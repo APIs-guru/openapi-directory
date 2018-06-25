@@ -200,7 +200,7 @@ paths:
   '/#CreateDirectoryConfig':
     post:
       operationId: CreateDirectoryConfig
-      description: Creates a directory configuration.
+      description: Creates a Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
       responses:
         '200':
           description: Success
@@ -237,7 +237,7 @@ paths:
   '/#CreateFleet':
     post:
       operationId: CreateFleet
-      description: Creates a fleet.
+      description: Creates a fleet. A fleet consists of streaming instances that run a specified image.
       responses:
         '200':
           description: Success
@@ -298,7 +298,7 @@ paths:
   '/#CreateImageBuilder':
     post:
       operationId: CreateImageBuilder
-      description: '<p>Creates an image builder.</p> <p>The initial state of the builder is <code>PENDING</code>. When it is ready, the state is <code>RUNNING</code>.</p>'
+      description: '<p>Creates an image builder. An image builder is a virtual machine that is used to create an image.</p> <p>The initial state of the builder is <code>PENDING</code>. When it is ready, the state is <code>RUNNING</code>.</p>'
       responses:
         '200':
           description: Success
@@ -392,7 +392,7 @@ paths:
   '/#CreateStack':
     post:
       operationId: CreateStack
-      description: Creates a stack.
+      description: 'Creates a stack to start streaming applications to users. A stack consists of an associated fleet, user access policies, and storage configurations. '
       responses:
         '200':
           description: Success
@@ -445,7 +445,7 @@ paths:
   '/#CreateStreamingURL':
     post:
       operationId: CreateStreamingURL
-      description: Creates a URL to start a streaming session for the specified user.
+      description: 'Creates a temporary URL to start an AppStream 2.0 streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup. '
       responses:
         '200':
           description: Success
@@ -486,7 +486,7 @@ paths:
   '/#DeleteDirectoryConfig':
     post:
       operationId: DeleteDirectoryConfig
-      description: Deletes the specified directory configuration.
+      description: Deletes the specified Directory Config object from AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
       responses:
         '200':
           description: Success
@@ -556,7 +556,7 @@ paths:
   '/#DeleteImage':
     post:
       operationId: DeleteImage
-      description: 'Deletes the specified image. You cannot delete an image that is currently in use. After you delete an image, you cannot provision new capacity using the image.'
+      description: 'Deletes the specified image. You cannot delete an image when it is in use. After you delete an image, you cannot provision new capacity using the image.'
       responses:
         '200':
           description: Success
@@ -634,7 +634,7 @@ paths:
   '/#DeleteStack':
     post:
       operationId: DeleteStack
-      description: 'Deletes the specified stack. After this operation completes, the environment can no longer be activated and any reservations made for the stack are released.'
+      description: 'Deletes the specified stack. After the stack is deleted, the application streaming environment provided by the stack is no longer available to users. Also, any reservations made for application streaming sessions for the stack are released.'
       responses:
         '200':
           description: Success
@@ -671,7 +671,7 @@ paths:
   '/#DescribeDirectoryConfigs':
     post:
       operationId: DescribeDirectoryConfigs
-      description: 'Describes the specified directory configurations. Note that although the response syntax in this topic includes the account password, this password is not returned in the actual response. '
+      description: '<p>Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the information required to join streaming instances to an Active Directory domain. </p> <p>Although the response syntax in this topic includes the account password, this password is not returned in the actual response.</p>'
       responses:
         '200':
           description: Success
@@ -700,7 +700,7 @@ paths:
   '/#DescribeFleets':
     post:
       operationId: DescribeFleets
-      description: Describes the specified fleets or all fleets in the account.
+      description: 'Retrieves a list that describes one or more specified fleets, if the fleet names are provided. Otherwise, all fleets in the account are described.'
       responses:
         '200':
           description: Success
@@ -762,7 +762,7 @@ paths:
   '/#DescribeImageBuilders':
     post:
       operationId: DescribeImageBuilders
-      description: Describes the specified image builders or all image builders in the account.
+      description: 'Retrieves a list that describes one or more specified image builders, if the image builder names are provided. Otherwise, all image builders in the account are described.'
       responses:
         '200':
           description: Success
@@ -791,7 +791,7 @@ paths:
   '/#DescribeImages':
     post:
       operationId: DescribeImages
-      description: Describes the specified images or all images in the account.
+      description: 'Retrieves a list that describes one or more specified images, if the image names are provided. Otherwise, all images in the account are described.'
       responses:
         '200':
           description: Success
@@ -820,7 +820,7 @@ paths:
   '/#DescribeSessions':
     post:
       operationId: DescribeSessions
-      description: 'Describes the streaming sessions for the specified stack and fleet. If a user ID is provided, only the streaming sessions for only that user are returned. If an authentication type is not provided, the default is to authenticate users using a streaming URL.'
+      description: 'Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a user ID is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.'
       responses:
         '200':
           description: Success
@@ -849,7 +849,7 @@ paths:
   '/#DescribeStacks':
     post:
       operationId: DescribeStacks
-      description: Describes the specified stacks or all stacks in the account.
+      description: 'Retrieves a list that describes one or more specified stacks, if the stack names are provided. Otherwise, all stacks in the account are described.'
       responses:
         '200':
           description: Success
@@ -915,7 +915,7 @@ paths:
   '/#ExpireSession':
     post:
       operationId: ExpireSession
-      description: Stops the specified streaming session.
+      description: Immediately stops the specified streaming session.
       responses:
         '200':
           description: Success
@@ -940,7 +940,7 @@ paths:
   '/#ListAssociatedFleets':
     post:
       operationId: ListAssociatedFleets
-      description: Lists the fleets associated with the specified stack.
+      description: Retrieves the name of the fleet that is associated with the specified stack.
       responses:
         '200':
           description: Success
@@ -965,7 +965,7 @@ paths:
   '/#ListAssociatedStacks':
     post:
       operationId: ListAssociatedStacks
-      description: Lists the stacks associated with the specified fleet.
+      description: Retrieves the name of the stack with which the specified fleet is associated.
       responses:
         '200':
           description: Success
@@ -990,7 +990,7 @@ paths:
   '/#ListTagsForResource':
     post:
       operationId: ListTagsForResource
-      description: '<p>Lists the tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>'
+      description: '<p>Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1216,7 +1216,7 @@ paths:
   '/#UntagResource':
     post:
       operationId: UntagResource
-      description: '<p>Disassociates the specified tags from the specified AppStream 2.0 resource.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.</p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>'
+      description: '<p>Disassociates one or more specified tags from the specified AppStream 2.0 resource.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.</p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1245,7 +1245,7 @@ paths:
   '/#UpdateDirectoryConfig':
     post:
       operationId: UpdateDirectoryConfig
-      description: Updates the specified directory configuration.
+      description: Updates the specified Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
       responses:
         '200':
           description: Success
@@ -1347,7 +1347,7 @@ paths:
   '/#UpdateStack':
     post:
       operationId: UpdateStack
-      description: Updates the specified stack.
+      description: Updates the specified fields for the specified stack.
       responses:
         '200':
           description: Success
@@ -1381,6 +1381,10 @@ paths:
           description: IncompatibleImageException
           schema:
             $ref: '#/definitions/IncompatibleImageException'
+        '487':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
       parameters:
         - name: body
           in: body
@@ -1672,7 +1676,7 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/Name'
         description: The name of the stack.
       Description:
         $ref: '#/definitions/Description'
@@ -2338,7 +2342,7 @@ definitions:
     properties:
       Names:
         $ref: '#/definitions/StringList'
-        description: The names of the fleets.
+        description: The name of the fleet.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
@@ -2358,7 +2362,7 @@ definitions:
     properties:
       Names:
         $ref: '#/definitions/StringList'
-        description: The names of the stacks.
+        description: The name of the stack.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
@@ -2390,6 +2394,16 @@ definitions:
   Name:
     type: string
     pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$'
+  NetworkAccessConfiguration:
+    type: object
+    properties:
+      EniPrivateIpAddress:
+        $ref: '#/definitions/String'
+        description: The private IP address of the elastic network interface that is attached to instances in your VPC.
+      EniId:
+        $ref: '#/definitions/String'
+        description: The resource identifier of the elastic network interface that is attached to instances in your VPC. All network interfaces have the eni-xxxxxxxx resource identifier.
+    description: The network details of the fleet instance for the streaming session.
   OperationNotPermittedException:
     type: object
     properties:
@@ -2510,6 +2524,9 @@ definitions:
       AuthenticationType:
         $ref: '#/definitions/AuthenticationType'
         description: The authentication method. The user is authenticated using a streaming URL (<code>API</code>) or SAML federation (<code>SAML</code>).
+      NetworkAccessConfiguration:
+        $ref: '#/definitions/NetworkAccessConfiguration'
+        description: The network details for the streaming session.
     description: Describes a streaming session.
   SessionList:
     type: array
@@ -2761,7 +2778,7 @@ definitions:
     properties:
       DirectoryName:
         $ref: '#/definitions/DirectoryName'
-        description: The name of the directory configuration.
+        description: The name of the Directory Config object.
       OrganizationalUnitDistinguishedNames:
         $ref: '#/definitions/OrganizationalUnitDistinguishedNamesList'
         description: The distinguished names of the organizational units for computer accounts.
@@ -2773,7 +2790,7 @@ definitions:
     properties:
       DirectoryConfig:
         $ref: '#/definitions/DirectoryConfig'
-        description: Information about the directory configuration.
+        description: Information about the Directory Config object.
   UpdateFleetRequest:
     type: object
     required:

@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '2016-05-10'
+  version: '2017-01-11'
   x-release: v4
   title: Amazon CloudDirectory
   description: '<fullname>Amazon Cloud Directory</fullname> <p>Amazon Cloud Directory is a component of the AWS Directory Service that simplifies the development and management of cloud-scale web, mobile, and IoT applications. This guide describes the Cloud Directory operations that you can call programmatically and includes detailed information on data types and errors. For information about AWS Directory Services features, see <a href="https://aws.amazon.com/directoryservice/">AWS Directory Service</a> and the <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html">AWS Directory Service Administration Guide</a>.</p>'
@@ -20,7 +20,7 @@ info:
   x-serviceName: clouddirectory
   x-origin:
     - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/clouddirectory-2016-05-10.normal.json'
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/clouddirectory-2017-01-11.normal.json'
       converter:
         url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
@@ -29,7 +29,7 @@ info:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-preferred: false
+  x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://aws.amazon.com/clouddirectory/'
@@ -193,10 +193,14 @@ paths:
           schema:
             $ref: '#/definitions/AccessDeniedException'
         '486':
+          description: SchemaAlreadyExistsException
+          schema:
+            $ref: '#/definitions/SchemaAlreadyExistsException'
+        '487':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '487':
+        '488':
           description: InvalidAttachmentException
           schema:
             $ref: '#/definitions/InvalidAttachmentException'
@@ -1837,14 +1841,18 @@ paths:
           schema:
             $ref: '#/definitions/InvalidFacetUpdateException'
         '487':
+          description: FacetValidationException
+          schema:
+            $ref: '#/definitions/FacetValidationException'
+        '488':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '488':
+        '489':
           description: FacetNotFoundException
           schema:
             $ref: '#/definitions/FacetNotFoundException'
-        '489':
+        '490':
           description: InvalidRuleException
           schema:
             $ref: '#/definitions/InvalidRuleException'
@@ -2723,6 +2731,65 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListIndexRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /amazonclouddirectory/2017-01-11/schema/managed:
+    post:
+      operationId: ListManagedSchemaArns
+      description: 'Lists the major version families of each managed schema. If a major version ARN is provided as SchemaArn, the minor version revisions in that family are listed instead.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListManagedSchemaArnsResponse'
+        '480':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '481':
+          description: InvalidArnException
+          schema:
+            $ref: '#/definitions/InvalidArnException'
+        '482':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListManagedSchemaArnsRequest'
         - name: MaxResults
           type: string
           in: query
@@ -4114,6 +4181,10 @@ paths:
           description: InvalidAttachmentException
           schema:
             $ref: '#/definitions/InvalidAttachmentException'
+        '488':
+          description: SchemaAlreadyExistsException
+          schema:
+            $ref: '#/definitions/SchemaAlreadyExistsException'
       parameters:
         - name: body
           in: body
@@ -5371,7 +5442,6 @@ definitions:
     type: object
     required:
       - Name
-      - ObjectType
     properties:
       Name:
         $ref: '#/definitions/FacetName'
@@ -5382,6 +5452,9 @@ definitions:
       ObjectType:
         $ref: '#/definitions/ObjectType'
         description: '<p>Specifies whether a given object created from this facet is of type node, leaf node, policy or index.</p> <ul> <li> <p>Node: Can have multiple children but one parent.</p> </li> </ul> <ul> <li> <p>Leaf node: Cannot have children but can have multiple parents.</p> </li> </ul> <ul> <li> <p>Policy: Allows you to store a policy document and policy type. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.</p> </li> </ul> <ul> <li> <p>Index: Can be created with the Index API.</p> </li> </ul>'
+      FacetStyle:
+        $ref: '#/definitions/FacetStyle'
+        description: 'There are two different styles that you can define on any given facet, <code>Static</code> and <code>Dynamic</code>. For static facets, all attributes must be defined in the schema. For dynamic facets, attributes can be defined during data plane operations.'
   CreateFacetResponse:
     type: object
     properties: {}
@@ -5665,6 +5738,9 @@ definitions:
       ObjectType:
         $ref: '#/definitions/ObjectType'
         description: The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.
+      FacetStyle:
+        $ref: '#/definitions/FacetStyle'
+        description: 'There are two different styles that you can define on any given facet, <code>Static</code> and <code>Dynamic</code>. For static facets, all attributes must be defined in the schema. For dynamic facets, attributes can be defined during data plane operations.'
     description: 'A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <code> <a>Rule</a>s</code>, and <code>ObjectTypes</code>. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/whatarefacets.html">Facets</a> for more information.'
   FacetAlreadyExistsException:
     type: object
@@ -5733,6 +5809,7 @@ definitions:
       - BOOLEAN
       - NUMBER
       - DATETIME
+      - VARIANT
   FacetAttributeUpdate:
     type: object
     properties:
@@ -5768,6 +5845,11 @@ definitions:
       Message:
         $ref: '#/definitions/ExceptionMessage'
     description: The specified <a>Facet</a> could not be found.
+  FacetStyle:
+    type: string
+    enum:
+      - STATIC
+      - DYNAMIC
   FacetValidationException:
     type: object
     properties:
@@ -6209,6 +6291,27 @@ definitions:
       IndexAttachments:
         $ref: '#/definitions/IndexAttachmentList'
         description: The objects and indexed values attached to the index.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListManagedSchemaArnsRequest:
+    type: object
+    properties:
+      SchemaArn:
+        $ref: '#/definitions/Arn'
+        description: 'The response for ListManagedSchemaArns. When this parameter is used, all minor version ARNs for a major version are listed.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+  ListManagedSchemaArnsResponse:
+    type: object
+    properties:
+      SchemaArns:
+        $ref: '#/definitions/Arns'
+        description: The ARNs for all AWS managed schemas.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The pagination token.

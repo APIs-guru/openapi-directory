@@ -141,6 +141,10 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: DeviceNotRegisteredException
+          schema:
+            $ref: '#/definitions/DeviceNotRegisteredException'
       parameters:
         - name: body
           in: body
@@ -613,6 +617,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DisassociateDeviceFromRoomResponse'
+        '480':
+          description: DeviceNotRegisteredException
+          schema:
+            $ref: '#/definitions/DeviceNotRegisteredException'
       parameters:
         - name: body
           in: body
@@ -1340,6 +1348,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/StartDeviceSyncResponse'
+        '480':
+          description: DeviceNotRegisteredException
+          schema:
+            $ref: '#/definitions/DeviceNotRegisteredException'
       parameters:
         - name: body
           in: body
@@ -1489,6 +1501,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '481':
+          description: DeviceNotRegisteredException
+          schema:
+            $ref: '#/definitions/DeviceNotRegisteredException'
       parameters:
         - name: body
           in: body
@@ -2107,6 +2123,11 @@ definitions:
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
     minLength: 2
     maxLength: 100
+  DeviceNotRegisteredException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
   DeviceSerialNumber:
     type: string
     pattern: '[a-zA-Z0-9]{1,200}'

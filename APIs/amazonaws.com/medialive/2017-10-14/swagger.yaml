@@ -853,6 +853,349 @@ paths:
           in: path
           type: string
           required: true
+  '/prod/reservations/{reservationId}':
+    delete:
+      operationId: DeleteReservation
+      description: Delete an expired reservation.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteReservationResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteReservationRequest'
+        - name: reservationId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeReservation
+      description: Get details for a reservation.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeReservationResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeReservationRequest'
+        - name: reservationId
+          in: path
+          type: string
+          required: true
+  '/prod/offerings/{offeringId}':
+    get:
+      operationId: DescribeOffering
+      description: Get details for an offering.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeOfferingResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeOfferingRequest'
+        - name: offeringId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /prod/offerings:
+    get:
+      operationId: ListOfferings
+      description: List offerings available for purchase.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListOfferingsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListOfferingsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /prod/reservations:
+    get:
+      operationId: ListReservations
+      description: List purchased reservations.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListReservationsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListReservationsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/prod/offerings/{offeringId}/purchase':
+    post:
+      operationId: PurchaseOffering
+      description: Purchase an offering and create a reservation.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/PurchaseOfferingResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PurchaseOfferingRequest'
+        - name: offeringId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/prod/channels/{channelId}/start':
     post:
       operationId: StartChannel
@@ -1978,6 +2321,65 @@ definitions:
     type: object
     properties: {}
     description: Placeholder documentation for DeleteInputSecurityGroupResponse
+  DeleteReservationRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteReservationRequest
+  DeleteReservationResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: 'Unique reservation ARN, e.g. ''arn:aws:medialive:us-west-2:123456789012:reservation:1234567'''
+      Count:
+        $ref: '#/definitions/__integer'
+        description: Number of reserved resources
+      CurrencyCode:
+        $ref: '#/definitions/__string'
+        description: 'Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. ''USD'''
+      Duration:
+        $ref: '#/definitions/__integer'
+        description: 'Lease duration, e.g. ''12'''
+      DurationUnits:
+        $ref: '#/definitions/OfferingDurationUnits'
+        description: 'Units for duration, e.g. ''MONTHS'''
+      End:
+        $ref: '#/definitions/__string'
+        description: 'Reservation UTC end date and time in ISO-8601 format, e.g. ''2019-03-01T00:00:00'''
+      FixedPrice:
+        $ref: '#/definitions/__double'
+        description: 'One-time charge for each reserved resource, e.g. ''0.0'' for a NO_UPFRONT offering'
+      Name:
+        $ref: '#/definitions/__string'
+        description: User specified reservation name
+      OfferingDescription:
+        $ref: '#/definitions/__string'
+        description: 'Offering description, e.g. ''HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'''
+      OfferingId:
+        $ref: '#/definitions/__string'
+        description: 'Unique offering ID, e.g. ''87654321'''
+      OfferingType:
+        $ref: '#/definitions/OfferingType'
+        description: 'Offering type, e.g. ''NO_UPFRONT'''
+      Region:
+        $ref: '#/definitions/__string'
+        description: 'AWS region, e.g. ''us-west-2'''
+      ReservationId:
+        $ref: '#/definitions/__string'
+        description: 'Unique reservation ID, e.g. ''1234567'''
+      ResourceSpecification:
+        $ref: '#/definitions/ReservationResourceSpecification'
+        description: Resource configuration details
+      Start:
+        $ref: '#/definitions/__string'
+        description: 'Reservation UTC start date and time in ISO-8601 format, e.g. ''2018-03-01T00:00:00'''
+      State:
+        $ref: '#/definitions/ReservationState'
+        description: 'Current state of reservation, e.g. ''ACTIVE'''
+      UsagePrice:
+        $ref: '#/definitions/__double'
+        description: 'Recurring usage charge for each reserved resource, e.g. ''157.0'''
+    description: Placeholder documentation for DeleteReservationResponse
   DescribeChannelRequest:
     type: object
     properties: {}
@@ -2078,6 +2480,106 @@ definitions:
         $ref: '#/definitions/__listOfInputWhitelistRule'
         description: Whitelist rules and their sync status
     description: Placeholder documentation for DescribeInputSecurityGroupResponse
+  DescribeOfferingRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DescribeOfferingRequest
+  DescribeOfferingResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: 'Unique offering ARN, e.g. ''arn:aws:medialive:us-west-2:123456789012:offering:87654321'''
+      CurrencyCode:
+        $ref: '#/definitions/__string'
+        description: 'Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. ''USD'''
+      Duration:
+        $ref: '#/definitions/__integer'
+        description: 'Lease duration, e.g. ''12'''
+      DurationUnits:
+        $ref: '#/definitions/OfferingDurationUnits'
+        description: 'Units for duration, e.g. ''MONTHS'''
+      FixedPrice:
+        $ref: '#/definitions/__double'
+        description: 'One-time charge for each reserved resource, e.g. ''0.0'' for a NO_UPFRONT offering'
+      OfferingDescription:
+        $ref: '#/definitions/__string'
+        description: 'Offering description, e.g. ''HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'''
+      OfferingId:
+        $ref: '#/definitions/__string'
+        description: 'Unique offering ID, e.g. ''87654321'''
+      OfferingType:
+        $ref: '#/definitions/OfferingType'
+        description: 'Offering type, e.g. ''NO_UPFRONT'''
+      Region:
+        $ref: '#/definitions/__string'
+        description: 'AWS region, e.g. ''us-west-2'''
+      ResourceSpecification:
+        $ref: '#/definitions/ReservationResourceSpecification'
+        description: Resource configuration details
+      UsagePrice:
+        $ref: '#/definitions/__double'
+        description: 'Recurring usage charge for each reserved resource, e.g. ''157.0'''
+    description: Placeholder documentation for DescribeOfferingResponse
+  DescribeReservationRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DescribeReservationRequest
+  DescribeReservationResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: 'Unique reservation ARN, e.g. ''arn:aws:medialive:us-west-2:123456789012:reservation:1234567'''
+      Count:
+        $ref: '#/definitions/__integer'
+        description: Number of reserved resources
+      CurrencyCode:
+        $ref: '#/definitions/__string'
+        description: 'Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. ''USD'''
+      Duration:
+        $ref: '#/definitions/__integer'
+        description: 'Lease duration, e.g. ''12'''
+      DurationUnits:
+        $ref: '#/definitions/OfferingDurationUnits'
+        description: 'Units for duration, e.g. ''MONTHS'''
+      End:
+        $ref: '#/definitions/__string'
+        description: 'Reservation UTC end date and time in ISO-8601 format, e.g. ''2019-03-01T00:00:00'''
+      FixedPrice:
+        $ref: '#/definitions/__double'
+        description: 'One-time charge for each reserved resource, e.g. ''0.0'' for a NO_UPFRONT offering'
+      Name:
+        $ref: '#/definitions/__string'
+        description: User specified reservation name
+      OfferingDescription:
+        $ref: '#/definitions/__string'
+        description: 'Offering description, e.g. ''HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'''
+      OfferingId:
+        $ref: '#/definitions/__string'
+        description: 'Unique offering ID, e.g. ''87654321'''
+      OfferingType:
+        $ref: '#/definitions/OfferingType'
+        description: 'Offering type, e.g. ''NO_UPFRONT'''
+      Region:
+        $ref: '#/definitions/__string'
+        description: 'AWS region, e.g. ''us-west-2'''
+      ReservationId:
+        $ref: '#/definitions/__string'
+        description: 'Unique reservation ID, e.g. ''1234567'''
+      ResourceSpecification:
+        $ref: '#/definitions/ReservationResourceSpecification'
+        description: Resource configuration details
+      Start:
+        $ref: '#/definitions/__string'
+        description: 'Reservation UTC start date and time in ISO-8601 format, e.g. ''2018-03-01T00:00:00'''
+      State:
+        $ref: '#/definitions/ReservationState'
+        description: 'Current state of reservation, e.g. ''ACTIVE'''
+      UsagePrice:
+        $ref: '#/definitions/__double'
+        description: 'Recurring usage charge for each reserved resource, e.g. ''157.0'''
+    description: Placeholder documentation for DescribeReservationResponse
   DvbNitSettings:
     type: object
     required:
@@ -3590,6 +4092,54 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
     description: Placeholder documentation for ListInputsResultModel
+  ListOfferingsRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListOfferingsRequest
+  ListOfferingsResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: Token to retrieve the next page of results
+      Offerings:
+        $ref: '#/definitions/__listOfOffering'
+        description: List of offerings
+    description: Placeholder documentation for ListOfferingsResponse
+  ListOfferingsResultModel:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: Token to retrieve the next page of results
+      Offerings:
+        $ref: '#/definitions/__listOfOffering'
+        description: List of offerings
+    description: ListOfferings response
+  ListReservationsRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListReservationsRequest
+  ListReservationsResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: Token to retrieve the next page of results
+      Reservations:
+        $ref: '#/definitions/__listOfReservation'
+        description: List of reservations
+    description: Placeholder documentation for ListReservationsResponse
+  ListReservationsResultModel:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: Token to retrieve the next page of results
+      Reservations:
+        $ref: '#/definitions/__listOfReservation'
+        description: List of reservations
+    description: ListReservations response
   LogLevel:
     type: string
     enum:
@@ -4056,6 +4606,53 @@ definitions:
       Message:
         $ref: '#/definitions/__string'
     description: Placeholder documentation for NotFoundException
+  Offering:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: 'Unique offering ARN, e.g. ''arn:aws:medialive:us-west-2:123456789012:offering:87654321'''
+      CurrencyCode:
+        $ref: '#/definitions/__string'
+        description: 'Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. ''USD'''
+      Duration:
+        $ref: '#/definitions/__integer'
+        description: 'Lease duration, e.g. ''12'''
+      DurationUnits:
+        $ref: '#/definitions/OfferingDurationUnits'
+        description: 'Units for duration, e.g. ''MONTHS'''
+      FixedPrice:
+        $ref: '#/definitions/__double'
+        description: 'One-time charge for each reserved resource, e.g. ''0.0'' for a NO_UPFRONT offering'
+      OfferingDescription:
+        $ref: '#/definitions/__string'
+        description: 'Offering description, e.g. ''HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'''
+      OfferingId:
+        $ref: '#/definitions/__string'
+        description: 'Unique offering ID, e.g. ''87654321'''
+      OfferingType:
+        $ref: '#/definitions/OfferingType'
+        description: 'Offering type, e.g. ''NO_UPFRONT'''
+      Region:
+        $ref: '#/definitions/__string'
+        description: 'AWS region, e.g. ''us-west-2'''
+      ResourceSpecification:
+        $ref: '#/definitions/ReservationResourceSpecification'
+        description: Resource configuration details
+      UsagePrice:
+        $ref: '#/definitions/__double'
+        description: 'Recurring usage charge for each reserved resource, e.g. ''157.0'''
+    description: Reserved resources available for purchase
+  OfferingDurationUnits:
+    type: string
+    enum:
+      - MONTHS
+    description: 'Units for duration, e.g. ''MONTHS'''
+  OfferingType:
+    type: string
+    enum:
+      - NO_UPFRONT
+    description: 'Offering type, e.g. ''NO_UPFRONT'''
   Output:
     type: object
     required:
@@ -4156,6 +4753,44 @@ definitions:
     type: object
     properties: {}
     description: Placeholder documentation for PassThroughSettings
+  PurchaseOffering:
+    type: object
+    properties:
+      Count:
+        $ref: '#/definitions/__integerMin1'
+        description: Number of resources
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name for the new reservation
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.
+    description: PurchaseOffering request
+  PurchaseOfferingRequest:
+    type: object
+    properties:
+      Count:
+        $ref: '#/definitions/__integerMin1'
+        description: Number of resources
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name for the new reservation
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.
+    description: Placeholder documentation for PurchaseOfferingRequest
+  PurchaseOfferingResponse:
+    type: object
+    properties:
+      Reservation:
+        $ref: '#/definitions/Reservation'
+    description: Placeholder documentation for PurchaseOfferingResponse
+  PurchaseOfferingResultModel:
+    type: object
+    properties:
+      Reservation:
+        $ref: '#/definitions/Reservation'
+    description: PurchaseOffering response
   RemixSettings:
     type: object
     required:
@@ -4173,6 +4808,143 @@ definitions:
           Number of output channels to be produced.
           Valid values: 1, 2, 4, 6, 8
     description: Placeholder documentation for RemixSettings
+  Reservation:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: 'Unique reservation ARN, e.g. ''arn:aws:medialive:us-west-2:123456789012:reservation:1234567'''
+      Count:
+        $ref: '#/definitions/__integer'
+        description: Number of reserved resources
+      CurrencyCode:
+        $ref: '#/definitions/__string'
+        description: 'Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. ''USD'''
+      Duration:
+        $ref: '#/definitions/__integer'
+        description: 'Lease duration, e.g. ''12'''
+      DurationUnits:
+        $ref: '#/definitions/OfferingDurationUnits'
+        description: 'Units for duration, e.g. ''MONTHS'''
+      End:
+        $ref: '#/definitions/__string'
+        description: 'Reservation UTC end date and time in ISO-8601 format, e.g. ''2019-03-01T00:00:00'''
+      FixedPrice:
+        $ref: '#/definitions/__double'
+        description: 'One-time charge for each reserved resource, e.g. ''0.0'' for a NO_UPFRONT offering'
+      Name:
+        $ref: '#/definitions/__string'
+        description: User specified reservation name
+      OfferingDescription:
+        $ref: '#/definitions/__string'
+        description: 'Offering description, e.g. ''HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'''
+      OfferingId:
+        $ref: '#/definitions/__string'
+        description: 'Unique offering ID, e.g. ''87654321'''
+      OfferingType:
+        $ref: '#/definitions/OfferingType'
+        description: 'Offering type, e.g. ''NO_UPFRONT'''
+      Region:
+        $ref: '#/definitions/__string'
+        description: 'AWS region, e.g. ''us-west-2'''
+      ReservationId:
+        $ref: '#/definitions/__string'
+        description: 'Unique reservation ID, e.g. ''1234567'''
+      ResourceSpecification:
+        $ref: '#/definitions/ReservationResourceSpecification'
+        description: Resource configuration details
+      Start:
+        $ref: '#/definitions/__string'
+        description: 'Reservation UTC start date and time in ISO-8601 format, e.g. ''2018-03-01T00:00:00'''
+      State:
+        $ref: '#/definitions/ReservationState'
+        description: 'Current state of reservation, e.g. ''ACTIVE'''
+      UsagePrice:
+        $ref: '#/definitions/__double'
+        description: 'Recurring usage charge for each reserved resource, e.g. ''157.0'''
+    description: Reserved resources available to use
+  ReservationCodec:
+    type: string
+    enum:
+      - MPEG2
+      - AVC
+      - HEVC
+      - AUDIO
+    description: 'Codec, ''MPEG2'', ''AVC'', ''HEVC'', or ''AUDIO'''
+  ReservationMaximumBitrate:
+    type: string
+    enum:
+      - MAX_10_MBPS
+      - MAX_20_MBPS
+      - MAX_50_MBPS
+    description: Maximum bitrate in megabits per second
+  ReservationMaximumFramerate:
+    type: string
+    enum:
+      - MAX_30_FPS
+      - MAX_60_FPS
+    description: Maximum framerate in frames per second (Outputs only)
+  ReservationResolution:
+    type: string
+    enum:
+      - SD
+      - HD
+      - UHD
+    description: |
+      Resolution based on lines of vertical resolution; SD is less than 720 lines, HD is 720 to 1080 lines, UHD is greater than 1080 lines
+  ReservationResourceSpecification:
+    type: object
+    properties:
+      Codec:
+        $ref: '#/definitions/ReservationCodec'
+        description: 'Codec, e.g. ''AVC'''
+      MaximumBitrate:
+        $ref: '#/definitions/ReservationMaximumBitrate'
+        description: 'Maximum bitrate, e.g. ''MAX_20_MBPS'''
+      MaximumFramerate:
+        $ref: '#/definitions/ReservationMaximumFramerate'
+        description: 'Maximum framerate, e.g. ''MAX_30_FPS'' (Outputs only)'
+      Resolution:
+        $ref: '#/definitions/ReservationResolution'
+        description: 'Resolution, e.g. ''HD'''
+      ResourceType:
+        $ref: '#/definitions/ReservationResourceType'
+        description: 'Resource type, ''INPUT'', ''OUTPUT'', or ''CHANNEL'''
+      SpecialFeature:
+        $ref: '#/definitions/ReservationSpecialFeature'
+        description: 'Special feature, e.g. ''AUDIO_NORMALIZATION'' (Channels only)'
+      VideoQuality:
+        $ref: '#/definitions/ReservationVideoQuality'
+        description: 'Video quality, e.g. ''STANDARD'' (Outputs only)'
+    description: 'Resource configuration (codec, resolution, bitrate, ...)'
+  ReservationResourceType:
+    type: string
+    enum:
+      - INPUT
+      - OUTPUT
+      - CHANNEL
+    description: 'Resource type, ''INPUT'', ''OUTPUT'', or ''CHANNEL'''
+  ReservationSpecialFeature:
+    type: string
+    enum:
+      - ADVANCED_AUDIO
+      - AUDIO_NORMALIZATION
+    description: 'Special features, ''ADVANCED_AUDIO'' or ''AUDIO_NORMALIZATION'''
+  ReservationState:
+    type: string
+    enum:
+      - ACTIVE
+      - EXPIRED
+      - CANCELED
+      - DELETED
+    description: Current reservation state
+  ReservationVideoQuality:
+    type: string
+    enum:
+      - STANDARD
+      - ENHANCED
+      - PREMIUM
+    description: 'Video quality, e.g. ''STANDARD'' (Outputs only)'
   ResourceConflict:
     type: object
     properties:
@@ -5138,6 +5910,11 @@ definitions:
     description: Placeholder documentation for __listOfInputWhitelistRuleCidr
     items:
       $ref: '#/definitions/InputWhitelistRuleCidr'
+  __listOfOffering:
+    type: array
+    description: Placeholder documentation for __listOfOffering
+    items:
+      $ref: '#/definitions/Offering'
   __listOfOutput:
     type: array
     description: Placeholder documentation for __listOfOutput
@@ -5158,6 +5935,11 @@ definitions:
     description: Placeholder documentation for __listOfOutputGroup
     items:
       $ref: '#/definitions/OutputGroup'
+  __listOfReservation:
+    type: array
+    description: Placeholder documentation for __listOfReservation
+    items:
+      $ref: '#/definitions/Reservation'
   __listOfValidationError:
     type: array
     description: Placeholder documentation for __listOfValidationError

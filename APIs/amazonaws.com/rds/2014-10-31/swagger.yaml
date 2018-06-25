@@ -3603,6 +3603,10 @@ paths:
           description: KMSKeyNotAccessibleFault
           schema:
             $ref: '#/definitions/KMSKeyNotAccessibleFault'
+        '497':
+          description: DBClusterParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterParameterGroupNotFoundFault'
       parameters:
         - name: body
           in: body
@@ -3692,6 +3696,10 @@ paths:
           description: StorageQuotaExceededFault
           schema:
             $ref: '#/definitions/StorageQuotaExceededFault'
+        '496':
+          description: DBClusterParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterParameterGroupNotFoundFault'
       parameters:
         - name: body
           in: body
@@ -3789,6 +3797,10 @@ paths:
           description: DomainNotFoundFault
           schema:
             $ref: '#/definitions/DomainNotFoundFault'
+        '498':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
       parameters:
         - name: body
           in: body
@@ -3979,6 +3991,10 @@ paths:
           description: DomainNotFoundFault
           schema:
             $ref: '#/definitions/DomainNotFoundFault'
+        '499':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
       parameters:
         - name: body
           in: body
@@ -4796,6 +4812,9 @@ definitions:
       PerformanceInsightsKMSKeyId:
         $ref: '#/definitions/String'
         description: 'The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.'
+      PerformanceInsightsRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). '
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: The list of log types that need to be enabled for exporting to CloudWatch Logs.
@@ -4871,6 +4890,9 @@ definitions:
       PerformanceInsightsKMSKeyId:
         $ref: '#/definitions/String'
         description: 'The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.'
+      PerformanceInsightsRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). '
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: The list of logs that the new DB instance is to export to CloudWatch Logs.
@@ -4905,7 +4927,7 @@ definitions:
         description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <note> <p>This value is stored as a lowercase string.</p> </note>'
       DBParameterGroupFamily:
         $ref: '#/definitions/String'
-        description: 'The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family.'
+        description: '<p>The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family.</p> <p>To list all of the available parameter group families, use the following command:</p> <p> <code>aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily"</code> </p> <note> <p>The output contains duplicates.</p> </note>'
       Description:
         $ref: '#/definitions/String'
         description: The description for the DB parameter group.
@@ -5659,6 +5681,9 @@ definitions:
       PerformanceInsightsKMSKeyId:
         $ref: '#/definitions/String'
         description: 'The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.'
+      PerformanceInsightsRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). '
       EnabledCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: A list of log types that this DB instance is configured to export to CloudWatch Logs.
@@ -7410,6 +7435,9 @@ definitions:
       PerformanceInsightsKMSKeyId:
         $ref: '#/definitions/String'
         description: 'The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.'
+      PerformanceInsightsRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). '
       CloudwatchLogsExportConfiguration:
         $ref: '#/definitions/CloudwatchLogsExportConfiguration'
         description: The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance.
@@ -8827,6 +8855,9 @@ definitions:
       PerformanceInsightsKMSKeyId:
         $ref: '#/definitions/String'
         description: 'The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key alias for the KMS encryption key. '
+      PerformanceInsightsRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). '
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: The list of logs that the restored DB instance is to export to CloudWatch Logs.
