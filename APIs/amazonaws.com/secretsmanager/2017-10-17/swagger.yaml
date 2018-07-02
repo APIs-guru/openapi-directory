@@ -181,12 +181,53 @@ paths:
           description: InternalServiceError
           schema:
             $ref: '#/definitions/InternalServiceError'
+        '488':
+          description: PreconditionNotMetException
+          schema:
+            $ref: '#/definitions/PreconditionNotMetException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/CreateSecretRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteResourcePolicy':
+    post:
+      operationId: DeleteResourcePolicy
+      description: '<p>Deletes the resource-based permission policy that''s attached to the secret.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p>secretsmanager:DeleteResourcePolicy</p> </li> </ul> <p> <b>Related operations</b> </p> <ul> <li> <p>To attach a resource policy to a secret, use <a>PutResourcePolicy</a>.</p> </li> <li> <p>To retrieve the current resource-based policy that''s attached to a secret, use <a>GetResourcePolicy</a>.</p> </li> <li> <p>To list all of the currently available secrets, use <a>ListSecrets</a>.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteResourcePolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServiceError
+          schema:
+            $ref: '#/definitions/InternalServiceError'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteResourcePolicyRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -298,6 +339,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetRandomPasswordRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetResourcePolicy':
+    post:
+      operationId: GetResourcePolicy
+      description: '<p>Retrieves the JSON text of the resource-based policy document that''s attached to the specified secret. The JSON request string input and response output are shown formatted with white space and line breaks for better readability. Submit your input as a single line JSON string.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p>secretsmanager:GetResourcePolicy</p> </li> </ul> <p> <b>Related operations</b> </p> <ul> <li> <p>To attach a resource policy to a secret, use <a>PutResourcePolicy</a>.</p> </li> <li> <p>To delete the resource-based policy that''s attached to a secret, use <a>DeleteResourcePolicy</a>.</p> </li> <li> <p>To list all of the currently available secrets, use <a>ListSecrets</a>.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetResourcePolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServiceError
+          schema:
+            $ref: '#/definitions/InternalServiceError'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetResourcePolicyRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -437,6 +515,51 @@ paths:
           in: query
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutResourcePolicy':
+    post:
+      operationId: PutResourcePolicy
+      description: '<p>Attaches the contents of the specified resource-based permission policy to a secret. A resource-based policy is optional. Alternatively, you can use IAM identity-based policies that specify the secret''s Amazon Resource Name (ARN) in the policy statement''s <code>Resources</code> element. You can also use a combination of both identity-based and resource-based policies. The affected users and roles receive the permissions that are permitted by all of the relevant policies. For more information, see <a href="http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-based-policies.html">Using Resource-Based Policies for AWS Secrets Manager</a>. For the complete description of the AWS policy syntax and grammar, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html">IAM JSON Policy Reference</a> in the <i>IAM User Guide</i>.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p>secretsmanager:PutResourcePolicy</p> </li> </ul> <p> <b>Related operations</b> </p> <ul> <li> <p>To retrieve the resource policy that''s attached to a secret, use <a>GetResourcePolicy</a>.</p> </li> <li> <p>To delete the resource-based policy that''s attached to a secret, use <a>DeleteResourcePolicy</a>.</p> </li> <li> <p>To list all of the currently available secrets, use <a>ListSecrets</a>.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutResourcePolicyResponse'
+        '480':
+          description: MalformedPolicyDocumentException
+          schema:
+            $ref: '#/definitions/MalformedPolicyDocumentException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: InternalServiceError
+          schema:
+            $ref: '#/definitions/InternalServiceError'
+        '484':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutResourcePolicyRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -594,10 +717,14 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
         '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: InvalidParameterException
           schema:
             $ref: '#/definitions/InvalidParameterException'
-        '482':
+        '483':
           description: InternalServiceError
           schema:
             $ref: '#/definitions/InternalServiceError'
@@ -629,10 +756,14 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
         '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: InvalidParameterException
           schema:
             $ref: '#/definitions/InvalidParameterException'
-        '482':
+        '483':
           description: InternalServiceError
           schema:
             $ref: '#/definitions/InternalServiceError'
@@ -693,6 +824,10 @@ paths:
           description: InternalServiceError
           schema:
             $ref: '#/definitions/InternalServiceError'
+        '488':
+          description: PreconditionNotMetException
+          schema:
+            $ref: '#/definitions/PreconditionNotMetException'
       parameters:
         - name: body
           in: body
@@ -802,7 +937,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameType'
-        description: '<p>Specifies the friendly name of the new secret.</p> <p>The secret name must be ASCII letters, digits, or the following characters : /_+=,.@-</p>'
+        description: '<p>Specifies the friendly name of the new secret.</p> <p>The secret name must be ASCII letters, digits, or the following characters : /_+=.@-</p>'
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestTokenType'
         description: '<p>(Optional) If you include <code>SecretString</code> or <code>SecretBinary</code>, then an initial version is created as part of the secret, and this parameter specifies a unique identifier for the new version. </p> <note> <p>If you use the AWS CLI or one of the AWS SDK to call this operation, then you can leave this parameter empty. The CLI or SDK generates a random UUID for you and includes it as the value for this parameter in the request. If you don''t use the SDK and instead generate a raw HTTP request to the Secrets Manager service endpoint, then you must generate a <code>ClientRequestToken</code> yourself for the new version and include that value in the request.</p> </note> <p>This value helps ensure idempotency. Secrets Manager uses this value to prevent the accidental creation of duplicate versions if there are failures and retries during a rotation. We recommend that you generate a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID-type</a> value to ensure uniqueness of your versions within the specified secret. </p> <ul> <li> <p>If the <code>ClientRequestToken</code> value isn''t already associated with a version of the secret then a new version of the secret is created. </p> </li> <li> <p>If a version with this value already exists and that version''s <code>SecretString</code> and <code>SecretBinary</code> values are the same as those in the request, then the request is ignored (the operation is idempotent).</p> </li> <li> <p>If a version with this value already exists and that version''s <code>SecretString</code> and <code>SecretBinary</code> values are different from those in the request then the request fails because you cannot modify an existing version. Instead, use <a>PutSecretValue</a> to create a new version.</p> </li> </ul> <p>This value becomes the <code>SecretVersionId</code> of the new version.</p>'
@@ -846,6 +981,28 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessage'
     description: 'Secrets Manager can''t decrypt the protected secret text using the provided KMS key. '
+  DeleteResourcePolicyRequest:
+    type: object
+    required:
+      - SecretId
+    example:
+      SecretId: MyTestDatabaseSecret
+    properties:
+      SecretId:
+        $ref: '#/definitions/SecretIdType'
+        description: Specifies the secret that you want to delete the attached resource-based policy for. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
+  DeleteResourcePolicyResponse:
+    type: object
+    example:
+      ARN: 'arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseMasterSecret-a1b2c3'
+      Name: MyTestDatabaseSecret
+    properties:
+      ARN:
+        $ref: '#/definitions/SecretARNType'
+        description: The ARN of the secret that the resource-based policy was deleted for.
+      Name:
+        $ref: '#/definitions/NameType'
+        description: The friendly name of the secret that the resource-based policy was deleted for.
   DeleteSecretRequest:
     type: object
     required:
@@ -1018,6 +1175,43 @@ definitions:
       RandomPassword:
         $ref: '#/definitions/RandomPasswordType'
         description: A string with the generated password.
+  GetResourcePolicyRequest:
+    type: object
+    required:
+      - SecretId
+    example:
+      SecretId: MyTestDatabaseSecret
+    properties:
+      SecretId:
+        $ref: '#/definitions/SecretIdType'
+        description: Specifies the secret that you want to retrieve the attached resource-based policy for. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
+  GetResourcePolicyResponse:
+    type: object
+    example:
+      ARN: 'arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3'
+      Name: MyTestDatabaseSecret
+      ResourcePolicy: |-
+        {
+        "Version":"2012-10-17",
+        "Statement":[{
+        "Effect":"Allow",
+        "Principal":{
+        "AWS":"arn:aws:iam::123456789012:root"
+        },
+        "Action":"secretsmanager:GetSecretValue",
+        "Resource":"*"
+        }]
+        }
+    properties:
+      ARN:
+        $ref: '#/definitions/SecretARNType'
+        description: The ARN of the secret that the resource-based policy was retrieved for.
+      Name:
+        $ref: '#/definitions/NameType'
+        description: The friendly name of the secret that the resource-based policy was retrieved for.
+      ResourcePolicy:
+        $ref: '#/definitions/NonEmptyResourcePolicyType'
+        description: 'A JSON-formatted string that describes the permissions that are associated with the attached secret. These permissions are combined with any permissions that are associated with the user or role that attempts to access this secret. The combined permissions specify who can access the secret and what actions they can perform. For more information, see <a href="http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html">Authentication and Access Control for AWS Secrets Manager</a> in the <i>AWS Secrets Manager User Guide</i>.'
   GetSecretValueRequest:
     type: object
     required:
@@ -1096,7 +1290,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/ErrorMessage'
-    description: 'You provided a parameter value that is not valid for the current state of the resource. For example, if you try to enable rotation on a secret, you must already have a Lambda function ARN configured or included as a parameter in this call.'
+    description: '<p>You provided a parameter value that is not valid for the current state of the resource.</p> <p>Possible causes:</p> <ul> <li> <p>You tried to perform the operation on a secret that''s currently marked deleted.</p> </li> <li> <p>You tried to enable rotation on a secret that doesn''t already have a Lambda function ARN configured and you didn''t include such an ARN as a parameter in this call. </p> </li> </ul>'
   KmsKeyIdType:
     type: string
     minLength: 0
@@ -1218,10 +1412,58 @@ definitions:
     type: string
     minLength: 1
     maxLength: 4096
+  NonEmptyResourcePolicyType:
+    type: string
+    minLength: 1
+    maxLength: 4096
   PasswordLengthType:
     type: integer
     minimum: 1
     maximum: 4096
+  PreconditionNotMetException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The request failed because you did not complete all the prerequisite steps.
+  PutResourcePolicyRequest:
+    type: object
+    required:
+      - SecretId
+      - ResourcePolicy
+    example:
+      ResourcePolicy: |-
+        {
+        "Version":"2012-10-17",
+        "Statement":[{
+        "Effect":"Allow",
+        "Principal":{
+        "AWS":"arn:aws:iam::123456789012:root"
+        },
+        "Action":"secretsmanager:GetSecretValue",
+        "Resource":"*"
+        }]
+        }
+      SecretId: MyTestDatabaseSecret
+    properties:
+      SecretId:
+        $ref: '#/definitions/SecretIdType'
+        description: Specifies the secret that you want to attach the resource-based policy to. You can specify either the ARN or the friendly name of the secret.
+      ResourcePolicy:
+        $ref: '#/definitions/NonEmptyResourcePolicyType'
+        description: 'A JSON-formatted string that''s constructed according to the grammar and syntax for an AWS resource-based policy. The policy in the string identifies who can access or manage this secret and its versions. For information on how to format a JSON parameter for the various command line tool environments, see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using JSON for Parameters</a> in the <i>AWS CLI User Guide</i>.'
+  PutResourcePolicyResponse:
+    type: object
+    example:
+      ARN: 'arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3'
+      Name: MyTestDatabaseSecret
+    properties:
+      ARN:
+        $ref: '#/definitions/SecretARNType'
+        description: The ARN of the secret that the resource-based policy was retrieved for.
+      Name:
+        $ref: '#/definitions/NameType'
+        description: The friendly name of the secret that the resource-based policy was retrieved for.
   PutSecretValueRequest:
     type: object
     required:

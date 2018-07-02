@@ -1452,49 +1452,6 @@ paths:
           in: path
           type: string
           required: true
-  '/2017-10-30/service-linked-role/{RoleName}':
-    delete:
-      operationId: DeleteServiceLinkedRole
-      description: ''
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: InvalidArgument
-          schema:
-            $ref: '#/definitions/InvalidArgument'
-        '481':
-          description: AccessDenied
-          schema:
-            $ref: '#/definitions/AccessDenied'
-        '482':
-          description: ResourceInUse
-          schema:
-            $ref: '#/definitions/ResourceInUse'
-        '483':
-          description: NoSuchResource
-          schema:
-            $ref: '#/definitions/NoSuchResource'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteServiceLinkedRoleRequest'
-        - name: RoleName
-          in: path
-          type: string
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2017-10-30/streaming-distribution/{Id}':
     delete:
       operationId: DeleteStreamingDistribution
@@ -3100,9 +3057,6 @@ definitions:
   DeletePublicKeyRequest:
     type: object
     properties: {}
-  DeleteServiceLinkedRoleRequest:
-    type: object
-    properties: {}
   DeleteStreamingDistributionRequest:
     type: object
     properties: {}
@@ -4521,11 +4475,6 @@ definitions:
   ResourceARN:
     type: string
     pattern: 'arn:aws:cloudfront::[0-9]+:.*'
-  ResourceInUse:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
   Restrictions:
     type: object
     required:

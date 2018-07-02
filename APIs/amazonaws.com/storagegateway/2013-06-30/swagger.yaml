@@ -3,7 +3,7 @@ info:
   version: '2013-06-30'
   x-release: v4
   title: AWS Storage Gateway
-  description: '<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization''s on-premises IT environment and AWS''s storage infrastructure. The service enables you to securely upload data to the AWS cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders">AWS Storage Gateway Required Request Headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests">Signing Requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses">Error Responses</a>: Provides reference information about AWS Storage Gateway errors.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region">AWS Storage Gateway Regions and Endpoints:</a> Provides a list of each region and endpoints available for use with AWS Storage Gateway. </p> </li> </ul> <note> <p>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href="https://aws.amazon.com/ec2/faqs/#longer-ids">Longer EC2 and EBS Resource IDs</a>.</p> <p> For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href="https://forums.aws.amazon.com/ann.jspa?annID=3557">Announcement: Heads-up – Longer AWS Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>'
+  description: '<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization''s on-premises IT environment and AWS''s storage infrastructure. The service enables you to securely upload data to the AWS cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders">AWS Storage Gateway Required Request Headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests">Signing Requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses">Error Responses</a>: Provides reference information about AWS Storage Gateway errors.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region">AWS Storage Gateway Regions and Endpoints:</a> Provides a list of each region and endpoints available for use with AWS Storage Gateway. </p> </li> </ul> <note> <p>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href="https://aws.amazon.com/ec2/faqs/#longer-ids">Longer EC2 and EBS Resource IDs</a>. </p> <p> For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href="https://forums.aws.amazon.com/ann.jspa?annID=3557">Announcement: Heads-up – Longer AWS Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -366,7 +366,7 @@ paths:
   '/#CreateNFSFileShare':
     post:
       operationId: CreateNFSFileShare
-      description: '<p>Creates a file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using a Network File System (NFS) interface. This operation is only supported in the file gateway type.</p> <important> <p>File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. </p> <p>File gateway does not support creating hard or symbolic links on a file share.</p> </important>'
+      description: '<p>Creates a Network File System (NFS) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using a NFS interface. This operation is only supported in the file gateway type.</p> <important> <p>File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. </p> <p>File gateway does not support creating hard or symbolic links on a file share.</p> </important>'
       responses:
         '200':
           description: Success
@@ -386,6 +386,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateNFSFileShareInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateSMBFileShare':
+    post:
+      operationId: CreateSMBFileShare
+      description: '<p>Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway expose file shares using a SMB interface. This operation is only supported in the file gateway type.</p> <important> <p>File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. </p> <p>File gateway does not support creating hard or symbolic links on a file share.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSMBFileShareOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSMBFileShareInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1034,7 +1067,7 @@ paths:
   '/#DescribeNFSFileShares':
     post:
       operationId: DescribeNFSFileShares
-      description: Gets a description for one or more file shares from a file gateway. This operation is only supported in the file gateway type.
+      description: Gets a description for one or more Network File System (NFS) file shares from a file gateway. This operation is only supported in the file gateway type.
       responses:
         '200':
           description: Success
@@ -1054,6 +1087,72 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeNFSFileSharesInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSMBFileShares':
+    post:
+      operationId: DescribeSMBFileShares
+      description: Gets a description for one or more Server Message Block (SMB) file shares from a file gateway. This operation is only supported in the file gateway type.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSMBFileSharesOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSMBFileSharesInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSMBSettings':
+    post:
+      operationId: DescribeSMBSettings
+      description: Gets a description of a Server Message Block (SMB) file share settings from a file gateway. This operation is only supported in the file gateway type.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSMBSettingsOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSMBSettingsInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1391,6 +1490,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisableGatewayInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#JoinDomain':
+    post:
+      operationId: JoinDomain
+      description: Adds a file gateway to an Active Directory domain. This operation is only supported in the file gateway type that supports the SMB file protocol.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/JoinDomainOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/JoinDomainInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1916,6 +2048,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#SetSMBGuestPassword':
+    post:
+      operationId: SetSMBGuestPassword
+      description: Sets the password for the guest user “smbguest”. "smbguest" is the user when the Authentication method for the file share is “GuestAccess”.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SetSMBGuestPasswordOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SetSMBGuestPasswordInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ShutdownGateway':
     post:
       operationId: ShutdownGateway
@@ -2150,7 +2315,7 @@ paths:
   '/#UpdateNFSFileShare':
     post:
       operationId: UpdateNFSFileShare
-      description: '<p>Updates a file share. This operation is only supported in the file gateway type.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <p>Updates the following file share setting:</p> <ul> <li> <p>Default storage class for your S3 bucket</p> </li> <li> <p>Metadata defaults for your S3 bucket</p> </li> <li> <p>Allowed NFS clients for your file share</p> </li> <li> <p>Squash settings</p> </li> <li> <p>Write status of your file share</p> </li> </ul> <note> <p>To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways.</p> </note>'
+      description: '<p>Updates a Network File System (NFS) file share. This operation is only supported in the file gateway type.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <p>Updates the following file share setting:</p> <ul> <li> <p>Default storage class for your S3 bucket</p> </li> <li> <p>Metadata defaults for your S3 bucket</p> </li> <li> <p>Allowed NFS clients for your file share</p> </li> <li> <p>Squash settings</p> </li> <li> <p>Write status of your file share</p> </li> </ul> <note> <p>To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2170,6 +2335,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateNFSFileShareInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateSMBFileShare':
+    post:
+      operationId: UpdateSMBFileShare
+      description: '<p>Updates a Server Message Block (SMB) file share. This operation is only supported in the file gateway type.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in the file gateway type.</p> </note> <important> <p>File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. </p> <p>File gateway does not support creating hard or symbolic links on a file share.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSMBFileShareOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateSMBFileShareInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2393,6 +2591,11 @@ definitions:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
     description: A JSON object containing the of the gateway for which working storage was configured.
+  Authentication:
+    type: string
+    description: 'The authentication method of the file share. Valid values: "ActiveDirectory" or "GuestAccess". The default is "ActiveDirectory".'
+    minLength: 5
+    maxLength: 15
   BandwidthDownloadRateLimit:
     type: integer
     minimum: 102400
@@ -2541,17 +2744,22 @@ definitions:
         $ref: '#/definitions/GatewayARN'
       VolumeSizeInBytes:
         $ref: '#/definitions/long'
+        description: The size of the volume in bytes.
       SnapshotId:
         $ref: '#/definitions/SnapshotId'
+        description: 'The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new cached volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.'
       TargetName:
         $ref: '#/definitions/TargetName'
+        description: 'The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.'
       SourceVolumeARN:
         $ref: '#/definitions/VolumeARN'
         description: 'The ARN for an existing volume. Specifying this ARN makes the new volume into an exact copy of the specified existing volume''s latest recovery point. The <code>VolumeSizeInBytes</code> value for this new volume must be equal to or larger than the size of the existing volume, in bytes.'
       NetworkInterfaceId:
         $ref: '#/definitions/NetworkInterfaceId'
+        description: '<p>The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use <a>DescribeGatewayInformation</a> to get a list of the network interfaces available on a gateway.</p> <p> Valid Values: A valid IP address.</p>'
       ClientToken:
         $ref: '#/definitions/ClientToken'
+        description: 'A unique identifier that you use to retry a request. If you retry a request, use the same <code>ClientToken</code> you specified in the initial request.'
       KMSEncrypted:
         $ref: '#/definitions/Boolean'
         description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
@@ -2566,8 +2774,10 @@ definitions:
     properties:
       VolumeARN:
         $ref: '#/definitions/VolumeARN'
+        description: The Amazon Resource Name (ARN) of the configured volume.
       TargetARN:
         $ref: '#/definitions/TargetARN'
+        description: he Amazon Resource Name (ARN) of the volume target that includes the iSCSI name that initiators can use to connect to the target.
   CreateNFSFileShareInput:
     type: object
     required:
@@ -2626,6 +2836,64 @@ definitions:
         $ref: '#/definitions/FileShareARN'
         description: 'The Amazon Resource Name (ARN) of the newly created file share. '
     description: CreateNFSFileShareOutput
+  CreateSMBFileShareInput:
+    type: object
+    required:
+      - ClientToken
+      - GatewayARN
+      - Role
+      - LocationARN
+    properties:
+      ClientToken:
+        $ref: '#/definitions/ClientToken'
+        description: A unique string value that you supply that is used by file gateway to ensure idempotent file share creation.
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+        description: The Amazon Resource Name (ARN) of the file gateway on which you want to create a file share.
+      KMSEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: The Amazon Resource Name (ARN) KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+      Role:
+        $ref: '#/definitions/Role'
+        description: 'The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes when it accesses the underlying storage. '
+      LocationARN:
+        $ref: '#/definitions/LocationARN'
+        description: 'The ARN of the backed storage used for storing file data. '
+      DefaultStorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: 'The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
+      ObjectACL:
+        $ref: '#/definitions/ObjectACL'
+        description: Sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is "private".
+      ReadOnly:
+        $ref: '#/definitions/Boolean'
+        description: 'Sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.'
+      GuessMIMETypeEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'Enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.'
+      RequesterPays:
+        $ref: '#/definitions/Boolean'
+        description: 'Sets who pays the cost of the request and the data download from the Amazon S3 bucket. Set this value to true if you want the requester to pay instead of the bucket owner, and otherwise to false.'
+      ValidUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users in the Active Directory that are allowed to access the file share. Can only be set if Authentication is set to "ActiveDirectory".
+      InvalidUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users in the Active Directory that are not allowed to access the file share. Can only be set if Authentication is set to "ActiveDirectory".
+      Authentication:
+        $ref: '#/definitions/Authentication'
+        description: '<p>The authentication method that users use to access the file share.</p> <p>Valid values: "ActiveDirectory" or "GuestAccess". The default is "ActiveDirectory".</p>'
+    description: CreateSMBFileShareInput
+  CreateSMBFileShareOutput:
+    type: object
+    properties:
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+        description: 'The Amazon Resource Name (ARN) of the newly created file share. '
+    description: CreateSMBFileShareOutput
   CreateSnapshotFromVolumeRecoveryPointInput:
     type: object
     required:
@@ -3210,6 +3478,40 @@ definitions:
         $ref: '#/definitions/NFSFileShareInfoList'
         description: 'An array containing a description for each requested file share. '
     description: DescribeNFSFileSharesOutput
+  DescribeSMBFileSharesInput:
+    type: object
+    required:
+      - FileShareARNList
+    properties:
+      FileShareARNList:
+        $ref: '#/definitions/FileShareARNList'
+        description: 'An array containing the Amazon Resource Name (ARN) of each file share to be described. '
+    description: DescribeSMBFileSharesInput
+  DescribeSMBFileSharesOutput:
+    type: object
+    properties:
+      SMBFileShareInfoList:
+        $ref: '#/definitions/SMBFileShareInfoList'
+        description: 'An array containing a description for each requested file share. '
+    description: DescribeSMBFileSharesOutput
+  DescribeSMBSettingsInput:
+    type: object
+    required:
+      - GatewayARN
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+  DescribeSMBSettingsOutput:
+    type: object
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain that the gateway is joined to.
+      SMBGuestPasswordSet:
+        $ref: '#/definitions/Boolean'
+        description: 'This value is true if a password for the guest user “smbguest” is set, and otherwise false.'
   DescribeSnapshotScheduleInput:
     type: object
     required:
@@ -3596,6 +3898,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Disk'
+  DomainName:
+    type: string
+    pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
+  DomainUserName:
+    type: string
+    pattern: '^\w[\w\.\- ]*$'
+  DomainUserPassword:
+    type: string
+    pattern: '^[ -~]+$'
+    format: password
   DoubleObject:
     type: number
     format: double
@@ -3689,6 +4001,8 @@ definitions:
   FileShareInfo:
     type: object
     properties:
+      FileShareType:
+        $ref: '#/definitions/FileShareType'
       FileShareARN:
         $ref: '#/definitions/FileShareARN'
       FileShareId:
@@ -3704,9 +4018,25 @@ definitions:
       $ref: '#/definitions/FileShareInfo'
   FileShareStatus:
     type: string
-    description: 'The status of the file share. Possible values are CREATING, UPDATING, AVAILABLE and DELETING. '
+    description: 'The status of the file share. Possible values are <code>CREATING</code>, <code>UPDATING</code>, <code>AVAILABLE</code> and <code>DELETING</code>. '
     minLength: 3
     maxLength: 50
+  FileShareType:
+    type: string
+    enum:
+      - NFS
+      - SMB
+    description: The type of the file share.
+  FileShareUser:
+    type: string
+    minLength: 1
+    maxLength: 64
+  FileShareUserList:
+    type: array
+    items:
+      $ref: '#/definitions/FileShareUser'
+    minItems: 0
+    maxItems: 100
   GatewayARN:
     type: string
     description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.
@@ -3805,6 +4135,34 @@ definitions:
     pattern: '[0-9a-z:.-]+'
     minLength: 1
     maxLength: 255
+  JoinDomainInput:
+    type: object
+    required:
+      - GatewayARN
+      - DomainName
+      - UserName
+      - Password
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+        description: 'The unique Amazon Resource Name of the file gateway you want to add to the Active Directory domain. '
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain that you want the gateway to join.
+      UserName:
+        $ref: '#/definitions/DomainUserName'
+        description: Sets the user name of user who has permission to add the gateway to the Active Directory domain.
+      Password:
+        $ref: '#/definitions/DomainUserPassword'
+        description: Sets the password of the user who has permission to add the gateway to the Active Directory domain.
+    description: JoinDomainInput
+  JoinDomainOutput:
+    type: object
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+        description: The unique Amazon Resource Name of the gateway that joined the domain.
+    description: JoinDomainOutput
   KMSKey:
     type: string
     description: The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
@@ -4074,7 +4432,7 @@ definitions:
       OwnerId:
         $ref: '#/definitions/PermissionId'
         description: 'The default owner ID for files in the file share (unless the files have another owner ID specified). The default value is nfsnobody. '
-    description: 'Describes file share default values. Files and folders stored as Amazon S3 objects in S3 buckets don''t, by default, have Unix file permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that represent files and folders are assigned these default Unix permissions. This operation is only supported in the file gateway type.'
+    description: 'Describes Network File System (NFS) file share default values. Files and folders stored as Amazon S3 objects in S3 buckets don''t, by default, have Unix file permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that represent files and folders are assigned these default Unix permissions. This operation is only supported in the file gateway type.'
   NFSFileShareInfo:
     type: object
     properties:
@@ -4312,6 +4670,62 @@ definitions:
     description: 'The ARN of the IAM role that file gateway assumes when it accesses the underlying storage. '
     minLength: 20
     maxLength: 2048
+  SMBFileShareInfo:
+    type: object
+    properties:
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+      FileShareId:
+        $ref: '#/definitions/FileShareId'
+      FileShareStatus:
+        $ref: '#/definitions/FileShareStatus'
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+      KMSEncrypted:
+        $ref: '#/definitions/boolean'
+        description: 'True to use Amazon S3 server side encryption with your own KMS key, or false to use a key managed by Amazon S3. Optional. '
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+      Path:
+        $ref: '#/definitions/Path'
+        description: The file share path used by the SMB client to identify the mount point.
+      Role:
+        $ref: '#/definitions/Role'
+      LocationARN:
+        $ref: '#/definitions/LocationARN'
+      DefaultStorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: 'The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
+      ObjectACL:
+        $ref: '#/definitions/ObjectACL'
+      ReadOnly:
+        $ref: '#/definitions/Boolean'
+        description: 'Sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.'
+      GuessMIMETypeEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'Enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.'
+      RequesterPays:
+        $ref: '#/definitions/Boolean'
+        description: 'Sets who pays the cost of the request and the data download from the Amazon S3 bucket. Set this value to true if you want the requester to pay instead of the bucket owner, and otherwise to false.'
+      ValidUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users in the Active Directory that are allowed to access the file share. Can only be set if Authentication is set to "ActiveDirectory".
+      InvalidUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users in the Active Directory that are not allowed to access the file share. Can only be set if Authentication is set to "ActiveDirectory".
+      Authentication:
+        $ref: '#/definitions/Authentication'
+    description: 'The Windows file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported in file gateways.'
+  SMBFileShareInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/SMBFileShareInfo'
+  SMBGuestPassword:
+    type: string
+    pattern: '^[ -~]+$'
+    minLength: 6
+    maxLength: 512
+    format: password
   ServiceUnavailableError:
     type: object
     properties:
@@ -4341,6 +4755,24 @@ definitions:
     type: object
     example:
       GatewayARN: 'arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B'
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+  SetSMBGuestPasswordInput:
+    type: object
+    required:
+      - GatewayARN
+      - Password
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+        description: The Amazon Resource Name (ARN) of the file gateway the SMB file share is associated with.
+      Password:
+        $ref: '#/definitions/SMBGuestPassword'
+        description: The password you want to set for your SMB Server.
+    description: SetSMBGuestPasswordInput
+  SetSMBGuestPasswordOutput:
+    type: object
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
@@ -4463,7 +4895,7 @@ definitions:
         $ref: '#/definitions/TagValue'
   TagKey:
     type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 128
   TagKeys:
@@ -4821,6 +5253,49 @@ definitions:
         $ref: '#/definitions/FileShareARN'
         description: 'The Amazon Resource Name (ARN) of the updated file share. '
     description: UpdateNFSFileShareOutput
+  UpdateSMBFileShareInput:
+    type: object
+    required:
+      - FileShareARN
+    properties:
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+        description: The Amazon Resource Name (ARN) of the SMB file share you want to update.
+      KMSEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: The Amazon Resource Name (ARN) KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+      DefaultStorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: 'The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
+      ObjectACL:
+        $ref: '#/definitions/ObjectACL'
+        description: Sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is "private".
+      ReadOnly:
+        $ref: '#/definitions/Boolean'
+        description: 'Sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.'
+      GuessMIMETypeEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'Enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.'
+      RequesterPays:
+        $ref: '#/definitions/Boolean'
+        description: 'Sets who pays the cost of the request and the data download from the Amazon S3 bucket. Set this value to true if you want the requester to pay instead of the bucket owner, and otherwise to false.'
+      ValidUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users in the Active Directory that are allowed to access the file share. Can only be set if Authentication is set to "ActiveDirectory".
+      InvalidUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users in the Active Directory that are not allowed to access the file share. Can only be set if Authentication is set to "ActiveDirectory".
+    description: UpdateSMBFileShareInput
+  UpdateSMBFileShareOutput:
+    type: object
+    properties:
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+        description: 'The Amazon Resource Name (ARN) of the updated SMB file share. '
+    description: UpdateSMBFileShareOutput
   UpdateSnapshotScheduleInput:
     type: object
     required:

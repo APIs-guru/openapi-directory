@@ -234,6 +234,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateExclusionsPreview':
+    post:
+      operationId: CreateExclusionsPreview
+      description: 'Starts the generation of an exclusions preview for the specified assessment template. The exclusions preview lists the potential exclusions (ExclusionPreview) that Inspector can detect before it runs the assessment. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateExclusionsPreviewResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: PreviewGenerationInProgressException
+          schema:
+            $ref: '#/definitions/PreviewGenerationInProgressException'
+        '482':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '484':
+          description: NoSuchEntityException
+          schema:
+            $ref: '#/definitions/NoSuchEntityException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateExclusionsPreviewRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateResourceGroup':
     post:
       operationId: CreateResourceGroup
@@ -526,6 +571,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeExclusions':
+    post:
+      operationId: DescribeExclusions
+      description: Describes the exclusions that are specified by the exclusions' ARNs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeExclusionsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeExclusionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeFindings':
     post:
       operationId: DescribeFindings
@@ -664,6 +742,57 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetAssessmentReportRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetExclusionsPreview':
+    post:
+      operationId: GetExclusionsPreview
+      description: Retrieves the exclusions preview (a list of ExclusionPreview objects) specified by the preview token. You can obtain the preview token by running the CreateExclusionsPreview API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetExclusionsPreviewResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: NoSuchEntityException
+          schema:
+            $ref: '#/definitions/NoSuchEntityException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetExclusionsPreviewRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -946,6 +1075,57 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListEventSubscriptionsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListExclusions':
+    post:
+      operationId: ListExclusions
+      description: List exclusions that are generated by the assessment run.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListExclusionsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: NoSuchEntityException
+          schema:
+            $ref: '#/definitions/NoSuchEntityException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListExclusionsRequest'
         - name: maxResults
           type: string
           in: query
@@ -2020,7 +2200,7 @@ definitions:
         description: The ARN of the assessment target that corresponds to this assessment template.
       durationInSeconds:
         $ref: '#/definitions/AssessmentRunDuration'
-        description: The duration in seconds specified for this assessment tempate. The default value is 3600 seconds (one hour). The maximum value is 86400 seconds (one day).
+        description: The duration in seconds specified for this assessment template. The default value is 3600 seconds (one hour). The maximum value is 86400 seconds (one day).
       rulesPackageArns:
         $ref: '#/definitions/AssessmentTemplateRulesPackageArnList'
         description: The rules packages that are specified for this assessment template.
@@ -2029,7 +2209,7 @@ definitions:
         description: The user-defined attributes that are assigned to every generated finding from the assessment run that uses this assessment template.
       lastAssessmentRunArn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the most recent assessment run associated with this assessment template. This value exists only when the value of assessmentRunCount is greater than zero.
+        description: The Amazon Resource Name (ARN) of the most recent assessment run associated with this assessment template. This value exists only when the value of assessmentRunCount is greaterpa than zero.
       assessmentRunCount:
         $ref: '#/definitions/ArnCount'
         description: The number of existing assessment runs associated with this assessment template. This value can be zero or a positive integer.
@@ -2136,6 +2316,12 @@ definitions:
       $ref: '#/definitions/Arn'
     minItems: 1
     maxItems: 10
+  BatchDescribeExclusionsArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
+    minItems: 1
+    maxItems: 100
   Bool:
     type: boolean
   CreateAssessmentTargetRequest:
@@ -2204,6 +2390,22 @@ definitions:
       assessmentTemplateArn:
         $ref: '#/definitions/Arn'
         description: The ARN that specifies the assessment template that is created.
+  CreateExclusionsPreviewRequest:
+    type: object
+    required:
+      - assessmentTemplateArn
+    properties:
+      assessmentTemplateArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN that specifies the assessment template for which you want to create an exclusions preview.
+  CreateExclusionsPreviewResponse:
+    type: object
+    required:
+      - previewToken
+    properties:
+      previewToken:
+        $ref: '#/definitions/UUID'
+        description: Specifies the unique identifier of the requested exclusions preview. You can use the unique identifier to retrieve the exclusions preview when running the GetExclusionsPreview API.
   CreateResourceGroupRequest:
     type: object
     required:
@@ -2404,6 +2606,29 @@ definitions:
       registeredAt:
         $ref: '#/definitions/Timestamp'
         description: The date when the cross-account access role was registered.
+  DescribeExclusionsRequest:
+    type: object
+    required:
+      - exclusionArns
+    properties:
+      exclusionArns:
+        $ref: '#/definitions/BatchDescribeExclusionsArnList'
+        description: The list of ARNs that specify the exclusions that you want to describe.
+      locale:
+        $ref: '#/definitions/Locale'
+        description: 'The locale into which you want to translate the exclusion''s title, description, and recommendation.'
+  DescribeExclusionsResponse:
+    type: object
+    required:
+      - exclusions
+      - failedItems
+    properties:
+      exclusions:
+        $ref: '#/definitions/ExclusionMap'
+        description: Information about the exclusions.
+      failedItems:
+        $ref: '#/definitions/FailedItems'
+        description: Exclusion details that cannot be described. An error code is provided for each failed item.
   DescribeFindingsRequest:
     type: object
     required:
@@ -2553,6 +2778,75 @@ definitions:
       $ref: '#/definitions/EventSubscription'
     minItems: 1
     maxItems: 50
+  Exclusion:
+    type: object
+    required:
+      - arn
+      - title
+      - description
+      - recommendation
+      - scopes
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN that specifies the exclusion.
+      title:
+        $ref: '#/definitions/Text'
+        description: The name of the exclusion.
+      description:
+        $ref: '#/definitions/Text'
+        description: The description of the exclusion.
+      recommendation:
+        $ref: '#/definitions/Text'
+        description: The recommendation for the exclusion.
+      scopes:
+        $ref: '#/definitions/ScopeList'
+        description: The AWS resources for which the exclusion pertains.
+      attributes:
+        $ref: '#/definitions/AttributeList'
+        description: The system-defined attributes for the exclusion.
+    description: Contains information about what was excluded from an assessment run.
+  ExclusionMap:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Arn'
+        value:
+          $ref: '#/definitions/Exclusion'
+  ExclusionPreview:
+    type: object
+    required:
+      - title
+      - description
+      - recommendation
+      - scopes
+    properties:
+      title:
+        $ref: '#/definitions/Text'
+        description: The name of the exclusion preview.
+      description:
+        $ref: '#/definitions/Text'
+        description: The description of the exclusion preview.
+      recommendation:
+        $ref: '#/definitions/Text'
+        description: The recommendation for the exclusion preview.
+      scopes:
+        $ref: '#/definitions/ScopeList'
+        description: The AWS resources for which the exclusion preview pertains.
+      attributes:
+        $ref: '#/definitions/AttributeList'
+        description: The system-defined attributes for the exclusion preview.
+    description: Contains information about what is excluded from an assessment run given the current state of the assessment template.
+  ExclusionPreviewList:
+    type: array
+    items:
+      $ref: '#/definitions/ExclusionPreview'
+    minItems: 0
+    maxItems: 100
   FailedItemDetails:
     type: object
     required:
@@ -2721,6 +3015,41 @@ definitions:
       url:
         $ref: '#/definitions/Url'
         description: Specifies the URL where you can find the generated assessment report. This parameter is only returned if the report is successfully generated.
+  GetExclusionsPreviewRequest:
+    type: object
+    required:
+      - assessmentTemplateArn
+      - previewToken
+    properties:
+      assessmentTemplateArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN that specifies the assessment template for which the exclusions preview was requested.
+      previewToken:
+        $ref: '#/definitions/UUID'
+        description: The unique identifier associated of the exclusions preview.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the GetExclusionsPreviewRequest action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data.
+      maxResults:
+        $ref: '#/definitions/ListMaxResults'
+        description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 100. The maximum value is 500.
+      locale:
+        $ref: '#/definitions/Locale'
+        description: 'The locale into which you want to translate the exclusion''s title, description, and recommendation.'
+  GetExclusionsPreviewResponse:
+    type: object
+    required:
+      - previewStatus
+    properties:
+      previewStatus:
+        $ref: '#/definitions/PreviewStatus'
+        description: Specifies the status of the request to generate an exclusions preview.
+      exclusionPreviews:
+        $ref: '#/definitions/ExclusionPreviewList'
+        description: Information about the exclusions included in the preview.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'When a response is generated, if there is more data to be listed, this parameters is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
   GetTelemetryMetadataRequest:
     type: object
     required:
@@ -3268,6 +3597,31 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: ' When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
+  ListExclusionsRequest:
+    type: object
+    required:
+      - assessmentRunArn
+    properties:
+      assessmentRunArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the assessment run that generated the exclusions that you want to list.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListExclusionsRequest action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data.
+      maxResults:
+        $ref: '#/definitions/ListMaxResults'
+        description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 100. The maximum value is 500.
+  ListExclusionsResponse:
+    type: object
+    required:
+      - exclusionArns
+    properties:
+      exclusionArns:
+        $ref: '#/definitions/ListReturnedArnList'
+        description: A list of exclusions' ARNs returned by the action.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'When a response is generated, if there is more data to be listed, this parameters is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
   ListFindingsRequest:
     type: object
     example:
@@ -3464,6 +3818,19 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: ' When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
+  PreviewGenerationInProgressException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The request is rejected. The specified assessment template is currently generating an exclusions preview.
+  PreviewStatus:
+    type: string
+    enum:
+      - WORK_IN_PROGRESS
+      - COMPLETED
   ProviderName:
     type: string
     minLength: 0
@@ -3605,6 +3972,28 @@ definitions:
     type: string
     minLength: 0
     maxLength: 1000
+  Scope:
+    type: object
+    properties:
+      key:
+        $ref: '#/definitions/ScopeType'
+        description: The type of the scope.
+      value:
+        $ref: '#/definitions/ScopeValue'
+        description: The resource identifier for the specified scope type.
+    description: This data type contains key-value pairs that identify various Amazon resources.
+  ScopeList:
+    type: array
+    items:
+      $ref: '#/definitions/Scope'
+    minItems: 1
+  ScopeType:
+    type: string
+    enum:
+      - INSTANCE_ID
+      - RULES_PACKAGE_ARN
+  ScopeValue:
+    type: string
   ServiceName:
     type: string
     minLength: 0
@@ -3789,6 +4178,9 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The maximum value of the timestamp range.
     description: This data type is used in the <a>AssessmentRunFilter</a> data type.
+  UUID:
+    type: string
+    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
   UnsubscribeFromEventRequest:
     type: object
     required:

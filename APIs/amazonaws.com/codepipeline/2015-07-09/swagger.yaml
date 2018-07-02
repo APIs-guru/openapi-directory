@@ -1255,6 +1255,10 @@ paths:
           description: InvalidStructureException
           schema:
             $ref: '#/definitions/InvalidStructureException'
+        '485':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
       parameters:
         - name: body
           in: body

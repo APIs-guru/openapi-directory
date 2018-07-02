@@ -898,7 +898,7 @@ paths:
   '/#DescribeInstancesHealth':
     post:
       operationId: DescribeInstancesHealth
-      description: 'Retrives detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html">enhanced health reporting</a>.'
+      description: 'Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html">enhanced health reporting</a>.'
       responses:
         '200':
           description: Success
@@ -1569,7 +1569,7 @@ definitions:
     properties:
       ServiceRole:
         $ref: '#/definitions/String'
-        description: The ARN of an IAM service role that Elastic Beanstalk has permission to assume.
+        description: '<p>The ARN of an IAM service role that Elastic Beanstalk has permission to assume.</p> <p>The <code>ServiceRole</code> property is required the first time that you provide a <code>VersionLifecycleConfig</code> for the application in one of the supporting calls (<code>CreateApplication</code> or <code>UpdateApplicationResourceLifecycle</code>). After you provide it once, in either one of the calls, Elastic Beanstalk persists the Service Role with the application, and you don''t need to specify it again in subsequent <code>UpdateApplicationResourceLifecycle</code> calls. You can, however, specify it in subsequent calls to change the Service Role to another value.</p>'
       VersionLifecycleConfig:
         $ref: '#/definitions/ApplicationVersionLifecycleConfig'
         description: The application version lifecycle configuration.
@@ -1617,7 +1617,7 @@ definitions:
         description: The last modified date of the application version.
       Status:
         $ref: '#/definitions/ApplicationVersionStatus'
-        description: The processing status of the application version.
+        description: <p>The processing status of the application version. Reflects the state of the application version during its creation. Many of the values are only applicable if you specified <code>True</code> for the <code>Process</code> parameter of the <code>CreateApplicationVersion</code> action. The following list describes the possible values.</p> <ul> <li> <p> <code>Unprocessed</code> – Application version wasn't pre-processed or validated. Elastic Beanstalk will validate configuration files during deployment of the application version to an environment.</p> </li> <li> <p> <code>Processing</code> – Elastic Beanstalk is currently processing the application version.</p> </li> <li> <p> <code>Building</code> – Application version is currently undergoing an AWS CodeBuild build.</p> </li> <li> <p> <code>Processed</code> – Elastic Beanstalk was successfully pre-processed and validated.</p> </li> <li> <p> <code>Failed</code> – Either the AWS CodeBuild build failed or configuration files didn't pass validation. This application version isn't usable.</p> </li> </ul>
     description: Describes the properties of an application version.
   ApplicationVersionDescriptionList:
     type: array
@@ -2121,7 +2121,7 @@ definitions:
         description: Set to <code>true</code> to create an application with the specified name if it doesn't already exist.
       Process:
         $ref: '#/definitions/ApplicationVersionProccess'
-        description: '<p>Preprocesses and validates the environment manifest (<code>env.yaml</code>) and configuration files (<code>*.config</code> files in the <code>.ebextensions</code> folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment.</p> <note> <p>The <code>Process</code> option validates Elastic Beanstalk configuration files. It doesn''t validate your application''s configuration files, like proxy server or Docker configuration.</p> </note>'
+        description: '<p>Pre-processes and validates the environment manifest (<code>env.yaml</code>) and configuration files (<code>*.config</code> files in the <code>.ebextensions</code> folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment.</p> <p>You must turn processing on for application versions that you create using AWS CodeBuild or AWS CodeCommit. For application versions built from a source bundle in Amazon S3, processing is optional.</p> <note> <p>The <code>Process</code> option validates Elastic Beanstalk configuration files. It doesn''t validate your application''s configuration files, like proxy server or Docker configuration.</p> </note>'
     description: <p/>
   CreateConfigurationTemplateMessage:
     type: object
@@ -2198,7 +2198,7 @@ definitions:
         description: ' The name of the configuration template to use in deployment. If no configuration template is found with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. '
       SolutionStackName:
         $ref: '#/definitions/SolutionStackName'
-        description: 'This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack.'
+        description: '<p>This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack.</p> <p>For a list of current solution stacks, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html">Elastic Beanstalk Supported Platforms</a>.</p>'
       PlatformArn:
         $ref: '#/definitions/PlatformArn'
         description: The ARN of the platform.
@@ -2904,6 +2904,7 @@ definitions:
       - Warning
       - Degraded
       - Severe
+      - Suspended
   EnvironmentId:
     type: string
   EnvironmentIdList:
@@ -3028,7 +3029,7 @@ definitions:
         description: The type of this environment tier.
       Version:
         $ref: '#/definitions/String'
-        description: The version of this environment tier.
+        description: '<p>The version of this environment tier. When you don''t set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.</p> <note> <p>This member is deprecated. Any specific version that you set may become out of date. We recommend leaving it unspecified.</p> </note>'
     description: Describes the properties of an environment tier
   EventDate:
     type: string

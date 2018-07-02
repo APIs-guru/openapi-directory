@@ -1906,6 +1906,8 @@ definitions:
     description: Container for information regarding the access control for replicas.
   AccountId:
     type: string
+  AllowQuotedRecordDelimiter:
+    type: boolean
   AllowedHeader:
     type: string
   AllowedHeaders:
@@ -2140,6 +2142,9 @@ definitions:
       QuoteCharacter:
         $ref: '#/definitions/QuoteCharacter'
         description: Value used for escaping where the field delimiter is part of the value.
+      AllowQuotedRecordDelimiter:
+        $ref: '#/definitions/AllowQuotedRecordDelimiter'
+        description: Specifies that CSV field values may contain quoted record delimiters and such records should be allowed. Default value is FALSE. Setting this value to TRUE may lower performance.
     description: Describes how a CSV-formatted input object is formatted.
   CSVOutput:
     type: object
