@@ -1002,6 +1002,146 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2017-08-29/tags/{arn}':
+    get:
+      operationId: ListTagsForResource
+      description: Retrieve the tags for a MediaConvert resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '485':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: arn
+          type: string
+          in: path
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /2017-08-29/tags:
+    post:
+      operationId: TagResource
+      description: 'Tag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '485':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: UntagResource
+      description: 'Untag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '485':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
 definitions:
   AacAudioDescriptionBroadcasterMix:
     type: string
@@ -1328,7 +1468,7 @@ definitions:
     properties:
       AudioSelectorNames:
         $ref: '#/definitions/__listOf__stringMin1'
-        description: 'Name of an Audio Selector within the same input to include in the group.  Audio selector names are standardized, based on their order within the input (e.g., "Audio Selector 1").  The audio selector name parameter can be repeated to add any number of audio selectors to the group.'
+        description: 'Name of an Audio Selector within the same input to include in the group.  Audio selector names are standardized, based on their order within the input (e.g., "Audio Selector 1"). The audio selector name parameter can be repeated to add any number of audio selectors to the group.'
     description: Group of Audio Selectors
   AudioSelectorType:
     type: string
@@ -1847,6 +1987,9 @@ definitions:
         description: 'Optional. The queue that jobs created from this template are assigned to. If you don''t specify this, jobs will go to the default queue.'
       Settings:
         $ref: '#/definitions/JobTemplateSettings'
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
   CreateJobTemplateResponse:
     type: object
     properties:
@@ -1869,6 +2012,9 @@ definitions:
         description: The name of the preset you are creating.
       Settings:
         $ref: '#/definitions/PresetSettings'
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
   CreatePresetResponse:
     type: object
     properties:
@@ -1885,6 +2031,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the queue you are creating.
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
   CreateQueueResponse:
     type: object
     properties:
@@ -3800,6 +3949,14 @@ definitions:
       Queues:
         $ref: '#/definitions/__listOfQueue'
         description: List of queues
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      ResourceTags:
+        $ref: '#/definitions/ResourceTags'
   M2tsAudioBufferModel:
     type: string
     enum:
@@ -4675,8 +4832,14 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: A name you create for each queue. Each name must be unique within your account.
+      ProgressingJobsCount:
+        $ref: '#/definitions/__integer'
+        description: Estimated number of jobs in PROGRESSING status.
       Status:
         $ref: '#/definitions/QueueStatus'
+      SubmittedJobsCount:
+        $ref: '#/definitions/__integer'
+        description: Estimated number of jobs in SUBMITTED status.
       Type:
         $ref: '#/definitions/Type'
         description: 'A queue can be of two types: system or custom. System or built-in queues can''t be modified or deleted by the user.'
@@ -4730,6 +4893,16 @@ definitions:
         $ref: '#/definitions/__integerMin1Max8'
         description: 'Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8'
     description: 'Use Manual audio remixing (RemixSettings) to adjust audio levels for each audio channel in each output of your job. With audio remixing, you can output more or fewer audio channels than your input audio source provides.'
+  ResourceTags:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the resource.
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags for the resource.
+    description: The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert resource.
   RespondToAfd:
     type: string
     enum:
@@ -4793,6 +4966,21 @@ definitions:
         $ref: '#/definitions/__string'
         description: Relates to DRM implementation. The location of the license server used for protecting content.
     description: Settings for use with a SPEKE key provider.
+  TagResourceRequest:
+    type: object
+    required:
+      - Arn
+      - Tags
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: 'The Amazon Resource Name (ARN) of the resource that you want to tag. To get the ARN, send a GET request with the resource name.'
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+  TagResourceResponse:
+    type: object
+    properties: {}
   TeletextDestinationSettings:
     type: object
     properties:
@@ -4905,6 +5093,18 @@ definitions:
     enum:
       - SYSTEM
       - CUSTOM
+  UntagResourceRequest:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: 'The Amazon Resource Name (ARN) of the resource that you want to remove tags from. To get the ARN, send a GET request with the resource name.'
+      TagKeys:
+        $ref: '#/definitions/__listOf__string'
+        description: The keys of the tags that you want to remove from the resource.
+  UntagResourceResponse:
+    type: object
+    properties: {}
   UpdateJobTemplateRequest:
     type: object
     properties:
@@ -5258,6 +5458,10 @@ definitions:
     type: integer
     minimum: 1
     maximum: 2
+  __integerMin1Max20:
+    type: integer
+    minimum: 1
+    maximum: 20
   __integerMin1Max2147483647:
     type: integer
     minimum: 1
@@ -5458,6 +5662,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/__integerMinNegative60Max6'
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
   __listOf__stringMin1:
     type: array
     items:

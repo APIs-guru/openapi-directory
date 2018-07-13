@@ -1416,6 +1416,41 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRolePermissionsBoundary':
+    post:
+      operationId: DeleteRolePermissionsBoundary
+      description: <p>Deletes the permissions boundary for the specified IAM role. </p> <important> <p>Deleting the permissions boundary for a role might increase its permissions by allowing anyone who assumes the role to perform all the actions granted in its permissions policies. </p> </important>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NoSuchEntityException
+          schema:
+            $ref: '#/definitions/NoSuchEntityException'
+        '481':
+          description: UnmodifiableEntityException
+          schema:
+            $ref: '#/definitions/UnmodifiableEntityException'
+        '482':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRolePermissionsBoundaryRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteRolePolicy':
     post:
       operationId: DeleteRolePolicy
@@ -1688,6 +1723,37 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteUserRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteUserPermissionsBoundary':
+    post:
+      operationId: DeleteUserPermissionsBoundary
+      description: <p>Deletes the permissions boundary for the specified IAM user.</p> <important> <p>Deleting the permissions boundary for a user might increase its permissions by allowing the user to perform all the actions granted in its permissions policies. </p> </important>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NoSuchEntityException
+          schema:
+            $ref: '#/definitions/NoSuchEntityException'
+        '481':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteUserPermissionsBoundaryRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3785,6 +3851,49 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutRolePermissionsBoundary':
+    post:
+      operationId: PutRolePermissionsBoundary
+      description: '<p>Adds or updates the policy that is specified as the IAM role''s permissions boundary. You can use an AWS managed policy or a customer managed policy to set the boundary for a role. Use the boundary to control the maximum permissions that the role can have. Setting a permissions boundary is an advanced feature that can affect the permissions for the role.</p> <p>You cannot set the boundary for a service-linked role. </p> <important> <p>Policies used as permissions boundaries do not provide permissions. You must also attach a permissions policy to the role. To learn how the effective permissions for a role are evaluated, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html">IAM JSON Policy Evaluation Logic</a> in the IAM User Guide. </p> </important>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NoSuchEntityException
+          schema:
+            $ref: '#/definitions/NoSuchEntityException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: UnmodifiableEntityException
+          schema:
+            $ref: '#/definitions/UnmodifiableEntityException'
+        '483':
+          description: PolicyNotAttachableException
+          schema:
+            $ref: '#/definitions/PolicyNotAttachableException'
+        '484':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutRolePermissionsBoundaryRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#PutRolePolicy':
     post:
       operationId: PutRolePolicy
@@ -3818,6 +3927,45 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutRolePolicyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutUserPermissionsBoundary':
+    post:
+      operationId: PutUserPermissionsBoundary
+      description: '<p>Adds or updates the policy that is specified as the IAM user''s permissions boundary. You can use an AWS managed policy or a customer managed policy to set the boundary for a user. Use the boundary to control the maximum permissions that the user can have. Setting a permissions boundary is an advanced feature that can affect the permissions for the user.</p> <important> <p>Policies that are used as permissions boundaries do not provide permissions. You must also attach a permissions policy to the user. To learn how the effective permissions for a user are evaluated, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html">IAM JSON Policy Evaluation Logic</a> in the IAM User Guide. </p> </important>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NoSuchEntityException
+          schema:
+            $ref: '#/definitions/NoSuchEntityException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: PolicyNotAttachableException
+          schema:
+            $ref: '#/definitions/PolicyNotAttachableException'
+        '483':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutUserPermissionsBoundaryRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4591,7 +4739,7 @@ paths:
   '/#UpdateServiceSpecificCredential':
     post:
       operationId: UpdateServiceSpecificCredential
-      description: Sets the status of a service-specific credential to <code>Active</code> or <code>Inactive</code>. Service-specific credentials that are inactive cannot be used for authentication to the service. This operation can be used to disable a user’s service-specific credential as part of a credential rotation work flow.
+      description: Sets the status of a service-specific credential to <code>Active</code> or <code>Inactive</code>. Service-specific credentials that are inactive cannot be used for authentication to the service. This operation can be used to disable a user's service-specific credential as part of a credential rotation work flow.
       responses:
         '200':
           description: Success
@@ -4996,6 +5144,16 @@ definitions:
       PolicyArn:
         $ref: '#/definitions/arnType'
         description: '<p>The Amazon Resource Name (ARN) of the IAM policy you want to attach.</p> <p>For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>'
+  AttachedPermissionsBoundary:
+    type: object
+    properties:
+      PermissionsBoundaryType:
+        $ref: '#/definitions/PermissionsBoundaryAttachmentType'
+        description: ' The permissions boundary usage type that indicates what type of IAM resource is used as the permissions boundary for an entity. This data type can only have a value of <code>Policy</code>.'
+      PermissionsBoundaryArn:
+        $ref: '#/definitions/arnType'
+        description: ' The ARN of the policy used to set the permissions boundary for the user or role.'
+    description: '<p>Contains information about an attached permissions boundary.</p> <p>An attached permissions boundary is a managed policy that has been attached to a user or role to set the permissions boundary.</p> <p>For more information about permissions boundaries, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
   AttachedPolicy:
     type: object
     properties:
@@ -5299,6 +5457,9 @@ definitions:
       MaxSessionDuration:
         $ref: '#/definitions/roleMaxSessionDurationType'
         description: '<p>The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.</p> <p>Anyone who assumes the role from the AWS CLI or API can use the <code>DurationSeconds</code> API parameter or the <code>duration-seconds</code> CLI parameter to request a longer session. The <code>MaxSessionDuration</code> setting determines the maximum duration that can be requested using the <code>DurationSeconds</code> parameter. If users don''t specify a value for the <code>DurationSeconds</code> parameter, their security credentials are valid for one hour by default. This applies when you use the <code>AssumeRole*</code> API operations or the <code>assume-role*</code> CLI operations but does not apply when you use those operations to create a console URL. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html">Using IAM Roles</a> in the <i>IAM User Guide</i>.</p>'
+      PermissionsBoundary:
+        $ref: '#/definitions/arnType'
+        description: The ARN of the policy that is used to set the permissions boundary for the role.
   CreateRoleResponse:
     type: object
     required:
@@ -5386,6 +5547,9 @@ definitions:
       UserName:
         $ref: '#/definitions/userNameType'
         description: '<p>The name of the user to create.</p> <p>This parameter allows (per its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-. User names are not distinguished by case. For example, you cannot create users named both "TESTUSER" and "testuser".</p>'
+      PermissionsBoundary:
+        $ref: '#/definitions/arnType'
+        description: The ARN of the policy that is used to set the permissions boundary for the user.
   CreateUserResponse:
     type: object
     example:
@@ -5551,6 +5715,14 @@ definitions:
       VersionId:
         $ref: '#/definitions/policyVersionIdType'
         description: '<p>The policy version to delete.</p> <p>This parameter allows (per its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that consists of the lowercase letter ''v'' followed by one or two digits, and optionally followed by a period ''.'' and a string of letters and digits.</p> <p>For more information about managed policy versions, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html">Versioning for Managed Policies</a> in the <i>IAM User Guide</i>.</p>'
+  DeleteRolePermissionsBoundaryRequest:
+    type: object
+    required:
+      - RoleName
+    properties:
+      RoleName:
+        $ref: '#/definitions/roleNameType'
+        description: 'The name (friendly name, not ARN) of the IAM role from which you want to remove the permissions boundary.'
   DeleteRolePolicyRequest:
     type: object
     required:
@@ -5645,6 +5817,14 @@ definitions:
       CertificateId:
         $ref: '#/definitions/certificateIdType'
         description: '<p>The ID of the signing certificate to delete.</p> <p>The format of this parameter, as described by its <a href="http://wikipedia.org/wiki/regex">regex</a> pattern, is a string of characters that can be upper- or lower-cased letters or digits.</p>'
+  DeleteUserPermissionsBoundaryRequest:
+    type: object
+    required:
+      - UserName
+    properties:
+      UserName:
+        $ref: '#/definitions/userNameType'
+        description: 'The name (friendly name, not ARN) of the IAM user from which you want to remove the permissions boundary.'
   DeleteUserPolicyRequest:
     type: object
     required:
@@ -6356,7 +6536,7 @@ definitions:
     properties:
       User:
         $ref: '#/definitions/User'
-        description: A structure containing details about the IAM user.
+        description: '<p>A structure containing details about the IAM user.</p> <important> <p>Due to a service issue, password last used data does not include password use from May 3rd 2018 22:50 PDT to May 23rd 2018 14:08 PDT. This affects <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_finding-unused.html">last sign-in</a> dates shown in the IAM console and password last used dates in the <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html">IAM credential report</a>, and returned by this GetUser API. If users signed in during the affected time, the password last used date that is returned is the date the user last signed in before May 3rd 2018. For users that signed in after May 23rd 2018 14:08 PDT, the returned password last used date is accurate.</p> <p>If you use password last used information to identify unused credentials for deletion, such as deleting users who did not sign in to AWS in the last 90 days, we recommend that you adjust your evaluation window to include dates after May 23rd 2018. Alternatively, if your users use access keys to access AWS programmatically you can refer to access key last used information because it is accurate for all dates. </p> </important>'
     description: 'Contains the response to a successful <a>GetUser</a> request. '
   Group:
     type: object
@@ -6651,6 +6831,9 @@ definitions:
       PathPrefix:
         $ref: '#/definitions/pathType'
         description: '<p>The path prefix for filtering the results. This parameter is optional. If it is not included, it defaults to a slash (/), listing all entities.</p> <p>This parameter allows (per its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (\u0021) through the DEL character (\u007F), including most punctuation characters, digits, and upper and lowercased letters.</p>'
+      PolicyUsageFilter:
+        $ref: '#/definitions/PolicyUsageType'
+        description: "<p>The policy usage method to use for filtering the results.</p> <p>To list only permissions policies, set\_<code>PolicyUsageFilter</code>\_to\_<code>PermissionsPolicy</code>. To list only the policies used to set permissions boundaries, set\_the value to\_<code>PermissionsBoundary</code>.</p> <p>This parameter is optional. If it is not included, all policies are returned. </p>"
       Marker:
         $ref: '#/definitions/markerType'
         description: Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.
@@ -6904,6 +7087,9 @@ definitions:
       PathPrefix:
         $ref: '#/definitions/policyPathType'
         description: 'The path prefix for filtering the results. This parameter is optional. If it is not included, it defaults to a slash (/), listing all policies. This parameter allows (per its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (\u0021) through the DEL character (\u007F), including most punctuation characters, digits, and upper and lowercased letters.'
+      PolicyUsageFilter:
+        $ref: '#/definitions/PolicyUsageType'
+        description: "<p>The policy usage method to use for filtering the results.</p> <p>To list only permissions policies, set\_<code>PolicyUsageFilter</code>\_to\_<code>PermissionsPolicy</code>. To list only the policies used to set permissions boundaries, set\_the value to\_<code>PermissionsBoundary</code>.</p> <p>This parameter is optional. If it is not included, all policies are returned. </p>"
       Marker:
         $ref: '#/definitions/markerType'
         description: Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.
@@ -7287,6 +7473,9 @@ definitions:
       AttachmentCount:
         $ref: '#/definitions/attachmentCountType'
         description: 'The number of principal entities (users, groups, and roles) that the policy is attached to.'
+      PermissionsBoundaryUsageCount:
+        $ref: '#/definitions/attachmentCountType'
+        description: '<p>The number of entities (users and roles) for which the policy is used as the permissions boundary. </p> <p>For more information about permissions boundaries, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
       IsAttachable:
         $ref: '#/definitions/booleanType'
         description: 'Specifies whether the policy can be attached to an IAM user, group, or role.'
@@ -7376,6 +7565,10 @@ definitions:
       message:
         $ref: '#/definitions/passwordPolicyViolationMessage'
     description: The request was rejected because the provided password did not meet the requirements imposed by the account password policy.
+  PermissionsBoundaryAttachmentType:
+    type: string
+    enum:
+      - PermissionsBoundaryPolicy
   Policy:
     type: object
     properties:
@@ -7396,6 +7589,9 @@ definitions:
       AttachmentCount:
         $ref: '#/definitions/attachmentCountType'
         description: 'The number of entities (users, groups, and roles) that the policy is attached to.'
+      PermissionsBoundaryUsageCount:
+        $ref: '#/definitions/attachmentCountType'
+        description: '<p>The number of entities (users and roles) for which the policy is used to set the permissions boundary. </p> <p>For more information about permissions boundaries, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
       IsAttachable:
         $ref: '#/definitions/booleanType'
         description: 'Specifies whether the policy can be attached to an IAM user, group, or role.'
@@ -7477,6 +7673,12 @@ definitions:
       - user-managed
       - resource
       - none
+  PolicyUsageType:
+    type: string
+    enum:
+      - PermissionsPolicy
+      - PermissionsBoundary
+    description: '<p>The policy usage type that indicates whether the policy is used as a permissions policy or as the permissions boundary for an entity.</p> <p>For more information about permissions boundaries, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
   PolicyUser:
     type: object
     properties:
@@ -7537,6 +7739,18 @@ definitions:
       PolicyDocument:
         $ref: '#/definitions/policyDocumentType'
         description: '<p>The policy document.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF)</p> </li> <li> <p>The special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D)</p> </li> </ul>'
+  PutRolePermissionsBoundaryRequest:
+    type: object
+    required:
+      - RoleName
+      - PermissionsBoundary
+    properties:
+      RoleName:
+        $ref: '#/definitions/roleNameType'
+        description: 'The name (friendly name, not ARN) of the IAM role for which you want to set the permissions boundary.'
+      PermissionsBoundary:
+        $ref: '#/definitions/arnType'
+        description: The ARN of the policy that is used to set the permissions boundary for the role.
   PutRolePolicyRequest:
     type: object
     required:
@@ -7557,6 +7771,18 @@ definitions:
       PolicyDocument:
         $ref: '#/definitions/policyDocumentType'
         description: '<p>The policy document.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF)</p> </li> <li> <p>The special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D)</p> </li> </ul>'
+  PutUserPermissionsBoundaryRequest:
+    type: object
+    required:
+      - UserName
+      - PermissionsBoundary
+    properties:
+      UserName:
+        $ref: '#/definitions/userNameType'
+        description: 'The name (friendly name, not ARN) of the IAM user for which you want to set the permissions boundary.'
+      PermissionsBoundary:
+        $ref: '#/definitions/arnType'
+        description: The ARN of the policy that is used to set the permissions boundary for the user.
   PutUserPolicyRequest:
     type: object
     required:
@@ -7748,6 +7974,9 @@ definitions:
       MaxSessionDuration:
         $ref: '#/definitions/roleMaxSessionDurationType'
         description: The maximum session duration (in seconds) for the specified role. Anyone who uses the AWS CLI or API to assume the role can specify the duration using the optional <code>DurationSeconds</code> API parameter or <code>duration-seconds</code> CLI parameter.
+      PermissionsBoundary:
+        $ref: '#/definitions/AttachedPermissionsBoundary'
+        description: '<p>The ARN of the policy used to set the permissions boundary for the role.</p> <p>For more information about permissions boundaries, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
     description: Contains information about an IAM role. This structure is returned as a response element in several API operations that interact with roles.
   RoleDetail:
     type: object
@@ -7778,6 +8007,9 @@ definitions:
       AttachedManagedPolicies:
         $ref: '#/definitions/attachedPoliciesListType'
         description: A list of managed policies attached to the role. These policies are the role's access (permissions) policies.
+      PermissionsBoundary:
+        $ref: '#/definitions/AttachedPermissionsBoundary'
+        description: '<p>The ARN of the policy used to set the permissions boundary for the role.</p> <p>For more information about permissions boundaries, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
     description: '<p>Contains information about an IAM role, including all of the role''s policies.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> operation.</p>'
   RoleUsageListType:
     type: array
@@ -8049,7 +8281,7 @@ definitions:
         description: '<p>A resource-based policy to include in the simulation provided as a string. Each resource in the simulation is treated as if it had this policy attached. You can include only one resource-based policy in a simulation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF)</p> </li> <li> <p>The special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D)</p> </li> </ul>'
       ResourceOwner:
         $ref: '#/definitions/ResourceNameType'
-        description: 'An AWS account ID that specifies the owner of any simulated resource that does not identify its owner in the resource ARN, such as an S3 bucket or object. If <code>ResourceOwner</code> is specified, it is also used as the account owner of any <code>ResourcePolicy</code> included in the simulation. If the <code>ResourceOwner</code> parameter is not specified, then the owner of the resources and the resource policy defaults to the account of the identity provided in <code>CallerArn</code>. This parameter is required only if you specify a resource-based policy and account that owns the resource is different from the account that owns the simulated calling user <code>CallerArn</code>.'
+        description: '<p>An ARN representing the AWS account ID that specifies the owner of any simulated resource that does not identify its owner in the resource ARN, such as an S3 bucket or object. If <code>ResourceOwner</code> is specified, it is also used as the account owner of any <code>ResourcePolicy</code> included in the simulation. If the <code>ResourceOwner</code> parameter is not specified, then the owner of the resources and the resource policy defaults to the account of the identity provided in <code>CallerArn</code>. This parameter is required only if you specify a resource-based policy and account that owns the resource is different from the account that owns the simulated calling user <code>CallerArn</code>.</p> <p>The ARN for an account uses the following syntax: <code>arn:aws:iam::<i>AWS-account-ID</i>:root</code>. For example, to represent the account with the 112233445566 ID, use the following ARN: <code>arn:aws:iam::112233445566-ID:root</code>. </p>'
       CallerArn:
         $ref: '#/definitions/ResourceNameType'
         description: '<p>The ARN of the IAM user that you want to use as the simulated caller of the API operations. <code>CallerArn</code> is required if you include a <code>ResourcePolicy</code> so that the policy''s <code>Principal</code> element has a value to use in evaluating the policy.</p> <p>You can specify only the ARN of an IAM user. You cannot specify the ARN of an assumed role, federated user, or a service principal.</p>'
@@ -8183,7 +8415,7 @@ definitions:
         description: '<p>The minimum number of characters allowed in an IAM user password.</p> <p>If you do not specify a value for this parameter, then the operation uses the default value of <code>6</code>.</p>'
       RequireSymbols:
         $ref: '#/definitions/booleanType'
-        description: '<p>Specifies whether IAM user passwords must contain at least one of the following non-alphanumeric characters:</p> <p>! @ # $ % ^ &amp;amp; * ( ) _ + - = [ ] { } | ''</p> <p>If you do not specify a value for this parameter, then the operation uses the default value of <code>false</code>. The result is that passwords do not require at least one symbol character.</p>'
+        description: '<p>Specifies whether IAM user passwords must contain at least one of the following non-alphanumeric characters:</p> <p>! @ # $ % ^ &amp; * ( ) _ + - = [ ] { } | ''</p> <p>If you do not specify a value for this parameter, then the operation uses the default value of <code>false</code>. The result is that passwords do not require at least one symbol character.</p>'
       RequireNumbers:
         $ref: '#/definitions/booleanType'
         description: '<p>Specifies whether IAM user passwords must contain at least one numeric character (0 to 9).</p> <p>If you do not specify a value for this parameter, then the operation uses the default value of <code>false</code>. The result is that passwords do not require at least one numeric character.</p>'
@@ -8412,7 +8644,7 @@ definitions:
         description: '<p>The name of the IAM user to associate the SSH public key with.</p> <p>This parameter allows (per its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-</p>'
       SSHPublicKeyBody:
         $ref: '#/definitions/publicKeyMaterialType'
-        description: '<p>The SSH public key. The public key must be encoded in ssh-rsa format or PEM format.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF)</p> </li> <li> <p>The special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D)</p> </li> </ul>'
+        description: '<p>The SSH public key. The public key must be encoded in ssh-rsa format or PEM format. The miminum bit-length of the public key is 2048 bits. For example, you can generate a 2048-bit key, and the resulting PEM file is 1679 bytes long.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF)</p> </li> <li> <p>The special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D)</p> </li> </ul>'
   UploadSSHPublicKeyResponse:
     type: object
     properties:
@@ -8519,6 +8751,9 @@ definitions:
       PasswordLastUsed:
         $ref: '#/definitions/dateType'
         description: '<p>The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the user''s password was last used to sign in to an AWS website. For a list of AWS websites that capture a user''s last sign-in time, see the <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html">Credential Reports</a> topic in the <i>Using IAM</i> guide. If a password is used more than once in a five-minute span, only the first use is returned in this field. If the field is null (no value) then it indicates that they never signed in with a password. This can be because:</p> <ul> <li> <p>The user never had a password.</p> </li> <li> <p>A password exists but has not been used since IAM started tracking this information on October 20th, 2014.</p> </li> </ul> <p>A null does not mean that the user <i>never</i> had a password. Also, if the user does not currently have a password, but had one in the past, then this field contains the date and time the most recent password was used.</p> <p>This value is returned only in the <a>GetUser</a> and <a>ListUsers</a> operations. </p>'
+      PermissionsBoundary:
+        $ref: '#/definitions/AttachedPermissionsBoundary'
+        description: '<p>The ARN of the policy used to set the permissions boundary for the user.</p> <p>For more information about permissions boundaries, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
     description: '<p>Contains information about an IAM user entity.</p> <p>This data type is used as a response element in the following operations:</p> <ul> <li> <p> <a>CreateUser</a> </p> </li> <li> <p> <a>GetUser</a> </p> </li> <li> <p> <a>ListUsers</a> </p> </li> </ul>'
   UserDetail:
     type: object
@@ -8546,6 +8781,9 @@ definitions:
       AttachedManagedPolicies:
         $ref: '#/definitions/attachedPoliciesListType'
         description: A list of the managed policies attached to the user.
+      PermissionsBoundary:
+        $ref: '#/definitions/AttachedPermissionsBoundary'
+        description: '<p>The ARN of the policy used to set the permissions boundary for the user.</p> <p>For more information about permissions boundaries, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
     description: '<p>Contains information about an IAM user, including all the user''s policies and all the IAM groups the user is in.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> operation.</p>'
   VirtualMFADevice:
     type: object

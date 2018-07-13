@@ -127,7 +127,7 @@ paths:
   '/#CreateEndpoint':
     post:
       operationId: CreateEndpoint
-      description: '<p>Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html">CreateEndpointConfig</a> API. </p> <note> <p> Use this API only for hosting models using Amazon SageMaker hosting services. </p> </note> <p>The endpoint name must be unique within an AWS Region in your AWS account. </p> <p>When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them. </p> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Creating</code>. After it creates the endpoint, it sets the status to <code>InService</code>. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html">DescribeEndpoint</a> API.</p> <p>For an example, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/ex1.html">Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker</a>. </p>'
+      description: '<p>Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html">CreateEndpointConfig</a> API. </p> <note> <p> Use this API only for hosting models using Amazon SageMaker hosting services. </p> </note> <p>The endpoint name must be unique within an AWS Region in your AWS account. </p> <p>When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them. </p> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Creating</code>. After it creates the endpoint, it sets the status to <code>InService</code>. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html">DescribeEndpoint</a> API.</p> <p>For an example, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/ex1.html">Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker</a>. </p> <p>If any of the models hosted at this endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provided. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and Deactivating AWS STS i an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -839,7 +839,7 @@ paths:
   '/#ListHyperParameterTuningJobs':
     post:
       operationId: ListHyperParameterTuningJobs
-      description: Gets a list of objects that describe the hyperparameter tuning jobs launched in your account.
+      description: Gets a list of <a>HyperParameterTuningJobSummary</a> objects that describe the hyperparameter tuning jobs launched in your account.
       responses:
         '200':
           description: Success
@@ -909,7 +909,7 @@ paths:
   '/#ListNotebookInstanceLifecycleConfigs':
     post:
       operationId: ListNotebookInstanceLifecycleConfigs
-      description: Lists notebook instance lifestyle configurations created with the API.
+      description: Lists notebook instance lifestyle configurations created with the <a>CreateNotebookInstanceLifecycleConfig</a> API.
       responses:
         '200':
           description: Success
@@ -1049,7 +1049,7 @@ paths:
   '/#ListTrainingJobsForHyperParameterTuningJob':
     post:
       operationId: ListTrainingJobsForHyperParameterTuningJob
-      description: Gets a list of objects that describe the training jobs that a hyperparameter tuning job launched.
+      description: Gets a list of <a>TrainingJobSummary</a> objects that describe the training jobs that a hyperparameter tuning job launched.
       responses:
         '200':
           description: Success
@@ -1192,7 +1192,7 @@ paths:
   '/#UpdateEndpoint':
     post:
       operationId: UpdateEndpoint
-      description: '<p> Deploys the new <code>EndpointConfig</code> specified in the request, switches to using newly created endpoint, and then deletes resources provisioned for the endpoint using the previous <code>EndpointConfig</code> (there is no availability loss). </p> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Updating</code>. After updating the endpoint, it sets the status to <code>InService</code>. To check the status of an endpoint, use the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html">DescribeEndpoint</a> API. </p>'
+      description: '<p> Deploys the new <code>EndpointConfig</code> specified in the request, switches to using newly created endpoint, and then deletes resources provisioned for the endpoint using the previous <code>EndpointConfig</code> (there is no availability loss). </p> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Updating</code>. After updating the endpoint, it sets the status to <code>InService</code>. To check the status of an endpoint, use the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html">DescribeEndpoint</a> API. </p> <note> <p>You cannot update an endpoint with the current <code>EndpointConfig</code>. To update an endpoint, you must create a new <code>EndpointConfig</code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1279,7 +1279,7 @@ paths:
   '/#UpdateNotebookInstanceLifecycleConfig':
     post:
       operationId: UpdateNotebookInstanceLifecycleConfig
-      description: Updates a notebook instance lifecycle configuration created with the API.
+      description: Updates a notebook instance lifecycle configuration created with the <a>CreateNotebookInstanceLifecycleConfig</a> API.
       responses:
         '200':
           description: Success
@@ -1401,10 +1401,10 @@ definitions:
         description: The DNS host name for the container after Amazon SageMaker deploys it.
       Image:
         $ref: '#/definitions/Image'
-        description: 'The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html">Using Your Own Algorithms with Amazon SageMaker</a> '
+        description: 'The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. Amazon SageMaker supports both <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code> image path formats. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html">Using Your Own Algorithms with Amazon SageMaker</a> '
       ModelDataUrl:
         $ref: '#/definitions/Url'
-        description: 'The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). '
+        description: '<p>The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). </p> <p>If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and Deactivating AWS STS i an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>'
       Environment:
         $ref: '#/definitions/EnvironmentMap'
         description: 'The environment variables to set in the Docker container. Each key and value in the <code>Environment</code> string to string map can have length of up to 1024. We support up to 16 entries in the map. '
@@ -1500,10 +1500,10 @@ definitions:
         description: 'The name of the tuning job. This name is the prefix for the names of all training jobs that this tuning job launches. The name must be unique within the same AWS account and AWS Region. Names are not case sensitive, and must be between 1-32 characters.'
       HyperParameterTuningJobConfig:
         $ref: '#/definitions/HyperParameterTuningJobConfig'
-        description: 'The object that describes the tuning job, including the search strategy, metric used to evaluate training jobs, ranges of parameters to search, and resource limits for the tuning job.'
+        description: 'The <a>HyperParameterTuningJobConfig</a> object that describes the tuning job, including the search strategy, metric used to evaluate training jobs, ranges of parameters to search, and resource limits for the tuning job.'
       TrainingJobDefinition:
         $ref: '#/definitions/HyperParameterTrainingJobDefinition'
-        description: 'The object that describes the training jobs that this tuning job launches, including static hyperparameters, input data configuration, output data configuration, resource configuration, and stopping condition.'
+        description: 'The <a>HyperParameterTrainingJobDefinition</a> object that describes the training jobs that this tuning job launches, including static hyperparameters, input data configuration, output data configuration, resource configuration, and stopping condition.'
       Tags:
         $ref: '#/definitions/TagList'
         description: 'An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href="http://docs.aws.amazon.com//awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.'
@@ -1536,7 +1536,7 @@ definitions:
         description: 'An array of key-value pairs. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. '
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
-        description: 'A object that specifies the VPC that you want your model to connect to. Control access to and from your model container by configuring the VPC. For more information, see <a>host-vpc</a>.'
+        description: 'A <a>VpcConfig</a> object that specifies the VPC that you want your model to connect to. Control access to and from your model container by configuring the VPC. For more information, see <a>host-vpc</a>.'
   CreateModelOutput:
     type: object
     required:
@@ -1656,7 +1656,7 @@ definitions:
         description: '<p>The resources, including the ML compute instances and ML storage volumes, to use for model training. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use ML storage volumes for scratch space. If you want Amazon SageMaker to use the ML storage volume to store the training data, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. For distributed training algorithms, specify an instance count greater than 1.</p>'
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
-        description: 'A object that specifies the VPC that you want your training job to connect to. Control access to and from your training container by configuring the VPC. For more information, see <a>train-vpc</a> '
+        description: 'A <a>VpcConfig</a> object that specifies the VPC that you want your training job to connect to. Control access to and from your training container by configuring the VPC. For more information, see <a>train-vpc</a> '
       StoppingCondition:
         $ref: '#/definitions/StoppingCondition'
         description: '<p>Sets a duration for training. Use this parameter to cap model training costs. To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for 120 seconds. Algorithms might use this 120-second window to save the model artifacts. </p> <p>When Amazon SageMaker terminates a job because the stopping condition has been met, training algorithms provided by Amazon SageMaker save the intermediate results of the job. This intermediate data is a valid model artifact. You can use it to create a model using the <code>CreateModel</code> API. </p>'
@@ -1738,6 +1738,23 @@ definitions:
   DeleteTagsOutput:
     type: object
     properties: {}
+  DeployedImage:
+    type: object
+    properties:
+      SpecifiedImage:
+        $ref: '#/definitions/Image'
+        description: The image path you specified when you created the model.
+      ResolvedImage:
+        $ref: '#/definitions/Image'
+        description: The specific digest path of the image hosted in this <code>ProductionVariant</code>.
+      ResolutionTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time when the image path for the model resolved to the <code>ResolvedImage</code> '
+    description: '<p>Gets the Amazon EC2 Container Registry path of the docker image of the model that is hosted in this <a>ProductionVariant</a>.</p> <p>If you used the <code>registry/repository[:tag]</code> form to to specify the image path of the primary container when you created the model hosted in this <code>ProductionVariant</code>, the path resolves to a path of the form <code>registry/repository[@digest]</code>. A digest is a hash value that identifies a specific version of an image. For information about Amazon ECR paths, see <a href="http://docs.aws.amazon.com//AmazonECR/latest/userguide/docker-pull-ecr-image.html">Pulling an Image</a> in the <i>Amazon ECR User Guide</i>.</p>'
+  DeployedImages:
+    type: array
+    items:
+      $ref: '#/definitions/DeployedImage'
   DescribeEndpointConfigInput:
     type: object
     required:
@@ -1798,7 +1815,7 @@ definitions:
         description: The name of the endpoint configuration associated with this endpoint.
       ProductionVariants:
         $ref: '#/definitions/ProductionVariantSummaryList'
-        description: ' An array of ProductionVariant objects, one for each model hosted behind this endpoint. '
+        description: ' An array of <a>ProductionVariantSummary</a> objects, one for each model hosted behind this endpoint. '
       EndpointStatus:
         $ref: '#/definitions/EndpointStatus'
         description: The status of the endpoint.
@@ -1839,10 +1856,10 @@ definitions:
         description: The Amazon Resource Name (ARN) of the tuning job.
       HyperParameterTuningJobConfig:
         $ref: '#/definitions/HyperParameterTuningJobConfig'
-        description: The object that specifies the configuration of the tuning job.
+        description: The <a>HyperParameterTuningJobConfig</a> object that specifies the configuration of the tuning job.
       TrainingJobDefinition:
         $ref: '#/definitions/HyperParameterTrainingJobDefinition'
-        description: The object that specifies the definition of the training jobs that this tuning job launches.
+        description: The <a>HyperParameterTrainingJobDefinition</a> object that specifies the definition of the training jobs that this tuning job launches.
       HyperParameterTuningJobStatus:
         $ref: '#/definitions/HyperParameterTuningJobStatus'
         description: 'The status of the tuning job: InProgress, Completed, Failed, Stopping, or Stopped.'
@@ -1857,13 +1874,13 @@ definitions:
         description: 'The date and time that the status of the tuning job was modified. '
       TrainingJobStatusCounters:
         $ref: '#/definitions/TrainingJobStatusCounters'
-        description: 'The object that specifies the number of training jobs, categorized by status, that this tuning job launched.'
+        description: 'The <a>TrainingJobStatusCounters</a> object that specifies the number of training jobs, categorized by status, that this tuning job launched.'
       ObjectiveStatusCounters:
         $ref: '#/definitions/ObjectiveStatusCounters'
-        description: 'The object that specifies the number of training jobs, categorized by the status of their final objective metric, that this tuning job launched.'
+        description: 'The <a>ObjectiveStatusCounters</a> object that specifies the number of training jobs, categorized by the status of their final objective metric, that this tuning job launched.'
       BestTrainingJob:
         $ref: '#/definitions/HyperParameterTrainingJobSummary'
-        description: A object that describes the training job that completed with the best current .
+        description: A <a>TrainingJobSummary</a> object that describes the training job that completed with the best current <a>HyperParameterTuningJobObjective</a>.
       FailureReason:
         $ref: '#/definitions/FailureReason'
         description: 'If the tuning job failed, the reason it failed.'
@@ -1895,7 +1912,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
-        description: 'A object that specifies the VPC that this model has access to. For more information, see <a>host-vpc</a> '
+        description: 'A <a>VpcConfig</a> object that specifies the VPC that this model has access to. For more information, see <a>host-vpc</a> '
       CreationTime:
         $ref: '#/definitions/Timestamp'
         description: A timestamp that shows when the model was created.
@@ -2050,7 +2067,7 @@ definitions:
         description: 'Resources, including ML compute instances and ML storage volumes, that are configured for model training. '
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
-        description: 'A object that specifies the VPC that this training job has access to. For more information, see <a>train-vpc</a>.'
+        description: 'A <a>VpcConfig</a> object that specifies the VPC that this training job has access to. For more information, see <a>train-vpc</a>.'
       StoppingCondition:
         $ref: '#/definitions/StoppingCondition'
         description: 'The condition under which to stop the training job. '
@@ -2234,7 +2251,7 @@ definitions:
         description: '<p>The input mode that the algorithm supports: File or Pipe. In File input mode, Amazon SageMaker downloads the training data from Amazon S3 to the storage volume that is attached to the training instance and mounts the directory to the Docker volume for the training container. In Pipe input mode, Amazon SageMaker streams data directly from Amazon S3 to the container. </p> <p>If you specify File mode, make sure that you provision the storage volume that is attached to the training instance with enough capacity to accommodate the training data downloaded from Amazon S3, the model artifacts, and intermediate information.</p> <p/> <p>For more information about input modes, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. </p>'
       MetricDefinitions:
         $ref: '#/definitions/MetricDefinitionList'
-        description: An array of objects that specify the metrics that the algorithm emits.
+        description: An array of <a>MetricDefinition</a> objects that specify the metrics that the algorithm emits.
     description: Specifies which training algorithm to use for training jobs that a hyperparameter tuning job launches and the metrics to monitor.
   HyperParameterTrainingJobDefinition:
     type: object
@@ -2251,16 +2268,16 @@ definitions:
         description: Specifies the values of hyperparameters that do not change for the tuning job.
       AlgorithmSpecification:
         $ref: '#/definitions/HyperParameterAlgorithmSpecification'
-        description: The object that specifies the algorithm to use for the training jobs that the tuning job launches.
+        description: The <a>HyperParameterAlgorithmSpecification</a> object that specifies the algorithm to use for the training jobs that the tuning job launches.
       RoleArn:
         $ref: '#/definitions/RoleArn'
         description: The Amazon Resource Name (ARN) of the IAM role associated with the training jobs that the tuning job launches.
       InputDataConfig:
         $ref: '#/definitions/InputDataConfig'
-        description: An array of objects that specify the input for the training jobs that the tuning job launches.
+        description: An array of <a>Channel</a> objects that specify the input for the training jobs that the tuning job launches.
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
-        description: 'The object that specifies the VPC that you want the training jobs that this hyperparameter tuning job launches to connect to. Control access to and from your training container by configuring the VPC. For more information, see <a>train-vpc</a>.'
+        description: 'The <a>VpcConfig</a> object that specifies the VPC that you want the training jobs that this hyperparameter tuning job launches to connect to. Control access to and from your training container by configuring the VPC. For more information, see <a>train-vpc</a>.'
       OutputDataConfig:
         $ref: '#/definitions/OutputDataConfig'
         description: Specifies the path to the Amazon S3 bucket where you store model artifacts from the training jobs that the tuning job launches.
@@ -2307,10 +2324,10 @@ definitions:
         description: A list of the hyperparameters for which you specified ranges to search.
       FailureReason:
         $ref: '#/definitions/FailureReason'
-        description: 'The reason that the '
+        description: 'The reason that the training job failed. '
       FinalHyperParameterTuningJobObjectiveMetric:
         $ref: '#/definitions/FinalHyperParameterTuningJobObjectiveMetric'
-        description: The object that specifies the value of the objective metric of the tuning job that launched this training job.
+        description: The <a>FinalHyperParameterTuningJobObjectiveMetric</a> object that specifies the value of the objective metric of the tuning job that launched this training job.
       ObjectiveStatus:
         $ref: '#/definitions/ObjectiveStatus'
         description: '<p>The status of the objective metric for the training job:</p> <ul> <li> <p>Succeeded: The final objective metric for the training job was evaluated by the hyperparameter tuning job and used in the hyperparameter tuning process.</p> </li> </ul> <ul> <li> <p>Pending: The training job is in progress and evaluation of its final objective metric is pending.</p> </li> </ul> <ul> <li> <p>Failed: The final objective metric for the training job was not evaluated, and was not used in the hyperparameter tuning process. This typically occurs when the training job failed or did not emit an objective metric.</p> </li> </ul>'
@@ -2332,13 +2349,13 @@ definitions:
         description: 'Specifies the search strategy for hyperparameters. Currently, the only valid value is <code>Bayesian</code>.'
       HyperParameterTuningJobObjective:
         $ref: '#/definitions/HyperParameterTuningJobObjective'
-        description: The object that specifies the objective metric for this tuning job.
+        description: The <a>HyperParameterTuningJobObjective</a> object that specifies the objective metric for this tuning job.
       ResourceLimits:
         $ref: '#/definitions/ResourceLimits'
-        description: The object that specifies the maximum number of training jobs and parallel training jobs for this tuning job.
+        description: The <a>ResourceLimits</a> object that specifies the maximum number of training jobs and parallel training jobs for this tuning job.
       ParameterRanges:
         $ref: '#/definitions/ParameterRanges'
-        description: The object that specifies the ranges of hyperparameters that this tuning job searches.
+        description: The <a>ParameterRanges</a> object that specifies the ranges of hyperparameters that this tuning job searches.
     description: Configures a hyperparameter tuning job.
   HyperParameterTuningJobName:
     type: string
@@ -2420,13 +2437,13 @@ definitions:
         description: The date and time that the tuning job was modified.
       TrainingJobStatusCounters:
         $ref: '#/definitions/TrainingJobStatusCounters'
-        description: 'The object that specifies the numbers of training jobs, categorized by status, that this tuning job launched.'
+        description: 'The <a>TrainingJobStatusCounters</a> object that specifies the numbers of training jobs, categorized by status, that this tuning job launched.'
       ObjectiveStatusCounters:
         $ref: '#/definitions/ObjectiveStatusCounters'
-        description: 'The object that specifies the numbers of training jobs, categorized by objective metric status, that this tuning job launched.'
+        description: 'The <a>ObjectiveStatusCounters</a> object that specifies the numbers of training jobs, categorized by objective metric status, that this tuning job launched.'
       ResourceLimits:
         $ref: '#/definitions/ResourceLimits'
-        description: The object that specifies the maximum number of training jobs and parallel training jobs allowed for this tuning job.
+        description: The <a>ResourceLimits</a> object that specifies the maximum number of training jobs and parallel training jobs allowed for this tuning job.
     description: Provides summary information about a hyperparameter tuning job.
   HyperParameters:
     type: array
@@ -2583,7 +2600,7 @@ definitions:
         description: 'If the result of the previous <code>ListHyperParameterTuningJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of tuning jobs, use the token in the next request.'
       MaxResults:
         $ref: '#/definitions/MaxResults'
-        description: The maximum number of tuning jobs to return.
+        description: The maximum number of tuning jobs to return. The default value is 10.
       SortBy:
         $ref: '#/definitions/HyperParameterTuningJobSortByOptions'
         description: The field to sort results by. The default is <code>Name</code>.
@@ -2615,7 +2632,7 @@ definitions:
     properties:
       HyperParameterTuningJobSummaries:
         $ref: '#/definitions/HyperParameterTuningJobSummaries'
-        description: A list of objects that describe the tuning jobs that the <code>ListHyperParameterTuningJobs</code> request returned.
+        description: A list of <a>HyperParameterTuningJobSummary</a> objects that describe the tuning jobs that the <code>ListHyperParameterTuningJobs</code> request returned.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If the result of this <code>ListHyperParameterTuningJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of tuning jobs, use the token in the next request.'
@@ -2777,13 +2794,13 @@ definitions:
         description: 'If the result of the previous <code>ListTrainingJobsForHyperParameterTuningJob</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of training jobs, use the token in the next request.'
       MaxResults:
         $ref: '#/definitions/MaxResults'
-        description: The maximum number of training jobs to return.
+        description: The maximum number of training jobs to return. The default value is 10.
       StatusEquals:
         $ref: '#/definitions/TrainingJobStatus'
         description: A filter that returns only training jobs with the specified status.
       SortBy:
         $ref: '#/definitions/TrainingJobSortByOptions'
-        description: The field to sort results by. The default is <code>Name</code>.
+        description: '<p>The field to sort results by. The default is <code>Name</code>.</p> <p>If the value of this field is <code>FinalObjectiveMetricValue</code>, any training jobs that did not return an objective metric are not listed.</p>'
       SortOrder:
         $ref: '#/definitions/SortOrder'
         description: The sort order for results. The default is <code>Ascending</code>.
@@ -2794,7 +2811,7 @@ definitions:
     properties:
       TrainingJobSummaries:
         $ref: '#/definitions/HyperParameterTrainingJobSummaries'
-        description: A list of objects that describe the training jobs that the <code>ListTrainingJobsForHyperParameterTuningJob</code> request returned.
+        description: A list of <a>TrainingJobSummary</a> objects that describe the training jobs that the <code>ListTrainingJobsForHyperParameterTuningJob</code> request returned.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If the result of this <code>ListTrainingJobsForHyperParameterTuningJob</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of training jobs, use the token in the next request.'
@@ -2866,7 +2883,7 @@ definitions:
         description: The name of the metric.
       Regex:
         $ref: '#/definitions/MetricRegex'
-        description: 'A regular expression that searches the output of a training job and gets the value of the metric. For more information about using regular expressions to define metrics, see <a>hpo-define-metrics</a>.'
+        description: 'A regular expression that searches the output of a training job and gets the value of the metric. For more information about using regular expressions to define metrics, see <a>automatic-model-tuning-define-metrics</a>.'
     description: Specifies a metric that the training algorithm writes to <code>stderr</code> or <code>stdout</code>. Amazon SageMakerHyperparamter tuning captures all defined metrics. You specify one metric that a hyperparameter tuning job uses as its objective metric to choose the best training job.
   MetricDefinitionList:
     type: array
@@ -3030,6 +3047,7 @@ definitions:
       - Stopped
       - Failed
       - Deleting
+      - Updating
   NotebookInstanceSummary:
     type: object
     required:
@@ -3206,6 +3224,9 @@ definitions:
       VariantName:
         $ref: '#/definitions/VariantName'
         description: The name of the variant.
+      DeployedImages:
+        $ref: '#/definitions/DeployedImages'
+        description: An array of <code>DeployedImage</code> objects that specify the Amazon EC2 Container Registry paths of the inference images deployed on instances of this <code>ProductionVariant</code>.
       CurrentWeight:
         $ref: '#/definitions/VariantWeight'
         description: The weight associated with the variant.

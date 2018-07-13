@@ -1857,18 +1857,31 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  DescribeImagesMaxResults:
+    type: integer
+    minimum: 0
+    maximum: 25
   DescribeImagesRequest:
     type: object
     properties:
       Names:
         $ref: '#/definitions/StringList'
         description: The names of the images to describe.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.'
+      MaxResults:
+        $ref: '#/definitions/DescribeImagesMaxResults'
+        description: The maximum size of each results page.
   DescribeImagesResult:
     type: object
     properties:
       Images:
         $ref: '#/definitions/ImageList'
         description: Information about the images.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token used to retrieve the next page of results. If this value is empty, only the first page is retrieved.'
   DescribeSessionsRequest:
     type: object
     required:
@@ -2582,6 +2595,7 @@ definitions:
       - STORAGE_CONNECTORS
       - STORAGE_CONNECTOR_HOMEFOLDERS
       - STORAGE_CONNECTOR_GOOGLE_DRIVE
+      - STORAGE_CONNECTOR_ONE_DRIVE
       - REDIRECT_URL
       - FEEDBACK_URL
       - THEME_NAME
@@ -2693,6 +2707,7 @@ definitions:
     enum:
       - HOMEFOLDERS
       - GOOGLE_DRIVE
+      - ONE_DRIVE
     description: The type of storage connector.
   StreamingUrlUserId:
     type: string

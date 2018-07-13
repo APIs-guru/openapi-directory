@@ -61,7 +61,7 @@ paths:
   '/{Bucket}/{Key}':
     delete:
       operationId: AbortMultipartUpload
-      description: '<p>Aborts a multipart upload.</p><p>To verify that all parts have been removed, so you don''t get charged for the part storage, you should call the List Parts operation and ensure the parts list is empty.</p><p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadAbort.html</p>'
+      description: '<p>Aborts a multipart upload.</p> <p>To verify that all parts have been removed, so you don''t get charged for the part storage, you should call the List Parts operation and ensure the parts list is empty.</p><p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadAbort.html</p>'
       responses:
         '200':
           description: Success
@@ -192,7 +192,7 @@ paths:
   '/{Bucket}/{Key}?uploads':
     post:
       operationId: CreateMultipartUpload
-      description: '<p>Initiates a multipart upload and returns an upload ID.</p><p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p><p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadInitiate.html</p>'
+      description: '<p>Initiates a multipart upload and returns an upload ID.</p> <p> <b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p><p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadInitiate.html</p>'
       responses:
         '200':
           description: Success
@@ -1808,7 +1808,7 @@ paths:
   '/{Bucket}/{Key}#UploadPart':
     put:
       operationId: UploadPart
-      description: '<p>Uploads a part in a multipart upload.</p><p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p><p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPart.html</p>'
+      description: '<p>Uploads a part in a multipart upload.</p> <p> <b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p><p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPart.html</p>'
       responses:
         '200':
           description: Success
@@ -2258,6 +2258,7 @@ definitions:
     enum:
       - NONE
       - GZIP
+      - BZIP2
   Condition:
     type: object
     properties:
@@ -3161,7 +3162,7 @@ definitions:
         description: Describes the serialization of a CSV-encoded object.
       CompressionType:
         $ref: '#/definitions/CompressionType'
-        description: 'Specifies object''s compression format. Valid values: NONE, GZIP. Default Value: NONE.'
+        description: 'Specifies object''s compression format. Valid values: NONE, GZIP, BZIP2. Default Value: NONE.'
       JSON:
         $ref: '#/definitions/JSONInput'
         description: Specifies JSON as object's input serialization format.
@@ -3725,7 +3726,7 @@ definitions:
         description: Encoding type used by Amazon S3 to encode object keys in the response.
       KeyCount:
         $ref: '#/definitions/KeyCount'
-        description: 'KeyCount is the number of keys returned with this request. KeyCount will always be less than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than equals 50 keys'
+        description: 'KeyCount is the number of keys returned with this request. KeyCount will always be less than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than equals 50 keys '
       ContinuationToken:
         $ref: '#/definitions/Token'
         description: ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key
@@ -4928,7 +4929,7 @@ definitions:
       OutputSerialization:
         $ref: '#/definitions/OutputSerialization'
         description: Describes the format of the data that you want Amazon S3 to return in response.
-    description: 'Request to filter the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response. For more information, go to <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html">S3Select API Documentation</a>.'
+    description: 'Request to filter the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response. For more information, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html">S3Select API Documentation</a>.'
   SelectParameters:
     type: object
     required:

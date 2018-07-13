@@ -463,7 +463,7 @@ paths:
   '/#CreateCrawler':
     post:
       operationId: CreateCrawler
-      description: 'Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the <i>s3Targets</i> or the <i>jdbcTargets</i> field.'
+      description: 'Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the <i>s3Targets</i> field, the <i>jdbcTargets</i> field, or the <i>DynamoDBTargets</i> field.'
       responses:
         '200':
           description: Success
@@ -2632,7 +2632,7 @@ paths:
   '/#StartCrawler':
     post:
       operationId: StartCrawler
-      description: 'Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, does nothing.'
+      description: 'Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-exceptions.html#aws-glue-api-exceptions-CrawlerRunningException">CrawlerRunningException</a>.'
       responses:
         '200':
           description: Success
@@ -3735,7 +3735,7 @@ definitions:
       JsonClassifier:
         $ref: '#/definitions/JsonClassifier'
         description: A <code>JsonClassifier</code> object.
-    description: '<p>Classifiers are written in Python and triggered during a crawl task. You can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>A classifier can be a <code>grok</code> classifier, an XML classifier, or a JSON classifier, asspecified in one of the fields in the <code>Classifier</code> object.</p>'
+    description: '<p>Classifiers are triggered during a crawl task. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>You can use the standard classifiers that AWS Glue supplies, or you can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier can be a <code>grok</code> classifier, an <code>XML</code> classifier, or a <code>JSON</code> classifier, as specified in one of the fields in the <code>Classifier</code> object.</p>'
   ClassifierList:
     type: array
     items:
@@ -4029,7 +4029,7 @@ definitions:
         description: The version of the crawler.
       Configuration:
         $ref: '#/definitions/CrawlerConfiguration'
-        description: '<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler''s behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>''{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }''</code> </p>'
+        description: 'Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
     description: 'Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metadata concerning the data source in the AWS Glue Data Catalog.'
   CrawlerConfiguration:
     type: string
@@ -4111,6 +4111,9 @@ definitions:
       JdbcTargets:
         $ref: '#/definitions/JdbcTargetList'
         description: Specifies JDBC targets.
+      DynamoDBTargets:
+        $ref: '#/definitions/DynamoDBTargetList'
+        description: Specifies DynamoDB targets.
     description: Specifies data stores to crawl.
   CreateClassifierRequest:
     type: object
@@ -4169,7 +4172,7 @@ definitions:
         description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
       Classifiers:
         $ref: '#/definitions/ClassifierNameList'
-        description: 'A list of custom classifiers that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.'
+        description: 'A list of custom classifiers that the user has registered. By default, all built-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.'
       TablePrefix:
         $ref: '#/definitions/TablePrefix'
         description: The table prefix used for catalog tables that are created.
@@ -4178,7 +4181,7 @@ definitions:
         description: Policy for the crawler's update and deletion behavior.
       Configuration:
         $ref: '#/definitions/CrawlerConfiguration'
-        description: '<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler''s behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>''{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }''</code> </p>'
+        description: 'Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
   CreateCrawlerResponse:
     type: object
     properties: {}
@@ -4808,6 +4811,17 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DevEndpoint'
+  DynamoDBTarget:
+    type: object
+    properties:
+      Path:
+        $ref: '#/definitions/Path'
+        description: The name of the DynamoDB table to crawl.
+    description: Specifies a DynamoDB table to crawl.
+  DynamoDBTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/DynamoDBTarget'
   EntityNotFoundException:
     type: object
     properties:
@@ -5836,6 +5850,9 @@ definitions:
       S3:
         $ref: '#/definitions/CodeGenNodeArgs'
         description: An Amazon S3 location.
+      DynamoDB:
+        $ref: '#/definitions/CodeGenNodeArgs'
+        description: A DynamoDB Table location.
     description: The location of resources.
   LocationMap:
     type: array
@@ -6733,7 +6750,7 @@ definitions:
         description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
       Classifiers:
         $ref: '#/definitions/ClassifierNameList'
-        description: 'A list of custom classifiers that the user has registered. By default, all classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.'
+        description: 'A list of custom classifiers that the user has registered. By default, all built-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.'
       TablePrefix:
         $ref: '#/definitions/TablePrefix'
         description: The table prefix used for catalog tables that are created.
@@ -6742,7 +6759,7 @@ definitions:
         description: Policy for the crawler's update and deletion behavior.
       Configuration:
         $ref: '#/definitions/CrawlerConfiguration'
-        description: '<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler''s behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>''{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }''</code> </p>'
+        description: 'Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
   UpdateCrawlerResponse:
     type: object
     properties: {}

@@ -3,6 +3,7 @@ info:
   version: '2016-12-01'
   x-release: v4
   title: Amazon Pinpoint
+  description: Amazon Pinpoint
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -568,7 +569,7 @@ paths:
   '/v1/apps/{application-id}/channels/adm':
     delete:
       operationId: DeleteAdmChannel
-      description: Delete an ADM channel
+      description: Delete an ADM channel.
       responses:
         '200':
           description: Success
@@ -620,7 +621,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetAdmChannel
-      description: Get an ADM channel
+      description: Get an ADM channel.
       responses:
         '200':
           description: Success
@@ -662,7 +663,7 @@ paths:
           required: true
     put:
       operationId: UpdateAdmChannel
-      description: Update an ADM channel
+      description: Update an ADM channel.
       responses:
         '200':
           description: Success
@@ -842,7 +843,7 @@ paths:
   '/v1/apps/{application-id}/channels/apns_sandbox':
     delete:
       operationId: DeleteApnsSandboxChannel
-      description: Delete an APNS sandbox channel
+      description: Delete an APNS sandbox channel.
       responses:
         '200':
           description: Success
@@ -894,7 +895,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetApnsSandboxChannel
-      description: Get an APNS sandbox channel
+      description: Get an APNS sandbox channel.
       responses:
         '200':
           description: Success
@@ -936,7 +937,7 @@ paths:
           required: true
     put:
       operationId: UpdateApnsSandboxChannel
-      description: Update an APNS sandbox channel
+      description: Update an APNS sandbox channel.
       responses:
         '200':
           description: Success
@@ -1634,7 +1635,7 @@ paths:
   '/v1/apps/{application-id}/channels/email':
     delete:
       operationId: DeleteEmailChannel
-      description: Delete an email channel
+      description: Delete an email channel.
       responses:
         '200':
           description: Success
@@ -1686,7 +1687,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetEmailChannel
-      description: Get an email channel
+      description: Get an email channel.
       responses:
         '200':
           description: Success
@@ -1728,7 +1729,7 @@ paths:
           required: true
     put:
       operationId: UpdateEmailChannel
-      description: Update an email channel
+      description: Update an email channel.
       responses:
         '200':
           description: Success
@@ -1873,7 +1874,7 @@ paths:
           required: true
     put:
       operationId: UpdateEndpoint
-      description: Use to update an endpoint.
+      description: Creates or updates an endpoint.
       responses:
         '202':
           description: Success
@@ -2343,7 +2344,7 @@ paths:
   '/v1/apps/{application-id}/channels/sms':
     delete:
       operationId: DeleteSmsChannel
-      description: Delete an SMS channel
+      description: Delete an SMS channel.
       responses:
         '200':
           description: Success
@@ -2395,7 +2396,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetSmsChannel
-      description: Get an SMS channel
+      description: Get an SMS channel.
       responses:
         '200':
           description: Success
@@ -2437,7 +2438,7 @@ paths:
           required: true
     put:
       operationId: UpdateSmsChannel
-      description: Update an SMS channel
+      description: Update an SMS channel.
       responses:
         '200':
           description: Success
@@ -2474,6 +2475,109 @@ paths:
           schema:
             $ref: '#/definitions/UpdateSmsChannelRequest'
         - name: application-id
+          in: path
+          type: string
+          required: true
+  '/v1/apps/{application-id}/users/{user-id}':
+    delete:
+      operationId: DeleteUserEndpoints
+      description: Deletes endpoints associated with an user id.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteUserEndpointsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteUserEndpointsRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: user-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetUserEndpoints
+      description: Returns information about the endpoints associated with an user id.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetUserEndpointsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetUserEndpointsRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: user-id
           in: path
           type: string
           required: true
@@ -2734,6 +2838,59 @@ paths:
           type: string
           required: true
         - name: campaign-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/channels':
+    get:
+      operationId: GetChannels
+      description: Get all channels.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetChannelsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetChannelsRequest'
+        - name: application-id
           in: path
           type: string
           required: true
@@ -3093,10 +3250,121 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /v1/phone/number/validate:
+    post:
+      operationId: PhoneNumberValidate
+      description: Returns information about the specified phone number.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PhoneNumberValidateResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PhoneNumberValidateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/attributes/{attribute-type}':
+    put:
+      operationId: RemoveAttributes
+      description: Used to remove the attributes for an app
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RemoveAttributesResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RemoveAttributesRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: attribute-type
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/apps/{application-id}/messages':
     post:
       operationId: SendMessages
-      description: Send a batch of messages
+      description: |-
+        Use this resource to send a direct message, which is a one time message that you send to a limited audience without creating a campaign. 
+
+        You can send the message to up to 100 recipients. You cannot use the message to engage a segment. When you send the message, Amazon Pinpoint delivers it immediately, and you cannot schedule the delivery. To engage a user segment, and to schedule the message delivery, create a campaign instead of sending a direct message.
+
+        You can send a direct message as a push notification to your mobile app or as an SMS message to SMS-enabled devices.
       responses:
         '200':
           description: Success
@@ -3149,7 +3417,14 @@ paths:
   '/v1/apps/{application-id}/users-messages':
     post:
       operationId: SendUsersMessages
-      description: Send a batch of messages to users
+      description: |-
+        Use this resource to message a list of users. Amazon Pinpoint sends the message to all of the endpoints that are associated with each user.
+
+        A user represents an individual who is assigned a unique user ID, and this ID is assigned to one or more endpoints. For example, if an individual uses your app on multiple devices, your app could assign that person's user ID to the endpoint for each device.
+
+        With the users-messages resource, you specify the message recipients as user IDs. For each user ID, Amazon Pinpoint delivers the message to all of the user's endpoints. Within the body of your request, you can specify a default message, and you can tailor your message for different channels, including those for mobile push and SMS.
+
+        With this resource, you send a direct message, which is a one time message that you send to a limited audience without creating a campaign. You can send the message to up to 100 users per request. You cannot use the message to engage a segment. When you send the message, Amazon Pinpoint delivers it immediately, and you cannot schedule the delivery. To engage a user segment, and to schedule the message delivery, create a campaign instead of using the users-messages resource.
       responses:
         '200':
           description: Success
@@ -3280,7 +3555,7 @@ definitions:
         description: If the channel is enabled for sending messages.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: Indicates whether the channel is configured with ADM credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with ADM. Provide your credentials by setting the ClientId and ClientSecret attributes.
+        description: Not used. Retained for backwards compatibility.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -3397,7 +3672,7 @@ definitions:
         description: If the channel is enabled for sending messages.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: 'Indicates whether the channel is configured with APNs credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with APNs. To use APNs token authentication, set the BundleId, TeamId, TokenKey, and TokenKeyId attributes. To use certificate authentication, set the Certificate and PrivateKey attributes.'
+        description: Not used. Retained for backwards compatibility.
       HasTokenKey:
         $ref: '#/definitions/__boolean'
         description: Indicates whether the channel is configured with a key for APNs token authentication. Provide a token key by setting the TokenKey attribute.
@@ -3531,7 +3806,7 @@ definitions:
         description: If the channel is enabled for sending messages.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: 'Indicates whether the channel is configured with APNs credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with APNs. To use APNs token authentication, set the BundleId, TeamId, TokenKey, and TokenKeyId attributes. To use certificate authentication, set the Certificate and PrivateKey attributes.'
+        description: Not used. Retained for backwards compatibility.
       HasTokenKey:
         $ref: '#/definitions/__boolean'
         description: Indicates whether the channel is configured with a key for APNs token authentication. Provide a token key by setting the TokenKey attribute.
@@ -3599,7 +3874,7 @@ definitions:
         description: If the channel is enabled for sending messages.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: If the channel is registered with a credential for authentication.
+        description: Not used. Retained for backwards compatibility.
       HasTokenKey:
         $ref: '#/definitions/__boolean'
         description: If the channel is registered with a token key for authentication.
@@ -3667,7 +3942,7 @@ definitions:
         description: If the channel is enabled for sending messages.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: If the channel is registered with a credential for authentication.
+        description: Not used. Retained for backwards compatibility.
       HasTokenKey:
         $ref: '#/definitions/__boolean'
         description: If the channel is registered with a token key for authentication.
@@ -3834,12 +4109,25 @@ definitions:
     enum:
       - INCLUSIVE
       - EXCLUSIVE
+  AttributesResource:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The unique ID for the application.
+      AttributeType:
+        $ref: '#/definitions/__string'
+        description: The attribute type for the application.
+      Attributes:
+        $ref: '#/definitions/ListOf__string'
+        description: The attributes for the application.
+    description: Attributes.
   BadRequestException:
     type: object
     properties:
       Message:
         $ref: '#/definitions/__string'
-        description: The error message returned from the API.
+        description: The error message that's returned from the API.
       RequestID:
         $ref: '#/definitions/__string'
         description: The unique message body ID.
@@ -3874,7 +4162,7 @@ definitions:
         description: If the channel is enabled for sending messages.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: Indicates whether the channel is configured with Baidu Cloud Push credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with Baidu Cloud Push. Provide your credentials by setting the ApiKey and SecretKey attributes.
+        description: Not used. Retained for backwards compatibility.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -3930,6 +4218,9 @@ definitions:
       Substitutions:
         $ref: '#/definitions/MapOfListOf__string'
         description: Default message substitutions. Can be overridden by individual address substitutions.
+      TimeToLive:
+        $ref: '#/definitions/__integer'
+        description: This parameter specifies how long (in seconds) the message should be kept in Baidu storage if the device is offline. The and the default value and the maximum time to live supported is 7 days (604800 seconds)
       Title:
         $ref: '#/definitions/__string'
         description: The message title that displays above the message on the user's device.
@@ -3965,6 +4256,7 @@ definitions:
       WebUrl:
         $ref: '#/definitions/__string'
         description: Web URL to call for hook. If the URL has authentication specified it will be added as authentication to the request
+    description: Campaign hook information.
   CampaignLimits:
     type: object
     properties:
@@ -4079,6 +4371,7 @@ definitions:
       - PENDING_NEXT_RUN
       - COMPLETED
       - PAUSED
+      - DELETED
   CampaignsResponse:
     type: object
     properties:
@@ -4089,6 +4382,37 @@ definitions:
         $ref: '#/definitions/__string'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: List of available campaigns.
+  ChannelResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: Application id
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: When was this segment created
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: Not used. Retained for backwards compatibility.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'Channel ID. Not used, only for backwards compatibility.'
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who made the last change
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: Base definition for channel response.
   ChannelType:
     type: string
     enum:
@@ -4102,6 +4426,13 @@ definitions:
       - EMAIL
       - BAIDU
       - CUSTOM
+  ChannelsResponse:
+    type: object
+    properties:
+      Channels:
+        $ref: '#/definitions/MapOfChannelResponse'
+        description: 'A map of channels, with the ChannelType as the key and the Channel as the value.'
+    description: Get channels definition
   CreateAppRequest:
     type: object
     required:
@@ -4304,10 +4635,6 @@ definitions:
     properties:
       EmailChannelResponse:
         $ref: '#/definitions/EmailChannelResponse'
-  DeleteEventStreamRequest:
-    type: object
-    properties: {}
-    description: DeleteEventStream Request
   DeleteEndpointRequest:
     type: object
     properties: {}
@@ -4318,6 +4645,9 @@ definitions:
     properties:
       EndpointResponse:
         $ref: '#/definitions/EndpointResponse'
+  DeleteEventStreamRequest:
+    type: object
+    properties: {}
   DeleteEventStreamResponse:
     type: object
     required:
@@ -4355,6 +4685,16 @@ definitions:
     properties:
       SMSChannelResponse:
         $ref: '#/definitions/SMSChannelResponse'
+  DeleteUserEndpointsRequest:
+    type: object
+    properties: {}
+  DeleteUserEndpointsResponse:
+    type: object
+    required:
+      - EndpointsResponse
+    properties:
+      EndpointsResponse:
+        $ref: '#/definitions/EndpointsResponse'
   DeliveryStatus:
     type: string
     enum:
@@ -4394,7 +4734,7 @@ definitions:
       SMSMessage:
         $ref: '#/definitions/SMSMessage'
         description: The message to SMS channels. Overrides the default message.
-    description: The message configuration.
+    description: Message definitions for the default message and any messages that are tailored for specific channels.
   Duration:
     type: string
     enum:
@@ -4435,7 +4775,7 @@ definitions:
         description: The email address used to send emails from.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: If the channel is registered with a credential for authentication.
+        description: Not used. Retained for backwards compatibility.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -4451,6 +4791,9 @@ definitions:
       LastModifiedDate:
         $ref: '#/definitions/__string'
         description: Last date this was updated
+      MessagesPerSecond:
+        $ref: '#/definitions/__integer'
+        description: Messages per second that can be sent
       Platform:
         $ref: '#/definitions/__string'
         description: Platform type. Will be "EMAIL"
@@ -4466,7 +4809,7 @@ definitions:
     properties:
       Address:
         $ref: '#/definitions/__string'
-        description: The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
+        description: 'The destination for messages that you send to this endpoint. The address varies by channel. For mobile push channels, use the token provided by the push notification service, such as the APNs device token or the FCM registration token. For the SMS channel, use a phone number in E.164 format, such as +1206XXX5550100. For the email channel, use an email address.'
       Attributes:
         $ref: '#/definitions/MapOfListOf__string'
         description: |-
@@ -4487,7 +4830,7 @@ definitions:
         description: The last time the endpoint was updated. Provided in ISO 8601 format.
       EndpointStatus:
         $ref: '#/definitions/__string'
-        description: The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated.
+        description: Unused.
       Id:
         $ref: '#/definitions/__string'
         description: The unique Id for the Endpoint in the batch.
@@ -4579,6 +4922,9 @@ definitions:
       DeliveryStatus:
         $ref: '#/definitions/DeliveryStatus'
         description: Delivery status of message.
+      MessageId:
+        $ref: '#/definitions/__string'
+        description: Unique message identifier associated with the message that was sent.
       StatusCode:
         $ref: '#/definitions/__integer'
         description: Downstream service status code.
@@ -4594,7 +4940,7 @@ definitions:
     properties:
       Address:
         $ref: '#/definitions/__string'
-        description: The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
+        description: 'The destination for messages that you send to this endpoint. The address varies by channel. For mobile push channels, use the token provided by the push notification service, such as the APNs device token or the FCM registration token. For the SMS channel, use a phone number in E.164 format, such as +1206XXX5550100. For the email channel, use an email address.'
       Attributes:
         $ref: '#/definitions/MapOfListOf__string'
         description: |-
@@ -4615,7 +4961,7 @@ definitions:
         description: The last time the endpoint was updated. Provided in ISO 8601 format.
       EndpointStatus:
         $ref: '#/definitions/__string'
-        description: The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated.
+        description: Unused.
       Location:
         $ref: '#/definitions/EndpointLocation'
         description: The endpoint location attributes.
@@ -4672,7 +5018,7 @@ definitions:
         description: The last time the endpoint was updated. Provided in ISO 8601 format.
       EndpointStatus:
         $ref: '#/definitions/__string'
-        description: The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated.
+        description: Unused.
       Id:
         $ref: '#/definitions/__string'
         description: The unique ID that you assigned to the endpoint. The ID should be a globally unique identifier (GUID) to ensure that it is unique compared to all other endpoints for the application.
@@ -4729,6 +5075,13 @@ definitions:
         $ref: '#/definitions/__string'
         description: The unique ID of the user.
     description: Endpoint user specific custom userAttributes
+  EndpointsResponse:
+    type: object
+    properties:
+      Item:
+        $ref: '#/definitions/ListOfEndpointResponse'
+        description: The list of endpoints.
+    description: List of endpoints
   EventStream:
     type: object
     properties:
@@ -4764,12 +5117,17 @@ definitions:
         $ref: '#/definitions/__string'
         description: |-
           A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.
+
           The URL should follow this format: s3://bucket-name/folder-name/
 
           Amazon Pinpoint will export endpoints to this location.
       SegmentId:
         $ref: '#/definitions/__string'
-        description: The ID of the segment to export endpoints from. If not present all endpoints will be exported.
+        description: 'The ID of the segment to export endpoints from. If not present, Amazon Pinpoint exports all of the endpoints that belong to the application.'
+      SegmentVersion:
+        $ref: '#/definitions/__integer'
+        description: The version of the segment to export if specified.
+    description: Export job request.
   ExportJobResource:
     type: object
     properties:
@@ -4780,12 +5138,17 @@ definitions:
         $ref: '#/definitions/__string'
         description: |-
           A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.
+
           The URL should follow this format: s3://bucket-name/folder-name/
 
           Amazon Pinpoint will export endpoints to this location.
       SegmentId:
         $ref: '#/definitions/__string'
-        description: 'The ID of the segment to export endpoints from. If not present, all endpoints are exported.'
+        description: 'The ID of the segment to export endpoints from. If not present, Amazon Pinpoint exports all of the endpoints that belong to the application.'
+      SegmentVersion:
+        $ref: '#/definitions/__integer'
+        description: The version of the segment to export if specified.
+    description: Export job resource.
   ExportJobResponse:
     type: object
     properties:
@@ -4832,6 +5195,7 @@ definitions:
       Type:
         $ref: '#/definitions/__string'
         description: The job type. Will be 'EXPORT'.
+    description: Export job response.
   ExportJobsResponse:
     type: object
     properties:
@@ -4847,7 +5211,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/__string'
-        description: The error message returned from the API.
+        description: The error message that's returned from the API.
       RequestID:
         $ref: '#/definitions/__string'
         description: The unique message body ID.
@@ -4892,7 +5256,7 @@ definitions:
         description: If the channel is enabled for sending messages.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: Indicates whether the channel is configured with FCM or GCM credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with FCM or GCM. Provide your credentials by setting the ApiKey attribute.
+        description: Not used. Retained for backwards compatibility.
       Id:
         $ref: '#/definitions/__string'
         description: Channel ID. Not used. Present only for backwards compatibility.
@@ -4976,6 +5340,26 @@ definitions:
         $ref: '#/definitions/__string'
         description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
     description: GCM Message.
+  GPSCoordinates:
+    type: object
+    properties:
+      Latitude:
+        $ref: '#/definitions/__double'
+        description: Latitude
+      Longitude:
+        $ref: '#/definitions/__double'
+        description: Longitude
+    description: GPS coordinates
+  GPSPointDimension:
+    type: object
+    properties:
+      Coordinates:
+        $ref: '#/definitions/GPSCoordinates'
+        description: Coordinate to measure distance from.
+      RangeInKilometers:
+        $ref: '#/definitions/__double'
+        description: Range in kilometers from the coordinate.
+    description: GPS point location dimension
   GetAdmChannelRequest:
     type: object
     properties: {}
@@ -5116,6 +5500,16 @@ definitions:
     properties:
       CampaignsResponse:
         $ref: '#/definitions/CampaignsResponse'
+  GetChannelsRequest:
+    type: object
+    properties: {}
+  GetChannelsResponse:
+    type: object
+    required:
+      - ChannelsResponse
+    properties:
+      ChannelsResponse:
+        $ref: '#/definitions/ChannelsResponse'
   GetEmailChannelRequest:
     type: object
     properties: {}
@@ -5139,7 +5533,6 @@ definitions:
   GetEventStreamRequest:
     type: object
     properties: {}
-    description: GetEventStreamRequest
   GetEventStreamResponse:
     type: object
     required:
@@ -5267,6 +5660,16 @@ definitions:
     properties:
       SMSChannelResponse:
         $ref: '#/definitions/SMSChannelResponse'
+  GetUserEndpointsRequest:
+    type: object
+    properties: {}
+  GetUserEndpointsResponse:
+    type: object
+    required:
+      - EndpointsResponse
+    properties:
+      EndpointsResponse:
+        $ref: '#/definitions/EndpointsResponse'
   ImportJobRequest:
     type: object
     properties:
@@ -5300,6 +5703,7 @@ definitions:
       SegmentName:
         $ref: '#/definitions/__string'
         description: A custom name for the segment created by the import job. Use if DefineSegment is true.
+    description: Import job request.
   ImportJobResource:
     type: object
     properties:
@@ -5333,6 +5737,7 @@ definitions:
       SegmentName:
         $ref: '#/definitions/__string'
         description: A custom name for the segment created by the import job. Use if DefineSegment is true.
+    description: Import job resource
   ImportJobResponse:
     type: object
     properties:
@@ -5379,6 +5784,7 @@ definitions:
       Type:
         $ref: '#/definitions/__string'
         description: The job type. Will be Import.
+    description: Import job response.
   ImportJobsResponse:
     type: object
     properties:
@@ -5389,12 +5795,18 @@ definitions:
         $ref: '#/definitions/__string'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: Import job list.
+  Include:
+    type: string
+    enum:
+      - ALL
+      - ANY
+      - NONE
   InternalServerErrorException:
     type: object
     properties:
       Message:
         $ref: '#/definitions/__string'
-        description: The error message returned from the API.
+        description: The error message that's returned from the API.
       RequestID:
         $ref: '#/definitions/__string'
         description: The unique message body ID.
@@ -5409,136 +5821,6 @@ definitions:
       - COMPLETED
       - FAILING
       - FAILED
-  ListOfActivityResponse:
-    type: array
-    items:
-      $ref: '#/definitions/ActivityResponse'
-  ListOfApplicationResponse:
-    type: array
-    items:
-      $ref: '#/definitions/ApplicationResponse'
-  ListOfCampaignResponse:
-    type: array
-    items:
-      $ref: '#/definitions/CampaignResponse'
-  ListOfEndpointBatchItem:
-    type: array
-    items:
-      $ref: '#/definitions/EndpointBatchItem'
-  ListOfExportJobResponse:
-    type: array
-    items:
-      $ref: '#/definitions/ExportJobResponse'
-  ListOfImportJobResponse:
-    type: array
-    items:
-      $ref: '#/definitions/ImportJobResponse'
-  ListOfSegmentResponse:
-    type: array
-    items:
-      $ref: '#/definitions/SegmentResponse'
-  ListOfTreatmentResource:
-    type: array
-    items:
-      $ref: '#/definitions/TreatmentResource'
-  ListOfWriteTreatmentResource:
-    type: array
-    items:
-      $ref: '#/definitions/WriteTreatmentResource'
-  ListOf__string:
-    type: array
-    items:
-      $ref: '#/definitions/__string'
-  MapOfAddressConfiguration:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/AddressConfiguration'
-  MapOfAttributeDimension:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/AttributeDimension'
-  MapOfEndpointMessageResult:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/EndpointMessageResult'
-  MapOfEndpointSendConfiguration:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/EndpointSendConfiguration'
-  MapOfListOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/ListOf__string'
-  MapOfMapOfEndpointMessageResult:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/MapOfEndpointMessageResult'
-  MapOfMessageResult:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/MessageResult'
-  MapOf__double:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__double'
-  MapOf__integer:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__integer'
-  MapOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
   Message:
     type: object
     properties:
@@ -5578,18 +5860,22 @@ definitions:
           Indicates if the message should display on the users device.
 
           Silent pushes can be used for Remote Configuration and Phone Home use cases. 
+      TimeToLive:
+        $ref: '#/definitions/__integer'
+        description: 'This parameter specifies how long (in seconds) the message should be kept if the service is unable to deliver the notification the first time. If the value is 0, it treats the notification as if it expires immediately and does not store the notification or attempt to redeliver it. This value is converted to the expiration field when sent to the service. It only applies to APNs and GCM'
       Title:
         $ref: '#/definitions/__string'
         description: The message title that displays above the message on the user's device.
       Url:
         $ref: '#/definitions/__string'
         description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
+    description: Message to send
   MessageBody:
     type: object
     properties:
       Message:
         $ref: '#/definitions/__string'
-        description: The error message returned from the API.
+        description: The error message that's returned from the API.
       RequestID:
         $ref: '#/definitions/__string'
         description: The unique message body ID.
@@ -5624,13 +5910,13 @@ definitions:
     properties:
       Addresses:
         $ref: '#/definitions/MapOfAddressConfiguration'
-        description: 'A map of destination addresses, with the address as the key(Email address, phone number or push token) and the Address Configuration as the value.'
+        description: 'A map of key-value pairs, where each key is an address and each value is an AddressConfiguration object. An address can be a push notification token, a phone number, or an email address.'
       Context:
         $ref: '#/definitions/MapOf__string'
         description: A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
       Endpoints:
         $ref: '#/definitions/MapOfEndpointSendConfiguration'
-        description: 'A map of destination addresses, with the address as the key(Email address, phone number or push token) and the Address Configuration as the value.'
+        description: 'A map of key-value pairs, where each key is an endpoint ID and each value is an EndpointSendConfiguration object. Within an EndpointSendConfiguration object, you can tailor the message for an endpoint by specifying message overrides or substitutions.'
       MessageConfiguration:
         $ref: '#/definitions/DirectMessageConfiguration'
         description: Message configuration.
@@ -5657,6 +5943,9 @@ definitions:
       DeliveryStatus:
         $ref: '#/definitions/DeliveryStatus'
         description: Delivery status of message.
+      MessageId:
+        $ref: '#/definitions/__string'
+        description: Unique message identifier associated with the message that was sent.
       StatusCode:
         $ref: '#/definitions/__integer'
         description: Downstream service status code.
@@ -5677,11 +5966,21 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/__string'
-        description: The error message returned from the API.
+        description: The error message that's returned from the API.
       RequestID:
         $ref: '#/definitions/__string'
         description: The unique message body ID.
     description: Simple message object.
+  MetricDimension:
+    type: object
+    properties:
+      ComparisonOperator:
+        $ref: '#/definitions/__string'
+        description: GREATER_THAN | LESS_THAN | GREATER_THAN_OR_EQUAL | LESS_THAN_OR_EQUAL | EQUAL
+      Value:
+        $ref: '#/definitions/__double'
+        description: Value to be compared.
+    description: Custom metric dimension
   Mode:
     type: string
     enum:
@@ -5692,11 +5991,81 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/__string'
-        description: The error message returned from the API.
+        description: The error message that's returned from the API.
       RequestID:
         $ref: '#/definitions/__string'
         description: The unique message body ID.
     description: Simple message object.
+  NumberValidateRequest:
+    type: object
+    properties:
+      IsoCountryCode:
+        $ref: '#/definitions/__string'
+        description: (Optional) The two-character ISO country code for the country where the phone number was originally registered.
+      PhoneNumber:
+        $ref: '#/definitions/__string'
+        description: The phone number to get information about.
+    description: Phone Number Information request.
+  NumberValidateResponse:
+    type: object
+    properties:
+      Carrier:
+        $ref: '#/definitions/__string'
+        description: The carrier that the phone number is registered with.
+      City:
+        $ref: '#/definitions/__string'
+        description: The city where the phone number was originally registered.
+      CleansedPhoneNumberE164:
+        $ref: '#/definitions/__string'
+        description: The cleansed (standardized) phone number in E.164 format.
+      CleansedPhoneNumberNational:
+        $ref: '#/definitions/__string'
+        description: The cleansed phone number in national format.
+      Country:
+        $ref: '#/definitions/__string'
+        description: The country where the phone number was originally registered.
+      CountryCodeIso2:
+        $ref: '#/definitions/__string'
+        description: The two-character ISO country code for the country where the phone number was originally registered.
+      CountryCodeNumeric:
+        $ref: '#/definitions/__string'
+        description: The numeric country code for the country where the phone number was originally registered.
+      County:
+        $ref: '#/definitions/__string'
+        description: The county where the phone number was originally registered.
+      OriginalCountryCodeIso2:
+        $ref: '#/definitions/__string'
+        description: The two-character ISO country code that was included in the request body.
+      OriginalPhoneNumber:
+        $ref: '#/definitions/__string'
+        description: The phone number that you included in the request body.
+      PhoneType:
+        $ref: '#/definitions/__string'
+        description: 'A description of the phone type. Possible values include MOBILE, LANDLINE, VOIP, INVALID, and OTHER.'
+      PhoneTypeCode:
+        $ref: '#/definitions/__integer'
+        description: 'The phone type as an integer. Possible values include 0 (MOBILE), 1 (LANDLINE), 2 (VOIP), 3 (INVALID), and 4 (OTHER).'
+      Timezone:
+        $ref: '#/definitions/__string'
+        description: The time zone for the location where the phone number was originally registered.
+      ZipCode:
+        $ref: '#/definitions/__string'
+        description: The zip code for the location where the phone number was originally registered.
+    description: Phone Number Information response.
+  PhoneNumberValidateRequest:
+    type: object
+    required:
+      - NumberValidateRequest
+    properties:
+      NumberValidateRequest:
+        $ref: '#/definitions/NumberValidateRequest'
+  PhoneNumberValidateResponse:
+    type: object
+    required:
+      - NumberValidateResponse
+    properties:
+      NumberValidateResponse:
+        $ref: '#/definitions/NumberValidateResponse'
   PutEventStreamRequest:
     type: object
     required:
@@ -5704,7 +6073,6 @@ definitions:
     properties:
       WriteEventStream:
         $ref: '#/definitions/WriteEventStream'
-        description: EventStream to write.
   PutEventStreamResponse:
     type: object
     required:
@@ -5742,6 +6110,20 @@ definitions:
     enum:
       - ACTIVE
       - INACTIVE
+  RemoveAttributesRequest:
+    type: object
+    required:
+      - UpdateAttributesRequest
+    properties:
+      UpdateAttributesRequest:
+        $ref: '#/definitions/UpdateAttributesRequest'
+  RemoveAttributesResponse:
+    type: object
+    required:
+      - AttributesResource
+    properties:
+      AttributesResource:
+        $ref: '#/definitions/AttributesResource'
   SMSChannelRequest:
     type: object
     properties:
@@ -5769,7 +6151,7 @@ definitions:
         description: If the channel is enabled for sending messages.
       HasCredential:
         $ref: '#/definitions/__boolean'
-        description: If the channel is registered with a credential for authentication.
+        description: Not used. Retained for backwards compatibility.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -5785,12 +6167,18 @@ definitions:
       Platform:
         $ref: '#/definitions/__string'
         description: Platform type. Will be "SMS"
+      PromotionalMessagesPerSecond:
+        $ref: '#/definitions/__integer'
+        description: Promotional messages per second that can be sent
       SenderId:
         $ref: '#/definitions/__string'
         description: Sender identifier of your messages.
       ShortCode:
         $ref: '#/definitions/__string'
         description: The short code registered with the phone provider.
+      TransactionalMessagesPerSecond:
+        $ref: '#/definitions/__integer'
+        description: Transactional messages per second that can be sent
       Version:
         $ref: '#/definitions/__integer'
         description: Version of channel
@@ -5800,7 +6188,10 @@ definitions:
     properties:
       Body:
         $ref: '#/definitions/__string'
-        description: 'The message body of the notification, the email body or the text message.'
+        description: The body of the SMS message.
+      Keyword:
+        $ref: '#/definitions/__string'
+        description: The SMS program name that you provided to AWS Support when you requested your dedicated number.
       MessageType:
         $ref: '#/definitions/MessageType'
         description: Is this a transaction priority message or lower priority.
@@ -5917,10 +6308,39 @@ definitions:
       Location:
         $ref: '#/definitions/SegmentLocation'
         description: The segment location attributes.
+      Metrics:
+        $ref: '#/definitions/MapOfMetricDimension'
+        description: Custom segment metrics.
       UserAttributes:
         $ref: '#/definitions/MapOfAttributeDimension'
         description: Custom segment user attributes.
     description: Segment dimensions
+  SegmentGroup:
+    type: object
+    properties:
+      Dimensions:
+        $ref: '#/definitions/ListOfSegmentDimensions'
+        description: List of dimensions to include or exclude.
+      SourceSegments:
+        $ref: '#/definitions/ListOfSegmentReference'
+        description: Segments that define the source of this segment. Currently a maximum of 1 import segment is supported.
+      SourceType:
+        $ref: '#/definitions/SourceType'
+        description: Include or exclude the source.
+      Type:
+        $ref: '#/definitions/Type'
+        description: How should the dimensions be applied for the result
+    description: Segment group definition.
+  SegmentGroupList:
+    type: object
+    properties:
+      Groups:
+        $ref: '#/definitions/ListOfSegmentGroup'
+        description: List of dimension groups to evaluate.
+      Include:
+        $ref: '#/definitions/Include'
+        description: How should the groups be applied for the result
+    description: Segment group definition.
   SegmentImportResource:
     type: object
     properties:
@@ -5951,7 +6371,20 @@ definitions:
       Country:
         $ref: '#/definitions/SetDimension'
         description: The country filter according to ISO 3166-1 Alpha-2 codes.
+      GPSPoint:
+        $ref: '#/definitions/GPSPointDimension'
+        description: The GPS Point dimension.
     description: Segment location dimensions
+  SegmentReference:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/__string'
+        description: Segment Id.
+      Version:
+        $ref: '#/definitions/__integer'
+        description: If specified contains a specific version of the segment included.
+    description: Segment reference.
   SegmentResponse:
     type: object
     properties:
@@ -5976,6 +6409,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of segment
+      SegmentGroups:
+        $ref: '#/definitions/SegmentGroupList'
+        description: Segment definition groups. We currently only support one. If specified Dimensions must be empty.
       SegmentType:
         $ref: '#/definitions/SegmentType'
         description: |-
@@ -6020,26 +6456,26 @@ definitions:
     properties:
       Context:
         $ref: '#/definitions/MapOf__string'
-        description: A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
+        description: A map of custom attribute-value pairs. Amazon Pinpoint adds these attributes to the data.pinpoint object in the body of the push notification payload. Amazon Pinpoint also provides these attributes in the events that it generates for users-messages deliveries.
       MessageConfiguration:
         $ref: '#/definitions/DirectMessageConfiguration'
-        description: Message configuration.
+        description: Message definitions for the default message and any messages that are tailored for specific channels.
       Users:
         $ref: '#/definitions/MapOfEndpointSendConfiguration'
-        description: 'A map of destination endpoints, with the EndpointId as the key Endpoint Message Configuration as the value.'
+        description: 'A map that associates user IDs with EndpointSendConfiguration objects. Within an EndpointSendConfiguration object, you can tailor the message for a user by specifying message overrides or substitutions.'
     description: Send message request.
   SendUsersMessageResponse:
     type: object
     properties:
       ApplicationId:
         $ref: '#/definitions/__string'
-        description: Application id of the message.
+        description: The unique ID of the Amazon Pinpoint project used to send the message.
       RequestId:
         $ref: '#/definitions/__string'
-        description: Original request Id for which this message was delivered.
+        description: The unique ID assigned to the users-messages request.
       Result:
         $ref: '#/definitions/MapOfMapOfEndpointMessageResult'
-        description: A map containing of UserId to Map of EndpointId to Endpoint Message Result.
+        description: 'An object that shows the endpoints that were messaged for each user. The object provides a list of user IDs. For each user ID, it provides the endpoint IDs that were messaged. For each endpoint ID, it provides an EndpointMessageResult object.'
     description: User send message response.
   SendUsersMessagesRequest:
     type: object
@@ -6068,12 +6504,17 @@ definitions:
         $ref: '#/definitions/ListOf__string'
         description: 'The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type.'
     description: Dimension specification of a segment.
+  SourceType:
+    type: string
+    enum:
+      - ALL
+      - ANY
   TooManyRequestsException:
     type: object
     properties:
       Message:
         $ref: '#/definitions/__string'
-        description: The error message returned from the API.
+        description: The error message that's returned from the API.
       RequestID:
         $ref: '#/definitions/__string'
         description: The unique message body ID.
@@ -6103,6 +6544,12 @@ definitions:
         $ref: '#/definitions/__string'
         description: The custom name of a variation of the campaign used for A/B testing.
     description: Treatment resource
+  Type:
+    type: string
+    enum:
+      - ALL
+      - ANY
+      - NONE
   UpdateAdmChannelRequest:
     type: object
     required:
@@ -6187,6 +6634,13 @@ definitions:
     properties:
       ApplicationSettingsResource:
         $ref: '#/definitions/ApplicationSettingsResource'
+  UpdateAttributesRequest:
+    type: object
+    properties:
+      Blacklist:
+        $ref: '#/definitions/ListOf__string'
+        description: The GLOB wildcard for removing the attributes in the application
+    description: Update attributes request
   UpdateBaiduChannelRequest:
     type: object
     required:
@@ -6305,6 +6759,9 @@ definitions:
       CampaignHook:
         $ref: '#/definitions/CampaignHook'
         description: Default campaign hook information.
+      CloudWatchMetricsEnabled:
+        $ref: '#/definitions/__boolean'
+        description: The CloudWatchMetrics settings for the app.
       Limits:
         $ref: '#/definitions/CampaignLimits'
         description: 'The default campaign limits for the app. These limits apply to each campaign for the app, unless the campaign overrides the default with limits of its own.'
@@ -6377,6 +6834,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of segment
+      SegmentGroups:
+        $ref: '#/definitions/SegmentGroupList'
+        description: Segment definition groups. We currently only support one. If specified Dimensions must be empty.
     description: Segment definition.
   WriteTreatmentResource:
     type: object
@@ -6404,8 +6864,177 @@ definitions:
     format: double
   __integer:
     type: integer
+  ListOfActivityResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ActivityResponse'
+  ListOfApplicationResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationResponse'
+  ListOfCampaignResponse:
+    type: array
+    items:
+      $ref: '#/definitions/CampaignResponse'
+  ListOfEndpointBatchItem:
+    type: array
+    items:
+      $ref: '#/definitions/EndpointBatchItem'
+  ListOfEndpointResponse:
+    type: array
+    items:
+      $ref: '#/definitions/EndpointResponse'
+  ListOfExportJobResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ExportJobResponse'
+  ListOfImportJobResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ImportJobResponse'
+  ListOfSegmentDimensions:
+    type: array
+    items:
+      $ref: '#/definitions/SegmentDimensions'
+  ListOfSegmentGroup:
+    type: array
+    items:
+      $ref: '#/definitions/SegmentGroup'
+  ListOfSegmentReference:
+    type: array
+    items:
+      $ref: '#/definitions/SegmentReference'
+  ListOfSegmentResponse:
+    type: array
+    items:
+      $ref: '#/definitions/SegmentResponse'
+  ListOfTreatmentResource:
+    type: array
+    items:
+      $ref: '#/definitions/TreatmentResource'
+  ListOfWriteTreatmentResource:
+    type: array
+    items:
+      $ref: '#/definitions/WriteTreatmentResource'
+  ListOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
+  __long:
+    type: integer
+  MapOfAddressConfiguration:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/AddressConfiguration'
+  MapOfAttributeDimension:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/AttributeDimension'
+  MapOfChannelResponse:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/ChannelResponse'
+  MapOfEndpointMessageResult:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/EndpointMessageResult'
+  MapOfEndpointSendConfiguration:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/EndpointSendConfiguration'
+  MapOfMessageResult:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/MessageResult'
+  MapOfMetricDimension:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/MetricDimension'
+  MapOf__double:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__double'
+  MapOf__integer:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__integer'
+  MapOfListOf__string:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/ListOf__string'
+  MapOfMapOfEndpointMessageResult:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/MapOfEndpointMessageResult'
+  MapOf__string:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
   __string:
     type: string
-  __timestamp:
+  __timestampIso8601:
+    type: string
+    format: date-time
+  __timestampUnix:
     type: string
     format: date-time

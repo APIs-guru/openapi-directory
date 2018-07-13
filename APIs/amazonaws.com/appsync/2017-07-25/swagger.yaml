@@ -1378,6 +1378,9 @@ definitions:
       elasticsearchConfig:
         $ref: '#/definitions/ElasticsearchDataSourceConfig'
         description: Amazon Elasticsearch settings.
+      httpConfig:
+        $ref: '#/definitions/HttpDataSourceConfig'
+        description: Http endpoint settings.
   CreateDataSourceResponse:
     type: object
     properties:
@@ -1468,7 +1471,7 @@ definitions:
         description: The description of the data source.
       type:
         $ref: '#/definitions/DataSourceType'
-        description: '<p>The type of the data source.</p> <ul> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon Elasticsearch Service domain.</p> </li> <li> <p> <b>AWS_LAMBDA</b>: The data source is an AWS Lambda function.</p> </li> <li> <p> <b>NONE</b>: There is no data source. This type is used when when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.</p> </li> </ul>'
+        description: '<p>The type of the data source.</p> <ul> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon Elasticsearch Service domain.</p> </li> <li> <p> <b>AWS_LAMBDA</b>: The data source is an AWS Lambda function.</p> </li> <li> <p> <b>NONE</b>: There is no data source. This type is used when when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.</p> </li> <li> <p> <b>HTTP</b>: The data source is an HTTP endpoint.</p> </li> </ul>'
       serviceRoleArn:
         $ref: '#/definitions/String'
         description: The IAM service role ARN for the data source. The system assumes this role when accessing the data source.
@@ -1481,6 +1484,9 @@ definitions:
       elasticsearchConfig:
         $ref: '#/definitions/ElasticsearchDataSourceConfig'
         description: Amazon Elasticsearch settings.
+      httpConfig:
+        $ref: '#/definitions/HttpDataSourceConfig'
+        description: Http endpoint settings.
     description: Describes a data source.
   DataSourceType:
     type: string
@@ -1489,6 +1495,7 @@ definitions:
       - AMAZON_DYNAMODB
       - AMAZON_ELASTICSEARCH
       - NONE
+      - HTTP
   DataSources:
     type: array
     items:
@@ -1660,6 +1667,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/GraphqlApi'
+  HttpDataSourceConfig:
+    type: object
+    properties:
+      endpoint:
+        $ref: '#/definitions/String'
+        description: 'The Http url endpoint. You can either specify the domain name or ip and port combination and the url scheme must be http(s). If the port is not specified, AWS AppSync will use the default port 80 for http endpoint and port 443 for https endpoints.'
+    description: Describes a Http data source configuration.
   InternalFailureException:
     type: object
     properties:
@@ -1928,6 +1942,9 @@ definitions:
       elasticsearchConfig:
         $ref: '#/definitions/ElasticsearchDataSourceConfig'
         description: The new Elasticsearch configuration.
+      httpConfig:
+        $ref: '#/definitions/HttpDataSourceConfig'
+        description: The new http endpoint configuration
   UpdateDataSourceResponse:
     type: object
     properties:

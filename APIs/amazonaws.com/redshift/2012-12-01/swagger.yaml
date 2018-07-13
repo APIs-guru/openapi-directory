@@ -99,6 +99,59 @@ security:
 paths:
   /:
     post:
+      operationId: AcceptReservedNodeExchange
+      description: 'Exchanges a DC1 Reserved Node for a DC2 Reserved Node with no changes to the configuration (term, payment type, or number of nodes) and no additional costs. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AcceptReservedNodeExchangeOutputMessage'
+        '480':
+          description: ReservedNodeNotFoundFault
+          schema:
+            $ref: '#/definitions/ReservedNodeNotFoundFault'
+        '481':
+          description: InvalidReservedNodeStateFault
+          schema:
+            $ref: '#/definitions/InvalidReservedNodeStateFault'
+        '482':
+          description: ReservedNodeAlreadyMigratedFault
+          schema:
+            $ref: '#/definitions/ReservedNodeAlreadyMigratedFault'
+        '483':
+          description: ReservedNodeOfferingNotFoundFault
+          schema:
+            $ref: '#/definitions/ReservedNodeOfferingNotFoundFault'
+        '484':
+          description: UnsupportedOperationFault
+          schema:
+            $ref: '#/definitions/UnsupportedOperationFault'
+        '485':
+          description: DependentServiceUnavailableFault
+          schema:
+            $ref: '#/definitions/DependentServiceUnavailableFault'
+        '486':
+          description: ReservedNodeAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/ReservedNodeAlreadyExistsFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AcceptReservedNodeExchangeInputMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AuthorizeClusterSecurityGroupIngress':
+    post:
       operationId: AuthorizeClusterSecurityGroupIngress
       description: '<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.</p> <p>If you authorize access to an Amazon EC2 security group, specify <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS region. </p> <p>If you authorize access to a CIDR/IP address range, specify <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia article on <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>. </p> <p>You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Working with Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
@@ -231,7 +284,7 @@ paths:
   '/#CreateCluster':
     post:
       operationId: CreateCluster
-      description: '<p>Creates a new cluster.</p> <p>To create the cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Creates a new cluster.</p> <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1068,6 +1121,35 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTagsMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeClusterDbRevisions':
+    post:
+      operationId: DescribeClusterDbRevisions
+      description: Returns an array of <code>ClusterDbRevision</code> objects.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ClusterDbRevisionsMessage'
+        '480':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeClusterDbRevisionsMessage'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2154,6 +2236,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetReservedNodeExchangeOfferings':
+    post:
+      operationId: GetReservedNodeExchangeOfferings
+      description: 'Returns an array of ReservedNodeOfferings which is filtered by payment type, term, and instance type.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetReservedNodeExchangeOfferingsOutputMessage'
+        '480':
+          description: ReservedNodeNotFoundFault
+          schema:
+            $ref: '#/definitions/ReservedNodeNotFoundFault'
+        '481':
+          description: InvalidReservedNodeStateFault
+          schema:
+            $ref: '#/definitions/InvalidReservedNodeStateFault'
+        '482':
+          description: ReservedNodeAlreadyMigratedFault
+          schema:
+            $ref: '#/definitions/ReservedNodeAlreadyMigratedFault'
+        '483':
+          description: ReservedNodeOfferingNotFoundFault
+          schema:
+            $ref: '#/definitions/ReservedNodeOfferingNotFoundFault'
+        '484':
+          description: UnsupportedOperationFault
+          schema:
+            $ref: '#/definitions/UnsupportedOperationFault'
+        '485':
+          description: DependentServiceUnavailableFault
+          schema:
+            $ref: '#/definitions/DependentServiceUnavailableFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetReservedNodeExchangeOfferingsInputMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ModifyCluster':
     post:
       operationId: ModifyCluster
@@ -2227,12 +2358,53 @@ paths:
           description: InvalidElasticIpFault
           schema:
             $ref: '#/definitions/InvalidElasticIpFault'
+        '496':
+          description: TableLimitExceededFault
+          schema:
+            $ref: '#/definitions/TableLimitExceededFault'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/ModifyClusterMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyClusterDbRevision':
+    post:
+      operationId: ModifyClusterDbRevision
+      description: Modifies the database revision of a cluster. The database revision is a unique revision of the database running in a cluster.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyClusterDbRevisionResult'
+        '480':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '481':
+          description: ClusterOnLatestRevisionFault
+          schema:
+            $ref: '#/definitions/ClusterOnLatestRevisionFault'
+        '482':
+          description: InvalidClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyClusterDbRevisionMessage'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2841,6 +3013,23 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  AcceptReservedNodeExchangeInputMessage:
+    type: object
+    required:
+      - ReservedNodeId
+      - TargetReservedNodeOfferingId
+    properties:
+      ReservedNodeId:
+        $ref: '#/definitions/String'
+        description: A string representing the identifier of the Reserved Node to be exchanged.
+      TargetReservedNodeOfferingId:
+        $ref: '#/definitions/String'
+        description: The unique identifier of the Reserved Node offering to be used for the exchange.
+  AcceptReservedNodeExchangeOutputMessage:
+    type: object
+    properties:
+      ExchangedReservedNode:
+        $ref: '#/definitions/ReservedNode'
   AccessToSnapshotDeniedFault:
     type: object
     properties: {}
@@ -3038,6 +3227,9 @@ definitions:
       IamRoles:
         $ref: '#/definitions/ClusterIamRoleList'
         description: A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.
+      PendingActions:
+        $ref: '#/definitions/PendingActionsList'
+        description: Cluster operations that are waiting to be started.
     description: Describes a cluster.
   ClusterAlreadyExistsFault:
     type: object
@@ -3056,6 +3248,35 @@ definitions:
         $ref: '#/definitions/TStamp'
         description: The date and time the password in <code>DbPassword</code> expires.
     description: 'Temporary credentials with authorization to log on to an Amazon Redshift database. '
+  ClusterDbRevision:
+    type: object
+    properties:
+      ClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: The unique identifier of the cluster.
+      CurrentDatabaseRevision:
+        $ref: '#/definitions/String'
+        description: A string representing the current cluster version.
+      DatabaseRevisionReleaseDate:
+        $ref: '#/definitions/TStamp'
+        description: The date on which the database revision was released.
+      RevisionTargets:
+        $ref: '#/definitions/RevisionTargetsList'
+        description: 'A list of <code>RevisionTarget</code> objects, where each object describes the database revision that a cluster can be updated to.'
+    description: Describes a <code>ClusterDbRevision</code>.
+  ClusterDbRevisionsList:
+    type: array
+    items:
+      $ref: '#/definitions/ClusterDbRevision'
+  ClusterDbRevisionsMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'A string representing the starting point for the next set of revisions. If a value is returned in a response, you can retrieve the next set of revisions by providing the value in the <code>marker</code> parameter and retrying the command. If the <code>marker</code> field is empty, all revisions have already been returned.'
+      ClusterDbRevisions:
+        $ref: '#/definitions/ClusterDbRevisionsList'
+        description: A list of revisions.
   ClusterIamRole:
     type: object
     properties:
@@ -3095,6 +3316,10 @@ definitions:
     type: object
     properties: {}
     description: 'The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster. '
+  ClusterOnLatestRevisionFault:
+    type: object
+    properties: {}
+    description: Cluster is already on the latest database revision.
   ClusterParameterGroup:
     type: object
     properties:
@@ -3841,6 +4066,18 @@ definitions:
     type: object
     properties: {}
     description: Your request cannot be completed because a dependent internal service is temporarily unavailable. Wait 30 to 60 seconds and try again.
+  DescribeClusterDbRevisionsMessage:
+    type: object
+    properties:
+      ClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for a cluster whose <code>ClusterDbRevisions</code> you are requesting. This parameter is case sensitive. All clusters defined for an account are returned by default.
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in the <code>marker</code> field of the response. You can retrieve the next set of response records by providing the returned <code>marker</code> value in the <code>marker</code> parameter and retrying the request. </p> <p>Default: 100</p> <p>Constraints: minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: '<p>An optional parameter that specifies the starting point for returning a set of response records. When the results of a <code>DescribeClusterDbRevisions</code> request exceed the value specified in <code>MaxRecords</code>, Amazon Redshift returns a value in the <code>marker</code> field of the response. You can retrieve the next set of response records by providing the returned <code>marker</code> value in the <code>marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <code>ClusterIdentifier</code> parameter, or the <code>marker</code> parameter, but not both.</p>'
   DescribeClusterParameterGroupsMessage:
     type: object
     properties:
@@ -4487,6 +4724,30 @@ definitions:
         $ref: '#/definitions/DbGroupList'
         description: '<p>A list of the names of existing database groups that the user named in <code>DbUser</code> will join for the current session, in addition to any group memberships for an existing user. If not specified, a new user is added only to PUBLIC.</p> <p>Database group name constraints</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>'
     description: The request parameters to get cluster credentials.
+  GetReservedNodeExchangeOfferingsInputMessage:
+    type: object
+    required:
+      - ReservedNodeId
+    properties:
+      ReservedNodeId:
+        $ref: '#/definitions/String'
+        description: A string representing the node identifier for the Reserved Node to be exchanged.
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: An integer setting the maximum number of ReservedNodeOfferings to retrieve.
+      Marker:
+        $ref: '#/definitions/String'
+        description: A value that indicates the starting point for the next set of ReservedNodeOfferings.
+    description: <p/>
+  GetReservedNodeExchangeOfferingsOutputMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional parameter that specifies the starting point for returning a set of response records. When the results of a <code>GetReservedNodeExchangeOfferings</code> request exceed the value specified in MaxRecords, Amazon Redshift returns a value in the marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the marker parameter and retrying the request. '
+      ReservedNodeOfferings:
+        $ref: '#/definitions/ReservedNodeOfferingList'
+        description: Returns an array of <a>ReservedNodeOffering</a> objects.
   HsmClientCertificate:
     type: object
     properties:
@@ -4673,6 +4934,10 @@ definitions:
     type: object
     properties: {}
     description: 'The specified HSM configuration is not in the <code>available</code> state, or it is still in use by one or more Amazon Redshift clusters.'
+  InvalidReservedNodeStateFault:
+    type: object
+    properties: {}
+    description: Indicates that the Reserved Node being exchanged is not in an active state.
   InvalidRestoreFault:
     type: object
     properties: {}
@@ -4739,6 +5004,23 @@ definitions:
     type: integer
   LongOptional:
     type: integer
+  ModifyClusterDbRevisionMessage:
+    type: object
+    required:
+      - ClusterIdentifier
+      - RevisionTarget
+    properties:
+      ClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The unique identifier of a cluster whose database revision you want to modify. </p> <p>Example: <code>examplecluster</code> </p>'
+      RevisionTarget:
+        $ref: '#/definitions/String'
+        description: The identifier of the database revision. You can retrieve this value from the response to the <a>DescribeClusterDbRevisions</a> request.
+  ModifyClusterDbRevisionResult:
+    type: object
+    properties:
+      Cluster:
+        $ref: '#/definitions/Cluster'
   ModifyClusterIamRolesMessage:
     type: object
     required:
@@ -4990,6 +5272,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Parameter'
+  PendingActionsList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   PendingModifiedValues:
     type: object
     properties:
@@ -5098,7 +5384,7 @@ definitions:
         description: The number of reserved compute nodes.
       State:
         $ref: '#/definitions/String'
-        description: '<p>The state of the reserved compute node.</p> <p>Possible Values:</p> <ul> <li> <p>pending-payment-This reserved node has recently been purchased, and the sale has been approved, but payment has not yet been confirmed.</p> </li> <li> <p>active-This reserved node is owned by the caller and is available for use.</p> </li> <li> <p>payment-failed-Payment failed for the purchase attempt.</p> </li> </ul>'
+        description: '<p>The state of the reserved compute node.</p> <p>Possible Values:</p> <ul> <li> <p>pending-payment-This reserved node has recently been purchased, and the sale has been approved, but payment has not yet been confirmed.</p> </li> <li> <p>active-This reserved node is owned by the caller and is available for use.</p> </li> <li> <p>payment-failed-Payment failed for the purchase attempt.</p> </li> <li> <p>retired-The reserved node is no longer available. </p> </li> <li> <p>exchanging-The owner is exchanging the reserved node for another reserved node.</p> </li> </ul>'
       OfferingType:
         $ref: '#/definitions/String'
         description: 'The anticipated utilization of the reserved node, as defined in the reserved node offering.'
@@ -5112,6 +5398,10 @@ definitions:
     type: object
     properties: {}
     description: User already has a reservation with the given identifier.
+  ReservedNodeAlreadyMigratedFault:
+    type: object
+    properties: {}
+    description: Indicates that the reserved node has already been exchanged.
   ReservedNodeList:
     type: array
     items:
@@ -5393,6 +5683,23 @@ definitions:
     properties:
       TableRestoreStatus:
         $ref: '#/definitions/TableRestoreStatus'
+  RevisionTarget:
+    type: object
+    properties:
+      DatabaseRevision:
+        $ref: '#/definitions/String'
+        description: A unique string that identifies the version to update the cluster to. You can use this value in <a>ModifyClusterDbRevision</a>.
+      Description:
+        $ref: '#/definitions/String'
+        description: A string that describes the changes and features that will be applied to the cluster when it is updated to the corresponding <a>ClusterDbRevision</a>.
+      DatabaseRevisionReleaseDate:
+        $ref: '#/definitions/TStamp'
+        description: The date on which the database revision was released.
+    description: Describes a <code>RevisionTarget</code>.
+  RevisionTargetsList:
+    type: array
+    items:
+      $ref: '#/definitions/RevisionTarget'
   RevokeClusterSecurityGroupIngressMessage:
     type: object
     required:
@@ -5696,6 +6003,10 @@ definitions:
   TStamp:
     type: string
     format: date-time
+  TableLimitExceededFault:
+    type: object
+    properties: {}
+    description: 'The number of tables in the cluster exceeds the limit for the requested new cluster node type. '
   TableRestoreNotFoundFault:
     type: object
     properties: {}
@@ -5785,7 +6096,7 @@ definitions:
   TagLimitExceededFault:
     type: object
     properties: {}
-    description: The request exceeds the limit of 10 tags for the resource.
+    description: The number of tables in your source cluster exceeds the limit for the target cluster. Resize to a larger cluster node type.
   TagList:
     type: array
     items:

@@ -1,0 +1,611 @@
+swagger: '2.0'
+info:
+  version: '2018-01-12'
+  x-release: v4
+  title: Amazon Data Lifecycle Manager
+  description: '<fullname>Amazon Data Lifecyle Manager</fullname> <p>With Amazon Data Lifecyle Manager, you can manage the lifecycle of your AWS resources. You create lifecycle policies, which are used to automate operations on the specified resources.</p> <p>Data Lifecycle Manager supports Amazon EBS volumes and snapshots. For information about using Data Lifecycle Manager with Amazon EBS, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html">Amazon Data Lifecyle Manager for Amazon EBS Snapshots</a>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: dlm
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/dlm-2018-01-12.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/dlm/'
+host: dlm.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /policies:
+    post:
+      operationId: CreateLifecyclePolicy
+      description: Creates a policy to manage the lifecycle of the specified AWS resources. You can create up to 100 lifecycle policies.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLifecyclePolicyResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLifecyclePolicyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetLifecyclePolicies
+      description: '<p>Gets summary information about all or the specified data lifecycle policies.</p> <p>To get complete information about a policy, use <a>GetLifecyclePolicy</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLifecyclePoliciesResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLifecyclePoliciesRequest'
+  '/policies/{policyId}/':
+    delete:
+      operationId: DeleteLifecyclePolicy
+      description: Deletes the specified lifecycle policy and halts the automated operations that the policy specified.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLifecyclePolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLifecyclePolicyRequest'
+        - name: policyId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetLifecyclePolicy
+      description: Gets detailed information about the specified lifecycle policy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLifecyclePolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLifecyclePolicyRequest'
+        - name: policyId
+          in: path
+          type: string
+          required: true
+  '/policies/{policyId}':
+    patch:
+      operationId: UpdateLifecyclePolicy
+      description: Updates the specified lifecycle policy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateLifecyclePolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateLifecyclePolicyRequest'
+        - name: policyId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  Count:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  CreateLifecyclePolicyRequest:
+    type: object
+    required:
+      - ExecutionRoleArn
+      - Description
+      - State
+      - PolicyDetails
+    properties:
+      ExecutionRoleArn:
+        $ref: '#/definitions/ExecutionRoleArn'
+        description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
+      Description:
+        $ref: '#/definitions/PolicyDescription'
+        description: 'A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are supported.'
+      State:
+        $ref: '#/definitions/SettablePolicyStateValues'
+        description: The desired activation state of the lifecycle policy after creation.
+      PolicyDetails:
+        $ref: '#/definitions/PolicyDetails'
+        description: <p>The configuration of the lifecycle policy.</p> <p>Target tags cannot be re-used across lifecycle policies.</p>
+  CreateLifecyclePolicyResponse:
+    type: object
+    properties:
+      PolicyId:
+        $ref: '#/definitions/PolicyId'
+        description: The identifier of the lifecycle policy.
+  CreateRule:
+    type: object
+    required:
+      - Interval
+      - IntervalUnit
+    properties:
+      Interval:
+        $ref: '#/definitions/Interval'
+        description: The interval. The supported values are 12 and 24.
+      IntervalUnit:
+        $ref: '#/definitions/IntervalUnitValues'
+        description: The interval unit.
+      Times:
+        $ref: '#/definitions/TimesList'
+        description: '<p>The time, in UTC, to start the operation.</p> <p>The operation occurs within a one-hour window following the specified time.</p>'
+    description: Specifies when to create snapshots of EBS volumes.
+  DeleteLifecyclePolicyRequest:
+    type: object
+    properties: {}
+  DeleteLifecyclePolicyResponse:
+    type: object
+    properties: {}
+  ErrorCode:
+    type: string
+  ErrorMessage:
+    type: string
+  ExecutionRoleArn:
+    type: string
+  GetLifecyclePoliciesRequest:
+    type: object
+    properties: {}
+  GetLifecyclePoliciesResponse:
+    type: object
+    properties:
+      Policies:
+        $ref: '#/definitions/LifecyclePolicySummaryList'
+        description: Summary information about the lifecycle policies.
+  GetLifecyclePolicyRequest:
+    type: object
+    properties: {}
+  GetLifecyclePolicyResponse:
+    type: object
+    properties:
+      Policy:
+        $ref: '#/definitions/LifecyclePolicy'
+        description: Detailed information about the lifecycle policy.
+  GettablePolicyStateValues:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+      - ERROR
+  InternalServerException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+      Code:
+        $ref: '#/definitions/ErrorCode'
+    description: The service failed in an unexpected way.
+  Interval:
+    type: integer
+    minimum: 1
+  IntervalUnitValues:
+    type: string
+    enum:
+      - HOURS
+  InvalidRequestException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+      Code:
+        $ref: '#/definitions/ErrorCode'
+      RequiredParameters:
+        $ref: '#/definitions/ParameterList'
+        description: The request omitted one or more required parameters.
+      MutuallyExclusiveParameters:
+        $ref: '#/definitions/ParameterList'
+        description: The request included parameters that cannot be provided together.
+    description: Bad request. The request is missing required parameters or has invalid parameters.
+  LifecyclePolicy:
+    type: object
+    properties:
+      PolicyId:
+        $ref: '#/definitions/PolicyId'
+        description: The identifier of the lifecycle policy.
+      Description:
+        $ref: '#/definitions/PolicyDescription'
+        description: The description of the lifecycle policy.
+      State:
+        $ref: '#/definitions/GettablePolicyStateValues'
+        description: The activation state of the lifecycle policy.
+      ExecutionRoleArn:
+        $ref: '#/definitions/ExecutionRoleArn'
+        description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
+      DateCreated:
+        $ref: '#/definitions/Timestamp'
+        description: The local date and time when the lifecycle policy was created.
+      DateModified:
+        $ref: '#/definitions/Timestamp'
+        description: The local date and time when the lifecycle policy was last modified.
+      PolicyDetails:
+        $ref: '#/definitions/PolicyDetails'
+        description: The configuration of the lifecycle policy
+    description: Detailed information about a lifecycle policy.
+  LifecyclePolicySummary:
+    type: object
+    properties:
+      PolicyId:
+        $ref: '#/definitions/PolicyId'
+        description: The identifier of the lifecycle policy.
+      Description:
+        $ref: '#/definitions/PolicyDescription'
+        description: The description of the lifecycle policy.
+      State:
+        $ref: '#/definitions/GettablePolicyStateValues'
+        description: The activation state of the lifecycle policy.
+    description: Summary information about a lifecycle policy.
+  LifecyclePolicySummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/LifecyclePolicySummary'
+  LimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+      Code:
+        $ref: '#/definitions/ErrorCode'
+      ResourceType:
+        $ref: '#/definitions/String'
+        description: Value is the type of resource for which a limit was exceeded.
+    description: The request failed because a limit was exceeded.
+  Parameter:
+    type: string
+  ParameterList:
+    type: array
+    items:
+      $ref: '#/definitions/Parameter'
+  PolicyDescription:
+    type: string
+    minLength: 0
+    maxLength: 500
+  PolicyDetails:
+    type: object
+    properties:
+      ResourceTypes:
+        $ref: '#/definitions/ResourceTypeValuesList'
+        description: The resource type.
+      TargetTags:
+        $ref: '#/definitions/TargetTagList'
+        description: The target tags.
+      Schedules:
+        $ref: '#/definitions/ScheduleList'
+        description: The schedule.
+    description: Specifies the configuration of a lifecycle policy.
+  PolicyId:
+    type: string
+  PolicyIdList:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyId'
+  ResourceNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+      Code:
+        $ref: '#/definitions/ErrorCode'
+      ResourceType:
+        $ref: '#/definitions/String'
+        description: Value is the type of resource that was not found.
+      ResourceIds:
+        $ref: '#/definitions/PolicyIdList'
+        description: Value is a list of resource IDs that were not found.
+    description: A requested resource was not found.
+  ResourceTypeValues:
+    type: string
+    enum:
+      - VOLUME
+  ResourceTypeValuesList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceTypeValues'
+    minItems: 1
+    maxItems: 1
+  RetainRule:
+    type: object
+    required:
+      - Count
+    properties:
+      Count:
+        $ref: '#/definitions/Count'
+        description: 'The number of snapshots to keep for each volume, up to a maximum of 1000.'
+    description: Specifies the number of snapshots to keep for each EBS volume.
+  Schedule:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/ScheduleName'
+        description: The name of the schedule.
+      TagsToAdd:
+        $ref: '#/definitions/TagsToAddList'
+        description: The tags to add to policy-created resources. These tags are added in addition to the default lifecycle tags.
+      CreateRule:
+        $ref: '#/definitions/CreateRule'
+        description: The create rule.
+      RetainRule:
+        $ref: '#/definitions/RetainRule'
+        description: The retain rule.
+    description: Specifies a schedule.
+  ScheduleList:
+    type: array
+    items:
+      $ref: '#/definitions/Schedule'
+    minItems: 1
+    maxItems: 1
+  ScheduleName:
+    type: string
+    minLength: 0
+    maxLength: 500
+  SettablePolicyStateValues:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+  String:
+    type: string
+  Tag:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/String'
+        description: The tag key.
+      Value:
+        $ref: '#/definitions/String'
+        description: The tag value.
+    description: Specifies a tag for a resource.
+  TagFilter:
+    type: string
+  TagsToAddFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
+    minItems: 0
+    maxItems: 50
+  TagsToAddList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 50
+  TargetTagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+    maxItems: 50
+  TargetTagsFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
+    minItems: 1
+    maxItems: 50
+  Time:
+    type: string
+    pattern: '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+  TimesList:
+    type: array
+    items:
+      $ref: '#/definitions/Time'
+    maxItems: 1
+  Timestamp:
+    type: string
+    format: date-time
+  UpdateLifecyclePolicyRequest:
+    type: object
+    properties:
+      ExecutionRoleArn:
+        $ref: '#/definitions/ExecutionRoleArn'
+        description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
+      State:
+        $ref: '#/definitions/SettablePolicyStateValues'
+        description: The desired activation state of the lifecycle policy after creation.
+      Description:
+        $ref: '#/definitions/PolicyDescription'
+        description: A description of the lifecycle policy.
+      PolicyDetails:
+        $ref: '#/definitions/PolicyDetails'
+        description: <p>The configuration of the lifecycle policy.</p> <p>Target tags cannot be re-used across policies.</p>
+  UpdateLifecyclePolicyResponse:
+    type: object
+    properties: {}

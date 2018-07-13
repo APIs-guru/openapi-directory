@@ -1073,6 +1073,84 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAssociationExecutionTargets':
+    post:
+      operationId: DescribeAssociationExecutionTargets
+      description: Use this API action to view information about a specific execution of a specific association.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAssociationExecutionTargetsResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: AssociationDoesNotExist
+          schema:
+            $ref: '#/definitions/AssociationDoesNotExist'
+        '482':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '483':
+          description: AssociationExecutionDoesNotExist
+          schema:
+            $ref: '#/definitions/AssociationExecutionDoesNotExist'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAssociationExecutionTargetsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAssociationExecutions':
+    post:
+      operationId: DescribeAssociationExecutions
+      description: 'Use this API action to view all executions for a specific association ID. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAssociationExecutionsResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: AssociationDoesNotExist
+          schema:
+            $ref: '#/definitions/AssociationDoesNotExist'
+        '482':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAssociationExecutionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeAutomationExecutions':
     post:
       operationId: DescribeAutomationExecutions
@@ -3657,6 +3735,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartAssociationsOnce':
+    post:
+      operationId: StartAssociationsOnce
+      description: Use this API action to execute an association immediately and only one time. This action can be helpful when troubleshooting associations.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartAssociationsOnceResult'
+        '480':
+          description: InvalidAssociation
+          schema:
+            $ref: '#/definitions/InvalidAssociation'
+        '481':
+          description: AssociationDoesNotExist
+          schema:
+            $ref: '#/definitions/AssociationDoesNotExist'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartAssociationsOnceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#StartAutomationExecution':
     post:
       operationId: StartAutomationExecution
@@ -4329,6 +4440,140 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: The specified association does not exist.
+  AssociationExecution:
+    type: object
+    properties:
+      AssociationId:
+        $ref: '#/definitions/AssociationId'
+        description: The association ID.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: The association version.
+      ExecutionId:
+        $ref: '#/definitions/AssociationExecutionId'
+        description: 'The execution ID for the association. If the association does not run at intervals or according to a schedule, then the ExecutionID is the same as the AssociationID.'
+      Status:
+        $ref: '#/definitions/StatusName'
+        description: The status of the association execution.
+      DetailedStatus:
+        $ref: '#/definitions/StatusName'
+        description: Detailed status information about the execution.
+      CreatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time the execution started.
+      LastExecutionDate:
+        $ref: '#/definitions/DateTime'
+        description: The date of the last execution.
+      ResourceCountByStatus:
+        $ref: '#/definitions/ResourceCountByStatus'
+        description: An aggregate status of the resources in the execution based on the status type.
+    description: Includes information about the specified association.
+  AssociationExecutionDoesNotExist:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The specified execution ID does not exist. Verify the ID number and try again.
+  AssociationExecutionFilter:
+    type: object
+    required:
+      - Key
+      - Value
+      - Type
+    properties:
+      Key:
+        $ref: '#/definitions/AssociationExecutionFilterKey'
+        description: The key value used in the request.
+      Value:
+        $ref: '#/definitions/AssociationExecutionFilterValue'
+        description: The value specified for the key.
+      Type:
+        $ref: '#/definitions/AssociationFilterOperatorType'
+        description: The filter type specified in the request.
+    description: Filters used in the request.
+  AssociationExecutionFilterKey:
+    type: string
+    enum:
+      - ExecutionId
+      - Status
+      - CreatedTime
+  AssociationExecutionFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/AssociationExecutionFilter'
+    minItems: 1
+  AssociationExecutionFilterValue:
+    type: string
+    minLength: 1
+  AssociationExecutionId:
+    type: string
+    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+  AssociationExecutionTarget:
+    type: object
+    properties:
+      AssociationId:
+        $ref: '#/definitions/AssociationId'
+        description: The association ID.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: The association version.
+      ExecutionId:
+        $ref: '#/definitions/AssociationExecutionId'
+        description: 'The execution ID. If the association does not run at intervals or according to a schedule, then the ExecutionID is the same as the AssociationID.'
+      ResourceId:
+        $ref: '#/definitions/AssociationResourceId'
+        description: 'The resource ID, for example, the instance ID where the association ran.'
+      ResourceType:
+        $ref: '#/definitions/AssociationResourceType'
+        description: 'The resource type, for example, instance.'
+      Status:
+        $ref: '#/definitions/StatusName'
+        description: The association execution status.
+      DetailedStatus:
+        $ref: '#/definitions/StatusName'
+        description: Detailed information about the execution status.
+      LastExecutionDate:
+        $ref: '#/definitions/DateTime'
+        description: The date of the last execution.
+      OutputSource:
+        $ref: '#/definitions/OutputSource'
+        description: The location where the association details are saved.
+    description: Includes information about the specified association execution.
+  AssociationExecutionTargetsFilter:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/AssociationExecutionTargetsFilterKey'
+        description: The key value used in the request.
+      Value:
+        $ref: '#/definitions/AssociationExecutionTargetsFilterValue'
+        description: The value specified for the key.
+    description: Filters for the association execution.
+  AssociationExecutionTargetsFilterKey:
+    type: string
+    enum:
+      - Status
+      - ResourceId
+      - ResourceType
+  AssociationExecutionTargetsFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/AssociationExecutionTargetsFilter'
+    minItems: 1
+  AssociationExecutionTargetsFilterValue:
+    type: string
+    minLength: 1
+  AssociationExecutionTargetsList:
+    type: array
+    items:
+      $ref: '#/definitions/AssociationExecutionTarget'
+  AssociationExecutionsList:
+    type: array
+    items:
+      $ref: '#/definitions/AssociationExecution'
   AssociationFilter:
     type: object
     required:
@@ -4357,12 +4602,24 @@ definitions:
     items:
       $ref: '#/definitions/AssociationFilter'
     minItems: 1
+  AssociationFilterOperatorType:
+    type: string
+    enum:
+      - EQUAL
+      - LESS_THAN
+      - GREATER_THAN
   AssociationFilterValue:
     type: string
     minLength: 1
   AssociationId:
     type: string
     pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+  AssociationIdList:
+    type: array
+    items:
+      $ref: '#/definitions/AssociationId'
+    minItems: 1
+    maxItems: 10
   AssociationLimitExceeded:
     type: object
     properties: {}
@@ -4387,6 +4644,14 @@ definitions:
         $ref: '#/definitions/AssociationStatusAggregatedCount'
         description: 'Returns the number of targets for the association status. For example, if you created an association with two instances, and one of them was successful, this would return the count of instances by status.'
     description: Information about the association.
+  AssociationResourceId:
+    type: string
+    minLength: 1
+    maxLength: 100
+  AssociationResourceType:
+    type: string
+    minLength: 1
+    maxLength: 50
   AssociationStatus:
     type: object
     required:
@@ -5762,6 +6027,62 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token for the next set of items to return. Use this token to get the next set of results. '
+  DescribeAssociationExecutionTargetsRequest:
+    type: object
+    required:
+      - AssociationId
+      - ExecutionId
+    properties:
+      AssociationId:
+        $ref: '#/definitions/AssociationId'
+        description: The association ID that includes the execution for which you want to view details.
+      ExecutionId:
+        $ref: '#/definitions/AssociationExecutionId'
+        description: The execution ID for which you want to view details.
+      Filters:
+        $ref: '#/definitions/AssociationExecutionTargetsFilterList'
+        description: <p>Filters for the request. You can specify the following filters and values.</p> <p>Status (EQUAL)</p> <p>ResourceId (EQUAL)</p> <p>ResourceType (EQUAL)</p>
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token to start the list. Use this token to get the next set of results. '
+  DescribeAssociationExecutionTargetsResult:
+    type: object
+    properties:
+      AssociationExecutionTargets:
+        $ref: '#/definitions/AssociationExecutionTargetsList'
+        description: Information about the execution.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
+  DescribeAssociationExecutionsRequest:
+    type: object
+    required:
+      - AssociationId
+    properties:
+      AssociationId:
+        $ref: '#/definitions/AssociationId'
+        description: The association ID for which you want to view execution history details.
+      Filters:
+        $ref: '#/definitions/AssociationExecutionFilterList'
+        description: '<p>Filters for the request. You can specify the following filters and values.</p> <p>ExecutionId (EQUAL)</p> <p>Status (EQUAL)</p> <p>CreatedTime (EQUAL, GREATER_THAN, LESS_THAN)</p>'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token to start the list. Use this token to get the next set of results. '
+  DescribeAssociationExecutionsResult:
+    type: object
+    properties:
+      AssociationExecutions:
+        $ref: '#/definitions/AssociationExecutionsList'
+        description: A list of the executions for the specified association ID.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
   DescribeAssociationRequest:
     type: object
     properties:
@@ -7213,7 +7534,7 @@ definitions:
     properties:
       Path:
         $ref: '#/definitions/PSParameterName'
-        description: 'The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: <code>/Finance/Prod/IAD/WinServ2016/license33</code> '
+        description: 'The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A parameter name hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: <code>/Finance/Prod/IAD/WinServ2016/license33</code> '
       Recursive:
         $ref: '#/definitions/Boolean'
         description: '<p>Retrieve all parameters within a hierarchy.</p> <important> <p>If a user has access to a path, then the user can access all levels of that path. For example, if a user has permission to access path /a, then the user can also access /a/b. Even if a user has explicitly been denied access in IAM for parameter /a, they can still call the GetParametersByPath API action recursively and view /a/b.</p> </important>'
@@ -7339,8 +7660,8 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/String'
-        description: 'A hierarchy can have a maximum of 15 levels. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a> in the <i>AWS Systems Manager User Guide</i>. '
-    description: 'A hierarchy can have a maximum of 15 levels. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a> in the <i>AWS Systems Manager User Guide</i>. '
+        description: 'A hierarchy can have a maximum of 15 levels. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html">Requirements and Constraints for Parameter Names</a> in the <i>AWS Systems Manager User Guide</i>. '
+    description: 'A hierarchy can have a maximum of 15 levels. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html">Requirements and Constraints for Parameter Names</a> in the <i>AWS Systems Manager User Guide</i>. '
   HierarchyTypeMismatchException:
     type: object
     properties:
@@ -7734,6 +8055,12 @@ definitions:
         $ref: '#/definitions/String'
         description: The request does not meet the regular expression requirement.
     description: The request does not meet the regular expression requirement.
+  InvalidAssociation:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: 'The association is not valid or does not exist. '
   InvalidAssociationVersion:
     type: object
     properties:
@@ -9210,6 +9537,22 @@ definitions:
       - REDHAT_ENTERPRISE_LINUX
       - SUSE
       - CENTOS
+  OutputSource:
+    type: object
+    properties:
+      OutputSourceId:
+        $ref: '#/definitions/OutputSourceId'
+        description: 'The ID of the output source, for example the URL of an Amazon S3 bucket.'
+      OutputSourceType:
+        $ref: '#/definitions/OutputSourceType'
+        description: 'The type of source where the association execution details are stored, for example, Amazon S3.'
+    description: Information about the source where the association execution details are stored.
+  OutputSourceId:
+    type: string
+    minLength: 36
+    maxLength: 36
+  OutputSourceType:
+    type: string
   OwnerInformation:
     type: string
     minLength: 1
@@ -9786,7 +10129,7 @@ definitions:
         description: 'The specific operating system versions a patch repository applies to, such as "Ubuntu16.04", "AmazonLinux2016.09", "RedhatEnterpriseLinux7.2" or "Suse12.7". For lists of supported product values, see <a>PatchFilter</a>.'
       Configuration:
         $ref: '#/definitions/PatchSourceConfiguration'
-        description: '<p>The value of the yum repo configuration. For example:</p> <p> <code>cachedir=/var/cache/yum/$basesearch</code> </p> <p> <code>$releasever</code> </p> <p> <code>keepcache=0</code> </p> <p> <code>debualevel=2</code> </p>'
+        description: '<p>The value of the yum repo configuration. For example:</p> <p> <code>cachedir=/var/cache/yum/$basesearch</code> </p> <p> <code>$releasever</code> </p> <p> <code>keepcache=0</code> </p> <p> <code>debuglevel=2</code> </p>'
     description: 'Information about the patches to use to update the instances, including target operating systems and source repository. Applies to Linux instances only.'
   PatchSourceConfiguration:
     type: string
@@ -9905,19 +10248,19 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/PSParameterName'
-        description: '<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>For information about parameter name requirements and restrictions, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html">Creating Systems Manager Parameters</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters. </p> </note>'
+        description: '<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>Naming Constraints:</p> <ul> <li> <p>Parameter names are case sensitive.</p> </li> <li> <p>A parameter name must be unique within an AWS Region</p> </li> <li> <p>A parameter name can''t be prefixed with "aws" or "ssm" (case-insensitive).</p> </li> <li> <p>Parameter names can include only the following symbols and letters: <code>a-zA-Z0-9_.-/</code> </p> </li> <li> <p>A parameter name can''t include spaces.</p> </li> <li> <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p> </li> </ul> <p>For additional information about valid values for parameter names, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html">Requirements and Constraints for Parameter Names</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters. </p> </note>'
       Description:
         $ref: '#/definitions/ParameterDescription'
-        description: <p>Information about the parameter that you want to add to the system.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>
+        description: <p>Information about the parameter that you want to add to the system. Optional but recommended.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>
       Value:
         $ref: '#/definitions/PSParameterValue'
         description: The parameter value that you want to add to the system.
       Type:
         $ref: '#/definitions/ParameterType'
-        description: The type of parameter that you want to add to the system.
+        description: '<p>The type of parameter that you want to add to the system.</p> <p>Items in a <code>StringList</code> must be separated by a comma (,). You can''t use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the <code>String</code> data type.</p> <note> <p> <code>SecureString</code> is not currently supported for AWS CloudFormation templates or in the China Regions.</p> </note>'
       KeyId:
         $ref: '#/definitions/ParameterKeyId'
-        description: 'The KMS Key ID that you want to use to encrypt a parameter when you choose the SecureString data type. If you don''t specify a key ID, the system uses the default key associated with your AWS account.'
+        description: '<p>The KMS Key ID that you want to use to encrypt a parameter. Either the default AWS Key Management Service (AWS KMS) key automatically assigned to your AWS account or a custom key. Required for parameters that use the <code>SecureString</code> data type.</p> <p>If you don''t specify a key ID, the system uses the default key associated with your AWS account.</p> <ul> <li> <p>To use your default AWS KMS key, choose the <code>SecureString</code> data type, and do <i>not</i> specify the <code>Key ID</code> when you create the parameter. The system automatically populates <code>Key ID</code> with your default KMS key.</p> </li> <li> <p>To use a custom KMS key, choose the <code>SecureString</code> data type with the <code>Key ID</code> parameter.</p> </li> </ul>'
       Overwrite:
         $ref: '#/definitions/Boolean'
         description: 'Overwrite an existing parameter. If not specified, will default to "false".'
@@ -10131,6 +10474,8 @@ definitions:
       $ref: '#/definitions/ResourceComplianceSummaryItem'
   ResourceCount:
     type: integer
+  ResourceCountByStatus:
+    type: string
   ResourceDataSyncAWSKMSKeyARN:
     type: string
     pattern: 'arn:.*'
@@ -10440,6 +10785,17 @@ definitions:
   StandardOutputContent:
     type: string
     maxLength: 24000
+  StartAssociationsOnceRequest:
+    type: object
+    required:
+      - AssociationIds
+    properties:
+      AssociationIds:
+        $ref: '#/definitions/AssociationIdList'
+        description: The association IDs that you want to execute immediately and only one time.
+  StartAssociationsOnceResult:
+    type: object
+    properties: {}
   StartAutomationExecutionRequest:
     type: object
     required:
@@ -10546,6 +10902,18 @@ definitions:
       OverriddenParameters:
         $ref: '#/definitions/AutomationParameterMap'
         description: A user-specified list of parameters to override when executing a step.
+      IsEnd:
+        $ref: '#/definitions/Boolean'
+        description: Enable this option to stop an Automation execution at the end of a specific step. The Automation execution stops if the step execution failed or succeeded.
+      NextStep:
+        $ref: '#/definitions/String'
+        description: 'Specifies which step in an Automation to process next after successfully completing a step. '
+      IsCritical:
+        $ref: '#/definitions/Boolean'
+        description: 'Enable this option to designate a step as critical for the successful completion of the Automation. If a step with this designation fails, then Automation reports the final status of the Automation as Failed. '
+      ValidNextSteps:
+        $ref: '#/definitions/ValidNextStepList'
+        description: 'ValidNextSteps offer different strategies for managing an Automation workflow when a step finishes. Automation dynamically processes ValidNextSteps when a step is completed. For example, you can specify <code>Abort</code> to stop the Automation when a step fails or <code>Continue</code> to ignore the failure of the current step and allow Automation to continue processing the next step. You can also specify <code>step:<i>step_name</i> </code> to jump to a designated step after a step succeeds. The result of the current step dynamically determines the ValidNextSteps. If a step finishes and no ValidNextStep is designated, then the Automation stops.'
     description: Detailed information about an the execution state of an Automation step.
   StepExecutionFilter:
     type: object
@@ -11148,6 +11516,14 @@ definitions:
         description: 'Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.'
   Url:
     type: string
+  ValidNextStep:
+    type: string
+    minLength: 1
+    maxLength: 65535
+  ValidNextStepList:
+    type: array
+    items:
+      $ref: '#/definitions/ValidNextStep'
   Version:
     type: string
     pattern: '^[0-9]{1,6}(\.[0-9]{1,6}){2,3}$'

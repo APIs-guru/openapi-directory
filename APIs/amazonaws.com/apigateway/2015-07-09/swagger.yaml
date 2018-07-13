@@ -5356,6 +5356,9 @@ definitions:
       stage:
         $ref: '#/definitions/String'
         description: API stage name of the associated API stage in a usage plan.
+      throttle:
+        $ref: '#/definitions/MapOfApiStageThrottleSettings'
+        description: Map containing method level throttling information for API stage in a usage plan.
     description: API stage name of the associated API stage in a usage plan.
   Authorizer:
     type: object
@@ -6598,6 +6601,15 @@ definitions:
       - UNDOCUMENTED
   Long:
     type: integer
+  MapOfApiStageThrottleSettings:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/ThrottleSettings'
   MapOfHeaderValues:
     type: array
     items:

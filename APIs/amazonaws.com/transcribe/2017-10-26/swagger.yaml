@@ -156,6 +156,10 @@ paths:
           schema:
             $ref: '#/definitions/LimitExceededException'
         '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
           description: InternalFailureException
           schema:
             $ref: '#/definitions/InternalFailureException'
@@ -395,7 +399,7 @@ paths:
   '/#UpdateVocabulary':
     post:
       operationId: UpdateVocabulary
-      description: Updates an existing vocabulary with new values.
+      description: Updates an existing vocabulary with new values. The <code>UpdateVocabulary</code> operation overwrites all of the existing information with the values that you provide in the request.
       responses:
         '200':
           description: Success
@@ -417,6 +421,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
       parameters:
         - name: body
           in: body
@@ -439,7 +447,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/FailureReason'
-    description: 'Your request didn''t pass one or more validation tests. For example, a name already exists when createing a resource or a name may not exist when getting a transcription job or custom vocabulary. See the exception <code>Message</code> field for more information.'
+    description: 'Your request didn''t pass one or more validation tests. For example, a name already exists when creating a resource or a name may not exist when getting a transcription job or custom vocabulary. See the exception <code>Message</code> field for more information.'
   Boolean:
     type: boolean
   ConflictException:
@@ -447,7 +455,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: The <code>JobName</code> field is a duplicate of a previously entered job name. Resend your request with a different name.
+    description: '<p>When you are using the <code>StartTranscriptionJob</code> operation, the <code>JobName</code> field is a duplicate of a previously entered job name. Resend your request with a different name.</p> <p>When you are using the <code>UpdateVocabulary</code> operation, there are two jobs running at the same time. Resend the second request later.</p>'
   CreateVocabularyRequest:
     type: object
     required:
@@ -643,7 +651,15 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: We can't find the requested transcription job or custom vocabulary. Check the name and try your request again.
+    description: We can't find the requested resource. Check the name and try your request again.
+  OutputBucketName:
+    type: string
+    pattern: '[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9]'
+  OutputLocationType:
+    type: string
+    enum:
+      - CUSTOMER_BUCKET
+      - SERVICE_BUCKET
   Phrase:
     type: string
     minLength: 0
@@ -675,7 +691,7 @@ definitions:
     properties:
       TranscriptionJobName:
         $ref: '#/definitions/TranscriptionJobName'
-        description: The name of the job. The name must be unique within an AWS account.
+        description: The name of the job. You can't use the strings "." or ".." in the job name. The name must be unique within an AWS account.
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
         description: The language code for the language used in the input media file.
@@ -688,6 +704,9 @@ definitions:
       Media:
         $ref: '#/definitions/Media'
         description: An object that describes the input media for a transcription job.
+      OutputBucketName:
+        $ref: '#/definitions/OutputBucketName'
+        description: '<p>The location where the transcription is stored.</p> <p>If you set the <code>OutputBucketName</code>, Amazon Transcribe puts the transcription in the specified S3 bucket. When you call the <a>GetTranscriptionJob</a> operation, the operation returns this location in the <code>TranscriptFileUri</code> field. The S3 bucket must have permissions that allow Amazon Transcribe to put files in the bucket. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/access-control-managing-permissions.html#auth-role-iam-user">Permissions Required for IAM User Roles</a>.</p> <p>If you don''t set the <code>OutputBucketName</code>, Amazon Transcribe generates a pre-signed URL, a shareable URL that provides secure access to your transcription, and returns it in the <code>TranscriptFileUri</code> field. Use this URL to download the transcription.</p>'
       Settings:
         $ref: '#/definitions/Settings'
         description: A <code>Settings</code> object that provides optional settings for a transcription job.
@@ -704,14 +723,14 @@ definitions:
     properties:
       TranscriptFileUri:
         $ref: '#/definitions/Uri'
-        description: 'The S3 location where the transcription result is stored. Use this URI to access the results of the transcription job. '
-    description: Describes the output of a transcription job.
+        description: '<p>The location where the transcription is stored.</p> <p>Use this URI to access the transcription. If you specified an S3 bucket in the <code>OutputBucketName</code> field when you created the job, this is the URI of that bucket. If you chose to store the transcription in Amazon Transcribe, this is a shareable URL that provides secure access to that location.</p>'
+    description: Identifies the location of a transcription.
   TranscriptionJob:
     type: object
     properties:
       TranscriptionJobName:
         $ref: '#/definitions/TranscriptionJobName'
-        description: A name to identify the transcription job.
+        description: The name of the transcription job.
       TranscriptionJobStatus:
         $ref: '#/definitions/TranscriptionJobStatus'
         description: The status of the transcription job.
@@ -726,22 +745,22 @@ definitions:
         description: The format of the input media file.
       Media:
         $ref: '#/definitions/Media'
-        description: An object that describes the input media for a transcription job.
+        description: An object that describes the input media for the transcription job.
       Transcript:
         $ref: '#/definitions/Transcript'
         description: An object that describes the output of the transcription job.
       CreationTime:
         $ref: '#/definitions/DateTime'
-        description: Timestamp of the date and time that the job was created.
+        description: A timestamp that shows when the job was created.
       CompletionTime:
         $ref: '#/definitions/DateTime'
-        description: Timestamp of the date and time that the job completed.
+        description: A timestamp that shows when the job was completed.
       FailureReason:
         $ref: '#/definitions/FailureReason'
         description: 'If the <code>TranscriptionJobStatus</code> field is <code>FAILED</code>, this field contains information about why the job failed.'
       Settings:
         $ref: '#/definitions/Settings'
-        description: Optional settings for the transcription job.
+        description: 'Optional settings for the transcription job. Use these settings to turn on speaker recognition, to set the maximum number of speakers that should be identified and to specify a custom vocabulary to use when processing the transcription job.'
     description: Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation.
   TranscriptionJobName:
     type: string
@@ -763,13 +782,13 @@ definitions:
     properties:
       TranscriptionJobName:
         $ref: '#/definitions/TranscriptionJobName'
-        description: The name assigned to the transcription job when it was created.
+        description: The name of the transcription job.
       CreationTime:
         $ref: '#/definitions/DateTime'
-        description: Timestamp of the date and time that the job was created.
+        description: A timestamp that shows when the job was created.
       CompletionTime:
         $ref: '#/definitions/DateTime'
-        description: Timestamp of the date and time that the job completed.
+        description: A timestamp that shows when the job was completed.
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
         description: The language code for the input speech.
@@ -778,7 +797,10 @@ definitions:
         description: 'The status of the transcription job. When the status is <code>COMPLETED</code>, use the <code>GetTranscriptionJob</code> operation to get the results of the transcription.'
       FailureReason:
         $ref: '#/definitions/FailureReason'
-        description: 'If the <code>TranscriptionJobStatus</code> field is <code>FAILED</code>, this field contains a description of the error.'
+        description: 'If the <code>TranscriptionJobStatus</code> field is <code>FAILED</code>, a description of the error.'
+      OutputLocationType:
+        $ref: '#/definitions/OutputLocationType'
+        description: <p>Indicates the location of the output of the transcription job.</p> <p>If the value is <code>CUSTOMER_BUCKET</code> then the location is the S3 bucket specified in the <code>outputBucketName</code> field when the transcription job was started with the <code>StartTranscriptionJob</code> operation.</p> <p>If the value is <code>SERVICE_BUCKET</code> then the output is stored by Amazon Transcribe and can be retrieved using the URI in the <code>GetTranscriptionJob</code> response's <code>TranscriptFileUri</code> field.</p>
     description: Provides a summary of information about a transcription job.
   UpdateVocabularyRequest:
     type: object
