@@ -2084,6 +2084,8 @@ paths:
       responses:
         '200':
           description: Successful Response
+          schema:
+            $ref: "#/definitions/statuses"
     parameters:
       - description: |-
           A UTF-8, URL-encoded search query of 1,000 characters maximum, including operators. Queries may
@@ -3096,3 +3098,17 @@ paths:
         name: slug
         required: true
         type: string
+        
+definitions:
+  statuses:
+    type: object
+    properties:
+      statuses:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: number
+            text:
+              type: string
