@@ -3625,7 +3625,7 @@ definitions:
         description: Allows you to configure additional group privileges for the Lambda process. This field is optional.
       SourcePath:
         $ref: '#/definitions/__string'
-        description: The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/proc'' or ''/sys''.
+        description: The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''.
     description: Attributes that define a local volume resource.
   Logger:
     type: object

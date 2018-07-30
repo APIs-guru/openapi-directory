@@ -454,7 +454,7 @@ paths:
   '/#DeleteListener':
     post:
       operationId: DeleteListener
-      description: '<p>Deletes the specified listener.</p> <p>Alternatively, your listener is deleted when you delete the load balancer it is attached to using <a>DeleteLoadBalancer</a>.</p>'
+      description: '<p>Deletes the specified listener.</p> <p>Alternatively, your listener is deleted when you delete the load balancer to which it is attached, using <a>DeleteLoadBalancer</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1413,7 +1413,7 @@ paths:
   '/#SetIpAddressType':
     post:
       operationId: SetIpAddressType
-      description: <p>Sets the type of IP addresses used by the subnets of the specified Application Load Balancer or Network Load Balancer.</p> <p>Note that Network Load Balancers must use <code>ipv4</code>.</p>
+      description: <p>Sets the type of IP addresses used by the subnets of the specified Application Load Balancer or Network Load Balancer.</p> <p>Network Load Balancers must use <code>ipv4</code>.</p>
       responses:
         '200':
           description: Success
@@ -1487,7 +1487,7 @@ paths:
   '/#SetSecurityGroups':
     post:
       operationId: SetSecurityGroups
-      description: <p>Associates the specified security groups with the specified Application Load Balancer. The specified security groups override the previously associated security groups.</p> <p>Note that you can't specify a security group for a Network Load Balancer.</p>
+      description: <p>Associates the specified security groups with the specified Application Load Balancer. The specified security groups override the previously associated security groups.</p> <p>You can't specify a security group for a Network Load Balancer.</p>
       responses:
         '200':
           description: Success
@@ -1524,7 +1524,7 @@ paths:
   '/#SetSubnets':
     post:
       operationId: SetSubnets
-      description: <p>Enables the Availability Zone for the specified public subnets for the specified Application Load Balancer. The specified subnets replace the previously enabled subnets.</p> <p>Note that you can't change the subnets for a Network Load Balancer.</p>
+      description: <p>Enables the Availability Zone for the specified public subnets for the specified Application Load Balancer. The specified subnets replace the previously enabled subnets.</p> <p>You can't change the subnets for a Network Load Balancer.</p>
       responses:
         '200':
           description: Success
@@ -1578,10 +1578,10 @@ definitions:
     properties:
       Type:
         $ref: '#/definitions/ActionTypeEnum'
-        description: The type of action. Each rule must include one forward action.
+        description: 'The type of action. Each rule must include exactly one of the following types of actions: <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>.'
       TargetGroupArn:
         $ref: '#/definitions/TargetGroupArn'
-        description: '<p>The Amazon Resource Name (ARN) of the target group. Specify only when <code>Type</code> is <code>forward</code>.</p> <p>For a default rule, the protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.</p>'
+        description: The Amazon Resource Name (ARN) of the target group. Specify only when <code>Type</code> is <code>forward</code>.
       AuthenticateOidcConfig:
         $ref: '#/definitions/AuthenticateOidcActionConfig'
         description: '[HTTPS listener] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when <code>Type</code> is <code>authenticate-oidc</code>.'
@@ -1590,7 +1590,13 @@ definitions:
         description: '[HTTPS listener] Information for using Amazon Cognito to authenticate users. Specify only when <code>Type</code> is <code>authenticate-cognito</code>.'
       Order:
         $ref: '#/definitions/ActionOrder'
-        description: The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first. The forward action must be performed last.
+        description: The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first. The final action to be performed must be a <code>forward</code> or a <code>fixed-response</code> action.
+      RedirectConfig:
+        $ref: '#/definitions/RedirectActionConfig'
+        description: '[Application Load Balancer] Information for creating a redirect action. Specify only when <code>Type</code> is <code>redirect</code>.'
+      FixedResponseConfig:
+        $ref: '#/definitions/FixedResponseActionConfig'
+        description: '[Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when <code>Type</code> is <code>fixed-response</code>.'
     description: Information about an action.
   ActionOrder:
     type: integer
@@ -1602,6 +1608,8 @@ definitions:
       - forward
       - authenticate-oidc
       - authenticate-cognito
+      - redirect
+      - fixed-response
   Actions:
     type: array
     items:
@@ -1893,10 +1901,10 @@ definitions:
         description: '[HTTPS listeners] The security policy that defines which ciphers and protocols are supported. The default is the current predefined security policy.'
       Certificates:
         $ref: '#/definitions/CertificateList'
-        description: '[HTTPS listeners] The default SSL server certificate. You must provide exactly one certificate. To create a certificate list, use <a>AddListenerCertificates</a>.'
+        description: '[HTTPS listeners] The default SSL server certificate. You must provide exactly one default certificate. To create a certificate list, use <a>AddListenerCertificates</a>.'
       DefaultActions:
         $ref: '#/definitions/Actions'
-        description: '<p>The actions for the default rule. The rule must include one forward action.</p> <p>If the action type is <code>forward</code>, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.</p> <p>If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p>'
+        description: '<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p> <p>If the action type is <code>forward</code>, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.</p> <p>[HTTPS listener] If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>[HTTPS listener] If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you can redirect HTTP and HTTPS requests.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you can return a custom HTTP response.</p>'
   CreateListenerOutput:
     type: object
     example:
@@ -1941,7 +1949,7 @@ definitions:
         description: '[Application Load Balancers] The IDs of the security groups for the load balancer.'
       Scheme:
         $ref: '#/definitions/LoadBalancerSchemeEnum'
-        description: '<p>The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the Internet.</p> <p>The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the private IP addresses of the nodes. Therefore, internal load balancers can only route requests from clients with access to the VPC for the load balancer.</p> <p>The default is an Internet-facing load balancer.</p>'
+        description: '<p>The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the internet.</p> <p>The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the private IP addresses of the nodes. Therefore, internal load balancers can only route requests from clients with access to the VPC for the load balancer.</p> <p>The default is an Internet-facing load balancer.</p>'
       Tags:
         $ref: '#/definitions/TagList'
         description: One or more tags to assign to the load balancer.
@@ -1999,13 +2007,13 @@ definitions:
         description: The Amazon Resource Name (ARN) of the listener.
       Conditions:
         $ref: '#/definitions/RuleConditionList'
-        description: '<p>The conditions. Each condition specifies a field name and a single value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
+        description: '<p>The conditions. Each condition specifies a field name and a single value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern. A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
       Priority:
         $ref: '#/definitions/RulePriority'
         description: The rule priority. A listener can't have multiple rules with the same priority.
       Actions:
         $ref: '#/definitions/Actions'
-        description: '<p>The actions. Each rule must include one forward action.</p> <p>If the action type is <code>forward</code>, you can specify a single target group.</p> <p>If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p>'
+        description: '<p>The actions. Each rule must include exactly one of the following types of actions: <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>.</p> <p>If the action type is <code>forward</code>, you can specify a single target group.</p> <p>[HTTPS listener] If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>[HTTPS listener] If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you can redirect HTTP and HTTPS requests.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you can return a custom HTTP response.</p>'
   CreateRuleOutput:
     type: object
     example:
@@ -2060,10 +2068,10 @@ definitions:
         description: '[HTTP/HTTPS health checks] The ping path that is the destination on the targets for health checks. The default is /.'
       HealthCheckIntervalSeconds:
         $ref: '#/definitions/HealthCheckIntervalSeconds'
-        description: 'The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5 to 300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. The default is 30 seconds.'
+        description: 'The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5–300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. The default is 30 seconds.'
       HealthCheckTimeoutSeconds:
         $ref: '#/definitions/HealthCheckTimeoutSeconds'
-        description: 'The amount of time, in seconds, during which no response from a target means a failed health check. For Application Load Balancers, the range is 2 to 60 seconds and the default is 5 seconds. For Network Load Balancers, this is 10 seconds for TCP and HTTPS health checks and 6 seconds for HTTP health checks.'
+        description: 'The amount of time, in seconds, during which no response from a target means a failed health check. For Application Load Balancers, the range is 2–60 seconds and the default is 5 seconds. For Network Load Balancers, this is 10 seconds for TCP and HTTPS health checks and 6 seconds for HTTP health checks.'
       HealthyThresholdCount:
         $ref: '#/definitions/HealthCheckThresholdCount'
         description: 'The number of consecutive health checks successes required before considering an unhealthy target healthy. For Application Load Balancers, the default is 5. For Network Load Balancers, the default is 3.'
@@ -2075,7 +2083,7 @@ definitions:
         description: '[HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target.'
       TargetType:
         $ref: '#/definitions/TargetTypeEnum'
-        description: '<p>The type of target that you must specify when registering targets with this target group. The possible values are <code>instance</code> (targets are specified by instance ID) or <code>ip</code> (targets are specified by IP address). The default is <code>instance</code>. Note that you can''t specify targets for a target group using both instance IDs and IP addresses.</p> <p>If the target type is <code>ip</code>, specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can''t specify publicly routable IP addresses.</p>'
+        description: '<p>The type of target that you must specify when registering targets with this target group. The possible values are <code>instance</code> (targets are specified by instance ID) or <code>ip</code> (targets are specified by IP address). The default is <code>instance</code>. You can''t specify targets for a target group using both instance IDs and IP addresses.</p> <p>If the target type is <code>ip</code>, specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can''t specify publicly routable IP addresses.</p>'
   CreateTargetGroupOutput:
     type: object
     example:
@@ -2583,6 +2591,32 @@ definitions:
     type: object
     properties: {}
     description: A target group with the specified name already exists.
+  FixedResponseActionConfig:
+    type: object
+    required:
+      - StatusCode
+    properties:
+      MessageBody:
+        $ref: '#/definitions/FixedResponseActionMessage'
+        description: The message.
+      StatusCode:
+        $ref: '#/definitions/FixedResponseActionStatusCode'
+        description: 'The HTTP response code (2XX, 4XX, or 5XX).'
+      ContentType:
+        $ref: '#/definitions/FixedResponseActionContentType'
+        description: '<p>The content type.</p> <p>Valid Values: text/plain | text/css | text/html | application/javascript | application/json</p>'
+    description: Information about an action that returns a custom HTTP response.
+  FixedResponseActionContentType:
+    type: string
+    minLength: 0
+    maxLength: 32
+  FixedResponseActionMessage:
+    type: string
+    minLength: 0
+    maxLength: 1024
+  FixedResponseActionStatusCode:
+    type: string
+    pattern: ^(2|4|5)\d\d$
   HealthCheckIntervalSeconds:
     type: integer
     minimum: 5
@@ -2717,7 +2751,7 @@ definitions:
         description: The name of the load balancer.
       Scheme:
         $ref: '#/definitions/LoadBalancerSchemeEnum'
-        description: '<p>The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the Internet.</p> <p>The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the private IP addresses of the nodes. Therefore, internal load balancers can only route requests from clients with access to the VPC for the load balancer.</p>'
+        description: '<p>The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the internet.</p> <p>The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the private IP addresses of the nodes. Therefore, internal load balancers can only route requests from clients with access to the VPC for the load balancer.</p>'
       VpcId:
         $ref: '#/definitions/VpcId'
         description: The ID of the VPC for the load balancer.
@@ -2762,7 +2796,7 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/LoadBalancerAttributeKey'
-        description: '<p>The name of the attribute.</p> <p>The following attributes are supported by both Application Load Balancers and Network Load Balancers:</p> <ul> <li> <p> <code>deletion_protection.enabled</code> - Indicates whether deletion protection is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> </ul> <p>The following attributes are supported by only Application Load Balancers:</p> <ul> <li> <p> <code>access_logs.s3.enabled</code> - Indicates whether access logs are enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> <li> <p> <code>access_logs.s3.bucket</code> - The name of the S3 bucket for the access logs. This attribute is required if access logs are enabled. The bucket must exist in the same region as the load balancer and have a bucket policy that grants Elastic Load Balancing permission to write to the bucket.</p> </li> <li> <p> <code>access_logs.s3.prefix</code> - The prefix for the location in the S3 bucket for the access logs.</p> </li> <li> <p> <code>idle_timeout.timeout_seconds</code> - The idle timeout value, in seconds. The valid range is 1-4000 seconds. The default is 60 seconds.</p> </li> <li> <p> <code>routing.http2.enabled</code> - Indicates whether HTTP/2 is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>true</code>.</p> </li> </ul> <p>The following attributes are supported by only Network Load Balancers:</p> <ul> <li> <p> <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross-zone load balancing is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> </ul>'
+        description: '<p>The name of the attribute.</p> <p>The following attributes are supported by both Application Load Balancers and Network Load Balancers:</p> <ul> <li> <p> <code>deletion_protection.enabled</code> - Indicates whether deletion protection is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> </ul> <p>The following attributes are supported by only Application Load Balancers:</p> <ul> <li> <p> <code>access_logs.s3.enabled</code> - Indicates whether access logs are enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> <li> <p> <code>access_logs.s3.bucket</code> - The name of the S3 bucket for the access logs. This attribute is required if access logs are enabled. The bucket must exist in the same region as the load balancer and have a bucket policy that grants Elastic Load Balancing permissions to write to the bucket.</p> </li> <li> <p> <code>access_logs.s3.prefix</code> - The prefix for the location in the S3 bucket for the access logs.</p> </li> <li> <p> <code>idle_timeout.timeout_seconds</code> - The idle timeout value, in seconds. The valid range is 1-4000 seconds. The default is 60 seconds.</p> </li> <li> <p> <code>routing.http2.enabled</code> - Indicates whether HTTP/2 is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>true</code>.</p> </li> </ul> <p>The following attributes are supported by only Network Load Balancers:</p> <ul> <li> <p> <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross-zone load balancing is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> </ul>'
       Value:
         $ref: '#/definitions/LoadBalancerAttributeValue'
         description: The value of the attribute.
@@ -2829,7 +2863,7 @@ definitions:
     properties:
       HttpCode:
         $ref: '#/definitions/HttpCode'
-        description: '<p>The HTTP codes.</p> <p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is 200 to 399.</p>'
+        description: '<p>The HTTP codes.</p> <p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is 200–399.</p>'
     description: Information to use when checking for a successful response from a target.
   Max:
     type: string
@@ -2856,10 +2890,10 @@ definitions:
         description: '[HTTPS listeners] The security policy that defines which protocols and ciphers are supported. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies">Security Policies</a> in the <i>Application Load Balancers Guide</i>.'
       Certificates:
         $ref: '#/definitions/CertificateList'
-        description: '[HTTPS listeners] The default SSL server certificate. You must provide exactly one certificate. To create a certificate list, use <a>AddListenerCertificates</a>.'
+        description: '[HTTPS listeners] The default SSL server certificate. You must provide exactly one default certificate. To create a certificate list, use <a>AddListenerCertificates</a>.'
       DefaultActions:
         $ref: '#/definitions/Actions'
-        description: '<p>The actions for the default rule. The rule must include one forward action.</p> <p>If the action type is <code>forward</code>, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.</p> <p>If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p>'
+        description: '<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p> <p>If the action type is <code>forward</code>, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.</p> <p>[HTTPS listener] If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>[HTTPS listener] If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you can redirect HTTP and HTTPS requests.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you can return a custom HTTP response.</p>'
   ModifyListenerOutput:
     type: object
     example:
@@ -2933,7 +2967,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the rule.
       Conditions:
         $ref: '#/definitions/RuleConditionList'
-        description: '<p>The conditions. Each condition specifies a field name and a single value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
+        description: '<p>The conditions. Each condition specifies a field name and a single value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern. A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
       Actions:
         $ref: '#/definitions/Actions'
         description: '<p>The actions.</p> <p>If the action type is <code>forward</code>, you can specify a single target group.</p> <p>If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p>'
@@ -3011,7 +3045,7 @@ definitions:
         description: '[HTTP/HTTPS health checks] The ping path that is the destination for the health check request.'
       HealthCheckIntervalSeconds:
         $ref: '#/definitions/HealthCheckIntervalSeconds'
-        description: 'The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5 to 300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds.'
+        description: 'The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5–300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds.'
       HealthCheckTimeoutSeconds:
         $ref: '#/definitions/HealthCheckTimeoutSeconds'
         description: '[HTTP/HTTPS health checks] The amount of time, in seconds, during which no response means a failed health check.'
@@ -3075,6 +3109,52 @@ definitions:
       - HTTP
       - HTTPS
       - TCP
+  RedirectActionConfig:
+    type: object
+    required:
+      - StatusCode
+    properties:
+      Protocol:
+        $ref: '#/definitions/RedirectActionProtocol'
+        description: 'The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You cannot redirect HTTPS to HTTP.'
+      Port:
+        $ref: '#/definitions/RedirectActionPort'
+        description: 'The port. You can specify a value from 1 to 65535 or #{port}.'
+      Host:
+        $ref: '#/definitions/RedirectActionHost'
+        description: 'The hostname. This component is not percent-encoded. The hostname can contain #{host}.'
+      Path:
+        $ref: '#/definitions/RedirectActionPath'
+        description: 'The absolute path, starting with the leading "/". This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}.'
+      Query:
+        $ref: '#/definitions/RedirectActionQuery'
+        description: 'The query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading "?", as it is automatically added. You can specify any of the reserved keywords.'
+      StatusCode:
+        $ref: '#/definitions/RedirectActionStatusCodeEnum'
+        description: The HTTP redirect code. The redirect is either permanent (HTTP 301) or temporary (HTTP 302).
+    description: '<p>Information about a redirect action.</p> <p>A URI consists of the following components: protocol://hostname:port/path?query. You must modify at least one of the following components to avoid a redirect loop: protocol, hostname, port, or path. Any components that you do not modify retain their original values.</p> <p>You can reuse URI components using the following reserved keywords:</p> <ul> <li> <p>#{protocol}</p> </li> <li> <p>#{host}</p> </li> <li> <p>#{port}</p> </li> <li> <p>#{path} (the leading "/" is removed)</p> </li> <li> <p>#{query}</p> </li> </ul> <p>For example, you can change the path to "/new/#{path}", the hostname to "example.#{host}", or the query to "#{query}&amp;value=xyz".</p>'
+  RedirectActionHost:
+    type: string
+    minLength: 1
+    maxLength: 128
+  RedirectActionPath:
+    type: string
+    minLength: 1
+    maxLength: 128
+  RedirectActionPort:
+    type: string
+  RedirectActionProtocol:
+    type: string
+    pattern: '^(HTTPS?|#\{protocol\})$'
+  RedirectActionQuery:
+    type: string
+    minLength: 0
+    maxLength: 128
+  RedirectActionStatusCodeEnum:
+    type: string
+    enum:
+      - HTTP_301
+      - HTTP_302
   RegisterTargetsInput:
     type: object
     required:
@@ -3176,7 +3256,7 @@ definitions:
         description: The name of the field. The possible values are <code>host-header</code> and <code>path-pattern</code>.
       Values:
         $ref: '#/definitions/ListOfString'
-        description: '<p>The condition value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern (for example, /img/*). A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
+        description: '<p>The condition value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern (for example, /img/*). A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
     description: Information about a condition for a rule.
   RuleConditionList:
     type: array

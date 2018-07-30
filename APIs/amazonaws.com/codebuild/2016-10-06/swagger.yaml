@@ -925,6 +925,9 @@ definitions:
       networkInterface:
         $ref: '#/definitions/NetworkInterface'
         description: Describes a network interface.
+      encryptionKey:
+        $ref: '#/definitions/NonEmptyString'
+        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>This is expressed either as the CMK''s Amazon Resource Name (ARN) or, if specified, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
     description: Information about a build.
   BuildArtifacts:
     type: object
@@ -938,6 +941,9 @@ definitions:
       md5sum:
         $ref: '#/definitions/String'
         description: <p>The MD5 hash of the build artifact.</p> <p>You can use this hash along with a checksum tool to confirm both file integrity and authenticity.</p> <note> <p>This value is available only if the build project's <code>packaging</code> value is set to <code>ZIP</code>.</p> </note>
+      encryptionDisabled:
+        $ref: '#/definitions/WrapperBoolean'
+        description: ' Information that tells you if encryption for build artifacts is disabled. '
     description: Information about build output artifacts.
   BuildIds:
     type: array
@@ -1414,6 +1420,9 @@ definitions:
       packaging:
         $ref: '#/definitions/ArtifactPackaging'
         description: '<p>The type of build output artifact to create, as follows:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, then AWS CodePipeline will ignore this value if specified. This is because AWS CodePipeline manages its build output artifacts instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, then this value will be ignored if specified, because no build output will be produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>NONE</code>: AWS CodeBuild will create in the output bucket a folder containing the build output. This is the default if <code>packaging</code> is not specified.</p> </li> <li> <p> <code>ZIP</code>: AWS CodeBuild will create in the output bucket a ZIP file containing the build output.</p> </li> </ul> </li> </ul>'
+      encryptionDisabled:
+        $ref: '#/definitions/WrapperBoolean'
+        description: ' Set to true if you do not want your output artifacts encrypted. This option is only valid if your artifacts type is Amazon S3. If this is set with another artifacts type, an invalidInputException will be thrown. '
     description: Information about the build output artifacts for the build project.
   ProjectBadge:
     type: object

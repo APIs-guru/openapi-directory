@@ -1635,6 +1635,13 @@ definitions:
     pattern: '^[a-zA-Z0-9_]+$'
     minLength: 1
     maxLength: 128
+  ChannelStatistics:
+    type: object
+    properties:
+      size:
+        $ref: '#/definitions/EstimatedResourceSize'
+        description: The estimated size of the channel.
+    description: Statistics information about the channel.
   ChannelStatus:
     type: string
     enum:
@@ -1933,6 +1940,13 @@ definitions:
     pattern: '^[a-zA-Z0-9_]+$'
     minLength: 1
     maxLength: 128
+  DatastoreStatistics:
+    type: object
+    properties:
+      size:
+        $ref: '#/definitions/EstimatedResourceSize'
+        description: The estimated size of the data store.
+    description: Statistics information about the data store.
   DatastoreStatus:
     type: string
     enum:
@@ -1983,6 +1997,9 @@ definitions:
       channel:
         $ref: '#/definitions/Channel'
         description: An object that contains information about the channel.
+      statistics:
+        $ref: '#/definitions/ChannelStatistics'
+        description: Statistics about the channel. Included if the 'includeStatistics' parameter is set to true in the request.
   DescribeDatasetRequest:
     type: object
     properties: {}
@@ -2001,6 +2018,9 @@ definitions:
       datastore:
         $ref: '#/definitions/Datastore'
         description: Information about the data store.
+      statistics:
+        $ref: '#/definitions/DatastoreStatistics'
+        description: Statistics about the data store. Included if the 'includeStatistics' parameter is set to true in the request.
   DescribeLoggingOptionsRequest:
     type: object
     properties: {}
@@ -2076,6 +2096,16 @@ definitions:
     type: string
   ErrorMessage:
     type: string
+  EstimatedResourceSize:
+    type: object
+    properties:
+      estimatedSizeInBytes:
+        $ref: '#/definitions/SizeInBytes'
+        description: The estimated size of the resource in bytes.
+      estimatedOn:
+        $ref: '#/definitions/Timestamp'
+        description: The time when the estimate of the size of the resource was made.
+    description: The estimated size of the resource.
   FilterActivity:
     type: object
     required:
@@ -2111,6 +2141,8 @@ definitions:
       status:
         $ref: '#/definitions/DatasetContentStatus'
         description: The status of the data set content.
+  IncludeStatisticsFlag:
+    type: boolean
   InternalFailureException:
     type: object
     properties:
@@ -2279,7 +2311,7 @@ definitions:
         description: The ID you wish to assign to the message. Each "messageId" must be unique within each batch sent.
       payload:
         $ref: '#/definitions/MessagePayload'
-        description: The payload of the message.
+        description: The payload of the message. This may be a JSON string or a Base64-encoded string representing binary data (in which case you must decode it by means of a pipeline activity).
     description: Information about a message.
   MessageId:
     type: string
@@ -2542,6 +2574,9 @@ definitions:
       message:
         $ref: '#/definitions/errorMessage'
     description: The service is temporarily unavailable.
+  SizeInBytes:
+    type: number
+    format: double
   SqlQuery:
     type: string
   SqlQueryDatasetAction:

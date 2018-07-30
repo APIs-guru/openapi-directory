@@ -360,6 +360,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateTransformJob':
+    post:
+      operationId: CreateTransformJob
+      description: '<p>Starts a transform job. After the results are obtained, Amazon SageMaker saves them to an Amazon S3 location that you specify.</p> <p>To perform batch transformations, you create a transform job and use the data that you have readily available.</p> <p>In the request body, you provide the following:</p> <ul> <li> <p> <code>TransformJobName</code> - Identifies the transform job. The name must be unique within an AWS Region in an AWS account.</p> </li> <li> <p> <code>ModelName</code> - Identifies the model to use.</p> </li> <li> <p> <code>TransformInput</code> - Describes the dataset to be transformed and the Amazon S3 location where it is stored.</p> </li> <li> <p> <code>TransformOutput</code> - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.</p> </li> <li> <p> <code>TransformResources</code> - Identifies the ML compute instances for the transform job.</p> </li> </ul> <p> For more information about how batch transformation works Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html">How It Works</a>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateTransformJobResponse'
+        '480':
+          description: ResourceInUse
+          schema:
+            $ref: '#/definitions/ResourceInUse'
+        '481':
+          description: ResourceLimitExceeded
+          schema:
+            $ref: '#/definitions/ResourceLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTransformJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteEndpoint':
     post:
       operationId: DeleteEndpoint
@@ -766,6 +799,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTransformJob':
+    post:
+      operationId: DescribeTransformJob
+      description: Returns information about a transform job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTransformJobResponse'
+        '480':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeTransformJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListEndpointConfigs':
     post:
       operationId: ListEndpointConfigs
@@ -1085,6 +1147,41 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTransformJobs':
+    post:
+      operationId: ListTransformJobs
+      description: Lists transform jobs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTransformJobsResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTransformJobsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#StartNotebookInstance':
     post:
       operationId: StartNotebookInstance
@@ -1115,7 +1212,7 @@ paths:
   '/#StopHyperParameterTuningJob':
     post:
       operationId: StopHyperParameterTuningJob
-      description: '<p>Stops a running hyperparameter tuning job and all running training jobs that the tuning job launched.</p> <p>All model artifacts output from the training jobs are stored in Amazon Simple Storage Service (Amazon S3). All data that the training jobs write toAmazon CloudWatch Logs are still available in CloudWatch. After the tuning job moves to the <code>Stopped</code> state, it releases all reserved resources for the tuning job.</p>'
+      description: '<p>Stops a running hyperparameter tuning job and all running training jobs that the tuning job launched.</p> <p>All model artifacts output from the training jobs are stored in Amazon Simple Storage Service (Amazon S3). All data that the training jobs write to Amazon CloudWatch Logs are still available in CloudWatch. After the tuning job moves to the <code>Stopped</code> state, it releases all reserved resources for the tuning job.</p>'
       responses:
         '200':
           description: Success
@@ -1179,6 +1276,33 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopTrainingJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopTransformJob':
+    post:
+      operationId: StopTransformJob
+      description: '<p>Stops a transform job.</p> <p>When Amazon SageMaker receives a <code>StopTransformJob</code> request, the status of the job changes to <code>Stopping</code>. After Amazon SageMaker stops the job, the status is set to <code>Stopped</code>. When you stop a transform job before it is completed, Amazon SageMaker doesn''t store the job''s output in Amazon S3.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopTransformJobRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1306,6 +1430,9 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  Accept:
+    type: string
+    maxLength: 256
   AddTagsInput:
     type: object
     required:
@@ -1340,6 +1467,16 @@ definitions:
         $ref: '#/definitions/TrainingInputMode'
         description: '<p>The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. If an algorithm supports the <code>File</code> input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the <code>Pipe</code> input mode, Amazon SageMaker streams data directly from S3 to the container. </p> <p> In File mode, make sure you provision ML storage volume with sufficient capacity to accommodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any. </p> <p> For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won''t be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. </p>'
     description: '<p>Specifies the training algorithm to use in a <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html">CreateTrainingJob</a> request.</p> <p>For more information about algorithms provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. For information about using your own algorithms, see <a>your-algorithms</a>. </p>'
+  AssemblyType:
+    type: string
+    enum:
+      - None
+      - Line
+  BatchStrategy:
+    type: string
+    enum:
+      - MultiRecord
+      - SingleRecord
   CategoricalParameterRange:
     type: object
     required:
@@ -1635,7 +1772,7 @@ definitions:
     properties:
       TrainingJobName:
         $ref: '#/definitions/TrainingJobName'
-        description: 'The name of the training job. The name must be unique within an AWS Region in an AWS account. It appears in the Amazon SageMaker console. '
+        description: 'The name of the training job. The name must be unique within an AWS Region in an AWS account. '
       HyperParameters:
         $ref: '#/definitions/HyperParameters'
         description: '<p>Algorithm-specific parameters that influence the quality of the model. You set hyperparameters before you start the learning process. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. </p> <p>You can specify a maximum of 100 hyperparameters. Each hyperparameter is a key-value pair. Each key and value is limited to 256 characters, as specified by the <code>Length Constraint</code>. </p>'
@@ -1671,6 +1808,53 @@ definitions:
       TrainingJobArn:
         $ref: '#/definitions/TrainingJobArn'
         description: The Amazon Resource Name (ARN) of the training job.
+  CreateTransformJobRequest:
+    type: object
+    required:
+      - TransformJobName
+      - ModelName
+      - TransformInput
+      - TransformOutput
+      - TransformResources
+    properties:
+      TransformJobName:
+        $ref: '#/definitions/TransformJobName'
+        description: 'The name of the transform job. The name must be unique within an AWS Region in an AWS account. '
+      ModelName:
+        $ref: '#/definitions/ModelName'
+        description: The name of the model that you want to use for the transform job.
+      MaxConcurrentTransforms:
+        $ref: '#/definitions/MaxConcurrentTransforms'
+        description: 'The maximum number of parallel requests on each instance node that can be launched in a transform job. The default value is <code>1</code>. To allow Amazon SageMaker to determine the appropriate number for <code>MaxConcurrentTransforms</code>, set the value to <code>0</code>.'
+      MaxPayloadInMB:
+        $ref: '#/definitions/MaxPayloadInMB'
+        description: 'The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata). The value in <code>MaxPayloadInMB</code> must be greater than the size of a single record.You can approximate the size of a record by dividing the size of your dataset by the number of records. The value you enter should be proportional to the number of records you want per batch. It is recommended to enter a slightly higher value to ensure the records will fit within the maximum payload size. The default value is <code>6</code> MB. For an unlimited payload size, set the value to <code>0</code>.'
+      BatchStrategy:
+        $ref: '#/definitions/BatchStrategy'
+        description: Determins the number of records included in a single batch. <code>SingleRecord</code> means only one record is used per batch. <code>MultiRecord</code> means a batch is set to contain as many records that could possibly fit within the <code>MaxPayloadInMB</code> limit.
+      Environment:
+        $ref: '#/definitions/TransformEnvironmentMap'
+        description: The environment variables to set in the Docker container. We support up to 16 key and values entries in the map.
+      TransformInput:
+        $ref: '#/definitions/TransformInput'
+        description: Describes the input source and the way the transform job consumes it.
+      TransformOutput:
+        $ref: '#/definitions/TransformOutput'
+        description: Describes the results of the transform job.
+      TransformResources:
+        $ref: '#/definitions/TransformResources'
+        description: 'Describes the resources, including ML instance types and ML instance count, to use for the transform job.'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'An array of key-value pairs. Adding tags is optional. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.'
+  CreateTransformJobResponse:
+    type: object
+    required:
+      - TransformJobArn
+    properties:
+      TransformJobArn:
+        $ref: '#/definitions/TransformJobArn'
+        description: The Amazon Resource Name (ARN) of the transform job.
   CreationTime:
     type: string
     format: date-time
@@ -2083,6 +2267,70 @@ definitions:
       LastModifiedTime:
         $ref: '#/definitions/Timestamp'
         description: A timestamp that indicates when the status of the training job was last modified.
+  DescribeTransformJobRequest:
+    type: object
+    required:
+      - TransformJobName
+    properties:
+      TransformJobName:
+        $ref: '#/definitions/TransformJobName'
+        description: The name of the transform job that you want to view details of.
+  DescribeTransformJobResponse:
+    type: object
+    required:
+      - TransformJobName
+      - TransformJobArn
+      - TransformJobStatus
+      - ModelName
+      - TransformInput
+      - TransformResources
+      - CreationTime
+    properties:
+      TransformJobName:
+        $ref: '#/definitions/TransformJobName'
+        description: The name of the transform job.
+      TransformJobArn:
+        $ref: '#/definitions/TransformJobArn'
+        description: The Amazon Resource Name (ARN) of the transform job.
+      TransformJobStatus:
+        $ref: '#/definitions/TransformJobStatus'
+        description: 'The status of the transform job. If the transform job failed, the reason is returned in the <code>FailureReason</code> field.'
+      FailureReason:
+        $ref: '#/definitions/FailureReason'
+        description: 'If the transform job failed, the reason that it failed.'
+      ModelName:
+        $ref: '#/definitions/ModelName'
+        description: The name of the model used in the transform job.
+      MaxConcurrentTransforms:
+        $ref: '#/definitions/MaxConcurrentTransforms'
+        description: The maximum number of parallel requests on each instance node that can be launched in a transform job. The default value is 1.
+      MaxPayloadInMB:
+        $ref: '#/definitions/MaxPayloadInMB'
+        description: 'The maximum payload size , in MB used in the transform job.'
+      BatchStrategy:
+        $ref: '#/definitions/BatchStrategy'
+        description: SingleRecord means only one record was used per a batch. &lt;code&gt;MultiRecord&lt;/code&gt; means batches contained as many records that could possibly fit within the <code>MaxPayloadInMB</code> limit.
+      Environment:
+        $ref: '#/definitions/TransformEnvironmentMap'
+        description: <p/>
+      TransformInput:
+        $ref: '#/definitions/TransformInput'
+        description: Describes the dataset to be transformed and the Amazon S3 location where it is stored.
+      TransformOutput:
+        $ref: '#/definitions/TransformOutput'
+        description: Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.
+      TransformResources:
+        $ref: '#/definitions/TransformResources'
+        description: 'Describes the resources, including ML instance types and ML instance count, to use for the transform job.'
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the transform Job was created.
+      TransformStartTime:
+        $ref: '#/definitions/Timestamp'
+        description: Indicates when the transform job starts on ML instances. You are billed for the time interval between this time and the value of <code>TransformEndTime</code>.
+      TransformEndTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'Indicates when the transform job is <code>Completed</code>, <code>Stopped</code>, or <code>Failed</code>. You are billed for the time interval between this time and the value of <code>TransformStartTime</code>.'
   DesiredWeightAndCapacity:
     type: object
     required:
@@ -2826,7 +3074,7 @@ definitions:
         description: The maximum number of training jobs to return in the response.
       CreationTimeAfter:
         $ref: '#/definitions/Timestamp'
-        description: A filter that only training jobs created after the specified time (timestamp).
+        description: A filter that returns only training jobs created after the specified time (timestamp).
       CreationTimeBefore:
         $ref: '#/definitions/Timestamp'
         description: A filter that returns only training jobs created before the specified time (timestamp).
@@ -2859,12 +3107,62 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request.'
+  ListTransformJobsRequest:
+    type: object
+    properties:
+      CreationTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only transform jobs created after the specified time.
+      CreationTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only transform jobs created before the specified time.
+      LastModifiedTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only transform jobs modified after the specified time.
+      LastModifiedTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only transform jobs modified before the specified time.
+      NameContains:
+        $ref: '#/definitions/NameContains'
+        description: A string in the transform job name. This filter returns only transform jobs whose name contains the specified string.
+      StatusEquals:
+        $ref: '#/definitions/TransformJobStatus'
+        description: A filter that retrieves only transform jobs with a specific status.
+      SortBy:
+        $ref: '#/definitions/SortBy'
+        description: The field to sort results by. The default is <code>CreationTime</code>.
+      SortOrder:
+        $ref: '#/definitions/SortOrder'
+        description: The sort order for results. The default is <code>Descending</code>.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the previous <code>ListTransformJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of transform jobs, use the token in the next request.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of transform jobs to return in the response. The default value is <code>10</code>.
+  ListTransformJobsResponse:
+    type: object
+    required:
+      - TransformJobSummaries
+    properties:
+      TransformJobSummaries:
+        $ref: '#/definitions/TransformJobSummaries'
+        description: An array of <code>TransformJobSummary</code> objects.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of transform jobs, use it in the next request.'
+  MaxConcurrentTransforms:
+    type: integer
+    minimum: 0
   MaxNumberOfTrainingJobs:
     type: integer
     minimum: 1
   MaxParallelTrainingJobs:
     type: integer
     minimum: 1
+  MaxPayloadInMB:
+    type: integer
+    minimum: 0
   MaxResults:
     type: integer
     minimum: 1
@@ -3374,6 +3672,12 @@ definitions:
     enum:
       - Ascending
       - Descending
+  SplitType:
+    type: string
+    enum:
+      - None
+      - Line
+      - RecordIO
   StartNotebookInstanceInput:
     type: object
     required:
@@ -3406,6 +3710,14 @@ definitions:
       TrainingJobName:
         $ref: '#/definitions/TrainingJobName'
         description: The name of the training job to stop.
+  StopTransformJobRequest:
+    type: object
+    required:
+      - TransformJobName
+    properties:
+      TransformJobName:
+        $ref: '#/definitions/TransformJobName'
+        description: The name of the transform job to stop.
   StoppingCondition:
     type: object
     properties:
@@ -3577,6 +3889,177 @@ definitions:
         $ref: '#/definitions/TrainingJobStatus'
         description: The status of the training job.
     description: Provides summary information about a training job.
+  TransformDataSource:
+    type: object
+    required:
+      - S3DataSource
+    properties:
+      S3DataSource:
+        $ref: '#/definitions/TransformS3DataSource'
+        description: The S3 location of the data source that is associated with a channel.
+    description: Describes the location of the channel data.
+  TransformEnvironmentKey:
+    type: string
+    pattern: '[a-zA-Z_][a-zA-Z0-9_]*'
+    maxLength: 1024
+  TransformEnvironmentMap:
+    type: array
+    maxItems: 16
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TransformEnvironmentKey'
+        value:
+          $ref: '#/definitions/TransformEnvironmentValue'
+  TransformEnvironmentValue:
+    type: string
+    maxLength: 10240
+  TransformInput:
+    type: object
+    required:
+      - DataSource
+    properties:
+      DataSource:
+        $ref: '#/definitions/TransformDataSource'
+        description: 'Describes the location of the channel data, meaning the S3 location of the input data that the model can consume.'
+      ContentType:
+        $ref: '#/definitions/ContentType'
+        description: The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.
+      CompressionType:
+        $ref: '#/definitions/CompressionType'
+        description: 'Compressing data helps save on storage space. If your transform data is compressed, specify the compression type.and Amazon SageMaker will automatically decompress the data for the transform job accordingly. The default value is <code>None</code>.'
+      SplitType:
+        $ref: '#/definitions/SplitType'
+        description: '<p>The method to use to split the transform job''s data into smaller batches. The default value is <code>None</code>. If you don''t want to split the data, specify (<code>None</code>). If you want to split records on a newline character boundary, specify <code>Line</code>. To split records according to the RecordIO format, specify <code>RecordIO</code>.</p> <p>Amazon SageMaker will send maximum number of records per batch in each request up to the MaxPayloadInMB limit. For more information, see <a href="http://mxnet.io/architecture/note_data_loading.html#data-format">RecordIO data format</a>.</p> <note> <p>For information about the <code>RecordIO</code> format, see <a href="http://mxnet.io/architecture/note_data_loading.html#data-format">Data Format</a>.</p> </note>'
+    description: Describes the input source of a transform job and the way the transform job consumes it.
+  TransformInstanceCount:
+    type: integer
+    minimum: 1
+  TransformInstanceType:
+    type: string
+    enum:
+      - ml.m4.xlarge
+      - ml.m4.2xlarge
+      - ml.m4.4xlarge
+      - ml.m4.10xlarge
+      - ml.m4.16xlarge
+      - ml.c4.xlarge
+      - ml.c4.2xlarge
+      - ml.c4.4xlarge
+      - ml.c4.8xlarge
+      - ml.p2.xlarge
+      - ml.p2.8xlarge
+      - ml.p2.16xlarge
+      - ml.p3.2xlarge
+      - ml.p3.8xlarge
+      - ml.p3.16xlarge
+      - ml.c5.xlarge
+      - ml.c5.2xlarge
+      - ml.c5.4xlarge
+      - ml.c5.9xlarge
+      - ml.c5.18xlarge
+      - ml.m5.large
+      - ml.m5.xlarge
+      - ml.m5.2xlarge
+      - ml.m5.4xlarge
+      - ml.m5.12xlarge
+      - ml.m5.24xlarge
+  TransformJobArn:
+    type: string
+    pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:transform-job/.*'
+    maxLength: 256
+  TransformJobName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    minLength: 1
+    maxLength: 63
+  TransformJobStatus:
+    type: string
+    enum:
+      - InProgress
+      - Completed
+      - Failed
+      - Stopping
+      - Stopped
+  TransformJobSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/TransformJobSummary'
+  TransformJobSummary:
+    type: object
+    required:
+      - TransformJobName
+      - TransformJobArn
+      - CreationTime
+      - TransformJobStatus
+    properties:
+      TransformJobName:
+        $ref: '#/definitions/TransformJobName'
+        description: The name of the transform job.
+      TransformJobArn:
+        $ref: '#/definitions/TransformJobArn'
+        description: The Amazon Resource Name (ARN) of the transform job.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the transform Job was created.
+      TransformEndTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'Indicates when the transform job ends on compute instances. For successful jobs and stopped jobs, this is the exact time recorded after the results are uploaded. For failed jobs, this is when Amazon SageMaker detected that the job failed.'
+      LastModifiedTime:
+        $ref: '#/definitions/Timestamp'
+        description: Indicates when the transform job was last modified.
+      TransformJobStatus:
+        $ref: '#/definitions/TransformJobStatus'
+        description: The status of the transform job.
+      FailureReason:
+        $ref: '#/definitions/FailureReason'
+        description: 'If the transform job failed, the reason it failed.'
+    description: Provides a summary information for a transform job. Multiple TransformJobSummary objects are returned as a list after calling <a>ListTransformJobs</a>.
+  TransformOutput:
+    type: object
+    required:
+      - S3OutputPath
+    properties:
+      S3OutputPath:
+        $ref: '#/definitions/S3Uri'
+        description: '<p>The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job. For example, <code>s3://bucket-name/key-name-prefix</code>.</p> <p>For every S3 object used as input for the transform job, the transformed data is stored in a corresponding subfolder in the location under the output prefix.For example, the input data <code>s3://bucket-name/input-name-prefix/dataset01/data.csv</code> will have the transformed data stored at <code>s3://bucket-name/key-name-prefix/dataset01/</code>, based on the original name, as a series of .part files (.part0001, part0002, etc).</p>'
+      Accept:
+        $ref: '#/definitions/Accept'
+        description: The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.
+      AssembleWith:
+        $ref: '#/definitions/AssemblyType'
+        description: '<p>Defines how to assemble the results of the transform job as a single S3 object. You should select a format that is most convienant to you. To concatenate the results in binary format, specify <code>None</code>. To add a newline character at the end of every transformed record, specify <code>Line</code>. To assemble the output in RecordIO format, specify <code>RecordIO</code>. The default value is <code>None</code>.</p> <p>For information about the <code>RecordIO</code> format, see <a href="http://mxnet.io/architecture/note_data_loading.html#data-format">Data Format</a>.</p>'
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: '<p>The AWS Key Management Service (AWS KMS) key for Amazon S3 server-side encryption that Amazon SageMaker uses to encrypt the transformed data.</p> <p>If you don''t provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role''s account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateTramsformJob</code> request. For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+    description: Describes the results of a transform job output.
+  TransformResources:
+    type: object
+    required:
+      - InstanceType
+      - InstanceCount
+    properties:
+      InstanceType:
+        $ref: '#/definitions/TransformInstanceType'
+        description: 'The ML compute instance type for the transform job. For using built-in algorithms to transform moderately sized datasets, ml.m4.xlarge or <code>ml.m5.large</code> should suffice. There is no default value for <code>InstanceType</code>.'
+      InstanceCount:
+        $ref: '#/definitions/TransformInstanceCount'
+        description: 'The number of ML compute instances to use in the transform job. For distributed transform, provide a value greater than 1. The default value is <code>1</code>.'
+    description: 'Describes the resources, including ML instance types and ML instance count, to use for transform job.'
+  TransformS3DataSource:
+    type: object
+    required:
+      - S3DataType
+      - S3Uri
+    properties:
+      S3DataType:
+        $ref: '#/definitions/S3DataType'
+        description: '<p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix. Amazon SageMaker uses all objects with the specified key name prefix for batch transform. </p> <p>If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for batch transform. </p>'
+      S3Uri:
+        $ref: '#/definitions/S3Uri'
+        description: '<p>Depending on the value specified for the <code>S3DataType</code>, identifies either a key name prefix or a manifest. For example:</p> <ul> <li> <p> A key name prefix might look like this: <code>s3://bucketname/exampleprefix</code>. </p> </li> <li> <p> A manifest might look like this: <code>s3://bucketname/example.manifest</code> </p> <p> The manifest is an S3 object which is a JSON file with the following format: </p> <p> <code>[</code> </p> <p> <code> {"prefix": "s3://customer_bucket/some/prefix/"},</code> </p> <p> <code> "relative/path/to/custdata-1",</code> </p> <p> <code> "relative/path/custdata-2",</code> </p> <p> <code> ...</code> </p> <p> <code> ]</code> </p> <p> The preceding JSON matches the following <code>S3Uris</code>: </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code> </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/custdata-1</code> </p> <p> <code>...</code> </p> <p> The complete set of <code>S3Uris</code> in this manifest constitutes the input data for the channel for this datasource. The object that each <code>S3Uris</code> points to must be readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf.</p> </li> </ul>'
+    description: Describes the S3 data source.
   UpdateEndpointInput:
     type: object
     required:

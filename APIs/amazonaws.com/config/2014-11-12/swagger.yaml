@@ -3445,6 +3445,8 @@ definitions:
     format: date-time
   ResourceId:
     type: string
+    minLength: 1
+    maxLength: 768
   ResourceIdList:
     type: array
     items:

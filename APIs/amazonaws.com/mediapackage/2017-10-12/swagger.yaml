@@ -861,6 +861,13 @@ definitions:
       MinUpdatePeriodSeconds:
         description: Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).
         $ref: '#/definitions/__integer'
+      PeriodTriggers:
+        description: |
+          A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
+          Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
+          be partitioned into more than one period. If the list contains "ADS", new periods will be created where
+          the Channel source contains SCTE-35 ad markers.
+        $ref: '#/definitions/__listOf__PeriodTriggersElement'
       Profile:
         description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.'
         $ref: '#/definitions/Profile'
@@ -1516,6 +1523,10 @@ definitions:
       Whitelist:
         description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
         $ref: '#/definitions/__listOf__string'
+  __PeriodTriggersElement:
+    enum:
+      - ADS
+    type: string
   __boolean:
     type: boolean
   __double:
@@ -1543,6 +1554,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/OriginEndpoint'
+  __listOf__PeriodTriggersElement:
+    type: array
+    items:
+      $ref: '#/definitions/__PeriodTriggersElement'
   __listOf__string:
     type: array
     items:

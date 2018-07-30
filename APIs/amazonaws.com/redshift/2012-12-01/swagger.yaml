@@ -366,6 +366,10 @@ paths:
           description: DependentServiceRequestThrottlingFault
           schema:
             $ref: '#/definitions/DependentServiceRequestThrottlingFault'
+        '499':
+          description: InvalidClusterTrackFault
+          schema:
+            $ref: '#/definitions/InvalidClusterTrackFault'
       parameters:
         - name: body
           in: body
@@ -1392,6 +1396,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeClusterTracks':
+    post:
+      operationId: DescribeClusterTracks
+      description: Returns a list of all the available maintenance tracks.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TrackListMessage'
+        '480':
+          description: InvalidClusterTrackFault
+          schema:
+            $ref: '#/definitions/InvalidClusterTrackFault'
+        '481':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeClusterTracksMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeClusterVersions':
     post:
       operationId: DescribeClusterVersions
@@ -2239,7 +2276,7 @@ paths:
   '/#GetReservedNodeExchangeOfferings':
     post:
       operationId: GetReservedNodeExchangeOfferings
-      description: 'Returns an array of ReservedNodeOfferings which is filtered by payment type, term, and instance type.'
+      description: 'Returns an array of DC2 ReservedNodeOfferings that matches the payment type, term, and usage price of the given DC1 reserved node.'
       responses:
         '200':
           description: Success
@@ -2362,6 +2399,10 @@ paths:
           description: TableLimitExceededFault
           schema:
             $ref: '#/definitions/TableLimitExceededFault'
+        '497':
+          description: InvalidClusterTrackFault
+          schema:
+            $ref: '#/definitions/InvalidClusterTrackFault'
       parameters:
         - name: body
           in: body
@@ -2832,6 +2873,10 @@ paths:
           description: DependentServiceRequestThrottlingFault
           schema:
             $ref: '#/definitions/DependentServiceRequestThrottlingFault'
+        '501':
+          description: InvalidClusterTrackFault
+          schema:
+            $ref: '#/definitions/InvalidClusterTrackFault'
       parameters:
         - name: body
           in: body
@@ -3021,10 +3066,10 @@ definitions:
     properties:
       ReservedNodeId:
         $ref: '#/definitions/String'
-        description: A string representing the identifier of the Reserved Node to be exchanged.
+        description: A string representing the node identifier of the DC1 Reserved Node to be exchanged.
       TargetReservedNodeOfferingId:
         $ref: '#/definitions/String'
-        description: The unique identifier of the Reserved Node offering to be used for the exchange.
+        description: 'The unique identifier of the DC2 Reserved Node offering to be used for the exchange. You can obtain the value for the parameter by calling <a>GetReservedNodeExchangeOfferings</a> '
   AcceptReservedNodeExchangeOutputMessage:
     type: object
     properties:
@@ -3230,6 +3275,9 @@ definitions:
       PendingActions:
         $ref: '#/definitions/PendingActionsList'
         description: Cluster operations that are waiting to be started.
+      MaintenanceTrackName:
+        $ref: '#/definitions/String'
+        description: The name of the maintenance track for the cluster.
     description: Describes a cluster.
   ClusterAlreadyExistsFault:
     type: object
@@ -3707,6 +3755,9 @@ definitions:
       IamRoles:
         $ref: '#/definitions/IamRoleArnList'
         description: <p>A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated with it at any time.</p>
+      MaintenanceTrackName:
+        $ref: '#/definitions/String'
+        description: 'An optional parameter for the name of the maintenance track for the cluster. If you don''t provide a maintenance track name, the cluster is assigned to the <code>current</code> track.'
     description: <p/>
   CreateClusterParameterGroupMessage:
     type: object
@@ -4190,6 +4241,18 @@ definitions:
         $ref: '#/definitions/TagValueList'
         description: 'A tag value or values for which you want to return all matching cluster subnet groups that are associated with the specified tag value or values. For example, suppose that you have subnet groups that are tagged with values called <code>admin</code> and <code>test</code>. If you specify both of these tag values in the request, Amazon Redshift returns a response with the subnet groups that have either or both of these tag values associated with them.'
     description: <p/>
+  DescribeClusterTracksMessage:
+    type: object
+    properties:
+      MaintenanceTrackName:
+        $ref: '#/definitions/String'
+        description: 'The name of the maintenance track. '
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: An integer value for the maximum number of maintenance tracks to return.
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <code>DescribeClusterTracks</code> request exceed the value specified in <code>MaxRecords</code>, Amazon Redshift returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
   DescribeClusterVersionsMessage:
     type: object
     properties:
@@ -4510,6 +4573,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The status of the elastic IP (EIP) address.
     description: Describes the status of the elastic IP (EIP) address.
+  EligibleTracksToUpdateList:
+    type: array
+    items:
+      $ref: '#/definitions/UpdateTarget'
   EnableLoggingMessage:
     type: object
     required:
@@ -4731,7 +4798,7 @@ definitions:
     properties:
       ReservedNodeId:
         $ref: '#/definitions/String'
-        description: A string representing the node identifier for the Reserved Node to be exchanged.
+        description: A string representing the node identifier for the DC1 Reserved Node to be exchanged.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
         description: An integer setting the maximum number of ReservedNodeOfferings to retrieve.
@@ -4922,6 +4989,10 @@ definitions:
     type: object
     properties: {}
     description: The state of the subnet is invalid.
+  InvalidClusterTrackFault:
+    type: object
+    properties: {}
+    description: The provided cluster track name is not valid.
   InvalidElasticIpFault:
     type: object
     properties: {}
@@ -5004,6 +5075,19 @@ definitions:
     type: integer
   LongOptional:
     type: integer
+  MaintenanceTrack:
+    type: object
+    properties:
+      MaintenanceTrackName:
+        $ref: '#/definitions/String'
+        description: The name of the maintenance track. Possible values are <code>current</code> and <code>trailing</code>.
+      DatabaseVersion:
+        $ref: '#/definitions/String'
+        description: The version number for the cluster release.
+      UpdateTargets:
+        $ref: '#/definitions/EligibleTracksToUpdateList'
+        description: 'An array of <a>UpdateTarget</a> objects to update with the maintenance track. '
+    description: 'Defines a maintenance track that determines which Amazon Redshift version to apply during a maintenance window. If the value for <code>MaintenanceTrack</code> is <code>current</code>, the cluster is updated to the most recently certified maintenance release. If the value is <code>trailing</code>, the cluster is updated to the previously certified maintenance release. '
   ModifyClusterDbRevisionMessage:
     type: object
     required:
@@ -5100,6 +5184,9 @@ definitions:
       EnhancedVpcRouting:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html">Enhanced VPC Routing</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If this option is <code>true</code>, enhanced VPC routing is enabled. </p> <p>Default: false</p>'
+      MaintenanceTrackName:
+        $ref: '#/definitions/String'
+        description: 'The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the <code>PendingModifiedValues</code> for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.'
     description: <p/>
   ModifyClusterParameterGroupMessage:
     type: object
@@ -5306,6 +5393,9 @@ definitions:
       EnhancedVpcRouting:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html">Enhanced VPC Routing</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If this option is <code>true</code>, enhanced VPC routing is enabled. </p> <p>Default: false</p>'
+      MaintenanceTrackName:
+        $ref: '#/definitions/String'
+        description: The name of the maintenance track that the cluster will change to during the next maintenance window.
     description: Describes cluster attributes that are in a pending state. A change to one or more the attributes was requested and is in progress or will be applied.
   PurchaseReservedNodeOfferingMessage:
     type: object
@@ -5616,6 +5706,9 @@ definitions:
       IamRoles:
         $ref: '#/definitions/IamRoleArnList'
         description: <p>A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>
+      MaintenanceTrackName:
+        $ref: '#/definitions/String'
+        description: 'The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the <code>MaintenanceTrack</code> value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks.'
     description: <p/>
   RestoreFromClusterSnapshotResult:
     type: object
@@ -5863,6 +5956,9 @@ definitions:
       EnhancedVpcRouting:
         $ref: '#/definitions/Boolean'
         description: '<p>An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html">Enhanced VPC Routing</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If this option is <code>true</code>, enhanced VPC routing is enabled. </p> <p>Default: false</p>'
+      MaintenanceTrackName:
+        $ref: '#/definitions/String'
+        description: The name of the maintenance track for the snapshot.
     description: Describes a snapshot.
   SnapshotCopyAlreadyDisabledFault:
     type: object
@@ -6132,6 +6228,19 @@ definitions:
         $ref: '#/definitions/String'
         description: 'A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field is empty, all response records have been retrieved for the request. '
     description: <p/>
+  TrackList:
+    type: array
+    items:
+      $ref: '#/definitions/MaintenanceTrack'
+  TrackListMessage:
+    type: object
+    properties:
+      MaintenanceTracks:
+        $ref: '#/definitions/TrackList'
+        description: 'A list of maintenance tracks output by the <code>DescribeClusterTracks</code> operation. '
+      Marker:
+        $ref: '#/definitions/String'
+        description: The starting point to return a set of response tracklist records. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request.
   UnauthorizedOperation:
     type: object
     properties: {}
@@ -6148,6 +6257,16 @@ definitions:
     type: object
     properties: {}
     description: A request option was specified that is not supported.
+  UpdateTarget:
+    type: object
+    properties:
+      MaintenanceTrackName:
+        $ref: '#/definitions/String'
+        description: The name of the new maintenance track.
+      DatabaseVersion:
+        $ref: '#/definitions/String'
+        description: The cluster version for the new maintenance track.
+    description: A maintenance track that you can switch the current track to.
   VpcSecurityGroupIdList:
     type: array
     items:

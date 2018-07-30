@@ -241,6 +241,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/synthesisTasks/{TaskId}':
+    get:
+      operationId: GetSpeechSynthesisTask
+      description: 'Retrieves a specific SpeechSynthesisTask object based on its TaskID. This object contains information about the given speech synthesis task, including the status of the task, and a link to the S3 bucket containing the output of the task.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSpeechSynthesisTaskOutput'
+        '480':
+          description: InvalidTaskIdException
+          schema:
+            $ref: '#/definitions/InvalidTaskIdException'
+        '481':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+        '482':
+          description: SynthesisTaskNotFoundException
+          schema:
+            $ref: '#/definitions/SynthesisTaskNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSpeechSynthesisTaskInput'
+        - name: TaskId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /v1/lexicons:
     get:
       operationId: ListLexicons
@@ -274,6 +315,103 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /v1/synthesisTasks:
+    get:
+      operationId: ListSpeechSynthesisTasks
+      description: 'Returns a list of SpeechSynthesisTask objects ordered by their creation date. This operation can filter the tasks by their status, for example, allowing users to list only tasks that are completed.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSpeechSynthesisTasksOutput'
+        '480':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '481':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListSpeechSynthesisTasksInput'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartSpeechSynthesisTask
+      description: 'Allows the creation of an asynchronous synthesis task, by starting a new <code>SpeechSynthesisTask</code>. This operation requires all the standard information needed for speech synthesis, plus the name of an Amazon S3 bucket for the service to store the output of the synthesis task and two optional parameters (OutputS3KeyPrefix and SnsTopicArn). Once the synthesis task is created, this operation will return a SpeechSynthesisTask object, which will include an identifier of this task as well as the current status.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartSpeechSynthesisTaskOutput'
+        '480':
+          description: TextLengthExceededException
+          schema:
+            $ref: '#/definitions/TextLengthExceededException'
+        '481':
+          description: InvalidS3BucketException
+          schema:
+            $ref: '#/definitions/InvalidS3BucketException'
+        '482':
+          description: InvalidS3KeyException
+          schema:
+            $ref: '#/definitions/InvalidS3KeyException'
+        '483':
+          description: InvalidSampleRateException
+          schema:
+            $ref: '#/definitions/InvalidSampleRateException'
+        '484':
+          description: InvalidSnsTopicArnException
+          schema:
+            $ref: '#/definitions/InvalidSnsTopicArnException'
+        '485':
+          description: InvalidSsmlException
+          schema:
+            $ref: '#/definitions/InvalidSsmlException'
+        '486':
+          description: LexiconNotFoundException
+          schema:
+            $ref: '#/definitions/LexiconNotFoundException'
+        '487':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+        '488':
+          description: MarksNotSupportedForFormatException
+          schema:
+            $ref: '#/definitions/MarksNotSupportedForFormatException'
+        '489':
+          description: SsmlMarksNotSupportedForTextTypeException
+          schema:
+            $ref: '#/definitions/SsmlMarksNotSupportedForTextTypeException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartSpeechSynthesisTaskInput'
   /v1/speech:
     post:
       operationId: SynthesizeSpeech
@@ -334,6 +472,9 @@ definitions:
     type: string
   ContentType:
     type: string
+  DateTime:
+    type: string
+    format: date-time
   DeleteLexiconInput:
     type: object
     example:
@@ -406,6 +547,15 @@ definitions:
       LexiconAttributes:
         $ref: '#/definitions/LexiconAttributes'
         description: 'Metadata of the lexicon, including phonetic alphabetic used, language code, lexicon ARN, number of lexemes defined in the lexicon, and size of lexicon in bytes.'
+  GetSpeechSynthesisTaskInput:
+    type: object
+    properties: {}
+  GetSpeechSynthesisTaskOutput:
+    type: object
+    properties:
+      SynthesisTask:
+        $ref: '#/definitions/SynthesisTask'
+        description: 'SynthesisTask object that provides information from the requested task, including output format, creation time, task status, and so on.'
   InvalidLexiconException:
     type: object
     properties:
@@ -418,18 +568,42 @@ definitions:
       message:
         $ref: '#/definitions/ErrorMessage'
     description: 'The NextToken is invalid. Verify that it''s spelled correctly, and then try again.'
+  InvalidS3BucketException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The provided Amazon S3 bucket name is invalid. Please check your input with S3 bucket naming requirements and try again.
+  InvalidS3KeyException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The provided Amazon S3 key prefix is invalid. Please provide a valid S3 object key name.
   InvalidSampleRateException:
     type: object
     properties:
       message:
         $ref: '#/definitions/ErrorMessage'
     description: The specified sample rate is not valid.
+  InvalidSnsTopicArnException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The provided SNS topic ARN is invalid. Please provide a valid SNS topic ARN and try again.
   InvalidSsmlException:
     type: object
     properties:
       message:
         $ref: '#/definitions/ErrorMessage'
     description: 'The SSML you provided is invalid. Verify the SSML syntax, spelling of tags and values, and then try again.'
+  InvalidTaskIdException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The provided Task ID is not valid. Please provide a valid Task ID and try again.
   LanguageCode:
     type: string
     enum:
@@ -559,6 +733,18 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The pagination token to use in the next request to continue the listing of lexicons. <code>NextToken</code> is returned only if the response is truncated.
+  ListSpeechSynthesisTasksInput:
+    type: object
+    properties: {}
+  ListSpeechSynthesisTasksOutput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An opaque pagination token returned from the previous List operation in this request. If present, this indicates where to continue the listing.'
+      SynthesisTasks:
+        $ref: '#/definitions/SynthesisTasks'
+        description: 'SynthesisTask object that provides information from the specified task in the list request, including output format, creation time, task status, and so on.'
   MarksNotSupportedForFormatException:
     type: object
     properties:
@@ -577,6 +763,10 @@ definitions:
       message:
         $ref: '#/definitions/ErrorMessage'
     description: The maximum number of lexicons would be exceeded by this operation.
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
   NextToken:
     type: string
   OutputFormat:
@@ -586,6 +776,14 @@ definitions:
       - mp3
       - ogg_vorbis
       - pcm
+  OutputS3BucketName:
+    type: string
+    pattern: '^[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9]$'
+  OutputS3KeyPrefix:
+    type: string
+    pattern: '^[0-9a-zA-Z\/\!\-_\.\*\''\(\)]{0,800}$'
+  OutputUri:
+    type: string
   PutLexiconInput:
     type: object
     required:
@@ -613,6 +811,9 @@ definitions:
     description: An unknown condition has caused a service failure.
   Size:
     type: integer
+  SnsTopicArn:
+    type: string
+    pattern: '^arn:aws(-(cn|iso(-b)?|us-gov))?:sns:.*:\w{12}:.+$'
   SpeechMarkType:
     type: string
     enum:
@@ -631,6 +832,103 @@ definitions:
       message:
         $ref: '#/definitions/ErrorMessage'
     description: SSML speech marks are not supported for plain text-type input.
+  StartSpeechSynthesisTaskInput:
+    type: object
+    required:
+      - OutputFormat
+      - OutputS3BucketName
+      - Text
+      - VoiceId
+    properties:
+      LexiconNames:
+        $ref: '#/definitions/LexiconNameList'
+        description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. '
+      OutputFormat:
+        $ref: '#/definitions/OutputFormat'
+        description: 'The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. '
+      OutputS3BucketName:
+        $ref: '#/definitions/OutputS3BucketName'
+        description: Amazon S3 bucket name to which the output file will be saved.
+      OutputS3KeyPrefix:
+        $ref: '#/definitions/OutputS3KeyPrefix'
+        description: The Amazon S3 Key prefix for the output speech file.
+      SampleRate:
+        $ref: '#/definitions/SampleRate'
+        description: '<p>The audio frequency specified in Hz.</p> <p>The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050". The default value is "22050".</p> <p>Valid values for pcm are "8000" and "16000" The default value is "16000". </p>'
+      SnsTopicArn:
+        $ref: '#/definitions/SnsTopicArn'
+        description: ARN for the SNS topic optionally used for providing status notification for a speech synthesis task.
+      SpeechMarkTypes:
+        $ref: '#/definitions/SpeechMarkTypeList'
+        description: The type of speech marks returned for the input text.
+      Text:
+        $ref: '#/definitions/Text'
+        description: 'The input text to synthesize. If you specify ssml as the TextType, follow the SSML format for the input text. '
+      TextType:
+        $ref: '#/definitions/TextType'
+        description: 'Specifies whether the input text is plain text or SSML. The default value is plain text. '
+      VoiceId:
+        $ref: '#/definitions/VoiceId'
+        description: 'Voice ID to use for the synthesis. '
+  StartSpeechSynthesisTaskOutput:
+    type: object
+    properties:
+      SynthesisTask:
+        $ref: '#/definitions/SynthesisTask'
+        description: SynthesisTask object that provides information and attributes about a newly submitted speech synthesis task.
+  SynthesisTask:
+    type: object
+    properties:
+      TaskId:
+        $ref: '#/definitions/TaskId'
+        description: The Amazon Polly generated identifier for a speech synthesis task.
+      TaskStatus:
+        $ref: '#/definitions/TaskStatus'
+        description: Current status of the individual speech synthesis task.
+      TaskStatusReason:
+        $ref: '#/definitions/TaskStatusReason'
+        description: 'Reason for the current status of a specific speech synthesis task, including errors if the task has failed.'
+      OutputUri:
+        $ref: '#/definitions/OutputUri'
+        description: Pathway for the output speech file.
+      CreationTime:
+        $ref: '#/definitions/DateTime'
+        description: Timestamp for the time the synthesis task was started.
+      RequestCharacters:
+        $ref: '#/definitions/RequestCharacters'
+        description: Number of billable characters synthesized.
+      SnsTopicArn:
+        $ref: '#/definitions/SnsTopicArn'
+        description: ARN for the SNS topic optionally used for providing status notification for a speech synthesis task.
+      LexiconNames:
+        $ref: '#/definitions/LexiconNameList'
+        description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. '
+      OutputFormat:
+        $ref: '#/definitions/OutputFormat'
+        description: 'The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. '
+      SampleRate:
+        $ref: '#/definitions/SampleRate'
+        description: '<p>The audio frequency specified in Hz.</p> <p>The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050". The default value is "22050".</p> <p>Valid values for pcm are "8000" and "16000" The default value is "16000". </p>'
+      SpeechMarkTypes:
+        $ref: '#/definitions/SpeechMarkTypeList'
+        description: The type of speech marks returned for the input text.
+      TextType:
+        $ref: '#/definitions/TextType'
+        description: 'Specifies whether the input text is plain text or SSML. The default value is plain text. '
+      VoiceId:
+        $ref: '#/definitions/VoiceId'
+        description: 'Voice ID to use for the synthesis. '
+    description: SynthesisTask object that provides information about a speech synthesis task.
+  SynthesisTaskNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The Speech Synthesis task with requested Task ID cannot be found.
+  SynthesisTasks:
+    type: array
+    items:
+      $ref: '#/definitions/SynthesisTask'
   SynthesizeSpeechInput:
     type: object
     required:
@@ -677,6 +975,19 @@ definitions:
       AudioStream:
         $ref: '#/definitions/AudioStream'
         description: ' Stream containing the synthesized speech. '
+  TaskId:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TaskStatus:
+    type: string
+    enum:
+      - scheduled
+      - inProgress
+      - completed
+      - failed
+  TaskStatusReason:
+    type: string
   Text:
     type: string
   TextLengthExceededException:
@@ -684,7 +995,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/ErrorMessage'
-    description: 'The value of the "Text" parameter is longer than the accepted limits. The limit for input text is a maximum of 6000 characters total, of which no more than 3000 can be billed characters. SSML tags are not counted as billed characters.'
+    description: 'The value of the "Text" parameter is longer than the accepted limits. For the <code>SynthesizeSpeech</code> API, the limit for input text is a maximum of 6000 characters total, of which no more than 3000 can be billed characters. For the <code>SetSpeechSynthesisTask</code> API, the maximum is 200,000 characters, of which no more than 100,000 can be billed characters. SSML tags are not counted as billed characters.'
   TextType:
     type: string
     enum:

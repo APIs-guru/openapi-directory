@@ -279,6 +279,10 @@ paths:
           description: IncompatibleImageException
           schema:
             $ref: '#/definitions/IncompatibleImageException'
+        '489':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
       parameters:
         - name: body
           in: body
@@ -340,6 +344,10 @@ paths:
           description: IncompatibleImageException
           schema:
             $ref: '#/definitions/IncompatibleImageException'
+        '489':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
       parameters:
         - name: body
           in: body
@@ -631,6 +639,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteImagePermissions':
+    post:
+      operationId: DeleteImagePermissions
+      description: 'Deletes permissions for the specified private image. After you delete permissions for an image, AWS accounts to which you previously granted these permissions can no longer use the image.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteImagePermissionsResult'
+        '480':
+          description: ResourceNotAvailableException
+          schema:
+            $ref: '#/definitions/ResourceNotAvailableException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteImagePermissionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteStack':
     post:
       operationId: DeleteStack
@@ -788,6 +829,45 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeImagePermissions':
+    post:
+      operationId: DescribeImagePermissions
+      description: 'Retrieves a list that describes the permissions for a private image that you own. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeImagePermissionsResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeImagePermissionsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeImages':
     post:
       operationId: DescribeImages
@@ -798,6 +878,10 @@ paths:
           schema:
             $ref: '#/definitions/DescribeImagesResult'
         '480':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+        '481':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
@@ -807,6 +891,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeImagesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1344,6 +1438,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateImagePermissions':
+    post:
+      operationId: UpdateImagePermissions
+      description: 'Adds or updates permissions for the specified private image. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateImagePermissionsResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceNotAvailableException
+          schema:
+            $ref: '#/definitions/ResourceNotAvailableException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateImagePermissionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateStack':
     post:
       operationId: UpdateStack
@@ -1455,6 +1586,10 @@ definitions:
   Arn:
     type: string
     pattern: '^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+  ArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
   AssociateFleetRequest:
     type: object
     required:
@@ -1476,6 +1611,15 @@ definitions:
       - API
       - SAML
       - USERPOOL
+  AwsAccountId:
+    type: string
+    pattern: ^\d+$
+  AwsAccountIdList:
+    type: array
+    items:
+      $ref: '#/definitions/AwsAccountId'
+    minItems: 1
+    maxItems: 5
   Boolean:
     type: boolean
   BooleanObject:
@@ -1564,7 +1708,6 @@ definitions:
     type: object
     required:
       - Name
-      - ImageName
       - InstanceType
       - ComputeCapacity
     properties:
@@ -1574,6 +1717,9 @@ definitions:
       ImageName:
         $ref: '#/definitions/String'
         description: The name of the image used to create the fleet.
+      ImageArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the public, private, or shared image to use.'
       InstanceType:
         $ref: '#/definitions/String'
         description: '<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
@@ -1614,7 +1760,6 @@ definitions:
     type: object
     required:
       - Name
-      - ImageName
       - InstanceType
     properties:
       Name:
@@ -1623,6 +1768,9 @@ definitions:
       ImageName:
         $ref: '#/definitions/String'
         description: The name of the image used to create the builder.
+      ImageArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the public, private, or shared image to use.'
       InstanceType:
         $ref: '#/definitions/String'
         description: The instance type to use when launching the image builder.
@@ -1772,6 +1920,21 @@ definitions:
       ImageBuilder:
         $ref: '#/definitions/ImageBuilder'
         description: Information about the image builder.
+  DeleteImagePermissionsRequest:
+    type: object
+    required:
+      - Name
+      - SharedAccountId
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of the private image.
+      SharedAccountId:
+        $ref: '#/definitions/AwsAccountId'
+        description: The 12-digit ID of the AWS account for which to delete image permissions.
+  DeleteImagePermissionsResult:
+    type: object
+    properties: {}
   DeleteImageRequest:
     type: object
     required:
@@ -1857,6 +2020,35 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  DescribeImagePermissionsRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+        description: 'The name of the private image for which to describe permissions. The image must be one that you own. '
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum size of each results page.
+      SharedAwsAccountIds:
+        $ref: '#/definitions/AwsAccountIdList'
+        description: The 12-digit ID of one or more AWS accounts with which the image is shared.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.'
+  DescribeImagePermissionsResult:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of the private image.
+      SharedImagePermissionsList:
+        $ref: '#/definitions/SharedImagePermissionsList'
+        description: 'The permissions for a private image that you own. '
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.'
   DescribeImagesMaxResults:
     type: integer
     minimum: 0
@@ -1867,12 +2059,18 @@ definitions:
       Names:
         $ref: '#/definitions/StringList'
         description: The names of the images to describe.
+      Arns:
+        $ref: '#/definitions/ArnList'
+        description: 'The ARNs of the public, private, and shared images to describe.'
+      Type:
+        $ref: '#/definitions/VisibilityType'
+        description: 'The type of image (public, private, or shared) to describe. '
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.'
       MaxResults:
         $ref: '#/definitions/DescribeImagesMaxResults'
-        description: The maximum size of each results page.
+        description: The maximum size of each page of results.
   DescribeImagesResult:
     type: object
     properties:
@@ -1881,7 +2079,7 @@ definitions:
         description: Information about the images.
       NextToken:
         $ref: '#/definitions/String'
-        description: 'The pagination token used to retrieve the next page of results. If this value is empty, only the first page is retrieved.'
+        description: 'The pagination token to use to retrieve the next page of results. If there are no more pages, this value is null.'
   DescribeSessionsRequest:
     type: object
     required:
@@ -2023,7 +2221,6 @@ definitions:
     required:
       - Arn
       - Name
-      - ImageName
       - InstanceType
       - ComputeCapacityStatus
       - State
@@ -2043,6 +2240,9 @@ definitions:
       ImageName:
         $ref: '#/definitions/String'
         description: The name of the image used to create the fleet.
+      ImageArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN for the public, private, or shared image.'
       InstanceType:
         $ref: '#/definitions/String'
         description: The instance type to use when launching fleet instances.
@@ -2196,6 +2396,9 @@ definitions:
       AppstreamAgentVersion:
         $ref: '#/definitions/AppstreamAgentVersion'
         description: 'The version of the AppStream 2.0 agent to use for instances that are launched from this image. '
+      ImagePermissions:
+        $ref: '#/definitions/ImagePermissions'
+        description: The permissions to provide to the destination AWS account for the specified image.
     description: Describes an image.
   ImageBuilder:
     type: object
@@ -2283,6 +2486,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Image'
+  ImagePermissions:
+    type: object
+    properties:
+      allowFleet:
+        $ref: '#/definitions/BooleanObject'
+        description: Indicates whether the image can be used for a fleet.
+      allowImageBuilder:
+        $ref: '#/definitions/BooleanObject'
+        description: Indicates whether the image can be used for an image builder.
+    description: 'Describes the permissions for an image. '
   ImageState:
     type: string
     enum:
@@ -2395,6 +2608,10 @@ definitions:
         description: The information about the tags.
   Long:
     type: integer
+  MaxResults:
+    type: integer
+    minimum: 0
+    maximum: 500
   Metadata:
     type: array
     items:
@@ -2553,6 +2770,23 @@ definitions:
       - PENDING
       - EXPIRED
     description: Possible values for the state of a streaming session.
+  SharedImagePermissions:
+    type: object
+    required:
+      - sharedAccountId
+      - imagePermissions
+    properties:
+      sharedAccountId:
+        $ref: '#/definitions/AwsAccountId'
+        description: The 12-digit ID of the AWS account with which the image is shared.
+      imagePermissions:
+        $ref: '#/definitions/ImagePermissions'
+        description: Describes the permissions for a shared image.
+    description: Describes the permissions that are available to the specified AWS account for a shared image.
+  SharedImagePermissionsList:
+    type: array
+    items:
+      $ref: '#/definitions/SharedImagePermissions'
   Stack:
     type: object
     required:
@@ -2808,12 +3042,13 @@ definitions:
         description: Information about the Directory Config object.
   UpdateFleetRequest:
     type: object
-    required:
-      - Name
     properties:
       ImageName:
         $ref: '#/definitions/String'
         description: The name of the image used to create the fleet.
+      ImageArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the public, private, or shared image to use.'
       Name:
         $ref: '#/definitions/String'
         description: A unique name for the fleet.
@@ -2856,6 +3091,25 @@ definitions:
       Fleet:
         $ref: '#/definitions/Fleet'
         description: Information about the fleet.
+  UpdateImagePermissionsRequest:
+    type: object
+    required:
+      - Name
+      - SharedAccountId
+      - ImagePermissions
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of the private image.
+      SharedAccountId:
+        $ref: '#/definitions/AwsAccountId'
+        description: The 12-digit ID of the AWS account for which you want add or update image permissions.
+      ImagePermissions:
+        $ref: '#/definitions/ImagePermissions'
+        description: The permissions for the image.
+  UpdateImagePermissionsResult:
+    type: object
+    properties: {}
   UpdateStackRequest:
     type: object
     required:
@@ -2921,6 +3175,7 @@ definitions:
     enum:
       - PUBLIC
       - PRIVATE
+      - SHARED
   VpcConfig:
     type: object
     properties:

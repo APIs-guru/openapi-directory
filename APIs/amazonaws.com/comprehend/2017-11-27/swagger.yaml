@@ -275,6 +275,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#BatchDetectSyntax':
+    post:
+      operationId: BatchDetectSyntax
+      description: 'Inspects the text of a batch of documents for the syntax and part of speech of the words in the document and returns information about them. For more information, see <a>how-syntax</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchDetectSyntaxResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: TextSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/TextSizeLimitExceededException'
+        '482':
+          description: UnsupportedLanguageException
+          schema:
+            $ref: '#/definitions/UnsupportedLanguageException'
+        '483':
+          description: BatchSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/BatchSizeLimitExceededException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchDetectSyntaxRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeDominantLanguageDetectionJob':
     post:
       operationId: DescribeDominantLanguageDetectionJob
@@ -630,6 +675,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DetectSentimentRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DetectSyntax':
+    post:
+      operationId: DetectSyntax
+      description: 'Inspects text for syntax and the part of speech of words in the document. For more information, <a>how-syntax</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetectSyntaxResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: TextSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/TextSizeLimitExceededException'
+        '482':
+          description: UnsupportedLanguageException
+          schema:
+            $ref: '#/definitions/UnsupportedLanguageException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DetectSyntaxRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1083,7 +1169,7 @@ paths:
   '/#StopDominantLanguageDetectionJob':
     post:
       operationId: StopDominantLanguageDetectionJob
-      description: '<p>Stops a dominant language detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job will be marked for termination and put into the <code>STOPPING</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation will return a 400 Internal Request Exception. </p> <p>When a job is stopped, any document that has already been processed will be written to the output location.</p>'
+      description: '<p>Stops a dominant language detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>'
       responses:
         '200':
           description: Success
@@ -1120,7 +1206,7 @@ paths:
   '/#StopEntitiesDetectionJob':
     post:
       operationId: StopEntitiesDetectionJob
-      description: '<p>Stops an entities detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job will be marked for termination and put into the <code>STOPPING</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation will return a 400 Internal Request Exception. </p> <p>When a job is stopped, any document that has already been processed will be written to the output location.</p>'
+      description: '<p>Stops an entities detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>'
       responses:
         '200':
           description: Success
@@ -1157,7 +1243,7 @@ paths:
   '/#StopKeyPhrasesDetectionJob':
     post:
       operationId: StopKeyPhrasesDetectionJob
-      description: '<p>Stops a key phrases detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job will be marked for termination and put into the <code>STOPPING</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation will return a 400 Internal Request Exception. </p> <p>When a job is stopped, any document that has already been processed will be written to the output location.</p>'
+      description: '<p>Stops a key phrases detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>'
       responses:
         '200':
           description: Success
@@ -1194,7 +1280,7 @@ paths:
   '/#StopSentimentDetectionJob':
     post:
       operationId: StopSentimentDetectionJob
-      description: '<p>Stops a sentiment detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job will be marked for termination and put into the <code>STOPPING</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation will return a 400 Internal Request Exception. </p> <p>When a job is stopped, any document that has already been processed will be written to the output location.</p>'
+      description: '<p>Stops a sentiment detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is be stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>'
       responses:
         '200':
           description: Success
@@ -1362,6 +1448,40 @@ definitions:
     properties:
       ResultList:
         $ref: '#/definitions/ListOfDetectSentimentResult'
+        description: 'A list of objects containing the results of the operation. The results are sorted in ascending order by the <code>Index</code> field and match the order of the documents in the input list. If all of the documents contain an error, the <code>ResultList</code> is empty.'
+      ErrorList:
+        $ref: '#/definitions/BatchItemErrorList'
+        description: 'A list containing one object for each document that contained an error. The results are sorted in ascending order by the <code>Index</code> field and match the order of the documents in the input list. If there are no errors in the batch, the <code>ErrorList</code> is empty.'
+  BatchDetectSyntaxItemResult:
+    type: object
+    properties:
+      Index:
+        $ref: '#/definitions/Integer'
+        description: The zero-based index of the document in the input list.
+      SyntaxTokens:
+        $ref: '#/definitions/ListOfSyntaxTokens'
+        description: 'The syntax tokens for the words in the document, one token for each word.'
+    description: The result of calling the operation. The operation returns one object that is successfully processed by the operation.
+  BatchDetectSyntaxRequest:
+    type: object
+    required:
+      - TextList
+      - LanguageCode
+    properties:
+      TextList:
+        $ref: '#/definitions/StringList'
+        description: 'A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
+      LanguageCode:
+        $ref: '#/definitions/SyntaxLanguageCode'
+        description: The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+  BatchDetectSyntaxResponse:
+    type: object
+    required:
+      - ResultList
+      - ErrorList
+    properties:
+      ResultList:
+        $ref: '#/definitions/ListOfDetectSyntaxResult'
         description: 'A list of objects containing the results of the operation. The results are sorted in ascending order by the <code>Index</code> field and match the order of the documents in the input list. If all of the documents contain an error, the <code>ResultList</code> is empty.'
       ErrorList:
         $ref: '#/definitions/BatchItemErrorList'
@@ -1535,6 +1655,24 @@ definitions:
       SentimentScore:
         $ref: '#/definitions/SentimentScore'
         description: 'An object that lists the sentiments, and their corresponding confidence levels.'
+  DetectSyntaxRequest:
+    type: object
+    required:
+      - Text
+      - LanguageCode
+    properties:
+      Text:
+        $ref: '#/definitions/String'
+        description: 'A UTF-8 string. Each string must contain fewer that 5,000 bytes of UTF encoded characters.'
+      LanguageCode:
+        $ref: '#/definitions/SyntaxLanguageCode'
+        description: The language code of the input documents. You can specify English ("en") or Spanish ("es").
+  DetectSyntaxResponse:
+    type: object
+    properties:
+      SyntaxTokens:
+        $ref: '#/definitions/ListOfSyntaxTokens'
+        description: 'A collection of syntax tokens describing the text. For each token, the response provides the text, the token type, where the text begins and ends, and the level of confidence that Amazon Comprehend has that the token is correct. For a list of token types, see <a>how-syntax</a>.'
   DominantLanguage:
     type: object
     properties:
@@ -1588,6 +1726,9 @@ definitions:
       OutputDataConfig:
         $ref: '#/definitions/OutputDataConfig'
         description: The output data configuration that you supplied when you created the dominant language detection job.
+      DataAccessRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
     description: Provides information about a dominant language detection job.
   DominantLanguageDetectionJobPropertiesList:
     type: array
@@ -1639,6 +1780,9 @@ definitions:
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
         description: The language code of the input documents.
+      DataAccessRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
     description: Provides information about an entities detection job.
   EntitiesDetectionJobPropertiesList:
     type: array
@@ -1804,6 +1948,9 @@ definitions:
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
         description: The language code of the input documents.
+      DataAccessRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
     description: Provides information about a key phrases detection job.
   KeyPhrasesDetectionJobPropertiesList:
     type: array
@@ -1893,6 +2040,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BatchDetectSentimentItemResult'
+  ListOfDetectSyntaxResult:
+    type: array
+    items:
+      $ref: '#/definitions/BatchDetectSyntaxItemResult'
   ListOfDominantLanguages:
     type: array
     items:
@@ -1905,6 +2056,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/KeyPhrase'
+  ListOfSyntaxTokens:
+    type: array
+    items:
+      $ref: '#/definitions/SyntaxToken'
   ListSentimentDetectionJobsRequest:
     type: object
     properties:
@@ -1964,6 +2119,36 @@ definitions:
         $ref: '#/definitions/S3Uri'
         description: '<p>When you use the <code>OutputDataConfig</code> object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of the output file.</p> <p>When the topic detection job is finished, the service creates an output file in a directory specific to the job. The <code>S3Uri</code> field contains the location of the output file, called <code>output.tar.gz</code>. It is a compressed archive that contains the ouput of the operation.</p>'
     description: <p>Provides configuration parameters for the output of topic detection jobs.</p> <p/>
+  PartOfSpeechTag:
+    type: object
+    properties:
+      Tag:
+        $ref: '#/definitions/PartOfSpeechTagType'
+        description: Identifies the part of speech that the token represents.
+      Score:
+        $ref: '#/definitions/Float'
+        description: The confidence that Amazon Comprehend has that the part of speech was correctly identified.
+    description: 'Identifies the part of speech represented by the token and gives the confidence that Amazon Comprehend has that the part of speech was correctly identified. For more information about the parts of speech that Amazon Comprehend can identify, see <a>how-syntax</a>.'
+  PartOfSpeechTagType:
+    type: string
+    enum:
+      - ADJ
+      - ADP
+      - ADV
+      - AUX
+      - CONJ
+      - DET
+      - INTJ
+      - NOUN
+      - NUM
+      - O
+      - PART
+      - PRON
+      - PROPN
+      - PUNCT
+      - SCONJ
+      - SYM
+      - VERB
   S3Uri:
     type: string
     pattern: 's3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?'
@@ -2014,6 +2199,9 @@ definitions:
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
         description: The language code of the input documents.
+      DataAccessRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
     description: Provides information about a sentiment detection job.
   SentimentDetectionJobPropertiesList:
     type: array
@@ -2057,7 +2245,7 @@ definitions:
         description: Specifies where to send the output files.
       DataAccessRoleArn:
         $ref: '#/definitions/IamRoleArn'
-        description: The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+        description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.'
       JobName:
         $ref: '#/definitions/JobName'
         description: An identifier for the job.
@@ -2089,7 +2277,7 @@ definitions:
         description: Specifies where to send the output files.
       DataAccessRoleArn:
         $ref: '#/definitions/IamRoleArn'
-        description: The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+        description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.'
       JobName:
         $ref: '#/definitions/JobName'
         description: The identifier of the job.
@@ -2124,7 +2312,7 @@ definitions:
         description: Specifies where to send the output files.
       DataAccessRoleArn:
         $ref: '#/definitions/IamRoleArn'
-        description: The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+        description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.'
       JobName:
         $ref: '#/definitions/JobName'
         description: The identifier of the job.
@@ -2159,7 +2347,7 @@ definitions:
         description: 'Specifies where to send the output files. '
       DataAccessRoleArn:
         $ref: '#/definitions/IamRoleArn'
-        description: The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+        description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.'
       JobName:
         $ref: '#/definitions/JobName'
         description: The identifier of the job.
@@ -2193,7 +2381,7 @@ definitions:
         description: 'Specifies where to send the output files. The output is a compressed archive with two files, <code>topic-terms.csv</code> that lists the terms associated with each topic, and <code>doc-topics.csv</code> that lists the documents associated with each topic'
       DataAccessRoleArn:
         $ref: '#/definitions/IamRoleArn'
-        description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. '
+        description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.'
       JobName:
         $ref: '#/definitions/JobName'
         description: The identifier of the job.
@@ -2228,7 +2416,7 @@ definitions:
         description: The identifier of the dominant language detection job to stop.
       JobStatus:
         $ref: '#/definitions/JobStatus'
-        description: 'Either <code>STOPPING</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopDominantLanguageDetectionJob</code> operation.'
+        description: 'Either <code>STOP_REQUESTED</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopDominantLanguageDetectionJob</code> operation.'
   StopEntitiesDetectionJobRequest:
     type: object
     required:
@@ -2245,7 +2433,7 @@ definitions:
         description: The identifier of the entities detection job to stop.
       JobStatus:
         $ref: '#/definitions/JobStatus'
-        description: 'Either <code>STOPPING</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopEntitiesDetectionJob</code> operation.'
+        description: 'Either <code>STOP_REQUESTED</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopEntitiesDetectionJob</code> operation.'
   StopKeyPhrasesDetectionJobRequest:
     type: object
     required:
@@ -2262,7 +2450,7 @@ definitions:
         description: The identifier of the key phrases detection job to stop.
       JobStatus:
         $ref: '#/definitions/JobStatus'
-        description: 'Either <code>STOPPING</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopKeyPhrasesDetectionJob</code> operation.'
+        description: 'Either <code>STOP_REQUESTED</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopKeyPhrasesDetectionJob</code> operation.'
   StopSentimentDetectionJobRequest:
     type: object
     required:
@@ -2279,7 +2467,7 @@ definitions:
         description: The identifier of the sentiment detection job to stop.
       JobStatus:
         $ref: '#/definitions/JobStatus'
-        description: 'Either <code>STOPPING</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopSentimentDetectionJob</code> operation.'
+        description: 'Either <code>STOP_REQUESTED</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopSentimentDetectionJob</code> operation.'
   String:
     type: string
     minLength: 1
@@ -2287,6 +2475,29 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  SyntaxLanguageCode:
+    type: string
+    enum:
+      - en
+  SyntaxToken:
+    type: object
+    properties:
+      TokenId:
+        $ref: '#/definitions/Integer'
+        description: A unique identifier for a token.
+      Text:
+        $ref: '#/definitions/String'
+        description: The word that was recognized in the source text.
+      BeginOffset:
+        $ref: '#/definitions/Integer'
+        description: The zero-based offset from the beginning of the source text to the first character in the word.
+      EndOffset:
+        $ref: '#/definitions/Integer'
+        description: The zero-based offset from the beginning of the source text to the last character in the word.
+      PartOfSpeech:
+        $ref: '#/definitions/PartOfSpeechTag'
+        description: 'Provides the part of speech label and the confidence level that Amazon Comprehend has that the part of speech was correctly identified. For more information, see <a>how-syntax</a>.'
+    description: Represents a work in the input text that was recognized and assigned a part of speech. There is one syntax token record for each word in the source text.
   TextSizeLimitExceededException:
     type: object
     properties:

@@ -2668,6 +2668,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#LabelParameterVersion':
+    post:
+      operationId: LabelParameterVersion
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/LabelParameterVersionResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: TooManyUpdates
+          schema:
+            $ref: '#/definitions/TooManyUpdates'
+        '482':
+          description: ParameterNotFound
+          schema:
+            $ref: '#/definitions/ParameterNotFound'
+        '483':
+          description: ParameterVersionNotFound
+          schema:
+            $ref: '#/definitions/ParameterVersionNotFound'
+        '484':
+          description: ParameterVersionLabelLimitExceeded
+          schema:
+            $ref: '#/definitions/ParameterVersionLabelLimitExceeded'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/LabelParameterVersionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListAssociationVersions':
     post:
       operationId: ListAssociationVersions
@@ -8628,6 +8673,23 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagKey'
+  LabelParameterVersionRequest:
+    type: object
+    required:
+      - Name
+      - Labels
+    properties:
+      Name:
+        $ref: '#/definitions/PSParameterName'
+      ParameterVersion:
+        $ref: '#/definitions/PSParameterVersion'
+      Labels:
+        $ref: '#/definitions/ParameterLabelList'
+  LabelParameterVersionResult:
+    type: object
+    properties:
+      InvalidLabels:
+        $ref: '#/definitions/ParameterLabelList'
   LastResourceDataSyncMessage:
     type: string
   LastResourceDataSyncStatus:
@@ -9562,6 +9624,10 @@ definitions:
     type: string
     minLength: 1
     maxLength: 2048
+  PSParameterSelector:
+    type: string
+    minLength: 0
+    maxLength: 128
   PSParameterValue:
     type: string
     minLength: 1
@@ -9583,6 +9649,18 @@ definitions:
       Version:
         $ref: '#/definitions/PSParameterVersion'
         description: The parameter version.
+      Selector:
+        $ref: '#/definitions/PSParameterSelector'
+        description: '<p>Either the version number or the label used to retrieve the parameter value. Specify selectors by using one of the following formats:</p> <p>parameter_name:version</p> <p>parameter_name:label</p>'
+      SourceResult:
+        $ref: '#/definitions/String'
+        description: Applies to parameters that reference information in other AWS services. SourceResult is the raw result or response from the source.
+      LastModifiedDate:
+        $ref: '#/definitions/DateTime'
+        description: Date the parameter was last changed or updated and the parameter version was created.
+      ARN:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the parameter.
     description: An Amazon EC2 Systems Manager parameter in Parameter Store.
   ParameterAlreadyExists:
     type: object
@@ -9624,6 +9702,9 @@ definitions:
       Version:
         $ref: '#/definitions/PSParameterVersion'
         description: The parameter version.
+      Labels:
+        $ref: '#/definitions/ParameterLabelList'
+        description: Labels assigned to the parameter version.
     description: Information about parameter usage.
   ParameterHistoryList:
     type: array
@@ -9634,6 +9715,16 @@ definitions:
     pattern: '^([a-zA-Z0-9:/_-]+)$'
     minLength: 1
     maxLength: 256
+  ParameterLabel:
+    type: string
+    minLength: 1
+    maxLength: 100
+  ParameterLabelList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterLabel'
+    minItems: 1
+    maxItems: 10
   ParameterLimitExceeded:
     type: object
     properties:
@@ -9720,7 +9811,7 @@ definitions:
     description: <p>One or more filters. Use a filter to return a more specific list of results.</p> <note> <p>The <code>Name</code> field can't be used with the <a>GetParametersByPath</a> API action.</p> </note>
   ParameterStringFilterKey:
     type: string
-    pattern: 'tag:.+|Name|Type|KeyId|Path'
+    pattern: 'tag:.+|Name|Type|KeyId|Path|Label'
     minLength: 1
     maxLength: 132
   ParameterStringFilterList:
@@ -9753,6 +9844,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ParameterValue'
+  ParameterVersionLabelLimitExceeded:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
   ParameterVersionNotFound:
     type: object
     properties:
@@ -10904,16 +11000,16 @@ definitions:
         description: A user-specified list of parameters to override when executing a step.
       IsEnd:
         $ref: '#/definitions/Boolean'
-        description: Enable this option to stop an Automation execution at the end of a specific step. The Automation execution stops if the step execution failed or succeeded.
+        description: The flag which can be used to end automation no matter whether the step succeeds or fails.
       NextStep:
         $ref: '#/definitions/String'
-        description: 'Specifies which step in an Automation to process next after successfully completing a step. '
+        description: The next step after the step succeeds.
       IsCritical:
         $ref: '#/definitions/Boolean'
-        description: 'Enable this option to designate a step as critical for the successful completion of the Automation. If a step with this designation fails, then Automation reports the final status of the Automation as Failed. '
+        description: The flag which can be used to help decide whether the failure of current step leads to the Automation failure.
       ValidNextSteps:
         $ref: '#/definitions/ValidNextStepList'
-        description: 'ValidNextSteps offer different strategies for managing an Automation workflow when a step finishes. Automation dynamically processes ValidNextSteps when a step is completed. For example, you can specify <code>Abort</code> to stop the Automation when a step fails or <code>Continue</code> to ignore the failure of the current step and allow Automation to continue processing the next step. You can also specify <code>step:<i>step_name</i> </code> to jump to a designated step after a step succeeds. The result of the current step dynamically determines the ValidNextSteps. If a step finishes and no ValidNextStep is designated, then the Automation stops.'
+        description: 'Strategies used when step fails, we support Continue and Abort. Abort will fail the automation when the step fails. Continue will ignore the failure of current step and allow automation to execute the next step. With conditional branching, we add step:stepName to support the automation to go to another specific step.'
     description: Detailed information about an the execution state of an Automation step.
   StepExecutionFilter:
     type: object

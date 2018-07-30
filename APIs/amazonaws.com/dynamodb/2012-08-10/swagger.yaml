@@ -1524,6 +1524,116 @@ definitions:
         $ref: '#/definitions/AttributeAction'
         description: '<p>Specifies how to perform the update. Valid values are <code>PUT</code> (default), <code>DELETE</code>, and <code>ADD</code>. The behavior depends on whether the specified primary key already exists in the table.</p> <p> <b>If an item with the specified <i>Key</i> is found in the table:</b> </p> <ul> <li> <p> <code>PUT</code> - Adds the specified attribute to the item. If the attribute already exists, it is replaced by the new value. </p> </li> <li> <p> <code>DELETE</code> - If no value is specified, the attribute and its value are removed from the item. The data type of the specified value must match the existing value''s data type.</p> <p>If a <i>set</i> of values is specified, then those values are subtracted from the old set. For example, if the attribute value was the set <code>[a,b,c]</code> and the <code>DELETE</code> action specified <code>[a,c]</code>, then the final attribute value would be <code>[b]</code>. Specifying an empty set is an error.</p> </li> <li> <p> <code>ADD</code> - If the attribute does not already exist, then the attribute and its values are added to the item. If the attribute does exist, then the behavior of <code>ADD</code> depends on the data type of the attribute:</p> <ul> <li> <p>If the existing attribute is a number, and if <code>Value</code> is also a number, then the <code>Value</code> is mathematically added to the existing attribute. If <code>Value</code> is a negative number, then it is subtracted from the existing attribute.</p> <note> <p> If you use <code>ADD</code> to increment or decrement a number value for an item that doesn''t exist before the update, DynamoDB uses 0 as the initial value.</p> <p>In addition, if you use <code>ADD</code> to update an existing item, and intend to increment or decrement an attribute value which does not yet exist, DynamoDB uses <code>0</code> as the initial value. For example, suppose that the item you want to update does not yet have an attribute named <i>itemcount</i>, but you decide to <code>ADD</code> the number <code>3</code> to this attribute anyway, even though it currently does not exist. DynamoDB will create the <i>itemcount</i> attribute, set its initial value to <code>0</code>, and finally add <code>3</code> to it. The result will be a new <i>itemcount</i> attribute in the item, with a value of <code>3</code>.</p> </note> </li> <li> <p>If the existing data type is a set, and if the <code>Value</code> is also a set, then the <code>Value</code> is added to the existing set. (This is a <i>set</i> operation, not mathematical addition.) For example, if the attribute value was the set <code>[1,2]</code>, and the <code>ADD</code> action specified <code>[3]</code>, then the final attribute value would be <code>[1,2,3]</code>. An error occurs if an Add action is specified for a set attribute and the attribute type specified does not match the existing set type. </p> <p>Both sets must have the same primitive data type. For example, if the existing data type is a set of strings, the <code>Value</code> must also be a set of strings. The same holds true for number sets and binary sets.</p> </li> </ul> <p>This action is only valid for an existing attribute whose data type is number or is a set. Do not use <code>ADD</code> for any other data types.</p> </li> </ul> <p> <b>If no item with the specified <i>Key</i> is found:</b> </p> <ul> <li> <p> <code>PUT</code> - DynamoDB creates a new item with the specified primary key, and then adds the attribute. </p> </li> <li> <p> <code>DELETE</code> - Nothing happens; there is no attribute to delete.</p> </li> <li> <p> <code>ADD</code> - DynamoDB creates an item with the supplied primary key and number (or set of numbers) for the attribute value. The only data types allowed are number and number set; no other data types can be specified.</p> </li> </ul>'
     description: '<p>For the <code>UpdateItem</code> operation, represents the attributes to be modified, the action to perform on each, and the new value for each.</p> <note> <p>You cannot use <code>UpdateItem</code> to update any primary key attributes. Instead, you will need to delete the item, and then use <code>PutItem</code> to create a new item with new attributes.</p> </note> <p>Attribute values cannot be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests with empty values will be rejected with a <code>ValidationException</code> exception.</p>'
+  AutoScalingPolicyDescription:
+    type: object
+    properties:
+      PolicyName:
+        $ref: '#/definitions/AutoScalingPolicyName'
+        description: The name of the scaling policy.
+      TargetTrackingScalingPolicyConfiguration:
+        $ref: '#/definitions/AutoScalingTargetTrackingScalingPolicyConfigurationDescription'
+        description: Represents a target tracking scaling policy configuration.
+    description: Represents the properties of the scaling policy.
+  AutoScalingPolicyDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/AutoScalingPolicyDescription'
+  AutoScalingPolicyName:
+    type: string
+    pattern: '\p{Print}+'
+    minLength: 1
+    maxLength: 256
+  AutoScalingPolicyUpdate:
+    type: object
+    required:
+      - TargetTrackingScalingPolicyConfiguration
+    properties:
+      PolicyName:
+        $ref: '#/definitions/AutoScalingPolicyName'
+        description: The name of the scaling policy.
+      TargetTrackingScalingPolicyConfiguration:
+        $ref: '#/definitions/AutoScalingTargetTrackingScalingPolicyConfigurationUpdate'
+        description: Represents a target tracking scaling policy configuration.
+    description: Represents the autoscaling policy to be modified.
+  AutoScalingRoleArn:
+    type: string
+    minLength: 1
+    maxLength: 1600
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  AutoScalingSettingsDescription:
+    type: object
+    properties:
+      MinimumUnits:
+        $ref: '#/definitions/PositiveLongObject'
+        description: The minimum capacity units that a global table or global secondary index should be scaled down to.
+      MaximumUnits:
+        $ref: '#/definitions/PositiveLongObject'
+        description: The maximum capacity units that a global table or global secondary index should be scaled up to.
+      AutoScalingDisabled:
+        $ref: '#/definitions/BooleanObject'
+        description: Disabled autoscaling for this global table or global secondary index.
+      AutoScalingRoleArn:
+        $ref: '#/definitions/String'
+        description: Role ARN used for configuring autoScaling policy.
+      ScalingPolicies:
+        $ref: '#/definitions/AutoScalingPolicyDescriptionList'
+        description: Information about the scaling policies.
+    description: Represents the autoscaling settings for a global table or global secondary index.
+  AutoScalingSettingsUpdate:
+    type: object
+    properties:
+      MinimumUnits:
+        $ref: '#/definitions/PositiveLongObject'
+        description: The minimum capacity units that a global table or global secondary index should be scaled down to.
+      MaximumUnits:
+        $ref: '#/definitions/PositiveLongObject'
+        description: The maximum capacity units that a global table or global secondary index should be scaled up to.
+      AutoScalingDisabled:
+        $ref: '#/definitions/BooleanObject'
+        description: Disabled autoscaling for this global table or global secondary index.
+      AutoScalingRoleArn:
+        $ref: '#/definitions/AutoScalingRoleArn'
+        description: Role ARN used for configuring autoscaling policy.
+      ScalingPolicyUpdate:
+        $ref: '#/definitions/AutoScalingPolicyUpdate'
+        description: The scaling policy to apply for scaling target global table or global secondary index capacity units.
+    description: Represents the autoscaling settings to be modified for a global table or global secondary index.
+  AutoScalingTargetTrackingScalingPolicyConfigurationDescription:
+    type: object
+    required:
+      - TargetValue
+    properties:
+      DisableScaleIn:
+        $ref: '#/definitions/BooleanObject'
+        description: 'Indicates whether scale in by the target tracking policy is disabled. If the value is true, scale in is disabled and the target tracking policy won''t remove capacity from the scalable resource. Otherwise, scale in is enabled and the target tracking policy can remove capacity from the scalable resource. The default value is false.'
+      ScaleInCooldown:
+        $ref: '#/definitions/IntegerObject'
+        description: 'The amount of time, in seconds, after a scale in activity completes before another scale in activity can start. The cooldown period is used to block subsequent scale in requests until it has expired. You should scale in conservatively to protect your application''s availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, application autoscaling scales out your scalable target immediately. '
+      ScaleOutCooldown:
+        $ref: '#/definitions/IntegerObject'
+        description: 'The amount of time, in seconds, after a scale out activity completes before another scale out activity can start. While the cooldown period is in effect, the capacity that has been added by the previous scale out event that initiated the cooldown is calculated as part of the desired capacity for the next scale out. You should continuously (but not excessively) scale out.'
+      TargetValue:
+        $ref: '#/definitions/Double'
+        description: The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
+    description: Represents the properties of a target tracking scaling policy.
+  AutoScalingTargetTrackingScalingPolicyConfigurationUpdate:
+    type: object
+    required:
+      - TargetValue
+    properties:
+      DisableScaleIn:
+        $ref: '#/definitions/BooleanObject'
+        description: 'Indicates whether scale in by the target tracking policy is disabled. If the value is true, scale in is disabled and the target tracking policy won''t remove capacity from the scalable resource. Otherwise, scale in is enabled and the target tracking policy can remove capacity from the scalable resource. The default value is false.'
+      ScaleInCooldown:
+        $ref: '#/definitions/IntegerObject'
+        description: 'The amount of time, in seconds, after a scale in activity completes before another scale in activity can start. The cooldown period is used to block subsequent scale in requests until it has expired. You should scale in conservatively to protect your application''s availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, application autoscaling scales out your scalable target immediately. '
+      ScaleOutCooldown:
+        $ref: '#/definitions/IntegerObject'
+        description: 'The amount of time, in seconds, after a scale out activity completes before another scale out activity can start. While the cooldown period is in effect, the capacity that has been added by the previous scale out event that initiated the cooldown is calculated as part of the desired capacity for the next scale out. You should continuously (but not excessively) scale out.'
+      TargetValue:
+        $ref: '#/definitions/Double'
+        description: The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
+    description: Represents the settings of a target tracking scaling policy that will be modified.
   Backfilling:
     type: boolean
   BackupArn:
@@ -2289,6 +2399,9 @@ definitions:
       TimeToLiveDescription:
         $ref: '#/definitions/TimeToLiveDescription'
         description: <p/>
+  Double:
+    type: number
+    format: double
   ErrorMessage:
     type: string
   ExpectedAttributeMap:
@@ -2544,6 +2657,9 @@ definitions:
       ProvisionedWriteCapacityUnits:
         $ref: '#/definitions/PositiveLongObject'
         description: 'The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException.</code> '
+      ProvisionedWriteCapacityAutoScalingSettingsUpdate:
+        $ref: '#/definitions/AutoScalingSettingsUpdate'
+        description: AutoScaling settings for managing a global secondary index's write capacity units.
     description: Represents the settings of a global secondary index for a global table that will be modified.
   GlobalTableGlobalSecondaryIndexSettingsUpdateList:
     type: array
@@ -2587,6 +2703,8 @@ definitions:
       - DELETING
       - ACTIVE
   Integer:
+    type: integer
+  IntegerObject:
     type: integer
   InternalServerError:
     type: object
@@ -3242,9 +3360,15 @@ definitions:
       ProvisionedReadCapacityUnits:
         $ref: '#/definitions/PositiveLongObject'
         description: The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>.
+      ProvisionedReadCapacityAutoScalingSettings:
+        $ref: '#/definitions/AutoScalingSettingsDescription'
+        description: Autoscaling settings for a global secondary index replica's read capacity units.
       ProvisionedWriteCapacityUnits:
         $ref: '#/definitions/PositiveLongObject'
         description: The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException</code>.
+      ProvisionedWriteCapacityAutoScalingSettings:
+        $ref: '#/definitions/AutoScalingSettingsDescription'
+        description: AutoScaling settings for a global secondary index replica's write capacity units.
     description: Represents the properties of a global secondary index.
   ReplicaGlobalSecondaryIndexSettingsDescriptionList:
     type: array
@@ -3261,6 +3385,9 @@ definitions:
       ProvisionedReadCapacityUnits:
         $ref: '#/definitions/PositiveLongObject'
         description: The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>.
+      ProvisionedReadCapacityAutoScalingSettingsUpdate:
+        $ref: '#/definitions/AutoScalingSettingsUpdate'
+        description: Autoscaling settings for managing a global secondary index replica's read capacity units.
     description: Represents the settings of a global secondary index for a global table that will be modified.
   ReplicaGlobalSecondaryIndexSettingsUpdateList:
     type: array
@@ -3292,9 +3419,15 @@ definitions:
       ReplicaProvisionedReadCapacityUnits:
         $ref: '#/definitions/PositiveLongObject'
         description: 'The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>. '
+      ReplicaProvisionedReadCapacityAutoScalingSettings:
+        $ref: '#/definitions/AutoScalingSettingsDescription'
+        description: Autoscaling settings for a global table replica's read capacity units.
       ReplicaProvisionedWriteCapacityUnits:
         $ref: '#/definitions/PositiveLongObject'
         description: 'The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>.'
+      ReplicaProvisionedWriteCapacityAutoScalingSettings:
+        $ref: '#/definitions/AutoScalingSettingsDescription'
+        description: AutoScaling settings for a global table replica's write capacity units.
       ReplicaGlobalSecondaryIndexSettings:
         $ref: '#/definitions/ReplicaGlobalSecondaryIndexSettingsDescriptionList'
         description: Replica global secondary index settings for the global table.
@@ -3314,6 +3447,9 @@ definitions:
       ReplicaProvisionedReadCapacityUnits:
         $ref: '#/definitions/PositiveLongObject'
         description: 'The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>. '
+      ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate:
+        $ref: '#/definitions/AutoScalingSettingsUpdate'
+        description: Autoscaling settings for managing a global table replica's read capacity units.
       ReplicaGlobalSecondaryIndexSettingsUpdate:
         $ref: '#/definitions/ReplicaGlobalSecondaryIndexSettingsUpdateList'
         description: Represents the settings of a global secondary index for a global table that will be modified.
@@ -3945,6 +4081,9 @@ definitions:
       GlobalTableProvisionedWriteCapacityUnits:
         $ref: '#/definitions/PositiveLongObject'
         description: 'The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException.</code> '
+      GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate:
+        $ref: '#/definitions/AutoScalingSettingsUpdate'
+        description: AutoScaling settings for managing provisioned write capacity for the global table.
       GlobalTableGlobalSecondaryIndexSettingsUpdate:
         $ref: '#/definitions/GlobalTableGlobalSecondaryIndexSettingsUpdateList'
         description: Represents the settings of a global secondary index for a global table that will be modified.
