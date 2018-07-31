@@ -18,7 +18,7 @@ info:
     - open_data
   x-logo:
     backgroundColor: '#FFFFFF'
-    url: 'https://pbs.twimg.com/profile_images/3189440223/bdf15148765709ca93c66597839b5589_400x400.png'
+    url: 'https://twitter.com/aucklandmuseum/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'http://api.aucklandmuseum.com/apidoc'
@@ -193,7 +193,7 @@ paths:
         You can execute your [SPARQL](http://www.w3.org/TR/rdf-sparql-query/) queries against this endpoint.
 
         The sparql query should be provided as the value of the request parameter `query`.
-        Set the `Accept` header to `application/sparql-results+xml` to get results in XML. Set it to `application/sparql-results+json` to get results in JSON. 
+        Set the `Accept` header to `application/sparql-results+xml` to get results in XML. Set it to `application/sparql-results+json` to get results in JSON.
 
         **Note:** This endpoints supports [JSON-P](http://json-p.org/). In order to get a JSON-P response, set the query parameter `callback` to your preferred callback function name. The default function name is `callback()`. When using JSON-P, there is no need to set the `Accept` header because the response will always be in `application/javascript`.
       operationId: get sparql
@@ -234,7 +234,7 @@ paths:
       description: |
         You can execute your [SPARQL](http://www.w3.org/TR/rdf-sparql-query/) queries against this endpoint.
         The sparql query should be provided as the value of the request parameter `query`.
-        Set the `Accept` header to `application/sparql-results+xml` to get results in XML. Set it to `application/sparql-results+json` to get results in JSON. 
+        Set the `Accept` header to `application/sparql-results+xml` to get results in XML. Set it to `application/sparql-results+json` to get results in JSON.
       operationId: post sparql
       parameters:
         - description: sparql query
