@@ -19,7 +19,7 @@ info:
   x-apisguru-categories:
     - iot
   x-logo:
-    url: 'https://dev.netatmo.com/images/common/netatmo-connect-horiz.png'
+    url: 'https://twitter.com/netatmo/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/cbornet/netatmo-swagger-decl/master/swagger.json'
@@ -458,7 +458,7 @@ paths:
           type: array
         - description: |
             Starting timestamp (utc) of the requested measurements.
-            Please note measurement retrieving is limited to 1024 measurements. 
+            Please note measurement retrieving is limited to 1024 measurements.
           format: int32
           in: query
           name: date_begin
@@ -466,7 +466,7 @@ paths:
           type: integer
         - description: |
             Ending timestamp (utc) of the request measurements.
-            If you want only the last measurement, do not provide date_begin, and set date_end to "last". 
+            If you want only the last measurement, do not provide date_begin, and set date_end to "last".
           in: query
           name: date_end
           required: false
@@ -483,7 +483,7 @@ paths:
             If you build a mobile app and bandwith usage is an issue, use optimize = true.
             Use optimize = false, for an easier parse. In this case, values are indexed by sorted timestamp.
             Example of un-optimized response :
-            {"status": "ok", 
+            {"status": "ok",
               "body": {
                 "1347575400": [18.3,39],
                 "1347586200": [20.6,48]
@@ -494,7 +494,7 @@ paths:
               "body": [
                 {"beg_time": 1347575400,
                  "step_time": 10800,
-                 "value": 
+                 "value":
                     [[18.3,39],
                     [ 20.6,48]]
                 }],
@@ -1262,14 +1262,14 @@ definitions:
           INDOOR_BATTERY_LEVEL_MEDIUM = 4920
           INDOOR_BATTERY_LEVEL_LOW = 4560
           "Below 4560: very low" |
-            
+
           "Raingauge and outdoor module Battery range: 6000 ... 3600" |
           BATTERY_LEVEL_FULL = 5500
           BATTERY_LEVEL_HIGH = 5000
           BATTERY_LEVEL_MEDIUM = 4500
           BATTERY_LEVEL_LOW = 4000
           "Below 4000: very low" |
-            
+
           "Thermostat Battery range: 4500 ... 3000" |
           THERMOSTAT_BATTERY_LEVEL_FULL = 4100
           THERMOSTAT_BATTERY_LEVEL_HIGH = 3600
@@ -1305,7 +1305,7 @@ definitions:
       rf_status:
         description: |
           "It contains the current radio status. The different thresholds to take into account are :" |
-          RADIO_THRESHOLD_SIGNAL_LOW = 90 
+          RADIO_THRESHOLD_SIGNAL_LOW = 90
           RADIO_THRESHOLD_SIGNAL_MEDIUM = 80
           RADIO_THRESHOLD_SIGNAL_HIGH = 70
           RADIO_THRESHOLD_SIGNAL_FULL = 60
@@ -1331,7 +1331,7 @@ definitions:
     properties:
       schedule_id:
         description: |
-          Id of the schedule. It can be use with the method "switchschedule" 
+          Id of the schedule. It can be use with the method "switchschedule"
         type: string
   NANewScheduleResponse:
     properties:
@@ -1538,14 +1538,14 @@ definitions:
           INDOOR_BATTERY_LEVEL_MEDIUM = 4920
           INDOOR_BATTERY_LEVEL_LOW = 4560
           "Below 4560: very low" |
-            
+
           "Raingauge and outdoor module Battery range: 6000 ... 3600" |
           BATTERY_LEVEL_FULL = 5500
           BATTERY_LEVEL_HIGH = 5000
           BATTERY_LEVEL_MEDIUM = 4500
           BATTERY_LEVEL_LOW = 4000
           "Below 4000: very low" |
-            
+
           "Thermostat Battery range: 4500 ... 3000" |
           THERMOSTAT_BATTERY_LEVEL_FULL = 4100
           THERMOSTAT_BATTERY_LEVEL_HIGH = 3600
@@ -1578,7 +1578,7 @@ definitions:
       rf_status:
         description: |
           "It contains the current radio status. The different thresholds to take into account are :" |
-          RADIO_THRESHOLD_SIGNAL_LOW = 90 
+          RADIO_THRESHOLD_SIGNAL_LOW = 90
           RADIO_THRESHOLD_SIGNAL_MEDIUM = 80
           RADIO_THRESHOLD_SIGNAL_HIGH = 70
           RADIO_THRESHOLD_SIGNAL_FULL = 60
@@ -1688,14 +1688,14 @@ definitions:
           INDOOR_BATTERY_LEVEL_MEDIUM = 4920
           INDOOR_BATTERY_LEVEL_LOW = 4560
           "Below 4560: very low" |
-            
+
           "Raingauge and outdoor module Battery range: 6000 ... 3600" |
           BATTERY_LEVEL_FULL = 5500
           BATTERY_LEVEL_HIGH = 5000
           BATTERY_LEVEL_MEDIUM = 4500
           BATTERY_LEVEL_LOW = 4000
           "Below 4000: very low" |
-            
+
           "Thermostat Battery range: 4500 ... 3000" |
           THERMOSTAT_BATTERY_LEVEL_FULL = 4100
           THERMOSTAT_BATTERY_LEVEL_HIGH = 3600
@@ -1721,7 +1721,7 @@ definitions:
       rf_status:
         description: |
           "It contains the current radio status. The different thresholds to take into account are :" |
-          RADIO_THRESHOLD_SIGNAL_LOW = 90 
+          RADIO_THRESHOLD_SIGNAL_LOW = 90
           RADIO_THRESHOLD_SIGNAL_MEDIUM = 80
           RADIO_THRESHOLD_SIGNAL_HIGH = 70
           RADIO_THRESHOLD_SIGNAL_FULL = 60
