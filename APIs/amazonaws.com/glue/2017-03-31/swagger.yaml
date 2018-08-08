@@ -4219,7 +4219,10 @@ definitions:
         description: The subnet ID for the new DevEndpoint to use.
       PublicKey:
         $ref: '#/definitions/GenericString'
-        description: The public key to use for authentication.
+        description: 'The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.'
+      PublicKeys:
+        $ref: '#/definitions/PublicKeysList'
+        description: '<p>A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.</p> <note> <p>If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the <code>UpdateDevEndpoint</code> API with the public key content in the <code>deletePublicKeys</code> attribute, and the list of new keys in the <code>addPublicKeys</code> attribute.</p> </note>'
       NumberOfNodes:
         $ref: '#/definitions/IntegerValue'
         description: The number of AWS Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.
@@ -4756,7 +4759,7 @@ definitions:
         description: The YARN endpoint address used by this DevEndpoint.
       PrivateAddress:
         $ref: '#/definitions/GenericString'
-        description: The private address used by this DevEndpoint.
+        description: 'A private DNS to access the DevEndpoint within a VPC, if the DevEndpoint is created within one.'
       ZeppelinRemoteSparkInterpreterPort:
         $ref: '#/definitions/IntegerValue'
         description: The Apache Zeppelin port for the remote Apache Spark interpreter.
@@ -4795,7 +4798,10 @@ definitions:
         description: The point in time at which this DevEndpoint was last modified.
       PublicKey:
         $ref: '#/definitions/GenericString'
-        description: The public key to be used by this DevEndpoint for authentication.
+        description: 'The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.'
+      PublicKeys:
+        $ref: '#/definitions/PublicKeysList'
+        description: '<p>A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.</p> <note> <p>If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the <code>UpdateDevEndpoint</code> API with the public key content in the <code>deletePublicKeys</code> attribute, and the list of new keys in the <code>addPublicKeys</code> attribute.</p> </note>'
     description: A development endpoint where a developer can remotely debug ETL scripts.
   DevEndpointCustomLibraries:
     type: object
@@ -6138,6 +6144,11 @@ definitions:
       - USER
       - ROLE
       - GROUP
+  PublicKeysList:
+    type: array
+    items:
+      $ref: '#/definitions/GenericString'
+    maxItems: 5
   PythonScript:
     type: string
   ResetJobBookmarkRequest:
@@ -6806,6 +6817,12 @@ definitions:
       PublicKey:
         $ref: '#/definitions/GenericString'
         description: The public key for the DevEndpoint to use.
+      AddPublicKeys:
+        $ref: '#/definitions/PublicKeysList'
+        description: The list of public keys for the DevEndpoint to use.
+      DeletePublicKeys:
+        $ref: '#/definitions/PublicKeysList'
+        description: 'The list of public keys to be deleted from the DevEndpoint. '
       CustomLibraries:
         $ref: '#/definitions/DevEndpointCustomLibraries'
         description: Custom Python or Java libraries to be loaded in the DevEndpoint.

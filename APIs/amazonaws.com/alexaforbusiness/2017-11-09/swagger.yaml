@@ -868,7 +868,7 @@ paths:
   '/#ListDeviceEvents':
     post:
       operationId: ListDeviceEvents
-      description: 'Lists the Device Event history for up to 30 days. If EventType isn''t specified in the request, this returns a list of all device events in reverse chronological order. If EventType is specified, this returns a list of device events for that EventType in reverse chronological order. '
+      description: 'Lists the device event history, including device connection status, for up to 30 days.'
       responses:
         '200':
           description: Success
@@ -942,7 +942,7 @@ paths:
   '/#ListTags':
     post:
       operationId: ListTags
-      description: Lists all tags for a specific resource.
+      description: Lists all tags for the specified resource.
       responses:
         '200':
           description: Success
@@ -2128,6 +2128,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/ErrorMessage'
+    description: The request failed because this device is no longer registered and therefore no longer managed by this account.
   DeviceSerialNumber:
     type: string
     pattern: '[a-zA-Z0-9]{1,200}'
@@ -2393,22 +2394,22 @@ definitions:
         description: The ARN of a device.
       EventType:
         $ref: '#/definitions/DeviceEventType'
-        description: The event type to filter device events.
+        description: 'The event type to filter device events. If EventType isn''t specified, this returns a list of all device events in reverse chronological order. If EventType is specified, this returns a list of device events for that EventType in reverse chronological order. '
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults. When the end of results is reached, the response has a value of null.'
       MaxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. Required. '
+        description: 'The maximum number of results to include in the response. The default value is 50. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. '
   ListDeviceEventsResponse:
     type: object
     properties:
       DeviceEvents:
         $ref: '#/definitions/DeviceEventList'
-        description: <p/>
+        description: The device events requested for the device ARN.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: <p/>
+        description: The token returned to indicate that there is more data available.
   ListSkillsRequest:
     type: object
     properties:
@@ -2437,7 +2438,7 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the specific resource for which to list tags. Required.
+        description: The ARN of the specified resource for which to list tags.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. '
@@ -2449,7 +2450,7 @@ definitions:
     properties:
       Tags:
         $ref: '#/definitions/TagList'
-        description: The list of tags requested for the specific resource.
+        description: The tags requested for the specified resource.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token returned to indicate that there is more data available.

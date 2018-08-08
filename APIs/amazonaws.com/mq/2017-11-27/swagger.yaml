@@ -113,13 +113,13 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
         '481':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '482':
           description: UnauthorizedException
           schema:
             $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
         '483':
           description: ConflictException
           schema:
@@ -173,7 +173,7 @@ paths:
   /v1/configurations:
     post:
       operationId: CreateConfiguration
-      description: 'Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version). Note: If the configuration name already exists, Amazon MQ doesn''t create a configuration.'
+      description: Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
       responses:
         '200':
           description: Success
@@ -794,10 +794,10 @@ definitions:
     properties:
       ErrorAttribute:
         $ref: '#/definitions/__string'
-        description: The error attribute.
+        description: The attribute which caused the error.
       Message:
         $ref: '#/definitions/__string'
-        description: The error message.
+        description: The explanation of the error.
     description: Returns information about an error.
   BrokerInstance:
     type: object
@@ -806,8 +806,11 @@ definitions:
         $ref: '#/definitions/__string'
         description: The URL of the broker's ActiveMQ Web Console.
       Endpoints:
-        $ref: '#/definitions/ListOf__string'
+        $ref: '#/definitions/__listOf__string'
         description: The broker's wire-level protocol endpoints.
+      IpAddress:
+        $ref: '#/definitions/__string'
+        description: The IP address of the ENI attached to the broker.
     description: Returns information about all brokers.
   BrokerState:
     type: string
@@ -817,7 +820,7 @@ definitions:
       - DELETION_IN_PROGRESS
       - RUNNING
       - REBOOT_IN_PROGRESS
-    description: 'The status of the broker. Possible values: CREATION_IN_PROGRESS, CREATION_FAILED, DELETION_IN_PROGRESS, RUNNING, REBOOT_IN_PROGRESS'
+    description: The status of the broker.
   BrokerSummary:
     type: object
     properties:
@@ -832,13 +835,16 @@ definitions:
         description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
       BrokerState:
         $ref: '#/definitions/BrokerState'
-        description: 'The status of the broker. Possible values: CREATION_IN_PROGRESS, CREATION_FAILED, DELETION_IN_PROGRESS, RUNNING, REBOOT_IN_PROGRESS'
+        description: The status of the broker.
+      Created:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The time when the broker was created.
       DeploymentMode:
         $ref: '#/definitions/DeploymentMode'
-        description: 'Required. The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability.'
+        description: Required. The deployment mode of the broker.
       HostInstanceType:
         $ref: '#/definitions/__string'
-        description: 'The broker''s instance type. Possible values: mq.t2.micro, mq.m4.large'
+        description: The broker's instance type.
     description: The Amazon Resource Name (ARN) of the broker.
   ChangeType:
     type: string
@@ -846,13 +852,16 @@ definitions:
       - CREATE
       - UPDATE
       - DELETE
-    description: 'The type of change pending for the ActiveMQ user. Possible values: CREATE, UPDATE, DELETE'
+    description: The type of change pending for the ActiveMQ user.
   Configuration:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
         description: Required. The ARN of the configuration.
+      Created:
+        $ref: '#/definitions/__timestampIso8601'
+        description: Required. The date and time of the configuration revision.
       Description:
         $ref: '#/definitions/__string'
         description: Required. The description of the configuration.
@@ -880,17 +889,20 @@ definitions:
         description: Required. The unique ID that Amazon MQ generates for the configuration.
       Revision:
         $ref: '#/definitions/__integer'
-        description: The Universally Unique Identifier (UUID) of the request.
+        description: The revision number of the configuration.
     description: A list of information about the configuration.
   ConfigurationRevision:
     type: object
     properties:
+      Created:
+        $ref: '#/definitions/__timestampIso8601'
+        description: Required. The date and time of the configuration revision.
       Description:
         $ref: '#/definitions/__string'
         description: The description of the configuration revision.
       Revision:
         $ref: '#/definitions/__integer'
-        description: Required. The revision of the configuration.
+        description: Required. The revision number of the configuration.
     description: Returns information about the specified configuration revision.
   Configurations:
     type: object
@@ -899,7 +911,7 @@ definitions:
         $ref: '#/definitions/ConfigurationId'
         description: The current configuration of the broker.
       History:
-        $ref: '#/definitions/ListOfConfigurationId'
+        $ref: '#/definitions/__listOfConfigurationId'
         description: The history of configurations applied to the broker.
       Pending:
         $ref: '#/definitions/ConfigurationId'
@@ -910,10 +922,10 @@ definitions:
     properties:
       ErrorAttribute:
         $ref: '#/definitions/__string'
-        description: The error attribute.
+        description: The attribute which caused the error.
       Message:
         $ref: '#/definitions/__string'
-        description: The error message.
+        description: The explanation of the error.
     description: Returns information about an error.
   CreateBrokerInput:
     type: object
@@ -932,7 +944,7 @@ definitions:
         description: 'The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn''t require idempotency.'
       DeploymentMode:
         $ref: '#/definitions/DeploymentMode'
-        description: 'Required. The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability.'
+        description: Required. The deployment mode of the broker.
       EngineType:
         $ref: '#/definitions/EngineType'
         description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
@@ -941,7 +953,10 @@ definitions:
         description: 'Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.'
       HostInstanceType:
         $ref: '#/definitions/__string'
-        description: 'Required. The broker''s instance type. Possible values: mq.t2.micro, mq.m4.large'
+        description: Required. The broker's instance type.
+      Logs:
+        $ref: '#/definitions/Logs'
+        description: Enables Amazon CloudWatch logging for brokers.
       MaintenanceWindowStartTime:
         $ref: '#/definitions/WeeklyStartTime'
         description: The parameters that determine the WeeklyStartTime.
@@ -949,13 +964,13 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
       SecurityGroups:
-        $ref: '#/definitions/ListOf__string'
-        description: 'Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
+        $ref: '#/definitions/__listOf__string'
+        description: 'The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
       SubnetIds:
-        $ref: '#/definitions/ListOf__string'
-        description: 'Required. The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+        $ref: '#/definitions/__listOf__string'
+        description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
       Users:
-        $ref: '#/definitions/ListOfUser'
+        $ref: '#/definitions/__listOfUser'
         description: 'Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
     description: Required. The time period during which Amazon MQ applies pending updates or patches to the broker.
   CreateBrokerOutput:
@@ -985,7 +1000,7 @@ definitions:
         description: 'The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn''t require idempotency.'
       DeploymentMode:
         $ref: '#/definitions/DeploymentMode'
-        description: 'Required. The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability.'
+        description: Required. The deployment mode of the broker.
       EngineType:
         $ref: '#/definitions/EngineType'
         description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
@@ -994,7 +1009,10 @@ definitions:
         description: 'Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.'
       HostInstanceType:
         $ref: '#/definitions/__string'
-        description: 'Required. The broker''s instance type. Possible values: mq.t2.micro, mq.m4.large'
+        description: Required. The broker's instance type.
+      Logs:
+        $ref: '#/definitions/Logs'
+        description: Enables Amazon CloudWatch logging for brokers.
       MaintenanceWindowStartTime:
         $ref: '#/definitions/WeeklyStartTime'
         description: The parameters that determine the WeeklyStartTime.
@@ -1002,13 +1020,13 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
       SecurityGroups:
-        $ref: '#/definitions/ListOf__string'
-        description: 'Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
+        $ref: '#/definitions/__listOf__string'
+        description: 'The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
       SubnetIds:
-        $ref: '#/definitions/ListOf__string'
-        description: 'Required. The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+        $ref: '#/definitions/__listOf__string'
+        description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
       Users:
-        $ref: '#/definitions/ListOfUser'
+        $ref: '#/definitions/__listOfUser'
         description: 'Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
     description: Creates a broker using the specified properties.
   CreateBrokerResponse:
@@ -1032,13 +1050,16 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
-    description: 'Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version). Note: If the configuration name already exists, Amazon MQ doesn''t create a configuration.'
+    description: Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
   CreateConfigurationOutput:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
         description: Required. The Amazon Resource Name (ARN) of the configuration.
+      Created:
+        $ref: '#/definitions/__timestampIso8601'
+        description: Required. The date and time of the configuration.
       Id:
         $ref: '#/definitions/__string'
         description: Required. The unique ID that Amazon MQ generates for the configuration.
@@ -1061,13 +1082,16 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
-    description: 'Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version). Note: If the configuration name already exists, Amazon MQ doesn''t create a configuration.'
+    description: Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
   CreateConfigurationResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
         description: Required. The Amazon Resource Name (ARN) of the configuration.
+      Created:
+        $ref: '#/definitions/__timestampIso8601'
+        description: Required. The date and time of the configuration.
       Id:
         $ref: '#/definitions/__string'
         description: Required. The unique ID that Amazon MQ generates for the configuration.
@@ -1084,7 +1108,7 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
       Groups:
-        $ref: '#/definitions/ListOf__string'
+        $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
       Password:
         $ref: '#/definitions/__string'
@@ -1097,7 +1121,7 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
       Groups:
-        $ref: '#/definitions/ListOf__string'
+        $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
       Password:
         $ref: '#/definitions/__string'
@@ -1143,7 +1167,7 @@ definitions:
     enum:
       - SINGLE_INSTANCE
       - ACTIVE_STANDBY_MULTI_AZ
-    description: 'The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability.'
+    description: The deployment mode of the broker.
   DescribeBrokerOutput:
     type: object
     properties:
@@ -1157,20 +1181,23 @@ definitions:
         $ref: '#/definitions/__string'
         description: The unique ID that Amazon MQ generates for the broker.
       BrokerInstances:
-        $ref: '#/definitions/ListOfBrokerInstance'
+        $ref: '#/definitions/__listOfBrokerInstance'
         description: A list of information about allocated brokers.
       BrokerName:
         $ref: '#/definitions/__string'
         description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
       BrokerState:
         $ref: '#/definitions/BrokerState'
-        description: 'The status of the broker. Possible values: CREATION_IN_PROGRESS, CREATION_FAILED, DELETION_IN_PROGRESS, RUNNING, REBOOT_IN_PROGRESS'
+        description: The status of the broker.
       Configurations:
         $ref: '#/definitions/Configurations'
         description: The list of all revisions for the specified configuration.
+      Created:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The time when the broker was created.
       DeploymentMode:
         $ref: '#/definitions/DeploymentMode'
-        description: 'Required. The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability.'
+        description: Required. The deployment mode of the broker.
       EngineType:
         $ref: '#/definitions/EngineType'
         description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
@@ -1179,7 +1206,10 @@ definitions:
         description: 'The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.'
       HostInstanceType:
         $ref: '#/definitions/__string'
-        description: 'The broker''s instance type. Possible values: mq.t2.micro, mq.m4.large'
+        description: The broker's instance type.
+      Logs:
+        $ref: '#/definitions/LogsSummary'
+        description: The list of information about logs currently enabled and pending to be deployed for the specified broker.
       MaintenanceWindowStartTime:
         $ref: '#/definitions/WeeklyStartTime'
         description: The parameters that determine the WeeklyStartTime.
@@ -1187,13 +1217,13 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
       SecurityGroups:
-        $ref: '#/definitions/ListOf__string'
+        $ref: '#/definitions/__listOf__string'
         description: 'Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
       SubnetIds:
-        $ref: '#/definitions/ListOf__string'
+        $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
       Users:
-        $ref: '#/definitions/ListOfUserSummary'
+        $ref: '#/definitions/__listOfUserSummary'
         description: The list of all ActiveMQ usernames for the specified broker.
     description: 'The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.'
   DescribeBrokerRequest:
@@ -1212,20 +1242,23 @@ definitions:
         $ref: '#/definitions/__string'
         description: The unique ID that Amazon MQ generates for the broker.
       BrokerInstances:
-        $ref: '#/definitions/ListOfBrokerInstance'
+        $ref: '#/definitions/__listOfBrokerInstance'
         description: A list of information about allocated brokers.
       BrokerName:
         $ref: '#/definitions/__string'
         description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
       BrokerState:
         $ref: '#/definitions/BrokerState'
-        description: 'The status of the broker. Possible values: CREATION_IN_PROGRESS, CREATION_FAILED, DELETION_IN_PROGRESS, RUNNING, REBOOT_IN_PROGRESS'
+        description: The status of the broker.
       Configurations:
         $ref: '#/definitions/Configurations'
         description: The list of all revisions for the specified configuration.
+      Created:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The time when the broker was created.
       DeploymentMode:
         $ref: '#/definitions/DeploymentMode'
-        description: 'Required. The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability.'
+        description: Required. The deployment mode of the broker.
       EngineType:
         $ref: '#/definitions/EngineType'
         description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
@@ -1234,7 +1267,10 @@ definitions:
         description: 'The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.'
       HostInstanceType:
         $ref: '#/definitions/__string'
-        description: 'The broker''s instance type. Possible values: mq.t2.micro, mq.m4.large'
+        description: The broker's instance type.
+      Logs:
+        $ref: '#/definitions/LogsSummary'
+        description: The list of information about logs currently enabled and pending to be deployed for the specified broker.
       MaintenanceWindowStartTime:
         $ref: '#/definitions/WeeklyStartTime'
         description: The parameters that determine the WeeklyStartTime.
@@ -1242,13 +1278,13 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
       SecurityGroups:
-        $ref: '#/definitions/ListOf__string'
+        $ref: '#/definitions/__listOf__string'
         description: 'Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
       SubnetIds:
-        $ref: '#/definitions/ListOf__string'
+        $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
       Users:
-        $ref: '#/definitions/ListOfUserSummary'
+        $ref: '#/definitions/__listOfUserSummary'
         description: The list of all ActiveMQ usernames for the specified broker.
   DescribeConfigurationRequest:
     type: object
@@ -1259,6 +1295,9 @@ definitions:
       Arn:
         $ref: '#/definitions/__string'
         description: Required. The ARN of the configuration.
+      Created:
+        $ref: '#/definitions/__timestampIso8601'
+        description: Required. The date and time of the configuration revision.
       Description:
         $ref: '#/definitions/__string'
         description: Required. The description of the configuration.
@@ -1283,6 +1322,9 @@ definitions:
       ConfigurationId:
         $ref: '#/definitions/__string'
         description: Required. The unique ID that Amazon MQ generates for the configuration.
+      Created:
+        $ref: '#/definitions/__timestampIso8601'
+        description: Required. The date and time of the configuration.
       Data:
         $ref: '#/definitions/__string'
         description: Required. The base64-encoded XML configuration.
@@ -1299,6 +1341,9 @@ definitions:
       ConfigurationId:
         $ref: '#/definitions/__string'
         description: Required. The unique ID that Amazon MQ generates for the configuration.
+      Created:
+        $ref: '#/definitions/__timestampIso8601'
+        description: Required. The date and time of the configuration.
       Data:
         $ref: '#/definitions/__string'
         description: Required. The base64-encoded XML configuration.
@@ -1315,7 +1360,7 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
       Groups:
-        $ref: '#/definitions/ListOf__string'
+        $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
       Pending:
         $ref: '#/definitions/UserPendingChanges'
@@ -1337,7 +1382,7 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
       Groups:
-        $ref: '#/definitions/ListOf__string'
+        $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
       Pending:
         $ref: '#/definitions/UserPendingChanges'
@@ -1355,36 +1400,36 @@ definitions:
     properties:
       ErrorAttribute:
         $ref: '#/definitions/__string'
-        description: The error attribute.
+        description: The attribute which caused the error.
       Message:
         $ref: '#/definitions/__string'
-        description: The error message.
+        description: The explanation of the error.
     description: Returns information about an error.
   ForbiddenException:
     type: object
     properties:
       ErrorAttribute:
         $ref: '#/definitions/__string'
-        description: The error attribute.
+        description: The attribute which caused the error.
       Message:
         $ref: '#/definitions/__string'
-        description: The error message.
+        description: The explanation of the error.
     description: Returns information about an error.
   InternalServerErrorException:
     type: object
     properties:
       ErrorAttribute:
         $ref: '#/definitions/__string'
-        description: The error attribute.
+        description: The attribute which caused the error.
       Message:
         $ref: '#/definitions/__string'
-        description: The error message.
+        description: The explanation of the error.
     description: Returns information about an error.
   ListBrokersOutput:
     type: object
     properties:
       BrokerSummaries:
-        $ref: '#/definitions/ListOfBrokerSummary'
+        $ref: '#/definitions/__listOfBrokerSummary'
         description: A list of information about all brokers.
       NextToken:
         $ref: '#/definitions/__string'
@@ -1397,7 +1442,7 @@ definitions:
     type: object
     properties:
       BrokerSummaries:
-        $ref: '#/definitions/ListOfBrokerSummary'
+        $ref: '#/definitions/__listOfBrokerSummary'
         description: A list of information about all brokers.
       NextToken:
         $ref: '#/definitions/__string'
@@ -1415,7 +1460,7 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
       Revisions:
-        $ref: '#/definitions/ListOfConfigurationRevision'
+        $ref: '#/definitions/__listOfConfigurationRevision'
         description: The list of all revisions for the specified configuration.
     description: Returns a list of all revisions for the specified configuration.
   ListConfigurationRevisionsRequest:
@@ -1434,13 +1479,13 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
       Revisions:
-        $ref: '#/definitions/ListOfConfigurationRevision'
+        $ref: '#/definitions/__listOfConfigurationRevision'
         description: The list of all revisions for the specified configuration.
   ListConfigurationsOutput:
     type: object
     properties:
       Configurations:
-        $ref: '#/definitions/ListOfConfiguration'
+        $ref: '#/definitions/__listOfConfiguration'
         description: The list of all revisions for the specified configuration.
       MaxResults:
         $ref: '#/definitions/__integer'
@@ -1456,7 +1501,7 @@ definitions:
     type: object
     properties:
       Configurations:
-        $ref: '#/definitions/ListOfConfiguration'
+        $ref: '#/definitions/__listOfConfiguration'
         description: The list of all revisions for the specified configuration.
       MaxResults:
         $ref: '#/definitions/__integer'
@@ -1464,42 +1509,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
-  ListOfBrokerInstance:
-    type: array
-    items:
-      $ref: '#/definitions/BrokerInstance'
-  ListOfBrokerSummary:
-    type: array
-    items:
-      $ref: '#/definitions/BrokerSummary'
-  ListOfConfiguration:
-    type: array
-    items:
-      $ref: '#/definitions/Configuration'
-  ListOfConfigurationId:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationId'
-  ListOfConfigurationRevision:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationRevision'
-  ListOfSanitizationWarning:
-    type: array
-    items:
-      $ref: '#/definitions/SanitizationWarning'
-  ListOfUser:
-    type: array
-    items:
-      $ref: '#/definitions/User'
-  ListOfUserSummary:
-    type: array
-    items:
-      $ref: '#/definitions/UserSummary'
-  ListOf__string:
-    type: array
-    items:
-      $ref: '#/definitions/__string'
   ListUsersOutput:
     type: object
     properties:
@@ -1507,13 +1516,13 @@ definitions:
         $ref: '#/definitions/__string'
         description: Required. The unique ID that Amazon MQ generates for the broker.
       MaxResults:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/__integerMin5Max100'
         description: Required. The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
       Users:
-        $ref: '#/definitions/ListOfUserSummary'
+        $ref: '#/definitions/__listOfUserSummary'
         description: Required. The list of all ActiveMQ usernames for the specified broker.
     description: Returns a list of all ActiveMQ users.
   ListUsersRequest:
@@ -1526,14 +1535,43 @@ definitions:
         $ref: '#/definitions/__string'
         description: Required. The unique ID that Amazon MQ generates for the broker.
       MaxResults:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/__integerMin5Max100'
         description: Required. The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
       Users:
-        $ref: '#/definitions/ListOfUserSummary'
+        $ref: '#/definitions/__listOfUserSummary'
         description: Required. The list of all ActiveMQ usernames for the specified broker.
+  Logs:
+    type: object
+    properties:
+      Audit:
+        $ref: '#/definitions/__boolean'
+        description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+      General:
+        $ref: '#/definitions/__boolean'
+        description: Enables general logging.
+    description: The list of information about logs to be enabled for the specified broker.
+  LogsSummary:
+    type: object
+    properties:
+      Audit:
+        $ref: '#/definitions/__boolean'
+        description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+      AuditLogGroup:
+        $ref: '#/definitions/__string'
+        description: Location of CloudWatch Log group where audit logs will be sent.
+      General:
+        $ref: '#/definitions/__boolean'
+        description: Enables general logging.
+      GeneralLogGroup:
+        $ref: '#/definitions/__string'
+        description: Location of CloudWatch Log group where general logs will be sent.
+      Pending:
+        $ref: '#/definitions/PendingLogs'
+        description: The list of information about logs pending to be deployed for the specified broker.
+    description: The list of information about logs currently enabled and pending to be deployed for the specified broker.
   MaxResults:
     type: integer
     minimum: 1
@@ -1543,11 +1581,21 @@ definitions:
     properties:
       ErrorAttribute:
         $ref: '#/definitions/__string'
-        description: The error attribute.
+        description: The attribute which caused the error.
       Message:
         $ref: '#/definitions/__string'
-        description: The error message.
+        description: The explanation of the error.
     description: Returns information about an error.
+  PendingLogs:
+    type: object
+    properties:
+      Audit:
+        $ref: '#/definitions/__boolean'
+        description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+      General:
+        $ref: '#/definitions/__boolean'
+        description: Enables general logging.
+    description: The list of information about logs to be enabled for the specified broker.
   RebootBrokerRequest:
     type: object
     properties: {}
@@ -1565,7 +1613,7 @@ definitions:
         description: The name of the XML element that has been sanitized.
       Reason:
         $ref: '#/definitions/SanitizationWarningReason'
-        description: 'Required. The reason for which the XML elements or attributes were sanitized. Possible values: DISALLOWED_ELEMENT_REMOVED, DISALLOWED_ATTRIBUTE_REMOVED, INVALID_ATTRIBUTE_VALUE_REMOVED DISALLOWED_ELEMENT_REMOVED shows that the provided element isn''t allowed and has been removed. DISALLOWED_ATTRIBUTE_REMOVED shows that the provided attribute isn''t allowed and has been removed. INVALID_ATTRIBUTE_VALUE_REMOVED shows that the provided value for the attribute isn''t allowed and has been removed.'
+        description: Required. The reason for which the XML elements or attributes were sanitized.
     description: Returns information about the XML element or attribute that was sanitized in the configuration.
   SanitizationWarningReason:
     type: string
@@ -1573,16 +1621,16 @@ definitions:
       - DISALLOWED_ELEMENT_REMOVED
       - DISALLOWED_ATTRIBUTE_REMOVED
       - INVALID_ATTRIBUTE_VALUE_REMOVED
-    description: 'The reason for which the XML elements or attributes were sanitized. Possible values: DISALLOWED_ELEMENT_REMOVED, DISALLOWED_ATTRIBUTE_REMOVED, INVALID_ATTRIBUTE_VALUE_REMOVED DISALLOWED_ELEMENT_REMOVED shows that the provided element isn''t allowed and has been removed. DISALLOWED_ATTRIBUTE_REMOVED shows that the provided attribute isn''t allowed and has been removed. INVALID_ATTRIBUTE_VALUE_REMOVED shows that the provided value for the attribute isn''t allowed and has been removed.'
+    description: The reason for which the XML elements or attributes were sanitized.
   UnauthorizedException:
     type: object
     properties:
       ErrorAttribute:
         $ref: '#/definitions/__string'
-        description: The error attribute.
+        description: The attribute which caused the error.
       Message:
         $ref: '#/definitions/__string'
-        description: The error message.
+        description: The explanation of the error.
     description: Returns information about an error.
   UpdateBrokerInput:
     type: object
@@ -1590,6 +1638,9 @@ definitions:
       Configuration:
         $ref: '#/definitions/ConfigurationId'
         description: A list of information about the configuration.
+      Logs:
+        $ref: '#/definitions/Logs'
+        description: Enables Amazon CloudWatch logging for brokers.
     description: Updates the broker using the specified properties.
   UpdateBrokerOutput:
     type: object
@@ -1600,6 +1651,9 @@ definitions:
       Configuration:
         $ref: '#/definitions/ConfigurationId'
         description: The ID of the updated configuration.
+      Logs:
+        $ref: '#/definitions/Logs'
+        description: The list of information about logs to be enabled for the specified broker.
     description: Returns information about the updated broker.
   UpdateBrokerRequest:
     type: object
@@ -1607,6 +1661,9 @@ definitions:
       Configuration:
         $ref: '#/definitions/ConfigurationId'
         description: A list of information about the configuration.
+      Logs:
+        $ref: '#/definitions/Logs'
+        description: Enables Amazon CloudWatch logging for brokers.
     description: Updates the broker using the specified properties.
   UpdateBrokerResponse:
     type: object
@@ -1617,6 +1674,9 @@ definitions:
       Configuration:
         $ref: '#/definitions/ConfigurationId'
         description: The ID of the updated configuration.
+      Logs:
+        $ref: '#/definitions/Logs'
+        description: The list of information about logs to be enabled for the specified broker.
   UpdateConfigurationInput:
     type: object
     properties:
@@ -1633,6 +1693,9 @@ definitions:
       Arn:
         $ref: '#/definitions/__string'
         description: Required. The Amazon Resource Name (ARN) of the configuration.
+      Created:
+        $ref: '#/definitions/__timestampIso8601'
+        description: Required. The date and time of the configuration.
       Id:
         $ref: '#/definitions/__string'
         description: Required. The unique ID that Amazon MQ generates for the configuration.
@@ -1643,7 +1706,7 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
       Warnings:
-        $ref: '#/definitions/ListOfSanitizationWarning'
+        $ref: '#/definitions/__listOfSanitizationWarning'
         description: The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.
     description: Returns information about the updated configuration.
   UpdateConfigurationRequest:
@@ -1662,6 +1725,9 @@ definitions:
       Arn:
         $ref: '#/definitions/__string'
         description: Required. The Amazon Resource Name (ARN) of the configuration.
+      Created:
+        $ref: '#/definitions/__timestampIso8601'
+        description: Required. The date and time of the configuration.
       Id:
         $ref: '#/definitions/__string'
         description: Required. The unique ID that Amazon MQ generates for the configuration.
@@ -1672,7 +1738,7 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
       Warnings:
-        $ref: '#/definitions/ListOfSanitizationWarning'
+        $ref: '#/definitions/__listOfSanitizationWarning'
         description: The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.
   UpdateUserInput:
     type: object
@@ -1681,7 +1747,7 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
       Groups:
-        $ref: '#/definitions/ListOf__string'
+        $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
       Password:
         $ref: '#/definitions/__string'
@@ -1694,7 +1760,7 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
       Groups:
-        $ref: '#/definitions/ListOf__string'
+        $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
       Password:
         $ref: '#/definitions/__string'
@@ -1710,7 +1776,7 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
       Groups:
-        $ref: '#/definitions/ListOf__string'
+        $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
       Password:
         $ref: '#/definitions/__string'
@@ -1726,18 +1792,18 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
       Groups:
-        $ref: '#/definitions/ListOf__string'
+        $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
       PendingChange:
         $ref: '#/definitions/ChangeType'
-        description: 'Required. The type of change pending for the ActiveMQ user. Possible values: CREATE, UPDATE, DELETE'
+        description: Required. The type of change pending for the ActiveMQ user.
     description: Returns information about the status of the changes pending for the ActiveMQ user.
   UserSummary:
     type: object
     properties:
       PendingChange:
         $ref: '#/definitions/ChangeType'
-        description: 'The type of change pending for the ActiveMQ user. Possible values: CREATE, UPDATE, DELETE'
+        description: The type of change pending for the ActiveMQ user.
       Username:
         $ref: '#/definitions/__string'
         description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
@@ -1747,7 +1813,7 @@ definitions:
     properties:
       DayOfWeek:
         $ref: '#/definitions/DayOfWeek'
-        description: 'Required. The day of the week. Possible values: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY'
+        description: Required. The day of the week.
       TimeOfDay:
         $ref: '#/definitions/__string'
         description: 'Required. The time, in 24-hour format.'
@@ -1762,8 +1828,53 @@ definitions:
     format: double
   __integer:
     type: integer
+  __integerMin5Max100:
+    type: integer
+    minimum: 5
+    maximum: 100
+  __listOfBrokerInstance:
+    type: array
+    items:
+      $ref: '#/definitions/BrokerInstance'
+  __listOfBrokerSummary:
+    type: array
+    items:
+      $ref: '#/definitions/BrokerSummary'
+  __listOfConfiguration:
+    type: array
+    items:
+      $ref: '#/definitions/Configuration'
+  __listOfConfigurationId:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationId'
+  __listOfConfigurationRevision:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationRevision'
+  __listOfSanitizationWarning:
+    type: array
+    items:
+      $ref: '#/definitions/SanitizationWarning'
+  __listOfUser:
+    type: array
+    items:
+      $ref: '#/definitions/User'
+  __listOfUserSummary:
+    type: array
+    items:
+      $ref: '#/definitions/UserSummary'
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
+  __long:
+    type: integer
   __string:
     type: string
-  __timestamp:
+  __timestampIso8601:
+    type: string
+    format: date-time
+  __timestampUnix:
     type: string
     format: date-time

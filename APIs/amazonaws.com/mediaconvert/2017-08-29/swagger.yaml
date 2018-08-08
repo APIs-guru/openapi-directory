@@ -3573,7 +3573,7 @@ definitions:
         $ref: '#/definitions/__string'
         description: An identifier for this resource that is unique within all of AWS.
       CreatedAt:
-        $ref: '#/definitions/__timestampIso8601'
+        $ref: '#/definitions/__timestampUnix'
         description: 'The time, in Unix epoch format in seconds, when the job got created.'
       ErrorCode:
         $ref: '#/definitions/__integer'
@@ -3654,13 +3654,13 @@ definitions:
         $ref: '#/definitions/__string'
         description: An optional category you create to organize your job templates.
       CreatedAt:
-        $ref: '#/definitions/__timestampIso8601'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds for Job template creation.
       Description:
         $ref: '#/definitions/__string'
         description: An optional description you create for each job template.
       LastUpdated:
-        $ref: '#/definitions/__timestampIso8601'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds when the Job template was last updated.
       Name:
         $ref: '#/definitions/__string'
@@ -4693,13 +4693,13 @@ definitions:
         $ref: '#/definitions/__string'
         description: An optional category you create to organize your presets.
       CreatedAt:
-        $ref: '#/definitions/__timestampIso8601'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds for preset creation.
       Description:
         $ref: '#/definitions/__string'
         description: An optional description you create for each preset.
       LastUpdated:
-        $ref: '#/definitions/__timestampIso8601'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds when the preset was last updated.
       Name:
         $ref: '#/definitions/__string'
@@ -4821,13 +4821,13 @@ definitions:
         $ref: '#/definitions/__string'
         description: An identifier for this resource that is unique within all of AWS.
       CreatedAt:
-        $ref: '#/definitions/__timestampIso8601'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds for queue creation.
       Description:
         $ref: '#/definitions/__string'
         description: An optional description you create for each queue.
       LastUpdated:
-        $ref: '#/definitions/__timestampIso8601'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds when the queue was last updated.
       Name:
         $ref: '#/definitions/__string'
@@ -5061,13 +5061,13 @@ definitions:
     type: object
     properties:
       FinishTime:
-        $ref: '#/definitions/__timestampIso8601'
+        $ref: '#/definitions/__timestampUnix'
         description: 'The time, in Unix epoch format, that the transcoding job finished'
       StartTime:
-        $ref: '#/definitions/__timestampIso8601'
+        $ref: '#/definitions/__timestampUnix'
         description: 'The time, in Unix epoch format, that transcoding for the job began.'
       SubmitTime:
-        $ref: '#/definitions/__timestampIso8601'
+        $ref: '#/definitions/__timestampUnix'
         description: 'The time, in Unix epoch format, that you submitted the job.'
     description: 'Information about when jobs are submitted, started, and finished is specified in Unix epoch format in seconds.'
   TooManyRequestsException:

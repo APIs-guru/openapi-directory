@@ -101,6 +101,51 @@ security:
 paths:
   /:
     post:
+      operationId: CopyBackupToRegion
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CopyBackupToRegionResponse'
+        '480':
+          description: CloudHsmInternalFailureException
+          schema:
+            $ref: '#/definitions/CloudHsmInternalFailureException'
+        '481':
+          description: CloudHsmServiceException
+          schema:
+            $ref: '#/definitions/CloudHsmServiceException'
+        '482':
+          description: CloudHsmResourceNotFoundException
+          schema:
+            $ref: '#/definitions/CloudHsmResourceNotFoundException'
+        '483':
+          description: CloudHsmInvalidRequestException
+          schema:
+            $ref: '#/definitions/CloudHsmInvalidRequestException'
+        '484':
+          description: CloudHsmAccessDeniedException
+          schema:
+            $ref: '#/definitions/CloudHsmAccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CopyBackupToRegionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateCluster':
+    post:
       operationId: CreateCluster
       description: Creates a new AWS CloudHSM cluster.
       responses:
@@ -593,6 +638,14 @@ definitions:
       CreateTimestamp:
         $ref: '#/definitions/Timestamp'
         description: The date and time when the backup was created.
+      CopyTimestamp:
+        $ref: '#/definitions/Timestamp'
+      SourceRegion:
+        $ref: '#/definitions/Region'
+      SourceBackup:
+        $ref: '#/definitions/BackupId'
+      SourceCluster:
+        $ref: '#/definitions/ClusterId'
     description: Contains information about a backup of an AWS CloudHSM cluster.
   BackupId:
     type: string
@@ -611,6 +664,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Backup'
+  Boolean:
+    type: boolean
   Cert:
     type: string
     pattern: '[a-zA-Z0-9+-/=\s]*'
@@ -726,6 +781,21 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Cluster'
+  CopyBackupToRegionRequest:
+    type: object
+    required:
+      - DestinationRegion
+      - BackupId
+    properties:
+      DestinationRegion:
+        $ref: '#/definitions/Region'
+      BackupId:
+        $ref: '#/definitions/BackupId'
+  CopyBackupToRegionResponse:
+    type: object
+    properties:
+      DestinationBackup:
+        $ref: '#/definitions/DestinationBackup'
   CreateClusterRequest:
     type: object
     required:
@@ -817,6 +887,8 @@ definitions:
       Filters:
         $ref: '#/definitions/Filters'
         description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>backupIds</code> filter to return only the specified backups. Specify backups by their backup identifier (ID).</p> <p>Use the <code>clusterIds</code> filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>states</code> filter to return only backups that match the specified state.</p>
+      SortAscending:
+        $ref: '#/definitions/Boolean'
   DescribeBackupsResponse:
     type: object
     properties:
@@ -847,12 +919,23 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: An opaque string that indicates that the response contains only a subset of clusters. Use this value in a subsequent <code>DescribeClusters</code> request to get more clusters.
+  DestinationBackup:
+    type: object
+    properties:
+      CreateTimestamp:
+        $ref: '#/definitions/Timestamp'
+      SourceRegion:
+        $ref: '#/definitions/Region'
+      SourceBackup:
+        $ref: '#/definitions/BackupId'
+      SourceCluster:
+        $ref: '#/definitions/ClusterId'
   EniId:
     type: string
     pattern: 'eni-[0-9a-fA-F]{8,17}'
   ExternalAz:
     type: string
-    pattern: '[a-z]{2}(-(gov|isob|iso))?-(east|west|north|south|central){1,2}-\d[a-z]'
+    pattern: '[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d[a-z]'
   ExternalSubnetMapping:
     type: array
     items:
@@ -987,6 +1070,9 @@ definitions:
     type: string
     minLength: 7
     maxLength: 32
+  Region:
+    type: string
+    pattern: '[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d'
   SecurityGroup:
     type: string
     pattern: 'sg-[0-9a-fA-F]'

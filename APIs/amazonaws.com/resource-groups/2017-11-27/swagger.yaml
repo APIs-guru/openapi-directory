@@ -144,50 +144,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    get:
-      operationId: ListGroups
-      description: Returns a list of existing resource groups in your account.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListGroupsOutput'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '482':
-          description: MethodNotAllowedException
-          schema:
-            $ref: '#/definitions/MethodNotAllowedException'
-        '483':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-        '484':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListGroupsInput'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
   '/groups/{GroupName}':
     delete:
       operationId: DeleteGroup
@@ -557,8 +513,8 @@ paths:
           in: path
           type: string
           required: true
-  '/groups/{GroupName}/resource-identifiers':
-    get:
+  '/groups/{GroupName}/resource-identifiers-list':
+    post:
       operationId: ListGroupResources
       description: Returns a list of ARNs of resources that are members of a specified resource group.
       responses:
@@ -614,6 +570,61 @@ paths:
           in: path
           type: string
           required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /groups-list:
+    post:
+      operationId: ListGroups
+      description: Returns a list of existing resource groups in your account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListGroupsOutput'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListGroupsInput'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -698,7 +709,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/GroupName'
-        description: 'The name of the group, which is the identifier of the group in other operations. A resource group name cannot be updated after it is created. A resource group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with <code>AWS</code> or <code>aws</code>; these are reserved. A resource group name must be unique within your account.'
+        description: 'The name of the group, which is the identifier of the group in other operations. A resource group name cannot be updated after it is created. A resource group name can have a maximum of 128 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with <code>AWS</code> or <code>aws</code>; these are reserved. A resource group name must be unique within your account.'
       Description:
         $ref: '#/definitions/GroupDescription'
         description: 'The description of the resource group. Descriptions can have a maximum of 511 characters, including letters, numbers, hyphens, underscores, punctuation, and spaces.'
@@ -707,7 +718,7 @@ definitions:
         description: The resource query that determines which AWS resources are members of this group.
       Tags:
         $ref: '#/definitions/Tags'
-        description: 'The tags to add to the group. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 127 characters, and tag values can have a maximum length of 255 characters.'
+        description: 'The tags to add to the group. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
   CreateGroupOutput:
     type: object
     properties:
@@ -790,7 +801,7 @@ definitions:
     pattern: 'arn:aws:resource-groups:[a-z]{2}-[a-z]+-\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\.-]{1,128}'
   GroupDescription:
     type: string
-    pattern: '[\sa-zA-Z0-9_\.-]+'
+    pattern: '[\sa-zA-Z0-9_\.-]*'
     maxLength: 512
   GroupList:
     type: array
@@ -822,7 +833,10 @@ definitions:
     description: An internal error occurred while processing the request.
   ListGroupResourcesInput:
     type: object
-    properties: {}
+    properties:
+      Filters:
+        $ref: '#/definitions/ResourceFilterList'
+        description: '<p>Filters, formatted as ResourceFilter objects, that you want to apply to a ListGroupResources operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter resources by their type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>'
   ListGroupResourcesOutput:
     type: object
     properties:
@@ -871,7 +885,39 @@ definitions:
       - TAG_FILTERS_1_0
   ResourceArn:
     type: string
-    pattern: 'arn:aws:[a-z0-9]*:([a-z]{2}-[a-z]+-\d{1})?:([0-9]{12})?:.+'
+    pattern: 'arn:aws:[a-z0-9\-]*:([a-z]{2}-[a-z]+-\d{1})?:([0-9]{12})?:.+'
+  ResourceFilter:
+    type: object
+    required:
+      - Name
+      - Values
+    properties:
+      Name:
+        $ref: '#/definitions/ResourceFilterName'
+        description: The name of the filter. Filter names are case-sensitive.
+      Values:
+        $ref: '#/definitions/ResourceFilterValues'
+        description: 'One or more filter values. Allowed filter values vary by resource filter name, and are case-sensitive.'
+    description: A filter name and value pair that is used to obtain more specific results from a list of resources.
+  ResourceFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceFilter'
+  ResourceFilterName:
+    type: string
+    enum:
+      - resource-type
+  ResourceFilterValue:
+    type: string
+    pattern: 'AWS::[a-zA-Z0-9]+::[a-zA-Z0-9]+'
+    minLength: 1
+    maxLength: 128
+  ResourceFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceFilterValue'
+    minItems: 1
+    maxItems: 5
   ResourceIdentifier:
     type: object
     properties:
@@ -932,7 +978,7 @@ definitions:
     properties:
       Tags:
         $ref: '#/definitions/Tags'
-        description: 'The tags to add to the specified resource. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 127 characters, and tag values can have a maximum length of 255 characters.'
+        description: 'The tags to add to the specified resource. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
   TagKey:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'

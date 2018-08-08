@@ -3,7 +3,7 @@ info:
   version: '2015-05-28'
   x-release: v4
   title: AWS IoT
-  description: '<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected devices (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each device (Registry), configure logging, and create and manage policies and credentials to authenticate devices.</p> <p>For more information about how AWS IoT works, see the <a href="http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html">Developer Guide</a>.</p>'
+  description: '<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected devices (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each device (Registry), configure logging, and create and manage policies and credentials to authenticate devices.</p> <p>For more information about how AWS IoT works, see the <a href="http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html">Developer Guide</a>.</p> <p>For information about how to use the credentials provider for AWS IoT, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html">Authorizing Direct Calls to AWS Services</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -434,6 +434,136 @@ paths:
           in: path
           type: string
           required: true
+  '/security-profiles/{securityProfileName}/targets':
+    put:
+      operationId: AttachSecurityProfile
+      description: Associates a Device Defender security profile with a thing group or with this account. Each thing group or account can have up to five security profiles associated with it.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AttachSecurityProfileResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: VersionConflictException
+          schema:
+            $ref: '#/definitions/VersionConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AttachSecurityProfileRequest'
+        - name: securityProfileName
+          in: path
+          type: string
+          required: true
+        - name: securityProfileName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DetachSecurityProfile
+      description: Disassociates a Device Defender security profile from a thing group or from this account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetachSecurityProfileResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DetachSecurityProfileRequest'
+        - name: securityProfileName
+          in: path
+          type: string
+          required: true
+        - name: securityProfileName
+          in: query
+          type: string
+    get:
+      operationId: ListTargetsForSecurityProfile
+      description: Lists the targets (thing groups) associated with a given Device Defender security profile.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTargetsForSecurityProfileResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTargetsForSecurityProfileRequest'
+        - name: securityProfileName
+          in: path
+          type: string
+          required: true
+        - name: securityProfileName
+          in: query
+          type: string
   '/things/{thingName}/principals':
     put:
       operationId: AttachThingPrincipal
@@ -580,6 +710,51 @@ paths:
         - name: thingName
           in: query
           type: string
+  '/audit/tasks/{taskId}/cancel':
+    put:
+      operationId: CancelAuditTask
+      description: 'Cancels an audit that is in progress. The audit can be either scheduled or on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CancelAuditTaskResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CancelAuditTaskRequest'
+        - name: taskId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/cancel-certificate-transfer/{certificateId}':
     patch:
       operationId: CancelCertificateTransfer
@@ -1883,6 +2058,316 @@ paths:
           in: path
           type: string
           required: true
+  '/audit/scheduledaudits/{scheduledAuditName}':
+    post:
+      operationId: CreateScheduledAudit
+      description: Creates a scheduled audit that is run at a specified time interval.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateScheduledAuditResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateScheduledAuditRequest'
+        - name: scheduledAuditName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteScheduledAudit
+      description: Deletes a scheduled audit.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteScheduledAuditResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteScheduledAuditRequest'
+        - name: scheduledAuditName
+          in: path
+          type: string
+          required: true
+    get:
+      operationId: DescribeScheduledAudit
+      description: Gets information about a scheduled audit.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeScheduledAuditResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeScheduledAuditRequest'
+        - name: scheduledAuditName
+          in: path
+          type: string
+          required: true
+    patch:
+      operationId: UpdateScheduledAudit
+      description: 'Updates a scheduled audit, including what checks are performed and how often the audit takes place.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateScheduledAuditResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateScheduledAuditRequest'
+        - name: scheduledAuditName
+          in: path
+          type: string
+          required: true
+  '/security-profiles/{securityProfileName}':
+    post:
+      operationId: CreateSecurityProfile
+      description: Creates a Device Defender security profile.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSecurityProfileResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSecurityProfileRequest'
+        - name: securityProfileName
+          in: path
+          type: string
+          required: true
+        - name: securityProfileName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteSecurityProfile
+      description: Deletes a Device Defender security profile.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSecurityProfileResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: VersionConflictException
+          schema:
+            $ref: '#/definitions/VersionConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSecurityProfileRequest'
+        - name: securityProfileName
+          in: path
+          type: string
+          required: true
+        - name: securityProfileName
+          in: query
+          type: string
+    get:
+      operationId: DescribeSecurityProfile
+      description: Gets information about a Device Defender security profile.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSecurityProfileResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSecurityProfileRequest'
+        - name: securityProfileName
+          in: path
+          type: string
+          required: true
+        - name: securityProfileName
+          in: query
+          type: string
+    patch:
+      operationId: UpdateSecurityProfile
+      description: Updates a Device Defender security profile.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSecurityProfileResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: VersionConflictException
+          schema:
+            $ref: '#/definitions/VersionConflictException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateSecurityProfileRequest'
+        - name: securityProfileName
+          in: path
+          type: string
+          required: true
+        - name: securityProfileName
+          in: query
+          type: string
   '/streams/{streamId}':
     post:
       operationId: CreateStream
@@ -2073,7 +2558,7 @@ paths:
   '/things/{thingName}':
     post:
       operationId: CreateThing
-      description: Creates a thing record in the registry.
+      description: '<p>Creates a thing record in the registry.</p> <note> <p>This is a control plane operation. See <a href="http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html">Authorization</a> for information about authorizing control plane actions.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2276,7 +2761,7 @@ paths:
   '/thing-groups/{thingGroupName}':
     post:
       operationId: CreateThingGroup
-      description: Create a thing group.
+      description: '<p>Create a thing group.</p> <note> <p>This is a control plane operation. See <a href="http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html">Authorization</a> for information about authorizing control plane actions.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2731,6 +3216,95 @@ paths:
           in: path
           type: string
           required: true
+  /audit/configuration:
+    delete:
+      operationId: DeleteAccountAuditConfiguration
+      description: 'Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteAccountAuditConfigurationResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteAccountAuditConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeAccountAuditConfiguration
+      description: Gets information about the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAccountAuditConfigurationResponse'
+        '480':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAccountAuditConfigurationRequest'
+    patch:
+      operationId: UpdateAccountAuditConfiguration
+      description: Configures or reconfigures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateAccountAuditConfigurationResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAccountAuditConfigurationRequest'
   '/cacertificate/{caCertificateId}':
     delete:
       operationId: DeleteCACertificate
@@ -3453,6 +4027,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/audit/tasks/{taskId}':
+    get:
+      operationId: DescribeAuditTask
+      description: Gets information about a Device Defender audit.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAuditTaskResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAuditTaskRequest'
+        - name: taskId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /endpoint:
     get:
       operationId: DescribeEndpoint
@@ -3973,7 +4592,7 @@ paths:
   /loggingOptions:
     get:
       operationId: GetLoggingOptions
-      description: Gets the logging options.
+      description: '<p>Gets the logging options.</p> <p>NOTE: use of this command is not recommended. Use <code>GetV2LoggingOptions</code> instead.</p>'
       responses:
         '200':
           description: Success
@@ -4009,7 +4628,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: SetLoggingOptions
-      description: Sets the logging options.
+      description: '<p>Sets the logging options.</p> <p>NOTE: use of this command is not recommended. Use <code>SetV2LoggingOptions</code> instead.</p>'
       responses:
         '200':
           description: Success
@@ -4045,9 +4664,9 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
         '481':
-          description: InvalidRequestException
+          description: NotConfiguredException
           schema:
-            $ref: '#/definitions/InvalidRequestException'
+            $ref: '#/definitions/NotConfiguredException'
         '482':
           description: ServiceUnavailableException
           schema:
@@ -4092,6 +4711,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SetV2LoggingOptionsRequest'
+  /active-violations:
+    get:
+      operationId: ListActiveViolations
+      description: Lists the active violations for a given Device Defender security profile.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListActiveViolationsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListActiveViolationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/attached-policies/{target}':
     post:
       operationId: ListAttachedPolicies
@@ -4149,6 +4809,110 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /audit/findings:
+    post:
+      operationId: ListAuditFindings
+      description: Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAuditFindingsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAuditFindingsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /audit/tasks:
+    get:
+      operationId: ListAuditTasks
+      description: Lists the Device Defender audits that have been performed during a given time period.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAuditTasksResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAuditTasksRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartOnDemandAuditTask
+      description: Starts an on-demand Device Defender audit.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartOnDemandAuditTaskResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartOnDemandAuditTaskRequest'
   /authorizers/:
     get:
       operationId: ListAuthorizers
@@ -4794,6 +5558,121 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /audit/scheduledaudits:
+    get:
+      operationId: ListScheduledAudits
+      description: Lists all of your scheduled audits.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListScheduledAuditsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListScheduledAuditsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /security-profiles:
+    get:
+      operationId: ListSecurityProfiles
+      description: Lists the Device Defender security profiles you have created. You can use filters to list only those security profiles associated with a thing group or only those associated with your account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSecurityProfilesResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListSecurityProfilesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /security-profiles-for-target:
+    get:
+      operationId: ListSecurityProfilesForTarget
+      description: Lists the Device Defender security profiles attached to a target (thing group).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSecurityProfilesForTargetResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListSecurityProfilesForTargetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /streams:
     get:
       operationId: ListStreams
@@ -5296,6 +6175,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTopicRulesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /violation-events:
+    get:
+      operationId: ListViolationEvents
+      description: 'Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior or thing (device).'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListViolationEventsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListViolationEventsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5842,6 +6758,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /security-profile-behaviors/validate:
+    post:
+      operationId: ValidateSecurityProfileBehaviors
+      description: Validates a Device Defender security profile behaviors specification.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ValidateSecurityProfileBehaviorsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ValidateSecurityProfileBehaviorsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AcceptCertificateTransferRequest:
     type: object
@@ -5892,6 +6845,9 @@ definitions:
       iotAnalytics:
         $ref: '#/definitions/IotAnalyticsAction'
         description: Sends message data to an AWS IoT Analytics channel.
+      stepFunctions:
+        $ref: '#/definitions/StepFunctionsAction'
+        description: Starts execution of a Step Functions state machine.
     description: Describes the actions associated with a rule.
   ActionList:
     type: array
@@ -5906,6 +6862,35 @@ definitions:
       - SUBSCRIBE
       - RECEIVE
       - CONNECT
+  ActiveViolation:
+    type: object
+    properties:
+      violationId:
+        $ref: '#/definitions/ViolationId'
+        description: The ID of the active violation.
+      thingName:
+        $ref: '#/definitions/ThingName'
+        description: The name of the thing responsible for the active violation.
+      securityProfileName:
+        $ref: '#/definitions/SecurityProfileName'
+        description: The security profile whose behavior is in violation.
+      behavior:
+        $ref: '#/definitions/Behavior'
+        description: The behavior which is being violated.
+      lastViolationValue:
+        $ref: '#/definitions/MetricValue'
+        description: The value of the metric (the measurement) which caused the most recent violation.
+      lastViolationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time the most recent violation occurred.
+      violationStartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time the violation started.
+    description: Information about an active Device Defender security profile behavior violation.
+  ActiveViolations:
+    type: array
+    items:
+      $ref: '#/definitions/ActiveViolation'
   AddThingToThingGroupRequest:
     type: object
     properties:
@@ -5935,6 +6920,35 @@ definitions:
           $ref: '#/definitions/Value'
   AlarmName:
     type: string
+  AlertTarget:
+    type: object
+    required:
+      - alertTargetArn
+      - roleArn
+    properties:
+      alertTargetArn:
+        $ref: '#/definitions/AlertTargetArn'
+        description: The ARN of the notification target to which alerts are sent.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role that grants permission to send alerts to the notification target.
+    description: A structure containing the alert target ARN and the role ARN.
+  AlertTargetArn:
+    type: string
+  AlertTargetType:
+    type: string
+    enum:
+      - SNS
+    description: 'The type of alert target: one of "SNS".'
+  AlertTargets:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AlertTargetType'
+        value:
+          $ref: '#/definitions/AlertTarget'
   AllowAutoRegistration:
     type: boolean
   Allowed:
@@ -5981,6 +6995,12 @@ definitions:
     type: object
     properties: {}
     description: The input for the AttachPrincipalPolicy operation.
+  AttachSecurityProfileRequest:
+    type: object
+    properties: {}
+  AttachSecurityProfileResponse:
+    type: object
+    properties: {}
   AttachThingPrincipalRequest:
     type: object
     properties: {}
@@ -6025,6 +7045,174 @@ definitions:
           $ref: '#/definitions/Key'
         value:
           $ref: '#/definitions/Value'
+  AuditCheckConfiguration:
+    type: object
+    properties:
+      enabled:
+        $ref: '#/definitions/Enabled'
+        description: True if this audit check is enabled for this account.
+    description: Which audit checks are enabled and disabled for this account.
+  AuditCheckConfigurations:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AuditCheckName'
+        value:
+          $ref: '#/definitions/AuditCheckConfiguration'
+  AuditCheckDetails:
+    type: object
+    properties:
+      checkRunStatus:
+        $ref: '#/definitions/AuditCheckRunStatus'
+        description: 'The completion status of this check, one of "IN_PROGRESS", "WAITING_FOR_DATA_COLLECTION", "CANCELED", "COMPLETED_COMPLIANT", "COMPLETED_NON_COMPLIANT", or "FAILED".'
+      checkCompliant:
+        $ref: '#/definitions/CheckCompliant'
+        description: True if the check completed and found all resources compliant.
+      totalResourcesCount:
+        $ref: '#/definitions/TotalResourcesCount'
+        description: The number of resources on which the check was performed.
+      nonCompliantResourcesCount:
+        $ref: '#/definitions/NonCompliantResourcesCount'
+        description: The number of resources that the check found non-compliant.
+      errorCode:
+        $ref: '#/definitions/ErrorCode'
+        description: 'The code of any error encountered when performing this check during this audit. One of "INSUFFICIENT_PERMISSIONS", or "AUDIT_CHECK_DISABLED".'
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: The message associated with any error encountered when performing this check during this audit.
+    description: Information about the audit check.
+  AuditCheckName:
+    type: string
+    description: An audit check name. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)
+  AuditCheckRunStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - WAITING_FOR_DATA_COLLECTION
+      - CANCELED
+      - COMPLETED_COMPLIANT
+      - COMPLETED_NON_COMPLIANT
+      - FAILED
+  AuditDetails:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AuditCheckName'
+        value:
+          $ref: '#/definitions/AuditCheckDetails'
+  AuditFinding:
+    type: object
+    properties:
+      taskId:
+        $ref: '#/definitions/AuditTaskId'
+        description: The ID of the audit that generated this result (finding)
+      checkName:
+        $ref: '#/definitions/AuditCheckName'
+        description: The audit check that generated this result.
+      taskStartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time the audit started.
+      findingTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time the result (finding) was discovered.
+      severity:
+        $ref: '#/definitions/AuditFindingSeverity'
+        description: The severity of the result (finding).
+      nonCompliantResource:
+        $ref: '#/definitions/NonCompliantResource'
+        description: The resource that was found to be non-compliant with the audit check.
+      relatedResources:
+        $ref: '#/definitions/RelatedResources'
+        description: The list of related resources.
+      reasonForNonCompliance:
+        $ref: '#/definitions/ReasonForNonCompliance'
+        description: The reason the resource was non-compliant.
+      reasonForNonComplianceCode:
+        $ref: '#/definitions/ReasonForNonComplianceCode'
+        description: A code which indicates the reason that the resource was non-compliant.
+    description: The findings (results) of the audit.
+  AuditFindingSeverity:
+    type: string
+    enum:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+  AuditFindings:
+    type: array
+    items:
+      $ref: '#/definitions/AuditFinding'
+  AuditFrequency:
+    type: string
+    enum:
+      - DAILY
+      - WEEKLY
+      - BIWEEKLY
+      - MONTHLY
+  AuditNotificationTarget:
+    type: object
+    properties:
+      targetArn:
+        $ref: '#/definitions/TargetArn'
+        description: The ARN of the target (SNS topic) to which audit notifications are sent.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role that grants permission to send notifications to the target.
+      enabled:
+        $ref: '#/definitions/Enabled'
+        description: True if notifications to the target are enabled.
+    description: Information about the targets to which audit notifications are sent.
+  AuditNotificationTargetConfigurations:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AuditNotificationType'
+        value:
+          $ref: '#/definitions/AuditNotificationTarget'
+  AuditNotificationType:
+    type: string
+    enum:
+      - SNS
+  AuditTaskId:
+    type: string
+    pattern: '[a-zA-Z0-9\-]+'
+    minLength: 1
+    maxLength: 40
+  AuditTaskMetadata:
+    type: object
+    properties:
+      taskId:
+        $ref: '#/definitions/AuditTaskId'
+        description: The ID of this audit.
+      taskStatus:
+        $ref: '#/definitions/AuditTaskStatus'
+        description: 'The status of this audit: one of "IN_PROGRESS", "COMPLETED", "FAILED" or "CANCELED".'
+      taskType:
+        $ref: '#/definitions/AuditTaskType'
+        description: 'The type of this audit: one of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".'
+    description: The audits that were performed.
+  AuditTaskMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/AuditTaskMetadata'
+  AuditTaskStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - COMPLETED
+      - FAILED
+      - CANCELED
+  AuditTaskType:
+    type: string
+    enum:
+      - ON_DEMAND_AUDIT_TASK
+      - SCHEDULED_AUDIT_TASK
   AuthDecision:
     type: string
     enum:
@@ -6133,7 +7321,9 @@ definitions:
       - DISABLE
   AwsAccountId:
     type: string
-    pattern: '[0-9]{12}'
+    pattern: '[0-9]+'
+    minLength: 12
+    maxLength: 12
   AwsArn:
     type: string
   AwsIotJobArn:
@@ -6142,6 +7332,46 @@ definitions:
     type: string
   AwsIotSqlVersion:
     type: string
+  Behavior:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        $ref: '#/definitions/BehaviorName'
+        description: The name you have given to the behavior.
+      metric:
+        $ref: '#/definitions/BehaviorMetric'
+        description: What is measured by the behavior.
+      criteria:
+        $ref: '#/definitions/BehaviorCriteria'
+        description: The criteria that determine if a device is behaving normally in regard to the <code>metric</code>.
+    description: A Device Defender security profile behavior.
+  BehaviorCriteria:
+    type: object
+    properties:
+      comparisonOperator:
+        $ref: '#/definitions/ComparisonOperator'
+        description: The operator that relates the thing measured (<code>metric</code>) to the criteria (<code>value</code>).
+      value:
+        $ref: '#/definitions/MetricValue'
+        description: The value to be compared with the <code>metric</code>.
+      durationSeconds:
+        $ref: '#/definitions/DurationSeconds'
+        description: 'Use this to specify the period of time over which the behavior is evaluated, for those criteria which have a time dimension (for example, <code>NUM_MESSAGES_SENT</code>).'
+    description: The criteria by which the behavior is determined to be normal.
+  BehaviorMetric:
+    type: string
+  BehaviorName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  Behaviors:
+    type: array
+    items:
+      $ref: '#/definitions/Behavior'
+    maxItems: 100
   Boolean:
     type: boolean
   BucketName:
@@ -6195,6 +7425,9 @@ definitions:
       generationId:
         $ref: '#/definitions/GenerationId'
         description: The generation ID of the CA certificate.
+      validity:
+        $ref: '#/definitions/CertificateValidity'
+        description: When the CA certificate is valid.
     description: Describes a CA certificate.
   CACertificateStatus:
     type: string
@@ -6205,6 +7438,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CACertificate'
+  CancelAuditTaskRequest:
+    type: object
+    properties: {}
+  CancelAuditTaskResponse:
+    type: object
+    properties: {}
   CancelCertificateTransferRequest:
     type: object
     properties: {}
@@ -6236,6 +7475,8 @@ definitions:
       description:
         $ref: '#/definitions/JobDescription'
         description: A short text description of the job.
+  CanceledChecksCount:
+    type: integer
   CanceledThings:
     type: integer
   CannedAccessControlList:
@@ -6313,6 +7554,9 @@ definitions:
       generationId:
         $ref: '#/definitions/GenerationId'
         description: The generation ID of the certificate.
+      validity:
+        $ref: '#/definitions/CertificateValidity'
+        description: When the certificate is valid.
     description: Describes a certificate.
   CertificateId:
     type: string
@@ -6352,12 +7596,33 @@ definitions:
         $ref: '#/definitions/errorMessage'
         description: Additional information about the exception.
     description: The certificate is invalid.
+  CertificateValidity:
+    type: object
+    properties:
+      notBefore:
+        $ref: '#/definitions/DateType'
+        description: The certificate is not valid before this date.
+      notAfter:
+        $ref: '#/definitions/DateType'
+        description: The certificate is not valid after this date.
+    description: When the certificate is valid.
   Certificates:
     type: array
     items:
       $ref: '#/definitions/Certificate'
   ChannelName:
     type: string
+  CheckCompliant:
+    type: boolean
+  Cidr:
+    type: string
+    pattern: '[a-fA-F0-9:\.\/]+'
+    minLength: 2
+    maxLength: 43
+  Cidrs:
+    type: array
+    items:
+      $ref: '#/definitions/Cidr'
   ClearDefaultAuthorizerRequest:
     type: object
     properties: {}
@@ -6400,19 +7665,19 @@ definitions:
         $ref: '#/definitions/AwsArn'
         description: The IAM role that allows access to the CloudWatch metric.
       metricNamespace:
-        $ref: '#/definitions/MetricNamespace'
+        $ref: '#/definitions/String'
         description: The CloudWatch metric namespace name.
       metricName:
-        $ref: '#/definitions/MetricName'
+        $ref: '#/definitions/String'
         description: The CloudWatch metric name.
       metricValue:
-        $ref: '#/definitions/MetricValue'
+        $ref: '#/definitions/String'
         description: The CloudWatch metric value.
       metricUnit:
-        $ref: '#/definitions/MetricUnit'
+        $ref: '#/definitions/String'
         description: 'The <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit">metric unit</a> supported by CloudWatch.'
       metricTimestamp:
-        $ref: '#/definitions/MetricTimestamp'
+        $ref: '#/definitions/String'
         description: 'An optional <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp">Unix timestamp</a>.'
     description: Describes an action that captures a CloudWatch metric.
   Code:
@@ -6456,6 +7721,19 @@ definitions:
     type: string
     pattern: '[^\p{C}]+'
     maxLength: 2028
+  ComparisonOperator:
+    type: string
+    enum:
+      - less-than
+      - less-than-equals
+      - greater-than
+      - greater-than-equals
+      - in-cidr-set
+      - not-in-cidr-set
+      - in-port-set
+      - not-in-port-set
+  CompliantChecksCount:
+    type: integer
   Configuration:
     type: object
     properties:
@@ -6468,6 +7746,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
     description: A conflicting resource update exception. This exception is thrown when two pending updates cause a conflict.
   Count:
     type: integer
@@ -6547,9 +7826,6 @@ definitions:
       jobExecutionsRolloutConfig:
         $ref: '#/definitions/JobExecutionsRolloutConfig'
         description: Allows you to create a staged rollout of the job.
-      documentParameters:
-        $ref: '#/definitions/JobDocumentParameters'
-        description: Parameters for the job document.
   CreateJobResponse:
     type: object
     properties:
@@ -6695,6 +7971,53 @@ definitions:
       roleAliasArn:
         $ref: '#/definitions/RoleAliasArn'
         description: The role alias ARN.
+  CreateScheduledAuditRequest:
+    type: object
+    required:
+      - frequency
+      - targetCheckNames
+    properties:
+      frequency:
+        $ref: '#/definitions/AuditFrequency'
+        description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.'
+      dayOfMonth:
+        $ref: '#/definitions/DayOfMonth'
+        description: 'The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
+      dayOfWeek:
+        $ref: '#/definitions/DayOfWeek'
+        description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
+      targetCheckNames:
+        $ref: '#/definitions/TargetAuditCheckNames'
+        description: Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)
+  CreateScheduledAuditResponse:
+    type: object
+    properties:
+      scheduledAuditArn:
+        $ref: '#/definitions/ScheduledAuditArn'
+        description: The ARN of the scheduled audit.
+  CreateSecurityProfileRequest:
+    type: object
+    required:
+      - behaviors
+    properties:
+      securityProfileDescription:
+        $ref: '#/definitions/SecurityProfileDescription'
+        description: A description of the security profile.
+      behaviors:
+        $ref: '#/definitions/Behaviors'
+        description: 'Specifies the behaviors that, when violated by a device (thing), cause an alert.'
+      alertTargets:
+        $ref: '#/definitions/AlertTargets'
+        description: Specifies the destinations to which alerts are sent. (Alerts are always sent to the console.) Alerts are generated when a device (thing) violates a behavior.
+  CreateSecurityProfileResponse:
+    type: object
+    properties:
+      securityProfileName:
+        $ref: '#/definitions/SecurityProfileName'
+        description: The name you gave to the security profile.
+      securityProfileArn:
+        $ref: '#/definitions/SecurityProfileArn'
+        description: The ARN of the security profile.
   CreateStreamRequest:
     type: object
     required:
@@ -6830,6 +8153,25 @@ definitions:
   DateType:
     type: string
     format: date-time
+  DayOfMonth:
+    type: string
+    pattern: '^([1-9]|[12][0-9]|3[01])$|^LAST$'
+  DayOfWeek:
+    type: string
+    enum:
+      - SUN
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+  DeleteAccountAuditConfigurationRequest:
+    type: object
+    properties: {}
+  DeleteAccountAuditConfigurationResponse:
+    type: object
+    properties: {}
   DeleteAuthorizerRequest:
     type: object
     properties: {}
@@ -6887,6 +8229,20 @@ definitions:
     type: object
     properties: {}
   DeleteRoleAliasResponse:
+    type: object
+    properties: {}
+  DeleteScheduledAuditRequest:
+    type: object
+    properties: {}
+  DeleteScheduledAuditResponse:
+    type: object
+    properties: {}
+  DeleteScheduledAudits:
+    type: boolean
+  DeleteSecurityProfileRequest:
+    type: object
+    properties: {}
+  DeleteSecurityProfileResponse:
     type: object
     properties: {}
   DeleteStreamRequest:
@@ -6950,6 +8306,45 @@ definitions:
   DeprecationDate:
     type: string
     format: date-time
+  DescribeAccountAuditConfigurationRequest:
+    type: object
+    properties: {}
+  DescribeAccountAuditConfigurationResponse:
+    type: object
+    properties:
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: '<p>The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as necessary when performing an audit.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code> this parameter is required.</p>'
+      auditNotificationTargetConfigurations:
+        $ref: '#/definitions/AuditNotificationTargetConfigurations'
+        description: Information about the targets to which audit notifications are sent for this account.
+      auditCheckConfigurations:
+        $ref: '#/definitions/AuditCheckConfigurations'
+        description: Which audit checks are enabled and disabled for this account.
+  DescribeAuditTaskRequest:
+    type: object
+    properties: {}
+  DescribeAuditTaskResponse:
+    type: object
+    properties:
+      taskStatus:
+        $ref: '#/definitions/AuditTaskStatus'
+        description: 'The status of the audit: one of "IN_PROGRESS", "COMPLETED", "FAILED", or "CANCELED".'
+      taskType:
+        $ref: '#/definitions/AuditTaskType'
+        description: 'The type of audit: "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".'
+      taskStartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time the audit started.
+      taskStatistics:
+        $ref: '#/definitions/TaskStatistics'
+        description: Statistical information about the audit.
+      scheduledAuditName:
+        $ref: '#/definitions/ScheduledAuditName'
+        description: The name of the scheduled audit (only if the audit was a scheduled audit).
+      auditDetails:
+        $ref: '#/definitions/AuditDetails'
+        description: Detailed information about each check performed during this audit.
   DescribeAuthorizerRequest:
     type: object
     properties: {}
@@ -7064,6 +8459,60 @@ definitions:
       roleAliasDescription:
         $ref: '#/definitions/RoleAliasDescription'
         description: The role alias description.
+  DescribeScheduledAuditRequest:
+    type: object
+    properties: {}
+  DescribeScheduledAuditResponse:
+    type: object
+    properties:
+      frequency:
+        $ref: '#/definitions/AuditFrequency'
+        description: 'How often the scheduled audit takes place. One of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.'
+      dayOfMonth:
+        $ref: '#/definitions/DayOfMonth'
+        description: 'The day of the month on which the scheduled audit takes place. Will be "1" through "31" or "LAST". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
+      dayOfWeek:
+        $ref: '#/definitions/DayOfWeek'
+        description: 'The day of the week on which the scheduled audit takes place. One of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT".'
+      targetCheckNames:
+        $ref: '#/definitions/TargetAuditCheckNames'
+        description: Which checks are performed during the scheduled audit. (Note that checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)
+      scheduledAuditName:
+        $ref: '#/definitions/ScheduledAuditName'
+        description: The name of the scheduled audit.
+      scheduledAuditArn:
+        $ref: '#/definitions/ScheduledAuditArn'
+        description: The ARN of the scheduled audit.
+  DescribeSecurityProfileRequest:
+    type: object
+    properties: {}
+  DescribeSecurityProfileResponse:
+    type: object
+    properties:
+      securityProfileName:
+        $ref: '#/definitions/SecurityProfileName'
+        description: The name of the security profile.
+      securityProfileArn:
+        $ref: '#/definitions/SecurityProfileArn'
+        description: The ARN of the security profile.
+      securityProfileDescription:
+        $ref: '#/definitions/SecurityProfileDescription'
+        description: A description of the security profile (associated with the security profile when it was created or updated).
+      behaviors:
+        $ref: '#/definitions/Behaviors'
+        description: 'Specifies the behaviors that, when violated by a device (thing), cause an alert.'
+      alertTargets:
+        $ref: '#/definitions/AlertTargets'
+        description: Where the alerts are sent. (Alerts are always sent to the console.)
+      version:
+        $ref: '#/definitions/Version'
+        description: The version of the security profile. A new version is generated whenever the security profile is updated.
+      creationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The time the security profile was created.
+      lastModifiedDate:
+        $ref: '#/definitions/Timestamp'
+        description: The time the security profile was last modified.
   DescribeStreamRequest:
     type: object
     properties: {}
@@ -7205,6 +8654,12 @@ definitions:
     type: object
     properties: {}
     description: The input for the DetachPrincipalPolicy operation.
+  DetachSecurityProfileRequest:
+    type: object
+    properties: {}
+  DetachSecurityProfileResponse:
+    type: object
+    properties: {}
   DetachThingPrincipalRequest:
     type: object
     properties: {}
@@ -7238,6 +8693,8 @@ definitions:
     type: object
     properties: {}
     description: The input for the DisableTopicRuleRequest operation.
+  DurationSeconds:
+    type: integer
   DynamoDBAction:
     type: object
     required:
@@ -7355,6 +8812,8 @@ definitions:
     type: string
   EndpointType:
     type: string
+  ErrorCode:
+    type: string
   ErrorInfo:
     type: object
     properties:
@@ -7388,6 +8847,11 @@ definitions:
       - THING_TYPE_ASSOCIATION
       - JOB
       - JOB_EXECUTION
+      - POLICY
+      - CERTIFICATE
+      - CA_CERTIFICATE
+  ExecutionNamePrefix:
+    type: string
   ExecutionNumber:
     type: integer
   ExpectedVersion:
@@ -7403,6 +8867,8 @@ definitions:
         $ref: '#/definitions/Policies'
         description: The policies that denied the authorization.
     description: Information that explicitly denies authorization.
+  FailedChecksCount:
+    type: integer
   FailedThings:
     type: integer
   FileId:
@@ -7626,6 +9092,8 @@ definitions:
         $ref: '#/definitions/Policies'
         description: 'Policies that don''t contain a matching allow or deny statement for the specified action on the specified resource. '
     description: Information that implicitly denies authorization. When policy doesn't explicitly deny or allow an action on a resource it is considered an implicit deny.
+  InProgressChecksCount:
+    type: integer
   InProgressThings:
     type: integer
   IndexName:
@@ -7642,6 +9110,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
     description: The index is not ready.
   IndexSchema:
     type: string
@@ -7672,6 +9141,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
     description: The query is invalid.
   InvalidRequestException:
     type: object
@@ -7685,12 +9155,14 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
     description: The response is invalid.
   InvalidStateTransitionException:
     type: object
     properties:
       message:
         $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
     description: 'An attempt was made to change to an invalid state, for example by deleting a job or a job execution which is "IN_PROGRESS" without setting the <code>force</code> parameter.'
   IotAnalyticsAction:
     type: object
@@ -7756,9 +9228,6 @@ definitions:
       jobProcessDetails:
         $ref: '#/definitions/JobProcessDetails'
         description: Details about the job process.
-      documentParameters:
-        $ref: '#/definitions/JobDocumentParameters'
-        description: The parameters specified for the job document.
     description: The <code>Job</code> object contains details about a job.
   JobArn:
     type: string
@@ -7769,16 +9238,6 @@ definitions:
   JobDocument:
     type: string
     maxLength: 32768
-  JobDocumentParameters:
-    type: array
-    maxItems: 10
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ParameterKey'
-        value:
-          $ref: '#/definitions/ParameterValue'
   JobDocumentSource:
     type: string
     minLength: 1
@@ -8026,6 +9485,18 @@ definitions:
         $ref: '#/definitions/errorMessage'
         description: The message for the exception.
     description: A limit has been exceeded.
+  ListActiveViolationsRequest:
+    type: object
+    properties: {}
+  ListActiveViolationsResponse:
+    type: object
+    properties:
+      activeViolations:
+        $ref: '#/definitions/ActiveViolations'
+        description: The list of active violations.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.'
   ListAttachedPoliciesRequest:
     type: object
     properties: {}
@@ -8038,6 +9509,51 @@ definitions:
       nextMarker:
         $ref: '#/definitions/Marker'
         description: 'The token to retrieve the next set of results, or ``null`` if there are no more results.'
+  ListAuditFindingsRequest:
+    type: object
+    properties:
+      taskId:
+        $ref: '#/definitions/AuditTaskId'
+        description: 'A filter to limit results to the audit with the specified ID. You must specify either the taskId or the startTime and endTime, but not both.'
+      checkName:
+        $ref: '#/definitions/AuditCheckName'
+        description: A filter to limit results to the findings for the specified audit check.
+      resourceIdentifier:
+        $ref: '#/definitions/ResourceIdentifier'
+        description: Information identifying the non-compliant resource.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return at one time. The default is 25.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of results.
+      startTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'A filter to limit results to those found after the specified time. You must specify either the startTime and endTime or the taskId, but not both.'
+      endTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'A filter to limit results to those found before the specified time. You must specify either the startTime and endTime or the taskId, but not both.'
+  ListAuditFindingsResponse:
+    type: object
+    properties:
+      findings:
+        $ref: '#/definitions/AuditFindings'
+        description: The findings (results) of the audit.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.'
+  ListAuditTasksRequest:
+    type: object
+    properties: {}
+  ListAuditTasksResponse:
+    type: object
+    properties:
+      tasks:
+        $ref: '#/definitions/AuditTaskMetadataList'
+        description: The audits that were performed during the specified time period.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.'
   ListAuthorizersRequest:
     type: object
     properties: {}
@@ -8245,6 +9761,42 @@ definitions:
       nextMarker:
         $ref: '#/definitions/Marker'
         description: A marker used to get the next set of results.
+  ListScheduledAuditsRequest:
+    type: object
+    properties: {}
+  ListScheduledAuditsResponse:
+    type: object
+    properties:
+      scheduledAudits:
+        $ref: '#/definitions/ScheduledAuditMetadataList'
+        description: The list of scheduled audits.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.'
+  ListSecurityProfilesForTargetRequest:
+    type: object
+    properties: {}
+  ListSecurityProfilesForTargetResponse:
+    type: object
+    properties:
+      securityProfileTargetMappings:
+        $ref: '#/definitions/SecurityProfileTargetMappings'
+        description: A list of security profiles and their associated targets.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.'
+  ListSecurityProfilesRequest:
+    type: object
+    properties: {}
+  ListSecurityProfilesResponse:
+    type: object
+    properties:
+      securityProfileIdentifiers:
+        $ref: '#/definitions/SecurityProfileIdentifiers'
+        description: A list of security profile identifiers (names and ARNs).
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.'
   ListStreamsRequest:
     type: object
     properties: {}
@@ -8269,6 +9821,18 @@ definitions:
       nextMarker:
         $ref: '#/definitions/Marker'
         description: A marker used to get the next set of results.
+  ListTargetsForSecurityProfileRequest:
+    type: object
+    properties: {}
+  ListTargetsForSecurityProfileResponse:
+    type: object
+    properties:
+      securityProfileTargets:
+        $ref: '#/definitions/SecurityProfileTargets'
+        description: The thing groups to which the security profile is attached.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.'
   ListThingGroupsForThingRequest:
     type: object
     properties: {}
@@ -8318,7 +9882,7 @@ definitions:
         description: The type of task report.
       nextToken:
         $ref: '#/definitions/NextToken'
-        description: The token to retrieve the next set of results.
+        description: 'The token used to get the next set of results, or <b>null</b> if there are no additional results.'
   ListThingRegistrationTasksRequest:
     type: object
     properties: {}
@@ -8397,6 +9961,18 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token used to get the next set of results, or <b>null</b> if there are no additional results.'
+  ListViolationEventsRequest:
+    type: object
+    properties: {}
+  ListViolationEventsResponse:
+    type: object
+    properties:
+      violationEvents:
+        $ref: '#/definitions/ViolationEvents'
+        description: 'The security profile violation alerts issued for this account during the given time frame, potentially filtered by security profile, behavior violated, or thing (device) violating.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.'
   LogLevel:
     type: string
     enum:
@@ -8476,16 +10052,19 @@ definitions:
     enum:
       - RAW
       - JSON
-  MetricName:
-    type: string
-  MetricNamespace:
-    type: string
-  MetricTimestamp:
-    type: string
-  MetricUnit:
-    type: string
   MetricValue:
-    type: string
+    type: object
+    properties:
+      count:
+        $ref: '#/definitions/UnsignedLong'
+        description: 'If the <code>comparisonOperator</code> calls for a numeric value, use this to specify that numeric value to be compared with the <code>metric</code>.'
+      cidrs:
+        $ref: '#/definitions/Cidrs'
+        description: 'If the <code>comparisonOperator</code> calls for a set of CIDRs, use this to specify that set to be compared with the <code>metric</code>.'
+      ports:
+        $ref: '#/definitions/Ports'
+        description: 'If the <code>comparisonOperator</code> calls for a set of ports, use this to specify that set to be compared with the <code>metric</code>.'
+    description: The value to be compared with the <code>metric</code>.
   MissingContextValue:
     type: string
   MissingContextValues:
@@ -8494,11 +10073,29 @@ definitions:
       $ref: '#/definitions/MissingContextValue'
   NextToken:
     type: string
+  NonCompliantChecksCount:
+    type: integer
+  NonCompliantResource:
+    type: object
+    properties:
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of the non-compliant resource.
+      resourceIdentifier:
+        $ref: '#/definitions/ResourceIdentifier'
+        description: Information identifying the non-compliant resource.
+      additionalInfo:
+        $ref: '#/definitions/StringMap'
+        description: Additional information about the non-compliant resource.
+    description: Information about the resource that was non-compliant with the audit check.
+  NonCompliantResourcesCount:
+    type: integer
   NotConfiguredException:
     type: object
     properties:
       message:
         $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
     description: The resource is not configured.
   OTAUpdateArn:
     type: string
@@ -8641,16 +10238,6 @@ definitions:
     maximum: 250
   Parameter:
     type: string
-  ParameterKey:
-    type: string
-    pattern: '[a-zA-Z0-9:_-]+'
-    minLength: 1
-    maxLength: 128
-  ParameterValue:
-    type: string
-    pattern: '[^\p{C}]+'
-    minLength: 1
-    maxLength: 1024
   Parameters:
     type: array
     items:
@@ -8721,10 +10308,28 @@ definitions:
   PolicyVersionId:
     type: string
     pattern: '[0-9]+'
+  PolicyVersionIdentifier:
+    type: object
+    properties:
+      policyName:
+        $ref: '#/definitions/PolicyName'
+        description: The name of the policy.
+      policyVersionId:
+        $ref: '#/definitions/PolicyVersionId'
+        description: The ID of the version of the policy associated with the resource.
+    description: Information about the version of the policy associated with the resource.
   PolicyVersions:
     type: array
     items:
       $ref: '#/definitions/PolicyVersion'
+  Port:
+    type: integer
+    minimum: 0
+    maximum: 65535
+  Ports:
+    type: array
+    items:
+      $ref: '#/definitions/Port'
   PresignedUrlConfig:
     type: object
     properties:
@@ -8797,6 +10402,10 @@ definitions:
     type: string
   RangeKeyValue:
     type: string
+  ReasonForNonCompliance:
+    type: string
+  ReasonForNonComplianceCode:
+    type: string
   Recursive:
     type: boolean
   RecursiveWithoutDefault:
@@ -8868,6 +10477,7 @@ definitions:
     properties:
       certificatePem:
         $ref: '#/definitions/CertificatePem'
+        description: .
       resourceArns:
         $ref: '#/definitions/ResourceArns'
         description: ARNs for the generated resources.
@@ -8916,6 +10526,23 @@ definitions:
     description: The input for the RejectCertificateTransfer operation.
   RejectedThings:
     type: integer
+  RelatedResource:
+    type: object
+    properties:
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of resource.
+      resourceIdentifier:
+        $ref: '#/definitions/ResourceIdentifier'
+        description: Information identifying the resource.
+      additionalInfo:
+        $ref: '#/definitions/StringMap'
+        description: Additional information about the resource.
+    description: Information about a related resource.
+  RelatedResources:
+    type: array
+    items:
+      $ref: '#/definitions/RelatedResource'
   RemoveAutoRegistration:
     type: boolean
   RemoveThingFromThingGroupRequest:
@@ -8993,6 +10620,28 @@ definitions:
           $ref: '#/definitions/ResourceLogicalId'
         value:
           $ref: '#/definitions/ResourceArn'
+  ResourceIdentifier:
+    type: object
+    properties:
+      deviceCertificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The ID of the certificate attached to the resource.
+      caCertificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The ID of the CA certificate used to authorize the certificate.
+      cognitoIdentityPoolId:
+        $ref: '#/definitions/CognitoIdentityPoolId'
+        description: The ID of the Cognito Identity Pool.
+      clientId:
+        $ref: '#/definitions/ClientId'
+        description: The client ID.
+      policyVersionIdentifier:
+        $ref: '#/definitions/PolicyVersionIdentifier'
+        description: The version of the policy associated with the resource.
+      account:
+        $ref: '#/definitions/AwsAccountId'
+        description: The account with which the resource is associated.
+    description: Information identifying the non-compliant resource.
   ResourceLogicalId:
     type: string
   ResourceNotFoundException:
@@ -9007,7 +10656,17 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
     description: The resource registration failed.
+  ResourceType:
+    type: string
+    enum:
+      - DEVICE_CERTIFICATE
+      - CA_CERTIFICATE
+      - IOT_POLICY
+      - COGNITO_IDENTITY_POOL
+      - CLIENT_ID
+      - ACCOUNT_SETTINGS
   Resources:
     type: array
     items:
@@ -9132,6 +10791,36 @@ definitions:
   SalesforceToken:
     type: string
     minLength: 40
+  ScheduledAuditArn:
+    type: string
+  ScheduledAuditMetadata:
+    type: object
+    properties:
+      scheduledAuditName:
+        $ref: '#/definitions/ScheduledAuditName'
+        description: The name of the scheduled audit.
+      scheduledAuditArn:
+        $ref: '#/definitions/ScheduledAuditArn'
+        description: The ARN of the scheduled audit.
+      frequency:
+        $ref: '#/definitions/AuditFrequency'
+        description: How often the scheduled audit takes place.
+      dayOfMonth:
+        $ref: '#/definitions/DayOfMonth'
+        description: 'The day of the month on which the scheduled audit is run (if the <code>frequency</code> is "MONTHLY"). If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
+      dayOfWeek:
+        $ref: '#/definitions/DayOfWeek'
+        description: The day of the week on which the scheduled audit is run (if the <code>frequency</code> is "WEEKLY" or "BIWEEKLY").
+    description: Information about the scheduled audit.
+  ScheduledAuditMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/ScheduledAuditMetadata'
+  ScheduledAuditName:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 128
   SearchIndexRequest:
     type: object
     required:
@@ -9167,6 +10856,63 @@ definitions:
       $ref: '#/definitions/AttributeName'
   Seconds:
     type: integer
+  SecurityProfileArn:
+    type: string
+  SecurityProfileDescription:
+    type: string
+    pattern: '[\p{Graph}\x20]*'
+    maxLength: 1000
+  SecurityProfileIdentifier:
+    type: object
+    required:
+      - name
+      - arn
+    properties:
+      name:
+        $ref: '#/definitions/SecurityProfileName'
+        description: The name you have given to the security profile.
+      arn:
+        $ref: '#/definitions/SecurityProfileArn'
+        description: The ARN of the security profile.
+    description: Identifying information for a Device Defender security profile.
+  SecurityProfileIdentifiers:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityProfileIdentifier'
+  SecurityProfileName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  SecurityProfileTarget:
+    type: object
+    required:
+      - arn
+    properties:
+      arn:
+        $ref: '#/definitions/SecurityProfileTargetArn'
+        description: The ARN of the security profile.
+    description: A target to which an alert is sent when a security profile behavior is violated.
+  SecurityProfileTargetArn:
+    type: string
+  SecurityProfileTargetMapping:
+    type: object
+    properties:
+      securityProfileIdentifier:
+        $ref: '#/definitions/SecurityProfileIdentifier'
+        description: Information that identifies the security profile.
+      target:
+        $ref: '#/definitions/SecurityProfileTarget'
+        description: Information about the target (thing group) associated with the security profile.
+    description: Information about a security profile and the target associated with it.
+  SecurityProfileTargetMappings:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityProfileTargetMapping'
+  SecurityProfileTargets:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityProfileTarget'
   ServiceUnavailableException:
     type: object
     properties:
@@ -9227,13 +10973,13 @@ definitions:
     properties:
       roleArn:
         $ref: '#/definitions/AwsArn'
-        description: The role ARN that allows IoT to write to Cloudwatch logs.
+        description: The ARN of the role that allows IoT to write to Cloudwatch logs.
       defaultLogLevel:
         $ref: '#/definitions/LogLevel'
         description: The default logging level.
       disableAllLogs:
         $ref: '#/definitions/DisableAllLogs'
-        description: 'Set to true to disable all logs, otherwise set to false.'
+        description: If true all logs are disabled. The default is false.
   Signature:
     type: string
   SignatureAlgorithm:
@@ -9283,6 +11029,20 @@ definitions:
         $ref: '#/definitions/UseBase64'
         description: Specifies whether to use Base64 encoding.
     description: Describes an action to publish data to an Amazon SQS queue.
+  StartOnDemandAuditTaskRequest:
+    type: object
+    required:
+      - targetCheckNames
+    properties:
+      targetCheckNames:
+        $ref: '#/definitions/TargetAuditCheckNames'
+        description: Which checks are performed during the audit. The checks you specify must be enabled for your account or an exception occurs. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.
+  StartOnDemandAuditTaskResponse:
+    type: object
+    properties:
+      taskId:
+        $ref: '#/definitions/AuditTaskId'
+        description: The ID of the on-demand audit you started.
   StartThingRegistrationTaskRequest:
     type: object
     required:
@@ -9309,6 +11069,8 @@ definitions:
       taskId:
         $ref: '#/definitions/TaskId'
         description: The bulk thing provisioning task ID.
+  StateMachineName:
+    type: string
   StateReason:
     type: string
   StateValue:
@@ -9321,6 +11083,22 @@ definitions:
       - Failed
       - Cancelled
       - Cancelling
+  StepFunctionsAction:
+    type: object
+    required:
+      - stateMachineName
+      - roleArn
+    properties:
+      executionNamePrefix:
+        $ref: '#/definitions/ExecutionNamePrefix'
+        description: (Optional) A name will be given to the state machine execution consisting of this prefix followed by a UUID. Step Functions automatically creates a unique name for each state machine execution if one is not provided.
+      stateMachineName:
+        $ref: '#/definitions/StateMachineName'
+        description: The name of the Step Functions state machine whose execution will be started.
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: 'The ARN of the role that grants IoT permission to start execution of a state machine ("Action":"states:StartExecution").'
+    description: Starts execution of a Step Functions state machine.
   StopThingRegistrationTaskRequest:
     type: object
     properties: {}
@@ -9418,6 +11196,17 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/StreamSummary'
+  String:
+    type: string
+  StringMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
   SucceededThings:
     type: integer
   TableName:
@@ -9426,6 +11215,10 @@ definitions:
     type: string
   TargetArn:
     type: string
+  TargetAuditCheckNames:
+    type: array
+    items:
+      $ref: '#/definitions/AuditCheckName'
   TargetSelection:
     type: string
     enum:
@@ -9443,6 +11236,31 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TaskId'
+  TaskStatistics:
+    type: object
+    properties:
+      totalChecks:
+        $ref: '#/definitions/TotalChecksCount'
+        description: The number of checks in this audit.
+      inProgressChecks:
+        $ref: '#/definitions/InProgressChecksCount'
+        description: The number of checks in progress.
+      waitingForDataCollectionChecks:
+        $ref: '#/definitions/WaitingForDataCollectionChecksCount'
+        description: The number of checks waiting for data collection.
+      compliantChecks:
+        $ref: '#/definitions/CompliantChecksCount'
+        description: The number of checks that found compliant resources.
+      nonCompliantChecks:
+        $ref: '#/definitions/NonCompliantChecksCount'
+        description: The number of checks that found non-compliant resources.
+      failedChecks:
+        $ref: '#/definitions/FailedChecksCount'
+        description: 'The number of checks '
+      canceledChecks:
+        $ref: '#/definitions/CanceledChecksCount'
+        description: The number of checks that did not run because the audit was canceled.
+    description: Statistics for the checks performed during the audit.
   TemplateBody:
     type: string
   TestAuthorizationRequest:
@@ -9687,10 +11505,13 @@ definitions:
         $ref: '#/definitions/errorMessage'
         description: The message for the exception.
     description: The rate exceeds the limit.
+  Timestamp:
+    type: string
+    format: date-time
   Token:
     type: string
     minLength: 1
-    maxLength: 1024
+    maxLength: 6144
   TokenKeyName:
     type: string
     pattern: '[a-zA-Z0-9_-]+'
@@ -9781,6 +11602,10 @@ definitions:
         $ref: '#/definitions/Action'
         description: The action to take when an error occurs.
     description: Describes a rule.
+  TotalChecksCount:
+    type: integer
+  TotalResourcesCount:
+    type: integer
   TransferAlreadyCompletedException:
     type: object
     properties:
@@ -9837,6 +11662,24 @@ definitions:
     description: You are not authorized to perform this operation.
   UndoDeprecate:
     type: boolean
+  UnsignedLong:
+    type: integer
+    minimum: 0
+  UpdateAccountAuditConfigurationRequest:
+    type: object
+    properties:
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: 'The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as necessary when performing an audit.'
+      auditNotificationTargetConfigurations:
+        $ref: '#/definitions/AuditNotificationTargetConfigurations'
+        description: Information about the targets to which audit notifications are sent.
+      auditCheckConfigurations:
+        $ref: '#/definitions/AuditCheckConfigurations'
+        description: '<p>Specifies which audit checks are enabled and disabled for this account. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are currently enabled.</p> <p>Note that some data collection may begin immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted.</p> <p>You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code> this parameter is required and must specify at least one enabled check.</p>'
+  UpdateAccountAuditConfigurationResponse:
+    type: object
+    properties: {}
   UpdateAuthorizerRequest:
     type: object
     properties:
@@ -9911,6 +11754,66 @@ definitions:
       roleAliasArn:
         $ref: '#/definitions/RoleAliasArn'
         description: The role alias ARN.
+  UpdateScheduledAuditRequest:
+    type: object
+    properties:
+      frequency:
+        $ref: '#/definitions/AuditFrequency'
+        description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.'
+      dayOfMonth:
+        $ref: '#/definitions/DayOfMonth'
+        description: 'The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
+      dayOfWeek:
+        $ref: '#/definitions/DayOfWeek'
+        description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
+      targetCheckNames:
+        $ref: '#/definitions/TargetAuditCheckNames'
+        description: Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)
+  UpdateScheduledAuditResponse:
+    type: object
+    properties:
+      scheduledAuditArn:
+        $ref: '#/definitions/ScheduledAuditArn'
+        description: The ARN of the scheduled audit.
+  UpdateSecurityProfileRequest:
+    type: object
+    properties:
+      securityProfileDescription:
+        $ref: '#/definitions/SecurityProfileDescription'
+        description: A description of the security profile.
+      behaviors:
+        $ref: '#/definitions/Behaviors'
+        description: 'Specifies the behaviors that, when violated by a device (thing), cause an alert.'
+      alertTargets:
+        $ref: '#/definitions/AlertTargets'
+        description: Where the alerts are sent. (Alerts are always sent to the console.)
+  UpdateSecurityProfileResponse:
+    type: object
+    properties:
+      securityProfileName:
+        $ref: '#/definitions/SecurityProfileName'
+        description: The name of the security profile that was updated.
+      securityProfileArn:
+        $ref: '#/definitions/SecurityProfileArn'
+        description: The ARN of the security profile that was updated.
+      securityProfileDescription:
+        $ref: '#/definitions/SecurityProfileDescription'
+        description: The description of the security profile.
+      behaviors:
+        $ref: '#/definitions/Behaviors'
+        description: 'Specifies the behaviors that, when violated by a device (thing), cause an alert.'
+      alertTargets:
+        $ref: '#/definitions/AlertTargets'
+        description: Where the alerts are sent. (Alerts are always sent to the console.)
+      version:
+        $ref: '#/definitions/Version'
+        description: The updated version of the security profile.
+      creationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The time the security profile was created.
+      lastModifiedDate:
+        $ref: '#/definitions/Timestamp'
+        description: The time the security profile was last modified.
   UpdateStreamRequest:
     type: object
     properties:
@@ -9992,6 +11895,36 @@ definitions:
     description: The output from the UpdateThing operation.
   UseBase64:
     type: boolean
+  Valid:
+    type: boolean
+  ValidateSecurityProfileBehaviorsRequest:
+    type: object
+    required:
+      - behaviors
+    properties:
+      behaviors:
+        $ref: '#/definitions/Behaviors'
+        description: 'Specifies the behaviors that, when violated by a device (thing), cause an alert.'
+  ValidateSecurityProfileBehaviorsResponse:
+    type: object
+    properties:
+      valid:
+        $ref: '#/definitions/Valid'
+        description: True if the behaviors were valid.
+      validationErrors:
+        $ref: '#/definitions/ValidationErrors'
+        description: The list of any errors found in the behaviors.
+  ValidationError:
+    type: object
+    properties:
+      errorMessage:
+        $ref: '#/definitions/ErrorMessage'
+        description: The description of an error found in the behaviors.
+    description: Information about an error found in a behavior specification.
+  ValidationErrors:
+    type: array
+    items:
+      $ref: '#/definitions/ValidationError'
   Value:
     type: string
   Version:
@@ -10012,6 +11945,48 @@ definitions:
         $ref: '#/definitions/errorMessage'
         description: The message for the exception.
     description: The number of policy versions exceeds the limit.
+  ViolationEvent:
+    type: object
+    properties:
+      violationId:
+        $ref: '#/definitions/ViolationId'
+        description: The ID of the violation event.
+      thingName:
+        $ref: '#/definitions/ThingName'
+        description: The name of the thing responsible for the violation event.
+      securityProfileName:
+        $ref: '#/definitions/SecurityProfileName'
+        description: The name of the security profile whose behavior was violated.
+      behavior:
+        $ref: '#/definitions/Behavior'
+        description: The behavior which was violated.
+      metricValue:
+        $ref: '#/definitions/MetricValue'
+        description: The value of the metric (the measurement).
+      violationEventType:
+        $ref: '#/definitions/ViolationEventType'
+        description: The type of violation event.
+      violationEventTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time the violation event occurred.
+    description: Information about a Device Defender security profile behavior violation.
+  ViolationEventType:
+    type: string
+    enum:
+      - in-alarm
+      - alarm-cleared
+      - alarm-invalidated
+  ViolationEvents:
+    type: array
+    items:
+      $ref: '#/definitions/ViolationEvent'
+  ViolationId:
+    type: string
+    pattern: '[a-zA-Z0-9\-]+'
+    minLength: 1
+    maxLength: 128
+  WaitingForDataCollectionChecksCount:
+    type: integer
   errorMessage:
     type: string
   resourceArn:

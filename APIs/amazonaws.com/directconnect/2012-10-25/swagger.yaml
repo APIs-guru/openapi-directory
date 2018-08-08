@@ -1686,6 +1686,8 @@ definitions:
   AwsDevice:
     type: string
     description: '<p>An abstract ID for the physical Direct Connect endpoint.</p> <p>Example: EQC50-abcdef123456</p>'
+  AwsDeviceV2:
+    type: string
   BGPAuthKey:
     type: string
     description: '<p>The authentication key for BGP configuration.</p> <p>Example: asdf34example</p>'
@@ -1706,6 +1708,9 @@ definitions:
         $ref: '#/definitions/BGPPeerState'
       bgpStatus:
         $ref: '#/definitions/BGPStatus'
+      awsDeviceV2:
+        $ref: '#/definitions/AwsDeviceV2'
+        description: The Direct Connection endpoint which the BGP peer terminates on.
     description: A structure containing information about a BGP peer.
   BGPPeerList:
     type: array
@@ -1726,7 +1731,7 @@ definitions:
     enum:
       - up
       - down
-    description: '<p>The Up/Down state of the BGP peer.</p> <ul> <li> <p> <b>Up</b>: The BGP peer is established.</p> </li> <li> <p> <b>Down</b>: The BGP peer is down.</p> </li> </ul>'
+    description: '<p>The Up/Down state of the BGP peer.</p> <ul> <li> <p> <b>Up</b>: The BGP peer is established.</p> <note> <p>A state of <code>up</code> does not indicate the state of the routing function. Ensure that you are receiving routes over the BGP session.</p> </note> </li> <li> <p> <b>Down</b>: The BGP peer is down.</p> </li> </ul>'
   Bandwidth:
     type: string
     description: '<p>Bandwidth of the connection.</p> <p>Example: 1Gbps</p> <p>Default: None</p>'
@@ -1813,6 +1818,9 @@ definitions:
         $ref: '#/definitions/LagId'
       awsDevice:
         $ref: '#/definitions/AwsDevice'
+        description: <p>Deprecated in favor of awsDeviceV2.</p> <p>The Direct Connection endpoint which the physical connection terminates on.</p>
+      awsDeviceV2:
+        $ref: '#/definitions/AwsDeviceV2'
         description: The Direct Connection endpoint which the physical connection terminates on.
     description: A connection represents the physical network connection between the AWS Direct Connect location and the customer.
   ConnectionId:
@@ -2424,6 +2432,9 @@ definitions:
         $ref: '#/definitions/LagId'
       awsDevice:
         $ref: '#/definitions/AwsDevice'
+        description: <p>Deprecated in favor of awsDeviceV2.</p> <p>The Direct Connection endpoint which the physical connection terminates on.</p>
+      awsDeviceV2:
+        $ref: '#/definitions/AwsDeviceV2'
         description: The Direct Connection endpoint which the physical connection terminates on.
     description: '<p>An interconnect is a connection that can host other connections.</p> <p>Like a standard AWS Direct Connect connection, an interconnect represents the physical connection between an AWS Direct Connect partner''s network and a specific Direct Connect location. An AWS Direct Connect partner who owns an interconnect can provision hosted connections on the interconnect for their end customers, thereby providing the end customers with connectivity to AWS services.</p> <p>The resources of the interconnect, including bandwidth and VLAN numbers, are shared by all of the hosted connections on the interconnect, and the owner of the interconnect determines how these resources are assigned.</p>'
   InterconnectId:
@@ -2482,6 +2493,9 @@ definitions:
         description: 'The minimum number of physical connections that must be operational for the LAG itself to be operational. If the number of operational connections drops below this setting, the LAG state changes to <code>down</code>. This value can help to ensure that a LAG is not overutilized if a significant number of its bundled connections go down.'
       awsDevice:
         $ref: '#/definitions/AwsDevice'
+        description: <p>Deprecated in favor of awsDeviceV2.</p> <p>The AWS Direct Connection endpoint that hosts the LAG.</p>
+      awsDeviceV2:
+        $ref: '#/definitions/AwsDeviceV2'
         description: The AWS Direct Connection endpoint that hosts the LAG.
       connections:
         $ref: '#/definitions/ConnectionList'
@@ -2542,6 +2556,9 @@ definitions:
       locationCode:
         $ref: '#/definitions/LocationCode'
         description: The code used to indicate the AWS Direct Connect location.
+      region:
+        $ref: '#/definitions/Region'
+        description: '<p>The AWS region where the AWS Direct connect location is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>'
     description: An AWS Direct Connect location where connections and interconnects can be requested.
   LocationCode:
     type: string
@@ -2883,6 +2900,12 @@ definitions:
         $ref: '#/definitions/RouteFilterPrefixList'
       bgpPeers:
         $ref: '#/definitions/BGPPeerList'
+      region:
+        $ref: '#/definitions/Region'
+        description: '<p>The AWS region where the virtual interface is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>'
+      awsDeviceV2:
+        $ref: '#/definitions/AwsDeviceV2'
+        description: The Direct Connection endpoint which the virtual interface terminates on.
     description: A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect location and the customer.
   VirtualInterfaceId:
     type: string

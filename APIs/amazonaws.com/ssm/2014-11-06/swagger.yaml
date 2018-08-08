@@ -2671,7 +2671,7 @@ paths:
   '/#LabelParameterVersion':
     post:
       operationId: LabelParameterVersion
-      description: ''
+      description: '<p>A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions. </p> <p>Parameter labels have the following requirements and restrictions.</p> <ul> <li> <p>A version of a parameter can have a maximum of 10 labels.</p> </li> <li> <p>You can''t attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can''t attach Production to version 2.</p> </li> <li> <p>You can move a label from one version of a parameter to another.</p> </li> <li> <p>You can''t create a label when you create a new parameter. You must attach a label to a specific version of a parameter.</p> </li> <li> <p>You can''t delete a parameter label. If you no longer want to use a parameter label, then you must move it to a different version of a parameter.</p> </li> <li> <p>A label can have a maximum of 100 characters.</p> </li> <li> <p>Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).</p> </li> <li> <p>Labels can''t begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -5177,7 +5177,7 @@ definitions:
         description: The name of the filter.
       value:
         $ref: '#/definitions/CommandFilterValue'
-        description: 'The filter value. '
+        description: '<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p> <b>InvokedAfter</b>: Specify a timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions occurring July 7, 2018, and later.</p> </li> <li> <p> <b>InvokedBefore</b>: Specify a timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions from before July 7, 2018.</p> </li> <li> <p> <b>Status</b>: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:</p> <ul> <li> <p> <code>Pending</code> </p> </li> <li> <p> <code>InProgress</code> </p> </li> <li> <p> <code>Success</code> </p> </li> <li> <p> <code>Cancelled</code> </p> </li> <li> <p> <code>Failed</code> </p> </li> <li> <p> <code>TimedOut</code> </p> </li> <li> <p> <code>Cancelling</code> </p> </li> </ul> </li> <li> <p> <b>DocumentName</b>: Specify name of the SSM document for which you want to see command execution results. For example, specify <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to perform security patching operations on instances. </p> </li> <li> <p> <b>ExecutionStage</b>: Specify one of the following values:</p> <ul> <li> <p> <code>Executing</code>: Returns a list of command executions that are currently still running.</p> </li> <li> <p> <code>Complete</code>: Returns a list of command exeuctions that have already completed. </p> </li> </ul> </li> </ul>'
     description: Describes a command filter.
   CommandFilterKey:
     type: string
@@ -5185,15 +5185,18 @@ definitions:
       - InvokedAfter
       - InvokedBefore
       - Status
+      - ExecutionStage
+      - DocumentName
   CommandFilterList:
     type: array
     items:
       $ref: '#/definitions/CommandFilter'
     minItems: 1
-    maxItems: 3
+    maxItems: 5
   CommandFilterValue:
     type: string
     minLength: 1
+    maxLength: 128
   CommandId:
     type: string
     minLength: 36
@@ -8681,15 +8684,19 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/PSParameterName'
+        description: The parameter name on which you want to attach one or more labels.
       ParameterVersion:
         $ref: '#/definitions/PSParameterVersion'
+        description: 'The specific version of the parameter on which you want to attach one or more labels. If no version is specified, the system attaches the label to the latest version.)'
       Labels:
         $ref: '#/definitions/ParameterLabelList'
+        description: One or more labels to attach to the specified parameter version.
   LabelParameterVersionResult:
     type: object
     properties:
       InvalidLabels:
         $ref: '#/definitions/ParameterLabelList'
+        description: 'The label does not meet the requirements. For information about parameter label requirements, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html">Labeling Parameters</a> in the <i>AWS Systems Manager User Guide</i>.'
   LastResourceDataSyncMessage:
     type: string
   LastResourceDataSyncStatus:
@@ -9849,6 +9856,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/String'
+    description: A parameter version can have a maximum of ten labels.
   ParameterVersionNotFound:
     type: object
     properties:
@@ -10444,7 +10452,6 @@ definitions:
       - WindowId
       - Targets
       - TaskArn
-      - ServiceRoleArn
       - TaskType
       - MaxConcurrency
       - MaxErrors

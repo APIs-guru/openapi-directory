@@ -330,7 +330,7 @@ definitions:
         description: 'The unique identifier for the entity. Format: <code>arn:aws:health:<i>entity-region</i>:<i>aws-account</i>:entity/<i>entity-id</i> </code>. Example: <code>arn:aws:health:us-east-1:111222333444:entity/AVh5GGT7ul1arKr1sE1K</code> '
       eventArn:
         $ref: '#/definitions/eventArn'
-        description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331</code> '
+        description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
       entityValue:
         $ref: '#/definitions/entityValue'
         description: The ID of the affected entity.
@@ -388,7 +388,7 @@ definitions:
     properties:
       eventArns:
         $ref: '#/definitions/EventArnsList'
-        description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331", "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"</code> '
+        description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"</code> '
   DescribeEntityAggregatesResponse:
     type: object
     properties:
@@ -432,7 +432,7 @@ definitions:
     properties:
       eventArns:
         $ref: '#/definitions/eventArnList'
-        description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331", "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"</code> '
+        description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"</code> '
       locale:
         $ref: '#/definitions/locale'
         description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
@@ -502,7 +502,7 @@ definitions:
     properties:
       eventArn:
         $ref: '#/definitions/eventArn'
-        description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331</code> '
+        description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
       count:
         $ref: '#/definitions/count'
         description: The number entities that match the criteria for the specified events.
@@ -518,7 +518,7 @@ definitions:
     properties:
       eventArns:
         $ref: '#/definitions/eventArnList'
-        description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331", "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"</code> '
+        description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"</code> '
       entityArns:
         $ref: '#/definitions/entityArnList'
         description: A list of entity ARNs (unique identifiers).
@@ -544,7 +544,7 @@ definitions:
     properties:
       arn:
         $ref: '#/definitions/eventArn'
-        description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331</code> '
+        description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
       service:
         $ref: '#/definitions/service'
         description: 'The AWS service that is affected by the event. For example, <code>EC2</code>, <code>RDS</code>.'
@@ -553,7 +553,7 @@ definitions:
         description: 'The unique identifier for the event type. The format is <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i> </code>; for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.'
       eventTypeCategory:
         $ref: '#/definitions/eventTypeCategory'
-        description: 'The '
+        description: 'The category of the event. Possible values are <code>issue</code>, <code>scheduledChange</code>, and <code>accountNotification</code>.'
       region:
         $ref: '#/definitions/region'
         description: The AWS region name of the event.
@@ -618,7 +618,7 @@ definitions:
     properties:
       eventArn:
         $ref: '#/definitions/eventArn'
-        description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331</code> '
+        description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
       errorName:
         $ref: '#/definitions/string'
         description: The name of the error.
@@ -631,7 +631,7 @@ definitions:
     properties:
       eventArns:
         $ref: '#/definitions/eventArnList'
-        description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331", "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"</code> '
+        description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"</code> '
       eventTypeCodes:
         $ref: '#/definitions/eventTypeList'
         description: 'A list of unique identifiers for event types. For example, <code>"AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED"</code> '
@@ -783,7 +783,7 @@ definitions:
       - eventTypeCategory
   eventArn:
     type: string
-    pattern: 'arn:aws:health:[^:]*:[^:]*:event/[\w-]+'
+    pattern: 'arn:aws:health:[^:]*:[^:]*:event(?:/[\w-]+){1}((?:/[\w-]+){2})?'
     maxLength: 1600
   eventArnList:
     type: array
