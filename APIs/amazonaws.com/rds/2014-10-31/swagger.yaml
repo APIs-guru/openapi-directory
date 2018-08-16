@@ -756,6 +756,10 @@ paths:
           description: DomainNotFoundFault
           schema:
             $ref: '#/definitions/DomainNotFoundFault'
+        '498':
+          description: BackupPolicyNotFoundFault
+          schema:
+            $ref: '#/definitions/BackupPolicyNotFoundFault'
       parameters:
         - name: body
           in: body
@@ -2690,6 +2694,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyCurrentDBClusterCapacity':
+    post:
+      operationId: ModifyCurrentDBClusterCapacity
+      description: '<p>Set the capacity of an Aurora Serverless DB cluster to a specific value.</p> <p>Aurora Serverless scales seamlessly based on the workload on the DB cluster. In some cases, the capacity might not scale fast enough to meet a sudden change in workload, such as a large number of new transactions. Call <code>ModifyCurrentDBClusterCapacity</code> to set the capacity explicitly.</p> <p>After this call sets the DB cluster capacity, Aurora Serverless can automatically scale the DB cluster based on the cooldown period for scaling up and the cooldown period for scaling down.</p> <p>For more information about Aurora Serverless, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> in the <i>Amazon RDS User Guide</i>.</p> <important> <p>If you call <code>ModifyCurrentDBClusterCapacity</code> with the default <code>TimeoutAction</code>, connections that prevent Aurora Serverless from finding a scaling point might be dropped. For more information about scaling points, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling"> Autoscaling for Aurora Serverless</a> in the <i>Amazon RDS User Guide</i>.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBClusterCapacityInfo'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBClusterCapacityFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterCapacityFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyCurrentDBClusterCapacityMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ModifyDBCluster':
     post:
       operationId: ModifyDBCluster
@@ -2902,6 +2943,10 @@ paths:
           description: DomainNotFoundFault
           schema:
             $ref: '#/definitions/DomainNotFoundFault'
+        '496':
+          description: BackupPolicyNotFoundFault
+          schema:
+            $ref: '#/definitions/BackupPolicyNotFoundFault'
       parameters:
         - name: body
           in: body
@@ -3801,6 +3846,10 @@ paths:
           description: DBParameterGroupNotFoundFault
           schema:
             $ref: '#/definitions/DBParameterGroupNotFoundFault'
+        '499':
+          description: BackupPolicyNotFoundFault
+          schema:
+            $ref: '#/definitions/BackupPolicyNotFoundFault'
       parameters:
         - name: body
           in: body
@@ -3890,6 +3939,10 @@ paths:
           description: KMSKeyNotAccessibleFault
           schema:
             $ref: '#/definitions/KMSKeyNotAccessibleFault'
+        '496':
+          description: BackupPolicyNotFoundFault
+          schema:
+            $ref: '#/definitions/BackupPolicyNotFoundFault'
       parameters:
         - name: body
           in: body
@@ -3995,6 +4048,10 @@ paths:
           description: DBParameterGroupNotFoundFault
           schema:
             $ref: '#/definitions/DBParameterGroupNotFoundFault'
+        '500':
+          description: BackupPolicyNotFoundFault
+          schema:
+            $ref: '#/definitions/BackupPolicyNotFoundFault'
       parameters:
         - name: body
           in: body
@@ -4350,6 +4407,9 @@ definitions:
         $ref: '#/definitions/BooleanOptional'
         description: 'If <i>BacktrackTo</i> is set to a timestamp earlier than the earliest backtrack time, this value backtracks the DB cluster to the earliest possible backtrack time. Otherwise, an error occurs.'
     description: <p/>
+  BackupPolicyNotFoundFault:
+    type: object
+    properties: {}
   Boolean:
     type: boolean
   BooleanOptional:
@@ -4413,7 +4473,7 @@ definitions:
       DisableLogTypes:
         $ref: '#/definitions/LogTypeList'
         description: The list of log types to disable.
-    description: The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.
+    description: '<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.</p> <p>The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays determine which logs will be exported (or not exported) to CloudWatch Logs. The values within these arrays depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.</p>'
   CopyDBClusterParameterGroupMessage:
     type: object
     required:
@@ -4628,7 +4688,13 @@ definitions:
         description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0. </p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
-        description: The list of log types that need to be enabled for exporting to CloudWatch Logs.
+        description: 'The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.'
+      EngineMode:
+        $ref: '#/definitions/String'
+        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code> or <code>serverless</code>.'
+      ScalingConfiguration:
+        $ref: '#/definitions/ScalingConfiguration'
+        description: 'For DB clusters in <code>serverless</code> DB engine mode, the scaling properties of the DB cluster.'
       SourceRegion:
         $ref: '#/definitions/String'
         description: The ID of the region that contains the source for the read replica.
@@ -4761,7 +4827,7 @@ definitions:
         description: '<p>For supported engines, indicates that the DB instance should be associated with the specified CharacterSet.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The character set is managed by the DB cluster. For more information, see <a>CreateDBCluster</a>.</p>'
       PubliclyAccessible:
         $ref: '#/definitions/BooleanOptional'
-        description: '<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b> true</p> </li> <li> <p> <b>VPC:</b> false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.</p>'
+        description: '<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether <code>DBSubnetGroupName</code> is specified.</p> <p>If <code>DBSubnetGroupName</code> is not specified, and <code>PubliclyAccessible</code> is not specified, the following applies:</p> <ul> <li> <p>If the default VPC in the target region doesn’t have an Internet gateway attached to it, the DB instance is private.</p> </li> <li> <p>If the default VPC in the target region has an Internet gateway attached to it, the DB instance is public.</p> </li> </ul> <p>If <code>DBSubnetGroupName</code> is specified, and <code>PubliclyAccessible</code> is not specified, the following applies:</p> <ul> <li> <p>If the subnets are part of a VPC that doesn’t have an Internet gateway attached to it, the DB instance is private.</p> </li> <li> <p>If the subnets are part of a VPC that has an Internet gateway attached to it, the DB instance is public.</p> </li> </ul>'
       Tags:
         $ref: '#/definitions/TagList'
       DBClusterIdentifier:
@@ -4817,7 +4883,7 @@ definitions:
         description: 'The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). '
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
-        description: The list of log types that need to be enabled for exporting to CloudWatch Logs.
+        description: 'The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.'
       ProcessorFeatures:
         $ref: '#/definitions/ProcessorFeatureList'
         description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
@@ -4857,7 +4923,7 @@ definitions:
         description: 'The option group the DB instance is associated with. If omitted, the default option group for the engine specified is used.'
       PubliclyAccessible:
         $ref: '#/definitions/BooleanOptional'
-        description: '<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b>true</p> </li> <li> <p> <b>VPC:</b>false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.</p>'
+        description: 'Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.'
       Tags:
         $ref: '#/definitions/TagList'
       DBSubnetGroupName:
@@ -4895,7 +4961,7 @@ definitions:
         description: 'The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). '
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
-        description: The list of logs that the new DB instance is to export to CloudWatch Logs.
+        description: 'The list of logs that the new DB instance is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.'
       ProcessorFeatures:
         $ref: '#/definitions/ProcessorFeatureList'
         description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
@@ -5182,7 +5248,14 @@ definitions:
         description: The number of change records stored for Backtrack.
       EnabledCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
-        description: A list of log types that this DB cluster is configured to export to CloudWatch Logs.
+        description: '<p>A list of log types that this DB cluster is configured to export to CloudWatch Logs.</p> <p>Log types vary by DB engine. For information about the log types for each DB engine, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html">Amazon RDS Database Log Files</a> in the <i>Amazon RDS User Guide.</i> </p>'
+      Capacity:
+        $ref: '#/definitions/IntegerOptional'
+      EngineMode:
+        $ref: '#/definitions/String'
+        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code> or <code>serverless</code>.'
+      ScalingConfigurationInfo:
+        $ref: '#/definitions/ScalingConfigurationInfo'
     description: <p>Contains the details of an Amazon RDS DB cluster. </p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a> action. </p>
   DBClusterAlreadyExistsFault:
     type: object
@@ -5228,6 +5301,24 @@ definitions:
     type: object
     properties: {}
     description: ' <i>BacktrackIdentifier</i> doesn''t refer to an existing backtrack. '
+  DBClusterCapacityInfo:
+    type: object
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: 'A user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster. '
+      PendingCapacity:
+        $ref: '#/definitions/IntegerOptional'
+        description: A value that specifies the capacity that the DB cluster scales to next.
+      CurrentCapacity:
+        $ref: '#/definitions/IntegerOptional'
+        description: The current capacity of the DB cluster.
+      SecondsBeforeTimeout:
+        $ref: '#/definitions/IntegerOptional'
+        description: The number of seconds before a call to <code>ModifyCurrentDBClusterCapacity</code> times out.
+      TimeoutAction:
+        $ref: '#/definitions/String'
+        description: 'The timeout action of a call to <code>ModifyCurrentDBClusterCapacity</code>, either <code>ForceApplyCapacityChange</code> or <code>RollbackCapacityChange</code>.'
   DBClusterList:
     type: array
     items:
@@ -5344,6 +5435,8 @@ definitions:
       Status:
         $ref: '#/definitions/String'
         description: '<p>Describes the state of association between the IAM role and the DB cluster. The Status property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - the IAM role ARN is associated with the DB cluster and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - the IAM role ARN is being associated with the DB cluster.</p> </li> <li> <p> <code>INVALID</code> - the IAM role ARN is associated with the DB cluster, but the DB cluster is unable to assume the IAM role in order to access other AWS services on your behalf.</p> </li> </ul>'
+      FeatureName:
+        $ref: '#/definitions/String'
     description: Describes an AWS Identity and Access Management (IAM) role that is associated with a DB cluster.
   DBClusterRoleAlreadyExistsFault:
     type: object
@@ -5510,6 +5603,9 @@ definitions:
       SupportsReadReplica:
         $ref: '#/definitions/Boolean'
         description: Indicates whether the database engine version supports read replicas.
+      SupportedEngineModes:
+        $ref: '#/definitions/EngineModeList'
+        description: A list of the supported DB engine modes.
     description: ' This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>. '
   DBEngineVersionList:
     type: array
@@ -5620,7 +5716,7 @@ definitions:
         description: 'If present, specifies the name of the secondary Availability Zone for a DB instance with multi-AZ support.'
       PubliclyAccessible:
         $ref: '#/definitions/Boolean'
-        description: '<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b>true</p> </li> <li> <p> <b>VPC:</b>false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.</p>'
+        description: 'Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.'
       StatusInfos:
         $ref: '#/definitions/DBInstanceStatusInfoList'
         description: 'The status of a Read Replica. If the instance is not a Read Replica, this is blank.'
@@ -5686,7 +5782,7 @@ definitions:
         description: 'The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). '
       EnabledCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
-        description: A list of log types that this DB instance is configured to export to CloudWatch Logs.
+        description: '<p>A list of log types that this DB instance is configured to export to CloudWatch Logs.</p> <p>Log types vary by DB engine. For information about the log types for each DB engine, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html">Amazon RDS Database Log Files</a> in the <i>Amazon RDS User Guide.</i> </p>'
       ProcessorFeatures:
         $ref: '#/definitions/ProcessorFeatureList'
         description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
@@ -5724,7 +5820,7 @@ definitions:
         description: 'Boolean value that is true if the instance is operating normally, or false if the instance is in an error state.'
       Status:
         $ref: '#/definitions/String'
-        description: 'Status of the DB instance. For a StatusType of read replica, the values can be replicating, error, stopped, or terminated.'
+        description: 'Status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.'
       Message:
         $ref: '#/definitions/String'
         description: 'Details of the error if there is an error for the instance. If the instance is not in an error state, this value is blank.'
@@ -6961,6 +7057,10 @@ definitions:
         $ref: '#/definitions/ParametersList'
         description: Contains a list of engine default parameters.
     description: ' Contains the result of a successful invocation of the <a>DescribeEngineDefaultParameters</a> action. '
+  EngineModeList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   Event:
     type: object
     properties:
@@ -7144,6 +7244,10 @@ definitions:
     type: integer
   IntegerOptional:
     type: integer
+  InvalidDBClusterCapacityFault:
+    type: object
+    properties: {}
+    description: ' <i>Capacity</i> isn''t a valid Aurora Serverless DB cluster capacity. Valid capacity values are <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>, <code>32</code>, <code>64</code>, <code>128</code>, and <code>256</code>.'
   InvalidDBClusterSnapshotStateFault:
     type: object
     properties: {}
@@ -7232,6 +7336,23 @@ definitions:
     type: integer
   LongOptional:
     type: integer
+  ModifyCurrentDBClusterCapacityMessage:
+    type: object
+    required:
+      - DBClusterIdentifier
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The DB cluster identifier for the cluster being modified. This parameter is not case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing DB cluster.</p> </li> </ul>'
+      Capacity:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The DB cluster capacity.</p> <p>Constraints:</p> <ul> <li> <p>Value must be <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>, <code>32</code>, <code>64</code>, <code>128</code>, or <code>256</code>.</p> </li> </ul>'
+      SecondsBeforeTimeout:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The amount of time, in seconds, that Aurora Serverless tries to find a scaling point to perform seamless scaling before enforcing the timeout action. The default is 300.</p> <ul> <li> <p>Value must be from 10 through 600.</p> </li> </ul>'
+      TimeoutAction:
+        $ref: '#/definitions/String'
+        description: '<p>The action to take when the timeout is reached, either <code>ForceApplyCapacityChange</code> or <code>RollbackCapacityChange</code>.</p> <p> <code>ForceApplyCapacityChange</code>, the default, sets the capacity to the specified value as soon as possible.</p> <p> <code>RollbackCapacityChange</code> ignores the capacity change if a scaling point is not found in the timeout period.</p>'
   ModifyDBClusterMessage:
     type: object
     required:
@@ -7282,6 +7403,9 @@ definitions:
       EngineVersion:
         $ref: '#/definitions/String'
         description: '<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true.</p> <p>For a list of valid engine versions, see <a>CreateDBCluster</a>, or call <a>DescribeDBEngineVersions</a>.</p>'
+      ScalingConfiguration:
+        $ref: '#/definitions/ScalingConfiguration'
+        description: The scaling properties of the DB cluster. You can only modify scaling properties for DB clusters in <code>serverless</code> DB engine mode.
     description: <p/>
   ModifyDBClusterParameterGroupMessage:
     type: object
@@ -7933,6 +8057,9 @@ definitions:
       AvailableProcessorFeatures:
         $ref: '#/definitions/AvailableProcessorFeatureList'
         description: A list of the available processor features for the DB instance class of a DB instance.
+      SupportedEngineModes:
+        $ref: '#/definitions/EngineModeList'
+        description: A list of the supported DB engine modes.
     description: <p>Contains a list of available options for a DB instance.</p> <p> This data type is used as a response element in the <a>DescribeOrderableDBInstanceOptions</a> action. </p>
   OrderableDBInstanceOptionsList:
     type: array
@@ -7981,6 +8108,9 @@ definitions:
       ApplyMethod:
         $ref: '#/definitions/ApplyMethod'
         description: Indicates when to apply parameter updates.
+      SupportedEngineModes:
+        $ref: '#/definitions/EngineModeList'
+        description: The valid DB engine modes.
     description: <p> This data type is used as a request parameter in the <a>ModifyDBParameterGroup</a> and <a>ResetDBParameterGroup</a> actions. </p> <p>This data type is used as a response element in the <a>DescribeEngineDefaultParameters</a> and <a>DescribeDBParameters</a> actions.</p>
   ParametersList:
     type: array
@@ -8527,7 +8657,7 @@ definitions:
         description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
-        description: The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+        description: 'The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.'
   RestoreDBClusterFromS3Result:
     type: object
     properties:
@@ -8584,7 +8714,13 @@ definitions:
         description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
-        description: The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+        description: 'The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.'
+      EngineMode:
+        $ref: '#/definitions/String'
+        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code> or <code>serverless</code>.'
+      ScalingConfiguration:
+        $ref: '#/definitions/ScalingConfiguration'
+        description: 'For DB clusters in <code>serverless</code> DB engine mode, the scaling properties of the DB cluster.'
     description: <p/>
   RestoreDBClusterFromSnapshotResult:
     type: object
@@ -8637,7 +8773,7 @@ definitions:
         description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
-        description: The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+        description: 'The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.'
     description: <p/>
   RestoreDBClusterToPointInTimeResult:
     type: object
@@ -8673,7 +8809,7 @@ definitions:
         description: '<p>Specifies if the DB instance is a Multi-AZ deployment.</p> <p>Constraint: You can''t specify the AvailabilityZone parameter if the MultiAZ parameter is set to <code>true</code>.</p>'
       PubliclyAccessible:
         $ref: '#/definitions/BooleanOptional'
-        description: '<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b> true</p> </li> <li> <p> <b>VPC:</b> false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.</p>'
+        description: 'Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.'
       AutoMinorVersionUpgrade:
         $ref: '#/definitions/BooleanOptional'
         description: Indicates that minor version upgrades are applied automatically to the DB instance during the maintenance window.
@@ -8717,7 +8853,7 @@ definitions:
         description: '<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>You can enable IAM database authentication for the following database engines</p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> </ul> <p>Default: <code>false</code> </p>'
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
-        description: The list of logs that the restored DB instance is to export to CloudWatch Logs.
+        description: 'The list of logs that the restored DB instance is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.'
       ProcessorFeatures:
         $ref: '#/definitions/ProcessorFeatureList'
         description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
@@ -8809,7 +8945,7 @@ definitions:
         description: 'The name of the option group to associate with this DB instance. If this argument is omitted, the default option group for the specified engine is used. '
       PubliclyAccessible:
         $ref: '#/definitions/BooleanOptional'
-        description: 'Specifies whether the DB instance is publicly accessible or not. For more information, see <a>CreateDBInstance</a>. '
+        description: 'Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.'
       Tags:
         $ref: '#/definitions/TagList'
         description: 'A list of tags to associate with this DB instance. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a>. '
@@ -8860,7 +8996,7 @@ definitions:
         description: 'The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). '
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
-        description: The list of logs that the restored DB instance is to export to CloudWatch Logs.
+        description: 'The list of logs that the restored DB instance is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.'
       ProcessorFeatures:
         $ref: '#/definitions/ProcessorFeatureList'
         description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
@@ -8907,7 +9043,7 @@ definitions:
         description: '<p>Specifies if the DB instance is a Multi-AZ deployment.</p> <p>Constraint: You can''t specify the AvailabilityZone parameter if the MultiAZ parameter is set to <code>true</code>.</p>'
       PubliclyAccessible:
         $ref: '#/definitions/BooleanOptional'
-        description: '<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b>true</p> </li> <li> <p> <b>VPC:</b>false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.</p>'
+        description: 'Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.'
       AutoMinorVersionUpgrade:
         $ref: '#/definitions/BooleanOptional'
         description: Indicates that minor version upgrades are applied automatically to the DB instance during the maintenance window.
@@ -8951,7 +9087,7 @@ definitions:
         description: '<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>You can enable IAM database authentication for the following database engines</p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> </ul> <p>Default: <code>false</code> </p>'
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
-        description: The list of logs that the restored DB instance is to export to CloudWatch Logs.
+        description: 'The list of logs that the restored DB instance is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.'
       ProcessorFeatures:
         $ref: '#/definitions/ProcessorFeatureList'
         description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
@@ -9002,6 +9138,38 @@ definitions:
     type: object
     properties: {}
     description: The SNS topic ARN does not exist.
+  ScalingConfiguration:
+    type: object
+    properties:
+      MinCapacity:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The minimum capacity for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p> <p>Valid capacity values are <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>, <code>32</code>, <code>64</code>, <code>128</code>, and <code>256</code>.</p> <p>The minimum capacity must be less than or equal to the maximum capacity.</p>'
+      MaxCapacity:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The maximum capacity for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p> <p>Valid capacity values are <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>, <code>32</code>, <code>64</code>, <code>128</code>, and <code>256</code>.</p> <p>The maximum capacity must be greater than or equal to the minimum capacity.</p>'
+      AutoPause:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>A value that specifies whether to allow or disallow automatic pause for an Aurora DB cluster in <code>serverless</code> DB engine mode. A DB cluster can be paused only when it''s idle (it has no connections).</p> <note> <p>If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot. In this case, the DB cluster is restored when there is a request to connect to it. </p> </note>'
+      SecondsUntilAutoPause:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The time, in seconds, before an Aurora DB cluster in <code>serverless</code> mode is paused.'
+    description: '<p>Contains the scaling configuration of an Aurora Serverless DB cluster.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> in the <i>Amazon RDS User Guide</i>.</p>'
+  ScalingConfigurationInfo:
+    type: object
+    properties:
+      MinCapacity:
+        $ref: '#/definitions/IntegerOptional'
+        description: The maximum capacity for the Aurora DB cluster in <code>serverless</code> DB engine mode.
+      MaxCapacity:
+        $ref: '#/definitions/IntegerOptional'
+        description: The maximum capacity for an Aurora DB cluster in <code>serverless</code> DB engine mode.
+      AutoPause:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'A value that indicates whether automatic pause is allowed for the Aurora DB cluster in <code>serverless</code> DB engine mode. '
+      SecondsUntilAutoPause:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The remaining amount of time, in seconds, before the Aurora DB cluster in <code>serverless</code> mode is paused. A DB cluster can be paused only when it''s idle (it has no connections).'
+    description: '<p>Shows the scaling configuration for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> in the <i>Amazon RDS User Guide</i>.</p>'
   SharedSnapshotQuotaExceededFault:
     type: object
     properties: {}

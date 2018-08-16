@@ -2395,6 +2395,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopJob':
+    post:
+      operationId: StopJob
+      description: 'Initiates a stop request for the current job. AWS Device Farm will immediately stop the job on the device where tests have not started executing, and you will not be billed for this device. On the device where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on the device. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopJobResult'
+        '480':
+          description: ArgumentException
+          schema:
+            $ref: '#/definitions/ArgumentException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          schema:
+            $ref: '#/definitions/ServiceAccountException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#StopRemoteAccessSession':
     post:
       operationId: StopRemoteAccessSession
@@ -2682,6 +2723,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateUpload':
+    post:
+      operationId: UpdateUpload
+      description: Update an uploaded test specification (test spec).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateUploadResult'
+        '480':
+          description: ArgumentException
+          schema:
+            $ref: '#/definitions/ArgumentException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          schema:
+            $ref: '#/definitions/ServiceAccountException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateUploadRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateVPCEConfiguration':
     post:
       operationId: UpdateVPCEConfiguration
@@ -2833,6 +2915,7 @@ definitions:
       - VIDEO
       - CUSTOMER_ARTIFACT
       - CUSTOMER_ARTIFACT_LOG
+      - TESTSPEC_OUTPUT
   Artifacts:
     type: array
     items:
@@ -3111,7 +3194,7 @@ definitions:
         description: 'The upload''s file name. The name should not contain the ''/'' character. If uploading an iOS app, the file name needs to end with the <code>.ipa</code> extension. If uploading an Android app, the file name needs to end with the <code>.apk</code> extension. For all others, the file name must end with the <code>.zip</code> file extension.'
       type:
         $ref: '#/definitions/UploadType'
-        description: '<p>The upload''s upload type.</p> <p>Must be one of the following values:</p> <ul> <li> <p>ANDROID_APP: An Android upload.</p> </li> <li> <p>IOS_APP: An iOS upload.</p> </li> <li> <p>WEB_APP: A web appliction upload.</p> </li> <li> <p>EXTERNAL_DATA: An external data upload.</p> </li> <li> <p>APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.</p> </li> <li> <p>APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.</p> </li> <li> <p>APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.</p> </li> <li> <p>APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.</p> </li> <li> <p>APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.</p> </li> <li> <p>APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.</p> </li> <li> <p>CALABASH_TEST_PACKAGE: A Calabash test package upload.</p> </li> <li> <p>INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.</p> </li> <li> <p>UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload.</p> </li> <li> <p>UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.</p> </li> <li> <p>XCTEST_TEST_PACKAGE: An XCode test package upload.</p> </li> <li> <p>XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.</p> </li> </ul> <p> <b>Note</b> If you call <code>CreateUpload</code> with <code>WEB_APP</code> specified, AWS Device Farm throws an <code>ArgumentException</code> error.</p>'
+        description: '<p>The upload''s upload type.</p> <p>Must be one of the following values:</p> <ul> <li> <p>ANDROID_APP: An Android upload.</p> </li> <li> <p>IOS_APP: An iOS upload.</p> </li> <li> <p>WEB_APP: A web application upload.</p> </li> <li> <p>EXTERNAL_DATA: An external data upload.</p> </li> <li> <p>APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.</p> </li> <li> <p>APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.</p> </li> <li> <p>APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.</p> </li> <li> <p>APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.</p> </li> <li> <p>APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.</p> </li> <li> <p>APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.</p> </li> <li> <p>CALABASH_TEST_PACKAGE: A Calabash test package upload.</p> </li> <li> <p>INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.</p> </li> <li> <p>UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload.</p> </li> <li> <p>UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.</p> </li> <li> <p>XCTEST_TEST_PACKAGE: An XCode test package upload.</p> </li> <li> <p>XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.</p> </li> </ul> <p> <b>Note</b> If you call <code>CreateUpload</code> with <code>WEB_APP</code> specified, AWS Device Farm throws an <code>ArgumentException</code> error.</p>'
       contentType:
         $ref: '#/definitions/ContentType'
         description: 'The upload''s content type (for example, "application/octet-stream").'
@@ -3483,6 +3566,9 @@ definitions:
       appPackagesCleanup:
         $ref: '#/definitions/AppPackagesCleanup'
         description: 'True if app package cleanup is enabled at the beginning of the test; otherwise, false.'
+      videoCapture:
+        $ref: '#/definitions/VideoCapture'
+        description: 'Set to true to enable video capture; otherwise, set to false. The default is true.'
       skipAppResign:
         $ref: '#/definitions/SkipAppResign'
         description: '<p>When set to <code>true</code>, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect.</p> <p>For more information about how Device Farm re-signs your app(s), see <a href="https://aws.amazon.com/device-farm/faq/">Do you modify my app?</a> in the <i>AWS Device Farm FAQs</i>.</p>'
@@ -4040,6 +4126,12 @@ definitions:
       deviceMinutes:
         $ref: '#/definitions/DeviceMinutes'
         description: Represents the total (metered or unmetered) minutes used by the job.
+      videoEndpoint:
+        $ref: '#/definitions/String'
+        description: The endpoint for streaming device video.
+      videoCapture:
+        $ref: '#/definitions/VideoCapture'
+        description: 'This value is set to true if video capture is enabled; otherwise, it is set to false.'
     description: Represents a device.
   JobTimeoutMinutes:
     type: integer
@@ -4608,6 +4700,9 @@ definitions:
       arn:
         $ref: '#/definitions/AmazonResourceName'
         description: The Amazon Resource Name (ARN) of the project for which you want to list uploads.
+      type:
+        $ref: '#/definitions/UploadType'
+        description: '<p>The type of upload.</p> <p>Must be one of the following values:</p> <ul> <li> <p>ANDROID_APP: An Android upload.</p> </li> <li> <p>IOS_APP: An iOS upload.</p> </li> <li> <p>WEB_APP: A web appliction upload.</p> </li> <li> <p>EXTERNAL_DATA: An external data upload.</p> </li> <li> <p>APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.</p> </li> <li> <p>APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.</p> </li> <li> <p>APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.</p> </li> <li> <p>APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.</p> </li> <li> <p>APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.</p> </li> <li> <p>APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.</p> </li> <li> <p>CALABASH_TEST_PACKAGE: A Calabash test package upload.</p> </li> <li> <p>INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.</p> </li> <li> <p>UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload.</p> </li> <li> <p>UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.</p> </li> <li> <p>XCTEST_TEST_PACKAGE: An XCode test package upload.</p> </li> <li> <p>XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.</p> </li> <li> <p>APPIUM_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.</p> </li> <li> <p>APPIUM_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload.</p> </li> <li> <p>APPIUM_PYTHON_TEST_SPEC: An Appium Python test spec upload.</p> </li> <li> <p>APPIUM_WEB_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.</p> </li> <li> <p>APPIUM_WEB_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload.</p> </li> <li> <p>APPIUM_WEB_PYTHON_TEST_SPEC: An Appium Python test spec upload.</p> </li> <li> <p>INSTRUMENTATION_TEST_SPEC: An instrumentation test spec upload.</p> </li> <li> <p>XCTEST_UI_TEST_SPEC: An XCode UI test spec upload.</p> </li> </ul>'
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
@@ -5238,6 +5333,9 @@ definitions:
       skipAppResign:
         $ref: '#/definitions/SkipAppResign'
         description: '<p>When set to <code>true</code>, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect.</p> <p>For more information about how Device Farm re-signs your app(s), see <a href="https://aws.amazon.com/device-farm/faq/">Do you modify my app?</a> in the <i>AWS Device Farm FAQs</i>.</p>'
+      testSpecArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The ARN of the YAML-formatted test specification for the run.
     description: 'Represents a test run on a set of devices with a given app package, test parameters, etc.'
   Runs:
     type: array
@@ -5367,6 +5465,9 @@ definitions:
       testPackageArn:
         $ref: '#/definitions/AmazonResourceName'
         description: The ARN of the uploaded test that will be run.
+      testSpecArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The ARN of the YAML-formatted test specification.
       filter:
         $ref: '#/definitions/Filter'
         description: The test's filter.
@@ -5391,6 +5492,20 @@ definitions:
     type: string
     minLength: 0
     maxLength: 8192
+  StopJobRequest:
+    type: object
+    required:
+      - arn
+    properties:
+      arn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: Represents the Amazon Resource Name (ARN) of the Device Farm job you wish to stop.
+  StopJobResult:
+    type: object
+    properties:
+      job:
+        $ref: '#/definitions/Job'
+        description: The job that was stopped.
   StopRemoteAccessSessionRequest:
     type: object
     required:
@@ -5741,6 +5856,29 @@ definitions:
         $ref: '#/definitions/Project'
         description: The project you wish to update.
     description: Represents the result of an update project request.
+  UpdateUploadRequest:
+    type: object
+    required:
+      - arn
+    properties:
+      arn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the uploaded test spec.
+      name:
+        $ref: '#/definitions/Name'
+        description: The upload's test spec file name. The name should not contain the '/' character. The test spec file name must end with the <code>.yaml</code> or <code>.yml</code> file extension.
+      contentType:
+        $ref: '#/definitions/ContentType'
+        description: 'The upload''s content type (for example, "application/x-yaml").'
+      editContent:
+        $ref: '#/definitions/Boolean'
+        description: 'Set to true if the YAML file has changed and needs to be updated; otherwise, set to false.'
+  UpdateUploadResult:
+    type: object
+    properties:
+      upload:
+        $ref: '#/definitions/Upload'
+        description: A test spec uploaded to Device Farm.
   UpdateVPCEConfigurationRequest:
     type: object
     required:
@@ -5797,7 +5935,15 @@ definitions:
       message:
         $ref: '#/definitions/Message'
         description: A message about the upload's result.
+      category:
+        $ref: '#/definitions/UploadCategory'
+        description: '<p>The upload''s category. Allowed values include:</p> <ul> <li> <p>CURATED: An upload managed by AWS Device Farm.</p> </li> <li> <p>PRIVATE: An upload managed by the AWS Device Farm customer.</p> </li> </ul>'
     description: An app or a set of one or more tests to upload or that have been uploaded.
+  UploadCategory:
+    type: string
+    enum:
+      - CURATED
+      - PRIVATE
   UploadStatus:
     type: string
     enum:
@@ -5824,6 +5970,14 @@ definitions:
       - UIAUTOMATOR_TEST_PACKAGE
       - XCTEST_TEST_PACKAGE
       - XCTEST_UI_TEST_PACKAGE
+      - APPIUM_JAVA_JUNIT_TEST_SPEC
+      - APPIUM_JAVA_TESTNG_TEST_SPEC
+      - APPIUM_PYTHON_TEST_SPEC
+      - APPIUM_WEB_JAVA_JUNIT_TEST_SPEC
+      - APPIUM_WEB_JAVA_TESTNG_TEST_SPEC
+      - APPIUM_WEB_PYTHON_TEST_SPEC
+      - INSTRUMENTATION_TEST_SPEC
+      - XCTEST_UI_TEST_SPEC
   Uploads:
     type: array
     items:
@@ -5863,3 +6017,5 @@ definitions:
     type: string
     minLength: 0
     maxLength: 2048
+  VideoCapture:
+    type: boolean

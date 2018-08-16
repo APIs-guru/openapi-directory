@@ -1792,6 +1792,9 @@ definitions:
       MinBufferTime:
         $ref: '#/definitions/__integerMin0Max2147483647'
         description: Minimum time of initially buffered media that is needed to ensure smooth playout.
+      MinFinalSegmentLength:
+        $ref: '#/definitions/__doubleMin0Max2147483647'
+        description: 'Keep this setting at the default value of 0, unless you are troubleshooting a problem with how devices play back the end of your video asset. If you know that player devices are hanging on the final segment of your video because the length of your final segment is too short, use this setting to specify a minimum final segment length, in seconds. Choose a value that is greater than or equal to 1 and less than your segment length. When you specify a value for this setting, the encoder will combine any final segment that is shorter than the length that you specify with the previous segment. For example, your segment length is 3 seconds and your final segment is .5 seconds without a minimum final segment length; when you set the minimum final segment length to 1, your final segment is 3.5 seconds.'
       SegmentControl:
         $ref: '#/definitions/CmafSegmentControl'
       SegmentLength:
@@ -2640,6 +2643,12 @@ definitions:
       - HIGH_422_10BIT
       - MAIN
     description: 'H.264 Profile. High 4:2:2 and 10-bit profiles are only available with the AVC-I License.'
+  H264DynamicSubGop:
+    type: string
+    enum:
+      - ADAPTIVE
+      - STATIC
+    description: Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
   H264EntropyEncoding:
     type: string
     enum:
@@ -2707,12 +2716,25 @@ definitions:
       - SINGLE_PASS_HQ
       - MULTI_PASS_HQ
     description: 'Use Quality tuning level (H264QualityTuningLevel) to specifiy whether to use fast single-pass, high-quality singlepass, or high-quality multipass video encoding.'
+  H264QvbrSettings:
+    type: object
+    required:
+      - QvbrQualityLevel
+    properties:
+      MaxAverageBitrate:
+        $ref: '#/definitions/__integerMin1000Max1152000000'
+        description: 'Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.'
+      QvbrQualityLevel:
+        $ref: '#/definitions/__integerMin1Max10'
+        description: 'Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h264Settings. Specify the target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9.'
+    description: 'Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don''t define Rate control mode.'
   H264RateControlMode:
     type: string
     enum:
       - VBR
       - CBR
-    description: Use this setting to specify whether this output has a variable bitrate (VBR) or constant bitrate (CBR).
+      - QVBR
+    description: 'Use this setting to specify whether this output has a variable bitrate (VBR), constant bitrate (CBR) or quality-defined variable bitrate (QVBR).'
   H264RepeatPps:
     type: string
     enum:
@@ -2737,6 +2759,9 @@ definitions:
         $ref: '#/definitions/H264CodecLevel'
       CodecProfile:
         $ref: '#/definitions/H264CodecProfile'
+      DynamicSubGop:
+        $ref: '#/definitions/H264DynamicSubGop'
+        description: Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
       EntropyEncoding:
         $ref: '#/definitions/H264EntropyEncoding'
       FieldEncoding:
@@ -2773,7 +2798,7 @@ definitions:
         $ref: '#/definitions/H264InterlaceMode'
       MaxBitrate:
         $ref: '#/definitions/__integerMin1000Max1152000000'
-        description: 'Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000.'
+        description: 'Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR.'
       MinIInterval:
         $ref: '#/definitions/__integerMin0Max30'
         description: 'Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. This setting is only used when Scene Change Detect is enabled. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1'
@@ -2793,6 +2818,9 @@ definitions:
         description: Pixel Aspect Ratio numerator.
       QualityTuningLevel:
         $ref: '#/definitions/H264QualityTuningLevel'
+      QvbrSettings:
+        $ref: '#/definitions/H264QvbrSettings'
+        description: 'Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don''t define Rate control mode.'
       RateControlMode:
         $ref: '#/definitions/H264RateControlMode'
       RepeatPps:
@@ -2901,6 +2929,12 @@ definitions:
       - MAIN_422_10BIT_MAIN
       - MAIN_422_10BIT_HIGH
     description: 'Represents the Profile and Tier, per the HEVC (H.265) specification. Selections are grouped as [Profile] / [Tier], so "Main/High" represents Main Profile with High Tier. 4:2:2 profiles are only available with the HEVC 4:2:2 License.'
+  H265DynamicSubGop:
+    type: string
+    enum:
+      - ADAPTIVE
+      - STATIC
+    description: Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
   H265FlickerAdaptiveQuantization:
     type: string
     enum:
@@ -2956,12 +2990,25 @@ definitions:
       - SINGLE_PASS_HQ
       - MULTI_PASS_HQ
     description: 'Use Quality tuning level (H265QualityTuningLevel) to specifiy whether to use fast single-pass, high-quality singlepass, or high-quality multipass video encoding.'
+  H265QvbrSettings:
+    type: object
+    required:
+      - QvbrQualityLevel
+    properties:
+      MaxAverageBitrate:
+        $ref: '#/definitions/__integerMin1000Max1466400000'
+        description: 'Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.'
+      QvbrQualityLevel:
+        $ref: '#/definitions/__integerMin1Max10'
+        description: 'Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h265Settings. Specify the target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9.'
+    description: 'Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don''t define Rate control mode.'
   H265RateControlMode:
     type: string
     enum:
       - VBR
       - CBR
-    description: Use this setting to specify whether this output has a variable bitrate (VBR) or constant bitrate (CBR).
+      - QVBR
+    description: 'Use this setting to specify whether this output has a variable bitrate (VBR), constant bitrate (CBR) or quality-defined variable bitrate (QVBR).'
   H265SampleAdaptiveOffsetFilterMode:
     type: string
     enum:
@@ -2989,6 +3036,9 @@ definitions:
         $ref: '#/definitions/H265CodecLevel'
       CodecProfile:
         $ref: '#/definitions/H265CodecProfile'
+      DynamicSubGop:
+        $ref: '#/definitions/H265DynamicSubGop'
+        description: Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
       FlickerAdaptiveQuantization:
         $ref: '#/definitions/H265FlickerAdaptiveQuantization'
       FramerateControl:
@@ -3021,7 +3071,7 @@ definitions:
         $ref: '#/definitions/H265InterlaceMode'
       MaxBitrate:
         $ref: '#/definitions/__integerMin1000Max1466400000'
-        description: Maximum bitrate in bits/second.
+        description: 'Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR.'
       MinIInterval:
         $ref: '#/definitions/__integerMin0Max30'
         description: 'Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. This setting is only used when Scene Change Detect is enabled. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1'
@@ -3041,6 +3091,9 @@ definitions:
         description: Pixel Aspect Ratio numerator.
       QualityTuningLevel:
         $ref: '#/definitions/H265QualityTuningLevel'
+      QvbrSettings:
+        $ref: '#/definitions/H265QvbrSettings'
+        description: 'Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don''t define Rate control mode.'
       RateControlMode:
         $ref: '#/definitions/H265RateControlMode'
       SampleAdaptiveOffsetFilterMode:
@@ -3270,6 +3323,9 @@ definitions:
         $ref: '#/definitions/HlsManifestCompression'
       ManifestDurationFormat:
         $ref: '#/definitions/HlsManifestDurationFormat'
+      MinFinalSegmentLength:
+        $ref: '#/definitions/__doubleMin0Max2147483647'
+        description: 'Keep this setting at the default value of 0, unless you are troubleshooting a problem with how devices play back the end of your video asset. If you know that player devices are hanging on the final segment of your video because the length of your final segment is too short, use this setting to specify a minimum final segment length, in seconds. Choose a value that is greater than or equal to 1 and less than your segment length. When you specify a value for this setting, the encoder will combine any final segment that is shorter than the length that you specify with the previous segment. For example, your segment length is 3 seconds and your final segment is .5 seconds without a minimum final segment length; when you set the minimum final segment length to 1, your final segment is 3.5 seconds.'
       MinSegmentLength:
         $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'When set, Minimum Segment Size is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.'
@@ -4296,6 +4352,12 @@ definitions:
       - MAIN
       - PROFILE_422
     description: Use Profile (Mpeg2CodecProfile) to set the MPEG-2 profile for the video output.
+  Mpeg2DynamicSubGop:
+    type: string
+    enum:
+      - ADAPTIVE
+      - STATIC
+    description: Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
   Mpeg2FramerateControl:
     type: string
     enum:
@@ -4371,6 +4433,9 @@ definitions:
         $ref: '#/definitions/Mpeg2CodecLevel'
       CodecProfile:
         $ref: '#/definitions/Mpeg2CodecProfile'
+      DynamicSubGop:
+        $ref: '#/definitions/Mpeg2DynamicSubGop'
+        description: Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
       FramerateControl:
         $ref: '#/definitions/Mpeg2FramerateControl'
       FramerateConversionAlgorithm:
@@ -4865,17 +4930,17 @@ definitions:
       - Width
     properties:
       Height:
-        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
-        description: Height of rectangle in pixels.
+        $ref: '#/definitions/__integerMin2Max2147483647'
+        description: Height of rectangle in pixels. Specify only even numbers.
       Width:
-        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
-        description: Width of rectangle in pixels.
+        $ref: '#/definitions/__integerMin2Max2147483647'
+        description: Width of rectangle in pixels. Specify only even numbers.
       X:
-        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
-        description: 'The distance, in pixels, between the rectangle and the left edge of the video frame.'
+        $ref: '#/definitions/__integerMin0Max2147483647'
+        description: 'The distance, in pixels, between the rectangle and the left edge of the video frame. Specify only even numbers.'
       'Y':
-        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
-        description: 'The distance, in pixels, between the rectangle and the top edge of the video frame.'
+        $ref: '#/definitions/__integerMin0Max2147483647'
+        description: 'The distance, in pixels, between the rectangle and the top edge of the video frame. Specify only even numbers.'
     description: Use Rectangle to identify a specific area of the video frame.
   RemixSettings:
     type: object
@@ -5303,6 +5368,9 @@ definitions:
   __doubleMin0:
     type: number
     format: double
+  __doubleMin0Max2147483647:
+    type: number
+    format: double
   __doubleMinNegative59Max0:
     type: number
     format: double
@@ -5438,6 +5506,10 @@ definitions:
     type: integer
     minimum: 1
     maximum: 1
+  __integerMin1Max10:
+    type: integer
+    minimum: 1
+    maximum: 10
   __integerMin1Max100:
     type: integer
     minimum: 1
@@ -5498,6 +5570,10 @@ definitions:
     type: integer
     minimum: 25
     maximum: 2000
+  __integerMin2Max2147483647:
+    type: integer
+    minimum: 2
+    maximum: 2147483647
   __integerMin32000Max384000:
     type: integer
     minimum: 32000

@@ -4860,6 +4860,9 @@ definitions:
       Targets:
         $ref: '#/definitions/Targets'
         description: The specified targets.
+      TargetMaps:
+        $ref: '#/definitions/TargetMaps'
+        description: The specified key-value mapping of document parameters to target resources.
       ResolvedTargets:
         $ref: '#/definitions/ResolvedTargets'
         description: A list of resolved targets in the rate control execution.
@@ -4973,6 +4976,9 @@ definitions:
       Targets:
         $ref: '#/definitions/Targets'
         description: The targets defined by the user when starting the Automation.
+      TargetMaps:
+        $ref: '#/definitions/TargetMaps'
+        description: The specified key-value mapping of document parameters to target resources.
       ResolvedTargets:
         $ref: '#/definitions/ResolvedTargets'
         description: A list of targets that resolved during the execution.
@@ -5177,7 +5183,7 @@ definitions:
         description: The name of the filter.
       value:
         $ref: '#/definitions/CommandFilterValue'
-        description: '<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p> <b>InvokedAfter</b>: Specify a timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions occurring July 7, 2018, and later.</p> </li> <li> <p> <b>InvokedBefore</b>: Specify a timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions from before July 7, 2018.</p> </li> <li> <p> <b>Status</b>: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:</p> <ul> <li> <p> <code>Pending</code> </p> </li> <li> <p> <code>InProgress</code> </p> </li> <li> <p> <code>Success</code> </p> </li> <li> <p> <code>Cancelled</code> </p> </li> <li> <p> <code>Failed</code> </p> </li> <li> <p> <code>TimedOut</code> </p> </li> <li> <p> <code>Cancelling</code> </p> </li> </ul> </li> <li> <p> <b>DocumentName</b>: Specify name of the SSM document for which you want to see command execution results. For example, specify <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to perform security patching operations on instances. </p> </li> <li> <p> <b>ExecutionStage</b>: Specify one of the following values:</p> <ul> <li> <p> <code>Executing</code>: Returns a list of command executions that are currently still running.</p> </li> <li> <p> <code>Complete</code>: Returns a list of command exeuctions that have already completed. </p> </li> </ul> </li> </ul>'
+        description: 'The filter value. '
     description: Describes a command filter.
   CommandFilterKey:
     type: string
@@ -5185,18 +5191,15 @@ definitions:
       - InvokedAfter
       - InvokedBefore
       - Status
-      - ExecutionStage
-      - DocumentName
   CommandFilterList:
     type: array
     items:
       $ref: '#/definitions/CommandFilter'
     minItems: 1
-    maxItems: 5
+    maxItems: 3
   CommandFilterValue:
     type: string
     minLength: 1
-    maxLength: 128
   CommandId:
     type: string
     minLength: 36
@@ -10467,7 +10470,7 @@ definitions:
         description: 'The ARN of the task to execute '
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
-        description: The role that should be assumed when executing the task.
+        description: '<p>The role to assume when running the Maintenance Window task.</p> <p>If you do not specify a service role ARN, Systems Manager will use your account''s service-linked role for Systems Manager by default. If no service-linked role for Systems Manager exists in your account, it will be created when you run <code>RegisterTaskWithMaintenanceWindow</code> without specifying a service role ARN.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions">Service-Linked Role Permissions for Systems Manager</a> and <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role">Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance Window Tasks? </a> in the <i>AWS Systems Manager User Guide</i>.</p>'
       TaskType:
         $ref: '#/definitions/MaintenanceWindowTaskType'
         description: The type of task being registered.
@@ -10925,6 +10928,9 @@ definitions:
       Targets:
         $ref: '#/definitions/Targets'
         description: A key-value mapping to target resources. Required if you specify TargetParameterName.
+      TargetMaps:
+        $ref: '#/definitions/TargetMaps'
+        description: A key-value mapping of document parameters to target resources. Both Targets and TargetMaps cannot be specified together.
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
         description: 'The maximum number of targets allowed to run this task in parallel. You can specify a number, such as 10, or a percentage, such as 10%. The default value is 10.'
@@ -11144,6 +11150,37 @@ definitions:
     pattern: '^[\p{L}\p{Z}\p{N}_.:/=\-@]*$'
     minLength: 1
     maxLength: 128
+  TargetMap:
+    type: array
+    minItems: 1
+    maxItems: 20
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TargetMapKey'
+        value:
+          $ref: '#/definitions/TargetMapValueList'
+  TargetMapKey:
+    type: string
+    minLength: 1
+    maxLength: 50
+  TargetMapValue:
+    type: string
+    minLength: 1
+    maxLength: 50
+  TargetMapValueList:
+    type: array
+    items:
+      $ref: '#/definitions/TargetMapValue'
+    minItems: 0
+    maxItems: 25
+  TargetMaps:
+    type: array
+    items:
+      $ref: '#/definitions/TargetMap'
+    minItems: 0
+    maxItems: 300
   TargetParameterList:
     type: array
     items:
@@ -11452,7 +11489,7 @@ definitions:
         description: The task ARN to modify.
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
-        description: 'The IAM service role ARN to modify. The system assumes this role during task execution. '
+        description: '<p>The IAM service role ARN to modify. The system assumes this role during task execution.</p> <p>If you do not specify a service role ARN, Systems Manager will use your account''s service-linked role for Systems Manager by default. If no service-linked role for Systems Manager exists in your account, it will be created when you run <code>RegisterTaskWithMaintenanceWindow</code> without specifying a service role ARN.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions">Service-Linked Role Permissions for Systems Manager</a> and <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role">Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance Window Tasks? </a> in the <i>AWS Systems Manager User Guide</i>.</p>'
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParameters'
         description: '<p>The parameters to modify.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note> <p>The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'

@@ -581,6 +581,159 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/es/compatibleVersions:
+    get:
+      operationId: GetCompatibleElasticsearchVersions
+      description: ' Returns a list of upgrade compatible Elastisearch versions. You can optionally pass a <code> <a>DomainName</a> </code> to get all upgrade compatible Elasticsearch versions for that specific domain. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCompatibleElasticsearchVersionsResponse'
+        '480':
+          description: BaseException
+          schema:
+            $ref: '#/definitions/BaseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+        '483':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '484':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCompatibleElasticsearchVersionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/es/upgradeDomain/{DomainName}/history':
+    get:
+      operationId: GetUpgradeHistory
+      description: Retrieves the complete history of the last 10 upgrades that were performed on the domain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetUpgradeHistoryResponse'
+        '480':
+          description: BaseException
+          schema:
+            $ref: '#/definitions/BaseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+        '483':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '484':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetUpgradeHistoryRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: DomainName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/es/upgradeDomain/{DomainName}/status':
+    get:
+      operationId: GetUpgradeStatus
+      description: Retrieves the latest status of the last upgrade or upgrade eligibility check that was performed on the domain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetUpgradeStatusResponse'
+        '480':
+          description: BaseException
+          schema:
+            $ref: '#/definitions/BaseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+        '483':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '484':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetUpgradeStatusRequest'
+        - name: DomainName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /2015-01-01/domain:
     get:
       operationId: ListDomainNames
@@ -839,6 +992,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/es/upgradeDomain:
+    post:
+      operationId: UpgradeElasticsearchDomain
+      description: Allows you to either upgrade your domain or perform an Upgrade eligibility check to a compatible Elasticsearch version.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpgradeElasticsearchDomainResponse'
+        '480':
+          description: BaseException
+          schema:
+            $ref: '#/definitions/BaseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '483':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+        '484':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '485':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpgradeElasticsearchDomainRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   ARN:
     type: string
@@ -947,6 +1149,19 @@ definitions:
         $ref: '#/definitions/OptionStatus'
         description: Specifies the status of the Cognito options for the specified Elasticsearch domain.
     description: Status of the Cognito options for the specified Elasticsearch domain.
+  CompatibleElasticsearchVersionsList:
+    type: array
+    items:
+      $ref: '#/definitions/CompatibleVersionsMap'
+  CompatibleVersionsMap:
+    type: object
+    properties:
+      SourceVersion:
+        $ref: '#/definitions/ElasticsearchVersionString'
+        description: The current version of Elasticsearch on which a domain is.
+      TargetVersions:
+        $ref: '#/definitions/ElasticsearchVersionList'
+    description: ' A map from an <code> <a>ElasticsearchVersion</a> </code> to a list of compatible <code> <a>ElasticsearchVersion</a> </code> s to which the domain can be upgraded. '
   CreateElasticsearchDomainRequest:
     type: object
     required:
@@ -1292,6 +1507,9 @@ definitions:
       Processing:
         $ref: '#/definitions/Boolean'
         description: The status of the Elasticsearch domain configuration. <code>True</code> if Amazon Elasticsearch Service is processing configuration changes. <code>False</code> if the configuration is active.
+      UpgradeProcessing:
+        $ref: '#/definitions/Boolean'
+        description: The status of an Elasticsearch domain version upgrade. <code>True</code> if Amazon Elasticsearch Service is undergoing a version upgrade. <code>False</code> if the configuration is active.
       ElasticsearchVersion:
         $ref: '#/definitions/ElasticsearchVersionString'
       ElasticsearchClusterConfig:
@@ -1389,6 +1607,48 @@ definitions:
   GUID:
     type: string
     pattern: '\p{XDigit}{8}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{12}'
+  GetCompatibleElasticsearchVersionsRequest:
+    type: object
+    properties: {}
+    description: ' Container for request parameters to <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. '
+  GetCompatibleElasticsearchVersionsResponse:
+    type: object
+    properties:
+      CompatibleElasticsearchVersions:
+        $ref: '#/definitions/CompatibleElasticsearchVersionsList'
+        description: ' A map of compatible Elasticsearch versions returned as part of the <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. '
+    description: ' Container for response returned by <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. '
+  GetUpgradeHistoryRequest:
+    type: object
+    properties: {}
+    description: ' Container for request parameters to <code> <a>GetUpgradeHistory</a> </code> operation. '
+  GetUpgradeHistoryResponse:
+    type: object
+    properties:
+      UpgradeHistories:
+        $ref: '#/definitions/UpgradeHistoryList'
+        description: ' A list of <code> <a>UpgradeHistory</a> </code> objects corresponding to each Upgrade or Upgrade Eligibility Check performed on a domain returned as part of <code> <a>GetUpgradeHistoryResponse</a> </code> object. '
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token that needs to be supplied to the next call to get the next page of results
+    description: ' Container for response returned by <code> <a>GetUpgradeHistory</a> </code> operation. '
+  GetUpgradeStatusRequest:
+    type: object
+    properties: {}
+    description: ' Container for request parameters to <code> <a>GetUpgradeStatus</a> </code> operation. '
+  GetUpgradeStatusResponse:
+    type: object
+    properties:
+      UpgradeStep:
+        $ref: '#/definitions/UpgradeStep'
+        description: ' Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does through: <ul> <li>PreUpgradeCheck</li> <li>Snapshot</li> <li>Upgrade</li> </ul> '
+      StepStatus:
+        $ref: '#/definitions/UpgradeStatus'
+        description: ' One of 4 statuses that a step can go through returned as part of the <code> <a>GetUpgradeStatusResponse</a> </code> object. The status can take one of the following values: <ul> <li>In Progress</li> <li>Succeeded</li> <li>Succeeded with Issues</li> <li>Failed</li> </ul> '
+      UpgradeName:
+        $ref: '#/definitions/UpgradeName'
+        description: A string that describes the update briefly
+    description: ' Container for response returned by <code> <a>GetUpgradeStatus</a> </code> operation. '
   IdentityPoolId:
     type: string
     pattern: '[\w-]+:[0-9a-f-]+'
@@ -1426,6 +1686,12 @@ definitions:
     type: object
     properties: {}
     description: An exception for trying to create or access sub-resource that is either invalid or not supported. Gives http status code of 409.
+  Issue:
+    type: string
+  Issues:
+    type: array
+    items:
+      $ref: '#/definitions/Issue'
   KmsKeyId:
     type: string
     minLength: 1
@@ -1766,6 +2032,9 @@ definitions:
         $ref: '#/definitions/OptionStatus'
         description: Specifies the status of a daily automated snapshot.
     description: Status of a daily automated snapshot.
+  StartTimestamp:
+    type: string
+    format: date-time
   StorageSubTypeName:
     type: string
     description: ' SubType of the given storage type. List of available sub-storage options: For "instance" storageType we wont have any storageSubType, in case of "ebs" storageType we will have following valid storageSubTypes <ol> <li>standard</li> <li>gp2</li> <li>io1</li> </ol> Refer <code><a>VolumeType</a></code> for more information regarding above EBS storage options. '
@@ -1878,6 +2147,88 @@ definitions:
   UpdateTimestamp:
     type: string
     format: date-time
+  UpgradeElasticsearchDomainRequest:
+    type: object
+    required:
+      - DomainName
+      - TargetVersion
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      TargetVersion:
+        $ref: '#/definitions/ElasticsearchVersionString'
+        description: The version of Elasticsearch that you intend to upgrade the domain to.
+      PerformCheckOnly:
+        $ref: '#/definitions/Boolean'
+        description: ' This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. '
+    description: ' Container for request parameters to <code> <a>UpgradeElasticsearchDomain</a> </code> operation. '
+  UpgradeElasticsearchDomainResponse:
+    type: object
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      TargetVersion:
+        $ref: '#/definitions/ElasticsearchVersionString'
+        description: The version of Elasticsearch that you intend to upgrade the domain to.
+      PerformCheckOnly:
+        $ref: '#/definitions/Boolean'
+        description: ' This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. '
+    description: ' Container for response returned by <code> <a>UpgradeElasticsearchDomain</a> </code> operation. '
+  UpgradeHistory:
+    type: object
+    properties:
+      UpgradeName:
+        $ref: '#/definitions/UpgradeName'
+        description: A string that describes the update briefly
+      StartTimestamp:
+        $ref: '#/definitions/StartTimestamp'
+        description: 'UTC Timestamp at which the Upgrade API call was made in "yyyy-MM-ddTHH:mm:ssZ" format.'
+      UpgradeStatus:
+        $ref: '#/definitions/UpgradeStatus'
+        description: ' The overall status of the update. The status can take one of the following values: <ul> <li>In Progress</li> <li>Succeeded</li> <li>Succeeded with Issues</li> <li>Failed</li> </ul> '
+      StepsList:
+        $ref: '#/definitions/UpgradeStepsList'
+        description: ' A list of <code> <a>UpgradeStepItem</a> </code> s representing information about each step performed as pard of a specific Upgrade or Upgrade Eligibility Check. '
+    description: History of the last 10 Upgrades and Upgrade Eligibility Checks.
+  UpgradeHistoryList:
+    type: array
+    items:
+      $ref: '#/definitions/UpgradeHistory'
+  UpgradeName:
+    type: string
+  UpgradeStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - SUCCEEDED
+      - SUCCEEDED_WITH_ISSUES
+      - FAILED
+  UpgradeStep:
+    type: string
+    enum:
+      - PRE_UPGRADE_CHECK
+      - SNAPSHOT
+      - UPGRADE
+  UpgradeStepItem:
+    type: object
+    properties:
+      UpgradeStep:
+        $ref: '#/definitions/UpgradeStep'
+        description: ' Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does through: <ul> <li>PreUpgradeCheck</li> <li>Snapshot</li> <li>Upgrade</li> </ul> '
+      UpgradeStepStatus:
+        $ref: '#/definitions/UpgradeStatus'
+        description: ' The status of a particular step during an upgrade. The status can take one of the following values: <ul> <li>In Progress</li> <li>Succeeded</li> <li>Succeeded with Issues</li> <li>Failed</li> </ul> '
+      Issues:
+        $ref: '#/definitions/Issues'
+        description: A list of strings containing detailed information about the errors encountered in a particular step.
+      ProgressPercent:
+        $ref: '#/definitions/Double'
+        description: The Floating point value representing progress percentage of a particular step.
+    description: Represents a single step of the Upgrade or Upgrade Eligibility Check workflow.
+  UpgradeStepsList:
+    type: array
+    items:
+      $ref: '#/definitions/UpgradeStepItem'
   UserPoolId:
     type: string
     pattern: '[\w-]+_[0-9a-zA-Z]+'
