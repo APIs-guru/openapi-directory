@@ -32,6 +32,8 @@ consumes:
 produces:
   - application/json
 responses:
+  Forbidden:
+    description: Forbidden
   InternalServerError:
     description: Internal Server Error
   NoContent:
@@ -40,6 +42,8 @@ responses:
     description: Not Found
   OK:
     description: OK
+  ServiceUnavailable:
+    description: Service Unavailable
 paths:
   /api/:
     get:
@@ -139,6 +143,8 @@ paths:
           description: OK
         '500':
           description: Internal Server Error
+        '503':
+          description: Service Unavailable
       schemes:
         - http
       summary: Modify config
@@ -295,6 +301,131 @@ paths:
       summary: SetOrientation external
       tags:
         - external
+  /api/v1/poi:
+    post:
+      description: Create a new POI
+      operationId: 'poi#Create'
+      parameters:
+        - description: A list of all POI
+          in: body
+          name: payload
+          required: true
+          schema:
+            $ref: '#/definitions/CreatePoiPayload'
+      produces:
+        - application/vnd.goa.error
+      responses:
+        '201':
+          description: Resource created
+          headers:
+            Location:
+              description: href to created resource
+              pattern: '^/poi/[0-9]+$'
+              type: string
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        '403':
+          description: Forbidden
+      schemes:
+        - http
+      summary: Create poi
+      tags:
+        - poi
+  /api/v1/poi/:
+    get:
+      description: List all points of interest
+      operationId: 'poi#List'
+      produces:
+        - application/vnd.waterlinked.poi+json; type=collection
+      responses:
+        '200':
+          description: Return list of all POIs
+          schema:
+            $ref: '#/definitions/WaterlinkedPoiCollection'
+        '404':
+          description: Not Found
+      schemes:
+        - http
+      summary: List poi
+      tags:
+        - poi
+  '/api/v1/poi/{ID}':
+    delete:
+      operationId: 'poi#Delete'
+      parameters:
+        - in: path
+          name: ID
+          required: true
+          type: integer
+      produces:
+        - application/vnd.goa.error
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        '404':
+          description: Not Found
+      schemes:
+        - http
+      summary: Delete poi
+      tags:
+        - poi
+    get:
+      description: Get a POI
+      operationId: 'poi#Show'
+      parameters:
+        - in: path
+          name: ID
+          required: true
+          type: integer
+      produces:
+        - application/vnd.waterlinked.poi+json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WaterlinkedPoi'
+        '404':
+          description: Not Found
+      schemes:
+        - http
+      summary: Show poi
+      tags:
+        - poi
+    patch:
+      operationId: 'poi#Update'
+      parameters:
+        - in: path
+          name: ID
+          required: true
+          type: integer
+        - description: A list of all POI
+          in: body
+          name: payload
+          required: true
+          schema:
+            $ref: '#/definitions/UpdatePoiPayload'
+      produces:
+        - application/vnd.goa.error
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        '404':
+          description: Not Found
+      schemes:
+        - http
+      summary: Update poi
+      tags:
+        - poi
   /api/v1/position/acoustic/filtered:
     get:
       description: 'Get current Kalman filtered acoustic position relative to master acoustics. Expected update frequency: 4 Hz'
@@ -336,12 +467,12 @@ paths:
       description: 'Get current global position of locator. Locator position is calculated from the current acoustic position and the global position of the master electronics. Expected update frequency: 4 Hz'
       operationId: 'position#Get'
       produces:
-        - application/vnd.wl.global.position+json
+        - application/vnd.wl.satellite.position+json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/WlGlobalPosition'
+            $ref: '#/definitions/WlSatellitePosition'
         '500':
           description: Internal Server Error
       schemes:
@@ -354,12 +485,12 @@ paths:
       description: 'Get current global position of master electronics. Expected update frequency: 1 Hz'
       operationId: 'position#GetMaster'
       produces:
-        - application/vnd.wl.master.position+json
+        - application/vnd.wl.satellite.position+json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/WlMasterPosition'
+            $ref: '#/definitions/WlSatellitePosition'
         '500':
           description: Internal Server Error
       schemes:
@@ -367,13 +498,82 @@ paths:
       summary: GetMaster position
       tags:
         - position
+  /api/v1/warnings/:
+    get:
+      description: Get current list of messages
+      operationId: 'warnings#Get'
+      produces:
+        - application/vnd.wl.warning+json; type=collection
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WlWarningCollection'
+      schemes:
+        - http
+      summary: Get warnings
+      tags:
+        - warnings
 definitions:
+  CreatePoiPayload:
+    description: A list of all POI
+    example:
+      depth: 0.748659470979663
+      icon: Accusamus iusto neque sequi fugit quis vero.
+      id: 7573279786407419000
+      lat: 0.9197150819910366
+      lng: 0.608968126951797
+      name: Maiores quidem.
+      visible: true
+    properties:
+      depth:
+        description: Depth of POI
+        example: 0.748659470979663
+        format: double
+        type: number
+      icon:
+        description: Icon of POI
+        example: Accusamus iusto neque sequi fugit quis vero.
+        type: string
+      id:
+        description: Unique POI id
+        example: 7573279786407419000
+        format: int64
+        type: integer
+      lat:
+        description: Latitude of POI
+        example: 0.9197150819910366
+        format: double
+        type: number
+      lng:
+        description: Longitude of POI
+        example: 0.608968126951797
+        format: double
+        type: number
+      name:
+        description: Name of POI
+        example: Maiores quidem.
+        type: string
+      visible:
+        description: Visibility of POI
+        example: true
+        type: boolean
+    required:
+      - name
+      - lat
+      - lng
+      - depth
+      - icon
+      - visible
+    title: CreatePoiPayload
+    type: object
   ModifyConfigPayload:
     description: Configuration parameters
     example:
-      carrier_frequency: 150
+      channel: 13
       compass: static
       gps: external
+      locator_type: a1
       range_max_x: 50
       range_max_y: 50
       range_max_z: 50
@@ -382,14 +582,13 @@ definitions:
       static_lat: 63.422
       static_lon: 10.424
       static_orientation: 42
-      use_external_depth: false
     properties:
-      carrier_frequency:
-        description: Carrier frequency (kHz)
-        example: 150
-        maximum: 200
-        minimum: 100
-        type: number
+      channel:
+        description: Channel to use
+        example: 13
+        maximum: 18
+        minimum: 1
+        type: integer
       compass:
         description: Compass provider setting
         enum:
@@ -405,6 +604,14 @@ definitions:
           - static
           - external
         example: external
+        type: string
+      locator_type:
+        description: Locator type in use
+        enum:
+          - d1
+          - a1
+          - s1
+        example: a1
         type: string
       range_max_x:
         description: Max range (meters)
@@ -454,18 +661,14 @@ definitions:
         maximum: 359
         minimum: 0
         type: number
-      use_external_depth:
-        description: Use external depth. Required to be true when using Locator-A1.
-        example: false
-        type: boolean
     required:
-      - carrier_frequency
+      - channel
       - range_min_x
       - range_max_x
       - range_min_y
       - range_max_y
       - range_max_z
-      - use_external_depth
+      - locator_type
       - gps
       - compass
       - static_lat
@@ -476,29 +679,29 @@ definitions:
   ModifyReceiverConfigPayload:
     description: A receiver configuration
     example:
-      id: 3143803153813247500
-      x: 0.748659470979663
-      'y': 0.5191780885101608
-      z: 0.8800592996534627
+      id: 3146300361811729400
+      x: 0.17148309399971762
+      'y': 0.36951858984372926
+      z: 0.8147274904139097
     properties:
       id:
         description: Unique receiver identifier
-        example: 3143803153813247500
+        example: 3146300361811729400
         format: int64
         type: integer
       x:
         description: Configured X position relative to master electronics (meter)
-        example: 0.748659470979663
+        example: 0.17148309399971762
         format: double
         type: number
       'y':
         description: Configured Y position relative to master electronics (meter)
-        example: 0.5191780885101608
+        example: 0.36951858984372926
         format: double
         type: number
       z:
         description: Configured Z position relative to master electronics (meter)
-        example: 0.8800592996534627
+        example: 0.8147274904139097
         format: double
         type: number
     required:
@@ -534,10 +737,25 @@ definitions:
   SetMasterExternalPayload:
     description: Global master position from external source
     example:
+      cog: 42
+      hdop: 1.9
       lat: 63.422
       lon: 10.424
+      numsats: 11
       orientation: 42
+      sog: 0.5
     properties:
+      cog:
+        description: Course over ground (degrees). -1 means no data.
+        example: 42
+        maximum: 359
+        minimum: -1
+        type: number
+      hdop:
+        description: Horizontal dilution of precision. -1 means no data.
+        example: 1.9
+        minimum: -1
+        type: number
       lat:
         description: Current Latitude
         example: 63.422
@@ -550,11 +768,21 @@ definitions:
         maximum: 180
         minimum: -180
         type: number
+      numsats:
+        description: Number of satellites. -1 means no data.
+        example: 11
+        minimum: -1
+        type: number
       orientation:
         description: Current orientation/compass heading (degrees)
         example: 42
         maximum: 359
         minimum: 0
+        type: number
+      sog:
+        description: Speed over ground (km/h). -1 means no data.
+        example: 0.5
+        minimum: -1
         type: number
     required:
       - lat
@@ -577,22 +805,80 @@ definitions:
       - orientation
     title: SetOrientationExternalPayload
     type: object
+  UpdatePoiPayload:
+    description: A list of all POI
+    example:
+      depth: 0.748659470979663
+      icon: Accusamus iusto neque sequi fugit quis vero.
+      id: 7573279786407419000
+      lat: 0.9197150819910366
+      lng: 0.608968126951797
+      name: Maiores quidem.
+      visible: true
+    properties:
+      depth:
+        description: Depth of POI
+        example: 0.748659470979663
+        format: double
+        type: number
+      icon:
+        description: Icon of POI
+        example: Accusamus iusto neque sequi fugit quis vero.
+        type: string
+      id:
+        description: Unique POI id
+        example: 7573279786407419000
+        format: int64
+        type: integer
+      lat:
+        description: Latitude of POI
+        example: 0.9197150819910366
+        format: double
+        type: number
+      lng:
+        description: Longitude of POI
+        example: 0.608968126951797
+        format: double
+        type: number
+      name:
+        description: Name of POI
+        example: Maiores quidem.
+        type: string
+      visible:
+        description: Visibility of POI
+        example: true
+        type: boolean
+    required:
+      - name
+      - lat
+      - lng
+      - depth
+      - icon
+      - visible
+    title: UpdatePoiPayload
+    type: object
   WaterlinkedAbout:
     description: About information (default view)
     example:
       chipid: '0x123456789'
       version: 1.0.0 (abc.def)
+      version_short: 1.0.0
     properties:
       chipid:
         description: Chip identifier
         example: '0x123456789'
         type: string
       version:
-        description: Web Server version string
+        description: Detailed Web Server version string
         example: 1.0.0 (abc.def)
+        type: string
+      version_short:
+        description: Short Web Server version string
+        example: 1.0.0
         type: string
     required:
       - version
+      - version_short
       - chipid
     title: 'Mediatype identifier: application/vnd.waterlinked.about+json; view=default'
     type: object
@@ -606,27 +892,27 @@ definitions:
       z: 10.2
     properties:
       std:
-        description: Current accoustic position accuracy (meter)
+        description: Current acoustic position accuracy (meter)
         example: 0.5
         minimum: 0
         type: number
       temp:
-        description: Current accoustic temperature (C)
+        description: Current acoustic temperature (C)
         example: 5.5
         format: double
         type: number
       x:
-        description: Current accoustic x position relative to master electronics (meter)
+        description: Current acoustic x position relative to master electronics (meter)
         example: 32.1
         format: double
         type: number
       'y':
-        description: Current accoustic y position relative to master electronics (meter)
+        description: Current acoustic y position relative to master electronics (meter)
         example: 11.2
         format: double
         type: number
       z:
-        description: Current accoustic z position (depth) relative to master electronics (meter)
+        description: Current acoustic z position (depth) relative to master electronics (meter)
         example: 10.2
         minimum: 0
         type: number
@@ -641,9 +927,10 @@ definitions:
   WaterlinkedConfiguration:
     description: Configuration parameters (default view)
     example:
-      carrier_frequency: 150
+      channel: 13
       compass: static
       gps: external
+      locator_type: a1
       range_max_x: 50
       range_max_y: 50
       range_max_z: 50
@@ -652,14 +939,13 @@ definitions:
       static_lat: 63.422
       static_lon: 10.424
       static_orientation: 42
-      use_external_depth: false
     properties:
-      carrier_frequency:
-        description: Carrier frequency (kHz)
-        example: 150
-        maximum: 200
-        minimum: 100
-        type: number
+      channel:
+        description: Channel to use
+        example: 13
+        maximum: 18
+        minimum: 1
+        type: integer
       compass:
         description: Compass provider setting
         enum:
@@ -675,6 +961,14 @@ definitions:
           - static
           - external
         example: external
+        type: string
+      locator_type:
+        description: Locator type in use
+        enum:
+          - d1
+          - a1
+          - s1
+        example: a1
         type: string
       range_max_x:
         description: Max range (meters)
@@ -724,18 +1018,14 @@ definitions:
         maximum: 359
         minimum: 0
         type: number
-      use_external_depth:
-        description: Use external depth. Required to be true when using Locator-A1.
-        example: false
-        type: boolean
     required:
-      - carrier_frequency
+      - channel
       - range_min_x
       - range_max_x
       - range_min_y
       - range_max_y
       - range_max_z
-      - use_external_depth
+      - locator_type
       - gps
       - compass
       - static_lat
@@ -743,32 +1033,112 @@ definitions:
       - static_orientation
     title: 'Mediatype identifier: application/vnd.waterlinked.configuration+json; view=default'
     type: object
+  WaterlinkedPoi:
+    description: A list of all POI (default view)
+    example:
+      depth: 0.748659470979663
+      icon: Accusamus iusto neque sequi fugit quis vero.
+      id: 7573279786407419000
+      lat: 0.9197150819910366
+      lng: 0.608968126951797
+      name: Maiores quidem.
+      visible: true
+    properties:
+      depth:
+        description: Depth of POI
+        example: 0.748659470979663
+        format: double
+        type: number
+      icon:
+        description: Icon of POI
+        example: Accusamus iusto neque sequi fugit quis vero.
+        type: string
+      id:
+        description: Unique POI id
+        example: 7573279786407419000
+        format: int64
+        type: integer
+      lat:
+        description: Latitude of POI
+        example: 0.9197150819910366
+        format: double
+        type: number
+      lng:
+        description: Longitude of POI
+        example: 0.608968126951797
+        format: double
+        type: number
+      name:
+        description: Name of POI
+        example: Maiores quidem.
+        type: string
+      visible:
+        description: Visibility of POI
+        example: true
+        type: boolean
+    required:
+      - name
+      - lat
+      - lng
+      - depth
+      - icon
+      - visible
+    title: 'Mediatype identifier: application/vnd.waterlinked.poi+json; view=default'
+    type: object
+  WaterlinkedPoiCollection:
+    description: WaterlinkedPoiCollection is the media type for an array of WaterlinkedPoi (default view)
+    example:
+      - depth: 0.748659470979663
+        icon: Accusamus iusto neque sequi fugit quis vero.
+        id: 7573279786407419000
+        lat: 0.9197150819910366
+        lng: 0.608968126951797
+        name: Maiores quidem.
+        visible: true
+      - depth: 0.748659470979663
+        icon: Accusamus iusto neque sequi fugit quis vero.
+        id: 7573279786407419000
+        lat: 0.9197150819910366
+        lng: 0.608968126951797
+        name: Maiores quidem.
+        visible: true
+      - depth: 0.748659470979663
+        icon: Accusamus iusto neque sequi fugit quis vero.
+        id: 7573279786407419000
+        lat: 0.9197150819910366
+        lng: 0.608968126951797
+        name: Maiores quidem.
+        visible: true
+    items:
+      $ref: '#/definitions/WaterlinkedPoi'
+    title: 'Mediatype identifier: application/vnd.waterlinked.poi+json; type=collection; view=default'
+    type: array
   WaterlinkedReceiver:
     description: A receiver configuration (default view)
     example:
-      id: 3143803153813247500
-      x: 0.748659470979663
-      'y': 0.5191780885101608
-      z: 0.8800592996534627
+      id: 3146300361811729400
+      x: 0.17148309399971762
+      'y': 0.36951858984372926
+      z: 0.8147274904139097
     properties:
       id:
         description: Unique receiver identifier
-        example: 3143803153813247500
+        example: 3146300361811729400
         format: int64
         type: integer
       x:
         description: Configured X position relative to master electronics (meter)
-        example: 0.748659470979663
+        example: 0.17148309399971762
         format: double
         type: number
       'y':
         description: Configured Y position relative to master electronics (meter)
-        example: 0.5191780885101608
+        example: 0.36951858984372926
         format: double
         type: number
       z:
         description: Configured Z position relative to master electronics (meter)
-        example: 0.8800592996534627
+        example: 0.8147274904139097
         format: double
         type: number
     required:
@@ -781,18 +1151,10 @@ definitions:
   WaterlinkedReceiverCollection:
     description: WaterlinkedReceiverCollection is the media type for an array of WaterlinkedReceiver (default view)
     example:
-      - id: 3143803153813247500
-        x: 0.748659470979663
-        'y': 0.5191780885101608
-        z: 0.8800592996534627
-      - id: 3143803153813247500
-        x: 0.748659470979663
-        'y': 0.5191780885101608
-        z: 0.8800592996534627
-      - id: 3143803153813247500
-        x: 0.748659470979663
-        'y': 0.5191780885101608
-        z: 0.8800592996534627
+      - id: 3146300361811729400
+        x: 0.17148309399971762
+        'y': 0.36951858984372926
+        z: 0.8147274904139097
     items:
       $ref: '#/definitions/WaterlinkedReceiver'
     title: 'Mediatype identifier: application/vnd.waterlinked.receiver+json; type=collection; view=default'
@@ -849,30 +1211,7 @@ definitions:
       - orientation
     title: 'Mediatype identifier: application/vnd.wl.external.locator.orientation+json; view=default'
     type: object
-  WlGlobalPosition:
-    description: Global locator position (default view)
-    example:
-      lat: 63.422
-      lon: 10.424
-    properties:
-      lat:
-        description: Current Latitude
-        example: 63.422
-        maximum: 90
-        minimum: -90
-        type: number
-      lon:
-        description: Current Longitude
-        example: 10.424
-        maximum: 180
-        minimum: -180
-        type: number
-    required:
-      - lat
-      - lon
-    title: 'Mediatype identifier: application/vnd.wl.global.position+json; view=default'
-    type: object
-  WlMasterPosition:
+  WlSatellitePosition:
     description: GPS and IMU position (default view)
     example:
       cog: 42
@@ -930,8 +1269,43 @@ definitions:
       - sog
       - hdop
       - numsats
-    title: 'Mediatype identifier: application/vnd.wl.master.position+json; view=default'
+    title: 'Mediatype identifier: application/vnd.wl.satellite.position+json; view=default'
     type: object
+  WlWarning:
+    description: Warning message (default view)
+    example:
+      id: Reprehenderit non architecto quia.
+      message: Accusantium ad.
+      severity: Omnis libero pariatur quia id.
+    properties:
+      id:
+        description: Identifier
+        example: Reprehenderit non architecto quia.
+        type: string
+      message:
+        description: Message
+        example: Accusantium ad.
+        type: string
+      severity:
+        description: Severity
+        example: Omnis libero pariatur quia id.
+        type: string
+    required:
+      - id
+      - message
+      - severity
+    title: 'Mediatype identifier: application/vnd.wl.warning+json; view=default'
+    type: object
+  WlWarningCollection:
+    description: WlWarningCollection is the media type for an array of WlWarning (default view)
+    example:
+      - id: Reprehenderit non architecto quia.
+        message: Accusantium ad.
+        severity: Omnis libero pariatur quia id.
+    items:
+      $ref: '#/definitions/WlWarning'
+    title: 'Mediatype identifier: application/vnd.wl.warning+json; type=collection; view=default'
+    type: array
   WupdaterApiversion:
     description: Returns supported api versions (default view)
     example:
@@ -945,10 +1319,44 @@ definitions:
           - v1
           - v2
         items:
-          example: Sequi fugit quis vero in deleniti.
+          example: Itaque nemo dolorem ea.
           type: string
         type: array
     required:
       - versions
     title: 'Mediatype identifier: application/vnd.wupdater.apiversion; view=default'
+    type: object
+  error:
+    description: Error response media type (default view)
+    example:
+      code: invalid_value
+      detail: Value of ID must be an integer
+      id: 3F1FKVRR
+      meta:
+        timestamp: 1458609066
+      status: '400'
+    properties:
+      code:
+        description: 'an application-specific error code, expressed as a string value.'
+        example: invalid_value
+        type: string
+      detail:
+        description: a human-readable explanation specific to this occurrence of the problem.
+        example: Value of ID must be an integer
+        type: string
+      id:
+        description: a unique identifier for this particular occurrence of the problem.
+        example: 3F1FKVRR
+        type: string
+      meta:
+        additionalProperties: true
+        description: a meta object containing non-standard meta-information about the error.
+        example:
+          timestamp: 1458609066
+        type: object
+      status:
+        description: 'the HTTP status code applicable to this problem, expressed as a string value.'
+        example: '400'
+        type: string
+    title: 'Mediatype identifier: application/vnd.goa.error; view=default'
     type: object

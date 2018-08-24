@@ -2,10 +2,9 @@ swagger: '2.0'
 schemes:
   - https
 host: azure.local
-basePath: /face/v1.0
 info:
   description: 'An API for face detection, verification, and identification.'
-  title: Face
+  title: Face Client
   version: '1.0'
   x-apisguru-categories:
     - cloud
@@ -28,6 +27,14 @@ securityDefinitions:
 security:
   - apim_key: []
 parameters:
+  Endpoint:
+    description: 'Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).'
+    in: path
+    name: Endpoint
+    required: true
+    type: string
+    x-ms-parameter-location: client
+    x-ms-skip-url-encoding: true
   faceListId:
     collectionFormat: csv
     description: Id referencing a particular face list.
@@ -45,6 +52,26 @@ parameters:
     maxLength: 1024
     name: userData
     required: false
+    type: string
+    x-ms-parameter-location: method
+  largeFaceListId:
+    collectionFormat: csv
+    description: Id referencing a particular large face list.
+    in: path
+    maxLength: 64
+    name: largeFaceListId
+    pattern: '^[a-z0-9-_]+$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  largePersonGroupId:
+    collectionFormat: csv
+    description: Id referencing a particular large person group.
+    in: path
+    maxLength: 64
+    name: largePersonGroupId
+    pattern: '^[a-z0-9-_]+$'
+    required: true
     type: string
     x-ms-parameter-location: method
   persistedFaceId:
@@ -142,20 +169,14 @@ paths:
           name: ImageUrl
           required: true
           schema:
-            properties:
-              url:
-                description: Publicly reachable URL of an image
-                type: string
-            required:
-              - url
-            type: object
+            $ref: '#/definitions/ImageUrl'
           x-ms-client-flatten: true
           x-ms-parameter-location: method
       produces:
         - application/json
       responses:
         '200':
-          description: A successful call returns an array of face entries ranked by face rectangle size in descendingorder. An empty response indicates no faces detected.
+          description: A successful call returns an array of face entries ranked by face rectangle size in descending order. An empty response indicates no faces detected.
           schema:
             $ref: '#/definitions/DetectedFaces'
         default:
@@ -165,8 +186,8 @@ paths:
       x-ms-examples:
         Detect with url example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             ImageUrl: '{Image Url here}'
             Ocp-Apim-Subscription-Key: '{API key}'
             returnFaceAttributes:
@@ -353,9 +374,9 @@ paths:
           schema:
             $ref: '#/definitions/APIError'
       x-ms-examples:
-        Get Face lists example:
+        List Face lists example:
           parameters:
-            AzureRegion: westus
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
           responses:
             '200':
@@ -379,8 +400,8 @@ paths:
       x-ms-examples:
         Delete face list example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             faceListId: sample_face_list
           responses:
@@ -405,8 +426,8 @@ paths:
       x-ms-examples:
         Get Face list example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             faceListId: sample_face_list
           responses:
@@ -442,8 +463,8 @@ paths:
       x-ms-examples:
         Update face list example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               name: list1
@@ -478,8 +499,8 @@ paths:
       x-ms-examples:
         Create new face list example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               name: sample_list
@@ -488,7 +509,7 @@ paths:
           responses:
             '200':
               body: ''
-  '/facelists/{faceListId}/persistedFaces':
+  '/facelists/{faceListId}/persistedfaces':
     post:
       consumes:
         - application/json
@@ -503,13 +524,7 @@ paths:
           name: ImageUrl
           required: true
           schema:
-            properties:
-              url:
-                description: Publicly reachable URL of an image
-                type: string
-            required:
-              - url
-            type: object
+            $ref: '#/definitions/ImageUrl'
           x-ms-client-flatten: true
           x-ms-parameter-location: method
       produces:
@@ -526,8 +541,8 @@ paths:
       x-ms-examples:
         Create face list face example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             ImageUrl: '{Image url}'
             Ocp-Apim-Subscription-Key: '{API key}'
             faceListId: sample_face_list
@@ -541,7 +556,7 @@ paths:
             '200':
               body:
                 persistedFaceId: B8D802CF-DD8F-4E61-B15C-9E6C5844CCBA
-  '/facelists/{faceListId}/persistedFaces/{persistedFaceId}':
+  '/facelists/{faceListId}/persistedfaces/{persistedFaceId}':
     delete:
       description: Delete an existing face from a face list (given by a persisitedFaceId and a faceListId). Persisted image related to the face will also be deleted.
       operationId: FaceList_DeleteFace
@@ -558,8 +573,8 @@ paths:
       x-ms-examples:
         Delete face in face list example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             faceListId: sample_face_list
             persistedFaceId: 62004fa7-1ac0-478e-9d5a-b38f9e7fbc68
@@ -570,7 +585,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: 'Given query face''s faceId, find the similar-looking faces from a faceId array or a faceListId.'
+      description: 'Given query face''s faceId, find the similar-looking faces from a faceId array, a face list or a large face list.'
       operationId: Face_FindSimilar
       parameters:
         - description: Request body for Find Similar.
@@ -594,12 +609,12 @@ paths:
       x-ms-examples:
         Find similar results example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               faceId: c5c24a82-6845-4031-9d5d-978df9175426
-              faceListId: sample_list
+              largeFaceListId: sample_list
               maxNumOfCandidatesReturned: 1
               mode: matchPerson
           responses:
@@ -635,8 +650,8 @@ paths:
       x-ms-examples:
         Group example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               faceIds:
@@ -664,7 +679,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Identify unknown faces from a person group.
+      description: 1-to-many identification to find the closest matches of the specific query person face from a person group or large person group.
       operationId: Face_Identify
       parameters:
         - description: Request body for identify operation.
@@ -688,16 +703,16 @@ paths:
       x-ms-examples:
         Identiy example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               confidenceThreshold: 0.5
               faceIds:
                 - c5c24a82-6845-4031-9d5d-978df9175426
                 - 65d083d4-9447-47d1-af30-b626144bf0fb
+              largePersonGroupId: sample_group
               maxNumOfCandidatesReturned: 1
-              personGroupId: sample_group
           responses:
             '200':
               body:
@@ -709,6 +724,953 @@ paths:
                     - confidence: 0.89
                       personId: 2ae4935b-9659-44c3-977f-61fac20d0538
                   faceId: 65d083d4-9447-47d1-af30-b626144bf0fb
+  /largefacelists:
+    get:
+      description: 'Retrieve information about all existing large face lists. Only largeFaceListId, name and userData will be returned.'
+      operationId: LargeFaceList_List
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns an array of largeFaceList.
+          schema:
+            $ref: '#/definitions/LargeFaceLists'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        List large face lists example:
+          parameters:
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+          responses:
+            '200':
+              body:
+                - largeFaceListId: f92f6f1b-3258-4444-8fa2-c2df505cc7ac
+                  name: large-face-list-name1
+                  userData: User-provided data attached to the large face list.
+                - largeFaceListId: c76f7f13-0ed3-4d00-8a3e-2ad3d78f6c37
+                  name: large-face-list-name2
+                  userData: User-provided data attached to the large face list.
+  '/largefacelists/{largeFaceListId}':
+    delete:
+      description: Delete an existing large face list according to faceListId. Persisted face images in the large face list will also be deleted.
+      operationId: LargeFaceList_Delete
+      parameters:
+        - $ref: '#/parameters/largeFaceListId'
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Delete large face list example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largeFaceListId: sample_face_list
+          responses:
+            '200':
+              body: ''
+    get:
+      description: Retrieve a large face list's information.
+      operationId: LargeFaceList_Get
+      parameters:
+        - $ref: '#/parameters/largeFaceListId'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns the large face list's information.
+          schema:
+            $ref: '#/definitions/LargeFaceList'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Get large face list example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largeFaceListId: f92f6f1b-3258-4444-8fa2-c2df505cc7ac
+          responses:
+            '200':
+              body:
+                largeFaceListId: f92f6f1b-3258-4444-8fa2-c2df505cc7ac
+                name: large-face-list-name
+                userData: User-provided data attached to the large face list.
+    patch:
+      consumes:
+        - application/json
+      description: Update information of a large face list.
+      operationId: LargeFaceList_Update
+      parameters:
+        - $ref: '#/parameters/largeFaceListId'
+        - description: Request body for updating a large face list.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/NameAndUserDataContract'
+          x-ms-client-flatten: true
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Update large face list example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body:
+              name: large-face-list-name
+              userData: User-provided data attached to the large face list.
+            largeFaceListId: sample_face_list
+          responses:
+            '200':
+              body: ''
+    put:
+      consumes:
+        - application/json
+      description: Create an empty large face list. Up to 64 large face lists are allowed to exist in one subscription.
+      operationId: LargeFaceList_Create
+      parameters:
+        - $ref: '#/parameters/largeFaceListId'
+        - description: Request body for creating a large face list.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/NameAndUserDataContract'
+          x-ms-client-flatten: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Create new large face list example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body:
+              name: large-face-list-name
+              userData: User-provided data attached to the large face list.
+            largeFaceListId: sample_face_list
+          responses:
+            '200':
+              body: ''
+  '/largefacelists/{largeFaceListId}/persistedfaces':
+    get:
+      description: 'List all faces in a large face list, and retrieve face information (including userData and persistedFaceIds of registered faces of the face).'
+      operationId: LargeFaceList_ListFaces
+      parameters:
+        - $ref: '#/parameters/largeFaceListId'
+        - description: Starting face id to return (used to list a range of faces).
+          in: query
+          name: start
+          required: false
+          type: string
+        - description: Number of faces to return starting with the face id indicated by the 'start' parameter.
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: top
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns an array of face information that belong to the large face list.
+          schema:
+            $ref: '#/definitions/PersistedFaces'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        List faces in large face list:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largeFaceListId: abc
+            start: 25985303-c537-4467-b41d-bdb45cd95ca1
+            top: 2
+          responses:
+            '200':
+              body:
+                - persistedFaceId: 8a887ac2-53fd-4f55-9024-1ec77eecd08e
+                  userData: User-provided data attached to the large face list face.
+                - persistedFaceId: f92f6f1b-3258-4444-8fa2-c2df505cc7ac
+                  userData: User-provided data attached to the large face list face.
+    post:
+      consumes:
+        - application/json
+      description: 'Add a face to a large face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.'
+      operationId: LargeFaceList_AddFaceFromUrl
+      parameters:
+        - $ref: '#/parameters/largeFaceListId'
+        - $ref: '#/parameters/faceUserData'
+        - $ref: '#/parameters/targetFace'
+        - description: A JSON document with a URL pointing to the image that is to be analyzed.
+          in: body
+          name: ImageUrl
+          required: true
+          schema:
+            $ref: '#/definitions/ImageUrl'
+          x-ms-client-flatten: true
+          x-ms-parameter-location: method
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns a new persistedFaceId.
+          schema:
+            $ref: '#/definitions/PersistedFace'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Create large face list face example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            ImageUrl: '{Image url}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largeFaceListId: sample_face_list
+            targetFace:
+              - 10
+              - 10
+              - 100
+              - 100
+            userData: '{Customized user data}'
+          responses:
+            '200':
+              body:
+                persistedFaceId: B8D802CF-DD8F-4E61-B15C-9E6C5844CCBA
+  '/largefacelists/{largeFaceListId}/persistedfaces/{persistedFaceId}':
+    delete:
+      description: Delete an existing face from a large face list (given by a persisitedFaceId and a largeFaceListId). Persisted image related to the face will also be deleted.
+      operationId: LargeFaceList_DeleteFace
+      parameters:
+        - $ref: '#/parameters/largeFaceListId'
+        - $ref: '#/parameters/persistedFaceId'
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Delete face in large face list example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largeFaceListId: sample_face_list
+            persistedFaceId: 62004fa7-1ac0-478e-9d5a-b38f9e7fbc68
+          responses:
+            '200':
+              body: ''
+    get:
+      description: Retrieve information about a persisted face (specified by persistedFaceId and its belonging largeFaceListId).
+      operationId: LargeFaceList_GetFace
+      parameters:
+        - $ref: '#/parameters/largeFaceListId'
+        - $ref: '#/parameters/persistedFaceId'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns target persisted face's information (persistedFaceId and userData).
+          schema:
+            $ref: '#/definitions/PersistedFace'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Get persisted face example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largeFaceListId: abc
+            persistedFaceId: 015839fb-fbd9-4f79-ace9-7675fc2f1dd9
+          responses:
+            '200':
+              body:
+                persistedFaceId: 015839fb-fbd9-4f79-ace9-7675fc2f1dd9
+                userData: User-provided data attached to the face.
+    patch:
+      consumes:
+        - application/json
+      description: Update a persisted face's userData field.
+      operationId: LargeFaceList_UpdateFace
+      parameters:
+        - $ref: '#/parameters/largeFaceListId'
+        - $ref: '#/parameters/persistedFaceId'
+        - description: Request body for updating persisted face.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFaceRequest'
+          x-ms-client-flatten: true
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Update face example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body:
+              userData: User-provided data attached to the face.
+            largeFaceListId: abc
+            persistedFaceId: 62004fa7-1ac0-478e-9d5a-b38f9e7fbc68
+          responses:
+            '200':
+              body: ''
+  '/largefacelists/{largeFaceListId}/train':
+    post:
+      description: 'Queue a large face list training task, the training task may not be started immediately.'
+      operationId: LargeFaceList_Train
+      parameters:
+        - $ref: '#/parameters/largeFaceListId'
+      produces:
+        - application/json
+      responses:
+        '202':
+          description: The training task was queued successfully.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Queue large face list training:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largeFaceListId: abc
+          responses:
+            '202':
+              body: ''
+  '/largefacelists/{largeFaceListId}/training':
+    get:
+      description: Retrieve the training status of a large face list (completed or ongoing).
+      operationId: LargeFaceList_GetTrainingStatus
+      parameters:
+        - $ref: '#/parameters/largeFaceListId'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns the large face list's training status.
+          schema:
+            $ref: '#/definitions/TrainingStatus'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Get large face list's training status example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largeFaceListId: abc
+          responses:
+            '200':
+              body:
+                createdDateTime: '2017-12-21T12:57:27.00Z'
+                lastActionDateTime: '2017-12-21T12:57:30.00Z'
+                lastSuccessfulTrainingDateTime: '2017-12-21T12:57:30.00Z'
+                message: null
+                status: succeeded
+  /largepersongroups:
+    get:
+      description: List large person groups and their information.
+      operationId: LargePersonGroup_List
+      parameters:
+        - description: List large person groups from the least largePersonGroupId greater than the "start".
+          in: query
+          maxLength: 64
+          name: start
+          required: false
+          type: string
+        - default: 1000
+          description: The number of large person groups to list.
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: top
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns an array of large person groups and their information.
+          schema:
+            $ref: '#/definitions/LargePersonGroups'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        List large person groups example:
+          parameters:
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            start: sample_group
+            top: 2
+          responses:
+            '200':
+              body:
+                - largePersonGroupId: f92f6f1b-3258-4444-8fa2-c2df505cc7ac
+                  name: large-person-group-name1
+                  userData: User-provided data attached to the large person group
+                - largePersonGroupId: c76f7f13-0ed3-4d00-8a3e-2ad3d78f6c37
+                  name: large-person-group-name2
+                  userData: User-provided data attached to the large person group
+  '/largepersongroups/{largePersonGroupId}':
+    delete:
+      description: Delete an existing large person group. Persisted face features of all people in the large person group will also be deleted.
+      operationId: LargePersonGroup_Delete
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Delete a large person group example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largePersonGroupId: abc
+          responses:
+            '200':
+              body: ''
+    get:
+      description: 'Retrieve the information of a large person group, including its name and userData.'
+      operationId: LargePersonGroup_Get
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns the large person group's information.
+          schema:
+            $ref: '#/definitions/LargePersonGroup'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Get large person group example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largePersonGroupId: abc
+          responses:
+            '200':
+              body:
+                largePersonGroupId: d408cb4e-2f5f-4b4d-b99e-f0b72870e5b5
+                name: large-person-group-name
+                userData: User-provided data attached to the large person group.
+    patch:
+      consumes:
+        - application/json
+      description: Update an existing large person group's display name and userData. The properties which does not appear in request body will not be updated.
+      operationId: LargePersonGroup_Update
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+        - description: Request body for updating large person group.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/NameAndUserDataContract'
+          x-ms-client-flatten: true
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Update large person group example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body:
+              name: group1
+              userData: user-provided data attached to the large person group
+            largePersonGroupId: abc
+          responses:
+            '200':
+              body: ''
+    put:
+      consumes:
+        - application/json
+      description: 'Create a new large person group with specified largePersonGroupId, name and user-provided userData.'
+      operationId: LargePersonGroup_Create
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+        - description: Request body for creating new large person group.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/NameAndUserDataContract'
+          x-ms-client-flatten: true
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Create new large person group example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body:
+              name: large-person-group-name
+              userData: User-provided data attached to the large person group.
+            largePersonGroupId: abc
+          responses:
+            '200':
+              body: ''
+  '/largepersongroups/{largePersonGroupId}/persons':
+    get:
+      description: 'List all persons in a large person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).'
+      operationId: LargePersonGroupPerson_List
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+        - description: Starting person id to return (used to list a range of persons).
+          in: query
+          name: start
+          required: false
+          type: string
+        - description: Number of persons to return starting with the person id indicated by the 'start' parameter.
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: top
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns an array of person information that belong to the large person group.
+          schema:
+            $ref: '#/definitions/Persons'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        List persons in person group:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largePersonGroupId: abc
+            start: 25985303-c537-4467-b41d-bdb45cd95ca1
+            top: 2
+          responses:
+            '200':
+              body:
+                - name: person-name1
+                  persistedFaceIds:
+                    - 015839fb-fbd9-4f79-ace9-7675fc2f1dd9
+                    - fce92aed-d578-4d2e-8114-068f8af4492e
+                    - b64d5e15-8257-4af2-b20a-5a750f8940e7
+                  personId: 25985303-c537-4467-b41d-bdb45cd95ca1
+                  userData: User-provided data attached to the person
+                - name: person-name2
+                  persistedFaceIds:
+                    - 30ea1073-cc9e-4652-b1e3-d08fb7b95315
+                    - fbd2a038-dbff-452c-8e79-2ee81b1aa84e
+                  personId: 2ae4935b-9659-44c3-977f-61fac20d0538
+                  userData: User-provided data attached to the person
+    post:
+      consumes:
+        - application/json
+      description: Create a new person in a specified large person group.
+      operationId: LargePersonGroupPerson_Create
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+        - description: Request body for creating new person.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/NameAndUserDataContract'
+          x-ms-client-flatten: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns a new personId created.
+          schema:
+            $ref: '#/definitions/Person'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Create new person for large person group example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body:
+              name: mike
+              userData: '{additional data associated with mike}'
+            largePersonGroupId: abc
+          responses:
+            '200':
+              body:
+                personId: 4caa25ee-3bc6-4e88-adf8-12455ce7aab0
+  '/largepersongroups/{largePersonGroupId}/persons/{personId}':
+    delete:
+      description: 'Delete an existing person from a large person group. All stored person data, and face features in the person entry will be deleted.'
+      operationId: LargePersonGroupPerson_Delete
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+        - $ref: '#/parameters/personId'
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Delete an existing person example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largePersonGroupId: abc
+            personId: 25985303-c537-4467-b41d-bdb45cd95ca1
+          responses:
+            '200':
+              body: ''
+    get:
+      description: 'Retrieve a person''s information, including registered persisted faces, name and userData.'
+      operationId: LargePersonGroupPerson_Get
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+        - $ref: '#/parameters/personId'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns the person's information.
+          schema:
+            $ref: '#/definitions/Person'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Get person example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largePersonGroupId: abc
+            personId: 25985303-c537-4467-b41d-bdb45cd95ca1
+          responses:
+            '200':
+              body:
+                name: person-name
+                persistedFaceIds:
+                  - 015839fb-fbd9-4f79-ace9-7675fc2f1dd9
+                  - fce92aed-d578-4d2e-8114-068f8af4492e
+                  - b64d5e15-8257-4af2-b20a-5a750f8940e7
+                personId: 25985303-c537-4467-b41d-bdb45cd95ca1
+                userData: User-provided data attached to the person
+    patch:
+      consumes:
+        - application/json
+      description: Update name or userData of a person.
+      operationId: LargePersonGroupPerson_Update
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+        - $ref: '#/parameters/personId'
+        - description: Request body for person update operation.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/NameAndUserDataContract'
+          x-ms-client-flatten: true
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Update person example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body:
+              name: mike
+              userData: '{additional data associated with mike}'
+            largePersonGroupId: abc
+            personId: 25985303-c537-4467-b41d-bdb45cd95ca1
+          responses:
+            '200':
+              body: ''
+  '/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces':
+    post:
+      consumes:
+        - application/json
+      description: Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.
+      operationId: LargePersonGroupPerson_AddFaceFromUrl
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+        - $ref: '#/parameters/personId'
+        - $ref: '#/parameters/faceUserData'
+        - $ref: '#/parameters/targetFace'
+        - description: A JSON document with a URL pointing to the image that is to be analyzed.
+          in: body
+          name: ImageUrl
+          required: true
+          schema:
+            $ref: '#/definitions/ImageUrl'
+          x-ms-client-flatten: true
+          x-ms-parameter-location: method
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns the new persistedFaceId.
+          schema:
+            $ref: '#/definitions/PersistedFace'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Add Person face example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            ImageUrl: '{Image url}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largePersonGroupId: abc
+            personId: 4caa25ee-3bc6-4e88-adf8-12455ce7aab0
+            targetFace:
+              - 10
+              - 10
+              - 100
+              - 100
+            userData: '{customized User data}'
+          responses:
+            '200':
+              body:
+                persistedFaceId: 6e04c175-219e-42a2-9d26-0e7b790e1ef4
+  '/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces/{persistedFaceId}':
+    delete:
+      description: Delete a face from a person. Relative feature for the persisted face will also be deleted.
+      operationId: LargePersonGroupPerson_DeleteFace
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+        - $ref: '#/parameters/personId'
+        - $ref: '#/parameters/persistedFaceId'
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Delete face from person example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largePersonGroupId: abc
+            persistedFaceId: 62004fa7-1ac0-478e-9d5a-b38f9e7fbc68
+            personId: 25985303-c537-4467-b41d-bdb45cd95ca1
+          responses:
+            '200':
+              body: ''
+    get:
+      description: 'Retrieve information about a persisted face (specified by persistedFaceId, personId and its belonging largePersonGroupId).'
+      operationId: LargePersonGroupPerson_GetFace
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+        - $ref: '#/parameters/personId'
+        - $ref: '#/parameters/persistedFaceId'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns target persisted face's information (persistedFaceId and userData).
+          schema:
+            $ref: '#/definitions/PersistedFace'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Get persisted face example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largePersonGroupId: abc
+            persistedFaceId: 015839fb-fbd9-4f79-ace9-7675fc2f1dd9
+            personId: B8D802CF-DD8F-4E61-B15C-9E6C5844CCBA
+          responses:
+            '200':
+              body:
+                persistedFaceId: 015839fb-fbd9-4f79-ace9-7675fc2f1dd9
+                userData: User-provided data attached to the person face.
+    patch:
+      consumes:
+        - application/json
+      description: Update a person persisted face's userData field.
+      operationId: LargePersonGroupPerson_UpdateFace
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+        - $ref: '#/parameters/personId'
+        - $ref: '#/parameters/persistedFaceId'
+        - description: Request body for updating persisted face.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFaceRequest'
+          x-ms-client-flatten: true
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Update person face example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body:
+              userData: User-provided data attached to the face.
+            largePersonGroupId: abc
+            persistedFaceId: 62004fa7-1ac0-478e-9d5a-b38f9e7fbc68
+            personId: 25985303-c537-4467-b41d-bdb45cd95ca1
+          responses:
+            '200':
+              body: ''
+  '/largepersongroups/{largePersonGroupId}/train':
+    post:
+      description: 'Queue a large person group training task, the training task may not be started immediately.'
+      operationId: LargePersonGroup_Train
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+      produces:
+        - application/json
+      responses:
+        '202':
+          description: The training task was queued successfully.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Queue large person group training:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largePersonGroupId: abc
+          responses:
+            '202':
+              body: ''
+  '/largepersongroups/{largePersonGroupId}/training':
+    get:
+      description: Retrieve the training status of a large person group (completed or ongoing).
+      operationId: LargePersonGroup_GetTrainingStatus
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns the large person group's training status.
+          schema:
+            $ref: '#/definitions/TrainingStatus'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Get large person group's training status example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largePersonGroupId: abc
+          responses:
+            '200':
+              body:
+                createdDateTime: '2017-12-21T12:57:27.00Z'
+                lastActionDateTime: '2017-12-21T12:57:30.00Z'
+                lastSuccessfulTrainingDateTime: '2017-12-21T12:57:30.00Z'
+                message: null
+                status: succeeded
   /persongroups:
     get:
       description: List person groups and their information.
@@ -740,9 +1702,9 @@ paths:
           schema:
             $ref: '#/definitions/APIError'
       x-ms-examples:
-        Get person groups example:
+        List person groups example:
           parameters:
-            AzureRegion: westus
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             start: sample_group
             top: 2
@@ -757,7 +1719,7 @@ paths:
                   userData: User-provided data attached to the person group
   '/persongroups/{personGroupId}':
     delete:
-      description: Delete an existing person group. Persisted face images of all people in the person group will also be deleted.
+      description: Delete an existing person group. Persisted face features of all people in the person group will also be deleted.
       operationId: PersonGroup_Delete
       parameters:
         - $ref: '#/parameters/personGroupId'
@@ -771,8 +1733,8 @@ paths:
       x-ms-examples:
         Delete a person group example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             personGroupId: abc
           responses:
@@ -797,8 +1759,8 @@ paths:
       x-ms-examples:
         Get person group example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             personGroupId: abc
           responses:
@@ -831,8 +1793,8 @@ paths:
       x-ms-examples:
         Update person group example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               name: group1
@@ -865,8 +1827,8 @@ paths:
       x-ms-examples:
         Create new person group example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               name: group1
@@ -907,8 +1869,8 @@ paths:
       x-ms-examples:
         List persons in person group:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             personGroupId: abc
             start: 25985303-c537-4467-b41d-bdb45cd95ca1
@@ -955,10 +1917,10 @@ paths:
           schema:
             $ref: '#/definitions/APIError'
       x-ms-examples:
-        Create new person example:
+        Create new person for person group example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               name: mike
@@ -970,7 +1932,7 @@ paths:
                 personId: 4caa25ee-3bc6-4e88-adf8-12455ce7aab0
   '/persongroups/{personGroupId}/persons/{personId}':
     delete:
-      description: Delete an existing person from a person group. Persisted face images of the person will also be deleted.
+      description: 'Delete an existing person from a person group. All stored person data, and face features in the person entry will be deleted.'
       operationId: PersonGroupPerson_Delete
       parameters:
         - $ref: '#/parameters/personGroupId'
@@ -985,8 +1947,8 @@ paths:
       x-ms-examples:
         Delete an existing person example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             personGroupId: abc
             personId: 25985303-c537-4467-b41d-bdb45cd95ca1
@@ -1013,8 +1975,8 @@ paths:
       x-ms-examples:
         Get person example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             personGroupId: abc
             personId: 25985303-c537-4467-b41d-bdb45cd95ca1
@@ -1053,8 +2015,8 @@ paths:
       x-ms-examples:
         Update person example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               name: mike
@@ -1064,12 +2026,12 @@ paths:
           responses:
             '200':
               body: ''
-  '/persongroups/{personGroupId}/persons/{personId}/persistedFaces':
+  '/persongroups/{personGroupId}/persons/{personId}/persistedfaces':
     post:
       consumes:
         - application/json
       description: Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.
-      operationId: PersonGroupPerson_AddPersonFaceFromUrl
+      operationId: PersonGroupPerson_AddFaceFromUrl
       parameters:
         - $ref: '#/parameters/personGroupId'
         - $ref: '#/parameters/personId'
@@ -1080,13 +2042,7 @@ paths:
           name: ImageUrl
           required: true
           schema:
-            properties:
-              url:
-                description: Publicly reachable URL of an image
-                type: string
-            required:
-              - url
-            type: object
+            $ref: '#/definitions/ImageUrl'
           x-ms-client-flatten: true
           x-ms-parameter-location: method
       produces:
@@ -1103,8 +2059,8 @@ paths:
       x-ms-examples:
         Add Person face example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             ImageUrl: '{Image url}'
             Ocp-Apim-Subscription-Key: '{API key}'
             personGroupId: abc
@@ -1119,9 +2075,9 @@ paths:
             '200':
               body:
                 persistedFaceId: 6e04c175-219e-42a2-9d26-0e7b790e1ef4
-  '/persongroups/{personGroupId}/persons/{personId}/persistedFaces/{persistedFaceId}':
+  '/persongroups/{personGroupId}/persons/{personId}/persistedfaces/{persistedFaceId}':
     delete:
-      description: Delete a face from a person. Relative image for the persisted face will also be deleted.
+      description: Delete a face from a person. Relative feature for the persisted face will also be deleted.
       operationId: PersonGroupPerson_DeleteFace
       parameters:
         - $ref: '#/parameters/personGroupId'
@@ -1137,8 +2093,8 @@ paths:
       x-ms-examples:
         Delete face from person example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             persistedFaceId: 62004fa7-1ac0-478e-9d5a-b38f9e7fbc68
             personGroupId: abc
@@ -1167,8 +2123,8 @@ paths:
       x-ms-examples:
         Get persisted face example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             persistedFaceId: asd
             personGroupId: abc
@@ -1177,7 +2133,7 @@ paths:
             '200':
               body:
                 persistedFaceId: 015839fb-fbd9-4f79-ace9-7675fc2f1dd9
-                userData: User-provided data attached to the person
+                userData: User-provided data attached to the person face.
     patch:
       consumes:
         - application/json
@@ -1192,7 +2148,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/UpdatePersonFaceRequest'
+            $ref: '#/definitions/UpdateFaceRequest'
           x-ms-client-flatten: true
       responses:
         '200':
@@ -1204,8 +2160,8 @@ paths:
       x-ms-examples:
         Update person face example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               userData: User-provided data attached to the face
@@ -1233,8 +2189,8 @@ paths:
       x-ms-examples:
         Queue person group training:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             personGroupId: abc
           responses:
@@ -1258,16 +2214,18 @@ paths:
           schema:
             $ref: '#/definitions/APIError'
       x-ms-examples:
-        Get training status example:
+        Get person group's training status example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             personGroupId: abc
           responses:
             '200':
               body:
-                createdDateTime: '2017-08-01T00:00:00.00Z'
+                createdDateTime: '2017-12-21T12:57:27.00Z'
+                lastActionDateTime: '2017-12-21T12:57:30.00Z'
+                message: null
                 status: succeeded
   /verify:
     post:
@@ -1276,7 +2234,7 @@ paths:
       description: Verify whether two faces belong to a same person or whether one face belongs to a person.
       operationId: Face_VerifyFaceToFace
       parameters:
-        - description: Request body for verify operation.
+        - description: Request body for face to face verification.
           in: body
           name: body
           required: true
@@ -1297,8 +2255,8 @@ paths:
       x-ms-examples:
         Verify faces example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               faceId1: c5c24a82-6845-4031-9d5d-978df9175426
@@ -1580,10 +2538,8 @@ definitions:
         pattern: '^[a-z0-9-_]+$'
         type: string
       persistedFaces:
+        $ref: '#/definitions/PersistedFaces'
         description: Persisted faces within the face list.
-        items:
-          $ref: '#/definitions/PersistedFace'
-        type: array
     required:
       - faceListId
     type: object
@@ -1638,14 +2594,19 @@ definitions:
         format: uuid
         type: string
       faceIds:
-        description: An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire 24 hours after the detection call.
+        description: 'An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire 24 hours after the detection call. The number of faceIds is limited to 1000. Parameter faceListId, largeFaceListId and faceIds should not be provided at the same time.'
         items:
           format: uuid
           type: string
         maxItems: 1000
         type: array
       faceListId:
-        description: 'An existing user-specified unique candidate face list, created in Face List - Create a Face List. Face list contains a set of persistedFaceIds which are persisted and will never expire. Parameter faceListId and faceIds should not be provided at the same time'
+        description: 'An existing user-specified unique candidate face list, created in Face List - Create a Face List. Face list contains a set of persistedFaceIds which are persisted and will never expire. Parameter faceListId, largeFaceListId and faceIds should not be provided at the same time。'
+        maxLength: 64
+        pattern: '^[a-z0-9-_]+$'
+        type: string
+      largeFaceListId:
+        description: 'An existing user-specified unique candidate large face list, created in LargeFaceList - Create. Large face list contains a set of persistedFaceIds which are persisted and will never expire. Parameter faceListId, largeFaceListId and faceIds should not be provided at the same time.'
         maxLength: 64
         pattern: '^[a-z0-9-_]+$'
         type: string
@@ -1789,6 +2750,11 @@ definitions:
           x-nullable: false
         maxItems: 10
         type: array
+      largePersonGroupId:
+        description: 'LargePersonGroupId of the target large person group, created by LargePersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.'
+        maxLength: 64
+        pattern: '^[a-z0-9-_]+$'
+        type: string
       maxNumOfCandidatesReturned:
         default: 1
         description: The range of maxNumOfCandidatesReturned is between 1 and 5 (default is 1).
@@ -1796,12 +2762,11 @@ definitions:
         minimum: 1
         type: integer
       personGroupId:
-        description: 'PersonGroupId of the target person group, created by PersonGroups.Create'
+        description: 'PersonGroupId of the target person group, created by PersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.'
         maxLength: 64
         pattern: '^[a-z0-9-_]+$'
         type: string
     required:
-      - personGroupId
       - faceIds
     type: object
   IdentifyResult:
@@ -1824,6 +2789,42 @@ definitions:
     items:
       $ref: '#/definitions/IdentifyResult'
     type: array
+  LargeFaceList:
+    allOf:
+      - $ref: '#/definitions/NameAndUserDataContract'
+    description: Large face list object.
+    properties:
+      largeFaceListId:
+        description: LargeFaceListId of the target large face list.
+        maxLength: 64
+        pattern: '^[a-z0-9-_]+$'
+        type: string
+    required:
+      - largeFaceListId
+    type: object
+  LargeFaceLists:
+    description: 'An array of large face list results, with fields of largeFaceListId, name and userData'
+    items:
+      $ref: '#/definitions/LargeFaceList'
+    type: array
+  LargePersonGroup:
+    allOf:
+      - $ref: '#/definitions/NameAndUserDataContract'
+    description: Large person group object.
+    properties:
+      largePersonGroupId:
+        description: LargePersonGroupId of the target large person groups
+        maxLength: 64
+        pattern: '^[a-z0-9-_]+$'
+        type: string
+    required:
+      - largePersonGroupId
+    type: object
+  LargePersonGroups:
+    description: An array of large person groups.
+    items:
+      $ref: '#/definitions/LargePersonGroup'
+    type: array
   Level:
     description: A number ranging from 0 to 1 indicating the intensity level associated with a property.
     maximum: 1
@@ -1842,7 +2843,7 @@ definitions:
         x-nullable: false
     type: object
   NameAndUserDataContract:
-    description: 'A combination of user defined name and user specified data for the person, personGroup, and faceList'
+    description: 'A combination of user defined name and user specified data for the person, largePersonGroup/personGroup, and largeFaceList/faceList.'
     properties:
       name:
         description: 'User defined name, maximum length is 128.'
@@ -1902,6 +2903,11 @@ definitions:
     required:
       - persistedFaceId
     type: object
+  PersistedFaces:
+    description: An array of persisted faces within the face list or large face list.
+    items:
+      $ref: '#/definitions/PersistedFace'
+    type: array
   Person:
     allOf:
       - $ref: '#/definitions/NameAndUserDataContract'
@@ -1927,7 +2933,7 @@ definitions:
     description: Person group object.
     properties:
       personGroupId:
-        description: PersonGroupId of the existing person groups.
+        description: PersonGroupId of the target person group.
         maxLength: 64
         pattern: '^[a-z0-9-_]+$'
         type: string
@@ -1969,20 +2975,25 @@ definitions:
     description: Training status object.
     properties:
       createdDateTime:
-        description: A combined UTC date and time string that describes person group created time.
+        description: 'A combined UTC date and time string that describes the created time of the person group, large person group or large face list.'
         format: date-time
         type: string
         x-ms-client-name: created
       lastActionDateTime:
-        description: 'Person group last modify time in the UTC, could be null value when the person group is not successfully trained.'
+        description: 'A combined UTC date and time string that describes the last modify time of the person group, large person group or large face list, could be null value when the group is not successfully trained.'
         format: date-time
         type: string
         x-ms-client-name: lastAction
+      lastSuccessfulTrainingDateTime:
+        description: 'A combined UTC date and time string that describes the last successful training time of the person group, large person group or large face list.'
+        format: date-time
+        type: string
+        x-ms-client-name: lastSuccessfulTraining
       message:
         description: Show failure message when training failed (omitted when training succeed).
         type: string
       status:
-        description: 'Training status: notstarted, running, succeeded, failed. If the training process is waiting to perform, the status is notstarted. If the training is ongoing, the status is running. Status succeed means this person group is ready for Face - Identify. Status failed is often caused by no person or no persisted face exist in the person group'
+        description: 'Training status: notstarted, running, succeeded, failed. If the training process is waiting to perform, the status is notstarted. If the training is ongoing, the status is running. Status succeed means this person group or large person group is ready for Face - Identify, or this large face list is ready for Face - Find Similar. Status failed is often caused by no person or no persisted face exist in the person group or large person group, or no persisted face exist in the large face list.'
         enum:
           - nonstarted
           - running
@@ -1996,8 +3007,8 @@ definitions:
       - status
       - createdDateTime
     type: object
-  UpdatePersonFaceRequest:
-    description: Request to update person face data.
+  UpdateFaceRequest:
+    description: Request to update face data.
     properties:
       userData:
         description: User-provided data attached to the face. The size limit is 1KB.
@@ -2005,7 +3016,7 @@ definitions:
         type: string
     type: object
   VerifyFaceToFaceRequest:
-    description: Request body for verify operation.
+    description: Request body for face to face verification.
     properties:
       faceId1:
         description: 'FaceId of the first face, comes from Face - Detect'
@@ -2020,25 +3031,29 @@ definitions:
       - faceId2
     type: object
   VerifyFaceToPersonRequest:
-    description: Request body for verify operation.
+    description: Request body for face to person verification.
     properties:
       faceId:
-        description: 'FaceId the face, comes from Face - Detect'
+        description: 'FaceId of the face, comes from Face - Detect'
         format: uuid
         type: string
+      largePersonGroupId:
+        description: Using existing largePersonGroupId and personId for fast loading a specified person. largePersonGroupId is created in LargePersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.
+        maxLength: 64
+        pattern: '^[a-z0-9-_]+$'
+        type: string
       personGroupId:
-        description: Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in Person Groups.Create.
+        description: Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in PersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.
         maxLength: 64
         pattern: '^[a-z0-9-_]+$'
         type: string
       personId:
-        description: Specify a certain person in a person group. personId is created in Persons.Create.
+        description: Specify a certain person in a person group or a large person group. personId is created in PersonGroup Person - Create or LargePersonGroup Person - Create.
         format: uuid
         type: string
     required:
       - faceId
       - personId
-      - personGroupId
     type: object
   VerifyResult:
     description: Result of the verify operation.
@@ -2054,31 +3069,10 @@ definitions:
       - confidence
     type: object
 x-ms-parameterized-host:
-  hostTemplate: '{AzureRegion}.api.cognitive.microsoft.com'
+  hostTemplate: '{Endpoint}/face/v1.0'
   parameters:
-    - description: Supported Azure regions for Cognitive Services endpoints
-      enum:
-        - westus
-        - westeurope
-        - southeastasia
-        - eastus2
-        - westcentralus
-        - westus2
-        - eastus
-        - southcentralus
-        - northeurope
-        - eastasia
-        - australiaeast
-        - brazilsouth
-      in: path
-      name: AzureRegion
-      required: true
-      type: string
-      x-ms-enum:
-        modelAsString: false
-        name: AzureRegions
-      x-ms-parameter-location: client
-      x-ms-skip-url-encoding: true
+    - $ref: '#/parameters/Endpoint'
+  useSchemePrefix: false
 x-ms-paths:
   /detect?overload=stream:
     post:
@@ -2110,7 +3104,7 @@ x-ms-paths:
         - application/json
       responses:
         '200':
-          description: A successful call returns an array of face entries ranked by face rectangle size in descendingorder. An empty response indicates no faces detected.
+          description: A successful call returns an array of face entries ranked by face rectangle size in descending order. An empty response indicates no faces detected.
           schema:
             $ref: '#/definitions/DetectedFaces'
         default:
@@ -2120,8 +3114,8 @@ x-ms-paths:
       x-ms-examples:
         Detect with stream example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/octet-stream
+            Endpoint: '{Endpoint}'
             Image: '{Image binary in base 64 format}'
             Ocp-Apim-Subscription-Key: '{API key}'
             returnFaceAttributes:
@@ -2291,7 +3285,7 @@ x-ms-paths:
                     left: 394
                     top: 54
                     width: 78
-  '/facelists/{faceListId}/persistedFaces?overload=stream':
+  '/facelists/{faceListId}/persistedfaces?overload=stream':
     post:
       consumes:
         - application/octet-stream
@@ -2323,8 +3317,8 @@ x-ms-paths:
       x-ms-examples:
         Add face to face list from stream example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/octet-stream
+            Endpoint: '{Endpoint}'
             Image: '{Image stream in base 64 encoded format}'
             Ocp-Apim-Subscription-Key: '{API key}'
             faceListId: sample_face_list
@@ -2338,12 +3332,108 @@ x-ms-paths:
             '200':
               body:
                 persistedFaceId: B8D802CF-DD8F-4E61-B15C-9E6C5844CCBA
-  '/persongroups/{personGroupId}/persons/{personId}/persistedFaces?overload=stream':
+  '/largefacelists/{largeFaceListId}/persistedfaces?overload=stream':
+    post:
+      consumes:
+        - application/octet-stream
+      description: 'Add a face to a large face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.'
+      operationId: LargeFaceList_AddFaceFromStream
+      parameters:
+        - $ref: '#/parameters/largeFaceListId'
+        - $ref: '#/parameters/faceUserData'
+        - $ref: '#/parameters/targetFace'
+        - description: An image stream.
+          in: body
+          name: Image
+          required: true
+          schema:
+            format: file
+            type: object
+          x-ms-parameter-location: method
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns a new persistedFaceId.
+          schema:
+            $ref: '#/definitions/PersistedFace'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Add face to large face list from stream example:
+          parameters:
+            Content-Type: application/octet-stream
+            Endpoint: '{Endpoint}'
+            Image: '{Image stream in base 64 encoded format}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largeFaceListId: sample_face_list
+            targetFace:
+              - 10
+              - 10
+              - 100
+              - 100
+            userData: '{Customized user data}'
+          responses:
+            '200':
+              body:
+                persistedFaceId: B8D802CF-DD8F-4E61-B15C-9E6C5844CCBA
+  '/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces?overload=stream':
     post:
       consumes:
         - application/octet-stream
       description: Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.
-      operationId: PersonGroupPerson_AddPersonFaceFromStream
+      operationId: LargePersonGroupPerson_AddFaceFromStream
+      parameters:
+        - $ref: '#/parameters/largePersonGroupId'
+        - $ref: '#/parameters/personId'
+        - $ref: '#/parameters/faceUserData'
+        - $ref: '#/parameters/targetFace'
+        - description: An image stream.
+          in: body
+          name: Image
+          required: true
+          schema:
+            format: file
+            type: object
+          x-ms-parameter-location: method
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns the new persistedFaceId.
+          schema:
+            $ref: '#/definitions/PersistedFace'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Add face to person with stream example:
+          parameters:
+            Content-Type: application/octet-stream
+            Endpoint: '{Endpoint}'
+            Image: '{Image stream in base 64 encoded format}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            largePersonGroupId: abc
+            personId: 4caa25ee-3bc6-4e88-adf8-12455ce7aab0
+            targetFace:
+              - 10
+              - 10
+              - 100
+              - 100
+            userData: '{customized User data}'
+          responses:
+            '200':
+              body:
+                persistedFaceId: 6e04c175-219e-42a2-9d26-0e7b790e1ef4
+  '/persongroups/{personGroupId}/persons/{personId}/persistedfaces?overload=stream':
+    post:
+      consumes:
+        - application/octet-stream
+      description: Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.
+      operationId: PersonGroupPerson_AddFaceFromStream
       parameters:
         - $ref: '#/parameters/personGroupId'
         - $ref: '#/parameters/personId'
@@ -2371,8 +3461,8 @@ x-ms-paths:
       x-ms-examples:
         Add face to person with stream example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/octet-stream
+            Endpoint: '{Endpoint}'
             Image: '{Image stream in base 64 encoded format}'
             Ocp-Apim-Subscription-Key: '{API key}'
             personGroupId: abc
@@ -2387,14 +3477,14 @@ x-ms-paths:
             '200':
               body:
                 persistedFaceId: 6e04c175-219e-42a2-9d26-0e7b790e1ef4
-  /verify?overload=persongroup:
+  /verify?overload=person:
     post:
       consumes:
         - application/json
       description: Verify whether two faces belong to a same person. Compares a face Id with a Person Id
       operationId: Face_VerifyFaceToPerson
       parameters:
-        - description: Request body for verifying two faces in a person group
+        - description: Request body for face to person verification.
           in: body
           name: body
           required: true
@@ -2415,12 +3505,12 @@ x-ms-paths:
       x-ms-examples:
         Verify face to person example:
           parameters:
-            AzureRegion: westus
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               faceId: c5c24a82-6845-4031-9d5d-978df9175426
-              personGroupId: sample_group
+              largePersonGroupId: sample_group
               personId: 815df99c-598f-4926-930a-a734b3fd651c
           responses:
             '200':

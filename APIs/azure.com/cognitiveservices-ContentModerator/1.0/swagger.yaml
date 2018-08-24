@@ -2,9 +2,8 @@ swagger: '2.0'
 schemes:
   - https
 host: azure.local
-basePath: /
 info:
-  description: "You use the API to scan your content as it is generated. Content Moderator then processes your content and sends the results along with relevant information either back to your systems or to the built-in review tool. You can use this information to take decisions e.g. take it down, send to human judge, etc.\r\n\r\nWhen using the API, images need to have a minimum of 128 pixels and a maximum file size of 4MB. \r\nText can be at most 1024 characters long. \r\nIf the content passed to the text API or the image API exceeds the size limits, the API will return an error code that informs about the issue.\r\n\r\nThis API is currently available in:\r\n\r\n* West US - westus.api.cognitive.microsoft.com\r\n* East US 2 - eastus2.api.cognitive.microsoft.com\r\n* West Central US - westcentralus.api.cognitive.microsoft.com\r\n* West Europe - westeurope.api.cognitive.microsoft.com\r\n* Southeast Asia - southeastasia.api.cognitive.microsoft.com ."
+  description: "You use the API to scan your content as it is generated. Content Moderator then processes your content and sends the results along with relevant information either back to your systems or to the built-in review tool. You can use this information to take decisions e.g. take it down, send to human judge, etc.\r\n\r\nWhen using the API, images need to have a minimum of 128 pixels and a maximum file size of 4MB. \r\nText can be at most 1024 characters long. \r\nIf the content passed to the text API or the image API exceeds the size limits, the API will return an error code that informs about the issue."
   title: Content Moderator Client
   version: '1.0'
   x-apisguru-categories:
@@ -163,6 +162,14 @@ parameters:
         type: object
       type: array
     x-ms-parameter-location: method
+  Endpoint:
+    description: 'Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).'
+    in: path
+    name: Endpoint
+    required: true
+    type: string
+    x-ms-parameter-location: client
+    x-ms-skip-url-encoding: true
   ImageId:
     description: Id of the image.
     in: path
@@ -216,31 +223,6 @@ parameters:
     required: false
     type: boolean
     x-ms-parameter-location: method
-  baseUrl:
-    description: Supported Azure regions for Content Moderator endpoints
-    enum:
-      - westus.api.cognitive.microsoft.com
-      - westus2.api.cognitive.microsoft.com
-      - eastus.api.cognitive.microsoft.com
-      - eastus2.api.cognitive.microsoft.com
-      - westcentralus.api.cognitive.microsoft.com
-      - southcentralus.api.cognitive.microsoft.com
-      - westeurope.api.cognitive.microsoft.com
-      - northeurope.api.cognitive.microsoft.com
-      - southeastasia.api.cognitive.microsoft.com
-      - eastasia.api.cognitive.microsoft.com
-      - australiaeast.api.cognitive.microsoft.com
-      - brazilsouth.api.cognitive.microsoft.com
-      - contentmoderatortest.azure-api.net
-    in: path
-    name: baseUrl
-    required: true
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: azureRegionBaseUrl
-    x-ms-parameter-location: client
-    x-ms-skip-url-encoding: true
   body:
     description: Schema of the body.
     in: body
@@ -252,14 +234,9 @@ parameters:
           description: Description of the list.
           type: string
         Metadata:
+          additionalProperties:
+            type: string
           description: Metadata of the list.
-          properties:
-            Key One:
-              description: Optional key value pair to describe your list.
-              type: string
-            Key Two:
-              description: Optional key value pair to describe your list.
-              type: string
           type: object
         Name:
           description: Name of the list.
@@ -486,8 +463,8 @@ paths:
       x-ms-examples:
         Get All Imagelists request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
           responses:
             '200':
               body:
@@ -533,8 +510,8 @@ paths:
         Create Imagelist request:
           parameters:
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             body:
               Description: List of images with racy content
               Metadata:
@@ -573,8 +550,8 @@ paths:
       x-ms-examples:
         Delete Imagelist request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             listId: '89003'
           responses:
             '200':
@@ -601,8 +578,8 @@ paths:
       x-ms-examples:
         Get List Id Details request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '123'
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             listId: '123'
           responses:
             '200':
@@ -644,8 +621,8 @@ paths:
         Update Imagelist request:
           parameters:
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             body:
               Description: List of images with bad content
               Metadata:
@@ -687,8 +664,8 @@ paths:
       x-ms-examples:
         Refresh Image Index request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             listId: '89003'
           responses:
             '200':
@@ -724,8 +701,8 @@ paths:
       x-ms-examples:
         Delete All Images request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             listId: '89003'
           responses:
             '200':
@@ -752,8 +729,8 @@ paths:
       x-ms-examples:
         Get All Image Ids request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             listId: '89003'
           responses:
             '200':
@@ -800,11 +777,11 @@ paths:
         Add Image request:
           parameters:
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             ImageUrl:
               DataRepresentation: URL
               Value: 'https://moderatorsampleimages.blob.core.windows.net/samples/img_300.jpg'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             label: test
             listId: '89003'
           responses:
@@ -843,9 +820,9 @@ paths:
       x-ms-examples:
         Delete Image request:
           parameters:
+            Endpoint: '{Endpoint}'
             ImageId: '34562'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             listId: '89003'
           responses:
             '200':
@@ -872,8 +849,8 @@ paths:
       x-ms-examples:
         Get All Termlists request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
           responses:
             '200':
               body:
@@ -919,8 +896,8 @@ paths:
         Create Termlist request:
           parameters:
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             body:
               Description: List of racy terms.
               Metadata:
@@ -959,8 +936,8 @@ paths:
       x-ms-examples:
         Delete Termlist request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             listId: '89003'
           responses:
             '200':
@@ -987,8 +964,8 @@ paths:
       x-ms-examples:
         Get Term ListId Details request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             listId: '89003'
           responses:
             '200':
@@ -1030,8 +1007,8 @@ paths:
         Update Termlist request:
           parameters:
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             body:
               Description: List of offensive terms.
               Metadata:
@@ -1074,8 +1051,8 @@ paths:
       x-ms-examples:
         Refresh Term Index request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             language: eng
             listId: '89003'
           responses:
@@ -1113,8 +1090,8 @@ paths:
       x-ms-examples:
         Delete AllTerms request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             language: eng
             listId: '89003'
           responses:
@@ -1153,8 +1130,8 @@ paths:
       x-ms-examples:
         Get All Terms request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             language: eng
             listId: '89003'
           responses:
@@ -1200,8 +1177,8 @@ paths:
       x-ms-examples:
         Delete Term request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             language: eng
             listId: '89003'
             term: hell
@@ -1233,8 +1210,8 @@ paths:
       x-ms-examples:
         Add Term request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             language: eng
             listId: '89003'
             term: hell
@@ -1388,9 +1365,9 @@ paths:
         Detect Language request:
           parameters:
             Content-Type: text/plain
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
             Text Content: 'Is this a crap email abcdef@abcd.com, phone: 6657789887, IP: 255.255.255.255, 1 Microsoft Way, Redmond, WA 98052'
-            baseUrl: southeastasia.api.cognitive.microsoft.com
           responses:
             '200':
               body:
@@ -1446,11 +1423,11 @@ paths:
         Detect Language request:
           parameters:
             Content-Type: text/plain
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
             PII: false
             Text Content: 'Is this a crap email abcdef@abcd.com, phone: 6657789887, IP: 255.255.255.255, 1 Microsoft Way, Redmond, WA 98052'
             autocorrect: false
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             classify: false
             language: eng
             listId: ''
@@ -1562,9 +1539,9 @@ paths:
             Content-Type: application/json
             ContentId: ContentID A
             ContentType: Image
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
             WorkflowName: TestWorkflow
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             teamName: sonaliProdTeam
           responses:
             '200':
@@ -1602,9 +1579,9 @@ paths:
       x-ms-examples:
         Get Job Details request:
           parameters:
+            Endpoint: '{Endpoint}'
             JobId: 201709i96f295aa5748101436064c42ddf
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             teamName: ModeratorTeam
           responses:
             '200':
@@ -1712,9 +1689,9 @@ paths:
       x-ms-examples:
         Create Review request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
             UrlContentType: application/json
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             createReviewBody:
               - CallbackEndpoint: ''
                 Content: 'https://www.w3schools.com/css/trolltunga.jpg'
@@ -1761,8 +1738,8 @@ paths:
       x-ms-examples:
         Get Review request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             reviewId: 201709i96f295aa5748101436064c42ddf
             teamName: ModeratorTeam
           responses:
@@ -1818,8 +1795,8 @@ paths:
       x-ms-examples:
         Get Frames Request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             reviewId: 201711v18ea829372b14f9e9d382621e62429a9
             teamName: Content moderator
           responses:
@@ -1888,8 +1865,8 @@ paths:
       x-ms-examples:
         publish video request:
           parameters:
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             reviewId: 201711v18ea829372b14f9e9d382621e62429a9
             teamName: Content moderator
           responses:
@@ -1928,9 +1905,9 @@ paths:
         Add transcript request:
           parameters:
             Content-Type: text/plain
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
             VTT file: 01010111 01000101 01000010 01010110 01010100 01010100 00001101 00001010 01001110 01001111 01010100 01000101 00100000 01000011 01101111 01101110 01100110 01101001 01100100 01100101 01101110 01100011 01100101 00111010 00100000 00110000 00101110 00110111 00111001 00110111 00110101 00110101 00111001 00110101 00001101 00001010 00110000 00110000 00111010 00110000 00110000 00111010 00110000 00110101 00101110 00110110 00110110 00110000 00100000 00101101 00101101 00111110 00100000 00110000 00110000 00111010 00110000 00110000 00111010 00110001 00110000 00101110 00110010 00110100 00110000 00001101 00001010 01010100 01101000 01101001 01110011 00100000 01100011 01101111 01101101 01110000 01100001 01101110 01101001 01100101 01110011 00100000 01101000 01100001 01100100 00100000 00110011 00100000 01000011 01000101 01001111 01110011 00101100 00100000 01110100 01101000 01100101 01110010 01100101 00100000 01100001 01101100 01101100 00100000 01110010 01101001 01100111 01101000 01110100 00100000 01101000 01100101 01110010 01100101 00101110 00100000 01010100 01101000 01101001 01110011 00100000 01101001 01110011 00100000 01100001 01101100 01101100 00101110
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             reviewId: 201711v18ea829372b14f9e9d382621e62429a9
             teamName: Content moderator
           responses:
@@ -1967,8 +1944,8 @@ paths:
         Transcript moderation result request:
           parameters:
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             reviewId: 201711v627c579149ec4220bc674214d93f5fe5
             teamName: ModeratorTeam
             transcriptModerationBody:
@@ -2246,14 +2223,9 @@ definitions:
         description: Image List Id.
         type: integer
       Metadata:
+        additionalProperties:
+          type: string
         description: Image List Metadata.
-        properties:
-          Key One:
-            description: Optional Key value pair to describe your list.
-            type: string
-          Key Two:
-            description: Optional Key value pair to describe your list.
-            type: string
         type: object
       Name:
         description: Image List Name.
@@ -2436,13 +2408,8 @@ definitions:
       AdvancedInfo:
         description: Advanced info list.
         items:
-          properties:
-            Key One:
-              description: Key parameter to describe advanced info.
-              type: string
-            Key Two:
-              description: Key parameter to describe advanced info.
-              type: string
+          additionalProperties:
+            type: string
           type: object
         type: array
       ContentSourceId:
@@ -2575,14 +2542,9 @@ definitions:
         description: Term list Id.
         type: integer
       Metadata:
+        additionalProperties:
+          type: string
         description: Term list metadata.
-        properties:
-          Key One:
-            description: Optional Key value pair to describe your list.
-            type: string
-          Key Two:
-            description: Optional Key value pair to describe your list.
-            type: string
         type: object
       Name:
         description: Term list name.
@@ -2637,9 +2599,10 @@ definitions:
         description: Added term details.
         type: string
 x-ms-parameterized-host:
-  hostTemplate: '{baseUrl}'
+  hostTemplate: '{Endpoint}'
   parameters:
-    - $ref: '#/parameters/baseUrl'
+    - $ref: '#/parameters/Endpoint'
+  useSchemePrefix: false
 x-ms-paths:
   '/contentmoderator/lists/v1.0/imagelists/{listId}/images?overload=stream':
     post:
@@ -2702,11 +2665,11 @@ x-ms-paths:
         Add Image request:
           parameters:
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             ImageUrl:
               DataRepresentation: URL
               Value: 'https://moderatorsampleimages.blob.core.windows.net/samples/img_300.jpg'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             label: test
             listId: '89003'
           responses:
@@ -2779,11 +2742,11 @@ x-ms-paths:
         Evaluate Image request:
           parameters:
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             ImageUrl:
               DataRepresentation: URL
               Value: 'https://moderatorsampleimages.blob.core.windows.net/samples/sample.jpg'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
           responses:
             '200':
               body:
@@ -2859,11 +2822,11 @@ x-ms-paths:
         Find Faces request:
           parameters:
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             ImageUrl:
               DataRepresentation: URL
               Value: 'https://moderatorsampleimages.blob.core.windows.net/samples/img_300.jpg'
             Ocp-Apim-Subscription-Key: a79e5f9eeafa4f059ac507a93e1a9ff1
-            baseUrl: southeastasia.api.cognitive.microsoft.com
           responses:
             '200':
               body:
@@ -2940,11 +2903,11 @@ x-ms-paths:
         Match Image request:
           parameters:
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             ImageUrl:
               DataRepresentation: URL
               Value: 'https://moderatorsampleimages.blob.core.windows.net/samples/sample.jpg'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             cacheimage: true
             listId: '12345'
           responses:
@@ -3031,11 +2994,11 @@ x-ms-paths:
           parameters:
             CacheImage: false
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             ImageUrl:
               DataRepresentation: URL
               Value: 'https://moderatorsampleimages.blob.core.windows.net/samples/img_300.jpg'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             enhanced: false
             language: eng
           responses:
@@ -3134,8 +3097,8 @@ x-ms-paths:
         Add video frame url input request:
           parameters:
             Content-Type: application/json
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             reviewId: 201711v18ea829372b14f9e9d382621e62429a9
             teamName: ModeratorTeam
             videoFrameBody:
@@ -3208,8 +3171,8 @@ x-ms-paths:
                         Value: 'False'
                     ReviewerResultTags: []
                     Timestamp: '2334'
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            baseUrl: southeastasia.api.cognitive.microsoft.com
             subTeam: SubteamA
             teamName: ModeratorTeam
           responses:

@@ -67,29 +67,6 @@ paths:
       responses:
         '200':
           description: Successful request to get more information about diagnostic setting
-          examples:
-            application/json:
-              value:
-                - id: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/mysetting
-                  location: eastus
-                  name: mysetting
-                  properties:
-                    eventHubAuthorizationRuleId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey
-                    logs:
-                      - category: WorkflowRuntime
-                        enabled: true
-                        retentionPolicy:
-                          days: 0
-                          enabled: false
-                    metrics:
-                      - category: WorkflowMetrics
-                        enabled: true
-                        retentionPolicy:
-                          days: 0
-                          enabled: false
-                    storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1
-                    workspaceId: ''
-                  type: microsoft.logic/workflows
           schema:
             $ref: '#/definitions/DiagnosticSettingsResourceCollection'
         default:
@@ -102,7 +79,7 @@ paths:
         Gets the diagnostic setting:
           parameters:
             api-version: 2017-05-01-preview
-            resourceUri: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
+            resourceUri: subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
           responses:
             '200':
               body:
@@ -151,11 +128,13 @@ paths:
           parameters:
             api-version: 2017-05-01-preview
             name: mysetting
-            resourceUri: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
+            resourceUri: subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
           responses:
             '200':
+              body: null
               headers: {}
             '204':
+              body: null
               headers: {}
     get:
       description: Gets the active diagnostic settings for the specified resource.
@@ -167,28 +146,6 @@ paths:
       responses:
         '200':
           description: Successful request to get more information about diagnostic setting
-          examples:
-            application/json:
-              id: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/mysetting
-              location: eastus
-              name: mysetting
-              properties:
-                eventHubAuthorizationRuleId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey
-                logs:
-                  - category: WorkflowRuntime
-                    enabled: true
-                    retentionPolicy:
-                      days: 0
-                      enabled: false
-                metrics:
-                  - category: WorkflowMetrics
-                    enabled: true
-                    retentionPolicy:
-                      days: 0
-                      enabled: false
-                storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1
-                workspaceId: ''
-              type: microsoft.logic/workflows
           schema:
             $ref: '#/definitions/DiagnosticSettingsResource'
         default:
@@ -202,7 +159,7 @@ paths:
           parameters:
             api-version: 2017-05-01-preview
             name: mysetting
-            resourceUri: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
+            resourceUri: subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
           responses:
             '200':
               body:
@@ -242,28 +199,6 @@ paths:
       responses:
         '200':
           description: Successful request to create a diagnostic setting
-          examples:
-            application/json:
-              id: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/mysetting
-              location: eastus
-              name: mysetting
-              properties:
-                eventHubAuthorizationRuleId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey
-                logs:
-                  - category: WorkflowRuntime
-                    enabled: true
-                    retentionPolicy:
-                      days: 0
-                      enabled: false
-                metrics:
-                  - category: WorkflowMetrics
-                    enabled: true
-                    retentionPolicy:
-                      days: 0
-                      enabled: false
-                storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1
-                workspaceId: ''
-              type: microsoft.logic/workflows
           schema:
             $ref: '#/definitions/DiagnosticSettingsResource'
         default:
@@ -295,7 +230,7 @@ paths:
                       enabled: false
                 storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1
                 workspaceId: ''
-            resourceUri: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
+            resourceUri: subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
           responses:
             '200':
               body:
@@ -340,6 +275,9 @@ definitions:
         items:
           $ref: '#/definitions/MetricSettings'
         type: array
+      serviceBusRuleId:
+        description: The service bus rule Id of the diagnostic setting. This is here to maintain backwards compatibility.
+        type: string
       storageAccountId:
         description: The resource ID of the storage account to which you would like to send Diagnostic Logs.
         type: string
@@ -353,6 +291,7 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/DiagnosticSettings'
+        description: Properties of a Diagnostic Settings Resource.
         x-ms-client-flatten: true
     type: object
   DiagnosticSettingsResourceCollection:

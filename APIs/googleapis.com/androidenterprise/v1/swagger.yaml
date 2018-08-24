@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/androidenterprise/v1/rest'
       version: v1
@@ -119,29 +119,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-    post:
-      description: Establishes the binding between the EMM and an enterprise. This is now deprecated; use enroll instead.
-      operationId: androidenterprise.enterprises.insert
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Enterprise'
-        - description: The token provided by the enterprise to register the EMM.
-          in: query
-          name: token
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Enterprise'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - enterprises
   /enterprises/acknowledgeNotificationSet:
     parameters:
       - $ref: '#/parameters/alt'
@@ -299,23 +276,6 @@ paths:
       tags:
         - enterprises
   '/enterprises/{enterpriseId}':
-    delete:
-      description: 'Deletes the binding between the EMM and enterprise. This is now deprecated. Use this method only to unenroll customers that were previously enrolled with the insert call, then enroll them again with the enroll call.'
-      operationId: androidenterprise.enterprises.delete
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - enterprises
     get:
       description: Retrieves the name and domain of an enterprise.
       operationId: androidenterprise.enterprises.get

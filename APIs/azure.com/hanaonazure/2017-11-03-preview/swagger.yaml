@@ -143,6 +143,7 @@ paths:
                         computerName: myComputerName1
                         osType: SUSE
                         version: 12 SP1
+                      powerState: started
                       storageProfile:
                         nfsIpAddress: 200.200.200.200
                     tags:
@@ -164,6 +165,7 @@ paths:
                         computerName: myComputerName2
                         osType: SUSE
                         version: 12 SP1
+                      powerState: started
                       storageProfile:
                         nfsIpAddress: 200.200.200.201
                     tags:
@@ -185,6 +187,7 @@ paths:
                         computerName: myComputerName3
                         osType: SUSE
                         version: 12 SP1
+                      powerState: started
                       storageProfile:
                         nfsIpAddress: 200.200.200.202
                     type: Microsoft.HanaOnAzure/hanaInstances
@@ -236,6 +239,7 @@ paths:
                         computerName: myComputerName1
                         osType: SUSE
                         version: 12 SP1
+                      powerState: started
                       storageProfile:
                         nfsIpAddress: 200.200.200.200
                     tags:
@@ -244,6 +248,7 @@ paths:
                   - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance2
                     location: westus
                     name: myHanaInstance2
+                    powerState: started
                     properties:
                       hanaInstanceId: 00000000-0000-0000-0000-000000000000
                       hardwareProfile:
@@ -257,6 +262,7 @@ paths:
                         computerName: myComputerName2
                         osType: SUSE
                         version: 12 SP1
+                      powerState: started
                       storageProfile:
                         nfsIpAddress: 200.200.200.201
                     tags:
@@ -311,6 +317,7 @@ paths:
                     computerName: myComputerName
                     osType: SUSE
                     version: 12 SP1
+                  powerState: restarting
                   storageProfile:
                     nfsIpAddress: 200.200.200.200
                 tags:
@@ -348,7 +355,7 @@ definitions:
         readOnly: true
         type: string
       provider:
-        description: The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with “Microsoft” for 1st party services.
+        description: The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with "Microsoft" for 1st party services.
         readOnly: true
         type: string
       resource:
@@ -391,6 +398,20 @@ definitions:
       osProfile:
         $ref: '#/definitions/OSProfile'
         description: Specifies the operating system settings for the HANA instance.
+      powerState:
+        description: Resource power state
+        enum:
+          - starting
+          - started
+          - stopping
+          - stopped
+          - restarting
+          - unknown
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: HanaInstancePowerStateEnum
       storageProfile:
         $ref: '#/definitions/StorageProfile'
         description: Specifies the storage settings for the HANA instance disks.

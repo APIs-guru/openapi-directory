@@ -966,6 +966,30 @@ paths:
       summary: Create a new Order.
       tags:
         - Orders
+  '/orders/after/{id}.json':
+    get:
+      description: 'For example the GET /orders/after/5000 will return Order 5001, 5002, 5003, etc.'
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Order
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Order'
+        '404':
+          description: Order Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve orders filtered by Order Id.
+      tags:
+        - Orders
   '/orders/status/{status}.json':
     get:
       parameters:
@@ -992,7 +1016,7 @@ paths:
           description: Status Invalid.
           schema:
             $ref: '#/definitions/StatusInvalid'
-      summary: Retrieve orders filter by status.
+      summary: Retrieve orders filtered by status.
       tags:
         - Orders
   '/orders/{id}.json':
@@ -2821,6 +2845,10 @@ definitions:
         type: number
       shipping_address:
         $ref: '#/definitions/ShippingAddress'
+      shipping_discount:
+        description: Shipping Discount value for the given order
+        format: float
+        type: number
       shipping_method_id:
         description: Shipping method e.g. Royal Mail
         format: int32
@@ -2950,7 +2978,6 @@ definitions:
           - pagseguro
           - interpagos
           - moneybookers
-          - webpay
           - webpay_cl
           - easypay
           - easypaycc
@@ -3562,6 +3589,10 @@ definitions:
     type: object
   VariantFields:
     properties:
+      discount:
+        description: Discount of the product
+        format: float
+        type: number
       id:
         description: Unique identifier of the product
         format: int32

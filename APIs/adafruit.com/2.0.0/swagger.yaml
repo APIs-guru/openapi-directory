@@ -1108,7 +1108,7 @@ paths:
         - lang: curl
           source: |-
             curl -F 'value=65.5' -H 'X-AIO-Key: io_key_12345' \
-              http://io.adafruit.vm/api/v2/io_username/feeds/io-feed-key/data
+              https://io.adafruit.com/api/v2/io_username/feeds/io-feed-key/data
       x-swagger-router-action: create
       x-swagger-router-controller: Data
   '/{username}/feeds/{feed_key}/data/batch':

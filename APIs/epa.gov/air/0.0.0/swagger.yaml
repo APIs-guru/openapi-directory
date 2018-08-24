@@ -189,8 +189,7 @@ parameters:
     required: false
     type: string
   p_des:
-    description: |
-      Universe Designation Limiter.  Enter one or more universe designation codes.  Provide multiple values as a comma-delimited list.  Use code "TSDF" to return the full enforcement TSDF universe and "Operating TSDF" to return the operating TSDF universe.
+    description: Universe Designation Limiter.  Enter one or more universe designation codes.  Provide multiple values as a comma-delimited list.  Use code "TSDF" to return the full enforcement TSDF universe and "Operating TSDF" to return the operating TSDF universe.
     in: query
     name: p_des
     required: false
@@ -278,7 +277,7 @@ parameters:
     required: false
     type: string
   p_fntype:
-    description: |
+    description: |-
       Controls type of text search performed on facility name with parameter p_fn.
       - EXACT = Find facilities having the exact provided name(s).
       - BEGINS = Find facilities with names starting with the provided term(s).
@@ -519,8 +518,7 @@ parameters:
     required: false
     type: string
   p_nei_any_amt:
-    description: |
-      National Emissions Inventory (NEI) Custom Pollutant Amount.  Only a number can be entered.  Identifies facilities with where the NEI Pollutant Emission Amount is greater than the number entered.
+    description: National Emissions Inventory (NEI) Custom Pollutant Amount.  Only a number can be entered.  Identifies facilities with where the NEI Pollutant Emission Amount is greater than the number entered.
     in: query
     name: p_nei_any_amt
     required: false
@@ -532,8 +530,7 @@ parameters:
     required: false
     type: string
   p_nei_pol:
-    description: |
-      National Emissions Inventory (NEI) Pollutant Identifier.  When a pollutant identifer is entered a corresponding formatted amount or custom amount must be entered.
+    description: National Emissions Inventory (NEI) Pollutant Identifier.  When a pollutant identifer is entered a corresponding formatted amount or custom amount must be entered.
     in: query
     name: p_nei_pol
     required: false
@@ -584,7 +581,7 @@ parameters:
     required: false
     type: string
   p_pd:
-    description: |
+    description: |-
       Population Density Limiter (per sq mile). Enter a value to limit results to facilities located in area of a given population density.
       - NONE = 0 population density per square mile
       - GT100 = More than 100 population density per square mile
@@ -977,7 +974,6 @@ parameters:
     required: false
     type: string
   p_tribedist:
-    default: 0
     description: Proximity to tribal land limiter. Enter an amount of mile between 0 and 25 to filter results.  This parameter is only evaluated if p_tribeid is populated.
     in: query
     name: p_tribedist
@@ -1005,7 +1001,7 @@ parameters:
     required: false
     type: string
   p_wbd:
-    description: '2-, 4-, 6-, or 8-character watershed (WBD from the USGS Watershed Boundary Dataset). May contain multiple comma-separated values.'
+    description: '2-, 4-, 6-, 8-, 10-, or 12-character watershed (WBD from the USGS Watershed Boundary Dataset). May contain multiple comma-separated values.  Uses the FRS Best Pick Coordinate to obtain the WBD12 Huc value.'
     in: query
     name: p_wbd
     required: false
@@ -1311,6 +1307,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Clean Air Act Facility Search
       tags:
         - Facilities
@@ -1451,6 +1449,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Clean Air Act Facility Search
       tags:
         - Facilities
@@ -1591,6 +1591,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Clean Air Act Facility Enhanced Search
       tags:
         - Facilities
@@ -1730,6 +1732,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Clean Air Act Facility Enhanced Search
       tags:
         - Facilities
@@ -1897,6 +1901,8 @@ paths:
             required:
               - MapOutput
             type: object
+            xml:
+              name: Root
       summary: Clean Air Act Map Service
       tags:
         - Facilities
@@ -1935,6 +1941,8 @@ paths:
             required:
               - MapOutput
             type: object
+            xml:
+              name: Root
       summary: Clean Air Act Map Service
       tags:
         - Facilities
@@ -1972,6 +1980,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Clean Air Act Search by Query ID
       tags:
         - Facilities
@@ -2008,6 +2018,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Clean Air Act Search by Query ID
       tags:
         - Facilities
@@ -2040,6 +2052,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Clean Air Act Metadata Service
       tags:
         - Metadata
@@ -2071,6 +2085,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Clean Air Act Metadata Service
       tags:
         - Metadata
@@ -2258,11 +2274,12 @@ definitions:
       - FormalCount
       - InformalCount
     type: object
+    xml:
+      name: Object
   air2_Facilities:
     description: Facilities Object
     properties:
-      AIR3yrComplQtrsStatus:
-        example: ______UUUUUU
+      AIR3yrComplQtrsHistory:
         type: string
       AIRCaseIDs:
         description: Space-delimited list of AIR cases associated with the facility.
@@ -2270,15 +2287,11 @@ definitions:
         type: string
       AIRCity:
         type: string
+      AIRComplStatus:
+        type: string
       AIRCounty:
         description: The name of the county where the AIR facility is located.
         example: Racine
-        type: string
-      AIRCurrComplStatus:
-        example: No Viol
-        type: string
-      AIRCurrHpv:
-        example: 'No'
         type: string
       AIRDaysLastEval:
         example: '2806'
@@ -2297,6 +2310,8 @@ definitions:
         type: string
       AIRFeaCnt:
         example: '2'
+        type: string
+      AIRHpvStatus:
         type: string
       AIRIDs:
         description: Air Facility System (AFS) ID.
@@ -2352,8 +2367,7 @@ definitions:
       AIRMajorFlag:
         example: 'N'
         type: string
-      AIRMnthsInHpv:
-        example: '2'
+      AIRMnthsWithHpv:
         type: string
       AIRNAICS:
         example: '812320'
@@ -2373,8 +2387,7 @@ definitions:
         example: 'MACT, SIP'
         title: Air Programs
         type: string
-      AIRQtrsInHpv:
-        example: '0'
+      AIRQtrsWithHpv:
         type: string
       AIRQtrsWithViol:
         example: '2'
@@ -2495,8 +2508,7 @@ definitions:
       FacFederalAgencyCode:
         description: 'Indicates the federal agency, as classified in FRS. Federal agencies are installations that are owned and operated by the U.S. government. The five-character code consists of a letter followed by four numbers. There are four possible letters that can occupy the first character position: C = Civilian Federal Agency; D = Department of Defense; E = Department of Energy; X = Unknown. The second and third characters represent the agency code, while the fourth and fifth characters represent the bureau code.'
         example: E
-        title: |
-          Facility Federal Agency Code
+        title: Facility Federal Agency Code
         type: string
       FacFederalAgencyName:
         type: string
@@ -2535,8 +2547,7 @@ definitions:
       FacPercentMinority:
         description: Percent Minority is the percentage of the population of the given area that is considered minority. Statistics are shown for the area within a 3-mile radius of each facility.
         example: '45.379'
-        title: |
-          Facility Percent Minority
+        title: Facility Percent Minority
         type: string
       FacPopulationDensity:
         example: '9611.17'
@@ -2549,7 +2560,7 @@ definitions:
       FacTRICarcAIRReleases:
         example: '24'
         type: string
-      FacTRIHapsAIRReleases:
+      FacTRIHapsReleases:
         example: '35.5'
         type: string
       FacTRIReporter:
@@ -2607,6 +2618,10 @@ definitions:
         description: '[Col. 121]'
         example: '1'
         title: Max Score
+        type: string
+      NaaCategories:
+        type: string
+      NaaPollutants:
         type: string
       Over80CountUs:
         type: string
@@ -2716,94 +2731,81 @@ definitions:
         title: Web Documents
         type: string
     required:
-      - SourceID
-      - EPASystem
-      - RegistryID
-      - Statute
       - AIRName
+      - SourceID
       - AIRStreet
       - AIRCity
       - AIRState
-      - AIRZip
-      - AIRCounty
       - LocalControlRegionCode
-      - LocalControlRegionName
-      - AIRFIPSCode
+      - AIRZip
+      - RegistryID
+      - AIRCounty
       - AIREPARegion
-      - AIRStatus
-      - AIRIndianCntryFlg
-      - AIRTRIbalEPAids
-      - AIRTRIbalNames
-      - FacFIPSCode
-      - FacLat
-      - FacLong
-      - FacUsMexBorderFlg
-      - AIRUniverse
-      - AIRNAICS
-      - FacSICCodes
-      - FacPercentMinority
-      - FacPopulationDensity
       - FacFederalAgencyCode
       - FacFederalAgencyName
+      - FacDerivedHuc
+      - FacFIPSCode
+      - FacIndianCntryFlg
+      - AIRIndianCntryFlg
+      - FacIndianSpatialFlg
+      - FacDerivedTRIbes
+      - FacUsMexBorderFlg
+      - FacSICCodes
+      - AIRNAICS
+      - FacLat
+      - FacLong
+      - AIRPrograms
+      - AIRMacts
+      - AIRStatus
+      - AIRUniverse
+      - FacDerivedWBD
+      - FacDerivedWBDName
       - ChesapeakeBayFlag
       - AIRIDs
       - CWAIDs
       - RCRAIDs
-      - TRIIDs
+      - RmpIDs
       - SDWAIDs
-      - AIRCaseIDs
+      - TRIIDs
       - GHGIDs
       - EisIDs
-      - AIRMacts
-      - AIRPrograms
-      - AIRCurrHpv
-      - AIRCurrComplStatus
-      - AIRQtrsInHpv
-      - AIRMnthsInHpv
+      - CamdIDs
+      - AIRComplStatus
+      - AIRHpvStatus
+      - AIRMnthsWithHpv
+      - AIRQtrsWithHpv
       - AIRQtrsWithViol
       - AIRPollRecentViol
       - AIRRecentViolCnt
       - AIRLastViolDate
       - AIREvalCnt
-      - AIRLastEvalDate
       - AIRDaysLastEval
-      - AIRLastStckTestDate
-      - AIRLastStckDateEPA
-      - AIRLastStckDateState
-      - AIRLastStckTestResults
-      - AIRIeaCnt
-      - AIRLastIeaDate
-      - AIRFeaCnt
-      - AIRLastFeaDate
-      - AIRPenalties
-      - AIRLastPenaltyDate
+      - AIRLastEvalDate
       - AIRLastEvalDateEPA
       - AIRLastEvalDateState
-      - AIRLastFeaDateEPA
-      - AIRLastFeaDateState
-      - AIRLastIeaDateEPA
-      - AIRLastIeaDateState
+      - LastDatePce
+      - LastDatePceEPA
+      - LastDatePceSta
+      - AIRLastStckTestDate
+      - AIRLastStckTestResults
+      - FacNaaFlag
       - FacTRIReporter
       - FacTRIAIRReleases
       - FacTRICarcAIRReleases
-      - FacTRIHapsAIRReleases
+      - FacTRIHapsReleases
       - FacEisAIRReleases
       - FacGHGCO2Releases
-      - FacDerivedHuc
-      - FacDerivedWBD
-      - FacDerivedWBDName
-      - FacMapFlg
-      - FacMapIcon
-      - FacNaaFlag
-      - FacGHGReporter
-      - FacEisReporter
-      - FacCamdReporter
-      - AIRFacilityTypeCode
-      - AIRMajorFlag
-      - RmpIDs
-      - AIR3yrComplQtrsStatus
-      - HasPollRpt
-      - CensusBlockGroup
+      - AIRIeaCnt
+      - AIRFeaCnt
+      - AIRLastIeaDate
+      - AIRLastIeaDateState
+      - AIRLastIeaDateEPA
+      - AIRLastFeaDate
+      - AIRLastFeaDateState
+      - AIRLastFeaDateEPA
+      - AIRPenalties
+      - AIRLastPenaltyDate
+      - Over80CountUs
       - PctilePctpre1960Us
       - PctileDpmUs
       - PctileCancerUs
@@ -2815,6 +2817,27 @@ definitions:
       - PctileProximityTsdfUs
       - PctileO3Us
       - PctilePmUs
+      - FacPopulationDensity
+      - FacPercentMinority
+      - EPASystem
+      - Statute
+      - LocalControlRegionName
+      - AIRFIPSCode
+      - AIRTRIbalEPAids
+      - AIRTRIbalNames
+      - AIRCaseIDs
+      - AIRLastStckDateEPA
+      - AIRLastStckDateState
+      - FacMapFlg
+      - FacMapIcon
+      - FacGHGReporter
+      - FacEisReporter
+      - FacCamdReporter
+      - AIRFacilityTypeCode
+      - AIRMajorFlag
+      - AIR3yrComplQtrsHistory
+      - HasPollRpt
+      - CensusBlockGroup
       - MaxPctileUs
       - EjscreenFlagUs
       - EjscreenFlag
@@ -2827,13 +2850,15 @@ definitions:
       - Infea5yrFlag
       - Lower48
       - ActiveLower48
-      - FacDerivedTRIbes
-      - FacIndianCntryFlg
-      - FacIndianSpatialFlg
       - CollectionMethod
       - ReferencePoint
       - CalculatedAccuracyMeters
       - Map
+      - WebDocs
+      - NaaCategories
+      - NaaPollutants
+      - Score
+      - MaxScore
     type: object
     xml:
       name: Facility
@@ -2850,6 +2875,9 @@ definitions:
           $ref: '#/definitions/air1_MapData'
         title: Map Data
         type: array
+        xml:
+          name: MapData
+          wrapped: true
       PopUpBaseURL:
         description: Combine this URL with the PUC to get popup info
         example: 'https://ofmpub.epa.gov/echo/cwa_rest_services.pop_up?p_id='
@@ -2882,6 +2910,9 @@ definitions:
           $ref: '#/definitions/air2_Facilities'
         title: Facilities
         type: array
+        xml:
+          name: Facilities
+          wrapped: true
       INSPRows:
         description: Number of facilities with insp_5yr_flag populated (CWP_DATE_LAST_INSPECTION)
         example: '1'
@@ -2948,8 +2979,7 @@ definitions:
   air3_Facilities:
     description: Facilities Object
     properties:
-      AIR3yrComplQtrsStatus:
-        example: ______UUUUUU
+      AIR3yrComplQtrsHistory:
         type: string
       AIRCaseIDs:
         description: Space-delimited list of AIR cases associated with the facility.
@@ -2957,23 +2987,11 @@ definitions:
         type: string
       AIRCity:
         type: string
-      AIRCmsCategoryCode:
-        description: AIR CMS Category Code
-        title: AIR CMS Category Code
-        type: string
-      AIRCmsCategoryDesc:
-        description: AIR CMS Category Description
-        title: AIR CMS Category Description
+      AIRComplStatus:
         type: string
       AIRCounty:
         description: The name of the county where the AIR facility is located.
         example: Racine
-        type: string
-      AIRCurrComplStatus:
-        example: No Viol
-        type: string
-      AIRCurrHpv:
-        example: 'No'
         type: string
       AIRDaysLastEval:
         example: '2806'
@@ -2992,6 +3010,8 @@ definitions:
         type: string
       AIRFeaCnt:
         example: '2'
+        type: string
+      AIRHpvStatus:
         type: string
       AIRIDs:
         description: Air Facility System (AFS) ID.
@@ -3047,8 +3067,7 @@ definitions:
       AIRMajorFlag:
         example: 'N'
         type: string
-      AIRMnthsInHpv:
-        example: '2'
+      AIRMnthsWithHpv:
         type: string
       AIRNAICS:
         example: '812320'
@@ -3068,8 +3087,7 @@ definitions:
         example: 'MACT, SIP'
         title: Air Programs
         type: string
-      AIRQtrsInHpv:
-        example: '0'
+      AIRQtrsWithHpv:
         type: string
       AIRQtrsWithViol:
         example: '2'
@@ -3190,8 +3208,7 @@ definitions:
       FacFederalAgencyCode:
         description: 'Indicates the federal agency, as classified in FRS. Federal agencies are installations that are owned and operated by the U.S. government. The five-character code consists of a letter followed by four numbers. There are four possible letters that can occupy the first character position: C = Civilian Federal Agency; D = Department of Defense; E = Department of Energy; X = Unknown. The second and third characters represent the agency code, while the fourth and fifth characters represent the bureau code.'
         example: E
-        title: |
-          Facility Federal Agency Code
+        title: Facility Federal Agency Code
         type: string
       FacFederalAgencyName:
         type: string
@@ -3230,8 +3247,7 @@ definitions:
       FacPercentMinority:
         description: Percent Minority is the percentage of the population of the given area that is considered minority. Statistics are shown for the area within a 3-mile radius of each facility.
         example: '45.379'
-        title: |
-          Facility Percent Minority
+        title: Facility Percent Minority
         type: string
       FacPopulationDensity:
         example: '9611.17'
@@ -3244,7 +3260,7 @@ definitions:
       FacTRICarcAIRReleases:
         example: '24'
         type: string
-      FacTRIHapsAIRReleases:
+      FacTRIHapsReleases:
         example: '35.5'
         type: string
       FacTRIReporter:
@@ -3302,6 +3318,10 @@ definitions:
         description: '[Col. 121]'
         example: '1'
         title: Max Score
+        type: string
+      NaaCategories:
+        type: string
+      NaaPollutants:
         type: string
       ObjectId:
         description: Sequential number assigned to each facility returned
@@ -3417,94 +3437,81 @@ definitions:
         type: string
     required:
       - ObjectId
-      - SourceID
-      - EPASystem
-      - RegistryID
-      - Statute
       - AIRName
+      - SourceID
       - AIRStreet
       - AIRCity
       - AIRState
-      - AIRZip
-      - AIRCounty
       - LocalControlRegionCode
-      - LocalControlRegionName
-      - AIRFIPSCode
+      - AIRZip
+      - RegistryID
+      - AIRCounty
       - AIREPARegion
-      - AIRStatus
-      - AIRIndianCntryFlg
-      - AIRTRIbalEPAids
-      - AIRTRIbalNames
-      - FacFIPSCode
-      - FacLat
-      - FacLong
-      - FacUsMexBorderFlg
-      - AIRUniverse
-      - AIRNAICS
-      - FacSICCodes
-      - FacPercentMinority
-      - FacPopulationDensity
       - FacFederalAgencyCode
       - FacFederalAgencyName
+      - FacDerivedHuc
+      - FacFIPSCode
+      - FacIndianCntryFlg
+      - AIRIndianCntryFlg
+      - FacIndianSpatialFlg
+      - FacDerivedTRIbes
+      - FacUsMexBorderFlg
+      - FacSICCodes
+      - AIRNAICS
+      - FacLat
+      - FacLong
+      - AIRPrograms
+      - AIRMacts
+      - AIRStatus
+      - AIRUniverse
+      - FacDerivedWBD
+      - FacDerivedWBDName
       - ChesapeakeBayFlag
       - AIRIDs
       - CWAIDs
       - RCRAIDs
-      - TRIIDs
+      - RmpIDs
       - SDWAIDs
-      - AIRCaseIDs
+      - TRIIDs
       - GHGIDs
       - EisIDs
-      - AIRMacts
-      - AIRPrograms
-      - AIRCurrHpv
-      - AIRCurrComplStatus
-      - AIRQtrsInHpv
-      - AIRMnthsInHpv
+      - CamdIDs
+      - AIRComplStatus
+      - AIRHpvStatus
+      - AIRMnthsWithHpv
+      - AIRQtrsWithHpv
       - AIRQtrsWithViol
       - AIRPollRecentViol
       - AIRRecentViolCnt
       - AIRLastViolDate
       - AIREvalCnt
-      - AIRLastEvalDate
       - AIRDaysLastEval
-      - AIRLastStckTestDate
-      - AIRLastStckDateEPA
-      - AIRLastStckDateState
-      - AIRLastStckTestResults
-      - AIRIeaCnt
-      - AIRLastIeaDate
-      - AIRFeaCnt
-      - AIRLastFeaDate
-      - AIRPenalties
-      - AIRLastPenaltyDate
+      - AIRLastEvalDate
       - AIRLastEvalDateEPA
       - AIRLastEvalDateState
-      - AIRLastFeaDateEPA
-      - AIRLastFeaDateState
-      - AIRLastIeaDateEPA
-      - AIRLastIeaDateState
+      - LastDatePce
+      - LastDatePceEPA
+      - LastDatePceSta
+      - AIRLastStckTestDate
+      - AIRLastStckTestResults
+      - FacNaaFlag
       - FacTRIReporter
       - FacTRIAIRReleases
       - FacTRICarcAIRReleases
-      - FacTRIHapsAIRReleases
+      - FacTRIHapsReleases
       - FacEisAIRReleases
       - FacGHGCO2Releases
-      - FacDerivedHuc
-      - FacDerivedWBD
-      - FacDerivedWBDName
-      - FacMapFlg
-      - FacMapIcon
-      - FacNaaFlag
-      - FacGHGReporter
-      - FacEisReporter
-      - FacCamdReporter
-      - AIRFacilityTypeCode
-      - AIRMajorFlag
-      - RmpIDs
-      - AIR3yrComplQtrsStatus
-      - HasPollRpt
-      - CensusBlockGroup
+      - AIRIeaCnt
+      - AIRFeaCnt
+      - AIRLastIeaDate
+      - AIRLastIeaDateState
+      - AIRLastIeaDateEPA
+      - AIRLastFeaDate
+      - AIRLastFeaDateState
+      - AIRLastFeaDateEPA
+      - AIRPenalties
+      - AIRLastPenaltyDate
+      - Over80CountUs
       - PctilePctpre1960Us
       - PctileDpmUs
       - PctileCancerUs
@@ -3516,6 +3523,27 @@ definitions:
       - PctileProximityTsdfUs
       - PctileO3Us
       - PctilePmUs
+      - FacPopulationDensity
+      - FacPercentMinority
+      - EPASystem
+      - Statute
+      - LocalControlRegionName
+      - AIRFIPSCode
+      - AIRTRIbalEPAids
+      - AIRTRIbalNames
+      - AIRCaseIDs
+      - AIRLastStckDateEPA
+      - AIRLastStckDateState
+      - FacMapFlg
+      - FacMapIcon
+      - FacGHGReporter
+      - FacEisReporter
+      - FacCamdReporter
+      - AIRFacilityTypeCode
+      - AIRMajorFlag
+      - AIR3yrComplQtrsHistory
+      - HasPollRpt
+      - CensusBlockGroup
       - MaxPctileUs
       - EjscreenFlagUs
       - EjscreenFlag
@@ -3528,13 +3556,15 @@ definitions:
       - Infea5yrFlag
       - Lower48
       - ActiveLower48
-      - FacDerivedTRIbes
-      - FacIndianCntryFlg
-      - FacIndianSpatialFlg
       - CollectionMethod
       - ReferencePoint
       - CalculatedAccuracyMeters
       - Map
+      - WebDocs
+      - NaaCategories
+      - NaaPollutants
+      - Score
+      - MaxScore
     type: object
     xml:
       name: Facility
@@ -3561,6 +3591,9 @@ definitions:
           $ref: '#/definitions/air3_Facilities'
         title: Facilities
         type: array
+        xml:
+          name: Facilities
+          wrapped: true
       INSPRows:
         description: Number of facilities with insp_5yr_flag populated (CWP_DATE_LAST_INSPECTION)
         example: '1'
@@ -3600,6 +3633,9 @@ definitions:
           $ref: '#/definitions/qp0_QueryParameters'
         title: Query Parameters
         type: array
+        xml:
+          name: QueryParameters
+          wrapped: true
       QueryRows:
         description: Number of query results returned
         example: '5'
@@ -3653,6 +3689,9 @@ definitions:
           $ref: '#/definitions/air1_MapData'
         title: Map Data
         type: array
+        xml:
+          name: MapData
+          wrapped: true
       PopUpBaseURL:
         description: Combine this URL with the PUC to get popup info
         example: 'https://ofmpub.epa.gov/echo/cwa_rest_services.pop_up?p_id='
@@ -3677,6 +3716,9 @@ definitions:
           $ref: '#/definitions/air2_Facilities'
         title: Facilities
         type: array
+        xml:
+          name: Facilities
+          wrapped: true
       Message:
         description: Field to record messages (typically performance-related) about packet processing
         example: Success
@@ -3724,8 +3766,7 @@ definitions:
   air6_properties:
     description: GeoJSON Properties Object
     properties:
-      AIR3yrComplQtrsStatus:
-        example: ______UUUUUU
+      AIR3yrComplQtrsHistory:
         type: string
       AIRCaseIDs:
         description: Space-delimited list of AIR cases associated with the facility.
@@ -3733,15 +3774,11 @@ definitions:
         type: string
       AIRCity:
         type: string
+      AIRComplStatus:
+        type: string
       AIRCounty:
         description: The name of the county where the AIR facility is located.
         example: Racine
-        type: string
-      AIRCurrComplStatus:
-        example: No Viol
-        type: string
-      AIRCurrHpv:
-        example: 'No'
         type: string
       AIRDaysLastEval:
         example: 2806
@@ -3760,6 +3797,8 @@ definitions:
         type: string
       AIRFeaCnt:
         example: '2'
+        type: string
+      AIRHpvStatus:
         type: string
       AIRIDs:
         description: Air Facility System (AFS) ID.
@@ -3815,8 +3854,7 @@ definitions:
       AIRMajorFlag:
         example: 'N'
         type: string
-      AIRMnthsInHpv:
-        example: 1
+      AIRMnthsWithHpv:
         type: number
       AIRNAICS:
         example: '812320'
@@ -3836,8 +3874,7 @@ definitions:
         example: 'MACT, SIP'
         title: Air Programs
         type: string
-      AIRQtrsInHpv:
-        example: 0
+      AIRQtrsWithHpv:
         type: number
       AIRQtrsWithViol:
         example: 2
@@ -3958,8 +3995,7 @@ definitions:
       FacFederalAgencyCode:
         description: 'Indicates the federal agency, as classified in FRS. Federal agencies are installations that are owned and operated by the U.S. government. The five-character code consists of a letter followed by four numbers. There are four possible letters that can occupy the first character position: C = Civilian Federal Agency; D = Department of Defense; E = Department of Energy; X = Unknown. The second and third characters represent the agency code, while the fourth and fifth characters represent the bureau code.'
         example: E
-        title: |
-          Facility Federal Agency Code
+        title: Facility Federal Agency Code
         type: string
       FacFederalAgencyName:
         type: string
@@ -3988,8 +4024,7 @@ definitions:
       FacPercentMinority:
         description: Percent Minority is the percentage of the population of the given area that is considered minority. Statistics are shown for the area within a 3-mile radius of each facility.
         example: 45.379
-        title: |
-          Facility Percent Minority
+        title: Facility Percent Minority
         type: number
       FacPopulationDensity:
         example: 9611.17
@@ -4002,7 +4037,7 @@ definitions:
       FacTRICarcAIRReleases:
         example: '24'
         type: string
-      FacTRIHapsAIRReleases:
+      FacTRIHapsReleases:
         example: '35.5'
         type: string
       FacTRIReporter:
@@ -4061,6 +4096,10 @@ definitions:
         example: 1
         title: Max Score
         type: number
+      NaaCategories:
+        type: string
+      NaaPollutants:
+        type: string
       Over80CountUs:
         type: number
       PctileCancerUs:
@@ -4169,92 +4208,79 @@ definitions:
         title: Web Documents
         type: string
     required:
-      - SourceID
-      - EPASystem
-      - RegistryID
-      - Statute
       - AIRName
+      - SourceID
       - AIRStreet
       - AIRCity
       - AIRState
-      - AIRZip
-      - AIRCounty
       - LocalControlRegionCode
-      - LocalControlRegionName
-      - AIRFIPSCode
+      - AIRZip
+      - RegistryID
+      - AIRCounty
       - AIREPARegion
-      - AIRStatus
-      - AIRIndianCntryFlg
-      - AIRTRIbalEPAids
-      - AIRTRIbalNames
-      - FacFIPSCode
-      - FacUsMexBorderFlg
-      - AIRUniverse
-      - AIRNAICS
-      - FacSICCodes
-      - FacPercentMinority
-      - FacPopulationDensity
       - FacFederalAgencyCode
       - FacFederalAgencyName
+      - FacDerivedHuc
+      - FacFIPSCode
+      - FacIndianCntryFlg
+      - AIRIndianCntryFlg
+      - FacIndianSpatialFlg
+      - FacDerivedTRIbes
+      - FacUsMexBorderFlg
+      - FacSICCodes
+      - AIRNAICS
+      - AIRPrograms
+      - AIRMacts
+      - AIRStatus
+      - AIRUniverse
+      - FacDerivedWBD
+      - FacDerivedWBDName
       - ChesapeakeBayFlag
       - AIRIDs
       - CWAIDs
       - RCRAIDs
-      - TRIIDs
+      - RmpIDs
       - SDWAIDs
-      - AIRCaseIDs
+      - TRIIDs
       - GHGIDs
       - EisIDs
-      - AIRMacts
-      - AIRPrograms
-      - AIRCurrHpv
-      - AIRCurrComplStatus
-      - AIRQtrsInHpv
-      - AIRMnthsInHpv
+      - CamdIDs
+      - AIRComplStatus
+      - AIRHpvStatus
+      - AIRMnthsWithHpv
+      - AIRQtrsWithHpv
       - AIRQtrsWithViol
       - AIRPollRecentViol
       - AIRRecentViolCnt
       - AIRLastViolDate
       - AIREvalCnt
-      - AIRLastEvalDate
       - AIRDaysLastEval
-      - AIRLastStckTestDate
-      - AIRLastStckDateEPA
-      - AIRLastStckDateState
-      - AIRLastStckTestResults
-      - AIRIeaCnt
-      - AIRLastIeaDate
-      - AIRFeaCnt
-      - AIRLastFeaDate
-      - AIRPenalties
-      - AIRLastPenaltyDate
+      - AIRLastEvalDate
       - AIRLastEvalDateEPA
       - AIRLastEvalDateState
-      - AIRLastFeaDateEPA
-      - AIRLastFeaDateState
-      - AIRLastIeaDateEPA
-      - AIRLastIeaDateState
+      - LastDatePce
+      - LastDatePceEPA
+      - LastDatePceSta
+      - AIRLastStckTestDate
+      - AIRLastStckTestResults
+      - FacNaaFlag
       - FacTRIReporter
       - FacTRIAIRReleases
       - FacTRICarcAIRReleases
-      - FacTRIHapsAIRReleases
+      - FacTRIHapsReleases
       - FacEisAIRReleases
       - FacGHGCO2Releases
-      - FacDerivedHuc
-      - FacDerivedWBD
-      - FacDerivedWBDName
-      - FacMapFlg
-      - FacMapIcon
-      - FacNaaFlag
-      - FacGHGReporter
-      - FacEisReporter
-      - FacCamdReporter
-      - AIRFacilityTypeCode
-      - AIRMajorFlag
-      - RmpIDs
-      - AIR3yrComplQtrsStatus
-      - HasPollRpt
-      - CensusBlockGroup
+      - AIRIeaCnt
+      - AIRFeaCnt
+      - AIRLastIeaDate
+      - AIRLastIeaDateState
+      - AIRLastIeaDateEPA
+      - AIRLastFeaDate
+      - AIRLastFeaDateState
+      - AIRLastFeaDateEPA
+      - AIRPenalties
+      - AIRLastPenaltyDate
+      - Over80CountUs
       - PctilePctpre1960Us
       - PctileDpmUs
       - PctileCancerUs
@@ -4266,6 +4292,27 @@ definitions:
       - PctileProximityTsdfUs
       - PctileO3Us
       - PctilePmUs
+      - FacPopulationDensity
+      - FacPercentMinority
+      - EPASystem
+      - Statute
+      - LocalControlRegionName
+      - AIRFIPSCode
+      - AIRTRIbalEPAids
+      - AIRTRIbalNames
+      - AIRCaseIDs
+      - AIRLastStckDateEPA
+      - AIRLastStckDateState
+      - FacMapFlg
+      - FacMapIcon
+      - FacGHGReporter
+      - FacEisReporter
+      - FacCamdReporter
+      - AIRFacilityTypeCode
+      - AIRMajorFlag
+      - AIR3yrComplQtrsHistory
+      - HasPollRpt
+      - CensusBlockGroup
       - MaxPctileUs
       - EjscreenFlagUs
       - EjscreenFlag
@@ -4278,13 +4325,15 @@ definitions:
       - Infea5yrFlag
       - Lower48
       - ActiveLower48
-      - FacDerivedTRIbes
-      - FacIndianCntryFlg
-      - FacIndianSpatialFlg
       - CollectionMethod
       - ReferencePoint
       - CalculatedAccuracyMeters
       - Map
+      - WebDocs
+      - NaaCategories
+      - NaaPollutants
+      - Score
+      - MaxScore
     type: object
   met_Results:
     description: Results Object
@@ -4299,6 +4348,9 @@ definitions:
           $ref: '#/definitions/met_ResultsColumns'
         title: Result Columns
         type: array
+        xml:
+          name: ResultColumns
+          wrapped: true
     required:
       - Message
     type: object
@@ -4336,6 +4388,8 @@ definitions:
       - ObjectName
       - Description
     type: object
+    xml:
+      name: ResultColumn
   qp0_QueryParameters:
     description: Query Parameters Object
     properties:
@@ -4353,3 +4407,5 @@ definitions:
       - QP
       - QV
     type: object
+    xml:
+      name: Parameter

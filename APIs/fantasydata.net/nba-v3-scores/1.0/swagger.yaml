@@ -33,6 +33,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/AllTeams':
     get:
@@ -402,6 +403,10 @@ definitions:
         type: integer
       Quarter:
         type: string
+      Quarters:
+        items:
+          $ref: '#/definitions/Quarter'
+        type: array
       Season:
         type: integer
       SeasonType:
@@ -567,6 +572,20 @@ definitions:
       UsageRatePercentage:
         type: number
       Wins:
+        type: integer
+  Quarter:
+    properties:
+      AwayScore:
+        type: integer
+      GameID:
+        type: integer
+      HomeScore:
+        type: integer
+      Name:
+        type: string
+      Number:
+        type: integer
+      QuarterID:
         type: integer
   Season:
     properties:

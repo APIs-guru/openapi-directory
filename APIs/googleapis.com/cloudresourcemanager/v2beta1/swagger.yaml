@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v2beta1'
       version: v1
@@ -59,11 +59,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -84,12 +79,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -113,8 +102,47 @@ parameters:
     type: string
 tags:
   - name: folders
+  - name: operations
 paths:
-  /v2beta1/folders:
+  '/v1/{name}':
+    get:
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: cloudresourcemanager.operations.get
+      parameters:
+        - description: The name of the operation resource.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - operations
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  /v2/folders:
     get:
       description: |-
         Lists the Folders that are direct descendants of supplied parent resource.
@@ -171,12 +199,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -201,12 +227,12 @@ paths:
         + The addition of the Folder must not cause the total number of Folders
         under its parent to exceed 100.
 
-        If the operation fails due to a folder constraint violation,
-        a PreconditionFailure explaining the violation will be returned.
-        If the failure occurs synchronously then the PreconditionFailure
-        will be returned via the Status.details field and if it occurs
-        asynchronously then the PreconditionFailure will be returned
-        via the the Operation.error field.
+        If the operation fails due to a folder constraint violation, some errors
+        may be returned by the CreateFolder request, with status code
+        FAILED_PRECONDITION and an error description. Other folder constraint
+        violations will be communicated in the Operation, with the specific
+        PreconditionFailure returned via the details list in the Operation.error
+        field.
 
         The caller must have `resourcemanager.folders.create` permission on the
         identified parent.
@@ -232,17 +258,15 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - folders
-  '/v2beta1/folders:search':
+  '/v2/folders:search':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -273,7 +297,7 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - folders
-  '/v2beta1/{name}':
+  '/v2/{name}':
     delete:
       description: |-
         Requests deletion of a Folder. The Folder is moved into the
@@ -338,12 +362,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -352,13 +374,13 @@ paths:
       description: |-
         Updates a Folder, changing its display_name.
         Changes to the folder display_name will be rejected if they violate either
-        the display_name formatting rules or naming constraints described in the
-        CreateFolder documentation.
+        the display_name formatting rules or naming constraints described in
+        the CreateFolder documentation.
 
         The Folder's display name must start and end with a letter or digit,
         may contain letters, digits, spaces, hyphens and underscores and can be
         no longer than 30 characters. This is captured by the regular expression:
-        [\p{L}\p{N}]({\p{L}\p{N}_- ]{0,28}[\p{L}\p{N}])?.
+        [\p{L}\p{N}]([\p{L}\p{N}_- ]{0,28}[\p{L}\p{N}])?.
         The caller must have `resourcemanager.folders.update` permission on the
         identified folder.
 
@@ -395,17 +417,15 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - folders
-  '/v2beta1/{name}:move':
+  '/v2/{name}:move':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -453,17 +473,15 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - folders
-  '/v2beta1/{name}:undelete':
+  '/v2/{name}:undelete':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -504,17 +522,15 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - folders
-  '/v2beta1/{resource}:getIamPolicy':
+  '/v2/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -552,17 +568,15 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - folders
-  '/v2beta1/{resource}:setIamPolicy':
+  '/v2/{resource}:setIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -598,17 +612,15 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - folders
-  '/v2beta1/{resource}:testIamPermissions':
+  '/v2/{resource}:testIamPermissions':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -753,6 +765,13 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          Unimplemented. The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -785,7 +804,39 @@ definitions:
         description: |-
           Role that is assigned to `members`.
           For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
-          Required
+        type: string
+    type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          Common Expression Language syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
         type: string
     type: object
   Folder:
@@ -805,7 +856,7 @@ definitions:
           The display name must start and end with a letter or digit, may contain
           letters, digits, spaces, hyphens and underscores and can be no longer
           than 30 characters. This is captured by the regular expression:
-          [\p{L}\p{N}]({\p{L}\p{N}_- ]{0,28}[\p{L}\p{N}])?.
+          [\p{L}\p{N}]([\p{L}\p{N}_- ]{0,28}[\p{L}\p{N}])?.
         type: string
       lifecycleState:
         description: |-
@@ -1070,14 +1121,18 @@ definitions:
           lifecycleState and parent, where the operators `=`, `NOT`, `AND` and `OR`
           can be used along with the suffix wildcard symbol `*`.
 
+          The displayName field in a query expression should use escaped quotes
+          for values that include whitespace to prevent unexpected behavior.
+
           Some example queries are:
 
           |Query | Description|
           |----- | -----------|
-          |displayName=Test*|Folders whose display name starts with "Test".|
-          |lifecycleState=ACTIVE|Folders whose lifecycleState is ACTIVE.|
-          |parent=folders/123|Folders whose parent is "folders/123".|
-          |parent=folders/123 AND lifecycleState=ACTIVE|Active folders whose parent is "folders/123".|
+          |displayName=Test* | Folders whose display name starts with "Test".|
+          |lifecycleState=ACTIVE | Folders whose lifecycleState is ACTIVE.|
+          |parent=folders/123 | Folders whose parent is "folders/123".|
+          |parent=folders/123 AND lifecycleState=ACTIVE | Active folders whose parent is "folders/123".|
+          |displayName=\\"Test String\\"|Folders whose display name includes both "Test" and "String".|
         type: string
     type: object
   SearchFoldersResponse:

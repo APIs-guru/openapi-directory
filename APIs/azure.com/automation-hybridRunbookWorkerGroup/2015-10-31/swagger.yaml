@@ -51,11 +51,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The filter to apply on the operation.
           in: query
           name: $filter
@@ -75,51 +76,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: The response model for the list hybrid runbook worker groups.
-            properties:
-              nextLink:
-                description: Gets or sets the next link.
-                type: string
-              value:
-                description: Gets or sets a list of hybrid runbook worker groups.
-                items:
-                  description: Definition of hybrid runbook worker group.
-                  properties:
-                    credential:
-                      description: Definition of runas credential to use for hybrid worker.
-                      properties:
-                        name:
-                          description: Gets or sets the name of the credential.
-                          type: string
-                    hybridRunbookWorkers:
-                      description: Gets or sets the list of hybrid runbook workers.
-                      items:
-                        description: Definition of hybrid runbook worker.
-                        properties:
-                          ip:
-                            description: Gets or sets the assigned machine IP address.
-                            type: string
-                          lastSeenDateTime:
-                            description: Last Heartbeat from the Worker
-                            format: date-time
-                            type: string
-                            x-nullable: false
-                          name:
-                            description: Gets or sets the worker machine name.
-                            type: string
-                          registrationTime:
-                            description: Gets or sets the registration time of the worker machine.
-                            format: date-time
-                            type: string
-                            x-nullable: false
-                      type: array
-                    id:
-                      description: Gets or sets the id of the resource.
-                      type: string
-                    name:
-                      description: Gets or sets the name of the group.
-                      type: string
-                type: array
+            $ref: '#/definitions/HybridRunbookWorkerGroupsListResult'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -155,7 +112,7 @@ paths:
                     id: /subscriptions/subid/resourceGroups/udtest/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestWorkerGroup
                     name: TestWorkerGroup
               headers: {}
-      x-ms-odata: './definitions.json#/definitions/HybridRunbookWorkerGroup'
+      x-ms-odata: '#/definitions/HybridRunbookWorkerGroup'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}':
@@ -174,11 +131,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: Automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The hybrid runbook worker group name
           in: path
           name: hybridRunbookWorkerGroupName
@@ -236,11 +194,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The hybrid runbook worker group name
           in: path
           name: hybridRunbookWorkerGroupName
@@ -260,42 +219,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: Definition of hybrid runbook worker group.
-            properties:
-              credential:
-                description: Definition of runas credential to use for hybrid worker.
-                properties:
-                  name:
-                    description: Gets or sets the name of the credential.
-                    type: string
-              hybridRunbookWorkers:
-                description: Gets or sets the list of hybrid runbook workers.
-                items:
-                  description: Definition of hybrid runbook worker.
-                  properties:
-                    ip:
-                      description: Gets or sets the assigned machine IP address.
-                      type: string
-                    lastSeenDateTime:
-                      description: Last Heartbeat from the Worker
-                      format: date-time
-                      type: string
-                      x-nullable: false
-                    name:
-                      description: Gets or sets the worker machine name.
-                      type: string
-                    registrationTime:
-                      description: Gets or sets the registration time of the worker machine.
-                      format: date-time
-                      type: string
-                      x-nullable: false
-                type: array
-              id:
-                description: Gets or sets the id of the resource.
-                type: string
-              name:
-                description: Gets or sets the name of the group.
-                type: string
+            $ref: '#/definitions/HybridRunbookWorkerGroup'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -345,11 +269,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The hybrid runbook worker group name
           in: path
           name: hybridRunbookWorkerGroupName
@@ -360,14 +285,7 @@ paths:
           name: parameters
           required: true
           schema:
-            description: Parameters supplied to the update operation.
-            properties:
-              credential:
-                description: Definition of runas credential to use for hybrid worker.
-                properties:
-                  name:
-                    description: Gets or sets the name of the credential.
-                    type: string
+            $ref: '#/definitions/HybridRunbookWorkerGroupUpdateParameters'
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -382,42 +300,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: Definition of hybrid runbook worker group.
-            properties:
-              credential:
-                description: Definition of runas credential to use for hybrid worker.
-                properties:
-                  name:
-                    description: Gets or sets the name of the credential.
-                    type: string
-              hybridRunbookWorkers:
-                description: Gets or sets the list of hybrid runbook workers.
-                items:
-                  description: Definition of hybrid runbook worker.
-                  properties:
-                    ip:
-                      description: Gets or sets the assigned machine IP address.
-                      type: string
-                    lastSeenDateTime:
-                      description: Last Heartbeat from the Worker
-                      format: date-time
-                      type: string
-                      x-nullable: false
-                    name:
-                      description: Gets or sets the worker machine name.
-                      type: string
-                    registrationTime:
-                      description: Gets or sets the registration time of the worker machine.
-                      format: date-time
-                      type: string
-                      x-nullable: false
-                type: array
-              id:
-                description: Gets or sets the id of the resource.
-                type: string
-              name:
-                description: Gets or sets the name of the group.
-                type: string
+            $ref: '#/definitions/HybridRunbookWorkerGroup'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -455,4 +338,72 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestHybridGroup
                 name: TestHybridGroup
               headers: {}
-definitions: {}
+definitions:
+  HybridRunbookWorker:
+    description: Definition of hybrid runbook worker.
+    properties:
+      ip:
+        description: Gets or sets the assigned machine IP address.
+        type: string
+      lastSeenDateTime:
+        description: Last Heartbeat from the Worker
+        format: date-time
+        type: string
+        x-nullable: false
+      name:
+        description: Gets or sets the worker machine name.
+        type: string
+      registrationTime:
+        description: Gets or sets the registration time of the worker machine.
+        format: date-time
+        type: string
+        x-nullable: false
+  HybridRunbookWorkerGroup:
+    description: Definition of hybrid runbook worker group.
+    properties:
+      credential:
+        $ref: '#/definitions/RunAsCredentialAssociationProperty'
+        description: Sets the credential of a worker group.
+      groupType:
+        description: Type of the HybridWorkerGroup.
+        enum:
+          - User
+          - System
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: GroupTypeEnum
+      hybridRunbookWorkers:
+        description: Gets or sets the list of hybrid runbook workers.
+        items:
+          $ref: '#/definitions/HybridRunbookWorker'
+        type: array
+      id:
+        description: Gets or sets the id of the resource.
+        type: string
+      name:
+        description: Gets or sets the name of the group.
+        type: string
+  HybridRunbookWorkerGroupUpdateParameters:
+    description: Parameters supplied to the update operation.
+    properties:
+      credential:
+        $ref: '#/definitions/RunAsCredentialAssociationProperty'
+        description: Sets the credential of a worker group.
+  HybridRunbookWorkerGroupsListResult:
+    description: The response model for the list hybrid runbook worker groups.
+    properties:
+      nextLink:
+        description: Gets or sets the next link.
+        type: string
+      value:
+        description: Gets or sets a list of hybrid runbook worker groups.
+        items:
+          $ref: '#/definitions/HybridRunbookWorkerGroup'
+        type: array
+  RunAsCredentialAssociationProperty:
+    description: Definition of runas credential to use for hybrid worker.
+    properties:
+      name:
+        description: Gets or sets the name of the credential.
+        type: string

@@ -63,6 +63,141 @@ parameters:
     required: true
     type: string
 paths:
+  '/subscriptions/{subscriptionId}/providers/microsoft.insights/autoscalesettings':
+    get:
+      description: Lists the autoscale settings for a subscription
+      operationId: AutoscaleSettings_ListBySubscription
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful request for a list of autoscale settings
+          schema:
+            $ref: '#/definitions/AutoscaleSettingResourceCollection'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - AutoscaleSettings
+      x-ms-examples:
+        List autoscale settings:
+          parameters:
+            api-version: '2015-04-01'
+            subscriptionId: b67f7fec-69fc-4974-9099-a26bd6ffeda3
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/########-####-####-####-############$skiptoken=######'
+                value:
+                  - id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/microsoft.insights/autoscalesettings/MySetting
+                    location: West US
+                    name: MySetting
+                    properties:
+                      enabled: true
+                      name: MySetting
+                      notifications:
+                        - email:
+                            customEmails:
+                              - gu@ms.com
+                              - ge@ns.net
+                            sendToSubscriptionAdministrator: true
+                            sendToSubscriptionCoAdministrators: true
+                          operation: Scale
+                          webhooks:
+                            - properties: {}
+                              serviceUri: 'http://myservice.com'
+                      profiles:
+                        - capacity:
+                            default: '1'
+                            maximum: '10'
+                            minimum: '1'
+                          fixedDate:
+                            end: '2015-03-05T14:30:00Z'
+                            start: '2015-03-05T14:00:00Z'
+                            timeZone: UTC
+                          name: adios
+                          rules:
+                            - metricTrigger:
+                                metricName: Percentage CPU
+                                metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
+                                operator: GreaterThan
+                                statistic: Average
+                                threshold: 10
+                                timeAggregation: Average
+                                timeGrain: PT1M
+                                timeWindow: PT5M
+                              scaleAction:
+                                cooldown: PT5M
+                                direction: Increase
+                                type: ChangeCount
+                                value: '1'
+                            - metricTrigger:
+                                metricName: Percentage CPU
+                                metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
+                                operator: GreaterThan
+                                statistic: Average
+                                threshold: 15
+                                timeAggregation: Average
+                                timeGrain: PT2M
+                                timeWindow: PT5M
+                              scaleAction:
+                                cooldown: PT6M
+                                direction: Decrease
+                                type: ChangeCount
+                                value: '2'
+                        - capacity:
+                            default: '1'
+                            maximum: '10'
+                            minimum: '1'
+                          name: saludos
+                          recurrence:
+                            frequency: Week
+                            schedule:
+                              days:
+                                - '1'
+                              hours:
+                                - 5
+                              minutes:
+                                - 15
+                              timeZone: UTC
+                          rules:
+                            - metricTrigger:
+                                metricName: Percentage CPU
+                                metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
+                                operator: GreaterThan
+                                statistic: Average
+                                threshold: 10
+                                timeAggregation: Average
+                                timeGrain: PT1M
+                                timeWindow: PT5M
+                              scaleAction:
+                                cooldown: PT5M
+                                direction: Increase
+                                type: ChangeCount
+                                value: '1'
+                            - metricTrigger:
+                                metricName: Percentage CPU
+                                metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
+                                operator: GreaterThan
+                                statistic: Average
+                                threshold: 15
+                                timeAggregation: Average
+                                timeGrain: PT2M
+                                timeWindow: PT5M
+                              scaleAction:
+                                cooldown: PT6M
+                                direction: Decrease
+                                type: ChangeCount
+                                value: '2'
+                      targetResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
+                    tags:
+                      $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
+                    type: Microsoft.Insights/autoscaleSettings
+              headers: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings':
     get:
       description: Lists the autoscale settings for a resource group
@@ -74,114 +209,6 @@ paths:
       responses:
         '200':
           description: Successful request for a list of autoscale settings
-          examples:
-            application/json:
-              nextLink: 'https://management.azure.com/########-####-####-####-############$skiptoken=######'
-              value:
-                - id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/microsoft.insights/autoscalesettings/MySetting
-                  location: West US
-                  name: MySetting
-                  properties:
-                    enabled: true
-                    name: MySetting
-                    notifications:
-                      - email:
-                          customEmails:
-                            - gu@ms.com
-                            - ge@ns.net
-                          sendToSubscriptionAdministrator: true
-                          sendToSubscriptionCoAdministrators: true
-                        operation: Scale
-                        webhooks:
-                          - properties: {}
-                            serviceUri: 'http://myservice.com'
-                    profiles:
-                      - capacity:
-                          default: '1'
-                          maximum: '10'
-                          minimum: '1'
-                        fixedDate:
-                          end: '2015-03-05T14:30:00Z'
-                          start: '2015-03-05T14:00:00Z'
-                          timeZone: UTC
-                        name: adios
-                        rules:
-                          - metricTrigger:
-                              metricName: Percentage CPU
-                              metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                              operator: GreaterThan
-                              statistic: Average
-                              threshold: 10
-                              timeAggregation: Average
-                              timeGrain: PT1M
-                              timeWindow: PT5M
-                            scaleAction:
-                              cooldown: PT5M
-                              direction: Increase
-                              type: ChangeCount
-                              value: '1'
-                          - metricTrigger:
-                              metricName: Percentage CPU
-                              metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                              operator: GreaterThan
-                              statistic: Average
-                              threshold: 15
-                              timeAggregation: Average
-                              timeGrain: PT2M
-                              timeWindow: PT5M
-                            scaleAction:
-                              cooldown: PT6M
-                              direction: Decrease
-                              type: ChangeCount
-                              value: '2'
-                      - capacity:
-                          default: '1'
-                          maximum: '10'
-                          minimum: '1'
-                        name: saludos
-                        recurrence:
-                          frequency: Week
-                          schedule:
-                            days:
-                              - '1'
-                            hours:
-                              - 5
-                            minutes:
-                              - 15
-                            timeZone: UTC
-                        rules:
-                          - metricTrigger:
-                              metricName: Percentage CPU
-                              metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                              operator: GreaterThan
-                              statistic: Average
-                              threshold: 10
-                              timeAggregation: Average
-                              timeGrain: PT1M
-                              timeWindow: PT5M
-                            scaleAction:
-                              cooldown: PT5M
-                              direction: Increase
-                              type: ChangeCount
-                              value: '1'
-                          - metricTrigger:
-                              metricName: Percentage CPU
-                              metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                              operator: GreaterThan
-                              statistic: Average
-                              threshold: 15
-                              timeAggregation: Average
-                              timeGrain: PT2M
-                              timeWindow: PT5M
-                            scaleAction:
-                              cooldown: PT6M
-                              direction: Decrease
-                              type: ChangeCount
-                              value: '2'
-                    targetResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                  tags:
-                    $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
-                  type: Microsoft.Insights/autoscaleSettings
           schema:
             $ref: '#/definitions/AutoscaleSettingResourceCollection'
         default:
@@ -337,8 +364,10 @@ paths:
             subscriptionId: b67f7fec-69fc-4974-9099-a26bd6ffeda3
           responses:
             '200':
+              body: null
               headers: {}
             '204':
+              body: null
               headers: {}
     get:
       description: Gets an autoscale setting
@@ -351,112 +380,6 @@ paths:
       responses:
         '200':
           description: Successful request to get one autoscale setting
-          examples:
-            application/json:
-              id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/microsoft.insights/autoscalesettings/MySetting
-              location: West US
-              name: MySetting
-              properties:
-                enabled: true
-                name: MySetting
-                notifications:
-                  - email:
-                      customEmails:
-                        - gu@ms.com
-                        - ge@ns.net
-                      sendToSubscriptionAdministrator: true
-                      sendToSubscriptionCoAdministrators: true
-                    operation: Scale
-                    webhooks:
-                      - properties: {}
-                        serviceUri: 'http://myservice.com'
-                profiles:
-                  - capacity:
-                      default: '1'
-                      maximum: '10'
-                      minimum: '1'
-                    fixedDate:
-                      end: '2015-03-05T14:30:00Z'
-                      start: '2015-03-05T14:00:00Z'
-                      timeZone: UTC
-                    name: adios
-                    rules:
-                      - metricTrigger:
-                          metricName: Percentage CPU
-                          metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                          operator: GreaterThan
-                          statistic: Average
-                          threshold: 10
-                          timeAggregation: Average
-                          timeGrain: PT1M
-                          timeWindow: PT5M
-                        scaleAction:
-                          cooldown: PT5M
-                          direction: Increase
-                          type: ChangeCount
-                          value: '1'
-                      - metricTrigger:
-                          metricName: Percentage CPU
-                          metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                          operator: GreaterThan
-                          statistic: Average
-                          threshold: 15
-                          timeAggregation: Average
-                          timeGrain: PT2M
-                          timeWindow: PT5M
-                        scaleAction:
-                          cooldown: PT6M
-                          direction: Decrease
-                          type: ChangeCount
-                          value: '2'
-                  - capacity:
-                      default: '1'
-                      maximum: '10'
-                      minimum: '1'
-                    name: saludos
-                    recurrence:
-                      frequency: Week
-                      schedule:
-                        days:
-                          - '1'
-                        hours:
-                          - 5
-                        minutes:
-                          - 15
-                        timeZone: UTC
-                    rules:
-                      - metricTrigger:
-                          metricName: Percentage CPU
-                          metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                          operator: GreaterThan
-                          statistic: Average
-                          threshold: 10
-                          timeAggregation: Average
-                          timeGrain: PT1M
-                          timeWindow: PT5M
-                        scaleAction:
-                          cooldown: PT5M
-                          direction: Increase
-                          type: ChangeCount
-                          value: '1'
-                      - metricTrigger:
-                          metricName: Percentage CPU
-                          metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                          operator: GreaterThan
-                          statistic: Average
-                          threshold: 15
-                          timeAggregation: Average
-                          timeGrain: PT2M
-                          timeWindow: PT5M
-                        scaleAction:
-                          cooldown: PT6M
-                          direction: Decrease
-                          type: ChangeCount
-                          value: '2'
-                targetResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-              tags:
-                $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
-              type: Microsoft.Insights/autoscaleSettings
           schema:
             $ref: '#/definitions/AutoscaleSettingResource'
         default:
@@ -835,222 +758,10 @@ paths:
       responses:
         '200':
           description: Successful request to create or update an autoscale setting
-          examples:
-            application/json:
-              id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/microsoft.insights/autoscalesettings/MySetting
-              location: West US
-              name: MySetting
-              properties:
-                enabled: true
-                name: MySetting
-                notifications:
-                  - email:
-                      customEmails:
-                        - gu@ms.com
-                        - ge@ns.net
-                      sendToSubscriptionAdministrator: true
-                      sendToSubscriptionCoAdministrators: true
-                    operation: Scale
-                    webhooks:
-                      - properties: {}
-                        serviceUri: 'http://myservice.com'
-                profiles:
-                  - capacity:
-                      default: '1'
-                      maximum: '10'
-                      minimum: '1'
-                    fixedDate:
-                      end: '2015-03-05T14:30:00Z'
-                      start: '2015-03-05T14:00:00Z'
-                      timeZone: UTC
-                    name: adios
-                    rules:
-                      - metricTrigger:
-                          metricName: Percentage CPU
-                          metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                          operator: GreaterThan
-                          statistic: Average
-                          threshold: 10
-                          timeAggregation: Average
-                          timeGrain: PT1M
-                          timeWindow: PT5M
-                        scaleAction:
-                          cooldown: PT5M
-                          direction: Increase
-                          type: ChangeCount
-                          value: '1'
-                      - metricTrigger:
-                          metricName: Percentage CPU
-                          metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                          operator: GreaterThan
-                          statistic: Average
-                          threshold: 15
-                          timeAggregation: Average
-                          timeGrain: PT2M
-                          timeWindow: PT5M
-                        scaleAction:
-                          cooldown: PT6M
-                          direction: Decrease
-                          type: ChangeCount
-                          value: '2'
-                  - capacity:
-                      default: '1'
-                      maximum: '10'
-                      minimum: '1'
-                    name: saludos
-                    recurrence:
-                      frequency: Week
-                      schedule:
-                        days:
-                          - '1'
-                        hours:
-                          - 5
-                        minutes:
-                          - 15
-                        timeZone: UTC
-                    rules:
-                      - metricTrigger:
-                          metricName: Percentage CPU
-                          metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                          operator: GreaterThan
-                          statistic: Average
-                          threshold: 10
-                          timeAggregation: Average
-                          timeGrain: PT1M
-                          timeWindow: PT5M
-                        scaleAction:
-                          cooldown: PT5M
-                          direction: Increase
-                          type: ChangeCount
-                          value: '1'
-                      - metricTrigger:
-                          metricName: Percentage CPU
-                          metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                          operator: GreaterThan
-                          statistic: Average
-                          threshold: 15
-                          timeAggregation: Average
-                          timeGrain: PT2M
-                          timeWindow: PT5M
-                        scaleAction:
-                          cooldown: PT6M
-                          direction: Decrease
-                          type: ChangeCount
-                          value: '2'
-                targetResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-              tags:
-                $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
-              type: Microsoft.Insights/autoscaleSettings
           schema:
             $ref: '#/definitions/AutoscaleSettingResource'
         '201':
           description: Created autoscale setting
-          examples:
-            application/json:
-              id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/microsoft.insights/autoscalesettings/MySetting
-              location: West US
-              name: MySetting
-              properties:
-                enabled: true
-                name: MySetting
-                notifications:
-                  - email:
-                      customEmails:
-                        - gu@ms.com
-                        - ge@ns.net
-                      sendToSubscriptionAdministrator: true
-                      sendToSubscriptionCoAdministrators: true
-                    operation: Scale
-                    webhooks:
-                      - properties: {}
-                        serviceUri: 'http://myservice.com'
-                profiles:
-                  - capacity:
-                      default: '1'
-                      maximum: '10'
-                      minimum: '1'
-                    fixedDate:
-                      end: '2015-03-05T14:30:00Z'
-                      start: '2015-03-05T14:00:00Z'
-                      timeZone: UTC
-                    name: adios
-                    rules:
-                      - metricTrigger:
-                          metricName: Percentage CPU
-                          metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                          operator: GreaterThan
-                          statistic: Average
-                          threshold: 10
-                          timeAggregation: Average
-                          timeGrain: PT1M
-                          timeWindow: PT5M
-                        scaleAction:
-                          cooldown: PT5M
-                          direction: Increase
-                          type: ChangeCount
-                          value: '1'
-                      - metricTrigger:
-                          metricName: Percentage CPU
-                          metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                          operator: GreaterThan
-                          statistic: Average
-                          threshold: 15
-                          timeAggregation: Average
-                          timeGrain: PT2M
-                          timeWindow: PT5M
-                        scaleAction:
-                          cooldown: PT6M
-                          direction: Decrease
-                          type: ChangeCount
-                          value: '2'
-                  - capacity:
-                      default: '1'
-                      maximum: '10'
-                      minimum: '1'
-                    name: saludos
-                    recurrence:
-                      frequency: Week
-                      schedule:
-                        days:
-                          - '1'
-                        hours:
-                          - 5
-                        minutes:
-                          - 15
-                        timeZone: UTC
-                    rules:
-                      - metricTrigger:
-                          metricName: Percentage CPU
-                          metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                          operator: GreaterThan
-                          statistic: Average
-                          threshold: 10
-                          timeAggregation: Average
-                          timeGrain: PT1M
-                          timeWindow: PT5M
-                        scaleAction:
-                          cooldown: PT5M
-                          direction: Increase
-                          type: ChangeCount
-                          value: '1'
-                      - metricTrigger:
-                          metricName: Percentage CPU
-                          metricResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-                          operator: GreaterThan
-                          statistic: Average
-                          threshold: 15
-                          timeAggregation: Average
-                          timeGrain: PT2M
-                          timeWindow: PT5M
-                        scaleAction:
-                          cooldown: PT6M
-                          direction: Decrease
-                          type: ChangeCount
-                          value: '2'
-                targetResourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc
-              tags:
-                $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
-              type: Microsoft.Insights/autoscaleSettings
           schema:
             $ref: '#/definitions/AutoscaleSettingResource'
         default:
@@ -1583,7 +1294,7 @@ definitions:
     description: The repeating times at which this profile begins. This element is not used if the FixedDate element is used.
     properties:
       frequency:
-        description: 'the recurrence frequency. How often the schedule profile should take effect. This value must be Week, meaning each week will have the same set of profiles.'
+        description: 'the recurrence frequency. How often the schedule profile should take effect. This value must be Week, meaning each week will have the same set of profiles. For example, to set a daily schedule, set **schedule** to every day of the week. The frequency property specifies that the schedule is repeated weekly.'
         enum:
           - None
           - Second

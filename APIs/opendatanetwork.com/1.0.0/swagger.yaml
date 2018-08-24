@@ -43,7 +43,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: apiBlueprint
       url: 'https://raw.githubusercontent.com/socrata/odn-backend/master/opendatanetwork-apiary.apib'
       version: 1A
@@ -60,6 +60,7 @@ paths:
           name: entity_id
           required: true
           type: string
+          x-example: '0100000US,0400000US53'
         - description: |-
             The [Socrata App Token](https://dev.socrata.com/docs/app-tokens.html) to be
             used with your request. The `app_token` parameter is required if an app token is not passed via the `X-App-Token` HTTP header. Clients must [register for their own app tokens](https://dev.socrata.com/docs/app-tokens.html).
@@ -67,6 +68,7 @@ paths:
           name: app_token
           required: false
           type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
       responses:
         '200':
           description: OK
@@ -115,16 +117,19 @@ paths:
           name: variable
           required: true
           type: string
+          x-example: demographics.population.count
         - description: Comma separated list of entity IDs.
           in: query
           name: entity_id
           required: true
           type: string
+          x-example: '0100000US,0400000US53'
         - description: Constraint to use.
           in: query
           name: constraint
           required: true
           type: string
+          x-example: year
         - description: |-
             The [Socrata App Token](https://dev.socrata.com/docs/app-tokens.html) to be
             used with your request. The `app_token` parameter is required if an app token is not passed via the `X-App-Token` HTTP header. Clients must [register for their own app tokens](https://dev.socrata.com/docs/app-tokens.html).
@@ -132,6 +137,7 @@ paths:
           name: app_token
           required: false
           type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
       responses:
         '200':
           description: OK
@@ -155,6 +161,7 @@ paths:
           name: variable
           required: true
           type: string
+          x-example: demographics.population.count
         - description: |-
             A comma separated list of entity IDs.
             Entities must have the same type and represent geographical regions.
@@ -162,6 +169,7 @@ paths:
           name: entity_id
           required: true
           type: string
+          x-example: '0400000US53,0400000US08'
         - description: |-
             Values must be specified for each constraint in the dataset.
             For example, to generate map data for `demographics.population.count`,
@@ -177,6 +185,7 @@ paths:
           name: app_token
           required: false
           type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
       responses:
         '200':
           description: OK
@@ -220,6 +229,7 @@ paths:
           name: variable
           required: true
           type: string
+          x-example: demographics.population.count
         - description: |-
             Comma separated list of entity IDs.
             Defaults to retrieving all entities.
@@ -229,6 +239,7 @@ paths:
           name: entity_id
           required: false
           type: string
+          x-example: '0100000US,0400000US53'
         - description: |-
             Number of steps to forecast.
             Must be an integer between 0 and 20.
@@ -242,6 +253,7 @@ paths:
           name: forecast
           required: false
           type: number
+          x-example: '3'
         - description: |-
             Whether or not to produce a description of the data.
             Set to `true` to produce a description.
@@ -252,6 +264,7 @@ paths:
           name: describe
           required: false
           type: boolean
+          x-example: 'false'
         - description: |-
             If format is set to `google`, the data frame will be formatted
             as a [Google Visualizations data table](https://developers.google.com/chart/interactive/docs/reference#datatable-class).
@@ -270,6 +283,7 @@ paths:
           name: app_token
           required: false
           type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
       responses:
         '200':
           description: OK
@@ -336,16 +350,19 @@ paths:
           name: entity_id
           required: false
           type: string
+          x-example: 0400000US53
         - description: Name of the entity.
           in: query
           name: entity_name
           required: false
           type: string
+          x-example: washington
         - description: Type of the entity.
           in: query
           name: entity_type
           required: false
           type: string
+          x-example: region.state
         - description: |-
             The [Socrata App Token](https://dev.socrata.com/docs/app-tokens.html) to be
             used with your request. The `app_token` parameter is required if an app token is not passed via the `X-App-Token` HTTP header. Clients must [register for their own app tokens](https://dev.socrata.com/docs/app-tokens.html).
@@ -353,6 +370,7 @@ paths:
           name: app_token
           required: false
           type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
       responses:
         '200':
           description: OK
@@ -379,11 +397,13 @@ paths:
           name: relation
           required: true
           type: string
+          x-example: parent
         - description: ID of the target entity.
           in: query
           name: entity_id
           required: true
           type: string
+          x-example: 0400000US53
         - description: |-
             If this parameter is included, only entities with data for the given
             variable will be returned. Note that this may cause the number of
@@ -392,6 +412,7 @@ paths:
           name: variable_id
           required: false
           type: string
+          x-example: demographics.population.seattle
         - default: 10
           description: |-
             Maximum number of entities in each group.
@@ -407,6 +428,7 @@ paths:
           name: app_token
           required: false
           type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
       responses:
         '200':
           description: OK
@@ -430,6 +452,7 @@ paths:
           name: entity_id
           required: false
           type: string
+          x-example: 0100000US
         - description: |-
             If included, the search terms of the dataset
             will be used in the query.
@@ -437,6 +460,7 @@ paths:
           name: dataset_id
           required: false
           type: string
+          x-example: demographics.population
         - default: 10
           description: |-
             Maximum number of results to return.
@@ -459,6 +483,7 @@ paths:
           name: app_token
           required: false
           type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
       responses:
         '200':
           description: OK
@@ -500,6 +525,7 @@ paths:
           name: query
           required: true
           type: string
+          x-example: seattle
         - default: 10
           description: |-
             Maximum number of results to return.
@@ -522,6 +548,7 @@ paths:
           name: app_token
           required: false
           type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
       responses:
         '200':
           description: OK
@@ -560,11 +587,13 @@ paths:
           name: type
           required: true
           type: string
+          x-example: entity
         - description: Query to match.
           in: query
           name: query
           required: true
           type: string
+          x-example: seattl
         - default: 5
           description: |-
             Maximum number of results to return.
@@ -586,6 +615,7 @@ paths:
           name: variable_id
           required: false
           type: string
+          x-example: demographics.population.count
         - description: |-
             The [Socrata App Token](https://dev.socrata.com/docs/app-tokens.html) to be
             used with your request. The `app_token` parameter is required if an app token is not passed via the `X-App-Token` HTTP header. Clients must [register for their own app tokens](https://dev.socrata.com/docs/app-tokens.html).
@@ -593,6 +623,7 @@ paths:
           name: app_token
           required: false
           type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
       responses:
         '200':
           description: OK

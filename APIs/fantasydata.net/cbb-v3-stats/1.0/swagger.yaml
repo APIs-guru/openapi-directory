@@ -33,6 +33,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/AreAnyGamesInProgress':
     get:
@@ -696,6 +697,10 @@ definitions:
         type: number
       Period:
         type: string
+      Periods:
+        items:
+          $ref: '#/definitions/Period'
+        type: array
       PointSpread:
         type: number
       Round:

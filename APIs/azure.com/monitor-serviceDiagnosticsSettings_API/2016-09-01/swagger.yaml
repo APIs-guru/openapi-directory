@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/microsoft.insights/stable/2016-09-01/serviceDiagnosticsSettings_API.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: monitor-serviceDiagnosticsSettings_API
   x-tags:
@@ -48,6 +47,7 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+    x-ms-skip-url-encoding: true
 paths:
   '/{resourceUri}/providers/microsoft.insights/diagnosticSettings/service':
     get:
@@ -117,6 +117,7 @@ paths:
                   serviceBusRuleId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey
                   storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1
                   workspaceId: ''
+                tags: null
                 type: ''
               headers: {}
     patch:
@@ -144,8 +145,7 @@ paths:
         Update a service diagnostic setting:
           parameters:
             api-version: '2016-09-01'
-            resourceUri: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
-            serviceDiagnosticSettingsResource:
+            parameters:
               properties:
                 eventHubAuthorizationRuleId: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/montest/providers/microsoft.eventhub/namespaces/mynamespace/eventhubs/myeventhub/authorizationrules/myrule
                 logs:
@@ -163,6 +163,8 @@ paths:
                 serviceBusRuleId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey
                 storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1
                 workspaceId: ''
+              tags: null
+            resourceUri: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
           responses:
             '200':
               body:
@@ -186,6 +188,7 @@ paths:
                   serviceBusRuleId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey
                   storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1
                   workspaceId: ''
+                tags: null
                 type: ''
               headers: {}
     put:
@@ -277,6 +280,7 @@ paths:
                   serviceBusRuleId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey
                   storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1
                   workspaceId: ''
+                tags: null
                 type: ''
               headers: {}
 definitions:

@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -59,11 +59,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -84,12 +79,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -169,12 +158,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -256,12 +243,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -379,12 +364,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -424,12 +407,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -471,12 +452,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -519,12 +498,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -566,12 +543,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -645,12 +620,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -715,12 +688,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -757,12 +728,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -803,12 +772,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -847,12 +814,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1004,6 +969,13 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          Unimplemented. The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -1036,7 +1008,6 @@ definitions:
         description: |-
           Role that is assigned to `members`.
           For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
-          Required
         type: string
     type: object
   Empty:
@@ -1051,6 +1022,39 @@ definitions:
 
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
+    type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          Common Expression Language syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
+        type: string
     type: object
   FolderOperation:
     description: Metadata describing a long running folder operation

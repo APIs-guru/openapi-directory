@@ -113,11 +113,14 @@ paths:
           name: shortName
           required: true
           type: string
-        - description: The unique property identifier (Sales or Lettings)
+        - collectionFormat: multi
+          description: The unique property identifier (Sales or Lettings)
           in: query
+          items:
+            type: string
           name: propertyIdentifier
           required: true
-          type: string
+          type: array
         - description: The appointment details model
           in: body
           name: appointmentDetails
@@ -443,6 +446,12 @@ definitions:
         type: string
       IsTenancyEnded:
         description: Has the Tenancy ended?
+        type: boolean
+      IsTenancyProposed:
+        description: Is the tenancy Proposed?
+        type: boolean
+      IsTenancySigned:
+        description: Is the tenancy signed?
         type: boolean
       LinkedTenants:
         description: 'A collection of tenants linked to the tenancy:-'

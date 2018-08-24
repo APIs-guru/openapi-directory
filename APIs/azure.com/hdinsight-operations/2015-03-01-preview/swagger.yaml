@@ -41,12 +41,6 @@ parameters:
     name: api-version
     required: true
     type: string
-  SubscriptionIdParameter:
-    description: The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   /providers/Microsoft.HDInsight/operations:
     get:
@@ -59,11 +53,25 @@ paths:
           description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/OperationListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - Operations
       x-ms-pageable:
         nextLinkName: nextLink
 definitions:
+  ErrorResponse:
+    description: Describes the format of Error response.
+    properties:
+      code:
+        description: Error code
+        type: string
+      message:
+        description: Error message indicating why the operation failed.
+        type: string
+    type: object
   Operation:
     description: The HDInsight REST API operation.
     properties:
@@ -77,7 +85,7 @@ definitions:
             description: 'The service provider: Microsoft.HDInsight'
             type: string
           resource:
-            description: 'The resource on which the operation is performed: Cluster, Capabilities, etc.'
+            description: 'The resource on which the operation is performed: Cluster, Applications, etc.'
             type: string
       name:
         description: 'The operation name: {provider}/{resource}/{operation}'

@@ -266,7 +266,7 @@ paths:
           name: superscheme
           required: true
           type: string
-        - description: 'PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see <<_company>>.'
+        - description: 'PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see <<Peppol Schemes List>>.'
           in: path
           name: scheme
           required: true
@@ -1708,7 +1708,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: The scheme of the identifier. See <<_company>> for a list.
+        description: The scheme of the identifier. See <<Peppol Schemes List>> for a list.
         maxLength: 64
         minLength: 2
         title: Type
@@ -1728,7 +1728,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: The scheme of the identifier. See <<_company>> for a list.
+        description: The scheme of the identifier. See <<Peppol Schemes List>> for a list.
         maxLength: 64
         minLength: 2
         title: Type
@@ -1764,7 +1764,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: The scheme of the identifier. See <<_company>> for a list.
+        description: The scheme of the identifier. See <<Peppol Schemes List>> for a list.
         minLength: 3
         title: Scheme
         type: string
@@ -1817,6 +1817,14 @@ definitions:
       due_date:
         description: The date the invoice must be payed by. Format "YYYY-MM-DD".
         title: Due Date
+        type: string
+      external_key:
+        description: Used for accountants. The id you specified for the organization.
+        title: External key
+        type: string
+      external_user_id:
+        description: Used for the embedded portal retrieval service. The external_user_id you provided when the ShopAccount was created.
+        title: External user id
         type: string
       guid:
         description: The GUID of the invoice
@@ -2020,6 +2028,14 @@ definitions:
         type: string
   PurchaseInvoiceUbl:
     properties:
+      external_key:
+        description: Used for accountants. The id you specified for the organization.
+        title: External key
+        type: string
+      external_user_id:
+        description: Used for the embedded portal retrieval service. The external_user_id you provided when the ShopAccount was created.
+        title: External user id
+        type: string
       guid:
         description: The GUID of the invoice
         format: uuid

@@ -25,38 +25,38 @@ info:
       url: 'http://rest.rgd.mcw.edu/rgdws/v2/api-docs'
       version: '2.0'
   x-providerName: mcw.edu
-consumes:
-  - application/json
 produces:
   - '*/*'
 tags:
-  - name: Annotation
-  - description: Gene Web Service
-    name: gene-web-service
-  - name: Pathway
-  - description: Lookup Web Service
-    name: lookup-web-service
   - description: Alliance of Genome Resources
     name: AGR
-  - name: Phenotype
-  - description: Stats Web Service
-    name: stats-web-service
-  - description: NIH Data Commons
-    name: NIHdatacommons
-  - description: Annotation Web Service
-    name: annotation-web-service
+  - name: Annotation
   - name: Gene
   - name: Lookup
-  - description: Phenotype Web Service
-    name: phenotype-web-service
+  - description: NIH Data Commons
+    name: NIHdatacommons
+  - name: Pathway
+  - name: Phenotype
+  - name: QTL
   - name: Rat Strain
+  - description: Annotation Web Service
+    name: annotation-web-service
+  - description: Gene Web Service
+    name: gene-web-service
+  - description: Lookup Web Service
+    name: lookup-web-service
+  - description: Ontology Web Service
+    name: ontology-web-service
   - description: Pathway Web Service
     name: pathway-web-service
-  - description: Strain Web Service
-    name: strain-web-service
-  - name: QTL
+  - description: Phenotype Web Service
+    name: phenotype-web-service
   - description: QTL Web Service
     name: qtl-web-service
+  - description: Stats Web Service
+    name: stats-web-service
+  - description: Strain Web Service
+    name: strain-web-service
 paths:
   '/annotations/accId/{rgdId}':
     get:
@@ -427,6 +427,61 @@ paths:
       summary: Return a list of gene alleles
       tags:
         - Gene
+  /genes/annotation:
+    post:
+      consumes:
+        - application/json
+      operationId: getAnnotatedGenesUsingPOST
+      parameters:
+        - description: data
+          in: body
+          name: data
+          required: false
+          schema:
+            $ref: '#/definitions/AnnotatedGeneRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Gene'
+            type: array
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of genes annotated to an ontology term
+      tags:
+        - Gene
+  '/genes/annotation/{accId}':
+    get:
+      operationId: getAllAnnotatedGenesUsingGET
+      parameters:
+        - description: Accesstion ID
+          in: path
+          name: accId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Gene'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of genes annotated to an ontology term
+      tags:
+        - Gene
   '/genes/annotation/{accId}/{speciesTypeKey}':
     get:
       operationId: getGenesAnnotatedUsingGET
@@ -515,7 +570,39 @@ paths:
       summary: Return a list of all genes with position information for an assembly
       tags:
         - Gene
-  '/genes/ortholog/{rgdId}':
+  /genes/orthologs:
+    post:
+      consumes:
+        - application/json
+      operationId: getOrthologsByListUsingPOST
+      parameters:
+        - description: orthologRequest
+          in: body
+          name: orthologRequest
+          required: true
+          schema:
+            $ref: '#/definitions/OrthologRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/Gene'
+              type: array
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of gene ortholocp s
+      tags:
+        - Gene
+  '/genes/orthologs/{rgdId}':
     get:
       operationId: getGeneOrthologsUsingGET
       parameters:
@@ -682,6 +769,566 @@ paths:
       summary: Returns a list of gene types avialable in RGD
       tags:
         - Lookup
+  /lookup/id/map/EnsemblGene:
+    post:
+      consumes:
+        - application/json
+      operationId: getEnsemblGeneMappingUsingPOST
+      parameters:
+        - description: data
+          in: body
+          name: data
+          required: false
+          schema:
+            $ref: '#/definitions/RGDIDListRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate RGD IDs to Ensembl Gene IDs
+      tags:
+        - Lookup
+  '/lookup/id/map/EnsemblGene/{rgdId}':
+    get:
+      operationId: getEnsemblGeneMappingUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate an RGD ID to an Ensembl Gene  ID
+      tags:
+        - Lookup
+  /lookup/id/map/EnsemblProtein:
+    post:
+      consumes:
+        - application/json
+      operationId: getEnsemblProteinMappingUsingPOST
+      parameters:
+        - description: data
+          in: body
+          name: data
+          required: false
+          schema:
+            $ref: '#/definitions/RGDIDListRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate RGD IDs to Ensembl Protein IDs
+      tags:
+        - Lookup
+  '/lookup/id/map/EnsemblProtein/{rgdId}':
+    get:
+      operationId: getEnsemblProteinMappingUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate an RGD ID to an Ensembl Protein ID
+      tags:
+        - Lookup
+  /lookup/id/map/EnsemblTranscript:
+    post:
+      consumes:
+        - application/json
+      operationId: getEnsemblTranscriptMappingUsingPOST
+      parameters:
+        - description: data
+          in: body
+          name: data
+          required: false
+          schema:
+            $ref: '#/definitions/RGDIDListRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate RGD IDs to Ensembl Transcript IDs
+      tags:
+        - Lookup
+  '/lookup/id/map/EnsemblTranscript/{rgdId}':
+    get:
+      operationId: getEnsemblTranscriptMappingUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate an RGD ID to an Ensembl Transcript ID
+      tags:
+        - Lookup
+  /lookup/id/map/GTEx:
+    post:
+      consumes:
+        - application/json
+      operationId: getGTEXMappingUsingPOST
+      parameters:
+        - description: data
+          in: body
+          name: data
+          required: false
+          schema:
+            $ref: '#/definitions/RGDIDListRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate RGD IDs to GTEx IDs
+      tags:
+        - Lookup
+  '/lookup/id/map/GTEx/{rgdId}':
+    get:
+      operationId: getGTEXMappingUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate an RGD ID to an GTEx ID
+      tags:
+        - Lookup
+  /lookup/id/map/GenBankNucleotide:
+    post:
+      consumes:
+        - application/json
+      operationId: getGenBankNucleotideMappingUsingPOST
+      parameters:
+        - description: data
+          in: body
+          name: data
+          required: false
+          schema:
+            $ref: '#/definitions/RGDIDListRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate RGD IDs to GenBank Nucleotide IDs
+      tags:
+        - Lookup
+  '/lookup/id/map/GenBankNucleotide/{rgdId}':
+    get:
+      operationId: getGenBankNucleotideMappingUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate an RGD ID to a GenBank Nucleotide ID
+      tags:
+        - Lookup
+  /lookup/id/map/GenBankProtein:
+    post:
+      consumes:
+        - application/json
+      operationId: getGenBankProteinMappingUsingPOST
+      parameters:
+        - description: data
+          in: body
+          name: data
+          required: false
+          schema:
+            $ref: '#/definitions/RGDIDListRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate RGD IDs to GenBank Protein IDs
+      tags:
+        - Lookup
+  '/lookup/id/map/GenBankProtein/{rgdId}':
+    get:
+      operationId: getGenBankProteinMappingUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate an RGD ID to a GenBank Protein ID
+      tags:
+        - Lookup
+  /lookup/id/map/HGNC:
+    post:
+      consumes:
+        - application/json
+      operationId: getHGNCMappingUsingPOST
+      parameters:
+        - description: data
+          in: body
+          name: data
+          required: false
+          schema:
+            $ref: '#/definitions/RGDIDListRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate RGD IDs to HGNC IDs
+      tags:
+        - Lookup
+  '/lookup/id/map/HGNC/{rgdId}':
+    get:
+      operationId: getHGNCMappingUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate an RGD ID to an HGNC ID
+      tags:
+        - Lookup
+  /lookup/id/map/MGI:
+    post:
+      consumes:
+        - application/json
+      operationId: getMGIMappingUsingPOST
+      parameters:
+        - description: data
+          in: body
+          name: data
+          required: false
+          schema:
+            $ref: '#/definitions/RGDIDListRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate RGD IDs to MGI IDs
+      tags:
+        - Lookup
+  '/lookup/id/map/MGI/{rgdId}':
+    get:
+      operationId: getMGIMappingUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate an RGD ID to an MGI ID
+      tags:
+        - Lookup
+  /lookup/id/map/NCBIGene:
+    post:
+      consumes:
+        - application/json
+      operationId: getNCBIGeneMappingUsingPOST
+      parameters:
+        - description: data
+          in: body
+          name: data
+          required: false
+          schema:
+            $ref: '#/definitions/RGDIDListRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate RGD IDs to NCBI Gene IDs
+      tags:
+        - Lookup
+  '/lookup/id/map/NCBIGene/{rgdId}':
+    get:
+      operationId: getNCBIGeneMappingUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate an RGD ID to an NCBI Gene ID
+      tags:
+        - Lookup
+  /lookup/id/map/UniProt:
+    post:
+      consumes:
+        - application/json
+      operationId: getUniProtMappingUsingPOST
+      parameters:
+        - description: data
+          in: body
+          name: data
+          required: false
+          schema:
+            $ref: '#/definitions/RGDIDListRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate RGD IDs to UniProt IDs
+      tags:
+        - Lookup
+  '/lookup/id/map/UniProt/{rgdId}':
+    get:
+      operationId: getUniProtMappingUsingGET
+      parameters:
+        - description: RGD ID
+          format: int32
+          in: path
+          name: rgdId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Translate an RGD ID to a UniProt ID
+      tags:
+        - Lookup
   '/lookup/maps/{speciesTypeKey}':
     get:
       operationId: getMapsUsingGET
@@ -725,6 +1372,29 @@ paths:
       summary: Return a Map of species type keys available in RGD
       tags:
         - Lookup
+  '/ontology/term/{accId}':
+    get:
+      operationId: getTermUsingGET
+      parameters:
+        - description: Term Accession ID
+          in: path
+          name: accId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Term'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Returns term for Accession ID
+      tags:
+        - Ontology
   '/pathways/diagrams/search/{searchString}':
     get:
       operationId: searchPathwaysUsingGET
@@ -1807,6 +2477,21 @@ paths:
       tags:
         - Rat Strain
 definitions:
+  AnnotatedGeneRequest:
+    properties:
+      accId:
+        type: string
+      evidenceCodes:
+        items:
+          type: string
+        type: array
+      speciesTypeKeys:
+        items:
+          format: int32
+          type: integer
+        type: array
+    title: AnnotatedGeneRequest
+    type: object
   Annotation:
     properties:
       annotatedObjectRgdId:
@@ -1863,6 +2548,7 @@ definitions:
         type: string
       xrefSource:
         type: string
+    title: Annotation
     type: object
   Gene:
     properties:
@@ -1900,6 +2586,7 @@ definitions:
         type: string
       variant:
         type: boolean
+    title: Gene
     type: object
   Map:
     properties:
@@ -1934,6 +2621,7 @@ definitions:
         type: string
       version:
         type: string
+    title: Map
     type: object
   MapPair:
     properties:
@@ -1941,6 +2629,7 @@ definitions:
         type: string
       stringValue:
         type: string
+    title: MapPair
     type: object
   MappedGene:
     properties:
@@ -1959,6 +2648,21 @@ definitions:
         type: integer
       strand:
         type: string
+    title: MappedGene
+    type: object
+  OrthologRequest:
+    properties:
+      rgdIds:
+        items:
+          format: int32
+          type: integer
+        type: array
+      speciesTypeKeys:
+        items:
+          format: int32
+          type: integer
+        type: array
+    title: OrthologRequest
     type: object
   Pathway:
     properties:
@@ -1982,6 +2686,7 @@ definitions:
         items:
           $ref: '#/definitions/Reference'
         type: array
+    title: Pathway
     type: object
   PathwayObject:
     properties:
@@ -2003,6 +2708,7 @@ definitions:
       xdb_key:
         format: int32
         type: integer
+    title: PathwayObject
     type: object
   QTL:
     properties:
@@ -2054,6 +2760,16 @@ definitions:
       variance:
         format: double
         type: number
+    title: QTL
+    type: object
+  RGDIDListRequest:
+    properties:
+      rgdIds:
+        items:
+          format: int32
+          type: integer
+        type: array
+    title: RGDIDListRequest
     type: object
   Reference:
     properties:
@@ -2099,6 +2815,7 @@ definitions:
         type: string
       volume:
         type: string
+    title: Reference
     type: object
   Status:
     properties:
@@ -2119,6 +2836,7 @@ definitions:
       strainRgdId:
         format: int32
         type: integer
+    title: Status
     type: object
   Strain:
     properties:
@@ -2174,4 +2892,49 @@ definitions:
         type: string
       symbol:
         type: string
+    title: Strain
+    type: object
+  Term:
+    properties:
+      accId:
+        type: string
+      comment:
+        type: string
+      createdBy:
+        type: string
+      creationDate:
+        format: date-time
+        type: string
+      definition:
+        type: string
+      modificationDate:
+        format: date-time
+        type: string
+      obsolete:
+        format: int32
+        type: integer
+      ontologyId:
+        type: string
+      term:
+        type: string
+      xrefs:
+        items:
+          $ref: '#/definitions/TermXRef'
+        type: array
+    title: Term
+    type: object
+  TermXRef:
+    properties:
+      key:
+        format: int32
+        type: integer
+      termAcc:
+        type: string
+      xrefDescription:
+        type: string
+      xrefType:
+        type: string
+      xrefValue:
+        type: string
+    title: TermXRef
     type: object

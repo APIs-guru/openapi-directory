@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventhub/resource-manager/Microsoft.EventHub/stable/2017-04-01/EventHub.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: eventhub-EventHub
   x-tags:
@@ -3001,6 +3000,7 @@ paths:
                 name: sdk-DisasterRecovery-3814
                 properties:
                   partnerNamespace: sdk-Namespace-8859
+                  pendingReplicationOperationsCount: 0
                   provisioningState: Accepted
                   role: Secondary
                   type: MetadataReplication
@@ -3994,6 +3994,11 @@ definitions:
           partnerNamespace:
             description: 'ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning'
             type: string
+          pendingReplicationOperationsCount:
+            description: Number of entities pending to be replicated.
+            format: int64
+            readOnly: true
+            type: integer
           provisioningState:
             description: Provisioning state of the Alias(Disaster Recovery configuration) - possible values 'Accepted' or 'Succeeded' or 'Failed'
             enum:

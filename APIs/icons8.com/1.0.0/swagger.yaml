@@ -37,7 +37,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: apiBlueprint
       url: 'https://raw.githubusercontent.com/icons8/api-docs/master/apiary.apib'
       version: 1A
@@ -78,6 +78,7 @@ paths:
           name: language
           required: true
           type: string
+          x-example: en-US
       responses:
         '200':
           description: OK
@@ -192,11 +193,13 @@ paths:
           name: category
           required: true
           type: string
+          x-example: free_icons
         - description: the code of subcategory
           in: path
           name: subcategory
           required: true
           type: string
+          x-example: home_appliances
         - default: 25
           description: the maximum number of icons which you'd like to receive
           in: path
@@ -235,6 +238,7 @@ paths:
           name: language
           required: true
           type: string
+          x-example: en-US
       responses:
         '200':
           description: OK
@@ -365,6 +369,7 @@ paths:
           name: language
           required: true
           type: string
+          x-example: en-US
         - in: path
           name: term
           required: true
@@ -467,6 +472,7 @@ paths:
           name: term
           required: true
           type: string
+          x-example: home
         - default: 25
           description: 'the maximum number of icons which you''d like to receive (will be multiplied by platforms count, if you didn''t specify the platform and didn''t set the ''exact_amount'' parameter)'
           in: path
@@ -510,6 +516,7 @@ paths:
           name: language
           required: true
           type: string
+          x-example: en-US
       responses:
         '200':
           description: OK
@@ -597,7 +604,7 @@ paths:
                     type: array
                 type: object
             type: object
-      summary: By Keyword
+      summary: By Keyword v3
       tags: []
   '/api/iconsets/v3/total?since={since}':
     get:
@@ -610,6 +617,7 @@ paths:
           name: since
           required: true
           type: string
+          x-example: '2014-12-31'
       responses:
         '200':
           description: OK
@@ -647,6 +655,125 @@ paths:
             type: object
       summary: Totals
       tags: []
+  '/api/iconsets/v4/search?term={term}&amount={amount}&offset={offset}&platform={platform}&language={language}&exact_amount={exact_amount}':
+    get:
+      description: ''
+      parameters:
+        - description: |
+            the name or tag of the icon or any other phrase.
+            e.g. use "@home" to find icons with the tag "home" and "=home" to find icons with the name "home"
+          in: path
+          name: term
+          required: true
+          type: string
+          x-example: home
+        - default: 50
+          description: 'the maximum number of icons which you''d like to receive (will be multiplied by platforms count, if you didn''t specify the platform and didn''t set the ''exact_amount'' parameter)'
+          in: path
+          name: amount
+          required: true
+          type: number
+        - description: the offset from the first received result
+          in: path
+          name: offset
+          required: true
+          type: number
+        - default: all
+          description: the style of the icons
+          enum:
+            - all
+            - ios7
+            - ios11
+            - win8
+            - win10
+            - android
+            - androidL
+            - color
+            - office
+            - ultraviolet
+            - nolan
+            - p1em
+            - dotty
+            - dusk
+            - Dusk_Wired
+            - cotton
+            - doodle
+            - flat_round
+          in: path
+          name: platform
+          required: true
+          type: string
+        - default: en-US
+          description: the language code to get localized result
+          enum:
+            - en-US
+            - fr-FR
+            - de-DE
+            - it-IT
+            - pt-BR
+            - pl-PL
+            - ru-RU
+            - es-ES
+            - zh-CN
+            - ja-JP
+          in: path
+          name: language
+          required: true
+          type: string
+        - in: path
+          name: exact_amount
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              icons:
+                - category: Travel
+                  commonId: '3022'
+                  commonName: sea-waves
+                  id: '23756'
+                  name: Sea Waves
+                  platform: win10
+                  timestamp: '1461024690'
+                - category: Animals
+                  commonId: '3035'
+                  commonName: starfish
+                  id: '19995'
+                  name: Sea Star
+                  platform: win10
+                  timestamp: '1450119085'
+              parameters:
+                amount `50`: ''
+                language: en-US
+                offset: '0'
+                platform: win10
+                term: sea
+          headers: {}
+          schema:
+            properties:
+              icons:
+                description: the result of operation
+                items: {}
+                type: array
+              parameters:
+                description: copy of the input parameters from the request
+                properties:
+                  amount `50`:
+                    type: string
+                  language:
+                    type: string
+                  offset:
+                    type: string
+                  platform:
+                    type: string
+                  term:
+                    type: string
+                type: object
+            type: object
+      summary: By Keyword v4
+      tags: []
   /api/task/web-font/collection:
     post:
       description: ''
@@ -654,6 +781,16 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              auth:
+                hash: api-demo-user
+              task:
+                arguments:
+                  collection: bef787ce-41ad-4424-8e0e-19ce78e104c3
+                  css_prefix: icons8
+                  css_rules_case: lowercase
+                  css_selector: '.icons8-{{glyph}}'
+                  font_name: Material Very Basic
             properties:
               auth:
                 properties:
@@ -752,6 +889,16 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              auth:
+                hash: api-demo-user
+              task:
+                arguments:
+                  collection: bef787ce-41ad-4424-8e0e-19ce78e104c3
+                  css_prefix: icons8
+                  css_rules_case: lowercase
+                  css_selector: '.icons8-{{glyph}}'
+                  font_name: Material Very Basic
             properties:
               auth:
                 properties:
@@ -912,7 +1059,42 @@ definitions:
       - features
     type: object
   IconV3Item:
-    $ref: '#/definitions/CompactIconV3Item'
+    allOf:
+      - $ref: '#/definitions/CompactIconV3Item'
+      - properties:
+          category:
+            type: string
+          common_icon_id:
+            type: number
+          created:
+            type: string
+          features:
+            type: object
+          id:
+            type: number
+          name:
+            type: string
+          platform_code:
+            type: string
+          share:
+            type: object
+          subcategory:
+            type: object
+          svg:
+            type: string
+          url:
+            type: string
+          vector:
+            type: object
+        required:
+          - id
+          - name
+          - platform_code
+          - created
+          - common_icon_id
+          - svg
+          - features
+        type: object
   Meta: {}
   Search: {}
   TaskError:

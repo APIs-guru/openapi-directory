@@ -19,11 +19,11 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/androidpublisher/v2/rest'
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: androidpublisher
 externalDocs:
@@ -725,6 +725,7 @@ paths:
     post:
       consumes:
         - application/octet-stream
+      description: 'Uploads a new Android App Bundle to this edit. If you are using the Google API client libraries, please increase the timeout of the http request before calling this endpoint (a timeout of 2 minutes is recommended). See: https://developers.google.com/api-client-library/java/google-api-java-client/errors for an example in java.'
       operationId: androidpublisher.edits.bundles.upload
       parameters:
         - description: Unique identifier for this edit.
@@ -2508,6 +2509,9 @@ definitions:
       defaultPrice:
         $ref: '#/definitions/Price'
         description: Default price cannot be zero. In-app products can never be free. Default price is always in the developer's Checkout merchant currency.
+      gracePeriod:
+        description: 'Grace period of the subscription, specified in ISO 8601 format. It will allow developers to give their subscribers a grace period when the payment for the new recurrence period is declined. Acceptable values = "P3D" (three days) and "P7D" (seven days)'
+        type: string
       listings:
         additionalProperties:
           $ref: '#/definitions/InAppProductListing'
@@ -2760,6 +2764,20 @@ definitions:
         format: int64
         type: string
     type: object
+  SubscriptionPriceChange:
+    description: Contains the price change information for a subscription that can be used to control the user journey for the price change in the app. This can be in the form of seeking confirmation from the user or tailoring the experience for a successful conversion.
+    properties:
+      newPrice:
+        $ref: '#/definitions/Price'
+        description: The new price the subscription will renew with if the price change is accepted by the user.
+      state:
+        description: |-
+          The current state of the price change. Possible values are:  
+          - Outstanding: State for a pending price change waiting for the user to agree. In this state, you can optionally seek confirmation from the user using the In-App API. 
+          - Accepted: State for an accepted price change that the subscription will renew with unless it's canceled. The price change takes effect on a future date when the subscription renews. Note that the change might not occur when the subscription is renewed next.
+        format: int32
+        type: integer
+    type: object
   SubscriptionPurchase:
     description: A SubscriptionPurchase resource indicates the status of a user's subscription purchase.
     properties:
@@ -2822,6 +2840,12 @@ definitions:
         description: 'Price of the subscription, not including tax. Price is expressed in micro-units, where 1,000,000 micro-units represents one unit of the currency. For example, if the subscription price is €1.99, price_amount_micros is 1990000.'
         format: int64
         type: string
+      priceChange:
+        $ref: '#/definitions/SubscriptionPriceChange'
+        description: |-
+          The latest price change information available. This is present only when there is an upcoming price change for the subscription yet to be applied.
+
+          Once the subscription renews with the new price or the subscription is canceled, no price change information will be returned.
       priceCurrencyCode:
         description: 'ISO 4217 currency code for the subscription price. For example, if the price is specified in British pounds sterling, price_currency_code is "GBP".'
         type: string
@@ -2889,7 +2913,7 @@ definitions:
   Track:
     properties:
       track:
-        description: 'Identifier for this track. One of "alpha", "beta", "production", "rollout" or "internal".'
+        description: Identifier for this track.
         type: string
       userFraction:
         format: double

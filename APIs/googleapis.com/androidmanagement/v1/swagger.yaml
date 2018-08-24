@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://androidmanagement.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -58,11 +58,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -83,12 +78,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -119,12 +108,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -164,12 +151,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -207,6 +192,17 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - collectionFormat: multi
+          description: Optional flags that control the device wiping behavior.
+          in: query
+          items:
+            enum:
+              - WIPE_DATA_FLAG_UNSPECIFIED
+              - PRESERVE_RESET_PROTECTION_DATA
+              - WIPE_EXTERNAL_STORAGE
+            type: string
+          name: wipeDataFlags
+          type: array
       responses:
         '200':
           description: Successful response
@@ -245,12 +241,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -288,12 +282,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -323,12 +315,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -390,12 +380,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -405,12 +393,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -472,12 +458,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -487,12 +471,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -619,7 +601,7 @@ definitions:
           type: string
         type: array
       disabled:
-        description: 'Whether the app should be disabled, but app data is preserved.'
+        description: 'Whether the app is disabled. When disabled, the app data is still preserved.'
         type: boolean
       installType:
         description: The type of installation to perform.
@@ -627,6 +609,7 @@ definitions:
           - INSTALL_TYPE_UNSPECIFIED
           - PREINSTALLED
           - FORCE_INSTALLED
+          - AVAILABLE
         type: string
       lockTaskAllowed:
         description: Whether the app is allowed to lock itself in full-screen mode.
@@ -769,6 +752,11 @@ definitions:
       nonComplianceDetailCondition:
         $ref: '#/definitions/NonComplianceDetailCondition'
         description: A condition which is satisfied if there exists any matching NonComplianceDetail for the device.
+      packageNamesToDisable:
+        description: 'If set, the rule includes a mitigating action to disable apps specified in the list, but app data is preserved.'
+        items:
+          type: string
+        type: array
     type: object
   Device:
     description: 'A device owned by an enterprise. Unless otherwise noted, all fields are read-only and can''t be modified by enterprises.devices.patch.'
@@ -828,7 +816,7 @@ definitions:
           $ref: '#/definitions/HardwareStatus'
         type: array
       lastPolicyComplianceReportTime:
-        description: The last time the device sent a policy compliance report.
+        description: Deprecated.
         format: google-datetime
         type: string
       lastPolicySyncTime:
@@ -838,6 +826,13 @@ definitions:
       lastStatusReportTime:
         description: The last time the device sent a status report.
         format: google-datetime
+        type: string
+      managementMode:
+        description: The type of management mode Android Device Policy takes on the device. This influences which policy settings are supported.
+        enum:
+          - MANAGEMENT_MODE_UNSPECIFIED
+          - DEVICE_OWNER
+          - PROFILE_OWNER
         type: string
       memoryEvents:
         description: Events related to memory and storage measurements in chronological order. This information is only available if memoryInfoEnabled is true in the device's policy.
@@ -985,6 +980,9 @@ definitions:
       name:
         description: 'The name of the enrollment token, which is generated by the server during creation, in the form enterprises/{enterpriseId}/enrollmentTokens/{enrollmentTokenId}.'
         type: string
+      oneTimeOnly:
+        description: 'Whether the enrollment token is for one time use only. If the flag is set to true, only one device can use it for registration.'
+        type: boolean
       policyName:
         description: 'The name of the policy initially applied to the enrolled device, in the form enterprises/{enterpriseId}/policies/{policyId}. If not specified, the policy_name for the device’s user is applied. If user_name is also not specified, enterprises/{enterpriseId}/policies/default is applied by default. When updating this field, you can specify only the policyId as long as the policyId doesn’t contain any slashes. The rest of the policy name will be inferred.'
         type: string
@@ -1453,7 +1451,7 @@ definitions:
     description: Configuration for an Android permission and its grant state.
     properties:
       permission:
-        description: 'The android permission, e.g. android.permission.READ_CALENDAR.'
+        description: 'The Android permission or group, e.g. android.permission.READ_CALENDAR or android.permission_group.CALENDAR.'
         type: string
       policy:
         description: The policy for granting the permission.
@@ -1670,6 +1668,11 @@ definitions:
       passwordRequirements:
         $ref: '#/definitions/PasswordRequirements'
         description: Password requirements.
+      permissionGrants:
+        description: Explicit permission or group grants or denials for all apps. These values override the default_permission_policy.
+        items:
+          $ref: '#/definitions/PermissionGrant'
+        type: array
       permittedInputMethods:
         $ref: '#/definitions/PackageNameList'
         description: 'If present, only the input methods provided by packages in this list are permitted. If this field is present, but the list is empty, then only system input methods are permitted.'
@@ -1743,7 +1746,7 @@ definitions:
         description: Whether transferring files over USB is disabled.
         type: boolean
       usbMassStorageEnabled:
-        description: Allows admins to toggle whether USB storge is enabled or disabled on user's devices.
+        description: Whether USB storage is enabled.
         type: boolean
       version:
         description: The version of the policy. This is a read-only field. The version is incremented each time the policy is updated.
@@ -1840,6 +1843,9 @@ definitions:
         type: string
       deviceKernelVersion:
         description: 'Kernel version, for example, 2.6.32.9-g103d848.'
+        type: string
+      primaryLanguageCode:
+        description: An IETF BCP 47 language code for the primary locale on the device.
         type: string
       securityPatchLevel:
         description: 'Security patch level, e.g. 2016-05-01.'

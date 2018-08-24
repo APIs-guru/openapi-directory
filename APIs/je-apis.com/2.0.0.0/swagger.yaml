@@ -15,7 +15,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: swagger
       url: 'https://public.je-apis.com/api-docs/'
       version: '1.2'
@@ -516,7 +516,7 @@ paths:
         - baskets
   '/baskets/{basketId}/paymentoptions':
     get:
-      description: 'Uri template /baskets/{basketId}/paymentoptions?applePay={applePay}&androidPay={androidPay}&platform={platform}&voucherCode={voucherCode}'
+      description: 'Uri template /baskets/{basketId}/paymentoptions?applePay={applePay}&androidPay={androidPay}&googlePay={googlePay}&platform={platform}&voucherCode={voucherCode}'
       parameters:
         - description: uk
           in: header
@@ -545,6 +545,12 @@ paths:
           maximum: 0
           minimum: 0
           name: androidPay
+          required: false
+          type: boolean
+        - in: query
+          maximum: 0
+          minimum: 0
+          name: googlePay
           required: false
           type: boolean
         - in: query
@@ -1603,44 +1609,6 @@ paths:
       summary: Gets all products from a given category
       tags:
         - menus
-  '/menus/{menuId}/products/{productId}':
-    get:
-      description: 'Uri template /menus/{menuId}/products/{productId}'
-      operationId: GetProduct
-      parameters:
-        - description: uk
-          in: header
-          name: Accept-Tenant
-          required: true
-          type: string
-        - in: header
-          name: Authorization
-          required: true
-          type: string
-        - format: int32
-          in: path
-          maximum: 0
-          minimum: 0
-          name: menuId
-          required: true
-          type: integer
-        - format: int32
-          in: path
-          maximum: 0
-          minimum: 0
-          name: productId
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: Operation successful
-          schema:
-            $ref: '#/definitions/JustEat.PublicApi.Site.ResponseData.ProductResult'
-            items:
-              $ref: '#/definitions/JustEat.PublicApi.Site.ResponseData.ProductResult'
-      summary: 'Gets product from a given menu (Deprecated, do not use)'
-      tags:
-        - menus
   /orders/:
     post:
       description: 'SuccessState values are: Unknown = 0, Successful, InvalidBasket, BasketNotOrderable, PotentialDuplicate, BasketDoesNotExist, BasketTooBig, InvalidContactDetails, GuestAccountCannotBeCreated, InvalidAuthToken'
@@ -1906,6 +1874,51 @@ paths:
       summary: Pay for an order using cash
       tags:
         - orders
+  '/orders/{orderId}/pay/google/':
+    post:
+      description: 'Uri template /orders/{orderId}/pay/google/'
+      operationId: MakePaymentUsingGooglePay
+      parameters:
+        - description: uk
+          in: header
+          name: Accept-Tenant
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          required: true
+          type: string
+        - in: path
+          name: orderId
+          required: true
+          type: string
+        - in: body
+          name: googlePayPaymentRequest
+          required: false
+          schema:
+            $ref: '#/definitions/JustEat.PublicApi.Site.Handlers.GooglePay.GooglePayPaymentRequest'
+            maximum: 0
+            minimum: 0
+        - in: header
+          name: Auth-Token
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Operation successful
+          schema:
+            $ref: '#/definitions/JustEat.PublicApi.Site.Handlers.GooglePay.GooglePayPaymentResponse'
+        '202':
+          description: Accepted
+        '400':
+          description: BadRequest
+        '401':
+          description: UnAuthorized
+        '500':
+          description: InternalServerError
+      summary: Pay using Google Pay
+      tags:
+        - orders
   '/orders/{orderId}/pay/savedcard':
     post:
       description: 'Uri template /orders/{orderId}/pay/savedcard'
@@ -1976,7 +1989,7 @@ paths:
         - orders
   '/orders/{orderId}/paymentoptions':
     get:
-      description: 'Uri template /orders/{orderId}/paymentoptions?applePay={applePay}&androidPay={androidPay}&platform={platform}&voucherCode={voucherCode}'
+      description: 'Uri template /orders/{orderId}/paymentoptions?applePay={applePay}&androidPay={androidPay}&googlePay={googlePay}&platform={platform}&voucherCode={voucherCode}'
       parameters:
         - description: uk
           in: header
@@ -2005,6 +2018,12 @@ paths:
           maximum: 0
           minimum: 0
           name: androidPay
+          required: false
+          type: boolean
+        - in: query
+          maximum: 0
+          minimum: 0
+          name: googlePay
           required: false
           type: boolean
         - in: query
@@ -4226,69 +4245,81 @@ definitions:
       Value:
         description: String
         type: string
-  JE.Api.Payments.Contracts.CheckingOut.AcceptanceRequirements.PaymentAcceptanceRequirement:
-    properties:
-      Amount:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-        description: Money
-        items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-      Problems:
-        description: 'IEnumerable[JE.Contracts.Problem]'
-        items:
-          $ref: '#/definitions/JE.Contracts.Problem'
-        type: array
-      Status:
-        description: RequirementStatuses
-        enum:
-          - Unknown
-          - Processed
-          - Pending
-          - Rejected
-        type: string
   JE.Api.Payments.Contracts.CheckingOut.Cash.CashPaymentResponse:
     properties:
+      AsyncNotification:
+        description: Boolean
+        type: boolean
+      Form:
+        $ref: '#/definitions/JE.Api.Payments.Contracts.CheckingOut.CheckoutForm'
+        description: CheckoutForm
+      LegacyOrderId:
+        description: Int32
+        format: int32
+        type: integer
+      OrderId:
+        description: String
+        type: string
       PaymentOption:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.PaymentOption'
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.PaymentOptions.PaymentOption'
         description: PaymentOption
+      Reason:
+        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode%601%5B%5BJE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes,%20JE.Api.Payments.Contracts,%20Version=6.16.0.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
+        description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes]'
       ResponseStatus:
         $ref: '#/definitions/ServiceStack.ServiceInterface.ServiceModel.ResponseStatus'
         description: ResponseStatus
       Result:
         $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode%601%5B%5BJE.Api.Payments.Contracts.CheckingOut.CheckoutResult,%20JE.Api.Payments.Contracts,%20Version=6.16.0.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
         description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult]'
-      TransactionLinesWritten:
-        description: Boolean
-        type: boolean
-      Voucher:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.VoucherDetail'
-        description: VoucherDetail
+      Status:
+        description: PaymentStatus
+        enum:
+          - NoErrorsYet
+          - ValidationInProgress
+          - Success
+          - Declined
+          - AmountMismatch
+          - ResponseNotValid
+          - ResponseIncomplete
+          - ResponseNotAuthenticated
+          - OrderIdMismatch
+          - OrderStatusInvalid
+          - FailureOrderUnrecognised
+          - FailureAuthorisationRequestInvalid
+          - VoucherUsageNotFoundForOrder
+          - FailureUnknown
+        type: string
+      Tenant:
+        description: String
+        type: string
   JE.Api.Payments.Contracts.CheckingOut.CheckoutAttemptResponse:
     properties:
+      AsyncNotification:
+        description: Boolean
+        type: boolean
+      Form:
+        $ref: '#/definitions/JE.Api.Payments.Contracts.CheckingOut.CheckoutForm'
+        description: CheckoutForm
+        items:
+          $ref: '#/definitions/JE.Api.Payments.Contracts.CheckingOut.CheckoutForm'
       LegacyOrderId:
         description: Int32
         format: int32
         type: integer
+      OrderId:
+        description: String
+        type: string
       PaymentOption:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.PaymentOption'
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.PaymentOptions.PaymentOption'
         description: PaymentOption
         items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.PaymentOption'
-      Pending:
-        description: 'IEnumerable[JE.Api.Payments.Contracts.CheckingOut.AcceptanceRequirements.PaymentAcceptanceRequirement]'
+          $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.PaymentOptions.PaymentOption'
+      Reason:
+        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode%601%5B%5BJE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes,%20JE.Api.Payments.Contracts,%20Version=6.16.0.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
+        description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes]'
         items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.CheckingOut.AcceptanceRequirements.PaymentAcceptanceRequirement'
-        type: array
-      Processed:
-        description: 'IEnumerable[JE.Api.Payments.Contracts.CheckingOut.AcceptanceRequirements.PaymentAcceptanceRequirement]'
-        items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.CheckingOut.AcceptanceRequirements.PaymentAcceptanceRequirement'
-        type: array
-      Rejected:
-        description: 'IEnumerable[JE.Api.Payments.Contracts.CheckingOut.AcceptanceRequirements.PaymentAcceptanceRequirement]'
-        items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.CheckingOut.AcceptanceRequirements.PaymentAcceptanceRequirement'
-        type: array
+          $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes, JE.Api.Payments.Contracts, Version=6.16.0.0, Culture=neutral, PublicKeyToken=null]]'
       ResponseStatus:
         $ref: '#/definitions/ServiceStack.ServiceInterface.ServiceModel.ResponseStatus'
         description: ResponseStatus
@@ -4299,119 +4330,46 @@ definitions:
         description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult]'
         items:
           $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult, JE.Api.Payments.Contracts, Version=6.16.0.0, Culture=neutral, PublicKeyToken=null]]'
-      TransactionLinesWritten:
-        description: Boolean
-        type: boolean
-      Voucher:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.VoucherDetail'
-        description: VoucherDetail
-        items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.VoucherDetail'
-  JE.Api.Payments.Contracts.Money:
-    properties:
-      Amount:
-        $ref: '#/definitions/System.Decimal'
-        description: Decimal
-        items:
-          $ref: '#/definitions/System.Decimal'
-      Currency:
-        description: String
-        type: string
-      Zero:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-        description: Money
-        items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-  JE.Api.Payments.Contracts.OfferingPaymentOptions.PaymentOption:
-    properties:
-      Available:
-        description: Boolean
-        type: boolean
-      BasketTotal:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-        description: Money
-        items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-      CanApplyVoucher:
-        description: Boolean
-        type: boolean
-      CanSave:
-        description: Boolean
-        type: boolean
-      CardExpiry:
-        description: DateTime
-        format: date-time
-        type: string
-      Id:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.PaymentOptionIdentifier'
-        description: PaymentOptionIdentifier
-      MaskedCardNumber:
-        description: String
-        type: string
-      OrderValue:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-        description: Money
-      Outstanding:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-        description: Money
-        items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-      PartialAccountCreditUsed:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-        description: Money
-        items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-      PaymentMethod:
-        description: String
-        type: string
-      PaymentServiceProvider:
-        description: String
-        type: string
-      ProcessingFee:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-        description: Money
-        items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-      Selected:
-        description: Boolean
-        type: boolean
-      VoucherDiscountUsed:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-        description: Money
-        items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-  JE.Api.Payments.Contracts.OfferingPaymentOptions.PaymentOptionIdentifier:
-    properties:
-      Id:
-        description: String
-        type: string
-      Type:
-        description: PaymentOptionTypes
+      Status:
+        description: PaymentStatus
         enum:
-          - AccountCredit
-          - Card
-          - Cash
-          - SavedCard
-          - ApplePay
-          - AndroidPay
+          - NoErrorsYet
+          - ValidationInProgress
+          - Success
+          - Declined
+          - AmountMismatch
+          - ResponseNotValid
+          - ResponseIncomplete
+          - ResponseNotAuthenticated
+          - OrderIdMismatch
+          - OrderStatusInvalid
+          - FailureOrderUnrecognised
+          - FailureAuthorisationRequestInvalid
+          - VoucherUsageNotFoundForOrder
+          - FailureUnknown
         type: string
-  JE.Api.Payments.Contracts.OfferingPaymentOptions.VoucherDetail:
-    properties:
-      DiscountYielded:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-        description: Money
-        items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.Money'
-      TypeOfDiscount:
-        description: DiscountType
-        enum:
-          - Amount
-          - Percentage
-        type: string
-      TypeOfDiscountName:
+      Tenant:
         description: String
         type: string
-      VoucherCode:
+  JE.Api.Payments.Contracts.CheckingOut.CheckoutForm:
+    properties:
+      Cookie:
+        description: String
+        type: string
+      Embedded:
+        description: Boolean
+        type: boolean
+      FieldNamesForClientToPopulate:
+        description: 'IEnumerable[System.String]'
+        items:
+          type: string
+        type: array
+      Fields:
+        description: 'IEnumerable[System.String]'
+        items:
+          type: string
+        type: array
+      Url:
         description: String
         type: string
   JE.Api.Payments.Contracts.StatusCode_x0060_1_x005B__x005B_JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes_x002C__x0020_JE.Api.Payments.Contracts_x002C__x0020_Version_x003D_6.16.0.0_x002C__x0020_Culture_x003D_neutral_x002C__x0020_PublicKeyToken_x003D_null_x005D__x005D_:
@@ -4448,6 +4406,7 @@ definitions:
       Status:
         description: CheckoutResult
         enum:
+          - Unknown
           - Processing
           - RegisteredAndAccepted
           - RegisteredButBalanceOutstanding
@@ -4735,25 +4694,6 @@ definitions:
         description: Int32
         format: int32
         type: integer
-  JE.Contracts.Problem:
-    properties:
-      AttemptedValue:
-        $ref: '#/definitions/System.Object'
-        description: Object
-      CustomState:
-        $ref: '#/definitions/System.Object'
-        description: Object
-        items:
-          $ref: '#/definitions/System.Object'
-      ErrorCode:
-        description: String
-        type: string
-      ErrorMessage:
-        description: String
-        type: string
-      PropertyName:
-        description: String
-        type: string
   JustEat.ConsumerHelpApi.Contracts.Customisation.GaTracking:
     properties:
       Action:
@@ -5428,6 +5368,106 @@ definitions:
       ZipCode:
         description: String
         type: string
+  JustEat.PaymentsApi.ContractsBase.Money:
+    properties:
+      Amount:
+        $ref: '#/definitions/System.Decimal'
+        description: Decimal
+        items:
+          $ref: '#/definitions/System.Decimal'
+      Currency:
+        description: String
+        type: string
+      Zero:
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+        description: Money
+        items:
+          $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+  JustEat.PaymentsApi.ContractsBase.PaymentOptions.PaymentOption:
+    properties:
+      Available:
+        description: Boolean
+        type: boolean
+      BasketTotal:
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+        description: Money
+        items:
+          $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+      CanApplyVoucher:
+        description: Boolean
+        type: boolean
+      CanSave:
+        description: Boolean
+        type: boolean
+      CardExpiry:
+        description: DateTime
+        format: date-time
+        type: string
+      DeferredFee:
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+        description: Money
+        items:
+          $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+      DeferredPayment:
+        description: Boolean
+        type: boolean
+      Id:
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.PaymentOptions.PaymentOptionIdentifier'
+        description: PaymentOptionIdentifier
+      MaskedCardNumber:
+        description: String
+        type: string
+      OrderValue:
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+        description: Money
+      Outstanding:
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+        description: Money
+        items:
+          $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+      PartialAccountCreditUsed:
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+        description: Money
+        items:
+          $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+      PaymentMethod:
+        description: String
+        type: string
+      PaymentServiceProvider:
+        description: String
+        type: string
+      ProcessingFee:
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+        description: Money
+        items:
+          $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+      Selected:
+        description: Boolean
+        type: boolean
+      VoucherDiscountUsed:
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+        description: Money
+        items:
+          $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.Money'
+  JustEat.PaymentsApi.ContractsBase.PaymentOptions.PaymentOptionIdentifier:
+    properties:
+      Id:
+        description: String
+        type: string
+      Type:
+        description: PaymentOptionTypes
+        enum:
+          - AccountCredit
+          - Card
+          - Cash
+          - SavedCard
+          - ApplePay
+          - AndroidPay
+          - PayPal
+          - Interac
+          - VCO
+          - GooglePay
+        type: string
   JustEat.PublicApi.DTOs.Models.ConsumerAddress:
     properties:
       City:
@@ -5803,16 +5843,34 @@ definitions:
       AndroidPayToken:
         description: String
         type: string
+      AsyncNotificationAllowed:
+        description: Boolean
+        type: boolean
       PaymentServiceProvider:
         description: String
         type: string
   JustEat.PublicApi.Site.Handlers.AndroidPay.AndroidPayPaymentResponse:
     properties:
+      AsyncNotification:
+        description: Boolean
+        type: boolean
+      Form:
+        $ref: '#/definitions/JE.Api.Payments.Contracts.CheckingOut.CheckoutForm'
+        description: CheckoutForm
+        items:
+          $ref: '#/definitions/JE.Api.Payments.Contracts.CheckingOut.CheckoutForm'
+      LegacyOrderId:
+        description: Int32
+        format: int32
+        type: integer
+      OrderId:
+        description: String
+        type: string
       PaymentOption:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.PaymentOption'
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.PaymentOptions.PaymentOption'
         description: PaymentOption
         items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.PaymentOption'
+          $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.PaymentOptions.PaymentOption'
       Reason:
         $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode%601%5B%5BJE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes,%20JE.Api.Payments.Contracts,%20Version=6.16.0.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
         description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes]'
@@ -5828,32 +5886,65 @@ definitions:
         description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult]'
         items:
           $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult, JE.Api.Payments.Contracts, Version=6.16.0.0, Culture=neutral, PublicKeyToken=null]]'
-      TransactionLinesWritten:
-        description: Boolean
-        type: boolean
-      Voucher:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.VoucherDetail'
-        description: VoucherDetail
-        items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.VoucherDetail'
+      Status:
+        description: PaymentStatus
+        enum:
+          - NoErrorsYet
+          - ValidationInProgress
+          - Success
+          - Declined
+          - AmountMismatch
+          - ResponseNotValid
+          - ResponseIncomplete
+          - ResponseNotAuthenticated
+          - OrderIdMismatch
+          - OrderStatusInvalid
+          - FailureOrderUnrecognised
+          - FailureAuthorisationRequestInvalid
+          - VoucherUsageNotFoundForOrder
+          - FailureUnknown
+        type: string
+      Tenant:
+        description: String
+        type: string
   JustEat.PublicApi.Site.Handlers.ApplePay.ApplePayPaymentRequest:
     properties:
       ApplePayToken:
         description: String
         type: string
+      AsyncNotificationAllowed:
+        description: Boolean
+        type: boolean
       PaymentServiceProvider:
         description: String
         type: string
   JustEat.PublicApi.Site.Handlers.ApplePay.ApplePayPaymentResponse:
     properties:
+      AsyncNotification:
+        description: Boolean
+        type: boolean
+      Form:
+        $ref: '#/definitions/JE.Api.Payments.Contracts.CheckingOut.CheckoutForm'
+        description: CheckoutForm
+        items:
+          $ref: '#/definitions/JE.Api.Payments.Contracts.CheckingOut.CheckoutForm'
+      LegacyOrderId:
+        description: Int32
+        format: int32
+        type: integer
+      OrderId:
+        description: String
+        type: string
       PaymentOption:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.PaymentOption'
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.PaymentOptions.PaymentOption'
         description: PaymentOption
         items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.PaymentOption'
+          $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.PaymentOptions.PaymentOption'
       Reason:
         $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode%601%5B%5BJE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes,%20JE.Api.Payments.Contracts,%20Version=6.16.0.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
         description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes]'
+        items:
+          $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes, JE.Api.Payments.Contracts, Version=6.16.0.0, Culture=neutral, PublicKeyToken=null]]'
       ResponseStatus:
         $ref: '#/definitions/ServiceStack.ServiceInterface.ServiceModel.ResponseStatus'
         description: ResponseStatus
@@ -5864,14 +5955,27 @@ definitions:
         description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult]'
         items:
           $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult, JE.Api.Payments.Contracts, Version=6.16.0.0, Culture=neutral, PublicKeyToken=null]]'
-      TransactionLinesWritten:
-        description: Boolean
-        type: boolean
-      Voucher:
-        $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.VoucherDetail'
-        description: VoucherDetail
-        items:
-          $ref: '#/definitions/JE.Api.Payments.Contracts.OfferingPaymentOptions.VoucherDetail'
+      Status:
+        description: PaymentStatus
+        enum:
+          - NoErrorsYet
+          - ValidationInProgress
+          - Success
+          - Declined
+          - AmountMismatch
+          - ResponseNotValid
+          - ResponseIncomplete
+          - ResponseNotAuthenticated
+          - OrderIdMismatch
+          - OrderStatusInvalid
+          - FailureOrderUnrecognised
+          - FailureAuthorisationRequestInvalid
+          - VoucherUsageNotFoundForOrder
+          - FailureUnknown
+        type: string
+      Tenant:
+        description: String
+        type: string
   JustEat.PublicApi.Site.Handlers.Basket.GetFulfilmentTimeSlotsResult:
     properties:
       DeliveryTimeInfo:
@@ -6355,6 +6459,75 @@ definitions:
     required:
       - ZipCode
   JustEat.PublicApi.Site.Handlers.DTOs.ZipCodeResponse: {}
+  JustEat.PublicApi.Site.Handlers.GooglePay.GooglePayPaymentRequest:
+    properties:
+      AsyncNotificationAllowed:
+        description: Boolean
+        type: boolean
+      GooglePayToken:
+        description: String
+        type: string
+      PaymentServiceProvider:
+        description: String
+        type: string
+  JustEat.PublicApi.Site.Handlers.GooglePay.GooglePayPaymentResponse:
+    properties:
+      AsyncNotification:
+        description: Boolean
+        type: boolean
+      Form:
+        $ref: '#/definitions/JE.Api.Payments.Contracts.CheckingOut.CheckoutForm'
+        description: CheckoutForm
+        items:
+          $ref: '#/definitions/JE.Api.Payments.Contracts.CheckingOut.CheckoutForm'
+      LegacyOrderId:
+        description: Int32
+        format: int32
+        type: integer
+      OrderId:
+        description: String
+        type: string
+      PaymentOption:
+        $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.PaymentOptions.PaymentOption'
+        description: PaymentOption
+        items:
+          $ref: '#/definitions/JustEat.PaymentsApi.ContractsBase.PaymentOptions.PaymentOption'
+      Reason:
+        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode%601%5B%5BJE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes,%20JE.Api.Payments.Contracts,%20Version=6.16.0.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
+        description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes]'
+        items:
+          $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.AuthorisationReasonTypes, JE.Api.Payments.Contracts, Version=6.16.0.0, Culture=neutral, PublicKeyToken=null]]'
+      ResponseStatus:
+        $ref: '#/definitions/ServiceStack.ServiceInterface.ServiceModel.ResponseStatus'
+        description: ResponseStatus
+        items:
+          $ref: '#/definitions/ServiceStack.ServiceInterface.ServiceModel.ResponseStatus'
+      Result:
+        $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode%601%5B%5BJE.Api.Payments.Contracts.CheckingOut.CheckoutResult,%20JE.Api.Payments.Contracts,%20Version=6.16.0.0,%20Culture=neutral,%20PublicKeyToken=null%5D%5D'
+        description: 'StatusCode`1[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult]'
+        items:
+          $ref: '#/definitions/JE.Api.Payments.Contracts.StatusCode`1[[JE.Api.Payments.Contracts.CheckingOut.CheckoutResult, JE.Api.Payments.Contracts, Version=6.16.0.0, Culture=neutral, PublicKeyToken=null]]'
+      Status:
+        description: PaymentStatus
+        enum:
+          - NoErrorsYet
+          - ValidationInProgress
+          - Success
+          - Declined
+          - AmountMismatch
+          - ResponseNotValid
+          - ResponseIncomplete
+          - ResponseNotAuthenticated
+          - OrderIdMismatch
+          - OrderStatusInvalid
+          - FailureOrderUnrecognised
+          - FailureAuthorisationRequestInvalid
+          - VoucherUsageNotFoundForOrder
+          - FailureUnknown
+        type: string
+      Tenant:
+        description: String
+        type: string
   JustEat.PublicApi.Site.Handlers.OrderCreatedResponse:
     properties:
       ConsumerAuthToken:
@@ -6466,6 +6639,9 @@ definitions:
   JustEat.PublicApi.Site.Handlers.Payments.SavedCardCheckoutPaymentRequest:
     properties:
       ApplyPartialAccountCredit:
+        description: Boolean
+        type: boolean
+      AsyncNotificationAllowed:
         description: Boolean
         type: boolean
       Cvv:

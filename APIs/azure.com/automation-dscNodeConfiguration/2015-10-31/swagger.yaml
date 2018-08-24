@@ -51,11 +51,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The filter to apply on the operation.
           in: query
           name: $filter
@@ -126,11 +127,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The Dsc node configuration name.
           in: path
           name: nodeConfigurationName
@@ -189,11 +191,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The Dsc node configuration name.
           in: path
           name: nodeConfigurationName
@@ -261,11 +264,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The create or update parameters for configuration.
           in: path
           name: nodeConfigurationName
@@ -316,8 +320,8 @@ paths:
             parameters:
               configuration:
                 name: configName
+              incrementNodeConfigurationBuild: true
               name: configName.nodeConfigName
-              newNodeConfigurationBuildVersionRequired: true
               source:
                 hash:
                   algorithm: sha256
@@ -371,33 +375,24 @@ definitions:
       version:
         description: Gets or sets the version of the content.
         type: string
+  DscConfigurationAssociationProperty:
+    description: The Dsc configuration property associated with the entity.
+    properties:
+      name:
+        description: Gets or sets the name of the Dsc configuration.
+        type: string
   DscNodeConfiguration:
     allOf:
       - allOf:
-          - description: The core properties of ARM resources
-            properties:
-              id:
-                description: Fully qualified resource Id for the resource
-                readOnly: true
-                type: string
-              name:
-                description: The name of the resource
-                readOnly: true
-                type: string
-              type:
-                description: The type of the resource.
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
-        description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
+          - $ref: '#/definitions/Resource'
+        description: ARM proxy resource.
+        properties: {}
+        type: object
     description: Definition of the dsc node configuration.
     properties:
       configuration:
-        description: The Dsc configuration property associated with the entity.
-        properties:
-          name:
-            description: Gets or sets the name of the Dsc configuration.
-            type: string
+        $ref: '#/definitions/DscConfigurationAssociationProperty'
+        description: Gets or sets the configuration of the node.
       creationTime:
         description: Gets or sets creation time.
         format: date-time
@@ -412,11 +407,8 @@ definitions:
     description: The parameters supplied to the create or update node configuration operation.
     properties:
       configuration:
-        description: The Dsc configuration property associated with the entity.
-        properties:
-          name:
-            description: Gets or sets the name of the Dsc configuration.
-            type: string
+        $ref: '#/definitions/DscConfigurationAssociationProperty'
+        description: Gets or sets the configuration of the node.
       incrementNodeConfigurationBuild:
         description: If a new build version of NodeConfiguration is required.
         type: boolean

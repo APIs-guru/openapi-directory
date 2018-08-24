@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/automation/resource-manager/Microsoft.Automation/stable/2015-10-31/job.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: automation-job
   x-tags:
@@ -52,11 +51,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The filter to apply on the operation.
           in: query
           name: $filter
@@ -76,111 +76,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: The response model for the list job operation.
-            properties:
-              nextLink:
-                description: Gets or sets the next link.
-                type: string
-              value:
-                description: Gets or sets a list of jobs.
-                items:
-                  description: Definition of the job.
-                  properties:
-                    id:
-                      description: Id of the resource.
-                      type: string
-                    properties:
-                      description: Definition of job properties.
-                      properties:
-                        creationTime:
-                          description: Gets or sets the creation time of the job.
-                          format: date-time
-                          type: string
-                          x-nullable: false
-                        endTime:
-                          description: Gets or sets the end time of the job.
-                          format: date-time
-                          type: string
-                          x-nullable: true
-                        exception:
-                          description: Gets or sets the exception of the job.
-                          type: string
-                        jobId:
-                          description: Gets or sets the id of the job.
-                          format: uuid
-                          type: string
-                          x-nullable: false
-                        lastModifiedTime:
-                          description: Gets or sets the last modified time of the job.
-                          format: date-time
-                          type: string
-                          x-nullable: true
-                        lastStatusModifiedTime:
-                          description: Gets or sets the last status modified time of the job.
-                          format: date-time
-                          type: string
-                          x-nullable: true
-                        parameters:
-                          additionalProperties:
-                            type: string
-                          description: Gets or sets the parameters of the job.
-                          type: object
-                        provisioningState:
-                          description: The provisioning state property.
-                          properties:
-                            provisioningState:
-                              description: The provisioning state of the resource.
-                              enum:
-                                - Failed
-                                - Succeeded
-                                - Suspended
-                                - Processing
-                              readOnly: true
-                              type: string
-                              x-ms-enum:
-                                modelAsString: true
-                                name: JobProvisioningState
-                        runOn:
-                          description: Gets or sets the runOn which specifies the group name where the job is to be executed.
-                          type: string
-                        runbook:
-                          description: The runbook property associated with the entity.
-                          properties:
-                            name:
-                              description: Gets or sets the name of the runbook.
-                              type: string
-                        startTime:
-                          description: Gets or sets the start time of the job.
-                          format: date-time
-                          type: string
-                          x-nullable: true
-                        startedBy:
-                          description: Gets or sets the job started by.
-                          type: string
-                        status:
-                          description: Gets or sets the status of the job.
-                          enum:
-                            - New
-                            - Activating
-                            - Running
-                            - Completed
-                            - Failed
-                            - Stopped
-                            - Blocked
-                            - Suspended
-                            - Disconnected
-                            - Suspending
-                            - Stopping
-                            - Resuming
-                            - Removing
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: JobStatus
-                        statusDetails:
-                          description: Gets or sets the status details of the job.
-                          type: string
-                type: array
+            $ref: '#/definitions/JobListResult'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -407,11 +303,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job id.
           format: uuid
           in: path
@@ -432,102 +329,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: Definition of the job.
-            properties:
-              id:
-                description: Id of the resource.
-                type: string
-              properties:
-                description: Definition of job properties.
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time of the job.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  endTime:
-                    description: Gets or sets the end time of the job.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  exception:
-                    description: Gets or sets the exception of the job.
-                    type: string
-                  jobId:
-                    description: Gets or sets the id of the job.
-                    format: uuid
-                    type: string
-                    x-nullable: false
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time of the job.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  lastStatusModifiedTime:
-                    description: Gets or sets the last status modified time of the job.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job.
-                    type: object
-                  provisioningState:
-                    description: The provisioning state property.
-                    properties:
-                      provisioningState:
-                        description: The provisioning state of the resource.
-                        enum:
-                          - Failed
-                          - Succeeded
-                          - Suspended
-                          - Processing
-                        readOnly: true
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: JobProvisioningState
-                  runOn:
-                    description: Gets or sets the runOn which specifies the group name where the job is to be executed.
-                    type: string
-                  runbook:
-                    description: The runbook property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the runbook.
-                        type: string
-                  startTime:
-                    description: Gets or sets the start time of the job.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  startedBy:
-                    description: Gets or sets the job started by.
-                    type: string
-                  status:
-                    description: Gets or sets the status of the job.
-                    enum:
-                      - New
-                      - Activating
-                      - Running
-                      - Completed
-                      - Failed
-                      - Stopped
-                      - Blocked
-                      - Suspended
-                      - Disconnected
-                      - Suspending
-                      - Stopping
-                      - Resuming
-                      - Removing
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: JobStatus
-                  statusDetails:
-                    description: Gets or sets the status details of the job.
-                    type: string
+            $ref: '#/definitions/Job'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -557,11 +359,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job id.
           format: uuid
           in: path
@@ -573,29 +376,7 @@ paths:
           name: parameters
           required: true
           schema:
-            description: The parameters supplied to the create job operation.
-            properties:
-              properties:
-                description: The parameters supplied to the create job operation.
-                properties:
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job.
-                    type: object
-                  runOn:
-                    description: Gets or sets the runOn which specifies the group name where the job is to be executed.
-                    type: string
-                  runbook:
-                    description: The runbook property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the runbook.
-                        type: string
-                required:
-                  - runbook
-            required:
-              - properties
+            $ref: '#/definitions/JobCreateParameters'
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -610,102 +391,7 @@ paths:
         '201':
           description: Created
           schema:
-            description: Definition of the job.
-            properties:
-              id:
-                description: Id of the resource.
-                type: string
-              properties:
-                description: Definition of job properties.
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time of the job.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  endTime:
-                    description: Gets or sets the end time of the job.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  exception:
-                    description: Gets or sets the exception of the job.
-                    type: string
-                  jobId:
-                    description: Gets or sets the id of the job.
-                    format: uuid
-                    type: string
-                    x-nullable: false
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time of the job.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  lastStatusModifiedTime:
-                    description: Gets or sets the last status modified time of the job.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job.
-                    type: object
-                  provisioningState:
-                    description: The provisioning state property.
-                    properties:
-                      provisioningState:
-                        description: The provisioning state of the resource.
-                        enum:
-                          - Failed
-                          - Succeeded
-                          - Suspended
-                          - Processing
-                        readOnly: true
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: JobProvisioningState
-                  runOn:
-                    description: Gets or sets the runOn which specifies the group name where the job is to be executed.
-                    type: string
-                  runbook:
-                    description: The runbook property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the runbook.
-                        type: string
-                  startTime:
-                    description: Gets or sets the start time of the job.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  startedBy:
-                    description: Gets or sets the job started by.
-                    type: string
-                  status:
-                    description: Gets or sets the status of the job.
-                    enum:
-                      - New
-                      - Activating
-                      - Running
-                      - Completed
-                      - Failed
-                      - Stopped
-                      - Blocked
-                      - Suspended
-                      - Disconnected
-                      - Suspending
-                      - Stopping
-                      - Resuming
-                      - Removing
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: JobStatus
-                  statusDetails:
-                    description: Gets or sets the status details of the job.
-                    type: string
+            $ref: '#/definitions/Job'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -727,17 +413,12 @@ paths:
             automationAccountName: ContoseAutomationAccount
             jobId: 45203a94-a8cb-47c3-8ce4-4dcc3a5f7d23
             parameters:
-              location: East US 2
-              name: TestRunbook
               properties:
                 parameters:
                   tag01: value01
                   tag02: value02
                 runbook:
                   name: TestRunbook
-              tags:
-                jobTags01: jobTagsValue01
-                jobTags02: value02
             resourceGroupName: rg
             subscriptionId: subid
           responses:
@@ -779,11 +460,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job id.
           in: path
           name: jobId
@@ -865,11 +547,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job id.
           format: uuid
           in: path
@@ -929,11 +612,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job id.
           in: path
           name: jobId
@@ -984,11 +668,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job id.
           format: uuid
           in: path
@@ -1048,11 +733,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job Id.
           in: path
           name: jobId
@@ -1077,57 +763,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: The response model for the list job stream operation.
-            properties:
-              nextLink:
-                description: Gets or sets the next link.
-                type: string
-              value:
-                description: A list of job streams.
-                items:
-                  description: Definition of the job stream.
-                  properties:
-                    id:
-                      description: Gets or sets the id of the resource.
-                      type: string
-                    properties:
-                      description: Definition of the job stream.
-                      properties:
-                        jobStreamId:
-                          description: Gets or sets the id of the job stream.
-                          type: string
-                        streamText:
-                          description: Gets or sets the stream text.
-                          type: string
-                        streamType:
-                          description: Gets or sets the stream type.
-                          enum:
-                            - Progress
-                            - Output
-                            - Warning
-                            - Error
-                            - Debug
-                            - Verbose
-                            - Any
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: JobStreamType
-                        summary:
-                          description: Gets or sets the summary.
-                          type: string
-                        time:
-                          description: Gets or sets the creation time of the job.
-                          format: date-time
-                          type: string
-                          x-nullable: false
-                        value:
-                          additionalProperties:
-                            type: object
-                          description: Gets or sets the values of the job stream.
-                          type: object
-                      x-ms-client-flatten: true
-                type: array
+            $ref: '#/definitions/JobStreamListResult'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1160,11 +796,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job id.
           in: path
           name: jobId
@@ -1189,48 +826,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: Definition of the job stream.
-            properties:
-              id:
-                description: Gets or sets the id of the resource.
-                type: string
-              properties:
-                description: Definition of the job stream.
-                properties:
-                  jobStreamId:
-                    description: Gets or sets the id of the job stream.
-                    type: string
-                  streamText:
-                    description: Gets or sets the stream text.
-                    type: string
-                  streamType:
-                    description: Gets or sets the stream type.
-                    enum:
-                      - Progress
-                      - Output
-                      - Warning
-                      - Error
-                      - Debug
-                      - Verbose
-                      - Any
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: JobStreamType
-                  summary:
-                    description: Gets or sets the summary.
-                    type: string
-                  time:
-                    description: Gets or sets the creation time of the job.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  value:
-                    additionalProperties:
-                      type: object
-                    description: Gets or sets the values of the job stream.
-                    type: object
-                x-ms-client-flatten: true
+            $ref: '#/definitions/JobStream'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1261,11 +857,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job id.
           format: uuid
           in: path
@@ -1309,4 +906,214 @@ paths:
             subscriptionId: subid
           responses:
             '200': {}
-definitions: {}
+definitions:
+  Job:
+    description: Definition of the job.
+    properties:
+      id:
+        description: Id of the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/JobProperties'
+        description: The properties of the job.
+        x-ms-client-flatten: true
+  JobCreateParameters:
+    description: The parameters supplied to the create job operation.
+    properties:
+      properties:
+        $ref: '#/definitions/JobCreateProperties'
+        description: Gets or sets the list of job properties.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  JobCreateProperties:
+    description: The parameters supplied to the create job operation.
+    properties:
+      parameters:
+        additionalProperties:
+          type: string
+        description: Gets or sets the parameters of the job.
+        type: object
+      runOn:
+        description: Gets or sets the runOn which specifies the group name where the job is to be executed.
+        type: string
+      runbook:
+        $ref: '#/definitions/RunbookAssociationProperty'
+        description: Gets or sets the runbook.
+    required:
+      - runbook
+  JobListResult:
+    description: The response model for the list job operation.
+    properties:
+      nextLink:
+        description: Gets or sets the next link.
+        type: string
+      value:
+        description: Gets or sets a list of jobs.
+        items:
+          $ref: '#/definitions/Job'
+        type: array
+  JobProperties:
+    description: Definition of job properties.
+    properties:
+      creationTime:
+        description: Gets or sets the creation time of the job.
+        format: date-time
+        type: string
+        x-nullable: false
+      endTime:
+        description: Gets or sets the end time of the job.
+        format: date-time
+        type: string
+        x-nullable: true
+      exception:
+        description: Gets or sets the exception of the job.
+        type: string
+      jobId:
+        description: Gets or sets the id of the job.
+        format: uuid
+        type: string
+        x-nullable: false
+      jobScheduleId:
+        description: Gets or sets the id of job schedule.
+        type: string
+      lastModifiedTime:
+        description: Gets or sets the last modified time of the job.
+        format: date-time
+        type: string
+        x-nullable: true
+      lastStatusModifiedTime:
+        description: Gets or sets the last status modified time of the job.
+        format: date-time
+        type: string
+        x-nullable: true
+      parameters:
+        additionalProperties:
+          type: string
+        description: Gets or sets the parameters of the job.
+        type: object
+      provisioningState:
+        $ref: '#/definitions/JobProvisioningStateProperty'
+        description: The provisioning state of a resource.
+      runOn:
+        description: Gets or sets the runOn which specifies the group name where the job is to be executed.
+        type: string
+      runbook:
+        $ref: '#/definitions/RunbookAssociationProperty'
+        description: Gets or sets the runbook.
+      schedule:
+        $ref: '#/definitions/ScheduleAssociationProperty'
+        description: Gets or sets the runbook.
+      startTime:
+        description: Gets or sets the start time of the job.
+        format: date-time
+        type: string
+        x-nullable: true
+      startedBy:
+        description: Gets or sets the job started by.
+        type: string
+      status:
+        description: Gets or sets the status of the job.
+        enum:
+          - New
+          - Activating
+          - Running
+          - Completed
+          - Failed
+          - Stopped
+          - Blocked
+          - Suspended
+          - Disconnected
+          - Suspending
+          - Stopping
+          - Resuming
+          - Removing
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: JobStatus
+      statusDetails:
+        description: Gets or sets the status details of the job.
+        type: string
+  JobProvisioningStateProperty:
+    description: The provisioning state of the resource.
+    enum:
+      - Failed
+      - Succeeded
+      - Suspended
+      - Processing
+    readOnly: true
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: JobProvisioningState
+  JobStream:
+    description: Definition of the job stream.
+    properties:
+      id:
+        description: Gets or sets the id of the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/JobStreamProperties'
+        description: Gets or sets the id of the job stream.
+        x-ms-client-flatten: true
+  JobStreamListResult:
+    description: The response model for the list job stream operation.
+    properties:
+      nextLink:
+        description: Gets or sets the next link.
+        type: string
+      value:
+        description: A list of job streams.
+        items:
+          $ref: '#/definitions/JobStream'
+        type: array
+  JobStreamProperties:
+    description: Definition of the job stream.
+    properties:
+      jobStreamId:
+        description: Gets or sets the id of the job stream.
+        type: string
+      streamText:
+        description: Gets or sets the stream text.
+        type: string
+      streamType:
+        description: Gets or sets the stream type.
+        enum:
+          - Progress
+          - Output
+          - Warning
+          - Error
+          - Debug
+          - Verbose
+          - Any
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: JobStreamType
+      summary:
+        description: Gets or sets the summary.
+        type: string
+      time:
+        description: Gets or sets the creation time of the job.
+        format: date-time
+        type: string
+        x-nullable: false
+      value:
+        additionalProperties:
+          type: object
+        description: Gets or sets the values of the job stream.
+        type: object
+    x-ms-client-flatten: true
+  RunbookAssociationProperty:
+    description: The runbook property associated with the entity.
+    properties:
+      name:
+        description: Gets or sets the name of the runbook.
+        type: string
+  ScheduleAssociationProperty:
+    description: The schedule property associated with the entity.
+    properties:
+      name:
+        description: Gets or sets the name of the Schedule.
+        type: string

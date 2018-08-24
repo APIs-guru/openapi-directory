@@ -39,13 +39,10 @@ paths:
     get:
       description: Get the current remaining credit balance for the account. Note - The credit balance is expressed as a value with a single decimal place.
       operationId: getCreditBalance
+      parameters: []
       responses:
         '200':
           description: OK
-          schema:
-            allOf:
-              - $ref: '#/definitions/responseMetadata'
-              - $ref: '#/definitions/creditBalanceResponse'
         '401':
           description: Unauthorized
           examples:
@@ -131,10 +128,6 @@ paths:
       responses:
         '200':
           description: OK
-          schema:
-            allOf:
-              - $ref: '#/definitions/responseMetadata'
-              - $ref: '#/definitions/creditTransferResponse'
         '400':
           description: Bad Request
           examples:
@@ -241,11 +234,6 @@ paths:
       responses:
         '200':
           description: OK
-          schema:
-            allOf:
-              - $ref: '#/definitions/responseMetadata'
-              - $ref: '#/definitions/responsePagination'
-              - $ref: '#/definitions/shortcodeMessageResponse'
         '401':
           description: Unauthorized
           examples:
@@ -328,11 +316,6 @@ paths:
       responses:
         '200':
           description: OK
-          schema:
-            allOf:
-              - $ref: '#/definitions/responseMetadata'
-              - $ref: '#/definitions/responsePagination'
-              - $ref: '#/definitions/incomingMessageResponse'
         '401':
           description: Unauthorized
           examples:
@@ -396,13 +379,10 @@ paths:
     get:
       description: 'Get a list of all opt-out SMS messages received by the account, as well as all manually added opt-out numbers.<br>'
       operationId: getIncomingOptoutMessages
+      parameters: []
       responses:
         '200':
           description: OK
-          schema:
-            allOf:
-              - $ref: '#/definitions/responseMetadata'
-              - $ref: '#/definitions/incomingOptoutMessageResponse'
         '401':
           description: Unauthorized
           examples:
@@ -466,10 +446,6 @@ paths:
       responses:
         '200':
           description: OK
-          schema:
-            allOf:
-              - $ref: '#/definitions/responseMetadata'
-              - $ref: '#/definitions/sendMessageResponse'
         '400':
           description: Bad Request
           examples:
@@ -569,13 +545,9 @@ paths:
           name: apiIds
           required: true
           schema:
-            example:
-              - 2316
-              - 2317
+            example: '[2316,2317]'
             items:
               type: integer
-            maxItems: 1000
-            minItems: 1
             type: array
       responses:
         '200':
@@ -714,11 +686,6 @@ paths:
       responses:
         '200':
           description: OK
-          schema:
-            allOf:
-              - $ref: '#/definitions/responseMetadata'
-              - $ref: '#/definitions/responsePagination'
-              - $ref: '#/definitions/scheduledMessageResponse'
         '401':
           description: Unauthorized
           examples:
@@ -788,13 +755,9 @@ paths:
           name: apiIds
           required: true
           schema:
-            example:
-              - 2316
-              - 2317
+            example: '[2316,2317]'
             items:
               type: integer
-            maxItems: 1000
-            minItems: 1
             type: array
       responses:
         '200':
@@ -888,13 +851,10 @@ paths:
     get:
       description: Get a list of all Sub Accounts.<br>
       operationId: getSubAccounts
+      parameters: []
       responses:
         '200':
           description: OK
-          schema:
-            allOf:
-              - $ref: '#/definitions/responseMetadata'
-              - $ref: '#/definitions/subAccountsListResponse'
         '401':
           description: Unauthorized
           examples:
@@ -976,8 +936,8 @@ definitions:
         example: 100
         type: integer
     required:
-      - sendingAccountNumber
       - receivingAccountNumber
+      - sendingAccountNumber
       - transferQuantity
     title: creditTransferRequest
     type: object
@@ -1042,10 +1002,10 @@ definitions:
         type: string
     required:
       - apiMessageId
-      - mobileNumber
-      - deleted
-      - deleteError
       - creditCost
+      - deleteError
+      - deleted
+      - mobileNumber
     title: deletedMessageStatus
     type: object
   errorDetails:
@@ -1068,10 +1028,10 @@ definitions:
         description: The current version of the API of the endpoint that was called
         type: string
     required:
+      - errorMessage
+      - statusCode
       - timeStamp
       - version
-      - statusCode
-      - errorMessage
     title: errorDetails
     type: object
   incomingMessage:
@@ -1098,10 +1058,10 @@ definitions:
         type: integer
     required:
       - incomingApiMessageId
-      - mobileNumber
-      - receiveTime
       - messageText
+      - mobileNumber
       - outgoingApiMessageId
+      - receiveTime
     title: incomingMessage
     type: object
   incomingMessageResponse:
@@ -1149,9 +1109,9 @@ definitions:
         type: integer
     required:
       - incomingApiMessageId
+      - messageText
       - mobileNumber
       - receiveTime
-      - messageText
     title: incomingOptoutMessage
     type: object
   incomingOptoutMessageResponse:
@@ -1225,14 +1185,14 @@ definitions:
         example: 201712251430
         type: integer
     required:
-      - clientMessageId
-      - mobileNumber
-      - accepted
       - acceptError
+      - accepted
       - apiMessageId
-      - scheduledTime
+      - clientMessageId
       - creditCost
+      - mobileNumber
       - newCreditBalance
+      - scheduledTime
     title: messageRecipientResponse
     type: object
   messageStatus:
@@ -1255,8 +1215,17 @@ definitions:
         example: true
         type: boolean
       statusErrorCode:
-        description: 'If the `statusDelivered` value is false, this will contain an error code indicating the reason for the SMS delivery failure. If the SMS message was successfully delivered, this value will be blank.'
-        example: BADDEST
+        description: |
+          If the SMS message was successfully delivered, this value will be blank.
+          If the `statusDelivered` value is false, this will contain a string indicating the current status of the SMS message. Possible values-
+          | Value | Description | Type |
+          |-------|-------------|------|
+          | SENT| The message has been sent to the recipient, but no delivery report has been received | Temporary |
+          | NOTFOUND | Either an incorrect MessageID was sent in the request, or the message was sent more than 90 days previously | Permanent |
+          | INQUEUE | Message is queued for sending | Temporary |
+          | SENDINGFAILED | The message was not transmitted, due to e.g. an invalid destination number or insufficient credits | Permanent |
+          | FAILED | The message was sent but could not be delivered to the recipient due to e.g. no such subscriber, subscriber's phone offline | Permanent |
+        example: FAILED
         type: string
       statusTime:
         description: 'The date and time of the last status update for this message, in the format YYYYMMDDHHmm. <br>If the message was delivered (**statusDelivered = true**) then this is a final status time. If the message is still awaiting delivery, this time might change when updates are received.'
@@ -1264,11 +1233,11 @@ definitions:
         type: integer
     required:
       - apiMessageId
+      - creditCost
       - mobileNumber
       - statusDelivered
       - statusErrorCode
       - statusTime
-      - creditCost
     title: messageStatus
     type: object
   messageStatusResponse:
@@ -1314,9 +1283,9 @@ definitions:
         description: The current version of the API of the endpoint that was called
         type: string
     required:
+      - statusCode
       - timeStamp
       - version
-      - statusCode
     title: responseMetadata
     type: object
   responsePagination:
@@ -1335,8 +1304,8 @@ definitions:
         description: The total number of results available for retrieval. The ```offset``` and ```limit``` properties specify which of the total available results have been returned.
         type: integer
     required:
-      - resultOffset
       - resultLimit
+      - resultOffset
       - resultTotalAvailable
     title: responsePagination
     type: object
@@ -1365,10 +1334,10 @@ definitions:
         type: integer
     required:
       - apiMessageId
-      - mobileNumber
-      - submitTime
-      - scheduledSendTime
       - creditCost
+      - mobileNumber
+      - scheduledSendTime
+      - submitTime
     title: scheduledMessage
     type: object
   scheduledMessageResponse:
@@ -1409,7 +1378,6 @@ definitions:
       scheduledTime: 201712251430
     properties:
       maxSegments:
-        default: 1
         description: 'Optional - <p>The maximum <a href="https://support.winsms.co.za/rest/GSM">GSM Encoded segment count</a> that the message is allowed to utilise.</p> <p>This defaults to 1, allowing for a maximum GSM Encoded message length of 160 characters.</p> <p>The maximum value is 6, which allows for a GSM Encoded message length of 918 characters.</p> <p>If you intend to send a message longer than 160 characters, this value should be specified.</p>'
         maximum: 6
         minimum: 1
@@ -1489,9 +1457,9 @@ definitions:
         type: integer
     required:
       - incomingApiMessageId
+      - messageText
       - mobileNumber
       - receiveTime
-      - messageText
     title: shortcodeMessage
     type: object
   shortcodeMessageResponse:
@@ -1541,8 +1509,8 @@ definitions:
         type: string
     required:
       - accountNumber
-      - loginName
       - firstName
+      - loginName
       - surname
     title: subAccount
     type: object

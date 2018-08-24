@@ -3242,6 +3242,7 @@ definitions:
         type: array
     type: object
   Tfl.Api.Presentation.Entities.CycleSuperhighway:
+    description: ''
     properties:
       geography:
         $ref: '#/definitions/System.Data.Spatial.DbGeography'
@@ -3259,9 +3260,28 @@ definitions:
         description: When the data was last updated
         format: date-time
         type: string
+      routeType:
+        description: 'Type of cycle route e.g CycleSuperhighways, Quietways, MiniHollands etc'
+        enum:
+          - Unknown
+          - All
+          - CycleSuperHighways
+          - Quietways
+          - MiniHollands
+          - CentralLondonGrid
+          - RoadsProject
+        type: string
       segmented:
         description: True if the route is split into segments
         type: boolean
+      status:
+        description: 'Cycle route status i.e Proposed, Existing etc'
+        enum:
+          - Unknown
+          - All
+          - Existing
+          - Proposed
+        type: string
     type: object
   Tfl.Api.Presentation.Entities.DisruptedPoint:
     properties:
@@ -3633,6 +3653,23 @@ definitions:
       id:
         type: string
       name:
+        type: string
+      routeType:
+        enum:
+          - Unknown
+          - All
+          - CycleSuperHighways
+          - Quietways
+          - MiniHollands
+          - CentralLondonGrid
+          - RoadsProject
+        type: string
+      status:
+        enum:
+          - Unknown
+          - All
+          - Existing
+          - Proposed
         type: string
       type:
         type: string

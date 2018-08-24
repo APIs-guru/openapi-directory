@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/civicinfo/v2/rest'
       version: v1
@@ -276,7 +276,7 @@ paths:
           schema:
             $ref: '#/definitions/VoterInfoRequest'
         - default: '0'
-          description: 'The unique ID of the election to look up. A list of election IDs can be obtained at https://www.googleapis.com/civicinfo/{version}/elections'
+          description: 'The unique ID of the election to look up. A list of election IDs can be obtained at https://www.googleapis.com/civicinfo/{version}/electionsIf no election ID is specified in the query and there is more than one election with data for the given voter, the additional elections are provided in the otherElections response field.'
           in: query
           name: electionId
           type: string
@@ -425,6 +425,9 @@ definitions:
       ballotPlacement:
         description: A number specifying the position of this contest on the voter's ballot.
         format: int64
+        type: string
+      ballotTitle:
+        description: 'The official title on the ballot for this contest, only where available.'
         type: string
       candidates:
         description: The candidate choices for this contest.
@@ -621,6 +624,11 @@ definitions:
         description: 'The geographic scope of this district. If unspecified the district''s geography is not known. One of: national, statewide, congressional, stateUpper, stateLower, countywide, judicial, schoolBoard, cityWide, township, countyCouncil, cityCouncil, ward, special'
         type: string
     type: object
+  FieldMetadataProto:
+    properties:
+      internal:
+        $ref: '#/definitions/InternalFieldMetadataProto'
+    type: object
   GeographicDivision:
     description: Describes a political geography.
     properties:
@@ -643,6 +651,74 @@ definitions:
           format: uint32
           type: integer
         type: array
+    type: object
+  InternalFieldMetadataProto:
+    properties:
+      isAuto:
+        type: boolean
+      sourceSummary:
+        $ref: '#/definitions/InternalSourceSummaryProto'
+    type: object
+  InternalSourceSummaryProto:
+    properties:
+      dataset:
+        type: string
+      provider:
+        type: string
+    type: object
+  LivegraphBacktraceRecordInfo:
+    properties:
+      dataSourcePublishMsec:
+        format: int64
+        type: string
+      expId:
+        type: string
+      expInfo:
+        $ref: '#/definitions/LivegraphBacktraceRecordInfoExpInfo'
+      isRecon:
+        type: boolean
+      isWlmThrottled:
+        type: boolean
+      numberOfTriples:
+        format: int64
+        type: string
+      priority:
+        type: string
+      process:
+        type: string
+      proxyReceiveMsec:
+        format: int64
+        type: string
+      proxySentMsec:
+        format: int64
+        type: string
+      recordId:
+        type: string
+      shouldMonitorLatency:
+        type: boolean
+      subscriberReceiveMsec:
+        format: int64
+        type: string
+      topicBuildFinishMsec:
+        format: int64
+        type: string
+      topicBuildStartMsec:
+        format: int64
+        type: string
+      version:
+        type: string
+    type: object
+  LivegraphBacktraceRecordInfoExpInfo:
+    properties:
+      deletedIns:
+        items:
+          type: string
+        type: array
+    type: object
+  MessageSet:
+    properties:
+      recordMessageSetExt:
+        $ref: '#/definitions/LivegraphBacktraceRecordInfo'
     type: object
   Office:
     description: Information about an Office held by one or more Officials.
@@ -713,6 +789,19 @@ definitions:
           type: string
         type: array
     type: object
+  PointProto:
+    properties:
+      latE7:
+        format: uint32
+        type: integer
+      lngE7:
+        format: uint32
+        type: integer
+      metadata:
+        $ref: '#/definitions/FieldMetadataProto'
+      temporaryData:
+        $ref: '#/definitions/MessageSet'
+    type: object
   PollingLocation:
     description: 'A location where a voter can vote. This may be an early vote site, an election day voting location, or a drop off location for a completed ballot.'
     properties:
@@ -760,21 +849,7 @@ definitions:
         type: string
       dependentLocalityName:
         type: string
-      dependentThoroughfareLeadingType:
-        type: string
       dependentThoroughfareName:
-        type: string
-      dependentThoroughfarePostDirection:
-        type: string
-      dependentThoroughfarePreDirection:
-        type: string
-      dependentThoroughfareTrailingType:
-        type: string
-      dependentThoroughfaresConnector:
-        type: string
-      dependentThoroughfaresIndicator:
-        type: string
-      dependentThoroughfaresType:
         type: string
       firmName:
         type: string
@@ -800,17 +875,36 @@ definitions:
         type: string
       subPremiseName:
         type: string
-      thoroughfareLeadingType:
-        type: string
       thoroughfareName:
         type: string
       thoroughfareNumber:
         type: string
-      thoroughfarePostDirection:
+    type: object
+  Provenance:
+    properties:
+      collidedSegmentSource:
+        $ref: '#/definitions/StreetSegmentList'
+      ctclContestUuid:
         type: string
-      thoroughfarePreDirection:
+      ctclOfficeUuid:
         type: string
-      thoroughfareTrailingType:
+      datasetId:
+        format: int64
+        type: string
+      precinctId:
+        format: int64
+        type: string
+      precinctSplitId:
+        format: int64
+        type: string
+      tsStreetSegmentId:
+        type: string
+      vip5PrecinctId:
+        type: string
+      vip5StreetSegmentId:
+        type: string
+      vipStreetSegmentId:
+        format: int64
         type: string
     type: object
   RepresentativeInfoData:
@@ -900,6 +994,128 @@ definitions:
         description: Whether this data comes from an official government source.
         type: boolean
     type: object
+  StreetSegment:
+    properties:
+      administrationRegionIds:
+        items:
+          type: string
+        type: array
+      beforeGeocodeId:
+        type: string
+      catalistUniquePrecinctCode:
+        type: string
+      city:
+        type: string
+      cityCouncilDistrict:
+        type: string
+      congressionalDistrict:
+        type: string
+      contestIds:
+        items:
+          type: string
+        type: array
+      countyCouncilDistrict:
+        type: string
+      countyFips:
+        type: string
+      datasetId:
+        format: int64
+        type: string
+      earlyVoteSiteByIds:
+        items:
+          type: string
+        type: array
+      endHouseNumber:
+        format: int64
+        type: string
+      geocodedPoint:
+        $ref: '#/definitions/PointProto'
+      geographicDivisionOcdIds:
+        items:
+          type: string
+        type: array
+      id:
+        type: string
+      judicialDistrict:
+        type: string
+      mailOnly:
+        type: boolean
+      municipalDistrict:
+        type: string
+      ncoaAddress:
+        type: string
+      oddOrEvens:
+        items:
+          type: string
+        type: array
+      originalId:
+        type: string
+      pollinglocationByIds:
+        items:
+          type: string
+        type: array
+      precinctName:
+        type: string
+      precinctOcdId:
+        type: string
+      provenances:
+        items:
+          $ref: '#/definitions/Provenance'
+        type: array
+      published:
+        type: boolean
+      schoolDistrict:
+        type: string
+      startHouseNumber:
+        format: int64
+        type: string
+      startLatE7:
+        format: int64
+        type: string
+      startLngE7:
+        format: int64
+        type: string
+      state:
+        type: string
+      stateHouseDistrict:
+        type: string
+      stateSenateDistrict:
+        type: string
+      streetName:
+        type: string
+      subAdministrativeAreaName:
+        type: string
+      surrogateId:
+        format: int64
+        type: string
+      targetsmartUniquePrecinctCode:
+        type: string
+      townshipDistrict:
+        type: string
+      unitNumber:
+        type: string
+      unitType:
+        type: string
+      vanPrecinctCode:
+        type: string
+      voterGeographicDivisionOcdIds:
+        items:
+          type: string
+        type: array
+      wardDistrict:
+        type: string
+      wildcard:
+        type: boolean
+      zip:
+        type: string
+    type: object
+  StreetSegmentList:
+    properties:
+      segments:
+        items:
+          $ref: '#/definitions/StreetSegment'
+        type: array
+    type: object
   VoterInfoRequest:
     description: A request for information about a voter.
     properties:
@@ -940,7 +1156,7 @@ definitions:
         $ref: '#/definitions/SimpleAddressType'
         description: The normalized version of the requested address
       otherElections:
-        description: 'If no election ID was specified in the query, and there was more than one election with data for the given voter, this will contain information about the other elections that could apply.'
+        description: 'When there are multiple elections for a voter address, the otherElections field is populated in the API response and there are two possibilities: 1. If the earliest election is not the intended election, specify the election ID of the desired election in a second API request using the electionId field. 2. If these elections occur on the same day, the API doesn?t return any polling location, contest, or election official information to ensure that an additional query is made. For user-facing applications, we recommend displaying these elections to the user to disambiguate. A second API request using the electionId field should be made for the election that is relevant to the user.'
         items:
           $ref: '#/definitions/Election'
         type: array
@@ -951,6 +1167,10 @@ definitions:
         type: array
       precinctId:
         type: string
+      segments:
+        items:
+          $ref: '#/definitions/StreetSegment'
+        type: array
       state:
         description: 'Local Election Information for the state that the voter votes in. For the US, there will only be one element in this array.'
         items:

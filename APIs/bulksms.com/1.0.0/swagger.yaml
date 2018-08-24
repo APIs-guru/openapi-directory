@@ -11,9 +11,73 @@ info:
 
     The base URL to use for this service is `https://api.bulksms.com/v1`.  The base URL cannot be used on its own; you must append a path that identifies an operation and you may have to specify some path parameters as well.
 
-    **The insecure base URL `http://api.bulksms.com/v1` is deprecated** and may in future result in a `301` redirect response, or insecure requests may be rejected outright. Please use the secure (`https`) URI above.
-
     [Click here](/) to go to the main BulkSMS developer site.
+
+    In order to give you an idea on how the API can be used, some JSON snippets are provided below.  Have a look at the [messages section](#tag/Message) for more information.
+
+    Probably the most simple example
+
+    ```
+    {
+        "to": "+27001234567",
+        "body": "Hello World!"
+    }
+    ```
+
+    Similar to above, but sent from a specific number
+
+    ```
+    {
+        "from": "+27007654321",
+        "to": "+27001234567",
+        "body": "Hello World!"
+    }
+    ```
+
+    Similar to above, but repliable
+
+    ```
+    {
+        "from": { "type": "REPLIABLE" },
+        "to": "+27001234567",
+        "body": "Hello World!"
+    }
+    ```
+
+    A message to a group called Everyone
+
+    ```
+    {
+        "to": { "type": "GROUP", "name": "Everyone" },
+        "body": "Hello World!"
+    }
+    ```
+
+    A message to multiple recipients
+
+    ```
+    {
+        "to": ["+27001234567", "+27002345678", "+27003456789"],
+        "body": "Happy Holidays!"
+    }
+    ```
+
+    Sending more than one message in the same request
+
+    ```
+    [
+        {
+            "to": "+27001234567",
+            "body": "Hello World!"
+        },
+        {
+            "to": "+27002345678",
+            "body": "Hello Universe!"
+        }
+    ]
+    ```
+
+    **The insecure base URL `http://api.bulksms.com/v1` is deprecated** and may in future result in a `301` redirect response, or insecure requests may be rejected outright. Please use the secure (`https`) URI above.
 
     ### HTTP Content Type
 
@@ -211,66 +275,42 @@ paths:
       description: |
         Send messages to one or more recipients.
 
-        Probably the most simple example
+        #### Body templates
 
-        ```json
+        When sending a message you can use template fields to customise the message text.
+
+        *Field based templates* allow you to create a message with place-holders for custom fields.  Fields are identified by a zero based index; the first field is `F0`, the second is `F1` and so on.  
+
+        For example, let's say you want to send a daily SMS message to all your clients that tell them what their current balance is.  The `body` of the message could look something like this 
+
+        ```
+        Good morning {F0######}, your balance is {F1######}
+        ```
+
+        In this message, the first field, `F0`, is the name  of the customer and he second field `F1` is the balance for that customer.  The `#` used to specify the maximum length  of the field.  Note that the maximum length allowed for the value includes the space taken by the braces, template name and hash symbol.  For example, the value `{F0#}` specifies a maximum length of `5`.  If the data is longer than this length, the data will be truncated when the message body is constructed.
+
+        The data fields are provided in the property named `fields` in the `to` element.  Here is a complete example of how this might look
+
+        ```
         {
-            "to": "+27001234567",
-            "body": "Hello World!"
+          "body": "Good morning {F0######}, your balance is {F1######}",
+          "to":  [
+              {"address": "27456789","fields": ["Harry", "$1345.23"] },
+              {"address": "27456785","fields": ["Sally", "$2345.58"] }
+          ]
         }
         ```
 
-        Similar to above, but sent from a specific number
+        If you are sending to contacts (or to groups) in your phonebook, you can use the *Phonebook based templates*.  These are similar to the templates described above, but they have specific names. The template for the contact's first name is identified by `fn` and the template for the contact's surname is identified by `sn`.  Below in an example that will work if the numbers are registered in your phonebook. 
 
-        ```json
-        {
-            "from": "+27007654321",
-            "to": "+27001234567",
-            "body": "Hello World!"
-        }
         ```
-
-        Similar to above, but repliable
-
-        ```json
         {
-            "from": { "type": "REPLIABLE" },
-            "to": "+27001234567",
-            "body": "Hello World!"
+          "body": "Hi {fn######} {sn######}, have a great day!",
+          "to":  [
+              {"address": "27456789" },
+              {"address": "27456785" }
+          ]
         }
-        ```
-
-        A message to a group called Everyone
-
-        ```json
-        {
-            "to": { "type": "GROUP", "name": "Everyone" },
-            "body": "Hello World!"
-        }
-        ```
-
-        A message, to multiple recipients, scheduled to be sent at a specific time
-
-        ```json
-        {
-            "to": ["+27001234567", "+27002345678", "+27003456789"],
-            "body": "Happy Holidays!"
-        }
-        ```
-
-        Sending more than one message in the same request
-
-        ```json
-        [
-            {
-                "to": "+27001234567",
-                "body": "Hello World!"
-            },
-            {
-                "to": "+27002345678",
-                "body": "Hello Universe!"
-            }
-        ]
         ```
       parameters:
         - description: |
@@ -337,6 +377,50 @@ paths:
       tags:
         - Message
       x-code-samples:
+        - lang: PHP
+          source: |
+            // Your PHP installation needs cUrl support, which not all PHP installations
+            // include by default.
+
+            $username = 'your_username';
+            $password = 'your_password';
+            $messages = array(
+                array('to'=>'+1233454567', 'body'=>'Hello World!'),
+                array('to'=>'+1233454568', 'body'=>'Hello World!')
+            );
+
+            $result = send_message( json_encode($messages), 'https://api.bulksms.com/v1/messages', $username, $password );
+
+            if ($result['http_status'] != 201) {
+                print "Error sending.  HTTP status " . $result['http_status'];
+                print " Response was " .$result['server_response'];
+            } else {
+                print "Response " . $result['server_response'];
+                // Use json_decode($result['server_response']) to work with the response further
+            }
+
+            function send_message ( $post_body, $url, $username, $password) {
+              $ch = curl_init( );
+              $headers = array(
+                  'Content-Type:application/json',
+                  'Authorization:Basic '. base64_encode("$username:$password")
+              );
+              curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+              curl_setopt ( $ch, CURLOPT_URL, $url );
+              curl_setopt ( $ch, CURLOPT_POST, 1 );
+              curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+              curl_setopt ( $ch, CURLOPT_POSTFIELDS, $post_body );
+              // Allow cUrl functions 20 seconds to execute
+              curl_setopt ( $ch, CURLOPT_TIMEOUT, 20 );
+              // Wait 10 seconds while trying to connect
+              curl_setopt ( $ch, CURLOPT_CONNECTTIMEOUT, 10 );
+              $output = array();
+              $output['server_response'] = curl_exec( $ch );
+              $curl_info = curl_getinfo( $ch );
+              $output['http_status'] = $curl_info[ 'http_code' ];
+              curl_close( $ch );
+              return $output;
+            }         
         - lang: 'C#'
           source: |
             using System;
@@ -776,7 +860,9 @@ definitions:
         description: The status of the message
         properties:
           id:
-            description: A unique identifier for the status
+            description: |
+              A concatenated value A.B where A is the `status.type` and B is the `status.subtype`.  
+              It there is no value for `subtype` then B takes string value `"null"` (e.g. `"SENT.null"`).   
             type: string
           subtype:
             description: |
@@ -800,7 +886,7 @@ definitions:
 
               ACCEPTED  Message accepted for delivery. Only returned for initial message submissions.
 
-              SCHEDULED  Message accepted for delivery as a later date. Only returned for initial message  submissions.
+              SCHEDULED  Message accepted for delivery at a later date. Only returned for initial message  submissions.
 
               SENT  Message has been relayed away from our systems.
 
@@ -940,15 +1026,9 @@ definitions:
     properties:
       body:
         description: |
-          The message content as described in the `encoding`.
+          The message content as described in the `encoding`. If the `encoding` is BINARY, the body must contain only hexadecimal digits where one byte is represented as two digits. For example, if you want to send two bytes '0x05' and '0x1F', the message body must contain the text '051F'.
 
-          If the `from` field contains groups, you can use a simple template system to use the contact's first name or surname in the message body.
-          The template names currently available are `fn` and `sn` for first name and surname respectively. Surround the template name with curly braces to use it.
-
-          Since names can be of variable length, the template system allows you to pad the template with the `#` symbol to limit the amount of text the replacement value can consume within the content. Note that the maximum length allowed for the value includes the space taken by the braces, template name and hash symbol.
-
-          For example, the text `Hello {fn###} {sn#####}` takes 7 characters from the first name and 9 characters from the surname of the contact.
-          If the `encoding` is BINARY, the body must contain only hexadecimal digits where one byte is represented as two digits. For example, if you want to send two bytes '0x05' and '0x1F', the message body must contain the text '051F'.
+          The message content can also contain templates, read the [body templates section](#tag/Message) for more information.
         example: Hi there!
         type: string
       deliveryReports:
@@ -1092,11 +1172,22 @@ definitions:
         items:
           example:
             address: '1111111'
+            fields:
+              - Jack
+              - $200.00
             type: INTERNATIONAL
           properties:
             address:
               description: The phone number of the recipient.  It must be supplied if the `type` is INTERNATIONAL
               type: string
+            fields:
+              description: |
+                Custom fields that can be used in the message body. A value can be given if the `type` is INTERNATIONAL
+
+                Read the [body templates section](#tag/Message) for more information.
+              items:
+                type: string
+              type: array
             id:
               description: The id of a group in your phonebook.  A value can be given if the `type` is GROUP.
               type: string
@@ -1170,13 +1261,6 @@ definitions:
           It is `null` by default.
         example: tech_team@example.com
         type: string
-      lastUpdated:
-        description: |
-          Indicates when the webhook information has been created or updated.
-
-          It is the number of milliseconds that have elapsed since January 1, 1970.
-        example: 1518095132000
-        type: number
       name:
         description: |
           A text identifier for the webhook.
@@ -1194,7 +1278,9 @@ definitions:
         type: boolean
       triggerScope:
         description: |
-          Specifies when the webhook will be triggered.
+          Specifies when the webhook will be triggered.  
+
+          Please note the values are case sensitive.
 
           If the value is `SENT`, the webhook will be called when a status update becomes available for a message you sent (i.e. a mobile terminating (MT) message).
           If the value is `RECEIVED`, the webhook will be called when a message is received (i.e. a mobile originating (MO) message).

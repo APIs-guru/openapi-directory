@@ -157,7 +157,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: apiBlueprint
       url: 'https://shipstation.docs.apiary.io/api-description-document'
       version: 1A
@@ -215,6 +215,20 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              addr1: 542 Midichlorian Rd.
+              addr2: ''
+              city: Austin
+              companyName: Droid Repair LLC
+              countryCode: US
+              email: jsmithtest@gmail.com
+              firstName: John
+              lastName: Smith
+              password: testpw1234
+              phone: '5124111234'
+              shippingOriginCountryCode: US
+              state: TX
+              zip: '78703'
             properties:
               addr1:
                 type: string
@@ -346,6 +360,7 @@ paths:
           name: carrierCode
           required: true
           type: string
+          x-example: stamps_com
       produces:
         - application/json
       responses:
@@ -593,6 +608,7 @@ paths:
           name: customerId
           required: true
           type: number
+          x-example: '12345678'
       produces:
         - application/json
       responses:
@@ -684,6 +700,7 @@ paths:
           name: sortDir
           required: true
           type: string
+          x-example: ASC
         - default: 1
           description: Page number.
           in: path
@@ -906,21 +923,25 @@ paths:
           name: createDateStart
           required: true
           type: string
+          x-example: '2015-01-01 00:00:00'
         - description: Returns fulfillments created on or before the specified ``createDate``
           in: path
           name: createDateEnd
           required: true
           type: string
+          x-example: '2015-01-08 00:00:00'
         - description: Returns fulfillments with the ``shipDate`` on or after the specified date
           in: path
           name: shipDateStart
           required: true
           type: string
+          x-example: '2015-01-01'
         - description: Returns fulfillments with the ``shipDate`` on or before the specified date
           in: path
           name: shipDateEnd
           required: true
           type: string
+          x-example: '2015-01-08'
         - description: 'Sort the responses by a set value.  The response will be sorted based off the ascending dates (oldest to most current.)  If left empty, the response will be sorted by ascending ``createDate``.'
           enum:
             - ShipDate
@@ -929,6 +950,7 @@ paths:
           name: sortBy
           required: true
           type: string
+          x-example: ShipDate
         - description: Sets the direction of the sort order.
           enum:
             - ASC
@@ -937,6 +959,7 @@ paths:
           name: sortDir
           required: true
           type: string
+          x-example: ASC
         - default: 1
           description: page number.
           in: path
@@ -1239,6 +1262,9 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              orderId: 123456
+              tagId: 1234
             properties:
               orderId:
                 type: number
@@ -1271,6 +1297,11 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              orderIds:
+                - 123456789
+                - 12345679
+              userId: 123456AB-ab12-3c4d-5e67-89f1abc1defa
             properties:
               orderIds:
                 items:
@@ -1314,6 +1345,16 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              carrierCode: fedex
+              orderId: 93348442
+              packageCode: package
+              serviceCode: fedex_2day
+              shipDate: '2014-04-03'
+              testLabel: false
+              weight:
+                units: pounds
+                value: 2
             properties:
               advancedOptions:
                 type: 'null'
@@ -1403,6 +1444,99 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              advancedOptions:
+                containsAlcohol: false
+                customField1: 'Custom data that you can add to an order. See Custom Field #2 & #3 for more info!'
+                customField2: 'Per UI settings, this information can appear on some carrier''s shipping labels. See link below'
+                customField3: 'https://help.shipstation.com/hc/en-us/articles/206639957'
+                mergedIds: []
+                mergedOrSplit: false
+                nonMachinable: false
+                saturdayDelivery: false
+                source: Webstore
+                storeId: 12345
+                warehouseId: 98765
+              amountPaid: 218.73
+              billTo:
+                name: The President
+              carrierCode: fedex
+              confirmation: delivery
+              customerEmail: headhoncho@whitehouse.gov
+              customerId: 37701499
+              customerNotes: Thanks for ordering!
+              customerUsername: headhoncho@whitehouse.gov
+              dimensions:
+                height: 6
+                length: 7
+                units: inches
+                width: 5
+              gift: true
+              giftMessage: Thank you!
+              insuranceOptions:
+                insureShipment: true
+                insuredValue: 200
+                provider: carrier
+              internalNotes: Customer called and would like to upgrade shipping
+              internationalOptions: {}
+              items:
+                - adjustment: false
+                  lineItemKey: vd08-MSLbtx
+                  name: 'Test item #1'
+                  options:
+                    - name: Size
+                      value: Large
+                  productId: 123456
+                  quantity: 2
+                  shippingAmount: 5
+                  sku: ABC123
+                  taxAmount: 2.5
+                  unitPrice: 99.99
+                  upc: 32-65-98
+                  warehouseLocation: 'Aisle 1, Bin 7'
+                  weight:
+                    units: ounces
+                    value: 24
+                - adjustment: true
+                  fulfillmentSku: SKU-Discount
+                  name: 10% OFF
+                  options: []
+                  productId: 123456
+                  quantity: 1
+                  sku: DISCOUNT CODE
+                  unitPrice: -20.55
+                  weight:
+                    units: ounces
+                    value: 0
+              orderDate: '2015-06-29T08:46:27.0000000'
+              orderKey: 0f6bec18-3e89-4881-83aa-f392d84f4c74
+              orderNumber: TEST-ORDER-API-DOCS
+              orderStatus: awaiting_shipment
+              packageCode: package
+              paymentDate: '2015-06-29T08:46:27.0000000'
+              paymentMethod: Credit Card
+              requestedShippingService: Priority Mail
+              serviceCode: fedex_2day
+              shipByDate: '2015-07-05T00:00:00.0000000'
+              shipDate: '2015-07-02'
+              shipTo:
+                city: Washington
+                company: US Govt
+                country: US
+                name: The President
+                phone: 555-555-5555
+                postalCode: '20500'
+                residential: true
+                state: DC
+                street1: 1600 Pennsylvania Ave
+                street2: Oval Office
+              shippingAmount: 10
+              tagIds:
+                - 53974
+              taxAmount: 5
+              weight:
+                units: ounces
+                value: 25
             properties:
               advancedOptions:
                 properties:
@@ -1773,6 +1907,99 @@ paths:
           name: body
           schema:
             items:
+              example:
+                - advancedOptions:
+                    containsAlcohol: false
+                    customField1: 'Custom data that you can add to an order. See Custom Field #2 & #3 for more info!'
+                    customField2: 'Per UI settings, this information can appear on some carrier''s shipping labels. See link below'
+                    customField3: 'https://help.shipstation.com/hc/en-us/articles/206639957'
+                    mergedIds: []
+                    mergedOrSplit: false
+                    nonMachinable: false
+                    saturdayDelivery: false
+                    source: Webstore
+                    storeId: 12345
+                    warehouseId: 98765
+                  amountPaid: 218.73
+                  billTo:
+                    name: The President
+                  carrierCode: fedex
+                  confirmation: delivery
+                  customerEmail: headhoncho@whitehouse.gov
+                  customerId: 37701499
+                  customerNotes: Thanks for ordering!
+                  customerUsername: headhoncho@whitehouse.gov
+                  dimensions:
+                    height: 6
+                    length: 7
+                    units: inches
+                    width: 5
+                  gift: true
+                  giftMessage: Thank you!
+                  insuranceOptions:
+                    insureShipment: true
+                    insuredValue: 200
+                    provider: carrier
+                  internalNotes: Customer called and would like to upgrade shipping
+                  internationalOptions: {}
+                  items:
+                    - adjustment: false
+                      lineItemKey: vd08-MSLbtx
+                      name: 'Test item #1'
+                      options:
+                        - name: Size
+                          value: Large
+                      productId: 123456
+                      quantity: 2
+                      shippingAmount: 5
+                      sku: ABC123
+                      taxAmount: 2.5
+                      unitPrice: 99.99
+                      upc: 32-65-98
+                      warehouseLocation: 'Aisle 1, Bin 7'
+                      weight:
+                        units: ounces
+                        value: 24
+                    - adjustment: true
+                      fulfillmentSku: SKU-Discount
+                      name: 10% OFF
+                      options: []
+                      productId: 123456
+                      quantity: 1
+                      sku: DISCOUNT CODE
+                      unitPrice: -20.55
+                      weight:
+                        units: ounces
+                        value: 0
+                  orderDate: '2015-06-29T08:46:27.0000000'
+                  orderKey: 0f6bec18-3e89-4881-83aa-f392d84f4c74
+                  orderNumber: TEST-ORDER-API-DOCS
+                  orderStatus: awaiting_shipment
+                  packageCode: package
+                  paymentDate: '2015-06-29T08:46:27.0000000'
+                  paymentMethod: Credit Card
+                  requestedShippingService: Priority Mail
+                  serviceCode: fedex_2day
+                  shipByDate: '2015-07-05T00:00:00.0000000'
+                  shipDate: '2015-07-02'
+                  shipTo:
+                    city: Washington
+                    company: US Govt
+                    country: US
+                    name: The President
+                    phone: 555-555-5555
+                    postalCode: '20500'
+                    residential: true
+                    state: DC
+                    street1: 1600 Pennsylvania Ave
+                    street2: Oval Office
+                  shippingAmount: 10
+                  tagIds:
+                    - 53974
+                  taxAmount: 5
+                  weight:
+                    units: ounces
+                    value: 25
               properties:
                 advancedOptions:
                   properties:
@@ -2053,6 +2280,9 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              holdUntilDate: '2014-12-01'
+              orderId: 1072467
             properties:
               holdUntilDate:
                 type: string
@@ -2251,6 +2481,13 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              carrierCode: usps
+              notifyCustomer: true
+              notifySalesChannel: true
+              orderId: 93348442
+              shipDate: '2014-04-01'
+              trackingNumber: '913492493294329421'
             properties:
               carrierCode:
                 type: string
@@ -2291,6 +2528,9 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              orderId: 123456
+              tagId: 1234
             properties:
               orderId:
                 type: number
@@ -2324,6 +2564,8 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              orderId: 1234567
             properties:
               orderId:
                 type: number
@@ -2353,6 +2595,10 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              orderIds:
+                - 123456789
+                - 12345679
             properties:
               orderIds:
                 items:
@@ -2381,6 +2627,7 @@ paths:
           name: orderId
           required: true
           type: string
+          x-example: '123456789'
       responses:
         '200':
           description: OK
@@ -2397,6 +2644,7 @@ paths:
           name: orderId
           required: true
           type: string
+          x-example: '123456789'
       produces:
         - application/json
       responses:
@@ -2537,46 +2785,55 @@ paths:
           name: customerName
           required: true
           type: string
+          x-example: Smith
         - description: 'Returns orders that contain items that match the specified keyword. Fields searched are Sku, Description, and Options'
           in: path
           name: itemKeyword
           required: true
           type: string
+          x-example: ABC123
         - description: Returns orders that were created in ShipStation after the specified date
           in: path
           name: createDateStart
           required: true
           type: string
+          x-example: '2015-01-01 00:00:00'
         - description: Returns orders that were created in ShipStation before the specified date
           in: path
           name: createDateEnd
           required: true
           type: string
+          x-example: '2015-01-08 00:00:00'
         - description: Returns orders that were modified after the specified date
           in: path
           name: modifyDateStart
           required: true
           type: string
+          x-example: '2015-01-01 00:00:00'
         - description: Returns orders that were modified before the specified date
           in: path
           name: modifyDateEnd
           required: true
           type: string
+          x-example: '2015-01-08 00:00:00'
         - description: Returns orders greater than the specified date
           in: path
           name: orderDateStart
           required: true
           type: string
+          x-example: '2015-01-01 00:00:00'
         - description: Returns orders less than or equal to the specified date
           in: path
           name: orderDateEnd
           required: true
           type: string
+          x-example: '2015-01-08 00:00:00'
         - description: 'Filter by order number, performs a "starts with" search.'
           in: path
           name: orderNumber
           required: true
           type: string
+          x-example: '12345'
         - description: 'Filter by order status.  If left empty, orders of all statuses are returned.'
           enum:
             - awaiting_payment
@@ -2589,21 +2846,25 @@ paths:
           name: orderStatus
           required: true
           type: string
+          x-example: awaiting_shipment
         - description: Returns orders that were paid after the specified date
           in: path
           name: paymentDateStart
           required: true
           type: string
+          x-example: '2015-01-01'
         - description: Returns orders that were paid before the specified date
           in: path
           name: paymentDateEnd
           required: true
           type: string
+          x-example: '2015-01-08'
         - description: Filters orders to a single store. Call List Stores to obtain a list of store Ids.
           in: path
           name: storeId
           required: true
           type: number
+          x-example: '123456'
         - description: 'Sort the responses by a set value.  The response will be sorted based off the ascending dates (oldest to most current.)  If left empty, the response will be sorted by ascending ``orderId``.'
           enum:
             - OrderDate
@@ -2613,6 +2874,7 @@ paths:
           name: sortBy
           required: true
           type: string
+          x-example: OrderDate
         - description: Sets the direction of the sort order.
           enum:
             - ASC
@@ -2621,6 +2883,7 @@ paths:
           name: sortDir
           required: true
           type: string
+          x-example: ASC
         - default: '1'
           description: Page number
           in: path
@@ -2933,6 +3196,7 @@ paths:
           name: productId
           required: true
           type: number
+          x-example: '12345678'
       responses:
         '200':
           description: OK
@@ -2949,9 +3213,16 @@ paths:
           name: productId
           required: true
           type: number
+          x-example: '12345678'
         - in: body
           name: body
           schema:
+            example:
+              active: true
+              name: Beautiful
+              price: 0
+              productId: 123456789
+              sku: ''
             properties:
               active:
                 type: boolean
@@ -3101,6 +3372,7 @@ paths:
           name: sortDir
           required: true
           type: string
+          x-example: ASC
         - default: '1'
           description: Page number.
           in: path
@@ -3215,6 +3487,7 @@ paths:
                   isReturnLabel: false
                   marketplaceNotified: true
                   orderId: 43945660
+                  orderKey: 8061c220f0794a9b92460b8bae6837e4
                   orderNumber: 100038-1
                   packageCode: package
                   serviceCode: usps_first_class_mail
@@ -3316,6 +3589,41 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              carrierCode: fedex
+              confirmation: delivery
+              dimensions:
+                height: 6
+                length: 7
+                units: inches
+                width: 5
+              packageCode: package
+              serviceCode: fedex_ground
+              shipDate: '2014-04-03'
+              shipFrom:
+                city: Austin
+                company: ShipStation
+                country: US
+                name: Jason Hodges
+                postalCode: '78703'
+                residential: false
+                state: TX
+                street1: 2815 Exposition Blvd
+                street2: Ste 2353242
+              shipTo:
+                city: Washington
+                company: US Govt
+                country: US
+                name: The President
+                postalCode: '20500'
+                residential: false
+                state: DC
+                street1: 1600 Pennsylvania Ave
+                street2: Oval Office
+              testLabel: false
+              weight:
+                units: ounces
+                value: 3
             properties:
               advancedOptions:
                 type: 'null'
@@ -3452,6 +3760,23 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              carrierCode: fedex
+              confirmation: delivery
+              dimensions:
+                height: 6
+                length: 7
+                units: inches
+                width: 5
+              fromPostalCode: '78703'
+              residential: false
+              toCity: Washington
+              toCountry: US
+              toPostalCode: '20500'
+              toState: DC
+              weight:
+                units: ounces
+                value: 3
             properties:
               carrierCode:
                 type: string
@@ -3543,6 +3868,8 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              shipmentId: 12345
             properties:
               shipmentId:
                 type: number
@@ -3634,36 +3961,43 @@ paths:
           name: createDateStart
           required: true
           type: string
+          x-example: '2015-01-01 00:00:00'
         - description: Returns shipments created on or before the specified ``createDate``
           in: path
           name: createDateEnd
           required: true
           type: string
+          x-example: '2015-01-08 00:00:00'
         - description: Returns shipments with the ``shipDate`` on or after the specified date
           in: path
           name: shipDateStart
           required: true
           type: string
+          x-example: '2015-01-01'
         - description: Returns shipments with the ``shipDate`` on or before the specified date
           in: path
           name: shipDateEnd
           required: true
           type: string
+          x-example: '2015-01-08'
         - description: Returns shipments voided on or after the specified date
           in: path
           name: voidDateStart
           required: true
           type: string
+          x-example: '2015-01-01 00:00:00'
         - description: Returns shipments voided on or before the specified date
           in: path
           name: voidDateEnd
           required: true
           type: string
+          x-example: '2015-01-08 00:00:00'
         - description: 'Specifies whether to include shipment items with results Default value: false.'
           in: path
           name: includeShipmentItems
           required: true
           type: boolean
+          x-example: 'false'
         - description: 'Sort the responses by a set value.  The response will be sorted based off the ascending dates (oldest to most current.)  If left empty, the response will be sorted by ascending ``createDate``.'
           enum:
             - ShipDate
@@ -3672,6 +4006,7 @@ paths:
           name: sortBy
           required: true
           type: string
+          x-example: ShipDate
         - description: Sets the direction of the sort order.
           enum:
             - ASC
@@ -3680,6 +4015,7 @@ paths:
           name: sortDir
           required: true
           type: string
+          x-example: ASC
         - default: 1
           description: page number.
           in: path
@@ -3713,6 +4049,7 @@ paths:
                   isReturnLabel: false
                   marketplaceNotified: true
                   orderId: 43945660
+                  orderKey: 8061c220f0794a9b92460b8bae6837e4
                   orderNumber: 100038-1
                   packageCode: package
                   serviceCode: usps_first_class_mail
@@ -3803,6 +4140,8 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              storeId: '12345'
             properties:
               storeId:
                 type: string
@@ -3829,6 +4168,7 @@ paths:
           name: storeId
           required: true
           type: number
+          x-example: '12345'
       produces:
         - application/json
       responses:
@@ -3892,6 +4232,8 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              storeId: '12345'
             properties:
               storeId:
                 type: string
@@ -3926,6 +4268,9 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              refreshDate: 12-08-2014
+              storeId: 12345
             properties:
               refreshDate:
                 type: string
@@ -3954,6 +4299,7 @@ paths:
           name: storeId
           required: true
           type: number
+          x-example: '12345'
       produces:
         - application/json
       responses:
@@ -3999,6 +4345,7 @@ paths:
           name: storeId
           required: true
           type: number
+          x-example: '12345'
         - in: body
           name: body
           schema:
@@ -4050,6 +4397,7 @@ paths:
           name: showInactive
           required: true
           type: boolean
+          x-example: 'false'
         - description: Returns stores of this marketplace type.
           in: path
           name: marketplaceId
@@ -4105,6 +4453,7 @@ paths:
           name: showInactive
           required: true
           type: boolean
+          x-example: 'false'
       produces:
         - application/json
       responses:
@@ -4203,6 +4552,19 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              isDefault: false
+              originAddress:
+                city: Las Cruces
+                company: White Sands Co.
+                country: US
+                name: NM Warehouse
+                phone: 512-111-2222
+                postalCode: '80012'
+                residential: true
+                state: NM
+                street1: 4704 Arabela Dr.
+              warehouseName: New Ship From Location
             properties:
               isDefault:
                 type: boolean
@@ -4283,6 +4645,7 @@ paths:
           name: warehouseId
           required: true
           type: number
+          x-example: '12345678'
       produces:
         - application/json
       responses:
@@ -4325,6 +4688,7 @@ paths:
           name: warehouseId
           required: true
           type: number
+          x-example: '12345678'
         - in: body
           name: body
           schema:
@@ -4421,6 +4785,10 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              event: ORDER_NOTIFY
+              friendly_name: My Webhook
+              target_url: 'http://someexamplewebhookurl.com/neworder'
             properties:
               event:
                 type: string
@@ -4452,6 +4820,7 @@ paths:
           name: webhookId
           required: true
           type: number
+          x-example: '12345'
       responses:
         '200':
           description: OK

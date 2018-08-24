@@ -118,6 +118,21 @@ paths:
       tags:
         - account
   '/accounts/{id}':
+    delete:
+      description: This removes most traces of an Accounts existence from the system.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: number
+      responses:
+        '200':
+          description: the deleted Account
+          schema:
+            $ref: '#/definitions/Account'
+      summary: Delete an Account
+      tags:
+        - account
     get:
       parameters:
         - $ref: '#/parameters/accountIdInPath'

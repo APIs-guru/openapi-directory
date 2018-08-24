@@ -2,14 +2,13 @@ swagger: '2.0'
 schemes:
   - https
 host: azure.local
-basePath: /text/analytics
 info:
   contact:
     email: mlapi@microsoft.com
     name: Microsoft Cognitive Services
     url: 'https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/'
   description: 'The Text Analytics API is a suite of text analytics web services built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction and language detection. No training data is needed to use this API; just bring your text data. This API uses advanced natural language processing techniques to deliver best in class predictions. Further documentation can be found in https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview'
-  title: Text Analytics
+  title: Text Analytics Client
   version: v2.0
   x-apisguru-categories:
     - cloud
@@ -35,8 +34,17 @@ securityDefinitions:
     type: apiKey
 security:
   - apim_key: []
+parameters:
+  Endpoint:
+    description: 'Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).'
+    in: path
+    name: Endpoint
+    required: true
+    type: string
+    x-ms-parameter-location: client
+    x-ms-skip-url-encoding: true
 paths:
-  /v2.0/entities:
+  /entities:
     post:
       deprecated: false
       description: 'To get even more information on each recognized entity we recommend using the Bing Entity Search API by querying for the recognized entities names. See the <a href="https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages">Supported languages in Text Analytics API</a> for the list of enabled languages.'
@@ -63,7 +71,7 @@ paths:
       x-ms-examples:
         Successful Entities request:
           parameters:
-            AzureRegion: westus
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             input:
               documents:
@@ -119,7 +127,7 @@ paths:
                     id: '2'
                 errors: []
               headers: {}
-  /v2.0/keyPhrases:
+  /keyPhrases:
     post:
       deprecated: false
       description: 'See the <a href="https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages">Text Analytics Documentation</a> for details about the languages that are supported by key phrase extraction.'
@@ -146,7 +154,7 @@ paths:
       x-ms-examples:
         Successful Key Phrase request:
           parameters:
-            AzureRegion: westus
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             input:
               documents:
@@ -180,7 +188,7 @@ paths:
                       - soleil
                 errors: []
               headers: {}
-  /v2.0/languages:
+  /languages:
     post:
       deprecated: false
       description: Scores close to 1 indicate 100% certainty that the identified language is true. A total of 120 languages are supported.
@@ -207,7 +215,7 @@ paths:
       x-ms-examples:
         Successful Detect Language request:
           parameters:
-            AzureRegion: westus
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             input:
               documents:
@@ -245,7 +253,7 @@ paths:
                     id: '4'
                 errors: []
               headers: {}
-  /v2.0/sentiment:
+  /sentiment:
     post:
       deprecated: false
       description: 'Scores close to 1 indicate positive sentiment, while scores close to 0 indicate negative sentiment. A score of 0.5 indicates the lack of sentiment (e.g. a factoid statement). See the <a href="https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages">Text Analytics Documentation</a> for details about the languages that are supported by sentiment analysis.'
@@ -272,7 +280,7 @@ paths:
       x-ms-examples:
         Successful Sentiment request:
           parameters:
-            AzureRegion: westus
+            Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             input:
               documents:
@@ -545,28 +553,7 @@ definitions:
         type: number
     type: object
 x-ms-parameterized-host:
-  hostTemplate: '{AzureRegion}.api.cognitive.microsoft.com'
+  hostTemplate: '{Endpoint}/text/analytics/v2.0'
   parameters:
-    - description: Supported Azure regions for Cognitive Services endpoints
-      enum:
-        - westus
-        - westeurope
-        - southeastasia
-        - eastus2
-        - westcentralus
-        - westus2
-        - eastus
-        - southcentralus
-        - northeurope
-        - eastasia
-        - australiaeast
-        - brazilsouth
-      in: path
-      name: AzureRegion
-      required: true
-      type: string
-      x-ms-enum:
-        modelAsString: false
-        name: AzureRegions
-      x-ms-parameter-location: client
-      x-ms-skip-url-encoding: true
+    - $ref: '#/parameters/Endpoint'
+  useSchemePrefix: false

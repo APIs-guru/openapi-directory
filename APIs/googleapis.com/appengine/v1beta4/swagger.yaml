@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://appengine.googleapis.com/$discovery/rest?version=v1beta4'
       version: v1
@@ -60,11 +60,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -85,12 +80,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -120,12 +109,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -179,12 +166,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -259,12 +244,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -302,12 +285,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -348,12 +329,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -415,12 +394,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -509,12 +486,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -621,12 +596,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -719,12 +692,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -806,12 +777,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -821,12 +790,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -909,12 +876,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -952,12 +917,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1193,6 +1156,9 @@ definitions:
       configId:
         description: 'Endpoints service configuration id as specified by the Service Management API. For example "2016-09-19r1"By default, the Endpoints service configuration id is fixed and config_id must be specified. To keep the Endpoints service configuration id updated with each rollout, specify RolloutStrategy.MANAGED and omit config_id.'
         type: string
+      disableTraceSampling:
+        description: 'Enable or disable trace sampling. By default, this is set to false for enabled.'
+        type: boolean
       name:
         description: Endpoints service name which is the name of the "service" resource in the Service Management API. For example "myapi.endpoints.myproject.cloud.goog"
         type: string

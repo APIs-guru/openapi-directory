@@ -5600,6 +5600,14 @@ paths:
           name: childVoicebanks
           required: false
           type: boolean
+        - description: Logical grouping for artists.
+          enum:
+            - And
+            - Or
+          in: query
+          name: artistGrouping
+          required: false
+          type: string
         - description: Filter songs by given rating (optional).
           enum:
             - Nothing

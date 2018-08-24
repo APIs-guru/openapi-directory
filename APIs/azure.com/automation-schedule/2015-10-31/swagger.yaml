@@ -51,11 +51,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -70,136 +71,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: The response model for the list schedule operation.
-            properties:
-              nextLink:
-                description: Gets or sets the next link.
-                type: string
-              value:
-                description: Gets or sets a list of schedules.
-                items:
-                  description: Definition of the schedule.
-                  properties:
-                    id:
-                      description: Gets the id of the resource.
-                      readOnly: true
-                      type: string
-                    name:
-                      description: Gets name of the schedule.
-                      readOnly: true
-                      type: string
-                    properties:
-                      description: Definition of schedule parameters.
-                      properties:
-                        advancedSchedule:
-                          description: The properties of the create Advanced Schedule.
-                          properties:
-                            monthDays:
-                              description: Days of the month that the job should execute on. Must be between 1 and 31.
-                              items:
-                                format: int32
-                                type: integer
-                                x-nullable: false
-                              type: array
-                            monthlyOccurrences:
-                              description: Occurrences of days within a month.
-                              items:
-                                description: The properties of the create advanced schedule monthly occurrence.
-                                properties:
-                                  day:
-                                    description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.'
-                                    enum:
-                                      - Monday
-                                      - Tuesday
-                                      - Wednesday
-                                      - Thursday
-                                      - Friday
-                                      - Saturday
-                                      - Sunday
-                                    type: string
-                                    x-ms-enum:
-                                      modelAsString: true
-                                      name: ScheduleDay
-                                  occurrence:
-                                    description: Occurrence of the week within the month. Must be between 1 and 5
-                                    format: int32
-                                    type: integer
-                              type: array
-                            weekDays:
-                              description: Days of the week that the job should execute on.
-                              items:
-                                type: string
-                              type: array
-                        creationTime:
-                          description: Gets or sets the creation time.
-                          format: date-time
-                          type: string
-                          x-nullable: false
-                        description:
-                          description: Gets or sets the description.
-                          type: string
-                        expiryTime:
-                          description: Gets or sets the end time of the schedule.
-                          format: date-time
-                          type: string
-                          x-nullable: true
-                        expiryTimeOffsetMinutes:
-                          description: Gets or sets the expiry time's offset in minutes.
-                          format: double
-                          type: number
-                          x-nullable: false
-                        frequency:
-                          description: Gets or sets the frequency of the schedule.
-                          enum:
-                            - OneTime
-                            - Day
-                            - Hour
-                            - Week
-                            - Month
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: ScheduleFrequency
-                        interval:
-                          description: Gets or sets the interval of the schedule.
-                        isEnabled:
-                          default: false
-                          description: Gets or sets a value indicating whether this schedule is enabled.
-                          type: boolean
-                        lastModifiedTime:
-                          description: Gets or sets the last modified time.
-                          format: date-time
-                          type: string
-                          x-nullable: false
-                        nextRun:
-                          description: Gets or sets the next run time of the schedule.
-                          format: date-time
-                          type: string
-                          x-nullable: true
-                        nextRunOffsetMinutes:
-                          description: Gets or sets the next run time's offset in minutes.
-                          format: double
-                          type: number
-                          x-nullable: false
-                        startTime:
-                          description: Gets or sets the start time of the schedule.
-                          format: date-time
-                          type: string
-                          x-nullable: false
-                        startTimeOffsetMinutes:
-                          description: Gets the start time's offset in minutes.
-                          format: double
-                          readOnly: true
-                          type: number
-                          x-nullable: false
-                        timeZone:
-                          description: Gets or sets the time zone of the schedule.
-                          type: string
-                    type:
-                      description: Resource type
-                      readOnly: true
-                      type: string
-                type: array
+            $ref: '#/definitions/ScheduleListResult'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -3088,11 +2960,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The schedule name.
           in: path
           name: scheduleName
@@ -3111,8 +2984,6 @@ paths:
       responses:
         '200':
           description: OK
-        '404':
-          description: Not Found
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -3137,7 +3008,6 @@ paths:
             subscriptionId: subid
           responses:
             '200': {}
-            '404': {}
     get:
       description: Retrieve the schedule identified by schedule name.
       externalDocs:
@@ -3153,11 +3023,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The schedule name.
           in: path
           name: scheduleName
@@ -3177,127 +3048,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: Definition of the schedule.
-            properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets name of the schedule.
-                readOnly: true
-                type: string
-              properties:
-                description: Definition of schedule parameters.
-                properties:
-                  advancedSchedule:
-                    description: The properties of the create Advanced Schedule.
-                    properties:
-                      monthDays:
-                        description: Days of the month that the job should execute on. Must be between 1 and 31.
-                        items:
-                          format: int32
-                          type: integer
-                          x-nullable: false
-                        type: array
-                      monthlyOccurrences:
-                        description: Occurrences of days within a month.
-                        items:
-                          description: The properties of the create advanced schedule monthly occurrence.
-                          properties:
-                            day:
-                              description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.'
-                              enum:
-                                - Monday
-                                - Tuesday
-                                - Wednesday
-                                - Thursday
-                                - Friday
-                                - Saturday
-                                - Sunday
-                              type: string
-                              x-ms-enum:
-                                modelAsString: true
-                                name: ScheduleDay
-                            occurrence:
-                              description: Occurrence of the week within the month. Must be between 1 and 5
-                              format: int32
-                              type: integer
-                        type: array
-                      weekDays:
-                        description: Days of the week that the job should execute on.
-                        items:
-                          type: string
-                        type: array
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  expiryTime:
-                    description: Gets or sets the end time of the schedule.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  expiryTimeOffsetMinutes:
-                    description: Gets or sets the expiry time's offset in minutes.
-                    format: double
-                    type: number
-                    x-nullable: false
-                  frequency:
-                    description: Gets or sets the frequency of the schedule.
-                    enum:
-                      - OneTime
-                      - Day
-                      - Hour
-                      - Week
-                      - Month
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: ScheduleFrequency
-                  interval:
-                    description: Gets or sets the interval of the schedule.
-                  isEnabled:
-                    default: false
-                    description: Gets or sets a value indicating whether this schedule is enabled.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  nextRun:
-                    description: Gets or sets the next run time of the schedule.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  nextRunOffsetMinutes:
-                    description: Gets or sets the next run time's offset in minutes.
-                    format: double
-                    type: number
-                    x-nullable: false
-                  startTime:
-                    description: Gets or sets the start time of the schedule.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  startTimeOffsetMinutes:
-                    description: Gets the start time's offset in minutes.
-                    format: double
-                    readOnly: true
-                    type: number
-                    x-nullable: false
-                  timeZone:
-                    description: Gets or sets the time zone of the schedule.
-                    type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
+            $ref: '#/definitions/Schedule'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -3326,7 +3077,6 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/schedules/mySchedule
                 name: mySchedule
                 properties:
-                  advancedSchedule: null
                   creationTime: '2017-03-27T16:59:22.697+00:00'
                   description: my description of schedule goes here
                   expiryTime: '2017-04-01T17:28:00+00:00'
@@ -3356,11 +3106,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The schedule name.
           in: path
           name: scheduleName
@@ -3371,20 +3122,7 @@ paths:
           name: parameters
           required: true
           schema:
-            description: The parameters supplied to the update schedule operation.
-            properties:
-              name:
-                description: Gets or sets the name of the schedule.
-                type: string
-              properties:
-                description: The parameters supplied to the update schedule operation.
-                properties:
-                  description:
-                    description: Gets or sets the description of the schedule.
-                    type: string
-                  isEnabled:
-                    description: Gets or sets a value indicating whether this schedule is enabled.
-                    type: boolean
+            $ref: '#/definitions/ScheduleUpdateParameters'
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -3399,127 +3137,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: Definition of the schedule.
-            properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets name of the schedule.
-                readOnly: true
-                type: string
-              properties:
-                description: Definition of schedule parameters.
-                properties:
-                  advancedSchedule:
-                    description: The properties of the create Advanced Schedule.
-                    properties:
-                      monthDays:
-                        description: Days of the month that the job should execute on. Must be between 1 and 31.
-                        items:
-                          format: int32
-                          type: integer
-                          x-nullable: false
-                        type: array
-                      monthlyOccurrences:
-                        description: Occurrences of days within a month.
-                        items:
-                          description: The properties of the create advanced schedule monthly occurrence.
-                          properties:
-                            day:
-                              description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.'
-                              enum:
-                                - Monday
-                                - Tuesday
-                                - Wednesday
-                                - Thursday
-                                - Friday
-                                - Saturday
-                                - Sunday
-                              type: string
-                              x-ms-enum:
-                                modelAsString: true
-                                name: ScheduleDay
-                            occurrence:
-                              description: Occurrence of the week within the month. Must be between 1 and 5
-                              format: int32
-                              type: integer
-                        type: array
-                      weekDays:
-                        description: Days of the week that the job should execute on.
-                        items:
-                          type: string
-                        type: array
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  expiryTime:
-                    description: Gets or sets the end time of the schedule.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  expiryTimeOffsetMinutes:
-                    description: Gets or sets the expiry time's offset in minutes.
-                    format: double
-                    type: number
-                    x-nullable: false
-                  frequency:
-                    description: Gets or sets the frequency of the schedule.
-                    enum:
-                      - OneTime
-                      - Day
-                      - Hour
-                      - Week
-                      - Month
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: ScheduleFrequency
-                  interval:
-                    description: Gets or sets the interval of the schedule.
-                  isEnabled:
-                    default: false
-                    description: Gets or sets a value indicating whether this schedule is enabled.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  nextRun:
-                    description: Gets or sets the next run time of the schedule.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  nextRunOffsetMinutes:
-                    description: Gets or sets the next run time's offset in minutes.
-                    format: double
-                    type: number
-                    x-nullable: false
-                  startTime:
-                    description: Gets or sets the start time of the schedule.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  startTimeOffsetMinutes:
-                    description: Gets the start time's offset in minutes.
-                    format: double
-                    readOnly: true
-                    type: number
-                    x-nullable: false
-                  timeZone:
-                    description: Gets or sets the time zone of the schedule.
-                    type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
+            $ref: '#/definitions/Schedule'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -3553,7 +3171,6 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/schedules/mySchedule
                 name: mySchedule
                 properties:
-                  advancedSchedule: null
                   creationTime: '2017-03-27T16:59:22.697+00:00'
                   description: my updated description of schedule goes here
                   expiryTime: '2017-04-01T17:28:00+00:00'
@@ -3583,11 +3200,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The schedule name.
           in: path
           name: scheduleName
@@ -3598,89 +3216,7 @@ paths:
           name: parameters
           required: true
           schema:
-            description: The parameters supplied to the create or update schedule operation.
-            properties:
-              name:
-                description: Gets or sets the name of the schedule.
-                type: string
-              properties:
-                description: The parameters supplied to the create or update schedule operation.
-                properties:
-                  advancedSchedule:
-                    description: The properties of the create Advanced Schedule.
-                    properties:
-                      monthDays:
-                        description: Days of the month that the job should execute on. Must be between 1 and 31.
-                        items:
-                          format: int32
-                          type: integer
-                          x-nullable: false
-                        type: array
-                      monthlyOccurrences:
-                        description: Occurrences of days within a month.
-                        items:
-                          description: The properties of the create advanced schedule monthly occurrence.
-                          properties:
-                            day:
-                              description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.'
-                              enum:
-                                - Monday
-                                - Tuesday
-                                - Wednesday
-                                - Thursday
-                                - Friday
-                                - Saturday
-                                - Sunday
-                              type: string
-                              x-ms-enum:
-                                modelAsString: true
-                                name: ScheduleDay
-                            occurrence:
-                              description: Occurrence of the week within the month. Must be between 1 and 5
-                              format: int32
-                              type: integer
-                        type: array
-                      weekDays:
-                        description: Days of the week that the job should execute on.
-                        items:
-                          type: string
-                        type: array
-                  description:
-                    description: Gets or sets the description of the schedule.
-                    type: string
-                  expiryTime:
-                    description: Gets or sets the end time of the schedule.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  frequency:
-                    description: Gets or sets the frequency of the schedule.
-                    enum:
-                      - OneTime
-                      - Day
-                      - Hour
-                      - Week
-                      - Month
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: ScheduleFrequency
-                  interval:
-                    description: Gets or sets the interval of the schedule.
-                  startTime:
-                    description: Gets or sets the start time of the schedule.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  timeZone:
-                    description: Gets or sets the time zone of the schedule.
-                    type: string
-                required:
-                  - startTime
-                  - frequency
-            required:
-              - name
-              - properties
+            $ref: '#/definitions/ScheduleCreateOrUpdateParameters'
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -3692,130 +3228,14 @@ paths:
           required: true
           type: string
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Schedule'
         '201':
           description: Created
           schema:
-            description: Definition of the schedule.
-            properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets name of the schedule.
-                readOnly: true
-                type: string
-              properties:
-                description: Definition of schedule parameters.
-                properties:
-                  advancedSchedule:
-                    description: The properties of the create Advanced Schedule.
-                    properties:
-                      monthDays:
-                        description: Days of the month that the job should execute on. Must be between 1 and 31.
-                        items:
-                          format: int32
-                          type: integer
-                          x-nullable: false
-                        type: array
-                      monthlyOccurrences:
-                        description: Occurrences of days within a month.
-                        items:
-                          description: The properties of the create advanced schedule monthly occurrence.
-                          properties:
-                            day:
-                              description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.'
-                              enum:
-                                - Monday
-                                - Tuesday
-                                - Wednesday
-                                - Thursday
-                                - Friday
-                                - Saturday
-                                - Sunday
-                              type: string
-                              x-ms-enum:
-                                modelAsString: true
-                                name: ScheduleDay
-                            occurrence:
-                              description: Occurrence of the week within the month. Must be between 1 and 5
-                              format: int32
-                              type: integer
-                        type: array
-                      weekDays:
-                        description: Days of the week that the job should execute on.
-                        items:
-                          type: string
-                        type: array
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  expiryTime:
-                    description: Gets or sets the end time of the schedule.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  expiryTimeOffsetMinutes:
-                    description: Gets or sets the expiry time's offset in minutes.
-                    format: double
-                    type: number
-                    x-nullable: false
-                  frequency:
-                    description: Gets or sets the frequency of the schedule.
-                    enum:
-                      - OneTime
-                      - Day
-                      - Hour
-                      - Week
-                      - Month
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: ScheduleFrequency
-                  interval:
-                    description: Gets or sets the interval of the schedule.
-                  isEnabled:
-                    default: false
-                    description: Gets or sets a value indicating whether this schedule is enabled.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  nextRun:
-                    description: Gets or sets the next run time of the schedule.
-                    format: date-time
-                    type: string
-                    x-nullable: true
-                  nextRunOffsetMinutes:
-                    description: Gets or sets the next run time's offset in minutes.
-                    format: double
-                    type: number
-                    x-nullable: false
-                  startTime:
-                    description: Gets or sets the start time of the schedule.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  startTimeOffsetMinutes:
-                    description: Gets the start time's offset in minutes.
-                    format: double
-                    readOnly: true
-                    type: number
-                    x-nullable: false
-                  timeZone:
-                    description: Gets or sets the time zone of the schedule.
-                    type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
+            $ref: '#/definitions/Schedule'
         '409':
           description: Conflict
         default:
@@ -3850,12 +3270,30 @@ paths:
             scheduleName: mySchedule
             subscriptionId: subid
           responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/schedules/mySchedule
+                name: mySchedule
+                properties:
+                  creationTime: '2017-03-27T16:59:22.697+00:00'
+                  description: my description of schedule goes here
+                  expiryTime: '2017-04-01T17:28:00+00:00'
+                  expiryTimeOffsetMinutes: 0
+                  frequency: Hour
+                  interval: 1
+                  isEnabled: true
+                  lastModifiedTime: '2017-03-27T16:59:22.697+00:00'
+                  nextRun: '2017-03-27T17:28:00+00:00'
+                  nextRunOffsetMinutes: 0
+                  startTime: '2017-03-27T17:28:00+00:00'
+                  startTimeOffsetMinutes: 0
+                  timeZone: UTC
+              headers: {}
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/schedules/mySchedule
                 name: mySchedule
                 properties:
-                  advancedSchedule: null
                   creationTime: '2017-03-27T16:59:22.697+00:00'
                   description: my description of schedule goes here
                   expiryTime: '2017-04-01T17:28:00+00:00'
@@ -3871,4 +3309,214 @@ paths:
                   timeZone: UTC
               headers: {}
             '409': {}
-definitions: {}
+definitions:
+  AdvancedSchedule:
+    description: The properties of the create Advanced Schedule.
+    properties:
+      monthDays:
+        description: Days of the month that the job should execute on. Must be between 1 and 31.
+        items:
+          format: int32
+          type: integer
+          x-nullable: false
+        type: array
+      monthlyOccurrences:
+        description: Occurrences of days within a month.
+        items:
+          $ref: '#/definitions/AdvancedScheduleMonthlyOccurrence'
+        type: array
+      weekDays:
+        description: Days of the week that the job should execute on.
+        items:
+          type: string
+        type: array
+  AdvancedScheduleMonthlyOccurrence:
+    description: The properties of the create advanced schedule monthly occurrence.
+    properties:
+      day:
+        description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.'
+        enum:
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          - Sunday
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ScheduleDay
+      occurrence:
+        description: Occurrence of the week within the month. Must be between 1 and 5
+        format: int32
+        type: integer
+  Schedule:
+    allOf:
+      - allOf:
+          - $ref: '#/definitions/Resource'
+        description: ARM proxy resource.
+        properties: {}
+        type: object
+    description: Definition of the schedule.
+    properties:
+      properties:
+        $ref: '#/definitions/ScheduleProperties'
+        description: Gets or sets the properties of the schedule.
+        x-ms-client-flatten: true
+  ScheduleCreateOrUpdateParameters:
+    description: The parameters supplied to the create or update schedule operation.
+    properties:
+      name:
+        description: Gets or sets the name of the Schedule.
+        type: string
+      properties:
+        $ref: '#/definitions/ScheduleCreateOrUpdateProperties'
+        description: Gets or sets the list of schedule properties.
+        x-ms-client-flatten: true
+    required:
+      - name
+      - properties
+  ScheduleCreateOrUpdateProperties:
+    description: The parameters supplied to the create or update schedule operation.
+    properties:
+      advancedSchedule:
+        $ref: '#/definitions/AdvancedSchedule'
+        description: Gets or sets the AdvancedSchedule.
+      description:
+        description: Gets or sets the description of the schedule.
+        type: string
+      expiryTime:
+        description: Gets or sets the end time of the schedule.
+        format: date-time
+        type: string
+        x-nullable: true
+      frequency:
+        $ref: '#/definitions/scheduleFrequency'
+        type: string
+      interval:
+        description: Gets or sets the interval of the schedule.
+      startTime:
+        description: Gets or sets the start time of the schedule.
+        format: date-time
+        type: string
+        x-nullable: false
+      timeZone:
+        description: Gets or sets the time zone of the schedule.
+        type: string
+    required:
+      - startTime
+      - frequency
+  ScheduleListResult:
+    description: The response model for the list schedule operation.
+    properties:
+      nextLink:
+        description: Gets or sets the next link.
+        type: string
+      value:
+        description: Gets or sets a list of schedules.
+        items:
+          $ref: '#/definitions/Schedule'
+        type: array
+  ScheduleProperties:
+    description: Definition of schedule parameters.
+    properties:
+      advancedSchedule:
+        $ref: '#/definitions/AdvancedSchedule'
+        description: Gets or sets the advanced schedule.
+      creationTime:
+        description: Gets or sets the creation time.
+        format: date-time
+        type: string
+        x-nullable: false
+      description:
+        description: Gets or sets the description.
+        type: string
+      expiryTime:
+        description: Gets or sets the end time of the schedule.
+        format: date-time
+        type: string
+        x-nullable: true
+      expiryTimeOffsetMinutes:
+        description: Gets or sets the expiry time's offset in minutes.
+        format: double
+        type: number
+        x-nullable: false
+      frequency:
+        description: Gets or sets the frequency of the schedule.
+        enum:
+          - OneTime
+          - Day
+          - Hour
+          - Week
+          - Month
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ScheduleFrequency
+      interval:
+        description: Gets or sets the interval of the schedule.
+      isEnabled:
+        default: false
+        description: Gets or sets a value indicating whether this schedule is enabled.
+        type: boolean
+      lastModifiedTime:
+        description: Gets or sets the last modified time.
+        format: date-time
+        type: string
+        x-nullable: false
+      nextRun:
+        description: Gets or sets the next run time of the schedule.
+        format: date-time
+        type: string
+        x-nullable: true
+      nextRunOffsetMinutes:
+        description: Gets or sets the next run time's offset in minutes.
+        format: double
+        type: number
+        x-nullable: false
+      startTime:
+        description: Gets or sets the start time of the schedule.
+        format: date-time
+        type: string
+        x-nullable: false
+      startTimeOffsetMinutes:
+        description: Gets the start time's offset in minutes.
+        format: double
+        readOnly: true
+        type: number
+        x-nullable: false
+      timeZone:
+        description: Gets or sets the time zone of the schedule.
+        type: string
+  ScheduleUpdateParameters:
+    description: The parameters supplied to the update schedule operation.
+    properties:
+      name:
+        description: Gets or sets the name of the Schedule.
+        type: string
+      properties:
+        $ref: '#/definitions/ScheduleUpdateProperties'
+        description: Gets or sets the list of schedule properties.
+        x-ms-client-flatten: true
+  ScheduleUpdateProperties:
+    description: The parameters supplied to the update schedule operation.
+    properties:
+      description:
+        description: Gets or sets the description of the schedule.
+        type: string
+      isEnabled:
+        description: Gets or sets a value indicating whether this schedule is enabled.
+        type: boolean
+  scheduleFrequency:
+    description: Gets or sets the frequency of the schedule.
+    enum:
+      - OneTime
+      - Day
+      - Hour
+      - Week
+      - Month
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ScheduleFrequency

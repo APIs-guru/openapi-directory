@@ -18,7 +18,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://cloudshell.googleapis.com/$discovery/rest?version=v1alpha1'
       version: v1
@@ -59,11 +59,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -84,12 +79,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -165,12 +154,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -206,17 +193,58 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - users
+  '/v1alpha1/{name}:authorize':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Sends an access token to a running environment on behalf of a user. When
+        this completes, the environment will be authorized to run gcloud commands
+        without requiring the user to manually authenticate.
+      operationId: cloudshell.users.environments.authorize
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AuthorizeEnvironmentRequest'
+        - description: |-
+            Name of the resource that should receive the token, for example
+            `users/me/environments/default` or
+            `users/someone@example.com/environments/default`.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - users
   '/v1alpha1/{name}:start':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -259,12 +287,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -298,6 +324,13 @@ paths:
       tags:
         - users
 definitions:
+  AuthorizeEnvironmentRequest:
+    description: Request message for AuthorizeEnvironment.
+    properties:
+      accessToken:
+        description: The OAuth access token that should be sent to the environment.
+        type: string
+    type: object
   CreatePublicKeyRequest:
     description: Request message for CreatePublicKey.
     properties:
@@ -462,7 +495,14 @@ definitions:
     type: object
   StartEnvironmentRequest:
     description: Request message for StartEnvironment.
-    properties: {}
+    properties:
+      accessToken:
+        description: |-
+          The initial access token passed to the environment. If this is present and
+          valid, the environment will be pre-authenticated with gcloud so that the
+          user can run gcloud commands in Cloud Shell without having to log in. This
+          code can be updated later by calling AuthorizeEnvironment.
+        type: string
     type: object
   StartEnvironmentResponse:
     description: |-

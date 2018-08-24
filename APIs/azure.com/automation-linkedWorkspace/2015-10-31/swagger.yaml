@@ -51,11 +51,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -70,12 +71,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: Definition of the linked workspace.
-            properties:
-              id:
-                description: Gets the id of the linked workspace.
-                readOnly: true
-                type: string
+            $ref: '#/definitions/LinkedWorkspace'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -102,4 +98,11 @@ paths:
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.OperationalInsights/workspaces/ContosoWorkspace
               headers: {}
-definitions: {}
+definitions:
+  LinkedWorkspace:
+    description: Definition of the linked workspace.
+    properties:
+      id:
+        description: Gets the id of the linked workspace.
+        readOnly: true
+        type: string

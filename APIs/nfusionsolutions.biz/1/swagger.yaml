@@ -6,12 +6,13 @@ info:
   contact:
     email: support@nfusionsolutions.com
     name: nFusion Solutions
-    url: 'https://nfusionsolutions.com/contact'
+    url: 'https://nfusionsolutions.com/contact-us'
     x-twitter: nfusionsolution
-  description: 'nFusion Solutions provides REST and streaming APIs that deliver enterprise-grade financial data. Data sets include real-time and historical pricing for Spot prices of precious metals such as Gold, Silver, Platinum, and Palladium, exchange rates for major currency pairs, exchange rates for Crypto Currencies such as BTC, ETH, and LTC. All API access requires authentication. In order to be issued access credentials you must first enter into a service agreement with nFusion Solutions and acquire a commercial license. For information on how to obtain a licence contact sales@nfusionsolutions.com.'
+  description: '[nFusion Solutions](https://nfusionsolutions.com) provides [REST and streaming APIs](https://nfusionsolutions.com/data-feeds/) that deliver enterprise-grade financial data. Data sets include real-time and historical pricing for Spot prices of precious metals such as Gold, Silver, Platinum, and Palladium, exchange rates for major currency pairs, exchange rates for Crypto Currencies such as BTC, ETH, and LTC. All API access requires authentication. In order to be issued access credentials you must first enter into a service agreement with nFusion Solutions and acquire a commercial license. For information on how to obtain a licence [take a tour of our products](https://nfusionsolutions.com/nfusion-solutions-metals-gold-price-feed-tour/) or email sales@nfusionsolutions.com.'
   license:
     name: Commercial License
-    url: 'https://nfusionsolutions.com/metals/solutions/data-tools'
+    url: 'https://nfusionsolutions.com/nfusion-solutions-metals-gold-price-feed-quote/'
+  termsOfService: See nFusion Solutions Service Agreeement
   title: nFusion Solutions Market Data API v1
   version: '1'
   x-apisguru-categories:
@@ -313,7 +314,7 @@ paths:
           name: historicalfx
           required: false
           type: boolean
-        - description: 'currency for pricing, defaults to USD'
+        - description: 'comma separated list of conversion currencies, defaults to USD'
           in: query
           name: currency
           required: false
@@ -363,7 +364,7 @@ paths:
           name: metals
           required: true
           type: string
-        - description: 'currency for pricing, defaults to USD'
+        - description: 'comma separated list of conversion currencies, defaults to USD'
           in: query
           name: currency
           required: false
@@ -470,7 +471,7 @@ paths:
           name: historicalfx
           required: false
           type: boolean
-        - description: 'currency for pricing, defaults to USD'
+        - description: 'comma separated list of conversion currencies, defaults to USD'
           in: query
           name: currency
           required: false
@@ -505,6 +506,209 @@ paths:
       summary: Get historical Spot prices for requested metals
       tags:
         - Metals
+  '/api/v{version}/Metals/spot/performance':
+    get:
+      description: Historical Performance information
+      operationId: 'ApiV{versionMetalsSpotPerformanceGet'
+      parameters:
+        - description: auth token
+          in: query
+          name: token
+          required: true
+          type: string
+        - description: comma separated list of metals
+          in: query
+          name: metals
+          required: true
+          type: string
+        - description: 'comma separated list of conversion currencies, defaults to USD'
+          in: query
+          name: currency
+          required: false
+          type: string
+        - description: "unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+          in: query
+          name: unitofmeasure
+          required: false
+          type: string
+        - description: to override content negotiation specify a value of json or xml
+          in: query
+          name: format
+          required: false
+          type: string
+        - default: '1'
+          description: The requested API version
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/Response[Summary]'
+            type: array
+        '400':
+          description: bad request
+        '401':
+          description: unauthorized
+      summary: Get Historical Performance for requested metals
+      tags:
+        - Metals
+  '/api/v{version}/Metals/spot/performance/annual':
+    get:
+      description: Annual Historical Performance information
+      operationId: 'ApiV{versionMetalsSpotPerformanceAnnualGet'
+      parameters:
+        - description: auth token
+          in: query
+          name: token
+          required: true
+          type: string
+        - description: comma separated list of metals
+          in: query
+          name: metals
+          required: true
+          type: string
+        - description: 'comma separated list of conversion currencies, defaults to USD'
+          in: query
+          name: currency
+          required: false
+          type: string
+        - description: "unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+          in: query
+          name: unitofmeasure
+          required: false
+          type: string
+        - description: to override content negotiation specify a value of json or xml
+          in: query
+          name: format
+          required: false
+          type: string
+        - description: Number of years of history to return. Defaults to 10.
+          format: int32
+          in: query
+          name: years
+          required: false
+          type: integer
+        - default: '1'
+          description: The requested API version
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/Response[Summary]'
+            type: array
+        '400':
+          description: bad request
+        '401':
+          description: unauthorized
+      summary: Get Historical Annual Performance for requested metals
+      tags:
+        - Metals
+  '/api/v{version}/Metals/spot/ratio/history':
+    get:
+      description: "Historical data for the specified period and interval size\r\n\r\nThe combination of the interval parameter and start and end dates can result in results\r\nbeing truncated to conform to result size limits. See comments on interval parameter for details on valid interval values."
+      operationId: 'ApiV{versionMetalsSpotRatioHistoryGet'
+      parameters:
+        - description: auth token
+          in: query
+          name: token
+          required: true
+          type: string
+        - description: comma separated list of metals
+          in: query
+          name: pairs
+          required: true
+          type: string
+        - description: start date of time period. format is <i>yyyy-mm-dd</i>
+          format: date-time
+          in: query
+          name: start
+          required: true
+          type: string
+        - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
+          format: date-time
+          in: query
+          name: end
+          required: false
+          type: string
+        - description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r\nfollowed by a type string which must be one of the following values:\r\ny=year,\r\nm=month,\r\nw=week,\r\nd=day,\r\nh=hour,\r\nmi=minute\r\n\r\nFor example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r\n\r\nIf not specified the interval parameter default is 1 Day."
+          in: query
+          name: interval
+          required: false
+          type: string
+        - description: to override content negotiation specify a value of json or xml
+          in: query
+          name: format
+          required: false
+          type: string
+        - default: '1'
+          description: The requested API version
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/Response[IntervalCollection]'
+            type: array
+        '400':
+          description: bad request
+        '401':
+          description: unauthorized
+      summary: Get historical Spot Ratio prices for requested metals
+      tags:
+        - Metals
+  '/api/v{version}/Metals/spot/ratio/summary':
+    get:
+      description: Ratios between prices of two metals
+      operationId: 'ApiV{versionMetalsSpotRatioSummaryGet'
+      parameters:
+        - description: auth token
+          in: query
+          name: token
+          required: true
+          type: string
+        - description: 'comma separated list of metal pairs. For example: gold/silver,gold/platinum,silver/palladium'
+          in: query
+          name: pairs
+          required: true
+          type: string
+        - description: to override content negotiation specify a value of json or xml
+          in: query
+          name: format
+          required: false
+          type: string
+        - default: '1'
+          description: The requested API version
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/Response[Summary]'
+            type: array
+        '400':
+          description: bad request
+        '401':
+          description: unauthorized
+      summary: Get latest Spot Summary for requested metal ratios
+      tags:
+        - Metals
   '/api/v{version}/Metals/spot/summary':
     get:
       description: Current and daily summary information combined into a single quote
@@ -520,7 +724,7 @@ paths:
           name: metals
           required: true
           type: string
-        - description: 'currency for pricing, defaults to USD'
+        - description: 'comma separated list of conversion currencies, defaults to USD'
           in: query
           name: currency
           required: false
@@ -633,6 +837,12 @@ paths:
 definitions:
   Interval:
     properties:
+      change:
+        format: double
+        type: number
+      changePercent:
+        format: double
+        type: number
       end:
         format: date-time
         type: string
@@ -686,6 +896,8 @@ definitions:
         type: string
       requestedSymbol:
         type: string
+      requestedUnitOfMeasure:
+        type: string
       success:
         type: boolean
     type: object
@@ -699,6 +911,8 @@ definitions:
         type: string
       requestedSymbol:
         type: string
+      requestedUnitOfMeasure:
+        type: string
       success:
         type: boolean
     type: object
@@ -711,6 +925,8 @@ definitions:
       requestedCurrency:
         type: string
       requestedSymbol:
+        type: string
+      requestedUnitOfMeasure:
         type: string
       success:
         type: boolean

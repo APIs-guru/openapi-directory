@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/resource-manager/Microsoft.CognitiveServices/stable/2017-04-18/cognitiveservices.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: cognitiveservices
   x-tags:
@@ -1947,7 +1946,7 @@ paths:
         '200':
           description: |-
             The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.
-            The nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with “value” property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.
+            The nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with "value" property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.
             The nextLink should be implemented using following query parameters:
             · skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.
             · top: the optional client query parameter which defines the maximum number of records to be returned by the server.
@@ -2065,7 +2064,7 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
-          description: "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are “name,” “type” and “id.”\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n"
+          description: "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n"
           schema:
             $ref: '#/definitions/CognitiveServicesAccount'
         default:
@@ -2365,7 +2364,7 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
-          description: "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are “name,” “type” and “id.”\nField\tDescription\nsku\tRequired, object\n\tThe exact set of keys that define this sku. This matches the fields on the respective resource.\nsku.name\tRequired, string\n\tThe name of the SKU. This is typically a letter + number code, such as A0 or P3\nsku.tier\tRequired, string\n\tThe tier of this particular SKU. Typically one of:\n\t· Free\n\t· Basic\n\t· Standard\n\t· Premium\n"
+          description: "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nsku\tRequired, object\n\tThe exact set of keys that define this sku. This matches the fields on the respective resource.\nsku.name\tRequired, string\n\tThe name of the SKU. This is typically a letter + number code, such as A0 or P3\nsku.tier\tRequired, string\n\tThe tier of this particular SKU. Typically one of:\n\t· Free\n\t· Basic\n\t· Standard\n\t· Premium\n"
           schema:
             $ref: '#/definitions/CognitiveServicesAccountEnumerateSkusResult'
         default:

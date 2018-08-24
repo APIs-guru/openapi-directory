@@ -126,9 +126,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: 'Returns Historical Observations - Given City and/or State, Country.'
+      summary: '[Enterprise Plan Only] Returns Historical Observations - Given City and/or State, Country.'
       tags:
-        - (Bulk) Daily Historical Weather Data (Advanced+ / Enterprise Plans)
+        - (Bulk) Daily Historical Weather Data (Enterprise Plans)
   '/bulk/history/daily?city_id={city_id}':
     get:
       description: Returns Historical Observations - Given a City ID.
@@ -221,9 +221,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: Returns Historical Observations - Given a City ID
+      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a City ID'
       tags:
-        - (Bulk) Daily Historical Weather Data (Advanced+ / Enterprise Plans)
+        - (Bulk) Daily Historical Weather Data (Enterprise Plans)
   '/bulk/history/daily?ip={ip}':
     get:
       description: 'Returns Historical Observations - Given IP Address, or auto.'
@@ -316,9 +316,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: 'Returns Historical Observations - Given IP Address, or auto.'
+      summary: '[Enterprise Plan Only] Returns Historical Observations - Given IP Address, or auto.'
       tags:
-        - (Bulk) Daily Historical Weather Data (Advanced+ / Enterprise Plans)
+        - (Bulk) Daily Historical Weather Data (Enterprise Plans)
   '/bulk/history/daily?lat={lat}&lon={lon}':
     get:
       description: 'Returns Historical Observations - Given a lat, and lon.'
@@ -417,9 +417,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: Returns Historical Observations - Given a lat/lon.
+      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a lat/lon.'
       tags:
-        - (Bulk) Daily Historical Weather Data (Advanced+ / Enterprise Plans)
+        - (Bulk) Daily Historical Weather Data (Enterprise Plans)
   '/bulk/history/daily?postal_code={postal_code}':
     get:
       description: Returns Historical Observations - Given a Postal Code.
@@ -518,9 +518,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: Returns Historical Observations - Given a Postal Code
+      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a Postal Code'
       tags:
-        - (Bulk) Daily Historical Weather Data (Advanced+ / Enterprise Plans)
+        - (Bulk) Daily Historical Weather Data (Enterprise Plans)
   '/bulk/history/daily?station={station}':
     get:
       description: Returns Historical Observations - Given a station ID.
@@ -613,9 +613,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: Returns Historical Observations - Given a station ID.
+      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a station ID.'
       tags:
-        - (Bulk) Daily Historical Weather Data (Advanced+ / Enterprise Plans)
+        - (Bulk) Daily Historical Weather Data (Enterprise Plans)
   '/bulk/history/hourly?city={city}&country={country}':
     get:
       description: 'Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.'
@@ -720,9 +720,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: 'Returns Historical Observations - Given City and/or State, Country. (1 Year/call limit)'
+      summary: '[Enterprise Plan Only] Returns Historical Observations - Given City and/or State, Country. (1 Year/call limit)'
       tags:
-        - (Bulk) Hourly Historical Weather Data (Advanced+ / Enterprise Plans)
+        - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
   '/bulk/history/hourly?city_id={city_id}':
     get:
       description: Returns Historical Observations - Given a City ID.
@@ -815,9 +815,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: Returns Historical Observations - Given a City ID. (1 Year/call limit)
+      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a City ID. (1 Year/call limit)'
       tags:
-        - (Bulk) Hourly Historical Weather Data (Advanced+ / Enterprise Plans)
+        - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
   '/bulk/history/hourly?ip={ip}':
     get:
       description: 'Returns Historical Observations - Given IP Address, or auto.'
@@ -910,9 +910,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: 'Returns Historical Observations - Given IP Address, or auto. (1 Year/call limit)'
+      summary: '[Enterprise Plan Only] Returns Historical Observations - Given IP Address, or auto. (1 Year/call limit)'
       tags:
-        - (Bulk) Hourly Historical Weather Data (Advanced+ / Enterprise Plans)
+        - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
   '/bulk/history/hourly?lat={lat}&lon={lon}':
     get:
       description: 'Returns Historical Observations - Given a lat, and lon.'
@@ -1011,9 +1011,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: Returns Historical Observations - Given a lat/lon. (1 Year/call limit)
+      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a lat/lon. (1 Year/call limit)'
       tags:
-        - (Bulk) Hourly Historical Weather Data (Advanced+ / Enterprise Plans)
+        - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
   '/bulk/history/hourly?postal_code={postal_code}':
     get:
       description: 'Returns Historical Observations - Given a Postal Code. '
@@ -1112,9 +1112,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: Returns Historical Observations - Given a Postal Code. (1 Year/call limit)
+      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a Postal Code. (1 Year/call limit)'
       tags:
-        - (Bulk) Hourly Historical Weather Data (Advanced+ / Enterprise Plans)
+        - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
   '/bulk/history/hourly?station={station}':
     get:
       description: Returns Historical Observations - Given a station ID.
@@ -1207,12 +1207,12 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: Returns Historical Observations - Given a station ID. (1 Year/call limit)
+      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a station ID. (1 Year/call limit)'
       tags:
-        - (Bulk) Hourly Historical Weather Data (Advanced+ / Enterprise Plans)
+        - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
   '/bulk/{file}':
     get:
-      description: '**(Advanced/Advanced+/Enterprise plans only)** Downloads bulk data files - OPTIONS: (forecast16d.json.gz - 16 day forecasts for cities > 1000 population, current.json.gz - Current observations for cities > 1000 population).'
+      description: '**(Enterprise plans only)** Downloads bulk data files - OPTIONS: (forecast16d.json.gz - 16 day forecasts for cities > 1000 population, current.json.gz - Current observations for cities > 1000 population).'
       parameters:
         - description: Filename (ie. forecast16d.json.gz)
           format: string
@@ -1236,7 +1236,7 @@ paths:
         - Bulk Downloads
   '/current?cities={cities}':
     get:
-      description: '**(Advanced/Advanced+/Enterprise plans only)** Returns a group of Current Observations - Given a list of City IDs. '
+      description: 'Returns a group of Current Observations - Given a list of City IDs. '
       parameters:
         - description: 'Comma separated list of City ID''s. Example: 4487042, 4494942, 4504871'
           format: string
@@ -1889,7 +1889,7 @@ paths:
         - Current Weather Data
   '/current?stations={stations}':
     get:
-      description: '**(Advanced/Advanced+/Enterprise plans only)** Returns a group of Current Observations - Given a list of Station Call IDs. '
+      description: 'Returns a group of Current Observations - Given a list of Station Call IDs. '
       parameters:
         - description: 'Comma separated list of Station Call ID''s. Example: KRDU,KBFI,KVNY'
           format: string
@@ -2447,7 +2447,7 @@ paths:
   '/forecast/daily?city={city}&country={country}':
     get:
       description: |
-        **(REQUIRED: Basic Plan or Higher)** Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC. Accepts a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.
+        Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC. Accepts a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.
       parameters:
         - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
           format: string
@@ -2549,7 +2549,7 @@ paths:
   '/forecast/daily?city_id={city_id}':
     get:
       description: |
-        **(REQUIRED: Basic Plan or Higher)** Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC.
+        Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC.
       parameters:
         - description: 'City ID. Example: 4487042'
           format: integer
@@ -2639,7 +2639,7 @@ paths:
   '/forecast/daily?ip={ip}':
     get:
       description: |
-        **(REQUIRED: Basic Plan or Higher)** Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC. 
+        Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC. 
       parameters:
         - description: 'IP address, or auto. Example: ip=auto'
           format: string
@@ -2729,7 +2729,7 @@ paths:
   '/forecast/daily?lat={lat}&lon={lon}':
     get:
       description: |
-        **(REQUIRED: Basic Plan or Higher)** Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC. 
+        Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC. 
       parameters:
         - description: Latitude component of location.
           format: double
@@ -2825,7 +2825,7 @@ paths:
   '/forecast/daily?postal_code={postal_code}':
     get:
       description: |
-        **(REQUIRED: Basic Plan or Higher)** Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC.
+        Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC.
       parameters:
         - description: 'Postal Code. Example: 28546'
           format: integer
@@ -2918,10 +2918,66 @@ paths:
       summary: Returns a daily forecast - Given a Postal Code.
       tags:
         - 16 day / daily Forecast
+  '/forecast/energy?lat={lat}&lon={lon}':
+    get:
+      description: 'Retrieve an 8 day forecast relevant to te Energy Sector (degree days, solar radiation, precipitation, wind).'
+      parameters:
+        - description: Latitude component of location.
+          format: double
+          in: path
+          name: lat
+          required: true
+          type: number
+        - description: Longitude component of location.
+          format: double
+          in: path
+          name: lon
+          required: true
+          type: number
+        - description: 'Temperature threshold to use to calculate degree days (default 18 C) '
+          format: double
+          in: query
+          name: threshold
+          required: false
+          type: number
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
+          enum:
+            - S
+            - I
+          format: string
+          in: query
+          name: units
+          required: false
+          type: string
+        - description: 'Wraps return in jsonp callback. Example: callback=func'
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: An Energy Data Object.
+          schema:
+            $ref: '#/definitions/EnergyObsGroupForecast'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: 'Returns Energy Forecast API response  - Given a single lat/lon. '
+      tags:
+        - Forecast Degree Day API
+        - Forecast Solar Irradiance API
   '/forecast/hourly?city={city}&country={country}':
     get:
-      description: |
-        **(REQUIRED: Developer Plan or Higher)** Returns an hourly forecast, where each point represents a one hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. Accepts a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.
+      description: |2
+         Returns an hourly forecast, where each point represents a one hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. Accepts a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.
       parameters:
         - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
           format: string
@@ -3022,8 +3078,8 @@ paths:
         - 48 hour / hourly Forecast
   '/forecast/hourly?city_id={city_id}':
     get:
-      description: |
-        **(REQUIRED: Developer Plan or Higher)** Returns an hourly forecast, where each point represents a one hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
+      description: |2
+         Returns an hourly forecast, where each point represents a one hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
       parameters:
         - description: 'City ID. Example: 4487042'
           format: integer
@@ -3112,8 +3168,8 @@ paths:
         - 48 hour / hourly Forecast
   '/forecast/hourly?ip={ip}':
     get:
-      description: |
-        **(REQUIRED: Developer Plan or Higher)** Returns an hourly forecast, where each point represents a one hour period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
+      description: |2
+         Returns an hourly forecast, where each point represents a one hour period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
       parameters:
         - description: 'IP address, or auto. Example: ip=auto'
           format: string
@@ -3209,7 +3265,7 @@ paths:
   '/forecast/hourly?lat={lat}&lon={lon}':
     get:
       description: |
-        **(REQUIRED: Developer Plan or Higher)** Returns an hourly forecast, where each point represents a one hour period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
+        Returns an hourly forecast, where each point represents a one hour period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
       parameters:
         - description: Latitude component of location.
           format: double
@@ -3304,8 +3360,8 @@ paths:
         - 48 hour / hourly Forecast
   '/forecast/hourly?postal_code={postal_code}':
     get:
-      description: |
-        **(REQUIRED: Developer Plan or Higher)** Returns an hourly forecast, where each point represents a one hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
+      description: |2
+         Returns an hourly forecast, where each point represents a one hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
       parameters:
         - description: 'Postal Code. Example: 28546'
           format: integer
@@ -4072,7 +4128,7 @@ paths:
       tags:
         - Historical Degree Day API
         - Historical Solar Irradiance API
-        - Historical Weather Energy API (Advanced+ / Enterprise Plans)
+        - Historical Weather Energy API
   '/history/energy?lat={lat}&lon={lon}':
     get:
       description: 'Returns aggregate energy specific historical weather fields, over a specified time period.'
@@ -4150,7 +4206,7 @@ paths:
       tags:
         - Historical Degree Day API
         - Historical Solar Irradiance API
-        - Historical Weather Energy API (Advanced+ / Enterprise Plans)
+        - Historical Weather Energy API
   '/history/hourly?city={city}&country={country}':
     get:
       description: 'Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Low Volume plans. LIMIT 7 days for Basic/Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
@@ -5050,6 +5106,108 @@ definitions:
         example: '2017-01-01'
         type: integer
     type: object
+  EnergyObsGroupForecast:
+    properties:
+      city_name:
+        description: City name (closest)
+        example: Raleigh
+        type: string
+      country_code:
+        description: Country abbreviation
+        example: US
+        type: string
+      data:
+        items:
+          $ref: '#/definitions/EnergyObsSeries'
+        type: array
+      lat:
+        description: Latitude
+        example: '38.00'
+        type: string
+      lon:
+        description: Longitude
+        example: '-78.25'
+        type: string
+      state_code:
+        description: State abbreviation
+        example: NC
+        type: string
+      threshold_units:
+        description: Degree day threshold units
+        example: C
+        type: string
+      threshold_value:
+        description: Degree day threshold
+        example: '18'
+        type: string
+      timezone:
+        description: Local IANA time zone
+        example: America/New_York
+        type: string
+    type: object
+  EnergyObsSeries:
+    properties:
+      cdd:
+        description: Cooling degree days
+        example: 10
+        type: number
+      clouds:
+        description: Average cloud cover (%)
+        example: 42
+        type: integer
+      date:
+        description: Date
+        example: '2018-06-01'
+        type: string
+      dewpt:
+        description: Average dew point temperature - Default (C)
+        example: 12
+        type: number
+      hdd:
+        description: Heating degree days
+        example: 120
+        type: number
+      precip:
+        description: Total precipitation in period - Default (mm)
+        example: 2
+        type: number
+      rh:
+        description: Average Relative humidity (%)
+        example: 75
+        type: integer
+      snow:
+        description: Total snowfall in period - Default (mm)
+        example: 10
+        type: number
+      sun_hours:
+        description: 'Average number of daily sun hours - # hours where Solar GHI > 1000 W/m^2'
+        example: 4.5
+        type: number
+      t_dhi:
+        description: Total diffuse horizontal solar irradiance (W/m^2)
+        example: 450
+        type: number
+      t_dni:
+        description: Total direct normal solar irradiance (W/m^2)
+        example: 1200
+        type: number
+      t_ghi:
+        description: Total global horizontal solar irradiance (W/m^2)
+        example: 3000
+        type: number
+      temp:
+        description: Average temperature - Default (C)
+        example: 13.85
+        type: number
+      wind_dir:
+        description: Average wind direction (Degrees)
+        example: 125
+        type: integer
+      wind_speed:
+        description: Average wind speed - Default (m/s)
+        example: 5.85
+        type: number
+    type: object
   Error:
     properties:
       code:
@@ -5092,6 +5250,18 @@ definitions:
         description: Minimum daily Temperature - default (C)
         example: -1.23
         type: number
+      moon_phase:
+        description: Moon phase
+        example: 0.87
+        type: number
+      moonrise_ts:
+        description: Moonrise unix timestamp
+        example: 1530331260
+        type: integer
+      moonset_ts:
+        description: Moonset unix timestamp
+        example: 1530331260
+        type: integer
       pod:
         description: 'Part of the day (d = day, n = night)'
         example: 'n'
@@ -5124,14 +5294,22 @@ definitions:
         description: Snow Depth - default (mm)
         example: 45
         type: number
+      sunrise_ts:
+        description: Sunrise unix timestamp
+        example: 1530331260
+        type: integer
+      sunset_ts:
+        description: Sunset unix timestamp
+        example: 1530331260
+        type: integer
       temp:
         description: Temperature (Average) - default (C)
         example: 1
         type: number
       ts:
         description: Unix Timestamp
-        example: '1490990400'
-        type: number
+        example: 1490990400
+        type: integer
       uv:
         description: UV Index
         example: 6.5
@@ -5551,6 +5729,10 @@ definitions:
         description: Liquid equivalent precipitation - default (mm)
         example: 3
         type: number
+      precip_gpm:
+        description: Satellite estimated liquid equivalent precipitation - default (mm)
+        example: 3
+        type: number
       pres:
         description: Average pressure (mb)
         example: 885.1
@@ -5590,7 +5772,7 @@ definitions:
       ts:
         description: Unix timestamp of datetime (Midnight UTC)
         example: 1501970516
-        type: number
+        type: integer
       wind_dir:
         description: Average wind direction (degrees)
         example: 325
@@ -5672,8 +5854,8 @@ definitions:
         type: number
       ts:
         description: Unix Timestamp (UTC)
-        example: '1451606400'
-        type: string
+        example: 1451606400
+        type: integer
       uv:
         description: UV Index (1-11+)
         example: 4

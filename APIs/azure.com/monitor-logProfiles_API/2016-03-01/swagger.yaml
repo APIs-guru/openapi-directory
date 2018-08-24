@@ -94,6 +94,7 @@ paths:
                         enabled: true
                       serviceBusRuleId: ''
                       storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/JohnKemTest/providers/Microsoft.Storage/storageAccounts/johnkemtest8162
+                    tags: null
                     type: ''
                   - id: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/providers/microsoft.insights/logprofiles/default2
                     location: ''
@@ -110,6 +111,7 @@ paths:
                         enabled: true
                       serviceBusRuleId: ''
                       storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/JohnKemTest/providers/Microsoft.Storage/storageAccounts/johnkemtest8165
+                    tags: null
                     type: ''
               headers: {}
       x-ms-pageable: {}
@@ -134,6 +136,7 @@ paths:
             subscriptionId: b67f7fec-69fc-4974-9099-a26bd6ffeda3
           responses:
             '200':
+              body: null
               headers: {}
     get:
       description: Gets the log profile.
@@ -145,24 +148,6 @@ paths:
       responses:
         '200':
           description: Successful request to get more information about a log profile.
-          examples:
-            application/json:
-              id: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/providers/microsoft.insights/logprofiles/default
-              location: ''
-              name: default
-              properties:
-                categories:
-                  - Delete
-                  - Write
-                  - Action
-                locations:
-                  - global
-                retentionPolicy:
-                  days: 3
-                  enabled: true
-                serviceBusRuleId: ''
-                storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/JohnKemTest/providers/Microsoft.Storage/storageAccounts/johnkemtest8162
-              type: ''
           schema:
             $ref: '#/definitions/LogProfileResource'
         default:
@@ -195,6 +180,7 @@ paths:
                     enabled: true
                   serviceBusRuleId: ''
                   storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/JohnKemTest/providers/Microsoft.Storage/storageAccounts/johnkemtest8162
+                tags: null
                 type: ''
               headers: {}
     patch:
@@ -278,24 +264,6 @@ paths:
       responses:
         '200':
           description: Successful request to create or update a log profile
-          examples:
-            application/json:
-              id: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/providers/microsoft.insights/logprofiles/default
-              location: ''
-              name: default
-              properties:
-                categories:
-                  - Delete
-                  - Write
-                  - Action
-                locations:
-                  - global
-                retentionPolicy:
-                  days: 3
-                  enabled: true
-                serviceBusRuleId: ''
-                storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/JohnKemTest/providers/Microsoft.Storage/storageAccounts/johnkemtest8162
-              type: ''
           schema:
             $ref: '#/definitions/LogProfileResource'
       tags:
@@ -339,6 +307,7 @@ paths:
                     enabled: true
                   serviceBusRuleId: ''
                   storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/JohnKemTest/providers/Microsoft.Storage/storageAccounts/johnkemtest8162
+                tags: null
                 type: ''
               headers: {}
 definitions:

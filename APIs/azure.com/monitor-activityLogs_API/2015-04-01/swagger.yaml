@@ -72,68 +72,6 @@ paths:
       responses:
         '200':
           description: Successful request to get a page of events in the activity logs
-          examples:
-            application/json:
-              nextLink: 'https://management.azure.com/########-####-####-####-############$skiptoken=######'
-              value:
-                - authorization:
-                    action: microsoft.support/supporttickets/write
-                    role: Subscription Admin
-                    scope: /subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/MSSupportGroup/providers/microsoft.support/supporttickets/115012112305841
-                  caller: admin@contoso.com
-                  claims:
-                    appid: c44b4083-3bq0-49c1-b47d-974e53cbdf3c
-                    appidacr: '2'
-                    aud: 'https://management.core.windows.net/'
-                    exp: '1421880271'
-                    groups: 'cacfe77c-e058-4712-83qw-f9b08849fd60,7f71d11d-4c41-4b23-99d2-d32ce7aa621c,31522864-0578-4ea0-9gdc-e66cc564d18c'
-                    'http://schemas.microsoft.com/claims/authnclassreference': '1'
-                    'http://schemas.microsoft.com/claims/authnmethodsreferences': pwd
-                    'http://schemas.microsoft.com/identity/claims/objectidentifier': 2468adf0-8211-44e3-95xq-85137af64708
-                    'http://schemas.microsoft.com/identity/claims/scope': user_impersonation
-                    'http://schemas.microsoft.com/identity/claims/tenantid': '1e8d8218-c5e7-4578-9acc-9abbd5d23315 '
-                    'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname': John
-                    'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name': ' admin@contoso.com'
-                    'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier': 9vckmEGF7zDKk1YzIY8k0t1_EAPaXoeHyPRn6f413zM
-                    'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname': Smith
-                    'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn': admin@contoso.com
-                    iat: '1421876371'
-                    iss: 'https://sts.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db47/'
-                    name: John Smith
-                    nbf: '1421876371'
-                    puid: 20030000801A118C
-                    ver: '1.0'
-                  correlationId: 1e121103-0ba6-4300-ac9d-952bb5d0c80f
-                  description: ''
-                  eventDataId: 44ade6b4-3813-45e6-ae27-7420a95fa2f8
-                  eventName:
-                    localizedValue: End request
-                    value: EndRequest
-                  eventTimestamp: '2015-01-21T22:14:26.9792776Z'
-                  httpRequest:
-                    clientIpAddress: 192.168.35.115
-                    clientRequestId: 27003b25-91d3-418f-8eb1-29e537dcb249
-                    method: PUT
-                  id: /subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/MSSupportGroup/providers/microsoft.support/supporttickets/115012112305841/events/44ade6b4-3813-45e6-ae27-7420a95fa2f8/ticks/635574752669792776
-                  level: Informational
-                  operationId: 1e121103-0ba6-4300-ac9d-952bb5d0c80f
-                  operationName:
-                    localizedValue: microsoft.support/supporttickets/write
-                    value: microsoft.support/supporttickets/write
-                  properties:
-                    statusCode: Created
-                  resourceGroupName: MSSupportGroup
-                  resourceProviderName:
-                    localizedValue: microsoft.support
-                    value: microsoft.support
-                  status:
-                    localizedValue: Succeeded
-                    value: Succeeded
-                  subStatus:
-                    localizedValue: 'Created (HTTP Status Code: 201)'
-                    value: Created
-                  submissionTimestamp: '2015-01-21T22:14:39.9936304Z'
-                  subscriptionId: 089bd33f-d4ec-47fe-8ba5-0753aa5c5b33
           schema:
             $ref: '#/definitions/EventDataCollection'
         default:
@@ -354,6 +292,7 @@ definitions:
     properties:
       authorization:
         $ref: '#/definitions/SenderAuthorization'
+        description: The sender authorization information.
         readOnly: true
       caller:
         description: 'the email address of the user who has performed the operation, the UPN claim or SPN claim based on availability.'

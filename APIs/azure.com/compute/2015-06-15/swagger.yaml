@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2015-06-15/compute.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: compute
   x-tags:
@@ -411,7 +410,8 @@ paths:
             $ref: '#/definitions/AvailabilitySetListResult'
       tags:
         - AvailabilitySets
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}':
     delete:
       description: Delete an availability set.
@@ -699,6 +699,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete':
     post:
       description: Deletes virtual machines in a VM scale set.
@@ -732,6 +734,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView':
     get:
       description: Gets the status of a VM scale set instance.
@@ -789,6 +793,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff':
     post:
       description: 'Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.'
@@ -822,6 +828,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage':
     post:
       description: Reimages (upgrade the operating system) one or more virtual machines in a VM scale set.
@@ -849,6 +857,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart':
     post:
       description: Restarts one or more virtual machines in a VM scale set.
@@ -882,6 +892,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus':
     get:
       description: 'Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.'
@@ -941,6 +953,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}':
     delete:
       description: Deletes a virtual machine from a VM scale set.
@@ -1035,6 +1049,8 @@ paths:
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/instanceView':
     get:
       description: Gets the status of a virtual machine from a VM scale set.
@@ -1096,6 +1112,8 @@ paths:
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimage':
     post:
       description: Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.
@@ -1128,6 +1146,8 @@ paths:
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/restart':
     post:
       description: Restarts a virtual machine in a VM scale set.
@@ -1160,6 +1180,8 @@ paths:
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/start':
     post:
       description: Starts a virtual machine in a VM scale set.
@@ -1192,6 +1214,8 @@ paths:
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines':
     get:
       description: Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.
@@ -1342,6 +1366,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate':
     post:
       description: Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.
@@ -1369,6 +1395,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}':
     delete:
       description: The operation to delete the extension.
@@ -1561,6 +1589,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/redeploy':
     post:
       description: The operation to redeploy a virtual machine.
@@ -1588,6 +1618,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/restart':
     post:
       description: The operation to restart a virtual machine.
@@ -1615,6 +1647,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/start':
     post:
       description: The operation to start a virtual machine.
@@ -1642,6 +1676,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes':
     get:
       description: Lists all available virtual machine sizes to which the specified virtual machine can be resized.
@@ -1748,11 +1784,16 @@ definitions:
   AvailabilitySetListResult:
     description: The List Availability Set operation response.
     properties:
+      nextLink:
+        description: The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets.
+        type: string
       value:
         description: The list of availability sets
         items:
           $ref: '#/definitions/AvailabilitySet'
         type: array
+    required:
+      - value
   AvailabilitySetProperties:
     description: The instance view of a resource.
     properties:
@@ -3116,7 +3157,7 @@ definitions:
         $ref: '#/definitions/HardwareProfile'
         description: Specifies the hardware settings for the virtual machine.
       instanceView:
-        $ref: '#/definitions/VirtualMachineInstanceView'
+        $ref: '#/definitions/VirtualMachineScaleSetVMInstanceView'
         description: The virtual machine instance view.
         readOnly: true
       latestModelApplied:

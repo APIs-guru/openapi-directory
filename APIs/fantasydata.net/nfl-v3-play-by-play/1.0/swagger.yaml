@@ -34,6 +34,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/PlayByPlay/{season}/{week}/{hometeam}':
     get:
@@ -174,6 +175,8 @@ definitions:
         type: integer
       QuarterName:
         type: string
+      ScoringPlay:
+        $ref: '#/definitions/ScoringPlay'
       Sequence:
         type: integer
       Team:
@@ -510,6 +513,40 @@ definitions:
         type: integer
       YardLineTerritory:
         type: string
+  ScoringPlay:
+    properties:
+      AwayScore:
+        type: integer
+      AwayTeam:
+        type: string
+      Date:
+        type: string
+      GameKey:
+        type: string
+      HomeScore:
+        type: integer
+      HomeTeam:
+        type: string
+      PlayDescription:
+        type: string
+      Quarter:
+        type: string
+      ScoreID:
+        type: integer
+      ScoringPlayID:
+        type: integer
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      Sequence:
+        type: integer
+      Team:
+        type: string
+      TimeRemaining:
+        type: string
+      Week:
+        type: integer
   Stadium:
     properties:
       Capacity:

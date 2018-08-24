@@ -7,8 +7,8 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Builds container images in the cloud.
-  title: Cloud Container Builder
+  description: Creates and manages builds on Google Cloud Platform.
+  title: Cloud Build
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://cloudbuild.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -25,7 +25,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: cloudbuild
 externalDocs:
-  url: 'https://cloud.google.com/container-builder/docs/'
+  url: 'https://cloud.google.com/cloud-build/docs/'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -58,11 +58,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -83,12 +78,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -154,12 +143,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -225,12 +212,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -240,12 +225,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -283,12 +266,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -375,12 +356,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -470,12 +449,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -516,12 +493,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -582,12 +557,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -597,12 +570,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -663,9 +634,7 @@ definitions:
         type: array
       timing:
         $ref: '#/definitions/TimeSpan'
-        description: |-
-          Stores timing information for pushing all artifact objects.
-          @OutputOnly
+        description: Output only. Stores timing information for pushing all artifact objects.
     type: object
   ArtifactResult:
     description: |-
@@ -720,7 +689,7 @@ definitions:
     type: object
   Build:
     description: |-
-      A build resource in the Container Builder API.
+      A build resource in the Cloud Build API.
 
       At a high level, a `Build` describes where to find source code, how to build
       it (for example, the builder image to run on the source), and where to store
@@ -745,29 +714,23 @@ definitions:
           successful completion of all build steps.
       buildTriggerId:
         description: |-
-          The ID of the `BuildTrigger` that triggered this build, if it was
-          triggered automatically.
-          @OutputOnly
+          Output only. The ID of the `BuildTrigger` that triggered this build, if it
+          was triggered automatically.
         type: string
       createTime:
-        description: |-
-          Time at which the request to create the build was received.
-          @OutputOnly
+        description: Output only. Time at which the request to create the build was received.
         format: google-datetime
         type: string
       finishTime:
         description: |-
-          Time at which execution of the build was finished.
+          Output only. Time at which execution of the build was finished.
 
           The difference between finish_time and start_time is the duration of the
           build's execution.
-          @OutputOnly
         format: google-datetime
         type: string
       id:
-        description: |-
-          Unique identifier of the build.
-          @OutputOnly
+        description: Output only. Unique identifier of the build.
         type: string
       images:
         description: |-
@@ -785,9 +748,7 @@ definitions:
           type: string
         type: array
       logUrl:
-        description: |-
-          URL to logs for this build in Google Cloud Console.
-          @OutputOnly
+        description: Output only. URL to logs for this build in Google Cloud Console.
         type: string
       logsBucket:
         description: |-
@@ -800,15 +761,11 @@ definitions:
         $ref: '#/definitions/BuildOptions'
         description: Special options for this build.
       projectId:
-        description: |-
-          ID of the project.
-          @OutputOnly.
+        description: Output only. ID of the project.
         type: string
       results:
         $ref: '#/definitions/Results'
-        description: |-
-          Results of the build.
-          @OutputOnly
+        description: Output only. Results of the build.
       secrets:
         description: Secrets to decrypt using Cloud Key Management Service.
         items:
@@ -819,19 +776,13 @@ definitions:
         description: The location of the source files to build.
       sourceProvenance:
         $ref: '#/definitions/SourceProvenance'
-        description: |-
-          A permanent fixed identifier for source.
-          @OutputOnly
+        description: Output only. A permanent fixed identifier for source.
       startTime:
-        description: |-
-          Time at which execution of the build was started.
-          @OutputOnly
+        description: Output only. Time at which execution of the build was started.
         format: google-datetime
         type: string
       status:
-        description: |-
-          Status of the build.
-          @OutputOnly
+        description: Output only. Status of the build.
         enum:
           - STATUS_UNKNOWN
           - QUEUED
@@ -843,9 +794,7 @@ definitions:
           - CANCELLED
         type: string
       statusDetail:
-        description: |-
-          Customer-readable message about the current status.
-          @OutputOnly
+        description: Output only. Customer-readable message about the current status.
         type: string
       steps:
         description: Required. The operations to be performed on the workspace.
@@ -875,7 +824,8 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/TimeSpan'
         description: |-
-          Stores timing information for phases of the build. Valid keys are:
+          Output only. Stores timing information for phases of the build. Valid keys
+          are:
 
           * BUILD: time to execute all build steps
           * PUSH: time to push all specified images.
@@ -883,7 +833,6 @@ definitions:
 
           If the build does not specify source or images,
           these keys will not be included.
-          @OutputOnly
         type: object
     type: object
   BuildOperationMetadata:
@@ -1022,10 +971,9 @@ definitions:
         type: array
       status:
         description: |-
-          Status of the build step. At this time, build step status is only updated
-          on build completion; step status is not updated in real-time as the build
-          progresses.
-          @OutputOnly
+          Output only. Status of the build step. At this time, build step status is
+          only updated on build completion; step status is not updated in real-time
+          as the build progresses.
         enum:
           - STATUS_UNKNOWN
           - QUEUED
@@ -1045,9 +993,7 @@ definitions:
         type: string
       timing:
         $ref: '#/definitions/TimeSpan'
-        description: |-
-          Stores timing information for executing this build step.
-          @OutputOnly
+        description: Output only. Stores timing information for executing this build step.
       volumes:
         description: |-
           List of volumes to mount into the build step.
@@ -1081,10 +1027,7 @@ definitions:
         $ref: '#/definitions/Build'
         description: Contents of the build template.
       createTime:
-        description: |-
-          Time when the trigger was created.
-
-          @OutputOnly
+        description: Output only. Time when the trigger was created.
         format: google-datetime
         type: string
       description:
@@ -1099,11 +1042,35 @@ definitions:
           template.
         type: string
       id:
-        description: |-
-          Unique identifier of the trigger.
-
-          @OutputOnly
+        description: Output only. Unique identifier of the trigger.
         type: string
+      ignoredFiles:
+        description: |-
+          ignored_files and included_files are file glob matches using
+          http://godoc/pkg/path/filepath#Match extended with support for "**".
+
+          If ignored_files and changed files are both empty, then they are
+          not used to determine whether or not to trigger a build.
+
+          If ignored_files is not empty, then we ignore any files that match
+          any of the ignored_file globs. If the change has no files that are
+          outside of the ignored_files globs, then we do not trigger a build.
+        items:
+          type: string
+        type: array
+      includedFiles:
+        description: |-
+          If any of the files altered in the commit pass the ignored_files
+          filter and included_files is empty, then as far as this filter is
+          concerned, we should trigger the build.
+
+          If any of the files altered in the commit pass the ignored_files
+          filter and included_files is not empty, then we make sure that at
+          least one of those files matches a included_files glob. If not,
+          then we do not trigger a build.
+        items:
+          type: string
+        type: array
       substitutions:
         additionalProperties:
           type: string
@@ -1131,9 +1098,7 @@ definitions:
         type: string
       pushTiming:
         $ref: '#/definitions/TimeSpan'
-        description: |-
-          Stores timing information for pushing the specified image.
-          @OutputOnly
+        description: Output only. Stores timing information for pushing the specified image.
     type: object
   CancelBuildRequest:
     description: Request to cancel an ongoing build.
@@ -1301,6 +1266,18 @@ definitions:
         items:
           type: string
         type: array
+      buildStepOutputs:
+        description: |-
+          List of build step outputs, produced by builder images, in the order
+          corresponding to build step indices.
+
+          [Cloud Builders](https://cloud.google.com/cloud-build/docs/cloud-builders)
+          can produce this output by writing to `$BUILDER_OUTPUT/output`.
+          Only the first 4KB of data is stored.
+        items:
+          format: byte
+          type: string
+        type: array
       images:
         description: Container images that were built as a part of the build.
         items:
@@ -1357,16 +1334,16 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/FileHashes'
         description: |-
-          Hash(es) of the build source, which can be used to verify that the original
-          source integrity was maintained in the build. Note that `FileHashes` will
-          only be populated if `BuildOptions` has requested a `SourceProvenanceHash`.
+          Output only. Hash(es) of the build source, which can be used to verify that
+          the originalsource integrity was maintained in the build. Note that
+          `FileHashes` willonly be populated if `BuildOptions` has requested a
+          `SourceProvenanceHash`.
 
           The keys to this map are file paths used as build source and the values
           contain the hash values for those files.
 
           If the build source came in a single package such as a gzipped tarfile
           (`.tar.gz`), the `FileHash` will be for the single path to that file.
-          @OutputOnly
         type: object
       resolvedRepoSource:
         $ref: '#/definitions/RepoSource'

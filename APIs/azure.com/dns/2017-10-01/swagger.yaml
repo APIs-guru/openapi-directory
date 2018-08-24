@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/dns/resource-manager/Microsoft.Network/stable/2017-10-01/dns.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: dns
   x-tags:
@@ -32,19 +31,7 @@ securityDefinitions:
     scopes:
       user_impersonation: impersonate your user account
     type: oauth2
-parameters:
-  ApiVersionParameter:
-    description: Specifies the API version.
-    in: query
-    name: api-version
-    required: true
-    type: string
-  SubscriptionIdParameter:
-    description: 'Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription.'
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
+parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones':
     get:
@@ -57,8 +44,18 @@ paths:
           name: $top
           required: false
           type: integer
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: Success.
@@ -115,19 +112,33 @@ paths:
       description: Lists the DNS zones within a resource group.
       operationId: Zones_ListByResourceGroup
       parameters:
-        - description: The name of the resource group.
+        - description: The name of the resource group. The name is case insensitive.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: 'The maximum number of record sets to return. If not specified, returns up to 100 record sets.'
           format: int32
           in: query
           name: $top
           required: false
           type: integer
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: Success.
@@ -185,11 +196,15 @@ paths:
       description: 'Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.'
       operationId: Zones_Delete
       parameters:
-        - description: The name of the resource group.
+        - description: The name of the resource group. The name is case insensitive.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
@@ -201,8 +216,18 @@ paths:
           required: false
           type: string
           x-ms-client-name: IfMatch
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: The DNS zone has been deleted.
@@ -234,18 +259,32 @@ paths:
       description: 'Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.'
       operationId: Zones_Get
       parameters:
-        - description: The name of the resource group.
+        - description: The name of the resource group. The name is case insensitive.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
           required: true
           type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: Success.
@@ -286,11 +325,15 @@ paths:
       description: Updates a DNS zone. Does not modify DNS records within the zone.
       operationId: Zones_Update
       parameters:
-        - description: The name of the resource group.
+        - description: The name of the resource group. The name is case insensitive.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
@@ -308,8 +351,18 @@ paths:
           required: false
           type: string
           x-ms-client-name: IfMatch
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: The DNS zone has been updated.
@@ -353,11 +406,15 @@ paths:
       description: Creates or updates a DNS zone. Does not modify DNS records within the zone.
       operationId: Zones_CreateOrUpdate
       parameters:
-        - description: The name of the resource group.
+        - description: The name of the resource group. The name is case insensitive.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
@@ -381,8 +438,18 @@ paths:
           required: false
           type: string
           x-ms-client-name: IfNoneMatch
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: The DNS zone has been updated.
@@ -449,11 +516,15 @@ paths:
       description: Lists all record sets in a DNS zone.
       operationId: RecordSets_ListAllByDnsZone
       parameters:
-        - description: The name of the resource group.
+        - description: The name of the resource group. The name is case insensitive.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
@@ -471,8 +542,18 @@ paths:
           required: false
           type: string
           x-ms-client-name: recordSetNameSuffix
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: Success.
@@ -538,11 +619,15 @@ paths:
       description: Lists all record sets in a DNS zone.
       operationId: RecordSets_ListByDnsZone
       parameters:
-        - description: The name of the resource group.
+        - description: The name of the resource group. The name is case insensitive.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
@@ -559,8 +644,18 @@ paths:
           name: $recordsetnamesuffix
           required: false
           type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: Success.
@@ -626,11 +721,15 @@ paths:
       description: Lists the record sets of a specified type in a DNS zone.
       operationId: RecordSets_ListByType
       parameters:
-        - description: The name of the resource group.
+        - description: The name of the resource group. The name is case insensitive.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
@@ -666,8 +765,18 @@ paths:
           name: $recordsetnamesuffix
           required: false
           type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: Success.
@@ -931,11 +1040,15 @@ paths:
       description: Deletes a record set from a DNS zone. This operation cannot be undone.
       operationId: RecordSets_Delete
       parameters:
-        - description: The name of the resource group.
+        - description: The name of the resource group. The name is case insensitive.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
@@ -972,8 +1085,18 @@ paths:
           required: false
           type: string
           x-ms-client-name: IfMatch
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: The record set has been deleted.
@@ -1089,11 +1212,15 @@ paths:
       description: Gets a record set.
       operationId: RecordSets_Get
       parameters:
-        - description: The name of the resource group.
+        - description: The name of the resource group. The name is case insensitive.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
@@ -1124,8 +1251,18 @@ paths:
           x-ms-enum:
             modelAsString: false
             name: RecordType
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: Success.
@@ -1376,11 +1513,15 @@ paths:
       description: Updates a record set within a DNS zone.
       operationId: RecordSets_Update
       parameters:
-        - description: The name of the resource group.
+        - description: The name of the resource group. The name is case insensitive.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
@@ -1423,8 +1564,18 @@ paths:
           required: false
           type: string
           x-ms-client-name: IfMatch
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: The record set has been updated.
@@ -1715,11 +1866,15 @@ paths:
       description: Creates or updates a record set within a DNS zone.
       operationId: RecordSets_CreateOrUpdate
       parameters:
-        - description: The name of the resource group.
+        - description: The name of the resource group. The name is case insensitive.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
@@ -1768,8 +1923,18 @@ paths:
           required: false
           type: string
           x-ms-client-name: IfNoneMatch
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: The record set has been updated.
@@ -2441,35 +2606,6 @@ definitions:
       RecordSet:
         $ref: '#/definitions/RecordSet'
         description: Specifies information about the record set being updated.
-  Resource:
-    description: Common properties of an Azure Resource Manager resource
-    properties:
-      id:
-        description: Resource ID.
-        readOnly: true
-        type: string
-      location:
-        description: Resource location.
-        type: string
-        x-ms-mutability:
-          - read
-          - create
-      name:
-        description: Resource name.
-        readOnly: true
-        type: string
-      tags:
-        additionalProperties:
-          type: string
-        description: Resource tags.
-        type: object
-      type:
-        description: Resource type.
-        readOnly: true
-        type: string
-    required:
-      - location
-    x-ms-azure-resource: true
   SoaRecord:
     description: An SOA record.
     properties:
@@ -2535,7 +2671,27 @@ definitions:
         type: array
   Zone:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - allOf:
+          - $ref: '#/definitions/Resource'
+        description: The resource model definition for a ARM tracked top level resource
+        properties:
+          location:
+            description: The geo-location where the resource lives
+            type: string
+            x-ms-mutability:
+              - read
+              - create
+          tags:
+            additionalProperties:
+              type: string
+            description: Resource tags.
+            type: object
+            x-ms-mutability:
+              - read
+              - create
+              - update
+        required:
+          - location
     description: Describes a DNS zone.
     properties:
       etag:

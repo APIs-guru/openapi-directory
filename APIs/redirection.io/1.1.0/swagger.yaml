@@ -65,7 +65,6 @@ paths:
         - application/json
         - text/html
         - text/csv
-      operationId: postAgentFlushRequestCollection
       parameters:
         - description: The new AgentFlushRequest resource
           in: body
@@ -96,13 +95,13 @@ paths:
         - application/json
         - text/html
         - text/csv
-      operationId: postAgentInstanceUpdateCollection
+      operationId: postInstanceCollection
       parameters:
-        - description: The new AgentInstanceUpdate resource
+        - description: The new Instance resource
           in: body
-          name: agentInstanceUpdate
+          name: instance
           schema:
-            $ref: '#/definitions/AgentInstanceUpdate-WriteStart'
+            $ref: '#/definitions/Instance-Write'
       produces:
         - application/ld+json
         - application/json
@@ -110,56 +109,34 @@ paths:
         - text/csv
       responses:
         '201':
-          description: AgentInstanceUpdate resource created
+          description: Instance resource created
           schema:
-            $ref: '#/definitions/AgentInstanceUpdate-Read'
+            $ref: '#/definitions/Instance-Read'
         '400':
           description: Invalid input
         '404':
           description: Resource not found
-      summary: Creates a AgentInstanceUpdate resource.
+      summary: Creates a Instance resource.
       tags:
-        - AgentInstanceUpdate
+        - Instance
   '/agent-instance-updates/{id}':
-    get:
-      operationId: getAgentInstanceUpdateItem
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: string
-      produces:
-        - application/ld+json
-        - application/json
-        - text/html
-        - text/csv
-      responses:
-        '200':
-          description: AgentInstanceUpdate resource response
-          schema:
-            $ref: '#/definitions/AgentInstanceUpdate-Read'
-        '404':
-          description: Resource not found
-      summary: Retrieves a AgentInstanceUpdate resource.
-      tags:
-        - AgentInstanceUpdate
     put:
       consumes:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
-      operationId: putAgentInstanceUpdateItem
+      operationId: putInstanceItem
       parameters:
         - in: path
           name: id
           required: true
           type: string
-        - description: The updated AgentInstanceUpdate resource
+        - description: The updated Instance resource
           in: body
-          name: agentInstanceUpdate
+          name: instance
           schema:
-            $ref: '#/definitions/AgentInstanceUpdate-WriteStart'
+            $ref: '#/definitions/Instance-Write'
       produces:
         - application/ld+json
         - application/json
@@ -167,19 +144,19 @@ paths:
         - text/csv
       responses:
         '200':
-          description: AgentInstanceUpdate resource updated
+          description: Instance resource updated
           schema:
-            $ref: '#/definitions/AgentInstanceUpdate-Read'
+            $ref: '#/definitions/Instance-Read'
         '400':
           description: Invalid input
         '404':
           description: Resource not found
-      summary: Replaces the AgentInstanceUpdate resource.
+      summary: Replaces the Instance resource.
       tags:
-        - AgentInstanceUpdate
+        - Instance
   /agent-rule-complexes:
     get:
-      operationId: agentRuleComplexCollection
+      operationId: agent-legacy-complexRuleCollection
       parameters:
         - in: query
           name: projectId
@@ -192,17 +169,17 @@ paths:
         - text/csv
       responses:
         '200':
-          description: RuleComplex collection response
+          description: Rule collection response
           schema:
             items:
-              $ref: '#/definitions/RuleComplex-Read'
+              $ref: '#/definitions/Rule-Read'
             type: array
-      summary: Retrieves the collection of RuleComplex resources.
+      summary: Retrieves the collection of Rule resources.
       tags:
-        - RuleComplex
+        - Rule
   /agent-rule-straights:
     get:
-      operationId: agentRuleSimpleCollection
+      operationId: agent-legacy-straightRuleCollection
       parameters:
         - in: query
           name: projectId
@@ -215,14 +192,37 @@ paths:
         - text/csv
       responses:
         '200':
-          description: RuleSimple collection response
+          description: Rule collection response
           schema:
             items:
-              $ref: '#/definitions/RuleSimple-Read'
+              $ref: '#/definitions/Rule-Read'
             type: array
-      summary: Retrieves the collection of RuleSimple resources.
+      summary: Retrieves the collection of Rule resources.
       tags:
-        - RuleSimple
+        - Rule
+  /agent-rules:
+    get:
+      operationId: agentRuleCollection
+      parameters:
+        - in: query
+          name: projectId
+          required: true
+          type: string
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: Rule collection response
+          schema:
+            items:
+              $ref: '#/definitions/Rule-Read'
+            type: array
+      summary: Retrieves the collection of Rule resources.
+      tags:
+        - Rule
   /aggregate-logs:
     get:
       operationId: getAggregateLogCollection
@@ -233,27 +233,35 @@ paths:
           required: false
           type: integer
         - in: query
-          name: lastOccurrenceAt
+          name: projectId
           required: false
           type: string
         - in: query
-          name: lastOccurrenceAt_gt
+          name: createdAt
           required: false
           type: string
         - in: query
-          name: lastOccurrenceAt_gte
+          name: createdAt_gt
           required: false
           type: string
         - in: query
-          name: lastOccurrenceAt_lt
+          name: createdAt_gte
           required: false
           type: string
         - in: query
-          name: lastOccurrenceAt_lte
+          name: createdAt_lt
           required: false
           type: string
         - in: query
-          name: fromUrl
+          name: createdAt_lte
+          required: false
+          type: string
+        - in: query
+          name: source
+          required: false
+          type: string
+        - in: query
+          name: target
           required: false
           type: string
         - in: query
@@ -261,11 +269,27 @@ paths:
           required: false
           type: string
         - in: query
-          name: toUrl
+          name: referer
           required: false
           type: string
         - in: query
-          name: viewCount
+          name: simplifiedUserAgent
+          required: false
+          type: string
+        - in: query
+          name: userAgent
+          required: false
+          type: string
+        - in: query
+          name: ruleId
+          required: false
+          type: string
+        - in: query
+          name: instanceName
+          required: false
+          type: string
+        - in: query
+          name: excludeUrls
           required: false
           type: string
       produces:
@@ -360,9 +384,9 @@ paths:
       summary: Retrieves a ExplainUrl resource.
       tags:
         - ExplainUrl
-  /export-rule-complexes:
+  /export-rules:
     get:
-      operationId: exportRuleComplexCollection
+      operationId: exportRuleCollection
       parameters:
         - in: query
           name: projectId
@@ -423,85 +447,14 @@ paths:
         - text/csv
       responses:
         '200':
-          description: RuleComplex collection response
+          description: Rule collection response
           schema:
             items:
-              $ref: '#/definitions/RuleComplex-Read'
+              $ref: '#/definitions/Rule-Read'
             type: array
-      summary: Retrieves the collection of RuleComplex resources.
+      summary: Retrieves the collection of Rule resources.
       tags:
-        - RuleComplex
-  /export-rule-simples:
-    get:
-      operationId: exportRuleSimpleCollection
-      parameters:
-        - in: query
-          name: projectId
-          required: true
-          type: string
-        - in: query
-          name: redirectCode
-          required: false
-          type: integer
-        - in: query
-          name: 'redirectCode[]'
-          required: false
-          type: integer
-        - in: query
-          name: source.input
-          required: false
-          type: string
-        - in: query
-          name: isEnabled
-          required: false
-          type: boolean
-        - in: query
-          name: 'isEnabled[]'
-          required: false
-          type: boolean
-        - in: query
-          name: target
-          required: false
-          type: string
-        - in: query
-          name: 'sort[id]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[target]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[viewCount]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[source.input]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[redirectCode]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[isEnabled]'
-          required: false
-          type: string
-      produces:
-        - application/ld+json
-        - application/json
-        - text/html
-        - text/csv
-      responses:
-        '200':
-          description: RuleSimple collection response
-          schema:
-            items:
-              $ref: '#/definitions/RuleSimple-Read'
-            type: array
-      summary: Retrieves the collection of RuleSimple resources.
-      tags:
-        - RuleSimple
+        - Rule
   /exports:
     get:
       operationId: getExportCollection
@@ -891,6 +844,10 @@ paths:
           required: false
           type: integer
         - in: query
+          name: projectId
+          required: false
+          type: string
+        - in: query
           name: createdAt
           required: false
           type: string
@@ -911,11 +868,11 @@ paths:
           required: false
           type: string
         - in: query
-          name: fromUrl
+          name: source
           required: false
           type: string
         - in: query
-          name: referer
+          name: target
           required: false
           type: string
         - in: query
@@ -923,15 +880,7 @@ paths:
           required: false
           type: string
         - in: query
-          name: toUrl
-          required: false
-          type: string
-        - in: query
-          name: host
-          required: false
-          type: string
-        - in: query
-          name: instanceName
+          name: referer
           required: false
           type: string
         - in: query
@@ -943,11 +892,11 @@ paths:
           required: false
           type: string
         - in: query
-          name: ruleType
+          name: ruleId
           required: false
           type: string
         - in: query
-          name: ruleId
+          name: instanceName
           required: false
           type: string
         - in: query
@@ -992,6 +941,109 @@ paths:
       summary: Retrieves a Log resource.
       tags:
         - Log
+  /markers:
+    post:
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      operationId: postMarkerCollection
+      parameters:
+        - description: The new Marker resource
+          in: body
+          name: marker
+          schema:
+            $ref: '#/definitions/Marker-Write'
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '201':
+          description: Marker resource created
+          schema:
+            $ref: '#/definitions/Marker'
+        '400':
+          description: Invalid input
+        '404':
+          description: Resource not found
+      summary: Creates a Marker resource.
+      tags:
+        - Marker
+  '/markers/{id}':
+    delete:
+      operationId: deleteMarkerItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Marker resource deleted
+        '404':
+          description: Resource not found
+      summary: Removes the Marker resource.
+      tags:
+        - Marker
+    get:
+      operationId: getMarkerItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: Marker resource response
+          schema:
+            $ref: '#/definitions/Marker'
+        '404':
+          description: Resource not found
+      summary: Retrieves a Marker resource.
+      tags:
+        - Marker
+    put:
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      operationId: putMarkerItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - description: The updated Marker resource
+          in: body
+          name: marker
+          schema:
+            $ref: '#/definitions/Marker'
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: Marker resource updated
+          schema:
+            $ref: '#/definitions/Marker'
+        '400':
+          description: Invalid input
+        '404':
+          description: Resource not found
+      summary: Replaces the Marker resource.
+      tags:
+        - Marker
   /organizations:
     get:
       operationId: getOrganizationCollection
@@ -1112,6 +1164,36 @@ paths:
       summary: Replaces the Organization resource.
       tags:
         - Organization
+  /post-logs:
+    post:
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      parameters:
+        - description: The new AgentFlushRequest resource
+          in: body
+          name: agentFlushRequest
+          schema:
+            $ref: '#/definitions/AgentFlushRequest'
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '201':
+          description: AgentFlushRequest resource created
+          schema:
+            $ref: '#/definitions/AgentFlushRequest'
+        '400':
+          description: Invalid input
+        '404':
+          description: Resource not found
+      summary: Creates a AgentFlushRequest resource.
+      tags:
+        - AgentFlushRequest
   /projects:
     post:
       consumes:
@@ -1362,105 +1444,6 @@ paths:
       summary: Retrieves a RuleAction resource.
       tags:
         - RuleAction
-  /rule-complexes:
-    get:
-      operationId: getRuleComplexCollection
-      parameters:
-        - in: query
-          name: projectId
-          required: true
-          type: string
-        - in: query
-          name: redirectCode
-          required: false
-          type: integer
-        - in: query
-          name: 'redirectCode[]'
-          required: false
-          type: integer
-        - in: query
-          name: source.input
-          required: false
-          type: string
-        - in: query
-          name: isEnabled
-          required: false
-          type: boolean
-        - in: query
-          name: 'isEnabled[]'
-          required: false
-          type: boolean
-        - in: query
-          name: target
-          required: false
-          type: string
-        - in: query
-          name: 'sort[id]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[target]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[viewCount]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[source.input]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[redirectCode]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[isEnabled]'
-          required: false
-          type: string
-        - description: The collection page number
-          in: query
-          name: page
-          required: false
-          type: integer
-      produces:
-        - application/ld+json
-        - application/json
-        - text/html
-        - text/csv
-      responses:
-        '200':
-          description: RuleComplex collection response
-          schema:
-            items:
-              $ref: '#/definitions/RuleComplex-Read'
-            type: array
-      summary: Retrieves the collection of RuleComplex resources.
-      tags:
-        - RuleComplex
-  '/rule-complexes/{id}':
-    get:
-      operationId: getRuleComplexItem
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: string
-      produces:
-        - application/ld+json
-        - application/json
-        - text/html
-        - text/csv
-      responses:
-        '200':
-          description: RuleComplex resource response
-          schema:
-            $ref: '#/definitions/RuleComplex-Read'
-        '404':
-          description: Resource not found
-      summary: Retrieves a RuleComplex resource.
-      tags:
-        - RuleComplex
   /rule-set-versions:
     get:
       operationId: getRuleSetVersionCollection
@@ -1590,9 +1573,9 @@ paths:
       summary: Publish a version
       tags:
         - RuleSetVersion
-  /rule-simples:
+  /rules:
     get:
-      operationId: getRuleSimpleCollection
+      operationId: getRuleCollection
       parameters:
         - in: query
           name: projectId
@@ -1658,17 +1641,17 @@ paths:
         - text/csv
       responses:
         '200':
-          description: RuleSimple collection response
+          description: Rule collection response
           schema:
             items:
-              $ref: '#/definitions/RuleSimple-Read'
+              $ref: '#/definitions/Rule-Read'
             type: array
-      summary: Retrieves the collection of RuleSimple resources.
+      summary: Retrieves the collection of Rule resources.
       tags:
-        - RuleSimple
-  '/rule-simples/{id}':
+        - Rule
+  '/rules/{id}':
     get:
-      operationId: getRuleSimpleItem
+      operationId: getRuleItem
       parameters:
         - in: path
           name: id
@@ -1681,14 +1664,14 @@ paths:
         - text/csv
       responses:
         '200':
-          description: RuleSimple resource response
+          description: Rule resource response
           schema:
-            $ref: '#/definitions/RuleSimple-Read'
+            $ref: '#/definitions/Rule-Read'
         '404':
           description: Resource not found
-      summary: Retrieves a RuleSimple resource.
+      summary: Retrieves a Rule resource.
       tags:
-        - RuleSimple
+        - Rule
   /user-organizations:
     post:
       consumes:
@@ -2212,7 +2195,8 @@ definitions:
     description: ''
     properties:
       instanceName: {}
-      instanceTime: {}
+      instanceTime:
+        type: integer
       logs:
         items:
           type: string
@@ -2222,40 +2206,19 @@ definitions:
       - instanceName
       - instanceTime
     type: object
-  AgentInstanceUpdate-Read:
-    description: ''
-    properties:
-      completedAt:
-        format: date-time
-        readOnly: true
-        type: string
-      features:
-        type: string
-      id:
-        readOnly: true
-        type: string
-      instance:
-        type: string
-    type: object
-  AgentInstanceUpdate-WriteStart:
-    description: ''
-    properties:
-      instanceName:
-        description: BC Layer for old agent.
-      name: {}
-    required:
-      - name
-    type: object
   AggregateLog-Read:
     description: ''
     properties:
-      fromUrl: {}
-      host: {}
       id: {}
-      lastOccurrenceAt: {}
-      scheme: {}
-      statusCode: {}
-      toUrl: {}
+      lastOccurrenceAt:
+        format: date-time
+        type: string
+      ruleId:
+        type: string
+      source: {}
+      statusCode:
+        type: integer
+      target: {}
       viewCount: {}
     type: object
   ExplainUrl:
@@ -2441,25 +2404,64 @@ definitions:
   Instance-Read:
     description: ''
     properties:
+      agentDuration:
+        type: integer
+      agentVersion:
+        type: string
+      agentVersionStatus:
+        readOnly: true
+        type: string
+      aggregatedLogsLastFlushedAt:
+        format: date-time
+        type: string
       createdAt:
         format: date-time
         type: string
+      gone:
+        readOnly: true
+        type: boolean
       id:
         readOnly: true
         type: string
+      lastCompletedAt:
+        format: date-time
+        type: string
+      lastStartedAt:
+        format: date-time
+        type: string
       logging:
         type: boolean
+      logsLastFlushedAt:
+        format: date-time
+        type: string
+      message:
+        type: string
       misconfigured:
         type: boolean
       name:
         type: string
+      rulesCount:
+        type: integer
+      stale:
+        readOnly: true
+        type: boolean
+      status:
+        type: integer
       updatedAt:
         format: date-time
         type: string
-      updates:
-        items:
-          type: string
-        type: array
+    required:
+      - name
+    type: object
+  Instance-Write:
+    description: ''
+    properties:
+      agentVersion:
+        type: string
+      misconfigured:
+        type: boolean
+      name:
+        type: string
     required:
       - name
     type: object
@@ -2515,19 +2517,65 @@ definitions:
       createdAt:
         format: date-time
         type: string
-      fromUrl: {}
-      host: {}
       id: {}
       instanceName: {}
-      referer: {}
-      scheme: {}
-      simplifiedUserAgent: {}
-      statusCode: {}
-      toUrl: {}
-      updatedAt:
-        format: date-time
+      referrer: {}
+      ruleId:
         type: string
+      simplifiedUserAgent: {}
+      source: {}
+      statusCode: {}
+      target: {}
       userAgent: {}
+    type: object
+  Marker:
+    description: ''
+    properties:
+      id: {}
+      maximumOccurrence:
+        type: integer
+      minimumOccurrence:
+        type: integer
+      name:
+        type: string
+      options:
+        items:
+          type: string
+        type: array
+      regex:
+        type: string
+      transformers:
+        items:
+          type: string
+        type: array
+      type:
+        type: string
+    required:
+      - type
+      - name
+    type: object
+  Marker-Write:
+    description: ''
+    properties:
+      maximumOccurrence:
+        type: integer
+      minimumOccurrence:
+        type: integer
+      name:
+        type: string
+      options:
+        items:
+          type: string
+        type: array
+      transformers:
+        items:
+          type: string
+        type: array
+      type:
+        type: string
+    required:
+      - type
+      - name
     type: object
   Organization-List:
     description: ''
@@ -2594,6 +2642,10 @@ definitions:
     properties:
       name:
         type: string
+      onboardingCompletedDemos:
+        items:
+          type: string
+        type: array
       organization:
         type: string
     required:
@@ -2615,12 +2667,17 @@ definitions:
       currentVersion:
         type: string
       id:
-        readOnly: true
         type: string
       name:
         type: string
+      onboardingCompletedDemos:
+        items:
+          type: string
+        type: array
       organization:
         type: string
+      plan:
+        type: integer
       slug:
         type: string
       straightRulesCount:
@@ -2646,12 +2703,17 @@ definitions:
     required:
       - name
       - organization
+      - plan
     type: object
   Project-Write:
     description: ''
     properties:
       name:
         type: string
+      onboardingCompletedDemos:
+        items:
+          type: string
+        type: array
     required:
       - name
     type: object
@@ -2707,6 +2769,37 @@ definitions:
       version:
         type: string
     type: object
+  Rule-Read:
+    description: ''
+    properties:
+      actions:
+        items:
+          type: string
+        type: array
+      currentAction:
+        type: string
+      id:
+        type: string
+      isEnabled:
+        type: boolean
+      markers:
+        items:
+          type: string
+        type: array
+      rank:
+        type: integer
+      redirectCode:
+        type: integer
+      source:
+        type: string
+      target:
+        type: string
+      updatedAt:
+        format: date-time
+        type: string
+      viewCount:
+        type: integer
+    type: object
   RuleAction-Read:
     description: ''
     properties:
@@ -2723,6 +2816,10 @@ definitions:
         type: string
       isEnabled:
         type: boolean
+      markers:
+        items:
+          type: string
+        type: array
       rank:
         type: integer
       ruleId:
@@ -2733,11 +2830,8 @@ definitions:
         type: integer
       target:
         type: string
-      type:
-        type: string
     required:
       - action
-      - type
       - source
       - statusCode
       - isEnabled
@@ -2750,6 +2844,10 @@ definitions:
         type: string
       isEnabled:
         type: boolean
+      markers:
+        items:
+          type: string
+        type: array
       rank:
         type: integer
       ruleId:
@@ -2760,39 +2858,12 @@ definitions:
         type: integer
       target:
         type: string
-      type:
-        type: string
     required:
       - action
-      - type
       - source
       - statusCode
       - isEnabled
       - rank
-    type: object
-  RuleComplex-Read:
-    description: ''
-    properties:
-      actions:
-        items:
-          type: string
-        type: array
-      currentAction:
-        type: string
-      id:
-        type: string
-      isEnabled:
-        type: boolean
-      rank:
-        type: integer
-      redirectCode:
-        type: integer
-      source:
-        type: string
-      target:
-        type: string
-      viewCount:
-        type: integer
     type: object
   RuleSetVersion:
     description: ''
@@ -2872,71 +2943,38 @@ definitions:
         readOnly: true
         type: boolean
     type: object
-  RuleSimple-Read:
-    description: ''
-    properties:
-      actions:
-        items:
-          type: string
-        type: array
-      currentAction:
-        type: string
-      id:
-        type: string
-      isEnabled:
-        type: boolean
-      rank:
-        type: integer
-      redirectCode:
-        type: integer
-      source:
-        type: string
-      target:
-        type: string
-      viewCount:
-        type: integer
-    type: object
   User-CreationWrite:
     description: ''
     properties:
       email:
         type: string
-      firstName:
-        type: string
-      lastName:
+      name:
         type: string
     required:
       - email
-      - firstName
-      - lastName
+      - name
     type: object
   User-EditInfo:
     description: ''
     properties:
-      firstName:
-        type: string
-      lastName:
+      name:
         type: string
     required:
-      - firstName
-      - lastName
+      - name
     type: object
   User-List:
     description: ''
     properties:
       email:
         type: string
-      firstName:
-        type: string
       id:
         readOnly: true
         type: string
-      lastName:
+      name:
         type: string
     required:
       - email
-      - firstName
-      - lastName
+      - name
     type: object
   User-Password:
     description: ''
@@ -2952,12 +2990,10 @@ definitions:
         type: string
       email:
         type: string
-      firstName:
-        type: string
       id:
         readOnly: true
         type: string
-      lastName:
+      name:
         type: string
       userOrganizations:
         items:
@@ -2965,8 +3001,7 @@ definitions:
         type: array
     required:
       - email
-      - firstName
-      - lastName
+      - name
     type: object
   UserOrganization-CreationWrite:
     description: ''

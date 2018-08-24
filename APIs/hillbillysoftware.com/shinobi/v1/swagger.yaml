@@ -16,7 +16,6 @@ info:
       version: '2.0'
   x-providerName: hillbillysoftware.com
   x-serviceName: shinobi
-consumes: []
 produces:
   - application/json
   - text/json
@@ -25,6 +24,7 @@ produces:
 paths:
   '/Actors/Search/{accesstoken}/{Query}':
     get:
+      consumes: []
       operationId: Actor_Get
       parameters:
         - description: ''
@@ -46,9 +46,116 @@ paths:
             type: array
       summary: Returns data on queried actor/actress. Result set limited to 5 records
       tags:
-        - Cast & Crew
+        - Cast & Crew (Cast & Crew in Movies & Television Shows)
+  /AddActor:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: AddActor_Post
+      parameters:
+        - description: ''
+          in: body
+          name: Value
+          required: true
+          schema:
+            $ref: '#/definitions/ActorPost'
+      responses:
+        '200':
+          description: Result
+          schema:
+            $ref: '#/definitions/PostResult'
+        '204':
+          description: Result
+          schema:
+            $ref: '#/definitions/PostResult'
+      summary: Add new actor or actress to database
+      tags:
+        - Cast & Crew (Cast & Crew in Movies & Television Shows)
+  /AddTVShow:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: AddTVShow_Post
+      parameters:
+        - description: ''
+          in: body
+          name: Value
+          required: true
+          schema:
+            $ref: '#/definitions/TVInformationPost'
+      responses:
+        '200':
+          description: Result
+          schema:
+            $ref: '#/definitions/PostResult'
+        '204':
+          description: Result
+          schema:
+            $ref: '#/definitions/PostResult'
+      summary: Add new show to database
+      tags:
+        - 'Television (Shows, Episodes, & Statuses)'
+  '/Aliases/ByID/{AccessToken}/{imdbID}':
+    get:
+      consumes: []
+      operationId: AliasesByID_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: imdbID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of known Aliases
+          schema:
+            items:
+              $ref: '#/definitions/Aliases'
+            type: array
+      summary: Get known aliases for Movies or Television shows from passed imdbID
+      tags:
+        - Aliases (Movie & Television Show Aliases)
+  '/Aliases/ByName/{AccessToken}/{Title}':
+    get:
+      consumes: []
+      operationId: Aliases_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: Title of movie or television show
+          in: path
+          name: Title
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of known Aliases
+          schema:
+            items:
+              $ref: '#/definitions/Aliases'
+            type: array
+      summary: Get known aliases for Movies or Television shows
+      tags:
+        - Aliases (Movie & Television Show Aliases)
   '/Awards/ByWinner/{AccessToken}/{Nominee}':
     get:
+      consumes: []
       operationId: AwardsbyWinner_Get
       parameters:
         - description: ''
@@ -70,9 +177,10 @@ paths:
             type: array
       summary: Gets all awards by nominiee
       tags:
-        - Awards
+        - Awards (Television & Movies)
   '/Awards/ByYear/{Year}':
     get:
+      consumes: []
       operationId: awards_Get
       parameters:
         - description: ''
@@ -89,9 +197,10 @@ paths:
             type: array
       summary: Gets all awards for requested year
       tags:
-        - Awards
+        - Awards (Television & Movies)
   '/Calendar/ByDate/{AccessToken}/{Date}/{Country}':
     get:
+      consumes: []
       operationId: ScheduleByDate_Get
       parameters:
         - description: ''
@@ -118,9 +227,10 @@ paths:
             type: array
       summary: Gets TV Schedule for selected data
       tags:
-        - Calendar
+        - Calendar (Television Show Schedules)
   '/Calendar/Countries/{AccessToken}':
     get:
+      consumes: []
       operationId: CalendarCountries_Get
       parameters:
         - description: ''
@@ -137,9 +247,10 @@ paths:
             type: array
       summary: Returns list of available countries in calendar database
       tags:
-        - Calendar
+        - Calendar (Television Show Schedules)
   '/Calendar/Networks/{AccessToken}':
     get:
+      consumes: []
       operationId: CalendarNetworks_Get
       parameters:
         - description: ''
@@ -156,9 +267,10 @@ paths:
             type: array
       summary: Gets a list of available networks
       tags:
-        - Calendar
+        - Calendar (Television Show Schedules)
   '/Calendar/Today/{AccessToken}':
     get:
+      consumes: []
       operationId: CalendarToday_Get
       parameters:
         - description: ''
@@ -175,9 +287,60 @@ paths:
             type: array
       summary: Will return show schedule for today for all countries in database
       tags:
-        - Calendar
+        - Calendar (Television Show Schedules)
+  '/Cast/ActorBySearch/{AccessToken}/{Actor}':
+    get:
+      consumes: []
+      operationId: ActorInShows_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: 'Part of, or full name of actor'
+          in: path
+          name: Actor
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of actors in show
+          schema:
+            items:
+              $ref: '#/definitions/TVShowActor'
+            type: array
+      summary: Returns all shows queried actor/actress is or has been in
+      tags:
+        - Cast & Crew (Cast & Crew in Movies & Television Shows)
+  '/Cast/ByActor/{AccessToken}/{Actor}':
+    get:
+      consumes: []
+      operationId: CastByActor_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: Full name of actor
+          in: path
+          name: Actor
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of shows Actor is appearing in
+          schema:
+            items:
+              $ref: '#/definitions/TVShowActor'
+            type: array
+      summary: Returns list of show actor is appearing in
+      tags:
+        - Cast & Crew (Cast & Crew in Movies & Television Shows)
   '/Cast/ByTVShow/{accesstoken}/{ShowName}':
     get:
+      consumes: []
       operationId: ActorsInTVShow_Get
       parameters:
         - description: ''
@@ -199,34 +362,36 @@ paths:
             type: array
       summary: Returns all actors in queried tvshow
       tags:
-        - Cast & Crew
-  '/Cast/InTVShow/{accesstoken}/{Actor}':
+        - Cast & Crew (Cast & Crew in Movies & Television Shows)
+  '/Crew/ByID/{AccessToken}/{ID}':
     get:
-      operationId: ActorInShows_Get
+      consumes: []
+      operationId: CrewByID_Get
       parameters:
         - description: ''
           in: path
-          name: accesstoken
+          name: AccessToken
           required: true
           type: string
-        - description: ''
+        - description: 'IMDBID, TVmazeID, or TVDBID'
           in: path
-          name: Actor
+          name: ID
           required: true
           type: string
       responses:
         '200':
-          description: List of actors in show
+          description: List of crew
           schema:
             items:
-              $ref: '#/definitions/TVShowActor'
+              $ref: '#/definitions/Crew'
             type: array
-      summary: Returns all shows queried actor/actress is or has been in
+      summary: Get crew list by ID
       tags:
-        - Cast & Crew
-  '/Crew/Search/{AccessToken}/{ShowName}':
+        - Cast & Crew (Cast & Crew in Movies & Television Shows)
+  '/Crew/ByPerson/{AccessToken}/{PersonName}':
     get:
-      operationId: Crew_Get
+      consumes: []
+      operationId: CrewByPerson_Get
       parameters:
         - description: ''
           in: path
@@ -234,6 +399,31 @@ paths:
           required: true
           type: string
         - description: ''
+          in: path
+          name: PersonName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of crew
+          schema:
+            items:
+              $ref: '#/definitions/Crew'
+            type: array
+      summary: Gets list of productions searched person is/was involved in.
+      tags:
+        - Cast & Crew (Cast & Crew in Movies & Television Shows)
+  '/Crew/ByShowName/{AccessToken}/{ShowName}':
+    get:
+      consumes: []
+      operationId: CrewbyShowname_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: Full exact showname
           in: path
           name: ShowName
           required: true
@@ -245,11 +435,37 @@ paths:
             items:
               $ref: '#/definitions/Crew'
             type: array
+      summary: Get crew list by showname
+      tags:
+        - Cast & Crew (Cast & Crew in Movies & Television Shows)
+  '/Crew/Search/{AccessToken}/{Phrase}':
+    get:
+      consumes: []
+      operationId: Crew_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: 'Part of, or full showname to search for'
+          in: path
+          name: Phrase
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of crew
+          schema:
+            items:
+              $ref: '#/definitions/Crew'
+            type: array
       summary: Returns crew for queried show.
       tags:
-        - Cast & Crew
+        - Cast & Crew (Cast & Crew in Movies & Television Shows)
   '/Episodes/ByID/{AccessToken}/{ID}':
     get:
+      consumes: []
       operationId: EpisodesByID_Get
       parameters:
         - description: ''
@@ -257,7 +473,7 @@ paths:
           name: AccessToken
           required: true
           type: string
-        - description: ''
+        - description: imdbID
           in: path
           name: ID
           required: true
@@ -271,9 +487,40 @@ paths:
             type: array
       summary: Gets all episodes for selected ID
       tags:
-        - TVShows
+        - 'Television (Shows, Episodes, & Statuses)'
+  '/Episodes/BySeason/{AccessToken}/{ID}/{Season}':
+    get:
+      consumes: []
+      operationId: EpisodesBySeason_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: imdbID
+          in: path
+          name: ID
+          required: true
+          type: string
+        - description: Season number
+          in: path
+          name: Season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of episodes for specified season
+          schema:
+            items:
+              $ref: '#/definitions/Episode'
+            type: array
+      summary: Gets list of episodes for specified imdbID and Season number
+      tags:
+        - 'Television (Shows, Episodes, & Statuses)'
   '/Episodes/ByShowName/{AccessToken}/{Showname}':
     get:
+      consumes: []
       operationId: Episodes_Get
       parameters:
         - description: ''
@@ -295,9 +542,56 @@ paths:
             type: array
       summary: Gets all episodes for selected show
       tags:
-        - TVShows
+        - 'Television (Shows, Episodes, & Statuses)'
+  '/Episodes/LatestSeason/{AccessToken}/{ID}':
+    get:
+      consumes: []
+      operationId: EpisodesLastAvailableSeason_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: imdbID
+          in: path
+          name: ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Returns last available Season Number for passed imdbID
+          schema:
+            $ref: '#/definitions/LastAvailableSeason'
+      summary: 'Returns last available season number in database, based on passed imdbID'
+      tags:
+        - 'Television (Shows, Episodes, & Statuses)'
+  '/Episodes/SeasonCount/{AccessToken}/{ID}':
+    get:
+      consumes: []
+      operationId: EpisodesSeasonCount_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: imdbID
+          in: path
+          name: ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Returns number of seasons available
+          schema:
+            $ref: '#/definitions/TVShowSeasons'
+      summary: Returns number of available seasons and episodes
+      tags:
+        - 'Television (Shows, Episodes, & Statuses)'
   '/GetIMDBid/ByID/{AccessToken}/{Query}':
     get:
+      consumes: []
       operationId: GetIMDBid_GetAsync
       parameters:
         - description: ''
@@ -319,9 +613,10 @@ paths:
             type: array
       summary: 'Gets list of avaiable IMDB ids from Movies and TV Show databases, you can use those to query other end points that need ID''s'
       tags:
-        - Miscellaneous
+        - Miscellaneous (Conversion & other Utilities)
   '/Images/ByID/{AccessToken}/{imdbID}':
     get:
+      consumes: []
       operationId: Images_Get
       parameters:
         - description: ''
@@ -343,9 +638,10 @@ paths:
             type: array
       summary: Get images available for movie/tv show with passed imdbID
       tags:
-        - Images
+        - Images (Movie & Television Show Images)
   '/Images/Search/{Accesstoken}/{Query}':
     get:
+      consumes: []
       operationId: ImageSearch_Get
       parameters:
         - description: ''
@@ -353,7 +649,7 @@ paths:
           name: Accesstoken
           required: true
           type: string
-        - description: ''
+        - description: Name or part of name from Movie or Show
           in: path
           name: Query
           required: true
@@ -367,13 +663,14 @@ paths:
           description: List of images
           schema:
             items:
-              $ref: '#/definitions/Images'
+              $ref: '#/definitions/imdbImages'
             type: array
       summary: Get images available for movie/tv show with passed query
       tags:
-        - Images
+        - Images (Movie & Television Show Images)
   '/Magnets/ByDate/{AccessToken}/{Date}':
     get:
+      consumes: []
       operationId: MagnetsByDate_GetAsync
       parameters:
         - description: ''
@@ -393,11 +690,37 @@ paths:
             items:
               $ref: '#/definitions/Magnets'
             type: array
-      summary: Gets available magnet hashes on passed date (yyyy-mm-dd)
+      summary: 'Gets available magnet hashes on passed date (yyyy-mm-dd).  Feature not available on free plan, please donate to be able to use this feature.'
       tags:
-        - Magnets
-  '/Magnets/Movie/{AccessToken}/{Movie}':
+        - Magnets (Magnet hashes of Movies & Television Shows)
+  '/Magnets/ByIMDB/{AccessToken}/{imdbID}':
     get:
+      consumes: []
+      operationId: MagnetsByimdbID_GetAsync
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ID with or without tt prefix
+          in: path
+          name: imdbID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of magnet hashes
+          schema:
+            items:
+              $ref: '#/definitions/Magnets'
+            type: array
+      summary: 'Returns list of magnet hashes for passed IMDBID.  Feature not available on free plan, please donate to be able to use this feature.'
+      tags:
+        - Magnets (Magnet hashes of Movies & Television Shows)
+  '/Magnets/Search/{AccessToken}/{Query}':
+    get:
+      consumes: []
       operationId: magnetsMovieByID_GetAsync
       parameters:
         - description: ''
@@ -405,9 +728,9 @@ paths:
           name: AccessToken
           required: true
           type: string
-        - description: ''
+        - description: Name or part of name of movie or tv show
           in: path
-          name: Movie
+          name: Query
           required: true
           type: string
       responses:
@@ -419,10 +742,11 @@ paths:
             type: array
       summary: 'Try and find magnet links for queried movie.  Feature not available on free plan, please donate to be able to use this feature'
       tags:
-        - Magnets
+        - Magnets (Magnet hashes of Movies & Television Shows)
   '/Magnets/TVShow/{AccessToken}/{TVShow}':
     get:
-      operationId: magnetsTVShowSearch_GetAsync
+      consumes: []
+      operationId: TVShowsearch_Get
       parameters:
         - description: ''
           in: path
@@ -443,9 +767,10 @@ paths:
             type: array
       summary: 'Returns results based on query, Feature not available on free plan, please donate to be able to use this feature.'
       tags:
-        - Magnets
+        - Magnets (Magnet hashes of Movies & Television Shows)
   '/Movie/ByID/{accesstoken}/{imdbID}':
     get:
+      consumes: []
       operationId: MovieID_Get
       parameters:
         - in: path
@@ -462,9 +787,10 @@ paths:
           schema:
             $ref: '#/definitions/MovieInformation'
       tags:
-        - Movies
+        - 'Movies (Movies, Documentaries, & made for Television Movies)'
   '/Movie/Search/{AccessToken}/{Query}':
     get:
+      consumes: []
       operationId: MovieSearch_GetAsync
       parameters:
         - description: ''
@@ -486,9 +812,329 @@ paths:
             type: array
       summary: 'Searches for movies, result set limited to 5 records'
       tags:
-        - Movies
+        - 'Movies (Movies, Documentaries, & made for Television Movies)'
+  '/Music/Albums/Art/{AccessToken}/{AlbumID}':
+    get:
+      consumes: []
+      operationId: musicAlbumArt_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: AlbumID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Gets album art for passed AlbumID
+          schema:
+            $ref: '#/definitions/AlbumArt'
+      summary: Returns Albumart for passed AlbumID
+      tags:
+        - 'Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)'
+  '/Music/Albums/CoverArt/{AccessToken}/{MBID}':
+    get:
+      consumes: []
+      operationId: musicCDCovers_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: MusicBrainzID
+          in: path
+          name: MBID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Gets CD Cover Art for album
+          schema:
+            items:
+              $ref: '#/definitions/CDCoverArt'
+            type: array
+      summary: Gets CD art for passed MusicBrainzID
+      tags:
+        - 'Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)'
+  '/Music/Albums/MusicBrainzID/{AccessToken}/{MBID}':
+    get:
+      consumes: []
+      operationId: MusicByMusicBrainz_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: MusicBrainzID
+          in: path
+          name: MBID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Information about band / artist based on MusicBrainzID
+          schema:
+            items:
+              $ref: '#/definitions/BandInfo'
+            type: array
+      summary: Get Artist / Band information on MusicBrainzID
+      tags:
+        - 'Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)'
+  '/Music/Albums/{AccessToken}/{ArtistID}':
+    get:
+      consumes: []
+      operationId: musicAlbums_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ID of artist or band to retrieve albums from
+          in: path
+          name: ArtistID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Lists all albums from passed ArtistID
+          schema:
+            items:
+              $ref: '#/definitions/BandAlbums'
+            type: array
+      summary: Get albums from passed ArtistID
+      tags:
+        - 'Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)'
+  '/Music/Artist/Art/ID/{AccessToken}/{ArtistID}':
+    get:
+      consumes: []
+      operationId: musicCoverArt_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ArtistID of artist or band
+          in: path
+          name: ArtistID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Gets art for passed ArtistID
+          schema:
+            $ref: '#/definitions/ArtistArt'
+      summary: Retrieves artist / band Banner and logo based on ArtistID
+      tags:
+        - 'Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)'
+  '/Music/Artist/Art/Name/{AccessToken}/{Name}':
+    get:
+      consumes: []
+      operationId: musicCoverArtByName_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: Name of artist or band
+          in: path
+          name: Name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Gets art for passed arist or bandname
+          schema:
+            $ref: '#/definitions/ArtistArt'
+      summary: Retrieves artist / band Banner and logo based on artist or bandname
+      tags:
+        - 'Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)'
+  '/Music/Artist/Extended/{AccessToken}/{Name}':
+    get:
+      consumes: []
+      operationId: musicArtistExtended_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: Name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Extended Information about band / artist
+          schema:
+            items:
+              $ref: '#/definitions/BandInfoExtended'
+            type: array
+      summary: 'Provides extended information, which includes all known albums and music videos of artist / band'
+      tags:
+        - 'Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)'
+  '/Music/Artist/{AccessToken}/{Name}':
+    get:
+      consumes: []
+      operationId: Music_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: Name (or part) of band or artist name
+          in: path
+          name: Name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Information about band / artist
+          schema:
+            items:
+              $ref: '#/definitions/BandInfo'
+            type: array
+      summary: Get information about passed band name or artist
+      tags:
+        - 'Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)'
+  '/Music/Lyrics/AlbumID/{AccessToken}/{AlbumID}':
+    get:
+      consumes: []
+      operationId: musicLyricsbyAlbumID_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: AlbumID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: lyric(s) for requested albumID
+          schema:
+            items:
+              $ref: '#/definitions/Lyric'
+            type: array
+      summary: Returns all lyrics for requested AlbumID
+      tags:
+        - 'Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)'
+  '/Music/Lyrics/ByName/{AccessToken}/{Name}':
+    get:
+      consumes: []
+      operationId: musicLyrics_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: Name (or partial) of band or artist (record set limited to 25)
+          in: path
+          name: Name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: lyric(s) for requested artist / band
+          schema:
+            items:
+              $ref: '#/definitions/Lyric'
+            type: array
+      summary: Get lyrics for band or artist (record set limited to 25)
+      tags:
+        - 'Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)'
+  '/Music/Lyrics/BySong/{AccessToken}/{Song}':
+    get:
+      consumes: []
+      operationId: musicLyricsBySong_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: Name or part of song name
+          in: path
+          name: Song
+          required: true
+          type: string
+      responses:
+        '200':
+          description: lyric(s) for requested song
+          schema:
+            items:
+              $ref: '#/definitions/Lyric'
+            type: array
+      summary: Get lyrics on song title
+      tags:
+        - 'Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)'
+  '/Music/Tracks/{AccessToken}/{AlbumID}':
+    get:
+      consumes: []
+      operationId: musicTracks_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: AlbumID (can be retrieved via album endpoint)
+          in: path
+          name: AlbumID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Lists all tracks on album from passed AlbumID
+          schema:
+            items:
+              $ref: '#/definitions/AlbumTracks'
+            type: array
+      summary: Get all tracks from requested album
+      tags:
+        - 'Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)'
+  '/Music/Videos/{AccessToken}/{ArtistID}':
+    get:
+      consumes: []
+      operationId: MusiVideos_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: ArtistID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Lists all videos available for this Artist / Band
+          schema:
+            items:
+              $ref: '#/definitions/MusicVideo'
+            type: array
+      summary: Lists all videos available for this Artist / Band
+      tags:
+        - 'Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)'
   '/Rating/ByID/{AccessToken}/{imdbID}':
     get:
+      consumes: []
       operationId: Rating_Get
       parameters:
         - description: ''
@@ -508,9 +1154,32 @@ paths:
             $ref: '#/definitions/RatingItem'
       summary: 'Returns ratings from various resources(IMDB,Rotten Tomatoes, metaCritics, TVMaze etc) of passed IMDBid'
       tags:
-        - Miscellaneous
+        - Ratings  (Movie & Television Show Ratings)
+  '/Rating/ByName/{AccessToken}/{Name}':
+    get:
+      consumes: []
+      operationId: RatingByName_Get
+      parameters:
+        - in: path
+          name: AccessToken
+          required: true
+          type: string
+        - in: path
+          name: Name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Ratings
+          schema:
+            items:
+              $ref: '#/definitions/RatingItem'
+            type: array
+      tags:
+        - Ratings  (Movie & Television Show Ratings)
   '/Status/{AccessToken}/{Query}':
     get:
+      consumes: []
       operationId: ShowStatus_Get
       parameters:
         - description: ''
@@ -532,9 +1201,10 @@ paths:
             type: array
       summary: 'Returns status of queried show (query can be IMDB, TVDB, or showname)'
       tags:
-        - TVShows
+        - 'Television (Shows, Episodes, & Statuses)'
   '/TV/ByID/{accesstoken}/{imdbID}':
     get:
+      consumes: []
       operationId: TVShowID_Get
       parameters:
         - description: ''
@@ -558,19 +1228,20 @@ paths:
             $ref: '#/definitions/TVInformation'
       summary: Returns TVShow information based on IMDBid
       tags:
-        - TVShows
-  '/TV/Search/{accesstoken}/{query}':
+        - 'Television (Shows, Episodes, & Statuses)'
+  '/TV/ByName/{AccessToken}/{Query}':
     get:
-      operationId: TVShowSearch_GetAsync
+      consumes: []
+      operationId: TVShowByName_Get
       parameters:
         - description: ''
           in: path
-          name: accesstoken
+          name: AccessToken
           required: true
           type: string
         - description: ''
           in: path
-          name: query
+          name: Query
           required: true
           type: string
       responses:
@@ -582,9 +1253,10 @@ paths:
             type: array
       summary: 'Returns results based on query, result set limited to 5 records'
       tags:
-        - TVShows
+        - 'Television (Shows, Episodes, & Statuses)'
   '/Trailers/ByID/{AccessToken}/{imdbID}':
     get:
+      consumes: []
       operationId: TrailersbyID_Get
       parameters:
         - description: ''
@@ -606,7 +1278,78 @@ paths:
             type: array
       summary: Get Trailers for passed imdbID
       tags:
-        - Trailers
+        - Trailers (Movie & Television Show Trailers)
+  '/Trailers/CountByID/{AccessToken}/{imdbID}':
+    get:
+      consumes: []
+      operationId: TrailerCountByID_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: imdbID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Count of trailers available for imdbID
+          schema:
+            $ref: '#/definitions/TrailerCount'
+      summary: Get trailer count for passed ID
+      tags:
+        - Trailers (Movie & Television Show Trailers)
+  '/Trailers/CountByName/{AccessToken}/{Name}':
+    get:
+      consumes: []
+      operationId: TrailerCountByName_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: Name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Count of trailers available for passed name
+          schema:
+            $ref: '#/definitions/TrailerCount'
+      summary: Get trailer count for passed name (Movie title or TVShow name)
+      tags:
+        - Trailers (Movie & Television Show Trailers)
+  '/Trailers/Search/{AccessToken}/{Phrase}':
+    get:
+      consumes: []
+      operationId: TrailerSearch_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: Trailer you like to search for
+          in: path
+          name: Phrase
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of trailers
+          schema:
+            items:
+              $ref: '#/definitions/Trailer'
+            type: array
+      summary: Gets trailers by search phrase (limited to 10 records)
+      tags:
+        - Trailers (Movie & Television Show Trailers)
 definitions:
   Actor:
     properties:
@@ -625,6 +1368,163 @@ definitions:
       ProfileImage:
         type: string
     type: object
+  ActorPost:
+    properties:
+      AccessToken:
+        type: string
+      Bio:
+        type: string
+      BirthYear:
+        type: string
+      DeathYear:
+        type: string
+      Gender:
+        type: string
+      Name:
+        type: string
+      PopularityIndex:
+        type: string
+      ProfileImage:
+        type: string
+    type: object
+  AlbumArt:
+    properties:
+      AlbumID:
+        type: string
+      Albumname:
+        type: string
+      Art:
+        type: string
+    type: object
+  AlbumTracks:
+    properties:
+      AlbumID:
+        type: string
+      ArtistID:
+        type: string
+      Length:
+        type: string
+      TrackName:
+        type: string
+      TrackNo:
+        type: string
+    type: object
+  Aliases:
+    properties:
+      Aka:
+        type: string
+      ExternalIDs:
+        items:
+          $ref: '#/definitions/ExternalIDs'
+        type: array
+      Name:
+        type: string
+      OriginalName:
+        type: string
+    type: object
+  ArtistArt:
+    properties:
+      ArtistID:
+        type: string
+      Banner:
+        type: string
+      Logo:
+        type: string
+      Name:
+        type: string
+    type: object
+  BandAlbums:
+    properties:
+      AlbumArt:
+        type: string
+      AlbumID:
+        type: string
+      ArtistID:
+        type: string
+      Bibliography:
+        type: string
+      Label:
+        type: string
+      Name:
+        type: string
+      Releaseyear:
+        type: string
+    type: object
+  BandInfo:
+    properties:
+      ArtistID:
+        type: string
+      Banner:
+        type: string
+      Biography:
+        type: string
+      DisbandedYear:
+        type: string
+      FormationYear:
+        type: string
+      Genre:
+        type: string
+      Logo:
+        type: string
+      Members:
+        type: string
+      MusicBrainzID:
+        type: string
+      Name:
+        type: string
+      SocialMedia:
+        type: string
+      WebSite:
+        type: string
+    type: object
+  BandInfoExtended:
+    properties:
+      Albums:
+        items:
+          $ref: '#/definitions/BandAlbums'
+        type: array
+      ArtistID:
+        type: string
+      Banner:
+        type: string
+      Biography:
+        type: string
+      DisbandedYear:
+        type: string
+      FormationYear:
+        type: string
+      Genre:
+        type: string
+      Logo:
+        type: string
+      Members:
+        type: string
+      MusicBrainzID:
+        type: string
+      Name:
+        type: string
+      SocialMedia:
+        type: string
+      Videos:
+        items:
+          $ref: '#/definitions/MusicVideo'
+        type: array
+      WebSite:
+        type: string
+    type: object
+  CDCoverArt:
+    properties:
+      CoverImage:
+        type: string
+      CoverThumbMedium:
+        type: string
+      CoverThumbSmall:
+        type: string
+      CoverType:
+        type: string
+      MusicBrainzID:
+        type: string
+    type: object
   Country:
     properties:
       Name:
@@ -632,6 +1532,12 @@ definitions:
     type: object
   Crew:
     properties:
+      Externals:
+        items:
+          $ref: '#/definitions/ExternalIDs'
+        type: array
+      Image:
+        type: string
       Name:
         type: string
       ShowName:
@@ -647,7 +1553,11 @@ definitions:
         type: string
       EpisodeNo:
         type: string
-      ImageHash:
+      Externals:
+        items:
+          $ref: '#/definitions/ExternalIDs'
+        type: array
+      Image:
         type: string
       Season:
         type: string
@@ -655,36 +1565,51 @@ definitions:
         type: string
       Title:
         type: string
-      imdbID:
-        type: string
-      tvdbID:
-        type: string
-      tvmazeID:
-        type: string
     type: object
-  Images:
+  ExternalIDs:
     properties:
       ID:
         type: string
-      ImageURI:
-        type: string
-      imdbID:
-        type: string
-      isValidated:
+      Name:
         type: string
     type: object
-  Links:
+  LastAvailableSeason:
     properties:
-      Magnet:
+      Season:
         type: string
-      Title:
+    type: object
+  Lyric:
+    properties:
+      AlbumID:
+        type: string
+      Artist:
+        type: string
+      Lyrics:
+        type: string
+      Song:
         type: string
     type: object
   Magnets:
     properties:
+      Externals:
+        items:
+          $ref: '#/definitions/ExternalIDs'
+        type: array
+      FirstSeenDate:
+        description: Date this hash was first detected
+        type: string
       Hash:
+        description: The actual hash you need to construct your magnet
+        type: string
+      Image:
         type: string
       Name:
+        type: string
+      Peers:
+        description: Number of Peers available at FirstSeenDate
+        type: string
+      Seeds:
+        description: Number of Seeds available at FirstSeenDate
         type: string
       Size:
         type: string
@@ -707,10 +1632,17 @@ definitions:
         type: string
       Title:
         type: string
-      Urls:
-        items:
-          $ref: '#/definitions/Links'
-        type: array
+    type: object
+  MusicVideo:
+    properties:
+      AlbumID:
+        type: string
+      ArtistID:
+        type: string
+      Decription:
+        type: string
+      Video:
+        type: string
     type: object
   Networks:
     properties:
@@ -719,19 +1651,30 @@ definitions:
       Network:
         type: string
     type: object
+  PostResult:
+    properties:
+      Status:
+        type: string
+    type: object
   RatingItem:
     properties:
-      ID:
+      EpisoDate:
+        type: string
+      IMDB:
         type: string
       MetaCritics:
         type: string
       Name:
         type: string
-      Rating:
-        type: string
       RottenTomatoes:
         type: string
+      RottenTomatoesAudienceScore:
+        type: string
+      TVDB:
+        type: string
       TVMaze:
+        type: string
+      Trakt:
         type: string
       imdbID:
         type: string
@@ -742,9 +1685,11 @@ definitions:
         type: string
       EpisodeRuntime:
         type: string
+      Externals:
+        items:
+          $ref: '#/definitions/ExternalIDs'
+        type: array
       ID:
-        type: string
-      ImdbID:
         type: string
       ReleaseYear:
         type: string
@@ -758,27 +1703,71 @@ definitions:
         type: string
       Title:
         type: string
-      Urls:
-        items:
-          $ref: '#/definitions/Links'
-        type: array
+    type: object
+  TVInformationPost:
+    properties:
+      AccessToken:
+        type: string
+      EpisodeCount:
+        type: string
+      EpisodeRuntime:
+        type: string
+      Genres:
+        type: string
+      ImdbID:
+        type: string
+      PremierYear:
+        type: string
+      Seasons:
+        type: string
+      ShowImage:
+        type: string
+      ShowStatus:
+        type: string
+      Synopsis:
+        type: string
+      Title:
+        type: string
     type: object
   TVShowActor:
     properties:
+      Externals:
+        items:
+          $ref: '#/definitions/ExternalIDs'
+        type: array
+      Image:
+        type: string
       Name:
         type: string
       Role:
         type: string
-      ShowID:
-        type: string
       ShowName:
+        type: string
+    type: object
+  TVShowSeasons:
+    properties:
+      Episodes:
+        type: string
+      Externals:
+        items:
+          $ref: '#/definitions/ExternalIDs'
+        type: array
+      Seasons:
+        type: string
+      Showname:
         type: string
     type: object
   Trailer:
     properties:
+      Episode:
+        type: string
       Key:
+        description: 'Key for trailer, usually end part of uri for youtube links'
         type: string
       MediaType:
+        description: 'Returns Media Type, either C (Channel) T (Television) or M (Movie)'
+        type: string
+      Season:
         type: string
       Site:
         type: string
@@ -787,11 +1776,18 @@ definitions:
       TrailerSize:
         type: string
       TrailerType:
+        description: 'Returns Trailer type (trailer, teaser, channel, episode,credits, clip etc)'
         type: string
       YouTubeEmbeddedCode:
         type: string
       YouTubeURL:
         type: string
+    type: object
+  TrailerCount:
+    properties:
+      Count:
+        format: int32
+        type: integer
     type: object
   _Awards:
     properties:

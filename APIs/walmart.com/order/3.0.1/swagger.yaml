@@ -22,8 +22,10 @@ info:
   x-serviceName: order
 consumes:
   - application/xml
+  - application/json
 produces:
   - application/xml
+  - application/json
 tags:
   - name: Version 3
 paths:
@@ -32,6 +34,11 @@ paths:
       description: You can display a list of all orders with the query parameter filter criteria.
       operationId: getAllOrders
       parameters:
+        - description: Ship Node
+          in: query
+          name: shipNode
+          required: false
+          type: string
         - description: Retrieves all orders with the specified SKU.
           in: query
           name: sku
@@ -79,14 +86,24 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: Used for pagination when there are more than 200 orders to retrieve. The nextCursor value of the returned response includes a link to another GET call to retrieve the next page. Copy the link and paste it in the next call.
-          format: int32
-          in: query
-          name: nextCursor
-          required: false
-          type: integer
         - default: application/xml
-          description: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
+          in: header
+          name: Content-Type
+          required: true
+          type: string
+        - default: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
           in: header
           name: Accept
           required: true
@@ -139,6 +156,11 @@ paths:
       description: You can display all released orders that have been created and are ready for fulfilment.
       operationId: getReleasedOrders
       parameters:
+        - description: Ship Node
+          in: query
+          name: shipNode
+          required: false
+          type: string
         - description: Limit orders to those created after this date or a timestamp.
           in: query
           name: createdStartDate
@@ -150,12 +172,28 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: Used for pagination when there are more than 200 orders to retrieve. The nextCursor value of the returned response includes a link to another GET call to retrieve the next page. Copy the link and paste it in the next call.
-          format: int32
-          in: query
-          name: nextCursor
-          required: false
-          type: integer
+        - default: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
+          in: header
+          name: Content-Type
+          required: true
+          type: string
+        - default: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
+          in: header
+          name: Accept
+          required: true
+          type: string
         - default: SWAGGER_CHANNEL_TYPE
           description: Channel Type
           enum:
@@ -199,6 +237,81 @@ paths:
       summary: Get all released orders
       tags:
         - Version 3
+  '/v3/orders/released{nextCursor}':
+    get:
+      description: You can display all released orders that have been created and are ready for fulfilment with nextCursor path parameter.
+      operationId: getNextCursorReleasedOrders
+      parameters:
+        - description: Used for pagination when there are more than 200 orders to retrieve. The nextCursor value of the returned response includes a link to another GET call to retrieve the next page. Copy the link and paste it in the next call.
+          in: path
+          name: nextCursor
+          required: true
+          type: string
+        - default: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
+          in: header
+          name: Content-Type
+          required: true
+          type: string
+        - default: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
+          in: header
+          name: Accept
+          required: true
+          type: string
+        - default: SWAGGER_CHANNEL_TYPE
+          description: Channel Type
+          enum:
+            - SWAGGER_CHANNEL_TYPE
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: true
+          type: string
+        - description: Your Consumer ID
+          in: header
+          name: WM_CONSUMER.ID
+          required: true
+          type: string
+        - default: Auto populated
+          description: Epoch timestamp
+          in: header
+          name: WM_SEC.TIMESTAMP
+          required: true
+          type: string
+        - default: Auto populated
+          description: Authentication signature
+          in: header
+          name: WM_SEC.AUTH_SIGNATURE
+          required: true
+          type: string
+        - default: Walmart Marketplace
+          description: The Service name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          type: string
+        - default: 123456abcdef
+          description: A Transaction ID
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          type: string
+      responses:
+        default:
+          description: successful operation
+      summary: Get released orders for next page
+      tags:
+        - Version 3
   '/v3/orders/{purchaseOrderId}':
     get:
       description: You can display details of a specific order based on the purchaseOrderId.
@@ -209,8 +322,29 @@ paths:
           name: purchaseOrderId
           required: true
           type: string
+        - description: Ship Node
+          in: query
+          name: shipNode
+          required: false
+          type: string
         - default: application/xml
-          description: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
+          in: header
+          name: Content-Type
+          required: true
+          type: string
+        - default: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
           in: header
           name: Accept
           required: true
@@ -268,16 +402,31 @@ paths:
           name: purchaseOrderId
           required: true
           type: string
+        - description: Ship Node
+          in: query
+          name: shipNode
+          required: false
+          type: string
         - default: application/xml
-          description: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
           in: header
-          name: Accept
+          name: Content-Type
           required: true
           type: string
         - default: application/xml
-          description: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
           in: header
-          name: Content-Type
+          name: Accept
           required: true
           type: string
         - default: SWAGGER_CHANNEL_TYPE
@@ -333,16 +482,31 @@ paths:
           name: purchaseOrderId
           required: true
           type: string
+        - description: Ship Node
+          in: query
+          name: shipNode
+          required: false
+          type: string
         - default: application/xml
-          description: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
           in: header
-          name: Accept
+          name: Content-Type
           required: true
           type: string
         - default: application/xml
-          description: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
           in: header
-          name: Content-Type
+          name: Accept
           required: true
           type: string
         - description: Request body
@@ -404,16 +568,31 @@ paths:
           name: purchaseOrderId
           required: true
           type: string
+        - description: Ship Node
+          in: query
+          name: shipNode
+          required: false
+          type: string
         - default: application/xml
-          description: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
           in: header
-          name: Accept
+          name: Content-Type
           required: true
           type: string
         - default: application/xml
-          description: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
           in: header
-          name: Content-Type
+          name: Accept
           required: true
           type: string
         - description: Request body
@@ -475,16 +654,31 @@ paths:
           name: purchaseOrderId
           required: true
           type: string
+        - description: Ship Node
+          in: query
+          name: shipNode
+          required: false
+          type: string
         - default: application/xml
-          description: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
           in: header
-          name: Accept
+          name: Content-Type
           required: true
           type: string
         - default: application/xml
-          description: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
           in: header
-          name: Content-Type
+          name: Accept
           required: true
           type: string
         - description: Request body
@@ -534,5 +728,80 @@ paths:
         default:
           description: successful operation
       summary: Shipping updates
+      tags:
+        - Version 3
+  '/v3/orders{nextCursor}':
+    get:
+      description: You can display a list of all orders with nextCursor path parameter pagination criteria.
+      operationId: getAllOrdersNext
+      parameters:
+        - description: Used for pagination when there are more than 200 orders to retrieve. The nextCursor value of the returned response includes a link to another GET call to retrieve the next page. Copy the link and paste it in the next call.
+          in: path
+          name: nextCursor
+          required: true
+          type: string
+        - default: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
+          in: header
+          name: Content-Type
+          required: true
+          type: string
+        - default: application/xml
+          description: |-
+            application/xml,
+            application/json
+          enum:
+            - application/xml
+            - application/json
+          in: header
+          name: Accept
+          required: true
+          type: string
+        - default: SWAGGER_CHANNEL_TYPE
+          description: Channel Type
+          enum:
+            - SWAGGER_CHANNEL_TYPE
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: true
+          type: string
+        - description: Your Consumer ID
+          in: header
+          name: WM_CONSUMER.ID
+          required: true
+          type: string
+        - default: Auto populated
+          description: Epoch timestamp
+          in: header
+          name: WM_SEC.TIMESTAMP
+          required: true
+          type: string
+        - default: Auto populated
+          description: Authentication signature
+          in: header
+          name: WM_SEC.AUTH_SIGNATURE
+          required: true
+          type: string
+        - default: Walmart Marketplace
+          description: The Service name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          type: string
+        - default: 123456abcdef
+          description: A Transaction ID
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          type: string
+      responses:
+        default:
+          description: successful operation
+      summary: Get orders for next page
       tags:
         - Version 3

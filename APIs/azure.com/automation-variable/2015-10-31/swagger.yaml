@@ -51,11 +51,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -70,58 +71,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: The response model for the list variables operation.
-            properties:
-              nextLink:
-                description: Gets or sets the next link.
-                type: string
-              value:
-                description: Gets or sets a list of variables.
-                items:
-                  allOf:
-                    - allOf:
-                        - description: The core properties of ARM resources
-                          properties:
-                            id:
-                              description: Fully qualified resource Id for the resource
-                              readOnly: true
-                              type: string
-                            name:
-                              description: The name of the resource
-                              readOnly: true
-                              type: string
-                            type:
-                              description: The type of the resource.
-                              readOnly: true
-                              type: string
-                          x-ms-azure-resource: true
-                      description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-                  description: Definition of the varible.
-                  properties:
-                    properties:
-                      description: Definition of the varible properties
-                      properties:
-                        creationTime:
-                          description: Gets or sets the creation time.
-                          format: date-time
-                          type: string
-                          x-nullable: false
-                        description:
-                          description: Gets or sets the description.
-                          type: string
-                        isEncrypted:
-                          description: Gets or sets the encrypted flag of the variable.
-                          type: boolean
-                          x-nullable: true
-                        lastModifiedTime:
-                          description: Gets or sets the last modified time.
-                          format: date-time
-                          type: string
-                          x-nullable: false
-                        value:
-                          description: Gets or sets the value of the variable.
-                          type: string
-                type: array
+            $ref: '#/definitions/VariableListResult'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1063,11 +1013,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of variable.
           in: path
           name: variableName
@@ -1125,11 +1076,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of variable.
           in: path
           name: variableName
@@ -1149,49 +1101,7 @@ paths:
         '200':
           description: OK
           schema:
-            allOf:
-              - allOf:
-                  - description: The core properties of ARM resources
-                    properties:
-                      id:
-                        description: Fully qualified resource Id for the resource
-                        readOnly: true
-                        type: string
-                      name:
-                        description: The name of the resource
-                        readOnly: true
-                        type: string
-                      type:
-                        description: The type of the resource.
-                        readOnly: true
-                        type: string
-                    x-ms-azure-resource: true
-                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-            description: Definition of the varible.
-            properties:
-              properties:
-                description: Definition of the varible properties
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  isEncrypted:
-                    description: Gets or sets the encrypted flag of the variable.
-                    type: boolean
-                    x-nullable: true
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  value:
-                    description: Gets or sets the value of the variable.
-                    type: string
+            $ref: '#/definitions/Variable'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1239,11 +1149,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The variable name.
           in: path
           name: variableName
@@ -1254,20 +1165,7 @@ paths:
           name: parameters
           required: true
           schema:
-            description: The parameters supplied to the update variable operation.
-            properties:
-              name:
-                description: Gets or sets the name of the variable.
-                type: string
-              properties:
-                description: The properties of the update variable
-                properties:
-                  description:
-                    description: Gets or sets the description of the variable.
-                    type: string
-                  value:
-                    description: Gets or sets the value of the variable.
-                    type: string
+            $ref: '#/definitions/VariableUpdateParameters'
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -1282,49 +1180,7 @@ paths:
         '200':
           description: OK
           schema:
-            allOf:
-              - allOf:
-                  - description: The core properties of ARM resources
-                    properties:
-                      id:
-                        description: Fully qualified resource Id for the resource
-                        readOnly: true
-                        type: string
-                      name:
-                        description: The name of the resource
-                        readOnly: true
-                        type: string
-                      type:
-                        description: The type of the resource.
-                        readOnly: true
-                        type: string
-                    x-ms-azure-resource: true
-                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-            description: Definition of the varible.
-            properties:
-              properties:
-                description: Definition of the varible properties
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  isEncrypted:
-                    description: Gets or sets the encrypted flag of the variable.
-                    type: boolean
-                    x-nullable: true
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  value:
-                    description: Gets or sets the value of the variable.
-                    type: string
+            $ref: '#/definitions/Variable'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1378,11 +1234,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The variable name.
           in: path
           name: variableName
@@ -1393,26 +1250,7 @@ paths:
           name: parameters
           required: true
           schema:
-            description: The parameters supplied to the create or update variable operation.
-            properties:
-              name:
-                description: Gets or sets the name of the variable.
-                type: string
-              properties:
-                description: The properties of the create variable operation.
-                properties:
-                  description:
-                    description: Gets or sets the description of the variable.
-                    type: string
-                  isEncrypted:
-                    description: Gets or sets the encrypted flag of the variable.
-                    type: boolean
-                  value:
-                    description: Gets or sets the value of the variable.
-                    type: string
-            required:
-              - name
-              - properties
+            $ref: '#/definitions/VariableCreateOrUpdateParameters'
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -1427,95 +1265,11 @@ paths:
         '200':
           description: OK
           schema:
-            allOf:
-              - allOf:
-                  - description: The core properties of ARM resources
-                    properties:
-                      id:
-                        description: Fully qualified resource Id for the resource
-                        readOnly: true
-                        type: string
-                      name:
-                        description: The name of the resource
-                        readOnly: true
-                        type: string
-                      type:
-                        description: The type of the resource.
-                        readOnly: true
-                        type: string
-                    x-ms-azure-resource: true
-                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-            description: Definition of the varible.
-            properties:
-              properties:
-                description: Definition of the varible properties
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  isEncrypted:
-                    description: Gets or sets the encrypted flag of the variable.
-                    type: boolean
-                    x-nullable: true
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  value:
-                    description: Gets or sets the value of the variable.
-                    type: string
+            $ref: '#/definitions/Variable'
         '201':
           description: Created
           schema:
-            allOf:
-              - allOf:
-                  - description: The core properties of ARM resources
-                    properties:
-                      id:
-                        description: Fully qualified resource Id for the resource
-                        readOnly: true
-                        type: string
-                      name:
-                        description: The name of the resource
-                        readOnly: true
-                        type: string
-                      type:
-                        description: The type of the resource.
-                        readOnly: true
-                        type: string
-                    x-ms-azure-resource: true
-                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-            description: Definition of the varible.
-            properties:
-              properties:
-                description: Definition of the varible properties
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  isEncrypted:
-                    description: Gets or sets the encrypted flag of the variable.
-                    type: boolean
-                    x-nullable: true
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  value:
-                    description: Gets or sets the value of the variable.
-                    type: string
+            $ref: '#/definitions/Variable'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1567,4 +1321,95 @@ paths:
                   lastModifiedTime: '2017-03-28T22:59:00.937+00:00'
                   value: '"ComputerName.domain.com"'
               headers: {}
-definitions: {}
+definitions:
+  Variable:
+    allOf:
+      - allOf:
+          - $ref: '#/definitions/Resource'
+        description: ARM proxy resource.
+        properties: {}
+        type: object
+    description: Definition of the varible.
+    properties:
+      properties:
+        $ref: '#/definitions/VariableProperties'
+        description: Gets or sets the properties of the variable.
+        x-ms-client-flatten: true
+  VariableCreateOrUpdateParameters:
+    description: The parameters supplied to the create or update variable operation.
+    properties:
+      name:
+        description: Gets or sets the name of the variable.
+        type: string
+      properties:
+        $ref: '#/definitions/VariableCreateOrUpdateProperties'
+        description: Gets or sets the properties of the variable.
+        x-ms-client-flatten: true
+    required:
+      - name
+      - properties
+  VariableCreateOrUpdateProperties:
+    description: The properties of the create variable operation.
+    properties:
+      description:
+        description: Gets or sets the description of the variable.
+        type: string
+      isEncrypted:
+        description: Gets or sets the encrypted flag of the variable.
+        type: boolean
+      value:
+        description: Gets or sets the value of the variable.
+        type: string
+  VariableListResult:
+    description: The response model for the list variables operation.
+    properties:
+      nextLink:
+        description: Gets or sets the next link.
+        type: string
+      value:
+        description: Gets or sets a list of variables.
+        items:
+          $ref: '#/definitions/Variable'
+        type: array
+  VariableProperties:
+    description: Definition of the varible properties
+    properties:
+      creationTime:
+        description: Gets or sets the creation time.
+        format: date-time
+        type: string
+        x-nullable: false
+      description:
+        description: Gets or sets the description.
+        type: string
+      isEncrypted:
+        description: Gets or sets the encrypted flag of the variable.
+        type: boolean
+        x-nullable: true
+      lastModifiedTime:
+        description: Gets or sets the last modified time.
+        format: date-time
+        type: string
+        x-nullable: false
+      value:
+        description: Gets or sets the value of the variable.
+        type: string
+  VariableUpdateParameters:
+    description: The parameters supplied to the update variable operation.
+    properties:
+      name:
+        description: Gets or sets the name of the variable.
+        type: string
+      properties:
+        $ref: '#/definitions/VariableUpdateProperties'
+        description: Gets or sets the value of the variable.
+        x-ms-client-flatten: true
+  VariableUpdateProperties:
+    description: The properties of the update variable
+    properties:
+      description:
+        description: Gets or sets the description of the variable.
+        type: string
+      value:
+        description: Gets or sets the value of the variable.
+        type: string

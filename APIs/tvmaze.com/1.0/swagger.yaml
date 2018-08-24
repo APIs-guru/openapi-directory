@@ -324,6 +324,134 @@ paths:
       summary: Follow a webchannel
       tags:
         - followed webchannels
+  /user/tags:
+    get:
+      responses:
+        '200':
+          description: An array of tags
+          schema:
+            items:
+              $ref: '#/definitions/Tag'
+            type: array
+      summary: List all tags
+      tags:
+        - tagged shows
+    post:
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Tag'
+      responses:
+        '200':
+          description: The newly created tag
+          schema:
+            $ref: '#/definitions/Tag'
+        '422':
+          description: invalid input data
+      summary: Create a new tag
+      tags:
+        - tagged shows
+  '/user/tags/{tag_id}':
+    delete:
+      parameters:
+        - in: path
+          name: tag_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: The tag was deleted
+        '404':
+          description: The tag does not exist
+      summary: Delete a specific tag
+      tags:
+        - tagged shows
+    patch:
+      parameters:
+        - in: path
+          name: tag_id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Tag'
+      responses:
+        '200':
+          description: The tag was updated
+          schema:
+            $ref: '#/definitions/Tag'
+        '404':
+          description: The tag does not exist
+      summary: Update a specific tag
+      tags:
+        - tagged shows
+  '/user/tags/{tag_id}/shows':
+    get:
+      parameters:
+        - in: path
+          name: tag_id
+          required: true
+          type: integer
+        - description: Embed full show info
+          enum:
+            - show
+          in: query
+          name: embed
+          required: false
+          type: string
+      responses:
+        '200':
+          description: A list of tagged shows
+          schema:
+            items:
+              $ref: '#/definitions/TagInstance'
+            type: array
+        '404':
+          description: The tag does not exist
+      summary: List all shows under this tag
+      tags:
+        - tagged shows
+  '/user/tags/{tag_id}/shows/{show_id}':
+    delete:
+      parameters:
+        - in: path
+          name: tag_id
+          required: true
+          type: integer
+        - in: path
+          name: show_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: The show was untagged
+        '404':
+          description: The show was not tagged
+      summary: Untag a show
+      tags:
+        - tagged shows
+    put:
+      parameters:
+        - in: path
+          name: tag_id
+          required: true
+          type: integer
+        - in: path
+          name: show_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: The show was tagged
+          schema:
+            $ref: '#/definitions/TagInstance'
+        '404':
+          description: The show or tag does not exist
+      summary: Tag a show
+      tags:
+        - tagged shows
   /user/votes/episodes:
     get:
       responses:
@@ -522,6 +650,24 @@ definitions:
       voted_at:
         description: Epoch timestamp for when the user voted for the episode
         readOnly: true
+        type: integer
+    type: object
+  Tag:
+    properties:
+      id:
+        readOnly: true
+        type: integer
+      name:
+        type: string
+    type: object
+  TagInstance:
+    properties:
+      _embedded:
+        properties:
+          show:
+            $ref: '#/definitions/Show'
+        type: object
+      show_id:
         type: integer
     type: object
   Webchannel:

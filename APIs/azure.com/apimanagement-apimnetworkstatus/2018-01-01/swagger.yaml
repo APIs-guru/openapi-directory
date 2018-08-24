@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-01-01/apimnetworkstatus.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimnetworkstatus
   x-tags:
@@ -87,36 +86,16 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - NetworkStatus
       x-ms-examples:
         ApiManagementServiceGetNetworkStatusByLocation:
           parameters:
             api-version: '2018-01-01'
-            locationName: East Asia
+            locationName: North Central US
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
@@ -125,28 +104,37 @@ paths:
               body:
                 connectivityStatus:
                   - error: ''
-                    lastStatusChange: '2017-04-13T19:39:53.5543347Z'
-                    lastUpdated: '2017-06-01T23:13:07.9054516Z'
-                    name: apimgmtstxaleb7*******.blob.core.windows.net
+                    lastStatusChange: '2018-06-13T20:31:06.6590782Z'
+                    lastUpdated: '2018-06-13T22:41:07.3844516Z'
+                    name: apimgmtst6mtxxxxxxxx.blob.core.windows.net
                     status: success
                   - error: ''
-                    lastStatusChange: '2017-04-13T19:39:53.7262408Z'
-                    lastUpdated: '2017-06-01T23:13:08.1242042Z'
-                    name: apimgmtstxaleb7*******.file.core.windows.net
+                    lastStatusChange: '2018-06-13T20:31:06.8934611Z'
+                    lastUpdated: '2018-06-13T22:41:08.6657305Z'
+                    name: apimgmtst6mtxxxxxxxx.file.core.windows.net
                     status: success
                   - error: ''
-                    lastStatusChange: '2017-05-27T17:52:41.3592337Z'
-                    lastUpdated: '2017-06-01T23:08:22.9140197Z'
+                    lastStatusChange: '2018-06-13T20:31:06.7529128Z'
+                    lastUpdated: '2018-06-13T22:41:08.7594708Z'
+                    name: apimgmtst6mtxxxxxxxx.table.core.windows.net
+                    status: success
+                  - error: ''
+                    lastStatusChange: '2018-06-13T20:31:07.1125257Z'
+                    lastUpdated: '2018-06-13T22:41:08.6969746Z'
+                    name: 'https://prod3.metrics.nsatc.net:1886/RecoveryService'
+                    status: success
+                  - error: ''
+                    lastStatusChange: '2018-06-13T20:31:07.0968711Z'
+                    lastUpdated: '2018-06-13T22:41:09.5094848Z'
+                    name: n20fxxx.database.windows.net
+                    status: success
+                  - error: ''
+                    lastStatusChange: '2018-06-13T20:41:09.8627827Z'
+                    lastUpdated: '2018-06-13T22:41:29.4358865Z'
                     name: Scm
                     status: success
-                  - error: ''
-                    lastStatusChange: '2017-04-13T19:39:53.5543347Z'
-                    lastUpdated: '2017-06-01T23:13:08.0617078Z'
-                    name: '****seqi.database.windows.net'
-                    status: success
                 dnsServers:
-                  - 10.20.32.69
-                  - 10.20.237.143
+                  - 100.78.90.70
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/networkstatus':
     get:
       description: Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
@@ -191,90 +179,86 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - NetworkStatus
       x-ms-examples:
         ApiManagementServiceGetNetworkStatus:
           parameters:
             api-version: '2018-01-01'
-            locationName: East Asia
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
           responses:
             '200':
               body:
-                - location: Central US
+                - location: North Central US
                   networkStatus:
                     connectivityStatus:
                       - error: ''
-                        lastStatusChange: '2017-06-28T23:17:34.9009011Z'
-                        lastUpdated: '2017-06-28T23:37:35.1518379Z'
-                        name: ap********.blob.core.windows.net
+                        lastStatusChange: '2018-06-13T20:31:06.6590782Z'
+                        lastUpdated: '2018-06-13T22:31:07.3274887Z'
+                        name: apimgmtst6mtxxxxxxxx.blob.core.windows.net
                         status: success
                       - error: ''
-                        lastStatusChange: '2017-06-28T23:17:35.2579713Z'
-                        lastUpdated: '2017-06-28T23:37:35.9161347Z'
-                        name: ap********.file.core.windows.net
+                        lastStatusChange: '2018-06-13T20:31:06.8934611Z'
+                        lastUpdated: '2018-06-13T22:31:08.54627Z'
+                        name: apimgmtst6mtxxxxxxxx.file.core.windows.net
                         status: success
                       - error: ''
-                        lastStatusChange: '2017-06-28T23:17:35.0079651Z'
-                        lastUpdated: '2017-06-28T23:37:35.2130114Z'
-                        name: e*****.database.windows.net
+                        lastStatusChange: '2018-06-13T20:31:06.7529128Z'
+                        lastUpdated: '2018-06-13T22:31:08.6556497Z'
+                        name: apimgmtst6mtxxxxxxxx.table.core.windows.net
                         status: success
                       - error: ''
-                        lastStatusChange: '2017-06-28T23:27:36.8198739Z'
-                        lastUpdated: '2017-06-28T23:37:37.4401208Z'
+                        lastStatusChange: '2018-06-13T20:31:07.1125257Z'
+                        lastUpdated: '2018-06-13T22:31:08.5618943Z'
+                        name: 'https://prod3.metrics.nsatc.net:1886/RecoveryService'
+                        status: success
+                      - error: ''
+                        lastStatusChange: '2018-06-13T20:31:07.0968711Z'
+                        lastUpdated: '2018-06-13T22:31:09.3275394Z'
+                        name: n20fxxxxxxxx.database.windows.net
+                        status: success
+                      - error: ''
+                        lastStatusChange: '2018-06-13T20:41:09.8627827Z'
+                        lastUpdated: '2018-06-13T22:31:28.0942291Z'
                         name: Scm
                         status: success
                     dnsServers:
-                      - 10.20.37.126
-                      - 10.20.244.38
-                - location: West US
+                      - 100.78.90.70
+                - location: South Central US
                   networkStatus:
                     connectivityStatus:
                       - error: ''
-                        lastStatusChange: '2017-06-28T23:17:06.4831818Z'
-                        lastUpdated: '2017-06-28T23:37:07.1803004Z'
-                        name: ap********.file.core.windows.net
+                        lastStatusChange: '2018-06-13T21:36:24.6042279Z'
+                        lastUpdated: '2018-06-13T22:36:26.6522053Z'
+                        name: apimgmtst6mtxxxxxxxx.file.core.windows.net
                         status: success
                       - error: ''
-                        lastStatusChange: '2017-06-28T23:17:05.7332755Z'
-                        lastUpdated: '2017-06-28T23:37:05.9303015Z'
-                        name: bb******.blob.core.windows.net
+                        lastStatusChange: '2018-06-13T21:36:24.1587528Z'
+                        lastUpdated: '2018-06-13T22:36:25.9959344Z'
+                        name: apimgmtst6mtxxxxxxxx.table.core.windows.net
                         status: success
                       - error: ''
-                        lastStatusChange: '2017-06-28T23:17:06.1237965Z'
-                        lastUpdated: '2017-06-28T23:37:07.1178113Z'
-                        name: e******.database.windows.net
+                        lastStatusChange: '2018-06-13T21:36:24.5104599Z'
+                        lastUpdated: '2018-06-13T22:36:25.0115192Z'
+                        name: apimgmtstufddxxxxxxxx.blob.core.windows.net
+                        status: success
+                      - error: ''
+                        lastStatusChange: '2018-06-13T21:36:24.0962419Z'
+                        lastUpdated: '2018-06-13T22:36:26.042817Z'
+                        name: 'https://prod2.metrics.nsatc.net:1886/RecoveryService'
+                        status: success
+                      - error: ''
+                        lastStatusChange: '2018-06-13T21:36:24.80737Z'
+                        lastUpdated: '2018-06-13T22:36:26.7615872Z'
+                        name: n20fxxxxxxxx.database.windows.net
                         status: success
                     dnsServers:
-                      - 10.64.3.87
-                      - 10.64.5.29
-                      - 10.20.32.105
+                      - 100.92.34.14
 definitions:
   ConnectivityStatusContract:
     description: Details about connectivity to a resource.

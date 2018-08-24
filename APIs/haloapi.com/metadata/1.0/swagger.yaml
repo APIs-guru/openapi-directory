@@ -33,6 +33,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   /h5/metadata/campaign-missions:
     get:
@@ -47,7 +48,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc421
+      operationId: Halo-5-Campaign-Missions
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -101,7 +102,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc422
+      operationId: Halo-5-Commendations
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -380,6 +381,296 @@ paths:
                 }
               ]
       summary: Halo 5 - Commendations
+  /h5/metadata/company-commendations:
+    get:
+      description: |
+        <br />
+        <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>August 15, 2018:</strong></p>
+            <ul>
+                <li>Added Endpoint.</li>
+            </ul>
+        </div>
+      operationId: Halo-5-Company-Commendations
+      parameters:
+        - default: en
+          description: The desired language for the Metadata.
+          in: header
+          name: Accept-Language
+          type: string
+      responses:
+        '200':
+          description: The response body will contain the requested Metadata.
+          examples:
+            application/json: |
+              // A list of commendations for the title. There is no significance to the ordering.
+              [
+                {
+                  // Indicates the type of commendation. This is one of the two following options:
+                  //   - "Progressive"
+                  //   - "Meta"
+                  // Progressive commendations have a series of increasingly difficult thresholds
+                  // (levels) a player must cross to receive increasingly greater rewards.
+                  // Meta commendations are unlocked when a player has completed one or more other
+                  // commendation levels. We model this by giving meta commendations one level with
+                  // dependencies rather than a threshold.
+                  "type": "string",
+
+                  // A localized name for the commendation, suitable for display to users. The text is
+                  // title cased. 
+                  "name": "string",
+
+                  // A localized description, suitable for display to users.
+                  "description": "string",
+
+                  // An image that is used as the icon for this commendation.
+                  "iconImageUrl": "string",
+
+                  // One or more levels that model what a player must do to earn rewards and complete
+                  // the commendation.
+                  "levels": [
+                    {
+                      // The reward the player will receive for earning this level.
+                      "reward": {
+
+                        // The amount of XP that will be awarded.
+                        "xp": "int",
+
+                        // The set of requisition packs (if any) that will be awarded.
+                        "requisitionPacks": [
+                          {
+                            // A localized name for the pack, suitable for display to users. The text
+                            // is title cased. 
+                            "name": "string",
+
+                            // A localized description, suitable for display to users.
+                            "description": "string",
+
+                            // A large image for the pack.
+                            "largeImageUrl": "string",
+
+                            // A medium image for the pack.
+                            "mediumImageUrl": "string",
+
+                            // A small image for the pack.
+                            "smallImageUrl": "string",
+
+                            // Internal use. Whether the item should be featured ahead of others.
+                            "isFeatured": "boolean",
+
+                            // Internal use. Whether the item should be labeled as "new!"
+                            "isNew": "boolean",
+
+                            // If the pack is purchasable via credits, this value contains the number
+                            // of credits a player must spend to acquire one pack. This value is zero
+                            // when isPurchasableWithCredits is false.
+                            "creditPrice": "int",
+
+                            // If the pack is currently available for purchase by spending credits,
+                            // then this value is true.
+                            "isPurchasableWithCredits": "boolean",
+
+                            // If the pack might be obtainable through the Xbox Live Marketplace, then
+                            // this value is true.
+                            "isPurchasableFromMarketplace": "boolean",
+
+                            // If this pack might be obtainable through the Xbox Live Marketplace, this
+                            // is the product ID. Note: Pricing and availability within the Xbox Live
+                            // marketplace is controlled independently of this value. The presence of
+                            // an Id in this field is not a guarantee the product is purchasable. There
+                            // may be geographic restrictions restricting purchase in certain regions,
+                            // or the item may not be currently purchasable at all.
+                            "xboxMarketplaceProductId": "guid",
+
+                            // If this pack might be obtainable through the Xbox Live Marketplace, this
+                            // is the URL to the product.
+                            "xboxMarketplaceProductUrl": "string",
+
+                            // Internal use. The order in which packs are shown for merchandising
+                            // purposes.
+                            "merchandisingOrder": "int",
+
+                            // Internal use. Indicates the visual treatment of the pack. This is one of
+                            // the following options:
+                            //   - None
+                            //   - New
+                            //   - Hot
+                            //   - LeavingSoon
+                            //   - MaximumValue
+                            //   - LimitedTime
+                            //   - Featured
+                            //   - BestSeller
+                            //   - Popular
+                            "flair": "string",
+
+                            // The ID that uniquely identifies this pack.
+                            "id": "guid",
+
+                            // Internal use only. Do not use.
+                            "contentId": "guid"
+                          }
+                        ],
+
+                        // The ID that uniquely identifies this reward.
+                        "id": "guid",
+
+                        // Internal use only. Do not use.
+                        "contentId": "guid"
+                      },
+
+                      // For progressive commendations this indicates the threshold that the player
+                      // must meet or exceed to consider the commendation level "completed". For meta
+                      // commendations, this value is always zero.
+                      "threshold": "int",
+
+                      // The ID that uniquely identifies this commendation level.
+                      "id": "guid",
+
+                      // Internal use only. Do not use.
+                      "contentId": "guid"
+                    }
+                  ],
+
+                  // For meta commendations, the commendation is considered "completed" when all
+                  // required levels have been "completed". This list contains one or more Level Ids
+                  // from other commendations. For progressive commendations, this list is empty.
+                  "requiredLevels": [
+                    {
+                      // The threshold that the player must meet or exceed in order to consider the
+                      // level requirement met.
+                      "threshold": "int",
+
+                      // The ID of the commendation level that must be met in order to consider the
+                      // level requirement met.
+                      "id": "guid",
+
+                      // Internal use only. Do not use.
+                      "contentId": "guid"
+                    }
+                  ],
+
+                  // The reward the player will receive for earning this commendation.
+                  "reward": {
+
+                    // The amount of XP that will be awarded.
+                    "xp": "int",
+
+                    // The set of requisition packs (if any) that will be awarded.
+                    "requisitionPacks": [
+                      {
+                        // A localized name for the pack, suitable for display to users. The text is
+                        // title cased. 
+                        "name": "string",
+
+                        // A localized description, suitable for display to users.
+                        "description": "Your achievement on the field of battle will not go unrewarded.",
+
+                        // A large image for the pack.
+                        "largeImageUrl": "string",
+
+                        // A medium image for the pack.
+                        "mediumImageUrl": "string",
+
+                        // A small image for the pack.
+                        "smallImageUrl": "string",
+
+                        // Internal use. Whether the item should be featured ahead of others.
+                        "isFeatured": "boolean",
+
+                        // Internal use. Whether the item should be labeled as "new!"
+                        "isNew": "boolean",
+
+                        // If the pack is purchasable via credits, this value contains the number of
+                        // credits a player must spend to acquire one pack. This value is zero when
+                        // isPurchasableWithCredits is false.
+                        "creditPrice": "int",
+
+                        // If the pack is currently available for purchase by spending credits, then
+                        // this value is true.
+                        "isPurchasableWithCredits": "boolean",
+
+                        // If the pack might be obtainable through the Xbox Live Marketplace, then this
+                        // value is true.
+                        "isPurchasableFromMarketplace": "boolean",
+
+                        // If this pack might be obtainable through the Xbox Live Marketplace, this is
+                        // the product ID. Note: Pricing and availability within the Xbox Live
+                        // marketplace is controlled independently of this value. The presence of an Id
+                        // in this field is not a guarantee the product is purchasable. There may be
+                        // geographic restrictions restricting purchase in certain regions, or the item
+                        // may not be currently purchasable at all.
+                        "xboxMarketplaceProductId": "guid",
+
+                        // If this pack might be obtainable through the Xbox Live Marketplace, this is
+                        // the URL to the product.
+                        "xboxMarketplaceProductUrl": "string",
+
+                        // Internal use. The order in which packs are shown for merchandising purposes.
+                        "merchandisingOrder": "int",
+
+                        // Internal use. Indicates the visual treatment of the pack. This is one of the
+                        // following options:
+                        //   - None
+                        //   - New
+                        //   - Hot
+                        //   - LeavingSoon
+                        //   - MaximumValue
+                        //   - LimitedTime
+                        //   - Featured
+                        //   - BestSeller
+                        //   - Popular
+                        "flair": "string",
+
+                        // The ID that uniquely identifies this pack.
+                        "id": "guid",
+
+                        // Internal use only. Do not use.
+                        "contentId": "guid"
+                      }
+                    ],
+
+                    // The ID that uniquely identifies this reward.
+                    "id": "guid",
+
+                    // Internal use only. Do not use.
+                    "contentId": "guid"
+                  },
+
+                  // Information about how this commendation should be categorized when shown to users.
+                  "category": {
+
+                    // A localized name for the category, suitable for display to users. The text is
+                    // title cased.
+                    "name": "string",
+
+                    // An image that is used as the icon for this category.
+                    "iconImageUrl": "string",
+
+                    // Internal use. The order in which the category should be displayed relative to
+                    // other categories. The lower the value, the more important the category - more
+                    // important categories should be shown before or ahead of less important
+                    // categories.
+                    "order": "int",
+
+                    // The ID that uniquely identifies this category.
+                    "id": "guid",
+
+                    // Internal use only. Do not use.
+                    "contentId": "guid"
+                  },
+
+                  // Whether this commendation is enabled or not.
+                  "enabled": "boolean",
+
+                  // The ID that uniquely identifies this commendation.
+                  "id": "guid",
+
+                    // Internal use only. Do not use.
+                  "contentId": "guid"
+                }
+              ]
+      summary: Halo 5 - Company Commendations
   /h5/metadata/csr-designations:
     get:
       description: |
@@ -393,7 +684,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc423
+      operationId: Halo-5-CSR-Designations
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -468,7 +759,7 @@ paths:
                 <li>Corrected documentation typo. The field "largeIconImageUrl" was incorrectly named "lageIconImageUrl".</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc424
+      operationId: Halo-5-Enemies
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -525,7 +816,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc425
+      operationId: Halo-5-Flexible-Stats
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -571,7 +862,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc426
+      operationId: Halo-5-Game-Base-Variants
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -630,7 +921,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc427
+      operationId: Halo-5-Game-Variant
       parameters:
         - description: An ID that uniquely identifies a Game Variant.
           in: path
@@ -669,7 +960,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc428
+      operationId: Halo-5-Impulses
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -709,7 +1000,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc429
+      operationId: Halo-5-Map-Variant
       parameters:
         - description: An ID that uniquely identifies a Map Variant.
           in: path
@@ -748,7 +1039,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc42a
+      operationId: Halo-5-Maps
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -802,7 +1093,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc42b
+      operationId: Halo-5-Medals
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -885,7 +1176,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc42c
+      operationId: Halo-5-Playlists
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -947,7 +1238,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc42e
+      operationId: Halo-5-Requisition-Pack
       parameters:
         - description: An ID that uniquely identifies a Requisition Pack.
           in: path
@@ -998,7 +1289,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc42d
+      operationId: Halo-5-Requisition
       parameters:
         - description: An ID that uniquely identifies a Requisition.
           in: path
@@ -1147,7 +1438,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc42f
+      operationId: Halo-5-Seasons
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -1235,7 +1526,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc430
+      operationId: Halo-5-Skulls
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -1284,7 +1575,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc431
+      operationId: Halo-5-Spartan-Ranks
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -1410,7 +1701,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc432
+      operationId: Halo-5-Team-Colors
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -1462,7 +1753,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc433
+      operationId: Halo-5-Vehicles
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -1522,7 +1813,7 @@ paths:
                 <li>Corrected documentation issue. The documentation for the "type" field was incorrect.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc434
+      operationId: Halo-5-Weapons
       parameters:
         - default: en
           description: The desired language for the Metadata.
@@ -1582,7 +1873,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc435
+      operationId: Halo-Wars-2-Campaign-Levels
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -1902,7 +2193,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc436
+      operationId: Halo-Wars-2-Campaign-Logs
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -1954,7 +2245,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ae45962109180bdcacc4eb
+      operationId: Halo-Wars-2-Card-Keywords
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -2033,7 +2324,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc438
+      operationId: Halo-Wars-2-Cards
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -2390,7 +2681,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ae45962109180bdcacc4ec
+      operationId: Halo-Wars-2-CSR-Designations
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -2506,7 +2797,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc43a
+      operationId: Halo-Wars-2-Difficulties
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -2584,7 +2875,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc43b
+      operationId: Halo-Wars-2-Game-Object-Categories
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -2635,7 +2926,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc43c
+      operationId: Halo-Wars-2-Game-Objects
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -2747,7 +3038,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc43d
+      operationId: Halo-Wars-2-Leader-Powers
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -2827,7 +3118,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc43e
+      operationId: Halo-Wars-2-Leaders
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -2978,7 +3269,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc43f
+      operationId: Halo-Wars-2-Maps
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -3079,7 +3370,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc440
+      operationId: Halo-Wars-2-Packs
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -3302,7 +3593,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc441
+      operationId: Halo-Wars-2-Playlists
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -3556,7 +3847,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc442
+      operationId: Halo-Wars-2-Seasons
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -3646,7 +3937,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc443
+      operationId: Halo-Wars-2-Spartan-Ranks
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.
@@ -3727,7 +4018,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 58ace18c2109180bdcacc444
+      operationId: Halo-Wars-2-Techs
       parameters:
         - description: |-
             When specified, this indicates the index of the item to start at.

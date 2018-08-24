@@ -6,7 +6,16 @@ basePath: /v1.0
 info:
   contact:
     x-twitter: GoTurbine
-  description: Turbine Labs Public REST API
+  description: |
+    The Turbine Labs API provides CRUD operations for core object types, and is
+    mostly RESTy. The easiest way to interact with the API is with
+    [tbnctl](https://docs.turbinelabs.io/advanced/tbnctl.html).
+    If you want to make direct HTTP calls, however, you can obtain an access
+    token using tbnctl, and then pass it in the Authorization header,
+    prefixed by `Token `:
+    ```console
+    curl -H "Authorization: Token <access token>" https://api.turbinelabs.io/v1.0/cluster
+    ```
   title: Turbine Labs
   version: '1.0'
   x-apisguru-categories:
@@ -23,7 +32,7 @@ produces:
 securityDefinitions:
   api_key:
     in: header
-    name: X-Turbine-API-Key
+    name: Authorization
     type: apiKey
 security:
   - api_key: []
@@ -32,6 +41,8 @@ tags:
     name: Zone
   - description: A configuration that can be applied to one or more running Proxies serving one or more Domains.
     name: Proxy
+  - description: An interface and port a Proxy will listen on
+    name: Listener
   - description: A served hostname and port.
     name: Domain
   - description: A served path within a Domain.
@@ -756,6 +767,130 @@ paths:
       summary: get domain
       tags:
         - Domain
+  /listener:
+    get:
+      description: Get a list of listeners
+      parameters:
+        - description: |
+            A JSON encoded array of ListenerFilter objects. The filter is taken
+            as a union of intersections. In other words an object that matches
+            every constraint in any ListenerFilter will be included.
+          in: query
+          name: filters
+          type: string
+      responses:
+        '200':
+          description: a result containing a list of listeners
+          schema:
+            $ref: '#/definitions/MultiListenerResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: list listeners
+      tags:
+        - Listener
+    post:
+      consumes:
+        - application/json
+      description: Create a new listener
+      parameters:
+        - description: the listener to create
+          in: body
+          name: listener
+          required: true
+          schema:
+            $ref: '#/definitions/ListenerCreate'
+      responses:
+        '200':
+          description: the newly created listener
+          schema:
+            $ref: '#/definitions/ListenerResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: create listener
+      tags:
+        - Listener
+  '/listener/{listenerKey}':
+    delete:
+      description: Delete existing listener
+      parameters:
+        - description: the listener key
+          in: path
+          name: listenerKey
+          required: true
+          type: string
+          x-example: 72c86057-ee8d-4a2b-a3a7-760fbd1d3b9f
+        - description: the current checksum of the listener to be deleted
+          in: query
+          name: checksum
+          required: true
+          type: string
+          x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
+      responses:
+        '200':
+          description: an empty result
+          schema:
+            $ref: '#/definitions/Listener'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: delete listener
+      tags:
+        - Listener
+    get:
+      description: Get details for a single listener
+      parameters:
+        - description: the listener key
+          in: path
+          name: listenerKey
+          required: true
+          type: string
+          x-example: 72c86057-ee8d-4a2b-a3a7-760fbd1d3b9f
+      responses:
+        '200':
+          description: a result containing a single listener
+          schema:
+            $ref: '#/definitions/ListenerResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: get listener
+      tags:
+        - Listener
+    put:
+      consumes:
+        - application/json
+      description: Modify an existing listener
+      parameters:
+        - description: the listener key
+          in: path
+          name: listenerKey
+          required: true
+          type: string
+          x-example: 5074fe62-821e-4034-55bd-b9caa09af2a1
+        - description: the listener to modify
+          in: body
+          name: listener
+          required: true
+          schema:
+            $ref: '#/definitions/Listener'
+      responses:
+        '200':
+          description: A result containing the modified cluster
+          schema:
+            $ref: '#/definitions/ListenerResult'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: modify listener
+      tags:
+        - Listener
   /proxy:
     get:
       description: Get a list of proxies
@@ -1412,34 +1547,17 @@ definitions:
         type: integer
     type: object
   Cluster:
-    properties:
-      checksum:
-        type: string
-      circuit_breakers:
-        $ref: '#/definitions/CircuitBreakers'
-      cluster_key:
-        type: string
-      instances:
-        $ref: '#/definitions/Instances'
-      name:
-        type: string
-      outlier_detection:
-        $ref: '#/definitions/OutlierDetection'
-      require_tls:
-        description: |
-          Experimental:
-          If set, requests to this collection of hosts will be made via HTTPS.
-          At this time neither certificate validation and certificate pinning
-          are supported for proxy clients of this cluster.
-        type: boolean
-      zone_key:
-        type: string
-    required:
-      - cluster_key
-      - zone_key
-      - name
-      - checksum
-    type: object
+    allOf:
+      - $ref: '#/definitions/ClusterCreate'
+      - properties:
+          checksum:
+            type: string
+          cluster_key:
+            type: string
+        required:
+          - cluster_key
+          - checksum
+        type: object
   ClusterConstraint:
     properties:
       cluster_key:
@@ -1467,10 +1585,22 @@ definitions:
     type: array
   ClusterCreate:
     properties:
+      circuit_breakers:
+        $ref: '#/definitions/CircuitBreakers'
+      health_checks:
+        $ref: '#/definitions/HealthChecks'
       instances:
         $ref: '#/definitions/Instances'
       name:
         type: string
+      outlier_detection:
+        $ref: '#/definitions/OutlierDetection'
+      require_tls:
+        description: |
+          If set, requests to this collection of hosts will be made via HTTPS.
+          At this time neither certificate validation and certificate pinning
+          are supported for proxy clients of this cluster.
+        type: boolean
       zone_key:
         type: string
     required:
@@ -1577,6 +1707,18 @@ definitions:
         type: boolean
     type: object
   Domain:
+    allOf:
+      - $ref: '#/definitions/DomainCreate'
+      - properties:
+          checksum:
+            type: string
+          domain_key:
+            type: string
+        required:
+          - domain_key
+          - checksum
+        type: object
+  DomainCreate:
     properties:
       aliases:
         description: |
@@ -1604,21 +1746,6 @@ definitions:
         type: array
       ssl_config:
         $ref: '#/definitions/SSLConfig'
-      zone_key:
-        type: string
-    required:
-      - domain_key
-      - zone_key
-      - name
-      - port
-      - checksum
-    type: object
-  DomainCreate:
-    properties:
-      name:
-        type: string
-      port:
-        type: integer
       zone_key:
         type: string
     required:
@@ -1747,6 +1874,30 @@ definitions:
           $ref: '#/definitions/FilterProducts'
         type: array
     type: object
+  HTTPHealthCheck:
+    properties:
+      host:
+        description: |
+          The value of the host header in the HTTP health check request.
+          If left empty, the name of the cluster being health checked
+          will be used.
+        type: string
+      path:
+        description: |
+          Specifies the HTTP path that will be requested during health
+          checking.
+        type: string
+      request_headers_to_add:
+        $ref: '#/definitions/Metadata'
+        description: |
+          Specifies a list of HTTP headers that should be added to each request
+          sent to the health checked cluster.
+      service_name:
+        description: |
+          An optional service name parameter which is used to validate
+          the identity of the health checked cluster.
+        type: string
+    type: object
   HeaderConstraint:
     description: |
       Indicates that a request's headers should meet some requirement before being
@@ -1800,6 +1951,100 @@ definitions:
           to resolve instance metadatum to find a value.
         type: boolean
     type: object
+  HealthCheck:
+    description: |
+      Configures active health checking for every instance in a cluster.
+    properties:
+      health_checker:
+        description: |
+          Defines the type of health checker to use. Only a single health
+          checker can be defined per HealthCheck.
+        properties:
+          http_health_check:
+            $ref: '#/definitions/HTTPHealthCheck'
+          tcp_health_check:
+            $ref: '#/definitions/TCPHealthCheck'
+        type: object
+      healthy_edge_interval_msec:
+        description: |
+          Interval used for the first health check right after a host is marked
+          as healthy. For subsequent health checks, the proxy will shift back to
+          using the standard health check interval(\'interval_msec\') that is
+          defined. Defaults to the same value as \'interval_msec\' if not
+          specified.
+        type: integer
+      healthy_threshold:
+        description: |
+          The number of healthy health checks required before a host is marked
+          healthy. Note that during startup, only a single successful health
+          check is required to mark a host healthy.
+        type: integer
+      interval_jitter_msec:
+        description: |
+          An optional jitter amount that is added to each interval value
+          calculated by the proxy. If not specified, defaults to 0.
+        type: integer
+      interval_msec:
+        description: |
+          The interval between health checks. The first round of health checks
+          will occur during startup before any traffic is routed to a cluster.
+          This means that the \'no_traffic_interval_msec\' value will be used as
+          the first interval of health checks.
+        type: integer
+      no_traffic_interval_msec:
+        description: |
+          Interval used when a cluster has never had traffic routed to it. It
+          allows cluster information to be kept up to date, without sending a
+          potentially large amount of active health checking traffic for no
+          reason. Once a cluster has been used for traffic routing, The proxy
+          will shift back to using the standard health check interval that is
+          defined. Note that this interval takes precedence over any other.
+          Defaults to 60s.
+        type: integer
+      reuse_connection:
+        description: |
+          Whether or not to reuse health check connections between health checks.
+          Default is true.
+        type: boolean
+      timeout_msec:
+        description: |
+          The time to wait for a health check response. If the timeout is
+          reached without a response, the health check attempt will be
+          considered a failure. This is a required field and must be greater
+          than 0.
+        type: integer
+      unhealthy_edge_interval_msec:
+        description: |
+          Interval used for the first health check right after a host is marked
+          as unhealthy. For subsequent health checks, the proxy will shift back
+          to using either \'unhealthy_interval_msec\' if present or the standard
+          health check interval, \'interval_msec\'.
+        type: integer
+      unhealthy_interval_msec:
+        description: |
+          Interval used for hosts that are marked as unhealthy. As soon as the
+          host is marked as healthy, The proxy will shift back to using the
+          standard health check interval that is defined. This defaults to the
+          same value as \'interval_msec\' if not specified.
+        type: integer
+      unhealthy_threshold:
+        description: |
+          The number of unhealthy health checks required before a host is
+          marked unhealthy. Note that for *http* health checking, if a host
+          responds with 503, this threshold is ignored and the host is
+          considered unhealthy immediately.
+        type: integer
+    required:
+      - timeout_msec
+      - interval_msec
+      - unhealthy_threshold
+      - healthy_threshold
+      - health_checker
+    type: object
+  HealthChecks:
+    items:
+      $ref: '#/definitions/HealthCheck'
+    type: array
   Instance:
     properties:
       host:
@@ -1818,6 +2063,64 @@ definitions:
     items:
       $ref: '#/definitions/Instance'
     type: array
+  Listener:
+    allOf:
+      - $ref: '#/definitions/ListenerCreate'
+      - properties:
+          checksum:
+            type: string
+          listener_key:
+            type: string
+            x-example: 9cd24183-f848-48f8-6f55-0f0724070000
+        required:
+          - listener_key
+          - checksum
+        type: object
+  ListenerCreate:
+    properties:
+      domain_keys:
+        items:
+          type: string
+        type: array
+        x-example:
+          - 9cd24183-f848-48f8-6f55-0f0724070000
+          - 9cd24183-f848-48f8-6f55-0f0724070001
+      ip:
+        description: the interface this listener should bind to.
+        type: string
+        x-example: 0.0.0.0
+      name:
+        type: string
+        x-example: http-web
+      port:
+        description: the port this listener should bind to.
+        type: integer
+        x-example: 80
+      protocol:
+        description: |
+          the protocol this listener will handle. http and http2 configure the listener to only
+          process requests of that type. http_auto will adapt to HTTP/1.1 and HTTP/2 as needed.
+          tcp configures the listener to be a tcp proxy
+        enum:
+          - http
+          - http2
+          - http_auto
+          - tcp
+        type: string
+      tracing_config:
+        $ref: '#/definitions/TracingConfig'
+      zone_key:
+        type: string
+    required:
+      - name
+      - port
+      - protocol
+    type: object
+  ListenerResult:
+    properties:
+      result:
+        $ref: '#/definitions/Listener'
+    type: object
   Match:
     properties:
       from:
@@ -1861,6 +2164,13 @@ definitions:
       result:
         items:
           $ref: '#/definitions/Domain'
+        type: array
+    type: object
+  MultiListenerResult:
+    properties:
+      result:
+        items:
+          $ref: '#/definitions/Listener'
         type: array
     type: object
   MultiProxyResult:
@@ -2012,23 +2322,24 @@ definitions:
         $ref: '#/definitions/PageDetails'
     type: object
   Proxy:
+    allOf:
+      - $ref: '#/definitions/ProxyCreate'
+      - properties:
+          checksum:
+            type: string
+          proxy_key:
+            type: string
+        required:
+          - proxy_key
+          - checksum
+        type: object
+  ProxyCreate:
     properties:
-      checksum:
-        type: string
       domain_keys:
         items:
           type: string
         type: array
-      name:
-        type: string
-      proxy_key:
-        type: string
-      zone_key:
-        type: string
-    type: object
-  ProxyCreate:
-    properties:
-      domain_keys:
+      listener_keys:
         items:
           type: string
         type: array
@@ -2123,6 +2434,18 @@ definitions:
         type: integer
     type: object
   Route:
+    allOf:
+      - $ref: '#/definitions/RouteCreate'
+      - properties:
+          checksum:
+            type: string
+          route_key:
+            type: string
+        required:
+          - route_key
+          - checksum
+        type: object
+  RouteCreate:
     properties:
       checksum:
         type: string
@@ -2153,31 +2476,10 @@ definitions:
       zone_key:
         type: string
     required:
-      - route_key
       - domain_key
       - zone_key
       - path
-      - checksum
       - shared_rules_key
-    type: object
-  RouteCreate:
-    properties:
-      domain_keys:
-        items:
-          type: string
-        type: array
-      name:
-        type: string
-      rules:
-        items:
-          $ref: '#/definitions/Rule'
-        type: array
-      zone_key:
-        type: string
-    required:
-      - zone_key
-      - name
-      - domain_keys
     type: object
   RouteFilter:
     properties:
@@ -2243,6 +2545,18 @@ definitions:
       - cert_key_pairs
     type: object
   SharedRules:
+    allOf:
+      - $ref: '#/definitions/SharedRulesCreate'
+      - properties:
+          checksum:
+            type: string
+          shared_rules_key:
+            type: string
+        required:
+          - shared_rules_key
+          - checksum
+        type: object
+  SharedRulesCreate:
     properties:
       checksum:
         type: string
@@ -2273,25 +2587,6 @@ definitions:
         type: string
     required:
       - zone_key
-      - checksum
-    type: object
-  SharedRulesCreate:
-    properties:
-      default:
-        $ref: '#/definitions/AllConstraints'
-      name:
-        type: string
-      rules:
-        items:
-          $ref: '#/definitions/Rule'
-        type: array
-      shared_rules_key:
-        type: string
-      zone_key:
-        type: string
-    required:
-      - name
-      - zone_key
       - default
     type: object
   SharedRulesFilter:
@@ -2308,6 +2603,25 @@ definitions:
       result:
         $ref: '#/definitions/SharedRules'
     type: object
+  TCPHealthCheck:
+    properties:
+      receive:
+        description: |
+          An array of base64 encoded strings, each representing array of
+          bytes that is expected in health check responses. When
+          checking the response, "fuzzy" matching is performed such that
+          each binary block must be found, and in the order specified,
+          but not necessarily contiguously.
+        items:
+          type: string
+        type: array
+      send:
+        description: |
+          Base64 encoded string representing an array of bytes to be
+          sent in health check requests. Leaving this field empty
+          implies a connect-only health check.
+        type: string
+    type: object
   TimeRange:
     properties:
       end:
@@ -2320,6 +2634,26 @@ definitions:
         description: The beginning of the window we want to see changes for; measured in microseconds since Unix Epoch.
         format: int64
         type: integer
+    type: object
+  TracingConfig:
+    description: |
+      Configures tracing operations to be performed on the given listener
+    properties:
+      ingress:
+        description: |
+          Determines whether spans sent from this listener should be treated as ingress
+          or egress operations.
+        type: boolean
+        x-example: true
+      request_headers_for_tags:
+        description: |
+          the headers specified here will be added to the generated spans as annotations
+        items:
+          type: string
+        type: array
+        x-example:
+          - x-forwarded-for
+          - x-user-id
     type: object
   User:
     properties:

@@ -5,13 +5,13 @@ host: api.paylocity.com
 basePath: /api
 info:
   contact:
-    email: vendorrelations@paylocity.com
+    email: webservices@paylocity.com
   description: |-
-    For general questions and support of the API, contact: vendorrelations@paylocity.com
+    For general questions and support of the API, contact: webservices@paylocity.com
     # Overview
 
     Paylocity Web Services API is an externally facing RESTful Internet protocol. The Paylocity API uses HTTP verbs and a RESTful endpoint structure. OAuth 2.0 is used as the API Authorization framework. Request and response payloads are formatted as JSON.
-    Paylocity supports v1 and v2 versions of its API endpoints. v1, while supported, won't be enhanced with additional functionality. For direct link to v1 documentation, please click [here](https://docs.paylocity.com/weblink/guides/Paylocity_Web_Services_API/v1/Paylocity_Web_Services_API.htm). For additional resources regarding v1/v2 differences and conversion path, please contact vendorrelations@paylocity.com.
+    Paylocity supports v1 and v2 versions of its API endpoints. v1, while supported, won't be enhanced with additional functionality. For direct link to v1 documentation, please click [here](https://docs.paylocity.com/weblink/guides/Paylocity_Web_Services_API/v1/Paylocity_Web_Services_API.htm). For additional resources regarding v1/v2 differences and conversion path, please contact webservices@paylocity.com.
 
     ##### Setup
 
@@ -183,7 +183,7 @@ info:
 
     ## Support
 
-    Questions about using the Paylocity API? Please contact vendorrelations@paylocity.com.
+    Questions about using the Paylocity API? Please contact webservices@paylocity.com.
 
     # Deductions (v1)
 
@@ -192,7 +192,7 @@ info:
     # OnBoarding (v1)
 
     Onboarding API sends employee data into Paylocity Onboarding to help ensure an easy and accurate hiring process for subsequent completion into Web Pay. For schema details, click <a href="https://docs.paylocity.com/weblink/guides/Paylocity_Web_Services_API/v1/Paylocity_Web_Services_API.htm" target="_blank">here</a>.
-  termsOfService: WebLink.OpenApiDoc.TermsOfService
+  termsOfService: Paylocity_Automated_Data_Exchange_Request_Form.pdf
   title: Paylocity
   version: '2'
   x-apisguru-categories:
@@ -1375,7 +1375,7 @@ definitions:
                 - string
                 - 'null'
             blockSpecial:
-              description: Indicates if direct deposit should be blocked when special check types such as Bonus are processed.<br /><small>new with Web Link 16.6 release</small>
+              description: Indicates if direct deposit should be blocked when special check types such as Bonus are processed.<br />
               type:
                 - boolean
                 - 'null'
@@ -1385,7 +1385,7 @@ definitions:
                 - boolean
                 - 'null'
             nameOnAccount:
-              description: 'Name on the bank account. Defaults to employee''s name. <br  />Max length: 30<br /><small>new with Web Link 16.6 release</small>'
+              description: 'Name on the bank account. Defaults to employee''s name. <br  />Max length: 30<br />'
               type:
                 - string
                 - 'null'
@@ -1904,7 +1904,7 @@ definitions:
               - string
               - 'null'
           blockSpecial:
-            description: Indicates if direct deposit should be blocked when special check types such as Bonus are processed.<br /><small>new with Web Link 16.6 release</small>
+            description: Indicates if direct deposit should be blocked when special check types such as Bonus are processed.<br />
             type:
               - boolean
               - 'null'
@@ -1914,7 +1914,7 @@ definitions:
               - boolean
               - 'null'
           nameOnAccount:
-            description: 'Name on the bank account. Defaults to employee''s name. <br  />Max length: 30<br /><small>new with Web Link 16.6 release</small>'
+            description: 'Name on the bank account. Defaults to employee''s name. <br  />Max length: 30<br />'
             type:
               - string
               - 'null'

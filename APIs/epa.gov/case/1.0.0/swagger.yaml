@@ -6,7 +6,7 @@ basePath: /echo
 info:
   contact:
     name: 'US EPA, OECA Integration, Targeting and Access Branch'
-  description: |
+  description: |-
     Enforcement and Compliance History Online (ECHO) is a tool developed and maintained by EPA's Office of Enforcement and Compliance Assurance for public use. ECHO provides integrated compliance and enforcement information for about 800,000 regulated facilities nationwide.
     <BR><BR>CASE Rest Services provide multiple service endpoints, each with specific capabilities, to search and retrieve data on civil cases entered into the 
     Integrated Compliance Information System (ICIS) and criminal cases entered into the Summary of Criminal Prosecutions database.  
@@ -332,7 +332,7 @@ parameters:
     required: false
     type: string
   p_fntype:
-    description: |
+    description: |-
       Controls type of text search performed on facility name with parameter p_fn.
       - EXACT = Find facilities having the exact provided name(s).
       - BEGINS = Find facilities with names starting with the provided term(s).
@@ -733,6 +733,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Enforcement Case Summary Report Search
       tags:
         - Case Enforcement
@@ -769,6 +771,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Enforcement Case Summary Report Search
       tags:
         - Case Enforcement
@@ -870,6 +874,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Enforcement Case Search
       tags:
         - Case Enforcement
@@ -970,6 +976,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Enforcement Case Search
       tags:
         - Case Enforcement
@@ -1007,6 +1015,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Enforcement Criminal Case Summary Report Search
       tags:
         - Case Enforcement
@@ -1043,6 +1053,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Enforcement Criminal Case Summary Report Search
       tags:
         - Case Enforcement
@@ -1122,6 +1134,8 @@ paths:
             required:
               - MapOutput
             type: object
+            xml:
+              name: Root
       summary: Enforcement Case Map Service
       tags:
         - Case Enforcement
@@ -1159,6 +1173,8 @@ paths:
             required:
               - MapOutput
             type: object
+            xml:
+              name: Root
       summary: Enforcement Case Map Service
       tags:
         - Case Enforcement
@@ -1196,6 +1212,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Enforcement Case Paginated Results Service
       tags:
         - Case Enforcement
@@ -1232,6 +1250,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Enforcement Case Paginated Results Service
       tags:
         - Case Enforcement
@@ -1264,6 +1284,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Enforcement Case Metadata Service
       tags:
         - Metadata
@@ -1295,6 +1317,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Enforcement Case Metadata Service
       tags:
         - Metadata
@@ -1332,6 +1356,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: ECHO ICIS Law Sections Lookup Service
       tags:
         - Lookups
@@ -1368,6 +1394,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: ECHO ICIS Law Sections Lookup Service
       tags:
         - Lookups
@@ -1617,6 +1645,8 @@ definitions:
       - NAME
       - PUV
     type: object
+    xml:
+      name: Object
   crs0_MapOutput:
     description: Data container for visualizing case information.
     properties:
@@ -1630,6 +1660,9 @@ definitions:
           $ref: '#/definitions/crs0_MapData'
         title: Map Data
         type: array
+        xml:
+          name: MapData
+          wrapped: true
       PopUpBaseURL:
         description: Combine this URL with the PUC to get popup info
         example: 'https://ofmpub.epa.gov/echo/cwa_rest_services.pop_up?p_id='
@@ -1648,9 +1681,31 @@ definitions:
     type: object
   crs1_CAEDDocuments:
     properties:
-      Dummy:
+      CaseNumber:
+        description: 'A unique number identifying the enforcement action. For EPA civil cases, these numbers begin with either the two digit EPA Region Code, "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or Western Field Office CAA Mobile Source Program cases); followed by the fiscal year in which the action was initiated. After the fiscal year there is a sequence number. State NPDES civil cases start with the two character post abbreviation, followed by a sequence number.'
+        example: 05-200021274
+        title: Case Number
         type: string
+      DocumentLink:
+        type: string
+      EPAProgram:
+        type: string
+      FacilityName:
+        description: The name of the facility.
+        example: 3M COMPANY
+        title: Facility Name
+        type: string
+      PublishDate:
+        type: string
+    required:
+      - CaseNumber
+      - FacilityName
+      - PublishDate
+      - EPAProgram
+      - DocumentLink
     type: object
+    xml:
+      name: CAEDDocument
   crs1_CaseInformation:
     description: 'The basic information section contains information that identifies the action and some key descriptive variables, such as case status and case type.'
     properties:
@@ -1784,8 +1839,6 @@ definitions:
       - CaseSummary
       - Violations
     type: object
-    xml:
-      name: CaseInformation
   crs1_CaseMilestones:
     description: The major milestone events tracked for the enforcement action.
     properties:
@@ -1942,11 +1995,17 @@ definitions:
           $ref: '#/definitions/crs1_ComplianceSchedules'
         title: Compliance Schedules
         type: array
+        xml:
+          name: ComplianceSchedules
+          wrapped: true
       ComplyingActions:
         items:
           $ref: '#/definitions/crs1_ComplyingActions'
         title: Complying Actions
         type: array
+        xml:
+          name: ComplyingActions
+          wrapped: true
       CostRecovery:
         description: 'For civil enforcement actions, cost recovery awarded is the amount of cost recovery ordered or agreed to be repaid by the responsible party of parties.'
         example: '0'
@@ -1985,14 +2044,19 @@ definitions:
       FinalOrderStatuses:
         items:
           $ref: '#/definitions/crs1_FinalOrderStatuses'
-        title: |
-          Final Order Statuses
+        title: Final Order Statuses
         type: array
+        xml:
+          name: FinalOrderStatuses
+          wrapped: true
       PollutantReductions:
         items:
           $ref: '#/definitions/crs1_PollutantReductions'
         title: Pollutant Reductions
         type: array
+        xml:
+          name: PollutantReductions
+          wrapped: true
       SEPCost:
         description: The total value of all SEPs for all settlements at the enforcement case.
         example: '$4,100.00'
@@ -2017,6 +2081,9 @@ definitions:
           $ref: '#/definitions/crs1_SupplementalEnvironmentalProjects'
         title: Supplemental Environmental Projects
         type: array
+        xml:
+          name: SupplementalEnvironmentalProjects
+          wrapped: true
     required:
       - EnforcementConclusionId
       - EnforcementConclusionType
@@ -2269,7 +2336,11 @@ definitions:
       CAEDDocuments:
         items:
           $ref: '#/definitions/crs1_CAEDDocuments'
+        title: CAED Documents
         type: array
+        xml:
+          name: CAEDDocuments
+          wrapped: true
       CaseInformation:
         $ref: '#/definitions/crs1_CaseInformation'
       CaseMilestones:
@@ -2277,31 +2348,49 @@ definitions:
           $ref: '#/definitions/crs1_CaseMilestones'
         title: Case Milestones
         type: array
+        xml:
+          name: CaseMilestones
+          wrapped: true
       Citations:
         items:
           $ref: '#/definitions/crs1_Citations'
         title: Citations
         type: array
+        xml:
+          name: Citations
+          wrapped: true
       Defendants:
         items:
           $ref: '#/definitions/crs1_Defendants'
         title: Defendants
         type: array
+        xml:
+          name: Defendants
+          wrapped: true
       EnforcementConclusions:
         items:
           $ref: '#/definitions/crs1_EnforcementConclusions'
         title: Enforcement Conclusions
         type: array
+        xml:
+          name: EnforcementConclusions
+          wrapped: true
       Facilities:
         items:
           $ref: '#/definitions/crs1_Facilities'
         title: Facilities
         type: array
+        xml:
+          name: Facilities
+          wrapped: true
       LawsAndSections:
         items:
           $ref: '#/definitions/crs1_LawsAndSections'
         title: Laws And Sections
         type: array
+        xml:
+          name: LawsAndSections
+          wrapped: true
       Message:
         description: Field to record messages (typically performance-related) about packet processing
         example: Success
@@ -2312,17 +2401,26 @@ definitions:
           $ref: '#/definitions/crs1_Pollutants'
         title: Pollutants
         type: array
+        xml:
+          name: Pollutants
+          wrapped: true
       ProgramLinks:
         items:
           $ref: '#/definitions/crs1_ProgramLinks'
         title: Program Links
         type: array
+        xml:
+          name: ProgramLinks
+          wrapped: true
       RelatedActivities:
         description: 'This section provides an Activity Type description and date for other ICIS activities (e.g., inspections, or compliance assistance) that are linked to the enforcement action.'
         items:
           $ref: '#/definitions/crs1_RelatedActivities'
         title: Related Activities
         type: array
+        xml:
+          name: RelatedActivities
+          wrapped: true
     required:
       - Message
       - CaseInformation
@@ -2382,6 +2480,9 @@ definitions:
           $ref: '#/definitions/crs0_Cases'
         title: Cases
         type: array
+        xml:
+          name: Cases
+          wrapped: true
       CriminalRows:
         description: Displays the number of criminal enforcement cases within the search results.
         example: '0'
@@ -2587,16 +2688,25 @@ definitions:
           $ref: '#/definitions/crs3_CRDefendants'
         title: Criminal Enforcement Case Defendants
         type: array
+        xml:
+          name: CRDefendants
+          wrapped: true
       CRDetails:
         items:
           $ref: '#/definitions/crs3_CRDetails'
         title: Criminal Case Details
         type: array
+        xml:
+          name: CRDetails
+          wrapped: true
       Locations:
         items:
           $ref: '#/definitions/crs3_Locations'
         title: Locations
         type: array
+        xml:
+          name: Locations
+          wrapped: true
       Message:
         description: Field to record messages (typically performance-related) about packet processing
         example: Success
@@ -2618,6 +2728,9 @@ definitions:
           $ref: '#/definitions/crs0_Cases'
         title: Cases
         type: array
+        xml:
+          name: Cases
+          wrapped: true
       Message:
         description: Field to record messages (typically performance-related) about packet processing
         example: Success
@@ -2658,6 +2771,9 @@ definitions:
           $ref: '#/definitions/met_ResultsColumns'
         title: Result Columns
         type: array
+        xml:
+          name: ResultColumns
+          wrapped: true
     required:
       - Message
     type: object
@@ -2695,6 +2811,8 @@ definitions:
       - ObjectName
       - Description
     type: object
+    xml:
+      name: ResultColumn
   rlk00_LuValues:
     description: Lookup Values
     properties:
@@ -2710,6 +2828,8 @@ definitions:
       - ValueCode
       - ValueDescription
     type: object
+    xml:
+      name: LuValue
   rlk51_Results:
     description: Results Object
     properties:
@@ -2717,6 +2837,9 @@ definitions:
         items:
           $ref: '#/definitions/rlk00_LuValues'
         type: array
+        xml:
+          name: LuValues
+          wrapped: true
       Message:
         description: Field to record messages (typically performance-related) about packet processing
         example: Success

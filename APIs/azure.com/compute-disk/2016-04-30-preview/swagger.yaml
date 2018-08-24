@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/preview/2016-04-30-preview/disk.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: compute-disk
   x-tags:
@@ -640,6 +639,8 @@ paths:
       tags:
         - Disks
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots':
     get:
       description: Lists snapshots under a resource group.
@@ -930,6 +931,8 @@ paths:
       tags:
         - Snapshots
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
 definitions:
   AccessUri:
     description: A disk access SAS uri.

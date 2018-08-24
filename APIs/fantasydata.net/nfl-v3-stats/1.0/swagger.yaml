@@ -34,6 +34,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/ActiveBoxScores':
     get:
@@ -1154,6 +1155,80 @@ paths:
           schema:
             $ref: '#/definitions/PlayerDetail'
       summary: Player Details by Player
+  '/{format}/PlayerGameRedZoneInsideFiveStats/{season}/{week}':
+    get:
+      operationId: PlayerGameRedZoneStatsInsideFive
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
+                      <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+                    
+          in: path
+          name: season
+          required: true
+          type: string
+        - description: |-
+            Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+                      Example: <code>1</code>
+                    
+          in: path
+          name: week
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerGameRedZone'
+            type: array
+      summary: Player Game Red Zone Stats Inside Five
+  '/{format}/PlayerGameRedZoneInsideTenStats/{season}/{week}':
+    get:
+      operationId: PlayerGameRedZoneStatsInsideTen
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
+                      <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+                    
+          in: path
+          name: season
+          required: true
+          type: string
+        - description: |-
+            Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+                      Example: <code>1</code>
+                    
+          in: path
+          name: week
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerGameRedZone'
+            type: array
+      summary: Player Game Red Zone Stats Inside Ten
   '/{format}/PlayerGameRedZoneStats/{season}/{week}':
     get:
       operationId: PlayerGameRedZoneStats
@@ -1430,6 +1505,64 @@ paths:
               $ref: '#/definitions/PlayerOwnership'
             type: array
       summary: Fantasy Player Ownership Percentages (Season-Long)
+  '/{format}/PlayerSeasonRedZoneInsideFiveStats/{season}':
+    get:
+      operationId: PlayerSeasonRedZoneStatsInsideFive
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
+                      <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+                    
+          in: path
+          name: season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerSeasonRedZone'
+            type: array
+      summary: Player Season Red Zone Stats Inside Five
+  '/{format}/PlayerSeasonRedZoneInsideTenStats/{season}':
+    get:
+      operationId: PlayerSeasonRedZoneStatsInsideTen
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
+                      <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+                    
+          in: path
+          name: season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerSeasonRedZone'
+            type: array
+      summary: Player Season Red Zone Stats Inside Ten
   '/{format}/PlayerSeasonRedZoneStats/{season}':
     get:
       operationId: PlayerSeasonRedZoneStats
@@ -1444,8 +1577,7 @@ paths:
           required: true
           type: string
         - description: |-
-
-                      Year of the season and the season type. If no season type is provided, then the default is regular season.
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
                       <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
                     
           in: path
@@ -2319,12 +2451,16 @@ definitions:
         type: integer
   DfsSlateGame:
     properties:
+      Game:
+        $ref: '#/definitions/Schedule'
       GameID:
         type: integer
       OperatorGameID:
         type: integer
       RemovedByOperator:
         type: boolean
+      ScoreID:
+        type: integer
       SlateGameID:
         type: integer
       SlateID:
@@ -2597,6 +2733,10 @@ definitions:
         type: number
       AverageDraftPosition:
         type: number
+      AverageDraftPosition2QB:
+        type: number
+      AverageDraftPositionDynasty:
+        type: number
       AverageDraftPositionPPR:
         type: number
       BlockedKickReturnTouchdowns:
@@ -2777,9 +2917,15 @@ definitions:
         type: integer
       AverageDraftPosition:
         type: number
+      AverageDraftPosition2QB:
+        type: number
+      AverageDraftPositionDynasty:
+        type: number
       AverageDraftPositionIDP:
         type: integer
       AverageDraftPositionPPR:
+        type: number
+      AverageDraftPositionRookie:
         type: number
       ByeWeek:
         type: integer
@@ -3427,6 +3573,12 @@ definitions:
         type: integer
       UpcomingYahooSalary:
         type: integer
+      UsaTodayHeadshotNoBackgroundUrl:
+        type: string
+      UsaTodayHeadshotUrl:
+        type: string
+      UsaTodayPlayerID:
+        type: integer
       Weight:
         type: integer
       XmlTeamPlayerID:
@@ -3626,6 +3778,12 @@ definitions:
       UpcomingSalary:
         type: integer
       UpcomingYahooSalary:
+        type: integer
+      UsaTodayHeadshotNoBackgroundUrl:
+        type: string
+      UsaTodayHeadshotUrl:
+        type: string
+      UsaTodayPlayerID:
         type: integer
       Weight:
         type: integer
@@ -4617,7 +4775,13 @@ definitions:
         type: number
       AverageDraftPosition:
         type: number
+      AverageDraftPosition2QB:
+        type: number
+      AverageDraftPositionDynasty:
+        type: number
       AverageDraftPositionPPR:
+        type: number
+      AverageDraftPositionRookie:
         type: number
       BlockedKickReturnTouchdowns:
         type: number
@@ -4895,7 +5059,13 @@ definitions:
         type: number
       AverageDraftPosition:
         type: number
+      AverageDraftPosition2QB:
+        type: number
+      AverageDraftPositionDynasty:
+        type: number
       AverageDraftPositionPPR:
+        type: number
+      AverageDraftPositionRookie:
         type: number
       BlockedKickReturnTouchdowns:
         type: number
@@ -5173,7 +5343,13 @@ definitions:
         type: number
       AverageDraftPosition:
         type: number
+      AverageDraftPosition2QB:
+        type: number
+      AverageDraftPositionDynasty:
+        type: number
       AverageDraftPositionPPR:
+        type: number
+      AverageDraftPositionRookie:
         type: number
       BlockedKickReturnTouchdowns:
         type: number
@@ -5770,6 +5946,10 @@ definitions:
   Team:
     properties:
       AverageDraftPosition:
+        type: number
+      AverageDraftPosition2QB:
+        type: number
+      AverageDraftPositionDynasty:
         type: number
       AverageDraftPositionPPR:
         type: number

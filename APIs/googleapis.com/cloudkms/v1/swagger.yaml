@@ -7,7 +7,8 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'Manages encryption for your cloud services the same way you do on-premises. You can generate, use, rotate, and destroy AES256 encryption keys.'
+  description: |
+    Cloud KMS allows you to keep cryptographic keys in one central cloud service, for direct use by other cloud resources and applications. With Cloud KMS you are the ultimate custodian of your data, you can manage encryption in the cloud the same way you do on-premises, and you have a provable and monitorable root of trust over your data.
   title: Cloud Key Management Service (KMS)
   version: v1
   x-apiClientRegistration:
@@ -19,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://cloudkms.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -60,11 +61,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -85,12 +81,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -140,12 +130,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -224,33 +212,152 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
-  '/v1/{name}:decrypt':
+  '/v1/{name}/publicKey':
+    get:
+      description: |-
+        Returns the public key for the given CryptoKeyVersion. The
+        CryptoKey.purpose must be
+        ASYMMETRIC_SIGN or
+        ASYMMETRIC_DECRYPT.
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.getPublicKey
+      parameters:
+        - description: |-
+            The name of the CryptoKeyVersion public key to
+            get.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PublicKey'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/{name}:asymmetricDecrypt':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Decrypts data that was protected by Encrypt.
+      description: |-
+        Decrypts data that was encrypted with a public key retrieved from
+        GetPublicKey corresponding to a CryptoKeyVersion with
+        CryptoKey.purpose ASYMMETRIC_DECRYPT.
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.asymmetricDecrypt
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AsymmetricDecryptRequest'
+        - description: |-
+            Required. The resource name of the CryptoKeyVersion to use for
+            decryption.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AsymmetricDecryptResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/{name}:asymmetricSign':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Signs data using a CryptoKeyVersion with CryptoKey.purpose
+        ASYMMETRIC_SIGN, producing a signature that can be verified with the public
+        key retrieved from GetPublicKey.
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.asymmetricSign
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AsymmetricSignRequest'
+        - description: Required. The resource name of the CryptoKeyVersion to use for signing.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AsymmetricSignResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/{name}:decrypt':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Decrypts data that was protected by Encrypt. The CryptoKey.purpose
+        must be ENCRYPT_DECRYPT.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.decrypt
       parameters:
         - in: body
@@ -280,12 +387,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -331,18 +436,19 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: 'Encrypts data, so that it can only be recovered by a call to Decrypt.'
+      description: |-
+        Encrypts data, so that it can only be recovered by a call to Decrypt.
+        The CryptoKey.purpose must be
+        ENCRYPT_DECRYPT.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.encrypt
       parameters:
         - in: body
@@ -375,12 +481,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -421,18 +525,19 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Update the version of a CryptoKey that will be used in Encrypt
+      description: |-
+        Update the version of a CryptoKey that will be used in Encrypt.
+
+        Returns an error if called on an asymmetric key.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.updatePrimaryVersion
       parameters:
         - in: body
@@ -483,6 +588,13 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The fields to include in the response.
+          enum:
+            - CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED
+            - FULL
+          in: query
+          name: view
+          type: string
       responses:
         '200':
           description: Successful response
@@ -497,12 +609,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -565,6 +675,13 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The fields of the primary version to include in the response.
+          enum:
+            - CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED
+            - FULL
+          in: query
+          name: versionView
+          type: string
       responses:
         '200':
           description: Successful response
@@ -579,12 +696,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -593,7 +708,9 @@ paths:
       description: |-
         Create a new CryptoKey within a KeyRing.
 
-        CryptoKey.purpose is required.
+        CryptoKey.purpose and
+        CryptoKey.version_template.algorithm
+        are required.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.create
       parameters:
         - in: body
@@ -665,12 +782,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -737,12 +852,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -752,12 +865,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -795,12 +906,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -839,6 +948,42 @@ paths:
       tags:
         - projects
 definitions:
+  AsymmetricDecryptRequest:
+    description: Request message for KeyManagementService.AsymmetricDecrypt.
+    properties:
+      ciphertext:
+        description: |-
+          Required. The data encrypted with the named CryptoKeyVersion's public
+          key using OAEP.
+        format: byte
+        type: string
+    type: object
+  AsymmetricDecryptResponse:
+    description: Response message for KeyManagementService.AsymmetricDecrypt.
+    properties:
+      plaintext:
+        description: The decrypted data originally encrypted with the matching public key.
+        format: byte
+        type: string
+    type: object
+  AsymmetricSignRequest:
+    description: Request message for KeyManagementService.AsymmetricSign.
+    properties:
+      digest:
+        $ref: '#/definitions/Digest'
+        description: |-
+          Required. The digest of the data to sign. The digest must be produced with
+          the same digest algorithm as specified by the key version's
+          algorithm.
+    type: object
+  AsymmetricSignResponse:
+    description: Response message for KeyManagementService.AsymmetricSign.
+    properties:
+      signature:
+        description: The created signature.
+        format: byte
+        type: string
+    type: object
   AuditConfig:
     description: |-
       Specifies the audit configuration for a service.
@@ -947,6 +1092,13 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          Unimplemented. The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -979,7 +1131,6 @@ definitions:
         description: |-
           Role that is assigned to `members`.
           For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
-          Required
         type: string
     type: object
   CryptoKey:
@@ -1017,24 +1168,32 @@ definitions:
           CreateCryptoKeyVersion and
           UpdateCryptoKeyPrimaryVersion
           do not affect next_rotation_time.
+
+          Keys with purpose
+          ENCRYPT_DECRYPT support
+          automatic rotation. For other keys, this field must be omitted.
         format: google-datetime
         type: string
       primary:
         $ref: '#/definitions/CryptoKeyVersion'
-        description: |
+        description: |-
           Output only. A copy of the "primary" CryptoKeyVersion that will be used
           by Encrypt when this CryptoKey is given
           in EncryptRequest.name.
 
           The CryptoKey's primary version can be updated via
           UpdateCryptoKeyPrimaryVersion.
+
+          All keys with purpose
+          ENCRYPT_DECRYPT have a
+          primary. For other keys, this field will be omitted.
       purpose:
-        description: |-
-          The immutable purpose of this CryptoKey. Currently, the only acceptable
-          purpose is ENCRYPT_DECRYPT.
+        description: The immutable purpose of this CryptoKey.
         enum:
           - CRYPTO_KEY_PURPOSE_UNSPECIFIED
           - ENCRYPT_DECRYPT
+          - ASYMMETRIC_SIGN
+          - ASYMMETRIC_DECRYPT
         type: string
       rotationPeriod:
         description: |-
@@ -1042,23 +1201,58 @@ definitions:
           automatically rotates a key. Must be at least one day.
 
           If rotation_period is set, next_rotation_time must also be set.
+
+          Keys with purpose
+          ENCRYPT_DECRYPT support
+          automatic rotation. For other keys, this field must be omitted.
         format: google-duration
         type: string
+      versionTemplate:
+        $ref: '#/definitions/CryptoKeyVersionTemplate'
+        description: |-
+          A template describing settings for new CryptoKeyVersion instances.
+          The properties of new CryptoKeyVersion instances created by either
+          CreateCryptoKeyVersion or
+          auto-rotation are controlled by this template.
     type: object
   CryptoKeyVersion:
     description: |-
       A CryptoKeyVersion represents an individual cryptographic key, and the
       associated key material.
 
-      It can be used for cryptographic operations either directly, or via its
-      parent CryptoKey, in which case the server will choose the appropriate
-      version for the operation.
+      An ENABLED version can be
+      used for cryptographic operations.
 
       For security reasons, the raw cryptographic key material represented by a
       CryptoKeyVersion can never be viewed or exported. It can only be used to
-      encrypt or decrypt data when an authorized user or application invokes Cloud
-      KMS.
+      encrypt, decrypt, or sign data when an authorized user or application invokes
+      Cloud KMS.
     properties:
+      algorithm:
+        description: |-
+          Output only. The CryptoKeyVersionAlgorithm that this
+          CryptoKeyVersion supports.
+        enum:
+          - CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED
+          - GOOGLE_SYMMETRIC_ENCRYPTION
+          - RSA_SIGN_PSS_2048_SHA256
+          - RSA_SIGN_PSS_3072_SHA256
+          - RSA_SIGN_PSS_4096_SHA256
+          - RSA_SIGN_PKCS1_2048_SHA256
+          - RSA_SIGN_PKCS1_3072_SHA256
+          - RSA_SIGN_PKCS1_4096_SHA256
+          - RSA_DECRYPT_OAEP_2048_SHA256
+          - RSA_DECRYPT_OAEP_3072_SHA256
+          - EC_SIGN_P256_SHA256
+          - EC_SIGN_P384_SHA384
+        type: string
+      attestation:
+        $ref: '#/definitions/KeyOperationAttestation'
+        description: |-
+          Output only. Statement that was generated and signed by the HSM at key
+          creation time. Use this statement to verify attributes of the key as stored
+          on the HSM, independently of Google. Only provided for key versions with
+          protection_level HSM.
       createTime:
         description: Output only. The time at which this CryptoKeyVersion was created.
         format: google-datetime
@@ -1077,19 +1271,74 @@ definitions:
           DESTROY_SCHEDULED.
         format: google-datetime
         type: string
+      generateTime:
+        description: |-
+          Output only. The time this CryptoKeyVersion's key material was
+          generated.
+        format: google-datetime
+        type: string
       name:
         description: |-
           Output only. The resource name for this CryptoKeyVersion in the format
           `projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*`.
         type: string
+      protectionLevel:
+        description: |-
+          Output only. The ProtectionLevel describing how crypto operations are
+          performed with this CryptoKeyVersion.
+        enum:
+          - PROTECTION_LEVEL_UNSPECIFIED
+          - SOFTWARE
+          - HSM
+        type: string
       state:
         description: The current state of the CryptoKeyVersion.
         enum:
           - CRYPTO_KEY_VERSION_STATE_UNSPECIFIED
+          - PENDING_GENERATION
           - ENABLED
           - DISABLED
           - DESTROYED
           - DESTROY_SCHEDULED
+        type: string
+    type: object
+  CryptoKeyVersionTemplate:
+    description: |-
+      A CryptoKeyVersionTemplate specifies the properties to use when creating
+      a new CryptoKeyVersion, either manually with
+      CreateCryptoKeyVersion or
+      automatically as a result of auto-rotation.
+    properties:
+      algorithm:
+        description: |-
+          Required. Algorithm to use
+          when creating a CryptoKeyVersion based on this template.
+
+          For backwards compatibility, GOOGLE_SYMMETRIC_ENCRYPTION is implied if both
+          this field is omitted and CryptoKey.purpose is
+          ENCRYPT_DECRYPT.
+        enum:
+          - CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED
+          - GOOGLE_SYMMETRIC_ENCRYPTION
+          - RSA_SIGN_PSS_2048_SHA256
+          - RSA_SIGN_PSS_3072_SHA256
+          - RSA_SIGN_PSS_4096_SHA256
+          - RSA_SIGN_PKCS1_2048_SHA256
+          - RSA_SIGN_PKCS1_3072_SHA256
+          - RSA_SIGN_PKCS1_4096_SHA256
+          - RSA_DECRYPT_OAEP_2048_SHA256
+          - RSA_DECRYPT_OAEP_3072_SHA256
+          - EC_SIGN_P256_SHA256
+          - EC_SIGN_P384_SHA384
+        type: string
+      protectionLevel:
+        description: |-
+          ProtectionLevel to use when creating a CryptoKeyVersion based on
+          this template. Immutable. Defaults to SOFTWARE.
+        enum:
+          - PROTECTION_LEVEL_UNSPECIFIED
+          - SOFTWARE
+          - HSM
         type: string
     type: object
   DecryptRequest:
@@ -1120,18 +1369,48 @@ definitions:
     description: Request message for KeyManagementService.DestroyCryptoKeyVersion.
     properties: {}
     type: object
+  Digest:
+    description: A Digest holds a cryptographic message digest.
+    properties:
+      sha256:
+        description: A message digest produced with the SHA-256 algorithm.
+        format: byte
+        type: string
+      sha384:
+        description: A message digest produced with the SHA-384 algorithm.
+        format: byte
+        type: string
+      sha512:
+        description: A message digest produced with the SHA-512 algorithm.
+        format: byte
+        type: string
+    type: object
   EncryptRequest:
     description: Request message for KeyManagementService.Encrypt.
     properties:
       additionalAuthenticatedData:
         description: |-
           Optional data that, if specified, must also be provided during decryption
-          through DecryptRequest.additional_authenticated_data.  Must be no
-          larger than 64KiB.
+          through DecryptRequest.additional_authenticated_data.
+
+          The maximum size depends on the key version's
+          protection_level. For
+          SOFTWARE keys, the AAD must be no larger than
+          64KiB. For HSM keys, the combined length of the
+          plaintext and additional_authenticated_data fields must be no larger than
+          8KiB.
         format: byte
         type: string
       plaintext:
-        description: Required. The data to encrypt. Must be no larger than 64KiB.
+        description: |-
+          Required. The data to encrypt. Must be no larger than 64KiB.
+
+          The maximum size depends on the key version's
+          protection_level. For
+          SOFTWARE keys, the plaintext must be no larger
+          than 64KiB. For HSM keys, the combined length of the
+          plaintext and additional_authenticated_data fields must be no larger than
+          8KiB.
         format: byte
         type: string
     type: object
@@ -1144,6 +1423,55 @@ definitions:
         type: string
       name:
         description: The resource name of the CryptoKeyVersion used in encryption.
+        type: string
+    type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          Common Expression Language syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
+        type: string
+    type: object
+  KeyOperationAttestation:
+    description: Contains an HSM-generated attestation about a key operation.
+    properties:
+      content:
+        description: |-
+          Output only. The attestation data provided by the HSM when the key
+          operation was performed.
+        format: byte
+        type: string
+      format:
+        description: Output only. The format of the attestation data.
+        enum:
+          - ATTESTATION_FORMAT_UNSPECIFIED
+          - CAVIUM_V1_COMPRESSED
         type: string
     type: object
   KeyRing:
@@ -1260,6 +1588,16 @@ definitions:
           For example: `"projects/example-project/locations/us-east1"`
         type: string
     type: object
+  LocationMetadata:
+    description: Cloud KMS metadata for the given google.cloud.location.Location.
+    properties:
+      hsmAvailable:
+        description: |-
+          Indicates whether CryptoKeys with
+          protection_level
+          HSM can be created in this location.
+        type: boolean
+    type: object
   Policy:
     description: |-
       Defines an Identity and Access Management (IAM) policy. It is used to
@@ -1338,6 +1676,20 @@ definitions:
         description: Deprecated.
         format: int32
         type: integer
+    type: object
+  PublicKey:
+    description: |-
+      The public key for a given CryptoKeyVersion. Obtained via
+      GetPublicKey.
+    properties:
+      pem:
+        description: |-
+          The public key, encoded in PEM format. For more information, see the
+          [RFC 7468](https://tools.ietf.org/html/rfc7468) sections for
+          [General Considerations](https://tools.ietf.org/html/rfc7468#section-2) and
+          [Textual Encoding of Subject Public Key Info]
+          (https://tools.ietf.org/html/rfc7468#section-13).
+        type: string
     type: object
   RestoreCryptoKeyVersionRequest:
     description: Request message for KeyManagementService.RestoreCryptoKeyVersion.

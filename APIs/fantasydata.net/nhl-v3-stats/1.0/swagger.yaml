@@ -33,6 +33,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/AllTeams':
     get:
@@ -929,6 +930,10 @@ definitions:
         type: number
       Period:
         type: string
+      Periods:
+        items:
+          $ref: '#/definitions/Period'
+        type: array
       PointSpread:
         type: number
       PointSpreadAwayTeamMoneyLine:
@@ -1240,6 +1245,12 @@ definitions:
       Team:
         type: string
       TeamID:
+        type: integer
+      UsaTodayHeadshotNoBackgroundUrl:
+        type: string
+      UsaTodayHeadshotUrl:
+        type: string
+      UsaTodayPlayerID:
         type: integer
       Weight:
         type: integer

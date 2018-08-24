@@ -52,6 +52,48 @@ tags:
   - description: formula rendering
     name: Math
 paths:
+  /feed/availability:
+    get:
+      description: |
+        Gets availability of featured feed content for the apps by wiki domain.
+
+        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
+      produces:
+        - 'application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Availability/1.0.1"'
+        - application/problem+json
+      responses:
+        '200':
+          description: JSON containing lists of wiki domains for which feed content is available.
+          schema:
+            $ref: '#/definitions/availability'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Gets availability of featured feed content for the apps by wiki domain.
+      tags:
+        - Feed content availability
+      x-amples:
+        - request:
+            params:
+              domain: wikimedia.org
+          response:
+            body:
+              in_the_news:
+                - /.+/
+              most_read:
+                - '*'
+              on_this_day:
+                - /.+/
+              picture_of_the_day:
+                - '*'
+              todays_featured_article:
+                - /.+/
+            headers:
+              content-type: application/json
+            status: 200
+          title: Retrieve feed content availability
+      x-monitor: true
   '/media/math/check/{type}':
     post:
       description: |
@@ -81,6 +123,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: Information about the checked formula
@@ -129,6 +172,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: Information about the checked formula
@@ -174,6 +218,7 @@ paths:
         - image/svg+xml
         - application/mathml+xml
         - image/png
+        - application/problem+json
       responses:
         '200':
           description: The rendered formula
@@ -262,6 +307,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -350,6 +396,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -451,6 +498,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -541,6 +589,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -626,6 +675,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -711,6 +761,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -796,6 +847,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -897,6 +949,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -983,6 +1036,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1069,6 +1123,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1155,6 +1210,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1242,6 +1298,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1310,6 +1367,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1388,6 +1446,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1497,6 +1556,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1553,6 +1613,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of top countries by pageviews in the project
@@ -1615,6 +1676,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of top articles in the project
@@ -1673,6 +1735,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1738,6 +1801,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1780,6 +1844,7 @@ paths:
           x-textarea: true
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The translated content
@@ -1831,6 +1896,7 @@ paths:
           x-textarea: true
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The translated content
@@ -1880,6 +1946,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: the list of tools available for the language pair
@@ -1910,6 +1977,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: the list of language pairs available for a given translation tool
@@ -1946,6 +2014,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: the list of language pairs available for a given translation tool
@@ -1987,6 +2056,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: the list of language pairs available for a given translation tool
@@ -2026,6 +2096,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: the dictionary translation for the given word
@@ -2073,6 +2144,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: the dictionary translation for the given word
@@ -2111,6 +2183,41 @@ definitions:
                     type: string
               type: array
         type: array
+  availability:
+    additionalProperties: false
+    properties:
+      in_the_news:
+        description: 'domains for wikis with this feature enabled, or [ ''*.<project>.org'' ] for all wikis in a project'
+        items:
+          type: string
+        type: array
+      most_read:
+        description: 'domains for wikis with this feature enabled, or [ ''*.<project>.org'' ] for all wikis in a project'
+        items:
+          type: string
+        type: array
+      on_this_day:
+        description: 'domains for wikis with this feature enabled, or [ ''*.<project>.org'' ] for all wikis in a project'
+        items:
+          type: string
+        type: array
+      picture_of_the_day:
+        description: 'domains for wikis with this feature enabled, or [ ''*.<project>.org'' ] for all wikis in a project'
+        items:
+          type: string
+        type: array
+      todays_featured_article:
+        description: 'domains for wikis with this feature enabled, or [ ''*.<project>.org'' ] for all wikis in a project'
+        items:
+          type: string
+        type: array
+    required:
+      - todays_featured_article
+      - most_read
+      - picture_of_the_day
+      - in_the_news
+      - on_this_day
+    type: object
   by-country:
     properties:
       items:
@@ -2442,11 +2549,15 @@ definitions:
     properties:
       detail:
         type: string
-      instance:
+      method:
         type: string
+      status:
+        type: integer
       title:
         type: string
       type:
+        type: string
+      uri:
         type: string
     required:
       - type

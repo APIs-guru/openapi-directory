@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimgroups.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimgroups
   x-tags:
@@ -150,17 +149,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -206,17 +195,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -272,17 +251,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -337,17 +306,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -432,98 +391,7 @@ paths:
               value:
                 description: Page values.
                 items:
-                  allOf:
-                    - allOf:
-                        - description: User Entity Base Parameters set.
-                          properties:
-                            identities:
-                              description: Collection of user identities.
-                              items:
-                                description: User identity details.
-                                properties:
-                                  id:
-                                    description: Identifier value within provider.
-                                    type: string
-                                  provider:
-                                    description: Identity provider name.
-                                    type: string
-                              readOnly: true
-                              type: array
-                            note:
-                              description: Optional note about a user set by the administrator.
-                              type: string
-                            state:
-                              default: active
-                              description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
-                              enum:
-                                - active
-                                - blocked
-                              type: string
-                              x-ms-enum:
-                                modelAsString: true
-                                name: UserState
-                      description: User profile.
-                      properties:
-                        email:
-                          description: Email address.
-                          type: string
-                        firstName:
-                          description: First name.
-                          type: string
-                        groups:
-                          description: Collection of groups user is part of.
-                          items:
-                            allOf:
-                              - description: Developer group.
-                                properties:
-                                  builtIn:
-                                    description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
-                                    readOnly: true
-                                    type: boolean
-                                  description:
-                                    description: Group description. Can contain HTML formatting tags.
-                                    maxLength: 1000
-                                    type: string
-                                  externalId:
-                                    description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
-                                    type: string
-                                  name:
-                                    description: Group name.
-                                    maxLength: 300
-                                    minLength: 1
-                                    type: string
-                                  type:
-                                    description: Group type.
-                                    enum:
-                                      - custom
-                                      - system
-                                      - external
-                                    type: string
-                                    x-ms-enum:
-                                      modelAsString: false
-                                      name: GroupType
-                                required:
-                                  - name
-                            description: Contract details.
-                            properties:
-                              id:
-                                description: Identifier of the Group entity.
-                                type: string
-                          readOnly: true
-                          type: array
-                        lastName:
-                          description: Last name.
-                          type: string
-                        registrationDate:
-                          description: |
-                            Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-                          format: date-time
-                          type: string
-                  description: User details.
-                  properties:
-                    id:
-                      description: Identifier of the entity.
-                      type: string
+                  $ref: '#/definitions/UserContract'
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -536,17 +404,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -629,17 +487,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -679,92 +527,7 @@ paths:
           description: The specified user is already a member of the specified group.
           schema:
             allOf:
-              - allOf:
-                  - description: User Entity Base Parameters set.
-                    properties:
-                      identities:
-                        description: Collection of user identities.
-                        items:
-                          description: User identity details.
-                          properties:
-                            id:
-                              description: Identifier value within provider.
-                              type: string
-                            provider:
-                              description: Identity provider name.
-                              type: string
-                        readOnly: true
-                        type: array
-                      note:
-                        description: Optional note about a user set by the administrator.
-                        type: string
-                      state:
-                        default: active
-                        description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
-                        enum:
-                          - active
-                          - blocked
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: UserState
-                description: User profile.
-                properties:
-                  email:
-                    description: Email address.
-                    type: string
-                  firstName:
-                    description: First name.
-                    type: string
-                  groups:
-                    description: Collection of groups user is part of.
-                    items:
-                      allOf:
-                        - description: Developer group.
-                          properties:
-                            builtIn:
-                              description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
-                              readOnly: true
-                              type: boolean
-                            description:
-                              description: Group description. Can contain HTML formatting tags.
-                              maxLength: 1000
-                              type: string
-                            externalId:
-                              description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
-                              type: string
-                            name:
-                              description: Group name.
-                              maxLength: 300
-                              minLength: 1
-                              type: string
-                            type:
-                              description: Group type.
-                              enum:
-                                - custom
-                                - system
-                                - external
-                              type: string
-                              x-ms-enum:
-                                modelAsString: false
-                                name: GroupType
-                          required:
-                            - name
-                      description: Contract details.
-                      properties:
-                        id:
-                          description: Identifier of the Group entity.
-                          type: string
-                    readOnly: true
-                    type: array
-                  lastName:
-                    description: Last name.
-                    type: string
-                  registrationDate:
-                    description: |
-                      Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-                    format: date-time
-                    type: string
+              - $ref: '#/definitions/UserContractProperties'
             description: User details.
             properties:
               id:
@@ -774,92 +537,7 @@ paths:
           description: The user was successfully added to the group.
           schema:
             allOf:
-              - allOf:
-                  - description: User Entity Base Parameters set.
-                    properties:
-                      identities:
-                        description: Collection of user identities.
-                        items:
-                          description: User identity details.
-                          properties:
-                            id:
-                              description: Identifier value within provider.
-                              type: string
-                            provider:
-                              description: Identity provider name.
-                              type: string
-                        readOnly: true
-                        type: array
-                      note:
-                        description: Optional note about a user set by the administrator.
-                        type: string
-                      state:
-                        default: active
-                        description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
-                        enum:
-                          - active
-                          - blocked
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: UserState
-                description: User profile.
-                properties:
-                  email:
-                    description: Email address.
-                    type: string
-                  firstName:
-                    description: First name.
-                    type: string
-                  groups:
-                    description: Collection of groups user is part of.
-                    items:
-                      allOf:
-                        - description: Developer group.
-                          properties:
-                            builtIn:
-                              description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
-                              readOnly: true
-                              type: boolean
-                            description:
-                              description: Group description. Can contain HTML formatting tags.
-                              maxLength: 1000
-                              type: string
-                            externalId:
-                              description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
-                              type: string
-                            name:
-                              description: Group name.
-                              maxLength: 300
-                              minLength: 1
-                              type: string
-                            type:
-                              description: Group type.
-                              enum:
-                                - custom
-                                - system
-                                - external
-                              type: string
-                              x-ms-enum:
-                                modelAsString: false
-                                name: GroupType
-                          required:
-                            - name
-                      description: Contract details.
-                      properties:
-                        id:
-                          description: Identifier of the Group entity.
-                          type: string
-                    readOnly: true
-                    type: array
-                  lastName:
-                    description: Last name.
-                    type: string
-                  registrationDate:
-                    description: |
-                      Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-                    format: date-time
-                    type: string
+              - $ref: '#/definitions/UserContractProperties'
             description: User details.
             properties:
               id:
@@ -876,17 +554,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -938,36 +606,7 @@ definitions:
         type: array
   GroupContract:
     allOf:
-      - description: Developer group.
-        properties:
-          builtIn:
-            description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
-            readOnly: true
-            type: boolean
-          description:
-            description: Group description. Can contain HTML formatting tags.
-            maxLength: 1000
-            type: string
-          externalId:
-            description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
-            type: string
-          name:
-            description: Group name.
-            maxLength: 300
-            minLength: 1
-            type: string
-          type:
-            description: Group type.
-            enum:
-              - custom
-              - system
-              - external
-            type: string
-            x-ms-enum:
-              modelAsString: false
-              name: GroupType
-        required:
-          - name
+      - $ref: '#/definitions/GroupContractProperties'
     description: Contract details.
     properties:
       id:

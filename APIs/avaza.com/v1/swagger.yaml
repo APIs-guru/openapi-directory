@@ -750,6 +750,10 @@ paths:
           name: TimesheetUserID
           required: false
           type: integer
+        - in: query
+          name: includeArchived
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK
@@ -2553,6 +2557,8 @@ definitions:
         type: integer
       Title:
         type: string
+      isArchived:
+        type: boolean
     type: object
   ProjectMemberDetails:
     properties:

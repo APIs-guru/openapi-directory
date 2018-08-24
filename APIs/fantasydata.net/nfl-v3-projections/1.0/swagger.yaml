@@ -34,6 +34,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/DfsSlatesByDate/{date}':
     get:
@@ -112,8 +113,7 @@ paths:
           required: true
           type: string
         - description: |-
-
-                      Year of the season and the season type. If no season type is provided, then the default is regular season.
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
                       <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
                     
           in: path
@@ -121,8 +121,7 @@ paths:
           required: true
           type: string
         - description: |-
-
-                      Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
                       Example: <code>1</code>
                     
           in: path
@@ -151,8 +150,7 @@ paths:
           required: true
           type: string
         - description: |-
-
-                      Year of the season and the season type. If no season type is provided, then the default is regular season.
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
                       <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
                     
           in: path
@@ -167,6 +165,125 @@ paths:
               $ref: '#/definitions/FantasyDefenseSeasonProjection'
             type: array
       summary: 'Projected Fantasy Defense Season Stats (w/ Bye Week, ADP)'
+  '/{format}/IdpPlayerGameProjectionStatsByPlayerID/{season}/{week}/{playerid}':
+    get:
+      operationId: IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
+                      <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+                    
+          in: path
+          name: season
+          required: true
+          type: string
+        - description: |-
+            Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+                      Example: <code>1</code>
+                    
+          in: path
+          name: week
+          required: true
+          type: string
+        - description: 'Each NFL player has a unique ID assigned by FantasyData. Player IDs can be determined by pulling player related data. Example:<code>14257</code>.'
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PlayerGameProjection'
+      summary: 'IDP Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)'
+  '/{format}/IdpPlayerGameProjectionStatsByTeam/{season}/{week}/{team}':
+    get:
+      operationId: IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
+                      <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+                    
+          in: path
+          name: season
+          required: true
+          type: string
+        - description: |-
+            Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+                      Example: <code>1</code>
+                    
+          in: path
+          name: week
+          required: true
+          type: string
+        - description: 'Abbreviation of the team. Example: <code>WAS</code>.'
+          in: path
+          name: team
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerGameProjection'
+            type: array
+      summary: 'IDP Projected Player Game Stats by Team (w/ Injuries, Lineups, DFS Salaries)'
+  '/{format}/IdpPlayerGameProjectionStatsByWeek/{season}/{week}':
+    get:
+      operationId: IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
+                      <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+                    
+          in: path
+          name: season
+          required: true
+          type: string
+        - description: |-
+            Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+                      Example: <code>1</code>
+                    
+          in: path
+          name: week
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerGameProjection'
+            type: array
+      summary: 'IDP Projected Player Game Stats by Week (w/ Injuries, Lineups, DFS Salaries)'
   '/{format}/PlayerGameProjectionStatsByPlayerID/{season}/{week}/{playerid}':
     get:
       operationId: ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries
@@ -181,8 +298,7 @@ paths:
           required: true
           type: string
         - description: |-
-
-                      Year of the season and the season type. If no season type is provided, then the default is regular season.
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
                       <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
                     
           in: path
@@ -223,8 +339,7 @@ paths:
           required: true
           type: string
         - description: |-
-
-                      Year of the season and the season type. If no season type is provided, then the default is regular season.
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
                       <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
                     
           in: path
@@ -232,8 +347,7 @@ paths:
           required: true
           type: string
         - description: |-
-
-                      Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
                       Example: <code>1</code>
                     
           in: path
@@ -267,8 +381,7 @@ paths:
           required: true
           type: string
         - description: |-
-
-                      Year of the season and the season type. If no season type is provided, then the default is regular season.
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
                       <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
                     
           in: path
@@ -306,8 +419,7 @@ paths:
           required: true
           type: string
         - description: |-
-
-                      Year of the season and the season type. If no season type is provided, then the default is regular season.
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
                       <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
                     
           in: path
@@ -336,8 +448,7 @@ paths:
           required: true
           type: string
         - description: |-
-
-                      Year of the season and the season type. If no season type is provided, then the default is regular season.
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
                       <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
                     
           in: path
@@ -369,8 +480,7 @@ paths:
           required: true
           type: string
         - description: |-
-
-                      Year of the season and the season type. If no season type is provided, then the default is regular season.
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
                       <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
                     
           in: path
@@ -423,12 +533,16 @@ definitions:
         type: integer
   DfsSlateGame:
     properties:
+      Game:
+        $ref: '#/definitions/Schedule'
       GameID:
         type: integer
       OperatorGameID:
         type: integer
       RemovedByOperator:
         type: boolean
+      ScoreID:
+        type: integer
       SlateGameID:
         type: integer
       SlateID:
@@ -700,6 +814,10 @@ definitions:
       AuctionValuePPR:
         type: number
       AverageDraftPosition:
+        type: number
+      AverageDraftPosition2QB:
+        type: number
+      AverageDraftPositionDynasty:
         type: number
       AverageDraftPositionPPR:
         type: number
@@ -1221,7 +1339,13 @@ definitions:
         type: number
       AverageDraftPosition:
         type: number
+      AverageDraftPosition2QB:
+        type: number
+      AverageDraftPositionDynasty:
+        type: number
       AverageDraftPositionPPR:
+        type: number
+      AverageDraftPositionRookie:
         type: number
       BlockedKickReturnTouchdowns:
         type: number
@@ -1487,6 +1611,64 @@ definitions:
         type: number
       WindSpeed:
         type: integer
+  Schedule:
+    properties:
+      AwayTeam:
+        type: string
+      AwayTeamMoneyLine:
+        type: integer
+      Canceled:
+        type: boolean
+      Channel:
+        type: string
+      Date:
+        type: string
+      DateTime:
+        type: string
+      Day:
+        type: string
+      ForecastDescription:
+        type: string
+      ForecastTempHigh:
+        type: integer
+      ForecastTempLow:
+        type: integer
+      ForecastWindChill:
+        type: integer
+      ForecastWindSpeed:
+        type: integer
+      GameKey:
+        type: string
+      GeoLat:
+        type: number
+      GeoLong:
+        type: number
+      GlobalAwayTeamID:
+        type: integer
+      GlobalGameID:
+        type: integer
+      GlobalHomeTeamID:
+        type: integer
+      HomeTeam:
+        type: string
+      HomeTeamMoneyLine:
+        type: integer
+      OverUnder:
+        type: number
+      PointSpread:
+        type: number
+      ScoreID:
+        type: integer
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      StadiumDetails:
+        $ref: '#/definitions/Stadium'
+      StadiumID:
+        type: integer
+      Week:
+        type: integer
   ScoringDetail:
     properties:
       GameKey:
@@ -1511,3 +1693,23 @@ definitions:
         type: string
       Week:
         type: integer
+  Stadium:
+    properties:
+      Capacity:
+        type: integer
+      City:
+        type: string
+      Country:
+        type: string
+      GeoLat:
+        type: number
+      GeoLong:
+        type: number
+      Name:
+        type: string
+      PlayingSurface:
+        type: string
+      StadiumID:
+        type: integer
+      State:
+        type: string

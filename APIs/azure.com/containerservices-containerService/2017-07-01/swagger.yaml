@@ -499,14 +499,8 @@ definitions:
         $ref: '#/definitions/ContainerServiceOSDisk'
         description: 'OS Disk Size in GB to be used to specify the disk size for every machine in this master/agent pool. If you specify 0, it will apply the default osDisk size according to the vmSize specified.'
       osType:
-        default: Linux
+        $ref: '#/definitions/OSType'
         description: OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux.
-        enum:
-          - Linux
-          - Windows
-        type: string
-        x-ms-enum:
-          name: OSType
       ports:
         description: Ports number array used to expose on this agent pool. The default opened ports are different based on your choice of orchestrator.
         items:
@@ -522,7 +516,7 @@ definitions:
         description: Size of agent VMs.
       vnetSubnetID:
         $ref: '#/definitions/ContainerServiceVnetSubnetID'
-        description: 'VNet SubnetID specifies the vnet''s subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet.'
+        description: VNet SubnetID specifies the vnet's subnet identifier.
     required:
       - name
       - vmSize
@@ -547,7 +541,7 @@ definitions:
     properties:
       adminUsername:
         description: The administrator username to use for Linux VMs.
-        pattern: '^[a-z][a-z0-9_-]*$'
+        pattern: '^[A-Za-z][-A-Za-z0-9_]*$'
         type: string
       ssh:
         $ref: '#/definitions/ContainerServiceSshConfiguration'
@@ -604,7 +598,7 @@ definitions:
         description: Size of agent VMs.
       vnetSubnetID:
         $ref: '#/definitions/ContainerServiceVnetSubnetID'
-        description: 'VNet SubnetID specifies the vnet''s subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet.'
+        description: VNet SubnetID specifies the vnet's subnet identifier.
     required:
       - dnsPrefix
       - vmSize
@@ -906,7 +900,7 @@ definitions:
       modelAsString: true
       name: ContainerServiceVMSizeTypes
   ContainerServiceVnetSubnetID:
-    description: 'VNet SubnetID specifies the vnet''s subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet.'
+    description: VNet SubnetID specifies the vnet's subnet identifier.
     type: string
   ContainerServiceWindowsProfile:
     description: Profile for Windows VMs in the container service cluster.
@@ -937,6 +931,16 @@ definitions:
     required:
       - vaultID
       - secretName
+  OSType:
+    default: Linux
+    description: OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux.
+    enum:
+      - Linux
+      - Windows
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: OSType
   Resource:
     description: The Resource model definition.
     properties:

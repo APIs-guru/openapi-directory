@@ -34,6 +34,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/AllTeams':
     get:
@@ -1269,6 +1270,12 @@ definitions:
         type: string
       UpcomingGameID:
         type: integer
+      UsaTodayHeadshotNoBackgroundUrl:
+        type: string
+      UsaTodayHeadshotUrl:
+        type: string
+      UsaTodayPlayerID:
+        type: integer
       Weight:
         type: integer
       XmlTeamPlayerID:
@@ -1883,6 +1890,10 @@ definitions:
         type: integer
       Percentage:
         type: number
+      RunsAgainst:
+        type: integer
+      RunsScored:
+        type: integer
       Season:
         type: integer
       SeasonType:

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-01-01/apimdeployment.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimdeployment
   x-tags:
@@ -2408,7 +2407,6 @@ definitions:
       certificate:
         $ref: '#/definitions/CertificateInformation'
         description: Certificate information.
-        readOnly: true
       certificatePassword:
         description: Certificate Password.
         type: string
@@ -2446,7 +2444,6 @@ definitions:
       certificate:
         $ref: '#/definitions/CertificateInformation'
         description: Certificate information.
-        readOnly: true
       certificatePassword:
         description: Certificate Password.
         type: string

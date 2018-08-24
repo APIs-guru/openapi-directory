@@ -34,6 +34,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/AllTeams':
     get:
@@ -1475,6 +1476,10 @@ definitions:
   Team:
     properties:
       AverageDraftPosition:
+        type: number
+      AverageDraftPosition2QB:
+        type: number
+      AverageDraftPositionDynasty:
         type: number
       AverageDraftPositionPPR:
         type: number

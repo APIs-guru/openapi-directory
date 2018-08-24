@@ -30,6 +30,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   /BusIncidents:
     get:
@@ -73,7 +74,144 @@ paths:
       summary: XML - Bus Incidents
   /ElevatorIncidents:
     get:
-      description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a list of <em>reported</em> elevator and escalator outages at a\r\ngiven station. Omit the StationCode parameter to return all reported\r\noutages.</p>\r\n\r\n<p>Note that for stations with multiple platforms and therefore StationCodes\r\n(e.g.: Metro Center, L'Enfant Plaza, etc.), a distinct call is required for\r\neach StationCode.</p>\r\n\r\n<p>Elevator and escalator outages are refreshed once every 20 to 30 seconds approximately.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>ElevatorIncidents</td>\r\n\r\n<td>\r\nArray containing elevator/escalator outage information\r\n(<a href=\"#ElevatorIncident\">ElevatorIncident</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"ElevatorIncident\" name=\r\n\"ElevatorIncident\">ElevatorIncident Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DateOutOfServ</td>\r\n\r\n<td>Date and time (Eastern Standard Time) unit was reported out of\r\nservice. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T15:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DateUpdated</td>\r\n\r\n<td>Date and time (Eastern Standard Time) outage details was last\r\nupdated. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T15:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td style=\"text-decoration: line-through\">DisplayOrder</td>\r\n\r\n<td><span class=\"text-danger\">Deprecated.</span></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LocationDescription</td>\r\n\r\n<td>Free-text description of the unit location within a station\r\n(e.g.: <span class=\"text-info\">Escalator between mezzanine and\r\nplatform</span>).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationCode</td>\r\n\r\n<td>Unit's station code. Use this value in other rail-related APIs\r\nto retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationName</td>\r\n\r\n<td>Full station name, may include entrance information (e.g.:\r\n<span class=\"text-info\">Metro Center, G and 11th St\r\nEntrance</span>).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td style=\"text-decoration: line-through\">SymptomCode</td>\r\n\r\n<td><span class=\"text-danger\">Deprecated.</span></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>SymptomDescription</td>\r\n\r\n<td>Description for why the unit is out of service or otherwise in\r\nreduced operation.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td style=\"text-decoration: line-through\">TimeOutOfService</td>\r\n\r\n<td><span class=\"text-danger\">Deprecated.</span> Use the time\r\nportion of the DateOutOfServ element.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>UnitName</td>\r\n\r\n<td>Unique identifier for unit, by type (a single elevator and\r\nescalator may have the same UnitName, but no two elevators or two\r\nescalators will have the same UnitName).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td style=\"text-decoration: line-through\">UnitStatus</td>\r\n\r\n<td><span class=\"text-danger\">Deprecated.</span> If listed here,\r\nthe unit is inoperational or otherwise impaired.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>UnitType</td>\r\n\r\n<td>Type of unit. Will be <span class=\"text-info\">ELEVATOR</span>\r\nor <span class=\"text-info\">ESCALATOR</span>.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
+      description: |-
+        <h4 class="text-primary">Description</h4>
+
+        <p>Returns a list of <em>reported</em> elevator and escalator outages at a
+        given station. Omit the StationCode parameter to return all reported
+        outages.</p>
+
+        <p>Note that for stations with multiple platforms and therefore StationCodes
+        (e.g.: Metro Center, L'Enfant Plaza, etc.), a distinct call is required for
+        each StationCode.</p>
+
+        <p>Elevator and escalator outages are refreshed once every 20 to 30 seconds approximately.</p>
+
+        <h4 class="text-primary">Response Elements</h4>
+
+        <table class="table table-condensed table-hover">
+        <thead>
+        <tr>
+        <th class="col-md-3">Element</th>
+
+        <th>Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+        <td>ElevatorIncidents</td>
+
+        <td>
+        Array containing elevator/escalator outage information
+        (<a href="#ElevatorIncident">ElevatorIncident</a>).
+        </td>
+        </tr>
+
+        <tr>
+        <td colspan="2">
+        <div class="text-primary" style="margin-top: 1em">
+        <a id="ElevatorIncident" name=
+        "ElevatorIncident">ElevatorIncident Elements</a>
+        </div>
+        </td>
+        </tr>
+
+        <tr>
+        <td>DateOutOfServ</td>
+
+        <td>Date and time (Eastern Standard Time) unit was reported out of
+        service. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
+        2014-10-27T15:17:00).</td>
+        </tr>
+
+        <tr>
+        <td>DateUpdated</td>
+
+        <td>Date and time (Eastern Standard Time) outage details was last
+        updated. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
+        2014-10-27T15:17:00).</td>
+        </tr>
+
+        <tr>
+        <td style="text-decoration: line-through">DisplayOrder</td>
+
+        <td><span class="text-danger">Deprecated.</span></td>
+        </tr>
+
+        <tr>
+        <td>EstimatedReturnToService</td>
+
+        <td>Estimated date and time (Eastern Standard Time) by when unit is expected to return to normal service. May be NULL, otherwise will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
+        2014-10-27T23:59:59).</td>
+        </tr>
+
+        <tr>
+        <td>LocationDescription</td>
+
+        <td>Free-text description of the unit location within a station
+        (e.g.: <span class="text-info">Escalator between mezzanine and
+        platform</span>).</td>
+        </tr>
+
+        <tr>
+        <td>StationCode</td>
+
+        <td>Unit's station code. Use this value in other rail-related APIs
+        to retrieve data about a station.</td>
+        </tr>
+
+        <tr>
+        <td>StationName</td>
+
+        <td>Full station name, may include entrance information (e.g.:
+        <span class="text-info">Metro Center, G and 11th St
+        Entrance</span>).</td>
+        </tr>
+
+        <tr>
+        <td style="text-decoration: line-through">SymptomCode</td>
+
+        <td><span class="text-danger">Deprecated.</span></td>
+        </tr>
+
+        <tr>
+        <td>SymptomDescription</td>
+
+        <td>Description for why the unit is out of service or otherwise in
+        reduced operation.</td>
+        </tr>
+
+        <tr>
+        <td style="text-decoration: line-through">TimeOutOfService</td>
+
+        <td><span class="text-danger">Deprecated.</span> Use the time
+        portion of the DateOutOfServ element.</td>
+        </tr>
+
+        <tr>
+        <td>UnitName</td>
+
+        <td>Unique identifier for unit, by type (a single elevator and
+        escalator may have the same UnitName, but no two elevators or two
+        escalators will have the same UnitName).</td>
+        </tr>
+
+        <tr>
+        <td style="text-decoration: line-through">UnitStatus</td>
+
+        <td><span class="text-danger">Deprecated.</span> If listed here,
+        the unit is inoperational or otherwise impaired.</td>
+        </tr>
+
+        <tr>
+        <td>UnitType</td>
+
+        <td>Type of unit. Will be <span class="text-info">ELEVATOR</span>
+        or <span class="text-info">ESCALATOR</span>.</td>
+        </tr>
+        </tbody>
+        </table>
       operationId: 54763641281d830c946a3d79
       parameters:
         - description: Two-letter station code.  Use the Station List method to return a list of all station codes.
@@ -98,6 +236,7 @@ paths:
                           <DateOutOfServ>2014-10-27T15:17:00</DateOutOfServ>
                           <DateUpdated>2014-10-28T06:28:30</DateUpdated>
                           <DisplayOrder>0</DisplayOrder>
+                          <EstimatedReturnToService>2014-10-30T23:59:59</EstimatedReturnToService>
                           <LocationDescription>Escalator between mezzanine and platform to Shady Grove</LocationDescription>
                           <StationCode>A03</StationCode>
                           <StationName>Dupont Circle, Q Street Entrance</StationName>
@@ -174,7 +313,144 @@ paths:
       summary: JSON - Bus Incidents
   /json/ElevatorIncidents:
     get:
-      description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a list of <em>reported</em> elevator and escalator outages at a\r\ngiven station. Omit the StationCode parameter to return all reported\r\noutages.</p>\r\n\r\n<p>Note that for stations with multiple platforms and therefore StationCodes\r\n(e.g.: Metro Center, L'Enfant Plaza, etc.), a distinct call is required for\r\neach StationCode.</p>\r\n\r\n<p>Elevator and escalator outages are refreshed once every 20 to 30 seconds approximately.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>ElevatorIncidents</td>\r\n\r\n<td>\r\nArray containing elevator/escalator outage information\r\n(<a href=\"#ElevatorIncident\">ElevatorIncident</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"ElevatorIncident\" name=\r\n\"ElevatorIncident\">ElevatorIncident Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DateOutOfServ</td>\r\n\r\n<td>Date and time (Eastern Standard Time) unit was reported out of\r\nservice. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T15:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DateUpdated</td>\r\n\r\n<td>Date and time (Eastern Standard Time) outage details was last\r\nupdated. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T15:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td style=\"text-decoration: line-through\">DisplayOrder</td>\r\n\r\n<td><span class=\"text-danger\">Deprecated.</span></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LocationDescription</td>\r\n\r\n<td>Free-text description of the unit location within a station\r\n(e.g.: <span class=\"text-info\">Escalator between mezzanine and\r\nplatform</span>).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationCode</td>\r\n\r\n<td>Unit's station code. Use this value in other rail-related APIs\r\nto retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StationName</td>\r\n\r\n<td>Full station name, may include entrance information (e.g.:\r\n<span class=\"text-info\">Metro Center, G and 11th St\r\nEntrance</span>).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td style=\"text-decoration: line-through\">SymptomCode</td>\r\n\r\n<td><span class=\"text-danger\">Deprecated.</span></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>SymptomDescription</td>\r\n\r\n<td>Description for why the unit is out of service or otherwise in\r\nreduced operation.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td style=\"text-decoration: line-through\">TimeOutOfService</td>\r\n\r\n<td><span class=\"text-danger\">Deprecated.</span> Use the time\r\nportion of the DateOutOfServ element.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>UnitName</td>\r\n\r\n<td>Unique identifier for unit, by type (a single elevator and\r\nescalator may have the same UnitName, but no two elevators or two\r\nescalators will have the same UnitName).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td style=\"text-decoration: line-through\">UnitStatus</td>\r\n\r\n<td><span class=\"text-danger\">Deprecated.</span> If listed here,\r\nthe unit is inoperational or otherwise impaired.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>UnitType</td>\r\n\r\n<td>Type of unit. Will be <span class=\"text-info\">ELEVATOR</span>\r\nor <span class=\"text-info\">ESCALATOR</span>.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
+      description: |-
+        <h4 class="text-primary">Description</h4>
+
+        <p>Returns a list of <em>reported</em> elevator and escalator outages at a
+        given station. Omit the StationCode parameter to return all reported
+        outages.</p>
+
+        <p>Note that for stations with multiple platforms and therefore StationCodes
+        (e.g.: Metro Center, L'Enfant Plaza, etc.), a distinct call is required for
+        each StationCode.</p>
+
+        <p>Elevator and escalator outages are refreshed once every 20 to 30 seconds approximately.</p>
+
+        <h4 class="text-primary">Response Elements</h4>
+
+        <table class="table table-condensed table-hover">
+        <thead>
+        <tr>
+        <th class="col-md-3">Element</th>
+
+        <th>Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+        <td>ElevatorIncidents</td>
+
+        <td>
+        Array containing elevator/escalator outage information
+        (<a href="#ElevatorIncident">ElevatorIncident</a>).
+        </td>
+        </tr>
+
+        <tr>
+        <td colspan="2">
+        <div class="text-primary" style="margin-top: 1em">
+        <a id="ElevatorIncident" name=
+        "ElevatorIncident">ElevatorIncident Elements</a>
+        </div>
+        </td>
+        </tr>
+
+        <tr>
+        <td>DateOutOfServ</td>
+
+        <td>Date and time (Eastern Standard Time) unit was reported out of
+        service. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
+        2014-10-27T15:17:00).</td>
+        </tr>
+
+        <tr>
+        <td>DateUpdated</td>
+
+        <td>Date and time (Eastern Standard Time) outage details was last
+        updated. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
+        2014-10-27T15:17:00).</td>
+        </tr>
+
+        <tr>
+        <td style="text-decoration: line-through">DisplayOrder</td>
+
+        <td><span class="text-danger">Deprecated.</span></td>
+        </tr>
+
+        <tr>
+        <td>EstimatedReturnToService</td>
+
+        <td>Estimated date and time (Eastern Standard Time) by when unit is expected to return to normal service. May be NULL, otherwise will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
+        2014-10-27T23:59:59).</td>
+        </tr>
+
+        <tr>
+        <td>LocationDescription</td>
+
+        <td>Free-text description of the unit location within a station
+        (e.g.: <span class="text-info">Escalator between mezzanine and
+        platform</span>).</td>
+        </tr>
+
+        <tr>
+        <td>StationCode</td>
+
+        <td>Unit's station code. Use this value in other rail-related APIs
+        to retrieve data about a station.</td>
+        </tr>
+
+        <tr>
+        <td>StationName</td>
+
+        <td>Full station name, may include entrance information (e.g.:
+        <span class="text-info">Metro Center, G and 11th St
+        Entrance</span>).</td>
+        </tr>
+
+        <tr>
+        <td style="text-decoration: line-through">SymptomCode</td>
+
+        <td><span class="text-danger">Deprecated.</span></td>
+        </tr>
+
+        <tr>
+        <td>SymptomDescription</td>
+
+        <td>Description for why the unit is out of service or otherwise in
+        reduced operation.</td>
+        </tr>
+
+        <tr>
+        <td style="text-decoration: line-through">TimeOutOfService</td>
+
+        <td><span class="text-danger">Deprecated.</span> Use the time
+        portion of the DateOutOfServ element.</td>
+        </tr>
+
+        <tr>
+        <td>UnitName</td>
+
+        <td>Unique identifier for unit, by type (a single elevator and
+        escalator may have the same UnitName, but no two elevators or two
+        escalators will have the same UnitName).</td>
+        </tr>
+
+        <tr>
+        <td style="text-decoration: line-through">UnitStatus</td>
+
+        <td><span class="text-danger">Deprecated.</span> If listed here,
+        the unit is inoperational or otherwise impaired.</td>
+        </tr>
+
+        <tr>
+        <td>UnitType</td>
+
+        <td>Type of unit. Will be <span class="text-info">ELEVATOR</span>
+        or <span class="text-info">ESCALATOR</span>.</td>
+        </tr>
+        </tbody>
+        </table>
       operationId: 54763641281d830c946a3d76
       parameters:
         - description: Station code.  Use the Station List method to return a list of all station codes.
@@ -195,6 +471,7 @@ paths:
                 - DateOutOfServ: '2014-10-27T15:17:00'
                   DateUpdated: '2014-10-28T06:28:30'
                   DisplayOrder: 0
+                  EstimatedReturnToService: '2014-10-30T23:59:59'
                   LocationDescription: Escalator between mezzanine and platform to Shady Grove
                   StationCode: A03
                   StationName: 'Dupont Circle, Q Street Entrance'

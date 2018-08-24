@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2017-12-01/compute.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: compute
   x-tags:
@@ -63,6 +62,22 @@ paths:
       tags:
         - ComputeOperations
       x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets':
+    get:
+      description: Lists all availability sets in a subscription.
+      operationId: AvailabilitySets_ListBySubscription
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AvailabilitySetListResult'
+      tags:
+        - AvailabilitySets
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/images':
     get:
       description: Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
@@ -164,6 +179,8 @@ paths:
             '202':
               body: ''
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests':
     post:
       description: Export logs that show total throttled Api requests for this subscription in the given time window.
@@ -216,6 +233,8 @@ paths:
             '202':
               body: ''
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers':
     get:
       description: Gets a list of virtual machine image publishers for the specified Azure location.
@@ -578,7 +597,8 @@ paths:
             $ref: '#/definitions/AvailabilitySetListResult'
       tags:
         - AvailabilitySets
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}':
     delete:
       description: Delete an availability set.
@@ -3199,6 +3219,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete':
     post:
       description: Deletes virtual machines in a VM scale set.
@@ -3232,6 +3254,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions':
     get:
       description: Gets a list of all extensions in a VM scale set.
@@ -3450,6 +3474,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osRollingUpgrade':
     post:
       description: Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.
@@ -3477,6 +3503,8 @@ paths:
       tags:
         - VirtualMachineScaleSetRollingUpgrades
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory':
     get:
       description: Gets list of OS upgrades on a VM scale set instance.
@@ -3505,7 +3533,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance':
     post:
-      description: Perform maintenance on one or more virtual machines in a VM scale set.
+      description: 'Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details: https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications'
       operationId: VirtualMachineScaleSets_PerformMaintenance
       parameters:
         - description: The name of the resource group.
@@ -3536,6 +3564,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff':
     post:
       description: 'Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.'
@@ -3569,6 +3599,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy':
     post:
       description: Redeploy one or more virtual machines in a VM scale set.
@@ -3602,6 +3634,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage':
     post:
       description: Reimages (upgrade the operating system) one or more virtual machines in a VM scale set.
@@ -3635,6 +3669,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall':
     post:
       description: Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks.
@@ -3668,6 +3704,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart':
     post:
       description: Restarts one or more virtual machines in a VM scale set.
@@ -3701,6 +3739,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/cancel':
     post:
       description: Cancels the current virtual machine scale set rolling upgrade.
@@ -3728,6 +3768,8 @@ paths:
       tags:
         - VirtualMachineScaleSetRollingUpgrades
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest':
     get:
       description: Gets the status of the latest virtual machine scale set rolling upgrade.
@@ -3811,6 +3853,8 @@ paths:
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}':
     delete:
       description: Deletes a virtual machine from a VM scale set.
@@ -3944,6 +3988,8 @@ paths:
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/instanceView':
     get:
       description: Gets the status of a virtual machine from a VM scale set.
@@ -4005,6 +4051,8 @@ paths:
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/poweroff':
     post:
       description: 'Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.'
@@ -4037,6 +4085,8 @@ paths:
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/redeploy':
     post:
       description: Redeploys a virtual machine in a VM scale set.
@@ -4069,6 +4119,8 @@ paths:
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimage':
     post:
       description: Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.
@@ -4101,6 +4153,8 @@ paths:
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimageall':
     post:
       description: Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.
@@ -4133,6 +4187,8 @@ paths:
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/restart':
     post:
       description: Restarts a virtual machine in a VM scale set.
@@ -4165,6 +4221,8 @@ paths:
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/start':
     post:
       description: Starts a virtual machine in a VM scale set.
@@ -4197,6 +4255,8 @@ paths:
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines':
     get:
       description: Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.
@@ -5556,6 +5616,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/convertToManagedDisks':
     post:
       description: Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation.
@@ -5583,6 +5645,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate':
     post:
       description: Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.
@@ -5610,6 +5674,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions':
     get:
       description: The operation to get all extensions of a Virtual Machine.
@@ -5855,6 +5921,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/powerOff':
     post:
       description: The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.
@@ -5882,6 +5950,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/redeploy':
     post:
       description: The operation to redeploy a virtual machine.
@@ -5909,6 +5979,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/restart':
     post:
       description: The operation to restart a virtual machine.
@@ -5936,6 +6008,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/start':
     post:
       description: The operation to start a virtual machine.
@@ -5963,6 +6037,8 @@ paths:
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes':
     get:
       description: Lists all available virtual machine sizes to which the specified virtual machine can be resized.
@@ -6078,11 +6154,16 @@ definitions:
   AvailabilitySetListResult:
     description: The List Availability Set operation response.
     properties:
+      nextLink:
+        description: The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets.
+        type: string
       value:
         description: The list of availability sets
         items:
           $ref: '#/definitions/AvailabilitySet'
         type: array
+    required:
+      - value
   AvailabilitySetProperties:
     description: The instance view of a resource.
     properties:
@@ -6193,7 +6274,7 @@ definitions:
         readOnly: true
         type: string
   CreateOption:
-    description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
+    description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
     enum:
       - FromImage
       - Empty
@@ -6210,7 +6291,7 @@ definitions:
         description: 'Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**'
       createOption:
         $ref: '#/definitions/CreateOption'
-        description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
+        description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
       diskSizeGB:
         description: Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB
         format: int32
@@ -6811,7 +6892,7 @@ definitions:
         description: 'Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**'
       createOption:
         $ref: '#/definitions/CreateOption'
-        description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
+        description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
       diskSizeGB:
         description: Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB
         format: int32
@@ -6997,7 +7078,7 @@ definitions:
       - location
     x-ms-azure-resource: true
   RollbackStatusInfo:
-    description: Information about rollback on failed VM instances after a OS Upgrade operation
+    description: Information about rollback on failed VM instances after a OS Upgrade operation.
     properties:
       failedRolledbackInstanceCount:
         description: The number of instances which failed to rollback.
@@ -7006,7 +7087,7 @@ definitions:
         type: integer
       rollbackError:
         $ref: '#/definitions/ApiError'
-        description: Error Details if OS rollback failed.
+        description: Error details if OS rollback failed.
         readOnly: true
       successfullyRolledbackInstanceCount:
         description: The number of instances which have been successfully rolled back.
@@ -8084,7 +8165,7 @@ definitions:
         description: 'Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**'
       createOption:
         $ref: '#/definitions/CreateOption'
-        description: 'Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
+        description: 'Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
       image:
         $ref: '#/definitions/VirtualHardDisk'
         description: Specifies information about the unmanaged user image to base the scale set on.
@@ -8633,7 +8714,7 @@ definitions:
         $ref: '#/definitions/HardwareProfile'
         description: Specifies the hardware settings for the virtual machine.
       instanceView:
-        $ref: '#/definitions/VirtualMachineInstanceView'
+        $ref: '#/definitions/VirtualMachineScaleSetVMInstanceView'
         description: The virtual machine instance view.
         readOnly: true
       latestModelApplied:

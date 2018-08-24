@@ -25,7 +25,7 @@ info:
       url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
       version: '2.0'
   x-providerName: bbci.co.uk
-  x-release: 1.0.0-375
+  x-release: 1.0.0-392
   x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
   x-unofficialSpec: true
 externalDocs:
@@ -989,6 +989,22 @@ definitions:
                 - text
                 - value
               type: object
+            events:
+              items:
+                additionalProperties: false
+                properties:
+                  name:
+                    type: string
+                  offset:
+                    type: integer
+                  system:
+                    type: string
+                required:
+                  - name
+                  - system
+                  - offset
+                type: object
+              type: array
             first_broadcast:
               type: string
             guidance:
@@ -1251,6 +1267,22 @@ definitions:
                     - text
                     - value
                   type: object
+                events:
+                  items:
+                    additionalProperties: false
+                    properties:
+                      name:
+                        type: string
+                      offset:
+                        type: integer
+                      system:
+                        type: string
+                    required:
+                      - name
+                      - system
+                      - offset
+                    type: object
+                  type: array
                 first_broadcast:
                   type: string
                 guidance:
@@ -1428,6 +1460,7 @@ definitions:
         enum:
           - tleo
           - curated
+          - automated
       id:
         type: string
       images:
@@ -2260,6 +2293,22 @@ definitions:
           - text
           - value
         type: object
+      events:
+        items:
+          additionalProperties: false
+          properties:
+            name:
+              type: string
+            offset:
+              type: integer
+            system:
+              type: string
+          required:
+            - name
+            - system
+            - offset
+          type: object
+        type: array
       first_broadcast:
         type: string
       guidance:

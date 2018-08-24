@@ -33,6 +33,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/ActiveMemberships':
     get:
@@ -804,6 +805,34 @@ paths:
               $ref: '#/definitions/Team'
             type: array
       summary: Teams
+  '/{format}/UpcomingScheduleByPlayer/{playerid}':
+    get:
+      operationId: UpcomingScheduleByPlayer
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Player ID.
+            Example:<code>90026231</code>.
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Game'
+            type: array
+      summary: Upcoming Schedule By Player
   '/{format}/Venues':
     get:
       operationId: Venues
@@ -1200,6 +1229,12 @@ definitions:
         type: string
       Updated:
         type: string
+      UsaTodayHeadshotNoBackgroundUrl:
+        type: string
+      UsaTodayHeadshotUrl:
+        type: string
+      UsaTodayPlayerID:
+        type: integer
       Weight:
         type: integer
   PlayerGame:

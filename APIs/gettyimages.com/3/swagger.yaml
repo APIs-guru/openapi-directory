@@ -25,7 +25,6 @@ securityDefinitions:
 security:
   - Api-Key: []
 paths:
-  '/jaguar/{uri}': {}
   /v3/artists/images:
     get:
       consumes: []
@@ -891,10 +890,16 @@ paths:
           name: company_downloads
           required: false
           type: boolean
-        - description: "If specified, select assets downloaded on or before this date. Dates should be submitted in ISO\r\n                8601 format (i.e., YYYY-MM-DD hh:mm:ss.sss). If time is omitted, midnight is assumed. Date/times are UTC."
+        - description: "If specified, select assets downloaded on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD). \r\n                Any hour, minute, second values in the request are not used at this time. Date/times in the response are UTC. Default is 30 days prior to date_to."
           format: date-time
           in: query
-          name: end_date
+          name: date_from
+          required: false
+          type: string
+        - description: "If specified, select assets downloaded on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD). \r\n                Any hour, minute, second values in the request are not used at this time. Date/times in the response are UTC. Default is current date."
+          format: date-time
+          in: query
+          name: date_to
           required: false
           type: string
         - description: Identifies page to return. Default is 1.
@@ -916,15 +921,8 @@ paths:
             - imagepack
             - premiumaccess
             - royaltyfreesubscription
-            - credit_pack
           in: query
           name: product_type
-          required: false
-          type: string
-        - description: "If specified, select assets downloaded on or after this date. Dates should be submitted in ISO\r\n                8601 format (i.e., YYYY-MM-DD hh:mm:ss.sss). If time is omitted, midnight is assumed. Date/times are UTC."
-          format: date-time
-          in: query
-          name: start_date
           required: false
           type: string
       produces:
@@ -1005,7 +1003,6 @@ paths:
             - imagepack
             - premiumaccess
             - royaltyfreesubscription
-            - credit_pack
           in: query
           name: product_type
           required: false
@@ -1104,7 +1101,6 @@ paths:
       summary: Download a video
       tags:
         - Downloads
-  '/v3/downloads/{id}': {}
   /v3/events:
     get:
       consumes: []
@@ -1250,7 +1246,7 @@ paths:
           required: true
           type: array
         - collectionFormat: multi
-          description: Specifies fields to return. Defaults to 'summary_set'.
+          description: 'Specifies fields to return. Defaults to ''summary_set''. NOTE: Bytes returned by ''download_sizes'' field are estimates.'
           in: query
           items:
             enum:
@@ -1283,6 +1279,7 @@ paths:
               - event_ids
               - graphical_style
               - id
+              - istock_collection
               - istock_licenses
               - keywords
               - largest_downloads
@@ -1322,6 +1319,8 @@ paths:
           description: UnauthorizedDisplaySize
         '404':
           description: ImageNotFound
+        '500':
+          description: InvalidIStockCollection
       summary: Get metadata for multiple images by supplying multiple image ids
       tags:
         - Images
@@ -1348,7 +1347,7 @@ paths:
           required: true
           type: string
         - collectionFormat: multi
-          description: Specifies fields to return. Defaults to 'summary_set'.
+          description: 'Specifies fields to return. Defaults to ''summary_set''. NOTE: Bytes returned by ''download_sizes'' field are estimates.'
           in: query
           items:
             enum:
@@ -1381,6 +1380,7 @@ paths:
               - event_ids
               - graphical_style
               - id
+              - istock_collection
               - istock_licenses
               - keywords
               - largest_downloads
@@ -1420,6 +1420,8 @@ paths:
           description: UnauthorizedDisplaySize
         '404':
           description: ImageNotFound
+        '500':
+          description: InvalidIStockCollection
       summary: Get metadata for a single image by supplying one image id
       tags:
         - Images
@@ -1474,6 +1476,7 @@ paths:
               - event_ids
               - graphical_style
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -1521,6 +1524,8 @@ paths:
           description: UnauthorizedDisplaySize
         '404':
           description: ImageNotFound
+        '500':
+          description: InvalidIStockCollection
       summary: Search for images similar to an image
       tags:
         - Images
@@ -1625,10 +1630,16 @@ paths:
           name: Accept-Language
           required: false
           type: string
+        - description: 'If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
+          format: date-time
+          in: query
+          name: date_from
+          required: false
+          type: string
         - description: 'If specified, retrieves previous purchases on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
           format: date-time
           in: query
-          name: end_date
+          name: date_to
           required: false
           type: string
         - description: Identifies page to return. Default is 1.
@@ -1643,12 +1654,6 @@ paths:
           name: page_size
           required: false
           type: integer
-        - description: 'If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
-          format: date-time
-          in: query
-          name: start_date
-          required: false
-          type: string
       produces:
         - application/json
         - text/json
@@ -1681,10 +1686,16 @@ paths:
           name: Accept-Language
           required: false
           type: string
+        - description: 'If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
+          format: date-time
+          in: query
+          name: date_from
+          required: false
+          type: string
         - description: 'If specified, retrieves previous purchases on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
           format: date-time
           in: query
-          name: end_date
+          name: date_to
           required: false
           type: string
         - description: Identifies page to return. Default is 1.
@@ -1699,12 +1710,6 @@ paths:
           name: page_size
           required: false
           type: integer
-        - description: 'If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
-          format: date-time
-          in: query
-          name: start_date
-          required: false
-          type: string
       produces:
         - application/json
         - text/json
@@ -2001,6 +2006,7 @@ paths:
               - event_ids
               - graphical_style
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -2039,10 +2045,19 @@ paths:
               - fine_art
               - illustration
               - photography
+              - vector
             type: string
           name: graphical_styles
           required: false
           type: array
+        - description: Provides searching based on specified graphical style(s).
+          enum:
+            - include
+            - exclude
+          in: query
+          name: graphical_styles_filter_type
+          required: false
+          type: string
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -2310,6 +2325,11 @@ paths:
           name: ethnicity
           required: false
           type: array
+        - description: Exclude images that are only available for editorial (non-commercial) use. Default value is false.
+          in: query
+          name: exclude_editorial_use_only
+          required: false
+          type: boolean
         - description: Excludes images containing nudity. The default is false.
           in: query
           name: exclude_nudity
@@ -2339,6 +2359,7 @@ paths:
               - display_set
               - graphical_style
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -2376,10 +2397,19 @@ paths:
               - fine_art
               - illustration
               - photography
+              - vector
             type: string
           name: graphical_styles
           required: false
           type: array
+        - description: Provides searching based on specified graphical style(s).
+          enum:
+            - include
+            - exclude
+          in: query
+          name: graphical_styles_filter_type
+          required: false
+          type: string
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -2492,6 +2522,8 @@ paths:
           description: AuthorizationTokenRequired
         '403':
           description: UnauthorizedDisplaySize
+        '500':
+          description: InvalidIStockCollection
       summary: Search for creative images only
       tags:
         - Search
@@ -2536,6 +2568,7 @@ paths:
               - display_set
               - graphical_style
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -2598,6 +2631,8 @@ paths:
           description: AuthorizationTokenRequired
         '403':
           description: UnauthorizedDisplaySize
+        '500':
+          description: InvalidIStockCollection
       summary: Search for creative images based on url
       tags:
         - Search
@@ -2714,6 +2749,18 @@ paths:
           name: compositions
           required: false
           type: array
+        - description: 'Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).'
+          format: date-time
+          in: query
+          name: date_from
+          required: false
+          type: string
+        - description: 'Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).'
+          format: date-time
+          in: query
+          name: date_to
+          required: false
+          type: string
         - collectionFormat: multi
           description: Return only events with a matching editorial segment.
           in: query
@@ -2734,12 +2781,6 @@ paths:
           name: embed_content_only
           required: false
           type: boolean
-        - description: 'Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).'
-          format: date-time
-          in: query
-          name: end_date
-          required: false
-          type: string
         - collectionFormat: multi
           description: specify linked data entity uri.
           in: query
@@ -2778,11 +2819,6 @@ paths:
           name: event_ids
           required: false
           type: array
-        - description: Excludes images containing nudity. The default is false.
-          in: query
-          name: exclude_nudity
-          required: false
-          type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
           in: query
@@ -2847,10 +2883,19 @@ paths:
             enum:
               - photography
               - illustration
+              - vector
             type: string
           name: graphical_styles
           required: false
           type: array
+        - description: Provides searching based on specified graphical style(s).
+          enum:
+            - include
+            - exclude
+          in: query
+          name: graphical_styles_filter_type
+          required: false
+          type: string
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -2948,12 +2993,6 @@ paths:
           name: specific_people
           required: false
           type: array
-        - description: 'Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).'
-          format: date-time
-          in: query
-          name: start_date
-          required: false
-          type: string
       produces:
         - application/json
         - text/json
@@ -3066,11 +3105,6 @@ paths:
           name: editorial_video_types
           required: false
           type: array
-        - description: Excludes images containing nudity. The default is false.
-          in: query
-          name: exclude_nudity
-          required: false
-          type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
           in: query
@@ -3096,6 +3130,7 @@ paths:
               - entity_details
               - era
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -3186,6 +3221,14 @@ paths:
           name: product_types
           required: false
           type: array
+        - description: Allows filtering by type of model release.
+          enum:
+            - release_not_important
+            - fully_released
+          in: query
+          name: release_status
+          required: false
+          type: string
         - description: Allows sorting of results.
           enum:
             - best_match
@@ -3305,11 +3348,6 @@ paths:
           name: collections_filter_type
           required: false
           type: string
-        - description: Excludes images containing nudity. The default is false.
-          in: query
-          name: exclude_nudity
-          required: false
-          type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
           in: query
@@ -3333,6 +3371,7 @@ paths:
               - display_set
               - era
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -3422,6 +3461,14 @@ paths:
           name: product_types
           required: false
           type: array
+        - description: Allows filtering by type of model release.
+          enum:
+            - release_not_important
+            - fully_released
+          in: query
+          name: release_status
+          required: false
+          type: string
         - description: Allows sorting of results.
           enum:
             - best_match
@@ -3445,6 +3492,8 @@ paths:
           description: AuthorizationTokenRequired
         '403':
           description: UnauthorizedDisplaySize
+        '500':
+          description: InvalidIStockCollection
       summary: Search for creative videos
       tags:
         - Search
@@ -3551,11 +3600,6 @@ paths:
           name: entity_uris
           required: false
           type: array
-        - description: Excludes images containing nudity. The default is false.
-          in: query
-          name: exclude_nudity
-          required: false
-          type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
           in: query
@@ -3581,6 +3625,7 @@ paths:
               - entity_details
               - era
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -3660,6 +3705,14 @@ paths:
           name: product_types
           required: false
           type: array
+        - description: Allows filtering by type of model release.
+          enum:
+            - release_not_important
+            - fully_released
+          in: query
+          name: release_status
+          required: false
+          type: string
         - description: Allows sorting of results.
           enum:
             - best_match
@@ -3704,17 +3757,17 @@ paths:
       description: "# Report Usage\r\n\r\nUse this endpoint to report the usages of a set of assets. The count of assets submitted in a single batch to this endpoint is limited to 1000. Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. In this case, you will need to remove the invalid asset Ids from the query request and re-submit the query.\r\n\r\n##  Quickstart\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource.\r\nPlease see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n\r\n\r\n_Note_: Date of use can be in any unambiguous date format.\r\n"
       operationId: Usage_Put
       parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          type: string
         - description: "Specifies up to 1000 sets of asset Id, usage count, and date of use to submit usages for. \r\n            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. \r\n            The date format should be ISO 8601 (ex: YYYY-MM-DD), time is not needed."
           in: body
           name: request
           required: true
           schema:
             $ref: '#/definitions/report_usage_batch_request'
-        - description: 'Provide access token in the format of ''Bearer {token}''.'
-          in: header
-          name: Authorization
-          required: true
-          type: string
         - description: Specifies a unique batch transaction id to identify the report.
           in: path
           name: id
@@ -3803,6 +3856,7 @@ paths:
               - thumb
               - title
               - istock_licenses
+              - istock_collection
             type: string
           name: fields
           required: false
@@ -3823,6 +3877,8 @@ paths:
           description: UnauthorizedDisplaySize
         '404':
           description: VideosNotFound
+        '500':
+          description: InvalidIStockCollection
       summary: Get metadata for multiple videos by supplying multiple video ids
       tags:
         - Videos
@@ -3889,6 +3945,7 @@ paths:
               - thumb
               - title
               - istock_licenses
+              - istock_collection
             type: string
           name: fields
           required: false
@@ -3909,6 +3966,8 @@ paths:
           description: UnauthorizedDisplaySize
         '404':
           description: VideosNotFound
+        '500':
+          description: InvalidIStockCollection
       summary: Get metadata for a single video by supplying one video id
       tags:
         - Videos
@@ -3958,6 +4017,7 @@ paths:
               - entity_details
               - era
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -4005,6 +4065,8 @@ paths:
           description: UnauthorizedDisplaySize
         '404':
           description: VideosNotFound
+        '500':
+          description: InvalidIStockCollection
       summary: Get videos similar to a video by supplying one video id
       tags:
         - Videos
@@ -4576,8 +4638,6 @@ definitions:
         type: string
       asset_family:
         type: string
-      asset_type:
-        type: string
       call_for_image:
         type: boolean
       caption:
@@ -4884,8 +4944,6 @@ definitions:
         type: string
       overage:
         $ref: '#/definitions/GettyImages.Models.Products.OverageDetails'
-      premium_access_download_requirements:
-        $ref: '#/definitions/GettyImages.Models.Products.DownloadRequirements'
       status:
         enum:
           - active
@@ -5406,6 +5464,15 @@ definitions:
         items:
           $ref: '#/definitions/GettyImages.Models.Artists.VideoSearchItem'
         type: array
+    type: object
+  GettyImages.Models.TerritoryRestriction:
+    properties:
+      country_code:
+        type: string
+      description:
+        type: string
+      type:
+        type: string
     type: object
   GettyImages.Models.Videos.VideoDetail:
     properties:

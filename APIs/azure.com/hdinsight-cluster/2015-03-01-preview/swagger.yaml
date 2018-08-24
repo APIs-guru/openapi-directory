@@ -41,6 +41,20 @@ parameters:
     name: api-version
     required: true
     type: string
+  ClusterNameParameter:
+    description: The name of the cluster.
+    in: path
+    name: clusterName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupNameParameter:
+    description: The name of the resource group.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   SubscriptionIdParameter:
     description: The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
@@ -53,13 +67,25 @@ paths:
       description: Lists all the HDInsight clusters under the subscription.
       operationId: Clusters_List
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: OK response definition.
           schema:
             $ref: '#/definitions/ClusterListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Clusters
       x-ms-examples:
@@ -180,18 +206,26 @@ paths:
       description: Lists the HDInsight clusters in a resource group.
       operationId: Clusters_ListByResourceGroup
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: OK response definition.
           schema:
             $ref: '#/definitions/ClusterListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Clusters
       x-ms-examples:
@@ -313,23 +347,27 @@ paths:
       description: Deletes the specified HDInsight cluster.
       operationId: Clusters_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: Ok response definition.
         '202':
           description: Accepted response definition.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Clusters
       x-ms-examples:
@@ -347,23 +385,27 @@ paths:
       description: Gets the specified cluster.
       operationId: Clusters_Get
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: OK response definition.
           schema:
             $ref: '#/definitions/Cluster'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Clusters
       x-ms-examples:
@@ -493,29 +535,33 @@ paths:
       description: Patch HDInsight cluster with the specified parameters.
       operationId: Clusters_Update
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
         - description: The cluster patch request.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/ClusterPatchParameters'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: OK response definition.
           schema:
             $ref: '#/definitions/Cluster'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Clusters
       x-ms-examples:
@@ -588,32 +634,95 @@ paths:
       description: Creates a new HDInsight cluster with the specified parameters.
       operationId: Clusters_Create
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
         - description: The cluster create request.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/ClusterCreateParametersExtended'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: OK response definition.
           schema:
             $ref: '#/definitions/Cluster'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Clusters
       x-ms-examples:
+        Create Hadoop cluster with Azure Data Lake Storage Gen 2:
+          parameters:
+            api-version: 2015-03-01-preview
+            clusterName: cluster1
+            parameters:
+              properties:
+                clusterDefinition:
+                  configurations:
+                    gateway:
+                      restAuthCredential.isEnabled: 'true'
+                      restAuthCredential.password: '**********'
+                      restAuthCredential.username: admin
+                  kind: Hadoop
+                clusterVersion: '3.6'
+                computeProfile:
+                  roles:
+                    - hardwareProfile:
+                        vmSize: Standard_D3_V2
+                      minInstanceCount: 1
+                      name: headnode
+                      osProfile:
+                        linuxOperatingSystemProfile:
+                          password: '**********'
+                          username: sshuser
+                      targetInstanceCount: 2
+                    - hardwareProfile:
+                        vmSize: Standard_D3_V2
+                      minInstanceCount: 1
+                      name: workernode
+                      osProfile:
+                        linuxOperatingSystemProfile:
+                          password: '**********'
+                          username: sshuser
+                      targetInstanceCount: 4
+                    - hardwareProfile:
+                        vmSize: Small
+                      minInstanceCount: 1
+                      name: zookeepernode
+                      osProfile:
+                        linuxOperatingSystemProfile:
+                          password: '**********'
+                          username: sshuser
+                      targetInstanceCount: 3
+                osType: Linux
+                storageProfile:
+                  storageaccounts:
+                    - fileSystem: default
+                      isDefault: true
+                      key: storagekey
+                      name: mystorage.dfs.core.windows.net
+                tier: Standard
+              tags:
+                key1: val1
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              headers:
+                location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
         Create Hadoop on Linux cluster with SSH password:
           parameters:
             api-version: 2015-03-01-preview
@@ -882,16 +991,9 @@ paths:
       description: Resizes the specified HDInsight cluster to the specified size.
       operationId: Clusters_Resize
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
         - description: The constant value for the roleName
           enum:
             - workernode
@@ -902,19 +1004,30 @@ paths:
           x-ms-enum:
             modelAsString: true
             name: RoleName
+        - $ref: '#/parameters/ApiVersionParameter'
         - description: The parameters for the resize operation.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/ClusterResizeParameters'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: OK response definition.
         '202':
           description: Accepted response definition.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Clusters
       x-ms-examples:
@@ -1036,7 +1149,7 @@ definitions:
       errors:
         description: The list of errors.
         items:
-          $ref: '#/definitions/errors'
+          $ref: '#/definitions/Errors'
         type: array
       osType:
         description: The type of operating system.
@@ -1167,6 +1280,15 @@ definitions:
         description: ReadOnly. The storage account type. Do not set this value.
         readOnly: true
         type: string
+  Errors:
+    description: The error message associated with the cluster creation.
+    properties:
+      code:
+        description: The error code.
+        type: string
+      message:
+        description: The error message.
+        type: string
   ExecuteScriptActionParameters:
     description: The parameters for the script actions to execute on a running cluster.
     properties:
@@ -1186,41 +1308,23 @@ definitions:
       vmSize:
         description: The size of the VM
         type: string
-  Operation:
-    description: The HDInsight REST API operation.
+  LinuxOperatingSystemProfile:
+    description: 'The ssh username, password, and ssh public key.'
     properties:
-      display:
-        description: The object that represents the operation.
-        properties:
-          operation:
-            description: 'The operation type: read, write, delete, etc.'
-            type: string
-          provider:
-            description: 'The service provider: Microsoft.HDInsight'
-            type: string
-          resource:
-            description: 'The resource on which the operation is performed: Cluster, Capabilities, etc.'
-            type: string
-      name:
-        description: 'The operation name: {provider}/{resource}/{operation}'
+      password:
+        description: The password.
         type: string
-    type: object
-  OperationListResult:
-    description: Result of the request to list HDInsight operations. It contains a list of operations and a URL link to get the next set of results.
-    properties:
-      nextLink:
-        description: The URL to get the next set of operation list results if there are any.
+      sshProfile:
+        $ref: '#/definitions/SshProfile'
+        description: The SSH profile.
+      username:
+        description: The username.
         type: string
-      value:
-        description: The list of HDInsight operations supported by the HDInsight resource provider.
-        items:
-          $ref: '#/definitions/Operation'
-        type: array
   OperationResource:
     description: The azure async operation response.
     properties:
       error:
-        $ref: '#/definitions/errors'
+        $ref: '#/definitions/Errors'
         description: The operation error information.
       status:
         description: The async operation state.
@@ -1232,6 +1336,12 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: AsyncOperationState
+  OsProfile:
+    description: The Linux operation systems profile.
+    properties:
+      linuxOperatingSystemProfile:
+        $ref: '#/definitions/LinuxOperatingSystemProfile'
+        description: The Linux OS profile.
   ProxyResource:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -1278,29 +1388,8 @@ definitions:
         description: The name of the role.
         type: string
       osProfile:
-        description: The Linux operation systems profile.
-        properties:
-          linuxOperatingSystemProfile:
-            description: 'The ssh username, password, and ssh public key.'
-            properties:
-              password:
-                description: The password.
-                type: string
-              sshProfile:
-                description: The list of SSH public keys.
-                properties:
-                  publicKeys:
-                    description: The list of SSH public keys.
-                    items:
-                      description: The SSH public key for the cluster nodes.
-                      properties:
-                        certificateData:
-                          description: The certificate for SSH.
-                          type: string
-                    type: array
-              username:
-                description: The username.
-                type: string
+        $ref: '#/definitions/OsProfile'
+        description: The operating system profile.
       scriptActions:
         description: The list of script actions on the role.
         items:
@@ -1434,11 +1523,28 @@ definitions:
       organizationalUnitDN:
         description: The organizational unit within the Active Directory to place the cluster and service accounts.
         type: string
+  SshProfile:
+    description: The list of SSH public keys.
+    properties:
+      publicKeys:
+        description: The list of SSH public keys.
+        items:
+          $ref: '#/definitions/SshPublicKey'
+        type: array
+  SshPublicKey:
+    description: The SSH public key for the cluster nodes.
+    properties:
+      certificateData:
+        description: The certificate for SSH.
+        type: string
   StorageAccount:
     description: The storage Account.
     properties:
       container:
-        description: The container in the storage account.
+        description: 'The container in the storage account, only to be specified for WASB storage accounts.'
+        type: string
+      fileSystem:
+        description: 'The filesystem, only to be specified for Azure Data Lake Storage Gen 2.'
         type: string
       isDefault:
         description: Whether or not the storage account is the default storage account.
@@ -1485,13 +1591,4 @@ definitions:
         type: string
       subnet:
         description: The name of the subnet.
-        type: string
-  errors:
-    description: The error message associated with the cluster creation.
-    properties:
-      code:
-        description: The error code.
-        type: string
-      message:
-        description: The error message.
         type: string

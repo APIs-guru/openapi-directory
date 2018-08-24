@@ -94,6 +94,192 @@ paths:
       summary: Returns infos about Billbee terms and conditions
       tags:
         - Provisioning
+  /api/v1/customers:
+    get:
+      consumes: []
+      operationId: Customer_GetAll
+      parameters:
+        - description: The current page to request starting with 1
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: The pagesize for the result list. Values between 1 and 250 are allowed
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]]'
+      summary: Get a list of all customers
+      tags:
+        - Customers
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: Customer_Create
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CreateCustomerApiModel'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]'
+      summary: Creates a new customer
+      tags:
+        - Customers
+  '/api/v1/customers/{id}':
+    get:
+      consumes: []
+      operationId: Customer_GetOne
+      parameters:
+        - description: The id of the customer to query
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]'
+      summary: Queries a single customer by id
+      tags:
+        - Customers
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: Customer_Update
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel'
+        - description: The id of the customer
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]'
+      summary: Updates a customer by id
+      tags:
+        - Customers
+  '/api/v1/customers/{id}/addresses':
+    get:
+      consumes: []
+      operationId: Customer_GetCustomerAddresses
+      parameters:
+        - description: The id of the customer
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: The current page to request starting with 1
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: The pagesize for the result list. Values between 1 and 250 are allowed
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]]'
+      summary: Queries a list of addresses from a customer
+      tags:
+        - Customers
+  '/api/v1/customers/{id}/orders':
+    get:
+      consumes: []
+      operationId: Customer_GetCustomerOrders
+      parameters:
+        - description: The id of the customer
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: The current page to request starting with 1
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: The pagesize for the result list. Values between 1 and 250 are allowed
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.Order.ApiOrder]]'
+      summary: Queries a list of orders from a customer
+      tags:
+        - Customers
   /api/v1/events:
     get:
       consumes: []
@@ -258,7 +444,7 @@ paths:
           format: int32
           in: query
           name: shopId
-          required: true
+          required: false
           type: integer
       produces:
         - application/json
@@ -708,6 +894,150 @@ paths:
       summary: Get a list of all products
       tags:
         - Products
+  /api/v1/products/PatchableFields:
+    get:
+      consumes: []
+      operationId: Article_GetPatchableFields
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      summary: Returns a list of fields which can be updated with the patch call
+      tags:
+        - Products
+  /api/v1/products/custom-fields:
+    get:
+      consumes: []
+      operationId: Article_GetCustomFields
+      parameters:
+        - format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel]]'
+      summary: Queries a list of all custom fields
+      tags:
+        - Products
+  '/api/v1/products/custom-fields/{id}':
+    get:
+      consumes: []
+      operationId: Article_GetCustomField
+      parameters:
+        - description: The id of the custom field to query
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel]'
+      summary: Queries a single custom field
+      tags:
+        - Products
+  /api/v1/products/images/delete:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: Article_DeleteImages
+      parameters:
+        - description: ''
+          in: body
+          name: imageIds
+          required: true
+          schema:
+            items:
+              format: int32
+              type: integer
+            type: array
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.DeletedImagesModel]'
+      summary: Delete multiple images by id
+      tags:
+        - Products
+  '/api/v1/products/images/{imageId}':
+    delete:
+      consumes: []
+      operationId: Article_DeleteImage
+      parameters:
+        - description: The image id
+          format: int32
+          in: path
+          name: imageId
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      summary: Deletes a single image by id
+      tags:
+        - Products
+    get:
+      consumes: []
+      operationId: Article_GetImage
+      parameters:
+        - description: The Id of the image
+          format: int32
+          in: path
+          name: imageId
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiImageModel]'
+      summary: Returns a single image by id
+      tags:
+        - Products
   /api/v1/products/reservedamount:
     get:
       consumes: []
@@ -860,6 +1190,228 @@ paths:
       summary: Queries a single article by id or by sku
       tags:
         - Products
+    patch:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      operationId: Article_PatchArticle
+      parameters:
+        - description: The id of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: The fields which should be updated.
+          in: body
+          name: model
+          required: true
+          schema:
+            type: object
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      summary: Updates one or more fields of a product
+      tags:
+        - Products
+  '/api/v1/products/{productId}/images':
+    get:
+      consumes: []
+      operationId: Article_GetImages
+      parameters:
+        - description: The Id of the product
+          format: int32
+          in: path
+          name: productId
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiImageModel]]'
+      summary: Returns a list of all images of the product
+      tags:
+        - Products
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: Article_PutImages
+      parameters:
+        - description: The id of the product
+          format: int32
+          in: path
+          name: productId
+          required: true
+          type: integer
+        - description: An array of ArticleApiImageModel
+          in: body
+          name: models
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiImageModel'
+            type: array
+        - description: 'If you pass true, the images will be replaced by the passed images. Otherwise the passed images will be appended to the product.'
+          in: query
+          name: replace
+          required: false
+          type: boolean
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiImageModel]'
+      summary: Add multiple images to a product or replace the product images by the given images
+      tags:
+        - Products
+  '/api/v1/products/{productId}/images/{imageId}':
+    delete:
+      consumes: []
+      operationId: Article_DeleteImageFromProduct
+      parameters:
+        - description: The product id
+          format: int32
+          in: path
+          name: productId
+          required: true
+          type: integer
+        - description: The image id
+          format: int32
+          in: path
+          name: imageId
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      summary: Deletes a single image from a product
+      tags:
+        - Products
+    get:
+      consumes: []
+      operationId: Article_GetImageFromProduct
+      parameters:
+        - description: The Id of the product
+          format: int32
+          in: path
+          name: productId
+          required: true
+          type: integer
+        - description: The Id of the image
+          format: int32
+          in: path
+          name: imageId
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiImageModel]'
+      summary: Returns a single image by id
+      tags:
+        - Products
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: Article_PutImage
+      parameters:
+        - description: The product id
+          format: int32
+          in: path
+          name: productId
+          required: true
+          type: integer
+        - description: 'The image id. If you pass 0, the image will be added'
+          format: int32
+          in: path
+          name: imageId
+          required: true
+          type: integer
+        - description: The ArticleApiImageModel
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiImageModel'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiImageModel]'
+      summary: Add or update an existing image of a product
+      tags:
+        - Products
+  /api/v1/search:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: Search_Search
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.SearchModel'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Rechnungsdruck.WebApp.Controllers.Api.SearchController.SearchResultsModel]'
+      summary: "Search for products, customers and orders.\r\nType can be \"order\", \"product\" and / or \"customer\"\r\nTerm can contains lucene query syntax"
+      tags:
+        - Products
+        - Customers
+        - Orders
   /api/v1/shipment/ping:
     get:
       consumes: []
@@ -1085,6 +1637,55 @@ paths:
       tags:
         - Webhooks
 definitions:
+  Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel:
+    properties:
+      Configuration:
+        type: object
+      Id:
+        format: int32
+        type: integer
+      IsNullable:
+        type: boolean
+      Name:
+        type: string
+      Type:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+        format: int32
+        type: integer
+    type: object
+  Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldValueModel:
+    properties:
+      ArticleId:
+        format: int32
+        type: integer
+      Definition:
+        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel'
+      DefinitionId:
+        format: int32
+        type: integer
+      Id:
+        format: int32
+        type: integer
+      Value:
+        type: object
+    type: object
+  Billbee.Interfaces.BillbeeAPI.Model.ArticleApiImageModel:
+    properties:
+      Id:
+        format: int32
+        type: integer
+      IsDefault:
+        type: boolean
+      Position:
+        format: int32
+        type: integer
+      Url:
+        type: string
+    type: object
   Billbee.Interfaces.BillbeeAPI.Model.ArticleApiModel:
     properties:
       BasicAttributes:
@@ -1109,6 +1710,10 @@ definitions:
         type: number
       CountryOfOrigin:
         type: string
+      CustomFields:
+        items:
+          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldValueModel'
+        type: array
       DeliveryTime:
         format: int32
         type: integer
@@ -1128,7 +1733,7 @@ definitions:
         type: integer
       Images:
         items:
-          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleImageApiModel'
+          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel'
         type: array
       InvoiceText:
         items:
@@ -1254,7 +1859,7 @@ definitions:
       Name:
         type: string
     type: object
-  Billbee.Interfaces.BillbeeAPI.Model.ArticleImageApiModel:
+  Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel:
     properties:
       Id:
         format: int32
@@ -1313,6 +1918,116 @@ definitions:
       SKU:
         type: string
     type: object
+  Billbee.Interfaces.BillbeeAPI.Model.CreateCustomerApiModel:
+    properties:
+      Address:
+        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel'
+      Email:
+        type: string
+      Id:
+        format: int32
+        type: integer
+      LanguageId:
+        format: int32
+        type: integer
+      Name:
+        type: string
+      Number:
+        format: int32
+        type: integer
+      PriceGroupId:
+        format: int32
+        type: integer
+      Tel1:
+        type: string
+      Tel2:
+        type: string
+      VatId:
+        type: string
+    type: object
+  Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel:
+    properties:
+      AddressAddition:
+        type: string
+      AddressType:
+        format: int32
+        type: integer
+      City:
+        type: string
+      Company:
+        type: string
+      CountryCode:
+        type: string
+      CustomerId:
+        format: int32
+        type: integer
+      Email:
+        type: string
+      Fax:
+        type: string
+      FirstName:
+        type: string
+      FullAddr:
+        readOnly: true
+        type: string
+      Housenumber:
+        type: string
+      Id:
+        format: int32
+        type: integer
+      LastName:
+        type: string
+      Name2:
+        type: string
+      State:
+        type: string
+      Street:
+        type: string
+      Tel1:
+        type: string
+      Tel2:
+        type: string
+      Zip:
+        type: string
+    type: object
+  Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel:
+    properties:
+      Email:
+        type: string
+      Id:
+        format: int32
+        type: integer
+      LanguageId:
+        format: int32
+        type: integer
+      Name:
+        type: string
+      Number:
+        format: int32
+        type: integer
+      PriceGroupId:
+        format: int32
+        type: integer
+      Tel1:
+        type: string
+      Tel2:
+        type: string
+      VatId:
+        type: string
+    type: object
+  Billbee.Interfaces.BillbeeAPI.Model.DeletedImagesModel:
+    properties:
+      Deleted:
+        items:
+          format: int32
+          type: integer
+        type: array
+      NotFound:
+        items:
+          format: int32
+          type: integer
+        type: array
+    type: object
   Billbee.Interfaces.BillbeeAPI.Model.GetReservedAmountResponseData:
     properties:
       ReservedAmount:
@@ -1345,6 +2060,9 @@ definitions:
     properties:
       AutosubtractReservedAmount:
         type: boolean
+      BillbeeId:
+        format: int32
+        type: integer
       DeltaQuantity:
         format: double
         type: number
@@ -1364,6 +2082,9 @@ definitions:
     type: object
   Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeApiModel:
     properties:
+      BillbeeId:
+        format: int32
+        type: integer
       Sku:
         type: string
       StockCode:
@@ -1418,9 +2139,20 @@ definitions:
         type: string
       Phone:
         type: string
+      Salutation:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        format: int32
+        type: integer
       State:
         type: string
       Street:
+        type: string
+      Title:
         type: string
       Zip:
         type: string
@@ -1578,6 +2310,8 @@ definitions:
           - 93
           - 94
           - 95
+          - 96
+          - 97
         format: int32
         type: integer
       PaymentReference:
@@ -1703,6 +2437,9 @@ definitions:
         type: number
       TransactionId:
         type: string
+      UnrebatedTotalPrice:
+        format: double
+        type: number
     type: object
   Billbee.Interfaces.Order.ApiOrderItemAttribute:
     properties:
@@ -1922,17 +2659,42 @@ definitions:
       - WebHookUri
     type: object
   Rechnungsdruck.WebApp.Controllers.Api.ApiAddShipmentToOrderModel:
+    description: Data of the shipment to be created
     properties:
+      CarrierId:
+        description: "Optional the id of a shipping carrier that should be assigend to the shipment\r\nWill override the carrier from the shipment product\r\n0: other,\r\n1: dhlExpress,\r\n2: dhl,\r\n3: hermes,\r\n4: dpd,\r\n5: ups,\r\n6: gls,\r\n7: dpag,\r\n8: OePost,\r\n9: fedex,\r\n10: generalOvernight,\r\n11: tnt,\r\n12: liefery,\r\n13: iloxx,\r\n14: parcel_one"
+        format: int32
+        type: integer
       Comment:
+        description: Optional a text stored with the shipment
         type: string
       OrderId:
+        description: Optional a differing order number of the shipment if available
         type: string
       ShippingId:
+        description: The id of the shipment (Sendungsnummer/trackingid)
         type: string
       ShippingProviderId:
+        description: Optional the id of a shipping provider existing in the billbee account that should be assigned to the shipment
         format: int32
         type: integer
       ShippingProviderProductId:
+        description: Optional the id of a shipping provider product that should be assigend to the shipment
+        format: int32
+        type: integer
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel]]':
+    properties:
+      Page:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalPages:
+        format: int32
+        type: integer
+      TotalRows:
         format: int32
         type: integer
     type: object
@@ -1950,6 +2712,91 @@ definitions:
       TotalRows:
         format: int32
         type: integer
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]]':
+    properties:
+      Page:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalPages:
+        format: int32
+        type: integer
+      TotalRows:
+        format: int32
+        type: integer
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]]':
+    properties:
+      Page:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalPages:
+        format: int32
+        type: integer
+      TotalRows:
+        format: int32
+        type: integer
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.Order.ApiOrder]]':
+    properties:
+      Page:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalPages:
+        format: int32
+        type: integer
+      TotalRows:
+        format: int32
+        type: integer
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel]]':
+    properties:
+      Data:
+        items:
+          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel'
+        type: array
+      ErrorCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+        format: int32
+        type: integer
+      ErrorMessage:
+        type: string
+      Paging:
+        $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel]]'
     type: object
   'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiModel]]':
     properties:
@@ -1982,12 +2829,206 @@ definitions:
           - 20
           - 21
           - 22
+          - 23
+          - 24
         format: int32
         type: integer
       ErrorMessage:
         type: string
       Paging:
         $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiModel]]'
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]]':
+    properties:
+      Data:
+        items:
+          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel'
+        type: array
+      ErrorCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+        format: int32
+        type: integer
+      ErrorMessage:
+        type: string
+      Paging:
+        $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]]'
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]]':
+    properties:
+      Data:
+        items:
+          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel'
+        type: array
+      ErrorCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+        format: int32
+        type: integer
+      ErrorMessage:
+        type: string
+      Paging:
+        $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]]'
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.Order.ApiOrder]]':
+    properties:
+      Data:
+        items:
+          $ref: '#/definitions/Billbee.Interfaces.Order.ApiOrder'
+        type: array
+      ErrorCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+        format: int32
+        type: integer
+      ErrorMessage:
+        type: string
+      Paging:
+        $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.Order.ApiOrder]]'
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel]':
+    properties:
+      Data:
+        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel'
+      ErrorCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+        format: int32
+        type: integer
+      ErrorMessage:
+        type: string
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiImageModel]':
+    properties:
+      Data:
+        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiImageModel'
+      ErrorCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+        format: int32
+        type: integer
+      ErrorMessage:
+        type: string
     type: object
   'Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiModel]':
     properties:
@@ -2018,6 +3059,80 @@ definitions:
           - 20
           - 21
           - 22
+          - 23
+          - 24
+        format: int32
+        type: integer
+      ErrorMessage:
+        type: string
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]':
+    properties:
+      Data:
+        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel'
+      ErrorCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+        format: int32
+        type: integer
+      ErrorMessage:
+        type: string
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.DeletedImagesModel]':
+    properties:
+      Data:
+        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.DeletedImagesModel'
+      ErrorCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
         format: int32
         type: integer
       ErrorMessage:
@@ -2052,6 +3167,8 @@ definitions:
           - 20
           - 21
           - 22
+          - 23
+          - 24
         format: int32
         type: integer
       ErrorMessage:
@@ -2086,6 +3203,8 @@ definitions:
           - 20
           - 21
           - 22
+          - 23
+          - 24
         format: int32
         type: integer
       ErrorMessage:
@@ -2120,6 +3239,44 @@ definitions:
           - 20
           - 21
           - 22
+          - 23
+          - 24
+        format: int32
+        type: integer
+      ErrorMessage:
+        type: string
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Rechnungsdruck.WebApp.Controllers.Api.SearchController.SearchResultsModel]':
+    properties:
+      Data:
+        $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.SearchResultsModel'
+      ErrorCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
         format: int32
         type: integer
       ErrorMessage:
@@ -2154,6 +3311,46 @@ definitions:
           - 20
           - 21
           - 22
+          - 23
+          - 24
+        format: int32
+        type: integer
+      ErrorMessage:
+        type: string
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiImageModel]]':
+    properties:
+      Data:
+        items:
+          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiImageModel'
+        type: array
+      ErrorCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
         format: int32
         type: integer
       ErrorMessage:
@@ -2163,6 +3360,7 @@ definitions:
     description: Data used to create a new Billbee user account
     properties:
       AcceptTerms:
+        description: 'Set to true, if the user has accepted the Billbee terms &amp; conditions'
         type: boolean
       Address:
         $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.AutomaticProvisioningController.CreateAccountContainer.UserAddress'
@@ -2257,6 +3455,70 @@ definitions:
       Tags:
         items:
           type: string
+        type: array
+    type: object
+  Rechnungsdruck.WebApp.Controllers.Api.SearchController.CustomerResult:
+    properties:
+      Addresses:
+        type: string
+      Id:
+        format: int32
+        type: integer
+      Name:
+        type: string
+      Number:
+        type: string
+    type: object
+  Rechnungsdruck.WebApp.Controllers.Api.SearchController.OrderResult:
+    properties:
+      ArticleTexts:
+        type: string
+      BuyerName:
+        type: string
+      CustomerName:
+        type: string
+      ExternalReference:
+        type: string
+      Id:
+        format: int32
+        type: integer
+      InvoiceNumber:
+        type: string
+    type: object
+  Rechnungsdruck.WebApp.Controllers.Api.SearchController.ProductResult:
+    properties:
+      Id:
+        format: int32
+        type: integer
+      SKU:
+        type: string
+      ShortText:
+        type: string
+      Tags:
+        type: string
+    type: object
+  Rechnungsdruck.WebApp.Controllers.Api.SearchController.SearchModel:
+    properties:
+      Term:
+        type: string
+      Type:
+        items:
+          type: string
+        type: array
+    type: object
+  Rechnungsdruck.WebApp.Controllers.Api.SearchController.SearchResultsModel:
+    properties:
+      Customers:
+        items:
+          $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.CustomerResult'
+        type: array
+      Orders:
+        items:
+          $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.OrderResult'
+        type: array
+      Products:
+        items:
+          $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.ProductResult'
         type: array
     type: object
   Rechnungsdruck.WebApp.Controllers.Api.ShipmentWithLabel:

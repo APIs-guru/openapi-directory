@@ -99,9 +99,9 @@ paths:
                       provisioningState: Succeeded
                       servicePrincipalProfile:
                         clientId: clientid
-                        keyVaultSecretRef: null
-                        secret: secret
-                    tags: managed-cluster
+                    tags:
+                      archv2: ''
+                      tier: production
                     type: Microsoft.ContainerService/ManagedClusters
       x-ms-pageable:
         nextLinkName: nextLink
@@ -160,9 +160,9 @@ paths:
                       provisioningState: Succeeded
                       servicePrincipalProfile:
                         clientId: clientid
-                        keyVaultSecretRef: null
-                        secret: secret
-                    tags: managed-cluster
+                    tags:
+                      archv2: ''
+                      tier: production
                     type: Microsoft.ContainerService/ManagedClusters
       x-ms-pageable:
         nextLinkName: nextLink
@@ -261,9 +261,9 @@ paths:
                   provisioningState: Succeeded
                   servicePrincipalProfile:
                     clientId: clientid
-                    keyVaultSecretRef: null
-                    secret: secret
-                tags: managed-cluster
+                tags:
+                  archv2: ''
+                  tier: production
                 type: Microsoft.ContainerService/ManagedClusters
     put:
       description: Creates or updates a managed cluster with the specified configuration for agents and Kubernetes version.
@@ -343,9 +343,9 @@ paths:
                   provisioningState: Succeeded
                   servicePrincipalProfile:
                     clientId: clientid
-                    keyVaultSecretRef: null
-                    secret: secret
-                tags: managedcluster
+                tags:
+                  archv2: ''
+                  tier: production
                 type: Microsoft.ContainerService/ManagedClusters
             '201':
               body:
@@ -374,9 +374,9 @@ paths:
                   provisioningState: Succeeded
                   servicePrincipalProfile:
                     clientId: clientid
-                    keyVaultSecretRef: null
-                    secret: secret
-                tags: managedcluster
+                tags:
+                  archv2: ''
+                  tier: production
                 type: Microsoft.ContainerService/ManagedClusters
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/accessProfiles/{roleName}':
@@ -575,7 +575,7 @@ definitions:
         description: Size of agent VMs.
       vnetSubnetID:
         $ref: '#/definitions/ContainerServiceVnetSubnetID'
-        description: 'VNet SubnetID specifies the vnet''s subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet.'
+        description: VNet SubnetID specifies the vnet's subnet identifier.
     required:
       - name
       - vmSize
@@ -592,7 +592,7 @@ definitions:
     properties:
       adminUsername:
         description: The administrator username to use for Linux VMs.
-        pattern: '^[a-z][a-z0-9_-]*$'
+        pattern: '^[A-Za-z][-A-Za-z0-9_]*$'
         type: string
       ssh:
         $ref: '#/definitions/ContainerServiceSshConfiguration'
@@ -637,7 +637,7 @@ definitions:
         description: Size of agent VMs.
       vnetSubnetID:
         $ref: '#/definitions/ContainerServiceVnetSubnetID'
-        description: 'VNet SubnetID specifies the vnet''s subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet.'
+        description: VNet SubnetID specifies the vnet's subnet identifier.
     required:
       - dnsPrefix
       - vmSize
@@ -882,7 +882,7 @@ definitions:
       modelAsString: true
       name: ContainerServiceVMSizeTypes
   ContainerServiceVnetSubnetID:
-    description: 'VNet SubnetID specifies the vnet''s subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet.'
+    description: VNet SubnetID specifies the vnet's subnet identifier.
     type: string
   ContainerServiceWindowsProfile:
     description: Profile for Windows VMs in the container service cluster.

@@ -33,6 +33,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/AllStars/{season}':
     get:
@@ -914,6 +915,10 @@ definitions:
         type: integer
       Quarter:
         type: string
+      Quarters:
+        items:
+          $ref: '#/definitions/Quarter'
+        type: array
       Season:
         type: integer
       SeasonType:
@@ -1159,6 +1164,12 @@ definitions:
       Team:
         type: string
       TeamID:
+        type: integer
+      UsaTodayHeadshotNoBackgroundUrl:
+        type: string
+      UsaTodayHeadshotUrl:
+        type: string
+      UsaTodayPlayerID:
         type: integer
       Weight:
         type: integer

@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://bigquerydatatransfer.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -60,11 +60,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -85,12 +80,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -170,12 +159,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -277,12 +264,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -292,12 +277,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -384,12 +367,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -399,8 +380,18 @@ paths:
       description: Returns information about running and completed jobs.
       operationId: bigquerydatatransfer.projects.transferConfigs.runs.list
       parameters:
-        - description: Page size. The default page size is the maximum value of 1000 results.
+        - collectionFormat: multi
+          description: Page size. The default page size is the maximum value of 1000 results.
           in: query
+          items:
+            enum:
+              - TRANSFER_STATE_UNSPECIFIED
+              - PENDING
+              - RUNNING
+              - SUCCEEDED
+              - FAILED
+              - CANCELLED
+            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -409,6 +400,9 @@ paths:
             results, `ListTransferRunsResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
+          enum:
+            - RUN_ATTEMPT_UNSPECIFIED
+            - LATEST
           in: query
           name: pageToken
           type: string
@@ -460,12 +454,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -486,16 +478,13 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - collectionFormat: multi
-          description: |-
+        - description: |-
             Pagination token, which can be used to request a specific page
             of `ListTransfersRequest` list results. For multiple-page
             results, `ListTransfersResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
           in: query
-          items:
-            type: string
           name: pageToken
           type: string
         - description: |-
@@ -524,12 +513,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -640,12 +627,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -655,12 +640,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -728,9 +711,7 @@ definitions:
           - GOOGLE_PLUS_AUTHORIZATION_CODE
         type: string
       clientId:
-        description: |-
-          Data source client id which should be used to receive refresh token.
-          When not supplied, no offline credentials are populated for data transfer.
+        description: Data source client id which should be used to receive refresh token.
         type: string
       dataRefreshType:
         description: |-
@@ -788,10 +769,9 @@ definitions:
         type: array
       scopes:
         description: |-
-          Api auth scopes for which refresh token needs to be obtained. Only valid
-          when `client_id` is specified. Ignored otherwise. These are scopes needed
-          by a data source to prepare data and ingest them into BigQuery,
-          e.g., https://www.googleapis.com/auth/bigquery
+          Api auth scopes for which refresh token needs to be obtained. These are
+          scopes needed by a data source to prepare data and ingest them into
+          BigQuery, e.g., https://www.googleapis.com/auth/bigquery
         items:
           type: string
         type: array
@@ -1264,7 +1244,7 @@ definitions:
           created as part of a regular schedule. For batch transfer runs that are
           scheduled manually, this is empty.
           NOTE: the system might choose to delay the schedule depending on the
-          current load, so `schedule_time` doesn't always matches this.
+          current load, so `schedule_time` doesn't always match this.
         type: string
       scheduleTime:
         description: Minimum time after which a transfer run can be started.

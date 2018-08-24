@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2018-04-01/disk.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: compute-disk
   x-tags:
@@ -1109,13 +1108,14 @@ definitions:
     required:
       - creationData
   DiskSku:
-    description: The disks sku name. Can be Standard_LRS or Premium_LRS.
+    description: 'The disks sku name. Can be Standard_LRS, Premium_LRS, or StandardSSD_LRS.'
     properties:
       name:
         description: The sku name.
         enum:
           - Standard_LRS
           - Premium_LRS
+          - StandardSSD_LRS
         type: string
         x-ms-enum:
           modelAsString: true
@@ -1126,13 +1126,18 @@ definitions:
         readOnly: true
         type: string
   DiskUpdate:
-    allOf:
-      - $ref: '#/definitions/ResourceUpdate'
     description: Disk update resource.
     properties:
       properties:
         $ref: '#/definitions/DiskUpdateProperties'
         x-ms-client-flatten: true
+      sku:
+        $ref: '#/definitions/DiskSku'
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        type: object
   DiskUpdateProperties:
     description: Disk resource update properties.
     properties:
@@ -1244,16 +1249,6 @@ definitions:
     required:
       - location
     x-ms-azure-resource: true
-  ResourceUpdate:
-    description: The Resource model definition.
-    properties:
-      sku:
-        $ref: '#/definitions/DiskSku'
-      tags:
-        additionalProperties:
-          type: string
-        description: Resource tags
-        type: object
   Snapshot:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -1300,13 +1295,18 @@ definitions:
         readOnly: true
         type: string
   SnapshotUpdate:
-    allOf:
-      - $ref: '#/definitions/ResourceUpdate'
     description: Snapshot update resource.
     properties:
       properties:
         $ref: '#/definitions/DiskUpdateProperties'
         x-ms-client-flatten: true
+      sku:
+        $ref: '#/definitions/SnapshotSku'
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        type: object
   SourceVault:
     description: 'The vault id is an Azure Resource Manager Resoure id in the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}'
     properties:

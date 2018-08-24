@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-01-01/apimgroups.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimgroups
   x-tags:
@@ -209,29 +208,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Groups
       x-ms-examples:
@@ -291,29 +270,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Groups
       x-ms-examples:
@@ -379,29 +338,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Groups
       x-ms-examples:
@@ -467,29 +406,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Groups
       x-ms-examples:
@@ -563,29 +482,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Groups
       x-ms-examples:
@@ -723,116 +622,7 @@ paths:
               value:
                 description: Page values.
                 items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: User details.
-                  properties:
-                    properties:
-                      allOf:
-                        - description: User Entity Base Parameters set.
-                          properties:
-                            identities:
-                              description: Collection of user identities.
-                              items:
-                                description: User identity details.
-                                properties:
-                                  id:
-                                    description: Identifier value within provider.
-                                    type: string
-                                  provider:
-                                    description: Identity provider name.
-                                    type: string
-                              readOnly: true
-                              type: array
-                            note:
-                              description: Optional note about a user set by the administrator.
-                              type: string
-                            state:
-                              default: active
-                              description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
-                              enum:
-                                - active
-                                - blocked
-                                - pending
-                                - deleted
-                              type: string
-                              x-ms-enum:
-                                modelAsString: true
-                                name: UserState
-                                values:
-                                  - description: User state is active.
-                                    value: active
-                                  - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
-                                    value: blocked
-                                  - description: User account is pending. Requires identity confirmation before it can be made active.
-                                    value: pending
-                                  - description: User account is closed. All identities and related entities are removed.
-                                    value: deleted
-                      description: User profile.
-                      properties:
-                        email:
-                          description: Email address.
-                          type: string
-                        firstName:
-                          description: First name.
-                          type: string
-                        groups:
-                          description: Collection of groups user is part of.
-                          items:
-                            description: Group contract Properties.
-                            properties:
-                              builtIn:
-                                description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
-                                readOnly: true
-                                type: boolean
-                              description:
-                                description: Group description. Can contain HTML formatting tags.
-                                maxLength: 1000
-                                type: string
-                              displayName:
-                                description: Group name.
-                                maxLength: 300
-                                minLength: 1
-                                type: string
-                              externalId:
-                                description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
-                                type: string
-                              type:
-                                description: Group type.
-                                enum:
-                                  - custom
-                                  - system
-                                  - external
-                                type: string
-                                x-ms-enum:
-                                  modelAsString: false
-                                  name: GroupType
-                            required:
-                              - displayName
-                          readOnly: true
-                          type: array
-                        lastName:
-                          description: Last name.
-                          type: string
-                        registrationDate:
-                          description: |
-                            Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-                          format: date-time
-                          type: string
+                  $ref: '#/definitions/UserContract'
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -840,29 +630,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - GroupUsers
       x-ms-examples:
@@ -945,29 +715,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - GroupUsers
       x-ms-examples:
@@ -1033,29 +783,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - GroupUsers
       x-ms-examples:
@@ -1132,97 +862,9 @@ paths:
             description: User details.
             properties:
               properties:
-                allOf:
-                  - description: User Entity Base Parameters set.
-                    properties:
-                      identities:
-                        description: Collection of user identities.
-                        items:
-                          description: User identity details.
-                          properties:
-                            id:
-                              description: Identifier value within provider.
-                              type: string
-                            provider:
-                              description: Identity provider name.
-                              type: string
-                        readOnly: true
-                        type: array
-                      note:
-                        description: Optional note about a user set by the administrator.
-                        type: string
-                      state:
-                        default: active
-                        description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
-                        enum:
-                          - active
-                          - blocked
-                          - pending
-                          - deleted
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: UserState
-                          values:
-                            - description: User state is active.
-                              value: active
-                            - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
-                              value: blocked
-                            - description: User account is pending. Requires identity confirmation before it can be made active.
-                              value: pending
-                            - description: User account is closed. All identities and related entities are removed.
-                              value: deleted
-                description: User profile.
-                properties:
-                  email:
-                    description: Email address.
-                    type: string
-                  firstName:
-                    description: First name.
-                    type: string
-                  groups:
-                    description: Collection of groups user is part of.
-                    items:
-                      description: Group contract Properties.
-                      properties:
-                        builtIn:
-                          description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
-                          readOnly: true
-                          type: boolean
-                        description:
-                          description: Group description. Can contain HTML formatting tags.
-                          maxLength: 1000
-                          type: string
-                        displayName:
-                          description: Group name.
-                          maxLength: 300
-                          minLength: 1
-                          type: string
-                        externalId:
-                          description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
-                          type: string
-                        type:
-                          description: Group type.
-                          enum:
-                            - custom
-                            - system
-                            - external
-                          type: string
-                          x-ms-enum:
-                            modelAsString: false
-                            name: GroupType
-                      required:
-                        - displayName
-                    readOnly: true
-                    type: array
-                  lastName:
-                    description: Last name.
-                    type: string
-                  registrationDate:
-                    description: |
-                      Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-                    format: date-time
-                    type: string
+                $ref: '#/definitions/UserContractProperties'
+                description: User entity contract properties.
+                x-ms-client-flatten: true
         '201':
           description: The user was successfully added to the group.
           schema:
@@ -1245,126 +887,18 @@ paths:
             description: User details.
             properties:
               properties:
-                allOf:
-                  - description: User Entity Base Parameters set.
-                    properties:
-                      identities:
-                        description: Collection of user identities.
-                        items:
-                          description: User identity details.
-                          properties:
-                            id:
-                              description: Identifier value within provider.
-                              type: string
-                            provider:
-                              description: Identity provider name.
-                              type: string
-                        readOnly: true
-                        type: array
-                      note:
-                        description: Optional note about a user set by the administrator.
-                        type: string
-                      state:
-                        default: active
-                        description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
-                        enum:
-                          - active
-                          - blocked
-                          - pending
-                          - deleted
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: UserState
-                          values:
-                            - description: User state is active.
-                              value: active
-                            - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
-                              value: blocked
-                            - description: User account is pending. Requires identity confirmation before it can be made active.
-                              value: pending
-                            - description: User account is closed. All identities and related entities are removed.
-                              value: deleted
-                description: User profile.
-                properties:
-                  email:
-                    description: Email address.
-                    type: string
-                  firstName:
-                    description: First name.
-                    type: string
-                  groups:
-                    description: Collection of groups user is part of.
-                    items:
-                      description: Group contract Properties.
-                      properties:
-                        builtIn:
-                          description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
-                          readOnly: true
-                          type: boolean
-                        description:
-                          description: Group description. Can contain HTML formatting tags.
-                          maxLength: 1000
-                          type: string
-                        displayName:
-                          description: Group name.
-                          maxLength: 300
-                          minLength: 1
-                          type: string
-                        externalId:
-                          description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
-                          type: string
-                        type:
-                          description: Group type.
-                          enum:
-                            - custom
-                            - system
-                            - external
-                          type: string
-                          x-ms-enum:
-                            modelAsString: false
-                            name: GroupType
-                      required:
-                        - displayName
-                    readOnly: true
-                    type: array
-                  lastName:
-                    description: Last name.
-                    type: string
-                  registrationDate:
-                    description: |
-                      Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-                    format: date-time
-                    type: string
+                $ref: '#/definitions/UserContractProperties'
+                description: User entity contract properties.
+                x-ms-client-flatten: true
         default:
           description: Error response describing why the operation failed.
           schema:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - GroupUsers
       x-ms-examples:

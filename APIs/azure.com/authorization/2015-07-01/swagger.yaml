@@ -137,47 +137,6 @@ paths:
                     name: name
                     operations: []
                 type: type
-  '/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/classicAdministrators':
-    get:
-      description: 'Gets service administrator, account administrator, and co-administrators for the subscription.'
-      operationId: ClassicAdministrators_List
-      parameters:
-        - description: The API version to use for this operation.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Returns an array of administrators.
-          schema:
-            $ref: '#/definitions/ClassicAdministratorListResult'
-      tags:
-        - ClassicAdministrators
-      x-ms-examples:
-        GetConfigurations:
-          parameters:
-            api-version: '2015-07-01'
-            subscriptionId: subId
-          responses:
-            '200':
-              body:
-                value:
-                  - id: /subscriptions/subId/providers/Microsoft.Authorization/classicAdministrators/classicadminid
-                    name: classicadminid
-                    properties:
-                      emailAddress: test@test.com
-                      role: ServiceAdministrator;AccountAdministrator
-                    type: Microsoft.Authorization/classicAdministrators
-                  - id: /subscriptions/subId/providers/Microsoft.Authorization/classicAdministrators/classicadminid2
-                    name: classicadminid2
-                    properties:
-                      emailAddress: coadmin@test.com
-                      role: CoAdministrator
-                    type: Microsoft.Authorization/classicAdministrators
-      x-ms-pageable:
-        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments':
     get:
       description: Gets all role assignments for the subscription.
@@ -913,41 +872,6 @@ paths:
                   type: roletype
                 type: Microsoft.Authorization/roleDefinitions
 definitions:
-  ClassicAdministrator:
-    description: Classic Administrators
-    properties:
-      id:
-        description: The ID of the administrator.
-        type: string
-      name:
-        description: The name of the administrator.
-        type: string
-      properties:
-        $ref: '#/definitions/ClassicAdministratorProperties'
-        description: Properties for the classic administrator.
-      type:
-        description: The type of the administrator.
-        type: string
-  ClassicAdministratorListResult:
-    description: ClassicAdministrator list result information.
-    properties:
-      nextLink:
-        description: The URL to use for getting the next set of results.
-        type: string
-      value:
-        description: An array of administrators.
-        items:
-          $ref: '#/definitions/ClassicAdministrator'
-        type: array
-  ClassicAdministratorProperties:
-    description: Classic Administrator properties.
-    properties:
-      emailAddress:
-        description: The email address of the administrator.
-        type: string
-      role:
-        description: The role of the administrator.
-        type: string
   Permission:
     description: Role definition permissions.
     properties:

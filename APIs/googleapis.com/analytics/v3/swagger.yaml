@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/analytics/v3/rest'
       version: v1
@@ -3198,6 +3198,35 @@ paths:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
+  '/management/clientId:hashClientId':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Hashes the given Client ID.
+      operationId: analytics.management.clientId.hashClientId
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/HashClientIdRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/HashClientIdResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+      tags:
+        - management
   /management/segments:
     get:
       description: Lists segments to which the user has access.
@@ -4891,6 +4920,30 @@ definitions:
         description: Email ID of the authenticated user
         type: string
     type: object
+  HashClientIdRequest:
+    description: JSON template for a hash Client Id request resource.
+    properties:
+      clientId:
+        type: string
+      kind:
+        default: 'analytics#hashClientIdRequest'
+        type: string
+      webPropertyId:
+        type: string
+    type: object
+  HashClientIdResponse:
+    description: JSON template for a hash Client Id response resource.
+    properties:
+      clientId:
+        type: string
+      hashedClientId:
+        type: string
+      kind:
+        default: 'analytics#hashClientIdResponse'
+        type: string
+      webPropertyId:
+        type: string
+    type: object
   IncludeConditions:
     description: JSON template for an Analytics Remarketing Include Conditions.
     properties:
@@ -5814,6 +5867,7 @@ definitions:
       deletionRequestTime:
         description: This marks the point in time for which all user data before should be deleted
         format: date-time
+        readOnly: true
         type: string
       firebaseProjectId:
         description: Firebase Project Id

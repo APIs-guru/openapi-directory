@@ -12,7 +12,7 @@ info:
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-  termsOfService: 'https://www.callfire.com/legal/terms'
+  termsOfService: 'https://www.callfire.com/terms'
   title: CallFire
   version: V2
   x-apisguru-categories:
@@ -2667,6 +2667,53 @@ paths:
       x-sample-php-url: /php/me/verifyCallerId.php
       x-sample-python-url: /python/me/verifyCallerId.py
   /media:
+    get:
+      description: Find media files created by user
+      operationId: findMedia
+      parameters:
+        - default: 100
+          description: To set the maximum number of records to return in a paged list response. The default is 100
+          format: int64
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
+          format: int64
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: Name of a file to search for
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: 'Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page.'
+          in: query
+          name: fields
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/MediaPage'
+      security:
+        - basicAuth: []
+      summary: Find media
+      tags:
+        - media
+      x-sample-csharp-url: /csharp/media/findMedia.cs
+      x-sample-curl-request-url: /curl/media/findMedia.sh
+      x-sample-curl-response-url: /curl/media/findMedia.json
+      x-sample-description-url: /description/media/findMedia.md
+      x-sample-go-url: /go/media/findMedia.go
+      x-sample-java-url: /java/media/findMedia.java
+      x-sample-js-url: /js/media/findMedia.js
+      x-sample-php-url: /php/media/findMedia.php
+      x-sample-python-url: /python/media/findMedia.py
     post:
       consumes:
         - multipart/form-data
@@ -5868,6 +5915,27 @@ definitions:
       publicUrl:
         description: A public URL of a media file
         type: string
+    type: object
+  MediaPage:
+    description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/Media'
+        type: array
+      limit:
+        description: '~'
+        format: int64
+        type: integer
+      offset:
+        description: '~'
+        format: int64
+        type: integer
+      totalCount:
+        description: '~'
+        format: int64
+        type: integer
     type: object
   Note:
     description: Represents a note which can be added to a call

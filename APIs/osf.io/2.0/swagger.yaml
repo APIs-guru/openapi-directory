@@ -29,7 +29,7 @@ tags:
   - description: |-
       Welcome to the Open Science Framework API. With this API you can access users, projects, components, logs, and files from the [Open Science Framework](https://osf.io/). The Open Science Framework (OSF) is a free, open-source service maintained by the [Center for Open Science](http://cos.io/).
 
-      The OSF serves as a repository and archive for study designs, materials, data, manuscripts, or anything else associated with your research during the research process. Every project and file on the OSF has a permanent unique identifier, and every registration (a permanent, time-stamped version of your projects and files) can be assigned a DOI/ARK. You can use the OSF to measure your impact by monitoring the traffic to projects and files you make public. With the OSF you have full control of what parts of your research are public and what remains private.
+      The OSF serves as a repository and archive for study designs, materials, data, manuscripts, or anything else associated with your research during the research process. Every project and file on the OSF has a permanent unique identifier, and every registration (a permanent, time-stamped version of your projects and files) can be assigned a DOI. You can use the OSF to measure your impact by monitoring the traffic to projects and files you make public. With the OSF you have full control of what parts of your research are public and what remains private.
     name: Introduction
     x-traitTag: true
   - description: |-
@@ -164,33 +164,6 @@ tags:
       + If the version specified in the header does not fall within the same major version specified in the URL path a 409 Conflict response will be returned.
 
       + If both a header version and query parameter version are specified, the versions must match exactly or a 409 Conflict response will be returned (i.e. one does not take precedence over the other).
-
-      #### CHANGELOG
-
-      `v2.1`
-
-      + Pagination links conform to JSON API specification, i.e. `meta` information was pulled out of the `links` object and placed in a top-level `meta` object.
-
-      + Deprecate the `node_links` field in the **Node** and **Registration** serializers in favor of `linked_nodes` and `linked_registrations`.
-
-      `v2.2`
-
-      + Modify institution nodes list so that affiliated components are also returned from `/v2/institutions/<id>/nodes/`.
-
-      + Ensure all existing date fields are standardized on UTC.
-
-      `v2.3`
-
-      + Handle merged users more correctly on `/v2/users/`.
-
-      `v2.4`
-
-      + Deprecate the `parents` field in the **Taxonomies** serializer.
-
-      + Deprecate the following fields in the **Preprint Provider** serializer:
-          + `social_facebook`, `social_instagram`, and `social_twitter`
-          + `banner_path`, `logo_path`, and `header_text`
-          + `email_contact`
     name: Versioning
     x-traitTag: true
   - description: |-
@@ -572,6 +545,54 @@ tags:
       An R package to interface with the OSF.
     name: External Libraries
     x-traitTag: true
+  - description: |-
+
+
+      #### 2.8
+
+      + Deprecate the `preprint_providers` endpoint in favor of `providers/preprints`.
+
+      + /data/relationships/wikis not shown in node data when the wiki is disabled for that project/component.
+
+      #### 2.7
+
+      + Require `type` and `id` for all PATCH requests.
+
+      #### 2.6
+
+      + Deprecate the [**Taxonomy List**](#tag/Taxonomies) endpoint.
+
+      #### 2.5
+
+      + Deprecate the `subjects_acceptable` field in the **Preprint Provider** serializer.
+
+      #### 2.4
+
+      + Deprecate the `parents` field in the **Taxonomies** serializer.
+
+      + Deprecate the following fields in the **Preprint Provider** serializer:
+          + `social_facebook`, `social_instagram`, and `social_twitter`
+          + `banner_path`, `logo_path`, and `header_text`
+          + `email_contact`
+
+
+      #### 2.3
+
+      + Handle merged users more correctly on `/v2/users/`.
+
+      #### 2.2
+
+      + Modify institution nodes list so that affiliated components are also returned from `/v2/institutions/<id>/nodes/`.
+
+      + Ensure all existing date fields are standardized on UTC.
+
+      #### 2.1
+
+      + Pagination links conform to JSON API specification, i.e. `meta` information was pulled out of the `links` object and placed in a top-level `meta` object.
+
+      + Deprecate the `node_links` field in the **Node** and **Registration** serializers in favor of `linked_nodes` and `linked_registrations`.
+    name: Changelog
+    x-traitTag: true
 paths:
   /:
     get:
@@ -631,7 +652,7 @@ paths:
 
         * `updated_fields`: One or more of a Node's fields are changed
 
-        * `external_ids_added`: An external identifier is added to a Node (e.g. DOI, ARK)
+        * `external_ids_added`: An external identifier is added to a Node (e.g. the DOI)
         ---
 
         * `view_only_link_added`: A view-only link was added to a Node
@@ -1322,13 +1343,42 @@ paths:
 
         #### Returns
 
-        Returns a JSON object with a `data` key containing the representation of the requested file, if the request was successful.
+        Returns a JSON object with a `data` key containing the metadata for the requested file or folder. If a metadata request is issued against a folder, the request will return the metadata for every object in the folder. If the ?info= query parameter is present for a request against a folder, the response will contain the metadata for the folder itself instead of the metadata for the objects in the folder.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
 
         ### Waterbutler API actions
 
         Files can be modified via the Waterbutler URLs found in the `links` key of the response (new_folder, move, upload, download, and delete). Further information about how to interact with files can be found in the [Waterbutler API documentation](https://waterbutler.readthedocs.io/en/latest/api.html#v1-api).
+
+
+        #### Download (files)
+
+        To download a file, issue a GET request against the download link. The response will have the Content-Disposition header set, which will will trigger a download in a browser.
+
+        #### Create Subfolder (folders)
+
+        You can create a subfolder of an existing folder by issuing a PUT request against the new_folder link. The ?kind=folder portion of the query parameter is already included in the new_folder link. The name of the new subfolder should be provided in the name query parameter. The response will contain a WaterButler folder entity. If a folder with that name already exists in the parent directory, the server will return a 409 Conflict error response.
+
+        #### Upload New File (folders)
+
+
+          To upload a file to a folder, issue a PUT request to the folder's upload link with the raw file data in the request body, and the kind and name query parameters set to 'file' and the desired name of the file. The response will contain a WaterButler file entity that describes the new file. If a file with the same name already exists in the folder, the server will return a 409 Conflict error response.
+
+
+        #### Update Existing File (file)
+
+        To update an existing file, issue a PUT request to the file's upload link with the raw file data in the request body and the kind query parameter set to "file". The update action will create a new version of the file. The response will contain a WaterButler file entity that describes the updated file.
+
+        #### Rename (files, folders)
+
+        To rename a file or folder, issue a POST request to the move link with the action body parameter set to "rename" and the rename body parameter set to the desired name. The response will contain either a folder entity or file entity with the new name.
+
+        #### Move & Copy (files, folders)
+
+        Move and copy actions both use the same request structure, a POST to the move url, but with different values for the action body parameters. The path parameter is also required and should be the OSF path attribute of the folder being written to. The rename and conflict parameters are optional. If you wish to change the name of the file or folder at its destination, set the rename parameter to the new name. The conflict param governs how name clashes are resolved. Possible values are replace and keep. replace is the default and will overwrite the file that already exists in the target folder. keep will attempt to keep both by adding a suffix to the new file's name until it no longer conflicts. The suffix will be ' (x)' where x is a increasing integer starting from 1. This behavior is intended to mimic that of the OS X Finder. The response will contain either a folder entity or file entity with the new name.
+        Files and folders can also be moved between nodes and providers. The resource parameter is the id of the node under which the file/folder should be moved. It must agree with the path parameter, that is the path must identify a valid folder under the node identified by resource. Likewise, the provider parameter may be used to move the file/folder to another storage provider, but both the resource and path parameters must belong to a node and folder already extant on that provider. Both resource and provider default to the current node and providers.
+        If a moved/copied file is overwriting an existing file, a 200 OK response will be returned. Otherwise, a 201 Created will be returned.
       operationId: files_detail
       parameters:
         - description: The unique identifier of the file you wish to retrieve.
@@ -2333,7 +2383,7 @@ paths:
                       readOnly: true
                       type: string
                     identifiers:
-                      description: A link to the list of identifiers for this node (i.e. ARK and DOI identifiers).
+                      description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
                       type: string
                     license:
@@ -3054,7 +3104,7 @@ paths:
                         readOnly: true
                         type: string
                       identifiers:
-                        description: Dictionary containing the DOI and ARK ID for a preprint associated with the log.
+                        description: Dictionary containing the DOI for a preprint associated with the log.
                         readOnly: true
                         type: string
                       institution:
@@ -3229,9 +3279,9 @@ paths:
       x-response-schema: Log
   /metaschemas/:
     get:
+      deprecated: true
       description: |-
         A paginated list of all active metaschemas.
-
         Metaschemas describe the supplemental questions that accompany a registration.
 
         #### Returns
@@ -3348,8 +3398,248 @@ paths:
       tags:
         - Metaschemas
       x-response-schema: Metaschema
+  /metaschemas/registrations/:
+    get:
+      description: |-
+        A paginated list of all active registration metaschemas.
+
+        Registration metaschemas describe the supplemental questions that accompany a registration.
+
+        #### Returns
+
+        Returns a JSON object containing `data` and `links` keys.
+
+        The `data` key contains an array of 10 registration metaschemas. Each resource in the array is a separate registration metaschema object.
+
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
+        This request should never return an error.
+      operationId: registration_metaschemas_list
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    name: OSF-Standard Pre-Data Collection Registration
+                    schema:
+                      description: You will be asked if data collection is underway and if you have looked at your data already. You will be provided an opportunity to post other comments about your project. This registration form is not a valid submission for the Pre-registration Prize.
+                      name: OSF-Standard Pre-Data Collection Registration
+                      pages:
+                        - id: page1
+                          questions:
+                            - description: Please choose
+                              format: singleselect
+                              nav: Data Completion
+                              options:
+                                - 'No, data collection has not begun'
+                                - 'Yes, data collection is underway or complete'
+                              qid: datacompletion
+                              title: Has data collection begun for this project?
+                              type: choose
+                            - description: Please choose
+                              format: singleselect
+                              nav: Looked at Data
+                              options:
+                                - 'Yes'
+                                - 'No'
+                              qid: looked
+                              title: Have you looked at the data?
+                              type: choose
+                            - format: textarea
+                              nav: Comments
+                              qid: comments
+                              title: Other Comments
+                              type: string
+                          title: OSF-Standard Pre-Data Collection Registration
+                      title: OSF-Standard Pre-Data Collection Registration
+                      version: 2
+                    schema_version: 2
+                  id: 564d31db8c5e4a7c9694b2c0
+                  links:
+                    self: 'https://api.osf.io/v2/metaschemas/registrations/564d31db8c5e4a7c9694b2c0/'
+                  type: registration_metaschemas
+              links:
+                per_page: 10
+                total: 1
+          schema:
+            items:
+              properties:
+                attributes:
+                  description: The properties of the metaschema entity.
+                  properties:
+                    name:
+                      description: The name of the metaschema
+                      readOnly: true
+                      type: string
+                    schema:
+                      additionalProperties:
+                        items:
+                          type: string
+                        type: array
+                      description: The details of the metaschema which contains the supplemental questions to accompany a registration
+                      readOnly: true
+                      type: object
+                    schema_version:
+                      description: The latest version of the schema
+                      readOnly: true
+                      type: integer
+                  readOnly: true
+                  title: Attributes
+                  type: object
+                id:
+                  description: The unique identifier of the metaschema entity.
+                  readOnly: true
+                  type: string
+                links:
+                  description: URLs to alternative representations of the metaschema entity.
+                  properties:
+                    self:
+                      description: A link to the detail page for a metaschema.
+                      format: URL
+                      readOnly: true
+                      type: string
+                  readOnly: true
+                  title: Links
+                  type: object
+                type:
+                  description: The type identifier of the metaschema entity (`metaschemas`).
+                  readOnly: true
+                  type: string
+              required:
+                - id
+                - type
+                - attributes
+                - links
+              title: Metaschema
+              type: object
+            type: array
+      summary: List all registration metaschemas
+      tags:
+        - Metaschemas
+      x-response-schema: Metaschema
+  '/metaschemas/registrations/{metaschema_id}':
+    get:
+      description: |-
+        Retrieves the details of a given registration metaschema.
+
+        Registration metaschemas describe the supplemental questions that accompany a registration.
+
+        #### Returns
+
+        Returns a JSON object with a `data` key containing the representation of the requested registration metaschema, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: registration_metaschemas_read
+      parameters:
+        - description: The unique identifier of the registration metaschema.
+          in: path
+          name: metaschema_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                attributes:
+                  name: OSF-Standard Pre-Data Collection Registration
+                  schema:
+                    description: You will be asked if data collection is underway and if you have looked at your data already. You will be provided an opportunity to post other comments about your project. This registration form is not a valid submission for the Pre-registration Prize.
+                    name: OSF-Standard Pre-Data Collection Registration
+                    pages:
+                      - id: page1
+                        questions:
+                          - description: Please choose
+                            format: singleselect
+                            nav: Data Completion
+                            options:
+                              - 'No, data collection has not begun'
+                              - 'Yes, data collection is underway or complete'
+                            qid: datacompletion
+                            title: Has data collection begun for this project?
+                            type: choose
+                          - description: Please choose
+                            format: singleselect
+                            nav: Looked at Data
+                            options:
+                              - 'Yes'
+                              - 'No'
+                            qid: looked
+                            title: Have you looked at the data?
+                            type: choose
+                          - format: textarea
+                            nav: Comments
+                            qid: comments
+                            title: Other Comments
+                            type: string
+                        title: OSF-Standard Pre-Data Collection Registration
+                    title: OSF-Standard Pre-Data Collection Registration
+                    version: 2
+                  schema_version: 2
+                id: 564d31db8c5e4a7c9694b2c0
+                links:
+                  self: 'https://api.osf.io/v2/metaschemas/registrations/564d31db8c5e4a7c9694b2c0/'
+                type: registration_metaschemas
+          schema:
+            properties:
+              attributes:
+                description: The properties of the metaschema entity.
+                properties:
+                  name:
+                    description: The name of the metaschema
+                    readOnly: true
+                    type: string
+                  schema:
+                    additionalProperties:
+                      items:
+                        type: string
+                      type: array
+                    description: The details of the metaschema which contains the supplemental questions to accompany a registration
+                    readOnly: true
+                    type: object
+                  schema_version:
+                    description: The latest version of the schema
+                    readOnly: true
+                    type: integer
+                readOnly: true
+                title: Attributes
+                type: object
+              id:
+                description: The unique identifier of the metaschema entity.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the metaschema entity.
+                properties:
+                  self:
+                    description: A link to the detail page for a metaschema.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              type:
+                description: The type identifier of the metaschema entity (`metaschemas`).
+                readOnly: true
+                type: string
+            required:
+              - id
+              - type
+              - attributes
+              - links
+            title: Metaschema
+            type: object
+      summary: Retrieve a registration metaschema
+      tags:
+        - Metaschemas
+      x-response-schema: Metaschema
   '/metaschemas/{metaschema_id}':
     get:
+      deprecated: true
       description: |-
         Retrieves the details of a given metaschema.
 
@@ -3789,7 +4079,7 @@ paths:
                       readOnly: true
                       type: string
                     identifiers:
-                      description: A link to the list of identifiers for this node (i.e. ARK and DOI identifiers).
+                      description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
                       type: string
                     license:
@@ -4038,7 +4328,7 @@ paths:
                     readOnly: true
                     type: string
                   identifiers:
-                    description: A link to the list of identifiers for this node (i.e. ARK and DOI identifiers).
+                    description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                     readOnly: true
                     type: string
                   license:
@@ -4434,7 +4724,7 @@ paths:
                     readOnly: true
                     type: string
                   identifiers:
-                    description: A link to the list of identifiers for this node (i.e. ARK and DOI identifiers).
+                    description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                     readOnly: true
                     type: string
                   license:
@@ -5224,7 +5514,7 @@ paths:
                       readOnly: true
                       type: string
                     identifiers:
-                      description: A link to the list of identifiers for this node (i.e. ARK and DOI identifiers).
+                      description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
                       type: string
                     license:
@@ -5484,7 +5774,7 @@ paths:
                     readOnly: true
                     type: string
                   identifiers:
-                    description: A link to the list of identifiers for this node (i.e. ARK and DOI identifiers).
+                    description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                     readOnly: true
                     type: string
                   license:
@@ -5546,6 +5836,384 @@ paths:
       responses:
         '201':
           description: Created
+          examples:
+            application/json:
+              data:
+                attributes:
+                  access_requests_enabled: true
+                  category: software
+                  collection: false
+                  current_user_can_comment: true
+                  current_user_permissions:
+                    - read
+                    - write
+                    - admin
+                  date_created: '2018-08-07T20:16:54.236943'
+                  date_modified: '2018-08-07T20:16:54.236943'
+                  description: ''
+                  fork: false
+                  preprint: false
+                  public: false
+                  registration: false
+                  subjects: []
+                  tags: []
+                  title: An Excellent Project Title
+                id: 8xj6n
+                links:
+                  html: 'http://osf.io/8xj6n/'
+                  self: 'http://api.osf.io/v2/nodes/8xj6n/'
+                relationships:
+                  affiliated_institutions:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/institutions/'
+                        meta: {}
+                      self:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/relationships/institutions/'
+                        meta: {}
+                  children:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/children/'
+                        meta: {}
+                  citation:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/citation/'
+                        meta: {}
+                  comments:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/comments/?filter%5Btarget%5D=8xj6n'
+                        meta: {}
+                  contributors:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/contributors/'
+                        meta: {}
+                  draft_registrations:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/draft_registrations/'
+                        meta: {}
+                  files:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/files/'
+                        meta: {}
+                  forks:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/forks/'
+                        meta: {}
+                  identifiers:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/identifiers/'
+                        meta: {}
+                  implicit_contributors:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/implicit_contributors/'
+                        meta: {}
+                  linked_by_nodes:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/linked_by_nodes/'
+                        meta: {}
+                  linked_by_registrations:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/linked_by_registrations/'
+                        meta: {}
+                  linked_nodes:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/linked_nodes/'
+                        meta: {}
+                      self:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/relationships/linked_nodes/'
+                        meta: {}
+                  linked_registrations:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/linked_registrations/'
+                        meta: {}
+                      self:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/relationships/linked_registrations/'
+                        meta: {}
+                  logs:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/logs/'
+                        meta: {}
+                  node_links:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/node_links/'
+                        meta: {}
+                  parent:
+                    data:
+                      id: mwcnb
+                      type: nodes
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/mwcnb/'
+                        meta: {}
+                  preprints:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/preprints/'
+                        meta: {}
+                  registrations:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/registrations/'
+                        meta: {}
+                  root:
+                    data:
+                      id: mwcnb
+                      type: nodes
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/mwcnb/'
+                        meta: {}
+                  settings:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/settings/'
+                        meta: {}
+                  view_only_links:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/view_only_links/'
+                        meta: {}
+                  wikis:
+                    links:
+                      related:
+                        href: 'http://api.osf.io/v2/nodes/8xj6n/wikis/'
+                        meta: {}
+                type: nodes
+              meta:
+                version: '2.0'
+          schema:
+            example:
+              data:
+                attributes:
+                  category: software
+                  title: An Excellent Project Title
+                type: nodes
+            properties:
+              attributes:
+                description: The properties of the node entity.
+                properties:
+                  category:
+                    description: 'The category of the node, as selected by project contributors.'
+                    enum:
+                      - analysis
+                      - communication
+                      - data
+                      - hypothesis
+                      - instrumentation
+                      - methods and measures
+                      - procedure
+                      - project
+                      - software
+                      - other
+                    readOnly: false
+                    type: string
+                  collection:
+                    description: Whether or not this node represents a collection. This value should always be `false`. This field may be deprecated in future versions.
+                    readOnly: true
+                    type: boolean
+                  current_user_can_comment:
+                    description: Whether or not the current user has permission to post comments on this node. Comments on nodes can be set to allow all users to comment (if public) or restricted to only allow comments from contributors.
+                    readOnly: true
+                    type: boolean
+                  current_user_permissions:
+                    description: 'A list of strings representing the permissions for the current user on this node. Valid permissions are "admin", "read", and "write".'
+                    items:
+                      type: string
+                    readOnly: true
+                    type: array
+                  date_created:
+                    description: 'The time at which the node was created, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_modified:
+                    description: 'The time at which the node was last modified, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: The description of the node.
+                    readOnly: false
+                    type: string
+                  fork:
+                    description: Whether or not this node represents a fork of another node.
+                    readOnly: true
+                    type: boolean
+                  forked_date:
+                    description: 'If this node is a fork of another node, the time at which the node was created, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  node_license:
+                    description: A dictionary containing the metadata (copyright year and holder) associated with the node license (required for certain license types).
+                    readOnly: false
+                    type: string
+                  preprint:
+                    description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                    readOnly: true
+                    type: boolean
+                  public:
+                    description: Whether or not the node is publicly visible. This field is only editable by project administrators.
+                    readOnly: false
+                    type: boolean
+                  registration:
+                    description: Whether or not the node represents a registration. This value should always be `false`. This field may be deprecated in future versions.
+                    readOnly: true
+                    type: boolean
+                  tags:
+                    description: 'A list of strings that describe this node, as entered by project contributors.'
+                    items:
+                      type: string
+                    readOnly: false
+                    type: array
+                  template_from:
+                    description: 'The unique ID of the node from which this node was templated, if this node was created from a template.'
+                    readOnly: false
+                    type: string
+                  title:
+                    description: The title of the node.
+                    readOnly: false
+                    type: string
+                readOnly: false
+                required:
+                  - title
+                  - category
+                title: Attributes
+                type: object
+              id:
+                description: The unique identifier of the node entity.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the node entity.
+                properties:
+                  html:
+                    description: A link to the node's page on the OSF.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  self:
+                    description: A link to the canonical API endpoint of this node.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the node entity.
+                properties:
+                  affiliated_institutions:
+                    description: A link to the list of institutions this node is affiliated with.
+                    readOnly: true
+                    type: string
+                  children:
+                    description: A link to the list of this node's children (components).
+                    readOnly: true
+                    type: string
+                  citation:
+                    description: A link to the citation details of this node.
+                    readOnly: true
+                    type: string
+                  comments:
+                    description: A link to the list of comments on this node.
+                    readOnly: true
+                    type: string
+                  contributors:
+                    description: A link to the list of contributors on this node.
+                    readOnly: true
+                    type: string
+                  draft_registrations:
+                    description: A link to the list of registrations that have been initiated from this node and are still in a draft state.
+                    readOnly: true
+                    type: string
+                  files:
+                    description: A link to the list of storage providers that have been enabled on this node.
+                    readOnly: true
+                    type: string
+                  forked_from:
+                    description: 'A link to the node which this node was forked from, if this node is a fork.'
+                    readOnly: true
+                    type: string
+                  forks:
+                    description: A link to the list of nodes that are forks of this node.
+                    readOnly: true
+                    type: string
+                  identifiers:
+                    description: A link to the list of identifiers for this node (i.e. DOI identifiers).
+                    readOnly: true
+                    type: string
+                  license:
+                    description: A link to the license that has been applied to this node.
+                    readOnly: true
+                    type: string
+                  linked_nodes:
+                    description: A link to the list of nodes that are linked to the current node.
+                    readOnly: true
+                    type: string
+                  logs:
+                    description: A link to the list of log actions pertaining to this node.
+                    readOnly: true
+                    type: string
+                  node_links:
+                    description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
+                    readOnly: true
+                    type: string
+                  parent:
+                    description: 'A link to the node that is the direct parent of the current node, if the current node is a child node.'
+                    readOnly: true
+                    type: string
+                  preprints:
+                    description: A link to the list of preprints that this node relates to.
+                    readOnly: true
+                    type: string
+                  registrations:
+                    description: A link to the list of registrations that have been created from this node.
+                    readOnly: true
+                    type: string
+                  root:
+                    description: 'A link to the node that is the top-level parent of the current node. If the current node is the top-level node, the root is the current node.'
+                    readOnly: true
+                    type: string
+                  template_node:
+                    description: 'A link to the node that the current node was templated from, if the current node was created from a template.'
+                    readOnly: true
+                    type: string
+                  view_only_links:
+                    description: A link to the list of view only links that have been created for this node.
+                    readOnly: true
+                    type: string
+                  wikis:
+                    description: A link to the list of wiki pages for this node.
+                    readOnly: true
+                    type: string
+                readOnly: false
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the node entity (`nodes`).
+                readOnly: false
+                type: string
+            required:
+              - type
+              - attributes
+            title: Node
+            type: object
       summary: Create a child node
       tags:
         - Nodes
@@ -5579,7 +6247,7 @@ paths:
                       given: Nicole
                     - family: Haendel
                       given: Melissa A
-                  publisher: Open Science Framework
+                  publisher: OSF
                   title: 'Identification Analysis of RP:CB'
                   type: webpage
                 id: bg4di
@@ -5600,7 +6268,7 @@ paths:
                     readOnly: true
                     type: string
                   publisher:
-                    description: 'The publisher of the entity being cited. For nodes and registrations, the publisher is the ''Open Science Framework''. For preprints, the publisher is the same as the preprint provider.'
+                    description: 'The publisher of the entity being cited. For nodes and registrations, the publisher is ''OSF''. For preprints, the publisher is the same as the preprint provider.'
                     readOnly: true
                     type: string
                   title:
@@ -7196,9 +7864,9 @@ paths:
       description: |-
         Update a draft registration by answering the supplemental registration questions. This is the second step in creating a registration. The answers will go under registration_metadata. Registration_metadata must be a dictionary with keys as question ids in the registration form, and values as nested dictionaries matching the specific format in the registration metaschema.
 
-        [To view all active registration schemas](#operation/metaschemas_list)
+        [To view all active registration schemas](#operation/registration_metaschemas_list)
 
-        [To retrieve the format of a certain registration schema](#operation/metaschemas_read)
+        [To retrieve the format of a certain registration schema](#operation/registration_metaschemas_read)
 
         If a question is multiple-choice, the question response must exactly match one of the possible choices.
 
@@ -8501,7 +9169,7 @@ paths:
                       readOnly: true
                       type: string
                     identifiers:
-                      description: A link to the list of identifiers for this node (i.e. ARK and DOI identifiers).
+                      description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
                       type: string
                     license:
@@ -8757,7 +9425,7 @@ paths:
                     readOnly: true
                     type: string
                   identifiers:
-                    description: A link to the list of identifiers for this node (i.e. ARK and DOI identifiers).
+                    description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                     readOnly: true
                     type: string
                   license:
@@ -8838,9 +9506,9 @@ paths:
 
         #### Filtering
 
-        You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/ezcuj/identifiers/?filter[category]=ark
+        You can optionally request that the response only include nodes that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/ezcuj/identifiers/?filter[category]=doi
 
-        Identifiers may be filtered by their `category` e.g `ark` or `doi`.
+        Identifiers may be filtered by their `category` e.g `doi`.
 
         You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: nodes_identifiers_list
@@ -8869,19 +9537,6 @@ paths:
                           href: 'https://api.osf.io/v2/nodes/73pnd/'
                           meta: {}
                   type: identifiers
-                - attributes:
-                    category: ark
-                    value: c7605/osf.io/73pnd
-                  id: 57f1641db83f6901ed94b45a
-                  links:
-                    self: 'https://api.osf.io/v2/identifiers/57f1641db83f6901ed94b45a/'
-                  relationships:
-                    referent:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/nodes/73pnd/'
-                          meta: {}
-                  type: identifiers
               links:
                 meta:
                   per_page: 10
@@ -8895,7 +9550,6 @@ paths:
                     category:
                       description: The category of the identifier
                       enum:
-                        - ark
                         - doi
                       readOnly: true
                       type: string
@@ -9532,7 +10186,7 @@ paths:
                       readOnly: true
                       type: string
                     identifiers:
-                      description: A link to the list of identifiers for this node (i.e. ARK and DOI identifiers).
+                      description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
                       type: string
                     license:
@@ -9812,7 +10466,7 @@ paths:
                           readOnly: true
                           type: string
                         identifiers:
-                          description: Dictionary containing the DOI and ARK ID for a preprint associated with the log.
+                          description: Dictionary containing the DOI for a preprint associated with the log.
                           readOnly: true
                           type: string
                         institution:
@@ -10351,7 +11005,7 @@ paths:
                   registration_schema:
                     links:
                       related:
-                        href: 'https://api.osf.io/v2/metaschemas/564d31db8c5e4a7c9694b2be/'
+                        href: 'https://api.osf.io/v2/metaschemas/registrations/564d31db8c5e4a7c9694b2be/'
                         meta: {}
                   root:
                     links:
@@ -10573,7 +11227,7 @@ paths:
                       readOnly: true
                       type: string
                     identifiers:
-                      description: A link to the list of identifiers for this registration (i.e. ARK and DOI identifiers).
+                      description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                       readOnly: true
                       type: string
                     linked_nodes:
@@ -10875,7 +11529,7 @@ paths:
                     readOnly: true
                     type: string
                   identifiers:
-                    description: A link to the list of identifiers for this registration (i.e. ARK and DOI identifiers).
+                    description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                     readOnly: true
                     type: string
                   linked_nodes:
@@ -10940,6 +11594,221 @@ paths:
       tags:
         - Nodes
       x-response-schema: Registration
+  '/nodes/{node_id}/settings/':
+    get:
+      description: |-
+        Retrieves the details of settings related to the node.
+
+        #### Returns
+
+        Returns a JSON object with a `data` key containing the representation of the requested node settings, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+
+        #### Permissions
+
+        Settings for a node are readable by users that are contributors on the node. Most fields are writeable only by users that are administrators on the node. The fields for determining redirect links are writable by a contributor who has read/write permissions on the node.
+      parameters:
+        - description: The unique identifier of the node.
+          in: path
+          name: node_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                attributes:
+                  access_requests_enabled: false
+                  anyone_can_comment: true
+                  anyone_can_edit_wiki: false
+                  redirect_link_enabled: true
+                  redirect_link_label: Published Study
+                  redirect_link_url: 'https://reproducibility.osf.io/'
+                  wiki_enabled: true
+                id: ezcuj
+                links:
+                  self: 'https://api.osf.io/v2/nodes/ezcuj/settings/'
+                relationships:
+                  view_only_links:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/nodes/ezcuj/view_only_links/'
+                        meta: {}
+                type: node-settings
+          schema:
+            properties:
+              attributes:
+                description: The properties of the node settings entity.
+                properties:
+                  access_requests_enabled:
+                    description: A boolean value indicating if access requests are allowed for the connected node.
+                    readOnly: false
+                    type: string
+                  anyone_can_comment:
+                    description: A boolean value indicating if public comments are enabled on the connected node.
+                    readOnly: false
+                    type: string
+                  anyone_can_edit_wiki:
+                    description: A boolean value indicating if public editing is enabled on the connected wiki.
+                    readOnly: false
+                    type: string
+                  redirect_link_enabled:
+                    description: A boolean value indicating that there is a redirect link activated for when a user visits the associated node.
+                    readOnly: false
+                    type: string
+                  redirect_link_label:
+                    description: The label for the redirect URL that has been configured for the associated node.
+                    readOnly: false
+                    type: string
+                  redirect_link_url:
+                    description: The redirect URL that has been configured for the associated node.
+                    readOnly: false
+                    type: string
+                  wiki_enabled:
+                    description: A boolean value indicating that there is a wiki connected to the associated node.
+                    readOnly: false
+                    type: string
+                readOnly: true
+                title: Attributes
+                type: object
+              id:
+                description: The identifier of the node that the current settings are for.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the node settings entity.
+                properties:
+                  self:
+                    description: A link to the node settings entity.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the node settings entity.
+                properties:
+                  view_only_links:
+                    description: A link to the list of view only links that have been created for the connected node.
+                    readOnly: true
+                    type: string
+                readOnly: false
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier for node settings. Should be node-settings.
+                readOnly: false
+                type: string
+            title: Node Settings Detail
+            type: object
+      summary: Retrieve node settings
+      tags:
+        - Nodes
+      x-response-schema: Node Settings
+    patch:
+      description: |-
+        Updates the details of settings related to the node.
+
+        #### Returns
+
+        Returns a JSON object with a `data` key containing the updated representation of the requested node settings, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+
+        #### Permissions
+
+        Most fields on the node settings entity are writeable only by users that are administrators on the node. The fields for determining redirect links are writable by a contributor who has read/write permissions on the node.
+      parameters:
+        - description: The unique identifier of the node.
+          in: path
+          name: node_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            example:
+              data:
+                attributes:
+                  access_requests_enabled: true
+                  wiki_enabled: false
+                id: '{node_id}'
+                type: node-settings
+            properties:
+              attributes:
+                description: The properties of the node settings entity.
+                properties:
+                  access_requests_enabled:
+                    description: A boolean value indicating if access requests are allowed for the connected node.
+                    readOnly: false
+                    type: string
+                  anyone_can_comment:
+                    description: A boolean value indicating if public comments are enabled on the connected node.
+                    readOnly: false
+                    type: string
+                  anyone_can_edit_wiki:
+                    description: A boolean value indicating if public editing is enabled on the connected wiki.
+                    readOnly: false
+                    type: string
+                  redirect_link_enabled:
+                    description: A boolean value indicating that there is a redirect link activated for when a user visits the associated node.
+                    readOnly: false
+                    type: string
+                  redirect_link_label:
+                    description: The label for the redirect URL that has been configured for the associated node.
+                    readOnly: false
+                    type: string
+                  redirect_link_url:
+                    description: The redirect URL that has been configured for the associated node.
+                    readOnly: false
+                    type: string
+                  wiki_enabled:
+                    description: A boolean value indicating that there is a wiki connected to the associated node.
+                    readOnly: false
+                    type: string
+                readOnly: true
+                title: Attributes
+                type: object
+              id:
+                description: The identifier of the node that the current settings are for.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the node settings entity.
+                properties:
+                  self:
+                    description: A link to the node settings entity.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the node settings entity.
+                properties:
+                  view_only_links:
+                    description: A link to the list of view only links that have been created for the connected node.
+                    readOnly: true
+                    type: string
+                readOnly: false
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier for node settings. Should be node-settings.
+                readOnly: false
+                type: string
+            title: Node Settings Detail
+            type: object
+      summary: Update node settings
+      tags:
+        - Nodes
+      x-response-schema: Node Settings
   '/nodes/{node_id}/view_only_links/':
     get:
       description: |-
@@ -11541,827 +12410,6 @@ paths:
       tags:
         - Nodes
       x-response-schema: Wiki
-  /preprint_providers/:
-    get:
-      description: |-
-        A paginated list of all preprint providers.
-
-        The returned preprint providers are sorted by their creation date, with the most recent preprints appearing first.
-
-        #### Returns
-
-        Returns a JSON object containing `data` and `links` keys.
-
-        The `data` key contains an array of 10 preprint providers.
-
-        Each resource in the array is a separate preprint provider object.
-
-        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
-
-        This request should never return an error.
-
-        #### Filtering
-
-        You can optionally request that the response only include preprint providers that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/preprint_providers/?filter[id]=osf.
-
-        Preprint Providers may be filtered by their `id`, `name`,  and `description`
-
-        You can learn more about advanced filtering features [here](#tag/Filtering).
-      operationId: preprint_provider_list
-      responses:
-        '200':
-          description: OK
-          examples:
-            application/json:
-              data:
-                - attributes:
-                    advisory_board: ''
-                    banner_path: /static/img/preprint_providers/cos-logo.png
-                    description: A scholarly commons to connect the entire research cycle
-                    domain: osf.io
-                    email_contact: ''
-                    email_support: ''
-                    example: khbvy
-                    header_text: ''
-                    logo_path: /static/img/preprint_providers/cos-logo.png
-                    name: Open Science Framework
-                    social_facebook: ''
-                    social_instagram: ''
-                    social_twitter: ''
-                    subjects_acceptable: []
-                  id: osf
-                  links:
-                    external_url: 'https://osf.io/preprints/'
-                    preprints: 'https://api.osf.io/v2/preprint_providers/osf/preprints/'
-                    self: 'https://api.osf.io/v2/preprint_providers/osf/'
-                  relationships:
-                    licenses_acceptable:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/preprint_providers/osf/licenses/'
-                          meta: {}
-                    preprints:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/preprint_providers/osf/preprints/'
-                          meta: {}
-                    taxonomies:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/preprint_providers/osf/taxonomies/'
-                          meta: {}
-                  type: preprint_providers
-          schema:
-            properties:
-              attributes:
-                description: The properties of the preprint provider entity.
-                properties:
-                  advisory_board:
-                    description: The HTML representation of the preprint provider's advisory board.
-                    readOnly: true
-                    type: string
-                  banner_path:
-                    description: A static path to the preprint provider's banner image. This field is deprecated as of verson 2.4.
-                    readOnly: true
-                    type: string
-                  description:
-                    description: The description of the preprint provider.
-                    readOnly: true
-                    type: string
-                  domain:
-                    description: 'The preprint provider''s domain, if the provider is using a domain to for their preprint service.'
-                    readOnly: true
-                    type: string
-                  domain_redirect_enabled:
-                    description: Whether or not redirects are enabled for the provider's domain.
-                    readOnly: true
-                    type: boolean
-                  email_contact:
-                    description: The preprint provider's contact email address. This field is deprecated as of verson 2.4.
-                    readOnly: true
-                    type: string
-                  email_support:
-                    description: The preprint providers's support email address.
-                    readOnly: true
-                    type: string
-                  example:
-                    description: The GUID for an example preprint from this preprint provider.
-                    readOnly: true
-                    type: string
-                  logo_path:
-                    description: A static path to the preprint provider's logo image. This field is deprecated as of verson 2.4.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: The name of the preprint provider.
-                    readOnly: true
-                    type: string
-                  social_facebook:
-                    description: The preprint provider's Facebook account ID. This field is deprecated as of verson 2.4.
-                    readOnly: true
-                    type: string
-                  social_instagram:
-                    description: The preprint provider's Instagram account ID. This field is deprecated as of verson 2.4.
-                    readOnly: true
-                    type: string
-                  subjects_acceptable:
-                    description: 'A nested array structure defining allowed subjects for this preprint provider, in the BePress taxonomy.'
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Attributes
-                type: object
-              id:
-                description: The identifier of the preprint provider entity.
-                readOnly: true
-                type: string
-              links:
-                description: Links to alternative representations of the preprint entity.
-                properties:
-                  external_url:
-                    description: A link to the external website for the preprint provider.
-                    format: URL
-                    readOnly: true
-                    type: string
-                  preprints:
-                    description: A link to the preprint list page for the preprint provider.
-                    format: URL
-                    readOnly: true
-                    type: string
-                  self:
-                    description: A link to the detail page for the preprint provider.
-                    format: URL
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Links
-                type: object
-              relationships:
-                description: Links to other entities or entity collections that have a relationship to the preprint provider.
-                properties:
-                  licenses_acceptable:
-                    description: A link to licenses the preprint provider allows.
-                    format: URL
-                    readOnly: true
-                    type: string
-                  preprints:
-                    description: A link to the preprint list page for the preprint provider.
-                    readOnly: true
-                    type: string
-                  taxonomies:
-                    description: A link to the taxonomies the preprint provider allows.
-                    format: URL
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Relationships
-                type: object
-              type:
-                description: The type identifier of the preprint provider entity (`preprint_providers`).
-                readOnly: true
-                type: string
-            title: Preprint Providers
-            type: object
-      summary: List all preprint providers
-      tags:
-        - Preprint Providers
-      x-response-schema: Preprint Provider
-  '/preprint_providers/{preprint_provider_id}/':
-    get:
-      description: |-
-        Retrieves the details of a preprint provider.
-
-        #### Returns
-
-        Returns a JSON object with a `data` key containing the representation of the requested preprint provider, if the request is successful.
-
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
-
-        #### Acceptable Subjects Structure
-
-        Each preprint provider specifies acceptable subjects.
-
-        `subjects_acceptable` is an array found in `attributes`.
-
-        Subjects consist of general parent subjects (e.g., Engineering), more specific child subjects (e.g., Aerospace Engineering), and even more specific grandchild subjects (e.g., Aerodynamics and Fluid Mechanics). Subjects can only be nested 3 deep.
-
-
-            "subjects_acceptable": [
-                [
-                    [
-                        # Parent Subject:
-                        # Architecture
-                        "584240d954be81056ceca9e5",
-
-                        # Child Subject:
-                        # Architectural Engineering
-                        "584240da54be81056cecac87"
-                    ],
-                    # Include all Architectural Engineering's children:
-                    true
-                ],
-                [
-                    [
-                        # Parent Subject:
-                        # Engineering
-                        "584240da54be81056cecaca9",
-
-                        # Child Subject:
-                        # Aerospace Engineering
-                        "584240db54be81056cecacd6",
-
-                        # Grandchild Subject:
-                        # Aerodynamics and Fluid Mechanics
-                        "584240da54be81056cecaa74"
-                    ],
-                    # All nestings 3 deep must be false
-                    false
-                ]
-            ]
-
-
-        The above structure would allow Architecture, Architectural Engineering, all of Architectural Engineering's children, Engineering, Aerospace Engineering, and Aerodynamics and Fluid Mechanics.
-      operationId: preprint_provider_detail
-      parameters:
-        - description: The unique identifier of the preprint provider.
-          in: path
-          name: preprint_provider_id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          examples:
-            application/json:
-              data:
-                attributes:
-                  advisory_board: ''
-                  banner_path: /static/img/preprint_providers/cos-logo.png
-                  description: A scholarly commons to connect the entire research cycle
-                  domain: osf.io
-                  email_contact: ''
-                  email_support: ''
-                  example: khbvy
-                  header_text: ''
-                  logo_path: /static/img/preprint_providers/cos-logo.png
-                  name: Open Science Framework
-                  social_facebook: ''
-                  social_instagram: ''
-                  social_twitter: ''
-                  subjects_acceptable: []
-                id: osf
-                links:
-                  external_url: 'https://osf.io/preprints/'
-                  preprints: 'https://api.osf.io/v2/preprint_providers/osf/preprints/'
-                  self: 'https://api.osf.io/v2/preprint_providers/osf/'
-                relationships:
-                  licenses_acceptable:
-                    links:
-                      related:
-                        href: 'https://api.osf.io/v2/preprint_providers/osf/licenses/'
-                        meta: {}
-                  preprints:
-                    links:
-                      related:
-                        href: 'https://api.osf.io/v2/preprint_providers/osf/preprints/'
-                        meta: {}
-                  taxonomies:
-                    links:
-                      related:
-                        href: 'https://api.osf.io/v2/preprint_providers/osf/taxonomies/'
-                        meta: {}
-                type: preprint_providers
-              links:
-                meta:
-                  per_page: 10
-                  total: 5
-          schema:
-            properties:
-              attributes:
-                description: The properties of the preprint provider entity.
-                properties:
-                  advisory_board:
-                    description: The HTML representation of the preprint provider's advisory board.
-                    readOnly: true
-                    type: string
-                  banner_path:
-                    description: A static path to the preprint provider's banner image. This field is deprecated as of verson 2.4.
-                    readOnly: true
-                    type: string
-                  description:
-                    description: The description of the preprint provider.
-                    readOnly: true
-                    type: string
-                  domain:
-                    description: 'The preprint provider''s domain, if the provider is using a domain to for their preprint service.'
-                    readOnly: true
-                    type: string
-                  domain_redirect_enabled:
-                    description: Whether or not redirects are enabled for the provider's domain.
-                    readOnly: true
-                    type: boolean
-                  email_contact:
-                    description: The preprint provider's contact email address. This field is deprecated as of verson 2.4.
-                    readOnly: true
-                    type: string
-                  email_support:
-                    description: The preprint providers's support email address.
-                    readOnly: true
-                    type: string
-                  example:
-                    description: The GUID for an example preprint from this preprint provider.
-                    readOnly: true
-                    type: string
-                  logo_path:
-                    description: A static path to the preprint provider's logo image. This field is deprecated as of verson 2.4.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: The name of the preprint provider.
-                    readOnly: true
-                    type: string
-                  social_facebook:
-                    description: The preprint provider's Facebook account ID. This field is deprecated as of verson 2.4.
-                    readOnly: true
-                    type: string
-                  social_instagram:
-                    description: The preprint provider's Instagram account ID. This field is deprecated as of verson 2.4.
-                    readOnly: true
-                    type: string
-                  subjects_acceptable:
-                    description: 'A nested array structure defining allowed subjects for this preprint provider, in the BePress taxonomy.'
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Attributes
-                type: object
-              id:
-                description: The identifier of the preprint provider entity.
-                readOnly: true
-                type: string
-              links:
-                description: Links to alternative representations of the preprint entity.
-                properties:
-                  external_url:
-                    description: A link to the external website for the preprint provider.
-                    format: URL
-                    readOnly: true
-                    type: string
-                  preprints:
-                    description: A link to the preprint list page for the preprint provider.
-                    format: URL
-                    readOnly: true
-                    type: string
-                  self:
-                    description: A link to the detail page for the preprint provider.
-                    format: URL
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Links
-                type: object
-              relationships:
-                description: Links to other entities or entity collections that have a relationship to the preprint provider.
-                properties:
-                  licenses_acceptable:
-                    description: A link to licenses the preprint provider allows.
-                    format: URL
-                    readOnly: true
-                    type: string
-                  preprints:
-                    description: A link to the preprint list page for the preprint provider.
-                    readOnly: true
-                    type: string
-                  taxonomies:
-                    description: A link to the taxonomies the preprint provider allows.
-                    format: URL
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Relationships
-                type: object
-              type:
-                description: The type identifier of the preprint provider entity (`preprint_providers`).
-                readOnly: true
-                type: string
-            title: Preprint Providers
-            type: object
-      summary: Retrieve a preprint provider
-      tags:
-        - Preprint Providers
-      x-response-schema: Preprint Provider
-  '/preprint_providers/{preprint_provider_id}/licenses/':
-    get:
-      description: |-
-        A paginated list of the licenses allowed bya preprint provider.
-
-        #### Returns
-
-        Returns a JSON object containing `data` and `links` keys.
-
-        The `data` key contains an array of 10 preprint providers. Each resource in the array is a separate preprint provider object.
-
-        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
-
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
-      operationId: preprint_provider_licenses_list
-      parameters:
-        - description: The unique identifier of the preprint provider.
-          in: path
-          name: preprint_provider_id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          examples:
-            application/json:
-              data:
-                - attributes:
-                    name: No license
-                    required_fields:
-                      - year
-                      - copyrightHolders
-                    text: 'Copyright {{year}} {{copyrightHolders}}'
-                  id: 563c1cf88c5e4a3877f9e965
-                  links:
-                    self: 'https://api.osf.io/v2/licenses/563c1cf88c5e4a3877f9e965/'
-                  type: licenses
-              links:
-                meta:
-                  per_page: 10
-                  total: 3
-          schema:
-            properties:
-              attributes:
-                description: The properties of the license.
-                properties:
-                  name:
-                    description: Name of the license.
-                    readOnly: true
-                    type: string
-                  required_fields:
-                    description: Fields required for this license (provided to help front-end validators). Maps to properties on the NodeLicense model.
-                    items:
-                      description: Individual fields required by this license.
-                      readOnly: true
-                      type: string
-                    readOnly: true
-                    type: array
-                  text:
-                    description: Full text of the license.
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Attributes
-                type: object
-              id:
-                description: The identifier of the license.
-                readOnly: true
-                type: string
-              links:
-                description: URLs to alternative representations of the license.
-                properties:
-                  self:
-                    description: A link to the detail page for the license.
-                    format: URL
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Links
-                type: object
-              type:
-                description: The type identifier of the license (`license`).
-                readOnly: true
-                type: string
-            title: License
-            type: object
-      summary: List all licenses
-      tags:
-        - Preprint Providers
-      x-response-schema: Licenses
-  '/preprint_providers/{preprint_provider_id}/preprints/':
-    get:
-      description: |-
-        A paginated list of preprints from the specified preprint provider. The returned preprints are sorted by their creation date, with the most recent preprints appearing first.
-
-        #### Returns
-
-        Returns a JSON object containing `data` and `links` keys.
-
-        The `data` key contains an array of 10 preprints. Each resource in the array is a separate preprint object.
-
-        The `links` key contains a dictionary with keys that can be used for [pagination](#tag/Pagination).
-
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
-
-        #### Filtering
-
-        You can optionally request that the response only include preprints that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/preprint_providers/osf/preprints/?filter[is_published]=true.
-
-        Preprints may be filtered by their `id`, `is_published`, `date_created`, `date_modified`, and `provider`.
-
-        You can learn more about advanced filtering features [here](#tag/Filtering).
-      operationId: preprint_providers_preprints_list
-      parameters:
-        - description: The unique identifier of the preprint provider.
-          in: path
-          name: preprint_provider_id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          examples:
-            application/json:
-              data:
-                - attributes:
-                    date_created: '2017-02-03T06:16:57.129000'
-                    date_modified: '2017-02-03T06:19:00.158000'
-                    date_published: '2017-02-03T06:18:59.788000'
-                    is_preprint_orphan: false
-                    is_published: true
-                    license_record:
-                      copyright_holders: []
-                      year: '2017'
-                    subjects:
-                      - - id: 584240da54be81056cecac48
-                          text: Social and Behavioral Sciences
-                        - id: 584240da54be81056cecac1a
-                          text: Political Science
-                  id: hqb2p
-                  links:
-                    html: 'https://osf.io/preprints/socarxiv/hqb2p/'
-                    self: 'https://api.osf.io/v2/preprints/hqb2p/'
-                  relationships:
-                    citation:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/preprints/hqb2p/citation/'
-                          meta: {}
-                    license:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/licenses/563c1cf88c5e4a3877f9e96a/'
-                          meta: {}
-                    node:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/nodes/5xuck/'
-                          meta: {}
-                    primary_file:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/files/5894204f594d900200ed23f2/'
-                          meta: {}
-                    provider:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/preprint_providers/socarxiv/'
-                          meta: {}
-                  type: preprints
-              links:
-                last: 'https://api.osf.io/v2/preprints/?page=172'
-                meta:
-                  per_page: 10
-                  total: 1720
-                next: 'https://api.osf.io/v2/preprints/?page=2'
-          schema:
-            items:
-              example:
-                data:
-                  attributes: {}
-                  relationships:
-                    node:
-                      data:
-                        id: '{node_id}'
-                        type: nodes
-                    primary_file:
-                      data:
-                        id: '{primary_file_id}'
-                        type: primary_files
-                    provider:
-                      data:
-                        id: '{preprint_provider_id}'
-                        type: providers
-              properties:
-                attributes:
-                  description: The properties of the preprint entity.
-                  properties:
-                    date_created:
-                      description: 'The time at which the preprint was created, as an iso8601 formatted timestamp.'
-                      format: date-time
-                      readOnly: true
-                      type: string
-                    date_modified:
-                      description: 'The time at which the preprint was last modified, as an iso8601 formatted timestamp.'
-                      format: date-time
-                      readOnly: true
-                      type: string
-                    date_published:
-                      description: 'The time at which the preprint was published, as an iso8601 formatted timestamp.'
-                      format: date-time
-                      readOnly: true
-                      type: string
-                    doi:
-                      description: 'The DOI of the associated journal article, as entered by the user, if the preprint is published.'
-                      readOnly: false
-                      type: string
-                    is_preprint_orphan:
-                      description: Whether or not the preprint is orphaned. A preprint can be orphaned if it's primary file was removed from the preprint node. This field may be deprecated in future versions.
-                      readOnly: true
-                      type: boolean
-                    license_record:
-                      description: 'The metadata (copyright year and holder) associated with a license, required for certain licenses.'
-                      readOnly: false
-                      type: string
-                    subjects:
-                      description: 'A nested array structure that describe subjects related to the preprint, in the BePress taxonomy. Each dictionary contains the text and ID of a subject.'
-                      items:
-                        type: string
-                      readOnly: false
-                      type: array
-                  readOnly: false
-                  title: Attributes
-                  type: object
-                id:
-                  description: The identifier of the preprint entity.
-                  readOnly: true
-                  type: string
-                links:
-                  description: URLs to alternative representations of the preprint entity.
-                  properties:
-                    doi:
-                      description: The URL representation of the DOI entered by the user for the preprint manuscript.
-                      format: URL
-                      readOnly: true
-                      type: string
-                    html:
-                      description: 'A link to the project on the OSF that was created for the preprint, or from which the preprint was created.'
-                      format: URL
-                      readOnly: true
-                      type: string
-                    preprint_doi:
-                      description: The URL representation of the OSF assigned DOI for the preprint.
-                      format: URL
-                      readOnly: true
-                      type: string
-                    self:
-                      description: A link to the detail page for the preprint.
-                      format: URL
-                      readOnly: true
-                      type: string
-                  readOnly: true
-                  title: Links
-                  type: object
-                relationships:
-                  description: URLs to other entities or entity collections that have a relationship to the preprint entity.
-                  properties:
-                    citation:
-                      description: A relationship to the citation of the preprint.
-                      readOnly: true
-                      type: string
-                    identifiers:
-                      description: A relationship to the identifiers associated with the preprint.
-                      readOnly: true
-                      type: string
-                    license:
-                      description: A relationship to the license that has been applied to the preprint.
-                      readOnly: false
-                      type: string
-                    node:
-                      description: 'A relationship to the node that was created for the preprint, or from which the preprint was created.'
-                      readOnly: false
-                      type: string
-                    primary_file:
-                      description: 'A relationship to the file that is designated as the preprint''s primary file, or the manuscript of the preprint.'
-                      readOnly: false
-                      type: string
-                    provider:
-                      description: 'A relationship to the preprint provider under which the preprint was created (OSF, socarxiv, psyarxiv, etc.).'
-                      readOnly: false
-                      type: string
-                  readOnly: false
-                  required:
-                    - node
-                    - primary_file
-                    - provider
-                  title: Relationships
-                  type: object
-                type:
-                  description: The type identifier of the preprint entity (`preprints`).
-                  readOnly: false
-                  type: string
-              required:
-                - type
-                - relationships
-              title: Preprint
-              type: object
-            type: array
-      summary: List all preprints
-      tags:
-        - Preprint Providers
-      x-response-schema: Preprint
-  '/preprint_providers/{preprint_provider_id}/taxonomies/':
-    get:
-      description: |-
-        A paginated list of the taxonomies for a preprint provider.
-
-        The returned preprint providers taxonomies are sorted by their creation date, with the most recent preprints appearing first.
-
-        #### Returns
-
-        Returns a JSON object containing `data` and `links` keys.
-
-        The `data` key contains an array of 10 preprint providers. Each resource in the array is a separate preprint provider object.
-
-        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
-
-        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
-      operationId: preprint_provider_taxonomies_list
-      parameters:
-        - description: The unique identifier of the preprint provider.
-          in: path
-          name: preprint_provider_id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          examples:
-            application/json:
-              data:
-                - attributes:
-                    child_count: 0
-                    parents:
-                      - id: 584240d954be81056ceca97a
-                        text: Philosophy
-                    text: History of Philosophy
-                  id: 584240d854be81056ceca838
-                  links:
-                    parents:
-                      - 'https://api.osf.io/v2/taxonomies/584240d954be81056ceca97a/'
-                    self: 'https://api.osf.io/v2/taxonomies/584240d854be81056ceca838/'
-                  type: taxonomies
-              links:
-                last: 'https://api.osf.io/v2/preprint_providers/osf/taxonomies/?page=122'
-                meta:
-                  per_page: 10
-                  total: 1217
-                next: 'https://api.osf.io/v2/preprint_providers/osf/taxonomies/?page=2'
-          schema:
-            properties:
-              attributes:
-                description: The properties of the taxonomy entity.
-                properties:
-                  child_count:
-                    description: The number of children this taxonomy contains.
-                    readOnly: true
-                    type: integer
-                  parents:
-                    description: An array of JSON objects containing keys for `text` (name) and `id` (unique identifier) of this taxonomy's parents
-                    items:
-                      type: string
-                    readOnly: true
-                    type: array
-                  text:
-                    description: The text name of the taxonomy
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Attributes
-                type: object
-              id:
-                description: The identifier of the taxonomy entity.
-                readOnly: true
-                type: string
-              links:
-                description: URLs to alternative representations of the taxonomy entity.
-                properties:
-                  parents:
-                    description: An array of links to to this taxonomy's parents. This field is deprecated as of verson 2.4.
-                    items:
-                      type: string
-                    readOnly: true
-                    type: array
-                  self:
-                    description: A link to the detail page for the taxonomy.
-                    format: URL
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Links
-                type: object
-              type:
-                description: The type identifier of the taxonomy entity (`taxonomies`).
-                readOnly: true
-                type: string
-            title: Taxonomy
-            type: object
-      summary: List all taxonomies
-      tags:
-        - Preprint Providers
-      x-response-schema: Taxonomies
   /preprints/:
     get:
       description: |-
@@ -13061,7 +13109,7 @@ paths:
                     readOnly: true
                     type: string
                   publisher:
-                    description: 'The publisher of the entity being cited. For nodes and registrations, the publisher is the ''Open Science Framework''. For preprints, the publisher is the same as the preprint provider.'
+                    description: 'The publisher of the entity being cited. For nodes and registrations, the publisher is ''OSF''. For preprints, the publisher is the same as the preprint provider.'
                     readOnly: true
                     type: string
                   title:
@@ -13153,6 +13201,730 @@ paths:
       tags:
         - Preprints
       x-response-schema: Styled Citation
+  /providers/preprints/:
+    get:
+      description: |-
+        A paginated list of all preprint providers.
+
+        The returned preprint providers are sorted by their creation date, with the most recent preprints appearing first.
+
+        _< v2.8 use `preprint_providers` instead of `providers/preprints`_
+
+        #### Returns
+
+        Returns a JSON object containing `data` and `links` keys.
+
+        The `data` key contains an array of 10 preprint providers.
+
+        Each resource in the array is a separate preprint provider object.
+
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
+        This request should never return an error.
+
+        #### Filtering
+
+        You can optionally request that the response only include preprint providers that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/providers/preprints/?filter[id]=osf.
+
+        Preprint Providers may be filtered by their `id`, `name`,  and `description`
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
+      operationId: preprint_provider_list
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    advisory_board: ''
+                    description: A scholarly commons to connect the entire research cycle
+                    domain: osf.io
+                    email_support: ''
+                    example: khbvy
+                    name: Open Science Framework
+                  id: osf
+                  links:
+                    external_url: 'https://osf.io/preprints/'
+                    preprints: 'https://api.osf.io/v2/providers/preprints/osf/preprints/'
+                    self: 'https://api.osf.io/v2/providers/preprints/osf/'
+                  relationships:
+                    licenses_acceptable:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/providers/preprints/osf/licenses/'
+                          meta: {}
+                    preprints:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/providers/preprints/osf/preprints/'
+                          meta: {}
+                    taxonomies:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/providers/preprints/osf/taxonomies/'
+                          meta: {}
+                  type: preprint_providers
+          schema:
+            properties:
+              attributes:
+                description: The properties of the preprint provider entity.
+                properties:
+                  advisory_board:
+                    description: The HTML representation of the preprint provider's advisory board.
+                    readOnly: true
+                    type: string
+                  description:
+                    description: The description of the preprint provider.
+                    readOnly: true
+                    type: string
+                  domain:
+                    description: 'The preprint provider''s domain, if the provider is using a domain to for their preprint service.'
+                    readOnly: true
+                    type: string
+                  domain_redirect_enabled:
+                    description: Whether or not redirects are enabled for the provider's domain.
+                    readOnly: true
+                    type: boolean
+                  email_support:
+                    description: The preprint providers's support email address.
+                    readOnly: true
+                    type: string
+                  example:
+                    description: The GUID for an example preprint from this preprint provider.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: The name of the preprint provider.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Attributes
+                type: object
+              id:
+                description: The identifier of the preprint provider entity.
+                readOnly: true
+                type: string
+              links:
+                description: Links to alternative representations of the preprint entity.
+                properties:
+                  external_url:
+                    description: A link to the external website for the preprint provider.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  preprints:
+                    description: A link to the preprint list page for the preprint provider.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  self:
+                    description: A link to the detail page for the preprint provider.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: Links to other entities or entity collections that have a relationship to the preprint provider.
+                properties:
+                  licenses_acceptable:
+                    description: A link to licenses the preprint provider allows.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  preprints:
+                    description: A link to the preprint list page for the preprint provider.
+                    readOnly: true
+                    type: string
+                  taxonomies:
+                    description: A link to the taxonomies the preprint provider allows.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the preprint provider entity (`preprint_providers`).
+                readOnly: true
+                type: string
+            title: Preprint Providers
+            type: object
+      summary: List all preprint providers
+      tags:
+        - Preprint Providers
+      x-response-schema: Preprint Provider
+  '/providers/preprints/{preprint_provider_id}/':
+    get:
+      description: |-
+        Retrieves the details of a preprint provider.
+
+        _< v2.8 use `preprint_providers` instead of `providers/preprints`_
+
+        #### Returns
+
+        Returns a JSON object with a `data` key containing the representation of the requested preprint provider, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: preprint_provider_detail
+      parameters:
+        - description: The unique identifier of the preprint provider.
+          in: path
+          name: preprint_provider_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                attributes:
+                  advisory_board: ''
+                  description: A scholarly commons to connect the entire research cycle
+                  domain: osf.io
+                  email_support: ''
+                  example: khbvy
+                  name: Open Science Framework
+                id: osf
+                links:
+                  external_url: 'https://osf.io/preprints/'
+                  preprints: 'https://api.osf.io/v2/providers/preprints/osf/preprints/'
+                  self: 'https://api.osf.io/v2/providers/preprints/osf/'
+                relationships:
+                  licenses_acceptable:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/providers/preprints/osf/licenses/'
+                        meta: {}
+                  preprints:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/providers/preprints/osf/preprints/'
+                        meta: {}
+                  taxonomies:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/providers/preprints/osf/taxonomies/'
+                        meta: {}
+                type: preprint_providers
+              links:
+                meta:
+                  per_page: 10
+                  total: 5
+          schema:
+            properties:
+              attributes:
+                description: The properties of the preprint provider entity.
+                properties:
+                  advisory_board:
+                    description: The HTML representation of the preprint provider's advisory board.
+                    readOnly: true
+                    type: string
+                  description:
+                    description: The description of the preprint provider.
+                    readOnly: true
+                    type: string
+                  domain:
+                    description: 'The preprint provider''s domain, if the provider is using a domain to for their preprint service.'
+                    readOnly: true
+                    type: string
+                  domain_redirect_enabled:
+                    description: Whether or not redirects are enabled for the provider's domain.
+                    readOnly: true
+                    type: boolean
+                  email_support:
+                    description: The preprint providers's support email address.
+                    readOnly: true
+                    type: string
+                  example:
+                    description: The GUID for an example preprint from this preprint provider.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: The name of the preprint provider.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Attributes
+                type: object
+              id:
+                description: The identifier of the preprint provider entity.
+                readOnly: true
+                type: string
+              links:
+                description: Links to alternative representations of the preprint entity.
+                properties:
+                  external_url:
+                    description: A link to the external website for the preprint provider.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  preprints:
+                    description: A link to the preprint list page for the preprint provider.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  self:
+                    description: A link to the detail page for the preprint provider.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: Links to other entities or entity collections that have a relationship to the preprint provider.
+                properties:
+                  licenses_acceptable:
+                    description: A link to licenses the preprint provider allows.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  preprints:
+                    description: A link to the preprint list page for the preprint provider.
+                    readOnly: true
+                    type: string
+                  taxonomies:
+                    description: A link to the taxonomies the preprint provider allows.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the preprint provider entity (`preprint_providers`).
+                readOnly: true
+                type: string
+            title: Preprint Providers
+            type: object
+      summary: Retrieve a preprint provider
+      tags:
+        - Preprint Providers
+      x-response-schema: Preprint Provider
+  '/providers/preprints/{preprint_provider_id}/licenses/':
+    get:
+      description: |-
+        A paginated list of the licenses allowed bya preprint provider.
+
+        _< v2.8 use `preprint_providers` instead of `providers/preprints`_
+
+        #### Returns
+
+        Returns a JSON object containing `data` and `links` keys.
+
+        The `data` key contains an array of 10 preprint providers. Each resource in the array is a separate preprint provider object.
+
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: preprint_provider_licenses_list
+      parameters:
+        - description: The unique identifier of the preprint provider.
+          in: path
+          name: preprint_provider_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    name: No license
+                    required_fields:
+                      - year
+                      - copyrightHolders
+                    text: 'Copyright {{year}} {{copyrightHolders}}'
+                  id: 563c1cf88c5e4a3877f9e965
+                  links:
+                    self: 'https://api.osf.io/v2/licenses/563c1cf88c5e4a3877f9e965/'
+                  type: licenses
+              links:
+                meta:
+                  per_page: 10
+                  total: 3
+          schema:
+            properties:
+              attributes:
+                description: The properties of the license.
+                properties:
+                  name:
+                    description: Name of the license.
+                    readOnly: true
+                    type: string
+                  required_fields:
+                    description: Fields required for this license (provided to help front-end validators). Maps to properties on the NodeLicense model.
+                    items:
+                      description: Individual fields required by this license.
+                      readOnly: true
+                      type: string
+                    readOnly: true
+                    type: array
+                  text:
+                    description: Full text of the license.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Attributes
+                type: object
+              id:
+                description: The identifier of the license.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the license.
+                properties:
+                  self:
+                    description: A link to the detail page for the license.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              type:
+                description: The type identifier of the license (`license`).
+                readOnly: true
+                type: string
+            title: License
+            type: object
+      summary: List all licenses
+      tags:
+        - Preprint Providers
+      x-response-schema: Licenses
+  '/providers/preprints/{preprint_provider_id}/preprints/':
+    get:
+      description: |-
+        A paginated list of preprints from the specified preprint provider. The returned preprints are sorted by their creation date, with the most recent preprints appearing first.
+
+        _< v2.8 use `preprint_providers` instead of `providers/preprints`_
+
+        #### Returns
+
+        Returns a JSON object containing `data` and `links` keys.
+
+        The `data` key contains an array of 10 preprints. Each resource in the array is a separate preprint object.
+
+        The `links` key contains a dictionary with keys that can be used for [pagination](#tag/Pagination).
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+
+        #### Filtering
+
+        You can optionally request that the response only include preprints that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/providers/preprints/osf/preprints/?filter[is_published]=true.
+
+        Preprints may be filtered by their `id`, `is_published`, `date_created`, `date_modified`, and `provider`.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
+      operationId: preprint_providers_preprints_list
+      parameters:
+        - description: The unique identifier of the preprint provider.
+          in: path
+          name: preprint_provider_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    date_created: '2017-02-03T06:16:57.129000'
+                    date_modified: '2017-02-03T06:19:00.158000'
+                    date_published: '2017-02-03T06:18:59.788000'
+                    is_preprint_orphan: false
+                    is_published: true
+                    license_record:
+                      copyright_holders: []
+                      year: '2017'
+                    subjects:
+                      - - id: 584240da54be81056cecac48
+                          text: Social and Behavioral Sciences
+                        - id: 584240da54be81056cecac1a
+                          text: Political Science
+                  id: hqb2p
+                  links:
+                    html: 'https://osf.io/preprints/socarxiv/hqb2p/'
+                    self: 'https://api.osf.io/v2/preprints/hqb2p/'
+                  relationships:
+                    citation:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/preprints/hqb2p/citation/'
+                          meta: {}
+                    license:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/licenses/563c1cf88c5e4a3877f9e96a/'
+                          meta: {}
+                    node:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/5xuck/'
+                          meta: {}
+                    primary_file:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/files/5894204f594d900200ed23f2/'
+                          meta: {}
+                    provider:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/providers/preprints/socarxiv/'
+                          meta: {}
+                  type: preprints
+              links:
+                last: 'https://api.osf.io/v2/preprints/?page=172'
+                meta:
+                  per_page: 10
+                  total: 1720
+                next: 'https://api.osf.io/v2/preprints/?page=2'
+          schema:
+            items:
+              example:
+                data:
+                  attributes: {}
+                  relationships:
+                    node:
+                      data:
+                        id: '{node_id}'
+                        type: nodes
+                    primary_file:
+                      data:
+                        id: '{primary_file_id}'
+                        type: primary_files
+                    provider:
+                      data:
+                        id: '{preprint_provider_id}'
+                        type: providers
+              properties:
+                attributes:
+                  description: The properties of the preprint entity.
+                  properties:
+                    date_created:
+                      description: 'The time at which the preprint was created, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    date_modified:
+                      description: 'The time at which the preprint was last modified, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    date_published:
+                      description: 'The time at which the preprint was published, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    doi:
+                      description: 'The DOI of the associated journal article, as entered by the user, if the preprint is published.'
+                      readOnly: false
+                      type: string
+                    is_preprint_orphan:
+                      description: Whether or not the preprint is orphaned. A preprint can be orphaned if it's primary file was removed from the preprint node. This field may be deprecated in future versions.
+                      readOnly: true
+                      type: boolean
+                    license_record:
+                      description: 'The metadata (copyright year and holder) associated with a license, required for certain licenses.'
+                      readOnly: false
+                      type: string
+                    subjects:
+                      description: 'A nested array structure that describe subjects related to the preprint, in the BePress taxonomy. Each dictionary contains the text and ID of a subject.'
+                      items:
+                        type: string
+                      readOnly: false
+                      type: array
+                  readOnly: false
+                  title: Attributes
+                  type: object
+                id:
+                  description: The identifier of the preprint entity.
+                  readOnly: true
+                  type: string
+                links:
+                  description: URLs to alternative representations of the preprint entity.
+                  properties:
+                    doi:
+                      description: The URL representation of the DOI entered by the user for the preprint manuscript.
+                      format: URL
+                      readOnly: true
+                      type: string
+                    html:
+                      description: 'A link to the project on the OSF that was created for the preprint, or from which the preprint was created.'
+                      format: URL
+                      readOnly: true
+                      type: string
+                    preprint_doi:
+                      description: The URL representation of the OSF assigned DOI for the preprint.
+                      format: URL
+                      readOnly: true
+                      type: string
+                    self:
+                      description: A link to the detail page for the preprint.
+                      format: URL
+                      readOnly: true
+                      type: string
+                  readOnly: true
+                  title: Links
+                  type: object
+                relationships:
+                  description: URLs to other entities or entity collections that have a relationship to the preprint entity.
+                  properties:
+                    citation:
+                      description: A relationship to the citation of the preprint.
+                      readOnly: true
+                      type: string
+                    identifiers:
+                      description: A relationship to the identifiers associated with the preprint.
+                      readOnly: true
+                      type: string
+                    license:
+                      description: A relationship to the license that has been applied to the preprint.
+                      readOnly: false
+                      type: string
+                    node:
+                      description: 'A relationship to the node that was created for the preprint, or from which the preprint was created.'
+                      readOnly: false
+                      type: string
+                    primary_file:
+                      description: 'A relationship to the file that is designated as the preprint''s primary file, or the manuscript of the preprint.'
+                      readOnly: false
+                      type: string
+                    provider:
+                      description: 'A relationship to the preprint provider under which the preprint was created (OSF, socarxiv, psyarxiv, etc.).'
+                      readOnly: false
+                      type: string
+                  readOnly: false
+                  required:
+                    - node
+                    - primary_file
+                    - provider
+                  title: Relationships
+                  type: object
+                type:
+                  description: The type identifier of the preprint entity (`preprints`).
+                  readOnly: false
+                  type: string
+              required:
+                - type
+                - relationships
+              title: Preprint
+              type: object
+            type: array
+      summary: List all preprints
+      tags:
+        - Preprint Providers
+      x-response-schema: Preprint
+  '/providers/preprints/{preprint_provider_id}/taxonomies/':
+    get:
+      description: |-
+        A paginated list of the taxonomies for a preprint provider.
+
+        The returned preprint providers taxonomies are sorted by their creation date, with the most recent preprints appearing first.
+
+
+         _< v2.8 use `preprint_providers` instead of `providers/preprints`_
+
+
+        #### Returns
+
+        Returns a JSON object containing `data` and `links` keys.
+
+        The `data` key contains an array of 10 preprint providers. Each resource in the array is a separate preprint provider object.
+
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: preprint_provider_taxonomies_list
+      parameters:
+        - description: The unique identifier of the preprint provider.
+          in: path
+          name: preprint_provider_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    child_count: 0
+                    parents:
+                      - id: 584240d954be81056ceca97a
+                        text: Philosophy
+                    text: History of Philosophy
+                  id: 584240d854be81056ceca838
+                  links:
+                    parents:
+                      - 'https://api.osf.io/v2/taxonomies/584240d954be81056ceca97a/'
+                    self: 'https://api.osf.io/v2/taxonomies/584240d854be81056ceca838/'
+                  type: taxonomies
+              links:
+                last: 'https://api.osf.io/v2/providers/preprints/osf/taxonomies/?page=122'
+                meta:
+                  per_page: 10
+                  total: 1217
+                next: 'https://api.osf.io/v2/providers/preprints/osf/taxonomies/?page=2'
+          schema:
+            properties:
+              attributes:
+                description: The properties of the taxonomy entity.
+                properties:
+                  child_count:
+                    description: The number of children this taxonomy contains.
+                    readOnly: true
+                    type: integer
+                  parents:
+                    description: An array of JSON objects containing keys for `text` (name) and `id` (unique identifier) of this taxonomy's parents
+                    items:
+                      type: string
+                    readOnly: true
+                    type: array
+                  text:
+                    description: The text name of the taxonomy
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Attributes
+                type: object
+              id:
+                description: The identifier of the taxonomy entity.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the taxonomy entity.
+                properties:
+                  parents:
+                    description: An array of links to to this taxonomy's parents. This field is deprecated as of verson 2.4.
+                    items:
+                      type: string
+                    readOnly: true
+                    type: array
+                  self:
+                    description: A link to the detail page for the taxonomy.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              type:
+                description: The type identifier of the taxonomy entity (`taxonomies`).
+                readOnly: true
+                type: string
+            title: Taxonomy
+            type: object
+      summary: List all taxonomies
+      tags:
+        - Preprint Providers
+      x-response-schema: Taxonomies
   /registrations/:
     get:
       description: |-
@@ -13301,7 +14073,7 @@ paths:
                     registration_schema:
                       links:
                         related:
-                          href: 'https://api.osf.io/v2/metaschemas/564d31db8c5e4a7c9694b2c0/'
+                          href: 'https://api.osf.io/v2/metaschemas/registrations/564d31db8c5e4a7c9694b2c0/'
                           meta: {}
                     root:
                       links:
@@ -13529,7 +14301,7 @@ paths:
                       readOnly: true
                       type: string
                     identifiers:
-                      description: A link to the list of identifiers for this registration (i.e. ARK and DOI identifiers).
+                      description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                       readOnly: true
                       type: string
                     linked_nodes:
@@ -13833,7 +14605,7 @@ paths:
                     readOnly: true
                     type: string
                   identifiers:
-                    description: A link to the list of identifiers for this registration (i.e. ARK and DOI identifiers).
+                    description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                     readOnly: true
                     type: string
                   linked_nodes:
@@ -14123,7 +14895,7 @@ paths:
                     readOnly: true
                     type: string
                   identifiers:
-                    description: A link to the list of identifiers for this registration (i.e. ARK and DOI identifiers).
+                    description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                     readOnly: true
                     type: string
                   linked_nodes:
@@ -14341,7 +15113,7 @@ paths:
                     registration_schema:
                       links:
                         related:
-                          href: 'https://api.osf.io/v2/metaschemas/564d31db8c5e4a7c9694b2c0/'
+                          href: 'https://api.osf.io/v2/metaschemas/registrations/564d31db8c5e4a7c9694b2c0/'
                           meta: {}
                     root:
                       links:
@@ -14567,7 +15339,7 @@ paths:
                       readOnly: true
                       type: string
                     identifiers:
-                      description: A link to the list of identifiers for this registration (i.e. ARK and DOI identifiers).
+                      description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                       readOnly: true
                       type: string
                     linked_nodes:
@@ -14761,7 +15533,7 @@ paths:
                       given: Nicole
                     - family: Haendel
                       given: Melissa A
-                  publisher: Open Science Framework
+                  publisher: OSF
                   title: 'Identification Analysis of RP:CB'
                   type: webpage
                 id: bg4di
@@ -14782,7 +15554,7 @@ paths:
                     readOnly: true
                     type: string
                   publisher:
-                    description: 'The publisher of the entity being cited. For nodes and registrations, the publisher is the ''Open Science Framework''. For preprints, the publisher is the same as the preprint provider.'
+                    description: 'The publisher of the entity being cited. For nodes and registrations, the publisher is ''OSF''. For preprints, the publisher is the same as the preprint provider.'
                     readOnly: true
                     type: string
                   title:
@@ -16264,7 +17036,7 @@ paths:
                     registration_schema:
                       links:
                         related:
-                          href: 'https://api.osf.io/v2/metaschemas/564d31db8c5e4a7c9694b2c0/'
+                          href: 'https://api.osf.io/v2/metaschemas/registrations/564d31db8c5e4a7c9694b2c0/'
                           meta: {}
                     root:
                       links:
@@ -16490,7 +17262,7 @@ paths:
                       readOnly: true
                       type: string
                     identifiers:
-                      description: A link to the list of identifiers for this registration (i.e. ARK and DOI identifiers).
+                      description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                       readOnly: true
                       type: string
                     linked_nodes:
@@ -16784,7 +17556,7 @@ paths:
                     readOnly: true
                     type: string
                   identifiers:
-                    description: A link to the list of identifiers for this registration (i.e. ARK and DOI identifiers).
+                    description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                     readOnly: true
                     type: string
                   linked_nodes:
@@ -16864,9 +17636,9 @@ paths:
 
         #### Filtering
 
-        You can optionally request that the response only include registrations that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/identifiers/?filter[category]=ark
+        You can optionally request that the response only include registrations that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/identifiers/?filter[category]=doi
 
-        Identifiers may be filtered by their `category` e.g `ark` or `doi`.
+        Identifiers may be filtered by their `category` e.g `doi`.
 
         You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registrations_identifiers_list
@@ -16895,19 +17667,6 @@ paths:
                           href: 'https://api.osf.io/v2/nodes/73pnd/'
                           meta: {}
                   type: identifiers
-                - attributes:
-                    category: ark
-                    value: c7605/osf.io/73pnd
-                  id: 57f1641db83f6901ed94b45a
-                  links:
-                    self: 'https://api.osf.io/v2/identifiers/57f1641db83f6901ed94b45a/'
-                  relationships:
-                    referent:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/nodes/73pnd/'
-                          meta: {}
-                  type: identifiers
               links:
                 meta:
                   per_page: 10
@@ -16921,7 +17680,6 @@ paths:
                     category:
                       description: The category of the identifier
                       enum:
-                        - ark
                         - doi
                       readOnly: true
                       type: string
@@ -17558,7 +18316,7 @@ paths:
                       readOnly: true
                       type: string
                     identifiers:
-                      description: A link to the list of identifiers for this node (i.e. ARK and DOI identifiers).
+                      description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
                       type: string
                     license:
@@ -17895,7 +18653,7 @@ paths:
                           readOnly: true
                           type: string
                         identifiers:
-                          description: Dictionary containing the DOI and ARK ID for a preprint associated with the log.
+                          description: Dictionary containing the DOI for a preprint associated with the log.
                           readOnly: true
                           type: string
                         institution:
@@ -18959,7 +19717,7 @@ paths:
   '/users/{user_id}/':
     get:
       description: |-
-        Retrieves the details of a given users.
+        Retrieves the details for a given user.
 
         The returned information includes the user's bibliographic information and the date the user was registered.
 
@@ -19679,6 +20437,101 @@ paths:
       tags:
         - Users
       x-response-schema: Addon Account
+  '/users/{user_id}/identities/{identities_id}/':
+    delete:
+      description: |-
+        Deletes  the specified external identity.
+        #### Permissions
+        External identities may only be deleted by the user they belong to.
+        #### Returns
+        If the request is successful, no content is returned.
+
+        If the request is unsuccessful, a JSON object with an errors key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      parameters:
+        - description: The unique identifier of the user.
+          in: path
+          name: user_id
+          required: true
+          type: string
+        - description: The unique identifier of a user's external identity.
+          in: path
+          name: identities_id
+          required: true
+          type: string
+      responses:
+        '204':
+          description: No content
+      summary: Remove a external identity
+      tags:
+        - Users
+    get:
+      description: |-
+        Retrieves the specified external identity, e.g. ORCID.
+        #### Permissions
+        External identities may only be viewed by the user they belong to.
+        #### Returns
+        Returns a JSON object with a `data` key containing the representation of the requested external identities, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      parameters:
+        - description: The unique identifier of the user.
+          in: path
+          name: user_id
+          required: true
+          type: string
+        - description: The unique identifier of a user's external identity.
+          in: path
+          name: identities_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                attributes:
+                  external_id: 0000-0001-9143-4653
+                  id: ORCID
+                  status: VERFIED
+                id: q7fts
+                links:
+                  self: 'https://api.osf.io/v2/users/q7fts/settings/identities/ORCID/'
+                type: users
+          schema:
+            properties:
+              attributes:
+                description: The properties of the  external identity entity.
+                properties:
+                  external_id:
+                    description: The identifier for the user associated with that external identity.
+                    readOnly: true
+                    type: string
+                  status:
+                    description: The status of the external identity e.g LINK or VERIFIED.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Attributes
+                type: object
+              id:
+                description: The identifier of the external identity provider e.g. ORCID.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the external identity.
+                readOnly: true
+                title: Links
+                type: object
+              type:
+                description: The type identifier of the external identity entity (`external-identities`).
+                readOnly: true
+                type: string
+            title: External Identity Detail
+            type: object
+      summary: Retrieve a external identity
+      tags:
+        - Users
   '/users/{user_id}/institutions/':
     get:
       description: |-
@@ -20124,7 +20977,7 @@ paths:
                       readOnly: true
                       type: string
                     identifiers:
-                      description: A link to the list of identifiers for this node (i.e. ARK and DOI identifiers).
+                      description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
                       type: string
                     license:
@@ -20568,7 +21421,7 @@ paths:
                     registration_schema:
                       links:
                         related:
-                          href: 'https://api.osf.io/v2/metaschemas/564d31db8c5e4a7c9694b2c0/'
+                          href: 'https://api.osf.io/v2/metaschemas/registrations/564d31db8c5e4a7c9694b2c0/'
                           meta: {}
                     root:
                       links:
@@ -20596,6 +21449,73 @@ paths:
       tags:
         - Users
       x-response-schema: Registration
+  '/users/{user_id}/settings/identities/':
+    get:
+      description: |-
+        Retrieves a list of a user's external identities.
+        #### Permissions
+        External identities may only be viewed by the user they belong to.
+        #### Returns
+        Returns a JSON object with a `data` key containing the representation of the requested external identities, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: external_identities_list
+      parameters:
+        - description: The unique identifier of the user.
+          in: path
+          name: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    external_id: 0000-0001-9143-4653
+                    id: ORCID
+                    status: VERFIED
+                  id: q7fts
+                  links:
+                    self: 'https://api.osf.io/v2/users/q7fts/settings/identities/ORCID/'
+                  type: users
+          schema:
+            items:
+              properties:
+                attributes:
+                  description: The properties of the  external identity entity.
+                  properties:
+                    external_id:
+                      description: The identifier for the user associated with that external identity.
+                      readOnly: true
+                      type: string
+                    status:
+                      description: The status of the external identity e.g LINK or VERIFIED.
+                      readOnly: true
+                      type: string
+                  readOnly: true
+                  title: Attributes
+                  type: object
+                id:
+                  description: The identifier of the external identity provider e.g. ORCID.
+                  readOnly: true
+                  type: string
+                links:
+                  description: URLs to alternative representations of the external identity.
+                  readOnly: true
+                  title: Links
+                  type: object
+                type:
+                  description: The type identifier of the external identity entity (`external-identities`).
+                  readOnly: true
+                  type: string
+              title: External Identity Detail
+              type: object
+            type: array
+      summary: List all external identities
+      tags:
+        - Users
   '/view_only_links/{link_id}/':
     get:
       description: |-
@@ -21260,7 +22180,7 @@ paths:
                       readOnly: true
                       type: string
                     identifiers:
-                      description: A link to the list of identifiers for this node (i.e. ARK and DOI identifiers).
+                      description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
                       type: string
                     license:
@@ -22016,6 +22936,7 @@ x-tagGroups:
       - Errors & Error Codes
       - Entities & Entity Collections
       - External Libraries
+      - Changelog
   - name: API Reference
     tags:
       - Addons

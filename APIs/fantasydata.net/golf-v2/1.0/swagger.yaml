@@ -33,6 +33,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/DfsSlatesByTournament/{tournamentid}':
     get:
@@ -565,6 +566,8 @@ definitions:
         type: integer
       Par:
         type: integer
+      PlayerRoundID:
+        type: integer
       Score:
         type: integer
       ToPar:
@@ -612,6 +615,10 @@ definitions:
       Par:
         type: integer
       Pars:
+        type: integer
+      PlayerRoundID:
+        type: integer
+      PlayerTournamentID:
         type: integer
       Score:
         type: integer
@@ -686,6 +693,8 @@ definitions:
       HoleInOnes:
         type: number
       IsAlternate:
+        type: boolean
+      IsWithdrawn:
         type: boolean
       MadeCut:
         type: number
@@ -781,6 +790,8 @@ definitions:
         type: number
       IsAlternate:
         type: boolean
+      IsWithdrawn:
+        type: boolean
       MadeCut:
         type: number
       MadeCutDidNotFinish:
@@ -840,6 +851,8 @@ definitions:
       Number:
         type: integer
       RoundID:
+        type: integer
+      TournamentID:
         type: integer
   Tournament:
     properties:

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-01-01/apimdiagnostics.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimdiagnostics
   x-tags:
@@ -112,29 +111,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Diagnostics
       x-ms-examples:
@@ -205,29 +184,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Diagnostics
       x-ms-examples:
@@ -287,29 +246,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Diagnostics
       x-ms-examples:
@@ -371,29 +310,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Diagnostics
       x-ms-examples:
@@ -459,29 +378,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Diagnostics
       x-ms-examples:
@@ -555,29 +454,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Diagnostics
       x-ms-examples:
@@ -678,61 +557,7 @@ paths:
               value:
                 description: Logger values.
                 items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: Logger details.
-                  properties:
-                    properties:
-                      description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
-                      properties:
-                        credentials:
-                          additionalProperties:
-                            type: string
-                          description: |-
-                            The name and SendRule connection string of the event hub for azureEventHub logger.
-                            Instrumentation key for applicationInsights logger.
-                          example:
-                            connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
-                            name: apim
-                          type: object
-                        description:
-                          description: Logger description.
-                          maxLength: 256
-                          type: string
-                        isBuffered:
-                          description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
-                          type: boolean
-                        loggerType:
-                          description: Logger type.
-                          enum:
-                            - azureEventHub
-                            - applicationInsights
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: LoggerType
-                            values:
-                              - description: Azure Event Hub as log destination.
-                                value: azureEventHub
-                              - description: Azure Application Insights as log destination.
-                                value: applicationInsights
-                      required:
-                        - loggerType
-                        - credentials
+                  $ref: '#/definitions/LoggerContract'
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -740,29 +565,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - DiagnosticLoggers
       x-ms-examples:
@@ -840,29 +645,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - DiagnosticLoggers
       x-ms-examples:
@@ -927,29 +712,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - DiagnosticLoggers
       x-ms-examples:
@@ -1025,42 +790,9 @@ paths:
             description: Logger details.
             properties:
               properties:
-                description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
-                properties:
-                  credentials:
-                    additionalProperties:
-                      type: string
-                    description: |-
-                      The name and SendRule connection string of the event hub for azureEventHub logger.
-                      Instrumentation key for applicationInsights logger.
-                    example:
-                      connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
-                      name: apim
-                    type: object
-                  description:
-                    description: Logger description.
-                    maxLength: 256
-                    type: string
-                  isBuffered:
-                    description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
-                    type: boolean
-                  loggerType:
-                    description: Logger type.
-                    enum:
-                      - azureEventHub
-                      - applicationInsights
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: LoggerType
-                      values:
-                        - description: Azure Event Hub as log destination.
-                          value: azureEventHub
-                        - description: Azure Application Insights as log destination.
-                          value: applicationInsights
-                required:
-                  - loggerType
-                  - credentials
+                $ref: '#/definitions/LoggerContractProperties'
+                description: Logger entity contract properties.
+                x-ms-client-flatten: true
         '201':
           description: Logger was successfully attached to Diagnostic.
           schema:
@@ -1083,71 +815,18 @@ paths:
             description: Logger details.
             properties:
               properties:
-                description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
-                properties:
-                  credentials:
-                    additionalProperties:
-                      type: string
-                    description: |-
-                      The name and SendRule connection string of the event hub for azureEventHub logger.
-                      Instrumentation key for applicationInsights logger.
-                    example:
-                      connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
-                      name: apim
-                    type: object
-                  description:
-                    description: Logger description.
-                    maxLength: 256
-                    type: string
-                  isBuffered:
-                    description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
-                    type: boolean
-                  loggerType:
-                    description: Logger type.
-                    enum:
-                      - azureEventHub
-                      - applicationInsights
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: LoggerType
-                      values:
-                        - description: Azure Event Hub as log destination.
-                          value: azureEventHub
-                        - description: Azure Application Insights as log destination.
-                          value: applicationInsights
-                required:
-                  - loggerType
-                  - credentials
+                $ref: '#/definitions/LoggerContractProperties'
+                description: Logger entity contract properties.
+                x-ms-client-flatten: true
         default:
           description: Error response describing why the operation failed.
           schema:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - DiagnosticLoggers
       x-ms-examples:

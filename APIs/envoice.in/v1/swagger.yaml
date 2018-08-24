@@ -321,6 +321,39 @@ paths:
       summary: Return all of the platform supported currencies
       tags:
         - General
+  /api/general/dateformats:
+    get:
+      consumes: []
+      operationId: GeneralApi_DateFormats
+      parameters:
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              type: string
+            type: array
+      summary: Return all of the platform supported Date Formats
+      tags:
+        - General
   /api/general/uilanguages:
     get:
       consumes: []
@@ -1691,6 +1724,9 @@ definitions:
         description: Indicates the default system currency used by the user for the client
         format: int32
         type: integer
+      CompanyRegistrationNumber:
+        description: Client's Company Registration Number
+        type: string
       Email:
         description: Client email
         type: string
@@ -1731,6 +1767,9 @@ definitions:
         description: Indicates the default system currency used by the user for the client
         format: int32
         type: integer
+      CompanyRegistrationNumber:
+        description: Client's Company Registration Number
+        type: string
       CreatedOn:
         description: Date of creation
         format: date-time
@@ -1772,6 +1811,9 @@ definitions:
         description: Indicates the default system currency used by the user for the client
         format: int32
         type: integer
+      CompanyRegistrationNumber:
+        description: Client's Company Registration Number
+        type: string
       Email:
         description: Client email
         type: string
@@ -1898,6 +1940,7 @@ definitions:
           - OrderUpdated
           - OrderCreated
           - NewPaymentWithTwoCheckout
+          - NewPaymentWithPaymentWall
         type: string
     type: object
   InvoiceAttachmentApiModel:
@@ -2320,6 +2363,7 @@ definitions:
           - Wepay
           - Halkbank
           - TwoCheckout
+          - PaymentWall
         type: string
     type: object
   InvoiceRecurringApiModel:

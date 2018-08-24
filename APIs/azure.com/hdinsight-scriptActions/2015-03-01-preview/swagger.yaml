@@ -41,6 +41,34 @@ parameters:
     name: api-version
     required: true
     type: string
+  ClusterNameParameter:
+    description: The name of the cluster.
+    in: path
+    name: clusterName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupNameParameter:
+    description: The name of the resource group.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ScriptExecutionIdParameter:
+    description: The script execution Id
+    in: path
+    name: scriptExecutionId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ScriptNameParameter:
+    description: The name of the script.
+    in: path
+    name: scriptName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   SubscriptionIdParameter:
     description: The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
@@ -53,16 +81,10 @@ paths:
       description: Executes script actions on the specified HDInsight cluster.
       operationId: Clusters_ExecuteScriptActions
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
         - description: The parameters for executing script actions.
           in: body
           name: parameters
@@ -76,40 +98,27 @@ paths:
               scriptActions:
                 description: The list of run time script actions.
                 items:
-                  description: Describes a script action on a running cluster.
-                  properties:
-                    applicationName:
-                      description: 'The application name of the script action, if any.'
-                      readOnly: true
-                      type: string
-                    name:
-                      description: The name of the script action.
-                      type: string
-                    parameters:
-                      description: The parameters for the script
-                      type: string
-                    roles:
-                      description: The list of roles where script will be executed.
-                      items:
-                        type: string
-                      type: array
-                    uri:
-                      description: The URI to the script.
-                      type: string
-                  required:
-                    - name
-                    - uri
-                    - roles
+                  $ref: '#/definitions/RuntimeScriptAction'
                 type: array
             required:
               - persistOnSuccess
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Accepted response definition.
         '202':
           description: OK response definition.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Clusters
       x-ms-examples:
@@ -139,23 +148,27 @@ paths:
       description: Lists all the persisted script actions for the specified cluster.
       operationId: ScriptActions_ListPersistedScripts
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: OK response definition.
           schema:
             $ref: '#/definitions/ScriptActionsList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - ScriptActions
       x-ms-examples:
@@ -182,26 +195,26 @@ paths:
       description: Deletes a specified persisted script action of the cluster.
       operationId: ScriptActions_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
-        - description: The name of the script.
-          in: path
-          name: scriptName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ScriptNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: OK response definition.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - ScriptActions
       x-ms-examples:
@@ -219,23 +232,27 @@ paths:
       description: Lists all scripts' execution history for the specified cluster.
       operationId: ScriptExecutionHistory_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: OK response definition.
           schema:
             $ref: '#/definitions/ScriptActionExecutionHistoryList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - ScriptExecutionHistory
       x-ms-examples:
@@ -283,52 +300,17 @@ paths:
       description: Gets the script execution detail for the given script execution ID.
       operationId: ScriptActions_GetExecutionDetail
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
-        - description: The script execution Id
-          in: path
-          name: scriptExecutionId
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ScriptExecutionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: OK response definition.
           schema:
             allOf:
-              - description: Describes a script action on a running cluster.
-                properties:
-                  applicationName:
-                    description: 'The application name of the script action, if any.'
-                    readOnly: true
-                    type: string
-                  name:
-                    description: The name of the script action.
-                    type: string
-                  parameters:
-                    description: The parameters for the script
-                    type: string
-                  roles:
-                    description: The list of roles where script will be executed.
-                    items:
-                      type: string
-                    type: array
-                  uri:
-                    description: The URI to the script.
-                    type: string
-                required:
-                  - name
-                  - uri
-                  - roles
+              - $ref: '#/definitions/RuntimeScriptAction'
               - properties:
                   debugInformation:
                     description: The script action execution debug information.
@@ -341,17 +323,7 @@ paths:
                   executionSummary:
                     description: The summary of script action execution result.
                     items:
-                      description: The execution summary of a script action.
-                      properties:
-                        instanceCount:
-                          description: The instance count for a given script action execution status.
-                          format: int32
-                          readOnly: true
-                          type: integer
-                        status:
-                          description: The status of script action execution.
-                          readOnly: true
-                          type: string
+                      $ref: '#/definitions/ScriptActionExecutionSummary'
                     readOnly: true
                     type: array
                   operation:
@@ -372,6 +344,18 @@ paths:
                     readOnly: true
                     type: string
             description: The execution details of a script action.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - ScriptExecutionHistory
       x-ms-examples:
@@ -404,27 +388,26 @@ paths:
       description: Promotes the specified ad-hoc script execution to a persisted script.
       operationId: ScriptExecutionHistory_Promote
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
-        - description: The script execution ID.
-          format: int64
-          in: path
-          name: scriptExecutionId
-          required: true
-          type: integer
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ScriptExecutionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: OK response definition.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Promote
       x-ms-examples:
@@ -449,30 +432,7 @@ definitions:
         description: The list of persisted script action details for the cluster.
         items:
           allOf:
-            - description: Describes a script action on a running cluster.
-              properties:
-                applicationName:
-                  description: 'The application name of the script action, if any.'
-                  readOnly: true
-                  type: string
-                name:
-                  description: The name of the script action.
-                  type: string
-                parameters:
-                  description: The parameters for the script
-                  type: string
-                roles:
-                  description: The list of roles where script will be executed.
-                  items:
-                    type: string
-                  type: array
-                uri:
-                  description: The URI to the script.
-                  type: string
-              required:
-                - name
-                - uri
-                - roles
+            - $ref: '#/definitions/RuntimeScriptAction'
             - properties:
                 debugInformation:
                   description: The script action execution debug information.
@@ -485,17 +445,7 @@ definitions:
                 executionSummary:
                   description: The summary of script action execution result.
                   items:
-                    description: The execution summary of a script action.
-                    properties:
-                      instanceCount:
-                        description: The instance count for a given script action execution status.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      status:
-                        description: The status of script action execution.
-                        readOnly: true
-                        type: string
+                    $ref: '#/definitions/ScriptActionExecutionSummary'
                   readOnly: true
                   type: array
                 operation:
@@ -545,30 +495,7 @@ definitions:
         description: The list of persisted script action details for the cluster.
         items:
           allOf:
-            - description: Describes a script action on a running cluster.
-              properties:
-                applicationName:
-                  description: 'The application name of the script action, if any.'
-                  readOnly: true
-                  type: string
-                name:
-                  description: The name of the script action.
-                  type: string
-                parameters:
-                  description: The parameters for the script
-                  type: string
-                roles:
-                  description: The list of roles where script will be executed.
-                  items:
-                    type: string
-                  type: array
-                uri:
-                  description: The URI to the script.
-                  type: string
-              required:
-                - name
-                - uri
-                - roles
+            - $ref: '#/definitions/RuntimeScriptAction'
             - properties:
                 debugInformation:
                   description: The script action execution debug information.
@@ -581,17 +508,7 @@ definitions:
                 executionSummary:
                   description: The summary of script action execution result.
                   items:
-                    description: The execution summary of a script action.
-                    properties:
-                      instanceCount:
-                        description: The instance count for a given script action execution status.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      status:
-                        description: The status of script action execution.
-                        readOnly: true
-                        type: string
+                    $ref: '#/definitions/ScriptActionExecutionSummary'
                   readOnly: true
                   type: array
                 operation:
@@ -645,30 +562,7 @@ definitions:
         description: The list of persisted script action details for the cluster.
         items:
           allOf:
-            - description: Describes a script action on a running cluster.
-              properties:
-                applicationName:
-                  description: 'The application name of the script action, if any.'
-                  readOnly: true
-                  type: string
-                name:
-                  description: The name of the script action.
-                  type: string
-                parameters:
-                  description: The parameters for the script
-                  type: string
-                roles:
-                  description: The list of roles where script will be executed.
-                  items:
-                    type: string
-                  type: array
-                uri:
-                  description: The URI to the script.
-                  type: string
-              required:
-                - name
-                - uri
-                - roles
+            - $ref: '#/definitions/RuntimeScriptAction'
             - properties:
                 debugInformation:
                   description: The script action execution debug information.
@@ -681,17 +575,7 @@ definitions:
                 executionSummary:
                   description: The summary of script action execution result.
                   items:
-                    description: The execution summary of a script action.
-                    properties:
-                      instanceCount:
-                        description: The instance count for a given script action execution status.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      status:
-                        description: The status of script action execution.
-                        readOnly: true
-                        type: string
+                    $ref: '#/definitions/ScriptActionExecutionSummary'
                   readOnly: true
                   type: array
                 operation:

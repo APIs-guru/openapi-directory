@@ -83,8 +83,15 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/CustomerSubscriptionList'
-        '404':
-          description: NOT FOUND
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+            properties:
+              error:
+                $ref: '#/definitions/ErrorDetails'
+                description: The details of the error.
+            type: object
       tags:
         - CustomerSubscription
       x-ms-examples:
@@ -99,12 +106,10 @@ paths:
               body:
                 value:
                   - id: /subscriptions/dd8597b4-8739-4467-8b10-f8679f62bfbf/resourceGroups/azurestack/providers/Microsoft.AzureStack/registrations/testregistration/customerSubscriptions/E09A4E93-29A7-4EBA-A6D4-76202383F07F
-                    location: global
                     name: testregistration/E09A4E93-29A7-4EBA-A6D4-76202383F07F
                     properties:
                       tenantId: dbab3982-796f-4d03-9908-044c08aef8a2
                     type: Microsoft.AzureStack/registrations/customerSubscriptions
-            '404': {}
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/customerSubscriptions/{customerSubscriptionName}':
@@ -187,8 +192,15 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/CustomerSubscription'
-        '404':
-          description: NOT FOUND
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+            properties:
+              error:
+                $ref: '#/definitions/ErrorDetails'
+                description: The details of the error.
+            type: object
       tags:
         - CustomerSubscription
       x-ms-examples:
@@ -203,12 +215,10 @@ paths:
             '200':
               body:
                 id: /subscriptions/dd8597b4-8739-4467-8b10-f8679f62bfbf/resourceGroups/azurestack/providers/Microsoft.AzureStack/registrations/testregistration/customerSubscriptions/E09A4E93-29A7-4EBA-A6D4-76202383F07F
-                location: global
                 name: testregistration/E09A4E93-29A7-4EBA-A6D4-76202383F07F
                 properties:
                   tenantId: dbab3982-796f-4d03-9908-044c08aef8a2
                 type: Microsoft.AzureStack/registrations/customerSubscriptions
-            '404': {}
     put:
       description: Creates a new customer subscription under a registration.
       operationId: CustomerSubscriptions_Create
@@ -260,7 +270,6 @@ paths:
             '200':
               body:
                 id: ''
-                location: global
                 name: ''
                 properties:
                   tenantId: dbab3982-796f-4d03-9908-044c08aef8a2
@@ -277,32 +286,14 @@ definitions:
             description: ID of the resource.
             readOnly: true
             type: string
-          location:
-            description: Location of the resource.
-            enum:
-              - global
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: Location
-            x-ms-mutability:
-              - create
-              - read
           name:
             description: Name of the resource.
             readOnly: true
             type: string
-          tags:
-            additionalProperties:
-              type: string
-            description: Custom tags for the resource.
-            type: object
           type:
             description: Type of Resource.
             readOnly: true
             type: string
-        required:
-          - location
         type: object
         x-ms-azure-resource: true
     description: Customer subcription.

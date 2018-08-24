@@ -2776,15 +2776,15 @@ definitions:
           TextBody are not. See our template language documentation for more
           information on the syntax for this field.
         type: string
+      TestRenderModel:
+        description: The model to be used when rendering test content.
+        type: object
       TextBody:
         description: |
           The text body content to validate. Must be specified if HtmlBody or
           Subject are not. See our template language documentation for more
           information on the syntax for this field.
         type: string
-      TextRenderModel:
-        description: The model to be used when rendering test content.
-        type: object
   TemplateValidationResponse:
     properties:
       AllContentIsValid:

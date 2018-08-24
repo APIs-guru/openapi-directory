@@ -29,10 +29,44 @@ securityDefinitions:
     name: Authorization
     type: apiKey
 paths:
-  /company/attendance-periods:
+  /company/attendances:
     get:
-      description: List Attendance Periods
-      parameters: []
+      description: 'This endpoint is responsible for fetching attendance data for the company employees. It is possible to paginate results, filter by period and/or specific employees. The result will contain a list of attendance periods, structured as defined here.'
+      parameters:
+        - description: 'First day of the period to be queried. It is inclusive, so the day specified as start_date will also be considered on the results'
+          format: date
+          in: query
+          name: start_date
+          required: true
+          type: string
+        - description: 'Last day of the period to be queried. It is inclusive, so the day specified as end_date will also be considered on the results.'
+          format: date
+          in: query
+          name: end_date
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: A list of Personio employee identifiers to filter the results. Only those employees specified here will be returned.
+          in: query
+          items:
+            type: integer
+          name: employees
+          required: false
+          type: array
+        - default: 200
+          description: Pagination attribute to limit how many attendances will be returned per page
+          in: query
+          minimum: 1
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: 'Pagination attribute to identify which page you are requesting, by the form of telling an offset from the first record that would be returned.'
+          in: query
+          minimum: 0
+          name: offset
+          required: false
+          type: integer
       responses:
         '200':
           description: ''
@@ -40,31 +74,68 @@ paths:
             application/json:
               data:
                 - attributes:
-                    break: 35
+                    break: 50
                     comment: I was productive as hell
-                    created_at: '2017-01-17T10:32:18+0100'
-                    employee:
-                      attributes:
-                        email:
-                          label: Email
-                          value: michael.miller@demo.com
-                        first_name:
-                          label: First name
-                          value: Michael
-                        id: 325659
-                        last_name:
-                          label: Last name
-                          value: Miller
-                      type: Employee
-                    end_time: '2017-01-17T18:00:00+0100'
-                    id: 325659
-                    start_time: '2017-01-17T10:00:00+0100'
-                    status: confirmed
-                    updated_at: '2017-01-17T10:32:18+0100'
+                    date: '2017-01-17'
+                    employee: 325659
+                    end_time: '18:00'
+                    is_holiday: false
+                    is_on_time_off: false
+                    start_time: '9:00'
                   type: AttendancePeriod
+                - attributes:
+                    break: 60
+                    date: '2017-01-18'
+                    employee: 325660
+                    end_time: '18:30'
+                    is_holiday: false
+                    is_on_time_off: true
+                    start_time: '9:30'
+                  type: AttendancePeriod
+              limit: 200
+              offset: 0
               success: true
           schema:
             $ref: '#/definitions/AttendancePeriodsResponse'
+    post:
+      description: 'This endpoint is responsible for adding attendance data for the company employees. It is possible to add attendances for one or many employees at the same time. The payload sent on the request should be a list of attendance periods, in the form of an array containing attendance period objects.'
+      parameters:
+        - description: List of attendance periods to create
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/NewAttendancePeriodRequest'
+      responses:
+        '200':
+          description: The attendance periods were created successfully
+          examples:
+            application/json:
+              data:
+                message: success
+              success: true
+          schema:
+            $ref: '#/definitions/NewAttendancePeriodResponse'
+        '400':
+          description: Invalid request
+          examples:
+            application/json:
+              error:
+                code: 400
+                message: Error when trying to insert Attendances periods rows
+              success: true
+          schema:
+            properties:
+              error:
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                type: object
+              success:
+                type: boolean
+            type: object
   /company/employees:
     get:
       description: List Employees
@@ -162,6 +233,23 @@ paths:
                     status:
                       label: Status
                       value: active
+                    supervisor:
+                      label: Supervisor
+                      value:
+                        attributes:
+                          email:
+                            label: Email
+                            value: max.mustermann@example.org
+                          first_name:
+                            label: First name
+                            value: Max
+                          id:
+                            label: id
+                            value: 423506
+                          last_name:
+                            label: Last name
+                            value: Mustermann
+                        type: Employee
                     termination_date:
                       label: Termination date
                     termination_reason:
@@ -272,6 +360,23 @@ paths:
                   status:
                     label: Status
                     value: active
+                  supervisor:
+                    label: Supervisor
+                    value:
+                      attributes:
+                        email:
+                          label: Email
+                          value: max.mustermann@example.org
+                        first_name:
+                          label: First name
+                          value: Max
+                        id:
+                          label: id
+                          value: 423506
+                        last_name:
+                          label: Last name
+                          value: Mustermann
+                      type: Employee
                   termination_date:
                     label: Termination date
                   termination_reason:
@@ -290,53 +395,6 @@ paths:
               success: true
           schema:
             $ref: '#/definitions/EmployeeResponse'
-  '/company/employees/{employee_id}/attendance-periods':
-    post:
-      description: Create new attendance period
-      parameters:
-        - description: Numeric `id` of the User to perform action with.
-          format: double
-          in: path
-          name: employee_id
-          required: true
-          type: number
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/NewAttendancePeriodRequest'
-      responses:
-        '200':
-          description: ''
-          examples:
-            application/json:
-              data:
-                attributes:
-                  break: 35
-                  comment: I was productive as hell
-                  created_at: '2017-01-17T10:32:18+0100'
-                  employee:
-                    attributes:
-                      email:
-                        label: Email
-                        value: michael.miller@demo.com
-                      first_name:
-                        label: First name
-                        value: Michael
-                      id: 325659
-                      last_name:
-                        label: Last name
-                        value: Miller
-                    type: Employee
-                  end_time: '2017-01-17T18:00:00+0100'
-                  id: 325659
-                  start_time: '2017-01-17T10:00:00+0100'
-                  status: confirmed
-                  updated_at: '2017-01-17T10:32:18+0100'
-                type: AttendancePeriod
-              success: true
-          schema:
-            $ref: '#/definitions/NewAttendancePeriodResponse'
   '/company/time-off/{time_off_id}':
     get:
       description: Absence Period
@@ -494,6 +552,58 @@ definitions:
     title: List All Absence Periods response
     type: object
   AttendancePeriodsResponse:
+    allOf:
+      - $ref: '#/definitions/Response'
+      - properties:
+          data:
+            items:
+              properties:
+                attributes:
+                  items:
+                    properties:
+                      break:
+                        type: integer
+                      comment:
+                        type: string
+                      date:
+                        format: date
+                        type: string
+                      employee:
+                        type: integer
+                      end_time:
+                        pattern: '^\d\d:\d\d$'
+                        type: string
+                      is_holiday:
+                        type: boolean
+                      is_on_time_off:
+                        type: boolean
+                      start_time:
+                        pattern: '^\d\d:\d\d$'
+                        type: string
+                    required:
+                      - employee
+                      - date
+                      - start_time
+                      - end_time
+                      - break
+                      - comment
+                      - is_holiday
+                      - is_on_time_off
+                    type: object
+                  type: array
+                type:
+                  type: string
+              required:
+                - type
+                - attributes
+              type: object
+            type: array
+          limit:
+            type: integer
+          offset:
+            type: integer
+        type: object
+    title: List All Attenance Periods response
     type: object
   Attribute:
     properties:
@@ -584,6 +694,8 @@ definitions:
               $ref: '#/definitions/Attribute'
             status:
               $ref: '#/definitions/Attribute'
+            supervisor:
+              $ref: '#/definitions/Supervisor'
             termination_date:
               $ref: '#/definitions/Attribute'
             termination_reason:
@@ -626,28 +738,65 @@ definitions:
     title: List of Employees
   NewAttendancePeriodRequest:
     example:
-      break: 35
-      comment: I was productive as hell
-      end_time: '2017-01-17T18:00:00+0100'
-      start_time: '2017-01-17T10:00:00+0100'
+      attendances:
+        - break: 120
+          date: '2017-01-18'
+          employee: 1234
+          end_time: '18:00'
+          start_time: '8:00'
+        - break: 35
+          comment: I was productive as hell
+          date: '2017-01-17'
+          employee: 1235
+          end_time: '12:00'
+          start_time: '9:00'
     properties:
-      break:
-        format: int32
-        type: integer
-      comment:
-        type: string
-      end_time:
-        type: string
-      start_time:
-        type: string
-    required:
-      - start_time
-      - end_time
-      - break
-      - comment
+      attendances:
+        items:
+          properties:
+            break:
+              description: Break in minutes
+              format: int32
+              type: integer
+            comment:
+              description: Optional comment
+              type: string
+            date:
+              description: Attendance date as YYYY-MM-DD
+              format: date
+              type: string
+            employee:
+              description: Employee identifier
+              type: integer
+            end_time:
+              description: 'End time as HH:MM'
+              pattern: '^\d\d:\d\d$'
+              type: string
+            start_time:
+              description: 'Start time as HH:MM'
+              pattern: '^\d\d:\d\d$'
+              type: string
+          required:
+            - employee
+            - date
+            - start_time
+            - end_time
+            - break
+            - comment
+          type: object
+        type: array
     title: Create a New Attendance Period request
     type: object
   NewAttendancePeriodResponse:
+    allOf:
+      - $ref: '#/definitions/Response'
+      - properties:
+          data:
+            properties:
+              message:
+                type: string
+            type: object
+        type: object
     type: object
   Office:
     allOf:
@@ -676,4 +825,11 @@ definitions:
       - success
       - data
     title: Default response object
+    type: object
+  Supervisor:
+    allOf:
+      - $ref: '#/definitions/Attribute'
+    properties:
+      value:
+        $ref: '#/definitions/Employee'
     type: object

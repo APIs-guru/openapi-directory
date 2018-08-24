@@ -51,11 +51,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -70,57 +71,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: The response model for the list credential operation.
-            properties:
-              nextLink:
-                description: Gets or sets the next link.
-                type: string
-              value:
-                description: Gets or sets a list of credentials.
-                items:
-                  allOf:
-                    - allOf:
-                        - description: The core properties of ARM resources
-                          properties:
-                            id:
-                              description: Fully qualified resource Id for the resource
-                              readOnly: true
-                              type: string
-                            name:
-                              description: The name of the resource
-                              readOnly: true
-                              type: string
-                            type:
-                              description: The type of the resource.
-                              readOnly: true
-                              type: string
-                          x-ms-azure-resource: true
-                      description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-                  description: Definition of the credential.
-                  properties:
-                    properties:
-                      description: Definition of the credential properties
-                      properties:
-                        creationTime:
-                          description: Gets the creation time.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                          x-nullable: false
-                        description:
-                          description: Gets or sets the description.
-                          type: string
-                        lastModifiedTime:
-                          description: Gets the last modified time.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                          x-nullable: false
-                        userName:
-                          description: Gets the user name of the credential.
-                          readOnly: true
-                          type: string
-                type: array
+            $ref: '#/definitions/CredentialListResult'
       tags:
         - Credential
       x-ms-examples:
@@ -1566,11 +1517,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of credential.
           in: path
           name: credentialName
@@ -1608,7 +1560,7 @@ paths:
           parameters:
             api-version: '2015-10-31'
             automationAccountName: myAutomationAccount20
-            nodeConfigurationName: SetupServer.localhost
+            credentialName: myCredential
             resourceGroupName: rg
             subscriptionId: subid
           responses:
@@ -1628,11 +1580,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of credential.
           in: path
           name: credentialName
@@ -1652,48 +1605,7 @@ paths:
         '200':
           description: OK
           schema:
-            allOf:
-              - allOf:
-                  - description: The core properties of ARM resources
-                    properties:
-                      id:
-                        description: Fully qualified resource Id for the resource
-                        readOnly: true
-                        type: string
-                      name:
-                        description: The name of the resource
-                        readOnly: true
-                        type: string
-                      type:
-                        description: The type of the resource.
-                        readOnly: true
-                        type: string
-                    x-ms-azure-resource: true
-                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-            description: Definition of the credential.
-            properties:
-              properties:
-                description: Definition of the credential properties
-                properties:
-                  creationTime:
-                    description: Gets the creation time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  lastModifiedTime:
-                    description: Gets the last modified time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  userName:
-                    description: Gets the user name of the credential.
-                    readOnly: true
-                    type: string
+            $ref: '#/definitions/Credential'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1742,11 +1654,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The parameters supplied to the Update credential operation.
           in: path
           name: credentialName
@@ -1757,23 +1670,7 @@ paths:
           name: parameters
           required: true
           schema:
-            description: The parameters supplied to the Update credential operation.
-            properties:
-              name:
-                description: Gets or sets the name of the credential.
-                type: string
-              properties:
-                description: The properties of the Update credential
-                properties:
-                  description:
-                    description: Gets or sets the description of the credential.
-                    type: string
-                  password:
-                    description: Gets or sets the password of the credential.
-                    type: string
-                  userName:
-                    description: Gets or sets the user name of the credential.
-                    type: string
+            $ref: '#/definitions/CredentialUpdateParameters'
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -1788,48 +1685,7 @@ paths:
         '200':
           description: OK
           schema:
-            allOf:
-              - allOf:
-                  - description: The core properties of ARM resources
-                    properties:
-                      id:
-                        description: Fully qualified resource Id for the resource
-                        readOnly: true
-                        type: string
-                      name:
-                        description: The name of the resource
-                        readOnly: true
-                        type: string
-                      type:
-                        description: The type of the resource.
-                        readOnly: true
-                        type: string
-                    x-ms-azure-resource: true
-                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-            description: Definition of the credential.
-            properties:
-              properties:
-                description: Definition of the credential properties
-                properties:
-                  creationTime:
-                    description: Gets the creation time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  lastModifiedTime:
-                    description: Gets the last modified time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  userName:
-                    description: Gets the user name of the credential.
-                    readOnly: true
-                    type: string
+            $ref: '#/definitions/Credential'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1884,11 +1740,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The parameters supplied to the create or update credential operation.
           in: path
           name: credentialName
@@ -1899,29 +1756,7 @@ paths:
           name: parameters
           required: true
           schema:
-            description: The parameters supplied to the create or update credential operation.
-            properties:
-              name:
-                description: Gets or sets the name of the credential.
-                type: string
-              properties:
-                description: The properties of the create cerdential operation.
-                properties:
-                  description:
-                    description: Gets or sets the description of the credential.
-                    type: string
-                  password:
-                    description: Gets or sets the password of the credential.
-                    type: string
-                  userName:
-                    description: Gets or sets the user name of the credential.
-                    type: string
-                required:
-                  - userName
-                  - password
-            required:
-              - name
-              - properties
+            $ref: '#/definitions/CredentialCreateOrUpdateParameters'
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -1936,93 +1771,11 @@ paths:
         '200':
           description: OK
           schema:
-            allOf:
-              - allOf:
-                  - description: The core properties of ARM resources
-                    properties:
-                      id:
-                        description: Fully qualified resource Id for the resource
-                        readOnly: true
-                        type: string
-                      name:
-                        description: The name of the resource
-                        readOnly: true
-                        type: string
-                      type:
-                        description: The type of the resource.
-                        readOnly: true
-                        type: string
-                    x-ms-azure-resource: true
-                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-            description: Definition of the credential.
-            properties:
-              properties:
-                description: Definition of the credential properties
-                properties:
-                  creationTime:
-                    description: Gets the creation time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  lastModifiedTime:
-                    description: Gets the last modified time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  userName:
-                    description: Gets the user name of the credential.
-                    readOnly: true
-                    type: string
+            $ref: '#/definitions/Credential'
         '201':
           description: Created
           schema:
-            allOf:
-              - allOf:
-                  - description: The core properties of ARM resources
-                    properties:
-                      id:
-                        description: Fully qualified resource Id for the resource
-                        readOnly: true
-                        type: string
-                      name:
-                        description: The name of the resource
-                        readOnly: true
-                        type: string
-                      type:
-                        description: The type of the resource.
-                        readOnly: true
-                        type: string
-                    x-ms-azure-resource: true
-                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-            description: Definition of the credential.
-            properties:
-              properties:
-                description: Definition of the credential properties
-                properties:
-                  creationTime:
-                    description: Gets the creation time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  lastModifiedTime:
-                    description: Gets the last modified time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  userName:
-                    description: Gets the user name of the credential.
-                    readOnly: true
-                    type: string
+            $ref: '#/definitions/Credential'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -2072,4 +1825,100 @@ paths:
                   lastModifiedTime: '2017-03-26T21:04:10.27+00:00'
                   userName: mylingaiah
               headers: {}
-definitions: {}
+definitions:
+  Credential:
+    allOf:
+      - allOf:
+          - $ref: '#/definitions/Resource'
+        description: ARM proxy resource.
+        properties: {}
+        type: object
+    description: Definition of the credential.
+    properties:
+      properties:
+        $ref: '#/definitions/CredentialProperties'
+        description: Gets or sets the properties of the credential.
+        x-ms-client-flatten: true
+  CredentialCreateOrUpdateParameters:
+    description: The parameters supplied to the create or update credential operation.
+    properties:
+      name:
+        description: Gets or sets the name of the credential.
+        type: string
+      properties:
+        $ref: '#/definitions/CredentialCreateOrUpdateProperties'
+        description: Gets or sets the properties of the credential.
+        x-ms-client-flatten: true
+    required:
+      - name
+      - properties
+  CredentialCreateOrUpdateProperties:
+    description: The properties of the create cerdential operation.
+    properties:
+      description:
+        description: Gets or sets the description of the credential.
+        type: string
+      password:
+        description: Gets or sets the password of the credential.
+        type: string
+      userName:
+        description: Gets or sets the user name of the credential.
+        type: string
+    required:
+      - userName
+      - password
+  CredentialListResult:
+    description: The response model for the list credential operation.
+    properties:
+      nextLink:
+        description: Gets or sets the next link.
+        type: string
+      value:
+        description: Gets or sets a list of credentials.
+        items:
+          $ref: '#/definitions/Credential'
+        type: array
+  CredentialProperties:
+    description: Definition of the credential properties
+    properties:
+      creationTime:
+        description: Gets the creation time.
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      description:
+        description: Gets or sets the description.
+        type: string
+      lastModifiedTime:
+        description: Gets the last modified time.
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      userName:
+        description: Gets the user name of the credential.
+        readOnly: true
+        type: string
+  CredentialUpdateParameters:
+    description: The parameters supplied to the Update credential operation.
+    properties:
+      name:
+        description: Gets or sets the name of the credential.
+        type: string
+      properties:
+        $ref: '#/definitions/CredentialUpdateProperties'
+        description: Gets or sets the properties of the variable.
+        x-ms-client-flatten: true
+  CredentialUpdateProperties:
+    description: The properties of the Update credential
+    properties:
+      description:
+        description: Gets or sets the description of the credential.
+        type: string
+      password:
+        description: Gets or sets the password of the credential.
+        type: string
+      userName:
+        description: Gets or sets the user name of the credential.
+        type: string

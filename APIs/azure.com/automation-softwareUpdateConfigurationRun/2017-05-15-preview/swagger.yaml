@@ -95,92 +95,7 @@ paths:
         '200':
           description: Return list of software update configurations runs.
           schema:
-            description: result of listing all software update configuration runs
-            properties:
-              nextLink:
-                description: link to next page of results.
-                type: string
-              value:
-                description: outer object returned when listing all software update configuration runs
-                items:
-                  description: Software update configuration Run properties.
-                  properties:
-                    id:
-                      description: Resource Id of the software update configuration run
-                      readOnly: true
-                      type: string
-                    name:
-                      description: Name of the software update configuration run.
-                      readOnly: true
-                      type: string
-                    properties:
-                      description: Software update configuration properties.
-                      properties:
-                        computerCount:
-                          description: Number of computers in the software update configuration run.
-                          readOnly: true
-                          type: integer
-                        configuredDuration:
-                          description: configured duration for the software update configuration run.
-                          readOnly: true
-                          type: string
-                        createdBy:
-                          description: 'createdBy property, which only appears in the response.'
-                          readOnly: true
-                          type: string
-                        creationTime:
-                          description: 'Creation time of theresource, which only appears in the response.'
-                          format: date-time
-                          readOnly: true
-                          type: string
-                          x-nullable: false
-                        endTime:
-                          description: End time of the software update configuration run.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                          x-nullable: true
-                        failedCount:
-                          description: Number of computers with failed status.
-                          readOnly: true
-                          type: integer
-                        lastModifiedBy:
-                          description: 'lastModifiedBy property, which only appears in the response.'
-                          readOnly: true
-                          type: string
-                        lastModifiedTime:
-                          description: 'Last time resource was modified, which only appears in the response.'
-                          format: date-time
-                          readOnly: true
-                          type: string
-                          x-nullable: false
-                        osType:
-                          description: Operating system target of the software update configuration triggered this run
-                          readOnly: true
-                          type: string
-                        softwareUpdateConfiguration:
-                          description: Software update configuration Run Navigation model.
-                          properties:
-                            name:
-                              description: Name of the software update configuration triggered the software update configuration run
-                              readOnly: true
-                              type: string
-                          type: object
-                        startTime:
-                          description: Etart time of the software update configuration run.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                          x-nullable: false
-                        status:
-                          description: Status of the software update configuration run.
-                          readOnly: true
-                          type: string
-                  type: object
-                  x-ms-azure-resource: false
-                type: array
-        '404':
-          description: 'Resource group, or account doesn''t exist.'
+            $ref: '#/definitions/softwareUpdateConfigurationRunListResult'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -240,9 +155,6 @@ paths:
                       startTime: '2017-10-23T01:33:01.8818952+00:00'
                       status: Failed
               headers: {}
-            '404':
-              code: NotFound
-              message: '{"Message":"Could not find the account. SubscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab AccountName: myaccount"}'
         List software update configuration machine runs:
           parameters:
             api-version: 2017-05-15-preview
@@ -286,9 +198,6 @@ paths:
                       startTime: '2017-10-23T01:33:01.8818952+00:00'
                       status: Succeeded
               headers: {}
-            '404':
-              code: NotFound
-              message: '{"Message":"Could not find the account. SubscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab AccountName: myaccount"}'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationRuns/{softwareUpdateConfigurationRunId}':
     get:
       description: Get a single software update configuration Run by Id.
@@ -337,83 +246,7 @@ paths:
         '200':
           description: A single software update configuration Run.
           schema:
-            description: Software update configuration Run properties.
-            properties:
-              id:
-                description: Resource Id of the software update configuration run
-                readOnly: true
-                type: string
-              name:
-                description: Name of the software update configuration run.
-                readOnly: true
-                type: string
-              properties:
-                description: Software update configuration properties.
-                properties:
-                  computerCount:
-                    description: Number of computers in the software update configuration run.
-                    readOnly: true
-                    type: integer
-                  configuredDuration:
-                    description: configured duration for the software update configuration run.
-                    readOnly: true
-                    type: string
-                  createdBy:
-                    description: 'createdBy property, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  creationTime:
-                    description: 'Creation time of theresource, which only appears in the response.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  endTime:
-                    description: End time of the software update configuration run.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: true
-                  failedCount:
-                    description: Number of computers with failed status.
-                    readOnly: true
-                    type: integer
-                  lastModifiedBy:
-                    description: 'lastModifiedBy property, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  lastModifiedTime:
-                    description: 'Last time resource was modified, which only appears in the response.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  osType:
-                    description: Operating system target of the software update configuration triggered this run
-                    readOnly: true
-                    type: string
-                  softwareUpdateConfiguration:
-                    description: Software update configuration Run Navigation model.
-                    properties:
-                      name:
-                        description: Name of the software update configuration triggered the software update configuration run
-                        readOnly: true
-                        type: string
-                    type: object
-                  startTime:
-                    description: Etart time of the software update configuration run.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  status:
-                    description: Status of the software update configuration run.
-                    readOnly: true
-                    type: string
-            type: object
-            x-ms-azure-resource: false
-        '404':
-          description: 'Resource group, account, or software update configuration doesn''t exist.'
+            $ref: '#/definitions/softwareUpdateConfigurationRun'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -455,6 +288,98 @@ paths:
                   startTime: '2017-10-23T02:30:36.2401233+00:00'
                   status: Succeeded
               headers: {}
-            '404':
-              code: NotFound
-              message: Software update configuration run not found
+definitions:
+  softwareUpdateConfigurationRun:
+    description: Software update configuration Run properties.
+    properties:
+      id:
+        description: Resource Id of the software update configuration run
+        readOnly: true
+        type: string
+      name:
+        description: Name of the software update configuration run.
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/softwareUpdateConfigurationRunProperties'
+        description: Software update configuration Run properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-azure-resource: false
+  softwareUpdateConfigurationRunListResult:
+    description: result of listing all software update configuration runs
+    properties:
+      nextLink:
+        description: link to next page of results.
+        type: string
+      value:
+        description: outer object returned when listing all software update configuration runs
+        items:
+          $ref: '#/definitions/softwareUpdateConfigurationRun'
+        type: array
+  softwareUpdateConfigurationRunProperties:
+    description: Software update configuration properties.
+    properties:
+      computerCount:
+        description: Number of computers in the software update configuration run.
+        readOnly: true
+        type: integer
+      configuredDuration:
+        description: configured duration for the software update configuration run.
+        readOnly: true
+        type: string
+      createdBy:
+        description: 'createdBy property, which only appears in the response.'
+        readOnly: true
+        type: string
+      creationTime:
+        description: 'Creation time of theresource, which only appears in the response.'
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      endTime:
+        description: End time of the software update configuration run.
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: true
+      failedCount:
+        description: Number of computers with failed status.
+        readOnly: true
+        type: integer
+      lastModifiedBy:
+        description: 'lastModifiedBy property, which only appears in the response.'
+        readOnly: true
+        type: string
+      lastModifiedTime:
+        description: 'Last time resource was modified, which only appears in the response.'
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      osType:
+        description: Operating system target of the software update configuration triggered this run
+        readOnly: true
+        type: string
+      softwareUpdateConfiguration:
+        $ref: '#/definitions/updateConfigurationNavigation'
+        description: software update configuration triggered this run
+      startTime:
+        description: Etart time of the software update configuration run.
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      status:
+        description: Status of the software update configuration run.
+        readOnly: true
+        type: string
+  updateConfigurationNavigation:
+    description: Software update configuration Run Navigation model.
+    properties:
+      name:
+        description: Name of the software update configuration triggered the software update configuration run
+        readOnly: true
+        type: string
+    type: object

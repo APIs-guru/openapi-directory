@@ -33,6 +33,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/AreAnyGamesInProgress':
     get:
@@ -381,6 +382,10 @@ definitions:
         type: number
       Period:
         type: string
+      Periods:
+        items:
+          $ref: '#/definitions/Period'
+        type: array
       PointSpread:
         type: number
       Round:
@@ -402,6 +407,22 @@ definitions:
       TournamentID:
         type: integer
       Updated:
+        type: string
+  Period:
+    properties:
+      AwayScore:
+        type: integer
+      GameID:
+        type: integer
+      HomeScore:
+        type: integer
+      Name:
+        type: string
+      Number:
+        type: integer
+      PeriodID:
+        type: integer
+      Type:
         type: string
   Player:
     properties:

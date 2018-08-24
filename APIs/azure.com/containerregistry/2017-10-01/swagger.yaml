@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: containerregistry
   x-tags:
@@ -528,6 +527,24 @@ paths:
           responses:
             '200': {}
             '202': {}
+        ImportImageFromPublicRegistry:
+          parameters:
+            api-version: '2017-10-01'
+            parameters:
+              mode: Force
+              source:
+                registryUri: registry.hub.docker.com
+                sourceImage: library/hello-world
+              targetTags:
+                - 'targetRepository:targetTag'
+              untaggedTargetRepositories:
+                - targetRepository1
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listCredentials':
     post:
@@ -561,6 +578,37 @@ paths:
                   - name: password2
                     value: '00000000000000000000000000000000'
                 username: myRegistry
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listPolicies':
+    get:
+      description: Lists the policies for the specified container registry.
+      operationId: Registries_ListPolicies
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/RegistryNameParameter'
+      responses:
+        '200':
+          description: The request was successful; the registry policies were retrieved and returned successfully.
+          schema:
+            $ref: '#/definitions/RegistryPolicies'
+      tags:
+        - Registries
+      x-ms-examples:
+        RegistryListPolicies:
+          parameters:
+            api-version: '2017-10-01'
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                quarantinePolicy:
+                  status: enabled
+                trustPolicy:
+                  status: enabled
+                  type: Notary
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listUsages':
     get:
       description: Gets the quota usages for the specified container registry.
@@ -882,6 +930,53 @@ paths:
                 tags:
                   key: value
                 type: Microsoft.ContainerRegistry/registries/replications
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/updatePolicies':
+    post:
+      description: Updates the policies for the specified container registry.
+      operationId: Registries_UpdatePolicies
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/RegistryNameParameter'
+        - description: The parameters for updating policies of a container registry.
+          in: body
+          name: registryPoliciesUpdateParameters
+          required: true
+          schema:
+            $ref: '#/definitions/RegistryPolicies'
+      responses:
+        '200':
+          description: The request was successful; the request was well-formed and received properly.
+          schema:
+            $ref: '#/definitions/RegistryPolicies'
+        '202':
+          description: The request was successful; the operation will complete asynchronously.
+      tags:
+        - Registries
+      x-ms-examples:
+        RegistryUpdatePolicies:
+          parameters:
+            api-version: '2017-10-01'
+            registryName: myRegistry
+            registryPoliciesUpdateParameters:
+              quarantinePolicy:
+                status: disabled
+              trustPolicy:
+                status: enabled
+                type: Notary
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                quarantinePolicy:
+                  status: disabled
+                trustPolicy:
+                  status: enabled
+                  type: Notary
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks':
     get:
@@ -1424,14 +1519,16 @@ definitions:
     type: object
   ImportSource:
     properties:
+      registryUri:
+        description: The address of the source registry.
+        type: string
       resourceId:
-        description: The resource identifier of the target Azure Container Registry.
+        description: The resource identifier of the source Azure Container Registry.
         type: string
       sourceImage:
         description: "Repository name of the source image.\r\nSpecify an image by repository ('hello-world'). This will use the 'latest' tag.\r\nSpecify an image by tag ('hello-world:latest').\r\nSpecify an image by sha256-based manifest digest ('hello-world@sha256:abc123')."
         type: string
     required:
-      - resourceId
       - sourceImage
     type: object
   OperationDefinition:
@@ -1443,6 +1540,13 @@ definitions:
       name:
         description: 'Operation name: {provider}/{resource}/{operation}.'
         type: string
+      origin:
+        description: The origin information of the container registry operation.
+        type: string
+      properties:
+        $ref: '#/definitions/OperationPropertiesDefinition'
+        description: The properties information for the container registry operation.
+        x-ms-client-flatten: true
     type: object
   OperationDisplayDefinition:
     description: The display information for a container registry operation.
@@ -1471,6 +1575,57 @@ definitions:
         items:
           $ref: '#/definitions/OperationDefinition'
         type: array
+    type: object
+  OperationMetricSpecificationDefinition:
+    description: The definition of Azure Monitoring metric.
+    properties:
+      aggregationType:
+        description: Metric aggregation type.
+        type: string
+      displayDescription:
+        description: Metric description.
+        type: string
+      displayName:
+        description: Metric display name.
+        type: string
+      internalMetricName:
+        description: Internal metric name.
+        type: string
+      name:
+        description: Metric name.
+        type: string
+      unit:
+        description: Metric unit.
+        type: string
+    type: object
+  OperationPropertiesDefinition:
+    description: The definition of Azure Monitoring properties.
+    properties:
+      serviceSpecification:
+        $ref: '#/definitions/OperationServiceSpecificationDefinition'
+        description: The definition of Azure Monitoring service.
+    type: object
+  OperationServiceSpecificationDefinition:
+    description: The definition of Azure Monitoring metrics list.
+    properties:
+      metricSpecifications:
+        description: A list of Azure Monitoring metrics definition.
+        items:
+          $ref: '#/definitions/OperationMetricSpecificationDefinition'
+        type: array
+    type: object
+  QuarantinePolicy:
+    description: An object that represents quarantine policy for a container registry.
+    properties:
+      status:
+        description: The value that indicates whether the policy is enabled or not.
+        enum:
+          - enabled
+          - disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: PolicyStatus
     type: object
   RegenerateCredentialParameters:
     description: The parameters used to regenerate the login credential.
@@ -1575,6 +1730,16 @@ definitions:
       value:
         description: The password value.
         type: string
+    type: object
+  RegistryPolicies:
+    description: An object that represents policies for a container registry.
+    properties:
+      quarantinePolicy:
+        $ref: '#/definitions/QuarantinePolicy'
+        description: An object that represents quarantine policy for a container registry.
+      trustPolicy:
+        $ref: '#/definitions/TrustPolicy'
+        description: An object that represents content trust policy for a container registry.
     type: object
   RegistryProperties:
     description: The properties of a container registry.
@@ -1866,6 +2031,27 @@ definitions:
         description: The direct URL to the content.
         type: string
     type: object
+  TrustPolicy:
+    description: An object that represents content trust policy for a container registry.
+    properties:
+      status:
+        description: The value that indicates whether the policy is enabled or not.
+        enum:
+          - enabled
+          - disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: PolicyStatus
+      type:
+        description: The type of trust policy.
+        enum:
+          - Notary
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: TrustPolicyType
+    type: object
   Webhook:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -1915,6 +2101,7 @@ definitions:
           enum:
             - push
             - delete
+            - quarantine
           type: string
           x-ms-enum:
             modelAsString: true
@@ -1958,6 +2145,7 @@ definitions:
           enum:
             - push
             - delete
+            - quarantine
           type: string
           x-ms-enum:
             modelAsString: true
@@ -1996,6 +2184,7 @@ definitions:
           enum:
             - push
             - delete
+            - quarantine
           type: string
           x-ms-enum:
             modelAsString: true

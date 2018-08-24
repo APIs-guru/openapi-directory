@@ -34,6 +34,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/AreAnyGamesInProgress':
     get:
@@ -321,6 +322,10 @@ definitions:
     properties:
       ConferenceID:
         type: integer
+      ConferenceName:
+        type: string
+      DivisionName:
+        type: string
       Name:
         type: string
       Teams:
@@ -408,6 +413,10 @@ definitions:
       ApRank:
         type: integer
       CoachesRank:
+        type: integer
+      Conference:
+        type: string
+      ConferenceID:
         type: integer
       ConferenceLosses:
         type: integer

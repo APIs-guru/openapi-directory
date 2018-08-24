@@ -1305,6 +1305,31 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys':
     get:
       description: Lists the read-only access keys for the specified Azure Cosmos DB database account.
+      operationId: DatabaseAccounts_GetReadOnlyKeys
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/DatabaseAccountListReadOnlyKeysResult'
+      x-ms-examples:
+        CosmosDBDatabaseAccountListReadOnlyKeys:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                primaryReadonlyMasterKey: primaryReadonlyMasterKey
+                secondaryReadonlyMasterKey: secondaryReadonlyMasterKey
+    post:
+      description: Lists the read-only access keys for the specified Azure Cosmos DB database account.
       operationId: DatabaseAccounts_ListReadOnlyKeys
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'

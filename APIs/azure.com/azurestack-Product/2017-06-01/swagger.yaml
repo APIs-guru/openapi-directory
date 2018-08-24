@@ -75,8 +75,15 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ProductList'
-        '404':
-          description: NOT FOUND
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+            properties:
+              error:
+                $ref: '#/definitions/ErrorDetails'
+                description: The details of the error.
+            type: object
       tags:
         - Product
       x-ms-examples:
@@ -91,7 +98,6 @@ paths:
               body:
                 value:
                   - id: /subscriptions/dd8597b4-8739-4467-8b10-f8679f62bfbf/resourceGroups/azurestack/providers/Microsoft.AzureStack/registrations/testregistration/products/Microsoft.OSTCExtensions.VMAccessForLinux.1.4.7.1
-                    location: global
                     name: testregistration/Microsoft.OSTCExtensions.VMAccessForLinux.1.4.7.1
                     properties:
                       displayName: VM Access For Linux Extension
@@ -113,7 +119,6 @@ paths:
                       vmExtensionType: VMAccessForLinux
                     type: Microsoft.AzureStack/registrations/products
                   - id: /subscriptions/dd8597b4-8739-4467-8b10-f8679f62bfbf/resourceGroups/azurestack/providers/Microsoft.AzureStack/registrations/testregistration/products/dummysharepoint
-                    location: global
                     name: testregistration/dummysharepoint
                     properties:
                       displayName: Display name for dummy SharePoint
@@ -135,7 +140,6 @@ paths:
                       sku: Dummy sku
                     type: Microsoft.AzureStack/registrations/products
                   - id: /subscriptions/dd8597b4-8739-4467-8b10-f8679f62bfbf/resourceGroups/azurestack/providers/Microsoft.AzureStack/registrations/testregistration/products/dummysharepointTest526
-                    location: global
                     name: testregistration/dummysharepointTest526
                     properties:
                       displayName: Display name for dummy SharePoint
@@ -157,7 +161,6 @@ paths:
                       sku: Dummy sku
                     type: Microsoft.AzureStack/registrations/products
                   - id: /subscriptions/dd8597b4-8739-4467-8b10-f8679f62bfbf/resourceGroups/azurestack/providers/Microsoft.AzureStack/registrations/testregistration/products/test.product.976fe55e-6921-47bb-b8ba-718bba70c72d
-                    location: global
                     name: testregistration/test.product.976fe55e-6921-47bb-b8ba-718bba70c72d
                     properties:
                       displayName: Display name for dummy SharePoint
@@ -179,7 +182,6 @@ paths:
                       sku: Dummy sku
                     type: Microsoft.AzureStack/registrations/products
                   - id: /subscriptions/dd8597b4-8739-4467-8b10-f8679f62bfbf/resourceGroups/azurestack/providers/Microsoft.AzureStack/registrations/testregistration/products/wordpress4-4
-                    location: global
                     name: testregistration/wordpress4-4
                     properties:
                       displayName: WordPress
@@ -200,7 +202,6 @@ paths:
                       publisherIdentifier: bitnami
                       sku: 4-4
                     type: Microsoft.AzureStack/registrations/products
-            '404': {}
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/products/{productName}':
@@ -237,8 +238,15 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Product'
-        '404':
-          description: NOT FOUND
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+            properties:
+              error:
+                $ref: '#/definitions/ErrorDetails'
+                description: The details of the error.
+            type: object
       tags:
         - Product
       x-ms-examples:
@@ -253,7 +261,6 @@ paths:
             '200':
               body:
                 id: /subscriptions/dd8597b4-8739-4467-8b10-f8679f62bfbf/resourceGroups/azurestack/providers/Microsoft.AzureStack/registrations/testregistration/products/Microsoft.OSTCExtensions.VMAccessForLinux.1.4.7.1
-                location: global
                 name: testregistration/Microsoft.OSTCExtensions.VMAccessForLinux.1.4.7.1
                 properties:
                   displayName: VM Access For Linux Extension
@@ -274,7 +281,6 @@ paths:
                   sku: ''
                   vmExtensionType: VMAccessForLinux
                 type: Microsoft.AzureStack/registrations/products
-            '404': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/products/{productName}/listDetails':
     post:
       description: Returns the extended properties of a product.
@@ -433,32 +439,14 @@ definitions:
             description: ID of the resource.
             readOnly: true
             type: string
-          location:
-            description: Location of the resource.
-            enum:
-              - global
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: Location
-            x-ms-mutability:
-              - create
-              - read
           name:
             description: Name of the resource.
             readOnly: true
             type: string
-          tags:
-            additionalProperties:
-              type: string
-            description: Custom tags for the resource.
-            type: object
           type:
             description: Type of Resource.
             readOnly: true
             type: string
-        required:
-          - location
         type: object
         x-ms-azure-resource: true
     description: Product information.

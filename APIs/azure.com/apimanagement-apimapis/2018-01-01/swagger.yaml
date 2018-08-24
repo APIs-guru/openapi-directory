@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-01-01/apimapis.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimapis
   x-tags:
@@ -194,29 +193,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Apis
       x-ms-examples:
@@ -335,29 +314,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Apis
       x-ms-examples:
@@ -422,29 +381,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Apis
       x-ms-examples:
@@ -473,6 +412,30 @@ paths:
                     header: Ocp-Apim-Subscription-Key
                     query: subscription-key
                   type: soap
+                type: Microsoft.ApiManagement/service/apis
+        ApiManagementGetApiRevisionContract:
+          parameters:
+            api-version: '2018-01-01'
+            apiId: echo-api;rev=3
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api;rev=3
+                name: echo-api;rev=3
+                properties:
+                  apiRevision: '3'
+                  apiRevisionDescription: fixed bug in contract
+                  displayName: Service
+                  path: schulte
+                  protocols:
+                    - https
+                  serviceUrl: 'https://api.plexonline.com/DataSource/Service.asmx'
+                  subscriptionKeyParameterNames:
+                    header: Ocp-Apim-Subscription-Key
+                    query: subscription-key
                 type: Microsoft.ApiManagement/service/apis
     head:
       description: Gets the entity state (Etag) version of the API specified by its identifier.
@@ -517,29 +480,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Apis
       x-ms-examples:
@@ -605,29 +548,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Apis
       x-ms-examples:
@@ -716,29 +639,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Apis
       x-ms-examples:
@@ -815,16 +718,17 @@ paths:
         ApiManagementCreateApiRevision:
           parameters:
             api-version: '2018-01-01'
-            apiId: 5a838fd48f33670ed070d77c;rev=4
+            apiId: echo-api;rev=4
             parameters:
               properties:
+                apiRevisionDescription: moved to swagger petstore backend
                 description: 'This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.'
-                displayName: Swagger Petstore V2
+                displayName: Echo API
                 isCurrent: false
                 path: petstore2
                 protocols:
                   - https
-                serviceUrl: 'http://petstore.swagger.io/v4'
+                serviceUrl: 'http://petstore.swagger.io/v5'
                 subscriptionKeyParameterNames:
                   header: Ocp-Apim-Subscription-Key
                   query: subscription-key
@@ -834,32 +738,34 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5a838fd48f33670ed070d77c;rev=4
-                name: 5a838fd48f33670ed070d77c;rev=4
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api;rev=4
+                name: echo-api;rev=4
                 properties:
                   apiRevision: '4'
+                  apiRevisionDescription: moved to swagger petstore backend
                   description: 'This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.'
-                  displayName: Swagger Petstore 2
+                  displayName: Echo API
                   path: petstore2
                   protocols:
                     - https
-                  serviceUrl: 'http://petstore.swagger.io/v4'
+                  serviceUrl: 'http://petstore.swagger.io/v5'
                   subscriptionKeyParameterNames:
                     header: Ocp-Apim-Subscription-Key
                     query: subscription-key
                 type: Microsoft.ApiManagement/service/apis
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5a838fd48f33670ed070d77c;rev=4
-                name: 5a838fd48f33670ed070d77c;rev=4
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api;rev=4
+                name: echo-api;rev=4
                 properties:
                   apiRevision: '4'
+                  apiRevisionDescription: moved to swagger petstore backend
                   description: 'This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.'
-                  displayName: Swagger Petstore 2
+                  displayName: Echo API
                   path: petstore2
                   protocols:
                     - https
-                  serviceUrl: 'http://petstore.swagger.io/v4'
+                  serviceUrl: 'http://petstore.swagger.io/v5'
                   subscriptionKeyParameterNames:
                     header: Ocp-Apim-Subscription-Key
                     query: subscription-key
@@ -1124,32 +1030,7 @@ paths:
               value:
                 description: Page values.
                 items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: Diagnostic details.
-                  properties:
-                    properties:
-                      description: Diagnostic Entity Properties
-                      properties:
-                        enabled:
-                          description: Indicates whether a diagnostic should receive data or not.
-                          type: boolean
-                      required:
-                        - enabled
+                  $ref: '#/definitions/DiagnosticContract'
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -1157,29 +1038,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiDiagnostics
       x-ms-examples:
@@ -1260,29 +1121,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiDiagnostics
       x-ms-examples:
@@ -1364,42 +1205,18 @@ paths:
             description: Diagnostic details.
             properties:
               properties:
-                description: Diagnostic Entity Properties
-                properties:
-                  enabled:
-                    description: Indicates whether a diagnostic should receive data or not.
-                    type: boolean
-                required:
-                  - enabled
+                $ref: '#/definitions/DiagnosticContractProperties'
+                description: Diagnostic entity contract properties.
+                x-ms-client-flatten: true
         default:
           description: Error response describing why the operation failed.
           schema:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiDiagnostics
       x-ms-examples:
@@ -1471,29 +1288,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiDiagnostics
       x-ms-examples:
@@ -1562,13 +1359,9 @@ paths:
             description: Diagnostic details.
             properties:
               properties:
-                description: Diagnostic Entity Properties
-                properties:
-                  enabled:
-                    description: Indicates whether a diagnostic should receive data or not.
-                    type: boolean
-                required:
-                  - enabled
+                $ref: '#/definitions/DiagnosticContractProperties'
+                description: Diagnostic entity contract properties.
+                x-ms-client-flatten: true
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -1594,29 +1387,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiDiagnostics
       x-ms-examples:
@@ -1687,13 +1460,9 @@ paths:
             description: Diagnostic details.
             properties:
               properties:
-                description: Diagnostic Entity Properties
-                properties:
-                  enabled:
-                    description: Indicates whether a diagnostic should receive data or not.
-                    type: boolean
-                required:
-                  - enabled
+                $ref: '#/definitions/DiagnosticContractProperties'
+                description: Diagnostic entity contract properties.
+                x-ms-client-flatten: true
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -1733,13 +1502,9 @@ paths:
             description: Diagnostic details.
             properties:
               properties:
-                description: Diagnostic Entity Properties
-                properties:
-                  enabled:
-                    description: Indicates whether a diagnostic should receive data or not.
-                    type: boolean
-                required:
-                  - enabled
+                $ref: '#/definitions/DiagnosticContractProperties'
+                description: Diagnostic entity contract properties.
+                x-ms-client-flatten: true
         '201':
           description: Diagnostic was successfully created.
           schema:
@@ -1762,42 +1527,18 @@ paths:
             description: Diagnostic details.
             properties:
               properties:
-                description: Diagnostic Entity Properties
-                properties:
-                  enabled:
-                    description: Indicates whether a diagnostic should receive data or not.
-                    type: boolean
-                required:
-                  - enabled
+                $ref: '#/definitions/DiagnosticContractProperties'
+                description: Diagnostic entity contract properties.
+                x-ms-client-flatten: true
         default:
           description: Error response describing why the operation failed.
           schema:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiDiagnostics
       x-ms-examples:
@@ -1908,61 +1649,7 @@ paths:
               value:
                 description: Logger values.
                 items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: Logger details.
-                  properties:
-                    properties:
-                      description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
-                      properties:
-                        credentials:
-                          additionalProperties:
-                            type: string
-                          description: |-
-                            The name and SendRule connection string of the event hub for azureEventHub logger.
-                            Instrumentation key for applicationInsights logger.
-                          example:
-                            connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
-                            name: apim
-                          type: object
-                        description:
-                          description: Logger description.
-                          maxLength: 256
-                          type: string
-                        isBuffered:
-                          description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
-                          type: boolean
-                        loggerType:
-                          description: Logger type.
-                          enum:
-                            - azureEventHub
-                            - applicationInsights
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: LoggerType
-                            values:
-                              - description: Azure Event Hub as log destination.
-                                value: azureEventHub
-                              - description: Azure Application Insights as log destination.
-                                value: applicationInsights
-                      required:
-                        - loggerType
-                        - credentials
+                  $ref: '#/definitions/LoggerContract'
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -1970,29 +1657,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiDiagnosticLoggers
       x-ms-examples:
@@ -2080,29 +1747,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiDiagnosticLoggers
       x-ms-examples:
@@ -2177,29 +1824,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiDiagnosticLoggers
       x-ms-examples:
@@ -2285,42 +1912,9 @@ paths:
             description: Logger details.
             properties:
               properties:
-                description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
-                properties:
-                  credentials:
-                    additionalProperties:
-                      type: string
-                    description: |-
-                      The name and SendRule connection string of the event hub for azureEventHub logger.
-                      Instrumentation key for applicationInsights logger.
-                    example:
-                      connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
-                      name: apim
-                    type: object
-                  description:
-                    description: Logger description.
-                    maxLength: 256
-                    type: string
-                  isBuffered:
-                    description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
-                    type: boolean
-                  loggerType:
-                    description: Logger type.
-                    enum:
-                      - azureEventHub
-                      - applicationInsights
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: LoggerType
-                      values:
-                        - description: Azure Event Hub as log destination.
-                          value: azureEventHub
-                        - description: Azure Application Insights as log destination.
-                          value: applicationInsights
-                required:
-                  - loggerType
-                  - credentials
+                $ref: '#/definitions/LoggerContractProperties'
+                description: Logger entity contract properties.
+                x-ms-client-flatten: true
         '201':
           description: Logger was successfully attached to Diagnostic.
           schema:
@@ -2343,71 +1937,18 @@ paths:
             description: Logger details.
             properties:
               properties:
-                description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
-                properties:
-                  credentials:
-                    additionalProperties:
-                      type: string
-                    description: |-
-                      The name and SendRule connection string of the event hub for azureEventHub logger.
-                      Instrumentation key for applicationInsights logger.
-                    example:
-                      connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
-                      name: apim
-                    type: object
-                  description:
-                    description: Logger description.
-                    maxLength: 256
-                    type: string
-                  isBuffered:
-                    description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
-                    type: boolean
-                  loggerType:
-                    description: Logger type.
-                    enum:
-                      - azureEventHub
-                      - applicationInsights
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: LoggerType
-                      values:
-                        - description: Azure Event Hub as log destination.
-                          value: azureEventHub
-                        - description: Azure Application Insights as log destination.
-                          value: applicationInsights
-                required:
-                  - loggerType
-                  - credentials
+                $ref: '#/definitions/LoggerContractProperties'
+                description: Logger entity contract properties.
+                x-ms-client-flatten: true
         default:
           description: Error response describing why the operation failed.
           schema:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiDiagnosticLoggers
       x-ms-examples:
@@ -2512,29 +2053,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssues
       x-ms-examples:
@@ -2611,29 +2132,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssues
       x-ms-examples:
@@ -2695,29 +2196,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssues
       x-ms-examples:
@@ -2786,29 +2267,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssues
       x-ms-examples:
@@ -2881,29 +2342,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssues
       x-ms-examples:
@@ -3013,29 +2454,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssueAttachments
       x-ms-examples:
@@ -3111,29 +2532,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssueAttachments
       x-ms-examples:
@@ -3197,29 +2598,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssueAttachments
       x-ms-examples:
@@ -3287,29 +2668,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssueAttachments
       x-ms-examples:
@@ -3384,29 +2745,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssueAttachments
       x-ms-examples:
@@ -3511,29 +2852,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssueComments
       x-ms-examples:
@@ -3609,29 +2930,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssueComments
       x-ms-examples:
@@ -3695,29 +2996,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssueComments
       x-ms-examples:
@@ -3785,29 +3066,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssueComments
       x-ms-examples:
@@ -3882,29 +3143,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiIssueComments
       x-ms-examples:
@@ -4010,29 +3251,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Operations
       x-ms-examples:
@@ -4136,29 +3357,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Operations
       x-ms-examples:
@@ -4220,29 +3421,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Operations
       x-ms-examples:
@@ -4327,29 +3508,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Operations
       x-ms-examples:
@@ -4417,29 +3578,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Operations
       x-ms-examples:
@@ -4536,29 +3677,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Operations
       x-ms-examples:
@@ -4690,53 +3811,7 @@ paths:
               value:
                 description: Policy Contract value.
                 items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: Policy Contract details.
-                  properties:
-                    properties:
-                      description: Policy contract Properties.
-                      properties:
-                        contentFormat:
-                          default: xml
-                          description: Format of the policyContent.
-                          enum:
-                            - xml
-                            - xml-link
-                            - rawxml
-                            - rawxml-link
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: PolicyContentFormat
-                            values:
-                              - description: The contents are inline and Content type is an XML document.
-                                value: xml
-                              - description: The policy XML document is hosted on a http endpoint accessible from the API Management service.
-                                value: xml-link
-                              - description: The contents are inline and Content type is a non XML encoded policy document.
-                                value: rawxml
-                              - description: The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service.
-                                value: rawxml-link
-                        policyContent:
-                          description: Json escaped Xml Encoded contents of the Policy.
-                          type: string
-                      required:
-                        - policyContent
+                  $ref: '#/definitions/PolicyContract'
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -4744,29 +3819,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiOperationPolicies
       x-ms-examples:
@@ -4848,29 +3903,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiOperationPolicies
       x-ms-examples:
@@ -4938,81 +3973,22 @@ paths:
               type: string
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Policy Contract details.
             properties:
               properties:
-                description: Policy contract Properties.
-                properties:
-                  contentFormat:
-                    default: xml
-                    description: Format of the policyContent.
-                    enum:
-                      - xml
-                      - xml-link
-                      - rawxml
-                      - rawxml-link
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: PolicyContentFormat
-                      values:
-                        - description: The contents are inline and Content type is an XML document.
-                          value: xml
-                        - description: The policy XML document is hosted on a http endpoint accessible from the API Management service.
-                          value: xml-link
-                        - description: The contents are inline and Content type is a non XML encoded policy document.
-                          value: rawxml
-                        - description: The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service.
-                          value: rawxml-link
-                  policyContent:
-                    description: Json escaped Xml Encoded contents of the Policy.
-                    type: string
-                required:
-                  - policyContent
+                $ref: '#/definitions/PolicyContractProperties'
+                description: Properties of the Policy.
+                x-ms-client-flatten: true
         default:
           description: Error response describing why the operation failed.
           schema:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiOperationPolicies
       x-ms-examples:
@@ -5088,29 +4064,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiOperationPolicies
       x-ms-examples:
@@ -5165,52 +4121,13 @@ paths:
           required: true
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Policy Contract details.
             properties:
               properties:
-                description: Policy contract Properties.
-                properties:
-                  contentFormat:
-                    default: xml
-                    description: Format of the policyContent.
-                    enum:
-                      - xml
-                      - xml-link
-                      - rawxml
-                      - rawxml-link
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: PolicyContentFormat
-                      values:
-                        - description: The contents are inline and Content type is an XML document.
-                          value: xml
-                        - description: The policy XML document is hosted on a http endpoint accessible from the API Management service.
-                          value: xml-link
-                        - description: The contents are inline and Content type is a non XML encoded policy document.
-                          value: rawxml
-                        - description: The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service.
-                          value: rawxml-link
-                  policyContent:
-                    description: Json escaped Xml Encoded contents of the Policy.
-                    type: string
-                required:
-                  - policyContent
+                $ref: '#/definitions/PolicyContractProperties'
+                description: Properties of the Policy.
+                x-ms-client-flatten: true
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -5232,131 +4149,33 @@ paths:
           description: Api Operation policy configuration of the tenant was successfully updated.
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Policy Contract details.
             properties:
               properties:
-                description: Policy contract Properties.
-                properties:
-                  contentFormat:
-                    default: xml
-                    description: Format of the policyContent.
-                    enum:
-                      - xml
-                      - xml-link
-                      - rawxml
-                      - rawxml-link
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: PolicyContentFormat
-                      values:
-                        - description: The contents are inline and Content type is an XML document.
-                          value: xml
-                        - description: The policy XML document is hosted on a http endpoint accessible from the API Management service.
-                          value: xml-link
-                        - description: The contents are inline and Content type is a non XML encoded policy document.
-                          value: rawxml
-                        - description: The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service.
-                          value: rawxml-link
-                  policyContent:
-                    description: Json escaped Xml Encoded contents of the Policy.
-                    type: string
-                required:
-                  - policyContent
+                $ref: '#/definitions/PolicyContractProperties'
+                description: Properties of the Policy.
+                x-ms-client-flatten: true
         '201':
           description: Api Operation policy configuration was successfully created.
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Policy Contract details.
             properties:
               properties:
-                description: Policy contract Properties.
-                properties:
-                  contentFormat:
-                    default: xml
-                    description: Format of the policyContent.
-                    enum:
-                      - xml
-                      - xml-link
-                      - rawxml
-                      - rawxml-link
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: PolicyContentFormat
-                      values:
-                        - description: The contents are inline and Content type is an XML document.
-                          value: xml
-                        - description: The policy XML document is hosted on a http endpoint accessible from the API Management service.
-                          value: xml-link
-                        - description: The contents are inline and Content type is a non XML encoded policy document.
-                          value: rawxml
-                        - description: The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service.
-                          value: rawxml-link
-                  policyContent:
-                    description: Json escaped Xml Encoded contents of the Policy.
-                    type: string
-                required:
-                  - policyContent
+                $ref: '#/definitions/PolicyContractProperties'
+                description: Properties of the Policy.
+                x-ms-client-flatten: true
         default:
           description: Error response describing why the operation failed.
           schema:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiOperationPolicies
       x-ms-examples:
@@ -5436,53 +4255,7 @@ paths:
               value:
                 description: Policy Contract value.
                 items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: Policy Contract details.
-                  properties:
-                    properties:
-                      description: Policy contract Properties.
-                      properties:
-                        contentFormat:
-                          default: xml
-                          description: Format of the policyContent.
-                          enum:
-                            - xml
-                            - xml-link
-                            - rawxml
-                            - rawxml-link
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: PolicyContentFormat
-                            values:
-                              - description: The contents are inline and Content type is an XML document.
-                                value: xml
-                              - description: The policy XML document is hosted on a http endpoint accessible from the API Management service.
-                                value: xml-link
-                              - description: The contents are inline and Content type is a non XML encoded policy document.
-                                value: rawxml
-                              - description: The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service.
-                                value: rawxml-link
-                        policyContent:
-                          description: Json escaped Xml Encoded contents of the Policy.
-                          type: string
-                      required:
-                        - policyContent
+                  $ref: '#/definitions/PolicyContract'
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -5490,29 +4263,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiPolicy
       x-ms-examples:
@@ -5592,29 +4345,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiPolicy
       x-ms-examples:
@@ -5684,81 +4417,22 @@ paths:
               type: string
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Policy Contract details.
             properties:
               properties:
-                description: Policy contract Properties.
-                properties:
-                  contentFormat:
-                    default: xml
-                    description: Format of the policyContent.
-                    enum:
-                      - xml
-                      - xml-link
-                      - rawxml
-                      - rawxml-link
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: PolicyContentFormat
-                      values:
-                        - description: The contents are inline and Content type is an XML document.
-                          value: xml
-                        - description: The policy XML document is hosted on a http endpoint accessible from the API Management service.
-                          value: xml-link
-                        - description: The contents are inline and Content type is a non XML encoded policy document.
-                          value: rawxml
-                        - description: The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service.
-                          value: rawxml-link
-                  policyContent:
-                    description: Json escaped Xml Encoded contents of the Policy.
-                    type: string
-                required:
-                  - policyContent
+                $ref: '#/definitions/PolicyContractProperties'
+                description: Properties of the Policy.
+                x-ms-client-flatten: true
         default:
           description: Error response describing why the operation failed.
           schema:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiPolicy
       x-ms-examples:
@@ -5832,29 +4506,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiPolicy
       x-ms-examples:
@@ -5911,52 +4565,13 @@ paths:
           required: true
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Policy Contract details.
             properties:
               properties:
-                description: Policy contract Properties.
-                properties:
-                  contentFormat:
-                    default: xml
-                    description: Format of the policyContent.
-                    enum:
-                      - xml
-                      - xml-link
-                      - rawxml
-                      - rawxml-link
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: PolicyContentFormat
-                      values:
-                        - description: The contents are inline and Content type is an XML document.
-                          value: xml
-                        - description: The policy XML document is hosted on a http endpoint accessible from the API Management service.
-                          value: xml-link
-                        - description: The contents are inline and Content type is a non XML encoded policy document.
-                          value: rawxml
-                        - description: The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service.
-                          value: rawxml-link
-                  policyContent:
-                    description: Json escaped Xml Encoded contents of the Policy.
-                    type: string
-                required:
-                  - policyContent
+                $ref: '#/definitions/PolicyContractProperties'
+                description: Properties of the Policy.
+                x-ms-client-flatten: true
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -5978,131 +4593,33 @@ paths:
           description: Api policy configuration of the tenant was successfully updated.
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Policy Contract details.
             properties:
               properties:
-                description: Policy contract Properties.
-                properties:
-                  contentFormat:
-                    default: xml
-                    description: Format of the policyContent.
-                    enum:
-                      - xml
-                      - xml-link
-                      - rawxml
-                      - rawxml-link
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: PolicyContentFormat
-                      values:
-                        - description: The contents are inline and Content type is an XML document.
-                          value: xml
-                        - description: The policy XML document is hosted on a http endpoint accessible from the API Management service.
-                          value: xml-link
-                        - description: The contents are inline and Content type is a non XML encoded policy document.
-                          value: rawxml
-                        - description: The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service.
-                          value: rawxml-link
-                  policyContent:
-                    description: Json escaped Xml Encoded contents of the Policy.
-                    type: string
-                required:
-                  - policyContent
+                $ref: '#/definitions/PolicyContractProperties'
+                description: Properties of the Policy.
+                x-ms-client-flatten: true
         '201':
           description: Api policy configuration was successfully created.
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Policy Contract details.
             properties:
               properties:
-                description: Policy contract Properties.
-                properties:
-                  contentFormat:
-                    default: xml
-                    description: Format of the policyContent.
-                    enum:
-                      - xml
-                      - xml-link
-                      - rawxml
-                      - rawxml-link
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: PolicyContentFormat
-                      values:
-                        - description: The contents are inline and Content type is an XML document.
-                          value: xml
-                        - description: The policy XML document is hosted on a http endpoint accessible from the API Management service.
-                          value: xml-link
-                        - description: The contents are inline and Content type is a non XML encoded policy document.
-                          value: rawxml
-                        - description: The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service.
-                          value: rawxml-link
-                  policyContent:
-                    description: Json escaped Xml Encoded contents of the Policy.
-                    type: string
-                required:
-                  - policyContent
+                $ref: '#/definitions/PolicyContractProperties'
+                description: Properties of the Policy.
+                x-ms-client-flatten: true
         default:
           description: Error response describing why the operation failed.
           schema:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiPolicy
       x-ms-examples:
@@ -6229,64 +4746,7 @@ paths:
               value:
                 description: Page values.
                 items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: Product details.
-                  properties:
-                    properties:
-                      allOf:
-                        - description: Product Entity Base Parameters
-                          properties:
-                            approvalRequired:
-                              description: "whether subscription approval is required. If\_false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If\_true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false."
-                              type: boolean
-                            description:
-                              description: Product description. May include HTML formatting tags.
-                              maxLength: 1000
-                              minLength: 1
-                              type: string
-                            state:
-                              description: whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
-                              enum:
-                                - notPublished
-                                - published
-                              type: string
-                              x-ms-enum:
-                                modelAsString: false
-                                name: ProductState
-                            subscriptionRequired:
-                              description: 'Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as "protected" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as "open" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it''s value is assumed to be true.'
-                              type: boolean
-                            subscriptionsLimit:
-                              description: "Whether the number of subscriptions a user can have to this product at the same time. Set to\_null\_or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
-                              format: int32
-                              type: integer
-                            terms:
-                              description: Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process.
-                              type: string
-                      description: Product profile.
-                      properties:
-                        displayName:
-                          description: Product name.
-                          maxLength: 300
-                          minLength: 1
-                          type: string
-                      required:
-                        - displayName
+                  $ref: '#/definitions/ProductContract'
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -6294,29 +4754,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiProduct
       x-ms-examples:
@@ -6412,29 +4852,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Releases
       x-ms-examples:
@@ -6509,29 +4929,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Releases
       x-ms-examples:
@@ -6589,29 +4989,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Releases
       x-ms-examples:
@@ -6678,29 +5058,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Releases
       x-ms-examples:
@@ -6768,29 +5128,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Releases
       x-ms-examples:
@@ -6861,29 +5201,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Releases
       x-ms-examples:
@@ -6983,29 +5303,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Revisions
       x-ms-examples:
@@ -7076,29 +5376,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiSchema
       x-ms-examples:
@@ -7170,29 +5450,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiSchema
       x-ms-examples:
@@ -7254,29 +5514,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiSchema
       x-ms-examples:
@@ -7342,29 +5582,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiSchema
       x-ms-examples:
@@ -7438,29 +5658,9 @@ paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - ApiSchema
       x-ms-examples:
@@ -7573,194 +5773,7 @@ paths:
               value:
                 description: Page values.
                 items:
-                  description: TagResource contract properties.
-                  properties:
-                    api:
-                      allOf:
-                        - description: API base contract details.
-                          properties:
-                            apiRevision:
-                              description: 'Describes the Revision of the Api. If no value is provided, default revision 1 is created'
-                              maxLength: 100
-                              minLength: 1
-                              type: string
-                            apiVersion:
-                              description: Indicates the Version identifier of the API if the API is versioned
-                              maxLength: 100
-                              type: string
-                            apiVersionSetId:
-                              description: A resource identifier for the related ApiVersionSet.
-                              type: string
-                            authenticationSettings:
-                              description: API Authentication Settings.
-                              properties:
-                                oAuth2:
-                                  description: API OAuth2 Authentication settings details.
-                                  properties:
-                                    authorizationServerId:
-                                      description: OAuth authorization server identifier.
-                                      type: string
-                                    scope:
-                                      description: operations scope.
-                                      type: string
-                            description:
-                              description: Description of the API. May include HTML formatting tags.
-                              type: string
-                            isCurrent:
-                              description: Indicates if API revision is current api revision.
-                              readOnly: true
-                              type: boolean
-                            isOnline:
-                              description: Indicates if API revision is accessible via the gateway.
-                              readOnly: true
-                              type: boolean
-                            subscriptionKeyParameterNames:
-                              description: Subscription key parameter names details.
-                              example:
-                                subscriptionKeyParameterNames:
-                                  header: customHeaderParameterName
-                                  query: customQueryParameterName
-                              properties:
-                                header:
-                                  description: Subscription key header name.
-                                  type: string
-                                query:
-                                  description: Subscription key query string parameter name.
-                                  type: string
-                            type:
-                              description: Type of API.
-                              enum:
-                                - http
-                                - soap
-                              type: string
-                              x-ms-client-name: ApiType
-                              x-ms-enum:
-                                modelAsString: true
-                                name: ApiType
-                      description: API contract properties for the Tag Resources.
-                      properties:
-                        id:
-                          description: 'API identifier in the form /apis/{apiId}.'
-                          type: string
-                        name:
-                          description: API name.
-                          maxLength: 300
-                          minLength: 1
-                          type: string
-                        path:
-                          description: Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.
-                          maxLength: 400
-                          minLength: 0
-                          type: string
-                        protocols:
-                          description: Describes on which protocols the operations in this API can be invoked.
-                          items:
-                            enum:
-                              - http
-                              - https
-                            type: string
-                            x-ms-enum:
-                              modelAsString: false
-                              name: Protocol
-                          type: array
-                        serviceUrl:
-                          description: Absolute URL of the backend service implementing this API.
-                          maxLength: 2000
-                          minLength: 1
-                          type: string
-                    operation:
-                      description: Operation Entity contract Properties.
-                      properties:
-                        apiName:
-                          description: Api Name.
-                          readOnly: true
-                          type: string
-                        apiRevision:
-                          description: Api Revision.
-                          readOnly: true
-                          type: string
-                        apiVersion:
-                          description: Api Version.
-                          readOnly: true
-                          type: string
-                        description:
-                          description: Operation Description.
-                          readOnly: true
-                          type: string
-                        id:
-                          description: 'Identifier of the operation in form /operations/{operationId}.'
-                          type: string
-                        method:
-                          description: 'A Valid HTTP Operation Method. Typical Http Methods like GET, PUT, POST but not limited by only them.'
-                          externalDocs:
-                            description: As defined by RFC.
-                            url: 'http://www.rfc-editor.org/rfc/rfc7230.txt'
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Operation name.
-                          readOnly: true
-                          type: string
-                        urlTemplate:
-                          description: 'Relative URL template identifying the target resource for this operation. May include parameters. Example: /customers/{cid}/orders/{oid}/?date={date}'
-                          readOnly: true
-                          type: string
-                    product:
-                      allOf:
-                        - description: Product Entity Base Parameters
-                          properties:
-                            approvalRequired:
-                              description: "whether subscription approval is required. If\_false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If\_true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false."
-                              type: boolean
-                            description:
-                              description: Product description. May include HTML formatting tags.
-                              maxLength: 1000
-                              minLength: 1
-                              type: string
-                            state:
-                              description: whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
-                              enum:
-                                - notPublished
-                                - published
-                              type: string
-                              x-ms-enum:
-                                modelAsString: false
-                                name: ProductState
-                            subscriptionRequired:
-                              description: 'Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as "protected" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as "open" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it''s value is assumed to be true.'
-                              type: boolean
-                            subscriptionsLimit:
-                              description: "Whether the number of subscriptions a user can have to this product at the same time. Set to\_null\_or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
-                              format: int32
-                              type: integer
-                            terms:
-                              description: Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process.
-                              type: string
-                      description: Product profile.
-                      properties:
-                        id:
-                          description: 'Identifier of the product in the form of /products/{productId}'
-                          type: string
-                        name:
-                          description: Product name.
-                          maxLength: 300
-                          minLength: 1
-                          type: string
-                      required:
-                        - name
-                    tag:
-                      description: Contract defining the Tag property in the Tag Resource Contract
-                      properties:
-                        id:
-                          description: Tag identifier
-                          type: string
-                        name:
-                          description: Tag Name
-                          maxLength: 160
-                          minLength: 1
-                          type: string
-                  required:
-                    - tag
+                  $ref: '#/definitions/TagResourceContract'
                 type: array
       tags:
         - ApisByTags
@@ -7971,25 +5984,24 @@ definitions:
         maxLength: 100
         minLength: 1
         type: string
+      apiRevisionDescription:
+        description: Description of the Api Revision.
+        maxLength: 256
+        type: string
       apiVersion:
         description: Indicates the Version identifier of the API if the API is versioned
         maxLength: 100
+        type: string
+      apiVersionDescription:
+        description: Description of the Api Version.
+        maxLength: 256
         type: string
       apiVersionSetId:
         description: A resource identifier for the related ApiVersionSet.
         type: string
       authenticationSettings:
-        description: API Authentication Settings.
-        properties:
-          oAuth2:
-            description: API OAuth2 Authentication settings details.
-            properties:
-              authorizationServerId:
-                description: OAuth authorization server identifier.
-                type: string
-              scope:
-                description: operations scope.
-                type: string
+        $ref: '#/definitions/AuthenticationSettingsContract'
+        description: Collection of authentication settings included into this API.
       description:
         description: Description of the API. May include HTML formatting tags.
         type: string
@@ -8002,18 +6014,8 @@ definitions:
         readOnly: true
         type: boolean
       subscriptionKeyParameterNames:
-        description: Subscription key parameter names details.
-        example:
-          subscriptionKeyParameterNames:
-            header: customHeaderParameterName
-            query: customQueryParameterName
-        properties:
-          header:
-            description: Subscription key header name.
-            type: string
-          query:
-            description: Subscription key query string parameter name.
-            type: string
+        $ref: '#/definitions/SubscriptionKeyParameterNamesContract'
+        description: Protocols over which API is made available.
       type:
         description: Type of API.
         enum:
@@ -8188,14 +6190,8 @@ definitions:
     description: API Authentication Settings.
     properties:
       oAuth2:
-        description: API OAuth2 Authentication settings details.
-        properties:
-          authorizationServerId:
-            description: OAuth authorization server identifier.
-            type: string
-          scope:
-            description: operations scope.
-            type: string
+        $ref: '#/definitions/OAuth2AuthenticationSettingsContract'
+        description: OAuth2 Authentication settings
   IssueAttachmentCollection:
     description: Paged Issue Attachment list representation.
     properties:
@@ -8736,29 +6732,9 @@ x-ms-paths:
             description: Error Response.
             properties:
               error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
+                $ref: '#/definitions/ErrorResponseBody'
+                description: Properties of the Error Response.
+                x-ms-client-flatten: true
       tags:
         - Apis
       x-ms-examples:

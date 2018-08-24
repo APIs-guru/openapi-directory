@@ -6,7 +6,7 @@ basePath: /echo
 info:
   contact:
     name: 'US EPA, OECA Integration, Targeting and Access Branch'
-  description: |
+  description: |-
     Enforcement and Compliance History Online (ECHO) is a tool developed and maintained by EPA's Office of Enforcement and Compliance Assurance for public use.
     ECHO provides integrated compliance and enforcement information for about 800,000 regulated facilities nationwide.
     <BR><BR>EFF Rest Services provides the data for ECHO's Effluent Charts, a set of dynamic charts and tables of permitted effluent limits, releases, and violations over time for 
@@ -164,6 +164,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Detailed Effluent Chart Service
       tags:
         - Effluent Charts
@@ -190,6 +192,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Detailed Effluent Chart Service
       tags:
         - Effluent Charts
@@ -213,6 +217,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Summary Effluent Chart Service
       tags:
         - Effluent Charts
@@ -235,6 +241,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Summary Effluent Chart Service
       tags:
         - Effluent Charts
@@ -259,6 +267,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: ECHO CWA Parameter Lookup Service
       tags:
         - Lookups
@@ -282,6 +292,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: ECHO CWA Parameter Lookup Service
       tags:
         - Lookups
@@ -425,6 +437,9 @@ definitions:
           $ref: '#/definitions/eff1_NPDESViolations'
         title: NPDES Violations
         type: array
+        xml:
+          name: NPDESViolations
+          wrapped: true
       NmbrOfSubmission:
         description: 'The number of months of discharges represented on each DMR for the limit set (e.g., monthly = 1, bi-monthly = 2, quarterly = 3, triannual = 4, semi-annual = 6, annual = 12). This data element will be blank for Unscheduled Limit Sets'
         example: '1'
@@ -529,6 +544,8 @@ definitions:
       - NODEDesc
       - ExceedencePct
     type: object
+    xml:
+      name: DischargeMonitoringReport
   eff1_NPDESViolations:
     description: NPDES Violations Object
     properties:
@@ -623,6 +640,8 @@ definitions:
         title: Violation Severity
         type: string
     type: object
+    xml:
+      name: NPDESViolation
   eff1_Parameters:
     description: Parameters Object
     properties:
@@ -632,6 +651,9 @@ definitions:
           $ref: '#/definitions/eff1_DischargeMonitoringReports'
         title: Effluent Discharge Monitoring Report
         type: array
+        xml:
+          name: DischargeMonitoringReports
+          wrapped: true
       MonitoringLocationCode:
         description: The code that the monitoring location at which the monitoring requirement (and effluent limit if limited) applies. One parameter may have several monitoring location codes pertaining to the same permitted feature
         example: '1'
@@ -671,6 +693,8 @@ definitions:
       - StayTypeDesc
       - DischargeMonitoringReports
     type: object
+    xml:
+      name: Parameter
   eff1_PermFeatures:
     description: Permit Features Object
     properties:
@@ -680,6 +704,9 @@ definitions:
           $ref: '#/definitions/eff1_Parameters'
         title: Limit Parameters
         type: array
+        xml:
+          name: Parameters
+          wrapped: true
       PermFeatureNmbr:
         description: 'A three-character code in ICIS-NPDES that identifies the point of discharge (e.g., outfall) for a facility. A NPDES permit may have multiple points of discharge. If the code is less than three characters in the .CSV, append zeros to the beginning of the number (e.g., 1 is equivalent to 001)'
         example: '001'
@@ -701,6 +728,8 @@ definitions:
       - Parameters
       - PermFeatureTypeDesc
     type: object
+    xml:
+      name: PermFeature
   eff1_Results:
     description: Results Object
     properties:
@@ -790,6 +819,9 @@ definitions:
           $ref: '#/definitions/eff1_PermFeatures'
         title: Permitted Features (Pipe Outfalls)
         type: array
+        xml:
+          name: PermFeatures
+          wrapped: true
       RegistryId:
         description: '12-digit Facility Registry Service (FRS) identification number.  FRS uniquely identifies a facility by assigning an identification number (FRS ID), and uses this FRS ID to link together all EPA regulatory program database records'
         example: '110020837601'
@@ -911,6 +943,8 @@ definitions:
       - CWPPermitTypeDesc
       - CWPCurrentSNCStatus
     type: object
+    xml:
+      name: LinkedPermit
   eff2_Parameters:
     description: Parameters Object
     properties:
@@ -940,6 +974,8 @@ definitions:
       - MaxVioStatus
       - CurrentVioStatus
     type: object
+    xml:
+      name: Parameter
   eff2_PermFeatures:
     description: Permit Features Object
     properties:
@@ -948,6 +984,9 @@ definitions:
           $ref: '#/definitions/eff2_Parameters'
         title: Parameters
         type: array
+        xml:
+          name: Parameters
+          wrapped: true
       PermFeatureNmbr:
         description: 'A three-character code in ICIS-NPDES that identifies the point of discharge (e.g., outfall) for a facility. A NPDES permit may have multiple points of discharge. If the code is less than three characters in the .CSV, append zeros to the beginning of the number (e.g., 1 is equivalent to 001)'
         example: '001'
@@ -969,6 +1008,8 @@ definitions:
       - PermFeatureTypeDesc
       - Parameters
     type: object
+    xml:
+      name: PermFeature
   eff2_Results:
     description: Results Object
     properties:
@@ -1052,6 +1093,9 @@ definitions:
           $ref: '#/definitions/eff2_LinkedPermits'
         title: Linked Permits
         type: array
+        xml:
+          name: LinkedPermits
+          wrapped: true
       Message:
         description: Field to record messages (typically performance-related) about packet processing
         example: Success
@@ -1062,6 +1106,9 @@ definitions:
           $ref: '#/definitions/eff2_PermFeatures'
         title: Permitted Features (Pipe Outfalls)
         type: array
+        xml:
+          name: PermFeatures
+          wrapped: true
       RegistryId:
         description: '12-digit Facility Registry Service (FRS) identification number.  FRS uniquely identifies a facility by assigning an identification number (FRS ID), and uses this FRS ID to link together all EPA regulatory program database records'
         example: '110020837601'
@@ -1122,6 +1169,8 @@ definitions:
       - ValueCode
       - ValueDescription
     type: object
+    xml:
+      name: LuValue
   rlk16_Results:
     description: Results Object
     properties:
@@ -1129,6 +1178,9 @@ definitions:
         items:
           $ref: '#/definitions/rlk00_LuValues'
         type: array
+        xml:
+          name: LuValues
+          wrapped: true
       Message:
         description: Field to record messages (typically performance-related) about packet processing
         example: Success

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2016-12-01/expressRouteCircuit.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-expressRouteCircuit
   x-tags:
@@ -781,31 +780,8 @@ definitions:
         description: Gets whether the provider or the customer last modified the peering.
         type: string
       microsoftPeeringConfig:
-        description: Specifies the peering configuration.
-        properties:
-          advertisedPublicPrefixes:
-            description: The reference of AdvertisedPublicPrefixes.
-            items:
-              type: string
-            type: array
-          advertisedPublicPrefixesState:
-            description: 'AdvertisedPublicPrefixState of the Peering resource. Possible values are ''NotConfigured'', ''Configuring'', ''Configured'', and ''ValidationNeeded''.'
-            enum:
-              - NotConfigured
-              - Configuring
-              - Configured
-              - ValidationNeeded
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: ExpressRouteCircuitPeeringAdvertisedPublicPrefixState
-          customerASN:
-            description: The CustomerASN of the peering.
-            format: int32
-            type: integer
-          routingRegistryName:
-            description: The RoutingRegistryName of the configuration.
-            type: string
+        $ref: '#/definitions/ExpressRouteCircuitPeeringConfig'
+        description: The Microsoft peering configuration.
       peerASN:
         description: The peer ASN.
         format: int32
@@ -830,8 +806,39 @@ definitions:
         description: 'Gets the provisioning state of the public IP resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
         type: string
       routeFilter:
-        $ref: './routeFilter.json#/definitions/RouteFilter'
-        description: The reference of the RouteFilter resource.
+        allOf:
+          - properties:
+              id:
+                description: Resource ID.
+                type: string
+              location:
+                description: Resource location.
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              tags:
+                additionalProperties:
+                  type: string
+                description: Resource tags.
+                type: object
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
+        description: Route Filter Resource.
+        properties:
+          etag:
+            description: Gets a unique read-only string that changes whenever the resource is updated.
+            readOnly: true
+            type: string
+          properties:
+            $ref: '#/definitions/RouteFilterPropertiesFormat'
+            x-ms-client-flatten: true
+        required:
+          - location
       secondaryAzurePort:
         description: The secondary port.
         type: string
@@ -851,24 +858,8 @@ definitions:
           modelAsString: true
           name: ExpressRouteCircuitPeeringState
       stats:
-        description: Contains stats associated with the peering.
-        properties:
-          primarybytesIn:
-            description: Gets BytesIn of the peering.
-            format: int64
-            type: integer
-          primarybytesOut:
-            description: Gets BytesOut of the peering.
-            format: int64
-            type: integer
-          secondarybytesIn:
-            description: Gets BytesIn of the peering.
-            format: int64
-            type: integer
-          secondarybytesOut:
-            description: Gets BytesOut of the peering.
-            format: int64
-            type: integer
+        $ref: '#/definitions/ExpressRouteCircuitStats'
+        description: Gets peering stats.
       vlanId:
         description: The VLAN ID.
         format: int32

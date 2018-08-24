@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/adsense/v1.4/rest'
       version: v1
@@ -182,6 +182,41 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AdClients'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/accounts/{accountId}/adclients/{adClientId}/adcode':
+    get:
+      description: Get Auto ad code for a given ad client.
+      operationId: adsense.accounts.adclients.getAdCode
+      parameters:
+        - description: Account which contains the ad client.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Ad client to get the code for.
+          in: path
+          name: adClientId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AdCode'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
@@ -1724,7 +1759,13 @@ definitions:
   AdCode:
     properties:
       adCode:
-        description: The ad code snippet.
+        description: The Auto ad code snippet. The ad code snippet.
+        type: string
+      ampBody:
+        description: The AMP Auto ad code snippet that goes in the body of an AMP page.
+        type: string
+      ampHead:
+        description: The AMP Auto ad code snippet that goes in the head of an AMP page.
         type: string
       kind:
         default: 'adsense#adCode'

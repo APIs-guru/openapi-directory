@@ -1207,6 +1207,27 @@ paths:
             type: array
         default:
           $ref: '#/responses/error'
+    post:
+      operationId: createSiteInTeam
+      parameters:
+        - in: body
+          name: site
+          schema:
+            $ref: '#/definitions/siteSetup'
+        - in: query
+          name: configure_dns
+          type: boolean
+        - in: path
+          name: account_slug
+          required: true
+          type: string
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/site'
+        default:
+          $ref: '#/responses/error'
 definitions:
   accessToken:
     properties:

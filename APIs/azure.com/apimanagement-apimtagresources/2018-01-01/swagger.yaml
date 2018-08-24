@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-01-01/apimtagresources.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimtagresources
   x-tags:
@@ -167,25 +166,24 @@ definitions:
             maxLength: 100
             minLength: 1
             type: string
+          apiRevisionDescription:
+            description: Description of the Api Revision.
+            maxLength: 256
+            type: string
           apiVersion:
             description: Indicates the Version identifier of the API if the API is versioned
             maxLength: 100
+            type: string
+          apiVersionDescription:
+            description: Description of the Api Version.
+            maxLength: 256
             type: string
           apiVersionSetId:
             description: A resource identifier for the related ApiVersionSet.
             type: string
           authenticationSettings:
-            description: API Authentication Settings.
-            properties:
-              oAuth2:
-                description: API OAuth2 Authentication settings details.
-                properties:
-                  authorizationServerId:
-                    description: OAuth authorization server identifier.
-                    type: string
-                  scope:
-                    description: operations scope.
-                    type: string
+            $ref: '#/definitions/AuthenticationSettingsContract'
+            description: Collection of authentication settings included into this API.
           description:
             description: Description of the API. May include HTML formatting tags.
             type: string
@@ -198,18 +196,8 @@ definitions:
             readOnly: true
             type: boolean
           subscriptionKeyParameterNames:
-            description: Subscription key parameter names details.
-            example:
-              subscriptionKeyParameterNames:
-                header: customHeaderParameterName
-                query: customQueryParameterName
-            properties:
-              header:
-                description: Subscription key header name.
-                type: string
-              query:
-                description: Subscription key query string parameter name.
-                type: string
+            $ref: '#/definitions/SubscriptionKeyParameterNamesContract'
+            description: Protocols over which API is made available.
           type:
             description: Type of API.
             enum:

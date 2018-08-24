@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://androiddeviceprovisioning.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -50,11 +50,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -75,12 +70,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -133,12 +122,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -148,12 +135,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -210,12 +195,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -225,12 +208,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -263,12 +244,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -302,12 +281,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -338,12 +315,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -378,12 +353,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -416,12 +389,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -455,12 +426,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -514,13 +483,12 @@ paths:
       tags:
         - customers
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: androiddeviceprovisioning.operations.get
+      description: Gets a device.
+      operationId: androiddeviceprovisioning.partners.devices.get
       parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            Required. The device API resource name in the format
+            `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.
           in: path
           name: name
           required: true
@@ -530,19 +498,17 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/Device'
       tags:
-        - operations
+        - partners
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -603,12 +569,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -639,16 +603,41 @@ paths:
       tags:
         - customers
   '/v1/{parent}/customers':
+    get:
+      description: Lists the customers of the vendor.
+      operationId: androiddeviceprovisioning.partners.vendors.customers.list
+      parameters:
+        - description: The maximum number of results to be returned.
+          in: query
+          name: pageSize
+          type: integer
+        - description: A token identifying a page of results returned by the server.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Required. The resource name in the format
+            `partners/[PARTNER_ID]/vendors/[VENDOR_ID]`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListVendorCustomersResponse'
+      tags:
+        - partners
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -714,12 +703,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -729,12 +716,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -770,12 +755,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -808,12 +791,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -872,12 +853,48 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/{parent}/vendors':
+    get:
+      description: Lists the vendors of the partner.
+      operationId: androiddeviceprovisioning.partners.vendors.list
+      parameters:
+        - description: The maximum number of results to be returned.
+          in: query
+          name: pageSize
+          type: integer
+        - description: A token identifying a page of results returned by the server.
+          in: query
+          name: pageToken
+          type: string
+        - description: 'Required. The resource name in the format `partners/[PARTNER_ID]`.'
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListVendorsResponse'
+      tags:
+        - partners
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -897,6 +914,7 @@ definitions:
         description: Required. The section type of the device's provisioning record.
         enum:
           - SECTION_TYPE_UNSPECIFIED
+          - SECTION_TYPE_SIM_LOCK
           - SECTION_TYPE_ZERO_TOUCH
         type: string
     type: object
@@ -926,7 +944,7 @@ definitions:
         type: array
     type: object
   Company:
-    description: A customer resource in the zero-touch enrollment API.
+    description: 'A reseller, vendor, or customer in the zero-touch reseller and customer APIs.'
     properties:
       adminEmails:
         description: |-
@@ -941,14 +959,19 @@ definitions:
         type: string
       companyName:
         description: |-
-          Required. The name of the company. For example _XYZ Corp_. Characters
-          allowed are: Latin letters, numerals, hyphens, and spaces. Displayed to the
-          customer's employees in the zero-touch enrollment portal.
+          Required. The name of the company. For example _XYZ Corp_. Displayed to the
+          company's employees in the zero-touch enrollment portal.
         type: string
       name:
         description: |-
-          Output only. The API resource name of the company in the format
-          `partners/[PARTNER_ID]/customers/[CUSTOMER_ID]`. Assigned by the server.
+          Output only. The API resource name of the company. The resource name is one
+          of the following formats:
+
+          * `partners/[PARTNER_ID]/customers/[CUSTOMER_ID]`
+          * `partners/[PARTNER_ID]/vendors/[VENDOR_ID]`
+          * `partners/[PARTNER_ID]/vendors/[VENDOR_ID]/customers/[CUSTOMER_ID]`
+
+          Assigned by the server.
         type: string
       ownerEmails:
         description: |-
@@ -1176,34 +1199,47 @@ definitions:
         description: The ID of the Customer that purchased the device.
         format: int64
         type: string
+      resellerId:
+        description: The ID of the reseller that claimed the device.
+        format: int64
+        type: string
       sectionType:
         description: Output only. The type of claim made on the device.
         enum:
           - SECTION_TYPE_UNSPECIFIED
+          - SECTION_TYPE_SIM_LOCK
           - SECTION_TYPE_ZERO_TOUCH
         type: string
     type: object
   DeviceIdentifier:
     description: |-
-      Encapsulates hardware and product IDs to identify a manufactured device. To
-      learn more, read [Identifiers](/zero-touch/guides/identifiers).
+      Encapsulates hardware and product IDs to identify a manufactured device.
+      To understand requirements on identifier sets, read
+      [Identifiers](/zero-touch/guides/identifiers).
     properties:
       imei:
         description: The device’s IMEI number. Validated on input.
         type: string
       manufacturer:
         description: |-
-          Required. The device manufacturer’s name. Matches the device's built-in
+          The device manufacturer’s name. Matches the device's built-in
           value returned from `android.os.Build.MANUFACTURER`. Allowed values are
-          listed in [manufacturer names](/zero-touch/resources/manufacturer-names).
+          listed in
+          [manufacturers](/zero-touch/resources/manufacturer-names#manufacturers-names).
         type: string
       meid:
         description: The device’s MEID number.
         type: string
+      model:
+        description: |-
+          The device model's name. Matches the device's built-in value returned from
+          `android.os.Build.MODEL`. Allowed values are listed in
+          [models](/zero-touch/resources/manufacturer-names#model-names).
+        type: string
       serialNumber:
         description: |-
           The manufacturer's serial number for the device. This value might not be
-          unique.
+          unique across different device models.
         type: string
     type: object
   DeviceMetadata:
@@ -1380,6 +1416,7 @@ definitions:
         description: Required. The section type of the device's provisioning record.
         enum:
           - SECTION_TYPE_UNSPECIFIED
+          - SECTION_TYPE_SIM_LOCK
           - SECTION_TYPE_ZERO_TOUCH
         type: string
     type: object
@@ -1402,6 +1439,36 @@ definitions:
     properties:
       customers:
         description: List of customers related to this reseller partner.
+        items:
+          $ref: '#/definitions/Company'
+        type: array
+    type: object
+  ListVendorCustomersResponse:
+    description: Response message to list customers of the vendor.
+    properties:
+      customers:
+        description: List of customers of the vendor.
+        items:
+          $ref: '#/definitions/Company'
+        type: array
+      nextPageToken:
+        description: |-
+          A token to retrieve the next page of results. Omitted if no further results
+          are available.
+        type: string
+    type: object
+  ListVendorsResponse:
+    description: Response message to list vendors of the partner.
+    properties:
+      nextPageToken:
+        description: |-
+          A token to retrieve the next page of results. Omitted if no further results
+          are available.
+        type: string
+      vendors:
+        description: |-
+          List of vendors of the reseller partner. Fields `name`, `companyId` and
+          `companyName` are populated to the Company object.
         items:
           $ref: '#/definitions/Company'
         type: array
@@ -1472,6 +1539,7 @@ definitions:
         description: Required. The section type of the device's provisioning record.
         enum:
           - SECTION_TYPE_UNSPECIFIED
+          - SECTION_TYPE_SIM_LOCK
           - SECTION_TYPE_ZERO_TOUCH
         type: string
     type: object
@@ -1489,6 +1557,7 @@ definitions:
         description: Required. The section type of the device's provisioning record.
         enum:
           - SECTION_TYPE_UNSPECIFIED
+          - SECTION_TYPE_SIM_LOCK
           - SECTION_TYPE_ZERO_TOUCH
         type: string
     type: object
@@ -1607,6 +1676,7 @@ definitions:
         description: Required. The section type of the device's provisioning record.
         enum:
           - SECTION_TYPE_UNSPECIFIED
+          - SECTION_TYPE_SIM_LOCK
           - SECTION_TYPE_ZERO_TOUCH
         type: string
     type: object

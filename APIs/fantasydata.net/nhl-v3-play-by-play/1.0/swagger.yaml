@@ -34,6 +34,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/PlayByPlay/{gameid}':
     get:
@@ -137,6 +138,10 @@ definitions:
         type: number
       Period:
         type: string
+      Periods:
+        items:
+          $ref: '#/definitions/Period'
+        type: array
       PointSpread:
         type: number
       PointSpreadAwayTeamMoneyLine:
@@ -157,6 +162,54 @@ definitions:
         type: integer
       Updated:
         type: string
+  Penalty:
+    properties:
+      BenchPenaltyServedByPlayerID:
+        type: integer
+      Description:
+        type: string
+      DrawnByPlayerID:
+        type: integer
+      DrawnByTeamID:
+        type: integer
+      IsBenchPenalty:
+        type: boolean
+      PenalizedPlayerID:
+        type: integer
+      PenalizedTeamID:
+        type: integer
+      PenaltyID:
+        type: integer
+      PenaltyMinutes:
+        type: integer
+      PeriodID:
+        type: integer
+      Sequence:
+        type: integer
+      TimeRemainingMinutes:
+        type: integer
+      TimeRemainingSeconds:
+        type: integer
+  Period:
+    properties:
+      AwayScore:
+        type: integer
+      GameID:
+        type: integer
+      HomeScore:
+        type: integer
+      Name:
+        type: string
+      Penalties:
+        items:
+          $ref: '#/definitions/Penalty'
+        type: array
+      PeriodID:
+        type: integer
+      ScoringPlays:
+        items:
+          $ref: '#/definitions/ScoringPlay'
+        type: array
   Play:
     properties:
       AwayTeamScore:
@@ -213,3 +266,35 @@ definitions:
         items:
           $ref: '#/definitions/Play'
         type: array
+  ScoringPlay:
+    properties:
+      AllowedByTeamID:
+        type: integer
+      AssistedByPlayerID1:
+        type: integer
+      AssistedByPlayerID2:
+        type: integer
+      AwayTeamScore:
+        type: integer
+      EmptyNet:
+        type: boolean
+      HomeTeamScore:
+        type: integer
+      PeriodID:
+        type: integer
+      PowerPlay:
+        type: boolean
+      ScoredByPlayerID:
+        type: integer
+      ScoredByTeamID:
+        type: integer
+      ScoringPlayID:
+        type: integer
+      Sequence:
+        type: integer
+      ShortHanded:
+        type: boolean
+      TimeRemainingMinutes:
+        type: integer
+      TimeRemainingSeconds:
+        type: integer

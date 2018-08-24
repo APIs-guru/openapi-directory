@@ -63,6 +63,82 @@ parameters:
     required: true
     type: string
 paths:
+  '/subscriptions/{subscriptionId}/providers/microsoft.insights/alertrules':
+    get:
+      description: List the alert rules within a subscription.
+      operationId: AlertRules_ListBySubscription
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful request for a list of alert rules
+          schema:
+            $ref: '#/definitions/AlertRuleResourceCollection'
+      tags:
+        - AlertRules
+      x-ms-examples:
+        List alert rules:
+          parameters:
+            api-version: '2016-03-01'
+            subscriptionId: b67f7fec-69fc-4974-9099-a26bd6ffeda3
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/myRuleName
+                    location: West US
+                    name: myRuleName
+                    properties:
+                      actions:
+                        - customEmails:
+                            - gu@ms.com
+                            - su@ms.net
+                          odata.type: Microsoft.Azure.Management.Insights.Models.RuleEmailAction
+                          sendToServiceOwners: true
+                      condition:
+                        dataSource:
+                          metricName: Requests
+                          odata.type: Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource
+                          resourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest
+                        odata.type: Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition
+                        operator: GreaterThan
+                        threshold: 2
+                        timeAggregation: Total
+                        windowSize: PT5M
+                      description: Pura Vida
+                      isEnabled: true
+                      lastUpdatedTime: '2016-11-10T21:04:39.0005255Z'
+                      name: myRuleName
+                    tags:
+                      $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
+                      'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest': Resource
+                    type: Microsoft.Insights/alertRules
+                  - id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin0
+                    location: West US
+                    name: chiricutin0
+                    properties:
+                      actions: []
+                      condition:
+                        dataSource:
+                          metricName: Requests
+                          odata.type: Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource
+                          resourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest
+                        odata.type: Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition
+                        operator: GreaterThan
+                        threshold: 2
+                        timeAggregation: Total
+                        windowSize: PT5M
+                      description: Pura Vida 0
+                      isEnabled: true
+                      lastUpdatedTime: '2016-11-10T21:04:39.1082596Z'
+                      name: chiricutin0
+                    tags:
+                      $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
+                      'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest': Resource
+                    type: Microsoft.Insights/alertRules
+              headers: {}
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules':
     get:
       description: List the alert rules within a resource group.
@@ -74,60 +150,6 @@ paths:
       responses:
         '200':
           description: Successful request for a list of alert rules
-          examples:
-            application/json:
-              value:
-                - id: '/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/{ruleName}'
-                  location: West US
-                  name: '{ruleName}'
-                  properties:
-                    actions:
-                      - customEmails:
-                          - gu@ms.com
-                          - su@ms.net
-                        odata.type: Microsoft.Azure.Management.Insights.Models.RuleEmailAction
-                        sendToServiceOwners: true
-                    condition:
-                      dataSource:
-                        metricName: Requests
-                        odata.type: Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource
-                        resourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest
-                      odata.type: Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition
-                      operator: GreaterThan
-                      threshold: 2
-                      timeAggregation: Total
-                      windowSize: PT5M
-                    description: Pura Vida
-                    isEnabled: true
-                    lastUpdatedTime: '2016-11-10T21:04:39.0005255Z'
-                    name: '{ruleName}'
-                  tags:
-                    $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
-                    'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest': Resource
-                  type: Microsoft.Insights/alertRules
-                - id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin0
-                  location: West US
-                  name: chiricutin0
-                  properties:
-                    actions: []
-                    condition:
-                      dataSource:
-                        metricName: Requests
-                        odata.type: Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource
-                        resourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest
-                      odata.type: Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition
-                      operator: GreaterThan
-                      threshold: 2
-                      timeAggregation: Total
-                      windowSize: PT5M
-                    description: Pura Vida 0
-                    isEnabled: true
-                    lastUpdatedTime: '2016-11-10T21:04:39.1082596Z'
-                    name: chiricutin0
-                  tags:
-                    $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
-                    'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest': Resource
-                  type: Microsoft.Insights/alertRules
           schema:
             $ref: '#/definitions/AlertRuleResourceCollection'
       tags:
@@ -220,8 +242,10 @@ paths:
             subscriptionId: b67f7fec-69fc-4974-9099-a26bd6ffeda3
           responses:
             '200':
+              body: null
               headers: {}
             '204':
+              body: null
               headers: {}
     get:
       description: Gets an alert rule
@@ -234,31 +258,6 @@ paths:
       responses:
         '200':
           description: Successful request to get an alert rule
-          examples:
-            application/json:
-              id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin0
-              location: West US
-              name: chiricutin0
-              properties:
-                actions: []
-                condition:
-                  dataSource:
-                    metricName: Requests
-                    odata.type: Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource
-                    resourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest
-                  odata.type: Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition
-                  operator: GreaterThan
-                  threshold: 2
-                  timeAggregation: Total
-                  windowSize: PT5M
-                description: Pura Vida 0
-                isEnabled: true
-                lastUpdatedTime: '2016-11-10T21:04:39.1082596Z'
-                name: chiricutin0
-              tags:
-                $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
-                'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest': Resource
-              type: Microsoft.Insights/alertRules
           schema:
             $ref: '#/definitions/AlertRuleResource'
       tags:
@@ -314,60 +313,10 @@ paths:
       responses:
         '200':
           description: Successful request to update an alert rule
-          examples:
-            application/json:
-              id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin
-              location: West US
-              name: chiricutin
-              properties:
-                actions: []
-                condition:
-                  dataSource:
-                    metricName: Requests
-                    odata.type: Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource
-                    resourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest
-                  odata.type: Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition
-                  operator: GreaterThan
-                  threshold: 3
-                  timeAggregation: Total
-                  windowSize: PT5M
-                description: Pura Vida
-                isEnabled: false
-                lastUpdatedTime: '2016-11-23T21:23:52.0221265Z'
-                name: chiricutin
-              tags:
-                $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
-                'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest2': Resource
-              type: Microsoft.Insights/alertRules
           schema:
             $ref: '#/definitions/AlertRuleResource'
         '201':
           description: Successful request to update an alert rule that resulted in a creation of the alert rule
-          examples:
-            application/json:
-              id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin
-              location: West US
-              name: chiricutin
-              properties:
-                actions: []
-                condition:
-                  dataSource:
-                    metricName: Requests
-                    odata.type: Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource
-                    resourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest
-                  odata.type: Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition
-                  operator: GreaterThan
-                  threshold: 3
-                  timeAggregation: Total
-                  windowSize: PT5M
-                description: Pura Vida
-                isEnabled: false
-                lastUpdatedTime: '2016-11-23T21:23:52.0221265Z'
-                name: chiricutin
-              tags:
-                $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
-                'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest2': Resource
-              type: Microsoft.Insights/alertRules
           schema:
             $ref: '#/definitions/AlertRuleResource'
         default:
@@ -468,60 +417,10 @@ paths:
       responses:
         '200':
           description: Successful request to update an alert rule
-          examples:
-            application/json:
-              id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin
-              location: West US
-              name: chiricutin
-              properties:
-                actions: []
-                condition:
-                  dataSource:
-                    metricName: Requests
-                    odata.type: Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource
-                    resourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest
-                  odata.type: Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition
-                  operator: GreaterThan
-                  threshold: 3
-                  timeAggregation: Total
-                  windowSize: PT5M
-                description: Pura Vida
-                isEnabled: true
-                lastUpdatedTime: '2016-11-23T21:23:52.0221265Z'
-                name: chiricutin
-              tags:
-                $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
-                'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest': Resource
-              type: Microsoft.Insights/alertRules
           schema:
             $ref: '#/definitions/AlertRuleResource'
         '201':
           description: Created alert rule
-          examples:
-            application/json:
-              id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin
-              location: West US
-              name: chiricutin
-              properties:
-                actions: []
-                condition:
-                  dataSource:
-                    metricName: Requests
-                    odata.type: Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource
-                    resourceUri: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest
-                  odata.type: Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition
-                  operator: GreaterThan
-                  threshold: 2
-                  timeAggregation: Total
-                  windowSize: PT5M
-                description: Pura Vida
-                isEnabled: true
-                lastUpdatedTime: '2016-11-23T21:21:40.3097118Z'
-                name: chiricutin
-              tags:
-                $type: 'Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage'
-                'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest': Resource
-              type: Microsoft.Insights/alertRules
           schema:
             $ref: '#/definitions/AlertRuleResource'
         default:

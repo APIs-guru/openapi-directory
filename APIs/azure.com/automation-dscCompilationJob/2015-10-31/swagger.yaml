@@ -51,11 +51,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The filter to apply on the operation.
           in: query
           name: $filter
@@ -75,134 +76,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: The response model for the list job operation.
-            properties:
-              nextLink:
-                description: Gets or sets the next link.
-                type: string
-              value:
-                description: Gets or sets a list of Dsc Compilation jobs.
-                items:
-                  allOf:
-                    - allOf:
-                        - description: The core properties of ARM resources
-                          properties:
-                            id:
-                              description: Fully qualified resource Id for the resource
-                              readOnly: true
-                              type: string
-                            name:
-                              description: The name of the resource
-                              readOnly: true
-                              type: string
-                            type:
-                              description: The type of the resource.
-                              readOnly: true
-                              type: string
-                          x-ms-azure-resource: true
-                      description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-                  description: Definition of the Dsc Compilation job.
-                  properties:
-                    properties:
-                      description: Definition of Dsc Compilation job properties.
-                      properties:
-                        configuration:
-                          description: The Dsc configuration property associated with the entity.
-                          properties:
-                            name:
-                              description: Gets or sets the name of the Dsc configuration.
-                              type: string
-                        creationTime:
-                          description: Gets the creation time of the job.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                          x-nullable: false
-                        endTime:
-                          description: Gets the end time of the job.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                          x-nullable: true
-                        exception:
-                          description: Gets the exception of the job.
-                          readOnly: true
-                          type: string
-                        jobId:
-                          description: Gets the id of the job.
-                          format: uuid
-                          readOnly: true
-                          type: string
-                          x-nullable: false
-                        lastModifiedTime:
-                          description: Gets the last modified time of the job.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                          x-nullable: false
-                        lastStatusModifiedTime:
-                          description: Gets the last status modified time of the job.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                          x-nullable: true
-                        parameters:
-                          additionalProperties:
-                            type: string
-                          description: Gets or sets the parameters of the job.
-                          type: object
-                        provisioningState:
-                          description: The provisioning state property.
-                          properties:
-                            provisioningState:
-                              description: The provisioning state of the resource.
-                              enum:
-                                - Failed
-                                - Succeeded
-                                - Suspended
-                                - Processing
-                              readOnly: true
-                              type: string
-                              x-ms-enum:
-                                modelAsString: true
-                                name: JobProvisioningState
-                        runOn:
-                          description: Gets or sets the runOn which specifies the group name where the job is to be executed.
-                          type: string
-                        startTime:
-                          description: Gets the start time of the job.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                          x-nullable: true
-                        startedBy:
-                          description: Gets the compilation job started by.
-                          readOnly: true
-                          type: string
-                        status:
-                          description: Gets or sets the status of the job.
-                          enum:
-                            - New
-                            - Activating
-                            - Running
-                            - Completed
-                            - Failed
-                            - Stopped
-                            - Blocked
-                            - Suspended
-                            - Disconnected
-                            - Suspending
-                            - Stopping
-                            - Resuming
-                            - Removing
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: JobStatus
-                        statusDetails:
-                          description: Gets or sets the status details of the job.
-                          type: string
-                type: array
+            $ref: '#/definitions/DscCompilationJobListResult'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -271,11 +145,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The Dsc configuration compilation job id.
           format: uuid
           in: path
@@ -296,125 +171,7 @@ paths:
         '200':
           description: OK
           schema:
-            allOf:
-              - allOf:
-                  - description: The core properties of ARM resources
-                    properties:
-                      id:
-                        description: Fully qualified resource Id for the resource
-                        readOnly: true
-                        type: string
-                      name:
-                        description: The name of the resource
-                        readOnly: true
-                        type: string
-                      type:
-                        description: The type of the resource.
-                        readOnly: true
-                        type: string
-                    x-ms-azure-resource: true
-                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-            description: Definition of the Dsc Compilation job.
-            properties:
-              properties:
-                description: Definition of Dsc Compilation job properties.
-                properties:
-                  configuration:
-                    description: The Dsc configuration property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the Dsc configuration.
-                        type: string
-                  creationTime:
-                    description: Gets the creation time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  endTime:
-                    description: Gets the end time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: true
-                  exception:
-                    description: Gets the exception of the job.
-                    readOnly: true
-                    type: string
-                  jobId:
-                    description: Gets the id of the job.
-                    format: uuid
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  lastModifiedTime:
-                    description: Gets the last modified time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  lastStatusModifiedTime:
-                    description: Gets the last status modified time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: true
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job.
-                    type: object
-                  provisioningState:
-                    description: The provisioning state property.
-                    properties:
-                      provisioningState:
-                        description: The provisioning state of the resource.
-                        enum:
-                          - Failed
-                          - Succeeded
-                          - Suspended
-                          - Processing
-                        readOnly: true
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: JobProvisioningState
-                  runOn:
-                    description: Gets or sets the runOn which specifies the group name where the job is to be executed.
-                    type: string
-                  startTime:
-                    description: Gets the start time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: true
-                  startedBy:
-                    description: Gets the compilation job started by.
-                    readOnly: true
-                    type: string
-                  status:
-                    description: Gets or sets the status of the job.
-                    enum:
-                      - New
-                      - Activating
-                      - Running
-                      - Completed
-                      - Failed
-                      - Stopped
-                      - Blocked
-                      - Suspended
-                      - Disconnected
-                      - Suspending
-                      - Stopping
-                      - Resuming
-                      - Removing
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: JobStatus
-                  statusDetails:
-                    description: Gets or sets the status details of the job.
-                    type: string
+            $ref: '#/definitions/DscCompilationJob'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -474,11 +231,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The the DSC configuration Id.
           format: uuid
           in: path
@@ -490,40 +248,7 @@ paths:
           name: parameters
           required: true
           schema:
-            description: The parameters supplied to the create compilation job operation.
-            properties:
-              location:
-                description: Gets or sets the location of the resource.
-                type: string
-              name:
-                description: Gets or sets name of the resource.
-                type: string
-              properties:
-                description: The parameters supplied to the create compilation job operation.
-                properties:
-                  configuration:
-                    description: The Dsc configuration property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the Dsc configuration.
-                        type: string
-                  newNodeConfigurationBuildVersionRequired:
-                    description: If a new build version of NodeConfiguration is required.
-                    type: boolean
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job.
-                    type: object
-                required:
-                  - configuration
-              tags:
-                additionalProperties:
-                  type: string
-                description: Gets or sets the tags attached to the resource.
-                type: object
-            required:
-              - properties
+            $ref: '#/definitions/DscCompilationJobCreateParameters'
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -538,125 +263,7 @@ paths:
         '201':
           description: Created
           schema:
-            allOf:
-              - allOf:
-                  - description: The core properties of ARM resources
-                    properties:
-                      id:
-                        description: Fully qualified resource Id for the resource
-                        readOnly: true
-                        type: string
-                      name:
-                        description: The name of the resource
-                        readOnly: true
-                        type: string
-                      type:
-                        description: The type of the resource.
-                        readOnly: true
-                        type: string
-                    x-ms-azure-resource: true
-                description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-            description: Definition of the Dsc Compilation job.
-            properties:
-              properties:
-                description: Definition of Dsc Compilation job properties.
-                properties:
-                  configuration:
-                    description: The Dsc configuration property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the Dsc configuration.
-                        type: string
-                  creationTime:
-                    description: Gets the creation time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  endTime:
-                    description: Gets the end time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: true
-                  exception:
-                    description: Gets the exception of the job.
-                    readOnly: true
-                    type: string
-                  jobId:
-                    description: Gets the id of the job.
-                    format: uuid
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  lastModifiedTime:
-                    description: Gets the last modified time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: false
-                  lastStatusModifiedTime:
-                    description: Gets the last status modified time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: true
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job.
-                    type: object
-                  provisioningState:
-                    description: The provisioning state property.
-                    properties:
-                      provisioningState:
-                        description: The provisioning state of the resource.
-                        enum:
-                          - Failed
-                          - Succeeded
-                          - Suspended
-                          - Processing
-                        readOnly: true
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: JobProvisioningState
-                  runOn:
-                    description: Gets or sets the runOn which specifies the group name where the job is to be executed.
-                    type: string
-                  startTime:
-                    description: Gets the start time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                    x-nullable: true
-                  startedBy:
-                    description: Gets the compilation job started by.
-                    readOnly: true
-                    type: string
-                  status:
-                    description: Gets or sets the status of the job.
-                    enum:
-                      - New
-                      - Activating
-                      - Running
-                      - Completed
-                      - Failed
-                      - Stopped
-                      - Blocked
-                      - Suspended
-                      - Disconnected
-                      - Suspending
-                      - Stopping
-                      - Resuming
-                      - Removing
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: JobStatus
-                  statusDetails:
-                    description: Gets or sets the status details of the job.
-                    type: string
+            $ref: '#/definitions/DscCompilationJob'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -721,11 +328,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job id.
           format: uuid
           in: path
@@ -754,48 +362,7 @@ paths:
               value:
                 description: A list of job streams.
                 items:
-                  description: Definition of the job stream.
-                  properties:
-                    id:
-                      description: Gets or sets the id of the resource.
-                      type: string
-                    properties:
-                      description: Definition of the job stream.
-                      properties:
-                        jobStreamId:
-                          description: Gets or sets the id of the job stream.
-                          type: string
-                        streamText:
-                          description: Gets or sets the stream text.
-                          type: string
-                        streamType:
-                          description: Gets or sets the stream type.
-                          enum:
-                            - Progress
-                            - Output
-                            - Warning
-                            - Error
-                            - Debug
-                            - Verbose
-                            - Any
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: JobStreamType
-                        summary:
-                          description: Gets or sets the summary.
-                          type: string
-                        time:
-                          description: Gets or sets the creation time of the job.
-                          format: date-time
-                          type: string
-                          x-nullable: false
-                        value:
-                          additionalProperties:
-                            type: object
-                          description: Gets or sets the values of the job stream.
-                          type: object
-                      x-ms-client-flatten: true
+                  $ref: '#/definitions/JobStream'
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -888,11 +455,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The automation account name.
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The job id.
           format: uuid
           in: path
@@ -924,41 +492,8 @@ paths:
                 description: Gets or sets the id of the resource.
                 type: string
               properties:
-                description: Definition of the job stream.
-                properties:
-                  jobStreamId:
-                    description: Gets or sets the id of the job stream.
-                    type: string
-                  streamText:
-                    description: Gets or sets the stream text.
-                    type: string
-                  streamType:
-                    description: Gets or sets the stream type.
-                    enum:
-                      - Progress
-                      - Output
-                      - Warning
-                      - Error
-                      - Debug
-                      - Verbose
-                      - Any
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: JobStreamType
-                  summary:
-                    description: Gets or sets the summary.
-                    type: string
-                  time:
-                    description: Gets or sets the creation time of the job.
-                    format: date-time
-                    type: string
-                    x-nullable: false
-                  value:
-                    additionalProperties:
-                      type: object
-                    description: Gets or sets the values of the job stream.
-                    type: object
+                $ref: '#/definitions/JobStreamProperties'
+                description: Gets or sets the id of the job stream.
                 x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
@@ -999,4 +534,166 @@ paths:
                     PSSourceJobInstanceId: 836d4e06-2d88-46b4-8500-7febd4906838
                     value: ''
               headers: {}
-definitions: {}
+definitions:
+  DscCompilationJob:
+    allOf:
+      - allOf:
+          - $ref: '#/definitions/Resource'
+        description: ARM proxy resource.
+        properties: {}
+        type: object
+    description: Definition of the Dsc Compilation job.
+    properties:
+      properties:
+        $ref: '#/definitions/DscCompilationJobProperties'
+        description: Gets or sets the properties of the Dsc Compilation job.
+        x-ms-client-flatten: true
+  DscCompilationJobCreateParameters:
+    description: The parameters supplied to the create compilation job operation.
+    properties:
+      location:
+        description: Gets or sets the location of the resource.
+        type: string
+      name:
+        description: Gets or sets name of the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/DscCompilationJobCreateProperties'
+        description: Gets or sets the list of compilation job properties.
+        x-ms-client-flatten: true
+      tags:
+        additionalProperties:
+          type: string
+        description: Gets or sets the tags attached to the resource.
+        type: object
+    required:
+      - properties
+  DscCompilationJobCreateProperties:
+    description: The parameters supplied to the create compilation job operation.
+    properties:
+      configuration:
+        $ref: '#/definitions/DscConfigurationAssociationProperty'
+        description: Gets or sets the configuration.
+      incrementNodeConfigurationBuild:
+        description: If a new build version of NodeConfiguration is required.
+        type: boolean
+      parameters:
+        additionalProperties:
+          type: string
+        description: Gets or sets the parameters of the job.
+        type: object
+    required:
+      - configuration
+  DscCompilationJobListResult:
+    description: The response model for the list job operation.
+    properties:
+      nextLink:
+        description: Gets or sets the next link.
+        type: string
+      value:
+        description: Gets or sets a list of Dsc Compilation jobs.
+        items:
+          $ref: '#/definitions/DscCompilationJob'
+        type: array
+  DscCompilationJobProperties:
+    description: Definition of Dsc Compilation job properties.
+    properties:
+      configuration:
+        $ref: '#/definitions/DscConfigurationAssociationProperty'
+        description: Gets or sets the configuration.
+      creationTime:
+        description: Gets the creation time of the job.
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      endTime:
+        description: Gets the end time of the job.
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: true
+      exception:
+        description: Gets the exception of the job.
+        readOnly: true
+        type: string
+      jobId:
+        description: Gets the id of the job.
+        format: uuid
+        readOnly: true
+        type: string
+        x-nullable: false
+      lastModifiedTime:
+        description: Gets the last modified time of the job.
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      lastStatusModifiedTime:
+        description: Gets the last status modified time of the job.
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: true
+      parameters:
+        additionalProperties:
+          type: string
+        description: Gets or sets the parameters of the job.
+        type: object
+      provisioningState:
+        $ref: '#/definitions/JobProvisioningStateProperty'
+        description: The current provisioning state of the job.
+      runOn:
+        description: Gets or sets the runOn which specifies the group name where the job is to be executed.
+        type: string
+      startTime:
+        description: Gets the start time of the job.
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: true
+      startedBy:
+        description: Gets the compilation job started by.
+        readOnly: true
+        type: string
+      status:
+        description: Gets or sets the status of the job.
+        enum:
+          - New
+          - Activating
+          - Running
+          - Completed
+          - Failed
+          - Stopped
+          - Blocked
+          - Suspended
+          - Disconnected
+          - Suspending
+          - Stopping
+          - Resuming
+          - Removing
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: JobStatus
+      statusDetails:
+        description: Gets or sets the status details of the job.
+        type: string
+  DscConfigurationAssociationProperty:
+    description: The Dsc configuration property associated with the entity.
+    properties:
+      name:
+        description: Gets or sets the name of the Dsc configuration.
+        type: string
+  JobProvisioningStateProperty:
+    description: The provisioning state of the resource.
+    enum:
+      - Failed
+      - Succeeded
+      - Suspended
+      - Processing
+    readOnly: true
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: JobProvisioningState

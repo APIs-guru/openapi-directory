@@ -1518,6 +1518,138 @@ paths:
         name: username
         required: true
         type: string
+  '/projects/{username}/{project_slug}/automations':
+    parameters:
+      - description: user to which belongs the project
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: identifies the project
+        in: path
+        name: project_slug
+        required: true
+        type: string
+    post:
+      description: Creates a new JobAutomation from data
+      operationId: postJobAutomation
+      parameters:
+        - description: Job automation creation
+          in: body
+          name: JobAutomation
+          schema:
+            $ref: '#/definitions/JobAutomation'
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/JobAutomation'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Creates a new JobAutomation from data
+      tags:
+        - JobAutomation
+  '/projects/{username}/{project_slug}/automations/from/{job_id}':
+    parameters:
+      - description: user to which belongs the project
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: identifies the project
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: the id of the existing job
+        in: path
+        name: job_id
+        required: true
+        type: string
+    post:
+      description: Creates a new JobAutomation from an existing job
+      operationId: postJobAutomationFromJob
+      parameters:
+        - description: Job automation creation
+          in: body
+          name: JobAutomation
+          schema:
+            $ref: '#/definitions/JobAutomation'
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/JobAutomation'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Creates a new JobAutomation from an existing job
+      tags:
+        - JobAutomation
+  '/projects/{username}/{project_slug}/collections':
+    get:
+      description: List all collections for a project
+      operationId: getProjectCollections
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Collection'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: List all collections for a project
+      tags:
+        - Collections
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+  '/projects/{username}/{project_slug}/collections/{collection}':
+    get:
+      description: Get the detail of a collection
+      operationId: getCollectionDetail
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Datasets'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Get the detail of a collection
+      tags:
+        - Collections
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: The collection to query
+        in: path
+        name: collection
+        required: true
+        type: string
   '/projects/{username}/{project_slug}/filters':
     get:
       description: 'List all the project''s saved filters (each filter''s name, ID and filter value)'
@@ -1939,6 +2071,28 @@ definitions:
         readOnly: true
         type: string
     type: object
+  Collection:
+    properties:
+      date:
+        readOnly: true
+        type: string
+      date_end:
+        format: date
+        type: string
+      date_start:
+        format: date
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      timestamped:
+        type: boolean
+    required:
+      - id
+      - name
+      - timestamped
+    type: object
   CrawlOrphanURLs:
     properties:
       url:
@@ -2211,6 +2365,10 @@ definitions:
         type: boolean
       name:
         type: string
+      suggested_operations:
+        items:
+          $ref: '#/definitions/SuggestedOperations'
+        type: array
     required:
       - id
       - name
@@ -2344,6 +2502,18 @@ definitions:
       id:
         readOnly: true
         type: string
+    type: object
+  JobAutomation:
+    description: Job automation creation
+    properties:
+      description:
+        type: string
+      job_type:
+        type: string
+      payload:
+        type: object
+    required:
+      - job_type
     type: object
   KeywordsStat:
     properties:
@@ -2519,6 +2689,20 @@ definitions:
         type: boolean
       auto_pin_first_analysis:
         type: boolean
+      conversion_rate_desktop:
+        description: Number of conversion per 1000 visits on desktop
+        format: float
+        type: number
+      conversion_rate_mobile:
+        description: Number of conversion per 1000 visits on mobile
+        format: float
+        type: number
+      conversion_rate_tablet:
+        description: Number of conversion per 1000 visits on tablet
+        format: float
+        type: number
+      currency:
+        type: string
       current_settings:
         $ref: '#/definitions/ProjectSettings'
       date_created:
@@ -2542,6 +2726,18 @@ definitions:
         maximum: 2147483647
         minimum: 0
         type: integer
+      revenue_per_conversion_desktop:
+        description: Revenue per conversion on desktop
+        format: float
+        type: number
+      revenue_per_conversion_mobile:
+        description: Revenue per conversion on mobile
+        format: float
+        type: number
+      revenue_per_conversion_tablet:
+        description: Revenue per conversion on tablet
+        format: float
+        type: number
       settings_url:
         readOnly: true
         type: string
@@ -2674,6 +2870,14 @@ definitions:
           type: string
         type: array
     type: object
+  QueryResponses:
+    description: Query Responses
+    properties:
+      results:
+        items:
+          type: string
+        type: array
+    type: object
   RegexConfig:
     description: Regex config
     properties:
@@ -2784,6 +2988,21 @@ definitions:
     required:
       - type
       - message
+    type: object
+  SuggestedOperations:
+    properties:
+      group:
+        type: string
+      meta:
+        type: object
+      name:
+        type: string
+      operation:
+        type: object
+    required:
+      - name
+      - operation
+      - meta
     type: object
   SuggestedUpdatesAddOnFeatures:
     properties:

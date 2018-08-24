@@ -91,15 +91,18 @@ securityDefinitions:
   JWT:
     description: |
       You can create a JSON Web Token (JWT) via our [Sessions resource](https://rebilly.github.io/RebillyUserAPI/#tag/Sessions%2Fpaths%2F~1signin%2Fpost).
+      Usage format: `Bearer <JWT>`
     in: header
-    name: 'Authorization: Bearer jwt'
+    name: Authorization
     type: apiKey
+    x-scheme: bearer
+    x-type: http
   PublishableApiKey:
     description: |
       Only for the Tokens resource.
       You can create a Publishable API Key via our [API Keys resource](https://rebilly.github.io/RebillyUserAPI/#tag/API-Keys), by specifying the type as `publishable`.
     in: header
-    name: 'Authorization: Bearer pk_live_xxxx'
+    name: Authorization
     type: apiKey
   SecretApiKey:
     description: |
@@ -108,17 +111,12 @@ securityDefinitions:
       Also you can generate additional API keys, and delete API keys (as you may
       need to rotate your keys in the future).
     in: header
-    name: 'REB-APIKEY: sk_live_xxxx'
+    name: REB-APIKEY
     type: apiKey
 security:
   - SecretApiKey: []
   - JWT: []
 parameters:
-  collectionCriteria:
-    description: The json criteria for collection
-    in: query
-    name: criteria
-    type: string
   collectionExpand:
     description: Expand response to get full related object intead of ID.  See the expand guide for more info.
     in: query
@@ -248,6 +246,10 @@ tags:
       members, patrons, or players in other systems.
     name: Customers
   - description: |
+      Customer KYC files uploaded on behalf of a customer, tagged with a document type
+      and submitted for validation.
+    name: KYC Documents
+  - description: |
       Create authentication credentials, login, logout, and verify your customers.
     name: Customer Authentication
   - description: |
@@ -306,7 +308,10 @@ tags:
       schedule.
     name: Plans
   - description: |
-      Proposed:  Your product includes digital goods, services, and physical goods.
+      A product describes what you sell (goods or services).  
+      A product determines how what you sell appears on invoices and receipts.
+      The pricing for products is set in Plans.  One product can have many
+      plans.
     name: Products
   - description: |
       The Rebilly Reporting API is currently experimental.  You may see
@@ -1702,7 +1707,6 @@ paths:
         - $ref: '#/parameters/collectionOffset'
         - $ref: '#/parameters/collectionFilter'
         - $ref: '#/parameters/collectionQuery'
-        - $ref: '#/parameters/collectionCriteria'
         - $ref: '#/parameters/collectionSort'
       responses:
         '200':
@@ -1814,7 +1818,6 @@ paths:
         - $ref: '#/parameters/collectionOffset'
         - $ref: '#/parameters/collectionFilter'
         - $ref: '#/parameters/collectionQuery'
-        - $ref: '#/parameters/collectionCriteria'
         - $ref: '#/parameters/collectionSort'
       responses:
         '200':
@@ -3930,136 +3933,6 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
-  '/invoices/{id}/lead-source':
-    delete:
-      description: |
-        Delete a Lead Source that belongs to a certain invoice
-      responses:
-        '204':
-          description: Lead Source was deleted
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '409':
-          description: Lead Source cannot be deleted
-      summary: Delete a Lead Source for an invoice
-      tags:
-        - Invoices
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $invoice = $client->invoices()->deleteLeadSource('invoiceId');
-    get:
-      description: |
-        Retrieve a Lead Source of given invoice
-      responses:
-        '200':
-          description: Lead Source was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieve an invoice's Lead Source
-      tags:
-        - Invoices
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $invoice = $client->invoices()->load('invoiceId');
-            $leadSource = $invoice->getLeadSource();
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    put:
-      description: |
-        Create a Lead Source for an invoice
-      parameters:
-        - description: Lead Source resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/LeadSource'
-      responses:
-        '200':
-          description: Lead Source was updated
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '201':
-          description: Lead Source was created
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create a Lead Source for an invoice
-      tags:
-        - Invoices
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $leadSourceForm = new Rebilly\Entities\LeadSource();
-            $leadSourceForm->setSource('TestSource');
-            $leadSourceForm->setCampaign('TestCampaign');
-
-            try {
-                $invoice = $client->invoices()->updateLeadSource('invoiceId', $leadSourceForm);
-            } catch (UnprocessableEntityException $e) {
-                echo $e->getMessage();
-            }
   '/invoices/{id}/matched-rules':
     get:
       description: Get matched rules for the invoice
@@ -4125,6 +3998,269 @@ paths:
         - lang: PHP
           source: |
             $invoice = $client->invoices()->void('invoiceId');
+  /kyc-documents:
+    get:
+      description: |
+        Retrieve a list of KYC documents
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+        - $ref: '#/parameters/collectionFilter'
+        - collectionFormat: csv
+          description: The collection items sort field and order (prefix with "-" for descending sort).
+          in: query
+          items:
+            enum:
+              - id
+              - '-id'
+              - createdTime
+              - '-createdTime'
+              - updatedTime
+              - '-updatedTime'
+            type: string
+          name: sort
+          type: array
+        - default: application/json
+          description: The response media type
+          enum:
+            - application/json
+          in: header
+          name: Accept
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A list of KYC documents was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/KycDocument'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of KYC documents
+      tags:
+        - KYC Documents
+    post:
+      description: |
+        Create a KYC Document
+      parameters:
+        - description: Kyc document resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/KycDocument'
+      responses:
+        '201':
+          description: Kyc document was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/KycDocument'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Create a KYC Document
+      tags:
+        - KYC Documents
+  '/kyc-documents/{id}':
+    get:
+      description: |
+        Retrieve a KYC document with specified identifier string
+      parameters:
+        - default: application/json
+          description: The response media type
+          enum:
+            - application/json
+          in: header
+          name: Accept
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: KYC document was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/KycDocument'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a KYC Document
+      tags:
+        - KYC Documents
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    put:
+      description: |
+        Create or update a KYC document with predefined identifier string
+      parameters:
+        - description: KYC document resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/KycDocument'
+      responses:
+        '200':
+          description: KYC document was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/KycDocument'
+        '201':
+          description: KYC document was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/KycDocument'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create or update a KYC document with predefined ID
+      tags:
+        - KYC Documents
+  '/kyc-documents/{id}/acceptance':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: |
+        Manually override automated status and accept the document
+      responses:
+        '201':
+          description: KYC document acceptance was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/KycDocument'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Accept a KYC document
+      tags:
+        - KYC Documents
+  '/kyc-documents/{id}/rejection':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: |
+        Manually override automated status and reject the document
+      parameters:
+        - description: KYC document resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/KycDocumentRejection'
+      responses:
+        '201':
+          description: KYC document rejection was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/KycDocument'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Reject a KYC document
+      tags:
+        - KYC Documents
   /password-tokens:
     get:
       description: |
@@ -4315,6 +4451,22 @@ paths:
           schema:
             $ref: '#/definitions/PaymentCard'
       responses:
+        '200':
+          description: PaymentCard was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/PaymentCard'
         '201':
           description: Payment Card was created
           headers:
@@ -4423,21 +4575,43 @@ paths:
       - $ref: '#/parameters/resourceId'
     patch:
       description: |
-        Update a payment card's cvv value with predefined identifier string
+        Update any of the payment card's values except for the pan
       parameters:
         - description: Payment card
           in: body
           name: body
-          required: true
           schema:
             properties:
+              billingAddress:
+                $ref: '#/definitions/ContactObject'
+                description: Card's billing address
+                type: object
+              customFields:
+                $ref: '#/definitions/ResourceCustomFields'
               cvv:
                 description: Card's cvv (card verification value).
                 type: string
+              expMonth:
+                description: Card's expiry month
+                type: string
+              expYear:
+                description: Card's expiry year
+                type: string
+              status:
+                description: Card's status
+                enum:
+                  - active
+                  - inactive
+                  - deactivated
+                type: string
+              stickyGatewayAccountId:
+                allOf:
+                  - $ref: '#/definitions/ResourceId'
+                description: Sticky Gateway Account ID
             type: object
       responses:
         '200':
-          description: Gateway Account was updated
+          description: Payment card was updated
           headers:
             Rate-Limit-Limit:
               description: The number of allowed requests in the current period
@@ -4460,7 +4634,7 @@ paths:
           description: Invalid data was sent
           schema:
             $ref: '#/definitions/InvalidError'
-      summary: Update a payment card's cvv value with predefined ID
+      summary: Update a payment card's values
       tags:
         - Payment Cards
     put:
@@ -4468,10 +4642,25 @@ paths:
         - description: Payment card
           in: body
           name: body
-          required: true
           schema:
             $ref: '#/definitions/PaymentCard'
       responses:
+        '200':
+          description: PaymentCard was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/PaymentCard'
         '201':
           description: Payment card was created
           headers:
@@ -4680,6 +4869,119 @@ paths:
       summary: Get matched rules for the payment card
       tags:
         - Payment Cards
+    parameters:
+      - $ref: '#/parameters/resourceId'
+  /payment-instrument-validation:
+    get:
+      description: |
+        Retrieve a Payment Instrument validation with specified identifier string
+      responses:
+        '200':
+          description: Successfully retrieved a payment instrument validation
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/PaymentInstrumentValidation'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a Payment Instrument validation
+      tags:
+        - Payment Instrument Validation
+    post:
+      description: |
+        Validate a payment instrument
+      parameters:
+        - description: Payment instrument
+          in: body
+          name: body
+          schema:
+            properties:
+              method:
+                description: Payment method
+                type: string
+              payementInstrumentId:
+                description: Payment instrument ID
+                type: string
+            required:
+              - method
+              - payementInstrumentId
+            type: object
+      responses:
+        '201':
+          description: Validation successful
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/PaymentInstrumentValidation'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Validate a payment instrument
+      tags:
+        - Payment Instrument Validation
+  '/payment-instrument-validation/{id}':
+    get:
+      description: |
+        Retrieve a list of validated payment instruments
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: A list of validated payment instrument was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/PaymentInstrumentValidation'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of validated payment instruments
+      tags:
+        - Payment Instrument Validation
     parameters:
       - $ref: '#/parameters/resourceId'
   /payments:
@@ -5302,6 +5604,7 @@ paths:
             $planForm->setTrialAmount(1);
             $planForm->setTrialPeriodUnit('day');
             $planForm->setTrialPeriodLength(1);
+            $planForm->setProductId('test-product');
 
             try {
                 $plan = $client->plans()->create($planForm);
@@ -5331,6 +5634,8 @@ paths:
           $ref: '#/responses/AccessForbidden'
         '404':
           $ref: '#/responses/NotFound'
+        '409':
+          $ref: '#/responses/Conflict'
       summary: Delete a Plan
       tags:
         - Plans
@@ -5930,6 +6235,296 @@ paths:
       summary: Create a shipping zone with predefined ID
       tags:
         - Shipping Zones
+  /subscription-cancellations:
+    get:
+      description: Retrieve a list of cancellations for all subscriptions
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: A list of cancellations was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/Cancellation'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of cancellations
+      tags:
+        - Subscriptions
+    post:
+      description: Cancel a subscription or preview the cancellation parameters before that
+      parameters:
+        - description: Cancellation resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Cancellation'
+      responses:
+        '201':
+          description: 'Cancellation was created, subscription is or will be deactivated'
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Cancellation'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Cancel a subscription
+      tags:
+        - Subscriptions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $subscriptionCancelForm = new Rebilly\Entities\SubscriptionCancel();
+            $subscriptionCancelForm->setEffectiveTime(new DateTime());
+
+            try {
+                $subscription = $client->subscriptions()->cancel('subscriptionId', $subscriptionCancelForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
+  '/subscription-cancellations/{id}':
+    delete:
+      description: Delete a subscription's cancellation. Only draft can be deleted.
+      responses:
+        '204':
+          description: Cancellaton was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '409':
+          description: Cancellaton cannot be deleted
+      summary: Delete a cancellation
+      tags:
+        - Subscriptions
+    get:
+      description: Retrieve a subscription cancellatopn with specified identifier string
+      responses:
+        '200':
+          description: Cancellation was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Cancellation'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a subscription cancellatopn
+      tags:
+        - Subscriptions
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    put:
+      description: Cancel a subscription
+      parameters:
+        - description: Cancellation resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Cancellation'
+      responses:
+        '200':
+          description: 'Cancellation was updated, subscription is or will be deactivated'
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Cancellation'
+        '201':
+          description: 'Cancellation was created, subscription is or will be deactivated'
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Cancellation'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Cancel a subscription
+      tags:
+        - Subscriptions
+  /subscription-reactivations:
+    get:
+      description: Retrieve a list of reactivations for all subscriptions
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: A list of reactivations was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/Reactivation'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of reactivations
+      tags:
+        - Subscriptions
+    post:
+      description: Reactivate a subscription
+      parameters:
+        - description: Reactivation resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Reactivation'
+      responses:
+        '201':
+          description: |
+            Reactivation was created, subscription is active and won't be deactivated.
+            If there was a cancellation with status "confirmed", it is revoked.
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Reactivation'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Reactivate a subscription
+      tags:
+        - Subscriptions
+  '/subscription-reactivations/{id}':
+    get:
+      description: Retrieve a subscription reactivation with specified identifier string
+      responses:
+        '200':
+          description: Reactivation was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Reactivation'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a subscription reactivation
+      tags:
+        - Subscriptions
+    parameters:
+      - $ref: '#/parameters/resourceId'
   /subscriptions:
     get:
       description: |
@@ -6203,56 +6798,6 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
-  '/subscriptions/{id}/cancel':
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    post:
-      description: |
-        Cancel a subscription
-      parameters:
-        - description: Only policy
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/SubscriptionCancel'
-      responses:
-        '201':
-          description: Subscription was switched
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/Subscription'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Cancel a subscription
-      tags:
-        - Subscriptions
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $subscriptionCancelForm = new Rebilly\Entities\SubscriptionCancel();
-            $subscriptionCancelForm->setPolicy($subscriptionCancelForm::NOW);
-
-            try {
-                $subscription = $client->subscriptions()->cancel('subscriptionId', $subscriptionCancelForm);
-            } catch (UnprocessableEntityException $e) {
-                echo $e->getMessage();
-            }
   '/subscriptions/{id}/change-plan':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -6349,136 +6894,6 @@ paths:
       summary: Issue an interim invoice for a subscription
       tags:
         - Subscriptions
-  '/subscriptions/{id}/lead-source':
-    delete:
-      description: |
-        Delete a Lead Source that belongs to a certain Subscription
-      responses:
-        '204':
-          description: Lead Source was deleted
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '409':
-          description: Lead Source cannot be deleted
-      summary: Delete a Lead Source for a Subscription
-      tags:
-        - Subscriptions
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $subscription = $client->subscriptions()->deleteLeadSource('subscriptionId');
-    get:
-      description: |
-        Retrieve a Lead Source of given subscription
-      responses:
-        '200':
-          description: Lead Source was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieve a subscription's Lead Source
-      tags:
-        - Subscriptions
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $subscription = $client->subscriptions()->load('subscriptionId');
-            $leadSource = $subscription->getLeadSource();
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    put:
-      description: |
-        Create a Lead Source for a Subscription
-      parameters:
-        - description: Lead Source resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/LeadSource'
-      responses:
-        '200':
-          description: Lead Source was updated
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '201':
-          description: Lead Source was created
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create a Lead Source for a Subscription
-      tags:
-        - Subscriptions
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $leadSourceForm = new Rebilly\Entities\LeadSource();
-            $leadSourceForm->setSource('TestSource');
-            $leadSourceForm->setCampaign('TestCampaign');
-
-            try {
-                $subscription = $client->subscriptions()->updateLeadSource('subscriptionId', $leadSourceForm);
-            } catch (UnprocessableEntityException $e) {
-                echo $e->getMessage();
-            }
   '/subscriptions/{id}/matched-rules':
     get:
       description: Get matched rules for the subscription
@@ -6510,43 +6925,6 @@ paths:
         - Subscriptions
     parameters:
       - $ref: '#/parameters/resourceId'
-  /tax-categories:
-    get:
-      description: |
-        Retrieve a list of tax categories
-      responses:
-        '200':
-          description: A list of tax categories was retrieved successfully
-          headers:
-            Pagination-Limit:
-              description: Items per page limit
-              type: integer
-            Pagination-Offset:
-              description: Pagination offset
-              type: integer
-            Pagination-Total:
-              description: Total items count
-              type: integer
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            items:
-              $ref: '#/definitions/TaxCategory'
-            type: array
-        '401':
-          $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a list of tax categories
-      tags:
-        - Taxes
   /tokens:
     get:
       description: |
@@ -6782,7 +7160,6 @@ paths:
         - $ref: '#/parameters/collectionOffset'
         - $ref: '#/parameters/collectionFilter'
         - $ref: '#/parameters/collectionQuery'
-        - $ref: '#/parameters/collectionCriteria'
         - $ref: '#/parameters/collectionSort'
         - default: application/json
           description: The response media type
@@ -6924,136 +7301,6 @@ paths:
         - Transactions
     parameters:
       - $ref: '#/parameters/resourceId'
-  '/transactions/{id}/lead-source':
-    delete:
-      description: |
-        Delete a Lead Source that belongs to a certain transaction
-      responses:
-        '204':
-          description: Lead Source was deleted
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '409':
-          description: Lead Source cannot be deleted
-      summary: Delete a Lead Source for a transaction
-      tags:
-        - Transactions
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $payment = $client->transactions()->deleteLeadSource('transactionId');
-    get:
-      description: |
-        Retrieve a Lead Source of given transaction
-      responses:
-        '200':
-          description: Lead Source was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieve a transaction's Lead Source
-      tags:
-        - Transactions
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $transaction = $client->transactions()->load('transactionId');
-            $leadSource = $transaction->getLeadSource();
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    put:
-      description: |
-        Create a Lead Source for a transaction
-      parameters:
-        - description: Lead Source resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/LeadSource'
-      responses:
-        '200':
-          description: Lead Source was updated
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '201':
-          description: Lead Source was created
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create a Lead Source for a transaction
-      tags:
-        - Transactions
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $leadSourceForm = new Rebilly\Entities\LeadSource();
-            $leadSourceForm->setSource('TestSource');
-            $leadSourceForm->setCampaign('TestCampaign');
-
-            try {
-                $transaction = $client->transactions()->updateLeadSource('transactionId', $leadSourceForm);
-            } catch (UnprocessableEntityException $e) {
-                echo $e->getMessage();
-            }
   '/transactions/{id}/matched-rules':
     get:
       description: Get matched rules for the transaction
@@ -7343,6 +7590,18 @@ definitions:
     required:
       - rel
     type: object
+  AuthTransactionLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - authTransaction
+        type: string
+    required:
+      - rel
+    type: object
   AuthenticationOptions:
     properties:
       authTokenTtl:
@@ -7591,6 +7850,145 @@ definitions:
         type: string
     required:
       - rel
+    type: object
+  Cancellation:
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        minItems: 1
+        readOnly: true
+        type: array
+      appliedInvoiceId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The identifier of the invoice where the cancellation fees or credits are applied.
+        readOnly: true
+      canceledBy:
+        default: customer
+        description: Who did the cancellation
+        enum:
+          - merchant
+          - customer
+        type: string
+      canceledTime:
+        description: The cancellation time (when the status is confirmed which is by default unless specified "draft").
+        format: date-time
+        readOnly: true
+        type: string
+      churnTime:
+        description: The time when the subscription will be deactivated.
+        format: date-time
+        type: string
+      createdTime:
+        description: The time of resource creation (when it is posted).
+        format: date-time
+        readOnly: true
+        type: string
+      description:
+        description: Cancel reason description in free form
+        maxLength: 255
+        type: string
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Cancellation identifier
+        readOnly: true
+      lineItemSubtotal:
+        description: Subtotal of the line items which will be added after the subscription's cancellation
+        example: 49.95
+        readOnly: true
+        type: number
+      lineItems:
+        description: Items to be added to the new invoice. Proration item is generated and added automatically.
+        items:
+          description: Line item
+          properties:
+            description:
+              description: Description of line item
+              type: string
+            periodEndTime:
+              description: Date-time when the period ends for this item
+              format: date-time
+              type: string
+            periodStartTime:
+              description: Date-time when the period begins for this item
+              format: date-time
+              type: string
+            quantity:
+              default: 1
+              description: Quantity of line item
+              example: 1
+              type: integer
+            type:
+              description: Type of line item
+              enum:
+                - debit
+                - credit
+              type: string
+            unitPriceAmount:
+              description: Unit price of the line item
+              example: 49.95
+              format: double
+              type: number
+            unitPriceCurrency:
+              description: Currency ISO code
+              example: USD
+              type: string
+          required:
+            - type
+            - unitPriceAmount
+            - unitPriceCurrency
+          type: object
+        type: array
+      prorated:
+        default: false
+        description: |
+          Defines if the customer gets a pro-rata credit for the time remaining between `churnTime` and
+          subscription's next renewal time.
+        type: boolean
+      proratedInvoiceId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Identifier of the invoice on which the cancellation proration is calculated.
+        readOnly: true
+      reason:
+        default: other
+        description: Cancellation reason
+        enum:
+          - did-not-use
+          - did-not-want
+          - missing-features
+          - bugs-or-problems
+          - do-not-remember
+          - risk-warning
+          - contract-expired
+          - too-expensive
+          - other
+          - billing-failure
+        type: string
+      status:
+        default: confirmed
+        description: |
+          "draft" defines that the cancellation isn't applied on an invoice and subscription but
+          can be inspected to see the charge.
+          "confirmed" will set a subscription to be canceled when the `churnTime` is reached.
+          "completed" is a read-only status which is set by the system when the churnTime is reached.
+          The cancellation may not be changed or deleted when the status is "completed".
+        enum:
+          - draft
+          - confirmed
+          - completed
+          - revoked
+        type: string
+      subscriptionId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Identifier of the canceled subscription
+    required:
+      - subscriptionId
+      - churnTime
     type: object
   CardinalCommerce:
     allOf:
@@ -7844,6 +8242,7 @@ definitions:
         description: A hash that can be used to compare multiple contacts for identical attribute values
         example: 056ae6d97c788b9e98b049ebafd7b229bf852221
         maxLength: 40
+        readOnly: true
         type: string
       lastName:
         description: The contact last name
@@ -8144,12 +8543,33 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The customer identifier string
         readOnly: true
+      invoiceCount:
+        description: 'An auto-incrementing number based on the sequence of invoices. If set to 0, then this record is a Lead, otherwise is a Customer'
+        readOnly: true
+        type: integer
+      lifetimeRevenue:
+        $ref: '#/definitions/CustomerLifetimeRevenue'
       primaryAddress:
         $ref: '#/definitions/ContactObject'
       updatedTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
         description: The customer updated time
+    type: object
+  CustomerLifetimeRevenue:
+    properties:
+      amount:
+        description: Revenue amount in Merchant's reporting currency
+        format: double
+        type: number
+      amountUsd:
+        description: Revenue amount in USD
+        format: double
+        type: number
+      currency:
+        description: Merchant's reporting currency
+        type: string
+    readOnly: true
     type: object
   CustomerLink:
     allOf:
@@ -8537,6 +8957,32 @@ definitions:
     required:
       - rel
     type: object
+  Elavon:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            description: Elavon credentials object
+            properties:
+              ssl_merchant_id:
+                description: Elavon merchant ID
+                type: string
+              ssl_pin:
+                description: Elavon pin
+                format: password
+                type: string
+              ssl_user_id:
+                description: Elavon user ID
+                type: string
+            required:
+              - ssl_merchant_id
+              - ssl_user_id
+              - ssl_pin
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Elavon config
   Error:
     properties:
       error:
@@ -8561,6 +9007,7 @@ definitions:
       - transaction-declined
       - transaction-process-requested
       - risk-score-changed
+      - transaction-discrepancy-found
     readOnly: true
     type: string
   File:
@@ -8835,6 +9282,7 @@ definitions:
           - CIM
           - Credorax
           - Cryptonator
+          - EcorePay
           - Elavon
           - EMS
           - Fifth Third Bank
@@ -8863,6 +9311,8 @@ definitions:
           - NMI
           - OchaPay
           - Other
+          - Panamerican
+          - ParamountEft
           - Panda Bank
           - PayPal
           - Payr
@@ -8874,6 +9324,7 @@ definitions:
           - RBS WorldPay
           - RealTime
           - RebillyProcessor
+          - Rotessa
           - Skrill
           - SMSVoucher
           - State Bank of Mauritius
@@ -8910,14 +9361,6 @@ definitions:
       descriptor:
         description: The gateway account's descriptor
         type: string
-      downtimeEnd:
-        description: Gateway account downtime end
-        format: date-time
-        type: string
-      downtimeStart:
-        description: Gateway account downtime start
-        format: date-time
-        type: string
       dynamicDescriptor:
         description: 'True, if Gateway Account allows dynamic descriptor'
         type: boolean
@@ -8945,6 +9388,8 @@ definitions:
           - Cryptonator
           - DataCash
           - Dengi
+          - EcorePay
+          - Elavon
           - eMerchantPay
           - Flexepin
           - FinTecSystems
@@ -8964,6 +9409,8 @@ definitions:
           - MtaPay
           - NMI
           - OchaPay
+          - Panamerican
+          - ParamountEft
           - PandaGateway
           - Payeezy
           - Payflow
@@ -8976,6 +9423,7 @@ definitions:
           - Realtime
           - RebillyProcessor
           - Redsys
+          - Rotessa
           - RPN
           - Sagepay
           - Skrill
@@ -8995,6 +9443,10 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The gateway identifier string
         readOnly: true
+      isDown:
+        description: True if gateway is currently in downtime period.
+        readOnly: true
+        type: boolean
       merchantCategoryCode:
         description: The gateway account's merchant category code
         maximum: 9950
@@ -9518,6 +9970,130 @@ definitions:
           - gatewayConfig
         type: object
     description: Jeton Gateway config
+  KycDocument:
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/FileLink'
+          - $ref: '#/definitions/CustomerLink'
+        minItems: 3
+        readOnly: true
+        type: array
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Creation date/time
+      customerId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Linked Customer object id
+      documentMatches:
+        $ref: '#/definitions/KycDocumentMatches'
+      documentType:
+        description: 'Document type submitted for validation, only identity-proof type is analyzed in an automated manner'
+        enum:
+          - identity-proof
+          - address-proof
+        type: string
+      fileId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Linked File object id
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        readOnly: true
+      processedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Processing date/time
+      rejectionReason:
+        $ref: '#/definitions/KycDocumentRejection'
+      status:
+        description: Status of the validation
+        enum:
+          - pending
+          - in-progress
+          - accepted
+          - rejected
+        readOnly: true
+        type: string
+      updatedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Latest update date/time
+    required:
+      - fileId
+      - customerId
+      - documentType
+      - status
+    type: object
+  KycDocumentMatches:
+    properties:
+      data:
+        properties:
+          containsImage:
+            description: Flag that indicates if there is an image that contains a face on it
+            example: true
+            type: boolean
+          dateOfBirth:
+            allOf:
+              - $ref: '#/definitions/ServerTimestamp'
+            description: 'The date of birth found on the document, null if not found'
+          expiryDate:
+            allOf:
+              - $ref: '#/definitions/ServerTimestamp'
+            description: 'The expiry date found on the document, null if not found'
+          firstName:
+            description: 'The customer first name if it was matched, null otherwise'
+            example: John
+            type: string
+          hasMinimalAge:
+            description: 'Checks the minimal age, 21+ for USA and 18+ for all other countries. Null if dateOfBirth could not be determined.'
+            example: true
+            type: boolean
+          isIdentityDocument:
+            description: Flag that indicates if this looks like and ID
+            example: true
+            type: boolean
+          isPublishedOnline:
+            description: If there is an exact match found online
+            example: false
+            type: boolean
+          issueDate:
+            allOf:
+              - $ref: '#/definitions/ServerTimestamp'
+            description: 'The issued date found on the document, null if not found'
+          lastName:
+            description: 'The customer last name if it was matched, null otherwise'
+            example: Doe
+            type: string
+        type: object
+      score:
+        description: The calculated score that represents the % of confidence that this ID respresents the given customer
+        example: 0.75
+        format: double
+        type: number
+    readOnly: true
+    type: object
+  KycDocumentRejection:
+    properties:
+      message:
+        description: The rejection message
+        example: Provided document is unreadable
+        type: string
+      type:
+        enum:
+          - document-unreadable
+          - document-expired
+          - document-not-matching
+          - underage-person
+          - other
+        type: string
+    readOnly: true
+    type: object
   LeadSource:
     properties:
       _links:
@@ -10206,6 +10782,7 @@ definitions:
         items:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/CustomerLink'
+          - $ref: '#/definitions/AuthTransactionLink'
         minItems: 1
         readOnly: true
         type: array
@@ -10276,8 +10853,8 @@ definitions:
       pan:
         description: The card PAN (Primary Account Number). Required if card is creating not from Token
         type: string
-      safeHash:
-        description: The card's hash. Based on bin and last 4 digits of the PAN
+      panFingerprint:
+        description: A unique value to identify the PAN regardless of expiry
         readOnly: true
         type: string
       status:
@@ -10288,6 +10865,7 @@ definitions:
           - inactive
           - deactivated
           - pending
+          - verification-needed
         readOnly: true
         type: string
       stickyGatewayAccountId:
@@ -10321,6 +10899,62 @@ definitions:
         $ref: '#/definitions/Method'
     required:
       - method
+    type: object
+  PaymentInstrumentValidation:
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        minItems: 1
+        readOnly: true
+        type: array
+      actionCode:
+        description: Action code
+        readOnly: true
+        type: string
+      avsResult:
+        description: Address verification result
+        readOnly: true
+        type: string
+      billingAddress:
+        allOf:
+          - $ref: '#/definitions/ContactObject'
+        description: Billing address.
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Payment instrument validation created time.
+      cvvResult:
+        description: CVV result
+        readOnly: true
+        type: string
+      expMonth:
+        description: Payment card's expiry month.
+        readOnly: true
+        type: integer
+      expYear:
+        description: Payment card's expiry year.
+        readOnly: true
+        type: integer
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Payment instrument validation ID
+        readOnly: true
+      method:
+        description: Payment method
+        type: string
+      paymentInstrumentId:
+        description: Payment instrument ID
+        type: string
+      responseCode:
+        description: Response code
+        readOnly: true
+        type: string
+    required:
+      - method
+      - paymentInstrumentId
     type: object
   PaymentLink:
     allOf:
@@ -10387,6 +11021,8 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The token identifier string
         readOnly: true
+      leadSource:
+        $ref: '#/definitions/LeadSource'
       method:
         description: The payment method
         enum:
@@ -10519,17 +11155,6 @@ definitions:
         minItems: 1
         readOnly: true
         type: array
-      contractTermLength:
-        description: The length that corresponds with the contractTermUnit
-        type: integer
-      contractTermUnit:
-        description: The unit of time
-        enum:
-          - day
-          - week
-          - month
-          - year
-        type: string
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -10542,69 +11167,68 @@ definitions:
         readOnly: true
         type: string
       description:
-        description: The plan description
-        type: string
-      expiredTime:
-        description: Time when the plan is not longer valid
-        format: date-time
+        description: The plan description (deprecated)
         type: string
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'
-        description: The website identifier string
+        description: The plan identifier string
         readOnly: true
       isActive:
-        description: 'If the plan is not active, customers cannot subscribe to the plan (default to true)'
+        description: 'If the plan is not active, customers cannot subscribe to the plan.'
         type: boolean
-      maxQuantity:
-        description: Maximum quantity per order (NULL if no maximum)
-        type: integer
-      minQuantity:
-        description: 'Minimum quantity per order, defaults to 1'
-        type: integer
       name:
-        description: The plan name
+        description: 'The plan name, displayed on invoices and receipts.'
         type: string
-      recurringAmount:
-        description: The amount that recurs according to the schedule
-        format: double
-        type: number
-      recurringPeriodLength:
-        description: The length of time (used with the recurringPeriodUnit)
-        type: integer
-      recurringPeriodLimit:
-        description: The number of times a subscription will rebill until the contract is over
-        type: integer
-      recurringPeriodUnit:
-        description: The unit of time
-        enum:
-          - day
-          - week
-          - month
-          - year
-        type: string
+      pricing:
+        $ref: '#/definitions/PlanPriceFormula'
+      productId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The related product identifier string
+      productOptions:
+        additionalProperties:
+          type: string
+        description: Name-value pairs to specify the product options.
+        example:
+          color: red
+          size: xxl
+        type: object
+      recurringInterval:
+        allOf:
+          - $ref: '#/definitions/PlanPeriod'
+          - properties:
+              limit:
+                description: 'The number of invoices this subscription will generate (if 1, it will not generate any beyond the initial subscription creation).  For example, set this property to `12`, when the `periodUnit` is month and the `periodLength` is 1, for a 1 year contract billed monthly.'
+                type: integer
+            type: object
+        description: 'The billing interval. For a one-time item, use `null`.'
       richDescription:
-        description: The plan rich description - supports HTML
+        description: The plan rich description - supports HTML (deprecated)
         type: string
-      setupAmount:
-        description: The amount of a setup - 0 is a valid value (for free)
-        format: double
-        type: number
-      trialAmount:
-        description: The amount of a trial - 0 is a valid value (for free)
-        format: double
-        type: number
-      trialPeriodLength:
-        description: The length of time (used with the trialPeriodUnit)
-        type: integer
-      trialPeriodUnit:
-        description: The unit of time
-        enum:
-          - day
-          - week
-          - month
-          - year
-        type: string
+      setup:
+        description: The setup. Set `null` if no setup.
+        properties:
+          price:
+            description: The price of a setup - 0 is a valid value (for free)
+            format: double
+            type: number
+        required:
+          - price
+        type: object
+      trial:
+        description: The trial. Set `null` if no trial.
+        properties:
+          period:
+            $ref: '#/definitions/PlanPeriod'
+          price:
+            description: 'The price of the trial. For a free trial, use `0`.'
+            format: double
+            type: number
+        required:
+          - price
+          - period
+        type: object
       updatedTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -10612,6 +11236,8 @@ definitions:
     required:
       - name
       - currency
+      - productId
+      - pricing
     type: object
   PlanLink:
     allOf:
@@ -10624,6 +11250,43 @@ definitions:
         type: string
     required:
       - rel
+    type: object
+  PlanPeriod:
+    properties:
+      length:
+        description: The length of time
+        type: integer
+      unit:
+        description: The unit of time
+        enum:
+          - day
+          - week
+          - month
+          - year
+        type: string
+    required:
+      - unit
+      - length
+    type: object
+  PlanPriceFormula:
+    discriminator: formula
+    properties:
+      formula:
+        description: |
+          The price formula determines what algorithm is used to calculate the invoice price based on a few factors,
+          - the quantity in the subscription (which may be variable if usage pricing, otherwise determined when creating the subscription)
+          - the price brackets data
+
+          To determine which formula is correct, please see the price formula documentation.
+        enum:
+          - fixed-fee
+          - flat-rate
+          - stairstep
+          - tiered
+          - volume
+        type: string
+    required:
+      - formula
     type: object
   Plugnpay:
     allOf:
@@ -10682,27 +11345,11 @@ definitions:
     type: object
   Product:
     description: |
-      Your product includes digital goods, services, and physical goods.
+      Products include digital goods, services, and physical goods.
       Products appear on invoice line items. If you set a tax category identifier,
-      taxes will be calculated upon invoice generation.
-    example: |
-      {
-        "id": "stringid",
-        "name": "Widget",
-        "description": "Fantastic widget",
-        "taxCategoryId": null,
-        "requiresShipping": true,
-        "accountingCode": "100",
-        "customFields": [],
-        "createdTime": "2015-08-27 13:45:12",
-        "updatedTime": "2015-08-27 13:45:12",
-        "_links": [
-            {
-              "rel": "self",
-              "href": "https://api.rebilly.com/v2.1/products/stringid"
-            }
-        ]
-      }
+      taxes will be calculated upon invoice generation.  If it is shippable,
+      shipping will be calculated upon invoice generation.  Pricing and 
+      variations are set within Plans.
     properties:
       _links:
         description: The links related to resource
@@ -10713,6 +11360,7 @@ definitions:
         type: array
       accountingCode:
         description: The product accounting code
+        example: 4010
         type: string
       createdTime:
         allOf:
@@ -10728,13 +11376,21 @@ definitions:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: The product identifier string
+        example: membership
         readOnly: true
       name:
         description: The product name
+        example: Premium membership
         maxLength: 255
         type: string
+      options:
+        description: 'The product options such as Color, Size, etc.  The product options definition does not include option values.  Those are defined within the Plans.'
+        items:
+          type: string
+        type: array
       requiresShipping:
         description: 'If the product requires shipping, shipping calculations will be applied'
+        example: false
         type: boolean
       taxCategoryId:
         description: The product's tax category identifier string
@@ -10746,6 +11402,12 @@ definitions:
           - 51010
           - 31000
           - 30070
+        type: string
+      unitLabel:
+        default: unit
+        description: 'The unit label, such as per `seat` or per `unit`.'
+        example: seat
+        maxLength: 50
         type: string
       updatedTime:
         allOf:
@@ -10775,6 +11437,47 @@ definitions:
           - gatewayConfig
         type: object
     description: RPN Gateway config
+  Reactivation:
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        minItems: 1
+        readOnly: true
+        type: array
+      cancellationId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Identifier of the related cancellation
+        readOnly: true
+      createdTime:
+        description: The time of resource creation (when it is posted).
+        format: date-time
+        readOnly: true
+        type: string
+      description:
+        description: Reactivation reason description in free form
+        maxLength: 255
+        type: string
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Reactivation identifier
+        readOnly: true
+      renewalTime:
+        description: |
+          The time of the next subscription renewal. If omitted then it is computed from the current time.
+          If the subscription is canceled but active it is ignored, so the next renewal will happen as scheduled.
+        format: date-time
+        type: string
+      subscriptionId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Identifier of the reactivated subscription
+    required:
+      - subscriptionId
+    type: object
   RealTime:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -11059,6 +11762,28 @@ definitions:
         readOnly: true
         type: string
     type: object
+  Rotessa:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            description: Rotessa credentials object
+            properties:
+              apiKey:
+                description: Rotessa api key
+                format: password
+                type: string
+              delay:
+                description: Rotessa Gateway time delay for them to process transaction
+                type: integer
+            required:
+              - apiKey
+              - delay
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Rotessa config
   RuleSetHistoryLink:
     allOf:
       - $ref: '#/definitions/NewLink'
@@ -11309,6 +12034,21 @@ definitions:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: Unique id for the initial invoice
+      items:
+        items:
+          properties:
+            planId:
+              allOf:
+                - $ref: '#/definitions/ResourceId'
+              description: Unique id for each plan
+            quantity:
+              description: Number of units of the product on the given plan
+              type: integer
+          required:
+            - planId
+          type: object
+        minItems: 1
+        type: array
       lineItemSubtotal:
         description: 'Subtotal of line items in this subscription (signed value).  If credits exceed debits, it will be a negative number.'
         example: 49.95
@@ -11355,13 +12095,6 @@ definitions:
           type: object
         readOnly: true
         type: array
-      planId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: Unique id for each plan
-      quantity:
-        description: Quantity for each subscription. Default value to 1
-        type: integer
       rebillNumber:
         description: The current period number
         readOnly: true
@@ -11399,45 +12132,8 @@ definitions:
         description: Unique id for each website
     required:
       - customerId
-      - planId
+      - items
       - websiteId
-    type: object
-  SubscriptionCancel:
-    properties:
-      cancelCategory:
-        description: Cancel category
-        enum:
-          - did-not-use
-          - did-not-want
-          - missing-features
-          - bugs-or-problems
-          - do-not-remember
-          - risk-warning
-          - contract-expired
-          - too-expensive
-          - other
-        type: string
-      cancelDescription:
-        description: Cancel reason description in free form
-        maxLength: 255
-        type: string
-      canceledBy:
-        description: Canceled by
-        enum:
-          - merchant
-          - customer
-        type: string
-      policy:
-        description: Cancel policy
-        enum:
-          - at-next-renewal
-          - now-with-prorata-credit
-          - now
-        type: string
-    required:
-      - policy
-      - canceledBy
-      - cancelCategory
     type: object
   SubscriptionChange:
     properties:
@@ -11488,38 +12184,6 @@ definitions:
         type: string
     required:
       - rel
-    type: object
-  TaxCategory:
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        minItems: 1
-        readOnly: true
-        type: array
-      description:
-        description: The tax category description
-        maxLength: 512
-        type: string
-      id:
-        description: The tax category identifier string
-        enum:
-          - 99999
-          - 20010
-          - 40030
-          - 51020
-          - 51010
-          - 31000
-          - 30070
-        maxLength: 50
-        readOnly: true
-        type: string
-      taxProvider:
-        description: The tax category maps to a provider
-        enum:
-          - tax-jar
-        type: string
     type: object
   ThreeDSecure:
     properties:
@@ -11702,6 +12366,7 @@ definitions:
               - CIM
               - Credorax
               - Cryptonator
+              - EcorePay
               - Elavon
               - EMS
               - Fifth Third Bank
@@ -11730,6 +12395,8 @@ definitions:
               - NMI
               - OchaPay
               - Other
+              - Panamerican
+              - ParamountEft
               - Panda Bank
               - PayPal
               - Payr
@@ -11741,6 +12408,7 @@ definitions:
               - RBS WorldPay
               - RealTime
               - RebillyProcessor
+              - Rotessa
               - Skrill
               - SMSVoucher
               - State Bank of Mauritius
@@ -11913,6 +12581,8 @@ definitions:
               - Cryptonator
               - DataCash
               - Dengi
+              - EcorePay
+              - Elavon
               - eMerchantPay
               - Flexepin
               - FinTecSystems
@@ -11932,6 +12602,8 @@ definitions:
               - MtaPay
               - NMI
               - OchaPay
+              - Panamerican
+              - ParamountEft
               - PandaGateway
               - Payeezy
               - Payflow
@@ -11944,6 +12616,7 @@ definitions:
               - Realtime
               - RebillyProcessor
               - Redsys
+              - Rotessa
               - RPN
               - Sagepay
               - Skrill
@@ -12006,6 +12679,9 @@ definitions:
         allOf:
           - $ref: '#/definitions/Method'
         description: Payment Method
+      orderId:
+        description: The transactions's order ID
+        type: string
       parentTransactionId:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -12644,6 +13320,45 @@ definitions:
           - currency
         type: object
     description: Coupon fixed amount discount
+  fixed-fee:
+    allOf:
+      - $ref: '#/definitions/PlanPriceFormula'
+      - properties:
+          price:
+            description: |
+              For the very simple price when it's fixed and does not depend on the quantity chosen by customer.
+
+              If the price is 0, it's free.
+            example: 99.95
+            format: double
+            type: number
+        required:
+          - price
+        type: object
+  flat-rate:
+    allOf:
+      - $ref: '#/definitions/PlanPriceFormula'
+      - properties:
+          maxQuantity:
+            description: 'If the value is `null`, it''s assumed to be infinite.'
+            example: 1
+            type: integer
+          price:
+            description: |
+              Flat-rate pricing is represented in a simple price per unit.
+              Some examples:
+
+              - $30 per unit
+              - $0.10 per transaction
+              - $50 per period
+
+              If the price is 0, it's free.
+            example: 99.95
+            format: double
+            type: number
+        required:
+          - price
+        type: object
   gt:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -12875,6 +13590,84 @@ definitions:
           - subscriptionIds
         type: object
     description: restrict-to-subscriptions restrictions
+  stairstep:
+    allOf:
+      - $ref: '#/definitions/PlanPriceFormula'
+      - properties:
+          brackets:
+            description: |
+              The price backets, along with the price formula,
+              is used to calculate the amount to charge for the product on this plan on the invoice.
+
+              The "stairstep" example:
+
+              Price total | Max quantity | Description
+              ------------|--------------|------------
+              $5          | 1            | 1
+              $13         | 5            | 2 to 5
+              $30         | null         | 6 or more
+
+              If someone bought 1 apple, it would be $5.
+
+              If someone bought 2 apples, it would be $13. For 2 to 5 apples, the price is $13 in any case.
+            items:
+              properties:
+                maxQuantity:
+                  description: |
+                    If the value is `null`, it's assumed to be infinite.  It starts at the end of the previous bracket.
+                    If there is no previous bracket, it starts at 1.
+                  example: 1
+                  type: integer
+                price:
+                  description: 'If the price is 0, it''s free.'
+                  example: 99.95
+                  format: double
+                  type: number
+              type: object
+            minItems: 1
+            type: array
+        required:
+          - brackets
+        type: object
+  tiered:
+    allOf:
+      - $ref: '#/definitions/PlanPriceFormula'
+      - properties:
+          brackets:
+            description: |
+              The price backets, along with the price formula,
+              is used to calculate the amount to charge for the product on this plan on the invoice.
+
+              The "tiered" example:
+
+              Price per apple | Max quantity | Description
+              ----------------|--------------|------------
+              $5              | 1            | 1
+              $4              | 5            | 2 to 5
+              $3              | null         | 6 or more
+
+              If someone bought 1 apple, it would be $5.
+
+              If someone bought 2 apples, it would be $9. $5 per apple for the first apple, then $4 per apple for the 2nd to 5th apple.
+            items:
+              properties:
+                maxQuantity:
+                  description: |
+                    If the value is `null`, it's assumed to be infinite.  It starts at the end of the previous bracket.
+                    If there is no previous bracket, it starts at 1.
+                  example: 1
+                  type: integer
+                price:
+                  description: 'If the price is 0, it''s free.'
+                  example: 99.95
+                  format: double
+                  type: number
+              type: object
+            minItems: 1
+            type: array
+        required:
+          - brackets
+        type: object
   total-redemptions:
     allOf:
       - $ref: '#/definitions/CouponRestriction'
@@ -12908,11 +13701,50 @@ definitions:
           - gatewayConfig
         type: object
     description: vegaaH Gateway config
+  volume:
+    allOf:
+      - $ref: '#/definitions/PlanPriceFormula'
+      - properties:
+          brackets:
+            description: |
+              The price backets, along with the price formula,
+              is used to calculate the amount to charge for the product on this plan on the invoice.
+
+              The "volume" example:
+
+              Price per apple | Max quantity | Description
+              ----------------|--------------|------------
+              $5              | 1            | 1
+              $4              | 5            | 2 to 5
+              $3              | null         | 6 or more
+
+              If someone bought 1 apple, it would be $5.
+
+              If someone bought 2 apples, it would be $8. For 2 to 5 apples, the price is $4 per apple.
+            items:
+              properties:
+                maxQuantity:
+                  description: |
+                    If the value is `null`, it's assumed to be infinite.  It starts at the end of the previous bracket.
+                    If there is no previous bracket, it starts at 1.
+                  example: 1
+                  type: integer
+                price:
+                  description: 'If the price is 0, it''s free.'
+                  example: 99.95
+                  format: double
+                  type: number
+              type: object
+            minItems: 1
+            type: array
+        required:
+          - brackets
+        type: object
 x-servers:
   - description: Live Server
-    url: //api.rebilly.com/v2.1
+    url: 'https://api.rebilly.com/v2.1'
   - description: Sandbox Server
-    url: //api-sandbox.rebilly.com/v2.1
+    url: 'https://api-sandbox.rebilly.com/v2.1'
 x-tagGroups:
   - name: Customers
     tags:
@@ -12921,12 +13753,14 @@ x-tagGroups:
       - Custom Fields
       - Contacts
       - Files
+      - KYC Documents
   - name: Payment Instruments
     tags:
       - Bank Accounts
       - Payment Cards
       - Payment Tokens
       - PayPal Accounts
+      - Payment Instrument Validation
   - name: Payments
     tags:
       - 3D Secure

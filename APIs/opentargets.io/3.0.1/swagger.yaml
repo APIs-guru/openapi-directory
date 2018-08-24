@@ -16,9 +16,14 @@ info:
     services.
 
     You can make calls to the latest version of our API using the base URL
-     `https://api.opentargets.io/v3/platform`. Please make sure you use `https` instead of the unencrypted
-     `http` calls, which we do not accept. Note that we only serve the latest version of the API. If you are interested in querying
-     an old version, please [get in touch](mailto:support@targetvalidation.org) so that we can help.
+    `https://api.opentargets.io/v3/platform`. Please make sure you use `https`
+    instead of the unencrypted `http` calls, which we do not accept.
+
+    Continue reading below or [try query in the interactive interface](https://api.opentargets.io/v3/platform/docs/swagger-ui)
+
+    Note that we only serve the latest version of the API. If you are interested in querying an
+    old version, please [get in touch](mailto:support@targetvalidation.org) so that
+    we can help.
 
     We list below the methods available for you to query our data directly from the API. These methods will be
     automatically generated from our Swagger UI. For every request you create, the interface will display a [curl](https://curl.haxx.se/) command
@@ -35,8 +40,6 @@ info:
     * __private__ - Methods used by the web app to serve additional data not specific to our platform. These methods
     may change without notice and should be used with caution.
     * __utils__ - Methods to get statistics and technical data about our API.
-    * __auth__ - Methods used for authentication. These are only relevant if you have an API key (see the 'Fair Usage
-    and API keys' section below for more details).
 
     ### Supported formats
 
@@ -96,30 +99,47 @@ produces:
   - text/tab-separated-values
   - text/csv
 tags:
+  - description: Methods to filter the available evidence.
+    name: filter
+  - description: Methods to get specific evidence.
+    name: retrieve
+  - description: Methods to search for target or diseases.
+    name: search
   - description: Publicly supported stable API.
     name: public
   - description: Unstable API methods. Subject to change without prior notice. Use at your own risk.
     name: private
-  - description: Authentication methods.
-    name: auth
   - description: Utility methods.
     name: utils
 paths:
   /platform/docs:
     get:
-      description: Get api-description.md for the API
+      description: Access api docs as served by Redoc
       operationId: getApiDocs
       produces:
         - application/json
       responses:
         '200':
-          description: Markdown API documentation file
+          description: Redoc API documentation file
+      summary: Browse API documentation
+      tags:
+        - private
+  /platform/docs/swagger-ui:
+    get:
+      description: Interactive API docs using swagger-ui
+      operationId: getApiSwaggerUI
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Swagger-UI API documentation file
+      summary: Browse interactive API documentation
       tags:
         - private
   /platform/private/autocomplete:
     get:
       description: |
-        Get `autocomplete` objects.
+        Search for the closest term to autocomplete in the search box.
       operationId: getAutocomplete
       parameters:
         - description: A full text query.
@@ -135,6 +155,7 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Get `autocomplete` objects.
       tags:
         - private
   /platform/private/besthitsearch:
@@ -152,6 +173,7 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Find the best hit
       tags:
         - private
   /platform/private/disease:
@@ -172,6 +194,7 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Find information about a list of diseases
       tags:
         - private
   '/platform/private/disease/{disease}':
@@ -188,6 +211,7 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Find information about a disease
       tags:
         - private
   '/platform/private/eco/{ECO_ID}':
@@ -204,6 +228,7 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Get evidence code by ID
       tags:
         - private
   /platform/private/enrichment/targets:
@@ -225,12 +250,13 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Enrichment analysis
       tags:
         - private
   /platform/private/quicksearch:
     get:
       description: |
-        Get `search-result` objects.
+        Get `search-result` objects. Enables search bar functionality.
       operationId: getQuickSearch
       parameters:
         - description: A full text query.
@@ -246,6 +272,7 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Search most relevant results
       tags:
         - private
   /platform/private/relation:
@@ -265,6 +292,7 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Find related entities
       tags:
         - private
   '/platform/private/relation/disease/{disease}':
@@ -281,6 +309,7 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Find related entities by disease
       tags:
         - private
   '/platform/private/relation/target/{target}':
@@ -297,12 +326,13 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Find related entities by target
       tags:
         - private
   /platform/private/target:
     post:
       description: |
-        Get `target` objects.
+        Get `target` objects. Used for the target profile page.
       operationId: postTargetByENSGID
       parameters:
         - description: An Ensembl gene identifier.
@@ -317,8 +347,24 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Find information about a list of targets
       tags:
         - private
+      x-code-samples:
+        - lang: Python
+          source: |
+            import requests
+            r = requests.get('http://api.opentargets.io/v3/platform/private/target/ENSG00000064687')
+            for ph in r.json()['mouse_phenotypes'][0]['phenotypes']:
+                    try:
+                        for link in ph['genotype_phenotype']:
+                            print(
+                                link['mp_identifier'],
+                                'https://europepmc.org/search?query=EXT_ID:'+link['pmid'],
+                                link['mp_label'],
+                                sep="\t")
+                    except KeyError:
+                        pass
   /platform/private/target/expression:
     get:
       description: |
@@ -333,6 +379,7 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Query expression levels
       tags:
         - private
     post:
@@ -351,6 +398,7 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Batch query expression levels
       tags:
         - private
   '/platform/private/target/{target}':
@@ -367,6 +415,7 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Find information about a target
       tags:
         - private
   /platform/public/association:
@@ -390,8 +439,10 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Get association by id
       tags:
         - public
+        - retrieve
   /platform/public/association/filter:
     get:
       description: |
@@ -514,8 +565,14 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Filter available associations
       tags:
         - public
+        - filter
+      x-code-samples:
+        - lang: httpie
+          source: |
+            http https://www.targetvalidation.org/api/latest/public/association/filter target==ENSG00000167207 disease==EFO_0003767
     post:
       description: |
         Complex queries and filters for association objects can also be submitted using a JSON
@@ -533,48 +590,10 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Batch query available associations
       tags:
         - public
-  /platform/public/auth/request_token:
-    get:
-      description: |
-        Get an authentication token in the form of [JWT](https://jwt.io/).
-      operationId: getAuthToken
-      parameters:
-        - description: The name of the app you are using to request a token. You need to register the app before you will be able to request a token.
-          in: query
-          name: app_name
-          required: true
-          type: string
-        - description: The secret you were given when registering your app.
-          in: query
-          name: secret
-          required: true
-          type: string
-        - description: Seconds before the token expires
-          in: query
-          name: expiry
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      tags:
-        - public
-        - auth
-  /platform/public/auth/validate_token:
-    get:
-      description: |
-        It succeeds if token is valid. You should test this call by passing the token in the header
-        as 'Auth-Token'.
-      operationId: ValidateToken
-      responses:
-        '200':
-          description: Successful response
-      tags:
-        - public
-        - utils
-        - auth
+        - filter
   /platform/public/evidence:
     get:
       description: |
@@ -590,7 +609,7 @@ paths:
         **Please note** that a specific evidence ID may change between data releases. We can not guarantee that a specific evidence ID will refer to the same piece of evidence connecting a target and its diseases.
       operationId: getEvidenceById
       parameters:
-        - description: ID of the evidence string to retrieve.
+        - description: Internal unique ID of the evidence string to retrieve.
           in: query
           name: id
           required: true
@@ -598,8 +617,10 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Get evidence by ID
       tags:
         - public
+        - retrieve
     post:
       description: |
         This is the POST version of [/public/evidence](#!/public/get_public_evidence).
@@ -617,8 +638,10 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Get evidence for a list of IDs
       tags:
         - public
+        - retrieve
   /platform/public/evidence/filter:
     get:
       description: |
@@ -709,8 +732,14 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Filter available evidence
       tags:
         - public
+        - filter
+      x-code-samples:
+        - lang: httpie
+          source: |
+            http https://www.targetvalidation.org/api/latest/public/evidence/filter target==ENSG00000167207 disease==EFO_0003767 datastructure==simple
     post:
       description: |
         POST version of [/public/evidence/filter](#!/public/get_public_evidence_filter).
@@ -728,8 +757,10 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Batch filter available evidence
       tags:
         - public
+        - filter
   /platform/public/search:
     get:
       description: |
@@ -761,41 +792,69 @@ paths:
       responses:
         '200':
           description: Successful response
+      summary: Search for a disease or a target
       tags:
         - public
+        - search
+      x-code-samples:
+        - lang: httpie
+          source: |
+            http https://api.opentargets.io/api/latest/public/search q==NOD2 size==1 filter==target
+        - lang: Python
+          source: |
+            import requests
+            from pprint import pprint
+            r = requests.get('https://www.targetvalidation.org/api/latest/public/search',
+                            params={"q":"NOD2","size":1})
+            pprint(r.json())
   /platform/public/utils/ping:
     get:
       description: |
-        Ping service
+        Check if the API is up
       operationId: getPing
       responses:
         '200':
           description: Successful response
+      summary: Ping service
       tags:
         - public
         - utils
   /platform/public/utils/stats:
     get:
       description: |
-        Get stats about available data.
+        Returns the number of associations and evidences, divided by datasource.
       operationId: getDataStats
       responses:
         '200':
           description: Successful response
+      summary: Get statistics about the current data release
       tags:
         - public
         - utils
+      x-code-samples:
+        - lang: Python
+          source: |-
+            import requests
+            r = requests.get('https://www.targetvalidation.com/api/latest/public/stats')
+            assert r.status_code == 200
+            assert r.headers['content-type'] == 'application/json'
+            print(r.json())
   /platform/public/utils/version:
     get:
       description: |
-        Get current API version.
+        Returns current API version.
       operationId: getVersion
       responses:
         '200':
           description: Successful response
+      summary: Get API version
       tags:
         - public
         - utils
+      x-code-samples:
+        - lang: Shell
+          source: |
+            curl -X GET https://www.targetvalidation.org/api/latest/public/utils/version
   /platform/swagger:
     get:
       description: Get swagger.yaml specs for the API
@@ -805,5 +864,20 @@ paths:
       responses:
         '200':
           description: Swagger.yaml file
+      summary: Get OpenAPI schema
       tags:
         - private
+x-tagGroups:
+  - name: Stable
+    tags:
+      - filter
+      - retrieve
+      - search
+  - name: Utilities
+    tags:
+      - utils
+      - private
+  - name: All
+    tags:
+      - public
+      - private

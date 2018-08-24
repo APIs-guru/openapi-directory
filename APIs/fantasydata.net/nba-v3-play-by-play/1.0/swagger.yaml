@@ -34,6 +34,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/{format}/PlayByPlay/{gameid}':
     get:
@@ -143,6 +144,10 @@ definitions:
         type: integer
       Quarter:
         type: string
+      Quarters:
+        items:
+          $ref: '#/definitions/Quarter'
+        type: array
       Season:
         type: integer
       SeasonType:

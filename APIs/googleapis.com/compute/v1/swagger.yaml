@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.11
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/compute/v1/rest'
       version: v1
@@ -107,6 +107,9 @@ tags:
   - name: licenses
   - name: machineTypes
   - name: networks
+  - name: nodeGroups
+  - name: nodeTemplates
+  - name: nodeTypes
   - name: projects
   - name: regionAutoscalers
   - name: regionBackendServices
@@ -973,6 +976,192 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/nodeGroups':
+    get:
+      description: 'Retrieves an aggregated list of node groups. Note: use nodeGroups.listNodes for more details about each group.'
+      operationId: compute.nodeGroups.aggregatedList
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NodeGroupAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - nodeGroups
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/nodeTemplates':
+    get:
+      description: Retrieves an aggregated list of node templates.
+      operationId: compute.nodeTemplates.aggregatedList
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NodeTemplateAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - nodeTemplates
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/nodeTypes':
+    get:
+      description: Retrieves an aggregated list of node types.
+      operationId: compute.nodeTypes.aggregatedList
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NodeTypeAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - nodeTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/aggregated/operations':
     get:
       description: Retrieves an aggregated list of all operations.
@@ -1142,6 +1331,68 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/SubnetworkAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - subnetworks
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/subnetworks/listUsable':
+    get:
+      description: Retrieves an aggregated list of usable subnetworks.
+      operationId: compute.subnetworks.listUsable
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UsableSubnetworksAggregatedList'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1606,18 +1857,34 @@ paths:
       description: Gets service resources (a.k.a service project) associated with this host project.
       operationId: compute.projects.getXpnResources
       parameters:
-        - in: query
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
           name: filter
           type: string
         - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
           type: integer
-        - in: query
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
           name: order_by
           type: string
-        - in: query
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
           name: pageToken
           type: string
         - description: Project ID for this request.
@@ -2059,6 +2326,103 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - backendBuckets
+  '/{project}/global/backendBuckets/{backendBucket}/addSignedUrlKey':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Adds a key for validating requests with signed URLs for this backend bucket.
+      operationId: compute.backendBuckets.addSignedUrlKey
+      parameters:
+        - description: Name of the BackendBucket resource to which the Signed URL Key should be added. The name should conform to RFC1035.
+          in: path
+          name: backendBucket
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SignedUrlKey'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendBuckets
+  '/{project}/global/backendBuckets/{backendBucket}/deleteSignedUrlKey':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Deletes a key for validating requests with signed URLs for this backend bucket.
+      operationId: compute.backendBuckets.deleteSignedUrlKey
+      parameters:
+        - description: Name of the BackendBucket resource to which the Signed URL Key should be added. The name should conform to RFC1035.
+          in: path
+          name: backendBucket
+          required: true
+          type: string
+        - description: The name of the Signed URL Key to delete.
+          in: query
+          name: keyName
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendBuckets
   '/{project}/global/backendServices':
     get:
       description: Retrieves the list of BackendService resources available to the specified project.
@@ -2279,6 +2643,103 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/BackendService'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendServices
+  '/{project}/global/backendServices/{backendService}/addSignedUrlKey':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Adds a key for validating requests with signed URLs for this backend service.
+      operationId: compute.backendServices.addSignedUrlKey
+      parameters:
+        - description: Name of the BackendService resource to which the Signed URL Key should be added. The name should conform to RFC1035.
+          in: path
+          name: backendService
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SignedUrlKey'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendServices
+  '/{project}/global/backendServices/{backendService}/deleteSignedUrlKey':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Deletes a key for validating requests with signed URLs for this backend service.
+      operationId: compute.backendServices.deleteSignedUrlKey
+      parameters:
+        - description: Name of the BackendService resource to which the Signed URL Key should be added. The name should conform to RFC1035.
+          in: path
+          name: backendService
+          required: true
+          type: string
+        - description: The name of the Signed URL Key to delete.
+          in: query
+          name: keyName
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -6204,6 +6665,54 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/targetHttpsProxies/{targetHttpsProxy}/setQuicOverride':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the QUIC override policy for TargetHttpsProxy.
+      operationId: compute.targetHttpsProxies.setQuicOverride
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetHttpsProxiesSetQuicOverrideRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the TargetHttpsProxy resource to set the QUIC override policy for. The name should conform to RFC1035.
+          in: path
+          name: targetHttpsProxy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - targetHttpsProxies
   '/{project}/global/targetHttpsProxies/{targetHttpsProxy}/setSslPolicy':
     parameters:
       - $ref: '#/parameters/alt'
@@ -7226,18 +7735,34 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/ProjectsListXpnHostsRequest'
-        - in: query
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
           name: filter
           type: string
         - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
           type: integer
-        - in: query
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
           name: order_by
           type: string
-        - in: query
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
           name: pageToken
           type: string
         - description: Project ID for this request.
@@ -9440,7 +9965,15 @@ paths:
       description: Lists the instances in the managed instance group and instances that are scheduled to be created. The list includes any current actions that the group has scheduled for its instances.
       operationId: compute.regionInstanceGroupManagers.listManagedInstances
       parameters:
-        - in: query
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
           name: filter
           type: string
         - description: The name of the managed instance group.
@@ -9449,14 +9982,22 @@ paths:
           required: true
           type: string
         - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
           type: integer
-        - in: query
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
           name: order_by
           type: string
-        - in: query
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
           name: pageToken
           type: string
         - description: Project ID for this request.
@@ -10123,6 +10664,238 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - interconnectAttachments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates the specified interconnect attachment with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+      operationId: compute.interconnectAttachments.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InterconnectAttachment'
+        - description: Name of the interconnect attachment to patch.
+          in: path
+          name: interconnectAttachment
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - interconnectAttachments
+  '/{project}/regions/{region}/nodeTemplates':
+    get:
+      description: Retrieves a list of node templates available to the specified project.
+      operationId: compute.nodeTemplates.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NodeTemplateList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - nodeTemplates
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a NodeTemplate resource in the specified project using the data included in the request.
+      operationId: compute.nodeTemplates.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/NodeTemplate'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - nodeTemplates
+  '/{project}/regions/{region}/nodeTemplates/{nodeTemplate}':
+    delete:
+      description: Deletes the specified NodeTemplate resource.
+      operationId: compute.nodeTemplates.delete
+      parameters:
+        - description: Name of the NodeTemplate resource to delete.
+          in: path
+          name: nodeTemplate
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - nodeTemplates
+    get:
+      description: Returns the specified node template. Gets a list of available node templates by making a list() request.
+      operationId: compute.nodeTemplates.get
+      parameters:
+        - description: Name of the node template to return.
+          in: path
+          name: nodeTemplate
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NodeTemplate'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - nodeTemplates
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -11893,6 +12666,49 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - projects
+  '/{project}/setDefaultNetworkTier':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the default network tier of the project. The default network tier is used when an address/forwardingRule/instance is created without specifying the network tier field.
+      operationId: compute.projects.setDefaultNetworkTier
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ProjectsSetDefaultNetworkTierRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - projects
   '/{project}/setUsageExportBucket':
     parameters:
       - $ref: '#/parameters/alt'
@@ -13351,7 +14167,15 @@ paths:
       description: 'Lists all of the instances in the managed instance group. Each instance in the list has a currentAction, which indicates the action that the managed instance group is performing on the instance. For example, if the group is still creating an instance, the currentAction is CREATING. If a previous action failed, the list displays the errors for that failed action.'
       operationId: compute.instanceGroupManagers.listManagedInstances
       parameters:
-        - in: query
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
           name: filter
           type: string
         - description: The name of the managed instance group.
@@ -13360,14 +14184,22 @@ paths:
           required: true
           type: string
         - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
           type: integer
-        - in: query
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
           name: order_by
           type: string
-        - in: query
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
           name: pageToken
           type: string
         - description: Project ID for this request.
@@ -15124,6 +15956,46 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - instances
+  '/{project}/zones/{zone}/instances/{instance}/simulateMaintenanceEvent':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Simulates a maintenance event on the instance.
+      operationId: compute.instances.simulateMaintenanceEvent
+      parameters:
+        - description: Name of the instance scoping this request.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
   '/{project}/zones/{zone}/instances/{instance}/start':
     parameters:
       - $ref: '#/parameters/alt'
@@ -15546,6 +16418,539 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - machineTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/nodeGroups':
+    get:
+      description: 'Retrieves a list of node groups available to the specified project. Note: use nodeGroups.listNodes for more details about each group.'
+      operationId: compute.nodeGroups.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NodeGroupList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - nodeGroups
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a NodeGroup resource in the specified project using the data included in the request.
+      operationId: compute.nodeGroups.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/NodeGroup'
+        - description: Initial count of nodes in the node group.
+          in: query
+          name: initialNodeCount
+          required: true
+          type: integer
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - nodeGroups
+  '/{project}/zones/{zone}/nodeGroups/{nodeGroup}':
+    delete:
+      description: Deletes the specified NodeGroup resource.
+      operationId: compute.nodeGroups.delete
+      parameters:
+        - description: Name of the NodeGroup resource to delete.
+          in: path
+          name: nodeGroup
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - nodeGroups
+    get:
+      description: 'Returns the specified NodeGroup. Get a list of available NodeGroups by making a list() request. Note: the "nodes" field should not be used. Use nodeGroups.listNodes instead.'
+      operationId: compute.nodeGroups.get
+      parameters:
+        - description: Name of the node group to return.
+          in: path
+          name: nodeGroup
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NodeGroup'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - nodeGroups
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/nodeGroups/{nodeGroup}/addNodes':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Adds specified number of nodes to the node group.
+      operationId: compute.nodeGroups.addNodes
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/NodeGroupsAddNodesRequest'
+        - description: Name of the NodeGroup resource to delete.
+          in: path
+          name: nodeGroup
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - nodeGroups
+  '/{project}/zones/{zone}/nodeGroups/{nodeGroup}/deleteNodes':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Deletes specified nodes from the node group.
+      operationId: compute.nodeGroups.deleteNodes
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/NodeGroupsDeleteNodesRequest'
+        - description: Name of the NodeGroup resource to delete.
+          in: path
+          name: nodeGroup
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - nodeGroups
+  '/{project}/zones/{zone}/nodeGroups/{nodeGroup}/listNodes':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Lists nodes in the node group.
+      operationId: compute.nodeGroups.listNodes
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: Name of the NodeGroup resource whose nodes you want to list.
+          in: path
+          name: nodeGroup
+          required: true
+          type: string
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NodeGroupsListNodes'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - nodeGroups
+  '/{project}/zones/{zone}/nodeGroups/{nodeGroup}/setNodeTemplate':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Updates the node template of the node group.
+      operationId: compute.nodeGroups.setNodeTemplate
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/NodeGroupsSetNodeTemplateRequest'
+        - description: Name of the NodeGroup resource to delete.
+          in: path
+          name: nodeGroup
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - nodeGroups
+  '/{project}/zones/{zone}/nodeTypes':
+    get:
+      description: Retrieves a list of node types available to the specified project.
+      operationId: compute.nodeTypes.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NodeTypeList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - nodeTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/nodeTypes/{nodeType}':
+    get:
+      description: Returns the specified node type. Gets a list of available node types by making a list() request.
+      operationId: compute.nodeTypes.get
+      parameters:
+        - description: Name of the node type to return.
+          in: path
+          name: nodeType
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NodeType'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - nodeTypes
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -16136,6 +17541,17 @@ definitions:
       natIP:
         description: 'An external IP address associated with this instance. Specify an unused static external IP address available to the project or leave this field undefined to use an IP from a shared ephemeral IP address pool. If you specify a static external IP address, it must live in the same region as the zone of the instance.'
         type: string
+      networkTier:
+        description: |-
+          This signifies the networking tier used for configuring this access configuration and can only take the following values: PREMIUM, STANDARD.
+
+          If an AccessConfig is specified without a valid external IP address, an ephemeral IP will be created with this networkTier.
+
+          If an AccessConfig with a valid external IP address is specified, it must match that of the networkTier associated with the Address resource owning that IP.
+        enum:
+          - PREMIUM
+          - STANDARD
+        type: string
       publicPtrDomainName:
         description: The DNS domain name for the public PTR record. This field can only be set when the set_public_ptr field is enabled.
         type: string
@@ -16187,6 +17603,15 @@ definitions:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
+      networkTier:
+        description: |-
+          This signifies the networking tier used for configuring this Address and can only take the following values: PREMIUM , STANDARD.
+
+          If this field is not specified, it is assumed to be PREMIUM.
+        enum:
+          - PREMIUM
+          - STANDARD
+        type: string
       region:
         description: '[Output Only] URL of the region where the regional address resides. This field is not applicable to global addresses. You must specify this field as part of the HTTP request URL. You cannot set this field in the request body.'
         type: string
@@ -16198,6 +17623,7 @@ definitions:
         enum:
           - IN_USE
           - RESERVED
+          - RESERVING
         type: string
       subnetwork:
         description: 'The URL of the subnetwork in which to reserve the address. If an IP address is specified, it must be within the subnetwork''s IP range. This field can only be used with INTERNAL type with GCE_ENDPOINT/DNS_RESOLVER purposes.'
@@ -16499,7 +17925,7 @@ definitions:
       This property is mutually exclusive with the source property; you can only define one or the other, but not both.
     properties:
       diskName:
-        description: 'Specifies the disk name. If not specified, the default is to use the name of the instance.'
+        description: 'Specifies the disk name. If not specified, the default is to use the name of the instance. If the disk with the instance name exists already in the given zone/region, a new name will be automatically generated.'
         type: string
       diskSizeGb:
         description: Specifies the size of the disk in base-2 GB.
@@ -16525,12 +17951,12 @@ definitions:
         description: |-
           The source image to create this disk. When creating a new instance, one of initializeParams.sourceImage or disks.source is required except for local SSD.
 
-          To create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-8 to use the latest Debian 8 image:
-          projects/debian-cloud/global/images/family/debian-8
+          To create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-9 to use the latest Debian 9 image:
+          projects/debian-cloud/global/images/family/debian-9
 
 
           Alternatively, use a specific version of a public operating system image:
-          projects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD
+          projects/debian-cloud/global/images/debian-9-stretch-vYYYYMMDD
 
 
           To create a disk with a custom image that you created, specify the image name in the following format:
@@ -16972,6 +18398,9 @@ definitions:
       bucketName:
         description: Cloud Storage bucket name.
         type: string
+      cdnPolicy:
+        $ref: '#/definitions/BackendBucketCdnPolicy'
+        description: Cloud CDN configuration for this BackendBucket.
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -16996,6 +18425,19 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+    type: object
+  BackendBucketCdnPolicy:
+    description: Message containing Cloud CDN configuration for a backend bucket.
+    properties:
+      signedUrlCacheMaxAgeSec:
+        description: 'Maximum number of seconds the response to a signed URL request will be considered fresh. After this time period, the response will be revalidated before being served. Defaults to 1hr (3600s). When serving responses to signed URL requests, Cloud CDN will internally behave as though all responses from this backend had a ?Cache-Control: public, max-age=[TTL]? header, regardless of any existing Cache-Control header. The actual headers served in responses will not be altered.'
+        format: int64
+        type: string
+      signedUrlKeyNames:
+        description: '[Output Only] Names of the keys for signing request URLs.'
+        items:
+          type: string
+        type: array
     type: object
   BackendBucketList:
     description: Contains a list of BackendBucket resources.
@@ -17100,7 +18542,10 @@ definitions:
           When the load balancing scheme is INTERNAL, this field is not used.
         type: boolean
       fingerprint:
-        description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a BackendService. An up-to-date fingerprint must be provided in order to update the BackendService.
+        description: |-
+          Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a BackendService. An up-to-date fingerprint must be provided in order to update the BackendService.
+
+          To see the latest fingerprint, make a get() request to retrieve a BackendService.
         format: byte
         type: string
       healthChecks:
@@ -17263,6 +18708,15 @@ definitions:
       cacheKeyPolicy:
         $ref: '#/definitions/CacheKeyPolicy'
         description: The CacheKeyPolicy for this CdnPolicy.
+      signedUrlCacheMaxAgeSec:
+        description: 'Maximum number of seconds the response to a signed URL request will be considered fresh. After this time period, the response will be revalidated before being served. Defaults to 1hr (3600s). When serving responses to signed URL requests, Cloud CDN will internally behave as though all responses from this backend had a ?Cache-Control: public, max-age=[TTL]? header, regardless of any existing Cache-Control header. The actual headers served in responses will not be altered.'
+        format: int64
+        type: string
+      signedUrlKeyNames:
+        description: '[Output Only] Names of the keys for signing request URLs.'
+        items:
+          type: string
+        type: array
     type: object
   BackendServiceGroupHealth:
     properties:
@@ -17808,7 +19262,7 @@ definitions:
           type: string
         type: array
       licenses:
-        description: Any applicable publicly visible licenses.
+        description: A list of publicly visible licenses. Reserved for Google's use.
         items:
           type: string
         type: array
@@ -17841,12 +19295,12 @@ definitions:
         description: |-
           The source image used to create this disk. If the source image is deleted, this field will not be set.
 
-          To create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-8 to use the latest Debian 8 image:
-          projects/debian-cloud/global/images/family/debian-8
+          To create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-9 to use the latest Debian 9 image:
+          projects/debian-cloud/global/images/family/debian-9
 
 
           Alternatively, use a specific version of a public operating system image:
-          projects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD
+          projects/debian-cloud/global/images/debian-9-stretch-vYYYYMMDD
 
 
           To create a disk with a custom image that you created, specify the image name in the following format:
@@ -17964,6 +19418,36 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  DiskInstantiationConfig:
+    description: A specification of the desired way to instantiate a disk in the instance template when its created from a source instance.
+    properties:
+      autoDelete:
+        description: Specifies whether the disk will be auto-deleted when the instance is deleted (but not when the disk is detached from the instance).
+        type: boolean
+      customImage:
+        description: The custom source image to be used to restore this disk when instantiating this instance template.
+        type: string
+      deviceName:
+        description: Specifies the device name of the disk to which the configurations apply to.
+        type: string
+      instantiateFrom:
+        description: |-
+          Specifies whether to include the disk and what image to use. Possible values are:  
+          - source-image: to use the same image that was used to create the source instance's corresponding disk. Applicable to the boot disk and additional read-write disks. 
+          - source-image-family: to use the same image family that was used to create the source instance's corresponding disk. Applicable to the boot disk and additional read-write disks. 
+          - custom-image: to use a user-provided image url for disk creation. Applicable to the boot disk and additional read-write disks. 
+          - attach-read-only: to attach a read-only disk. Applicable to read-only disks. 
+          - do-not-include: to exclude a disk from the template. Applicable to additional read-write disks, local SSDs, and read-only disks.
+        enum:
+          - ATTACH_READ_ONLY
+          - BLANK
+          - CUSTOM_IMAGE
+          - DEFAULT
+          - DO_NOT_INCLUDE
+          - SOURCE_IMAGE
+          - SOURCE_IMAGE_FAMILY
+        type: string
     type: object
   DiskList:
     description: A list of Disk resources.
@@ -18352,6 +19836,20 @@ definitions:
             type: string
         type: object
     type: object
+  DistributionPolicy:
+    properties:
+      zones:
+        description: Zones where the regional managed instance group will create and manage instances.
+        items:
+          $ref: '#/definitions/DistributionPolicyZoneConfiguration'
+        type: array
+    type: object
+  DistributionPolicyZoneConfiguration:
+    properties:
+      zone:
+        description: The URL of the zone. The zone must exist in the region where the managed instance group is located.
+        type: string
+    type: object
   Firewall:
     description: Represents a Firewall resource.
     properties:
@@ -18541,6 +20039,8 @@ definitions:
 
           When the load balancing scheme is EXTERNAL, for global forwarding rules, the address must be a global IP, and for regional forwarding rules, the address must live in the same region as the forwarding rule. If this field is empty, an ephemeral IPv4 address from the same scope (global or regional) will be assigned. A regional forwarding rule supports IPv4 only. A global forwarding rule supports either IPv4 or IPv6.
 
+          When the load balancing scheme is INTERNAL_SELF_MANAGED, this must be a URL reference to an existing Address resource ( internal regional static IP address).
+
           When the load balancing scheme is INTERNAL, this can only be an RFC 1918 IP address belonging to the network/subnet configured for the forwarding rule. By default, if this field is empty, an ephemeral internal IP address will be automatically allocated from the IP range of the subnet or network configured for this forwarding rule.
 
           An address can be specified either by a literal IP address or a URL reference to an existing Address resource. The following examples are all valid:  
@@ -18555,7 +20055,7 @@ definitions:
         description: |-
           The IP protocol to which this rule applies. Valid options are TCP, UDP, ESP, AH, SCTP or ICMP.
 
-          When the load balancing scheme is INTERNAL, only TCP and UDP are valid.
+          When the load balancing scheme is INTERNAL, only TCP and UDP are valid. When the load balancing scheme is INTERNAL_SELF_MANAGED, only TCPis valid.
         enum:
           - AH
           - ESP
@@ -18566,7 +20066,7 @@ definitions:
         type: string
       backendService:
         description: |-
-          This field is not used for external load balancing.
+          This field is only used for INTERNAL load balancing.
 
           For internal load balancing, this field identifies the BackendService resource to receive the matched traffic.
         type: string
@@ -18581,7 +20081,7 @@ definitions:
         format: uint64
         type: string
       ipVersion:
-        description: The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6. This can only be specified for a global forwarding rule.
+        description: The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6. This can only be specified for an external global forwarding rule.
         enum:
           - IPV4
           - IPV6
@@ -18592,7 +20092,7 @@ definitions:
         description: '[Output Only] Type of the resource. Always compute#forwardingRule for Forwarding Rule resources.'
         type: string
       loadBalancingScheme:
-        description: 'This signifies what the ForwardingRule will be used for and can only take the following values: INTERNAL, EXTERNAL The value of INTERNAL means that this will be used for Internal Network Load Balancing (TCP, UDP). The value of EXTERNAL means that this will be used for External Load Balancing (HTTP(S) LB, External TCP/UDP LB, SSL Proxy)'
+        description: 'This signifies what the ForwardingRule will be used for and can only take the following values: INTERNAL, INTERNAL_SELF_MANAGED, EXTERNAL. The value of INTERNAL means that this will be used for Internal Network Load Balancing (TCP, UDP). The value of INTERNAL_SELF_MANAGED means that this will be used for Internal Global HTTP(S) LB. The value of EXTERNAL means that this will be used for External Load Balancing (HTTP(S) LB, External TCP/UDP LB, SSL Proxy)'
         enum:
           - EXTERNAL
           - INTERNAL
@@ -18606,7 +20106,18 @@ definitions:
         description: |-
           This field is not used for external load balancing.
 
-          For internal load balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used.
+          For INTERNAL and INTERNAL_SELF_MANAGED load balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used.
+        type: string
+      networkTier:
+        description: |-
+          This signifies the networking tier used for configuring this load balancer and can only take the following values: PREMIUM , STANDARD.
+
+          For regional ForwardingRule, the valid values are PREMIUM and STANDARD. For GlobalForwardingRule, the valid value is PREMIUM.
+
+          If this field is not specified, it is assumed to be PREMIUM. If IPAddress is specified, this value must be equal to the networkTier of the Address.
+        enum:
+          - PREMIUM
+          - STANDARD
         type: string
       portRange:
         description: |-
@@ -18639,14 +20150,14 @@ definitions:
         type: string
       subnetwork:
         description: |-
-          This field is not used for external load balancing.
+          This field is only used for INTERNAL load balancing.
 
           For internal load balancing, this field identifies the subnetwork that the load balanced IP should belong to for this Forwarding Rule.
 
           If the network specified is in auto subnet mode, this field is optional. However, if the network is in custom subnet mode, a subnetwork must be specified.
         type: string
       target:
-        description: 'The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object.'
+        description: 'The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For INTERNAL_SELF_MANAGED" load balancing, only HTTP and HTTPS targets are valid.'
         type: string
     type: object
   ForwardingRuleAggregatedList:
@@ -19432,7 +20943,7 @@ definitions:
         $ref: '#/definitions/CustomerEncryptionKey'
         description: The customer-supplied encryption key of the source disk. Required if the source disk is protected by a customer-supplied encryption key.
       sourceDiskId:
-        description: The ID value of the disk used to create this image. This value may be used to determine whether the image was taken from the current or a previous instance of a given disk name.
+        description: '[Output Only] The ID value of the disk used to create this image. This value may be used to determine whether the image was taken from the current or a previous instance of a given disk name.'
         type: string
       sourceImage:
         description: |-
@@ -19656,7 +21167,7 @@ definitions:
         type: string
       tags:
         $ref: '#/definitions/Tags'
-        description: A list of tags to apply to this instance. Tags are used to identify valid sources or targets for network firewalls and are specified by the client during instance creation. The tags can be later modified by the setTags method. Each tag within the list must comply with RFC1035.
+        description: Tags to apply to this instance. Tags are used to identify valid sources or targets for network firewalls and are specified by the client during instance creation. The tags can be later modified by the setTags method. Each tag within the list must comply with RFC1035. Multiple tags can be specified via the 'tags.items' field.
       zone:
         description: '[Output Only] URL of the zone where the instance resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
@@ -19942,8 +21453,14 @@ definitions:
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
+      distributionPolicy:
+        $ref: '#/definitions/DistributionPolicy'
+        description: Policy specifying intended distribution of instances in regional managed instance group.
       fingerprint:
-        description: Fingerprint of this resource. This field may be used in optimistic locking. It will be ignored when inserting an InstanceGroupManager. An up-to-date fingerprint must be provided in order to update the InstanceGroupManager or the field need to be unset.
+        description: |-
+          Fingerprint of this resource. This field may be used in optimistic locking. It will be ignored when inserting an InstanceGroupManager. An up-to-date fingerprint must be provided in order to update the InstanceGroupManager.
+
+          To see the latest fingerprint, make a get() request to retrieve an InstanceGroupManager.
         format: byte
         type: string
       id:
@@ -20674,6 +22191,15 @@ definitions:
       selfLink:
         description: '[Output Only] The URL for this instance template. The server defines this URL.'
         type: string
+      sourceInstance:
+        description: |-
+          The source instance used to create the template. You can provide this as a partial or full URL to the resource. For example, the following are valid values:  
+          - https://www.googleapis.com/compute/v1/projects/project/zones/zone/instances/instance 
+          - projects/project/zones/zone/instances/instance
+        type: string
+      sourceInstanceParams:
+        $ref: '#/definitions/SourceInstanceParams'
+        description: The source instance params to use to create this instance template.
     type: object
   InstanceTemplateList:
     description: A list of instance templates.
@@ -20924,6 +22450,7 @@ definitions:
         enum:
           - DEDICATED
           - IT_PRIVATE
+          - PARTNER
         type: string
       kind:
         default: 'compute#interconnect'
@@ -20964,10 +22491,38 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      state:
+        description: '[Output Only] The current state of whether or not this Interconnect is functional.'
+        enum:
+          - ACTIVE
+          - UNPROVISIONED
+        type: string
     type: object
   InterconnectAttachment:
     description: 'Represents an InterconnectAttachment (VLAN attachment) resource. For more information, see  Creating VLAN Attachments. (== resource_for beta.interconnectAttachments ==) (== resource_for v1.interconnectAttachments ==)'
     properties:
+      adminEnabled:
+        description: Determines whether this Attachment will carry packets. Not present for PARTNER_PROVIDER.
+        type: boolean
+      bandwidth:
+        description: 'Provisioned bandwidth capacity for the interconnectAttachment. Can be set by the partner to update the customer''s provisioned bandwidth. Output only for for PARTNER type, mutable for PARTNER_PROVIDER, not available for DEDICATED.'
+        enum:
+          - BPS_100M
+          - BPS_10G
+          - BPS_1G
+          - BPS_200M
+          - BPS_2G
+          - BPS_300M
+          - BPS_400M
+          - BPS_500M
+          - BPS_50M
+          - BPS_5G
+        type: string
+      candidateSubnets:
+        description: 'Up to 16 candidate prefixes that can be used to restrict the allocation of cloudRouterIpAddress and customerRouterIpAddress for this attachment. All prefixes must be within link-local address space (169.254.0.0/16) and must be /29 or shorter (/28, /27, etc). Google will attempt to select an unused /29 from the supplied candidate prefix(es). The request will fail if all possible /29s are in use on Google?s edge. If not supplied, Google will randomly select an unused /29 from all of link-local space.'
+        items:
+          type: string
+        type: array
       cloudRouterIpAddress:
         description: '[Output Only] IPv4 address + prefix length to be configured on Cloud Router Interface for this interconnect attachment.'
         type: string
@@ -20979,6 +22534,13 @@ definitions:
         type: string
       description:
         description: An optional description of this resource.
+        type: string
+      edgeAvailabilityDomain:
+        description: 'Desired availability domain for the attachment. Only available for type PARTNER, at creation time. For improved reliability, customers should configure a pair of attachments with one per availability domain. The selected availability domain will be provided to the Partner via the pairing key so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY_DOMAIN_ANY.'
+        enum:
+          - AVAILABILITY_DOMAIN_1
+          - AVAILABILITY_DOMAIN_2
+          - AVAILABILITY_DOMAIN_ANY
         type: string
       googleReferenceId:
         description: '[Output Only] Google reference ID, to be used when raising support tickets with Google or otherwise to debug backend connectivity issues.'
@@ -21004,6 +22566,16 @@ definitions:
           - OS_ACTIVE
           - OS_UNPROVISIONED
         type: string
+      pairingKey:
+        description: '[Output only for type PARTNER. Input only for PARTNER_PROVIDER. Not present for DEDICATED]. The opaque identifier of an PARTNER attachment used to initiate provisioning with a selected partner. Of the form "XXXXX/region/domain"'
+        type: string
+      partnerAsn:
+        description: 'Optional BGP ASN for the router that should be supplied by a layer 3 Partner if they configured BGP on behalf of the customer. Output only for PARTNER type, input only for PARTNER_PROVIDER, not available for DEDICATED.'
+        format: int64
+        type: string
+      partnerMetadata:
+        $ref: '#/definitions/InterconnectAttachmentPartnerMetadata'
+        description: 'Informational metadata about Partner attachments from Partners to display to customers. Output only for for PARTNER type, mutable for PARTNER_PROVIDER, not available for DEDICATED.'
       privateInterconnectInfo:
         $ref: '#/definitions/InterconnectAttachmentPrivateInfo'
         description: '[Output Only] Information specific to an InterconnectAttachment. This property is populated if the interconnect that this is attached to is of type DEDICATED.'
@@ -21016,6 +22588,27 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      state:
+        description: '[Output Only] The current state of this attachment''s functionality.'
+        enum:
+          - ACTIVE
+          - DEFUNCT
+          - PARTNER_REQUEST_RECEIVED
+          - PENDING_CUSTOMER
+          - PENDING_PARTNER
+          - STATE_UNSPECIFIED
+          - UNPROVISIONED
+        type: string
+      type:
+        enum:
+          - DEDICATED
+          - PARTNER
+          - PARTNER_PROVIDER
+        type: string
+      vlanTag8021q:
+        description: 'Available only for DEDICATED and PARTNER_PROVIDER. Desired VLAN tag for this attachment, in the range 2-4094. This field refers to 802.1q VLAN tag, also known as IEEE 802.1Q Only specified at creation time.'
+        format: int32
+        type: integer
     type: object
   InterconnectAttachmentAggregatedList:
     properties:
@@ -21156,6 +22749,19 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  InterconnectAttachmentPartnerMetadata:
+    description: Informational metadata about Partner attachments from Partners to display to customers. These fields are propagated from PARTNER_PROVIDER attachments to their corresponding PARTNER attachments.
+    properties:
+      interconnectName:
+        description: 'Plain text name of the Interconnect this attachment is connected to, as displayed in the Partner?s portal. For instance ?Chicago 1?. This value may be validated to match approved Partner values.'
+        type: string
+      partnerName:
+        description: Plain text name of the Partner providing this attachment. This value may be validated to match approved Partner values.
+        type: string
+      portalUrl:
+        description: URL of the Partner?s portal for this Attachment. Partners may customise this to be a deep-link to the specific resource on the Partner portal. This value may be validated to match approved Partner values.
+        type: string
     type: object
   InterconnectAttachmentPrivateInfo:
     description: Information for an interconnect attachment when this belongs to an interconnect of type DEDICATED.
@@ -21923,7 +23529,7 @@ definitions:
         type: object
     type: object
   ManagedInstance:
-    description: 'Next available tag: 12'
+    description: A Managed Instance resource.
     properties:
       currentAction:
         description: |-
@@ -21996,7 +23602,10 @@ definitions:
     description: A metadata key/value entry.
     properties:
       fingerprint:
-        description: 'Specifies a fingerprint for this request, which is essentially a hash of the metadata''s contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata.'
+        description: |-
+          Specifies a fingerprint for this request, which is essentially a hash of the metadata's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata.
+
+          To see the latest fingerprint, make a get() request to retrieve the resource.
         format: byte
         type: string
       items:
@@ -22244,6 +23853,852 @@ definitions:
       name:
         description: 'Name of the peering, which should conform to RFC1035.'
         type: string
+    type: object
+  NodeGroup:
+    description: A NodeGroup resource.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#nodeGroup'
+        description: '[Output Only] The type of the resource. Always compute#nodeGroup for node group.'
+        type: string
+      name:
+        description: 'The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        type: string
+      nodeTemplate:
+        description: The URL of the node template to which this node group belongs.
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      size:
+        description: '[Output Only] The total number of nodes in the node group.'
+        format: int32
+        type: integer
+      status:
+        enum:
+          - CREATING
+          - DELETING
+          - INVALID
+          - READY
+        type: string
+      zone:
+        description: '[Output Only] The name of the zone where the node group resides, such as us-central1-a.'
+        type: string
+    type: object
+  NodeGroupAggregatedList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/NodeGroupsScopedList'
+          description: '[Output Only] Name of the scope containing this set of node groups.'
+        description: A list of NodeGroupsScopedList resources.
+        type: object
+      kind:
+        default: 'compute#nodeGroupAggregatedList'
+        description: '[Output Only] Type of resource.Always compute#nodeGroupAggregatedList for aggregated lists of node groups.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  NodeGroupList:
+    description: Contains a list of nodeGroups.
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of NodeGroup resources.
+        items:
+          $ref: '#/definitions/NodeGroup'
+        type: array
+      kind:
+        default: 'compute#nodeGroupList'
+        description: '[Output Only] Type of resource.Always compute#nodeGroupList for lists of node groups.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  NodeGroupNode:
+    properties:
+      instances:
+        description: Instances scheduled on this node.
+        items:
+          type: string
+        type: array
+      name:
+        description: The name of the node.
+        type: string
+      nodeType:
+        description: The type of this node.
+        type: string
+      status:
+        enum:
+          - CREATING
+          - DELETING
+          - INVALID
+          - READY
+        type: string
+    type: object
+  NodeGroupsAddNodesRequest:
+    properties:
+      additionalNodeCount:
+        description: Count of additional nodes to be added to the node group.
+        format: int32
+        type: integer
+    type: object
+  NodeGroupsDeleteNodesRequest:
+    properties:
+      nodes:
+        items:
+          type: string
+        type: array
+    type: object
+  NodeGroupsListNodes:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of Node resources.
+        items:
+          $ref: '#/definitions/NodeGroupNode'
+        type: array
+      kind:
+        default: 'compute#nodeGroupsListNodes'
+        description: '[Output Only] The resource type, which is always compute.nodeGroupsListNodes for the list of nodes in the specified node group.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  NodeGroupsScopedList:
+    properties:
+      nodeGroups:
+        description: '[Output Only] A list of node groups contained in this scope.'
+        items:
+          $ref: '#/definitions/NodeGroup'
+        type: array
+      warning:
+        description: '[Output Only] An informational warning that appears when the nodeGroup list is empty.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  NodeGroupsSetNodeTemplateRequest:
+    properties:
+      nodeTemplate:
+        description: Full or partial URL of the node template resource to be updated for this node group.
+        type: string
+    type: object
+  NodeTemplate:
+    description: A Node Template resource.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#nodeTemplate'
+        description: '[Output Only] The type of the resource. Always compute#nodeTemplate for node templates.'
+        type: string
+      name:
+        description: 'The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last charaicter, which cannot be a dash.'
+        type: string
+      nodeAffinityLabels:
+        additionalProperties:
+          type: string
+        description: 'Labels to use for node affinity, which will be used in instance scheduling.'
+        type: object
+      nodeType:
+        description: The node type to use for nodes group that are created from this template.
+        type: string
+      nodeTypeFlexibility:
+        $ref: '#/definitions/NodeTemplateNodeTypeFlexibility'
+        description: |-
+          The flexible properties of the desired node type. Node groups that use this node template will create nodes of a type that matches these properties.
+
+          This field is mutually exclusive with the node_type property; you can only define one or the other, but not both.
+      region:
+        description: '[Output Only] The name of the region where the node template resides, such as us-central1.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      status:
+        description: '[Output Only] The status of the node template. One of the following values: CREATING, READY, and DELETING.'
+        enum:
+          - CREATING
+          - DELETING
+          - INVALID
+          - READY
+        type: string
+      statusMessage:
+        description: '[Output Only] An optional, human-readable explanation of the status.'
+        type: string
+    type: object
+  NodeTemplateAggregatedList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/NodeTemplatesScopedList'
+          description: '[Output Only] Name of the scope containing this set of node templates.'
+        description: A list of NodeTemplatesScopedList resources.
+        type: object
+      kind:
+        default: 'compute#nodeTemplateAggregatedList'
+        description: '[Output Only] Type of resource.Always compute#nodeTemplateAggregatedList for aggregated lists of node templates.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  NodeTemplateList:
+    description: Contains a list of node templates.
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of NodeTemplate resources.
+        items:
+          $ref: '#/definitions/NodeTemplate'
+        type: array
+      kind:
+        default: 'compute#nodeTemplateList'
+        description: '[Output Only] Type of resource.Always compute#nodeTemplateList for lists of node templates.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  NodeTemplateNodeTypeFlexibility:
+    properties:
+      cpus:
+        type: string
+      localSsd:
+        type: string
+      memory:
+        type: string
+    type: object
+  NodeTemplatesScopedList:
+    properties:
+      nodeTemplates:
+        description: '[Output Only] A list of node templates contained in this scope.'
+        items:
+          $ref: '#/definitions/NodeTemplate'
+        type: array
+      warning:
+        description: '[Output Only] An informational warning that appears when the node templates list is empty.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  NodeType:
+    description: A Node Type resource.
+    properties:
+      cpuPlatform:
+        description: '[Output Only] The CPU platform used by this node type.'
+        type: string
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      deprecated:
+        $ref: '#/definitions/DeprecationStatus'
+        description: '[Output Only] The deprecation status associated with this node type.'
+      description:
+        description: '[Output Only] An optional textual description of the resource.'
+        type: string
+      guestCpus:
+        description: '[Output Only] The number of virtual CPUs that are available to the node type.'
+        format: int32
+        type: integer
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#nodeType'
+        description: '[Output Only] The type of the resource. Always compute#nodeType for node types.'
+        type: string
+      localSsdGb:
+        description: '[Output Only] Local SSD available to the node type, defined in GB.'
+        format: int32
+        type: integer
+      memoryMb:
+        description: '[Output Only] The amount of physical memory available to the node type, defined in MB.'
+        format: int32
+        type: integer
+      name:
+        description: '[Output Only] Name of the resource.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      zone:
+        description: '[Output Only] The name of the zone where the node type resides, such as us-central1-a.'
+        type: string
+    type: object
+  NodeTypeAggregatedList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/NodeTypesScopedList'
+          description: '[Output Only] Name of the scope containing this set of node types.'
+        description: A list of NodeTypesScopedList resources.
+        type: object
+      kind:
+        default: 'compute#nodeTypeAggregatedList'
+        description: '[Output Only] Type of resource.Always compute#nodeTypeAggregatedList for aggregated lists of node types.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  NodeTypeList:
+    description: Contains a list of node types.
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of NodeType resources.
+        items:
+          $ref: '#/definitions/NodeType'
+        type: array
+      kind:
+        default: 'compute#nodeTypeList'
+        description: '[Output Only] Type of resource.Always compute#nodeTypeList for lists of node types.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  NodeTypesScopedList:
+    properties:
+      nodeTypes:
+        description: '[Output Only] A list of node types contained in this scope.'
+        items:
+          $ref: '#/definitions/NodeType'
+        type: array
+      warning:
+        description: '[Output Only] An informational warning that appears when the node types list is empty.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   Operation:
     description: 'An Operation resource, used to manage asynchronous API requests. (== resource_for v1.globalOperations ==) (== resource_for beta.globalOperations ==) (== resource_for v1.regionOperations ==) (== resource_for beta.regionOperations ==) (== resource_for v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)'
@@ -22629,6 +25084,12 @@ definitions:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
+      defaultNetworkTier:
+        description: 'This signifies the default network tier used for configuring resources of the project and can only take the following values: PREMIUM, STANDARD. Initially the default network tier is PREMIUM.'
+        enum:
+          - PREMIUM
+          - STANDARD
+        type: string
       defaultServiceAccount:
         description: '[Output Only] Default service account used by VMs running in this project.'
         type: string
@@ -22702,6 +25163,15 @@ definitions:
         description: 'Optional organization ID managed by Cloud Resource Manager, for which to list shared VPC host projects. If not specified, the organization will be inferred from the project.'
         type: string
     type: object
+  ProjectsSetDefaultNetworkTierRequest:
+    properties:
+      networkTier:
+        description: Default network tier to be set.
+        enum:
+          - PREMIUM
+          - STANDARD
+        type: string
+    type: object
   Quota:
     description: A quotas entry.
     properties:
@@ -22721,6 +25191,7 @@ definitions:
           - DISKS_TOTAL_GB
           - FIREWALLS
           - FORWARDING_RULES
+          - GPUS_ALL_REGIONS
           - HEALTH_CHECKS
           - IMAGES
           - INSTANCES
@@ -22732,17 +25203,26 @@ definitions:
           - INTERCONNECT_ATTACHMENTS_TOTAL_MBPS
           - INTERNAL_ADDRESSES
           - IN_USE_ADDRESSES
+          - IN_USE_BACKUP_SCHEDULES
           - LOCAL_SSD_TOTAL_GB
           - NETWORKS
           - NVIDIA_K80_GPUS
           - NVIDIA_P100_GPUS
+          - NVIDIA_P100_VWS_GPUS
+          - NVIDIA_P4_GPUS
+          - NVIDIA_P4_VWS_GPUS
           - NVIDIA_V100_GPUS
           - PREEMPTIBLE_CPUS
           - PREEMPTIBLE_LOCAL_SSD_GB
           - PREEMPTIBLE_NVIDIA_K80_GPUS
           - PREEMPTIBLE_NVIDIA_P100_GPUS
+          - PREEMPTIBLE_NVIDIA_P100_VWS_GPUS
+          - PREEMPTIBLE_NVIDIA_P4_GPUS
+          - PREEMPTIBLE_NVIDIA_P4_VWS_GPUS
+          - PREEMPTIBLE_NVIDIA_V100_GPUS
           - REGIONAL_AUTOSCALERS
           - REGIONAL_INSTANCE_GROUP_MANAGERS
+          - RESOURCE_POLICIES
           - ROUTERS
           - ROUTES
           - SECURITY_POLICIES
@@ -23727,6 +26207,12 @@ definitions:
       ipAddress:
         description: IP address of the interface inside Google Cloud Platform. Only IPv4 is supported.
         type: string
+      managementType:
+        description: '[Output Only] Type of how the resource/configuration of the BGP peer is managed. MANAGED_BY_USER is the default value; MANAGED_BY_ATTACHMENT represents an BGP peer that is automatically created for PARTNER interconnectAttachment, Google will automatically create/delete this type of BGP peer when the PARTNER interconnectAttachment is created/deleted.'
+        enum:
+          - MANAGED_BY_ATTACHMENT
+          - MANAGED_BY_USER
+        type: string
       name:
         description: Name of this BGP peer. The name must be 1-63 characters long and comply with RFC1035.
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
@@ -23749,6 +26235,12 @@ definitions:
         type: string
       linkedVpnTunnel:
         description: URI of the linked VPN tunnel. It must be in the same region as the router. Each interface can have at most one linked resource and it could either be a VPN Tunnel or an interconnect attachment.
+        type: string
+      managementType:
+        description: '[Output Only] Type of how the resource/configuration of the interface is managed. MANAGED_BY_USER is the default value; MANAGED_BY_ATTACHMENT represents an interface that is automatically created for PARTNER type interconnectAttachment, Google will automatically create/update/delete this type of interface when the PARTNER interconnectAttachment is created/provisioned/deleted.'
+        enum:
+          - MANAGED_BY_ATTACHMENT
+          - MANAGED_BY_USER
         type: string
       name:
         description: Name of this interface entry. The name must be 1-63 characters long and comply with RFC1035.
@@ -23987,6 +26479,11 @@ definitions:
 
           By default, this is set to true so an instance is automatically restarted if it is terminated by Compute Engine.
         type: boolean
+      nodeAffinities:
+        description: A set of node affinity and anti-affinity.
+        items:
+          $ref: '#/definitions/SchedulingNodeAffinity'
+        type: array
       onHostMaintenance:
         description: 'Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Setting Instance Scheduling Options.'
         enum:
@@ -23996,6 +26493,25 @@ definitions:
       preemptible:
         description: 'Defines whether the instance is preemptible. This can only be set during instance creation, it cannot be set or changed after the instance has been created.'
         type: boolean
+    type: object
+  SchedulingNodeAffinity:
+    description: 'Node Affinity: the configuration of desired nodes onto which this Instance could be scheduled.'
+    properties:
+      key:
+        description: Corresponds to the label key of Node resource.
+        type: string
+      operator:
+        description: Defines the operation of node selection.
+        enum:
+          - IN
+          - NOT_IN
+          - OPERATOR_UNSPECIFIED
+        type: string
+      values:
+        description: Corresponds to the label values of Node resource.
+        items:
+          type: string
+        type: array
     type: object
   SerialPortOutput:
     description: An instance's serial console output.
@@ -24031,6 +26547,17 @@ definitions:
           type: string
         type: array
     type: object
+  SignedUrlKey:
+    description: Represents a customer-supplied Signing Key used by Cloud CDN Signed URLs
+    properties:
+      keyName:
+        description: 'Name of the key. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      keyValue:
+        description: 128-bit key value used for signing the URL. The key value must be a valid RFC 4648 Section 5 base64url encoded string.
+        type: string
+    type: object
   Snapshot:
     description: A persistent disk snapshot resource. (== resource_for beta.snapshots ==) (== resource_for v1.snapshots ==)
     properties:
@@ -24065,7 +26592,7 @@ definitions:
         description: Labels to apply to this snapshot. These can be later modified by the setLabels method. Label values may be empty.
         type: object
       licenseCodes:
-        description: Integer license codes indicating which licenses are attached to this snapshot.
+        description: '[Output Only] Integer license codes indicating which licenses are attached to this snapshot.'
         items:
           format: int64
           type: string
@@ -24190,6 +26717,15 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  SourceInstanceParams:
+    description: A specification of the parameters to use when creating the instance template from a source instance.
+    properties:
+      diskConfigs:
+        description: 'Attached disks configuration. If not provided, defaults are applied: For boot disk and any other R/W disks, new custom images will be created from each disk. For read-only disks, they will be attached in read-only mode. Local SSD disks will be created as blank volumes.'
+        items:
+          $ref: '#/definitions/DiskInstantiationConfig'
+        type: array
     type: object
   SslCertificate:
     description: An SslCertificate resource. This resource provides a mechanism to upload an SSL key and certificate to the load balancer to serve secure connections from the user. (== resource_for beta.sslCertificates ==) (== resource_for v1.sslCertificates ==)
@@ -24390,7 +26926,10 @@ definitions:
           type: string
         type: array
       fingerprint:
-        description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a SslPolicy. An up-to-date fingerprint must be provided in order to update the SslPolicy.
+        description: |-
+          Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a SslPolicy. An up-to-date fingerprint must be provided in order to update the SslPolicy.
+
+          To see the latest fingerprint, make a get() request to retrieve an SslPolicy.
         format: byte
         type: string
       id:
@@ -24493,7 +27032,10 @@ definitions:
         description: Whether to enable flow logging for this subnetwork.
         type: boolean
       fingerprint:
-        description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a Subnetwork. An up-to-date fingerprint must be provided in order to update the Subnetwork.
+        description: |-
+          Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a Subnetwork. An up-to-date fingerprint must be provided in order to update the Subnetwork.
+
+          To see the latest fingerprint, make a get() request to retrieve a Subnetwork.
         format: byte
         type: string
       gatewayAddress:
@@ -24885,6 +27427,16 @@ definitions:
             type: string
         type: object
     type: object
+  TargetHttpsProxiesSetQuicOverrideRequest:
+    properties:
+      quicOverride:
+        description: QUIC policy for the TargetHttpsProxy resource.
+        enum:
+          - DISABLE
+          - ENABLE
+          - NONE
+        type: string
+    type: object
   TargetHttpsProxiesSetSslCertificatesRequest:
     properties:
       sslCertificates:
@@ -24913,6 +27465,13 @@ definitions:
       name:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      quicOverride:
+        description: 'Specifies the QUIC override policy for this TargetHttpsProxy resource. This determines whether the load balancer will attempt to negotiate QUIC with clients or not. Can specify one of NONE, ENABLE, or DISABLE. Specify ENABLE to always enable QUIC, Enables QUIC when set to ENABLE, and disables QUIC when set to DISABLE. If NONE is specified, uses the QUIC policy with no user overrides, which is equivalent to DISABLE. Not specifying this field is equivalent to specifying NONE.'
+        enum:
+          - DISABLE
+          - ENABLE
+          - NONE
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -26098,7 +28657,10 @@ definitions:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
       fingerprint:
-        description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a UrlMap. An up-to-date fingerprint must be provided in order to update the UrlMap.
+        description: |-
+          Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a UrlMap. An up-to-date fingerprint must be provided in order to update the UrlMap.
+
+          To see the latest fingerprint, make a get() request to retrieve a UrlMap.
         format: byte
         type: string
       hostRules:
@@ -26251,6 +28813,103 @@ definitions:
     properties:
       result:
         $ref: '#/definitions/UrlMapValidationResult'
+    type: object
+  UsableSubnetwork:
+    description: Subnetwork which the current user has compute.subnetworks.use permission on.
+    properties:
+      ipCidrRange:
+        description: The range of internal addresses that are owned by this subnetwork.
+        type: string
+      network:
+        description: Network URL.
+        type: string
+      secondaryIpRanges:
+        description: Secondary IP ranges.
+        items:
+          $ref: '#/definitions/UsableSubnetworkSecondaryRange'
+        type: array
+      subnetwork:
+        description: Subnetwork URL.
+        type: string
+    type: object
+  UsableSubnetworkSecondaryRange:
+    description: Secondary IP range of a usable subnetwork.
+    properties:
+      ipCidrRange:
+        description: The range of IP addresses belonging to this subnetwork secondary range.
+        type: string
+      rangeName:
+        description: 'The name associated with this subnetwork secondary range, used when adding an alias IP range to a VM instance. The name must be 1-63 characters long, and comply with RFC1035. The name must be unique within the subnetwork.'
+        type: string
+    type: object
+  UsableSubnetworksAggregatedList:
+    properties:
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        description: '[Output] A list of usable subnetwork URLs.'
+        items:
+          $ref: '#/definitions/UsableSubnetwork'
+        type: array
+      kind:
+        default: 'compute#usableSubnetworksAggregatedList'
+        description: '[Output Only] Type of resource. Always compute#usableSubnetworksAggregatedList for aggregated lists of usable subnetworks.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   UsageExportLocation:
     description: The location in Cloud Storage and naming method of the daily usage report. Contains bucket_name and report_name prefix.

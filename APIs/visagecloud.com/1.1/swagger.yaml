@@ -301,6 +301,12 @@ paths:
           required: false
           type: string
         - default: false
+          description: Auto-rotate to find flipped or rotate faces
+          in: query
+          name: autoRotate
+          required: false
+          type: boolean
+        - default: false
           description: Skip EXIF rotation procesing
           in: query
           name: skipEXIF
@@ -470,6 +476,12 @@ paths:
           name: algorithmVersion
           required: false
           type: string
+        - default: false
+          description: Auto-rotate to find flipped or rotate faces
+          in: query
+          name: autoRotate
+          required: false
+          type: boolean
         - default: false
           description: Skip EXIF rotation procesing
           in: query
@@ -2608,7 +2620,7 @@ paths:
         - description: Attributes of the stream
           in: query
           name: attributes
-          required: true
+          required: false
           type: string
       produces:
         - application/json
@@ -2722,17 +2734,64 @@ paths:
           name: streamId
           required: true
           type: string
-        - default: 605000
-          description: Number of seconds for frames to be kept. Default is 605000 seconds (7 days)
+        - description: The name of the stream that will be updated
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: The url of the stream
+          in: query
+          name: url
+          required: false
+          type: string
+        - description: Streaming method
+          enum:
+            - WEBRTC_PULL
+            - WEBRTC_PUSH
+            - INGESTION_ENDPOINT
+          in: query
+          name: method
+          required: false
+          type: string
+        - description: Username
+          in: query
+          name: username
+          required: false
+          type: string
+        - description: Password
+          in: query
+          name: password
+          required: false
+          type: string
+        - description: Boolean value indicating whether you want the original picture to be stored for later retrieval
+          in: query
+          name: skipFramesWithNoFaces
+          required: false
+          type: boolean
+        - description: Number of seconds for frames to be kept
           format: int32
           in: query
           name: retentionTime
           required: false
           type: integer
-        - default: false
-          description: Boolean value indicating whether you want the original picture to be stored for later retrieval
+        - description: Boolean value indicating whether you want the original picture to be stored for later retrieval
           in: query
           name: storeOriginalFrames
+          required: false
+          type: boolean
+        - description: Boolean value indicating whether you want to store permanently store faces clippings of the recognized faces
+          in: query
+          name: storeAttendanceFaces
+          required: false
+          type: boolean
+        - description: Boolean value indicating whether you want to store permanently store frames with a recognized face in them
+          in: query
+          name: storeAttendanceFrames
+          required: false
+          type: boolean
+        - description: Boolean value indicating whether the stream is currently active or not
+          in: query
+          name: isActive
           required: false
           type: boolean
         - collectionFormat: multi
@@ -2746,20 +2805,8 @@ paths:
         - description: Attributes of the stream
           in: query
           name: attributes
-          required: true
+          required: false
           type: string
-        - default: false
-          description: Boolean value indicating whether you want to store permanently store faces clippings of the recognized faces
-          in: query
-          name: storeAttendanceFaces
-          required: false
-          type: boolean
-        - default: false
-          description: Boolean value indicating whether you want to store permanently store frames with a recognized face in them
-          in: query
-          name: storeAttendanceFrames
-          required: false
-          type: boolean
       produces:
         - application/json
       responses:

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/keyvault/data-plane/Microsoft.KeyVault/stable/2015-06-01/keyvault.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: keyvault
   x-tags:
@@ -1730,7 +1729,7 @@ definitions:
             name: JsonWebKeyOperation
         type: array
       key_size:
-        description: The key size in bytes. e.g. 1024 or 2048.
+        description: The key size in bits. e.g. 1024 or 2048.
         format: int32
         type: integer
       kty:
@@ -1843,7 +1842,7 @@ definitions:
         description: Indicates if the private key can be exported.
         type: boolean
       key_size:
-        description: The key size in bytes. e.g. 2048.
+        description: The key size in bits. e.g. 2048.
         format: int32
         type: integer
       kty:

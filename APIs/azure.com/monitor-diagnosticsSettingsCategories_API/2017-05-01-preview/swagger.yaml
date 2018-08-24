@@ -67,21 +67,6 @@ paths:
       responses:
         '200':
           description: Successful request to get more information about diagnostic setting category
-          examples:
-            application/json:
-              value:
-                - id: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/providers/microsoft.insights/diagnosticSettingsCategories/WorkflowRuntime
-                  location: eastus
-                  name: WorkflowRuntime
-                  properties:
-                    categoryType: Logs
-                  type: microsoft.insights/diagnosticSettingsCategories
-                - id: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/providers/microsoft.insights/diagnosticSettingsCategories/WorkflowMetric
-                  location: eastus
-                  name: WorkflowMetric
-                  properties:
-                    categoryType: Metrics
-                  type: microsoft.insights/diagnosticSettingsCategories
           schema:
             $ref: '#/definitions/DiagnosticSettingsCategoryResourceCollection'
         default:
@@ -94,7 +79,7 @@ paths:
         Gets the diagnostic setting:
           parameters:
             api-version: 2017-05-01-preview
-            resourceUri: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
+            resourceUri: subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
           responses:
             '200':
               body:
@@ -121,14 +106,6 @@ paths:
       responses:
         '200':
           description: Successful request to get more information about diagnostic setting category
-          examples:
-            application/json:
-              id: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/providers/microsoft.insights/diagnosticSettingsCategories/WorkflowRuntime
-              location: eastus
-              name: WorkflowRuntime
-              properties:
-                categoryType: Logs
-              type: microsoft.insights/diagnosticSettingsCategories
           schema:
             $ref: '#/definitions/DiagnosticSettingsCategoryResource'
         default:
@@ -142,7 +119,7 @@ paths:
           parameters:
             api-version: 2017-05-01-preview
             name: WorkflowRuntime
-            resourceUri: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
+            resourceUri: subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
           responses:
             '200':
               body:
@@ -172,6 +149,7 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/DiagnosticSettingsCategory'
+        description: The properties of a Diagnostic Settings Category.
         x-ms-client-flatten: true
     type: object
   DiagnosticSettingsCategoryResourceCollection:
