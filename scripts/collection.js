@@ -156,6 +156,7 @@ program
   .description('validate collection')
   .option('-q, --quiet', 'suppress two common warnings')
   .option('-f, --fix', 'test fixing in validate')
+  .option('-n, --nuke', 'nuke failures')
   .arguments('[DIR]')
   .action(validateCollection);
 
@@ -303,7 +304,10 @@ function validateCollection(dir, command) {
         }
         if (errors) {
           logYaml(errors);
-          throw Error('Validation errors detected '+filename);
+          if (command.nuke) {
+            fs.unlinkSync(filename);
+          }
+          else throw Error('Validation errors detected '+filename);
         }
         else {
           if (command.fix) {
