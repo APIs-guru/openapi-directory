@@ -1548,245 +1548,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  ASN:
-    type: integer
-    description: '<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p> <p>Example: 65000</p>'
-  AddressFamily:
-    type: string
-    enum:
-      - ipv4
-      - ipv6
-    description: '<p>Indicates the address family for the BGP peer.</p> <ul> <li> <p> <b>ipv4</b>: IPv4 address family</p> </li> <li> <p> <b>ipv6</b>: IPv6 address family</p> </li> </ul>'
-  AllocateConnectionOnInterconnectRequest:
-    type: object
-    required:
-      - bandwidth
-      - connectionName
-      - ownerAccount
-      - interconnectId
-      - vlan
-    properties:
-      bandwidth:
-        $ref: '#/definitions/Bandwidth'
-        description: '<p>Bandwidth of the connection.</p> <p>Example: "<i>500Mbps</i>"</p> <p>Default: None</p> <p>Values: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps</p>'
-      connectionName:
-        $ref: '#/definitions/ConnectionName'
-        description: '<p>Name of the provisioned connection.</p> <p>Example: "<i>500M Connection to AWS</i>"</p> <p>Default: None</p>'
-      ownerAccount:
-        $ref: '#/definitions/OwnerAccount'
-        description: '<p>Numeric account Id of the customer for whom the connection will be provisioned.</p> <p>Example: 123443215678</p> <p>Default: None</p>'
-      interconnectId:
-        $ref: '#/definitions/InterconnectId'
-        description: '<p>ID of the interconnect on which the connection will be provisioned.</p> <p>Example: dxcon-456abc78</p> <p>Default: None</p>'
-      vlan:
-        $ref: '#/definitions/VLAN'
-        description: '<p>The dedicated VLAN provisioned to the connection.</p> <p>Example: 101</p> <p>Default: None</p>'
-    description: Container for the parameters to the AllocateConnectionOnInterconnect operation.
-  AllocateHostedConnectionRequest:
-    type: object
-    required:
-      - connectionId
-      - ownerAccount
-      - bandwidth
-      - connectionName
-      - vlan
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-        description: '<p>The ID of the interconnect or LAG on which the connection will be provisioned.</p> <p>Example: dxcon-456abc78 or dxlag-abc123</p> <p>Default: None</p>'
-      ownerAccount:
-        $ref: '#/definitions/OwnerAccount'
-        description: '<p>The numeric account ID of the customer for whom the connection will be provisioned.</p> <p>Example: 123443215678</p> <p>Default: None</p>'
-      bandwidth:
-        $ref: '#/definitions/Bandwidth'
-        description: '<p>The bandwidth of the connection.</p> <p>Example: <code>500Mbps</code> </p> <p>Default: None</p> <p>Values: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps</p>'
-      connectionName:
-        $ref: '#/definitions/ConnectionName'
-        description: '<p>The name of the provisioned connection.</p> <p>Example: "<code>500M Connection to AWS</code>"</p> <p>Default: None</p>'
-      vlan:
-        $ref: '#/definitions/VLAN'
-        description: '<p>The dedicated VLAN provisioned to the hosted connection.</p> <p>Example: 101</p> <p>Default: None</p>'
-    description: Container for the parameters to theHostedConnection operation.
-  AllocatePrivateVirtualInterfaceRequest:
-    type: object
-    required:
-      - connectionId
-      - ownerAccount
-      - newPrivateVirtualInterfaceAllocation
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-        description: '<p>The connection ID on which the private virtual interface is provisioned.</p> <p>Default: None</p>'
-      ownerAccount:
-        $ref: '#/definitions/OwnerAccount'
-        description: '<p>The AWS account that will own the new private virtual interface.</p> <p>Default: None</p>'
-      newPrivateVirtualInterfaceAllocation:
-        $ref: '#/definitions/NewPrivateVirtualInterfaceAllocation'
-        description: '<p>Detailed information for the private virtual interface to be provisioned.</p> <p>Default: None</p>'
-    description: Container for the parameters to the AllocatePrivateVirtualInterface operation.
-  AllocatePublicVirtualInterfaceRequest:
-    type: object
-    required:
-      - connectionId
-      - ownerAccount
-      - newPublicVirtualInterfaceAllocation
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-        description: '<p>The connection ID on which the public virtual interface is provisioned.</p> <p>Default: None</p>'
-      ownerAccount:
-        $ref: '#/definitions/OwnerAccount'
-        description: '<p>The AWS account that will own the new public virtual interface.</p> <p>Default: None</p>'
-      newPublicVirtualInterfaceAllocation:
-        $ref: '#/definitions/NewPublicVirtualInterfaceAllocation'
-        description: '<p>Detailed information for the public virtual interface to be provisioned.</p> <p>Default: None</p>'
-    description: Container for the parameters to the AllocatePublicVirtualInterface operation.
-  AmazonAddress:
-    type: string
-    description: '<p>IP address assigned to the Amazon interface.</p> <p>Example: 192.168.1.1/30 or 2001:db8::1/125</p>'
-  AssociateConnectionWithLagRequest:
-    type: object
-    required:
-      - connectionId
-      - lagId
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-        description: '<p>The ID of the connection.</p> <p>Example: dxcon-abc123</p> <p>Default: None</p>'
-      lagId:
-        $ref: '#/definitions/LagId'
-        description: '<p>The ID of the LAG with which to associate the connection.</p> <p>Example: dxlag-abc123</p> <p>Default: None</p>'
-    description: Container for the parameters to the AssociateConnectionWithLag operation.
-  AssociateHostedConnectionRequest:
-    type: object
-    required:
-      - connectionId
-      - parentConnectionId
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-        description: '<p>The ID of the hosted connection.</p> <p>Example: dxcon-abc123</p> <p>Default: None</p>'
-      parentConnectionId:
-        $ref: '#/definitions/ConnectionId'
-        description: '<p>The ID of the interconnect or the LAG.</p> <p>Example: dxcon-abc123 or dxlag-abc123</p> <p>Default: None</p>'
-    description: Container for the parameters to the AssociateHostedConnection operation.
-  AssociateVirtualInterfaceRequest:
-    type: object
-    required:
-      - virtualInterfaceId
-      - connectionId
-    properties:
-      virtualInterfaceId:
-        $ref: '#/definitions/VirtualInterfaceId'
-        description: '<p>The ID of the virtual interface.</p> <p>Example: dxvif-123dfg56</p> <p>Default: None</p>'
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-        description: '<p>The ID of the LAG or connection with which to associate the virtual interface.</p> <p>Example: dxlag-abc123 or dxcon-abc123</p> <p>Default: None</p>'
-    description: Container for the parameters to the AssociateVirtualInterface operation.
-  AwsDevice:
-    type: string
-    description: '<p>An abstract ID for the physical Direct Connect endpoint.</p> <p>Example: EQC50-abcdef123456</p>'
-  AwsDeviceV2:
-    type: string
-  BGPAuthKey:
-    type: string
-    description: '<p>The authentication key for BGP configuration.</p> <p>Example: asdf34example</p>'
-  BGPPeer:
-    type: object
-    properties:
-      asn:
-        $ref: '#/definitions/ASN'
-      authKey:
-        $ref: '#/definitions/BGPAuthKey'
-      addressFamily:
-        $ref: '#/definitions/AddressFamily'
-      amazonAddress:
-        $ref: '#/definitions/AmazonAddress'
-      customerAddress:
-        $ref: '#/definitions/CustomerAddress'
-      bgpPeerState:
-        $ref: '#/definitions/BGPPeerState'
-      bgpStatus:
-        $ref: '#/definitions/BGPStatus'
-      awsDeviceV2:
-        $ref: '#/definitions/AwsDeviceV2'
-        description: The Direct Connection endpoint which the BGP peer terminates on.
-    description: A structure containing information about a BGP peer.
-  BGPPeerList:
-    type: array
-    description: A list of the BGP peers configured on this virtual interface.
-    items:
-      $ref: '#/definitions/BGPPeer'
-  BGPPeerState:
-    type: string
-    enum:
-      - verifying
-      - pending
-      - available
-      - deleting
-      - deleted
-    description: '<p>The state of the BGP peer.</p> <ul> <li> <p> <b>Verifying</b>: The BGP peering addresses or ASN require validation before the BGP peer can be created. This state only applies to BGP peers on a public virtual interface. </p> </li> <li> <p> <b>Pending</b>: The BGP peer has been created, and is in this state until it is ready to be established.</p> </li> <li> <p> <b>Available</b>: The BGP peer can be established.</p> </li> <li> <p> <b>Deleting</b>: The BGP peer is in the process of being deleted.</p> </li> <li> <p> <b>Deleted</b>: The BGP peer has been deleted and cannot be established.</p> </li> </ul>'
-  BGPStatus:
-    type: string
-    enum:
-      - up
-      - down
-    description: '<p>The Up/Down state of the BGP peer.</p> <ul> <li> <p> <b>Up</b>: The BGP peer is established.</p> <note> <p>A state of <code>up</code> does not indicate the state of the routing function. Ensure that you are receiving routes over the BGP session.</p> </note> </li> <li> <p> <b>Down</b>: The BGP peer is down.</p> </li> </ul>'
-  Bandwidth:
-    type: string
-    description: '<p>Bandwidth of the connection.</p> <p>Example: 1Gbps</p> <p>Default: None</p>'
-  BooleanFlag:
-    type: boolean
-  CIDR:
-    type: string
-  ConfirmConnectionRequest:
-    type: object
-    required:
-      - connectionId
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-    description: Container for the parameters to the ConfirmConnection operation.
-  ConfirmConnectionResponse:
-    type: object
-    properties:
-      connectionState:
-        $ref: '#/definitions/ConnectionState'
-    description: The response received when ConfirmConnection is called.
-  ConfirmPrivateVirtualInterfaceRequest:
-    type: object
-    required:
-      - virtualInterfaceId
-    properties:
-      virtualInterfaceId:
-        $ref: '#/definitions/VirtualInterfaceId'
-      virtualGatewayId:
-        $ref: '#/definitions/VirtualGatewayId'
-        description: '<p>ID of the virtual private gateway that will be attached to the virtual interface.</p> <p> A virtual private gateway can be managed via the Amazon Virtual Private Cloud (VPC) console or the <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html">EC2 CreateVpnGateway</a> action.</p> <p>Default: None</p>'
-      directConnectGatewayId:
-        $ref: '#/definitions/DirectConnectGatewayId'
-        description: '<p>ID of the direct connect gateway that will be attached to the virtual interface.</p> <p> A direct connect gateway can be managed via the AWS Direct Connect console or the <a>CreateDirectConnectGateway</a> action.</p> <p>Default: None</p>'
-    description: Container for the parameters to the ConfirmPrivateVirtualInterface operation.
-  ConfirmPrivateVirtualInterfaceResponse:
-    type: object
-    properties:
-      virtualInterfaceState:
-        $ref: '#/definitions/VirtualInterfaceState'
-    description: The response received when ConfirmPrivateVirtualInterface is called.
-  ConfirmPublicVirtualInterfaceRequest:
-    type: object
-    required:
-      - virtualInterfaceId
-    properties:
-      virtualInterfaceId:
-        $ref: '#/definitions/VirtualInterfaceId'
-    description: Container for the parameters to the ConfirmPublicVirtualInterface operation.
-  ConfirmPublicVirtualInterfaceResponse:
-    type: object
-    properties:
-      virtualInterfaceState:
-        $ref: '#/definitions/VirtualInterfaceState'
-    description: The response received when ConfirmPublicVirtualInterface is called.
   Connection:
     type: object
     properties:
@@ -1823,567 +1584,31 @@ definitions:
         $ref: '#/definitions/AwsDeviceV2'
         description: The Direct Connection endpoint which the physical connection terminates on.
     description: A connection represents the physical network connection between the AWS Direct Connect location and the customer.
-  ConnectionId:
-    type: string
-    description: '<p>The ID of the connection. This field is also used as the ID type for operations that use multiple connection types (LAG, interconnect, and/or connection).</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>'
-  ConnectionList:
-    type: array
-    description: A list of connections.
-    items:
-      $ref: '#/definitions/Connection'
-  ConnectionName:
-    type: string
-    description: '<p>The name of the connection.</p> <p>Example: "<i>My Connection to AWS</i>"</p> <p>Default: None</p>'
-  ConnectionState:
-    type: string
-    enum:
-      - ordering
-      - requested
-      - pending
-      - available
-      - down
-      - deleting
-      - deleted
-      - rejected
-    description: '<p>State of the connection.</p> <ul> <li> <p> <b>Ordering</b>: The initial state of a hosted connection provisioned on an interconnect. The connection stays in the ordering state until the owner of the hosted connection confirms or declines the connection order.</p> </li> <li> <p> <b>Requested</b>: The initial state of a standard connection. The connection stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.</p> </li> <li> <p> <b>Pending</b>: The connection has been approved, and is being initialized.</p> </li> <li> <p> <b>Available</b>: The network link is up, and the connection is ready for use.</p> </li> <li> <p> <b>Down</b>: The network link is down.</p> </li> <li> <p> <b>Deleting</b>: The connection is in the process of being deleted.</p> </li> <li> <p> <b>Deleted</b>: The connection has been deleted.</p> </li> <li> <p> <b>Rejected</b>: A hosted connection in the ''Ordering'' state will enter the ''Rejected'' state if it is deleted by the end customer.</p> </li> </ul>'
-  Connections:
-    type: object
-    properties:
-      connections:
-        $ref: '#/definitions/ConnectionList'
-        description: A list of connections.
-    description: A structure containing a list of connections.
-  Count:
-    type: integer
-  CreateBGPPeerRequest:
-    type: object
-    properties:
-      virtualInterfaceId:
-        $ref: '#/definitions/VirtualInterfaceId'
-        description: '<p>The ID of the virtual interface on which the BGP peer will be provisioned.</p> <p>Example: dxvif-456abc78</p> <p>Default: None</p>'
-      newBGPPeer:
-        $ref: '#/definitions/NewBGPPeer'
-        description: '<p>Detailed information for the BGP peer to be created.</p> <p>Default: None</p>'
-    description: Container for the parameters to the CreateBGPPeer operation.
-  CreateBGPPeerResponse:
-    type: object
-    properties:
-      virtualInterface:
-        $ref: '#/definitions/VirtualInterface'
-    description: The response received when CreateBGPPeer is called.
-  CreateConnectionRequest:
+  AllocateConnectionOnInterconnectRequest:
     type: object
     required:
-      - location
       - bandwidth
       - connectionName
+      - ownerAccount
+      - interconnectId
+      - vlan
     properties:
-      location:
-        $ref: '#/definitions/LocationCode'
       bandwidth:
         $ref: '#/definitions/Bandwidth'
+        description: '<p>Bandwidth of the connection.</p> <p>Example: "<i>500Mbps</i>"</p> <p>Default: None</p> <p>Values: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps</p>'
       connectionName:
         $ref: '#/definitions/ConnectionName'
-      lagId:
-        $ref: '#/definitions/LagId'
-    description: Container for the parameters to the CreateConnection operation.
-  CreateDirectConnectGatewayAssociationRequest:
-    type: object
-    required:
-      - directConnectGatewayId
-      - virtualGatewayId
-    properties:
-      directConnectGatewayId:
-        $ref: '#/definitions/DirectConnectGatewayId'
-        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
-      virtualGatewayId:
-        $ref: '#/definitions/VirtualGatewayId'
-        description: '<p>The ID of the virtual private gateway.</p> <p>Example: "vgw-abc123ef"</p> <p>Default: None</p>'
-    description: Container for the parameters to the CreateDirectConnectGatewayAssociation operation.
-  CreateDirectConnectGatewayAssociationResult:
-    type: object
-    properties:
-      directConnectGatewayAssociation:
-        $ref: '#/definitions/DirectConnectGatewayAssociation'
-        description: The direct connect gateway association to be created.
-    description: Container for the response from the CreateDirectConnectGatewayAssociation API call
-  CreateDirectConnectGatewayRequest:
-    type: object
-    required:
-      - directConnectGatewayName
-    properties:
-      directConnectGatewayName:
-        $ref: '#/definitions/DirectConnectGatewayName'
-        description: '<p>The name of the direct connect gateway.</p> <p>Example: "My direct connect gateway"</p> <p>Default: None</p>'
-      amazonSideAsn:
-        $ref: '#/definitions/LongAsn'
-        description: '<p>The autonomous system number (ASN) for Border Gateway Protocol (BGP) to be configured on the Amazon side of the connection. The ASN must be in the private range of 64,512 to 65,534 or 4,200,000,000 to 4,294,967,294 </p> <p>Example: 65200</p> <p>Default: 64512</p>'
-    description: Container for the parameters to the CreateDirectConnectGateway operation.
-  CreateDirectConnectGatewayResult:
-    type: object
-    properties:
-      directConnectGateway:
-        $ref: '#/definitions/DirectConnectGateway'
-        description: The direct connect gateway to be created.
-    description: Container for the response from the CreateDirectConnectGateway API call
-  CreateInterconnectRequest:
-    type: object
-    required:
-      - interconnectName
-      - bandwidth
-      - location
-    properties:
-      interconnectName:
-        $ref: '#/definitions/InterconnectName'
-        description: '<p>The name of the interconnect.</p> <p>Example: "<i>1G Interconnect to AWS</i>"</p> <p>Default: None</p>'
-      bandwidth:
-        $ref: '#/definitions/Bandwidth'
-        description: '<p>The port bandwidth</p> <p>Example: 1Gbps</p> <p>Default: None</p> <p>Available values: 1Gbps,10Gbps</p>'
-      location:
-        $ref: '#/definitions/LocationCode'
-        description: '<p>Where the interconnect is located</p> <p>Example: EqSV5</p> <p>Default: None</p>'
-      lagId:
-        $ref: '#/definitions/LagId'
-    description: Container for the parameters to the CreateInterconnect operation.
-  CreateLagRequest:
-    type: object
-    required:
-      - numberOfConnections
-      - location
-      - connectionsBandwidth
-      - lagName
-    properties:
-      numberOfConnections:
-        $ref: '#/definitions/Count'
-        description: '<p>The number of physical connections initially provisioned and bundled by the LAG.</p> <p>Default: None</p>'
-      location:
-        $ref: '#/definitions/LocationCode'
-        description: '<p>The AWS Direct Connect location in which the LAG should be allocated.</p> <p>Example: EqSV5</p> <p>Default: None</p>'
-      connectionsBandwidth:
-        $ref: '#/definitions/Bandwidth'
-        description: '<p>The bandwidth of the individual physical connections bundled by the LAG.</p> <p>Default: None</p> <p>Available values: 1Gbps, 10Gbps</p>'
-      lagName:
-        $ref: '#/definitions/LagName'
-        description: '<p>The name of the LAG.</p> <p>Example: "<code>3x10G LAG to AWS</code>"</p> <p>Default: None</p>'
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-        description: '<p>The ID of an existing connection to migrate to the LAG.</p> <p>Default: None</p>'
-    description: Container for the parameters to the CreateLag operation.
-  CreatePrivateVirtualInterfaceRequest:
-    type: object
-    required:
-      - connectionId
-      - newPrivateVirtualInterface
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-      newPrivateVirtualInterface:
-        $ref: '#/definitions/NewPrivateVirtualInterface'
-        description: '<p>Detailed information for the private virtual interface to be created.</p> <p>Default: None</p>'
-    description: Container for the parameters to the CreatePrivateVirtualInterface operation.
-  CreatePublicVirtualInterfaceRequest:
-    type: object
-    required:
-      - connectionId
-      - newPublicVirtualInterface
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-      newPublicVirtualInterface:
-        $ref: '#/definitions/NewPublicVirtualInterface'
-        description: '<p>Detailed information for the public virtual interface to be created.</p> <p>Default: None</p>'
-    description: Container for the parameters to the CreatePublicVirtualInterface operation.
-  CustomerAddress:
-    type: string
-    description: '<p>IP address assigned to the customer interface.</p> <p>Example: 192.168.1.2/30 or 2001:db8::2/125</p>'
-  DeleteBGPPeerRequest:
-    type: object
-    properties:
-      virtualInterfaceId:
-        $ref: '#/definitions/VirtualInterfaceId'
-        description: '<p>The ID of the virtual interface from which the BGP peer will be deleted.</p> <p>Example: dxvif-456abc78</p> <p>Default: None</p>'
-      asn:
-        $ref: '#/definitions/ASN'
-      customerAddress:
-        $ref: '#/definitions/CustomerAddress'
-    description: Container for the parameters to the DeleteBGPPeer operation.
-  DeleteBGPPeerResponse:
-    type: object
-    properties:
-      virtualInterface:
-        $ref: '#/definitions/VirtualInterface'
-    description: The response received when DeleteBGPPeer is called.
-  DeleteConnectionRequest:
-    type: object
-    required:
-      - connectionId
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-    description: Container for the parameters to the DeleteConnection operation.
-  DeleteDirectConnectGatewayAssociationRequest:
-    type: object
-    required:
-      - directConnectGatewayId
-      - virtualGatewayId
-    properties:
-      directConnectGatewayId:
-        $ref: '#/definitions/DirectConnectGatewayId'
-        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
-      virtualGatewayId:
-        $ref: '#/definitions/VirtualGatewayId'
-        description: '<p>The ID of the virtual private gateway.</p> <p>Example: "vgw-abc123ef"</p> <p>Default: None</p>'
-    description: Container for the parameters to the DeleteDirectConnectGatewayAssociation operation.
-  DeleteDirectConnectGatewayAssociationResult:
-    type: object
-    properties:
-      directConnectGatewayAssociation:
-        $ref: '#/definitions/DirectConnectGatewayAssociation'
-        description: The direct connect gateway association to be deleted.
-    description: Container for the response from the DeleteDirectConnectGatewayAssociation API call
-  DeleteDirectConnectGatewayRequest:
-    type: object
-    required:
-      - directConnectGatewayId
-    properties:
-      directConnectGatewayId:
-        $ref: '#/definitions/DirectConnectGatewayId'
-        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
-    description: Container for the parameters to the DeleteDirectConnectGateway operation.
-  DeleteDirectConnectGatewayResult:
-    type: object
-    properties:
-      directConnectGateway:
-        $ref: '#/definitions/DirectConnectGateway'
-        description: The direct connect gateway to be deleted.
-    description: Container for the response from the DeleteDirectConnectGateway API call
-  DeleteInterconnectRequest:
-    type: object
-    required:
-      - interconnectId
-    properties:
-      interconnectId:
-        $ref: '#/definitions/InterconnectId'
-    description: Container for the parameters to the DeleteInterconnect operation.
-  DeleteInterconnectResponse:
-    type: object
-    properties:
-      interconnectState:
-        $ref: '#/definitions/InterconnectState'
-    description: The response received when DeleteInterconnect is called.
-  DeleteLagRequest:
-    type: object
-    required:
-      - lagId
-    properties:
-      lagId:
-        $ref: '#/definitions/LagId'
-        description: '<p>The ID of the LAG to delete.</p> <p>Example: dxlag-abc123</p> <p>Default: None</p>'
-    description: Container for the parameters to the DeleteLag operation.
-  DeleteVirtualInterfaceRequest:
-    type: object
-    required:
-      - virtualInterfaceId
-    properties:
-      virtualInterfaceId:
-        $ref: '#/definitions/VirtualInterfaceId'
-    description: Container for the parameters to the DeleteVirtualInterface operation.
-  DeleteVirtualInterfaceResponse:
-    type: object
-    properties:
-      virtualInterfaceState:
-        $ref: '#/definitions/VirtualInterfaceState'
-    description: The response received when DeleteVirtualInterface is called.
-  DescribeConnectionLoaRequest:
-    type: object
-    required:
-      - connectionId
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-      providerName:
-        $ref: '#/definitions/ProviderName'
-        description: '<p>The name of the APN partner or service provider who establishes connectivity on your behalf. If you supply this parameter, the LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p> <p>Default: None</p>'
-      loaContentType:
-        $ref: '#/definitions/LoaContentType'
-    description: Container for the parameters to the DescribeConnectionLoa operation.
-  DescribeConnectionLoaResponse:
-    type: object
-    properties:
-      loa:
-        $ref: '#/definitions/Loa'
-    description: The response received when DescribeConnectionLoa is called.
-  DescribeConnectionsOnInterconnectRequest:
-    type: object
-    required:
-      - interconnectId
-    properties:
-      interconnectId:
-        $ref: '#/definitions/InterconnectId'
-        description: '<p>ID of the interconnect on which a list of connection is provisioned.</p> <p>Example: dxcon-abc123</p> <p>Default: None</p>'
-    description: Container for the parameters to the DescribeConnectionsOnInterconnect operation.
-  DescribeConnectionsRequest:
-    type: object
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-    description: Container for the parameters to the DescribeConnections operation.
-  DescribeDirectConnectGatewayAssociationsRequest:
-    type: object
-    properties:
-      directConnectGatewayId:
-        $ref: '#/definitions/DirectConnectGatewayId'
-        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
-      virtualGatewayId:
-        $ref: '#/definitions/VirtualGatewayId'
-        description: '<p>The ID of the virtual private gateway.</p> <p>Example: "vgw-abc123ef"</p> <p>Default: None</p>'
-      maxResults:
-        $ref: '#/definitions/MaxResultSetSize'
-        description: '<p>The maximum number of direct connect gateway associations to return per page.</p> <p>Example: 15</p> <p>Default: None</p>'
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: '<p>The token provided in the previous describe result to retrieve the next page of the result.</p> <p>Default: None</p>'
-    description: Container for the parameters to the DescribeDirectConnectGatewayAssociations operation.
-  DescribeDirectConnectGatewayAssociationsResult:
-    type: object
-    properties:
-      directConnectGatewayAssociations:
-        $ref: '#/definitions/DirectConnectGatewayAssociationList'
-        description: Information about the direct connect gateway associations.
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-    description: Container for the response from the DescribeDirectConnectGatewayAssociations API call
-  DescribeDirectConnectGatewayAttachmentsRequest:
-    type: object
-    properties:
-      directConnectGatewayId:
-        $ref: '#/definitions/DirectConnectGatewayId'
-        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
-      virtualInterfaceId:
-        $ref: '#/definitions/VirtualInterfaceId'
-        description: '<p>The ID of the virtual interface.</p> <p>Example: "dxvif-abc123ef"</p> <p>Default: None</p>'
-      maxResults:
-        $ref: '#/definitions/MaxResultSetSize'
-        description: '<p>The maximum number of direct connect gateway attachments to return per page.</p> <p>Example: 15</p> <p>Default: None</p>'
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: '<p>The token provided in the previous describe result to retrieve the next page of the result.</p> <p>Default: None</p>'
-    description: Container for the parameters to the DescribeDirectConnectGatewayAttachments operation.
-  DescribeDirectConnectGatewayAttachmentsResult:
-    type: object
-    properties:
-      directConnectGatewayAttachments:
-        $ref: '#/definitions/DirectConnectGatewayAttachmentList'
-        description: Information about the direct connect gateway attachments.
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-    description: Container for the response from the DescribeDirectConnectGatewayAttachments API call
-  DescribeDirectConnectGatewaysRequest:
-    type: object
-    properties:
-      directConnectGatewayId:
-        $ref: '#/definitions/DirectConnectGatewayId'
-        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
-      maxResults:
-        $ref: '#/definitions/MaxResultSetSize'
-        description: '<p>The maximum number of direct connect gateways to return per page.</p> <p>Example: 15</p> <p>Default: None</p>'
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: '<p>The token provided in the previous describe result to retrieve the next page of the result.</p> <p>Default: None</p>'
-    description: Container for the parameters to the DescribeDirectConnectGateways operation.
-  DescribeDirectConnectGatewaysResult:
-    type: object
-    properties:
-      directConnectGateways:
-        $ref: '#/definitions/DirectConnectGatewayList'
-        description: Information about the direct connect gateways.
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-    description: Container for the response from the DescribeDirectConnectGateways API call
-  DescribeHostedConnectionsRequest:
-    type: object
-    required:
-      - connectionId
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-        description: '<p>The ID of the interconnect or LAG on which the hosted connections are provisioned.</p> <p>Example: dxcon-abc123 or dxlag-abc123</p> <p>Default: None</p>'
-    description: Container for the parameters to the DescribeHostedConnections operation.
-  DescribeInterconnectLoaRequest:
-    type: object
-    required:
-      - interconnectId
-    properties:
-      interconnectId:
-        $ref: '#/definitions/InterconnectId'
-      providerName:
-        $ref: '#/definitions/ProviderName'
-        description: '<p>The name of the service provider who establishes connectivity on your behalf. If you supply this parameter, the LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p> <p>Default: None</p>'
-      loaContentType:
-        $ref: '#/definitions/LoaContentType'
-    description: Container for the parameters to the DescribeInterconnectLoa operation.
-  DescribeInterconnectLoaResponse:
-    type: object
-    properties:
-      loa:
-        $ref: '#/definitions/Loa'
-    description: The response received when DescribeInterconnectLoa is called.
-  DescribeInterconnectsRequest:
-    type: object
-    properties:
-      interconnectId:
-        $ref: '#/definitions/InterconnectId'
-    description: Container for the parameters to the DescribeInterconnects operation.
-  DescribeLagsRequest:
-    type: object
-    properties:
-      lagId:
-        $ref: '#/definitions/LagId'
-        description: '<p>The ID of the LAG.</p> <p>Example: dxlag-abc123</p> <p>Default: None</p>'
-    description: Container for the parameters to the DescribeLags operation.
-  DescribeLoaRequest:
-    type: object
-    required:
-      - connectionId
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-        description: '<p>The ID of a connection, LAG, or interconnect for which to get the LOA-CFA information.</p> <p>Example: dxcon-abc123 or dxlag-abc123</p> <p>Default: None</p>'
-      providerName:
-        $ref: '#/definitions/ProviderName'
-        description: '<p>The name of the service provider who establishes connectivity on your behalf. If you supply this parameter, the LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p> <p>Default: None</p>'
-      loaContentType:
-        $ref: '#/definitions/LoaContentType'
-        description: '<p>A standard media type indicating the content type of the LOA-CFA document. Currently, the only supported value is "application/pdf".</p> <p>Default: application/pdf</p>'
-    description: Container for the parameters to the DescribeLoa operation.
-  DescribeTagsRequest:
-    type: object
-    required:
-      - resourceArns
-    properties:
-      resourceArns:
-        $ref: '#/definitions/ResourceArnList'
-        description: The Amazon Resource Names (ARNs) of the Direct Connect resources.
-    description: Container for the parameters to the DescribeTags operation.
-  DescribeTagsResponse:
-    type: object
-    properties:
-      resourceTags:
-        $ref: '#/definitions/ResourceTagList'
-        description: Information about the tags.
-    description: The response received when DescribeTags is called.
-  DescribeVirtualInterfacesRequest:
-    type: object
-    properties:
-      connectionId:
-        $ref: '#/definitions/ConnectionId'
-      virtualInterfaceId:
-        $ref: '#/definitions/VirtualInterfaceId'
-    description: Container for the parameters to the DescribeVirtualInterfaces operation.
-  DirectConnectClientException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: 'This is an exception thrown when there is an issue with the input provided by the API call. For example, the name provided for a connection contains a pound sign (#). This can also occur when a valid value is provided, but is otherwise constrained. For example, the valid VLAN tag range is 1-4096 but each can only be used once per connection.'
-    description: The API was called with invalid parameters. The error message will contain additional details about the cause.
-  DirectConnectGateway:
-    type: object
-    properties:
-      directConnectGatewayId:
-        $ref: '#/definitions/DirectConnectGatewayId'
-      directConnectGatewayName:
-        $ref: '#/definitions/DirectConnectGatewayName'
-      amazonSideAsn:
-        $ref: '#/definitions/LongAsn'
-        description: The autonomous system number (ASN) for the Amazon side of the connection.
+        description: '<p>Name of the provisioned connection.</p> <p>Example: "<i>500M Connection to AWS</i>"</p> <p>Default: None</p>'
       ownerAccount:
         $ref: '#/definitions/OwnerAccount'
-        description: The AWS account ID of the owner of the direct connect gateway.
-      directConnectGatewayState:
-        $ref: '#/definitions/DirectConnectGatewayState'
-      stateChangeError:
-        $ref: '#/definitions/StateChangeError'
-    description: A direct connect gateway is an intermediate object that enables you to connect virtual interfaces and virtual private gateways.
-  DirectConnectGatewayAssociation:
-    type: object
-    properties:
-      directConnectGatewayId:
-        $ref: '#/definitions/DirectConnectGatewayId'
-      virtualGatewayId:
-        $ref: '#/definitions/VirtualGatewayId'
-      virtualGatewayRegion:
-        $ref: '#/definitions/VirtualGatewayRegion'
-      virtualGatewayOwnerAccount:
-        $ref: '#/definitions/OwnerAccount'
-        description: The AWS account ID of the owner of the virtual private gateway.
-      associationState:
-        $ref: '#/definitions/DirectConnectGatewayAssociationState'
-      stateChangeError:
-        $ref: '#/definitions/StateChangeError'
-    description: The association between a direct connect gateway and virtual private gateway.
-  DirectConnectGatewayAssociationList:
-    type: array
-    description: A list of direct connect gateway associations.
-    items:
-      $ref: '#/definitions/DirectConnectGatewayAssociation'
-  DirectConnectGatewayAssociationState:
-    type: string
-    enum:
-      - associating
-      - associated
-      - disassociating
-      - disassociated
-    description: '<p>State of the direct connect gateway association.</p> <ul> <li> <p> <b>Associating</b>: The initial state after calling <a>CreateDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <b>Associated</b>: The direct connect gateway and virtual private gateway are successfully associated and ready to pass traffic.</p> </li> <li> <p> <b>Disassociating</b>: The initial state after calling <a>DeleteDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <b>Disassociated</b>: The virtual private gateway is successfully disassociated from the direct connect gateway. Traffic flow between the direct connect gateway and virtual private gateway stops.</p> </li> </ul>'
-  DirectConnectGatewayAttachment:
-    type: object
-    properties:
-      directConnectGatewayId:
-        $ref: '#/definitions/DirectConnectGatewayId'
-      virtualInterfaceId:
-        $ref: '#/definitions/VirtualInterfaceId'
-      virtualInterfaceRegion:
-        $ref: '#/definitions/VirtualInterfaceRegion'
-      virtualInterfaceOwnerAccount:
-        $ref: '#/definitions/OwnerAccount'
-        description: The AWS account ID of the owner of the virtual interface.
-      attachmentState:
-        $ref: '#/definitions/DirectConnectGatewayAttachmentState'
-      stateChangeError:
-        $ref: '#/definitions/StateChangeError'
-    description: The association between a direct connect gateway and virtual interface.
-  DirectConnectGatewayAttachmentList:
-    type: array
-    description: A list of direct connect gateway attachments.
-    items:
-      $ref: '#/definitions/DirectConnectGatewayAttachment'
-  DirectConnectGatewayAttachmentState:
-    type: string
-    enum:
-      - attaching
-      - attached
-      - detaching
-      - detached
-    description: '<p>State of the direct connect gateway attachment.</p> <ul> <li> <p> <b>Attaching</b>: The initial state after a virtual interface is created using the direct connect gateway.</p> </li> <li> <p> <b>Attached</b>: The direct connect gateway and virtual interface are successfully attached and ready to pass traffic.</p> </li> <li> <p> <b>Detaching</b>: The initial state after calling <a>DeleteVirtualInterface</a> on a virtual interface that is attached to a direct connect gateway.</p> </li> <li> <p> <b>Detached</b>: The virtual interface is successfully detached from the direct connect gateway. Traffic flow between the direct connect gateway and virtual interface stops.</p> </li> </ul>'
-  DirectConnectGatewayId:
-    type: string
-    description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p>'
-  DirectConnectGatewayList:
-    type: array
-    description: A list of direct connect gateways.
-    items:
-      $ref: '#/definitions/DirectConnectGateway'
-  DirectConnectGatewayName:
-    type: string
-    description: '<p>The name of the direct connect gateway.</p> <p>Example: "My direct connect gateway"</p> <p>Default: None</p>'
-  DirectConnectGatewayState:
-    type: string
-    enum:
-      - pending
-      - available
-      - deleting
-      - deleted
-    description: '<p>State of the direct connect gateway.</p> <ul> <li> <p> <b>Pending</b>: The initial state after calling <a>CreateDirectConnectGateway</a>.</p> </li> <li> <p> <b>Available</b>: The direct connect gateway is ready for use.</p> </li> <li> <p> <b>Deleting</b>: The initial state after calling <a>DeleteDirectConnectGateway</a>.</p> </li> <li> <p> <b>Deleted</b>: The direct connect gateway is deleted and cannot pass traffic.</p> </li> </ul>'
+        description: '<p>Numeric account Id of the customer for whom the connection will be provisioned.</p> <p>Example: 123443215678</p> <p>Default: None</p>'
+      interconnectId:
+        $ref: '#/definitions/InterconnectId'
+        description: '<p>ID of the interconnect on which the connection will be provisioned.</p> <p>Example: dxcon-456abc78</p> <p>Default: None</p>'
+      vlan:
+        $ref: '#/definitions/VLAN'
+        description: '<p>The dedicated VLAN provisioned to the connection.</p> <p>Example: 101</p> <p>Default: None</p>'
+    description: Container for the parameters to the AllocateConnectionOnInterconnect operation.
   DirectConnectServerException:
     type: object
     properties:
@@ -2391,471 +1616,38 @@ definitions:
         $ref: '#/definitions/ErrorMessage'
         description: This is an exception thrown when there is a backend issue on the server side.
     description: A server-side error occurred during the API call. The error message will contain additional details about the cause.
-  DisassociateConnectionFromLagRequest:
+  DirectConnectClientException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: 'This is an exception thrown when there is an issue with the input provided by the API call. For example, the name provided for a connection contains a pound sign (#). This can also occur when a valid value is provided, but is otherwise constrained. For example, the valid VLAN tag range is 1-4096 but each can only be used once per connection.'
+    description: The API was called with invalid parameters. The error message will contain additional details about the cause.
+  AllocateHostedConnectionRequest:
     type: object
     required:
       - connectionId
-      - lagId
+      - ownerAccount
+      - bandwidth
+      - connectionName
+      - vlan
     properties:
       connectionId:
         $ref: '#/definitions/ConnectionId'
-        description: '<p>The ID of the connection to disassociate from the LAG.</p> <p>Example: dxcon-abc123</p> <p>Default: None</p>'
-      lagId:
-        $ref: '#/definitions/LagId'
-        description: '<p>The ID of the LAG.</p> <p>Example: dxlag-abc123</p> <p>Default: None</p>'
-    description: Container for the parameters to the DisassociateConnectionFromLag operation.
-  DuplicateTagKeysException:
-    type: object
-    properties: {}
-    description: A tag key was specified more than once.
-  ErrorMessage:
-    type: string
-  Interconnect:
-    type: object
-    properties:
-      interconnectId:
-        $ref: '#/definitions/InterconnectId'
-      interconnectName:
-        $ref: '#/definitions/InterconnectName'
-      interconnectState:
-        $ref: '#/definitions/InterconnectState'
-      region:
-        $ref: '#/definitions/Region'
-      location:
-        $ref: '#/definitions/LocationCode'
-      bandwidth:
-        $ref: '#/definitions/Bandwidth'
-      loaIssueTime:
-        $ref: '#/definitions/LoaIssueTime'
-        description: The time of the most recent call to DescribeInterconnectLoa for this Interconnect.
-      lagId:
-        $ref: '#/definitions/LagId'
-      awsDevice:
-        $ref: '#/definitions/AwsDevice'
-        description: <p>Deprecated in favor of awsDeviceV2.</p> <p>The Direct Connection endpoint which the physical connection terminates on.</p>
-      awsDeviceV2:
-        $ref: '#/definitions/AwsDeviceV2'
-        description: The Direct Connection endpoint which the physical connection terminates on.
-    description: '<p>An interconnect is a connection that can host other connections.</p> <p>Like a standard AWS Direct Connect connection, an interconnect represents the physical connection between an AWS Direct Connect partner''s network and a specific Direct Connect location. An AWS Direct Connect partner who owns an interconnect can provision hosted connections on the interconnect for their end customers, thereby providing the end customers with connectivity to AWS services.</p> <p>The resources of the interconnect, including bandwidth and VLAN numbers, are shared by all of the hosted connections on the interconnect, and the owner of the interconnect determines how these resources are assigned.</p>'
-  InterconnectId:
-    type: string
-    description: '<p>The ID of the interconnect.</p> <p>Example: dxcon-abc123</p>'
-  InterconnectList:
-    type: array
-    description: A list of interconnects.
-    items:
-      $ref: '#/definitions/Interconnect'
-  InterconnectName:
-    type: string
-    description: '<p>The name of the interconnect.</p> <p>Example: "<i>1G Interconnect to AWS</i>"</p>'
-  InterconnectState:
-    type: string
-    enum:
-      - requested
-      - pending
-      - available
-      - down
-      - deleting
-      - deleted
-    description: '<p>State of the interconnect.</p> <ul> <li> <p> <b>Requested</b>: The initial state of an interconnect. The interconnect stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.</p> </li> <li> <p> <b>Pending</b>: The interconnect has been approved, and is being initialized.</p> </li> <li> <p> <b>Available</b>: The network link is up, and the interconnect is ready for use.</p> </li> <li> <p> <b>Down</b>: The network link is down.</p> </li> <li> <p> <b>Deleting</b>: The interconnect is in the process of being deleted.</p> </li> <li> <p> <b>Deleted</b>: The interconnect has been deleted.</p> </li> </ul>'
-  Interconnects:
-    type: object
-    properties:
-      interconnects:
-        $ref: '#/definitions/InterconnectList'
-        description: A list of interconnects.
-    description: A structure containing a list of interconnects.
-  Lag:
-    type: object
-    properties:
-      connectionsBandwidth:
-        $ref: '#/definitions/Bandwidth'
-        description: '<p>The individual bandwidth of the physical connections bundled by the LAG.</p> <p>Available values: 1Gbps, 10Gbps</p>'
-      numberOfConnections:
-        $ref: '#/definitions/Count'
-        description: 'The number of physical connections bundled by the LAG, up to a maximum of 10.'
-      lagId:
-        $ref: '#/definitions/LagId'
+        description: '<p>The ID of the interconnect or LAG on which the connection will be provisioned.</p> <p>Example: dxcon-456abc78 or dxlag-abc123</p> <p>Default: None</p>'
       ownerAccount:
         $ref: '#/definitions/OwnerAccount'
-        description: The owner of the LAG.
-      lagName:
-        $ref: '#/definitions/LagName'
-        description: The name of the LAG.
-      lagState:
-        $ref: '#/definitions/LagState'
-      location:
-        $ref: '#/definitions/LocationCode'
-      region:
-        $ref: '#/definitions/Region'
-      minimumLinks:
-        $ref: '#/definitions/Count'
-        description: 'The minimum number of physical connections that must be operational for the LAG itself to be operational. If the number of operational connections drops below this setting, the LAG state changes to <code>down</code>. This value can help to ensure that a LAG is not overutilized if a significant number of its bundled connections go down.'
-      awsDevice:
-        $ref: '#/definitions/AwsDevice'
-        description: <p>Deprecated in favor of awsDeviceV2.</p> <p>The AWS Direct Connection endpoint that hosts the LAG.</p>
-      awsDeviceV2:
-        $ref: '#/definitions/AwsDeviceV2'
-        description: The AWS Direct Connection endpoint that hosts the LAG.
-      connections:
-        $ref: '#/definitions/ConnectionList'
-        description: A list of connections bundled by this LAG.
-      allowsHostedConnections:
-        $ref: '#/definitions/BooleanFlag'
-        description: <p>Indicates whether the LAG can host other connections.</p> <note> <p>This is intended for use by AWS Direct Connect partners only.</p> </note>
-    description: 'Describes a link aggregation group (LAG). A LAG is a connection that uses the Link Aggregation Control Protocol (LACP) to logically aggregate a bundle of physical connections. Like an interconnect, it can host other connections. All connections in a LAG must terminate on the same physical AWS Direct Connect endpoint, and must be the same bandwidth.'
-  LagId:
-    type: string
-    description: '<p>The ID of the LAG.</p> <p>Example: dxlag-fg5678gh</p>'
-  LagList:
-    type: array
-    description: A list of LAGs.
-    items:
-      $ref: '#/definitions/Lag'
-  LagName:
-    type: string
-  LagState:
-    type: string
-    enum:
-      - requested
-      - pending
-      - available
-      - down
-      - deleting
-      - deleted
-    description: '<p>The state of the LAG.</p> <ul> <li> <p> <b>Requested</b>: The initial state of a LAG. The LAG stays in the requested state until the Letter of Authorization (LOA) is available.</p> </li> <li> <p> <b>Pending</b>: The LAG has been approved, and is being initialized.</p> </li> <li> <p> <b>Available</b>: The network link is established, and the LAG is ready for use.</p> </li> <li> <p> <b>Down</b>: The network link is down.</p> </li> <li> <p> <b>Deleting</b>: The LAG is in the process of being deleted.</p> </li> <li> <p> <b>Deleted</b>: The LAG has been deleted.</p> </li> </ul>'
-  Lags:
-    type: object
-    properties:
-      lags:
-        $ref: '#/definitions/LagList'
-        description: A list of LAGs.
-    description: A structure containing a list of LAGs.
-  Loa:
-    type: object
-    properties:
-      loaContent:
-        $ref: '#/definitions/LoaContent'
-      loaContentType:
-        $ref: '#/definitions/LoaContentType'
-    description: A structure containing the Letter of Authorization - Connecting Facility Assignment (LOA-CFA) for a connection.
-  LoaContent:
-    type: string
-    description: The binary contents of the LOA-CFA document.
-  LoaContentType:
-    type: string
-    enum:
-      - application/pdf
-    description: '<p>A standard media type indicating the content type of the LOA-CFA document. Currently, the only supported value is "application/pdf".</p> <p>Default: application/pdf</p>'
-  LoaIssueTime:
-    type: string
-    format: date-time
-  Location:
-    type: object
-    properties:
-      locationCode:
-        $ref: '#/definitions/LocationCode'
-        description: The code used to indicate the AWS Direct Connect location.
-      region:
-        $ref: '#/definitions/Region'
-        description: '<p>The AWS region where the AWS Direct connect location is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>'
-    description: An AWS Direct Connect location where connections and interconnects can be requested.
-  LocationCode:
-    type: string
-    description: '<p>Where the connection is located.</p> <p>Example: EqSV5</p> <p>Default: None</p>'
-  LocationList:
-    type: array
-    items:
-      $ref: '#/definitions/Location'
-  LocationName:
-    type: string
-  Locations:
-    type: object
-    properties:
-      locations:
-        $ref: '#/definitions/LocationList'
-        description: A list of colocation hubs where network providers have equipment. Most regions have multiple locations available.
-    description: 'A location is a network facility where AWS Direct Connect routers are available to be connected. Generally, these are colocation hubs where many network providers have equipment, and where cross connects can be delivered. Locations include a name and facility code, and must be provided when creating a connection.'
-  LongAsn:
-    type: integer
-  MaxResultSetSize:
-    type: integer
-    description: Maximum number of objects to return per page.
-  NewBGPPeer:
-    type: object
-    properties:
-      asn:
-        $ref: '#/definitions/ASN'
-      authKey:
-        $ref: '#/definitions/BGPAuthKey'
-      addressFamily:
-        $ref: '#/definitions/AddressFamily'
-      amazonAddress:
-        $ref: '#/definitions/AmazonAddress'
-      customerAddress:
-        $ref: '#/definitions/CustomerAddress'
-    description: A structure containing information about a new BGP peer.
-  NewPrivateVirtualInterface:
-    type: object
-    required:
-      - virtualInterfaceName
-      - vlan
-      - asn
-    properties:
-      virtualInterfaceName:
-        $ref: '#/definitions/VirtualInterfaceName'
+        description: '<p>The numeric account ID of the customer for whom the connection will be provisioned.</p> <p>Example: 123443215678</p> <p>Default: None</p>'
+      bandwidth:
+        $ref: '#/definitions/Bandwidth'
+        description: '<p>The bandwidth of the connection.</p> <p>Example: <code>500Mbps</code> </p> <p>Default: None</p> <p>Values: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps</p>'
+      connectionName:
+        $ref: '#/definitions/ConnectionName'
+        description: '<p>The name of the provisioned connection.</p> <p>Example: "<code>500M Connection to AWS</code>"</p> <p>Default: None</p>'
       vlan:
         $ref: '#/definitions/VLAN'
-      asn:
-        $ref: '#/definitions/ASN'
-      authKey:
-        $ref: '#/definitions/BGPAuthKey'
-      amazonAddress:
-        $ref: '#/definitions/AmazonAddress'
-      customerAddress:
-        $ref: '#/definitions/CustomerAddress'
-      addressFamily:
-        $ref: '#/definitions/AddressFamily'
-      virtualGatewayId:
-        $ref: '#/definitions/VirtualGatewayId'
-      directConnectGatewayId:
-        $ref: '#/definitions/DirectConnectGatewayId'
-    description: A structure containing information about a new private virtual interface.
-  NewPrivateVirtualInterfaceAllocation:
-    type: object
-    required:
-      - virtualInterfaceName
-      - vlan
-      - asn
-    properties:
-      virtualInterfaceName:
-        $ref: '#/definitions/VirtualInterfaceName'
-      vlan:
-        $ref: '#/definitions/VLAN'
-      asn:
-        $ref: '#/definitions/ASN'
-      authKey:
-        $ref: '#/definitions/BGPAuthKey'
-      amazonAddress:
-        $ref: '#/definitions/AmazonAddress'
-      addressFamily:
-        $ref: '#/definitions/AddressFamily'
-      customerAddress:
-        $ref: '#/definitions/CustomerAddress'
-    description: A structure containing information about a private virtual interface that will be provisioned on a connection.
-  NewPublicVirtualInterface:
-    type: object
-    required:
-      - virtualInterfaceName
-      - vlan
-      - asn
-    properties:
-      virtualInterfaceName:
-        $ref: '#/definitions/VirtualInterfaceName'
-      vlan:
-        $ref: '#/definitions/VLAN'
-      asn:
-        $ref: '#/definitions/ASN'
-      authKey:
-        $ref: '#/definitions/BGPAuthKey'
-      amazonAddress:
-        $ref: '#/definitions/AmazonAddress'
-      customerAddress:
-        $ref: '#/definitions/CustomerAddress'
-      addressFamily:
-        $ref: '#/definitions/AddressFamily'
-      routeFilterPrefixes:
-        $ref: '#/definitions/RouteFilterPrefixList'
-    description: A structure containing information about a new public virtual interface.
-  NewPublicVirtualInterfaceAllocation:
-    type: object
-    required:
-      - virtualInterfaceName
-      - vlan
-      - asn
-    properties:
-      virtualInterfaceName:
-        $ref: '#/definitions/VirtualInterfaceName'
-      vlan:
-        $ref: '#/definitions/VLAN'
-      asn:
-        $ref: '#/definitions/ASN'
-      authKey:
-        $ref: '#/definitions/BGPAuthKey'
-      amazonAddress:
-        $ref: '#/definitions/AmazonAddress'
-      customerAddress:
-        $ref: '#/definitions/CustomerAddress'
-      addressFamily:
-        $ref: '#/definitions/AddressFamily'
-      routeFilterPrefixes:
-        $ref: '#/definitions/RouteFilterPrefixList'
-    description: A structure containing information about a public virtual interface that will be provisioned on a connection.
-  OwnerAccount:
-    type: string
-  PaginationToken:
-    type: string
-    description: Token to retrieve the next page of the result.
-  PartnerName:
-    type: string
-  ProviderName:
-    type: string
-  Region:
-    type: string
-    description: '<p>The AWS region where the connection is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>'
-  ResourceArn:
-    type: string
-  ResourceArnList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceArn'
-  ResourceTag:
-    type: object
-    properties:
-      resourceArn:
-        $ref: '#/definitions/ResourceArn'
-        description: The Amazon Resource Name (ARN) of the Direct Connect resource.
-      tags:
-        $ref: '#/definitions/TagList'
-        description: The tags.
-    description: The tags associated with a Direct Connect resource.
-  ResourceTagList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceTag'
-  RouteFilterPrefix:
-    type: object
-    properties:
-      cidr:
-        $ref: '#/definitions/CIDR'
-        description: '<p>CIDR notation for the advertised route. Multiple routes are separated by commas.</p> <p>IPv6 CIDRs must be at least a /64 or shorter</p> <p>Example: 10.10.10.0/24,10.10.11.0/24,2001:db8::/64</p>'
-    description: A route filter prefix that the customer can advertise through Border Gateway Protocol (BGP) over a public virtual interface.
-  RouteFilterPrefixList:
-    type: array
-    description: A list of routes to be advertised to the AWS network in this region (public virtual interface).
-    items:
-      $ref: '#/definitions/RouteFilterPrefix'
-  RouterConfig:
-    type: string
-  StateChangeError:
-    type: string
-    description: Error message when the state of an object fails to advance.
-  Tag:
-    type: object
-    required:
-      - key
-    properties:
-      key:
-        $ref: '#/definitions/TagKey'
-        description: The key of the tag.
-      value:
-        $ref: '#/definitions/TagValue'
-        description: The value of the tag.
-    description: Information about a tag.
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-  TagResourceRequest:
-    type: object
-    required:
-      - resourceArn
-      - tags
-    properties:
-      resourceArn:
-        $ref: '#/definitions/ResourceArn'
-        description: '<p>The Amazon Resource Name (ARN) of the Direct Connect resource.</p> <p>Example: arn:aws:directconnect:us-east-1:123456789012:dxcon/dxcon-fg5678gh</p>'
-      tags:
-        $ref: '#/definitions/TagList'
-        description: The list of tags to add.
-    description: Container for the parameters to the TagResource operation.
-  TagResourceResponse:
-    type: object
-    properties: {}
-    description: The response received when TagResource is called.
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  TooManyTagsException:
-    type: object
-    properties: {}
-    description: You have reached the limit on the number of tags that can be assigned to a Direct Connect resource.
-  UntagResourceRequest:
-    type: object
-    required:
-      - resourceArn
-      - tagKeys
-    properties:
-      resourceArn:
-        $ref: '#/definitions/ResourceArn'
-        description: The Amazon Resource Name (ARN) of the Direct Connect resource.
-      tagKeys:
-        $ref: '#/definitions/TagKeyList'
-        description: The list of tag keys to remove.
-    description: Container for the parameters to the UntagResource operation.
-  UntagResourceResponse:
-    type: object
-    properties: {}
-    description: The response received when UntagResource is called.
-  UpdateLagRequest:
-    type: object
-    required:
-      - lagId
-    properties:
-      lagId:
-        $ref: '#/definitions/LagId'
-        description: '<p>The ID of the LAG to update.</p> <p>Example: dxlag-abc123</p> <p>Default: None</p>'
-      lagName:
-        $ref: '#/definitions/LagName'
-        description: '<p>The name for the LAG.</p> <p>Example: "<code>3x10G LAG to AWS</code>"</p> <p>Default: None</p>'
-      minimumLinks:
-        $ref: '#/definitions/Count'
-        description: '<p>The minimum number of physical connections that must be operational for the LAG itself to be operational.</p> <p>Default: None</p>'
-    description: Container for the parameters to the UpdateLag operation.
-  VLAN:
-    type: integer
-    description: '<p>The VLAN ID.</p> <p>Example: 101</p>'
-  VirtualGateway:
-    type: object
-    properties:
-      virtualGatewayId:
-        $ref: '#/definitions/VirtualGatewayId'
-      virtualGatewayState:
-        $ref: '#/definitions/VirtualGatewayState'
-    description: '<p>You can create one or more AWS Direct Connect private virtual interfaces linking to your virtual private gateway.</p> <p>Virtual private gateways can be managed using the Amazon Virtual Private Cloud (Amazon VPC) console or the <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html">Amazon EC2 CreateVpnGateway action</a>.</p>'
-  VirtualGatewayId:
-    type: string
-    description: '<p>The ID of the virtual private gateway to a VPC. This only applies to private virtual interfaces.</p> <p>Example: vgw-123er56</p>'
-  VirtualGatewayList:
-    type: array
-    description: A list of virtual private gateways.
-    items:
-      $ref: '#/definitions/VirtualGateway'
-  VirtualGatewayRegion:
-    type: string
-    description: '<p>The region in which the virtual private gateway is located.</p> <p>Example: us-east-1</p>'
-  VirtualGatewayState:
-    type: string
-    description: '<p>State of the virtual private gateway.</p> <ul> <li> <p> <b>Pending</b>: This is the initial state after calling <i>CreateVpnGateway</i>.</p> </li> <li> <p> <b>Available</b>: Ready for use by a private virtual interface.</p> </li> <li> <p> <b>Deleting</b>: This is the initial state after calling <i>DeleteVpnGateway</i>.</p> </li> <li> <p> <b>Deleted</b>: In this state, a private virtual interface is unable to send traffic over this gateway.</p> </li> </ul>'
-  VirtualGateways:
-    type: object
-    properties:
-      virtualGateways:
-        $ref: '#/definitions/VirtualGatewayList'
-        description: A list of virtual private gateways.
-    description: A structure containing a list of virtual private gateways.
+        description: '<p>The dedicated VLAN provisioned to the hosted connection.</p> <p>Example: 101</p> <p>Default: None</p>'
+    description: Container for the parameters to theHostedConnection operation.
   VirtualInterface:
     type: object
     properties:
@@ -2907,20 +1699,890 @@ definitions:
         $ref: '#/definitions/AwsDeviceV2'
         description: The Direct Connection endpoint which the virtual interface terminates on.
     description: A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect location and the customer.
+  AllocatePrivateVirtualInterfaceRequest:
+    type: object
+    required:
+      - connectionId
+      - ownerAccount
+      - newPrivateVirtualInterfaceAllocation
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+        description: '<p>The connection ID on which the private virtual interface is provisioned.</p> <p>Default: None</p>'
+      ownerAccount:
+        $ref: '#/definitions/OwnerAccount'
+        description: '<p>The AWS account that will own the new private virtual interface.</p> <p>Default: None</p>'
+      newPrivateVirtualInterfaceAllocation:
+        $ref: '#/definitions/NewPrivateVirtualInterfaceAllocation'
+        description: '<p>Detailed information for the private virtual interface to be provisioned.</p> <p>Default: None</p>'
+    description: Container for the parameters to the AllocatePrivateVirtualInterface operation.
+  AllocatePublicVirtualInterfaceRequest:
+    type: object
+    required:
+      - connectionId
+      - ownerAccount
+      - newPublicVirtualInterfaceAllocation
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+        description: '<p>The connection ID on which the public virtual interface is provisioned.</p> <p>Default: None</p>'
+      ownerAccount:
+        $ref: '#/definitions/OwnerAccount'
+        description: '<p>The AWS account that will own the new public virtual interface.</p> <p>Default: None</p>'
+      newPublicVirtualInterfaceAllocation:
+        $ref: '#/definitions/NewPublicVirtualInterfaceAllocation'
+        description: '<p>Detailed information for the public virtual interface to be provisioned.</p> <p>Default: None</p>'
+    description: Container for the parameters to the AllocatePublicVirtualInterface operation.
+  AssociateConnectionWithLagRequest:
+    type: object
+    required:
+      - connectionId
+      - lagId
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+        description: '<p>The ID of the connection.</p> <p>Example: dxcon-abc123</p> <p>Default: None</p>'
+      lagId:
+        $ref: '#/definitions/LagId'
+        description: '<p>The ID of the LAG with which to associate the connection.</p> <p>Example: dxlag-abc123</p> <p>Default: None</p>'
+    description: Container for the parameters to the AssociateConnectionWithLag operation.
+  AssociateHostedConnectionRequest:
+    type: object
+    required:
+      - connectionId
+      - parentConnectionId
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+        description: '<p>The ID of the hosted connection.</p> <p>Example: dxcon-abc123</p> <p>Default: None</p>'
+      parentConnectionId:
+        $ref: '#/definitions/ConnectionId'
+        description: '<p>The ID of the interconnect or the LAG.</p> <p>Example: dxcon-abc123 or dxlag-abc123</p> <p>Default: None</p>'
+    description: Container for the parameters to the AssociateHostedConnection operation.
+  AssociateVirtualInterfaceRequest:
+    type: object
+    required:
+      - virtualInterfaceId
+      - connectionId
+    properties:
+      virtualInterfaceId:
+        $ref: '#/definitions/VirtualInterfaceId'
+        description: '<p>The ID of the virtual interface.</p> <p>Example: dxvif-123dfg56</p> <p>Default: None</p>'
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+        description: '<p>The ID of the LAG or connection with which to associate the virtual interface.</p> <p>Example: dxlag-abc123 or dxcon-abc123</p> <p>Default: None</p>'
+    description: Container for the parameters to the AssociateVirtualInterface operation.
+  ConfirmConnectionResponse:
+    type: object
+    properties:
+      connectionState:
+        $ref: '#/definitions/ConnectionState'
+    description: The response received when ConfirmConnection is called.
+  ConfirmConnectionRequest:
+    type: object
+    required:
+      - connectionId
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+    description: Container for the parameters to the ConfirmConnection operation.
+  ConfirmPrivateVirtualInterfaceResponse:
+    type: object
+    properties:
+      virtualInterfaceState:
+        $ref: '#/definitions/VirtualInterfaceState'
+    description: The response received when ConfirmPrivateVirtualInterface is called.
+  ConfirmPrivateVirtualInterfaceRequest:
+    type: object
+    required:
+      - virtualInterfaceId
+    properties:
+      virtualInterfaceId:
+        $ref: '#/definitions/VirtualInterfaceId'
+      virtualGatewayId:
+        $ref: '#/definitions/VirtualGatewayId'
+        description: '<p>ID of the virtual private gateway that will be attached to the virtual interface.</p> <p> A virtual private gateway can be managed via the Amazon Virtual Private Cloud (VPC) console or the <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html">EC2 CreateVpnGateway</a> action.</p> <p>Default: None</p>'
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>ID of the direct connect gateway that will be attached to the virtual interface.</p> <p> A direct connect gateway can be managed via the AWS Direct Connect console or the <a>CreateDirectConnectGateway</a> action.</p> <p>Default: None</p>'
+    description: Container for the parameters to the ConfirmPrivateVirtualInterface operation.
+  ConfirmPublicVirtualInterfaceResponse:
+    type: object
+    properties:
+      virtualInterfaceState:
+        $ref: '#/definitions/VirtualInterfaceState'
+    description: The response received when ConfirmPublicVirtualInterface is called.
+  ConfirmPublicVirtualInterfaceRequest:
+    type: object
+    required:
+      - virtualInterfaceId
+    properties:
+      virtualInterfaceId:
+        $ref: '#/definitions/VirtualInterfaceId'
+    description: Container for the parameters to the ConfirmPublicVirtualInterface operation.
+  CreateBGPPeerResponse:
+    type: object
+    properties:
+      virtualInterface:
+        $ref: '#/definitions/VirtualInterface'
+    description: The response received when CreateBGPPeer is called.
+  CreateBGPPeerRequest:
+    type: object
+    properties:
+      virtualInterfaceId:
+        $ref: '#/definitions/VirtualInterfaceId'
+        description: '<p>The ID of the virtual interface on which the BGP peer will be provisioned.</p> <p>Example: dxvif-456abc78</p> <p>Default: None</p>'
+      newBGPPeer:
+        $ref: '#/definitions/NewBGPPeer'
+        description: '<p>Detailed information for the BGP peer to be created.</p> <p>Default: None</p>'
+    description: Container for the parameters to the CreateBGPPeer operation.
+  CreateConnectionRequest:
+    type: object
+    required:
+      - location
+      - bandwidth
+      - connectionName
+    properties:
+      location:
+        $ref: '#/definitions/LocationCode'
+      bandwidth:
+        $ref: '#/definitions/Bandwidth'
+      connectionName:
+        $ref: '#/definitions/ConnectionName'
+      lagId:
+        $ref: '#/definitions/LagId'
+    description: Container for the parameters to the CreateConnection operation.
+  CreateDirectConnectGatewayResult:
+    type: object
+    properties:
+      directConnectGateway:
+        $ref: '#/definitions/DirectConnectGateway'
+        description: The direct connect gateway to be created.
+    description: Container for the response from the CreateDirectConnectGateway API call
+  CreateDirectConnectGatewayRequest:
+    type: object
+    required:
+      - directConnectGatewayName
+    properties:
+      directConnectGatewayName:
+        $ref: '#/definitions/DirectConnectGatewayName'
+        description: '<p>The name of the direct connect gateway.</p> <p>Example: "My direct connect gateway"</p> <p>Default: None</p>'
+      amazonSideAsn:
+        $ref: '#/definitions/LongAsn'
+        description: '<p>The autonomous system number (ASN) for Border Gateway Protocol (BGP) to be configured on the Amazon side of the connection. The ASN must be in the private range of 64,512 to 65,534 or 4,200,000,000 to 4,294,967,294 </p> <p>Example: 65200</p> <p>Default: 64512</p>'
+    description: Container for the parameters to the CreateDirectConnectGateway operation.
+  CreateDirectConnectGatewayAssociationResult:
+    type: object
+    properties:
+      directConnectGatewayAssociation:
+        $ref: '#/definitions/DirectConnectGatewayAssociation'
+        description: The direct connect gateway association to be created.
+    description: Container for the response from the CreateDirectConnectGatewayAssociation API call
+  CreateDirectConnectGatewayAssociationRequest:
+    type: object
+    required:
+      - directConnectGatewayId
+      - virtualGatewayId
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
+      virtualGatewayId:
+        $ref: '#/definitions/VirtualGatewayId'
+        description: '<p>The ID of the virtual private gateway.</p> <p>Example: "vgw-abc123ef"</p> <p>Default: None</p>'
+    description: Container for the parameters to the CreateDirectConnectGatewayAssociation operation.
+  Interconnect:
+    type: object
+    properties:
+      interconnectId:
+        $ref: '#/definitions/InterconnectId'
+      interconnectName:
+        $ref: '#/definitions/InterconnectName'
+      interconnectState:
+        $ref: '#/definitions/InterconnectState'
+      region:
+        $ref: '#/definitions/Region'
+      location:
+        $ref: '#/definitions/LocationCode'
+      bandwidth:
+        $ref: '#/definitions/Bandwidth'
+      loaIssueTime:
+        $ref: '#/definitions/LoaIssueTime'
+        description: The time of the most recent call to DescribeInterconnectLoa for this Interconnect.
+      lagId:
+        $ref: '#/definitions/LagId'
+      awsDevice:
+        $ref: '#/definitions/AwsDevice'
+        description: <p>Deprecated in favor of awsDeviceV2.</p> <p>The Direct Connection endpoint which the physical connection terminates on.</p>
+      awsDeviceV2:
+        $ref: '#/definitions/AwsDeviceV2'
+        description: The Direct Connection endpoint which the physical connection terminates on.
+    description: '<p>An interconnect is a connection that can host other connections.</p> <p>Like a standard AWS Direct Connect connection, an interconnect represents the physical connection between an AWS Direct Connect partner''s network and a specific Direct Connect location. An AWS Direct Connect partner who owns an interconnect can provision hosted connections on the interconnect for their end customers, thereby providing the end customers with connectivity to AWS services.</p> <p>The resources of the interconnect, including bandwidth and VLAN numbers, are shared by all of the hosted connections on the interconnect, and the owner of the interconnect determines how these resources are assigned.</p>'
+  CreateInterconnectRequest:
+    type: object
+    required:
+      - interconnectName
+      - bandwidth
+      - location
+    properties:
+      interconnectName:
+        $ref: '#/definitions/InterconnectName'
+        description: '<p>The name of the interconnect.</p> <p>Example: "<i>1G Interconnect to AWS</i>"</p> <p>Default: None</p>'
+      bandwidth:
+        $ref: '#/definitions/Bandwidth'
+        description: '<p>The port bandwidth</p> <p>Example: 1Gbps</p> <p>Default: None</p> <p>Available values: 1Gbps,10Gbps</p>'
+      location:
+        $ref: '#/definitions/LocationCode'
+        description: '<p>Where the interconnect is located</p> <p>Example: EqSV5</p> <p>Default: None</p>'
+      lagId:
+        $ref: '#/definitions/LagId'
+    description: Container for the parameters to the CreateInterconnect operation.
+  Lag:
+    type: object
+    properties:
+      connectionsBandwidth:
+        $ref: '#/definitions/Bandwidth'
+        description: '<p>The individual bandwidth of the physical connections bundled by the LAG.</p> <p>Available values: 1Gbps, 10Gbps</p>'
+      numberOfConnections:
+        $ref: '#/definitions/Count'
+        description: 'The number of physical connections bundled by the LAG, up to a maximum of 10.'
+      lagId:
+        $ref: '#/definitions/LagId'
+      ownerAccount:
+        $ref: '#/definitions/OwnerAccount'
+        description: The owner of the LAG.
+      lagName:
+        $ref: '#/definitions/LagName'
+        description: The name of the LAG.
+      lagState:
+        $ref: '#/definitions/LagState'
+      location:
+        $ref: '#/definitions/LocationCode'
+      region:
+        $ref: '#/definitions/Region'
+      minimumLinks:
+        $ref: '#/definitions/Count'
+        description: 'The minimum number of physical connections that must be operational for the LAG itself to be operational. If the number of operational connections drops below this setting, the LAG state changes to <code>down</code>. This value can help to ensure that a LAG is not overutilized if a significant number of its bundled connections go down.'
+      awsDevice:
+        $ref: '#/definitions/AwsDevice'
+        description: <p>Deprecated in favor of awsDeviceV2.</p> <p>The AWS Direct Connection endpoint that hosts the LAG.</p>
+      awsDeviceV2:
+        $ref: '#/definitions/AwsDeviceV2'
+        description: The AWS Direct Connection endpoint that hosts the LAG.
+      connections:
+        $ref: '#/definitions/ConnectionList'
+        description: A list of connections bundled by this LAG.
+      allowsHostedConnections:
+        $ref: '#/definitions/BooleanFlag'
+        description: <p>Indicates whether the LAG can host other connections.</p> <note> <p>This is intended for use by AWS Direct Connect partners only.</p> </note>
+    description: 'Describes a link aggregation group (LAG). A LAG is a connection that uses the Link Aggregation Control Protocol (LACP) to logically aggregate a bundle of physical connections. Like an interconnect, it can host other connections. All connections in a LAG must terminate on the same physical AWS Direct Connect endpoint, and must be the same bandwidth.'
+  CreateLagRequest:
+    type: object
+    required:
+      - numberOfConnections
+      - location
+      - connectionsBandwidth
+      - lagName
+    properties:
+      numberOfConnections:
+        $ref: '#/definitions/Count'
+        description: '<p>The number of physical connections initially provisioned and bundled by the LAG.</p> <p>Default: None</p>'
+      location:
+        $ref: '#/definitions/LocationCode'
+        description: '<p>The AWS Direct Connect location in which the LAG should be allocated.</p> <p>Example: EqSV5</p> <p>Default: None</p>'
+      connectionsBandwidth:
+        $ref: '#/definitions/Bandwidth'
+        description: '<p>The bandwidth of the individual physical connections bundled by the LAG.</p> <p>Default: None</p> <p>Available values: 1Gbps, 10Gbps</p>'
+      lagName:
+        $ref: '#/definitions/LagName'
+        description: '<p>The name of the LAG.</p> <p>Example: "<code>3x10G LAG to AWS</code>"</p> <p>Default: None</p>'
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+        description: '<p>The ID of an existing connection to migrate to the LAG.</p> <p>Default: None</p>'
+    description: Container for the parameters to the CreateLag operation.
+  CreatePrivateVirtualInterfaceRequest:
+    type: object
+    required:
+      - connectionId
+      - newPrivateVirtualInterface
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+      newPrivateVirtualInterface:
+        $ref: '#/definitions/NewPrivateVirtualInterface'
+        description: '<p>Detailed information for the private virtual interface to be created.</p> <p>Default: None</p>'
+    description: Container for the parameters to the CreatePrivateVirtualInterface operation.
+  CreatePublicVirtualInterfaceRequest:
+    type: object
+    required:
+      - connectionId
+      - newPublicVirtualInterface
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+      newPublicVirtualInterface:
+        $ref: '#/definitions/NewPublicVirtualInterface'
+        description: '<p>Detailed information for the public virtual interface to be created.</p> <p>Default: None</p>'
+    description: Container for the parameters to the CreatePublicVirtualInterface operation.
+  DeleteBGPPeerResponse:
+    type: object
+    properties:
+      virtualInterface:
+        $ref: '#/definitions/VirtualInterface'
+    description: The response received when DeleteBGPPeer is called.
+  DeleteBGPPeerRequest:
+    type: object
+    properties:
+      virtualInterfaceId:
+        $ref: '#/definitions/VirtualInterfaceId'
+        description: '<p>The ID of the virtual interface from which the BGP peer will be deleted.</p> <p>Example: dxvif-456abc78</p> <p>Default: None</p>'
+      asn:
+        $ref: '#/definitions/ASN'
+      customerAddress:
+        $ref: '#/definitions/CustomerAddress'
+    description: Container for the parameters to the DeleteBGPPeer operation.
+  DeleteConnectionRequest:
+    type: object
+    required:
+      - connectionId
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+    description: Container for the parameters to the DeleteConnection operation.
+  DeleteDirectConnectGatewayResult:
+    type: object
+    properties:
+      directConnectGateway:
+        $ref: '#/definitions/DirectConnectGateway'
+        description: The direct connect gateway to be deleted.
+    description: Container for the response from the DeleteDirectConnectGateway API call
+  DeleteDirectConnectGatewayRequest:
+    type: object
+    required:
+      - directConnectGatewayId
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
+    description: Container for the parameters to the DeleteDirectConnectGateway operation.
+  DeleteDirectConnectGatewayAssociationResult:
+    type: object
+    properties:
+      directConnectGatewayAssociation:
+        $ref: '#/definitions/DirectConnectGatewayAssociation'
+        description: The direct connect gateway association to be deleted.
+    description: Container for the response from the DeleteDirectConnectGatewayAssociation API call
+  DeleteDirectConnectGatewayAssociationRequest:
+    type: object
+    required:
+      - directConnectGatewayId
+      - virtualGatewayId
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
+      virtualGatewayId:
+        $ref: '#/definitions/VirtualGatewayId'
+        description: '<p>The ID of the virtual private gateway.</p> <p>Example: "vgw-abc123ef"</p> <p>Default: None</p>'
+    description: Container for the parameters to the DeleteDirectConnectGatewayAssociation operation.
+  DeleteInterconnectResponse:
+    type: object
+    properties:
+      interconnectState:
+        $ref: '#/definitions/InterconnectState'
+    description: The response received when DeleteInterconnect is called.
+  DeleteInterconnectRequest:
+    type: object
+    required:
+      - interconnectId
+    properties:
+      interconnectId:
+        $ref: '#/definitions/InterconnectId'
+    description: Container for the parameters to the DeleteInterconnect operation.
+  DeleteLagRequest:
+    type: object
+    required:
+      - lagId
+    properties:
+      lagId:
+        $ref: '#/definitions/LagId'
+        description: '<p>The ID of the LAG to delete.</p> <p>Example: dxlag-abc123</p> <p>Default: None</p>'
+    description: Container for the parameters to the DeleteLag operation.
+  DeleteVirtualInterfaceResponse:
+    type: object
+    properties:
+      virtualInterfaceState:
+        $ref: '#/definitions/VirtualInterfaceState'
+    description: The response received when DeleteVirtualInterface is called.
+  DeleteVirtualInterfaceRequest:
+    type: object
+    required:
+      - virtualInterfaceId
+    properties:
+      virtualInterfaceId:
+        $ref: '#/definitions/VirtualInterfaceId'
+    description: Container for the parameters to the DeleteVirtualInterface operation.
+  DescribeConnectionLoaResponse:
+    type: object
+    properties:
+      loa:
+        $ref: '#/definitions/Loa'
+    description: The response received when DescribeConnectionLoa is called.
+  DescribeConnectionLoaRequest:
+    type: object
+    required:
+      - connectionId
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+      providerName:
+        $ref: '#/definitions/ProviderName'
+        description: '<p>The name of the APN partner or service provider who establishes connectivity on your behalf. If you supply this parameter, the LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p> <p>Default: None</p>'
+      loaContentType:
+        $ref: '#/definitions/LoaContentType'
+    description: Container for the parameters to the DescribeConnectionLoa operation.
+  Connections:
+    type: object
+    properties:
+      connections:
+        $ref: '#/definitions/ConnectionList'
+        description: A list of connections.
+    description: A structure containing a list of connections.
+  DescribeConnectionsRequest:
+    type: object
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+    description: Container for the parameters to the DescribeConnections operation.
+  DescribeConnectionsOnInterconnectRequest:
+    type: object
+    required:
+      - interconnectId
+    properties:
+      interconnectId:
+        $ref: '#/definitions/InterconnectId'
+        description: '<p>ID of the interconnect on which a list of connection is provisioned.</p> <p>Example: dxcon-abc123</p> <p>Default: None</p>'
+    description: Container for the parameters to the DescribeConnectionsOnInterconnect operation.
+  DescribeDirectConnectGatewayAssociationsResult:
+    type: object
+    properties:
+      directConnectGatewayAssociations:
+        $ref: '#/definitions/DirectConnectGatewayAssociationList'
+        description: Information about the direct connect gateway associations.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+    description: Container for the response from the DescribeDirectConnectGatewayAssociations API call
+  DescribeDirectConnectGatewayAssociationsRequest:
+    type: object
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
+      virtualGatewayId:
+        $ref: '#/definitions/VirtualGatewayId'
+        description: '<p>The ID of the virtual private gateway.</p> <p>Example: "vgw-abc123ef"</p> <p>Default: None</p>'
+      maxResults:
+        $ref: '#/definitions/MaxResultSetSize'
+        description: '<p>The maximum number of direct connect gateway associations to return per page.</p> <p>Example: 15</p> <p>Default: None</p>'
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: '<p>The token provided in the previous describe result to retrieve the next page of the result.</p> <p>Default: None</p>'
+    description: Container for the parameters to the DescribeDirectConnectGatewayAssociations operation.
+  DescribeDirectConnectGatewayAttachmentsResult:
+    type: object
+    properties:
+      directConnectGatewayAttachments:
+        $ref: '#/definitions/DirectConnectGatewayAttachmentList'
+        description: Information about the direct connect gateway attachments.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+    description: Container for the response from the DescribeDirectConnectGatewayAttachments API call
+  DescribeDirectConnectGatewayAttachmentsRequest:
+    type: object
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
+      virtualInterfaceId:
+        $ref: '#/definitions/VirtualInterfaceId'
+        description: '<p>The ID of the virtual interface.</p> <p>Example: "dxvif-abc123ef"</p> <p>Default: None</p>'
+      maxResults:
+        $ref: '#/definitions/MaxResultSetSize'
+        description: '<p>The maximum number of direct connect gateway attachments to return per page.</p> <p>Example: 15</p> <p>Default: None</p>'
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: '<p>The token provided in the previous describe result to retrieve the next page of the result.</p> <p>Default: None</p>'
+    description: Container for the parameters to the DescribeDirectConnectGatewayAttachments operation.
+  DescribeDirectConnectGatewaysResult:
+    type: object
+    properties:
+      directConnectGateways:
+        $ref: '#/definitions/DirectConnectGatewayList'
+        description: Information about the direct connect gateways.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+    description: Container for the response from the DescribeDirectConnectGateways API call
+  DescribeDirectConnectGatewaysRequest:
+    type: object
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
+      maxResults:
+        $ref: '#/definitions/MaxResultSetSize'
+        description: '<p>The maximum number of direct connect gateways to return per page.</p> <p>Example: 15</p> <p>Default: None</p>'
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: '<p>The token provided in the previous describe result to retrieve the next page of the result.</p> <p>Default: None</p>'
+    description: Container for the parameters to the DescribeDirectConnectGateways operation.
+  DescribeHostedConnectionsRequest:
+    type: object
+    required:
+      - connectionId
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+        description: '<p>The ID of the interconnect or LAG on which the hosted connections are provisioned.</p> <p>Example: dxcon-abc123 or dxlag-abc123</p> <p>Default: None</p>'
+    description: Container for the parameters to the DescribeHostedConnections operation.
+  DescribeInterconnectLoaResponse:
+    type: object
+    properties:
+      loa:
+        $ref: '#/definitions/Loa'
+    description: The response received when DescribeInterconnectLoa is called.
+  DescribeInterconnectLoaRequest:
+    type: object
+    required:
+      - interconnectId
+    properties:
+      interconnectId:
+        $ref: '#/definitions/InterconnectId'
+      providerName:
+        $ref: '#/definitions/ProviderName'
+        description: '<p>The name of the service provider who establishes connectivity on your behalf. If you supply this parameter, the LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p> <p>Default: None</p>'
+      loaContentType:
+        $ref: '#/definitions/LoaContentType'
+    description: Container for the parameters to the DescribeInterconnectLoa operation.
+  Interconnects:
+    type: object
+    properties:
+      interconnects:
+        $ref: '#/definitions/InterconnectList'
+        description: A list of interconnects.
+    description: A structure containing a list of interconnects.
+  DescribeInterconnectsRequest:
+    type: object
+    properties:
+      interconnectId:
+        $ref: '#/definitions/InterconnectId'
+    description: Container for the parameters to the DescribeInterconnects operation.
+  Lags:
+    type: object
+    properties:
+      lags:
+        $ref: '#/definitions/LagList'
+        description: A list of LAGs.
+    description: A structure containing a list of LAGs.
+  DescribeLagsRequest:
+    type: object
+    properties:
+      lagId:
+        $ref: '#/definitions/LagId'
+        description: '<p>The ID of the LAG.</p> <p>Example: dxlag-abc123</p> <p>Default: None</p>'
+    description: Container for the parameters to the DescribeLags operation.
+  Loa:
+    type: object
+    properties:
+      loaContent:
+        $ref: '#/definitions/LoaContent'
+      loaContentType:
+        $ref: '#/definitions/LoaContentType'
+    description: A structure containing the Letter of Authorization - Connecting Facility Assignment (LOA-CFA) for a connection.
+  DescribeLoaRequest:
+    type: object
+    required:
+      - connectionId
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+        description: '<p>The ID of a connection, LAG, or interconnect for which to get the LOA-CFA information.</p> <p>Example: dxcon-abc123 or dxlag-abc123</p> <p>Default: None</p>'
+      providerName:
+        $ref: '#/definitions/ProviderName'
+        description: '<p>The name of the service provider who establishes connectivity on your behalf. If you supply this parameter, the LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p> <p>Default: None</p>'
+      loaContentType:
+        $ref: '#/definitions/LoaContentType'
+        description: '<p>A standard media type indicating the content type of the LOA-CFA document. Currently, the only supported value is "application/pdf".</p> <p>Default: application/pdf</p>'
+    description: Container for the parameters to the DescribeLoa operation.
+  Locations:
+    type: object
+    properties:
+      locations:
+        $ref: '#/definitions/LocationList'
+        description: A list of colocation hubs where network providers have equipment. Most regions have multiple locations available.
+    description: 'A location is a network facility where AWS Direct Connect routers are available to be connected. Generally, these are colocation hubs where many network providers have equipment, and where cross connects can be delivered. Locations include a name and facility code, and must be provided when creating a connection.'
+  DescribeTagsResponse:
+    type: object
+    properties:
+      resourceTags:
+        $ref: '#/definitions/ResourceTagList'
+        description: Information about the tags.
+    description: The response received when DescribeTags is called.
+  DescribeTagsRequest:
+    type: object
+    required:
+      - resourceArns
+    properties:
+      resourceArns:
+        $ref: '#/definitions/ResourceArnList'
+        description: The Amazon Resource Names (ARNs) of the Direct Connect resources.
+    description: Container for the parameters to the DescribeTags operation.
+  VirtualGateways:
+    type: object
+    properties:
+      virtualGateways:
+        $ref: '#/definitions/VirtualGatewayList'
+        description: A list of virtual private gateways.
+    description: A structure containing a list of virtual private gateways.
+  VirtualInterfaces:
+    type: object
+    properties:
+      virtualInterfaces:
+        $ref: '#/definitions/VirtualInterfaceList'
+        description: A list of virtual interfaces.
+    description: A structure containing a list of virtual interfaces.
+  DescribeVirtualInterfacesRequest:
+    type: object
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+      virtualInterfaceId:
+        $ref: '#/definitions/VirtualInterfaceId'
+    description: Container for the parameters to the DescribeVirtualInterfaces operation.
+  DisassociateConnectionFromLagRequest:
+    type: object
+    required:
+      - connectionId
+      - lagId
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+        description: '<p>The ID of the connection to disassociate from the LAG.</p> <p>Example: dxcon-abc123</p> <p>Default: None</p>'
+      lagId:
+        $ref: '#/definitions/LagId'
+        description: '<p>The ID of the LAG.</p> <p>Example: dxlag-abc123</p> <p>Default: None</p>'
+    description: Container for the parameters to the DisassociateConnectionFromLag operation.
+  TagResourceResponse:
+    type: object
+    properties: {}
+    description: The response received when TagResource is called.
+  TagResourceRequest:
+    type: object
+    required:
+      - resourceArn
+      - tags
+    properties:
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: '<p>The Amazon Resource Name (ARN) of the Direct Connect resource.</p> <p>Example: arn:aws:directconnect:us-east-1:123456789012:dxcon/dxcon-fg5678gh</p>'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The list of tags to add.
+    description: Container for the parameters to the TagResource operation.
+  DuplicateTagKeysException:
+    type: object
+    properties: {}
+    description: A tag key was specified more than once.
+  TooManyTagsException:
+    type: object
+    properties: {}
+    description: You have reached the limit on the number of tags that can be assigned to a Direct Connect resource.
+  UntagResourceResponse:
+    type: object
+    properties: {}
+    description: The response received when UntagResource is called.
+  UntagResourceRequest:
+    type: object
+    required:
+      - resourceArn
+      - tagKeys
+    properties:
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the Direct Connect resource.
+      tagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: The list of tag keys to remove.
+    description: Container for the parameters to the UntagResource operation.
+  UpdateLagRequest:
+    type: object
+    required:
+      - lagId
+    properties:
+      lagId:
+        $ref: '#/definitions/LagId'
+        description: '<p>The ID of the LAG to update.</p> <p>Example: dxlag-abc123</p> <p>Default: None</p>'
+      lagName:
+        $ref: '#/definitions/LagName'
+        description: '<p>The name for the LAG.</p> <p>Example: "<code>3x10G LAG to AWS</code>"</p> <p>Default: None</p>'
+      minimumLinks:
+        $ref: '#/definitions/Count'
+        description: '<p>The minimum number of physical connections that must be operational for the LAG itself to be operational.</p> <p>Default: None</p>'
+    description: Container for the parameters to the UpdateLag operation.
+  ASN:
+    type: integer
+    description: '<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p> <p>Example: 65000</p>'
+  AddressFamily:
+    type: string
+    enum:
+      - ipv4
+      - ipv6
+    description: '<p>Indicates the address family for the BGP peer.</p> <ul> <li> <p> <b>ipv4</b>: IPv4 address family</p> </li> <li> <p> <b>ipv6</b>: IPv6 address family</p> </li> </ul>'
+  Bandwidth:
+    type: string
+    description: '<p>Bandwidth of the connection.</p> <p>Example: 1Gbps</p> <p>Default: None</p>'
+  ConnectionName:
+    type: string
+    description: '<p>The name of the connection.</p> <p>Example: "<i>My Connection to AWS</i>"</p> <p>Default: None</p>'
+  OwnerAccount:
+    type: string
+  InterconnectId:
+    type: string
+    description: '<p>The ID of the interconnect.</p> <p>Example: dxcon-abc123</p>'
+  VLAN:
+    type: integer
+    description: '<p>The VLAN ID.</p> <p>Example: 101</p>'
+  ConnectionId:
+    type: string
+    description: '<p>The ID of the connection. This field is also used as the ID type for operations that use multiple connection types (LAG, interconnect, and/or connection).</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>'
+  NewPrivateVirtualInterfaceAllocation:
+    type: object
+    required:
+      - virtualInterfaceName
+      - vlan
+      - asn
+    properties:
+      virtualInterfaceName:
+        $ref: '#/definitions/VirtualInterfaceName'
+      vlan:
+        $ref: '#/definitions/VLAN'
+      asn:
+        $ref: '#/definitions/ASN'
+      authKey:
+        $ref: '#/definitions/BGPAuthKey'
+      amazonAddress:
+        $ref: '#/definitions/AmazonAddress'
+      addressFamily:
+        $ref: '#/definitions/AddressFamily'
+      customerAddress:
+        $ref: '#/definitions/CustomerAddress'
+    description: A structure containing information about a private virtual interface that will be provisioned on a connection.
+  NewPublicVirtualInterfaceAllocation:
+    type: object
+    required:
+      - virtualInterfaceName
+      - vlan
+      - asn
+    properties:
+      virtualInterfaceName:
+        $ref: '#/definitions/VirtualInterfaceName'
+      vlan:
+        $ref: '#/definitions/VLAN'
+      asn:
+        $ref: '#/definitions/ASN'
+      authKey:
+        $ref: '#/definitions/BGPAuthKey'
+      amazonAddress:
+        $ref: '#/definitions/AmazonAddress'
+      customerAddress:
+        $ref: '#/definitions/CustomerAddress'
+      addressFamily:
+        $ref: '#/definitions/AddressFamily'
+      routeFilterPrefixes:
+        $ref: '#/definitions/RouteFilterPrefixList'
+    description: A structure containing information about a public virtual interface that will be provisioned on a connection.
+  AmazonAddress:
+    type: string
+    description: '<p>IP address assigned to the Amazon interface.</p> <p>Example: 192.168.1.1/30 or 2001:db8::1/125</p>'
+  LagId:
+    type: string
+    description: '<p>The ID of the LAG.</p> <p>Example: dxlag-fg5678gh</p>'
   VirtualInterfaceId:
     type: string
     description: '<p>The ID of the virtual interface.</p> <p>Example: dxvif-123dfg56</p> <p>Default: None</p>'
-  VirtualInterfaceList:
+  AwsDevice:
+    type: string
+    description: '<p>An abstract ID for the physical Direct Connect endpoint.</p> <p>Example: EQC50-abcdef123456</p>'
+  AwsDeviceV2:
+    type: string
+  BGPAuthKey:
+    type: string
+    description: '<p>The authentication key for BGP configuration.</p> <p>Example: asdf34example</p>'
+  CustomerAddress:
+    type: string
+    description: '<p>IP address assigned to the customer interface.</p> <p>Example: 192.168.1.2/30 or 2001:db8::2/125</p>'
+  BGPPeerState:
+    type: string
+    enum:
+      - verifying
+      - pending
+      - available
+      - deleting
+      - deleted
+    description: '<p>The state of the BGP peer.</p> <ul> <li> <p> <b>Verifying</b>: The BGP peering addresses or ASN require validation before the BGP peer can be created. This state only applies to BGP peers on a public virtual interface. </p> </li> <li> <p> <b>Pending</b>: The BGP peer has been created, and is in this state until it is ready to be established.</p> </li> <li> <p> <b>Available</b>: The BGP peer can be established.</p> </li> <li> <p> <b>Deleting</b>: The BGP peer is in the process of being deleted.</p> </li> <li> <p> <b>Deleted</b>: The BGP peer has been deleted and cannot be established.</p> </li> </ul>'
+  BGPStatus:
+    type: string
+    enum:
+      - up
+      - down
+    description: '<p>The Up/Down state of the BGP peer.</p> <ul> <li> <p> <b>Up</b>: The BGP peer is established.</p> <note> <p>A state of <code>up</code> does not indicate the state of the routing function. Ensure that you are receiving routes over the BGP session.</p> </note> </li> <li> <p> <b>Down</b>: The BGP peer is down.</p> </li> </ul>'
+  BGPPeer:
+    type: object
+    properties:
+      asn:
+        $ref: '#/definitions/ASN'
+      authKey:
+        $ref: '#/definitions/BGPAuthKey'
+      addressFamily:
+        $ref: '#/definitions/AddressFamily'
+      amazonAddress:
+        $ref: '#/definitions/AmazonAddress'
+      customerAddress:
+        $ref: '#/definitions/CustomerAddress'
+      bgpPeerState:
+        $ref: '#/definitions/BGPPeerState'
+      bgpStatus:
+        $ref: '#/definitions/BGPStatus'
+      awsDeviceV2:
+        $ref: '#/definitions/AwsDeviceV2'
+        description: The Direct Connection endpoint which the BGP peer terminates on.
+    description: A structure containing information about a BGP peer.
+  BGPPeerList:
     type: array
-    description: A list of virtual interfaces.
+    description: A list of the BGP peers configured on this virtual interface.
     items:
-      $ref: '#/definitions/VirtualInterface'
-  VirtualInterfaceName:
+      $ref: '#/definitions/BGPPeer'
+  BooleanFlag:
+    type: boolean
+  CIDR:
     type: string
-    description: '<p>The name of the virtual interface assigned by the customer.</p> <p>Example: "My VPC"</p>'
-  VirtualInterfaceRegion:
+  ConnectionState:
     type: string
-    description: '<p>The region in which the virtual interface is located.</p> <p>Example: us-east-1</p>'
+    enum:
+      - ordering
+      - requested
+      - pending
+      - available
+      - down
+      - deleting
+      - deleted
+      - rejected
+    description: '<p>State of the connection.</p> <ul> <li> <p> <b>Ordering</b>: The initial state of a hosted connection provisioned on an interconnect. The connection stays in the ordering state until the owner of the hosted connection confirms or declines the connection order.</p> </li> <li> <p> <b>Requested</b>: The initial state of a standard connection. The connection stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.</p> </li> <li> <p> <b>Pending</b>: The connection has been approved, and is being initialized.</p> </li> <li> <p> <b>Available</b>: The network link is up, and the connection is ready for use.</p> </li> <li> <p> <b>Down</b>: The network link is down.</p> </li> <li> <p> <b>Deleting</b>: The connection is in the process of being deleted.</p> </li> <li> <p> <b>Deleted</b>: The connection has been deleted.</p> </li> <li> <p> <b>Rejected</b>: A hosted connection in the ''Ordering'' state will enter the ''Rejected'' state if it is deleted by the end customer.</p> </li> </ul>'
+  VirtualGatewayId:
+    type: string
+    description: '<p>The ID of the virtual private gateway to a VPC. This only applies to private virtual interfaces.</p> <p>Example: vgw-123er56</p>'
+  DirectConnectGatewayId:
+    type: string
+    description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p>'
   VirtualInterfaceState:
     type: string
     enum:
@@ -2933,13 +2595,351 @@ definitions:
       - deleted
       - rejected
     description: '<p>State of the virtual interface.</p> <ul> <li> <p> <b>Confirming</b>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p> </li> <li> <p> <b>Verifying</b>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p> </li> <li> <p> <b>Pending</b>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p> </li> <li> <p> <b>Available</b>: A virtual interface that is able to forward traffic.</p> </li> <li> <p> <b>Down</b>: A virtual interface that is BGP down.</p> </li> <li> <p> <b>Deleting</b>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p> </li> <li> <p> <b>Deleted</b>: A virtual interface that cannot forward traffic.</p> </li> <li> <p> <b>Rejected</b>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the ''Confirming'' state is deleted by the virtual interface owner, the virtual interface will enter the ''Rejected'' state.</p> </li> </ul>'
+  Region:
+    type: string
+    description: '<p>The AWS region where the connection is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>'
+  LocationCode:
+    type: string
+    description: '<p>Where the connection is located.</p> <p>Example: EqSV5</p> <p>Default: None</p>'
+  PartnerName:
+    type: string
+  LoaIssueTime:
+    type: string
+    format: date-time
+  ConnectionList:
+    type: array
+    description: A list of connections.
+    items:
+      $ref: '#/definitions/Connection'
+  Count:
+    type: integer
+  NewBGPPeer:
+    type: object
+    properties:
+      asn:
+        $ref: '#/definitions/ASN'
+      authKey:
+        $ref: '#/definitions/BGPAuthKey'
+      addressFamily:
+        $ref: '#/definitions/AddressFamily'
+      amazonAddress:
+        $ref: '#/definitions/AmazonAddress'
+      customerAddress:
+        $ref: '#/definitions/CustomerAddress'
+    description: A structure containing information about a new BGP peer.
+  DirectConnectGatewayAssociation:
+    type: object
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+      virtualGatewayId:
+        $ref: '#/definitions/VirtualGatewayId'
+      virtualGatewayRegion:
+        $ref: '#/definitions/VirtualGatewayRegion'
+      virtualGatewayOwnerAccount:
+        $ref: '#/definitions/OwnerAccount'
+        description: The AWS account ID of the owner of the virtual private gateway.
+      associationState:
+        $ref: '#/definitions/DirectConnectGatewayAssociationState'
+      stateChangeError:
+        $ref: '#/definitions/StateChangeError'
+    description: The association between a direct connect gateway and virtual private gateway.
+  DirectConnectGatewayName:
+    type: string
+    description: '<p>The name of the direct connect gateway.</p> <p>Example: "My direct connect gateway"</p> <p>Default: None</p>'
+  LongAsn:
+    type: integer
+  DirectConnectGateway:
+    type: object
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+      directConnectGatewayName:
+        $ref: '#/definitions/DirectConnectGatewayName'
+      amazonSideAsn:
+        $ref: '#/definitions/LongAsn'
+        description: The autonomous system number (ASN) for the Amazon side of the connection.
+      ownerAccount:
+        $ref: '#/definitions/OwnerAccount'
+        description: The AWS account ID of the owner of the direct connect gateway.
+      directConnectGatewayState:
+        $ref: '#/definitions/DirectConnectGatewayState'
+      stateChangeError:
+        $ref: '#/definitions/StateChangeError'
+    description: A direct connect gateway is an intermediate object that enables you to connect virtual interfaces and virtual private gateways.
+  InterconnectName:
+    type: string
+    description: '<p>The name of the interconnect.</p> <p>Example: "<i>1G Interconnect to AWS</i>"</p>'
+  LagName:
+    type: string
+  NewPrivateVirtualInterface:
+    type: object
+    required:
+      - virtualInterfaceName
+      - vlan
+      - asn
+    properties:
+      virtualInterfaceName:
+        $ref: '#/definitions/VirtualInterfaceName'
+      vlan:
+        $ref: '#/definitions/VLAN'
+      asn:
+        $ref: '#/definitions/ASN'
+      authKey:
+        $ref: '#/definitions/BGPAuthKey'
+      amazonAddress:
+        $ref: '#/definitions/AmazonAddress'
+      customerAddress:
+        $ref: '#/definitions/CustomerAddress'
+      addressFamily:
+        $ref: '#/definitions/AddressFamily'
+      virtualGatewayId:
+        $ref: '#/definitions/VirtualGatewayId'
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+    description: A structure containing information about a new private virtual interface.
+  NewPublicVirtualInterface:
+    type: object
+    required:
+      - virtualInterfaceName
+      - vlan
+      - asn
+    properties:
+      virtualInterfaceName:
+        $ref: '#/definitions/VirtualInterfaceName'
+      vlan:
+        $ref: '#/definitions/VLAN'
+      asn:
+        $ref: '#/definitions/ASN'
+      authKey:
+        $ref: '#/definitions/BGPAuthKey'
+      amazonAddress:
+        $ref: '#/definitions/AmazonAddress'
+      customerAddress:
+        $ref: '#/definitions/CustomerAddress'
+      addressFamily:
+        $ref: '#/definitions/AddressFamily'
+      routeFilterPrefixes:
+        $ref: '#/definitions/RouteFilterPrefixList'
+    description: A structure containing information about a new public virtual interface.
+  InterconnectState:
+    type: string
+    enum:
+      - requested
+      - pending
+      - available
+      - down
+      - deleting
+      - deleted
+    description: '<p>State of the interconnect.</p> <ul> <li> <p> <b>Requested</b>: The initial state of an interconnect. The interconnect stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.</p> </li> <li> <p> <b>Pending</b>: The interconnect has been approved, and is being initialized.</p> </li> <li> <p> <b>Available</b>: The network link is up, and the interconnect is ready for use.</p> </li> <li> <p> <b>Down</b>: The network link is down.</p> </li> <li> <p> <b>Deleting</b>: The interconnect is in the process of being deleted.</p> </li> <li> <p> <b>Deleted</b>: The interconnect has been deleted.</p> </li> </ul>'
+  ProviderName:
+    type: string
+  LoaContentType:
+    type: string
+    enum:
+      - application/pdf
+    description: '<p>A standard media type indicating the content type of the LOA-CFA document. Currently, the only supported value is "application/pdf".</p> <p>Default: application/pdf</p>'
+  MaxResultSetSize:
+    type: integer
+    description: Maximum number of objects to return per page.
+  PaginationToken:
+    type: string
+    description: Token to retrieve the next page of the result.
+  DirectConnectGatewayAssociationList:
+    type: array
+    description: A list of direct connect gateway associations.
+    items:
+      $ref: '#/definitions/DirectConnectGatewayAssociation'
+  DirectConnectGatewayAttachmentList:
+    type: array
+    description: A list of direct connect gateway attachments.
+    items:
+      $ref: '#/definitions/DirectConnectGatewayAttachment'
+  DirectConnectGatewayList:
+    type: array
+    description: A list of direct connect gateways.
+    items:
+      $ref: '#/definitions/DirectConnectGateway'
+  ResourceArnList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceArn'
+  ResourceTagList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceTag'
+  ErrorMessage:
+    type: string
+  DirectConnectGatewayState:
+    type: string
+    enum:
+      - pending
+      - available
+      - deleting
+      - deleted
+    description: '<p>State of the direct connect gateway.</p> <ul> <li> <p> <b>Pending</b>: The initial state after calling <a>CreateDirectConnectGateway</a>.</p> </li> <li> <p> <b>Available</b>: The direct connect gateway is ready for use.</p> </li> <li> <p> <b>Deleting</b>: The initial state after calling <a>DeleteDirectConnectGateway</a>.</p> </li> <li> <p> <b>Deleted</b>: The direct connect gateway is deleted and cannot pass traffic.</p> </li> </ul>'
+  StateChangeError:
+    type: string
+    description: Error message when the state of an object fails to advance.
+  VirtualGatewayRegion:
+    type: string
+    description: '<p>The region in which the virtual private gateway is located.</p> <p>Example: us-east-1</p>'
+  DirectConnectGatewayAssociationState:
+    type: string
+    enum:
+      - associating
+      - associated
+      - disassociating
+      - disassociated
+    description: '<p>State of the direct connect gateway association.</p> <ul> <li> <p> <b>Associating</b>: The initial state after calling <a>CreateDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <b>Associated</b>: The direct connect gateway and virtual private gateway are successfully associated and ready to pass traffic.</p> </li> <li> <p> <b>Disassociating</b>: The initial state after calling <a>DeleteDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <b>Disassociated</b>: The virtual private gateway is successfully disassociated from the direct connect gateway. Traffic flow between the direct connect gateway and virtual private gateway stops.</p> </li> </ul>'
+  VirtualInterfaceRegion:
+    type: string
+    description: '<p>The region in which the virtual interface is located.</p> <p>Example: us-east-1</p>'
+  DirectConnectGatewayAttachmentState:
+    type: string
+    enum:
+      - attaching
+      - attached
+      - detaching
+      - detached
+    description: '<p>State of the direct connect gateway attachment.</p> <ul> <li> <p> <b>Attaching</b>: The initial state after a virtual interface is created using the direct connect gateway.</p> </li> <li> <p> <b>Attached</b>: The direct connect gateway and virtual interface are successfully attached and ready to pass traffic.</p> </li> <li> <p> <b>Detaching</b>: The initial state after calling <a>DeleteVirtualInterface</a> on a virtual interface that is attached to a direct connect gateway.</p> </li> <li> <p> <b>Detached</b>: The virtual interface is successfully detached from the direct connect gateway. Traffic flow between the direct connect gateway and virtual interface stops.</p> </li> </ul>'
+  DirectConnectGatewayAttachment:
+    type: object
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+      virtualInterfaceId:
+        $ref: '#/definitions/VirtualInterfaceId'
+      virtualInterfaceRegion:
+        $ref: '#/definitions/VirtualInterfaceRegion'
+      virtualInterfaceOwnerAccount:
+        $ref: '#/definitions/OwnerAccount'
+        description: The AWS account ID of the owner of the virtual interface.
+      attachmentState:
+        $ref: '#/definitions/DirectConnectGatewayAttachmentState'
+      stateChangeError:
+        $ref: '#/definitions/StateChangeError'
+    description: The association between a direct connect gateway and virtual interface.
+  InterconnectList:
+    type: array
+    description: A list of interconnects.
+    items:
+      $ref: '#/definitions/Interconnect'
+  LagState:
+    type: string
+    enum:
+      - requested
+      - pending
+      - available
+      - down
+      - deleting
+      - deleted
+    description: '<p>The state of the LAG.</p> <ul> <li> <p> <b>Requested</b>: The initial state of a LAG. The LAG stays in the requested state until the Letter of Authorization (LOA) is available.</p> </li> <li> <p> <b>Pending</b>: The LAG has been approved, and is being initialized.</p> </li> <li> <p> <b>Available</b>: The network link is established, and the LAG is ready for use.</p> </li> <li> <p> <b>Down</b>: The network link is down.</p> </li> <li> <p> <b>Deleting</b>: The LAG is in the process of being deleted.</p> </li> <li> <p> <b>Deleted</b>: The LAG has been deleted.</p> </li> </ul>'
+  LagList:
+    type: array
+    description: A list of LAGs.
+    items:
+      $ref: '#/definitions/Lag'
+  LoaContent:
+    type: string
+    description: The binary contents of the LOA-CFA document.
+  Location:
+    type: object
+    properties:
+      locationCode:
+        $ref: '#/definitions/LocationCode'
+        description: The code used to indicate the AWS Direct Connect location.
+      region:
+        $ref: '#/definitions/Region'
+        description: '<p>The AWS region where the AWS Direct connect location is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>'
+    description: An AWS Direct Connect location where connections and interconnects can be requested.
+  LocationList:
+    type: array
+    items:
+      $ref: '#/definitions/Location'
+  LocationName:
+    type: string
+  VirtualInterfaceName:
+    type: string
+    description: '<p>The name of the virtual interface assigned by the customer.</p> <p>Example: "My VPC"</p>'
+  RouteFilterPrefixList:
+    type: array
+    description: A list of routes to be advertised to the AWS network in this region (public virtual interface).
+    items:
+      $ref: '#/definitions/RouteFilterPrefix'
+  ResourceArn:
+    type: string
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+  ResourceTag:
+    type: object
+    properties:
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the Direct Connect resource.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The tags.
+    description: The tags associated with a Direct Connect resource.
+  RouteFilterPrefix:
+    type: object
+    properties:
+      cidr:
+        $ref: '#/definitions/CIDR'
+        description: '<p>CIDR notation for the advertised route. Multiple routes are separated by commas.</p> <p>IPv6 CIDRs must be at least a /64 or shorter</p> <p>Example: 10.10.10.0/24,10.10.11.0/24,2001:db8::/64</p>'
+    description: A route filter prefix that the customer can advertise through Border Gateway Protocol (BGP) over a public virtual interface.
+  RouterConfig:
+    type: string
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    required:
+      - key
+    properties:
+      key:
+        $ref: '#/definitions/TagKey'
+        description: The key of the tag.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: The value of the tag.
+    description: Information about a tag.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  VirtualGatewayState:
+    type: string
+    description: '<p>State of the virtual private gateway.</p> <ul> <li> <p> <b>Pending</b>: This is the initial state after calling <i>CreateVpnGateway</i>.</p> </li> <li> <p> <b>Available</b>: Ready for use by a private virtual interface.</p> </li> <li> <p> <b>Deleting</b>: This is the initial state after calling <i>DeleteVpnGateway</i>.</p> </li> <li> <p> <b>Deleted</b>: In this state, a private virtual interface is unable to send traffic over this gateway.</p> </li> </ul>'
+  VirtualGateway:
+    type: object
+    properties:
+      virtualGatewayId:
+        $ref: '#/definitions/VirtualGatewayId'
+      virtualGatewayState:
+        $ref: '#/definitions/VirtualGatewayState'
+    description: '<p>You can create one or more AWS Direct Connect private virtual interfaces linking to your virtual private gateway.</p> <p>Virtual private gateways can be managed using the Amazon Virtual Private Cloud (Amazon VPC) console or the <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html">Amazon EC2 CreateVpnGateway action</a>.</p>'
+  VirtualGatewayList:
+    type: array
+    description: A list of virtual private gateways.
+    items:
+      $ref: '#/definitions/VirtualGateway'
   VirtualInterfaceType:
     type: string
     description: '<p>The type of virtual interface.</p> <p>Example: private (Amazon VPC) or public (Amazon S3, Amazon DynamoDB, and so on.)</p>'
-  VirtualInterfaces:
-    type: object
-    properties:
-      virtualInterfaces:
-        $ref: '#/definitions/VirtualInterfaceList'
-        description: A list of virtual interfaces.
-    description: A structure containing a list of virtual interfaces.
+  VirtualInterfaceList:
+    type: array
+    description: A list of virtual interfaces.
+    items:
+      $ref: '#/definitions/VirtualInterface'

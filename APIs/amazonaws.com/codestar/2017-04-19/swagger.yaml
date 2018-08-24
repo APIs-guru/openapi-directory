@@ -802,6 +802,12 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  AssociateTeamMemberResult:
+    type: object
+    properties:
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: The user- or system-generated token from the initial request that can be used to repeat the request.
   AssociateTeamMemberRequest:
     type: object
     required:
@@ -824,39 +830,34 @@ definitions:
       remoteAccessAllowed:
         $ref: '#/definitions/RemoteAccessAllowed'
         description: 'Whether the team member is allowed to use an SSH public/private key pair to remotely access project resources, for example Amazon EC2 instances.'
-  AssociateTeamMemberResult:
+  LimitExceededException:
     type: object
-    properties:
-      clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: The user- or system-generated token from the initial request that can be used to repeat the request.
-  ClientRequestToken:
-    type: string
-    pattern: '^[\w:/-]+$'
-    minLength: 1
-    maxLength: 256
+    properties: {}
+    description: A resource limit has been exceeded.
+  ProjectNotFoundException:
+    type: object
+    properties: {}
+    description: The specified AWS CodeStar project was not found.
+  TeamMemberAlreadyAssociatedException:
+    type: object
+    properties: {}
+    description: The team member is already associated with a role in this project.
+  ValidationException:
+    type: object
+    properties: {}
+    description: 'The specified input is either not valid, or it could not be validated.'
+  InvalidServiceRoleException:
+    type: object
+    properties: {}
+    description: The service role is not valid.
+  ProjectConfigurationException:
+    type: object
+    properties: {}
+    description: Project configuration information is required but not specified.
   ConcurrentModificationException:
     type: object
     properties: {}
     description: Another modification is being made. That modification must complete before you can make your change.
-  CreateProjectRequest:
-    type: object
-    required:
-      - name
-      - id
-    properties:
-      name:
-        $ref: '#/definitions/ProjectName'
-        description: Reserved for future use.
-      id:
-        $ref: '#/definitions/ProjectId'
-        description: Reserved for future use.
-      description:
-        $ref: '#/definitions/ProjectDescription'
-        description: Reserved for future use.
-      clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: Reserved for future use.
   CreateProjectResult:
     type: object
     required:
@@ -875,25 +876,32 @@ definitions:
       projectTemplateId:
         $ref: '#/definitions/ProjectTemplateId'
         description: Reserved for future use.
-  CreateUserProfileRequest:
+  CreateProjectRequest:
     type: object
     required:
-      - userArn
-      - displayName
-      - emailAddress
+      - name
+      - id
     properties:
-      userArn:
-        $ref: '#/definitions/UserArn'
-        description: The Amazon Resource Name (ARN) of the user in IAM.
-      displayName:
-        $ref: '#/definitions/UserProfileDisplayName'
-        description: 'The name that will be displayed as the friendly name for the user in AWS CodeStar. '
-      emailAddress:
-        $ref: '#/definitions/Email'
-        description: The email address that will be displayed as part of the user's profile in AWS CodeStar.
-      sshPublicKey:
-        $ref: '#/definitions/SshPublicKey'
-        description: 'The SSH public key associated with the user in AWS CodeStar. If a project owner allows the user remote access to project resources, this public key will be used along with the user''s private key for SSH access.'
+      name:
+        $ref: '#/definitions/ProjectName'
+        description: Reserved for future use.
+      id:
+        $ref: '#/definitions/ProjectId'
+        description: Reserved for future use.
+      description:
+        $ref: '#/definitions/ProjectDescription'
+        description: Reserved for future use.
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: Reserved for future use.
+  ProjectAlreadyExistsException:
+    type: object
+    properties: {}
+    description: An AWS CodeStar project with the same ID already exists in this region for the AWS account. AWS CodeStar project IDs must be unique within a region for the AWS account.
+  ProjectCreationFailedException:
+    type: object
+    properties: {}
+    description: 'The project creation request was valid, but a nonspecific exception or error occurred during project creation. The project could not be created in AWS CodeStar.'
   CreateUserProfileResult:
     type: object
     required:
@@ -917,9 +925,38 @@ definitions:
       lastModifiedTimestamp:
         $ref: '#/definitions/LastModifiedTimestamp'
         description: 'The date the user profile was last modified, in timestamp format.'
-  CreatedTimestamp:
-    type: string
-    format: date-time
+  CreateUserProfileRequest:
+    type: object
+    required:
+      - userArn
+      - displayName
+      - emailAddress
+    properties:
+      userArn:
+        $ref: '#/definitions/UserArn'
+        description: The Amazon Resource Name (ARN) of the user in IAM.
+      displayName:
+        $ref: '#/definitions/UserProfileDisplayName'
+        description: 'The name that will be displayed as the friendly name for the user in AWS CodeStar. '
+      emailAddress:
+        $ref: '#/definitions/Email'
+        description: The email address that will be displayed as part of the user's profile in AWS CodeStar.
+      sshPublicKey:
+        $ref: '#/definitions/SshPublicKey'
+        description: 'The SSH public key associated with the user in AWS CodeStar. If a project owner allows the user remote access to project resources, this public key will be used along with the user''s private key for SSH access.'
+  UserProfileAlreadyExistsException:
+    type: object
+    properties: {}
+    description: 'A user profile with that name already exists in this region for the AWS account. AWS CodeStar user profile names must be unique within a region for the AWS account. '
+  DeleteProjectResult:
+    type: object
+    properties:
+      stackId:
+        $ref: '#/definitions/StackId'
+        description: The ID of the primary stack in AWS CloudFormation that will be deleted as part of deleting the project and its resources.
+      projectArn:
+        $ref: '#/definitions/ProjectArn'
+        description: The Amazon Resource Name (ARN) of the deleted project.
   DeleteProjectRequest:
     type: object
     required:
@@ -934,25 +971,6 @@ definitions:
       deleteStack:
         $ref: '#/definitions/DeleteStack'
         description: Whether to send a delete request for the primary stack in AWS CloudFormation originally used to generate the project and its resources. This option will delete all AWS resources for the project (except for any buckets in Amazon S3) as well as deleting the project itself. Recommended for most use cases.
-  DeleteProjectResult:
-    type: object
-    properties:
-      stackId:
-        $ref: '#/definitions/StackId'
-        description: The ID of the primary stack in AWS CloudFormation that will be deleted as part of deleting the project and its resources.
-      projectArn:
-        $ref: '#/definitions/ProjectArn'
-        description: The Amazon Resource Name (ARN) of the deleted project.
-  DeleteStack:
-    type: boolean
-  DeleteUserProfileRequest:
-    type: object
-    required:
-      - userArn
-    properties:
-      userArn:
-        $ref: '#/definitions/UserArn'
-        description: The Amazon Resource Name (ARN) of the user to delete from AWS CodeStar.
   DeleteUserProfileResult:
     type: object
     required:
@@ -961,14 +979,14 @@ definitions:
       userArn:
         $ref: '#/definitions/UserArn'
         description: The Amazon Resource Name (ARN) of the user deleted from AWS CodeStar.
-  DescribeProjectRequest:
+  DeleteUserProfileRequest:
     type: object
     required:
-      - id
+      - userArn
     properties:
-      id:
-        $ref: '#/definitions/ProjectId'
-        description: The ID of the project.
+      userArn:
+        $ref: '#/definitions/UserArn'
+        description: The Amazon Resource Name (ARN) of the user to delete from AWS CodeStar.
   DescribeProjectResult:
     type: object
     properties:
@@ -996,14 +1014,14 @@ definitions:
       projectTemplateId:
         $ref: '#/definitions/ProjectTemplateId'
         description: The ID for the AWS CodeStar project template used to create the project.
-  DescribeUserProfileRequest:
+  DescribeProjectRequest:
     type: object
     required:
-      - userArn
+      - id
     properties:
-      userArn:
-        $ref: '#/definitions/UserArn'
-        description: The Amazon Resource Name (ARN) of the user.
+      id:
+        $ref: '#/definitions/ProjectId'
+        description: The ID of the project.
   DescribeUserProfileResult:
     type: object
     required:
@@ -1029,6 +1047,21 @@ definitions:
       lastModifiedTimestamp:
         $ref: '#/definitions/LastModifiedTimestamp'
         description: 'The date and time when the user profile was last modified, in timestamp format.'
+  DescribeUserProfileRequest:
+    type: object
+    required:
+      - userArn
+    properties:
+      userArn:
+        $ref: '#/definitions/UserArn'
+        description: The Amazon Resource Name (ARN) of the user.
+  UserProfileNotFoundException:
+    type: object
+    properties: {}
+    description: The user profile was not found.
+  DisassociateTeamMemberResult:
+    type: object
+    properties: {}
   DisassociateTeamMemberRequest:
     type: object
     required:
@@ -1041,30 +1074,17 @@ definitions:
       userArn:
         $ref: '#/definitions/UserArn'
         description: The Amazon Resource Name (ARN) of the IAM user or group whom you want to remove from the project.
-  DisassociateTeamMemberResult:
+  ListProjectsResult:
     type: object
-    properties: {}
-  Email:
-    type: string
-    pattern: '^[\w-.+]+@[\w-.+]+$'
-    minLength: 3
-    maxLength: 128
-    format: password
-  InvalidNextTokenException:
-    type: object
-    properties: {}
-    description: The next token is not valid.
-  InvalidServiceRoleException:
-    type: object
-    properties: {}
-    description: The service role is not valid.
-  LastModifiedTimestamp:
-    type: string
-    format: date-time
-  LimitExceededException:
-    type: object
-    properties: {}
-    description: A resource limit has been exceeded.
+    required:
+      - projects
+    properties:
+      projects:
+        $ref: '#/definitions/ProjectsList'
+        description: A list of projects.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
   ListProjectsRequest:
     type: object
     properties:
@@ -1074,14 +1094,16 @@ definitions:
       maxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum amount of data that can be contained in a single set of results.
-  ListProjectsResult:
+  InvalidNextTokenException:
     type: object
-    required:
-      - projects
+    properties: {}
+    description: The next token is not valid.
+  ListResourcesResult:
+    type: object
     properties:
-      projects:
-        $ref: '#/definitions/ProjectsList'
-        description: A list of projects.
+      resources:
+        $ref: '#/definitions/ResourcesResult'
+        description: 'An array of resources associated with the project. '
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
@@ -1099,15 +1121,15 @@ definitions:
       maxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum amount of data that can be contained in a single set of results.
-  ListResourcesResult:
+  ListTagsForProjectResult:
     type: object
     properties:
-      resources:
-        $ref: '#/definitions/ResourcesResult'
-        description: 'An array of resources associated with the project. '
+      tags:
+        $ref: '#/definitions/Tags'
+        description: The tags for the project.
       nextToken:
         $ref: '#/definitions/PaginationToken'
-        description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
+        description: Reserved for future use.
   ListTagsForProjectRequest:
     type: object
     required:
@@ -1122,15 +1144,17 @@ definitions:
       maxResults:
         $ref: '#/definitions/MaxResults'
         description: Reserved for future use.
-  ListTagsForProjectResult:
+  ListTeamMembersResult:
     type: object
+    required:
+      - teamMembers
     properties:
-      tags:
-        $ref: '#/definitions/Tags'
-        description: The tags for the project.
+      teamMembers:
+        $ref: '#/definitions/TeamMemberResult'
+        description: A list of team member objects for the project.
       nextToken:
         $ref: '#/definitions/PaginationToken'
-        description: Reserved for future use.
+        description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
   ListTeamMembersRequest:
     type: object
     required:
@@ -1145,14 +1169,14 @@ definitions:
       maxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of team members you want returned in a response.
-  ListTeamMembersResult:
+  ListUserProfilesResult:
     type: object
     required:
-      - teamMembers
+      - userProfiles
     properties:
-      teamMembers:
-        $ref: '#/definitions/TeamMemberResult'
-        description: A list of team member objects for the project.
+      userProfiles:
+        $ref: '#/definitions/UserProfilesList'
+        description: All the user profiles configured in AWS CodeStar for an AWS account.
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
@@ -1165,117 +1189,12 @@ definitions:
       maxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to return in a response.
-  ListUserProfilesResult:
-    type: object
-    required:
-      - userProfiles
-    properties:
-      userProfiles:
-        $ref: '#/definitions/UserProfilesList'
-        description: All the user profiles configured in AWS CodeStar for an AWS account.
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  PaginationToken:
-    type: string
-    pattern: '^[\w/+=]+$'
-    minLength: 1
-    maxLength: 512
-  ProjectAlreadyExistsException:
-    type: object
-    properties: {}
-    description: An AWS CodeStar project with the same ID already exists in this region for the AWS account. AWS CodeStar project IDs must be unique within a region for the AWS account.
-  ProjectArn:
-    type: string
-    pattern: '^arn:aws[^:\s]*:codestar:[^:\s]+:[0-9]{12}:project\/[a-z]([a-z0-9|-])+$'
-  ProjectConfigurationException:
-    type: object
-    properties: {}
-    description: Project configuration information is required but not specified.
-  ProjectCreationFailedException:
-    type: object
-    properties: {}
-    description: 'The project creation request was valid, but a nonspecific exception or error occurred during project creation. The project could not be created in AWS CodeStar.'
-  ProjectDescription:
-    type: string
-    pattern: ^$|^\S(.*\S)?$
-    maxLength: 1024
-    format: password
-  ProjectId:
-    type: string
-    pattern: '^[a-z][a-z0-9-]+$'
-    minLength: 2
-    maxLength: 15
-  ProjectName:
-    type: string
-    pattern: ^\S(.*\S)?$
-    minLength: 1
-    maxLength: 100
-    format: password
-  ProjectNotFoundException:
-    type: object
-    properties: {}
-    description: The specified AWS CodeStar project was not found.
-  ProjectSummary:
+  TagProjectResult:
     type: object
     properties:
-      projectId:
-        $ref: '#/definitions/ProjectId'
-        description: The ID of the project.
-      projectArn:
-        $ref: '#/definitions/ProjectArn'
-        description: The Amazon Resource Name (ARN) of the project.
-    description: Information about the metadata for a project.
-  ProjectTemplateId:
-    type: string
-    pattern: '^arn:aws[^:\s]{0,5}:codestar:[^:\s]+::project-template\/[a-z0-9-]+$'
-    minLength: 1
-  ProjectsList:
-    type: array
-    items:
-      $ref: '#/definitions/ProjectSummary'
-  RemoteAccessAllowed:
-    type: boolean
-  Resource:
-    type: object
-    required:
-      - id
-    properties:
-      id:
-        $ref: '#/definitions/ResourceId'
-        description: The Amazon Resource Name (ARN) of the resource.
-    description: Information about a resource for a project.
-  ResourceId:
-    type: string
-    pattern: '^arn\:aws\:\S.*\:.*'
-    minLength: 11
-  ResourcesResult:
-    type: array
-    items:
-      $ref: '#/definitions/Resource'
-  Role:
-    type: string
-    pattern: ^(Owner|Viewer|Contributor)$
-  SshPublicKey:
-    type: string
-    pattern: '^[\t\r\n\u0020-\u00FF]*$'
-    maxLength: 16384
-  StackId:
-    type: string
-    pattern: '^arn:aws[^:\s]*:cloudformation:[^:\s]+:[0-9]{12}:stack\/[^:\s]+\/[^:\s]+$'
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagKeys:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
+      tags:
+        $ref: '#/definitions/Tags'
+        description: The tags for the project.
   TagProjectRequest:
     type: object
     required:
@@ -1288,53 +1207,9 @@ definitions:
       tags:
         $ref: '#/definitions/Tags'
         description: The tags you want to add to the project.
-  TagProjectResult:
-    type: object
-    properties:
-      tags:
-        $ref: '#/definitions/Tags'
-        description: The tags for the project.
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    maxLength: 256
-  Tags:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
-  TeamMember:
-    type: object
-    required:
-      - userArn
-      - projectRole
-    properties:
-      userArn:
-        $ref: '#/definitions/UserArn'
-        description: The Amazon Resource Name (ARN) of the user in IAM.
-      projectRole:
-        $ref: '#/definitions/Role'
-        description: 'The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href="http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html">Working with Teams</a> in the <i>AWS CodeStar User Guide</i>. '
-      remoteAccessAllowed:
-        $ref: '#/definitions/RemoteAccessAllowed'
-        description: Whether the user is allowed to remotely access project resources using an SSH public/private key pair.
-    description: Information about a team member in a project.
-  TeamMemberAlreadyAssociatedException:
+  UntagProjectResult:
     type: object
     properties: {}
-    description: The team member is already associated with a role in this project.
-  TeamMemberNotFoundException:
-    type: object
-    properties: {}
-    description: The specified team member was not found.
-  TeamMemberResult:
-    type: array
-    items:
-      $ref: '#/definitions/TeamMember'
   UntagProjectRequest:
     type: object
     required:
@@ -1347,7 +1222,7 @@ definitions:
       tags:
         $ref: '#/definitions/TagKeys'
         description: The tags to remove from the project.
-  UntagProjectResult:
+  UpdateProjectResult:
     type: object
     properties: {}
   UpdateProjectRequest:
@@ -1364,9 +1239,18 @@ definitions:
       description:
         $ref: '#/definitions/ProjectDescription'
         description: 'The description of the project, if any.'
-  UpdateProjectResult:
+  UpdateTeamMemberResult:
     type: object
-    properties: {}
+    properties:
+      userArn:
+        $ref: '#/definitions/UserArn'
+        description: The Amazon Resource Name (ARN) of the user whose team membership attributes were updated.
+      projectRole:
+        $ref: '#/definitions/Role'
+        description: The project role granted to the user.
+      remoteAccessAllowed:
+        $ref: '#/definitions/RemoteAccessAllowed'
+        description: Whether a team member is allowed to remotely access project resources using the SSH public key associated with the user's profile.
   UpdateTeamMemberRequest:
     type: object
     required:
@@ -1385,35 +1269,10 @@ definitions:
       remoteAccessAllowed:
         $ref: '#/definitions/RemoteAccessAllowed'
         description: 'Whether a team member is allowed to remotely access project resources using the SSH public key associated with the user''s profile. Even if this is set to True, the user must associate a public key with their profile before the user can access resources.'
-  UpdateTeamMemberResult:
+  TeamMemberNotFoundException:
     type: object
-    properties:
-      userArn:
-        $ref: '#/definitions/UserArn'
-        description: The Amazon Resource Name (ARN) of the user whose team membership attributes were updated.
-      projectRole:
-        $ref: '#/definitions/Role'
-        description: The project role granted to the user.
-      remoteAccessAllowed:
-        $ref: '#/definitions/RemoteAccessAllowed'
-        description: Whether a team member is allowed to remotely access project resources using the SSH public key associated with the user's profile.
-  UpdateUserProfileRequest:
-    type: object
-    required:
-      - userArn
-    properties:
-      userArn:
-        $ref: '#/definitions/UserArn'
-        description: The name that will be displayed as the friendly name for the user in AWS CodeStar.
-      displayName:
-        $ref: '#/definitions/UserProfileDisplayName'
-        description: The name that is displayed as the friendly name for the user in AWS CodeStar.
-      emailAddress:
-        $ref: '#/definitions/Email'
-        description: The email address that is displayed as part of the user's profile in AWS CodeStar.
-      sshPublicKey:
-        $ref: '#/definitions/SshPublicKey'
-        description: 'The SSH public key associated with the user in AWS CodeStar. If a project owner allows the user remote access to project resources, this public key will be used along with the user''s private key for SSH access.'
+    properties: {}
+    description: The specified team member was not found.
   UpdateUserProfileResult:
     type: object
     required:
@@ -1437,24 +1296,173 @@ definitions:
       lastModifiedTimestamp:
         $ref: '#/definitions/LastModifiedTimestamp'
         description: 'The date the user profile was last modified, in timestamp format.'
+  UpdateUserProfileRequest:
+    type: object
+    required:
+      - userArn
+    properties:
+      userArn:
+        $ref: '#/definitions/UserArn'
+        description: The name that will be displayed as the friendly name for the user in AWS CodeStar.
+      displayName:
+        $ref: '#/definitions/UserProfileDisplayName'
+        description: The name that is displayed as the friendly name for the user in AWS CodeStar.
+      emailAddress:
+        $ref: '#/definitions/Email'
+        description: The email address that is displayed as part of the user's profile in AWS CodeStar.
+      sshPublicKey:
+        $ref: '#/definitions/SshPublicKey'
+        description: 'The SSH public key associated with the user in AWS CodeStar. If a project owner allows the user remote access to project resources, this public key will be used along with the user''s private key for SSH access.'
+  ProjectId:
+    type: string
+    pattern: '^[a-z][a-z0-9-]+$'
+    minLength: 2
+    maxLength: 15
+  ClientRequestToken:
+    type: string
+    pattern: '^[\w:/-]+$'
+    minLength: 1
+    maxLength: 256
   UserArn:
     type: string
     pattern: '^arn:aws:iam::\d{12}:user(?:(\u002F)|(\u002F[\u0021-\u007E]+\u002F))[\w+=,.@-]+$'
     minLength: 32
     maxLength: 95
-  UserProfileAlreadyExistsException:
-    type: object
-    properties: {}
-    description: 'A user profile with that name already exists in this region for the AWS account. AWS CodeStar user profile names must be unique within a region for the AWS account. '
+  Role:
+    type: string
+    pattern: ^(Owner|Viewer|Contributor)$
+  RemoteAccessAllowed:
+    type: boolean
+  ProjectName:
+    type: string
+    pattern: ^\S(.*\S)?$
+    minLength: 1
+    maxLength: 100
+    format: password
+  ProjectDescription:
+    type: string
+    pattern: ^$|^\S(.*\S)?$
+    maxLength: 1024
+    format: password
+  ProjectArn:
+    type: string
+    pattern: '^arn:aws[^:\s]*:codestar:[^:\s]+:[0-9]{12}:project\/[a-z]([a-z0-9|-])+$'
+  ProjectTemplateId:
+    type: string
+    pattern: '^arn:aws[^:\s]{0,5}:codestar:[^:\s]+::project-template\/[a-z0-9-]+$'
+    minLength: 1
   UserProfileDisplayName:
     type: string
     pattern: ^\S(.*\S)?$
     minLength: 1
     maxLength: 64
-  UserProfileNotFoundException:
+  Email:
+    type: string
+    pattern: '^[\w-.+]+@[\w-.+]+$'
+    minLength: 3
+    maxLength: 128
+    format: password
+  SshPublicKey:
+    type: string
+    pattern: '^[\t\r\n\u0020-\u00FF]*$'
+    maxLength: 16384
+  CreatedTimestamp:
+    type: string
+    format: date-time
+  LastModifiedTimestamp:
+    type: string
+    format: date-time
+  DeleteStack:
+    type: boolean
+  StackId:
+    type: string
+    pattern: '^arn:aws[^:\s]*:cloudformation:[^:\s]+:[0-9]{12}:stack\/[^:\s]+\/[^:\s]+$'
+  PaginationToken:
+    type: string
+    pattern: '^[\w/+=]+$'
+    minLength: 1
+    maxLength: 512
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  ProjectsList:
+    type: array
+    items:
+      $ref: '#/definitions/ProjectSummary'
+  ResourcesResult:
+    type: array
+    items:
+      $ref: '#/definitions/Resource'
+  Tags:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
+  TeamMemberResult:
+    type: array
+    items:
+      $ref: '#/definitions/TeamMember'
+  UserProfilesList:
+    type: array
+    items:
+      $ref: '#/definitions/UserProfileSummary'
+  ProjectSummary:
     type: object
-    properties: {}
-    description: The user profile was not found.
+    properties:
+      projectId:
+        $ref: '#/definitions/ProjectId'
+        description: The ID of the project.
+      projectArn:
+        $ref: '#/definitions/ProjectArn'
+        description: The Amazon Resource Name (ARN) of the project.
+    description: Information about the metadata for a project.
+  ResourceId:
+    type: string
+    pattern: '^arn\:aws\:\S.*\:.*'
+    minLength: 11
+  Resource:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        $ref: '#/definitions/ResourceId'
+        description: The Amazon Resource Name (ARN) of the resource.
+    description: Information about a resource for a project.
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagKeys:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    maxLength: 256
+  TeamMember:
+    type: object
+    required:
+      - userArn
+      - projectRole
+    properties:
+      userArn:
+        $ref: '#/definitions/UserArn'
+        description: The Amazon Resource Name (ARN) of the user in IAM.
+      projectRole:
+        $ref: '#/definitions/Role'
+        description: 'The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href="http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html">Working with Teams</a> in the <i>AWS CodeStar User Guide</i>. '
+      remoteAccessAllowed:
+        $ref: '#/definitions/RemoteAccessAllowed'
+        description: Whether the user is allowed to remotely access project resources using an SSH public/private key pair.
+    description: Information about a team member in a project.
   UserProfileSummary:
     type: object
     properties:
@@ -1471,11 +1479,3 @@ definitions:
         $ref: '#/definitions/SshPublicKey'
         description: 'The SSH public key associated with the user in AWS CodeStar. If a project owner allows the user remote access to project resources, this public key will be used along with the user''s private key for SSH access.'
     description: Information about a user's profile in AWS CodeStar.
-  UserProfilesList:
-    type: array
-    items:
-      $ref: '#/definitions/UserProfileSummary'
-  ValidationException:
-    type: object
-    properties: {}
-    description: 'The specified input is either not valid, or it could not be validated.'

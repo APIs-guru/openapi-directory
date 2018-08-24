@@ -621,6 +621,272 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  CopyBackupToRegionResponse:
+    type: object
+    properties:
+      DestinationBackup:
+        $ref: '#/definitions/DestinationBackup'
+  CopyBackupToRegionRequest:
+    type: object
+    required:
+      - DestinationRegion
+      - BackupId
+    properties:
+      DestinationRegion:
+        $ref: '#/definitions/Region'
+      BackupId:
+        $ref: '#/definitions/BackupId'
+  CloudHsmInternalFailureException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/errorMessage'
+    description: The request was rejected because of an AWS CloudHSM internal failure. The request can be retried.
+  CloudHsmServiceException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/errorMessage'
+    description: The request was rejected because an error occurred.
+  CloudHsmResourceNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/errorMessage'
+    description: The request was rejected because it refers to a resource that cannot be found.
+  CloudHsmInvalidRequestException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/errorMessage'
+    description: The request was rejected because it is not a valid request.
+  CloudHsmAccessDeniedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/errorMessage'
+    description: The request was rejected because the requester does not have permission to perform the requested operation.
+  CreateClusterResponse:
+    type: object
+    properties:
+      Cluster:
+        $ref: '#/definitions/Cluster'
+        description: Information about the cluster that was created.
+  CreateClusterRequest:
+    type: object
+    required:
+      - SubnetIds
+      - HsmType
+    properties:
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: '<p>The identifiers (IDs) of the subnets where you are creating the cluster. You must specify at least one subnet. If you specify multiple subnets, they must meet the following criteria:</p> <ul> <li> <p>All subnets must be in the same virtual private cloud (VPC).</p> </li> <li> <p>You can specify only one subnet per Availability Zone.</p> </li> </ul>'
+      HsmType:
+        $ref: '#/definitions/HsmType'
+        description: The type of HSM to use in the cluster. Currently the only allowed value is <code>hsm1.medium</code>.
+      SourceBackupId:
+        $ref: '#/definitions/BackupId'
+        description: 'The identifier (ID) of the cluster backup to restore. Use this value to restore the cluster from a backup instead of creating a new cluster. To find the backup ID, use <a>DescribeBackups</a>.'
+  CreateHsmResponse:
+    type: object
+    properties:
+      Hsm:
+        $ref: '#/definitions/Hsm'
+        description: Information about the HSM that was created.
+  CreateHsmRequest:
+    type: object
+    required:
+      - ClusterId
+      - AvailabilityZone
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: 'The identifier (ID) of the HSM''s cluster. To find the cluster ID, use <a>DescribeClusters</a>.'
+      AvailabilityZone:
+        $ref: '#/definitions/ExternalAz'
+        description: 'The Availability Zone where you are creating the HSM. To find the cluster''s Availability Zones, use <a>DescribeClusters</a>.'
+      IpAddress:
+        $ref: '#/definitions/IpAddress'
+        description: 'The HSM''s IP address. If you specify an IP address, use an available address from the subnet that maps to the Availability Zone where you are creating the HSM. If you don''t specify an IP address, one is chosen for you from that subnet.'
+  DeleteClusterResponse:
+    type: object
+    properties:
+      Cluster:
+        $ref: '#/definitions/Cluster'
+        description: Information about the cluster that was deleted.
+  DeleteClusterRequest:
+    type: object
+    required:
+      - ClusterId
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: 'The identifier (ID) of the cluster that you are deleting. To find the cluster ID, use <a>DescribeClusters</a>.'
+  DeleteHsmResponse:
+    type: object
+    properties:
+      HsmId:
+        $ref: '#/definitions/HsmId'
+        description: The identifier (ID) of the HSM that was deleted.
+  DeleteHsmRequest:
+    type: object
+    required:
+      - ClusterId
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: The identifier (ID) of the cluster that contains the HSM that you are deleting.
+      HsmId:
+        $ref: '#/definitions/HsmId'
+        description: The identifier (ID) of the HSM that you are deleting.
+      EniId:
+        $ref: '#/definitions/EniId'
+        description: The identifier (ID) of the elastic network interface (ENI) of the HSM that you are deleting.
+      EniIp:
+        $ref: '#/definitions/IpAddress'
+        description: The IP address of the elastic network interface (ENI) of the HSM that you are deleting.
+  DescribeBackupsResponse:
+    type: object
+    properties:
+      Backups:
+        $ref: '#/definitions/Backups'
+        description: A list of backups.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An opaque string that indicates that the response contains only a subset of backups. Use this value in a subsequent <code>DescribeBackups</code> request to get more backups.
+  DescribeBackupsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more backups.
+      MaxResults:
+        $ref: '#/definitions/MaxSize'
+        description: 'The maximum number of backups to return in the response. When there are more backups than the number you specify, the response contains a <code>NextToken</code> value.'
+      Filters:
+        $ref: '#/definitions/Filters'
+        description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>backupIds</code> filter to return only the specified backups. Specify backups by their backup identifier (ID).</p> <p>Use the <code>clusterIds</code> filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>states</code> filter to return only backups that match the specified state.</p>
+      SortAscending:
+        $ref: '#/definitions/Boolean'
+  DescribeClustersResponse:
+    type: object
+    properties:
+      Clusters:
+        $ref: '#/definitions/Clusters'
+        description: A list of clusters.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An opaque string that indicates that the response contains only a subset of clusters. Use this value in a subsequent <code>DescribeClusters</code> request to get more clusters.
+  DescribeClustersRequest:
+    type: object
+    properties:
+      Filters:
+        $ref: '#/definitions/Filters'
+        description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>clusterIds</code> filter to return only the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>vpcIds</code> filter to return only the clusters in the specified virtual private clouds (VPCs). Specify VPCs by their VPC identifier (ID).</p> <p>Use the <code>states</code> filter to return only clusters that match the specified state.</p>
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more clusters.
+      MaxResults:
+        $ref: '#/definitions/MaxSize'
+        description: 'The maximum number of clusters to return in the response. When there are more clusters than the number you specify, the response contains a <code>NextToken</code> value.'
+  InitializeClusterResponse:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/ClusterState'
+        description: The cluster's state.
+      StateMessage:
+        $ref: '#/definitions/StateMessage'
+        description: A description of the cluster's state.
+  InitializeClusterRequest:
+    type: object
+    required:
+      - ClusterId
+      - SignedCert
+      - TrustAnchor
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: 'The identifier (ID) of the cluster that you are claiming. To find the cluster ID, use <a>DescribeClusters</a>.'
+      SignedCert:
+        $ref: '#/definitions/Cert'
+        description: The cluster certificate issued (signed) by your issuing certificate authority (CA). The certificate must be in PEM format and can contain a maximum of 5000 characters.
+      TrustAnchor:
+        $ref: '#/definitions/Cert'
+        description: The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate. This can be a root (self-signed) certificate or a certificate chain that begins with the certificate that issued the cluster certificate and ends with a root certificate. The certificate or certificate chain must be in PEM format and can contain a maximum of 5000 characters.
+  ListTagsResponse:
+    type: object
+    required:
+      - TagList
+    properties:
+      TagList:
+        $ref: '#/definitions/TagList'
+        description: A list of tags.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An opaque string that indicates that the response contains only a subset of tags. Use this value in a subsequent <code>ListTags</code> request to get more tags.
+  ListTagsRequest:
+    type: object
+    required:
+      - ResourceId
+    properties:
+      ResourceId:
+        $ref: '#/definitions/ClusterId'
+        description: 'The cluster identifier (ID) for the cluster whose tags you are getting. To find the cluster ID, use <a>DescribeClusters</a>.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more tags.
+      MaxResults:
+        $ref: '#/definitions/MaxSize'
+        description: 'The maximum number of tags to return in the response. When there are more tags than the number you specify, the response contains a <code>NextToken</code> value.'
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - ResourceId
+      - TagList
+    properties:
+      ResourceId:
+        $ref: '#/definitions/ClusterId'
+        description: 'The cluster identifier (ID) for the cluster that you are tagging. To find the cluster ID, use <a>DescribeClusters</a>.'
+      TagList:
+        $ref: '#/definitions/TagList'
+        description: A list of one or more tags.
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - ResourceId
+      - TagKeyList
+    properties:
+      ResourceId:
+        $ref: '#/definitions/ClusterId'
+        description: 'The cluster identifier (ID) for the cluster whose tags you are removing. To find the cluster ID, use <a>DescribeClusters</a>.'
+      TagKeyList:
+        $ref: '#/definitions/TagKeyList'
+        description: 'A list of one or more tag keys for the tags that you are removing. Specify only the tag keys, not the tag values.'
+  BackupId:
+    type: string
+    pattern: 'backup-[2-7a-zA-Z]{11,16}'
+  BackupState:
+    type: string
+    enum:
+      - CREATE_IN_PROGRESS
+      - READY
+      - DELETED
+  ClusterId:
+    type: string
+    pattern: 'cluster-[2-7a-zA-Z]{11,16}'
+  Timestamp:
+    type: string
+    format: date-time
+  Region:
+    type: string
+    pattern: '[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d'
   Backup:
     type: object
     required:
@@ -647,19 +913,10 @@ definitions:
       SourceCluster:
         $ref: '#/definitions/ClusterId'
     description: Contains information about a backup of an AWS CloudHSM cluster.
-  BackupId:
-    type: string
-    pattern: 'backup-[2-7a-zA-Z]{11,16}'
   BackupPolicy:
     type: string
     enum:
       - DEFAULT
-  BackupState:
-    type: string
-    enum:
-      - CREATE_IN_PROGRESS
-      - READY
-      - DELETED
   Backups:
     type: array
     items:
@@ -689,36 +946,50 @@ definitions:
         $ref: '#/definitions/Cert'
         description: The cluster certificate issued (signed) by the issuing certificate authority (CA) of the cluster's owner.
     description: Contains one or more certificates or a certificate signing request (CSR).
-  CloudHsmAccessDeniedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: The request was rejected because the requester does not have permission to perform the requested operation.
-  CloudHsmInternalFailureException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: The request was rejected because of an AWS CloudHSM internal failure. The request can be retried.
-  CloudHsmInvalidRequestException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: The request was rejected because it is not a valid request.
-  CloudHsmResourceNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: The request was rejected because it refers to a resource that cannot be found.
-  CloudHsmServiceException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: The request was rejected because an error occurred.
+  errorMessage:
+    type: string
+  Hsms:
+    type: array
+    items:
+      $ref: '#/definitions/Hsm'
+  HsmType:
+    type: string
+    pattern: (hsm1\.medium)
+  PreCoPassword:
+    type: string
+    minLength: 7
+    maxLength: 32
+  SecurityGroup:
+    type: string
+    pattern: 'sg-[0-9a-fA-F]'
+  ClusterState:
+    type: string
+    enum:
+      - CREATE_IN_PROGRESS
+      - UNINITIALIZED
+      - INITIALIZE_IN_PROGRESS
+      - INITIALIZED
+      - ACTIVE
+      - UPDATE_IN_PROGRESS
+      - DELETE_IN_PROGRESS
+      - DELETED
+      - DEGRADED
+  StateMessage:
+    type: string
+    pattern: .*
+    maxLength: 300
+  ExternalSubnetMapping:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ExternalAz'
+        value:
+          $ref: '#/definitions/SubnetId'
+  VpcId:
+    type: string
+    pattern: 'vpc-[0-9a-fA-F]'
   Cluster:
     type: object
     properties:
@@ -762,163 +1033,10 @@ definitions:
         $ref: '#/definitions/Certificates'
         description: Contains one or more certificates or a certificate signing request (CSR).
     description: Contains information about an AWS CloudHSM cluster.
-  ClusterId:
-    type: string
-    pattern: 'cluster-[2-7a-zA-Z]{11,16}'
-  ClusterState:
-    type: string
-    enum:
-      - CREATE_IN_PROGRESS
-      - UNINITIALIZED
-      - INITIALIZE_IN_PROGRESS
-      - INITIALIZED
-      - ACTIVE
-      - UPDATE_IN_PROGRESS
-      - DELETE_IN_PROGRESS
-      - DELETED
-      - DEGRADED
   Clusters:
     type: array
     items:
       $ref: '#/definitions/Cluster'
-  CopyBackupToRegionRequest:
-    type: object
-    required:
-      - DestinationRegion
-      - BackupId
-    properties:
-      DestinationRegion:
-        $ref: '#/definitions/Region'
-      BackupId:
-        $ref: '#/definitions/BackupId'
-  CopyBackupToRegionResponse:
-    type: object
-    properties:
-      DestinationBackup:
-        $ref: '#/definitions/DestinationBackup'
-  CreateClusterRequest:
-    type: object
-    required:
-      - SubnetIds
-      - HsmType
-    properties:
-      SubnetIds:
-        $ref: '#/definitions/SubnetIds'
-        description: '<p>The identifiers (IDs) of the subnets where you are creating the cluster. You must specify at least one subnet. If you specify multiple subnets, they must meet the following criteria:</p> <ul> <li> <p>All subnets must be in the same virtual private cloud (VPC).</p> </li> <li> <p>You can specify only one subnet per Availability Zone.</p> </li> </ul>'
-      HsmType:
-        $ref: '#/definitions/HsmType'
-        description: The type of HSM to use in the cluster. Currently the only allowed value is <code>hsm1.medium</code>.
-      SourceBackupId:
-        $ref: '#/definitions/BackupId'
-        description: 'The identifier (ID) of the cluster backup to restore. Use this value to restore the cluster from a backup instead of creating a new cluster. To find the backup ID, use <a>DescribeBackups</a>.'
-  CreateClusterResponse:
-    type: object
-    properties:
-      Cluster:
-        $ref: '#/definitions/Cluster'
-        description: Information about the cluster that was created.
-  CreateHsmRequest:
-    type: object
-    required:
-      - ClusterId
-      - AvailabilityZone
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The identifier (ID) of the HSM''s cluster. To find the cluster ID, use <a>DescribeClusters</a>.'
-      AvailabilityZone:
-        $ref: '#/definitions/ExternalAz'
-        description: 'The Availability Zone where you are creating the HSM. To find the cluster''s Availability Zones, use <a>DescribeClusters</a>.'
-      IpAddress:
-        $ref: '#/definitions/IpAddress'
-        description: 'The HSM''s IP address. If you specify an IP address, use an available address from the subnet that maps to the Availability Zone where you are creating the HSM. If you don''t specify an IP address, one is chosen for you from that subnet.'
-  CreateHsmResponse:
-    type: object
-    properties:
-      Hsm:
-        $ref: '#/definitions/Hsm'
-        description: Information about the HSM that was created.
-  DeleteClusterRequest:
-    type: object
-    required:
-      - ClusterId
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The identifier (ID) of the cluster that you are deleting. To find the cluster ID, use <a>DescribeClusters</a>.'
-  DeleteClusterResponse:
-    type: object
-    properties:
-      Cluster:
-        $ref: '#/definitions/Cluster'
-        description: Information about the cluster that was deleted.
-  DeleteHsmRequest:
-    type: object
-    required:
-      - ClusterId
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: The identifier (ID) of the cluster that contains the HSM that you are deleting.
-      HsmId:
-        $ref: '#/definitions/HsmId'
-        description: The identifier (ID) of the HSM that you are deleting.
-      EniId:
-        $ref: '#/definitions/EniId'
-        description: The identifier (ID) of the elastic network interface (ENI) of the HSM that you are deleting.
-      EniIp:
-        $ref: '#/definitions/IpAddress'
-        description: The IP address of the elastic network interface (ENI) of the HSM that you are deleting.
-  DeleteHsmResponse:
-    type: object
-    properties:
-      HsmId:
-        $ref: '#/definitions/HsmId'
-        description: The identifier (ID) of the HSM that was deleted.
-  DescribeBackupsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more backups.
-      MaxResults:
-        $ref: '#/definitions/MaxSize'
-        description: 'The maximum number of backups to return in the response. When there are more backups than the number you specify, the response contains a <code>NextToken</code> value.'
-      Filters:
-        $ref: '#/definitions/Filters'
-        description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>backupIds</code> filter to return only the specified backups. Specify backups by their backup identifier (ID).</p> <p>Use the <code>clusterIds</code> filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>states</code> filter to return only backups that match the specified state.</p>
-      SortAscending:
-        $ref: '#/definitions/Boolean'
-  DescribeBackupsResponse:
-    type: object
-    properties:
-      Backups:
-        $ref: '#/definitions/Backups'
-        description: A list of backups.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates that the response contains only a subset of backups. Use this value in a subsequent <code>DescribeBackups</code> request to get more backups.
-  DescribeClustersRequest:
-    type: object
-    properties:
-      Filters:
-        $ref: '#/definitions/Filters'
-        description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>clusterIds</code> filter to return only the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>vpcIds</code> filter to return only the clusters in the specified virtual private clouds (VPCs). Specify VPCs by their VPC identifier (ID).</p> <p>Use the <code>states</code> filter to return only clusters that match the specified state.</p>
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more clusters.
-      MaxResults:
-        $ref: '#/definitions/MaxSize'
-        description: 'The maximum number of clusters to return in the response. When there are more clusters than the number you specify, the response contains a <code>NextToken</code> value.'
-  DescribeClustersResponse:
-    type: object
-    properties:
-      Clusters:
-        $ref: '#/definitions/Clusters'
-        description: A list of clusters.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates that the response contains only a subset of clusters. Use this value in a subsequent <code>DescribeClusters</code> request to get more clusters.
   DestinationBackup:
     type: object
     properties:
@@ -930,33 +1048,18 @@ definitions:
         $ref: '#/definitions/BackupId'
       SourceCluster:
         $ref: '#/definitions/ClusterId'
-  EniId:
-    type: string
-    pattern: 'eni-[0-9a-fA-F]{8,17}'
+  SubnetIds:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+    minItems: 1
+    maxItems: 10
   ExternalAz:
     type: string
     pattern: '[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d[a-z]'
-  ExternalSubnetMapping:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ExternalAz'
-        value:
-          $ref: '#/definitions/SubnetId'
-  Field:
+  IpAddress:
     type: string
-    pattern: '[a-zA-Z0-9_-]+'
-  Filters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Field'
-        value:
-          $ref: '#/definitions/Strings'
+    pattern: '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
   Hsm:
     type: object
     required:
@@ -990,6 +1093,36 @@ definitions:
   HsmId:
     type: string
     pattern: 'hsm-[2-7a-zA-Z]{11,16}'
+  EniId:
+    type: string
+    pattern: 'eni-[0-9a-fA-F]{8,17}'
+  NextToken:
+    type: string
+    pattern: .*
+    maxLength: 256
+  MaxSize:
+    type: integer
+    minimum: 1
+    maximum: 100
+  Filters:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Field'
+        value:
+          $ref: '#/definitions/Strings'
+  SubnetId:
+    type: string
+    pattern: 'subnet-[0-9a-fA-F]{8,17}'
+  Field:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+  Strings:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   HsmState:
     type: string
     enum:
@@ -998,103 +1131,24 @@ definitions:
       - DEGRADED
       - DELETE_IN_PROGRESS
       - DELETED
-  HsmType:
-    type: string
-    pattern: (hsm1\.medium)
-  Hsms:
-    type: array
-    items:
-      $ref: '#/definitions/Hsm'
-  InitializeClusterRequest:
-    type: object
-    required:
-      - ClusterId
-      - SignedCert
-      - TrustAnchor
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The identifier (ID) of the cluster that you are claiming. To find the cluster ID, use <a>DescribeClusters</a>.'
-      SignedCert:
-        $ref: '#/definitions/Cert'
-        description: The cluster certificate issued (signed) by your issuing certificate authority (CA). The certificate must be in PEM format and can contain a maximum of 5000 characters.
-      TrustAnchor:
-        $ref: '#/definitions/Cert'
-        description: The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate. This can be a root (self-signed) certificate or a certificate chain that begins with the certificate that issued the cluster certificate and ends with a root certificate. The certificate or certificate chain must be in PEM format and can contain a maximum of 5000 characters.
-  InitializeClusterResponse:
-    type: object
-    properties:
-      State:
-        $ref: '#/definitions/ClusterState'
-        description: The cluster's state.
-      StateMessage:
-        $ref: '#/definitions/StateMessage'
-        description: A description of the cluster's state.
-  IpAddress:
-    type: string
-    pattern: '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
-  ListTagsRequest:
-    type: object
-    required:
-      - ResourceId
-    properties:
-      ResourceId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The cluster identifier (ID) for the cluster whose tags you are getting. To find the cluster ID, use <a>DescribeClusters</a>.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more tags.
-      MaxResults:
-        $ref: '#/definitions/MaxSize'
-        description: 'The maximum number of tags to return in the response. When there are more tags than the number you specify, the response contains a <code>NextToken</code> value.'
-  ListTagsResponse:
-    type: object
-    required:
-      - TagList
-    properties:
-      TagList:
-        $ref: '#/definitions/TagList'
-        description: A list of tags.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates that the response contains only a subset of tags. Use this value in a subsequent <code>ListTags</code> request to get more tags.
-  MaxSize:
-    type: integer
-    minimum: 1
-    maximum: 100
-  NextToken:
-    type: string
-    pattern: .*
-    maxLength: 256
-  PreCoPassword:
-    type: string
-    minLength: 7
-    maxLength: 32
-  Region:
-    type: string
-    pattern: '[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d'
-  SecurityGroup:
-    type: string
-    pattern: 'sg-[0-9a-fA-F]'
-  StateMessage:
-    type: string
-    pattern: .*
-    maxLength: 300
   String:
     type: string
-  Strings:
+  TagList:
     type: array
     items:
-      $ref: '#/definitions/String'
-  SubnetId:
-    type: string
-    pattern: 'subnet-[0-9a-fA-F]{8,17}'
-  SubnetIds:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetId'
+      $ref: '#/definitions/Tag'
     minItems: 1
-    maxItems: 10
+    maxItems: 50
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -1108,63 +1162,9 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value of the tag.
     description: Contains a tag. A tag is a key-value pair.
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
     minItems: 1
     maxItems: 50
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-    maxItems: 50
-  TagResourceRequest:
-    type: object
-    required:
-      - ResourceId
-      - TagList
-    properties:
-      ResourceId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The cluster identifier (ID) for the cluster that you are tagging. To find the cluster ID, use <a>DescribeClusters</a>.'
-      TagList:
-        $ref: '#/definitions/TagList'
-        description: A list of one or more tags.
-  TagResourceResponse:
-    type: object
-    properties: {}
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  Timestamp:
-    type: string
-    format: date-time
-  UntagResourceRequest:
-    type: object
-    required:
-      - ResourceId
-      - TagKeyList
-    properties:
-      ResourceId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The cluster identifier (ID) for the cluster whose tags you are removing. To find the cluster ID, use <a>DescribeClusters</a>.'
-      TagKeyList:
-        $ref: '#/definitions/TagKeyList'
-        description: 'A list of one or more tag keys for the tags that you are removing. Specify only the tag keys, not the tag values.'
-  UntagResourceResponse:
-    type: object
-    properties: {}
-  VpcId:
-    type: string
-    pattern: 'vpc-[0-9a-fA-F]'
-  errorMessage:
-    type: string

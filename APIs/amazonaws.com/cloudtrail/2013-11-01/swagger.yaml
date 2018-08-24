@@ -840,6 +840,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  AddTagsResponse:
+    type: object
+    properties: {}
+    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
   AddTagsRequest:
     type: object
     required:
@@ -852,59 +856,38 @@ definitions:
         $ref: '#/definitions/TagsList'
         description: 'Contains a list of CloudTrail tags, up to a limit of 50'
     description: Specifies the tags to add to a trail.
-  AddTagsResponse:
+  ResourceNotFoundException:
     type: object
     properties: {}
-    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
-  Boolean:
-    type: boolean
-  ByteBuffer:
-    type: string
+    description: This exception is thrown when the specified resource is not found.
   CloudTrailARNInvalidException:
     type: object
     properties: {}
     description: '<p>This exception is thrown when an operation is called with an invalid trail ARN. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
-  CloudWatchLogsDeliveryUnavailableException:
+  ResourceTypeNotSupportedException:
     type: object
     properties: {}
-    description: Cannot set a CloudWatch Logs delivery for this region.
-  CreateTrailRequest:
+    description: This exception is thrown when the specified resource type is not supported by CloudTrail.
+  TagsLimitExceededException:
     type: object
-    required:
-      - Name
-      - S3BucketName
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the name of the trail. The name must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul>'
-      S3BucketName:
-        $ref: '#/definitions/String'
-        description: 'Specifies the name of the Amazon S3 bucket designated for publishing log files. See <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html">Amazon S3 Bucket Naming Requirements</a>.'
-      S3KeyPrefix:
-        $ref: '#/definitions/String'
-        description: 'Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html">Finding Your CloudTrail Log Files</a>. The maximum length is 200 characters.'
-      SnsTopicName:
-        $ref: '#/definitions/String'
-        description: Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.
-      IncludeGlobalServiceEvents:
-        $ref: '#/definitions/Boolean'
-        description: Specifies whether the trail is publishing events from global services such as IAM to the log files.
-      IsMultiRegionTrail:
-        $ref: '#/definitions/Boolean'
-        description: Specifies whether the trail is created in the current region or in all regions. The default is false.
-      EnableLogFileValidation:
-        $ref: '#/definitions/Boolean'
-        description: '<p>Specifies whether log file integrity validation is enabled. The default is false.</p> <note> <p>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</p> </note>'
-      CloudWatchLogsLogGroupArn:
-        $ref: '#/definitions/String'
-        description: 'Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.'
-      CloudWatchLogsRoleArn:
-        $ref: '#/definitions/String'
-        description: Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
-      KmsKeyId:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.</p> <p>Examples:</p> <ul> <li> <p>alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-1:123456789012:alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</p> </li> <li> <p>12345678-1234-1234-1234-123456789012</p> </li> </ul>'
-    description: Specifies the settings for each trail.
+    properties: {}
+    description: 'The number of tags per trail has exceeded the permitted amount. Currently, the limit is 50.'
+  InvalidTrailNameException:
+    type: object
+    properties: {}
+    description: '<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul>'
+  InvalidTagParameterException:
+    type: object
+    properties: {}
+    description: 'This exception is thrown when the key or value specified for the tag does not match the regular expression <code>^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$</code>.'
+  UnsupportedOperationException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the requested operation is not supported.
+  OperationNotPermittedException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the requested operation is not permitted.
   CreateTrailResponse:
     type: object
     properties:
@@ -945,27 +928,119 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <p> <code>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</code> </p>'
     description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
-  DataResource:
+  CreateTrailRequest:
     type: object
+    required:
+      - Name
+      - S3BucketName
     properties:
-      Type:
+      Name:
         $ref: '#/definitions/String'
-        description: 'The resource type in which you want to log data events. You can specify only the following value: <code>AWS::S3::Object</code>.'
-      Values:
-        $ref: '#/definitions/DataResourceValues'
-        description: '<p>A list of ARN-like strings for the specified S3 objects.</p> <p>To log data events for all objects in an S3 bucket, specify the bucket and an empty object prefix such as <code>arn:aws:s3:::bucket-1/</code>. The trail logs data events for all objects in this S3 bucket.</p> <p>To log data events for specific objects, specify the S3 bucket and object prefix such as <code>arn:aws:s3:::bucket-1/example-images</code>. The trail logs data events for objects in this S3 bucket that match the prefix.</p>'
-    description: '<p>The Amazon S3 objects that you specify in your event selectors for your trail to log data events. Data events are object-level API operations that access S3 objects, such as <code>GetObject</code>, <code>DeleteObject</code>, and <code>PutObject</code>. You can specify up to 250 S3 buckets and object prefixes for a trail. </p> <p>Example</p> <ol> <li> <p>You create an event selector for a trail and specify an S3 bucket and an empty prefix, such as <code>arn:aws:s3:::bucket-1/</code>.</p> </li> <li> <p>You upload an image file to <code>bucket-1</code>.</p> </li> <li> <p>The <code>PutObject</code> API operation occurs on an object in the S3 bucket that you specified in the event selector. The trail processes and logs the event.</p> </li> <li> <p>You upload another image file to a different S3 bucket named <code>arn:aws:s3:::bucket-2</code>.</p> </li> <li> <p>The event occurs on an object in an S3 bucket that you didn''t specify in the event selector. The trail doesn’t log the event.</p> </li> </ol>'
-  DataResourceValues:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  DataResources:
-    type: array
-    items:
-      $ref: '#/definitions/DataResource'
-  Date:
-    type: string
-    format: date-time
+        description: '<p>Specifies the name of the trail. The name must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul>'
+      S3BucketName:
+        $ref: '#/definitions/String'
+        description: 'Specifies the name of the Amazon S3 bucket designated for publishing log files. See <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html">Amazon S3 Bucket Naming Requirements</a>.'
+      S3KeyPrefix:
+        $ref: '#/definitions/String'
+        description: 'Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html">Finding Your CloudTrail Log Files</a>. The maximum length is 200 characters.'
+      SnsTopicName:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.
+      IncludeGlobalServiceEvents:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the trail is publishing events from global services such as IAM to the log files.
+      IsMultiRegionTrail:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the trail is created in the current region or in all regions. The default is false.
+      EnableLogFileValidation:
+        $ref: '#/definitions/Boolean'
+        description: '<p>Specifies whether log file integrity validation is enabled. The default is false.</p> <note> <p>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</p> </note>'
+      CloudWatchLogsLogGroupArn:
+        $ref: '#/definitions/String'
+        description: 'Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.'
+      CloudWatchLogsRoleArn:
+        $ref: '#/definitions/String'
+        description: Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.</p> <p>Examples:</p> <ul> <li> <p>alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-1:123456789012:alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</p> </li> <li> <p>12345678-1234-1234-1234-123456789012</p> </li> </ul>'
+    description: Specifies the settings for each trail.
+  MaximumNumberOfTrailsExceededException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the maximum number of trails is reached.
+  TrailAlreadyExistsException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the specified trail already exists.
+  S3BucketDoesNotExistException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the specified S3 bucket does not exist.
+  InsufficientS3BucketPolicyException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the policy on the S3 bucket is not sufficient.
+  InsufficientSnsTopicPolicyException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the policy on the SNS topic is not sufficient.
+  InsufficientEncryptionPolicyException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the policy on the S3 bucket or KMS key is not sufficient.
+  InvalidS3BucketNameException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the provided S3 bucket name is not valid.
+  InvalidS3PrefixException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the provided S3 prefix is not valid.
+  InvalidSnsTopicNameException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the provided SNS topic name is not valid.
+  InvalidKmsKeyIdException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the KMS key ARN is invalid.
+  TrailNotProvidedException:
+    type: object
+    properties: {}
+    description: This exception is deprecated.
+  InvalidParameterCombinationException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the combination of parameters provided is not valid.
+  KmsKeyNotFoundException:
+    type: object
+    properties: {}
+    description: 'This exception is thrown when the KMS key does not exist, or when the S3 bucket and the KMS key are not in the same region.'
+  KmsKeyDisabledException:
+    type: object
+    properties: {}
+    description: This exception is deprecated.
+  KmsException:
+    type: object
+    properties: {}
+    description: This exception is thrown when there is an issue with the specified KMS key and the trail can’t be updated.
+  InvalidCloudWatchLogsLogGroupArnException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the provided CloudWatch log group is not valid.
+  InvalidCloudWatchLogsRoleArnException:
+    type: object
+    properties: {}
+    description: This exception is thrown when the provided role is not valid.
+  CloudWatchLogsDeliveryUnavailableException:
+    type: object
+    properties: {}
+    description: Cannot set a CloudWatch Logs delivery for this region.
+  DeleteTrailResponse:
+    type: object
+    properties: {}
+    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
   DeleteTrailRequest:
     type: object
     required:
@@ -975,9 +1050,20 @@ definitions:
         $ref: '#/definitions/String'
         description: 'Specifies the name or the CloudTrail ARN of the trail to be deleted. The format of a trail ARN is: <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> '
     description: The request that specifies the name of a trail to delete.
-  DeleteTrailResponse:
+  TrailNotFoundException:
     type: object
     properties: {}
+    description: This exception is thrown when the trail with the given name is not found.
+  InvalidHomeRegionException:
+    type: object
+    properties: {}
+    description: This exception is thrown when an operation is called on a trail from a region other than the region in which the trail was created.
+  DescribeTrailsResponse:
+    type: object
+    properties:
+      trailList:
+        $ref: '#/definitions/TrailList'
+        description: The list of trail objects.
     description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
   DescribeTrailsRequest:
     type: object
@@ -989,67 +1075,6 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Specifies whether to include shadow trails in the response. A shadow trail is the replication in a region of a trail that was created in a different region. The default is true.
     description: Returns information about the trail.
-  DescribeTrailsResponse:
-    type: object
-    properties:
-      trailList:
-        $ref: '#/definitions/TrailList'
-        description: The list of trail objects.
-    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
-  Event:
-    type: object
-    properties:
-      EventId:
-        $ref: '#/definitions/String'
-        description: The CloudTrail ID of the event returned.
-      EventName:
-        $ref: '#/definitions/String'
-        description: The name of the event returned.
-      EventTime:
-        $ref: '#/definitions/Date'
-        description: The date and time of the event returned.
-      EventSource:
-        $ref: '#/definitions/String'
-        description: The AWS service that the request was made to.
-      Username:
-        $ref: '#/definitions/String'
-        description: A user name or role name of the requester that called the API in the event returned.
-      Resources:
-        $ref: '#/definitions/ResourceList'
-        description: A list of resources referenced by the event returned.
-      CloudTrailEvent:
-        $ref: '#/definitions/String'
-        description: A JSON string that contains a representation of the event returned.
-    description: Contains information about an event that was returned by a lookup request. The result includes a representation of a CloudTrail event.
-  EventSelector:
-    type: object
-    properties:
-      ReadWriteType:
-        $ref: '#/definitions/ReadWriteType'
-        description: '<p>Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 <code>GetConsoleOutput</code> is a read-only API operation and <code>RunInstances</code> is a write-only API operation.</p> <p> By default, the value is <code>All</code>.</p>'
-      IncludeManagementEvents:
-        $ref: '#/definitions/Boolean'
-        description: '<p>Specify if you want your event selector to include management events for your trail.</p> <p> For more information, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events">Management Events</a> in the <i>AWS CloudTrail User Guide</i>.</p> <p>By default, the value is <code>true</code>.</p>'
-      DataResources:
-        $ref: '#/definitions/DataResources'
-        description: '<p>CloudTrail supports logging only data events for S3 objects. You can specify up to 250 S3 buckets and object prefixes for a trail.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events">Data Events</a> in the <i>AWS CloudTrail User Guide</i>.</p>'
-    description: '<p>Use event selectors to specify whether you want your trail to log management and/or data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn''t match any event selector, the trail doesn''t log the event.</p> <p>You can configure up to five event selectors for a trail.</p>'
-  EventSelectors:
-    type: array
-    items:
-      $ref: '#/definitions/EventSelector'
-  EventsList:
-    type: array
-    items:
-      $ref: '#/definitions/Event'
-  GetEventSelectorsRequest:
-    type: object
-    required:
-      - TrailName
-    properties:
-      TrailName:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul> <p>If you specify a trail ARN, it must be in the format:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
   GetEventSelectorsResponse:
     type: object
     properties:
@@ -1059,15 +1084,14 @@ definitions:
       EventSelectors:
         $ref: '#/definitions/EventSelectors'
         description: The event selectors that are configured for the trail.
-  GetTrailStatusRequest:
+  GetEventSelectorsRequest:
     type: object
     required:
-      - Name
+      - TrailName
     properties:
-      Name:
+      TrailName:
         $ref: '#/definitions/String'
-        description: '<p>Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a shadow trail (a replication of the trail in another region), you must specify its ARN. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
-    description: The name of a trail about which you want the current status.
+        description: '<p>Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul> <p>If you specify a trail ARN, it must be in the format:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
   GetTrailStatusResponse:
     type: object
     properties:
@@ -1123,94 +1147,25 @@ definitions:
         $ref: '#/definitions/String'
         description: This field is deprecated.
     description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
-  InsufficientEncryptionPolicyException:
+  GetTrailStatusRequest:
     type: object
-    properties: {}
-    description: This exception is thrown when the policy on the S3 bucket or KMS key is not sufficient.
-  InsufficientS3BucketPolicyException:
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a shadow trail (a replication of the trail in another region), you must specify its ARN. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
+    description: The name of a trail about which you want the current status.
+  ListPublicKeysResponse:
     type: object
-    properties: {}
-    description: This exception is thrown when the policy on the S3 bucket is not sufficient.
-  InsufficientSnsTopicPolicyException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the policy on the SNS topic is not sufficient.
-  InvalidCloudWatchLogsLogGroupArnException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the provided CloudWatch log group is not valid.
-  InvalidCloudWatchLogsRoleArnException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the provided role is not valid.
-  InvalidEventSelectorsException:
-    type: object
-    properties: {}
-    description: '<p>This exception is thrown when the <code>PutEventSelectors</code> operation is called with an invalid number of event selectors, data resources, or an invalid value for a parameter:</p> <ul> <li> <p>Specify a valid number of event selectors (1 to 5) for a trail.</p> </li> <li> <p>Specify a valid number of data resources (1 to 250) for an event selector.</p> </li> <li> <p>Specify a valid value for a parameter. For example, specifying the <code>ReadWriteType</code> parameter with a value of <code>read-only</code> is invalid.</p> </li> </ul>'
-  InvalidHomeRegionException:
-    type: object
-    properties: {}
-    description: This exception is thrown when an operation is called on a trail from a region other than the region in which the trail was created.
-  InvalidKmsKeyIdException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the KMS key ARN is invalid.
-  InvalidLookupAttributesException:
-    type: object
-    properties: {}
-    description: Occurs when an invalid lookup attribute is specified.
-  InvalidMaxResultsException:
-    type: object
-    properties: {}
-    description: This exception is thrown if the limit specified is invalid.
-  InvalidNextTokenException:
-    type: object
-    properties: {}
-    description: Invalid token or token that was previously used in a request with different parameters. This exception is thrown if the token is invalid.
-  InvalidParameterCombinationException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the combination of parameters provided is not valid.
-  InvalidS3BucketNameException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the provided S3 bucket name is not valid.
-  InvalidS3PrefixException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the provided S3 prefix is not valid.
-  InvalidSnsTopicNameException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the provided SNS topic name is not valid.
-  InvalidTagParameterException:
-    type: object
-    properties: {}
-    description: 'This exception is thrown when the key or value specified for the tag does not match the regular expression <code>^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$</code>.'
-  InvalidTimeRangeException:
-    type: object
-    properties: {}
-    description: Occurs if the timestamp values are invalid. Either the start time occurs after the end time or the time range is outside the range of possible values.
-  InvalidTokenException:
-    type: object
-    properties: {}
-    description: Reserved for future use.
-  InvalidTrailNameException:
-    type: object
-    properties: {}
-    description: '<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul>'
-  KmsException:
-    type: object
-    properties: {}
-    description: This exception is thrown when there is an issue with the specified KMS key and the trail can’t be updated.
-  KmsKeyDisabledException:
-    type: object
-    properties: {}
-    description: This exception is deprecated.
-  KmsKeyNotFoundException:
-    type: object
-    properties: {}
-    description: 'This exception is thrown when the KMS key does not exist, or when the S3 bucket and the KMS key are not in the same region.'
+    properties:
+      PublicKeyList:
+        $ref: '#/definitions/PublicKeyList'
+        description: <p>Contains an array of PublicKey objects.</p> <note> <p>The returned public keys may have validity time ranges that overlap.</p> </note>
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Reserved for future use.
+    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
   ListPublicKeysRequest:
     type: object
     properties:
@@ -1224,12 +1179,20 @@ definitions:
         $ref: '#/definitions/String'
         description: Reserved for future use.
     description: Requests the public keys for a specified time range.
-  ListPublicKeysResponse:
+  InvalidTimeRangeException:
+    type: object
+    properties: {}
+    description: Occurs if the timestamp values are invalid. Either the start time occurs after the end time or the time range is outside the range of possible values.
+  InvalidTokenException:
+    type: object
+    properties: {}
+    description: Reserved for future use.
+  ListTagsResponse:
     type: object
     properties:
-      PublicKeyList:
-        $ref: '#/definitions/PublicKeyList'
-        description: <p>Contains an array of PublicKey objects.</p> <note> <p>The returned public keys may have validity time ranges that overlap.</p> </note>
+      ResourceTagList:
+        $ref: '#/definitions/ResourceTagList'
+        description: A list of resource tags.
       NextToken:
         $ref: '#/definitions/String'
         description: Reserved for future use.
@@ -1246,42 +1209,16 @@ definitions:
         $ref: '#/definitions/String'
         description: Reserved for future use.
     description: Specifies a list of trail tags to return.
-  ListTagsResponse:
+  LookupEventsResponse:
     type: object
     properties:
-      ResourceTagList:
-        $ref: '#/definitions/ResourceTagList'
-        description: A list of resource tags.
+      Events:
+        $ref: '#/definitions/EventsList'
+        description: A list of events returned based on the lookup attributes specified and the CloudTrail event. The events list is sorted by time. The most recent event is listed first.
       NextToken:
-        $ref: '#/definitions/String'
-        description: Reserved for future use.
-    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
-  LookupAttribute:
-    type: object
-    required:
-      - AttributeKey
-      - AttributeValue
-    properties:
-      AttributeKey:
-        $ref: '#/definitions/LookupAttributeKey'
-        description: Specifies an attribute on which to filter the events returned.
-      AttributeValue:
-        $ref: '#/definitions/String'
-        description: Specifies a value for the specified AttributeKey.
-    description: Specifies an attribute and value that filter the events returned.
-  LookupAttributeKey:
-    type: string
-    enum:
-      - EventId
-      - EventName
-      - Username
-      - ResourceType
-      - ResourceName
-      - EventSource
-  LookupAttributesList:
-    type: array
-    items:
-      $ref: '#/definitions/LookupAttribute'
+        $ref: '#/definitions/NextToken'
+        description: 'The token to use to get the next page of results after a previous API call. If the token does not appear, there are no more results to return. The token must be passed in with the same parameters as the previous call. For example, if the original call specified an AttributeKey of ''Username'' with a value of ''root'', the call with NextToken should include those same parameters.'
+    description: Contains a response to a LookupEvents action.
   LookupEventsRequest:
     type: object
     properties:
@@ -1301,30 +1238,302 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the the original call. For example, if the original call specified an AttributeKey of ''Username'' with a value of ''root'', the call with NextToken should include those same parameters.'
     description: Contains a request for LookupEvents.
-  LookupEventsResponse:
+  InvalidLookupAttributesException:
+    type: object
+    properties: {}
+    description: Occurs when an invalid lookup attribute is specified.
+  InvalidMaxResultsException:
+    type: object
+    properties: {}
+    description: This exception is thrown if the limit specified is invalid.
+  InvalidNextTokenException:
+    type: object
+    properties: {}
+    description: Invalid token or token that was previously used in a request with different parameters. This exception is thrown if the token is invalid.
+  PutEventSelectorsResponse:
     type: object
     properties:
-      Events:
-        $ref: '#/definitions/EventsList'
-        description: A list of events returned based on the lookup attributes specified and the CloudTrail event. The events list is sorted by time. The most recent event is listed first.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'The token to use to get the next page of results after a previous API call. If the token does not appear, there are no more results to return. The token must be passed in with the same parameters as the previous call. For example, if the original call specified an AttributeKey of ''Username'' with a value of ''root'', the call with NextToken should include those same parameters.'
-    description: Contains a response to a LookupEvents action.
+      TrailARN:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the ARN of the trail that was updated with event selectors. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
+      EventSelectors:
+        $ref: '#/definitions/EventSelectors'
+        description: Specifies the event selectors configured for your trail.
+  PutEventSelectorsRequest:
+    type: object
+    required:
+      - TrailName
+      - EventSelectors
+    properties:
+      TrailName:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul> <p>If you specify a trail ARN, it must be in the format:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
+      EventSelectors:
+        $ref: '#/definitions/EventSelectors'
+        description: Specifies the settings for your event selectors. You can configure up to five event selectors for a trail.
+  InvalidEventSelectorsException:
+    type: object
+    properties: {}
+    description: '<p>This exception is thrown when the <code>PutEventSelectors</code> operation is called with an invalid number of event selectors, data resources, or an invalid value for a parameter:</p> <ul> <li> <p>Specify a valid number of event selectors (1 to 5) for a trail.</p> </li> <li> <p>Specify a valid number of data resources (1 to 250) for an event selector.</p> </li> <li> <p>Specify a valid value for a parameter. For example, specifying the <code>ReadWriteType</code> parameter with a value of <code>read-only</code> is invalid.</p> </li> </ul>'
+  RemoveTagsResponse:
+    type: object
+    properties: {}
+    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+  RemoveTagsRequest:
+    type: object
+    required:
+      - ResourceId
+    properties:
+      ResourceId:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the ARN of the trail from which tags should be removed. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
+      TagsList:
+        $ref: '#/definitions/TagsList'
+        description: Specifies a list of tags to be removed.
+    description: Specifies the tags to remove from a trail.
+  StartLoggingResponse:
+    type: object
+    properties: {}
+    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+  StartLoggingRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs AWS API calls. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
+    description: The request to CloudTrail to start logging AWS API calls for an account.
+  StopLoggingResponse:
+    type: object
+    properties: {}
+    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+  StopLoggingRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging AWS API calls. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
+    description: Passes the request to CloudTrail to stop logging AWS API calls for the specified account.
+  UpdateTrailResponse:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the trail.
+      S3BucketName:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the Amazon S3 bucket designated for publishing log files.
+      S3KeyPrefix:
+        $ref: '#/definitions/String'
+        description: 'Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html">Finding Your CloudTrail Log Files</a>.'
+      SnsTopicName:
+        $ref: '#/definitions/String'
+        description: This field is deprecated. Use SnsTopicARN.
+      SnsTopicARN:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:</p> <p> <code>arn:aws:sns:us-east-1:123456789012:MyTopic</code> </p>'
+      IncludeGlobalServiceEvents:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the trail is publishing events from global services such as IAM to the log files.
+      IsMultiRegionTrail:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the trail exists in one region or in all regions.
+      TrailARN:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the ARN of the trail that was updated. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
+      LogFileValidationEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether log file integrity validation is enabled.
+      CloudWatchLogsLogGroupArn:
+        $ref: '#/definitions/String'
+        description: Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail logs will be delivered.
+      CloudWatchLogsRoleArn:
+        $ref: '#/definitions/String'
+        description: Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <p> <code>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</code> </p>'
+    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+  UpdateTrailRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the name of the trail or trail ARN. If <code>Name</code> is a trail name, the string must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul> <p>If <code>Name</code> is a trail ARN, it must be in the format:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
+      S3BucketName:
+        $ref: '#/definitions/String'
+        description: 'Specifies the name of the Amazon S3 bucket designated for publishing log files. See <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html">Amazon S3 Bucket Naming Requirements</a>.'
+      S3KeyPrefix:
+        $ref: '#/definitions/String'
+        description: 'Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html">Finding Your CloudTrail Log Files</a>. The maximum length is 200 characters.'
+      SnsTopicName:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.
+      IncludeGlobalServiceEvents:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the trail is publishing events from global services such as IAM to the log files.
+      IsMultiRegionTrail:
+        $ref: '#/definitions/Boolean'
+        description: 'Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted.'
+      EnableLogFileValidation:
+        $ref: '#/definitions/Boolean'
+        description: '<p>Specifies whether log file validation is enabled. The default is false.</p> <note> <p>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</p> </note>'
+      CloudWatchLogsLogGroupArn:
+        $ref: '#/definitions/String'
+        description: 'Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.'
+      CloudWatchLogsRoleArn:
+        $ref: '#/definitions/String'
+        description: Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.</p> <p>Examples:</p> <ul> <li> <p>alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-1:123456789012:alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</p> </li> <li> <p>12345678-1234-1234-1234-123456789012</p> </li> </ul>'
+    description: Specifies settings to update for the trail.
+  String:
+    type: string
+  TagsList:
+    type: array
+    description: A list of tags.
+    items:
+      $ref: '#/definitions/Tag'
+  Boolean:
+    type: boolean
+  ByteBuffer:
+    type: string
+  DataResourceValues:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  DataResource:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+        description: 'The resource type in which you want to log data events. You can specify only the following value: <code>AWS::S3::Object</code>.'
+      Values:
+        $ref: '#/definitions/DataResourceValues'
+        description: '<p>A list of ARN-like strings for the specified S3 objects.</p> <p>To log data events for all objects in an S3 bucket, specify the bucket and an empty object prefix such as <code>arn:aws:s3:::bucket-1/</code>. The trail logs data events for all objects in this S3 bucket.</p> <p>To log data events for specific objects, specify the S3 bucket and object prefix such as <code>arn:aws:s3:::bucket-1/example-images</code>. The trail logs data events for objects in this S3 bucket that match the prefix.</p>'
+    description: '<p>The Amazon S3 objects that you specify in your event selectors for your trail to log data events. Data events are object-level API operations that access S3 objects, such as <code>GetObject</code>, <code>DeleteObject</code>, and <code>PutObject</code>. You can specify up to 250 S3 buckets and object prefixes for a trail. </p> <p>Example</p> <ol> <li> <p>You create an event selector for a trail and specify an S3 bucket and an empty prefix, such as <code>arn:aws:s3:::bucket-1/</code>.</p> </li> <li> <p>You upload an image file to <code>bucket-1</code>.</p> </li> <li> <p>The <code>PutObject</code> API operation occurs on an object in the S3 bucket that you specified in the event selector. The trail processes and logs the event.</p> </li> <li> <p>You upload another image file to a different S3 bucket named <code>arn:aws:s3:::bucket-2</code>.</p> </li> <li> <p>The event occurs on an object in an S3 bucket that you didn''t specify in the event selector. The trail doesn’t log the event.</p> </li> </ol>'
+  DataResources:
+    type: array
+    items:
+      $ref: '#/definitions/DataResource'
+  Date:
+    type: string
+    format: date-time
+  TrailNameList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  TrailList:
+    type: array
+    items:
+      $ref: '#/definitions/Trail'
+  ResourceList:
+    type: array
+    description: A list of resources referenced by the event returned.
+    items:
+      $ref: '#/definitions/Resource'
+  Event:
+    type: object
+    properties:
+      EventId:
+        $ref: '#/definitions/String'
+        description: The CloudTrail ID of the event returned.
+      EventName:
+        $ref: '#/definitions/String'
+        description: The name of the event returned.
+      EventTime:
+        $ref: '#/definitions/Date'
+        description: The date and time of the event returned.
+      EventSource:
+        $ref: '#/definitions/String'
+        description: The AWS service that the request was made to.
+      Username:
+        $ref: '#/definitions/String'
+        description: A user name or role name of the requester that called the API in the event returned.
+      Resources:
+        $ref: '#/definitions/ResourceList'
+        description: A list of resources referenced by the event returned.
+      CloudTrailEvent:
+        $ref: '#/definitions/String'
+        description: A JSON string that contains a representation of the event returned.
+    description: Contains information about an event that was returned by a lookup request. The result includes a representation of a CloudTrail event.
+  ReadWriteType:
+    type: string
+    enum:
+      - ReadOnly
+      - WriteOnly
+      - All
+  EventSelector:
+    type: object
+    properties:
+      ReadWriteType:
+        $ref: '#/definitions/ReadWriteType'
+        description: '<p>Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 <code>GetConsoleOutput</code> is a read-only API operation and <code>RunInstances</code> is a write-only API operation.</p> <p> By default, the value is <code>All</code>.</p>'
+      IncludeManagementEvents:
+        $ref: '#/definitions/Boolean'
+        description: '<p>Specify if you want your event selector to include management events for your trail.</p> <p> For more information, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events">Management Events</a> in the <i>AWS CloudTrail User Guide</i>.</p> <p>By default, the value is <code>true</code>.</p>'
+      DataResources:
+        $ref: '#/definitions/DataResources'
+        description: '<p>CloudTrail supports logging only data events for S3 objects. You can specify up to 250 S3 buckets and object prefixes for a trail.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events">Data Events</a> in the <i>AWS CloudTrail User Guide</i>.</p>'
+    description: '<p>Use event selectors to specify whether you want your trail to log management and/or data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn''t match any event selector, the trail doesn''t log the event.</p> <p>You can configure up to five event selectors for a trail.</p>'
+  EventSelectors:
+    type: array
+    items:
+      $ref: '#/definitions/EventSelector'
+  EventsList:
+    type: array
+    items:
+      $ref: '#/definitions/Event'
+  PublicKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/PublicKey'
+  ResourceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ResourceTagList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceTag'
+  LookupAttributeKey:
+    type: string
+    enum:
+      - EventId
+      - EventName
+      - Username
+      - ResourceType
+      - ResourceName
+      - EventSource
+  LookupAttribute:
+    type: object
+    required:
+      - AttributeKey
+      - AttributeValue
+    properties:
+      AttributeKey:
+        $ref: '#/definitions/LookupAttributeKey'
+        description: Specifies an attribute on which to filter the events returned.
+      AttributeValue:
+        $ref: '#/definitions/String'
+        description: Specifies a value for the specified AttributeKey.
+    description: Specifies an attribute and value that filter the events returned.
+  LookupAttributesList:
+    type: array
+    items:
+      $ref: '#/definitions/LookupAttribute'
   MaxResults:
     type: integer
     minimum: 1
     maximum: 50
-  MaximumNumberOfTrailsExceededException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the maximum number of trails is reached.
   NextToken:
     type: string
-  OperationNotPermittedException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the requested operation is not permitted.
   PublicKey:
     type: object
     properties:
@@ -1341,53 +1550,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The fingerprint of the public key.
     description: Contains information about a returned public key.
-  PublicKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/PublicKey'
-  PutEventSelectorsRequest:
-    type: object
-    required:
-      - TrailName
-      - EventSelectors
-    properties:
-      TrailName:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul> <p>If you specify a trail ARN, it must be in the format:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
-      EventSelectors:
-        $ref: '#/definitions/EventSelectors'
-        description: Specifies the settings for your event selectors. You can configure up to five event selectors for a trail.
-  PutEventSelectorsResponse:
-    type: object
-    properties:
-      TrailARN:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the ARN of the trail that was updated with event selectors. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
-      EventSelectors:
-        $ref: '#/definitions/EventSelectors'
-        description: Specifies the event selectors configured for your trail.
-  ReadWriteType:
-    type: string
-    enum:
-      - ReadOnly
-      - WriteOnly
-      - All
-  RemoveTagsRequest:
-    type: object
-    required:
-      - ResourceId
-    properties:
-      ResourceId:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the ARN of the trail from which tags should be removed. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
-      TagsList:
-        $ref: '#/definitions/TagsList'
-        description: Specifies a list of tags to be removed.
-    description: Specifies the tags to remove from a trail.
-  RemoveTagsResponse:
-    type: object
-    properties: {}
-    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
   Resource:
     type: object
     properties:
@@ -1398,19 +1560,6 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The name of the resource referenced by the event returned. These are user-created names whose values will depend on the environment. For example, the resource name might be "auto-scaling-test-group" for an Auto Scaling Group or "i-1234567" for an EC2 Instance.'
     description: Specifies the type and name of a resource referenced by an event.
-  ResourceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ResourceList:
-    type: array
-    description: A list of resources referenced by the event returned.
-    items:
-      $ref: '#/definitions/Resource'
-  ResourceNotFoundException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the specified resource is not found.
   ResourceTag:
     type: object
     properties:
@@ -1421,46 +1570,6 @@ definitions:
         $ref: '#/definitions/TagsList'
         description: A list of tags.
     description: A resource tag.
-  ResourceTagList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceTag'
-  ResourceTypeNotSupportedException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the specified resource type is not supported by CloudTrail.
-  S3BucketDoesNotExistException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the specified S3 bucket does not exist.
-  StartLoggingRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs AWS API calls. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
-    description: The request to CloudTrail to start logging AWS API calls for an account.
-  StartLoggingResponse:
-    type: object
-    properties: {}
-    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
-  StopLoggingRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging AWS API calls. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
-    description: Passes the request to CloudTrail to stop logging AWS API calls for the specified account.
-  StopLoggingResponse:
-    type: object
-    properties: {}
-    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
-  String:
-    type: string
   Tag:
     type: object
     required:
@@ -1473,15 +1582,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The value in a key-value pair of a tag. The value must be no longer than 256 Unicode characters.
     description: A custom key-value pair associated with a resource such as a CloudTrail trail.
-  TagsLimitExceededException:
-    type: object
-    properties: {}
-    description: 'The number of tags per trail has exceeded the permitted amount. Currently, the limit is 50.'
-  TagsList:
-    type: array
-    description: A list of tags.
-    items:
-      $ref: '#/definitions/Tag'
   Trail:
     type: object
     properties:
@@ -1528,103 +1628,3 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Specifies if the trail has custom event selectors.
     description: The settings for a trail.
-  TrailAlreadyExistsException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the specified trail already exists.
-  TrailList:
-    type: array
-    items:
-      $ref: '#/definitions/Trail'
-  TrailNameList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  TrailNotFoundException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the trail with the given name is not found.
-  TrailNotProvidedException:
-    type: object
-    properties: {}
-    description: This exception is deprecated.
-  UnsupportedOperationException:
-    type: object
-    properties: {}
-    description: This exception is thrown when the requested operation is not supported.
-  UpdateTrailRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the name of the trail or trail ARN. If <code>Name</code> is a trail name, the string must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul> <p>If <code>Name</code> is a trail ARN, it must be in the format:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
-      S3BucketName:
-        $ref: '#/definitions/String'
-        description: 'Specifies the name of the Amazon S3 bucket designated for publishing log files. See <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html">Amazon S3 Bucket Naming Requirements</a>.'
-      S3KeyPrefix:
-        $ref: '#/definitions/String'
-        description: 'Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html">Finding Your CloudTrail Log Files</a>. The maximum length is 200 characters.'
-      SnsTopicName:
-        $ref: '#/definitions/String'
-        description: Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.
-      IncludeGlobalServiceEvents:
-        $ref: '#/definitions/Boolean'
-        description: Specifies whether the trail is publishing events from global services such as IAM to the log files.
-      IsMultiRegionTrail:
-        $ref: '#/definitions/Boolean'
-        description: 'Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted.'
-      EnableLogFileValidation:
-        $ref: '#/definitions/Boolean'
-        description: '<p>Specifies whether log file validation is enabled. The default is false.</p> <note> <p>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</p> </note>'
-      CloudWatchLogsLogGroupArn:
-        $ref: '#/definitions/String'
-        description: 'Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.'
-      CloudWatchLogsRoleArn:
-        $ref: '#/definitions/String'
-        description: Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
-      KmsKeyId:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.</p> <p>Examples:</p> <ul> <li> <p>alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-1:123456789012:alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</p> </li> <li> <p>12345678-1234-1234-1234-123456789012</p> </li> </ul>'
-    description: Specifies settings to update for the trail.
-  UpdateTrailResponse:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: Specifies the name of the trail.
-      S3BucketName:
-        $ref: '#/definitions/String'
-        description: Specifies the name of the Amazon S3 bucket designated for publishing log files.
-      S3KeyPrefix:
-        $ref: '#/definitions/String'
-        description: 'Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html">Finding Your CloudTrail Log Files</a>.'
-      SnsTopicName:
-        $ref: '#/definitions/String'
-        description: This field is deprecated. Use SnsTopicARN.
-      SnsTopicARN:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:</p> <p> <code>arn:aws:sns:us-east-1:123456789012:MyTopic</code> </p>'
-      IncludeGlobalServiceEvents:
-        $ref: '#/definitions/Boolean'
-        description: Specifies whether the trail is publishing events from global services such as IAM to the log files.
-      IsMultiRegionTrail:
-        $ref: '#/definitions/Boolean'
-        description: Specifies whether the trail exists in one region or in all regions.
-      TrailARN:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the ARN of the trail that was updated. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
-      LogFileValidationEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Specifies whether log file integrity validation is enabled.
-      CloudWatchLogsLogGroupArn:
-        $ref: '#/definitions/String'
-        description: Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail logs will be delivered.
-      CloudWatchLogsRoleArn:
-        $ref: '#/definitions/String'
-        description: Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
-      KmsKeyId:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <p> <code>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</code> </p>'
-    description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'

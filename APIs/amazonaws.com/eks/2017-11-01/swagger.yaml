@@ -265,13 +265,73 @@ paths:
           type: string
           required: true
 definitions:
-  Certificate:
+  CreateClusterResponse:
+    type: object
+    example: {}
+    properties:
+      cluster:
+        $ref: '#/definitions/Cluster'
+        description: The full description of your new cluster.
+  CreateClusterRequest:
+    type: object
+    required:
+      - name
+      - roleArn
+      - resourcesVpcConfig
+    example:
+      version: '1.10'
+      name: prod
+      clientRequestToken: 1d2129a1-3d38-460a-9756-e5b91fddb951
+      resourcesVpcConfig:
+        securityGroupIds:
+          - sg-6979fe18
+        subnetIds:
+          - subnet-6782e71e
+          - subnet-e7e761ac
+      roleArn: 'arn:aws:iam::012345678910:role/eks-service-role-AWSServiceRoleForAmazonEKS-J7ONKE3BQ4PI'
+    properties:
+      name:
+        $ref: '#/definitions/ClusterName'
+        description: The unique name to give to your cluster.
+      version:
+        $ref: '#/definitions/String'
+        description: 'The desired Kubernetes version for your cluster. If you do not specify a value here, the latest version available in Amazon EKS is used.'
+      roleArn:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) of the IAM role that provides permissions for Amazon EKS to make calls to other AWS API operations on your behalf. For more information, see <a href="http://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i> '
+      resourcesVpcConfig:
+        $ref: '#/definitions/VpcConfigRequest'
+        description: 'The VPC subnets and security groups used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>.'
+      clientRequestToken:
+        $ref: '#/definitions/String'
+        description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request.'
+  ResourceInUseException:
     type: object
     properties:
-      data:
+      clusterName:
         $ref: '#/definitions/String'
-        description: The base64 encoded certificate data required to communicate with your cluster. Add this to the <code>certificate-authority-data</code> section of the <code>kubeconfig</code> file for your cluster.
-    description: An object representing the <code>certificate-authority-data</code> for your cluster.
+        description: The Amazon EKS cluster associated with the exception.
+      message:
+        $ref: '#/definitions/String'
+    description: The specified resource is in use.
+  ResourceLimitExceededException:
+    type: object
+    properties:
+      clusterName:
+        $ref: '#/definitions/String'
+        description: The Amazon EKS cluster associated with the exception.
+      message:
+        $ref: '#/definitions/String'
+    description: You have encountered a service limit on the specified resource.
+  InvalidParameterException:
+    type: object
+    properties:
+      clusterName:
+        $ref: '#/definitions/String'
+        description: The Amazon EKS cluster associated with the exception.
+      message:
+        $ref: '#/definitions/String'
+    description: The specified parameter is invalid. Review the available parameters for the API request.
   ClientException:
     type: object
     properties:
@@ -281,6 +341,132 @@ definitions:
       message:
         $ref: '#/definitions/String'
     description: 'These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn''t have permissions to use the action or resource, or specifying an identifier that is not valid.'
+  ServerException:
+    type: object
+    properties:
+      clusterName:
+        $ref: '#/definitions/String'
+        description: The Amazon EKS cluster associated with the exception.
+      message:
+        $ref: '#/definitions/String'
+    description: These errors are usually caused by a server-side issue.
+  ServiceUnavailableException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: 'The service is unavailable, back off and retry the operation.'
+  UnsupportedAvailabilityZoneException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+      clusterName:
+        $ref: '#/definitions/String'
+        description: The Amazon EKS cluster associated with the exception.
+      validZones:
+        $ref: '#/definitions/StringList'
+        description: The supported Availability Zones for your account. Choose subnets in these Availability Zones for your cluster.
+    description: 'At least one of your specified cluster subnets is in an Availability Zone that does not support Amazon EKS. The exception output will specify the supported Availability Zones for your account, from which you can choose subnets for your cluster.'
+  DeleteClusterResponse:
+    type: object
+    example: {}
+    properties:
+      cluster:
+        $ref: '#/definitions/Cluster'
+        description: The full description of the cluster to delete.
+  DeleteClusterRequest:
+    type: object
+    example:
+      name: devel
+    properties: {}
+  ResourceNotFoundException:
+    type: object
+    properties:
+      clusterName:
+        $ref: '#/definitions/String'
+        description: The Amazon EKS cluster associated with the exception.
+      message:
+        $ref: '#/definitions/String'
+    description: The specified resource could not be found. You can view your available clusters with <a>ListClusters</a>. Amazon EKS clusters are region-specific.
+  DescribeClusterResponse:
+    type: object
+    example:
+      cluster:
+        version: '1.10'
+        name: devel
+        arn: 'arn:aws:eks:us-west-2:012345678910:cluster/devel'
+        certificateAuthority:
+          data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRFNE1EVXpNVEl6TVRFek1Wb1hEVEk0TURVeU9ESXpNVEV6TVZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTTZWCjVUaG4rdFcySm9Xa2hQMzRlVUZMNitaRXJOZGIvWVdrTmtDdWNGS2RaaXl2TjlMVmdvUmV2MjlFVFZlN1ZGbSsKUTJ3ZURyRXJiQyt0dVlibkFuN1ZLYmE3ay9hb1BHekZMdmVnb0t6b0M1N2NUdGVwZzRIazRlK2tIWHNaME10MApyb3NzcjhFM1ROeExETnNJTThGL1cwdjhsTGNCbWRPcjQyV2VuTjFHZXJnaDNSZ2wzR3JIazBnNTU0SjFWenJZCm9hTi8zODFUczlOTFF2QTBXb0xIcjBFRlZpTFdSZEoyZ3lXaC9ybDVyOFNDOHZaQXg1YW1BU0hVd01aTFpWRC8KTDBpOW4wRVM0MkpVdzQyQmxHOEdpd3NhTkJWV3lUTHZKclNhRXlDSHFtVVZaUTFDZkFXUjl0L3JleVVOVXM3TApWV1FqM3BFbk9RMitMSWJrc0RzQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFNZ3RsQ1dIQ2U2YzVHMXl2YlFTS0Q4K2hUalkKSm1NSG56L2EvRGt0WG9YUjFVQzIrZUgzT1BZWmVjRVZZZHVaSlZCckNNQ2VWR0ZkeWdBYlNLc1FxWDg0S2RXbAp1MU5QaERDSmEyRHliN2pVMUV6VThTQjFGZUZ5ZFE3a0hNS1E1blpBRVFQOTY4S01hSGUrSm0yQ2x1UFJWbEJVCjF4WlhTS1gzTVZ0K1Q0SU1EV2d6c3JRSjVuQkRjdEtLcUZtM3pKdVVubHo5ZEpVckdscEltMjVJWXJDckxYUFgKWkUwRUtRNWEzMHhkVWNrTHRGQkQrOEtBdFdqSS9yZUZPNzM1YnBMdVoyOTBaNm42QlF3elRrS0p4cnhVc3QvOAppNGsxcnlsaUdWMm5SSjBUYjNORkczNHgrYWdzYTRoSTFPbU90TFM0TmgvRXJxT3lIUXNDc2hEQUtKUT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+        createdAt: 1527807879.988
+        endpoint: 'https://A0DCCD80A04F01705DD065655C30CC3D.yl4.us-west-2.eks.amazonaws.com'
+        resourcesVpcConfig:
+          securityGroupIds:
+            - sg-6979fe18
+          subnetIds:
+            - subnet-6782e71e
+            - subnet-e7e761ac
+          vpcId: vpc-950809ec
+        roleArn: 'arn:aws:iam::012345678910:role/eks-service-role-AWSServiceRoleForAmazonEKS-J7ONKE3BQ4PI'
+        status: ACTIVE
+    properties:
+      cluster:
+        $ref: '#/definitions/Cluster'
+        description: The full description of your specified cluster.
+  DescribeClusterRequest:
+    type: object
+    example:
+      name: devel
+    properties: {}
+  ListClustersResponse:
+    type: object
+    example:
+      clusters:
+        - devel
+        - prod
+    properties:
+      clusters:
+        $ref: '#/definitions/StringList'
+        description: A list of all of the clusters for your account in the specified region.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: 'The <code>nextToken</code> value to include in a future <code>ListClusters</code> request. When the results of a <code>ListClusters</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+  ListClustersRequest:
+    type: object
+    example: {}
+    properties: {}
+  String:
+    type: string
+  Certificate:
+    type: object
+    properties:
+      data:
+        $ref: '#/definitions/String'
+        description: The base64 encoded certificate data required to communicate with your cluster. Add this to the <code>certificate-authority-data</code> section of the <code>kubeconfig</code> file for your cluster.
+    description: An object representing the <code>certificate-authority-data</code> for your cluster.
+  Timestamp:
+    type: string
+    format: date-time
+  VpcConfigResponse:
+    type: object
+    properties:
+      subnetIds:
+        $ref: '#/definitions/StringList'
+        description: The subnets associated with your cluster.
+      securityGroupIds:
+        $ref: '#/definitions/StringList'
+        description: The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your worker nodes and the Kubernetes control plane.
+      vpcId:
+        $ref: '#/definitions/String'
+        description: The VPC associated with your cluster.
+    description: An object representing an Amazon EKS cluster VPC configuration response.
+  ClusterStatus:
+    type: string
+    enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+      - FAILED
   Cluster:
     type: object
     properties:
@@ -320,187 +506,6 @@ definitions:
     pattern: '[A-Za-z0-9\-_]*'
     minLength: 1
     maxLength: 255
-  ClusterStatus:
-    type: string
-    enum:
-      - CREATING
-      - ACTIVE
-      - DELETING
-      - FAILED
-  CreateClusterRequest:
-    type: object
-    required:
-      - name
-      - roleArn
-      - resourcesVpcConfig
-    example:
-      version: '1.10'
-      name: prod
-      clientRequestToken: 1d2129a1-3d38-460a-9756-e5b91fddb951
-      resourcesVpcConfig:
-        securityGroupIds:
-          - sg-6979fe18
-        subnetIds:
-          - subnet-6782e71e
-          - subnet-e7e761ac
-      roleArn: 'arn:aws:iam::012345678910:role/eks-service-role-AWSServiceRoleForAmazonEKS-J7ONKE3BQ4PI'
-    properties:
-      name:
-        $ref: '#/definitions/ClusterName'
-        description: The unique name to give to your cluster.
-      version:
-        $ref: '#/definitions/String'
-        description: 'The desired Kubernetes version for your cluster. If you do not specify a value here, the latest version available in Amazon EKS is used.'
-      roleArn:
-        $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the IAM role that provides permissions for Amazon EKS to make calls to other AWS API operations on your behalf. For more information, see <a href="http://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i> '
-      resourcesVpcConfig:
-        $ref: '#/definitions/VpcConfigRequest'
-        description: 'The VPC subnets and security groups used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>.'
-      clientRequestToken:
-        $ref: '#/definitions/String'
-        description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request.'
-  CreateClusterResponse:
-    type: object
-    example: {}
-    properties:
-      cluster:
-        $ref: '#/definitions/Cluster'
-        description: The full description of your new cluster.
-  DeleteClusterRequest:
-    type: object
-    example:
-      name: devel
-    properties: {}
-  DeleteClusterResponse:
-    type: object
-    example: {}
-    properties:
-      cluster:
-        $ref: '#/definitions/Cluster'
-        description: The full description of the cluster to delete.
-  DescribeClusterRequest:
-    type: object
-    example:
-      name: devel
-    properties: {}
-  DescribeClusterResponse:
-    type: object
-    example:
-      cluster:
-        version: '1.10'
-        name: devel
-        arn: 'arn:aws:eks:us-west-2:012345678910:cluster/devel'
-        certificateAuthority:
-          data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRFNE1EVXpNVEl6TVRFek1Wb1hEVEk0TURVeU9ESXpNVEV6TVZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTTZWCjVUaG4rdFcySm9Xa2hQMzRlVUZMNitaRXJOZGIvWVdrTmtDdWNGS2RaaXl2TjlMVmdvUmV2MjlFVFZlN1ZGbSsKUTJ3ZURyRXJiQyt0dVlibkFuN1ZLYmE3ay9hb1BHekZMdmVnb0t6b0M1N2NUdGVwZzRIazRlK2tIWHNaME10MApyb3NzcjhFM1ROeExETnNJTThGL1cwdjhsTGNCbWRPcjQyV2VuTjFHZXJnaDNSZ2wzR3JIazBnNTU0SjFWenJZCm9hTi8zODFUczlOTFF2QTBXb0xIcjBFRlZpTFdSZEoyZ3lXaC9ybDVyOFNDOHZaQXg1YW1BU0hVd01aTFpWRC8KTDBpOW4wRVM0MkpVdzQyQmxHOEdpd3NhTkJWV3lUTHZKclNhRXlDSHFtVVZaUTFDZkFXUjl0L3JleVVOVXM3TApWV1FqM3BFbk9RMitMSWJrc0RzQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFNZ3RsQ1dIQ2U2YzVHMXl2YlFTS0Q4K2hUalkKSm1NSG56L2EvRGt0WG9YUjFVQzIrZUgzT1BZWmVjRVZZZHVaSlZCckNNQ2VWR0ZkeWdBYlNLc1FxWDg0S2RXbAp1MU5QaERDSmEyRHliN2pVMUV6VThTQjFGZUZ5ZFE3a0hNS1E1blpBRVFQOTY4S01hSGUrSm0yQ2x1UFJWbEJVCjF4WlhTS1gzTVZ0K1Q0SU1EV2d6c3JRSjVuQkRjdEtLcUZtM3pKdVVubHo5ZEpVckdscEltMjVJWXJDckxYUFgKWkUwRUtRNWEzMHhkVWNrTHRGQkQrOEtBdFdqSS9yZUZPNzM1YnBMdVoyOTBaNm42QlF3elRrS0p4cnhVc3QvOAppNGsxcnlsaUdWMm5SSjBUYjNORkczNHgrYWdzYTRoSTFPbU90TFM0TmgvRXJxT3lIUXNDc2hEQUtKUT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
-        createdAt: 1527807879.988
-        endpoint: 'https://A0DCCD80A04F01705DD065655C30CC3D.yl4.us-west-2.eks.amazonaws.com'
-        resourcesVpcConfig:
-          securityGroupIds:
-            - sg-6979fe18
-          subnetIds:
-            - subnet-6782e71e
-            - subnet-e7e761ac
-          vpcId: vpc-950809ec
-        roleArn: 'arn:aws:iam::012345678910:role/eks-service-role-AWSServiceRoleForAmazonEKS-J7ONKE3BQ4PI'
-        status: ACTIVE
-    properties:
-      cluster:
-        $ref: '#/definitions/Cluster'
-        description: The full description of your specified cluster.
-  InvalidParameterException:
-    type: object
-    properties:
-      clusterName:
-        $ref: '#/definitions/String'
-        description: The Amazon EKS cluster associated with the exception.
-      message:
-        $ref: '#/definitions/String'
-    description: The specified parameter is invalid. Review the available parameters for the API request.
-  ListClustersRequest:
-    type: object
-    example: {}
-    properties: {}
-  ListClustersRequestMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  ListClustersResponse:
-    type: object
-    example:
-      clusters:
-        - devel
-        - prod
-    properties:
-      clusters:
-        $ref: '#/definitions/StringList'
-        description: A list of all of the clusters for your account in the specified region.
-      nextToken:
-        $ref: '#/definitions/String'
-        description: 'The <code>nextToken</code> value to include in a future <code>ListClusters</code> request. When the results of a <code>ListClusters</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
-  ResourceInUseException:
-    type: object
-    properties:
-      clusterName:
-        $ref: '#/definitions/String'
-        description: The Amazon EKS cluster associated with the exception.
-      message:
-        $ref: '#/definitions/String'
-    description: The specified resource is in use.
-  ResourceLimitExceededException:
-    type: object
-    properties:
-      clusterName:
-        $ref: '#/definitions/String'
-        description: The Amazon EKS cluster associated with the exception.
-      message:
-        $ref: '#/definitions/String'
-    description: You have encountered a service limit on the specified resource.
-  ResourceNotFoundException:
-    type: object
-    properties:
-      clusterName:
-        $ref: '#/definitions/String'
-        description: The Amazon EKS cluster associated with the exception.
-      message:
-        $ref: '#/definitions/String'
-    description: The specified resource could not be found. You can view your available clusters with <a>ListClusters</a>. Amazon EKS clusters are region-specific.
-  ServerException:
-    type: object
-    properties:
-      clusterName:
-        $ref: '#/definitions/String'
-        description: The Amazon EKS cluster associated with the exception.
-      message:
-        $ref: '#/definitions/String'
-    description: These errors are usually caused by a server-side issue.
-  ServiceUnavailableException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: 'The service is unavailable, back off and retry the operation.'
-  String:
-    type: string
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  Timestamp:
-    type: string
-    format: date-time
-  UnsupportedAvailabilityZoneException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-      clusterName:
-        $ref: '#/definitions/String'
-        description: The Amazon EKS cluster associated with the exception.
-      validZones:
-        $ref: '#/definitions/StringList'
-        description: The supported Availability Zones for your account. Choose subnets in these Availability Zones for your cluster.
-    description: 'At least one of your specified cluster subnets is in an Availability Zone that does not support Amazon EKS. The exception output will specify the supported Availability Zones for your account, from which you can choose subnets for your cluster.'
   VpcConfigRequest:
     type: object
     required:
@@ -513,16 +518,11 @@ definitions:
         $ref: '#/definitions/StringList'
         description: Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
     description: An object representing an Amazon EKS cluster VPC configuration request.
-  VpcConfigResponse:
-    type: object
-    properties:
-      subnetIds:
-        $ref: '#/definitions/StringList'
-        description: The subnets associated with your cluster.
-      securityGroupIds:
-        $ref: '#/definitions/StringList'
-        description: The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your worker nodes and the Kubernetes control plane.
-      vpcId:
-        $ref: '#/definitions/String'
-        description: The VPC associated with your cluster.
-    description: An object representing an Amazon EKS cluster VPC configuration response.
+  ListClustersRequestMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'

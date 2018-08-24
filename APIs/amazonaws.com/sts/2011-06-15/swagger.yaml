@@ -357,6 +357,29 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  AssumeRoleResponse:
+    type: object
+    example:
+      AssumedRoleUser:
+        Arn: 'arn:aws:sts::123456789012:assumed-role/demo/Bob'
+        AssumedRoleId: 'ARO123EXAMPLE123:Bob'
+      Credentials:
+        AccessKeyId: AKIAIOSFODNN7EXAMPLE
+        Expiration: '2011-07-15T23:28:33.359Z'
+        SecretAccessKey: wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY
+        SessionToken: AQoDYXdzEPT//////////wEXAMPLEtc764bNrC9SAPBSM22wDOk4x4HIZ8j4FZTwdQWLWsKWHGBuFqwAeMicRXmxfpSPfIeoIYRqTflfKD8YUuwthAx7mSEI/qkPpKPi/kMcGdQrmGdeehM4IC1NtBmUpp2wUE8phUZampKsburEDy0KPkyQDYwT7WZ0wq5VSXDvp75YU9HFvlRd8Tx6q6fE8YQcHNVXAkiY9q6d+xo0rKwT38xVqr7ZD0u0iPPkUL64lIZbqBAz+scqKmlzm8FDrypNC9Yjc8fPOLn9FX9KSYvKTr4rvx3iSIlTJabIQwj2ICCR/oLxBA==
+      PackedPolicySize: 6
+    properties:
+      Credentials:
+        $ref: '#/definitions/Credentials'
+        description: '<p>The temporary security credentials, which include an access key ID, a secret access key, and a security (or session) token.</p> <p> <b>Note:</b> The size of the security token that STS APIs return is not fixed. We strongly recommend that you make no assumptions about the maximum size. As of this writing, the typical size is less than 4096 bytes, but that can vary. Also, future updates to AWS might require larger sizes.</p>'
+      AssumedRoleUser:
+        $ref: '#/definitions/AssumedRoleUser'
+        description: 'The Amazon Resource Name (ARN) and the assumed role ID, which are identifiers that you can use to refer to the resulting temporary security credentials. For example, you can reference these credentials as a principal in a resource-based policy by using the ARN or assumed role ID. The ARN and ID include the <code>RoleSessionName</code> that you specified when you called <code>AssumeRole</code>. '
+      PackedPolicySize:
+        $ref: '#/definitions/nonNegativeIntegerType'
+        description: 'A percentage value that indicates the size of the policy in packed form. The service rejects any policy with a packed size greater than 100 percent, which means the policy exceeded the allowed space.'
+    description: 'Contains the response to a successful <a>AssumeRole</a> request, including temporary AWS credentials that can be used to make AWS requests. '
   AssumeRoleRequest:
     type: object
     required:
@@ -390,51 +413,24 @@ definitions:
       TokenCode:
         $ref: '#/definitions/tokenCodeType'
         description: '<p>The value provided by the MFA device, if the trust policy of the role being assumed requires MFA (that is, if the policy includes a condition that tests for MFA). If the role being assumed requires MFA and if the <code>TokenCode</code> value is missing or expired, the <code>AssumeRole</code> call returns an "access denied" error.</p> <p>The format for this parameter, as described by its regex pattern, is a sequence of six numeric digits.</p>'
-  AssumeRoleResponse:
+  MalformedPolicyDocumentException:
     type: object
-    example:
-      AssumedRoleUser:
-        Arn: 'arn:aws:sts::123456789012:assumed-role/demo/Bob'
-        AssumedRoleId: 'ARO123EXAMPLE123:Bob'
-      Credentials:
-        AccessKeyId: AKIAIOSFODNN7EXAMPLE
-        Expiration: '2011-07-15T23:28:33.359Z'
-        SecretAccessKey: wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY
-        SessionToken: AQoDYXdzEPT//////////wEXAMPLEtc764bNrC9SAPBSM22wDOk4x4HIZ8j4FZTwdQWLWsKWHGBuFqwAeMicRXmxfpSPfIeoIYRqTflfKD8YUuwthAx7mSEI/qkPpKPi/kMcGdQrmGdeehM4IC1NtBmUpp2wUE8phUZampKsburEDy0KPkyQDYwT7WZ0wq5VSXDvp75YU9HFvlRd8Tx6q6fE8YQcHNVXAkiY9q6d+xo0rKwT38xVqr7ZD0u0iPPkUL64lIZbqBAz+scqKmlzm8FDrypNC9Yjc8fPOLn9FX9KSYvKTr4rvx3iSIlTJabIQwj2ICCR/oLxBA==
-      PackedPolicySize: 6
     properties:
-      Credentials:
-        $ref: '#/definitions/Credentials'
-        description: '<p>The temporary security credentials, which include an access key ID, a secret access key, and a security (or session) token.</p> <p> <b>Note:</b> The size of the security token that STS APIs return is not fixed. We strongly recommend that you make no assumptions about the maximum size. As of this writing, the typical size is less than 4096 bytes, but that can vary. Also, future updates to AWS might require larger sizes.</p>'
-      AssumedRoleUser:
-        $ref: '#/definitions/AssumedRoleUser'
-        description: 'The Amazon Resource Name (ARN) and the assumed role ID, which are identifiers that you can use to refer to the resulting temporary security credentials. For example, you can reference these credentials as a principal in a resource-based policy by using the ARN or assumed role ID. The ARN and ID include the <code>RoleSessionName</code> that you specified when you called <code>AssumeRole</code>. '
-      PackedPolicySize:
-        $ref: '#/definitions/nonNegativeIntegerType'
-        description: 'A percentage value that indicates the size of the policy in packed form. The service rejects any policy with a packed size greater than 100 percent, which means the policy exceeded the allowed space.'
-    description: 'Contains the response to a successful <a>AssumeRole</a> request, including temporary AWS credentials that can be used to make AWS requests. '
-  AssumeRoleWithSAMLRequest:
+      message:
+        $ref: '#/definitions/malformedPolicyDocumentMessage'
+    description: The request was rejected because the policy document was malformed. The error message describes the specific error.
+  PackedPolicyTooLargeException:
     type: object
-    required:
-      - RoleArn
-      - PrincipalArn
-      - SAMLAssertion
     properties:
-      RoleArn:
-        $ref: '#/definitions/arnType'
-        description: The Amazon Resource Name (ARN) of the role that the caller is assuming.
-      PrincipalArn:
-        $ref: '#/definitions/arnType'
-        description: The Amazon Resource Name (ARN) of the SAML provider in IAM that describes the IdP.
-      SAMLAssertion:
-        $ref: '#/definitions/SAMLAssertionType'
-        description: '<p>The base-64 encoded SAML authentication response provided by the IdP.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/create-role-saml-IdP-tasks.html">Configuring a Relying Party and Adding Claims</a> in the <i>Using IAM</i> guide. </p>'
-      Policy:
-        $ref: '#/definitions/sessionPolicyDocumentType'
-        description: '<p>An IAM policy in JSON format.</p> <p>The policy parameter is optional. If you pass a policy, the temporary security credentials that are returned by the operation have the permissions that are allowed by both the access policy of the role that is being assumed, <i> <b>and</b> </i> the policy that you pass. This gives you a way to further restrict the permissions for the resulting temporary security credentials. You cannot use the passed policy to grant permissions that are in excess of those allowed by the access policy of the role that is being assumed. For more information, <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html">Permissions for AssumeRole, AssumeRoleWithSAML, and AssumeRoleWithWebIdentity</a> in the <i>IAM User Guide</i>. </p> <p>The format for this parameter, as described by its regex pattern, is a string of characters up to 2048 characters in length. The characters can be any ASCII character from the space character to the end of the valid character list (\u0020-\u00FF). It can also include the tab (\u0009), linefeed (\u000A), and carriage return (\u000D) characters.</p> <note> <p>The policy plain text must be 2048 bytes or shorter. However, an internal conversion compresses it into a packed binary format with a separate limit. The PackedPolicySize response element indicates by percentage how close to the upper size limit the policy is, with 100% equaling the maximum allowed size.</p> </note>'
-      DurationSeconds:
-        $ref: '#/definitions/roleDurationSecondsType'
-        description: '<p>The duration, in seconds, of the role session. Your role session lasts for the duration that you specify for the <code>DurationSeconds</code> parameter, or until the time specified in the SAML authentication response''s <code>SessionNotOnOrAfter</code> value, whichever is shorter. You can provide a <code>DurationSeconds</code> value from 900 seconds (15 minutes) up to the maximum session duration setting for the role. This setting can have a value from 1 hour to 12 hours. If you specify a value higher than this setting, the operation fails. For example, if you specify a session duration of 12 hours, but your administrator set the maximum session duration to 6 hours, your operation fails. To learn how to view the maximum value for your role, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session">View the Maximum Session Duration Setting for a Role</a> in the <i>IAM User Guide</i>.</p> <p>By default, the value is set to 3600 seconds. </p> <note> <p>The <code>DurationSeconds</code> parameter is separate from the duration of a console session that you might request using the returned credentials. The request to the federation endpoint for a console sign-in token takes a <code>SessionDuration</code> parameter that specifies the maximum length of the console session. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html">Creating a URL that Enables Federated Users to Access the AWS Management Console</a> in the <i>IAM User Guide</i>.</p> </note>'
+      message:
+        $ref: '#/definitions/packedPolicyTooLargeMessage'
+    description: 'The request was rejected because the policy document was too large. The error message describes how big the policy document is, in packed form, as a percentage of what the API allows.'
+  RegionDisabledException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/regionDisabledMessage'
+    description: 'STS is not activated in the requested region for the account that is being asked to generate credentials. The account administrator must use the IAM console to activate STS in that region. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>IAM User Guide</i>.'
   AssumeRoleWithSAMLResponse:
     type: object
     properties:
@@ -463,37 +459,46 @@ definitions:
         $ref: '#/definitions/NameQualifier'
         description: '<p>A hash value based on the concatenation of the <code>Issuer</code> response value, the AWS account ID, and the friendly name (the last part of the ARN) of the SAML provider in IAM. The combination of <code>NameQualifier</code> and <code>Subject</code> can be used to uniquely identify a federated user. </p> <p>The following pseudocode shows how the hash value is calculated:</p> <p> <code>BASE64 ( SHA1 ( "https://example.com/saml" + "123456789012" + "/MySAMLIdP" ) )</code> </p>'
     description: 'Contains the response to a successful <a>AssumeRoleWithSAML</a> request, including temporary AWS credentials that can be used to make AWS requests. '
-  AssumeRoleWithWebIdentityRequest:
+  AssumeRoleWithSAMLRequest:
     type: object
     required:
       - RoleArn
-      - RoleSessionName
-      - WebIdentityToken
-    example:
-      DurationSeconds: 3600
-      ProviderId: www.amazon.com
-      RoleArn: 'arn:aws:iam::123456789012:role/FederatedWebIdentityRole'
-      RoleSessionName: app1
-      WebIdentityToken: Atza%7CIQEBLjAsAhRFiXuWpUXuRvQ9PZL3GMFcYevydwIUFAHZwXZXXXXXXXXJnrulxKDHwy87oGKPznh0D6bEQZTSCzyoCtL_8S07pLpr0zMbn6w1lfVZKNTBdDansFBmtGnIsIapjI6xKR02Yc_2bQ8LZbUXSGm6Ry6_BG7PrtLZtj_dfCTj92xNGed-CrKqjG7nPBjNIL016GGvuS5gSvPRUxWES3VYfm1wl7WTI7jn-Pcb6M-buCgHhFOzTQxod27L9CqnOLio7N3gZAGpsp6n1-AJBOCJckcyXe2c6uD0srOJeZlKUm2eTDVMf8IehDVI0r1QOnTV6KzzAI3OY87Vd_cVMQ
+      - PrincipalArn
+      - SAMLAssertion
     properties:
       RoleArn:
         $ref: '#/definitions/arnType'
         description: The Amazon Resource Name (ARN) of the role that the caller is assuming.
-      RoleSessionName:
-        $ref: '#/definitions/roleSessionNameType'
-        description: '<p>An identifier for the assumed role session. Typically, you pass the name or identifier that is associated with the user who is using your application. That way, the temporary security credentials that your application will use are associated with that user. This session name is included as part of the ARN and assumed role ID in the <code>AssumedRoleUser</code> response element.</p> <p>The regex used to validate this parameter is a string of characters consisting of upper- and lower-case alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@-</p>'
-      WebIdentityToken:
-        $ref: '#/definitions/clientTokenType'
-        description: 'The OAuth 2.0 access token or OpenID Connect ID token that is provided by the identity provider. Your application must get this token by authenticating the user who is using your application with a web identity provider before the application makes an <code>AssumeRoleWithWebIdentity</code> call. '
-      ProviderId:
-        $ref: '#/definitions/urlType'
-        description: <p>The fully qualified host component of the domain name of the identity provider.</p> <p>Specify this value only for OAuth 2.0 access tokens. Currently <code>www.amazon.com</code> and <code>graph.facebook.com</code> are the only supported identity providers for OAuth 2.0 access tokens. Do not include URL schemes and port numbers.</p> <p>Do not specify this value for OpenID Connect ID tokens.</p>
+      PrincipalArn:
+        $ref: '#/definitions/arnType'
+        description: The Amazon Resource Name (ARN) of the SAML provider in IAM that describes the IdP.
+      SAMLAssertion:
+        $ref: '#/definitions/SAMLAssertionType'
+        description: '<p>The base-64 encoded SAML authentication response provided by the IdP.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/create-role-saml-IdP-tasks.html">Configuring a Relying Party and Adding Claims</a> in the <i>Using IAM</i> guide. </p>'
       Policy:
         $ref: '#/definitions/sessionPolicyDocumentType'
-        description: '<p>An IAM policy in JSON format.</p> <p>The policy parameter is optional. If you pass a policy, the temporary security credentials that are returned by the operation have the permissions that are allowed by both the access policy of the role that is being assumed, <i> <b>and</b> </i> the policy that you pass. This gives you a way to further restrict the permissions for the resulting temporary security credentials. You cannot use the passed policy to grant permissions that are in excess of those allowed by the access policy of the role that is being assumed. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html">Permissions for AssumeRoleWithWebIdentity</a> in the <i>IAM User Guide</i>. </p> <p>The format for this parameter, as described by its regex pattern, is a string of characters up to 2048 characters in length. The characters can be any ASCII character from the space character to the end of the valid character list (\u0020-\u00FF). It can also include the tab (\u0009), linefeed (\u000A), and carriage return (\u000D) characters.</p> <note> <p>The policy plain text must be 2048 bytes or shorter. However, an internal conversion compresses it into a packed binary format with a separate limit. The PackedPolicySize response element indicates by percentage how close to the upper size limit the policy is, with 100% equaling the maximum allowed size.</p> </note>'
+        description: '<p>An IAM policy in JSON format.</p> <p>The policy parameter is optional. If you pass a policy, the temporary security credentials that are returned by the operation have the permissions that are allowed by both the access policy of the role that is being assumed, <i> <b>and</b> </i> the policy that you pass. This gives you a way to further restrict the permissions for the resulting temporary security credentials. You cannot use the passed policy to grant permissions that are in excess of those allowed by the access policy of the role that is being assumed. For more information, <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html">Permissions for AssumeRole, AssumeRoleWithSAML, and AssumeRoleWithWebIdentity</a> in the <i>IAM User Guide</i>. </p> <p>The format for this parameter, as described by its regex pattern, is a string of characters up to 2048 characters in length. The characters can be any ASCII character from the space character to the end of the valid character list (\u0020-\u00FF). It can also include the tab (\u0009), linefeed (\u000A), and carriage return (\u000D) characters.</p> <note> <p>The policy plain text must be 2048 bytes or shorter. However, an internal conversion compresses it into a packed binary format with a separate limit. The PackedPolicySize response element indicates by percentage how close to the upper size limit the policy is, with 100% equaling the maximum allowed size.</p> </note>'
       DurationSeconds:
         $ref: '#/definitions/roleDurationSecondsType'
-        description: '<p>The duration, in seconds, of the role session. The value can range from 900 seconds (15 minutes) up to the maximum session duration setting for the role. This setting can have a value from 1 hour to 12 hours. If you specify a value higher than this setting, the operation fails. For example, if you specify a session duration of 12 hours, but your administrator set the maximum session duration to 6 hours, your operation fails. To learn how to view the maximum value for your role, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session">View the Maximum Session Duration Setting for a Role</a> in the <i>IAM User Guide</i>.</p> <p>By default, the value is set to 3600 seconds. </p> <note> <p>The <code>DurationSeconds</code> parameter is separate from the duration of a console session that you might request using the returned credentials. The request to the federation endpoint for a console sign-in token takes a <code>SessionDuration</code> parameter that specifies the maximum length of the console session. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html">Creating a URL that Enables Federated Users to Access the AWS Management Console</a> in the <i>IAM User Guide</i>.</p> </note>'
+        description: '<p>The duration, in seconds, of the role session. Your role session lasts for the duration that you specify for the <code>DurationSeconds</code> parameter, or until the time specified in the SAML authentication response''s <code>SessionNotOnOrAfter</code> value, whichever is shorter. You can provide a <code>DurationSeconds</code> value from 900 seconds (15 minutes) up to the maximum session duration setting for the role. This setting can have a value from 1 hour to 12 hours. If you specify a value higher than this setting, the operation fails. For example, if you specify a session duration of 12 hours, but your administrator set the maximum session duration to 6 hours, your operation fails. To learn how to view the maximum value for your role, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session">View the Maximum Session Duration Setting for a Role</a> in the <i>IAM User Guide</i>.</p> <p>By default, the value is set to 3600 seconds. </p> <note> <p>The <code>DurationSeconds</code> parameter is separate from the duration of a console session that you might request using the returned credentials. The request to the federation endpoint for a console sign-in token takes a <code>SessionDuration</code> parameter that specifies the maximum length of the console session. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html">Creating a URL that Enables Federated Users to Access the AWS Management Console</a> in the <i>IAM User Guide</i>.</p> </note>'
+  IDPRejectedClaimException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/idpRejectedClaimMessage'
+    description: '<p>The identity provider (IdP) reported that authentication failed. This might be because the claim is invalid.</p> <p>If this error is returned for the <code>AssumeRoleWithWebIdentity</code> operation, it can also mean that the claim has expired or has been explicitly revoked. </p>'
+  InvalidIdentityTokenException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/invalidIdentityTokenMessage'
+    description: The web identity token that was passed could not be validated by AWS. Get a new identity token from the identity provider and then retry the request.
+  ExpiredTokenException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/expiredIdentityTokenMessage'
+    description: The web identity token that was passed is expired or is not valid. Get a new identity token from the identity provider and then retry the request.
   AssumeRoleWithWebIdentityResponse:
     type: object
     example:
@@ -529,42 +534,52 @@ definitions:
         $ref: '#/definitions/Audience'
         description: The intended audience (also known as client ID) of the web identity token. This is traditionally the client identifier issued to the application that requested the web identity token.
     description: 'Contains the response to a successful <a>AssumeRoleWithWebIdentity</a> request, including temporary AWS credentials that can be used to make AWS requests. '
-  AssumedRoleUser:
+  AssumeRoleWithWebIdentityRequest:
     type: object
     required:
-      - AssumedRoleId
-      - Arn
+      - RoleArn
+      - RoleSessionName
+      - WebIdentityToken
+    example:
+      DurationSeconds: 3600
+      ProviderId: www.amazon.com
+      RoleArn: 'arn:aws:iam::123456789012:role/FederatedWebIdentityRole'
+      RoleSessionName: app1
+      WebIdentityToken: Atza%7CIQEBLjAsAhRFiXuWpUXuRvQ9PZL3GMFcYevydwIUFAHZwXZXXXXXXXXJnrulxKDHwy87oGKPznh0D6bEQZTSCzyoCtL_8S07pLpr0zMbn6w1lfVZKNTBdDansFBmtGnIsIapjI6xKR02Yc_2bQ8LZbUXSGm6Ry6_BG7PrtLZtj_dfCTj92xNGed-CrKqjG7nPBjNIL016GGvuS5gSvPRUxWES3VYfm1wl7WTI7jn-Pcb6M-buCgHhFOzTQxod27L9CqnOLio7N3gZAGpsp6n1-AJBOCJckcyXe2c6uD0srOJeZlKUm2eTDVMf8IehDVI0r1QOnTV6KzzAI3OY87Vd_cVMQ
     properties:
-      AssumedRoleId:
-        $ref: '#/definitions/assumedRoleIdType'
-        description: A unique identifier that contains the role ID and the role session name of the role that is being assumed. The role ID is generated by AWS when the role is created.
-      Arn:
+      RoleArn:
         $ref: '#/definitions/arnType'
-        description: 'The ARN of the temporary security credentials that are returned from the <a>AssumeRole</a> action. For more information about ARNs and how to use them in policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in <i>Using IAM</i>. '
-    description: The identifiers for the temporary security credentials that the operation returns.
-  Audience:
-    type: string
-  Credentials:
+        description: The Amazon Resource Name (ARN) of the role that the caller is assuming.
+      RoleSessionName:
+        $ref: '#/definitions/roleSessionNameType'
+        description: '<p>An identifier for the assumed role session. Typically, you pass the name or identifier that is associated with the user who is using your application. That way, the temporary security credentials that your application will use are associated with that user. This session name is included as part of the ARN and assumed role ID in the <code>AssumedRoleUser</code> response element.</p> <p>The regex used to validate this parameter is a string of characters consisting of upper- and lower-case alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@-</p>'
+      WebIdentityToken:
+        $ref: '#/definitions/clientTokenType'
+        description: 'The OAuth 2.0 access token or OpenID Connect ID token that is provided by the identity provider. Your application must get this token by authenticating the user who is using your application with a web identity provider before the application makes an <code>AssumeRoleWithWebIdentity</code> call. '
+      ProviderId:
+        $ref: '#/definitions/urlType'
+        description: <p>The fully qualified host component of the domain name of the identity provider.</p> <p>Specify this value only for OAuth 2.0 access tokens. Currently <code>www.amazon.com</code> and <code>graph.facebook.com</code> are the only supported identity providers for OAuth 2.0 access tokens. Do not include URL schemes and port numbers.</p> <p>Do not specify this value for OpenID Connect ID tokens.</p>
+      Policy:
+        $ref: '#/definitions/sessionPolicyDocumentType'
+        description: '<p>An IAM policy in JSON format.</p> <p>The policy parameter is optional. If you pass a policy, the temporary security credentials that are returned by the operation have the permissions that are allowed by both the access policy of the role that is being assumed, <i> <b>and</b> </i> the policy that you pass. This gives you a way to further restrict the permissions for the resulting temporary security credentials. You cannot use the passed policy to grant permissions that are in excess of those allowed by the access policy of the role that is being assumed. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html">Permissions for AssumeRoleWithWebIdentity</a> in the <i>IAM User Guide</i>. </p> <p>The format for this parameter, as described by its regex pattern, is a string of characters up to 2048 characters in length. The characters can be any ASCII character from the space character to the end of the valid character list (\u0020-\u00FF). It can also include the tab (\u0009), linefeed (\u000A), and carriage return (\u000D) characters.</p> <note> <p>The policy plain text must be 2048 bytes or shorter. However, an internal conversion compresses it into a packed binary format with a separate limit. The PackedPolicySize response element indicates by percentage how close to the upper size limit the policy is, with 100% equaling the maximum allowed size.</p> </note>'
+      DurationSeconds:
+        $ref: '#/definitions/roleDurationSecondsType'
+        description: '<p>The duration, in seconds, of the role session. The value can range from 900 seconds (15 minutes) up to the maximum session duration setting for the role. This setting can have a value from 1 hour to 12 hours. If you specify a value higher than this setting, the operation fails. For example, if you specify a session duration of 12 hours, but your administrator set the maximum session duration to 6 hours, your operation fails. To learn how to view the maximum value for your role, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session">View the Maximum Session Duration Setting for a Role</a> in the <i>IAM User Guide</i>.</p> <p>By default, the value is set to 3600 seconds. </p> <note> <p>The <code>DurationSeconds</code> parameter is separate from the duration of a console session that you might request using the returned credentials. The request to the federation endpoint for a console sign-in token takes a <code>SessionDuration</code> parameter that specifies the maximum length of the console session. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html">Creating a URL that Enables Federated Users to Access the AWS Management Console</a> in the <i>IAM User Guide</i>.</p> </note>'
+  IDPCommunicationErrorException:
     type: object
-    required:
-      - AccessKeyId
-      - SecretAccessKey
-      - SessionToken
-      - Expiration
     properties:
-      AccessKeyId:
-        $ref: '#/definitions/accessKeyIdType'
-        description: The access key ID that identifies the temporary security credentials.
-      SecretAccessKey:
-        $ref: '#/definitions/accessKeySecretType'
-        description: The secret access key that can be used to sign requests.
-      SessionToken:
-        $ref: '#/definitions/tokenType'
-        description: The token that users must pass to the service API to use the temporary credentials.
-      Expiration:
-        $ref: '#/definitions/dateType'
-        description: The date on which the current credentials expire.
-    description: AWS credentials for API authentication.
+      message:
+        $ref: '#/definitions/idpCommunicationErrorMessage'
+    description: 'The request could not be fulfilled because the non-AWS identity provider (IDP) that was asked to verify the incoming identity token could not be reached. This is often a transient error caused by network conditions. Retry the request a limited number of times so that you don''t exceed the request rate. If the error persists, the non-AWS identity provider might be down or not responding.'
+  DecodeAuthorizationMessageResponse:
+    type: object
+    example:
+      DecodedMessage: '{"allowed": "false","explicitDeny": "false","matchedStatements": "","failures": "","context": {"principal": {"id": "AIDACKCEVSQ6C2EXAMPLE","name": "Bob","arn": "arn:aws:iam::123456789012:user/Bob"},"action": "ec2:StopInstances","resource": "arn:aws:ec2:us-east-1:123456789012:instance/i-dd01c9bd","conditions": [{"item": {"key": "ec2:Tenancy","values": ["default"]},{"item": {"key": "ec2:ResourceTag/elasticbeanstalk:environment-name","values": ["Default-Environment"]}},(Additional items ...)]}}'
+    properties:
+      DecodedMessage:
+        $ref: '#/definitions/decodedMessageType'
+        description: An XML document that contains the decoded message.
+    description: A document that contains additional information about the authorization status of a request from an encoded message that is returned in response to an AWS request.
   DecodeAuthorizationMessageRequest:
     type: object
     required:
@@ -575,38 +590,12 @@ definitions:
       EncodedMessage:
         $ref: '#/definitions/encodedMessageType'
         description: The encoded message that was returned with the response.
-  DecodeAuthorizationMessageResponse:
-    type: object
-    example:
-      DecodedMessage: '{"allowed": "false","explicitDeny": "false","matchedStatements": "","failures": "","context": {"principal": {"id": "AIDACKCEVSQ6C2EXAMPLE","name": "Bob","arn": "arn:aws:iam::123456789012:user/Bob"},"action": "ec2:StopInstances","resource": "arn:aws:ec2:us-east-1:123456789012:instance/i-dd01c9bd","conditions": [{"item": {"key": "ec2:Tenancy","values": ["default"]},{"item": {"key": "ec2:ResourceTag/elasticbeanstalk:environment-name","values": ["Default-Environment"]}},(Additional items ...)]}}'
-    properties:
-      DecodedMessage:
-        $ref: '#/definitions/decodedMessageType'
-        description: An XML document that contains the decoded message.
-    description: A document that contains additional information about the authorization status of a request from an encoded message that is returned in response to an AWS request.
-  ExpiredTokenException:
+  InvalidAuthorizationMessageException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/expiredIdentityTokenMessage'
-    description: The web identity token that was passed is expired or is not valid. Get a new identity token from the identity provider and then retry the request.
-  FederatedUser:
-    type: object
-    required:
-      - FederatedUserId
-      - Arn
-    properties:
-      FederatedUserId:
-        $ref: '#/definitions/federatedIdType'
-        description: 'The string that identifies the federated user associated with the credentials, similar to the unique ID of an IAM user.'
-      Arn:
-        $ref: '#/definitions/arnType'
-        description: 'The ARN that specifies the federated user that is associated with the credentials. For more information about ARNs and how to use them in policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in <i>Using IAM</i>. '
-    description: Identifiers for the federated user that is associated with the credentials.
-  GetCallerIdentityRequest:
-    type: object
-    example: {}
-    properties: {}
+        $ref: '#/definitions/invalidAuthorizationMessage'
+    description: 'The error returned if the message passed to <code>DecodeAuthorizationMessage</code> was invalid. This can happen if the token contains invalid characters, such as linebreaks. '
   GetCallerIdentityResponse:
     type: object
     example:
@@ -624,24 +613,10 @@ definitions:
         $ref: '#/definitions/arnType'
         description: The AWS ARN associated with the calling entity.
     description: 'Contains the response to a successful <a>GetCallerIdentity</a> request, including information about the entity making the request.'
-  GetFederationTokenRequest:
+  GetCallerIdentityRequest:
     type: object
-    required:
-      - Name
-    example:
-      DurationSeconds: 3600
-      Name: Bob
-      Policy: '{"Version":"2012-10-17","Statement":[{"Sid":"Stmt1","Effect":"Allow","Action":"s3:*","Resource":"*"}]}'
-    properties:
-      Name:
-        $ref: '#/definitions/userNameType'
-        description: '<p>The name of the federated user. The name is used as an identifier for the temporary security credentials (such as <code>Bob</code>). For example, you can reference the federated user name in a resource-based policy, such as in an Amazon S3 bucket policy.</p> <p>The regex used to validate this parameter is a string of characters consisting of upper- and lower-case alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@-</p>'
-      Policy:
-        $ref: '#/definitions/sessionPolicyDocumentType'
-        description: '<p>An IAM policy in JSON format that is passed with the <code>GetFederationToken</code> call and evaluated along with the policy or policies that are attached to the IAM user whose credentials are used to call <code>GetFederationToken</code>. The passed policy is used to scope down the permissions that are available to the IAM user, by allowing only a subset of the permissions that are granted to the IAM user. The passed policy cannot grant more permissions than those granted to the IAM user. The final permissions for the federated user are the most restrictive set based on the intersection of the passed policy and the IAM user policy.</p> <p>If you do not pass a policy, the resulting temporary security credentials have no effective permissions. The only exception is when the temporary security credentials are used to access a resource that has a resource-based policy that specifically allows the federated user to access the resource.</p> <p>The format for this parameter, as described by its regex pattern, is a string of characters up to 2048 characters in length. The characters can be any ASCII character from the space character to the end of the valid character list (\u0020-\u00FF). It can also include the tab (\u0009), linefeed (\u000A), and carriage return (\u000D) characters.</p> <note> <p>The policy plain text must be 2048 bytes or shorter. However, an internal conversion compresses it into a packed binary format with a separate limit. The PackedPolicySize response element indicates by percentage how close to the upper size limit the policy is, with 100% equaling the maximum allowed size.</p> </note> <p>For more information about how permissions work, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_getfederationtoken.html">Permissions for GetFederationToken</a>.</p>'
-      DurationSeconds:
-        $ref: '#/definitions/durationSecondsType'
-        description: 'The duration, in seconds, that the session should last. Acceptable durations for federation sessions range from 900 seconds (15 minutes) to 129600 seconds (36 hours), with 43200 seconds (12 hours) as the default. Sessions obtained using AWS account (root) credentials are restricted to a maximum of 3600 seconds (one hour). If the specified duration is longer than one hour, the session obtained by using AWS account (root) credentials defaults to one hour.'
+    example: {}
+    properties: {}
   GetFederationTokenResponse:
     type: object
     example:
@@ -665,6 +640,37 @@ definitions:
         $ref: '#/definitions/nonNegativeIntegerType'
         description: A percentage value indicating the size of the policy in packed form. The service rejects policies for which the packed size is greater than 100 percent of the allowed value.
     description: 'Contains the response to a successful <a>GetFederationToken</a> request, including temporary AWS credentials that can be used to make AWS requests. '
+  GetFederationTokenRequest:
+    type: object
+    required:
+      - Name
+    example:
+      DurationSeconds: 3600
+      Name: Bob
+      Policy: '{"Version":"2012-10-17","Statement":[{"Sid":"Stmt1","Effect":"Allow","Action":"s3:*","Resource":"*"}]}'
+    properties:
+      Name:
+        $ref: '#/definitions/userNameType'
+        description: '<p>The name of the federated user. The name is used as an identifier for the temporary security credentials (such as <code>Bob</code>). For example, you can reference the federated user name in a resource-based policy, such as in an Amazon S3 bucket policy.</p> <p>The regex used to validate this parameter is a string of characters consisting of upper- and lower-case alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@-</p>'
+      Policy:
+        $ref: '#/definitions/sessionPolicyDocumentType'
+        description: '<p>An IAM policy in JSON format that is passed with the <code>GetFederationToken</code> call and evaluated along with the policy or policies that are attached to the IAM user whose credentials are used to call <code>GetFederationToken</code>. The passed policy is used to scope down the permissions that are available to the IAM user, by allowing only a subset of the permissions that are granted to the IAM user. The passed policy cannot grant more permissions than those granted to the IAM user. The final permissions for the federated user are the most restrictive set based on the intersection of the passed policy and the IAM user policy.</p> <p>If you do not pass a policy, the resulting temporary security credentials have no effective permissions. The only exception is when the temporary security credentials are used to access a resource that has a resource-based policy that specifically allows the federated user to access the resource.</p> <p>The format for this parameter, as described by its regex pattern, is a string of characters up to 2048 characters in length. The characters can be any ASCII character from the space character to the end of the valid character list (\u0020-\u00FF). It can also include the tab (\u0009), linefeed (\u000A), and carriage return (\u000D) characters.</p> <note> <p>The policy plain text must be 2048 bytes or shorter. However, an internal conversion compresses it into a packed binary format with a separate limit. The PackedPolicySize response element indicates by percentage how close to the upper size limit the policy is, with 100% equaling the maximum allowed size.</p> </note> <p>For more information about how permissions work, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_getfederationtoken.html">Permissions for GetFederationToken</a>.</p>'
+      DurationSeconds:
+        $ref: '#/definitions/durationSecondsType'
+        description: 'The duration, in seconds, that the session should last. Acceptable durations for federation sessions range from 900 seconds (15 minutes) to 129600 seconds (36 hours), with 43200 seconds (12 hours) as the default. Sessions obtained using AWS account (root) credentials are restricted to a maximum of 3600 seconds (one hour). If the specified duration is longer than one hour, the session obtained by using AWS account (root) credentials defaults to one hour.'
+  GetSessionTokenResponse:
+    type: object
+    example:
+      Credentials:
+        AccessKeyId: AKIAIOSFODNN7EXAMPLE
+        Expiration: '2011-07-11T19:55:29.611Z'
+        SecretAccessKey: wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY
+        SessionToken: AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKwRcOIfrRh3c/LTo6UDdyJwOOvEVPvLXCrrrUtdnniCEXAMPLE/IvU1dYUg2RVAJBanLiHb4IgRmpRV3zrkuWJOgQs8IZZaIv2BXIa2R4OlgkBN9bkUDNCJiBeb/AXlzBBko7b15fjrBs2+cTQtpZ3CYWFXG8C5zqx37wnOE49mRl/+OtkIKGO7fAE
+    properties:
+      Credentials:
+        $ref: '#/definitions/Credentials'
+        description: '<p>The temporary security credentials, which include an access key ID, a secret access key, and a security (or session) token.</p> <p> <b>Note:</b> The size of the security token that STS APIs return is not fixed. We strongly recommend that you make no assumptions about the maximum size. As of this writing, the typical size is less than 4096 bytes, but that can vary. Also, future updates to AWS might require larger sizes.</p>'
+    description: 'Contains the response to a successful <a>GetSessionToken</a> request, including temporary AWS credentials that can be used to make AWS requests. '
   GetSessionTokenRequest:
     type: object
     example:
@@ -681,65 +687,77 @@ definitions:
       TokenCode:
         $ref: '#/definitions/tokenCodeType'
         description: '<p>The value provided by the MFA device, if MFA is required. If any policy requires the IAM user to submit an MFA code, specify this value. If MFA authentication is required, and the user does not provide a code when requesting a set of temporary security credentials, the user will receive an "access denied" response when requesting resources that require MFA authentication.</p> <p>The format for this parameter, as described by its regex pattern, is a sequence of six numeric digits.</p>'
-  GetSessionTokenResponse:
-    type: object
-    example:
-      Credentials:
-        AccessKeyId: AKIAIOSFODNN7EXAMPLE
-        Expiration: '2011-07-11T19:55:29.611Z'
-        SecretAccessKey: wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY
-        SessionToken: AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKwRcOIfrRh3c/LTo6UDdyJwOOvEVPvLXCrrrUtdnniCEXAMPLE/IvU1dYUg2RVAJBanLiHb4IgRmpRV3zrkuWJOgQs8IZZaIv2BXIa2R4OlgkBN9bkUDNCJiBeb/AXlzBBko7b15fjrBs2+cTQtpZ3CYWFXG8C5zqx37wnOE49mRl/+OtkIKGO7fAE
-    properties:
-      Credentials:
-        $ref: '#/definitions/Credentials'
-        description: '<p>The temporary security credentials, which include an access key ID, a secret access key, and a security (or session) token.</p> <p> <b>Note:</b> The size of the security token that STS APIs return is not fixed. We strongly recommend that you make no assumptions about the maximum size. As of this writing, the typical size is less than 4096 bytes, but that can vary. Also, future updates to AWS might require larger sizes.</p>'
-    description: 'Contains the response to a successful <a>GetSessionToken</a> request, including temporary AWS credentials that can be used to make AWS requests. '
-  IDPCommunicationErrorException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/idpCommunicationErrorMessage'
-    description: 'The request could not be fulfilled because the non-AWS identity provider (IDP) that was asked to verify the incoming identity token could not be reached. This is often a transient error caused by network conditions. Retry the request a limited number of times so that you don''t exceed the request rate. If the error persists, the non-AWS identity provider might be down or not responding.'
-  IDPRejectedClaimException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/idpRejectedClaimMessage'
-    description: '<p>The identity provider (IdP) reported that authentication failed. This might be because the claim is invalid.</p> <p>If this error is returned for the <code>AssumeRoleWithWebIdentity</code> operation, it can also mean that the claim has expired or has been explicitly revoked. </p>'
-  InvalidAuthorizationMessageException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/invalidAuthorizationMessage'
-    description: 'The error returned if the message passed to <code>DecodeAuthorizationMessage</code> was invalid. This can happen if the token contains invalid characters, such as linebreaks. '
-  InvalidIdentityTokenException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/invalidIdentityTokenMessage'
-    description: The web identity token that was passed could not be validated by AWS. Get a new identity token from the identity provider and then retry the request.
-  Issuer:
+  arnType:
     type: string
-  MalformedPolicyDocumentException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/malformedPolicyDocumentMessage'
-    description: The request was rejected because the policy document was malformed. The error message describes the specific error.
-  NameQualifier:
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]+'
+    minLength: 20
+    maxLength: 2048
+  roleSessionNameType:
     type: string
-  PackedPolicyTooLargeException:
+    pattern: '[\w+=,.@-]*'
+    minLength: 2
+    maxLength: 64
+  sessionPolicyDocumentType:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 2048
+  roleDurationSecondsType:
+    type: integer
+    minimum: 900
+    maximum: 43200
+  externalIdType:
+    type: string
+    pattern: '[\w+=,.@:\/-]*'
+    minLength: 2
+    maxLength: 1224
+  serialNumberType:
+    type: string
+    pattern: '[\w+=/:,.@-]*'
+    minLength: 9
+    maxLength: 256
+  tokenCodeType:
+    type: string
+    pattern: '[\d]*'
+    minLength: 6
+    maxLength: 6
+  Credentials:
     type: object
+    required:
+      - AccessKeyId
+      - SecretAccessKey
+      - SessionToken
+      - Expiration
     properties:
-      message:
-        $ref: '#/definitions/packedPolicyTooLargeMessage'
-    description: 'The request was rejected because the policy document was too large. The error message describes how big the policy document is, in packed form, as a percentage of what the API allows.'
-  RegionDisabledException:
+      AccessKeyId:
+        $ref: '#/definitions/accessKeyIdType'
+        description: The access key ID that identifies the temporary security credentials.
+      SecretAccessKey:
+        $ref: '#/definitions/accessKeySecretType'
+        description: The secret access key that can be used to sign requests.
+      SessionToken:
+        $ref: '#/definitions/tokenType'
+        description: The token that users must pass to the service API to use the temporary credentials.
+      Expiration:
+        $ref: '#/definitions/dateType'
+        description: The date on which the current credentials expire.
+    description: AWS credentials for API authentication.
+  AssumedRoleUser:
     type: object
+    required:
+      - AssumedRoleId
+      - Arn
     properties:
-      message:
-        $ref: '#/definitions/regionDisabledMessage'
-    description: 'STS is not activated in the requested region for the account that is being asked to generate credentials. The account administrator must use the IAM console to activate STS in that region. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>IAM User Guide</i>.'
+      AssumedRoleId:
+        $ref: '#/definitions/assumedRoleIdType'
+        description: A unique identifier that contains the role ID and the role session name of the role that is being assumed. The role ID is generated by AWS when the role is created.
+      Arn:
+        $ref: '#/definitions/arnType'
+        description: 'The ARN of the temporary security credentials that are returned from the <a>AssumeRole</a> action. For more information about ARNs and how to use them in policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in <i>Using IAM</i>. '
+    description: The identifiers for the temporary security credentials that the operation returns.
+  nonNegativeIntegerType:
+    type: integer
+    minimum: 0
   SAMLAssertionType:
     type: string
     minLength: 4
@@ -748,6 +766,29 @@ definitions:
     type: string
   SubjectType:
     type: string
+  Issuer:
+    type: string
+  Audience:
+    type: string
+  NameQualifier:
+    type: string
+  clientTokenType:
+    type: string
+    minLength: 4
+    maxLength: 2048
+  urlType:
+    type: string
+    minLength: 4
+    maxLength: 2048
+  webIdentitySubjectType:
+    type: string
+    minLength: 6
+    maxLength: 255
+  assumedRoleIdType:
+    type: string
+    pattern: '[\w+=,.@:-]*'
+    minLength: 2
+    maxLength: 193
   accessKeyIdType:
     type: string
     pattern: '[\w]*'
@@ -755,47 +796,50 @@ definitions:
     maxLength: 128
   accessKeySecretType:
     type: string
-  accountType:
+  tokenType:
     type: string
-  arnType:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]+'
-    minLength: 20
-    maxLength: 2048
-  assumedRoleIdType:
-    type: string
-    pattern: '[\w+=,.@:-]*'
-    minLength: 2
-    maxLength: 193
-  clientTokenType:
-    type: string
-    minLength: 4
-    maxLength: 2048
   dateType:
     type: string
     format: date-time
-  decodedMessageType:
-    type: string
-  durationSecondsType:
-    type: integer
-    minimum: 900
-    maximum: 129600
   encodedMessageType:
     type: string
     minLength: 1
     maxLength: 10240
+  decodedMessageType:
+    type: string
   expiredIdentityTokenMessage:
     type: string
-  externalIdType:
-    type: string
-    pattern: '[\w+=,.@:\/-]*'
-    minLength: 2
-    maxLength: 1224
   federatedIdType:
     type: string
     pattern: '[\w+=,.@\:-]*'
     minLength: 2
     maxLength: 193
+  FederatedUser:
+    type: object
+    required:
+      - FederatedUserId
+      - Arn
+    properties:
+      FederatedUserId:
+        $ref: '#/definitions/federatedIdType'
+        description: 'The string that identifies the federated user associated with the credentials, similar to the unique ID of an IAM user.'
+      Arn:
+        $ref: '#/definitions/arnType'
+        description: 'The ARN that specifies the federated user that is associated with the credentials. For more information about ARNs and how to use them in policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in <i>Using IAM</i>. '
+    description: Identifiers for the federated user that is associated with the credentials.
+  userIdType:
+    type: string
+  accountType:
+    type: string
+  userNameType:
+    type: string
+    pattern: '[\w+=,.@-]*'
+    minLength: 2
+    maxLength: 32
+  durationSecondsType:
+    type: integer
+    minimum: 900
+    maximum: 129600
   idpCommunicationErrorMessage:
     type: string
   idpRejectedClaimMessage:
@@ -806,51 +850,7 @@ definitions:
     type: string
   malformedPolicyDocumentMessage:
     type: string
-  nonNegativeIntegerType:
-    type: integer
-    minimum: 0
   packedPolicyTooLargeMessage:
     type: string
   regionDisabledMessage:
     type: string
-  roleDurationSecondsType:
-    type: integer
-    minimum: 900
-    maximum: 43200
-  roleSessionNameType:
-    type: string
-    pattern: '[\w+=,.@-]*'
-    minLength: 2
-    maxLength: 64
-  serialNumberType:
-    type: string
-    pattern: '[\w+=/:,.@-]*'
-    minLength: 9
-    maxLength: 256
-  sessionPolicyDocumentType:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 2048
-  tokenCodeType:
-    type: string
-    pattern: '[\d]*'
-    minLength: 6
-    maxLength: 6
-  tokenType:
-    type: string
-  urlType:
-    type: string
-    minLength: 4
-    maxLength: 2048
-  userIdType:
-    type: string
-  userNameType:
-    type: string
-    pattern: '[\w+=,.@-]*'
-    minLength: 2
-    maxLength: 32
-  webIdentitySubjectType:
-    type: string
-    minLength: 6
-    maxLength: 255

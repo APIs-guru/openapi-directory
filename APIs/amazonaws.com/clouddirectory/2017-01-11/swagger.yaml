@@ -4263,12 +4263,9 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AccessDeniedException:
+  AddFacetToObjectResponse:
     type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Access denied. Check your permissions.
+    properties: {}
   AddFacetToObjectRequest:
     type: object
     required:
@@ -4284,17 +4281,60 @@ definitions:
       ObjectReference:
         $ref: '#/definitions/ObjectReference'
         description: A reference to the object you are adding the specified facet to.
-  AddFacetToObjectResponse:
+  InternalServiceException:
     type: object
-    properties: {}
-  ApplySchemaRequest:
-    type: object
-    required:
-      - PublishedSchemaArn
     properties:
-      PublishedSchemaArn:
-        $ref: '#/definitions/Arn'
-        description: 'Published schema Amazon Resource Name (ARN) that needs to be copied. For more information, see <a>arns</a>.'
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'Indicates a problem that must be resolved by Amazon Web Services. This might be a transient error in which case you can retry your request until it succeeds. Otherwise, go to the <a href="http://status.aws.amazon.com/">AWS Service Health Dashboard</a> site to see if there are any operational issues with the service.'
+  InvalidArnException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that the provided ARN value is not valid.
+  RetryableConflictException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'Occurs when a conflict with a previous successful write is detected. For example, if a write operation occurs on an object and then an attempt is made to read the object using “SERIALIZABLE” consistency, this exception may result. This generally occurs when the previous write did not have time to propagate to the host serving the current request. A retry (with appropriate backoff logic) is the recommended response to this exception.'
+  ValidationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that your request is malformed in some manner. See the exception message.
+  LimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'Indicates that limits are exceeded. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html">Limits</a> for more information.'
+  AccessDeniedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Access denied. Check your permissions.
+  DirectoryNotEnabledException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Operations are only permitted on enabled directories.
+  ResourceNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The specified resource could not be found.
+  FacetValidationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The <a>Facet</a> that you provided was not well formed or could not be validated with the schema.
   ApplySchemaResponse:
     type: object
     properties:
@@ -4304,12 +4344,32 @@ definitions:
       DirectoryArn:
         $ref: '#/definitions/Arn'
         description: 'The ARN that is associated with the <a>Directory</a>. For more information, see <a>arns</a>.'
-  Arn:
-    type: string
-  Arns:
-    type: array
-    items:
-      $ref: '#/definitions/Arn'
+  ApplySchemaRequest:
+    type: object
+    required:
+      - PublishedSchemaArn
+    properties:
+      PublishedSchemaArn:
+        $ref: '#/definitions/Arn'
+        description: 'Published schema Amazon Resource Name (ARN) that needs to be copied. For more information, see <a>arns</a>.'
+  SchemaAlreadyExistsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that a schema could not be created due to a naming conflict. Please select a different name and then try again.
+  InvalidAttachmentException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that an attempt to attach an object with the same link name or to apply a schema with the same name has occurred. Rename the link or the schema and then try again.
+  AttachObjectResponse:
+    type: object
+    properties:
+      AttachedObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: 'The attached <code>ObjectIdentifier</code>, which is the child <code>ObjectIdentifier</code>.'
   AttachObjectRequest:
     type: object
     required:
@@ -4326,12 +4386,15 @@ definitions:
       LinkName:
         $ref: '#/definitions/LinkName'
         description: The link name with which the child object is attached to the parent.
-  AttachObjectResponse:
+  LinkNameAlreadyInUseException:
     type: object
     properties:
-      AttachedObjectIdentifier:
-        $ref: '#/definitions/ObjectIdentifier'
-        description: 'The attached <code>ObjectIdentifier</code>, which is the child <code>ObjectIdentifier</code>.'
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that a link could not be created due to a naming conflict. Choose a different name and then try again.
+  AttachPolicyResponse:
+    type: object
+    properties: {}
   AttachPolicyRequest:
     type: object
     required:
@@ -4344,9 +4407,18 @@ definitions:
       ObjectReference:
         $ref: '#/definitions/ObjectReference'
         description: The reference that identifies the object to which the policy will be attached.
-  AttachPolicyResponse:
+  NotPolicyException:
     type: object
-    properties: {}
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that the requested operation can only operate on policy objects.
+  AttachToIndexResponse:
+    type: object
+    properties:
+      AttachedObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: The <code>ObjectIdentifier</code> of the object that was attached to the index.
   AttachToIndexRequest:
     type: object
     required:
@@ -4359,12 +4431,24 @@ definitions:
       TargetReference:
         $ref: '#/definitions/ObjectReference'
         description: A reference to the object that you are attaching to the index.
-  AttachToIndexResponse:
+  IndexedAttributeMissingException:
     type: object
     properties:
-      AttachedObjectIdentifier:
-        $ref: '#/definitions/ObjectIdentifier'
-        description: The <code>ObjectIdentifier</code> of the object that was attached to the index.
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: An object has been attempted to be attached to an object that does not have the appropriate attribute value.
+  NotIndexException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that the requested operation can only operate on index objects.
+  AttachTypedLinkResponse:
+    type: object
+    properties:
+      TypedLinkSpecifier:
+        $ref: '#/definitions/TypedLinkSpecifier'
+        description: Returns a typed link specifier as output.
   AttachTypedLinkRequest:
     type: object
     required:
@@ -4385,12 +4469,1323 @@ definitions:
       Attributes:
         $ref: '#/definitions/AttributeNameAndValueList'
         description: A set of attributes that are associated with the typed link.
-  AttachTypedLinkResponse:
+  BatchReadResponse:
     type: object
+    properties:
+      Responses:
+        $ref: '#/definitions/BatchReadOperationResponseList'
+        description: A list of all the responses for each batch read.
+  BatchReadRequest:
+    type: object
+    required:
+      - Operations
+    properties:
+      Operations:
+        $ref: '#/definitions/BatchReadOperationList'
+        description: A list of operations that are part of the batch.
+  BatchWriteResponse:
+    type: object
+    properties:
+      Responses:
+        $ref: '#/definitions/BatchWriteOperationResponseList'
+        description: A list of all the responses for each batch write.
+  BatchWriteRequest:
+    type: object
+    required:
+      - Operations
+    properties:
+      Operations:
+        $ref: '#/definitions/BatchWriteOperationList'
+        description: A list of operations that are part of the batch.
+  BatchWriteException:
+    type: object
+    properties:
+      Index:
+        $ref: '#/definitions/BatchOperationIndex'
+      Type:
+        $ref: '#/definitions/BatchWriteExceptionType'
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: A <code>BatchWrite</code> exception has occurred.
+  CreateDirectoryResponse:
+    type: object
+    required:
+      - DirectoryArn
+      - Name
+      - ObjectIdentifier
+      - AppliedSchemaArn
+    properties:
+      DirectoryArn:
+        $ref: '#/definitions/DirectoryArn'
+        description: 'The ARN that is associated with the <a>Directory</a>. For more information, see <a>arns</a>.'
+      Name:
+        $ref: '#/definitions/DirectoryName'
+        description: The name of the <a>Directory</a>.
+      ObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: The root object node of the created directory.
+      AppliedSchemaArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the published schema in the <a>Directory</a>. Once a published schema is copied into the directory, it has its own ARN, which is referred to applied schema ARN. For more information, see <a>arns</a>.'
+  CreateDirectoryRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/DirectoryName'
+        description: 'The name of the <a>Directory</a>. Should be unique per account, per region.'
+  DirectoryAlreadyExistsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that a <a>Directory</a> could not be created due to a naming conflict. Choose a different name and try again.
+  CreateFacetResponse:
+    type: object
+    properties: {}
+  CreateFacetRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/FacetName'
+        description: 'The name of the <a>Facet</a>, which is unique for a given schema.'
+      Attributes:
+        $ref: '#/definitions/FacetAttributeList'
+        description: The attributes that are associated with the <a>Facet</a>.
+      ObjectType:
+        $ref: '#/definitions/ObjectType'
+        description: '<p>Specifies whether a given object created from this facet is of type node, leaf node, policy or index.</p> <ul> <li> <p>Node: Can have multiple children but one parent.</p> </li> </ul> <ul> <li> <p>Leaf node: Cannot have children but can have multiple parents.</p> </li> </ul> <ul> <li> <p>Policy: Allows you to store a policy document and policy type. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.</p> </li> </ul> <ul> <li> <p>Index: Can be created with the Index API.</p> </li> </ul>'
+      FacetStyle:
+        $ref: '#/definitions/FacetStyle'
+        description: 'There are two different styles that you can define on any given facet, <code>Static</code> and <code>Dynamic</code>. For static facets, all attributes must be defined in the schema. For dynamic facets, attributes can be defined during data plane operations.'
+  FacetAlreadyExistsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: A facet with the same name already exists.
+  InvalidRuleException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Occurs when any of the rule parameter keys or values are invalid.
+  CreateIndexResponse:
+    type: object
+    properties:
+      ObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: The <code>ObjectIdentifier</code> of the index created by this operation.
+  CreateIndexRequest:
+    type: object
+    required:
+      - OrderedIndexedAttributeList
+      - IsUnique
+    properties:
+      OrderedIndexedAttributeList:
+        $ref: '#/definitions/AttributeKeyList'
+        description: Specifies the attributes that should be indexed on. Currently only a single attribute is supported.
+      IsUnique:
+        $ref: '#/definitions/Bool'
+        description: Indicates whether the attribute that is being indexed has unique values or not.
+      ParentReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference to the parent object that contains the index object.
+      LinkName:
+        $ref: '#/definitions/LinkName'
+        description: The name of the link between the parent object and the index object.
+  UnsupportedIndexTypeException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that the requested index type is not supported.
+  CreateObjectResponse:
+    type: object
+    properties:
+      ObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: The identifier that is associated with the object.
+  CreateObjectRequest:
+    type: object
+    required:
+      - SchemaFacets
+    properties:
+      SchemaFacets:
+        $ref: '#/definitions/SchemaFacetList'
+        description: A list of schema facets to be associated with the object. Do not provide minor version components. See <a>SchemaFacet</a> for details.
+      ObjectAttributeList:
+        $ref: '#/definitions/AttributeKeyAndValueList'
+        description: The attribute map whose attribute ARN contains the key and attribute value as the map value.
+      ParentReference:
+        $ref: '#/definitions/ObjectReference'
+        description: 'If specified, the parent reference to which this object will be attached.'
+      LinkName:
+        $ref: '#/definitions/LinkName'
+        description: The name of link that is used to attach this object to a parent.
+  CreateSchemaResponse:
+    type: object
+    properties:
+      SchemaArn:
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.'
+  CreateSchemaRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/SchemaName'
+        description: The name that is associated with the schema. This is unique to each account and in each region.
+  CreateTypedLinkFacetResponse:
+    type: object
+    properties: {}
+  CreateTypedLinkFacetRequest:
+    type: object
+    required:
+      - Facet
+    properties:
+      Facet:
+        $ref: '#/definitions/TypedLinkFacet'
+        description: ' <a>Facet</a> structure that is associated with the typed link facet.'
+  DeleteDirectoryResponse:
+    type: object
+    required:
+      - DirectoryArn
+    properties:
+      DirectoryArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the deleted directory.
+  DeleteDirectoryRequest:
+    type: object
+    properties: {}
+  DirectoryNotDisabledException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: An operation can only operate on a disabled directory.
+  DirectoryDeletedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'A directory that has been deleted and to which access has been attempted. Note: The requested resource will eventually cease to exist.'
+  DeleteFacetResponse:
+    type: object
+    properties: {}
+  DeleteFacetRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/FacetName'
+        description: The name of the facet to delete.
+  FacetNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The specified <a>Facet</a> could not be found.
+  FacetInUseException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Occurs when deleting a facet that contains an attribute that is a target to an attribute reference in a different facet.
+  DeleteObjectResponse:
+    type: object
+    properties: {}
+  DeleteObjectRequest:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference that identifies the object.
+  ObjectNotDetachedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that the requested operation cannot be completed because the object has not been detached from the tree.
+  DeleteSchemaResponse:
+    type: object
+    properties:
+      SchemaArn:
+        $ref: '#/definitions/Arn'
+        description: 'The input ARN that is returned as part of the response. For more information, see <a>arns</a>.'
+  DeleteSchemaRequest:
+    type: object
+    properties: {}
+  StillContainsLinksException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The object could not be deleted because links still exist. Remove the links and then try the operation again.
+  DeleteTypedLinkFacetResponse:
+    type: object
+    properties: {}
+  DeleteTypedLinkFacetRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/TypedLinkName'
+        description: The unique name of the typed link facet.
+  DetachFromIndexResponse:
+    type: object
+    properties:
+      DetachedObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: The <code>ObjectIdentifier</code> of the object that was detached from the index.
+  DetachFromIndexRequest:
+    type: object
+    required:
+      - IndexReference
+      - TargetReference
+    properties:
+      IndexReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference to the index object.
+      TargetReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference to the object being detached from the index.
+  ObjectAlreadyDetachedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that the object is not attached to the index.
+  DetachObjectResponse:
+    type: object
+    properties:
+      DetachedObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: The <code>ObjectIdentifier</code> that was detached from the object.
+  DetachObjectRequest:
+    type: object
+    required:
+      - ParentReference
+      - LinkName
+    properties:
+      ParentReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The parent reference from which the object with the specified link name is detached.
+      LinkName:
+        $ref: '#/definitions/LinkName'
+        description: The link name associated with the object that needs to be detached.
+  NotNodeException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'Occurs when any invalid operations are performed on an object that is not a node, such as calling <code>ListObjectChildren</code> for a leaf node object.'
+  DetachPolicyResponse:
+    type: object
+    properties: {}
+  DetachPolicyRequest:
+    type: object
+    required:
+      - PolicyReference
+      - ObjectReference
+    properties:
+      PolicyReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Reference that identifies the policy object.
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Reference that identifies the object whose policy object will be detached.
+  DetachTypedLinkRequest:
+    type: object
+    required:
+      - TypedLinkSpecifier
     properties:
       TypedLinkSpecifier:
         $ref: '#/definitions/TypedLinkSpecifier'
+        description: Used to accept a typed link specifier as input.
+  DisableDirectoryResponse:
+    type: object
+    required:
+      - DirectoryArn
+    properties:
+      DirectoryArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the directory that has been disabled.
+  DisableDirectoryRequest:
+    type: object
+    properties: {}
+  EnableDirectoryResponse:
+    type: object
+    required:
+      - DirectoryArn
+    properties:
+      DirectoryArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the enabled directory.
+  EnableDirectoryRequest:
+    type: object
+    properties: {}
+  GetAppliedSchemaVersionResponse:
+    type: object
+    properties:
+      AppliedSchemaArn:
+        $ref: '#/definitions/Arn'
+        description: 'Current applied schema ARN, including the minor version in use if one was provided.'
+  GetAppliedSchemaVersionRequest:
+    type: object
+    required:
+      - SchemaArn
+    properties:
+      SchemaArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the applied schema.
+  GetDirectoryResponse:
+    type: object
+    required:
+      - Directory
+    properties:
+      Directory:
+        $ref: '#/definitions/Directory'
+        description: Metadata about the directory.
+  GetDirectoryRequest:
+    type: object
+    properties: {}
+  GetFacetResponse:
+    type: object
+    properties:
+      Facet:
+        $ref: '#/definitions/Facet'
+        description: The <a>Facet</a> structure that is associated with the facet.
+  GetFacetRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/FacetName'
+        description: The name of the facet to retrieve.
+  GetLinkAttributesResponse:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/AttributeKeyAndValueList'
+        description: The attributes that are associated with the typed link.
+  GetLinkAttributesRequest:
+    type: object
+    required:
+      - TypedLinkSpecifier
+      - AttributeNames
+    properties:
+      TypedLinkSpecifier:
+        $ref: '#/definitions/TypedLinkSpecifier'
+        description: Allows a typed link specifier to be accepted as input.
+      AttributeNames:
+        $ref: '#/definitions/AttributeNameList'
+        description: A list of attribute names whose values will be retrieved.
+      ConsistencyLevel:
+        $ref: '#/definitions/ConsistencyLevel'
+        description: The consistency level at which to retrieve the attributes on a typed link.
+  GetObjectAttributesResponse:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/AttributeKeyAndValueList'
+        description: The attributes that are associated with the object.
+  GetObjectAttributesRequest:
+    type: object
+    required:
+      - ObjectReference
+      - SchemaFacet
+      - AttributeNames
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Reference that identifies the object whose attributes will be retrieved.
+      SchemaFacet:
+        $ref: '#/definitions/SchemaFacet'
+        description: Identifier for the facet whose attributes will be retrieved. See <a>SchemaFacet</a> for details.
+      AttributeNames:
+        $ref: '#/definitions/AttributeNameList'
+        description: List of attribute names whose values will be retrieved.
+  GetObjectInformationResponse:
+    type: object
+    properties:
+      SchemaFacets:
+        $ref: '#/definitions/SchemaFacetList'
+        description: 'The facets attached to the specified object. Although the response does not include minor version information, the most recently applied minor version of each Facet is in effect. See <a>GetAppliedSchemaVersion</a> for details.'
+      ObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: The <code>ObjectIdentifier</code> of the specified object.
+  GetObjectInformationRequest:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference to the object.
+  GetSchemaAsJsonResponse:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/SchemaName'
+        description: The name of the retrieved schema.
+      Document:
+        $ref: '#/definitions/SchemaJsonDocument'
+        description: The JSON representation of the schema document.
+  GetSchemaAsJsonRequest:
+    type: object
+    properties: {}
+  GetTypedLinkFacetInformationResponse:
+    type: object
+    properties:
+      IdentityAttributeOrder:
+        $ref: '#/definitions/AttributeNameList'
+        description: 'The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+  GetTypedLinkFacetInformationRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/TypedLinkName'
+        description: The unique name of the typed link facet.
+  InvalidNextTokenException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that the <code>NextToken</code> value is not valid.
+  ListAppliedSchemaArnsResponse:
+    type: object
+    properties:
+      SchemaArns:
+        $ref: '#/definitions/Arns'
+        description: The ARNs of schemas that are applied to the directory.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListAppliedSchemaArnsRequest:
+    type: object
+    required:
+      - DirectoryArn
+    properties:
+      DirectoryArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the directory you are listing.
+      SchemaArn:
+        $ref: '#/definitions/Arn'
+        description: The response for <code>ListAppliedSchemaArns</code> when this parameter is used will list all minor version ARNs for a major version.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+  ListAttachedIndicesResponse:
+    type: object
+    properties:
+      IndexAttachments:
+        $ref: '#/definitions/IndexAttachmentList'
+        description: The indices attached to the specified object.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListAttachedIndicesRequest:
+    type: object
+    required:
+      - TargetReference
+    properties:
+      TargetReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference to the object that has indices attached.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+  ListDevelopmentSchemaArnsResponse:
+    type: object
+    properties:
+      SchemaArns:
+        $ref: '#/definitions/Arns'
+        description: The ARNs of retrieved development schemas.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListDevelopmentSchemaArnsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+  ListDirectoriesResponse:
+    type: object
+    required:
+      - Directories
+    properties:
+      Directories:
+        $ref: '#/definitions/DirectoryList'
+        description: Lists all directories that are associated with your account in pagination fashion.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListDirectoriesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+      state:
+        $ref: '#/definitions/DirectoryState'
+        description: 'The state of the directories in the list. Can be either Enabled, Disabled, or Deleted.'
+  ListFacetAttributesResponse:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/FacetAttributeList'
+        description: The attributes attached to the facet.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListFacetAttributesRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/FacetName'
+        description: The name of the facet whose attributes will be retrieved.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+  ListFacetNamesResponse:
+    type: object
+    properties:
+      FacetNames:
+        $ref: '#/definitions/FacetNameList'
+        description: The names of facets that exist within the schema.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListFacetNamesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+  ListIncomingTypedLinksResponse:
+    type: object
+    properties:
+      LinkSpecifiers:
+        $ref: '#/definitions/TypedLinkSpecifierList'
+        description: Returns one or more typed link specifiers as output.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListIncomingTypedLinksRequest:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Reference that identifies the object whose attributes will be listed.
+      FilterAttributeRanges:
+        $ref: '#/definitions/TypedLinkAttributeRangeList'
+        description: 'Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.'
+      FilterTypedLink:
+        $ref: '#/definitions/TypedLinkSchemaAndFacetName'
+        description: 'Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+      ConsistencyLevel:
+        $ref: '#/definitions/ConsistencyLevel'
+        description: The consistency level to execute the request at.
+  ListIndexResponse:
+    type: object
+    properties:
+      IndexAttachments:
+        $ref: '#/definitions/IndexAttachmentList'
+        description: The objects and indexed values attached to the index.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListIndexRequest:
+    type: object
+    required:
+      - IndexReference
+    properties:
+      RangesOnIndexedValues:
+        $ref: '#/definitions/ObjectAttributeRangeList'
+        description: Specifies the ranges of indexed values that you want to query.
+      IndexReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference to the index to list.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: 'The maximum number of objects in a single page to retrieve from the index during a request. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html#limits_cd">AWS Directory Service Limits</a>.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListManagedSchemaArnsResponse:
+    type: object
+    properties:
+      SchemaArns:
+        $ref: '#/definitions/Arns'
+        description: The ARNs for all AWS managed schemas.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListManagedSchemaArnsRequest:
+    type: object
+    properties:
+      SchemaArn:
+        $ref: '#/definitions/Arn'
+        description: 'The response for ListManagedSchemaArns. When this parameter is used, all minor version ARNs for a major version are listed.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+  ListObjectAttributesResponse:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/AttributeKeyAndValueList'
+        description: 'Attributes map that is associated with the object. <code>AttributeArn</code> is the key, and attribute value is the value.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListObjectAttributesRequest:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference that identifies the object whose attributes will be listed.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
+      FacetFilter:
+        $ref: '#/definitions/SchemaFacet'
+        description: Used to filter the list of object attributes that are associated with a certain facet.
+  ListObjectChildrenResponse:
+    type: object
+    properties:
+      Children:
+        $ref: '#/definitions/LinkNameToObjectIdentifierMap'
+        description: 'Children structure, which is a map with key as the <code>LinkName</code> and <code>ObjectIdentifier</code> as the value.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListObjectChildrenRequest:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference that identifies the object for which child objects are being listed.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
+  ListObjectParentPathsResponse:
+    type: object
+    properties:
+      PathToObjectIdentifiersList:
+        $ref: '#/definitions/PathToObjectIdentifiersList'
+        description: Returns the path to the <code>ObjectIdentifiers</code> that are associated with the directory.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListObjectParentPathsRequest:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference that identifies the object whose parent paths are listed.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
+  ListObjectParentsResponse:
+    type: object
+    properties:
+      Parents:
+        $ref: '#/definitions/ObjectIdentifierToLinkNameMap'
+        description: 'The parent structure, which is a map with key as the <code>ObjectIdentifier</code> and LinkName as the value.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListObjectParentsRequest:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference that identifies the object for which parent objects are being listed.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
+  CannotListParentOfRootException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Cannot list the parents of a <a>Directory</a> root.
+  ListObjectPoliciesResponse:
+    type: object
+    properties:
+      AttachedPolicyIds:
+        $ref: '#/definitions/ObjectIdentifierList'
+        description: 'A list of policy <code>ObjectIdentifiers</code>, that are attached to the object.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListObjectPoliciesRequest:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Reference that identifies the object for which policies will be listed.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
+  ListOutgoingTypedLinksResponse:
+    type: object
+    properties:
+      TypedLinkSpecifiers:
+        $ref: '#/definitions/TypedLinkSpecifierList'
         description: Returns a typed link specifier as output.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListOutgoingTypedLinksRequest:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference that identifies the object whose attributes will be listed.
+      FilterAttributeRanges:
+        $ref: '#/definitions/TypedLinkAttributeRangeList'
+        description: 'Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.'
+      FilterTypedLink:
+        $ref: '#/definitions/TypedLinkSchemaAndFacetName'
+        description: 'Filters are interpreted in the order of the attributes defined on the typed link facet, not the order they are supplied to any API calls.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+      ConsistencyLevel:
+        $ref: '#/definitions/ConsistencyLevel'
+        description: The consistency level to execute the request at.
+  ListPolicyAttachmentsResponse:
+    type: object
+    properties:
+      ObjectIdentifiers:
+        $ref: '#/definitions/ObjectIdentifierList'
+        description: A list of <code>ObjectIdentifiers</code> to which the policy is attached.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListPolicyAttachmentsRequest:
+    type: object
+    required:
+      - PolicyReference
+    properties:
+      PolicyReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference that identifies the policy object.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
+  ListPublishedSchemaArnsResponse:
+    type: object
+    properties:
+      SchemaArns:
+        $ref: '#/definitions/Arns'
+        description: The ARNs of published schemas.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListPublishedSchemaArnsRequest:
+    type: object
+    properties:
+      SchemaArn:
+        $ref: '#/definitions/Arn'
+        description: The response for <code>ListPublishedSchemaArns</code> when this parameter is used will list all minor version ARNs for a major version.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: A list of tag key value pairs that are associated with the response.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+  ListTagsForResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the resource. Tagging is only supported for directories.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token. This is for future use. Currently pagination is not supported for tagging.
+      MaxResults:
+        $ref: '#/definitions/TagsNumberResults'
+        description: The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. This is for future use and is not supported currently.
+  InvalidTaggingRequestException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Can occur for multiple reasons such as when you tag a resource that doesn’t exist or if you specify a higher number of tags for a resource than the allowed limit. Allowed limit is 50 tags per resource.
+  ListTypedLinkFacetAttributesResponse:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/TypedLinkAttributeDefinitionList'
+        description: An ordered set of attributes associate with the typed link.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListTypedLinkFacetAttributesRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/TypedLinkName'
+        description: The unique name of the typed link facet.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+  ListTypedLinkFacetNamesResponse:
+    type: object
+    properties:
+      FacetNames:
+        $ref: '#/definitions/TypedLinkNameList'
+        description: The names of typed link facets that exist within the schema.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  ListTypedLinkFacetNamesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+  LookupPolicyResponse:
+    type: object
+    properties:
+      PolicyToPathList:
+        $ref: '#/definitions/PolicyToPathList'
+        description: 'Provides list of path to policies. Policies contain <code>PolicyId</code>, <code>ObjectIdentifier</code>, and <code>PolicyType</code>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+  LookupPolicyRequest:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Reference that identifies the object whose policies will be looked up.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to request the next page of results.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
+  PublishSchemaResponse:
+    type: object
+    properties:
+      PublishedSchemaArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN that is associated with the published schema. For more information, see <a>arns</a>.'
+  PublishSchemaRequest:
+    type: object
+    required:
+      - Version
+    properties:
+      Version:
+        $ref: '#/definitions/Version'
+        description: The major version under which the schema will be published. Schemas have both a major and minor version associated with them.
+      MinorVersion:
+        $ref: '#/definitions/Version'
+        description: The minor version under which the schema will be published. This parameter is recommended. Schemas have both a major and minor version associated with them.
+      Name:
+        $ref: '#/definitions/SchemaName'
+        description: 'The new name under which the schema will be published. If this is not provided, the development schema is considered.'
+  SchemaAlreadyPublishedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that a schema is already published.
+  PutSchemaFromJsonResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the schema to update.
+  PutSchemaFromJsonRequest:
+    type: object
+    required:
+      - Document
+    properties:
+      Document:
+        $ref: '#/definitions/SchemaJsonDocument'
+        description: The replacement JSON schema.
+  InvalidSchemaDocException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates that the provided <code>SchemaDoc</code> value is not valid.
+  RemoveFacetFromObjectResponse:
+    type: object
+    properties: {}
+  RemoveFacetFromObjectRequest:
+    type: object
+    required:
+      - SchemaFacet
+      - ObjectReference
+    properties:
+      SchemaFacet:
+        $ref: '#/definitions/SchemaFacet'
+        description: The facet to remove. See <a>SchemaFacet</a> for details.
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference to the object to remove the facet from.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+      - Tags
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the resource. Tagging is only supported for directories.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: A list of tag key-value pairs.
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+      - TagKeys
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the resource. Tagging is only supported for directories.
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: Keys of the tag that need to be removed from the resource.
+  UpdateFacetResponse:
+    type: object
+    properties: {}
+  UpdateFacetRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/FacetName'
+        description: The name of the facet.
+      AttributeUpdates:
+        $ref: '#/definitions/FacetAttributeUpdateList'
+        description: 'List of attributes that need to be updated in a given schema <a>Facet</a>. Each attribute is followed by <code>AttributeAction</code>, which specifies the type of update operation to perform. '
+      ObjectType:
+        $ref: '#/definitions/ObjectType'
+        description: The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.
+  InvalidFacetUpdateException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: An attempt to modify a <a>Facet</a> resulted in an invalid schema exception.
+  UpdateLinkAttributesResponse:
+    type: object
+    properties: {}
+  UpdateLinkAttributesRequest:
+    type: object
+    required:
+      - TypedLinkSpecifier
+      - AttributeUpdates
+    properties:
+      TypedLinkSpecifier:
+        $ref: '#/definitions/TypedLinkSpecifier'
+        description: Allows a typed link specifier to be accepted as input.
+      AttributeUpdates:
+        $ref: '#/definitions/LinkAttributeUpdateList'
+        description: The attributes update structure.
+  UpdateObjectAttributesResponse:
+    type: object
+    properties:
+      ObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: The <code>ObjectIdentifier</code> of the updated object.
+  UpdateObjectAttributesRequest:
+    type: object
+    required:
+      - ObjectReference
+      - AttributeUpdates
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference that identifies the object.
+      AttributeUpdates:
+        $ref: '#/definitions/ObjectAttributeUpdateList'
+        description: The attributes update structure.
+  UpdateSchemaResponse:
+    type: object
+    properties:
+      SchemaArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN that is associated with the updated schema. For more information, see <a>arns</a>.'
+  UpdateSchemaRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/SchemaName'
+        description: The name of the schema.
+  UpdateTypedLinkFacetResponse:
+    type: object
+    properties: {}
+  UpdateTypedLinkFacetRequest:
+    type: object
+    required:
+      - Name
+      - AttributeUpdates
+      - IdentityAttributeOrder
+    properties:
+      Name:
+        $ref: '#/definitions/TypedLinkName'
+        description: The unique name of the typed link facet.
+      AttributeUpdates:
+        $ref: '#/definitions/TypedLinkFacetAttributeUpdateList'
+        description: Attributes update structure.
+      IdentityAttributeOrder:
+        $ref: '#/definitions/AttributeNameList'
+        description: 'The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to a typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+  UpgradeAppliedSchemaResponse:
+    type: object
+    properties:
+      UpgradedSchemaArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the upgraded schema that is returned as part of the response.
+      DirectoryArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the directory that is returned as part of the response.
+  UpgradeAppliedSchemaRequest:
+    type: object
+    required:
+      - PublishedSchemaArn
+      - DirectoryArn
+    properties:
+      PublishedSchemaArn:
+        $ref: '#/definitions/Arn'
+        description: The revision of the published schema to upgrade the directory to.
+      DirectoryArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN for the directory to which the upgraded schema will be applied.
+      DryRun:
+        $ref: '#/definitions/Bool'
+        description: 'Used for testing whether the major version schemas are backward compatible or not. If schema compatibility fails, an exception would be thrown else the call would succeed but no changes will be saved. This parameter is optional.'
+  IncompatibleSchemaException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Indicates a failure occurred while performing a check for backward compatibility between the specified schema and the schema that is currently applied to the directory.
+  UpgradePublishedSchemaResponse:
+    type: object
+    properties:
+      UpgradedSchemaArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the upgraded schema that is returned as part of the response.
+  UpgradePublishedSchemaRequest:
+    type: object
+    required:
+      - DevelopmentSchemaArn
+      - PublishedSchemaArn
+      - MinorVersion
+    properties:
+      DevelopmentSchemaArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the development schema with the changes used for the upgrade.
+      PublishedSchemaArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the published schema to be upgraded.
+      MinorVersion:
+        $ref: '#/definitions/Version'
+        description: Identifies the minor version of the published schema that will be created. This parameter is NOT optional.
+      DryRun:
+        $ref: '#/definitions/Bool'
+        description: 'Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded. If schema compatibility fails, an exception would be thrown else the call would succeed. This parameter is optional and defaults to false.'
+  ExceptionMessage:
+    type: string
+  Arn:
+    type: string
+  SchemaFacet:
+    type: object
+    properties:
+      SchemaArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the schema that contains the facet with no minor component. See <a>arns</a> and <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/inplaceschemaupgrade.html">In-Place Schema Upgrade</a> for a description of when to provide minor versions.'
+      FacetName:
+        $ref: '#/definitions/FacetName'
+        description: The name of the facet.
+    description: A facet.
+  AttributeKeyAndValueList:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeKeyAndValue'
+  ObjectReference:
+    type: object
+    properties:
+      Selector:
+        $ref: '#/definitions/SelectorObjectReference'
+        description: '<p>A path selector supports easy selection of an object by the parent/child links leading to it from the directory root. Use the link names from each parent/child link to construct the path. Path selectors start with a slash (/) and link names are separated by slashes. For more information about paths, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#accessingobjects">Accessing Objects</a>. You can identify an object in one of the following ways:</p> <ul> <li> <p> <i>$ObjectIdentifier</i> - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier</p> </li> <li> <p> <i>/some/path</i> - Identifies the object based on path</p> </li> <li> <p> <i>#SomeBatchReference</i> - Identifies the object in a batch call</p> </li> </ul>'
+    description: The reference that identifies an object.
+  Arns:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
+  LinkName:
+    type: string
+    pattern: '[^\/\[\]\(\):\{\}#@!?\s\\;]+'
+    minLength: 1
+    maxLength: 64
+  ObjectIdentifier:
+    type: string
+  TypedLinkSchemaAndFacetName:
+    type: object
+    required:
+      - SchemaArn
+      - TypedLinkName
+    properties:
+      SchemaArn:
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.'
+      TypedLinkName:
+        $ref: '#/definitions/TypedLinkName'
+        description: The unique name of the typed link facet.
+    description: Identifies the schema Amazon Resource Name (ARN) and facet name for the typed link.
+  AttributeNameAndValueList:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeNameAndValue'
+  TypedLinkSpecifier:
+    type: object
+    required:
+      - TypedLinkFacet
+      - SourceObjectReference
+      - TargetObjectReference
+      - IdentityAttributeValues
+    properties:
+      TypedLinkFacet:
+        $ref: '#/definitions/TypedLinkSchemaAndFacetName'
+        description: Identifies the typed link facet that is associated with the typed link.
+      SourceObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Identifies the source object that the typed link will attach to.
+      TargetObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Identifies the target object that the typed link will attach to.
+      IdentityAttributeValues:
+        $ref: '#/definitions/AttributeNameAndValueList'
+        description: Identifies the attribute value to update.
+    description: 'Contains all the information that is used to uniquely identify a typed link. The parameters discussed in this topic are used to uniquely specify the typed link being operated on. The <a>AttachTypedLink</a> API returns a typed link specifier while the <a>DetachTypedLink</a> API accepts one as input. Similarly, the <a>ListIncomingTypedLinks</a> and <a>ListOutgoingTypedLinks</a> API operations provide typed link specifiers as output. You can also construct a typed link specifier from scratch.'
+  FacetName:
+    type: string
+    pattern: '^[a-zA-Z0-9._-]*$'
+    minLength: 1
+    maxLength: 64
+  AttributeName:
+    type: string
+    pattern: '^[a-zA-Z0-9._-]*$'
+    minLength: 1
+    maxLength: 64
   AttributeKey:
     type: object
     required:
@@ -4408,6 +5803,25 @@ definitions:
         $ref: '#/definitions/AttributeName'
         description: The name of the attribute.
     description: A unique identifier for an attribute.
+  TypedAttributeValue:
+    type: object
+    properties:
+      StringValue:
+        $ref: '#/definitions/StringAttributeValue'
+        description: A string data value.
+      BinaryValue:
+        $ref: '#/definitions/BinaryAttributeValue'
+        description: A binary data value.
+      BooleanValue:
+        $ref: '#/definitions/BooleanAttributeValue'
+        description: A Boolean data value.
+      NumberValue:
+        $ref: '#/definitions/NumberAttributeValue'
+        description: A number data value.
+      DatetimeValue:
+        $ref: '#/definitions/DatetimeAttributeValue'
+        description: A date and time value.
+    description: 'Represents the data for a typed attribute. You can set one, and only one, of the elements. Each attribute in an item is a name-value pair. Attributes have a single value.'
   AttributeKeyAndValue:
     type: object
     required:
@@ -4421,19 +5835,10 @@ definitions:
         $ref: '#/definitions/TypedAttributeValue'
         description: The value of the attribute.
     description: The combination of an attribute key and an attribute value.
-  AttributeKeyAndValueList:
-    type: array
-    items:
-      $ref: '#/definitions/AttributeKeyAndValue'
   AttributeKeyList:
     type: array
     items:
       $ref: '#/definitions/AttributeKey'
-  AttributeName:
-    type: string
-    pattern: '^[a-zA-Z0-9._-]*$'
-    minLength: 1
-    maxLength: 64
   AttributeNameAndValue:
     type: object
     required:
@@ -4447,10 +5852,6 @@ definitions:
         $ref: '#/definitions/TypedAttributeValue'
         description: The value for the typed link.
     description: Identifies the attribute name and value for a typed link.
-  AttributeNameAndValueList:
-    type: array
-    items:
-      $ref: '#/definitions/AttributeNameAndValue'
   AttributeNameList:
     type: array
     items:
@@ -4565,6 +5966,10 @@ definitions:
         $ref: '#/definitions/TypedLinkSpecifier'
         description: Returns a typed link specifier as output.
     description: Represents the output of a <a>AttachTypedLink</a> response operation.
+  Bool:
+    type: boolean
+  BatchReferenceName:
+    type: string
   BatchCreateIndex:
     type: object
     required:
@@ -4594,6 +5999,10 @@ definitions:
         $ref: '#/definitions/ObjectIdentifier'
         description: The <code>ObjectIdentifier</code> of the index created by this operation.
     description: Represents the output of a <a>CreateIndex</a> response operation.
+  SchemaFacetList:
+    type: array
+    items:
+      $ref: '#/definitions/SchemaFacet'
   BatchCreateObject:
     type: object
     required:
@@ -4772,6 +6181,11 @@ definitions:
         $ref: '#/definitions/ObjectIdentifier'
         description: The <code>ObjectIdentifier</code> of the specified object.
     description: Represents the output of a <a>GetObjectInformation</a> response operation.
+  NextToken:
+    type: string
+  NumberResults:
+    type: integer
+    minimum: 1
   BatchListAttachedIndices:
     type: object
     required:
@@ -4787,6 +6201,10 @@ definitions:
         $ref: '#/definitions/NumberResults'
         description: The maximum number of results to retrieve.
     description: 'Lists indices attached to an object inside a <a>BatchRead</a> operation. For more information, see <a>ListAttachedIndices</a> and <a>BatchReadRequest$Operations</a>.'
+  IndexAttachmentList:
+    type: array
+    items:
+      $ref: '#/definitions/IndexAttachment'
   BatchListAttachedIndicesResponse:
     type: object
     properties:
@@ -4797,6 +6215,10 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: The pagination token.
     description: Represents the output of a <a>ListAttachedIndices</a> response operation.
+  TypedLinkAttributeRangeList:
+    type: array
+    items:
+      $ref: '#/definitions/TypedLinkAttributeRange'
   BatchListIncomingTypedLinks:
     type: object
     required:
@@ -4818,6 +6240,10 @@ definitions:
         $ref: '#/definitions/NumberResults'
         description: The maximum number of results to retrieve.
     description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object inside a <a>BatchRead</a> operation. For more information, see <a>ListIncomingTypedLinks</a> and <a>BatchReadRequest$Operations</a>.'
+  TypedLinkSpecifierList:
+    type: array
+    items:
+      $ref: '#/definitions/TypedLinkSpecifier'
   BatchListIncomingTypedLinksResponse:
     type: object
     properties:
@@ -4828,6 +6254,10 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: The pagination token.
     description: Represents the output of a <a>ListIncomingTypedLinks</a> response operation.
+  ObjectAttributeRangeList:
+    type: array
+    items:
+      $ref: '#/definitions/ObjectAttributeRange'
   BatchListIndex:
     type: object
     required:
@@ -4899,6 +6329,15 @@ definitions:
         $ref: '#/definitions/NumberResults'
         description: Maximum number of items to be retrieved in a single call. This is an approximate number.
     description: Represents the output of a <a>ListObjectChildren</a> operation.
+  LinkNameToObjectIdentifierMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/LinkName'
+        value:
+          $ref: '#/definitions/ObjectIdentifier'
   BatchListObjectChildrenResponse:
     type: object
     properties:
@@ -4924,6 +6363,10 @@ definitions:
         $ref: '#/definitions/NumberResults'
         description: The maximum number of results to retrieve.
     description: 'Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects inside a <a>BatchRead</a> operation. For more information, see <a>ListObjectParentPaths</a> and <a>BatchReadRequest$Operations</a>.'
+  PathToObjectIdentifiersList:
+    type: array
+    items:
+      $ref: '#/definitions/PathToObjectIdentifiers'
   BatchListObjectParentPathsResponse:
     type: object
     properties:
@@ -4949,6 +6392,10 @@ definitions:
         $ref: '#/definitions/NumberResults'
         description: The maximum number of results to retrieve.
     description: 'Returns policies attached to an object in pagination fashion inside a <a>BatchRead</a> operation. For more information, see <a>ListObjectPolicies</a> and <a>BatchReadRequest$Operations</a>.'
+  ObjectIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/ObjectIdentifier'
   BatchListObjectPoliciesResponse:
     type: object
     properties:
@@ -5030,6 +6477,10 @@ definitions:
         $ref: '#/definitions/NumberResults'
         description: The maximum number of results to retrieve.
     description: 'Lists all policies from the root of the Directory to the object specified inside a <a>BatchRead</a> operation. For more information, see <a>LookupPolicy</a> and <a>BatchReadRequest$Operations</a>.'
+  PolicyToPathList:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyToPath'
   BatchLookupPolicyResponse:
     type: object
     properties:
@@ -5042,16 +6493,6 @@ definitions:
     description: Represents the output of a <a>LookupPolicy</a> response operation.
   BatchOperationIndex:
     type: integer
-  BatchReadException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/BatchReadExceptionType'
-        description: 'A type of exception, such as <code>InvalidArnException</code>.'
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: An exception message that is associated with the failure.
-    description: 'The batch read exception structure, which contains the exception type and message.'
   BatchReadExceptionType:
     type: string
     enum:
@@ -5068,6 +6509,16 @@ definitions:
       - DirectoryNotEnabledException
       - LimitExceededException
       - InternalServiceException
+  BatchReadException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/BatchReadExceptionType'
+        description: 'A type of exception, such as <code>InvalidArnException</code>.'
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: An exception message that is associated with the failure.
+    description: 'The batch read exception structure, which contains the exception type and message.'
   BatchReadOperation:
     type: object
     properties:
@@ -5115,34 +6566,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BatchReadOperation'
-  BatchReadOperationResponse:
-    type: object
-    properties:
-      SuccessfulResponse:
-        $ref: '#/definitions/BatchReadSuccessfulResponse'
-        description: Identifies which operation in a batch has succeeded.
-      ExceptionResponse:
-        $ref: '#/definitions/BatchReadException'
-        description: Identifies which operation in a batch has failed.
-    description: Represents the output of a <code>BatchRead</code> response operation.
-  BatchReadOperationResponseList:
-    type: array
-    items:
-      $ref: '#/definitions/BatchReadOperationResponse'
-  BatchReadRequest:
-    type: object
-    required:
-      - Operations
-    properties:
-      Operations:
-        $ref: '#/definitions/BatchReadOperationList'
-        description: A list of operations that are part of the batch.
-  BatchReadResponse:
-    type: object
-    properties:
-      Responses:
-        $ref: '#/definitions/BatchReadOperationResponseList'
-        description: A list of all the responses for each batch read.
   BatchReadSuccessfulResponse:
     type: object
     properties:
@@ -5186,8 +6609,25 @@ definitions:
         $ref: '#/definitions/BatchGetLinkAttributesResponse'
         description: The list of attributes to retrieve from the typed link.
     description: Represents the output of a <code>BatchRead</code> success response operation.
-  BatchReferenceName:
+  BatchReadOperationResponse:
+    type: object
+    properties:
+      SuccessfulResponse:
+        $ref: '#/definitions/BatchReadSuccessfulResponse'
+        description: Identifies which operation in a batch has succeeded.
+      ExceptionResponse:
+        $ref: '#/definitions/BatchReadException'
+        description: Identifies which operation in a batch has failed.
+    description: Represents the output of a <code>BatchRead</code> response operation.
+  BatchReadOperationResponseList:
+    type: array
+    items:
+      $ref: '#/definitions/BatchReadOperationResponse'
+  ConsistencyLevel:
     type: string
+    enum:
+      - SERIALIZABLE
+      - EVENTUAL
   BatchRemoveFacetFromObject:
     type: object
     required:
@@ -5205,6 +6645,10 @@ definitions:
     type: object
     properties: {}
     description: An empty result that represents success.
+  LinkAttributeUpdateList:
+    type: array
+    items:
+      $ref: '#/definitions/LinkAttributeUpdate'
   BatchUpdateLinkAttributes:
     type: object
     required:
@@ -5222,6 +6666,10 @@ definitions:
     type: object
     properties: {}
     description: Represents the output of a <a>UpdateLinkAttributes</a> response operation.
+  ObjectAttributeUpdateList:
+    type: array
+    items:
+      $ref: '#/definitions/ObjectAttributeUpdate'
   BatchUpdateObjectAttributes:
     type: object
     required:
@@ -5242,16 +6690,6 @@ definitions:
         $ref: '#/definitions/ObjectIdentifier'
         description: ID that is associated with the object.
     description: Represents the output of a <code>BatchUpdate</code> response operation.
-  BatchWriteException:
-    type: object
-    properties:
-      Index:
-        $ref: '#/definitions/BatchOperationIndex'
-      Type:
-        $ref: '#/definitions/BatchWriteExceptionType'
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: A <code>BatchWrite</code> exception has occurred.
   BatchWriteExceptionType:
     type: string
     enum:
@@ -5379,275 +6817,70 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BatchWriteOperationResponse'
-  BatchWriteRequest:
-    type: object
-    required:
-      - Operations
-    properties:
-      Operations:
-        $ref: '#/definitions/BatchWriteOperationList'
-        description: A list of operations that are part of the batch.
-  BatchWriteResponse:
-    type: object
-    properties:
-      Responses:
-        $ref: '#/definitions/BatchWriteOperationResponseList'
-        description: A list of all the responses for each batch write.
   BinaryAttributeValue:
     type: string
-  Bool:
-    type: boolean
   BooleanAttributeValue:
     type: boolean
-  CannotListParentOfRootException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Cannot list the parents of a <a>Directory</a> root.
-  ConsistencyLevel:
+  DirectoryName:
+    type: string
+    pattern: '^[a-zA-Z0-9._-]*$'
+    minLength: 1
+    maxLength: 64
+  DirectoryArn:
+    type: string
+  FacetAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/FacetAttribute'
+  ObjectType:
     type: string
     enum:
-      - SERIALIZABLE
-      - EVENTUAL
-  CreateDirectoryRequest:
+      - NODE
+      - LEAF_NODE
+      - POLICY
+      - INDEX
+  FacetStyle:
+    type: string
+    enum:
+      - STATIC
+      - DYNAMIC
+  SchemaName:
+    type: string
+    pattern: '^[a-zA-Z0-9._-]*$'
+    minLength: 1
+    maxLength: 32
+  TypedLinkFacet:
     type: object
     required:
       - Name
+      - Attributes
+      - IdentityAttributeOrder
     properties:
       Name:
-        $ref: '#/definitions/DirectoryName'
-        description: 'The name of the <a>Directory</a>. Should be unique per account, per region.'
-  CreateDirectoryResponse:
-    type: object
-    required:
-      - DirectoryArn
-      - Name
-      - ObjectIdentifier
-      - AppliedSchemaArn
-    properties:
-      DirectoryArn:
-        $ref: '#/definitions/DirectoryArn'
-        description: 'The ARN that is associated with the <a>Directory</a>. For more information, see <a>arns</a>.'
-      Name:
-        $ref: '#/definitions/DirectoryName'
-        description: The name of the <a>Directory</a>.
-      ObjectIdentifier:
-        $ref: '#/definitions/ObjectIdentifier'
-        description: The root object node of the created directory.
-      AppliedSchemaArn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN of the published schema in the <a>Directory</a>. Once a published schema is copied into the directory, it has its own ARN, which is referred to applied schema ARN. For more information, see <a>arns</a>.'
-  CreateFacetRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/FacetName'
-        description: 'The name of the <a>Facet</a>, which is unique for a given schema.'
+        $ref: '#/definitions/TypedLinkName'
+        description: The unique name of the typed link facet.
       Attributes:
-        $ref: '#/definitions/FacetAttributeList'
-        description: The attributes that are associated with the <a>Facet</a>.
-      ObjectType:
-        $ref: '#/definitions/ObjectType'
-        description: '<p>Specifies whether a given object created from this facet is of type node, leaf node, policy or index.</p> <ul> <li> <p>Node: Can have multiple children but one parent.</p> </li> </ul> <ul> <li> <p>Leaf node: Cannot have children but can have multiple parents.</p> </li> </ul> <ul> <li> <p>Policy: Allows you to store a policy document and policy type. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.</p> </li> </ul> <ul> <li> <p>Index: Can be created with the Index API.</p> </li> </ul>'
-      FacetStyle:
-        $ref: '#/definitions/FacetStyle'
-        description: 'There are two different styles that you can define on any given facet, <code>Static</code> and <code>Dynamic</code>. For static facets, all attributes must be defined in the schema. For dynamic facets, attributes can be defined during data plane operations.'
-  CreateFacetResponse:
-    type: object
-    properties: {}
-  CreateIndexRequest:
-    type: object
-    required:
-      - OrderedIndexedAttributeList
-      - IsUnique
-    properties:
-      OrderedIndexedAttributeList:
-        $ref: '#/definitions/AttributeKeyList'
-        description: Specifies the attributes that should be indexed on. Currently only a single attribute is supported.
-      IsUnique:
-        $ref: '#/definitions/Bool'
-        description: Indicates whether the attribute that is being indexed has unique values or not.
-      ParentReference:
-        $ref: '#/definitions/ObjectReference'
-        description: A reference to the parent object that contains the index object.
-      LinkName:
-        $ref: '#/definitions/LinkName'
-        description: The name of the link between the parent object and the index object.
-  CreateIndexResponse:
-    type: object
-    properties:
-      ObjectIdentifier:
-        $ref: '#/definitions/ObjectIdentifier'
-        description: The <code>ObjectIdentifier</code> of the index created by this operation.
-  CreateObjectRequest:
-    type: object
-    required:
-      - SchemaFacets
-    properties:
-      SchemaFacets:
-        $ref: '#/definitions/SchemaFacetList'
-        description: A list of schema facets to be associated with the object. Do not provide minor version components. See <a>SchemaFacet</a> for details.
-      ObjectAttributeList:
-        $ref: '#/definitions/AttributeKeyAndValueList'
-        description: The attribute map whose attribute ARN contains the key and attribute value as the map value.
-      ParentReference:
-        $ref: '#/definitions/ObjectReference'
-        description: 'If specified, the parent reference to which this object will be attached.'
-      LinkName:
-        $ref: '#/definitions/LinkName'
-        description: The name of link that is used to attach this object to a parent.
-  CreateObjectResponse:
-    type: object
-    properties:
-      ObjectIdentifier:
-        $ref: '#/definitions/ObjectIdentifier'
-        description: The identifier that is associated with the object.
-  CreateSchemaRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/SchemaName'
-        description: The name that is associated with the schema. This is unique to each account and in each region.
-  CreateSchemaResponse:
-    type: object
-    properties:
-      SchemaArn:
-        $ref: '#/definitions/Arn'
-        description: 'The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.'
-  CreateTypedLinkFacetRequest:
-    type: object
-    required:
-      - Facet
-    properties:
-      Facet:
-        $ref: '#/definitions/TypedLinkFacet'
-        description: ' <a>Facet</a> structure that is associated with the typed link facet.'
-  CreateTypedLinkFacetResponse:
-    type: object
-    properties: {}
+        $ref: '#/definitions/TypedLinkAttributeDefinitionList'
+        description: 'A set of key-value pairs associated with the typed link. Typed link attributes are used when you have data values that are related to the link itself, and not to one of the two objects being linked. Identity attributes also serve to distinguish the link from others of the same type between the same objects.'
+      IdentityAttributeOrder:
+        $ref: '#/definitions/AttributeNameList'
+        description: 'The set of attributes that distinguish links made from this facet from each other, in the order of significance. Listing typed links can filter on the values of these attributes. See <a>ListOutgoingTypedLinks</a> and <a>ListIncomingTypedLinks</a> for details.'
+    description: 'Defines the typed links structure and its attributes. To create a typed link facet, use the <a>CreateTypedLinkFacet</a> API.'
   Date:
     type: string
     format: date-time
   DatetimeAttributeValue:
     type: string
     format: date-time
-  DeleteDirectoryRequest:
-    type: object
-    properties: {}
-  DeleteDirectoryResponse:
-    type: object
-    required:
-      - DirectoryArn
-    properties:
-      DirectoryArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the deleted directory.
-  DeleteFacetRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/FacetName'
-        description: The name of the facet to delete.
-  DeleteFacetResponse:
-    type: object
-    properties: {}
-  DeleteObjectRequest:
-    type: object
-    required:
-      - ObjectReference
-    properties:
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: A reference that identifies the object.
-  DeleteObjectResponse:
-    type: object
-    properties: {}
-  DeleteSchemaRequest:
-    type: object
-    properties: {}
-  DeleteSchemaResponse:
-    type: object
-    properties:
-      SchemaArn:
-        $ref: '#/definitions/Arn'
-        description: 'The input ARN that is returned as part of the response. For more information, see <a>arns</a>.'
-  DeleteTypedLinkFacetRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/TypedLinkName'
-        description: The unique name of the typed link facet.
-  DeleteTypedLinkFacetResponse:
-    type: object
-    properties: {}
-  DetachFromIndexRequest:
-    type: object
-    required:
-      - IndexReference
-      - TargetReference
-    properties:
-      IndexReference:
-        $ref: '#/definitions/ObjectReference'
-        description: A reference to the index object.
-      TargetReference:
-        $ref: '#/definitions/ObjectReference'
-        description: A reference to the object being detached from the index.
-  DetachFromIndexResponse:
-    type: object
-    properties:
-      DetachedObjectIdentifier:
-        $ref: '#/definitions/ObjectIdentifier'
-        description: The <code>ObjectIdentifier</code> of the object that was detached from the index.
-  DetachObjectRequest:
-    type: object
-    required:
-      - ParentReference
-      - LinkName
-    properties:
-      ParentReference:
-        $ref: '#/definitions/ObjectReference'
-        description: The parent reference from which the object with the specified link name is detached.
-      LinkName:
-        $ref: '#/definitions/LinkName'
-        description: The link name associated with the object that needs to be detached.
-  DetachObjectResponse:
-    type: object
-    properties:
-      DetachedObjectIdentifier:
-        $ref: '#/definitions/ObjectIdentifier'
-        description: The <code>ObjectIdentifier</code> that was detached from the object.
-  DetachPolicyRequest:
-    type: object
-    required:
-      - PolicyReference
-      - ObjectReference
-    properties:
-      PolicyReference:
-        $ref: '#/definitions/ObjectReference'
-        description: Reference that identifies the policy object.
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: Reference that identifies the object whose policy object will be detached.
-  DetachPolicyResponse:
-    type: object
-    properties: {}
-  DetachTypedLinkRequest:
-    type: object
-    required:
-      - TypedLinkSpecifier
-    properties:
-      TypedLinkSpecifier:
-        $ref: '#/definitions/TypedLinkSpecifier'
-        description: Used to accept a typed link specifier as input.
+  TypedLinkName:
+    type: string
+    pattern: '^[a-zA-Z0-9._-]*$'
+  DirectoryState:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+      - DELETED
   Directory:
     type: object
     properties:
@@ -5664,71 +6897,10 @@ definitions:
         $ref: '#/definitions/Date'
         description: The date and time when the directory was created.
     description: Directory structure that includes the directory name and directory ARN.
-  DirectoryAlreadyExistsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that a <a>Directory</a> could not be created due to a naming conflict. Choose a different name and try again.
-  DirectoryArn:
-    type: string
-  DirectoryDeletedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'A directory that has been deleted and to which access has been attempted. Note: The requested resource will eventually cease to exist.'
   DirectoryList:
     type: array
     items:
       $ref: '#/definitions/Directory'
-  DirectoryName:
-    type: string
-    pattern: '^[a-zA-Z0-9._-]*$'
-    minLength: 1
-    maxLength: 64
-  DirectoryNotDisabledException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: An operation can only operate on a disabled directory.
-  DirectoryNotEnabledException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Operations are only permitted on enabled directories.
-  DirectoryState:
-    type: string
-    enum:
-      - ENABLED
-      - DISABLED
-      - DELETED
-  DisableDirectoryRequest:
-    type: object
-    properties: {}
-  DisableDirectoryResponse:
-    type: object
-    required:
-      - DirectoryArn
-    properties:
-      DirectoryArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the directory that has been disabled.
-  EnableDirectoryRequest:
-    type: object
-    properties: {}
-  EnableDirectoryResponse:
-    type: object
-    required:
-      - DirectoryArn
-    properties:
-      DirectoryArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the enabled directory.
-  ExceptionMessage:
-    type: string
   Facet:
     type: object
     properties:
@@ -5742,30 +6914,6 @@ definitions:
         $ref: '#/definitions/FacetStyle'
         description: 'There are two different styles that you can define on any given facet, <code>Static</code> and <code>Dynamic</code>. For static facets, all attributes must be defined in the schema. For dynamic facets, attributes can be defined during data plane operations.'
     description: 'A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <code> <a>Rule</a>s</code>, and <code>ObjectTypes</code>. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/whatarefacets.html">Facets</a> for more information.'
-  FacetAlreadyExistsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: A facet with the same name already exists.
-  FacetAttribute:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/AttributeName'
-        description: The name of the facet attribute.
-      AttributeDefinition:
-        $ref: '#/definitions/FacetAttributeDefinition'
-        description: 'A facet attribute consists of either a definition or a reference. This structure contains the attribute definition. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
-      AttributeReference:
-        $ref: '#/definitions/FacetAttributeReference'
-        description: 'An attribute reference that is associated with the attribute. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
-      RequiredBehavior:
-        $ref: '#/definitions/RequiredAttributeBehavior'
-        description: The required behavior of the <code>FacetAttribute</code>.
-    description: An attribute that is associated with the <a>Facet</a>.
   FacetAttributeDefinition:
     type: object
     required:
@@ -5784,10 +6932,6 @@ definitions:
         $ref: '#/definitions/RuleMap'
         description: Validation rules attached to the attribute definition.
     description: 'A facet attribute definition. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
-  FacetAttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/FacetAttribute'
   FacetAttributeReference:
     type: object
     required:
@@ -5801,6 +6945,29 @@ definitions:
         $ref: '#/definitions/AttributeName'
         description: 'The target attribute name that is associated with the facet reference. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
     description: The facet attribute reference that specifies the attribute definition that contains the attribute facet name and attribute name.
+  RequiredAttributeBehavior:
+    type: string
+    enum:
+      - REQUIRED_ALWAYS
+      - NOT_REQUIRED
+  FacetAttribute:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/AttributeName'
+        description: The name of the facet attribute.
+      AttributeDefinition:
+        $ref: '#/definitions/FacetAttributeDefinition'
+        description: 'A facet attribute consists of either a definition or a reference. This structure contains the attribute definition. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
+      AttributeReference:
+        $ref: '#/definitions/FacetAttributeReference'
+        description: 'An attribute reference that is associated with the attribute. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
+      RequiredBehavior:
+        $ref: '#/definitions/RequiredAttributeBehavior'
+        description: The required behavior of the <code>FacetAttribute</code>.
+    description: An attribute that is associated with the <a>Facet</a>.
   FacetAttributeType:
     type: string
     enum:
@@ -5810,6 +6977,20 @@ definitions:
       - NUMBER
       - DATETIME
       - VARIANT
+  RuleMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/RuleKey'
+        value:
+          $ref: '#/definitions/Rule'
+  UpdateActionType:
+    type: string
+    enum:
+      - CREATE_OR_UPDATE
+      - DELETE
   FacetAttributeUpdate:
     type: object
     properties:
@@ -5824,169 +7005,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/FacetAttributeUpdate'
-  FacetInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Occurs when deleting a facet that contains an attribute that is a target to an attribute reference in a different facet.
-  FacetName:
-    type: string
-    pattern: '^[a-zA-Z0-9._-]*$'
-    minLength: 1
-    maxLength: 64
   FacetNameList:
     type: array
     items:
       $ref: '#/definitions/FacetName'
-  FacetNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The specified <a>Facet</a> could not be found.
-  FacetStyle:
+  SchemaJsonDocument:
     type: string
-    enum:
-      - STATIC
-      - DYNAMIC
-  FacetValidationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The <a>Facet</a> that you provided was not well formed or could not be validated with the schema.
-  GetAppliedSchemaVersionRequest:
-    type: object
-    required:
-      - SchemaArn
-    properties:
-      SchemaArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the applied schema.
-  GetAppliedSchemaVersionResponse:
-    type: object
-    properties:
-      AppliedSchemaArn:
-        $ref: '#/definitions/Arn'
-        description: 'Current applied schema ARN, including the minor version in use if one was provided.'
-  GetDirectoryRequest:
-    type: object
-    properties: {}
-  GetDirectoryResponse:
-    type: object
-    required:
-      - Directory
-    properties:
-      Directory:
-        $ref: '#/definitions/Directory'
-        description: Metadata about the directory.
-  GetFacetRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/FacetName'
-        description: The name of the facet to retrieve.
-  GetFacetResponse:
-    type: object
-    properties:
-      Facet:
-        $ref: '#/definitions/Facet'
-        description: The <a>Facet</a> structure that is associated with the facet.
-  GetLinkAttributesRequest:
-    type: object
-    required:
-      - TypedLinkSpecifier
-      - AttributeNames
-    properties:
-      TypedLinkSpecifier:
-        $ref: '#/definitions/TypedLinkSpecifier'
-        description: Allows a typed link specifier to be accepted as input.
-      AttributeNames:
-        $ref: '#/definitions/AttributeNameList'
-        description: A list of attribute names whose values will be retrieved.
-      ConsistencyLevel:
-        $ref: '#/definitions/ConsistencyLevel'
-        description: The consistency level at which to retrieve the attributes on a typed link.
-  GetLinkAttributesResponse:
-    type: object
-    properties:
-      Attributes:
-        $ref: '#/definitions/AttributeKeyAndValueList'
-        description: The attributes that are associated with the typed link.
-  GetObjectAttributesRequest:
-    type: object
-    required:
-      - ObjectReference
-      - SchemaFacet
-      - AttributeNames
-    properties:
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: Reference that identifies the object whose attributes will be retrieved.
-      SchemaFacet:
-        $ref: '#/definitions/SchemaFacet'
-        description: Identifier for the facet whose attributes will be retrieved. See <a>SchemaFacet</a> for details.
-      AttributeNames:
-        $ref: '#/definitions/AttributeNameList'
-        description: List of attribute names whose values will be retrieved.
-  GetObjectAttributesResponse:
-    type: object
-    properties:
-      Attributes:
-        $ref: '#/definitions/AttributeKeyAndValueList'
-        description: The attributes that are associated with the object.
-  GetObjectInformationRequest:
-    type: object
-    required:
-      - ObjectReference
-    properties:
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: A reference to the object.
-  GetObjectInformationResponse:
-    type: object
-    properties:
-      SchemaFacets:
-        $ref: '#/definitions/SchemaFacetList'
-        description: 'The facets attached to the specified object. Although the response does not include minor version information, the most recently applied minor version of each Facet is in effect. See <a>GetAppliedSchemaVersion</a> for details.'
-      ObjectIdentifier:
-        $ref: '#/definitions/ObjectIdentifier'
-        description: The <code>ObjectIdentifier</code> of the specified object.
-  GetSchemaAsJsonRequest:
-    type: object
-    properties: {}
-  GetSchemaAsJsonResponse:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/SchemaName'
-        description: The name of the retrieved schema.
-      Document:
-        $ref: '#/definitions/SchemaJsonDocument'
-        description: The JSON representation of the schema document.
-  GetTypedLinkFacetInformationRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/TypedLinkName'
-        description: The unique name of the typed link facet.
-  GetTypedLinkFacetInformationResponse:
-    type: object
-    properties:
-      IdentityAttributeOrder:
-        $ref: '#/definitions/AttributeNameList'
-        description: 'The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
-  IncompatibleSchemaException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates a failure occurred while performing a check for backward compatibility between the specified schema and the schema that is currently applied to the directory.
   IndexAttachment:
     type: object
     properties:
@@ -5997,70 +7021,6 @@ definitions:
         $ref: '#/definitions/ObjectIdentifier'
         description: 'In response to <a>ListIndex</a>, the <code>ObjectIdentifier</code> of the object attached to the index. In response to <a>ListAttachedIndices</a>, the <code>ObjectIdentifier</code> of the index attached to the object. This field will always contain the <code>ObjectIdentifier</code> of the object on the opposite side of the attachment specified in the query.'
     description: Represents an index and an attached object.
-  IndexAttachmentList:
-    type: array
-    items:
-      $ref: '#/definitions/IndexAttachment'
-  IndexedAttributeMissingException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: An object has been attempted to be attached to an object that does not have the appropriate attribute value.
-  InternalServiceException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'Indicates a problem that must be resolved by Amazon Web Services. This might be a transient error in which case you can retry your request until it succeeds. Otherwise, go to the <a href="http://status.aws.amazon.com/">AWS Service Health Dashboard</a> site to see if there are any operational issues with the service.'
-  InvalidArnException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the provided ARN value is not valid.
-  InvalidAttachmentException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that an attempt to attach an object with the same link name or to apply a schema with the same name has occurred. Rename the link or the schema and then try again.
-  InvalidFacetUpdateException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: An attempt to modify a <a>Facet</a> resulted in an invalid schema exception.
-  InvalidNextTokenException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the <code>NextToken</code> value is not valid.
-  InvalidRuleException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Occurs when any of the rule parameter keys or values are invalid.
-  InvalidSchemaDocException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the provided <code>SchemaDoc</code> value is not valid.
-  InvalidTaggingRequestException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Can occur for multiple reasons such as when you tag a resource that doesn’t exist or if you specify a higher number of tags for a resource than the allowed limit. Allowed limit is 50 tags per resource.
-  LimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'Indicates that limits are exceeded. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html">Limits</a> for more information.'
   LinkAttributeAction:
     type: object
     properties:
@@ -6081,552 +7041,32 @@ definitions:
         $ref: '#/definitions/LinkAttributeAction'
         description: The action to perform as part of the attribute update.
     description: Structure that contains attribute update information.
-  LinkAttributeUpdateList:
-    type: array
-    items:
-      $ref: '#/definitions/LinkAttributeUpdate'
-  LinkName:
-    type: string
-    pattern: '[^\/\[\]\(\):\{\}#@!?\s\\;]+'
-    minLength: 1
-    maxLength: 64
-  LinkNameAlreadyInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that a link could not be created due to a naming conflict. Choose a different name and then try again.
-  LinkNameToObjectIdentifierMap:
+  ObjectIdentifierToLinkNameMap:
     type: array
     items:
       type: object
       properties:
         key:
-          $ref: '#/definitions/LinkName'
-        value:
           $ref: '#/definitions/ObjectIdentifier'
-  ListAppliedSchemaArnsRequest:
-    type: object
-    required:
-      - DirectoryArn
-    properties:
-      DirectoryArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the directory you are listing.
-      SchemaArn:
-        $ref: '#/definitions/Arn'
-        description: The response for <code>ListAppliedSchemaArns</code> when this parameter is used will list all minor version ARNs for a major version.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of results to retrieve.
-  ListAppliedSchemaArnsResponse:
-    type: object
-    properties:
-      SchemaArns:
-        $ref: '#/definitions/Arns'
-        description: The ARNs of schemas that are applied to the directory.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListAttachedIndicesRequest:
-    type: object
-    required:
-      - TargetReference
-    properties:
-      TargetReference:
-        $ref: '#/definitions/ObjectReference'
-        description: A reference to the object that has indices attached.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of results to retrieve.
-  ListAttachedIndicesResponse:
-    type: object
-    properties:
-      IndexAttachments:
-        $ref: '#/definitions/IndexAttachmentList'
-        description: The indices attached to the specified object.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListDevelopmentSchemaArnsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of results to retrieve.
-  ListDevelopmentSchemaArnsResponse:
-    type: object
-    properties:
-      SchemaArns:
-        $ref: '#/definitions/Arns'
-        description: The ARNs of retrieved development schemas.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListDirectoriesRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of results to retrieve.
-      state:
-        $ref: '#/definitions/DirectoryState'
-        description: 'The state of the directories in the list. Can be either Enabled, Disabled, or Deleted.'
-  ListDirectoriesResponse:
-    type: object
-    required:
-      - Directories
-    properties:
-      Directories:
-        $ref: '#/definitions/DirectoryList'
-        description: Lists all directories that are associated with your account in pagination fashion.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListFacetAttributesRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/FacetName'
-        description: The name of the facet whose attributes will be retrieved.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of results to retrieve.
-  ListFacetAttributesResponse:
-    type: object
-    properties:
-      Attributes:
-        $ref: '#/definitions/FacetAttributeList'
-        description: The attributes attached to the facet.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListFacetNamesRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of results to retrieve.
-  ListFacetNamesResponse:
-    type: object
-    properties:
-      FacetNames:
-        $ref: '#/definitions/FacetNameList'
-        description: The names of facets that exist within the schema.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListIncomingTypedLinksRequest:
-    type: object
-    required:
-      - ObjectReference
-    properties:
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: Reference that identifies the object whose attributes will be listed.
-      FilterAttributeRanges:
-        $ref: '#/definitions/TypedLinkAttributeRangeList'
-        description: 'Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.'
-      FilterTypedLink:
-        $ref: '#/definitions/TypedLinkSchemaAndFacetName'
-        description: 'Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of results to retrieve.
-      ConsistencyLevel:
-        $ref: '#/definitions/ConsistencyLevel'
-        description: The consistency level to execute the request at.
-  ListIncomingTypedLinksResponse:
-    type: object
-    properties:
-      LinkSpecifiers:
-        $ref: '#/definitions/TypedLinkSpecifierList'
-        description: Returns one or more typed link specifiers as output.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListIndexRequest:
-    type: object
-    required:
-      - IndexReference
-    properties:
-      RangesOnIndexedValues:
-        $ref: '#/definitions/ObjectAttributeRangeList'
-        description: Specifies the ranges of indexed values that you want to query.
-      IndexReference:
-        $ref: '#/definitions/ObjectReference'
-        description: The reference to the index to list.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: 'The maximum number of objects in a single page to retrieve from the index during a request. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html#limits_cd">AWS Directory Service Limits</a>.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListIndexResponse:
-    type: object
-    properties:
-      IndexAttachments:
-        $ref: '#/definitions/IndexAttachmentList'
-        description: The objects and indexed values attached to the index.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListManagedSchemaArnsRequest:
-    type: object
-    properties:
-      SchemaArn:
-        $ref: '#/definitions/Arn'
-        description: 'The response for ListManagedSchemaArns. When this parameter is used, all minor version ARNs for a major version are listed.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of results to retrieve.
-  ListManagedSchemaArnsResponse:
-    type: object
-    properties:
-      SchemaArns:
-        $ref: '#/definitions/Arns'
-        description: The ARNs for all AWS managed schemas.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListObjectAttributesRequest:
-    type: object
-    required:
-      - ObjectReference
-    properties:
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: The reference that identifies the object whose attributes will be listed.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
-      FacetFilter:
-        $ref: '#/definitions/SchemaFacet'
-        description: Used to filter the list of object attributes that are associated with a certain facet.
-  ListObjectAttributesResponse:
-    type: object
-    properties:
-      Attributes:
-        $ref: '#/definitions/AttributeKeyAndValueList'
-        description: 'Attributes map that is associated with the object. <code>AttributeArn</code> is the key, and attribute value is the value.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListObjectChildrenRequest:
-    type: object
-    required:
-      - ObjectReference
-    properties:
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: The reference that identifies the object for which child objects are being listed.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
-  ListObjectChildrenResponse:
-    type: object
-    properties:
-      Children:
-        $ref: '#/definitions/LinkNameToObjectIdentifierMap'
-        description: 'Children structure, which is a map with key as the <code>LinkName</code> and <code>ObjectIdentifier</code> as the value.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListObjectParentPathsRequest:
-    type: object
-    required:
-      - ObjectReference
-    properties:
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: The reference that identifies the object whose parent paths are listed.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
-  ListObjectParentPathsResponse:
-    type: object
-    properties:
-      PathToObjectIdentifiersList:
-        $ref: '#/definitions/PathToObjectIdentifiersList'
-        description: Returns the path to the <code>ObjectIdentifiers</code> that are associated with the directory.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListObjectParentsRequest:
-    type: object
-    required:
-      - ObjectReference
-    properties:
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: The reference that identifies the object for which parent objects are being listed.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
-  ListObjectParentsResponse:
-    type: object
-    properties:
-      Parents:
-        $ref: '#/definitions/ObjectIdentifierToLinkNameMap'
-        description: 'The parent structure, which is a map with key as the <code>ObjectIdentifier</code> and LinkName as the value.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListObjectPoliciesRequest:
-    type: object
-    required:
-      - ObjectReference
-    properties:
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: Reference that identifies the object for which policies will be listed.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
-  ListObjectPoliciesResponse:
-    type: object
-    properties:
-      AttachedPolicyIds:
-        $ref: '#/definitions/ObjectIdentifierList'
-        description: 'A list of policy <code>ObjectIdentifiers</code>, that are attached to the object.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListOutgoingTypedLinksRequest:
-    type: object
-    required:
-      - ObjectReference
-    properties:
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: A reference that identifies the object whose attributes will be listed.
-      FilterAttributeRanges:
-        $ref: '#/definitions/TypedLinkAttributeRangeList'
-        description: 'Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.'
-      FilterTypedLink:
-        $ref: '#/definitions/TypedLinkSchemaAndFacetName'
-        description: 'Filters are interpreted in the order of the attributes defined on the typed link facet, not the order they are supplied to any API calls.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of results to retrieve.
-      ConsistencyLevel:
-        $ref: '#/definitions/ConsistencyLevel'
-        description: The consistency level to execute the request at.
-  ListOutgoingTypedLinksResponse:
-    type: object
-    properties:
-      TypedLinkSpecifiers:
-        $ref: '#/definitions/TypedLinkSpecifierList'
-        description: Returns a typed link specifier as output.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListPolicyAttachmentsRequest:
-    type: object
-    required:
-      - PolicyReference
-    properties:
-      PolicyReference:
-        $ref: '#/definitions/ObjectReference'
-        description: The reference that identifies the policy object.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
-  ListPolicyAttachmentsResponse:
-    type: object
-    properties:
-      ObjectIdentifiers:
-        $ref: '#/definitions/ObjectIdentifierList'
-        description: A list of <code>ObjectIdentifiers</code> to which the policy is attached.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListPublishedSchemaArnsRequest:
-    type: object
-    properties:
-      SchemaArn:
-        $ref: '#/definitions/Arn'
-        description: The response for <code>ListPublishedSchemaArns</code> when this parameter is used will list all minor version ARNs for a major version.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of results to retrieve.
-  ListPublishedSchemaArnsResponse:
-    type: object
-    properties:
-      SchemaArns:
-        $ref: '#/definitions/Arns'
-        description: The ARNs of published schemas.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListTagsForResourceRequest:
-    type: object
-    required:
-      - ResourceArn
-    properties:
-      ResourceArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the resource. Tagging is only supported for directories.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token. This is for future use. Currently pagination is not supported for tagging.
-      MaxResults:
-        $ref: '#/definitions/TagsNumberResults'
-        description: The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. This is for future use and is not supported currently.
-  ListTagsForResourceResponse:
-    type: object
-    properties:
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: A list of tag key value pairs that are associated with the response.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
-  ListTypedLinkFacetAttributesRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/TypedLinkName'
-        description: The unique name of the typed link facet.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of results to retrieve.
-  ListTypedLinkFacetAttributesResponse:
-    type: object
-    properties:
-      Attributes:
-        $ref: '#/definitions/TypedLinkAttributeDefinitionList'
-        description: An ordered set of attributes associate with the typed link.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  ListTypedLinkFacetNamesRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of results to retrieve.
-  ListTypedLinkFacetNamesResponse:
-    type: object
-    properties:
-      FacetNames:
-        $ref: '#/definitions/TypedLinkNameList'
-        description: The names of typed link facets that exist within the schema.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  LookupPolicyRequest:
-    type: object
-    required:
-      - ObjectReference
-    properties:
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: Reference that identifies the object whose policies will be looked up.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token to request the next page of results.
-      MaxResults:
-        $ref: '#/definitions/NumberResults'
-        description: The maximum number of items to be retrieved in a single call. This is an approximate number.
-  LookupPolicyResponse:
-    type: object
-    properties:
-      PolicyToPathList:
-        $ref: '#/definitions/PolicyToPathList'
-        description: 'Provides list of path to policies. Policies contain <code>PolicyId</code>, <code>ObjectIdentifier</code>, and <code>PolicyType</code>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The pagination token.
-  NextToken:
-    type: string
-  NotIndexException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the requested operation can only operate on index objects.
-  NotNodeException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'Occurs when any invalid operations are performed on an object that is not a node, such as calling <code>ListObjectChildren</code> for a leaf node object.'
-  NotPolicyException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the requested operation can only operate on policy objects.
+        value:
+          $ref: '#/definitions/LinkName'
+  TagsNumberResults:
+    type: integer
+    minimum: 50
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  TypedLinkAttributeDefinitionList:
+    type: array
+    items:
+      $ref: '#/definitions/TypedLinkAttributeDefinition'
+  TypedLinkNameList:
+    type: array
+    items:
+      $ref: '#/definitions/TypedLinkName'
   NumberAttributeValue:
     type: string
-  NumberResults:
-    type: integer
-    minimum: 1
-  ObjectAlreadyDetachedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the object is not attached to the index.
   ObjectAttributeAction:
     type: object
     properties:
@@ -6637,6 +7077,25 @@ definitions:
         $ref: '#/definitions/TypedAttributeValue'
         description: The value that you want to update to.
     description: The action to take on the object attribute.
+  TypedAttributeValueRange:
+    type: object
+    required:
+      - StartMode
+      - EndMode
+    properties:
+      StartMode:
+        $ref: '#/definitions/RangeMode'
+        description: The inclusive or exclusive range start.
+      StartValue:
+        $ref: '#/definitions/TypedAttributeValue'
+        description: The value to start the range at.
+      EndMode:
+        $ref: '#/definitions/RangeMode'
+        description: The inclusive or exclusive range end.
+      EndValue:
+        $ref: '#/definitions/TypedAttributeValue'
+        description: The attribute value to terminate the range at.
+    description: 'A range of attribute values. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters">Range Filters</a>.'
   ObjectAttributeRange:
     type: object
     properties:
@@ -6647,10 +7106,6 @@ definitions:
         $ref: '#/definitions/TypedAttributeValueRange'
         description: The range of attribute values being selected.
     description: A range of attributes.
-  ObjectAttributeRangeList:
-    type: array
-    items:
-      $ref: '#/definitions/ObjectAttributeRange'
   ObjectAttributeUpdate:
     type: object
     properties:
@@ -6661,45 +7116,8 @@ definitions:
         $ref: '#/definitions/ObjectAttributeAction'
         description: The action to perform as part of the attribute update.
     description: Structure that contains attribute update information.
-  ObjectAttributeUpdateList:
-    type: array
-    items:
-      $ref: '#/definitions/ObjectAttributeUpdate'
-  ObjectIdentifier:
+  SelectorObjectReference:
     type: string
-  ObjectIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/ObjectIdentifier'
-  ObjectIdentifierToLinkNameMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ObjectIdentifier'
-        value:
-          $ref: '#/definitions/LinkName'
-  ObjectNotDetachedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the requested operation cannot be completed because the object has not been detached from the tree.
-  ObjectReference:
-    type: object
-    properties:
-      Selector:
-        $ref: '#/definitions/SelectorObjectReference'
-        description: '<p>A path selector supports easy selection of an object by the parent/child links leading to it from the directory root. Use the link names from each parent/child link to construct the path. Path selectors start with a slash (/) and link names are separated by slashes. For more information about paths, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#accessingobjects">Accessing Objects</a>. You can identify an object in one of the following ways:</p> <ul> <li> <p> <i>$ObjectIdentifier</i> - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier</p> </li> <li> <p> <i>/some/path</i> - Identifies the object based on path</p> </li> <li> <p> <i>#SomeBatchReference</i> - Identifies the object in a batch call</p> </li> </ul>'
-    description: The reference that identifies an object.
-  ObjectType:
-    type: string
-    enum:
-      - NODE
-      - LEAF_NODE
-      - POLICY
-      - INDEX
   PathString:
     type: string
   PathToObjectIdentifiers:
@@ -6712,10 +7130,8 @@ definitions:
         $ref: '#/definitions/ObjectIdentifierList'
         description: Lists <code>ObjectIdentifiers</code> starting from directory root to the object in the request.
     description: Returns the path to the <code>ObjectIdentifiers</code> that is associated with the directory.
-  PathToObjectIdentifiersList:
-    type: array
-    items:
-      $ref: '#/definitions/PathToObjectIdentifiers'
+  PolicyType:
+    type: string
   PolicyAttachment:
     type: object
     properties:
@@ -6743,46 +7159,11 @@ definitions:
         $ref: '#/definitions/PolicyAttachmentList'
         description: List of policy objects.
     description: Used when a regular object exists in a <a>Directory</a> and you want to find all of the policies that are associated with that object and the parent to that object.
-  PolicyToPathList:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyToPath'
-  PolicyType:
+  Version:
     type: string
-  PublishSchemaRequest:
-    type: object
-    required:
-      - Version
-    properties:
-      Version:
-        $ref: '#/definitions/Version'
-        description: The major version under which the schema will be published. Schemas have both a major and minor version associated with them.
-      MinorVersion:
-        $ref: '#/definitions/Version'
-        description: The minor version under which the schema will be published. This parameter is recommended. Schemas have both a major and minor version associated with them.
-      Name:
-        $ref: '#/definitions/SchemaName'
-        description: 'The new name under which the schema will be published. If this is not provided, the development schema is considered.'
-  PublishSchemaResponse:
-    type: object
-    properties:
-      PublishedSchemaArn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN that is associated with the published schema. For more information, see <a>arns</a>.'
-  PutSchemaFromJsonRequest:
-    type: object
-    required:
-      - Document
-    properties:
-      Document:
-        $ref: '#/definitions/SchemaJsonDocument'
-        description: The replacement JSON schema.
-  PutSchemaFromJsonResponse:
-    type: object
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the schema to update.
+    pattern: '^[a-zA-Z0-9._-]*$'
+    minLength: 1
+    maxLength: 10
   RangeMode:
     type: string
     enum:
@@ -6791,38 +7172,22 @@ definitions:
       - LAST_BEFORE_MISSING_VALUES
       - INCLUSIVE
       - EXCLUSIVE
-  RemoveFacetFromObjectRequest:
-    type: object
-    required:
-      - SchemaFacet
-      - ObjectReference
-    properties:
-      SchemaFacet:
-        $ref: '#/definitions/SchemaFacet'
-        description: The facet to remove. See <a>SchemaFacet</a> for details.
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: A reference to the object to remove the facet from.
-  RemoveFacetFromObjectResponse:
-    type: object
-    properties: {}
-  RequiredAttributeBehavior:
+  RuleType:
     type: string
     enum:
-      - REQUIRED_ALWAYS
-      - NOT_REQUIRED
-  ResourceNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The specified resource could not be found.
-  RetryableConflictException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'Occurs when a conflict with a previous successful write is detected. For example, if a write operation occurs on an object and then an attempt is made to read the object using “SERIALIZABLE” consistency, this exception may result. This generally occurs when the previous write did not have time to propagate to the host serving the current request. A retry (with appropriate backoff logic) is the recommended response to this exception.'
+      - BINARY_LENGTH
+      - NUMBER_COMPARISON
+      - STRING_FROM_SET
+      - STRING_LENGTH
+  RuleParameterMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/RuleParameterKey'
+        value:
+          $ref: '#/definitions/RuleParameterValue'
   Rule:
     type: object
     properties:
@@ -6838,77 +7203,15 @@ definitions:
     pattern: '^[a-zA-Z0-9._-]*$'
     minLength: 1
     maxLength: 64
-  RuleMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/RuleKey'
-        value:
-          $ref: '#/definitions/Rule'
   RuleParameterKey:
     type: string
-  RuleParameterMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/RuleParameterKey'
-        value:
-          $ref: '#/definitions/RuleParameterValue'
   RuleParameterValue:
     type: string
-  RuleType:
-    type: string
-    enum:
-      - BINARY_LENGTH
-      - NUMBER_COMPARISON
-      - STRING_FROM_SET
-      - STRING_LENGTH
-  SchemaAlreadyExistsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that a schema could not be created due to a naming conflict. Please select a different name and then try again.
-  SchemaAlreadyPublishedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that a schema is already published.
-  SchemaFacet:
-    type: object
-    properties:
-      SchemaArn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN of the schema that contains the facet with no minor component. See <a>arns</a> and <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/inplaceschemaupgrade.html">In-Place Schema Upgrade</a> for a description of when to provide minor versions.'
-      FacetName:
-        $ref: '#/definitions/FacetName'
-        description: The name of the facet.
-    description: A facet.
-  SchemaFacetList:
-    type: array
-    items:
-      $ref: '#/definitions/SchemaFacet'
-  SchemaJsonDocument:
-    type: string
-  SchemaName:
-    type: string
-    pattern: '^[a-zA-Z0-9._-]*$'
-    minLength: 1
-    maxLength: 32
-  SelectorObjectReference:
-    type: string
-  StillContainsLinksException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The object could not be deleted because links still exist. Remove the links and then try the operation again.
   StringAttributeValue:
+    type: string
+  TagKey:
+    type: string
+  TagValue:
     type: string
   Tag:
     type: object
@@ -6920,74 +7223,10 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value that is associated with the tag.
     description: The tag structure that contains a tag key and value.
-  TagKey:
-    type: string
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagResourceRequest:
-    type: object
-    required:
-      - ResourceArn
-      - Tags
-    properties:
-      ResourceArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the resource. Tagging is only supported for directories.
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: A list of tag key-value pairs.
-  TagResourceResponse:
-    type: object
-    properties: {}
-  TagValue:
-    type: string
-  TagsNumberResults:
-    type: integer
-    minimum: 50
-  TypedAttributeValue:
-    type: object
-    properties:
-      StringValue:
-        $ref: '#/definitions/StringAttributeValue'
-        description: A string data value.
-      BinaryValue:
-        $ref: '#/definitions/BinaryAttributeValue'
-        description: A binary data value.
-      BooleanValue:
-        $ref: '#/definitions/BooleanAttributeValue'
-        description: A Boolean data value.
-      NumberValue:
-        $ref: '#/definitions/NumberAttributeValue'
-        description: A number data value.
-      DatetimeValue:
-        $ref: '#/definitions/DatetimeAttributeValue'
-        description: A date and time value.
-    description: 'Represents the data for a typed attribute. You can set one, and only one, of the elements. Each attribute in an item is a name-value pair. Attributes have a single value.'
-  TypedAttributeValueRange:
-    type: object
-    required:
-      - StartMode
-      - EndMode
-    properties:
-      StartMode:
-        $ref: '#/definitions/RangeMode'
-        description: The inclusive or exclusive range start.
-      StartValue:
-        $ref: '#/definitions/TypedAttributeValue'
-        description: The value to start the range at.
-      EndMode:
-        $ref: '#/definitions/RangeMode'
-        description: The inclusive or exclusive range end.
-      EndValue:
-        $ref: '#/definitions/TypedAttributeValue'
-        description: The attribute value to terminate the range at.
-    description: 'A range of attribute values. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters">Range Filters</a>.'
   TypedLinkAttributeDefinition:
     type: object
     required:
@@ -7014,10 +7253,6 @@ definitions:
         $ref: '#/definitions/RequiredAttributeBehavior'
         description: The required behavior of the <code>TypedLinkAttributeDefinition</code>.
     description: A typed link attribute definition.
-  TypedLinkAttributeDefinitionList:
-    type: array
-    items:
-      $ref: '#/definitions/TypedLinkAttributeDefinition'
   TypedLinkAttributeRange:
     type: object
     required:
@@ -7030,27 +7265,6 @@ definitions:
         $ref: '#/definitions/TypedAttributeValueRange'
         description: The range of attribute values that are being selected.
     description: Identifies the range of attributes that are used by a specified filter.
-  TypedLinkAttributeRangeList:
-    type: array
-    items:
-      $ref: '#/definitions/TypedLinkAttributeRange'
-  TypedLinkFacet:
-    type: object
-    required:
-      - Name
-      - Attributes
-      - IdentityAttributeOrder
-    properties:
-      Name:
-        $ref: '#/definitions/TypedLinkName'
-        description: The unique name of the typed link facet.
-      Attributes:
-        $ref: '#/definitions/TypedLinkAttributeDefinitionList'
-        description: 'A set of key-value pairs associated with the typed link. Typed link attributes are used when you have data values that are related to the link itself, and not to one of the two objects being linked. Identity attributes also serve to distinguish the link from others of the same type between the same objects.'
-      IdentityAttributeOrder:
-        $ref: '#/definitions/AttributeNameList'
-        description: 'The set of attributes that distinguish links made from this facet from each other, in the order of significance. Listing typed links can filter on the values of these attributes. See <a>ListOutgoingTypedLinks</a> and <a>ListIncomingTypedLinks</a> for details.'
-    description: 'Defines the typed links structure and its attributes. To create a typed link facet, use the <a>CreateTypedLinkFacet</a> API.'
   TypedLinkFacetAttributeUpdate:
     type: object
     required:
@@ -7068,217 +7282,3 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TypedLinkFacetAttributeUpdate'
-  TypedLinkName:
-    type: string
-    pattern: '^[a-zA-Z0-9._-]*$'
-  TypedLinkNameList:
-    type: array
-    items:
-      $ref: '#/definitions/TypedLinkName'
-  TypedLinkSchemaAndFacetName:
-    type: object
-    required:
-      - SchemaArn
-      - TypedLinkName
-    properties:
-      SchemaArn:
-        $ref: '#/definitions/Arn'
-        description: 'The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.'
-      TypedLinkName:
-        $ref: '#/definitions/TypedLinkName'
-        description: The unique name of the typed link facet.
-    description: Identifies the schema Amazon Resource Name (ARN) and facet name for the typed link.
-  TypedLinkSpecifier:
-    type: object
-    required:
-      - TypedLinkFacet
-      - SourceObjectReference
-      - TargetObjectReference
-      - IdentityAttributeValues
-    properties:
-      TypedLinkFacet:
-        $ref: '#/definitions/TypedLinkSchemaAndFacetName'
-        description: Identifies the typed link facet that is associated with the typed link.
-      SourceObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: Identifies the source object that the typed link will attach to.
-      TargetObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: Identifies the target object that the typed link will attach to.
-      IdentityAttributeValues:
-        $ref: '#/definitions/AttributeNameAndValueList'
-        description: Identifies the attribute value to update.
-    description: 'Contains all the information that is used to uniquely identify a typed link. The parameters discussed in this topic are used to uniquely specify the typed link being operated on. The <a>AttachTypedLink</a> API returns a typed link specifier while the <a>DetachTypedLink</a> API accepts one as input. Similarly, the <a>ListIncomingTypedLinks</a> and <a>ListOutgoingTypedLinks</a> API operations provide typed link specifiers as output. You can also construct a typed link specifier from scratch.'
-  TypedLinkSpecifierList:
-    type: array
-    items:
-      $ref: '#/definitions/TypedLinkSpecifier'
-  UnsupportedIndexTypeException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the requested index type is not supported.
-  UntagResourceRequest:
-    type: object
-    required:
-      - ResourceArn
-      - TagKeys
-    properties:
-      ResourceArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the resource. Tagging is only supported for directories.
-      TagKeys:
-        $ref: '#/definitions/TagKeyList'
-        description: Keys of the tag that need to be removed from the resource.
-  UntagResourceResponse:
-    type: object
-    properties: {}
-  UpdateActionType:
-    type: string
-    enum:
-      - CREATE_OR_UPDATE
-      - DELETE
-  UpdateFacetRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/FacetName'
-        description: The name of the facet.
-      AttributeUpdates:
-        $ref: '#/definitions/FacetAttributeUpdateList'
-        description: 'List of attributes that need to be updated in a given schema <a>Facet</a>. Each attribute is followed by <code>AttributeAction</code>, which specifies the type of update operation to perform. '
-      ObjectType:
-        $ref: '#/definitions/ObjectType'
-        description: The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.
-  UpdateFacetResponse:
-    type: object
-    properties: {}
-  UpdateLinkAttributesRequest:
-    type: object
-    required:
-      - TypedLinkSpecifier
-      - AttributeUpdates
-    properties:
-      TypedLinkSpecifier:
-        $ref: '#/definitions/TypedLinkSpecifier'
-        description: Allows a typed link specifier to be accepted as input.
-      AttributeUpdates:
-        $ref: '#/definitions/LinkAttributeUpdateList'
-        description: The attributes update structure.
-  UpdateLinkAttributesResponse:
-    type: object
-    properties: {}
-  UpdateObjectAttributesRequest:
-    type: object
-    required:
-      - ObjectReference
-      - AttributeUpdates
-    properties:
-      ObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: The reference that identifies the object.
-      AttributeUpdates:
-        $ref: '#/definitions/ObjectAttributeUpdateList'
-        description: The attributes update structure.
-  UpdateObjectAttributesResponse:
-    type: object
-    properties:
-      ObjectIdentifier:
-        $ref: '#/definitions/ObjectIdentifier'
-        description: The <code>ObjectIdentifier</code> of the updated object.
-  UpdateSchemaRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/SchemaName'
-        description: The name of the schema.
-  UpdateSchemaResponse:
-    type: object
-    properties:
-      SchemaArn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN that is associated with the updated schema. For more information, see <a>arns</a>.'
-  UpdateTypedLinkFacetRequest:
-    type: object
-    required:
-      - Name
-      - AttributeUpdates
-      - IdentityAttributeOrder
-    properties:
-      Name:
-        $ref: '#/definitions/TypedLinkName'
-        description: The unique name of the typed link facet.
-      AttributeUpdates:
-        $ref: '#/definitions/TypedLinkFacetAttributeUpdateList'
-        description: Attributes update structure.
-      IdentityAttributeOrder:
-        $ref: '#/definitions/AttributeNameList'
-        description: 'The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to a typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
-  UpdateTypedLinkFacetResponse:
-    type: object
-    properties: {}
-  UpgradeAppliedSchemaRequest:
-    type: object
-    required:
-      - PublishedSchemaArn
-      - DirectoryArn
-    properties:
-      PublishedSchemaArn:
-        $ref: '#/definitions/Arn'
-        description: The revision of the published schema to upgrade the directory to.
-      DirectoryArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN for the directory to which the upgraded schema will be applied.
-      DryRun:
-        $ref: '#/definitions/Bool'
-        description: 'Used for testing whether the major version schemas are backward compatible or not. If schema compatibility fails, an exception would be thrown else the call would succeed but no changes will be saved. This parameter is optional.'
-  UpgradeAppliedSchemaResponse:
-    type: object
-    properties:
-      UpgradedSchemaArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the upgraded schema that is returned as part of the response.
-      DirectoryArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the directory that is returned as part of the response.
-  UpgradePublishedSchemaRequest:
-    type: object
-    required:
-      - DevelopmentSchemaArn
-      - PublishedSchemaArn
-      - MinorVersion
-    properties:
-      DevelopmentSchemaArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the development schema with the changes used for the upgrade.
-      PublishedSchemaArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the published schema to be upgraded.
-      MinorVersion:
-        $ref: '#/definitions/Version'
-        description: Identifies the minor version of the published schema that will be created. This parameter is NOT optional.
-      DryRun:
-        $ref: '#/definitions/Bool'
-        description: 'Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded. If schema compatibility fails, an exception would be thrown else the call would succeed. This parameter is optional and defaults to false.'
-  UpgradePublishedSchemaResponse:
-    type: object
-    properties:
-      UpgradedSchemaArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the upgraded schema that is returned as part of the response.
-  ValidationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that your request is malformed in some manner. See the exception message.
-  Version:
-    type: string
-    pattern: '^[a-zA-Z0-9._-]*$'
-    minLength: 1
-    maxLength: 10

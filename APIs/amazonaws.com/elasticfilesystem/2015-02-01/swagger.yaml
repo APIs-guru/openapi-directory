@@ -637,238 +637,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AwsAccountId:
-    type: string
-  BadRequest:
-    type: object
-    required:
-      - ErrorCode
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Returned if the request is malformed or contains an error such as an invalid parameter value or a missing required parameter.
-  CreateFileSystemRequest:
-    type: object
-    required:
-      - CreationToken
-    example:
-      CreationToken: tokenstring
-      PerformanceMode: generalPurpose
-    properties:
-      CreationToken:
-        $ref: '#/definitions/CreationToken'
-        description: String of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent creation.
-      PerformanceMode:
-        $ref: '#/definitions/PerformanceMode'
-        description: The <code>PerformanceMode</code> of the file system. We recommend <code>generalPurpose</code> performance mode for most file systems. File systems using the <code>maxIO</code> performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. This can't be changed after the file system has been created.
-      Encrypted:
-        $ref: '#/definitions/Encrypted'
-        description: 'A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying a <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don''t specify a CMK, then the default CMK for Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system. '
-      KmsKeyId:
-        $ref: '#/definitions/KmsKeyId'
-        description: '<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a non-default CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example, <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key. For example, <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example, <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If KmsKeyId is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>'
-      ThroughputMode:
-        $ref: '#/definitions/ThroughputMode'
-        description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: bursting and provisioned. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change.'
-      ProvisionedThroughputInMibps:
-        $ref: '#/definitions/ProvisionedThroughputInMibps'
-        description: 'The throughput, measured in MiB/s, that you want to provision for a file system that you''re creating. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see <a href="http://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
-  CreateMountTargetRequest:
-    type: object
-    required:
-      - FileSystemId
-      - SubnetId
-    example:
-      FileSystemId: fs-01234567
-      SubnetId: subnet-1234abcd
-    properties:
-      FileSystemId:
-        $ref: '#/definitions/FileSystemId'
-        description: ID of the file system for which to create the mount target.
-      SubnetId:
-        $ref: '#/definitions/SubnetId'
-        description: ID of the subnet to add the mount target in.
-      IpAddress:
-        $ref: '#/definitions/IpAddress'
-        description: Valid IPv4 address within the address range of the specified subnet.
-      SecurityGroups:
-        $ref: '#/definitions/SecurityGroups'
-        description: 'Up to five VPC security group IDs, of the form <code>sg-xxxxxxxx</code>. These must be for the same VPC as subnet specified.'
-    description: <p/>
-  CreateTagsRequest:
-    type: object
-    required:
-      - Tags
-    example:
-      FileSystemId: fs-01234567
-      Tags:
-        - Key: Name
-          Value: MyFileSystem
-    properties:
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: 'Array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value pair. '
-    description: <p/>
-  CreationToken:
-    type: string
-    minLength: 1
-    maxLength: 64
-  DeleteFileSystemRequest:
-    type: object
-    example:
-      FileSystemId: fs-01234567
-    properties: {}
-    description: <p/>
-  DeleteMountTargetRequest:
-    type: object
-    example:
-      MountTargetId: fsmt-12340abc
-    properties: {}
-    description: <p/>
-  DeleteTagsRequest:
-    type: object
-    required:
-      - TagKeys
-    example:
-      FileSystemId: fs-01234567
-      TagKeys:
-        - Name
-    properties:
-      TagKeys:
-        $ref: '#/definitions/TagKeys'
-        description: List of tag keys to delete.
-    description: <p/>
-  DependencyTimeout:
-    type: object
-    required:
-      - ErrorCode
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The service timed out trying to fulfill the request, and the client should try the call again.'
-  DescribeFileSystemsRequest:
-    type: object
-    example: {}
-    properties: {}
-    description: <p/>
-  DescribeFileSystemsResponse:
-    type: object
-    example:
-      FileSystems:
-        - CreationTime: '1481841524.0'
-          CreationToken: tokenstring
-          FileSystemId: fs-01234567
-          LifeCycleState: available
-          Name: MyFileSystem
-          NumberOfMountTargets: 1
-          OwnerId: 012345678912
-          PerformanceMode: generalPurpose
-          SizeInBytes:
-            Value: 6144
-    properties:
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: Present if provided by caller in the request (String).
-      FileSystems:
-        $ref: '#/definitions/FileSystemDescriptions'
-        description: Array of file system descriptions.
-      NextMarker:
-        $ref: '#/definitions/Marker'
-        description: Present if there are more file systems than returned in the response (String). You can use the <code>NextMarker</code> in the subsequent request to fetch the descriptions.
-  DescribeMountTargetSecurityGroupsRequest:
-    type: object
-    example:
-      MountTargetId: fsmt-12340abc
-    properties: {}
-    description: <p/>
-  DescribeMountTargetSecurityGroupsResponse:
-    type: object
-    required:
-      - SecurityGroups
-    example:
-      SecurityGroups:
-        - sg-fghi4567
-    properties:
-      SecurityGroups:
-        $ref: '#/definitions/SecurityGroups'
-        description: Array of security groups.
-  DescribeMountTargetsRequest:
-    type: object
-    example:
-      FileSystemId: fs-01234567
-    properties: {}
-    description: <p/>
-  DescribeMountTargetsResponse:
-    type: object
-    example:
-      MountTargets:
-        - FileSystemId: fs-01234567
-          IpAddress: 192.0.0.2
-          LifeCycleState: available
-          MountTargetId: fsmt-12340abc
-          NetworkInterfaceId: eni-cedf6789
-          OwnerId: 012345678912
-          SubnetId: subnet-1234abcd
-    properties:
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: 'If the request included the <code>Marker</code>, the response returns that value in this field.'
-      MountTargets:
-        $ref: '#/definitions/MountTargetDescriptions'
-        description: Returns the file system's mount targets as an array of <code>MountTargetDescription</code> objects.
-      NextMarker:
-        $ref: '#/definitions/Marker'
-        description: 'If a value is present, there are more mount targets to return. In a subsequent request, you can provide <code>Marker</code> in your request with this value to retrieve the next set of mount targets.'
-    description: <p/>
-  DescribeTagsRequest:
-    type: object
-    example:
-      FileSystemId: fs-01234567
-    properties: {}
-    description: <p/>
-  DescribeTagsResponse:
-    type: object
-    required:
-      - Tags
-    example:
-      Tags:
-        - Key: Name
-          Value: MyFileSystem
-    properties:
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: 'If the request included a <code>Marker</code>, the response returns that value in this field.'
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: 'Returns tags associated with the file system as an array of <code>Tag</code> objects. '
-      NextMarker:
-        $ref: '#/definitions/Marker'
-        description: 'If a value is present, there are more tags to return. In a subsequent request, you can provide the value of <code>NextMarker</code> as the value of the <code>Marker</code> parameter in your next request to retrieve the next set of tags.'
-    description: <p/>
-  Encrypted:
-    type: boolean
-  ErrorCode:
-    type: string
-    minLength: 1
-  ErrorMessage:
-    type: string
-  FileSystemAlreadyExists:
-    type: object
-    required:
-      - ErrorCode
-      - FileSystemId
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-      FileSystemId:
-        $ref: '#/definitions/FileSystemId'
-    description: 'Returned if the file system you are trying to create already exists, with the creation token you provided.'
   FileSystemDescription:
     type: object
     required:
@@ -931,13 +699,33 @@ definitions:
         $ref: '#/definitions/ProvisionedThroughputInMibps'
         description: 'The throughput, measured in MiB/s, that you want to provision for a file system. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see <a href="http://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
     description: Description of the file system.
-  FileSystemDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/FileSystemDescription'
-  FileSystemId:
-    type: string
-  FileSystemInUse:
+  CreateFileSystemRequest:
+    type: object
+    required:
+      - CreationToken
+    example:
+      CreationToken: tokenstring
+      PerformanceMode: generalPurpose
+    properties:
+      CreationToken:
+        $ref: '#/definitions/CreationToken'
+        description: String of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent creation.
+      PerformanceMode:
+        $ref: '#/definitions/PerformanceMode'
+        description: The <code>PerformanceMode</code> of the file system. We recommend <code>generalPurpose</code> performance mode for most file systems. File systems using the <code>maxIO</code> performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. This can't be changed after the file system has been created.
+      Encrypted:
+        $ref: '#/definitions/Encrypted'
+        description: 'A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying a <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don''t specify a CMK, then the default CMK for Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system. '
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: '<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a non-default CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example, <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key. For example, <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example, <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If KmsKeyId is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>'
+      ThroughputMode:
+        $ref: '#/definitions/ThroughputMode'
+        description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: bursting and provisioned. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change.'
+      ProvisionedThroughputInMibps:
+        $ref: '#/definitions/ProvisionedThroughputInMibps'
+        description: 'The throughput, measured in MiB/s, that you want to provision for a file system that you''re creating. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see <a href="http://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
+  BadRequest:
     type: object
     required:
       - ErrorCode
@@ -946,72 +734,7 @@ definitions:
         $ref: '#/definitions/ErrorCode'
       Message:
         $ref: '#/definitions/ErrorMessage'
-    description: Returned if a file system has mount targets.
-  FileSystemLimitExceeded:
-    type: object
-    required:
-      - ErrorCode
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Returned if the AWS account has already created the maximum number of file systems allowed per account.
-  FileSystemNotFound:
-    type: object
-    required:
-      - ErrorCode
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Returned if the specified <code>FileSystemId</code> value doesn't exist in the requester's AWS account.
-  FileSystemSize:
-    type: object
-    required:
-      - Value
-    properties:
-      Value:
-        $ref: '#/definitions/FileSystemSizeValue'
-        description: Latest known metered size (in bytes) of data stored in the file system.
-      Timestamp:
-        $ref: '#/definitions/Timestamp'
-        description: 'Time at which the size of data, returned in the <code>Value</code> field, was determined. The value is the integer number of seconds since 1970-01-01T00:00:00Z.'
-    description: 'Latest known metered size (in bytes) of data stored in the file system, in its <code>Value</code> field, and the time at which that size was determined in its <code>Timestamp</code> field. Note that the value does not represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, the value will represent the actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not necessarily the exact size the file system was at any instant in time.'
-  FileSystemSizeValue:
-    type: integer
-    minimum: 0
-  IncorrectFileSystemLifeCycleState:
-    type: object
-    required:
-      - ErrorCode
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Returned if the file system's lifecycle state is not "available".
-  IncorrectMountTargetState:
-    type: object
-    required:
-      - ErrorCode
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Returned if the mount target is not in the correct state for the operation.
-  InsufficientThroughputCapacity:
-    type: object
-    required:
-      - ErrorCode
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Returned if there''s not enough capacity to provision additional throughput. This value might be returned when you try to create a file system in provisioned throughput mode, when you attempt to increase the provisioned throughput of an existing file system, or when you attempt to change an existing file system from bursting to provisioned throughput mode.'
+    description: Returned if the request is malformed or contains an error such as an invalid parameter value or a missing required parameter.
   InternalServerError:
     type: object
     required:
@@ -1022,9 +745,20 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessage'
     description: Returned if an error occurred on the server side.
-  IpAddress:
-    type: string
-  IpAddressInUse:
+  FileSystemAlreadyExists:
+    type: object
+    required:
+      - ErrorCode
+      - FileSystemId
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+      FileSystemId:
+        $ref: '#/definitions/FileSystemId'
+    description: 'Returned if the file system you are trying to create already exists, with the creation token you provided.'
+  FileSystemLimitExceeded:
     type: object
     required:
       - ErrorCode
@@ -1033,36 +767,8 @@ definitions:
         $ref: '#/definitions/ErrorCode'
       Message:
         $ref: '#/definitions/ErrorMessage'
-    description: Returned if the request specified an <code>IpAddress</code> that is already in use in the subnet.
-  KmsKeyId:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  LifeCycleState:
-    type: string
-    enum:
-      - creating
-      - available
-      - updating
-      - deleting
-      - deleted
-  Marker:
-    type: string
-  MaxItems:
-    type: integer
-    minimum: 1
-  ModifyMountTargetSecurityGroupsRequest:
-    type: object
-    example:
-      MountTargetId: fsmt-12340abc
-      SecurityGroups:
-        - sg-abcd1234
-    properties:
-      SecurityGroups:
-        $ref: '#/definitions/SecurityGroups'
-        description: Array of up to five VPC security group IDs.
-    description: <p/>
-  MountTargetConflict:
+    description: Returned if the AWS account has already created the maximum number of file systems allowed per account.
+  InsufficientThroughputCapacity:
     type: object
     required:
       - ErrorCode
@@ -1071,10 +777,17 @@ definitions:
         $ref: '#/definitions/ErrorCode'
       Message:
         $ref: '#/definitions/ErrorMessage'
-    description: Returned if the mount target would violate one of the specified restrictions based on the file system's existing mount targets.
-  MountTargetCount:
-    type: integer
-    minimum: 0
+    description: 'Returned if there''s not enough capacity to provision additional throughput. This value might be returned when you try to create a file system in provisioned throughput mode, when you attempt to increase the provisioned throughput of an existing file system, or when you attempt to change an existing file system from bursting to provisioned throughput mode.'
+  ThroughputLimitExceeded:
+    type: object
+    required:
+      - ErrorCode
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Returned if the throughput mode or amount of provisioned throughput can't be changed because the throughput limit of 1024 MiB/s has been reached.
   MountTargetDescription:
     type: object
     required:
@@ -1113,13 +826,29 @@ definitions:
         $ref: '#/definitions/NetworkInterfaceId'
         description: ID of the network interface that Amazon EFS created when it created the mount target.
     description: Provides a description of a mount target.
-  MountTargetDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/MountTargetDescription'
-  MountTargetId:
-    type: string
-  MountTargetNotFound:
+  CreateMountTargetRequest:
+    type: object
+    required:
+      - FileSystemId
+      - SubnetId
+    example:
+      FileSystemId: fs-01234567
+      SubnetId: subnet-1234abcd
+    properties:
+      FileSystemId:
+        $ref: '#/definitions/FileSystemId'
+        description: ID of the file system for which to create the mount target.
+      SubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: ID of the subnet to add the mount target in.
+      IpAddress:
+        $ref: '#/definitions/IpAddress'
+        description: Valid IPv4 address within the address range of the specified subnet.
+      SecurityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: 'Up to five VPC security group IDs, of the form <code>sg-xxxxxxxx</code>. These must be for the same VPC as subnet specified.'
+    description: <p/>
+  FileSystemNotFound:
     type: object
     required:
       - ErrorCode
@@ -1128,10 +857,8 @@ definitions:
         $ref: '#/definitions/ErrorCode'
       Message:
         $ref: '#/definitions/ErrorMessage'
-    description: Returned if there is no mount target with the specified ID found in the caller's account.
-  NetworkInterfaceId:
-    type: string
-  NetworkInterfaceLimitExceeded:
+    description: Returned if the specified <code>FileSystemId</code> value doesn't exist in the requester's AWS account.
+  IncorrectFileSystemLifeCycleState:
     type: object
     required:
       - ErrorCode
@@ -1140,7 +867,27 @@ definitions:
         $ref: '#/definitions/ErrorCode'
       Message:
         $ref: '#/definitions/ErrorMessage'
-    description: 'The calling account has reached the limit for elastic network interfaces for the specific AWS Region. The client should try to delete some elastic network interfaces or get the account limit raised. For more information, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html">Amazon VPC Limits</a> in the <i>Amazon VPC User Guide </i> (see the Network interfaces per VPC entry in the table). '
+    description: Returned if the file system's lifecycle state is not "available".
+  MountTargetConflict:
+    type: object
+    required:
+      - ErrorCode
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Returned if the mount target would violate one of the specified restrictions based on the file system's existing mount targets.
+  SubnetNotFound:
+    type: object
+    required:
+      - ErrorCode
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Returned if there is no subnet with ID <code>SubnetId</code> provided in the request.
   NoFreeAddressesInSubnet:
     type: object
     required:
@@ -1151,17 +898,26 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessage'
     description: Returned if <code>IpAddress</code> was not specified in the request and there are no free IP addresses in the subnet.
-  PerformanceMode:
-    type: string
-    enum:
-      - generalPurpose
-      - maxIO
-  ProvisionedThroughputInMibps:
-    type: number
-    format: double
-    minimum: 0
-  SecurityGroup:
-    type: string
+  IpAddressInUse:
+    type: object
+    required:
+      - ErrorCode
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Returned if the request specified an <code>IpAddress</code> that is already in use in the subnet.
+  NetworkInterfaceLimitExceeded:
+    type: object
+    required:
+      - ErrorCode
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The calling account has reached the limit for elastic network interfaces for the specific AWS Region. The client should try to delete some elastic network interfaces or get the account limit raised. For more information, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html">Amazon VPC Limits</a> in the <i>Amazon VPC User Guide </i> (see the Network interfaces per VPC entry in the table). '
   SecurityGroupLimitExceeded:
     type: object
     required:
@@ -1182,14 +938,7 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessage'
     description: Returned if one of the specified security groups doesn't exist in the subnet's VPC.
-  SecurityGroups:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityGroup'
-    maxItems: 5
-  SubnetId:
-    type: string
-  SubnetNotFound:
+  UnsupportedAvailabilityZone:
     type: object
     required:
       - ErrorCode
@@ -1198,7 +947,320 @@ definitions:
         $ref: '#/definitions/ErrorCode'
       Message:
         $ref: '#/definitions/ErrorMessage'
-    description: Returned if there is no subnet with ID <code>SubnetId</code> provided in the request.
+    description: <p/>
+  CreateTagsRequest:
+    type: object
+    required:
+      - Tags
+    example:
+      FileSystemId: fs-01234567
+      Tags:
+        - Key: Name
+          Value: MyFileSystem
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'Array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value pair. '
+    description: <p/>
+  DeleteFileSystemRequest:
+    type: object
+    example:
+      FileSystemId: fs-01234567
+    properties: {}
+    description: <p/>
+  FileSystemInUse:
+    type: object
+    required:
+      - ErrorCode
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Returned if a file system has mount targets.
+  DeleteMountTargetRequest:
+    type: object
+    example:
+      MountTargetId: fsmt-12340abc
+    properties: {}
+    description: <p/>
+  DependencyTimeout:
+    type: object
+    required:
+      - ErrorCode
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The service timed out trying to fulfill the request, and the client should try the call again.'
+  MountTargetNotFound:
+    type: object
+    required:
+      - ErrorCode
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Returned if there is no mount target with the specified ID found in the caller's account.
+  DeleteTagsRequest:
+    type: object
+    required:
+      - TagKeys
+    example:
+      FileSystemId: fs-01234567
+      TagKeys:
+        - Name
+    properties:
+      TagKeys:
+        $ref: '#/definitions/TagKeys'
+        description: List of tag keys to delete.
+    description: <p/>
+  DescribeFileSystemsResponse:
+    type: object
+    example:
+      FileSystems:
+        - CreationTime: '1481841524.0'
+          CreationToken: tokenstring
+          FileSystemId: fs-01234567
+          LifeCycleState: available
+          Name: MyFileSystem
+          NumberOfMountTargets: 1
+          OwnerId: 012345678912
+          PerformanceMode: generalPurpose
+          SizeInBytes:
+            Value: 6144
+    properties:
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: Present if provided by caller in the request (String).
+      FileSystems:
+        $ref: '#/definitions/FileSystemDescriptions'
+        description: Array of file system descriptions.
+      NextMarker:
+        $ref: '#/definitions/Marker'
+        description: Present if there are more file systems than returned in the response (String). You can use the <code>NextMarker</code> in the subsequent request to fetch the descriptions.
+  DescribeFileSystemsRequest:
+    type: object
+    example: {}
+    properties: {}
+    description: <p/>
+  DescribeMountTargetSecurityGroupsResponse:
+    type: object
+    required:
+      - SecurityGroups
+    example:
+      SecurityGroups:
+        - sg-fghi4567
+    properties:
+      SecurityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: Array of security groups.
+  DescribeMountTargetSecurityGroupsRequest:
+    type: object
+    example:
+      MountTargetId: fsmt-12340abc
+    properties: {}
+    description: <p/>
+  IncorrectMountTargetState:
+    type: object
+    required:
+      - ErrorCode
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Returned if the mount target is not in the correct state for the operation.
+  DescribeMountTargetsResponse:
+    type: object
+    example:
+      MountTargets:
+        - FileSystemId: fs-01234567
+          IpAddress: 192.0.0.2
+          LifeCycleState: available
+          MountTargetId: fsmt-12340abc
+          NetworkInterfaceId: eni-cedf6789
+          OwnerId: 012345678912
+          SubnetId: subnet-1234abcd
+    properties:
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: 'If the request included the <code>Marker</code>, the response returns that value in this field.'
+      MountTargets:
+        $ref: '#/definitions/MountTargetDescriptions'
+        description: Returns the file system's mount targets as an array of <code>MountTargetDescription</code> objects.
+      NextMarker:
+        $ref: '#/definitions/Marker'
+        description: 'If a value is present, there are more mount targets to return. In a subsequent request, you can provide <code>Marker</code> in your request with this value to retrieve the next set of mount targets.'
+    description: <p/>
+  DescribeMountTargetsRequest:
+    type: object
+    example:
+      FileSystemId: fs-01234567
+    properties: {}
+    description: <p/>
+  DescribeTagsResponse:
+    type: object
+    required:
+      - Tags
+    example:
+      Tags:
+        - Key: Name
+          Value: MyFileSystem
+    properties:
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: 'If the request included a <code>Marker</code>, the response returns that value in this field.'
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'Returns tags associated with the file system as an array of <code>Tag</code> objects. '
+      NextMarker:
+        $ref: '#/definitions/Marker'
+        description: 'If a value is present, there are more tags to return. In a subsequent request, you can provide the value of <code>NextMarker</code> as the value of the <code>Marker</code> parameter in your next request to retrieve the next set of tags.'
+    description: <p/>
+  DescribeTagsRequest:
+    type: object
+    example:
+      FileSystemId: fs-01234567
+    properties: {}
+    description: <p/>
+  ModifyMountTargetSecurityGroupsRequest:
+    type: object
+    example:
+      MountTargetId: fsmt-12340abc
+      SecurityGroups:
+        - sg-abcd1234
+    properties:
+      SecurityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: Array of up to five VPC security group IDs.
+    description: <p/>
+  UpdateFileSystemRequest:
+    type: object
+    properties:
+      ThroughputMode:
+        $ref: '#/definitions/ThroughputMode'
+        description: '(Optional) The throughput mode that you want your file system to use. If you''re not updating your throughput mode, you don''t need to provide this value in your request.'
+      ProvisionedThroughputInMibps:
+        $ref: '#/definitions/ProvisionedThroughputInMibps'
+        description: '(Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. If you''re not updating the amount of provisioned throughput for your file system, you don''t need to provide this value in your request.'
+  TooManyRequests:
+    type: object
+    required:
+      - ErrorCode
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Returned if you don’t wait at least 24 hours before changing the throughput mode, or decreasing the Provisioned Throughput value.'
+  AwsAccountId:
+    type: string
+  ErrorCode:
+    type: string
+    minLength: 1
+  ErrorMessage:
+    type: string
+  CreationToken:
+    type: string
+    minLength: 1
+    maxLength: 64
+  PerformanceMode:
+    type: string
+    enum:
+      - generalPurpose
+      - maxIO
+  Encrypted:
+    type: boolean
+  KmsKeyId:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  ThroughputMode:
+    type: string
+    enum:
+      - bursting
+      - provisioned
+  ProvisionedThroughputInMibps:
+    type: number
+    format: double
+    minimum: 0
+  FileSystemId:
+    type: string
+  SubnetId:
+    type: string
+  IpAddress:
+    type: string
+  SecurityGroups:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroup'
+    maxItems: 5
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  MountTargetId:
+    type: string
+  TagKeys:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  MaxItems:
+    type: integer
+    minimum: 1
+  Marker:
+    type: string
+  FileSystemDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/FileSystemDescription'
+  MountTargetDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/MountTargetDescription'
+  Timestamp:
+    type: string
+    format: date-time
+  LifeCycleState:
+    type: string
+    enum:
+      - creating
+      - available
+      - updating
+      - deleting
+      - deleted
+  TagValue:
+    type: string
+    maxLength: 256
+  MountTargetCount:
+    type: integer
+    minimum: 0
+  FileSystemSize:
+    type: object
+    required:
+      - Value
+    properties:
+      Value:
+        $ref: '#/definitions/FileSystemSizeValue'
+        description: Latest known metered size (in bytes) of data stored in the file system.
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'Time at which the size of data, returned in the <code>Value</code> field, was determined. The value is the integer number of seconds since 1970-01-01T00:00:00Z.'
+    description: 'Latest known metered size (in bytes) of data stored in the file system, in its <code>Value</code> field, and the time at which that size was determined in its <code>Timestamp</code> field. Note that the value does not represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, the value will represent the actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not necessarily the exact size the file system was at any instant in time.'
+  FileSystemSizeValue:
+    type: integer
+    minimum: 0
+  NetworkInterfaceId:
+    type: string
+  SecurityGroup:
+    type: string
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
   Tag:
     type: object
     required:
@@ -1212,65 +1274,3 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: Value of the tag key.
     description: 'A tag is a key-value pair. Allowed characters: letters, whitespace, and numbers, representable in UTF-8, and the following characters:<code> + - = . _ : /</code> '
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagKeys:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-  TagValue:
-    type: string
-    maxLength: 256
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  ThroughputLimitExceeded:
-    type: object
-    required:
-      - ErrorCode
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Returned if the throughput mode or amount of provisioned throughput can't be changed because the throughput limit of 1024 MiB/s has been reached.
-  ThroughputMode:
-    type: string
-    enum:
-      - bursting
-      - provisioned
-  Timestamp:
-    type: string
-    format: date-time
-  TooManyRequests:
-    type: object
-    required:
-      - ErrorCode
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Returned if you don’t wait at least 24 hours before changing the throughput mode, or decreasing the Provisioned Throughput value.'
-  UnsupportedAvailabilityZone:
-    type: object
-    required:
-      - ErrorCode
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: <p/>
-  UpdateFileSystemRequest:
-    type: object
-    properties:
-      ThroughputMode:
-        $ref: '#/definitions/ThroughputMode'
-        description: '(Optional) The throughput mode that you want your file system to use. If you''re not updating your throughput mode, you don''t need to provide this value in your request.'
-      ProvisionedThroughputInMibps:
-        $ref: '#/definitions/ProvisionedThroughputInMibps'
-        description: '(Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. If you''re not updating the amount of provisioned throughput for your file system, you don''t need to provide this value in your request.'

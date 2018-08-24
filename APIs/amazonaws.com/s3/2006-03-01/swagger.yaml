@@ -1856,16 +1856,6 @@ paths:
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
 definitions:
-  AbortDate:
-    type: string
-    format: date-time
-  AbortIncompleteMultipartUpload:
-    type: object
-    properties:
-      DaysAfterInitiation:
-        $ref: '#/definitions/DaysAfterInitiation'
-        description: Indicates the number of days that must pass since initiation for Lifecycle to abort an Incomplete Multipart Upload.
-    description: Specifies the days since the initiation of an Incomplete Multipart Upload that Lifecycle will wait before permanently removing all parts of the upload.
   AbortMultipartUploadOutput:
     type: object
     example: {}
@@ -1877,328 +1867,10 @@ definitions:
       Key: bigobject
       UploadId: xadcOB_7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--
     properties: {}
-  AbortRuleId:
-    type: string
-  AccelerateConfiguration:
-    type: object
-    properties:
-      Status:
-        $ref: '#/definitions/BucketAccelerateStatus'
-        description: The accelerate configuration of the bucket.
-  AcceptRanges:
-    type: string
-  AccessControlPolicy:
-    type: object
-    properties:
-      Grants:
-        $ref: '#/definitions/Grants'
-        description: A list of grants.
-      Owner:
-        $ref: '#/definitions/Owner'
-  AccessControlTranslation:
-    type: object
-    required:
-      - Owner
-    properties:
-      Owner:
-        $ref: '#/definitions/OwnerOverride'
-        description: The override value for the owner of the replica object.
-    description: Container for information regarding the access control for replicas.
-  AccountId:
-    type: string
-  AllowQuotedRecordDelimiter:
-    type: boolean
-  AllowedHeader:
-    type: string
-  AllowedHeaders:
-    type: array
-    items:
-      $ref: '#/definitions/AllowedHeader'
-    xml:
-      wrapped: false
-  AllowedMethod:
-    type: string
-  AllowedMethods:
-    type: array
-    items:
-      $ref: '#/definitions/AllowedMethod'
-    xml:
-      wrapped: false
-  AllowedOrigin:
-    type: string
-  AllowedOrigins:
-    type: array
-    items:
-      $ref: '#/definitions/AllowedOrigin'
-    xml:
-      wrapped: false
-  AnalyticsAndOperator:
-    type: object
-    properties:
-      Prefix:
-        $ref: '#/definitions/Prefix'
-        description: The prefix to use when evaluating an AND predicate.
-      Tags:
-        $ref: '#/definitions/TagSet'
-        description: The list of tags to use when evaluating an AND predicate.
-    xml:
-      wrapped: false
-  AnalyticsConfiguration:
-    type: object
-    required:
-      - Id
-      - StorageClassAnalysis
-    properties:
-      Id:
-        $ref: '#/definitions/AnalyticsId'
-        description: The identifier used to represent an analytics configuration.
-      Filter:
-        $ref: '#/definitions/AnalyticsFilter'
-        description: 'The filter used to describe a set of objects for analyses. A filter must have exactly one prefix, one tag, or one conjunction (AnalyticsAndOperator). If no filter is provided, all objects will be considered in any analysis.'
-      StorageClassAnalysis:
-        $ref: '#/definitions/StorageClassAnalysis'
-        description: 'If present, it indicates that data related to access patterns will be collected and made available to analyze the tradeoffs between different storage classes.'
-  AnalyticsConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/AnalyticsConfiguration'
-    xml:
-      wrapped: false
-  AnalyticsExportDestination:
-    type: object
-    required:
-      - S3BucketDestination
-    properties:
-      S3BucketDestination:
-        $ref: '#/definitions/AnalyticsS3BucketDestination'
-        description: A destination signifying output to an S3 bucket.
-  AnalyticsFilter:
-    type: object
-    properties:
-      Prefix:
-        $ref: '#/definitions/Prefix'
-        description: The prefix to use when evaluating an analytics filter.
-      Tag:
-        $ref: '#/definitions/Tag'
-        description: The tag to use when evaluating an analytics filter.
-      And:
-        $ref: '#/definitions/AnalyticsAndOperator'
-        description: 'A conjunction (logical AND) of predicates, which is used in evaluating an analytics filter. The operator must have at least two predicates.'
-  AnalyticsId:
-    type: string
-  AnalyticsS3BucketDestination:
-    type: object
-    required:
-      - Format
-      - Bucket
-    properties:
-      Format:
-        $ref: '#/definitions/AnalyticsS3ExportFileFormat'
-        description: The file format used when exporting data to Amazon S3.
-      BucketAccountId:
-        $ref: '#/definitions/AccountId'
-        description: 'The account ID that owns the destination bucket. If no account ID is provided, the owner will not be validated prior to exporting data.'
-      Bucket:
-        $ref: '#/definitions/BucketName'
-        description: The Amazon resource name (ARN) of the bucket to which data is exported.
-      Prefix:
-        $ref: '#/definitions/Prefix'
-        description: The prefix to use when exporting data. The exported data begins with this prefix.
-  AnalyticsS3ExportFileFormat:
-    type: string
-    enum:
-      - CSV
-  Body:
-    type: string
-  Bucket:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/BucketName'
-        description: The name of the bucket.
-      CreationDate:
-        $ref: '#/definitions/CreationDate'
-        description: Date the bucket was created.
-  BucketAccelerateStatus:
-    type: string
-    enum:
-      - Enabled
-      - Suspended
-  BucketAlreadyExists:
+  NoSuchUpload:
     type: object
     properties: {}
-    description: The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.
-  BucketAlreadyOwnedByYou:
-    type: object
-    properties: {}
-  BucketCannedACL:
-    type: string
-    enum:
-      - private
-      - public-read
-      - public-read-write
-      - authenticated-read
-  BucketLifecycleConfiguration:
-    type: object
-    required:
-      - Rules
-    properties:
-      Rules:
-        $ref: '#/definitions/LifecycleRules'
-  BucketLocationConstraint:
-    type: string
-    enum:
-      - EU
-      - eu-west-1
-      - us-west-1
-      - us-west-2
-      - ap-south-1
-      - ap-southeast-1
-      - ap-southeast-2
-      - ap-northeast-1
-      - sa-east-1
-      - cn-north-1
-      - eu-central-1
-  BucketLoggingStatus:
-    type: object
-    properties:
-      LoggingEnabled:
-        $ref: '#/definitions/LoggingEnabled'
-  BucketLogsPermission:
-    type: string
-    enum:
-      - FULL_CONTROL
-      - READ
-      - WRITE
-  BucketName:
-    type: string
-  BucketVersioningStatus:
-    type: string
-    enum:
-      - Enabled
-      - Suspended
-  Buckets:
-    type: array
-    items:
-      $ref: '#/definitions/Bucket'
-  BytesProcessed:
-    type: integer
-  BytesReturned:
-    type: integer
-  BytesScanned:
-    type: integer
-  CORSConfiguration:
-    type: object
-    required:
-      - CORSRules
-    properties:
-      CORSRules:
-        $ref: '#/definitions/CORSRules'
-  CORSRule:
-    type: object
-    required:
-      - AllowedMethods
-      - AllowedOrigins
-    properties:
-      AllowedHeaders:
-        $ref: '#/definitions/AllowedHeaders'
-        description: Specifies which headers are allowed in a pre-flight OPTIONS request.
-      AllowedMethods:
-        $ref: '#/definitions/AllowedMethods'
-        description: Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.
-      AllowedOrigins:
-        $ref: '#/definitions/AllowedOrigins'
-        description: One or more origins you want customers to be able to access the bucket from.
-      ExposeHeaders:
-        $ref: '#/definitions/ExposeHeaders'
-        description: 'One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).'
-      MaxAgeSeconds:
-        $ref: '#/definitions/MaxAgeSeconds'
-        description: The time in seconds that your browser is to cache the preflight response for the specified resource.
-  CORSRules:
-    type: array
-    items:
-      $ref: '#/definitions/CORSRule'
-    xml:
-      wrapped: false
-  CSVInput:
-    type: object
-    properties:
-      FileHeaderInfo:
-        $ref: '#/definitions/FileHeaderInfo'
-        description: 'Describes the first line of input. Valid values: None, Ignore, Use.'
-      Comments:
-        $ref: '#/definitions/Comments'
-        description: Single character used to indicate a row should be ignored when present at the start of a row.
-      QuoteEscapeCharacter:
-        $ref: '#/definitions/QuoteEscapeCharacter'
-        description: Single character used for escaping the quote character inside an already escaped value.
-      RecordDelimiter:
-        $ref: '#/definitions/RecordDelimiter'
-        description: Value used to separate individual records.
-      FieldDelimiter:
-        $ref: '#/definitions/FieldDelimiter'
-        description: Value used to separate individual fields in a record.
-      QuoteCharacter:
-        $ref: '#/definitions/QuoteCharacter'
-        description: Value used for escaping where the field delimiter is part of the value.
-      AllowQuotedRecordDelimiter:
-        $ref: '#/definitions/AllowQuotedRecordDelimiter'
-        description: Specifies that CSV field values may contain quoted record delimiters and such records should be allowed. Default value is FALSE. Setting this value to TRUE may lower performance.
-    description: Describes how a CSV-formatted input object is formatted.
-  CSVOutput:
-    type: object
-    properties:
-      QuoteFields:
-        $ref: '#/definitions/QuoteFields'
-        description: Indicates whether or not all output fields should be quoted.
-      QuoteEscapeCharacter:
-        $ref: '#/definitions/QuoteEscapeCharacter'
-        description: Single character used for escaping the quote character inside an already escaped value.
-      RecordDelimiter:
-        $ref: '#/definitions/RecordDelimiter'
-        description: Value used to separate individual records.
-      FieldDelimiter:
-        $ref: '#/definitions/FieldDelimiter'
-        description: Value used to separate individual fields in a record.
-      QuoteCharacter:
-        $ref: '#/definitions/QuoteCharacter'
-        description: Value used for escaping where the field delimiter is part of the value.
-    description: Describes how CSV-formatted results are formatted.
-  CacheControl:
-    type: string
-  CloudFunction:
-    type: string
-  CloudFunctionConfiguration:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/NotificationId'
-      Event:
-        $ref: '#/definitions/Event'
-      Events:
-        $ref: '#/definitions/EventList'
-      CloudFunction:
-        $ref: '#/definitions/CloudFunction'
-      InvocationRole:
-        $ref: '#/definitions/CloudFunctionInvocationRole'
-  CloudFunctionInvocationRole:
-    type: string
-  Code:
-    type: string
-  Comments:
-    type: string
-  CommonPrefix:
-    type: object
-    properties:
-      Prefix:
-        $ref: '#/definitions/Prefix'
-  CommonPrefixList:
-    type: array
-    items:
-      $ref: '#/definitions/CommonPrefix'
-    xml:
-      wrapped: false
+    description: The specified multipart upload does not exist.
   CompleteMultipartUploadOutput:
     type: object
     example:
@@ -2233,60 +1905,6 @@ definitions:
         $ref: '#/definitions/CompletedMultipartUpload'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
-  CompletedMultipartUpload:
-    type: object
-    properties:
-      Parts:
-        $ref: '#/definitions/CompletedPartList'
-  CompletedPart:
-    type: object
-    properties:
-      ETag:
-        $ref: '#/definitions/ETag'
-        description: Entity tag returned when the part was uploaded.
-      PartNumber:
-        $ref: '#/definitions/PartNumber'
-        description: 'Part number that identifies the part. This is a positive integer between 1 and 10,000.'
-  CompletedPartList:
-    type: array
-    items:
-      $ref: '#/definitions/CompletedPart'
-    xml:
-      wrapped: false
-  CompressionType:
-    type: string
-    enum:
-      - NONE
-      - GZIP
-      - BZIP2
-  Condition:
-    type: object
-    properties:
-      HttpErrorCodeReturnedEquals:
-        $ref: '#/definitions/HttpErrorCodeReturnedEquals'
-        description: 'The HTTP error code when the redirect is applied. In the event of an error, if the error code equals this value, then the specified redirect is applied. Required when parent element Condition is specified and sibling KeyPrefixEquals is not specified. If both are specified, then both must be true for the redirect to be applied.'
-      KeyPrefixEquals:
-        $ref: '#/definitions/KeyPrefixEquals'
-        description: 'The object key name prefix when the redirect is applied. For example, to redirect requests for ExamplePage.html, the key prefix will be ExamplePage.html. To redirect request for all pages with the prefix docs/, the key prefix will be /docs, which identifies all objects in the docs/ folder. Required when the parent element Condition is specified and sibling HttpErrorCodeReturnedEquals is not specified. If both conditions are specified, both must be true for the redirect to be applied.'
-  ConfirmRemoveSelfBucketAccess:
-    type: boolean
-  ContentDisposition:
-    type: string
-  ContentEncoding:
-    type: string
-  ContentLanguage:
-    type: string
-  ContentLength:
-    type: integer
-  ContentMD5:
-    type: string
-  ContentRange:
-    type: string
-  ContentType:
-    type: string
-  ContinuationEvent:
-    type: object
-    properties: {}
   CopyObjectOutput:
     type: object
     example:
@@ -2303,52 +1921,10 @@ definitions:
       CopySource: /sourcebucket/HappyFacejpg
       Key: HappyFaceCopyjpg
     properties: {}
-  CopyObjectResult:
+  ObjectNotInActiveTierError:
     type: object
-    properties:
-      ETag:
-        $ref: '#/definitions/ETag'
-      LastModified:
-        $ref: '#/definitions/LastModified'
-  CopyPartResult:
-    type: object
-    properties:
-      ETag:
-        $ref: '#/definitions/ETag'
-        description: Entity tag of the object.
-      LastModified:
-        $ref: '#/definitions/LastModified'
-        description: Date and time at which the object was uploaded.
-  CopySource:
-    type: string
-    pattern: \/.+\/.+
-  CopySourceIfMatch:
-    type: string
-  CopySourceIfModifiedSince:
-    type: string
-    format: date-time
-  CopySourceIfNoneMatch:
-    type: string
-  CopySourceIfUnmodifiedSince:
-    type: string
-    format: date-time
-  CopySourceRange:
-    type: string
-  CopySourceSSECustomerAlgorithm:
-    type: string
-  CopySourceSSECustomerKey:
-    type: string
-    format: password
-  CopySourceSSECustomerKeyMD5:
-    type: string
-  CopySourceVersionId:
-    type: string
-  CreateBucketConfiguration:
-    type: object
-    properties:
-      LocationConstraint:
-        $ref: '#/definitions/BucketLocationConstraint'
-        description: 'Specifies the region where the bucket will be created. If you don''t specify a region, the bucket will be created in US Standard.'
+    properties: {}
+    description: The source object of the COPY operation is not in the active tier and is only stored in Amazon Glacier.
   CreateBucketOutput:
     type: object
     example:
@@ -2363,6 +1939,13 @@ definitions:
         $ref: '#/definitions/CreateBucketConfiguration'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  BucketAlreadyExists:
+    type: object
+    properties: {}
+    description: The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.
+  BucketAlreadyOwnedByYou:
+    type: object
+    properties: {}
   CreateMultipartUploadOutput:
     type: object
     example:
@@ -2385,26 +1968,11 @@ definitions:
       Bucket: examplebucket
       Key: largeobject
     properties: {}
-  CreationDate:
-    type: string
-    format: date-time
-  Date:
-    type: string
-    format: date-time
-  Days:
-    type: integer
-  DaysAfterInitiation:
-    type: integer
-  Delete:
+  DeleteBucketRequest:
     type: object
-    required:
-      - Objects
-    properties:
-      Objects:
-        $ref: '#/definitions/ObjectIdentifierList'
-      Quiet:
-        $ref: '#/definitions/Quiet'
-        description: 'Element to enable quiet mode for the request. When you add this element, you must set its value to true.'
+    example:
+      Bucket: forrandall2
+    properties: {}
   DeleteBucketAnalyticsConfigurationRequest:
     type: object
     properties: {}
@@ -2437,11 +2005,6 @@ definitions:
     example:
       Bucket: example
     properties: {}
-  DeleteBucketRequest:
-    type: object
-    example:
-      Bucket: forrandall2
-    properties: {}
   DeleteBucketTaggingRequest:
     type: object
     example:
@@ -2452,33 +2015,6 @@ definitions:
     example:
       Bucket: examplebucket
     properties: {}
-  DeleteMarker:
-    type: boolean
-  DeleteMarkerEntry:
-    type: object
-    properties:
-      Owner:
-        $ref: '#/definitions/Owner'
-      Key:
-        $ref: '#/definitions/ObjectKey'
-        description: The object key.
-      VersionId:
-        $ref: '#/definitions/ObjectVersionId'
-        description: Version ID of an object.
-      IsLatest:
-        $ref: '#/definitions/IsLatest'
-        description: Specifies whether the object is (true) or is not (false) the latest version of an object.
-      LastModified:
-        $ref: '#/definitions/LastModified'
-        description: Date and time the object was last modified.
-  DeleteMarkerVersionId:
-    type: string
-  DeleteMarkers:
-    type: array
-    items:
-      $ref: '#/definitions/DeleteMarkerEntry'
-    xml:
-      wrapped: false
   DeleteObjectOutput:
     type: object
     example: {}
@@ -2531,189 +2067,6 @@ definitions:
         $ref: '#/definitions/Delete'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
-  DeletedObject:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/ObjectKey'
-      VersionId:
-        $ref: '#/definitions/ObjectVersionId'
-      DeleteMarker:
-        $ref: '#/definitions/DeleteMarker'
-      DeleteMarkerVersionId:
-        $ref: '#/definitions/DeleteMarkerVersionId'
-  DeletedObjects:
-    type: array
-    items:
-      $ref: '#/definitions/DeletedObject'
-    xml:
-      wrapped: false
-  Delimiter:
-    type: string
-  Description:
-    type: string
-  Destination:
-    type: object
-    required:
-      - Bucket
-    properties:
-      Bucket:
-        $ref: '#/definitions/BucketName'
-        description: Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.
-      Account:
-        $ref: '#/definitions/AccountId'
-        description: Account ID of the destination bucket. Currently this is only being verified if Access Control Translation is enabled
-      StorageClass:
-        $ref: '#/definitions/StorageClass'
-        description: The class of storage used to store the object.
-      AccessControlTranslation:
-        $ref: '#/definitions/AccessControlTranslation'
-        description: Container for information regarding the access control for replicas.
-      EncryptionConfiguration:
-        $ref: '#/definitions/EncryptionConfiguration'
-        description: Container for information regarding encryption based configuration for replicas.
-    description: Container for replication destination information.
-  DisplayName:
-    type: string
-  ETag:
-    type: string
-  EmailAddress:
-    type: string
-  EnableRequestProgress:
-    type: boolean
-  EncodingType:
-    type: string
-    enum:
-      - url
-    description: 'Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response.'
-  Encryption:
-    type: object
-    required:
-      - EncryptionType
-    properties:
-      EncryptionType:
-        $ref: '#/definitions/ServerSideEncryption'
-        description: 'The server-side encryption algorithm used when storing job results in Amazon S3 (e.g., AES256, aws:kms).'
-      KMSKeyId:
-        $ref: '#/definitions/SSEKMSKeyId'
-        description: 'If the encryption type is aws:kms, this optional value specifies the AWS KMS key ID to use for encryption of job results.'
-      KMSContext:
-        $ref: '#/definitions/KMSContext'
-        description: 'If the encryption type is aws:kms, this optional value can be used to specify the encryption context for the restore results.'
-    description: Describes the server-side encryption that will be applied to the restore results.
-  EncryptionConfiguration:
-    type: object
-    properties:
-      ReplicaKmsKeyID:
-        $ref: '#/definitions/ReplicaKmsKeyID'
-        description: The id of the KMS key used to encrypt the replica object.
-    description: Container for information regarding encryption based configuration for replicas.
-  EndEvent:
-    type: object
-    properties: {}
-  Error:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/ObjectKey'
-      VersionId:
-        $ref: '#/definitions/ObjectVersionId'
-      Code:
-        $ref: '#/definitions/Code'
-      Message:
-        $ref: '#/definitions/Message'
-  ErrorDocument:
-    type: object
-    required:
-      - Key
-    properties:
-      Key:
-        $ref: '#/definitions/ObjectKey'
-        description: The object key name to use when a 4XX class error occurs.
-  Errors:
-    type: array
-    items:
-      $ref: '#/definitions/Error'
-    xml:
-      wrapped: false
-  Event:
-    type: string
-    enum:
-      - 's3:ReducedRedundancyLostObject'
-      - 's3:ObjectCreated:*'
-      - 's3:ObjectCreated:Put'
-      - 's3:ObjectCreated:Post'
-      - 's3:ObjectCreated:Copy'
-      - 's3:ObjectCreated:CompleteMultipartUpload'
-      - 's3:ObjectRemoved:*'
-      - 's3:ObjectRemoved:Delete'
-      - 's3:ObjectRemoved:DeleteMarkerCreated'
-    description: Bucket event for which to send notifications.
-  EventList:
-    type: array
-    items:
-      $ref: '#/definitions/Event'
-    xml:
-      wrapped: false
-  Expiration:
-    type: string
-  ExpirationStatus:
-    type: string
-    enum:
-      - Enabled
-      - Disabled
-  ExpiredObjectDeleteMarker:
-    type: boolean
-  Expires:
-    type: string
-    format: date-time
-  ExposeHeader:
-    type: string
-  ExposeHeaders:
-    type: array
-    items:
-      $ref: '#/definitions/ExposeHeader'
-    xml:
-      wrapped: false
-  Expression:
-    type: string
-  ExpressionType:
-    type: string
-    enum:
-      - SQL
-  FetchOwner:
-    type: boolean
-  FieldDelimiter:
-    type: string
-  FileHeaderInfo:
-    type: string
-    enum:
-      - USE
-      - IGNORE
-      - NONE
-  FilterRule:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/FilterRuleName'
-        description: 'Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the Amazon Simple Storage Service Developer Guide.'
-      Value:
-        $ref: '#/definitions/FilterRuleValue'
-    description: Container for key value pair that defines the criteria for the filter rule.
-  FilterRuleList:
-    type: array
-    description: A list of containers for key value pair that defines the criteria for the filter rule.
-    items:
-      $ref: '#/definitions/FilterRule'
-    xml:
-      wrapped: false
-  FilterRuleName:
-    type: string
-    enum:
-      - prefix
-      - suffix
-  FilterRuleValue:
-    type: string
   GetBucketAccelerateConfigurationOutput:
     type: object
     properties:
@@ -2779,6 +2132,23 @@ definitions:
   GetBucketInventoryConfigurationRequest:
     type: object
     properties: {}
+  GetBucketLifecycleOutput:
+    type: object
+    example:
+      Rules:
+        - Expiration:
+            Days: 1
+          ID: delete logs
+          Prefix: 123/
+          Status: Enabled
+    properties:
+      Rules:
+        $ref: '#/definitions/Rules'
+  GetBucketLifecycleRequest:
+    type: object
+    example:
+      Bucket: acl1
+    properties: {}
   GetBucketLifecycleConfigurationOutput:
     type: object
     example:
@@ -2796,23 +2166,6 @@ definitions:
     type: object
     example:
       Bucket: examplebucket
-    properties: {}
-  GetBucketLifecycleOutput:
-    type: object
-    example:
-      Rules:
-        - Expiration:
-            Days: 1
-          ID: delete logs
-          Prefix: 123/
-          Status: Enabled
-    properties:
-      Rules:
-        $ref: '#/definitions/Rules'
-  GetBucketLifecycleRequest:
-    type: object
-    example:
-      Bucket: acl1
     properties: {}
   GetBucketLocationOutput:
     type: object
@@ -2843,11 +2196,43 @@ definitions:
   GetBucketMetricsConfigurationRequest:
     type: object
     properties: {}
+  NotificationConfigurationDeprecated:
+    type: object
+    example:
+      QueueConfiguration:
+        Event: 's3:ObjectCreated:Put'
+        Events:
+          - 's3:ObjectCreated:Put'
+        Id: MDQ2OGQ4NDEtOTBmNi00YTM4LTk0NzYtZDIwN2I3NWQ1NjIx
+        Queue: 'arn:aws:sqs:us-east-1:acct-id:S3ObjectCreatedEventQueue'
+      TopicConfiguration:
+        Event: 's3:ObjectCreated:Copy'
+        Events:
+          - 's3:ObjectCreated:Copy'
+        Id: YTVkMWEzZGUtNTY1NS00ZmE2LWJjYjktMmRlY2QwODFkNTJi
+        Topic: 'arn:aws:sns:us-east-1:acct-id:S3ObjectCreatedEventTopic'
+    properties:
+      TopicConfiguration:
+        $ref: '#/definitions/TopicConfigurationDeprecated'
+      QueueConfiguration:
+        $ref: '#/definitions/QueueConfigurationDeprecated'
+      CloudFunctionConfiguration:
+        $ref: '#/definitions/CloudFunctionConfiguration'
   GetBucketNotificationConfigurationRequest:
     type: object
     example:
       Bucket: examplebucket
     properties: {}
+  NotificationConfiguration:
+    type: object
+    properties:
+      TopicConfigurations:
+        $ref: '#/definitions/TopicConfigurationList'
+      QueueConfigurations:
+        $ref: '#/definitions/QueueConfigurationList'
+      LambdaFunctionConfigurations:
+        $ref: '#/definitions/LambdaFunctionConfigurationList'
+    description: 'Container for specifying the notification configuration of the bucket. If this element is empty, notifications are turned off on the bucket.'
   GetBucketPolicyOutput:
     type: object
     example:
@@ -2949,6 +2334,32 @@ definitions:
     example:
       Bucket: examplebucket
     properties: {}
+  GetObjectOutput:
+    type: object
+    example:
+      AcceptRanges: bytes
+      ContentLength: '10'
+      ContentRange: bytes 0-9/43
+      ContentType: text/plain
+      ETag: '"0d94420ffd0bc68cd3d152506b97a9cc"'
+      LastModified: 'Thu, 09 Oct 2014 22:57:28 GMT'
+      Metadata: {}
+      VersionId: 'null'
+    properties:
+      Body:
+        $ref: '#/definitions/Body'
+        description: Object data.
+  GetObjectRequest:
+    type: object
+    example:
+      Bucket: examplebucket
+      Key: SampleFile.txt
+      Range: bytes=0-9
+    properties: {}
+  NoSuchKey:
+    type: object
+    properties: {}
+    description: The specified key does not exist.
   GetObjectAclOutput:
     type: object
     example:
@@ -2988,28 +2399,6 @@ definitions:
       Bucket: examplebucket
       Key: HappyFace.jpg
     properties: {}
-  GetObjectOutput:
-    type: object
-    example:
-      AcceptRanges: bytes
-      ContentLength: '10'
-      ContentRange: bytes 0-9/43
-      ContentType: text/plain
-      ETag: '"0d94420ffd0bc68cd3d152506b97a9cc"'
-      LastModified: 'Thu, 09 Oct 2014 22:57:28 GMT'
-      Metadata: {}
-      VersionId: 'null'
-    properties:
-      Body:
-        $ref: '#/definitions/Body'
-        description: Object data.
-  GetObjectRequest:
-    type: object
-    example:
-      Bucket: examplebucket
-      Key: SampleFile.txt
-      Range: bytes=0-9
-    properties: {}
   GetObjectTaggingOutput:
     type: object
     required:
@@ -3041,64 +2430,15 @@ definitions:
       Bucket: examplebucket
       Key: HappyFace.jpg
     properties: {}
-  GlacierJobParameters:
-    type: object
-    required:
-      - Tier
-    properties:
-      Tier:
-        $ref: '#/definitions/Tier'
-        description: Glacier retrieval tier at which the restore will be processed.
-  Grant:
-    type: object
-    properties:
-      Grantee:
-        $ref: '#/definitions/Grantee'
-      Permission:
-        $ref: '#/definitions/Permission'
-        description: Specifies the permission given to the grantee.
-  GrantFullControl:
-    type: string
-  GrantRead:
-    type: string
-  GrantReadACP:
-    type: string
-  GrantWrite:
-    type: string
-  GrantWriteACP:
-    type: string
-  Grantee:
-    type: object
-    required:
-      - Type
-    properties:
-      DisplayName:
-        $ref: '#/definitions/DisplayName'
-        description: Screen name of the grantee.
-      EmailAddress:
-        $ref: '#/definitions/EmailAddress'
-        description: Email address of the grantee.
-      ID:
-        $ref: '#/definitions/ID'
-        description: The canonical user ID of the grantee.
-      Type:
-        $ref: '#/definitions/Type'
-        description: Type of grantee
-      URI:
-        $ref: '#/definitions/URI'
-        description: URI of the grantee group.
-    xml:
-      namespace: 'http://www.w3.org/2001/XMLSchema-instance'
-      attribute: true
-  Grants:
-    type: array
-    items:
-      $ref: '#/definitions/Grant'
   HeadBucketRequest:
     type: object
     example:
       Bucket: acl1
     properties: {}
+  NoSuchBucket:
+    type: object
+    properties: {}
+    description: The specified bucket does not exist.
   HeadObjectOutput:
     type: object
     example:
@@ -3116,311 +2456,6 @@ definitions:
       Bucket: examplebucket
       Key: HappyFace.jpg
     properties: {}
-  HostName:
-    type: string
-  HttpErrorCodeReturnedEquals:
-    type: string
-  HttpRedirectCode:
-    type: string
-  ID:
-    type: string
-  IfMatch:
-    type: string
-  IfModifiedSince:
-    type: string
-    format: date-time
-  IfNoneMatch:
-    type: string
-  IfUnmodifiedSince:
-    type: string
-    format: date-time
-  IndexDocument:
-    type: object
-    required:
-      - Suffix
-    properties:
-      Suffix:
-        $ref: '#/definitions/Suffix'
-        description: A suffix that is appended to a request that is for a directory on the website endpoint (e.g. if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character.
-  Initiated:
-    type: string
-    format: date-time
-  Initiator:
-    type: object
-    properties:
-      ID:
-        $ref: '#/definitions/ID'
-        description: 'If the principal is an AWS account, it provides the Canonical User ID. If the principal is an IAM User, it provides a user ARN value.'
-      DisplayName:
-        $ref: '#/definitions/DisplayName'
-        description: Name of the Principal.
-  InputSerialization:
-    type: object
-    properties:
-      CSV:
-        $ref: '#/definitions/CSVInput'
-        description: Describes the serialization of a CSV-encoded object.
-      CompressionType:
-        $ref: '#/definitions/CompressionType'
-        description: 'Specifies object''s compression format. Valid values: NONE, GZIP, BZIP2. Default Value: NONE.'
-      JSON:
-        $ref: '#/definitions/JSONInput'
-        description: Specifies JSON as object's input serialization format.
-    description: Describes the serialization format of the object.
-  InventoryConfiguration:
-    type: object
-    required:
-      - Destination
-      - IsEnabled
-      - Id
-      - IncludedObjectVersions
-      - Schedule
-    properties:
-      Destination:
-        $ref: '#/definitions/InventoryDestination'
-        description: Contains information about where to publish the inventory results.
-      IsEnabled:
-        $ref: '#/definitions/IsEnabled'
-        description: Specifies whether the inventory is enabled or disabled.
-      Filter:
-        $ref: '#/definitions/InventoryFilter'
-        description: Specifies an inventory filter. The inventory only includes objects that meet the filter's criteria.
-      Id:
-        $ref: '#/definitions/InventoryId'
-        description: The ID used to identify the inventory configuration.
-      IncludedObjectVersions:
-        $ref: '#/definitions/InventoryIncludedObjectVersions'
-        description: Specifies which object version(s) to included in the inventory results.
-      OptionalFields:
-        $ref: '#/definitions/InventoryOptionalFields'
-        description: Contains the optional fields that are included in the inventory results.
-      Schedule:
-        $ref: '#/definitions/InventorySchedule'
-        description: Specifies the schedule for generating inventory results.
-  InventoryConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/InventoryConfiguration'
-    xml:
-      wrapped: false
-  InventoryDestination:
-    type: object
-    required:
-      - S3BucketDestination
-    properties:
-      S3BucketDestination:
-        $ref: '#/definitions/InventoryS3BucketDestination'
-        description: 'Contains the bucket name, file format, bucket owner (optional), and prefix (optional) where inventory results are published.'
-  InventoryEncryption:
-    type: object
-    properties:
-      SSES3:
-        $ref: '#/definitions/SSES3'
-        description: Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
-      SSEKMS:
-        $ref: '#/definitions/SSEKMS'
-        description: Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
-    description: Contains the type of server-side encryption used to encrypt the inventory results.
-  InventoryFilter:
-    type: object
-    required:
-      - Prefix
-    properties:
-      Prefix:
-        $ref: '#/definitions/Prefix'
-        description: The prefix that an object must have to be included in the inventory results.
-  InventoryFormat:
-    type: string
-    enum:
-      - CSV
-      - ORC
-  InventoryFrequency:
-    type: string
-    enum:
-      - Daily
-      - Weekly
-  InventoryId:
-    type: string
-  InventoryIncludedObjectVersions:
-    type: string
-    enum:
-      - All
-      - Current
-  InventoryOptionalField:
-    type: string
-    enum:
-      - Size
-      - LastModifiedDate
-      - StorageClass
-      - ETag
-      - IsMultipartUploaded
-      - ReplicationStatus
-      - EncryptionStatus
-  InventoryOptionalFields:
-    type: array
-    items:
-      $ref: '#/definitions/InventoryOptionalField'
-  InventoryS3BucketDestination:
-    type: object
-    required:
-      - Bucket
-      - Format
-    properties:
-      AccountId:
-        $ref: '#/definitions/AccountId'
-        description: The ID of the account that owns the destination bucket.
-      Bucket:
-        $ref: '#/definitions/BucketName'
-        description: The Amazon resource name (ARN) of the bucket where inventory results will be published.
-      Format:
-        $ref: '#/definitions/InventoryFormat'
-        description: Specifies the output format of the inventory results.
-      Prefix:
-        $ref: '#/definitions/Prefix'
-        description: The prefix that is prepended to all inventory results.
-      Encryption:
-        $ref: '#/definitions/InventoryEncryption'
-        description: Contains the type of server-side encryption used to encrypt the inventory results.
-  InventorySchedule:
-    type: object
-    required:
-      - Frequency
-    properties:
-      Frequency:
-        $ref: '#/definitions/InventoryFrequency'
-        description: Specifies how frequently inventory results are produced.
-  IsEnabled:
-    type: boolean
-  IsLatest:
-    type: boolean
-  IsTruncated:
-    type: boolean
-  JSONInput:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/JSONType'
-        description: 'The type of JSON. Valid values: Document, Lines.'
-  JSONOutput:
-    type: object
-    properties:
-      RecordDelimiter:
-        $ref: '#/definitions/RecordDelimiter'
-        description: The value used to separate individual records in the output.
-  JSONType:
-    type: string
-    enum:
-      - DOCUMENT
-      - LINES
-  KMSContext:
-    type: string
-  KeyCount:
-    type: integer
-  KeyMarker:
-    type: string
-  KeyPrefixEquals:
-    type: string
-  LambdaFunctionArn:
-    type: string
-  LambdaFunctionConfiguration:
-    type: object
-    required:
-      - LambdaFunctionArn
-      - Events
-    properties:
-      Id:
-        $ref: '#/definitions/NotificationId'
-      LambdaFunctionArn:
-        $ref: '#/definitions/LambdaFunctionArn'
-        description: Lambda cloud function ARN that Amazon S3 can invoke when it detects events of the specified type.
-      Events:
-        $ref: '#/definitions/EventList'
-      Filter:
-        $ref: '#/definitions/NotificationConfigurationFilter'
-    description: Container for specifying the AWS Lambda notification configuration.
-  LambdaFunctionConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/LambdaFunctionConfiguration'
-    xml:
-      wrapped: false
-  LastModified:
-    type: string
-    format: date-time
-  LifecycleConfiguration:
-    type: object
-    required:
-      - Rules
-    properties:
-      Rules:
-        $ref: '#/definitions/Rules'
-  LifecycleExpiration:
-    type: object
-    properties:
-      Date:
-        $ref: '#/definitions/Date'
-        description: Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.
-      Days:
-        $ref: '#/definitions/Days'
-        description: 'Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.'
-      ExpiredObjectDeleteMarker:
-        $ref: '#/definitions/ExpiredObjectDeleteMarker'
-        description: 'Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.'
-  LifecycleRule:
-    type: object
-    required:
-      - Status
-    properties:
-      Expiration:
-        $ref: '#/definitions/LifecycleExpiration'
-      ID:
-        $ref: '#/definitions/ID'
-        description: Unique identifier for the rule. The value cannot be longer than 255 characters.
-      Prefix:
-        $ref: '#/definitions/Prefix'
-        description: Prefix identifying one or more objects to which the rule applies. This is deprecated; use Filter instead.
-      Filter:
-        $ref: '#/definitions/LifecycleRuleFilter'
-      Status:
-        $ref: '#/definitions/ExpirationStatus'
-        description: 'If ''Enabled'', the rule is currently being applied. If ''Disabled'', the rule is not currently being applied.'
-      Transitions:
-        $ref: '#/definitions/TransitionList'
-      NoncurrentVersionTransitions:
-        $ref: '#/definitions/NoncurrentVersionTransitionList'
-      NoncurrentVersionExpiration:
-        $ref: '#/definitions/NoncurrentVersionExpiration'
-      AbortIncompleteMultipartUpload:
-        $ref: '#/definitions/AbortIncompleteMultipartUpload'
-  LifecycleRuleAndOperator:
-    type: object
-    properties:
-      Prefix:
-        $ref: '#/definitions/Prefix'
-      Tags:
-        $ref: '#/definitions/TagSet'
-        description: All of these tags must exist in the object's tag set in order for the rule to apply.
-    description: This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator.
-    xml:
-      wrapped: false
-  LifecycleRuleFilter:
-    type: object
-    properties:
-      Prefix:
-        $ref: '#/definitions/Prefix'
-        description: Prefix identifying one or more objects to which the rule applies.
-      Tag:
-        $ref: '#/definitions/Tag'
-        description: This tag must exist in the object's tag set in order for the rule to apply.
-      And:
-        $ref: '#/definitions/LifecycleRuleAndOperator'
-    description: 'The Filter is used to identify objects that a Lifecycle Rule applies to. A Filter must have exactly one of Prefix, Tag, or And specified.'
-  LifecycleRules:
-    type: array
-    items:
-      $ref: '#/definitions/LifecycleRule'
-    xml:
-      wrapped: false
   ListBucketAnalyticsConfigurationsOutput:
     type: object
     properties:
@@ -3800,435 +2835,6 @@ definitions:
       Key: bigobject
       UploadId: example7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--
     properties: {}
-  Location:
-    type: string
-  LocationPrefix:
-    type: string
-  LoggingEnabled:
-    type: object
-    required:
-      - TargetBucket
-      - TargetPrefix
-    properties:
-      TargetBucket:
-        $ref: '#/definitions/TargetBucket'
-        description: 'Specifies the bucket where you want Amazon S3 to store server access logs. You can have your logs delivered to any bucket that you own, including the same bucket that is being logged. You can also configure multiple buckets to deliver their logs to the same target bucket. In this case you should choose a different TargetPrefix for each source bucket so that the delivered log files can be distinguished by key.'
-      TargetGrants:
-        $ref: '#/definitions/TargetGrants'
-      TargetPrefix:
-        $ref: '#/definitions/TargetPrefix'
-        description: This element lets you specify a prefix for the keys that the log files will be stored under.
-    description: Container for logging information. Presence of this element indicates that logging is enabled. Parameters TargetBucket and TargetPrefix are required in this case.
-  MFA:
-    type: string
-  MFADelete:
-    type: string
-    enum:
-      - Enabled
-      - Disabled
-  MFADeleteStatus:
-    type: string
-    enum:
-      - Enabled
-      - Disabled
-  Marker:
-    type: string
-  MaxAgeSeconds:
-    type: integer
-  MaxKeys:
-    type: integer
-  MaxParts:
-    type: integer
-  MaxUploads:
-    type: integer
-  Message:
-    type: string
-  Metadata:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/MetadataKey'
-        value:
-          $ref: '#/definitions/MetadataValue'
-  MetadataDirective:
-    type: string
-    enum:
-      - COPY
-      - REPLACE
-  MetadataEntry:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/MetadataKey'
-      Value:
-        $ref: '#/definitions/MetadataValue'
-    description: A metadata key-value pair to store with an object.
-  MetadataKey:
-    type: string
-  MetadataValue:
-    type: string
-  MetricsAndOperator:
-    type: object
-    properties:
-      Prefix:
-        $ref: '#/definitions/Prefix'
-        description: The prefix used when evaluating an AND predicate.
-      Tags:
-        $ref: '#/definitions/TagSet'
-        description: The list of tags used when evaluating an AND predicate.
-    xml:
-      wrapped: false
-  MetricsConfiguration:
-    type: object
-    required:
-      - Id
-    properties:
-      Id:
-        $ref: '#/definitions/MetricsId'
-        description: The ID used to identify the metrics configuration.
-      Filter:
-        $ref: '#/definitions/MetricsFilter'
-        description: 'Specifies a metrics configuration filter. The metrics configuration will only include objects that meet the filter''s criteria. A filter must be a prefix, a tag, or a conjunction (MetricsAndOperator).'
-  MetricsConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/MetricsConfiguration'
-    xml:
-      wrapped: false
-  MetricsFilter:
-    type: object
-    properties:
-      Prefix:
-        $ref: '#/definitions/Prefix'
-        description: The prefix used when evaluating a metrics filter.
-      Tag:
-        $ref: '#/definitions/Tag'
-        description: The tag used when evaluating a metrics filter.
-      And:
-        $ref: '#/definitions/MetricsAndOperator'
-        description: 'A conjunction (logical AND) of predicates, which is used in evaluating a metrics filter. The operator must have at least two predicates, and an object must match all of the predicates in order for the filter to apply.'
-  MetricsId:
-    type: string
-  MissingMeta:
-    type: integer
-  MultipartUpload:
-    type: object
-    properties:
-      UploadId:
-        $ref: '#/definitions/MultipartUploadId'
-        description: Upload ID that identifies the multipart upload.
-      Key:
-        $ref: '#/definitions/ObjectKey'
-        description: Key of the object for which the multipart upload was initiated.
-      Initiated:
-        $ref: '#/definitions/Initiated'
-        description: Date and time at which the multipart upload was initiated.
-      StorageClass:
-        $ref: '#/definitions/StorageClass'
-        description: The class of storage used to store the object.
-      Owner:
-        $ref: '#/definitions/Owner'
-      Initiator:
-        $ref: '#/definitions/Initiator'
-        description: Identifies who initiated the multipart upload.
-  MultipartUploadId:
-    type: string
-  MultipartUploadList:
-    type: array
-    items:
-      $ref: '#/definitions/MultipartUpload'
-    xml:
-      wrapped: false
-  NextKeyMarker:
-    type: string
-  NextMarker:
-    type: string
-  NextPartNumberMarker:
-    type: integer
-  NextToken:
-    type: string
-  NextUploadIdMarker:
-    type: string
-  NextVersionIdMarker:
-    type: string
-  NoSuchBucket:
-    type: object
-    properties: {}
-    description: The specified bucket does not exist.
-  NoSuchKey:
-    type: object
-    properties: {}
-    description: The specified key does not exist.
-  NoSuchUpload:
-    type: object
-    properties: {}
-    description: The specified multipart upload does not exist.
-  NoncurrentVersionExpiration:
-    type: object
-    properties:
-      NoncurrentDays:
-        $ref: '#/definitions/Days'
-        description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.'
-    description: 'Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object''s lifetime.'
-  NoncurrentVersionTransition:
-    type: object
-    properties:
-      NoncurrentDays:
-        $ref: '#/definitions/Days'
-        description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.'
-      StorageClass:
-        $ref: '#/definitions/TransitionStorageClass'
-        description: The class of storage used to store the object.
-    description: 'Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA or GLACIER storage class at a specific period in the object''s lifetime.'
-  NoncurrentVersionTransitionList:
-    type: array
-    items:
-      $ref: '#/definitions/NoncurrentVersionTransition'
-    xml:
-      wrapped: false
-  NotificationConfiguration:
-    type: object
-    properties:
-      TopicConfigurations:
-        $ref: '#/definitions/TopicConfigurationList'
-      QueueConfigurations:
-        $ref: '#/definitions/QueueConfigurationList'
-      LambdaFunctionConfigurations:
-        $ref: '#/definitions/LambdaFunctionConfigurationList'
-    description: 'Container for specifying the notification configuration of the bucket. If this element is empty, notifications are turned off on the bucket.'
-  NotificationConfigurationDeprecated:
-    type: object
-    example:
-      QueueConfiguration:
-        Event: 's3:ObjectCreated:Put'
-        Events:
-          - 's3:ObjectCreated:Put'
-        Id: MDQ2OGQ4NDEtOTBmNi00YTM4LTk0NzYtZDIwN2I3NWQ1NjIx
-        Queue: 'arn:aws:sqs:us-east-1:acct-id:S3ObjectCreatedEventQueue'
-      TopicConfiguration:
-        Event: 's3:ObjectCreated:Copy'
-        Events:
-          - 's3:ObjectCreated:Copy'
-        Id: YTVkMWEzZGUtNTY1NS00ZmE2LWJjYjktMmRlY2QwODFkNTJi
-        Topic: 'arn:aws:sns:us-east-1:acct-id:S3ObjectCreatedEventTopic'
-    properties:
-      TopicConfiguration:
-        $ref: '#/definitions/TopicConfigurationDeprecated'
-      QueueConfiguration:
-        $ref: '#/definitions/QueueConfigurationDeprecated'
-      CloudFunctionConfiguration:
-        $ref: '#/definitions/CloudFunctionConfiguration'
-  NotificationConfigurationFilter:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/S3KeyFilter'
-    description: 'Container for object key name filtering rules. For information about key name filtering, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the Amazon Simple Storage Service Developer Guide.'
-  NotificationId:
-    type: string
-    description: 'Optional unique identifier for configurations in a notification configuration. If you don''t provide one, Amazon S3 will assign an ID.'
-  Object:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/ObjectKey'
-      LastModified:
-        $ref: '#/definitions/LastModified'
-      ETag:
-        $ref: '#/definitions/ETag'
-      Size:
-        $ref: '#/definitions/Size'
-      StorageClass:
-        $ref: '#/definitions/ObjectStorageClass'
-        description: The class of storage used to store the object.
-      Owner:
-        $ref: '#/definitions/Owner'
-  ObjectAlreadyInActiveTierError:
-    type: object
-    properties: {}
-    description: This operation is not allowed against this storage tier
-  ObjectCannedACL:
-    type: string
-    enum:
-      - private
-      - public-read
-      - public-read-write
-      - authenticated-read
-      - aws-exec-read
-      - bucket-owner-read
-      - bucket-owner-full-control
-  ObjectIdentifier:
-    type: object
-    required:
-      - Key
-    properties:
-      Key:
-        $ref: '#/definitions/ObjectKey'
-        description: Key name of the object to delete.
-      VersionId:
-        $ref: '#/definitions/ObjectVersionId'
-        description: VersionId for the specific version of the object to delete.
-  ObjectIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/ObjectIdentifier'
-    xml:
-      wrapped: false
-  ObjectKey:
-    type: string
-    minLength: 1
-  ObjectList:
-    type: array
-    items:
-      $ref: '#/definitions/Object'
-    xml:
-      wrapped: false
-  ObjectNotInActiveTierError:
-    type: object
-    properties: {}
-    description: The source object of the COPY operation is not in the active tier and is only stored in Amazon Glacier.
-  ObjectStorageClass:
-    type: string
-    enum:
-      - STANDARD
-      - REDUCED_REDUNDANCY
-      - GLACIER
-      - STANDARD_IA
-      - ONEZONE_IA
-  ObjectVersion:
-    type: object
-    properties:
-      ETag:
-        $ref: '#/definitions/ETag'
-      Size:
-        $ref: '#/definitions/Size'
-        description: Size in bytes of the object.
-      StorageClass:
-        $ref: '#/definitions/ObjectVersionStorageClass'
-        description: The class of storage used to store the object.
-      Key:
-        $ref: '#/definitions/ObjectKey'
-        description: The object key.
-      VersionId:
-        $ref: '#/definitions/ObjectVersionId'
-        description: Version ID of an object.
-      IsLatest:
-        $ref: '#/definitions/IsLatest'
-        description: Specifies whether the object is (true) or is not (false) the latest version of an object.
-      LastModified:
-        $ref: '#/definitions/LastModified'
-        description: Date and time the object was last modified.
-      Owner:
-        $ref: '#/definitions/Owner'
-  ObjectVersionId:
-    type: string
-  ObjectVersionList:
-    type: array
-    items:
-      $ref: '#/definitions/ObjectVersion'
-    xml:
-      wrapped: false
-  ObjectVersionStorageClass:
-    type: string
-    enum:
-      - STANDARD
-  OutputLocation:
-    type: object
-    properties:
-      S3:
-        $ref: '#/definitions/S3Location'
-        description: Describes an S3 location that will receive the results of the restore request.
-    description: Describes the location where the restore job's output is stored.
-  OutputSerialization:
-    type: object
-    properties:
-      CSV:
-        $ref: '#/definitions/CSVOutput'
-        description: Describes the serialization of CSV-encoded Select results.
-      JSON:
-        $ref: '#/definitions/JSONOutput'
-        description: Specifies JSON as request's output serialization format.
-    description: Describes how results of the Select job are serialized.
-  Owner:
-    type: object
-    properties:
-      DisplayName:
-        $ref: '#/definitions/DisplayName'
-      ID:
-        $ref: '#/definitions/ID'
-  OwnerOverride:
-    type: string
-    enum:
-      - Destination
-  Part:
-    type: object
-    properties:
-      PartNumber:
-        $ref: '#/definitions/PartNumber'
-        description: 'Part number identifying the part. This is a positive integer between 1 and 10,000.'
-      LastModified:
-        $ref: '#/definitions/LastModified'
-        description: Date and time at which the part was uploaded.
-      ETag:
-        $ref: '#/definitions/ETag'
-        description: Entity tag returned when the part was uploaded.
-      Size:
-        $ref: '#/definitions/Size'
-        description: Size of the uploaded part data.
-  PartNumber:
-    type: integer
-  PartNumberMarker:
-    type: integer
-  Parts:
-    type: array
-    items:
-      $ref: '#/definitions/Part'
-    xml:
-      wrapped: false
-  PartsCount:
-    type: integer
-  Payer:
-    type: string
-    enum:
-      - Requester
-      - BucketOwner
-  Permission:
-    type: string
-    enum:
-      - FULL_CONTROL
-      - WRITE
-      - WRITE_ACP
-      - READ
-      - READ_ACP
-  Policy:
-    type: string
-  Prefix:
-    type: string
-  Progress:
-    type: object
-    properties:
-      BytesScanned:
-        $ref: '#/definitions/BytesScanned'
-        description: Current number of object bytes scanned.
-      BytesProcessed:
-        $ref: '#/definitions/BytesProcessed'
-        description: Current number of uncompressed object bytes processed.
-      BytesReturned:
-        $ref: '#/definitions/BytesReturned'
-        description: Current number of bytes of records payload data returned.
-  ProgressEvent:
-    type: object
-    properties:
-      Details:
-        $ref: '#/definitions/Progress'
-        description: The Progress event details.
-  Protocol:
-    type: string
-    enum:
-      - http
-      - https
   PutBucketAccelerateConfigurationRequest:
     type: object
     required:
@@ -4311,6 +2917,13 @@ definitions:
         description: Specifies the inventory configuration.
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketLifecycleRequest:
+    type: object
+    properties:
+      LifecycleConfiguration:
+        $ref: '#/definitions/LifecycleConfiguration'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketLifecycleConfigurationRequest:
     type: object
     example:
@@ -4329,13 +2942,6 @@ definitions:
     properties:
       LifecycleConfiguration:
         $ref: '#/definitions/BucketLifecycleConfiguration'
-    xml:
-      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
-  PutBucketLifecycleRequest:
-    type: object
-    properties:
-      LifecycleConfiguration:
-        $ref: '#/definitions/LifecycleConfiguration'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketLoggingRequest:
@@ -4368,6 +2974,15 @@ definitions:
         description: Specifies the metrics configuration.
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketNotificationRequest:
+    type: object
+    required:
+      - NotificationConfiguration
+    properties:
+      NotificationConfiguration:
+        $ref: '#/definitions/NotificationConfigurationDeprecated'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketNotificationConfigurationRequest:
     type: object
     required:
@@ -4382,15 +2997,6 @@ definitions:
     properties:
       NotificationConfiguration:
         $ref: '#/definitions/NotificationConfiguration'
-    xml:
-      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
-  PutBucketNotificationRequest:
-    type: object
-    required:
-      - NotificationConfiguration
-    properties:
-      NotificationConfiguration:
-        $ref: '#/definitions/NotificationConfigurationDeprecated'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketPolicyRequest:
@@ -4484,23 +3090,6 @@ definitions:
         $ref: '#/definitions/WebsiteConfiguration'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
-  PutObjectAclOutput:
-    type: object
-    example: {}
-    properties: {}
-  PutObjectAclRequest:
-    type: object
-    example:
-      AccessControlPolicy: {}
-      Bucket: examplebucket
-      GrantFullControl: 'emailaddress=user1@example.com,emailaddress=user2@example.com'
-      GrantRead: 'uri=http://acs.amazonaws.com/groups/global/AllUsers'
-      Key: HappyFace.jpg
-    properties:
-      AccessControlPolicy:
-        $ref: '#/definitions/AccessControlPolicy'
-    xml:
-      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutObjectOutput:
     type: object
     example:
@@ -4520,6 +3109,23 @@ definitions:
       Body:
         $ref: '#/definitions/Body'
         description: Object data.
+  PutObjectAclOutput:
+    type: object
+    example: {}
+    properties: {}
+  PutObjectAclRequest:
+    type: object
+    example:
+      AccessControlPolicy: {}
+      Bucket: examplebucket
+      GrantFullControl: 'emailaddress=user1@example.com,emailaddress=user2@example.com'
+      GrantRead: 'uri=http://acs.amazonaws.com/groups/global/AllUsers'
+      Key: HappyFace.jpg
+    properties:
+      AccessControlPolicy:
+        $ref: '#/definitions/AccessControlPolicy'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutObjectTaggingOutput:
     type: object
     example:
@@ -4543,6 +3149,1795 @@ definitions:
         $ref: '#/definitions/Tagging'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  RestoreObjectOutput:
+    type: object
+    example: {}
+    properties: {}
+  RestoreObjectRequest:
+    type: object
+    example:
+      Bucket: examplebucket
+      Key: archivedobjectkey
+      RestoreRequest:
+        Days: 1
+        GlacierJobParameters:
+          Tier: Expedited
+    properties:
+      RestoreRequest:
+        $ref: '#/definitions/RestoreRequest'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  ObjectAlreadyInActiveTierError:
+    type: object
+    properties: {}
+    description: This operation is not allowed against this storage tier
+  SelectObjectContentOutput:
+    type: object
+    properties:
+      Payload:
+        $ref: '#/definitions/SelectObjectContentEventStream'
+  SelectObjectContentRequest:
+    type: object
+    required:
+      - Expression
+      - ExpressionType
+      - InputSerialization
+      - OutputSerialization
+    properties:
+      Expression:
+        $ref: '#/definitions/Expression'
+        description: The expression that is used to query the object.
+      ExpressionType:
+        $ref: '#/definitions/ExpressionType'
+        description: 'The type of the provided expression (e.g., SQL).'
+      RequestProgress:
+        $ref: '#/definitions/RequestProgress'
+        description: Specifies if periodic request progress information should be enabled.
+      InputSerialization:
+        $ref: '#/definitions/InputSerialization'
+        description: Describes the format of the data in the object that is being queried.
+      OutputSerialization:
+        $ref: '#/definitions/OutputSerialization'
+        description: Describes the format of the data that you want Amazon S3 to return in response.
+    description: 'Request to filter the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response. For more information, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html">S3Select API Documentation</a>.'
+  UploadPartOutput:
+    type: object
+    example:
+      ETag: '"d8c2eafd90c266e19ab9dcacc479f8af"'
+    properties: {}
+  UploadPartRequest:
+    type: object
+    example:
+      Body: fileToUpload
+      Bucket: examplebucket
+      Key: examplelargeobject
+      PartNumber: '1'
+      UploadId: xadcOB_7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--
+    properties:
+      Body:
+        $ref: '#/definitions/Body'
+        description: Object data.
+  UploadPartCopyOutput:
+    type: object
+    example:
+      CopyPartResult:
+        ETag: '"b0c6f0e7e054ab8fa2536a2677f8734d"'
+        LastModified: '2016-12-29T21:24:43.000Z'
+    properties:
+      CopyPartResult:
+        $ref: '#/definitions/CopyPartResult'
+  UploadPartCopyRequest:
+    type: object
+    example:
+      Bucket: examplebucket
+      CopySource: /bucketname/sourceobjectkey
+      Key: examplelargeobject
+      PartNumber: '1'
+      UploadId: exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--
+    properties: {}
+  AbortDate:
+    type: string
+    format: date-time
+  DaysAfterInitiation:
+    type: integer
+  AbortIncompleteMultipartUpload:
+    type: object
+    properties:
+      DaysAfterInitiation:
+        $ref: '#/definitions/DaysAfterInitiation'
+        description: Indicates the number of days that must pass since initiation for Lifecycle to abort an Incomplete Multipart Upload.
+    description: Specifies the days since the initiation of an Incomplete Multipart Upload that Lifecycle will wait before permanently removing all parts of the upload.
+  RequestCharged:
+    type: string
+    enum:
+      - requester
+    description: 'If present, indicates that the requester was successfully charged for the request.'
+  BucketName:
+    type: string
+  ObjectKey:
+    type: string
+    minLength: 1
+  MultipartUploadId:
+    type: string
+  RequestPayer:
+    type: string
+    enum:
+      - requester
+    description: 'Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html'
+  AbortRuleId:
+    type: string
+  BucketAccelerateStatus:
+    type: string
+    enum:
+      - Enabled
+      - Suspended
+  AccelerateConfiguration:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/BucketAccelerateStatus'
+        description: The accelerate configuration of the bucket.
+  AcceptRanges:
+    type: string
+  Grants:
+    type: array
+    items:
+      $ref: '#/definitions/Grant'
+  Owner:
+    type: object
+    properties:
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+      ID:
+        $ref: '#/definitions/ID'
+  AccessControlPolicy:
+    type: object
+    properties:
+      Grants:
+        $ref: '#/definitions/Grants'
+        description: A list of grants.
+      Owner:
+        $ref: '#/definitions/Owner'
+  OwnerOverride:
+    type: string
+    enum:
+      - Destination
+  AccessControlTranslation:
+    type: object
+    required:
+      - Owner
+    properties:
+      Owner:
+        $ref: '#/definitions/OwnerOverride'
+        description: The override value for the owner of the replica object.
+    description: Container for information regarding the access control for replicas.
+  AccountId:
+    type: string
+  AllowQuotedRecordDelimiter:
+    type: boolean
+  AllowedHeader:
+    type: string
+  AllowedHeaders:
+    type: array
+    items:
+      $ref: '#/definitions/AllowedHeader'
+    xml:
+      wrapped: false
+  AllowedMethod:
+    type: string
+  AllowedMethods:
+    type: array
+    items:
+      $ref: '#/definitions/AllowedMethod'
+    xml:
+      wrapped: false
+  AllowedOrigin:
+    type: string
+  AllowedOrigins:
+    type: array
+    items:
+      $ref: '#/definitions/AllowedOrigin'
+    xml:
+      wrapped: false
+  Prefix:
+    type: string
+  TagSet:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  AnalyticsAndOperator:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix to use when evaluating an AND predicate.
+      Tags:
+        $ref: '#/definitions/TagSet'
+        description: The list of tags to use when evaluating an AND predicate.
+    xml:
+      wrapped: false
+  AnalyticsId:
+    type: string
+  AnalyticsFilter:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix to use when evaluating an analytics filter.
+      Tag:
+        $ref: '#/definitions/Tag'
+        description: The tag to use when evaluating an analytics filter.
+      And:
+        $ref: '#/definitions/AnalyticsAndOperator'
+        description: 'A conjunction (logical AND) of predicates, which is used in evaluating an analytics filter. The operator must have at least two predicates.'
+  StorageClassAnalysis:
+    type: object
+    properties:
+      DataExport:
+        $ref: '#/definitions/StorageClassAnalysisDataExport'
+        description: A container used to describe how data related to the storage class analysis should be exported.
+  AnalyticsConfiguration:
+    type: object
+    required:
+      - Id
+      - StorageClassAnalysis
+    properties:
+      Id:
+        $ref: '#/definitions/AnalyticsId'
+        description: The identifier used to represent an analytics configuration.
+      Filter:
+        $ref: '#/definitions/AnalyticsFilter'
+        description: 'The filter used to describe a set of objects for analyses. A filter must have exactly one prefix, one tag, or one conjunction (AnalyticsAndOperator). If no filter is provided, all objects will be considered in any analysis.'
+      StorageClassAnalysis:
+        $ref: '#/definitions/StorageClassAnalysis'
+        description: 'If present, it indicates that data related to access patterns will be collected and made available to analyze the tradeoffs between different storage classes.'
+  AnalyticsConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/AnalyticsConfiguration'
+    xml:
+      wrapped: false
+  AnalyticsS3BucketDestination:
+    type: object
+    required:
+      - Format
+      - Bucket
+    properties:
+      Format:
+        $ref: '#/definitions/AnalyticsS3ExportFileFormat'
+        description: The file format used when exporting data to Amazon S3.
+      BucketAccountId:
+        $ref: '#/definitions/AccountId'
+        description: 'The account ID that owns the destination bucket. If no account ID is provided, the owner will not be validated prior to exporting data.'
+      Bucket:
+        $ref: '#/definitions/BucketName'
+        description: The Amazon resource name (ARN) of the bucket to which data is exported.
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix to use when exporting data. The exported data begins with this prefix.
+  AnalyticsExportDestination:
+    type: object
+    required:
+      - S3BucketDestination
+    properties:
+      S3BucketDestination:
+        $ref: '#/definitions/AnalyticsS3BucketDestination'
+        description: A destination signifying output to an S3 bucket.
+  Tag:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: Name of the tag.
+      Value:
+        $ref: '#/definitions/Value'
+        description: Value of the tag.
+  AnalyticsS3ExportFileFormat:
+    type: string
+    enum:
+      - CSV
+  Body:
+    type: string
+  CreationDate:
+    type: string
+    format: date-time
+  Bucket:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/BucketName'
+        description: The name of the bucket.
+      CreationDate:
+        $ref: '#/definitions/CreationDate'
+        description: Date the bucket was created.
+  BucketCannedACL:
+    type: string
+    enum:
+      - private
+      - public-read
+      - public-read-write
+      - authenticated-read
+  LifecycleRules:
+    type: array
+    items:
+      $ref: '#/definitions/LifecycleRule'
+    xml:
+      wrapped: false
+  BucketLifecycleConfiguration:
+    type: object
+    required:
+      - Rules
+    properties:
+      Rules:
+        $ref: '#/definitions/LifecycleRules'
+  BucketLocationConstraint:
+    type: string
+    enum:
+      - EU
+      - eu-west-1
+      - us-west-1
+      - us-west-2
+      - ap-south-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - sa-east-1
+      - cn-north-1
+      - eu-central-1
+  LoggingEnabled:
+    type: object
+    required:
+      - TargetBucket
+      - TargetPrefix
+    properties:
+      TargetBucket:
+        $ref: '#/definitions/TargetBucket'
+        description: 'Specifies the bucket where you want Amazon S3 to store server access logs. You can have your logs delivered to any bucket that you own, including the same bucket that is being logged. You can also configure multiple buckets to deliver their logs to the same target bucket. In this case you should choose a different TargetPrefix for each source bucket so that the delivered log files can be distinguished by key.'
+      TargetGrants:
+        $ref: '#/definitions/TargetGrants'
+      TargetPrefix:
+        $ref: '#/definitions/TargetPrefix'
+        description: This element lets you specify a prefix for the keys that the log files will be stored under.
+    description: Container for logging information. Presence of this element indicates that logging is enabled. Parameters TargetBucket and TargetPrefix are required in this case.
+  BucketLoggingStatus:
+    type: object
+    properties:
+      LoggingEnabled:
+        $ref: '#/definitions/LoggingEnabled'
+  BucketLogsPermission:
+    type: string
+    enum:
+      - FULL_CONTROL
+      - READ
+      - WRITE
+  BucketVersioningStatus:
+    type: string
+    enum:
+      - Enabled
+      - Suspended
+  Buckets:
+    type: array
+    items:
+      $ref: '#/definitions/Bucket'
+  BytesProcessed:
+    type: integer
+  BytesReturned:
+    type: integer
+  BytesScanned:
+    type: integer
+  CORSRules:
+    type: array
+    items:
+      $ref: '#/definitions/CORSRule'
+    xml:
+      wrapped: false
+  CORSConfiguration:
+    type: object
+    required:
+      - CORSRules
+    properties:
+      CORSRules:
+        $ref: '#/definitions/CORSRules'
+  ExposeHeaders:
+    type: array
+    items:
+      $ref: '#/definitions/ExposeHeader'
+    xml:
+      wrapped: false
+  MaxAgeSeconds:
+    type: integer
+  CORSRule:
+    type: object
+    required:
+      - AllowedMethods
+      - AllowedOrigins
+    properties:
+      AllowedHeaders:
+        $ref: '#/definitions/AllowedHeaders'
+        description: Specifies which headers are allowed in a pre-flight OPTIONS request.
+      AllowedMethods:
+        $ref: '#/definitions/AllowedMethods'
+        description: Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.
+      AllowedOrigins:
+        $ref: '#/definitions/AllowedOrigins'
+        description: One or more origins you want customers to be able to access the bucket from.
+      ExposeHeaders:
+        $ref: '#/definitions/ExposeHeaders'
+        description: 'One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).'
+      MaxAgeSeconds:
+        $ref: '#/definitions/MaxAgeSeconds'
+        description: The time in seconds that your browser is to cache the preflight response for the specified resource.
+  FileHeaderInfo:
+    type: string
+    enum:
+      - USE
+      - IGNORE
+      - NONE
+  Comments:
+    type: string
+  QuoteEscapeCharacter:
+    type: string
+  RecordDelimiter:
+    type: string
+  FieldDelimiter:
+    type: string
+  QuoteCharacter:
+    type: string
+  CSVInput:
+    type: object
+    properties:
+      FileHeaderInfo:
+        $ref: '#/definitions/FileHeaderInfo'
+        description: 'Describes the first line of input. Valid values: None, Ignore, Use.'
+      Comments:
+        $ref: '#/definitions/Comments'
+        description: Single character used to indicate a row should be ignored when present at the start of a row.
+      QuoteEscapeCharacter:
+        $ref: '#/definitions/QuoteEscapeCharacter'
+        description: Single character used for escaping the quote character inside an already escaped value.
+      RecordDelimiter:
+        $ref: '#/definitions/RecordDelimiter'
+        description: Value used to separate individual records.
+      FieldDelimiter:
+        $ref: '#/definitions/FieldDelimiter'
+        description: Value used to separate individual fields in a record.
+      QuoteCharacter:
+        $ref: '#/definitions/QuoteCharacter'
+        description: Value used for escaping where the field delimiter is part of the value.
+      AllowQuotedRecordDelimiter:
+        $ref: '#/definitions/AllowQuotedRecordDelimiter'
+        description: Specifies that CSV field values may contain quoted record delimiters and such records should be allowed. Default value is FALSE. Setting this value to TRUE may lower performance.
+    description: Describes how a CSV-formatted input object is formatted.
+  QuoteFields:
+    type: string
+    enum:
+      - ALWAYS
+      - ASNEEDED
+  CSVOutput:
+    type: object
+    properties:
+      QuoteFields:
+        $ref: '#/definitions/QuoteFields'
+        description: Indicates whether or not all output fields should be quoted.
+      QuoteEscapeCharacter:
+        $ref: '#/definitions/QuoteEscapeCharacter'
+        description: Single character used for escaping the quote character inside an already escaped value.
+      RecordDelimiter:
+        $ref: '#/definitions/RecordDelimiter'
+        description: Value used to separate individual records.
+      FieldDelimiter:
+        $ref: '#/definitions/FieldDelimiter'
+        description: Value used to separate individual fields in a record.
+      QuoteCharacter:
+        $ref: '#/definitions/QuoteCharacter'
+        description: Value used for escaping where the field delimiter is part of the value.
+    description: Describes how CSV-formatted results are formatted.
+  CacheControl:
+    type: string
+  CloudFunction:
+    type: string
+  NotificationId:
+    type: string
+    description: 'Optional unique identifier for configurations in a notification configuration. If you don''t provide one, Amazon S3 will assign an ID.'
+  Event:
+    type: string
+    enum:
+      - 's3:ReducedRedundancyLostObject'
+      - 's3:ObjectCreated:*'
+      - 's3:ObjectCreated:Put'
+      - 's3:ObjectCreated:Post'
+      - 's3:ObjectCreated:Copy'
+      - 's3:ObjectCreated:CompleteMultipartUpload'
+      - 's3:ObjectRemoved:*'
+      - 's3:ObjectRemoved:Delete'
+      - 's3:ObjectRemoved:DeleteMarkerCreated'
+    description: Bucket event for which to send notifications.
+  EventList:
+    type: array
+    items:
+      $ref: '#/definitions/Event'
+    xml:
+      wrapped: false
+  CloudFunctionInvocationRole:
+    type: string
+  CloudFunctionConfiguration:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/NotificationId'
+      Event:
+        $ref: '#/definitions/Event'
+      Events:
+        $ref: '#/definitions/EventList'
+      CloudFunction:
+        $ref: '#/definitions/CloudFunction'
+      InvocationRole:
+        $ref: '#/definitions/CloudFunctionInvocationRole'
+  Code:
+    type: string
+  CommonPrefix:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+  CommonPrefixList:
+    type: array
+    items:
+      $ref: '#/definitions/CommonPrefix'
+    xml:
+      wrapped: false
+  Location:
+    type: string
+  Expiration:
+    type: string
+  ETag:
+    type: string
+  ServerSideEncryption:
+    type: string
+    enum:
+      - AES256
+      - 'aws:kms'
+  ObjectVersionId:
+    type: string
+  SSEKMSKeyId:
+    type: string
+    format: password
+  CompletedMultipartUpload:
+    type: object
+    properties:
+      Parts:
+        $ref: '#/definitions/CompletedPartList'
+  CompletedPartList:
+    type: array
+    items:
+      $ref: '#/definitions/CompletedPart'
+    xml:
+      wrapped: false
+  PartNumber:
+    type: integer
+  CompletedPart:
+    type: object
+    properties:
+      ETag:
+        $ref: '#/definitions/ETag'
+        description: Entity tag returned when the part was uploaded.
+      PartNumber:
+        $ref: '#/definitions/PartNumber'
+        description: 'Part number that identifies the part. This is a positive integer between 1 and 10,000.'
+  CompressionType:
+    type: string
+    enum:
+      - NONE
+      - GZIP
+      - BZIP2
+  HttpErrorCodeReturnedEquals:
+    type: string
+  KeyPrefixEquals:
+    type: string
+  Condition:
+    type: object
+    properties:
+      HttpErrorCodeReturnedEquals:
+        $ref: '#/definitions/HttpErrorCodeReturnedEquals'
+        description: 'The HTTP error code when the redirect is applied. In the event of an error, if the error code equals this value, then the specified redirect is applied. Required when parent element Condition is specified and sibling KeyPrefixEquals is not specified. If both are specified, then both must be true for the redirect to be applied.'
+      KeyPrefixEquals:
+        $ref: '#/definitions/KeyPrefixEquals'
+        description: 'The object key name prefix when the redirect is applied. For example, to redirect requests for ExamplePage.html, the key prefix will be ExamplePage.html. To redirect request for all pages with the prefix docs/, the key prefix will be /docs, which identifies all objects in the docs/ folder. Required when the parent element Condition is specified and sibling HttpErrorCodeReturnedEquals is not specified. If both conditions are specified, both must be true for the redirect to be applied.'
+  ConfirmRemoveSelfBucketAccess:
+    type: boolean
+  ContentDisposition:
+    type: string
+  ContentEncoding:
+    type: string
+  ContentLanguage:
+    type: string
+  ContentLength:
+    type: integer
+  ContentMD5:
+    type: string
+  ContentRange:
+    type: string
+  ContentType:
+    type: string
+  ContinuationEvent:
+    type: object
+    properties: {}
+  CopyObjectResult:
+    type: object
+    properties:
+      ETag:
+        $ref: '#/definitions/ETag'
+      LastModified:
+        $ref: '#/definitions/LastModified'
+  CopySourceVersionId:
+    type: string
+  SSECustomerAlgorithm:
+    type: string
+  SSECustomerKeyMD5:
+    type: string
+  ObjectCannedACL:
+    type: string
+    enum:
+      - private
+      - public-read
+      - public-read-write
+      - authenticated-read
+      - aws-exec-read
+      - bucket-owner-read
+      - bucket-owner-full-control
+  CopySource:
+    type: string
+    pattern: \/.+\/.+
+  CopySourceIfMatch:
+    type: string
+  CopySourceIfModifiedSince:
+    type: string
+    format: date-time
+  CopySourceIfNoneMatch:
+    type: string
+  CopySourceIfUnmodifiedSince:
+    type: string
+    format: date-time
+  Expires:
+    type: string
+    format: date-time
+  GrantFullControl:
+    type: string
+  GrantRead:
+    type: string
+  GrantReadACP:
+    type: string
+  GrantWriteACP:
+    type: string
+  Metadata:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/MetadataKey'
+        value:
+          $ref: '#/definitions/MetadataValue'
+  MetadataDirective:
+    type: string
+    enum:
+      - COPY
+      - REPLACE
+  TaggingDirective:
+    type: string
+    enum:
+      - COPY
+      - REPLACE
+  StorageClass:
+    type: string
+    enum:
+      - STANDARD
+      - REDUCED_REDUNDANCY
+      - STANDARD_IA
+      - ONEZONE_IA
+  WebsiteRedirectLocation:
+    type: string
+  SSECustomerKey:
+    type: string
+    format: password
+  CopySourceSSECustomerAlgorithm:
+    type: string
+  CopySourceSSECustomerKey:
+    type: string
+    format: password
+  CopySourceSSECustomerKeyMD5:
+    type: string
+  TaggingHeader:
+    type: string
+  LastModified:
+    type: string
+    format: date-time
+  CopyPartResult:
+    type: object
+    properties:
+      ETag:
+        $ref: '#/definitions/ETag'
+        description: Entity tag of the object.
+      LastModified:
+        $ref: '#/definitions/LastModified'
+        description: Date and time at which the object was uploaded.
+  CopySourceRange:
+    type: string
+  CreateBucketConfiguration:
+    type: object
+    properties:
+      LocationConstraint:
+        $ref: '#/definitions/BucketLocationConstraint'
+        description: 'Specifies the region where the bucket will be created. If you don''t specify a region, the bucket will be created in US Standard.'
+  GrantWrite:
+    type: string
+  Date:
+    type: string
+    format: date-time
+  Days:
+    type: integer
+  ObjectIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/ObjectIdentifier'
+    xml:
+      wrapped: false
+  Quiet:
+    type: boolean
+  Delete:
+    type: object
+    required:
+      - Objects
+    properties:
+      Objects:
+        $ref: '#/definitions/ObjectIdentifierList'
+      Quiet:
+        $ref: '#/definitions/Quiet'
+        description: 'Element to enable quiet mode for the request. When you add this element, you must set its value to true.'
+  InventoryId:
+    type: string
+  MetricsId:
+    type: string
+  DeleteMarker:
+    type: boolean
+  IsLatest:
+    type: boolean
+  DeleteMarkerEntry:
+    type: object
+    properties:
+      Owner:
+        $ref: '#/definitions/Owner'
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: The object key.
+      VersionId:
+        $ref: '#/definitions/ObjectVersionId'
+        description: Version ID of an object.
+      IsLatest:
+        $ref: '#/definitions/IsLatest'
+        description: Specifies whether the object is (true) or is not (false) the latest version of an object.
+      LastModified:
+        $ref: '#/definitions/LastModified'
+        description: Date and time the object was last modified.
+  DeleteMarkerVersionId:
+    type: string
+  DeleteMarkers:
+    type: array
+    items:
+      $ref: '#/definitions/DeleteMarkerEntry'
+    xml:
+      wrapped: false
+  MFA:
+    type: string
+  DeletedObjects:
+    type: array
+    items:
+      $ref: '#/definitions/DeletedObject'
+    xml:
+      wrapped: false
+  Errors:
+    type: array
+    items:
+      $ref: '#/definitions/Error'
+    xml:
+      wrapped: false
+  DeletedObject:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/ObjectKey'
+      VersionId:
+        $ref: '#/definitions/ObjectVersionId'
+      DeleteMarker:
+        $ref: '#/definitions/DeleteMarker'
+      DeleteMarkerVersionId:
+        $ref: '#/definitions/DeleteMarkerVersionId'
+  Delimiter:
+    type: string
+  Description:
+    type: string
+  EncryptionConfiguration:
+    type: object
+    properties:
+      ReplicaKmsKeyID:
+        $ref: '#/definitions/ReplicaKmsKeyID'
+        description: The id of the KMS key used to encrypt the replica object.
+    description: Container for information regarding encryption based configuration for replicas.
+  Destination:
+    type: object
+    required:
+      - Bucket
+    properties:
+      Bucket:
+        $ref: '#/definitions/BucketName'
+        description: Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.
+      Account:
+        $ref: '#/definitions/AccountId'
+        description: Account ID of the destination bucket. Currently this is only being verified if Access Control Translation is enabled
+      StorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: The class of storage used to store the object.
+      AccessControlTranslation:
+        $ref: '#/definitions/AccessControlTranslation'
+        description: Container for information regarding the access control for replicas.
+      EncryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: Container for information regarding encryption based configuration for replicas.
+    description: Container for replication destination information.
+  DisplayName:
+    type: string
+  EmailAddress:
+    type: string
+  EnableRequestProgress:
+    type: boolean
+  EncodingType:
+    type: string
+    enum:
+      - url
+    description: 'Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response.'
+  KMSContext:
+    type: string
+  Encryption:
+    type: object
+    required:
+      - EncryptionType
+    properties:
+      EncryptionType:
+        $ref: '#/definitions/ServerSideEncryption'
+        description: 'The server-side encryption algorithm used when storing job results in Amazon S3 (e.g., AES256, aws:kms).'
+      KMSKeyId:
+        $ref: '#/definitions/SSEKMSKeyId'
+        description: 'If the encryption type is aws:kms, this optional value specifies the AWS KMS key ID to use for encryption of job results.'
+      KMSContext:
+        $ref: '#/definitions/KMSContext'
+        description: 'If the encryption type is aws:kms, this optional value can be used to specify the encryption context for the restore results.'
+    description: Describes the server-side encryption that will be applied to the restore results.
+  ReplicaKmsKeyID:
+    type: string
+  EndEvent:
+    type: object
+    properties: {}
+  Message:
+    type: string
+  Error:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/ObjectKey'
+      VersionId:
+        $ref: '#/definitions/ObjectVersionId'
+      Code:
+        $ref: '#/definitions/Code'
+      Message:
+        $ref: '#/definitions/Message'
+  ErrorDocument:
+    type: object
+    required:
+      - Key
+    properties:
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: The object key name to use when a 4XX class error occurs.
+  ExpirationStatus:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+  ExpiredObjectDeleteMarker:
+    type: boolean
+  ExposeHeader:
+    type: string
+  Expression:
+    type: string
+  ExpressionType:
+    type: string
+    enum:
+      - SQL
+  FetchOwner:
+    type: boolean
+  FilterRuleName:
+    type: string
+    enum:
+      - prefix
+      - suffix
+  FilterRuleValue:
+    type: string
+  FilterRule:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/FilterRuleName'
+        description: 'Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the Amazon Simple Storage Service Developer Guide.'
+      Value:
+        $ref: '#/definitions/FilterRuleValue'
+    description: Container for key value pair that defines the criteria for the filter rule.
+  FilterRuleList:
+    type: array
+    description: A list of containers for key value pair that defines the criteria for the filter rule.
+    items:
+      $ref: '#/definitions/FilterRule'
+    xml:
+      wrapped: false
+  ServerSideEncryptionConfiguration:
+    type: object
+    required:
+      - Rules
+    properties:
+      Rules:
+        $ref: '#/definitions/ServerSideEncryptionRules'
+        description: Container for information about a particular server-side encryption configuration rule.
+    description: Container for server-side encryption configuration rules. Currently S3 supports one rule only.
+  InventoryConfiguration:
+    type: object
+    required:
+      - Destination
+      - IsEnabled
+      - Id
+      - IncludedObjectVersions
+      - Schedule
+    properties:
+      Destination:
+        $ref: '#/definitions/InventoryDestination'
+        description: Contains information about where to publish the inventory results.
+      IsEnabled:
+        $ref: '#/definitions/IsEnabled'
+        description: Specifies whether the inventory is enabled or disabled.
+      Filter:
+        $ref: '#/definitions/InventoryFilter'
+        description: Specifies an inventory filter. The inventory only includes objects that meet the filter's criteria.
+      Id:
+        $ref: '#/definitions/InventoryId'
+        description: The ID used to identify the inventory configuration.
+      IncludedObjectVersions:
+        $ref: '#/definitions/InventoryIncludedObjectVersions'
+        description: Specifies which object version(s) to included in the inventory results.
+      OptionalFields:
+        $ref: '#/definitions/InventoryOptionalFields'
+        description: Contains the optional fields that are included in the inventory results.
+      Schedule:
+        $ref: '#/definitions/InventorySchedule'
+        description: Specifies the schedule for generating inventory results.
+  Rules:
+    type: array
+    items:
+      $ref: '#/definitions/Rule'
+    xml:
+      wrapped: false
+  MetricsConfiguration:
+    type: object
+    required:
+      - Id
+    properties:
+      Id:
+        $ref: '#/definitions/MetricsId'
+        description: The ID used to identify the metrics configuration.
+      Filter:
+        $ref: '#/definitions/MetricsFilter'
+        description: 'Specifies a metrics configuration filter. The metrics configuration will only include objects that meet the filter''s criteria. A filter must be a prefix, a tag, or a conjunction (MetricsAndOperator).'
+  Policy:
+    type: string
+  ReplicationConfiguration:
+    type: object
+    required:
+      - Role
+      - Rules
+    properties:
+      Role:
+        $ref: '#/definitions/Role'
+        description: Amazon Resource Name (ARN) of an IAM role for Amazon S3 to assume when replicating the objects.
+      Rules:
+        $ref: '#/definitions/ReplicationRules'
+        description: 'Container for information about a particular replication rule. Replication configuration must have at least one rule and can contain up to 1,000 rules.'
+    description: 'Container for replication rules. You can add as many as 1,000 rules. Total replication configuration size can be up to 2 MB.'
+  Payer:
+    type: string
+    enum:
+      - Requester
+      - BucketOwner
+  MFADeleteStatus:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+  RedirectAllRequestsTo:
+    type: object
+    required:
+      - HostName
+    properties:
+      HostName:
+        $ref: '#/definitions/HostName'
+        description: Name of the host where requests will be redirected.
+      Protocol:
+        $ref: '#/definitions/Protocol'
+        description: 'Protocol to use (http, https) when redirecting requests. The default is the protocol that is used in the original request.'
+  IndexDocument:
+    type: object
+    required:
+      - Suffix
+    properties:
+      Suffix:
+        $ref: '#/definitions/Suffix'
+        description: A suffix that is appended to a request that is for a directory on the website endpoint (e.g. if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character.
+  RoutingRules:
+    type: array
+    items:
+      $ref: '#/definitions/RoutingRule'
+  Restore:
+    type: string
+  MissingMeta:
+    type: integer
+  ReplicationStatus:
+    type: string
+    enum:
+      - COMPLETE
+      - PENDING
+      - FAILED
+      - REPLICA
+  PartsCount:
+    type: integer
+  TagCount:
+    type: integer
+  IfMatch:
+    type: string
+  IfModifiedSince:
+    type: string
+    format: date-time
+  IfNoneMatch:
+    type: string
+  IfUnmodifiedSince:
+    type: string
+    format: date-time
+  Range:
+    type: string
+  ResponseCacheControl:
+    type: string
+  ResponseContentDisposition:
+    type: string
+  ResponseContentEncoding:
+    type: string
+  ResponseContentLanguage:
+    type: string
+  ResponseContentType:
+    type: string
+  ResponseExpires:
+    type: string
+    format: date-time
+  Tier:
+    type: string
+    enum:
+      - Standard
+      - Bulk
+      - Expedited
+  GlacierJobParameters:
+    type: object
+    required:
+      - Tier
+    properties:
+      Tier:
+        $ref: '#/definitions/Tier'
+        description: Glacier retrieval tier at which the restore will be processed.
+  Grantee:
+    type: object
+    required:
+      - Type
+    properties:
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: Screen name of the grantee.
+      EmailAddress:
+        $ref: '#/definitions/EmailAddress'
+        description: Email address of the grantee.
+      ID:
+        $ref: '#/definitions/ID'
+        description: The canonical user ID of the grantee.
+      Type:
+        $ref: '#/definitions/Type'
+        description: Type of grantee
+      URI:
+        $ref: '#/definitions/URI'
+        description: URI of the grantee group.
+    xml:
+      namespace: 'http://www.w3.org/2001/XMLSchema-instance'
+      attribute: true
+  Permission:
+    type: string
+    enum:
+      - FULL_CONTROL
+      - WRITE
+      - WRITE_ACP
+      - READ
+      - READ_ACP
+  Grant:
+    type: object
+    properties:
+      Grantee:
+        $ref: '#/definitions/Grantee'
+      Permission:
+        $ref: '#/definitions/Permission'
+        description: Specifies the permission given to the grantee.
+  ID:
+    type: string
+  Type:
+    type: string
+    enum:
+      - CanonicalUser
+      - AmazonCustomerByEmail
+      - Group
+  URI:
+    type: string
+  HostName:
+    type: string
+  HttpRedirectCode:
+    type: string
+  Suffix:
+    type: string
+  Initiated:
+    type: string
+    format: date-time
+  Initiator:
+    type: object
+    properties:
+      ID:
+        $ref: '#/definitions/ID'
+        description: 'If the principal is an AWS account, it provides the Canonical User ID. If the principal is an IAM User, it provides a user ARN value.'
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: Name of the Principal.
+  JSONInput:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/JSONType'
+        description: 'The type of JSON. Valid values: Document, Lines.'
+  InputSerialization:
+    type: object
+    properties:
+      CSV:
+        $ref: '#/definitions/CSVInput'
+        description: Describes the serialization of a CSV-encoded object.
+      CompressionType:
+        $ref: '#/definitions/CompressionType'
+        description: 'Specifies object''s compression format. Valid values: NONE, GZIP, BZIP2. Default Value: NONE.'
+      JSON:
+        $ref: '#/definitions/JSONInput'
+        description: Specifies JSON as object's input serialization format.
+    description: Describes the serialization format of the object.
+  InventoryDestination:
+    type: object
+    required:
+      - S3BucketDestination
+    properties:
+      S3BucketDestination:
+        $ref: '#/definitions/InventoryS3BucketDestination'
+        description: 'Contains the bucket name, file format, bucket owner (optional), and prefix (optional) where inventory results are published.'
+  IsEnabled:
+    type: boolean
+  InventoryFilter:
+    type: object
+    required:
+      - Prefix
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix that an object must have to be included in the inventory results.
+  InventoryIncludedObjectVersions:
+    type: string
+    enum:
+      - All
+      - Current
+  InventoryOptionalFields:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryOptionalField'
+  InventorySchedule:
+    type: object
+    required:
+      - Frequency
+    properties:
+      Frequency:
+        $ref: '#/definitions/InventoryFrequency'
+        description: Specifies how frequently inventory results are produced.
+  InventoryConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryConfiguration'
+    xml:
+      wrapped: false
+  InventoryS3BucketDestination:
+    type: object
+    required:
+      - Bucket
+      - Format
+    properties:
+      AccountId:
+        $ref: '#/definitions/AccountId'
+        description: The ID of the account that owns the destination bucket.
+      Bucket:
+        $ref: '#/definitions/BucketName'
+        description: The Amazon resource name (ARN) of the bucket where inventory results will be published.
+      Format:
+        $ref: '#/definitions/InventoryFormat'
+        description: Specifies the output format of the inventory results.
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix that is prepended to all inventory results.
+      Encryption:
+        $ref: '#/definitions/InventoryEncryption'
+        description: Contains the type of server-side encryption used to encrypt the inventory results.
+  SSES3:
+    type: object
+    properties: {}
+    description: Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+  SSEKMS:
+    type: object
+    required:
+      - KeyId
+    properties:
+      KeyId:
+        $ref: '#/definitions/SSEKMSKeyId'
+        description: Specifies the ID of the AWS Key Management Service (KMS) master encryption key to use for encrypting Inventory reports.
+    description: Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
+  InventoryEncryption:
+    type: object
+    properties:
+      SSES3:
+        $ref: '#/definitions/SSES3'
+        description: Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+      SSEKMS:
+        $ref: '#/definitions/SSEKMS'
+        description: Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
+    description: Contains the type of server-side encryption used to encrypt the inventory results.
+  InventoryFormat:
+    type: string
+    enum:
+      - CSV
+      - ORC
+  InventoryFrequency:
+    type: string
+    enum:
+      - Daily
+      - Weekly
+  InventoryOptionalField:
+    type: string
+    enum:
+      - Size
+      - LastModifiedDate
+      - StorageClass
+      - ETag
+      - IsMultipartUploaded
+      - ReplicationStatus
+      - EncryptionStatus
+  IsTruncated:
+    type: boolean
+  JSONType:
+    type: string
+    enum:
+      - DOCUMENT
+      - LINES
+  JSONOutput:
+    type: object
+    properties:
+      RecordDelimiter:
+        $ref: '#/definitions/RecordDelimiter'
+        description: The value used to separate individual records in the output.
+  KeyCount:
+    type: integer
+  KeyMarker:
+    type: string
+  LambdaFunctionArn:
+    type: string
+  NotificationConfigurationFilter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/S3KeyFilter'
+    description: 'Container for object key name filtering rules. For information about key name filtering, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the Amazon Simple Storage Service Developer Guide.'
+  LambdaFunctionConfiguration:
+    type: object
+    required:
+      - LambdaFunctionArn
+      - Events
+    properties:
+      Id:
+        $ref: '#/definitions/NotificationId'
+      LambdaFunctionArn:
+        $ref: '#/definitions/LambdaFunctionArn'
+        description: Lambda cloud function ARN that Amazon S3 can invoke when it detects events of the specified type.
+      Events:
+        $ref: '#/definitions/EventList'
+      Filter:
+        $ref: '#/definitions/NotificationConfigurationFilter'
+    description: Container for specifying the AWS Lambda notification configuration.
+  LambdaFunctionConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/LambdaFunctionConfiguration'
+    xml:
+      wrapped: false
+  LifecycleConfiguration:
+    type: object
+    required:
+      - Rules
+    properties:
+      Rules:
+        $ref: '#/definitions/Rules'
+  LifecycleExpiration:
+    type: object
+    properties:
+      Date:
+        $ref: '#/definitions/Date'
+        description: Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.
+      Days:
+        $ref: '#/definitions/Days'
+        description: 'Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.'
+      ExpiredObjectDeleteMarker:
+        $ref: '#/definitions/ExpiredObjectDeleteMarker'
+        description: 'Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.'
+  LifecycleRuleFilter:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: Prefix identifying one or more objects to which the rule applies.
+      Tag:
+        $ref: '#/definitions/Tag'
+        description: This tag must exist in the object's tag set in order for the rule to apply.
+      And:
+        $ref: '#/definitions/LifecycleRuleAndOperator'
+    description: 'The Filter is used to identify objects that a Lifecycle Rule applies to. A Filter must have exactly one of Prefix, Tag, or And specified.'
+  TransitionList:
+    type: array
+    items:
+      $ref: '#/definitions/Transition'
+    xml:
+      wrapped: false
+  NoncurrentVersionTransitionList:
+    type: array
+    items:
+      $ref: '#/definitions/NoncurrentVersionTransition'
+    xml:
+      wrapped: false
+  NoncurrentVersionExpiration:
+    type: object
+    properties:
+      NoncurrentDays:
+        $ref: '#/definitions/Days'
+        description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.'
+    description: 'Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object''s lifetime.'
+  LifecycleRule:
+    type: object
+    required:
+      - Status
+    properties:
+      Expiration:
+        $ref: '#/definitions/LifecycleExpiration'
+      ID:
+        $ref: '#/definitions/ID'
+        description: Unique identifier for the rule. The value cannot be longer than 255 characters.
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: Prefix identifying one or more objects to which the rule applies. This is deprecated; use Filter instead.
+      Filter:
+        $ref: '#/definitions/LifecycleRuleFilter'
+      Status:
+        $ref: '#/definitions/ExpirationStatus'
+        description: 'If ''Enabled'', the rule is currently being applied. If ''Disabled'', the rule is not currently being applied.'
+      Transitions:
+        $ref: '#/definitions/TransitionList'
+      NoncurrentVersionTransitions:
+        $ref: '#/definitions/NoncurrentVersionTransitionList'
+      NoncurrentVersionExpiration:
+        $ref: '#/definitions/NoncurrentVersionExpiration'
+      AbortIncompleteMultipartUpload:
+        $ref: '#/definitions/AbortIncompleteMultipartUpload'
+  LifecycleRuleAndOperator:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+      Tags:
+        $ref: '#/definitions/TagSet'
+        description: All of these tags must exist in the object's tag set in order for the rule to apply.
+    description: This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator.
+    xml:
+      wrapped: false
+  Token:
+    type: string
+  NextToken:
+    type: string
+  MetricsConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricsConfiguration'
+    xml:
+      wrapped: false
+  UploadIdMarker:
+    type: string
+  NextKeyMarker:
+    type: string
+  NextUploadIdMarker:
+    type: string
+  MaxUploads:
+    type: integer
+  MultipartUploadList:
+    type: array
+    items:
+      $ref: '#/definitions/MultipartUpload'
+    xml:
+      wrapped: false
+  VersionIdMarker:
+    type: string
+  NextVersionIdMarker:
+    type: string
+  ObjectVersionList:
+    type: array
+    items:
+      $ref: '#/definitions/ObjectVersion'
+    xml:
+      wrapped: false
+  MaxKeys:
+    type: integer
+  Marker:
+    type: string
+  NextMarker:
+    type: string
+  ObjectList:
+    type: array
+    items:
+      $ref: '#/definitions/Object'
+    xml:
+      wrapped: false
+  StartAfter:
+    type: string
+  PartNumberMarker:
+    type: integer
+  NextPartNumberMarker:
+    type: integer
+  MaxParts:
+    type: integer
+  Parts:
+    type: array
+    items:
+      $ref: '#/definitions/Part'
+    xml:
+      wrapped: false
+  LocationPrefix:
+    type: string
+  TargetBucket:
+    type: string
+  TargetGrants:
+    type: array
+    items:
+      $ref: '#/definitions/TargetGrant'
+  TargetPrefix:
+    type: string
+  MFADelete:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+  MetadataKey:
+    type: string
+  MetadataValue:
+    type: string
+  MetadataEntry:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/MetadataKey'
+      Value:
+        $ref: '#/definitions/MetadataValue'
+    description: A metadata key-value pair to store with an object.
+  MetricsAndOperator:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix used when evaluating an AND predicate.
+      Tags:
+        $ref: '#/definitions/TagSet'
+        description: The list of tags used when evaluating an AND predicate.
+    xml:
+      wrapped: false
+  MetricsFilter:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix used when evaluating a metrics filter.
+      Tag:
+        $ref: '#/definitions/Tag'
+        description: The tag used when evaluating a metrics filter.
+      And:
+        $ref: '#/definitions/MetricsAndOperator'
+        description: 'A conjunction (logical AND) of predicates, which is used in evaluating a metrics filter. The operator must have at least two predicates, and an object must match all of the predicates in order for the filter to apply.'
+  MultipartUpload:
+    type: object
+    properties:
+      UploadId:
+        $ref: '#/definitions/MultipartUploadId'
+        description: Upload ID that identifies the multipart upload.
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: Key of the object for which the multipart upload was initiated.
+      Initiated:
+        $ref: '#/definitions/Initiated'
+        description: Date and time at which the multipart upload was initiated.
+      StorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: The class of storage used to store the object.
+      Owner:
+        $ref: '#/definitions/Owner'
+      Initiator:
+        $ref: '#/definitions/Initiator'
+        description: Identifies who initiated the multipart upload.
+  TransitionStorageClass:
+    type: string
+    enum:
+      - GLACIER
+      - STANDARD_IA
+      - ONEZONE_IA
+  NoncurrentVersionTransition:
+    type: object
+    properties:
+      NoncurrentDays:
+        $ref: '#/definitions/Days'
+        description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.'
+      StorageClass:
+        $ref: '#/definitions/TransitionStorageClass'
+        description: The class of storage used to store the object.
+    description: 'Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA or GLACIER storage class at a specific period in the object''s lifetime.'
+  TopicConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/TopicConfiguration'
+    xml:
+      wrapped: false
+  QueueConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/QueueConfiguration'
+    xml:
+      wrapped: false
+  TopicConfigurationDeprecated:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/NotificationId'
+      Events:
+        $ref: '#/definitions/EventList'
+      Event:
+        $ref: '#/definitions/Event'
+        description: Bucket event for which to send notifications.
+      Topic:
+        $ref: '#/definitions/TopicArn'
+        description: Amazon SNS topic to which Amazon S3 will publish a message to report the specified events for the bucket.
+  QueueConfigurationDeprecated:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/NotificationId'
+      Event:
+        $ref: '#/definitions/Event'
+      Events:
+        $ref: '#/definitions/EventList'
+      Queue:
+        $ref: '#/definitions/QueueArn'
+  S3KeyFilter:
+    type: object
+    properties:
+      FilterRules:
+        $ref: '#/definitions/FilterRuleList'
+    description: Container for object key name prefix and suffix filtering rules.
+  Size:
+    type: integer
+  ObjectStorageClass:
+    type: string
+    enum:
+      - STANDARD
+      - REDUCED_REDUNDANCY
+      - GLACIER
+      - STANDARD_IA
+      - ONEZONE_IA
+  Object:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/ObjectKey'
+      LastModified:
+        $ref: '#/definitions/LastModified'
+      ETag:
+        $ref: '#/definitions/ETag'
+      Size:
+        $ref: '#/definitions/Size'
+      StorageClass:
+        $ref: '#/definitions/ObjectStorageClass'
+        description: The class of storage used to store the object.
+      Owner:
+        $ref: '#/definitions/Owner'
+  ObjectIdentifier:
+    type: object
+    required:
+      - Key
+    properties:
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: Key name of the object to delete.
+      VersionId:
+        $ref: '#/definitions/ObjectVersionId'
+        description: VersionId for the specific version of the object to delete.
+  ObjectVersionStorageClass:
+    type: string
+    enum:
+      - STANDARD
+  ObjectVersion:
+    type: object
+    properties:
+      ETag:
+        $ref: '#/definitions/ETag'
+      Size:
+        $ref: '#/definitions/Size'
+        description: Size in bytes of the object.
+      StorageClass:
+        $ref: '#/definitions/ObjectVersionStorageClass'
+        description: The class of storage used to store the object.
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: The object key.
+      VersionId:
+        $ref: '#/definitions/ObjectVersionId'
+        description: Version ID of an object.
+      IsLatest:
+        $ref: '#/definitions/IsLatest'
+        description: Specifies whether the object is (true) or is not (false) the latest version of an object.
+      LastModified:
+        $ref: '#/definitions/LastModified'
+        description: Date and time the object was last modified.
+      Owner:
+        $ref: '#/definitions/Owner'
+  S3Location:
+    type: object
+    required:
+      - BucketName
+      - Prefix
+    properties:
+      BucketName:
+        $ref: '#/definitions/BucketName'
+        description: The name of the bucket where the restore results will be placed.
+      Prefix:
+        $ref: '#/definitions/LocationPrefix'
+        description: The prefix that is prepended to the restore results for this request.
+      Encryption:
+        $ref: '#/definitions/Encryption'
+      CannedACL:
+        $ref: '#/definitions/ObjectCannedACL'
+        description: The canned ACL to apply to the restore results.
+      AccessControlList:
+        $ref: '#/definitions/Grants'
+        description: A list of grants that control access to the staged results.
+      Tagging:
+        $ref: '#/definitions/Tagging'
+        description: The tag-set that is applied to the restore results.
+      UserMetadata:
+        $ref: '#/definitions/UserMetadata'
+        description: A list of metadata to store with the restore results in S3.
+      StorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: The class of storage used to store the restore results.
+    description: Describes an S3 location that will receive the results of the restore request.
+  OutputLocation:
+    type: object
+    properties:
+      S3:
+        $ref: '#/definitions/S3Location'
+        description: Describes an S3 location that will receive the results of the restore request.
+    description: Describes the location where the restore job's output is stored.
+  OutputSerialization:
+    type: object
+    properties:
+      CSV:
+        $ref: '#/definitions/CSVOutput'
+        description: Describes the serialization of CSV-encoded Select results.
+      JSON:
+        $ref: '#/definitions/JSONOutput'
+        description: Specifies JSON as request's output serialization format.
+    description: Describes how results of the Select job are serialized.
+  Part:
+    type: object
+    properties:
+      PartNumber:
+        $ref: '#/definitions/PartNumber'
+        description: 'Part number identifying the part. This is a positive integer between 1 and 10,000.'
+      LastModified:
+        $ref: '#/definitions/LastModified'
+        description: Date and time at which the part was uploaded.
+      ETag:
+        $ref: '#/definitions/ETag'
+        description: Entity tag returned when the part was uploaded.
+      Size:
+        $ref: '#/definitions/Size'
+        description: Size of the uploaded part data.
+  Progress:
+    type: object
+    properties:
+      BytesScanned:
+        $ref: '#/definitions/BytesScanned'
+        description: Current number of object bytes scanned.
+      BytesProcessed:
+        $ref: '#/definitions/BytesProcessed'
+        description: Current number of uncompressed object bytes processed.
+      BytesReturned:
+        $ref: '#/definitions/BytesReturned'
+        description: Current number of bytes of records payload data returned.
+  ProgressEvent:
+    type: object
+    properties:
+      Details:
+        $ref: '#/definitions/Progress'
+        description: The Progress event details.
+  Protocol:
+    type: string
+    enum:
+      - http
+      - https
+  RequestPaymentConfiguration:
+    type: object
+    required:
+      - Payer
+    properties:
+      Payer:
+        $ref: '#/definitions/Payer'
+        description: Specifies who pays for the download and request fees.
+  Tagging:
+    type: object
+    required:
+      - TagSet
+    properties:
+      TagSet:
+        $ref: '#/definitions/TagSet'
+  VersioningConfiguration:
+    type: object
+    properties:
+      MFADelete:
+        $ref: '#/definitions/MFADelete'
+        description: 'Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned.'
+      Status:
+        $ref: '#/definitions/BucketVersioningStatus'
+        description: The versioning state of the bucket.
+  WebsiteConfiguration:
+    type: object
+    properties:
+      ErrorDocument:
+        $ref: '#/definitions/ErrorDocument'
+      IndexDocument:
+        $ref: '#/definitions/IndexDocument'
+      RedirectAllRequestsTo:
+        $ref: '#/definitions/RedirectAllRequestsTo'
+      RoutingRules:
+        $ref: '#/definitions/RoutingRules'
   QueueArn:
     type: string
   QueueConfiguration:
@@ -4561,44 +4956,16 @@ definitions:
       Filter:
         $ref: '#/definitions/NotificationConfigurationFilter'
     description: Container for specifying an configuration when you want Amazon S3 to publish events to an Amazon Simple Queue Service (Amazon SQS) queue.
-  QueueConfigurationDeprecated:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/NotificationId'
-      Event:
-        $ref: '#/definitions/Event'
-      Events:
-        $ref: '#/definitions/EventList'
-      Queue:
-        $ref: '#/definitions/QueueArn'
-  QueueConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/QueueConfiguration'
-    xml:
-      wrapped: false
-  Quiet:
-    type: boolean
-  QuoteCharacter:
-    type: string
-  QuoteEscapeCharacter:
-    type: string
-  QuoteFields:
-    type: string
-    enum:
-      - ALWAYS
-      - ASNEEDED
-  Range:
-    type: string
-  RecordDelimiter:
-    type: string
   RecordsEvent:
     type: object
     properties:
       Payload:
         $ref: '#/definitions/Body'
         description: 'The byte array of partial, one or more result records.'
+  ReplaceKeyPrefixWith:
+    type: string
+  ReplaceKeyWith:
+    type: string
   Redirect:
     type: object
     properties:
@@ -4617,36 +4984,26 @@ definitions:
       ReplaceKeyWith:
         $ref: '#/definitions/ReplaceKeyWith'
         description: 'The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided.'
-  RedirectAllRequestsTo:
+  Role:
+    type: string
+  ReplicationRules:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicationRule'
+    xml:
+      wrapped: false
+  ReplicationRuleStatus:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+  SourceSelectionCriteria:
     type: object
-    required:
-      - HostName
     properties:
-      HostName:
-        $ref: '#/definitions/HostName'
-        description: Name of the host where requests will be redirected.
-      Protocol:
-        $ref: '#/definitions/Protocol'
-        description: 'Protocol to use (http, https) when redirecting requests. The default is the protocol that is used in the original request.'
-  ReplaceKeyPrefixWith:
-    type: string
-  ReplaceKeyWith:
-    type: string
-  ReplicaKmsKeyID:
-    type: string
-  ReplicationConfiguration:
-    type: object
-    required:
-      - Role
-      - Rules
-    properties:
-      Role:
-        $ref: '#/definitions/Role'
-        description: Amazon Resource Name (ARN) of an IAM role for Amazon S3 to assume when replicating the objects.
-      Rules:
-        $ref: '#/definitions/ReplicationRules'
-        description: 'Container for information about a particular replication rule. Replication configuration must have at least one rule and can contain up to 1,000 rules.'
-    description: 'Container for replication rules. You can add as many as 1,000 rules. Total replication configuration size can be up to 2 MB.'
+      SseKmsEncryptedObjects:
+        $ref: '#/definitions/SseKmsEncryptedObjects'
+        description: Container for filter information of selection of KMS Encrypted S3 objects.
+    description: Container for filters that define which source objects should be replicated.
   ReplicationRule:
     type: object
     required:
@@ -4670,81 +5027,12 @@ definitions:
         $ref: '#/definitions/Destination'
         description: Container for replication destination information.
     description: Container for information about a particular replication rule.
-  ReplicationRuleStatus:
-    type: string
-    enum:
-      - Enabled
-      - Disabled
-  ReplicationRules:
-    type: array
-    items:
-      $ref: '#/definitions/ReplicationRule'
-    xml:
-      wrapped: false
-  ReplicationStatus:
-    type: string
-    enum:
-      - COMPLETE
-      - PENDING
-      - FAILED
-      - REPLICA
-  RequestCharged:
-    type: string
-    enum:
-      - requester
-    description: 'If present, indicates that the requester was successfully charged for the request.'
-  RequestPayer:
-    type: string
-    enum:
-      - requester
-    description: 'Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html'
-  RequestPaymentConfiguration:
-    type: object
-    required:
-      - Payer
-    properties:
-      Payer:
-        $ref: '#/definitions/Payer'
-        description: Specifies who pays for the download and request fees.
   RequestProgress:
     type: object
     properties:
       Enabled:
         $ref: '#/definitions/EnableRequestProgress'
         description: 'Specifies whether periodic QueryProgress frames should be sent. Valid values: TRUE, FALSE. Default value: FALSE.'
-  ResponseCacheControl:
-    type: string
-  ResponseContentDisposition:
-    type: string
-  ResponseContentEncoding:
-    type: string
-  ResponseContentLanguage:
-    type: string
-  ResponseContentType:
-    type: string
-  ResponseExpires:
-    type: string
-    format: date-time
-  Restore:
-    type: string
-  RestoreObjectOutput:
-    type: object
-    example: {}
-    properties: {}
-  RestoreObjectRequest:
-    type: object
-    example:
-      Bucket: examplebucket
-      Key: archivedobjectkey
-      RestoreRequest:
-        Days: 1
-        GlacierJobParameters:
-          Tier: Expedited
-    properties:
-      RestoreRequest:
-        $ref: '#/definitions/RestoreRequest'
-    xml:
-      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   RestoreOutputPath:
     type: string
   RestoreRequest:
@@ -4776,8 +5064,27 @@ definitions:
     type: string
     enum:
       - SELECT
-  Role:
-    type: string
+  SelectParameters:
+    type: object
+    required:
+      - InputSerialization
+      - ExpressionType
+      - Expression
+      - OutputSerialization
+    properties:
+      InputSerialization:
+        $ref: '#/definitions/InputSerialization'
+        description: Describes the serialization format of the object.
+      ExpressionType:
+        $ref: '#/definitions/ExpressionType'
+        description: 'The type of the provided expression (e.g., SQL).'
+      Expression:
+        $ref: '#/definitions/Expression'
+        description: The expression that is used to query the object.
+      OutputSerialization:
+        $ref: '#/definitions/OutputSerialization'
+        description: Describes how the results of the Select job are serialized.
+    description: Describes the parameters for Select job types.
   RoutingRule:
     type: object
     required:
@@ -4789,10 +5096,18 @@ definitions:
       Redirect:
         $ref: '#/definitions/Redirect'
         description: 'Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can can specify a different error code to return.'
-  RoutingRules:
-    type: array
-    items:
-      $ref: '#/definitions/RoutingRule'
+  Transition:
+    type: object
+    properties:
+      Date:
+        $ref: '#/definitions/Date'
+        description: Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.
+      Days:
+        $ref: '#/definitions/Days'
+        description: 'Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.'
+      StorageClass:
+        $ref: '#/definitions/TransitionStorageClass'
+        description: The class of storage used to store the object.
   Rule:
     type: object
     required:
@@ -4818,71 +5133,16 @@ definitions:
         $ref: '#/definitions/NoncurrentVersionExpiration'
       AbortIncompleteMultipartUpload:
         $ref: '#/definitions/AbortIncompleteMultipartUpload'
-  Rules:
+  UserMetadata:
     type: array
     items:
-      $ref: '#/definitions/Rule'
-    xml:
-      wrapped: false
-  S3KeyFilter:
+      $ref: '#/definitions/MetadataEntry'
+  StatsEvent:
     type: object
     properties:
-      FilterRules:
-        $ref: '#/definitions/FilterRuleList'
-    description: Container for object key name prefix and suffix filtering rules.
-  S3Location:
-    type: object
-    required:
-      - BucketName
-      - Prefix
-    properties:
-      BucketName:
-        $ref: '#/definitions/BucketName'
-        description: The name of the bucket where the restore results will be placed.
-      Prefix:
-        $ref: '#/definitions/LocationPrefix'
-        description: The prefix that is prepended to the restore results for this request.
-      Encryption:
-        $ref: '#/definitions/Encryption'
-      CannedACL:
-        $ref: '#/definitions/ObjectCannedACL'
-        description: The canned ACL to apply to the restore results.
-      AccessControlList:
-        $ref: '#/definitions/Grants'
-        description: A list of grants that control access to the staged results.
-      Tagging:
-        $ref: '#/definitions/Tagging'
-        description: The tag-set that is applied to the restore results.
-      UserMetadata:
-        $ref: '#/definitions/UserMetadata'
-        description: A list of metadata to store with the restore results in S3.
-      StorageClass:
-        $ref: '#/definitions/StorageClass'
-        description: The class of storage used to store the restore results.
-    description: Describes an S3 location that will receive the results of the restore request.
-  SSECustomerAlgorithm:
-    type: string
-  SSECustomerKey:
-    type: string
-    format: password
-  SSECustomerKeyMD5:
-    type: string
-  SSEKMS:
-    type: object
-    required:
-      - KeyId
-    properties:
-      KeyId:
-        $ref: '#/definitions/SSEKMSKeyId'
-        description: Specifies the ID of the AWS Key Management Service (KMS) master encryption key to use for encrypting Inventory reports.
-    description: Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
-  SSEKMSKeyId:
-    type: string
-    format: password
-  SSES3:
-    type: object
-    properties: {}
-    description: Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+      Details:
+        $ref: '#/definitions/Stats'
+        description: The Stats event details.
   SelectObjectContentEventStream:
     type: object
     properties:
@@ -4901,61 +5161,6 @@ definitions:
       End:
         $ref: '#/definitions/EndEvent'
         description: The End Event.
-  SelectObjectContentOutput:
-    type: object
-    properties:
-      Payload:
-        $ref: '#/definitions/SelectObjectContentEventStream'
-  SelectObjectContentRequest:
-    type: object
-    required:
-      - Expression
-      - ExpressionType
-      - InputSerialization
-      - OutputSerialization
-    properties:
-      Expression:
-        $ref: '#/definitions/Expression'
-        description: The expression that is used to query the object.
-      ExpressionType:
-        $ref: '#/definitions/ExpressionType'
-        description: 'The type of the provided expression (e.g., SQL).'
-      RequestProgress:
-        $ref: '#/definitions/RequestProgress'
-        description: Specifies if periodic request progress information should be enabled.
-      InputSerialization:
-        $ref: '#/definitions/InputSerialization'
-        description: Describes the format of the data in the object that is being queried.
-      OutputSerialization:
-        $ref: '#/definitions/OutputSerialization'
-        description: Describes the format of the data that you want Amazon S3 to return in response.
-    description: 'Request to filter the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response. For more information, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html">S3Select API Documentation</a>.'
-  SelectParameters:
-    type: object
-    required:
-      - InputSerialization
-      - ExpressionType
-      - Expression
-      - OutputSerialization
-    properties:
-      InputSerialization:
-        $ref: '#/definitions/InputSerialization'
-        description: Describes the serialization format of the object.
-      ExpressionType:
-        $ref: '#/definitions/ExpressionType'
-        description: 'The type of the provided expression (e.g., SQL).'
-      Expression:
-        $ref: '#/definitions/Expression'
-        description: The expression that is used to query the object.
-      OutputSerialization:
-        $ref: '#/definitions/OutputSerialization'
-        description: Describes how the results of the Select job are serialized.
-    description: Describes the parameters for Select job types.
-  ServerSideEncryption:
-    type: string
-    enum:
-      - AES256
-      - 'aws:kms'
   ServerSideEncryptionByDefault:
     type: object
     required:
@@ -4968,15 +5173,12 @@ definitions:
         $ref: '#/definitions/SSEKMSKeyId'
         description: 'KMS master key ID to use for the default encryption. This parameter is allowed if SSEAlgorithm is aws:kms.'
     description: 'Describes the default server-side encryption to apply to new objects in the bucket. If Put Object request does not specify any server-side encryption, this default encryption will be applied.'
-  ServerSideEncryptionConfiguration:
-    type: object
-    required:
-      - Rules
-    properties:
-      Rules:
-        $ref: '#/definitions/ServerSideEncryptionRules'
-        description: Container for information about a particular server-side encryption configuration rule.
-    description: Container for server-side encryption configuration rules. Currently S3 supports one rule only.
+  ServerSideEncryptionRules:
+    type: array
+    items:
+      $ref: '#/definitions/ServerSideEncryptionRule'
+    xml:
+      wrapped: false
   ServerSideEncryptionRule:
     type: object
     properties:
@@ -4984,21 +5186,6 @@ definitions:
         $ref: '#/definitions/ServerSideEncryptionByDefault'
         description: 'Describes the default server-side encryption to apply to new objects in the bucket. If Put Object request does not specify any server-side encryption, this default encryption will be applied.'
     description: Container for information about a particular server-side encryption configuration rule.
-  ServerSideEncryptionRules:
-    type: array
-    items:
-      $ref: '#/definitions/ServerSideEncryptionRule'
-    xml:
-      wrapped: false
-  Size:
-    type: integer
-  SourceSelectionCriteria:
-    type: object
-    properties:
-      SseKmsEncryptedObjects:
-        $ref: '#/definitions/SseKmsEncryptedObjects'
-        description: Container for filter information of selection of KMS Encrypted S3 objects.
-    description: Container for filters that define which source objects should be replicated.
   SseKmsEncryptedObjects:
     type: object
     required:
@@ -5013,8 +5200,6 @@ definitions:
     enum:
       - Enabled
       - Disabled
-  StartAfter:
-    type: string
   Stats:
     type: object
     properties:
@@ -5027,25 +5212,6 @@ definitions:
       BytesReturned:
         $ref: '#/definitions/BytesReturned'
         description: Total number of bytes of records payload data returned.
-  StatsEvent:
-    type: object
-    properties:
-      Details:
-        $ref: '#/definitions/Stats'
-        description: The Stats event details.
-  StorageClass:
-    type: string
-    enum:
-      - STANDARD
-      - REDUCED_REDUNDANCY
-      - STANDARD_IA
-      - ONEZONE_IA
-  StorageClassAnalysis:
-    type: object
-    properties:
-      DataExport:
-        $ref: '#/definitions/StorageClassAnalysisDataExport'
-        description: A container used to describe how data related to the storage class analysis should be exported.
   StorageClassAnalysisDataExport:
     type: object
     required:
@@ -5062,41 +5228,7 @@ definitions:
     type: string
     enum:
       - V_1
-  Suffix:
-    type: string
-  Tag:
-    type: object
-    required:
-      - Key
-      - Value
-    properties:
-      Key:
-        $ref: '#/definitions/ObjectKey'
-        description: Name of the tag.
-      Value:
-        $ref: '#/definitions/Value'
-        description: Value of the tag.
-  TagCount:
-    type: integer
-  TagSet:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  Tagging:
-    type: object
-    required:
-      - TagSet
-    properties:
-      TagSet:
-        $ref: '#/definitions/TagSet'
-  TaggingDirective:
-    type: string
-    enum:
-      - COPY
-      - REPLACE
-  TaggingHeader:
-    type: string
-  TargetBucket:
+  Value:
     type: string
   TargetGrant:
     type: object
@@ -5106,20 +5238,6 @@ definitions:
       Permission:
         $ref: '#/definitions/BucketLogsPermission'
         description: Logging permissions assigned to the Grantee for the bucket.
-  TargetGrants:
-    type: array
-    items:
-      $ref: '#/definitions/TargetGrant'
-  TargetPrefix:
-    type: string
-  Tier:
-    type: string
-    enum:
-      - Standard
-      - Bulk
-      - Expedited
-  Token:
-    type: string
   TopicArn:
     type: string
   TopicConfiguration:
@@ -5138,121 +5256,3 @@ definitions:
       Filter:
         $ref: '#/definitions/NotificationConfigurationFilter'
     description: Container for specifying the configuration when you want Amazon S3 to publish events to an Amazon Simple Notification Service (Amazon SNS) topic.
-  TopicConfigurationDeprecated:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/NotificationId'
-      Events:
-        $ref: '#/definitions/EventList'
-      Event:
-        $ref: '#/definitions/Event'
-        description: Bucket event for which to send notifications.
-      Topic:
-        $ref: '#/definitions/TopicArn'
-        description: Amazon SNS topic to which Amazon S3 will publish a message to report the specified events for the bucket.
-  TopicConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/TopicConfiguration'
-    xml:
-      wrapped: false
-  Transition:
-    type: object
-    properties:
-      Date:
-        $ref: '#/definitions/Date'
-        description: Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.
-      Days:
-        $ref: '#/definitions/Days'
-        description: 'Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.'
-      StorageClass:
-        $ref: '#/definitions/TransitionStorageClass'
-        description: The class of storage used to store the object.
-  TransitionList:
-    type: array
-    items:
-      $ref: '#/definitions/Transition'
-    xml:
-      wrapped: false
-  TransitionStorageClass:
-    type: string
-    enum:
-      - GLACIER
-      - STANDARD_IA
-      - ONEZONE_IA
-  Type:
-    type: string
-    enum:
-      - CanonicalUser
-      - AmazonCustomerByEmail
-      - Group
-  URI:
-    type: string
-  UploadIdMarker:
-    type: string
-  UploadPartCopyOutput:
-    type: object
-    example:
-      CopyPartResult:
-        ETag: '"b0c6f0e7e054ab8fa2536a2677f8734d"'
-        LastModified: '2016-12-29T21:24:43.000Z'
-    properties:
-      CopyPartResult:
-        $ref: '#/definitions/CopyPartResult'
-  UploadPartCopyRequest:
-    type: object
-    example:
-      Bucket: examplebucket
-      CopySource: /bucketname/sourceobjectkey
-      Key: examplelargeobject
-      PartNumber: '1'
-      UploadId: exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--
-    properties: {}
-  UploadPartOutput:
-    type: object
-    example:
-      ETag: '"d8c2eafd90c266e19ab9dcacc479f8af"'
-    properties: {}
-  UploadPartRequest:
-    type: object
-    example:
-      Body: fileToUpload
-      Bucket: examplebucket
-      Key: examplelargeobject
-      PartNumber: '1'
-      UploadId: xadcOB_7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--
-    properties:
-      Body:
-        $ref: '#/definitions/Body'
-        description: Object data.
-  UserMetadata:
-    type: array
-    items:
-      $ref: '#/definitions/MetadataEntry'
-  Value:
-    type: string
-  VersionIdMarker:
-    type: string
-  VersioningConfiguration:
-    type: object
-    properties:
-      MFADelete:
-        $ref: '#/definitions/MFADelete'
-        description: 'Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned.'
-      Status:
-        $ref: '#/definitions/BucketVersioningStatus'
-        description: The versioning state of the bucket.
-  WebsiteConfiguration:
-    type: object
-    properties:
-      ErrorDocument:
-        $ref: '#/definitions/ErrorDocument'
-      IndexDocument:
-        $ref: '#/definitions/IndexDocument'
-      RedirectAllRequestsTo:
-        $ref: '#/definitions/RedirectAllRequestsTo'
-      RoutingRules:
-        $ref: '#/definitions/RoutingRules'
-  WebsiteRedirectLocation:
-    type: string

@@ -305,28 +305,14 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  ApplicationSource:
+  CreateScalingPlanResponse:
     type: object
+    required:
+      - ScalingPlanVersion
     properties:
-      CloudFormationStackARN:
-        $ref: '#/definitions/XmlString'
-        description: The Amazon Resource Name (ARN) of a CloudFormation stack.
-      TagFilters:
-        $ref: '#/definitions/TagFilters'
-        description: A set of tags (up to 50).
-    description: Represents an application source.
-  ApplicationSources:
-    type: array
-    items:
-      $ref: '#/definitions/ApplicationSource'
-  ConcurrentUpdateException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Concurrent updates caused an exception, for example, if you request an update to a scaling plan that already has a pending update.'
-  Cooldown:
-    type: integer
+      ScalingPlanVersion:
+        $ref: '#/definitions/ScalingPlanVersion'
+        description: The version of the scaling plan. This value is always 1.
   CreateScalingPlanRequest:
     type: object
     required:
@@ -343,14 +329,186 @@ definitions:
       ScalingInstructions:
         $ref: '#/definitions/ScalingInstructions'
         description: The scaling instructions.
-  CreateScalingPlanResponse:
+  ValidationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: An exception was thrown for a validation issue. Review the parameters provided.
+  LimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Your account exceeded a limit. This exception is thrown when a per-account resource limit is exceeded.
+  ConcurrentUpdateException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Concurrent updates caused an exception, for example, if you request an update to a scaling plan that already has a pending update.'
+  InternalServiceException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The service encountered an internal error.
+  DeleteScalingPlanResponse:
+    type: object
+    properties: {}
+  DeleteScalingPlanRequest:
     type: object
     required:
+      - ScalingPlanName
       - ScalingPlanVersion
     properties:
+      ScalingPlanName:
+        $ref: '#/definitions/ScalingPlanName'
+        description: The name of the scaling plan.
       ScalingPlanVersion:
         $ref: '#/definitions/ScalingPlanVersion'
-        description: The version of the scaling plan. This value is always 1.
+        description: The version of the scaling plan.
+  ObjectNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified object could not be found.
+  DescribeScalingPlanResourcesResponse:
+    type: object
+    properties:
+      ScalingPlanResources:
+        $ref: '#/definitions/ScalingPlanResources'
+        description: Information about the scalable resources.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token required to get the next set of results. This value is <code>null</code> if there are no more results to return.
+  DescribeScalingPlanResourcesRequest:
+    type: object
+    required:
+      - ScalingPlanName
+      - ScalingPlanVersion
+    properties:
+      ScalingPlanName:
+        $ref: '#/definitions/ScalingPlanName'
+        description: The name of the scaling plan.
+      ScalingPlanVersion:
+        $ref: '#/definitions/ScalingPlanVersion'
+        description: The version of the scaling plan.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of scalable resources to return. This value can be between 1 and 50. The default value is 50.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of results.
+  InvalidNextTokenException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The token provided is not valid.
+  DescribeScalingPlansResponse:
+    type: object
+    properties:
+      ScalingPlans:
+        $ref: '#/definitions/ScalingPlans'
+        description: Information about the scaling plans.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token required to get the next set of results. This value is <code>null</code> if there are no more results to return.
+  DescribeScalingPlansRequest:
+    type: object
+    properties:
+      ScalingPlanNames:
+        $ref: '#/definitions/ScalingPlanNames'
+        description: 'The names of the scaling plans (up to 10). If you specify application sources, you cannot specify scaling plan names.'
+      ScalingPlanVersion:
+        $ref: '#/definitions/ScalingPlanVersion'
+        description: 'The version of the scaling plan. If you specify a scaling plan version, you must also specify a scaling plan name.'
+      ApplicationSources:
+        $ref: '#/definitions/ApplicationSources'
+        description: 'The sources for the applications (up to 10). If you specify scaling plan names, you cannot specify application sources.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of scalable resources to return. This value can be between 1 and 50. The default value is 50.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of results.
+  UpdateScalingPlanResponse:
+    type: object
+    properties: {}
+  UpdateScalingPlanRequest:
+    type: object
+    required:
+      - ScalingPlanName
+      - ScalingPlanVersion
+    properties:
+      ApplicationSource:
+        $ref: '#/definitions/ApplicationSource'
+        description: A CloudFormation stack or set of tags.
+      ScalingPlanName:
+        $ref: '#/definitions/ScalingPlanName'
+        description: The name of the scaling plan.
+      ScalingInstructions:
+        $ref: '#/definitions/ScalingInstructions'
+        description: The scaling instructions.
+      ScalingPlanVersion:
+        $ref: '#/definitions/ScalingPlanVersion'
+        description: The version number.
+  XmlString:
+    type: string
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  TagFilters:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
+  ApplicationSource:
+    type: object
+    properties:
+      CloudFormationStackARN:
+        $ref: '#/definitions/XmlString'
+        description: The Amazon Resource Name (ARN) of a CloudFormation stack.
+      TagFilters:
+        $ref: '#/definitions/TagFilters'
+        description: A set of tags (up to 50).
+    description: Represents an application source.
+  ApplicationSources:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationSource'
+  ErrorMessage:
+    type: string
+  Cooldown:
+    type: integer
+  ScalingPlanName:
+    type: string
+    pattern: '[\p{Print}&&[^|:/]]+'
+    minLength: 1
+    maxLength: 128
+  ScalingInstructions:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingInstruction'
+  ScalingPlanVersion:
+    type: integer
+  MetricName:
+    type: string
+  MetricNamespace:
+    type: string
+  MetricDimensions:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDimension'
+  MetricStatistic:
+    type: string
+    enum:
+      - Average
+      - Minimum
+      - Maximum
+      - SampleCount
+      - Sum
+  MetricUnit:
+    type: string
   CustomizedScalingMetricSpecification:
     type: object
     required:
@@ -374,99 +532,28 @@ definitions:
         $ref: '#/definitions/MetricUnit'
         description: The unit of the metric.
     description: Represents a customized metric for a target tracking policy.
-  DeleteScalingPlanRequest:
-    type: object
-    required:
-      - ScalingPlanName
-      - ScalingPlanVersion
-    properties:
-      ScalingPlanName:
-        $ref: '#/definitions/ScalingPlanName'
-        description: The name of the scaling plan.
-      ScalingPlanVersion:
-        $ref: '#/definitions/ScalingPlanVersion'
-        description: The version of the scaling plan.
-  DeleteScalingPlanResponse:
-    type: object
-    properties: {}
-  DescribeScalingPlanResourcesRequest:
-    type: object
-    required:
-      - ScalingPlanName
-      - ScalingPlanVersion
-    properties:
-      ScalingPlanName:
-        $ref: '#/definitions/ScalingPlanName'
-        description: The name of the scaling plan.
-      ScalingPlanVersion:
-        $ref: '#/definitions/ScalingPlanVersion'
-        description: The version of the scaling plan.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of scalable resources to return. This value can be between 1 and 50. The default value is 50.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token for the next set of results.
-  DescribeScalingPlanResourcesResponse:
-    type: object
-    properties:
-      ScalingPlanResources:
-        $ref: '#/definitions/ScalingPlanResources'
-        description: Information about the scalable resources.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token required to get the next set of results. This value is <code>null</code> if there are no more results to return.
-  DescribeScalingPlansRequest:
-    type: object
-    properties:
-      ScalingPlanNames:
-        $ref: '#/definitions/ScalingPlanNames'
-        description: 'The names of the scaling plans (up to 10). If you specify application sources, you cannot specify scaling plan names.'
-      ScalingPlanVersion:
-        $ref: '#/definitions/ScalingPlanVersion'
-        description: 'The version of the scaling plan. If you specify a scaling plan version, you must also specify a scaling plan name.'
-      ApplicationSources:
-        $ref: '#/definitions/ApplicationSources'
-        description: 'The sources for the applications (up to 10). If you specify scaling plan names, you cannot specify application sources.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of scalable resources to return. This value can be between 1 and 50. The default value is 50.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token for the next set of results.
-  DescribeScalingPlansResponse:
-    type: object
-    properties:
-      ScalingPlans:
-        $ref: '#/definitions/ScalingPlans'
-        description: Information about the scaling plans.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token required to get the next set of results. This value is <code>null</code> if there are no more results to return.
-  DisableScaleIn:
-    type: boolean
-  ErrorMessage:
-    type: string
-  InternalServiceException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The service encountered an internal error.
-  InvalidNextTokenException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The token provided is not valid.
-  LimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Your account exceeded a limit. This exception is thrown when a per-account resource limit is exceeded.
   MaxResults:
     type: integer
+  NextToken:
+    type: string
+  ScalingPlanResources:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingPlanResource'
+  ScalingPlanNames:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingPlanName'
+  ScalingPlans:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingPlan'
+  DisableScaleIn:
+    type: boolean
+  MetricDimensionName:
+    type: string
+  MetricDimensionValue:
+    type: string
   MetricDimension:
     type: object
     required:
@@ -480,39 +567,9 @@ definitions:
         $ref: '#/definitions/MetricDimensionValue'
         description: The value of the dimension.
     description: Represents a dimension for a customized metric.
-  MetricDimensionName:
-    type: string
-  MetricDimensionValue:
-    type: string
-  MetricDimensions:
-    type: array
-    items:
-      $ref: '#/definitions/MetricDimension'
-  MetricName:
-    type: string
-  MetricNamespace:
-    type: string
   MetricScale:
     type: number
     format: double
-  MetricStatistic:
-    type: string
-    enum:
-      - Average
-      - Minimum
-      - Maximum
-      - SampleCount
-      - Sum
-  MetricUnit:
-    type: string
-  NextToken:
-    type: string
-  ObjectNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified object could not be found.
   PolicyName:
     type: string
     pattern: '\p{Print}+'
@@ -522,6 +579,26 @@ definitions:
     type: string
     enum:
       - TargetTrackingScaling
+  ScalingMetricType:
+    type: string
+    enum:
+      - ASGAverageCPUUtilization
+      - ASGAverageNetworkIn
+      - ASGAverageNetworkOut
+      - DynamoDBReadCapacityUtilization
+      - DynamoDBWriteCapacityUtilization
+      - ECSServiceAverageCPUUtilization
+      - ECSServiceAverageMemoryUtilization
+      - ALBRequestCountPerTarget
+      - RDSReaderAverageCPUUtilization
+      - RDSReaderAverageDatabaseConnections
+      - EC2SpotFleetRequestAverageCPUUtilization
+      - EC2SpotFleetRequestAverageNetworkIn
+      - EC2SpotFleetRequestAverageNetworkOut
+  ResourceLabel:
+    type: string
+    minLength: 1
+    maxLength: 1023
   PredefinedScalingMetricSpecification:
     type: object
     required:
@@ -541,10 +618,6 @@ definitions:
     minLength: 1
     maxLength: 1600
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  ResourceLabel:
-    type: string
-    minLength: 1
-    maxLength: 1023
   ScalableDimension:
     type: string
     enum:
@@ -556,6 +629,18 @@ definitions:
       - 'dynamodb:table:WriteCapacityUnits'
       - 'dynamodb:index:ReadCapacityUnits'
       - 'dynamodb:index:WriteCapacityUnits'
+  ServiceNamespace:
+    type: string
+    enum:
+      - autoscaling
+      - ecs
+      - ec2
+      - rds
+      - dynamodb
+  TargetTrackingConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/TargetTrackingConfiguration'
   ScalingInstruction:
     type: object
     required:
@@ -585,26 +670,20 @@ definitions:
         $ref: '#/definitions/TargetTrackingConfigurations'
         description: The target tracking scaling policies (up to 10).
     description: Specifies the scaling configuration for a scalable resource.
-  ScalingInstructions:
-    type: array
-    items:
-      $ref: '#/definitions/ScalingInstruction'
-  ScalingMetricType:
+  ScalingPlanStatusCode:
     type: string
     enum:
-      - ASGAverageCPUUtilization
-      - ASGAverageNetworkIn
-      - ASGAverageNetworkOut
-      - DynamoDBReadCapacityUtilization
-      - DynamoDBWriteCapacityUtilization
-      - ECSServiceAverageCPUUtilization
-      - ECSServiceAverageMemoryUtilization
-      - ALBRequestCountPerTarget
-      - RDSReaderAverageCPUUtilization
-      - RDSReaderAverageDatabaseConnections
-      - EC2SpotFleetRequestAverageCPUUtilization
-      - EC2SpotFleetRequestAverageNetworkIn
-      - EC2SpotFleetRequestAverageNetworkOut
+      - Active
+      - ActiveWithProblems
+      - CreationInProgress
+      - CreationFailed
+      - DeletionInProgress
+      - DeletionFailed
+      - UpdateInProgress
+      - UpdateFailed
+  TimestampType:
+    type: string
+    format: date-time
   ScalingPlan:
     type: object
     required:
@@ -639,15 +718,16 @@ definitions:
         $ref: '#/definitions/TimestampType'
         description: The Unix timestamp when the scaling plan was created.
     description: Represents a scaling plan.
-  ScalingPlanName:
-    type: string
-    pattern: '[\p{Print}&&[^|:/]]+'
-    minLength: 1
-    maxLength: 128
-  ScalingPlanNames:
+  ScalingPolicies:
     type: array
     items:
-      $ref: '#/definitions/ScalingPlanName'
+      $ref: '#/definitions/ScalingPolicy'
+  ScalingStatusCode:
+    type: string
+    enum:
+      - Inactive
+      - PartiallyActive
+      - Active
   ScalingPlanResource:
     type: object
     required:
@@ -683,31 +763,6 @@ definitions:
         $ref: '#/definitions/XmlString'
         description: A simple message about the current scaling status of the resource.
     description: Represents a scalable resource.
-  ScalingPlanResources:
-    type: array
-    items:
-      $ref: '#/definitions/ScalingPlanResource'
-  ScalingPlanStatusCode:
-    type: string
-    enum:
-      - Active
-      - ActiveWithProblems
-      - CreationInProgress
-      - CreationFailed
-      - DeletionInProgress
-      - DeletionFailed
-      - UpdateInProgress
-      - UpdateFailed
-  ScalingPlanVersion:
-    type: integer
-  ScalingPlans:
-    type: array
-    items:
-      $ref: '#/definitions/ScalingPlan'
-  ScalingPolicies:
-    type: array
-    items:
-      $ref: '#/definitions/ScalingPolicy'
   ScalingPolicy:
     type: object
     required:
@@ -724,38 +779,6 @@ definitions:
         $ref: '#/definitions/TargetTrackingConfiguration'
         description: The target tracking scaling policy.
     description: Represents a scaling policy.
-  ScalingStatusCode:
-    type: string
-    enum:
-      - Inactive
-      - PartiallyActive
-      - Active
-  ServiceNamespace:
-    type: string
-    enum:
-      - autoscaling
-      - ecs
-      - ec2
-      - rds
-      - dynamodb
-  TagFilter:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/XmlStringMaxLen128'
-        description: The tag key.
-      Values:
-        $ref: '#/definitions/TagValues'
-        description: The tag values (0 to 20).
-    description: Represents a tag.
-  TagFilters:
-    type: array
-    items:
-      $ref: '#/definitions/TagFilter'
-  TagValues:
-    type: array
-    items:
-      $ref: '#/definitions/XmlStringMaxLen256'
   TargetTrackingConfiguration:
     type: object
     required:
@@ -783,48 +806,25 @@ definitions:
         $ref: '#/definitions/Cooldown'
         description: 'The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. This value is used only if the resource is an Auto Scaling group.'
     description: Represents a target tracking scaling policy.
-  TargetTrackingConfigurations:
-    type: array
-    items:
-      $ref: '#/definitions/TargetTrackingConfiguration'
-  TimestampType:
-    type: string
-    format: date-time
-  UpdateScalingPlanRequest:
-    type: object
-    required:
-      - ScalingPlanName
-      - ScalingPlanVersion
-    properties:
-      ApplicationSource:
-        $ref: '#/definitions/ApplicationSource'
-        description: A CloudFormation stack or set of tags.
-      ScalingPlanName:
-        $ref: '#/definitions/ScalingPlanName'
-        description: The name of the scaling plan.
-      ScalingInstructions:
-        $ref: '#/definitions/ScalingInstructions'
-        description: The scaling instructions.
-      ScalingPlanVersion:
-        $ref: '#/definitions/ScalingPlanVersion'
-        description: The version number.
-  UpdateScalingPlanResponse:
-    type: object
-    properties: {}
-  ValidationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: An exception was thrown for a validation issue. Review the parameters provided.
-  XmlString:
-    type: string
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   XmlStringMaxLen128:
     type: string
     minLength: 1
     maxLength: 128
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  TagValues:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen256'
+  TagFilter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/XmlStringMaxLen128'
+        description: The tag key.
+      Values:
+        $ref: '#/definitions/TagValues'
+        description: The tag values (0 to 20).
+    description: Represents a tag.
   XmlStringMaxLen256:
     type: string
     minLength: 1

@@ -1617,6 +1617,58 @@ definitions:
       vaultName: my-vault
     properties: {}
     description: '<p>Provides options to abort a multipart upload identified by the upload ID.</p> <p>For information about the underlying REST API, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html">Abort Multipart Upload</a>. For conceptual information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html">Working with Archives in Amazon Glacier</a>.</p>'
+  ResourceNotFoundException:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/string'
+        description: Client
+      code:
+        $ref: '#/definitions/string'
+        description: 404 Not Found
+      message:
+        $ref: '#/definitions/string'
+        description: 'Returned if the specified resource (such as a vault, upload ID, or job ID) doesn''t exist.'
+    description: 'Returned if the specified resource (such as a vault, upload ID, or job ID) doesn''t exist.'
+  InvalidParameterValueException:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/string'
+        description: Client
+      code:
+        $ref: '#/definitions/string'
+        description: 400 Bad Request
+      message:
+        $ref: '#/definitions/string'
+        description: Returned if a parameter of the request is incorrectly specified.
+    description: Returned if a parameter of the request is incorrectly specified.
+  MissingParameterValueException:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/string'
+        description: Client.
+      code:
+        $ref: '#/definitions/string'
+        description: 400 Bad Request
+      message:
+        $ref: '#/definitions/string'
+        description: Returned if no authentication data is found for the request.
+    description: Returned if a required header or parameter is missing from the request.
+  ServiceUnavailableException:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/string'
+        description: Server
+      code:
+        $ref: '#/definitions/string'
+        description: 500 Internal Server Error
+      message:
+        $ref: '#/definitions/string'
+        description: Returned if the service cannot complete the request.
+    description: Returned if the service cannot complete the request.
   AbortVaultLockInput:
     type: object
     example:
@@ -1624,16 +1676,6 @@ definitions:
       vaultName: examplevault
     properties: {}
     description: The input values for <code>AbortVaultLock</code>.
-  AccessControlPolicyList:
-    type: array
-    items:
-      $ref: '#/definitions/Grant'
-  ActionCode:
-    type: string
-    enum:
-      - ArchiveRetrieval
-      - InventoryRetrieval
-      - Select
   AddTagsToVaultInput:
     type: object
     example:
@@ -1647,6 +1689,19 @@ definitions:
         $ref: '#/definitions/TagMap'
         description: The tags to add to the vault. Each tag is composed of a key and a value. The value can be an empty string.
     description: The input values for <code>AddTagsToVault</code>.
+  LimitExceededException:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/string'
+        description: Client
+      code:
+        $ref: '#/definitions/string'
+        description: 400 Bad Request
+      message:
+        $ref: '#/definitions/string'
+        description: Returned if the request results in a vault limit or tags limit being exceeded.
+    description: Returned if the request results in a vault or account limit being exceeded.
   ArchiveCreationOutput:
     type: object
     example:
@@ -1655,57 +1710,6 @@ definitions:
       location: /0123456789012/vaults/my-vault/archives/kKB7ymWJVpPSwhGP6ycSOAekp9ZYe_--zM_mw6k76ZFGEIWQX-ybtRDvc2VkPSDtfKmQrj0IRQLSGsNuDp-AJVlu2ccmDSyDUmZwKbwbpAdGATGDiB3hHO0bjbGehXTcApVud_wyDw
     properties: {}
     description: '<p>Contains the Amazon Glacier response to your request.</p> <p>For information about the underlying REST API, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html">Upload Archive</a>. For conceptual information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html">Working with Archives in Amazon Glacier</a>.</p>'
-  CSVInput:
-    type: object
-    properties:
-      FileHeaderInfo:
-        $ref: '#/definitions/FileHeaderInfo'
-        description: 'Describes the first line of input. Valid values are <code>None</code>, <code>Ignore</code>, and <code>Use</code>.'
-      Comments:
-        $ref: '#/definitions/string'
-        description: A single character used to indicate that a row should be ignored when the character is present at the start of that row.
-      QuoteEscapeCharacter:
-        $ref: '#/definitions/string'
-        description: A single character used for escaping the quotation-mark character inside an already escaped value.
-      RecordDelimiter:
-        $ref: '#/definitions/string'
-        description: A value used to separate individual records from each other.
-      FieldDelimiter:
-        $ref: '#/definitions/string'
-        description: A value used to separate individual fields from each other within a record.
-      QuoteCharacter:
-        $ref: '#/definitions/string'
-        description: A value used as an escape character where the field delimiter is part of the value.
-    description: Contains information about the comma-separated value (CSV) file to select from.
-  CSVOutput:
-    type: object
-    properties:
-      QuoteFields:
-        $ref: '#/definitions/QuoteFields'
-        description: A value that indicates whether all output fields should be contained within quotation marks.
-      QuoteEscapeCharacter:
-        $ref: '#/definitions/string'
-        description: A single character used for escaping the quotation-mark character inside an already escaped value.
-      RecordDelimiter:
-        $ref: '#/definitions/string'
-        description: A value used to separate individual records from each other.
-      FieldDelimiter:
-        $ref: '#/definitions/string'
-        description: A value used to separate individual fields from each other within a record.
-      QuoteCharacter:
-        $ref: '#/definitions/string'
-        description: A value used as an escape character where the field delimiter is part of the value.
-    description: Contains information about the comma-separated value (CSV) file that the job results are stored in.
-  CannedACL:
-    type: string
-    enum:
-      - private
-      - public-read
-      - public-read-write
-      - aws-exec-read
-      - authenticated-read
-      - bucket-owner-read
-      - bucket-owner-full-control
   CompleteMultipartUploadInput:
     type: object
     example:
@@ -1724,6 +1728,12 @@ definitions:
       vaultName: example-vault
     properties: {}
     description: The input values for <code>CompleteVaultLock</code>.
+  CreateVaultOutput:
+    type: object
+    example:
+      location: /111122223333/vaults/my-vault
+    properties: {}
+    description: Contains the Amazon Glacier response to your request.
   CreateVaultInput:
     type: object
     example:
@@ -1731,35 +1741,6 @@ definitions:
       vaultName: my-vault
     properties: {}
     description: Provides options to create a vault.
-  CreateVaultOutput:
-    type: object
-    example:
-      location: /111122223333/vaults/my-vault
-    properties: {}
-    description: Contains the Amazon Glacier response to your request.
-  DataRetrievalPolicy:
-    type: object
-    properties:
-      Rules:
-        $ref: '#/definitions/DataRetrievalRulesList'
-        description: 'The policy rule. Although this is a list type, currently there must be only one rule, which contains a Strategy field and optionally a BytesPerHour field.'
-    description: Data retrieval policy.
-  DataRetrievalRule:
-    type: object
-    properties:
-      Strategy:
-        $ref: '#/definitions/string'
-        description: '<p>The type of data retrieval policy to set.</p> <p>Valid values: BytesPerHour|FreeTier|None</p>'
-      BytesPerHour:
-        $ref: '#/definitions/NullableLong'
-        description: <p>The maximum number of bytes that can be retrieved in an hour.</p> <p>This field is required only if the value of the Strategy field is <code>BytesPerHour</code>. Your PUT operation will be rejected if the Strategy field is not set to <code>BytesPerHour</code> and you set this field.</p>
-    description: Data retrieval policy rule.
-  DataRetrievalRulesList:
-    type: array
-    items:
-      $ref: '#/definitions/DataRetrievalRule'
-  DateTime:
-    type: string
   DeleteArchiveInput:
     type: object
     example:
@@ -1768,13 +1749,6 @@ definitions:
       vaultName: examplevault
     properties: {}
     description: Provides options for deleting an archive from an Amazon Glacier vault.
-  DeleteVaultAccessPolicyInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: examplevault
-    properties: {}
-    description: DeleteVaultAccessPolicy input.
   DeleteVaultInput:
     type: object
     example:
@@ -1782,6 +1756,13 @@ definitions:
       vaultName: my-vault
     properties: {}
     description: Provides options for deleting a vault from Amazon Glacier.
+  DeleteVaultAccessPolicyInput:
+    type: object
+    example:
+      accountId: '-'
+      vaultName: examplevault
+    properties: {}
+    description: DeleteVaultAccessPolicy input.
   DeleteVaultNotificationsInput:
     type: object
     example:
@@ -1789,181 +1770,6 @@ definitions:
       vaultName: examplevault
     properties: {}
     description: Provides options for deleting a vault notification configuration from an Amazon Glacier vault.
-  DescribeJobInput:
-    type: object
-    example:
-      accountId: '-'
-      jobId: zbxcm3Z_3z5UkoroF7SuZKrxgGoDc3RloGduS7Eg-RO47Yc6FxsdGBgf_Q2DK5Ejh18CnTS5XW4_XqlNHS61dsO4Cn
-      vaultName: my-vault
-    properties: {}
-    description: Provides options for retrieving a job description.
-  DescribeVaultInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: my-vault
-    properties: {}
-    description: Provides options for retrieving metadata for a specific vault in Amazon Glacier.
-  DescribeVaultOutput:
-    type: object
-    example:
-      CreationDate: '2016-09-23T19:27:18.665Z'
-      NumberOfArchives: 0
-      SizeInBytes: 0
-      VaultARN: 'arn:aws:glacier:us-west-2:111122223333:vaults/my-vault'
-      VaultName: my-vault
-    properties:
-      VaultARN:
-        $ref: '#/definitions/string'
-        description: The Amazon Resource Name (ARN) of the vault.
-      VaultName:
-        $ref: '#/definitions/string'
-        description: The name of the vault.
-      CreationDate:
-        $ref: '#/definitions/string'
-        description: 'The Universal Coordinated Time (UTC) date when the vault was created. This value should be a string in the ISO 8601 date format, for example <code>2012-03-20T17:03:43.221Z</code>.'
-      LastInventoryDate:
-        $ref: '#/definitions/string'
-        description: 'The Universal Coordinated Time (UTC) date when Amazon Glacier completed the last vault inventory. This value should be a string in the ISO 8601 date format, for example <code>2012-03-20T17:03:43.221Z</code>.'
-      NumberOfArchives:
-        $ref: '#/definitions/long'
-        description: 'The number of archives in the vault as of the last inventory date. This field will return <code>null</code> if an inventory has not yet run on the vault, for example if you just created the vault.'
-      SizeInBytes:
-        $ref: '#/definitions/long'
-        description: 'Total size, in bytes, of the archives in the vault as of the last inventory date. This field will return null if an inventory has not yet run on the vault, for example if you just created the vault.'
-    description: Contains the Amazon Glacier response to your request.
-  Encryption:
-    type: object
-    properties:
-      EncryptionType:
-        $ref: '#/definitions/EncryptionType'
-        description: 'The server-side encryption algorithm used when storing job results in Amazon S3, for example <code>AES256</code> or <code>aws:kms</code>.'
-      KMSKeyId:
-        $ref: '#/definitions/string'
-        description: 'The AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS fail if not made by using Secure Sockets Layer (SSL) or Signature Version 4. '
-      KMSContext:
-        $ref: '#/definitions/string'
-        description: 'Optional. If the encryption type is <code>aws:kms</code>, you can use this value to specify the encryption context for the job results.'
-    description: 'Contains information about the encryption used to store the job results in Amazon S3. '
-  EncryptionType:
-    type: string
-    enum:
-      - 'aws:kms'
-      - AES256
-  ExpressionType:
-    type: string
-    enum:
-      - SQL
-  FileHeaderInfo:
-    type: string
-    enum:
-      - USE
-      - IGNORE
-      - NONE
-  GetDataRetrievalPolicyInput:
-    type: object
-    example:
-      accountId: '-'
-    properties: {}
-    description: Input for GetDataRetrievalPolicy.
-  GetDataRetrievalPolicyOutput:
-    type: object
-    example:
-      Policy:
-        Rules:
-          - BytesPerHour: 10737418240
-            Strategy: BytesPerHour
-    properties:
-      Policy:
-        $ref: '#/definitions/DataRetrievalPolicy'
-        description: Contains the returned data retrieval policy in JSON format.
-    description: Contains the Amazon Glacier response to the <code>GetDataRetrievalPolicy</code> request.
-  GetJobOutputInput:
-    type: object
-    example:
-      accountId: '-'
-      jobId: zbxcm3Z_3z5UkoroF7SuZKrxgGoDc3RloGduS7Eg-RO47Yc6FxsdGBgf_Q2DK5Ejh18CnTS5XW4_XqlNHS61dsO4CnMW
-      range: ''
-      vaultName: my-vaul
-    properties: {}
-    description: Provides options for downloading output of an Amazon Glacier job.
-  GetJobOutputOutput:
-    type: object
-    example:
-      acceptRanges: bytes
-      body: inventory-data
-      contentType: application/json
-      status: 200
-    properties:
-      body:
-        $ref: '#/definitions/Stream'
-        description: 'The job data, either archive data or inventory data.'
-    description: Contains the Amazon Glacier response to your request.
-  GetVaultAccessPolicyInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: example-vault
-    properties: {}
-    description: Input for GetVaultAccessPolicy.
-  GetVaultAccessPolicyOutput:
-    type: object
-    example:
-      policy:
-        Policy: '{"Version":"2012-10-17","Statement":[{"Sid":"Define-owner-access-rights","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::999999999999:root"},"Action":"glacier:DeleteArchive","Resource":"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault"}]}'
-    properties:
-      policy:
-        $ref: '#/definitions/VaultAccessPolicy'
-        description: Contains the returned vault access policy as a JSON string.
-    description: Output for GetVaultAccessPolicy.
-  GetVaultLockInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: examplevault
-    properties: {}
-    description: The input values for <code>GetVaultLock</code>.
-  GetVaultLockOutput:
-    type: object
-    example:
-      CreationDate: exampledate
-      ExpirationDate: exampledate
-      Policy: '{"Version":"2012-10-17","Statement":[{"Sid":"Define-vault-lock","Effect":"Deny","Principal":{"AWS":"arn:aws:iam::999999999999:root"},"Action":"glacier:DeleteArchive","Resource":"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault","Condition":{"NumericLessThanEquals":{"glacier:ArchiveAgeinDays":"365"}}}]}'
-      State: InProgress
-    properties:
-      Policy:
-        $ref: '#/definitions/string'
-        description: 'The vault lock policy as a JSON string, which uses "\" as an escape character.'
-      State:
-        $ref: '#/definitions/string'
-        description: The state of the vault lock. <code>InProgress</code> or <code>Locked</code>.
-      ExpirationDate:
-        $ref: '#/definitions/string'
-        description: The UTC date and time at which the lock ID expires. This value can be <code>null</code> if the vault lock is in a <code>Locked</code> state.
-      CreationDate:
-        $ref: '#/definitions/string'
-        description: The UTC date and time at which the vault lock was put into the <code>InProgress</code> state.
-    description: Contains the Amazon Glacier response to your request.
-  GetVaultNotificationsInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: my-vault
-    properties: {}
-    description: Provides options for retrieving the notification configuration set on an Amazon Glacier vault.
-  GetVaultNotificationsOutput:
-    type: object
-    example:
-      vaultNotificationConfig:
-        Events:
-          - InventoryRetrievalCompleted
-          - ArchiveRetrievalCompleted
-        SNSTopic: 'arn:aws:sns:us-west-2:0123456789012:my-vault'
-    properties:
-      vaultNotificationConfig:
-        $ref: '#/definitions/VaultNotificationConfig'
-        description: Returns the notification configuration set on the vault.
-    description: Contains the Amazon Glacier response to your request.
   GlacierJobDescription:
     type: object
     example:
@@ -2040,37 +1846,160 @@ definitions:
         $ref: '#/definitions/OutputLocation'
         description: Contains the location where the data from the select job is stored.
     description: Contains the description of an Amazon Glacier job.
-  Grant:
+  DescribeJobInput:
     type: object
-    properties:
-      Grantee:
-        $ref: '#/definitions/Grantee'
-        description: The grantee.
-      Permission:
-        $ref: '#/definitions/Permission'
-        description: 'Specifies the permission given to the grantee. '
-    description: Contains information about a grant.
-  Grantee:
+    example:
+      accountId: '-'
+      jobId: zbxcm3Z_3z5UkoroF7SuZKrxgGoDc3RloGduS7Eg-RO47Yc6FxsdGBgf_Q2DK5Ejh18CnTS5XW4_XqlNHS61dsO4Cn
+      vaultName: my-vault
+    properties: {}
+    description: Provides options for retrieving a job description.
+  DescribeVaultOutput:
     type: object
-    required:
-      - Type
+    example:
+      CreationDate: '2016-09-23T19:27:18.665Z'
+      NumberOfArchives: 0
+      SizeInBytes: 0
+      VaultARN: 'arn:aws:glacier:us-west-2:111122223333:vaults/my-vault'
+      VaultName: my-vault
     properties:
-      Type:
-        $ref: '#/definitions/Type'
-        description: Type of grantee
-      DisplayName:
+      VaultARN:
         $ref: '#/definitions/string'
-        description: Screen name of the grantee.
-      URI:
+        description: The Amazon Resource Name (ARN) of the vault.
+      VaultName:
         $ref: '#/definitions/string'
-        description: URI of the grantee group.
-      ID:
+        description: The name of the vault.
+      CreationDate:
         $ref: '#/definitions/string'
-        description: The canonical user ID of the grantee.
-      EmailAddress:
+        description: 'The Universal Coordinated Time (UTC) date when the vault was created. This value should be a string in the ISO 8601 date format, for example <code>2012-03-20T17:03:43.221Z</code>.'
+      LastInventoryDate:
         $ref: '#/definitions/string'
-        description: Email address of the grantee.
-    description: Contains information about the grantee.
+        description: 'The Universal Coordinated Time (UTC) date when Amazon Glacier completed the last vault inventory. This value should be a string in the ISO 8601 date format, for example <code>2012-03-20T17:03:43.221Z</code>.'
+      NumberOfArchives:
+        $ref: '#/definitions/long'
+        description: 'The number of archives in the vault as of the last inventory date. This field will return <code>null</code> if an inventory has not yet run on the vault, for example if you just created the vault.'
+      SizeInBytes:
+        $ref: '#/definitions/long'
+        description: 'Total size, in bytes, of the archives in the vault as of the last inventory date. This field will return null if an inventory has not yet run on the vault, for example if you just created the vault.'
+    description: Contains the Amazon Glacier response to your request.
+  DescribeVaultInput:
+    type: object
+    example:
+      accountId: '-'
+      vaultName: my-vault
+    properties: {}
+    description: Provides options for retrieving metadata for a specific vault in Amazon Glacier.
+  GetDataRetrievalPolicyOutput:
+    type: object
+    example:
+      Policy:
+        Rules:
+          - BytesPerHour: 10737418240
+            Strategy: BytesPerHour
+    properties:
+      Policy:
+        $ref: '#/definitions/DataRetrievalPolicy'
+        description: Contains the returned data retrieval policy in JSON format.
+    description: Contains the Amazon Glacier response to the <code>GetDataRetrievalPolicy</code> request.
+  GetDataRetrievalPolicyInput:
+    type: object
+    example:
+      accountId: '-'
+    properties: {}
+    description: Input for GetDataRetrievalPolicy.
+  GetJobOutputOutput:
+    type: object
+    example:
+      acceptRanges: bytes
+      body: inventory-data
+      contentType: application/json
+      status: 200
+    properties:
+      body:
+        $ref: '#/definitions/Stream'
+        description: 'The job data, either archive data or inventory data.'
+    description: Contains the Amazon Glacier response to your request.
+  GetJobOutputInput:
+    type: object
+    example:
+      accountId: '-'
+      jobId: zbxcm3Z_3z5UkoroF7SuZKrxgGoDc3RloGduS7Eg-RO47Yc6FxsdGBgf_Q2DK5Ejh18CnTS5XW4_XqlNHS61dsO4CnMW
+      range: ''
+      vaultName: my-vaul
+    properties: {}
+    description: Provides options for downloading output of an Amazon Glacier job.
+  GetVaultAccessPolicyOutput:
+    type: object
+    example:
+      policy:
+        Policy: '{"Version":"2012-10-17","Statement":[{"Sid":"Define-owner-access-rights","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::999999999999:root"},"Action":"glacier:DeleteArchive","Resource":"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault"}]}'
+    properties:
+      policy:
+        $ref: '#/definitions/VaultAccessPolicy'
+        description: Contains the returned vault access policy as a JSON string.
+    description: Output for GetVaultAccessPolicy.
+  GetVaultAccessPolicyInput:
+    type: object
+    example:
+      accountId: '-'
+      vaultName: example-vault
+    properties: {}
+    description: Input for GetVaultAccessPolicy.
+  GetVaultLockOutput:
+    type: object
+    example:
+      CreationDate: exampledate
+      ExpirationDate: exampledate
+      Policy: '{"Version":"2012-10-17","Statement":[{"Sid":"Define-vault-lock","Effect":"Deny","Principal":{"AWS":"arn:aws:iam::999999999999:root"},"Action":"glacier:DeleteArchive","Resource":"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault","Condition":{"NumericLessThanEquals":{"glacier:ArchiveAgeinDays":"365"}}}]}'
+      State: InProgress
+    properties:
+      Policy:
+        $ref: '#/definitions/string'
+        description: 'The vault lock policy as a JSON string, which uses "\" as an escape character.'
+      State:
+        $ref: '#/definitions/string'
+        description: The state of the vault lock. <code>InProgress</code> or <code>Locked</code>.
+      ExpirationDate:
+        $ref: '#/definitions/string'
+        description: The UTC date and time at which the lock ID expires. This value can be <code>null</code> if the vault lock is in a <code>Locked</code> state.
+      CreationDate:
+        $ref: '#/definitions/string'
+        description: The UTC date and time at which the vault lock was put into the <code>InProgress</code> state.
+    description: Contains the Amazon Glacier response to your request.
+  GetVaultLockInput:
+    type: object
+    example:
+      accountId: '-'
+      vaultName: examplevault
+    properties: {}
+    description: The input values for <code>GetVaultLock</code>.
+  GetVaultNotificationsOutput:
+    type: object
+    example:
+      vaultNotificationConfig:
+        Events:
+          - InventoryRetrievalCompleted
+          - ArchiveRetrievalCompleted
+        SNSTopic: 'arn:aws:sns:us-west-2:0123456789012:my-vault'
+    properties:
+      vaultNotificationConfig:
+        $ref: '#/definitions/VaultNotificationConfig'
+        description: Returns the notification configuration set on the vault.
+    description: Contains the Amazon Glacier response to your request.
+  GetVaultNotificationsInput:
+    type: object
+    example:
+      accountId: '-'
+      vaultName: my-vault
+    properties: {}
+    description: Provides options for retrieving the notification configuration set on an Amazon Glacier vault.
+  InitiateJobOutput:
+    type: object
+    example:
+      jobId: ' HkF9p6o7yjhFx-K3CGl6fuSm6VzW9T7esGQfco8nUXVYwS0jlb5gq1JZ55yHgt5vP54ZShjoQzQVVh7vEXAMPLEjobID'
+      location: /111122223333/vaults/examplevault/jobs/HkF9p6o7yjhFx-K3CGl6fuSm6VzW9T7esGQfco8nUXVYwS0jlb5gq1JZ55yHgt5vP54ZShjoQzQVVh7vEXAMPLEjobID
+    properties: {}
+    description: Contains the Amazon Glacier response to your request.
   InitiateJobInput:
     type: object
     example:
@@ -2086,13 +2015,36 @@ definitions:
         $ref: '#/definitions/JobParameters'
         description: Provides options for specifying job information.
     description: Provides options for initiating an Amazon Glacier job.
-  InitiateJobOutput:
+  PolicyEnforcedException:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/string'
+        description: Client
+      code:
+        $ref: '#/definitions/string'
+        description: PolicyEnforcedException
+      message:
+        $ref: '#/definitions/string'
+        description: InitiateJob request denied by current data retrieval policy.
+    description: 'Returned if a retrieval job would exceed the current data policy''s retrieval rate limit. For more information about data retrieval policies,'
+  InsufficientCapacityException:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/string'
+      code:
+        $ref: '#/definitions/string'
+      message:
+        $ref: '#/definitions/string'
+    description: Returned if there is insufficient capacity to process this expedited request. This error only applies to expedited retrievals and not to standard or bulk retrievals.
+  InitiateMultipartUploadOutput:
     type: object
     example:
-      jobId: ' HkF9p6o7yjhFx-K3CGl6fuSm6VzW9T7esGQfco8nUXVYwS0jlb5gq1JZ55yHgt5vP54ZShjoQzQVVh7vEXAMPLEjobID'
-      location: /111122223333/vaults/examplevault/jobs/HkF9p6o7yjhFx-K3CGl6fuSm6VzW9T7esGQfco8nUXVYwS0jlb5gq1JZ55yHgt5vP54ZShjoQzQVVh7vEXAMPLEjobID
+      location: /111122223333/vaults/my-vault/multipart-uploads/19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ
+      uploadId: 19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ
     properties: {}
-    description: Contains the Amazon Glacier response to your request.
+    description: The Amazon Glacier response to your request.
   InitiateMultipartUploadInput:
     type: object
     example:
@@ -2101,13 +2053,12 @@ definitions:
       vaultName: my-vault
     properties: {}
     description: Provides options for initiating a multipart upload to an Amazon Glacier vault.
-  InitiateMultipartUploadOutput:
+  InitiateVaultLockOutput:
     type: object
     example:
-      location: /111122223333/vaults/my-vault/multipart-uploads/19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ
-      uploadId: 19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ
+      lockId: AE863rKkWZU53SLW5be4DUcW
     properties: {}
-    description: The Amazon Glacier response to your request.
+    description: Contains the Amazon Glacier response to your request.
   InitiateVaultLockInput:
     type: object
     example:
@@ -2120,135 +2071,6 @@ definitions:
         $ref: '#/definitions/VaultLockPolicy'
         description: 'The vault lock policy as a JSON string, which uses "\" as an escape character.'
     description: The input values for <code>InitiateVaultLock</code>.
-  InitiateVaultLockOutput:
-    type: object
-    example:
-      lockId: AE863rKkWZU53SLW5be4DUcW
-    properties: {}
-    description: Contains the Amazon Glacier response to your request.
-  InputSerialization:
-    type: object
-    properties:
-      csv:
-        $ref: '#/definitions/CSVInput'
-        description: Describes the serialization of a CSV-encoded object.
-    description: Describes how the archive is serialized.
-  InsufficientCapacityException:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/string'
-      code:
-        $ref: '#/definitions/string'
-      message:
-        $ref: '#/definitions/string'
-    description: Returned if there is insufficient capacity to process this expedited request. This error only applies to expedited retrievals and not to standard or bulk retrievals.
-  InvalidParameterValueException:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/string'
-        description: Client
-      code:
-        $ref: '#/definitions/string'
-        description: 400 Bad Request
-      message:
-        $ref: '#/definitions/string'
-        description: Returned if a parameter of the request is incorrectly specified.
-    description: Returned if a parameter of the request is incorrectly specified.
-  InventoryRetrievalJobDescription:
-    type: object
-    properties:
-      Format:
-        $ref: '#/definitions/string'
-        description: 'The output format for the vault inventory list, which is set by the <b>InitiateJob</b> request when initiating a job to retrieve a vault inventory. Valid values are <code>CSV</code> and <code>JSON</code>.'
-      StartDate:
-        $ref: '#/definitions/DateTime'
-        description: 'The start of the date range in Universal Coordinated Time (UTC) for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
-      EndDate:
-        $ref: '#/definitions/DateTime'
-        description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
-      Limit:
-        $ref: '#/definitions/string'
-        description: 'The maximum number of inventory items returned per vault inventory retrieval request. This limit is set when initiating the job with the a <b>InitiateJob</b> request. '
-      Marker:
-        $ref: '#/definitions/string'
-        description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>. For more information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering"> Range Inventory Retrieval</a>.'
-    description: Describes the options for a range inventory retrieval job.
-  InventoryRetrievalJobInput:
-    type: object
-    properties:
-      StartDate:
-        $ref: '#/definitions/string'
-        description: 'The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
-      EndDate:
-        $ref: '#/definitions/string'
-        description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
-      Limit:
-        $ref: '#/definitions/string'
-        description: Specifies the maximum number of inventory items returned per vault inventory retrieval request. Valid values are greater than or equal to 1.
-      Marker:
-        $ref: '#/definitions/string'
-        description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>.'
-    description: Provides options for specifying a range inventory retrieval job.
-  JobList:
-    type: array
-    items:
-      $ref: '#/definitions/GlacierJobDescription'
-  JobParameters:
-    type: object
-    properties:
-      Format:
-        $ref: '#/definitions/string'
-        description: 'When initiating a job to retrieve a vault inventory, you can optionally add this parameter to your request to specify the output format. If you are initiating an inventory job and do not specify a Format field, JSON is the default format. Valid values are "CSV" and "JSON".'
-      Type:
-        $ref: '#/definitions/string'
-        description: 'The job type. You can initiate a job to perform a select query on an archive, retrieve an archive, or get an inventory of a vault. Valid values are "select", "archive-retrieval" and "inventory-retrieval".'
-      ArchiveId:
-        $ref: '#/definitions/string'
-        description: 'The ID of the archive that you want to retrieve. This field is required only if <code>Type</code> is set to <code>select</code> or <code>archive-retrieval</code>code&gt;. An error occurs if you specify this request parameter for an inventory retrieval job request. '
-      Description:
-        $ref: '#/definitions/string'
-        description: 'The optional description for the job. The description must be less than or equal to 1,024 bytes. The allowable characters are 7-bit ASCII without control codes-specifically, ASCII values 32-126 decimal or 0x20-0x7E hexadecimal.'
-      SNSTopic:
-        $ref: '#/definitions/string'
-        description: The Amazon SNS topic ARN to which Amazon Glacier sends a notification when the job is completed and the output is ready for you to download. The specified topic publishes the notification to its subscribers. The SNS topic must exist.
-      RetrievalByteRange:
-        $ref: '#/definitions/string'
-        description: '<p>The byte range to retrieve for an archive retrieval. in the form "<i>StartByteValue</i>-<i>EndByteValue</i>" If not specified, the whole archive is retrieved. If specified, the byte range must be megabyte (1024*1024) aligned which means that <i>StartByteValue</i> must be divisible by 1 MB and <i>EndByteValue</i> plus 1 must be divisible by 1 MB or be the end of the archive specified as the archive byte size value minus 1. If RetrievalByteRange is not megabyte aligned, this operation returns a 400 response. </p> <p>An error occurs if you specify this field for an inventory retrieval job request.</p>'
-      Tier:
-        $ref: '#/definitions/string'
-        description: 'The tier to use for a select or an archive retrieval job. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.'
-      InventoryRetrievalParameters:
-        $ref: '#/definitions/InventoryRetrievalJobInput'
-        description: Input parameters used for range inventory retrieval.
-      SelectParameters:
-        $ref: '#/definitions/SelectParameters'
-        description: Contains the parameters that define a job.
-      OutputLocation:
-        $ref: '#/definitions/OutputLocation'
-        description: Contains information about the location where the select job results are stored.
-    description: Provides options for defining a job.
-  LimitExceededException:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/string'
-        description: Client
-      code:
-        $ref: '#/definitions/string'
-        description: 400 Bad Request
-      message:
-        $ref: '#/definitions/string'
-        description: Returned if the request results in a vault limit or tags limit being exceeded.
-    description: Returned if the request results in a vault or account limit being exceeded.
-  ListJobsInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: my-vault
-    properties: {}
-    description: Provides options for retrieving a job list for an Amazon Glacier vault.
   ListJobsOutput:
     type: object
     example:
@@ -2282,13 +2104,13 @@ definitions:
         $ref: '#/definitions/string'
         description: ' An opaque string used for pagination that specifies the job at which the listing of jobs should begin. You get the <code>marker</code> value from a previous List Jobs response. You only need to include the marker if you are continuing the pagination of the results started in a previous List Jobs request. '
     description: Contains the Amazon Glacier response to your request.
-  ListMultipartUploadsInput:
+  ListJobsInput:
     type: object
     example:
       accountId: '-'
-      vaultName: examplevault
+      vaultName: my-vault
     properties: {}
-    description: Provides options for retrieving list of in-progress multipart uploads for an Amazon Glacier vault.
+    description: Provides options for retrieving a job list for an Amazon Glacier vault.
   ListMultipartUploadsOutput:
     type: object
     example:
@@ -2317,14 +2139,13 @@ definitions:
         $ref: '#/definitions/string'
         description: 'An opaque string that represents where to continue pagination of the results. You use the marker in a new List Multipart Uploads request to obtain more uploads in the list. If there are no more uploads, this value is <code>null</code>.'
     description: Contains the Amazon Glacier response to your request.
-  ListPartsInput:
+  ListMultipartUploadsInput:
     type: object
     example:
       accountId: '-'
-      uploadId: OW2fM5iVylEpFEMM9_HpKowRapC3vn5sSL39_396UW9zLFUWVrnRHaPjUJddQ5OxSHVXjYtrN47NBZ-khxOjyEXAMPLE
       vaultName: examplevault
     properties: {}
-    description: Provides options for retrieving a list of parts of an archive that have been uploaded in a specific multipart upload.
+    description: Provides options for retrieving list of in-progress multipart uploads for an Amazon Glacier vault.
   ListPartsOutput:
     type: object
     example:
@@ -2362,11 +2183,14 @@ definitions:
         $ref: '#/definitions/string'
         description: 'An opaque string that represents where to continue pagination of the results. You use the marker in a new List Parts request to obtain more jobs in the list. If there are no more parts, this value is <code>null</code>.'
     description: Contains the Amazon Glacier response to your request.
-  ListProvisionedCapacityInput:
+  ListPartsInput:
     type: object
     example:
       accountId: '-'
+      uploadId: OW2fM5iVylEpFEMM9_HpKowRapC3vn5sSL39_396UW9zLFUWVrnRHaPjUJddQ5OxSHVXjYtrN47NBZ-khxOjyEXAMPLE
+      vaultName: examplevault
     properties: {}
+    description: Provides options for retrieving a list of parts of an archive that have been uploaded in a specific multipart upload.
   ListProvisionedCapacityOutput:
     type: object
     example:
@@ -2381,13 +2205,11 @@ definitions:
       ProvisionedCapacityList:
         $ref: '#/definitions/ProvisionedCapacityList'
         description: The response body contains the following JSON fields.
-  ListTagsForVaultInput:
+  ListProvisionedCapacityInput:
     type: object
     example:
       accountId: '-'
-      vaultName: examplevault
     properties: {}
-    description: The input value for <code>ListTagsForVaultInput</code>.
   ListTagsForVaultOutput:
     type: object
     example:
@@ -2399,14 +2221,13 @@ definitions:
         $ref: '#/definitions/TagMap'
         description: The tags attached to the vault. Each tag is composed of a key and a value.
     description: Contains the Amazon Glacier response to your request.
-  ListVaultsInput:
+  ListTagsForVaultInput:
     type: object
     example:
       accountId: '-'
-      limit: ''
-      marker: ''
+      vaultName: examplevault
     properties: {}
-    description: Provides options to retrieve the vault list owned by the calling user's account. The list provides metadata information for each vault.
+    description: The input value for <code>ListTagsForVaultInput</code>.
   ListVaultsOutput:
     type: object
     example:
@@ -2425,106 +2246,24 @@ definitions:
         $ref: '#/definitions/string'
         description: The vault ARN at which to continue pagination of the results. You use the marker in another List Vaults request to obtain more vaults in the list.
     description: Contains the Amazon Glacier response to your request.
-  MissingParameterValueException:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/string'
-        description: Client.
-      code:
-        $ref: '#/definitions/string'
-        description: 400 Bad Request
-      message:
-        $ref: '#/definitions/string'
-        description: Returned if no authentication data is found for the request.
-    description: Returned if a required header or parameter is missing from the request.
-  NotificationEventList:
-    type: array
-    items:
-      $ref: '#/definitions/string'
-  NullableLong:
-    type: integer
-  OutputLocation:
-    type: object
-    properties:
-      S3:
-        $ref: '#/definitions/S3Location'
-        description: Describes an S3 location that will receive the results of the job request.
-    description: Contains information about the location where the select job results are stored.
-  OutputSerialization:
-    type: object
-    properties:
-      csv:
-        $ref: '#/definitions/CSVOutput'
-        description: Describes the serialization of CSV-encoded query results.
-    description: Describes how the select output is serialized.
-  PartList:
-    type: array
-    items:
-      $ref: '#/definitions/PartListElement'
-  PartListElement:
-    type: object
-    properties:
-      RangeInBytes:
-        $ref: '#/definitions/string'
-        description: 'The byte range of a part, inclusive of the upper value of the range.'
-      SHA256TreeHash:
-        $ref: '#/definitions/string'
-        description: The SHA256 tree hash value that Amazon Glacier calculated for the part. This field is never <code>null</code>.
-    description: A list of the part sizes of the multipart upload.
-  Permission:
-    type: string
-    enum:
-      - FULL_CONTROL
-      - WRITE
-      - WRITE_ACP
-      - READ
-      - READ_ACP
-  PolicyEnforcedException:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/string'
-        description: Client
-      code:
-        $ref: '#/definitions/string'
-        description: PolicyEnforcedException
-      message:
-        $ref: '#/definitions/string'
-        description: InitiateJob request denied by current data retrieval policy.
-    description: 'Returned if a retrieval job would exceed the current data policy''s retrieval rate limit. For more information about data retrieval policies,'
-  ProvisionedCapacityDescription:
-    type: object
-    properties:
-      CapacityId:
-        $ref: '#/definitions/string'
-        description: The ID that identifies the provisioned capacity unit.
-      StartDate:
-        $ref: '#/definitions/string'
-        description: 'The date that the provisioned capacity unit was purchased, in Universal Coordinated Time (UTC).'
-      ExpirationDate:
-        $ref: '#/definitions/string'
-        description: 'The date that the provisioned capacity unit expires, in Universal Coordinated Time (UTC).'
-    description: The definition for a provisioned capacity unit.
-  ProvisionedCapacityList:
-    type: array
-    items:
-      $ref: '#/definitions/ProvisionedCapacityDescription'
-  PurchaseProvisionedCapacityInput:
+  ListVaultsInput:
     type: object
     example:
       accountId: '-'
+      limit: ''
+      marker: ''
     properties: {}
+    description: Provides options to retrieve the vault list owned by the calling user's account. The list provides metadata information for each vault.
   PurchaseProvisionedCapacityOutput:
     type: object
     example:
       capacityId: zSaq7NzHFQDANTfQkDen4V7z
     properties: {}
-  QuoteFields:
-    type: string
-    enum:
-      - ALWAYS
-      - ASNEEDED
+  PurchaseProvisionedCapacityInput:
+    type: object
+    example:
+      accountId: '-'
+    properties: {}
   RemoveTagsFromVaultInput:
     type: object
     example:
@@ -2538,89 +2277,6 @@ definitions:
         $ref: '#/definitions/TagKeyList'
         description: A list of tag keys. Each corresponding tag is removed from the vault.
     description: The input value for <code>RemoveTagsFromVaultInput</code>.
-  RequestTimeoutException:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/string'
-        description: Client
-      code:
-        $ref: '#/definitions/string'
-        description: 408 Request Timeout
-      message:
-        $ref: '#/definitions/string'
-        description: 'Returned if, when uploading an archive, Amazon Glacier times out while receiving the upload.'
-    description: 'Returned if, when uploading an archive, Amazon Glacier times out while receiving the upload.'
-  ResourceNotFoundException:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/string'
-        description: Client
-      code:
-        $ref: '#/definitions/string'
-        description: 404 Not Found
-      message:
-        $ref: '#/definitions/string'
-        description: 'Returned if the specified resource (such as a vault, upload ID, or job ID) doesn''t exist.'
-    description: 'Returned if the specified resource (such as a vault, upload ID, or job ID) doesn''t exist.'
-  S3Location:
-    type: object
-    properties:
-      BucketName:
-        $ref: '#/definitions/string'
-        description: The name of the Amazon S3 bucket where the job results are stored.
-      Prefix:
-        $ref: '#/definitions/string'
-        description: The prefix that is prepended to the results for this request.
-      Encryption:
-        $ref: '#/definitions/Encryption'
-        description: Contains information about the encryption used to store the job results in Amazon S3.
-      CannedACL:
-        $ref: '#/definitions/CannedACL'
-        description: The canned access control list (ACL) to apply to the job results.
-      AccessControlList:
-        $ref: '#/definitions/AccessControlPolicyList'
-        description: A list of grants that control access to the staged results.
-      Tagging:
-        $ref: '#/definitions/hashmap'
-        description: The tag-set that is applied to the job results.
-      UserMetadata:
-        $ref: '#/definitions/hashmap'
-        description: A map of metadata to store with the job results in Amazon S3.
-      StorageClass:
-        $ref: '#/definitions/StorageClass'
-        description: The storage class used to store the job results.
-    description: Contains information about the location in Amazon S3 where the select job results are stored.
-  SelectParameters:
-    type: object
-    properties:
-      InputSerialization:
-        $ref: '#/definitions/InputSerialization'
-        description: Describes the serialization format of the object.
-      ExpressionType:
-        $ref: '#/definitions/ExpressionType'
-        description: 'The type of the provided expression, for example <code>SQL</code>.'
-      Expression:
-        $ref: '#/definitions/string'
-        description: The expression that is used to select the object.
-      OutputSerialization:
-        $ref: '#/definitions/OutputSerialization'
-        description: Describes how the results of the select job are serialized.
-    description: Contains information about the parameters used for a select.
-  ServiceUnavailableException:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/string'
-        description: Server
-      code:
-        $ref: '#/definitions/string'
-        description: 500 Internal Server Error
-      message:
-        $ref: '#/definitions/string'
-        description: Returned if the service cannot complete the request.
-    description: Returned if the service cannot complete the request.
   SetDataRetrievalPolicyInput:
     type: object
     example:
@@ -2661,45 +2317,6 @@ definitions:
         $ref: '#/definitions/VaultNotificationConfig'
         description: Provides options for specifying notification configuration.
     description: Provides options to configure notifications that will be sent when specific events happen to a vault.
-  Size:
-    type: integer
-  StatusCode:
-    type: string
-    enum:
-      - InProgress
-      - Succeeded
-      - Failed
-  StorageClass:
-    type: string
-    enum:
-      - STANDARD
-      - REDUCED_REDUNDANCY
-      - STANDARD_IA
-  Stream:
-    type: string
-  TagKey:
-    type: string
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/string'
-  TagMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
-  TagValue:
-    type: string
-  Type:
-    type: string
-    enum:
-      - AmazonCustomerByEmail
-      - CanonicalUser
-      - Group
   UploadArchiveInput:
     type: object
     example:
@@ -2713,6 +2330,458 @@ definitions:
         $ref: '#/definitions/Stream'
         description: The data to upload.
     description: Provides options to add an archive to a vault.
+  RequestTimeoutException:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/string'
+        description: Client
+      code:
+        $ref: '#/definitions/string'
+        description: 408 Request Timeout
+      message:
+        $ref: '#/definitions/string'
+        description: 'Returned if, when uploading an archive, Amazon Glacier times out while receiving the upload.'
+    description: 'Returned if, when uploading an archive, Amazon Glacier times out while receiving the upload.'
+  UploadMultipartPartOutput:
+    type: object
+    example:
+      checksum: c06f7cd4baacb087002a99a5f48bf953
+    properties: {}
+    description: Contains the Amazon Glacier response to your request.
+  UploadMultipartPartInput:
+    type: object
+    example:
+      accountId: '-'
+      body: part1
+      checksum: c06f7cd4baacb087002a99a5f48bf953
+      range: bytes 0-1048575/*
+      uploadId: 19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ
+      vaultName: examplevault
+    properties:
+      body:
+        $ref: '#/definitions/Stream'
+        description: The data to upload.
+    description: Provides options to upload a part of an archive in a multipart upload operation.
+  string:
+    type: string
+  Grant:
+    type: object
+    properties:
+      Grantee:
+        $ref: '#/definitions/Grantee'
+        description: The grantee.
+      Permission:
+        $ref: '#/definitions/Permission'
+        description: 'Specifies the permission given to the grantee. '
+    description: Contains information about a grant.
+  AccessControlPolicyList:
+    type: array
+    items:
+      $ref: '#/definitions/Grant'
+  ActionCode:
+    type: string
+    enum:
+      - ArchiveRetrieval
+      - InventoryRetrieval
+      - Select
+  TagMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
+  FileHeaderInfo:
+    type: string
+    enum:
+      - USE
+      - IGNORE
+      - NONE
+  CSVInput:
+    type: object
+    properties:
+      FileHeaderInfo:
+        $ref: '#/definitions/FileHeaderInfo'
+        description: 'Describes the first line of input. Valid values are <code>None</code>, <code>Ignore</code>, and <code>Use</code>.'
+      Comments:
+        $ref: '#/definitions/string'
+        description: A single character used to indicate that a row should be ignored when the character is present at the start of that row.
+      QuoteEscapeCharacter:
+        $ref: '#/definitions/string'
+        description: A single character used for escaping the quotation-mark character inside an already escaped value.
+      RecordDelimiter:
+        $ref: '#/definitions/string'
+        description: A value used to separate individual records from each other.
+      FieldDelimiter:
+        $ref: '#/definitions/string'
+        description: A value used to separate individual fields from each other within a record.
+      QuoteCharacter:
+        $ref: '#/definitions/string'
+        description: A value used as an escape character where the field delimiter is part of the value.
+    description: Contains information about the comma-separated value (CSV) file to select from.
+  QuoteFields:
+    type: string
+    enum:
+      - ALWAYS
+      - ASNEEDED
+  CSVOutput:
+    type: object
+    properties:
+      QuoteFields:
+        $ref: '#/definitions/QuoteFields'
+        description: A value that indicates whether all output fields should be contained within quotation marks.
+      QuoteEscapeCharacter:
+        $ref: '#/definitions/string'
+        description: A single character used for escaping the quotation-mark character inside an already escaped value.
+      RecordDelimiter:
+        $ref: '#/definitions/string'
+        description: A value used to separate individual records from each other.
+      FieldDelimiter:
+        $ref: '#/definitions/string'
+        description: A value used to separate individual fields from each other within a record.
+      QuoteCharacter:
+        $ref: '#/definitions/string'
+        description: A value used as an escape character where the field delimiter is part of the value.
+    description: Contains information about the comma-separated value (CSV) file that the job results are stored in.
+  CannedACL:
+    type: string
+    enum:
+      - private
+      - public-read
+      - public-read-write
+      - aws-exec-read
+      - authenticated-read
+      - bucket-owner-read
+      - bucket-owner-full-control
+  DataRetrievalRulesList:
+    type: array
+    items:
+      $ref: '#/definitions/DataRetrievalRule'
+  DataRetrievalPolicy:
+    type: object
+    properties:
+      Rules:
+        $ref: '#/definitions/DataRetrievalRulesList'
+        description: 'The policy rule. Although this is a list type, currently there must be only one rule, which contains a Strategy field and optionally a BytesPerHour field.'
+    description: Data retrieval policy.
+  NullableLong:
+    type: integer
+  DataRetrievalRule:
+    type: object
+    properties:
+      Strategy:
+        $ref: '#/definitions/string'
+        description: '<p>The type of data retrieval policy to set.</p> <p>Valid values: BytesPerHour|FreeTier|None</p>'
+      BytesPerHour:
+        $ref: '#/definitions/NullableLong'
+        description: <p>The maximum number of bytes that can be retrieved in an hour.</p> <p>This field is required only if the value of the Strategy field is <code>BytesPerHour</code>. Your PUT operation will be rejected if the Strategy field is not set to <code>BytesPerHour</code> and you set this field.</p>
+    description: Data retrieval policy rule.
+  DateTime:
+    type: string
+  long:
+    type: integer
+  EncryptionType:
+    type: string
+    enum:
+      - 'aws:kms'
+      - AES256
+  Encryption:
+    type: object
+    properties:
+      EncryptionType:
+        $ref: '#/definitions/EncryptionType'
+        description: 'The server-side encryption algorithm used when storing job results in Amazon S3, for example <code>AES256</code> or <code>aws:kms</code>.'
+      KMSKeyId:
+        $ref: '#/definitions/string'
+        description: 'The AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS fail if not made by using Secure Sockets Layer (SSL) or Signature Version 4. '
+      KMSContext:
+        $ref: '#/definitions/string'
+        description: 'Optional. If the encryption type is <code>aws:kms</code>, you can use this value to specify the encryption context for the job results.'
+    description: 'Contains information about the encryption used to store the job results in Amazon S3. '
+  ExpressionType:
+    type: string
+    enum:
+      - SQL
+  Stream:
+    type: string
+  httpstatus:
+    type: integer
+  VaultAccessPolicy:
+    type: object
+    properties:
+      Policy:
+        $ref: '#/definitions/string'
+        description: The vault access policy.
+    description: Contains the vault access policy.
+  VaultNotificationConfig:
+    type: object
+    properties:
+      SNSTopic:
+        $ref: '#/definitions/string'
+        description: The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name (ARN).
+      Events:
+        $ref: '#/definitions/NotificationEventList'
+        description: A list of one or more events for which Amazon Glacier will send a notification to the specified Amazon SNS topic.
+    description: Represents a vault's notification configuration.
+  boolean:
+    type: boolean
+  StatusCode:
+    type: string
+    enum:
+      - InProgress
+      - Succeeded
+      - Failed
+  Size:
+    type: integer
+  InventoryRetrievalJobDescription:
+    type: object
+    properties:
+      Format:
+        $ref: '#/definitions/string'
+        description: 'The output format for the vault inventory list, which is set by the <b>InitiateJob</b> request when initiating a job to retrieve a vault inventory. Valid values are <code>CSV</code> and <code>JSON</code>.'
+      StartDate:
+        $ref: '#/definitions/DateTime'
+        description: 'The start of the date range in Universal Coordinated Time (UTC) for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+      EndDate:
+        $ref: '#/definitions/DateTime'
+        description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+      Limit:
+        $ref: '#/definitions/string'
+        description: 'The maximum number of inventory items returned per vault inventory retrieval request. This limit is set when initiating the job with the a <b>InitiateJob</b> request. '
+      Marker:
+        $ref: '#/definitions/string'
+        description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>. For more information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering"> Range Inventory Retrieval</a>.'
+    description: Describes the options for a range inventory retrieval job.
+  SelectParameters:
+    type: object
+    properties:
+      InputSerialization:
+        $ref: '#/definitions/InputSerialization'
+        description: Describes the serialization format of the object.
+      ExpressionType:
+        $ref: '#/definitions/ExpressionType'
+        description: 'The type of the provided expression, for example <code>SQL</code>.'
+      Expression:
+        $ref: '#/definitions/string'
+        description: The expression that is used to select the object.
+      OutputSerialization:
+        $ref: '#/definitions/OutputSerialization'
+        description: Describes how the results of the select job are serialized.
+    description: Contains information about the parameters used for a select.
+  OutputLocation:
+    type: object
+    properties:
+      S3:
+        $ref: '#/definitions/S3Location'
+        description: Describes an S3 location that will receive the results of the job request.
+    description: Contains information about the location where the select job results are stored.
+  Grantee:
+    type: object
+    required:
+      - Type
+    properties:
+      Type:
+        $ref: '#/definitions/Type'
+        description: Type of grantee
+      DisplayName:
+        $ref: '#/definitions/string'
+        description: Screen name of the grantee.
+      URI:
+        $ref: '#/definitions/string'
+        description: URI of the grantee group.
+      ID:
+        $ref: '#/definitions/string'
+        description: The canonical user ID of the grantee.
+      EmailAddress:
+        $ref: '#/definitions/string'
+        description: Email address of the grantee.
+    description: Contains information about the grantee.
+  Permission:
+    type: string
+    enum:
+      - FULL_CONTROL
+      - WRITE
+      - WRITE_ACP
+      - READ
+      - READ_ACP
+  Type:
+    type: string
+    enum:
+      - AmazonCustomerByEmail
+      - CanonicalUser
+      - Group
+  JobParameters:
+    type: object
+    properties:
+      Format:
+        $ref: '#/definitions/string'
+        description: 'When initiating a job to retrieve a vault inventory, you can optionally add this parameter to your request to specify the output format. If you are initiating an inventory job and do not specify a Format field, JSON is the default format. Valid values are "CSV" and "JSON".'
+      Type:
+        $ref: '#/definitions/string'
+        description: 'The job type. You can initiate a job to perform a select query on an archive, retrieve an archive, or get an inventory of a vault. Valid values are "select", "archive-retrieval" and "inventory-retrieval".'
+      ArchiveId:
+        $ref: '#/definitions/string'
+        description: 'The ID of the archive that you want to retrieve. This field is required only if <code>Type</code> is set to <code>select</code> or <code>archive-retrieval</code>code&gt;. An error occurs if you specify this request parameter for an inventory retrieval job request. '
+      Description:
+        $ref: '#/definitions/string'
+        description: 'The optional description for the job. The description must be less than or equal to 1,024 bytes. The allowable characters are 7-bit ASCII without control codes-specifically, ASCII values 32-126 decimal or 0x20-0x7E hexadecimal.'
+      SNSTopic:
+        $ref: '#/definitions/string'
+        description: The Amazon SNS topic ARN to which Amazon Glacier sends a notification when the job is completed and the output is ready for you to download. The specified topic publishes the notification to its subscribers. The SNS topic must exist.
+      RetrievalByteRange:
+        $ref: '#/definitions/string'
+        description: '<p>The byte range to retrieve for an archive retrieval. in the form "<i>StartByteValue</i>-<i>EndByteValue</i>" If not specified, the whole archive is retrieved. If specified, the byte range must be megabyte (1024*1024) aligned which means that <i>StartByteValue</i> must be divisible by 1 MB and <i>EndByteValue</i> plus 1 must be divisible by 1 MB or be the end of the archive specified as the archive byte size value minus 1. If RetrievalByteRange is not megabyte aligned, this operation returns a 400 response. </p> <p>An error occurs if you specify this field for an inventory retrieval job request.</p>'
+      Tier:
+        $ref: '#/definitions/string'
+        description: 'The tier to use for a select or an archive retrieval job. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.'
+      InventoryRetrievalParameters:
+        $ref: '#/definitions/InventoryRetrievalJobInput'
+        description: Input parameters used for range inventory retrieval.
+      SelectParameters:
+        $ref: '#/definitions/SelectParameters'
+        description: Contains the parameters that define a job.
+      OutputLocation:
+        $ref: '#/definitions/OutputLocation'
+        description: Contains information about the location where the select job results are stored.
+    description: Provides options for defining a job.
+  VaultLockPolicy:
+    type: object
+    properties:
+      Policy:
+        $ref: '#/definitions/string'
+        description: The vault lock policy.
+    description: Contains the vault lock policy.
+  InputSerialization:
+    type: object
+    properties:
+      csv:
+        $ref: '#/definitions/CSVInput'
+        description: Describes the serialization of a CSV-encoded object.
+    description: Describes how the archive is serialized.
+  InventoryRetrievalJobInput:
+    type: object
+    properties:
+      StartDate:
+        $ref: '#/definitions/string'
+        description: 'The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+      EndDate:
+        $ref: '#/definitions/string'
+        description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+      Limit:
+        $ref: '#/definitions/string'
+        description: Specifies the maximum number of inventory items returned per vault inventory retrieval request. Valid values are greater than or equal to 1.
+      Marker:
+        $ref: '#/definitions/string'
+        description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>.'
+    description: Provides options for specifying a range inventory retrieval job.
+  JobList:
+    type: array
+    items:
+      $ref: '#/definitions/GlacierJobDescription'
+  UploadsList:
+    type: array
+    items:
+      $ref: '#/definitions/UploadListElement'
+  PartList:
+    type: array
+    items:
+      $ref: '#/definitions/PartListElement'
+  ProvisionedCapacityList:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisionedCapacityDescription'
+  VaultList:
+    type: array
+    items:
+      $ref: '#/definitions/DescribeVaultOutput'
+  NotificationEventList:
+    type: array
+    items:
+      $ref: '#/definitions/string'
+  S3Location:
+    type: object
+    properties:
+      BucketName:
+        $ref: '#/definitions/string'
+        description: The name of the Amazon S3 bucket where the job results are stored.
+      Prefix:
+        $ref: '#/definitions/string'
+        description: The prefix that is prepended to the results for this request.
+      Encryption:
+        $ref: '#/definitions/Encryption'
+        description: Contains information about the encryption used to store the job results in Amazon S3.
+      CannedACL:
+        $ref: '#/definitions/CannedACL'
+        description: The canned access control list (ACL) to apply to the job results.
+      AccessControlList:
+        $ref: '#/definitions/AccessControlPolicyList'
+        description: A list of grants that control access to the staged results.
+      Tagging:
+        $ref: '#/definitions/hashmap'
+        description: The tag-set that is applied to the job results.
+      UserMetadata:
+        $ref: '#/definitions/hashmap'
+        description: A map of metadata to store with the job results in Amazon S3.
+      StorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: The storage class used to store the job results.
+    description: Contains information about the location in Amazon S3 where the select job results are stored.
+  OutputSerialization:
+    type: object
+    properties:
+      csv:
+        $ref: '#/definitions/CSVOutput'
+        description: Describes the serialization of CSV-encoded query results.
+    description: Describes how the select output is serialized.
+  PartListElement:
+    type: object
+    properties:
+      RangeInBytes:
+        $ref: '#/definitions/string'
+        description: 'The byte range of a part, inclusive of the upper value of the range.'
+      SHA256TreeHash:
+        $ref: '#/definitions/string'
+        description: The SHA256 tree hash value that Amazon Glacier calculated for the part. This field is never <code>null</code>.
+    description: A list of the part sizes of the multipart upload.
+  ProvisionedCapacityDescription:
+    type: object
+    properties:
+      CapacityId:
+        $ref: '#/definitions/string'
+        description: The ID that identifies the provisioned capacity unit.
+      StartDate:
+        $ref: '#/definitions/string'
+        description: 'The date that the provisioned capacity unit was purchased, in Universal Coordinated Time (UTC).'
+      ExpirationDate:
+        $ref: '#/definitions/string'
+        description: 'The date that the provisioned capacity unit expires, in Universal Coordinated Time (UTC).'
+    description: The definition for a provisioned capacity unit.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/string'
+  hashmap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/string'
+        value:
+          $ref: '#/definitions/string'
+  StorageClass:
+    type: string
+    enum:
+      - STANDARD
+      - REDUCED_REDUNDANCY
+      - STANDARD_IA
+  TagKey:
+    type: string
+  TagValue:
+    type: string
   UploadListElement:
     type: object
     properties:
@@ -2732,72 +2801,3 @@ definitions:
         $ref: '#/definitions/string'
         description: The UTC time at which the multipart upload was initiated.
     description: A list of in-progress multipart uploads for a vault.
-  UploadMultipartPartInput:
-    type: object
-    example:
-      accountId: '-'
-      body: part1
-      checksum: c06f7cd4baacb087002a99a5f48bf953
-      range: bytes 0-1048575/*
-      uploadId: 19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ
-      vaultName: examplevault
-    properties:
-      body:
-        $ref: '#/definitions/Stream'
-        description: The data to upload.
-    description: Provides options to upload a part of an archive in a multipart upload operation.
-  UploadMultipartPartOutput:
-    type: object
-    example:
-      checksum: c06f7cd4baacb087002a99a5f48bf953
-    properties: {}
-    description: Contains the Amazon Glacier response to your request.
-  UploadsList:
-    type: array
-    items:
-      $ref: '#/definitions/UploadListElement'
-  VaultAccessPolicy:
-    type: object
-    properties:
-      Policy:
-        $ref: '#/definitions/string'
-        description: The vault access policy.
-    description: Contains the vault access policy.
-  VaultList:
-    type: array
-    items:
-      $ref: '#/definitions/DescribeVaultOutput'
-  VaultLockPolicy:
-    type: object
-    properties:
-      Policy:
-        $ref: '#/definitions/string'
-        description: The vault lock policy.
-    description: Contains the vault lock policy.
-  VaultNotificationConfig:
-    type: object
-    properties:
-      SNSTopic:
-        $ref: '#/definitions/string'
-        description: The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name (ARN).
-      Events:
-        $ref: '#/definitions/NotificationEventList'
-        description: A list of one or more events for which Amazon Glacier will send a notification to the specified Amazon SNS topic.
-    description: Represents a vault's notification configuration.
-  boolean:
-    type: boolean
-  hashmap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/string'
-        value:
-          $ref: '#/definitions/string'
-  httpstatus:
-    type: integer
-  long:
-    type: integer
-  string:
-    type: string

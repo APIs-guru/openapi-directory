@@ -1819,48 +1819,14 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AWSAccountIdType:
-    type: string
-  AlgorithmSpec:
-    type: string
-    enum:
-      - RSAES_PKCS1_V1_5
-      - RSAES_OAEP_SHA_1
-      - RSAES_OAEP_SHA_256
-  AliasList:
-    type: array
-    items:
-      $ref: '#/definitions/AliasListEntry'
-  AliasListEntry:
+  CancelKeyDeletionResponse:
     type: object
+    example:
+      KeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
     properties:
-      AliasName:
-        $ref: '#/definitions/AliasNameType'
-        description: String that contains the alias.
-      AliasArn:
-        $ref: '#/definitions/ArnType'
-        description: String that contains the key ARN.
-      TargetKeyId:
+      KeyId:
         $ref: '#/definitions/KeyIdType'
-        description: String that contains the key identifier referred to by the alias.
-    description: Contains information about an alias.
-  AliasNameType:
-    type: string
-    pattern: '^[a-zA-Z0-9:/_-]+$'
-    minLength: 1
-    maxLength: 256
-  AlreadyExistsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because it attempted to create a resource that already exists.
-  ArnType:
-    type: string
-    minLength: 20
-    maxLength: 2048
-  BooleanType:
-    type: boolean
+        description: The unique identifier of the master key for which deletion is canceled.
   CancelKeyDeletionRequest:
     type: object
     required:
@@ -1871,18 +1837,36 @@ definitions:
       KeyId:
         $ref: '#/definitions/KeyIdType'
         description: '<p>The unique identifier for the customer master key (CMK) for which to cancel deletion.</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
-  CancelKeyDeletionResponse:
+  NotFoundException:
     type: object
-    example:
-      KeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
     properties:
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: The unique identifier of the master key for which deletion is canceled.
-  CiphertextType:
-    type: string
-    minLength: 1
-    maxLength: 6144
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The request was rejected because the specified entity or resource could not be found.
+  InvalidArnException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The request was rejected because a specified ARN was not valid.
+  DependencyTimeoutException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The system timed out while trying to fulfill the request. The request can be retried.
+  KMSInternalException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The request was rejected because an internal exception occurred. The request can be retried.
+  KMSInvalidStateException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: '<p>The request was rejected because the state of the specified resource is not valid for this request.</p> <p>For more information about how key state affects the use of a CMK, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">How Key State Affects Use of a Customer Master Key</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
   CreateAliasRequest:
     type: object
     required:
@@ -1898,6 +1882,36 @@ definitions:
       TargetKeyId:
         $ref: '#/definitions/KeyIdType'
         description: '<p>Identifies the CMK for which you are creating the alias. This value cannot be an alias.</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
+  AlreadyExistsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The request was rejected because it attempted to create a resource that already exists.
+  InvalidAliasNameException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The request was rejected because the specified alias name is not valid.
+  LimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: 'The request was rejected because a limit was exceeded. For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/limits.html">Limits</a> in the <i>AWS Key Management Service Developer Guide</i>.'
+  CreateGrantResponse:
+    type: object
+    example:
+      GrantId: 0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60
+      GrantToken: AQpAM2RhZTk1MGMyNTk2ZmZmMzEyYWVhOWViN2I1MWM4Mzc0MWFiYjc0ZDE1ODkyNGFlNTIzODZhMzgyZjBlNGY3NiKIAgEBAgB4Pa6VDCWW__MSrqnre1HIN0Grt00ViSSuUjhqOC8OT3YAAADfMIHcBgkqhkiG9w0BBwaggc4wgcsCAQAwgcUGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMmqLyBTAegIn9XlK5AgEQgIGXZQjkBcl1dykDdqZBUQ6L1OfUivQy7JVYO2-ZJP7m6f1g8GzV47HX5phdtONAP7K_HQIflcgpkoCqd_fUnE114mSmiagWkbQ5sqAVV3ov-VeqgrvMe5ZFEWLMSluvBAqdjHEdMIkHMlhlj4ENZbzBfo9Wxk8b8SnwP4kc4gGivedzFXo-dwN8fxjjq_ZZ9JFOj2ijIbj5FyogDCN0drOfi8RORSEuCEmPvjFRMFAwcmwFkN2NPp89amA
+    properties:
+      GrantToken:
+        $ref: '#/definitions/GrantTokenType'
+        description: '<p>The grant token.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token">Grant Tokens</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+      GrantId:
+        $ref: '#/definitions/GrantIdType'
+        description: <p>The unique identifier for the grant.</p> <p>You can use the <code>GrantId</code> in a subsequent <a>RetireGrant</a> or <a>RevokeGrant</a> operation.</p>
   CreateGrantRequest:
     type: object
     required:
@@ -1932,18 +1946,36 @@ definitions:
       Name:
         $ref: '#/definitions/GrantNameType'
         description: '<p>A friendly name for identifying the grant. Use this value to prevent the unintended creation of duplicate grants when retrying this request.</p> <p>When this value is absent, all <code>CreateGrant</code> requests result in a new grant with a unique <code>GrantId</code> even if all the supplied parameters are identical. This can result in unintended duplicates when you retry the <code>CreateGrant</code> request.</p> <p>When this value is present, you can retry a <code>CreateGrant</code> request with identical parameters; if the grant already exists, the original <code>GrantId</code> is returned without creating a new grant. Note that the returned grant token is unique with every <code>CreateGrant</code> request, even when a duplicate <code>GrantId</code> is returned. All grant tokens obtained in this way can be used interchangeably.</p>'
-  CreateGrantResponse:
+  DisabledException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The request was rejected because the specified CMK is not enabled.
+  InvalidGrantTokenException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The request was rejected because the specified grant token is not valid.
+  CreateKeyResponse:
     type: object
     example:
-      GrantId: 0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60
-      GrantToken: AQpAM2RhZTk1MGMyNTk2ZmZmMzEyYWVhOWViN2I1MWM4Mzc0MWFiYjc0ZDE1ODkyNGFlNTIzODZhMzgyZjBlNGY3NiKIAgEBAgB4Pa6VDCWW__MSrqnre1HIN0Grt00ViSSuUjhqOC8OT3YAAADfMIHcBgkqhkiG9w0BBwaggc4wgcsCAQAwgcUGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMmqLyBTAegIn9XlK5AgEQgIGXZQjkBcl1dykDdqZBUQ6L1OfUivQy7JVYO2-ZJP7m6f1g8GzV47HX5phdtONAP7K_HQIflcgpkoCqd_fUnE114mSmiagWkbQ5sqAVV3ov-VeqgrvMe5ZFEWLMSluvBAqdjHEdMIkHMlhlj4ENZbzBfo9Wxk8b8SnwP4kc4gGivedzFXo-dwN8fxjjq_ZZ9JFOj2ijIbj5FyogDCN0drOfi8RORSEuCEmPvjFRMFAwcmwFkN2NPp89amA
+      KeyMetadata:
+        AWSAccountId: '111122223333'
+        Arn: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+        CreationDate: '2017-07-05T14:04:55-07:00'
+        Description: ''
+        Enabled: true
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+        KeyManager: CUSTOMER
+        KeyState: Enabled
+        KeyUsage: ENCRYPT_DECRYPT
+        Origin: AWS_KMS
     properties:
-      GrantToken:
-        $ref: '#/definitions/GrantTokenType'
-        description: '<p>The grant token.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token">Grant Tokens</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
-      GrantId:
-        $ref: '#/definitions/GrantIdType'
-        description: <p>The unique identifier for the grant.</p> <p>You can use the <code>GrantId</code> in a subsequent <a>RetireGrant</a> or <a>RevokeGrant</a> operation.</p>
+      KeyMetadata:
+        $ref: '#/definitions/KeyMetadata'
+        description: Metadata associated with the CMK.
   CreateKeyRequest:
     type: object
     example:
@@ -1969,32 +2001,36 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: '<p>One or more tags. Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty (null) strings.</p> <p>Use this parameter to tag the CMK when it is created. Alternately, you can omit this parameter and instead tag the CMK after it is created using <a>TagResource</a>.</p>'
-  CreateKeyResponse:
+  MalformedPolicyDocumentException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The request was rejected because the specified policy is not syntactically or semantically correct.
+  UnsupportedOperationException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The request was rejected because a specified parameter is not supported or a specified resource is not valid for this operation.
+  TagException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The request was rejected because one or more tags are not valid.
+  DecryptResponse:
     type: object
     example:
-      KeyMetadata:
-        AWSAccountId: '111122223333'
-        Arn: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
-        CreationDate: '2017-07-05T14:04:55-07:00'
-        Description: ''
-        Enabled: true
-        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
-        KeyManager: CUSTOMER
-        KeyState: Enabled
-        KeyUsage: ENCRYPT_DECRYPT
-        Origin: AWS_KMS
+      KeyId: 'arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+      Plaintext: <binary data>
     properties:
-      KeyMetadata:
-        $ref: '#/definitions/KeyMetadata'
-        description: Metadata associated with the CMK.
-  DataKeySpec:
-    type: string
-    enum:
-      - AES_256
-      - AES_128
-  DateType:
-    type: string
-    format: date-time
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: ARN of the key used to perform the decryption. This value is returned if no errors are encountered during the operation.
+      Plaintext:
+        $ref: '#/definitions/PlaintextType'
+        description: 'Decrypted plaintext data. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.'
   DecryptRequest:
     type: object
     required:
@@ -2011,18 +2047,18 @@ definitions:
       GrantTokens:
         $ref: '#/definitions/GrantTokenList'
         description: '<p>A list of grant tokens.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token">Grant Tokens</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
-  DecryptResponse:
+  InvalidCiphertextException:
     type: object
-    example:
-      KeyId: 'arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
-      Plaintext: <binary data>
     properties:
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: ARN of the key used to perform the decryption. This value is returned if no errors are encountered during the operation.
-      Plaintext:
-        $ref: '#/definitions/PlaintextType'
-        description: 'Decrypted plaintext data. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.'
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: 'The request was rejected because the specified ciphertext, or additional authenticated data incorporated into the ciphertext, such as the encryption context, is corrupted, missing, or otherwise invalid.'
+  KeyUnavailableException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The request was rejected because the specified CMK was not available. The request can be retried.
   DeleteAliasRequest:
     type: object
     required:
@@ -2043,25 +2079,6 @@ definitions:
       KeyId:
         $ref: '#/definitions/KeyIdType'
         description: '<p>The identifier of the CMK whose key material to delete. The CMK''s <code>Origin</code> must be <code>EXTERNAL</code>.</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
-  DependencyTimeoutException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The system timed out while trying to fulfill the request. The request can be retried.
-  DescribeKeyRequest:
-    type: object
-    required:
-      - KeyId
-    example:
-      KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
-    properties:
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: '<p>Describes the specified customer master key (CMK). </p> <p>If you specify a predefined AWS alias (an AWS alias with no key ID), KMS associates the alias with an <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">AWS managed CMK</a> and returns its <code>KeyId</code> and <code>Arn</code> in the response.</p> <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>"alias/"</code>. To specify a CMK in a different AWS account, you must use the key ARN or alias ARN.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>'
-      GrantTokens:
-        $ref: '#/definitions/GrantTokenList'
-        description: '<p>A list of grant tokens.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token">Grant Tokens</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
   DescribeKeyResponse:
     type: object
     example:
@@ -2080,10 +2097,19 @@ definitions:
       KeyMetadata:
         $ref: '#/definitions/KeyMetadata'
         description: Metadata associated with the key.
-  DescriptionType:
-    type: string
-    minLength: 0
-    maxLength: 8192
+  DescribeKeyRequest:
+    type: object
+    required:
+      - KeyId
+    example:
+      KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+    properties:
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: '<p>Describes the specified customer master key (CMK). </p> <p>If you specify a predefined AWS alias (an AWS alias with no key ID), KMS associates the alias with an <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">AWS managed CMK</a> and returns its <code>KeyId</code> and <code>Arn</code> in the response.</p> <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>"alias/"</code>. To specify a CMK in a different AWS account, you must use the key ARN or alias ARN.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>'
+      GrantTokens:
+        $ref: '#/definitions/GrantTokenList'
+        description: '<p>A list of grant tokens.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token">Grant Tokens</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
   DisableKeyRequest:
     type: object
     required:
@@ -2104,12 +2130,6 @@ definitions:
       KeyId:
         $ref: '#/definitions/KeyIdType'
         description: '<p>A unique identifier for the customer master key (CMK).</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
-  DisabledException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because the specified CMK is not enabled.
   EnableKeyRequest:
     type: object
     required:
@@ -2130,6 +2150,18 @@ definitions:
       KeyId:
         $ref: '#/definitions/KeyIdType'
         description: '<p>A unique identifier for the customer master key (CMK).</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
+  EncryptResponse:
+    type: object
+    example:
+      CiphertextBlob: <binary data>
+      KeyId: 'arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+    properties:
+      CiphertextBlob:
+        $ref: '#/definitions/CiphertextType'
+        description: 'The encrypted plaintext. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.'
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: The ID of the key used during encryption.
   EncryptRequest:
     type: object
     required:
@@ -2151,44 +2183,28 @@ definitions:
       GrantTokens:
         $ref: '#/definitions/GrantTokenList'
         description: '<p>A list of grant tokens.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token">Grant Tokens</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
-  EncryptResponse:
-    type: object
-    example:
-      CiphertextBlob: <binary data>
-      KeyId: 'arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
-    properties:
-      CiphertextBlob:
-        $ref: '#/definitions/CiphertextType'
-        description: 'The encrypted plaintext. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.'
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: The ID of the key used during encryption.
-  EncryptionContextKey:
-    type: string
-  EncryptionContextType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/EncryptionContextKey'
-        value:
-          $ref: '#/definitions/EncryptionContextValue'
-  EncryptionContextValue:
-    type: string
-  ErrorMessageType:
-    type: string
-  ExpirationModelType:
-    type: string
-    enum:
-      - KEY_MATERIAL_EXPIRES
-      - KEY_MATERIAL_DOES_NOT_EXPIRE
-  ExpiredImportTokenException:
+  InvalidKeyUsageException:
     type: object
     properties:
       message:
         $ref: '#/definitions/ErrorMessageType'
-    description: 'The request was rejected because the provided import token is expired. Use <a>GetParametersForImport</a> to get a new import token and public key, use the new public key to encrypt the key material, and then try the request again.'
+    description: The request was rejected because the specified <code>KeySpec</code> value is not valid.
+  GenerateDataKeyResponse:
+    type: object
+    example:
+      CiphertextBlob: <binary data>
+      KeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+      Plaintext: <binary data>
+    properties:
+      CiphertextBlob:
+        $ref: '#/definitions/CiphertextType'
+        description: 'The encrypted data encryption key. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.'
+      Plaintext:
+        $ref: '#/definitions/PlaintextType'
+        description: 'The data encryption key. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded. Use this data key for local encryption and decryption, then remove it from memory as soon as possible.'
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: The identifier of the CMK under which the data encryption key was generated and encrypted.
   GenerateDataKeyRequest:
     type: object
     required:
@@ -2212,19 +2228,15 @@ definitions:
       GrantTokens:
         $ref: '#/definitions/GrantTokenList'
         description: '<p>A list of grant tokens.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token">Grant Tokens</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
-  GenerateDataKeyResponse:
+  GenerateDataKeyWithoutPlaintextResponse:
     type: object
     example:
       CiphertextBlob: <binary data>
       KeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
-      Plaintext: <binary data>
     properties:
       CiphertextBlob:
         $ref: '#/definitions/CiphertextType'
         description: 'The encrypted data encryption key. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.'
-      Plaintext:
-        $ref: '#/definitions/PlaintextType'
-        description: 'The data encryption key. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded. Use this data key for local encryption and decryption, then remove it from memory as soon as possible.'
       KeyId:
         $ref: '#/definitions/KeyIdType'
         description: The identifier of the CMK under which the data encryption key was generated and encrypted.
@@ -2251,26 +2263,6 @@ definitions:
       GrantTokens:
         $ref: '#/definitions/GrantTokenList'
         description: '<p>A list of grant tokens.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token">Grant Tokens</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
-  GenerateDataKeyWithoutPlaintextResponse:
-    type: object
-    example:
-      CiphertextBlob: <binary data>
-      KeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
-    properties:
-      CiphertextBlob:
-        $ref: '#/definitions/CiphertextType'
-        description: 'The encrypted data encryption key. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.'
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: The identifier of the CMK under which the data encryption key was generated and encrypted.
-  GenerateRandomRequest:
-    type: object
-    example:
-      NumberOfBytes: 32
-    properties:
-      NumberOfBytes:
-        $ref: '#/definitions/NumberOfBytesType'
-        description: The length of the byte string.
   GenerateRandomResponse:
     type: object
     example:
@@ -2279,21 +2271,14 @@ definitions:
       Plaintext:
         $ref: '#/definitions/PlaintextType'
         description: 'The random byte string. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.'
-  GetKeyPolicyRequest:
+  GenerateRandomRequest:
     type: object
-    required:
-      - KeyId
-      - PolicyName
     example:
-      KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
-      PolicyName: default
+      NumberOfBytes: 32
     properties:
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: '<p>A unique identifier for the customer master key (CMK).</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
-      PolicyName:
-        $ref: '#/definitions/PolicyNameType'
-        description: 'Specifies the name of the key policy. The only valid name is <code>default</code>. To get the names of key policies, use <a>ListKeyPolicies</a>.'
+      NumberOfBytes:
+        $ref: '#/definitions/NumberOfBytesType'
+        description: The length of the byte string.
   GetKeyPolicyResponse:
     type: object
     example:
@@ -2315,6 +2300,29 @@ definitions:
       Policy:
         $ref: '#/definitions/PolicyType'
         description: A key policy document in JSON format.
+  GetKeyPolicyRequest:
+    type: object
+    required:
+      - KeyId
+      - PolicyName
+    example:
+      KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      PolicyName: default
+    properties:
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: '<p>A unique identifier for the customer master key (CMK).</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
+      PolicyName:
+        $ref: '#/definitions/PolicyNameType'
+        description: 'Specifies the name of the key policy. The only valid name is <code>default</code>. To get the names of key policies, use <a>ListKeyPolicies</a>.'
+  GetKeyRotationStatusResponse:
+    type: object
+    example:
+      KeyRotationEnabled: true
+    properties:
+      KeyRotationEnabled:
+        $ref: '#/definitions/BooleanType'
+        description: A Boolean value that specifies whether key rotation is enabled.
   GetKeyRotationStatusRequest:
     type: object
     required:
@@ -2325,34 +2333,6 @@ definitions:
       KeyId:
         $ref: '#/definitions/KeyIdType'
         description: '<p>A unique identifier for the customer master key (CMK).</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
-  GetKeyRotationStatusResponse:
-    type: object
-    example:
-      KeyRotationEnabled: true
-    properties:
-      KeyRotationEnabled:
-        $ref: '#/definitions/BooleanType'
-        description: A Boolean value that specifies whether key rotation is enabled.
-  GetParametersForImportRequest:
-    type: object
-    required:
-      - KeyId
-      - WrappingAlgorithm
-      - WrappingKeySpec
-    example:
-      KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
-      WrappingAlgorithm: RSAES_OAEP_SHA_1
-      WrappingKeySpec: RSA_2048
-    properties:
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: '<p>The identifier of the CMK into which you will import key material. The CMK''s <code>Origin</code> must be <code>EXTERNAL</code>.</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
-      WrappingAlgorithm:
-        $ref: '#/definitions/AlgorithmSpec'
-        description: 'The algorithm you use to encrypt the key material before importing it with <a>ImportKeyMaterial</a>. For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html">Encrypt the Key Material</a> in the <i>AWS Key Management Service Developer Guide</i>.'
-      WrappingKeySpec:
-        $ref: '#/definitions/WrappingKeySpec'
-        description: The type of wrapping key (public key) to return in the response. Only 2048-bit RSA public keys are supported.
   GetParametersForImportResponse:
     type: object
     example:
@@ -2373,86 +2353,29 @@ definitions:
       ParametersValidTo:
         $ref: '#/definitions/DateType'
         description: 'The time at which the import token and public key are no longer valid. After this time, you cannot use them to make an <a>ImportKeyMaterial</a> request and you must send another <code>GetParametersForImport</code> request to get new ones.'
-  GrantConstraints:
+  GetParametersForImportRequest:
     type: object
-    properties:
-      EncryptionContextSubset:
-        $ref: '#/definitions/EncryptionContextType'
-        description: 'A list of key-value pairs, all of which must be present in the encryption context of certain subsequent operations that the grant allows. When certain subsequent operations allowed by the grant include encryption context that matches this list or is a superset of this list, the grant allows the operation. Otherwise, the grant does not allow the operation.'
-      EncryptionContextEquals:
-        $ref: '#/definitions/EncryptionContextType'
-        description: 'A list of key-value pairs that must be present in the encryption context of certain subsequent operations that the grant allows. When certain subsequent operations allowed by the grant include encryption context that matches this list, the grant allows the operation. Otherwise, the grant does not allow the operation.'
-    description: '<p>A structure that you can use to allow certain operations in the grant only when the preferred encryption context is present. For more information about encryption context, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html">Encryption Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p> <p>Grant constraints apply only to operations that accept encryption context as input. For example, the <code> <a>DescribeKey</a> </code> operation does not accept encryption context as input. A grant that allows the <code>DescribeKey</code> operation does so regardless of the grant constraints. In contrast, the <code> <a>Encrypt</a> </code> operation accepts encryption context as input. A grant that allows the <code>Encrypt</code> operation does so only when the encryption context of the <code>Encrypt</code> operation satisfies the grant constraints.</p>'
-  GrantIdType:
-    type: string
-    minLength: 1
-    maxLength: 128
-  GrantList:
-    type: array
-    items:
-      $ref: '#/definitions/GrantListEntry'
-  GrantListEntry:
-    type: object
+    required:
+      - KeyId
+      - WrappingAlgorithm
+      - WrappingKeySpec
+    example:
+      KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      WrappingAlgorithm: RSAES_OAEP_SHA_1
+      WrappingKeySpec: RSA_2048
     properties:
       KeyId:
         $ref: '#/definitions/KeyIdType'
-        description: The unique identifier for the customer master key (CMK) to which the grant applies.
-      GrantId:
-        $ref: '#/definitions/GrantIdType'
-        description: The unique identifier for the grant.
-      Name:
-        $ref: '#/definitions/GrantNameType'
-        description: 'The friendly name that identifies the grant. If a name was provided in the <a>CreateGrant</a> request, that name is returned. Otherwise this value is null.'
-      CreationDate:
-        $ref: '#/definitions/DateType'
-        description: The date and time when the grant was created.
-      GranteePrincipal:
-        $ref: '#/definitions/PrincipalIdType'
-        description: The principal that receives the grant's permissions.
-      RetiringPrincipal:
-        $ref: '#/definitions/PrincipalIdType'
-        description: The principal that can retire the grant.
-      IssuingAccount:
-        $ref: '#/definitions/PrincipalIdType'
-        description: The AWS account under which the grant was issued.
-      Operations:
-        $ref: '#/definitions/GrantOperationList'
-        description: The list of operations permitted by the grant.
-      Constraints:
-        $ref: '#/definitions/GrantConstraints'
-        description: A list of key-value pairs that must be present in the encryption context of certain subsequent operations that the grant allows.
-    description: Contains information about an entry in a list of grants.
-  GrantNameType:
-    type: string
-    pattern: '^[a-zA-Z0-9:/_-]+$'
-    minLength: 1
-    maxLength: 256
-  GrantOperation:
-    type: string
-    enum:
-      - Decrypt
-      - Encrypt
-      - GenerateDataKey
-      - GenerateDataKeyWithoutPlaintext
-      - ReEncryptFrom
-      - ReEncryptTo
-      - CreateGrant
-      - RetireGrant
-      - DescribeKey
-  GrantOperationList:
-    type: array
-    items:
-      $ref: '#/definitions/GrantOperation'
-  GrantTokenList:
-    type: array
-    items:
-      $ref: '#/definitions/GrantTokenType'
-    minItems: 0
-    maxItems: 10
-  GrantTokenType:
-    type: string
-    minLength: 1
-    maxLength: 8192
+        description: '<p>The identifier of the CMK into which you will import key material. The CMK''s <code>Origin</code> must be <code>EXTERNAL</code>.</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
+      WrappingAlgorithm:
+        $ref: '#/definitions/AlgorithmSpec'
+        description: 'The algorithm you use to encrypt the key material before importing it with <a>ImportKeyMaterial</a>. For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html">Encrypt the Key Material</a> in the <i>AWS Key Management Service Developer Guide</i>.'
+      WrappingKeySpec:
+        $ref: '#/definitions/WrappingKeySpec'
+        description: The type of wrapping key (public key) to return in the response. Only 2048-bit RSA public keys are supported.
+  ImportKeyMaterialResponse:
+    type: object
+    properties: {}
   ImportKeyMaterialRequest:
     type: object
     required:
@@ -2480,182 +2403,24 @@ definitions:
       ExpirationModel:
         $ref: '#/definitions/ExpirationModelType'
         description: 'Specifies whether the key material expires. The default is <code>KEY_MATERIAL_EXPIRES</code>, in which case you must include the <code>ValidTo</code> parameter. When this parameter is set to <code>KEY_MATERIAL_DOES_NOT_EXPIRE</code>, you must omit the <code>ValidTo</code> parameter.'
-  ImportKeyMaterialResponse:
-    type: object
-    properties: {}
   IncorrectKeyMaterialException:
     type: object
     properties:
       message:
         $ref: '#/definitions/ErrorMessageType'
     description: The request was rejected because the provided key material is invalid or is not the same key material that was previously imported into this customer master key (CMK).
-  InvalidAliasNameException:
+  ExpiredImportTokenException:
     type: object
     properties:
       message:
         $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because the specified alias name is not valid.
-  InvalidArnException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because a specified ARN was not valid.
-  InvalidCiphertextException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: 'The request was rejected because the specified ciphertext, or additional authenticated data incorporated into the ciphertext, such as the encryption context, is corrupted, missing, or otherwise invalid.'
-  InvalidGrantIdException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because the specified <code>GrantId</code> is not valid.
-  InvalidGrantTokenException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because the specified grant token is not valid.
+    description: 'The request was rejected because the provided import token is expired. Use <a>GetParametersForImport</a> to get a new import token and public key, use the new public key to encrypt the key material, and then try the request again.'
   InvalidImportTokenException:
     type: object
     properties:
       message:
         $ref: '#/definitions/ErrorMessageType'
     description: The request was rejected because the provided import token is invalid or is associated with a different customer master key (CMK).
-  InvalidKeyUsageException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because the specified <code>KeySpec</code> value is not valid.
-  InvalidMarkerException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because the marker that specifies where pagination should next begin is not valid.
-  KMSInternalException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because an internal exception occurred. The request can be retried.
-  KMSInvalidStateException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: '<p>The request was rejected because the state of the specified resource is not valid for this request.</p> <p>For more information about how key state affects the use of a CMK, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">How Key State Affects Use of a Customer Master Key</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
-  KeyIdType:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  KeyList:
-    type: array
-    items:
-      $ref: '#/definitions/KeyListEntry'
-  KeyListEntry:
-    type: object
-    properties:
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: Unique identifier of the key.
-      KeyArn:
-        $ref: '#/definitions/ArnType'
-        description: ARN of the key.
-    description: Contains information about each entry in the key list.
-  KeyManagerType:
-    type: string
-    enum:
-      - AWS
-      - CUSTOMER
-  KeyMetadata:
-    type: object
-    required:
-      - KeyId
-    properties:
-      AWSAccountId:
-        $ref: '#/definitions/AWSAccountIdType'
-        description: The twelve-digit account ID of the AWS account that owns the CMK.
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: The globally unique identifier for the CMK.
-      Arn:
-        $ref: '#/definitions/ArnType'
-        description: 'The Amazon Resource Name (ARN) of the CMK. For examples, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms">AWS Key Management Service (AWS KMS)</a> in the Example ARNs section of the <i>AWS General Reference</i>.'
-      CreationDate:
-        $ref: '#/definitions/DateType'
-        description: The date and time when the CMK was created.
-      Enabled:
-        $ref: '#/definitions/BooleanType'
-        description: 'Specifies whether the CMK is enabled. When <code>KeyState</code> is <code>Enabled</code> this value is true, otherwise it is false.'
-      Description:
-        $ref: '#/definitions/DescriptionType'
-        description: The description of the CMK.
-      KeyUsage:
-        $ref: '#/definitions/KeyUsageType'
-        description: 'The cryptographic operations for which you can use the CMK. Currently the only allowed value is <code>ENCRYPT_DECRYPT</code>, which means you can use the CMK for the <a>Encrypt</a> and <a>Decrypt</a> operations.'
-      KeyState:
-        $ref: '#/definitions/KeyState'
-        description: '<p>The state of the CMK.</p> <p>For more information about how key state affects the use of a CMK, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">How Key State Affects the Use of a Customer Master Key</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
-      DeletionDate:
-        $ref: '#/definitions/DateType'
-        description: 'The date and time after which AWS KMS deletes the CMK. This value is present only when <code>KeyState</code> is <code>PendingDeletion</code>, otherwise this value is omitted.'
-      ValidTo:
-        $ref: '#/definitions/DateType'
-        description: 'The time at which the imported key material expires. When the key material expires, AWS KMS deletes the key material and the CMK becomes unusable. This value is present only for CMKs whose <code>Origin</code> is <code>EXTERNAL</code> and whose <code>ExpirationModel</code> is <code>KEY_MATERIAL_EXPIRES</code>, otherwise this value is omitted.'
-      Origin:
-        $ref: '#/definitions/OriginType'
-        description: 'The source of the CMK''s key material. When this value is <code>AWS_KMS</code>, AWS KMS created the key material. When this value is <code>EXTERNAL</code>, the key material was imported from your existing key management infrastructure or the CMK lacks key material.'
-      ExpirationModel:
-        $ref: '#/definitions/ExpirationModelType'
-        description: 'Specifies whether the CMK''s key material expires. This value is present only when <code>Origin</code> is <code>EXTERNAL</code>, otherwise this value is omitted.'
-      KeyManager:
-        $ref: '#/definitions/KeyManagerType'
-        description: 'The CMK''s manager. CMKs are either customer managed or AWS managed. For more information about the difference, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">Customer Master Keys</a> in the <i>AWS Key Management Service Developer Guide</i>.'
-    description: <p>Contains metadata about a customer master key (CMK).</p> <p>This data type is used as a response element for the <a>CreateKey</a> and <a>DescribeKey</a> operations.</p>
-  KeyState:
-    type: string
-    enum:
-      - Enabled
-      - Disabled
-      - PendingDeletion
-      - PendingImport
-  KeyUnavailableException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because the specified CMK was not available. The request can be retried.
-  KeyUsageType:
-    type: string
-    enum:
-      - ENCRYPT_DECRYPT
-  LimitExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: 'The request was rejected because a limit was exceeded. For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/limits.html">Limits</a> in the <i>AWS Key Management Service Developer Guide</i>.'
-  LimitType:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  ListAliasesRequest:
-    type: object
-    properties:
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: '<p>Lists only aliases that refer to the specified CMK. The value of this parameter can be the ID or Amazon Resource Name (ARN) of a CMK in the caller''s account and region. You cannot use an alias name or alias ARN in this value.</p> <p>This parameter is optional. If you omit it, <code>ListAliases</code> returns all aliases in the account and region.</p>'
-      Limit:
-        $ref: '#/definitions/LimitType'
-        description: '<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>'
-      Marker:
-        $ref: '#/definitions/MarkerType'
-        description: Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the truncated response you just received.
   ListAliasesResponse:
     type: object
     example:
@@ -2695,22 +2460,24 @@ definitions:
       Truncated:
         $ref: '#/definitions/BooleanType'
         description: 'A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To get more items, pass the value of the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a subsequent request.'
-  ListGrantsRequest:
+  ListAliasesRequest:
     type: object
-    required:
-      - KeyId
-    example:
-      KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
     properties:
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: '<p>Lists only aliases that refer to the specified CMK. The value of this parameter can be the ID or Amazon Resource Name (ARN) of a CMK in the caller''s account and region. You cannot use an alias name or alias ARN in this value.</p> <p>This parameter is optional. If you omit it, <code>ListAliases</code> returns all aliases in the account and region.</p>'
       Limit:
         $ref: '#/definitions/LimitType'
         description: '<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>'
       Marker:
         $ref: '#/definitions/MarkerType'
         description: Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the truncated response you just received.
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: '<p>A unique identifier for the customer master key (CMK).</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
+  InvalidMarkerException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The request was rejected because the marker that specifies where pagination should next begin is not valid.
   ListGrantsResponse:
     type: object
     example:
@@ -2735,22 +2502,22 @@ definitions:
       Truncated:
         $ref: '#/definitions/BooleanType'
         description: 'A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To get more items, pass the value of the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a subsequent request.'
-  ListKeyPoliciesRequest:
+  ListGrantsRequest:
     type: object
     required:
       - KeyId
     example:
       KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
     properties:
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: '<p>A unique identifier for the customer master key (CMK).</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
       Limit:
         $ref: '#/definitions/LimitType'
-        description: '<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 1000, inclusive. If you do not include a value, it defaults to 100.</p> <p>Currently only 1 policy can be attached to a key.</p>'
+        description: '<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>'
       Marker:
         $ref: '#/definitions/MarkerType'
         description: Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the truncated response you just received.
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: '<p>A unique identifier for the customer master key (CMK).</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
   ListKeyPoliciesResponse:
     type: object
     example:
@@ -2767,12 +2534,19 @@ definitions:
       Truncated:
         $ref: '#/definitions/BooleanType'
         description: 'A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To get more items, pass the value of the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a subsequent request.'
-  ListKeysRequest:
+  ListKeyPoliciesRequest:
     type: object
+    required:
+      - KeyId
+    example:
+      KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
     properties:
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: '<p>A unique identifier for the customer master key (CMK).</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
       Limit:
         $ref: '#/definitions/LimitType'
-        description: '<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 1000, inclusive. If you do not include a value, it defaults to 100.</p>'
+        description: '<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 1000, inclusive. If you do not include a value, it defaults to 100.</p> <p>Currently only 1 policy can be attached to a key.</p>'
       Marker:
         $ref: '#/definitions/MarkerType'
         description: Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the truncated response you just received.
@@ -2805,22 +2579,15 @@ definitions:
       Truncated:
         $ref: '#/definitions/BooleanType'
         description: 'A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To get more items, pass the value of the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a subsequent request.'
-  ListResourceTagsRequest:
+  ListKeysRequest:
     type: object
-    required:
-      - KeyId
-    example:
-      KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
     properties:
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: '<p>A unique identifier for the customer master key (CMK).</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
       Limit:
         $ref: '#/definitions/LimitType'
-        description: '<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 50, inclusive. If you do not include a value, it defaults to 50.</p>'
+        description: '<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 1000, inclusive. If you do not include a value, it defaults to 100.</p>'
       Marker:
         $ref: '#/definitions/MarkerType'
-        description: <p>Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the truncated response you just received.</p> <p>Do not attempt to construct this value. Use only the value of <code>NextMarker</code> from the truncated response you just received.</p>
+        description: Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the truncated response you just received.
   ListResourceTagsResponse:
     type: object
     example:
@@ -2842,6 +2609,22 @@ definitions:
       Truncated:
         $ref: '#/definitions/BooleanType'
         description: 'A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To get more items, pass the value of the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a subsequent request.'
+  ListResourceTagsRequest:
+    type: object
+    required:
+      - KeyId
+    example:
+      KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+    properties:
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: '<p>A unique identifier for the customer master key (CMK).</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
+      Limit:
+        $ref: '#/definitions/LimitType'
+        description: '<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 50, inclusive. If you do not include a value, it defaults to 50.</p>'
+      Marker:
+        $ref: '#/definitions/MarkerType'
+        description: <p>Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the truncated response you just received.</p> <p>Do not attempt to construct this value. Use only the value of <code>NextMarker</code> from the truncated response you just received.</p>
   ListRetirableGrantsRequest:
     type: object
     required:
@@ -2858,59 +2641,6 @@ definitions:
       RetiringPrincipal:
         $ref: '#/definitions/PrincipalIdType'
         description: '<p>The retiring principal for which to list grants.</p> <p>To specify the retiring principal, use the <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of an AWS principal. Valid AWS principals include AWS accounts (root), IAM users, federated users, and assumed role users. For examples of the ARN syntax for specifying a principal, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam">AWS Identity and Access Management (IAM)</a> in the Example ARNs section of the <i>Amazon Web Services General Reference</i>.</p>'
-  MalformedPolicyDocumentException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because the specified policy is not syntactically or semantically correct.
-  MarkerType:
-    type: string
-    pattern: '[\u0020-\u00FF]*'
-    minLength: 1
-    maxLength: 1024
-  NotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because the specified entity or resource could not be found.
-  NumberOfBytesType:
-    type: integer
-    minimum: 1
-    maximum: 1024
-  OriginType:
-    type: string
-    enum:
-      - AWS_KMS
-      - EXTERNAL
-  PendingWindowInDaysType:
-    type: integer
-    minimum: 1
-    maximum: 365
-  PlaintextType:
-    type: string
-    minLength: 1
-    maxLength: 4096
-    format: password
-  PolicyNameList:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyNameType'
-  PolicyNameType:
-    type: string
-    pattern: '[\w]+'
-    minLength: 1
-    maxLength: 128
-  PolicyType:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 131072
-  PrincipalIdType:
-    type: string
-    minLength: 1
-    maxLength: 256
   PutKeyPolicyRequest:
     type: object
     required:
@@ -3007,6 +2737,22 @@ definitions:
       BypassPolicyLockoutSafetyCheck:
         $ref: '#/definitions/BooleanType'
         description: '<p>A flag to indicate whether to bypass the key policy lockout safety check.</p> <important> <p>Setting this value to true increases the risk that the CMK becomes unmanageable. Do not set this value to true indiscriminately.</p> <p>For more information, refer to the scenario in the <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam">Default Key Policy</a> section in the <i>AWS Key Management Service Developer Guide</i>.</p> </important> <p>Use this parameter only when you intend to prevent the principal that is making the request from making a subsequent <code>PutKeyPolicy</code> request on the CMK.</p> <p>The default value is false.</p>'
+  ReEncryptResponse:
+    type: object
+    example:
+      CiphertextBlob: <binary data>
+      KeyId: 'arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321'
+      SourceKeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+    properties:
+      CiphertextBlob:
+        $ref: '#/definitions/CiphertextType'
+        description: 'The reencrypted data. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.'
+      SourceKeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: Unique identifier of the CMK used to originally encrypt the data.
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: Unique identifier of the CMK used to reencrypt the data.
   ReEncryptRequest:
     type: object
     required:
@@ -3031,22 +2777,6 @@ definitions:
       GrantTokens:
         $ref: '#/definitions/GrantTokenList'
         description: '<p>A list of grant tokens.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token">Grant Tokens</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
-  ReEncryptResponse:
-    type: object
-    example:
-      CiphertextBlob: <binary data>
-      KeyId: 'arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321'
-      SourceKeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
-    properties:
-      CiphertextBlob:
-        $ref: '#/definitions/CiphertextType'
-        description: 'The reencrypted data. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.'
-      SourceKeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: Unique identifier of the CMK used to originally encrypt the data.
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: Unique identifier of the CMK used to reencrypt the data.
   RetireGrantRequest:
     type: object
     example:
@@ -3062,6 +2792,12 @@ definitions:
       GrantId:
         $ref: '#/definitions/GrantIdType'
         description: <p>Unique identifier of the grant to retire. The grant ID is returned in the response to a <code>CreateGrant</code> operation.</p> <ul> <li> <p>Grant ID Example - 0123456789012345678901234567890123456789012345678901234567890123</p> </li> </ul>
+  InvalidGrantIdException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The request was rejected because the specified <code>GrantId</code> is not valid.
   RevokeGrantRequest:
     type: object
     required:
@@ -3077,6 +2813,18 @@ definitions:
       GrantId:
         $ref: '#/definitions/GrantIdType'
         description: Identifier of the grant to be revoked.
+  ScheduleKeyDeletionResponse:
+    type: object
+    example:
+      DeletionDate: '2016-12-17T16:00:00-08:00'
+      KeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+    properties:
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: The unique identifier of the customer master key (CMK) for which deletion is scheduled.
+      DeletionDate:
+        $ref: '#/definitions/DateType'
+        description: The date and time after which AWS KMS deletes the customer master key (CMK).
   ScheduleKeyDeletionRequest:
     type: object
     required:
@@ -3091,49 +2839,6 @@ definitions:
       PendingWindowInDays:
         $ref: '#/definitions/PendingWindowInDaysType'
         description: '<p>The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the customer master key (CMK).</p> <p>This value is optional. If you include a value, it must be between 7 and 30, inclusive. If you do not include a value, it defaults to 30.</p>'
-  ScheduleKeyDeletionResponse:
-    type: object
-    example:
-      DeletionDate: '2016-12-17T16:00:00-08:00'
-      KeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
-    properties:
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: The unique identifier of the customer master key (CMK) for which deletion is scheduled.
-      DeletionDate:
-        $ref: '#/definitions/DateType'
-        description: The date and time after which AWS KMS deletes the customer master key (CMK).
-  Tag:
-    type: object
-    required:
-      - TagKey
-      - TagValue
-    properties:
-      TagKey:
-        $ref: '#/definitions/TagKeyType'
-        description: The key of the tag.
-      TagValue:
-        $ref: '#/definitions/TagValueType'
-        description: The value of the tag.
-    description: '<p>A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty (null) strings.</p> <p>For information about the rules that apply to tag keys and tag values, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html">User-Defined Tag Restrictions</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p>'
-  TagException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because one or more tags are not valid.
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKeyType'
-  TagKeyType:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
   TagResourceRequest:
     type: object
     required:
@@ -3151,16 +2856,6 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: One or more tags. Each tag consists of a tag key and a tag value.
-  TagValueType:
-    type: string
-    minLength: 0
-    maxLength: 256
-  UnsupportedOperationException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessageType'
-    description: The request was rejected because a specified parameter is not supported or a specified resource is not valid for this operation.
   UntagResourceRequest:
     type: object
     required:
@@ -3208,7 +2903,312 @@ definitions:
       Description:
         $ref: '#/definitions/DescriptionType'
         description: New description for the CMK.
+  AWSAccountIdType:
+    type: string
+  AlgorithmSpec:
+    type: string
+    enum:
+      - RSAES_PKCS1_V1_5
+      - RSAES_OAEP_SHA_1
+      - RSAES_OAEP_SHA_256
+  AliasListEntry:
+    type: object
+    properties:
+      AliasName:
+        $ref: '#/definitions/AliasNameType'
+        description: String that contains the alias.
+      AliasArn:
+        $ref: '#/definitions/ArnType'
+        description: String that contains the key ARN.
+      TargetKeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: String that contains the key identifier referred to by the alias.
+    description: Contains information about an alias.
+  AliasList:
+    type: array
+    items:
+      $ref: '#/definitions/AliasListEntry'
+  AliasNameType:
+    type: string
+    pattern: '^[a-zA-Z0-9:/_-]+$'
+    minLength: 1
+    maxLength: 256
+  ArnType:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  KeyIdType:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  ErrorMessageType:
+    type: string
+  BooleanType:
+    type: boolean
+  CiphertextType:
+    type: string
+    minLength: 1
+    maxLength: 6144
+  PrincipalIdType:
+    type: string
+    minLength: 1
+    maxLength: 256
+  GrantOperationList:
+    type: array
+    items:
+      $ref: '#/definitions/GrantOperation'
+  GrantConstraints:
+    type: object
+    properties:
+      EncryptionContextSubset:
+        $ref: '#/definitions/EncryptionContextType'
+        description: 'A list of key-value pairs, all of which must be present in the encryption context of certain subsequent operations that the grant allows. When certain subsequent operations allowed by the grant include encryption context that matches this list or is a superset of this list, the grant allows the operation. Otherwise, the grant does not allow the operation.'
+      EncryptionContextEquals:
+        $ref: '#/definitions/EncryptionContextType'
+        description: 'A list of key-value pairs that must be present in the encryption context of certain subsequent operations that the grant allows. When certain subsequent operations allowed by the grant include encryption context that matches this list, the grant allows the operation. Otherwise, the grant does not allow the operation.'
+    description: '<p>A structure that you can use to allow certain operations in the grant only when the preferred encryption context is present. For more information about encryption context, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html">Encryption Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p> <p>Grant constraints apply only to operations that accept encryption context as input. For example, the <code> <a>DescribeKey</a> </code> operation does not accept encryption context as input. A grant that allows the <code>DescribeKey</code> operation does so regardless of the grant constraints. In contrast, the <code> <a>Encrypt</a> </code> operation accepts encryption context as input. A grant that allows the <code>Encrypt</code> operation does so only when the encryption context of the <code>Encrypt</code> operation satisfies the grant constraints.</p>'
+  GrantTokenList:
+    type: array
+    items:
+      $ref: '#/definitions/GrantTokenType'
+    minItems: 0
+    maxItems: 10
+  GrantNameType:
+    type: string
+    pattern: '^[a-zA-Z0-9:/_-]+$'
+    minLength: 1
+    maxLength: 256
+  GrantTokenType:
+    type: string
+    minLength: 1
+    maxLength: 8192
+  GrantIdType:
+    type: string
+    minLength: 1
+    maxLength: 128
+  PolicyType:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 131072
+  DescriptionType:
+    type: string
+    minLength: 0
+    maxLength: 8192
+  KeyUsageType:
+    type: string
+    enum:
+      - ENCRYPT_DECRYPT
+  OriginType:
+    type: string
+    enum:
+      - AWS_KMS
+      - EXTERNAL
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  KeyMetadata:
+    type: object
+    required:
+      - KeyId
+    properties:
+      AWSAccountId:
+        $ref: '#/definitions/AWSAccountIdType'
+        description: The twelve-digit account ID of the AWS account that owns the CMK.
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: The globally unique identifier for the CMK.
+      Arn:
+        $ref: '#/definitions/ArnType'
+        description: 'The Amazon Resource Name (ARN) of the CMK. For examples, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms">AWS Key Management Service (AWS KMS)</a> in the Example ARNs section of the <i>AWS General Reference</i>.'
+      CreationDate:
+        $ref: '#/definitions/DateType'
+        description: The date and time when the CMK was created.
+      Enabled:
+        $ref: '#/definitions/BooleanType'
+        description: 'Specifies whether the CMK is enabled. When <code>KeyState</code> is <code>Enabled</code> this value is true, otherwise it is false.'
+      Description:
+        $ref: '#/definitions/DescriptionType'
+        description: The description of the CMK.
+      KeyUsage:
+        $ref: '#/definitions/KeyUsageType'
+        description: 'The cryptographic operations for which you can use the CMK. Currently the only allowed value is <code>ENCRYPT_DECRYPT</code>, which means you can use the CMK for the <a>Encrypt</a> and <a>Decrypt</a> operations.'
+      KeyState:
+        $ref: '#/definitions/KeyState'
+        description: '<p>The state of the CMK.</p> <p>For more information about how key state affects the use of a CMK, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">How Key State Affects the Use of a Customer Master Key</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+      DeletionDate:
+        $ref: '#/definitions/DateType'
+        description: 'The date and time after which AWS KMS deletes the CMK. This value is present only when <code>KeyState</code> is <code>PendingDeletion</code>, otherwise this value is omitted.'
+      ValidTo:
+        $ref: '#/definitions/DateType'
+        description: 'The time at which the imported key material expires. When the key material expires, AWS KMS deletes the key material and the CMK becomes unusable. This value is present only for CMKs whose <code>Origin</code> is <code>EXTERNAL</code> and whose <code>ExpirationModel</code> is <code>KEY_MATERIAL_EXPIRES</code>, otherwise this value is omitted.'
+      Origin:
+        $ref: '#/definitions/OriginType'
+        description: 'The source of the CMK''s key material. When this value is <code>AWS_KMS</code>, AWS KMS created the key material. When this value is <code>EXTERNAL</code>, the key material was imported from your existing key management infrastructure or the CMK lacks key material.'
+      ExpirationModel:
+        $ref: '#/definitions/ExpirationModelType'
+        description: 'Specifies whether the CMK''s key material expires. This value is present only when <code>Origin</code> is <code>EXTERNAL</code>, otherwise this value is omitted.'
+      KeyManager:
+        $ref: '#/definitions/KeyManagerType'
+        description: 'The CMK''s manager. CMKs are either customer managed or AWS managed. For more information about the difference, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">Customer Master Keys</a> in the <i>AWS Key Management Service Developer Guide</i>.'
+    description: <p>Contains metadata about a customer master key (CMK).</p> <p>This data type is used as a response element for the <a>CreateKey</a> and <a>DescribeKey</a> operations.</p>
+  DataKeySpec:
+    type: string
+    enum:
+      - AES_256
+      - AES_128
+  DateType:
+    type: string
+    format: date-time
+  EncryptionContextType:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/EncryptionContextKey'
+        value:
+          $ref: '#/definitions/EncryptionContextValue'
+  PlaintextType:
+    type: string
+    minLength: 1
+    maxLength: 4096
+    format: password
+  EncryptionContextKey:
+    type: string
+  EncryptionContextValue:
+    type: string
+  ExpirationModelType:
+    type: string
+    enum:
+      - KEY_MATERIAL_EXPIRES
+      - KEY_MATERIAL_DOES_NOT_EXPIRE
+  NumberOfBytesType:
+    type: integer
+    minimum: 1
+    maximum: 1024
+  PolicyNameType:
+    type: string
+    pattern: '[\w]+'
+    minLength: 1
+    maxLength: 128
   WrappingKeySpec:
     type: string
     enum:
       - RSA_2048
+  GrantListEntry:
+    type: object
+    properties:
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: The unique identifier for the customer master key (CMK) to which the grant applies.
+      GrantId:
+        $ref: '#/definitions/GrantIdType'
+        description: The unique identifier for the grant.
+      Name:
+        $ref: '#/definitions/GrantNameType'
+        description: 'The friendly name that identifies the grant. If a name was provided in the <a>CreateGrant</a> request, that name is returned. Otherwise this value is null.'
+      CreationDate:
+        $ref: '#/definitions/DateType'
+        description: The date and time when the grant was created.
+      GranteePrincipal:
+        $ref: '#/definitions/PrincipalIdType'
+        description: The principal that receives the grant's permissions.
+      RetiringPrincipal:
+        $ref: '#/definitions/PrincipalIdType'
+        description: The principal that can retire the grant.
+      IssuingAccount:
+        $ref: '#/definitions/PrincipalIdType'
+        description: The AWS account under which the grant was issued.
+      Operations:
+        $ref: '#/definitions/GrantOperationList'
+        description: The list of operations permitted by the grant.
+      Constraints:
+        $ref: '#/definitions/GrantConstraints'
+        description: A list of key-value pairs that must be present in the encryption context of certain subsequent operations that the grant allows.
+    description: Contains information about an entry in a list of grants.
+  GrantList:
+    type: array
+    items:
+      $ref: '#/definitions/GrantListEntry'
+  GrantOperation:
+    type: string
+    enum:
+      - Decrypt
+      - Encrypt
+      - GenerateDataKey
+      - GenerateDataKeyWithoutPlaintext
+      - ReEncryptFrom
+      - ReEncryptTo
+      - CreateGrant
+      - RetireGrant
+      - DescribeKey
+  KeyListEntry:
+    type: object
+    properties:
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: Unique identifier of the key.
+      KeyArn:
+        $ref: '#/definitions/ArnType'
+        description: ARN of the key.
+    description: Contains information about each entry in the key list.
+  KeyList:
+    type: array
+    items:
+      $ref: '#/definitions/KeyListEntry'
+  KeyManagerType:
+    type: string
+    enum:
+      - AWS
+      - CUSTOMER
+  KeyState:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+      - PendingDeletion
+      - PendingImport
+  LimitType:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  MarkerType:
+    type: string
+    pattern: '[\u0020-\u00FF]*'
+    minLength: 1
+    maxLength: 1024
+  PolicyNameList:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyNameType'
+  PendingWindowInDaysType:
+    type: integer
+    minimum: 1
+    maximum: 365
+  TagKeyType:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValueType:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    required:
+      - TagKey
+      - TagValue
+    properties:
+      TagKey:
+        $ref: '#/definitions/TagKeyType'
+        description: The key of the tag.
+      TagValue:
+        $ref: '#/definitions/TagValueType'
+        description: The value of the tag.
+    description: '<p>A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty (null) strings.</p> <p>For information about the rules that apply to tag keys and tag values, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html">User-Defined Tag Restrictions</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p>'
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKeyType'

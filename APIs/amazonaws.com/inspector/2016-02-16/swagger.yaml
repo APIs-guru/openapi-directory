@@ -1741,34 +1741,16 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AccessDeniedErrorCode:
-    type: string
-    enum:
-      - ACCESS_DENIED_TO_ASSESSMENT_TARGET
-      - ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE
-      - ACCESS_DENIED_TO_ASSESSMENT_RUN
-      - ACCESS_DENIED_TO_FINDING
-      - ACCESS_DENIED_TO_RESOURCE_GROUP
-      - ACCESS_DENIED_TO_RULES_PACKAGE
-      - ACCESS_DENIED_TO_SNS_TOPIC
-      - ACCESS_DENIED_TO_IAM_ROLE
-  AccessDeniedException:
+  AddAttributesToFindingsResponse:
     type: object
     required:
-      - message
-      - errorCode
-      - canRetry
+      - failedItems
+    example:
+      failedItems: {}
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: Details of the exception error.
-      errorCode:
-        $ref: '#/definitions/AccessDeniedErrorCode'
-        description: Code that indicates the type of error that is generated.
-      canRetry:
-        $ref: '#/definitions/Bool'
-        description: You can immediately retry your request.
-    description: You do not have required permissions to access the requested resource.
+      failedItems:
+        $ref: '#/definitions/FailedItems'
+        description: Attribute details that cannot be described. An error code is provided for each failed item.
   AddAttributesToFindingsRequest:
     type: object
     required:
@@ -1787,611 +1769,93 @@ definitions:
       attributes:
         $ref: '#/definitions/UserAttributeList'
         description: The array of attributes that you want to assign to specified findings.
-  AddAttributesToFindingsResponse:
-    type: object
-    required:
-      - failedItems
-    example:
-      failedItems: {}
-    properties:
-      failedItems:
-        $ref: '#/definitions/FailedItems'
-        description: Attribute details that cannot be described. An error code is provided for each failed item.
-  AddRemoveAttributesFindingArnList:
-    type: array
-    items:
-      $ref: '#/definitions/Arn'
-    minItems: 1
-    maxItems: 10
-  AgentAlreadyRunningAssessment:
-    type: object
-    required:
-      - agentId
-      - assessmentRunArn
-    properties:
-      agentId:
-        $ref: '#/definitions/AgentId'
-        description: ID of the agent that is running on an EC2 instance that is already participating in another started assessment run.
-      assessmentRunArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the assessment run that has already been started.
-    description: Used in the exception error that is thrown if you start an assessment run for an assessment target that includes an EC2 instance that is already participating in another started assessment run.
-  AgentAlreadyRunningAssessmentList:
-    type: array
-    items:
-      $ref: '#/definitions/AgentAlreadyRunningAssessment'
-    minItems: 1
-    maxItems: 10
-  AgentFilter:
-    type: object
-    required:
-      - agentHealths
-      - agentHealthCodes
-    properties:
-      agentHealths:
-        $ref: '#/definitions/AgentHealthList'
-        description: The current health state of the agent. Values can be set to <b>HEALTHY</b> or <b>UNHEALTHY</b>.
-      agentHealthCodes:
-        $ref: '#/definitions/AgentHealthCodeList'
-        description: 'The detailed health state of the agent. Values can be set to <b>IDLE</b>, <b>RUNNING</b>, <b>SHUTDOWN</b>, <b>UNHEALTHY</b>, <b>THROTTLED</b>, and <b>UNKNOWN</b>. '
-    description: Contains information about an Amazon Inspector agent. This data type is used as a request parameter in the <a>ListAssessmentRunAgents</a> action.
-  AgentHealth:
-    type: string
-    enum:
-      - HEALTHY
-      - UNHEALTHY
-      - UNKNOWN
-  AgentHealthCode:
-    type: string
-    enum:
-      - IDLE
-      - RUNNING
-      - SHUTDOWN
-      - UNHEALTHY
-      - THROTTLED
-      - UNKNOWN
-  AgentHealthCodeList:
-    type: array
-    items:
-      $ref: '#/definitions/AgentHealthCode'
-    minItems: 0
-    maxItems: 10
-  AgentHealthList:
-    type: array
-    items:
-      $ref: '#/definitions/AgentHealth'
-    minItems: 0
-    maxItems: 10
-  AgentId:
-    type: string
-    minLength: 1
-    maxLength: 128
-  AgentIdList:
-    type: array
-    items:
-      $ref: '#/definitions/AgentId'
-    minItems: 0
-    maxItems: 500
-  AgentPreview:
-    type: object
-    required:
-      - agentId
-    properties:
-      hostname:
-        $ref: '#/definitions/Hostname'
-        description: The hostname of the EC2 instance on which the Amazon Inspector Agent is installed.
-      agentId:
-        $ref: '#/definitions/AgentId'
-        description: The ID of the EC2 instance where the agent is installed.
-      autoScalingGroup:
-        $ref: '#/definitions/AutoScalingGroup'
-        description: The Auto Scaling group for the EC2 instance where the agent is installed.
-      agentHealth:
-        $ref: '#/definitions/AgentHealth'
-        description: The health status of the Amazon Inspector Agent.
-      agentVersion:
-        $ref: '#/definitions/AgentVersion'
-        description: The version of the Amazon Inspector Agent.
-      operatingSystem:
-        $ref: '#/definitions/OperatingSystem'
-        description: The operating system running on the EC2 instance on which the Amazon Inspector Agent is installed.
-      kernelVersion:
-        $ref: '#/definitions/KernelVersion'
-        description: The kernel version of the operating system running on the EC2 instance on which the Amazon Inspector Agent is installed.
-      ipv4Address:
-        $ref: '#/definitions/Ipv4Address'
-        description: The IP address of the EC2 instance on which the Amazon Inspector Agent is installed.
-    description: Used as a response element in the <a>PreviewAgents</a> action.
-  AgentPreviewList:
-    type: array
-    items:
-      $ref: '#/definitions/AgentPreview'
-    minItems: 0
-    maxItems: 100
-  AgentVersion:
-    type: string
-    minLength: 1
-    maxLength: 128
-  AgentsAlreadyRunningAssessmentException:
+  InternalException:
     type: object
     required:
       - message
-      - agents
-      - agentsTruncated
       - canRetry
     properties:
       message:
         $ref: '#/definitions/ErrorMessage'
         description: Details of the exception error.
-      agents:
-        $ref: '#/definitions/AgentAlreadyRunningAssessmentList'
-        description: <p/>
-      agentsTruncated:
-        $ref: '#/definitions/Bool'
-        description: <p/>
       canRetry:
         $ref: '#/definitions/Bool'
         description: You can immediately retry your request.
-    description: 'You started an assessment run, but one of the instances is already participating in another assessment run.'
-  AmiId:
-    type: string
-    minLength: 0
-    maxLength: 256
-  Arn:
-    type: string
-    minLength: 1
-    maxLength: 300
-  ArnCount:
-    type: integer
-  AssessmentRulesPackageArnList:
-    type: array
-    items:
-      $ref: '#/definitions/Arn'
-    minItems: 1
-    maxItems: 50
-  AssessmentRun:
-    type: object
-    required:
-      - arn
-      - name
-      - assessmentTemplateArn
-      - state
-      - durationInSeconds
-      - rulesPackageArns
-      - userAttributesForFindings
-      - createdAt
-      - stateChangedAt
-      - dataCollected
-      - stateChanges
-      - notifications
-      - findingCounts
-    properties:
-      arn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the assessment run.
-      name:
-        $ref: '#/definitions/AssessmentRunName'
-        description: The auto-generated name for the assessment run.
-      assessmentTemplateArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the assessment template that is associated with the assessment run.
-      state:
-        $ref: '#/definitions/AssessmentRunState'
-        description: The state of the assessment run.
-      durationInSeconds:
-        $ref: '#/definitions/AssessmentRunDuration'
-        description: The duration of the assessment run.
-      rulesPackageArns:
-        $ref: '#/definitions/AssessmentRulesPackageArnList'
-        description: The rules packages selected for the assessment run.
-      userAttributesForFindings:
-        $ref: '#/definitions/UserAttributeList'
-        description: The user-defined attributes that are assigned to every generated finding.
-      createdAt:
-        $ref: '#/definitions/Timestamp'
-        description: The time when <a>StartAssessmentRun</a> was called.
-      startedAt:
-        $ref: '#/definitions/Timestamp'
-        description: The time when <a>StartAssessmentRun</a> was called.
-      completedAt:
-        $ref: '#/definitions/Timestamp'
-        description: The assessment run completion time that corresponds to the rules packages evaluation completion time or failure.
-      stateChangedAt:
-        $ref: '#/definitions/Timestamp'
-        description: The last time when the assessment run's state changed.
-      dataCollected:
-        $ref: '#/definitions/Bool'
-        description: A Boolean value (true or false) that specifies whether the process of collecting data from the agents is completed.
-      stateChanges:
-        $ref: '#/definitions/AssessmentRunStateChangeList'
-        description: A list of the assessment run state changes.
-      notifications:
-        $ref: '#/definitions/AssessmentRunNotificationList'
-        description: A list of notifications for the event subscriptions. A notification about a particular generated finding is added to this list only once.
-      findingCounts:
-        $ref: '#/definitions/AssessmentRunFindingCounts'
-        description: Provides a total count of generated findings per severity.
-    description: <p>A snapshot of an Amazon Inspector assessment run that contains the findings of the assessment run .</p> <p>Used as the response element in the <a>DescribeAssessmentRuns</a> action.</p>
-  AssessmentRunAgent:
-    type: object
-    required:
-      - agentId
-      - assessmentRunArn
-      - agentHealth
-      - agentHealthCode
-      - telemetryMetadata
-    properties:
-      agentId:
-        $ref: '#/definitions/AgentId'
-        description: The AWS account of the EC2 instance where the agent is installed.
-      assessmentRunArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the assessment run that is associated with the agent.
-      agentHealth:
-        $ref: '#/definitions/AgentHealth'
-        description: The current health state of the agent.
-      agentHealthCode:
-        $ref: '#/definitions/AgentHealthCode'
-        description: The detailed health state of the agent.
-      agentHealthDetails:
-        $ref: '#/definitions/Message'
-        description: The description for the agent health code.
-      autoScalingGroup:
-        $ref: '#/definitions/AutoScalingGroup'
-        description: The Auto Scaling group of the EC2 instance that is specified by the agent ID.
-      telemetryMetadata:
-        $ref: '#/definitions/TelemetryMetadataList'
-        description: The Amazon Inspector application data metrics that are collected by the agent.
-    description: Contains information about an Amazon Inspector agent. This data type is used as a response element in the <a>ListAssessmentRunAgents</a> action.
-  AssessmentRunAgentList:
-    type: array
-    items:
-      $ref: '#/definitions/AssessmentRunAgent'
-    minItems: 0
-    maxItems: 500
-  AssessmentRunDuration:
-    type: integer
-    minimum: 180
-    maximum: 86400
-  AssessmentRunFilter:
-    type: object
-    properties:
-      namePattern:
-        $ref: '#/definitions/NamePattern'
-        description: 'For a record to match a filter, an explicit value or a string containing a wildcard that is specified for this data type property must match the value of the <b>assessmentRunName</b> property of the <a>AssessmentRun</a> data type.'
-      states:
-        $ref: '#/definitions/AssessmentRunStateList'
-        description: 'For a record to match a filter, one of the values specified for this data type property must be the exact match of the value of the <b>assessmentRunState</b> property of the <a>AssessmentRun</a> data type.'
-      durationRange:
-        $ref: '#/definitions/DurationRange'
-        description: 'For a record to match a filter, the value that is specified for this data type property must inclusively match any value between the specified minimum and maximum values of the <b>durationInSeconds</b> property of the <a>AssessmentRun</a> data type.'
-      rulesPackageArns:
-        $ref: '#/definitions/FilterRulesPackageArnList'
-        description: 'For a record to match a filter, the value that is specified for this data type property must be contained in the list of values of the <b>rulesPackages</b> property of the <a>AssessmentRun</a> data type.'
-      startTimeRange:
-        $ref: '#/definitions/TimestampRange'
-        description: 'For a record to match a filter, the value that is specified for this data type property must inclusively match any value between the specified minimum and maximum values of the <b>startTime</b> property of the <a>AssessmentRun</a> data type.'
-      completionTimeRange:
-        $ref: '#/definitions/TimestampRange'
-        description: 'For a record to match a filter, the value that is specified for this data type property must inclusively match any value between the specified minimum and maximum values of the <b>completedAt</b> property of the <a>AssessmentRun</a> data type.'
-      stateChangeTimeRange:
-        $ref: '#/definitions/TimestampRange'
-        description: 'For a record to match a filter, the value that is specified for this data type property must match the <b>stateChangedAt</b> property of the <a>AssessmentRun</a> data type.'
-    description: Used as the request parameter in the <a>ListAssessmentRuns</a> action.
-  AssessmentRunFindingCounts:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Severity'
-        value:
-          $ref: '#/definitions/FindingCount'
-  AssessmentRunInProgressArnList:
-    type: array
-    items:
-      $ref: '#/definitions/Arn'
-    minItems: 1
-    maxItems: 10
-  AssessmentRunInProgressException:
+    description: Internal server error.
+  InvalidInputException:
     type: object
     required:
       - message
-      - assessmentRunArns
-      - assessmentRunArnsTruncated
+      - errorCode
       - canRetry
     properties:
       message:
         $ref: '#/definitions/ErrorMessage'
         description: Details of the exception error.
-      assessmentRunArns:
-        $ref: '#/definitions/AssessmentRunInProgressArnList'
-        description: The ARNs of the assessment runs that are currently in progress.
-      assessmentRunArnsTruncated:
-        $ref: '#/definitions/Bool'
-        description: Boolean value that indicates whether the ARN list of the assessment runs is truncated.
+      errorCode:
+        $ref: '#/definitions/InvalidInputErrorCode'
+        description: Code that indicates the type of error that is generated.
       canRetry:
         $ref: '#/definitions/Bool'
         description: You can immediately retry your request.
-    description: You cannot perform a specified action if an assessment run is currently in progress.
-  AssessmentRunList:
-    type: array
-    items:
-      $ref: '#/definitions/AssessmentRun'
-    minItems: 0
-    maxItems: 10
-  AssessmentRunName:
-    type: string
-    minLength: 1
-    maxLength: 140
-  AssessmentRunNotification:
+    description: The request was rejected because an invalid or out-of-range value was supplied for an input parameter.
+  AccessDeniedException:
     type: object
     required:
-      - date
-      - event
-      - error
+      - message
+      - errorCode
+      - canRetry
     properties:
-      date:
-        $ref: '#/definitions/Timestamp'
-        description: The date of the notification.
-      event:
-        $ref: '#/definitions/InspectorEvent'
-        description: The event for which a notification is sent.
       message:
-        $ref: '#/definitions/Message'
-        description: The message included in the notification.
-      error:
+        $ref: '#/definitions/ErrorMessage'
+        description: Details of the exception error.
+      errorCode:
+        $ref: '#/definitions/AccessDeniedErrorCode'
+        description: Code that indicates the type of error that is generated.
+      canRetry:
         $ref: '#/definitions/Bool'
-        description: The Boolean value that specifies whether the notification represents an error.
-      snsTopicArn:
-        $ref: '#/definitions/Arn'
-        description: The SNS topic to which the SNS notification is sent.
-      snsPublishStatusCode:
-        $ref: '#/definitions/AssessmentRunNotificationSnsStatusCode'
-        description: The status code of the SNS notification.
-    description: Used as one of the elements of the <a>AssessmentRun</a> data type.
-  AssessmentRunNotificationList:
-    type: array
-    items:
-      $ref: '#/definitions/AssessmentRunNotification'
-    minItems: 0
-    maxItems: 50
-  AssessmentRunNotificationSnsStatusCode:
-    type: string
-    enum:
-      - SUCCESS
-      - TOPIC_DOES_NOT_EXIST
-      - ACCESS_DENIED
-      - INTERNAL_ERROR
-  AssessmentRunState:
-    type: string
-    enum:
-      - CREATED
-      - START_DATA_COLLECTION_PENDING
-      - START_DATA_COLLECTION_IN_PROGRESS
-      - COLLECTING_DATA
-      - STOP_DATA_COLLECTION_PENDING
-      - DATA_COLLECTED
-      - START_EVALUATING_RULES_PENDING
-      - EVALUATING_RULES
-      - FAILED
-      - ERROR
-      - COMPLETED
-      - COMPLETED_WITH_ERRORS
-      - CANCELED
-  AssessmentRunStateChange:
+        description: You can immediately retry your request.
+    description: You do not have required permissions to access the requested resource.
+  NoSuchEntityException:
     type: object
     required:
-      - stateChangedAt
-      - state
+      - message
+      - errorCode
+      - canRetry
     properties:
-      stateChangedAt:
-        $ref: '#/definitions/Timestamp'
-        description: The last time the assessment run state changed.
-      state:
-        $ref: '#/definitions/AssessmentRunState'
-        description: The assessment run state.
-    description: Used as one of the elements of the <a>AssessmentRun</a> data type.
-  AssessmentRunStateChangeList:
-    type: array
-    items:
-      $ref: '#/definitions/AssessmentRunStateChange'
-    minItems: 0
-    maxItems: 50
-  AssessmentRunStateList:
-    type: array
-    items:
-      $ref: '#/definitions/AssessmentRunState'
-    minItems: 0
-    maxItems: 50
-  AssessmentTarget:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: Details of the exception error.
+      errorCode:
+        $ref: '#/definitions/NoSuchEntityErrorCode'
+        description: Code that indicates the type of error that is generated.
+      canRetry:
+        $ref: '#/definitions/Bool'
+        description: You can immediately retry your request.
+    description: The request was rejected because it referenced an entity that does not exist. The error code describes the entity.
+  ServiceTemporarilyUnavailableException:
     type: object
     required:
-      - arn
-      - name
-      - createdAt
-      - updatedAt
+      - message
+      - canRetry
     properties:
-      arn:
-        $ref: '#/definitions/Arn'
-        description: The ARN that specifies the Amazon Inspector assessment target.
-      name:
-        $ref: '#/definitions/AssessmentTargetName'
-        description: The name of the Amazon Inspector assessment target.
-      resourceGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN that specifies the resource group that is associated with the assessment target.
-      createdAt:
-        $ref: '#/definitions/Timestamp'
-        description: The time at which the assessment target is created.
-      updatedAt:
-        $ref: '#/definitions/Timestamp'
-        description: The time at which <a>UpdateAssessmentTarget</a> is called.
-    description: Contains information about an Amazon Inspector application. This data type is used as the response element in the <a>DescribeAssessmentTargets</a> action.
-  AssessmentTargetFilter:
-    type: object
-    properties:
-      assessmentTargetNamePattern:
-        $ref: '#/definitions/NamePattern'
-        description: 'For a record to match a filter, an explicit value or a string that contains a wildcard that is specified for this data type property must match the value of the <b>assessmentTargetName</b> property of the <a>AssessmentTarget</a> data type.'
-    description: Used as the request parameter in the <a>ListAssessmentTargets</a> action.
-  AssessmentTargetList:
-    type: array
-    items:
-      $ref: '#/definitions/AssessmentTarget'
-    minItems: 0
-    maxItems: 10
-  AssessmentTargetName:
-    type: string
-    minLength: 1
-    maxLength: 140
-  AssessmentTemplate:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: Details of the exception error.
+      canRetry:
+        $ref: '#/definitions/Bool'
+        description: You can wait and then retry your request.
+    description: The serice is temporary unavailable.
+  CreateAssessmentTargetResponse:
     type: object
     required:
-      - arn
-      - name
       - assessmentTargetArn
-      - durationInSeconds
-      - rulesPackageArns
-      - userAttributesForFindings
-      - assessmentRunCount
-      - createdAt
+    example:
+      assessmentTargetArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX'
     properties:
-      arn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the assessment template.
-      name:
-        $ref: '#/definitions/AssessmentTemplateName'
-        description: The name of the assessment template.
       assessmentTargetArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the assessment target that corresponds to this assessment template.
-      durationInSeconds:
-        $ref: '#/definitions/AssessmentRunDuration'
-        description: The duration in seconds specified for this assessment template. The default value is 3600 seconds (one hour). The maximum value is 86400 seconds (one day).
-      rulesPackageArns:
-        $ref: '#/definitions/AssessmentTemplateRulesPackageArnList'
-        description: The rules packages that are specified for this assessment template.
-      userAttributesForFindings:
-        $ref: '#/definitions/UserAttributeList'
-        description: The user-defined attributes that are assigned to every generated finding from the assessment run that uses this assessment template.
-      lastAssessmentRunArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the most recent assessment run associated with this assessment template. This value exists only when the value of assessmentRunCount is greaterpa than zero.
-      assessmentRunCount:
-        $ref: '#/definitions/ArnCount'
-        description: The number of existing assessment runs associated with this assessment template. This value can be zero or a positive integer.
-      createdAt:
-        $ref: '#/definitions/Timestamp'
-        description: The time at which the assessment template is created.
-    description: Contains information about an Amazon Inspector assessment template. This data type is used as the response element in the <a>DescribeAssessmentTemplates</a> action.
-  AssessmentTemplateFilter:
-    type: object
-    properties:
-      namePattern:
-        $ref: '#/definitions/NamePattern'
-        description: 'For a record to match a filter, an explicit value or a string that contains a wildcard that is specified for this data type property must match the value of the <b>assessmentTemplateName</b> property of the <a>AssessmentTemplate</a> data type.'
-      durationRange:
-        $ref: '#/definitions/DurationRange'
-        description: 'For a record to match a filter, the value specified for this data type property must inclusively match any value between the specified minimum and maximum values of the <b>durationInSeconds</b> property of the <a>AssessmentTemplate</a> data type.'
-      rulesPackageArns:
-        $ref: '#/definitions/FilterRulesPackageArnList'
-        description: 'For a record to match a filter, the values that are specified for this data type property must be contained in the list of values of the <b>rulesPackageArns</b> property of the <a>AssessmentTemplate</a> data type.'
-    description: Used as the request parameter in the <a>ListAssessmentTemplates</a> action.
-  AssessmentTemplateList:
-    type: array
-    items:
-      $ref: '#/definitions/AssessmentTemplate'
-    minItems: 0
-    maxItems: 10
-  AssessmentTemplateName:
-    type: string
-    minLength: 1
-    maxLength: 140
-  AssessmentTemplateRulesPackageArnList:
-    type: array
-    items:
-      $ref: '#/definitions/Arn'
-    minItems: 0
-    maxItems: 50
-  AssetAttributes:
-    type: object
-    required:
-      - schemaVersion
-    properties:
-      schemaVersion:
-        $ref: '#/definitions/NumericVersion'
-        description: The schema version of this data type.
-      agentId:
-        $ref: '#/definitions/AgentId'
-        description: The ID of the agent that is installed on the EC2 instance where the finding is generated.
-      autoScalingGroup:
-        $ref: '#/definitions/AutoScalingGroup'
-        description: The Auto Scaling group of the EC2 instance where the finding is generated.
-      amiId:
-        $ref: '#/definitions/AmiId'
-        description: The ID of the Amazon Machine Image (AMI) that is installed on the EC2 instance where the finding is generated.
-      hostname:
-        $ref: '#/definitions/Hostname'
-        description: The hostname of the EC2 instance where the finding is generated.
-      ipv4Addresses:
-        $ref: '#/definitions/Ipv4AddressList'
-        description: The list of IP v4 addresses of the EC2 instance where the finding is generated.
-    description: A collection of attributes of the host from which the finding is generated.
-  AssetType:
-    type: string
-    enum:
-      - ec2-instance
-  Attribute:
-    type: object
-    required:
-      - key
-    properties:
-      key:
-        $ref: '#/definitions/AttributeKey'
-        description: The attribute key.
-      value:
-        $ref: '#/definitions/AttributeValue'
-        description: The value assigned to the attribute key.
-    description: This data type is used as a request parameter in the <a>AddAttributesToFindings</a> and <a>CreateAssessmentTemplate</a> actions.
-  AttributeKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  AttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/Attribute'
-    minItems: 0
-    maxItems: 50
-  AttributeValue:
-    type: string
-    minLength: 1
-    maxLength: 256
-  AutoScalingGroup:
-    type: string
-    minLength: 1
-    maxLength: 256
-  AutoScalingGroupList:
-    type: array
-    items:
-      $ref: '#/definitions/AutoScalingGroup'
-    minItems: 0
-    maxItems: 20
-  BatchDescribeArnList:
-    type: array
-    items:
-      $ref: '#/definitions/Arn'
-    minItems: 1
-    maxItems: 10
-  BatchDescribeExclusionsArnList:
-    type: array
-    items:
-      $ref: '#/definitions/Arn'
-    minItems: 1
-    maxItems: 100
-  Bool:
-    type: boolean
+        description: The ARN that specifies the assessment target that is created.
   CreateAssessmentTargetRequest:
     type: object
     required:
@@ -2406,16 +1870,50 @@ definitions:
       resourceGroupArn:
         $ref: '#/definitions/Arn'
         description: 'The ARN that specifies the resource group that is used to create the assessment target. If resourceGroupArn is not specified, all EC2 instances in the current AWS account and region are included in the assessment target.'
-  CreateAssessmentTargetResponse:
+  LimitExceededException:
     type: object
     required:
-      - assessmentTargetArn
-    example:
-      assessmentTargetArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX'
+      - message
+      - errorCode
+      - canRetry
     properties:
-      assessmentTargetArn:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: Details of the exception error.
+      errorCode:
+        $ref: '#/definitions/LimitExceededErrorCode'
+        description: Code that indicates the type of error that is generated.
+      canRetry:
+        $ref: '#/definitions/Bool'
+        description: You can immediately retry your request.
+    description: The request was rejected because it attempted to create resources beyond the current AWS account limits. The error code describes the limit exceeded.
+  InvalidCrossAccountRoleException:
+    type: object
+    required:
+      - message
+      - errorCode
+      - canRetry
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: Details of the exception error.
+      errorCode:
+        $ref: '#/definitions/InvalidCrossAccountRoleErrorCode'
+        description: Code that indicates the type of error that is generated.
+      canRetry:
+        $ref: '#/definitions/Bool'
+        description: You can immediately retry your request.
+    description: Amazon Inspector cannot assume the cross-account role that it needs to list your EC2 instances during the assessment run.
+  CreateAssessmentTemplateResponse:
+    type: object
+    required:
+      - assessmentTemplateArn
+    example:
+      assessmentTemplateArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T'
+    properties:
+      assessmentTemplateArn:
         $ref: '#/definitions/Arn'
-        description: The ARN that specifies the assessment target that is created.
+        description: The ARN that specifies the assessment template that is created.
   CreateAssessmentTemplateRequest:
     type: object
     required:
@@ -2448,24 +1946,6 @@ definitions:
       userAttributesForFindings:
         $ref: '#/definitions/UserAttributeList'
         description: 'The user-defined attributes that are assigned to every finding that is generated by the assessment run that uses this assessment template. An attribute is a key and value pair (an <a>Attribute</a> object). Within an assessment template, each key must be unique.'
-  CreateAssessmentTemplateResponse:
-    type: object
-    required:
-      - assessmentTemplateArn
-    example:
-      assessmentTemplateArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T'
-    properties:
-      assessmentTemplateArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN that specifies the assessment template that is created.
-  CreateExclusionsPreviewRequest:
-    type: object
-    required:
-      - assessmentTemplateArn
-    properties:
-      assessmentTemplateArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN that specifies the assessment template for which you want to create an exclusions preview.
   CreateExclusionsPreviewResponse:
     type: object
     required:
@@ -2474,6 +1954,32 @@ definitions:
       previewToken:
         $ref: '#/definitions/UUID'
         description: Specifies the unique identifier of the requested exclusions preview. You can use the unique identifier to retrieve the exclusions preview when running the GetExclusionsPreview API.
+  CreateExclusionsPreviewRequest:
+    type: object
+    required:
+      - assessmentTemplateArn
+    properties:
+      assessmentTemplateArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN that specifies the assessment template for which you want to create an exclusions preview.
+  PreviewGenerationInProgressException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The request is rejected. The specified assessment template is currently generating an exclusions preview.
+  CreateResourceGroupResponse:
+    type: object
+    required:
+      - resourceGroupArn
+    example:
+      resourceGroupArn: 'arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-AB6DMKnv'
+    properties:
+      resourceGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN that specifies the resource group that is created.
   CreateResourceGroupRequest:
     type: object
     required:
@@ -2486,16 +1992,6 @@ definitions:
       resourceGroupTags:
         $ref: '#/definitions/ResourceGroupTags'
         description: '<p>A collection of keys and an array of possible values, ''[{"key":"key1","values":["Value1","Value2"]},{"key":"Key2","values":["Value3"]}]''.</p> <p>For example,''[{"key":"Name","values":["TestEC2Instance"]}]''.</p>'
-  CreateResourceGroupResponse:
-    type: object
-    required:
-      - resourceGroupArn
-    example:
-      resourceGroupArn: 'arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-AB6DMKnv'
-    properties:
-      resourceGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN that specifies the resource group that is created.
   DeleteAssessmentRunRequest:
     type: object
     required:
@@ -2506,6 +2002,27 @@ definitions:
       assessmentRunArn:
         $ref: '#/definitions/Arn'
         description: The ARN that specifies the assessment run that you want to delete.
+  AssessmentRunInProgressException:
+    type: object
+    required:
+      - message
+      - assessmentRunArns
+      - assessmentRunArnsTruncated
+      - canRetry
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: Details of the exception error.
+      assessmentRunArns:
+        $ref: '#/definitions/AssessmentRunInProgressArnList'
+        description: The ARNs of the assessment runs that are currently in progress.
+      assessmentRunArnsTruncated:
+        $ref: '#/definitions/Bool'
+        description: Boolean value that indicates whether the ARN list of the assessment runs is truncated.
+      canRetry:
+        $ref: '#/definitions/Bool'
+        description: You can immediately retry your request.
+    description: You cannot perform a specified action if an assessment run is currently in progress.
   DeleteAssessmentTargetRequest:
     type: object
     required:
@@ -2526,17 +2043,6 @@ definitions:
       assessmentTemplateArn:
         $ref: '#/definitions/Arn'
         description: The ARN that specifies the assessment template that you want to delete.
-  DescribeAssessmentRunsRequest:
-    type: object
-    required:
-      - assessmentRunArns
-    example:
-      assessmentRunArns:
-        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE'
-    properties:
-      assessmentRunArns:
-        $ref: '#/definitions/BatchDescribeArnList'
-        description: The ARN that specifies the assessment run that you want to describe.
   DescribeAssessmentRunsResponse:
     type: object
     required:
@@ -2589,17 +2095,17 @@ definitions:
       failedItems:
         $ref: '#/definitions/FailedItems'
         description: Assessment run details that cannot be described. An error code is provided for each failed item.
-  DescribeAssessmentTargetsRequest:
+  DescribeAssessmentRunsRequest:
     type: object
     required:
-      - assessmentTargetArns
+      - assessmentRunArns
     example:
-      assessmentTargetArns:
-        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq'
+      assessmentRunArns:
+        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE'
     properties:
-      assessmentTargetArns:
+      assessmentRunArns:
         $ref: '#/definitions/BatchDescribeArnList'
-        description: The ARNs that specifies the assessment targets that you want to describe.
+        description: The ARN that specifies the assessment run that you want to describe.
   DescribeAssessmentTargetsResponse:
     type: object
     required:
@@ -2620,16 +2126,17 @@ definitions:
       failedItems:
         $ref: '#/definitions/FailedItems'
         description: Assessment target details that cannot be described. An error code is provided for each failed item.
-  DescribeAssessmentTemplatesRequest:
+  DescribeAssessmentTargetsRequest:
     type: object
     required:
-      - assessmentTemplateArns
+      - assessmentTargetArns
     example:
-      assessmentTemplateArns:
-        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw'
+      assessmentTargetArns:
+        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq'
     properties:
-      assessmentTemplateArns:
+      assessmentTargetArns:
         $ref: '#/definitions/BatchDescribeArnList'
+        description: The ARNs that specifies the assessment targets that you want to describe.
   DescribeAssessmentTemplatesResponse:
     type: object
     required:
@@ -2654,6 +2161,16 @@ definitions:
       failedItems:
         $ref: '#/definitions/FailedItems'
         description: Assessment template details that cannot be described. An error code is provided for each failed item.
+  DescribeAssessmentTemplatesRequest:
+    type: object
+    required:
+      - assessmentTemplateArns
+    example:
+      assessmentTemplateArns:
+        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw'
+    properties:
+      assessmentTemplateArns:
+        $ref: '#/definitions/BatchDescribeArnList'
   DescribeCrossAccountAccessRoleResponse:
     type: object
     required:
@@ -2674,17 +2191,6 @@ definitions:
       registeredAt:
         $ref: '#/definitions/Timestamp'
         description: The date when the cross-account access role was registered.
-  DescribeExclusionsRequest:
-    type: object
-    required:
-      - exclusionArns
-    properties:
-      exclusionArns:
-        $ref: '#/definitions/BatchDescribeExclusionsArnList'
-        description: The list of ARNs that specify the exclusions that you want to describe.
-      locale:
-        $ref: '#/definitions/Locale'
-        description: 'The locale into which you want to translate the exclusion''s title, description, and recommendation.'
   DescribeExclusionsResponse:
     type: object
     required:
@@ -2697,20 +2203,17 @@ definitions:
       failedItems:
         $ref: '#/definitions/FailedItems'
         description: Exclusion details that cannot be described. An error code is provided for each failed item.
-  DescribeFindingsRequest:
+  DescribeExclusionsRequest:
     type: object
     required:
-      - findingArns
-    example:
-      findingArns:
-        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE/finding/0-HwPnsDm4'
+      - exclusionArns
     properties:
-      findingArns:
-        $ref: '#/definitions/BatchDescribeArnList'
-        description: The ARN that specifies the finding that you want to describe.
+      exclusionArns:
+        $ref: '#/definitions/BatchDescribeExclusionsArnList'
+        description: The list of ARNs that specify the exclusions that you want to describe.
       locale:
         $ref: '#/definitions/Locale'
-        description: 'The locale into which you want to translate a finding description, recommendation, and the short description that identifies the finding.'
+        description: 'The locale into which you want to translate the exclusion''s title, description, and recommendation.'
   DescribeFindingsResponse:
     type: object
     required:
@@ -2748,17 +2251,20 @@ definitions:
       failedItems:
         $ref: '#/definitions/FailedItems'
         description: Finding details that cannot be described. An error code is provided for each failed item.
-  DescribeResourceGroupsRequest:
+  DescribeFindingsRequest:
     type: object
     required:
-      - resourceGroupArns
+      - findingArns
     example:
-      resourceGroupArns:
-        - 'arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-PyGXopAI'
+      findingArns:
+        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE/finding/0-HwPnsDm4'
     properties:
-      resourceGroupArns:
+      findingArns:
         $ref: '#/definitions/BatchDescribeArnList'
-        description: The ARN that specifies the resource group that you want to describe.
+        description: The ARN that specifies the finding that you want to describe.
+      locale:
+        $ref: '#/definitions/Locale'
+        description: 'The locale into which you want to translate a finding description, recommendation, and the short description that identifies the finding.'
   DescribeResourceGroupsResponse:
     type: object
     required:
@@ -2779,20 +2285,17 @@ definitions:
       failedItems:
         $ref: '#/definitions/FailedItems'
         description: Resource group details that cannot be described. An error code is provided for each failed item.
-  DescribeRulesPackagesRequest:
+  DescribeResourceGroupsRequest:
     type: object
     required:
-      - rulesPackageArns
+      - resourceGroupArns
     example:
-      rulesPackageArns:
-        - 'arn:aws:inspector:us-west-2:758058086616:rulespackage/0-JJOtZiqQ'
+      resourceGroupArns:
+        - 'arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-PyGXopAI'
     properties:
-      rulesPackageArns:
+      resourceGroupArns:
         $ref: '#/definitions/BatchDescribeArnList'
-        description: The ARN that specifies the rules package that you want to describe.
-      locale:
-        $ref: '#/definitions/Locale'
-        description: The locale that you want to translate a rules package description into.
+        description: The ARN that specifies the resource group that you want to describe.
   DescribeRulesPackagesResponse:
     type: object
     required:
@@ -2813,249 +2316,31 @@ definitions:
       failedItems:
         $ref: '#/definitions/FailedItems'
         description: Rules package details that cannot be described. An error code is provided for each failed item.
-  DurationRange:
-    type: object
-    properties:
-      minSeconds:
-        $ref: '#/definitions/AssessmentRunDuration'
-        description: The minimum value of the duration range. Must be greater than zero.
-      maxSeconds:
-        $ref: '#/definitions/AssessmentRunDuration'
-        description: The maximum value of the duration range. Must be less than or equal to 604800 seconds (1 week).
-    description: This data type is used in the <a>AssessmentTemplateFilter</a> data type.
-  ErrorMessage:
-    type: string
-    minLength: 0
-    maxLength: 1000
-  EventSubscription:
+  DescribeRulesPackagesRequest:
     type: object
     required:
-      - event
-      - subscribedAt
-    properties:
-      event:
-        $ref: '#/definitions/InspectorEvent'
-        description: The event for which Amazon Simple Notification Service (SNS) notifications are sent.
-      subscribedAt:
-        $ref: '#/definitions/Timestamp'
-        description: The time at which <a>SubscribeToEvent</a> is called.
-    description: This data type is used in the <a>Subscription</a> data type.
-  EventSubscriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/EventSubscription'
-    minItems: 1
-    maxItems: 50
-  Exclusion:
-    type: object
-    required:
-      - arn
-      - title
-      - description
-      - recommendation
-      - scopes
-    properties:
-      arn:
-        $ref: '#/definitions/Arn'
-        description: The ARN that specifies the exclusion.
-      title:
-        $ref: '#/definitions/Text'
-        description: The name of the exclusion.
-      description:
-        $ref: '#/definitions/Text'
-        description: The description of the exclusion.
-      recommendation:
-        $ref: '#/definitions/Text'
-        description: The recommendation for the exclusion.
-      scopes:
-        $ref: '#/definitions/ScopeList'
-        description: The AWS resources for which the exclusion pertains.
-      attributes:
-        $ref: '#/definitions/AttributeList'
-        description: The system-defined attributes for the exclusion.
-    description: Contains information about what was excluded from an assessment run.
-  ExclusionMap:
-    type: array
-    minItems: 1
-    maxItems: 100
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Arn'
-        value:
-          $ref: '#/definitions/Exclusion'
-  ExclusionPreview:
-    type: object
-    required:
-      - title
-      - description
-      - recommendation
-      - scopes
-    properties:
-      title:
-        $ref: '#/definitions/Text'
-        description: The name of the exclusion preview.
-      description:
-        $ref: '#/definitions/Text'
-        description: The description of the exclusion preview.
-      recommendation:
-        $ref: '#/definitions/Text'
-        description: The recommendation for the exclusion preview.
-      scopes:
-        $ref: '#/definitions/ScopeList'
-        description: The AWS resources for which the exclusion preview pertains.
-      attributes:
-        $ref: '#/definitions/AttributeList'
-        description: The system-defined attributes for the exclusion preview.
-    description: Contains information about what is excluded from an assessment run given the current state of the assessment template.
-  ExclusionPreviewList:
-    type: array
-    items:
-      $ref: '#/definitions/ExclusionPreview'
-    minItems: 0
-    maxItems: 100
-  FailedItemDetails:
-    type: object
-    required:
-      - failureCode
-      - retryable
-    properties:
-      failureCode:
-        $ref: '#/definitions/FailedItemErrorCode'
-        description: The status code of a failed item.
-      retryable:
-        $ref: '#/definitions/Bool'
-        description: Indicates whether you can immediately retry a request for this item for a specified resource.
-    description: Includes details about the failed items.
-  FailedItemErrorCode:
-    type: string
-    enum:
-      - INVALID_ARN
-      - DUPLICATE_ARN
-      - ITEM_DOES_NOT_EXIST
-      - ACCESS_DENIED
-      - LIMIT_EXCEEDED
-      - INTERNAL_ERROR
-  FailedItems:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Arn'
-        value:
-          $ref: '#/definitions/FailedItemDetails'
-  FilterRulesPackageArnList:
-    type: array
-    items:
-      $ref: '#/definitions/Arn'
-    minItems: 0
-    maxItems: 50
-  Finding:
-    type: object
-    required:
-      - arn
-      - attributes
-      - userAttributes
-      - createdAt
-      - updatedAt
-    properties:
-      arn:
-        $ref: '#/definitions/Arn'
-        description: The ARN that specifies the finding.
-      schemaVersion:
-        $ref: '#/definitions/NumericVersion'
-        description: The schema version of this data type.
-      service:
-        $ref: '#/definitions/ServiceName'
-        description: The data element is set to "Inspector".
-      serviceAttributes:
-        $ref: '#/definitions/InspectorServiceAttributes'
-        description: This data type is used in the <a>Finding</a> data type.
-      assetType:
-        $ref: '#/definitions/AssetType'
-        description: The type of the host from which the finding is generated.
-      assetAttributes:
-        $ref: '#/definitions/AssetAttributes'
-        description: A collection of attributes of the host from which the finding is generated.
-      id:
-        $ref: '#/definitions/FindingId'
-        description: The ID of the finding.
-      title:
-        $ref: '#/definitions/Text'
-        description: The name of the finding.
-      description:
-        $ref: '#/definitions/Text'
-        description: The description of the finding.
-      recommendation:
-        $ref: '#/definitions/Text'
-        description: The recommendation for the finding.
-      severity:
-        $ref: '#/definitions/Severity'
-        description: 'The finding severity. Values can be set to High, Medium, Low, and Informational.'
-      numericSeverity:
-        $ref: '#/definitions/NumericSeverity'
-        description: The numeric value of the finding severity.
-      confidence:
-        $ref: '#/definitions/IocConfidence'
-        description: This data element is currently not used.
-      indicatorOfCompromise:
-        $ref: '#/definitions/Bool'
-        description: This data element is currently not used.
-      attributes:
-        $ref: '#/definitions/AttributeList'
-        description: The system-defined attributes for the finding.
-      userAttributes:
-        $ref: '#/definitions/UserAttributeList'
-        description: The user-defined attributes that are assigned to the finding.
-      createdAt:
-        $ref: '#/definitions/Timestamp'
-        description: The time when the finding was generated.
-      updatedAt:
-        $ref: '#/definitions/Timestamp'
-        description: The time when <a>AddAttributesToFindings</a> is called.
-    description: Contains information about an Amazon Inspector finding. This data type is used as the response element in the <a>DescribeFindings</a> action.
-  FindingCount:
-    type: integer
-  FindingFilter:
-    type: object
-    properties:
-      agentIds:
-        $ref: '#/definitions/AgentIdList'
-        description: 'For a record to match a filter, one of the values that is specified for this data type property must be the exact match of the value of the <b>agentId</b> property of the <a>Finding</a> data type.'
-      autoScalingGroups:
-        $ref: '#/definitions/AutoScalingGroupList'
-        description: 'For a record to match a filter, one of the values that is specified for this data type property must be the exact match of the value of the <b>autoScalingGroup</b> property of the <a>Finding</a> data type.'
-      ruleNames:
-        $ref: '#/definitions/RuleNameList'
-        description: 'For a record to match a filter, one of the values that is specified for this data type property must be the exact match of the value of the <b>ruleName</b> property of the <a>Finding</a> data type.'
-      severities:
-        $ref: '#/definitions/SeverityList'
-        description: 'For a record to match a filter, one of the values that is specified for this data type property must be the exact match of the value of the <b>severity</b> property of the <a>Finding</a> data type.'
+      - rulesPackageArns
+    example:
       rulesPackageArns:
-        $ref: '#/definitions/FilterRulesPackageArnList'
-        description: 'For a record to match a filter, one of the values that is specified for this data type property must be the exact match of the value of the <b>rulesPackageArn</b> property of the <a>Finding</a> data type.'
-      attributes:
-        $ref: '#/definitions/AttributeList'
-        description: 'For a record to match a filter, the list of values that are specified for this data type property must be contained in the list of values of the <b>attributes</b> property of the <a>Finding</a> data type.'
-      userAttributes:
-        $ref: '#/definitions/AttributeList'
-        description: 'For a record to match a filter, the value that is specified for this data type property must be contained in the list of values of the <b>userAttributes</b> property of the <a>Finding</a> data type.'
-      creationTimeRange:
-        $ref: '#/definitions/TimestampRange'
-        description: The time range during which the finding is generated.
-    description: This data type is used as a request parameter in the <a>ListFindings</a> action.
-  FindingId:
-    type: string
-    minLength: 0
-    maxLength: 128
-  FindingList:
-    type: array
-    items:
-      $ref: '#/definitions/Finding'
-    minItems: 0
-    maxItems: 100
+        - 'arn:aws:inspector:us-west-2:758058086616:rulespackage/0-JJOtZiqQ'
+    properties:
+      rulesPackageArns:
+        $ref: '#/definitions/BatchDescribeArnList'
+        description: The ARN that specifies the rules package that you want to describe.
+      locale:
+        $ref: '#/definitions/Locale'
+        description: The locale that you want to translate a rules package description into.
+  GetAssessmentReportResponse:
+    type: object
+    required:
+      - status
+    properties:
+      status:
+        $ref: '#/definitions/ReportStatus'
+        description: 'Specifies the status of the request to generate an assessment report. '
+      url:
+        $ref: '#/definitions/Url'
+        description: Specifies the URL where you can find the generated assessment report. This parameter is only returned if the report is successfully generated.
   GetAssessmentReportRequest:
     type: object
     required:
@@ -3072,17 +2357,31 @@ definitions:
       reportType:
         $ref: '#/definitions/ReportType'
         description: 'Specifies the type of the assessment report that you want to generate. There are two types of assessment reports: a finding report and a full report. For more information, see <a href="http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html">Assessment Reports</a>. '
-  GetAssessmentReportResponse:
+  UnsupportedFeatureException:
     type: object
     required:
-      - status
+      - message
+      - canRetry
     properties:
-      status:
-        $ref: '#/definitions/ReportStatus'
-        description: 'Specifies the status of the request to generate an assessment report. '
-      url:
-        $ref: '#/definitions/Url'
-        description: Specifies the URL where you can find the generated assessment report. This parameter is only returned if the report is successfully generated.
+      message:
+        $ref: '#/definitions/ErrorMessage'
+      canRetry:
+        $ref: '#/definitions/Bool'
+    description: Used by the <a>GetAssessmentReport</a> API. The request was rejected because you tried to generate a report for an assessment run that existed before reporting was supported in Amazon Inspector. You can only generate reports for assessment runs that took place or will take place after generating reports in Amazon Inspector became available.
+  GetExclusionsPreviewResponse:
+    type: object
+    required:
+      - previewStatus
+    properties:
+      previewStatus:
+        $ref: '#/definitions/PreviewStatus'
+        description: Specifies the status of the request to generate an exclusions preview.
+      exclusionPreviews:
+        $ref: '#/definitions/ExclusionPreviewList'
+        description: Information about the exclusions included in the preview.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'When a response is generated, if there is more data to be listed, this parameters is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
   GetExclusionsPreviewRequest:
     type: object
     required:
@@ -3104,30 +2403,6 @@ definitions:
       locale:
         $ref: '#/definitions/Locale'
         description: 'The locale into which you want to translate the exclusion''s title, description, and recommendation.'
-  GetExclusionsPreviewResponse:
-    type: object
-    required:
-      - previewStatus
-    properties:
-      previewStatus:
-        $ref: '#/definitions/PreviewStatus'
-        description: Specifies the status of the request to generate an exclusions preview.
-      exclusionPreviews:
-        $ref: '#/definitions/ExclusionPreviewList'
-        description: Information about the exclusions included in the preview.
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'When a response is generated, if there is more data to be listed, this parameters is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
-  GetTelemetryMetadataRequest:
-    type: object
-    required:
-      - assessmentRunArn
-    example:
-      assessmentRunArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE'
-    properties:
-      assessmentRunArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN that specifies the assessment run that has the telemetry data that you want to obtain.
   GetTelemetryMetadataResponse:
     type: object
     required:
@@ -3225,205 +2500,16 @@ definitions:
       telemetryMetadata:
         $ref: '#/definitions/TelemetryMetadataList'
         description: Telemetry details.
-  Hostname:
-    type: string
-    minLength: 0
-    maxLength: 256
-  InspectorEvent:
-    type: string
-    enum:
-      - ASSESSMENT_RUN_STARTED
-      - ASSESSMENT_RUN_COMPLETED
-      - ASSESSMENT_RUN_STATE_CHANGED
-      - FINDING_REPORTED
-      - OTHER
-  InspectorServiceAttributes:
-    type: object
-    required:
-      - schemaVersion
-    properties:
-      schemaVersion:
-        $ref: '#/definitions/NumericVersion'
-        description: The schema version of this data type.
-      assessmentRunArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the assessment run during which the finding is generated.
-      rulesPackageArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the rules package that is used to generate the finding.
-    description: This data type is used in the <a>Finding</a> data type.
-  InternalException:
-    type: object
-    required:
-      - message
-      - canRetry
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: Details of the exception error.
-      canRetry:
-        $ref: '#/definitions/Bool'
-        description: You can immediately retry your request.
-    description: Internal server error.
-  InvalidCrossAccountRoleErrorCode:
-    type: string
-    enum:
-      - ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP
-      - ROLE_DOES_NOT_HAVE_CORRECT_POLICY
-  InvalidCrossAccountRoleException:
-    type: object
-    required:
-      - message
-      - errorCode
-      - canRetry
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: Details of the exception error.
-      errorCode:
-        $ref: '#/definitions/InvalidCrossAccountRoleErrorCode'
-        description: Code that indicates the type of error that is generated.
-      canRetry:
-        $ref: '#/definitions/Bool'
-        description: You can immediately retry your request.
-    description: Amazon Inspector cannot assume the cross-account role that it needs to list your EC2 instances during the assessment run.
-  InvalidInputErrorCode:
-    type: string
-    enum:
-      - INVALID_ASSESSMENT_TARGET_ARN
-      - INVALID_ASSESSMENT_TEMPLATE_ARN
-      - INVALID_ASSESSMENT_RUN_ARN
-      - INVALID_FINDING_ARN
-      - INVALID_RESOURCE_GROUP_ARN
-      - INVALID_RULES_PACKAGE_ARN
-      - INVALID_RESOURCE_ARN
-      - INVALID_SNS_TOPIC_ARN
-      - INVALID_IAM_ROLE_ARN
-      - INVALID_ASSESSMENT_TARGET_NAME
-      - INVALID_ASSESSMENT_TARGET_NAME_PATTERN
-      - INVALID_ASSESSMENT_TEMPLATE_NAME
-      - INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN
-      - INVALID_ASSESSMENT_TEMPLATE_DURATION
-      - INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE
-      - INVALID_ASSESSMENT_RUN_DURATION_RANGE
-      - INVALID_ASSESSMENT_RUN_START_TIME_RANGE
-      - INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE
-      - INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE
-      - INVALID_ASSESSMENT_RUN_STATE
-      - INVALID_TAG
-      - INVALID_TAG_KEY
-      - INVALID_TAG_VALUE
-      - INVALID_RESOURCE_GROUP_TAG_KEY
-      - INVALID_RESOURCE_GROUP_TAG_VALUE
-      - INVALID_ATTRIBUTE
-      - INVALID_USER_ATTRIBUTE
-      - INVALID_USER_ATTRIBUTE_KEY
-      - INVALID_USER_ATTRIBUTE_VALUE
-      - INVALID_PAGINATION_TOKEN
-      - INVALID_MAX_RESULTS
-      - INVALID_AGENT_ID
-      - INVALID_AUTO_SCALING_GROUP
-      - INVALID_RULE_NAME
-      - INVALID_SEVERITY
-      - INVALID_LOCALE
-      - INVALID_EVENT
-      - ASSESSMENT_TARGET_NAME_ALREADY_TAKEN
-      - ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN
-      - INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS
-      - INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS
-      - INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS
-      - INVALID_NUMBER_OF_FINDING_ARNS
-      - INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS
-      - INVALID_NUMBER_OF_RULES_PACKAGE_ARNS
-      - INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES
-      - INVALID_NUMBER_OF_TAGS
-      - INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS
-      - INVALID_NUMBER_OF_ATTRIBUTES
-      - INVALID_NUMBER_OF_USER_ATTRIBUTES
-      - INVALID_NUMBER_OF_AGENT_IDS
-      - INVALID_NUMBER_OF_AUTO_SCALING_GROUPS
-      - INVALID_NUMBER_OF_RULE_NAMES
-      - INVALID_NUMBER_OF_SEVERITIES
-  InvalidInputException:
-    type: object
-    required:
-      - message
-      - errorCode
-      - canRetry
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: Details of the exception error.
-      errorCode:
-        $ref: '#/definitions/InvalidInputErrorCode'
-        description: Code that indicates the type of error that is generated.
-      canRetry:
-        $ref: '#/definitions/Bool'
-        description: You can immediately retry your request.
-    description: The request was rejected because an invalid or out-of-range value was supplied for an input parameter.
-  IocConfidence:
-    type: integer
-    minimum: 0
-    maximum: 10
-  Ipv4Address:
-    type: string
-    minLength: 7
-    maxLength: 15
-  Ipv4AddressList:
-    type: array
-    items:
-      $ref: '#/definitions/Ipv4Address'
-    minItems: 0
-    maxItems: 50
-  KernelVersion:
-    type: string
-    minLength: 1
-    maxLength: 128
-  LimitExceededErrorCode:
-    type: string
-    enum:
-      - ASSESSMENT_TARGET_LIMIT_EXCEEDED
-      - ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED
-      - ASSESSMENT_RUN_LIMIT_EXCEEDED
-      - RESOURCE_GROUP_LIMIT_EXCEEDED
-      - EVENT_SUBSCRIPTION_LIMIT_EXCEEDED
-  LimitExceededException:
-    type: object
-    required:
-      - message
-      - errorCode
-      - canRetry
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: Details of the exception error.
-      errorCode:
-        $ref: '#/definitions/LimitExceededErrorCode'
-        description: Code that indicates the type of error that is generated.
-      canRetry:
-        $ref: '#/definitions/Bool'
-        description: You can immediately retry your request.
-    description: The request was rejected because it attempted to create resources beyond the current AWS account limits. The error code describes the limit exceeded.
-  ListAssessmentRunAgentsRequest:
+  GetTelemetryMetadataRequest:
     type: object
     required:
       - assessmentRunArn
     example:
       assessmentRunArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE'
-      maxResults: 123
     properties:
       assessmentRunArn:
         $ref: '#/definitions/Arn'
-        description: The ARN that specifies the assessment run whose agents you want to list.
-      filter:
-        $ref: '#/definitions/AgentFilter'
-        description: '<p>You can use this parameter to specify a subset of data to be included in the action''s response.</p> <p>For a record to match a filter, all specified filter attributes must match. When multiple values are specified for a filter attribute, any of the values can match.</p>'
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the <b>ListAssessmentRunAgents</b> action. Subsequent calls to the action fill <b>nextToken</b> in the request with the value of <b>NextToken</b> from the previous response to continue listing data.
-      maxResults:
-        $ref: '#/definitions/ListMaxResults'
-        description: You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 10. The maximum value is 500.
+        description: The ARN that specifies the assessment run that has the telemetry data that you want to obtain.
   ListAssessmentRunAgentsResponse:
     type: object
     required:
@@ -3530,22 +2616,23 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: ' When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
-  ListAssessmentRunsRequest:
+  ListAssessmentRunAgentsRequest:
     type: object
+    required:
+      - assessmentRunArn
     example:
-      assessmentTemplateArns:
-        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw'
+      assessmentRunArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE'
       maxResults: 123
     properties:
-      assessmentTemplateArns:
-        $ref: '#/definitions/ListParentArnList'
-        description: The ARNs that specify the assessment templates whose assessment runs you want to list.
+      assessmentRunArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN that specifies the assessment run whose agents you want to list.
       filter:
-        $ref: '#/definitions/AssessmentRunFilter'
+        $ref: '#/definitions/AgentFilter'
         description: '<p>You can use this parameter to specify a subset of data to be included in the action''s response.</p> <p>For a record to match a filter, all specified filter attributes must match. When multiple values are specified for a filter attribute, any of the values can match.</p>'
       nextToken:
         $ref: '#/definitions/PaginationToken'
-        description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the <b>ListAssessmentRuns</b> action. Subsequent calls to the action fill <b>nextToken</b> in the request with the value of <b>NextToken</b> from the previous response to continue listing data.
+        description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the <b>ListAssessmentRunAgents</b> action. Subsequent calls to the action fill <b>nextToken</b> in the request with the value of <b>NextToken</b> from the previous response to continue listing data.
       maxResults:
         $ref: '#/definitions/ListMaxResults'
         description: You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 10. The maximum value is 500.
@@ -3565,6 +2652,40 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: ' When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
+  ListAssessmentRunsRequest:
+    type: object
+    example:
+      assessmentTemplateArns:
+        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw'
+      maxResults: 123
+    properties:
+      assessmentTemplateArns:
+        $ref: '#/definitions/ListParentArnList'
+        description: The ARNs that specify the assessment templates whose assessment runs you want to list.
+      filter:
+        $ref: '#/definitions/AssessmentRunFilter'
+        description: '<p>You can use this parameter to specify a subset of data to be included in the action''s response.</p> <p>For a record to match a filter, all specified filter attributes must match. When multiple values are specified for a filter attribute, any of the values can match.</p>'
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the <b>ListAssessmentRuns</b> action. Subsequent calls to the action fill <b>nextToken</b> in the request with the value of <b>NextToken</b> from the previous response to continue listing data.
+      maxResults:
+        $ref: '#/definitions/ListMaxResults'
+        description: You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 10. The maximum value is 500.
+  ListAssessmentTargetsResponse:
+    type: object
+    required:
+      - assessmentTargetArns
+    example:
+      assessmentTargetArns:
+        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq'
+      nextToken: '1'
+    properties:
+      assessmentTargetArns:
+        $ref: '#/definitions/ListReturnedArnList'
+        description: A list of ARNs that specifies the assessment targets that are returned by the action.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: ' When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
   ListAssessmentTargetsRequest:
     type: object
     example:
@@ -3579,18 +2700,19 @@ definitions:
       maxResults:
         $ref: '#/definitions/ListMaxResults'
         description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 10. The maximum value is 500.
-  ListAssessmentTargetsResponse:
+  ListAssessmentTemplatesResponse:
     type: object
     required:
-      - assessmentTargetArns
+      - assessmentTemplateArns
     example:
-      assessmentTargetArns:
-        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq'
+      assessmentTemplateArns:
+        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw'
+        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-Uza6ihLh'
       nextToken: '1'
     properties:
-      assessmentTargetArns:
+      assessmentTemplateArns:
         $ref: '#/definitions/ListReturnedArnList'
-        description: A list of ARNs that specifies the assessment targets that are returned by the action.
+        description: A list of ARNs that specifies the assessment templates returned by the action.
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: ' When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
@@ -3613,39 +2735,6 @@ definitions:
       maxResults:
         $ref: '#/definitions/ListMaxResults'
         description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 10. The maximum value is 500.
-  ListAssessmentTemplatesResponse:
-    type: object
-    required:
-      - assessmentTemplateArns
-    example:
-      assessmentTemplateArns:
-        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw'
-        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-Uza6ihLh'
-      nextToken: '1'
-    properties:
-      assessmentTemplateArns:
-        $ref: '#/definitions/ListReturnedArnList'
-        description: A list of ARNs that specifies the assessment templates returned by the action.
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: ' When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
-  ListEventSubscriptionsMaxResults:
-    type: integer
-  ListEventSubscriptionsRequest:
-    type: object
-    example:
-      maxResults: 123
-      resourceArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-7sbz2Kz0'
-    properties:
-      resourceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the assessment template for which you want to list the existing event subscriptions.
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the <b>ListEventSubscriptions</b> action. Subsequent calls to the action fill <b>nextToken</b> in the request with the value of <b>NextToken</b> from the previous response to continue listing data.
-      maxResults:
-        $ref: '#/definitions/ListEventSubscriptionsMaxResults'
-        description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 10. The maximum value is 500.
   ListEventSubscriptionsResponse:
     type: object
     required:
@@ -3665,6 +2754,32 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: ' When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
+  ListEventSubscriptionsRequest:
+    type: object
+    example:
+      maxResults: 123
+      resourceArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-7sbz2Kz0'
+    properties:
+      resourceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the assessment template for which you want to list the existing event subscriptions.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the <b>ListEventSubscriptions</b> action. Subsequent calls to the action fill <b>nextToken</b> in the request with the value of <b>NextToken</b> from the previous response to continue listing data.
+      maxResults:
+        $ref: '#/definitions/ListEventSubscriptionsMaxResults'
+        description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 10. The maximum value is 500.
+  ListExclusionsResponse:
+    type: object
+    required:
+      - exclusionArns
+    properties:
+      exclusionArns:
+        $ref: '#/definitions/ListReturnedArnList'
+        description: A list of exclusions' ARNs returned by the action.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'When a response is generated, if there is more data to be listed, this parameters is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
   ListExclusionsRequest:
     type: object
     required:
@@ -3679,36 +2794,6 @@ definitions:
       maxResults:
         $ref: '#/definitions/ListMaxResults'
         description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 100. The maximum value is 500.
-  ListExclusionsResponse:
-    type: object
-    required:
-      - exclusionArns
-    properties:
-      exclusionArns:
-        $ref: '#/definitions/ListReturnedArnList'
-        description: A list of exclusions' ARNs returned by the action.
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'When a response is generated, if there is more data to be listed, this parameters is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
-  ListFindingsRequest:
-    type: object
-    example:
-      assessmentRunArns:
-        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE'
-      maxResults: 123
-    properties:
-      assessmentRunArns:
-        $ref: '#/definitions/ListParentArnList'
-        description: The ARNs of the assessment runs that generate the findings that you want to list.
-      filter:
-        $ref: '#/definitions/FindingFilter'
-        description: '<p>You can use this parameter to specify a subset of data to be included in the action''s response.</p> <p>For a record to match a filter, all specified filter attributes must match. When multiple values are specified for a filter attribute, any of the values can match.</p>'
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the <b>ListFindings</b> action. Subsequent calls to the action fill <b>nextToken</b> in the request with the value of <b>NextToken</b> from the previous response to continue listing data.
-      maxResults:
-        $ref: '#/definitions/ListMaxResults'
-        description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 10. The maximum value is 500.
   ListFindingsResponse:
     type: object
     required:
@@ -3725,28 +2810,22 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: ' When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
-  ListMaxResults:
-    type: integer
-  ListParentArnList:
-    type: array
-    items:
-      $ref: '#/definitions/Arn'
-    minItems: 0
-    maxItems: 50
-  ListReturnedArnList:
-    type: array
-    items:
-      $ref: '#/definitions/Arn'
-    minItems: 0
-    maxItems: 100
-  ListRulesPackagesRequest:
+  ListFindingsRequest:
     type: object
     example:
+      assessmentRunArns:
+        - 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE'
       maxResults: 123
     properties:
+      assessmentRunArns:
+        $ref: '#/definitions/ListParentArnList'
+        description: The ARNs of the assessment runs that generate the findings that you want to list.
+      filter:
+        $ref: '#/definitions/FindingFilter'
+        description: '<p>You can use this parameter to specify a subset of data to be included in the action''s response.</p> <p>For a record to match a filter, all specified filter attributes must match. When multiple values are specified for a filter attribute, any of the values can match.</p>'
       nextToken:
         $ref: '#/definitions/PaginationToken'
-        description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the <b>ListRulesPackages</b> action. Subsequent calls to the action fill <b>nextToken</b> in the request with the value of <b>NextToken</b> from the previous response to continue listing data.
+        description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the <b>ListFindings</b> action. Subsequent calls to the action fill <b>nextToken</b> in the request with the value of <b>NextToken</b> from the previous response to continue listing data.
       maxResults:
         $ref: '#/definitions/ListMaxResults'
         description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 10. The maximum value is 500.
@@ -3768,16 +2847,17 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: ' When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
-  ListTagsForResourceRequest:
+  ListRulesPackagesRequest:
     type: object
-    required:
-      - resourceArn
     example:
-      resourceArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-gcwFliYu'
+      maxResults: 123
     properties:
-      resourceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN that specifies the assessment template whose tags you want to list.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the <b>ListRulesPackages</b> action. Subsequent calls to the action fill <b>nextToken</b> in the request with the value of <b>NextToken</b> from the previous response to continue listing data.
+      maxResults:
+        $ref: '#/definitions/ListMaxResults'
+        description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 10. The maximum value is 500.
   ListTagsForResourceResponse:
     type: object
     required:
@@ -3790,70 +2870,31 @@ definitions:
       tags:
         $ref: '#/definitions/TagList'
         description: A collection of key and value pairs.
-  Locale:
-    type: string
-    enum:
-      - EN_US
-  Long:
-    type: integer
-  Message:
-    type: string
-    minLength: 0
-    maxLength: 1000
-  MessageType:
-    type: string
-    minLength: 1
-    maxLength: 300
-  NamePattern:
-    type: string
-    minLength: 1
-    maxLength: 140
-  NoSuchEntityErrorCode:
-    type: string
-    enum:
-      - ASSESSMENT_TARGET_DOES_NOT_EXIST
-      - ASSESSMENT_TEMPLATE_DOES_NOT_EXIST
-      - ASSESSMENT_RUN_DOES_NOT_EXIST
-      - FINDING_DOES_NOT_EXIST
-      - RESOURCE_GROUP_DOES_NOT_EXIST
-      - RULES_PACKAGE_DOES_NOT_EXIST
-      - SNS_TOPIC_DOES_NOT_EXIST
-      - IAM_ROLE_DOES_NOT_EXIST
-  NoSuchEntityException:
+  ListTagsForResourceRequest:
     type: object
     required:
-      - message
-      - errorCode
-      - canRetry
+      - resourceArn
+    example:
+      resourceArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-gcwFliYu'
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: Details of the exception error.
-      errorCode:
-        $ref: '#/definitions/NoSuchEntityErrorCode'
-        description: Code that indicates the type of error that is generated.
-      canRetry:
-        $ref: '#/definitions/Bool'
-        description: You can immediately retry your request.
-    description: The request was rejected because it referenced an entity that does not exist. The error code describes the entity.
-  NumericSeverity:
-    type: number
-    format: double
-    minimum: 0
-    maximum: 10
-  NumericVersion:
-    type: integer
-    minimum: 0
-  OperatingSystem:
-    type: string
-    minLength: 1
-    maxLength: 256
-  PaginationToken:
-    type: string
-    minLength: 1
-    maxLength: 300
-  PreviewAgentsMaxResults:
-    type: integer
+      resourceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN that specifies the assessment template whose tags you want to list.
+  PreviewAgentsResponse:
+    type: object
+    required:
+      - agentPreviews
+    example:
+      agentPreviews:
+        - agentId: i-49113b93
+      nextToken: '1'
+    properties:
+      agentPreviews:
+        $ref: '#/definitions/AgentPreviewList'
+        description: The resulting list of agents.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: ' When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
   PreviewAgentsRequest:
     type: object
     required:
@@ -3871,38 +2912,6 @@ definitions:
       maxResults:
         $ref: '#/definitions/PreviewAgentsMaxResults'
         description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 10. The maximum value is 500.
-  PreviewAgentsResponse:
-    type: object
-    required:
-      - agentPreviews
-    example:
-      agentPreviews:
-        - agentId: i-49113b93
-      nextToken: '1'
-    properties:
-      agentPreviews:
-        $ref: '#/definitions/AgentPreviewList'
-        description: The resulting list of agents.
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: ' When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.'
-  PreviewGenerationInProgressException:
-    type: object
-    required:
-      - message
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The request is rejected. The specified assessment template is currently generating an exclusions preview.
-  PreviewStatus:
-    type: string
-    enum:
-      - WORK_IN_PROGRESS
-      - COMPLETED
-  ProviderName:
-    type: string
-    minLength: 0
-    maxLength: 1000
   RegisterCrossAccountAccessRoleRequest:
     type: object
     required:
@@ -3913,6 +2922,16 @@ definitions:
       roleArn:
         $ref: '#/definitions/Arn'
         description: 'The ARN of the IAM role that grants Amazon Inspector access to AWS Services needed to perform security assessments. '
+  RemoveAttributesFromFindingsResponse:
+    type: object
+    required:
+      - failedItems
+    example:
+      failedItems: {}
+    properties:
+      failedItems:
+        $ref: '#/definitions/FailedItems'
+        description: Attributes details that cannot be described. An error code is provided for each failed item.
   RemoveAttributesFromFindingsRequest:
     type: object
     required:
@@ -3930,155 +2949,6 @@ definitions:
       attributeKeys:
         $ref: '#/definitions/UserAttributeKeyList'
         description: The array of attribute keys that you want to remove from specified findings.
-  RemoveAttributesFromFindingsResponse:
-    type: object
-    required:
-      - failedItems
-    example:
-      failedItems: {}
-    properties:
-      failedItems:
-        $ref: '#/definitions/FailedItems'
-        description: Attributes details that cannot be described. An error code is provided for each failed item.
-  ReportFileFormat:
-    type: string
-    enum:
-      - HTML
-      - PDF
-  ReportStatus:
-    type: string
-    enum:
-      - WORK_IN_PROGRESS
-      - FAILED
-      - COMPLETED
-  ReportType:
-    type: string
-    enum:
-      - FINDING
-      - FULL
-  ResourceGroup:
-    type: object
-    required:
-      - arn
-      - tags
-      - createdAt
-    properties:
-      arn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the resource group.
-      tags:
-        $ref: '#/definitions/ResourceGroupTags'
-        description: The tags (key and value pairs) of the resource group. This data type property is used in the <a>CreateResourceGroup</a> action.
-      createdAt:
-        $ref: '#/definitions/Timestamp'
-        description: The time at which resource group is created.
-    description: 'Contains information about a resource group. The resource group defines a set of tags that, when queried, identify the AWS resources that make up the assessment target. This data type is used as the response element in the <a>DescribeResourceGroups</a> action.'
-  ResourceGroupList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceGroup'
-    minItems: 0
-    maxItems: 10
-  ResourceGroupTag:
-    type: object
-    required:
-      - key
-    properties:
-      key:
-        $ref: '#/definitions/TagKey'
-        description: A tag key.
-      value:
-        $ref: '#/definitions/TagValue'
-        description: The value assigned to a tag key.
-    description: This data type is used as one of the elements of the <a>ResourceGroup</a> data type.
-  ResourceGroupTags:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceGroupTag'
-    minItems: 1
-    maxItems: 10
-  RuleName:
-    type: string
-    maxLength: 1000
-  RuleNameList:
-    type: array
-    items:
-      $ref: '#/definitions/RuleName'
-    minItems: 0
-    maxItems: 50
-  RulesPackage:
-    type: object
-    required:
-      - arn
-      - name
-      - version
-      - provider
-    properties:
-      arn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the rules package.
-      name:
-        $ref: '#/definitions/RulesPackageName'
-        description: The name of the rules package.
-      version:
-        $ref: '#/definitions/Version'
-        description: The version ID of the rules package.
-      provider:
-        $ref: '#/definitions/ProviderName'
-        description: The provider of the rules package.
-      description:
-        $ref: '#/definitions/Text'
-        description: The description of the rules package.
-    description: Contains information about an Amazon Inspector rules package. This data type is used as the response element in the <a>DescribeRulesPackages</a> action.
-  RulesPackageList:
-    type: array
-    items:
-      $ref: '#/definitions/RulesPackage'
-    minItems: 0
-    maxItems: 10
-  RulesPackageName:
-    type: string
-    minLength: 0
-    maxLength: 1000
-  Scope:
-    type: object
-    properties:
-      key:
-        $ref: '#/definitions/ScopeType'
-        description: The type of the scope.
-      value:
-        $ref: '#/definitions/ScopeValue'
-        description: The resource identifier for the specified scope type.
-    description: This data type contains key-value pairs that identify various Amazon resources.
-  ScopeList:
-    type: array
-    items:
-      $ref: '#/definitions/Scope'
-    minItems: 1
-  ScopeType:
-    type: string
-    enum:
-      - INSTANCE_ID
-      - RULES_PACKAGE_ARN
-  ScopeValue:
-    type: string
-  ServiceName:
-    type: string
-    minLength: 0
-    maxLength: 128
-  ServiceTemporarilyUnavailableException:
-    type: object
-    required:
-      - message
-      - canRetry
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: Details of the exception error.
-      canRetry:
-        $ref: '#/definitions/Bool'
-        description: You can wait and then retry your request.
-    description: The serice is temporary unavailable.
   SetTagsForResourceRequest:
     type: object
     required:
@@ -4095,20 +2965,16 @@ definitions:
       tags:
         $ref: '#/definitions/TagList'
         description: A collection of key and value pairs that you want to set to the assessment template.
-  Severity:
-    type: string
-    enum:
-      - Low
-      - Medium
-      - High
-      - Informational
-      - Undefined
-  SeverityList:
-    type: array
-    items:
-      $ref: '#/definitions/Severity'
-    minItems: 0
-    maxItems: 50
+  StartAssessmentRunResponse:
+    type: object
+    required:
+      - assessmentRunArn
+    example:
+      assessmentRunArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T/run/0-jOoroxyY'
+    properties:
+      assessmentRunArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the assessment run that has been started.
   StartAssessmentRunRequest:
     type: object
     required:
@@ -4123,21 +2989,27 @@ definitions:
       assessmentRunName:
         $ref: '#/definitions/AssessmentRunName'
         description: You can specify the name for the assessment run. The name must be unique for the assessment template whose ARN is used to start the assessment run.
-  StartAssessmentRunResponse:
+  AgentsAlreadyRunningAssessmentException:
     type: object
     required:
-      - assessmentRunArn
-    example:
-      assessmentRunArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T/run/0-jOoroxyY'
+      - message
+      - agents
+      - agentsTruncated
+      - canRetry
     properties:
-      assessmentRunArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the assessment run that has been started.
-  StopAction:
-    type: string
-    enum:
-      - START_EVALUATION
-      - SKIP_EVALUATION
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: Details of the exception error.
+      agents:
+        $ref: '#/definitions/AgentAlreadyRunningAssessmentList'
+        description: <p/>
+      agentsTruncated:
+        $ref: '#/definitions/Bool'
+        description: <p/>
+      canRetry:
+        $ref: '#/definitions/Bool'
+        description: You can immediately retry your request.
+    description: 'You started an assessment run, but one of the instances is already participating in another assessment run.'
   StopAssessmentRunRequest:
     type: object
     required:
@@ -4171,97 +3043,6 @@ definitions:
       topicArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the SNS topic to which the SNS notifications are sent.
-  Subscription:
-    type: object
-    required:
-      - resourceArn
-      - topicArn
-      - eventSubscriptions
-    properties:
-      resourceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the assessment template that is used during the event for which the SNS notification is sent.
-      topicArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the Amazon Simple Notification Service (SNS) topic to which the SNS notifications are sent.
-      eventSubscriptions:
-        $ref: '#/definitions/EventSubscriptionList'
-        description: The list of existing event subscriptions.
-    description: This data type is used as a response element in the <a>ListEventSubscriptions</a> action.
-  SubscriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/Subscription'
-    minItems: 0
-    maxItems: 50
-  Tag:
-    type: object
-    required:
-      - key
-    properties:
-      key:
-        $ref: '#/definitions/TagKey'
-        description: A tag key.
-      value:
-        $ref: '#/definitions/TagValue'
-        description: A value assigned to a tag key.
-    description: A key and value pair. This data type is used as a request parameter in the <a>SetTagsForResource</a> action and a response element in the <a>ListTagsForResource</a> action.
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 0
-    maxItems: 10
-  TagValue:
-    type: string
-    minLength: 1
-    maxLength: 256
-  TelemetryMetadata:
-    type: object
-    required:
-      - messageType
-      - count
-    properties:
-      messageType:
-        $ref: '#/definitions/MessageType'
-        description: A specific type of behavioral data that is collected by the agent.
-      count:
-        $ref: '#/definitions/Long'
-        description: The count of messages that the agent sends to the Amazon Inspector service.
-      dataSize:
-        $ref: '#/definitions/Long'
-        description: The data size of messages that the agent sends to the Amazon Inspector service.
-    description: The metadata about the Amazon Inspector application data metrics collected by the agent. This data type is used as the response element in the <a>GetTelemetryMetadata</a> action.
-  TelemetryMetadataList:
-    type: array
-    items:
-      $ref: '#/definitions/TelemetryMetadata'
-    minItems: 0
-    maxItems: 5000
-  Text:
-    type: string
-    minLength: 0
-    maxLength: 20000
-  Timestamp:
-    type: string
-    format: date-time
-  TimestampRange:
-    type: object
-    properties:
-      beginDate:
-        $ref: '#/definitions/Timestamp'
-        description: The minimum value of the timestamp range.
-      endDate:
-        $ref: '#/definitions/Timestamp'
-        description: The maximum value of the timestamp range.
-    description: This data type is used in the <a>AssessmentRunFilter</a> data type.
-  UUID:
-    type: string
-    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
   UnsubscribeFromEventRequest:
     type: object
     required:
@@ -4282,17 +3063,6 @@ definitions:
       topicArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the SNS topic to which SNS notifications are sent.
-  UnsupportedFeatureException:
-    type: object
-    required:
-      - message
-      - canRetry
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-      canRetry:
-        $ref: '#/definitions/Bool'
-    description: Used by the <a>GetAssessmentReport</a> API. The request was rejected because you tried to generate a report for an assessment run that existed before reporting was supported in Amazon Inspector. You can only generate reports for assessment runs that took place or will take place after generating reports in Amazon Inspector became available.
   UpdateAssessmentTargetRequest:
     type: object
     required:
@@ -4312,14 +3082,28 @@ definitions:
       resourceGroupArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the resource group that is used to specify the new resource group to associate with the assessment target.
-  Url:
+  AccessDeniedErrorCode:
     type: string
-    maxLength: 2048
-  UserAttributeKeyList:
+    enum:
+      - ACCESS_DENIED_TO_ASSESSMENT_TARGET
+      - ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE
+      - ACCESS_DENIED_TO_ASSESSMENT_RUN
+      - ACCESS_DENIED_TO_FINDING
+      - ACCESS_DENIED_TO_RESOURCE_GROUP
+      - ACCESS_DENIED_TO_RULES_PACKAGE
+      - ACCESS_DENIED_TO_SNS_TOPIC
+      - ACCESS_DENIED_TO_IAM_ROLE
+  ErrorMessage:
+    type: string
+    minLength: 0
+    maxLength: 1000
+  Bool:
+    type: boolean
+  AddRemoveAttributesFindingArnList:
     type: array
     items:
-      $ref: '#/definitions/AttributeKey'
-    minItems: 0
+      $ref: '#/definitions/Arn'
+    minItems: 1
     maxItems: 10
   UserAttributeList:
     type: array
@@ -4327,7 +3111,1223 @@ definitions:
       $ref: '#/definitions/Attribute'
     minItems: 0
     maxItems: 10
+  FailedItems:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Arn'
+        value:
+          $ref: '#/definitions/FailedItemDetails'
+  Arn:
+    type: string
+    minLength: 1
+    maxLength: 300
+  AgentId:
+    type: string
+    minLength: 1
+    maxLength: 128
+  AgentAlreadyRunningAssessment:
+    type: object
+    required:
+      - agentId
+      - assessmentRunArn
+    properties:
+      agentId:
+        $ref: '#/definitions/AgentId'
+        description: ID of the agent that is running on an EC2 instance that is already participating in another started assessment run.
+      assessmentRunArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the assessment run that has already been started.
+    description: Used in the exception error that is thrown if you start an assessment run for an assessment target that includes an EC2 instance that is already participating in another started assessment run.
+  AgentAlreadyRunningAssessmentList:
+    type: array
+    items:
+      $ref: '#/definitions/AgentAlreadyRunningAssessment'
+    minItems: 1
+    maxItems: 10
+  AgentHealthList:
+    type: array
+    items:
+      $ref: '#/definitions/AgentHealth'
+    minItems: 0
+    maxItems: 10
+  AgentHealthCodeList:
+    type: array
+    items:
+      $ref: '#/definitions/AgentHealthCode'
+    minItems: 0
+    maxItems: 10
+  AgentFilter:
+    type: object
+    required:
+      - agentHealths
+      - agentHealthCodes
+    properties:
+      agentHealths:
+        $ref: '#/definitions/AgentHealthList'
+        description: The current health state of the agent. Values can be set to <b>HEALTHY</b> or <b>UNHEALTHY</b>.
+      agentHealthCodes:
+        $ref: '#/definitions/AgentHealthCodeList'
+        description: 'The detailed health state of the agent. Values can be set to <b>IDLE</b>, <b>RUNNING</b>, <b>SHUTDOWN</b>, <b>UNHEALTHY</b>, <b>THROTTLED</b>, and <b>UNKNOWN</b>. '
+    description: Contains information about an Amazon Inspector agent. This data type is used as a request parameter in the <a>ListAssessmentRunAgents</a> action.
+  AgentHealth:
+    type: string
+    enum:
+      - HEALTHY
+      - UNHEALTHY
+      - UNKNOWN
+  AgentHealthCode:
+    type: string
+    enum:
+      - IDLE
+      - RUNNING
+      - SHUTDOWN
+      - UNHEALTHY
+      - THROTTLED
+      - UNKNOWN
+  AgentIdList:
+    type: array
+    items:
+      $ref: '#/definitions/AgentId'
+    minItems: 0
+    maxItems: 500
+  Hostname:
+    type: string
+    minLength: 0
+    maxLength: 256
+  AutoScalingGroup:
+    type: string
+    minLength: 1
+    maxLength: 256
+  AgentVersion:
+    type: string
+    minLength: 1
+    maxLength: 128
+  OperatingSystem:
+    type: string
+    minLength: 1
+    maxLength: 256
+  KernelVersion:
+    type: string
+    minLength: 1
+    maxLength: 128
+  Ipv4Address:
+    type: string
+    minLength: 7
+    maxLength: 15
+  AgentPreview:
+    type: object
+    required:
+      - agentId
+    properties:
+      hostname:
+        $ref: '#/definitions/Hostname'
+        description: The hostname of the EC2 instance on which the Amazon Inspector Agent is installed.
+      agentId:
+        $ref: '#/definitions/AgentId'
+        description: The ID of the EC2 instance where the agent is installed.
+      autoScalingGroup:
+        $ref: '#/definitions/AutoScalingGroup'
+        description: The Auto Scaling group for the EC2 instance where the agent is installed.
+      agentHealth:
+        $ref: '#/definitions/AgentHealth'
+        description: The health status of the Amazon Inspector Agent.
+      agentVersion:
+        $ref: '#/definitions/AgentVersion'
+        description: The version of the Amazon Inspector Agent.
+      operatingSystem:
+        $ref: '#/definitions/OperatingSystem'
+        description: The operating system running on the EC2 instance on which the Amazon Inspector Agent is installed.
+      kernelVersion:
+        $ref: '#/definitions/KernelVersion'
+        description: The kernel version of the operating system running on the EC2 instance on which the Amazon Inspector Agent is installed.
+      ipv4Address:
+        $ref: '#/definitions/Ipv4Address'
+        description: The IP address of the EC2 instance on which the Amazon Inspector Agent is installed.
+    description: Used as a response element in the <a>PreviewAgents</a> action.
+  AgentPreviewList:
+    type: array
+    items:
+      $ref: '#/definitions/AgentPreview'
+    minItems: 0
+    maxItems: 100
+  AmiId:
+    type: string
+    minLength: 0
+    maxLength: 256
+  ArnCount:
+    type: integer
+  AssessmentRulesPackageArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
+    minItems: 1
+    maxItems: 50
+  AssessmentRunName:
+    type: string
+    minLength: 1
+    maxLength: 140
+  AssessmentRunState:
+    type: string
+    enum:
+      - CREATED
+      - START_DATA_COLLECTION_PENDING
+      - START_DATA_COLLECTION_IN_PROGRESS
+      - COLLECTING_DATA
+      - STOP_DATA_COLLECTION_PENDING
+      - DATA_COLLECTED
+      - START_EVALUATING_RULES_PENDING
+      - EVALUATING_RULES
+      - FAILED
+      - ERROR
+      - COMPLETED
+      - COMPLETED_WITH_ERRORS
+      - CANCELED
+  AssessmentRunDuration:
+    type: integer
+    minimum: 180
+    maximum: 86400
+  Timestamp:
+    type: string
+    format: date-time
+  AssessmentRunStateChangeList:
+    type: array
+    items:
+      $ref: '#/definitions/AssessmentRunStateChange'
+    minItems: 0
+    maxItems: 50
+  AssessmentRunNotificationList:
+    type: array
+    items:
+      $ref: '#/definitions/AssessmentRunNotification'
+    minItems: 0
+    maxItems: 50
+  AssessmentRunFindingCounts:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Severity'
+        value:
+          $ref: '#/definitions/FindingCount'
+  AssessmentRun:
+    type: object
+    required:
+      - arn
+      - name
+      - assessmentTemplateArn
+      - state
+      - durationInSeconds
+      - rulesPackageArns
+      - userAttributesForFindings
+      - createdAt
+      - stateChangedAt
+      - dataCollected
+      - stateChanges
+      - notifications
+      - findingCounts
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the assessment run.
+      name:
+        $ref: '#/definitions/AssessmentRunName'
+        description: The auto-generated name for the assessment run.
+      assessmentTemplateArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the assessment template that is associated with the assessment run.
+      state:
+        $ref: '#/definitions/AssessmentRunState'
+        description: The state of the assessment run.
+      durationInSeconds:
+        $ref: '#/definitions/AssessmentRunDuration'
+        description: The duration of the assessment run.
+      rulesPackageArns:
+        $ref: '#/definitions/AssessmentRulesPackageArnList'
+        description: The rules packages selected for the assessment run.
+      userAttributesForFindings:
+        $ref: '#/definitions/UserAttributeList'
+        description: The user-defined attributes that are assigned to every generated finding.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The time when <a>StartAssessmentRun</a> was called.
+      startedAt:
+        $ref: '#/definitions/Timestamp'
+        description: The time when <a>StartAssessmentRun</a> was called.
+      completedAt:
+        $ref: '#/definitions/Timestamp'
+        description: The assessment run completion time that corresponds to the rules packages evaluation completion time or failure.
+      stateChangedAt:
+        $ref: '#/definitions/Timestamp'
+        description: The last time when the assessment run's state changed.
+      dataCollected:
+        $ref: '#/definitions/Bool'
+        description: A Boolean value (true or false) that specifies whether the process of collecting data from the agents is completed.
+      stateChanges:
+        $ref: '#/definitions/AssessmentRunStateChangeList'
+        description: A list of the assessment run state changes.
+      notifications:
+        $ref: '#/definitions/AssessmentRunNotificationList'
+        description: A list of notifications for the event subscriptions. A notification about a particular generated finding is added to this list only once.
+      findingCounts:
+        $ref: '#/definitions/AssessmentRunFindingCounts'
+        description: Provides a total count of generated findings per severity.
+    description: <p>A snapshot of an Amazon Inspector assessment run that contains the findings of the assessment run .</p> <p>Used as the response element in the <a>DescribeAssessmentRuns</a> action.</p>
+  Message:
+    type: string
+    minLength: 0
+    maxLength: 1000
+  TelemetryMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/TelemetryMetadata'
+    minItems: 0
+    maxItems: 5000
+  AssessmentRunAgent:
+    type: object
+    required:
+      - agentId
+      - assessmentRunArn
+      - agentHealth
+      - agentHealthCode
+      - telemetryMetadata
+    properties:
+      agentId:
+        $ref: '#/definitions/AgentId'
+        description: The AWS account of the EC2 instance where the agent is installed.
+      assessmentRunArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the assessment run that is associated with the agent.
+      agentHealth:
+        $ref: '#/definitions/AgentHealth'
+        description: The current health state of the agent.
+      agentHealthCode:
+        $ref: '#/definitions/AgentHealthCode'
+        description: The detailed health state of the agent.
+      agentHealthDetails:
+        $ref: '#/definitions/Message'
+        description: The description for the agent health code.
+      autoScalingGroup:
+        $ref: '#/definitions/AutoScalingGroup'
+        description: The Auto Scaling group of the EC2 instance that is specified by the agent ID.
+      telemetryMetadata:
+        $ref: '#/definitions/TelemetryMetadataList'
+        description: The Amazon Inspector application data metrics that are collected by the agent.
+    description: Contains information about an Amazon Inspector agent. This data type is used as a response element in the <a>ListAssessmentRunAgents</a> action.
+  AssessmentRunAgentList:
+    type: array
+    items:
+      $ref: '#/definitions/AssessmentRunAgent'
+    minItems: 0
+    maxItems: 500
+  NamePattern:
+    type: string
+    minLength: 1
+    maxLength: 140
+  AssessmentRunStateList:
+    type: array
+    items:
+      $ref: '#/definitions/AssessmentRunState'
+    minItems: 0
+    maxItems: 50
+  DurationRange:
+    type: object
+    properties:
+      minSeconds:
+        $ref: '#/definitions/AssessmentRunDuration'
+        description: The minimum value of the duration range. Must be greater than zero.
+      maxSeconds:
+        $ref: '#/definitions/AssessmentRunDuration'
+        description: The maximum value of the duration range. Must be less than or equal to 604800 seconds (1 week).
+    description: This data type is used in the <a>AssessmentTemplateFilter</a> data type.
+  FilterRulesPackageArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
+    minItems: 0
+    maxItems: 50
+  TimestampRange:
+    type: object
+    properties:
+      beginDate:
+        $ref: '#/definitions/Timestamp'
+        description: The minimum value of the timestamp range.
+      endDate:
+        $ref: '#/definitions/Timestamp'
+        description: The maximum value of the timestamp range.
+    description: This data type is used in the <a>AssessmentRunFilter</a> data type.
+  AssessmentRunFilter:
+    type: object
+    properties:
+      namePattern:
+        $ref: '#/definitions/NamePattern'
+        description: 'For a record to match a filter, an explicit value or a string containing a wildcard that is specified for this data type property must match the value of the <b>assessmentRunName</b> property of the <a>AssessmentRun</a> data type.'
+      states:
+        $ref: '#/definitions/AssessmentRunStateList'
+        description: 'For a record to match a filter, one of the values specified for this data type property must be the exact match of the value of the <b>assessmentRunState</b> property of the <a>AssessmentRun</a> data type.'
+      durationRange:
+        $ref: '#/definitions/DurationRange'
+        description: 'For a record to match a filter, the value that is specified for this data type property must inclusively match any value between the specified minimum and maximum values of the <b>durationInSeconds</b> property of the <a>AssessmentRun</a> data type.'
+      rulesPackageArns:
+        $ref: '#/definitions/FilterRulesPackageArnList'
+        description: 'For a record to match a filter, the value that is specified for this data type property must be contained in the list of values of the <b>rulesPackages</b> property of the <a>AssessmentRun</a> data type.'
+      startTimeRange:
+        $ref: '#/definitions/TimestampRange'
+        description: 'For a record to match a filter, the value that is specified for this data type property must inclusively match any value between the specified minimum and maximum values of the <b>startTime</b> property of the <a>AssessmentRun</a> data type.'
+      completionTimeRange:
+        $ref: '#/definitions/TimestampRange'
+        description: 'For a record to match a filter, the value that is specified for this data type property must inclusively match any value between the specified minimum and maximum values of the <b>completedAt</b> property of the <a>AssessmentRun</a> data type.'
+      stateChangeTimeRange:
+        $ref: '#/definitions/TimestampRange'
+        description: 'For a record to match a filter, the value that is specified for this data type property must match the <b>stateChangedAt</b> property of the <a>AssessmentRun</a> data type.'
+    description: Used as the request parameter in the <a>ListAssessmentRuns</a> action.
+  Severity:
+    type: string
+    enum:
+      - Low
+      - Medium
+      - High
+      - Informational
+      - Undefined
+  FindingCount:
+    type: integer
+  AssessmentRunInProgressArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
+    minItems: 1
+    maxItems: 10
+  AssessmentRunList:
+    type: array
+    items:
+      $ref: '#/definitions/AssessmentRun'
+    minItems: 0
+    maxItems: 10
+  InspectorEvent:
+    type: string
+    enum:
+      - ASSESSMENT_RUN_STARTED
+      - ASSESSMENT_RUN_COMPLETED
+      - ASSESSMENT_RUN_STATE_CHANGED
+      - FINDING_REPORTED
+      - OTHER
+  AssessmentRunNotificationSnsStatusCode:
+    type: string
+    enum:
+      - SUCCESS
+      - TOPIC_DOES_NOT_EXIST
+      - ACCESS_DENIED
+      - INTERNAL_ERROR
+  AssessmentRunNotification:
+    type: object
+    required:
+      - date
+      - event
+      - error
+    properties:
+      date:
+        $ref: '#/definitions/Timestamp'
+        description: The date of the notification.
+      event:
+        $ref: '#/definitions/InspectorEvent'
+        description: The event for which a notification is sent.
+      message:
+        $ref: '#/definitions/Message'
+        description: The message included in the notification.
+      error:
+        $ref: '#/definitions/Bool'
+        description: The Boolean value that specifies whether the notification represents an error.
+      snsTopicArn:
+        $ref: '#/definitions/Arn'
+        description: The SNS topic to which the SNS notification is sent.
+      snsPublishStatusCode:
+        $ref: '#/definitions/AssessmentRunNotificationSnsStatusCode'
+        description: The status code of the SNS notification.
+    description: Used as one of the elements of the <a>AssessmentRun</a> data type.
+  AssessmentRunStateChange:
+    type: object
+    required:
+      - stateChangedAt
+      - state
+    properties:
+      stateChangedAt:
+        $ref: '#/definitions/Timestamp'
+        description: The last time the assessment run state changed.
+      state:
+        $ref: '#/definitions/AssessmentRunState'
+        description: The assessment run state.
+    description: Used as one of the elements of the <a>AssessmentRun</a> data type.
+  AssessmentTargetName:
+    type: string
+    minLength: 1
+    maxLength: 140
+  AssessmentTarget:
+    type: object
+    required:
+      - arn
+      - name
+      - createdAt
+      - updatedAt
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN that specifies the Amazon Inspector assessment target.
+      name:
+        $ref: '#/definitions/AssessmentTargetName'
+        description: The name of the Amazon Inspector assessment target.
+      resourceGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN that specifies the resource group that is associated with the assessment target.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The time at which the assessment target is created.
+      updatedAt:
+        $ref: '#/definitions/Timestamp'
+        description: The time at which <a>UpdateAssessmentTarget</a> is called.
+    description: Contains information about an Amazon Inspector application. This data type is used as the response element in the <a>DescribeAssessmentTargets</a> action.
+  AssessmentTargetFilter:
+    type: object
+    properties:
+      assessmentTargetNamePattern:
+        $ref: '#/definitions/NamePattern'
+        description: 'For a record to match a filter, an explicit value or a string that contains a wildcard that is specified for this data type property must match the value of the <b>assessmentTargetName</b> property of the <a>AssessmentTarget</a> data type.'
+    description: Used as the request parameter in the <a>ListAssessmentTargets</a> action.
+  AssessmentTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/AssessmentTarget'
+    minItems: 0
+    maxItems: 10
+  AssessmentTemplateName:
+    type: string
+    minLength: 1
+    maxLength: 140
+  AssessmentTemplateRulesPackageArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
+    minItems: 0
+    maxItems: 50
+  AssessmentTemplate:
+    type: object
+    required:
+      - arn
+      - name
+      - assessmentTargetArn
+      - durationInSeconds
+      - rulesPackageArns
+      - userAttributesForFindings
+      - assessmentRunCount
+      - createdAt
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the assessment template.
+      name:
+        $ref: '#/definitions/AssessmentTemplateName'
+        description: The name of the assessment template.
+      assessmentTargetArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the assessment target that corresponds to this assessment template.
+      durationInSeconds:
+        $ref: '#/definitions/AssessmentRunDuration'
+        description: The duration in seconds specified for this assessment template. The default value is 3600 seconds (one hour). The maximum value is 86400 seconds (one day).
+      rulesPackageArns:
+        $ref: '#/definitions/AssessmentTemplateRulesPackageArnList'
+        description: The rules packages that are specified for this assessment template.
+      userAttributesForFindings:
+        $ref: '#/definitions/UserAttributeList'
+        description: The user-defined attributes that are assigned to every generated finding from the assessment run that uses this assessment template.
+      lastAssessmentRunArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the most recent assessment run associated with this assessment template. This value exists only when the value of assessmentRunCount is greaterpa than zero.
+      assessmentRunCount:
+        $ref: '#/definitions/ArnCount'
+        description: The number of existing assessment runs associated with this assessment template. This value can be zero or a positive integer.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The time at which the assessment template is created.
+    description: Contains information about an Amazon Inspector assessment template. This data type is used as the response element in the <a>DescribeAssessmentTemplates</a> action.
+  AssessmentTemplateFilter:
+    type: object
+    properties:
+      namePattern:
+        $ref: '#/definitions/NamePattern'
+        description: 'For a record to match a filter, an explicit value or a string that contains a wildcard that is specified for this data type property must match the value of the <b>assessmentTemplateName</b> property of the <a>AssessmentTemplate</a> data type.'
+      durationRange:
+        $ref: '#/definitions/DurationRange'
+        description: 'For a record to match a filter, the value specified for this data type property must inclusively match any value between the specified minimum and maximum values of the <b>durationInSeconds</b> property of the <a>AssessmentTemplate</a> data type.'
+      rulesPackageArns:
+        $ref: '#/definitions/FilterRulesPackageArnList'
+        description: 'For a record to match a filter, the values that are specified for this data type property must be contained in the list of values of the <b>rulesPackageArns</b> property of the <a>AssessmentTemplate</a> data type.'
+    description: Used as the request parameter in the <a>ListAssessmentTemplates</a> action.
+  AssessmentTemplateList:
+    type: array
+    items:
+      $ref: '#/definitions/AssessmentTemplate'
+    minItems: 0
+    maxItems: 10
+  NumericVersion:
+    type: integer
+    minimum: 0
+  Ipv4AddressList:
+    type: array
+    items:
+      $ref: '#/definitions/Ipv4Address'
+    minItems: 0
+    maxItems: 50
+  AssetAttributes:
+    type: object
+    required:
+      - schemaVersion
+    properties:
+      schemaVersion:
+        $ref: '#/definitions/NumericVersion'
+        description: The schema version of this data type.
+      agentId:
+        $ref: '#/definitions/AgentId'
+        description: The ID of the agent that is installed on the EC2 instance where the finding is generated.
+      autoScalingGroup:
+        $ref: '#/definitions/AutoScalingGroup'
+        description: The Auto Scaling group of the EC2 instance where the finding is generated.
+      amiId:
+        $ref: '#/definitions/AmiId'
+        description: The ID of the Amazon Machine Image (AMI) that is installed on the EC2 instance where the finding is generated.
+      hostname:
+        $ref: '#/definitions/Hostname'
+        description: The hostname of the EC2 instance where the finding is generated.
+      ipv4Addresses:
+        $ref: '#/definitions/Ipv4AddressList'
+        description: The list of IP v4 addresses of the EC2 instance where the finding is generated.
+    description: A collection of attributes of the host from which the finding is generated.
+  AssetType:
+    type: string
+    enum:
+      - ec2-instance
+  AttributeKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  AttributeValue:
+    type: string
+    minLength: 1
+    maxLength: 256
+  Attribute:
+    type: object
+    required:
+      - key
+    properties:
+      key:
+        $ref: '#/definitions/AttributeKey'
+        description: The attribute key.
+      value:
+        $ref: '#/definitions/AttributeValue'
+        description: The value assigned to the attribute key.
+    description: This data type is used as a request parameter in the <a>AddAttributesToFindings</a> and <a>CreateAssessmentTemplate</a> actions.
+  AttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/Attribute'
+    minItems: 0
+    maxItems: 50
+  AutoScalingGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/AutoScalingGroup'
+    minItems: 0
+    maxItems: 20
+  BatchDescribeArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
+    minItems: 1
+    maxItems: 10
+  BatchDescribeExclusionsArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
+    minItems: 1
+    maxItems: 100
+  UUID:
+    type: string
+    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+  ResourceGroupTags:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceGroupTag'
+    minItems: 1
+    maxItems: 10
+  Locale:
+    type: string
+    enum:
+      - EN_US
+  ExclusionMap:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Arn'
+        value:
+          $ref: '#/definitions/Exclusion'
+  FindingList:
+    type: array
+    items:
+      $ref: '#/definitions/Finding'
+    minItems: 0
+    maxItems: 100
+  ResourceGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceGroup'
+    minItems: 0
+    maxItems: 10
+  RulesPackageList:
+    type: array
+    items:
+      $ref: '#/definitions/RulesPackage'
+    minItems: 0
+    maxItems: 10
+  EventSubscription:
+    type: object
+    required:
+      - event
+      - subscribedAt
+    properties:
+      event:
+        $ref: '#/definitions/InspectorEvent'
+        description: The event for which Amazon Simple Notification Service (SNS) notifications are sent.
+      subscribedAt:
+        $ref: '#/definitions/Timestamp'
+        description: The time at which <a>SubscribeToEvent</a> is called.
+    description: This data type is used in the <a>Subscription</a> data type.
+  EventSubscriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/EventSubscription'
+    minItems: 1
+    maxItems: 50
+  Text:
+    type: string
+    minLength: 0
+    maxLength: 20000
+  ScopeList:
+    type: array
+    items:
+      $ref: '#/definitions/Scope'
+    minItems: 1
+  Exclusion:
+    type: object
+    required:
+      - arn
+      - title
+      - description
+      - recommendation
+      - scopes
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN that specifies the exclusion.
+      title:
+        $ref: '#/definitions/Text'
+        description: The name of the exclusion.
+      description:
+        $ref: '#/definitions/Text'
+        description: The description of the exclusion.
+      recommendation:
+        $ref: '#/definitions/Text'
+        description: The recommendation for the exclusion.
+      scopes:
+        $ref: '#/definitions/ScopeList'
+        description: The AWS resources for which the exclusion pertains.
+      attributes:
+        $ref: '#/definitions/AttributeList'
+        description: The system-defined attributes for the exclusion.
+    description: Contains information about what was excluded from an assessment run.
+  ExclusionPreview:
+    type: object
+    required:
+      - title
+      - description
+      - recommendation
+      - scopes
+    properties:
+      title:
+        $ref: '#/definitions/Text'
+        description: The name of the exclusion preview.
+      description:
+        $ref: '#/definitions/Text'
+        description: The description of the exclusion preview.
+      recommendation:
+        $ref: '#/definitions/Text'
+        description: The recommendation for the exclusion preview.
+      scopes:
+        $ref: '#/definitions/ScopeList'
+        description: The AWS resources for which the exclusion preview pertains.
+      attributes:
+        $ref: '#/definitions/AttributeList'
+        description: The system-defined attributes for the exclusion preview.
+    description: Contains information about what is excluded from an assessment run given the current state of the assessment template.
+  ExclusionPreviewList:
+    type: array
+    items:
+      $ref: '#/definitions/ExclusionPreview'
+    minItems: 0
+    maxItems: 100
+  FailedItemErrorCode:
+    type: string
+    enum:
+      - INVALID_ARN
+      - DUPLICATE_ARN
+      - ITEM_DOES_NOT_EXIST
+      - ACCESS_DENIED
+      - LIMIT_EXCEEDED
+      - INTERNAL_ERROR
+  FailedItemDetails:
+    type: object
+    required:
+      - failureCode
+      - retryable
+    properties:
+      failureCode:
+        $ref: '#/definitions/FailedItemErrorCode'
+        description: The status code of a failed item.
+      retryable:
+        $ref: '#/definitions/Bool'
+        description: Indicates whether you can immediately retry a request for this item for a specified resource.
+    description: Includes details about the failed items.
+  ServiceName:
+    type: string
+    minLength: 0
+    maxLength: 128
+  InspectorServiceAttributes:
+    type: object
+    required:
+      - schemaVersion
+    properties:
+      schemaVersion:
+        $ref: '#/definitions/NumericVersion'
+        description: The schema version of this data type.
+      assessmentRunArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the assessment run during which the finding is generated.
+      rulesPackageArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the rules package that is used to generate the finding.
+    description: This data type is used in the <a>Finding</a> data type.
+  FindingId:
+    type: string
+    minLength: 0
+    maxLength: 128
+  NumericSeverity:
+    type: number
+    format: double
+    minimum: 0
+    maximum: 10
+  IocConfidence:
+    type: integer
+    minimum: 0
+    maximum: 10
+  Finding:
+    type: object
+    required:
+      - arn
+      - attributes
+      - userAttributes
+      - createdAt
+      - updatedAt
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN that specifies the finding.
+      schemaVersion:
+        $ref: '#/definitions/NumericVersion'
+        description: The schema version of this data type.
+      service:
+        $ref: '#/definitions/ServiceName'
+        description: The data element is set to "Inspector".
+      serviceAttributes:
+        $ref: '#/definitions/InspectorServiceAttributes'
+        description: This data type is used in the <a>Finding</a> data type.
+      assetType:
+        $ref: '#/definitions/AssetType'
+        description: The type of the host from which the finding is generated.
+      assetAttributes:
+        $ref: '#/definitions/AssetAttributes'
+        description: A collection of attributes of the host from which the finding is generated.
+      id:
+        $ref: '#/definitions/FindingId'
+        description: The ID of the finding.
+      title:
+        $ref: '#/definitions/Text'
+        description: The name of the finding.
+      description:
+        $ref: '#/definitions/Text'
+        description: The description of the finding.
+      recommendation:
+        $ref: '#/definitions/Text'
+        description: The recommendation for the finding.
+      severity:
+        $ref: '#/definitions/Severity'
+        description: 'The finding severity. Values can be set to High, Medium, Low, and Informational.'
+      numericSeverity:
+        $ref: '#/definitions/NumericSeverity'
+        description: The numeric value of the finding severity.
+      confidence:
+        $ref: '#/definitions/IocConfidence'
+        description: This data element is currently not used.
+      indicatorOfCompromise:
+        $ref: '#/definitions/Bool'
+        description: This data element is currently not used.
+      attributes:
+        $ref: '#/definitions/AttributeList'
+        description: The system-defined attributes for the finding.
+      userAttributes:
+        $ref: '#/definitions/UserAttributeList'
+        description: The user-defined attributes that are assigned to the finding.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The time when the finding was generated.
+      updatedAt:
+        $ref: '#/definitions/Timestamp'
+        description: The time when <a>AddAttributesToFindings</a> is called.
+    description: Contains information about an Amazon Inspector finding. This data type is used as the response element in the <a>DescribeFindings</a> action.
+  RuleNameList:
+    type: array
+    items:
+      $ref: '#/definitions/RuleName'
+    minItems: 0
+    maxItems: 50
+  SeverityList:
+    type: array
+    items:
+      $ref: '#/definitions/Severity'
+    minItems: 0
+    maxItems: 50
+  FindingFilter:
+    type: object
+    properties:
+      agentIds:
+        $ref: '#/definitions/AgentIdList'
+        description: 'For a record to match a filter, one of the values that is specified for this data type property must be the exact match of the value of the <b>agentId</b> property of the <a>Finding</a> data type.'
+      autoScalingGroups:
+        $ref: '#/definitions/AutoScalingGroupList'
+        description: 'For a record to match a filter, one of the values that is specified for this data type property must be the exact match of the value of the <b>autoScalingGroup</b> property of the <a>Finding</a> data type.'
+      ruleNames:
+        $ref: '#/definitions/RuleNameList'
+        description: 'For a record to match a filter, one of the values that is specified for this data type property must be the exact match of the value of the <b>ruleName</b> property of the <a>Finding</a> data type.'
+      severities:
+        $ref: '#/definitions/SeverityList'
+        description: 'For a record to match a filter, one of the values that is specified for this data type property must be the exact match of the value of the <b>severity</b> property of the <a>Finding</a> data type.'
+      rulesPackageArns:
+        $ref: '#/definitions/FilterRulesPackageArnList'
+        description: 'For a record to match a filter, one of the values that is specified for this data type property must be the exact match of the value of the <b>rulesPackageArn</b> property of the <a>Finding</a> data type.'
+      attributes:
+        $ref: '#/definitions/AttributeList'
+        description: 'For a record to match a filter, the list of values that are specified for this data type property must be contained in the list of values of the <b>attributes</b> property of the <a>Finding</a> data type.'
+      userAttributes:
+        $ref: '#/definitions/AttributeList'
+        description: 'For a record to match a filter, the value that is specified for this data type property must be contained in the list of values of the <b>userAttributes</b> property of the <a>Finding</a> data type.'
+      creationTimeRange:
+        $ref: '#/definitions/TimestampRange'
+        description: The time range during which the finding is generated.
+    description: This data type is used as a request parameter in the <a>ListFindings</a> action.
+  ReportFileFormat:
+    type: string
+    enum:
+      - HTML
+      - PDF
+  ReportType:
+    type: string
+    enum:
+      - FINDING
+      - FULL
+  ReportStatus:
+    type: string
+    enum:
+      - WORK_IN_PROGRESS
+      - FAILED
+      - COMPLETED
+  Url:
+    type: string
+    maxLength: 2048
+  PaginationToken:
+    type: string
+    minLength: 1
+    maxLength: 300
+  ListMaxResults:
+    type: integer
+  PreviewStatus:
+    type: string
+    enum:
+      - WORK_IN_PROGRESS
+      - COMPLETED
+  InvalidCrossAccountRoleErrorCode:
+    type: string
+    enum:
+      - ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP
+      - ROLE_DOES_NOT_HAVE_CORRECT_POLICY
+  InvalidInputErrorCode:
+    type: string
+    enum:
+      - INVALID_ASSESSMENT_TARGET_ARN
+      - INVALID_ASSESSMENT_TEMPLATE_ARN
+      - INVALID_ASSESSMENT_RUN_ARN
+      - INVALID_FINDING_ARN
+      - INVALID_RESOURCE_GROUP_ARN
+      - INVALID_RULES_PACKAGE_ARN
+      - INVALID_RESOURCE_ARN
+      - INVALID_SNS_TOPIC_ARN
+      - INVALID_IAM_ROLE_ARN
+      - INVALID_ASSESSMENT_TARGET_NAME
+      - INVALID_ASSESSMENT_TARGET_NAME_PATTERN
+      - INVALID_ASSESSMENT_TEMPLATE_NAME
+      - INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN
+      - INVALID_ASSESSMENT_TEMPLATE_DURATION
+      - INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE
+      - INVALID_ASSESSMENT_RUN_DURATION_RANGE
+      - INVALID_ASSESSMENT_RUN_START_TIME_RANGE
+      - INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE
+      - INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE
+      - INVALID_ASSESSMENT_RUN_STATE
+      - INVALID_TAG
+      - INVALID_TAG_KEY
+      - INVALID_TAG_VALUE
+      - INVALID_RESOURCE_GROUP_TAG_KEY
+      - INVALID_RESOURCE_GROUP_TAG_VALUE
+      - INVALID_ATTRIBUTE
+      - INVALID_USER_ATTRIBUTE
+      - INVALID_USER_ATTRIBUTE_KEY
+      - INVALID_USER_ATTRIBUTE_VALUE
+      - INVALID_PAGINATION_TOKEN
+      - INVALID_MAX_RESULTS
+      - INVALID_AGENT_ID
+      - INVALID_AUTO_SCALING_GROUP
+      - INVALID_RULE_NAME
+      - INVALID_SEVERITY
+      - INVALID_LOCALE
+      - INVALID_EVENT
+      - ASSESSMENT_TARGET_NAME_ALREADY_TAKEN
+      - ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN
+      - INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS
+      - INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS
+      - INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS
+      - INVALID_NUMBER_OF_FINDING_ARNS
+      - INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS
+      - INVALID_NUMBER_OF_RULES_PACKAGE_ARNS
+      - INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES
+      - INVALID_NUMBER_OF_TAGS
+      - INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS
+      - INVALID_NUMBER_OF_ATTRIBUTES
+      - INVALID_NUMBER_OF_USER_ATTRIBUTES
+      - INVALID_NUMBER_OF_AGENT_IDS
+      - INVALID_NUMBER_OF_AUTO_SCALING_GROUPS
+      - INVALID_NUMBER_OF_RULE_NAMES
+      - INVALID_NUMBER_OF_SEVERITIES
+  LimitExceededErrorCode:
+    type: string
+    enum:
+      - ASSESSMENT_TARGET_LIMIT_EXCEEDED
+      - ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED
+      - ASSESSMENT_RUN_LIMIT_EXCEEDED
+      - RESOURCE_GROUP_LIMIT_EXCEEDED
+      - EVENT_SUBSCRIPTION_LIMIT_EXCEEDED
+  ListParentArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
+    minItems: 0
+    maxItems: 50
+  ListReturnedArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
+    minItems: 0
+    maxItems: 100
+  ListEventSubscriptionsMaxResults:
+    type: integer
+  SubscriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/Subscription'
+    minItems: 0
+    maxItems: 50
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 10
+  Long:
+    type: integer
+  MessageType:
+    type: string
+    minLength: 1
+    maxLength: 300
+  NoSuchEntityErrorCode:
+    type: string
+    enum:
+      - ASSESSMENT_TARGET_DOES_NOT_EXIST
+      - ASSESSMENT_TEMPLATE_DOES_NOT_EXIST
+      - ASSESSMENT_RUN_DOES_NOT_EXIST
+      - FINDING_DOES_NOT_EXIST
+      - RESOURCE_GROUP_DOES_NOT_EXIST
+      - RULES_PACKAGE_DOES_NOT_EXIST
+      - SNS_TOPIC_DOES_NOT_EXIST
+      - IAM_ROLE_DOES_NOT_EXIST
+  PreviewAgentsMaxResults:
+    type: integer
+  ProviderName:
+    type: string
+    minLength: 0
+    maxLength: 1000
+  UserAttributeKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeKey'
+    minItems: 0
+    maxItems: 10
+  ResourceGroup:
+    type: object
+    required:
+      - arn
+      - tags
+      - createdAt
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the resource group.
+      tags:
+        $ref: '#/definitions/ResourceGroupTags'
+        description: The tags (key and value pairs) of the resource group. This data type property is used in the <a>CreateResourceGroup</a> action.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The time at which resource group is created.
+    description: 'Contains information about a resource group. The resource group defines a set of tags that, when queried, identify the AWS resources that make up the assessment target. This data type is used as the response element in the <a>DescribeResourceGroups</a> action.'
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 1
+    maxLength: 256
+  ResourceGroupTag:
+    type: object
+    required:
+      - key
+    properties:
+      key:
+        $ref: '#/definitions/TagKey'
+        description: A tag key.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: The value assigned to a tag key.
+    description: This data type is used as one of the elements of the <a>ResourceGroup</a> data type.
+  RuleName:
+    type: string
+    maxLength: 1000
+  RulesPackageName:
+    type: string
+    minLength: 0
+    maxLength: 1000
   Version:
     type: string
     minLength: 0
     maxLength: 1000
+  RulesPackage:
+    type: object
+    required:
+      - arn
+      - name
+      - version
+      - provider
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the rules package.
+      name:
+        $ref: '#/definitions/RulesPackageName'
+        description: The name of the rules package.
+      version:
+        $ref: '#/definitions/Version'
+        description: The version ID of the rules package.
+      provider:
+        $ref: '#/definitions/ProviderName'
+        description: The provider of the rules package.
+      description:
+        $ref: '#/definitions/Text'
+        description: The description of the rules package.
+    description: Contains information about an Amazon Inspector rules package. This data type is used as the response element in the <a>DescribeRulesPackages</a> action.
+  ScopeType:
+    type: string
+    enum:
+      - INSTANCE_ID
+      - RULES_PACKAGE_ARN
+  ScopeValue:
+    type: string
+  Scope:
+    type: object
+    properties:
+      key:
+        $ref: '#/definitions/ScopeType'
+        description: The type of the scope.
+      value:
+        $ref: '#/definitions/ScopeValue'
+        description: The resource identifier for the specified scope type.
+    description: This data type contains key-value pairs that identify various Amazon resources.
+  StopAction:
+    type: string
+    enum:
+      - START_EVALUATION
+      - SKIP_EVALUATION
+  Subscription:
+    type: object
+    required:
+      - resourceArn
+      - topicArn
+      - eventSubscriptions
+    properties:
+      resourceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the assessment template that is used during the event for which the SNS notification is sent.
+      topicArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the Amazon Simple Notification Service (SNS) topic to which the SNS notifications are sent.
+      eventSubscriptions:
+        $ref: '#/definitions/EventSubscriptionList'
+        description: The list of existing event subscriptions.
+    description: This data type is used as a response element in the <a>ListEventSubscriptions</a> action.
+  Tag:
+    type: object
+    required:
+      - key
+    properties:
+      key:
+        $ref: '#/definitions/TagKey'
+        description: A tag key.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: A value assigned to a tag key.
+    description: A key and value pair. This data type is used as a request parameter in the <a>SetTagsForResource</a> action and a response element in the <a>ListTagsForResource</a> action.
+  TelemetryMetadata:
+    type: object
+    required:
+      - messageType
+      - count
+    properties:
+      messageType:
+        $ref: '#/definitions/MessageType'
+        description: A specific type of behavioral data that is collected by the agent.
+      count:
+        $ref: '#/definitions/Long'
+        description: The count of messages that the agent sends to the Amazon Inspector service.
+      dataSize:
+        $ref: '#/definitions/Long'
+        description: The data size of messages that the agent sends to the Amazon Inspector service.
+    description: The metadata about the Amazon Inspector application data metrics collected by the agent. This data type is used as the response element in the <a>GetTelemetryMetadata</a> action.

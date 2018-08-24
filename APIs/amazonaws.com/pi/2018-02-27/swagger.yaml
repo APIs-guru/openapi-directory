@@ -174,23 +174,24 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  DataPoint:
+  DescribeDimensionKeysResponse:
     type: object
-    required:
-      - Timestamp
-      - Value
     properties:
-      Timestamp:
+      AlignedStartTime:
         $ref: '#/definitions/ISOTimestamp'
-        description: 'The time, in epoch format, associated with a particular <code>Value</code>.'
-      Value:
-        $ref: '#/definitions/Double'
-        description: The actual value associated with a particular <code>Timestamp</code>.
-    description: 'A timestamp, and a single numerical value, which together represent a measurement at a particular point in time.'
-  DataPointsList:
-    type: array
-    items:
-      $ref: '#/definitions/DataPoint'
+        description: 'The start time for the returned dimension keys, after alignment to a granular boundary (as specified by <code>PeriodInSeconds</code>). <code>AlignedStartTime</code> will be less than or equal to the value of the user-specified <code>StartTime</code>.'
+      AlignedEndTime:
+        $ref: '#/definitions/ISOTimestamp'
+        description: 'The end time for the returned dimension keys, after alignment to a granular boundary (as specified by <code>PeriodInSeconds</code>). <code>AlignedEndTime</code> will be greater than or equal to the value of the user-specified <code>Endtime</code>.'
+      PartitionKeys:
+        $ref: '#/definitions/ResponsePartitionKeyList'
+        description: 'If <code>PartitionBy</code> was present in the request, <code>PartitionKeys</code> contains the breakdown of dimension keys by the specified partitions.'
+      Keys:
+        $ref: '#/definitions/DimensionKeyDescriptionList'
+        description: The dimension keys that were requested.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.'
   DescribeDimensionKeysRequest:
     type: object
     required:
@@ -234,68 +235,42 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.'
-  DescribeDimensionKeysResponse:
+  InvalidArgumentException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: One of the arguments provided is invalid for this request.
+  InternalServiceError:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The request failed due to an unknown error.
+  NotAuthorizedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The user is not authorized to perform this request.
+  GetResourceMetricsResponse:
     type: object
     properties:
       AlignedStartTime:
         $ref: '#/definitions/ISOTimestamp'
-        description: 'The start time for the returned dimension keys, after alignment to a granular boundary (as specified by <code>PeriodInSeconds</code>). <code>AlignedStartTime</code> will be less than or equal to the value of the user-specified <code>StartTime</code>.'
+        description: 'The start time for the returned metrics, after alignment to a granular boundary (as specified by <code>PeriodInSeconds</code>). <code>AlignedStartTime</code> will be less than or equal to the value of the user-specified <code>StartTime</code>.'
       AlignedEndTime:
         $ref: '#/definitions/ISOTimestamp'
-        description: 'The end time for the returned dimension keys, after alignment to a granular boundary (as specified by <code>PeriodInSeconds</code>). <code>AlignedEndTime</code> will be greater than or equal to the value of the user-specified <code>Endtime</code>.'
-      PartitionKeys:
-        $ref: '#/definitions/ResponsePartitionKeyList'
-        description: 'If <code>PartitionBy</code> was present in the request, <code>PartitionKeys</code> contains the breakdown of dimension keys by the specified partitions.'
-      Keys:
-        $ref: '#/definitions/DimensionKeyDescriptionList'
-        description: The dimension keys that were requested.
+        description: 'The end time for the returned metrics, after alignment to a granular boundary (as specified by <code>PeriodInSeconds</code>). <code>AlignedEndTime</code> will be greater than or equal to the value of the user-specified <code>Endtime</code>.'
+      Identifier:
+        $ref: '#/definitions/String'
+        description: '<p>An immutable, AWS Region-unique identifier for a data source. Performance Insights gathers metrics from this data source.</p> <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value - for example: <code>db-FAIHNTYBKTGAUSUZQYPDS2GW4A</code> </p>'
+      MetricList:
+        $ref: '#/definitions/MetricKeyDataPointsList'
+        description: 'An array of metric results,, where each array element contains all of the data points for a particular dimension.'
       NextToken:
         $ref: '#/definitions/String'
         description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.'
-  DimensionGroup:
-    type: object
-    required:
-      - Group
-    properties:
-      Group:
-        $ref: '#/definitions/String'
-        description: '<p>The name of the dimension group. Valid values are:</p> <ul> <li> <p> <code>db.user</code> </p> </li> <li> <p> <code>db.host</code> </p> </li> <li> <p> <code>db.sql</code> </p> </li> <li> <p> <code>db.sql_tokenized</code> </p> </li> <li> <p> <code>db.wait_event</code> </p> </li> <li> <p> <code>db.wait_event_type</code> </p> </li> </ul>'
-      Dimensions:
-        $ref: '#/definitions/StringList'
-        description: '<p>A list of specific dimensions from a dimension group. If this parameter is not present, then it signifies that all of the dimensions in the group were requested, or are present in the response.</p> <p>Valid values for elements in the <code>Dimensions</code> array are:</p> <ul> <li> <p>db.user.id</p> </li> <li> <p>db.user.name</p> </li> <li> <p>db.host.id</p> </li> <li> <p>db.host.name</p> </li> <li> <p>db.sql.id</p> </li> <li> <p>db.sql.db_id</p> </li> <li> <p>db.sql.statement</p> </li> <li> <p>db.sql.tokenized_id</p> </li> <li> <p>db.sql_tokenized.id</p> </li> <li> <p>db.sql_tokenized.db_id</p> </li> <li> <p>db.sql_tokenized.statement</p> </li> <li> <p>db.wait_event.name</p> </li> <li> <p>db.wait_event.type</p> </li> <li> <p>db.wait_event_type.name</p> </li> </ul>'
-      Limit:
-        $ref: '#/definitions/Limit'
-        description: The maximum number of items to fetch for this dimension group.
-    description: 'A logical grouping of Performance Insights metrics for a related subject area. For example, the <code>db.sql</code> dimension group consists of the following dimensions: <code>db.sql.id</code>, <code>db.sql.db_id</code>, <code>db.sql.statement</code>, and <code>db.sql.tokenized_id</code>.'
-  DimensionKeyDescription:
-    type: object
-    properties:
-      Dimensions:
-        $ref: '#/definitions/DimensionMap'
-        description: A map of name-value pairs for the dimensions in the group.
-      Total:
-        $ref: '#/definitions/Double'
-        description: 'The aggregated metric value for the dimension(s), over the requested time range.'
-      Partitions:
-        $ref: '#/definitions/MetricValuesList'
-        description: 'If <code>PartitionBy</code> was specified, <code>PartitionKeys</code> contains the dimensions that were.'
-    description: An array of descriptions and aggregated values for each dimension within a dimension group.
-  DimensionKeyDescriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/DimensionKeyDescription'
-  DimensionMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  Double:
-    type: number
-    format: double
   GetResourceMetricsRequest:
     type: object
     required:
@@ -329,49 +304,131 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.'
-  GetResourceMetricsResponse:
-    type: object
-    properties:
-      AlignedStartTime:
-        $ref: '#/definitions/ISOTimestamp'
-        description: 'The start time for the returned metrics, after alignment to a granular boundary (as specified by <code>PeriodInSeconds</code>). <code>AlignedStartTime</code> will be less than or equal to the value of the user-specified <code>StartTime</code>.'
-      AlignedEndTime:
-        $ref: '#/definitions/ISOTimestamp'
-        description: 'The end time for the returned metrics, after alignment to a granular boundary (as specified by <code>PeriodInSeconds</code>). <code>AlignedEndTime</code> will be greater than or equal to the value of the user-specified <code>Endtime</code>.'
-      Identifier:
-        $ref: '#/definitions/String'
-        description: '<p>An immutable, AWS Region-unique identifier for a data source. Performance Insights gathers metrics from this data source.</p> <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value - for example: <code>db-FAIHNTYBKTGAUSUZQYPDS2GW4A</code> </p>'
-      MetricList:
-        $ref: '#/definitions/MetricKeyDataPointsList'
-        description: 'An array of metric results,, where each array element contains all of the data points for a particular dimension.'
-      NextToken:
-        $ref: '#/definitions/String'
-        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.'
   ISOTimestamp:
     type: string
     format: date-time
+  Double:
+    type: number
+    format: double
+  DataPoint:
+    type: object
+    required:
+      - Timestamp
+      - Value
+    properties:
+      Timestamp:
+        $ref: '#/definitions/ISOTimestamp'
+        description: 'The time, in epoch format, associated with a particular <code>Value</code>.'
+      Value:
+        $ref: '#/definitions/Double'
+        description: The actual value associated with a particular <code>Timestamp</code>.
+    description: 'A timestamp, and a single numerical value, which together represent a measurement at a particular point in time.'
+  DataPointsList:
+    type: array
+    items:
+      $ref: '#/definitions/DataPoint'
+  ServiceType:
+    type: string
+    enum:
+      - RDS
+  String:
+    type: string
   Integer:
     type: integer
-  InternalServiceError:
+  DimensionGroup:
     type: object
+    required:
+      - Group
     properties:
-      Message:
+      Group:
         $ref: '#/definitions/String'
-    description: The request failed due to an unknown error.
-  InvalidArgumentException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: One of the arguments provided is invalid for this request.
-  Limit:
-    type: integer
-    minimum: 1
-    maximum: 10
+        description: '<p>The name of the dimension group. Valid values are:</p> <ul> <li> <p> <code>db.user</code> </p> </li> <li> <p> <code>db.host</code> </p> </li> <li> <p> <code>db.sql</code> </p> </li> <li> <p> <code>db.sql_tokenized</code> </p> </li> <li> <p> <code>db.wait_event</code> </p> </li> <li> <p> <code>db.wait_event_type</code> </p> </li> </ul>'
+      Dimensions:
+        $ref: '#/definitions/StringList'
+        description: '<p>A list of specific dimensions from a dimension group. If this parameter is not present, then it signifies that all of the dimensions in the group were requested, or are present in the response.</p> <p>Valid values for elements in the <code>Dimensions</code> array are:</p> <ul> <li> <p>db.user.id</p> </li> <li> <p>db.user.name</p> </li> <li> <p>db.host.id</p> </li> <li> <p>db.host.name</p> </li> <li> <p>db.sql.id</p> </li> <li> <p>db.sql.db_id</p> </li> <li> <p>db.sql.statement</p> </li> <li> <p>db.sql.tokenized_id</p> </li> <li> <p>db.sql_tokenized.id</p> </li> <li> <p>db.sql_tokenized.db_id</p> </li> <li> <p>db.sql_tokenized.statement</p> </li> <li> <p>db.wait_event.name</p> </li> <li> <p>db.wait_event.type</p> </li> <li> <p>db.wait_event_type.name</p> </li> </ul>'
+      Limit:
+        $ref: '#/definitions/Limit'
+        description: The maximum number of items to fetch for this dimension group.
+    description: 'A logical grouping of Performance Insights metrics for a related subject area. For example, the <code>db.sql</code> dimension group consists of the following dimensions: <code>db.sql.id</code>, <code>db.sql.db_id</code>, <code>db.sql.statement</code>, and <code>db.sql.tokenized_id</code>.'
+  MetricQueryFilterMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
   MaxResults:
     type: integer
     minimum: 0
     maximum: 20
+  ResponsePartitionKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/ResponsePartitionKey'
+  DimensionKeyDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/DimensionKeyDescription'
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+    minItems: 1
+    maxItems: 10
+  Limit:
+    type: integer
+    minimum: 1
+    maximum: 10
+  DimensionMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  MetricValuesList:
+    type: array
+    items:
+      $ref: '#/definitions/Double'
+  DimensionKeyDescription:
+    type: object
+    properties:
+      Dimensions:
+        $ref: '#/definitions/DimensionMap'
+        description: A map of name-value pairs for the dimensions in the group.
+      Total:
+        $ref: '#/definitions/Double'
+        description: 'The aggregated metric value for the dimension(s), over the requested time range.'
+      Partitions:
+        $ref: '#/definitions/MetricValuesList'
+        description: 'If <code>PartitionBy</code> was specified, <code>PartitionKeys</code> contains the dimensions that were.'
+    description: An array of descriptions and aggregated values for each dimension within a dimension group.
+  MetricQueryList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricQuery'
+    minItems: 1
+    maxItems: 15
+  MetricKeyDataPointsList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricKeyDataPoints'
+  ResponseResourceMetricKey:
+    type: object
+    required:
+      - Metric
+    properties:
+      Metric:
+        $ref: '#/definitions/String'
+        description: '<p>The name of a Performance Insights metric to be measured.</p> <p>Valid values for <code>Metric</code> are:</p> <ul> <li> <p> <code>db.load.avg</code> - a scaled representation of the number of active sessions for the database engine.</p> </li> <li> <p> <code>db.sampledload.avg</code> - the raw number of active sessions for the database engine.</p> </li> </ul>'
+      Dimensions:
+        $ref: '#/definitions/DimensionMap'
+        description: The valid dimensions for the metric.
+    description: An object describing a Performance Insights metric and one or more dimensions for that metric.
   MetricKeyDataPoints:
     type: object
     properties:
@@ -382,10 +439,6 @@ definitions:
         $ref: '#/definitions/DataPointsList'
         description: 'An array of timestamp-value pairs, representing measurements over a period of time.'
     description: 'A time-ordered series of data points, correpsonding to a dimension of a Performance Insights metric.'
-  MetricKeyDataPointsList:
-    type: array
-    items:
-      $ref: '#/definitions/MetricKeyDataPoints'
   MetricQuery:
     type: object
     required:
@@ -401,31 +454,6 @@ definitions:
         $ref: '#/definitions/MetricQueryFilterMap'
         description: '<p>One or more filters to apply in the request. Restrictions:</p> <ul> <li> <p>Any number of filters by the same dimension, as specified in the <code>GroupBy</code> parameter.</p> </li> <li> <p>A single filter for any other dimension in this dimension group.</p> </li> </ul>'
     description: 'A single query to be processed. You must provide the metric to query. If no other parameters are specified, Performance Insights returns all of the data points for that metric. You can optionally request that the data points be aggregated by dimension group ( <code>GroupBy</code>), and return only those data points that match your criteria (<code>Filter</code>).'
-  MetricQueryFilterMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  MetricQueryList:
-    type: array
-    items:
-      $ref: '#/definitions/MetricQuery'
-    minItems: 1
-    maxItems: 15
-  MetricValuesList:
-    type: array
-    items:
-      $ref: '#/definitions/Double'
-  NotAuthorizedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: The user is not authorized to perform this request.
   ResponsePartitionKey:
     type: object
     required:
@@ -435,31 +463,3 @@ definitions:
         $ref: '#/definitions/DimensionMap'
         description: A dimension map that contains the dimension(s) for this partition.
     description: 'If <code>PartitionBy</code> was specified in a <code>DescribeDimensionKeys</code> request, the dimensions are returned in an array. Each element in the array specifies one dimension. '
-  ResponsePartitionKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/ResponsePartitionKey'
-  ResponseResourceMetricKey:
-    type: object
-    required:
-      - Metric
-    properties:
-      Metric:
-        $ref: '#/definitions/String'
-        description: '<p>The name of a Performance Insights metric to be measured.</p> <p>Valid values for <code>Metric</code> are:</p> <ul> <li> <p> <code>db.load.avg</code> - a scaled representation of the number of active sessions for the database engine.</p> </li> <li> <p> <code>db.sampledload.avg</code> - the raw number of active sessions for the database engine.</p> </li> </ul>'
-      Dimensions:
-        $ref: '#/definitions/DimensionMap'
-        description: The valid dimensions for the metric.
-    description: An object describing a Performance Insights metric and one or more dimensions for that metric.
-  ServiceType:
-    type: string
-    enum:
-      - RDS
-  String:
-    type: string
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-    minItems: 1
-    maxItems: 10

@@ -1010,33 +1010,6 @@ paths:
           type: string
           required: true
 definitions:
-  AlreadyStreamedException:
-    type: object
-    required:
-      - message
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The message associated with the AlreadyStreamedException exception.
-    description: An exception thrown when a bulk publish operation is requested less than 24 hours after a previous bulk publish operation completed successfully.
-  ApplicationArn:
-    type: string
-    pattern: 'arn:aws:sns:[-0-9a-z]+:\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+'
-  ApplicationArnList:
-    type: array
-    items:
-      $ref: '#/definitions/ApplicationArn'
-  AssumeRoleArn:
-    type: string
-    pattern: 'arn:aws:iam::\d+:role/.*'
-    minLength: 20
-    maxLength: 2048
-  Boolean:
-    type: boolean
-  BulkPublishRequest:
-    type: object
-    properties: {}
-    description: The input for the BulkPublish operation.
   BulkPublishResponse:
     type: object
     properties:
@@ -1044,124 +1017,46 @@ definitions:
         $ref: '#/definitions/IdentityPoolId'
         description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
     description: The output for the BulkPublish operation.
-  BulkPublishStatus:
-    type: string
-    enum:
-      - NOT_STARTED
-      - IN_PROGRESS
-      - FAILED
-      - SUCCEEDED
-  ClientContext:
-    type: string
-  CognitoEventType:
-    type: string
-  CognitoStreams:
+  BulkPublishRequest:
     type: object
-    properties:
-      StreamName:
-        $ref: '#/definitions/StreamName'
-        description: The name of the Cognito stream to receive updates. This stream must be in the developers account and in the same region as the identity pool.
-      RoleArn:
-        $ref: '#/definitions/AssumeRoleArn'
-        description: The ARN of the role Amazon Cognito can assume in order to publish to the stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord on your Cognito stream.
-      StreamingStatus:
-        $ref: '#/definitions/StreamingStatus'
-        description: 'Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>'
-    description: Configuration options for configure Cognito streams.
-  ConcurrentModificationException:
+    properties: {}
+    description: The input for the BulkPublish operation.
+  NotAuthorizedException:
     type: object
     required:
       - message
     properties:
       message:
-        $ref: '#/definitions/String'
-        description: The message returned by a ConcurrentModicationException.
-    description: Thrown if there are parallel requests to modify a resource.
-  Dataset:
+        $ref: '#/definitions/ExceptionMessage'
+        description: The message returned by a NotAuthorizedException.
+    description: Thrown when a user is not authorized to access the requested resource.
+  InvalidParameterException:
     type: object
+    required:
+      - message
     properties:
-      IdentityId:
-        $ref: '#/definitions/IdentityId'
-        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-      DatasetName:
-        $ref: '#/definitions/DatasetName'
-        description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
-      CreationDate:
-        $ref: '#/definitions/Date'
-        description: Date on which the dataset was created.
-      LastModifiedDate:
-        $ref: '#/definitions/Date'
-        description: Date when the dataset was last modified.
-      LastModifiedBy:
-        $ref: '#/definitions/String'
-        description: The device that made the last change to this dataset.
-      DataStorage:
-        $ref: '#/definitions/Long'
-        description: Total size in bytes of the records in this dataset.
-      NumRecords:
-        $ref: '#/definitions/Long'
-        description: Number of records in this dataset.
-    description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
-  DatasetList:
-    type: array
-    items:
-      $ref: '#/definitions/Dataset'
-  DatasetName:
-    type: string
-    pattern: '[a-zA-Z0-9_.:-]+'
-    minLength: 1
-    maxLength: 128
-  Date:
-    type: string
-    format: date-time
-  DeleteDatasetRequest:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: Message returned by InvalidParameterException.
+    description: Thrown when a request parameter does not comply with the associated constraints.
+  ResourceNotFoundException:
     type: object
-    properties: {}
-    description: A request to delete the specific dataset.
-  DeleteDatasetResponse:
-    type: object
+    required:
+      - message
     properties:
-      Dataset:
-        $ref: '#/definitions/Dataset'
-        description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
-    description: Response to a successful DeleteDataset request.
-  DescribeDatasetRequest:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: Message returned by a ResourceNotFoundException.
+    description: Thrown if the resource doesn't exist.
+  InternalErrorException:
     type: object
-    properties: {}
-    description: 'A request for meta data about a dataset (creation date, number of records, size) by owner and dataset name.'
-  DescribeDatasetResponse:
-    type: object
+    required:
+      - message
     properties:
-      Dataset:
-        $ref: '#/definitions/Dataset'
-        description: 'Meta data for a collection of data for an identity. An identity can have multiple datasets. A dataset can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
-    description: Response to a successful DescribeDataset request.
-  DescribeIdentityPoolUsageRequest:
-    type: object
-    properties: {}
-    description: A request for usage information about the identity pool.
-  DescribeIdentityPoolUsageResponse:
-    type: object
-    properties:
-      IdentityPoolUsage:
-        $ref: '#/definitions/IdentityPoolUsage'
-        description: Information about the usage of the identity pool.
-    description: Response to a successful DescribeIdentityPoolUsage request.
-  DescribeIdentityUsageRequest:
-    type: object
-    properties: {}
-    description: A request for information about the usage of an identity pool.
-  DescribeIdentityUsageResponse:
-    type: object
-    properties:
-      IdentityUsage:
-        $ref: '#/definitions/IdentityUsage'
-        description: Usage information for the identity.
-    description: The response to a successful DescribeIdentityUsage request.
-  DeviceId:
-    type: string
-    minLength: 1
-    maxLength: 256
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: Message returned by InternalErrorException.
+    description: Indicates an internal service error.
   DuplicateRequestException:
     type: object
     required:
@@ -1171,22 +1066,77 @@ definitions:
         $ref: '#/definitions/ExceptionMessage'
         description: The message associated with the DuplicateRequestException exception.
     description: An exception thrown when there is an IN_PROGRESS bulk publish operation for the given identity pool.
-  Events:
-    type: array
-    maxItems: 1
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/CognitoEventType'
-        value:
-          $ref: '#/definitions/LambdaFunctionArn'
-  ExceptionMessage:
-    type: string
-  GetBulkPublishDetailsRequest:
+  AlreadyStreamedException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: The message associated with the AlreadyStreamedException exception.
+    description: An exception thrown when a bulk publish operation is requested less than 24 hours after a previous bulk publish operation completed successfully.
+  DeleteDatasetResponse:
+    type: object
+    properties:
+      Dataset:
+        $ref: '#/definitions/Dataset'
+        description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
+    description: Response to a successful DeleteDataset request.
+  DeleteDatasetRequest:
     type: object
     properties: {}
-    description: The input for the GetBulkPublishDetails operation.
+    description: A request to delete the specific dataset.
+  TooManyRequestsException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: Message returned by a TooManyRequestsException.
+    description: Thrown if the request is throttled.
+  ResourceConflictException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: The message returned by a ResourceConflictException.
+    description: Thrown if an update can't be applied because the resource was changed by another call and this would result in a conflict.
+  DescribeDatasetResponse:
+    type: object
+    properties:
+      Dataset:
+        $ref: '#/definitions/Dataset'
+        description: 'Meta data for a collection of data for an identity. An identity can have multiple datasets. A dataset can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
+    description: Response to a successful DescribeDataset request.
+  DescribeDatasetRequest:
+    type: object
+    properties: {}
+    description: 'A request for meta data about a dataset (creation date, number of records, size) by owner and dataset name.'
+  DescribeIdentityPoolUsageResponse:
+    type: object
+    properties:
+      IdentityPoolUsage:
+        $ref: '#/definitions/IdentityPoolUsage'
+        description: Information about the usage of the identity pool.
+    description: Response to a successful DescribeIdentityPoolUsage request.
+  DescribeIdentityPoolUsageRequest:
+    type: object
+    properties: {}
+    description: A request for usage information about the identity pool.
+  DescribeIdentityUsageResponse:
+    type: object
+    properties:
+      IdentityUsage:
+        $ref: '#/definitions/IdentityUsage'
+        description: Usage information for the identity.
+    description: The response to a successful DescribeIdentityUsage request.
+  DescribeIdentityUsageRequest:
+    type: object
+    properties: {}
+    description: A request for information about the usage of an identity pool.
   GetBulkPublishDetailsResponse:
     type: object
     properties:
@@ -1206,10 +1156,10 @@ definitions:
         $ref: '#/definitions/String'
         description: If BulkPublishStatus is FAILED this field will contain the error message that caused the bulk publish to fail.
     description: The output for the GetBulkPublishDetails operation.
-  GetCognitoEventsRequest:
+  GetBulkPublishDetailsRequest:
     type: object
     properties: {}
-    description: A request for a list of the configured Cognito Events
+    description: The input for the GetBulkPublishDetails operation.
   GetCognitoEventsResponse:
     type: object
     properties:
@@ -1217,10 +1167,10 @@ definitions:
         $ref: '#/definitions/Events'
         description: The Cognito Events returned from the GetCognitoEvents request
     description: The response from the GetCognitoEvents request
-  GetIdentityPoolConfigurationRequest:
+  GetCognitoEventsRequest:
     type: object
     properties: {}
-    description: The input for the GetIdentityPoolConfiguration operation.
+    description: A request for a list of the configured Cognito Events
   GetIdentityPoolConfigurationResponse:
     type: object
     properties:
@@ -1234,118 +1184,10 @@ definitions:
         $ref: '#/definitions/CognitoStreams'
         description: Options to apply to this identity pool for Amazon Cognito streams.
     description: The output for the GetIdentityPoolConfiguration operation.
-  IdentityId:
-    type: string
-    pattern: '[\w-]+:[0-9a-f-]+'
-    minLength: 1
-    maxLength: 55
-  IdentityPoolId:
-    type: string
-    pattern: '[\w-]+:[0-9a-f-]+'
-    minLength: 1
-    maxLength: 55
-  IdentityPoolUsage:
-    type: object
-    properties:
-      IdentityPoolId:
-        $ref: '#/definitions/IdentityPoolId'
-        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-      SyncSessionsCount:
-        $ref: '#/definitions/Long'
-        description: Number of sync sessions for the identity pool.
-      DataStorage:
-        $ref: '#/definitions/Long'
-        description: Data storage information for the identity pool.
-      LastModifiedDate:
-        $ref: '#/definitions/Date'
-        description: Date on which the identity pool was last modified.
-    description: Usage information for the identity pool.
-  IdentityPoolUsageList:
-    type: array
-    items:
-      $ref: '#/definitions/IdentityPoolUsage'
-  IdentityUsage:
-    type: object
-    properties:
-      IdentityId:
-        $ref: '#/definitions/IdentityId'
-        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-      IdentityPoolId:
-        $ref: '#/definitions/IdentityPoolId'
-        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-      LastModifiedDate:
-        $ref: '#/definitions/Date'
-        description: Date on which the identity was last modified.
-      DatasetCount:
-        $ref: '#/definitions/Integer'
-        description: Number of datasets for the identity.
-      DataStorage:
-        $ref: '#/definitions/Long'
-        description: Total data storage for this identity.
-    description: Usage information for the identity.
-  Integer:
-    type: integer
-  IntegerString:
-    type: integer
-  InternalErrorException:
-    type: object
-    required:
-      - message
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: Message returned by InternalErrorException.
-    description: Indicates an internal service error.
-  InvalidConfigurationException:
-    type: object
-    required:
-      - message
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: Message returned by InvalidConfigurationException.
-  InvalidLambdaFunctionOutputException:
-    type: object
-    required:
-      - message
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: A message returned when an InvalidLambdaFunctionOutputException occurs
-    description: The AWS Lambda function returned invalid output or an exception.
-  InvalidParameterException:
-    type: object
-    required:
-      - message
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: Message returned by InvalidParameterException.
-    description: Thrown when a request parameter does not comply with the associated constraints.
-  LambdaFunctionArn:
-    type: string
-  LambdaThrottledException:
-    type: object
-    required:
-      - message
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: A message returned when an LambdaThrottledException is thrown
-    description: 'AWS Lambda throttled your account, please contact AWS Support'
-  LimitExceededException:
-    type: object
-    required:
-      - message
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: Message returned by LimitExceededException.
-    description: Thrown when the limit on the number of objects or operations has been exceeded.
-  ListDatasetsRequest:
+  GetIdentityPoolConfigurationRequest:
     type: object
     properties: {}
-    description: Request for a list of datasets for an identity.
+    description: The input for the GetIdentityPoolConfiguration operation.
   ListDatasetsResponse:
     type: object
     properties:
@@ -1359,10 +1201,10 @@ definitions:
         $ref: '#/definitions/String'
         description: A pagination token for obtaining the next page of results.
     description: Returned for a successful ListDatasets request.
-  ListIdentityPoolUsageRequest:
+  ListDatasetsRequest:
     type: object
     properties: {}
-    description: A request for usage information on an identity pool.
+    description: Request for a list of datasets for an identity.
   ListIdentityPoolUsageResponse:
     type: object
     properties:
@@ -1379,10 +1221,10 @@ definitions:
         $ref: '#/definitions/String'
         description: A pagination token for obtaining the next page of results.
     description: Returned for a successful ListIdentityPoolUsage request.
-  ListRecordsRequest:
+  ListIdentityPoolUsageRequest:
     type: object
     properties: {}
-    description: A request for a list of records.
+    description: A request for usage information on an identity pool.
   ListRecordsResponse:
     type: object
     properties:
@@ -1414,21 +1256,323 @@ definitions:
         $ref: '#/definitions/String'
         description: 'A token containing a session ID, identity ID, and expiration.'
     description: Returned for a successful ListRecordsRequest.
-  Long:
-    type: integer
-  MergedDatasetNameList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  NotAuthorizedException:
+  ListRecordsRequest:
+    type: object
+    properties: {}
+    description: A request for a list of records.
+  RegisterDeviceResponse:
+    type: object
+    properties:
+      DeviceId:
+        $ref: '#/definitions/DeviceId'
+        description: The unique ID generated for this device by Cognito.
+    description: Response to a RegisterDevice request.
+  RegisterDeviceRequest:
+    type: object
+    required:
+      - Platform
+      - Token
+    properties:
+      Platform:
+        $ref: '#/definitions/Platform'
+        description: 'The SNS platform type (e.g. GCM, SDM, APNS, APNS_SANDBOX).'
+      Token:
+        $ref: '#/definitions/PushToken'
+        description: The push token.
+    description: A request to RegisterDevice.
+  InvalidConfigurationException:
     type: object
     required:
       - message
     properties:
       message:
         $ref: '#/definitions/ExceptionMessage'
-        description: The message returned by a NotAuthorizedException.
-    description: Thrown when a user is not authorized to access the requested resource.
+        description: Message returned by InvalidConfigurationException.
+  SetCognitoEventsRequest:
+    type: object
+    required:
+      - Events
+    properties:
+      Events:
+        $ref: '#/definitions/Events'
+        description: The events to configure
+    description: <p>A request to configure Cognito Events"</p>"
+  SetIdentityPoolConfigurationResponse:
+    type: object
+    properties:
+      IdentityPoolId:
+        $ref: '#/definitions/IdentityPoolId'
+        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.'
+      PushSync:
+        $ref: '#/definitions/PushSync'
+        description: Options to apply to this identity pool for push synchronization.
+      CognitoStreams:
+        $ref: '#/definitions/CognitoStreams'
+        description: Options to apply to this identity pool for Amazon Cognito streams.
+    description: The output for the SetIdentityPoolConfiguration operation
+  SetIdentityPoolConfigurationRequest:
+    type: object
+    properties:
+      PushSync:
+        $ref: '#/definitions/PushSync'
+        description: Options to apply to this identity pool for push synchronization.
+      CognitoStreams:
+        $ref: '#/definitions/CognitoStreams'
+        description: Options to apply to this identity pool for Amazon Cognito streams.
+    description: The input for the SetIdentityPoolConfiguration operation.
+  ConcurrentModificationException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/String'
+        description: The message returned by a ConcurrentModicationException.
+    description: Thrown if there are parallel requests to modify a resource.
+  SubscribeToDatasetResponse:
+    type: object
+    properties: {}
+    description: Response to a SubscribeToDataset request.
+  SubscribeToDatasetRequest:
+    type: object
+    properties: {}
+    description: A request to SubscribeToDatasetRequest.
+  UnsubscribeFromDatasetResponse:
+    type: object
+    properties: {}
+    description: Response to an UnsubscribeFromDataset request.
+  UnsubscribeFromDatasetRequest:
+    type: object
+    properties: {}
+    description: A request to UnsubscribeFromDataset.
+  UpdateRecordsResponse:
+    type: object
+    properties:
+      Records:
+        $ref: '#/definitions/RecordList'
+        description: A list of records that have been updated.
+    description: Returned for a successful UpdateRecordsRequest.
+  UpdateRecordsRequest:
+    type: object
+    required:
+      - SyncSessionToken
+    properties:
+      DeviceId:
+        $ref: '#/definitions/DeviceId'
+        description: The unique ID generated for this device by Cognito.
+      RecordPatches:
+        $ref: '#/definitions/RecordPatchList'
+        description: A list of patch operations.
+      SyncSessionToken:
+        $ref: '#/definitions/SyncSessionToken'
+        description: The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity.
+    description: A request to post updates to records or add and delete records for a dataset and user.
+  LimitExceededException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: Message returned by LimitExceededException.
+    description: Thrown when the limit on the number of objects or operations has been exceeded.
+  InvalidLambdaFunctionOutputException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: A message returned when an InvalidLambdaFunctionOutputException occurs
+    description: The AWS Lambda function returned invalid output or an exception.
+  LambdaThrottledException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: A message returned when an LambdaThrottledException is thrown
+    description: 'AWS Lambda throttled your account, please contact AWS Support'
+  ExceptionMessage:
+    type: string
+  ApplicationArn:
+    type: string
+    pattern: 'arn:aws:sns:[-0-9a-z]+:\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+'
+  ApplicationArnList:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationArn'
+  AssumeRoleArn:
+    type: string
+    pattern: 'arn:aws:iam::\d+:role/.*'
+    minLength: 20
+    maxLength: 2048
+  Boolean:
+    type: boolean
+  IdentityPoolId:
+    type: string
+    pattern: '[\w-]+:[0-9a-f-]+'
+    minLength: 1
+    maxLength: 55
+  BulkPublishStatus:
+    type: string
+    enum:
+      - NOT_STARTED
+      - IN_PROGRESS
+      - FAILED
+      - SUCCEEDED
+  ClientContext:
+    type: string
+  CognitoEventType:
+    type: string
+  StreamName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  StreamingStatus:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+  CognitoStreams:
+    type: object
+    properties:
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the Cognito stream to receive updates. This stream must be in the developers account and in the same region as the identity pool.
+      RoleArn:
+        $ref: '#/definitions/AssumeRoleArn'
+        description: The ARN of the role Amazon Cognito can assume in order to publish to the stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord on your Cognito stream.
+      StreamingStatus:
+        $ref: '#/definitions/StreamingStatus'
+        description: 'Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>'
+    description: Configuration options for configure Cognito streams.
+  String:
+    type: string
+  IdentityId:
+    type: string
+    pattern: '[\w-]+:[0-9a-f-]+'
+    minLength: 1
+    maxLength: 55
+  DatasetName:
+    type: string
+    pattern: '[a-zA-Z0-9_.:-]+'
+    minLength: 1
+    maxLength: 128
+  Date:
+    type: string
+    format: date-time
+  Long:
+    type: integer
+  Dataset:
+    type: object
+    properties:
+      IdentityId:
+        $ref: '#/definitions/IdentityId'
+        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+      DatasetName:
+        $ref: '#/definitions/DatasetName'
+        description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
+      CreationDate:
+        $ref: '#/definitions/Date'
+        description: Date on which the dataset was created.
+      LastModifiedDate:
+        $ref: '#/definitions/Date'
+        description: Date when the dataset was last modified.
+      LastModifiedBy:
+        $ref: '#/definitions/String'
+        description: The device that made the last change to this dataset.
+      DataStorage:
+        $ref: '#/definitions/Long'
+        description: Total size in bytes of the records in this dataset.
+      NumRecords:
+        $ref: '#/definitions/Long'
+        description: Number of records in this dataset.
+    description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
+  DatasetList:
+    type: array
+    items:
+      $ref: '#/definitions/Dataset'
+  IdentityPoolUsage:
+    type: object
+    properties:
+      IdentityPoolId:
+        $ref: '#/definitions/IdentityPoolId'
+        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+      SyncSessionsCount:
+        $ref: '#/definitions/Long'
+        description: Number of sync sessions for the identity pool.
+      DataStorage:
+        $ref: '#/definitions/Long'
+        description: Data storage information for the identity pool.
+      LastModifiedDate:
+        $ref: '#/definitions/Date'
+        description: Date on which the identity pool was last modified.
+    description: Usage information for the identity pool.
+  IdentityUsage:
+    type: object
+    properties:
+      IdentityId:
+        $ref: '#/definitions/IdentityId'
+        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+      IdentityPoolId:
+        $ref: '#/definitions/IdentityPoolId'
+        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+      LastModifiedDate:
+        $ref: '#/definitions/Date'
+        description: Date on which the identity was last modified.
+      DatasetCount:
+        $ref: '#/definitions/Integer'
+        description: Number of datasets for the identity.
+      DataStorage:
+        $ref: '#/definitions/Long'
+        description: Total data storage for this identity.
+    description: Usage information for the identity.
+  DeviceId:
+    type: string
+    minLength: 1
+    maxLength: 256
+  LambdaFunctionArn:
+    type: string
+  Events:
+    type: array
+    maxItems: 1
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/CognitoEventType'
+        value:
+          $ref: '#/definitions/LambdaFunctionArn'
+  PushSync:
+    type: object
+    properties:
+      ApplicationArns:
+        $ref: '#/definitions/ApplicationArnList'
+        description: List of SNS platform application ARNs that could be used by clients.
+      RoleArn:
+        $ref: '#/definitions/AssumeRoleArn'
+        description: A role configured to allow Cognito to call SNS on behalf of the developer.
+    description: Configuration options to be applied to the identity pool.
+  IdentityPoolUsageList:
+    type: array
+    items:
+      $ref: '#/definitions/IdentityPoolUsage'
+  Integer:
+    type: integer
+  IntegerString:
+    type: integer
+  SyncSessionToken:
+    type: string
+  RecordList:
+    type: array
+    items:
+      $ref: '#/definitions/Record'
+  MergedDatasetNameList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   Operation:
     type: string
     enum:
@@ -1441,18 +1585,15 @@ definitions:
       - APNS_SANDBOX
       - GCM
       - ADM
-  PushSync:
-    type: object
-    properties:
-      ApplicationArns:
-        $ref: '#/definitions/ApplicationArnList'
-        description: List of SNS platform application ARNs that could be used by clients.
-      RoleArn:
-        $ref: '#/definitions/AssumeRoleArn'
-        description: A role configured to allow Cognito to call SNS on behalf of the developer.
-    description: Configuration options to be applied to the identity pool.
   PushToken:
     type: string
+  RecordKey:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  RecordValue:
+    type: string
+    maxLength: 1048575
   Record:
     type: object
     properties:
@@ -1475,14 +1616,6 @@ definitions:
         $ref: '#/definitions/Date'
         description: The last modified date of the client device.
     description: The basic data structure of a dataset.
-  RecordKey:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  RecordList:
-    type: array
-    items:
-      $ref: '#/definitions/Record'
   RecordPatch:
     type: object
     required:
@@ -1510,136 +1643,3 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RecordPatch'
-  RecordValue:
-    type: string
-    maxLength: 1048575
-  RegisterDeviceRequest:
-    type: object
-    required:
-      - Platform
-      - Token
-    properties:
-      Platform:
-        $ref: '#/definitions/Platform'
-        description: 'The SNS platform type (e.g. GCM, SDM, APNS, APNS_SANDBOX).'
-      Token:
-        $ref: '#/definitions/PushToken'
-        description: The push token.
-    description: A request to RegisterDevice.
-  RegisterDeviceResponse:
-    type: object
-    properties:
-      DeviceId:
-        $ref: '#/definitions/DeviceId'
-        description: The unique ID generated for this device by Cognito.
-    description: Response to a RegisterDevice request.
-  ResourceConflictException:
-    type: object
-    required:
-      - message
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The message returned by a ResourceConflictException.
-    description: Thrown if an update can't be applied because the resource was changed by another call and this would result in a conflict.
-  ResourceNotFoundException:
-    type: object
-    required:
-      - message
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: Message returned by a ResourceNotFoundException.
-    description: Thrown if the resource doesn't exist.
-  SetCognitoEventsRequest:
-    type: object
-    required:
-      - Events
-    properties:
-      Events:
-        $ref: '#/definitions/Events'
-        description: The events to configure
-    description: <p>A request to configure Cognito Events"</p>"
-  SetIdentityPoolConfigurationRequest:
-    type: object
-    properties:
-      PushSync:
-        $ref: '#/definitions/PushSync'
-        description: Options to apply to this identity pool for push synchronization.
-      CognitoStreams:
-        $ref: '#/definitions/CognitoStreams'
-        description: Options to apply to this identity pool for Amazon Cognito streams.
-    description: The input for the SetIdentityPoolConfiguration operation.
-  SetIdentityPoolConfigurationResponse:
-    type: object
-    properties:
-      IdentityPoolId:
-        $ref: '#/definitions/IdentityPoolId'
-        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.'
-      PushSync:
-        $ref: '#/definitions/PushSync'
-        description: Options to apply to this identity pool for push synchronization.
-      CognitoStreams:
-        $ref: '#/definitions/CognitoStreams'
-        description: Options to apply to this identity pool for Amazon Cognito streams.
-    description: The output for the SetIdentityPoolConfiguration operation
-  StreamName:
-    type: string
-    minLength: 1
-    maxLength: 128
-  StreamingStatus:
-    type: string
-    enum:
-      - ENABLED
-      - DISABLED
-  String:
-    type: string
-  SubscribeToDatasetRequest:
-    type: object
-    properties: {}
-    description: A request to SubscribeToDatasetRequest.
-  SubscribeToDatasetResponse:
-    type: object
-    properties: {}
-    description: Response to a SubscribeToDataset request.
-  SyncSessionToken:
-    type: string
-  TooManyRequestsException:
-    type: object
-    required:
-      - message
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: Message returned by a TooManyRequestsException.
-    description: Thrown if the request is throttled.
-  UnsubscribeFromDatasetRequest:
-    type: object
-    properties: {}
-    description: A request to UnsubscribeFromDataset.
-  UnsubscribeFromDatasetResponse:
-    type: object
-    properties: {}
-    description: Response to an UnsubscribeFromDataset request.
-  UpdateRecordsRequest:
-    type: object
-    required:
-      - SyncSessionToken
-    properties:
-      DeviceId:
-        $ref: '#/definitions/DeviceId'
-        description: The unique ID generated for this device by Cognito.
-      RecordPatches:
-        $ref: '#/definitions/RecordPatchList'
-        description: A list of patch operations.
-      SyncSessionToken:
-        $ref: '#/definitions/SyncSessionToken'
-        description: The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity.
-    description: A request to post updates to records or add and delete records for a dataset and user.
-  UpdateRecordsResponse:
-    type: object
-    properties:
-      Records:
-        $ref: '#/definitions/RecordList'
-        description: A list of records that have been updated.
-    description: Returned for a successful UpdateRecordsRequest.

@@ -742,68 +742,9 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  Address:
+  CancelClusterResult:
     type: object
-    properties:
-      AddressId:
-        $ref: '#/definitions/AddressId'
-        description: The unique ID for an address.
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of a person to receive a Snowball at an address.
-      Company:
-        $ref: '#/definitions/String'
-        description: The name of the company to receive a Snowball at an address.
-      Street1:
-        $ref: '#/definitions/String'
-        description: The first line in a street address that a Snowball is to be delivered to.
-      Street2:
-        $ref: '#/definitions/String'
-        description: The second line in a street address that a Snowball is to be delivered to.
-      Street3:
-        $ref: '#/definitions/String'
-        description: The third line in a street address that a Snowball is to be delivered to.
-      City:
-        $ref: '#/definitions/String'
-        description: The city in an address that a Snowball is to be delivered to.
-      StateOrProvince:
-        $ref: '#/definitions/String'
-        description: The state or province in an address that a Snowball is to be delivered to.
-      PrefectureOrDistrict:
-        $ref: '#/definitions/String'
-        description: This field is no longer used and the value is ignored.
-      Landmark:
-        $ref: '#/definitions/String'
-        description: This field is no longer used and the value is ignored.
-      Country:
-        $ref: '#/definitions/String'
-        description: The country in an address that a Snowball is to be delivered to.
-      PostalCode:
-        $ref: '#/definitions/String'
-        description: The postal code in an address that a Snowball is to be delivered to.
-      PhoneNumber:
-        $ref: '#/definitions/String'
-        description: The phone number associated with an address that a Snowball is to be delivered to.
-      IsRestricted:
-        $ref: '#/definitions/Boolean'
-        description: 'If the address you are creating is a primary address, then set this option to true. This field is not supported in most regions.'
-    description: 'The address that you want the Snowball or Snowballs associated with a specific job to be shipped to. Addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. Although no individual elements of the <code>Address</code> are required, if the address is invalid or unsupported, then an exception is thrown.'
-  AddressId:
-    type: string
-    pattern: 'ADID[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
-    minLength: 40
-    maxLength: 40
-  AddressList:
-    type: array
-    items:
-      $ref: '#/definitions/Address'
-  AmiId:
-    type: string
-    pattern: '(ami-[0-9a-f]{8})|(ami-[0-9a-f]{17})'
-    minLength: 12
-    maxLength: 21
-  Boolean:
-    type: boolean
+    properties: {}
   CancelClusterRequest:
     type: object
     required:
@@ -814,7 +755,10 @@ definitions:
       ClusterId:
         $ref: '#/definitions/ClusterId'
         description: 'The 39-character ID for the cluster that you want to cancel, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
-  CancelClusterResult:
+  KMSRequestFailedException: {}
+  InvalidJobStateException: {}
+  InvalidResourceException: {}
+  CancelJobResult:
     type: object
     properties: {}
   CancelJobRequest:
@@ -827,105 +771,14 @@ definitions:
       JobId:
         $ref: '#/definitions/JobId'
         description: 'The 39-character job ID for the job that you want to cancel, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
-  CancelJobResult:
+  CreateAddressResult:
     type: object
-    properties: {}
-  ClusterId:
-    type: string
-    pattern: 'CID[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
-    minLength: 39
-    maxLength: 39
-  ClusterLimitExceededException:
-    type: object
+    example:
+      AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
     properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: 'Job creation failed. Currently, clusters support five nodes. If you have less than five nodes for your cluster and you have more nodes to create for this cluster, try again and create jobs until your cluster has exactly five notes.'
-  ClusterListEntry:
-    type: object
-    properties:
-      ClusterId:
-        $ref: '#/definitions/String'
-        description: 'The 39-character ID for the cluster that you want to list, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
-      ClusterState:
-        $ref: '#/definitions/ClusterState'
-        description: 'The current state of this cluster. For information about the state of a specific node, see <a>JobListEntry$JobState</a>.'
-      CreationDate:
-        $ref: '#/definitions/Timestamp'
-        description: The creation date for this cluster.
-      Description:
-        $ref: '#/definitions/String'
-        description: 'Defines an optional description of the cluster, for example <code>Environmental Data Cluster-01</code>.'
-    description: 'Contains a cluster''s state, a cluster''s ID, and other important information.'
-  ClusterListEntryList:
-    type: array
-    items:
-      $ref: '#/definitions/ClusterListEntry'
-  ClusterMetadata:
-    type: object
-    properties:
-      ClusterId:
-        $ref: '#/definitions/String'
-        description: The automatically generated ID for a cluster.
-      Description:
-        $ref: '#/definitions/String'
-        description: The optional description of the cluster.
-      KmsKeyARN:
-        $ref: '#/definitions/KmsKeyARN'
-        description: 'The <code>KmsKeyARN</code> Amazon Resource Name (ARN) associated with this cluster. This ARN was created using the <a href="http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS Key Management Service (AWS KMS).'
-      RoleARN:
-        $ref: '#/definitions/RoleARN'
-        description: 'The role ARN associated with this cluster. This ARN was created using the <a href="http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
-      ClusterState:
-        $ref: '#/definitions/ClusterState'
-        description: The current status of the cluster.
-      JobType:
-        $ref: '#/definitions/JobType'
-        description: 'The type of job for this cluster. Currently, the only job type supported for clusters is <code>LOCAL_USE</code>.'
-      SnowballType:
-        $ref: '#/definitions/SnowballType'
-        description: 'The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.'
-      CreationDate:
-        $ref: '#/definitions/Timestamp'
-        description: The creation date for this cluster.
-      Resources:
-        $ref: '#/definitions/JobResource'
-        description: The arrays of <a>JobResource</a> objects that can include updated <a>S3Resource</a> objects or <a>LambdaResource</a> objects.
       AddressId:
-        $ref: '#/definitions/AddressId'
-        description: The automatically generated ID for a specific address.
-      ShippingOption:
-        $ref: '#/definitions/ShippingOption'
-        description: '<p>The shipping speed for each node in this cluster. This speed doesn''t dictate how soon you''ll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
-      Notification:
-        $ref: '#/definitions/Notification'
-        description: The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.
-      ForwardingAddressId:
-        $ref: '#/definitions/AddressId'
-        description: 'The ID of the address that you want a cluster shipped to, after it will be shipped to its primary address. This field is not supported in most regions.'
-    description: Contains metadata about a specific cluster.
-  ClusterState:
-    type: string
-    enum:
-      - AwaitingQuorum
-      - Pending
-      - InUse
-      - Complete
-      - Cancelled
-  CompatibleImage:
-    type: object
-    properties:
-      AmiId:
         $ref: '#/definitions/String'
-        description: The unique identifier for an individual Snowball Edge AMI.
-      Name:
-        $ref: '#/definitions/String'
-        description: The optional name of a compatible image.
-    description: 'A JSON-formatted object that describes a compatible Amazon Machine Image (AMI), including the ID and name for a Snowball Edge AMI. This AMI is compatible with the device''s physical hardware requirements, and it should be able to be run in an SBE1 instance on the device.'
-  CompatibleImageList:
-    type: array
-    items:
-      $ref: '#/definitions/CompatibleImage'
+        description: The automatically generated ID for a specific address. You'll use this ID when you create a job to specify which address you want the Snowball for that job shipped to.
   CreateAddressRequest:
     type: object
     required:
@@ -944,14 +797,16 @@ definitions:
       Address:
         $ref: '#/definitions/Address'
         description: The address that you want the Snowball shipped to.
-  CreateAddressResult:
+  InvalidAddressException: {}
+  UnsupportedAddressException: {}
+  CreateClusterResult:
     type: object
     example:
-      AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
+      ClusterId: CID123e4567-e89b-12d3-a456-426655440000
     properties:
-      AddressId:
-        $ref: '#/definitions/String'
-        description: The automatically generated ID for a specific address. You'll use this ID when you create a job to specify which address you want the Snowball for that job shipped to.
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: The automatically generated ID for a cluster.
   CreateClusterRequest:
     type: object
     required:
@@ -1006,14 +861,16 @@ definitions:
       ForwardingAddressId:
         $ref: '#/definitions/AddressId'
         description: The forwarding address ID for a cluster. This field is not supported in most regions.
-  CreateClusterResult:
+  InvalidInputCombinationException: {}
+  Ec2RequestFailedException: {}
+  CreateJobResult:
     type: object
     example:
-      ClusterId: CID123e4567-e89b-12d3-a456-426655440000
+      JobId: JID123e4567-e89b-12d3-a456-426655440000
     properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: The automatically generated ID for a cluster.
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
   CreateJobRequest:
     type: object
     example:
@@ -1069,40 +926,7 @@ definitions:
       ForwardingAddressId:
         $ref: '#/definitions/AddressId'
         description: The forwarding address ID for a job. This field is not supported in most regions.
-  CreateJobResult:
-    type: object
-    example:
-      JobId: JID123e4567-e89b-12d3-a456-426655440000
-    properties:
-      JobId:
-        $ref: '#/definitions/JobId'
-        description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
-  DataTransfer:
-    type: object
-    properties:
-      BytesTransferred:
-        $ref: '#/definitions/Long'
-        description: The number of bytes transferred between a Snowball and Amazon S3.
-      ObjectsTransferred:
-        $ref: '#/definitions/Long'
-        description: The number of objects transferred between a Snowball and Amazon S3.
-      TotalBytes:
-        $ref: '#/definitions/Long'
-        description: The total bytes of data for a transfer between a Snowball and Amazon S3. This value is set to 0 (zero) until all the keys that will be transferred have been listed.
-      TotalObjects:
-        $ref: '#/definitions/Long'
-        description: The total number of objects for a transfer between a Snowball and Amazon S3. This value is set to 0 (zero) until all the keys that will be transferred have been listed.
-    description: 'Defines the real-time status of a Snowball''s data transfer while the device is at AWS. This data is only available while a job has a <code>JobState</code> value of <code>InProgress</code>, for both import and export jobs.'
-  DescribeAddressRequest:
-    type: object
-    required:
-      - AddressId
-    example:
-      AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
-    properties:
-      AddressId:
-        $ref: '#/definitions/AddressId'
-        description: The automatically generated ID for a specific address.
+  ClusterLimitExceededException: {}
   DescribeAddressResult:
     type: object
     example:
@@ -1120,16 +944,16 @@ definitions:
       Address:
         $ref: '#/definitions/Address'
         description: The address that you want the Snowball or Snowballs associated with a specific job to be shipped to.
-  DescribeAddressesRequest:
+  DescribeAddressRequest:
     type: object
-    example: {}
+    required:
+      - AddressId
+    example:
+      AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
     properties:
-      MaxResults:
-        $ref: '#/definitions/ListLimit'
-        description: The number of <code>ADDRESS</code> objects to return.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>ADDRESS</code> objects, you have the option of specifying a value for <code>NextToken</code> as the starting point for your list of returned addresses.'
+      AddressId:
+        $ref: '#/definitions/AddressId'
+        description: The automatically generated ID for a specific address.
   DescribeAddressesResult:
     type: object
     example:
@@ -1150,16 +974,17 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: 'HTTP requests are stateless. If you use the automatically generated <code>NextToken</code> value in your next <code>DescribeAddresses</code> call, your list of returned addresses will start from this point in the array.'
-  DescribeClusterRequest:
+  DescribeAddressesRequest:
     type: object
-    required:
-      - ClusterId
-    example:
-      ClusterId: CID123e4567-e89b-12d3-a456-426655440000
+    example: {}
     properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: The automatically generated ID for a cluster.
+      MaxResults:
+        $ref: '#/definitions/ListLimit'
+        description: The number of <code>ADDRESS</code> objects to return.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>ADDRESS</code> objects, you have the option of specifying a value for <code>NextToken</code> as the starting point for your list of returned addresses.'
+  InvalidNextTokenException: {}
   DescribeClusterResult:
     type: object
     example:
@@ -1184,16 +1009,16 @@ definitions:
       ClusterMetadata:
         $ref: '#/definitions/ClusterMetadata'
         description: 'Information about a specific cluster, including shipping information, cluster status, and other important metadata.'
-  DescribeJobRequest:
+  DescribeClusterRequest:
     type: object
     required:
-      - JobId
+      - ClusterId
     example:
-      JobId: JID123e4567-e89b-12d3-a456-426655440000
+      ClusterId: CID123e4567-e89b-12d3-a456-426655440000
     properties:
-      JobId:
-        $ref: '#/definitions/JobId'
-        description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: The automatically generated ID for a cluster.
   DescribeJobResult:
     type: object
     example:
@@ -1224,39 +1049,24 @@ definitions:
       SubJobMetadata:
         $ref: '#/definitions/JobMetadataList'
         description: 'Information about a specific job part (in the case of an export job), including shipping information, job status, and other important metadata.'
-  Ec2AmiResource:
+  DescribeJobRequest:
     type: object
     required:
-      - AmiId
+      - JobId
+    example:
+      JobId: JID123e4567-e89b-12d3-a456-426655440000
     properties:
-      AmiId:
-        $ref: '#/definitions/AmiId'
-        description: The ID of the AMI in Amazon EC2.
-      SnowballAmiId:
-        $ref: '#/definitions/String'
-        description: The ID of the AMI on the Snowball Edge device.
-    description: 'A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI), including the Amazon EC2 AMI ID and the Snowball Edge AMI ID. Each AMI has these two IDs to simplify identifying the AMI in both the AWS Cloud and on the device.'
-  Ec2AmiResourceList:
-    type: array
-    items:
-      $ref: '#/definitions/Ec2AmiResource'
-  Ec2RequestFailedException:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
+  GetJobManifestResult:
     type: object
+    example:
+      ManifestURI: 'https://awsie-frosty-manifests-prod.s3.amazonaws.com/JID123e4567-e89b-12d3-a456-426655440000_manifest.bin?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20161224T005115Z&X-Amz-SignedHeaders=...'
     properties:
-      Message:
+      ManifestURI:
         $ref: '#/definitions/String'
-    description: Your IAM user lacks the necessary Amazon EC2 permissions to perform the attempted action.
-  EventTriggerDefinition:
-    type: object
-    properties:
-      EventResourceARN:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an AWS Lambda function's event trigger associated with this job.
-    description: The container for the <a>EventTriggerDefinition$EventResourceARN</a>.
-  EventTriggerDefinitionList:
-    type: array
-    items:
-      $ref: '#/definitions/EventTriggerDefinition'
+        description: The Amazon S3 presigned URL for the manifest file associated with the specified <code>JobId</code> value.
   GetJobManifestRequest:
     type: object
     required:
@@ -1267,14 +1077,14 @@ definitions:
       JobId:
         $ref: '#/definitions/JobId'
         description: 'The ID for a job that you want to get the manifest file for, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
-  GetJobManifestResult:
+  GetJobUnlockCodeResult:
     type: object
     example:
-      ManifestURI: 'https://awsie-frosty-manifests-prod.s3.amazonaws.com/JID123e4567-e89b-12d3-a456-426655440000_manifest.bin?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20161224T005115Z&X-Amz-SignedHeaders=...'
+      UnlockCode: 12345-abcde-56789-fghij-01234
     properties:
-      ManifestURI:
+      UnlockCode:
         $ref: '#/definitions/String'
-        description: The Amazon S3 presigned URL for the manifest file associated with the specified <code>JobId</code> value.
+        description: The <code>UnlockCode</code> value for the specified job. The <code>UnlockCode</code> value can be accessed for up to 90 days after the job has been created.
   GetJobUnlockCodeRequest:
     type: object
     required:
@@ -1285,18 +1095,6 @@ definitions:
       JobId:
         $ref: '#/definitions/JobId'
         description: 'The ID for the job that you want to get the <code>UnlockCode</code> value for, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
-  GetJobUnlockCodeResult:
-    type: object
-    example:
-      UnlockCode: 12345-abcde-56789-fghij-01234
-    properties:
-      UnlockCode:
-        $ref: '#/definitions/String'
-        description: The <code>UnlockCode</code> value for the specified job. The <code>UnlockCode</code> value can be accessed for up to 90 days after the job has been created.
-  GetSnowballUsageRequest:
-    type: object
-    example: {}
-    properties: {}
   GetSnowballUsageResult:
     type: object
     example:
@@ -1309,88 +1107,464 @@ definitions:
       SnowballsInUse:
         $ref: '#/definitions/Integer'
         description: The number of Snowballs that this account is currently using.
-  Integer:
-    type: integer
-  InvalidAddressException:
+  GetSnowballUsageRequest:
+    type: object
+    example: {}
+    properties: {}
+  ListClusterJobsResult:
+    type: object
+    example:
+      JobListEntries:
+        - CreationDate: '1480475524.0'
+          Description: MyClustrer-node-001
+          IsMaster: false
+          JobId: JID123e4567-e89b-12d3-a456-426655440000
+          JobState: New
+          JobType: LOCAL_USE
+          SnowballType: EDGE
+        - CreationDate: '1480475525.0'
+          Description: MyClustrer-node-002
+          IsMaster: false
+          JobId: JID123e4567-e89b-12d3-a456-426655440001
+          JobState: New
+          JobType: LOCAL_USE
+          SnowballType: EDGE
+        - CreationDate: '1480475525.0'
+          Description: MyClustrer-node-003
+          IsMaster: false
+          JobId: JID123e4567-e89b-12d3-a456-426655440002
+          JobState: New
+          JobType: LOCAL_USE
+          SnowballType: EDGE
+        - CreationDate: '1480475525.0'
+          Description: MyClustrer-node-004
+          IsMaster: false
+          JobId: JID123e4567-e89b-12d3-a456-426655440003
+          JobState: New
+          JobType: LOCAL_USE
+          SnowballType: EDGE
+        - CreationDate: '1480475525.0'
+          Description: MyClustrer-node-005
+          IsMaster: false
+          JobId: JID123e4567-e89b-12d3-a456-426655440004
+          JobState: New
+          JobType: LOCAL_USE
+          SnowballType: EDGE
+    properties:
+      JobListEntries:
+        $ref: '#/definitions/JobListEntryList'
+        description: 'Each <code>JobListEntry</code> object contains a job''s state, a job''s ID, and a value that indicates whether the job is a job part, in the case of export jobs. '
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'HTTP requests are stateless. If you use the automatically generated <code>NextToken</code> value in your next <code>ListClusterJobsResult</code> call, your list of returned jobs will start from this point in the array.'
+  ListClusterJobsRequest:
+    type: object
+    required:
+      - ClusterId
+    example:
+      ClusterId: CID123e4567-e89b-12d3-a456-426655440000
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: 'The 39-character ID for the cluster that you want to list, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
+      MaxResults:
+        $ref: '#/definitions/ListLimit'
+        description: The number of <code>JobListEntry</code> objects to return.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>JobListEntry</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
+  ListClustersResult:
+    type: object
+    example:
+      ClusterListEntries:
+        - ClusterId: CID123e4567-e89b-12d3-a456-426655440000
+          ClusterState: Pending
+          CreationDate: '1480475517.0'
+          Description: MyCluster
+    properties:
+      ClusterListEntries:
+        $ref: '#/definitions/ClusterListEntryList'
+        description: 'Each <code>ClusterListEntry</code> object contains a cluster''s state, a cluster''s ID, and other important status information.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'HTTP requests are stateless. If you use the automatically generated <code>NextToken</code> value in your next <code>ClusterListEntry</code> call, your list of returned clusters will start from this point in the array.'
+  ListClustersRequest:
+    type: object
+    example: {}
+    properties:
+      MaxResults:
+        $ref: '#/definitions/ListLimit'
+        description: The number of <code>ClusterListEntry</code> objects to return.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>ClusterListEntry</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
+  ListCompatibleImagesResult:
     type: object
     properties:
-      Message:
+      CompatibleImages:
+        $ref: '#/definitions/CompatibleImageList'
+        description: 'A JSON-formatted object that describes a compatible AMI, including the ID and name for a Snowball Edge AMI.'
+      NextToken:
         $ref: '#/definitions/String'
-    description: 'The address provided was invalid. Check the address with your region''s carrier, and try again.'
-  InvalidInputCombinationException:
+        description: 'Because HTTP requests are stateless, this is the starting point for your next list of returned images.'
+  ListCompatibleImagesRequest:
     type: object
     properties:
-      Message:
+      MaxResults:
+        $ref: '#/definitions/ListLimit'
+        description: 'The maximum number of results for the list of compatible images. Currently, a Snowball Edge device can store 10 AMIs.'
+      NextToken:
         $ref: '#/definitions/String'
-    description: 'Job or cluster creation failed. One ore more inputs were invalid. Confirm that the <a>CreateClusterRequest$SnowballType</a> value supports your <a>CreateJobRequest$JobType</a>, and try again.'
-  InvalidJobStateException:
+        description: 'HTTP requests are stateless. To identify what object comes "next" in the list of compatible images, you can specify a value for <code>NextToken</code> as the starting point for your list of returned images.'
+  ListJobsResult:
+    type: object
+    example:
+      JobListEntries:
+        - CreationDate: '1460678186.0'
+          Description: MyJob
+          IsMaster: false
+          JobId: JID123e4567-e89b-12d3-a456-426655440000
+          JobState: New
+          JobType: IMPORT
+          SnowballType: STANDARD
+    properties:
+      JobListEntries:
+        $ref: '#/definitions/JobListEntryList'
+        description: 'Each <code>JobListEntry</code> object contains a job''s state, a job''s ID, and a value that indicates whether the job is a job part, in the case of export jobs. '
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'HTTP requests are stateless. If you use this automatically generated <code>NextToken</code> value in your next <code>ListJobs</code> call, your returned <code>JobListEntry</code> objects will start from this point in the array.'
+  ListJobsRequest:
+    type: object
+    example: {}
+    properties:
+      MaxResults:
+        $ref: '#/definitions/ListLimit'
+        description: The number of <code>JobListEntry</code> objects to return.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>JobListEntry</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
+  UpdateClusterResult:
+    type: object
+    properties: {}
+  UpdateClusterRequest:
+    type: object
+    required:
+      - ClusterId
+    example:
+      AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
+      ClusterId: CID123e4567-e89b-12d3-a456-426655440000
+      Description: Updated the address to send this to image processing - RJ
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: 'The cluster ID of the cluster that you want to update, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
+      RoleARN:
+        $ref: '#/definitions/RoleARN'
+        description: 'The new role Amazon Resource Name (ARN) that you want to associate with this cluster. To create a role ARN, use the <a href="http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
+      Description:
+        $ref: '#/definitions/String'
+        description: The updated description of this cluster.
+      Resources:
+        $ref: '#/definitions/JobResource'
+        description: The updated arrays of <a>JobResource</a> objects that can include updated <a>S3Resource</a> objects or <a>LambdaResource</a> objects.
+      AddressId:
+        $ref: '#/definitions/AddressId'
+        description: The ID of the updated <a>Address</a> object.
+      ShippingOption:
+        $ref: '#/definitions/ShippingOption'
+        description: The updated shipping option value of this cluster's <a>ShippingDetails</a> object.
+      Notification:
+        $ref: '#/definitions/Notification'
+        description: The new or updated <a>Notification</a> object.
+      ForwardingAddressId:
+        $ref: '#/definitions/AddressId'
+        description: The updated ID for the forwarding address for a cluster. This field is not supported in most regions.
+  UpdateJobResult:
+    type: object
+    properties: {}
+  UpdateJobRequest:
+    type: object
+    required:
+      - JobId
+    example:
+      AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
+      Description: 'Upgraded to Edge, shipped to Finance Dept, and requested faster shipping speed - TS.'
+      JobId: JID123e4567-e89b-12d3-a456-426655440000
+      ShippingOption: NEXT_DAY
+      SnowballCapacityPreference: T100
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: 'The job ID of the job that you want to update, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
+      RoleARN:
+        $ref: '#/definitions/RoleARN'
+        description: 'The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the <a href="http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a>AWS Identity and Access Management (IAM) API action.'
+      Notification:
+        $ref: '#/definitions/Notification'
+        description: The new or updated <a>Notification</a> object.
+      Resources:
+        $ref: '#/definitions/JobResource'
+        description: 'The updated <code>JobResource</code> object, or the updated <a>JobResource</a> object. '
+      AddressId:
+        $ref: '#/definitions/AddressId'
+        description: The ID of the updated <a>Address</a> object.
+      ShippingOption:
+        $ref: '#/definitions/ShippingOption'
+        description: The updated shipping option value of this job's <a>ShippingDetails</a> object.
+      Description:
+        $ref: '#/definitions/String'
+        description: The updated description of this job's <a>JobMetadata</a> object.
+      SnowballCapacityPreference:
+        $ref: '#/definitions/SnowballCapacity'
+        description: The updated <code>SnowballCapacityPreference</code> of this job's <a>JobMetadata</a> object. The 50 TB Snowballs are only available in the US regions.
+      ForwardingAddressId:
+        $ref: '#/definitions/AddressId'
+        description: The updated ID for the forwarding address for a job. This field is not supported in most regions.
+  AddressId:
+    type: string
+    pattern: 'ADID[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+    minLength: 40
+    maxLength: 40
+  String:
+    type: string
+    minLength: 1
+  Boolean:
+    type: boolean
+  Address:
     type: object
     properties:
-      Message:
+      AddressId:
+        $ref: '#/definitions/AddressId'
+        description: The unique ID for an address.
+      Name:
         $ref: '#/definitions/String'
-    description: The action can't be performed because the job's current state doesn't allow that action to be performed.
-  InvalidNextTokenException:
-    type: object
-    properties:
-      Message:
+        description: The name of a person to receive a Snowball at an address.
+      Company:
         $ref: '#/definitions/String'
-    description: 'The <code>NextToken</code> string was altered unexpectedly, and the operation has stopped. Run the operation without changing the <code>NextToken</code> string, and try again.'
-  InvalidResourceException:
-    type: object
-    properties:
-      Message:
+        description: The name of the company to receive a Snowball at an address.
+      Street1:
         $ref: '#/definitions/String'
-      ResourceType:
+        description: The first line in a street address that a Snowball is to be delivered to.
+      Street2:
         $ref: '#/definitions/String'
-        description: The provided resource value is invalid.
-    description: 'The specified resource can''t be found. Check the information you provided in your last request, and try again.'
+        description: The second line in a street address that a Snowball is to be delivered to.
+      Street3:
+        $ref: '#/definitions/String'
+        description: The third line in a street address that a Snowball is to be delivered to.
+      City:
+        $ref: '#/definitions/String'
+        description: The city in an address that a Snowball is to be delivered to.
+      StateOrProvince:
+        $ref: '#/definitions/String'
+        description: The state or province in an address that a Snowball is to be delivered to.
+      PrefectureOrDistrict:
+        $ref: '#/definitions/String'
+        description: This field is no longer used and the value is ignored.
+      Landmark:
+        $ref: '#/definitions/String'
+        description: This field is no longer used and the value is ignored.
+      Country:
+        $ref: '#/definitions/String'
+        description: The country in an address that a Snowball is to be delivered to.
+      PostalCode:
+        $ref: '#/definitions/String'
+        description: The postal code in an address that a Snowball is to be delivered to.
+      PhoneNumber:
+        $ref: '#/definitions/String'
+        description: The phone number associated with an address that a Snowball is to be delivered to.
+      IsRestricted:
+        $ref: '#/definitions/Boolean'
+        description: 'If the address you are creating is a primary address, then set this option to true. This field is not supported in most regions.'
+    description: 'The address that you want the Snowball or Snowballs associated with a specific job to be shipped to. Addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. Although no individual elements of the <code>Address</code> are required, if the address is invalid or unsupported, then an exception is thrown.'
+  AddressList:
+    type: array
+    items:
+      $ref: '#/definitions/Address'
+  AmiId:
+    type: string
+    pattern: '(ami-[0-9a-f]{8})|(ami-[0-9a-f]{17})'
+    minLength: 12
+    maxLength: 21
+  ClusterId:
+    type: string
+    pattern: 'CID[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+    minLength: 39
+    maxLength: 39
   JobId:
     type: string
     pattern: '(M|J)ID[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
     minLength: 39
     maxLength: 39
-  JobListEntry:
+  ClusterState:
+    type: string
+    enum:
+      - AwaitingQuorum
+      - Pending
+      - InUse
+      - Complete
+      - Cancelled
+  Timestamp:
+    type: string
+    format: date-time
+  ClusterListEntry:
     type: object
     properties:
-      JobId:
+      ClusterId:
         $ref: '#/definitions/String'
-        description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
-      JobState:
-        $ref: '#/definitions/JobState'
-        description: The current state of this job.
-      IsMaster:
-        $ref: '#/definitions/Boolean'
-        description: 'A value that indicates that this job is a master job. A master job represents a successful request to create an export job. Master jobs aren''t associated with any Snowballs. Instead, each master job will have at least one job part, and each job part is associated with a Snowball. It might take some time before the job parts associated with a particular master job are listed, because they are created after the master job is created.'
-      JobType:
-        $ref: '#/definitions/JobType'
-        description: The type of job.
-      SnowballType:
-        $ref: '#/definitions/SnowballType'
-        description: The type of device used with this job.
+        description: 'The 39-character ID for the cluster that you want to list, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
+      ClusterState:
+        $ref: '#/definitions/ClusterState'
+        description: 'The current state of this cluster. For information about the state of a specific node, see <a>JobListEntry$JobState</a>.'
       CreationDate:
         $ref: '#/definitions/Timestamp'
-        description: The creation date for this job.
+        description: The creation date for this cluster.
       Description:
         $ref: '#/definitions/String'
-        description: 'The optional description of this specific job, for example <code>Important Photos 2016-08-11</code>.'
-    description: 'Each <code>JobListEntry</code> object contains a job''s state, a job''s ID, and a value that indicates whether the job is a job part, in the case of an export job.'
-  JobListEntryList:
+        description: 'Defines an optional description of the cluster, for example <code>Environmental Data Cluster-01</code>.'
+    description: 'Contains a cluster''s state, a cluster''s ID, and other important information.'
+  ClusterListEntryList:
     type: array
     items:
-      $ref: '#/definitions/JobListEntry'
-  JobLogs:
+      $ref: '#/definitions/ClusterListEntry'
+  KmsKeyARN:
+    type: string
+    pattern: 'arn:aws.*:kms:.*:[0-9]{12}:key/.*'
+    maxLength: 255
+  RoleARN:
+    type: string
+    pattern: 'arn:aws.*:iam::[0-9]{12}:role/.*'
+    maxLength: 255
+  JobType:
+    type: string
+    enum:
+      - IMPORT
+      - EXPORT
+      - LOCAL_USE
+  SnowballType:
+    type: string
+    enum:
+      - STANDARD
+      - EDGE
+  JobResource:
     type: object
     properties:
-      JobCompletionReportURI:
+      S3Resources:
+        $ref: '#/definitions/S3ResourceList'
+        description: An array of <code>S3Resource</code> objects.
+      LambdaResources:
+        $ref: '#/definitions/LambdaResourceList'
+        description: The Python-language Lambda functions for this job.
+      Ec2AmiResources:
+        $ref: '#/definitions/Ec2AmiResourceList'
+        description: The Amazon Machine Images (AMIs) associated with this job.
+    description: 'Contains an array of AWS resource objects. Each object represents an Amazon S3 bucket, an AWS Lambda function, or an Amazon Machine Image (AMI) based on Amazon EC2 that is associated with a particular job.'
+  ShippingOption:
+    type: string
+    enum:
+      - SECOND_DAY
+      - NEXT_DAY
+      - EXPRESS
+      - STANDARD
+  Notification:
+    type: object
+    properties:
+      SnsTopicARN:
+        $ref: '#/definitions/SnsTopicARN'
+        description: '<p>The new SNS <code>TopicArn</code> that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the <a href="http://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html">CreateTopic</a> Amazon SNS API action.</p> <p>You can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the <a href="http://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html">Subscribe</a> AWS Simple Notification Service (SNS) API action.</p>'
+      JobStatesToNotify:
+        $ref: '#/definitions/JobStateList'
+        description: The list of job states that will trigger a notification for this job.
+      NotifyAll:
+        $ref: '#/definitions/Boolean'
+        description: Any change in job state will trigger a notification for this job.
+    description: '<p>The Amazon Simple Notification Service (Amazon SNS) notification settings associated with a specific job. The <code>Notification</code> object is returned as a part of the response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data type.</p> <p>When the notification settings are defined during job creation, you can choose to notify based on a specific set of job states using the <code>JobStatesToNotify</code> array of strings, or you can specify that you want to have Amazon SNS notifications sent out for all job states with <code>NotifyAll</code> set to true.</p>'
+  ClusterMetadata:
+    type: object
+    properties:
+      ClusterId:
         $ref: '#/definitions/String'
-        description: A link to an Amazon S3 presigned URL where the job completion report is located.
-      JobSuccessLogURI:
+        description: The automatically generated ID for a cluster.
+      Description:
         $ref: '#/definitions/String'
-        description: A link to an Amazon S3 presigned URL where the job success log is located.
-      JobFailureLogURI:
+        description: The optional description of the cluster.
+      KmsKeyARN:
+        $ref: '#/definitions/KmsKeyARN'
+        description: 'The <code>KmsKeyARN</code> Amazon Resource Name (ARN) associated with this cluster. This ARN was created using the <a href="http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS Key Management Service (AWS KMS).'
+      RoleARN:
+        $ref: '#/definitions/RoleARN'
+        description: 'The role ARN associated with this cluster. This ARN was created using the <a href="http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
+      ClusterState:
+        $ref: '#/definitions/ClusterState'
+        description: The current status of the cluster.
+      JobType:
+        $ref: '#/definitions/JobType'
+        description: 'The type of job for this cluster. Currently, the only job type supported for clusters is <code>LOCAL_USE</code>.'
+      SnowballType:
+        $ref: '#/definitions/SnowballType'
+        description: 'The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.'
+      CreationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The creation date for this cluster.
+      Resources:
+        $ref: '#/definitions/JobResource'
+        description: The arrays of <a>JobResource</a> objects that can include updated <a>S3Resource</a> objects or <a>LambdaResource</a> objects.
+      AddressId:
+        $ref: '#/definitions/AddressId'
+        description: The automatically generated ID for a specific address.
+      ShippingOption:
+        $ref: '#/definitions/ShippingOption'
+        description: '<p>The shipping speed for each node in this cluster. This speed doesn''t dictate how soon you''ll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
+      Notification:
+        $ref: '#/definitions/Notification'
+        description: The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.
+      ForwardingAddressId:
+        $ref: '#/definitions/AddressId'
+        description: 'The ID of the address that you want a cluster shipped to, after it will be shipped to its primary address. This field is not supported in most regions.'
+    description: Contains metadata about a specific cluster.
+  CompatibleImage:
+    type: object
+    properties:
+      AmiId:
         $ref: '#/definitions/String'
-        description: A link to an Amazon S3 presigned URL where the job failure log is located.
-    description: '<p>Contains job logs. Whenever Snowball is used to import data into or export data out of Amazon S3, you''ll have the option of downloading a PDF job report. Job logs are returned as a part of the response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data type. The job logs can be accessed for up to 60 minutes after this request has been made. To access any of the job logs after 60 minutes have passed, you''ll have to make another call to the <code>DescribeJob</code> action.</p> <p>For import jobs, the PDF job report becomes available at the end of the import process. For export jobs, your job report typically becomes available while the Snowball for your job part is being delivered to you.</p> <p>The job report provides you insight into the state of your Amazon S3 data transfer. The report includes details about your job or job part for your records.</p> <p>For deeper visibility into the status of your transferred objects, you can look at the two associated logs: a success log and a failure log. The logs are saved in comma-separated value (CSV) format, and the name of each log includes the ID of the job or job part that the log describes.</p>'
+        description: The unique identifier for an individual Snowball Edge AMI.
+      Name:
+        $ref: '#/definitions/String'
+        description: The optional name of a compatible image.
+    description: 'A JSON-formatted object that describes a compatible Amazon Machine Image (AMI), including the ID and name for a Snowball Edge AMI. This AMI is compatible with the device''s physical hardware requirements, and it should be able to be run in an SBE1 instance on the device.'
+  CompatibleImageList:
+    type: array
+    items:
+      $ref: '#/definitions/CompatibleImage'
+  SnowballCapacity:
+    type: string
+    enum:
+      - T50
+      - T80
+      - T100
+      - NoPreference
+  Long:
+    type: integer
+  DataTransfer:
+    type: object
+    properties:
+      BytesTransferred:
+        $ref: '#/definitions/Long'
+        description: The number of bytes transferred between a Snowball and Amazon S3.
+      ObjectsTransferred:
+        $ref: '#/definitions/Long'
+        description: The number of objects transferred between a Snowball and Amazon S3.
+      TotalBytes:
+        $ref: '#/definitions/Long'
+        description: The total bytes of data for a transfer between a Snowball and Amazon S3. This value is set to 0 (zero) until all the keys that will be transferred have been listed.
+      TotalObjects:
+        $ref: '#/definitions/Long'
+        description: The total number of objects for a transfer between a Snowball and Amazon S3. This value is set to 0 (zero) until all the keys that will be transferred have been listed.
+    description: 'Defines the real-time status of a Snowball''s data transfer while the device is at AWS. This data is only available while a job has a <code>JobState</code> value of <code>InProgress</code>, for both import and export jobs.'
+  ListLimit:
+    type: integer
+    minimum: 0
+    maximum: 100
   JobMetadata:
     type: object
     properties:
@@ -1450,19 +1624,38 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/JobMetadata'
-  JobResource:
+  Ec2AmiResource:
+    type: object
+    required:
+      - AmiId
+    properties:
+      AmiId:
+        $ref: '#/definitions/AmiId'
+        description: The ID of the AMI in Amazon EC2.
+      SnowballAmiId:
+        $ref: '#/definitions/String'
+        description: The ID of the AMI on the Snowball Edge device.
+    description: 'A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI), including the Amazon EC2 AMI ID and the Snowball Edge AMI ID. Each AMI has these two IDs to simplify identifying the AMI in both the AWS Cloud and on the device.'
+  Ec2AmiResourceList:
+    type: array
+    items:
+      $ref: '#/definitions/Ec2AmiResource'
+  ResourceARN:
+    type: string
+    maxLength: 255
+  EventTriggerDefinition:
     type: object
     properties:
-      S3Resources:
-        $ref: '#/definitions/S3ResourceList'
-        description: An array of <code>S3Resource</code> objects.
-      LambdaResources:
-        $ref: '#/definitions/LambdaResourceList'
-        description: The Python-language Lambda functions for this job.
-      Ec2AmiResources:
-        $ref: '#/definitions/Ec2AmiResourceList'
-        description: The Amazon Machine Images (AMIs) associated with this job.
-    description: 'Contains an array of AWS resource objects. Each object represents an Amazon S3 bucket, an AWS Lambda function, or an Amazon Machine Image (AMI) based on Amazon EC2 that is associated with a particular job.'
+      EventResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an AWS Lambda function's event trigger associated with this job.
+    description: The container for the <a>EventTriggerDefinition$EventResourceARN</a>.
+  EventTriggerDefinitionList:
+    type: array
+    items:
+      $ref: '#/definitions/EventTriggerDefinition'
+  Integer:
+    type: integer
   JobState:
     type: string
     enum:
@@ -1472,239 +1665,55 @@ definitions:
       - InTransitToCustomer
       - WithCustomer
       - InTransitToAWS
+      - WithAWSSortingFacility
       - WithAWS
       - InProgress
       - Complete
       - Cancelled
       - Listing
       - Pending
-  JobStateList:
-    type: array
-    items:
-      $ref: '#/definitions/JobState'
-  JobType:
-    type: string
-    enum:
-      - IMPORT
-      - EXPORT
-      - LOCAL_USE
-  KMSRequestFailedException:
+  JobListEntry:
     type: object
     properties:
-      Message:
+      JobId:
         $ref: '#/definitions/String'
-    description: The provided AWS Key Management Service key lacks the permissions to perform the specified <a>CreateJob</a> or <a>UpdateJob</a> action.
-  KeyRange:
-    type: object
-    properties:
-      BeginMarker:
-        $ref: '#/definitions/String'
-        description: The key that starts an optional key range for an export job. Ranges are inclusive and UTF-8 binary sorted.
-      EndMarker:
-        $ref: '#/definitions/String'
-        description: The key that ends an optional key range for an export job. Ranges are inclusive and UTF-8 binary sorted.
-    description: 'Contains a key range. For export jobs, a <code>S3Resource</code> object can have an optional <code>KeyRange</code> value. The length of the range is defined at job creation, and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are UTF-8 binary sorted.'
-  KmsKeyARN:
-    type: string
-    pattern: 'arn:aws.*:kms:.*:[0-9]{12}:key/.*'
-    maxLength: 255
-  LambdaResource:
-    type: object
-    properties:
-      LambdaArn:
-        $ref: '#/definitions/ResourceARN'
-        description: An Amazon Resource Name (ARN) that represents an AWS Lambda function to be triggered by PUT object actions on the associated local Amazon S3 resource.
-      EventTriggers:
-        $ref: '#/definitions/EventTriggerDefinitionList'
-        description: The array of ARNs for <a>S3Resource</a> objects to trigger the <a>LambdaResource</a> objects associated with this job.
-    description: 'Identifies '
-  LambdaResourceList:
-    type: array
-    items:
-      $ref: '#/definitions/LambdaResource'
-  ListClusterJobsRequest:
-    type: object
-    required:
-      - ClusterId
-    example:
-      ClusterId: CID123e4567-e89b-12d3-a456-426655440000
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The 39-character ID for the cluster that you want to list, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
-      MaxResults:
-        $ref: '#/definitions/ListLimit'
-        description: The number of <code>JobListEntry</code> objects to return.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>JobListEntry</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
-  ListClusterJobsResult:
-    type: object
-    example:
-      JobListEntries:
-        - CreationDate: '1480475524.0'
-          Description: MyClustrer-node-001
-          IsMaster: false
-          JobId: JID123e4567-e89b-12d3-a456-426655440000
-          JobState: New
-          JobType: LOCAL_USE
-          SnowballType: EDGE
-        - CreationDate: '1480475525.0'
-          Description: MyClustrer-node-002
-          IsMaster: false
-          JobId: JID123e4567-e89b-12d3-a456-426655440001
-          JobState: New
-          JobType: LOCAL_USE
-          SnowballType: EDGE
-        - CreationDate: '1480475525.0'
-          Description: MyClustrer-node-003
-          IsMaster: false
-          JobId: JID123e4567-e89b-12d3-a456-426655440002
-          JobState: New
-          JobType: LOCAL_USE
-          SnowballType: EDGE
-        - CreationDate: '1480475525.0'
-          Description: MyClustrer-node-004
-          IsMaster: false
-          JobId: JID123e4567-e89b-12d3-a456-426655440003
-          JobState: New
-          JobType: LOCAL_USE
-          SnowballType: EDGE
-        - CreationDate: '1480475525.0'
-          Description: MyClustrer-node-005
-          IsMaster: false
-          JobId: JID123e4567-e89b-12d3-a456-426655440004
-          JobState: New
-          JobType: LOCAL_USE
-          SnowballType: EDGE
-    properties:
-      JobListEntries:
-        $ref: '#/definitions/JobListEntryList'
-        description: 'Each <code>JobListEntry</code> object contains a job''s state, a job''s ID, and a value that indicates whether the job is a job part, in the case of export jobs. '
-      NextToken:
-        $ref: '#/definitions/String'
-        description: 'HTTP requests are stateless. If you use the automatically generated <code>NextToken</code> value in your next <code>ListClusterJobsResult</code> call, your list of returned jobs will start from this point in the array.'
-  ListClustersRequest:
-    type: object
-    example: {}
-    properties:
-      MaxResults:
-        $ref: '#/definitions/ListLimit'
-        description: The number of <code>ClusterListEntry</code> objects to return.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>ClusterListEntry</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
-  ListClustersResult:
-    type: object
-    example:
-      ClusterListEntries:
-        - ClusterId: CID123e4567-e89b-12d3-a456-426655440000
-          ClusterState: Pending
-          CreationDate: '1480475517.0'
-          Description: MyCluster
-    properties:
-      ClusterListEntries:
-        $ref: '#/definitions/ClusterListEntryList'
-        description: 'Each <code>ClusterListEntry</code> object contains a cluster''s state, a cluster''s ID, and other important status information.'
-      NextToken:
-        $ref: '#/definitions/String'
-        description: 'HTTP requests are stateless. If you use the automatically generated <code>NextToken</code> value in your next <code>ClusterListEntry</code> call, your list of returned clusters will start from this point in the array.'
-  ListCompatibleImagesRequest:
-    type: object
-    properties:
-      MaxResults:
-        $ref: '#/definitions/ListLimit'
-        description: 'The maximum number of results for the list of compatible images. Currently, a Snowball Edge device can store 10 AMIs.'
-      NextToken:
-        $ref: '#/definitions/String'
-        description: 'HTTP requests are stateless. To identify what object comes "next" in the list of compatible images, you can specify a value for <code>NextToken</code> as the starting point for your list of returned images.'
-  ListCompatibleImagesResult:
-    type: object
-    properties:
-      CompatibleImages:
-        $ref: '#/definitions/CompatibleImageList'
-        description: 'A JSON-formatted object that describes a compatible AMI, including the ID and name for a Snowball Edge AMI.'
-      NextToken:
-        $ref: '#/definitions/String'
-        description: 'Because HTTP requests are stateless, this is the starting point for your next list of returned images.'
-  ListJobsRequest:
-    type: object
-    example: {}
-    properties:
-      MaxResults:
-        $ref: '#/definitions/ListLimit'
-        description: The number of <code>JobListEntry</code> objects to return.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>JobListEntry</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
-  ListJobsResult:
-    type: object
-    example:
-      JobListEntries:
-        - CreationDate: '1460678186.0'
-          Description: MyJob
-          IsMaster: false
-          JobId: JID123e4567-e89b-12d3-a456-426655440000
-          JobState: New
-          JobType: IMPORT
-          SnowballType: STANDARD
-    properties:
-      JobListEntries:
-        $ref: '#/definitions/JobListEntryList'
-        description: 'Each <code>JobListEntry</code> object contains a job''s state, a job''s ID, and a value that indicates whether the job is a job part, in the case of export jobs. '
-      NextToken:
-        $ref: '#/definitions/String'
-        description: 'HTTP requests are stateless. If you use this automatically generated <code>NextToken</code> value in your next <code>ListJobs</code> call, your returned <code>JobListEntry</code> objects will start from this point in the array.'
-  ListLimit:
-    type: integer
-    minimum: 0
-    maximum: 100
-  Long:
-    type: integer
-  Notification:
-    type: object
-    properties:
-      SnsTopicARN:
-        $ref: '#/definitions/SnsTopicARN'
-        description: '<p>The new SNS <code>TopicArn</code> that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the <a href="http://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html">CreateTopic</a> Amazon SNS API action.</p> <p>You can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the <a href="http://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html">Subscribe</a> AWS Simple Notification Service (SNS) API action.</p>'
-      JobStatesToNotify:
-        $ref: '#/definitions/JobStateList'
-        description: The list of job states that will trigger a notification for this job.
-      NotifyAll:
+        description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
+      JobState:
+        $ref: '#/definitions/JobState'
+        description: The current state of this job.
+      IsMaster:
         $ref: '#/definitions/Boolean'
-        description: Any change in job state will trigger a notification for this job.
-    description: '<p>The Amazon Simple Notification Service (Amazon SNS) notification settings associated with a specific job. The <code>Notification</code> object is returned as a part of the response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data type.</p> <p>When the notification settings are defined during job creation, you can choose to notify based on a specific set of job states using the <code>JobStatesToNotify</code> array of strings, or you can specify that you want to have Amazon SNS notifications sent out for all job states with <code>NotifyAll</code> set to true.</p>'
-  ResourceARN:
-    type: string
-    maxLength: 255
-  RoleARN:
-    type: string
-    pattern: 'arn:aws.*:iam::[0-9]{12}:role/.*'
-    maxLength: 255
-  S3Resource:
-    type: object
-    properties:
-      BucketArn:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of an Amazon S3 bucket.
-      KeyRange:
-        $ref: '#/definitions/KeyRange'
-        description: 'For export jobs, you can provide an optional <code>KeyRange</code> within a specific Amazon S3 bucket. The length of the range is defined at job creation, and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are UTF-8 binary sorted.'
-    description: 'Each <code>S3Resource</code> object represents an Amazon S3 bucket that your transferred data will be exported from or imported into. For export jobs, this object can have an optional <code>KeyRange</code> value. The length of the range is defined at job creation, and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are UTF-8 binary sorted.'
-  S3ResourceList:
+        description: 'A value that indicates that this job is a master job. A master job represents a successful request to create an export job. Master jobs aren''t associated with any Snowballs. Instead, each master job will have at least one job part, and each job part is associated with a Snowball. It might take some time before the job parts associated with a particular master job are listed, because they are created after the master job is created.'
+      JobType:
+        $ref: '#/definitions/JobType'
+        description: The type of job.
+      SnowballType:
+        $ref: '#/definitions/SnowballType'
+        description: The type of device used with this job.
+      CreationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The creation date for this job.
+      Description:
+        $ref: '#/definitions/String'
+        description: 'The optional description of this specific job, for example <code>Important Photos 2016-08-11</code>.'
+    description: 'Each <code>JobListEntry</code> object contains a job''s state, a job''s ID, and a value that indicates whether the job is a job part, in the case of an export job.'
+  JobListEntryList:
     type: array
     items:
-      $ref: '#/definitions/S3Resource'
-  Shipment:
+      $ref: '#/definitions/JobListEntry'
+  JobLogs:
     type: object
     properties:
-      Status:
+      JobCompletionReportURI:
         $ref: '#/definitions/String'
-        description: Status information for a shipment.
-      TrackingNumber:
+        description: A link to an Amazon S3 presigned URL where the job completion report is located.
+      JobSuccessLogURI:
         $ref: '#/definitions/String'
-        description: '<p>The tracking number for this job. Using this tracking number with your region''s carrier''s website, you can track a Snowball as the carrier transports it.</p> <p>For India, the carrier is Amazon Logistics. For all other regions, UPS is the carrier.</p>'
-    description: The <code>Status</code> and <code>TrackingNumber</code> information for an inbound or outbound shipment.
+        description: A link to an Amazon S3 presigned URL where the job success log is located.
+      JobFailureLogURI:
+        $ref: '#/definitions/String'
+        description: A link to an Amazon S3 presigned URL where the job failure log is located.
+    description: '<p>Contains job logs. Whenever Snowball is used to import data into or export data out of Amazon S3, you''ll have the option of downloading a PDF job report. Job logs are returned as a part of the response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data type. The job logs can be accessed for up to 60 minutes after this request has been made. To access any of the job logs after 60 minutes have passed, you''ll have to make another call to the <code>DescribeJob</code> action.</p> <p>For import jobs, the PDF job report becomes available at the end of the import process. For export jobs, your job report typically becomes available while the Snowball for your job part is being delivered to you.</p> <p>The job report provides you insight into the state of your Amazon S3 data transfer. The report includes details about your job or job part for your records.</p> <p>For deeper visibility into the status of your transferred objects, you can look at the two associated logs: a success log and a failure log. The logs are saved in comma-separated value (CSV) format, and the name of each log includes the ID of the job or job part that the log describes.</p>'
   ShippingDetails:
     type: object
     properties:
@@ -1718,115 +1727,59 @@ definitions:
         $ref: '#/definitions/Shipment'
         description: The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being delivered to the address that you specified for a particular job.
     description: 'A job''s shipping information, including inbound and outbound tracking numbers and shipping speed options.'
-  ShippingOption:
-    type: string
-    enum:
-      - SECOND_DAY
-      - NEXT_DAY
-      - EXPRESS
-      - STANDARD
-  SnowballCapacity:
-    type: string
-    enum:
-      - T50
-      - T80
-      - T100
-      - NoPreference
-  SnowballType:
-    type: string
-    enum:
-      - STANDARD
-      - EDGE
+  S3ResourceList:
+    type: array
+    items:
+      $ref: '#/definitions/S3Resource'
+  LambdaResourceList:
+    type: array
+    items:
+      $ref: '#/definitions/LambdaResource'
+  JobStateList:
+    type: array
+    items:
+      $ref: '#/definitions/JobState'
+  KeyRange:
+    type: object
+    properties:
+      BeginMarker:
+        $ref: '#/definitions/String'
+        description: The key that starts an optional key range for an export job. Ranges are inclusive and UTF-8 binary sorted.
+      EndMarker:
+        $ref: '#/definitions/String'
+        description: The key that ends an optional key range for an export job. Ranges are inclusive and UTF-8 binary sorted.
+    description: 'Contains a key range. For export jobs, a <code>S3Resource</code> object can have an optional <code>KeyRange</code> value. The length of the range is defined at job creation, and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are UTF-8 binary sorted.'
+  LambdaResource:
+    type: object
+    properties:
+      LambdaArn:
+        $ref: '#/definitions/ResourceARN'
+        description: An Amazon Resource Name (ARN) that represents an AWS Lambda function to be triggered by PUT object actions on the associated local Amazon S3 resource.
+      EventTriggers:
+        $ref: '#/definitions/EventTriggerDefinitionList'
+        description: The array of ARNs for <a>S3Resource</a> objects to trigger the <a>LambdaResource</a> objects associated with this job.
+    description: 'Identifies '
   SnsTopicARN:
     type: string
     pattern: 'arn:aws.*:sns:.*:[0-9]{12}:.*'
     maxLength: 255
-  String:
-    type: string
-    minLength: 1
-  Timestamp:
-    type: string
-    format: date-time
-  UnsupportedAddressException:
+  S3Resource:
     type: object
     properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: 'The address is either outside the serviceable area for your region, or an error occurred. Check the address with your region''s carrier and try again. If the issue persists, contact AWS Support.'
-  UpdateClusterRequest:
+      BucketArn:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) of an Amazon S3 bucket.
+      KeyRange:
+        $ref: '#/definitions/KeyRange'
+        description: 'For export jobs, you can provide an optional <code>KeyRange</code> within a specific Amazon S3 bucket. The length of the range is defined at job creation, and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are UTF-8 binary sorted.'
+    description: 'Each <code>S3Resource</code> object represents an Amazon S3 bucket that your transferred data will be exported from or imported into. For export jobs, this object can have an optional <code>KeyRange</code> value. The length of the range is defined at job creation, and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are UTF-8 binary sorted.'
+  Shipment:
     type: object
-    required:
-      - ClusterId
-    example:
-      AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
-      ClusterId: CID123e4567-e89b-12d3-a456-426655440000
-      Description: Updated the address to send this to image processing - RJ
     properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The cluster ID of the cluster that you want to update, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
-      RoleARN:
-        $ref: '#/definitions/RoleARN'
-        description: 'The new role Amazon Resource Name (ARN) that you want to associate with this cluster. To create a role ARN, use the <a href="http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
-      Description:
+      Status:
         $ref: '#/definitions/String'
-        description: The updated description of this cluster.
-      Resources:
-        $ref: '#/definitions/JobResource'
-        description: The updated arrays of <a>JobResource</a> objects that can include updated <a>S3Resource</a> objects or <a>LambdaResource</a> objects.
-      AddressId:
-        $ref: '#/definitions/AddressId'
-        description: The ID of the updated <a>Address</a> object.
-      ShippingOption:
-        $ref: '#/definitions/ShippingOption'
-        description: The updated shipping option value of this cluster's <a>ShippingDetails</a> object.
-      Notification:
-        $ref: '#/definitions/Notification'
-        description: The new or updated <a>Notification</a> object.
-      ForwardingAddressId:
-        $ref: '#/definitions/AddressId'
-        description: The updated ID for the forwarding address for a cluster. This field is not supported in most regions.
-  UpdateClusterResult:
-    type: object
-    properties: {}
-  UpdateJobRequest:
-    type: object
-    required:
-      - JobId
-    example:
-      AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
-      Description: 'Upgraded to Edge, shipped to Finance Dept, and requested faster shipping speed - TS.'
-      JobId: JID123e4567-e89b-12d3-a456-426655440000
-      ShippingOption: NEXT_DAY
-      SnowballCapacityPreference: T100
-    properties:
-      JobId:
-        $ref: '#/definitions/JobId'
-        description: 'The job ID of the job that you want to update, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
-      RoleARN:
-        $ref: '#/definitions/RoleARN'
-        description: 'The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the <a href="http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a>AWS Identity and Access Management (IAM) API action.'
-      Notification:
-        $ref: '#/definitions/Notification'
-        description: The new or updated <a>Notification</a> object.
-      Resources:
-        $ref: '#/definitions/JobResource'
-        description: 'The updated <code>JobResource</code> object, or the updated <a>JobResource</a> object. '
-      AddressId:
-        $ref: '#/definitions/AddressId'
-        description: The ID of the updated <a>Address</a> object.
-      ShippingOption:
-        $ref: '#/definitions/ShippingOption'
-        description: The updated shipping option value of this job's <a>ShippingDetails</a> object.
-      Description:
+        description: Status information for a shipment.
+      TrackingNumber:
         $ref: '#/definitions/String'
-        description: The updated description of this job's <a>JobMetadata</a> object.
-      SnowballCapacityPreference:
-        $ref: '#/definitions/SnowballCapacity'
-        description: The updated <code>SnowballCapacityPreference</code> of this job's <a>JobMetadata</a> object. The 50 TB Snowballs are only available in the US regions.
-      ForwardingAddressId:
-        $ref: '#/definitions/AddressId'
-        description: The updated ID for the forwarding address for a job. This field is not supported in most regions.
-  UpdateJobResult:
-    type: object
-    properties: {}
+        description: '<p>The tracking number for this job. Using this tracking number with your region''s carrier''s website, you can track a Snowball as the carrier transports it.</p> <p>For India, the carrier is Amazon Logistics. For all other regions, UPS is the carrier.</p>'
+    description: The <code>Status</code> and <code>TrackingNumber</code> information for an inbound or outbound shipment.

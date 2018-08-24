@@ -927,17 +927,9 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  ARN:
-    type: string
-    pattern: '^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$'
-  AccessDeniedException:
+  AssociateIpGroupsResult:
     type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The user is not authorized to access a resource.
-  Alias:
-    type: string
+    properties: {}
   AssociateIpGroupsRequest:
     type: object
     required:
@@ -950,7 +942,49 @@ definitions:
       GroupIds:
         $ref: '#/definitions/IpGroupIdList'
         description: The IDs of one or more IP access control groups.
-  AssociateIpGroupsResult:
+  InvalidParameterValuesException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: The exception error message.
+    description: One or more parameter values are not valid.
+  ResourceNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: The resource could not be found.
+      ResourceId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the resource that could not be found.
+    description: The resource could not be found.
+  ResourceLimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: The exception error message.
+    description: Your resource limits have been exceeded.
+  InvalidResourceStateException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The state of the resource is not valid for this operation.
+  AccessDeniedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The user is not authorized to access a resource.
+  OperationNotSupportedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: This operation is not supported.
+  AuthorizeIpRulesResult:
     type: object
     properties: {}
   AuthorizeIpRulesRequest:
@@ -965,9 +999,412 @@ definitions:
       UserRules:
         $ref: '#/definitions/IpRuleList'
         description: The rules to add to the group.
-  AuthorizeIpRulesResult:
+  CreateIpGroupResult:
+    type: object
+    properties:
+      GroupId:
+        $ref: '#/definitions/IpGroupId'
+        description: The ID of the group.
+  CreateIpGroupRequest:
+    type: object
+    required:
+      - GroupName
+    properties:
+      GroupName:
+        $ref: '#/definitions/IpGroupName'
+        description: The name of the group.
+      GroupDesc:
+        $ref: '#/definitions/IpGroupDesc'
+        description: The description of the group.
+      UserRules:
+        $ref: '#/definitions/IpRuleList'
+        description: The rules to add to the group.
+  ResourceAlreadyExistsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The specified resource already exists.
+  ResourceCreationFailedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The resource could not be created.
+  CreateTagsResult:
     type: object
     properties: {}
+  CreateTagsRequest:
+    type: object
+    required:
+      - ResourceId
+      - Tags
+    properties:
+      ResourceId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The ID of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags. Each WorkSpace can have a maximum of 50 tags.
+  CreateWorkspacesResult:
+    type: object
+    properties:
+      FailedRequests:
+        $ref: '#/definitions/FailedCreateWorkspaceRequests'
+        description: Information about the WorkSpaces that could not be created.
+      PendingRequests:
+        $ref: '#/definitions/WorkspaceList'
+        description: '<p>Information about the WorkSpaces that were created.</p> <p>Because this operation is asynchronous, the identifier returned is not immediately available for use with other operations. For example, if you call <a>DescribeWorkspaces</a> before the WorkSpace is created, the information returned can be incomplete.</p>'
+  CreateWorkspacesRequest:
+    type: object
+    required:
+      - Workspaces
+    properties:
+      Workspaces:
+        $ref: '#/definitions/WorkspaceRequestList'
+        description: The WorkSpaces to create. You can specify up to 25 WorkSpaces.
+  DeleteIpGroupResult:
+    type: object
+    properties: {}
+  DeleteIpGroupRequest:
+    type: object
+    required:
+      - GroupId
+    properties:
+      GroupId:
+        $ref: '#/definitions/IpGroupId'
+        description: The ID of the IP access control group.
+  ResourceAssociatedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The resource is associated with a directory.
+  DeleteTagsResult:
+    type: object
+    properties: {}
+  DeleteTagsRequest:
+    type: object
+    required:
+      - ResourceId
+      - TagKeys
+    properties:
+      ResourceId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The ID of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: The tag keys.
+  DescribeIpGroupsResult:
+    type: object
+    properties:
+      Result:
+        $ref: '#/definitions/WorkspacesIpGroupsList'
+        description: Information about the IP access control groups.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
+  DescribeIpGroupsRequest:
+    type: object
+    properties:
+      GroupIds:
+        $ref: '#/definitions/IpGroupIdList'
+        description: The IDs of one or more IP access control groups.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The token for the next set of results. (You received this token from a previous call.)
+      MaxResults:
+        $ref: '#/definitions/Limit'
+        description: The maximum number of items to return.
+  DescribeTagsResult:
+    type: object
+    properties:
+      TagList:
+        $ref: '#/definitions/TagList'
+        description: The tags.
+  DescribeTagsRequest:
+    type: object
+    required:
+      - ResourceId
+    properties:
+      ResourceId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The ID of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
+  DescribeWorkspaceBundlesResult:
+    type: object
+    properties:
+      Bundles:
+        $ref: '#/definitions/BundleList'
+        description: Information about the bundles.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
+  DescribeWorkspaceBundlesRequest:
+    type: object
+    properties:
+      BundleIds:
+        $ref: '#/definitions/BundleIdList'
+        description: The IDs of the bundles. This parameter cannot be combined with any other filter.
+      Owner:
+        $ref: '#/definitions/BundleOwner'
+        description: <p>The owner of the bundles. This parameter cannot be combined with any other filter.</p> <p>Specify <code>AMAZON</code> to describe the bundles provided by AWS or null to describe the bundles that belong to your account.</p>
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The token for the next set of results. (You received this token from a previous call.)
+  DescribeWorkspaceDirectoriesResult:
+    type: object
+    properties:
+      Directories:
+        $ref: '#/definitions/DirectoryList'
+        description: Information about the directories.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
+  DescribeWorkspaceDirectoriesRequest:
+    type: object
+    properties:
+      DirectoryIds:
+        $ref: '#/definitions/DirectoryIdList'
+        description: 'The identifiers of the directories. If the value is null, all directories are retrieved.'
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The token for the next set of results. (You received this token from a previous call.)
+  DescribeWorkspacesResult:
+    type: object
+    properties:
+      Workspaces:
+        $ref: '#/definitions/WorkspaceList'
+        description: '<p>Information about the WorkSpaces.</p> <p>Because <a>CreateWorkspaces</a> is an asynchronous operation, some of the returned information could be incomplete.</p>'
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
+  DescribeWorkspacesRequest:
+    type: object
+    properties:
+      WorkspaceIds:
+        $ref: '#/definitions/WorkspaceIdList'
+        description: '<p>The IDs of the WorkSpaces. This parameter cannot be combined with any other filter.</p> <p>Because the <a>CreateWorkspaces</a> operation is asynchronous, the identifier it returns is not immediately available. If you immediately call <a>DescribeWorkspaces</a> with this identifier, no information is returned.</p>'
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: 'The ID of the directory. In addition, you can optionally specify a specific directory user (see <code>UserName</code>). This parameter cannot be combined with any other filter.'
+      UserName:
+        $ref: '#/definitions/UserName'
+        description: The name of the directory user. You must specify this parameter with <code>DirectoryId</code>.
+      BundleId:
+        $ref: '#/definitions/BundleId'
+        description: The ID of the bundle. All WorkSpaces that are created from this bundle are retrieved. This parameter cannot be combined with any other filter.
+      Limit:
+        $ref: '#/definitions/Limit'
+        description: The maximum number of items to return.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The token for the next set of results. (You received this token from a previous call.)
+  ResourceUnavailableException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: The exception error message.
+      ResourceId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The identifier of the resource that is not available.
+    description: The specified resource is not available.
+  DescribeWorkspacesConnectionStatusResult:
+    type: object
+    properties:
+      WorkspacesConnectionStatus:
+        $ref: '#/definitions/WorkspaceConnectionStatusList'
+        description: Information about the connection status of the WorkSpace.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if there are no more results available.'
+  DescribeWorkspacesConnectionStatusRequest:
+    type: object
+    properties:
+      WorkspaceIds:
+        $ref: '#/definitions/WorkspaceIdList'
+        description: The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The token for the next set of results. (You received this token from a previous call.)
+  DisassociateIpGroupsResult:
+    type: object
+    properties: {}
+  DisassociateIpGroupsRequest:
+    type: object
+    required:
+      - DirectoryId
+      - GroupIds
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The ID of the directory.
+      GroupIds:
+        $ref: '#/definitions/IpGroupIdList'
+        description: The IDs of one or more IP access control groups.
+  ModifyWorkspacePropertiesResult:
+    type: object
+    properties: {}
+  ModifyWorkspacePropertiesRequest:
+    type: object
+    required:
+      - WorkspaceId
+      - WorkspaceProperties
+    properties:
+      WorkspaceId:
+        $ref: '#/definitions/WorkspaceId'
+        description: The ID of the WorkSpace.
+      WorkspaceProperties:
+        $ref: '#/definitions/WorkspaceProperties'
+        description: The properties of the WorkSpace.
+  OperationInProgressException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The properties of this WorkSpace are currently being modified. Try again in a moment.
+  UnsupportedWorkspaceConfigurationException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'The configuration of this WorkSpace is not supported for this operation. For more information, see the <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/">Amazon WorkSpaces Administration Guide</a>. '
+  ModifyWorkspaceStateResult:
+    type: object
+    properties: {}
+  ModifyWorkspaceStateRequest:
+    type: object
+    required:
+      - WorkspaceId
+      - WorkspaceState
+    properties:
+      WorkspaceId:
+        $ref: '#/definitions/WorkspaceId'
+        description: The ID of the WorkSpace.
+      WorkspaceState:
+        $ref: '#/definitions/TargetWorkspaceState'
+        description: The WorkSpace state.
+  RebootWorkspacesResult:
+    type: object
+    properties:
+      FailedRequests:
+        $ref: '#/definitions/FailedRebootWorkspaceRequests'
+        description: Information about the WorkSpaces that could not be rebooted.
+  RebootWorkspacesRequest:
+    type: object
+    required:
+      - RebootWorkspaceRequests
+    properties:
+      RebootWorkspaceRequests:
+        $ref: '#/definitions/RebootWorkspaceRequests'
+        description: The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
+  RebuildWorkspacesResult:
+    type: object
+    properties:
+      FailedRequests:
+        $ref: '#/definitions/FailedRebuildWorkspaceRequests'
+        description: Information about the WorkSpace if it could not be rebuilt.
+  RebuildWorkspacesRequest:
+    type: object
+    required:
+      - RebuildWorkspaceRequests
+    properties:
+      RebuildWorkspaceRequests:
+        $ref: '#/definitions/RebuildWorkspaceRequests'
+        description: The WorkSpace to rebuild. You can specify a single WorkSpace.
+  RevokeIpRulesResult:
+    type: object
+    properties: {}
+  RevokeIpRulesRequest:
+    type: object
+    required:
+      - GroupId
+      - UserRules
+    properties:
+      GroupId:
+        $ref: '#/definitions/IpGroupId'
+        description: The ID of the group.
+      UserRules:
+        $ref: '#/definitions/IpRevokedRuleList'
+        description: The rules to remove from the group.
+  StartWorkspacesResult:
+    type: object
+    properties:
+      FailedRequests:
+        $ref: '#/definitions/FailedStartWorkspaceRequests'
+        description: Information about the WorkSpaces that could not be started.
+  StartWorkspacesRequest:
+    type: object
+    required:
+      - StartWorkspaceRequests
+    properties:
+      StartWorkspaceRequests:
+        $ref: '#/definitions/StartWorkspaceRequests'
+        description: The WorkSpaces to start. You can specify up to 25 WorkSpaces.
+  StopWorkspacesResult:
+    type: object
+    properties:
+      FailedRequests:
+        $ref: '#/definitions/FailedStopWorkspaceRequests'
+        description: Information about the WorkSpaces that could not be stopped.
+  StopWorkspacesRequest:
+    type: object
+    required:
+      - StopWorkspaceRequests
+    properties:
+      StopWorkspaceRequests:
+        $ref: '#/definitions/StopWorkspaceRequests'
+        description: The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
+  TerminateWorkspacesResult:
+    type: object
+    properties:
+      FailedRequests:
+        $ref: '#/definitions/FailedTerminateWorkspaceRequests'
+        description: Information about the WorkSpaces that could not be terminated.
+  TerminateWorkspacesRequest:
+    type: object
+    required:
+      - TerminateWorkspaceRequests
+    properties:
+      TerminateWorkspaceRequests:
+        $ref: '#/definitions/TerminateWorkspaceRequests'
+        description: The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
+  UpdateRulesOfIpGroupResult:
+    type: object
+    properties: {}
+  UpdateRulesOfIpGroupRequest:
+    type: object
+    required:
+      - GroupId
+      - UserRules
+    properties:
+      GroupId:
+        $ref: '#/definitions/IpGroupId'
+        description: The ID of the group.
+      UserRules:
+        $ref: '#/definitions/IpRuleList'
+        description: One or more rules.
+  ARN:
+    type: string
+    pattern: '^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$'
+  ExceptionMessage:
+    type: string
+  Alias:
+    type: string
+  DirectoryId:
+    type: string
+    pattern: '^d-[0-9a-f]{8,63}$'
+  IpGroupIdList:
+    type: array
+    items:
+      $ref: '#/definitions/IpGroupId'
+  IpGroupId:
+    type: string
+    pattern: 'wsipg-[0-9a-z]{8,63}$'
+  IpRuleList:
+    type: array
+    items:
+      $ref: '#/definitions/IpRuleItem'
   BooleanObject:
     type: boolean
   BundleId:
@@ -979,6 +1416,31 @@ definitions:
       $ref: '#/definitions/BundleId'
     minItems: 1
     maxItems: 25
+  WorkspaceBundle:
+    type: object
+    properties:
+      BundleId:
+        $ref: '#/definitions/BundleId'
+        description: The bundle identifier.
+      Name:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the bundle.
+      Owner:
+        $ref: '#/definitions/BundleOwner'
+        description: 'The owner of the bundle. This is the account identifier of the owner, or <code>AMAZON</code> if the bundle is provided by AWS.'
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description.
+      RootStorage:
+        $ref: '#/definitions/RootStorage'
+        description: The size of the root volume.
+      UserStorage:
+        $ref: '#/definitions/UserStorage'
+        description: The size of the user storage.
+      ComputeType:
+        $ref: '#/definitions/ComputeType'
+        description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
+    description: Information about a WorkSpace bundle.
   BundleList:
     type: array
     items:
@@ -1008,60 +1470,36 @@ definitions:
       - CONNECTED
       - DISCONNECTED
       - UNKNOWN
-  CreateIpGroupRequest:
-    type: object
-    required:
-      - GroupName
-    properties:
-      GroupName:
-        $ref: '#/definitions/IpGroupName'
-        description: The name of the group.
-      GroupDesc:
-        $ref: '#/definitions/IpGroupDesc'
-        description: The description of the group.
-      UserRules:
-        $ref: '#/definitions/IpRuleList'
-        description: The rules to add to the group.
-  CreateIpGroupResult:
-    type: object
-    properties:
-      GroupId:
-        $ref: '#/definitions/IpGroupId'
-        description: The ID of the group.
-  CreateTagsRequest:
-    type: object
-    required:
-      - ResourceId
-      - Tags
-    properties:
-      ResourceId:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The ID of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The tags. Each WorkSpace can have a maximum of 50 tags.
-  CreateTagsResult:
-    type: object
-    properties: {}
-  CreateWorkspacesRequest:
-    type: object
-    required:
-      - Workspaces
-    properties:
-      Workspaces:
-        $ref: '#/definitions/WorkspaceRequestList'
-        description: The WorkSpaces to create. You can specify up to 25 WorkSpaces.
-  CreateWorkspacesResult:
-    type: object
-    properties:
-      FailedRequests:
-        $ref: '#/definitions/FailedCreateWorkspaceRequests'
-        description: Information about the WorkSpaces that could not be created.
-      PendingRequests:
-        $ref: '#/definitions/WorkspaceList'
-        description: '<p>Information about the WorkSpaces that were created.</p> <p>Because this operation is asynchronous, the identifier returned is not immediately available for use with other operations. For example, if you call <a>DescribeWorkspaces</a> before the WorkSpace is created, the information returned can be incomplete.</p>'
+  IpGroupName:
+    type: string
+  IpGroupDesc:
+    type: string
+  NonEmptyString:
+    type: string
+    minLength: 1
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  WorkspaceRequestList:
+    type: array
+    items:
+      $ref: '#/definitions/WorkspaceRequest'
+    minItems: 1
+    maxItems: 25
+  FailedCreateWorkspaceRequests:
+    type: array
+    items:
+      $ref: '#/definitions/FailedCreateWorkspaceRequest'
+  WorkspaceList:
+    type: array
+    items:
+      $ref: '#/definitions/Workspace'
   DefaultOu:
     type: string
+  SecurityGroupId:
+    type: string
+    pattern: '^(sg-[0-9a-f]{8})$'
   DefaultWorkspaceCreationProperties:
     type: object
     properties:
@@ -1081,159 +1519,22 @@ definitions:
         $ref: '#/definitions/BooleanObject'
         description: Indicates whether the WorkSpace user is an administrator on the WorkSpace.
     description: Information about defaults used to create a WorkSpace.
-  DeleteIpGroupRequest:
-    type: object
-    required:
-      - GroupId
-    properties:
-      GroupId:
-        $ref: '#/definitions/IpGroupId'
-        description: The ID of the IP access control group.
-  DeleteIpGroupResult:
-    type: object
-    properties: {}
-  DeleteTagsRequest:
-    type: object
-    required:
-      - ResourceId
-      - TagKeys
-    properties:
-      ResourceId:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The ID of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
-      TagKeys:
-        $ref: '#/definitions/TagKeyList'
-        description: The tag keys.
-  DeleteTagsResult:
-    type: object
-    properties: {}
-  DescribeIpGroupsRequest:
-    type: object
-    properties:
-      GroupIds:
-        $ref: '#/definitions/IpGroupIdList'
-        description: The IDs of one or more IP access control groups.
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: The token for the next set of results. (You received this token from a previous call.)
-      MaxResults:
-        $ref: '#/definitions/Limit'
-        description: The maximum number of items to return.
-  DescribeIpGroupsResult:
-    type: object
-    properties:
-      Result:
-        $ref: '#/definitions/WorkspacesIpGroupsList'
-        description: Information about the IP access control groups.
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
-  DescribeTagsRequest:
-    type: object
-    required:
-      - ResourceId
-    properties:
-      ResourceId:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The ID of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
-  DescribeTagsResult:
-    type: object
-    properties:
-      TagList:
-        $ref: '#/definitions/TagList'
-        description: The tags.
-  DescribeWorkspaceBundlesRequest:
-    type: object
-    properties:
-      BundleIds:
-        $ref: '#/definitions/BundleIdList'
-        description: The IDs of the bundles. This parameter cannot be combined with any other filter.
-      Owner:
-        $ref: '#/definitions/BundleOwner'
-        description: <p>The owner of the bundles. This parameter cannot be combined with any other filter.</p> <p>Specify <code>AMAZON</code> to describe the bundles provided by AWS or null to describe the bundles that belong to your account.</p>
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: The token for the next set of results. (You received this token from a previous call.)
-  DescribeWorkspaceBundlesResult:
-    type: object
-    properties:
-      Bundles:
-        $ref: '#/definitions/BundleList'
-        description: Information about the bundles.
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
-  DescribeWorkspaceDirectoriesRequest:
-    type: object
-    properties:
-      DirectoryIds:
-        $ref: '#/definitions/DirectoryIdList'
-        description: 'The identifiers of the directories. If the value is null, all directories are retrieved.'
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: The token for the next set of results. (You received this token from a previous call.)
-  DescribeWorkspaceDirectoriesResult:
-    type: object
-    properties:
-      Directories:
-        $ref: '#/definitions/DirectoryList'
-        description: Information about the directories.
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
-  DescribeWorkspacesConnectionStatusRequest:
-    type: object
-    properties:
-      WorkspaceIds:
-        $ref: '#/definitions/WorkspaceIdList'
-        description: The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: The token for the next set of results. (You received this token from a previous call.)
-  DescribeWorkspacesConnectionStatusResult:
-    type: object
-    properties:
-      WorkspacesConnectionStatus:
-        $ref: '#/definitions/WorkspaceConnectionStatusList'
-        description: Information about the connection status of the WorkSpace.
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'The token to use to retrieve the next set of results, or null if there are no more results available.'
-  DescribeWorkspacesRequest:
-    type: object
-    properties:
-      WorkspaceIds:
-        $ref: '#/definitions/WorkspaceIdList'
-        description: '<p>The IDs of the WorkSpaces. This parameter cannot be combined with any other filter.</p> <p>Because the <a>CreateWorkspaces</a> operation is asynchronous, the identifier it returns is not immediately available. If you immediately call <a>DescribeWorkspaces</a> with this identifier, no information is returned.</p>'
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: 'The ID of the directory. In addition, you can optionally specify a specific directory user (see <code>UserName</code>). This parameter cannot be combined with any other filter.'
-      UserName:
-        $ref: '#/definitions/UserName'
-        description: The name of the directory user. You must specify this parameter with <code>DirectoryId</code>.
-      BundleId:
-        $ref: '#/definitions/BundleId'
-        description: The ID of the bundle. All WorkSpaces that are created from this bundle are retrieved. This parameter cannot be combined with any other filter.
-      Limit:
-        $ref: '#/definitions/Limit'
-        description: The maximum number of items to return.
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: The token for the next set of results. (You received this token from a previous call.)
-  DescribeWorkspacesResult:
-    type: object
-    properties:
-      Workspaces:
-        $ref: '#/definitions/WorkspaceList'
-        description: '<p>Information about the WorkSpaces.</p> <p>Because <a>CreateWorkspaces</a> is an asynchronous operation, some of the returned information could be incomplete.</p>'
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
-  Description:
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/NonEmptyString'
+  PaginationToken:
     type: string
-  DirectoryId:
-    type: string
-    pattern: '^d-[0-9a-f]{8,63}$'
+    minLength: 1
+    maxLength: 63
+  Limit:
+    type: integer
+    minimum: 1
+    maximum: 25
+  WorkspacesIpGroupsList:
+    type: array
+    items:
+      $ref: '#/definitions/WorkspacesIpGroup'
   DirectoryIdList:
     type: array
     items:
@@ -1244,31 +1545,107 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/WorkspaceDirectory'
-  DirectoryName:
+  WorkspaceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/WorkspaceId'
+    minItems: 1
+    maxItems: 25
+  WorkspaceConnectionStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/WorkspaceConnectionStatus'
+  UserName:
     type: string
-  DisassociateIpGroupsRequest:
+    minLength: 1
+    maxLength: 63
+  Description:
+    type: string
+  WorkspaceDirectory:
     type: object
-    required:
-      - DirectoryId
-      - GroupIds
     properties:
       DirectoryId:
         $ref: '#/definitions/DirectoryId'
-        description: The ID of the directory.
-      GroupIds:
+        description: The directory identifier.
+      Alias:
+        $ref: '#/definitions/Alias'
+        description: The directory alias.
+      DirectoryName:
+        $ref: '#/definitions/DirectoryName'
+        description: The name of the directory.
+      RegistrationCode:
+        $ref: '#/definitions/RegistrationCode'
+        description: The registration code for the directory. This is the code that users enter in their Amazon WorkSpaces client application to connect to the directory.
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: The identifiers of the subnets used with the directory.
+      DnsIpAddresses:
+        $ref: '#/definitions/DnsIpAddresses'
+        description: The IP addresses of the DNS servers for the directory.
+      CustomerUserName:
+        $ref: '#/definitions/UserName'
+        description: The user name for the service account.
+      IamRoleId:
+        $ref: '#/definitions/ARN'
+        description: 'The identifier of the IAM role. This is the role that allows Amazon WorkSpaces to make calls to other services, such as Amazon EC2, on your behalf.'
+      DirectoryType:
+        $ref: '#/definitions/WorkspaceDirectoryType'
+        description: The directory type.
+      WorkspaceSecurityGroupId:
+        $ref: '#/definitions/SecurityGroupId'
+        description: The identifier of the security group that is assigned to new WorkSpaces.
+      State:
+        $ref: '#/definitions/WorkspaceDirectoryState'
+        description: The state of the directory's registration with Amazon WorkSpaces
+      WorkspaceCreationProperties:
+        $ref: '#/definitions/DefaultWorkspaceCreationProperties'
+        description: The default creation properties for all WorkSpaces in the directory.
+      ipGroupIds:
         $ref: '#/definitions/IpGroupIdList'
-        description: The IDs of one or more IP access control groups.
-  DisassociateIpGroupsResult:
-    type: object
-    properties: {}
+        description: The identifiers of the IP access control groups associated with the directory.
+    description: Information about an AWS Directory Service directory for use with Amazon WorkSpaces.
+  DirectoryName:
+    type: string
+  IpAddress:
+    type: string
   DnsIpAddresses:
     type: array
     items:
       $ref: '#/definitions/IpAddress'
   ErrorType:
     type: string
-  ExceptionMessage:
-    type: string
+  WorkspaceRequest:
+    type: object
+    required:
+      - DirectoryId
+      - UserName
+      - BundleId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the AWS Directory Service directory for the WorkSpace. You can use <a>DescribeWorkspaceDirectories</a> to list the available directories.
+      UserName:
+        $ref: '#/definitions/UserName'
+        description: The username of the user for the WorkSpace. This username must exist in the AWS Directory Service directory for the WorkSpace.
+      BundleId:
+        $ref: '#/definitions/BundleId'
+        description: The identifier of the bundle for the WorkSpace. You can use <a>DescribeWorkspaceBundles</a> to list the available bundles.
+      VolumeEncryptionKey:
+        $ref: '#/definitions/VolumeEncryptionKey'
+        description: The KMS key used to encrypt data stored on your WorkSpace.
+      UserVolumeEncryptionEnabled:
+        $ref: '#/definitions/BooleanObject'
+        description: Indicates whether the data stored on the user volume is encrypted.
+      RootVolumeEncryptionEnabled:
+        $ref: '#/definitions/BooleanObject'
+        description: Indicates whether the data stored on the root volume is encrypted.
+      WorkspaceProperties:
+        $ref: '#/definitions/WorkspaceProperties'
+        description: The WorkSpace properties.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the WorkSpace.
+    description: Information used to create a WorkSpace.
   FailedCreateWorkspaceRequest:
     type: object
     properties:
@@ -1282,10 +1659,19 @@ definitions:
         $ref: '#/definitions/Description'
         description: The textual error message.
     description: Information about a WorkSpace that could not be created.
-  FailedCreateWorkspaceRequests:
-    type: array
-    items:
-      $ref: '#/definitions/FailedCreateWorkspaceRequest'
+  FailedWorkspaceChangeRequest:
+    type: object
+    properties:
+      WorkspaceId:
+        $ref: '#/definitions/WorkspaceId'
+        description: The identifier of the WorkSpace.
+      ErrorCode:
+        $ref: '#/definitions/ErrorType'
+        description: The error code.
+      ErrorMessage:
+        $ref: '#/definitions/Description'
+        description: The textual error message.
+    description: 'Information about a WorkSpace that could not be rebooted (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).'
   FailedRebootWorkspaceRequests:
     type: array
     items:
@@ -1306,51 +1692,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/FailedWorkspaceChangeRequest'
-  FailedWorkspaceChangeRequest:
-    type: object
-    properties:
-      WorkspaceId:
-        $ref: '#/definitions/WorkspaceId'
-        description: The identifier of the WorkSpace.
-      ErrorCode:
-        $ref: '#/definitions/ErrorType'
-        description: The error code.
-      ErrorMessage:
-        $ref: '#/definitions/Description'
-        description: The textual error message.
-    description: 'Information about a WorkSpace that could not be rebooted (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).'
-  InvalidParameterValuesException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The exception error message.
-    description: One or more parameter values are not valid.
-  InvalidResourceStateException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The state of the resource is not valid for this operation.
-  IpAddress:
+  WorkspaceId:
     type: string
-  IpGroupDesc:
-    type: string
-  IpGroupId:
-    type: string
-    pattern: 'wsipg-[0-9a-z]{8,63}$'
-  IpGroupIdList:
-    type: array
-    items:
-      $ref: '#/definitions/IpGroupId'
-  IpGroupName:
+    pattern: '^ws-[0-9a-z]{8,63}$'
+  IpRule:
     type: string
   IpRevokedRuleList:
     type: array
     items:
       $ref: '#/definitions/IpRule'
-  IpRule:
-    type: string
   IpRuleDesc:
     type: string
   IpRuleItem:
@@ -1363,20 +1713,17 @@ definitions:
         $ref: '#/definitions/IpRuleDesc'
         description: The description.
     description: Information about a rule for an IP access control group.
-  IpRuleList:
-    type: array
-    items:
-      $ref: '#/definitions/IpRuleItem'
-  Limit:
-    type: integer
-    minimum: 1
-    maximum: 25
   ModificationResourceEnum:
     type: string
     enum:
       - ROOT_VOLUME
       - USER_VOLUME
       - COMPUTE_TYPE
+  ModificationStateEnum:
+    type: string
+    enum:
+      - UPDATE_INITIATED
+      - UPDATE_IN_PROGRESS
   ModificationState:
     type: object
     properties:
@@ -1387,64 +1734,34 @@ definitions:
         $ref: '#/definitions/ModificationStateEnum'
         description: The modification state.
     description: Information about a WorkSpace modification.
-  ModificationStateEnum:
-    type: string
-    enum:
-      - UPDATE_INITIATED
-      - UPDATE_IN_PROGRESS
   ModificationStateList:
     type: array
     items:
       $ref: '#/definitions/ModificationState'
-  ModifyWorkspacePropertiesRequest:
+  WorkspaceProperties:
     type: object
-    required:
-      - WorkspaceId
-      - WorkspaceProperties
     properties:
-      WorkspaceId:
-        $ref: '#/definitions/WorkspaceId'
-        description: The ID of the WorkSpace.
-      WorkspaceProperties:
-        $ref: '#/definitions/WorkspaceProperties'
-        description: The properties of the WorkSpace.
-  ModifyWorkspacePropertiesResult:
-    type: object
-    properties: {}
-  ModifyWorkspaceStateRequest:
-    type: object
-    required:
-      - WorkspaceId
-      - WorkspaceState
-    properties:
-      WorkspaceId:
-        $ref: '#/definitions/WorkspaceId'
-        description: The ID of the WorkSpace.
-      WorkspaceState:
-        $ref: '#/definitions/TargetWorkspaceState'
-        description: The WorkSpace state.
-  ModifyWorkspaceStateResult:
-    type: object
-    properties: {}
-  NonEmptyString:
+      RunningMode:
+        $ref: '#/definitions/RunningMode'
+        description: 'The running mode. For more information, see <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html">Manage the WorkSpace Running Mode</a>.'
+      RunningModeAutoStopTimeoutInMinutes:
+        $ref: '#/definitions/RunningModeAutoStopTimeoutInMinutes'
+        description: The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60 minute intervals.
+      RootVolumeSizeGib:
+        $ref: '#/definitions/RootVolumeSizeGib'
+        description: The size of the root volume.
+      UserVolumeSizeGib:
+        $ref: '#/definitions/UserVolumeSizeGib'
+        description: The size of the user storage.
+      ComputeTypeName:
+        $ref: '#/definitions/Compute'
+        description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
+    description: Information about a WorkSpace.
+  TargetWorkspaceState:
     type: string
-    minLength: 1
-  OperationInProgressException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The properties of this WorkSpace are currently being modified. Try again in a moment.
-  OperationNotSupportedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: This operation is not supported.
-  PaginationToken:
-    type: string
-    minLength: 1
-    maxLength: 63
+    enum:
+      - AVAILABLE
+      - ADMIN_MAINTENANCE
   RebootRequest:
     type: object
     required:
@@ -1460,20 +1777,6 @@ definitions:
       $ref: '#/definitions/RebootRequest'
     minItems: 1
     maxItems: 25
-  RebootWorkspacesRequest:
-    type: object
-    required:
-      - RebootWorkspaceRequests
-    properties:
-      RebootWorkspaceRequests:
-        $ref: '#/definitions/RebootWorkspaceRequests'
-        description: The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
-  RebootWorkspacesResult:
-    type: object
-    properties:
-      FailedRequests:
-        $ref: '#/definitions/FailedRebootWorkspaceRequests'
-        description: Information about the WorkSpaces that could not be rebooted.
   RebuildRequest:
     type: object
     required:
@@ -1489,84 +1792,10 @@ definitions:
       $ref: '#/definitions/RebuildRequest'
     minItems: 1
     maxItems: 1
-  RebuildWorkspacesRequest:
-    type: object
-    required:
-      - RebuildWorkspaceRequests
-    properties:
-      RebuildWorkspaceRequests:
-        $ref: '#/definitions/RebuildWorkspaceRequests'
-        description: The WorkSpace to rebuild. You can specify a single WorkSpace.
-  RebuildWorkspacesResult:
-    type: object
-    properties:
-      FailedRequests:
-        $ref: '#/definitions/FailedRebuildWorkspaceRequests'
-        description: Information about the WorkSpace if it could not be rebuilt.
   RegistrationCode:
     type: string
     minLength: 1
     maxLength: 20
-  ResourceAlreadyExistsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The specified resource already exists.
-  ResourceAssociatedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The resource is associated with a directory.
-  ResourceCreationFailedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The resource could not be created.
-  ResourceLimitExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The exception error message.
-    description: Your resource limits have been exceeded.
-  ResourceNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The resource could not be found.
-      ResourceId:
-        $ref: '#/definitions/NonEmptyString'
-        description: The ID of the resource that could not be found.
-    description: The resource could not be found.
-  ResourceUnavailableException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The exception error message.
-      ResourceId:
-        $ref: '#/definitions/NonEmptyString'
-        description: The identifier of the resource that is not available.
-    description: The specified resource is not available.
-  RevokeIpRulesRequest:
-    type: object
-    required:
-      - GroupId
-      - UserRules
-    properties:
-      GroupId:
-        $ref: '#/definitions/IpGroupId'
-        description: The ID of the group.
-      UserRules:
-        $ref: '#/definitions/IpRevokedRuleList'
-        description: The rules to remove from the group.
-  RevokeIpRulesResult:
-    type: object
-    properties: {}
   RootStorage:
     type: object
     properties:
@@ -1583,9 +1812,6 @@ definitions:
       - ALWAYS_ON
   RunningModeAutoStopTimeoutInMinutes:
     type: integer
-  SecurityGroupId:
-    type: string
-    pattern: '^(sg-[0-9a-f]{8})$'
   StartRequest:
     type: object
     properties:
@@ -1599,20 +1825,6 @@ definitions:
       $ref: '#/definitions/StartRequest'
     minItems: 1
     maxItems: 25
-  StartWorkspacesRequest:
-    type: object
-    required:
-      - StartWorkspaceRequests
-    properties:
-      StartWorkspaceRequests:
-        $ref: '#/definitions/StartWorkspaceRequests'
-        description: The WorkSpaces to start. You can specify up to 25 WorkSpaces.
-  StartWorkspacesResult:
-    type: object
-    properties:
-      FailedRequests:
-        $ref: '#/definitions/FailedStartWorkspaceRequests'
-        description: Information about the WorkSpaces that could not be started.
   StopRequest:
     type: object
     properties:
@@ -1626,20 +1838,6 @@ definitions:
       $ref: '#/definitions/StopRequest'
     minItems: 1
     maxItems: 25
-  StopWorkspacesRequest:
-    type: object
-    required:
-      - StopWorkspaceRequests
-    properties:
-      StopWorkspaceRequests:
-        $ref: '#/definitions/StopWorkspaceRequests'
-        description: The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
-  StopWorkspacesResult:
-    type: object
-    properties:
-      FailedRequests:
-        $ref: '#/definitions/FailedStopWorkspaceRequests'
-        description: Information about the WorkSpaces that could not be stopped.
   SubnetId:
     type: string
     pattern: '^(subnet-[0-9a-f]{8})$'
@@ -1647,6 +1845,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SubnetId'
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 127
+  TagValue:
+    type: string
+    maxLength: 255
   Tag:
     type: object
     required:
@@ -1659,26 +1864,6 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value of the tag.
     description: Information about a tag.
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 127
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/NonEmptyString'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagValue:
-    type: string
-    maxLength: 255
-  TargetWorkspaceState:
-    type: string
-    enum:
-      - AVAILABLE
-      - ADMIN_MAINTENANCE
   TerminateRequest:
     type: object
     required:
@@ -1694,48 +1879,9 @@ definitions:
       $ref: '#/definitions/TerminateRequest'
     minItems: 1
     maxItems: 25
-  TerminateWorkspacesRequest:
-    type: object
-    required:
-      - TerminateWorkspaceRequests
-    properties:
-      TerminateWorkspaceRequests:
-        $ref: '#/definitions/TerminateWorkspaceRequests'
-        description: The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
-  TerminateWorkspacesResult:
-    type: object
-    properties:
-      FailedRequests:
-        $ref: '#/definitions/FailedTerminateWorkspaceRequests'
-        description: Information about the WorkSpaces that could not be terminated.
   Timestamp:
     type: string
     format: date-time
-  UnsupportedWorkspaceConfigurationException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'The configuration of this WorkSpace is not supported for this operation. For more information, see the <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/">Amazon WorkSpaces Administration Guide</a>. '
-  UpdateRulesOfIpGroupRequest:
-    type: object
-    required:
-      - GroupId
-      - UserRules
-    properties:
-      GroupId:
-        $ref: '#/definitions/IpGroupId'
-        description: The ID of the group.
-      UserRules:
-        $ref: '#/definitions/IpRuleList'
-        description: One or more rules.
-  UpdateRulesOfIpGroupResult:
-    type: object
-    properties: {}
-  UserName:
-    type: string
-    minLength: 1
-    maxLength: 63
   UserStorage:
     type: object
     properties:
@@ -1746,6 +1892,27 @@ definitions:
   UserVolumeSizeGib:
     type: integer
   VolumeEncryptionKey:
+    type: string
+  WorkspaceState:
+    type: string
+    enum:
+      - PENDING
+      - AVAILABLE
+      - IMPAIRED
+      - UNHEALTHY
+      - REBOOTING
+      - STARTING
+      - REBUILDING
+      - MAINTENANCE
+      - ADMIN_MAINTENANCE
+      - TERMINATING
+      - TERMINATED
+      - SUSPENDED
+      - UPDATING
+      - STOPPING
+      - STOPPED
+      - ERROR
+  WorkspaceErrorCode:
     type: string
   Workspace:
     type: object
@@ -1796,31 +1963,6 @@ definitions:
         $ref: '#/definitions/ModificationStateList'
         description: The modification states of the WorkSpace.
     description: Information about a WorkSpace.
-  WorkspaceBundle:
-    type: object
-    properties:
-      BundleId:
-        $ref: '#/definitions/BundleId'
-        description: The bundle identifier.
-      Name:
-        $ref: '#/definitions/NonEmptyString'
-        description: The name of the bundle.
-      Owner:
-        $ref: '#/definitions/BundleOwner'
-        description: 'The owner of the bundle. This is the account identifier of the owner, or <code>AMAZON</code> if the bundle is provided by AWS.'
-      Description:
-        $ref: '#/definitions/Description'
-        description: A description.
-      RootStorage:
-        $ref: '#/definitions/RootStorage'
-        description: The size of the root volume.
-      UserStorage:
-        $ref: '#/definitions/UserStorage'
-        description: The size of the user storage.
-      ComputeType:
-        $ref: '#/definitions/ComputeType'
-        description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
-    description: Information about a WorkSpace bundle.
   WorkspaceConnectionStatus:
     type: object
     properties:
@@ -1837,53 +1979,11 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The timestamp of the last known user connection.
     description: Describes the connection status of a WorkSpace.
-  WorkspaceConnectionStatusList:
-    type: array
-    items:
-      $ref: '#/definitions/WorkspaceConnectionStatus'
-  WorkspaceDirectory:
-    type: object
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The directory identifier.
-      Alias:
-        $ref: '#/definitions/Alias'
-        description: The directory alias.
-      DirectoryName:
-        $ref: '#/definitions/DirectoryName'
-        description: The name of the directory.
-      RegistrationCode:
-        $ref: '#/definitions/RegistrationCode'
-        description: The registration code for the directory. This is the code that users enter in their Amazon WorkSpaces client application to connect to the directory.
-      SubnetIds:
-        $ref: '#/definitions/SubnetIds'
-        description: The identifiers of the subnets used with the directory.
-      DnsIpAddresses:
-        $ref: '#/definitions/DnsIpAddresses'
-        description: The IP addresses of the DNS servers for the directory.
-      CustomerUserName:
-        $ref: '#/definitions/UserName'
-        description: The user name for the service account.
-      IamRoleId:
-        $ref: '#/definitions/ARN'
-        description: 'The identifier of the IAM role. This is the role that allows Amazon WorkSpaces to make calls to other services, such as Amazon EC2, on your behalf.'
-      DirectoryType:
-        $ref: '#/definitions/WorkspaceDirectoryType'
-        description: The directory type.
-      WorkspaceSecurityGroupId:
-        $ref: '#/definitions/SecurityGroupId'
-        description: The identifier of the security group that is assigned to new WorkSpaces.
-      State:
-        $ref: '#/definitions/WorkspaceDirectoryState'
-        description: The state of the directory's registration with Amazon WorkSpaces
-      WorkspaceCreationProperties:
-        $ref: '#/definitions/DefaultWorkspaceCreationProperties'
-        description: The default creation properties for all WorkSpaces in the directory.
-      ipGroupIds:
-        $ref: '#/definitions/IpGroupIdList'
-        description: The identifiers of the IP access control groups associated with the directory.
-    description: Information about an AWS Directory Service directory for use with Amazon WorkSpaces.
+  WorkspaceDirectoryType:
+    type: string
+    enum:
+      - SIMPLE_AD
+      - AD_CONNECTOR
   WorkspaceDirectoryState:
     type: string
     enum:
@@ -1891,102 +1991,6 @@ definitions:
       - REGISTERED
       - DEREGISTERING
       - DEREGISTERED
-      - ERROR
-  WorkspaceDirectoryType:
-    type: string
-    enum:
-      - SIMPLE_AD
-      - AD_CONNECTOR
-  WorkspaceErrorCode:
-    type: string
-  WorkspaceId:
-    type: string
-    pattern: '^ws-[0-9a-z]{8,63}$'
-  WorkspaceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/WorkspaceId'
-    minItems: 1
-    maxItems: 25
-  WorkspaceList:
-    type: array
-    items:
-      $ref: '#/definitions/Workspace'
-  WorkspaceProperties:
-    type: object
-    properties:
-      RunningMode:
-        $ref: '#/definitions/RunningMode'
-        description: 'The running mode. For more information, see <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html">Manage the WorkSpace Running Mode</a>.'
-      RunningModeAutoStopTimeoutInMinutes:
-        $ref: '#/definitions/RunningModeAutoStopTimeoutInMinutes'
-        description: The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60 minute intervals.
-      RootVolumeSizeGib:
-        $ref: '#/definitions/RootVolumeSizeGib'
-        description: The size of the root volume.
-      UserVolumeSizeGib:
-        $ref: '#/definitions/UserVolumeSizeGib'
-        description: The size of the user storage.
-      ComputeTypeName:
-        $ref: '#/definitions/Compute'
-        description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
-    description: Information about a WorkSpace.
-  WorkspaceRequest:
-    type: object
-    required:
-      - DirectoryId
-      - UserName
-      - BundleId
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The identifier of the AWS Directory Service directory for the WorkSpace. You can use <a>DescribeWorkspaceDirectories</a> to list the available directories.
-      UserName:
-        $ref: '#/definitions/UserName'
-        description: The username of the user for the WorkSpace. This username must exist in the AWS Directory Service directory for the WorkSpace.
-      BundleId:
-        $ref: '#/definitions/BundleId'
-        description: The identifier of the bundle for the WorkSpace. You can use <a>DescribeWorkspaceBundles</a> to list the available bundles.
-      VolumeEncryptionKey:
-        $ref: '#/definitions/VolumeEncryptionKey'
-        description: The KMS key used to encrypt data stored on your WorkSpace.
-      UserVolumeEncryptionEnabled:
-        $ref: '#/definitions/BooleanObject'
-        description: Indicates whether the data stored on the user volume is encrypted.
-      RootVolumeEncryptionEnabled:
-        $ref: '#/definitions/BooleanObject'
-        description: Indicates whether the data stored on the root volume is encrypted.
-      WorkspaceProperties:
-        $ref: '#/definitions/WorkspaceProperties'
-        description: The WorkSpace properties.
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The tags for the WorkSpace.
-    description: Information used to create a WorkSpace.
-  WorkspaceRequestList:
-    type: array
-    items:
-      $ref: '#/definitions/WorkspaceRequest'
-    minItems: 1
-    maxItems: 25
-  WorkspaceState:
-    type: string
-    enum:
-      - PENDING
-      - AVAILABLE
-      - IMPAIRED
-      - UNHEALTHY
-      - REBOOTING
-      - STARTING
-      - REBUILDING
-      - MAINTENANCE
-      - ADMIN_MAINTENANCE
-      - TERMINATING
-      - TERMINATED
-      - SUSPENDED
-      - UPDATING
-      - STOPPING
-      - STOPPED
       - ERROR
   WorkspacesIpGroup:
     type: object
@@ -2004,7 +2008,3 @@ definitions:
         $ref: '#/definitions/IpRuleList'
         description: The rules.
     description: Information about an IP access control group.
-  WorkspacesIpGroupsList:
-    type: array
-    items:
-      $ref: '#/definitions/WorkspacesIpGroup'

@@ -144,31 +144,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  BodyBlob:
-    type: string
-    maxLength: 5242880
-    format: password
-  EndpointName:
-    type: string
-    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
-    maxLength: 63
-  Header:
-    type: string
-    maxLength: 1024
-  InternalFailure:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-    description: ' Internal failure occurred. '
-  InvokeEndpointInput:
-    type: object
-    required:
-      - Body
-    properties:
-      Body:
-        $ref: '#/definitions/BodyBlob'
-        description: 'Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. '
   InvokeEndpointOutput:
     type: object
     required:
@@ -177,11 +152,32 @@ definitions:
       Body:
         $ref: '#/definitions/BodyBlob'
         description: Includes the inference provided by the model.
-  LogStreamArn:
-    type: string
-  Message:
-    type: string
-    maxLength: 2048
+  InvokeEndpointInput:
+    type: object
+    required:
+      - Body
+    properties:
+      Body:
+        $ref: '#/definitions/BodyBlob'
+        description: 'Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. '
+  InternalFailure:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/Message'
+    description: ' Internal failure occurred. '
+  ServiceUnavailable:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/Message'
+    description: ' Service is unavailable. Try your call again. '
+  ValidationError:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/Message'
+    description: ' Inspect your request and try again. '
   ModelError:
     type: object
     properties:
@@ -197,17 +193,21 @@ definitions:
         $ref: '#/definitions/LogStreamArn'
         description: ' Amazon Resource Name (ARN) of the log stream. '
     description: ' Model (owned by the customer in the container) returned an error 500. '
-  ServiceUnavailable:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-    description: ' Service is unavailable. Try your call again. '
+  BodyBlob:
+    type: string
+    maxLength: 5242880
+    format: password
+  EndpointName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  Header:
+    type: string
+    maxLength: 1024
+  Message:
+    type: string
+    maxLength: 2048
+  LogStreamArn:
+    type: string
   StatusCode:
     type: integer
-  ValidationError:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-    description: ' Inspect your request and try again. '

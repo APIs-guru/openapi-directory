@@ -3569,6 +3569,880 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  CreateAppResponse:
+    type: object
+    required:
+      - ApplicationResponse
+    properties:
+      ApplicationResponse:
+        $ref: '#/definitions/ApplicationResponse'
+  CreateAppRequest:
+    type: object
+    required:
+      - CreateApplicationRequest
+    properties:
+      CreateApplicationRequest:
+        $ref: '#/definitions/CreateApplicationRequest'
+  BadRequestException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message that's returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique message body ID.
+    description: Simple message object.
+  InternalServerErrorException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message that's returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique message body ID.
+    description: Simple message object.
+  ForbiddenException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message that's returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique message body ID.
+    description: Simple message object.
+  NotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message that's returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique message body ID.
+    description: Simple message object.
+  MethodNotAllowedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message that's returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique message body ID.
+    description: Simple message object.
+  TooManyRequestsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message that's returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique message body ID.
+    description: Simple message object.
+  CreateCampaignResponse:
+    type: object
+    required:
+      - CampaignResponse
+    properties:
+      CampaignResponse:
+        $ref: '#/definitions/CampaignResponse'
+  CreateCampaignRequest:
+    type: object
+    required:
+      - WriteCampaignRequest
+    properties:
+      WriteCampaignRequest:
+        $ref: '#/definitions/WriteCampaignRequest'
+  CreateExportJobResponse:
+    type: object
+    required:
+      - ExportJobResponse
+    properties:
+      ExportJobResponse:
+        $ref: '#/definitions/ExportJobResponse'
+  CreateExportJobRequest:
+    type: object
+    required:
+      - ExportJobRequest
+    properties:
+      ExportJobRequest:
+        $ref: '#/definitions/ExportJobRequest'
+  CreateImportJobResponse:
+    type: object
+    required:
+      - ImportJobResponse
+    properties:
+      ImportJobResponse:
+        $ref: '#/definitions/ImportJobResponse'
+  CreateImportJobRequest:
+    type: object
+    required:
+      - ImportJobRequest
+    properties:
+      ImportJobRequest:
+        $ref: '#/definitions/ImportJobRequest'
+  CreateSegmentResponse:
+    type: object
+    required:
+      - SegmentResponse
+    properties:
+      SegmentResponse:
+        $ref: '#/definitions/SegmentResponse'
+  CreateSegmentRequest:
+    type: object
+    required:
+      - WriteSegmentRequest
+    properties:
+      WriteSegmentRequest:
+        $ref: '#/definitions/WriteSegmentRequest'
+  DeleteAdmChannelResponse:
+    type: object
+    required:
+      - ADMChannelResponse
+    properties:
+      ADMChannelResponse:
+        $ref: '#/definitions/ADMChannelResponse'
+  DeleteAdmChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsChannelResponse:
+    type: object
+    required:
+      - APNSChannelResponse
+    properties:
+      APNSChannelResponse:
+        $ref: '#/definitions/APNSChannelResponse'
+  DeleteApnsChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsSandboxChannelResponse:
+    type: object
+    required:
+      - APNSSandboxChannelResponse
+    properties:
+      APNSSandboxChannelResponse:
+        $ref: '#/definitions/APNSSandboxChannelResponse'
+  DeleteApnsSandboxChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsVoipChannelResponse:
+    type: object
+    required:
+      - APNSVoipChannelResponse
+    properties:
+      APNSVoipChannelResponse:
+        $ref: '#/definitions/APNSVoipChannelResponse'
+  DeleteApnsVoipChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsVoipSandboxChannelResponse:
+    type: object
+    required:
+      - APNSVoipSandboxChannelResponse
+    properties:
+      APNSVoipSandboxChannelResponse:
+        $ref: '#/definitions/APNSVoipSandboxChannelResponse'
+  DeleteApnsVoipSandboxChannelRequest:
+    type: object
+    properties: {}
+  DeleteAppResponse:
+    type: object
+    required:
+      - ApplicationResponse
+    properties:
+      ApplicationResponse:
+        $ref: '#/definitions/ApplicationResponse'
+  DeleteAppRequest:
+    type: object
+    properties: {}
+  DeleteBaiduChannelResponse:
+    type: object
+    required:
+      - BaiduChannelResponse
+    properties:
+      BaiduChannelResponse:
+        $ref: '#/definitions/BaiduChannelResponse'
+  DeleteBaiduChannelRequest:
+    type: object
+    properties: {}
+  DeleteCampaignResponse:
+    type: object
+    required:
+      - CampaignResponse
+    properties:
+      CampaignResponse:
+        $ref: '#/definitions/CampaignResponse'
+  DeleteCampaignRequest:
+    type: object
+    properties: {}
+  DeleteEmailChannelResponse:
+    type: object
+    required:
+      - EmailChannelResponse
+    properties:
+      EmailChannelResponse:
+        $ref: '#/definitions/EmailChannelResponse'
+  DeleteEmailChannelRequest:
+    type: object
+    properties: {}
+  DeleteEndpointResponse:
+    type: object
+    required:
+      - EndpointResponse
+    properties:
+      EndpointResponse:
+        $ref: '#/definitions/EndpointResponse'
+  DeleteEndpointRequest:
+    type: object
+    properties: {}
+  DeleteEventStreamResponse:
+    type: object
+    required:
+      - EventStream
+    properties:
+      EventStream:
+        $ref: '#/definitions/EventStream'
+  DeleteEventStreamRequest:
+    type: object
+    properties: {}
+  DeleteGcmChannelResponse:
+    type: object
+    required:
+      - GCMChannelResponse
+    properties:
+      GCMChannelResponse:
+        $ref: '#/definitions/GCMChannelResponse'
+  DeleteGcmChannelRequest:
+    type: object
+    properties: {}
+  DeleteSegmentResponse:
+    type: object
+    required:
+      - SegmentResponse
+    properties:
+      SegmentResponse:
+        $ref: '#/definitions/SegmentResponse'
+  DeleteSegmentRequest:
+    type: object
+    properties: {}
+  DeleteSmsChannelResponse:
+    type: object
+    required:
+      - SMSChannelResponse
+    properties:
+      SMSChannelResponse:
+        $ref: '#/definitions/SMSChannelResponse'
+  DeleteSmsChannelRequest:
+    type: object
+    properties: {}
+  DeleteUserEndpointsResponse:
+    type: object
+    required:
+      - EndpointsResponse
+    properties:
+      EndpointsResponse:
+        $ref: '#/definitions/EndpointsResponse'
+  DeleteUserEndpointsRequest:
+    type: object
+    properties: {}
+  GetAdmChannelResponse:
+    type: object
+    required:
+      - ADMChannelResponse
+    properties:
+      ADMChannelResponse:
+        $ref: '#/definitions/ADMChannelResponse'
+  GetAdmChannelRequest:
+    type: object
+    properties: {}
+  GetApnsChannelResponse:
+    type: object
+    required:
+      - APNSChannelResponse
+    properties:
+      APNSChannelResponse:
+        $ref: '#/definitions/APNSChannelResponse'
+  GetApnsChannelRequest:
+    type: object
+    properties: {}
+  GetApnsSandboxChannelResponse:
+    type: object
+    required:
+      - APNSSandboxChannelResponse
+    properties:
+      APNSSandboxChannelResponse:
+        $ref: '#/definitions/APNSSandboxChannelResponse'
+  GetApnsSandboxChannelRequest:
+    type: object
+    properties: {}
+  GetApnsVoipChannelResponse:
+    type: object
+    required:
+      - APNSVoipChannelResponse
+    properties:
+      APNSVoipChannelResponse:
+        $ref: '#/definitions/APNSVoipChannelResponse'
+  GetApnsVoipChannelRequest:
+    type: object
+    properties: {}
+  GetApnsVoipSandboxChannelResponse:
+    type: object
+    required:
+      - APNSVoipSandboxChannelResponse
+    properties:
+      APNSVoipSandboxChannelResponse:
+        $ref: '#/definitions/APNSVoipSandboxChannelResponse'
+  GetApnsVoipSandboxChannelRequest:
+    type: object
+    properties: {}
+  GetAppResponse:
+    type: object
+    required:
+      - ApplicationResponse
+    properties:
+      ApplicationResponse:
+        $ref: '#/definitions/ApplicationResponse'
+  GetAppRequest:
+    type: object
+    properties: {}
+  GetApplicationSettingsResponse:
+    type: object
+    required:
+      - ApplicationSettingsResource
+    properties:
+      ApplicationSettingsResource:
+        $ref: '#/definitions/ApplicationSettingsResource'
+  GetApplicationSettingsRequest:
+    type: object
+    properties: {}
+  GetAppsResponse:
+    type: object
+    required:
+      - ApplicationsResponse
+    properties:
+      ApplicationsResponse:
+        $ref: '#/definitions/ApplicationsResponse'
+  GetAppsRequest:
+    type: object
+    properties: {}
+  GetBaiduChannelResponse:
+    type: object
+    required:
+      - BaiduChannelResponse
+    properties:
+      BaiduChannelResponse:
+        $ref: '#/definitions/BaiduChannelResponse'
+  GetBaiduChannelRequest:
+    type: object
+    properties: {}
+  GetCampaignResponse:
+    type: object
+    required:
+      - CampaignResponse
+    properties:
+      CampaignResponse:
+        $ref: '#/definitions/CampaignResponse'
+  GetCampaignRequest:
+    type: object
+    properties: {}
+  GetCampaignActivitiesResponse:
+    type: object
+    required:
+      - ActivitiesResponse
+    properties:
+      ActivitiesResponse:
+        $ref: '#/definitions/ActivitiesResponse'
+  GetCampaignActivitiesRequest:
+    type: object
+    properties: {}
+  GetCampaignVersionResponse:
+    type: object
+    required:
+      - CampaignResponse
+    properties:
+      CampaignResponse:
+        $ref: '#/definitions/CampaignResponse'
+  GetCampaignVersionRequest:
+    type: object
+    properties: {}
+  GetCampaignVersionsResponse:
+    type: object
+    required:
+      - CampaignsResponse
+    properties:
+      CampaignsResponse:
+        $ref: '#/definitions/CampaignsResponse'
+  GetCampaignVersionsRequest:
+    type: object
+    properties: {}
+  GetCampaignsResponse:
+    type: object
+    required:
+      - CampaignsResponse
+    properties:
+      CampaignsResponse:
+        $ref: '#/definitions/CampaignsResponse'
+  GetCampaignsRequest:
+    type: object
+    properties: {}
+  GetChannelsResponse:
+    type: object
+    required:
+      - ChannelsResponse
+    properties:
+      ChannelsResponse:
+        $ref: '#/definitions/ChannelsResponse'
+  GetChannelsRequest:
+    type: object
+    properties: {}
+  GetEmailChannelResponse:
+    type: object
+    required:
+      - EmailChannelResponse
+    properties:
+      EmailChannelResponse:
+        $ref: '#/definitions/EmailChannelResponse'
+  GetEmailChannelRequest:
+    type: object
+    properties: {}
+  GetEndpointResponse:
+    type: object
+    required:
+      - EndpointResponse
+    properties:
+      EndpointResponse:
+        $ref: '#/definitions/EndpointResponse'
+  GetEndpointRequest:
+    type: object
+    properties: {}
+  GetEventStreamResponse:
+    type: object
+    required:
+      - EventStream
+    properties:
+      EventStream:
+        $ref: '#/definitions/EventStream'
+  GetEventStreamRequest:
+    type: object
+    properties: {}
+  GetExportJobResponse:
+    type: object
+    required:
+      - ExportJobResponse
+    properties:
+      ExportJobResponse:
+        $ref: '#/definitions/ExportJobResponse'
+  GetExportJobRequest:
+    type: object
+    properties: {}
+  GetExportJobsResponse:
+    type: object
+    required:
+      - ExportJobsResponse
+    properties:
+      ExportJobsResponse:
+        $ref: '#/definitions/ExportJobsResponse'
+  GetExportJobsRequest:
+    type: object
+    properties: {}
+  GetGcmChannelResponse:
+    type: object
+    required:
+      - GCMChannelResponse
+    properties:
+      GCMChannelResponse:
+        $ref: '#/definitions/GCMChannelResponse'
+  GetGcmChannelRequest:
+    type: object
+    properties: {}
+  GetImportJobResponse:
+    type: object
+    required:
+      - ImportJobResponse
+    properties:
+      ImportJobResponse:
+        $ref: '#/definitions/ImportJobResponse'
+  GetImportJobRequest:
+    type: object
+    properties: {}
+  GetImportJobsResponse:
+    type: object
+    required:
+      - ImportJobsResponse
+    properties:
+      ImportJobsResponse:
+        $ref: '#/definitions/ImportJobsResponse'
+  GetImportJobsRequest:
+    type: object
+    properties: {}
+  GetSegmentResponse:
+    type: object
+    required:
+      - SegmentResponse
+    properties:
+      SegmentResponse:
+        $ref: '#/definitions/SegmentResponse'
+  GetSegmentRequest:
+    type: object
+    properties: {}
+  GetSegmentExportJobsResponse:
+    type: object
+    required:
+      - ExportJobsResponse
+    properties:
+      ExportJobsResponse:
+        $ref: '#/definitions/ExportJobsResponse'
+  GetSegmentExportJobsRequest:
+    type: object
+    properties: {}
+  GetSegmentImportJobsResponse:
+    type: object
+    required:
+      - ImportJobsResponse
+    properties:
+      ImportJobsResponse:
+        $ref: '#/definitions/ImportJobsResponse'
+  GetSegmentImportJobsRequest:
+    type: object
+    properties: {}
+  GetSegmentVersionResponse:
+    type: object
+    required:
+      - SegmentResponse
+    properties:
+      SegmentResponse:
+        $ref: '#/definitions/SegmentResponse'
+  GetSegmentVersionRequest:
+    type: object
+    properties: {}
+  GetSegmentVersionsResponse:
+    type: object
+    required:
+      - SegmentsResponse
+    properties:
+      SegmentsResponse:
+        $ref: '#/definitions/SegmentsResponse'
+  GetSegmentVersionsRequest:
+    type: object
+    properties: {}
+  GetSegmentsResponse:
+    type: object
+    required:
+      - SegmentsResponse
+    properties:
+      SegmentsResponse:
+        $ref: '#/definitions/SegmentsResponse'
+  GetSegmentsRequest:
+    type: object
+    properties: {}
+  GetSmsChannelResponse:
+    type: object
+    required:
+      - SMSChannelResponse
+    properties:
+      SMSChannelResponse:
+        $ref: '#/definitions/SMSChannelResponse'
+  GetSmsChannelRequest:
+    type: object
+    properties: {}
+  GetUserEndpointsResponse:
+    type: object
+    required:
+      - EndpointsResponse
+    properties:
+      EndpointsResponse:
+        $ref: '#/definitions/EndpointsResponse'
+  GetUserEndpointsRequest:
+    type: object
+    properties: {}
+  PhoneNumberValidateResponse:
+    type: object
+    required:
+      - NumberValidateResponse
+    properties:
+      NumberValidateResponse:
+        $ref: '#/definitions/NumberValidateResponse'
+  PhoneNumberValidateRequest:
+    type: object
+    required:
+      - NumberValidateRequest
+    properties:
+      NumberValidateRequest:
+        $ref: '#/definitions/NumberValidateRequest'
+  PutEventStreamResponse:
+    type: object
+    required:
+      - EventStream
+    properties:
+      EventStream:
+        $ref: '#/definitions/EventStream'
+  PutEventStreamRequest:
+    type: object
+    required:
+      - WriteEventStream
+    properties:
+      WriteEventStream:
+        $ref: '#/definitions/WriteEventStream'
+  PutEventsResponse:
+    type: object
+    required:
+      - EventsResponse
+    properties:
+      EventsResponse:
+        $ref: '#/definitions/EventsResponse'
+  PutEventsRequest:
+    type: object
+    required:
+      - EventsRequest
+    properties:
+      EventsRequest:
+        $ref: '#/definitions/EventsRequest'
+  RemoveAttributesResponse:
+    type: object
+    required:
+      - AttributesResource
+    properties:
+      AttributesResource:
+        $ref: '#/definitions/AttributesResource'
+  RemoveAttributesRequest:
+    type: object
+    required:
+      - UpdateAttributesRequest
+    properties:
+      UpdateAttributesRequest:
+        $ref: '#/definitions/UpdateAttributesRequest'
+  SendMessagesResponse:
+    type: object
+    required:
+      - MessageResponse
+    properties:
+      MessageResponse:
+        $ref: '#/definitions/MessageResponse'
+  SendMessagesRequest:
+    type: object
+    required:
+      - MessageRequest
+    properties:
+      MessageRequest:
+        $ref: '#/definitions/MessageRequest'
+  SendUsersMessagesResponse:
+    type: object
+    required:
+      - SendUsersMessageResponse
+    properties:
+      SendUsersMessageResponse:
+        $ref: '#/definitions/SendUsersMessageResponse'
+  SendUsersMessagesRequest:
+    type: object
+    required:
+      - SendUsersMessageRequest
+    properties:
+      SendUsersMessageRequest:
+        $ref: '#/definitions/SendUsersMessageRequest'
+  UpdateAdmChannelResponse:
+    type: object
+    required:
+      - ADMChannelResponse
+    properties:
+      ADMChannelResponse:
+        $ref: '#/definitions/ADMChannelResponse'
+  UpdateAdmChannelRequest:
+    type: object
+    required:
+      - ADMChannelRequest
+    properties:
+      ADMChannelRequest:
+        $ref: '#/definitions/ADMChannelRequest'
+  UpdateApnsChannelResponse:
+    type: object
+    required:
+      - APNSChannelResponse
+    properties:
+      APNSChannelResponse:
+        $ref: '#/definitions/APNSChannelResponse'
+  UpdateApnsChannelRequest:
+    type: object
+    required:
+      - APNSChannelRequest
+    properties:
+      APNSChannelRequest:
+        $ref: '#/definitions/APNSChannelRequest'
+  UpdateApnsSandboxChannelResponse:
+    type: object
+    required:
+      - APNSSandboxChannelResponse
+    properties:
+      APNSSandboxChannelResponse:
+        $ref: '#/definitions/APNSSandboxChannelResponse'
+  UpdateApnsSandboxChannelRequest:
+    type: object
+    required:
+      - APNSSandboxChannelRequest
+    properties:
+      APNSSandboxChannelRequest:
+        $ref: '#/definitions/APNSSandboxChannelRequest'
+  UpdateApnsVoipChannelResponse:
+    type: object
+    required:
+      - APNSVoipChannelResponse
+    properties:
+      APNSVoipChannelResponse:
+        $ref: '#/definitions/APNSVoipChannelResponse'
+  UpdateApnsVoipChannelRequest:
+    type: object
+    required:
+      - APNSVoipChannelRequest
+    properties:
+      APNSVoipChannelRequest:
+        $ref: '#/definitions/APNSVoipChannelRequest'
+  UpdateApnsVoipSandboxChannelResponse:
+    type: object
+    required:
+      - APNSVoipSandboxChannelResponse
+    properties:
+      APNSVoipSandboxChannelResponse:
+        $ref: '#/definitions/APNSVoipSandboxChannelResponse'
+  UpdateApnsVoipSandboxChannelRequest:
+    type: object
+    required:
+      - APNSVoipSandboxChannelRequest
+    properties:
+      APNSVoipSandboxChannelRequest:
+        $ref: '#/definitions/APNSVoipSandboxChannelRequest'
+  UpdateApplicationSettingsResponse:
+    type: object
+    required:
+      - ApplicationSettingsResource
+    properties:
+      ApplicationSettingsResource:
+        $ref: '#/definitions/ApplicationSettingsResource'
+  UpdateApplicationSettingsRequest:
+    type: object
+    required:
+      - WriteApplicationSettingsRequest
+    properties:
+      WriteApplicationSettingsRequest:
+        $ref: '#/definitions/WriteApplicationSettingsRequest'
+  UpdateBaiduChannelResponse:
+    type: object
+    required:
+      - BaiduChannelResponse
+    properties:
+      BaiduChannelResponse:
+        $ref: '#/definitions/BaiduChannelResponse'
+  UpdateBaiduChannelRequest:
+    type: object
+    required:
+      - BaiduChannelRequest
+    properties:
+      BaiduChannelRequest:
+        $ref: '#/definitions/BaiduChannelRequest'
+  UpdateCampaignResponse:
+    type: object
+    required:
+      - CampaignResponse
+    properties:
+      CampaignResponse:
+        $ref: '#/definitions/CampaignResponse'
+  UpdateCampaignRequest:
+    type: object
+    required:
+      - WriteCampaignRequest
+    properties:
+      WriteCampaignRequest:
+        $ref: '#/definitions/WriteCampaignRequest'
+  UpdateEmailChannelResponse:
+    type: object
+    required:
+      - EmailChannelResponse
+    properties:
+      EmailChannelResponse:
+        $ref: '#/definitions/EmailChannelResponse'
+  UpdateEmailChannelRequest:
+    type: object
+    required:
+      - EmailChannelRequest
+    properties:
+      EmailChannelRequest:
+        $ref: '#/definitions/EmailChannelRequest'
+  UpdateEndpointResponse:
+    type: object
+    required:
+      - MessageBody
+    properties:
+      MessageBody:
+        $ref: '#/definitions/MessageBody'
+  UpdateEndpointRequest:
+    type: object
+    required:
+      - EndpointRequest
+    properties:
+      EndpointRequest:
+        $ref: '#/definitions/EndpointRequest'
+  UpdateEndpointsBatchResponse:
+    type: object
+    required:
+      - MessageBody
+    properties:
+      MessageBody:
+        $ref: '#/definitions/MessageBody'
+  UpdateEndpointsBatchRequest:
+    type: object
+    required:
+      - EndpointBatchRequest
+    properties:
+      EndpointBatchRequest:
+        $ref: '#/definitions/EndpointBatchRequest'
+  UpdateGcmChannelResponse:
+    type: object
+    required:
+      - GCMChannelResponse
+    properties:
+      GCMChannelResponse:
+        $ref: '#/definitions/GCMChannelResponse'
+  UpdateGcmChannelRequest:
+    type: object
+    required:
+      - GCMChannelRequest
+    properties:
+      GCMChannelRequest:
+        $ref: '#/definitions/GCMChannelRequest'
+  UpdateSegmentResponse:
+    type: object
+    required:
+      - SegmentResponse
+    properties:
+      SegmentResponse:
+        $ref: '#/definitions/SegmentResponse'
+  UpdateSegmentRequest:
+    type: object
+    required:
+      - WriteSegmentRequest
+    properties:
+      WriteSegmentRequest:
+        $ref: '#/definitions/WriteSegmentRequest'
+  UpdateSmsChannelResponse:
+    type: object
+    required:
+      - SMSChannelResponse
+    properties:
+      SMSChannelResponse:
+        $ref: '#/definitions/SMSChannelResponse'
+  UpdateSmsChannelRequest:
+    type: object
+    required:
+      - SMSChannelRequest
+    properties:
+      SMSChannelRequest:
+        $ref: '#/definitions/SMSChannelRequest'
+  __string:
+    type: string
+  __boolean:
+    type: boolean
   ADMChannelRequest:
     type: object
     properties:
@@ -3582,6 +4456,8 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Indicates whether or not the channel is enabled for sending messages.
     description: Amazon Device Messaging channel definition.
+  __integer:
+    type: integer
   ADMChannelResponse:
     type: object
     properties:
@@ -3616,6 +4492,30 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The channel version.
     description: Amazon Device Messaging channel definition.
+  Action:
+    type: string
+    enum:
+      - OPEN_APP
+      - DEEP_LINK
+      - URL
+  MapOf__string:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
+  MapOfListOf__string:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/ListOf__string'
   ADMMessage:
     type: object
     properties:
@@ -4006,12 +4906,10 @@ definitions:
         $ref: '#/definitions/__integer'
         description: Version of channel
     description: Apple VoIP Developer Push Notification Service channel definition.
-  Action:
-    type: string
-    enum:
-      - OPEN_APP
-      - DEEP_LINK
-      - URL
+  ListOfActivityResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ActivityResponse'
   ActivitiesResponse:
     type: object
     properties:
@@ -4071,6 +4969,19 @@ definitions:
         $ref: '#/definitions/__string'
         description: The ID of a variation of the campaign used for A/B testing.
     description: Activity definition
+  ChannelType:
+    type: string
+    enum:
+      - GCM
+      - APNS
+      - APNS_SANDBOX
+      - APNS_VOIP
+      - APNS_VOIP_SANDBOX
+      - ADM
+      - SMS
+      - EMAIL
+      - BAIDU
+      - CUSTOM
   AddressConfiguration:
     type: object
     properties:
@@ -4106,6 +5017,45 @@ definitions:
         $ref: '#/definitions/__string'
         description: The display name of the application.
     description: Application Response.
+  CampaignHook:
+    type: object
+    properties:
+      LambdaFunctionName:
+        $ref: '#/definitions/__string'
+        description: Lambda function name or arn to be called for delivery
+      Mode:
+        $ref: '#/definitions/Mode'
+        description: What mode Lambda should be invoked in.
+      WebUrl:
+        $ref: '#/definitions/__string'
+        description: Web URL to call for hook. If the URL has authentication specified it will be added as authentication to the request
+    description: Campaign hook information.
+  CampaignLimits:
+    type: object
+    properties:
+      Daily:
+        $ref: '#/definitions/__integer'
+        description: The maximum number of messages that the campaign can send daily.
+      MaximumDuration:
+        $ref: '#/definitions/__integer'
+        description: The length of time (in seconds) that the campaign can run before it ends and message deliveries stop. This duration begins at the scheduled start time for the campaign. The minimum value is 60.
+      MessagesPerSecond:
+        $ref: '#/definitions/__integer'
+        description: 'The number of messages that the campaign can send per second. The minimum value is 50, and the maximum is 20000.'
+      Total:
+        $ref: '#/definitions/__integer'
+        description: The maximum total number of messages that the campaign can send.
+    description: Campaign Limits are used to limit the number of messages that can be sent to a user.
+  QuietTime:
+    type: object
+    properties:
+      End:
+        $ref: '#/definitions/__string'
+        description: The default end time for quiet time in ISO 8601 format.
+      Start:
+        $ref: '#/definitions/__string'
+        description: The default start time for quiet time in ISO 8601 format.
+    description: Quiet Time
   ApplicationSettingsResource:
     type: object
     properties:
@@ -4125,6 +5075,10 @@ definitions:
         $ref: '#/definitions/QuietTime'
         description: The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own.
     description: Application settings.
+  ListOfApplicationResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationResponse'
   ApplicationsResponse:
     type: object
     properties:
@@ -4135,6 +5089,15 @@ definitions:
         $ref: '#/definitions/__string'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: Get Applications Result.
+  AttributeType:
+    type: string
+    enum:
+      - INCLUSIVE
+      - EXCLUSIVE
+  ListOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
   AttributeDimension:
     type: object
     properties:
@@ -4148,11 +5111,6 @@ definitions:
         $ref: '#/definitions/ListOf__string'
         description: 'The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type.'
     description: Custom attibute dimension
-  AttributeType:
-    type: string
-    enum:
-      - INCLUSIVE
-      - EXCLUSIVE
   AttributesResource:
     type: object
     properties:
@@ -4166,16 +5124,6 @@ definitions:
         $ref: '#/definitions/ListOf__string'
         description: The attributes for the application.
     description: Attributes.
-  BadRequestException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message that's returned from the API.
-      RequestID:
-        $ref: '#/definitions/__string'
-        description: The unique message body ID.
-    description: Simple message object.
   BaiduChannelRequest:
     type: object
     properties:
@@ -4288,35 +5236,109 @@ definitions:
         $ref: '#/definitions/__string'
         description: The email title (Or subject).
     description: The email message configuration.
-  CampaignHook:
+  Mode:
+    type: string
+    enum:
+      - DELIVERY
+      - FILTER
+  ListOfTreatmentResource:
+    type: array
+    items:
+      $ref: '#/definitions/TreatmentResource'
+  CampaignState:
     type: object
     properties:
-      LambdaFunctionName:
-        $ref: '#/definitions/__string'
-        description: Lambda function name or arn to be called for delivery
-      Mode:
-        $ref: '#/definitions/Mode'
-        description: What mode Lambda should be invoked in.
-      WebUrl:
-        $ref: '#/definitions/__string'
-        description: Web URL to call for hook. If the URL has authentication specified it will be added as authentication to the request
-    description: Campaign hook information.
-  CampaignLimits:
+      CampaignStatus:
+        $ref: '#/definitions/CampaignStatus'
+        description: |-
+          The status of the campaign, or the status of a treatment that belongs to an A/B test campaign.
+
+          Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
+    description: State of the Campaign
+  MessageConfiguration:
     type: object
     properties:
-      Daily:
-        $ref: '#/definitions/__integer'
-        description: The maximum number of messages that the campaign can send daily.
-      MaximumDuration:
-        $ref: '#/definitions/__integer'
-        description: The length of time (in seconds) that the campaign can run before it ends and message deliveries stop. This duration begins at the scheduled start time for the campaign. The minimum value is 60.
-      MessagesPerSecond:
-        $ref: '#/definitions/__integer'
-        description: 'The number of messages that the campaign can send per second. The minimum value is 50, and the maximum is 20000.'
-      Total:
-        $ref: '#/definitions/__integer'
-        description: The maximum total number of messages that the campaign can send.
-    description: Campaign Limits are used to limit the number of messages that can be sent to a user.
+      ADMMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to ADM channels. Overrides the default message.
+      APNSMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to APNS channels. Overrides the default message.
+      BaiduMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to Baidu channels. Overrides the default message.
+      DefaultMessage:
+        $ref: '#/definitions/Message'
+        description: The default message for all channels.
+      EmailMessage:
+        $ref: '#/definitions/CampaignEmailMessage'
+        description: The email message configuration.
+      GCMMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to GCM channels. Overrides the default message.
+      SMSMessage:
+        $ref: '#/definitions/CampaignSmsMessage'
+        description: The SMS message configuration.
+    description: Message configuration for a campaign.
+  Schedule:
+    type: object
+    properties:
+      EndTime:
+        $ref: '#/definitions/__string'
+        description: The scheduled time that the campaign ends in ISO 8601 format.
+      Frequency:
+        $ref: '#/definitions/Frequency'
+        description: |-
+          How often the campaign delivers messages.
+
+          Valid values: ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+      IsLocalTime:
+        $ref: '#/definitions/__boolean'
+        description: Indicates whether the campaign schedule takes effect according to each user's local time.
+      QuietTime:
+        $ref: '#/definitions/QuietTime'
+        description: The time during which the campaign sends no messages.
+      StartTime:
+        $ref: '#/definitions/__string'
+        description: The scheduled time that the campaign begins in ISO 8601 format.
+      Timezone:
+        $ref: '#/definitions/__string'
+        description: |-
+          The starting UTC offset for the schedule if the value for isLocalTime is true
+
+          Valid values: 
+          UTC
+          UTC+01
+          UTC+02
+          UTC+03
+          UTC+03:30
+          UTC+04
+          UTC+04:30
+          UTC+05
+          UTC+05:30
+          UTC+05:45
+          UTC+06
+          UTC+06:30
+          UTC+07
+          UTC+08
+          UTC+09
+          UTC+09:30
+          UTC+10
+          UTC+10:30
+          UTC+11
+          UTC+12
+          UTC+13
+          UTC-02
+          UTC-03
+          UTC-04
+          UTC-05
+          UTC-06
+          UTC-07
+          UTC-08
+          UTC-09
+          UTC-10
+          UTC-11
+    description: Shcedule that defines when a campaign is run.
   CampaignResponse:
     type: object
     properties:
@@ -4384,6 +5406,11 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The campaign version number.
     description: Campaign definition
+  MessageType:
+    type: string
+    enum:
+      - TRANSACTIONAL
+      - PROMOTIONAL
   CampaignSmsMessage:
     type: object
     properties:
@@ -4397,16 +5424,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: Sender ID of sent message.
     description: SMS message configuration.
-  CampaignState:
-    type: object
-    properties:
-      CampaignStatus:
-        $ref: '#/definitions/CampaignStatus'
-        description: |-
-          The status of the campaign, or the status of a treatment that belongs to an A/B test campaign.
-
-          Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
-    description: State of the Campaign
   CampaignStatus:
     type: string
     enum:
@@ -4416,6 +5433,10 @@ definitions:
       - COMPLETED
       - PAUSED
       - DELETED
+  ListOfCampaignResponse:
+    type: array
+    items:
+      $ref: '#/definitions/CampaignResponse'
   CampaignsResponse:
     type: object
     properties:
@@ -4457,19 +5478,15 @@ definitions:
         $ref: '#/definitions/__integer'
         description: Version of channel
     description: Base definition for channel response.
-  ChannelType:
-    type: string
-    enum:
-      - GCM
-      - APNS
-      - APNS_SANDBOX
-      - APNS_VOIP
-      - APNS_VOIP_SANDBOX
-      - ADM
-      - SMS
-      - EMAIL
-      - BAIDU
-      - CUSTOM
+  MapOfChannelResponse:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/ChannelResponse'
   ChannelsResponse:
     type: object
     properties:
@@ -4477,20 +5494,6 @@ definitions:
         $ref: '#/definitions/MapOfChannelResponse'
         description: 'A map of channels, with the ChannelType as the key and the Channel as the value.'
     description: Get channels definition
-  CreateAppRequest:
-    type: object
-    required:
-      - CreateApplicationRequest
-    properties:
-      CreateApplicationRequest:
-        $ref: '#/definitions/CreateApplicationRequest'
-  CreateAppResponse:
-    type: object
-    required:
-      - ApplicationResponse
-    properties:
-      ApplicationResponse:
-        $ref: '#/definitions/ApplicationResponse'
   CreateApplicationRequest:
     type: object
     properties:
@@ -4498,62 +5501,247 @@ definitions:
         $ref: '#/definitions/__string'
         description: The display name of the application. Used in the Amazon Pinpoint console.
     description: Application Request.
-  CreateCampaignRequest:
+  WriteCampaignRequest:
     type: object
-    required:
-      - WriteCampaignRequest
     properties:
-      WriteCampaignRequest:
-        $ref: '#/definitions/WriteCampaignRequest'
-  CreateCampaignResponse:
+      AdditionalTreatments:
+        $ref: '#/definitions/ListOfWriteTreatmentResource'
+        description: Treatments that are defined in addition to the default treatment.
+      Description:
+        $ref: '#/definitions/__string'
+        description: A description of the campaign.
+      HoldoutPercent:
+        $ref: '#/definitions/__integer'
+        description: The allocated percentage of end users who will not receive messages from this campaign.
+      Hook:
+        $ref: '#/definitions/CampaignHook'
+        description: Campaign hook information.
+      IsPaused:
+        $ref: '#/definitions/__boolean'
+        description: Indicates whether the campaign is paused. A paused campaign does not send messages unless you resume it by setting IsPaused to false.
+      Limits:
+        $ref: '#/definitions/CampaignLimits'
+        description: The campaign limits settings.
+      MessageConfiguration:
+        $ref: '#/definitions/MessageConfiguration'
+        description: The message configuration settings.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The custom name of the campaign.
+      Schedule:
+        $ref: '#/definitions/Schedule'
+        description: The campaign schedule.
+      SegmentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the segment to which the campaign sends messages.
+      SegmentVersion:
+        $ref: '#/definitions/__integer'
+        description: The version of the segment to which the campaign sends messages.
+      TreatmentDescription:
+        $ref: '#/definitions/__string'
+        description: A custom description for the treatment.
+      TreatmentName:
+        $ref: '#/definitions/__string'
+        description: The custom name of a variation of the campaign used for A/B testing.
+    description: Used to create a campaign.
+  ExportJobRequest:
     type: object
-    required:
-      - CampaignResponse
     properties:
-      CampaignResponse:
-        $ref: '#/definitions/CampaignResponse'
-  CreateExportJobRequest:
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that endpoints will be exported to.
+      S3UrlPrefix:
+        $ref: '#/definitions/__string'
+        description: |-
+          A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.
+
+          The URL should follow this format: s3://bucket-name/folder-name/
+
+          Amazon Pinpoint will export endpoints to this location.
+      SegmentId:
+        $ref: '#/definitions/__string'
+        description: 'The ID of the segment to export endpoints from. If not present, Amazon Pinpoint exports all of the endpoints that belong to the application.'
+      SegmentVersion:
+        $ref: '#/definitions/__integer'
+        description: The version of the segment to export if specified.
+    description: Export job request.
+  ExportJobResponse:
     type: object
-    required:
-      - ExportJobRequest
     properties:
-      ExportJobRequest:
-        $ref: '#/definitions/ExportJobRequest'
-  CreateExportJobResponse:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the application associated with the export job.
+      CompletedPieces:
+        $ref: '#/definitions/__integer'
+        description: The number of pieces that have successfully completed as of the time of the request.
+      CompletionDate:
+        $ref: '#/definitions/__string'
+        description: The date the job completed in ISO 8601 format.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date the job was created in ISO 8601 format.
+      Definition:
+        $ref: '#/definitions/ExportJobResource'
+        description: The export job settings.
+      FailedPieces:
+        $ref: '#/definitions/__integer'
+        description: The number of pieces that failed to be processed as of the time of the request.
+      Failures:
+        $ref: '#/definitions/ListOf__string'
+        description: 'Provides up to 100 of the first failed entries for the job, if any exist.'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the job.
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: |-
+          The status of the job.
+          Valid values: CREATED, INITIALIZING, PROCESSING, COMPLETING, COMPLETED, FAILING, FAILED
+
+          The job status is FAILED if one or more pieces failed.
+      TotalFailures:
+        $ref: '#/definitions/__integer'
+        description: 'The number of endpoints that were not processed; for example, because of syntax errors.'
+      TotalPieces:
+        $ref: '#/definitions/__integer'
+        description: The total number of pieces that must be processed to finish the job. Each piece is an approximately equal portion of the endpoints.
+      TotalProcessed:
+        $ref: '#/definitions/__integer'
+        description: The number of endpoints that were processed by the job.
+      Type:
+        $ref: '#/definitions/__string'
+        description: The job type. Will be 'EXPORT'.
+    description: Export job response.
+  ImportJobRequest:
     type: object
-    required:
-      - ExportJobResponse
     properties:
-      ExportJobResponse:
-        $ref: '#/definitions/ExportJobResponse'
-  CreateImportJobRequest:
+      DefineSegment:
+        $ref: '#/definitions/__boolean'
+        description: Sets whether the endpoints create a segment when they are imported.
+      ExternalId:
+        $ref: '#/definitions/__string'
+        description: '(Deprecated) Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.'
+      Format:
+        $ref: '#/definitions/Format'
+        description: |-
+          The format of the files that contain the endpoint definitions.
+          Valid values: CSV, JSON
+      RegisterEndpoints:
+        $ref: '#/definitions/__boolean'
+        description: Sets whether the endpoints are registered with Amazon Pinpoint when they are imported.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that contains the endpoints to import.
+      S3Url:
+        $ref: '#/definitions/__string'
+        description: |-
+          The URL of the S3 bucket that contains the segment information to import. The location can be a folder or a single file. The URL should use the following format: s3://bucket-name/folder-name/file-name
+
+          Amazon Pinpoint imports endpoints from this location and any subfolders it contains.
+      SegmentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the segment to update if the import job is meant to update an existing segment.
+      SegmentName:
+        $ref: '#/definitions/__string'
+        description: A custom name for the segment created by the import job. Use if DefineSegment is true.
+    description: Import job request.
+  ImportJobResponse:
     type: object
-    required:
-      - ImportJobRequest
     properties:
-      ImportJobRequest:
-        $ref: '#/definitions/ImportJobRequest'
-  CreateImportJobResponse:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the application to which the import job applies.
+      CompletedPieces:
+        $ref: '#/definitions/__integer'
+        description: The number of pieces that have successfully imported as of the time of the request.
+      CompletionDate:
+        $ref: '#/definitions/__string'
+        description: The date the import job completed in ISO 8601 format.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date the import job was created in ISO 8601 format.
+      Definition:
+        $ref: '#/definitions/ImportJobResource'
+        description: The import job settings.
+      FailedPieces:
+        $ref: '#/definitions/__integer'
+        description: The number of pieces that have failed to import as of the time of the request.
+      Failures:
+        $ref: '#/definitions/ListOf__string'
+        description: 'Provides up to 100 of the first failed entries for the job, if any exist.'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the import job.
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: |-
+          The status of the import job.
+          Valid values: CREATED, INITIALIZING, PROCESSING, COMPLETING, COMPLETED, FAILING, FAILED
+
+          The job status is FAILED if one or more pieces failed to import.
+      TotalFailures:
+        $ref: '#/definitions/__integer'
+        description: 'The number of endpoints that failed to import; for example, because of syntax errors.'
+      TotalPieces:
+        $ref: '#/definitions/__integer'
+        description: The total number of pieces that must be imported to finish the job. Each piece is an approximately equal portion of the endpoints to import.
+      TotalProcessed:
+        $ref: '#/definitions/__integer'
+        description: The number of endpoints that were processed by the import job.
+      Type:
+        $ref: '#/definitions/__string'
+        description: The job type. Will be Import.
+    description: Import job response.
+  WriteSegmentRequest:
     type: object
-    required:
-      - ImportJobResponse
     properties:
-      ImportJobResponse:
-        $ref: '#/definitions/ImportJobResponse'
-  CreateSegmentRequest:
+      Dimensions:
+        $ref: '#/definitions/SegmentDimensions'
+        description: The segment dimensions attributes.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of segment
+      SegmentGroups:
+        $ref: '#/definitions/SegmentGroupList'
+        description: 'A segment group, which consists of zero or more source segments, plus dimensions that are applied to those source segments. Your request can only include one segment group. Your request can include either a SegmentGroups object or a Dimensions object, but not both.'
+    description: Segment definition.
+  SegmentResponse:
     type: object
-    required:
-      - WriteSegmentRequest
     properties:
-      WriteSegmentRequest:
-        $ref: '#/definitions/WriteSegmentRequest'
-  CreateSegmentResponse:
-    type: object
-    required:
-      - SegmentResponse
-    properties:
-      SegmentResponse:
-        $ref: '#/definitions/SegmentResponse'
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The ID of the application that the segment applies to.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date and time when the segment was created.
+      Dimensions:
+        $ref: '#/definitions/SegmentDimensions'
+        description: The segment dimensions attributes.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique segment ID.
+      ImportDefinition:
+        $ref: '#/definitions/SegmentImportResource'
+        description: The import job settings.
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: The date and time when the segment was last modified.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the segment.
+      SegmentGroups:
+        $ref: '#/definitions/SegmentGroupList'
+        description: 'A segment group, which consists of zero or more source segments, plus dimensions that are applied to those source segments.'
+      SegmentType:
+        $ref: '#/definitions/SegmentType'
+        description: |-
+          The segment type:
+          DIMENSIONAL - A dynamic segment built from selection criteria based on endpoint data reported by your app. You create this type of segment by using the segment builder in the Amazon Pinpoint console or by making a POST request to the segments resource.
+          IMPORT - A static segment built from an imported set of endpoint definitions. You create this type of segment by importing a segment in the Amazon Pinpoint console or by making a POST request to the jobs/import resource.
+      Version:
+        $ref: '#/definitions/__integer'
+        description: The segment version number.
+    description: Segment definition.
   DefaultMessage:
     type: object
     properties:
@@ -4589,156 +5777,227 @@ definitions:
         $ref: '#/definitions/__string'
         description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
     description: Default Push Notification Message.
-  DeleteAdmChannelRequest:
+  EmailChannelResponse:
     type: object
-    properties: {}
-  DeleteAdmChannelResponse:
-    type: object
-    required:
-      - ADMChannelResponse
     properties:
-      ADMChannelResponse:
-        $ref: '#/definitions/ADMChannelResponse'
-  DeleteApnsChannelRequest:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the application to which the email channel belongs.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date that the settings were last updated in ISO 8601 format.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      FromAddress:
+        $ref: '#/definitions/__string'
+        description: The email address used to send emails from.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: Not used. Retained for backwards compatibility.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'Channel ID. Not used, only for backwards compatibility.'
+      Identity:
+        $ref: '#/definitions/__string'
+        description: The ARN of an identity verified with SES.
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who last updated this entry
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      MessagesPerSecond:
+        $ref: '#/definitions/__integer'
+        description: Messages per second that can be sent
+      Platform:
+        $ref: '#/definitions/__string'
+        description: Platform type. Will be "EMAIL"
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of an IAM Role used to submit events to Mobile Analytics' event ingestion service
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: Email Channel Response.
+  EndpointResponse:
     type: object
-    properties: {}
-  DeleteApnsChannelResponse:
-    type: object
-    required:
-      - APNSChannelResponse
     properties:
-      APNSChannelResponse:
-        $ref: '#/definitions/APNSChannelResponse'
-  DeleteApnsSandboxChannelRequest:
+      Address:
+        $ref: '#/definitions/__string'
+        description: 'The address of the endpoint as provided by your push provider. For example, the DeviceToken or RegistrationId.'
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The ID of the application that is associated with the endpoint.
+      Attributes:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: |-
+          Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the following values: ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create segments.
+
+          The Amazon Pinpoint console can't display attribute names that include the following characters: hash/pound sign (#), colon (:), question mark (?), backslash (\), and forward slash (/). For this reason, you should avoid using these characters in the names of custom attributes.
+      ChannelType:
+        $ref: '#/definitions/ChannelType'
+        description: |-
+          The channel type.
+
+          Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
+      CohortId:
+        $ref: '#/definitions/__string'
+        description: 'A number from 0-99 that represents the cohort the endpoint is assigned to. Endpoints are grouped into cohorts randomly, and each cohort contains approximately 1 percent of the endpoints for an app. Amazon Pinpoint assigns cohorts to the holdout or treatment allocations for a campaign.'
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: 'The date and time when the endpoint was created, shown in ISO 8601 format.'
+      Demographic:
+        $ref: '#/definitions/EndpointDemographic'
+        description: The endpoint demographic attributes.
+      EffectiveDate:
+        $ref: '#/definitions/__string'
+        description: 'The date and time when the endpoint was last updated, shown in ISO 8601 format.'
+      EndpointStatus:
+        $ref: '#/definitions/__string'
+        description: Unused.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique ID that you assigned to the endpoint. The ID should be a globally unique identifier (GUID) to ensure that it doesn't conflict with other endpoint IDs associated with the application.
+      Location:
+        $ref: '#/definitions/EndpointLocation'
+        description: The endpoint location attributes.
+      Metrics:
+        $ref: '#/definitions/MapOf__double'
+        description: Custom metrics that your app reports to Amazon Pinpoint.
+      OptOut:
+        $ref: '#/definitions/__string'
+        description: |-
+          Indicates whether a user has opted out of receiving messages with one of the following values:
+
+          ALL - User has opted out of all messages.
+
+          NONE - Users has not opted out and receives all messages.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: The unique ID for the most recent request to update the endpoint.
+      User:
+        $ref: '#/definitions/EndpointUser'
+        description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
+    description: Endpoint response
+  EventStream:
     type: object
-    properties: {}
-  DeleteApnsSandboxChannelResponse:
-    type: object
-    required:
-      - APNSSandboxChannelResponse
     properties:
-      APNSSandboxChannelResponse:
-        $ref: '#/definitions/APNSSandboxChannelResponse'
-  DeleteApnsVoipChannelRequest:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The ID of the application from which events should be published.
+      DestinationStreamArn:
+        $ref: '#/definitions/__string'
+        description: |-
+          The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.
+           Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME
+           Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
+      ExternalId:
+        $ref: '#/definitions/__string'
+        description: '(Deprecated) Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.'
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: The date the event stream was last updated in ISO 8601 format.
+      LastUpdatedBy:
+        $ref: '#/definitions/__string'
+        description: The IAM user who last modified the event stream.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
+    description: Model for an event publishing subscription export.
+  GCMChannelResponse:
     type: object
-    properties: {}
-  DeleteApnsVoipChannelResponse:
-    type: object
-    required:
-      - APNSVoipChannelResponse
     properties:
-      APNSVoipChannelResponse:
-        $ref: '#/definitions/APNSVoipChannelResponse'
-  DeleteApnsVoipSandboxChannelRequest:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The ID of the application to which the channel applies.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: When was this segment created
+      Credential:
+        $ref: '#/definitions/__string'
+        description: The GCM API key from Google.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: Not used. Retained for backwards compatibility.
+      Id:
+        $ref: '#/definitions/__string'
+        description: Channel ID. Not used. Present only for backwards compatibility.
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who last updated this entry
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Platform:
+        $ref: '#/definitions/__string'
+        description: The platform type. Will be GCM
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: Google Cloud Messaging channel definition
+  SMSChannelResponse:
     type: object
-    properties: {}
-  DeleteApnsVoipSandboxChannelResponse:
-    type: object
-    required:
-      - APNSVoipSandboxChannelResponse
     properties:
-      APNSVoipSandboxChannelResponse:
-        $ref: '#/definitions/APNSVoipSandboxChannelResponse'
-  DeleteAppRequest:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the application to which the SMS channel belongs.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date that the settings were last updated in ISO 8601 format.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: Not used. Retained for backwards compatibility.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'Channel ID. Not used, only for backwards compatibility.'
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who last updated this entry
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Platform:
+        $ref: '#/definitions/__string'
+        description: Platform type. Will be "SMS"
+      PromotionalMessagesPerSecond:
+        $ref: '#/definitions/__integer'
+        description: Promotional messages per second that can be sent
+      SenderId:
+        $ref: '#/definitions/__string'
+        description: Sender identifier of your messages.
+      ShortCode:
+        $ref: '#/definitions/__string'
+        description: The short code registered with the phone provider.
+      TransactionalMessagesPerSecond:
+        $ref: '#/definitions/__integer'
+        description: Transactional messages per second that can be sent
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: SMS Channel Response.
+  EndpointsResponse:
     type: object
-    properties: {}
-  DeleteAppResponse:
-    type: object
-    required:
-      - ApplicationResponse
     properties:
-      ApplicationResponse:
-        $ref: '#/definitions/ApplicationResponse'
-  DeleteBaiduChannelRequest:
-    type: object
-    properties: {}
-  DeleteBaiduChannelResponse:
-    type: object
-    required:
-      - BaiduChannelResponse
-    properties:
-      BaiduChannelResponse:
-        $ref: '#/definitions/BaiduChannelResponse'
-  DeleteCampaignRequest:
-    type: object
-    properties: {}
-  DeleteCampaignResponse:
-    type: object
-    required:
-      - CampaignResponse
-    properties:
-      CampaignResponse:
-        $ref: '#/definitions/CampaignResponse'
-  DeleteEmailChannelRequest:
-    type: object
-    properties: {}
-  DeleteEmailChannelResponse:
-    type: object
-    required:
-      - EmailChannelResponse
-    properties:
-      EmailChannelResponse:
-        $ref: '#/definitions/EmailChannelResponse'
-  DeleteEndpointRequest:
-    type: object
-    properties: {}
-  DeleteEndpointResponse:
-    type: object
-    required:
-      - EndpointResponse
-    properties:
-      EndpointResponse:
-        $ref: '#/definitions/EndpointResponse'
-  DeleteEventStreamRequest:
-    type: object
-    properties: {}
-  DeleteEventStreamResponse:
-    type: object
-    required:
-      - EventStream
-    properties:
-      EventStream:
-        $ref: '#/definitions/EventStream'
-  DeleteGcmChannelRequest:
-    type: object
-    properties: {}
-  DeleteGcmChannelResponse:
-    type: object
-    required:
-      - GCMChannelResponse
-    properties:
-      GCMChannelResponse:
-        $ref: '#/definitions/GCMChannelResponse'
-  DeleteSegmentRequest:
-    type: object
-    properties: {}
-  DeleteSegmentResponse:
-    type: object
-    required:
-      - SegmentResponse
-    properties:
-      SegmentResponse:
-        $ref: '#/definitions/SegmentResponse'
-  DeleteSmsChannelRequest:
-    type: object
-    properties: {}
-  DeleteSmsChannelResponse:
-    type: object
-    required:
-      - SMSChannelResponse
-    properties:
-      SMSChannelResponse:
-        $ref: '#/definitions/SMSChannelResponse'
-  DeleteUserEndpointsRequest:
-    type: object
-    properties: {}
-  DeleteUserEndpointsResponse:
-    type: object
-    required:
-      - EndpointsResponse
-    properties:
-      EndpointsResponse:
-        $ref: '#/definitions/EndpointsResponse'
+      Item:
+        $ref: '#/definitions/ListOfEndpointResponse'
+        description: The list of endpoints.
+    description: List of endpoints
   DeliveryStatus:
     type: string
     enum:
@@ -4754,6 +6013,92 @@ definitions:
     enum:
       - INCLUSIVE
       - EXCLUSIVE
+  GCMMessage:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/Action'
+        description: 'The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user''s device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL'
+      Body:
+        $ref: '#/definitions/__string'
+        description: The message body of the notification.
+      CollapseKey:
+        $ref: '#/definitions/__string'
+        description: 'This parameter identifies a group of messages (e.g., with collapse_key: "Updates Available") that can be collapsed, so that only the last message gets sent when delivery can be resumed. This is intended to avoid sending too many of the same messages when the device comes back online or becomes active.'
+      Data:
+        $ref: '#/definitions/MapOf__string'
+        description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+      IconReference:
+        $ref: '#/definitions/__string'
+        description: The icon image name of the asset saved in your application.
+      ImageIconUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to an image used as the large icon to the notification content view.
+      ImageUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to an image used in the push notification.
+      Priority:
+        $ref: '#/definitions/__string'
+        description: |-
+          The message priority. Amazon Pinpoint uses this value to set the FCM or GCM priority parameter when it sends the message. Accepts the following values:
+
+          "Normal" - Messages might be delayed. Delivery is optimized for battery usage on the receiving device. Use normal priority unless immediate delivery is required.
+
+          "High" - Messages are sent immediately and might wake a sleeping device.
+
+          The equivalent values for APNs messages are "5" and "10". Amazon Pinpoint accepts these values here and converts them.
+
+          For more information, see About FCM Messages in the Firebase documentation.
+      RawContent:
+        $ref: '#/definitions/__string'
+        description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
+      RestrictedPackageName:
+        $ref: '#/definitions/__string'
+        description: This parameter specifies the package name of the application where the registration tokens must match in order to receive the message.
+      SilentPush:
+        $ref: '#/definitions/__boolean'
+        description: Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+      SmallImageIconUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to an image used as the small icon for the notification which will be used to represent the notification in the status bar and content view
+      Sound:
+        $ref: '#/definitions/__string'
+        description: 'Indicates a sound to play when the device receives the notification. Supports default, or the filename of a sound resource bundled in the app. Android sound files must reside in /res/raw/'
+      Substitutions:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Default message substitutions. Can be overridden by individual address substitutions.
+      TimeToLive:
+        $ref: '#/definitions/__integer'
+        description: 'The length of time (in seconds) that FCM or GCM stores and attempts to deliver the message. If unspecified, the value defaults to the maximum, which is 2,419,200 seconds (28 days). Amazon Pinpoint uses this value to set the FCM or GCM time_to_live parameter.'
+      Title:
+        $ref: '#/definitions/__string'
+        description: The message title that displays above the message on the user's device.
+      Url:
+        $ref: '#/definitions/__string'
+        description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
+    description: GCM Message.
+  SMSMessage:
+    type: object
+    properties:
+      Body:
+        $ref: '#/definitions/__string'
+        description: The body of the SMS message.
+      Keyword:
+        $ref: '#/definitions/__string'
+        description: The SMS program name that you provided to AWS Support when you requested your dedicated number.
+      MessageType:
+        $ref: '#/definitions/MessageType'
+        description: Is this a transaction priority message or lower priority.
+      OriginationNumber:
+        $ref: '#/definitions/__string'
+        description: 'The phone number that the SMS message originates from. Specify one of the dedicated long codes or short codes that you requested from AWS Support and that is assigned to your account. If this attribute is not specified, Amazon Pinpoint randomly assigns a long code.'
+      SenderId:
+        $ref: '#/definitions/__string'
+        description: The sender ID that is shown as the message sender on the recipient's device. Support for sender IDs varies by country or region.
+      Substitutions:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Default message substitutions. Can be overridden by individual address substitutions.
+    description: SMS Message.
   DirectMessageConfiguration:
     type: object
     properties:
@@ -4802,52 +6147,79 @@ definitions:
         $ref: '#/definitions/__string'
         description: The ARN of an IAM Role used to submit events to Mobile Analytics' event ingestion service
     description: Email Channel Request
-  EmailChannelResponse:
+  EndpointDemographic:
     type: object
     properties:
-      ApplicationId:
+      AppVersion:
         $ref: '#/definitions/__string'
-        description: The unique ID of the application to which the email channel belongs.
-      CreationDate:
+        description: The version of the application associated with the endpoint.
+      Locale:
         $ref: '#/definitions/__string'
-        description: The date that the settings were last updated in ISO 8601 format.
-      Enabled:
-        $ref: '#/definitions/__boolean'
-        description: If the channel is enabled for sending messages.
-      FromAddress:
+        description: |
+          The endpoint locale in the following format: The ISO 639-1 alpha-2 code, followed by an underscore, followed by an ISO 3166-1 alpha-2 value.
+      Make:
         $ref: '#/definitions/__string'
-        description: The email address used to send emails from.
-      HasCredential:
-        $ref: '#/definitions/__boolean'
-        description: Not used. Retained for backwards compatibility.
-      Id:
+        description: 'The manufacturer of the endpoint device, such as Apple or Samsung.'
+      Model:
         $ref: '#/definitions/__string'
-        description: 'Channel ID. Not used, only for backwards compatibility.'
-      Identity:
+        description: 'The model name or number of the endpoint device, such as iPhone.'
+      ModelVersion:
         $ref: '#/definitions/__string'
-        description: The ARN of an identity verified with SES.
-      IsArchived:
-        $ref: '#/definitions/__boolean'
-        description: Is this channel archived
-      LastModifiedBy:
-        $ref: '#/definitions/__string'
-        description: Who last updated this entry
-      LastModifiedDate:
-        $ref: '#/definitions/__string'
-        description: Last date this was updated
-      MessagesPerSecond:
-        $ref: '#/definitions/__integer'
-        description: Messages per second that can be sent
+        description: The model version of the endpoint device.
       Platform:
         $ref: '#/definitions/__string'
-        description: Platform type. Will be "EMAIL"
-      RoleArn:
+        description: 'The platform of the endpoint device, such as iOS or Android.'
+      PlatformVersion:
         $ref: '#/definitions/__string'
-        description: The ARN of an IAM Role used to submit events to Mobile Analytics' event ingestion service
-      Version:
-        $ref: '#/definitions/__integer'
-        description: Version of channel
-    description: Email Channel Response.
+        description: The platform version of the endpoint device.
+      Timezone:
+        $ref: '#/definitions/__string'
+        description: 'The timezone of the endpoint. Specified as a tz database value, such as Americas/Los_Angeles.'
+    description: Demographic information about the endpoint.
+  EndpointLocation:
+    type: object
+    properties:
+      City:
+        $ref: '#/definitions/__string'
+        description: The city where the endpoint is located.
+      Country:
+        $ref: '#/definitions/__string'
+        description: 'The two-letter code for the country or region of the endpoint. Specified as an ISO 3166-1 Alpha-2 code, such as "US" for the United States.'
+      Latitude:
+        $ref: '#/definitions/__double'
+        description: 'The latitude of the endpoint location, rounded to one decimal place.'
+      Longitude:
+        $ref: '#/definitions/__double'
+        description: 'The longitude of the endpoint location, rounded to one decimal place.'
+      PostalCode:
+        $ref: '#/definitions/__string'
+        description: The postal code or zip code of the endpoint.
+      Region:
+        $ref: '#/definitions/__string'
+        description: 'The region of the endpoint location. For example, in the United States, this corresponds to a state.'
+    description: Location data for the endpoint.
+  MapOf__double:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__double'
+  EndpointUser:
+    type: object
+    properties:
+      UserAttributes:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: |-
+          Custom attributes that describe the user by associating a name with an array of values. For example, an attribute named "interests" might have the following values: ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create segments.
+
+          The Amazon Pinpoint console can't display attribute names that include the following characters: hash/pound sign (#), colon (:), question mark (?), backslash (\), and forward slash (/). For this reason, you should avoid using these characters in the names of custom attributes.
+      UserId:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the user.
+    description: Endpoint user specific custom userAttributes
   EndpointBatchItem:
     type: object
     properties:
@@ -4899,6 +6271,10 @@ definitions:
         $ref: '#/definitions/EndpointUser'
         description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
     description: Endpoint update request
+  ListOfEndpointBatchItem:
+    type: array
+    items:
+      $ref: '#/definitions/EndpointBatchItem'
   EndpointBatchRequest:
     type: object
     properties:
@@ -4906,35 +6282,6 @@ definitions:
         $ref: '#/definitions/ListOfEndpointBatchItem'
         description: List of items to update. Maximum 100 items
     description: Endpoint batch update request.
-  EndpointDemographic:
-    type: object
-    properties:
-      AppVersion:
-        $ref: '#/definitions/__string'
-        description: The version of the application associated with the endpoint.
-      Locale:
-        $ref: '#/definitions/__string'
-        description: |
-          The endpoint locale in the following format: The ISO 639-1 alpha-2 code, followed by an underscore, followed by an ISO 3166-1 alpha-2 value.
-      Make:
-        $ref: '#/definitions/__string'
-        description: 'The manufacturer of the endpoint device, such as Apple or Samsung.'
-      Model:
-        $ref: '#/definitions/__string'
-        description: 'The model name or number of the endpoint device, such as iPhone.'
-      ModelVersion:
-        $ref: '#/definitions/__string'
-        description: The model version of the endpoint device.
-      Platform:
-        $ref: '#/definitions/__string'
-        description: 'The platform of the endpoint device, such as iOS or Android.'
-      PlatformVersion:
-        $ref: '#/definitions/__string'
-        description: The platform version of the endpoint device.
-      Timezone:
-        $ref: '#/definitions/__string'
-        description: 'The timezone of the endpoint. Specified as a tz database value, such as Americas/Los_Angeles.'
-    description: Demographic information about the endpoint.
   EndpointItemResponse:
     type: object
     properties:
@@ -4945,28 +6292,9 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The status code to respond with for a particular endpoint id after endpoint registration
     description: The responses that are returned after you create or update an endpoint and record an event.
-  EndpointLocation:
-    type: object
-    properties:
-      City:
-        $ref: '#/definitions/__string'
-        description: The city where the endpoint is located.
-      Country:
-        $ref: '#/definitions/__string'
-        description: 'The two-letter code for the country or region of the endpoint. Specified as an ISO 3166-1 Alpha-2 code, such as "US" for the United States.'
-      Latitude:
-        $ref: '#/definitions/__double'
-        description: 'The latitude of the endpoint location, rounded to one decimal place.'
-      Longitude:
-        $ref: '#/definitions/__double'
-        description: 'The longitude of the endpoint location, rounded to one decimal place.'
-      PostalCode:
-        $ref: '#/definitions/__string'
-        description: The postal code or zip code of the endpoint.
-      Region:
-        $ref: '#/definitions/__string'
-        description: 'The region of the endpoint location. For example, in the United States, this corresponds to a state.'
-    description: Location data for the endpoint.
+  __double:
+    type: number
+    format: double
   EndpointMessageResult:
     type: object
     properties:
@@ -5062,66 +6390,6 @@ definitions:
         $ref: '#/definitions/EndpointUser'
         description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
     description: Endpoint update request
-  EndpointResponse:
-    type: object
-    properties:
-      Address:
-        $ref: '#/definitions/__string'
-        description: 'The address of the endpoint as provided by your push provider. For example, the DeviceToken or RegistrationId.'
-      ApplicationId:
-        $ref: '#/definitions/__string'
-        description: The ID of the application that is associated with the endpoint.
-      Attributes:
-        $ref: '#/definitions/MapOfListOf__string'
-        description: |-
-          Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the following values: ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create segments.
-
-          The Amazon Pinpoint console can't display attribute names that include the following characters: hash/pound sign (#), colon (:), question mark (?), backslash (\), and forward slash (/). For this reason, you should avoid using these characters in the names of custom attributes.
-      ChannelType:
-        $ref: '#/definitions/ChannelType'
-        description: |-
-          The channel type.
-
-          Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
-      CohortId:
-        $ref: '#/definitions/__string'
-        description: 'A number from 0-99 that represents the cohort the endpoint is assigned to. Endpoints are grouped into cohorts randomly, and each cohort contains approximately 1 percent of the endpoints for an app. Amazon Pinpoint assigns cohorts to the holdout or treatment allocations for a campaign.'
-      CreationDate:
-        $ref: '#/definitions/__string'
-        description: 'The date and time when the endpoint was created, shown in ISO 8601 format.'
-      Demographic:
-        $ref: '#/definitions/EndpointDemographic'
-        description: The endpoint demographic attributes.
-      EffectiveDate:
-        $ref: '#/definitions/__string'
-        description: 'The date and time when the endpoint was last updated, shown in ISO 8601 format.'
-      EndpointStatus:
-        $ref: '#/definitions/__string'
-        description: Unused.
-      Id:
-        $ref: '#/definitions/__string'
-        description: The unique ID that you assigned to the endpoint. The ID should be a globally unique identifier (GUID) to ensure that it doesn't conflict with other endpoint IDs associated with the application.
-      Location:
-        $ref: '#/definitions/EndpointLocation'
-        description: The endpoint location attributes.
-      Metrics:
-        $ref: '#/definitions/MapOf__double'
-        description: Custom metrics that your app reports to Amazon Pinpoint.
-      OptOut:
-        $ref: '#/definitions/__string'
-        description: |-
-          Indicates whether a user has opted out of receiving messages with one of the following values:
-
-          ALL - User has opted out of all messages.
-
-          NONE - Users has not opted out and receives all messages.
-      RequestId:
-        $ref: '#/definitions/__string'
-        description: The unique ID for the most recent request to update the endpoint.
-      User:
-        $ref: '#/definitions/EndpointUser'
-        description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
-    description: Endpoint response
   EndpointSendConfiguration:
     type: object
     properties:
@@ -5141,26 +6409,26 @@ definitions:
         $ref: '#/definitions/__string'
         description: Title override. If specified will override default title if applicable.
     description: Endpoint send configuration.
-  EndpointUser:
+  ListOfEndpointResponse:
+    type: array
+    items:
+      $ref: '#/definitions/EndpointResponse'
+  Session:
     type: object
     properties:
-      UserAttributes:
-        $ref: '#/definitions/MapOfListOf__string'
-        description: |-
-          Custom attributes that describe the user by associating a name with an array of values. For example, an attribute named "interests" might have the following values: ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create segments.
-
-          The Amazon Pinpoint console can't display attribute names that include the following characters: hash/pound sign (#), colon (:), question mark (?), backslash (\), and forward slash (/). For this reason, you should avoid using these characters in the names of custom attributes.
-      UserId:
+      Duration:
+        $ref: '#/definitions/__integer'
+        description: Session duration in millis
+      Id:
         $ref: '#/definitions/__string'
-        description: The unique ID of the user.
-    description: Endpoint user specific custom userAttributes
-  EndpointsResponse:
-    type: object
-    properties:
-      Item:
-        $ref: '#/definitions/ListOfEndpointResponse'
-        description: The list of endpoints.
-    description: List of endpoints
+        description: A unique identifier for the session.
+      StartTimestamp:
+        $ref: '#/definitions/__string'
+        description: The date and time when the session began.
+      StopTimestamp:
+        $ref: '#/definitions/__string'
+        description: The date and time when the session ended.
+    description: Information about a session.
   Event:
     type: object
     properties:
@@ -5193,31 +6461,60 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The status code to respond with for a particular event id
     description: The responses that are returned after you record an event.
-  EventStream:
+  PublicEndpoint:
     type: object
     properties:
-      ApplicationId:
+      Address:
         $ref: '#/definitions/__string'
-        description: The ID of the application from which events should be published.
-      DestinationStreamArn:
+        description: 'The unique identifier for the recipient. For example, an address could be a device token or an endpoint ID.'
+      Attributes:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
+      ChannelType:
+        $ref: '#/definitions/ChannelType'
+        description: |-
+          The channel type.
+
+          Valid values: APNS, GCM
+      Demographic:
+        $ref: '#/definitions/EndpointDemographic'
+        description: The endpoint demographic attributes.
+      EffectiveDate:
+        $ref: '#/definitions/__string'
+        description: The date and time when the endpoint was last updated.
+      EndpointStatus:
+        $ref: '#/definitions/__string'
+        description: 'The status of the endpoint. If the update fails, the value is INACTIVE. If the endpoint is updated successfully, the value is ACTIVE.'
+      Location:
+        $ref: '#/definitions/EndpointLocation'
+        description: The endpoint location attributes.
+      Metrics:
+        $ref: '#/definitions/MapOf__double'
+        description: Custom metrics that your app reports to Amazon Pinpoint.
+      OptOut:
         $ref: '#/definitions/__string'
         description: |-
-          The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.
-           Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME
-           Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
-      ExternalId:
+          Indicates whether a user has opted out of receiving messages with one of the following values:
+
+          ALL - User has opted out of all messages.
+
+          NONE - Users has not opted out and receives all messages.
+      RequestId:
         $ref: '#/definitions/__string'
-        description: '(Deprecated) Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.'
-      LastModifiedDate:
-        $ref: '#/definitions/__string'
-        description: The date the event stream was last updated in ISO 8601 format.
-      LastUpdatedBy:
-        $ref: '#/definitions/__string'
-        description: The IAM user who last modified the event stream.
-      RoleArn:
-        $ref: '#/definitions/__string'
-        description: The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
-    description: Model for an event publishing subscription export.
+        description: A unique identifier that is generated each time the endpoint is updated.
+      User:
+        $ref: '#/definitions/EndpointUser'
+        description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
+    description: Public endpoint attributes.
+  MapOfEvent:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/Event'
   EventsBatch:
     type: object
     properties:
@@ -5228,6 +6525,15 @@ definitions:
         $ref: '#/definitions/MapOfEvent'
         description: Events
     description: Events batch definition
+  MapOfEventsBatch:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/EventsBatch'
   EventsRequest:
     type: object
     properties:
@@ -5235,6 +6541,15 @@ definitions:
         $ref: '#/definitions/MapOfEventsBatch'
         description: Batch of events with endpoint id as the key and an object of EventsBatch as value. The EventsBatch object has the PublicEndpoint and a map of event Id's to events
     description: Put Events request
+  MapOfItemResponse:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/ItemResponse'
   EventsResponse:
     type: object
     properties:
@@ -5242,27 +6557,6 @@ definitions:
         $ref: '#/definitions/MapOfItemResponse'
         description: 'A map containing a multi part response for each endpoint, with the endpoint id as the key and item response as the value'
     description: The results from processing a put events request
-  ExportJobRequest:
-    type: object
-    properties:
-      RoleArn:
-        $ref: '#/definitions/__string'
-        description: The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that endpoints will be exported to.
-      S3UrlPrefix:
-        $ref: '#/definitions/__string'
-        description: |-
-          A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.
-
-          The URL should follow this format: s3://bucket-name/folder-name/
-
-          Amazon Pinpoint will export endpoints to this location.
-      SegmentId:
-        $ref: '#/definitions/__string'
-        description: 'The ID of the segment to export endpoints from. If not present, Amazon Pinpoint exports all of the endpoints that belong to the application.'
-      SegmentVersion:
-        $ref: '#/definitions/__integer'
-        description: The version of the segment to export if specified.
-    description: Export job request.
   ExportJobResource:
     type: object
     properties:
@@ -5284,53 +6578,20 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The version of the segment to export if specified.
     description: Export job resource.
-  ExportJobResponse:
-    type: object
-    properties:
-      ApplicationId:
-        $ref: '#/definitions/__string'
-        description: The unique ID of the application associated with the export job.
-      CompletedPieces:
-        $ref: '#/definitions/__integer'
-        description: The number of pieces that have successfully completed as of the time of the request.
-      CompletionDate:
-        $ref: '#/definitions/__string'
-        description: The date the job completed in ISO 8601 format.
-      CreationDate:
-        $ref: '#/definitions/__string'
-        description: The date the job was created in ISO 8601 format.
-      Definition:
-        $ref: '#/definitions/ExportJobResource'
-        description: The export job settings.
-      FailedPieces:
-        $ref: '#/definitions/__integer'
-        description: The number of pieces that failed to be processed as of the time of the request.
-      Failures:
-        $ref: '#/definitions/ListOf__string'
-        description: 'Provides up to 100 of the first failed entries for the job, if any exist.'
-      Id:
-        $ref: '#/definitions/__string'
-        description: The unique ID of the job.
-      JobStatus:
-        $ref: '#/definitions/JobStatus'
-        description: |-
-          The status of the job.
-          Valid values: CREATED, INITIALIZING, PROCESSING, COMPLETING, COMPLETED, FAILING, FAILED
-
-          The job status is FAILED if one or more pieces failed.
-      TotalFailures:
-        $ref: '#/definitions/__integer'
-        description: 'The number of endpoints that were not processed; for example, because of syntax errors.'
-      TotalPieces:
-        $ref: '#/definitions/__integer'
-        description: The total number of pieces that must be processed to finish the job. Each piece is an approximately equal portion of the endpoints.
-      TotalProcessed:
-        $ref: '#/definitions/__integer'
-        description: The number of endpoints that were processed by the job.
-      Type:
-        $ref: '#/definitions/__string'
-        description: The job type. Will be 'EXPORT'.
-    description: Export job response.
+  JobStatus:
+    type: string
+    enum:
+      - CREATED
+      - INITIALIZING
+      - PROCESSING
+      - COMPLETING
+      - COMPLETED
+      - FAILING
+      - FAILED
+  ListOfExportJobResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ExportJobResponse'
   ExportJobsResponse:
     type: object
     properties:
@@ -5341,16 +6602,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: Export job list.
-  ForbiddenException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message that's returned from the API.
-      RequestID:
-        $ref: '#/definitions/__string'
-        description: The unique message body ID.
-    description: Simple message object.
   Format:
     type: string
     enum:
@@ -5374,107 +6625,6 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
     description: Google Cloud Messaging credentials
-  GCMChannelResponse:
-    type: object
-    properties:
-      ApplicationId:
-        $ref: '#/definitions/__string'
-        description: The ID of the application to which the channel applies.
-      CreationDate:
-        $ref: '#/definitions/__string'
-        description: When was this segment created
-      Credential:
-        $ref: '#/definitions/__string'
-        description: The GCM API key from Google.
-      Enabled:
-        $ref: '#/definitions/__boolean'
-        description: If the channel is enabled for sending messages.
-      HasCredential:
-        $ref: '#/definitions/__boolean'
-        description: Not used. Retained for backwards compatibility.
-      Id:
-        $ref: '#/definitions/__string'
-        description: Channel ID. Not used. Present only for backwards compatibility.
-      IsArchived:
-        $ref: '#/definitions/__boolean'
-        description: Is this channel archived
-      LastModifiedBy:
-        $ref: '#/definitions/__string'
-        description: Who last updated this entry
-      LastModifiedDate:
-        $ref: '#/definitions/__string'
-        description: Last date this was updated
-      Platform:
-        $ref: '#/definitions/__string'
-        description: The platform type. Will be GCM
-      Version:
-        $ref: '#/definitions/__integer'
-        description: Version of channel
-    description: Google Cloud Messaging channel definition
-  GCMMessage:
-    type: object
-    properties:
-      Action:
-        $ref: '#/definitions/Action'
-        description: 'The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user''s device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL'
-      Body:
-        $ref: '#/definitions/__string'
-        description: The message body of the notification.
-      CollapseKey:
-        $ref: '#/definitions/__string'
-        description: 'This parameter identifies a group of messages (e.g., with collapse_key: "Updates Available") that can be collapsed, so that only the last message gets sent when delivery can be resumed. This is intended to avoid sending too many of the same messages when the device comes back online or becomes active.'
-      Data:
-        $ref: '#/definitions/MapOf__string'
-        description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
-      IconReference:
-        $ref: '#/definitions/__string'
-        description: The icon image name of the asset saved in your application.
-      ImageIconUrl:
-        $ref: '#/definitions/__string'
-        description: The URL that points to an image used as the large icon to the notification content view.
-      ImageUrl:
-        $ref: '#/definitions/__string'
-        description: The URL that points to an image used in the push notification.
-      Priority:
-        $ref: '#/definitions/__string'
-        description: |-
-          The message priority. Amazon Pinpoint uses this value to set the FCM or GCM priority parameter when it sends the message. Accepts the following values:
-
-          "Normal" - Messages might be delayed. Delivery is optimized for battery usage on the receiving device. Use normal priority unless immediate delivery is required.
-
-          "High" - Messages are sent immediately and might wake a sleeping device.
-
-          The equivalent values for APNs messages are "5" and "10". Amazon Pinpoint accepts these values here and converts them.
-
-          For more information, see About FCM Messages in the Firebase documentation.
-      RawContent:
-        $ref: '#/definitions/__string'
-        description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
-      RestrictedPackageName:
-        $ref: '#/definitions/__string'
-        description: This parameter specifies the package name of the application where the registration tokens must match in order to receive the message.
-      SilentPush:
-        $ref: '#/definitions/__boolean'
-        description: Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
-      SmallImageIconUrl:
-        $ref: '#/definitions/__string'
-        description: The URL that points to an image used as the small icon for the notification which will be used to represent the notification in the status bar and content view
-      Sound:
-        $ref: '#/definitions/__string'
-        description: 'Indicates a sound to play when the device receives the notification. Supports default, or the filename of a sound resource bundled in the app. Android sound files must reside in /res/raw/'
-      Substitutions:
-        $ref: '#/definitions/MapOfListOf__string'
-        description: Default message substitutions. Can be overridden by individual address substitutions.
-      TimeToLive:
-        $ref: '#/definitions/__integer'
-        description: 'The length of time (in seconds) that FCM or GCM stores and attempts to deliver the message. If unspecified, the value defaults to the maximum, which is 2,419,200 seconds (28 days). Amazon Pinpoint uses this value to set the FCM or GCM time_to_live parameter.'
-      Title:
-        $ref: '#/definitions/__string'
-        description: The message title that displays above the message on the user's device.
-      Url:
-        $ref: '#/definitions/__string'
-        description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
-    description: GCM Message.
   GPSCoordinates:
     type: object
     properties:
@@ -5495,349 +6645,26 @@ definitions:
         $ref: '#/definitions/__double'
         description: Range in kilometers from the coordinate.
     description: GPS point location dimension
-  GetAdmChannelRequest:
-    type: object
-    properties: {}
-  GetAdmChannelResponse:
-    type: object
-    required:
-      - ADMChannelResponse
-    properties:
-      ADMChannelResponse:
-        $ref: '#/definitions/ADMChannelResponse'
-  GetApnsChannelRequest:
-    type: object
-    properties: {}
-  GetApnsChannelResponse:
-    type: object
-    required:
-      - APNSChannelResponse
-    properties:
-      APNSChannelResponse:
-        $ref: '#/definitions/APNSChannelResponse'
-  GetApnsSandboxChannelRequest:
-    type: object
-    properties: {}
-  GetApnsSandboxChannelResponse:
-    type: object
-    required:
-      - APNSSandboxChannelResponse
-    properties:
-      APNSSandboxChannelResponse:
-        $ref: '#/definitions/APNSSandboxChannelResponse'
-  GetApnsVoipChannelRequest:
-    type: object
-    properties: {}
-  GetApnsVoipChannelResponse:
-    type: object
-    required:
-      - APNSVoipChannelResponse
-    properties:
-      APNSVoipChannelResponse:
-        $ref: '#/definitions/APNSVoipChannelResponse'
-  GetApnsVoipSandboxChannelRequest:
-    type: object
-    properties: {}
-  GetApnsVoipSandboxChannelResponse:
-    type: object
-    required:
-      - APNSVoipSandboxChannelResponse
-    properties:
-      APNSVoipSandboxChannelResponse:
-        $ref: '#/definitions/APNSVoipSandboxChannelResponse'
-  GetAppRequest:
-    type: object
-    properties: {}
-  GetAppResponse:
-    type: object
-    required:
-      - ApplicationResponse
-    properties:
-      ApplicationResponse:
-        $ref: '#/definitions/ApplicationResponse'
-  GetApplicationSettingsRequest:
-    type: object
-    properties: {}
-  GetApplicationSettingsResponse:
-    type: object
-    required:
-      - ApplicationSettingsResource
-    properties:
-      ApplicationSettingsResource:
-        $ref: '#/definitions/ApplicationSettingsResource'
-  GetAppsRequest:
-    type: object
-    properties: {}
-  GetAppsResponse:
-    type: object
-    required:
-      - ApplicationsResponse
-    properties:
-      ApplicationsResponse:
-        $ref: '#/definitions/ApplicationsResponse'
-  GetBaiduChannelRequest:
-    type: object
-    properties: {}
-  GetBaiduChannelResponse:
-    type: object
-    required:
-      - BaiduChannelResponse
-    properties:
-      BaiduChannelResponse:
-        $ref: '#/definitions/BaiduChannelResponse'
-  GetCampaignActivitiesRequest:
-    type: object
-    properties: {}
-  GetCampaignActivitiesResponse:
-    type: object
-    required:
-      - ActivitiesResponse
-    properties:
-      ActivitiesResponse:
-        $ref: '#/definitions/ActivitiesResponse'
-  GetCampaignRequest:
-    type: object
-    properties: {}
-  GetCampaignResponse:
-    type: object
-    required:
-      - CampaignResponse
-    properties:
-      CampaignResponse:
-        $ref: '#/definitions/CampaignResponse'
-  GetCampaignVersionRequest:
-    type: object
-    properties: {}
-  GetCampaignVersionResponse:
-    type: object
-    required:
-      - CampaignResponse
-    properties:
-      CampaignResponse:
-        $ref: '#/definitions/CampaignResponse'
-  GetCampaignVersionsRequest:
-    type: object
-    properties: {}
-  GetCampaignVersionsResponse:
-    type: object
-    required:
-      - CampaignsResponse
-    properties:
-      CampaignsResponse:
-        $ref: '#/definitions/CampaignsResponse'
-  GetCampaignsRequest:
-    type: object
-    properties: {}
-  GetCampaignsResponse:
-    type: object
-    required:
-      - CampaignsResponse
-    properties:
-      CampaignsResponse:
-        $ref: '#/definitions/CampaignsResponse'
-  GetChannelsRequest:
-    type: object
-    properties: {}
-  GetChannelsResponse:
-    type: object
-    required:
-      - ChannelsResponse
-    properties:
-      ChannelsResponse:
-        $ref: '#/definitions/ChannelsResponse'
-  GetEmailChannelRequest:
-    type: object
-    properties: {}
-  GetEmailChannelResponse:
-    type: object
-    required:
-      - EmailChannelResponse
-    properties:
-      EmailChannelResponse:
-        $ref: '#/definitions/EmailChannelResponse'
-  GetEndpointRequest:
-    type: object
-    properties: {}
-  GetEndpointResponse:
-    type: object
-    required:
-      - EndpointResponse
-    properties:
-      EndpointResponse:
-        $ref: '#/definitions/EndpointResponse'
-  GetEventStreamRequest:
-    type: object
-    properties: {}
-  GetEventStreamResponse:
-    type: object
-    required:
-      - EventStream
-    properties:
-      EventStream:
-        $ref: '#/definitions/EventStream'
-  GetExportJobRequest:
-    type: object
-    properties: {}
-  GetExportJobResponse:
-    type: object
-    required:
-      - ExportJobResponse
-    properties:
-      ExportJobResponse:
-        $ref: '#/definitions/ExportJobResponse'
-  GetExportJobsRequest:
-    type: object
-    properties: {}
-  GetExportJobsResponse:
-    type: object
-    required:
-      - ExportJobsResponse
-    properties:
-      ExportJobsResponse:
-        $ref: '#/definitions/ExportJobsResponse'
-  GetGcmChannelRequest:
-    type: object
-    properties: {}
-  GetGcmChannelResponse:
-    type: object
-    required:
-      - GCMChannelResponse
-    properties:
-      GCMChannelResponse:
-        $ref: '#/definitions/GCMChannelResponse'
-  GetImportJobRequest:
-    type: object
-    properties: {}
-  GetImportJobResponse:
-    type: object
-    required:
-      - ImportJobResponse
-    properties:
-      ImportJobResponse:
-        $ref: '#/definitions/ImportJobResponse'
-  GetImportJobsRequest:
-    type: object
-    properties: {}
-  GetImportJobsResponse:
-    type: object
-    required:
-      - ImportJobsResponse
-    properties:
-      ImportJobsResponse:
-        $ref: '#/definitions/ImportJobsResponse'
-  GetSegmentExportJobsRequest:
-    type: object
-    properties: {}
-  GetSegmentExportJobsResponse:
-    type: object
-    required:
-      - ExportJobsResponse
-    properties:
-      ExportJobsResponse:
-        $ref: '#/definitions/ExportJobsResponse'
-  GetSegmentImportJobsRequest:
-    type: object
-    properties: {}
-  GetSegmentImportJobsResponse:
-    type: object
-    required:
-      - ImportJobsResponse
-    properties:
-      ImportJobsResponse:
-        $ref: '#/definitions/ImportJobsResponse'
-  GetSegmentRequest:
-    type: object
-    properties: {}
-  GetSegmentResponse:
-    type: object
-    required:
-      - SegmentResponse
-    properties:
-      SegmentResponse:
-        $ref: '#/definitions/SegmentResponse'
-  GetSegmentVersionRequest:
-    type: object
-    properties: {}
-  GetSegmentVersionResponse:
-    type: object
-    required:
-      - SegmentResponse
-    properties:
-      SegmentResponse:
-        $ref: '#/definitions/SegmentResponse'
-  GetSegmentVersionsRequest:
-    type: object
-    properties: {}
-  GetSegmentVersionsResponse:
-    type: object
-    required:
-      - SegmentsResponse
-    properties:
-      SegmentsResponse:
-        $ref: '#/definitions/SegmentsResponse'
-  GetSegmentsRequest:
-    type: object
-    properties: {}
-  GetSegmentsResponse:
-    type: object
-    required:
-      - SegmentsResponse
-    properties:
-      SegmentsResponse:
-        $ref: '#/definitions/SegmentsResponse'
-  GetSmsChannelRequest:
-    type: object
-    properties: {}
-  GetSmsChannelResponse:
-    type: object
-    required:
-      - SMSChannelResponse
-    properties:
-      SMSChannelResponse:
-        $ref: '#/definitions/SMSChannelResponse'
-  GetUserEndpointsRequest:
-    type: object
-    properties: {}
-  GetUserEndpointsResponse:
-    type: object
-    required:
-      - EndpointsResponse
-    properties:
-      EndpointsResponse:
-        $ref: '#/definitions/EndpointsResponse'
-  ImportJobRequest:
+  ImportJobsResponse:
     type: object
     properties:
-      DefineSegment:
-        $ref: '#/definitions/__boolean'
-        description: Sets whether the endpoints create a segment when they are imported.
-      ExternalId:
+      Item:
+        $ref: '#/definitions/ListOfImportJobResponse'
+        description: A list of import jobs for the application.
+      NextToken:
         $ref: '#/definitions/__string'
-        description: '(Deprecated) Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.'
-      Format:
-        $ref: '#/definitions/Format'
-        description: |-
-          The format of the files that contain the endpoint definitions.
-          Valid values: CSV, JSON
-      RegisterEndpoints:
-        $ref: '#/definitions/__boolean'
-        description: Sets whether the endpoints are registered with Amazon Pinpoint when they are imported.
-      RoleArn:
+        description: The string that you use in a subsequent request to get the next page of results in a paginated response.
+    description: Import job list.
+  SegmentsResponse:
+    type: object
+    properties:
+      Item:
+        $ref: '#/definitions/ListOfSegmentResponse'
+        description: The list of segments.
+      NextToken:
         $ref: '#/definitions/__string'
-        description: The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that contains the endpoints to import.
-      S3Url:
-        $ref: '#/definitions/__string'
-        description: |-
-          The URL of the S3 bucket that contains the segment information to import. The location can be a folder or a single file. The URL should use the following format: s3://bucket-name/folder-name/file-name
-
-          Amazon Pinpoint imports endpoints from this location and any subfolders it contains.
-      SegmentId:
-        $ref: '#/definitions/__string'
-        description: The ID of the segment to update if the import job is meant to update an existing segment.
-      SegmentName:
-        $ref: '#/definitions/__string'
-        description: A custom name for the segment created by the import job. Use if DefineSegment is true.
-    description: Import job request.
+        description: An identifier used to retrieve the next page of results. The token is null if no additional pages exist.
+    description: Segments in your account.
   ImportJobResource:
     type: object
     properties:
@@ -5871,79 +6698,25 @@ definitions:
         $ref: '#/definitions/__string'
         description: A custom name for the segment created by the import job. Use if DefineSegment is true.
     description: Import job resource
-  ImportJobResponse:
-    type: object
-    properties:
-      ApplicationId:
-        $ref: '#/definitions/__string'
-        description: The unique ID of the application to which the import job applies.
-      CompletedPieces:
-        $ref: '#/definitions/__integer'
-        description: The number of pieces that have successfully imported as of the time of the request.
-      CompletionDate:
-        $ref: '#/definitions/__string'
-        description: The date the import job completed in ISO 8601 format.
-      CreationDate:
-        $ref: '#/definitions/__string'
-        description: The date the import job was created in ISO 8601 format.
-      Definition:
-        $ref: '#/definitions/ImportJobResource'
-        description: The import job settings.
-      FailedPieces:
-        $ref: '#/definitions/__integer'
-        description: The number of pieces that have failed to import as of the time of the request.
-      Failures:
-        $ref: '#/definitions/ListOf__string'
-        description: 'Provides up to 100 of the first failed entries for the job, if any exist.'
-      Id:
-        $ref: '#/definitions/__string'
-        description: The unique ID of the import job.
-      JobStatus:
-        $ref: '#/definitions/JobStatus'
-        description: |-
-          The status of the import job.
-          Valid values: CREATED, INITIALIZING, PROCESSING, COMPLETING, COMPLETED, FAILING, FAILED
-
-          The job status is FAILED if one or more pieces failed to import.
-      TotalFailures:
-        $ref: '#/definitions/__integer'
-        description: 'The number of endpoints that failed to import; for example, because of syntax errors.'
-      TotalPieces:
-        $ref: '#/definitions/__integer'
-        description: The total number of pieces that must be imported to finish the job. Each piece is an approximately equal portion of the endpoints to import.
-      TotalProcessed:
-        $ref: '#/definitions/__integer'
-        description: The number of endpoints that were processed by the import job.
-      Type:
-        $ref: '#/definitions/__string'
-        description: The job type. Will be Import.
-    description: Import job response.
-  ImportJobsResponse:
-    type: object
-    properties:
-      Item:
-        $ref: '#/definitions/ListOfImportJobResponse'
-        description: A list of import jobs for the application.
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: The string that you use in a subsequent request to get the next page of results in a paginated response.
-    description: Import job list.
+  ListOfImportJobResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ImportJobResponse'
   Include:
     type: string
     enum:
       - ALL
       - ANY
       - NONE
-  InternalServerErrorException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message that's returned from the API.
-      RequestID:
-        $ref: '#/definitions/__string'
-        description: The unique message body ID.
-    description: Simple message object.
+  MapOfEventItemResponse:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/EventItemResponse'
   ItemResponse:
     type: object
     properties:
@@ -5954,16 +6727,6 @@ definitions:
         $ref: '#/definitions/MapOfEventItemResponse'
         description: 'Events item response is a multipart response object per event Id, with eventId as the key and EventItemResponse object as the value'
     description: The endpoint and events combined response definition
-  JobStatus:
-    type: string
-    enum:
-      - CREATED
-      - INITIALIZING
-      - PROCESSING
-      - COMPLETING
-      - COMPLETED
-      - FAILING
-      - FAILED
   Message:
     type: object
     properties:
@@ -6023,31 +6786,24 @@ definitions:
         $ref: '#/definitions/__string'
         description: The unique message body ID.
     description: Simple message object.
-  MessageConfiguration:
-    type: object
-    properties:
-      ADMMessage:
-        $ref: '#/definitions/Message'
-        description: The message that the campaign delivers to ADM channels. Overrides the default message.
-      APNSMessage:
-        $ref: '#/definitions/Message'
-        description: The message that the campaign delivers to APNS channels. Overrides the default message.
-      BaiduMessage:
-        $ref: '#/definitions/Message'
-        description: The message that the campaign delivers to Baidu channels. Overrides the default message.
-      DefaultMessage:
-        $ref: '#/definitions/Message'
-        description: The default message for all channels.
-      EmailMessage:
-        $ref: '#/definitions/CampaignEmailMessage'
-        description: The email message configuration.
-      GCMMessage:
-        $ref: '#/definitions/Message'
-        description: The message that the campaign delivers to GCM channels. Overrides the default message.
-      SMSMessage:
-        $ref: '#/definitions/CampaignSmsMessage'
-        description: The SMS message configuration.
-    description: Message configuration for a campaign.
+  MapOfAddressConfiguration:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/AddressConfiguration'
+  MapOfEndpointSendConfiguration:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/EndpointSendConfiguration'
   MessageRequest:
     type: object
     properties:
@@ -6067,6 +6823,24 @@ definitions:
         $ref: '#/definitions/__string'
         description: A unique ID that you can use to trace a message. This ID is visible to recipients.
     description: Send message request.
+  MapOfEndpointMessageResult:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/EndpointMessageResult'
+  MapOfMessageResult:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/MessageResult'
   MessageResponse:
     type: object
     properties:
@@ -6127,21 +6901,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: If token was updated as part of delivery. (This is GCM Specific)
     description: The result from sending a message to an address.
-  MessageType:
-    type: string
-    enum:
-      - TRANSACTIONAL
-      - PROMOTIONAL
-  MethodNotAllowedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message that's returned from the API.
-      RequestID:
-        $ref: '#/definitions/__string'
-        description: The unique message body ID.
-    description: Simple message object.
   MetricDimension:
     type: object
     properties:
@@ -6152,21 +6911,6 @@ definitions:
         $ref: '#/definitions/__double'
         description: Value to be compared.
     description: Custom metric dimension
-  Mode:
-    type: string
-    enum:
-      - DELIVERY
-      - FILTER
-  NotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message that's returned from the API.
-      RequestID:
-        $ref: '#/definitions/__string'
-        description: The unique message body ID.
-    description: Simple message object.
   NumberValidateRequest:
     type: object
     properties:
@@ -6223,103 +6967,24 @@ definitions:
         $ref: '#/definitions/__string'
         description: The postal code for the location where the phone number was originally registered.
     description: Phone Number Information response.
-  PhoneNumberValidateRequest:
-    type: object
-    required:
-      - NumberValidateRequest
-    properties:
-      NumberValidateRequest:
-        $ref: '#/definitions/NumberValidateRequest'
-  PhoneNumberValidateResponse:
-    type: object
-    required:
-      - NumberValidateResponse
-    properties:
-      NumberValidateResponse:
-        $ref: '#/definitions/NumberValidateResponse'
-  PublicEndpoint:
+  WriteEventStream:
     type: object
     properties:
-      Address:
-        $ref: '#/definitions/__string'
-        description: 'The unique identifier for the recipient. For example, an address could be a device token or an endpoint ID.'
-      Attributes:
-        $ref: '#/definitions/MapOfListOf__string'
-        description: Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
-      ChannelType:
-        $ref: '#/definitions/ChannelType'
-        description: |-
-          The channel type.
-
-          Valid values: APNS, GCM
-      Demographic:
-        $ref: '#/definitions/EndpointDemographic'
-        description: The endpoint demographic attributes.
-      EffectiveDate:
-        $ref: '#/definitions/__string'
-        description: The date and time when the endpoint was last updated.
-      EndpointStatus:
-        $ref: '#/definitions/__string'
-        description: 'The status of the endpoint. If the update fails, the value is INACTIVE. If the endpoint is updated successfully, the value is ACTIVE.'
-      Location:
-        $ref: '#/definitions/EndpointLocation'
-        description: The endpoint location attributes.
-      Metrics:
-        $ref: '#/definitions/MapOf__double'
-        description: Custom metrics that your app reports to Amazon Pinpoint.
-      OptOut:
+      DestinationStreamArn:
         $ref: '#/definitions/__string'
         description: |-
-          Indicates whether a user has opted out of receiving messages with one of the following values:
-
-          ALL - User has opted out of all messages.
-
-          NONE - Users has not opted out and receives all messages.
-      RequestId:
+          The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.
+           Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME
+           Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
+      RoleArn:
         $ref: '#/definitions/__string'
-        description: A unique identifier that is generated each time the endpoint is updated.
-      User:
-        $ref: '#/definitions/EndpointUser'
-        description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
-    description: Public endpoint attributes.
-  PutEventStreamRequest:
-    type: object
-    required:
-      - WriteEventStream
-    properties:
-      WriteEventStream:
-        $ref: '#/definitions/WriteEventStream'
-  PutEventStreamResponse:
-    type: object
-    required:
-      - EventStream
-    properties:
-      EventStream:
-        $ref: '#/definitions/EventStream'
-  PutEventsRequest:
-    type: object
-    required:
-      - EventsRequest
-    properties:
-      EventsRequest:
-        $ref: '#/definitions/EventsRequest'
-  PutEventsResponse:
-    type: object
-    required:
-      - EventsResponse
-    properties:
-      EventsResponse:
-        $ref: '#/definitions/EventsResponse'
-  QuietTime:
-    type: object
-    properties:
-      End:
-        $ref: '#/definitions/__string'
-        description: The default end time for quiet time in ISO 8601 format.
-      Start:
-        $ref: '#/definitions/__string'
-        description: The default start time for quiet time in ISO 8601 format.
-    description: Quiet Time
+        description: The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
+    description: Request to save an EventStream.
+  RecencyType:
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
   RecencyDimension:
     type: object
     properties:
@@ -6335,25 +7000,13 @@ definitions:
           ACTIVE - Users who have used your app within the specified duration are included in the segment.
           INACTIVE - Users who have not used your app within the specified duration are included in the segment.
     description: Define how a segment based on recency of use.
-  RecencyType:
-    type: string
-    enum:
-      - ACTIVE
-      - INACTIVE
-  RemoveAttributesRequest:
+  UpdateAttributesRequest:
     type: object
-    required:
-      - UpdateAttributesRequest
     properties:
-      UpdateAttributesRequest:
-        $ref: '#/definitions/UpdateAttributesRequest'
-  RemoveAttributesResponse:
-    type: object
-    required:
-      - AttributesResource
-    properties:
-      AttributesResource:
-        $ref: '#/definitions/AttributesResource'
+      Blacklist:
+        $ref: '#/definitions/ListOf__string'
+        description: The GLOB wildcard for removing the attributes in the application
+    description: Update attributes request
   SMSChannelRequest:
     type: object
     properties:
@@ -6367,133 +7020,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: ShortCode registered with phone provider.
     description: SMS Channel Request
-  SMSChannelResponse:
-    type: object
-    properties:
-      ApplicationId:
-        $ref: '#/definitions/__string'
-        description: The unique ID of the application to which the SMS channel belongs.
-      CreationDate:
-        $ref: '#/definitions/__string'
-        description: The date that the settings were last updated in ISO 8601 format.
-      Enabled:
-        $ref: '#/definitions/__boolean'
-        description: If the channel is enabled for sending messages.
-      HasCredential:
-        $ref: '#/definitions/__boolean'
-        description: Not used. Retained for backwards compatibility.
-      Id:
-        $ref: '#/definitions/__string'
-        description: 'Channel ID. Not used, only for backwards compatibility.'
-      IsArchived:
-        $ref: '#/definitions/__boolean'
-        description: Is this channel archived
-      LastModifiedBy:
-        $ref: '#/definitions/__string'
-        description: Who last updated this entry
-      LastModifiedDate:
-        $ref: '#/definitions/__string'
-        description: Last date this was updated
-      Platform:
-        $ref: '#/definitions/__string'
-        description: Platform type. Will be "SMS"
-      PromotionalMessagesPerSecond:
-        $ref: '#/definitions/__integer'
-        description: Promotional messages per second that can be sent
-      SenderId:
-        $ref: '#/definitions/__string'
-        description: Sender identifier of your messages.
-      ShortCode:
-        $ref: '#/definitions/__string'
-        description: The short code registered with the phone provider.
-      TransactionalMessagesPerSecond:
-        $ref: '#/definitions/__integer'
-        description: Transactional messages per second that can be sent
-      Version:
-        $ref: '#/definitions/__integer'
-        description: Version of channel
-    description: SMS Channel Response.
-  SMSMessage:
-    type: object
-    properties:
-      Body:
-        $ref: '#/definitions/__string'
-        description: The body of the SMS message.
-      Keyword:
-        $ref: '#/definitions/__string'
-        description: The SMS program name that you provided to AWS Support when you requested your dedicated number.
-      MessageType:
-        $ref: '#/definitions/MessageType'
-        description: Is this a transaction priority message or lower priority.
-      OriginationNumber:
-        $ref: '#/definitions/__string'
-        description: 'The phone number that the SMS message originates from. Specify one of the dedicated long codes or short codes that you requested from AWS Support and that is assigned to your account. If this attribute is not specified, Amazon Pinpoint randomly assigns a long code.'
-      SenderId:
-        $ref: '#/definitions/__string'
-        description: The sender ID that is shown as the message sender on the recipient's device. Support for sender IDs varies by country or region.
-      Substitutions:
-        $ref: '#/definitions/MapOfListOf__string'
-        description: Default message substitutions. Can be overridden by individual address substitutions.
-    description: SMS Message.
-  Schedule:
-    type: object
-    properties:
-      EndTime:
-        $ref: '#/definitions/__string'
-        description: The scheduled time that the campaign ends in ISO 8601 format.
-      Frequency:
-        $ref: '#/definitions/Frequency'
-        description: |-
-          How often the campaign delivers messages.
-
-          Valid values: ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
-      IsLocalTime:
-        $ref: '#/definitions/__boolean'
-        description: Indicates whether the campaign schedule takes effect according to each user's local time.
-      QuietTime:
-        $ref: '#/definitions/QuietTime'
-        description: The time during which the campaign sends no messages.
-      StartTime:
-        $ref: '#/definitions/__string'
-        description: The scheduled time that the campaign begins in ISO 8601 format.
-      Timezone:
-        $ref: '#/definitions/__string'
-        description: |-
-          The starting UTC offset for the schedule if the value for isLocalTime is true
-
-          Valid values: 
-          UTC
-          UTC+01
-          UTC+02
-          UTC+03
-          UTC+03:30
-          UTC+04
-          UTC+04:30
-          UTC+05
-          UTC+05:30
-          UTC+05:45
-          UTC+06
-          UTC+06:30
-          UTC+07
-          UTC+08
-          UTC+09
-          UTC+09:30
-          UTC+10
-          UTC+10:30
-          UTC+11
-          UTC+12
-          UTC+13
-          UTC-02
-          UTC-03
-          UTC-04
-          UTC-05
-          UTC-06
-          UTC-07
-          UTC-08
-          UTC-09
-          UTC-10
-          UTC-11
-    description: Shcedule that defines when a campaign is run.
   SegmentBehaviors:
     type: object
     properties:
@@ -6501,6 +7027,19 @@ definitions:
         $ref: '#/definitions/RecencyDimension'
         description: The recency of use.
     description: Segment behavior dimensions
+  SetDimension:
+    type: object
+    properties:
+      DimensionType:
+        $ref: '#/definitions/DimensionType'
+        description: |-
+          The type of dimension:
+          INCLUSIVE - Endpoints that match the criteria are included in the segment.
+          EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
+      Values:
+        $ref: '#/definitions/ListOf__string'
+        description: 'The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type.'
+    description: Dimension specification of a segment.
   SegmentDemographics:
     type: object
     properties:
@@ -6523,6 +7062,34 @@ definitions:
         $ref: '#/definitions/SetDimension'
         description: The device platform criteria for the segment.
     description: Segment demographic dimensions
+  MapOfAttributeDimension:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/AttributeDimension'
+  SegmentLocation:
+    type: object
+    properties:
+      Country:
+        $ref: '#/definitions/SetDimension'
+        description: The country filter according to ISO 3166-1 Alpha-2 codes.
+      GPSPoint:
+        $ref: '#/definitions/GPSPointDimension'
+        description: The GPS Point dimension.
+    description: Segment location dimensions
+  MapOfMetricDimension:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/MetricDimension'
   SegmentDimensions:
     type: object
     properties:
@@ -6545,6 +7112,26 @@ definitions:
         $ref: '#/definitions/MapOfAttributeDimension'
         description: Custom segment user attributes.
     description: Segment dimensions
+  ListOfSegmentDimensions:
+    type: array
+    items:
+      $ref: '#/definitions/SegmentDimensions'
+  ListOfSegmentReference:
+    type: array
+    items:
+      $ref: '#/definitions/SegmentReference'
+  SourceType:
+    type: string
+    enum:
+      - ALL
+      - ANY
+      - NONE
+  Type:
+    type: string
+    enum:
+      - ALL
+      - ANY
+      - NONE
   SegmentGroup:
     type: object
     properties:
@@ -6561,6 +7148,10 @@ definitions:
         $ref: '#/definitions/Type'
         description: 'Specify how to handle multiple segment dimensions. For example, if you specify three dimensions, should the resulting segment include endpoints that are matched by all, any, or none of the dimensions? Acceptable values: ALL, ANY, or NONE.'
     description: Segment group definition.
+  ListOfSegmentGroup:
+    type: array
+    items:
+      $ref: '#/definitions/SegmentGroup'
   SegmentGroupList:
     type: object
     properties:
@@ -6571,6 +7162,15 @@ definitions:
         $ref: '#/definitions/Include'
         description: 'Specify how to handle multiple segment groups. For example, if the segment includes three segment groups, should the resulting segment include endpoints that are matched by all, any, or none of the segment groups you created. Acceptable values: ALL, ANY, or NONE.'
     description: Segment group definition.
+  MapOf__integer:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__integer'
   SegmentImportResource:
     type: object
     properties:
@@ -6595,16 +7195,6 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The number of endpoints that were successfully imported to create this segment.
     description: Segment import definition.
-  SegmentLocation:
-    type: object
-    properties:
-      Country:
-        $ref: '#/definitions/SetDimension'
-        description: The country filter according to ISO 3166-1 Alpha-2 codes.
-      GPSPoint:
-        $ref: '#/definitions/GPSPointDimension'
-        description: The GPS Point dimension.
-    description: Segment location dimensions
   SegmentReference:
     type: object
     properties:
@@ -6615,72 +7205,15 @@ definitions:
         $ref: '#/definitions/__integer'
         description: If specified contains a specific version of the segment included.
     description: Segment reference.
-  SegmentResponse:
-    type: object
-    properties:
-      ApplicationId:
-        $ref: '#/definitions/__string'
-        description: The ID of the application that the segment applies to.
-      CreationDate:
-        $ref: '#/definitions/__string'
-        description: The date and time when the segment was created.
-      Dimensions:
-        $ref: '#/definitions/SegmentDimensions'
-        description: The segment dimensions attributes.
-      Id:
-        $ref: '#/definitions/__string'
-        description: The unique segment ID.
-      ImportDefinition:
-        $ref: '#/definitions/SegmentImportResource'
-        description: The import job settings.
-      LastModifiedDate:
-        $ref: '#/definitions/__string'
-        description: The date and time when the segment was last modified.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the segment.
-      SegmentGroups:
-        $ref: '#/definitions/SegmentGroupList'
-        description: 'A segment group, which consists of zero or more source segments, plus dimensions that are applied to those source segments.'
-      SegmentType:
-        $ref: '#/definitions/SegmentType'
-        description: |-
-          The segment type:
-          DIMENSIONAL - A dynamic segment built from selection criteria based on endpoint data reported by your app. You create this type of segment by using the segment builder in the Amazon Pinpoint console or by making a POST request to the segments resource.
-          IMPORT - A static segment built from an imported set of endpoint definitions. You create this type of segment by importing a segment in the Amazon Pinpoint console or by making a POST request to the jobs/import resource.
-      Version:
-        $ref: '#/definitions/__integer'
-        description: The segment version number.
-    description: Segment definition.
   SegmentType:
     type: string
     enum:
       - DIMENSIONAL
       - IMPORT
-  SegmentsResponse:
-    type: object
-    properties:
-      Item:
-        $ref: '#/definitions/ListOfSegmentResponse'
-        description: The list of segments.
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: An identifier used to retrieve the next page of results. The token is null if no additional pages exist.
-    description: Segments in your account.
-  SendMessagesRequest:
-    type: object
-    required:
-      - MessageRequest
-    properties:
-      MessageRequest:
-        $ref: '#/definitions/MessageRequest'
-  SendMessagesResponse:
-    type: object
-    required:
-      - MessageResponse
-    properties:
-      MessageResponse:
-        $ref: '#/definitions/MessageResponse'
+  ListOfSegmentResponse:
+    type: array
+    items:
+      $ref: '#/definitions/SegmentResponse'
   SendUsersMessageRequest:
     type: object
     properties:
@@ -6697,6 +7230,15 @@ definitions:
         $ref: '#/definitions/MapOfEndpointSendConfiguration'
         description: 'A map that associates user IDs with EndpointSendConfiguration objects. Within an EndpointSendConfiguration object, you can tailor the message for a user by specifying message overrides or substitutions.'
     description: Send message request.
+  MapOfMapOfEndpointMessageResult:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/MapOfEndpointMessageResult'
   SendUsersMessageResponse:
     type: object
     properties:
@@ -6710,65 +7252,6 @@ definitions:
         $ref: '#/definitions/MapOfMapOfEndpointMessageResult'
         description: 'An object that shows the endpoints that were messaged for each user. The object provides a list of user IDs. For each user ID, it provides the endpoint IDs that were messaged. For each endpoint ID, it provides an EndpointMessageResult object.'
     description: User send message response.
-  SendUsersMessagesRequest:
-    type: object
-    required:
-      - SendUsersMessageRequest
-    properties:
-      SendUsersMessageRequest:
-        $ref: '#/definitions/SendUsersMessageRequest'
-  SendUsersMessagesResponse:
-    type: object
-    required:
-      - SendUsersMessageResponse
-    properties:
-      SendUsersMessageResponse:
-        $ref: '#/definitions/SendUsersMessageResponse'
-  Session:
-    type: object
-    properties:
-      Duration:
-        $ref: '#/definitions/__integer'
-        description: Session duration in millis
-      Id:
-        $ref: '#/definitions/__string'
-        description: A unique identifier for the session.
-      StartTimestamp:
-        $ref: '#/definitions/__string'
-        description: The date and time when the session began.
-      StopTimestamp:
-        $ref: '#/definitions/__string'
-        description: The date and time when the session ended.
-    description: Information about a session.
-  SetDimension:
-    type: object
-    properties:
-      DimensionType:
-        $ref: '#/definitions/DimensionType'
-        description: |-
-          The type of dimension:
-          INCLUSIVE - Endpoints that match the criteria are included in the segment.
-          EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
-      Values:
-        $ref: '#/definitions/ListOf__string'
-        description: 'The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type.'
-    description: Dimension specification of a segment.
-  SourceType:
-    type: string
-    enum:
-      - ALL
-      - ANY
-      - NONE
-  TooManyRequestsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message that's returned from the API.
-      RequestID:
-        $ref: '#/definitions/__string'
-        description: The unique message body ID.
-    description: Simple message object.
   TreatmentResource:
     type: object
     properties:
@@ -6794,215 +7277,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: The custom name of a variation of the campaign used for A/B testing.
     description: Treatment resource
-  Type:
-    type: string
-    enum:
-      - ALL
-      - ANY
-      - NONE
-  UpdateAdmChannelRequest:
-    type: object
-    required:
-      - ADMChannelRequest
-    properties:
-      ADMChannelRequest:
-        $ref: '#/definitions/ADMChannelRequest'
-  UpdateAdmChannelResponse:
-    type: object
-    required:
-      - ADMChannelResponse
-    properties:
-      ADMChannelResponse:
-        $ref: '#/definitions/ADMChannelResponse'
-  UpdateApnsChannelRequest:
-    type: object
-    required:
-      - APNSChannelRequest
-    properties:
-      APNSChannelRequest:
-        $ref: '#/definitions/APNSChannelRequest'
-  UpdateApnsChannelResponse:
-    type: object
-    required:
-      - APNSChannelResponse
-    properties:
-      APNSChannelResponse:
-        $ref: '#/definitions/APNSChannelResponse'
-  UpdateApnsSandboxChannelRequest:
-    type: object
-    required:
-      - APNSSandboxChannelRequest
-    properties:
-      APNSSandboxChannelRequest:
-        $ref: '#/definitions/APNSSandboxChannelRequest'
-  UpdateApnsSandboxChannelResponse:
-    type: object
-    required:
-      - APNSSandboxChannelResponse
-    properties:
-      APNSSandboxChannelResponse:
-        $ref: '#/definitions/APNSSandboxChannelResponse'
-  UpdateApnsVoipChannelRequest:
-    type: object
-    required:
-      - APNSVoipChannelRequest
-    properties:
-      APNSVoipChannelRequest:
-        $ref: '#/definitions/APNSVoipChannelRequest'
-  UpdateApnsVoipChannelResponse:
-    type: object
-    required:
-      - APNSVoipChannelResponse
-    properties:
-      APNSVoipChannelResponse:
-        $ref: '#/definitions/APNSVoipChannelResponse'
-  UpdateApnsVoipSandboxChannelRequest:
-    type: object
-    required:
-      - APNSVoipSandboxChannelRequest
-    properties:
-      APNSVoipSandboxChannelRequest:
-        $ref: '#/definitions/APNSVoipSandboxChannelRequest'
-  UpdateApnsVoipSandboxChannelResponse:
-    type: object
-    required:
-      - APNSVoipSandboxChannelResponse
-    properties:
-      APNSVoipSandboxChannelResponse:
-        $ref: '#/definitions/APNSVoipSandboxChannelResponse'
-  UpdateApplicationSettingsRequest:
-    type: object
-    required:
-      - WriteApplicationSettingsRequest
-    properties:
-      WriteApplicationSettingsRequest:
-        $ref: '#/definitions/WriteApplicationSettingsRequest'
-  UpdateApplicationSettingsResponse:
-    type: object
-    required:
-      - ApplicationSettingsResource
-    properties:
-      ApplicationSettingsResource:
-        $ref: '#/definitions/ApplicationSettingsResource'
-  UpdateAttributesRequest:
-    type: object
-    properties:
-      Blacklist:
-        $ref: '#/definitions/ListOf__string'
-        description: The GLOB wildcard for removing the attributes in the application
-    description: Update attributes request
-  UpdateBaiduChannelRequest:
-    type: object
-    required:
-      - BaiduChannelRequest
-    properties:
-      BaiduChannelRequest:
-        $ref: '#/definitions/BaiduChannelRequest'
-  UpdateBaiduChannelResponse:
-    type: object
-    required:
-      - BaiduChannelResponse
-    properties:
-      BaiduChannelResponse:
-        $ref: '#/definitions/BaiduChannelResponse'
-  UpdateCampaignRequest:
-    type: object
-    required:
-      - WriteCampaignRequest
-    properties:
-      WriteCampaignRequest:
-        $ref: '#/definitions/WriteCampaignRequest'
-  UpdateCampaignResponse:
-    type: object
-    required:
-      - CampaignResponse
-    properties:
-      CampaignResponse:
-        $ref: '#/definitions/CampaignResponse'
-  UpdateEmailChannelRequest:
-    type: object
-    required:
-      - EmailChannelRequest
-    properties:
-      EmailChannelRequest:
-        $ref: '#/definitions/EmailChannelRequest'
-  UpdateEmailChannelResponse:
-    type: object
-    required:
-      - EmailChannelResponse
-    properties:
-      EmailChannelResponse:
-        $ref: '#/definitions/EmailChannelResponse'
-  UpdateEndpointRequest:
-    type: object
-    required:
-      - EndpointRequest
-    properties:
-      EndpointRequest:
-        $ref: '#/definitions/EndpointRequest'
-  UpdateEndpointResponse:
-    type: object
-    required:
-      - MessageBody
-    properties:
-      MessageBody:
-        $ref: '#/definitions/MessageBody'
-  UpdateEndpointsBatchRequest:
-    type: object
-    required:
-      - EndpointBatchRequest
-    properties:
-      EndpointBatchRequest:
-        $ref: '#/definitions/EndpointBatchRequest'
-  UpdateEndpointsBatchResponse:
-    type: object
-    required:
-      - MessageBody
-    properties:
-      MessageBody:
-        $ref: '#/definitions/MessageBody'
-  UpdateGcmChannelRequest:
-    type: object
-    required:
-      - GCMChannelRequest
-    properties:
-      GCMChannelRequest:
-        $ref: '#/definitions/GCMChannelRequest'
-  UpdateGcmChannelResponse:
-    type: object
-    required:
-      - GCMChannelResponse
-    properties:
-      GCMChannelResponse:
-        $ref: '#/definitions/GCMChannelResponse'
-  UpdateSegmentRequest:
-    type: object
-    required:
-      - WriteSegmentRequest
-    properties:
-      WriteSegmentRequest:
-        $ref: '#/definitions/WriteSegmentRequest'
-  UpdateSegmentResponse:
-    type: object
-    required:
-      - SegmentResponse
-    properties:
-      SegmentResponse:
-        $ref: '#/definitions/SegmentResponse'
-  UpdateSmsChannelRequest:
-    type: object
-    required:
-      - SMSChannelRequest
-    properties:
-      SMSChannelRequest:
-        $ref: '#/definitions/SMSChannelRequest'
-  UpdateSmsChannelResponse:
-    type: object
-    required:
-      - SMSChannelResponse
-    properties:
-      SMSChannelResponse:
-        $ref: '#/definitions/SMSChannelResponse'
   WriteApplicationSettingsRequest:
     type: object
     properties:
@@ -7019,75 +7293,10 @@ definitions:
         $ref: '#/definitions/QuietTime'
         description: The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own.
     description: Creating application setting request
-  WriteCampaignRequest:
-    type: object
-    properties:
-      AdditionalTreatments:
-        $ref: '#/definitions/ListOfWriteTreatmentResource'
-        description: Treatments that are defined in addition to the default treatment.
-      Description:
-        $ref: '#/definitions/__string'
-        description: A description of the campaign.
-      HoldoutPercent:
-        $ref: '#/definitions/__integer'
-        description: The allocated percentage of end users who will not receive messages from this campaign.
-      Hook:
-        $ref: '#/definitions/CampaignHook'
-        description: Campaign hook information.
-      IsPaused:
-        $ref: '#/definitions/__boolean'
-        description: Indicates whether the campaign is paused. A paused campaign does not send messages unless you resume it by setting IsPaused to false.
-      Limits:
-        $ref: '#/definitions/CampaignLimits'
-        description: The campaign limits settings.
-      MessageConfiguration:
-        $ref: '#/definitions/MessageConfiguration'
-        description: The message configuration settings.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The custom name of the campaign.
-      Schedule:
-        $ref: '#/definitions/Schedule'
-        description: The campaign schedule.
-      SegmentId:
-        $ref: '#/definitions/__string'
-        description: The ID of the segment to which the campaign sends messages.
-      SegmentVersion:
-        $ref: '#/definitions/__integer'
-        description: The version of the segment to which the campaign sends messages.
-      TreatmentDescription:
-        $ref: '#/definitions/__string'
-        description: A custom description for the treatment.
-      TreatmentName:
-        $ref: '#/definitions/__string'
-        description: The custom name of a variation of the campaign used for A/B testing.
-    description: Used to create a campaign.
-  WriteEventStream:
-    type: object
-    properties:
-      DestinationStreamArn:
-        $ref: '#/definitions/__string'
-        description: |-
-          The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.
-           Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME
-           Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
-      RoleArn:
-        $ref: '#/definitions/__string'
-        description: The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
-    description: Request to save an EventStream.
-  WriteSegmentRequest:
-    type: object
-    properties:
-      Dimensions:
-        $ref: '#/definitions/SegmentDimensions'
-        description: The segment dimensions attributes.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of segment
-      SegmentGroups:
-        $ref: '#/definitions/SegmentGroupList'
-        description: 'A segment group, which consists of zero or more source segments, plus dimensions that are applied to those source segments. Your request can only include one segment group. Your request can include either a SegmentGroups object or a Dimensions object, but not both.'
-    description: Segment definition.
+  ListOfWriteTreatmentResource:
+    type: array
+    items:
+      $ref: '#/definitions/WriteTreatmentResource'
   WriteTreatmentResource:
     type: object
     properties:
@@ -7107,217 +7316,8 @@ definitions:
         $ref: '#/definitions/__string'
         description: The custom name of a variation of the campaign used for A/B testing.
     description: Used to create a campaign treatment.
-  __boolean:
-    type: boolean
-  __double:
-    type: number
-    format: double
-  __integer:
-    type: integer
-  ListOfActivityResponse:
-    type: array
-    items:
-      $ref: '#/definitions/ActivityResponse'
-  ListOfApplicationResponse:
-    type: array
-    items:
-      $ref: '#/definitions/ApplicationResponse'
-  ListOfCampaignResponse:
-    type: array
-    items:
-      $ref: '#/definitions/CampaignResponse'
-  ListOfEndpointBatchItem:
-    type: array
-    items:
-      $ref: '#/definitions/EndpointBatchItem'
-  ListOfEndpointResponse:
-    type: array
-    items:
-      $ref: '#/definitions/EndpointResponse'
-  ListOfExportJobResponse:
-    type: array
-    items:
-      $ref: '#/definitions/ExportJobResponse'
-  ListOfImportJobResponse:
-    type: array
-    items:
-      $ref: '#/definitions/ImportJobResponse'
-  ListOfSegmentDimensions:
-    type: array
-    items:
-      $ref: '#/definitions/SegmentDimensions'
-  ListOfSegmentGroup:
-    type: array
-    items:
-      $ref: '#/definitions/SegmentGroup'
-  ListOfSegmentReference:
-    type: array
-    items:
-      $ref: '#/definitions/SegmentReference'
-  ListOfSegmentResponse:
-    type: array
-    items:
-      $ref: '#/definitions/SegmentResponse'
-  ListOfTreatmentResource:
-    type: array
-    items:
-      $ref: '#/definitions/TreatmentResource'
-  ListOfWriteTreatmentResource:
-    type: array
-    items:
-      $ref: '#/definitions/WriteTreatmentResource'
-  ListOf__string:
-    type: array
-    items:
-      $ref: '#/definitions/__string'
   __long:
     type: integer
-  MapOfAddressConfiguration:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/AddressConfiguration'
-  MapOfAttributeDimension:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/AttributeDimension'
-  MapOfChannelResponse:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/ChannelResponse'
-  MapOfEndpointMessageResult:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/EndpointMessageResult'
-  MapOfEndpointSendConfiguration:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/EndpointSendConfiguration'
-  MapOfEvent:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/Event'
-  MapOfEventItemResponse:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/EventItemResponse'
-  MapOfEventsBatch:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/EventsBatch'
-  MapOfItemResponse:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/ItemResponse'
-  MapOfMessageResult:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/MessageResult'
-  MapOfMetricDimension:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/MetricDimension'
-  MapOf__double:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__double'
-  MapOf__integer:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__integer'
-  MapOfListOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/ListOf__string'
-  MapOfMapOfEndpointMessageResult:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/MapOfEndpointMessageResult'
-  MapOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
-  __string:
-    type: string
   __timestampIso8601:
     type: string
     format: date-time

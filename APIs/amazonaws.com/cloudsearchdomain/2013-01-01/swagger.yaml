@@ -186,40 +186,72 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  Adds:
-    type: integer
-  Blob:
-    type: string
-  Bucket:
+  SearchResponse:
     type: object
     properties:
-      value:
+      status:
+        $ref: '#/definitions/SearchStatus'
+        description: The status information returned for the search request.
+      hits:
+        $ref: '#/definitions/Hits'
+        description: The documents that match the search criteria.
+      facets:
+        $ref: '#/definitions/Facets'
+        description: The requested facet information.
+      stats:
+        $ref: '#/definitions/Stats'
+        description: The requested field statistics information.
+    description: 'The result of a <code>Search</code> request. Contains the documents that match the specified search criteria and any requested fields, highlights, and facet information.'
+  SearchRequest:
+    type: object
+    properties: {}
+    description: Container for the parameters to the <code>Search</code> request.
+  SearchException:
+    type: object
+    properties:
+      message:
         $ref: '#/definitions/String'
-        description: The facet value being counted.
-      count:
-        $ref: '#/definitions/Long'
-        description: The number of hits that contain the facet value in the specified facet field.
-    description: 'A container for facet information. '
-  BucketInfo:
+        description: A description of the error returned by the search service.
+    description: Information about any problems encountered while processing a search request.
+  SuggestResponse:
     type: object
     properties:
-      buckets:
-        $ref: '#/definitions/BucketList'
-        description: A list of the calculated facet values and counts.
-    description: A container for the calculated facet values and counts.
-  BucketList:
-    type: array
-    items:
-      $ref: '#/definitions/Bucket'
-  ContentType:
-    type: string
-    enum:
-      - application/json
-      - application/xml
-  Cursor:
-    type: string
-  Deletes:
-    type: integer
+      status:
+        $ref: '#/definitions/SuggestStatus'
+        description: The status of a <code>SuggestRequest</code>. Contains the resource ID (<code>rid</code>) and how long it took to process the request (<code>timems</code>).
+      suggest:
+        $ref: '#/definitions/SuggestModel'
+        description: Container for the matching search suggestion information.
+    description: Contains the response to a <code>Suggest</code> request.
+  SuggestRequest:
+    type: object
+    properties: {}
+    description: Container for the parameters to the <code>Suggest</code> request.
+  UploadDocumentsResponse:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/String'
+        description: The status of an <code>UploadDocumentsRequest</code>.
+      adds:
+        $ref: '#/definitions/Adds'
+        description: The number of documents that were added to the search domain.
+      deletes:
+        $ref: '#/definitions/Deletes'
+        description: The number of documents that were deleted from the search domain.
+      warnings:
+        $ref: '#/definitions/DocumentServiceWarnings'
+        description: Any warnings returned by the document service about the documents being uploaded.
+    description: Contains the response to an <code>UploadDocuments</code> request.
+  UploadDocumentsRequest:
+    type: object
+    required:
+      - documents
+    properties:
+      documents:
+        $ref: '#/definitions/Blob'
+        description: A batch of documents formatted in JSON or HTML.
+    description: Container for the parameters to the <code>UploadDocuments</code> request.
   DocumentServiceException:
     type: object
     properties:
@@ -230,6 +262,44 @@ definitions:
         $ref: '#/definitions/String'
         description: The description of the errors returned by the document service.
     description: Information about any problems encountered while processing an upload request.
+  Adds:
+    type: integer
+  Blob:
+    type: string
+  String:
+    type: string
+  Long:
+    type: integer
+  Bucket:
+    type: object
+    properties:
+      value:
+        $ref: '#/definitions/String'
+        description: The facet value being counted.
+      count:
+        $ref: '#/definitions/Long'
+        description: The number of hits that contain the facet value in the specified facet field.
+    description: 'A container for facet information. '
+  BucketList:
+    type: array
+    items:
+      $ref: '#/definitions/Bucket'
+  BucketInfo:
+    type: object
+    properties:
+      buckets:
+        $ref: '#/definitions/BucketList'
+        description: A list of the calculated facet values and counts.
+    description: A container for the calculated facet values and counts.
+  ContentType:
+    type: string
+    enum:
+      - application/json
+      - application/xml
+  Cursor:
+    type: string
+  Deletes:
+    type: integer
   DocumentServiceWarning:
     type: object
     properties:
@@ -356,8 +426,6 @@ definitions:
         $ref: '#/definitions/HitList'
         description: A document that matches the search request.
     description: The collection of documents that match the search request.
-  Long:
-    type: integer
   Partial:
     type: boolean
   Query:
@@ -373,33 +441,14 @@ definitions:
       - dismax
   Return:
     type: string
-  SearchException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-        description: A description of the error returned by the search service.
-    description: Information about any problems encountered while processing a search request.
-  SearchRequest:
-    type: object
-    properties: {}
-    description: Container for the parameters to the <code>Search</code> request.
-  SearchResponse:
-    type: object
-    properties:
-      status:
-        $ref: '#/definitions/SearchStatus'
-        description: The status information returned for the search request.
-      hits:
-        $ref: '#/definitions/Hits'
-        description: The documents that match the search criteria.
-      facets:
-        $ref: '#/definitions/Facets'
-        description: The requested facet information.
-      stats:
-        $ref: '#/definitions/Stats'
-        description: The requested field statistics information.
-    description: 'The result of a <code>Search</code> request. Contains the documents that match the specified search criteria and any requested fields, highlights, and facet information.'
+  Size:
+    type: integer
+  Sort:
+    type: string
+  Start:
+    type: integer
+  Stat:
+    type: string
   SearchStatus:
     type: object
     properties:
@@ -410,14 +459,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The encrypted resource ID for the request.
     description: Contains the resource id (<code>rid</code>) and the time it took to process the request (<code>timems</code>).
-  Size:
-    type: integer
-  Sort:
-    type: string
-  Start:
-    type: integer
-  Stat:
-    type: string
   Stats:
     type: array
     description: The statistics calculated in the request.
@@ -428,8 +469,10 @@ definitions:
           $ref: '#/definitions/String'
         value:
           $ref: '#/definitions/FieldStats'
-  String:
-    type: string
+  Suggestions:
+    type: array
+    items:
+      $ref: '#/definitions/SuggestionMatch'
   SuggestModel:
     type: object
     properties:
@@ -443,20 +486,10 @@ definitions:
         $ref: '#/definitions/Suggestions'
         description: The documents that match the query string.
     description: Container for the suggestion information returned in a <code>SuggestResponse</code>.
-  SuggestRequest:
-    type: object
-    properties: {}
-    description: Container for the parameters to the <code>Suggest</code> request.
-  SuggestResponse:
-    type: object
-    properties:
-      status:
-        $ref: '#/definitions/SuggestStatus'
-        description: The status of a <code>SuggestRequest</code>. Contains the resource ID (<code>rid</code>) and how long it took to process the request (<code>timems</code>).
-      suggest:
-        $ref: '#/definitions/SuggestModel'
-        description: Container for the matching search suggestion information.
-    description: Contains the response to a <code>Suggest</code> request.
+  Suggester:
+    type: string
+  SuggestionsSize:
+    type: integer
   SuggestStatus:
     type: object
     properties:
@@ -467,8 +500,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The encrypted resource ID for the request.
     description: Contains the resource id (<code>rid</code>) and the time it took to process the request (<code>timems</code>).
-  Suggester:
-    type: string
   SuggestionMatch:
     type: object
     properties:
@@ -482,34 +513,3 @@ definitions:
         $ref: '#/definitions/String'
         description: The document ID of the suggested document.
     description: 'An autocomplete suggestion that matches the query string specified in a <code>SuggestRequest</code>. '
-  Suggestions:
-    type: array
-    items:
-      $ref: '#/definitions/SuggestionMatch'
-  SuggestionsSize:
-    type: integer
-  UploadDocumentsRequest:
-    type: object
-    required:
-      - documents
-    properties:
-      documents:
-        $ref: '#/definitions/Blob'
-        description: A batch of documents formatted in JSON or HTML.
-    description: Container for the parameters to the <code>UploadDocuments</code> request.
-  UploadDocumentsResponse:
-    type: object
-    properties:
-      status:
-        $ref: '#/definitions/String'
-        description: The status of an <code>UploadDocumentsRequest</code>.
-      adds:
-        $ref: '#/definitions/Adds'
-        description: The number of documents that were added to the search domain.
-      deletes:
-        $ref: '#/definitions/Deletes'
-        description: The number of documents that were deleted from the search domain.
-      warnings:
-        $ref: '#/definitions/DocumentServiceWarnings'
-        description: Any warnings returned by the document service about the documents being uploaded.
-    description: Contains the response to an <code>UploadDocuments</code> request.

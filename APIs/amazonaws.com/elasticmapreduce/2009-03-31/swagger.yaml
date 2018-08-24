@@ -1017,13 +1017,15 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  ActionOnFailure:
-    type: string
-    enum:
-      - TERMINATE_JOB_FLOW
-      - TERMINATE_CLUSTER
-      - CANCEL_AND_WAIT
-      - CONTINUE
+  AddInstanceFleetOutput:
+    type: object
+    properties:
+      ClusterId:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: The unique identifier of the cluster.
+      InstanceFleetId:
+        $ref: '#/definitions/InstanceFleetId'
+        description: The unique identifier of the instance fleet.
   AddInstanceFleetInput:
     type: object
     required:
@@ -1036,15 +1038,33 @@ definitions:
       InstanceFleet:
         $ref: '#/definitions/InstanceFleetConfig'
         description: Specifies the configuration of the instance fleet.
-  AddInstanceFleetOutput:
+  InternalServerException:
     type: object
     properties:
-      ClusterId:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+        description: The message associated with the exception.
+    description: This exception occurs when there is an internal failure in the EMR service.
+  InvalidRequestException:
+    type: object
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+        description: The error code associated with the exception.
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+        description: The message associated with the exception.
+    description: This exception occurs when there is something wrong with user input.
+  AddInstanceGroupsOutput:
+    type: object
+    properties:
+      JobFlowId:
         $ref: '#/definitions/XmlStringMaxLen256'
-        description: The unique identifier of the cluster.
-      InstanceFleetId:
-        $ref: '#/definitions/InstanceFleetId'
-        description: The unique identifier of the instance fleet.
+        description: The job flow ID in which the instance groups are added.
+      InstanceGroupIds:
+        $ref: '#/definitions/InstanceGroupIdsList'
+        description: Instance group IDs of the newly created instance groups.
+    description: Output from an AddInstanceGroups call.
   AddInstanceGroupsInput:
     type: object
     required:
@@ -1058,16 +1078,17 @@ definitions:
         $ref: '#/definitions/XmlStringMaxLen256'
         description: Job flow in which to add the instance groups.
     description: Input to an AddInstanceGroups call.
-  AddInstanceGroupsOutput:
+  InternalServerError:
+    type: object
+    properties: {}
+    description: Indicates that an error occurred while processing the request and that the request was not completed.
+  AddJobFlowStepsOutput:
     type: object
     properties:
-      JobFlowId:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: The job flow ID in which the instance groups are added.
-      InstanceGroupIds:
-        $ref: '#/definitions/InstanceGroupIdsList'
-        description: Instance group IDs of the newly created instance groups.
-    description: Output from an AddInstanceGroups call.
+      StepIds:
+        $ref: '#/definitions/StepIdsList'
+        description: The identifiers of the list of steps added to the job flow.
+    description: ' The output for the <a>AddJobFlowSteps</a> operation. '
   AddJobFlowStepsInput:
     type: object
     required:
@@ -1081,13 +1102,10 @@ definitions:
         $ref: '#/definitions/StepConfigList'
         description: ' A list of <a>StepConfig</a> to be executed by the job flow. '
     description: ' The input argument to the <a>AddJobFlowSteps</a> operation. '
-  AddJobFlowStepsOutput:
+  AddTagsOutput:
     type: object
-    properties:
-      StepIds:
-        $ref: '#/definitions/StepIdsList'
-        description: The identifiers of the list of steps added to the job flow.
-    description: ' The output for the <a>AddJobFlowSteps</a> operation. '
+    properties: {}
+    description: This output indicates the result of adding tags to a resource.
   AddTagsInput:
     type: object
     required:
@@ -1101,16 +1119,588 @@ definitions:
         $ref: '#/definitions/TagList'
         description: 'A list of tags to associate with a cluster and propagate to EC2 instances. Tags are user-defined key/value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.'
     description: This input identifies a cluster and a list of tags to attach.
-  AddTagsOutput:
+  CancelStepsOutput:
+    type: object
+    properties:
+      CancelStepsInfoList:
+        $ref: '#/definitions/CancelStepsInfoList'
+        description: 'A list of <a>CancelStepsInfo</a>, which shows the status of specified cancel requests for each <code>StepID</code> specified.'
+    description: ' The output for the <a>CancelSteps</a> operation. '
+  CancelStepsInput:
+    type: object
+    properties:
+      ClusterId:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: 'The <code>ClusterID</code> for which specified steps will be canceled. Use <a>RunJobFlow</a> and <a>ListClusters</a> to get ClusterIDs. '
+      StepIds:
+        $ref: '#/definitions/StepIdsList'
+        description: The list of <code>StepIDs</code> to cancel. Use <a>ListSteps</a> to get steps and their states for the specified cluster.
+    description: The input argument to the <a>CancelSteps</a> operation.
+  CreateSecurityConfigurationOutput:
+    type: object
+    required:
+      - Name
+      - CreationDateTime
+    properties:
+      Name:
+        $ref: '#/definitions/XmlString'
+        description: The name of the security configuration.
+      CreationDateTime:
+        $ref: '#/definitions/Date'
+        description: The date and time the security configuration was created.
+  CreateSecurityConfigurationInput:
+    type: object
+    required:
+      - Name
+      - SecurityConfiguration
+    properties:
+      Name:
+        $ref: '#/definitions/XmlString'
+        description: The name of the security configuration.
+      SecurityConfiguration:
+        $ref: '#/definitions/String'
+        description: 'The security configuration details in JSON format. For JSON parameters and examples, see <a href="http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html">Use Security Configurations to Set Up Cluster Security</a> in the <i>Amazon EMR Management Guide</i>.'
+  DeleteSecurityConfigurationOutput:
     type: object
     properties: {}
-    description: This output indicates the result of adding tags to a resource.
+  DeleteSecurityConfigurationInput:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/XmlString'
+        description: The name of the security configuration.
+  DescribeClusterOutput:
+    type: object
+    properties:
+      Cluster:
+        $ref: '#/definitions/Cluster'
+        description: This output contains the details for the requested cluster.
+    description: This output contains the description of the cluster.
+  DescribeClusterInput:
+    type: object
+    required:
+      - ClusterId
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: The identifier of the cluster to describe.
+    description: This input determines which cluster to describe.
+  DescribeJobFlowsOutput:
+    type: object
+    properties:
+      JobFlows:
+        $ref: '#/definitions/JobFlowDetailList'
+        description: A list of job flows matching the parameters supplied.
+    description: ' The output for the <a>DescribeJobFlows</a> operation. '
+  DescribeJobFlowsInput:
+    type: object
+    properties:
+      CreatedAfter:
+        $ref: '#/definitions/Date'
+        description: Return only job flows created after this date and time.
+      CreatedBefore:
+        $ref: '#/definitions/Date'
+        description: Return only job flows created before this date and time.
+      JobFlowIds:
+        $ref: '#/definitions/XmlStringList'
+        description: Return only job flows whose job flow ID is contained in this list.
+      JobFlowStates:
+        $ref: '#/definitions/JobFlowExecutionStateList'
+        description: Return only job flows whose state is contained in this list.
+    description: ' The input for the <a>DescribeJobFlows</a> operation. '
+  DescribeSecurityConfigurationOutput:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/XmlString'
+        description: The name of the security configuration.
+      SecurityConfiguration:
+        $ref: '#/definitions/String'
+        description: The security configuration details in JSON format.
+      CreationDateTime:
+        $ref: '#/definitions/Date'
+        description: The date and time the security configuration was created
+  DescribeSecurityConfigurationInput:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/XmlString'
+        description: The name of the security configuration.
+  DescribeStepOutput:
+    type: object
+    properties:
+      Step:
+        $ref: '#/definitions/Step'
+        description: The step details for the requested step identifier.
+    description: This output contains the description of the cluster step.
+  DescribeStepInput:
+    type: object
+    required:
+      - ClusterId
+      - StepId
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: The identifier of the cluster with steps to describe.
+      StepId:
+        $ref: '#/definitions/StepId'
+        description: The identifier of the step to describe.
+    description: This input determines which step to describe.
+  ListBootstrapActionsOutput:
+    type: object
+    properties:
+      BootstrapActions:
+        $ref: '#/definitions/CommandList'
+        description: The bootstrap actions associated with the cluster.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The pagination token that indicates the next set of results to retrieve.
+    description: This output contains the bootstrap actions detail.
+  ListBootstrapActionsInput:
+    type: object
+    required:
+      - ClusterId
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: The cluster identifier for the bootstrap actions to list.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The pagination token that indicates the next set of results to retrieve.
+    description: This input determines which bootstrap actions to retrieve.
+  ListClustersOutput:
+    type: object
+    properties:
+      Clusters:
+        $ref: '#/definitions/ClusterSummaryList'
+        description: The list of clusters for the account based on the given filters.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The pagination token that indicates the next set of results to retrieve.
+    description: 'This contains a ClusterSummaryList with the cluster details; for example, the cluster IDs, names, and status.'
+  ListClustersInput:
+    type: object
+    properties:
+      CreatedAfter:
+        $ref: '#/definitions/Date'
+        description: The creation date and time beginning value filter for listing clusters.
+      CreatedBefore:
+        $ref: '#/definitions/Date'
+        description: The creation date and time end value filter for listing clusters.
+      ClusterStates:
+        $ref: '#/definitions/ClusterStateList'
+        description: The cluster state filters to apply when listing clusters.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The pagination token that indicates the next set of results to retrieve.
+    description: This input determines how the ListClusters action filters the list of clusters that it returns.
+  ListInstanceFleetsOutput:
+    type: object
+    properties:
+      InstanceFleets:
+        $ref: '#/definitions/InstanceFleetList'
+        description: The list of instance fleets for the cluster and given filters.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The pagination token that indicates the next set of results to retrieve.
+  ListInstanceFleetsInput:
+    type: object
+    required:
+      - ClusterId
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: The unique identifier of the cluster.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The pagination token that indicates the next set of results to retrieve.
+  ListInstanceGroupsOutput:
+    type: object
+    properties:
+      InstanceGroups:
+        $ref: '#/definitions/InstanceGroupList'
+        description: The list of instance groups for the cluster and given filters.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The pagination token that indicates the next set of results to retrieve.
+    description: This input determines which instance groups to retrieve.
+  ListInstanceGroupsInput:
+    type: object
+    required:
+      - ClusterId
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: The identifier of the cluster for which to list the instance groups.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The pagination token that indicates the next set of results to retrieve.
+    description: This input determines which instance groups to retrieve.
+  ListInstancesOutput:
+    type: object
+    properties:
+      Instances:
+        $ref: '#/definitions/InstanceList'
+        description: The list of instances for the cluster and given filters.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The pagination token that indicates the next set of results to retrieve.
+    description: This output contains the list of instances.
+  ListInstancesInput:
+    type: object
+    required:
+      - ClusterId
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: The identifier of the cluster for which to list the instances.
+      InstanceGroupId:
+        $ref: '#/definitions/InstanceGroupId'
+        description: The identifier of the instance group for which to list the instances.
+      InstanceGroupTypes:
+        $ref: '#/definitions/InstanceGroupTypeList'
+        description: The type of instance group for which to list the instances.
+      InstanceFleetId:
+        $ref: '#/definitions/InstanceFleetId'
+        description: The unique identifier of the instance fleet.
+      InstanceFleetType:
+        $ref: '#/definitions/InstanceFleetType'
+        description: 'The node type of the instance fleet. For example MASTER, CORE, or TASK.'
+      InstanceStates:
+        $ref: '#/definitions/InstanceStateList'
+        description: A list of instance states that will filter the instances returned with this request.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The pagination token that indicates the next set of results to retrieve.
+    description: This input determines which instances to list.
+  ListSecurityConfigurationsOutput:
+    type: object
+    properties:
+      SecurityConfigurations:
+        $ref: '#/definitions/SecurityConfigurationList'
+        description: 'The creation date and time, and name, of each security configuration.'
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: 'A pagination token that indicates the next set of results to retrieve. Include the marker in the next ListSecurityConfiguration call to retrieve the next page of results, if required.'
+  ListSecurityConfigurationsInput:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The pagination token that indicates the set of results to retrieve.
+  ListStepsOutput:
+    type: object
+    properties:
+      Steps:
+        $ref: '#/definitions/StepSummaryList'
+        description: The filtered list of steps for the cluster.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The pagination token that indicates the next set of results to retrieve.
+    description: This output contains the list of steps returned in reverse order. This means that the last step is the first element in the list.
+  ListStepsInput:
+    type: object
+    required:
+      - ClusterId
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: The identifier of the cluster for which to list the steps.
+      StepStates:
+        $ref: '#/definitions/StepStateList'
+        description: The filter to limit the step list based on certain states.
+      StepIds:
+        $ref: '#/definitions/XmlStringList'
+        description: The filter to limit the step list based on the identifier of the steps.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The pagination token that indicates the next set of results to retrieve.
+    description: This input determines which steps to list.
+  ModifyInstanceFleetInput:
+    type: object
+    required:
+      - ClusterId
+      - InstanceFleet
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: The unique identifier of the cluster.
+      InstanceFleet:
+        $ref: '#/definitions/InstanceFleetModifyConfig'
+        description: The unique identifier of the instance fleet.
+  ModifyInstanceGroupsInput:
+    type: object
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: The ID of the cluster to which the instance group belongs.
+      InstanceGroups:
+        $ref: '#/definitions/InstanceGroupModifyConfigList'
+        description: Instance groups to change.
+    description: Change the size of some instance groups.
+  PutAutoScalingPolicyOutput:
+    type: object
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.
+      InstanceGroupId:
+        $ref: '#/definitions/InstanceGroupId'
+        description: Specifies the ID of the instance group to which the scaling policy is applied.
+      AutoScalingPolicy:
+        $ref: '#/definitions/AutoScalingPolicyDescription'
+        description: The automatic scaling policy definition.
+  PutAutoScalingPolicyInput:
+    type: object
+    required:
+      - ClusterId
+      - InstanceGroupId
+      - AutoScalingPolicy
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.
+      InstanceGroupId:
+        $ref: '#/definitions/InstanceGroupId'
+        description: Specifies the ID of the instance group to which the automatic scaling policy is applied.
+      AutoScalingPolicy:
+        $ref: '#/definitions/AutoScalingPolicy'
+        description: Specifies the definition of the automatic scaling policy.
+  RemoveAutoScalingPolicyOutput:
+    type: object
+    properties: {}
+  RemoveAutoScalingPolicyInput:
+    type: object
+    required:
+      - ClusterId
+      - InstanceGroupId
+    properties:
+      ClusterId:
+        $ref: '#/definitions/ClusterId'
+        description: Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.
+      InstanceGroupId:
+        $ref: '#/definitions/InstanceGroupId'
+        description: Specifies the ID of the instance group to which the scaling policy is applied.
+  RemoveTagsOutput:
+    type: object
+    properties: {}
+    description: This output indicates the result of removing tags from a resource.
+  RemoveTagsInput:
+    type: object
+    required:
+      - ResourceId
+      - TagKeys
+    properties:
+      ResourceId:
+        $ref: '#/definitions/ResourceId'
+        description: The Amazon EMR resource identifier from which tags will be removed. This value must be a cluster identifier.
+      TagKeys:
+        $ref: '#/definitions/StringList'
+        description: A list of tag keys to remove from a resource.
+    description: This input identifies a cluster and a list of tags to remove.
+  RunJobFlowOutput:
+    type: object
+    properties:
+      JobFlowId:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: An unique identifier for the job flow.
+    description: ' The result of the <a>RunJobFlow</a> operation. '
+  RunJobFlowInput:
+    type: object
+    required:
+      - Name
+      - Instances
+    properties:
+      Name:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: The name of the job flow.
+      LogUri:
+        $ref: '#/definitions/XmlString'
+        description: 'The location in Amazon S3 to write the log files of the job flow. If a value is not provided, logs are not created.'
+      AdditionalInfo:
+        $ref: '#/definitions/XmlString'
+        description: A JSON string for selecting additional features.
+      AmiVersion:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: 'Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0 and later, <code>ReleaseLabel</code> is used. To specify a custom AMI, use <code>CustomAmiID</code>.'
+      ReleaseLabel:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: 'The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version, for example, <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application versions and features, see <a href="http://docs.aws.amazon.com/emr/latest/ReleaseGuide/">http://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use <code>AmiVersion</code>.'
+      Instances:
+        $ref: '#/definitions/JobFlowInstancesConfig'
+        description: A specification of the number and type of Amazon EC2 instances.
+      Steps:
+        $ref: '#/definitions/StepConfigList'
+        description: A list of steps to run.
+      BootstrapActions:
+        $ref: '#/definitions/BootstrapActionConfigList'
+        description: A list of bootstrap actions to run before Hadoop starts on the cluster nodes.
+      SupportedProducts:
+        $ref: '#/definitions/SupportedProductsList'
+        description: '<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.</p> </note> <p>A list of strings that indicates third-party software to use. For more information, see the <a href="http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf">Amazon EMR Developer Guide</a>. Currently supported values are:</p> <ul> <li> <p>"mapr-m3" - launch the job flow using MapR M3 Edition.</p> </li> <li> <p>"mapr-m5" - launch the job flow using MapR M5 Edition.</p> </li> </ul>'
+      NewSupportedProducts:
+        $ref: '#/definitions/NewSupportedProductsList'
+        description: '<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.</p> </note> <p>A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see "Launch a Job Flow on the MapR Distribution for Hadoop" in the <a href="http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf">Amazon EMR Developer Guide</a>. Supported values are:</p> <ul> <li> <p>"mapr-m3" - launch the cluster using MapR M3 Edition.</p> </li> <li> <p>"mapr-m5" - launch the cluster using MapR M5 Edition.</p> </li> <li> <p>"mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.</p> </li> <li> <p>"mapr-m7" - launch the cluster using MapR M7 Edition.</p> </li> <li> <p>"hunk" - launch the cluster with the Hunk Big Data Analtics Platform.</p> </li> <li> <p>"hue"- launch the cluster with Hue installed.</p> </li> <li> <p>"spark" - launch the cluster with Apache Spark installed.</p> </li> <li> <p>"ganglia" - launch the cluster with the Ganglia Monitoring System installed.</p> </li> </ul>'
+      Applications:
+        $ref: '#/definitions/ApplicationList'
+        description: 'For Amazon EMR releases 4.0 and later. A list of applications for the cluster. Valid values are: "Hadoop", "Hive", "Mahout", "Pig", and "Spark." They are case insensitive.'
+      Configurations:
+        $ref: '#/definitions/ConfigurationList'
+        description: For Amazon EMR releases 4.0 and later. The list of configurations supplied for the EMR cluster you are creating.
+      VisibleToAllUsers:
+        $ref: '#/definitions/Boolean'
+        description: 'Whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to <code>true</code>, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the cluster. If it is set to <code>false</code>, only the IAM user that created the cluster can view and manage it.'
+      JobFlowRole:
+        $ref: '#/definitions/XmlString'
+        description: 'Also called instance profile and EC2 role. An IAM role for an EMR cluster. The EC2 instances of the cluster assume this role. The default role is <code>EMR_EC2_DefaultRole</code>. In order to use the default role, you must have already created it using the CLI or console.'
+      ServiceRole:
+        $ref: '#/definitions/XmlString'
+        description: The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: A list of tags to associate with a cluster and propagate to Amazon EC2 instances.
+      SecurityConfiguration:
+        $ref: '#/definitions/XmlString'
+        description: The name of a security configuration to apply to the cluster.
+      AutoScalingRole:
+        $ref: '#/definitions/XmlString'
+        description: An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate EC2 instances in an instance group.
+      ScaleDownBehavior:
+        $ref: '#/definitions/ScaleDownBehavior'
+        description: 'Specifies the way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.'
+      CustomAmiId:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: '<p>Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when it launches cluster EC2 instances. For more information about custom AMIs in Amazon EMR, see <a href="http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html">Using a Custom AMI</a> in the <i>Amazon EMR Management Guide</i>. If omitted, the cluster uses the base Linux AMI for the <code>ReleaseLabel</code> specified. For Amazon EMR versions 2.x and 3.x, use <code>AmiVersion</code> instead.</p> <p>For information about creating a custom AMI, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html">Creating an Amazon EBS-Backed Linux AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>. For information about finding an AMI ID, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html">Finding a Linux AMI</a>. </p>'
+      EbsRootVolumeSize:
+        $ref: '#/definitions/Integer'
+        description: 'The size, in GiB, of the EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later.'
+      RepoUpgradeOnBoot:
+        $ref: '#/definitions/RepoUpgradeOnBoot'
+        description: 'Applies only when <code>CustomAmiID</code> is used. Specifies which updates from the Amazon Linux AMI package repositories to apply automatically when the instance boots using the AMI. If omitted, the default is <code>SECURITY</code>, which indicates that only security updates are applied. If <code>NONE</code> is specified, no updates are applied, and all updates must be applied manually.'
+      KerberosAttributes:
+        $ref: '#/definitions/KerberosAttributes'
+        description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.'
+    description: ' Input to the <a>RunJobFlow</a> operation. '
+  SetTerminationProtectionInput:
+    type: object
+    required:
+      - JobFlowIds
+      - TerminationProtected
+    properties:
+      JobFlowIds:
+        $ref: '#/definitions/XmlStringList'
+        description: ' A list of strings that uniquely identify the clusters to protect. This identifier is returned by <a>RunJobFlow</a> and can also be obtained from <a>DescribeJobFlows</a> . '
+      TerminationProtected:
+        $ref: '#/definitions/Boolean'
+        description: 'A Boolean that indicates whether to protect the cluster and prevent the Amazon EC2 instances in the cluster from shutting down due to API calls, user intervention, or job-flow error.'
+    description: ' The input argument to the <a>TerminationProtection</a> operation. '
+  SetVisibleToAllUsersInput:
+    type: object
+    required:
+      - JobFlowIds
+      - VisibleToAllUsers
+    properties:
+      JobFlowIds:
+        $ref: '#/definitions/XmlStringList'
+        description: Identifiers of the job flows to receive the new visibility setting.
+      VisibleToAllUsers:
+        $ref: '#/definitions/Boolean'
+        description: 'Whether the specified clusters are visible to all IAM users of the AWS account associated with the cluster. If this value is set to True, all IAM users of that AWS account can view and, if they have the proper IAM policy permissions set, manage the clusters. If it is set to False, only the IAM user that created a cluster can view and manage it.'
+    description: The input to the SetVisibleToAllUsers action.
+  TerminateJobFlowsInput:
+    type: object
+    required:
+      - JobFlowIds
+    properties:
+      JobFlowIds:
+        $ref: '#/definitions/XmlStringList'
+        description: A list of job flows to be shutdown.
+    description: ' Input to the <a>TerminateJobFlows</a> operation. '
+  ActionOnFailure:
+    type: string
+    enum:
+      - TERMINATE_JOB_FLOW
+      - TERMINATE_CLUSTER
+      - CANCEL_AND_WAIT
+      - CONTINUE
+  XmlStringMaxLen256:
+    type: string
+    minLength: 0
+    maxLength: 256
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  InstanceFleetConfig:
+    type: object
+    required:
+      - InstanceFleetType
+    properties:
+      Name:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: The friendly name of the instance fleet.
+      InstanceFleetType:
+        $ref: '#/definitions/InstanceFleetType'
+        description: 'The node type that the instance fleet hosts. Valid values are MASTER,CORE,and TASK.'
+      TargetOnDemandCapacity:
+        $ref: '#/definitions/WholeNumber'
+        description: '<p>The target capacity of On-Demand units for the instance fleet, which determines how many On-Demand instances to provision. When the instance fleet launches, Amazon EMR tries to provision On-Demand instances as specified by <a>InstanceTypeConfig</a>. Each instance configuration has a specified <code>WeightedCapacity</code>. When an On-Demand instance is provisioned, the <code>WeightedCapacity</code> units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units.</p> <note> <p>If not specified or set to 0, only Spot instances are provisioned for the instance fleet using <code>TargetSpotCapacity</code>. At least one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> should be greater than 0. For a master instance fleet, only one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> can be specified, and its value must be 1.</p> </note>'
+      TargetSpotCapacity:
+        $ref: '#/definitions/WholeNumber'
+        description: '<p>The target capacity of Spot units for the instance fleet, which determines how many Spot instances to provision. When the instance fleet launches, Amazon EMR tries to provision Spot instances as specified by <a>InstanceTypeConfig</a>. Each instance configuration has a specified <code>WeightedCapacity</code>. When a Spot instance is provisioned, the <code>WeightedCapacity</code> units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units.</p> <note> <p>If not specified or set to 0, only On-Demand instances are provisioned for the instance fleet. At least one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> should be greater than 0. For a master instance fleet, only one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> can be specified, and its value must be 1.</p> </note>'
+      InstanceTypeConfigs:
+        $ref: '#/definitions/InstanceTypeConfigList'
+        description: The instance type configurations that define the EC2 instances in the instance fleet.
+      LaunchSpecifications:
+        $ref: '#/definitions/InstanceFleetProvisioningSpecifications'
+        description: The launch specification for the instance fleet.
+    description: '<p>The configuration that defines an instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+  InstanceFleetId:
+    type: string
+  InstanceGroupConfigList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceGroupConfig'
+  InstanceGroupIdsList:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen256'
+  StepConfigList:
+    type: array
+    items:
+      $ref: '#/definitions/StepConfig'
+  StepIdsList:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen256'
+  ResourceId:
+    type: string
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   AdjustmentType:
     type: string
     enum:
       - CHANGE_IN_CAPACITY
       - PERCENT_CHANGE_IN_CAPACITY
       - EXACT_CAPACITY
+  String:
+    type: string
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  StringMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
   Application:
     type: object
     properties:
@@ -1131,6 +1721,23 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Application'
+  ScalingConstraints:
+    type: object
+    required:
+      - MinCapacity
+      - MaxCapacity
+    properties:
+      MinCapacity:
+        $ref: '#/definitions/Integer'
+        description: The lower boundary of EC2 instances in an instance group below which scaling activities are not allowed to shrink. Scale-in activities will not terminate instances below this boundary.
+      MaxCapacity:
+        $ref: '#/definitions/Integer'
+        description: The upper boundary of EC2 instances in an instance group beyond which scaling activities are not allowed to grow. Scale-out activities will not add instances beyond this boundary.
+    description: The upper and lower EC2 instance limits for an automatic scaling policy. Automatic scaling activities triggered by automatic scaling rules will not cause an instance group to grow above or below these limits.
+  ScalingRuleList:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingRule'
   AutoScalingPolicy:
     type: object
     required:
@@ -1144,6 +1751,16 @@ definitions:
         $ref: '#/definitions/ScalingRuleList'
         description: The scale-in and scale-out rules that comprise the automatic scaling policy.
     description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. An automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.
+  AutoScalingPolicyStatus:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/AutoScalingPolicyState'
+        description: Indicates the status of the automatic scaling policy.
+      StateChangeReason:
+        $ref: '#/definitions/AutoScalingPolicyStateChangeReason'
+        description: The reason for a change in status.
+    description: 'The status of an automatic scaling policy. '
   AutoScalingPolicyDescription:
     type: object
     properties:
@@ -1166,6 +1783,12 @@ definitions:
       - DETACHING
       - DETACHED
       - FAILED
+  AutoScalingPolicyStateChangeReasonCode:
+    type: string
+    enum:
+      - USER_REQUEST
+      - PROVISION_FAILURE
+      - CLEANUP_FAILURE
   AutoScalingPolicyStateChangeReason:
     type: object
     properties:
@@ -1176,26 +1799,22 @@ definitions:
         $ref: '#/definitions/String'
         description: 'A friendly, more verbose message that accompanies an automatic scaling policy state change.'
     description: The reason for an <a>AutoScalingPolicyStatus</a> change.
-  AutoScalingPolicyStateChangeReasonCode:
-    type: string
-    enum:
-      - USER_REQUEST
-      - PROVISION_FAILURE
-      - CLEANUP_FAILURE
-  AutoScalingPolicyStatus:
-    type: object
-    properties:
-      State:
-        $ref: '#/definitions/AutoScalingPolicyState'
-        description: Indicates the status of the automatic scaling policy.
-      StateChangeReason:
-        $ref: '#/definitions/AutoScalingPolicyStateChangeReason'
-        description: The reason for a change in status.
-    description: 'The status of an automatic scaling policy. '
   Boolean:
     type: boolean
   BooleanObject:
     type: boolean
+  ScriptBootstrapActionConfig:
+    type: object
+    required:
+      - Path
+    properties:
+      Path:
+        $ref: '#/definitions/XmlString'
+        description: Location of the script to run during a bootstrap action. Can be either a location in Amazon S3 or on a local file system.
+      Args:
+        $ref: '#/definitions/XmlStringList'
+        description: A list of command line arguments to pass to the bootstrap action script.
+    description: Configuration of the script to run during a bootstrap action.
   BootstrapActionConfig:
     type: object
     required:
@@ -1224,6 +1843,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BootstrapActionDetail'
+  StepId:
+    type: string
+  CancelStepsRequestStatus:
+    type: string
+    enum:
+      - SUBMITTED
+      - FAILED
   CancelStepsInfo:
     type: object
     properties:
@@ -1241,28 +1867,61 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CancelStepsInfo'
-  CancelStepsInput:
-    type: object
-    properties:
-      ClusterId:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: 'The <code>ClusterID</code> for which specified steps will be canceled. Use <a>RunJobFlow</a> and <a>ListClusters</a> to get ClusterIDs. '
-      StepIds:
-        $ref: '#/definitions/StepIdsList'
-        description: The list of <code>StepIDs</code> to cancel. Use <a>ListSteps</a> to get steps and their states for the specified cluster.
-    description: The input argument to the <a>CancelSteps</a> operation.
-  CancelStepsOutput:
-    type: object
-    properties:
-      CancelStepsInfoList:
-        $ref: '#/definitions/CancelStepsInfoList'
-        description: 'A list of <a>CancelStepsInfo</a>, which shows the status of specified cancel requests for each <code>StepID</code> specified.'
-    description: ' The output for the <a>CancelSteps</a> operation. '
-  CancelStepsRequestStatus:
+  ComparisonOperator:
     type: string
     enum:
-      - SUBMITTED
-      - FAILED
+      - GREATER_THAN_OR_EQUAL
+      - GREATER_THAN
+      - LESS_THAN
+      - LESS_THAN_OR_EQUAL
+  Integer:
+    type: integer
+  Statistic:
+    type: string
+    enum:
+      - SAMPLE_COUNT
+      - AVERAGE
+      - SUM
+      - MINIMUM
+      - MAXIMUM
+  NonNegativeDouble:
+    type: number
+    format: double
+    minimum: 0
+  Unit:
+    type: string
+    enum:
+      - NONE
+      - SECONDS
+      - MICRO_SECONDS
+      - MILLI_SECONDS
+      - BYTES
+      - KILO_BYTES
+      - MEGA_BYTES
+      - GIGA_BYTES
+      - TERA_BYTES
+      - BITS
+      - KILO_BITS
+      - MEGA_BITS
+      - GIGA_BITS
+      - TERA_BITS
+      - PERCENT
+      - COUNT
+      - BYTES_PER_SECOND
+      - KILO_BYTES_PER_SECOND
+      - MEGA_BYTES_PER_SECOND
+      - GIGA_BYTES_PER_SECOND
+      - TERA_BYTES_PER_SECOND
+      - BITS_PER_SECOND
+      - KILO_BITS_PER_SECOND
+      - MEGA_BITS_PER_SECOND
+      - GIGA_BITS_PER_SECOND
+      - TERA_BITS_PER_SECOND
+      - COUNT_PER_SECOND
+  MetricDimensionList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDimension'
   CloudWatchAlarmDefinition:
     type: object
     required:
@@ -1299,6 +1958,104 @@ definitions:
         $ref: '#/definitions/MetricDimensionList'
         description: A CloudWatch metric dimension.
     description: 'The definition of a CloudWatch metric alarm, which determines when an automatic scaling activity is triggered. When the defined alarm conditions are satisfied, scaling activity begins.'
+  ClusterId:
+    type: string
+  ClusterStatus:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/ClusterState'
+        description: The current state of the cluster.
+      StateChangeReason:
+        $ref: '#/definitions/ClusterStateChangeReason'
+        description: The reason for the cluster status change.
+      Timeline:
+        $ref: '#/definitions/ClusterTimeline'
+        description: A timeline that represents the status of a cluster over the lifetime of the cluster.
+    description: The detailed status of the cluster.
+  Ec2InstanceAttributes:
+    type: object
+    properties:
+      Ec2KeyName:
+        $ref: '#/definitions/String'
+        description: The name of the Amazon EC2 key pair to use when connecting with SSH into the master node as a user named "hadoop".
+      Ec2SubnetId:
+        $ref: '#/definitions/String'
+        description: '<p>To launch the cluster in Amazon VPC, set this parameter to the identifier of the Amazon VPC subnet where you want the cluster to launch. If you do not specify this value, the cluster is launched in the normal AWS cloud, outside of a VPC.</p> <p>Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus, you cannot specify the cc1.4xlarge instance type for nodes of a cluster launched in a VPC.</p>'
+      RequestedEc2SubnetIds:
+        $ref: '#/definitions/XmlStringMaxLen256List'
+        description: 'Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the EC2 subnet with the best fit from among the list of <code>RequestedEc2SubnetIds</code>, and then launches all cluster instances within that Subnet. If this value is not specified, and the account and region support EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses <code>RequestedEc2AvailabilityZones</code> instead of this setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.'
+      Ec2AvailabilityZone:
+        $ref: '#/definitions/String'
+        description: 'The Availability Zone in which the cluster will run. '
+      RequestedEc2AvailabilityZones:
+        $ref: '#/definitions/XmlStringMaxLen256List'
+        description: 'Applies to clusters configured with the instance fleets option. Specifies one or more Availability Zones in which to launch EC2 cluster instances when the EC2-Classic network configuration is supported. Amazon EMR chooses the Availability Zone with the best fit from among the list of <code>RequestedEc2AvailabilityZones</code>, and then launches all cluster instances within that Availability Zone. If you do not specify this value, Amazon EMR chooses the Availability Zone for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.'
+      IamInstanceProfile:
+        $ref: '#/definitions/String'
+        description: The IAM role that was specified when the cluster was launched. The EC2 instances of the cluster assume this role.
+      EmrManagedMasterSecurityGroup:
+        $ref: '#/definitions/String'
+        description: The identifier of the Amazon EC2 security group for the master node.
+      EmrManagedSlaveSecurityGroup:
+        $ref: '#/definitions/String'
+        description: The identifier of the Amazon EC2 security group for the slave nodes.
+      ServiceAccessSecurityGroup:
+        $ref: '#/definitions/String'
+        description: The identifier of the Amazon EC2 security group for the Amazon EMR service to access clusters in VPC private subnets.
+      AdditionalMasterSecurityGroups:
+        $ref: '#/definitions/StringList'
+        description: A list of additional Amazon EC2 security group IDs for the master node.
+      AdditionalSlaveSecurityGroups:
+        $ref: '#/definitions/StringList'
+        description: A list of additional Amazon EC2 security group IDs for the slave nodes.
+    description: 'Provides information about the EC2 instances in a cluster grouped by category. For example, key name, subnet ID, IAM instance profile, and so on.'
+  InstanceCollectionType:
+    type: string
+    enum:
+      - INSTANCE_FLEET
+      - INSTANCE_GROUP
+  ConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/Configuration'
+  XmlString:
+    type: string
+    minLength: 0
+    maxLength: 10280
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  ScaleDownBehavior:
+    type: string
+    enum:
+      - TERMINATE_AT_INSTANCE_HOUR
+      - TERMINATE_AT_TASK_COMPLETION
+  RepoUpgradeOnBoot:
+    type: string
+    enum:
+      - SECURITY
+      - NONE
+  KerberosAttributes:
+    type: object
+    required:
+      - Realm
+      - KdcAdminPassword
+    properties:
+      Realm:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: 'The name of the Kerberos realm to which all nodes in a cluster belong. For example, <code>EC2.INTERNAL</code>. '
+      KdcAdminPassword:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: 'The password used within the cluster for the kadmin service on the cluster-dedicated KDC, which maintains Kerberos principals, password policies, and keytabs for the cluster.'
+      CrossRealmTrustPrincipalPassword:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: 'Required only when establishing a cross-realm trust with a KDC in a different realm. The cross-realm principal password, which must be identical across realms.'
+      ADDomainJoinUser:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: Required only when establishing a cross-realm trust with an Active Directory domain. A user with sufficient privileges to join resources to the domain.
+      ADDomainJoinPassword:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: The Active Directory password for <code>ADDomainJoinUser</code>.
+    description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.'
   Cluster:
     type: object
     properties:
@@ -1378,8 +2135,6 @@ definitions:
         $ref: '#/definitions/KerberosAttributes'
         description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.'
     description: The detailed description of the cluster.
-  ClusterId:
-    type: string
   ClusterState:
     type: string
     enum:
@@ -1390,16 +2145,6 @@ definitions:
       - TERMINATING
       - TERMINATED
       - TERMINATED_WITH_ERRORS
-  ClusterStateChangeReason:
-    type: object
-    properties:
-      Code:
-        $ref: '#/definitions/ClusterStateChangeReasonCode'
-        description: The programmatic code for the state change reason.
-      Message:
-        $ref: '#/definitions/String'
-        description: The descriptive message for the state change reason.
-    description: The reason that the cluster changed to its current state.
   ClusterStateChangeReasonCode:
     type: string
     enum:
@@ -1411,23 +2156,33 @@ definitions:
       - USER_REQUEST
       - STEP_FAILURE
       - ALL_STEPS_COMPLETED
+  ClusterStateChangeReason:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/ClusterStateChangeReasonCode'
+        description: The programmatic code for the state change reason.
+      Message:
+        $ref: '#/definitions/String'
+        description: The descriptive message for the state change reason.
+    description: The reason that the cluster changed to its current state.
   ClusterStateList:
     type: array
     items:
       $ref: '#/definitions/ClusterState'
-  ClusterStatus:
+  ClusterTimeline:
     type: object
     properties:
-      State:
-        $ref: '#/definitions/ClusterState'
-        description: The current state of the cluster.
-      StateChangeReason:
-        $ref: '#/definitions/ClusterStateChangeReason'
-        description: The reason for the cluster status change.
-      Timeline:
-        $ref: '#/definitions/ClusterTimeline'
-        description: A timeline that represents the status of a cluster over the lifetime of the cluster.
-    description: The detailed status of the cluster.
+      CreationDateTime:
+        $ref: '#/definitions/Date'
+        description: The creation date and time of the cluster.
+      ReadyDateTime:
+        $ref: '#/definitions/Date'
+        description: The date and time when the cluster was ready to execute steps.
+      EndDateTime:
+        $ref: '#/definitions/Date'
+        description: The date and time when the cluster was terminated.
+    description: Represents the timeline of the cluster's lifecycle.
   ClusterSummary:
     type: object
     properties:
@@ -1448,19 +2203,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ClusterSummary'
-  ClusterTimeline:
-    type: object
-    properties:
-      CreationDateTime:
-        $ref: '#/definitions/Date'
-        description: The creation date and time of the cluster.
-      ReadyDateTime:
-        $ref: '#/definitions/Date'
-        description: The date and time when the cluster was ready to execute steps.
-      EndDateTime:
-        $ref: '#/definitions/Date'
-        description: The date and time when the cluster was terminated.
-    description: Represents the timeline of the cluster's lifecycle.
+  Date:
+    type: string
+    format: date-time
   Command:
     type: object
     properties:
@@ -1478,13 +2223,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Command'
-  ComparisonOperator:
-    type: string
-    enum:
-      - GREATER_THAN_OR_EQUAL
-      - GREATER_THAN
-      - LESS_THAN
-      - LESS_THAN_OR_EQUAL
   Configuration:
     type: object
     properties:
@@ -1498,127 +2236,39 @@ definitions:
         $ref: '#/definitions/StringMap'
         description: A set of properties specified within a configuration classification.
     description: '<note> <p>Amazon EMR releases 4.x or later.</p> </note> <p>An optional configuration specification to be used when provisioning cluster instances, which can include configurations for applications and software bundled with Amazon EMR. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file. For more information, see <a href="http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html">Configuring Applications</a>.</p>'
-  ConfigurationList:
+  XmlStringList:
     type: array
     items:
-      $ref: '#/definitions/Configuration'
-  CreateSecurityConfigurationInput:
-    type: object
-    required:
-      - Name
-      - SecurityConfiguration
-    properties:
-      Name:
-        $ref: '#/definitions/XmlString'
-        description: The name of the security configuration.
-      SecurityConfiguration:
-        $ref: '#/definitions/String'
-        description: 'The security configuration details in JSON format. For JSON parameters and examples, see <a href="http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html">Use Security Configurations to Set Up Cluster Security</a> in the <i>Amazon EMR Management Guide</i>.'
-  CreateSecurityConfigurationOutput:
-    type: object
-    required:
-      - Name
-      - CreationDateTime
-    properties:
-      Name:
-        $ref: '#/definitions/XmlString'
-        description: The name of the security configuration.
-      CreationDateTime:
-        $ref: '#/definitions/Date'
-        description: The date and time the security configuration was created.
-  Date:
-    type: string
-    format: date-time
-  DeleteSecurityConfigurationInput:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/XmlString'
-        description: The name of the security configuration.
-  DeleteSecurityConfigurationOutput:
-    type: object
-    properties: {}
-  DescribeClusterInput:
-    type: object
-    required:
-      - ClusterId
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: The identifier of the cluster to describe.
-    description: This input determines which cluster to describe.
-  DescribeClusterOutput:
+      $ref: '#/definitions/XmlString'
+  JobFlowExecutionStateList:
+    type: array
+    items:
+      $ref: '#/definitions/JobFlowExecutionState'
+  JobFlowDetailList:
+    type: array
+    items:
+      $ref: '#/definitions/JobFlowDetail'
+  Step:
     type: object
     properties:
-      Cluster:
-        $ref: '#/definitions/Cluster'
-        description: This output contains the details for the requested cluster.
-    description: This output contains the description of the cluster.
-  DescribeJobFlowsInput:
-    type: object
-    properties:
-      CreatedAfter:
-        $ref: '#/definitions/Date'
-        description: Return only job flows created after this date and time.
-      CreatedBefore:
-        $ref: '#/definitions/Date'
-        description: Return only job flows created before this date and time.
-      JobFlowIds:
-        $ref: '#/definitions/XmlStringList'
-        description: Return only job flows whose job flow ID is contained in this list.
-      JobFlowStates:
-        $ref: '#/definitions/JobFlowExecutionStateList'
-        description: Return only job flows whose state is contained in this list.
-    description: ' The input for the <a>DescribeJobFlows</a> operation. '
-  DescribeJobFlowsOutput:
-    type: object
-    properties:
-      JobFlows:
-        $ref: '#/definitions/JobFlowDetailList'
-        description: A list of job flows matching the parameters supplied.
-    description: ' The output for the <a>DescribeJobFlows</a> operation. '
-  DescribeSecurityConfigurationInput:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/XmlString'
-        description: The name of the security configuration.
-  DescribeSecurityConfigurationOutput:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/XmlString'
-        description: The name of the security configuration.
-      SecurityConfiguration:
-        $ref: '#/definitions/String'
-        description: The security configuration details in JSON format.
-      CreationDateTime:
-        $ref: '#/definitions/Date'
-        description: The date and time the security configuration was created
-  DescribeStepInput:
-    type: object
-    required:
-      - ClusterId
-      - StepId
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: The identifier of the cluster with steps to describe.
-      StepId:
+      Id:
         $ref: '#/definitions/StepId'
-        description: The identifier of the step to describe.
-    description: This input determines which step to describe.
-  DescribeStepOutput:
-    type: object
-    properties:
-      Step:
-        $ref: '#/definitions/Step'
-        description: The step details for the requested step identifier.
-    description: This output contains the description of the cluster step.
+        description: The identifier of the cluster step.
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the cluster step.
+      Config:
+        $ref: '#/definitions/HadoopStepConfig'
+        description: The Hadoop job configuration of the cluster step.
+      ActionOnFailure:
+        $ref: '#/definitions/ActionOnFailure'
+        description: 'This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.'
+      Status:
+        $ref: '#/definitions/StepStatus'
+        description: The current execution status details of the cluster step.
+    description: This represents a step in a cluster.
+  InstanceId:
+    type: string
   EC2InstanceIdsList:
     type: array
     items:
@@ -1627,6 +2277,22 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InstanceId'
+  VolumeSpecification:
+    type: object
+    required:
+      - VolumeType
+      - SizeInGB
+    properties:
+      VolumeType:
+        $ref: '#/definitions/String'
+        description: 'The volume type. Volume types supported are gp2, io1, standard.'
+      Iops:
+        $ref: '#/definitions/Integer'
+        description: The number of I/O operations per second (IOPS) that the volume supports.
+      SizeInGB:
+        $ref: '#/definitions/Integer'
+        description: 'The volume size, in gibibytes (GiB). This can be a number from 1 - 1024. If the volume type is EBS-optimized, the minimum value is 10.'
+    description: 'EBS volume specifications such as volume type, IOPS, and size (GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.'
   EbsBlockDevice:
     type: object
     properties:
@@ -1681,43 +2347,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EbsVolume'
-  Ec2InstanceAttributes:
-    type: object
-    properties:
-      Ec2KeyName:
-        $ref: '#/definitions/String'
-        description: The name of the Amazon EC2 key pair to use when connecting with SSH into the master node as a user named "hadoop".
-      Ec2SubnetId:
-        $ref: '#/definitions/String'
-        description: '<p>To launch the cluster in Amazon VPC, set this parameter to the identifier of the Amazon VPC subnet where you want the cluster to launch. If you do not specify this value, the cluster is launched in the normal AWS cloud, outside of a VPC.</p> <p>Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus, you cannot specify the cc1.4xlarge instance type for nodes of a cluster launched in a VPC.</p>'
-      RequestedEc2SubnetIds:
-        $ref: '#/definitions/XmlStringMaxLen256List'
-        description: 'Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the EC2 subnet with the best fit from among the list of <code>RequestedEc2SubnetIds</code>, and then launches all cluster instances within that Subnet. If this value is not specified, and the account and region support EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses <code>RequestedEc2AvailabilityZones</code> instead of this setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.'
-      Ec2AvailabilityZone:
-        $ref: '#/definitions/String'
-        description: 'The Availability Zone in which the cluster will run. '
-      RequestedEc2AvailabilityZones:
-        $ref: '#/definitions/XmlStringMaxLen256List'
-        description: 'Applies to clusters configured with the instance fleets option. Specifies one or more Availability Zones in which to launch EC2 cluster instances when the EC2-Classic network configuration is supported. Amazon EMR chooses the Availability Zone with the best fit from among the list of <code>RequestedEc2AvailabilityZones</code>, and then launches all cluster instances within that Availability Zone. If you do not specify this value, Amazon EMR chooses the Availability Zone for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.'
-      IamInstanceProfile:
-        $ref: '#/definitions/String'
-        description: The IAM role that was specified when the cluster was launched. The EC2 instances of the cluster assume this role.
-      EmrManagedMasterSecurityGroup:
-        $ref: '#/definitions/String'
-        description: The identifier of the Amazon EC2 security group for the master node.
-      EmrManagedSlaveSecurityGroup:
-        $ref: '#/definitions/String'
-        description: The identifier of the Amazon EC2 security group for the slave nodes.
-      ServiceAccessSecurityGroup:
-        $ref: '#/definitions/String'
-        description: The identifier of the Amazon EC2 security group for the Amazon EMR service to access clusters in VPC private subnets.
-      AdditionalMasterSecurityGroups:
-        $ref: '#/definitions/StringList'
-        description: A list of additional Amazon EC2 security group IDs for the master node.
-      AdditionalSlaveSecurityGroups:
-        $ref: '#/definitions/StringList'
-        description: A list of additional Amazon EC2 security group IDs for the slave nodes.
-    description: 'Provides information about the EC2 instances in a cluster grouped by category. For example, key name, subnet ID, IAM instance profile, and so on.'
+  XmlStringMaxLen256List:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen256'
   ErrorCode:
     type: string
     minLength: 1
@@ -1737,6 +2370,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The path to the log file where the step failure root cause was originally recorded.
     description: The details of the step failure. The service attempts to detect the root cause for many common failures.
+  KeyValueList:
+    type: array
+    items:
+      $ref: '#/definitions/KeyValue'
   HadoopJarStepConfig:
     type: object
     required:
@@ -1771,6 +2408,29 @@ definitions:
         $ref: '#/definitions/StringList'
         description: The list of command line arguments to pass to the JAR file's main function for execution.
     description: A cluster step consisting of a JAR file whose main function will be executed. The main function submits a job for Hadoop to execute and waits for the job to finish or fail.
+  InstanceStatus:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/InstanceState'
+        description: The current state of the instance.
+      StateChangeReason:
+        $ref: '#/definitions/InstanceStateChangeReason'
+        description: The details of the status change reason for the instance.
+      Timeline:
+        $ref: '#/definitions/InstanceTimeline'
+        description: The timeline of the instance status over time.
+    description: The instance status details.
+  MarketType:
+    type: string
+    enum:
+      - ON_DEMAND
+      - SPOT
+  InstanceType:
+    type: string
+    minLength: 1
+    maxLength: 256
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   Instance:
     type: object
     properties:
@@ -1811,11 +2471,41 @@ definitions:
         $ref: '#/definitions/EbsVolumeList'
         description: The list of EBS volumes that are attached to this instance.
     description: Represents an EC2 instance provisioned as part of cluster.
-  InstanceCollectionType:
+  InstanceFleetStatus:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/InstanceFleetState'
+        description: '<p>A code representing the instance fleet status.</p> <ul> <li> <p> <code>PROVISIONING</code>—The instance fleet is provisioning EC2 resources and is not yet ready to run jobs.</p> </li> <li> <p> <code>BOOTSTRAPPING</code>—EC2 instances and other resources have been provisioned and the bootstrap actions specified for the instances are underway.</p> </li> <li> <p> <code>RUNNING</code>—EC2 instances and other resources are running. They are either executing jobs or waiting to execute jobs.</p> </li> <li> <p> <code>RESIZING</code>—A resize operation is underway. EC2 instances are either being added or removed.</p> </li> <li> <p> <code>SUSPENDED</code>—A resize operation could not complete. Existing EC2 instances are running, but instances can''t be added or removed.</p> </li> <li> <p> <code>TERMINATING</code>—The instance fleet is terminating EC2 instances.</p> </li> <li> <p> <code>TERMINATED</code>—The instance fleet is no longer active, and all EC2 instances have been terminated.</p> </li> </ul>'
+      StateChangeReason:
+        $ref: '#/definitions/InstanceFleetStateChangeReason'
+        description: Provides status change reason details for the instance fleet.
+      Timeline:
+        $ref: '#/definitions/InstanceFleetTimeline'
+        description: 'Provides historical timestamps for the instance fleet, including the time of creation, the time it became ready to run jobs, and the time of termination.'
+    description: '<p>The status of the instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+  InstanceFleetType:
     type: string
     enum:
-      - INSTANCE_FLEET
-      - INSTANCE_GROUP
+      - MASTER
+      - CORE
+      - TASK
+  WholeNumber:
+    type: integer
+    minimum: 0
+  InstanceTypeSpecificationList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceTypeSpecification'
+  InstanceFleetProvisioningSpecifications:
+    type: object
+    required:
+      - SpotSpecification
+    properties:
+      SpotSpecification:
+        $ref: '#/definitions/SpotProvisioningSpecification'
+        description: 'The launch specification for Spot instances in the fleet, which determines the defined duration and provisioning timeout behavior.'
+    description: '<p>The launch specification for Spot instances in the fleet, which determines the defined duration and provisioning timeout behavior.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
   InstanceFleet:
     type: object
     properties:
@@ -1850,36 +2540,14 @@ definitions:
         $ref: '#/definitions/InstanceFleetProvisioningSpecifications'
         description: 'Describes the launch specification for an instance fleet. '
     description: '<p>Describes an instance fleet, which is a group of EC2 instances that host a particular node type (master, core, or task) in an Amazon EMR cluster. Instance fleets can consist of a mix of instance types and On-Demand and Spot instances, which are provisioned to meet a defined target capacity. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
-  InstanceFleetConfig:
-    type: object
-    required:
-      - InstanceFleetType
-    properties:
-      Name:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: The friendly name of the instance fleet.
-      InstanceFleetType:
-        $ref: '#/definitions/InstanceFleetType'
-        description: 'The node type that the instance fleet hosts. Valid values are MASTER,CORE,and TASK.'
-      TargetOnDemandCapacity:
-        $ref: '#/definitions/WholeNumber'
-        description: '<p>The target capacity of On-Demand units for the instance fleet, which determines how many On-Demand instances to provision. When the instance fleet launches, Amazon EMR tries to provision On-Demand instances as specified by <a>InstanceTypeConfig</a>. Each instance configuration has a specified <code>WeightedCapacity</code>. When an On-Demand instance is provisioned, the <code>WeightedCapacity</code> units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units.</p> <note> <p>If not specified or set to 0, only Spot instances are provisioned for the instance fleet using <code>TargetSpotCapacity</code>. At least one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> should be greater than 0. For a master instance fleet, only one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> can be specified, and its value must be 1.</p> </note>'
-      TargetSpotCapacity:
-        $ref: '#/definitions/WholeNumber'
-        description: '<p>The target capacity of Spot units for the instance fleet, which determines how many Spot instances to provision. When the instance fleet launches, Amazon EMR tries to provision Spot instances as specified by <a>InstanceTypeConfig</a>. Each instance configuration has a specified <code>WeightedCapacity</code>. When a Spot instance is provisioned, the <code>WeightedCapacity</code> units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units.</p> <note> <p>If not specified or set to 0, only On-Demand instances are provisioned for the instance fleet. At least one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> should be greater than 0. For a master instance fleet, only one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> can be specified, and its value must be 1.</p> </note>'
-      InstanceTypeConfigs:
-        $ref: '#/definitions/InstanceTypeConfigList'
-        description: The instance type configurations that define the EC2 instances in the instance fleet.
-      LaunchSpecifications:
-        $ref: '#/definitions/InstanceFleetProvisioningSpecifications'
-        description: The launch specification for the instance fleet.
-    description: '<p>The configuration that defines an instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+  InstanceTypeConfigList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceTypeConfig'
   InstanceFleetConfigList:
     type: array
     items:
       $ref: '#/definitions/InstanceFleetConfig'
-  InstanceFleetId:
-    type: string
   InstanceFleetList:
     type: array
     items:
@@ -1899,15 +2567,22 @@ definitions:
         $ref: '#/definitions/WholeNumber'
         description: 'The target capacity of Spot units for the instance fleet. For more information, see <a>InstanceFleetConfig$TargetSpotCapacity</a>.'
     description: '<p>Configuration parameters for an instance fleet modification request.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
-  InstanceFleetProvisioningSpecifications:
+  SpotProvisioningSpecification:
     type: object
     required:
-      - SpotSpecification
+      - TimeoutDurationMinutes
+      - TimeoutAction
     properties:
-      SpotSpecification:
-        $ref: '#/definitions/SpotProvisioningSpecification'
-        description: 'The launch specification for Spot instances in the fleet, which determines the defined duration and provisioning timeout behavior.'
-    description: '<p>The launch specification for Spot instances in the fleet, which determines the defined duration and provisioning timeout behavior.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      TimeoutDurationMinutes:
+        $ref: '#/definitions/WholeNumber'
+        description: 'The spot provisioning timeout period in minutes. If Spot instances are not provisioned within this time period, the <code>TimeOutAction</code> is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.'
+      TimeoutAction:
+        $ref: '#/definitions/SpotProvisioningTimeoutAction'
+        description: 'The action to take when <code>TargetSpotCapacity</code> has not been fulfilled when the <code>TimeoutDurationMinutes</code> has expired. Spot instances are not uprovisioned within the Spot provisioining timeout. Valid values are <code>TERMINATE_CLUSTER</code> and <code>SWITCH_TO_ON_DEMAND</code>. SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.'
+      BlockDurationMinutes:
+        $ref: '#/definitions/WholeNumber'
+        description: 'The defined duration for Spot instances (also known as Spot blocks) in minutes. When specified, the Spot instance does not terminate before the defined duration expires, and defined duration pricing for Spot instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates. '
+    description: '<p>The launch specification for Spot instances in the instance fleet, which determines the defined duration and provisioning timeout behavior.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
   InstanceFleetState:
     type: string
     enum:
@@ -1918,6 +2593,13 @@ definitions:
       - SUSPENDED
       - TERMINATING
       - TERMINATED
+  InstanceFleetStateChangeReasonCode:
+    type: string
+    enum:
+      - INTERNAL_ERROR
+      - VALIDATION_ERROR
+      - INSTANCE_FAILURE
+      - CLUSTER_TERMINATED
   InstanceFleetStateChangeReason:
     type: object
     properties:
@@ -1928,26 +2610,6 @@ definitions:
         $ref: '#/definitions/String'
         description: An explanatory message.
     description: '<p>Provides status change reason details for the instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
-  InstanceFleetStateChangeReasonCode:
-    type: string
-    enum:
-      - INTERNAL_ERROR
-      - VALIDATION_ERROR
-      - INSTANCE_FAILURE
-      - CLUSTER_TERMINATED
-  InstanceFleetStatus:
-    type: object
-    properties:
-      State:
-        $ref: '#/definitions/InstanceFleetState'
-        description: '<p>A code representing the instance fleet status.</p> <ul> <li> <p> <code>PROVISIONING</code>—The instance fleet is provisioning EC2 resources and is not yet ready to run jobs.</p> </li> <li> <p> <code>BOOTSTRAPPING</code>—EC2 instances and other resources have been provisioned and the bootstrap actions specified for the instances are underway.</p> </li> <li> <p> <code>RUNNING</code>—EC2 instances and other resources are running. They are either executing jobs or waiting to execute jobs.</p> </li> <li> <p> <code>RESIZING</code>—A resize operation is underway. EC2 instances are either being added or removed.</p> </li> <li> <p> <code>SUSPENDED</code>—A resize operation could not complete. Existing EC2 instances are running, but instances can''t be added or removed.</p> </li> <li> <p> <code>TERMINATING</code>—The instance fleet is terminating EC2 instances.</p> </li> <li> <p> <code>TERMINATED</code>—The instance fleet is no longer active, and all EC2 instances have been terminated.</p> </li> </ul>'
-      StateChangeReason:
-        $ref: '#/definitions/InstanceFleetStateChangeReason'
-        description: Provides status change reason details for the instance fleet.
-      Timeline:
-        $ref: '#/definitions/InstanceFleetTimeline'
-        description: 'Provides historical timestamps for the instance fleet, including the time of creation, the time it became ready to run jobs, and the time of termination.'
-    description: '<p>The status of the instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
   InstanceFleetTimeline:
     type: object
     properties:
@@ -1961,12 +2623,37 @@ definitions:
         $ref: '#/definitions/Date'
         description: The time and date the instance fleet terminated.
     description: '<p>Provides historical timestamps for the instance fleet, including the time of creation, the time it became ready to run jobs, and the time of termination.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
-  InstanceFleetType:
+  InstanceGroupId:
+    type: string
+  InstanceGroupType:
     type: string
     enum:
       - MASTER
       - CORE
       - TASK
+  InstanceGroupStatus:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/InstanceGroupState'
+        description: The current state of the instance group.
+      StateChangeReason:
+        $ref: '#/definitions/InstanceGroupStateChangeReason'
+        description: The status change reason details for the instance group.
+      Timeline:
+        $ref: '#/definitions/InstanceGroupTimeline'
+        description: The timeline of the instance group status over time.
+    description: The details of the instance group status.
+  ShrinkPolicy:
+    type: object
+    properties:
+      DecommissionTimeout:
+        $ref: '#/definitions/Integer'
+        description: The desired timeout for decommissioning an instance. Overrides the default YARN decommissioning timeout.
+      InstanceResizePolicy:
+        $ref: '#/definitions/InstanceResizePolicy'
+        description: Custom policy for requesting termination protection or termination of specific instances when shrinking an instance group.
+    description: Policy for customizing shrink operations. Allows configuration of decommissioning timeout and targeted instance shrinking.
   InstanceGroup:
     type: object
     properties:
@@ -2013,6 +2700,12 @@ definitions:
         $ref: '#/definitions/AutoScalingPolicyDescription'
         description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See PutAutoScalingPolicy.
     description: 'This entity represents an instance group, which is a group of instances that have common purpose. For example, CORE instance group is used for HDFS.'
+  InstanceRoleType:
+    type: string
+    enum:
+      - MASTER
+      - CORE
+      - TASK
   InstanceGroupConfig:
     type: object
     required:
@@ -2048,10 +2741,19 @@ definitions:
         $ref: '#/definitions/AutoScalingPolicy'
         description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.
     description: Configuration defining a new instance group.
-  InstanceGroupConfigList:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceGroupConfig'
+  InstanceGroupState:
+    type: string
+    enum:
+      - PROVISIONING
+      - BOOTSTRAPPING
+      - RUNNING
+      - RESIZING
+      - SUSPENDED
+      - TERMINATING
+      - TERMINATED
+      - ARRESTED
+      - SHUTTING_DOWN
+      - ENDED
   InstanceGroupDetail:
     type: object
     required:
@@ -2110,12 +2812,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InstanceGroupDetail'
-  InstanceGroupId:
-    type: string
-  InstanceGroupIdsList:
-    type: array
-    items:
-      $ref: '#/definitions/XmlStringMaxLen256'
   InstanceGroupList:
     type: array
     items:
@@ -2142,19 +2838,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InstanceGroupModifyConfig'
-  InstanceGroupState:
+  InstanceGroupStateChangeReasonCode:
     type: string
     enum:
-      - PROVISIONING
-      - BOOTSTRAPPING
-      - RUNNING
-      - RESIZING
-      - SUSPENDED
-      - TERMINATING
-      - TERMINATED
-      - ARRESTED
-      - SHUTTING_DOWN
-      - ENDED
+      - INTERNAL_ERROR
+      - VALIDATION_ERROR
+      - INSTANCE_FAILURE
+      - CLUSTER_TERMINATED
   InstanceGroupStateChangeReason:
     type: object
     properties:
@@ -2165,26 +2855,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The status change reason description.
     description: The status change reason details for the instance group.
-  InstanceGroupStateChangeReasonCode:
-    type: string
-    enum:
-      - INTERNAL_ERROR
-      - VALIDATION_ERROR
-      - INSTANCE_FAILURE
-      - CLUSTER_TERMINATED
-  InstanceGroupStatus:
-    type: object
-    properties:
-      State:
-        $ref: '#/definitions/InstanceGroupState'
-        description: The current state of the instance group.
-      StateChangeReason:
-        $ref: '#/definitions/InstanceGroupStateChangeReason'
-        description: The status change reason details for the instance group.
-      Timeline:
-        $ref: '#/definitions/InstanceGroupTimeline'
-        description: The timeline of the instance group status over time.
-    description: The details of the instance group status.
   InstanceGroupTimeline:
     type: object
     properties:
@@ -2198,18 +2868,10 @@ definitions:
         $ref: '#/definitions/Date'
         description: The date and time when the instance group terminated.
     description: The timeline of the instance group lifecycle.
-  InstanceGroupType:
-    type: string
-    enum:
-      - MASTER
-      - CORE
-      - TASK
   InstanceGroupTypeList:
     type: array
     items:
       $ref: '#/definitions/InstanceGroupType'
-  InstanceId:
-    type: string
   InstanceList:
     type: array
     items:
@@ -2227,12 +2889,6 @@ definitions:
         $ref: '#/definitions/Integer'
         description: Decommissioning timeout override for the specific list of instances to be terminated.
     description: Custom policy for requesting termination protection or termination of specific instances when shrinking an instance group.
-  InstanceRoleType:
-    type: string
-    enum:
-      - MASTER
-      - CORE
-      - TASK
   InstanceState:
     type: string
     enum:
@@ -2241,6 +2897,14 @@ definitions:
       - BOOTSTRAPPING
       - RUNNING
       - TERMINATED
+  InstanceStateChangeReasonCode:
+    type: string
+    enum:
+      - INTERNAL_ERROR
+      - VALIDATION_ERROR
+      - INSTANCE_FAILURE
+      - BOOTSTRAP_FAILURE
+      - CLUSTER_TERMINATED
   InstanceStateChangeReason:
     type: object
     properties:
@@ -2251,31 +2915,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The status change reason description.
     description: The details of the status change reason for the instance.
-  InstanceStateChangeReasonCode:
-    type: string
-    enum:
-      - INTERNAL_ERROR
-      - VALIDATION_ERROR
-      - INSTANCE_FAILURE
-      - BOOTSTRAP_FAILURE
-      - CLUSTER_TERMINATED
   InstanceStateList:
     type: array
     items:
       $ref: '#/definitions/InstanceState'
-  InstanceStatus:
-    type: object
-    properties:
-      State:
-        $ref: '#/definitions/InstanceState'
-        description: The current state of the instance.
-      StateChangeReason:
-        $ref: '#/definitions/InstanceStateChangeReason'
-        description: The details of the status change reason for the instance.
-      Timeline:
-        $ref: '#/definitions/InstanceTimeline'
-        description: The timeline of the instance status over time.
-    description: The instance status details.
   InstanceTimeline:
     type: object
     properties:
@@ -2289,11 +2932,6 @@ definitions:
         $ref: '#/definitions/Date'
         description: The date and time when the instance was terminated.
     description: The timeline of the instance lifecycle.
-  InstanceType:
-    type: string
-    minLength: 1
-    maxLength: 256
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   InstanceTypeConfig:
     type: object
     required:
@@ -2318,10 +2956,6 @@ definitions:
         $ref: '#/definitions/ConfigurationList'
         description: 'A configuration classification that applies when provisioning cluster instances, which can include configurations for applications and software that run on the cluster.'
     description: '<p>An instance type configuration for each instance type in an instance fleet, which determines the EC2 instances Amazon EMR attempts to provision to fulfill On-Demand and Spot target capacities. There can be a maximum of 5 instance type configurations in a fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
-  InstanceTypeConfigList:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceTypeConfig'
   InstanceTypeSpecification:
     type: object
     properties:
@@ -2347,33 +2981,86 @@ definitions:
         $ref: '#/definitions/BooleanObject'
         description: Evaluates to <code>TRUE</code> when the specified <code>InstanceType</code> is EBS-optimized.
     description: '<p>The configuration specification for each instance type in an instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
-  InstanceTypeSpecificationList:
+  JobFlowExecutionStatusDetail:
+    type: object
+    required:
+      - State
+      - CreationDateTime
+    properties:
+      State:
+        $ref: '#/definitions/JobFlowExecutionState'
+        description: The state of the job flow.
+      CreationDateTime:
+        $ref: '#/definitions/Date'
+        description: The creation date and time of the job flow.
+      StartDateTime:
+        $ref: '#/definitions/Date'
+        description: The start date and time of the job flow.
+      ReadyDateTime:
+        $ref: '#/definitions/Date'
+        description: The date and time when the job flow was ready to start running bootstrap actions.
+      EndDateTime:
+        $ref: '#/definitions/Date'
+        description: The completion date and time of the job flow.
+      LastStateChangeReason:
+        $ref: '#/definitions/XmlString'
+        description: Description of the job flow last changed state.
+    description: Describes the status of the cluster (job flow).
+  JobFlowInstancesDetail:
+    type: object
+    required:
+      - MasterInstanceType
+      - SlaveInstanceType
+      - InstanceCount
+    properties:
+      MasterInstanceType:
+        $ref: '#/definitions/InstanceType'
+        description: The Amazon EC2 master node instance type.
+      MasterPublicDnsName:
+        $ref: '#/definitions/XmlString'
+        description: 'The DNS name of the master node. If the cluster is on a private subnet, this is the private DNS name. On a public subnet, this is the public DNS name.'
+      MasterInstanceId:
+        $ref: '#/definitions/XmlString'
+        description: The Amazon EC2 instance identifier of the master node.
+      SlaveInstanceType:
+        $ref: '#/definitions/InstanceType'
+        description: The Amazon EC2 slave node instance type.
+      InstanceCount:
+        $ref: '#/definitions/Integer'
+        description: 'The number of Amazon EC2 instances in the cluster. If the value is 1, the same instance serves as both the master and slave node. If the value is greater than 1, one instance is the master node and all others are slave nodes.'
+      InstanceGroups:
+        $ref: '#/definitions/InstanceGroupDetailList'
+        description: Details about the instance groups in a cluster.
+      NormalizedInstanceHours:
+        $ref: '#/definitions/Integer'
+        description: 'An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour that an m1.small runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.'
+      Ec2KeyName:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: The name of an Amazon EC2 key pair that can be used to ssh to the master node.
+      Ec2SubnetId:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: 'For clusters launched within Amazon Virtual Private Cloud, this is the identifier of the subnet where the cluster was launched.'
+      Placement:
+        $ref: '#/definitions/PlacementType'
+        description: The Amazon EC2 Availability Zone for the cluster.
+      KeepJobFlowAliveWhenNoSteps:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the cluster should remain available after completing all steps.
+      TerminationProtected:
+        $ref: '#/definitions/Boolean'
+        description: 'Specifies whether the Amazon EC2 instances in the cluster are protected from termination by API calls, user intervention, or in the event of a job-flow error.'
+      HadoopVersion:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: The Hadoop version for the cluster.
+    description: Specify the type of Amazon EC2 instances that the cluster (job flow) runs on.
+  StepDetailList:
     type: array
     items:
-      $ref: '#/definitions/InstanceTypeSpecification'
-  Integer:
-    type: integer
-  InternalServerError:
-    type: object
-    properties: {}
-    description: Indicates that an error occurred while processing the request and that the request was not completed.
-  InternalServerException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-        description: The message associated with the exception.
-    description: This exception occurs when there is an internal failure in the EMR service.
-  InvalidRequestException:
-    type: object
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-        description: The error code associated with the exception.
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-        description: The message associated with the exception.
-    description: This exception occurs when there is something wrong with user input.
+      $ref: '#/definitions/StepDetail'
+  SupportedProductsList:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen256'
   JobFlowDetail:
     type: object
     required:
@@ -2425,10 +3112,6 @@ definitions:
         $ref: '#/definitions/ScaleDownBehavior'
         description: 'The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.'
     description: A description of a cluster (job flow).
-  JobFlowDetailList:
-    type: array
-    items:
-      $ref: '#/definitions/JobFlowDetail'
   JobFlowExecutionState:
     type: string
     enum:
@@ -2441,35 +3124,20 @@ definitions:
       - COMPLETED
       - FAILED
     description: The type of instance.
-  JobFlowExecutionStateList:
+  PlacementType:
+    type: object
+    properties:
+      AvailabilityZone:
+        $ref: '#/definitions/XmlString'
+        description: 'The Amazon EC2 Availability Zone for the cluster. <code>AvailabilityZone</code> is used for uniform instance groups, while <code>AvailabilityZones</code> (plural) is used for instance fleets.'
+      AvailabilityZones:
+        $ref: '#/definitions/XmlStringMaxLen256List'
+        description: '<p>When multiple Availability Zones are specified, Amazon EMR evaluates them and launches instances in the optimal Availability Zone. <code>AvailabilityZones</code> is used for instance fleets, while <code>AvailabilityZone</code> (singular) is used for uniform instance groups.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+    description: The Amazon EC2 Availability Zone configuration of the cluster (job flow).
+  SecurityGroupsList:
     type: array
     items:
-      $ref: '#/definitions/JobFlowExecutionState'
-  JobFlowExecutionStatusDetail:
-    type: object
-    required:
-      - State
-      - CreationDateTime
-    properties:
-      State:
-        $ref: '#/definitions/JobFlowExecutionState'
-        description: The state of the job flow.
-      CreationDateTime:
-        $ref: '#/definitions/Date'
-        description: The creation date and time of the job flow.
-      StartDateTime:
-        $ref: '#/definitions/Date'
-        description: The start date and time of the job flow.
-      ReadyDateTime:
-        $ref: '#/definitions/Date'
-        description: The date and time when the job flow was ready to start running bootstrap actions.
-      EndDateTime:
-        $ref: '#/definitions/Date'
-        description: The completion date and time of the job flow.
-      LastStateChangeReason:
-        $ref: '#/definitions/XmlString'
-        description: Description of the job flow last changed state.
-    description: Describes the status of the cluster (job flow).
+      $ref: '#/definitions/XmlStringMaxLen256'
   JobFlowInstancesConfig:
     type: object
     properties:
@@ -2525,75 +3193,6 @@ definitions:
         $ref: '#/definitions/SecurityGroupsList'
         description: A list of additional Amazon EC2 security group IDs for the slave nodes.
     description: 'A description of the Amazon EC2 instance on which the cluster (job flow) runs. A valid JobFlowInstancesConfig must contain either InstanceGroups or InstanceFleets, which is the recommended configuration. They cannot be used together. You may also have MasterInstanceType, SlaveInstanceType, and InstanceCount (all three must be present), but we don''t recommend this configuration.'
-  JobFlowInstancesDetail:
-    type: object
-    required:
-      - MasterInstanceType
-      - SlaveInstanceType
-      - InstanceCount
-    properties:
-      MasterInstanceType:
-        $ref: '#/definitions/InstanceType'
-        description: The Amazon EC2 master node instance type.
-      MasterPublicDnsName:
-        $ref: '#/definitions/XmlString'
-        description: 'The DNS name of the master node. If the cluster is on a private subnet, this is the private DNS name. On a public subnet, this is the public DNS name.'
-      MasterInstanceId:
-        $ref: '#/definitions/XmlString'
-        description: The Amazon EC2 instance identifier of the master node.
-      SlaveInstanceType:
-        $ref: '#/definitions/InstanceType'
-        description: The Amazon EC2 slave node instance type.
-      InstanceCount:
-        $ref: '#/definitions/Integer'
-        description: 'The number of Amazon EC2 instances in the cluster. If the value is 1, the same instance serves as both the master and slave node. If the value is greater than 1, one instance is the master node and all others are slave nodes.'
-      InstanceGroups:
-        $ref: '#/definitions/InstanceGroupDetailList'
-        description: Details about the instance groups in a cluster.
-      NormalizedInstanceHours:
-        $ref: '#/definitions/Integer'
-        description: 'An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour that an m1.small runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.'
-      Ec2KeyName:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: The name of an Amazon EC2 key pair that can be used to ssh to the master node.
-      Ec2SubnetId:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: 'For clusters launched within Amazon Virtual Private Cloud, this is the identifier of the subnet where the cluster was launched.'
-      Placement:
-        $ref: '#/definitions/PlacementType'
-        description: The Amazon EC2 Availability Zone for the cluster.
-      KeepJobFlowAliveWhenNoSteps:
-        $ref: '#/definitions/Boolean'
-        description: Specifies whether the cluster should remain available after completing all steps.
-      TerminationProtected:
-        $ref: '#/definitions/Boolean'
-        description: 'Specifies whether the Amazon EC2 instances in the cluster are protected from termination by API calls, user intervention, or in the event of a job-flow error.'
-      HadoopVersion:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: The Hadoop version for the cluster.
-    description: Specify the type of Amazon EC2 instances that the cluster (job flow) runs on.
-  KerberosAttributes:
-    type: object
-    required:
-      - Realm
-      - KdcAdminPassword
-    properties:
-      Realm:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: 'The name of the Kerberos realm to which all nodes in a cluster belong. For example, <code>EC2.INTERNAL</code>. '
-      KdcAdminPassword:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: 'The password used within the cluster for the kadmin service on the cluster-dedicated KDC, which maintains Kerberos principals, password policies, and keytabs for the cluster.'
-      CrossRealmTrustPrincipalPassword:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: 'Required only when establishing a cross-realm trust with a KDC in a different realm. The cross-realm principal password, which must be identical across realms.'
-      ADDomainJoinUser:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: Required only when establishing a cross-realm trust with an Active Directory domain. A user with sufficient privileges to join resources to the domain.
-      ADDomainJoinPassword:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: The Active Directory password for <code>ADDomainJoinUser</code>.
-    description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.'
   KeyValue:
     type: object
     properties:
@@ -2604,187 +3203,20 @@ definitions:
         $ref: '#/definitions/XmlString'
         description: The value part of the identified key.
     description: A key value pair.
-  KeyValueList:
-    type: array
-    items:
-      $ref: '#/definitions/KeyValue'
-  ListBootstrapActionsInput:
-    type: object
-    required:
-      - ClusterId
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: The cluster identifier for the bootstrap actions to list.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The pagination token that indicates the next set of results to retrieve.
-    description: This input determines which bootstrap actions to retrieve.
-  ListBootstrapActionsOutput:
-    type: object
-    properties:
-      BootstrapActions:
-        $ref: '#/definitions/CommandList'
-        description: The bootstrap actions associated with the cluster.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The pagination token that indicates the next set of results to retrieve.
-    description: This output contains the bootstrap actions detail.
-  ListClustersInput:
-    type: object
-    properties:
-      CreatedAfter:
-        $ref: '#/definitions/Date'
-        description: The creation date and time beginning value filter for listing clusters.
-      CreatedBefore:
-        $ref: '#/definitions/Date'
-        description: The creation date and time end value filter for listing clusters.
-      ClusterStates:
-        $ref: '#/definitions/ClusterStateList'
-        description: The cluster state filters to apply when listing clusters.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The pagination token that indicates the next set of results to retrieve.
-    description: This input determines how the ListClusters action filters the list of clusters that it returns.
-  ListClustersOutput:
-    type: object
-    properties:
-      Clusters:
-        $ref: '#/definitions/ClusterSummaryList'
-        description: The list of clusters for the account based on the given filters.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The pagination token that indicates the next set of results to retrieve.
-    description: 'This contains a ClusterSummaryList with the cluster details; for example, the cluster IDs, names, and status.'
-  ListInstanceFleetsInput:
-    type: object
-    required:
-      - ClusterId
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: The unique identifier of the cluster.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The pagination token that indicates the next set of results to retrieve.
-  ListInstanceFleetsOutput:
-    type: object
-    properties:
-      InstanceFleets:
-        $ref: '#/definitions/InstanceFleetList'
-        description: The list of instance fleets for the cluster and given filters.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The pagination token that indicates the next set of results to retrieve.
-  ListInstanceGroupsInput:
-    type: object
-    required:
-      - ClusterId
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: The identifier of the cluster for which to list the instance groups.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The pagination token that indicates the next set of results to retrieve.
-    description: This input determines which instance groups to retrieve.
-  ListInstanceGroupsOutput:
-    type: object
-    properties:
-      InstanceGroups:
-        $ref: '#/definitions/InstanceGroupList'
-        description: The list of instance groups for the cluster and given filters.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The pagination token that indicates the next set of results to retrieve.
-    description: This input determines which instance groups to retrieve.
-  ListInstancesInput:
-    type: object
-    required:
-      - ClusterId
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: The identifier of the cluster for which to list the instances.
-      InstanceGroupId:
-        $ref: '#/definitions/InstanceGroupId'
-        description: The identifier of the instance group for which to list the instances.
-      InstanceGroupTypes:
-        $ref: '#/definitions/InstanceGroupTypeList'
-        description: The type of instance group for which to list the instances.
-      InstanceFleetId:
-        $ref: '#/definitions/InstanceFleetId'
-        description: The unique identifier of the instance fleet.
-      InstanceFleetType:
-        $ref: '#/definitions/InstanceFleetType'
-        description: 'The node type of the instance fleet. For example MASTER, CORE, or TASK.'
-      InstanceStates:
-        $ref: '#/definitions/InstanceStateList'
-        description: A list of instance states that will filter the instances returned with this request.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The pagination token that indicates the next set of results to retrieve.
-    description: This input determines which instances to list.
-  ListInstancesOutput:
-    type: object
-    properties:
-      Instances:
-        $ref: '#/definitions/InstanceList'
-        description: The list of instances for the cluster and given filters.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The pagination token that indicates the next set of results to retrieve.
-    description: This output contains the list of instances.
-  ListSecurityConfigurationsInput:
-    type: object
-    properties:
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The pagination token that indicates the set of results to retrieve.
-  ListSecurityConfigurationsOutput:
-    type: object
-    properties:
-      SecurityConfigurations:
-        $ref: '#/definitions/SecurityConfigurationList'
-        description: 'The creation date and time, and name, of each security configuration.'
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: 'A pagination token that indicates the next set of results to retrieve. Include the marker in the next ListSecurityConfiguration call to retrieve the next page of results, if required.'
-  ListStepsInput:
-    type: object
-    required:
-      - ClusterId
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: The identifier of the cluster for which to list the steps.
-      StepStates:
-        $ref: '#/definitions/StepStateList'
-        description: The filter to limit the step list based on certain states.
-      StepIds:
-        $ref: '#/definitions/XmlStringList'
-        description: The filter to limit the step list based on the identifier of the steps.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The pagination token that indicates the next set of results to retrieve.
-    description: This input determines which steps to list.
-  ListStepsOutput:
-    type: object
-    properties:
-      Steps:
-        $ref: '#/definitions/StepSummaryList'
-        description: The filtered list of steps for the cluster.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The pagination token that indicates the next set of results to retrieve.
-    description: This output contains the list of steps returned in reverse order. This means that the last step is the first element in the list.
   Marker:
     type: string
-  MarketType:
-    type: string
-    enum:
-      - ON_DEMAND
-      - SPOT
+  SecurityConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityConfigurationSummary'
+  StepStateList:
+    type: array
+    items:
+      $ref: '#/definitions/StepState'
+  StepSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/StepSummary'
   MetricDimension:
     type: object
     properties:
@@ -2795,205 +3227,35 @@ definitions:
         $ref: '#/definitions/String'
         description: The dimension value.
     description: 'A CloudWatch dimension, which is specified using a <code>Key</code> (known as a <code>Name</code> in CloudWatch), <code>Value</code> pair. By default, Amazon EMR uses one dimension whose <code>Key</code> is <code>JobFlowID</code> and <code>Value</code> is a variable representing the cluster ID, which is <code>${emr.clusterId}</code>. This enables the rule to bootstrap when the cluster ID becomes available.'
-  MetricDimensionList:
-    type: array
-    items:
-      $ref: '#/definitions/MetricDimension'
-  ModifyInstanceFleetInput:
-    type: object
-    required:
-      - ClusterId
-      - InstanceFleet
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: The unique identifier of the cluster.
-      InstanceFleet:
-        $ref: '#/definitions/InstanceFleetModifyConfig'
-        description: The unique identifier of the instance fleet.
-  ModifyInstanceGroupsInput:
+  SupportedProductConfig:
     type: object
     properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: The ID of the cluster to which the instance group belongs.
-      InstanceGroups:
-        $ref: '#/definitions/InstanceGroupModifyConfigList'
-        description: Instance groups to change.
-    description: Change the size of some instance groups.
+      Name:
+        $ref: '#/definitions/XmlStringMaxLen256'
+        description: The name of the product configuration.
+      Args:
+        $ref: '#/definitions/XmlStringList'
+        description: The list of user-supplied arguments.
+    description: The list of supported product configurations which allow user-supplied arguments. EMR accepts these arguments and forwards them to the corresponding installation script as bootstrap action arguments.
   NewSupportedProductsList:
     type: array
     items:
       $ref: '#/definitions/SupportedProductConfig'
-  NonNegativeDouble:
-    type: number
-    format: double
-    minimum: 0
-  PlacementType:
-    type: object
-    properties:
-      AvailabilityZone:
-        $ref: '#/definitions/XmlString'
-        description: 'The Amazon EC2 Availability Zone for the cluster. <code>AvailabilityZone</code> is used for uniform instance groups, while <code>AvailabilityZones</code> (plural) is used for instance fleets.'
-      AvailabilityZones:
-        $ref: '#/definitions/XmlStringMaxLen256List'
-        description: '<p>When multiple Availability Zones are specified, Amazon EMR evaluates them and launches instances in the optimal Availability Zone. <code>AvailabilityZones</code> is used for instance fleets, while <code>AvailabilityZone</code> (singular) is used for uniform instance groups.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
-    description: The Amazon EC2 Availability Zone configuration of the cluster (job flow).
-  PutAutoScalingPolicyInput:
+  SimpleScalingPolicyConfiguration:
     type: object
     required:
-      - ClusterId
-      - InstanceGroupId
-      - AutoScalingPolicy
+      - ScalingAdjustment
     properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.
-      InstanceGroupId:
-        $ref: '#/definitions/InstanceGroupId'
-        description: Specifies the ID of the instance group to which the automatic scaling policy is applied.
-      AutoScalingPolicy:
-        $ref: '#/definitions/AutoScalingPolicy'
-        description: Specifies the definition of the automatic scaling policy.
-  PutAutoScalingPolicyOutput:
-    type: object
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.
-      InstanceGroupId:
-        $ref: '#/definitions/InstanceGroupId'
-        description: Specifies the ID of the instance group to which the scaling policy is applied.
-      AutoScalingPolicy:
-        $ref: '#/definitions/AutoScalingPolicyDescription'
-        description: The automatic scaling policy definition.
-  RemoveAutoScalingPolicyInput:
-    type: object
-    required:
-      - ClusterId
-      - InstanceGroupId
-    properties:
-      ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.
-      InstanceGroupId:
-        $ref: '#/definitions/InstanceGroupId'
-        description: Specifies the ID of the instance group to which the scaling policy is applied.
-  RemoveAutoScalingPolicyOutput:
-    type: object
-    properties: {}
-  RemoveTagsInput:
-    type: object
-    required:
-      - ResourceId
-      - TagKeys
-    properties:
-      ResourceId:
-        $ref: '#/definitions/ResourceId'
-        description: The Amazon EMR resource identifier from which tags will be removed. This value must be a cluster identifier.
-      TagKeys:
-        $ref: '#/definitions/StringList'
-        description: A list of tag keys to remove from a resource.
-    description: This input identifies a cluster and a list of tags to remove.
-  RemoveTagsOutput:
-    type: object
-    properties: {}
-    description: This output indicates the result of removing tags from a resource.
-  RepoUpgradeOnBoot:
-    type: string
-    enum:
-      - SECURITY
-      - NONE
-  ResourceId:
-    type: string
-  RunJobFlowInput:
-    type: object
-    required:
-      - Name
-      - Instances
-    properties:
-      Name:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: The name of the job flow.
-      LogUri:
-        $ref: '#/definitions/XmlString'
-        description: 'The location in Amazon S3 to write the log files of the job flow. If a value is not provided, logs are not created.'
-      AdditionalInfo:
-        $ref: '#/definitions/XmlString'
-        description: A JSON string for selecting additional features.
-      AmiVersion:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: 'Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0 and later, <code>ReleaseLabel</code> is used. To specify a custom AMI, use <code>CustomAmiID</code>.'
-      ReleaseLabel:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: 'The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version, for example, <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application versions and features, see <a href="http://docs.aws.amazon.com/emr/latest/ReleaseGuide/">http://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use <code>AmiVersion</code>.'
-      Instances:
-        $ref: '#/definitions/JobFlowInstancesConfig'
-        description: A specification of the number and type of Amazon EC2 instances.
-      Steps:
-        $ref: '#/definitions/StepConfigList'
-        description: A list of steps to run.
-      BootstrapActions:
-        $ref: '#/definitions/BootstrapActionConfigList'
-        description: A list of bootstrap actions to run before Hadoop starts on the cluster nodes.
-      SupportedProducts:
-        $ref: '#/definitions/SupportedProductsList'
-        description: '<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.</p> </note> <p>A list of strings that indicates third-party software to use. For more information, see the <a href="http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf">Amazon EMR Developer Guide</a>. Currently supported values are:</p> <ul> <li> <p>"mapr-m3" - launch the job flow using MapR M3 Edition.</p> </li> <li> <p>"mapr-m5" - launch the job flow using MapR M5 Edition.</p> </li> </ul>'
-      NewSupportedProducts:
-        $ref: '#/definitions/NewSupportedProductsList'
-        description: '<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.</p> </note> <p>A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see "Launch a Job Flow on the MapR Distribution for Hadoop" in the <a href="http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf">Amazon EMR Developer Guide</a>. Supported values are:</p> <ul> <li> <p>"mapr-m3" - launch the cluster using MapR M3 Edition.</p> </li> <li> <p>"mapr-m5" - launch the cluster using MapR M5 Edition.</p> </li> <li> <p>"mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.</p> </li> <li> <p>"mapr-m7" - launch the cluster using MapR M7 Edition.</p> </li> <li> <p>"hunk" - launch the cluster with the Hunk Big Data Analtics Platform.</p> </li> <li> <p>"hue"- launch the cluster with Hue installed.</p> </li> <li> <p>"spark" - launch the cluster with Apache Spark installed.</p> </li> <li> <p>"ganglia" - launch the cluster with the Ganglia Monitoring System installed.</p> </li> </ul>'
-      Applications:
-        $ref: '#/definitions/ApplicationList'
-        description: 'For Amazon EMR releases 4.0 and later. A list of applications for the cluster. Valid values are: "Hadoop", "Hive", "Mahout", "Pig", and "Spark." They are case insensitive.'
-      Configurations:
-        $ref: '#/definitions/ConfigurationList'
-        description: For Amazon EMR releases 4.0 and later. The list of configurations supplied for the EMR cluster you are creating.
-      VisibleToAllUsers:
-        $ref: '#/definitions/Boolean'
-        description: 'Whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to <code>true</code>, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the cluster. If it is set to <code>false</code>, only the IAM user that created the cluster can view and manage it.'
-      JobFlowRole:
-        $ref: '#/definitions/XmlString'
-        description: 'Also called instance profile and EC2 role. An IAM role for an EMR cluster. The EC2 instances of the cluster assume this role. The default role is <code>EMR_EC2_DefaultRole</code>. In order to use the default role, you must have already created it using the CLI or console.'
-      ServiceRole:
-        $ref: '#/definitions/XmlString'
-        description: The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf.
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: A list of tags to associate with a cluster and propagate to Amazon EC2 instances.
-      SecurityConfiguration:
-        $ref: '#/definitions/XmlString'
-        description: The name of a security configuration to apply to the cluster.
-      AutoScalingRole:
-        $ref: '#/definitions/XmlString'
-        description: An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate EC2 instances in an instance group.
-      ScaleDownBehavior:
-        $ref: '#/definitions/ScaleDownBehavior'
-        description: 'Specifies the way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.'
-      CustomAmiId:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: '<p>Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when it launches cluster EC2 instances. For more information about custom AMIs in Amazon EMR, see <a href="http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html">Using a Custom AMI</a> in the <i>Amazon EMR Management Guide</i>. If omitted, the cluster uses the base Linux AMI for the <code>ReleaseLabel</code> specified. For Amazon EMR versions 2.x and 3.x, use <code>AmiVersion</code> instead.</p> <p>For information about creating a custom AMI, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html">Creating an Amazon EBS-Backed Linux AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>. For information about finding an AMI ID, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html">Finding a Linux AMI</a>. </p>'
-      EbsRootVolumeSize:
+      AdjustmentType:
+        $ref: '#/definitions/AdjustmentType'
+        description: 'The way in which EC2 instances are added (if <code>ScalingAdjustment</code> is a positive number) or terminated (if <code>ScalingAdjustment</code> is a negative number) each time the scaling activity is triggered. <code>CHANGE_IN_CAPACITY</code> is the default. <code>CHANGE_IN_CAPACITY</code> indicates that the EC2 instance count increments or decrements by <code>ScalingAdjustment</code>, which should be expressed as an integer. <code>PERCENT_CHANGE_IN_CAPACITY</code> indicates the instance count increments or decrements by the percentage specified by <code>ScalingAdjustment</code>, which should be expressed as an integer. For example, 20 indicates an increase in 20% increments of cluster capacity. <code>EXACT_CAPACITY</code> indicates the scaling activity results in an instance group with the number of EC2 instances specified by <code>ScalingAdjustment</code>, which should be expressed as a positive integer.'
+      ScalingAdjustment:
         $ref: '#/definitions/Integer'
-        description: 'The size, in GiB, of the EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later.'
-      RepoUpgradeOnBoot:
-        $ref: '#/definitions/RepoUpgradeOnBoot'
-        description: 'Applies only when <code>CustomAmiID</code> is used. Specifies which updates from the Amazon Linux AMI package repositories to apply automatically when the instance boots using the AMI. If omitted, the default is <code>SECURITY</code>, which indicates that only security updates are applied. If <code>NONE</code> is specified, no updates are applied, and all updates must be applied manually.'
-      KerberosAttributes:
-        $ref: '#/definitions/KerberosAttributes'
-        description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.'
-    description: ' Input to the <a>RunJobFlow</a> operation. '
-  RunJobFlowOutput:
-    type: object
-    properties:
-      JobFlowId:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: An unique identifier for the job flow.
-    description: ' The result of the <a>RunJobFlow</a> operation. '
-  ScaleDownBehavior:
-    type: string
-    enum:
-      - TERMINATE_AT_INSTANCE_HOUR
-      - TERMINATE_AT_TASK_COMPLETION
+        description: 'The amount by which to scale in or scale out, based on the specified <code>AdjustmentType</code>. A positive value adds to the instance group''s EC2 instance count while a negative number removes instances. If <code>AdjustmentType</code> is set to <code>EXACT_CAPACITY</code>, the number should only be a positive integer. If <code>AdjustmentType</code> is set to <code>PERCENT_CHANGE_IN_CAPACITY</code>, the value should express the percentage as an integer. For example, -20 indicates a decrease in 20% increments of cluster capacity.'
+      CoolDown:
+        $ref: '#/definitions/Integer'
+        description: 'The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start. The default value is 0.'
+    description: 'An automatic scaling configuration, which describes how the policy adds or removes instances, the cooldown period, and the number of EC2 instances that will be added each time the CloudWatch metric alarm condition is satisfied.'
   ScalingAction:
     type: object
     required:
@@ -3006,19 +3268,15 @@ definitions:
         $ref: '#/definitions/SimpleScalingPolicyConfiguration'
         description: 'The type of adjustment the automatic scaling activity makes when triggered, and the periodicity of the adjustment.'
     description: 'The type of adjustment the automatic scaling activity makes when triggered, and the periodicity of the adjustment.'
-  ScalingConstraints:
+  ScalingTrigger:
     type: object
     required:
-      - MinCapacity
-      - MaxCapacity
+      - CloudWatchAlarmDefinition
     properties:
-      MinCapacity:
-        $ref: '#/definitions/Integer'
-        description: The lower boundary of EC2 instances in an instance group below which scaling activities are not allowed to shrink. Scale-in activities will not terminate instances below this boundary.
-      MaxCapacity:
-        $ref: '#/definitions/Integer'
-        description: The upper boundary of EC2 instances in an instance group beyond which scaling activities are not allowed to grow. Scale-out activities will not add instances beyond this boundary.
-    description: The upper and lower EC2 instance limits for an automatic scaling policy. Automatic scaling activities triggered by automatic scaling rules will not cause an instance group to grow above or below these limits.
+      CloudWatchAlarmDefinition:
+        $ref: '#/definitions/CloudWatchAlarmDefinition'
+        description: 'The definition of a CloudWatch metric alarm. When the defined alarm conditions are met along with other trigger parameters, scaling activity begins.'
+    description: The conditions that trigger an automatic scaling activity.
   ScalingRule:
     type: object
     required:
@@ -3039,35 +3297,6 @@ definitions:
         $ref: '#/definitions/ScalingTrigger'
         description: The CloudWatch alarm definition that determines when automatic scaling activity is triggered.
     description: 'A scale-in or scale-out rule that defines scaling activity, including the CloudWatch metric alarm that triggers activity, how EC2 instances are added or removed, and the periodicity of adjustments. The automatic scaling policy for an instance group can comprise one or more automatic scaling rules.'
-  ScalingRuleList:
-    type: array
-    items:
-      $ref: '#/definitions/ScalingRule'
-  ScalingTrigger:
-    type: object
-    required:
-      - CloudWatchAlarmDefinition
-    properties:
-      CloudWatchAlarmDefinition:
-        $ref: '#/definitions/CloudWatchAlarmDefinition'
-        description: 'The definition of a CloudWatch metric alarm. When the defined alarm conditions are met along with other trigger parameters, scaling activity begins.'
-    description: The conditions that trigger an automatic scaling activity.
-  ScriptBootstrapActionConfig:
-    type: object
-    required:
-      - Path
-    properties:
-      Path:
-        $ref: '#/definitions/XmlString'
-        description: Location of the script to run during a bootstrap action. Can be either a location in Amazon S3 or on a local file system.
-      Args:
-        $ref: '#/definitions/XmlStringList'
-        description: A list of command line arguments to pass to the bootstrap action script.
-    description: Configuration of the script to run during a bootstrap action.
-  SecurityConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityConfigurationSummary'
   SecurityConfigurationSummary:
     type: object
     properties:
@@ -3078,109 +3307,27 @@ definitions:
         $ref: '#/definitions/Date'
         description: The date and time the security configuration was created.
     description: 'The creation date and time, and name, of a security configuration.'
-  SecurityGroupsList:
-    type: array
-    items:
-      $ref: '#/definitions/XmlStringMaxLen256'
-  SetTerminationProtectionInput:
-    type: object
-    required:
-      - JobFlowIds
-      - TerminationProtected
-    properties:
-      JobFlowIds:
-        $ref: '#/definitions/XmlStringList'
-        description: ' A list of strings that uniquely identify the clusters to protect. This identifier is returned by <a>RunJobFlow</a> and can also be obtained from <a>DescribeJobFlows</a> . '
-      TerminationProtected:
-        $ref: '#/definitions/Boolean'
-        description: 'A Boolean that indicates whether to protect the cluster and prevent the Amazon EC2 instances in the cluster from shutting down due to API calls, user intervention, or job-flow error.'
-    description: ' The input argument to the <a>TerminationProtection</a> operation. '
-  SetVisibleToAllUsersInput:
-    type: object
-    required:
-      - JobFlowIds
-      - VisibleToAllUsers
-    properties:
-      JobFlowIds:
-        $ref: '#/definitions/XmlStringList'
-        description: Identifiers of the job flows to receive the new visibility setting.
-      VisibleToAllUsers:
-        $ref: '#/definitions/Boolean'
-        description: 'Whether the specified clusters are visible to all IAM users of the AWS account associated with the cluster. If this value is set to True, all IAM users of that AWS account can view and, if they have the proper IAM policy permissions set, manage the clusters. If it is set to False, only the IAM user that created a cluster can view and manage it.'
-    description: The input to the SetVisibleToAllUsers action.
-  ShrinkPolicy:
-    type: object
-    properties:
-      DecommissionTimeout:
-        $ref: '#/definitions/Integer'
-        description: The desired timeout for decommissioning an instance. Overrides the default YARN decommissioning timeout.
-      InstanceResizePolicy:
-        $ref: '#/definitions/InstanceResizePolicy'
-        description: Custom policy for requesting termination protection or termination of specific instances when shrinking an instance group.
-    description: Policy for customizing shrink operations. Allows configuration of decommissioning timeout and targeted instance shrinking.
-  SimpleScalingPolicyConfiguration:
-    type: object
-    required:
-      - ScalingAdjustment
-    properties:
-      AdjustmentType:
-        $ref: '#/definitions/AdjustmentType'
-        description: 'The way in which EC2 instances are added (if <code>ScalingAdjustment</code> is a positive number) or terminated (if <code>ScalingAdjustment</code> is a negative number) each time the scaling activity is triggered. <code>CHANGE_IN_CAPACITY</code> is the default. <code>CHANGE_IN_CAPACITY</code> indicates that the EC2 instance count increments or decrements by <code>ScalingAdjustment</code>, which should be expressed as an integer. <code>PERCENT_CHANGE_IN_CAPACITY</code> indicates the instance count increments or decrements by the percentage specified by <code>ScalingAdjustment</code>, which should be expressed as an integer. For example, 20 indicates an increase in 20% increments of cluster capacity. <code>EXACT_CAPACITY</code> indicates the scaling activity results in an instance group with the number of EC2 instances specified by <code>ScalingAdjustment</code>, which should be expressed as a positive integer.'
-      ScalingAdjustment:
-        $ref: '#/definitions/Integer'
-        description: 'The amount by which to scale in or scale out, based on the specified <code>AdjustmentType</code>. A positive value adds to the instance group''s EC2 instance count while a negative number removes instances. If <code>AdjustmentType</code> is set to <code>EXACT_CAPACITY</code>, the number should only be a positive integer. If <code>AdjustmentType</code> is set to <code>PERCENT_CHANGE_IN_CAPACITY</code>, the value should express the percentage as an integer. For example, -20 indicates a decrease in 20% increments of cluster capacity.'
-      CoolDown:
-        $ref: '#/definitions/Integer'
-        description: 'The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start. The default value is 0.'
-    description: 'An automatic scaling configuration, which describes how the policy adds or removes instances, the cooldown period, and the number of EC2 instances that will be added each time the CloudWatch metric alarm condition is satisfied.'
-  SpotProvisioningSpecification:
-    type: object
-    required:
-      - TimeoutDurationMinutes
-      - TimeoutAction
-    properties:
-      TimeoutDurationMinutes:
-        $ref: '#/definitions/WholeNumber'
-        description: 'The spot provisioning timeout period in minutes. If Spot instances are not provisioned within this time period, the <code>TimeOutAction</code> is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.'
-      TimeoutAction:
-        $ref: '#/definitions/SpotProvisioningTimeoutAction'
-        description: 'The action to take when <code>TargetSpotCapacity</code> has not been fulfilled when the <code>TimeoutDurationMinutes</code> has expired. Spot instances are not uprovisioned within the Spot provisioining timeout. Valid values are <code>TERMINATE_CLUSTER</code> and <code>SWITCH_TO_ON_DEMAND</code>. SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.'
-      BlockDurationMinutes:
-        $ref: '#/definitions/WholeNumber'
-        description: 'The defined duration for Spot instances (also known as Spot blocks) in minutes. When specified, the Spot instance does not terminate before the defined duration expires, and defined duration pricing for Spot instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates. '
-    description: '<p>The launch specification for Spot instances in the instance fleet, which determines the defined duration and provisioning timeout behavior.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
   SpotProvisioningTimeoutAction:
     type: string
     enum:
       - SWITCH_TO_ON_DEMAND
       - TERMINATE_CLUSTER
-  Statistic:
-    type: string
-    enum:
-      - SAMPLE_COUNT
-      - AVERAGE
-      - SUM
-      - MINIMUM
-      - MAXIMUM
-  Step:
+  StepStatus:
     type: object
     properties:
-      Id:
-        $ref: '#/definitions/StepId'
-        description: The identifier of the cluster step.
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the cluster step.
-      Config:
-        $ref: '#/definitions/HadoopStepConfig'
-        description: The Hadoop job configuration of the cluster step.
-      ActionOnFailure:
-        $ref: '#/definitions/ActionOnFailure'
-        description: 'This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.'
-      Status:
-        $ref: '#/definitions/StepStatus'
-        description: The current execution status details of the cluster step.
-    description: This represents a step in a cluster.
+      State:
+        $ref: '#/definitions/StepState'
+        description: The execution state of the cluster step.
+      StateChangeReason:
+        $ref: '#/definitions/StepStateChangeReason'
+        description: The reason for the step execution status change.
+      FailureDetails:
+        $ref: '#/definitions/FailureDetails'
+        description: 'The details for the step failure including reason, message, and log file path where the root cause was identified.'
+      Timeline:
+        $ref: '#/definitions/StepTimeline'
+        description: The timeline of the cluster step status over time.
+    description: The execution status details of the cluster step.
   StepConfig:
     type: object
     required:
@@ -3197,37 +3344,6 @@ definitions:
         $ref: '#/definitions/HadoopJarStepConfig'
         description: The JAR file used for the step.
     description: Specification of a cluster (job flow) step.
-  StepConfigList:
-    type: array
-    items:
-      $ref: '#/definitions/StepConfig'
-  StepDetail:
-    type: object
-    required:
-      - StepConfig
-      - ExecutionStatusDetail
-    properties:
-      StepConfig:
-        $ref: '#/definitions/StepConfig'
-        description: The step configuration.
-      ExecutionStatusDetail:
-        $ref: '#/definitions/StepExecutionStatusDetail'
-        description: The description of the step status.
-    description: Combines the execution state and configuration of a step.
-  StepDetailList:
-    type: array
-    items:
-      $ref: '#/definitions/StepDetail'
-  StepExecutionState:
-    type: string
-    enum:
-      - PENDING
-      - RUNNING
-      - CONTINUE
-      - COMPLETED
-      - CANCELLED
-      - FAILED
-      - INTERRUPTED
   StepExecutionStatusDetail:
     type: object
     required:
@@ -3250,12 +3366,29 @@ definitions:
         $ref: '#/definitions/XmlString'
         description: A description of the step's current state.
     description: The execution state of a step.
-  StepId:
+  StepDetail:
+    type: object
+    required:
+      - StepConfig
+      - ExecutionStatusDetail
+    properties:
+      StepConfig:
+        $ref: '#/definitions/StepConfig'
+        description: The step configuration.
+      ExecutionStatusDetail:
+        $ref: '#/definitions/StepExecutionStatusDetail'
+        description: The description of the step status.
+    description: Combines the execution state and configuration of a step.
+  StepExecutionState:
     type: string
-  StepIdsList:
-    type: array
-    items:
-      $ref: '#/definitions/XmlStringMaxLen256'
+    enum:
+      - PENDING
+      - RUNNING
+      - CONTINUE
+      - COMPLETED
+      - CANCELLED
+      - FAILED
+      - INTERRUPTED
   StepState:
     type: string
     enum:
@@ -3266,6 +3399,10 @@ definitions:
       - CANCELLED
       - FAILED
       - INTERRUPTED
+  StepStateChangeReasonCode:
+    type: string
+    enum:
+      - NONE
   StepStateChangeReason:
     type: object
     properties:
@@ -3276,30 +3413,19 @@ definitions:
         $ref: '#/definitions/String'
         description: The descriptive message for the state change reason.
     description: The details of the step state change reason.
-  StepStateChangeReasonCode:
-    type: string
-    enum:
-      - NONE
-  StepStateList:
-    type: array
-    items:
-      $ref: '#/definitions/StepState'
-  StepStatus:
+  StepTimeline:
     type: object
     properties:
-      State:
-        $ref: '#/definitions/StepState'
-        description: The execution state of the cluster step.
-      StateChangeReason:
-        $ref: '#/definitions/StepStateChangeReason'
-        description: The reason for the step execution status change.
-      FailureDetails:
-        $ref: '#/definitions/FailureDetails'
-        description: 'The details for the step failure including reason, message, and log file path where the root cause was identified.'
-      Timeline:
-        $ref: '#/definitions/StepTimeline'
-        description: The timeline of the cluster step status over time.
-    description: The execution status details of the cluster step.
+      CreationDateTime:
+        $ref: '#/definitions/Date'
+        description: The date and time when the cluster step was created.
+      StartDateTime:
+        $ref: '#/definitions/Date'
+        description: The date and time when the cluster step execution started.
+      EndDateTime:
+        $ref: '#/definitions/Date'
+        description: The date and time when the cluster step execution completed or failed.
+    description: The timeline of the cluster step lifecycle.
   StepSummary:
     type: object
     properties:
@@ -3319,52 +3445,6 @@ definitions:
         $ref: '#/definitions/StepStatus'
         description: The current execution status details of the cluster step.
     description: The summary of the cluster step.
-  StepSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/StepSummary'
-  StepTimeline:
-    type: object
-    properties:
-      CreationDateTime:
-        $ref: '#/definitions/Date'
-        description: The date and time when the cluster step was created.
-      StartDateTime:
-        $ref: '#/definitions/Date'
-        description: The date and time when the cluster step execution started.
-      EndDateTime:
-        $ref: '#/definitions/Date'
-        description: The date and time when the cluster step execution completed or failed.
-    description: The timeline of the cluster step lifecycle.
-  String:
-    type: string
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  StringMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  SupportedProductConfig:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/XmlStringMaxLen256'
-        description: The name of the product configuration.
-      Args:
-        $ref: '#/definitions/XmlStringList'
-        description: The list of user-supplied arguments.
-    description: The list of supported product configurations which allow user-supplied arguments. EMR accepts these arguments and forwards them to the corresponding installation script as bootstrap action arguments.
-  SupportedProductsList:
-    type: array
-    items:
-      $ref: '#/definitions/XmlStringMaxLen256'
   Tag:
     type: object
     properties:
@@ -3375,83 +3455,3 @@ definitions:
         $ref: '#/definitions/String'
         description: 'A user-defined value, which is optional in a tag. For more information, see <a href="http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html">Tag Clusters</a>. '
     description: 'A key/value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href="http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html">Tag Clusters</a>. '
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TerminateJobFlowsInput:
-    type: object
-    required:
-      - JobFlowIds
-    properties:
-      JobFlowIds:
-        $ref: '#/definitions/XmlStringList'
-        description: A list of job flows to be shutdown.
-    description: ' Input to the <a>TerminateJobFlows</a> operation. '
-  Unit:
-    type: string
-    enum:
-      - NONE
-      - SECONDS
-      - MICRO_SECONDS
-      - MILLI_SECONDS
-      - BYTES
-      - KILO_BYTES
-      - MEGA_BYTES
-      - GIGA_BYTES
-      - TERA_BYTES
-      - BITS
-      - KILO_BITS
-      - MEGA_BITS
-      - GIGA_BITS
-      - TERA_BITS
-      - PERCENT
-      - COUNT
-      - BYTES_PER_SECOND
-      - KILO_BYTES_PER_SECOND
-      - MEGA_BYTES_PER_SECOND
-      - GIGA_BYTES_PER_SECOND
-      - TERA_BYTES_PER_SECOND
-      - BITS_PER_SECOND
-      - KILO_BITS_PER_SECOND
-      - MEGA_BITS_PER_SECOND
-      - GIGA_BITS_PER_SECOND
-      - TERA_BITS_PER_SECOND
-      - COUNT_PER_SECOND
-  VolumeSpecification:
-    type: object
-    required:
-      - VolumeType
-      - SizeInGB
-    properties:
-      VolumeType:
-        $ref: '#/definitions/String'
-        description: 'The volume type. Volume types supported are gp2, io1, standard.'
-      Iops:
-        $ref: '#/definitions/Integer'
-        description: The number of I/O operations per second (IOPS) that the volume supports.
-      SizeInGB:
-        $ref: '#/definitions/Integer'
-        description: 'The volume size, in gibibytes (GiB). This can be a number from 1 - 1024. If the volume type is EBS-optimized, the minimum value is 10.'
-    description: 'EBS volume specifications such as volume type, IOPS, and size (GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.'
-  WholeNumber:
-    type: integer
-    minimum: 0
-  XmlString:
-    type: string
-    minLength: 0
-    maxLength: 10280
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  XmlStringList:
-    type: array
-    items:
-      $ref: '#/definitions/XmlString'
-  XmlStringMaxLen256:
-    type: string
-    minLength: 0
-    maxLength: 256
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  XmlStringMaxLen256List:
-    type: array
-    items:
-      $ref: '#/definitions/XmlStringMaxLen256'

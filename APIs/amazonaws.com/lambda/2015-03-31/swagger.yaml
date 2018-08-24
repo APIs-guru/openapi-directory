@@ -1492,38 +1492,15 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AccountLimit:
+  AddPermissionResponse:
     type: object
+    example:
+      Statement: ID-1
     properties:
-      TotalCodeSize:
-        $ref: '#/definitions/Long'
-        description: 'Maximum size, in bytes, of a code package you can upload per region. The default size is 75 GB. '
-      CodeSizeUnzipped:
-        $ref: '#/definitions/Long'
-        description: 'Size, in bytes, of code/dependencies that you can zip into a deployment package (uncompressed zip/jar size) for uploading. The default limit is 250 MB.'
-      CodeSizeZipped:
-        $ref: '#/definitions/Long'
-        description: 'Size, in bytes, of a single zipped code/dependencies package you can upload for your Lambda function(.zip/.jar file). Try using Amazon S3 for uploading larger files. Default limit is 50 MB.'
-      ConcurrentExecutions:
-        $ref: '#/definitions/Integer'
-        description: 'Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Lambda Function Concurrent Executions</a>. The default limit is 1000.'
-      UnreservedConcurrentExecutions:
-        $ref: '#/definitions/UnreservedConcurrentExecutions'
-        description: 'The number of concurrent executions available to functions that do not have concurrency limits set. For more information, see <a>concurrent-executions</a>.'
-    description: Provides limits of code size and concurrency associated with the current account and region.
-  AccountUsage:
-    type: object
-    properties:
-      TotalCodeSize:
-        $ref: '#/definitions/Long'
-        description: 'Total size, in bytes, of the account''s deployment packages per region.'
-      FunctionCount:
-        $ref: '#/definitions/Long'
-        description: The number of your account's existing functions per region.
-    description: Provides code size usage and function count associated with the current account and region.
-  Action:
-    type: string
-    pattern: '(lambda:[*]|lambda:[a-zA-Z]+|[*])'
+      Statement:
+        $ref: '#/definitions/String'
+        description: The permission statement you specified in the request. The response returns the same as a string using a backslash ("\") as an escape character in the JSON.
+    description: <p/>
   AddPermissionRequest:
     type: object
     required:
@@ -1560,34 +1537,70 @@ definitions:
         $ref: '#/definitions/String'
         description: 'An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn''t match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either or .'
     description: <p/>
-  AddPermissionResponse:
+  ServiceException:
     type: object
-    example:
-      Statement: ID-1
     properties:
-      Statement:
+      Type:
         $ref: '#/definitions/String'
-        description: The permission statement you specified in the request. The response returns the same as a string using a backslash ("\") as an escape character in the JSON.
-    description: <p/>
-  AdditionalVersion:
-    type: string
-    pattern: '[0-9]+'
-    minLength: 1
-    maxLength: 1024
-  AdditionalVersionWeights:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AdditionalVersion'
-        value:
-          $ref: '#/definitions/Weight'
-  Alias:
-    type: string
-    pattern: '(?!^[0-9]+$)([a-zA-Z0-9-_]+)'
-    minLength: 1
-    maxLength: 128
+      Message:
+        $ref: '#/definitions/String'
+    description: The AWS Lambda service encountered an internal error.
+  ResourceNotFoundException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: 'The resource (for example, a Lambda function or access policy statement) specified in the request does not exist.'
+  ResourceConflictException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+        description: <p/>
+      message:
+        $ref: '#/definitions/String'
+        description: <p/>
+    description: The resource already exists.
+  InvalidParameterValueException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+        description: <p/>
+      message:
+        $ref: '#/definitions/String'
+        description: <p/>
+    description: 'One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception.'
+  PolicyLengthExceededException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      message:
+        $ref: '#/definitions/String'
+    description: Lambda function access policy is limited to 20 KB.
+  TooManyRequestsException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      message:
+        $ref: '#/definitions/String'
+      Reason:
+        $ref: '#/definitions/ThrottleReason'
+    description: ' '
+  PreconditionFailedException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+        description: <p/>
+      message:
+        $ref: '#/definitions/String'
+        description: <p/>
+    description: The RevisionId provided does not match the latest RevisionId for the Lambda function or alias. Call the <code>GetFunction</code> or the <code>GetAlias</code> API to retrieve the latest RevisionId for your resource.
   AliasConfiguration:
     type: object
     example:
@@ -1615,46 +1628,6 @@ definitions:
         $ref: '#/definitions/String'
         description: Represents the latest updated revision of the function or alias.
     description: Provides configuration information about a Lambda function version alias.
-  AliasList:
-    type: array
-    items:
-      $ref: '#/definitions/AliasConfiguration'
-  AliasRoutingConfiguration:
-    type: object
-    properties:
-      AdditionalVersionWeights:
-        $ref: '#/definitions/AdditionalVersionWeights'
-        description: 'Set this value to dictate what percentage of traffic will invoke the updated function version. If set to an empty string, 100 percent of traffic will invoke <code>function-version</code>. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.'
-    description: 'The parent object that implements what percentage of traffic will invoke each function version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.'
-  Arn:
-    type: string
-    pattern: 'arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)'
-  BatchSize:
-    type: integer
-    minimum: 1
-    maximum: 10000
-  Blob:
-    type: string
-    format: password
-  BlobStream:
-    type: string
-  Boolean:
-    type: boolean
-  CodeStorageExceededException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-        description: <p/>
-      message:
-        $ref: '#/definitions/String'
-    description: 'You have exceeded your maximum total code size per account. <a href="http://docs.aws.amazon.com/lambda/latest/dg/limits.html">Limits</a> '
-  Concurrency:
-    type: object
-    properties:
-      ReservedConcurrentExecutions:
-        $ref: '#/definitions/ReservedConcurrentExecutions'
-        description: 'The number of concurrent executions reserved for this function. For more information, see <a>concurrent-executions</a>.'
   CreateAliasRequest:
     type: object
     required:
@@ -1673,209 +1646,6 @@ definitions:
       RoutingConfig:
         $ref: '#/definitions/AliasRoutingConfiguration'
         description: 'Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.'
-  CreateEventSourceMappingRequest:
-    type: object
-    required:
-      - EventSourceArn
-      - FunctionName
-    properties:
-      EventSourceArn:
-        $ref: '#/definitions/Arn'
-        description: 'The Amazon Resource Name (ARN) of the event source. Any record added to this source could cause AWS Lambda to invoke your Lambda function, it depends on the <code>BatchSize</code>. AWS Lambda POSTs the event''s records to your Lambda function as JSON.'
-      FunctionName:
-        $ref: '#/definitions/FunctionName'
-        description: '<p>The Lambda function to invoke when AWS Lambda detects an event on the stream.</p> <p> You can specify the function name (for example, <code>Thumbnail</code>) or you can specify Amazon Resource Name (ARN) of the function (for example, <code>arn:aws:lambda:us-west-2:account-id:function:ThumbNail</code>). </p> <p> If you are using versioning, you can also provide a qualified function ARN (ARN that is qualified with function version or alias name as suffix). For more information about versioning, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a> </p> <p>AWS Lambda also allows you to specify only the function name with the account ID qualifier (for example, <code>account-id:Thumbnail</code>). </p> <p>Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
-      Enabled:
-        $ref: '#/definitions/Enabled'
-        description: 'Indicates whether AWS Lambda should begin polling the event source. By default, <code>Enabled</code> is true. '
-      BatchSize:
-        $ref: '#/definitions/BatchSize'
-        description: 'The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function. Your function receives an event with all the retrieved records. The default for Amazon Kinesis and Amazon DynamoDB is 100 records. For SQS, the default is 1.'
-      StartingPosition:
-        $ref: '#/definitions/EventSourcePosition'
-        description: 'The position in the DynamoDB or Kinesis stream where AWS Lambda should start reading. For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType">GetShardIterator</a> in the <i>Amazon Kinesis API Reference Guide</i> or <a href="http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetShardIterator.html">GetShardIterator</a> in the <i>Amazon DynamoDB API Reference Guide</i>. The <code>AT_TIMESTAMP</code> value is supported only for <a href="http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html">Kinesis streams</a>. '
-      StartingPositionTimestamp:
-        $ref: '#/definitions/Date'
-        description: 'The timestamp of the data record from which to start reading. Used with <a href="http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType">shard iterator type</a> AT_TIMESTAMP. If a record with this exact timestamp does not exist, the iterator returned is for the next (later) record. If the timestamp is older than the current trim horizon, the iterator returned is for the oldest untrimmed data record (TRIM_HORIZON). Valid only for <a href="http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html">Kinesis streams</a>. '
-    description: <p/>
-  CreateFunctionRequest:
-    type: object
-    required:
-      - FunctionName
-      - Runtime
-      - Role
-      - Handler
-      - Code
-    example:
-      Code: {}
-      Description: ''
-      FunctionName: MyFunction
-      Handler: souce_file.handler_name
-      MemorySize: 128
-      Publish: true
-      Role: 'arn:aws:iam::123456789012:role/service-role/role-name'
-      Runtime: nodejs4.3
-      Timeout: 15
-      VpcConfig: {}
-    properties:
-      FunctionName:
-        $ref: '#/definitions/FunctionName'
-        description: 'The name you want to assign to the function you are uploading. The function names appear in the console and are returned in the <a>ListFunctions</a> API. Function names are used to specify functions to other AWS Lambda API operations, such as <a>Invoke</a>. Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length. '
-      Runtime:
-        $ref: '#/definitions/Runtime'
-        description: '<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use the .NET Core runtime v1.0, set the value to "dotnetcore1.0". To use the .NET Core runtime v2.0, set the value to "dotnetcore2.0".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parameter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>'
-      Role:
-        $ref: '#/definitions/RoleArn'
-        description: 'The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html">AWS Lambda: How it Works</a>. '
-      Handler:
-        $ref: '#/definitions/Handler'
-        description: 'The function within your code that Lambda calls to begin execution. For Node.js, it is the <i>module-name</i>.<i>export</i> value in your function. For Java, it can be <code>package.class-name::handler</code> or <code>package.class-name</code>. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/java-programming-model-handler-types.html">Lambda Function Handler (Java)</a>. '
-      Code:
-        $ref: '#/definitions/FunctionCode'
-        description: The code for the Lambda function.
-      Description:
-        $ref: '#/definitions/Description'
-        description: 'A short, user-defined function description. Lambda does not use this value. Assign a meaningful description as you see fit.'
-      Timeout:
-        $ref: '#/definitions/Timeout'
-        description: 'The function execution time at which Lambda should terminate the function. Because the execution time has cost implications, we recommend you set this value based on your expected execution time. The default is 3 seconds.'
-      MemorySize:
-        $ref: '#/definitions/MemorySize'
-        description: 'The amount of memory, in MB, your Lambda function is given. Lambda uses this memory size to infer the amount of CPU and memory allocated to your function. Your function use-case determines your CPU and memory requirements. For example, a database operation might need less memory compared to an image processing function. The default value is 128 MB. The value must be a multiple of 64 MB.'
-      Publish:
-        $ref: '#/definitions/Boolean'
-        description: This boolean parameter can be used to request AWS Lambda to create the Lambda function and publish a version as an atomic operation.
-      VpcConfig:
-        $ref: '#/definitions/VpcConfig'
-        description: 'If your Lambda function accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID.'
-      DeadLetterConfig:
-        $ref: '#/definitions/DeadLetterConfig'
-        description: 'The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic. For more information, see <a>dlq</a>. '
-      Environment:
-        $ref: '#/definitions/Environment'
-      KMSKeyArn:
-        $ref: '#/definitions/KMSKeyArn'
-        description: 'The Amazon Resource Name (ARN) of the KMS key used to encrypt your function''s environment variables. If not provided, AWS Lambda will use a default service key.'
-      TracingConfig:
-        $ref: '#/definitions/TracingConfig'
-        description: The parent object that contains your function's tracing settings.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: 'The list of tags (key-value pairs) assigned to the new function. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/tagging.html">Tagging Lambda Functions</a> in the <b>AWS Lambda Developer Guide</b>.'
-    description: <p/>
-  Date:
-    type: string
-    format: date-time
-  DeadLetterConfig:
-    type: object
-    properties:
-      TargetArn:
-        $ref: '#/definitions/ResourceArn'
-        description: 'The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ). <a>dlq</a>. For more information, see <a>dlq</a>. '
-    description: 'The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ). For more information, see <a>dlq</a>. '
-  DeleteAliasRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      Name: alias
-    properties: {}
-  DeleteEventSourceMappingRequest:
-    type: object
-    example:
-      UUID: 12345kxodurf3443
-    properties: {}
-    description: <p/>
-  DeleteFunctionConcurrencyRequest:
-    type: object
-    properties: {}
-  DeleteFunctionRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      Qualifier: '1'
-    properties: {}
-  Description:
-    type: string
-    minLength: 0
-    maxLength: 256
-  EC2AccessDeniedException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      Message:
-        $ref: '#/definitions/String'
-    description: <p/>
-  EC2ThrottledException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      Message:
-        $ref: '#/definitions/String'
-    description: AWS Lambda was throttled by Amazon EC2 during Lambda function initialization using the execution role provided for the Lambda function.
-  EC2UnexpectedException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      Message:
-        $ref: '#/definitions/String'
-      EC2ErrorCode:
-        $ref: '#/definitions/String'
-    description: AWS Lambda received an unexpected EC2 client exception while setting up for the Lambda function.
-  ENILimitReachedException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      Message:
-        $ref: '#/definitions/String'
-    description: 'AWS Lambda was not able to create an Elastic Network Interface (ENI) in the VPC, specified as part of Lambda function configuration, because the limit for network interfaces has been reached.'
-  Enabled:
-    type: boolean
-  Environment:
-    type: object
-    properties:
-      Variables:
-        $ref: '#/definitions/EnvironmentVariables'
-        description: The key-value pairs that represent your environment's configuration settings.
-    description: The parent object that contains your environment's configuration settings.
-  EnvironmentError:
-    type: object
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/String'
-        description: The error code returned by the environment error object.
-      Message:
-        $ref: '#/definitions/SensitiveString'
-        description: The message returned by the environment error object.
-    description: The parent object that contains error information associated with your configuration settings.
-  EnvironmentResponse:
-    type: object
-    properties:
-      Variables:
-        $ref: '#/definitions/EnvironmentVariables'
-        description: The key-value pairs returned that represent your environment's configuration settings or error information.
-      Error:
-        $ref: '#/definitions/EnvironmentError'
-    description: The parent object returned that contains your environment's configuration settings or any error information associated with your configuration settings.
-  EnvironmentVariableName:
-    type: string
-    pattern: '[a-zA-Z]([a-zA-Z0-9_])+'
-    format: password
-  EnvironmentVariableValue:
-    type: string
-    format: password
-  EnvironmentVariables:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/EnvironmentVariableName'
-        value:
-          $ref: '#/definitions/EnvironmentVariableValue'
   EventSourceMappingConfiguration:
     type: object
     example:
@@ -1913,50 +1683,31 @@ definitions:
         $ref: '#/definitions/String'
         description: The reason the event source mapping is in its current state. It is either user-requested or an AWS Lambda-initiated state transition.
     description: Describes mapping between an Amazon Kinesis or DynamoDB stream or an Amazon SQS queue and a Lambda function.
-  EventSourceMappingsList:
-    type: array
-    items:
-      $ref: '#/definitions/EventSourceMappingConfiguration'
-  EventSourcePosition:
-    type: string
-    enum:
-      - TRIM_HORIZON
-      - LATEST
-      - AT_TIMESTAMP
-  EventSourceToken:
-    type: string
-    pattern: '[a-zA-Z0-9._\-]+'
-    minLength: 0
-    maxLength: 256
-  FunctionArn:
-    type: string
-    pattern: 'arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?'
-  FunctionCode:
+  CreateEventSourceMappingRequest:
     type: object
+    required:
+      - EventSourceArn
+      - FunctionName
     properties:
-      ZipFile:
-        $ref: '#/definitions/Blob'
-        description: 'The contents of your zip file containing your deployment package. If you are using the web API directly, the contents of the zip file must be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you. For more information about creating a .zip file, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html">Execution Permissions</a> in the <b>AWS Lambda Developer Guide</b>. '
-      S3Bucket:
-        $ref: '#/definitions/S3Bucket'
-        description: Amazon S3 bucket name where the .zip file containing your deployment package is stored. This bucket must reside in the same AWS region where you are creating the Lambda function.
-      S3Key:
-        $ref: '#/definitions/S3Key'
-        description: The Amazon S3 object (the deployment package) key name you want to upload.
-      S3ObjectVersion:
-        $ref: '#/definitions/S3ObjectVersion'
-        description: The Amazon S3 object (the deployment package) version you want to upload.
-    description: The code for the Lambda function.
-  FunctionCodeLocation:
-    type: object
-    properties:
-      RepositoryType:
-        $ref: '#/definitions/String'
-        description: The repository from which you can download the function.
-      Location:
-        $ref: '#/definitions/String'
-        description: The presigned URL you can use to download the function's .zip file that you previously uploaded. The URL is valid for up to 10 minutes.
-    description: The object for the Lambda function location.
+      EventSourceArn:
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) of the event source. Any record added to this source could cause AWS Lambda to invoke your Lambda function, it depends on the <code>BatchSize</code>. AWS Lambda POSTs the event''s records to your Lambda function as JSON.'
+      FunctionName:
+        $ref: '#/definitions/FunctionName'
+        description: '<p>The Lambda function to invoke when AWS Lambda detects an event on the stream.</p> <p> You can specify the function name (for example, <code>Thumbnail</code>) or you can specify Amazon Resource Name (ARN) of the function (for example, <code>arn:aws:lambda:us-west-2:account-id:function:ThumbNail</code>). </p> <p> If you are using versioning, you can also provide a qualified function ARN (ARN that is qualified with function version or alias name as suffix). For more information about versioning, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a> </p> <p>AWS Lambda also allows you to specify only the function name with the account ID qualifier (for example, <code>account-id:Thumbnail</code>). </p> <p>Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+      Enabled:
+        $ref: '#/definitions/Enabled'
+        description: 'Indicates whether AWS Lambda should begin polling the event source. By default, <code>Enabled</code> is true. '
+      BatchSize:
+        $ref: '#/definitions/BatchSize'
+        description: 'The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function. Your function receives an event with all the retrieved records. The default for Amazon Kinesis and Amazon DynamoDB is 100 records. For SQS, the default is 1.'
+      StartingPosition:
+        $ref: '#/definitions/EventSourcePosition'
+        description: 'The position in the DynamoDB or Kinesis stream where AWS Lambda should start reading. For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType">GetShardIterator</a> in the <i>Amazon Kinesis API Reference Guide</i> or <a href="http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetShardIterator.html">GetShardIterator</a> in the <i>Amazon DynamoDB API Reference Guide</i>. The <code>AT_TIMESTAMP</code> value is supported only for <a href="http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html">Kinesis streams</a>. '
+      StartingPositionTimestamp:
+        $ref: '#/definitions/Date'
+        description: 'The timestamp of the data record from which to start reading. Used with <a href="http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType">shard iterator type</a> AT_TIMESTAMP. If a record with this exact timestamp does not exist, the iterator returned is for the next (later) record. If the timestamp is older than the current trim horizon, the iterator returned is for the oldest untrimmed data record (TRIM_HORIZON). Valid only for <a href="http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html">Kinesis streams</a>. '
+    description: <p/>
   FunctionConfiguration:
     type: object
     example:
@@ -2032,22 +1783,108 @@ definitions:
         $ref: '#/definitions/String'
         description: Represents the latest updated revision of the function or alias.
     description: A complex type that describes function metadata.
-  FunctionList:
-    type: array
-    items:
-      $ref: '#/definitions/FunctionConfiguration'
-  FunctionName:
-    type: string
-    pattern: '(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
-    minLength: 1
-    maxLength: 140
-  FunctionVersion:
-    type: string
-    enum:
-      - ALL
-  GetAccountSettingsRequest:
+  CreateFunctionRequest:
     type: object
-    example: {}
+    required:
+      - FunctionName
+      - Runtime
+      - Role
+      - Handler
+      - Code
+    example:
+      Code: {}
+      Description: ''
+      FunctionName: MyFunction
+      Handler: souce_file.handler_name
+      MemorySize: 128
+      Publish: true
+      Role: 'arn:aws:iam::123456789012:role/service-role/role-name'
+      Runtime: nodejs4.3
+      Timeout: 15
+      VpcConfig: {}
+    properties:
+      FunctionName:
+        $ref: '#/definitions/FunctionName'
+        description: 'The name you want to assign to the function you are uploading. The function names appear in the console and are returned in the <a>ListFunctions</a> API. Function names are used to specify functions to other AWS Lambda API operations, such as <a>Invoke</a>. Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length. '
+      Runtime:
+        $ref: '#/definitions/Runtime'
+        description: '<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use the .NET Core runtime v1.0, set the value to "dotnetcore1.0". To use the .NET Core runtime v2.0, set the value to "dotnetcore2.0".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parameter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>'
+      Role:
+        $ref: '#/definitions/RoleArn'
+        description: 'The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html">AWS Lambda: How it Works</a>. '
+      Handler:
+        $ref: '#/definitions/Handler'
+        description: 'The function within your code that Lambda calls to begin execution. For Node.js, it is the <i>module-name</i>.<i>export</i> value in your function. For Java, it can be <code>package.class-name::handler</code> or <code>package.class-name</code>. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/java-programming-model-handler-types.html">Lambda Function Handler (Java)</a>. '
+      Code:
+        $ref: '#/definitions/FunctionCode'
+        description: The code for the Lambda function.
+      Description:
+        $ref: '#/definitions/Description'
+        description: 'A short, user-defined function description. Lambda does not use this value. Assign a meaningful description as you see fit.'
+      Timeout:
+        $ref: '#/definitions/Timeout'
+        description: 'The function execution time at which Lambda should terminate the function. Because the execution time has cost implications, we recommend you set this value based on your expected execution time. The default is 3 seconds.'
+      MemorySize:
+        $ref: '#/definitions/MemorySize'
+        description: 'The amount of memory, in MB, your Lambda function is given. Lambda uses this memory size to infer the amount of CPU and memory allocated to your function. Your function use-case determines your CPU and memory requirements. For example, a database operation might need less memory compared to an image processing function. The default value is 128 MB. The value must be a multiple of 64 MB.'
+      Publish:
+        $ref: '#/definitions/Boolean'
+        description: This boolean parameter can be used to request AWS Lambda to create the Lambda function and publish a version as an atomic operation.
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'If your Lambda function accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID.'
+      DeadLetterConfig:
+        $ref: '#/definitions/DeadLetterConfig'
+        description: 'The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic. For more information, see <a>dlq</a>. '
+      Environment:
+        $ref: '#/definitions/Environment'
+      KMSKeyArn:
+        $ref: '#/definitions/KMSKeyArn'
+        description: 'The Amazon Resource Name (ARN) of the KMS key used to encrypt your function''s environment variables. If not provided, AWS Lambda will use a default service key.'
+      TracingConfig:
+        $ref: '#/definitions/TracingConfig'
+        description: The parent object that contains your function's tracing settings.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The list of tags (key-value pairs) assigned to the new function. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/tagging.html">Tagging Lambda Functions</a> in the <b>AWS Lambda Developer Guide</b>.'
+    description: <p/>
+  CodeStorageExceededException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+        description: <p/>
+      message:
+        $ref: '#/definitions/String'
+    description: 'You have exceeded your maximum total code size per account. <a href="http://docs.aws.amazon.com/lambda/latest/dg/limits.html">Limits</a> '
+  DeleteAliasRequest:
+    type: object
+    example:
+      FunctionName: myFunction
+      Name: alias
+    properties: {}
+  DeleteEventSourceMappingRequest:
+    type: object
+    example:
+      UUID: 12345kxodurf3443
+    properties: {}
+    description: <p/>
+  ResourceInUseException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: 'The operation conflicts with the resource''s availability. For example, you attempted to update an EventSoure Mapping in CREATING, or tried to delete a EventSoure mapping currently in the UPDATING state. '
+  DeleteFunctionRequest:
+    type: object
+    example:
+      FunctionName: myFunction
+      Qualifier: '1'
+    properties: {}
+  DeleteFunctionConcurrencyRequest:
+    type: object
     properties: {}
   GetAccountSettingsResponse:
     type: object
@@ -2059,6 +1896,10 @@ definitions:
         $ref: '#/definitions/AccountLimit'
       AccountUsage:
         $ref: '#/definitions/AccountUsage'
+  GetAccountSettingsRequest:
+    type: object
+    example: {}
+    properties: {}
   GetAliasRequest:
     type: object
     example:
@@ -2069,20 +1910,6 @@ definitions:
     type: object
     example:
       UUID: 123489-xxxxx-kdla8d89d7
-    properties: {}
-    description: <p/>
-  GetFunctionConfigurationRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      Qualifier: '1'
-    properties: {}
-    description: <p/>
-  GetFunctionRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      Qualifier: '1'
     properties: {}
     description: <p/>
   GetFunctionResponse:
@@ -2122,7 +1949,14 @@ definitions:
         $ref: '#/definitions/Concurrency'
         description: 'The concurrent execution limit set for this function. For more information, see <a>concurrent-executions</a>.'
     description: This response contains the object for the Lambda function location (see <a>FunctionCodeLocation</a>.
-  GetPolicyRequest:
+  GetFunctionRequest:
+    type: object
+    example:
+      FunctionName: myFunction
+      Qualifier: '1'
+    properties: {}
+    description: <p/>
+  GetFunctionConfigurationRequest:
     type: object
     example:
       FunctionName: myFunction
@@ -2141,66 +1975,25 @@ definitions:
         $ref: '#/definitions/String'
         description: Represents the latest updated revision of the function or alias.
     description: <p/>
-  Handler:
-    type: string
-    pattern: '[^\s]+'
-    maxLength: 128
-  HttpStatus:
-    type: integer
-  Integer:
-    type: integer
-  InvalidParameterValueException:
+  GetPolicyRequest:
     type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-        description: <p/>
-      message:
-        $ref: '#/definitions/String'
-        description: <p/>
-    description: 'One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception.'
-  InvalidRequestContentException:
+    example:
+      FunctionName: myFunction
+      Qualifier: '1'
+    properties: {}
+    description: <p/>
+  InvocationResponse:
     type: object
+    example:
+      FunctionError: ''
+      LogResult: ''
+      Payload: '?'
+      StatusCode: 123
     properties:
-      Type:
-        $ref: '#/definitions/String'
-        description: <p/>
-      message:
-        $ref: '#/definitions/String'
-        description: <p/>
-    description: The request body could not be parsed as JSON.
-  InvalidRuntimeException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      Message:
-        $ref: '#/definitions/String'
-    description: The runtime or runtime version specified is not supported.
-  InvalidSecurityGroupIDException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      Message:
-        $ref: '#/definitions/String'
-    description: The Security Group ID provided in the Lambda function VPC configuration is invalid.
-  InvalidSubnetIDException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      Message:
-        $ref: '#/definitions/String'
-    description: The Subnet ID provided in the Lambda function VPC configuration is invalid.
-  InvalidZipFileException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      Message:
-        $ref: '#/definitions/String'
-    description: AWS Lambda could not unzip the function zip file.
+      Payload:
+        $ref: '#/definitions/Blob'
+        description: <p> It is the JSON representation of the object returned by the Lambda function. This is present only if the invocation type is <code>RequestResponse</code>. </p> <p>In the event of a function error this field contains a message describing the error. For the <code>Handled</code> errors the Lambda function will report this message. For <code>Unhandled</code> errors AWS Lambda reports the message. </p>
+    description: 'Upon success, returns an empty response. Otherwise, throws an exception.'
   InvocationRequest:
     type: object
     example:
@@ -2215,50 +2008,98 @@ definitions:
         $ref: '#/definitions/Blob'
         description: JSON that you want to provide to your Lambda function as input.
     description: <p/>
-  InvocationResponse:
+  InvalidRequestContentException:
     type: object
-    example:
-      FunctionError: ''
-      LogResult: ''
-      Payload: '?'
-      StatusCode: 123
     properties:
-      Payload:
-        $ref: '#/definitions/Blob'
-        description: <p> It is the JSON representation of the object returned by the Lambda function. This is present only if the invocation type is <code>RequestResponse</code>. </p> <p>In the event of a function error this field contains a message describing the error. For the <code>Handled</code> errors the Lambda function will report this message. For <code>Unhandled</code> errors AWS Lambda reports the message. </p>
-    description: 'Upon success, returns an empty response. Otherwise, throws an exception.'
-  InvocationType:
-    type: string
-    enum:
-      - Event
-      - RequestResponse
-      - DryRun
-  InvokeAsyncRequest:
+      Type:
+        $ref: '#/definitions/String'
+        description: <p/>
+      message:
+        $ref: '#/definitions/String'
+        description: <p/>
+    description: The request body could not be parsed as JSON.
+  RequestTooLargeException:
     type: object
-    required:
-      - InvokeArgs
-    example:
-      FunctionName: myFunction
-      InvokeArgs: 'fileb://file-path/input.json'
     properties:
-      InvokeArgs:
-        $ref: '#/definitions/BlobStream'
-        description: JSON that you want to provide to your Lambda function as input.
-    description: <p/>
-  InvokeAsyncResponse:
+      Type:
+        $ref: '#/definitions/String'
+      message:
+        $ref: '#/definitions/String'
+    description: 'The request payload exceeded the <code>Invoke</code> request body JSON input limit. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/limits.html">Limits</a>. '
+  UnsupportedMediaTypeException:
     type: object
-    example:
-      Status: 123
-    properties: {}
-    description: 'Upon success, it returns empty response. Otherwise, throws an exception.'
-  KMSAccessDeniedException:
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      message:
+        $ref: '#/definitions/String'
+    description: The content type of the <code>Invoke</code> request body is not JSON.
+  EC2UnexpectedException:
     type: object
     properties:
       Type:
         $ref: '#/definitions/String'
       Message:
         $ref: '#/definitions/String'
-    description: Lambda was unable to decrypt the environment variables because KMS access was denied. Check the Lambda function's KMS permissions.
+      EC2ErrorCode:
+        $ref: '#/definitions/String'
+    description: AWS Lambda received an unexpected EC2 client exception while setting up for the Lambda function.
+  SubnetIPAddressLimitReachedException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: AWS Lambda was not able to set up VPC access for the Lambda function because one or more configured subnets has no available IP addresses.
+  ENILimitReachedException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: 'AWS Lambda was not able to create an Elastic Network Interface (ENI) in the VPC, specified as part of Lambda function configuration, because the limit for network interfaces has been reached.'
+  EC2ThrottledException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: AWS Lambda was throttled by Amazon EC2 during Lambda function initialization using the execution role provided for the Lambda function.
+  EC2AccessDeniedException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: <p/>
+  InvalidSubnetIDException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: The Subnet ID provided in the Lambda function VPC configuration is invalid.
+  InvalidSecurityGroupIDException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: The Security Group ID provided in the Lambda function VPC configuration is invalid.
+  InvalidZipFileException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: AWS Lambda could not unzip the function zip file.
   KMSDisabledException:
     type: object
     properties:
@@ -2275,9 +2116,14 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: Lambda was unable to decrypt the environment variables because the KMS key used is in an invalid state for Decrypt. Check the function's KMS key settings.
-  KMSKeyArn:
-    type: string
-    pattern: '(arn:aws:[a-z0-9-.]+:.*)|()'
+  KMSAccessDeniedException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: Lambda was unable to decrypt the environment variables because KMS access was denied. Check the Lambda function's KMS permissions.
   KMSNotFoundException:
     type: object
     properties:
@@ -2286,14 +2132,32 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: 'Lambda was unable to decrypt the environment variables because the KMS key was not found. Check the function''s KMS key settings. '
-  ListAliasesRequest:
+  InvalidRuntimeException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: The runtime or runtime version specified is not supported.
+  InvokeAsyncResponse:
     type: object
     example:
-      FunctionName: myFunction
-      FunctionVersion: '1'
-      Marker: ''
-      MaxItems: 123
+      Status: 123
     properties: {}
+    description: 'Upon success, it returns empty response. Otherwise, throws an exception.'
+  InvokeAsyncRequest:
+    type: object
+    required:
+      - InvokeArgs
+    example:
+      FunctionName: myFunction
+      InvokeArgs: 'fileb://file-path/input.json'
+    properties:
+      InvokeArgs:
+        $ref: '#/definitions/BlobStream'
+        description: JSON that you want to provide to your Lambda function as input.
+    description: <p/>
   ListAliasesResponse:
     type: object
     example:
@@ -2306,10 +2170,14 @@ definitions:
       Aliases:
         $ref: '#/definitions/AliasList'
         description: A list of aliases.
-  ListEventSourceMappingsRequest:
+  ListAliasesRequest:
     type: object
+    example:
+      FunctionName: myFunction
+      FunctionVersion: '1'
+      Marker: ''
+      MaxItems: 123
     properties: {}
-    description: <p/>
   ListEventSourceMappingsResponse:
     type: object
     properties:
@@ -2320,11 +2188,8 @@ definitions:
         $ref: '#/definitions/EventSourceMappingsList'
         description: An array of <code>EventSourceMappingConfiguration</code> objects.
     description: Contains a list of event sources (see <a>EventSourceMappingConfiguration</a>)
-  ListFunctionsRequest:
+  ListEventSourceMappingsRequest:
     type: object
-    example:
-      Marker: ''
-      MaxItems: 123
     properties: {}
     description: <p/>
   ListFunctionsResponse:
@@ -2340,23 +2205,22 @@ definitions:
         $ref: '#/definitions/FunctionList'
         description: A list of Lambda functions.
     description: Contains a list of AWS Lambda function configurations (see <a>FunctionConfiguration</a>.
-  ListTagsRequest:
+  ListFunctionsRequest:
     type: object
+    example:
+      Marker: ''
+      MaxItems: 123
     properties: {}
+    description: <p/>
   ListTagsResponse:
     type: object
     properties:
       Tags:
         $ref: '#/definitions/Tags'
         description: 'The list of tags assigned to the function. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/tagging.html">Tagging Lambda Functions</a> in the <b>AWS Lambda Developer Guide</b>.'
-  ListVersionsByFunctionRequest:
+  ListTagsRequest:
     type: object
-    example:
-      FunctionName: myFunction
-      Marker: ''
-      MaxItems: 123
     properties: {}
-    description: <p/>
   ListVersionsByFunctionResponse:
     type: object
     example:
@@ -2370,58 +2234,14 @@ definitions:
         $ref: '#/definitions/FunctionList'
         description: A list of Lambda function versions.
     description: <p/>
-  LogType:
-    type: string
-    enum:
-      - None
-      - Tail
-  Long:
-    type: integer
-  MasterRegion:
-    type: string
-    pattern: 'ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}'
-  MaxListItems:
-    type: integer
-    minimum: 1
-    maximum: 10000
-  MemorySize:
-    type: integer
-    minimum: 128
-    maximum: 3008
-  NameSpacedFunctionArn:
-    type: string
-    pattern: 'arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_\.]+(:(\$LATEST|[a-zA-Z0-9-_]+))?'
-  NamespacedFunctionName:
-    type: string
-    pattern: '(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
-    minLength: 1
-    maxLength: 170
-  NamespacedStatementId:
-    type: string
-    pattern: '([a-zA-Z0-9-_.]+)'
-    minLength: 1
-    maxLength: 100
-  PolicyLengthExceededException:
+  ListVersionsByFunctionRequest:
     type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      message:
-        $ref: '#/definitions/String'
-    description: Lambda function access policy is limited to 20 KB.
-  PreconditionFailedException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-        description: <p/>
-      message:
-        $ref: '#/definitions/String'
-        description: <p/>
-    description: The RevisionId provided does not match the latest RevisionId for the Lambda function or alias. Call the <code>GetFunction</code> or the <code>GetAlias</code> API to retrieve the latest RevisionId for your resource.
-  Principal:
-    type: string
-    pattern: .*
+    example:
+      FunctionName: myFunction
+      Marker: ''
+      MaxItems: 123
+    properties: {}
+    description: <p/>
   PublishVersionRequest:
     type: object
     example:
@@ -2439,6 +2259,12 @@ definitions:
         $ref: '#/definitions/String'
         description: 'An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn''t match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either or .'
     description: <p/>
+  Concurrency:
+    type: object
+    properties:
+      ReservedConcurrentExecutions:
+        $ref: '#/definitions/ReservedConcurrentExecutions'
+        description: 'The number of concurrent executions reserved for this function. For more information, see <a>concurrent-executions</a>.'
   PutFunctionConcurrencyRequest:
     type: object
     required:
@@ -2447,11 +2273,6 @@ definitions:
       ReservedConcurrentExecutions:
         $ref: '#/definitions/ReservedConcurrentExecutions'
         description: 'The concurrent execution limit reserved for this function. For more information, see <a>concurrent-executions</a>.'
-  Qualifier:
-    type: string
-    pattern: '(|[a-zA-Z0-9$_-]+)'
-    minLength: 1
-    maxLength: 128
   RemovePermissionRequest:
     type: object
     example:
@@ -2460,126 +2281,6 @@ definitions:
       StatementId: role-statement-id
     properties: {}
     description: <p/>
-  RequestTooLargeException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      message:
-        $ref: '#/definitions/String'
-    description: 'The request payload exceeded the <code>Invoke</code> request body JSON input limit. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/limits.html">Limits</a>. '
-  ReservedConcurrentExecutions:
-    type: integer
-    minimum: 0
-  ResourceArn:
-    type: string
-    pattern: '(arn:aws:[a-z0-9-.]+:.*)|()'
-  ResourceConflictException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-        description: <p/>
-      message:
-        $ref: '#/definitions/String'
-        description: <p/>
-    description: The resource already exists.
-  ResourceInUseException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      Message:
-        $ref: '#/definitions/String'
-    description: 'The operation conflicts with the resource''s availability. For example, you attempted to update an EventSoure Mapping in CREATING, or tried to delete a EventSoure mapping currently in the UPDATING state. '
-  ResourceNotFoundException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      Message:
-        $ref: '#/definitions/String'
-    description: 'The resource (for example, a Lambda function or access policy statement) specified in the request does not exist.'
-  RoleArn:
-    type: string
-    pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
-  Runtime:
-    type: string
-    enum:
-      - nodejs
-      - nodejs4.3
-      - nodejs6.10
-      - nodejs8.10
-      - java8
-      - python2.7
-      - python3.6
-      - dotnetcore1.0
-      - dotnetcore2.0
-      - dotnetcore2.1
-      - nodejs4.3-edge
-      - go1.x
-  S3Bucket:
-    type: string
-    pattern: '^[0-9A-Za-z\.\-_]*(?<!\.)$'
-    minLength: 3
-    maxLength: 63
-  S3Key:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  S3ObjectVersion:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  SecurityGroupId:
-    type: string
-  SecurityGroupIds:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityGroupId'
-    maxItems: 5
-  SensitiveString:
-    type: string
-    format: password
-  ServiceException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      Message:
-        $ref: '#/definitions/String'
-    description: The AWS Lambda service encountered an internal error.
-  SourceOwner:
-    type: string
-    pattern: '\d{12}'
-  StatementId:
-    type: string
-    pattern: '([a-zA-Z0-9-_]+)'
-    minLength: 1
-    maxLength: 100
-  String:
-    type: string
-  SubnetIPAddressLimitReachedException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      Message:
-        $ref: '#/definitions/String'
-    description: AWS Lambda was not able to set up VPC access for the Lambda function because one or more configured subnets has no available IP addresses.
-  SubnetId:
-    type: string
-  SubnetIds:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetId'
-    maxItems: 16
-  TagKey:
-    type: string
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
   TagResourceRequest:
     type: object
     required:
@@ -2588,70 +2289,6 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: 'The list of tags (key-value pairs) you are assigning to the Lambda function. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/tagging.html">Tagging Lambda Functions</a> in the <b>AWS Lambda Developer Guide</b>.'
-  TagValue:
-    type: string
-  Tags:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
-  ThrottleReason:
-    type: string
-    enum:
-      - ConcurrentInvocationLimitExceeded
-      - FunctionInvocationRateLimitExceeded
-      - ReservedFunctionConcurrentInvocationLimitExceeded
-      - ReservedFunctionInvocationRateLimitExceeded
-      - CallerRateLimitExceeded
-  Timeout:
-    type: integer
-    minimum: 1
-  Timestamp:
-    type: string
-  TooManyRequestsException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      message:
-        $ref: '#/definitions/String'
-      Reason:
-        $ref: '#/definitions/ThrottleReason'
-    description: ' '
-  TracingConfig:
-    type: object
-    properties:
-      Mode:
-        $ref: '#/definitions/TracingMode'
-        description: 'Can be either PassThrough or Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.'
-    description: The parent object that contains your function's tracing settings.
-  TracingConfigResponse:
-    type: object
-    properties:
-      Mode:
-        $ref: '#/definitions/TracingMode'
-        description: The tracing mode associated with your Lambda function.
-    description: Parent object of the tracing information associated with your Lambda function.
-  TracingMode:
-    type: string
-    enum:
-      - Active
-      - PassThrough
-  UnreservedConcurrentExecutions:
-    type: integer
-    minimum: 0
-  UnsupportedMediaTypeException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/String'
-      message:
-        $ref: '#/definitions/String'
-    description: The content type of the <code>Invoke</code> request body is not JSON.
   UntagResourceRequest:
     type: object
     properties: {}
@@ -2773,11 +2410,193 @@ definitions:
         $ref: '#/definitions/String'
         description: 'An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn''t match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either or .'
     description: <p/>
+  Long:
+    type: integer
+  Integer:
+    type: integer
+  UnreservedConcurrentExecutions:
+    type: integer
+    minimum: 0
+  AccountLimit:
+    type: object
+    properties:
+      TotalCodeSize:
+        $ref: '#/definitions/Long'
+        description: 'Maximum size, in bytes, of a code package you can upload per region. The default size is 75 GB. '
+      CodeSizeUnzipped:
+        $ref: '#/definitions/Long'
+        description: 'Size, in bytes, of code/dependencies that you can zip into a deployment package (uncompressed zip/jar size) for uploading. The default limit is 250 MB.'
+      CodeSizeZipped:
+        $ref: '#/definitions/Long'
+        description: 'Size, in bytes, of a single zipped code/dependencies package you can upload for your Lambda function(.zip/.jar file). Try using Amazon S3 for uploading larger files. Default limit is 50 MB.'
+      ConcurrentExecutions:
+        $ref: '#/definitions/Integer'
+        description: 'Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Lambda Function Concurrent Executions</a>. The default limit is 1000.'
+      UnreservedConcurrentExecutions:
+        $ref: '#/definitions/UnreservedConcurrentExecutions'
+        description: 'The number of concurrent executions available to functions that do not have concurrency limits set. For more information, see <a>concurrent-executions</a>.'
+    description: Provides limits of code size and concurrency associated with the current account and region.
+  AccountUsage:
+    type: object
+    properties:
+      TotalCodeSize:
+        $ref: '#/definitions/Long'
+        description: 'Total size, in bytes, of the account''s deployment packages per region.'
+      FunctionCount:
+        $ref: '#/definitions/Long'
+        description: The number of your account's existing functions per region.
+    description: Provides code size usage and function count associated with the current account and region.
+  Action:
+    type: string
+    pattern: '(lambda:[*]|lambda:[a-zA-Z]+|[*])'
+  FunctionName:
+    type: string
+    pattern: '(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+    minLength: 1
+    maxLength: 140
+  StatementId:
+    type: string
+    pattern: '([a-zA-Z0-9-_]+)'
+    minLength: 1
+    maxLength: 100
+  Principal:
+    type: string
+    pattern: .*
+  Arn:
+    type: string
+    pattern: 'arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)'
+  SourceOwner:
+    type: string
+    pattern: '\d{12}'
+  EventSourceToken:
+    type: string
+    pattern: '[a-zA-Z0-9._\-]+'
+    minLength: 0
+    maxLength: 256
+  Qualifier:
+    type: string
+    pattern: '(|[a-zA-Z0-9$_-]+)'
+    minLength: 1
+    maxLength: 128
+  String:
+    type: string
+  AdditionalVersion:
+    type: string
+    pattern: '[0-9]+'
+    minLength: 1
+    maxLength: 1024
+  Weight:
+    type: number
+    format: double
+    minimum: 0
+    maximum: 1
+  AdditionalVersionWeights:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AdditionalVersion'
+        value:
+          $ref: '#/definitions/Weight'
+  Alias:
+    type: string
+    pattern: '(?!^[0-9]+$)([a-zA-Z0-9-_]+)'
+    minLength: 1
+    maxLength: 128
+  FunctionArn:
+    type: string
+    pattern: 'arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?'
   Version:
     type: string
     pattern: '(\$LATEST|[0-9]+)'
     minLength: 1
     maxLength: 1024
+  Description:
+    type: string
+    minLength: 0
+    maxLength: 256
+  AliasRoutingConfiguration:
+    type: object
+    properties:
+      AdditionalVersionWeights:
+        $ref: '#/definitions/AdditionalVersionWeights'
+        description: 'Set this value to dictate what percentage of traffic will invoke the updated function version. If set to an empty string, 100 percent of traffic will invoke <code>function-version</code>. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.'
+    description: 'The parent object that implements what percentage of traffic will invoke each function version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.'
+  AliasList:
+    type: array
+    items:
+      $ref: '#/definitions/AliasConfiguration'
+  BatchSize:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  Blob:
+    type: string
+    format: password
+  BlobStream:
+    type: string
+  Boolean:
+    type: boolean
+  ReservedConcurrentExecutions:
+    type: integer
+    minimum: 0
+  Enabled:
+    type: boolean
+  EventSourcePosition:
+    type: string
+    enum:
+      - TRIM_HORIZON
+      - LATEST
+      - AT_TIMESTAMP
+  Date:
+    type: string
+    format: date-time
+  Runtime:
+    type: string
+    enum:
+      - nodejs
+      - nodejs4.3
+      - nodejs6.10
+      - nodejs8.10
+      - java8
+      - python2.7
+      - python3.6
+      - dotnetcore1.0
+      - dotnetcore2.0
+      - dotnetcore2.1
+      - nodejs4.3-edge
+      - go1.x
+  RoleArn:
+    type: string
+    pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+  Handler:
+    type: string
+    pattern: '[^\s]+'
+    maxLength: 128
+  FunctionCode:
+    type: object
+    properties:
+      ZipFile:
+        $ref: '#/definitions/Blob'
+        description: 'The contents of your zip file containing your deployment package. If you are using the web API directly, the contents of the zip file must be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you. For more information about creating a .zip file, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html">Execution Permissions</a> in the <b>AWS Lambda Developer Guide</b>. '
+      S3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: Amazon S3 bucket name where the .zip file containing your deployment package is stored. This bucket must reside in the same AWS region where you are creating the Lambda function.
+      S3Key:
+        $ref: '#/definitions/S3Key'
+        description: The Amazon S3 object (the deployment package) key name you want to upload.
+      S3ObjectVersion:
+        $ref: '#/definitions/S3ObjectVersion'
+        description: The Amazon S3 object (the deployment package) version you want to upload.
+    description: The code for the Lambda function.
+  Timeout:
+    type: integer
+    minimum: 1
+  MemorySize:
+    type: integer
+    minimum: 128
+    maximum: 3008
   VpcConfig:
     type: object
     properties:
@@ -2788,6 +2607,117 @@ definitions:
         $ref: '#/definitions/SecurityGroupIds'
         description: A list of one or more security groups IDs in your VPC.
     description: 'If your Lambda function accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID.'
+  DeadLetterConfig:
+    type: object
+    properties:
+      TargetArn:
+        $ref: '#/definitions/ResourceArn'
+        description: 'The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ). <a>dlq</a>. For more information, see <a>dlq</a>. '
+    description: 'The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ). For more information, see <a>dlq</a>. '
+  Environment:
+    type: object
+    properties:
+      Variables:
+        $ref: '#/definitions/EnvironmentVariables'
+        description: The key-value pairs that represent your environment's configuration settings.
+    description: The parent object that contains your environment's configuration settings.
+  KMSKeyArn:
+    type: string
+    pattern: '(arn:aws:[a-z0-9-.]+:.*)|()'
+  TracingConfig:
+    type: object
+    properties:
+      Mode:
+        $ref: '#/definitions/TracingMode'
+        description: 'Can be either PassThrough or Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.'
+    description: The parent object that contains your function's tracing settings.
+  Tags:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
+  ResourceArn:
+    type: string
+    pattern: '(arn:aws:[a-z0-9-.]+:.*)|()'
+  EnvironmentVariables:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/EnvironmentVariableName'
+        value:
+          $ref: '#/definitions/EnvironmentVariableValue'
+  SensitiveString:
+    type: string
+    format: password
+  EnvironmentError:
+    type: object
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/String'
+        description: The error code returned by the environment error object.
+      Message:
+        $ref: '#/definitions/SensitiveString'
+        description: The message returned by the environment error object.
+    description: The parent object that contains error information associated with your configuration settings.
+  EnvironmentResponse:
+    type: object
+    properties:
+      Variables:
+        $ref: '#/definitions/EnvironmentVariables'
+        description: The key-value pairs returned that represent your environment's configuration settings or error information.
+      Error:
+        $ref: '#/definitions/EnvironmentError'
+    description: The parent object returned that contains your environment's configuration settings or any error information associated with your configuration settings.
+  EnvironmentVariableName:
+    type: string
+    pattern: '[a-zA-Z]([a-zA-Z0-9_])+'
+    format: password
+  EnvironmentVariableValue:
+    type: string
+    format: password
+  EventSourceMappingsList:
+    type: array
+    items:
+      $ref: '#/definitions/EventSourceMappingConfiguration'
+  S3Bucket:
+    type: string
+    pattern: '^[0-9A-Za-z\.\-_]*(?<!\.)$'
+    minLength: 3
+    maxLength: 63
+  S3Key:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  S3ObjectVersion:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  FunctionCodeLocation:
+    type: object
+    properties:
+      RepositoryType:
+        $ref: '#/definitions/String'
+        description: The repository from which you can download the function.
+      Location:
+        $ref: '#/definitions/String'
+        description: The presigned URL you can use to download the function's .zip file that you previously uploaded. The URL is valid for up to 10 minutes.
+    description: The object for the Lambda function location.
+  NamespacedFunctionName:
+    type: string
+    pattern: '(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+    minLength: 1
+    maxLength: 170
+  NameSpacedFunctionArn:
+    type: string
+    pattern: 'arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_\.]+(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+  Timestamp:
+    type: string
   VpcConfigResponse:
     type: object
     properties:
@@ -2801,10 +2731,80 @@ definitions:
         $ref: '#/definitions/VpcId'
         description: The VPC ID associated with you Lambda function.
     description: VPC configuration associated with your Lambda function.
+  TracingConfigResponse:
+    type: object
+    properties:
+      Mode:
+        $ref: '#/definitions/TracingMode'
+        description: The tracing mode associated with your Lambda function.
+    description: Parent object of the tracing information associated with your Lambda function.
+  FunctionList:
+    type: array
+    items:
+      $ref: '#/definitions/FunctionConfiguration'
+  FunctionVersion:
+    type: string
+    enum:
+      - ALL
+  HttpStatus:
+    type: integer
+  InvocationType:
+    type: string
+    enum:
+      - Event
+      - RequestResponse
+      - DryRun
+  LogType:
+    type: string
+    enum:
+      - None
+      - Tail
+  MaxListItems:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  MasterRegion:
+    type: string
+    pattern: 'ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}'
+  NamespacedStatementId:
+    type: string
+    pattern: '([a-zA-Z0-9-_.]+)'
+    minLength: 1
+    maxLength: 100
+  SecurityGroupId:
+    type: string
+  SecurityGroupIds:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+    maxItems: 5
+  SubnetId:
+    type: string
+  SubnetIds:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+    maxItems: 16
+  TagKey:
+    type: string
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  TagValue:
+    type: string
+  ThrottleReason:
+    type: string
+    enum:
+      - ConcurrentInvocationLimitExceeded
+      - FunctionInvocationRateLimitExceeded
+      - ReservedFunctionConcurrentInvocationLimitExceeded
+      - ReservedFunctionInvocationRateLimitExceeded
+      - CallerRateLimitExceeded
+  TracingMode:
+    type: string
+    enum:
+      - Active
+      - PassThrough
   VpcId:
     type: string
-  Weight:
-    type: number
-    format: double
-    minimum: 0
-    maximum: 1

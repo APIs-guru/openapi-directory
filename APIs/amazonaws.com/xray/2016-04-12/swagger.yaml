@@ -383,6 +383,193 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  BatchGetTracesResult:
+    type: object
+    properties:
+      Traces:
+        $ref: '#/definitions/TraceList'
+        description: Full traces for the specified requests.
+      UnprocessedTraceIds:
+        $ref: '#/definitions/UnprocessedTraceIdList'
+        description: Trace IDs of requests that haven't been processed.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  BatchGetTracesRequest:
+    type: object
+    required:
+      - TraceIds
+    properties:
+      TraceIds:
+        $ref: '#/definitions/TraceIdList'
+        description: Specify the trace IDs of requests for which to retrieve segments.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  InvalidRequestException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The request is missing required parameters or has invalid parameters.
+  ThrottledException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The request exceeds the maximum number of requests per second.
+  GetEncryptionConfigResult:
+    type: object
+    properties:
+      EncryptionConfig:
+        $ref: '#/definitions/EncryptionConfig'
+        description: The encryption configuration document.
+  GetEncryptionConfigRequest:
+    type: object
+    properties: {}
+  GetServiceGraphResult:
+    type: object
+    properties:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The start of the time frame for which the graph was generated.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The end of the time frame for which the graph was generated.
+      Services:
+        $ref: '#/definitions/ServiceList'
+        description: The services that have processed a traced request during the specified time frame.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetServiceGraphRequest:
+    type: object
+    required:
+      - StartTime
+      - EndTime
+    properties:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The start of the time frame for which to generate a graph.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The end of the time frame for which to generate a graph.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetTraceGraphResult:
+    type: object
+    properties:
+      Services:
+        $ref: '#/definitions/ServiceList'
+        description: The services that have processed one of the specified requests.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetTraceGraphRequest:
+    type: object
+    required:
+      - TraceIds
+    properties:
+      TraceIds:
+        $ref: '#/definitions/TraceIdList'
+        description: Trace IDs of requests for which to generate a service graph.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetTraceSummariesResult:
+    type: object
+    properties:
+      TraceSummaries:
+        $ref: '#/definitions/TraceSummaryList'
+        description: Trace IDs and metadata for traces that were found in the specified time frame.
+      ApproximateTime:
+        $ref: '#/definitions/Timestamp'
+        description: The start time of this page of results.
+      TracesProcessedCount:
+        $ref: '#/definitions/NullableLong'
+        description: 'The total number of traces processed, including traces that did not match the specified filter expression.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'If the requested time frame contained more than one page of results, you can use this token to retrieve the next page. The first page contains the most most recent results, closest to the end of the time frame.'
+  GetTraceSummariesRequest:
+    type: object
+    required:
+      - StartTime
+      - EndTime
+    properties:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The start of the time frame for which to retrieve traces.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The end of the time frame for which to retrieve traces.
+      Sampling:
+        $ref: '#/definitions/NullableBoolean'
+        description: Set to <code>true</code> to get summaries for only a subset of available traces.
+      FilterExpression:
+        $ref: '#/definitions/FilterExpression'
+        description: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Specify the pagination token returned by a previous request to retrieve the next page of results.
+  PutEncryptionConfigResult:
+    type: object
+    properties:
+      EncryptionConfig:
+        $ref: '#/definitions/EncryptionConfig'
+        description: The new encryption configuration.
+  PutEncryptionConfigRequest:
+    type: object
+    required:
+      - Type
+    properties:
+      KeyId:
+        $ref: '#/definitions/EncryptionKeyId'
+        description: '<p>An AWS KMS customer master key (CMK) in one of the following formats:</p> <ul> <li> <p> <b>Alias</b> - The name of the key. For example, <code>alias/MyKey</code>.</p> </li> <li> <p> <b>Key ID</b> - The KMS key ID of the key. For example, <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>.</p> </li> <li> <p> <b>ARN</b> - The full Amazon Resource Name of the key ID or alias. For example, <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Use this format to specify a key in a different account.</p> </li> </ul> <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>'
+      Type:
+        $ref: '#/definitions/EncryptionType'
+        description: The type of encryption. Set to <code>KMS</code> to use your own key for encryption. Set to <code>NONE</code> for default encryption.
+  PutTelemetryRecordsResult:
+    type: object
+    properties: {}
+  PutTelemetryRecordsRequest:
+    type: object
+    required:
+      - TelemetryRecords
+    properties:
+      TelemetryRecords:
+        $ref: '#/definitions/TelemetryRecordList'
+        description: <p/>
+      EC2InstanceId:
+        $ref: '#/definitions/EC2InstanceId'
+        description: <p/>
+      Hostname:
+        $ref: '#/definitions/Hostname'
+        description: <p/>
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: <p/>
+  PutTraceSegmentsResult:
+    type: object
+    properties:
+      UnprocessedTraceSegments:
+        $ref: '#/definitions/UnprocessedTraceSegmentList'
+        description: Segments that failed processing.
+  PutTraceSegmentsRequest:
+    type: object
+    required:
+      - TraceSegmentDocuments
+    properties:
+      TraceSegmentDocuments:
+        $ref: '#/definitions/TraceSegmentDocumentList'
+        description: A string containing a JSON document defining one or more segments or subsegments.
+  String:
+    type: string
+  AliasNames:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   Alias:
     type: object
     properties:
@@ -400,12 +587,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Alias'
-  AliasNames:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   AnnotationKey:
     type: string
+  NullableDouble:
+    type: number
+    format: double
+  NullableBoolean:
+    type: boolean
   AnnotationValue:
     type: object
     properties:
@@ -419,6 +607,10 @@ definitions:
         $ref: '#/definitions/String'
         description: Value for a String annotation.
     description: 'Value of a segment annotation. Has one of three value types: Number, Boolean or String.'
+  ValuesWithServiceIds:
+    type: array
+    items:
+      $ref: '#/definitions/ValueWithServiceIds'
   Annotations:
     type: array
     items:
@@ -428,6 +620,8 @@ definitions:
           $ref: '#/definitions/AnnotationKey'
         value:
           $ref: '#/definitions/ValuesWithServiceIds'
+  NullableInteger:
+    type: integer
   BackendConnectionErrors:
     type: object
     properties:
@@ -450,35 +644,50 @@ definitions:
         $ref: '#/definitions/NullableInteger'
         description: <p/>
     description: <p/>
-  BatchGetTracesRequest:
-    type: object
-    required:
-      - TraceIds
-    properties:
-      TraceIds:
-        $ref: '#/definitions/TraceIdList'
-        description: Specify the trace IDs of requests for which to retrieve segments.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
-  BatchGetTracesResult:
-    type: object
-    properties:
-      Traces:
-        $ref: '#/definitions/TraceList'
-        description: Full traces for the specified requests.
-      UnprocessedTraceIds:
-        $ref: '#/definitions/UnprocessedTraceIdList'
-        description: Trace IDs of requests that haven't been processed.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+  TraceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/TraceId'
+  TraceList:
+    type: array
+    items:
+      $ref: '#/definitions/Trace'
+  UnprocessedTraceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/TraceId'
   Double:
     type: number
     format: double
   EC2InstanceId:
     type: string
     maxLength: 20
+  Timestamp:
+    type: string
+    format: date-time
+  EdgeStatistics:
+    type: object
+    properties:
+      OkCount:
+        $ref: '#/definitions/NullableLong'
+        description: The number of requests that completed with a 2xx Success status code.
+      ErrorStatistics:
+        $ref: '#/definitions/ErrorStatistics'
+        description: Information about requests that failed with a 4xx Client Error status code.
+      FaultStatistics:
+        $ref: '#/definitions/FaultStatistics'
+        description: Information about requests that failed with a 5xx Server Error status code.
+      TotalCount:
+        $ref: '#/definitions/NullableLong'
+        description: The total number of completed requests.
+      TotalResponseTime:
+        $ref: '#/definitions/NullableDouble'
+        description: The aggregate response time of completed requests.
+    description: Response statistics for an edge.
+  Histogram:
+    type: array
+    items:
+      $ref: '#/definitions/HistogramEntry'
   Edge:
     type: object
     properties:
@@ -505,54 +714,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Edge'
-  EdgeStatistics:
-    type: object
-    properties:
-      OkCount:
-        $ref: '#/definitions/NullableLong'
-        description: The number of requests that completed with a 2xx Success status code.
-      ErrorStatistics:
-        $ref: '#/definitions/ErrorStatistics'
-        description: Information about requests that failed with a 4xx Client Error status code.
-      FaultStatistics:
-        $ref: '#/definitions/FaultStatistics'
-        description: Information about requests that failed with a 5xx Server Error status code.
-      TotalCount:
-        $ref: '#/definitions/NullableLong'
-        description: The total number of completed requests.
-      TotalResponseTime:
-        $ref: '#/definitions/NullableDouble'
-        description: The aggregate response time of completed requests.
-    description: Response statistics for an edge.
-  EncryptionConfig:
-    type: object
-    properties:
-      KeyId:
-        $ref: '#/definitions/String'
-        description: 'The ID of the customer master key (CMK) used for encryption, if applicable.'
-      Status:
-        $ref: '#/definitions/EncryptionStatus'
-        description: 'The encryption status. After modifying encryption configuration with <a>PutEncryptionConfig</a>, the status can be <code>UPDATING</code> for up to one hour before X-Ray starts encrypting data with the new key.'
-      Type:
-        $ref: '#/definitions/EncryptionType'
-        description: The type of encryption. Set to <code>KMS</code> for encryption with CMKs. Set to <code>NONE</code> for default encryption.
-    description: A configuration document that specifies encryption configuration settings.
-  EncryptionKeyId:
-    type: string
-    minLength: 1
-    maxLength: 3000
-  EncryptionStatus:
-    type: string
-    enum:
-      - UPDATING
-      - ACTIVE
-  EncryptionType:
-    type: string
-    enum:
-      - NONE
-      - KMS
-  ErrorMessage:
-    type: string
+  NullableLong:
+    type: integer
   ErrorStatistics:
     type: object
     properties:
@@ -576,109 +739,47 @@ definitions:
         $ref: '#/definitions/NullableLong'
         description: The total number of requests that failed with a 5xx Server Error status code.
     description: Information about requests that failed with a 5xx Server Error status code.
+  EncryptionStatus:
+    type: string
+    enum:
+      - UPDATING
+      - ACTIVE
+  EncryptionType:
+    type: string
+    enum:
+      - NONE
+      - KMS
+  EncryptionConfig:
+    type: object
+    properties:
+      KeyId:
+        $ref: '#/definitions/String'
+        description: 'The ID of the customer master key (CMK) used for encryption, if applicable.'
+      Status:
+        $ref: '#/definitions/EncryptionStatus'
+        description: 'The encryption status. After modifying encryption configuration with <a>PutEncryptionConfig</a>, the status can be <code>UPDATING</code> for up to one hour before X-Ray starts encrypting data with the new key.'
+      Type:
+        $ref: '#/definitions/EncryptionType'
+        description: The type of encryption. Set to <code>KMS</code> for encryption with CMKs. Set to <code>NONE</code> for default encryption.
+    description: A configuration document that specifies encryption configuration settings.
+  EncryptionKeyId:
+    type: string
+    minLength: 1
+    maxLength: 3000
+  ErrorMessage:
+    type: string
   FilterExpression:
     type: string
     minLength: 1
     maxLength: 2000
-  GetEncryptionConfigRequest:
-    type: object
-    properties: {}
-  GetEncryptionConfigResult:
-    type: object
-    properties:
-      EncryptionConfig:
-        $ref: '#/definitions/EncryptionConfig'
-        description: The encryption configuration document.
-  GetServiceGraphRequest:
-    type: object
-    required:
-      - StartTime
-      - EndTime
-    properties:
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: The start of the time frame for which to generate a graph.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The end of the time frame for which to generate a graph.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
-  GetServiceGraphResult:
-    type: object
-    properties:
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: The start of the time frame for which the graph was generated.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The end of the time frame for which the graph was generated.
-      Services:
-        $ref: '#/definitions/ServiceList'
-        description: The services that have processed a traced request during the specified time frame.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
-  GetTraceGraphRequest:
-    type: object
-    required:
-      - TraceIds
-    properties:
-      TraceIds:
-        $ref: '#/definitions/TraceIdList'
-        description: Trace IDs of requests for which to generate a service graph.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
-  GetTraceGraphResult:
-    type: object
-    properties:
-      Services:
-        $ref: '#/definitions/ServiceList'
-        description: The services that have processed one of the specified requests.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
-  GetTraceSummariesRequest:
-    type: object
-    required:
-      - StartTime
-      - EndTime
-    properties:
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: The start of the time frame for which to retrieve traces.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The end of the time frame for which to retrieve traces.
-      Sampling:
-        $ref: '#/definitions/NullableBoolean'
-        description: Set to <code>true</code> to get summaries for only a subset of available traces.
-      FilterExpression:
-        $ref: '#/definitions/FilterExpression'
-        description: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Specify the pagination token returned by a previous request to retrieve the next page of results.
-  GetTraceSummariesResult:
-    type: object
-    properties:
-      TraceSummaries:
-        $ref: '#/definitions/TraceSummaryList'
-        description: Trace IDs and metadata for traces that were found in the specified time frame.
-      ApproximateTime:
-        $ref: '#/definitions/Timestamp'
-        description: The start time of this page of results.
-      TracesProcessedCount:
-        $ref: '#/definitions/NullableLong'
-        description: 'The total number of traces processed, including traces that did not match the specified filter expression.'
-      NextToken:
-        $ref: '#/definitions/String'
-        description: 'If the requested time frame contained more than one page of results, you can use this token to retrieve the next page. The first page contains the most most recent results, closest to the end of the time frame.'
-  Histogram:
+  ServiceList:
     type: array
     items:
-      $ref: '#/definitions/HistogramEntry'
+      $ref: '#/definitions/Service'
+  TraceSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/TraceSummary'
   HistogramEntry:
     type: object
     properties:
@@ -689,6 +790,8 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The prevalence of the entry.
     description: 'An entry in a histogram for a statistic. A histogram maps the range of observed values on the X axis, and the prevalence of each value on the Y axis.'
+  Integer:
+    type: integer
   Hostname:
     type: string
     maxLength: 255
@@ -711,77 +814,26 @@ definitions:
         $ref: '#/definitions/String'
         description: The IP address of the requestor.
     description: Information about an HTTP request.
-  Integer:
-    type: integer
-  InvalidRequestException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The request is missing required parameters or has invalid parameters.
-  NullableBoolean:
-    type: boolean
-  NullableDouble:
-    type: number
-    format: double
-  NullableInteger:
-    type: integer
-  NullableLong:
-    type: integer
-  PutEncryptionConfigRequest:
-    type: object
-    required:
-      - Type
-    properties:
-      KeyId:
-        $ref: '#/definitions/EncryptionKeyId'
-        description: '<p>An AWS KMS customer master key (CMK) in one of the following formats:</p> <ul> <li> <p> <b>Alias</b> - The name of the key. For example, <code>alias/MyKey</code>.</p> </li> <li> <p> <b>Key ID</b> - The KMS key ID of the key. For example, <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>.</p> </li> <li> <p> <b>ARN</b> - The full Amazon Resource Name of the key ID or alias. For example, <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Use this format to specify a key in a different account.</p> </li> </ul> <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>'
-      Type:
-        $ref: '#/definitions/EncryptionType'
-        description: The type of encryption. Set to <code>KMS</code> to use your own key for encryption. Set to <code>NONE</code> for default encryption.
-  PutEncryptionConfigResult:
-    type: object
-    properties:
-      EncryptionConfig:
-        $ref: '#/definitions/EncryptionConfig'
-        description: The new encryption configuration.
-  PutTelemetryRecordsRequest:
-    type: object
-    required:
-      - TelemetryRecords
-    properties:
-      TelemetryRecords:
-        $ref: '#/definitions/TelemetryRecordList'
-        description: <p/>
-      EC2InstanceId:
-        $ref: '#/definitions/EC2InstanceId'
-        description: <p/>
-      Hostname:
-        $ref: '#/definitions/Hostname'
-        description: <p/>
-      ResourceARN:
-        $ref: '#/definitions/ResourceARN'
-        description: <p/>
-  PutTelemetryRecordsResult:
-    type: object
-    properties: {}
-  PutTraceSegmentsRequest:
-    type: object
-    required:
-      - TraceSegmentDocuments
-    properties:
-      TraceSegmentDocuments:
-        $ref: '#/definitions/TraceSegmentDocumentList'
-        description: A string containing a JSON document defining one or more segments or subsegments.
-  PutTraceSegmentsResult:
-    type: object
-    properties:
-      UnprocessedTraceSegments:
-        $ref: '#/definitions/UnprocessedTraceSegmentList'
-        description: Segments that failed processing.
+  TelemetryRecordList:
+    type: array
+    items:
+      $ref: '#/definitions/TelemetryRecord'
   ResourceARN:
     type: string
     maxLength: 500
+  TraceSegmentDocumentList:
+    type: array
+    items:
+      $ref: '#/definitions/TraceSegmentDocument'
+  UnprocessedTraceSegmentList:
+    type: array
+    items:
+      $ref: '#/definitions/UnprocessedTraceSegment'
+  SegmentId:
+    type: string
+  SegmentDocument:
+    type: string
+    minLength: 1
   Segment:
     type: object
     properties:
@@ -792,15 +844,33 @@ definitions:
         $ref: '#/definitions/SegmentDocument'
         description: The segment document.
     description: '<p>A segment from a trace that has been ingested by the X-Ray service. The segment can be compiled from documents uploaded with <a>PutTraceSegments</a>, or an <code>inferred</code> segment for a downstream service, generated from a subsegment sent by the service that called it.</p> <p>For the full segment document schema, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html">AWS X-Ray Segment Documents</a> in the <i>AWS X-Ray Developer Guide</i>.</p>'
-  SegmentDocument:
-    type: string
-    minLength: 1
-  SegmentId:
-    type: string
   SegmentList:
     type: array
     items:
       $ref: '#/definitions/Segment'
+  ServiceNames:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ServiceStatistics:
+    type: object
+    properties:
+      OkCount:
+        $ref: '#/definitions/NullableLong'
+        description: The number of requests that completed with a 2xx Success status code.
+      ErrorStatistics:
+        $ref: '#/definitions/ErrorStatistics'
+        description: Information about requests that failed with a 4xx Client Error status code.
+      FaultStatistics:
+        $ref: '#/definitions/FaultStatistics'
+        description: Information about requests that failed with a 5xx Server Error status code.
+      TotalCount:
+        $ref: '#/definitions/NullableLong'
+        description: The total number of completed requests.
+      TotalResponseTime:
+        $ref: '#/definitions/NullableDouble'
+        description: The aggregate response time of completed requests.
+    description: Response statistics for a service.
   Service:
     type: object
     properties:
@@ -864,35 +934,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ServiceId'
-  ServiceList:
-    type: array
-    items:
-      $ref: '#/definitions/Service'
-  ServiceNames:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ServiceStatistics:
-    type: object
-    properties:
-      OkCount:
-        $ref: '#/definitions/NullableLong'
-        description: The number of requests that completed with a 2xx Success status code.
-      ErrorStatistics:
-        $ref: '#/definitions/ErrorStatistics'
-        description: Information about requests that failed with a 4xx Client Error status code.
-      FaultStatistics:
-        $ref: '#/definitions/FaultStatistics'
-        description: Information about requests that failed with a 5xx Server Error status code.
-      TotalCount:
-        $ref: '#/definitions/NullableLong'
-        description: The total number of completed requests.
-      TotalResponseTime:
-        $ref: '#/definitions/NullableDouble'
-        description: The aggregate response time of completed requests.
-    description: Response statistics for a service.
-  String:
-    type: string
   TelemetryRecord:
     type: object
     required:
@@ -917,19 +958,10 @@ definitions:
         $ref: '#/definitions/BackendConnectionErrors'
         description: <p/>
     description: <p/>
-  TelemetryRecordList:
-    type: array
-    items:
-      $ref: '#/definitions/TelemetryRecord'
-  ThrottledException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The request exceeds the maximum number of requests per second.
-  Timestamp:
+  TraceId:
     type: string
-    format: date-time
+    minLength: 1
+    maxLength: 35
   Trace:
     type: object
     properties:
@@ -943,24 +975,12 @@ definitions:
         $ref: '#/definitions/SegmentList'
         description: Segment documents for the segments and subsegments that comprise the trace.
     description: A collection of segment documents with matching trace IDs.
-  TraceId:
-    type: string
-    minLength: 1
-    maxLength: 35
-  TraceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/TraceId'
-  TraceList:
-    type: array
-    items:
-      $ref: '#/definitions/Trace'
   TraceSegmentDocument:
     type: string
-  TraceSegmentDocumentList:
+  TraceUsers:
     type: array
     items:
-      $ref: '#/definitions/TraceSegmentDocument'
+      $ref: '#/definitions/TraceUser'
   TraceSummary:
     type: object
     properties:
@@ -998,10 +1018,6 @@ definitions:
         $ref: '#/definitions/ServiceIds'
         description: Service IDs from the trace's segment documents.
     description: Metadata generated from the segment documents in a trace.
-  TraceSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/TraceSummary'
   TraceUser:
     type: object
     properties:
@@ -1012,14 +1028,6 @@ definitions:
         $ref: '#/definitions/ServiceIds'
         description: Services that the user's request hit.
     description: Information about a user recorded in segment documents.
-  TraceUsers:
-    type: array
-    items:
-      $ref: '#/definitions/TraceUser'
-  UnprocessedTraceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/TraceId'
   UnprocessedTraceSegment:
     type: object
     properties:
@@ -1033,10 +1041,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The error message.
     description: Information about a segment that failed processing.
-  UnprocessedTraceSegmentList:
-    type: array
-    items:
-      $ref: '#/definitions/UnprocessedTraceSegment'
   ValueWithServiceIds:
     type: object
     properties:
@@ -1047,7 +1051,3 @@ definitions:
         $ref: '#/definitions/ServiceIds'
         description: Services to which the annotation applies.
     description: Information about a segment annotation.
-  ValuesWithServiceIds:
-    type: array
-    items:
-      $ref: '#/definitions/ValueWithServiceIds'

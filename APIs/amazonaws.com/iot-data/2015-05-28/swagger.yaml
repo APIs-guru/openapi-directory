@@ -308,17 +308,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  ConflictException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: The message for the exception.
-    description: The specified version does not match the version of the document.
-  DeleteThingShadowRequest:
-    type: object
-    properties: {}
-    description: The input for the DeleteThingShadow operation.
   DeleteThingShadowResponse:
     type: object
     required:
@@ -328,62 +317,10 @@ definitions:
         $ref: '#/definitions/JsonDocument'
         description: 'The state information, in JSON format.'
     description: The output from the DeleteThingShadow operation.
-  ErrorMessage:
-    type: string
-  GetThingShadowRequest:
+  DeleteThingShadowRequest:
     type: object
     properties: {}
-    description: The input for the GetThingShadow operation.
-  GetThingShadowResponse:
-    type: object
-    properties:
-      payload:
-        $ref: '#/definitions/JsonDocument'
-        description: 'The state information, in JSON format.'
-    description: The output from the GetThingShadow operation.
-  InternalFailureException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/errorMessage'
-        description: The message for the exception.
-    description: An unexpected error has occurred.
-  InvalidRequestException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/errorMessage'
-        description: The message for the exception.
-    description: The request is not valid.
-  JsonDocument:
-    type: string
-  MethodNotAllowedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: The message for the exception.
-    description: The specified combination of HTTP verb and URI is not supported.
-  Payload:
-    type: string
-  PublishRequest:
-    type: object
-    properties:
-      payload:
-        $ref: '#/definitions/Payload'
-        description: 'The state information, in JSON format.'
-    description: The input for the Publish operation.
-  Qos:
-    type: integer
-    minimum: 0
-    maximum: 1
-  RequestEntityTooLargeException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: The message for the exception.
-    description: The payload exceeds the maximum size allowed.
+    description: The input for the DeleteThingShadow operation.
   ResourceNotFoundException:
     type: object
     properties:
@@ -391,18 +328,13 @@ definitions:
         $ref: '#/definitions/errorMessage'
         description: The message for the exception.
     description: The specified resource does not exist.
-  ServiceUnavailableException:
+  InvalidRequestException:
     type: object
     properties:
       message:
         $ref: '#/definitions/errorMessage'
         description: The message for the exception.
-    description: The service is temporarily unavailable.
-  ThingName:
-    type: string
-    pattern: '[a-zA-Z0-9_-]+'
-    minLength: 1
-    maxLength: 128
+    description: The request is not valid.
   ThrottlingException:
     type: object
     properties:
@@ -410,8 +342,6 @@ definitions:
         $ref: '#/definitions/errorMessage'
         description: The message for the exception.
     description: The rate exceeds the limit.
-  Topic:
-    type: string
   UnauthorizedException:
     type: object
     properties:
@@ -419,6 +349,27 @@ definitions:
         $ref: '#/definitions/errorMessage'
         description: The message for the exception.
     description: You are not authorized to perform this operation.
+  ServiceUnavailableException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: The service is temporarily unavailable.
+  InternalFailureException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: An unexpected error has occurred.
+  MethodNotAllowedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: The message for the exception.
+    description: The specified combination of HTTP verb and URI is not supported.
   UnsupportedDocumentEncodingException:
     type: object
     properties:
@@ -426,6 +377,31 @@ definitions:
         $ref: '#/definitions/errorMessage'
         description: The message for the exception.
     description: The document encoding is not supported.
+  GetThingShadowResponse:
+    type: object
+    properties:
+      payload:
+        $ref: '#/definitions/JsonDocument'
+        description: 'The state information, in JSON format.'
+    description: The output from the GetThingShadow operation.
+  GetThingShadowRequest:
+    type: object
+    properties: {}
+    description: The input for the GetThingShadow operation.
+  PublishRequest:
+    type: object
+    properties:
+      payload:
+        $ref: '#/definitions/Payload'
+        description: 'The state information, in JSON format.'
+    description: The input for the Publish operation.
+  UpdateThingShadowResponse:
+    type: object
+    properties:
+      payload:
+        $ref: '#/definitions/JsonDocument'
+        description: 'The state information, in JSON format.'
+    description: The output from the UpdateThingShadow operation.
   UpdateThingShadowRequest:
     type: object
     required:
@@ -435,12 +411,36 @@ definitions:
         $ref: '#/definitions/JsonDocument'
         description: 'The state information, in JSON format.'
     description: The input for the UpdateThingShadow operation.
-  UpdateThingShadowResponse:
+  ConflictException:
     type: object
     properties:
-      payload:
-        $ref: '#/definitions/JsonDocument'
-        description: 'The state information, in JSON format.'
-    description: The output from the UpdateThingShadow operation.
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: The message for the exception.
+    description: The specified version does not match the version of the document.
+  RequestEntityTooLargeException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: The message for the exception.
+    description: The payload exceeds the maximum size allowed.
+  ErrorMessage:
+    type: string
+  ThingName:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 128
+  JsonDocument:
+    type: string
   errorMessage:
     type: string
+  Payload:
+    type: string
+  Topic:
+    type: string
+  Qos:
+    type: integer
+    minimum: 0
+    maximum: 1

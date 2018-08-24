@@ -827,123 +827,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  ActivityDoesNotExist:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified activity does not exist.
-  ActivityFailedEventDetails:
-    type: object
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-        description: The error code of the failure.
-      cause:
-        $ref: '#/definitions/Cause'
-        description: A more detailed explanation of the cause of the failure.
-    description: Contains details about an activity which failed during an execution.
-  ActivityLimitExceeded:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The maximum number of activities has been reached. Existing activities must be deleted before a new activity can be created.
-  ActivityList:
-    type: array
-    items:
-      $ref: '#/definitions/ActivityListItem'
-  ActivityListItem:
-    type: object
-    required:
-      - activityArn
-      - name
-      - creationDate
-    properties:
-      activityArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) that identifies the activity.
-      name:
-        $ref: '#/definitions/Name'
-        description: '<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
-      creationDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date the activity is created.
-    description: Contains details about an activity.
-  ActivityScheduleFailedEventDetails:
-    type: object
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-        description: The error code of the failure.
-      cause:
-        $ref: '#/definitions/Cause'
-        description: A more detailed explanation of the cause of the failure.
-    description: Contains details about an activity schedule failure which occurred during an execution.
-  ActivityScheduledEventDetails:
-    type: object
-    required:
-      - resource
-    properties:
-      resource:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the scheduled activity.
-      input:
-        $ref: '#/definitions/Data'
-        description: The JSON data input to the activity task.
-      timeoutInSeconds:
-        $ref: '#/definitions/TimeoutInSeconds'
-        description: The maximum allowed duration of the activity task.
-      heartbeatInSeconds:
-        $ref: '#/definitions/TimeoutInSeconds'
-        description: The maximum allowed duration between two heartbeats for the activity task.
-    description: Contains details about an activity scheduled during an execution.
-  ActivityStartedEventDetails:
-    type: object
-    properties:
-      workerName:
-        $ref: '#/definitions/Identity'
-        description: The name of the worker that the task is assigned to. These names are provided by the workers when calling <a>GetActivityTask</a>.
-    description: Contains details about the start of an activity during an execution.
-  ActivitySucceededEventDetails:
-    type: object
-    properties:
-      output:
-        $ref: '#/definitions/Data'
-        description: The JSON data output by the activity task.
-    description: Contains details about an activity which successfully terminated during an execution.
-  ActivityTimedOutEventDetails:
-    type: object
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-        description: The error code of the failure.
-      cause:
-        $ref: '#/definitions/Cause'
-        description: A more detailed explanation of the cause of the timeout.
-    description: Contains details about an activity timeout which occurred during an execution.
-  ActivityWorkerLimitExceeded:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The maximum number of workers concurrently polling for activity tasks has been reached.
-  Arn:
-    type: string
-    minLength: 1
-    maxLength: 256
-  Cause:
-    type: string
-    minLength: 0
-    maxLength: 32768
-  CreateActivityInput:
-    type: object
-    required:
-      - name
-    properties:
-      name:
-        $ref: '#/definitions/Name'
-        description: '<p>The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see <a href="http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
   CreateActivityOutput:
     type: object
     required:
@@ -956,6 +839,38 @@ definitions:
       creationDate:
         $ref: '#/definitions/Timestamp'
         description: The date the activity is created.
+  CreateActivityInput:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see <a href="http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+  ActivityLimitExceeded:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The maximum number of activities has been reached. Existing activities must be deleted before a new activity can be created.
+  InvalidName:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The provided name is invalid.
+  CreateStateMachineOutput:
+    type: object
+    required:
+      - stateMachineArn
+      - creationDate
+    properties:
+      stateMachineArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) that identifies the created state machine.
+      creationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date the state machine is created.
   CreateStateMachineInput:
     type: object
     required:
@@ -972,25 +887,39 @@ definitions:
       roleArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
-  CreateStateMachineOutput:
+  InvalidArn:
     type: object
-    required:
-      - stateMachineArn
-      - creationDate
     properties:
-      stateMachineArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) that identifies the created state machine.
-      creationDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date the state machine is created.
-  Data:
-    type: string
-    maxLength: 32768
-  Definition:
-    type: string
-    minLength: 1
-    maxLength: 1048576
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The provided Amazon Resource Name (ARN) is invalid.
+  InvalidDefinition:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The provided Amazon States Language definition is invalid.
+  StateMachineAlreadyExists:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: A state machine with the same name but a different definition or role ARN already exists.
+  StateMachineDeleting:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified state machine is being deleted.
+  StateMachineLimitExceeded:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The maximum number of state machines has been reached. Existing state machines must be deleted before a new state machine can be created.
+  DeleteActivityOutput:
+    type: object
+    properties: {}
   DeleteActivityInput:
     type: object
     required:
@@ -999,7 +928,7 @@ definitions:
       activityArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the activity to delete.
-  DeleteActivityOutput:
+  DeleteStateMachineOutput:
     type: object
     properties: {}
   DeleteStateMachineInput:
@@ -1010,17 +939,6 @@ definitions:
       stateMachineArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the state machine to delete.
-  DeleteStateMachineOutput:
-    type: object
-    properties: {}
-  DescribeActivityInput:
-    type: object
-    required:
-      - activityArn
-    properties:
-      activityArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the activity to describe.
   DescribeActivityOutput:
     type: object
     required:
@@ -1037,14 +955,20 @@ definitions:
       creationDate:
         $ref: '#/definitions/Timestamp'
         description: The date the activity is created.
-  DescribeExecutionInput:
+  DescribeActivityInput:
     type: object
     required:
-      - executionArn
+      - activityArn
     properties:
-      executionArn:
+      activityArn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the execution to describe.
+        description: The Amazon Resource Name (ARN) of the activity to describe.
+  ActivityDoesNotExist:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified activity does not exist.
   DescribeExecutionOutput:
     type: object
     required:
@@ -1078,46 +1002,20 @@ definitions:
       output:
         $ref: '#/definitions/Data'
         description: '<p>The JSON output data of the execution.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>'
-  DescribeStateMachineForExecutionInput:
+  DescribeExecutionInput:
     type: object
     required:
       - executionArn
     properties:
       executionArn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the execution you want state machine information for.
-  DescribeStateMachineForExecutionOutput:
+        description: The Amazon Resource Name (ARN) of the execution to describe.
+  ExecutionDoesNotExist:
     type: object
-    required:
-      - stateMachineArn
-      - name
-      - definition
-      - roleArn
-      - updateDate
     properties:
-      stateMachineArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the state machine associated with the execution.
-      name:
-        $ref: '#/definitions/Name'
-        description: The name of the state machine associated with the execution.
-      definition:
-        $ref: '#/definitions/Definition'
-        description: The Amazon States Language definition of the state machine.
-      roleArn:
-        $ref: '#/definitions/Arn'
-        description: 'The Amazon Resource Name (ARN) of the IAM role of the State Machine for the execution. '
-      updateDate:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time the state machine associated with an execution was updated. For a newly created state machine, this is the creation date.'
-  DescribeStateMachineInput:
-    type: object
-    required:
-      - stateMachineArn
-    properties:
-      stateMachineArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the state machine to describe.
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified execution does not exist.
   DescribeStateMachineOutput:
     type: object
     required:
@@ -1145,12 +1043,461 @@ definitions:
       creationDate:
         $ref: '#/definitions/Timestamp'
         description: The date the state machine is created.
+  DescribeStateMachineInput:
+    type: object
+    required:
+      - stateMachineArn
+    properties:
+      stateMachineArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the state machine to describe.
+  StateMachineDoesNotExist:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified state machine does not exist.
+  DescribeStateMachineForExecutionOutput:
+    type: object
+    required:
+      - stateMachineArn
+      - name
+      - definition
+      - roleArn
+      - updateDate
+    properties:
+      stateMachineArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the state machine associated with the execution.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the state machine associated with the execution.
+      definition:
+        $ref: '#/definitions/Definition'
+        description: The Amazon States Language definition of the state machine.
+      roleArn:
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) of the IAM role of the State Machine for the execution. '
+      updateDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time the state machine associated with an execution was updated. For a newly created state machine, this is the creation date.'
+  DescribeStateMachineForExecutionInput:
+    type: object
+    required:
+      - executionArn
+    properties:
+      executionArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the execution you want state machine information for.
+  GetActivityTaskOutput:
+    type: object
+    properties:
+      taskToken:
+        $ref: '#/definitions/TaskToken'
+        description: 'A token that identifies the scheduled task. This token must be copied and included in subsequent calls to <a>SendTaskHeartbeat</a>, <a>SendTaskSuccess</a> or <a>SendTaskFailure</a> in order to report the progress or completion of the task.'
+      input:
+        $ref: '#/definitions/Data'
+        description: The string that contains the JSON input data for the task.
+  GetActivityTaskInput:
+    type: object
+    required:
+      - activityArn
+    properties:
+      activityArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned when you create the task using <a>CreateActivity</a>.)
+      workerName:
+        $ref: '#/definitions/Name'
+        description: You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name is used when it is logged in the execution history.
+  ActivityWorkerLimitExceeded:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The maximum number of workers concurrently polling for activity tasks has been reached.
+  GetExecutionHistoryOutput:
+    type: object
+    required:
+      - events
+    properties:
+      events:
+        $ref: '#/definitions/HistoryEventList'
+        description: The list of events that occurred in the execution.
+      nextToken:
+        $ref: '#/definitions/PageToken'
+        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
+  GetExecutionHistoryInput:
+    type: object
+    required:
+      - executionArn
+    properties:
+      executionArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the execution.
+      maxResults:
+        $ref: '#/definitions/PageSize'
+        description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
+      reverseOrder:
+        $ref: '#/definitions/ReverseOrder'
+        description: Lists events in descending order of their <code>timeStamp</code>.
+      nextToken:
+        $ref: '#/definitions/PageToken'
+        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
+  InvalidToken:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The provided token is invalid.
+  ListActivitiesOutput:
+    type: object
+    required:
+      - activities
+    properties:
+      activities:
+        $ref: '#/definitions/ActivityList'
+        description: The list of activities.
+      nextToken:
+        $ref: '#/definitions/PageToken'
+        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
+  ListActivitiesInput:
+    type: object
+    properties:
+      maxResults:
+        $ref: '#/definitions/PageSize'
+        description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
+      nextToken:
+        $ref: '#/definitions/PageToken'
+        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
+  ListExecutionsOutput:
+    type: object
+    required:
+      - executions
+    properties:
+      executions:
+        $ref: '#/definitions/ExecutionList'
+        description: The list of matching executions.
+      nextToken:
+        $ref: '#/definitions/PageToken'
+        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
+  ListExecutionsInput:
+    type: object
+    required:
+      - stateMachineArn
+    properties:
+      stateMachineArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the state machine whose executions is listed.
+      statusFilter:
+        $ref: '#/definitions/ExecutionStatus'
+        description: 'If specified, only list the executions whose current execution status matches the given filter.'
+      maxResults:
+        $ref: '#/definitions/PageSize'
+        description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
+      nextToken:
+        $ref: '#/definitions/PageToken'
+        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
+  ListStateMachinesOutput:
+    type: object
+    required:
+      - stateMachines
+    properties:
+      stateMachines:
+        $ref: '#/definitions/StateMachineList'
+      nextToken:
+        $ref: '#/definitions/PageToken'
+        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
+  ListStateMachinesInput:
+    type: object
+    properties:
+      maxResults:
+        $ref: '#/definitions/PageSize'
+        description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
+      nextToken:
+        $ref: '#/definitions/PageToken'
+        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
+  SendTaskFailureOutput:
+    type: object
+    properties: {}
+  SendTaskFailureInput:
+    type: object
+    required:
+      - taskToken
+    properties:
+      taskToken:
+        $ref: '#/definitions/TaskToken'
+        description: 'The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see GetActivityTask::taskToken).'
+      error:
+        $ref: '#/definitions/Error'
+        description: An arbitrary error code that identifies the cause of the failure.
+      cause:
+        $ref: '#/definitions/Cause'
+        description: A more detailed explanation of the cause of the failure.
+  TaskDoesNotExist:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+  TaskTimedOut:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+  SendTaskHeartbeatOutput:
+    type: object
+    properties: {}
+  SendTaskHeartbeatInput:
+    type: object
+    required:
+      - taskToken
+    properties:
+      taskToken:
+        $ref: '#/definitions/TaskToken'
+        description: The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see <a>GetActivityTaskOutput$taskToken</a>).
+  SendTaskSuccessOutput:
+    type: object
+    properties: {}
+  SendTaskSuccessInput:
+    type: object
+    required:
+      - taskToken
+      - output
+    properties:
+      taskToken:
+        $ref: '#/definitions/TaskToken'
+        description: The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see <a>GetActivityTaskOutput$taskToken</a>).
+      output:
+        $ref: '#/definitions/Data'
+        description: The JSON output of the task.
+  InvalidOutput:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The provided JSON output data is invalid.
+  StartExecutionOutput:
+    type: object
+    required:
+      - executionArn
+      - startDate
+    properties:
+      executionArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) that identifies the execution.
+      startDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date the execution is started.
+  StartExecutionInput:
+    type: object
+    required:
+      - stateMachineArn
+    properties:
+      stateMachineArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the state machine to execute.
+      name:
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see <a href="http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <important> <p>An execution can''t use the name of another execution for 90 days.</p> <p>When you make multiple <code>StartExecution</code> calls with the same name, the new execution doesn''t run and the following rules apply:</p> <ul> <li> <p>When the original execution is open and the execution input from the new call is <i>different</i>, the <code>ExecutionAlreadyExists</code> message is returned.</p> </li> <li> <p>When the original execution is open and the execution input from the new call is <i>identical</i>, the <code>Success</code> message is returned.</p> </li> <li> <p>When the original execution is closed, the <code>ExecutionAlreadyExists</code> message is returned regardless of input.</p> </li> </ul> </important> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+      input:
+        $ref: '#/definitions/Data'
+        description: '<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>"input": "{\"first_name\" : \"test\"}"</code> </p> <note> <p>If you don''t include any JSON input data, you still must include the two braces, for example: <code>"input": "{}"</code> </p> </note>'
+  ExecutionLimitExceeded:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The maximum number of running executions has been reached. Running executions must end or be stopped before a new execution can be started.
+  ExecutionAlreadyExists:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: <p>The execution has the same <code>name</code> as another execution (but a different <code>input</code>).</p> <note> <p>Executions with the same <code>name</code> and <code>input</code> are considered idempotent.</p> </note>
+  InvalidExecutionInput:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The provided JSON input data is invalid.
+  StopExecutionOutput:
+    type: object
+    required:
+      - stopDate
+    properties:
+      stopDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date the execution is stopped.
+  StopExecutionInput:
+    type: object
+    required:
+      - executionArn
+    properties:
+      executionArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the execution to stop.
+      error:
+        $ref: '#/definitions/Error'
+        description: An arbitrary error code that identifies the cause of the termination.
+      cause:
+        $ref: '#/definitions/Cause'
+        description: A more detailed explanation of the cause of the termination.
+  UpdateStateMachineOutput:
+    type: object
+    required:
+      - updateDate
+    properties:
+      updateDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time the state machine was updated.
+  UpdateStateMachineInput:
+    type: object
+    required:
+      - stateMachineArn
+    properties:
+      stateMachineArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the state machine.
+      definition:
+        $ref: '#/definitions/Definition'
+        description: The Amazon States Language definition of the state machine.
+      roleArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the IAM role of the state machine.
+  MissingRequiredParameter:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Request is missing a required parameter. This error occurs if both <code>definition</code> and <code>roleArn</code> are not specified.
+  ErrorMessage:
+    type: string
   Error:
     type: string
     minLength: 0
     maxLength: 256
-  ErrorMessage:
+  Cause:
     type: string
+    minLength: 0
+    maxLength: 32768
+  ActivityFailedEventDetails:
+    type: object
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+        description: The error code of the failure.
+      cause:
+        $ref: '#/definitions/Cause'
+        description: A more detailed explanation of the cause of the failure.
+    description: Contains details about an activity which failed during an execution.
+  ActivityListItem:
+    type: object
+    required:
+      - activityArn
+      - name
+      - creationDate
+    properties:
+      activityArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) that identifies the activity.
+      name:
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+      creationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date the activity is created.
+    description: Contains details about an activity.
+  ActivityList:
+    type: array
+    items:
+      $ref: '#/definitions/ActivityListItem'
+  Arn:
+    type: string
+    minLength: 1
+    maxLength: 256
+  Name:
+    type: string
+    minLength: 1
+    maxLength: 80
+  Timestamp:
+    type: string
+    format: date-time
+  ActivityScheduleFailedEventDetails:
+    type: object
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+        description: The error code of the failure.
+      cause:
+        $ref: '#/definitions/Cause'
+        description: A more detailed explanation of the cause of the failure.
+    description: Contains details about an activity schedule failure which occurred during an execution.
+  Data:
+    type: string
+    maxLength: 32768
+  TimeoutInSeconds:
+    type: integer
+  ActivityScheduledEventDetails:
+    type: object
+    required:
+      - resource
+    properties:
+      resource:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the scheduled activity.
+      input:
+        $ref: '#/definitions/Data'
+        description: The JSON data input to the activity task.
+      timeoutInSeconds:
+        $ref: '#/definitions/TimeoutInSeconds'
+        description: The maximum allowed duration of the activity task.
+      heartbeatInSeconds:
+        $ref: '#/definitions/TimeoutInSeconds'
+        description: The maximum allowed duration between two heartbeats for the activity task.
+    description: Contains details about an activity scheduled during an execution.
+  Identity:
+    type: string
+    maxLength: 256
+  ActivityStartedEventDetails:
+    type: object
+    properties:
+      workerName:
+        $ref: '#/definitions/Identity'
+        description: The name of the worker that the task is assigned to. These names are provided by the workers when calling <a>GetActivityTask</a>.
+    description: Contains details about the start of an activity during an execution.
+  ActivitySucceededEventDetails:
+    type: object
+    properties:
+      output:
+        $ref: '#/definitions/Data'
+        description: The JSON data output by the activity task.
+    description: Contains details about an activity which successfully terminated during an execution.
+  ActivityTimedOutEventDetails:
+    type: object
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+        description: The error code of the failure.
+      cause:
+        $ref: '#/definitions/Cause'
+        description: A more detailed explanation of the cause of the timeout.
+    description: Contains details about an activity timeout which occurred during an execution.
+  Definition:
+    type: string
+    minLength: 1
+    maxLength: 1048576
+  ExecutionStatus:
+    type: string
+    enum:
+      - RUNNING
+      - SUCCEEDED
+      - FAILED
+      - TIMED_OUT
+      - ABORTED
+  StateMachineStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - DELETING
   EventId:
     type: integer
   ExecutionAbortedEventDetails:
@@ -1163,18 +1510,6 @@ definitions:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about an abort of an execution.
-  ExecutionAlreadyExists:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: <p>The execution has the same <code>name</code> as another execution (but a different <code>input</code>).</p> <note> <p>Executions with the same <code>name</code> and <code>input</code> are considered idempotent.</p> </note>
-  ExecutionDoesNotExist:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified execution does not exist.
   ExecutionFailedEventDetails:
     type: object
     properties:
@@ -1185,16 +1520,6 @@ definitions:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about an execution failure event.
-  ExecutionLimitExceeded:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The maximum number of running executions has been reached. Running executions must end or be stopped before a new execution can be started.
-  ExecutionList:
-    type: array
-    items:
-      $ref: '#/definitions/ExecutionListItem'
   ExecutionListItem:
     type: object
     required:
@@ -1223,6 +1548,10 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: 'If the execution already ended, the date the execution stopped.'
     description: Contains details about an execution.
+  ExecutionList:
+    type: array
+    items:
+      $ref: '#/definitions/ExecutionListItem'
   ExecutionStartedEventDetails:
     type: object
     properties:
@@ -1233,14 +1562,6 @@ definitions:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda tasks.
     description: Contains details about the start of the execution.
-  ExecutionStatus:
-    type: string
-    enum:
-      - RUNNING
-      - SUCCEEDED
-      - FAILED
-      - TIMED_OUT
-      - ABORTED
   ExecutionSucceededEventDetails:
     type: object
     properties:
@@ -1258,115 +1579,20 @@ definitions:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the timeout.
     description: Contains details about the execution timeout which occurred during the execution.
-  GetActivityTaskInput:
-    type: object
-    required:
-      - activityArn
-    properties:
-      activityArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned when you create the task using <a>CreateActivity</a>.)
-      workerName:
-        $ref: '#/definitions/Name'
-        description: You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name is used when it is logged in the execution history.
-  GetActivityTaskOutput:
-    type: object
-    properties:
-      taskToken:
-        $ref: '#/definitions/TaskToken'
-        description: 'A token that identifies the scheduled task. This token must be copied and included in subsequent calls to <a>SendTaskHeartbeat</a>, <a>SendTaskSuccess</a> or <a>SendTaskFailure</a> in order to report the progress or completion of the task.'
-      input:
-        $ref: '#/definitions/Data'
-        description: The string that contains the JSON input data for the task.
-  GetExecutionHistoryInput:
-    type: object
-    required:
-      - executionArn
-    properties:
-      executionArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the execution.
-      maxResults:
-        $ref: '#/definitions/PageSize'
-        description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
-      reverseOrder:
-        $ref: '#/definitions/ReverseOrder'
-        description: Lists events in descending order of their <code>timeStamp</code>.
-      nextToken:
-        $ref: '#/definitions/PageToken'
-        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
-  GetExecutionHistoryOutput:
-    type: object
-    required:
-      - events
-    properties:
-      events:
-        $ref: '#/definitions/HistoryEventList'
-        description: The list of events that occurred in the execution.
-      nextToken:
-        $ref: '#/definitions/PageToken'
-        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
-  HistoryEvent:
-    type: object
-    required:
-      - timestamp
-      - type
-      - id
-    properties:
-      timestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The date the event occurred.
-      type:
-        $ref: '#/definitions/HistoryEventType'
-        description: The type of the event.
-      id:
-        $ref: '#/definitions/EventId'
-        description: 'The id of the event. Events are numbered sequentially, starting at one.'
-      previousEventId:
-        $ref: '#/definitions/EventId'
-        description: The id of the previous event.
-      activityFailedEventDetails:
-        $ref: '#/definitions/ActivityFailedEventDetails'
-      activityScheduleFailedEventDetails:
-        $ref: '#/definitions/ActivityScheduleFailedEventDetails'
-        description: Contains details about an activity schedule event which failed during an execution.
-      activityScheduledEventDetails:
-        $ref: '#/definitions/ActivityScheduledEventDetails'
-      activityStartedEventDetails:
-        $ref: '#/definitions/ActivityStartedEventDetails'
-      activitySucceededEventDetails:
-        $ref: '#/definitions/ActivitySucceededEventDetails'
-      activityTimedOutEventDetails:
-        $ref: '#/definitions/ActivityTimedOutEventDetails'
-      executionFailedEventDetails:
-        $ref: '#/definitions/ExecutionFailedEventDetails'
-      executionStartedEventDetails:
-        $ref: '#/definitions/ExecutionStartedEventDetails'
-      executionSucceededEventDetails:
-        $ref: '#/definitions/ExecutionSucceededEventDetails'
-      executionAbortedEventDetails:
-        $ref: '#/definitions/ExecutionAbortedEventDetails'
-      executionTimedOutEventDetails:
-        $ref: '#/definitions/ExecutionTimedOutEventDetails'
-      lambdaFunctionFailedEventDetails:
-        $ref: '#/definitions/LambdaFunctionFailedEventDetails'
-      lambdaFunctionScheduleFailedEventDetails:
-        $ref: '#/definitions/LambdaFunctionScheduleFailedEventDetails'
-      lambdaFunctionScheduledEventDetails:
-        $ref: '#/definitions/LambdaFunctionScheduledEventDetails'
-      lambdaFunctionStartFailedEventDetails:
-        $ref: '#/definitions/LambdaFunctionStartFailedEventDetails'
-        description: Contains details about a lambda function which failed to start during an execution.
-      lambdaFunctionSucceededEventDetails:
-        $ref: '#/definitions/LambdaFunctionSucceededEventDetails'
-        description: Contains details about a lambda function which terminated successfully during an execution.
-      lambdaFunctionTimedOutEventDetails:
-        $ref: '#/definitions/LambdaFunctionTimedOutEventDetails'
-      stateEnteredEventDetails:
-        $ref: '#/definitions/StateEnteredEventDetails'
-      stateExitedEventDetails:
-        $ref: '#/definitions/StateExitedEventDetails'
-    description: Contains details about the events of an execution.
+  TaskToken:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  PageSize:
+    type: integer
+    minimum: 0
+    maximum: 1000
+  ReverseOrder:
+    type: boolean
+  PageToken:
+    type: string
+    minLength: 1
+    maxLength: 1024
   HistoryEventList:
     type: array
     description: Contains details about the events which occurred during an execution.
@@ -1412,45 +1638,6 @@ definitions:
       - WaitStateAborted
       - WaitStateEntered
       - WaitStateExited
-  Identity:
-    type: string
-    maxLength: 256
-  InvalidArn:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The provided Amazon Resource Name (ARN) is invalid.
-  InvalidDefinition:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The provided Amazon States Language definition is invalid.
-  InvalidExecutionInput:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The provided JSON input data is invalid.
-  InvalidName:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The provided name is invalid.
-  InvalidOutput:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The provided JSON output data is invalid.
-  InvalidToken:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The provided token is invalid.
   LambdaFunctionFailedEventDetails:
     type: object
     properties:
@@ -1513,162 +1700,6 @@ definitions:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the timeout.
     description: Contains details about a lambda function timeout which occurred during an execution.
-  ListActivitiesInput:
-    type: object
-    properties:
-      maxResults:
-        $ref: '#/definitions/PageSize'
-        description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
-      nextToken:
-        $ref: '#/definitions/PageToken'
-        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
-  ListActivitiesOutput:
-    type: object
-    required:
-      - activities
-    properties:
-      activities:
-        $ref: '#/definitions/ActivityList'
-        description: The list of activities.
-      nextToken:
-        $ref: '#/definitions/PageToken'
-        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
-  ListExecutionsInput:
-    type: object
-    required:
-      - stateMachineArn
-    properties:
-      stateMachineArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the state machine whose executions is listed.
-      statusFilter:
-        $ref: '#/definitions/ExecutionStatus'
-        description: 'If specified, only list the executions whose current execution status matches the given filter.'
-      maxResults:
-        $ref: '#/definitions/PageSize'
-        description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
-      nextToken:
-        $ref: '#/definitions/PageToken'
-        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
-  ListExecutionsOutput:
-    type: object
-    required:
-      - executions
-    properties:
-      executions:
-        $ref: '#/definitions/ExecutionList'
-        description: The list of matching executions.
-      nextToken:
-        $ref: '#/definitions/PageToken'
-        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
-  ListStateMachinesInput:
-    type: object
-    properties:
-      maxResults:
-        $ref: '#/definitions/PageSize'
-        description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
-      nextToken:
-        $ref: '#/definitions/PageToken'
-        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
-  ListStateMachinesOutput:
-    type: object
-    required:
-      - stateMachines
-    properties:
-      stateMachines:
-        $ref: '#/definitions/StateMachineList'
-      nextToken:
-        $ref: '#/definitions/PageToken'
-        description: '<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
-  MissingRequiredParameter:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Request is missing a required parameter. This error occurs if both <code>definition</code> and <code>roleArn</code> are not specified.
-  Name:
-    type: string
-    minLength: 1
-    maxLength: 80
-  PageSize:
-    type: integer
-    minimum: 0
-    maximum: 1000
-  PageToken:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  ReverseOrder:
-    type: boolean
-  SendTaskFailureInput:
-    type: object
-    required:
-      - taskToken
-    properties:
-      taskToken:
-        $ref: '#/definitions/TaskToken'
-        description: 'The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see GetActivityTask::taskToken).'
-      error:
-        $ref: '#/definitions/Error'
-        description: An arbitrary error code that identifies the cause of the failure.
-      cause:
-        $ref: '#/definitions/Cause'
-        description: A more detailed explanation of the cause of the failure.
-  SendTaskFailureOutput:
-    type: object
-    properties: {}
-  SendTaskHeartbeatInput:
-    type: object
-    required:
-      - taskToken
-    properties:
-      taskToken:
-        $ref: '#/definitions/TaskToken'
-        description: The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see <a>GetActivityTaskOutput$taskToken</a>).
-  SendTaskHeartbeatOutput:
-    type: object
-    properties: {}
-  SendTaskSuccessInput:
-    type: object
-    required:
-      - taskToken
-      - output
-    properties:
-      taskToken:
-        $ref: '#/definitions/TaskToken'
-        description: The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see <a>GetActivityTaskOutput$taskToken</a>).
-      output:
-        $ref: '#/definitions/Data'
-        description: The JSON output of the task.
-  SendTaskSuccessOutput:
-    type: object
-    properties: {}
-  StartExecutionInput:
-    type: object
-    required:
-      - stateMachineArn
-    properties:
-      stateMachineArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the state machine to execute.
-      name:
-        $ref: '#/definitions/Name'
-        description: '<p>The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see <a href="http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <important> <p>An execution can''t use the name of another execution for 90 days.</p> <p>When you make multiple <code>StartExecution</code> calls with the same name, the new execution doesn''t run and the following rules apply:</p> <ul> <li> <p>When the original execution is open and the execution input from the new call is <i>different</i>, the <code>ExecutionAlreadyExists</code> message is returned.</p> </li> <li> <p>When the original execution is open and the execution input from the new call is <i>identical</i>, the <code>Success</code> message is returned.</p> </li> <li> <p>When the original execution is closed, the <code>ExecutionAlreadyExists</code> message is returned regardless of input.</p> </li> </ul> </important> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
-      input:
-        $ref: '#/definitions/Data'
-        description: '<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>"input": "{\"first_name\" : \"test\"}"</code> </p> <note> <p>If you don''t include any JSON input data, you still must include the two braces, for example: <code>"input": "{}"</code> </p> </note>'
-  StartExecutionOutput:
-    type: object
-    required:
-      - executionArn
-      - startDate
-    properties:
-      executionArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) that identifies the execution.
-      startDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date the execution is started.
   StateEnteredEventDetails:
     type: object
     required:
@@ -1693,30 +1724,67 @@ definitions:
         $ref: '#/definitions/Data'
         description: The JSON output data of the state.
     description: Contains details about an exit from a state during an execution.
-  StateMachineAlreadyExists:
+  HistoryEvent:
     type: object
+    required:
+      - timestamp
+      - type
+      - id
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: A state machine with the same name but a different definition or role ARN already exists.
-  StateMachineDeleting:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified state machine is being deleted.
-  StateMachineDoesNotExist:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified state machine does not exist.
-  StateMachineLimitExceeded:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The maximum number of state machines has been reached. Existing state machines must be deleted before a new state machine can be created.
+      timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The date the event occurred.
+      type:
+        $ref: '#/definitions/HistoryEventType'
+        description: The type of the event.
+      id:
+        $ref: '#/definitions/EventId'
+        description: 'The id of the event. Events are numbered sequentially, starting at one.'
+      previousEventId:
+        $ref: '#/definitions/EventId'
+        description: The id of the previous event.
+      activityFailedEventDetails:
+        $ref: '#/definitions/ActivityFailedEventDetails'
+      activityScheduleFailedEventDetails:
+        $ref: '#/definitions/ActivityScheduleFailedEventDetails'
+        description: Contains details about an activity schedule event which failed during an execution.
+      activityScheduledEventDetails:
+        $ref: '#/definitions/ActivityScheduledEventDetails'
+      activityStartedEventDetails:
+        $ref: '#/definitions/ActivityStartedEventDetails'
+      activitySucceededEventDetails:
+        $ref: '#/definitions/ActivitySucceededEventDetails'
+      activityTimedOutEventDetails:
+        $ref: '#/definitions/ActivityTimedOutEventDetails'
+      executionFailedEventDetails:
+        $ref: '#/definitions/ExecutionFailedEventDetails'
+      executionStartedEventDetails:
+        $ref: '#/definitions/ExecutionStartedEventDetails'
+      executionSucceededEventDetails:
+        $ref: '#/definitions/ExecutionSucceededEventDetails'
+      executionAbortedEventDetails:
+        $ref: '#/definitions/ExecutionAbortedEventDetails'
+      executionTimedOutEventDetails:
+        $ref: '#/definitions/ExecutionTimedOutEventDetails'
+      lambdaFunctionFailedEventDetails:
+        $ref: '#/definitions/LambdaFunctionFailedEventDetails'
+      lambdaFunctionScheduleFailedEventDetails:
+        $ref: '#/definitions/LambdaFunctionScheduleFailedEventDetails'
+      lambdaFunctionScheduledEventDetails:
+        $ref: '#/definitions/LambdaFunctionScheduledEventDetails'
+      lambdaFunctionStartFailedEventDetails:
+        $ref: '#/definitions/LambdaFunctionStartFailedEventDetails'
+        description: Contains details about a lambda function which failed to start during an execution.
+      lambdaFunctionSucceededEventDetails:
+        $ref: '#/definitions/LambdaFunctionSucceededEventDetails'
+        description: Contains details about a lambda function which terminated successfully during an execution.
+      lambdaFunctionTimedOutEventDetails:
+        $ref: '#/definitions/LambdaFunctionTimedOutEventDetails'
+      stateEnteredEventDetails:
+        $ref: '#/definitions/StateEnteredEventDetails'
+      stateExitedEventDetails:
+        $ref: '#/definitions/StateExitedEventDetails'
+    description: Contains details about the events of an execution.
   StateMachineList:
     type: array
     items:
@@ -1738,71 +1806,3 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The date the state machine is created.
     description: Contains details about the state machine.
-  StateMachineStatus:
-    type: string
-    enum:
-      - ACTIVE
-      - DELETING
-  StopExecutionInput:
-    type: object
-    required:
-      - executionArn
-    properties:
-      executionArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the execution to stop.
-      error:
-        $ref: '#/definitions/Error'
-        description: An arbitrary error code that identifies the cause of the termination.
-      cause:
-        $ref: '#/definitions/Cause'
-        description: A more detailed explanation of the cause of the termination.
-  StopExecutionOutput:
-    type: object
-    required:
-      - stopDate
-    properties:
-      stopDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date the execution is stopped.
-  TaskDoesNotExist:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-  TaskTimedOut:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-  TaskToken:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  TimeoutInSeconds:
-    type: integer
-  Timestamp:
-    type: string
-    format: date-time
-  UpdateStateMachineInput:
-    type: object
-    required:
-      - stateMachineArn
-    properties:
-      stateMachineArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the state machine.
-      definition:
-        $ref: '#/definitions/Definition'
-        description: The Amazon States Language definition of the state machine.
-      roleArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the IAM role of the state machine.
-  UpdateStateMachineOutput:
-    type: object
-    required:
-      - updateDate
-    properties:
-      updateDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time the state machine was updated.

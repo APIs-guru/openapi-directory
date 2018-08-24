@@ -497,14 +497,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  BatchGetNamedQueryInput:
-    type: object
-    required:
-      - NamedQueryIds
-    properties:
-      NamedQueryIds:
-        $ref: '#/definitions/NamedQueryIdList'
-        description: An array of query IDs.
   BatchGetNamedQueryOutput:
     type: object
     properties:
@@ -514,14 +506,28 @@ definitions:
       UnprocessedNamedQueryIds:
         $ref: '#/definitions/UnprocessedNamedQueryIdList'
         description: Information about provided query IDs.
-  BatchGetQueryExecutionInput:
+  BatchGetNamedQueryInput:
     type: object
     required:
-      - QueryExecutionIds
+      - NamedQueryIds
     properties:
-      QueryExecutionIds:
-        $ref: '#/definitions/QueryExecutionIdList'
-        description: An array of query execution IDs.
+      NamedQueryIds:
+        $ref: '#/definitions/NamedQueryIdList'
+        description: An array of query IDs.
+  InternalServerException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Indicates a platform issue, which may be due to a transient condition or outage.'
+  InvalidRequestException:
+    type: object
+    properties:
+      AthenaErrorCode:
+        $ref: '#/definitions/ErrorCode'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Indicates that something is wrong with the input to the request. For example, a required parameter may be missing or out of range.'
   BatchGetQueryExecutionOutput:
     type: object
     properties:
@@ -531,8 +537,223 @@ definitions:
       UnprocessedQueryExecutionIds:
         $ref: '#/definitions/UnprocessedQueryExecutionIdList'
         description: Information about the query executions that failed to run.
+  BatchGetQueryExecutionInput:
+    type: object
+    required:
+      - QueryExecutionIds
+    properties:
+      QueryExecutionIds:
+        $ref: '#/definitions/QueryExecutionIdList'
+        description: An array of query execution IDs.
+  CreateNamedQueryOutput:
+    type: object
+    properties:
+      NamedQueryId:
+        $ref: '#/definitions/NamedQueryId'
+        description: The unique ID of the query.
+  CreateNamedQueryInput:
+    type: object
+    required:
+      - Name
+      - Database
+      - QueryString
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The plain language name for the query.
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: A brief explanation of the query.
+      Database:
+        $ref: '#/definitions/DatabaseString'
+        description: The database to which the query belongs.
+      QueryString:
+        $ref: '#/definitions/QueryString'
+        description: 'The text of the query itself. In other words, all query statements.'
+      ClientRequestToken:
+        $ref: '#/definitions/IdempotencyToken'
+        description: '<p>A unique case-sensitive string used to ensure the request to create the query is idempotent (executes only once). If another <code>CreateNamedQuery</code> request is received, the same response is returned and another query is not created. If a parameter has changed, for example, the <code>QueryString</code>, an error is returned.</p> <important> <p>This token is listed as not required because AWS SDKs (for example the AWS SDK for Java) auto-generate the token for users. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the action will fail.</p> </important>'
+  DeleteNamedQueryOutput:
+    type: object
+    properties: {}
+  DeleteNamedQueryInput:
+    type: object
+    required:
+      - NamedQueryId
+    properties:
+      NamedQueryId:
+        $ref: '#/definitions/NamedQueryId'
+        description: The unique ID of the query to delete.
+  GetNamedQueryOutput:
+    type: object
+    properties:
+      NamedQuery:
+        $ref: '#/definitions/NamedQuery'
+        description: Information about the query.
+  GetNamedQueryInput:
+    type: object
+    required:
+      - NamedQueryId
+    properties:
+      NamedQueryId:
+        $ref: '#/definitions/NamedQueryId'
+        description: The unique ID of the query. Use <a>ListNamedQueries</a> to get query IDs.
+  GetQueryExecutionOutput:
+    type: object
+    properties:
+      QueryExecution:
+        $ref: '#/definitions/QueryExecution'
+        description: Information about the query execution.
+  GetQueryExecutionInput:
+    type: object
+    required:
+      - QueryExecutionId
+    properties:
+      QueryExecutionId:
+        $ref: '#/definitions/QueryExecutionId'
+        description: The unique ID of the query execution.
+  GetQueryResultsOutput:
+    type: object
+    properties:
+      ResultSet:
+        $ref: '#/definitions/ResultSet'
+        description: The results of the query execution.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: A token to be used by the next request if this request is truncated.
+  GetQueryResultsInput:
+    type: object
+    required:
+      - QueryExecutionId
+    properties:
+      QueryExecutionId:
+        $ref: '#/definitions/QueryExecutionId'
+        description: The unique ID of the query execution.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: The token that specifies where to start pagination if a previous request was truncated.
+      MaxResults:
+        $ref: '#/definitions/MaxQueryResults'
+        description: The maximum number of results (rows) to return in this request.
+  ListNamedQueriesOutput:
+    type: object
+    properties:
+      NamedQueryIds:
+        $ref: '#/definitions/NamedQueryIdList'
+        description: The list of unique query IDs.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: A token to be used by the next request if this request is truncated.
+  ListNamedQueriesInput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: The token that specifies where to start pagination if a previous request was truncated.
+      MaxResults:
+        $ref: '#/definitions/MaxNamedQueriesCount'
+        description: The maximum number of queries to return in this request.
+  ListQueryExecutionsOutput:
+    type: object
+    properties:
+      QueryExecutionIds:
+        $ref: '#/definitions/QueryExecutionIdList'
+        description: The unique IDs of each query execution as an array of strings.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: A token to be used by the next request if this request is truncated.
+  ListQueryExecutionsInput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: The token that specifies where to start pagination if a previous request was truncated.
+      MaxResults:
+        $ref: '#/definitions/MaxQueryExecutionsCount'
+        description: The maximum number of query executions to return in this request.
+  StartQueryExecutionOutput:
+    type: object
+    properties:
+      QueryExecutionId:
+        $ref: '#/definitions/QueryExecutionId'
+        description: The unique ID of the query that ran as a result of this request.
+  StartQueryExecutionInput:
+    type: object
+    required:
+      - QueryString
+      - ResultConfiguration
+    properties:
+      QueryString:
+        $ref: '#/definitions/QueryString'
+        description: The SQL query statements to be executed.
+      ClientRequestToken:
+        $ref: '#/definitions/IdempotencyToken'
+        description: '<p>A unique case-sensitive string used to ensure the request to create the query is idempotent (executes only once). If another <code>StartQueryExecution</code> request is received, the same response is returned and another query is not created. If a parameter has changed, for example, the <code>QueryString</code>, an error is returned.</p> <important> <p>This token is listed as not required because AWS SDKs (for example the AWS SDK for Java) auto-generate the token for users. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the action will fail.</p> </important>'
+      QueryExecutionContext:
+        $ref: '#/definitions/QueryExecutionContext'
+        description: The database within which the query executes.
+      ResultConfiguration:
+        $ref: '#/definitions/ResultConfiguration'
+        description: Specifies information about where and how to save the results of the query execution.
+  TooManyRequestsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+      Reason:
+        $ref: '#/definitions/ThrottleReason'
+    description: Indicates that the request was throttled.
+  StopQueryExecutionOutput:
+    type: object
+    properties: {}
+  StopQueryExecutionInput:
+    type: object
+    required:
+      - QueryExecutionId
+    properties:
+      QueryExecutionId:
+        $ref: '#/definitions/QueryExecutionId'
+        description: The unique ID of the query execution to stop.
+  NamedQueryIdList:
+    type: array
+    items:
+      $ref: '#/definitions/NamedQueryId'
+    minItems: 1
+    maxItems: 50
+  NamedQueryList:
+    type: array
+    items:
+      $ref: '#/definitions/NamedQuery'
+  UnprocessedNamedQueryIdList:
+    type: array
+    items:
+      $ref: '#/definitions/UnprocessedNamedQueryId'
+  QueryExecutionIdList:
+    type: array
+    items:
+      $ref: '#/definitions/QueryExecutionId'
+    minItems: 1
+    maxItems: 50
+  QueryExecutionList:
+    type: array
+    items:
+      $ref: '#/definitions/QueryExecution'
+  UnprocessedQueryExecutionIdList:
+    type: array
+    items:
+      $ref: '#/definitions/UnprocessedQueryExecutionId'
   Boolean:
     type: boolean
+  String:
+    type: string
+  Integer:
+    type: integer
+  ColumnNullable:
+    type: string
+    enum:
+      - NOT_NULL
+      - NULLABLE
+      - UNKNOWN
   ColumnInfo:
     type: object
     required:
@@ -574,47 +795,33 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ColumnInfo'
-  ColumnNullable:
+  NameString:
     type: string
-    enum:
-      - NOT_NULL
-      - NULLABLE
-      - UNKNOWN
-  CreateNamedQueryInput:
-    type: object
-    required:
-      - Name
-      - Database
-      - QueryString
-    properties:
-      Name:
-        $ref: '#/definitions/NameString'
-        description: The plain language name for the query.
-      Description:
-        $ref: '#/definitions/DescriptionString'
-        description: A brief explanation of the query.
-      Database:
-        $ref: '#/definitions/DatabaseString'
-        description: The database to which the query belongs.
-      QueryString:
-        $ref: '#/definitions/QueryString'
-        description: 'The text of the query itself. In other words, all query statements.'
-      ClientRequestToken:
-        $ref: '#/definitions/IdempotencyToken'
-        description: '<p>A unique case-sensitive string used to ensure the request to create the query is idempotent (executes only once). If another <code>CreateNamedQuery</code> request is received, the same response is returned and another query is not created. If a parameter has changed, for example, the <code>QueryString</code>, an error is returned.</p> <important> <p>This token is listed as not required because AWS SDKs (for example the AWS SDK for Java) auto-generate the token for users. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the action will fail.</p> </important>'
-  CreateNamedQueryOutput:
-    type: object
-    properties:
-      NamedQueryId:
-        $ref: '#/definitions/NamedQueryId'
-        description: The unique ID of the query.
+    minLength: 1
+    maxLength: 128
+  DescriptionString:
+    type: string
+    minLength: 1
+    maxLength: 1024
   DatabaseString:
     type: string
     minLength: 1
     maxLength: 32
+  QueryString:
+    type: string
+    minLength: 1
+    maxLength: 262144
+  IdempotencyToken:
+    type: string
+    minLength: 32
+    maxLength: 128
+  NamedQueryId:
+    type: string
   Date:
     type: string
     format: date-time
+  datumString:
+    type: string
   Datum:
     type: object
     properties:
@@ -622,21 +829,12 @@ definitions:
         $ref: '#/definitions/datumString'
         description: The value of the datum.
     description: A piece of data (a field in the table).
-  DeleteNamedQueryInput:
-    type: object
-    required:
-      - NamedQueryId
-    properties:
-      NamedQueryId:
-        $ref: '#/definitions/NamedQueryId'
-        description: The unique ID of the query to delete.
-  DeleteNamedQueryOutput:
-    type: object
-    properties: {}
-  DescriptionString:
+  EncryptionOption:
     type: string
-    minLength: 1
-    maxLength: 1024
+    enum:
+      - SSE_S3
+      - SSE_KMS
+      - CSE_KMS
   EncryptionConfiguration:
     type: object
     required:
@@ -649,143 +847,12 @@ definitions:
         $ref: '#/definitions/String'
         description: 'For <code>SSE-KMS</code> and <code>CSE-KMS</code>, this is the KMS key ARN or ID.'
     description: 'If query results are encrypted in Amazon S3, indicates the Amazon S3 encryption option used.'
-  EncryptionOption:
-    type: string
-    enum:
-      - SSE_S3
-      - SSE_KMS
-      - CSE_KMS
   ErrorCode:
     type: string
     minLength: 1
     maxLength: 256
   ErrorMessage:
     type: string
-  GetNamedQueryInput:
-    type: object
-    required:
-      - NamedQueryId
-    properties:
-      NamedQueryId:
-        $ref: '#/definitions/NamedQueryId'
-        description: The unique ID of the query. Use <a>ListNamedQueries</a> to get query IDs.
-  GetNamedQueryOutput:
-    type: object
-    properties:
-      NamedQuery:
-        $ref: '#/definitions/NamedQuery'
-        description: Information about the query.
-  GetQueryExecutionInput:
-    type: object
-    required:
-      - QueryExecutionId
-    properties:
-      QueryExecutionId:
-        $ref: '#/definitions/QueryExecutionId'
-        description: The unique ID of the query execution.
-  GetQueryExecutionOutput:
-    type: object
-    properties:
-      QueryExecution:
-        $ref: '#/definitions/QueryExecution'
-        description: Information about the query execution.
-  GetQueryResultsInput:
-    type: object
-    required:
-      - QueryExecutionId
-    properties:
-      QueryExecutionId:
-        $ref: '#/definitions/QueryExecutionId'
-        description: The unique ID of the query execution.
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: The token that specifies where to start pagination if a previous request was truncated.
-      MaxResults:
-        $ref: '#/definitions/MaxQueryResults'
-        description: The maximum number of results (rows) to return in this request.
-  GetQueryResultsOutput:
-    type: object
-    properties:
-      ResultSet:
-        $ref: '#/definitions/ResultSet'
-        description: The results of the query execution.
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: A token to be used by the next request if this request is truncated.
-  IdempotencyToken:
-    type: string
-    minLength: 32
-    maxLength: 128
-  Integer:
-    type: integer
-  InternalServerException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Indicates a platform issue, which may be due to a transient condition or outage.'
-  InvalidRequestException:
-    type: object
-    properties:
-      AthenaErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Indicates that something is wrong with the input to the request. For example, a required parameter may be missing or out of range.'
-  ListNamedQueriesInput:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: The token that specifies where to start pagination if a previous request was truncated.
-      MaxResults:
-        $ref: '#/definitions/MaxNamedQueriesCount'
-        description: The maximum number of queries to return in this request.
-  ListNamedQueriesOutput:
-    type: object
-    properties:
-      NamedQueryIds:
-        $ref: '#/definitions/NamedQueryIdList'
-        description: The list of unique query IDs.
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: A token to be used by the next request if this request is truncated.
-  ListQueryExecutionsInput:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: The token that specifies where to start pagination if a previous request was truncated.
-      MaxResults:
-        $ref: '#/definitions/MaxQueryExecutionsCount'
-        description: The maximum number of query executions to return in this request.
-  ListQueryExecutionsOutput:
-    type: object
-    properties:
-      QueryExecutionIds:
-        $ref: '#/definitions/QueryExecutionIdList'
-        description: The unique IDs of each query execution as an array of strings.
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: A token to be used by the next request if this request is truncated.
-  Long:
-    type: integer
-  MaxNamedQueriesCount:
-    type: integer
-    minimum: 0
-    maximum: 50
-  MaxQueryExecutionsCount:
-    type: integer
-    minimum: 0
-    maximum: 50
-  MaxQueryResults:
-    type: integer
-    minimum: 0
-    maximum: 1000
-  NameString:
-    type: string
-    minLength: 1
-    maxLength: 128
   NamedQuery:
     type: object
     required:
@@ -809,18 +876,8 @@ definitions:
         $ref: '#/definitions/NamedQueryId'
         description: The unique identifier of the query.
     description: 'A query, where <code>QueryString</code> is the SQL query statements that comprise the query.'
-  NamedQueryId:
+  QueryExecutionId:
     type: string
-  NamedQueryIdList:
-    type: array
-    items:
-      $ref: '#/definitions/NamedQueryId'
-    minItems: 1
-    maxItems: 50
-  NamedQueryList:
-    type: array
-    items:
-      $ref: '#/definitions/NamedQuery'
   QueryExecution:
     type: object
     properties:
@@ -843,6 +900,44 @@ definitions:
         $ref: '#/definitions/QueryExecutionStatistics'
         description: The amount of data scanned during the query execution and the amount of time that it took to execute.
     description: Information about a single instance of a query execution.
+  Token:
+    type: string
+  MaxQueryResults:
+    type: integer
+    minimum: 0
+    maximum: 1000
+  ResultSet:
+    type: object
+    properties:
+      Rows:
+        $ref: '#/definitions/RowList'
+        description: The rows in the table.
+      ResultSetMetadata:
+        $ref: '#/definitions/ResultSetMetadata'
+        description: The metadata that describes the column structure and data types of a table of query results.
+    description: The metadata and rows that comprise a query result set. The metadata describes the column structure and data types.
+  MaxNamedQueriesCount:
+    type: integer
+    minimum: 0
+    maximum: 50
+  MaxQueryExecutionsCount:
+    type: integer
+    minimum: 0
+    maximum: 50
+  Long:
+    type: integer
+  ResultConfiguration:
+    type: object
+    required:
+      - OutputLocation
+    properties:
+      OutputLocation:
+        $ref: '#/definitions/String'
+        description: The location in S3 where query results are stored.
+      EncryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: 'If query results are encrypted in S3, indicates the S3 encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code> and key information.'
+    description: 'The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results.'
   QueryExecutionContext:
     type: object
     properties:
@@ -850,36 +945,6 @@ definitions:
         $ref: '#/definitions/DatabaseString'
         description: The name of the database.
     description: The database in which the query execution occurs.
-  QueryExecutionId:
-    type: string
-  QueryExecutionIdList:
-    type: array
-    items:
-      $ref: '#/definitions/QueryExecutionId'
-    minItems: 1
-    maxItems: 50
-  QueryExecutionList:
-    type: array
-    items:
-      $ref: '#/definitions/QueryExecution'
-  QueryExecutionState:
-    type: string
-    enum:
-      - QUEUED
-      - RUNNING
-      - SUCCEEDED
-      - FAILED
-      - CANCELLED
-  QueryExecutionStatistics:
-    type: object
-    properties:
-      EngineExecutionTimeInMillis:
-        $ref: '#/definitions/Long'
-        description: The number of milliseconds that the query took to execute.
-      DataScannedInBytes:
-        $ref: '#/definitions/Long'
-        description: The number of bytes in the data that was queried.
-    description: The amount of data scanned during the query execution and the amount of time that it took to execute.
   QueryExecutionStatus:
     type: object
     properties:
@@ -896,32 +961,28 @@ definitions:
         $ref: '#/definitions/Date'
         description: The date and time that the query completed.
     description: 'The completion date, current state, submission time, and state change reason (if applicable) for the query execution.'
-  QueryString:
+  QueryExecutionStatistics:
+    type: object
+    properties:
+      EngineExecutionTimeInMillis:
+        $ref: '#/definitions/Long'
+        description: The number of milliseconds that the query took to execute.
+      DataScannedInBytes:
+        $ref: '#/definitions/Long'
+        description: The number of bytes in the data that was queried.
+    description: The amount of data scanned during the query execution and the amount of time that it took to execute.
+  QueryExecutionState:
     type: string
-    minLength: 1
-    maxLength: 262144
-  ResultConfiguration:
-    type: object
-    required:
-      - OutputLocation
-    properties:
-      OutputLocation:
-        $ref: '#/definitions/String'
-        description: The location in S3 where query results are stored.
-      EncryptionConfiguration:
-        $ref: '#/definitions/EncryptionConfiguration'
-        description: 'If query results are encrypted in S3, indicates the S3 encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code> and key information.'
-    description: 'The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results.'
-  ResultSet:
-    type: object
-    properties:
-      Rows:
-        $ref: '#/definitions/RowList'
-        description: The rows in the table.
-      ResultSetMetadata:
-        $ref: '#/definitions/ResultSetMetadata'
-        description: The metadata that describes the column structure and data types of a table of query results.
-    description: The metadata and rows that comprise a query result set. The metadata describes the column structure and data types.
+    enum:
+      - QUEUED
+      - RUNNING
+      - SUCCEEDED
+      - FAILED
+      - CANCELLED
+  RowList:
+    type: array
+    items:
+      $ref: '#/definitions/Row'
   ResultSetMetadata:
     type: object
     properties:
@@ -929,6 +990,10 @@ definitions:
         $ref: '#/definitions/ColumnInfoList'
         description: Information about the columns in a query execution result.
     description: The metadata that describes the column structure and data types of a table of query results.
+  datumList:
+    type: array
+    items:
+      $ref: '#/definitions/Datum'
   Row:
     type: object
     properties:
@@ -936,61 +1001,10 @@ definitions:
         $ref: '#/definitions/datumList'
         description: The data that populates a row in a query result table.
     description: The rows that comprise a query result table.
-  RowList:
-    type: array
-    items:
-      $ref: '#/definitions/Row'
-  StartQueryExecutionInput:
-    type: object
-    required:
-      - QueryString
-      - ResultConfiguration
-    properties:
-      QueryString:
-        $ref: '#/definitions/QueryString'
-        description: The SQL query statements to be executed.
-      ClientRequestToken:
-        $ref: '#/definitions/IdempotencyToken'
-        description: '<p>A unique case-sensitive string used to ensure the request to create the query is idempotent (executes only once). If another <code>StartQueryExecution</code> request is received, the same response is returned and another query is not created. If a parameter has changed, for example, the <code>QueryString</code>, an error is returned.</p> <important> <p>This token is listed as not required because AWS SDKs (for example the AWS SDK for Java) auto-generate the token for users. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the action will fail.</p> </important>'
-      QueryExecutionContext:
-        $ref: '#/definitions/QueryExecutionContext'
-        description: The database within which the query executes.
-      ResultConfiguration:
-        $ref: '#/definitions/ResultConfiguration'
-        description: Specifies information about where and how to save the results of the query execution.
-  StartQueryExecutionOutput:
-    type: object
-    properties:
-      QueryExecutionId:
-        $ref: '#/definitions/QueryExecutionId'
-        description: The unique ID of the query that ran as a result of this request.
-  StopQueryExecutionInput:
-    type: object
-    required:
-      - QueryExecutionId
-    properties:
-      QueryExecutionId:
-        $ref: '#/definitions/QueryExecutionId'
-        description: The unique ID of the query execution to stop.
-  StopQueryExecutionOutput:
-    type: object
-    properties: {}
-  String:
-    type: string
   ThrottleReason:
     type: string
     enum:
       - CONCURRENT_QUERY_LIMIT_EXCEEDED
-  Token:
-    type: string
-  TooManyRequestsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-      Reason:
-        $ref: '#/definitions/ThrottleReason'
-    description: Indicates that the request was throttled.
   UnprocessedNamedQueryId:
     type: object
     properties:
@@ -1004,10 +1018,6 @@ definitions:
         $ref: '#/definitions/ErrorMessage'
         description: 'The error message returned when the processing request for the named query failed, if applicable.'
     description: Information about a named query ID that could not be processed.
-  UnprocessedNamedQueryIdList:
-    type: array
-    items:
-      $ref: '#/definitions/UnprocessedNamedQueryId'
   UnprocessedQueryExecutionId:
     type: object
     properties:
@@ -1021,13 +1031,3 @@ definitions:
         $ref: '#/definitions/ErrorMessage'
         description: 'The error message returned when the query execution failed to process, if applicable.'
     description: Describes a query execution that failed to process.
-  UnprocessedQueryExecutionIdList:
-    type: array
-    items:
-      $ref: '#/definitions/UnprocessedQueryExecutionId'
-  datumList:
-    type: array
-    items:
-      $ref: '#/definitions/Datum'
-  datumString:
-    type: string

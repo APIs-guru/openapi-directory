@@ -1621,10 +1621,984 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  AssociateContactWithAddressBookResponse:
+    type: object
+    properties: {}
+  AssociateContactWithAddressBookRequest:
+    type: object
+    required:
+      - ContactArn
+      - AddressBookArn
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the contact to associate with an address book.
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the address book with which to associate the contact.
+  LimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'You are performing an action that would put you beyond your account''s limits. HTTP Status Code: 400'
+  AssociateDeviceWithRoomResponse:
+    type: object
+    properties: {}
+  AssociateDeviceWithRoomRequest:
+    type: object
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the device to associate to a room. Required.
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room with which to associate the device. Required.
+  DeviceNotRegisteredException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The request failed because this device is no longer registered and therefore no longer managed by this account.
+  AssociateSkillGroupWithRoomResponse:
+    type: object
+    properties: {}
+  AssociateSkillGroupWithRoomRequest:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the skill group to associate with a room. Required.
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room with which to associate the skill group. Required.
+  CreateAddressBookResponse:
+    type: object
+    properties:
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the newly created address book.
+  CreateAddressBookRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/AddressBookName'
+        description: The name of the address book.
+      Description:
+        $ref: '#/definitions/AddressBookDescription'
+        description: The description of the address book.
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'A unique, user-specified identifier for the request that ensures idempotency.'
+  AlreadyExistsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The resource being created already exists. HTTP Status Code: 400'
+  CreateContactResponse:
+    type: object
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the newly created address book.
+  CreateContactRequest:
+    type: object
+    required:
+      - FirstName
+      - PhoneNumber
+    properties:
+      DisplayName:
+        $ref: '#/definitions/ContactName'
+        description: The name of the contact to display on the console.
+      FirstName:
+        $ref: '#/definitions/ContactName'
+        description: The first name of the contact that is used to call the contact on the device.
+      LastName:
+        $ref: '#/definitions/ContactName'
+        description: The last name of the contact that is used to call the contact on the device.
+      PhoneNumber:
+        $ref: '#/definitions/E164PhoneNumber'
+        description: The phone number of the contact in E.164 format.
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'A unique, user-specified identifier for this request that ensures idempotency.'
+  CreateProfileResponse:
+    type: object
+    properties:
+      ProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the newly created room profile in the response.
+  CreateProfileRequest:
+    type: object
+    required:
+      - ProfileName
+      - Timezone
+      - Address
+      - DistanceUnit
+      - TemperatureUnit
+      - WakeWord
+    properties:
+      ProfileName:
+        $ref: '#/definitions/ProfileName'
+        description: The name of a room profile.
+      Timezone:
+        $ref: '#/definitions/Timezone'
+        description: The time zone used by a room profile.
+      Address:
+        $ref: '#/definitions/Address'
+        description: The valid address for the room.
+      DistanceUnit:
+        $ref: '#/definitions/DistanceUnit'
+        description: The distance unit to be used by devices in the profile.
+      TemperatureUnit:
+        $ref: '#/definitions/TemperatureUnit'
+        description: The temperature unit to be used by devices in the profile.
+      WakeWord:
+        $ref: '#/definitions/WakeWord'
+        description: 'A wake word for Alexa, Echo, Amazon, or a computer.'
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: The user-specified token that is used during the creation of a profile.
+      SetupModeDisabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether room profile setup is enabled.
+      MaxVolumeLimit:
+        $ref: '#/definitions/MaxVolumeLimit'
+        description: The maximum volume limit for a room profile.
+      PSTNEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether PSTN calling is enabled.
+  CreateRoomResponse:
+    type: object
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the newly created room in the response.
+  CreateRoomRequest:
+    type: object
+    required:
+      - RoomName
+    properties:
+      RoomName:
+        $ref: '#/definitions/RoomName'
+        description: The name for the room.
+      Description:
+        $ref: '#/definitions/RoomDescription'
+        description: The description for the room.
+      ProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The profile ARN for the room.
+      ProviderCalendarId:
+        $ref: '#/definitions/ProviderCalendarId'
+        description: The calendar ARN for the room.
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'A unique, user-specified identifier for this request that ensures idempotency. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the room.
+  CreateSkillGroupResponse:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the newly created skill group in the response.
+  CreateSkillGroupRequest:
+    type: object
+    required:
+      - SkillGroupName
+    properties:
+      SkillGroupName:
+        $ref: '#/definitions/SkillGroupName'
+        description: The name for the skill group.
+      Description:
+        $ref: '#/definitions/SkillGroupDescription'
+        description: The description for the skill group.
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'A unique, user-specified identifier for this request that ensures idempotency. '
+  CreateUserResponse:
+    type: object
+    properties:
+      UserArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the newly created user in the response.
+  CreateUserRequest:
+    type: object
+    required:
+      - UserId
+    properties:
+      UserId:
+        $ref: '#/definitions/user_UserId'
+        description: The ARN for the user.
+      FirstName:
+        $ref: '#/definitions/user_FirstName'
+        description: The first name for the user.
+      LastName:
+        $ref: '#/definitions/user_LastName'
+        description: The last name for the user.
+      Email:
+        $ref: '#/definitions/Email'
+        description: The email address for the user.
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'A unique, user-specified identifier for this request that ensures idempotency. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the user.
+  ResourceInUseException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+    description: 'The resource in the request is already in use. HTTP Status Code: 400'
+  DeleteAddressBookResponse:
+    type: object
+    properties: {}
+  DeleteAddressBookRequest:
+    type: object
+    required:
+      - AddressBookArn
+    properties:
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the address book to delete.
+  NotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The resource is not found. HTTP Status Code: 400'
+  DeleteContactResponse:
+    type: object
+    properties: {}
+  DeleteContactRequest:
+    type: object
+    required:
+      - ContactArn
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the contact to delete.
+  DeleteProfileResponse:
+    type: object
+    properties: {}
+  DeleteProfileRequest:
+    type: object
+    properties:
+      ProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room profile to delete. Required.
+  DeleteRoomResponse:
+    type: object
+    properties: {}
+  DeleteRoomRequest:
+    type: object
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room to delete. Required.
+  DeleteRoomSkillParameterResponse:
+    type: object
+    properties: {}
+  DeleteRoomSkillParameterRequest:
+    type: object
+    required:
+      - SkillId
+      - ParameterKey
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room from which to remove the room skill parameter details.
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The ID of the skill from which to remove the room skill parameter details.
+      ParameterKey:
+        $ref: '#/definitions/RoomSkillParameterKey'
+        description: The room skill parameter key for which to remove details.
+  DeleteSkillGroupResponse:
+    type: object
+    properties: {}
+  DeleteSkillGroupRequest:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the skill group to delete. Required.
+  DeleteUserResponse:
+    type: object
+    properties: {}
+  DeleteUserRequest:
+    type: object
+    required:
+      - EnrollmentId
+    properties:
+      UserArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the user to delete in the organization. Required.
+      EnrollmentId:
+        $ref: '#/definitions/EnrollmentId'
+        description: The ARN of the user's enrollment in the organization. Required.
+  DisassociateContactFromAddressBookResponse:
+    type: object
+    properties: {}
+  DisassociateContactFromAddressBookRequest:
+    type: object
+    required:
+      - ContactArn
+      - AddressBookArn
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the contact to disassociate from an address book.
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the address from which to disassociate the contact.
+  DisassociateDeviceFromRoomResponse:
+    type: object
+    properties: {}
+  DisassociateDeviceFromRoomRequest:
+    type: object
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the device to disassociate from a room. Required.
+  DisassociateSkillGroupFromRoomResponse:
+    type: object
+    properties: {}
+  DisassociateSkillGroupFromRoomRequest:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the skill group to disassociate from a room. Required.
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room from which the skill group is to be disassociated. Required.
+  GetAddressBookResponse:
+    type: object
+    properties:
+      AddressBook:
+        $ref: '#/definitions/AddressBook'
+        description: The details of the requested address book.
+  GetAddressBookRequest:
+    type: object
+    required:
+      - AddressBookArn
+    properties:
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the address book for which to request details.
+  GetContactResponse:
+    type: object
+    properties:
+      Contact:
+        $ref: '#/definitions/Contact'
+        description: The details of the requested contact.
+  GetContactRequest:
+    type: object
+    required:
+      - ContactArn
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the contact for which to request details.
+  GetDeviceResponse:
+    type: object
+    properties:
+      Device:
+        $ref: '#/definitions/Device'
+        description: The details of the device requested. Required.
+  GetDeviceRequest:
+    type: object
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the device for which to request details. Required.
+  GetProfileResponse:
+    type: object
+    properties:
+      Profile:
+        $ref: '#/definitions/Profile'
+        description: The details of the room profile requested. Required.
+  GetProfileRequest:
+    type: object
+    properties:
+      ProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room profile for which to request details. Required.
+  GetRoomResponse:
+    type: object
+    properties:
+      Room:
+        $ref: '#/definitions/Room'
+        description: The details of the room requested.
+  GetRoomRequest:
+    type: object
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room for which to request details. Required.
+  GetRoomSkillParameterResponse:
+    type: object
+    properties:
+      RoomSkillParameter:
+        $ref: '#/definitions/RoomSkillParameter'
+        description: The details of the room skill parameter requested. Required.
+  GetRoomSkillParameterRequest:
+    type: object
+    required:
+      - SkillId
+      - ParameterKey
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the room from which to get the room skill parameter details. '
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The ARN of the skill from which to get the room skill parameter details. Required.
+      ParameterKey:
+        $ref: '#/definitions/RoomSkillParameterKey'
+        description: The room skill parameter key for which to get details. Required.
+  GetSkillGroupResponse:
+    type: object
+    properties:
+      SkillGroup:
+        $ref: '#/definitions/SkillGroup'
+        description: The details of the skill group requested. Required.
+  GetSkillGroupRequest:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the skill group for which to get details. Required.
+  ListDeviceEventsResponse:
+    type: object
+    properties:
+      DeviceEvents:
+        $ref: '#/definitions/DeviceEventList'
+        description: The device events requested for the device ARN.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+  ListDeviceEventsRequest:
+    type: object
+    required:
+      - DeviceArn
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of a device.
+      EventType:
+        $ref: '#/definitions/DeviceEventType'
+        description: 'The event type to filter device events. If EventType isn''t specified, this returns a list of all device events in reverse chronological order. If EventType is specified, this returns a list of device events for that EventType in reverse chronological order. '
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults. When the end of results is reached, the response has a value of null.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. The default value is 50. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. '
+  ListSkillsResponse:
+    type: object
+    properties:
+      SkillSummaries:
+        $ref: '#/definitions/SkillSummaryList'
+        description: The list of enabled skills requested. Required.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+  ListSkillsRequest:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the skill group for which to list enabled skills. Required.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
+      MaxResults:
+        $ref: '#/definitions/SkillListMaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. Required.'
+  ListTagsResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags requested for the specified resource.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+  ListTagsRequest:
+    type: object
+    required:
+      - Arn
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the specified resource for which to list tags.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. '
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
+  PutRoomSkillParameterResponse:
+    type: object
+    properties: {}
+  PutRoomSkillParameterRequest:
+    type: object
+    required:
+      - SkillId
+      - RoomSkillParameter
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room associated with the room skill parameter. Required.
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The ARN of the skill associated with the room skill parameter. Required.
+      RoomSkillParameter:
+        $ref: '#/definitions/RoomSkillParameter'
+        description: The updated room skill parameter. Required.
+  ResolveRoomResponse:
+    type: object
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room from which the skill request was invoked.
+      RoomName:
+        $ref: '#/definitions/RoomName'
+        description: The name of the room from which the skill request was invoked.
+      RoomSkillParameters:
+        $ref: '#/definitions/RoomSkillParameters'
+        description: Response to get the room profile request. Required.
+  ResolveRoomRequest:
+    type: object
+    required:
+      - UserId
+      - SkillId
+    properties:
+      UserId:
+        $ref: '#/definitions/UserId'
+        description: The ARN of the user. Required.
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The ARN of the skill that was requested. Required.
+  RevokeInvitationResponse:
+    type: object
+    properties: {}
+  RevokeInvitationRequest:
+    type: object
+    properties:
+      UserArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the user for whom to revoke an enrollment invitation. Required.
+      EnrollmentId:
+        $ref: '#/definitions/EnrollmentId'
+        description: The ARN of the enrollment invitation to revoke. Required.
+  SearchAddressBooksResponse:
+    type: object
+    properties:
+      AddressBooks:
+        $ref: '#/definitions/AddressBookDataList'
+        description: 'The address books that meet the specified set of filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of address books returned.
+  SearchAddressBooksRequest:
+    type: object
+    properties:
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: The filters to use to list a specified set of address books. The supported filter key is AddressBookName.
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: The sort order to use in listing the specified set of address books. The supported sort key is AddressBookName.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+  SearchContactsResponse:
+    type: object
+    properties:
+      Contacts:
+        $ref: '#/definitions/ContactDataList'
+        description: 'The contacts that meet the specified set of filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of contacts returned.
+  SearchContactsRequest:
+    type: object
+    properties:
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: 'The filters to use to list a specified set of address books. The supported filter keys are DisplayName, FirstName, LastName, and AddressBookArns.'
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: 'The sort order to use in listing the specified set of contacts. The supported sort keys are DisplayName, FirstName, and LastName.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+  SearchDevicesResponse:
+    type: object
+    properties:
+      Devices:
+        $ref: '#/definitions/DeviceDataList'
+        description: 'The devices that meet the specified set of filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of devices returned.
+  SearchDevicesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: 'The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and ConnectionStatus (ONLINE and OFFLINE).'
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: 'The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and ConnectionStatus.'
+  SearchProfilesResponse:
+    type: object
+    properties:
+      Profiles:
+        $ref: '#/definitions/ProfileDataList'
+        description: 'The profiles that meet the specified set of filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of room profiles returned.
+  SearchProfilesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: 'The filters to use to list a specified set of room profiles. Supported filter keys are ProfileName and Address. Required. '
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: The sort order to use in listing the specified set of room profiles. Supported sort keys are ProfileName and Address.
+  SearchRoomsResponse:
+    type: object
+    properties:
+      Rooms:
+        $ref: '#/definitions/RoomDataList'
+        description: 'The rooms that meet the specified set of filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of rooms returned.
+  SearchRoomsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. '
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: The filters to use to list a specified set of rooms. The supported filter keys are RoomName and ProfileName.
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: The sort order to use in listing the specified set of rooms. The supported sort keys are RoomName and ProfileName.
+  SearchSkillGroupsResponse:
+    type: object
+    properties:
+      SkillGroups:
+        $ref: '#/definitions/SkillGroupDataList'
+        description: 'The skill groups that meet the filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of skill groups returned.
+  SearchSkillGroupsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. '
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: 'The filters to use to list a specified set of skill groups. The supported filter key is SkillGroupName. '
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: 'The sort order to use in listing the specified set of skill groups. The supported sort key is SkillGroupName. '
+  SearchUsersResponse:
+    type: object
+    properties:
+      Users:
+        $ref: '#/definitions/UserDataList'
+        description: 'The users that meet the specified set of filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of users returned.
+  SearchUsersRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. Required.'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: 'The filters to use for listing a specific set of users. Required. Supported filter keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.'
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: 'The sort order to use in listing the filtered set of users. Required. Supported sort keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.'
+  SendInvitationResponse:
+    type: object
+    properties: {}
+  SendInvitationRequest:
+    type: object
+    properties:
+      UserArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the user to whom to send an invitation. Required.
+  InvalidUserStatusException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The attempt to update a user is invalid due to the user''s current status. HTTP Status Code: 400'
+  StartDeviceSyncResponse:
+    type: object
+    properties: {}
+  StartDeviceSyncRequest:
+    type: object
+    required:
+      - Features
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room with which the device to sync is associated. Required.
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the device to sync. Required.
+      Features:
+        $ref: '#/definitions/Features'
+        description: Request structure to start the device sync. Required.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - Arn
+      - Tags
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the resource to which to add metadata tags. Required. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tags to be added to the specified resource. Do not provide system tags. Required. '
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - Arn
+      - TagKeys
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the resource from which to remove metadata tags. Required. '
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: 'The tags to be removed from the specified resource. Do not provide system tags. Required. '
+  UpdateAddressBookResponse:
+    type: object
+    properties: {}
+  UpdateAddressBookRequest:
+    type: object
+    required:
+      - AddressBookArn
+    properties:
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room to update.
+      Name:
+        $ref: '#/definitions/AddressBookName'
+        description: The updated name of the room.
+      Description:
+        $ref: '#/definitions/AddressBookDescription'
+        description: The updated description of the room.
+  NameInUseException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The name sent in the request is already in use. HTTP Status Code: 400'
+  UpdateContactResponse:
+    type: object
+    properties: {}
+  UpdateContactRequest:
+    type: object
+    required:
+      - ContactArn
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the contact to update.
+      DisplayName:
+        $ref: '#/definitions/ContactName'
+        description: The updated display name of the contact.
+      FirstName:
+        $ref: '#/definitions/ContactName'
+        description: The updated first name of the contact.
+      LastName:
+        $ref: '#/definitions/ContactName'
+        description: The updated last name of the contact.
+      PhoneNumber:
+        $ref: '#/definitions/E164PhoneNumber'
+        description: The updated phone number of the contact.
+  UpdateDeviceResponse:
+    type: object
+    properties: {}
+  UpdateDeviceRequest:
+    type: object
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the device to update. Required.
+      DeviceName:
+        $ref: '#/definitions/DeviceName'
+        description: The updated device name. Required.
+  UpdateProfileResponse:
+    type: object
+    properties: {}
+  UpdateProfileRequest:
+    type: object
+    properties:
+      ProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room profile to update. Required.
+      ProfileName:
+        $ref: '#/definitions/ProfileName'
+        description: The updated name for the room profile.
+      Timezone:
+        $ref: '#/definitions/Timezone'
+        description: The updated timezone for the room profile.
+      Address:
+        $ref: '#/definitions/Address'
+        description: The updated address for the room profile.
+      DistanceUnit:
+        $ref: '#/definitions/DistanceUnit'
+        description: The updated distance unit for the room profile.
+      TemperatureUnit:
+        $ref: '#/definitions/TemperatureUnit'
+        description: The updated temperature unit for the room profile.
+      WakeWord:
+        $ref: '#/definitions/WakeWord'
+        description: The updated wake word for the room profile.
+      SetupModeDisabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the setup mode of the profile is enabled.
+      MaxVolumeLimit:
+        $ref: '#/definitions/MaxVolumeLimit'
+        description: The updated maximum volume limit for the room profile.
+      PSTNEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the PSTN setting of the room profile is enabled.
+  UpdateRoomResponse:
+    type: object
+    properties: {}
+  UpdateRoomRequest:
+    type: object
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the room to update. '
+      RoomName:
+        $ref: '#/definitions/RoomName'
+        description: The updated name for the room.
+      Description:
+        $ref: '#/definitions/RoomDescription'
+        description: The updated description for the room.
+      ProviderCalendarId:
+        $ref: '#/definitions/ProviderCalendarId'
+        description: The updated provider calendar ARN for the room.
+      ProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The updated profile ARN for the room.
+  UpdateSkillGroupResponse:
+    type: object
+    properties: {}
+  UpdateSkillGroupRequest:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the skill group to update. '
+      SkillGroupName:
+        $ref: '#/definitions/SkillGroupName'
+        description: The updated name for the skill group.
+      Description:
+        $ref: '#/definitions/SkillGroupDescription'
+        description: The updated description for the skill group.
   Address:
     type: string
     minLength: 1
     maxLength: 500
+  Arn:
+    type: string
+    pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+  AddressBookName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  AddressBookDescription:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 200
   AddressBook:
     type: object
     properties:
@@ -1655,64 +2629,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AddressBookData'
-  AddressBookDescription:
+  ErrorMessage:
     type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 200
-  AddressBookName:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 100
-  AlreadyExistsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The resource being created already exists. HTTP Status Code: 400'
-  Arn:
-    type: string
-    pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
-  AssociateContactWithAddressBookRequest:
-    type: object
-    required:
-      - ContactArn
-      - AddressBookArn
-    properties:
-      ContactArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the contact to associate with an address book.
-      AddressBookArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the address book with which to associate the contact.
-  AssociateContactWithAddressBookResponse:
-    type: object
-    properties: {}
-  AssociateDeviceWithRoomRequest:
-    type: object
-    properties:
-      DeviceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the device to associate to a room. Required.
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room with which to associate the device. Required.
-  AssociateDeviceWithRoomResponse:
-    type: object
-    properties: {}
-  AssociateSkillGroupWithRoomRequest:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the skill group to associate with a room. Required.
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room with which to associate the skill group. Required.
-  AssociateSkillGroupWithRoomResponse:
-    type: object
-    properties: {}
   Boolean:
     type: boolean
   ClientRequestToken:
@@ -1726,6 +2644,14 @@ definitions:
     enum:
       - ONLINE
       - OFFLINE
+  ContactName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  E164PhoneNumber:
+    type: string
+    pattern: '^\+\d{8,}$'
   Contact:
     type: object
     properties:
@@ -1768,263 +2694,125 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ContactData'
-  ContactName:
+  ProfileName:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
     minLength: 1
     maxLength: 100
-  CreateAddressBookRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/AddressBookName'
-        description: The name of the address book.
-      Description:
-        $ref: '#/definitions/AddressBookDescription'
-        description: The description of the address book.
-      ClientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: 'A unique, user-specified identifier for the request that ensures idempotency.'
-  CreateAddressBookResponse:
-    type: object
-    properties:
-      AddressBookArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the newly created address book.
-  CreateContactRequest:
-    type: object
-    required:
-      - FirstName
-      - PhoneNumber
-    properties:
-      DisplayName:
-        $ref: '#/definitions/ContactName'
-        description: The name of the contact to display on the console.
-      FirstName:
-        $ref: '#/definitions/ContactName'
-        description: The first name of the contact that is used to call the contact on the device.
-      LastName:
-        $ref: '#/definitions/ContactName'
-        description: The last name of the contact that is used to call the contact on the device.
-      PhoneNumber:
-        $ref: '#/definitions/E164PhoneNumber'
-        description: The phone number of the contact in E.164 format.
-      ClientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: 'A unique, user-specified identifier for this request that ensures idempotency.'
-  CreateContactResponse:
-    type: object
-    properties:
-      ContactArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the newly created address book.
-  CreateProfileRequest:
-    type: object
-    required:
-      - ProfileName
-      - Timezone
-      - Address
-      - DistanceUnit
-      - TemperatureUnit
-      - WakeWord
-    properties:
-      ProfileName:
-        $ref: '#/definitions/ProfileName'
-        description: The name of a room profile.
-      Timezone:
-        $ref: '#/definitions/Timezone'
-        description: The time zone used by a room profile.
-      Address:
-        $ref: '#/definitions/Address'
-        description: The valid address for the room.
-      DistanceUnit:
-        $ref: '#/definitions/DistanceUnit'
-        description: The distance unit to be used by devices in the profile.
-      TemperatureUnit:
-        $ref: '#/definitions/TemperatureUnit'
-        description: The temperature unit to be used by devices in the profile.
-      WakeWord:
-        $ref: '#/definitions/WakeWord'
-        description: 'A wake word for Alexa, Echo, Amazon, or a computer.'
-      ClientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: The user-specified token that is used during the creation of a profile.
-      SetupModeDisabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether room profile setup is enabled.
-      MaxVolumeLimit:
-        $ref: '#/definitions/MaxVolumeLimit'
-        description: The maximum volume limit for a room profile.
-      PSTNEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether PSTN calling is enabled.
-  CreateProfileResponse:
-    type: object
-    properties:
-      ProfileArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the newly created room profile in the response.
-  CreateRoomRequest:
-    type: object
-    required:
-      - RoomName
-    properties:
-      RoomName:
-        $ref: '#/definitions/RoomName'
-        description: The name for the room.
-      Description:
-        $ref: '#/definitions/RoomDescription'
-        description: The description for the room.
-      ProfileArn:
-        $ref: '#/definitions/Arn'
-        description: The profile ARN for the room.
-      ProviderCalendarId:
-        $ref: '#/definitions/ProviderCalendarId'
-        description: The calendar ARN for the room.
-      ClientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: 'A unique, user-specified identifier for this request that ensures idempotency. '
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The tags for the room.
-  CreateRoomResponse:
+  Timezone:
+    type: string
+    minLength: 1
+    maxLength: 100
+  DistanceUnit:
+    type: string
+    enum:
+      - METRIC
+      - IMPERIAL
+  TemperatureUnit:
+    type: string
+    enum:
+      - FAHRENHEIT
+      - CELSIUS
+  WakeWord:
+    type: string
+    enum:
+      - ALEXA
+      - AMAZON
+      - ECHO
+      - COMPUTER
+  MaxVolumeLimit:
+    type: integer
+  RoomName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  RoomDescription:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 200
+  ProviderCalendarId:
+    type: string
+    minLength: 0
+    maxLength: 100
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  SkillGroupName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  SkillGroupDescription:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 200
+  user_UserId:
+    type: string
+    pattern: '[a-zA-Z0-9@_+.-]*'
+    minLength: 1
+    maxLength: 128
+  user_FirstName:
+    type: string
+    pattern: '([A-Za-z\-'' 0-9._]|\p{IsLetter})*'
+    minLength: 0
+    maxLength: 30
+  user_LastName:
+    type: string
+    pattern: '([A-Za-z\-'' 0-9._]|\p{IsLetter})*'
+    minLength: 0
+    maxLength: 30
+  Email:
+    type: string
+    pattern: '([0-9a-zA-Z]([+-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})'
+    minLength: 1
+    maxLength: 128
+  SkillId:
+    type: string
+    pattern: '(^amzn1\.ask\.skill\.[0-9a-f\-]{1,200})|(^amzn1\.echo-sdk-ams\.app\.[0-9a-f\-]{1,200})'
+  RoomSkillParameterKey:
+    type: string
+    minLength: 1
+    maxLength: 256
+  EnrollmentId:
+    type: string
+    minLength: 0
+    maxLength: 128
+  DeviceSerialNumber:
+    type: string
+    pattern: '[a-zA-Z0-9]{1,200}'
+  DeviceType:
+    type: string
+    pattern: '[a-zA-Z0-9]{1,200}'
+  DeviceName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 2
+    maxLength: 100
+  SoftwareVersion:
+    type: string
+  MacAddress:
+    type: string
+  DeviceStatus:
+    type: string
+    enum:
+      - READY
+      - PENDING
+      - WAS_OFFLINE
+      - DEREGISTERED
+  DeviceStatusInfo:
     type: object
     properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the newly created room in the response.
-  CreateSkillGroupRequest:
-    type: object
-    required:
-      - SkillGroupName
-    properties:
-      SkillGroupName:
-        $ref: '#/definitions/SkillGroupName'
-        description: The name for the skill group.
-      Description:
-        $ref: '#/definitions/SkillGroupDescription'
-        description: The description for the skill group.
-      ClientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: 'A unique, user-specified identifier for this request that ensures idempotency. '
-  CreateSkillGroupResponse:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the newly created skill group in the response.
-  CreateUserRequest:
-    type: object
-    required:
-      - UserId
-    properties:
-      UserId:
-        $ref: '#/definitions/user_UserId'
-        description: The ARN for the user.
-      FirstName:
-        $ref: '#/definitions/user_FirstName'
-        description: The first name for the user.
-      LastName:
-        $ref: '#/definitions/user_LastName'
-        description: The last name for the user.
-      Email:
-        $ref: '#/definitions/Email'
-        description: The email address for the user.
-      ClientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: 'A unique, user-specified identifier for this request that ensures idempotency. '
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The tags for the user.
-  CreateUserResponse:
-    type: object
-    properties:
-      UserArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the newly created user in the response.
-  DeleteAddressBookRequest:
-    type: object
-    required:
-      - AddressBookArn
-    properties:
-      AddressBookArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the address book to delete.
-  DeleteAddressBookResponse:
-    type: object
-    properties: {}
-  DeleteContactRequest:
-    type: object
-    required:
-      - ContactArn
-    properties:
-      ContactArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the contact to delete.
-  DeleteContactResponse:
-    type: object
-    properties: {}
-  DeleteProfileRequest:
-    type: object
-    properties:
-      ProfileArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room profile to delete. Required.
-  DeleteProfileResponse:
-    type: object
-    properties: {}
-  DeleteRoomRequest:
-    type: object
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room to delete. Required.
-  DeleteRoomResponse:
-    type: object
-    properties: {}
-  DeleteRoomSkillParameterRequest:
-    type: object
-    required:
-      - SkillId
-      - ParameterKey
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room from which to remove the room skill parameter details.
-      SkillId:
-        $ref: '#/definitions/SkillId'
-        description: The ID of the skill from which to remove the room skill parameter details.
-      ParameterKey:
-        $ref: '#/definitions/RoomSkillParameterKey'
-        description: The room skill parameter key for which to remove details.
-  DeleteRoomSkillParameterResponse:
-    type: object
-    properties: {}
-  DeleteSkillGroupRequest:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the skill group to delete. Required.
-  DeleteSkillGroupResponse:
-    type: object
-    properties: {}
-  DeleteUserRequest:
-    type: object
-    required:
-      - EnrollmentId
-    properties:
-      UserArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the user to delete in the organization. Required.
-      EnrollmentId:
-        $ref: '#/definitions/EnrollmentId'
-        description: The ARN of the user's enrollment in the organization. Required.
-  DeleteUserResponse:
-    type: object
-    properties: {}
+      DeviceStatusDetails:
+        $ref: '#/definitions/DeviceStatusDetails'
+        description: One or more device status detail descriptions.
+      ConnectionStatus:
+        $ref: '#/definitions/ConnectionStatus'
+        description: 'The latest available information about the connection status of a device. '
+    description: Detailed information about a device's status.
   Device:
     type: object
     properties:
@@ -2094,6 +2882,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DeviceData'
+  DeviceEventType:
+    type: string
+    enum:
+      - CONNECTION_STATUS
+      - DEVICE_STATUS
+  DeviceEventValue:
+    type: string
+  Timestamp:
+    type: string
+    format: date-time
   DeviceEvent:
     type: object
     properties:
@@ -2111,34 +2909,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DeviceEvent'
-  DeviceEventType:
+  DeviceStatusDetailCode:
     type: string
     enum:
-      - CONNECTION_STATUS
-      - DEVICE_STATUS
-  DeviceEventValue:
-    type: string
-  DeviceName:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 2
-    maxLength: 100
-  DeviceNotRegisteredException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The request failed because this device is no longer registered and therefore no longer managed by this account.
-  DeviceSerialNumber:
-    type: string
-    pattern: '[a-zA-Z0-9]{1,200}'
-  DeviceStatus:
-    type: string
-    enum:
-      - READY
-      - PENDING
-      - WAS_OFFLINE
-      - DEREGISTERED
+      - DEVICE_SOFTWARE_UPDATE_NEEDED
+      - DEVICE_WAS_OFFLINE
   DeviceStatusDetail:
     type: object
     properties:
@@ -2146,81 +2921,10 @@ definitions:
         $ref: '#/definitions/DeviceStatusDetailCode'
         description: The device status detail code.
     description: Details of a device’s status.
-  DeviceStatusDetailCode:
-    type: string
-    enum:
-      - DEVICE_SOFTWARE_UPDATE_NEEDED
-      - DEVICE_WAS_OFFLINE
   DeviceStatusDetails:
     type: array
     items:
       $ref: '#/definitions/DeviceStatusDetail'
-  DeviceStatusInfo:
-    type: object
-    properties:
-      DeviceStatusDetails:
-        $ref: '#/definitions/DeviceStatusDetails'
-        description: One or more device status detail descriptions.
-      ConnectionStatus:
-        $ref: '#/definitions/ConnectionStatus'
-        description: 'The latest available information about the connection status of a device. '
-    description: Detailed information about a device's status.
-  DeviceType:
-    type: string
-    pattern: '[a-zA-Z0-9]{1,200}'
-  DisassociateContactFromAddressBookRequest:
-    type: object
-    required:
-      - ContactArn
-      - AddressBookArn
-    properties:
-      ContactArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the contact to disassociate from an address book.
-      AddressBookArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the address from which to disassociate the contact.
-  DisassociateContactFromAddressBookResponse:
-    type: object
-    properties: {}
-  DisassociateDeviceFromRoomRequest:
-    type: object
-    properties:
-      DeviceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the device to disassociate from a room. Required.
-  DisassociateDeviceFromRoomResponse:
-    type: object
-    properties: {}
-  DisassociateSkillGroupFromRoomRequest:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the skill group to disassociate from a room. Required.
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room from which the skill group is to be disassociated. Required.
-  DisassociateSkillGroupFromRoomResponse:
-    type: object
-    properties: {}
-  DistanceUnit:
-    type: string
-    enum:
-      - METRIC
-      - IMPERIAL
-  E164PhoneNumber:
-    type: string
-    pattern: '^\+\d{8,}$'
-  Email:
-    type: string
-    pattern: '([0-9a-zA-Z]([+-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})'
-    minLength: 1
-    maxLength: 128
-  EnrollmentId:
-    type: string
-    minLength: 0
-    maxLength: 128
   EnrollmentStatus:
     type: string
     enum:
@@ -2229,8 +2933,6 @@ definitions:
       - REGISTERED
       - DISASSOCIATING
       - DEREGISTERING
-  ErrorMessage:
-    type: string
   Feature:
     type: string
     enum:
@@ -2244,6 +2946,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Feature'
+  FilterKey:
+    type: string
+    minLength: 1
+    maxLength: 500
+  FilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/FilterValue'
+    maxItems: 5
   Filter:
     type: object
     required:
@@ -2257,10 +2968,6 @@ definitions:
         $ref: '#/definitions/FilterValueList'
         description: The values of a filter.
     description: A filter name and value pair that is used to return a more specific list of results. Filters can be used to match a set of resources by various criteria.
-  FilterKey:
-    type: string
-    minLength: 1
-    maxLength: 500
   FilterList:
     type: array
     items:
@@ -2270,214 +2977,6 @@ definitions:
     type: string
     minLength: 1
     maxLength: 500
-  FilterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/FilterValue'
-    maxItems: 5
-  GetAddressBookRequest:
-    type: object
-    required:
-      - AddressBookArn
-    properties:
-      AddressBookArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the address book for which to request details.
-  GetAddressBookResponse:
-    type: object
-    properties:
-      AddressBook:
-        $ref: '#/definitions/AddressBook'
-        description: The details of the requested address book.
-  GetContactRequest:
-    type: object
-    required:
-      - ContactArn
-    properties:
-      ContactArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the contact for which to request details.
-  GetContactResponse:
-    type: object
-    properties:
-      Contact:
-        $ref: '#/definitions/Contact'
-        description: The details of the requested contact.
-  GetDeviceRequest:
-    type: object
-    properties:
-      DeviceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the device for which to request details. Required.
-  GetDeviceResponse:
-    type: object
-    properties:
-      Device:
-        $ref: '#/definitions/Device'
-        description: The details of the device requested. Required.
-  GetProfileRequest:
-    type: object
-    properties:
-      ProfileArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room profile for which to request details. Required.
-  GetProfileResponse:
-    type: object
-    properties:
-      Profile:
-        $ref: '#/definitions/Profile'
-        description: The details of the room profile requested. Required.
-  GetRoomRequest:
-    type: object
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room for which to request details. Required.
-  GetRoomResponse:
-    type: object
-    properties:
-      Room:
-        $ref: '#/definitions/Room'
-        description: The details of the room requested.
-  GetRoomSkillParameterRequest:
-    type: object
-    required:
-      - SkillId
-      - ParameterKey
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN of the room from which to get the room skill parameter details. '
-      SkillId:
-        $ref: '#/definitions/SkillId'
-        description: The ARN of the skill from which to get the room skill parameter details. Required.
-      ParameterKey:
-        $ref: '#/definitions/RoomSkillParameterKey'
-        description: The room skill parameter key for which to get details. Required.
-  GetRoomSkillParameterResponse:
-    type: object
-    properties:
-      RoomSkillParameter:
-        $ref: '#/definitions/RoomSkillParameter'
-        description: The details of the room skill parameter requested. Required.
-  GetSkillGroupRequest:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the skill group for which to get details. Required.
-  GetSkillGroupResponse:
-    type: object
-    properties:
-      SkillGroup:
-        $ref: '#/definitions/SkillGroup'
-        description: The details of the skill group requested. Required.
-  InvalidUserStatusException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The attempt to update a user is invalid due to the user''s current status. HTTP Status Code: 400'
-  LimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'You are performing an action that would put you beyond your account''s limits. HTTP Status Code: 400'
-  ListDeviceEventsRequest:
-    type: object
-    required:
-      - DeviceArn
-    properties:
-      DeviceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of a device.
-      EventType:
-        $ref: '#/definitions/DeviceEventType'
-        description: 'The event type to filter device events. If EventType isn''t specified, this returns a list of all device events in reverse chronological order. If EventType is specified, this returns a list of device events for that EventType in reverse chronological order. '
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults. When the end of results is reached, the response has a value of null.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. The default value is 50. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. '
-  ListDeviceEventsResponse:
-    type: object
-    properties:
-      DeviceEvents:
-        $ref: '#/definitions/DeviceEventList'
-        description: The device events requested for the device ARN.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-  ListSkillsRequest:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the skill group for which to list enabled skills. Required.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
-      MaxResults:
-        $ref: '#/definitions/SkillListMaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. Required.'
-  ListSkillsResponse:
-    type: object
-    properties:
-      SkillSummaries:
-        $ref: '#/definitions/SkillSummaryList'
-        description: The list of enabled skills requested. Required.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-  ListTagsRequest:
-    type: object
-    required:
-      - Arn
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the specified resource for which to list tags.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. '
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
-  ListTagsResponse:
-    type: object
-    properties:
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The tags requested for the specified resource.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-  MacAddress:
-    type: string
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 50
-  MaxVolumeLimit:
-    type: integer
-  NameInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The name sent in the request is already in use. HTTP Status Code: 400'
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 1000
-  NotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The resource is not found. HTTP Status Code: 400'
   Profile:
     type: object
     properties:
@@ -2512,6 +3011,67 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: The PSTN setting of a room profile.
     description: A room profile with attributes.
+  Room:
+    type: object
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of a room.
+      RoomName:
+        $ref: '#/definitions/RoomName'
+        description: The name of a room.
+      Description:
+        $ref: '#/definitions/RoomDescription'
+        description: The description of a room.
+      ProviderCalendarId:
+        $ref: '#/definitions/ProviderCalendarId'
+        description: The provider calendar ARN of a room.
+      ProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The profile ARN of a room.
+    description: A room with attributes.
+  RoomSkillParameter:
+    type: object
+    required:
+      - ParameterKey
+      - ParameterValue
+    properties:
+      ParameterKey:
+        $ref: '#/definitions/RoomSkillParameterKey'
+        description: The parameter key of a room skill parameter. ParameterKey is an enumerated type that only takes “DEFAULT” or “SCOPE” as valid values.
+      ParameterValue:
+        $ref: '#/definitions/RoomSkillParameterValue'
+        description: The parameter value of a room skill parameter.
+    description: A skill parameter associated with a room.
+  SkillGroup:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of a skill group.
+      SkillGroupName:
+        $ref: '#/definitions/SkillGroupName'
+        description: The name of a skill group.
+      Description:
+        $ref: '#/definitions/SkillGroupDescription'
+        description: The description of a skill group.
+    description: A skill group with attributes.
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 50
+  SkillListMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 10
+  SkillSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/SkillSummary'
   ProfileData:
     type: object
     properties:
@@ -2541,96 +3101,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ProfileData'
-  ProfileName:
+  UserId:
     type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 100
-  ProviderCalendarId:
-    type: string
-    minLength: 0
-    maxLength: 100
-  PutRoomSkillParameterRequest:
-    type: object
-    required:
-      - SkillId
-      - RoomSkillParameter
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room associated with the room skill parameter. Required.
-      SkillId:
-        $ref: '#/definitions/SkillId'
-        description: The ARN of the skill associated with the room skill parameter. Required.
-      RoomSkillParameter:
-        $ref: '#/definitions/RoomSkillParameter'
-        description: The updated room skill parameter. Required.
-  PutRoomSkillParameterResponse:
-    type: object
-    properties: {}
-  ResolveRoomRequest:
-    type: object
-    required:
-      - UserId
-      - SkillId
-    properties:
-      UserId:
-        $ref: '#/definitions/UserId'
-        description: The ARN of the user. Required.
-      SkillId:
-        $ref: '#/definitions/SkillId'
-        description: The ARN of the skill that was requested. Required.
-  ResolveRoomResponse:
-    type: object
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room from which the skill request was invoked.
-      RoomName:
-        $ref: '#/definitions/RoomName'
-        description: The name of the room from which the skill request was invoked.
-      RoomSkillParameters:
-        $ref: '#/definitions/RoomSkillParameters'
-        description: Response to get the room profile request. Required.
-  ResourceInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-      ClientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-    description: 'The resource in the request is already in use. HTTP Status Code: 400'
-  RevokeInvitationRequest:
-    type: object
-    properties:
-      UserArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the user for whom to revoke an enrollment invitation. Required.
-      EnrollmentId:
-        $ref: '#/definitions/EnrollmentId'
-        description: The ARN of the enrollment invitation to revoke. Required.
-  RevokeInvitationResponse:
-    type: object
-    properties: {}
-  Room:
-    type: object
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of a room.
-      RoomName:
-        $ref: '#/definitions/RoomName'
-        description: The name of a room.
-      Description:
-        $ref: '#/definitions/RoomDescription'
-        description: The description of a room.
-      ProviderCalendarId:
-        $ref: '#/definitions/ProviderCalendarId'
-        description: The provider calendar ARN of a room.
-      ProfileArn:
-        $ref: '#/definitions/Arn'
-        description: The profile ARN of a room.
-    description: A room with attributes.
+    pattern: 'amzn1\.[A-Za-z0-9+-\/=.]{1,300}'
+  RoomSkillParameters:
+    type: array
+    items:
+      $ref: '#/definitions/RoomSkillParameter'
   RoomData:
     type: object
     properties:
@@ -2657,252 +3134,25 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RoomData'
-  RoomDescription:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 200
-  RoomName:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 100
-  RoomSkillParameter:
-    type: object
-    required:
-      - ParameterKey
-      - ParameterValue
-    properties:
-      ParameterKey:
-        $ref: '#/definitions/RoomSkillParameterKey'
-        description: The parameter key of a room skill parameter. ParameterKey is an enumerated type that only takes “DEFAULT” or “SCOPE” as valid values.
-      ParameterValue:
-        $ref: '#/definitions/RoomSkillParameterValue'
-        description: The parameter value of a room skill parameter.
-    description: A skill parameter associated with a room.
-  RoomSkillParameterKey:
-    type: string
-    minLength: 1
-    maxLength: 256
   RoomSkillParameterValue:
     type: string
     minLength: 1
     maxLength: 512
-  RoomSkillParameters:
+  SortList:
     type: array
     items:
-      $ref: '#/definitions/RoomSkillParameter'
-  SearchAddressBooksRequest:
-    type: object
-    properties:
-      Filters:
-        $ref: '#/definitions/FilterList'
-        description: The filters to use to list a specified set of address books. The supported filter key is AddressBookName.
-      SortCriteria:
-        $ref: '#/definitions/SortList'
-        description: The sort order to use in listing the specified set of address books. The supported sort key is AddressBookName.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
-  SearchAddressBooksResponse:
-    type: object
-    properties:
-      AddressBooks:
-        $ref: '#/definitions/AddressBookDataList'
-        description: 'The address books that meet the specified set of filter criteria, in sort order.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-      TotalCount:
-        $ref: '#/definitions/TotalCount'
-        description: The total number of address books returned.
-  SearchContactsRequest:
-    type: object
-    properties:
-      Filters:
-        $ref: '#/definitions/FilterList'
-        description: 'The filters to use to list a specified set of address books. The supported filter keys are DisplayName, FirstName, LastName, and AddressBookArns.'
-      SortCriteria:
-        $ref: '#/definitions/SortList'
-        description: 'The sort order to use in listing the specified set of contacts. The supported sort keys are DisplayName, FirstName, and LastName.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
-  SearchContactsResponse:
-    type: object
-    properties:
-      Contacts:
-        $ref: '#/definitions/ContactDataList'
-        description: 'The contacts that meet the specified set of filter criteria, in sort order.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-      TotalCount:
-        $ref: '#/definitions/TotalCount'
-        description: The total number of contacts returned.
-  SearchDevicesRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
-      Filters:
-        $ref: '#/definitions/FilterList'
-        description: 'The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and ConnectionStatus (ONLINE and OFFLINE).'
-      SortCriteria:
-        $ref: '#/definitions/SortList'
-        description: 'The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and ConnectionStatus.'
-  SearchDevicesResponse:
-    type: object
-    properties:
-      Devices:
-        $ref: '#/definitions/DeviceDataList'
-        description: 'The devices that meet the specified set of filter criteria, in sort order.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-      TotalCount:
-        $ref: '#/definitions/TotalCount'
-        description: The total number of devices returned.
-  SearchProfilesRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
-      Filters:
-        $ref: '#/definitions/FilterList'
-        description: 'The filters to use to list a specified set of room profiles. Supported filter keys are ProfileName and Address. Required. '
-      SortCriteria:
-        $ref: '#/definitions/SortList'
-        description: The sort order to use in listing the specified set of room profiles. Supported sort keys are ProfileName and Address.
-  SearchProfilesResponse:
-    type: object
-    properties:
-      Profiles:
-        $ref: '#/definitions/ProfileDataList'
-        description: 'The profiles that meet the specified set of filter criteria, in sort order.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-      TotalCount:
-        $ref: '#/definitions/TotalCount'
-        description: The total number of room profiles returned.
-  SearchRoomsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. '
-      Filters:
-        $ref: '#/definitions/FilterList'
-        description: The filters to use to list a specified set of rooms. The supported filter keys are RoomName and ProfileName.
-      SortCriteria:
-        $ref: '#/definitions/SortList'
-        description: The sort order to use in listing the specified set of rooms. The supported sort keys are RoomName and ProfileName.
-  SearchRoomsResponse:
-    type: object
-    properties:
-      Rooms:
-        $ref: '#/definitions/RoomDataList'
-        description: 'The rooms that meet the specified set of filter criteria, in sort order.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-      TotalCount:
-        $ref: '#/definitions/TotalCount'
-        description: The total number of rooms returned.
-  SearchSkillGroupsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. '
-      Filters:
-        $ref: '#/definitions/FilterList'
-        description: 'The filters to use to list a specified set of skill groups. The supported filter key is SkillGroupName. '
-      SortCriteria:
-        $ref: '#/definitions/SortList'
-        description: 'The sort order to use in listing the specified set of skill groups. The supported sort key is SkillGroupName. '
-  SearchSkillGroupsResponse:
-    type: object
-    properties:
-      SkillGroups:
-        $ref: '#/definitions/SkillGroupDataList'
-        description: 'The skill groups that meet the filter criteria, in sort order.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-      TotalCount:
-        $ref: '#/definitions/TotalCount'
-        description: The total number of skill groups returned.
-  SearchUsersRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. Required.'
-      Filters:
-        $ref: '#/definitions/FilterList'
-        description: 'The filters to use for listing a specific set of users. Required. Supported filter keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.'
-      SortCriteria:
-        $ref: '#/definitions/SortList'
-        description: 'The sort order to use in listing the filtered set of users. Required. Supported sort keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.'
-  SearchUsersResponse:
-    type: object
-    properties:
-      Users:
-        $ref: '#/definitions/UserDataList'
-        description: 'The users that meet the specified set of filter criteria, in sort order.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-      TotalCount:
-        $ref: '#/definitions/TotalCount'
-        description: The total number of users returned.
-  SendInvitationRequest:
-    type: object
-    properties:
-      UserArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the user to whom to send an invitation. Required.
-  SendInvitationResponse:
-    type: object
-    properties: {}
-  SkillGroup:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of a skill group.
-      SkillGroupName:
-        $ref: '#/definitions/SkillGroupName'
-        description: The name of a skill group.
-      Description:
-        $ref: '#/definitions/SkillGroupDescription'
-        description: The description of a skill group.
-    description: A skill group with attributes.
+      $ref: '#/definitions/Sort'
+    maxItems: 25
+  TotalCount:
+    type: integer
+  SkillGroupDataList:
+    type: array
+    items:
+      $ref: '#/definitions/SkillGroupData'
+  UserDataList:
+    type: array
+    items:
+      $ref: '#/definitions/UserData'
   SkillGroupData:
     type: object
     properties:
@@ -2916,32 +3166,13 @@ definitions:
         $ref: '#/definitions/SkillGroupDescription'
         description: The description of a skill group.
     description: The attributes of a skill group.
-  SkillGroupDataList:
-    type: array
-    items:
-      $ref: '#/definitions/SkillGroupData'
-  SkillGroupDescription:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 200
-  SkillGroupName:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 100
-  SkillId:
-    type: string
-    pattern: '(^amzn1\.ask\.skill\.[0-9a-f\-]{1,200})|(^amzn1\.echo-sdk-ams\.app\.[0-9a-f\-]{1,200})'
-  SkillListMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 10
   SkillName:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
     minLength: 1
     maxLength: 100
+  boolean:
+    type: boolean
   SkillSummary:
     type: object
     properties:
@@ -2955,12 +3186,15 @@ definitions:
         $ref: '#/definitions/boolean'
         description: Linking support for a skill.
     description: The summary of skills.
-  SkillSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/SkillSummary'
-  SoftwareVersion:
+  SortKey:
     type: string
+    minLength: 1
+    maxLength: 500
+  SortValue:
+    type: string
+    enum:
+      - ASC
+      - DESC
   Sort:
     type: object
     required:
@@ -2974,37 +3208,16 @@ definitions:
         $ref: '#/definitions/SortValue'
         description: The sort value of a sort object.
     description: 'An object representing a sort criteria. '
-  SortKey:
+  TagKey:
     type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
-    maxLength: 500
-  SortList:
-    type: array
-    items:
-      $ref: '#/definitions/Sort'
-    maxItems: 25
-  SortValue:
+    maxLength: 128
+  TagValue:
     type: string
-    enum:
-      - ASC
-      - DESC
-  StartDeviceSyncRequest:
-    type: object
-    required:
-      - Features
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room with which the device to sync is associated. Required.
-      DeviceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the device to sync. Required.
-      Features:
-        $ref: '#/definitions/Features'
-        description: Request structure to start the device sync. Required.
-  StartDeviceSyncResponse:
-    type: object
-    properties: {}
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     properties:
@@ -3015,192 +3228,10 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value of a tag. Tag values are case-sensitive and can be null.
     description: 'A key-value pair that can be associated with a resource. '
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagResourceRequest:
-    type: object
-    required:
-      - Arn
-      - Tags
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN of the resource to which to add metadata tags. Required. '
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: 'The tags to be added to the specified resource. Do not provide system tags. Required. '
-  TagResourceResponse:
-    type: object
-    properties: {}
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  TemperatureUnit:
-    type: string
-    enum:
-      - FAHRENHEIT
-      - CELSIUS
-  Timestamp:
-    type: string
-    format: date-time
-  Timezone:
-    type: string
-    minLength: 1
-    maxLength: 100
-  TotalCount:
-    type: integer
-  UntagResourceRequest:
-    type: object
-    required:
-      - Arn
-      - TagKeys
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN of the resource from which to remove metadata tags. Required. '
-      TagKeys:
-        $ref: '#/definitions/TagKeyList'
-        description: 'The tags to be removed from the specified resource. Do not provide system tags. Required. '
-  UntagResourceResponse:
-    type: object
-    properties: {}
-  UpdateAddressBookRequest:
-    type: object
-    required:
-      - AddressBookArn
-    properties:
-      AddressBookArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room to update.
-      Name:
-        $ref: '#/definitions/AddressBookName'
-        description: The updated name of the room.
-      Description:
-        $ref: '#/definitions/AddressBookDescription'
-        description: The updated description of the room.
-  UpdateAddressBookResponse:
-    type: object
-    properties: {}
-  UpdateContactRequest:
-    type: object
-    required:
-      - ContactArn
-    properties:
-      ContactArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the contact to update.
-      DisplayName:
-        $ref: '#/definitions/ContactName'
-        description: The updated display name of the contact.
-      FirstName:
-        $ref: '#/definitions/ContactName'
-        description: The updated first name of the contact.
-      LastName:
-        $ref: '#/definitions/ContactName'
-        description: The updated last name of the contact.
-      PhoneNumber:
-        $ref: '#/definitions/E164PhoneNumber'
-        description: The updated phone number of the contact.
-  UpdateContactResponse:
-    type: object
-    properties: {}
-  UpdateDeviceRequest:
-    type: object
-    properties:
-      DeviceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the device to update. Required.
-      DeviceName:
-        $ref: '#/definitions/DeviceName'
-        description: The updated device name. Required.
-  UpdateDeviceResponse:
-    type: object
-    properties: {}
-  UpdateProfileRequest:
-    type: object
-    properties:
-      ProfileArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room profile to update. Required.
-      ProfileName:
-        $ref: '#/definitions/ProfileName'
-        description: The updated name for the room profile.
-      Timezone:
-        $ref: '#/definitions/Timezone'
-        description: The updated timezone for the room profile.
-      Address:
-        $ref: '#/definitions/Address'
-        description: The updated address for the room profile.
-      DistanceUnit:
-        $ref: '#/definitions/DistanceUnit'
-        description: The updated distance unit for the room profile.
-      TemperatureUnit:
-        $ref: '#/definitions/TemperatureUnit'
-        description: The updated temperature unit for the room profile.
-      WakeWord:
-        $ref: '#/definitions/WakeWord'
-        description: The updated wake word for the room profile.
-      SetupModeDisabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the setup mode of the profile is enabled.
-      MaxVolumeLimit:
-        $ref: '#/definitions/MaxVolumeLimit'
-        description: The updated maximum volume limit for the room profile.
-      PSTNEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the PSTN setting of the room profile is enabled.
-  UpdateProfileResponse:
-    type: object
-    properties: {}
-  UpdateRoomRequest:
-    type: object
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN of the room to update. '
-      RoomName:
-        $ref: '#/definitions/RoomName'
-        description: The updated name for the room.
-      Description:
-        $ref: '#/definitions/RoomDescription'
-        description: The updated description for the room.
-      ProviderCalendarId:
-        $ref: '#/definitions/ProviderCalendarId'
-        description: The updated provider calendar ARN for the room.
-      ProfileArn:
-        $ref: '#/definitions/Arn'
-        description: The updated profile ARN for the room.
-  UpdateRoomResponse:
-    type: object
-    properties: {}
-  UpdateSkillGroupRequest:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN of the skill group to update. '
-      SkillGroupName:
-        $ref: '#/definitions/SkillGroupName'
-        description: The updated name for the skill group.
-      Description:
-        $ref: '#/definitions/SkillGroupDescription'
-        description: The updated description for the skill group.
-  UpdateSkillGroupResponse:
-    type: object
-    properties: {}
   UserData:
     type: object
     properties:
@@ -3223,34 +3254,3 @@ definitions:
         $ref: '#/definitions/EnrollmentId'
         description: The enrollment ARN of a user.
     description: Information related to a user.
-  UserDataList:
-    type: array
-    items:
-      $ref: '#/definitions/UserData'
-  UserId:
-    type: string
-    pattern: 'amzn1\.[A-Za-z0-9+-\/=.]{1,300}'
-  WakeWord:
-    type: string
-    enum:
-      - ALEXA
-      - AMAZON
-      - ECHO
-      - COMPUTER
-  boolean:
-    type: boolean
-  user_FirstName:
-    type: string
-    pattern: '([A-Za-z\-'' 0-9._]|\p{IsLetter})*'
-    minLength: 0
-    maxLength: 30
-  user_LastName:
-    type: string
-    pattern: '([A-Za-z\-'' 0-9._]|\p{IsLetter})*'
-    minLength: 0
-    maxLength: 30
-  user_UserId:
-    type: string
-    pattern: '[a-zA-Z0-9@_+.-]*'
-    minLength: 1
-    maxLength: 128

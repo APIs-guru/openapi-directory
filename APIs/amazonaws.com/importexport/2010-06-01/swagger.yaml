@@ -510,28 +510,12 @@ paths:
       - $ref: '#/parameters/Version'
       - $ref: '#/parameters/Signature'
 definitions:
-  APIVersion:
-    type: string
-    description: Specifies the version of the client tool.
-  Artifact:
+  CancelJobOutput:
     type: object
     properties:
-      Description:
-        $ref: '#/definitions/Description'
-      URL:
-        $ref: '#/definitions/URL'
-    description: A discrete item that contains the description and URL of an artifact (such as a PDF).
-  ArtifactList:
-    type: array
-    description: A collection of artifacts.
-    items:
-      $ref: '#/definitions/Artifact'
-  BucketPermissionException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The account specified does not have the appropriate bucket permissions.
+      Success:
+        $ref: '#/definitions/Success'
+    description: Output structure for the CancelJob operation.
   CancelJobInput:
     type: object
     required:
@@ -542,21 +526,58 @@ definitions:
       APIVersion:
         $ref: '#/definitions/APIVersion'
     description: Input structure for the CancelJob operation.
-  CancelJobOutput:
+  InvalidJobIdException:
     type: object
     properties:
-      Success:
-        $ref: '#/definitions/Success'
-    description: Output structure for the CancelJob operation.
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The JOBID was missing, not found, or not associated with the AWS account.'
+  ExpiredJobIdException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Indicates that the specified job has expired out of the system.
   CanceledJobIdException:
     type: object
     properties:
       message:
         $ref: '#/definitions/ErrorMessage'
     description: The specified job ID has been canceled and is no longer valid.
-  Carrier:
-    type: string
-    description: Name of the shipping company. This value is included when the LocationCode is "Returned".
+  UnableToCancelJobIdException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: AWS Import/Export cannot cancel the job
+  InvalidAccessKeyIdException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The AWS Access Key ID specified in the request did not match the manifest's accessKeyId value. The manifest and the request authentication must use the same AWS Access Key ID.
+  InvalidVersionException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The client tool version is invalid.
+  CreateJobOutput:
+    type: object
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+      JobType:
+        $ref: '#/definitions/JobType'
+      Signature:
+        $ref: '#/definitions/Signature'
+      SignatureFileContents:
+        $ref: '#/definitions/SignatureFileContents'
+      WarningMessage:
+        $ref: '#/definitions/WarningMessage'
+      ArtifactList:
+        $ref: '#/definitions/ArtifactList'
+    description: Output structure for the CreateJob operation.
   CreateJobInput:
     type: object
     required:
@@ -575,52 +596,91 @@ definitions:
       APIVersion:
         $ref: '#/definitions/APIVersion'
     description: Input structure for the CreateJob operation.
-  CreateJobOutput:
+  MissingParameterException:
     type: object
     properties:
-      JobId:
-        $ref: '#/definitions/JobId'
-      JobType:
-        $ref: '#/definitions/JobType'
-      Signature:
-        $ref: '#/definitions/Signature'
-      SignatureFileContents:
-        $ref: '#/definitions/SignatureFileContents'
-      WarningMessage:
-        $ref: '#/definitions/WarningMessage'
-      ArtifactList:
-        $ref: '#/definitions/ArtifactList'
-    description: Output structure for the CreateJob operation.
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: One or more required parameters was missing from the request.
+  InvalidParameterException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: One or more parameters had an invalid value.
+  InvalidAddressException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The address specified in the manifest is invalid.
+  InvalidManifestFieldException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: One or more manifest fields was invalid. Please correct and resubmit.
+  MissingManifestFieldException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: One or more required fields were missing from the manifest file. Please correct and resubmit.
+  NoSuchBucketException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The specified bucket does not exist. Create the specified bucket or change the manifest''s bucket, exportBucket, or logBucket field to a bucket that the account, as specified by the manifest''s Access Key ID, has write permissions to.'
+  MissingCustomsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: One or more required customs parameters was missing from the manifest.
+  InvalidCustomsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: One or more customs parameters was invalid. Please correct and resubmit.
+  InvalidFileSystemException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: File system specified in export manifest is invalid.
+  MultipleRegionsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Your manifest file contained buckets from multiple regions. A job is restricted to buckets from one region. Please correct and resubmit.
+  BucketPermissionException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The account specified does not have the appropriate bucket permissions.
+  MalformedManifestException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Your manifest is not well-formed.
   CreateJobQuotaExceededException:
     type: object
     properties:
       message:
         $ref: '#/definitions/ErrorMessage'
     description: 'Each account can create only a certain number of jobs per day. If you need to create more than this, please contact awsimportexport@amazon.com to explain your particular use case.'
-  CreationDate:
-    type: string
-    description: 'Timestamp of the CreateJob request in ISO8601 date format. For example "2010-03-28T20:27:35Z".'
-    format: date-time
-  CurrentManifest:
-    type: string
-    description: 'The last manifest submitted, which will be used to process the job.'
-  Description:
-    type: string
-    description: The associated description for this object.
-  ErrorCount:
-    type: integer
-    description: Number of errors. We return this value when the ProgressCode is Success or SuccessWithErrors.
-  ErrorMessage:
-    type: string
-    description: The human-readable description of a particular error.
-  ExpiredJobIdException:
+  GetShippingLabelOutput:
     type: object
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Indicates that the specified job has expired out of the system.
-  GenericString:
-    type: string
+      ShippingLabelURL:
+        $ref: '#/definitions/GenericString'
+      Warning:
+        $ref: '#/definitions/GenericString'
   GetShippingLabelInput:
     type: object
     required:
@@ -650,23 +710,6 @@ definitions:
         $ref: '#/definitions/street3'
       APIVersion:
         $ref: '#/definitions/APIVersion'
-  GetShippingLabelOutput:
-    type: object
-    properties:
-      ShippingLabelURL:
-        $ref: '#/definitions/GenericString'
-      Warning:
-        $ref: '#/definitions/GenericString'
-  GetStatusInput:
-    type: object
-    required:
-      - JobId
-    properties:
-      JobId:
-        $ref: '#/definitions/JobId'
-      APIVersion:
-        $ref: '#/definitions/APIVersion'
-    description: Input structure for the GetStatus operation.
   GetStatusOutput:
     type: object
     properties:
@@ -703,90 +746,24 @@ definitions:
       ArtifactList:
         $ref: '#/definitions/ArtifactList'
     description: Output structure for the GetStatus operation.
-  InvalidAccessKeyIdException:
+  GetStatusInput:
     type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The AWS Access Key ID specified in the request did not match the manifest's accessKeyId value. The manifest and the request authentication must use the same AWS Access Key ID.
-  InvalidAddressException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The address specified in the manifest is invalid.
-  InvalidCustomsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: One or more customs parameters was invalid. Please correct and resubmit.
-  InvalidFileSystemException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: File system specified in export manifest is invalid.
-  InvalidJobIdException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The JOBID was missing, not found, or not associated with the AWS account.'
-  InvalidManifestFieldException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: One or more manifest fields was invalid. Please correct and resubmit.
-  InvalidParameterException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: One or more parameters had an invalid value.
-  InvalidVersionException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The client tool version is invalid.
-  IsCanceled:
-    type: boolean
-    description: Indicates whether the job was canceled.
-  IsTruncated:
-    type: boolean
-    description: 'Indicates whether the list of jobs was truncated. If true, then call ListJobs again using the last JobId element as the marker.'
-  Job:
-    type: object
+    required:
+      - JobId
     properties:
       JobId:
         $ref: '#/definitions/JobId'
-      CreationDate:
-        $ref: '#/definitions/CreationDate'
-      IsCanceled:
-        $ref: '#/definitions/IsCanceled'
-      JobType:
-        $ref: '#/definitions/JobType'
-    description: Representation of a job returned by the ListJobs operation.
-  JobId:
-    type: string
-    description: A unique identifier which refers to a particular job.
-  JobIdList:
-    type: array
-    items:
-      $ref: '#/definitions/GenericString'
-  JobType:
-    type: string
-    enum:
-      - Import
-      - Export
-    description: Specifies whether the job to initiate is an import or export job.
-  JobsList:
-    type: array
-    description: A list container for Jobs returned by the ListJobs operation.
-    items:
-      $ref: '#/definitions/Job'
+      APIVersion:
+        $ref: '#/definitions/APIVersion'
+    description: Input structure for the GetStatus operation.
+  ListJobsOutput:
+    type: object
+    properties:
+      Jobs:
+        $ref: '#/definitions/JobsList'
+      IsTruncated:
+        $ref: '#/definitions/IsTruncated'
+    description: Output structure for the ListJobs operation.
   ListJobsInput:
     type: object
     properties:
@@ -797,107 +774,16 @@ definitions:
       APIVersion:
         $ref: '#/definitions/APIVersion'
     description: Input structure for the ListJobs operation.
-  ListJobsOutput:
+  UpdateJobOutput:
     type: object
     properties:
-      Jobs:
-        $ref: '#/definitions/JobsList'
-      IsTruncated:
-        $ref: '#/definitions/IsTruncated'
-    description: Output structure for the ListJobs operation.
-  LocationCode:
-    type: string
-    description: 'A token representing the location of the storage device, such as "AtAWS".'
-  LocationMessage:
-    type: string
-    description: A more human readable form of the physical location of the storage device.
-  LogBucket:
-    type: string
-    description: Amazon S3 bucket for user logs.
-  LogKey:
-    type: string
-    description: The key where the user logs were stored.
-  MalformedManifestException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Your manifest is not well-formed.
-  Manifest:
-    type: string
-    description: The UTF-8 encoded text of the manifest file.
-  ManifestAddendum:
-    type: string
-    description: For internal use only.
-  Marker:
-    type: string
-    description: Specifies the JOBID to start after when listing the jobs created with your account. AWS Import/Export lists your jobs in reverse chronological order. See MaxJobs.
-  MaxJobs:
-    type: integer
-    description: 'Sets the maximum number of jobs returned in the response. If there are additional jobs that were not returned because MaxJobs was exceeded, the response contains &lt;IsTruncated&gt;true&lt;/IsTruncated&gt;. To return the additional jobs, see Marker.'
-  MissingCustomsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: One or more required customs parameters was missing from the manifest.
-  MissingManifestFieldException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: One or more required fields were missing from the manifest file. Please correct and resubmit.
-  MissingParameterException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: One or more required parameters was missing from the request.
-  MultipleRegionsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Your manifest file contained buckets from multiple regions. A job is restricted to buckets from one region. Please correct and resubmit.
-  NoSuchBucketException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The specified bucket does not exist. Create the specified bucket or change the manifest''s bucket, exportBucket, or logBucket field to a bucket that the account, as specified by the manifest''s Access Key ID, has write permissions to.'
-  ProgressCode:
-    type: string
-    description: 'A token representing the state of the job, such as "Started".'
-  ProgressMessage:
-    type: string
-    description: A more human readable form of the job status.
-  Signature:
-    type: string
-    description: 'An encrypted code used to authenticate the request and response, for example, "DV+TpDfx1/TdSE9ktyK9k/bDTVI=". Only use this value is you want to create the signature file yourself. Generally you should use the SignatureFileContents value.'
-  SignatureFileContents:
-    type: string
-    description: The actual text of the SIGNATURE file to be written to disk.
-  Success:
-    type: boolean
-    description: Specifies whether (true) or not (false) AWS Import/Export updated your job.
-  TrackingNumber:
-    type: string
-    description: The shipping tracking number assigned by AWS Import/Export to the storage device when it's returned to you. We return this value when the LocationCode is "Returned".
-  URL:
-    type: string
-    description: The URL for a given Artifact.
-  UnableToCancelJobIdException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: AWS Import/Export cannot cancel the job
-  UnableToUpdateJobIdException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: AWS Import/Export cannot update the job
+      Success:
+        $ref: '#/definitions/Success'
+      WarningMessage:
+        $ref: '#/definitions/WarningMessage'
+      ArtifactList:
+        $ref: '#/definitions/ArtifactList'
+    description: Output structure for the UpateJob operation.
   UpdateJobInput:
     type: object
     required:
@@ -917,43 +803,107 @@ definitions:
       APIVersion:
         $ref: '#/definitions/APIVersion'
     description: Input structure for the UpateJob operation.
-  UpdateJobOutput:
+  UnableToUpdateJobIdException:
     type: object
     properties:
-      Success:
-        $ref: '#/definitions/Success'
-      WarningMessage:
-        $ref: '#/definitions/WarningMessage'
-      ArtifactList:
-        $ref: '#/definitions/ArtifactList'
-    description: Output structure for the UpateJob operation.
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: AWS Import/Export cannot update the job
+  APIVersion:
+    type: string
+    description: Specifies the version of the client tool.
+  Description:
+    type: string
+    description: The associated description for this object.
+  URL:
+    type: string
+    description: The URL for a given Artifact.
+  Artifact:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/Description'
+      URL:
+        $ref: '#/definitions/URL'
+    description: A discrete item that contains the description and URL of an artifact (such as a PDF).
+  ArtifactList:
+    type: array
+    description: A collection of artifacts.
+    items:
+      $ref: '#/definitions/Artifact'
+  ErrorMessage:
+    type: string
+    description: The human-readable description of a particular error.
+  JobId:
+    type: string
+    description: A unique identifier which refers to a particular job.
+  Success:
+    type: boolean
+    description: Specifies whether (true) or not (false) AWS Import/Export updated your job.
+  Carrier:
+    type: string
+    description: Name of the shipping company. This value is included when the LocationCode is "Returned".
+  JobType:
+    type: string
+    enum:
+      - Import
+      - Export
+    description: Specifies whether the job to initiate is an import or export job.
+  Manifest:
+    type: string
+    description: The UTF-8 encoded text of the manifest file.
+  ManifestAddendum:
+    type: string
+    description: For internal use only.
   ValidateOnly:
     type: boolean
     description: Validate the manifest and parameter values in the request but do not actually create a job.
+  Signature:
+    type: string
+    description: 'An encrypted code used to authenticate the request and response, for example, "DV+TpDfx1/TdSE9ktyK9k/bDTVI=". Only use this value is you want to create the signature file yourself. Generally you should use the SignatureFileContents value.'
+  SignatureFileContents:
+    type: string
+    description: The actual text of the SIGNATURE file to be written to disk.
   WarningMessage:
     type: string
     description: 'An optional message notifying you of non-fatal issues with the job, such as use of an incompatible Amazon S3 bucket name.'
-  city:
+  CreationDate:
     type: string
-    description: Specifies the name of your city for the return address.
-  company:
+    description: 'Timestamp of the CreateJob request in ISO8601 date format. For example "2010-03-28T20:27:35Z".'
+    format: date-time
+  CurrentManifest:
     type: string
-    description: Specifies the name of the company that will ship this package.
-  country:
+    description: 'The last manifest submitted, which will be used to process the job.'
+  ErrorCount:
+    type: integer
+    description: Number of errors. We return this value when the ProgressCode is Success or SuccessWithErrors.
+  GenericString:
     type: string
-    description: Specifies the name of your country for the return address.
+  JobIdList:
+    type: array
+    items:
+      $ref: '#/definitions/GenericString'
   name:
     type: string
     description: Specifies the name of the person responsible for shipping this package.
+  company:
+    type: string
+    description: Specifies the name of the company that will ship this package.
   phoneNumber:
     type: string
     description: Specifies the phone number of the person responsible for shipping this package.
-  postalCode:
+  country:
     type: string
-    description: Specifies the postal code for the return address.
+    description: Specifies the name of your country for the return address.
   stateOrProvince:
     type: string
     description: Specifies the name of your state or your province for the return address.
+  city:
+    type: string
+    description: Specifies the name of your city for the return address.
+  postalCode:
+    type: string
+    description: Specifies the postal code for the return address.
   street1:
     type: string
     description: 'Specifies the first part of the street address for the return address, for example 1234 Main Street.'
@@ -963,3 +913,53 @@ definitions:
   street3:
     type: string
     description: 'Specifies the optional third part of the street address for the return address, for example c/o Jane Doe.'
+  LocationCode:
+    type: string
+    description: 'A token representing the location of the storage device, such as "AtAWS".'
+  LocationMessage:
+    type: string
+    description: A more human readable form of the physical location of the storage device.
+  ProgressCode:
+    type: string
+    description: 'A token representing the state of the job, such as "Started".'
+  ProgressMessage:
+    type: string
+    description: A more human readable form of the job status.
+  TrackingNumber:
+    type: string
+    description: The shipping tracking number assigned by AWS Import/Export to the storage device when it's returned to you. We return this value when the LocationCode is "Returned".
+  LogBucket:
+    type: string
+    description: Amazon S3 bucket for user logs.
+  LogKey:
+    type: string
+    description: The key where the user logs were stored.
+  IsCanceled:
+    type: boolean
+    description: Indicates whether the job was canceled.
+  IsTruncated:
+    type: boolean
+    description: 'Indicates whether the list of jobs was truncated. If true, then call ListJobs again using the last JobId element as the marker.'
+  Job:
+    type: object
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+      CreationDate:
+        $ref: '#/definitions/CreationDate'
+      IsCanceled:
+        $ref: '#/definitions/IsCanceled'
+      JobType:
+        $ref: '#/definitions/JobType'
+    description: Representation of a job returned by the ListJobs operation.
+  JobsList:
+    type: array
+    description: A list container for Jobs returned by the ListJobs operation.
+    items:
+      $ref: '#/definitions/Job'
+  MaxJobs:
+    type: integer
+    description: 'Sets the maximum number of jobs returned in the response. If there are additional jobs that were not returned because MaxJobs was exceeded, the response contains &lt;IsTruncated&gt;true&lt;/IsTruncated&gt;. To return the additional jobs, see Marker.'
+  Marker:
+    type: string
+    description: Specifies the JOBID to start after when listing the jobs created with your account. AWS Import/Export lists your jobs in reverse chronological order. See MaxJobs.

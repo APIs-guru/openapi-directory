@@ -599,9 +599,265 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  CreateReplicationJobResponse:
+    type: object
+    properties:
+      replicationJobId:
+        $ref: '#/definitions/ReplicationJobId'
+  CreateReplicationJobRequest:
+    type: object
+    required:
+      - serverId
+      - seedReplicationTime
+      - frequency
+    properties:
+      serverId:
+        $ref: '#/definitions/ServerId'
+      seedReplicationTime:
+        $ref: '#/definitions/Timestamp'
+      frequency:
+        $ref: '#/definitions/Frequency'
+      licenseType:
+        $ref: '#/definitions/LicenseType'
+      roleName:
+        $ref: '#/definitions/RoleName'
+      description:
+        $ref: '#/definitions/Description'
+  InvalidParameterException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'A parameter specified in the request is not valid, is unsupported, or cannot be used.'
+  MissingRequiredParameterException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The request is missing a required parameter. Ensure that you have supplied all the required parameters for the request.
+  UnauthorizedOperationException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: This user does not have permissions to perform this operation.
+  OperationNotPermittedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The specified operation is not allowed. This error can occur for a number of reasons; for example, you might be trying to start a Replication Run before seed Replication Run.'
+  ServerCannotBeReplicatedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The provided server cannot be replicated.
+  ReplicationJobAlreadyExistsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: An active Replication Job already exists for the specified server.
+  NoConnectorsAvailableException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: No connectors are available to handle this request. Please associate connector(s) and verify any existing connectors are healthy and can respond to requests.
+  InternalError:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: An internal error has occured.
+  DeleteReplicationJobResponse:
+    type: object
+    properties: {}
+  DeleteReplicationJobRequest:
+    type: object
+    required:
+      - replicationJobId
+    properties:
+      replicationJobId:
+        $ref: '#/definitions/ReplicationJobId'
+  ReplicationJobNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified Replication Job cannot be found.
+  DeleteServerCatalogResponse:
+    type: object
+    properties: {}
+  DeleteServerCatalogRequest:
+    type: object
+    properties: {}
+  DisassociateConnectorResponse:
+    type: object
+    properties: {}
+  DisassociateConnectorRequest:
+    type: object
+    required:
+      - connectorId
+    properties:
+      connectorId:
+        $ref: '#/definitions/ConnectorId'
+  GetConnectorsResponse:
+    type: object
+    properties:
+      connectorList:
+        $ref: '#/definitions/ConnectorList'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+  GetConnectorsRequest:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/NextToken'
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+  GetReplicationJobsResponse:
+    type: object
+    properties:
+      replicationJobList:
+        $ref: '#/definitions/ReplicationJobList'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+  GetReplicationJobsRequest:
+    type: object
+    properties:
+      replicationJobId:
+        $ref: '#/definitions/ReplicationJobId'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+  GetReplicationRunsResponse:
+    type: object
+    properties:
+      replicationJob:
+        $ref: '#/definitions/ReplicationJob'
+      replicationRunList:
+        $ref: '#/definitions/ReplicationRunList'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+  GetReplicationRunsRequest:
+    type: object
+    required:
+      - replicationJobId
+    properties:
+      replicationJobId:
+        $ref: '#/definitions/ReplicationJobId'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+  GetServersResponse:
+    type: object
+    properties:
+      lastModifiedOn:
+        $ref: '#/definitions/Timestamp'
+      serverCatalogStatus:
+        $ref: '#/definitions/ServerCatalogStatus'
+      serverList:
+        $ref: '#/definitions/ServerList'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+  GetServersRequest:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/NextToken'
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+  ImportServerCatalogResponse:
+    type: object
+    properties: {}
+  ImportServerCatalogRequest:
+    type: object
+    properties: {}
+  StartOnDemandReplicationRunResponse:
+    type: object
+    properties:
+      replicationRunId:
+        $ref: '#/definitions/ReplicationRunId'
+  StartOnDemandReplicationRunRequest:
+    type: object
+    required:
+      - replicationJobId
+    properties:
+      replicationJobId:
+        $ref: '#/definitions/ReplicationJobId'
+      description:
+        $ref: '#/definitions/Description'
+  ReplicationRunLimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: This user has exceeded the maximum allowed Replication Run limit.
+  UpdateReplicationJobResponse:
+    type: object
+    properties: {}
+  UpdateReplicationJobRequest:
+    type: object
+    required:
+      - replicationJobId
+    properties:
+      replicationJobId:
+        $ref: '#/definitions/ReplicationJobId'
+      frequency:
+        $ref: '#/definitions/Frequency'
+      nextReplicationRunStartTime:
+        $ref: '#/definitions/Timestamp'
+      licenseType:
+        $ref: '#/definitions/LicenseType'
+      roleName:
+        $ref: '#/definitions/RoleName'
+      description:
+        $ref: '#/definitions/Description'
   AmiId:
     type: string
     description: The AMI id for the image resulting from a Replication Run.
+  ConnectorId:
+    type: string
+    description: Unique Identifier for Connector
+  ConnectorVersion:
+    type: string
+    description: Connector version string
+  ConnectorStatus:
+    type: string
+    enum:
+      - HEALTHY
+      - UNHEALTHY
+    description: Status of on-premise Connector
+  ConnectorCapabilityList:
+    type: array
+    description: List of Connector Capabilities
+    items:
+      $ref: '#/definitions/ConnectorCapability'
+  VmManagerName:
+    type: string
+    description: VM Manager Name
+  VmManagerType:
+    type: string
+    enum:
+      - VSPHERE
+    description: VM Management Product
+  VmManagerId:
+    type: string
+    description: Unique Identifier for VM Manager
+  IpAddress:
+    type: string
+    description: Internet Protocol (IP) Address
+  MacAddress:
+    type: string
+    description: Hardware (MAC) address
+  Timestamp:
+    type: string
+    description: Timestamp of an operation
+    format: date-time
   Connector:
     type: object
     properties:
@@ -631,209 +887,46 @@ definitions:
     enum:
       - VSPHERE
     description: Capabilities for a Connector
-  ConnectorCapabilityList:
-    type: array
-    description: List of Connector Capabilities
-    items:
-      $ref: '#/definitions/ConnectorCapability'
-  ConnectorId:
-    type: string
-    description: Unique Identifier for Connector
   ConnectorList:
     type: array
     description: List of connectors
     items:
       $ref: '#/definitions/Connector'
-  ConnectorStatus:
+  ServerId:
     type: string
-    enum:
-      - HEALTHY
-      - UNHEALTHY
-    description: Status of on-premise Connector
-  ConnectorVersion:
-    type: string
-    description: Connector version string
-  CreateReplicationJobRequest:
-    type: object
-    required:
-      - serverId
-      - seedReplicationTime
-      - frequency
-    properties:
-      serverId:
-        $ref: '#/definitions/ServerId'
-      seedReplicationTime:
-        $ref: '#/definitions/Timestamp'
-      frequency:
-        $ref: '#/definitions/Frequency'
-      licenseType:
-        $ref: '#/definitions/LicenseType'
-      roleName:
-        $ref: '#/definitions/RoleName'
-      description:
-        $ref: '#/definitions/Description'
-  CreateReplicationJobResponse:
-    type: object
-    properties:
-      replicationJobId:
-        $ref: '#/definitions/ReplicationJobId'
-  DeleteReplicationJobRequest:
-    type: object
-    required:
-      - replicationJobId
-    properties:
-      replicationJobId:
-        $ref: '#/definitions/ReplicationJobId'
-  DeleteReplicationJobResponse:
-    type: object
-    properties: {}
-  DeleteServerCatalogRequest:
-    type: object
-    properties: {}
-  DeleteServerCatalogResponse:
-    type: object
-    properties: {}
-  Description:
-    type: string
-    description: The description for a Replication Job/Run.
-  DisassociateConnectorRequest:
-    type: object
-    required:
-      - connectorId
-    properties:
-      connectorId:
-        $ref: '#/definitions/ConnectorId'
-  DisassociateConnectorResponse:
-    type: object
-    properties: {}
-  ErrorMessage:
-    type: string
-    description: Error Message string
+    description: Unique Identifier for a server
   Frequency:
     type: integer
     description: 'Interval between Replication Runs. This value is specified in hours, and represents the time between consecutive Replication Runs.'
-  GetConnectorsRequest:
-    type: object
-    properties:
-      nextToken:
-        $ref: '#/definitions/NextToken'
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-  GetConnectorsResponse:
-    type: object
-    properties:
-      connectorList:
-        $ref: '#/definitions/ConnectorList'
-      nextToken:
-        $ref: '#/definitions/NextToken'
-  GetReplicationJobsRequest:
-    type: object
-    properties:
-      replicationJobId:
-        $ref: '#/definitions/ReplicationJobId'
-      nextToken:
-        $ref: '#/definitions/NextToken'
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-  GetReplicationJobsResponse:
-    type: object
-    properties:
-      replicationJobList:
-        $ref: '#/definitions/ReplicationJobList'
-      nextToken:
-        $ref: '#/definitions/NextToken'
-  GetReplicationRunsRequest:
-    type: object
-    required:
-      - replicationJobId
-    properties:
-      replicationJobId:
-        $ref: '#/definitions/ReplicationJobId'
-      nextToken:
-        $ref: '#/definitions/NextToken'
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-  GetReplicationRunsResponse:
-    type: object
-    properties:
-      replicationJob:
-        $ref: '#/definitions/ReplicationJob'
-      replicationRunList:
-        $ref: '#/definitions/ReplicationRunList'
-      nextToken:
-        $ref: '#/definitions/NextToken'
-  GetServersRequest:
-    type: object
-    properties:
-      nextToken:
-        $ref: '#/definitions/NextToken'
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-  GetServersResponse:
-    type: object
-    properties:
-      lastModifiedOn:
-        $ref: '#/definitions/Timestamp'
-      serverCatalogStatus:
-        $ref: '#/definitions/ServerCatalogStatus'
-      serverList:
-        $ref: '#/definitions/ServerList'
-      nextToken:
-        $ref: '#/definitions/NextToken'
-  ImportServerCatalogRequest:
-    type: object
-    properties: {}
-  ImportServerCatalogResponse:
-    type: object
-    properties: {}
-  InternalError:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: An internal error has occured.
-  InvalidParameterException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'A parameter specified in the request is not valid, is unsupported, or cannot be used.'
-  IpAddress:
-    type: string
-    description: Internet Protocol (IP) Address
   LicenseType:
     type: string
     enum:
       - AWS
       - BYOL
     description: The license type to be used for the Amazon Machine Image (AMI) created after a successful ReplicationRun.
-  MacAddress:
+  RoleName:
     type: string
-    description: Hardware (MAC) address
-  MaxResults:
-    type: integer
-    description: 'The maximum number of results to return in one API call. If left empty, this will default to 50.'
-  MissingRequiredParameterException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The request is missing a required parameter. Ensure that you have supplied all the required parameters for the request.
+    description: Name of service role in customer's account to be used by SMS service.
+  Description:
+    type: string
+    description: The description for a Replication Job/Run.
+  ReplicationJobId:
+    type: string
+    description: The unique identifier for a Replication Job.
+  ErrorMessage:
+    type: string
+    description: Error Message string
   NextToken:
     type: string
     description: Pagination token to pass as input to API call
-  NoConnectorsAvailableException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: No connectors are available to handle this request. Please associate connector(s) and verify any existing connectors are healthy and can respond to requests.
-  OperationNotPermittedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The specified operation is not allowed. This error can occur for a number of reasons; for example, you might be trying to start a Replication Run before seed Replication Run.'
+  MaxResults:
+    type: integer
+    description: 'The maximum number of results to return in one API call. If left empty, this will default to 50.'
+  ReplicationJobList:
+    type: array
+    description: List of Replication Jobs
+    items:
+      $ref: '#/definitions/ReplicationJob'
   ReplicationJob:
     type: object
     properties:
@@ -866,26 +959,44 @@ definitions:
       replicationRunList:
         $ref: '#/definitions/ReplicationRunList'
     description: Object representing a Replication Job
-  ReplicationJobAlreadyExistsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: An active Replication Job already exists for the specified server.
-  ReplicationJobId:
-    type: string
-    description: The unique identifier for a Replication Job.
-  ReplicationJobList:
+  ReplicationRunList:
     type: array
-    description: List of Replication Jobs
+    description: List of Replication Runs
     items:
-      $ref: '#/definitions/ReplicationJob'
-  ReplicationJobNotFoundException:
+      $ref: '#/definitions/ReplicationRun'
+  ServerCatalogStatus:
+    type: string
+    enum:
+      - NOT_IMPORTED
+      - IMPORTING
+      - AVAILABLE
+      - DELETED
+      - EXPIRED
+    description: Status of Server catalog
+  ServerList:
+    type: array
+    description: List of servers from catalog
+    items:
+      $ref: '#/definitions/Server'
+  ServerType:
+    type: string
+    enum:
+      - VIRTUAL_MACHINE
+    description: Type of server.
+  VmServer:
     type: object
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified Replication Job cannot be found.
+      vmServerAddress:
+        $ref: '#/definitions/VmServerAddress'
+      vmName:
+        $ref: '#/definitions/VmName'
+      vmManagerName:
+        $ref: '#/definitions/VmManagerName'
+      vmManagerType:
+        $ref: '#/definitions/VmManagerType'
+      vmPath:
+        $ref: '#/definitions/VmPath'
+    description: Object representing a VM server
   ReplicationJobState:
     type: string
     enum:
@@ -901,6 +1012,29 @@ definitions:
   ReplicationJobTerminated:
     type: boolean
     description: An indicator of the Replication Job being deleted or failed.
+  ReplicationRunId:
+    type: string
+    description: The unique identifier for a Replication Run.
+  ReplicationRunState:
+    type: string
+    enum:
+      - PENDING
+      - MISSED
+      - ACTIVE
+      - FAILED
+      - COMPLETED
+      - DELETING
+      - DELETED
+    description: Current state of Replication Run
+  ReplicationRunType:
+    type: string
+    enum:
+      - ON_DEMAND
+      - AUTOMATIC
+    description: Type of Replication Run
+  ReplicationRunStatusMessage:
+    type: string
+    description: String describing current status of Replication Run
   ReplicationRun:
     type: object
     properties:
@@ -921,43 +1055,6 @@ definitions:
       description:
         $ref: '#/definitions/Description'
     description: Object representing a Replication Run
-  ReplicationRunId:
-    type: string
-    description: The unique identifier for a Replication Run.
-  ReplicationRunLimitExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: This user has exceeded the maximum allowed Replication Run limit.
-  ReplicationRunList:
-    type: array
-    description: List of Replication Runs
-    items:
-      $ref: '#/definitions/ReplicationRun'
-  ReplicationRunState:
-    type: string
-    enum:
-      - PENDING
-      - MISSED
-      - ACTIVE
-      - FAILED
-      - COMPLETED
-      - DELETING
-      - DELETED
-    description: Current state of Replication Run
-  ReplicationRunStatusMessage:
-    type: string
-    description: String describing current status of Replication Run
-  ReplicationRunType:
-    type: string
-    enum:
-      - ON_DEMAND
-      - AUTOMATIC
-    description: Type of Replication Run
-  RoleName:
-    type: string
-    description: Name of service role in customer's account to be used by SMS service.
   Server:
     type: object
     properties:
@@ -972,112 +1069,15 @@ definitions:
       replicationJobTerminated:
         $ref: '#/definitions/ReplicationJobTerminated'
     description: Object representing a server
-  ServerCannotBeReplicatedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The provided server cannot be replicated.
-  ServerCatalogStatus:
-    type: string
-    enum:
-      - NOT_IMPORTED
-      - IMPORTING
-      - AVAILABLE
-      - DELETED
-      - EXPIRED
-    description: Status of Server catalog
-  ServerId:
-    type: string
-    description: Unique Identifier for a server
-  ServerList:
-    type: array
-    description: List of servers from catalog
-    items:
-      $ref: '#/definitions/Server'
-  ServerType:
-    type: string
-    enum:
-      - VIRTUAL_MACHINE
-    description: Type of server.
-  StartOnDemandReplicationRunRequest:
-    type: object
-    required:
-      - replicationJobId
-    properties:
-      replicationJobId:
-        $ref: '#/definitions/ReplicationJobId'
-      description:
-        $ref: '#/definitions/Description'
-  StartOnDemandReplicationRunResponse:
-    type: object
-    properties:
-      replicationRunId:
-        $ref: '#/definitions/ReplicationRunId'
-  Timestamp:
-    type: string
-    description: Timestamp of an operation
-    format: date-time
-  UnauthorizedOperationException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: This user does not have permissions to perform this operation.
-  UpdateReplicationJobRequest:
-    type: object
-    required:
-      - replicationJobId
-    properties:
-      replicationJobId:
-        $ref: '#/definitions/ReplicationJobId'
-      frequency:
-        $ref: '#/definitions/Frequency'
-      nextReplicationRunStartTime:
-        $ref: '#/definitions/Timestamp'
-      licenseType:
-        $ref: '#/definitions/LicenseType'
-      roleName:
-        $ref: '#/definitions/RoleName'
-      description:
-        $ref: '#/definitions/Description'
-  UpdateReplicationJobResponse:
-    type: object
-    properties: {}
   VmId:
     type: string
     description: Unique Identifier for a VM
-  VmManagerId:
-    type: string
-    description: Unique Identifier for VM Manager
-  VmManagerName:
-    type: string
-    description: VM Manager Name
-  VmManagerType:
-    type: string
-    enum:
-      - VSPHERE
-    description: VM Management Product
   VmName:
     type: string
     description: Name of Virtual Machine
   VmPath:
     type: string
     description: Path to VM
-  VmServer:
-    type: object
-    properties:
-      vmServerAddress:
-        $ref: '#/definitions/VmServerAddress'
-      vmName:
-        $ref: '#/definitions/VmName'
-      vmManagerName:
-        $ref: '#/definitions/VmManagerName'
-      vmManagerType:
-        $ref: '#/definitions/VmManagerType'
-      vmPath:
-        $ref: '#/definitions/VmPath'
-    description: Object representing a VM server
   VmServerAddress:
     type: object
     properties:

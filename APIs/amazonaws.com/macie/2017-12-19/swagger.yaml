@@ -371,17 +371,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AWSAccountId:
-    type: string
-    pattern: '[0-9]{12}'
-  AccessDeniedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-    description: You do not have required permissions to access the requested resource.
   AssociateMemberAccountRequest:
     type: object
     required:
@@ -390,6 +379,40 @@ definitions:
       memberAccountId:
         $ref: '#/definitions/AWSAccountId'
         description: The ID of the AWS account that you want to associate with Amazon Macie as a member account.
+  InvalidInputException:
+    type: object
+    properties:
+      errorCode:
+        $ref: '#/definitions/ErrorCode'
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+      fieldName:
+        $ref: '#/definitions/FieldName'
+    description: 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter. '
+  LimitExceededException:
+    type: object
+    properties:
+      errorCode:
+        $ref: '#/definitions/ErrorCode'
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+    description: 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error code describes the limit exceeded. '
+  InternalException:
+    type: object
+    properties:
+      errorCode:
+        $ref: '#/definitions/ErrorCode'
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Internal server error.
+  AssociateS3ResourcesResult:
+    type: object
+    properties:
+      failedS3Resources:
+        $ref: '#/definitions/FailedS3Resources'
+        description: 'S3 resources that couldn''t be associated with Amazon Macie. An error code and an error message are provided for each failed item. '
   AssociateS3ResourcesRequest:
     type: object
     required:
@@ -401,15 +424,125 @@ definitions:
       s3Resources:
         $ref: '#/definitions/S3ResourcesClassification'
         description: 'The S3 resources that you want to associate with Amazon Macie for monitoring and data classification. '
-  AssociateS3ResourcesResult:
+  AccessDeniedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+    description: You do not have required permissions to access the requested resource.
+  DisassociateMemberAccountRequest:
+    type: object
+    required:
+      - memberAccountId
+    properties:
+      memberAccountId:
+        $ref: '#/definitions/AWSAccountId'
+        description: The ID of the member account that you want to remove from Amazon Macie.
+  DisassociateS3ResourcesResult:
     type: object
     properties:
       failedS3Resources:
         $ref: '#/definitions/FailedS3Resources'
-        description: 'S3 resources that couldn''t be associated with Amazon Macie. An error code and an error message are provided for each failed item. '
+        description: 'S3 resources that couldn''t be removed from being monitored and classified by Amazon Macie. An error code and an error message are provided for each failed item. '
+  DisassociateS3ResourcesRequest:
+    type: object
+    required:
+      - associatedS3Resources
+    properties:
+      memberAccountId:
+        $ref: '#/definitions/AWSAccountId'
+        description: 'The ID of the Amazon Macie member account whose resources you want to remove from being monitored by Amazon Macie. '
+      associatedS3Resources:
+        $ref: '#/definitions/S3Resources'
+        description: 'The S3 resources (buckets or prefixes) that you want to remove from being monitored and classified by Amazon Macie. '
+  ListMemberAccountsResult:
+    type: object
+    properties:
+      memberAccounts:
+        $ref: '#/definitions/MemberAccounts'
+        description: 'A list of the Amazon Macie member accounts returned by the action. The current master account is also included in this list. '
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null. '
+  ListMemberAccountsRequest:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'Use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListMemberAccounts action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. '
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'Use this parameter to indicate the maximum number of items that you want in the response. The default value is 250. '
+  ListS3ResourcesResult:
+    type: object
+    properties:
+      s3Resources:
+        $ref: '#/definitions/S3ResourcesClassification'
+        description: A list of the associated S3 resources returned by the action.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null. '
+  ListS3ResourcesRequest:
+    type: object
+    properties:
+      memberAccountId:
+        $ref: '#/definitions/AWSAccountId'
+        description: 'The Amazon Macie member account ID whose associated S3 resources you want to list. '
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'Use this parameter when paginating results. Set its value to null on your first call to the ListS3Resources action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. '
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'Use this parameter to indicate the maximum number of items that you want in the response. The default value is 250. '
+  UpdateS3ResourcesResult:
+    type: object
+    properties:
+      failedS3Resources:
+        $ref: '#/definitions/FailedS3Resources'
+        description: 'The S3 resources whose classification types can''t be updated. An error code and an error message are provided for each failed item. '
+  UpdateS3ResourcesRequest:
+    type: object
+    required:
+      - s3ResourcesUpdate
+    properties:
+      memberAccountId:
+        $ref: '#/definitions/AWSAccountId'
+        description: 'The AWS ID of the Amazon Macie member account whose S3 resources'' classification types you want to update. '
+      s3ResourcesUpdate:
+        $ref: '#/definitions/S3ResourcesClassificationUpdate'
+        description: The S3 resources whose classification types you want to update.
+  AWSAccountId:
+    type: string
+    pattern: '[0-9]{12}'
+  ExceptionMessage:
+    type: string
+    maxLength: 10000
+  ResourceType:
+    type: string
+    description: Resource type that caused the exception
+    maxLength: 1000
+  S3ResourcesClassification:
+    type: array
+    items:
+      $ref: '#/definitions/S3ResourceClassification'
+  FailedS3Resources:
+    type: array
+    items:
+      $ref: '#/definitions/FailedS3Resource'
   BucketName:
     type: string
     maxLength: 500
+  S3OneTimeClassificationType:
+    type: string
+    enum:
+      - FULL
+      - NONE
+  S3ContinuousClassificationType:
+    type: string
+    enum:
+      - FULL
   ClassificationType:
     type: object
     required:
@@ -433,38 +566,26 @@ definitions:
         $ref: '#/definitions/S3ContinuousClassificationType'
         description: 'A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie begins performing continuous classification after a bucket is successfully associated with Amazon Macie. '
     description: 'The classification type that Amazon Macie applies to the associated S3 resources. At least one of the classification types (oneTime or continuous) must be specified. '
-  DisassociateMemberAccountRequest:
-    type: object
-    required:
-      - memberAccountId
-    properties:
-      memberAccountId:
-        $ref: '#/definitions/AWSAccountId'
-        description: The ID of the member account that you want to remove from Amazon Macie.
-  DisassociateS3ResourcesRequest:
-    type: object
-    required:
-      - associatedS3Resources
-    properties:
-      memberAccountId:
-        $ref: '#/definitions/AWSAccountId'
-        description: 'The ID of the Amazon Macie member account whose resources you want to remove from being monitored by Amazon Macie. '
-      associatedS3Resources:
-        $ref: '#/definitions/S3Resources'
-        description: 'The S3 resources (buckets or prefixes) that you want to remove from being monitored and classified by Amazon Macie. '
-  DisassociateS3ResourcesResult:
-    type: object
-    properties:
-      failedS3Resources:
-        $ref: '#/definitions/FailedS3Resources'
-        description: 'S3 resources that couldn''t be removed from being monitored and classified by Amazon Macie. An error code and an error message are provided for each failed item. '
+  S3Resources:
+    type: array
+    items:
+      $ref: '#/definitions/S3Resource'
   ErrorCode:
     type: string
     description: Error code for the exception
     maxLength: 10
-  ExceptionMessage:
-    type: string
-    maxLength: 10000
+  S3Resource:
+    type: object
+    required:
+      - bucketName
+    properties:
+      bucketName:
+        $ref: '#/definitions/BucketName'
+        description: The name of the S3 bucket.
+      prefix:
+        $ref: '#/definitions/Prefix'
+        description: 'The prefix of the S3 bucket. '
+    description: 'Contains information about the S3 resource. This data type is used as a request parameter in the DisassociateS3Resources action and can be used as a response parameter in the AssociateS3Resources and UpdateS3Resources actions. '
   FailedS3Resource:
     type: object
     properties:
@@ -478,84 +599,20 @@ definitions:
         $ref: '#/definitions/ExceptionMessage'
         description: The error message of a failed item.
     description: Includes details about the failed S3 resources.
-  FailedS3Resources:
-    type: array
-    items:
-      $ref: '#/definitions/FailedS3Resource'
   FieldName:
     type: string
     description: Field that has invalid input
     maxLength: 1000
-  InternalException:
-    type: object
-    properties:
-      errorCode:
-        $ref: '#/definitions/ErrorCode'
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Internal server error.
-  InvalidInputException:
-    type: object
-    properties:
-      errorCode:
-        $ref: '#/definitions/ErrorCode'
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-      fieldName:
-        $ref: '#/definitions/FieldName'
-    description: 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter. '
-  LimitExceededException:
-    type: object
-    properties:
-      errorCode:
-        $ref: '#/definitions/ErrorCode'
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-    description: 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error code describes the limit exceeded. '
-  ListMemberAccountsRequest:
-    type: object
-    properties:
-      nextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'Use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListMemberAccounts action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. '
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'Use this parameter to indicate the maximum number of items that you want in the response. The default value is 250. '
-  ListMemberAccountsResult:
-    type: object
-    properties:
-      memberAccounts:
-        $ref: '#/definitions/MemberAccounts'
-        description: 'A list of the Amazon Macie member accounts returned by the action. The current master account is also included in this list. '
-      nextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null. '
-  ListS3ResourcesRequest:
-    type: object
-    properties:
-      memberAccountId:
-        $ref: '#/definitions/AWSAccountId'
-        description: 'The Amazon Macie member account ID whose associated S3 resources you want to list. '
-      nextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'Use this parameter when paginating results. Set its value to null on your first call to the ListS3Resources action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. '
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'Use this parameter to indicate the maximum number of items that you want in the response. The default value is 250. '
-  ListS3ResourcesResult:
-    type: object
-    properties:
-      s3Resources:
-        $ref: '#/definitions/S3ResourcesClassification'
-        description: A list of the associated S3 resources returned by the action.
-      nextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null. '
+  NextToken:
+    type: string
+    maxLength: 500
   MaxResults:
     type: integer
     maximum: 250
+  MemberAccounts:
+    type: array
+    items:
+      $ref: '#/definitions/MemberAccount'
   MemberAccount:
     type: object
     properties:
@@ -563,41 +620,9 @@ definitions:
         $ref: '#/definitions/AWSAccountId'
         description: The AWS account ID of the Amazon Macie member account.
     description: Contains information about the Amazon Macie member account.
-  MemberAccounts:
-    type: array
-    items:
-      $ref: '#/definitions/MemberAccount'
-  NextToken:
-    type: string
-    maxLength: 500
   Prefix:
     type: string
     maxLength: 10000
-  ResourceType:
-    type: string
-    description: Resource type that caused the exception
-    maxLength: 1000
-  S3ContinuousClassificationType:
-    type: string
-    enum:
-      - FULL
-  S3OneTimeClassificationType:
-    type: string
-    enum:
-      - FULL
-      - NONE
-  S3Resource:
-    type: object
-    required:
-      - bucketName
-    properties:
-      bucketName:
-        $ref: '#/definitions/BucketName'
-        description: The name of the S3 bucket.
-      prefix:
-        $ref: '#/definitions/Prefix'
-        description: 'The prefix of the S3 bucket. '
-    description: 'Contains information about the S3 resource. This data type is used as a request parameter in the DisassociateS3Resources action and can be used as a response parameter in the AssociateS3Resources and UpdateS3Resources actions. '
   S3ResourceClassification:
     type: object
     required:
@@ -630,32 +655,7 @@ definitions:
         $ref: '#/definitions/ClassificationTypeUpdate'
         description: 'The classification type that you want to update for the resource associated with Amazon Macie. '
     description: 'The S3 resources whose classification types you want to update. This data type is used as a request parameter in the UpdateS3Resources action. '
-  S3Resources:
-    type: array
-    items:
-      $ref: '#/definitions/S3Resource'
-  S3ResourcesClassification:
-    type: array
-    items:
-      $ref: '#/definitions/S3ResourceClassification'
   S3ResourcesClassificationUpdate:
     type: array
     items:
       $ref: '#/definitions/S3ResourceClassificationUpdate'
-  UpdateS3ResourcesRequest:
-    type: object
-    required:
-      - s3ResourcesUpdate
-    properties:
-      memberAccountId:
-        $ref: '#/definitions/AWSAccountId'
-        description: 'The AWS ID of the Amazon Macie member account whose S3 resources'' classification types you want to update. '
-      s3ResourcesUpdate:
-        $ref: '#/definitions/S3ResourcesClassificationUpdate'
-        description: The S3 resources whose classification types you want to update.
-  UpdateS3ResourcesResult:
-    type: object
-    properties:
-      failedS3Resources:
-        $ref: '#/definitions/FailedS3Resources'
-        description: 'The S3 resources whose classification types can''t be updated. An error code and an error message are provided for each failed item. '

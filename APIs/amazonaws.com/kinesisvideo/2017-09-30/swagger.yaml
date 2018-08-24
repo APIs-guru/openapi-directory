@@ -541,30 +541,12 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  APIName:
-    type: string
-    enum:
-      - PUT_MEDIA
-      - GET_MEDIA
-      - LIST_FRAGMENTS
-      - GET_MEDIA_FOR_FRAGMENT_LIST
-      - GET_HLS_STREAMING_SESSION_URL
-  AccountStreamLimitExceededException:
+  CreateStreamOutput:
     type: object
     properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The number of streams created for the account is too high.
-  ClientLimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Kinesis Video Streams has throttled the request because you have exceeded the limit of allowed client calls. Try making the call later.
-  ComparisonOperator:
-    type: string
-    enum:
-      - BEGINS_WITH
+      StreamARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) of the stream.
   CreateStreamInput:
     type: object
     required:
@@ -585,20 +567,45 @@ definitions:
       DataRetentionInHours:
         $ref: '#/definitions/DataRetentionInHours'
         description: '<p>The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream.</p> <p>The default value is 0, indicating that the stream does not persist data.</p> <p>When the <code>DataRetentionInHours</code> value is 0, consumers can still consume the fragments that remain in the service host buffer, which has a retention time limit of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the buffer when either limit is reached.</p>'
-  CreateStreamOutput:
+  AccountStreamLimitExceededException:
     type: object
     properties:
-      StreamARN:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the stream.
-  DataEndpoint:
-    type: string
-  DataRetentionChangeInHours:
-    type: integer
-    minimum: 1
-  DataRetentionInHours:
-    type: integer
-    minimum: 0
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The number of streams created for the account is too high.
+  DeviceStreamLimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Not implemented. '
+  ResourceInUseException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The stream is currently not available for this operation.
+  InvalidDeviceException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Not implemented.
+  InvalidArgumentException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The value for this input parameter is invalid.
+  ClientLimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Kinesis Video Streams has throttled the request because you have exceeded the limit of allowed client calls. Try making the call later.
+  DeleteStreamOutput:
+    type: object
+    properties: {}
   DeleteStreamInput:
     type: object
     required:
@@ -610,9 +617,24 @@ definitions:
       CurrentVersion:
         $ref: '#/definitions/Version'
         description: '<p>Optional: The version of the stream that you want to delete. </p> <p>Specify the version as a safeguard to ensure that your are deleting the correct stream. To get the stream version, use the <code>DescribeStream</code> API.</p> <p>If not specified, only the <code>CreationTime</code> is checked before deleting the stream.</p>'
-  DeleteStreamOutput:
+  ResourceNotFoundException:
     type: object
-    properties: {}
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Amazon Kinesis Video Streams can't find the stream that you specified.
+  NotAuthorizedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The caller is not authorized to perform this operation.
+  DescribeStreamOutput:
+    type: object
+    properties:
+      StreamInfo:
+        $ref: '#/definitions/StreamInfo'
+        description: An object that describes the stream.
   DescribeStreamInput:
     type: object
     properties:
@@ -622,25 +644,12 @@ definitions:
       StreamARN:
         $ref: '#/definitions/ResourceARN'
         description: The Amazon Resource Name (ARN) of the stream.
-  DescribeStreamOutput:
+  GetDataEndpointOutput:
     type: object
     properties:
-      StreamInfo:
-        $ref: '#/definitions/StreamInfo'
-        description: An object that describes the stream.
-  DeviceName:
-    type: string
-    pattern: '[a-zA-Z0-9_.-]+'
-    minLength: 1
-    maxLength: 128
-  DeviceStreamLimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Not implemented. '
-  ErrorMessage:
-    type: string
+      DataEndpoint:
+        $ref: '#/definitions/DataEndpoint'
+        description: 'The endpoint value. To read data from the stream or to write data to it, specify this endpoint in your application.'
   GetDataEndpointInput:
     type: object
     required:
@@ -655,34 +664,15 @@ definitions:
       APIName:
         $ref: '#/definitions/APIName'
         description: The name of the API action for which to get an endpoint.
-  GetDataEndpointOutput:
+  ListStreamsOutput:
     type: object
     properties:
-      DataEndpoint:
-        $ref: '#/definitions/DataEndpoint'
-        description: 'The endpoint value. To read data from the stream or to write data to it, specify this endpoint in your application.'
-  InvalidArgumentException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The value for this input parameter is invalid.
-  InvalidDeviceException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Not implemented.
-  InvalidResourceFormatException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The format of the <code>StreamARN</code> is invalid.
-  KmsKeyId:
-    type: string
-    minLength: 1
-    maxLength: 2048
+      StreamInfoList:
+        $ref: '#/definitions/StreamInfoList'
+        description: An array of <code>StreamInfo</code> objects.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the response is truncated, the call returns this element with a token. To get the next batch of streams, use this token in your next request. '
   ListStreamsInput:
     type: object
     properties:
@@ -695,19 +685,15 @@ definitions:
       StreamNameCondition:
         $ref: '#/definitions/StreamNameCondition'
         description: 'Optional: Returns only streams that satisfy a specific condition. Currently, you can specify only the prefix of a stream name as a condition. '
-  ListStreamsInputLimit:
-    type: integer
-    minimum: 1
-    maximum: 10000
-  ListStreamsOutput:
+  ListTagsForStreamOutput:
     type: object
     properties:
-      StreamInfoList:
-        $ref: '#/definitions/StreamInfoList'
-        description: An array of <code>StreamInfo</code> objects.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: 'If the response is truncated, the call returns this element with a token. To get the next batch of streams, use this token in your next request. '
+        description: 'If you specify this parameter and the result of a <code>ListTags</code> call is truncated, the response includes a token that you can use in the next request to fetch the next set of tags.'
+      Tags:
+        $ref: '#/definitions/ResourceTags'
+        description: A map of tag keys and values associated with the specified stream.
   ListTagsForStreamInput:
     type: object
     properties:
@@ -720,65 +706,157 @@ definitions:
       StreamName:
         $ref: '#/definitions/StreamName'
         description: The name of the stream that you want to list tags for.
-  ListTagsForStreamOutput:
+  InvalidResourceFormatException:
     type: object
     properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If you specify this parameter and the result of a <code>ListTags</code> call is truncated, the response includes a token that you can use in the next request to fetch the next set of tags.'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The format of the <code>StreamARN</code> is invalid.
+  TagStreamOutput:
+    type: object
+    properties: {}
+  TagStreamInput:
+    type: object
+    required:
+      - Tags
+    properties:
+      StreamARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) of the resource that you want to add the tag or tags to.
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the stream that you want to add the tag or tags to.
       Tags:
         $ref: '#/definitions/ResourceTags'
-        description: A map of tag keys and values associated with the specified stream.
+        description: A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
+  TagsPerResourceExceededLimitException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'You have exceeded the limit of tags that you can associate with the resource. Kinesis video streams support up to 50 tags. '
+  UntagStreamOutput:
+    type: object
+    properties: {}
+  UntagStreamInput:
+    type: object
+    required:
+      - TagKeyList
+    properties:
+      StreamARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) of the stream that you want to remove tags from.
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the stream that you want to remove tags from.
+      TagKeyList:
+        $ref: '#/definitions/TagKeyList'
+        description: A list of the keys of the tags that you want to remove.
+  UpdateDataRetentionOutput:
+    type: object
+    properties: {}
+  UpdateDataRetentionInput:
+    type: object
+    required:
+      - CurrentVersion
+      - Operation
+      - DataRetentionChangeInHours
+    properties:
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the stream whose retention period you want to change.
+      StreamARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) of the stream whose retention period you want to change.
+      CurrentVersion:
+        $ref: '#/definitions/Version'
+        description: 'The version of the stream whose retention period you want to change. To get the version, call either the <code>DescribeStream</code> or the <code>ListStreams</code> API.'
+      Operation:
+        $ref: '#/definitions/UpdateDataRetentionOperation'
+        description: Indicates whether you want to increase or decrease the retention period.
+      DataRetentionChangeInHours:
+        $ref: '#/definitions/DataRetentionChangeInHours'
+        description: 'The retention period, in hours. The value you specify replaces the current value.'
+  VersionMismatchException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The stream version that you specified is not the latest version. To get the latest version, use the <a href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_DescribeStream.html">DescribeStream</a> API.'
+  UpdateStreamOutput:
+    type: object
+    properties: {}
+  UpdateStreamInput:
+    type: object
+    required:
+      - CurrentVersion
+    properties:
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: '<p>The name of the stream whose metadata you want to update.</p> <p>The stream name is an identifier for the stream, and must be unique for each account and region.</p>'
+      StreamARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The ARN of the stream whose metadata you want to update.
+      CurrentVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the stream whose metadata you want to update.
+      DeviceName:
+        $ref: '#/definitions/DeviceName'
+        description: '<p>The name of the device that is writing to the stream. </p> <note> <p> In the current implementation, Kinesis Video Streams does not use this name. </p> </note>'
+      MediaType:
+        $ref: '#/definitions/MediaType'
+        description: '<p>The stream''s media type. Use <code>MediaType</code> to specify the type of content that the stream contains to the consumers of the stream. For more information about media types, see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>. If you choose to specify the <code>MediaType</code>, see <a href="https://tools.ietf.org/html/rfc6838#section-4.2">Naming Requirements</a>.</p> <p>To play video on the console, you must specify the correct video type. For example, if the video in the stream is H.264, specify <code>video/h264</code> as the <code>MediaType</code>.</p>'
+  APIName:
+    type: string
+    enum:
+      - PUT_MEDIA
+      - GET_MEDIA
+      - LIST_FRAGMENTS
+      - GET_MEDIA_FOR_FRAGMENT_LIST
+      - GET_HLS_STREAMING_SESSION_URL
+  ErrorMessage:
+    type: string
+  ComparisonOperator:
+    type: string
+    enum:
+      - BEGINS_WITH
+  DeviceName:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 128
+  StreamName:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 256
   MediaType:
     type: string
     pattern: '[\w\-\.\+]+/[\w\-\.\+]+'
     minLength: 1
     maxLength: 128
-  NextToken:
+  KmsKeyId:
     type: string
-    minLength: 0
-    maxLength: 512
-  NotAuthorizedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The caller is not authorized to perform this operation.
+    minLength: 1
+    maxLength: 2048
+  DataRetentionInHours:
+    type: integer
+    minimum: 0
   ResourceARN:
     type: string
     pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
     minLength: 1
     maxLength: 1024
-  ResourceInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The stream is currently not available for this operation.
-  ResourceNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Amazon Kinesis Video Streams can't find the stream that you specified.
-  ResourceTags:
-    type: array
-    minItems: 1
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
-  Status:
+  DataEndpoint:
     type: string
-    enum:
-      - CREATING
-      - ACTIVE
-      - UPDATING
-      - DELETING
+  DataRetentionChangeInHours:
+    type: integer
+    minimum: 1
+  Version:
+    type: string
+    pattern: '[a-zA-Z0-9]+'
+    minLength: 1
+    maxLength: 64
   StreamInfo:
     type: object
     properties:
@@ -810,15 +888,14 @@ definitions:
         $ref: '#/definitions/DataRetentionInHours'
         description: 'How long the stream retains data, in hours.'
     description: An object describing a Kinesis video stream.
-  StreamInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/StreamInfo'
-  StreamName:
+  ListStreamsInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  NextToken:
     type: string
-    pattern: '[a-zA-Z0-9_.-]+'
-    minLength: 1
-    maxLength: 256
+    minLength: 0
+    maxLength: 512
   StreamNameCondition:
     type: object
     properties:
@@ -829,124 +906,47 @@ definitions:
         $ref: '#/definitions/StreamName'
         description: A value to compare.
     description: 'Specifies the condition that streams must satisfy to be returned when you list streams (see the <code>ListStreams</code> API). A condition has a comparison operation and a value. Currently, you can specify only the <code>BEGINS_WITH</code> operator, which finds streams whose names start with a given prefix. '
+  StreamInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/StreamInfo'
+  ResourceTags:
+    type: array
+    minItems: 1
+    maxItems: 50
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
   TagKey:
     type: string
     minLength: 1
     maxLength: 128
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Status:
+    type: string
+    enum:
+      - CREATING
+      - ACTIVE
+      - UPDATING
+      - DELETING
+  Timestamp:
+    type: string
+    format: date-time
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
     minItems: 1
     maxItems: 50
-  TagStreamInput:
-    type: object
-    required:
-      - Tags
-    properties:
-      StreamARN:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the resource that you want to add the tag or tags to.
-      StreamName:
-        $ref: '#/definitions/StreamName'
-        description: The name of the stream that you want to add the tag or tags to.
-      Tags:
-        $ref: '#/definitions/ResourceTags'
-        description: A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
-  TagStreamOutput:
-    type: object
-    properties: {}
-  TagValue:
-    type: string
-    minLength: 0
-    maxLength: 256
-  TagsPerResourceExceededLimitException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'You have exceeded the limit of tags that you can associate with the resource. Kinesis video streams support up to 50 tags. '
-  Timestamp:
-    type: string
-    format: date-time
-  UntagStreamInput:
-    type: object
-    required:
-      - TagKeyList
-    properties:
-      StreamARN:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the stream that you want to remove tags from.
-      StreamName:
-        $ref: '#/definitions/StreamName'
-        description: The name of the stream that you want to remove tags from.
-      TagKeyList:
-        $ref: '#/definitions/TagKeyList'
-        description: A list of the keys of the tags that you want to remove.
-  UntagStreamOutput:
-    type: object
-    properties: {}
-  UpdateDataRetentionInput:
-    type: object
-    required:
-      - CurrentVersion
-      - Operation
-      - DataRetentionChangeInHours
-    properties:
-      StreamName:
-        $ref: '#/definitions/StreamName'
-        description: The name of the stream whose retention period you want to change.
-      StreamARN:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the stream whose retention period you want to change.
-      CurrentVersion:
-        $ref: '#/definitions/Version'
-        description: 'The version of the stream whose retention period you want to change. To get the version, call either the <code>DescribeStream</code> or the <code>ListStreams</code> API.'
-      Operation:
-        $ref: '#/definitions/UpdateDataRetentionOperation'
-        description: Indicates whether you want to increase or decrease the retention period.
-      DataRetentionChangeInHours:
-        $ref: '#/definitions/DataRetentionChangeInHours'
-        description: 'The retention period, in hours. The value you specify replaces the current value.'
   UpdateDataRetentionOperation:
     type: string
     enum:
       - INCREASE_DATA_RETENTION
       - DECREASE_DATA_RETENTION
-  UpdateDataRetentionOutput:
-    type: object
-    properties: {}
-  UpdateStreamInput:
-    type: object
-    required:
-      - CurrentVersion
-    properties:
-      StreamName:
-        $ref: '#/definitions/StreamName'
-        description: '<p>The name of the stream whose metadata you want to update.</p> <p>The stream name is an identifier for the stream, and must be unique for each account and region.</p>'
-      StreamARN:
-        $ref: '#/definitions/ResourceARN'
-        description: The ARN of the stream whose metadata you want to update.
-      CurrentVersion:
-        $ref: '#/definitions/Version'
-        description: The version of the stream whose metadata you want to update.
-      DeviceName:
-        $ref: '#/definitions/DeviceName'
-        description: '<p>The name of the device that is writing to the stream. </p> <note> <p> In the current implementation, Kinesis Video Streams does not use this name. </p> </note>'
-      MediaType:
-        $ref: '#/definitions/MediaType'
-        description: '<p>The stream''s media type. Use <code>MediaType</code> to specify the type of content that the stream contains to the consumers of the stream. For more information about media types, see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>. If you choose to specify the <code>MediaType</code>, see <a href="https://tools.ietf.org/html/rfc6838#section-4.2">Naming Requirements</a>.</p> <p>To play video on the console, you must specify the correct video type. For example, if the video in the stream is H.264, specify <code>video/h264</code> as the <code>MediaType</code>.</p>'
-  UpdateStreamOutput:
-    type: object
-    properties: {}
-  Version:
-    type: string
-    pattern: '[a-zA-Z0-9]+'
-    minLength: 1
-    maxLength: 64
-  VersionMismatchException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The stream version that you specified is not the latest version. To get the latest version, use the <a href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_DescribeStream.html">DescribeStream</a> API.'

@@ -218,7 +218,7 @@ paths:
   '/#CreateModel':
     post:
       operationId: CreateModel
-      description: '<p>Creates a model in Amazon SageMaker. In the request, you name the model and describe one or more containers. For each container, you specify the docker image containing inference code, artifacts (from prior training), and custom environment map that the inference code uses when you deploy the model into production. </p> <p>Use this API to create a model only if you want to use Amazon SageMaker hosting services. To host your model, you create an endpoint configuration with the <code>CreateEndpointConfig</code> API, and then create an endpoint with the <code>CreateEndpoint</code> API. </p> <p>Amazon SageMaker then deploys all of the containers that you defined for the model in the hosting environment. </p> <p>In the <code>CreateModel</code> request, you must define a container with the <code>PrimaryContainer</code> parameter. </p> <p>In the request, you also provide an IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other AWS resources, you grant necessary permissions via this role.</p>'
+      description: '<p>Creates a model in Amazon SageMaker. In the request, you name the model and describe a primary container. For the primary container, you specify the docker image containing inference code, artifacts (from prior training), and custom environment map that the inference code uses when you deploy the model for predictions.</p> <p>Use this API to create a model if you want to use Amazon SageMaker hosting services or run a batch transform job.</p> <p>To host your model, you create an endpoint configuration with the <code>CreateEndpointConfig</code> API, and then create an endpoint with the <code>CreateEndpoint</code> API. Amazon SageMaker then deploys all of the containers that you defined for the model in the hosting environment. </p> <p>To run a batch transform using your model, you start a job with the <code>CreateTransformJob</code> API. Amazon SageMaker uses your model and your dataset to get inferences which are then saved to a specified S3 location.</p> <p>In the <code>CreateModel</code> request, you must define a container with the <code>PrimaryContainer</code> parameter.</p> <p>In the request, you also provide an IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances or for batch transform jobs. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other AWS resources, you grant necessary permissions via this role.</p>'
       responses:
         '200':
           description: Success
@@ -363,7 +363,7 @@ paths:
   '/#CreateTransformJob':
     post:
       operationId: CreateTransformJob
-      description: '<p>Starts a transform job. A transform job uses a trained model to get inferences on a dataset and saves these results to an Amazon S3 location that you specify.</p> <p>To perform batch transformations, you create a transform job and use the data that you have readily available.</p> <p>In the request body, you provide the following:</p> <ul> <li> <p> <code>TransformJobName</code> - Identifies the transform job. The name must be unique within an AWS Region in an AWS account.</p> </li> <li> <p> <code>ModelName</code> - Identifies the model to use. <code>ModelName</code> must be the name of an existing Amazon SageMaker model within an AWS Region in an AWS account.</p> </li> <li> <p> <code>TransformInput</code> - Describes the dataset to be transformed and the Amazon S3 location where it is stored.</p> </li> <li> <p> <code>TransformOutput</code> - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.</p> </li> <li> <p> <code>TransformResources</code> - Identifies the ML compute instances for the transform job.</p> </li> </ul> <p> For more information about how batch transformation works Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html">How It Works</a>. </p>'
+      description: '<p>Starts a transform job. A transform job uses a trained model to get inferences on a dataset and saves these results to an Amazon S3 location that you specify.</p> <p>To perform batch transformations, you create a transform job and use the data that you have readily available.</p> <p>In the request body, you provide the following:</p> <ul> <li> <p> <code>TransformJobName</code> - Identifies the transform job. The name must be unique within an AWS Region in an AWS account.</p> </li> <li> <p> <code>ModelName</code> - Identifies the model to use. <code>ModelName</code> must be the name of an existing Amazon SageMaker model in the same AWS Region and AWS account. For information on creating a model, see <a>CreateModel</a>.</p> </li> <li> <p> <code>TransformInput</code> - Describes the dataset to be transformed and the Amazon S3 location where it is stored.</p> </li> <li> <p> <code>TransformOutput</code> - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.</p> </li> <li> <p> <code>TransformResources</code> - Identifies the ML compute instances for the transform job.</p> </li> </ul> <p> For more information about how batch transformation works Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html">How It Works</a>. </p>'
       responses:
         '200':
           description: Success
@@ -1430,9 +1430,12 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  Accept:
-    type: string
-    maxLength: 256
+  AddTagsOutput:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: A list of tags associated with the Amazon SageMaker resource.
   AddTagsInput:
     type: object
     required:
@@ -1445,137 +1448,38 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: 'An array of <code>Tag</code> objects. Each tag is a key-value pair. Only the <code>key</code> parameter is required. If you don''t specify a value, Amazon SageMaker sets the value to an empty string. '
-  AddTagsOutput:
+  CreateEndpointOutput:
     type: object
+    required:
+      - EndpointArn
     properties:
+      EndpointArn:
+        $ref: '#/definitions/EndpointArn'
+        description: The Amazon Resource Name (ARN) of the endpoint.
+  CreateEndpointInput:
+    type: object
+    required:
+      - EndpointName
+      - EndpointConfigName
+    properties:
+      EndpointName:
+        $ref: '#/definitions/EndpointName'
+        description: The name of the endpoint. The name must be unique within an AWS Region in your AWS account.
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: 'The name of an endpoint configuration. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html">CreateEndpointConfig</a>. '
       Tags:
         $ref: '#/definitions/TagList'
-        description: A list of tags associated with the Amazon SageMaker resource.
-  AlgorithmImage:
-    type: string
-    maxLength: 255
-  AlgorithmSpecification:
+        description: 'An array of key-value pairs. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a>in the <i>AWS Billing and Cost Management User Guide</i>. '
+  ResourceLimitExceeded: {}
+  CreateEndpointConfigOutput:
     type: object
     required:
-      - TrainingImage
-      - TrainingInputMode
+      - EndpointConfigArn
     properties:
-      TrainingImage:
-        $ref: '#/definitions/AlgorithmImage'
-        description: 'The registry path of the Docker image that contains the training algorithm. For information about docker registry paths for built-in algorithms, see <a>sagemaker-algo-docker-registry-paths</a>.'
-      TrainingInputMode:
-        $ref: '#/definitions/TrainingInputMode'
-        description: '<p>The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. If an algorithm supports the <code>File</code> input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the <code>Pipe</code> input mode, Amazon SageMaker streams data directly from S3 to the container. </p> <p> In File mode, make sure you provision ML storage volume with sufficient capacity to accommodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any. </p> <p> For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won''t be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. </p>'
-    description: '<p>Specifies the training algorithm to use in a <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html">CreateTrainingJob</a> request.</p> <p>For more information about algorithms provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. For information about using your own algorithms, see <a>your-algorithms</a>. </p>'
-  AssemblyType:
-    type: string
-    enum:
-      - None
-      - Line
-  BatchStrategy:
-    type: string
-    enum:
-      - MultiRecord
-      - SingleRecord
-  CategoricalParameterRange:
-    type: object
-    required:
-      - Name
-      - Values
-    properties:
-      Name:
-        $ref: '#/definitions/ParameterKey'
-        description: The name of the categorical hyperparameter to tune.
-      Values:
-        $ref: '#/definitions/ParameterValues'
-        description: A list of the categories for the hyperparameter.
-    description: A list of categorical hyperparameters to tune.
-  CategoricalParameterRanges:
-    type: array
-    items:
-      $ref: '#/definitions/CategoricalParameterRange'
-    minItems: 0
-    maxItems: 20
-  Channel:
-    type: object
-    required:
-      - ChannelName
-      - DataSource
-    properties:
-      ChannelName:
-        $ref: '#/definitions/ChannelName'
-        description: 'The name of the channel. '
-      DataSource:
-        $ref: '#/definitions/DataSource'
-        description: The location of the channel data.
-      ContentType:
-        $ref: '#/definitions/ContentType'
-        description: The MIME type of the data.
-      CompressionType:
-        $ref: '#/definitions/CompressionType'
-        description: 'If training data is compressed, the compression type. The default value is <code>None</code>. <code>CompressionType</code> is used only in Pipe input mode. In File mode, leave this field unset or set it to None.'
-      RecordWrapperType:
-        $ref: '#/definitions/RecordWrapper'
-        description: '<p/> <p>Specify RecordIO as the value when input data is in raw format but the training algorithm requires the RecordIO format, in which case, Amazon SageMaker wraps each individual S3 object in a RecordIO record. If the input data is already in RecordIO format, you don''t need to set this attribute. For more information, see <a href="https://mxnet.incubator.apache.org/how_to/recordio.html?highlight=im2rec">Create a Dataset Using RecordIO</a>. </p> <p>In FILE mode, leave this field unset or set it to None.</p> <p/>'
-    description: 'A channel is a named input source that training algorithms can consume. '
-  ChannelName:
-    type: string
-    pattern: '[A-Za-z0-9\.\-_]+'
-    minLength: 1
-    maxLength: 64
-  CompressionType:
-    type: string
-    enum:
-      - None
-      - Gzip
-  ContainerDefinition:
-    type: object
-    required:
-      - Image
-    properties:
-      ContainerHostname:
-        $ref: '#/definitions/ContainerHostname'
-        description: The DNS host name for the container after Amazon SageMaker deploys it.
-      Image:
-        $ref: '#/definitions/Image'
-        description: 'The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. Amazon SageMaker supports both <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code> image path formats. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html">Using Your Own Algorithms with Amazon SageMaker</a> '
-      ModelDataUrl:
-        $ref: '#/definitions/Url'
-        description: '<p>The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). </p> <p>If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and Deactivating AWS STS i an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>'
-      Environment:
-        $ref: '#/definitions/EnvironmentMap'
-        description: 'The environment variables to set in the Docker container. Each key and value in the <code>Environment</code> string to string map can have length of up to 1024. We support up to 16 entries in the map. '
-    description: 'Describes the container, as part of model definition.'
-  ContainerHostname:
-    type: string
-    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
-    maxLength: 63
-  ContentType:
-    type: string
-    maxLength: 256
-  ContinuousParameterRange:
-    type: object
-    required:
-      - Name
-      - MinValue
-      - MaxValue
-    properties:
-      Name:
-        $ref: '#/definitions/ParameterKey'
-        description: The name of the continuous hyperparameter to tune.
-      MinValue:
-        $ref: '#/definitions/ParameterValue'
-        description: The minimum value for the hyperparameter. The tuning job uses floating-point values between this value and <code>MaxValue</code>for tuning.
-      MaxValue:
-        $ref: '#/definitions/ParameterValue'
-        description: The maximum value for the hyperparameter. The tuning job uses floating-point values between <code>MinValue</code> value and this value for tuning.
-    description: A list of continuous hyperparameters to tune.
-  ContinuousParameterRanges:
-    type: array
-    items:
-      $ref: '#/definitions/ContinuousParameterRange'
-    minItems: 0
-    maxItems: 20
+      EndpointConfigArn:
+        $ref: '#/definitions/EndpointConfigArn'
+        description: 'The Amazon Resource Name (ARN) of the endpoint configuration. '
   CreateEndpointConfigInput:
     type: object
     required:
@@ -1594,37 +1498,14 @@ definitions:
       KmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
-  CreateEndpointConfigOutput:
+  CreateHyperParameterTuningJobResponse:
     type: object
     required:
-      - EndpointConfigArn
+      - HyperParameterTuningJobArn
     properties:
-      EndpointConfigArn:
-        $ref: '#/definitions/EndpointConfigArn'
-        description: 'The Amazon Resource Name (ARN) of the endpoint configuration. '
-  CreateEndpointInput:
-    type: object
-    required:
-      - EndpointName
-      - EndpointConfigName
-    properties:
-      EndpointName:
-        $ref: '#/definitions/EndpointName'
-        description: The name of the endpoint. The name must be unique within an AWS Region in your AWS account.
-      EndpointConfigName:
-        $ref: '#/definitions/EndpointConfigName'
-        description: 'The name of an endpoint configuration. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html">CreateEndpointConfig</a>. '
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: 'An array of key-value pairs. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a>in the <i>AWS Billing and Cost Management User Guide</i>. '
-  CreateEndpointOutput:
-    type: object
-    required:
-      - EndpointArn
-    properties:
-      EndpointArn:
-        $ref: '#/definitions/EndpointArn'
-        description: The Amazon Resource Name (ARN) of the endpoint.
+      HyperParameterTuningJobArn:
+        $ref: '#/definitions/HyperParameterTuningJobArn'
+        description: The Amazon Resource Name (ARN) of the tuning job.
   CreateHyperParameterTuningJobRequest:
     type: object
     required:
@@ -1644,14 +1525,15 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: 'An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href="http://docs.aws.amazon.com//awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.'
-  CreateHyperParameterTuningJobResponse:
+  ResourceInUse: {}
+  CreateModelOutput:
     type: object
     required:
-      - HyperParameterTuningJobArn
+      - ModelArn
     properties:
-      HyperParameterTuningJobArn:
-        $ref: '#/definitions/HyperParameterTuningJobArn'
-        description: The Amazon Resource Name (ARN) of the tuning job.
+      ModelArn:
+        $ref: '#/definitions/ModelArn'
+        description: The ARN of the model created in Amazon SageMaker.
   CreateModelInput:
     type: object
     required:
@@ -1664,24 +1546,22 @@ definitions:
         description: The name of the new model.
       PrimaryContainer:
         $ref: '#/definitions/ContainerDefinition'
-        description: 'The location of the primary docker image containing inference code, associated artifacts, and custom environment map that the inference code uses when the model is deployed into production. '
+        description: 'The location of the primary docker image containing inference code, associated artifacts, and custom environment map that the inference code uses when the model is deployed for predictions. '
       ExecutionRoleArn:
         $ref: '#/definitions/RoleArn'
-        description: '<p>The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute instances. Deploying on ML compute instances is part of model hosting. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. </p> <note> <p>To be able to pass this role to Amazon SageMaker, the caller of this API must have the <code>iam:PassRole</code> permission.</p> </note>'
+        description: '<p>The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute instances or for batch transform jobs. Deploying on ML compute instances is part of model hosting. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. </p> <note> <p>To be able to pass this role to Amazon SageMaker, the caller of this API must have the <code>iam:PassRole</code> permission.</p> </note>'
       Tags:
         $ref: '#/definitions/TagList'
         description: 'An array of key-value pairs. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. '
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
-        description: 'A <a>VpcConfig</a> object that specifies the VPC that you want your model to connect to. Control access to and from your model container by configuring the VPC. For more information, see <a>host-vpc</a>.'
-  CreateModelOutput:
+        description: 'A <a>VpcConfig</a> object that specifies the VPC that you want your model to connect to. Control access to and from your model container by configuring the VPC. <code>VpcConfig</code> is currently used in hosting services but not in batch transform. For more information, see <a>host-vpc</a>.'
+  CreateNotebookInstanceOutput:
     type: object
-    required:
-      - ModelArn
     properties:
-      ModelArn:
-        $ref: '#/definitions/ModelArn'
-        description: The ARN of the model created in Amazon SageMaker.
+      NotebookInstanceArn:
+        $ref: '#/definitions/NotebookInstanceArn'
+        description: 'The Amazon Resource Name (ARN) of the notebook instance. '
   CreateNotebookInstanceInput:
     type: object
     required:
@@ -1716,6 +1596,12 @@ definitions:
       DirectInternetAccess:
         $ref: '#/definitions/DirectInternetAccess'
         description: '<p>Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this to <code>Disabled</code> this notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC.</p> <p>For more information, see <a>appendix-notebook-and-internet-access</a>. You can set the value of this parameter to <code>Disabled</code> only if you set a value for the <code>SubnetId</code> parameter.</p>'
+  CreateNotebookInstanceLifecycleConfigOutput:
+    type: object
+    properties:
+      NotebookInstanceLifecycleConfigArn:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigArn'
+        description: The Amazon Resource Name (ARN) of the lifecycle configuration.
   CreateNotebookInstanceLifecycleConfigInput:
     type: object
     required:
@@ -1730,18 +1616,12 @@ definitions:
       OnStart:
         $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
         description: 'A shell script that runs every time you start a notebook instance, including when you create the notebook instance.'
-  CreateNotebookInstanceLifecycleConfigOutput:
+  CreatePresignedNotebookInstanceUrlOutput:
     type: object
     properties:
-      NotebookInstanceLifecycleConfigArn:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigArn'
-        description: The Amazon Resource Name (ARN) of the lifecycle configuration.
-  CreateNotebookInstanceOutput:
-    type: object
-    properties:
-      NotebookInstanceArn:
-        $ref: '#/definitions/NotebookInstanceArn'
-        description: 'The Amazon Resource Name (ARN) of the notebook instance. '
+      AuthorizedUrl:
+        $ref: '#/definitions/NotebookInstanceUrl'
+        description: 'A JSON object that contains the URL string. '
   CreatePresignedNotebookInstanceUrlInput:
     type: object
     required:
@@ -1753,12 +1633,14 @@ definitions:
       SessionExpirationDurationInSeconds:
         $ref: '#/definitions/SessionExpirationDurationInSeconds'
         description: 'The duration of the session, in seconds. The default is 12 hours.'
-  CreatePresignedNotebookInstanceUrlOutput:
+  CreateTrainingJobResponse:
     type: object
+    required:
+      - TrainingJobArn
     properties:
-      AuthorizedUrl:
-        $ref: '#/definitions/NotebookInstanceUrl'
-        description: 'A JSON object that contains the URL string. '
+      TrainingJobArn:
+        $ref: '#/definitions/TrainingJobArn'
+        description: The Amazon Resource Name (ARN) of the training job.
   CreateTrainingJobRequest:
     type: object
     required:
@@ -1800,14 +1682,14 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: 'An array of key-value pairs. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. '
-  CreateTrainingJobResponse:
+  CreateTransformJobResponse:
     type: object
     required:
-      - TrainingJobArn
+      - TransformJobArn
     properties:
-      TrainingJobArn:
-        $ref: '#/definitions/TrainingJobArn'
-        description: The Amazon Resource Name (ARN) of the training job.
+      TransformJobArn:
+        $ref: '#/definitions/TransformJobArn'
+        description: The Amazon Resource Name (ARN) of the transform job.
   CreateTransformJobRequest:
     type: object
     required:
@@ -1831,7 +1713,7 @@ definitions:
         description: 'The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata). The value in <code>MaxPayloadInMB</code> must be greater or equal to the size of a single record. You can approximate the size of a record by dividing the size of your dataset by the number of records. Then multiply this value by the number of records you want in a mini-batch. It is recommended to enter a value slightly larger than this to ensure the records fit within the maximum payload size. The default value is <code>6</code> MB. For an unlimited payload size, set the value to <code>0</code>.'
       BatchStrategy:
         $ref: '#/definitions/BatchStrategy'
-        description: Determines the number of records included in a single mini-batch. <code>SingleRecord</code> means only one record is used per mini-batch. <code>MultiRecord</code> means a mini-batch is set to contain as many records that can fit within the <code>MaxPayloadInMB</code> limit.
+        description: <p>Determines the number of records included in a single mini-batch. <code>SingleRecord</code> means only one record is used per mini-batch. <code>MultiRecord</code> means a mini-batch is set to contain as many records that can fit within the <code>MaxPayloadInMB</code> limit.</p> <p>Batch transform will automatically split your input data into whatever payload size is specified if you set <code>SplitType</code> to <code>Line</code> and <code>BatchStrategy</code> to <code>MultiRecord</code>. There's no need to split the dataset into smaller files or to use larger payload sizes unless the records in your dataset are very large.</p>
       Environment:
         $ref: '#/definitions/TransformEnvironmentMap'
         description: The environment variables to set in the Docker container. We support up to 16 key and values entries in the map.
@@ -1847,34 +1729,6 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: 'An array of key-value pairs. Adding tags is optional. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.'
-  CreateTransformJobResponse:
-    type: object
-    required:
-      - TransformJobArn
-    properties:
-      TransformJobArn:
-        $ref: '#/definitions/TransformJobArn'
-        description: The Amazon Resource Name (ARN) of the transform job.
-  CreationTime:
-    type: string
-    format: date-time
-  DataSource:
-    type: object
-    required:
-      - S3DataSource
-    properties:
-      S3DataSource:
-        $ref: '#/definitions/S3DataSource'
-        description: The S3 location of the data source that is associated with a channel.
-    description: Describes the location of the channel data.
-  DeleteEndpointConfigInput:
-    type: object
-    required:
-      - EndpointConfigName
-    properties:
-      EndpointConfigName:
-        $ref: '#/definitions/EndpointConfigName'
-        description: The name of the endpoint configuration that you want to delete.
   DeleteEndpointInput:
     type: object
     required:
@@ -1883,6 +1737,14 @@ definitions:
       EndpointName:
         $ref: '#/definitions/EndpointName'
         description: The name of the endpoint that you want to delete.
+  DeleteEndpointConfigInput:
+    type: object
+    required:
+      - EndpointConfigName
+    properties:
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: The name of the endpoint configuration that you want to delete.
   DeleteModelInput:
     type: object
     required:
@@ -1907,6 +1769,9 @@ definitions:
       NotebookInstanceLifecycleConfigName:
         $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
         description: The name of the lifecycle configuration to delete.
+  DeleteTagsOutput:
+    type: object
+    properties: {}
   DeleteTagsInput:
     type: object
     required:
@@ -1919,65 +1784,6 @@ definitions:
       TagKeys:
         $ref: '#/definitions/TagKeyList'
         description: An array or one or more tag keys to delete.
-  DeleteTagsOutput:
-    type: object
-    properties: {}
-  DeployedImage:
-    type: object
-    properties:
-      SpecifiedImage:
-        $ref: '#/definitions/Image'
-        description: The image path you specified when you created the model.
-      ResolvedImage:
-        $ref: '#/definitions/Image'
-        description: The specific digest path of the image hosted in this <code>ProductionVariant</code>.
-      ResolutionTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time when the image path for the model resolved to the <code>ResolvedImage</code> '
-    description: '<p>Gets the Amazon EC2 Container Registry path of the docker image of the model that is hosted in this <a>ProductionVariant</a>.</p> <p>If you used the <code>registry/repository[:tag]</code> form to to specify the image path of the primary container when you created the model hosted in this <code>ProductionVariant</code>, the path resolves to a path of the form <code>registry/repository[@digest]</code>. A digest is a hash value that identifies a specific version of an image. For information about Amazon ECR paths, see <a href="http://docs.aws.amazon.com//AmazonECR/latest/userguide/docker-pull-ecr-image.html">Pulling an Image</a> in the <i>Amazon ECR User Guide</i>.</p>'
-  DeployedImages:
-    type: array
-    items:
-      $ref: '#/definitions/DeployedImage'
-  DescribeEndpointConfigInput:
-    type: object
-    required:
-      - EndpointConfigName
-    properties:
-      EndpointConfigName:
-        $ref: '#/definitions/EndpointConfigName'
-        description: The name of the endpoint configuration.
-  DescribeEndpointConfigOutput:
-    type: object
-    required:
-      - EndpointConfigName
-      - EndpointConfigArn
-      - ProductionVariants
-      - CreationTime
-    properties:
-      EndpointConfigName:
-        $ref: '#/definitions/EndpointConfigName'
-        description: Name of the Amazon SageMaker endpoint configuration.
-      EndpointConfigArn:
-        $ref: '#/definitions/EndpointConfigArn'
-        description: The Amazon Resource Name (ARN) of the endpoint configuration.
-      ProductionVariants:
-        $ref: '#/definitions/ProductionVariantList'
-        description: 'An array of <code>ProductionVariant</code> objects, one for each model that you want to host at this endpoint.'
-      KmsKeyId:
-        $ref: '#/definitions/KmsKeyId'
-        description: AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage volume attached to the instance.
-      CreationTime:
-        $ref: '#/definitions/Timestamp'
-        description: A timestamp that shows when the endpoint configuration was created.
-  DescribeEndpointInput:
-    type: object
-    required:
-      - EndpointName
-    properties:
-      EndpointName:
-        $ref: '#/definitions/EndpointName'
-        description: The name of the endpoint.
   DescribeEndpointOutput:
     type: object
     required:
@@ -2012,14 +1818,45 @@ definitions:
       LastModifiedTime:
         $ref: '#/definitions/Timestamp'
         description: A timestamp that shows when the endpoint was last modified.
-  DescribeHyperParameterTuningJobRequest:
+  DescribeEndpointInput:
     type: object
     required:
-      - HyperParameterTuningJobName
+      - EndpointName
     properties:
-      HyperParameterTuningJobName:
-        $ref: '#/definitions/HyperParameterTuningJobName'
-        description: The name of the tuning job to describe.
+      EndpointName:
+        $ref: '#/definitions/EndpointName'
+        description: The name of the endpoint.
+  DescribeEndpointConfigOutput:
+    type: object
+    required:
+      - EndpointConfigName
+      - EndpointConfigArn
+      - ProductionVariants
+      - CreationTime
+    properties:
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: Name of the Amazon SageMaker endpoint configuration.
+      EndpointConfigArn:
+        $ref: '#/definitions/EndpointConfigArn'
+        description: The Amazon Resource Name (ARN) of the endpoint configuration.
+      ProductionVariants:
+        $ref: '#/definitions/ProductionVariantList'
+        description: 'An array of <code>ProductionVariant</code> objects, one for each model that you want to host at this endpoint.'
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage volume attached to the instance.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the endpoint configuration was created.
+  DescribeEndpointConfigInput:
+    type: object
+    required:
+      - EndpointConfigName
+    properties:
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: The name of the endpoint configuration.
   DescribeHyperParameterTuningJobResponse:
     type: object
     required:
@@ -2068,14 +1905,15 @@ definitions:
       FailureReason:
         $ref: '#/definitions/FailureReason'
         description: 'If the tuning job failed, the reason it failed.'
-  DescribeModelInput:
+  DescribeHyperParameterTuningJobRequest:
     type: object
     required:
-      - ModelName
+      - HyperParameterTuningJobName
     properties:
-      ModelName:
-        $ref: '#/definitions/ModelName'
-        description: The name of the model.
+      HyperParameterTuningJobName:
+        $ref: '#/definitions/HyperParameterTuningJobName'
+        description: The name of the tuning job to describe.
+  ResourceNotFound: {}
   DescribeModelOutput:
     type: object
     required:
@@ -2103,43 +1941,14 @@ definitions:
       ModelArn:
         $ref: '#/definitions/ModelArn'
         description: The Amazon Resource Name (ARN) of the model.
-  DescribeNotebookInstanceInput:
+  DescribeModelInput:
     type: object
     required:
-      - NotebookInstanceName
+      - ModelName
     properties:
-      NotebookInstanceName:
-        $ref: '#/definitions/NotebookInstanceName'
-        description: The name of the notebook instance that you want information about.
-  DescribeNotebookInstanceLifecycleConfigInput:
-    type: object
-    required:
-      - NotebookInstanceLifecycleConfigName
-    properties:
-      NotebookInstanceLifecycleConfigName:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
-        description: The name of the lifecycle configuration to describe.
-  DescribeNotebookInstanceLifecycleConfigOutput:
-    type: object
-    properties:
-      NotebookInstanceLifecycleConfigArn:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigArn'
-        description: The Amazon Resource Name (ARN) of the lifecycle configuration.
-      NotebookInstanceLifecycleConfigName:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
-        description: The name of the lifecycle configuration.
-      OnCreate:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
-        description: 'The shell script that runs only once, when you create a notebook instance.'
-      OnStart:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
-        description: 'The shell script that runs every time you start a notebook instance, including when you create the notebook instance.'
-      LastModifiedTime:
-        $ref: '#/definitions/LastModifiedTime'
-        description: A timestamp that tells when the lifecycle configuration was last modified.
-      CreationTime:
-        $ref: '#/definitions/CreationTime'
-        description: A timestamp that tells when the lifecycle configuration was created.
+      ModelName:
+        $ref: '#/definitions/ModelName'
+        description: The name of the model.
   DescribeNotebookInstanceOutput:
     type: object
     properties:
@@ -2188,14 +1997,43 @@ definitions:
       DirectInternetAccess:
         $ref: '#/definitions/DirectInternetAccess'
         description: '<p>Describes whether Amazon SageMaker provides internet access to the notebook instance. If this value is set to <i>Disabled, he notebook instance does not have internet access, and cannot connect to Amazon SageMaker training and endpoint services</i>.</p> <p>For more information, see <a>appendix-notebook-and-internet-access</a>.</p>'
-  DescribeTrainingJobRequest:
+  DescribeNotebookInstanceInput:
     type: object
     required:
-      - TrainingJobName
+      - NotebookInstanceName
     properties:
-      TrainingJobName:
-        $ref: '#/definitions/TrainingJobName'
-        description: The name of the training job.
+      NotebookInstanceName:
+        $ref: '#/definitions/NotebookInstanceName'
+        description: The name of the notebook instance that you want information about.
+  DescribeNotebookInstanceLifecycleConfigOutput:
+    type: object
+    properties:
+      NotebookInstanceLifecycleConfigArn:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigArn'
+        description: The Amazon Resource Name (ARN) of the lifecycle configuration.
+      NotebookInstanceLifecycleConfigName:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: The name of the lifecycle configuration.
+      OnCreate:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
+        description: 'The shell script that runs only once, when you create a notebook instance.'
+      OnStart:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
+        description: 'The shell script that runs every time you start a notebook instance, including when you create the notebook instance.'
+      LastModifiedTime:
+        $ref: '#/definitions/LastModifiedTime'
+        description: A timestamp that tells when the lifecycle configuration was last modified.
+      CreationTime:
+        $ref: '#/definitions/CreationTime'
+        description: A timestamp that tells when the lifecycle configuration was created.
+  DescribeNotebookInstanceLifecycleConfigInput:
+    type: object
+    required:
+      - NotebookInstanceLifecycleConfigName
+    properties:
+      NotebookInstanceLifecycleConfigName:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: The name of the lifecycle configuration to describe.
   DescribeTrainingJobResponse:
     type: object
     required:
@@ -2227,7 +2065,7 @@ definitions:
         description: '<p>The status of the training job. </p> <p>For the <code>InProgress</code> status, Amazon SageMaker can return these secondary statuses:</p> <ul> <li> <p>Starting - Preparing for training.</p> </li> <li> <p>Downloading - Optional stage for algorithms that support File training input mode. It indicates data is being downloaded to ML storage volumes.</p> </li> <li> <p>Training - Training is in progress.</p> </li> <li> <p>Uploading - Training is complete and model upload is in progress.</p> </li> </ul> <p>For the <code>Stopped</code> training status, Amazon SageMaker can return these secondary statuses:</p> <ul> <li> <p>MaxRuntimeExceeded - Job stopped as a result of maximum allowed runtime exceeded.</p> </li> </ul>'
       SecondaryStatus:
         $ref: '#/definitions/SecondaryStatus'
-        description: '<p> Provides granular information about the system state. For more information, see <code>TrainingJobStatus</code>. </p> <ul> <li> <p> <code>Starting</code> - starting the training job.</p> </li> <li> <p> <code>LaunchingMLInstances</code> - launching ML instances for the training job.</p> </li> <li> <p> <code>PreparingTrainingStack</code> - preparing the ML instances for the training job.</p> </li> <li> <p> <code>Downloading</code> - downloading the input data.</p> </li> <li> <p> <code>DownloadingTrainingImage</code> - downloading the training algorithm image.</p> </li> <li> <p> <code>Training</code> - model training is in progress.</p> </li> <li> <p> <code>Uploading</code> - uploading the trained model.</p> </li> <li> <p> <code>Stopping</code> - stopping the training job.</p> </li> <li> <p> <code>Stopped</code> - the training job has stopped.</p> </li> <li> <p> <code>MaxRuntimeExceeded</code> - the training exceed the specified the max run time, which means the training job is stopping.</p> </li> <li> <p> <code>Completed</code> - the training job has completed.</p> </li> <li> <p> <code>Failed</code> - the training job has failed. The failure reason is provided in the <code>StatusMessage</code>.</p> </li> </ul> <important> <p>The valid values for <code>SecondaryStatus</code> are subject to change. They primary provide information on the progress of the training job.</p> </important>'
+        description: '<p> Provides granular information about the system state. For more information, see <code>TrainingJobStatus</code>. </p> <ul> <li> <p> <code>Starting</code> - starting the training job.</p> </li> <li> <p> <code>Downloading</code> - downloading the input data.</p> </li> <li> <p> <code>Training</code> - model training is in progress.</p> </li> <li> <p> <code>Uploading</code> - uploading the trained model.</p> </li> <li> <p> <code>Stopping</code> - stopping the training job.</p> </li> <li> <p> <code>Stopped</code> - the training job has stopped.</p> </li> <li> <p> <code>MaxRuntimeExceeded</code> - the training job exceeded the specified max run time and has been stopped.</p> </li> <li> <p> <code>Completed</code> - the training job has completed.</p> </li> <li> <p> <code>Failed</code> - the training job has failed. The failure reason is stored in the <code>FailureReason</code> field of <code>DescribeTrainingJobResponse</code>.</p> </li> </ul> <important> <p>The valid values for <code>SecondaryStatus</code> are subject to change. They primarily provide information on the progress of the training job.</p> </important>'
       FailureReason:
         $ref: '#/definitions/FailureReason'
         description: 'If the training job failed, the reason it failed. '
@@ -2269,15 +2107,15 @@ definitions:
         description: A timestamp that indicates when the status of the training job was last modified.
       SecondaryStatusTransitions:
         $ref: '#/definitions/SecondaryStatusTransitions'
-        description: A log of time-ordered secondary statuses that a training job has transitioned.
-  DescribeTransformJobRequest:
+        description: 'To give an overview of the training job lifecycle, <code>SecondaryStatusTransitions</code> is a log of time-ordered secondary statuses that a training job has transitioned.'
+  DescribeTrainingJobRequest:
     type: object
     required:
-      - TransformJobName
+      - TrainingJobName
     properties:
-      TransformJobName:
-        $ref: '#/definitions/TransformJobName'
-        description: The name of the transform job that you want to view details of.
+      TrainingJobName:
+        $ref: '#/definitions/TrainingJobName'
+        description: The name of the training job.
   DescribeTransformJobResponse:
     type: object
     required:
@@ -2334,127 +2172,652 @@ definitions:
       TransformEndTime:
         $ref: '#/definitions/Timestamp'
         description: 'Indicates when the transform job is <code>Completed</code>, <code>Stopped</code>, or <code>Failed</code>. You are billed for the time interval between this time and the value of <code>TransformStartTime</code>.'
-  DesiredWeightAndCapacity:
+  DescribeTransformJobRequest:
     type: object
     required:
-      - VariantName
+      - TransformJobName
     properties:
-      VariantName:
-        $ref: '#/definitions/VariantName'
-        description: The name of the variant to update.
-      DesiredWeight:
-        $ref: '#/definitions/VariantWeight'
-        description: The variant's weight.
-      DesiredInstanceCount:
-        $ref: '#/definitions/TaskCount'
-        description: The variant's capacity.
-    description: Specifies weight and capacity values for a production variant.
-  DesiredWeightAndCapacityList:
-    type: array
-    items:
-      $ref: '#/definitions/DesiredWeightAndCapacity'
-    minItems: 1
-  DirectInternetAccess:
-    type: string
-    enum:
-      - Enabled
-      - Disabled
-  EndpointArn:
-    type: string
-    minLength: 20
-    maxLength: 2048
-  EndpointConfigArn:
-    type: string
-    minLength: 20
-    maxLength: 2048
-  EndpointConfigName:
-    type: string
-    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
-    maxLength: 63
-  EndpointConfigNameContains:
-    type: string
-    pattern: '[a-zA-Z0-9-]+'
-  EndpointConfigSortKey:
-    type: string
-    enum:
-      - Name
-      - CreationTime
-  EndpointConfigSummary:
+      TransformJobName:
+        $ref: '#/definitions/TransformJobName'
+        description: The name of the transform job that you want to view details of.
+  ListEndpointConfigsOutput:
     type: object
     required:
-      - EndpointConfigName
-      - EndpointConfigArn
-      - CreationTime
+      - EndpointConfigs
     properties:
-      EndpointConfigName:
-        $ref: '#/definitions/EndpointConfigName'
-        description: The name of the endpoint configuration.
-      EndpointConfigArn:
-        $ref: '#/definitions/EndpointConfigArn'
-        description: The Amazon Resource Name (ARN) of the endpoint configuration.
-      CreationTime:
+      EndpointConfigs:
+        $ref: '#/definitions/EndpointConfigSummaryList'
+        description: An array of endpoint configurations.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: ' If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of endpoint configurations, use it in the subsequent request '
+  ListEndpointConfigsInput:
+    type: object
+    properties:
+      SortBy:
+        $ref: '#/definitions/EndpointConfigSortKey'
+        description: The field to sort results by. The default is <code>CreationTime</code>.
+      SortOrder:
+        $ref: '#/definitions/OrderKey'
+        description: The sort order for results. The default is <code>Ascending</code>.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'If the result of the previous <code>ListEndpointConfig</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of endpoint configurations, use the token in the next request. '
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of training jobs to return in the response.
+      NameContains:
+        $ref: '#/definitions/EndpointConfigNameContains'
+        description: 'A string in the endpoint configuration name. This filter returns only endpoint configurations whose name contains the specified string. '
+      CreationTimeBefore:
         $ref: '#/definitions/Timestamp'
-        description: A timestamp that shows when the endpoint configuration was created.
-    description: Provides summary information for an endpoint configuration.
-  EndpointConfigSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/EndpointConfigSummary'
-  EndpointName:
-    type: string
-    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
-    maxLength: 63
-  EndpointNameContains:
-    type: string
-    pattern: '[a-zA-Z0-9-]+'
-  EndpointSortKey:
-    type: string
-    enum:
-      - Name
-      - CreationTime
-      - Status
-  EndpointStatus:
-    type: string
-    enum:
-      - OutOfService
-      - Creating
-      - Updating
-      - RollingBack
-      - InService
-      - Deleting
-      - Failed
-  EndpointSummary:
+        description: A filter that returns only endpoint configurations created before the specified time (timestamp).
+      CreationTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only endpoint configurations created after the specified time (timestamp).
+  ListEndpointsOutput:
     type: object
     required:
-      - EndpointName
-      - EndpointArn
-      - CreationTime
-      - LastModifiedTime
-      - EndpointStatus
+      - Endpoints
     properties:
-      EndpointName:
-        $ref: '#/definitions/EndpointName'
-        description: The name of the endpoint.
+      Endpoints:
+        $ref: '#/definitions/EndpointSummaryList'
+        description: ' An array or endpoint objects. '
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: ' If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request. '
+  ListEndpointsInput:
+    type: object
+    properties:
+      SortBy:
+        $ref: '#/definitions/EndpointSortKey'
+        description: Sorts the list of results. The default is <code>CreationTime</code>.
+      SortOrder:
+        $ref: '#/definitions/OrderKey'
+        description: The sort order for results. The default is <code>Ascending</code>.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'If the result of a <code>ListEndpoints</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of endpoints, use the token in the next request.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of endpoints to return in the response.
+      NameContains:
+        $ref: '#/definitions/EndpointNameContains'
+        description: A string in endpoint names. This filter returns only endpoints whose name contains the specified string.
+      CreationTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only endpoints that were created before the specified time (timestamp).
+      CreationTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only endpoints that were created after the specified time (timestamp).
+      LastModifiedTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: ' A filter that returns only endpoints that were modified before the specified timestamp. '
+      LastModifiedTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: ' A filter that returns only endpoints that were modified after the specified timestamp. '
+      StatusEquals:
+        $ref: '#/definitions/EndpointStatus'
+        description: ' A filter that returns only endpoints with the specified status. '
+  ListHyperParameterTuningJobsResponse:
+    type: object
+    required:
+      - HyperParameterTuningJobSummaries
+    properties:
+      HyperParameterTuningJobSummaries:
+        $ref: '#/definitions/HyperParameterTuningJobSummaries'
+        description: A list of <a>HyperParameterTuningJobSummary</a> objects that describe the tuning jobs that the <code>ListHyperParameterTuningJobs</code> request returned.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of this <code>ListHyperParameterTuningJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of tuning jobs, use the token in the next request.'
+  ListHyperParameterTuningJobsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the previous <code>ListHyperParameterTuningJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of tuning jobs, use the token in the next request.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of tuning jobs to return. The default value is 10.
+      SortBy:
+        $ref: '#/definitions/HyperParameterTuningJobSortByOptions'
+        description: The field to sort results by. The default is <code>Name</code>.
+      SortOrder:
+        $ref: '#/definitions/SortOrder'
+        description: The sort order for results. The default is <code>Ascending</code>.
+      NameContains:
+        $ref: '#/definitions/NameContains'
+        description: A string in the tuning job name. This filter returns only tuning jobs whose name contains the specified string.
+      CreationTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only tuning jobs that were created after the specified time.
+      CreationTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only tuning jobs that were created before the specified time.
+      LastModifiedTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only tuning jobs that were modified after the specified time.
+      LastModifiedTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only tuning jobs that were modified before the specified time.
+      StatusEquals:
+        $ref: '#/definitions/HyperParameterTuningJobStatus'
+        description: A filter that returns only tuning jobs with the specified status.
+  ListModelsOutput:
+    type: object
+    required:
+      - Models
+    properties:
+      Models:
+        $ref: '#/definitions/ModelSummaryList'
+        description: 'An array of <code>ModelSummary</code> objects, each of which lists a model.'
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: ' If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of models, use it in the subsequent request. '
+  ListModelsInput:
+    type: object
+    properties:
+      SortBy:
+        $ref: '#/definitions/ModelSortKey'
+        description: Sorts the list of results. The default is <code>CreationTime</code>.
+      SortOrder:
+        $ref: '#/definitions/OrderKey'
+        description: The sort order for results. The default is <code>Ascending</code>.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'If the response to a previous <code>ListModels</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of models, use the token in the next request.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of models to return in the response.
+      NameContains:
+        $ref: '#/definitions/ModelNameContains'
+        description: A string in the training job name. This filter returns only models in the training job whose name contains the specified string.
+      CreationTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only models created before the specified time (timestamp).
+      CreationTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only models created after the specified time (timestamp).
+  ListNotebookInstanceLifecycleConfigsOutput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the response is truncated, Amazon SageMaker returns this token. To get the next set of lifecycle configurations, use it in the next request. '
+      NotebookInstanceLifecycleConfigs:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigSummaryList'
+        description: 'An array of <code>NotebookInstanceLifecycleConfiguration</code> objects, each listing a lifecycle configuration.'
+  ListNotebookInstanceLifecycleConfigsInput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of a <code>ListNotebookInstanceLifecycleConfigs</code> request was truncated, the response includes a <code>NextToken</code>. To get the next set of lifecycle configurations, use the token in the next request.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of lifecycle configurations to return in the response.
+      SortBy:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigSortKey'
+        description: Sorts the list of results. The default is <code>CreationTime</code>.
+      SortOrder:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigSortOrder'
+        description: The sort order for results.
+      NameContains:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigNameContains'
+        description: A string in the lifecycle configuration name. This filter returns only lifecycle configurations whose name contains the specified string.
+      CreationTimeBefore:
+        $ref: '#/definitions/CreationTime'
+        description: A filter that returns only lifecycle configurations that were created before the specified time (timestamp).
+      CreationTimeAfter:
+        $ref: '#/definitions/CreationTime'
+        description: A filter that returns only lifecycle configurations that were created after the specified time (timestamp).
+      LastModifiedTimeBefore:
+        $ref: '#/definitions/LastModifiedTime'
+        description: A filter that returns only lifecycle configurations that were modified before the specified time (timestamp).
+      LastModifiedTimeAfter:
+        $ref: '#/definitions/LastModifiedTime'
+        description: A filter that returns only lifecycle configurations that were modified after the specified time (timestamp).
+  ListNotebookInstancesOutput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the response to the previous <code>ListNotebookInstances</code> request was truncated, Amazon SageMaker returns this token. To retrieve the next set of notebook instances, use the token in the next request.'
+      NotebookInstances:
+        $ref: '#/definitions/NotebookInstanceSummaryList'
+        description: 'An array of <code>NotebookInstanceSummary</code> objects, one for each notebook instance.'
+  ListNotebookInstancesInput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: '<p> If the previous call to the <code>ListNotebookInstances</code> is truncated, the response includes a <code>NextToken</code>. You can use this token in your subsequent <code>ListNotebookInstances</code> request to fetch the next set of notebook instances. </p> <note> <p> You might specify a filter or a sort order in your request. When response is truncated, you must use the same values for the filer and sort order in the next request. </p> </note>'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of notebook instances to return.
+      SortBy:
+        $ref: '#/definitions/NotebookInstanceSortKey'
+        description: The field to sort results by. The default is <code>Name</code>.
+      SortOrder:
+        $ref: '#/definitions/NotebookInstanceSortOrder'
+        description: 'The sort order for results. '
+      NameContains:
+        $ref: '#/definitions/NotebookInstanceNameContains'
+        description: A string in the notebook instances' name. This filter returns only notebook instances whose name contains the specified string.
+      CreationTimeBefore:
+        $ref: '#/definitions/CreationTime'
+        description: 'A filter that returns only notebook instances that were created before the specified time (timestamp). '
+      CreationTimeAfter:
+        $ref: '#/definitions/CreationTime'
+        description: A filter that returns only notebook instances that were created after the specified time (timestamp).
+      LastModifiedTimeBefore:
+        $ref: '#/definitions/LastModifiedTime'
+        description: A filter that returns only notebook instances that were modified before the specified time (timestamp).
+      LastModifiedTimeAfter:
+        $ref: '#/definitions/LastModifiedTime'
+        description: A filter that returns only notebook instances that were modified after the specified time (timestamp).
+      StatusEquals:
+        $ref: '#/definitions/NotebookInstanceStatus'
+        description: A filter that returns only notebook instances with the specified status.
+      NotebookInstanceLifecycleConfigNameContains:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: A string in the name of a notebook instances lifecycle configuration associated with this notebook instance. This filter returns only notebook instances associated with a lifecycle configuration with a name that contains the specified string.
+  ListTagsOutput:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'An array of <code>Tag</code> objects, each with a tag key and a value.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' If response is truncated, Amazon SageMaker includes a token in the response. You can use this token in your subsequent request to fetch next set of tokens. '
+  ListTagsInput:
+    type: object
+    required:
+      - ResourceArn
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' If the response to the previous <code>ListTags</code> request is truncated, Amazon SageMaker returns this token. To retrieve the next set of tags, use it in the subsequent request. '
+      MaxResults:
+        $ref: '#/definitions/ListTagsMaxResults'
+        description: Maximum number of tags to return.
+  ListTrainingJobsResponse:
+    type: object
+    required:
+      - TrainingJobSummaries
+    properties:
+      TrainingJobSummaries:
+        $ref: '#/definitions/TrainingJobSummaries'
+        description: 'An array of <code>TrainingJobSummary</code> objects, each listing a training job.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request.'
+  ListTrainingJobsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the previous <code>ListTrainingJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of training jobs, use the token in the next request. '
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of training jobs to return in the response.
+      CreationTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only training jobs created after the specified time (timestamp).
+      CreationTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only training jobs created before the specified time (timestamp).
+      LastModifiedTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only training jobs modified after the specified time (timestamp).
+      LastModifiedTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only training jobs modified before the specified time (timestamp).
+      NameContains:
+        $ref: '#/definitions/NameContains'
+        description: A string in the training job name. This filter returns only training jobs whose name contains the specified string.
+      StatusEquals:
+        $ref: '#/definitions/TrainingJobStatus'
+        description: A filter that retrieves only training jobs with a specific status.
+      SortBy:
+        $ref: '#/definitions/SortBy'
+        description: The field to sort results by. The default is <code>CreationTime</code>.
+      SortOrder:
+        $ref: '#/definitions/SortOrder'
+        description: The sort order for results. The default is <code>Ascending</code>.
+  ListTrainingJobsForHyperParameterTuningJobResponse:
+    type: object
+    required:
+      - TrainingJobSummaries
+    properties:
+      TrainingJobSummaries:
+        $ref: '#/definitions/HyperParameterTrainingJobSummaries'
+        description: A list of <a>TrainingJobSummary</a> objects that describe the training jobs that the <code>ListTrainingJobsForHyperParameterTuningJob</code> request returned.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of this <code>ListTrainingJobsForHyperParameterTuningJob</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of training jobs, use the token in the next request.'
+  ListTrainingJobsForHyperParameterTuningJobRequest:
+    type: object
+    required:
+      - HyperParameterTuningJobName
+    properties:
+      HyperParameterTuningJobName:
+        $ref: '#/definitions/HyperParameterTuningJobName'
+        description: The name of the tuning job whose training jobs you want to list.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the previous <code>ListTrainingJobsForHyperParameterTuningJob</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of training jobs, use the token in the next request.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of training jobs to return. The default value is 10.
+      StatusEquals:
+        $ref: '#/definitions/TrainingJobStatus'
+        description: A filter that returns only training jobs with the specified status.
+      SortBy:
+        $ref: '#/definitions/TrainingJobSortByOptions'
+        description: '<p>The field to sort results by. The default is <code>Name</code>.</p> <p>If the value of this field is <code>FinalObjectiveMetricValue</code>, any training jobs that did not return an objective metric are not listed.</p>'
+      SortOrder:
+        $ref: '#/definitions/SortOrder'
+        description: The sort order for results. The default is <code>Ascending</code>.
+  ListTransformJobsResponse:
+    type: object
+    required:
+      - TransformJobSummaries
+    properties:
+      TransformJobSummaries:
+        $ref: '#/definitions/TransformJobSummaries'
+        description: An array of <code>TransformJobSummary</code> objects.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of transform jobs, use it in the next request.'
+  ListTransformJobsRequest:
+    type: object
+    properties:
+      CreationTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only transform jobs created after the specified time.
+      CreationTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only transform jobs created before the specified time.
+      LastModifiedTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only transform jobs modified after the specified time.
+      LastModifiedTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: A filter that returns only transform jobs modified before the specified time.
+      NameContains:
+        $ref: '#/definitions/NameContains'
+        description: A string in the transform job name. This filter returns only transform jobs whose name contains the specified string.
+      StatusEquals:
+        $ref: '#/definitions/TransformJobStatus'
+        description: A filter that retrieves only transform jobs with a specific status.
+      SortBy:
+        $ref: '#/definitions/SortBy'
+        description: The field to sort results by. The default is <code>CreationTime</code>.
+      SortOrder:
+        $ref: '#/definitions/SortOrder'
+        description: The sort order for results. The default is <code>Descending</code>.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the previous <code>ListTransformJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of transform jobs, use the token in the next request.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of transform jobs to return in the response. The default value is <code>10</code>.
+  StartNotebookInstanceInput:
+    type: object
+    required:
+      - NotebookInstanceName
+    properties:
+      NotebookInstanceName:
+        $ref: '#/definitions/NotebookInstanceName'
+        description: The name of the notebook instance to start.
+  StopHyperParameterTuningJobRequest:
+    type: object
+    required:
+      - HyperParameterTuningJobName
+    properties:
+      HyperParameterTuningJobName:
+        $ref: '#/definitions/HyperParameterTuningJobName'
+        description: The name of the tuning job to stop.
+  StopNotebookInstanceInput:
+    type: object
+    required:
+      - NotebookInstanceName
+    properties:
+      NotebookInstanceName:
+        $ref: '#/definitions/NotebookInstanceName'
+        description: The name of the notebook instance to terminate.
+  StopTrainingJobRequest:
+    type: object
+    required:
+      - TrainingJobName
+    properties:
+      TrainingJobName:
+        $ref: '#/definitions/TrainingJobName'
+        description: The name of the training job to stop.
+  StopTransformJobRequest:
+    type: object
+    required:
+      - TransformJobName
+    properties:
+      TransformJobName:
+        $ref: '#/definitions/TransformJobName'
+        description: The name of the transform job to stop.
+  UpdateEndpointOutput:
+    type: object
+    required:
+      - EndpointArn
+    properties:
       EndpointArn:
         $ref: '#/definitions/EndpointArn'
         description: The Amazon Resource Name (ARN) of the endpoint.
-      CreationTime:
-        $ref: '#/definitions/Timestamp'
-        description: A timestamp that shows when the endpoint was created.
-      LastModifiedTime:
-        $ref: '#/definitions/Timestamp'
-        description: A timestamp that shows when the endpoint was last modified.
-      EndpointStatus:
-        $ref: '#/definitions/EndpointStatus'
-        description: The status of the endpoint.
-    description: Provides summary information for an endpoint.
-  EndpointSummaryList:
+  UpdateEndpointInput:
+    type: object
+    required:
+      - EndpointName
+      - EndpointConfigName
+    properties:
+      EndpointName:
+        $ref: '#/definitions/EndpointName'
+        description: The name of the endpoint whose configuration you want to update.
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: The name of the new endpoint configuration.
+  UpdateEndpointWeightsAndCapacitiesOutput:
+    type: object
+    required:
+      - EndpointArn
+    properties:
+      EndpointArn:
+        $ref: '#/definitions/EndpointArn'
+        description: The Amazon Resource Name (ARN) of the updated endpoint.
+  UpdateEndpointWeightsAndCapacitiesInput:
+    type: object
+    required:
+      - EndpointName
+      - DesiredWeightsAndCapacities
+    properties:
+      EndpointName:
+        $ref: '#/definitions/EndpointName'
+        description: The name of an existing Amazon SageMaker endpoint.
+      DesiredWeightsAndCapacities:
+        $ref: '#/definitions/DesiredWeightAndCapacityList'
+        description: An object that provides new capacity and weight values for a variant.
+  UpdateNotebookInstanceOutput:
+    type: object
+    properties: {}
+  UpdateNotebookInstanceInput:
+    type: object
+    required:
+      - NotebookInstanceName
+    properties:
+      NotebookInstanceName:
+        $ref: '#/definitions/NotebookInstanceName'
+        description: The name of the notebook instance to update.
+      InstanceType:
+        $ref: '#/definitions/InstanceType'
+        description: The Amazon ML compute instance type.
+      RoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: '<p>The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume to access the notebook instance. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. </p> <note> <p>To be able to pass this role to Amazon SageMaker, the caller of this API must have the <code>iam:PassRole</code> permission.</p> </note>'
+      LifecycleConfigName:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: 'The name of a lifecycle configuration to associate with the notebook instance. For information about lifestyle configurations, see <a>notebook-lifecycle-config</a>.'
+      DisassociateLifecycleConfig:
+        $ref: '#/definitions/DisassociateNotebookInstanceLifecycleConfig'
+        description: Set to <code>true</code> to remove the notebook instance lifecycle configuration currently associated with the notebook instance.
+  UpdateNotebookInstanceLifecycleConfigOutput:
+    type: object
+    properties: {}
+  UpdateNotebookInstanceLifecycleConfigInput:
+    type: object
+    required:
+      - NotebookInstanceLifecycleConfigName
+    properties:
+      NotebookInstanceLifecycleConfigName:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
+        description: The name of the lifecycle configuration.
+      OnCreate:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
+        description: 'The shell script that runs only once, when you create a notebook instance'
+      OnStart:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
+        description: 'The shell script that runs every time you start a notebook instance, including when you create the notebook instance.'
+  Accept:
+    type: string
+    maxLength: 256
+  ResourceArn:
+    type: string
+    maxLength: 256
+  TagList:
     type: array
     items:
-      $ref: '#/definitions/EndpointSummary'
-  EnvironmentKey:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 50
+  AlgorithmImage:
     type: string
-    pattern: '[a-zA-Z_][a-zA-Z0-9_]*'
+    maxLength: 255
+  TrainingInputMode:
+    type: string
+    enum:
+      - Pipe
+      - File
+  AlgorithmSpecification:
+    type: object
+    required:
+      - TrainingImage
+      - TrainingInputMode
+    properties:
+      TrainingImage:
+        $ref: '#/definitions/AlgorithmImage'
+        description: 'The registry path of the Docker image that contains the training algorithm. For information about docker registry paths for built-in algorithms, see <a>sagemaker-algo-docker-registry-paths</a>.'
+      TrainingInputMode:
+        $ref: '#/definitions/TrainingInputMode'
+        description: '<p>The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. If an algorithm supports the <code>File</code> input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the <code>Pipe</code> input mode, Amazon SageMaker streams data directly from S3 to the container. </p> <p> In File mode, make sure you provision ML storage volume with sufficient capacity to accommodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any. </p> <p> For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won''t be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. </p>'
+    description: '<p>Specifies the training algorithm to use in a <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html">CreateTrainingJob</a> request.</p> <p>For more information about algorithms provided by Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. For information about using your own algorithms, see <a>your-algorithms</a>. </p>'
+  AssemblyType:
+    type: string
+    enum:
+      - None
+      - Line
+  BatchStrategy:
+    type: string
+    enum:
+      - MultiRecord
+      - SingleRecord
+  ParameterKey:
+    type: string
+    maxLength: 256
+  ParameterValues:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterValue'
+    minItems: 1
+    maxItems: 20
+  CategoricalParameterRange:
+    type: object
+    required:
+      - Name
+      - Values
+    properties:
+      Name:
+        $ref: '#/definitions/ParameterKey'
+        description: The name of the categorical hyperparameter to tune.
+      Values:
+        $ref: '#/definitions/ParameterValues'
+        description: A list of the categories for the hyperparameter.
+    description: A list of categorical hyperparameters to tune.
+  CategoricalParameterRanges:
+    type: array
+    items:
+      $ref: '#/definitions/CategoricalParameterRange'
+    minItems: 0
+    maxItems: 20
+  ChannelName:
+    type: string
+    pattern: '[A-Za-z0-9\.\-_]+'
+    minLength: 1
+    maxLength: 64
+  DataSource:
+    type: object
+    required:
+      - S3DataSource
+    properties:
+      S3DataSource:
+        $ref: '#/definitions/S3DataSource'
+        description: The S3 location of the data source that is associated with a channel.
+    description: Describes the location of the channel data.
+  ContentType:
+    type: string
+    maxLength: 256
+  CompressionType:
+    type: string
+    enum:
+      - None
+      - Gzip
+  RecordWrapper:
+    type: string
+    enum:
+      - None
+      - RecordIO
+  Channel:
+    type: object
+    required:
+      - ChannelName
+      - DataSource
+    properties:
+      ChannelName:
+        $ref: '#/definitions/ChannelName'
+        description: 'The name of the channel. '
+      DataSource:
+        $ref: '#/definitions/DataSource'
+        description: The location of the channel data.
+      ContentType:
+        $ref: '#/definitions/ContentType'
+        description: The MIME type of the data.
+      CompressionType:
+        $ref: '#/definitions/CompressionType'
+        description: 'If training data is compressed, the compression type. The default value is <code>None</code>. <code>CompressionType</code> is used only in Pipe input mode. In File mode, leave this field unset or set it to None.'
+      RecordWrapperType:
+        $ref: '#/definitions/RecordWrapper'
+        description: '<p/> <p>Specify RecordIO as the value when input data is in raw format but the training algorithm requires the RecordIO format, in which case, Amazon SageMaker wraps each individual S3 object in a RecordIO record. If the input data is already in RecordIO format, you don''t need to set this attribute. For more information, see <a href="https://mxnet.incubator.apache.org/how_to/recordio.html?highlight=im2rec">Create a Dataset Using RecordIO</a>. </p> <p>In FILE mode, leave this field unset or set it to None.</p> <p/>'
+    description: 'A channel is a named input source that training algorithms can consume. '
+  ContainerHostname:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  Image:
+    type: string
+    pattern: '[\S]+'
+    maxLength: 255
+  Url:
+    type: string
+    pattern: '^(https|s3)://([^/]+)/?(.*)$'
     maxLength: 1024
   EnvironmentMap:
     type: array
@@ -2466,44 +2829,100 @@ definitions:
           $ref: '#/definitions/EnvironmentKey'
         value:
           $ref: '#/definitions/EnvironmentValue'
-  EnvironmentValue:
-    type: string
-    maxLength: 1024
-  FailureReason:
-    type: string
-    maxLength: 1024
-  FinalHyperParameterTuningJobObjectiveMetric:
+  ContainerDefinition:
     type: object
     required:
-      - MetricName
-      - Value
+      - Image
     properties:
-      Type:
-        $ref: '#/definitions/HyperParameterTuningJobObjectiveType'
-        description: Whether to minimize or maximize the objective metric. Valid values are Minimize and Maximize.
-      MetricName:
-        $ref: '#/definitions/MetricName'
-        description: The name of the objective metric.
-      Value:
-        $ref: '#/definitions/MetricValue'
-        description: The value of the objective metric.
-    description: Shows the final value for the objective metric for a training job that was launched by a hyperparameter tuning job. You define the objective metric in the <code>HyperParameterTuningJobObjective</code> parameter of <a>HyperParameterTuningJobConfig</a>.
-  HyperParameterAlgorithmSpecification:
+      ContainerHostname:
+        $ref: '#/definitions/ContainerHostname'
+        description: The DNS host name for the container after Amazon SageMaker deploys it.
+      Image:
+        $ref: '#/definitions/Image'
+        description: 'The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. Amazon SageMaker supports both <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code> image path formats. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html">Using Your Own Algorithms with Amazon SageMaker</a> '
+      ModelDataUrl:
+        $ref: '#/definitions/Url'
+        description: '<p>The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). </p> <p>If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and Deactivating AWS STS i an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>'
+      Environment:
+        $ref: '#/definitions/EnvironmentMap'
+        description: 'The environment variables to set in the Docker container. Each key and value in the <code>Environment</code> string to string map can have length of up to 1024. We support up to 16 entries in the map. '
+    description: 'Describes the container, as part of model definition.'
+  ParameterValue:
+    type: string
+    maxLength: 256
+  ContinuousParameterRange:
     type: object
     required:
-      - TrainingImage
-      - TrainingInputMode
+      - Name
+      - MinValue
+      - MaxValue
     properties:
-      TrainingImage:
-        $ref: '#/definitions/AlgorithmImage'
-        description: ' The registry path of the Docker image that contains the training algorithm. For information about Docker registry paths for built-in algorithms, see <a>sagemaker-algo-docker-registry-paths</a>.'
-      TrainingInputMode:
-        $ref: '#/definitions/TrainingInputMode'
-        description: '<p>The input mode that the algorithm supports: File or Pipe. In File input mode, Amazon SageMaker downloads the training data from Amazon S3 to the storage volume that is attached to the training instance and mounts the directory to the Docker volume for the training container. In Pipe input mode, Amazon SageMaker streams data directly from Amazon S3 to the container. </p> <p>If you specify File mode, make sure that you provision the storage volume that is attached to the training instance with enough capacity to accommodate the training data downloaded from Amazon S3, the model artifacts, and intermediate information.</p> <p/> <p>For more information about input modes, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. </p>'
-      MetricDefinitions:
-        $ref: '#/definitions/MetricDefinitionList'
-        description: An array of <a>MetricDefinition</a> objects that specify the metrics that the algorithm emits.
-    description: Specifies which training algorithm to use for training jobs that a hyperparameter tuning job launches and the metrics to monitor.
+      Name:
+        $ref: '#/definitions/ParameterKey'
+        description: The name of the continuous hyperparameter to tune.
+      MinValue:
+        $ref: '#/definitions/ParameterValue'
+        description: The minimum value for the hyperparameter. The tuning job uses floating-point values between this value and <code>MaxValue</code>for tuning.
+      MaxValue:
+        $ref: '#/definitions/ParameterValue'
+        description: The maximum value for the hyperparameter. The tuning job uses floating-point values between <code>MinValue</code> value and this value for tuning.
+    description: A list of continuous hyperparameters to tune.
+  ContinuousParameterRanges:
+    type: array
+    items:
+      $ref: '#/definitions/ContinuousParameterRange'
+    minItems: 0
+    maxItems: 20
+  EndpointConfigName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  ProductionVariantList:
+    type: array
+    items:
+      $ref: '#/definitions/ProductionVariant'
+    minItems: 1
+  KmsKeyId:
+    type: string
+    maxLength: 2048
+  EndpointConfigArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  EndpointName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  EndpointArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  HyperParameterTuningJobName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    minLength: 1
+    maxLength: 32
+  HyperParameterTuningJobConfig:
+    type: object
+    required:
+      - Strategy
+      - HyperParameterTuningJobObjective
+      - ResourceLimits
+      - ParameterRanges
+    properties:
+      Strategy:
+        $ref: '#/definitions/HyperParameterTuningJobStrategyType'
+        description: 'Specifies the search strategy for hyperparameters. Currently, the only valid value is <code>Bayesian</code>.'
+      HyperParameterTuningJobObjective:
+        $ref: '#/definitions/HyperParameterTuningJobObjective'
+        description: The <a>HyperParameterTuningJobObjective</a> object that specifies the objective metric for this tuning job.
+      ResourceLimits:
+        $ref: '#/definitions/ResourceLimits'
+        description: The <a>ResourceLimits</a> object that specifies the maximum number of training jobs and parallel training jobs for this tuning job.
+      ParameterRanges:
+        $ref: '#/definitions/ParameterRanges'
+        description: The <a>ParameterRanges</a> object that specifies the ranges of hyperparameters that this tuning job searches.
+    description: Configures a hyperparameter tuning job.
   HyperParameterTrainingJobDefinition:
     type: object
     required:
@@ -2539,10 +2958,334 @@ definitions:
         $ref: '#/definitions/StoppingCondition'
         description: '<p>Sets a maximum duration for the training jobs that the tuning job launches. Use this parameter to limit model training costs. </p> <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal. This delays job termination for 120 seconds. Algorithms might use this 120-second window to save the model artifacts.</p> <p>When Amazon SageMaker terminates a job because the stopping condition has been met, training algorithms provided by Amazon SageMaker save the intermediate results of the job.</p>'
     description: Defines the training jobs launched by a hyperparameter tuning job.
-  HyperParameterTrainingJobSummaries:
+  HyperParameterTuningJobArn:
+    type: string
+    pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:hyper-parameter-tuning-job/.*'
+    maxLength: 256
+  ModelName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  RoleArn:
+    type: string
+    pattern: '^arn:aws[a-z\-]*:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+$'
+    minLength: 20
+    maxLength: 2048
+  VpcConfig:
+    type: object
+    required:
+      - SecurityGroupIds
+      - Subnets
+    properties:
+      SecurityGroupIds:
+        $ref: '#/definitions/VpcSecurityGroupIds'
+        description: 'The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the <code>Subnets</code> field.'
+      Subnets:
+        $ref: '#/definitions/Subnets'
+        description: The ID of the subnets in the VPC to which you want to connect your training job or model.
+    description: 'Specifies a VPC that your training jobs and hosted models have access to. Control access to and from your training and model containers by configuring the VPC. For more information, see <a>host-vpc</a> and <a>train-vpc</a>.'
+  ModelArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  NotebookInstanceName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  InstanceType:
+    type: string
+    enum:
+      - ml.t2.medium
+      - ml.t2.large
+      - ml.t2.xlarge
+      - ml.t2.2xlarge
+      - ml.m4.xlarge
+      - ml.m4.2xlarge
+      - ml.m4.4xlarge
+      - ml.m4.10xlarge
+      - ml.m4.16xlarge
+      - ml.p2.xlarge
+      - ml.p2.8xlarge
+      - ml.p2.16xlarge
+      - ml.p3.2xlarge
+      - ml.p3.8xlarge
+      - ml.p3.16xlarge
+  SubnetId:
+    type: string
+    maxLength: 32
+  SecurityGroupIds:
     type: array
     items:
-      $ref: '#/definitions/HyperParameterTrainingJobSummary'
+      $ref: '#/definitions/SecurityGroupId'
+    maxItems: 5
+  NotebookInstanceLifecycleConfigName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  DirectInternetAccess:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+  NotebookInstanceLifecycleConfigList:
+    type: array
+    items:
+      $ref: '#/definitions/NotebookInstanceLifecycleHook'
+    maxItems: 1
+  NotebookInstanceLifecycleConfigArn:
+    type: string
+    maxLength: 256
+  NotebookInstanceArn:
+    type: string
+    maxLength: 256
+  SessionExpirationDurationInSeconds:
+    type: integer
+    minimum: 1800
+    maximum: 43200
+  NotebookInstanceUrl:
+    type: string
+  TrainingJobName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    minLength: 1
+    maxLength: 63
+  HyperParameters:
+    type: array
+    minItems: 0
+    maxItems: 100
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ParameterKey'
+        value:
+          $ref: '#/definitions/ParameterValue'
+  InputDataConfig:
+    type: array
+    items:
+      $ref: '#/definitions/Channel'
+    minItems: 1
+    maxItems: 8
+  OutputDataConfig:
+    type: object
+    required:
+      - S3OutputPath
+    properties:
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: '<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. </p> <note> <p>If you don''t provide the KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role''s account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in Amazon Simple Storage Service developer guide.</p> </note> <note> <p> The KMS key policy must grant permission to the IAM role you specify in your <code>CreateTrainingJob</code> request. <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the AWS Key Management Service Developer Guide. </p> </note>'
+      S3OutputPath:
+        $ref: '#/definitions/S3Uri'
+        description: 'Identifies the S3 path where you want Amazon SageMaker to store the model artifacts. For example, <code>s3://bucket-name/key-name-prefix</code>. '
+    description: Provides information about how to store model training results (model artifacts).
+  ResourceConfig:
+    type: object
+    required:
+      - InstanceType
+      - InstanceCount
+      - VolumeSizeInGB
+    properties:
+      InstanceType:
+        $ref: '#/definitions/TrainingInstanceType'
+        description: 'The ML compute instance type. '
+      InstanceCount:
+        $ref: '#/definitions/TrainingInstanceCount'
+        description: 'The number of ML compute instances to use. For distributed training, provide a value greater than 1. '
+      VolumeSizeInGB:
+        $ref: '#/definitions/VolumeSizeInGB'
+        description: '<p>The size of the ML storage volume that you want to provision. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use the ML storage volume for scratch space. If you want to store the training data in the ML storage volume, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. </p> <p>You must specify sufficient ML storage for your scenario. </p> <note> <p> Amazon SageMaker supports only the General Purpose SSD (gp2) ML storage volume type. </p> </note>'
+      VolumeKmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the training job.
+    description: 'Describes the resources, including ML compute instances and ML storage volumes, to use for model training. '
+  StoppingCondition:
+    type: object
+    properties:
+      MaxRuntimeInSeconds:
+        $ref: '#/definitions/MaxRuntimeInSeconds'
+        description: 'The maximum length of time, in seconds, that the training job can run. If model training does not complete during this time, Amazon SageMaker ends the job. If value is not specified, default value is 1 day. Maximum value is 5 days.'
+    description: '<p>Specifies how long model training can run. When model training reaches the limit, Amazon SageMaker ends the training job. Use this API to cap model training cost.</p> <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for120 seconds. Algorithms might use this 120-second window to save the model artifacts, so the results of training is not lost. </p> <p>Training algorithms provided by Amazon SageMaker automatically saves the intermediate results of a model training job (it is best effort case, as model might not be ready to save as some stages, for example training just started). This intermediate data is a valid model artifact. You can use it to create a model (<code>CreateModel</code>). </p>'
+  TrainingJobArn:
+    type: string
+    pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:training-job/.*'
+    maxLength: 256
+  TransformJobName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    minLength: 1
+    maxLength: 63
+  MaxConcurrentTransforms:
+    type: integer
+    minimum: 0
+  MaxPayloadInMB:
+    type: integer
+    minimum: 0
+  TransformEnvironmentMap:
+    type: array
+    maxItems: 16
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TransformEnvironmentKey'
+        value:
+          $ref: '#/definitions/TransformEnvironmentValue'
+  TransformInput:
+    type: object
+    required:
+      - DataSource
+    properties:
+      DataSource:
+        $ref: '#/definitions/TransformDataSource'
+        description: 'Describes the location of the channel data, meaning the S3 location of the input data that the model can consume.'
+      ContentType:
+        $ref: '#/definitions/ContentType'
+        description: The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.
+      CompressionType:
+        $ref: '#/definitions/CompressionType'
+        description: 'Compressing data helps save on storage space. If your transform data is compressed, specify the compression type.and Amazon SageMaker will automatically decompress the data for the transform job accordingly. The default value is <code>None</code>.'
+      SplitType:
+        $ref: '#/definitions/SplitType'
+        description: '<p>The method to use to split the transform job''s data into smaller batches. The default value is <code>None</code>. If you don''t want to split the data, specify <code>None</code>. If you want to split records on a newline character boundary, specify <code>Line</code>. To split records according to the RecordIO format, specify <code>RecordIO</code>.</p> <p>Amazon SageMaker will send maximum number of records per batch in each request up to the MaxPayloadInMB limit. For more information, see <a href="http://mxnet.io/architecture/note_data_loading.html#data-format">RecordIO data format</a>.</p> <note> <p>For information about the <code>RecordIO</code> format, see <a href="http://mxnet.io/architecture/note_data_loading.html#data-format">Data Format</a>.</p> </note>'
+    description: Describes the input source of a transform job and the way the transform job consumes it.
+  TransformOutput:
+    type: object
+    required:
+      - S3OutputPath
+    properties:
+      S3OutputPath:
+        $ref: '#/definitions/S3Uri'
+        description: '<p>The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job. For example, <code>s3://bucket-name/key-name-prefix</code>.</p> <p>For every S3 object used as input for the transform job, the transformed data is stored in a corresponding subfolder in the location under the output prefix. For example, the input data <code>s3://bucket-name/input-name-prefix/dataset01/data.csv</code> will have the transformed data stored at <code>s3://bucket-name/key-name-prefix/dataset01/</code>, based on the original name, as a series of .part files (.part0001, part0002, etc).</p>'
+      Accept:
+        $ref: '#/definitions/Accept'
+        description: The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.
+      AssembleWith:
+        $ref: '#/definitions/AssemblyType'
+        description: '<p>Defines how to assemble the results of the transform job as a single S3 object. You should select a format that is most convenient to you. To concatenate the results in binary format, specify <code>None</code>. To add a newline character at the end of every transformed record, specify <code>Line</code>. To assemble the output in RecordIO format, specify <code>RecordIO</code>. The default value is <code>None</code>.</p> <p>For information about the <code>RecordIO</code> format, see <a href="http://mxnet.io/architecture/note_data_loading.html#data-format">Data Format</a>.</p>'
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: '<p>The AWS Key Management Service (AWS KMS) key for Amazon S3 server-side encryption that Amazon SageMaker uses to encrypt the transformed data.</p> <p>If you don''t provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role''s account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateTramsformJob</code> request. For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+    description: Describes the results of a transform job output.
+  TransformResources:
+    type: object
+    required:
+      - InstanceType
+      - InstanceCount
+    properties:
+      InstanceType:
+        $ref: '#/definitions/TransformInstanceType'
+        description: 'The ML compute instance type for the transform job. For using built-in algorithms to transform moderately sized datasets, ml.m4.xlarge or <code>ml.m5.large</code> should suffice. There is no default value for <code>InstanceType</code>.'
+      InstanceCount:
+        $ref: '#/definitions/TransformInstanceCount'
+        description: 'The number of ML compute instances to use in the transform job. For distributed transform, provide a value greater than 1. The default value is <code>1</code>.'
+    description: 'Describes the resources, including ML instance types and ML instance count, to use for transform job.'
+  TransformJobArn:
+    type: string
+    pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:transform-job/.*'
+    maxLength: 256
+  CreationTime:
+    type: string
+    format: date-time
+  S3DataSource:
+    type: object
+    required:
+      - S3DataType
+      - S3Uri
+    properties:
+      S3DataType:
+        $ref: '#/definitions/S3DataType'
+        description: '<p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix. Amazon SageMaker uses all objects with the specified key name prefix for model training. </p> <p>If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for model training. </p>'
+      S3Uri:
+        $ref: '#/definitions/S3Uri'
+        description: '<p>Depending on the value specified for the <code>S3DataType</code>, identifies either a key name prefix or a manifest. For example: </p> <ul> <li> <p> A key name prefix might look like this: <code>s3://bucketname/exampleprefix</code>. </p> </li> <li> <p> A manifest might look like this: <code>s3://bucketname/example.manifest</code> </p> <p> The manifest is an S3 object which is a JSON file with the following format: </p> <p> <code>[</code> </p> <p> <code> {"prefix": "s3://customer_bucket/some/prefix/"},</code> </p> <p> <code> "relative/path/to/custdata-1",</code> </p> <p> <code> "relative/path/custdata-2",</code> </p> <p> <code> ...</code> </p> <p> <code> ]</code> </p> <p> The preceding JSON matches the following <code>s3Uris</code>: </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code> </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/custdata-1</code> </p> <p> <code>...</code> </p> <p> The complete set of <code>s3uris</code> in this manifest constitutes the input data for the channel for this datasource. The object that each <code>s3uris</code> points to must readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf. </p> </li> </ul>'
+      S3DataDistributionType:
+        $ref: '#/definitions/S3DataDistribution'
+        description: '<p>If you want Amazon SageMaker to replicate the entire dataset on each ML compute instance that is launched for model training, specify <code>FullyReplicated</code>. </p> <p>If you want Amazon SageMaker to replicate a subset of data on each ML compute instance that is launched for model training, specify <code>ShardedByS3Key</code>. If there are <i>n</i> ML compute instances launched for a training job, each instance gets approximately 1/<i>n</i> of the number of S3 objects. In this case, model training on each machine uses only the subset of training data. </p> <p>Don''t choose more ML compute instances for training than available S3 objects. If you do, some nodes won''t get any data and you will pay for nodes that aren''t getting any training data. This applies in both FILE and PIPE modes. Keep this in mind when developing algorithms. </p> <p>In distributed training, where you use multiple ML compute EC2 instances, you might choose <code>ShardedByS3Key</code>. If the algorithm requires copying training data to the ML storage volume (when <code>TrainingInputMode</code> is set to <code>File</code>), this copies 1/<i>n</i> of the number of objects. </p>'
+    description: Describes the S3 data source.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  Timestamp:
+    type: string
+    format: date-time
+  DeployedImage:
+    type: object
+    properties:
+      SpecifiedImage:
+        $ref: '#/definitions/Image'
+        description: The image path you specified when you created the model.
+      ResolvedImage:
+        $ref: '#/definitions/Image'
+        description: The specific digest path of the image hosted in this <code>ProductionVariant</code>.
+      ResolutionTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time when the image path for the model resolved to the <code>ResolvedImage</code> '
+    description: '<p>Gets the Amazon EC2 Container Registry path of the docker image of the model that is hosted in this <a>ProductionVariant</a>.</p> <p>If you used the <code>registry/repository[:tag]</code> form to to specify the image path of the primary container when you created the model hosted in this <code>ProductionVariant</code>, the path resolves to a path of the form <code>registry/repository[@digest]</code>. A digest is a hash value that identifies a specific version of an image. For information about Amazon ECR paths, see <a href="http://docs.aws.amazon.com//AmazonECR/latest/userguide/docker-pull-ecr-image.html">Pulling an Image</a> in the <i>Amazon ECR User Guide</i>.</p>'
+  DeployedImages:
+    type: array
+    items:
+      $ref: '#/definitions/DeployedImage'
+  ProductionVariantSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/ProductionVariantSummary'
+    minItems: 1
+  EndpointStatus:
+    type: string
+    enum:
+      - OutOfService
+      - Creating
+      - Updating
+      - RollingBack
+      - InService
+      - Deleting
+      - Failed
+  FailureReason:
+    type: string
+    maxLength: 1024
+  HyperParameterTuningJobStatus:
+    type: string
+    enum:
+      - Completed
+      - InProgress
+      - Failed
+      - Stopped
+      - Stopping
+  TrainingJobStatusCounters:
+    type: object
+    properties:
+      Completed:
+        $ref: '#/definitions/TrainingJobStatusCounter'
+        description: The number of completed training jobs launched by a hyperparameter tuning job.
+      InProgress:
+        $ref: '#/definitions/TrainingJobStatusCounter'
+        description: The number of in-progress training jobs launched by a hyperparameter tuning job.
+      RetryableError:
+        $ref: '#/definitions/TrainingJobStatusCounter'
+        description: 'The number of training jobs that failed, but can be retried. A failed training job can be retried only if it failed because an internal service error occurred.'
+      NonRetryableError:
+        $ref: '#/definitions/TrainingJobStatusCounter'
+        description: The number of training jobs that failed and can't be retried. A failed training job can't be retried if it failed because a client error occurred.
+      Stopped:
+        $ref: '#/definitions/TrainingJobStatusCounter'
+        description: The number of training jobs launched by a hyperparameter tuning job that were manually stopped.
+    description: 'The numbers of training jobs launched by a hyperparameter tuning job, categorized by status.'
+  ObjectiveStatusCounters:
+    type: object
+    properties:
+      Succeeded:
+        $ref: '#/definitions/ObjectiveStatusCounter'
+        description: The number of training jobs whose final objective metric was evaluated by the hyperparameter tuning job and used in the hyperparameter tuning process.
+      Pending:
+        $ref: '#/definitions/ObjectiveStatusCounter'
+        description: The number of training jobs that are in progress and pending evaluation of their final objective metric.
+      Failed:
+        $ref: '#/definitions/ObjectiveStatusCounter'
+        description: The number of training jobs whose final objective metric was not evaluated and used in the hyperparameter tuning process. This typically occurs when the training job failed or did not emit an objective metric.
+    description: 'Specifies the number of training jobs that this hyperparameter tuning job launched, categorized by the status of their objective metric. The objective metric status shows whether the final objective metric for the training job has been evaluated by the tuning job and used in the hyperparameter tuning process.'
   HyperParameterTrainingJobSummary:
     type: object
     required:
@@ -2583,36 +3326,237 @@ definitions:
         $ref: '#/definitions/ObjectiveStatus'
         description: '<p>The status of the objective metric for the training job:</p> <ul> <li> <p>Succeeded: The final objective metric for the training job was evaluated by the hyperparameter tuning job and used in the hyperparameter tuning process.</p> </li> </ul> <ul> <li> <p>Pending: The training job is in progress and evaluation of its final objective metric is pending.</p> </li> </ul> <ul> <li> <p>Failed: The final objective metric for the training job was not evaluated, and was not used in the hyperparameter tuning process. This typically occurs when the training job failed or did not emit an objective metric.</p> </li> </ul>'
     description: Specifies summary information about a training job.
-  HyperParameterTuningJobArn:
+  LastModifiedTime:
     type: string
-    pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:hyper-parameter-tuning-job/.*'
-    maxLength: 256
-  HyperParameterTuningJobConfig:
+    format: date-time
+  NotebookInstanceStatus:
+    type: string
+    enum:
+      - Pending
+      - InService
+      - Stopping
+      - Stopped
+      - Failed
+      - Deleting
+      - Updating
+  NetworkInterfaceId:
+    type: string
+  ModelArtifacts:
     type: object
     required:
-      - Strategy
-      - HyperParameterTuningJobObjective
-      - ResourceLimits
-      - ParameterRanges
+      - S3ModelArtifacts
     properties:
-      Strategy:
-        $ref: '#/definitions/HyperParameterTuningJobStrategyType'
-        description: 'Specifies the search strategy for hyperparameters. Currently, the only valid value is <code>Bayesian</code>.'
-      HyperParameterTuningJobObjective:
-        $ref: '#/definitions/HyperParameterTuningJobObjective'
-        description: The <a>HyperParameterTuningJobObjective</a> object that specifies the objective metric for this tuning job.
-      ResourceLimits:
-        $ref: '#/definitions/ResourceLimits'
-        description: The <a>ResourceLimits</a> object that specifies the maximum number of training jobs and parallel training jobs for this tuning job.
-      ParameterRanges:
-        $ref: '#/definitions/ParameterRanges'
-        description: The <a>ParameterRanges</a> object that specifies the ranges of hyperparameters that this tuning job searches.
-    description: Configures a hyperparameter tuning job.
-  HyperParameterTuningJobName:
+      S3ModelArtifacts:
+        $ref: '#/definitions/S3Uri'
+        description: 'The path of the S3 object that contains the model artifacts. For example, <code>s3://bucket-name/keynameprefix/model.tar.gz</code>.'
+    description: 'Provides information about the location that is configured for storing model artifacts. '
+  TrainingJobStatus:
+    type: string
+    enum:
+      - InProgress
+      - Completed
+      - Failed
+      - Stopping
+      - Stopped
+  SecondaryStatus:
+    type: string
+    enum:
+      - Starting
+      - LaunchingMLInstances
+      - PreparingTrainingStack
+      - Downloading
+      - DownloadingTrainingImage
+      - Training
+      - Uploading
+      - Stopping
+      - Stopped
+      - MaxRuntimeExceeded
+      - Completed
+      - Failed
+  SecondaryStatusTransitions:
+    type: array
+    items:
+      $ref: '#/definitions/SecondaryStatusTransition'
+  TransformJobStatus:
+    type: string
+    enum:
+      - InProgress
+      - Completed
+      - Failed
+      - Stopping
+      - Stopped
+  VariantName:
     type: string
     pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 63
+  VariantWeight:
+    type: number
+    format: float
+    minimum: 0
+  TaskCount:
+    type: integer
+    minimum: 1
+  DesiredWeightAndCapacity:
+    type: object
+    required:
+      - VariantName
+    properties:
+      VariantName:
+        $ref: '#/definitions/VariantName'
+        description: The name of the variant to update.
+      DesiredWeight:
+        $ref: '#/definitions/VariantWeight'
+        description: The variant's weight.
+      DesiredInstanceCount:
+        $ref: '#/definitions/TaskCount'
+        description: The variant's capacity.
+    description: Specifies weight and capacity values for a production variant.
+  DesiredWeightAndCapacityList:
+    type: array
+    items:
+      $ref: '#/definitions/DesiredWeightAndCapacity'
+    minItems: 1
+  DisassociateNotebookInstanceLifecycleConfig:
+    type: boolean
+  EndpointConfigNameContains:
+    type: string
+    pattern: '[a-zA-Z0-9-]+'
+  EndpointConfigSortKey:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+  EndpointConfigSummary:
+    type: object
+    required:
+      - EndpointConfigName
+      - EndpointConfigArn
+      - CreationTime
+    properties:
+      EndpointConfigName:
+        $ref: '#/definitions/EndpointConfigName'
+        description: The name of the endpoint configuration.
+      EndpointConfigArn:
+        $ref: '#/definitions/EndpointConfigArn'
+        description: The Amazon Resource Name (ARN) of the endpoint configuration.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the endpoint configuration was created.
+    description: Provides summary information for an endpoint configuration.
+  EndpointConfigSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/EndpointConfigSummary'
+  EndpointNameContains:
+    type: string
+    pattern: '[a-zA-Z0-9-]+'
+  EndpointSortKey:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+      - Status
+  EndpointSummary:
+    type: object
+    required:
+      - EndpointName
+      - EndpointArn
+      - CreationTime
+      - LastModifiedTime
+      - EndpointStatus
+    properties:
+      EndpointName:
+        $ref: '#/definitions/EndpointName'
+        description: The name of the endpoint.
+      EndpointArn:
+        $ref: '#/definitions/EndpointArn'
+        description: The Amazon Resource Name (ARN) of the endpoint.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the endpoint was created.
+      LastModifiedTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the endpoint was last modified.
+      EndpointStatus:
+        $ref: '#/definitions/EndpointStatus'
+        description: The status of the endpoint.
+    description: Provides summary information for an endpoint.
+  EndpointSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/EndpointSummary'
+  EnvironmentKey:
+    type: string
+    pattern: '[a-zA-Z_][a-zA-Z0-9_]*'
+    maxLength: 1024
+  EnvironmentValue:
+    type: string
+    maxLength: 1024
+  HyperParameterTuningJobObjectiveType:
+    type: string
+    enum:
+      - Maximize
+      - Minimize
+  MetricName:
+    type: string
     minLength: 1
-    maxLength: 32
+    maxLength: 255
+  MetricValue:
+    type: number
+    format: float
+  FinalHyperParameterTuningJobObjectiveMetric:
+    type: object
+    required:
+      - MetricName
+      - Value
+    properties:
+      Type:
+        $ref: '#/definitions/HyperParameterTuningJobObjectiveType'
+        description: Whether to minimize or maximize the objective metric. Valid values are Minimize and Maximize.
+      MetricName:
+        $ref: '#/definitions/MetricName'
+        description: The name of the objective metric.
+      Value:
+        $ref: '#/definitions/MetricValue'
+        description: The value of the objective metric.
+    description: Shows the final value for the objective metric for a training job that was launched by a hyperparameter tuning job. You define the objective metric in the <code>HyperParameterTuningJobObjective</code> parameter of <a>HyperParameterTuningJobConfig</a>.
+  MetricDefinitionList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDefinition'
+    minItems: 0
+    maxItems: 20
+  HyperParameterAlgorithmSpecification:
+    type: object
+    required:
+      - TrainingImage
+      - TrainingInputMode
+    properties:
+      TrainingImage:
+        $ref: '#/definitions/AlgorithmImage'
+        description: ' The registry path of the Docker image that contains the training algorithm. For information about Docker registry paths for built-in algorithms, see <a>sagemaker-algo-docker-registry-paths</a>.'
+      TrainingInputMode:
+        $ref: '#/definitions/TrainingInputMode'
+        description: '<p>The input mode that the algorithm supports: File or Pipe. In File input mode, Amazon SageMaker downloads the training data from Amazon S3 to the storage volume that is attached to the training instance and mounts the directory to the Docker volume for the training container. In Pipe input mode, Amazon SageMaker streams data directly from Amazon S3 to the container. </p> <p>If you specify File mode, make sure that you provision the storage volume that is attached to the training instance with enough capacity to accommodate the training data downloaded from Amazon S3, the model artifacts, and intermediate information.</p> <p/> <p>For more information about input modes, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. </p>'
+      MetricDefinitions:
+        $ref: '#/definitions/MetricDefinitionList'
+        description: An array of <a>MetricDefinition</a> objects that specify the metrics that the algorithm emits.
+    description: Specifies which training algorithm to use for training jobs that a hyperparameter tuning job launches and the metrics to monitor.
+  HyperParameterTrainingJobSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/HyperParameterTrainingJobSummary'
+  ObjectiveStatus:
+    type: string
+    enum:
+      - Succeeded
+      - Pending
+      - Failed
+  HyperParameterTuningJobStrategyType:
+    type: string
+    enum:
+      - Bayesian
+    description: 'The strategy hyperparameter tuning uses to find the best combination of hyperparameters for your model. Currently, the only supported value is <code>Bayesian</code>.'
   HyperParameterTuningJobObjective:
     type: object
     required:
@@ -2626,34 +3570,38 @@ definitions:
         $ref: '#/definitions/MetricName'
         description: The name of the metric to use for the objective metric.
     description: 'Defines the objective metric for a hyperparameter tuning job. Hyperparameter tuning uses the value of this metric to evaluate the training jobs it launches, and returns the training job that results in either the highest or lowest value for this metric, depending on the value you specify for the <code>Type</code> parameter.'
-  HyperParameterTuningJobObjectiveType:
-    type: string
-    enum:
-      - Maximize
-      - Minimize
+  ResourceLimits:
+    type: object
+    required:
+      - MaxNumberOfTrainingJobs
+      - MaxParallelTrainingJobs
+    properties:
+      MaxNumberOfTrainingJobs:
+        $ref: '#/definitions/MaxNumberOfTrainingJobs'
+        description: The maximum number of training jobs that a hyperparameter tuning job can launch.
+      MaxParallelTrainingJobs:
+        $ref: '#/definitions/MaxParallelTrainingJobs'
+        description: The maximum number of concurrent training jobs that a hyperparameter tuning job can launch.
+    description: Specifies the maximum number of training jobs and parallel training jobs that a hyperparameter tuning job can launch.
+  ParameterRanges:
+    type: object
+    properties:
+      IntegerParameterRanges:
+        $ref: '#/definitions/IntegerParameterRanges'
+        description: The array of <a>IntegerParameterRange</a> objects that specify ranges of integer hyperparameters that a hyperparameter tuning job searches.
+      ContinuousParameterRanges:
+        $ref: '#/definitions/ContinuousParameterRanges'
+        description: The array of <a>ContinuousParameterRange</a> objects that specify ranges of continuous hyperparameters that a hyperparameter tuning job searches.
+      CategoricalParameterRanges:
+        $ref: '#/definitions/CategoricalParameterRanges'
+        description: The array of <a>CategoricalParameterRange</a> objects that specify ranges of categorical hyperparameters that a hyperparameter tuning job searches.
+    description: 'Specifies ranges of integer, continuous, and categorical hyperparameters that a hyperparameter tuning job searches.'
   HyperParameterTuningJobSortByOptions:
     type: string
     enum:
       - Name
       - Status
       - CreationTime
-  HyperParameterTuningJobStatus:
-    type: string
-    enum:
-      - Completed
-      - InProgress
-      - Failed
-      - Stopped
-      - Stopping
-  HyperParameterTuningJobStrategyType:
-    type: string
-    enum:
-      - Bayesian
-    description: 'The strategy hyperparameter tuning uses to find the best combination of hyperparameters for your model. Currently, the only supported value is <code>Bayesian</code>.'
-  HyperParameterTuningJobSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/HyperParameterTuningJobSummary'
   HyperParameterTuningJobSummary:
     type: object
     required:
@@ -2696,45 +3644,10 @@ definitions:
         $ref: '#/definitions/ResourceLimits'
         description: The <a>ResourceLimits</a> object that specifies the maximum number of training jobs and parallel training jobs allowed for this tuning job.
     description: Provides summary information about a hyperparameter tuning job.
-  HyperParameters:
-    type: array
-    minItems: 0
-    maxItems: 100
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ParameterKey'
-        value:
-          $ref: '#/definitions/ParameterValue'
-  Image:
-    type: string
-    pattern: '[\S]+'
-    maxLength: 255
-  InputDataConfig:
+  HyperParameterTuningJobSummaries:
     type: array
     items:
-      $ref: '#/definitions/Channel'
-    minItems: 1
-    maxItems: 8
-  InstanceType:
-    type: string
-    enum:
-      - ml.t2.medium
-      - ml.t2.large
-      - ml.t2.xlarge
-      - ml.t2.2xlarge
-      - ml.m4.xlarge
-      - ml.m4.2xlarge
-      - ml.m4.4xlarge
-      - ml.m4.10xlarge
-      - ml.m4.16xlarge
-      - ml.p2.xlarge
-      - ml.p2.8xlarge
-      - ml.p2.16xlarge
-      - ml.p3.2xlarge
-      - ml.p3.8xlarge
-      - ml.p3.16xlarge
+      $ref: '#/definitions/HyperParameterTuningJobSummary'
   IntegerParameterRange:
     type: object
     required:
@@ -2758,421 +3671,115 @@ definitions:
       $ref: '#/definitions/IntegerParameterRange'
     minItems: 0
     maxItems: 20
-  KmsKeyId:
+  OrderKey:
     type: string
-    maxLength: 2048
-  LastModifiedTime:
+    enum:
+      - Ascending
+      - Descending
+  PaginationToken:
     type: string
-    format: date-time
-  ListEndpointConfigsInput:
-    type: object
-    properties:
-      SortBy:
-        $ref: '#/definitions/EndpointConfigSortKey'
-        description: The field to sort results by. The default is <code>CreationTime</code>.
-      SortOrder:
-        $ref: '#/definitions/OrderKey'
-        description: The sort order for results. The default is <code>Ascending</code>.
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'If the result of the previous <code>ListEndpointConfig</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of endpoint configurations, use the token in the next request. '
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of training jobs to return in the response.
-      NameContains:
-        $ref: '#/definitions/EndpointConfigNameContains'
-        description: 'A string in the endpoint configuration name. This filter returns only endpoint configurations whose name contains the specified string. '
-      CreationTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only endpoint configurations created before the specified time (timestamp).
-      CreationTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only endpoint configurations created after the specified time (timestamp).
-  ListEndpointConfigsOutput:
-    type: object
-    required:
-      - EndpointConfigs
-    properties:
-      EndpointConfigs:
-        $ref: '#/definitions/EndpointConfigSummaryList'
-        description: An array of endpoint configurations.
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: ' If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of endpoint configurations, use it in the subsequent request '
-  ListEndpointsInput:
-    type: object
-    properties:
-      SortBy:
-        $ref: '#/definitions/EndpointSortKey'
-        description: Sorts the list of results. The default is <code>CreationTime</code>.
-      SortOrder:
-        $ref: '#/definitions/OrderKey'
-        description: The sort order for results. The default is <code>Ascending</code>.
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'If the result of a <code>ListEndpoints</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of endpoints, use the token in the next request.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of endpoints to return in the response.
-      NameContains:
-        $ref: '#/definitions/EndpointNameContains'
-        description: A string in endpoint names. This filter returns only endpoints whose name contains the specified string.
-      CreationTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only endpoints that were created before the specified time (timestamp).
-      CreationTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only endpoints that were created after the specified time (timestamp).
-      LastModifiedTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: ' A filter that returns only endpoints that were modified before the specified timestamp. '
-      LastModifiedTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: ' A filter that returns only endpoints that were modified after the specified timestamp. '
-      StatusEquals:
-        $ref: '#/definitions/EndpointStatus'
-        description: ' A filter that returns only endpoints with the specified status. '
-  ListEndpointsOutput:
-    type: object
-    required:
-      - Endpoints
-    properties:
-      Endpoints:
-        $ref: '#/definitions/EndpointSummaryList'
-        description: ' An array or endpoint objects. '
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: ' If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request. '
-  ListHyperParameterTuningJobsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If the result of the previous <code>ListHyperParameterTuningJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of tuning jobs, use the token in the next request.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of tuning jobs to return. The default value is 10.
-      SortBy:
-        $ref: '#/definitions/HyperParameterTuningJobSortByOptions'
-        description: The field to sort results by. The default is <code>Name</code>.
-      SortOrder:
-        $ref: '#/definitions/SortOrder'
-        description: The sort order for results. The default is <code>Ascending</code>.
-      NameContains:
-        $ref: '#/definitions/NameContains'
-        description: A string in the tuning job name. This filter returns only tuning jobs whose name contains the specified string.
-      CreationTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only tuning jobs that were created after the specified time.
-      CreationTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only tuning jobs that were created before the specified time.
-      LastModifiedTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only tuning jobs that were modified after the specified time.
-      LastModifiedTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only tuning jobs that were modified before the specified time.
-      StatusEquals:
-        $ref: '#/definitions/HyperParameterTuningJobStatus'
-        description: A filter that returns only tuning jobs with the specified status.
-  ListHyperParameterTuningJobsResponse:
-    type: object
-    required:
-      - HyperParameterTuningJobSummaries
-    properties:
-      HyperParameterTuningJobSummaries:
-        $ref: '#/definitions/HyperParameterTuningJobSummaries'
-        description: A list of <a>HyperParameterTuningJobSummary</a> objects that describe the tuning jobs that the <code>ListHyperParameterTuningJobs</code> request returned.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If the result of this <code>ListHyperParameterTuningJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of tuning jobs, use the token in the next request.'
-  ListModelsInput:
-    type: object
-    properties:
-      SortBy:
-        $ref: '#/definitions/ModelSortKey'
-        description: Sorts the list of results. The default is <code>CreationTime</code>.
-      SortOrder:
-        $ref: '#/definitions/OrderKey'
-        description: The sort order for results. The default is <code>Ascending</code>.
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'If the response to a previous <code>ListModels</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of models, use the token in the next request.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of models to return in the response.
-      NameContains:
-        $ref: '#/definitions/ModelNameContains'
-        description: A string in the training job name. This filter returns only models in the training job whose name contains the specified string.
-      CreationTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only models created before the specified time (timestamp).
-      CreationTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only models created after the specified time (timestamp).
-  ListModelsOutput:
-    type: object
-    required:
-      - Models
-    properties:
-      Models:
-        $ref: '#/definitions/ModelSummaryList'
-        description: 'An array of <code>ModelSummary</code> objects, each of which lists a model.'
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: ' If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of models, use it in the subsequent request. '
-  ListNotebookInstanceLifecycleConfigsInput:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If the result of a <code>ListNotebookInstanceLifecycleConfigs</code> request was truncated, the response includes a <code>NextToken</code>. To get the next set of lifecycle configurations, use the token in the next request.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of lifecycle configurations to return in the response.
-      SortBy:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigSortKey'
-        description: Sorts the list of results. The default is <code>CreationTime</code>.
-      SortOrder:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigSortOrder'
-        description: The sort order for results.
-      NameContains:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigNameContains'
-        description: A string in the lifecycle configuration name. This filter returns only lifecycle configurations whose name contains the specified string.
-      CreationTimeBefore:
-        $ref: '#/definitions/CreationTime'
-        description: A filter that returns only lifecycle configurations that were created before the specified time (timestamp).
-      CreationTimeAfter:
-        $ref: '#/definitions/CreationTime'
-        description: A filter that returns only lifecycle configurations that were created after the specified time (timestamp).
-      LastModifiedTimeBefore:
-        $ref: '#/definitions/LastModifiedTime'
-        description: A filter that returns only lifecycle configurations that were modified before the specified time (timestamp).
-      LastModifiedTimeAfter:
-        $ref: '#/definitions/LastModifiedTime'
-        description: A filter that returns only lifecycle configurations that were modified after the specified time (timestamp).
-  ListNotebookInstanceLifecycleConfigsOutput:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If the response is truncated, Amazon SageMaker returns this token. To get the next set of lifecycle configurations, use it in the next request. '
-      NotebookInstanceLifecycleConfigs:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigSummaryList'
-        description: 'An array of <code>NotebookInstanceLifecycleConfiguration</code> objects, each listing a lifecycle configuration.'
-  ListNotebookInstancesInput:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: '<p> If the previous call to the <code>ListNotebookInstances</code> is truncated, the response includes a <code>NextToken</code>. You can use this token in your subsequent <code>ListNotebookInstances</code> request to fetch the next set of notebook instances. </p> <note> <p> You might specify a filter or a sort order in your request. When response is truncated, you must use the same values for the filer and sort order in the next request. </p> </note>'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of notebook instances to return.
-      SortBy:
-        $ref: '#/definitions/NotebookInstanceSortKey'
-        description: The field to sort results by. The default is <code>Name</code>.
-      SortOrder:
-        $ref: '#/definitions/NotebookInstanceSortOrder'
-        description: 'The sort order for results. '
-      NameContains:
-        $ref: '#/definitions/NotebookInstanceNameContains'
-        description: A string in the notebook instances' name. This filter returns only notebook instances whose name contains the specified string.
-      CreationTimeBefore:
-        $ref: '#/definitions/CreationTime'
-        description: 'A filter that returns only notebook instances that were created before the specified time (timestamp). '
-      CreationTimeAfter:
-        $ref: '#/definitions/CreationTime'
-        description: A filter that returns only notebook instances that were created after the specified time (timestamp).
-      LastModifiedTimeBefore:
-        $ref: '#/definitions/LastModifiedTime'
-        description: A filter that returns only notebook instances that were modified before the specified time (timestamp).
-      LastModifiedTimeAfter:
-        $ref: '#/definitions/LastModifiedTime'
-        description: A filter that returns only notebook instances that were modified after the specified time (timestamp).
-      StatusEquals:
-        $ref: '#/definitions/NotebookInstanceStatus'
-        description: A filter that returns only notebook instances with the specified status.
-      NotebookInstanceLifecycleConfigNameContains:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
-        description: A string in the name of a notebook instances lifecycle configuration associated with this notebook instance. This filter returns only notebook instances associated with a lifecycle configuration with a name that contains the specified string.
-  ListNotebookInstancesOutput:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If the response to the previous <code>ListNotebookInstances</code> request was truncated, Amazon SageMaker returns this token. To retrieve the next set of notebook instances, use the token in the next request.'
-      NotebookInstances:
-        $ref: '#/definitions/NotebookInstanceSummaryList'
-        description: 'An array of <code>NotebookInstanceSummary</code> objects, one for each notebook instance.'
-  ListTagsInput:
-    type: object
-    required:
-      - ResourceArn
-    properties:
-      ResourceArn:
-        $ref: '#/definitions/ResourceArn'
-        description: The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: ' If the response to the previous <code>ListTags</code> request is truncated, Amazon SageMaker returns this token. To retrieve the next set of tags, use it in the subsequent request. '
-      MaxResults:
-        $ref: '#/definitions/ListTagsMaxResults'
-        description: Maximum number of tags to return.
+    maxLength: 8192
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  NextToken:
+    type: string
+    maxLength: 8192
+  SortOrder:
+    type: string
+    enum:
+      - Ascending
+      - Descending
+  NameContains:
+    type: string
+    pattern: '[a-zA-Z0-9\-]+'
+    maxLength: 63
+  ModelSortKey:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+  ModelNameContains:
+    type: string
+    pattern: '[a-zA-Z0-9-]+'
+  ModelSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/ModelSummary'
+  NotebookInstanceLifecycleConfigSortKey:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+      - LastModifiedTime
+  NotebookInstanceLifecycleConfigSortOrder:
+    type: string
+    enum:
+      - Ascending
+      - Descending
+  NotebookInstanceLifecycleConfigNameContains:
+    type: string
+    pattern: '[a-zA-Z0-9-]+'
+  NotebookInstanceLifecycleConfigSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/NotebookInstanceLifecycleConfigSummary'
+  NotebookInstanceSortKey:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+      - Status
+  NotebookInstanceSortOrder:
+    type: string
+    enum:
+      - Ascending
+      - Descending
+  NotebookInstanceNameContains:
+    type: string
+    pattern: '[a-zA-Z0-9-]+'
+  NotebookInstanceSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/NotebookInstanceSummary'
   ListTagsMaxResults:
     type: integer
     minimum: 50
-  ListTagsOutput:
-    type: object
-    properties:
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: 'An array of <code>Tag</code> objects, each with a tag key and a value.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: ' If response is truncated, Amazon SageMaker includes a token in the response. You can use this token in your subsequent request to fetch next set of tokens. '
-  ListTrainingJobsForHyperParameterTuningJobRequest:
-    type: object
-    required:
-      - HyperParameterTuningJobName
-    properties:
-      HyperParameterTuningJobName:
-        $ref: '#/definitions/HyperParameterTuningJobName'
-        description: The name of the tuning job whose training jobs you want to list.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If the result of the previous <code>ListTrainingJobsForHyperParameterTuningJob</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of training jobs, use the token in the next request.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of training jobs to return. The default value is 10.
-      StatusEquals:
-        $ref: '#/definitions/TrainingJobStatus'
-        description: A filter that returns only training jobs with the specified status.
-      SortBy:
-        $ref: '#/definitions/TrainingJobSortByOptions'
-        description: '<p>The field to sort results by. The default is <code>Name</code>.</p> <p>If the value of this field is <code>FinalObjectiveMetricValue</code>, any training jobs that did not return an objective metric are not listed.</p>'
-      SortOrder:
-        $ref: '#/definitions/SortOrder'
-        description: The sort order for results. The default is <code>Ascending</code>.
-  ListTrainingJobsForHyperParameterTuningJobResponse:
-    type: object
-    required:
-      - TrainingJobSummaries
-    properties:
-      TrainingJobSummaries:
-        $ref: '#/definitions/HyperParameterTrainingJobSummaries'
-        description: A list of <a>TrainingJobSummary</a> objects that describe the training jobs that the <code>ListTrainingJobsForHyperParameterTuningJob</code> request returned.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If the result of this <code>ListTrainingJobsForHyperParameterTuningJob</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of training jobs, use the token in the next request.'
-  ListTrainingJobsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If the result of the previous <code>ListTrainingJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of training jobs, use the token in the next request. '
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of training jobs to return in the response.
-      CreationTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only training jobs created after the specified time (timestamp).
-      CreationTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only training jobs created before the specified time (timestamp).
-      LastModifiedTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only training jobs modified after the specified time (timestamp).
-      LastModifiedTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only training jobs modified before the specified time (timestamp).
-      NameContains:
-        $ref: '#/definitions/NameContains'
-        description: A string in the training job name. This filter returns only training jobs whose name contains the specified string.
-      StatusEquals:
-        $ref: '#/definitions/TrainingJobStatus'
-        description: A filter that retrieves only training jobs with a specific status.
-      SortBy:
-        $ref: '#/definitions/SortBy'
-        description: The field to sort results by. The default is <code>CreationTime</code>.
-      SortOrder:
-        $ref: '#/definitions/SortOrder'
-        description: The sort order for results. The default is <code>Ascending</code>.
-  ListTrainingJobsResponse:
-    type: object
-    required:
-      - TrainingJobSummaries
-    properties:
-      TrainingJobSummaries:
-        $ref: '#/definitions/TrainingJobSummaries'
-        description: 'An array of <code>TrainingJobSummary</code> objects, each listing a training job.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request.'
-  ListTransformJobsRequest:
-    type: object
-    properties:
-      CreationTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only transform jobs created after the specified time.
-      CreationTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only transform jobs created before the specified time.
-      LastModifiedTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only transform jobs modified after the specified time.
-      LastModifiedTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: A filter that returns only transform jobs modified before the specified time.
-      NameContains:
-        $ref: '#/definitions/NameContains'
-        description: A string in the transform job name. This filter returns only transform jobs whose name contains the specified string.
-      StatusEquals:
-        $ref: '#/definitions/TransformJobStatus'
-        description: A filter that retrieves only transform jobs with a specific status.
-      SortBy:
-        $ref: '#/definitions/SortBy'
-        description: The field to sort results by. The default is <code>CreationTime</code>.
-      SortOrder:
-        $ref: '#/definitions/SortOrder'
-        description: The sort order for results. The default is <code>Descending</code>.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If the result of the previous <code>ListTransformJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of transform jobs, use the token in the next request.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of transform jobs to return in the response. The default value is <code>10</code>.
-  ListTransformJobsResponse:
-    type: object
-    required:
-      - TransformJobSummaries
-    properties:
-      TransformJobSummaries:
-        $ref: '#/definitions/TransformJobSummaries'
-        description: An array of <code>TransformJobSummary</code> objects.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of transform jobs, use it in the next request.'
-  MaxConcurrentTransforms:
-    type: integer
-    minimum: 0
+  TrainingJobSortByOptions:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+      - Status
+      - FinalObjectiveMetricValue
+  SortBy:
+    type: string
+    enum:
+      - Name
+      - CreationTime
+      - Status
+  TrainingJobSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/TrainingJobSummary'
+  TransformJobSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/TransformJobSummary'
   MaxNumberOfTrainingJobs:
     type: integer
     minimum: 1
   MaxParallelTrainingJobs:
     type: integer
     minimum: 1
-  MaxPayloadInMB:
-    type: integer
-    minimum: 0
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
   MaxRuntimeInSeconds:
     type: integer
     minimum: 1
+  MetricRegex:
+    type: string
+    minLength: 1
+    maxLength: 500
   MetricDefinition:
     type: object
     required:
@@ -3186,48 +3793,10 @@ definitions:
         $ref: '#/definitions/MetricRegex'
         description: 'A regular expression that searches the output of a training job and gets the value of the metric. For more information about using regular expressions to define metrics, see <a>automatic-model-tuning-define-metrics</a>.'
     description: Specifies a metric that the training algorithm writes to <code>stderr</code> or <code>stdout</code>. Amazon SageMakerHyperparamter tuning captures all defined metrics. You specify one metric that a hyperparameter tuning job uses as its objective metric to choose the best training job.
-  MetricDefinitionList:
-    type: array
-    items:
-      $ref: '#/definitions/MetricDefinition'
-    minItems: 0
-    maxItems: 20
-  MetricName:
+  S3Uri:
     type: string
-    minLength: 1
-    maxLength: 255
-  MetricRegex:
-    type: string
-    minLength: 1
-    maxLength: 500
-  MetricValue:
-    type: number
-    format: float
-  ModelArn:
-    type: string
-    minLength: 20
-    maxLength: 2048
-  ModelArtifacts:
-    type: object
-    required:
-      - S3ModelArtifacts
-    properties:
-      S3ModelArtifacts:
-        $ref: '#/definitions/S3Uri'
-        description: 'The path of the S3 object that contains the model artifacts. For example, <code>s3://bucket-name/keynameprefix/model.tar.gz</code>.'
-    description: 'Provides information about the location that is configured for storing model artifacts. '
-  ModelName:
-    type: string
-    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
-    maxLength: 63
-  ModelNameContains:
-    type: string
-    pattern: '[a-zA-Z0-9-]+'
-  ModelSortKey:
-    type: string
-    enum:
-      - Name
-      - CreationTime
+    pattern: '^(https|s3)://([^/]+)/?(.*)$'
+    maxLength: 1024
   ModelSummary:
     type: object
     required:
@@ -3245,52 +3814,17 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: A timestamp that indicates when the model was created.
     description: Provides summary information about a model.
-  ModelSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/ModelSummary'
-  NameContains:
-    type: string
-    pattern: '[a-zA-Z0-9\-]+'
-    maxLength: 63
-  NetworkInterfaceId:
-    type: string
-  NextToken:
-    type: string
-    maxLength: 8192
-  NotebookInstanceArn:
-    type: string
-    maxLength: 256
-  NotebookInstanceLifecycleConfigArn:
-    type: string
-    maxLength: 256
   NotebookInstanceLifecycleConfigContent:
     type: string
     minLength: 1
     maxLength: 16384
-  NotebookInstanceLifecycleConfigList:
-    type: array
-    items:
-      $ref: '#/definitions/NotebookInstanceLifecycleHook'
-    maxItems: 1
-  NotebookInstanceLifecycleConfigName:
-    type: string
-    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
-    maxLength: 63
-  NotebookInstanceLifecycleConfigNameContains:
-    type: string
-    pattern: '[a-zA-Z0-9-]+'
-  NotebookInstanceLifecycleConfigSortKey:
-    type: string
-    enum:
-      - Name
-      - CreationTime
-      - LastModifiedTime
-  NotebookInstanceLifecycleConfigSortOrder:
-    type: string
-    enum:
-      - Ascending
-      - Descending
+  NotebookInstanceLifecycleHook:
+    type: object
+    properties:
+      Content:
+        $ref: '#/definitions/NotebookInstanceLifecycleConfigContent'
+        description: A base64-encoded string that contains a shell script for a notebook instance lifecycle configuration.
+    description: '<p>Contains the notebook instance lifecycle configuration script.</p> <p>Each lifecycle configuration script has a limit of 16384 characters.</p> <p>The value of the <code>$PATH</code> environment variable that is available to both scripts is <code>/sbin:bin:/usr/sbin:/usr/bin</code>.</p> <p>View CloudWatch Logs for notebook instance lifecycle configurations in log group <code>/aws/sagemaker/NotebookInstances</code> in log stream <code>[notebook-instance-name]/[LifecycleConfigHook]</code>.</p> <p>Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs for longer than 5 minutes, it fails and the notebook instance is not created or started.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>'
   NotebookInstanceLifecycleConfigSummary:
     type: object
     required:
@@ -3310,45 +3844,6 @@ definitions:
         $ref: '#/definitions/LastModifiedTime'
         description: A timestamp that tells when the lifecycle configuration was last modified.
     description: Provides a summary of a notebook instance lifecycle configuration.
-  NotebookInstanceLifecycleConfigSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/NotebookInstanceLifecycleConfigSummary'
-  NotebookInstanceLifecycleHook:
-    type: object
-    properties:
-      Content:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigContent'
-        description: A base64-encoded string that contains a shell script for a notebook instance lifecycle configuration.
-    description: '<p>Contains the notebook instance lifecycle configuration script.</p> <p>Each lifecycle configuration script has a limit of 16384 characters.</p> <p>The value of the <code>$PATH</code> environment variable that is available to both scripts is <code>/sbin:bin:/usr/sbin:/usr/bin</code>.</p> <p>View CloudWatch Logs for notebook instance lifecycle configurations in log group <code>/aws/sagemaker/NotebookInstances</code> in log stream <code>[notebook-instance-name]/[LifecycleConfigHook]</code>.</p> <p>Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs for longer than 5 minutes, it fails and the notebook instance is not created or started.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>'
-  NotebookInstanceName:
-    type: string
-    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
-    maxLength: 63
-  NotebookInstanceNameContains:
-    type: string
-    pattern: '[a-zA-Z0-9-]+'
-  NotebookInstanceSortKey:
-    type: string
-    enum:
-      - Name
-      - CreationTime
-      - Status
-  NotebookInstanceSortOrder:
-    type: string
-    enum:
-      - Ascending
-      - Descending
-  NotebookInstanceStatus:
-    type: string
-    enum:
-      - Pending
-      - InService
-      - Stopping
-      - Stopped
-      - Failed
-      - Deleting
-      - Updating
   NotebookInstanceSummary:
     type: object
     required:
@@ -3380,103 +3875,9 @@ definitions:
         $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
         description: '<p>The name of a notebook instance lifecycle configuration associated with this notebook instance.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>'
     description: Provides summary information for an Amazon SageMaker notebook instance.
-  NotebookInstanceSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/NotebookInstanceSummary'
-  NotebookInstanceUrl:
-    type: string
-  ObjectiveStatus:
-    type: string
-    enum:
-      - Succeeded
-      - Pending
-      - Failed
   ObjectiveStatusCounter:
     type: integer
     minimum: 0
-  ObjectiveStatusCounters:
-    type: object
-    properties:
-      Succeeded:
-        $ref: '#/definitions/ObjectiveStatusCounter'
-        description: The number of training jobs whose final objective metric was evaluated by the hyperparameter tuning job and used in the hyperparameter tuning process.
-      Pending:
-        $ref: '#/definitions/ObjectiveStatusCounter'
-        description: The number of training jobs that are in progress and pending evaluation of their final objective metric.
-      Failed:
-        $ref: '#/definitions/ObjectiveStatusCounter'
-        description: The number of training jobs whose final objective metric was not evaluated and used in the hyperparameter tuning process. This typically occurs when the training job failed or did not emit an objective metric.
-    description: 'Specifies the number of training jobs that this hyperparameter tuning job launched, categorized by the status of their objective metric. The objective metric status shows whether the final objective metric for the training job has been evaluated by the tuning job and used in the hyperparameter tuning process.'
-  OrderKey:
-    type: string
-    enum:
-      - Ascending
-      - Descending
-  OutputDataConfig:
-    type: object
-    required:
-      - S3OutputPath
-    properties:
-      KmsKeyId:
-        $ref: '#/definitions/KmsKeyId'
-        description: '<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. </p> <note> <p>If you don''t provide the KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role''s account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in Amazon Simple Storage Service developer guide.</p> </note> <note> <p> The KMS key policy must grant permission to the IAM role you specify in your <code>CreateTrainingJob</code> request. <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the AWS Key Management Service Developer Guide. </p> </note>'
-      S3OutputPath:
-        $ref: '#/definitions/S3Uri'
-        description: 'Identifies the S3 path where you want Amazon SageMaker to store the model artifacts. For example, <code>s3://bucket-name/key-name-prefix</code>. '
-    description: Provides information about how to store model training results (model artifacts).
-  PaginationToken:
-    type: string
-    maxLength: 8192
-  ParameterKey:
-    type: string
-    maxLength: 256
-  ParameterRanges:
-    type: object
-    properties:
-      IntegerParameterRanges:
-        $ref: '#/definitions/IntegerParameterRanges'
-        description: The array of <a>IntegerParameterRange</a> objects that specify ranges of integer hyperparameters that a hyperparameter tuning job searches.
-      ContinuousParameterRanges:
-        $ref: '#/definitions/ContinuousParameterRanges'
-        description: The array of <a>ContinuousParameterRange</a> objects that specify ranges of continuous hyperparameters that a hyperparameter tuning job searches.
-      CategoricalParameterRanges:
-        $ref: '#/definitions/CategoricalParameterRanges'
-        description: The array of <a>CategoricalParameterRange</a> objects that specify ranges of categorical hyperparameters that a hyperparameter tuning job searches.
-    description: 'Specifies ranges of integer, continuous, and categorical hyperparameters that a hyperparameter tuning job searches.'
-  ParameterValue:
-    type: string
-    maxLength: 256
-  ParameterValues:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterValue'
-    minItems: 1
-    maxItems: 20
-  ProductionVariant:
-    type: object
-    required:
-      - VariantName
-      - ModelName
-      - InitialInstanceCount
-      - InstanceType
-    properties:
-      VariantName:
-        $ref: '#/definitions/VariantName'
-        description: The name of the production variant.
-      ModelName:
-        $ref: '#/definitions/ModelName'
-        description: The name of the model that you want to host. This is the name that you specified when creating the model.
-      InitialInstanceCount:
-        $ref: '#/definitions/TaskCount'
-        description: Number of instances to launch initially.
-      InstanceType:
-        $ref: '#/definitions/ProductionVariantInstanceType'
-        description: The ML compute instance type.
-      InitialVariantWeight:
-        $ref: '#/definitions/VariantWeight'
-        description: 'Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. The traffic to a production variant is determined by the ratio of the <code>VariantWeight</code> to the sum of all <code>VariantWeight</code> values across all ProductionVariants. If unspecified, it defaults to 1.0. '
-    description: 'Identifies a model that you want to host and the resources to deploy for hosting it. If you are deploying multiple models, tell Amazon SageMaker how to distribute traffic among the models by specifying variant weights. '
   ProductionVariantInstanceType:
     type: string
     enum:
@@ -3512,11 +3913,30 @@ definitions:
       - ml.c5.4xlarge
       - ml.c5.9xlarge
       - ml.c5.18xlarge
-  ProductionVariantList:
-    type: array
-    items:
-      $ref: '#/definitions/ProductionVariant'
-    minItems: 1
+  ProductionVariant:
+    type: object
+    required:
+      - VariantName
+      - ModelName
+      - InitialInstanceCount
+      - InstanceType
+    properties:
+      VariantName:
+        $ref: '#/definitions/VariantName'
+        description: The name of the production variant.
+      ModelName:
+        $ref: '#/definitions/ModelName'
+        description: The name of the model that you want to host. This is the name that you specified when creating the model.
+      InitialInstanceCount:
+        $ref: '#/definitions/TaskCount'
+        description: Number of instances to launch initially.
+      InstanceType:
+        $ref: '#/definitions/ProductionVariantInstanceType'
+        description: The ML compute instance type.
+      InitialVariantWeight:
+        $ref: '#/definitions/VariantWeight'
+        description: 'Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. The traffic to a production variant is determined by the ratio of the <code>VariantWeight</code> to the sum of all <code>VariantWeight</code> values across all ProductionVariants. If unspecified, it defaults to 1.0. '
+    description: 'Identifies a model that you want to host and the resources to deploy for hosting it. If you are deploying multiple models, tell Amazon SageMaker how to distribute traffic among the models by specifying variant weights. '
   ProductionVariantSummary:
     type: object
     required:
@@ -3541,279 +3961,6 @@ definitions:
         $ref: '#/definitions/TaskCount'
         description: 'The number of instances requested in the <code>UpdateEndpointWeightsAndCapacities</code> request. '
     description: 'Describes weight and capacities for a production variant associated with an endpoint. If you sent a request to the <code>UpdateEndpointWeightsAndCapacities</code> API and the endpoint status is <code>Updating</code>, you get different desired and current values. '
-  ProductionVariantSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/ProductionVariantSummary'
-    minItems: 1
-  RecordWrapper:
-    type: string
-    enum:
-      - None
-      - RecordIO
-  ResourceArn:
-    type: string
-    maxLength: 256
-  ResourceConfig:
-    type: object
-    required:
-      - InstanceType
-      - InstanceCount
-      - VolumeSizeInGB
-    properties:
-      InstanceType:
-        $ref: '#/definitions/TrainingInstanceType'
-        description: 'The ML compute instance type. '
-      InstanceCount:
-        $ref: '#/definitions/TrainingInstanceCount'
-        description: 'The number of ML compute instances to use. For distributed training, provide a value greater than 1. '
-      VolumeSizeInGB:
-        $ref: '#/definitions/VolumeSizeInGB'
-        description: '<p>The size of the ML storage volume that you want to provision. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use the ML storage volume for scratch space. If you want to store the training data in the ML storage volume, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. </p> <p>You must specify sufficient ML storage for your scenario. </p> <note> <p> Amazon SageMaker supports only the General Purpose SSD (gp2) ML storage volume type. </p> </note>'
-      VolumeKmsKeyId:
-        $ref: '#/definitions/KmsKeyId'
-        description: The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the training job.
-    description: 'Describes the resources, including ML compute instances and ML storage volumes, to use for model training. '
-  ResourceInUse:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/FailureReason'
-    description: Resource being accessed is in use.
-  ResourceLimitExceeded:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/FailureReason'
-    description: ' You have exceeded an Amazon SageMaker resource limit. For example, you might have too many training jobs created. '
-  ResourceLimits:
-    type: object
-    required:
-      - MaxNumberOfTrainingJobs
-      - MaxParallelTrainingJobs
-    properties:
-      MaxNumberOfTrainingJobs:
-        $ref: '#/definitions/MaxNumberOfTrainingJobs'
-        description: The maximum number of training jobs that a hyperparameter tuning job can launch.
-      MaxParallelTrainingJobs:
-        $ref: '#/definitions/MaxParallelTrainingJobs'
-        description: The maximum number of concurrent training jobs that a hyperparameter tuning job can launch.
-    description: Specifies the maximum number of training jobs and parallel training jobs that a hyperparameter tuning job can launch.
-  ResourceNotFound:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/FailureReason'
-    description: Resource being access is not found.
-  RoleArn:
-    type: string
-    pattern: '^arn:aws[a-z\-]*:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+$'
-    minLength: 20
-    maxLength: 2048
-  S3DataDistribution:
-    type: string
-    enum:
-      - FullyReplicated
-      - ShardedByS3Key
-  S3DataSource:
-    type: object
-    required:
-      - S3DataType
-      - S3Uri
-    properties:
-      S3DataType:
-        $ref: '#/definitions/S3DataType'
-        description: '<p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix. Amazon SageMaker uses all objects with the specified key name prefix for model training. </p> <p>If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for model training. </p>'
-      S3Uri:
-        $ref: '#/definitions/S3Uri'
-        description: '<p>Depending on the value specified for the <code>S3DataType</code>, identifies either a key name prefix or a manifest. For example: </p> <ul> <li> <p> A key name prefix might look like this: <code>s3://bucketname/exampleprefix</code>. </p> </li> <li> <p> A manifest might look like this: <code>s3://bucketname/example.manifest</code> </p> <p> The manifest is an S3 object which is a JSON file with the following format: </p> <p> <code>[</code> </p> <p> <code> {"prefix": "s3://customer_bucket/some/prefix/"},</code> </p> <p> <code> "relative/path/to/custdata-1",</code> </p> <p> <code> "relative/path/custdata-2",</code> </p> <p> <code> ...</code> </p> <p> <code> ]</code> </p> <p> The preceding JSON matches the following <code>s3Uris</code>: </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code> </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/custdata-1</code> </p> <p> <code>...</code> </p> <p> The complete set of <code>s3uris</code> in this manifest constitutes the input data for the channel for this datasource. The object that each <code>s3uris</code> points to must readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf. </p> </li> </ul>'
-      S3DataDistributionType:
-        $ref: '#/definitions/S3DataDistribution'
-        description: '<p>If you want Amazon SageMaker to replicate the entire dataset on each ML compute instance that is launched for model training, specify <code>FullyReplicated</code>. </p> <p>If you want Amazon SageMaker to replicate a subset of data on each ML compute instance that is launched for model training, specify <code>ShardedByS3Key</code>. If there are <i>n</i> ML compute instances launched for a training job, each instance gets approximately 1/<i>n</i> of the number of S3 objects. In this case, model training on each machine uses only the subset of training data. </p> <p>Don''t choose more ML compute instances for training than available S3 objects. If you do, some nodes won''t get any data and you will pay for nodes that aren''t getting any training data. This applies in both FILE and PIPE modes. Keep this in mind when developing algorithms. </p> <p>In distributed training, where you use multiple ML compute EC2 instances, you might choose <code>ShardedByS3Key</code>. If the algorithm requires copying training data to the ML storage volume (when <code>TrainingInputMode</code> is set to <code>File</code>), this copies 1/<i>n</i> of the number of objects. </p>'
-    description: Describes the S3 data source.
-  S3DataType:
-    type: string
-    enum:
-      - ManifestFile
-      - S3Prefix
-  S3Uri:
-    type: string
-    pattern: '^(https|s3)://([^/]+)/?(.*)$'
-    maxLength: 1024
-  SecondaryStatus:
-    type: string
-    enum:
-      - Starting
-      - LaunchingMLInstances
-      - PreparingTrainingStack
-      - Downloading
-      - DownloadingTrainingImage
-      - Training
-      - Uploading
-      - Stopping
-      - Stopped
-      - MaxRuntimeExceeded
-      - Completed
-      - Failed
-  SecondaryStatusTransition:
-    type: object
-    required:
-      - Status
-      - StartTime
-    properties:
-      Status:
-        $ref: '#/definitions/SecondaryStatus'
-        description: 'Provides granular information about the system state. For more information, see <code>SecondaryStatus</code> under the <a>DescribeTrainingJob</a> response elements.'
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: A timestamp that shows when the training job has entered this secondary status.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'A timestamp that shows when the secondary status has ended and the job has transitioned into another secondary status. '
-      StatusMessage:
-        $ref: '#/definitions/StatusMessage'
-        description: 'Shows a brief description and other information about the secondary status. For example, the <code>LaunchingMLInstances</code> secondary status could show a status message of "Insufficent capacity error while launching instances".'
-    description: Specifies a secondary status the job has transitioned into. It includes a start timestamp and later an end timestamp. The end timestamp is added either after the job transitions to a different secondary status or after the job has ended.
-  SecondaryStatusTransitions:
-    type: array
-    items:
-      $ref: '#/definitions/SecondaryStatusTransition'
-  SecurityGroupId:
-    type: string
-    maxLength: 32
-  SecurityGroupIds:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityGroupId'
-    maxItems: 5
-  SessionExpirationDurationInSeconds:
-    type: integer
-    minimum: 1800
-    maximum: 43200
-  SortBy:
-    type: string
-    enum:
-      - Name
-      - CreationTime
-      - Status
-  SortOrder:
-    type: string
-    enum:
-      - Ascending
-      - Descending
-  SplitType:
-    type: string
-    enum:
-      - None
-      - Line
-      - RecordIO
-  StartNotebookInstanceInput:
-    type: object
-    required:
-      - NotebookInstanceName
-    properties:
-      NotebookInstanceName:
-        $ref: '#/definitions/NotebookInstanceName'
-        description: The name of the notebook instance to start.
-  StatusMessage:
-    type: string
-  StopHyperParameterTuningJobRequest:
-    type: object
-    required:
-      - HyperParameterTuningJobName
-    properties:
-      HyperParameterTuningJobName:
-        $ref: '#/definitions/HyperParameterTuningJobName'
-        description: The name of the tuning job to stop.
-  StopNotebookInstanceInput:
-    type: object
-    required:
-      - NotebookInstanceName
-    properties:
-      NotebookInstanceName:
-        $ref: '#/definitions/NotebookInstanceName'
-        description: The name of the notebook instance to terminate.
-  StopTrainingJobRequest:
-    type: object
-    required:
-      - TrainingJobName
-    properties:
-      TrainingJobName:
-        $ref: '#/definitions/TrainingJobName'
-        description: The name of the training job to stop.
-  StopTransformJobRequest:
-    type: object
-    required:
-      - TransformJobName
-    properties:
-      TransformJobName:
-        $ref: '#/definitions/TransformJobName'
-        description: The name of the transform job to stop.
-  StoppingCondition:
-    type: object
-    properties:
-      MaxRuntimeInSeconds:
-        $ref: '#/definitions/MaxRuntimeInSeconds'
-        description: 'The maximum length of time, in seconds, that the training job can run. If model training does not complete during this time, Amazon SageMaker ends the job. If value is not specified, default value is 1 day. Maximum value is 5 days.'
-    description: '<p>Specifies how long model training can run. When model training reaches the limit, Amazon SageMaker ends the training job. Use this API to cap model training cost.</p> <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for120 seconds. Algorithms might use this 120-second window to save the model artifacts, so the results of training is not lost. </p> <p>Training algorithms provided by Amazon SageMaker automatically saves the intermediate results of a model training job (it is best effort case, as model might not be ready to save as some stages, for example training just started). This intermediate data is a valid model artifact. You can use it to create a model (<code>CreateModel</code>). </p>'
-  SubnetId:
-    type: string
-    maxLength: 32
-  Subnets:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetId'
-    minItems: 1
-    maxItems: 16
-  Tag:
-    type: object
-    required:
-      - Key
-      - Value
-    properties:
-      Key:
-        $ref: '#/definitions/TagKey'
-        description: The tag key.
-      Value:
-        $ref: '#/definitions/TagValue'
-        description: The tag value.
-    description: 'Describes a tag. '
-  TagKey:
-    type: string
-    pattern: '^((?!aws:)[\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-    minItems: 1
-    maxItems: 50
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 0
-    maxItems: 50
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  TaskCount:
-    type: integer
-    minimum: 1
-  Timestamp:
-    type: string
-    format: date-time
-  TrainingInputMode:
-    type: string
-    enum:
-      - Pipe
-      - File
-  TrainingInstanceCount:
-    type: integer
-    minimum: 1
   TrainingInstanceType:
     type: string
     enum:
@@ -3843,56 +3990,84 @@ definitions:
       - ml.c5.4xlarge
       - ml.c5.9xlarge
       - ml.c5.18xlarge
-  TrainingJobArn:
-    type: string
-    pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:training-job/.*'
-    maxLength: 256
-  TrainingJobName:
-    type: string
-    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
-    minLength: 1
-    maxLength: 63
-  TrainingJobSortByOptions:
+  TrainingInstanceCount:
+    type: integer
+    minimum: 1
+  VolumeSizeInGB:
+    type: integer
+    minimum: 1
+  S3DataDistribution:
     type: string
     enum:
-      - Name
-      - CreationTime
+      - FullyReplicated
+      - ShardedByS3Key
+  S3DataType:
+    type: string
+    enum:
+      - ManifestFile
+      - S3Prefix
+  StatusMessage:
+    type: string
+  SecondaryStatusTransition:
+    type: object
+    required:
       - Status
-      - FinalObjectiveMetricValue
-  TrainingJobStatus:
+      - StartTime
+    properties:
+      Status:
+        $ref: '#/definitions/SecondaryStatus'
+        description: 'Provides granular information about the system state. For more information, see <code>SecondaryStatus</code> under the <a>DescribeTrainingJob</a> response elements.'
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the training job has entered this secondary status.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp that shows when the secondary status has ended and the job has transitioned into another secondary status. The <code>EndTime</code> timestamp is also set after the training job has ended.
+      StatusMessage:
+        $ref: '#/definitions/StatusMessage'
+        description: 'Shows a brief description and other information about the secondary status. For example, the <code>LaunchingMLInstances</code> secondary status could show a status message of "Insufficent capacity error while launching instances".'
+    description: Specifies a secondary status the job has transitioned into. It includes a start timestamp and later an end timestamp. The end timestamp is added either after the job transitions to a different secondary status or after the job has ended.
+  SecurityGroupId:
+    type: string
+    maxLength: 32
+  SplitType:
     type: string
     enum:
-      - InProgress
-      - Completed
-      - Failed
-      - Stopping
-      - Stopped
+      - None
+      - Line
+      - RecordIO
+  Subnets:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+    minItems: 1
+    maxItems: 16
+  TagKey:
+    type: string
+    pattern: '^((?!aws:)[\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: The tag key.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The tag value.
+    description: 'Describes a tag. '
   TrainingJobStatusCounter:
     type: integer
     minimum: 0
-  TrainingJobStatusCounters:
-    type: object
-    properties:
-      Completed:
-        $ref: '#/definitions/TrainingJobStatusCounter'
-        description: The number of completed training jobs launched by a hyperparameter tuning job.
-      InProgress:
-        $ref: '#/definitions/TrainingJobStatusCounter'
-        description: The number of in-progress training jobs launched by a hyperparameter tuning job.
-      RetryableError:
-        $ref: '#/definitions/TrainingJobStatusCounter'
-        description: 'The number of training jobs that failed, but can be retried. A failed training job can be retried only if it failed because an internal service error occurred.'
-      NonRetryableError:
-        $ref: '#/definitions/TrainingJobStatusCounter'
-        description: The number of training jobs that failed and can't be retried. A failed training job can't be retried if it failed because a client error occurred.
-      Stopped:
-        $ref: '#/definitions/TrainingJobStatusCounter'
-        description: The number of training jobs launched by a hyperparameter tuning job that were manually stopped.
-    description: 'The numbers of training jobs launched by a hyperparameter tuning job, categorized by status.'
-  TrainingJobSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/TrainingJobSummary'
   TrainingJobSummary:
     type: object
     required:
@@ -3920,6 +4095,19 @@ definitions:
         $ref: '#/definitions/TrainingJobStatus'
         description: The status of the training job.
     description: Provides summary information about a training job.
+  TransformS3DataSource:
+    type: object
+    required:
+      - S3DataType
+      - S3Uri
+    properties:
+      S3DataType:
+        $ref: '#/definitions/S3DataType'
+        description: '<p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix. Amazon SageMaker uses all objects with the specified key name prefix for batch transform. </p> <p>If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for batch transform. </p>'
+      S3Uri:
+        $ref: '#/definitions/S3Uri'
+        description: '<p>Depending on the value specified for the <code>S3DataType</code>, identifies either a key name prefix or a manifest. For example:</p> <ul> <li> <p> A key name prefix might look like this: <code>s3://bucketname/exampleprefix</code>. </p> </li> <li> <p> A manifest might look like this: <code>s3://bucketname/example.manifest</code> </p> <p> The manifest is an S3 object which is a JSON file with the following format: </p> <p> <code>[</code> </p> <p> <code> {"prefix": "s3://customer_bucket/some/prefix/"},</code> </p> <p> <code> "relative/path/to/custdata-1",</code> </p> <p> <code> "relative/path/custdata-2",</code> </p> <p> <code> ...</code> </p> <p> <code> ]</code> </p> <p> The preceding JSON matches the following <code>S3Uris</code>: </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code> </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/custdata-1</code> </p> <p> <code>...</code> </p> <p> The complete set of <code>S3Uris</code> in this manifest constitutes the input data for the channel for this datasource. The object that each <code>S3Uris</code> points to must be readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf.</p> </li> </ul>'
+    description: Describes the S3 data source.
   TransformDataSource:
     type: object
     required:
@@ -3933,37 +4121,9 @@ definitions:
     type: string
     pattern: '[a-zA-Z_][a-zA-Z0-9_]*'
     maxLength: 1024
-  TransformEnvironmentMap:
-    type: array
-    maxItems: 16
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TransformEnvironmentKey'
-        value:
-          $ref: '#/definitions/TransformEnvironmentValue'
   TransformEnvironmentValue:
     type: string
     maxLength: 10240
-  TransformInput:
-    type: object
-    required:
-      - DataSource
-    properties:
-      DataSource:
-        $ref: '#/definitions/TransformDataSource'
-        description: 'Describes the location of the channel data, meaning the S3 location of the input data that the model can consume.'
-      ContentType:
-        $ref: '#/definitions/ContentType'
-        description: The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.
-      CompressionType:
-        $ref: '#/definitions/CompressionType'
-        description: 'Compressing data helps save on storage space. If your transform data is compressed, specify the compression type.and Amazon SageMaker will automatically decompress the data for the transform job accordingly. The default value is <code>None</code>.'
-      SplitType:
-        $ref: '#/definitions/SplitType'
-        description: '<p>The method to use to split the transform job''s data into smaller batches. The default value is <code>None</code>. If you don''t want to split the data, specify <code>None</code>. If you want to split records on a newline character boundary, specify <code>Line</code>. To split records according to the RecordIO format, specify <code>RecordIO</code>.</p> <p>Amazon SageMaker will send maximum number of records per batch in each request up to the MaxPayloadInMB limit. For more information, see <a href="http://mxnet.io/architecture/note_data_loading.html#data-format">RecordIO data format</a>.</p> <note> <p>For information about the <code>RecordIO</code> format, see <a href="http://mxnet.io/architecture/note_data_loading.html#data-format">Data Format</a>.</p> </note>'
-    description: Describes the input source of a transform job and the way the transform job consumes it.
   TransformInstanceCount:
     type: integer
     minimum: 1
@@ -3996,27 +4156,6 @@ definitions:
       - ml.m5.4xlarge
       - ml.m5.12xlarge
       - ml.m5.24xlarge
-  TransformJobArn:
-    type: string
-    pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:transform-job/.*'
-    maxLength: 256
-  TransformJobName:
-    type: string
-    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
-    minLength: 1
-    maxLength: 63
-  TransformJobStatus:
-    type: string
-    enum:
-      - InProgress
-      - Completed
-      - Failed
-      - Stopping
-      - Stopped
-  TransformJobSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/TransformJobSummary'
   TransformJobSummary:
     type: object
     required:
@@ -4047,152 +4186,6 @@ definitions:
         $ref: '#/definitions/FailureReason'
         description: 'If the transform job failed, the reason it failed.'
     description: Provides a summary information for a transform job. Multiple TransformJobSummary objects are returned as a list after calling <a>ListTransformJobs</a>.
-  TransformOutput:
-    type: object
-    required:
-      - S3OutputPath
-    properties:
-      S3OutputPath:
-        $ref: '#/definitions/S3Uri'
-        description: '<p>The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job. For example, <code>s3://bucket-name/key-name-prefix</code>.</p> <p>For every S3 object used as input for the transform job, the transformed data is stored in a corresponding subfolder in the location under the output prefix. For example, the input data <code>s3://bucket-name/input-name-prefix/dataset01/data.csv</code> will have the transformed data stored at <code>s3://bucket-name/key-name-prefix/dataset01/</code>, based on the original name, as a series of .part files (.part0001, part0002, etc).</p>'
-      Accept:
-        $ref: '#/definitions/Accept'
-        description: The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.
-      AssembleWith:
-        $ref: '#/definitions/AssemblyType'
-        description: '<p>Defines how to assemble the results of the transform job as a single S3 object. You should select a format that is most convenient to you. To concatenate the results in binary format, specify <code>None</code>. To add a newline character at the end of every transformed record, specify <code>Line</code>. To assemble the output in RecordIO format, specify <code>RecordIO</code>. The default value is <code>None</code>.</p> <p>For information about the <code>RecordIO</code> format, see <a href="http://mxnet.io/architecture/note_data_loading.html#data-format">Data Format</a>.</p>'
-      KmsKeyId:
-        $ref: '#/definitions/KmsKeyId'
-        description: '<p>The AWS Key Management Service (AWS KMS) key for Amazon S3 server-side encryption that Amazon SageMaker uses to encrypt the transformed data.</p> <p>If you don''t provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role''s account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateTramsformJob</code> request. For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
-    description: Describes the results of a transform job output.
-  TransformResources:
-    type: object
-    required:
-      - InstanceType
-      - InstanceCount
-    properties:
-      InstanceType:
-        $ref: '#/definitions/TransformInstanceType'
-        description: 'The ML compute instance type for the transform job. For using built-in algorithms to transform moderately sized datasets, ml.m4.xlarge or <code>ml.m5.large</code> should suffice. There is no default value for <code>InstanceType</code>.'
-      InstanceCount:
-        $ref: '#/definitions/TransformInstanceCount'
-        description: 'The number of ML compute instances to use in the transform job. For distributed transform, provide a value greater than 1. The default value is <code>1</code>.'
-    description: 'Describes the resources, including ML instance types and ML instance count, to use for transform job.'
-  TransformS3DataSource:
-    type: object
-    required:
-      - S3DataType
-      - S3Uri
-    properties:
-      S3DataType:
-        $ref: '#/definitions/S3DataType'
-        description: '<p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix. Amazon SageMaker uses all objects with the specified key name prefix for batch transform. </p> <p>If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for batch transform. </p>'
-      S3Uri:
-        $ref: '#/definitions/S3Uri'
-        description: '<p>Depending on the value specified for the <code>S3DataType</code>, identifies either a key name prefix or a manifest. For example:</p> <ul> <li> <p> A key name prefix might look like this: <code>s3://bucketname/exampleprefix</code>. </p> </li> <li> <p> A manifest might look like this: <code>s3://bucketname/example.manifest</code> </p> <p> The manifest is an S3 object which is a JSON file with the following format: </p> <p> <code>[</code> </p> <p> <code> {"prefix": "s3://customer_bucket/some/prefix/"},</code> </p> <p> <code> "relative/path/to/custdata-1",</code> </p> <p> <code> "relative/path/custdata-2",</code> </p> <p> <code> ...</code> </p> <p> <code> ]</code> </p> <p> The preceding JSON matches the following <code>S3Uris</code>: </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code> </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/custdata-1</code> </p> <p> <code>...</code> </p> <p> The complete set of <code>S3Uris</code> in this manifest constitutes the input data for the channel for this datasource. The object that each <code>S3Uris</code> points to must be readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf.</p> </li> </ul>'
-    description: Describes the S3 data source.
-  UpdateEndpointInput:
-    type: object
-    required:
-      - EndpointName
-      - EndpointConfigName
-    properties:
-      EndpointName:
-        $ref: '#/definitions/EndpointName'
-        description: The name of the endpoint whose configuration you want to update.
-      EndpointConfigName:
-        $ref: '#/definitions/EndpointConfigName'
-        description: The name of the new endpoint configuration.
-  UpdateEndpointOutput:
-    type: object
-    required:
-      - EndpointArn
-    properties:
-      EndpointArn:
-        $ref: '#/definitions/EndpointArn'
-        description: The Amazon Resource Name (ARN) of the endpoint.
-  UpdateEndpointWeightsAndCapacitiesInput:
-    type: object
-    required:
-      - EndpointName
-      - DesiredWeightsAndCapacities
-    properties:
-      EndpointName:
-        $ref: '#/definitions/EndpointName'
-        description: The name of an existing Amazon SageMaker endpoint.
-      DesiredWeightsAndCapacities:
-        $ref: '#/definitions/DesiredWeightAndCapacityList'
-        description: An object that provides new capacity and weight values for a variant.
-  UpdateEndpointWeightsAndCapacitiesOutput:
-    type: object
-    required:
-      - EndpointArn
-    properties:
-      EndpointArn:
-        $ref: '#/definitions/EndpointArn'
-        description: The Amazon Resource Name (ARN) of the updated endpoint.
-  UpdateNotebookInstanceInput:
-    type: object
-    required:
-      - NotebookInstanceName
-    properties:
-      NotebookInstanceName:
-        $ref: '#/definitions/NotebookInstanceName'
-        description: The name of the notebook instance to update.
-      InstanceType:
-        $ref: '#/definitions/InstanceType'
-        description: The Amazon ML compute instance type.
-      RoleArn:
-        $ref: '#/definitions/RoleArn'
-        description: '<p>The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume to access the notebook instance. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. </p> <note> <p>To be able to pass this role to Amazon SageMaker, the caller of this API must have the <code>iam:PassRole</code> permission.</p> </note>'
-  UpdateNotebookInstanceLifecycleConfigInput:
-    type: object
-    required:
-      - NotebookInstanceLifecycleConfigName
-    properties:
-      NotebookInstanceLifecycleConfigName:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigName'
-        description: The name of the lifecycle configuration.
-      OnCreate:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
-        description: 'The shell script that runs only once, when you create a notebook instance'
-      OnStart:
-        $ref: '#/definitions/NotebookInstanceLifecycleConfigList'
-        description: 'The shell script that runs every time you start a notebook instance, including when you create the notebook instance.'
-  UpdateNotebookInstanceLifecycleConfigOutput:
-    type: object
-    properties: {}
-  UpdateNotebookInstanceOutput:
-    type: object
-    properties: {}
-  Url:
-    type: string
-    pattern: '^(https|s3)://([^/]+)/?(.*)$'
-    maxLength: 1024
-  VariantName:
-    type: string
-    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
-    maxLength: 63
-  VariantWeight:
-    type: number
-    format: float
-    minimum: 0
-  VolumeSizeInGB:
-    type: integer
-    minimum: 1
-  VpcConfig:
-    type: object
-    required:
-      - SecurityGroupIds
-      - Subnets
-    properties:
-      SecurityGroupIds:
-        $ref: '#/definitions/VpcSecurityGroupIds'
-        description: 'The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the <code>Subnets</code> field.'
-      Subnets:
-        $ref: '#/definitions/Subnets'
-        description: The ID of the subnets in the VPC to which you want to connect your training job or model.
-    description: 'Specifies a VPC that your training jobs and hosted models have access to. Control access to and from your training and model containers by configuring the VPC. For more information, see <a>host-vpc</a> and <a>train-vpc</a>.'
   VpcSecurityGroupIds:
     type: array
     items:

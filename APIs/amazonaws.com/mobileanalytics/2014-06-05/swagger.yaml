@@ -127,6 +127,15 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  PutEventsInput:
+    type: object
+    required:
+      - events
+    properties:
+      events:
+        $ref: '#/definitions/EventListDefinition'
+        description: An array of Event JSON objects
+    description: A container for the data needed for a PutEvent operation
   BadRequestException:
     type: object
     properties:
@@ -134,9 +143,59 @@ definitions:
         $ref: '#/definitions/String'
         description: A text description associated with the BadRequestException object.
     description: An exception object returned when a request fails.
+  String:
+    type: string
   Double:
     type: number
     format: double
+  String50Chars:
+    type: string
+    minLength: 1
+    maxLength: 50
+  ISO8601Timestamp:
+    type: string
+  Session:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/String50Chars'
+        description: A unique identifier for the session
+      duration:
+        $ref: '#/definitions/Long'
+        description: The duration of the session.
+      startTimestamp:
+        $ref: '#/definitions/ISO8601Timestamp'
+        description: 'The time the event started in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
+      stopTimestamp:
+        $ref: '#/definitions/ISO8601Timestamp'
+        description: 'The time the event terminated in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
+    description: Describes the session. Session information is required on ALL events.
+  String10Chars:
+    type: string
+    minLength: 1
+    maxLength: 10
+  MapOfStringToString:
+    type: array
+    minItems: 0
+    maxItems: 50
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String50Chars'
+        value:
+          $ref: '#/definitions/String0to1000Chars'
+  MapOfStringToNumber:
+    type: array
+    minItems: 0
+    maxItems: 50
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String50Chars'
+        value:
+          $ref: '#/definitions/Double'
   Event:
     type: object
     required:
@@ -166,68 +225,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Event'
-  ISO8601Timestamp:
-    type: string
   Long:
     type: integer
-  MapOfStringToNumber:
-    type: array
-    minItems: 0
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String50Chars'
-        value:
-          $ref: '#/definitions/Double'
-  MapOfStringToString:
-    type: array
-    minItems: 0
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String50Chars'
-        value:
-          $ref: '#/definitions/String0to1000Chars'
-  PutEventsInput:
-    type: object
-    required:
-      - events
-    properties:
-      events:
-        $ref: '#/definitions/EventListDefinition'
-        description: An array of Event JSON objects
-    description: A container for the data needed for a PutEvent operation
-  Session:
-    type: object
-    properties:
-      id:
-        $ref: '#/definitions/String50Chars'
-        description: A unique identifier for the session
-      duration:
-        $ref: '#/definitions/Long'
-        description: The duration of the session.
-      startTimestamp:
-        $ref: '#/definitions/ISO8601Timestamp'
-        description: 'The time the event started in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
-      stopTimestamp:
-        $ref: '#/definitions/ISO8601Timestamp'
-        description: 'The time the event terminated in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
-    description: Describes the session. Session information is required on ALL events.
-  String:
-    type: string
   String0to1000Chars:
     type: string
     minLength: 0
     maxLength: 1000
-  String10Chars:
-    type: string
-    minLength: 1
-    maxLength: 10
-  String50Chars:
-    type: string
-    minLength: 1
-    maxLength: 50

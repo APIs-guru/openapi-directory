@@ -2478,22 +2478,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AWSOrganizationsNotInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'Your account is not a member of an organization. To make this request, you must use the credentials of an account that belongs to an organization.'
-  AcceptHandshakeRequest:
-    type: object
-    required:
-      - HandshakeId
-    example:
-      HandshakeId: h-examplehandshakeid111
-    properties:
-      HandshakeId:
-        $ref: '#/definitions/HandshakeId'
-        description: '<p>The unique identifier (ID) of the handshake that you want to accept.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
   AcceptHandshakeResponse:
     type: object
     example:
@@ -2525,12 +2509,82 @@ definitions:
       Handshake:
         $ref: '#/definitions/Handshake'
         description: A structure that contains details about the accepted handshake.
+  AcceptHandshakeRequest:
+    type: object
+    required:
+      - HandshakeId
+    example:
+      HandshakeId: h-examplehandshakeid111
+    properties:
+      HandshakeId:
+        $ref: '#/definitions/HandshakeId'
+        description: '<p>The unique identifier (ID) of the handshake that you want to accept.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
   AccessDeniedException:
     type: object
     properties:
       Message:
         $ref: '#/definitions/ExceptionMessage'
     description: 'You don''t have permissions to perform the requested operation. The user or role that is making the request must have at least one IAM permissions policy attached that grants the required permissions. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html">Access Management</a> in the <i>IAM User Guide</i>.'
+  AWSOrganizationsNotInUseException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'Your account is not a member of an organization. To make this request, you must use the credentials of an account that belongs to an organization.'
+  HandshakeConstraintViolationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+      Reason:
+        $ref: '#/definitions/HandshakeConstraintViolationExceptionReason'
+    description: '<p>The requested operation would violate the constraint identified in the reason code.</p> <note> <p>Some of the reasons in the following list might not be applicable to this specific API or operation:</p> </note> <ul> <li> <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number of accounts in an organization. <b>Note</b>: deleted and closed accounts still count toward your limit.</p> <important> <p>If you get this exception immediately after creating the organization, wait one hour and try again. If after an hour it continues to fail with this error, contact <a href="https://console.aws.amazon.com/support/home#/">AWS Customer Support</a>.</p> </important> </li> <li> <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of handshakes you can send in one day.</p> </li> <li> <p>ALREADY_IN_AN_ORGANIZATION: The handshake request is invalid because the invited account is already a member of an organization.</p> </li> <li> <p>ORGANIZATION_ALREADY_HAS_ALL_FEATURES: The handshake request is invalid because the organization has already enabled all features.</p> </li> <li> <p>INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES: You cannot issue new invitations to join an organization while it is in the process of enabling all features. You can resume inviting accounts after you finalize the process when all accounts have agreed to the change.</p> </li> <li> <p>PAYMENT_INSTRUMENT_REQUIRED: You cannot complete the operation with an account that does not have a payment instrument, such as a credit card, associated with it.</p> </li> <li> <p>ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: The request failed because the account is from a different marketplace than the accounts in the organization. For example, accounts with India addresses must be associated with the AISPL marketplace. All accounts in an organization must be from the same marketplace.</p> </li> <li> <p>ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED: You attempted to change the membership of an account too quickly after its previous change.</p> </li> </ul>'
+  HandshakeNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: We can't find a handshake with the HandshakeId that you specified.
+  InvalidHandshakeTransitionException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'You can''t perform the operation on the handshake in its current state. For example, you can''t cancel a handshake that was already accepted, or accept a handshake that was already declined.'
+  HandshakeAlreadyInStateException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'The specified handshake is already in the requested state. For example, you can''t accept a handshake that was already accepted.'
+  InvalidInputException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+      Reason:
+        $ref: '#/definitions/InvalidInputExceptionReason'
+    description: '<p>The requested operation failed because you provided invalid values for one or more of the request parameters. This exception includes a reason that contains additional information about the violated limit:</p> <note> <p>Some of the reasons in the following list might not be applicable to this specific API or operation:</p> </note> <ul> <li> <p>IMMUTABLE_POLICY: You specified a policy that is managed by AWS and cannot be modified.</p> </li> <li> <p>INPUT_REQUIRED: You must include a value for all required parameters.</p> </li> <li> <p>INVALID_ENUM: You specified a value that is not valid for that parameter.</p> </li> <li> <p>INVALID_FULL_NAME_TARGET: You specified a full name that contains invalid characters.</p> </li> <li> <p>INVALID_LIST_MEMBER: You provided a list to a parameter that contains at least one invalid value.</p> </li> <li> <p>INVALID_PARTY_TYPE_TARGET: You specified the wrong type of entity (account, organization, or email) as a party.</p> </li> <li> <p>INVALID_PAGINATION_TOKEN: Get the value for the NextToken parameter from the response to a previous call of the operation.</p> </li> <li> <p>INVALID_PATTERN: You provided a value that doesn''t match the required pattern.</p> </li> <li> <p>INVALID_PATTERN_TARGET_ID: You specified a policy target ID that doesn''t match the required pattern.</p> </li> <li> <p>INVALID_ROLE_NAME: You provided a role name that is not valid. A role name can’t begin with the reserved prefix ''AWSServiceRoleFor''.</p> </li> <li> <p>INVALID_SYNTAX_ORGANIZATION_ARN: You specified an invalid ARN for the organization.</p> </li> <li> <p>INVALID_SYNTAX_POLICY_ID: You specified an invalid policy ID. </p> </li> <li> <p>MAX_FILTER_LIMIT_EXCEEDED: You can specify only one filter parameter for the operation.</p> </li> <li> <p>MAX_LENGTH_EXCEEDED: You provided a string parameter that is longer than allowed.</p> </li> <li> <p>MAX_VALUE_EXCEEDED: You provided a numeric parameter that has a larger value than allowed.</p> </li> <li> <p>MIN_LENGTH_EXCEEDED: You provided a string parameter that is shorter than allowed.</p> </li> <li> <p>MIN_VALUE_EXCEEDED: You provided a numeric parameter that has a smaller value than allowed.</p> </li> <li> <p>MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: You can move an account only between entities in the same root.</p> </li> </ul>'
+  ConcurrentModificationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The target of the operation is currently being modified by a different request. Try again later.
+  ServiceException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: AWS Organizations can't complete your request because of an internal service error. Try again later.
+  TooManyRequestsException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/ExceptionType'
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: You've sent too many requests in too short a period of time. The limit helps protect against denial-of-service attacks. Try again later.
   AccessDeniedForDependencyException:
     type: object
     properties:
@@ -2539,79 +2593,6 @@ definitions:
       Reason:
         $ref: '#/definitions/AccessDeniedForDependencyExceptionReason'
     description: 'The operation you attempted requires you to have the <code>iam:CreateServiceLinkedRole</code> so that Organizations can create the required service-linked role. You do not have that permission.'
-  AccessDeniedForDependencyExceptionReason:
-    type: string
-    enum:
-      - ACCESS_DENIED_DURING_CREATE_SERVICE_LINKED_ROLE
-  Account:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/AccountId'
-        description: '<p>The unique identifier (ID) of the account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
-      Arn:
-        $ref: '#/definitions/AccountArn'
-        description: '<p>The Amazon Resource Name (ARN) of the account.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
-      Email:
-        $ref: '#/definitions/Email'
-        description: '<p>The email address associated with the AWS account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for this parameter is a string of characters that represents a standard Internet email address.</p>'
-      Name:
-        $ref: '#/definitions/AccountName'
-        description: '<p>The friendly name of the account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
-      Status:
-        $ref: '#/definitions/AccountStatus'
-        description: The status of the account in the organization.
-      JoinedMethod:
-        $ref: '#/definitions/AccountJoinedMethod'
-        description: The method by which the account joined the organization.
-      JoinedTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The date the account became a part of the organization.
-    description: Contains information about an AWS account that is a member of an organization.
-  AccountArn:
-    type: string
-    pattern: '^arn:aws:organizations::\d{12}:account\/o-[a-z0-9]{10,32}\/\d{12}'
-  AccountId:
-    type: string
-    pattern: '^\d{12}$'
-  AccountJoinedMethod:
-    type: string
-    enum:
-      - INVITED
-      - CREATED
-  AccountName:
-    type: string
-    minLength: 1
-    maxLength: 50
-    format: password
-  AccountNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: ' We can''t find an AWS account with the AccountId that you specified, or the account whose credentials you used to make this request is not a member of an organization.'
-  AccountStatus:
-    type: string
-    enum:
-      - ACTIVE
-      - SUSPENDED
-  Accounts:
-    type: array
-    items:
-      $ref: '#/definitions/Account'
-  ActionType:
-    type: string
-    enum:
-      - INVITE
-      - ENABLE_ALL_FEATURES
-      - APPROVE_ALL_FEATURES
-      - ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE
-  AlreadyInOrganizationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: This account is already a member of an organization. An account can belong to only one organization at a time.
   AttachPolicyRequest:
     type: object
     required:
@@ -2627,18 +2608,38 @@ definitions:
       TargetId:
         $ref: '#/definitions/PolicyTargetId'
         description: '<p>The unique identifier (ID) of the root, OU, or account that you want to attach the policy to. You can get the ID by calling the <a>ListRoots</a>, <a>ListOrganizationalUnitsForParent</a>, or <a>ListAccounts</a> operations.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
-  AwsManagedPolicy:
-    type: boolean
-  CancelHandshakeRequest:
+  ConstraintViolationException:
     type: object
-    required:
-      - HandshakeId
-    example:
-      HandshakeId: h-examplehandshakeid111
     properties:
-      HandshakeId:
-        $ref: '#/definitions/HandshakeId'
-        description: '<p>The unique identifier (ID) of the handshake that you want to cancel. You can get the ID from the <a>ListHandshakesForOrganization</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+      Reason:
+        $ref: '#/definitions/ConstraintViolationExceptionReason'
+    description: '<p>Performing this operation violates a minimum or maximum value limit. For example, attempting to removing the last SCP from an OU or root, inviting or creating too many accounts to the organization, or attaching too many policies to an account, OU, or root. This exception includes a reason that contains additional information about the violated limit:</p> <p/> <p>Some of the reasons in the following list might not be applicable to this specific API or operation:</p> <ul> <li> <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number of accounts in an organization. If you need more accounts, contact AWS Support to request an increase in your limit. </p> <p>Or, The number of invitations that you tried to send would cause you to exceed the limit of accounts in your organization. Send fewer invitations, or contact AWS Support to request an increase in the number of accounts.</p> <p> <b>Note</b>: deleted and closed accounts still count toward your limit.</p> <important> <p>If you get receive this exception when running a command immediately after creating the organization, wait one hour and try again. If after an hour it continues to fail with this error, contact <a href="https://console.aws.amazon.com/support/home#/">AWS Customer Support</a>.</p> </important> </li> <li> <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of handshakes you can send in one day.</p> </li> <li> <p>OU_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of organizational units you can have in an organization.</p> </li> <li> <p>OU_DEPTH_LIMIT_EXCEEDED: You attempted to create an organizational unit tree that is too many levels deep.</p> </li> <li> <p>ORGANIZATION_NOT_IN_ALL_FEATURES_MODE: You attempted to perform an operation that requires the organization to be configured to support all features. An organization that supports consolidated billing features only cannot perform this operation.</p> </li> <li> <p>POLICY_NUMBER_LIMIT_EXCEEDED. You attempted to exceed the number of policies that you can have in an organization.</p> </li> <li> <p>MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to exceed the number of policies of a certain type that can be attached to an entity at one time.</p> </li> <li> <p>MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to detach a policy from an entity that would cause the entity to have fewer than the minimum number of policies of a certain type required.</p> </li> <li> <p>ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA: You attempted to remove an account from the organization that does not yet have enough information to exist as a stand-alone account. This account requires you to first agree to the AWS Customer Agreement. Follow the steps at <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info">To leave an organization when all required account information has not yet been provided</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p>ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION: You attempted to remove an account from the organization that does not yet have enough information to exist as a stand-alone account. This account requires you to first complete phone verification. Follow the steps at <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info">To leave an organization when all required account information has not yet been provided</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p>MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To create an organization with this account, you first must associate a payment instrument, such as a credit card, with the account. Follow the steps at <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info">To leave an organization when all required account information has not yet been provided</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p>MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To complete this operation with this member account, you first must associate a payment instrument, such as a credit card, with the account. Follow the steps at <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info">To leave an organization when all required account information has not yet been provided</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p>ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of accounts that you can create in one day.</p> </li> <li> <p>MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE: To create an account in this organization, you first must migrate the organization''s master account to the marketplace that corresponds to the master account''s address. For example, accounts with India addresses must be associated with the AISPL marketplace. All accounts in an organization must be associated with the same marketplace.</p> </li> <li> <p>MASTER_ACCOUNT_MISSING_CONTACT_INFO: To complete this operation, you must first provide contact a valid address and phone number for the master account. Then try the operation again.</p> </li> </ul>'
+  DuplicatePolicyAttachmentException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The selected policy is already attached to the specified target.
+  PolicyNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: We can't find a policy with the PolicyId that you specified.
+  PolicyTypeNotEnabledException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'The specified policy type is not currently enabled in this root. You cannot attach policies of the specified type to entities in a root until you enable that type in the root. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">Enabling All Features in Your Organization</a> in the <i>AWS Organizations User Guide</i>.'
+  TargetNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'We can''t find a root, OU, or account with the TargetId that you specified.'
   CancelHandshakeResponse:
     type: object
     example:
@@ -2672,76 +2673,26 @@ definitions:
       Handshake:
         $ref: '#/definitions/Handshake'
         description: A structure that contains details about the handshake that you canceled.
-  Child:
+  CancelHandshakeRequest:
     type: object
+    required:
+      - HandshakeId
+    example:
+      HandshakeId: h-examplehandshakeid111
     properties:
-      Id:
-        $ref: '#/definitions/ChildId'
-        description: '<p>The unique identifier (ID) of this child entity.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a child ID string requires one of the following:</p> <ul> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
-      Type:
-        $ref: '#/definitions/ChildType'
-        description: The type of this child entity.
-    description: 'Contains a list of child entities, either OUs or accounts.'
-  ChildId:
-    type: string
-    pattern: '^(\d{12})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$'
-  ChildNotFoundException:
+      HandshakeId:
+        $ref: '#/definitions/HandshakeId'
+        description: '<p>The unique identifier (ID) of the handshake that you want to cancel. You can get the ID from the <a>ListHandshakesForOrganization</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
+  CreateAccountResponse:
     type: object
+    example:
+      CreateAccountStatus:
+        Id: car-examplecreateaccountrequestid111
+        State: IN_PROGRESS
     properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: We can't find an organizational unit (OU) or AWS account with the ChildId that you specified.
-  ChildType:
-    type: string
-    enum:
-      - ACCOUNT
-      - ORGANIZATIONAL_UNIT
-  Children:
-    type: array
-    items:
-      $ref: '#/definitions/Child'
-  ConcurrentModificationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The target of the operation is currently being modified by a different request. Try again later.
-  ConstraintViolationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      Reason:
-        $ref: '#/definitions/ConstraintViolationExceptionReason'
-    description: '<p>Performing this operation violates a minimum or maximum value limit. For example, attempting to removing the last SCP from an OU or root, inviting or creating too many accounts to the organization, or attaching too many policies to an account, OU, or root. This exception includes a reason that contains additional information about the violated limit:</p> <p/> <p>Some of the reasons in the following list might not be applicable to this specific API or operation:</p> <ul> <li> <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number of accounts in an organization. If you need more accounts, contact AWS Support to request an increase in your limit. </p> <p>Or, The number of invitations that you tried to send would cause you to exceed the limit of accounts in your organization. Send fewer invitations, or contact AWS Support to request an increase in the number of accounts.</p> <p> <b>Note</b>: deleted and closed accounts still count toward your limit.</p> <important> <p>If you get receive this exception when running a command immediately after creating the organization, wait one hour and try again. If after an hour it continues to fail with this error, contact <a href="https://console.aws.amazon.com/support/home#/">AWS Customer Support</a>.</p> </important> </li> <li> <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of handshakes you can send in one day.</p> </li> <li> <p>OU_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of organizational units you can have in an organization.</p> </li> <li> <p>OU_DEPTH_LIMIT_EXCEEDED: You attempted to create an organizational unit tree that is too many levels deep.</p> </li> <li> <p>ORGANIZATION_NOT_IN_ALL_FEATURES_MODE: You attempted to perform an operation that requires the organization to be configured to support all features. An organization that supports consolidated billing features only cannot perform this operation.</p> </li> <li> <p>POLICY_NUMBER_LIMIT_EXCEEDED. You attempted to exceed the number of policies that you can have in an organization.</p> </li> <li> <p>MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to exceed the number of policies of a certain type that can be attached to an entity at one time.</p> </li> <li> <p>MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to detach a policy from an entity that would cause the entity to have fewer than the minimum number of policies of a certain type required.</p> </li> <li> <p>ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA: You attempted to remove an account from the organization that does not yet have enough information to exist as a stand-alone account. This account requires you to first agree to the AWS Customer Agreement. Follow the steps at <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info">To leave an organization when all required account information has not yet been provided</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p>ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION: You attempted to remove an account from the organization that does not yet have enough information to exist as a stand-alone account. This account requires you to first complete phone verification. Follow the steps at <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info">To leave an organization when all required account information has not yet been provided</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p>MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To create an organization with this account, you first must associate a payment instrument, such as a credit card, with the account. Follow the steps at <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info">To leave an organization when all required account information has not yet been provided</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p>MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To complete this operation with this member account, you first must associate a payment instrument, such as a credit card, with the account. Follow the steps at <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info">To leave an organization when all required account information has not yet been provided</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p>ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of accounts that you can create in one day.</p> </li> <li> <p>MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE: To create an account in this organization, you first must migrate the organization''s master account to the marketplace that corresponds to the master account''s address. For example, accounts with India addresses must be associated with the AISPL marketplace. All accounts in an organization must be associated with the same marketplace.</p> </li> <li> <p>MASTER_ACCOUNT_MISSING_CONTACT_INFO: To complete this operation, you must first provide contact a valid address and phone number for the master account. Then try the operation again.</p> </li> </ul>'
-  ConstraintViolationExceptionReason:
-    type: string
-    enum:
-      - ACCOUNT_NUMBER_LIMIT_EXCEEDED
-      - HANDSHAKE_RATE_LIMIT_EXCEEDED
-      - OU_NUMBER_LIMIT_EXCEEDED
-      - OU_DEPTH_LIMIT_EXCEEDED
-      - POLICY_NUMBER_LIMIT_EXCEEDED
-      - MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED
-      - MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED
-      - ACCOUNT_CANNOT_LEAVE_ORGANIZATION
-      - ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA
-      - ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION
-      - MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED
-      - MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED
-      - ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED
-      - MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE
-      - MASTER_ACCOUNT_MISSING_CONTACT_INFO
-      - ORGANIZATION_NOT_IN_ALL_FEATURES_MODE
-  CreateAccountFailureReason:
-    type: string
-    enum:
-      - ACCOUNT_LIMIT_EXCEEDED
-      - EMAIL_ALREADY_EXISTS
-      - INVALID_ADDRESS
-      - INVALID_EMAIL
-      - CONCURRENT_ACCOUNT_MODIFICATION
-      - INTERNAL_FAILURE
+      CreateAccountStatus:
+        $ref: '#/definitions/CreateAccountStatus'
+        description: 'A structure that contains details about the request to create an account. This response structure might not be fully populated when you first receive it because account creation is an asynchronous process. You can pass the returned CreateAccountStatus ID as a parameter to <code> <a>DescribeCreateAccountStatus</a> </code> to get status about the progress of the request at later times. '
   CreateAccountRequest:
     type: object
     required:
@@ -2763,72 +2714,12 @@ definitions:
       IamUserAccessToBilling:
         $ref: '#/definitions/IAMUserAccessToBilling'
         description: '<p>If set to <code>ALLOW</code>, the new account enables IAM users to access account billing information <i>if</i> they have the required permissions. If set to <code>DENY</code>, then only the root user of the new account can access account billing information. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate">Activating Access to the Billing and Cost Management Console</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> <p>If you do not specify this parameter, the value defaults to ALLOW, and IAM users and roles with the required permissions can access billing information for the new account.</p>'
-  CreateAccountRequestId:
-    type: string
-    pattern: '^car-[a-z0-9]{8,32}$'
-  CreateAccountResponse:
-    type: object
-    example:
-      CreateAccountStatus:
-        Id: car-examplecreateaccountrequestid111
-        State: IN_PROGRESS
-    properties:
-      CreateAccountStatus:
-        $ref: '#/definitions/CreateAccountStatus'
-        description: 'A structure that contains details about the request to create an account. This response structure might not be fully populated when you first receive it because account creation is an asynchronous process. You can pass the returned CreateAccountStatus ID as a parameter to <code> <a>DescribeCreateAccountStatus</a> </code> to get status about the progress of the request at later times. '
-  CreateAccountState:
-    type: string
-    enum:
-      - IN_PROGRESS
-      - SUCCEEDED
-      - FAILED
-  CreateAccountStates:
-    type: array
-    items:
-      $ref: '#/definitions/CreateAccountState'
-  CreateAccountStatus:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/CreateAccountRequestId'
-        description: '<p>The unique identifier (ID) that references this request. You get this value from the response of the initial <a>CreateAccount</a> request to create the account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an create account request ID string requires "car-" followed by from 8 to 32 lower-case letters or digits.</p>'
-      AccountName:
-        $ref: '#/definitions/AccountName'
-        description: The account name given to the account when it was created.
-      State:
-        $ref: '#/definitions/CreateAccountState'
-        description: The status of the request.
-      RequestedTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time that the request was made for the account creation.
-      CompletedTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time that the account was created and the request completed.
-      AccountId:
-        $ref: '#/definitions/AccountId'
-        description: '<p>If the account was created successfully, the unique identifier (ID) of the new account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
-      FailureReason:
-        $ref: '#/definitions/CreateAccountFailureReason'
-        description: '<p>If the request failed, a description of the reason for the failure.</p> <ul> <li> <p>ACCOUNT_LIMIT_EXCEEDED: The account could not be created because you have reached the limit on the number of accounts in your organization.</p> </li> <li> <p>EMAIL_ALREADY_EXISTS: The account could not be created because another AWS account with that email address already exists.</p> </li> <li> <p>INVALID_ADDRESS: The account could not be created because the address you provided is not valid.</p> </li> <li> <p>INVALID_EMAIL: The account could not be created because the email address you provided is not valid.</p> </li> <li> <p>INTERNAL_FAILURE: The account could not be created because of an internal failure. Try again later. If the problem persists, contact Customer Support.</p> </li> </ul>'
-    description: Contains the status about a <a>CreateAccount</a> request to create an AWS account in an organization.
-  CreateAccountStatusNotFoundException:
+  FinalizingOrganizationException:
     type: object
     properties:
       Message:
         $ref: '#/definitions/ExceptionMessage'
-    description: We can't find an create account request with the CreateAccountRequestId that you specified.
-  CreateAccountStatuses:
-    type: array
-    items:
-      $ref: '#/definitions/CreateAccountStatus'
-  CreateOrganizationRequest:
-    type: object
-    example:
-      FeatureSet: CONSOLIDATED_BILLING
-    properties:
-      FeatureSet:
-        $ref: '#/definitions/OrganizationFeatureSet'
-        description: '<p>Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.</p> <ul> <li> <p> <i>CONSOLIDATED_BILLING</i>: All member accounts have their bills consolidated to and paid by the master account. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-cb-only">Consolidated Billing</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p> <i>ALL</i>: In addition to all the features supported by the consolidated billing feature set, the master account can also apply any type of policy to any member account in the organization. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all">All features</a> in the <i>AWS Organizations User Guide</i>.</p> </li> </ul>'
+    description: 'AWS Organizations could not perform the operation because your organization has not finished initializing. This can take up to an hour. Try again later. If after one hour you continue to receive this error, contact <a href="https://console.aws.amazon.com/support/home#/"> AWS Customer Support</a>.'
   CreateOrganizationResponse:
     type: object
     example:
@@ -2844,6 +2735,31 @@ definitions:
       Organization:
         $ref: '#/definitions/Organization'
         description: A structure that contains details about the newly created organization.
+  CreateOrganizationRequest:
+    type: object
+    example:
+      FeatureSet: CONSOLIDATED_BILLING
+    properties:
+      FeatureSet:
+        $ref: '#/definitions/OrganizationFeatureSet'
+        description: '<p>Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.</p> <ul> <li> <p> <i>CONSOLIDATED_BILLING</i>: All member accounts have their bills consolidated to and paid by the master account. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-cb-only">Consolidated Billing</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p> <i>ALL</i>: In addition to all the features supported by the consolidated billing feature set, the master account can also apply any type of policy to any member account in the organization. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all">All features</a> in the <i>AWS Organizations User Guide</i>.</p> </li> </ul>'
+  AlreadyInOrganizationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: This account is already a member of an organization. An account can belong to only one organization at a time.
+  CreateOrganizationalUnitResponse:
+    type: object
+    example:
+      OrganizationalUnit:
+        Arn: 'arn:aws:organizations::111111111111:ou/o-exampleorgid/ou-examplerootid111-exampleouid111'
+        Id: ou-examplerootid111-exampleouid111
+        Name: AccountingOU
+    properties:
+      OrganizationalUnit:
+        $ref: '#/definitions/OrganizationalUnit'
+        description: A structure that contains details about the newly created OU.
   CreateOrganizationalUnitRequest:
     type: object
     required:
@@ -2859,17 +2775,32 @@ definitions:
       Name:
         $ref: '#/definitions/OrganizationalUnitName'
         description: The friendly name to assign to the new OU.
-  CreateOrganizationalUnitResponse:
+  DuplicateOrganizationalUnitException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: An organizational unit (OU) with the same name already exists.
+  ParentNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: We can't find a root or organizational unit (OU) with the ParentId that you specified.
+  CreatePolicyResponse:
     type: object
     example:
-      OrganizationalUnit:
-        Arn: 'arn:aws:organizations::111111111111:ou/o-exampleorgid/ou-examplerootid111-exampleouid111'
-        Id: ou-examplerootid111-exampleouid111
-        Name: AccountingOU
+      Policy:
+        Content: '{"Version":"2012-10-17","Statement":{"Effect":"Allow","Action":"s3:*"}}'
+        PolicySummary:
+          Arn: 'arn:aws:organizations::111111111111:policy/o-exampleorgid/service_control_policy/p-examplepolicyid111'
+          Description: Allows delegation of all S3 actions
+          Name: AllowAllS3Actions
+          Type: SERVICE_CONTROL_POLICY
     properties:
-      OrganizationalUnit:
-        $ref: '#/definitions/OrganizationalUnit'
-        description: A structure that contains details about the newly created OU.
+      Policy:
+        $ref: '#/definitions/Policy'
+        description: A structure that contains details about the newly created policy.
   CreatePolicyRequest:
     type: object
     required:
@@ -2895,30 +2826,24 @@ definitions:
       Type:
         $ref: '#/definitions/PolicyType'
         description: '<p>The type of policy to create.</p> <note> <p>In the current release, the only type of policy that you can create is a service control policy (SCP).</p> </note>'
-  CreatePolicyResponse:
+  DuplicatePolicyException:
     type: object
-    example:
-      Policy:
-        Content: '{"Version":"2012-10-17","Statement":{"Effect":"Allow","Action":"s3:*"}}'
-        PolicySummary:
-          Arn: 'arn:aws:organizations::111111111111:policy/o-exampleorgid/service_control_policy/p-examplepolicyid111'
-          Description: Allows delegation of all S3 actions
-          Name: AllowAllS3Actions
-          Type: SERVICE_CONTROL_POLICY
     properties:
-      Policy:
-        $ref: '#/definitions/Policy'
-        description: A structure that contains details about the newly created policy.
-  DeclineHandshakeRequest:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: A policy with the same name already exists.
+  MalformedPolicyDocumentException:
     type: object
-    required:
-      - HandshakeId
-    example:
-      HandshakeId: h-examplehandshakeid111
     properties:
-      HandshakeId:
-        $ref: '#/definitions/HandshakeId'
-        description: '<p>The unique identifier (ID) of the handshake that you want to decline. You can get the ID from the <a>ListHandshakesForAccount</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'The provided policy document does not meet the requirements of the specified policy type. For example, the syntax might be incorrect. For details about service control policy syntax, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html">Service Control Policy Syntax</a> in the <i>AWS Organizations User Guide</i>.'
+  PolicyTypeNotAvailableForOrganizationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'You can''t use the specified policy type with the feature set currently enabled for this organization. For example, you can enable service control policies (SCPs) only after you enable all features in the organization. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html#enable_policies_on_root">Enabling and Disabling a Policy Type on a Root</a> in the <i>AWS Organizations User Guide</i>.'
   DeclineHandshakeResponse:
     type: object
     example:
@@ -2950,6 +2875,22 @@ definitions:
       Handshake:
         $ref: '#/definitions/Handshake'
         description: A structure that contains details about the declined handshake. The state is updated to show the value <code>DECLINED</code>.
+  DeclineHandshakeRequest:
+    type: object
+    required:
+      - HandshakeId
+    example:
+      HandshakeId: h-examplehandshakeid111
+    properties:
+      HandshakeId:
+        $ref: '#/definitions/HandshakeId'
+        description: '<p>The unique identifier (ID) of the handshake that you want to decline. You can get the ID from the <a>ListHandshakesForAccount</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
+  OrganizationNotEmptyException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'The organization isn''t empty. To delete an organization, you must first remove all accounts except the master account, delete all organizational units (OUs), and delete all policies.'
   DeleteOrganizationalUnitRequest:
     type: object
     required:
@@ -2960,6 +2901,18 @@ definitions:
       OrganizationalUnitId:
         $ref: '#/definitions/OrganizationalUnitId'
         description: '<p>The unique identifier (ID) of the organizational unit that you want to delete. You can get the ID from the <a>ListOrganizationalUnitsForParent</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p>'
+  OrganizationalUnitNotEmptyException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'The specified organizational unit (OU) is not empty. Move all accounts to another root or to other OUs, remove all child OUs, and then try the operation again.'
+  OrganizationalUnitNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: We can't find an organizational unit (OU) with the OrganizationalUnitId that you specified.
   DeletePolicyRequest:
     type: object
     required:
@@ -2970,16 +2923,12 @@ definitions:
       PolicyId:
         $ref: '#/definitions/PolicyId'
         description: '<p>The unique identifier (ID) of the policy that you want to delete. You can get the ID from the <a>ListPolicies</a> or <a>ListPoliciesForTarget</a> operations.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
-  DescribeAccountRequest:
+  PolicyInUseException:
     type: object
-    required:
-      - AccountId
-    example:
-      AccountId: '555555555555'
     properties:
-      AccountId:
-        $ref: '#/definitions/AccountId'
-        description: '<p>The unique identifier (ID) of the AWS account that you want information about. You can get the ID from the <a>ListAccounts</a> or <a>ListAccountsForParent</a> operations.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'The policy is attached to one or more entities. You must detach it from all roots, organizational units (OUs), and accounts before performing this operation.'
   DescribeAccountResponse:
     type: object
     example:
@@ -2992,16 +2941,22 @@ definitions:
       Account:
         $ref: '#/definitions/Account'
         description: A structure that contains information about the requested account.
-  DescribeCreateAccountStatusRequest:
+  DescribeAccountRequest:
     type: object
     required:
-      - CreateAccountRequestId
+      - AccountId
     example:
-      CreateAccountRequestId: car-exampleaccountcreationrequestid
+      AccountId: '555555555555'
     properties:
-      CreateAccountRequestId:
-        $ref: '#/definitions/CreateAccountRequestId'
-        description: '<p>Specifies the <code>operationId</code> that uniquely identifies the request. You can get the ID from the response to an earlier <a>CreateAccount</a> request, or from the <a>ListCreateAccountStatus</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an create account request ID string requires "car-" followed by from 8 to 32 lower-case letters or digits.</p>'
+      AccountId:
+        $ref: '#/definitions/AccountId'
+        description: '<p>The unique identifier (ID) of the AWS account that you want information about. You can get the ID from the <a>ListAccounts</a> or <a>ListAccountsForParent</a> operations.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
+  AccountNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: ' We can''t find an AWS account with the AccountId that you specified, or the account whose credentials you used to make this request is not a member of an organization.'
   DescribeCreateAccountStatusResponse:
     type: object
     example:
@@ -3013,16 +2968,22 @@ definitions:
       CreateAccountStatus:
         $ref: '#/definitions/CreateAccountStatus'
         description: A structure that contains the current status of an account creation request.
-  DescribeHandshakeRequest:
+  DescribeCreateAccountStatusRequest:
     type: object
     required:
-      - HandshakeId
+      - CreateAccountRequestId
     example:
-      HandshakeId: h-examplehandshakeid111
+      CreateAccountRequestId: car-exampleaccountcreationrequestid
     properties:
-      HandshakeId:
-        $ref: '#/definitions/HandshakeId'
-        description: '<p>The unique identifier (ID) of the handshake that you want information about. You can get the ID from the original call to <a>InviteAccountToOrganization</a>, or from a call to <a>ListHandshakesForAccount</a> or <a>ListHandshakesForOrganization</a>.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
+      CreateAccountRequestId:
+        $ref: '#/definitions/CreateAccountRequestId'
+        description: '<p>Specifies the <code>operationId</code> that uniquely identifies the request. You can get the ID from the response to an earlier <a>CreateAccount</a> request, or from the <a>ListCreateAccountStatus</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an create account request ID string requires "car-" followed by from 8 to 32 lower-case letters or digits.</p>'
+  CreateAccountStatusNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: We can't find an create account request with the CreateAccountRequestId that you specified.
   DescribeHandshakeResponse:
     type: object
     example:
@@ -3052,6 +3013,16 @@ definitions:
       Handshake:
         $ref: '#/definitions/Handshake'
         description: A structure that contains information about the specified handshake.
+  DescribeHandshakeRequest:
+    type: object
+    required:
+      - HandshakeId
+    example:
+      HandshakeId: h-examplehandshakeid111
+    properties:
+      HandshakeId:
+        $ref: '#/definitions/HandshakeId'
+        description: '<p>The unique identifier (ID) of the handshake that you want information about. You can get the ID from the original call to <a>InviteAccountToOrganization</a>, or from a call to <a>ListHandshakesForAccount</a> or <a>ListHandshakesForOrganization</a>.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
   DescribeOrganizationResponse:
     type: object
     example:
@@ -3068,16 +3039,6 @@ definitions:
       Organization:
         $ref: '#/definitions/Organization'
         description: A structure that contains information about the organization.
-  DescribeOrganizationalUnitRequest:
-    type: object
-    required:
-      - OrganizationalUnitId
-    example:
-      OrganizationalUnitId: ou-examplerootid111-exampleouid111
-    properties:
-      OrganizationalUnitId:
-        $ref: '#/definitions/OrganizationalUnitId'
-        description: '<p>The unique identifier (ID) of the organizational unit that you want details about. You can get the ID from the <a>ListOrganizationalUnitsForParent</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p>'
   DescribeOrganizationalUnitResponse:
     type: object
     example:
@@ -3089,16 +3050,16 @@ definitions:
       OrganizationalUnit:
         $ref: '#/definitions/OrganizationalUnit'
         description: A structure that contains details about the specified OU.
-  DescribePolicyRequest:
+  DescribeOrganizationalUnitRequest:
     type: object
     required:
-      - PolicyId
+      - OrganizationalUnitId
     example:
-      PolicyId: p-examplepolicyid111
+      OrganizationalUnitId: ou-examplerootid111-exampleouid111
     properties:
-      PolicyId:
-        $ref: '#/definitions/PolicyId'
-        description: '<p>The unique identifier (ID) of the policy that you want details about. You can get the ID from the <a>ListPolicies</a> or <a>ListPoliciesForTarget</a> operations.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
+      OrganizationalUnitId:
+        $ref: '#/definitions/OrganizationalUnitId'
+        description: '<p>The unique identifier (ID) of the organizational unit that you want details about. You can get the ID from the <a>ListOrganizationalUnitsForParent</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p>'
   DescribePolicyResponse:
     type: object
     example:
@@ -3115,12 +3076,16 @@ definitions:
       Policy:
         $ref: '#/definitions/Policy'
         description: A structure that contains details about the specified policy.
-  DestinationParentNotFoundException:
+  DescribePolicyRequest:
     type: object
+    required:
+      - PolicyId
+    example:
+      PolicyId: p-examplepolicyid111
     properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: We can't find the destination container (a root or OU) with the ParentId that you specified.
+      PolicyId:
+        $ref: '#/definitions/PolicyId'
+        description: '<p>The unique identifier (ID) of the policy that you want details about. You can get the ID from the <a>ListPolicies</a> or <a>ListPoliciesForTarget</a> operations.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
   DetachPolicyRequest:
     type: object
     required:
@@ -3136,6 +3101,12 @@ definitions:
       TargetId:
         $ref: '#/definitions/PolicyTargetId'
         description: '<p>The unique identifier (ID) of the root, OU, or account from which you want to detach the policy. You can get the ID from the <a>ListRoots</a>, <a>ListOrganizationalUnitsForParent</a>, or <a>ListAccounts</a> operations.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
+  PolicyNotAttachedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The policy isn't attached to the specified target in the specified root.
   DisableAWSServiceAccessRequest:
     type: object
     required:
@@ -3144,6 +3115,18 @@ definitions:
       ServicePrincipal:
         $ref: '#/definitions/ServicePrincipal'
         description: 'The service principal name of the AWS service for which you want to disable integration with your organization. This is typically in the form of a URL, such as <code> <i>service-abbreviation</i>.amazonaws.com</code>.'
+  DisablePolicyTypeResponse:
+    type: object
+    example:
+      Root:
+        Arn: 'arn:aws:organizations::111111111111:root/o-exampleorgid/r-examplerootid111'
+        Id: r-examplerootid111
+        Name: Root
+        PolicyTypes: []
+    properties:
+      Root:
+        $ref: '#/definitions/Root'
+        description: A structure that shows the root with the updated list of enabled policy types.
   DisablePolicyTypeRequest:
     type: object
     required:
@@ -3159,54 +3142,12 @@ definitions:
       PolicyType:
         $ref: '#/definitions/PolicyType'
         description: The policy type that you want to disable in this root.
-  DisablePolicyTypeResponse:
-    type: object
-    example:
-      Root:
-        Arn: 'arn:aws:organizations::111111111111:root/o-exampleorgid/r-examplerootid111'
-        Id: r-examplerootid111
-        Name: Root
-        PolicyTypes: []
-    properties:
-      Root:
-        $ref: '#/definitions/Root'
-        description: A structure that shows the root with the updated list of enabled policy types.
-  DuplicateAccountException:
+  RootNotFoundException:
     type: object
     properties:
       Message:
         $ref: '#/definitions/ExceptionMessage'
-    description: That account is already present in the specified destination.
-  DuplicateHandshakeException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'A handshake with the same action and target already exists. For example, if you invited an account to join your organization, the invited account might already have a pending invitation from this organization. If you intend to resend an invitation to an account, ensure that existing handshakes that might be considered duplicates are canceled or declined.'
-  DuplicateOrganizationalUnitException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: An organizational unit (OU) with the same name already exists.
-  DuplicatePolicyAttachmentException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The selected policy is already attached to the specified target.
-  DuplicatePolicyException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: A policy with the same name already exists.
-  Email:
-    type: string
-    pattern: '[^\s@]+@[^\s@]+\.[^\s@]+'
-    minLength: 6
-    maxLength: 64
-    format: password
+    description: We can't find a root with the RootId that you specified.
   EnableAWSServiceAccessRequest:
     type: object
     required:
@@ -3215,10 +3156,6 @@ definitions:
       ServicePrincipal:
         $ref: '#/definitions/ServicePrincipal'
         description: 'The service principal name of the AWS service for which you want to enable integration with your organization. This is typically in the form of a URL, such as <code> <i>service-abbreviation</i>.amazonaws.com</code>.'
-  EnableAllFeaturesRequest:
-    type: object
-    example: {}
-    properties: {}
   EnableAllFeaturesResponse:
     type: object
     example:
@@ -3239,6 +3176,24 @@ definitions:
       Handshake:
         $ref: '#/definitions/Handshake'
         description: A structure that contains details about the handshake created to support this request to enable all features in the organization.
+  EnableAllFeaturesRequest:
+    type: object
+    example: {}
+    properties: {}
+  EnablePolicyTypeResponse:
+    type: object
+    example:
+      Root:
+        Arn: 'arn:aws:organizations::111111111111:root/o-exampleorgid/r-examplerootid111'
+        Id: r-examplerootid111
+        Name: Root
+        PolicyTypes:
+          - Status: ENABLED
+            Type: SERVICE_CONTROL_POLICY
+    properties:
+      Root:
+        $ref: '#/definitions/Root'
+        description: A structure that shows the root with the updated list of enabled policy types.
   EnablePolicyTypeRequest:
     type: object
     required:
@@ -3254,255 +3209,12 @@ definitions:
       PolicyType:
         $ref: '#/definitions/PolicyType'
         description: The policy type that you want to enable.
-  EnablePolicyTypeResponse:
-    type: object
-    example:
-      Root:
-        Arn: 'arn:aws:organizations::111111111111:root/o-exampleorgid/r-examplerootid111'
-        Id: r-examplerootid111
-        Name: Root
-        PolicyTypes:
-          - Status: ENABLED
-            Type: SERVICE_CONTROL_POLICY
-    properties:
-      Root:
-        $ref: '#/definitions/Root'
-        description: A structure that shows the root with the updated list of enabled policy types.
-  EnabledServicePrincipal:
-    type: object
-    properties:
-      ServicePrincipal:
-        $ref: '#/definitions/ServicePrincipal'
-        description: 'The name of the service principal. This is typically in the form of a URL, such as: <code> <i>servicename</i>.amazonaws.com</code>.'
-      DateEnabled:
-        $ref: '#/definitions/Timestamp'
-        description: The date that the service principal was enabled for integration with AWS Organizations.
-    description: A structure that contains details of a service principal that is enabled to integrate with AWS Organizations.
-  EnabledServicePrincipals:
-    type: array
-    items:
-      $ref: '#/definitions/EnabledServicePrincipal'
-  ExceptionMessage:
-    type: string
-  ExceptionType:
-    type: string
-  FinalizingOrganizationException:
+  PolicyTypeAlreadyEnabledException:
     type: object
     properties:
       Message:
         $ref: '#/definitions/ExceptionMessage'
-    description: 'AWS Organizations could not perform the operation because your organization has not finished initializing. This can take up to an hour. Try again later. If after one hour you continue to receive this error, contact <a href="https://console.aws.amazon.com/support/home#/"> AWS Customer Support</a>.'
-  GenericArn:
-    type: string
-    pattern: '^arn:aws:organizations::.+:.+'
-  Handshake:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/HandshakeId'
-        description: '<p>The unique identifier (ID) of a handshake. The originating account creates the ID when it initiates the handshake.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
-      Arn:
-        $ref: '#/definitions/HandshakeArn'
-        description: '<p>The Amazon Resource Name (ARN) of a handshake.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
-      Parties:
-        $ref: '#/definitions/HandshakeParties'
-        description: Information about the two accounts that are participating in the handshake.
-      State:
-        $ref: '#/definitions/HandshakeState'
-        description: '<p>The current state of the handshake. Use the state to trace the flow of the handshake through the process from its creation to its acceptance. The meaning of each of the valid values is as follows:</p> <ul> <li> <p> <b>REQUESTED</b>: This handshake was sent to multiple recipients (applicable to only some handshake types) and not all recipients have responded yet. The request stays in this state until all recipients respond.</p> </li> <li> <p> <b>OPEN</b>: This handshake was sent to multiple recipients (applicable to only some policy types) and all recipients have responded, allowing the originator to complete the handshake action.</p> </li> <li> <p> <b>CANCELED</b>: This handshake is no longer active because it was canceled by the originating account.</p> </li> <li> <p> <b>ACCEPTED</b>: This handshake is complete because it has been accepted by the recipient.</p> </li> <li> <p> <b>DECLINED</b>: This handshake is no longer active because it was declined by the recipient account.</p> </li> <li> <p> <b>EXPIRED</b>: This handshake is no longer active because the originator did not receive a response of any kind from the recipient before the expiration time (15 days).</p> </li> </ul>'
-      RequestedTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time that the handshake request was made.
-      ExpirationTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time that the handshake expires. If the recipient of the handshake request fails to respond before the specified date and time, the handshake becomes inactive and is no longer valid.'
-      Action:
-        $ref: '#/definitions/ActionType'
-        description: '<p>The type of handshake, indicating what action occurs when the recipient accepts the handshake. The following handshake types are supported:</p> <ul> <li> <p> <b>INVITE</b>: This type of handshake represents a request to join an organization. It is always sent from the master account to only non-member accounts.</p> </li> <li> <p> <b>ENABLE_ALL_FEATURES</b>: This type of handshake represents a request to enable all features in an organization. It is always sent from the master account to only <i>invited</i> member accounts. Created accounts do not receive this because those accounts were created by the organization''s master account and approval is inferred.</p> </li> <li> <p> <b>APPROVE_ALL_FEATURES</b>: This type of handshake is sent from the Organizations service when all member accounts have approved the <code>ENABLE_ALL_FEATURES</code> invitation. It is sent only to the master account and signals the master that it can finalize the process to enable all features.</p> </li> </ul>'
-      Resources:
-        $ref: '#/definitions/HandshakeResources'
-        description: Additional information that is needed to process the handshake.
-    description: '<p>Contains information that must be exchanged to securely establish a relationship between two accounts (an <i>originator</i> and a <i>recipient</i>). For example, when a master account (the originator) invites another account (the recipient) to join its organization, the two accounts exchange information as a series of handshake requests and responses.</p> <p> <b>Note:</b> Handshakes that are CANCELED, ACCEPTED, or DECLINED show up in lists for only 30 days after entering that state After that they are deleted.</p>'
-  HandshakeAlreadyInStateException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'The specified handshake is already in the requested state. For example, you can''t accept a handshake that was already accepted.'
-  HandshakeArn:
-    type: string
-    pattern: '^arn:aws:organizations::\d{12}:handshake\/o-[a-z0-9]{10,32}\/[a-z_]{1,32}\/h-[0-9a-z]{8,32}'
-  HandshakeConstraintViolationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      Reason:
-        $ref: '#/definitions/HandshakeConstraintViolationExceptionReason'
-    description: '<p>The requested operation would violate the constraint identified in the reason code.</p> <note> <p>Some of the reasons in the following list might not be applicable to this specific API or operation:</p> </note> <ul> <li> <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number of accounts in an organization. <b>Note</b>: deleted and closed accounts still count toward your limit.</p> <important> <p>If you get this exception immediately after creating the organization, wait one hour and try again. If after an hour it continues to fail with this error, contact <a href="https://console.aws.amazon.com/support/home#/">AWS Customer Support</a>.</p> </important> </li> <li> <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of handshakes you can send in one day.</p> </li> <li> <p>ALREADY_IN_AN_ORGANIZATION: The handshake request is invalid because the invited account is already a member of an organization.</p> </li> <li> <p>ORGANIZATION_ALREADY_HAS_ALL_FEATURES: The handshake request is invalid because the organization has already enabled all features.</p> </li> <li> <p>INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES: You cannot issue new invitations to join an organization while it is in the process of enabling all features. You can resume inviting accounts after you finalize the process when all accounts have agreed to the change.</p> </li> <li> <p>PAYMENT_INSTRUMENT_REQUIRED: You cannot complete the operation with an account that does not have a payment instrument, such as a credit card, associated with it.</p> </li> <li> <p>ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: The request failed because the account is from a different marketplace than the accounts in the organization. For example, accounts with India addresses must be associated with the AISPL marketplace. All accounts in an organization must be from the same marketplace.</p> </li> <li> <p>ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED: You attempted to change the membership of an account too quickly after its previous change.</p> </li> </ul>'
-  HandshakeConstraintViolationExceptionReason:
-    type: string
-    enum:
-      - ACCOUNT_NUMBER_LIMIT_EXCEEDED
-      - HANDSHAKE_RATE_LIMIT_EXCEEDED
-      - ALREADY_IN_AN_ORGANIZATION
-      - ORGANIZATION_ALREADY_HAS_ALL_FEATURES
-      - INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES
-      - PAYMENT_INSTRUMENT_REQUIRED
-      - ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD
-      - ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED
-  HandshakeFilter:
-    type: object
-    properties:
-      ActionType:
-        $ref: '#/definitions/ActionType'
-        description: '<p>Specifies the type of handshake action.</p> <p>If you specify <code>ActionType</code>, you cannot also specify <code>ParentHandshakeId</code>.</p>'
-      ParentHandshakeId:
-        $ref: '#/definitions/HandshakeId'
-        description: '<p>Specifies the parent handshake. Only used for handshake types that are a child of another type.</p> <p>If you specify <code>ParentHandshakeId</code>, you cannot also specify <code>ActionType</code>.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
-    description: Specifies the criteria that are used to select the handshakes for the operation.
-  HandshakeId:
-    type: string
-    pattern: '^h-[0-9a-z]{8,32}$'
-  HandshakeNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: We can't find a handshake with the HandshakeId that you specified.
-  HandshakeNotes:
-    type: string
-    maxLength: 1024
-    format: password
-  HandshakeParties:
-    type: array
-    items:
-      $ref: '#/definitions/HandshakeParty'
-  HandshakeParty:
-    type: object
-    required:
-      - Id
-      - Type
-    properties:
-      Id:
-        $ref: '#/definitions/HandshakePartyId'
-        description: '<p>The unique identifier (ID) for the party.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
-      Type:
-        $ref: '#/definitions/HandshakePartyType'
-        description: The type of party.
-    description: Identifies a participant in a handshake.
-  HandshakePartyId:
-    type: string
-    minLength: 1
-    maxLength: 64
-    format: password
-  HandshakePartyType:
-    type: string
-    enum:
-      - ACCOUNT
-      - ORGANIZATION
-      - EMAIL
-  HandshakeResource:
-    type: object
-    properties:
-      Value:
-        $ref: '#/definitions/HandshakeResourceValue'
-        description: The information that is passed to the other party in the handshake. The format of the value string must match the requirements of the specified type.
-      Type:
-        $ref: '#/definitions/HandshakeResourceType'
-        description: '<p>The type of information being passed, specifying how the value is to be interpreted by the other party:</p> <ul> <li> <p> <code>ACCOUNT</code> - Specifies an AWS account ID number.</p> </li> <li> <p> <code>ORGANIZATION</code> - Specifies an organization ID number.</p> </li> <li> <p> <code>EMAIL</code> - Specifies the email address that is associated with the account that receives the handshake. </p> </li> <li> <p> <code>OWNER_EMAIL</code> - Specifies the email address associated with the master account. Included as information about an organization. </p> </li> <li> <p> <code>OWNER_NAME</code> - Specifies the name associated with the master account. Included as information about an organization. </p> </li> <li> <p> <code>NOTES</code> - Additional text provided by the handshake initiator and intended for the recipient to read.</p> </li> </ul>'
-      Resources:
-        $ref: '#/definitions/HandshakeResources'
-        description: 'When needed, contains an additional array of <code>HandshakeResource</code> objects.'
-    description: Contains additional data that is needed to process a handshake.
-  HandshakeResourceType:
-    type: string
-    enum:
-      - ACCOUNT
-      - ORGANIZATION
-      - ORGANIZATION_FEATURE_SET
-      - EMAIL
-      - MASTER_EMAIL
-      - MASTER_NAME
-      - NOTES
-      - PARENT_HANDSHAKE
-  HandshakeResourceValue:
-    type: string
-    format: password
-  HandshakeResources:
-    type: array
-    items:
-      $ref: '#/definitions/HandshakeResource'
-  HandshakeState:
-    type: string
-    enum:
-      - REQUESTED
-      - OPEN
-      - CANCELED
-      - ACCEPTED
-      - DECLINED
-      - EXPIRED
-  Handshakes:
-    type: array
-    items:
-      $ref: '#/definitions/Handshake'
-  IAMUserAccessToBilling:
-    type: string
-    enum:
-      - ALLOW
-      - DENY
-  InvalidHandshakeTransitionException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'You can''t perform the operation on the handshake in its current state. For example, you can''t cancel a handshake that was already accepted, or accept a handshake that was already declined.'
-  InvalidInputException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      Reason:
-        $ref: '#/definitions/InvalidInputExceptionReason'
-    description: '<p>The requested operation failed because you provided invalid values for one or more of the request parameters. This exception includes a reason that contains additional information about the violated limit:</p> <note> <p>Some of the reasons in the following list might not be applicable to this specific API or operation:</p> </note> <ul> <li> <p>IMMUTABLE_POLICY: You specified a policy that is managed by AWS and cannot be modified.</p> </li> <li> <p>INPUT_REQUIRED: You must include a value for all required parameters.</p> </li> <li> <p>INVALID_ENUM: You specified a value that is not valid for that parameter.</p> </li> <li> <p>INVALID_FULL_NAME_TARGET: You specified a full name that contains invalid characters.</p> </li> <li> <p>INVALID_LIST_MEMBER: You provided a list to a parameter that contains at least one invalid value.</p> </li> <li> <p>INVALID_PARTY_TYPE_TARGET: You specified the wrong type of entity (account, organization, or email) as a party.</p> </li> <li> <p>INVALID_PAGINATION_TOKEN: Get the value for the NextToken parameter from the response to a previous call of the operation.</p> </li> <li> <p>INVALID_PATTERN: You provided a value that doesn''t match the required pattern.</p> </li> <li> <p>INVALID_PATTERN_TARGET_ID: You specified a policy target ID that doesn''t match the required pattern.</p> </li> <li> <p>INVALID_ROLE_NAME: You provided a role name that is not valid. A role name can’t begin with the reserved prefix ''AWSServiceRoleFor''.</p> </li> <li> <p>INVALID_SYNTAX_ORGANIZATION_ARN: You specified an invalid ARN for the organization.</p> </li> <li> <p>INVALID_SYNTAX_POLICY_ID: You specified an invalid policy ID. </p> </li> <li> <p>MAX_FILTER_LIMIT_EXCEEDED: You can specify only one filter parameter for the operation.</p> </li> <li> <p>MAX_LENGTH_EXCEEDED: You provided a string parameter that is longer than allowed.</p> </li> <li> <p>MAX_VALUE_EXCEEDED: You provided a numeric parameter that has a larger value than allowed.</p> </li> <li> <p>MIN_LENGTH_EXCEEDED: You provided a string parameter that is shorter than allowed.</p> </li> <li> <p>MIN_VALUE_EXCEEDED: You provided a numeric parameter that has a smaller value than allowed.</p> </li> <li> <p>MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: You can move an account only between entities in the same root.</p> </li> </ul>'
-  InvalidInputExceptionReason:
-    type: string
-    enum:
-      - INVALID_PARTY_TYPE_TARGET
-      - INVALID_SYNTAX_ORGANIZATION_ARN
-      - INVALID_SYNTAX_POLICY_ID
-      - INVALID_ENUM
-      - INVALID_LIST_MEMBER
-      - MAX_LENGTH_EXCEEDED
-      - MAX_VALUE_EXCEEDED
-      - MIN_LENGTH_EXCEEDED
-      - MIN_VALUE_EXCEEDED
-      - IMMUTABLE_POLICY
-      - INVALID_PATTERN
-      - INVALID_PATTERN_TARGET_ID
-      - INPUT_REQUIRED
-      - INVALID_NEXT_TOKEN
-      - MAX_LIMIT_EXCEEDED_FILTER
-      - MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS
-      - INVALID_FULL_NAME_TARGET
-      - UNRECOGNIZED_SERVICE_PRINCIPAL
-      - INVALID_ROLE_NAME
-  InviteAccountToOrganizationRequest:
-    type: object
-    required:
-      - Target
-    example:
-      Notes: This is a request for Juan's account to join Bill's organization
-      Target:
-        Id: juan@example.com
-        Type: EMAIL
-    properties:
-      Target:
-        $ref: '#/definitions/HandshakeParty'
-        description: '<p>The identifier (ID) of the AWS account that you want to invite to join your organization. This is a JSON object that contains the following elements: </p> <p> <code>{ "Type": "ACCOUNT", "Id": "&lt;<i> <b>account id number</b> </i>&gt;" }</code> </p> <p>If you use the AWS CLI, you can submit this as a single string, similar to the following example:</p> <p> <code>--target Id=123456789012,Type=ACCOUNT</code> </p> <p>If you specify <code>"Type": "ACCOUNT"</code>, then you must provide the AWS account ID number as the <code>Id</code>. If you specify <code>"Type": "EMAIL"</code>, then you must specify the email address that is associated with the account.</p> <p> <code>--target Id=bill@example.com,Type=EMAIL</code> </p>'
-      Notes:
-        $ref: '#/definitions/HandshakeNotes'
-        description: Additional information that you want to include in the generated email to the recipient account owner.
+    description: The specified policy type is already enabled in the specified root.
   InviteAccountToOrganizationResponse:
     type: object
     example:
@@ -3534,15 +3246,34 @@ definitions:
       Handshake:
         $ref: '#/definitions/Handshake'
         description: A structure that contains details about the handshake that is created to support this invitation request.
-  ListAWSServiceAccessForOrganizationRequest:
+  InviteAccountToOrganizationRequest:
+    type: object
+    required:
+      - Target
+    example:
+      Notes: This is a request for Juan's account to join Bill's organization
+      Target:
+        Id: juan@example.com
+        Type: EMAIL
+    properties:
+      Target:
+        $ref: '#/definitions/HandshakeParty'
+        description: '<p>The identifier (ID) of the AWS account that you want to invite to join your organization. This is a JSON object that contains the following elements: </p> <p> <code>{ "Type": "ACCOUNT", "Id": "&lt;<i> <b>account id number</b> </i>&gt;" }</code> </p> <p>If you use the AWS CLI, you can submit this as a single string, similar to the following example:</p> <p> <code>--target Id=123456789012,Type=ACCOUNT</code> </p> <p>If you specify <code>"Type": "ACCOUNT"</code>, then you must provide the AWS account ID number as the <code>Id</code>. If you specify <code>"Type": "EMAIL"</code>, then you must specify the email address that is associated with the account.</p> <p> <code>--target Id=bill@example.com,Type=EMAIL</code> </p>'
+      Notes:
+        $ref: '#/definitions/HandshakeNotes'
+        description: Additional information that you want to include in the generated email to the recipient account owner.
+  DuplicateHandshakeException:
     type: object
     properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: '(Optional) Use this to limit the number of results you want included in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'A handshake with the same action and target already exists. For example, if you invited an account to join your organization, the invited account might already have a pending invitation from this organization. If you intend to resend an invitation to an account, ensure that existing handshakes that might be considered duplicates are canceled or declined.'
+  MasterCannotLeaveOrganizationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'You can''t remove a master account from an organization. If you want the master account to become a member account in another organization, you must first delete the current organization of the master account.'
   ListAWSServiceAccessForOrganizationResponse:
     type: object
     properties:
@@ -3552,50 +3283,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
-  ListAccountsForParentRequest:
+  ListAWSServiceAccessForOrganizationRequest:
     type: object
-    required:
-      - ParentId
-    example:
-      ParentId: ou-examplerootid111-exampleouid111
-    properties:
-      ParentId:
-        $ref: '#/definitions/ParentId'
-        description: The unique identifier (ID) for the parent root or organization unit (OU) whose accounts you want to list.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: '(Optional) Use this to limit the number of results you want included in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
-  ListAccountsForParentResponse:
-    type: object
-    example:
-      Accounts:
-        - Arn: 'arn:aws:organizations::111111111111:account/o-exampleorgid/333333333333'
-          Email: juan@example.com
-          Id: '333333333333'
-          JoinedMethod: INVITED
-          JoinedTimestamp: 1481835795.536
-          Name: Development Account
-          Status: ACTIVE
-        - Arn: 'arn:aws:organizations::111111111111:account/o-exampleorgid/444444444444'
-          Email: anika@example.com
-          Id: '444444444444'
-          JoinedMethod: INVITED
-          JoinedTimestamp: 1481835812.143
-          Name: Test Account
-          Status: ACTIVE
-    properties:
-      Accounts:
-        $ref: '#/definitions/Accounts'
-        description: A list of the accounts in the specified root or OU.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
-  ListAccountsRequest:
-    type: object
-    example: {}
     properties:
       NextToken:
         $ref: '#/definitions/NextToken'
@@ -3642,21 +3331,51 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
-  ListChildrenRequest:
+  ListAccountsRequest:
+    type: object
+    example: {}
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: '(Optional) Use this to limit the number of results you want included in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+  ListAccountsForParentResponse:
+    type: object
+    example:
+      Accounts:
+        - Arn: 'arn:aws:organizations::111111111111:account/o-exampleorgid/333333333333'
+          Email: juan@example.com
+          Id: '333333333333'
+          JoinedMethod: INVITED
+          JoinedTimestamp: 1481835795.536
+          Name: Development Account
+          Status: ACTIVE
+        - Arn: 'arn:aws:organizations::111111111111:account/o-exampleorgid/444444444444'
+          Email: anika@example.com
+          Id: '444444444444'
+          JoinedMethod: INVITED
+          JoinedTimestamp: 1481835812.143
+          Name: Test Account
+          Status: ACTIVE
+    properties:
+      Accounts:
+        $ref: '#/definitions/Accounts'
+        description: A list of the accounts in the specified root or OU.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
+  ListAccountsForParentRequest:
     type: object
     required:
       - ParentId
-      - ChildType
     example:
-      ChildType: ORGANIZATIONAL_UNIT
       ParentId: ou-examplerootid111-exampleouid111
     properties:
       ParentId:
         $ref: '#/definitions/ParentId'
-        description: '<p>The unique identifier (ID) for the parent root or OU whose children you want to list.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
-      ChildType:
-        $ref: '#/definitions/ChildType'
-        description: Filters the output to include only the specified child type.
+        description: The unique identifier (ID) for the parent root or organization unit (OU) whose accounts you want to list.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
@@ -3678,15 +3397,21 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
-  ListCreateAccountStatusRequest:
+  ListChildrenRequest:
     type: object
+    required:
+      - ParentId
+      - ChildType
     example:
-      States:
-        - IN_PROGRESS
+      ChildType: ORGANIZATIONAL_UNIT
+      ParentId: ou-examplerootid111-exampleouid111
     properties:
-      States:
-        $ref: '#/definitions/CreateAccountStates'
-        description: 'A list of one or more states that you want included in the response. If this parameter is not present, then all requests are included in the response.'
+      ParentId:
+        $ref: '#/definitions/ParentId'
+        description: '<p>The unique identifier (ID) for the parent root or OU whose children you want to list.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
+      ChildType:
+        $ref: '#/definitions/ChildType'
+        description: Filters the output to include only the specified child type.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
@@ -3708,12 +3433,15 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
-  ListHandshakesForAccountRequest:
+  ListCreateAccountStatusRequest:
     type: object
+    example:
+      States:
+        - IN_PROGRESS
     properties:
-      Filter:
-        $ref: '#/definitions/HandshakeFilter'
-        description: 'Filters the handshakes that you want included in the response. The default is all types. Use the <code>ActionType</code> element to limit the output to only a specified type, such as <code>INVITE</code>, <code>ENABLE-FULL-CONTROL</code>, or <code>APPROVE-FULL-CONTROL</code>. Alternatively, for the <code>ENABLE-FULL-CONTROL</code> handshake that generates a separate child handshake for each member account, you can specify <code>ParentHandshakeId</code> to see only the handshakes that were generated by that parent request.'
+      States:
+        $ref: '#/definitions/CreateAccountStates'
+        description: 'A list of one or more states that you want included in the response. If this parameter is not present, then all requests are included in the response.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
@@ -3754,12 +3482,12 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
-  ListHandshakesForOrganizationRequest:
+  ListHandshakesForAccountRequest:
     type: object
     properties:
       Filter:
         $ref: '#/definitions/HandshakeFilter'
-        description: 'A filter of the handshakes that you want included in the response. The default is all types. Use the <code>ActionType</code> element to limit the output to only a specified type, such as <code>INVITE</code>, <code>ENABLE-ALL-FEATURES</code>, or <code>APPROVE-ALL-FEATURES</code>. Alternatively, for the <code>ENABLE-ALL-FEATURES</code> handshake that generates a separate child handshake for each member account, you can specify the <code>ParentHandshakeId</code> to see only the handshakes that were generated by that parent request.'
+        description: 'Filters the handshakes that you want included in the response. The default is all types. Use the <code>ActionType</code> element to limit the output to only a specified type, such as <code>INVITE</code>, <code>ENABLE-FULL-CONTROL</code>, or <code>APPROVE-FULL-CONTROL</code>. Alternatively, for the <code>ENABLE-FULL-CONTROL</code> handshake that generates a separate child handshake for each member account, you can specify <code>ParentHandshakeId</code> to see only the handshakes that were generated by that parent request.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
@@ -3823,16 +3551,12 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
-  ListOrganizationalUnitsForParentRequest:
+  ListHandshakesForOrganizationRequest:
     type: object
-    required:
-      - ParentId
-    example:
-      ParentId: r-examplerootid111
     properties:
-      ParentId:
-        $ref: '#/definitions/ParentId'
-        description: '<p>The unique identifier (ID) of the root or OU whose child OUs you want to list.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
+      Filter:
+        $ref: '#/definitions/HandshakeFilter'
+        description: 'A filter of the handshakes that you want included in the response. The default is all types. Use the <code>ActionType</code> element to limit the output to only a specified type, such as <code>INVITE</code>, <code>ENABLE-ALL-FEATURES</code>, or <code>APPROVE-ALL-FEATURES</code>. Alternatively, for the <code>ENABLE-ALL-FEATURES</code> handshake that generates a separate child handshake for each member account, you can specify the <code>ParentHandshakeId</code> to see only the handshakes that were generated by that parent request.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
@@ -3856,16 +3580,16 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
-  ListParentsRequest:
+  ListOrganizationalUnitsForParentRequest:
     type: object
     required:
-      - ChildId
+      - ParentId
     example:
-      ChildId: '444444444444'
+      ParentId: r-examplerootid111
     properties:
-      ChildId:
-        $ref: '#/definitions/ChildId'
-        description: '<p>The unique identifier (ID) of the OU or account whose parent containers you want to list. Do not specify a root.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a child ID string requires one of the following:</p> <ul> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
+      ParentId:
+        $ref: '#/definitions/ParentId'
+        description: '<p>The unique identifier (ID) of the root or OU whose child OUs you want to list.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
@@ -3885,60 +3609,28 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
-  ListPoliciesForTargetRequest:
+  ListParentsRequest:
     type: object
     required:
-      - TargetId
-      - Filter
+      - ChildId
     example:
-      Filter: SERVICE_CONTROL_POLICY
-      TargetId: '444444444444'
+      ChildId: '444444444444'
     properties:
-      TargetId:
-        $ref: '#/definitions/PolicyTargetId'
-        description: '<p>The unique identifier (ID) of the root, organizational unit, or account whose policies you want to list.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
-      Filter:
-        $ref: '#/definitions/PolicyType'
-        description: The type of policy that you want to include in the returned list.
+      ChildId:
+        $ref: '#/definitions/ChildId'
+        description: '<p>The unique identifier (ID) of the OU or account whose parent containers you want to list. Do not specify a root.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a child ID string requires one of the following:</p> <ul> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: '(Optional) Use this to limit the number of results you want included in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
-  ListPoliciesForTargetResponse:
+  ChildNotFoundException:
     type: object
-    example:
-      Policies:
-        - Arn: 'arn:aws:organizations::111111111111:policy/o-exampleorgid/service_control_policy/p-examplepolicyid222'
-          AwsManaged: false
-          Description: Enables account admins to delegate permissions for any EC2 actions to users and roles in their accounts.
-          Id: p-examplepolicyid222
-          Name: AllowAllEC2Actions
-          Type: SERVICE_CONTROL_POLICY
     properties:
-      Policies:
-        $ref: '#/definitions/Policies'
-        description: The list of policies that match the criteria in the request.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
-  ListPoliciesRequest:
-    type: object
-    required:
-      - Filter
-    example:
-      Filter: SERVICE_CONTROL_POLICY
-    properties:
-      Filter:
-        $ref: '#/definitions/PolicyType'
-        description: Specifies the type of policy that you want to include in the response.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: '(Optional) Use this to limit the number of results you want included in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: We can't find an organizational unit (OU) or AWS account with the ChildId that you specified.
   ListPoliciesResponse:
     type: object
     example:
@@ -3968,10 +3660,54 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
-  ListRootsRequest:
+  ListPoliciesRequest:
     type: object
-    example: {}
+    required:
+      - Filter
+    example:
+      Filter: SERVICE_CONTROL_POLICY
     properties:
+      Filter:
+        $ref: '#/definitions/PolicyType'
+        description: Specifies the type of policy that you want to include in the response.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: '(Optional) Use this to limit the number of results you want included in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+  ListPoliciesForTargetResponse:
+    type: object
+    example:
+      Policies:
+        - Arn: 'arn:aws:organizations::111111111111:policy/o-exampleorgid/service_control_policy/p-examplepolicyid222'
+          AwsManaged: false
+          Description: Enables account admins to delegate permissions for any EC2 actions to users and roles in their accounts.
+          Id: p-examplepolicyid222
+          Name: AllowAllEC2Actions
+          Type: SERVICE_CONTROL_POLICY
+    properties:
+      Policies:
+        $ref: '#/definitions/Policies'
+        description: The list of policies that match the criteria in the request.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
+  ListPoliciesForTargetRequest:
+    type: object
+    required:
+      - TargetId
+      - Filter
+    example:
+      Filter: SERVICE_CONTROL_POLICY
+      TargetId: '444444444444'
+    properties:
+      TargetId:
+        $ref: '#/definitions/PolicyTargetId'
+        description: '<p>The unique identifier (ID) of the root, organizational unit, or account whose policies you want to list.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
+      Filter:
+        $ref: '#/definitions/PolicyType'
+        description: The type of policy that you want to include in the returned list.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
@@ -3995,16 +3731,10 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
-  ListTargetsForPolicyRequest:
+  ListRootsRequest:
     type: object
-    required:
-      - PolicyId
-    example:
-      PolicyId: p-FullAWSAccess
+    example: {}
     properties:
-      PolicyId:
-        $ref: '#/definitions/PolicyId'
-        description: '<p>The unique identifier (ID) of the policy for which you want to know its attachments.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
@@ -4034,22 +3764,22 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
-  MalformedPolicyDocumentException:
+  ListTargetsForPolicyRequest:
     type: object
+    required:
+      - PolicyId
+    example:
+      PolicyId: p-FullAWSAccess
     properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'The provided policy document does not meet the requirements of the specified policy type. For example, the syntax might be incorrect. For details about service control policy syntax, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html">Service Control Policy Syntax</a> in the <i>AWS Organizations User Guide</i>.'
-  MasterCannotLeaveOrganizationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'You can''t remove a master account from an organization. If you want the master account to become a member account in another organization, you must first delete the current organization of the master account.'
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 20
+      PolicyId:
+        $ref: '#/definitions/PolicyId'
+        description: '<p>The unique identifier (ID) of the policy for which you want to know its attachments.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: '(Optional) Use this to limit the number of results you want included in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   MoveAccountRequest:
     type: object
     required:
@@ -4070,8 +3800,311 @@ definitions:
       DestinationParentId:
         $ref: '#/definitions/ParentId'
         description: '<p>The unique identifier (ID) of the root or organizational unit that you want to move the account to.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
-  NextToken:
+  SourceParentNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: We can't find a source root or OU with the ParentId that you specified.
+  DestinationParentNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: We can't find the destination container (a root or OU) with the ParentId that you specified.
+  DuplicateAccountException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: That account is already present in the specified destination.
+  RemoveAccountFromOrganizationRequest:
+    type: object
+    required:
+      - AccountId
+    example:
+      AccountId: '333333333333'
+    properties:
+      AccountId:
+        $ref: '#/definitions/AccountId'
+        description: '<p>The unique identifier (ID) of the member account that you want to remove from the organization.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
+  UpdateOrganizationalUnitResponse:
+    type: object
+    example:
+      OrganizationalUnit:
+        Arn: 'arn:aws:organizations::111111111111:ou/o-exampleorgid/ou-examplerootid111-exampleouid111'
+        Id: ou-examplerootid111-exampleouid111
+        Name: AccountingOU
+    properties:
+      OrganizationalUnit:
+        $ref: '#/definitions/OrganizationalUnit'
+        description: 'A structure that contains the details about the specified OU, including its new name.'
+  UpdateOrganizationalUnitRequest:
+    type: object
+    required:
+      - OrganizationalUnitId
+    example:
+      Name: AccountingOU
+      OrganizationalUnitId: ou-examplerootid111-exampleouid111
+    properties:
+      OrganizationalUnitId:
+        $ref: '#/definitions/OrganizationalUnitId'
+        description: '<p>The unique identifier (ID) of the OU that you want to rename. You can get the ID from the <a>ListOrganizationalUnitsForParent</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p>'
+      Name:
+        $ref: '#/definitions/OrganizationalUnitName'
+        description: '<p>The new name that you want to assign to the OU.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
+  UpdatePolicyResponse:
+    type: object
+    example:
+      Policy:
+        Content: '{ \"Version\": \"2012-10-17\", \"Statement\": { \"Effect\": \"Allow\", \"Action\": \"s3:*\", \"Resource\": \"*\" } }'
+        PolicySummary:
+          Arn: 'arn:aws:organizations::111111111111:policy/o-exampleorgid/service_control_policy/p-examplepolicyid111'
+          AwsManaged: false
+          Description: This description replaces the original.
+          Id: p-examplepolicyid111
+          Name: Renamed-Policy
+          Type: SERVICE_CONTROL_POLICY
+    properties:
+      Policy:
+        $ref: '#/definitions/Policy'
+        description: 'A structure that contains details about the updated policy, showing the requested changes.'
+  UpdatePolicyRequest:
+    type: object
+    required:
+      - PolicyId
+    example:
+      Content: '{ \"Version\": \"2012-10-17\", \"Statement\": {\"Effect\": \"Allow\", \"Action\": \"s3:*\", \"Resource\": \"*\" } }'
+      PolicyId: p-examplepolicyid111
+    properties:
+      PolicyId:
+        $ref: '#/definitions/PolicyId'
+        description: '<p>The unique identifier (ID) of the policy that you want to update.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
+      Name:
+        $ref: '#/definitions/PolicyName'
+        description: '<p>If provided, the new name for the policy.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
+      Description:
+        $ref: '#/definitions/PolicyDescription'
+        description: 'If provided, the new description for the policy.'
+      Content:
+        $ref: '#/definitions/PolicyContent'
+        description: 'If provided, the new content for the policy. The text must be correctly formatted JSON that complies with the syntax for the policy''s type. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html">Service Control Policy Syntax</a> in the <i>AWS Organizations User Guide</i>.'
+  ExceptionMessage:
     type: string
+  HandshakeId:
+    type: string
+    pattern: '^h-[0-9a-z]{8,32}$'
+  Handshake:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/HandshakeId'
+        description: '<p>The unique identifier (ID) of a handshake. The originating account creates the ID when it initiates the handshake.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
+      Arn:
+        $ref: '#/definitions/HandshakeArn'
+        description: '<p>The Amazon Resource Name (ARN) of a handshake.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
+      Parties:
+        $ref: '#/definitions/HandshakeParties'
+        description: Information about the two accounts that are participating in the handshake.
+      State:
+        $ref: '#/definitions/HandshakeState'
+        description: '<p>The current state of the handshake. Use the state to trace the flow of the handshake through the process from its creation to its acceptance. The meaning of each of the valid values is as follows:</p> <ul> <li> <p> <b>REQUESTED</b>: This handshake was sent to multiple recipients (applicable to only some handshake types) and not all recipients have responded yet. The request stays in this state until all recipients respond.</p> </li> <li> <p> <b>OPEN</b>: This handshake was sent to multiple recipients (applicable to only some policy types) and all recipients have responded, allowing the originator to complete the handshake action.</p> </li> <li> <p> <b>CANCELED</b>: This handshake is no longer active because it was canceled by the originating account.</p> </li> <li> <p> <b>ACCEPTED</b>: This handshake is complete because it has been accepted by the recipient.</p> </li> <li> <p> <b>DECLINED</b>: This handshake is no longer active because it was declined by the recipient account.</p> </li> <li> <p> <b>EXPIRED</b>: This handshake is no longer active because the originator did not receive a response of any kind from the recipient before the expiration time (15 days).</p> </li> </ul>'
+      RequestedTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the handshake request was made.
+      ExpirationTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time that the handshake expires. If the recipient of the handshake request fails to respond before the specified date and time, the handshake becomes inactive and is no longer valid.'
+      Action:
+        $ref: '#/definitions/ActionType'
+        description: '<p>The type of handshake, indicating what action occurs when the recipient accepts the handshake. The following handshake types are supported:</p> <ul> <li> <p> <b>INVITE</b>: This type of handshake represents a request to join an organization. It is always sent from the master account to only non-member accounts.</p> </li> <li> <p> <b>ENABLE_ALL_FEATURES</b>: This type of handshake represents a request to enable all features in an organization. It is always sent from the master account to only <i>invited</i> member accounts. Created accounts do not receive this because those accounts were created by the organization''s master account and approval is inferred.</p> </li> <li> <p> <b>APPROVE_ALL_FEATURES</b>: This type of handshake is sent from the Organizations service when all member accounts have approved the <code>ENABLE_ALL_FEATURES</code> invitation. It is sent only to the master account and signals the master that it can finalize the process to enable all features.</p> </li> </ul>'
+      Resources:
+        $ref: '#/definitions/HandshakeResources'
+        description: Additional information that is needed to process the handshake.
+    description: '<p>Contains information that must be exchanged to securely establish a relationship between two accounts (an <i>originator</i> and a <i>recipient</i>). For example, when a master account (the originator) invites another account (the recipient) to join its organization, the two accounts exchange information as a series of handshake requests and responses.</p> <p> <b>Note:</b> Handshakes that are CANCELED, ACCEPTED, or DECLINED show up in lists for only 30 days after entering that state After that they are deleted.</p>'
+  AccessDeniedForDependencyExceptionReason:
+    type: string
+    enum:
+      - ACCESS_DENIED_DURING_CREATE_SERVICE_LINKED_ROLE
+  AccountId:
+    type: string
+    pattern: '^\d{12}$'
+  AccountArn:
+    type: string
+    pattern: '^arn:aws:organizations::\d{12}:account\/o-[a-z0-9]{10,32}\/\d{12}'
+  Email:
+    type: string
+    pattern: '[^\s@]+@[^\s@]+\.[^\s@]+'
+    minLength: 6
+    maxLength: 64
+    format: password
+  AccountName:
+    type: string
+    minLength: 1
+    maxLength: 50
+    format: password
+  AccountStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - SUSPENDED
+  AccountJoinedMethod:
+    type: string
+    enum:
+      - INVITED
+      - CREATED
+  Timestamp:
+    type: string
+    format: date-time
+  Account:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/AccountId'
+        description: '<p>The unique identifier (ID) of the account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
+      Arn:
+        $ref: '#/definitions/AccountArn'
+        description: '<p>The Amazon Resource Name (ARN) of the account.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
+      Email:
+        $ref: '#/definitions/Email'
+        description: '<p>The email address associated with the AWS account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for this parameter is a string of characters that represents a standard Internet email address.</p>'
+      Name:
+        $ref: '#/definitions/AccountName'
+        description: '<p>The friendly name of the account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
+      Status:
+        $ref: '#/definitions/AccountStatus'
+        description: The status of the account in the organization.
+      JoinedMethod:
+        $ref: '#/definitions/AccountJoinedMethod'
+        description: The method by which the account joined the organization.
+      JoinedTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The date the account became a part of the organization.
+    description: Contains information about an AWS account that is a member of an organization.
+  Accounts:
+    type: array
+    items:
+      $ref: '#/definitions/Account'
+  ActionType:
+    type: string
+    enum:
+      - INVITE
+      - ENABLE_ALL_FEATURES
+      - APPROVE_ALL_FEATURES
+      - ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE
+  PolicyId:
+    type: string
+    pattern: '^p-[0-9a-zA-Z_]{8,128}$'
+  PolicyTargetId:
+    type: string
+    pattern: '^(r-[0-9a-z]{4,32})|(\d{12})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$'
+  AwsManagedPolicy:
+    type: boolean
+  ChildId:
+    type: string
+    pattern: '^(\d{12})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$'
+  ChildType:
+    type: string
+    enum:
+      - ACCOUNT
+      - ORGANIZATIONAL_UNIT
+  Child:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ChildId'
+        description: '<p>The unique identifier (ID) of this child entity.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a child ID string requires one of the following:</p> <ul> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
+      Type:
+        $ref: '#/definitions/ChildType'
+        description: The type of this child entity.
+    description: 'Contains a list of child entities, either OUs or accounts.'
+  Children:
+    type: array
+    items:
+      $ref: '#/definitions/Child'
+  ConstraintViolationExceptionReason:
+    type: string
+    enum:
+      - ACCOUNT_NUMBER_LIMIT_EXCEEDED
+      - HANDSHAKE_RATE_LIMIT_EXCEEDED
+      - OU_NUMBER_LIMIT_EXCEEDED
+      - OU_DEPTH_LIMIT_EXCEEDED
+      - POLICY_NUMBER_LIMIT_EXCEEDED
+      - MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED
+      - MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED
+      - ACCOUNT_CANNOT_LEAVE_ORGANIZATION
+      - ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA
+      - ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION
+      - MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED
+      - MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED
+      - ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED
+      - MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE
+      - MASTER_ACCOUNT_MISSING_CONTACT_INFO
+      - ORGANIZATION_NOT_IN_ALL_FEATURES_MODE
+  CreateAccountFailureReason:
+    type: string
+    enum:
+      - ACCOUNT_LIMIT_EXCEEDED
+      - EMAIL_ALREADY_EXISTS
+      - INVALID_ADDRESS
+      - INVALID_EMAIL
+      - CONCURRENT_ACCOUNT_MODIFICATION
+      - INTERNAL_FAILURE
+  RoleName:
+    type: string
+    pattern: '[\w+=,.@-]{1,64}'
+  IAMUserAccessToBilling:
+    type: string
+    enum:
+      - ALLOW
+      - DENY
+  CreateAccountRequestId:
+    type: string
+    pattern: '^car-[a-z0-9]{8,32}$'
+  CreateAccountStatus:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/CreateAccountRequestId'
+        description: '<p>The unique identifier (ID) that references this request. You get this value from the response of the initial <a>CreateAccount</a> request to create the account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an create account request ID string requires "car-" followed by from 8 to 32 lower-case letters or digits.</p>'
+      AccountName:
+        $ref: '#/definitions/AccountName'
+        description: The account name given to the account when it was created.
+      State:
+        $ref: '#/definitions/CreateAccountState'
+        description: The status of the request.
+      RequestedTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the request was made for the account creation.
+      CompletedTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the account was created and the request completed.
+      AccountId:
+        $ref: '#/definitions/AccountId'
+        description: '<p>If the account was created successfully, the unique identifier (ID) of the new account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
+      FailureReason:
+        $ref: '#/definitions/CreateAccountFailureReason'
+        description: '<p>If the request failed, a description of the reason for the failure.</p> <ul> <li> <p>ACCOUNT_LIMIT_EXCEEDED: The account could not be created because you have reached the limit on the number of accounts in your organization.</p> </li> <li> <p>EMAIL_ALREADY_EXISTS: The account could not be created because another AWS account with that email address already exists.</p> </li> <li> <p>INVALID_ADDRESS: The account could not be created because the address you provided is not valid.</p> </li> <li> <p>INVALID_EMAIL: The account could not be created because the email address you provided is not valid.</p> </li> <li> <p>INTERNAL_FAILURE: The account could not be created because of an internal failure. Try again later. If the problem persists, contact Customer Support.</p> </li> </ul>'
+    description: Contains the status about a <a>CreateAccount</a> request to create an AWS account in an organization.
+  CreateAccountState:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - SUCCEEDED
+      - FAILED
+  CreateAccountStates:
+    type: array
+    items:
+      $ref: '#/definitions/CreateAccountState'
+  CreateAccountStatuses:
+    type: array
+    items:
+      $ref: '#/definitions/CreateAccountStatus'
+  OrganizationFeatureSet:
+    type: string
+    enum:
+      - ALL
+      - CONSOLIDATED_BILLING
   Organization:
     type: object
     properties:
@@ -4097,23 +4130,13 @@ definitions:
         $ref: '#/definitions/PolicyTypes'
         description: '<p>A list of policy types that are enabled for this organization. For example, if your organization has all features enabled, then service control policies (SCPs) are included in the list.</p> <note> <p>Even if a policy type is shown as available in the organization, you can separately enable and disable them at the root level by using <a>EnablePolicyType</a> and <a>DisablePolicyType</a>. Use <a>ListRoots</a> to see the status of a policy type in that root.</p> </note>'
     description: 'Contains details about an organization. An organization is a collection of accounts that are centrally managed together using consolidated billing, organized hierarchically with organizational units (OUs), and controlled with policies .'
-  OrganizationArn:
+  ParentId:
     type: string
-    pattern: '^arn:aws:organizations::\d{12}:organization\/o-[a-z0-9]{10,32}'
-  OrganizationFeatureSet:
+    pattern: '^(r-[0-9a-z]{4,32})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$'
+  OrganizationalUnitName:
     type: string
-    enum:
-      - ALL
-      - CONSOLIDATED_BILLING
-  OrganizationId:
-    type: string
-    pattern: '^o-[a-z0-9]{10,32}$'
-  OrganizationNotEmptyException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'The organization isn''t empty. To delete an organization, you must first remove all accounts except the master account, delete all organizational units (OUs), and delete all policies.'
+    minLength: 1
+    maxLength: 128
   OrganizationalUnit:
     type: object
     properties:
@@ -4127,64 +4150,21 @@ definitions:
         $ref: '#/definitions/OrganizationalUnitName'
         description: '<p>The friendly name of this OU.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
     description: Contains details about an organizational unit (OU). An OU is a container of AWS accounts within a root of an organization. Policies that are attached to an OU apply to all accounts contained in that OU and in any child OUs.
-  OrganizationalUnitArn:
+  PolicyContent:
     type: string
-    pattern: '^arn:aws:organizations::\d{12}:ou\/o-[a-z0-9]{10,32}\/ou-[0-9a-z]{4,32}-[0-9a-z]{8,32}'
-  OrganizationalUnitId:
+    minLength: 1
+    maxLength: 1000000
+  PolicyDescription:
     type: string
-    pattern: '^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$'
-  OrganizationalUnitName:
+    maxLength: 512
+  PolicyName:
     type: string
     minLength: 1
     maxLength: 128
-  OrganizationalUnitNotEmptyException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'The specified organizational unit (OU) is not empty. Move all accounts to another root or to other OUs, remove all child OUs, and then try the operation again.'
-  OrganizationalUnitNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: We can't find an organizational unit (OU) with the OrganizationalUnitId that you specified.
-  OrganizationalUnits:
-    type: array
-    items:
-      $ref: '#/definitions/OrganizationalUnit'
-  Parent:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/ParentId'
-        description: '<p>The unique identifier (ID) of the parent entity.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
-      Type:
-        $ref: '#/definitions/ParentType'
-        description: The type of the parent entity.
-    description: Contains information about either a root or an organizational unit (OU) that can contain OUs or accounts in an organization.
-  ParentId:
-    type: string
-    pattern: '^(r-[0-9a-z]{4,32})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$'
-  ParentNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: We can't find a root or organizational unit (OU) with the ParentId that you specified.
-  ParentType:
+  PolicyType:
     type: string
     enum:
-      - ROOT
-      - ORGANIZATIONAL_UNIT
-  Parents:
-    type: array
-    items:
-      $ref: '#/definitions/Parent'
-  Policies:
-    type: array
-    items:
-      $ref: '#/definitions/PolicySummary'
+      - SERVICE_CONTROL_POLICY
   Policy:
     type: object
     properties:
@@ -4195,41 +4175,228 @@ definitions:
         $ref: '#/definitions/PolicyContent'
         description: The text content of the policy.
     description: 'Contains rules to be applied to the affected accounts. Policies can be attached directly to accounts, or to roots and OUs to affect all accounts in those hierarchies.'
-  PolicyArn:
+  OrganizationalUnitId:
     type: string
-    pattern: '^(arn:aws:organizations::\d{12}:policy\/o-[a-z0-9]{10,32}\/[0-9a-z_]+\/p-[0-9a-z]{10,32})|(arn:aws:organizations::aws:policy\/[0-9a-z_]+\/p-[0-9a-zA-Z_]{10,128})'
-  PolicyContent:
+    pattern: '^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$'
+  ServicePrincipal:
     type: string
-    minLength: 1
-    maxLength: 1000000
-  PolicyDescription:
-    type: string
-    maxLength: 512
-  PolicyId:
-    type: string
-    pattern: '^p-[0-9a-zA-Z_]{8,128}$'
-  PolicyInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'The policy is attached to one or more entities. You must detach it from all roots, organizational units (OUs), and accounts before performing this operation.'
-  PolicyName:
-    type: string
+    pattern: '[\w+=,.@-]*'
     minLength: 1
     maxLength: 128
-  PolicyNotAttachedException:
+  RootId:
+    type: string
+    pattern: '^r-[0-9a-z]{4,32}$'
+  Root:
     type: object
     properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The policy isn't attached to the specified target in the specified root.
-  PolicyNotFoundException:
+      Id:
+        $ref: '#/definitions/RootId'
+        description: '<p>The unique identifier (ID) for the root.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by from 4 to 32 lower-case letters or digits.</p>'
+      Arn:
+        $ref: '#/definitions/RootArn'
+        description: '<p>The Amazon Resource Name (ARN) of the root.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
+      Name:
+        $ref: '#/definitions/RootName'
+        description: '<p>The friendly name of the root.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
+      PolicyTypes:
+        $ref: '#/definitions/PolicyTypes'
+        description: '<p>The types of policies that are currently enabled for the root and therefore can be attached to the root or to its OUs or accounts.</p> <note> <p>Even if a policy type is shown as available in the organization, you can separately enable and disable them at the root level by using <a>EnablePolicyType</a> and <a>DisablePolicyType</a>. Use <a>DescribeOrganization</a> to see the availability of the policy types in that organization.</p> </note>'
+    description: Contains details about a root. A root is a top-level parent node in the hierarchy of an organization that can contain organizational units (OUs) and accounts. Every root contains every AWS account in the organization. Each root enables the accounts to be organized in a different way and to have different policy types enabled for use in that root.
+  EnabledServicePrincipal:
     type: object
     properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: We can't find a policy with the PolicyId that you specified.
+      ServicePrincipal:
+        $ref: '#/definitions/ServicePrincipal'
+        description: 'The name of the service principal. This is typically in the form of a URL, such as: <code> <i>servicename</i>.amazonaws.com</code>.'
+      DateEnabled:
+        $ref: '#/definitions/Timestamp'
+        description: The date that the service principal was enabled for integration with AWS Organizations.
+    description: A structure that contains details of a service principal that is enabled to integrate with AWS Organizations.
+  EnabledServicePrincipals:
+    type: array
+    items:
+      $ref: '#/definitions/EnabledServicePrincipal'
+  ExceptionType:
+    type: string
+  GenericArn:
+    type: string
+    pattern: '^arn:aws:organizations::.+:.+'
+  HandshakeArn:
+    type: string
+    pattern: '^arn:aws:organizations::\d{12}:handshake\/o-[a-z0-9]{10,32}\/[a-z_]{1,32}\/h-[0-9a-z]{8,32}'
+  HandshakeParties:
+    type: array
+    items:
+      $ref: '#/definitions/HandshakeParty'
+  HandshakeState:
+    type: string
+    enum:
+      - REQUESTED
+      - OPEN
+      - CANCELED
+      - ACCEPTED
+      - DECLINED
+      - EXPIRED
+  HandshakeResources:
+    type: array
+    items:
+      $ref: '#/definitions/HandshakeResource'
+  HandshakeConstraintViolationExceptionReason:
+    type: string
+    enum:
+      - ACCOUNT_NUMBER_LIMIT_EXCEEDED
+      - HANDSHAKE_RATE_LIMIT_EXCEEDED
+      - ALREADY_IN_AN_ORGANIZATION
+      - ORGANIZATION_ALREADY_HAS_ALL_FEATURES
+      - INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES
+      - PAYMENT_INSTRUMENT_REQUIRED
+      - ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD
+      - ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED
+  HandshakeFilter:
+    type: object
+    properties:
+      ActionType:
+        $ref: '#/definitions/ActionType'
+        description: '<p>Specifies the type of handshake action.</p> <p>If you specify <code>ActionType</code>, you cannot also specify <code>ParentHandshakeId</code>.</p>'
+      ParentHandshakeId:
+        $ref: '#/definitions/HandshakeId'
+        description: '<p>Specifies the parent handshake. Only used for handshake types that are a child of another type.</p> <p>If you specify <code>ParentHandshakeId</code>, you cannot also specify <code>ActionType</code>.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
+    description: Specifies the criteria that are used to select the handshakes for the operation.
+  HandshakeNotes:
+    type: string
+    maxLength: 1024
+    format: password
+  HandshakeParty:
+    type: object
+    required:
+      - Id
+      - Type
+    properties:
+      Id:
+        $ref: '#/definitions/HandshakePartyId'
+        description: '<p>The unique identifier (ID) for the party.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
+      Type:
+        $ref: '#/definitions/HandshakePartyType'
+        description: The type of party.
+    description: Identifies a participant in a handshake.
+  HandshakePartyId:
+    type: string
+    minLength: 1
+    maxLength: 64
+    format: password
+  HandshakePartyType:
+    type: string
+    enum:
+      - ACCOUNT
+      - ORGANIZATION
+      - EMAIL
+  HandshakeResourceValue:
+    type: string
+    format: password
+  HandshakeResourceType:
+    type: string
+    enum:
+      - ACCOUNT
+      - ORGANIZATION
+      - ORGANIZATION_FEATURE_SET
+      - EMAIL
+      - MASTER_EMAIL
+      - MASTER_NAME
+      - NOTES
+      - PARENT_HANDSHAKE
+  HandshakeResource:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/HandshakeResourceValue'
+        description: The information that is passed to the other party in the handshake. The format of the value string must match the requirements of the specified type.
+      Type:
+        $ref: '#/definitions/HandshakeResourceType'
+        description: '<p>The type of information being passed, specifying how the value is to be interpreted by the other party:</p> <ul> <li> <p> <code>ACCOUNT</code> - Specifies an AWS account ID number.</p> </li> <li> <p> <code>ORGANIZATION</code> - Specifies an organization ID number.</p> </li> <li> <p> <code>EMAIL</code> - Specifies the email address that is associated with the account that receives the handshake. </p> </li> <li> <p> <code>OWNER_EMAIL</code> - Specifies the email address associated with the master account. Included as information about an organization. </p> </li> <li> <p> <code>OWNER_NAME</code> - Specifies the name associated with the master account. Included as information about an organization. </p> </li> <li> <p> <code>NOTES</code> - Additional text provided by the handshake initiator and intended for the recipient to read.</p> </li> </ul>'
+      Resources:
+        $ref: '#/definitions/HandshakeResources'
+        description: 'When needed, contains an additional array of <code>HandshakeResource</code> objects.'
+    description: Contains additional data that is needed to process a handshake.
+  Handshakes:
+    type: array
+    items:
+      $ref: '#/definitions/Handshake'
+  InvalidInputExceptionReason:
+    type: string
+    enum:
+      - INVALID_PARTY_TYPE_TARGET
+      - INVALID_SYNTAX_ORGANIZATION_ARN
+      - INVALID_SYNTAX_POLICY_ID
+      - INVALID_ENUM
+      - INVALID_LIST_MEMBER
+      - MAX_LENGTH_EXCEEDED
+      - MAX_VALUE_EXCEEDED
+      - MIN_LENGTH_EXCEEDED
+      - MIN_VALUE_EXCEEDED
+      - IMMUTABLE_POLICY
+      - INVALID_PATTERN
+      - INVALID_PATTERN_TARGET_ID
+      - INPUT_REQUIRED
+      - INVALID_NEXT_TOKEN
+      - MAX_LIMIT_EXCEEDED_FILTER
+      - MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS
+      - INVALID_FULL_NAME_TARGET
+      - UNRECOGNIZED_SERVICE_PRINCIPAL
+      - INVALID_ROLE_NAME
+  NextToken:
+    type: string
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 20
+  OrganizationalUnits:
+    type: array
+    items:
+      $ref: '#/definitions/OrganizationalUnit'
+  Parents:
+    type: array
+    items:
+      $ref: '#/definitions/Parent'
+  Policies:
+    type: array
+    items:
+      $ref: '#/definitions/PolicySummary'
+  Roots:
+    type: array
+    items:
+      $ref: '#/definitions/Root'
+  PolicyTargets:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyTargetSummary'
+  OrganizationId:
+    type: string
+    pattern: '^o-[a-z0-9]{10,32}$'
+  OrganizationArn:
+    type: string
+    pattern: '^arn:aws:organizations::\d{12}:organization\/o-[a-z0-9]{10,32}'
+  PolicyTypes:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyTypeSummary'
+  OrganizationalUnitArn:
+    type: string
+    pattern: '^arn:aws:organizations::\d{12}:ou\/o-[a-z0-9]{10,32}\/ou-[0-9a-z]{4,32}-[0-9a-z]{8,32}'
+  ParentType:
+    type: string
+    enum:
+      - ROOT
+      - ORGANIZATIONAL_UNIT
+  Parent:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ParentId'
+        description: '<p>The unique identifier (ID) of the parent entity.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
+      Type:
+        $ref: '#/definitions/ParentType'
+        description: The type of the parent entity.
+    description: Contains information about either a root or an organizational unit (OU) that can contain OUs or accounts in an organization.
   PolicySummary:
     type: object
     properties:
@@ -4252,9 +4419,19 @@ definitions:
         $ref: '#/definitions/AwsManagedPolicy'
         description: 'A boolean value that indicates whether the specified policy is an AWS managed policy. If true, then you can attach the policy to roots, OUs, or accounts, but you cannot edit it.'
     description: 'Contains information about a policy, but does not include the content. To see the content of a policy, see <a>DescribePolicy</a>.'
-  PolicyTargetId:
+  PolicyArn:
     type: string
-    pattern: '^(r-[0-9a-z]{4,32})|(\d{12})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$'
+    pattern: '^(arn:aws:organizations::\d{12}:policy\/o-[a-z0-9]{10,32}\/[0-9a-z_]+\/p-[0-9a-z]{10,32})|(arn:aws:organizations::aws:policy\/[0-9a-z_]+\/p-[0-9a-zA-Z_]{10,128})'
+  TargetName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TargetType:
+    type: string
+    enum:
+      - ACCOUNT
+      - ORGANIZATIONAL_UNIT
+      - ROOT
   PolicyTargetSummary:
     type: object
     properties:
@@ -4271,32 +4448,6 @@ definitions:
         $ref: '#/definitions/TargetType'
         description: The type of the policy target.
     description: 'Contains information about a root, OU, or account that a policy is attached to.'
-  PolicyTargets:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyTargetSummary'
-  PolicyType:
-    type: string
-    enum:
-      - SERVICE_CONTROL_POLICY
-  PolicyTypeAlreadyEnabledException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The specified policy type is already enabled in the specified root.
-  PolicyTypeNotAvailableForOrganizationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'You can''t use the specified policy type with the feature set currently enabled for this organization. For example, you can enable service control policies (SCPs) only after you enable all features in the organization. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html#enable_policies_on_root">Enabling and Disabling a Policy Type on a Root</a> in the <i>AWS Organizations User Guide</i>.'
-  PolicyTypeNotEnabledException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'The specified policy type is not currently enabled in this root. You cannot attach policies of the specified type to entities in a root until you enable that type in the root. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">Enabling All Features in Your Organization</a> in the <i>AWS Organizations User Guide</i>.'
   PolicyTypeStatus:
     type: string
     enum:
@@ -4313,161 +4464,10 @@ definitions:
         $ref: '#/definitions/PolicyTypeStatus'
         description: 'The status of the policy type as it relates to the associated root. To attach a policy of the specified type to a root or to an OU or account in that root, it must be available in the organization and enabled for that root.'
     description: Contains information about a policy type and its status in the associated root.
-  PolicyTypes:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyTypeSummary'
-  RemoveAccountFromOrganizationRequest:
-    type: object
-    required:
-      - AccountId
-    example:
-      AccountId: '333333333333'
-    properties:
-      AccountId:
-        $ref: '#/definitions/AccountId'
-        description: '<p>The unique identifier (ID) of the member account that you want to remove from the organization.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
-  RoleName:
-    type: string
-    pattern: '[\w+=,.@-]{1,64}'
-  Root:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/RootId'
-        description: '<p>The unique identifier (ID) for the root.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by from 4 to 32 lower-case letters or digits.</p>'
-      Arn:
-        $ref: '#/definitions/RootArn'
-        description: '<p>The Amazon Resource Name (ARN) of the root.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
-      Name:
-        $ref: '#/definitions/RootName'
-        description: '<p>The friendly name of the root.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
-      PolicyTypes:
-        $ref: '#/definitions/PolicyTypes'
-        description: '<p>The types of policies that are currently enabled for the root and therefore can be attached to the root or to its OUs or accounts.</p> <note> <p>Even if a policy type is shown as available in the organization, you can separately enable and disable them at the root level by using <a>EnablePolicyType</a> and <a>DisablePolicyType</a>. Use <a>DescribeOrganization</a> to see the availability of the policy types in that organization.</p> </note>'
-    description: Contains details about a root. A root is a top-level parent node in the hierarchy of an organization that can contain organizational units (OUs) and accounts. Every root contains every AWS account in the organization. Each root enables the accounts to be organized in a different way and to have different policy types enabled for use in that root.
   RootArn:
     type: string
     pattern: '^arn:aws:organizations::\d{12}:root\/o-[a-z0-9]{10,32}\/r-[0-9a-z]{4,32}'
-  RootId:
-    type: string
-    pattern: '^r-[0-9a-z]{4,32}$'
   RootName:
     type: string
     minLength: 1
     maxLength: 128
-  RootNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: We can't find a root with the RootId that you specified.
-  Roots:
-    type: array
-    items:
-      $ref: '#/definitions/Root'
-  ServiceException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: AWS Organizations can't complete your request because of an internal service error. Try again later.
-  ServicePrincipal:
-    type: string
-    pattern: '[\w+=,.@-]*'
-    minLength: 1
-    maxLength: 128
-  SourceParentNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: We can't find a source root or OU with the ParentId that you specified.
-  TargetName:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TargetNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'We can''t find a root, OU, or account with the TargetId that you specified.'
-  TargetType:
-    type: string
-    enum:
-      - ACCOUNT
-      - ORGANIZATIONAL_UNIT
-      - ROOT
-  Timestamp:
-    type: string
-    format: date-time
-  TooManyRequestsException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/ExceptionType'
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: You've sent too many requests in too short a period of time. The limit helps protect against denial-of-service attacks. Try again later.
-  UpdateOrganizationalUnitRequest:
-    type: object
-    required:
-      - OrganizationalUnitId
-    example:
-      Name: AccountingOU
-      OrganizationalUnitId: ou-examplerootid111-exampleouid111
-    properties:
-      OrganizationalUnitId:
-        $ref: '#/definitions/OrganizationalUnitId'
-        description: '<p>The unique identifier (ID) of the OU that you want to rename. You can get the ID from the <a>ListOrganizationalUnitsForParent</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p>'
-      Name:
-        $ref: '#/definitions/OrganizationalUnitName'
-        description: '<p>The new name that you want to assign to the OU.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
-  UpdateOrganizationalUnitResponse:
-    type: object
-    example:
-      OrganizationalUnit:
-        Arn: 'arn:aws:organizations::111111111111:ou/o-exampleorgid/ou-examplerootid111-exampleouid111'
-        Id: ou-examplerootid111-exampleouid111
-        Name: AccountingOU
-    properties:
-      OrganizationalUnit:
-        $ref: '#/definitions/OrganizationalUnit'
-        description: 'A structure that contains the details about the specified OU, including its new name.'
-  UpdatePolicyRequest:
-    type: object
-    required:
-      - PolicyId
-    example:
-      Content: '{ \"Version\": \"2012-10-17\", \"Statement\": {\"Effect\": \"Allow\", \"Action\": \"s3:*\", \"Resource\": \"*\" } }'
-      PolicyId: p-examplepolicyid111
-    properties:
-      PolicyId:
-        $ref: '#/definitions/PolicyId'
-        description: '<p>The unique identifier (ID) of the policy that you want to update.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
-      Name:
-        $ref: '#/definitions/PolicyName'
-        description: '<p>If provided, the new name for the policy.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
-      Description:
-        $ref: '#/definitions/PolicyDescription'
-        description: 'If provided, the new description for the policy.'
-      Content:
-        $ref: '#/definitions/PolicyContent'
-        description: 'If provided, the new content for the policy. The text must be correctly formatted JSON that complies with the syntax for the policy''s type. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html">Service Control Policy Syntax</a> in the <i>AWS Organizations User Guide</i>.'
-  UpdatePolicyResponse:
-    type: object
-    example:
-      Policy:
-        Content: '{ \"Version\": \"2012-10-17\", \"Statement\": { \"Effect\": \"Allow\", \"Action\": \"s3:*\", \"Resource\": \"*\" } }'
-        PolicySummary:
-          Arn: 'arn:aws:organizations::111111111111:policy/o-exampleorgid/service_control_policy/p-examplepolicyid111'
-          AwsManaged: false
-          Description: This description replaces the original.
-          Id: p-examplepolicyid111
-          Name: Renamed-Policy
-          Type: SERVICE_CONTROL_POLICY
-    properties:
-      Policy:
-        $ref: '#/definitions/Policy'
-        description: 'A structure that contains details about the updated policy, showing the requested changes.'
