@@ -10,8 +10,7 @@ info:
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://marketcheck-mccarsapiportal.apigee.io/files/logo.png'
+    url: 'https://twitter.com/MarketcheckAPIs/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://stagingapi.marketcheck.com/api-docs'
@@ -833,17 +832,17 @@ paths:
   /search:
     get:
       description: |-
-        This endpoint is the meat of the API and serves many purposes. This API produces a list of currently active cars from the market for the given search criteria. The API results are limited to allow pagination upto 1000 rows. 
-         The search API facilitates the following use cases - 
-        1. Search Cars around a given geo-point within a given radius 
-        2. Search cars for a specific year / make / model or combination of these 
+        This endpoint is the meat of the API and serves many purposes. This API produces a list of currently active cars from the market for the given search criteria. The API results are limited to allow pagination upto 1000 rows.
+         The search API facilitates the following use cases -
+        1. Search Cars around a given geo-point within a given radius
+        2. Search cars for a specific year / make / model or combination of these
         3. Search cars matching multiple year, make, model combinatins in the same search request
         4. Filter results by most car specification attributes
-        5. Search for similar cars by VIN or Taxonomy VIN 
+        5. Search for similar cars by VIN or Taxonomy VIN
         6. Filter cars within a given price / miles / days on market (dom) range
-        7. Specify a sort order for the results on price / miles / dom / listed date 
-        8. Search cars for a given City / State combination 
-        9. Get Facets to build the search drill downs 
+        7. Specify a sort order for the results on price / miles / dom / listed date
+        8. Search cars for a given City / State combination
+        9. Get Facets to build the search drill downs
         10. Get Market averages for price/miles/dom/msrp for your search
       operationId: search
       parameters:
