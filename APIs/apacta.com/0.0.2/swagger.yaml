@@ -5,7 +5,7 @@ host: app.apacta.com
 basePath: /api/v1
 info:
   description: |-
-    API for a tool to craftsmen used to register working hours, material usage and quality assurance.    
+    API for a tool to craftsmen used to register working hours, material usage and quality assurance.
     # Endpoint
     The endpoint `https://app.apacta.com/api/v1` should be used to communicate with the API. API access is only allowed with SSL encrypted connection (https).
     # Authentication
@@ -45,20 +45,20 @@ info:
     Running examples of how to retrieve the 5 most recent forms registered and embed the details of the User that made the form, and eventual products contained in the form
     ### Swift
     ```
-      
+
     ```
     ### Java
     #### OkHttp
     ```
       OkHttpClient client = new OkHttpClient();
-      
+
       Request request = new Request.Builder()
         .url("https://app.apacta.com/api/v1/forms?extended=true&sort=Forms.created&direction=DESC&include=Products%2CCreatedBy&limit=5")
         .get()
         .addHeader("x-auth-token", "{INSERT_YOUR_TOKEN}")
         .addHeader("accept", "application/json")
         .build();
-      
+
       Response response = client.newCall(request).execute();
     ```
     #### Unirest
@@ -72,20 +72,20 @@ info:
     #### Native
     ```
       var data = null;
-      
+
       var xhr = new XMLHttpRequest();
       xhr.withCredentials = true;
-      
+
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === 4) {
           console.log(this.responseText);
         }
       });
-      
+
       xhr.open("GET", "https://app.apacta.com/api/v1/forms?extended=true&sort=Forms.created&direction=DESC&include=Products%2CCreatedBy&limit=5");
       xhr.setRequestHeader("x-auth-token", "{INSERT_YOUR_TOKEN}");
       xhr.setRequestHeader("accept", "application/json");
-      
+
       xhr.send(data);
     ```
     #### jQuery
@@ -100,7 +100,7 @@ info:
           "accept": "application/json",
         }
       }
-      
+
       $.ajax(settings).done(function (response) {
         console.log(response);
       });
@@ -111,19 +111,19 @@ info:
 
       var options = { method: 'GET',
         url: 'https://app.apacta.com/api/v1/forms',
-        qs: 
+        qs:
          { extended: 'true',
            sort: 'Forms.created',
            direction: 'DESC',
            include: 'Products,CreatedBy',
            limit: '5' },
-        headers: 
+        headers:
          { accept: 'application/json',
            'x-auth-token': '{INSERT_YOUR_TOKEN}' } };
-      
+
       request(options, function (error, response, body) {
         if (error) throw new Error(error);
-      
+
         console.log(body);
       });
 
@@ -131,21 +131,21 @@ info:
     ### Python 3
     ```
       import http.client
-      
+
       conn = http.client.HTTPSConnection("app.apacta.com")
-      
+
       payload = ""
-      
+
       headers = {
           'x-auth-token': "{INSERT_YOUR_TOKEN}",
           'accept': "application/json",
           }
-      
+
       conn.request("GET", "/api/v1/forms?extended=true&sort=Forms.created&direction=DESC&include=Products%2CCreatedBy&limit=5", payload, headers)
-      
+
       res = conn.getresponse()
       data = res.read()
-      
+
       print(data.decode("utf-8"))
     ```
     ### C#
@@ -155,23 +155,23 @@ info:
       var request = new RestRequest(Method.GET);
       request.AddHeader("accept", "application/json");
       request.AddHeader("x-auth-token", "{INSERT_YOUR_TOKEN}");
-      IRestResponse response = client.Execute(request);    
+      IRestResponse response = client.Execute(request);
     ```
     ### Ruby
     ```
       require 'uri'
       require 'net/http'
-      
+
       url = URI("https://app.apacta.com/api/v1/forms?extended=true&sort=Forms.created&direction=DESC&include=Products%2CCreatedBy&limit=5")
-      
+
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      
+
       request = Net::HTTP::Get.new(url)
       request["x-auth-token"] = '{INSERT_YOUR_TOKEN}'
       request["accept"] = 'application/json'
-      
+
       response = http.request(request)
       puts response.read_body
     ```
@@ -182,7 +182,7 @@ info:
       $request = new HttpRequest();
       $request->setUrl('https://app.apacta.com/api/v1/forms');
       $request->setMethod(HTTP_METH_GET);
-      
+
       $request->setQueryData(array(
         'extended' => 'true',
         'sort' => 'Forms.created',
@@ -190,15 +190,15 @@ info:
         'include' => 'Products,CreatedBy',
         'limit' => '5'
       ));
-      
+
       $request->setHeaders(array(
         'accept' => 'application/json',
         'x-auth-token' => '{INSERT_YOUR_TOKEN}'
       ));
-      
+
       try {
         $response = $request->send();
-      
+
         echo $response->getBody();
       } catch (HttpException $ex) {
         echo $ex;
@@ -208,7 +208,7 @@ info:
     ```
 
       $ curl --request GET --url 'https://app.apacta.com/api/v1/forms?extended=true&sort=Forms.created&direction=DESC&include=Products%2CCreatedBy&limit=5' --header 'accept: application/json' --header 'x-auth-token: {INSERT_YOUR_TOKEN}'
-      
+
     ```
   title: Apacta
   version: 0.0.2
@@ -216,8 +216,7 @@ info:
     - time_management
     - project_management
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://apacta.com/wp-content/uploads/2016/01/apactalogo.png'
+    url: 'https://twitter.com/apactadk/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'http://apidoc.apacta.com/swagger.yaml'
