@@ -3,7 +3,7 @@ info:
   version: '2017-11-01'
   x-release: v4
   title: Amazon Elastic Container Service for Kubernetes
-  description: '<p>Amazon Elastic Container Service for Kubernetes (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on AWS without needing to stand up or maintain your own Kubernetes control plane. Kubernetes is an open-source system for automating the deployment, scaling, and management of containerized applications. </p> <p>Amazon EKS runs three Kubernetes control plane instances across three Availability Zones to ensure high availability. Amazon EKS automatically detects and replaces unhealthy control plane instances, and it provides automated version upgrades and patching for them.</p> <p>Amazon EKS is also integrated with many AWS services to provide scalability and security for your applications, including the following: </p> <ul> <li> <p>Elastic Load Balancing for load distribution</p> </li> <li> <p>IAM for authentication</p> </li> <li> <p>Amazon VPC for isolation</p> </li> </ul> <p>Amazon EKS runs up to date versions of the open-source Kubernetes software, so you can use all the existing plugins and tooling from the Kubernetes community. Applications running on Amazon EKS are fully compatible with applications running on any standard Kubernetes environment, whether running in on-premises data centers or public clouds. This means that you can easily migrate any standard Kubernetes application to Amazon EKS without any code modification required.</p>'
+  description: '<p>Amazon Elastic Container Service for Kubernetes (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on AWS without needing to stand up or maintain your own Kubernetes control plane. Kubernetes is an open-source system for automating the deployment, scaling, and management of containerized applications. </p> <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you can use all the existing plugins and tooling from the Kubernetes community. Applications running on Amazon EKS are fully compatible with applications running on any standard Kubernetes environment, whether running in on-premises data centers or public clouds. This means that you can easily migrate any standard Kubernetes application to Amazon EKS without any code modification required.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -153,7 +153,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListClusters
-      description: Lists the Amazon EKS clusters in your AWS account in the specified region.
+      description: Lists the Amazon EKS clusters in your AWS account in the specified Region.
       responses:
         '200':
           description: Success
@@ -298,76 +298,20 @@ definitions:
         description: 'The desired Kubernetes version for your cluster. If you do not specify a value here, the latest version available in Amazon EKS is used.'
       roleArn:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the IAM role that provides permissions for Amazon EKS to make calls to other AWS API operations on your behalf. For more information, see <a href="http://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i> '
+        description: 'The Amazon Resource Name (ARN) of the IAM role that provides permissions for Amazon EKS to make calls to other AWS API operations on your behalf. For more information, see <a href="http://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
       resourcesVpcConfig:
         $ref: '#/definitions/VpcConfigRequest'
-        description: 'The VPC subnets and security groups used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>.'
+        description: 'The VPC subnets and security groups used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You may specify up to 5 security groups, but we recommend that you use a dedicated security group for your cluster control plane.'
       clientRequestToken:
         $ref: '#/definitions/String'
         description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request.'
-  ResourceInUseException:
-    type: object
-    properties:
-      clusterName:
-        $ref: '#/definitions/String'
-        description: The Amazon EKS cluster associated with the exception.
-      message:
-        $ref: '#/definitions/String'
-    description: The specified resource is in use.
-  ResourceLimitExceededException:
-    type: object
-    properties:
-      clusterName:
-        $ref: '#/definitions/String'
-        description: The Amazon EKS cluster associated with the exception.
-      message:
-        $ref: '#/definitions/String'
-    description: You have encountered a service limit on the specified resource.
-  InvalidParameterException:
-    type: object
-    properties:
-      clusterName:
-        $ref: '#/definitions/String'
-        description: The Amazon EKS cluster associated with the exception.
-      message:
-        $ref: '#/definitions/String'
-    description: The specified parameter is invalid. Review the available parameters for the API request.
-  ClientException:
-    type: object
-    properties:
-      clusterName:
-        $ref: '#/definitions/String'
-        description: The Amazon EKS cluster associated with the exception.
-      message:
-        $ref: '#/definitions/String'
-    description: 'These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn''t have permissions to use the action or resource, or specifying an identifier that is not valid.'
-  ServerException:
-    type: object
-    properties:
-      clusterName:
-        $ref: '#/definitions/String'
-        description: The Amazon EKS cluster associated with the exception.
-      message:
-        $ref: '#/definitions/String'
-    description: These errors are usually caused by a server-side issue.
-  ServiceUnavailableException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: 'The service is unavailable, back off and retry the operation.'
-  UnsupportedAvailabilityZoneException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-      clusterName:
-        $ref: '#/definitions/String'
-        description: The Amazon EKS cluster associated with the exception.
-      validZones:
-        $ref: '#/definitions/StringList'
-        description: The supported Availability Zones for your account. Choose subnets in these Availability Zones for your cluster.
-    description: 'At least one of your specified cluster subnets is in an Availability Zone that does not support Amazon EKS. The exception output will specify the supported Availability Zones for your account, from which you can choose subnets for your cluster.'
+  ResourceInUseException: {}
+  ResourceLimitExceededException: {}
+  InvalidParameterException: {}
+  ClientException: {}
+  ServerException: {}
+  ServiceUnavailableException: {}
+  UnsupportedAvailabilityZoneException: {}
   DeleteClusterResponse:
     type: object
     example: {}
@@ -380,15 +324,7 @@ definitions:
     example:
       name: devel
     properties: {}
-  ResourceNotFoundException:
-    type: object
-    properties:
-      clusterName:
-        $ref: '#/definitions/String'
-        description: The Amazon EKS cluster associated with the exception.
-      message:
-        $ref: '#/definitions/String'
-    description: The specified resource could not be found. You can view your available clusters with <a>ListClusters</a>. Amazon EKS clusters are region-specific.
+  ResourceNotFoundException: {}
   DescribeClusterResponse:
     type: object
     example:
@@ -427,7 +363,7 @@ definitions:
     properties:
       clusters:
         $ref: '#/definitions/StringList'
-        description: A list of all of the clusters for your account in the specified region.
+        description: A list of all of the clusters for your account in the specified Region.
       nextToken:
         $ref: '#/definitions/String'
         description: 'The <code>nextToken</code> value to include in a future <code>ListClusters</code> request. When the results of a <code>ListClusters</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
@@ -500,6 +436,9 @@ definitions:
       clientRequestToken:
         $ref: '#/definitions/String'
         description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request.'
+      platformVersion:
+        $ref: '#/definitions/String'
+        description: 'The platform version of your Amazon EKS cluster. For more information, see <a href="eks/latest/userguide/platform-versions.html">Platform Versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
     description: An object representing an Amazon EKS cluster.
   ClusterName:
     type: string

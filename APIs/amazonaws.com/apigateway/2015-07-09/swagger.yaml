@@ -5315,42 +5315,12 @@ definitions:
         $ref: '#/definitions/String'
         description: 'An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.'
     description: Request to create an <a>ApiKey</a> resource.
-  UnauthorizedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: The request is denied because the caller has insufficient permissions.
-  NotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: The requested resource is not found. Make sure that the request URI is correct.
-  TooManyRequestsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: The request has reached its throttling limit. Retry after the specified time period.
-  LimitExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: The request exceeded the rate limit. Retry after the specified time period.
-  BadRequestException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: 'The submitted request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.'
-  ConflictException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: 'The request configuration has conflicts. For details, see the accompanying error message.'
+  UnauthorizedException: {}
+  NotFoundException: {}
+  TooManyRequestsException: {}
+  LimitExceededException: {}
+  BadRequestException: {}
+  ConflictException: {}
   Authorizer:
     type: object
     properties:
@@ -5487,13 +5457,11 @@ definitions:
       canarySettings:
         $ref: '#/definitions/DeploymentCanarySettings'
         description: 'The input configuration for the canary deployment when the deployment is a canary release deployment. '
+      tracingEnabled:
+        $ref: '#/definitions/NullableBoolean'
+        description: Specifies whether active tracing with X-ray is enabled for the <a>Stage</a>.
     description: Requests API Gateway to create a <a>Deployment</a> resource.
-  ServiceUnavailableException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: The requested service is not available. For details see the accompanying error message. Retry after the specified time period.
+  ServiceUnavailableException: {}
   DocumentationPart:
     type: object
     properties:
@@ -5822,6 +5790,9 @@ definitions:
       canarySettings:
         $ref: '#/definitions/CanarySettings'
         description: Settings for the canary deployment in this stage.
+      tracingEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether active tracing with X-ray is enabled for the <a>Stage</a>.
       tags:
         $ref: '#/definitions/MapOfStringToString'
         description: The collection of tags. Each tag element is associated with a given resource.
@@ -5862,6 +5833,9 @@ definitions:
       canarySettings:
         $ref: '#/definitions/CanarySettings'
         description: The canary deployment settings of this stage.
+      tracingEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether active tracing with X-ray is enabled for the <a>Stage</a>.
       tags:
         $ref: '#/definitions/MapOfStringToString'
         description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
@@ -7551,10 +7525,10 @@ definitions:
         description: 'Specifies whether Amazon CloudWatch metrics are enabled for this method. The PATCH path for this setting is <code>/{method_setting_key}/metrics/enabled</code>, and the value is a Boolean.'
       loggingLevel:
         $ref: '#/definitions/String'
-        description: 'Specifies the logging level for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/loglevel</code>, and the available levels are <code>OFF</code>, <code>ERROR</code>, and <code>INFO</code>.'
+        description: 'Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/loglevel</code>, and the available levels are <code>OFF</code>, <code>ERROR</code>, and <code>INFO</code>.'
       dataTraceEnabled:
         $ref: '#/definitions/Boolean'
-        description: 'Specifies whether data trace logging is enabled for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.'
+        description: 'Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.'
       throttlingBurstLimit:
         $ref: '#/definitions/Integer'
         description: 'Specifies the throttling burst limit. The PATCH path for this setting is <code>/{method_setting_key}/throttling/burstLimit</code>, and the value is an integer.'

@@ -1867,10 +1867,7 @@ definitions:
       Key: bigobject
       UploadId: xadcOB_7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--
     properties: {}
-  NoSuchUpload:
-    type: object
-    properties: {}
-    description: The specified multipart upload does not exist.
+  NoSuchUpload: {}
   CompleteMultipartUploadOutput:
     type: object
     example:
@@ -1921,10 +1918,7 @@ definitions:
       CopySource: /sourcebucket/HappyFacejpg
       Key: HappyFaceCopyjpg
     properties: {}
-  ObjectNotInActiveTierError:
-    type: object
-    properties: {}
-    description: The source object of the COPY operation is not in the active tier and is only stored in Amazon Glacier.
+  ObjectNotInActiveTierError: {}
   CreateBucketOutput:
     type: object
     example:
@@ -1939,13 +1933,8 @@ definitions:
         $ref: '#/definitions/CreateBucketConfiguration'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
-  BucketAlreadyExists:
-    type: object
-    properties: {}
-    description: The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.
-  BucketAlreadyOwnedByYou:
-    type: object
-    properties: {}
+  BucketAlreadyExists: {}
+  BucketAlreadyOwnedByYou: {}
   CreateMultipartUploadOutput:
     type: object
     example:
@@ -2022,8 +2011,8 @@ definitions:
   DeleteObjectRequest:
     type: object
     example:
-      Bucket: examplebucket
-      Key: objectkey.jpg
+      Bucket: ExampleBucket
+      Key: HappyFace.jpg
     properties: {}
   DeleteObjectTaggingOutput:
     type: object
@@ -2356,10 +2345,7 @@ definitions:
       Key: SampleFile.txt
       Range: bytes=0-9
     properties: {}
-  NoSuchKey:
-    type: object
-    properties: {}
-    description: The specified key does not exist.
+  NoSuchKey: {}
   GetObjectAclOutput:
     type: object
     example:
@@ -2435,10 +2421,7 @@ definitions:
     example:
       Bucket: acl1
     properties: {}
-  NoSuchBucket:
-    type: object
-    properties: {}
-    description: The specified bucket does not exist.
+  NoSuchBucket: {}
   HeadObjectOutput:
     type: object
     example:
@@ -3095,16 +3078,16 @@ definitions:
     example:
       ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
       ServerSideEncryption: AES256
-      VersionId: CG612hodqujkf8FaaNfp8U..FIhLROcp
+      VersionId: Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt
     properties: {}
   PutObjectRequest:
     type: object
     example:
-      Body: HappyFace.jpg
+      Body: filetoupload
       Bucket: examplebucket
-      Key: HappyFace.jpg
+      Key: exampleobject
       ServerSideEncryption: AES256
-      StorageClass: STANDARD_IA
+      Tagging: key1=value1&key2=value2
     properties:
       Body:
         $ref: '#/definitions/Body'
@@ -3167,10 +3150,7 @@ definitions:
         $ref: '#/definitions/RestoreRequest'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
-  ObjectAlreadyInActiveTierError:
-    type: object
-    properties: {}
-    description: This operation is not allowed against this storage tier
+  ObjectAlreadyInActiveTierError: {}
   SelectObjectContentOutput:
     type: object
     properties:
@@ -3221,8 +3201,8 @@ definitions:
     type: object
     example:
       CopyPartResult:
-        ETag: '"b0c6f0e7e054ab8fa2536a2677f8734d"'
-        LastModified: '2016-12-29T21:24:43.000Z'
+        ETag: '"65d16d19e65a7508a51f043180edcc36"'
+        LastModified: '2016-12-29T21:44:28.000Z'
     properties:
       CopyPartResult:
         $ref: '#/definitions/CopyPartResult'
@@ -3231,8 +3211,9 @@ definitions:
     example:
       Bucket: examplebucket
       CopySource: /bucketname/sourceobjectkey
+      CopySourceRange: bytes=1-100000
       Key: examplelargeobject
-      PartNumber: '1'
+      PartNumber: '2'
       UploadId: exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--
     properties: {}
   AbortDate:
@@ -4312,6 +4293,9 @@ definitions:
       Type:
         $ref: '#/definitions/JSONType'
         description: 'The type of JSON. Valid values: Document, Lines.'
+  ParquetInput:
+    type: object
+    properties: {}
   InputSerialization:
     type: object
     properties:
@@ -4324,6 +4308,9 @@ definitions:
       JSON:
         $ref: '#/definitions/JSONInput'
         description: Specifies JSON as object's input serialization format.
+      Parquet:
+        $ref: '#/definitions/ParquetInput'
+        description: Specifies Parquet as object's input serialization format.
     description: Describes the serialization format of the object.
   InventoryDestination:
     type: object

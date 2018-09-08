@@ -1498,26 +1498,30 @@ paths:
           schema:
             $ref: '#/definitions/InvalidRequestException'
         '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '482':
+        '483':
           description: ResourceAlreadyExistsException
           schema:
             $ref: '#/definitions/ResourceAlreadyExistsException'
-        '483':
+        '484':
           description: ThrottlingException
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '484':
+        '485':
           description: UnauthorizedException
           schema:
             $ref: '#/definitions/UnauthorizedException'
-        '485':
+        '486':
           description: InternalFailureException
           schema:
             $ref: '#/definitions/InternalFailureException'
-        '486':
+        '487':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
@@ -1573,6 +1577,10 @@ paths:
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: VersionConflictException
+          schema:
+            $ref: '#/definitions/VersionConflictException'
       parameters:
         - name: body
           in: body
@@ -2382,26 +2390,30 @@ paths:
           schema:
             $ref: '#/definitions/InvalidRequestException'
         '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '482':
+        '483':
           description: ResourceAlreadyExistsException
           schema:
             $ref: '#/definitions/ResourceAlreadyExistsException'
-        '483':
+        '484':
           description: ThrottlingException
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '484':
+        '485':
           description: UnauthorizedException
           schema:
             $ref: '#/definitions/UnauthorizedException'
-        '485':
+        '486':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '486':
+        '487':
           description: InternalFailureException
           schema:
             $ref: '#/definitions/InternalFailureException'
@@ -7063,6 +7075,9 @@ definitions:
       targetSelection:
         $ref: '#/definitions/TargetSelection'
         description: 'Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all the things specified as targets have completed the update (SNAPSHOT). If continuous, the update may also be run on a thing when a change is detected in a target. For example, an update will run on a thing when the thing is added to a target group, even after the update was completed by all things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.'
+      awsJobExecutionsRolloutConfig:
+        $ref: '#/definitions/AwsJobExecutionsRolloutConfig'
+        description: Configuration for the rollout of OTA updates.
       files:
         $ref: '#/definitions/OTAUpdateFiles'
         description: The files to be streamed by the OTA update.
@@ -9419,7 +9434,7 @@ definitions:
     type: string
   ThingArn:
     type: string
-  Key:
+  AttributeKey:
     type: string
   Value:
     type: string
@@ -9429,7 +9444,7 @@ definitions:
       type: object
       properties:
         key:
-          $ref: '#/definitions/Key'
+          $ref: '#/definitions/AttributeKey'
         value:
           $ref: '#/definitions/Value'
   AlarmName:
@@ -9548,7 +9563,7 @@ definitions:
       type: object
       properties:
         key:
-          $ref: '#/definitions/Key'
+          $ref: '#/definitions/AttributeKey'
         value:
           $ref: '#/definitions/Value'
   Enabled:
@@ -9909,6 +9924,17 @@ definitions:
     type: string
   AwsIotSqlVersion:
     type: string
+  MaximumPerMinute:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  AwsJobExecutionsRolloutConfig:
+    type: object
+    properties:
+      maximumPerMinute:
+        $ref: '#/definitions/MaximumPerMinute'
+        description: The maximum number of OTA update job executions started per minute.
+    description: Configuration for the rollout of OTA updates.
   BehaviorName:
     type: string
     pattern: '[a-zA-Z0-9:_-]+'
@@ -10152,6 +10178,8 @@ definitions:
     description: Describes a certificate.
   CertificateName:
     type: string
+  CertificatePathOnDevice:
+    type: string
   CertificateSigningRequest:
     type: string
     minLength: 1
@@ -10182,6 +10210,19 @@ definitions:
     type: string
   SigningJobId:
     type: string
+  StartSigningJobParameter:
+    type: object
+    properties:
+      signingProfileParameter:
+        $ref: '#/definitions/SigningProfileParameter'
+        description: Describes the code-signing profile.
+      signingProfileName:
+        $ref: '#/definitions/SigningProfileName'
+        description: The code-signing profile name.
+      destination:
+        $ref: '#/definitions/Destination'
+        description: The location to write the code-signed file.
+    description: Information required to start a signing job.
   CustomCodeSigning:
     type: object
     properties:
@@ -10204,28 +10245,18 @@ definitions:
       awsSignerJobId:
         $ref: '#/definitions/SigningJobId'
         description: The ID of the AWSSignerJob which was created to sign the file.
+      startSigningJobParameter:
+        $ref: '#/definitions/StartSigningJobParameter'
+        description: Describes the code-signing job.
       customCodeSigning:
         $ref: '#/definitions/CustomCodeSigning'
         description: A custom method for code signing a file.
     description: Describes the method to use when code signing a file.
-  Stream:
-    type: object
-    properties:
-      streamId:
-        $ref: '#/definitions/StreamId'
-        description: The stream ID.
-      fileId:
-        $ref: '#/definitions/FileId'
-        description: The ID of a file associated with a stream.
-    description: Describes a group of files that can be streamed.
   InlineDocument:
     type: string
   CodeSigningCertificateChain:
     type: object
     properties:
-      stream:
-        $ref: '#/definitions/Stream'
-        description: A stream of the certificate chain files.
       certificateName:
         $ref: '#/definitions/CertificateName'
         description: The name of the certificate.
@@ -10238,9 +10269,6 @@ definitions:
   CodeSigningSignature:
     type: object
     properties:
-      stream:
-        $ref: '#/definitions/Stream'
-        description: A stream of the code signing signature.
       inlineDocument:
         $ref: '#/definitions/Signature'
         description: A base64 encoded binary representation of the code signing signature.
@@ -10316,7 +10344,7 @@ definitions:
     items:
       $ref: '#/definitions/OTAUpdateFile'
     minItems: 1
-    maxItems: 10
+    maxItems: 50
   OTAUpdateArn:
     type: string
   OTAUpdateStatus:
@@ -10392,7 +10420,7 @@ definitions:
     items:
       $ref: '#/definitions/StreamFile'
     minItems: 1
-    maxItems: 10
+    maxItems: 50
   StreamArn:
     type: string
   StreamVersion:
@@ -10481,6 +10509,10 @@ definitions:
     type: boolean
   ExecutionNumber:
     type: integer
+  DeleteStream:
+    type: boolean
+  ForceDeleteAWSJob:
+    type: boolean
   OptionalVersion:
     type: integer
   LogTargetType:
@@ -10762,6 +10794,23 @@ definitions:
     description: 'The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when time was deprecated.'
   Description:
     type: string
+  S3Destination:
+    type: object
+    properties:
+      bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The S3 bucket that contains the updated firmware.
+      prefix:
+        $ref: '#/definitions/Prefix'
+        description: The S3 prefix.
+    description: Describes the location of updated firmware in S3.
+  Destination:
+    type: object
+    properties:
+      s3Destination:
+        $ref: '#/definitions/S3Destination'
+        description: Describes the location in S3 of the updated firmware.
+    description: Describes the location of the updated firmware.
   DetailsKey:
     type: string
     pattern: '[a-zA-Z0-9:_-]+'
@@ -10868,6 +10917,39 @@ definitions:
     type: integer
     minimum: 0
     maximum: 255
+  Stream:
+    type: object
+    properties:
+      streamId:
+        $ref: '#/definitions/StreamId'
+        description: The stream ID.
+      fileId:
+        $ref: '#/definitions/FileId'
+        description: The ID of a file associated with a stream.
+    description: Describes a group of files that can be streamed.
+  S3Location:
+    type: object
+    properties:
+      bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The S3 bucket.
+      key:
+        $ref: '#/definitions/S3Key'
+        description: The S3 key.
+      version:
+        $ref: '#/definitions/S3Version'
+        description: The S3 bucket version.
+    description: The S3 location.
+  FileLocation:
+    type: object
+    properties:
+      stream:
+        $ref: '#/definitions/Stream'
+        description: The stream that contains the OTA update.
+      s3Location:
+        $ref: '#/definitions/S3Location'
+        description: The location of the updated firmware in S3.
+    description: The location of the OTA update.
   FileName:
     type: string
   FirehoseSeparator:
@@ -10928,6 +11010,9 @@ definitions:
       targets:
         $ref: '#/definitions/Targets'
         description: The targets of the OTA update.
+      awsJobExecutionsRolloutConfig:
+        $ref: '#/definitions/AwsJobExecutionsRolloutConfig'
+        description: Configuration for the rollout of OTA updates.
       targetSelection:
         $ref: '#/definitions/TargetSelection'
         description: 'Specifies whether the OTA update will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the OTA update (SNAPSHOT). If continuous, the OTA update may also be run on a thing when a change is detected in a target. For example, an OTA update will run on a thing when the thing is added to a target group, even after the OTA update was completed by all things originally in the group. '
@@ -11157,6 +11242,8 @@ definitions:
     items:
       $ref: '#/definitions/JobSummary'
   JsonDocument:
+    type: string
+  Key:
     type: string
   KeyName:
     type: string
@@ -11401,9 +11488,9 @@ definitions:
       fileVersion:
         $ref: '#/definitions/OTAUpdateFileVersion'
         description: The file version.
-      fileSource:
-        $ref: '#/definitions/Stream'
-        description: The source of the file.
+      fileLocation:
+        $ref: '#/definitions/FileLocation'
+        description: The location of the updated firmware.
       codeSigning:
         $ref: '#/definitions/CodeSigning'
         description: The code signing method of the file.
@@ -11457,6 +11544,8 @@ definitions:
           $ref: '#/definitions/Parameter'
         value:
           $ref: '#/definitions/Value'
+  Platform:
+    type: string
   Policy:
     type: object
     properties:
@@ -11502,6 +11591,8 @@ definitions:
     type: integer
     minimum: 0
     maximum: 65535
+  Prefix:
+    type: string
   PrincipalArn:
     type: string
   PrincipalId:
@@ -11565,22 +11656,6 @@ definitions:
     minLength: 1
   S3Version:
     type: string
-  S3Location:
-    type: object
-    required:
-      - bucket
-      - key
-    properties:
-      bucket:
-        $ref: '#/definitions/S3Bucket'
-        description: The S3 bucket that contains the file to stream.
-      key:
-        $ref: '#/definitions/S3Key'
-        description: The name of the file within the S3 bucket to stream.
-      version:
-        $ref: '#/definitions/S3Version'
-        description: The file version.
-    description: The location in S3 the contains the files to stream.
   SQL:
     type: string
   SalesforceToken:
@@ -11655,6 +11730,21 @@ definitions:
         $ref: '#/definitions/SecurityProfileTarget'
         description: Information about the target (thing group) associated with the security profile.
     description: Information about a security profile and the target associated with it.
+  SigningProfileName:
+    type: string
+  SigningProfileParameter:
+    type: object
+    properties:
+      certificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: Certificate ARN.
+      platform:
+        $ref: '#/definitions/Platform'
+        description: The hardware platform of your device.
+      certificatePathOnDevice:
+        $ref: '#/definitions/CertificatePathOnDevice'
+        description: The location of the code-signing certificate on your device.
+    description: Describes the code-signing profile.
   UseBase64:
     type: boolean
   StateMachineName:

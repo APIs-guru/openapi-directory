@@ -1423,22 +1423,10 @@ definitions:
       kmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: 'The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms">Amazon Resource Names - AWS Key Management Service (AWS KMS)</a>.'
-  InvalidParameterException:
-    type: object
-    properties: {}
-    description: A parameter is specified incorrectly.
-  ResourceNotFoundException:
-    type: object
-    properties: {}
-    description: The specified resource does not exist.
-  OperationAbortedException:
-    type: object
-    properties: {}
-    description: Multiple requests to update the same resource were in conflict.
-  ServiceUnavailableException:
-    type: object
-    properties: {}
-    description: The service cannot complete the request.
+  InvalidParameterException: {}
+  ResourceNotFoundException: {}
+  OperationAbortedException: {}
+  ServiceUnavailableException: {}
   CancelExportTaskRequest:
     type: object
     required:
@@ -1447,10 +1435,7 @@ definitions:
       taskId:
         $ref: '#/definitions/ExportTaskId'
         description: The ID of the export task.
-  InvalidOperationException:
-    type: object
-    properties: {}
-    description: The operation is not valid on the specified resource.
+  InvalidOperationException: {}
   CreateExportTaskResponse:
     type: object
     properties:
@@ -1486,14 +1471,8 @@ definitions:
       destinationPrefix:
         $ref: '#/definitions/ExportDestinationPrefix'
         description: 'The prefix used as the start of the key for every object exported. If you don''t specify a value, the default is <code>exportedlogs</code>.'
-  LimitExceededException:
-    type: object
-    properties: {}
-    description: You have reached the maximum number of resources that can be created.
-  ResourceAlreadyExistsException:
-    type: object
-    properties: {}
-    description: The specified resource already exists.
+  LimitExceededException: {}
+  ResourceAlreadyExistsException: {}
   CreateLogGroupRequest:
     type: object
     required:
@@ -1777,10 +1756,13 @@ definitions:
     properties:
       logGroupName:
         $ref: '#/definitions/LogGroupName'
-        description: The name of the log group.
+        description: The name of the log group to search.
       logStreamNames:
         $ref: '#/definitions/InputLogStreamNames'
-        description: Optional list of log stream names.
+        description: '<p>Filters the results to only logs from the log streams in this list.</p> <p>If you specify a value for both <code>logStreamNamePrefix</code> and <code>logStreamNames</code>, but the value for <code>logStreamNamePrefix</code> does not match any log stream names specified in <code>logStreamNames</code>, the action returns an <code>InvalidParameterException</code> error.</p>'
+      logStreamNamePrefix:
+        $ref: '#/definitions/LogStreamName'
+        description: '<p>Filters the results to include only events from log streams that have names starting with this prefix.</p> <p>If you specify a value for both <code>logStreamNamePrefix</code> and <code>logStreamNames</code>, but the value for <code>logStreamNamePrefix</code> does not match any log stream names specified in <code>logStreamNames</code>, the action returns an <code>InvalidParameterException</code> error.</p>'
       startTime:
         $ref: '#/definitions/Timestamp'
         description: 'The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp before this time are not returned.'
@@ -1789,7 +1771,7 @@ definitions:
         description: 'The end of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than this time are not returned.'
       filterPattern:
         $ref: '#/definitions/FilterPattern'
-        description: 'The filter pattern to use. If not provided, all the events are matched.'
+        description: '<p>The filter pattern to use. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html">Filter and Pattern Syntax</a>.</p> <p>If not provided, all the events are matched.</p>'
       nextToken:
         $ref: '#/definitions/NextToken'
         description: The token for the next set of events to return. (You received this token from a previous call.)
@@ -1914,22 +1896,9 @@ definitions:
       sequenceToken:
         $ref: '#/definitions/SequenceToken'
         description: 'The sequence token obtained from the response of the previous <code>PutLogEvents</code> call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using <a>DescribeLogStreams</a>. If you call <code>PutLogEvents</code> twice within a narrow time period using the same value for <code>sequenceToken</code>, both calls may be successful, or one may be rejected.'
-  InvalidSequenceTokenException:
-    type: object
-    properties:
-      expectedSequenceToken:
-        $ref: '#/definitions/SequenceToken'
-    description: The sequence token is not valid.
-  DataAlreadyAcceptedException:
-    type: object
-    properties:
-      expectedSequenceToken:
-        $ref: '#/definitions/SequenceToken'
-    description: The event was already logged.
-  UnrecognizedClientException:
-    type: object
-    properties: {}
-    description: The most likely cause is an invalid AWS access key ID or secret key.
+  InvalidSequenceTokenException: {}
+  DataAlreadyAcceptedException: {}
+  UnrecognizedClientException: {}
   PutMetricFilterRequest:
     type: object
     required:
@@ -2089,9 +2058,6 @@ definitions:
           $ref: '#/definitions/TagKey'
         value:
           $ref: '#/definitions/TagValue'
-  SequenceToken:
-    type: string
-    minLength: 1
   Days:
     type: integer
     description: 'The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.'
@@ -2381,6 +2347,9 @@ definitions:
         $ref: '#/definitions/KmsKeyId'
         description: The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.
     description: Represents a log group.
+  SequenceToken:
+    type: string
+    minLength: 1
   LogStream:
     type: object
     properties:

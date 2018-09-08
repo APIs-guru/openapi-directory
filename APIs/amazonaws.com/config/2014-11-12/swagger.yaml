@@ -1624,14 +1624,8 @@ definitions:
       resourceKeys:
         $ref: '#/definitions/ResourceKeys'
         description: A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID.
-  ValidationException:
-    type: object
-    properties: {}
-    description: The requested action is not valid.
-  NoAvailableConfigurationRecorderException:
-    type: object
-    properties: {}
-    description: There are no configuration recorders available to provide the role needed to describe your resources. Create a configuration recorder.
+  ValidationException: {}
+  NoAvailableConfigurationRecorderException: {}
   DeleteAggregationAuthorizationRequest:
     type: object
     required:
@@ -1644,10 +1638,7 @@ definitions:
       AuthorizedAwsRegion:
         $ref: '#/definitions/AwsRegion'
         description: The region authorized to collect aggregated data.
-  InvalidParameterValueException:
-    type: object
-    properties: {}
-    description: One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.
+  InvalidParameterValueException: {}
   DeleteConfigRuleRequest:
     type: object
     required:
@@ -1657,14 +1648,8 @@ definitions:
         $ref: '#/definitions/StringWithCharLimit64'
         description: The name of the AWS Config rule that you want to delete.
     description: <p/>
-  NoSuchConfigRuleException:
-    type: object
-    properties: {}
-    description: One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.
-  ResourceInUseException:
-    type: object
-    properties: {}
-    description: The rule is currently being deleted or the rule is deleting your evaluation results. Try your request again later.
+  NoSuchConfigRuleException: {}
+  ResourceInUseException: {}
   DeleteConfigurationAggregatorRequest:
     type: object
     required:
@@ -1673,10 +1658,7 @@ definitions:
       ConfigurationAggregatorName:
         $ref: '#/definitions/ConfigurationAggregatorName'
         description: The name of the configuration aggregator.
-  NoSuchConfigurationAggregatorException:
-    type: object
-    properties: {}
-    description: You have specified a configuration aggregator that does not exist.
+  NoSuchConfigurationAggregatorException: {}
   DeleteConfigurationRecorderRequest:
     type: object
     required:
@@ -1686,10 +1668,7 @@ definitions:
         $ref: '#/definitions/RecorderName'
         description: The name of the configuration recorder to be deleted. You can retrieve the name of your configuration recorder by using the <code>DescribeConfigurationRecorders</code> action.
     description: The request object for the <code>DeleteConfigurationRecorder</code> action.
-  NoSuchConfigurationRecorderException:
-    type: object
-    properties: {}
-    description: You have specified a configuration recorder that does not exist.
+  NoSuchConfigurationRecorderException: {}
   DeleteDeliveryChannelRequest:
     type: object
     required:
@@ -1699,14 +1678,8 @@ definitions:
         $ref: '#/definitions/ChannelName'
         description: The name of the delivery channel to delete.
     description: 'The input for the <a>DeleteDeliveryChannel</a> action. The action accepts the following data, in JSON format. '
-  NoSuchDeliveryChannelException:
-    type: object
-    properties: {}
-    description: You have specified a delivery channel that does not exist.
-  LastDeliveryChannelDeleteFailedException:
-    type: object
-    properties: {}
-    description: You cannot delete the delivery channel you specified because the configuration recorder is running.
+  NoSuchDeliveryChannelException: {}
+  LastDeliveryChannelDeleteFailedException: {}
   DeleteEvaluationResultsResponse:
     type: object
     properties: {}
@@ -1740,10 +1713,7 @@ definitions:
       RetentionConfigurationName:
         $ref: '#/definitions/RetentionConfigurationName'
         description: The name of the retention configuration to delete.
-  NoSuchRetentionConfigurationException:
-    type: object
-    properties: {}
-    description: You have specified a retention configuration that does not exist.
+  NoSuchRetentionConfigurationException: {}
   DeliverConfigSnapshotResponse:
     type: object
     properties:
@@ -1760,10 +1730,7 @@ definitions:
         $ref: '#/definitions/ChannelName'
         description: The name of the delivery channel through which the snapshot is delivered.
     description: The input for the <a>DeliverConfigSnapshot</a> action.
-  NoRunningConfigurationRecorderException:
-    type: object
-    properties: {}
-    description: There is no configuration recorder running.
+  NoRunningConfigurationRecorderException: {}
   DescribeAggregateComplianceByConfigRulesResponse:
     type: object
     properties:
@@ -1790,14 +1757,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
-  InvalidLimitException:
-    type: object
-    properties: {}
-    description: The specified limit is outside the allowable range.
-  InvalidNextTokenException:
-    type: object
-    properties: {}
-    description: The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the previous response to get the next page of results.
+  InvalidLimitException: {}
+  InvalidNextTokenException: {}
   DescribeAggregationAuthorizationsResponse:
     type: object
     properties:
@@ -2260,14 +2221,8 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
     description: The input for the <a>GetResourceConfigHistory</a> action.
-  InvalidTimeRangeException:
-    type: object
-    properties: {}
-    description: The specified time range is not valid. The earlier time is not chronologically before the later time.
-  ResourceNotDiscoveredException:
-    type: object
-    properties: {}
-    description: You have specified a resource that is either unknown or has not been discovered.
+  InvalidTimeRangeException: {}
+  ResourceNotDiscoveredException: {}
   ListDiscoveredResourcesResponse:
     type: object
     properties:
@@ -2328,14 +2283,8 @@ definitions:
       ConfigRule:
         $ref: '#/definitions/ConfigRule'
         description: The rule that you want to add to your account.
-  MaxNumberOfConfigRulesExceededException:
-    type: object
-    properties: {}
-    description: Failed to add the AWS Config rule because the account already contains the maximum number of 50 rules. Consider deleting any deactivated rules before you add new rules.
-  InsufficientPermissionsException:
-    type: object
-    properties: {}
-    description: '<p>Indicates one of the following errors:</p> <ul> <li> <p>The rule cannot be created because the IAM role assigned to AWS Config lacks permissions to perform the config:Put* action.</p> </li> <li> <p>The AWS Lambda function cannot be invoked. Check the function ARN, and check the function''s permissions.</p> </li> </ul>'
+  MaxNumberOfConfigRulesExceededException: {}
+  InsufficientPermissionsException: {}
   PutConfigurationAggregatorResponse:
     type: object
     properties:
@@ -2356,26 +2305,11 @@ definitions:
       OrganizationAggregationSource:
         $ref: '#/definitions/OrganizationAggregationSource'
         description: An OrganizationAggregationSource object.
-  LimitExceededException:
-    type: object
-    properties: {}
-    description: This exception is thrown if an evaluation is in progress or if you call the <a>StartConfigRulesEvaluation</a> API more than once per minute.
-  InvalidRoleException:
-    type: object
-    properties: {}
-    description: You have provided a null or empty role ARN.
-  OrganizationAccessDeniedException:
-    type: object
-    properties: {}
-    description: No permission to call the EnableAWSServiceAccess API.
-  NoAvailableOrganizationException:
-    type: object
-    properties: {}
-    description: Organization does is no longer available.
-  OrganizationAllFeaturesNotEnabledException:
-    type: object
-    properties: {}
-    description: The configuration aggregator cannot be created because organization does not have all features enabled.
+  LimitExceededException: {}
+  InvalidRoleException: {}
+  OrganizationAccessDeniedException: {}
+  NoAvailableOrganizationException: {}
+  OrganizationAllFeaturesNotEnabledException: {}
   PutConfigurationRecorderRequest:
     type: object
     required:
@@ -2385,18 +2319,9 @@ definitions:
         $ref: '#/definitions/ConfigurationRecorder'
         description: The configuration recorder object that records each configuration change made to the resources.
     description: The input for the <a>PutConfigurationRecorder</a> action.
-  MaxNumberOfConfigurationRecordersExceededException:
-    type: object
-    properties: {}
-    description: You have reached the limit of the number of recorders you can create.
-  InvalidConfigurationRecorderNameException:
-    type: object
-    properties: {}
-    description: You have provided a configuration recorder name that is not valid.
-  InvalidRecordingGroupException:
-    type: object
-    properties: {}
-    description: AWS Config throws an exception if the recording group does not contain a valid list of resource types. Invalid values might also be incorrectly formatted.
+  MaxNumberOfConfigurationRecordersExceededException: {}
+  InvalidConfigurationRecorderNameException: {}
+  InvalidRecordingGroupException: {}
   PutDeliveryChannelRequest:
     type: object
     required:
@@ -2406,30 +2331,12 @@ definitions:
         $ref: '#/definitions/DeliveryChannel'
         description: The configuration delivery channel object that delivers the configuration information to an Amazon S3 bucket and to an Amazon SNS topic.
     description: The input for the <a>PutDeliveryChannel</a> action.
-  MaxNumberOfDeliveryChannelsExceededException:
-    type: object
-    properties: {}
-    description: You have reached the limit of the number of delivery channels you can create.
-  InvalidDeliveryChannelNameException:
-    type: object
-    properties: {}
-    description: The specified delivery channel name is not valid.
-  NoSuchBucketException:
-    type: object
-    properties: {}
-    description: The specified Amazon S3 bucket does not exist.
-  InvalidS3KeyPrefixException:
-    type: object
-    properties: {}
-    description: The specified Amazon S3 key prefix is not valid.
-  InvalidSNSTopicARNException:
-    type: object
-    properties: {}
-    description: The specified Amazon SNS topic does not exist.
-  InsufficientDeliveryPolicyException:
-    type: object
-    properties: {}
-    description: Your Amazon S3 bucket policy does not permit AWS Config to write to it.
+  MaxNumberOfDeliveryChannelsExceededException: {}
+  InvalidDeliveryChannelNameException: {}
+  NoSuchBucketException: {}
+  InvalidS3KeyPrefixException: {}
+  InvalidSNSTopicARNException: {}
+  InsufficientDeliveryPolicyException: {}
   PutEvaluationsResponse:
     type: object
     properties:
@@ -2452,10 +2359,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: '<p>Use this parameter to specify a test run for <code>PutEvaluations</code>. You can verify whether your AWS Lambda function will deliver evaluation results to AWS Config. No updates occur to your existing evaluations, and evaluation results are not sent to AWS Config.</p> <note> <p>When <code>TestMode</code> is <code>true</code>, <code>PutEvaluations</code> doesn''t require a valid value for the <code>ResultToken</code> parameter, but the value cannot be null.</p> </note>'
     description: <p/>
-  InvalidResultTokenException:
-    type: object
-    properties: {}
-    description: The specified <code>ResultToken</code> is invalid.
+  InvalidResultTokenException: {}
   PutRetentionConfigurationResponse:
     type: object
     properties:
@@ -2470,10 +2374,7 @@ definitions:
       RetentionPeriodInDays:
         $ref: '#/definitions/RetentionPeriodInDays'
         description: '<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>'
-  MaxNumberOfRetentionConfigurationsExceededException:
-    type: object
-    properties: {}
-    description: Failed to add the retention configuration because a retention configuration with that name already exists.
+  MaxNumberOfRetentionConfigurationsExceededException: {}
   StartConfigRulesEvaluationResponse:
     type: object
     properties: {}
@@ -2494,10 +2395,7 @@ definitions:
         $ref: '#/definitions/RecorderName'
         description: The name of the recorder object that records each configuration change made to the resources.
     description: The input for the <a>StartConfigurationRecorder</a> action.
-  NoAvailableDeliveryChannelException:
-    type: object
-    properties: {}
-    description: There is no delivery channel available to record configurations.
+  NoAvailableDeliveryChannelException: {}
   StopConfigurationRecorderRequest:
     type: object
     required:
@@ -3087,6 +2985,9 @@ definitions:
       ConfigRuleState:
         $ref: '#/definitions/ConfigRuleState'
         description: '<p>Indicates whether the AWS Config rule is active or is currently being deleted by AWS Config. It can also indicate the evaluation status for the AWS Config rule.</p> <p>AWS Config sets the state of the rule to <code>EVALUATING</code> temporarily after you use the <code>StartConfigRulesEvaluation</code> request to evaluate your resources against the AWS Config rule.</p> <p>AWS Config sets the state of the rule to <code>DELETING_RESULTS</code> temporarily after you use the <code>DeleteEvaluationResults</code> request to delete the current evaluation results for the AWS Config rule.</p> <p>AWS Config temporarily sets the state of a rule to <code>DELETING</code> after you use the <code>DeleteConfigRule</code> request to delete the rule. After AWS Config deletes the rule, the rule and all of its evaluations are erased and are no longer available.</p>'
+      CreatedBy:
+        $ref: '#/definitions/StringWithCharLimit256'
+        description: <p>Service principal name of the service that created the rule.</p> <note> <p>The field is populated only if the service linked rule is created by a service. The field is empty if you create your own rule.</p> </note>
     description: '<p>An AWS Config rule represents an AWS Lambda function that you create for a custom rule or a predefined function for an AWS managed rule. The function evaluates configuration items to assess whether your AWS resources comply with your desired configurations. This function can run when AWS Config detects a configuration change to an AWS resource and at a periodic frequency that you choose (for example, every 24 hours).</p> <note> <p>You can use the AWS CLI and AWS SDKs if you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p> </note> <p>For more information about developing and using AWS Config rules, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>'
   ConfigRuleComplianceFilters:
     type: object

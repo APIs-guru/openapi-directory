@@ -412,7 +412,7 @@ paths:
   '/#DescribeCollection':
     post:
       operationId: DescribeCollection
-      description: ''
+      description: '<p>Describes the specified collection. You can use <code>DescribeCollection</code> to get information, such as the number of faces indexed into a collection and the version of the model used by the collection for face detection.</p> <p>For more information, see Describing a Collection in the Amazon Rekognition Developer Guide.</p>'
       responses:
         '200':
           description: Success
@@ -681,7 +681,7 @@ paths:
   '/#DetectText':
     post:
       operationId: DetectText
-      description: '<p>Detects text in the input image and converts it into machine-readable text.</p> <p>Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file. </p> <p>The <code>DetectText</code> operation returns text in an array of elements, <code>TextDetections</code>. Each <code>TextDetection</code> element provides information about a single word or line of text that was detected in the image. </p> <p>A word is one or more ISO basic latin script characters that are not separated by spaces. <code>DetectText</code> can detect up to 50 words in an image.</p> <p>A line is a string of equally spaced words. A line isn''t necessarily a complete sentence. For example, a driver''s license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don''t represent the end of a line. If a sentence spans multiple lines, the <code>DetectText</code> operation returns multiple lines.</p> <p>To determine whether a <code>TextDetection</code> element is a line of text or a word, use the <code>TextDetection</code> object <code>Type</code> field. </p> <p>To be detected, text must be within +/- 30 degrees orientation of the horizontal axis.</p> <p>For more information, see DetectText in the Amazon Rekognition Developer Guide.</p>'
+      description: '<p>Detects text in the input image and converts it into machine-readable text.</p> <p>Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file. </p> <p>The <code>DetectText</code> operation returns text in an array of elements, <code>TextDetections</code>. Each <code>TextDetection</code> element provides information about a single word or line of text that was detected in the image. </p> <p>A word is one or more ISO basic latin script characters that are not separated by spaces. <code>DetectText</code> can detect up to 50 words in an image.</p> <p>A line is a string of equally spaced words. A line isn''t necessarily a complete sentence. For example, a driver''s license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don''t represent the end of a line. If a sentence spans multiple lines, the <code>DetectText</code> operation returns multiple lines.</p> <p>To determine whether a <code>TextDetection</code> element is a line of text or a word, use the <code>TextDetection</code> object <code>Type</code> field. </p> <p>To be detected, text must be within +/- 90 degrees orientation of the horizontal axis.</p> <p>For more information, see DetectText in the Amazon Rekognition Developer Guide.</p>'
       responses:
         '200':
           description: Success
@@ -1165,7 +1165,7 @@ paths:
   '/#IndexFaces':
     post:
       operationId: IndexFaces
-      description: '<p>Detects faces in the input image and adds them to the specified collection. </p> <p>Amazon Rekognition does not save the actual faces detected. Instead, the underlying detection algorithm first detects the faces in the input image, and for each face extracts facial features into a feature vector, and stores it in the back-end database. Amazon Rekognition uses feature vectors when performing face match and search operations using the and operations.</p> <p>If you are using version 1.0 of the face detection model, <code>IndexFaces</code> indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image. To determine which version of the model you are using, check the the value of <code>FaceModelVersion</code> in the response from <code>IndexFaces</code>. </p> <p>For more information, see Model Versioning in the Amazon Rekognition Developer Guide.</p> <p>If you provide the optional <code>ExternalImageID</code> for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image. </p> <p>In response, the operation returns an array of metadata for all detected faces. This includes, the bounding box of the detected face, confidence value (indicating the bounding box contains a face), a face ID assigned by the service for each face that is detected and stored, and an image ID assigned by the service for the input image. If you request all facial attributes (using the <code>detectionAttributes</code> parameter, Amazon Rekognition returns detailed facial attributes such as facial landmarks (for example, location of eye and mouth) and other facial attributes such gender. If you provide the same image, specify the same collection, and use the same external ID in the <code>IndexFaces</code> operation, Amazon Rekognition doesn''t save duplicate face metadata.</p> <p>For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide.</p> <p>The input image is passed either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p>This operation requires permissions to perform the <code>rekognition:IndexFaces</code> action.</p>'
+      description: '<p>Detects faces in the input image and adds them to the specified collection. </p> <p>Amazon Rekognition does not save the actual faces detected. Instead, the underlying detection algorithm first detects the faces in the input image, and for each face extracts facial features into a feature vector, and stores it in the back-end database. Amazon Rekognition uses feature vectors when performing face match and search operations using the and operations.</p> <p>To get the number of faces in a collection, call . </p> <p>If you are using version 1.0 of the face detection model, <code>IndexFaces</code> indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image. To determine which version of the model you are using, call and supply the collection ID. You also get the model version from the value of <code>FaceModelVersion</code> in the response from <code>IndexFaces</code>. </p> <p>For more information, see Model Versioning in the Amazon Rekognition Developer Guide.</p> <p>If you provide the optional <code>ExternalImageID</code> for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image. </p> <p>In response, the operation returns an array of metadata for all detected faces. This includes, the bounding box of the detected face, confidence value (indicating the bounding box contains a face), a face ID assigned by the service for each face that is detected and stored, and an image ID assigned by the service for the input image. If you request all facial attributes (using the <code>detectionAttributes</code> parameter, Amazon Rekognition returns detailed facial attributes such as facial landmarks (for example, location of eye and mouth) and other facial attributes such gender. If you provide the same image, specify the same collection, and use the same external ID in the <code>IndexFaces</code> operation, Amazon Rekognition doesn''t save duplicate face metadata.</p> <p>For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide.</p> <p>The input image is passed either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p>This operation requires permissions to perform the <code>rekognition:IndexFaces</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -2242,12 +2242,16 @@ definitions:
     properties:
       FaceCount:
         $ref: '#/definitions/ULong'
+        description: 'The number of faces that are indexed into the collection. To index faces into a collection, use .'
       FaceModelVersion:
         $ref: '#/definitions/String'
+        description: '<p>The version of the face model that''s used by the collection for face detection.</p> <p>For more information, see Model Versioning in the Amazon Rekognition Developer Guide.</p>'
       CollectionARN:
         $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the collection.
       CreationTimestamp:
         $ref: '#/definitions/DateTime'
+        description: 'The number of milliseconds since the Unix epoch time until the creation of the collection. The Unix epoch time is 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.'
   DescribeCollectionRequest:
     type: object
     required:
@@ -2255,6 +2259,7 @@ definitions:
     properties:
       CollectionId:
         $ref: '#/definitions/CollectionId'
+        description: The ID of the collection to describe.
   DescribeStreamProcessorResponse:
     type: object
     properties:
@@ -2455,12 +2460,6 @@ definitions:
       Celebrities:
         $ref: '#/definitions/CelebrityRecognitions'
         description: Array of celebrities recognized in the video.
-      BillableDurationSeconds:
-        $ref: '#/definitions/UInteger'
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Warnings:
-        $ref: '#/definitions/Warnings'
   GetCelebrityRecognitionRequest:
     type: object
     required:
@@ -2497,12 +2496,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent request to retrieve the next set of moderation labels. '
-      BillableDurationSeconds:
-        $ref: '#/definitions/UInteger'
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Warnings:
-        $ref: '#/definitions/Warnings'
   GetContentModerationRequest:
     type: object
     required:
@@ -2538,12 +2531,6 @@ definitions:
       Faces:
         $ref: '#/definitions/FaceDetections'
         description: 'An array of faces detected in the video. Each element contains a detected face''s details and the time, in milliseconds from the start of the video, the face was detected. '
-      BillableDurationSeconds:
-        $ref: '#/definitions/UInteger'
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Warnings:
-        $ref: '#/definitions/Warnings'
   GetFaceDetectionRequest:
     type: object
     required:
@@ -2576,12 +2563,6 @@ definitions:
       Persons:
         $ref: '#/definitions/PersonMatches'
         description: 'An array of persons, , in the video whose face(s) match the face(s) in an Amazon Rekognition collection. It also includes time information for when persons are matched in the video. You specify the input collection in an initial call to <code>StartFaceSearch</code>. Each <code>Persons</code> element includes a time the person was matched, face match details (<code>FaceMatches</code>) for matching faces in the collection, and person information (<code>Person</code>) for the matched person. '
-      BillableDurationSeconds:
-        $ref: '#/definitions/UInteger'
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Warnings:
-        $ref: '#/definitions/Warnings'
   GetFaceSearchRequest:
     type: object
     required:
@@ -2617,12 +2598,6 @@ definitions:
       Labels:
         $ref: '#/definitions/LabelDetections'
         description: 'An array of labels detected in the video. Each element contains the detected label and the time, in milliseconds from the start of the video, that the label was detected. '
-      BillableDurationSeconds:
-        $ref: '#/definitions/UInteger'
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Warnings:
-        $ref: '#/definitions/Warnings'
   GetLabelDetectionRequest:
     type: object
     required:
@@ -2658,12 +2633,6 @@ definitions:
       Persons:
         $ref: '#/definitions/PersonDetections'
         description: 'An array of the persons detected in the video and the times they are tracked throughout the video. An array element will exist for each time the person is tracked. '
-      BillableDurationSeconds:
-        $ref: '#/definitions/UInteger'
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Warnings:
-        $ref: '#/definitions/Warnings'
   GetPersonTrackingRequest:
     type: object
     required:
@@ -3129,8 +3098,6 @@ definitions:
       NotificationChannel:
         $ref: '#/definitions/NotificationChannel'
         description: The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the celebrity recognition analysis to.
-      EnablePersonTracking:
-        $ref: '#/definitions/NullableBoolean'
       JobTag:
         $ref: '#/definitions/JobTag'
         description: 'Unique identifier you specify to identify the job in the completion status published to the Amazon Simple Notification Service topic. '
@@ -3212,8 +3179,6 @@ definitions:
       CollectionId:
         $ref: '#/definitions/CollectionId'
         description: ID of the collection that contains the faces you want to search for.
-      EnablePersonTracking:
-        $ref: '#/definitions/NullableBoolean'
       NotificationChannel:
         $ref: '#/definitions/NotificationChannel'
         description: 'The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the search. '
@@ -3348,7 +3313,7 @@ definitions:
       Top:
         $ref: '#/definitions/Float'
         description: Top coordinate of the bounding box as a ratio of overall image height.
-    description: '<p>Identifies the bounding box around the object, face or text. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p>The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>'
+    description: '<p>Identifies the bounding box around the face or text. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p>The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>'
   Urls:
     type: array
     items:
@@ -3642,7 +3607,7 @@ definitions:
     description: Input parameters used to recognize faces in a streaming video analyzed by a Amazon Rekognition stream processor.
   RoleArn:
     type: string
-    pattern: 'arn:([a-z\d-]+):iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+    pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
   StreamProcessorArn:
     type: string
     pattern: '(^arn:[a-z\d-]+:rekognition:[a-z\d-]+:\d{12}:streamprocessor\/.+$)'
@@ -3712,8 +3677,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Emotion'
-  ErrorCode:
-    type: string
   ExternalImageId:
     type: string
     pattern: '[a-zA-Z0-9_.\-:]+'
@@ -3763,8 +3726,6 @@ definitions:
       Confidence:
         $ref: '#/definitions/Percent'
         description: Confidence level that the bounding box contains a face (and not a different object such as a tree).
-      AssociationScore:
-        $ref: '#/definitions/Percent'
     description: 'Describes the face properties such as the bounding box, face ID, image ID of the input image, and external image ID that you assigned. '
   FaceAttributes:
     type: string
@@ -3945,13 +3906,7 @@ definitions:
       FrameWidth:
         $ref: '#/definitions/ULong'
         description: Horizontal pixel dimension of the video.
-      Rotation:
-        $ref: '#/definitions/UInteger'
     description: Information about a video that Amazon Rekognition analyzed. <code>Videometadata</code> is returned in every page of paginated responses from a Amazon Rekognition video operation.
-  Warnings:
-    type: array
-    items:
-      $ref: '#/definitions/Warning'
   PersonMatches:
     type: array
     items:
@@ -4091,7 +4046,7 @@ definitions:
     maximum: 4096
   SNSTopicArn:
     type: string
-    pattern: '(^arn:([a-z\d-]+):sns:.*:\w{12}:.+$)'
+    pattern: '(^arn:aws:sns:.*:\w{12}:.+$)'
   NotificationChannel:
     type: object
     required:
@@ -4105,8 +4060,6 @@ definitions:
         $ref: '#/definitions/RoleArn'
         description: 'The ARN of an IAM role that gives Amazon Rekognition publishing permissions to the Amazon SNS topic. '
     description: 'The Amazon Simple Notification Service topic to which Amazon Rekognition publishes the completion status of a video analysis operation. For more information, see <a>api-video</a>.'
-  NullableBoolean:
-    type: boolean
   PersonIndex:
     type: integer
   PersonDetail:
@@ -4168,17 +4121,6 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1024
-  Section:
-    type: object
-    properties:
-      StartTimestamp:
-        $ref: '#/definitions/Timestamp'
-      EndTimestamp:
-        $ref: '#/definitions/Timestamp'
-  Sections:
-    type: array
-    items:
-      $ref: '#/definitions/Section'
   Video:
     type: object
     properties:
@@ -4225,12 +4167,3 @@ definitions:
     description: '<p>Information about a word or line of text detected by .</p> <p>The <code>DetectedText</code> field contains the text that Amazon Rekognition detected in the image. </p> <p>Every word and line has an identifier (<code>Id</code>). Each word belongs to a line and has a parent identifier (<code>ParentId</code>) that identifies the line of text in which the word appears. The word <code>Id</code> is also an index for the word within a line of words. </p> <p>For more information, see Detecting Text in the Amazon Rekognition Developer Guide.</p>'
   Url:
     type: string
-  Warning:
-    type: object
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/StatusMessage'
-      Sections:
-        $ref: '#/definitions/Sections'

@@ -502,6 +502,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEndpoints':
+    post:
+      operationId: DescribeEndpoints
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeEndpointsResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEndpointsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeGlobalTable':
     post:
       operationId: DescribeGlobalTable
@@ -1786,6 +1811,16 @@ definitions:
       TableName:
         $ref: '#/definitions/TableName'
         description: Name of the table for which the customer wants to check the continuous backups and point in time recovery settings.
+  DescribeEndpointsResponse:
+    type: object
+    required:
+      - Endpoints
+    properties:
+      Endpoints:
+        $ref: '#/definitions/Endpoints'
+  DescribeEndpointsRequest:
+    type: object
+    properties: {}
   DescribeGlobalTableOutput:
     type: object
     properties:
@@ -3488,6 +3523,10 @@ definitions:
         $ref: '#/definitions/Key'
         description: 'A map of attribute name to attribute values, representing the primary key of the item to delete. All of the table''s primary key attributes must be specified, and their data types must match those of the table''s key schema.'
     description: Represents a request to perform a <code>DeleteItem</code> operation on an item.
+  Endpoints:
+    type: array
+    items:
+      $ref: '#/definitions/Endpoint'
   ReplicaSettingsDescriptionList:
     type: array
     items:
@@ -3502,6 +3541,18 @@ definitions:
         $ref: '#/definitions/TimeToLiveAttributeName'
         description: ' The name of the Time to Live attribute for items in the table.'
     description: 'The description of the Time to Live (TTL) status on the specified table. '
+  Long:
+    type: integer
+  Endpoint:
+    type: object
+    required:
+      - Address
+      - CachePeriodInMinutes
+    properties:
+      Address:
+        $ref: '#/definitions/String'
+      CachePeriodInMinutes:
+        $ref: '#/definitions/Long'
   ExpectedAttributeValue:
     type: object
     properties:
@@ -3580,8 +3631,6 @@ definitions:
         $ref: '#/definitions/PositiveLongObject'
         description: The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException</code>.
     description: 'Represents the provisioned throughput settings for the table, consisting of read and write capacity units, along with data about increases and decreases.'
-  Long:
-    type: integer
   GlobalSecondaryIndexDescription:
     type: object
     properties:

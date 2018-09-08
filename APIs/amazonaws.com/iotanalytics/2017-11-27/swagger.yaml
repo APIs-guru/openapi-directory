@@ -1237,6 +1237,65 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutLoggingOptionsRequest'
+  '/datasets/{datasetName}/contents':
+    get:
+      operationId: ListDatasetContents
+      description: Lists information about data set contents that have been created.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDatasetContentsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDatasetContentsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: datasetName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /tags:
     get:
       operationId: ListTagsForResource
@@ -1746,6 +1805,18 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
   ListChannelsRequest:
+    type: object
+    properties: {}
+  ListDatasetContentsResponse:
+    type: object
+    properties:
+      datasetContentSummaries:
+        $ref: '#/definitions/DatasetContentSummaries'
+        description: Summary information about data set contents that have been created.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
+  ListDatasetContentsRequest:
     type: object
     properties: {}
   ListDatasetsResponse:
@@ -2277,6 +2348,26 @@ definitions:
         $ref: '#/definitions/Reason'
         description: The reason the data set contents are in this state.
     description: The state of the data set contents and the reason they are in this state.
+  DatasetContentSummary:
+    type: object
+    properties:
+      version:
+        $ref: '#/definitions/DatasetContentVersion'
+        description: The version of the data set contents.
+      status:
+        $ref: '#/definitions/DatasetContentStatus'
+        description: The status of the data set contents.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The actual time the creation of the data set contents was started.
+      scheduleTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time the creation of the data set contents was scheduled to start.
+    description: Summary information about data set contents.
+  DatasetContentSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/DatasetContentSummary'
   DatasetContentVersionValue:
     type: object
     required:

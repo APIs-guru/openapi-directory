@@ -1055,10 +1055,52 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UntagResource
+      description: 'Remove tags from a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '485':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: arn
+          type: string
+          in: path
+          required: true
   /2017-08-29/tags:
     post:
       operationId: TagResource
-      description: 'Tag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
+      description: 'Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html'
       responses:
         '200':
           description: Success
@@ -1104,44 +1146,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    delete:
-      operationId: UntagResource
-      description: 'Untag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/UntagResourceResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '484':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-        '485':
-          description: ConflictException
-          schema:
-            $ref: '#/definitions/ConflictException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UntagResourceRequest'
 definitions:
   CancelJobResponse:
     type: object
@@ -1166,6 +1170,8 @@ definitions:
       - Role
       - Settings
     properties:
+      BillingTagsSource:
+        $ref: '#/definitions/BillingTagsSource'
       ClientRequestToken:
         $ref: '#/definitions/__string'
         description: Idempotency token for CreateJob operation.
@@ -1288,6 +1294,8 @@ definitions:
       MaxResults:
         $ref: '#/definitions/__integer'
         description: 'Optional. Max number of endpoints, up to twenty, that will be returned at one time.'
+      Mode:
+        $ref: '#/definitions/DescribeEndpointsMode'
       NextToken:
         $ref: '#/definitions/__string'
         description: 'Use this string, provided with the response to a previous request, to request the next batch of endpoints.'
@@ -1401,9 +1409,6 @@ definitions:
   UntagResourceRequest:
     type: object
     properties:
-      Arn:
-        $ref: '#/definitions/__string'
-        description: 'The Amazon Resource Name (ARN) of the resource that you want to remove tags from. To get the ARN, send a GET request with the resource name.'
       TagKeys:
         $ref: '#/definitions/__listOf__string'
         description: The keys of the tags that you want to remove from the resource.
@@ -2169,6 +2174,13 @@ definitions:
         $ref: '#/definitions/__stringMin14PatternS3BmpBMPPngPNG'
         description: Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported.
     description: Settings for Avail Blanking
+  BillingTagsSource:
+    type: string
+    enum:
+      - QUEUE
+      - PRESET
+      - JOB_TEMPLATE
+    description: 'Optional. Choose a tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up. Any transcoding outputs that don''t have an associated tag will appear in your billing report unsorted. If you don''t choose a valid value for this field, your job outputs will appear on the billing report unsorted.'
   BurninSubtitleAlignment:
     type: string
     enum:
@@ -3001,6 +3013,8 @@ definitions:
       Arn:
         $ref: '#/definitions/__string'
         description: An identifier for this resource that is unique within all of AWS.
+      BillingTagsSource:
+        $ref: '#/definitions/BillingTagsSource'
       CreatedAt:
         $ref: '#/definitions/__timestampUnix'
         description: 'The time, in Unix epoch format in seconds, when the job got created.'
@@ -3265,6 +3279,12 @@ definitions:
       Mode:
         $ref: '#/definitions/DeinterlacerMode'
     description: Settings for deinterlacer
+  DescribeEndpointsMode:
+    type: string
+    enum:
+      - DEFAULT
+      - GET_ONLY
+    description: 'Optional field, defaults to DEFAULT. Specify DEFAULT for this operation to return your endpoints if any exist, or to create an endpoint for you and return it if one doesn''t already exist. Specify GET_ONLY to return your endpoints if any exist, or an empty list if none exist.'
   __integer:
     type: integer
   __listOfEndpoint:
@@ -3512,7 +3532,7 @@ definitions:
       Url:
         $ref: '#/definitions/__string'
         description: URL of endpoint
-    description: Describes account specific API endpoint
+    description: Describes an account-specific API endpoint.
   F4vMoovPlacement:
     type: string
     enum:
@@ -5520,7 +5540,7 @@ definitions:
     enum:
       - ACTIVE
       - PAUSED
-    description: 'Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue will not begin. Jobs running when a queue is paused continue to run until they finish or error out.'
+    description: 'Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue won''t begin. Jobs running when a queue is paused continue to run until they finish or error out.'
   __integerMin2Max2147483647:
     type: integer
     minimum: 2

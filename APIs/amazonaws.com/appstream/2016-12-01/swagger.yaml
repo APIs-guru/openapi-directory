@@ -832,7 +832,7 @@ paths:
   '/#DescribeImagePermissions':
     post:
       operationId: DescribeImagePermissions
-      description: 'Retrieves a list that describes the permissions for a private image that you own. '
+      description: 'Retrieves a list that describes the permissions for shared AWS account IDs on a private image that you own. '
       responses:
         '200':
           description: Success
@@ -871,7 +871,7 @@ paths:
   '/#DescribeImages':
     post:
       operationId: DescribeImages
-      description: 'Retrieves a list that describes one or more specified images, if the image names are provided. Otherwise, all images in the account are described.'
+      description: 'Retrieves a list that describes one or more specified images, if the image names or image ARNs are provided. Otherwise, all images in the account are described.'
       responses:
         '200':
           description: Success
@@ -1548,42 +1548,12 @@ definitions:
       StackName:
         $ref: '#/definitions/String'
         description: The name of the stack.
-  LimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The requested limit exceeds the permitted limit for an account.
-  InvalidAccountStatusException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The resource cannot be created because your AWS account is suspended. For assistance, contact AWS Support. '
-  ResourceNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified resource was not found.
-  ConcurrentModificationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: An API error occurred. Wait a few minutes and try again.
-  IncompatibleImageException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The image does not support storage connectors.
-  OperationNotPermittedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The attempted operation is not permitted.
+  LimitExceededException: {}
+  InvalidAccountStatusException: {}
+  ResourceNotFoundException: {}
+  ConcurrentModificationException: {}
+  IncompatibleImageException: {}
+  OperationNotPermittedException: {}
   CopyImageResponse:
     type: object
     properties:
@@ -1609,18 +1579,8 @@ definitions:
       DestinationImageDescription:
         $ref: '#/definitions/Description'
         description: The description that the image will have when it is copied to the destination.
-  ResourceAlreadyExistsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified resource already exists.
-  ResourceNotAvailableException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The specified resource exists and is not in use, but isn''t available.'
+  ResourceAlreadyExistsException: {}
+  ResourceNotAvailableException: {}
   CreateDirectoryConfigResult:
     type: object
     properties:
@@ -1695,18 +1655,8 @@ definitions:
       DomainJoinInfo:
         $ref: '#/definitions/DomainJoinInfo'
         description: The information needed to join a Microsoft Active Directory domain.
-  InvalidRoleException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified role is invalid.
-  InvalidParameterCombinationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Indicates an incorrect combination of parameters, or a missing parameter.'
+  InvalidRoleException: {}
+  InvalidParameterCombinationException: {}
   CreateImageBuilderResult:
     type: object
     properties:
@@ -1801,6 +1751,9 @@ definitions:
       UserSettings:
         $ref: '#/definitions/UserSettingList'
         description: 'The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled. '
+      ApplicationSettings:
+        $ref: '#/definitions/ApplicationSettings'
+        description: 'The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.'
   CreateStreamingURLResult:
     type: object
     properties:
@@ -1846,12 +1799,7 @@ definitions:
       DirectoryName:
         $ref: '#/definitions/DirectoryName'
         description: The name of the directory configuration.
-  ResourceInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified resource is in use.
+  ResourceInUseException: {}
   DeleteFleetResult:
     type: object
     properties: {}
@@ -2020,7 +1968,7 @@ definitions:
     properties:
       Names:
         $ref: '#/definitions/StringList'
-        description: The names of the images to describe.
+        description: The names of the public or private images to describe.
       Arns:
         $ref: '#/definitions/ArnList'
         description: 'The ARNs of the public, private, and shared images to describe.'
@@ -2375,6 +2323,9 @@ definitions:
       UserSettings:
         $ref: '#/definitions/UserSettingList'
         description: 'The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled.'
+      ApplicationSettings:
+        $ref: '#/definitions/ApplicationSettings'
+        description: 'The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.'
   AccountName:
     type: string
     minLength: 1
@@ -2431,6 +2382,34 @@ definitions:
         $ref: '#/definitions/Metadata'
         description: Additional attributes that describe the application.
     description: Describes an application in the application catalog.
+  SettingsGroup:
+    type: string
+    maxLength: 100
+  ApplicationSettings:
+    type: object
+    required:
+      - Enabled
+    properties:
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: 'Enables or disables persistent application settings for users during their streaming sessions. '
+      SettingsGroup:
+        $ref: '#/definitions/SettingsGroup'
+        description: 'The path prefix for the S3 bucket where users’ persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack. '
+    description: The persistent application settings for users of a stack.
+  ApplicationSettingsResponse:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether persistent application settings are enabled for users during their streaming sessions.
+      SettingsGroup:
+        $ref: '#/definitions/SettingsGroup'
+        description: The path prefix for the S3 bucket where users’ persistent application settings are stored.
+      S3BucketName:
+        $ref: '#/definitions/String'
+        description: 'The S3 bucket where users’ persistent application settings are stored. When persistent application settings are enabled for the first time for an account in an AWS Region, an S3 bucket is created. The bucket is unique to the AWS account and the Region. '
+    description: Describes the persistent application settings for users of a stack.
   Applications:
     type: array
     items:
@@ -2492,9 +2471,6 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The number of currently available instances that can be used to stream sessions.
     description: Describes the capacity status for a fleet.
-  ErrorMessage:
-    type: string
-    description: The error message in the exception.
   Name:
     type: string
     pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$'
@@ -2738,6 +2714,9 @@ definitions:
       UserSettings:
         $ref: '#/definitions/UserSettingList'
         description: The actions that are enabled or disabled for users during their streaming sessions. By default these actions are enabled.
+      ApplicationSettings:
+        $ref: '#/definitions/ApplicationSettingsResponse'
+        description: The persistent application settings for users of the stack.
     description: Describes a stack.
   StreamingUrlUserId:
     type: string

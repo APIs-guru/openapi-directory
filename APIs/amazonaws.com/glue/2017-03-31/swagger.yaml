@@ -132,6 +132,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '486':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -225,7 +229,7 @@ paths:
   '/#BatchDeleteTable':
     post:
       operationId: BatchDeleteTable
-      description: Deletes multiple tables at once.
+      description: '<p>Deletes multiple tables at once.</p> <note> <p>After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure immediate deletion of all related resources, before calling <code>BatchDeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>'
       responses:
         '200':
           description: Success
@@ -329,6 +333,10 @@ paths:
           description: InternalServiceException
           schema:
             $ref: '#/definitions/InternalServiceException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -444,6 +452,10 @@ paths:
           description: ResourceNumberLimitExceededException
           schema:
             $ref: '#/definitions/ResourceNumberLimitExceededException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -530,6 +542,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '485':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -689,6 +705,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '486':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -742,6 +762,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateSecurityConfiguration':
+    post:
+      operationId: CreateSecurityConfiguration
+      description: Creates a new security configuration.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSecurityConfigurationResponse'
+        '480':
+          description: AlreadyExistsException
+          schema:
+            $ref: '#/definitions/AlreadyExistsException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+        '484':
+          description: ResourceNumberLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceNumberLimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSecurityConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateTable':
     post:
       operationId: CreateTable
@@ -775,6 +840,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '486':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -877,6 +946,10 @@ paths:
           description: ResourceNumberLimitExceededException
           schema:
             $ref: '#/definitions/ResourceNumberLimitExceededException'
+        '486':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -1003,7 +1076,7 @@ paths:
   '/#DeleteDatabase':
     post:
       operationId: DeleteDatabase
-      description: Removes a specified Database from a Data Catalog.
+      description: '<p>Removes a specified Database from a Data Catalog.</p> <note> <p>After completing this operation, you will no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure immediate deletion of all related resources, before calling <code>DeleteDatabase</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, <code>DeletePartition</code> or <code>BatchDeletePartition</code>, <code>DeleteUserDefinedFunction</code>, and <code>DeleteTable</code> or <code>BatchDeleteTable</code>, to delete any resources that belong to the database.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1160,10 +1233,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteSecurityConfiguration':
+    post:
+      operationId: DeleteSecurityConfiguration
+      description: Deletes a specified security configuration.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSecurityConfigurationResponse'
+        '480':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSecurityConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteTable':
     post:
       operationId: DeleteTable
-      description: Removes a table definition from the Data Catalog.
+      description: '<p>Removes a table definition from the Data Catalog.</p> <note> <p>After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure immediate deletion of all related resources, before calling <code>DeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1446,6 +1560,14 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '482':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '483':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -1479,6 +1601,14 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '482':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '483':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -1641,6 +1771,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -1678,6 +1812,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '483':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -2083,6 +2221,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -2124,6 +2266,10 @@ paths:
           description: InternalServiceException
           schema:
             $ref: '#/definitions/InternalServiceException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -2187,6 +2333,88 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetSecurityConfiguration':
+    post:
+      operationId: GetSecurityConfiguration
+      description: Retrieves a specified security configuration.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSecurityConfigurationResponse'
+        '480':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSecurityConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetSecurityConfigurations':
+    post:
+      operationId: GetSecurityConfigurations
+      description: Retrieves a list of all security configurations.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSecurityConfigurationsResponse'
+        '480':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSecurityConfigurationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetTable':
     post:
       operationId: GetTable
@@ -2212,6 +2440,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -2253,6 +2485,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -2294,6 +2530,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -2345,6 +2585,10 @@ paths:
           description: InternalServiceException
           schema:
             $ref: '#/definitions/InternalServiceException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -2488,6 +2732,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -2529,6 +2777,10 @@ paths:
           description: InternalServiceException
           schema:
             $ref: '#/definitions/InternalServiceException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -2578,6 +2830,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ImportCatalogToGlueRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutDataCatalogEncryptionSettings':
+    post:
+      operationId: PutDataCatalogEncryptionSettings
+      description: 'Sets the security configuration for a specified catalog. Once the configuration has been set, the specified encryption is applied to every catalog write thereafter.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutDataCatalogEncryptionSettingsResponse'
+        '480':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutDataCatalogEncryptionSettingsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2998,6 +3287,14 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -3129,6 +3426,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -3260,6 +3561,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -3309,6 +3614,10 @@ paths:
           description: ResourceNumberLimitExceededException
           schema:
             $ref: '#/definitions/ResourceNumberLimitExceededException'
+        '486':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -3395,6 +3704,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          schema:
+            $ref: '#/definitions/GlueEncryptionException'
       parameters:
         - name: body
           in: body
@@ -3437,48 +3750,13 @@ definitions:
       PartitionInputList:
         $ref: '#/definitions/PartitionInputList'
         description: A list of <code>PartitionInput</code> structures that define the partitions to be created.
-  InvalidInputException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: The input provided was not valid.
-  AlreadyExistsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: A resource to be created or added already exists.
-  ResourceNumberLimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: A resource numerical limit was exceeded.
-  InternalServiceException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: An internal service error occurred.
-  EntityNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: A specified entity does not exist
-  OperationTimeoutException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: The operation timed out.
+  InvalidInputException: {}
+  AlreadyExistsException: {}
+  ResourceNumberLimitExceededException: {}
+  InternalServiceException: {}
+  EntityNotFoundException: {}
+  OperationTimeoutException: {}
+  GlueEncryptionException: {}
   BatchDeleteConnectionResponse:
     type: object
     properties:
@@ -3688,7 +3966,10 @@ definitions:
         description: Policy for the crawler's update and deletion behavior.
       Configuration:
         $ref: '#/definitions/CrawlerConfiguration'
-        description: 'Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
+        description: '<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler''s behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>''{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }''</code> </p>'
+      CrawlerSecurityConfiguration:
+        $ref: '#/definitions/CrawlerSecurityConfiguration'
+        description: The name of the SecurityConfiguration structure to be used by this Crawler.
   CreateDatabaseResponse:
     type: object
     properties: {}
@@ -3745,6 +4026,9 @@ definitions:
       FailureReason:
         $ref: '#/definitions/GenericString'
         description: The reason for a current failure in this DevEndpoint.
+      SecurityConfiguration:
+        $ref: '#/definitions/NameString'
+        description: The name of the SecurityConfiguration structure being used with this DevEndpoint.
       CreatedTimestamp:
         $ref: '#/definitions/TimestampValue'
         description: The point in time at which this DevEndpoint was created.
@@ -3781,27 +4065,12 @@ definitions:
       ExtraJarsS3Path:
         $ref: '#/definitions/GenericString'
         description: Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.
-  AccessDeniedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: Access to a resource was denied.
-  IdempotentParameterMismatchException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: The same unique identifier was associated with two different records.
-  ValidationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: A value could not be validated.
+      SecurityConfiguration:
+        $ref: '#/definitions/NameString'
+        description: The name of the SecurityConfiguration structure to be used with this DevEndpoint.
+  AccessDeniedException: {}
+  IdempotentParameterMismatchException: {}
+  ValidationException: {}
   CreateJobResponse:
     type: object
     properties:
@@ -3847,17 +4116,14 @@ definitions:
         description: 'The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.'
       Timeout:
         $ref: '#/definitions/Timeout'
-        description: The job timeout in minutes. The default is 2880 minutes (48 hours).
+        description: 'The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).'
       NotificationProperty:
         $ref: '#/definitions/NotificationProperty'
         description: Specifies configuration properties of a job notification.
-  ConcurrentModificationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: Two processes are trying to modify a resource simultaneously.
+      SecurityConfiguration:
+        $ref: '#/definitions/NameString'
+        description: The name of the SecurityConfiguration structure to be used with this job.
+  ConcurrentModificationException: {}
   CreatePartitionResponse:
     type: object
     properties: {}
@@ -3901,6 +4167,27 @@ definitions:
       Language:
         $ref: '#/definitions/Language'
         description: The programming language of the resulting code from the DAG.
+  CreateSecurityConfigurationResponse:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name assigned to the new security configuration.
+      CreatedTimestamp:
+        $ref: '#/definitions/TimestampValue'
+        description: The time at which the new security configuration was created.
+  CreateSecurityConfigurationRequest:
+    type: object
+    required:
+      - Name
+      - EncryptionConfiguration
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name for the new security configuration.
+      EncryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: The encryption configuration for the new security configuration.
   CreateTableResponse:
     type: object
     properties: {}
@@ -4007,20 +4294,8 @@ definitions:
       Name:
         $ref: '#/definitions/NameString'
         description: Name of the crawler to remove.
-  CrawlerRunningException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: The operation cannot be performed because the crawler is already running.
-  SchedulerTransitioningException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: The specified scheduler is transitioning.
+  CrawlerRunningException: {}
+  SchedulerTransitioningException: {}
   DeleteDatabaseResponse:
     type: object
     properties: {}
@@ -4082,6 +4357,17 @@ definitions:
       PartitionValues:
         $ref: '#/definitions/ValueStringList'
         description: The values that define the partition.
+  DeleteSecurityConfigurationResponse:
+    type: object
+    properties: {}
+  DeleteSecurityConfigurationRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the security configuration to delete.
   DeleteTableResponse:
     type: object
     properties: {}
@@ -4568,6 +4854,38 @@ definitions:
       Language:
         $ref: '#/definitions/Language'
         description: The programming language of the code to perform the mapping.
+  GetSecurityConfigurationResponse:
+    type: object
+    properties:
+      SecurityConfiguration:
+        $ref: '#/definitions/SecurityConfiguration'
+        description: The requested security configuration
+  GetSecurityConfigurationRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the security configuration to retrieve.
+  GetSecurityConfigurationsResponse:
+    type: object
+    properties:
+      SecurityConfigurations:
+        $ref: '#/definitions/SecurityConfigurationList'
+        description: A list of security configurations.
+      NextToken:
+        $ref: '#/definitions/GenericString'
+        description: 'A continuation token, if there are more security configurations to return.'
+  GetSecurityConfigurationsRequest:
+    type: object
+    properties:
+      MaxResults:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of results to return.
+      NextToken:
+        $ref: '#/definitions/GenericString'
+        description: 'A continuation token, if this is a continuation call.'
   GetTableResponse:
     type: object
     properties:
@@ -4767,6 +5085,20 @@ definitions:
       CatalogId:
         $ref: '#/definitions/CatalogIdString'
         description: 'The ID of the catalog to import. Currently, this should be the AWS account ID.'
+  PutDataCatalogEncryptionSettingsResponse:
+    type: object
+    properties: {}
+  PutDataCatalogEncryptionSettingsRequest:
+    type: object
+    required:
+      - DataCatalogEncryptionSettings
+    properties:
+      CatalogId:
+        $ref: '#/definitions/CatalogIdString'
+        description: 'The ID of the Data Catalog for which to set the security configuration. If none is supplied, the AWS account ID is used by default.'
+      DataCatalogEncryptionSettings:
+        $ref: '#/definitions/DataCatalogEncryptionSettings'
+        description: The security configuration to set.
   ResetJobBookmarkResponse:
     type: object
     properties:
@@ -4803,20 +5135,8 @@ definitions:
       CrawlerName:
         $ref: '#/definitions/NameString'
         description: Name of the crawler to schedule.
-  SchedulerRunningException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: The specified scheduler is already running.
-  NoScheduleException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: There is no applicable schedule.
+  SchedulerRunningException: {}
+  NoScheduleException: {}
   StartJobRunResponse:
     type: object
     properties:
@@ -4842,17 +5162,14 @@ definitions:
         description: 'The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.'
       Timeout:
         $ref: '#/definitions/Timeout'
-        description: The job run timeout in minutes. It overrides the timeout value of the job.
+        description: 'The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.'
       NotificationProperty:
         $ref: '#/definitions/NotificationProperty'
         description: Specifies configuration properties of a job run notification.
-  ConcurrentRunsExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: Too many jobs are being run concurrently.
+      SecurityConfiguration:
+        $ref: '#/definitions/NameString'
+        description: The name of the SecurityConfiguration structure to be used with this job run.
+  ConcurrentRunsExceededException: {}
   StartTriggerResponse:
     type: object
     properties:
@@ -4878,20 +5195,8 @@ definitions:
       Name:
         $ref: '#/definitions/NameString'
         description: Name of the crawler to stop.
-  CrawlerNotRunningException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: The specified crawler is not running.
-  CrawlerStoppingException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: The specified crawler is stopping.
+  CrawlerNotRunningException: {}
+  CrawlerStoppingException: {}
   StopCrawlerScheduleResponse:
     type: object
     properties: {}
@@ -4903,13 +5208,7 @@ definitions:
       CrawlerName:
         $ref: '#/definitions/NameString'
         description: Name of the crawler whose schedule state to set.
-  SchedulerNotRunningException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: The specified scheduler is not running.
+  SchedulerNotRunningException: {}
   StopTriggerResponse:
     type: object
     properties:
@@ -4939,13 +5238,7 @@ definitions:
       JsonClassifier:
         $ref: '#/definitions/UpdateJsonClassifierRequest'
         description: A <code>JsonClassifier</code> object with updated fields.
-  VersionMismatchException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/MessageString'
-        description: A message describing the problem.
-    description: There was a version conflict.
+  VersionMismatchException: {}
   UpdateConnectionResponse:
     type: object
     properties: {}
@@ -5001,7 +5294,10 @@ definitions:
         description: Policy for the crawler's update and deletion behavior.
       Configuration:
         $ref: '#/definitions/CrawlerConfiguration'
-        description: 'Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
+        description: '<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler''s behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>''{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }''</code> </p>'
+      CrawlerSecurityConfiguration:
+        $ref: '#/definitions/CrawlerSecurityConfiguration'
+        description: The name of the SecurityConfiguration structure to be used by this Crawler.
   UpdateCrawlerScheduleResponse:
     type: object
     properties: {}
@@ -5053,7 +5349,7 @@ definitions:
         description: The list of public keys for the DevEndpoint to use.
       DeletePublicKeys:
         $ref: '#/definitions/PublicKeysList'
-        description: 'The list of public keys to be deleted from the DevEndpoint. '
+        description: The list of public keys to be deleted from the DevEndpoint.
       CustomLibraries:
         $ref: '#/definitions/DevEndpointCustomLibraries'
         description: Custom Python or Java libraries to be loaded in the DevEndpoint.
@@ -5165,8 +5461,6 @@ definitions:
       FunctionInput:
         $ref: '#/definitions/UserDefinedFunctionInput'
         description: A <code>FunctionInput</code> object that re-defines the function in the Data Catalog.
-  MessageString:
-    type: string
   NameString:
     type: string
     minLength: 1
@@ -5199,13 +5493,16 @@ definitions:
         description: The name of a job to be executed.
       Arguments:
         $ref: '#/definitions/GenericMap'
-        description: '<p>Arguments to be passed to the job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+        description: '<p>Arguments to be passed to the job run.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
       Timeout:
         $ref: '#/definitions/Timeout'
-        description: The job run timeout in minutes. It overrides the timeout value of the job.
+        description: 'The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.'
       NotificationProperty:
         $ref: '#/definitions/NotificationProperty'
         description: Specifies configuration properties of a job run notification.
+      SecurityConfiguration:
+        $ref: '#/definitions/NameString'
+        description: The name of the SecurityConfiguration structure to be used with this action.
     description: Defines an action to be initiated by a trigger.
   ActionList:
     type: array
@@ -5364,6 +5661,11 @@ definitions:
       $ref: '#/definitions/ValueString'
     minItems: 0
     maxItems: 100
+  CatalogEncryptionMode:
+    type: string
+    enum:
+      - DISABLED
+      - SSE-KMS
   CatalogEntry:
     type: object
     required:
@@ -5496,6 +5798,24 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/NameString'
+  CloudWatchEncryptionMode:
+    type: string
+    enum:
+      - DISABLED
+      - SSE-KMS
+  KmsKeyArn:
+    type: string
+    pattern: 'arn:aws:kms:.*'
+  CloudWatchEncryption:
+    type: object
+    properties:
+      CloudWatchEncryptionMode:
+        $ref: '#/definitions/CloudWatchEncryptionMode'
+        description: The encryption mode to use for CloudWatch data.
+      KmsKeyArn:
+        $ref: '#/definitions/KmsKeyArn'
+        description: The AWS ARN of the KMS key to be used to encrypt the data.
+    description: Specifies how CloudWatch data should be encrypted.
   CodeGenArgName:
     type: string
   CodeGenArgValue:
@@ -5671,7 +5991,7 @@ definitions:
         description: The security group ID list used by the connection.
       AvailabilityZone:
         $ref: '#/definitions/NameString'
-        description: The connection's availability zone. This field is deprecated and has no effect.
+        description: 'The connection''s availability zone. This field is redundant, since the specified subnet implies the availability zone to be used. The field must be populated now, but will be deprecated in the future.'
     description: Specifies the physical requirements for a connection.
   Connection:
     type: object
@@ -5690,7 +6010,7 @@ definitions:
         description: A list of criteria that can be used in selecting this connection.
       ConnectionProperties:
         $ref: '#/definitions/ConnectionProperties'
-        description: A list of key-value pairs used as parameters for this connection.
+        description: '<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database.</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The S3 path of the a jar file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use).</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for the JDBC connection.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether SSL with hostname matching will be enforced for the JDBC connection on the client. The default is false.</p> </li> </ul>'
       PhysicalConnectionRequirements:
         $ref: '#/definitions/PhysicalConnectionRequirements'
         description: 'A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.'
@@ -5725,7 +6045,7 @@ definitions:
         description: A list of criteria that can be used in selecting this connection.
       ConnectionProperties:
         $ref: '#/definitions/ConnectionProperties'
-        description: A list of key-value pairs used as parameters for this connection.
+        description: These key-value pairs define parameters for the connection.
       PhysicalConnectionRequirements:
         $ref: '#/definitions/PhysicalConnectionRequirements'
         description: 'A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.'
@@ -5750,6 +6070,7 @@ definitions:
       - CONFIG_FILES
       - INSTANCE_ID
       - JDBC_CONNECTION_URL
+      - JDBC_ENFORCE_SSL
   StringList:
     type: array
     items:
@@ -5836,6 +6157,10 @@ definitions:
     type: integer
   CrawlerConfiguration:
     type: string
+  CrawlerSecurityConfiguration:
+    type: string
+    minLength: 0
+    maxLength: 128
   Crawler:
     type: object
     properties:
@@ -5886,7 +6211,10 @@ definitions:
         description: The version of the crawler.
       Configuration:
         $ref: '#/definitions/CrawlerConfiguration'
-        description: 'Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
+        description: '<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler''s behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>''{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }''</code> </p>'
+      CrawlerSecurityConfiguration:
+        $ref: '#/definitions/CrawlerSecurityConfiguration'
+        description: The name of the SecurityConfiguration structure to be used by this Crawler.
     description: 'Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metadata concerning the data source in the AWS Glue Data Catalog.'
   CrawlerList:
     type: array
@@ -6016,7 +6344,7 @@ definitions:
         description: 'The location of the database (for example, an HDFS path).'
       Parameters:
         $ref: '#/definitions/ParametersMap'
-        description: A list of key-value pairs that define parameters and properties of the database.
+        description: Thes key-value pairs define parameters and properties of the database.
     description: The structure used to create or update a database.
   GenericString:
     type: string
@@ -6082,7 +6410,7 @@ definitions:
         description: Provides information about the physical location where the partition is stored.
       Parameters:
         $ref: '#/definitions/ParametersMap'
-        description: 'Partition parameters, in the form of a list of key-value pairs.'
+        description: These key-value pairs define partition parameters.
       LastAnalyzedTime:
         $ref: '#/definitions/Timestamp'
         description: The last time at which column statistics were computed for this partition.
@@ -6104,6 +6432,19 @@ definitions:
     type: string
   ScalaCode:
     type: string
+  EncryptionConfiguration:
+    type: object
+    properties:
+      S3Encryption:
+        $ref: '#/definitions/S3EncryptionList'
+        description: The encryption configuration for S3 data.
+      CloudWatchEncryption:
+        $ref: '#/definitions/CloudWatchEncryption'
+        description: The encryption configuration for CloudWatch.
+      JobBookmarksEncryption:
+        $ref: '#/definitions/JobBookmarksEncryption'
+        description: The encryption configuration for Job Bookmarks.
+    description: Specifies an encryption configuration.
   TableInput:
     type: object
     required:
@@ -6144,7 +6485,7 @@ definitions:
         description: 'The type of this table (<code>EXTERNAL_TABLE</code>, <code>VIRTUAL_VIEW</code>, etc.).'
       Parameters:
         $ref: '#/definitions/ParametersMap'
-        description: 'Properties associated with this table, as a list of key-value pairs.'
+        description: These key-value pairs define properties associated with the table.
     description: Structure used to create or update the table.
   TriggerType:
     type: string
@@ -6183,6 +6524,25 @@ definitions:
     description: A structure used to create or updata a user-defined function.
   RowTag:
     type: string
+  EncryptionAtRest:
+    type: object
+    required:
+      - CatalogEncryptionMode
+    properties:
+      CatalogEncryptionMode:
+        $ref: '#/definitions/CatalogEncryptionMode'
+        description: The encryption-at-rest mode for encrypting Data Catalog data.
+      SseAwsKmsKeyId:
+        $ref: '#/definitions/NameString'
+        description: The ID of the AWS KMS key to use for encryption at rest.
+    description: Specifies encryption-at-rest configuration for the Data Catalog.
+  DataCatalogEncryptionSettings:
+    type: object
+    properties:
+      EncryptionAtRest:
+        $ref: '#/definitions/EncryptionAtRest'
+        description: Specifies encryption-at-rest configuration for the Data Catalog.
+    description: Contains configuration information for maintaining Data Catalog security.
   URI:
     type: string
     minLength: 1
@@ -6213,7 +6573,7 @@ definitions:
         description: 'The location of the database (for example, an HDFS path).'
       Parameters:
         $ref: '#/definitions/ParametersMap'
-        description: A list of key-value pairs that define parameters and properties of the database.
+        description: These key-value pairs define parameters and properties of the database.
       CreateTime:
         $ref: '#/definitions/Timestamp'
         description: The time at which the metadata database was created in the catalog.
@@ -6300,6 +6660,9 @@ definitions:
       PublicKeys:
         $ref: '#/definitions/PublicKeysList'
         description: '<p>A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.</p> <note> <p>If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the <code>UpdateDevEndpoint</code> API with the public key content in the <code>deletePublicKeys</code> attribute, and the list of new keys in the <code>addPublicKeys</code> attribute.</p> </note>'
+      SecurityConfiguration:
+        $ref: '#/definitions/NameString'
+        description: The name of the SecurityConfiguration structure to be used with this DevEndpoint.
     description: A development endpoint where a developer can remotely debug ETL scripts.
   DevEndpointCustomLibraries:
     type: object
@@ -6324,6 +6687,20 @@ definitions:
         $ref: '#/definitions/Path'
         description: The name of the DynamoDB table to crawl.
     description: Specifies a DynamoDB table to crawl.
+  S3EncryptionList:
+    type: array
+    items:
+      $ref: '#/definitions/S3Encryption'
+  JobBookmarksEncryption:
+    type: object
+    properties:
+      JobBookmarksEncryptionMode:
+        $ref: '#/definitions/JobBookmarksEncryptionMode'
+        description: The encryption mode to use for Job bookmarks data.
+      KmsKeyArn:
+        $ref: '#/definitions/KmsKeyArn'
+        description: The AWS ARN of the KMS key to be used to encrypt the data.
+    description: Specifies how Job bookmark data should be encrypted.
   ErrorString:
     type: string
   MaxConcurrentRuns:
@@ -6398,10 +6775,13 @@ definitions:
         description: 'The number of AWS Glue data processing units (DPUs) allocated to runs of this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.'
       Timeout:
         $ref: '#/definitions/Timeout'
-        description: The job timeout in minutes.
+        description: 'The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).'
       NotificationProperty:
         $ref: '#/definitions/NotificationProperty'
         description: Specifies configuration properties of a job notification.
+      SecurityConfiguration:
+        $ref: '#/definitions/NameString'
+        description: The name of the SecurityConfiguration structure to be used with this job.
     description: Specifies a job definition.
   JobRun:
     type: object
@@ -6450,10 +6830,16 @@ definitions:
         description: The amount of time (in seconds) that the job run consumed resources.
       Timeout:
         $ref: '#/definitions/Timeout'
-        description: The job run timeout in minutes.
+        description: 'The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.'
       NotificationProperty:
         $ref: '#/definitions/NotificationProperty'
         description: Specifies configuration properties of a job run notification.
+      SecurityConfiguration:
+        $ref: '#/definitions/NameString'
+        description: The name of the SecurityConfiguration structure to be used with this job run.
+      LogGroupName:
+        $ref: '#/definitions/GenericString'
+        description: 'The name of the log group for secure logging, that can be server-side encrypted in CloudWatch using KMS. This name can be <code>/aws-glue/jobs/</code>, in which case the default encryption is <code>NONE</code>. If you add a role name and SecurityConfiguration name (in other words, <code>/aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/</code>), then that security configuration will be used to encrypt the log group.'
     description: Contains information about a job run.
   JobRunList:
     type: array
@@ -6503,7 +6889,7 @@ definitions:
         description: Provides information about the physical location where the partition is stored.
       Parameters:
         $ref: '#/definitions/ParametersMap'
-        description: 'Partition parameters, in the form of a list of key-value pairs.'
+        description: These key-value pairs define partition parameters.
       LastAnalyzedTime:
         $ref: '#/definitions/Timestamp'
         description: The last time at which column statistics were computed for this partition.
@@ -6526,6 +6912,23 @@ definitions:
         $ref: '#/definitions/TotalSegmentsInteger'
         description: The total numer of segments.
     description: 'Defines a non-overlapping region of a table''s partitions, allowing multiple requests to be executed in parallel.'
+  SecurityConfiguration:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the security configuration.
+      CreatedTimeStamp:
+        $ref: '#/definitions/TimestampValue'
+        description: The time at which this security configuration was created.
+      EncryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: The encryption configuration associated with this security configuration.
+    description: Specifies a security configuration.
+  SecurityConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityConfiguration'
   Table:
     type: object
     required:
@@ -6575,7 +6978,7 @@ definitions:
         description: 'The type of this table (<code>EXTERNAL_TABLE</code>, <code>VIRTUAL_VIEW</code>, etc.).'
       Parameters:
         $ref: '#/definitions/ParametersMap'
-        description: 'Properties associated with this table, as a list of key-value pairs.'
+        description: These key-value pairs define properties associated with the table.
       CreatedBy:
         $ref: '#/definitions/NameString'
         description: Person or entity who created the table.
@@ -6700,6 +7103,11 @@ definitions:
         $ref: '#/definitions/JsonValue'
         description: The bookmark itself.
     description: Defines a point which a job can resume processing.
+  JobBookmarksEncryptionMode:
+    type: string
+    enum:
+      - DISABLED
+      - CSE-KMS
   ScriptLocationString:
     type: string
   PredecessorList:
@@ -6738,10 +7146,13 @@ definitions:
         description: 'The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.'
       Timeout:
         $ref: '#/definitions/Timeout'
-        description: The job timeout in minutes. The default is 2880 minutes (48 hours).
+        description: 'The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).'
       NotificationProperty:
         $ref: '#/definitions/NotificationProperty'
         description: Specifies configuration properties of a job notification.
+      SecurityConfiguration:
+        $ref: '#/definitions/NameString'
+        description: The name of the SecurityConfiguration structure to be used with this job.
     description: Specifies information used to update an existing job definition. Note that the previous job definition will be completely overwritten by this information.
   KeyString:
     type: string
@@ -6930,6 +7341,22 @@ definitions:
       $ref: '#/definitions/ResourceUri'
     minItems: 0
     maxItems: 1000
+  S3EncryptionMode:
+    type: string
+    enum:
+      - DISABLED
+      - SSE-KMS
+      - SSE-S3
+  S3Encryption:
+    type: object
+    properties:
+      S3EncryptionMode:
+        $ref: '#/definitions/S3EncryptionMode'
+        description: The encryption mode to use for S3 data.
+      KmsKeyArn:
+        $ref: '#/definitions/KmsKeyArn'
+        description: The AWS ARN of the KMS key to be used to encrypt the data.
+    description: Specifies how S3 data should be encrypted.
   S3Target:
     type: object
     properties:
@@ -6966,7 +7393,7 @@ definitions:
         description: 'Usually the class that implements the SerDe. An example is: <code>org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe</code>.'
       Parameters:
         $ref: '#/definitions/ParametersMap'
-        description: 'A list of initialization parameters for the SerDe, in key-value form.'
+        description: These key-value pairs define initialization parameters for the SerDe.
     description: Information about a serialization/deserialization program (SerDe) which serves as an extractor and loader.
   SkewedInfo:
     type: object
