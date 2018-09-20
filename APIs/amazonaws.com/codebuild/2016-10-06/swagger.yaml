@@ -898,6 +898,9 @@ definitions:
       badgeEnabled:
         $ref: '#/definitions/WrapperBoolean'
         description: Set this to true to generate a publicly-accessible URL for your project's build badge.
+      logsConfig:
+        $ref: '#/definitions/LogsConfig'
+        description: ' Information about logs for the build project. Logs can be Amazon CloudWatch Logs, uploaded to a specified S3 bucket, or both. '
   ResourceAlreadyExistsException: {}
   AccountLimitExceededException: {}
   CreateWebhookOutput:
@@ -1057,7 +1060,7 @@ definitions:
         description: 'A set of environment variables that overrides, for this build only, the latest ones already defined in the build project.'
       sourceTypeOverride:
         $ref: '#/definitions/SourceType'
-        description: A source input type for this build that overrides the source input defined in the build project
+        description: A source input type for this build that overrides the source input defined in the build project.
       sourceLocationOverride:
         $ref: '#/definitions/String'
         description: A location that overrides for this build the source location for the one defined in the build project.
@@ -1100,6 +1103,9 @@ definitions:
       timeoutInMinutesOverride:
         $ref: '#/definitions/TimeOut'
         description: 'The number of build timeout minutes, from 5 to 480 (8 hours), that overrides, for this build only, the latest setting already defined in the build project.'
+      logsConfigOverride:
+        $ref: '#/definitions/LogsConfig'
+        description: ' Log settings for this build that override the log settings defined in the build project. '
   StopBuildOutput:
     type: object
     properties:
@@ -1167,6 +1173,9 @@ definitions:
       badgeEnabled:
         $ref: '#/definitions/WrapperBoolean'
         description: Set this to true to generate a publicly-accessible URL for your project's build badge.
+      logsConfig:
+        $ref: '#/definitions/LogsConfig'
+        description: ' Information about logs for the build project. A project can create Amazon CloudWatch Logs, logs in an S3 bucket, or both. '
   UpdateWebhookOutput:
     type: object
     properties:
@@ -1257,7 +1266,7 @@ definitions:
     properties:
       type:
         $ref: '#/definitions/SourceType'
-        description: '<p>The type of repository that contains the source code to be built. Valid values include:</p> <ul> <li> <p> <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code>: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.</p> </li> <li> <p> <code>GITHUB</code>: The source code is in a GitHub repository.</p> </li> <li> <p> <code>S3</code>: The source code is in an Amazon Simple Storage Service (Amazon S3) input bucket.</p> </li> </ul>'
+        description: '<p>The type of repository that contains the source code to be built. Valid values include:</p> <ul> <li> <p> <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code>: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.</p> </li> <li> <p> <code>GITHUB</code>: The source code is in a GitHub repository.</p> </li> <li> <p> <code>NO_SOURCE</code>: The project does not have input source code.</p> </li> <li> <p> <code>S3</code>: The source code is in an Amazon Simple Storage Service (Amazon S3) input bucket.</p> </li> </ul>'
       location:
         $ref: '#/definitions/String'
         description: '<p>Information about the location of the source code to be built. Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, <code>location</code> should not be specified. If it is specified, AWS CodePipeline will ignore it. This is because AWS CodePipeline uses the settings in a pipeline''s source action instead of this value.</p> </li> <li> <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec (for example, <code>https://git-codecommit.<i>region-ID</i>.amazonaws.com/v1/repos/<i>repo-name</i> </code>).</p> </li> <li> <p>For source code in an Amazon Simple Storage Service (Amazon S3) input bucket, the path to the ZIP file that contains the source code (for example, <code> <i>bucket-name</i>/<i>path</i>/<i>to</i>/<i>object-name</i>.zip</code>)</p> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec. Also, you must connect your AWS account to your GitHub account. To do this, use the AWS CodeBuild console to begin creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub <b>Authorize application</b> page that displays, for <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to allow AWS CodeBuild to have access to. Then choose <b>Authorize application</b>. (After you have connected to your GitHub account, you do not need to finish creating the build project, and you may then leave the AWS CodeBuild console.) To instruct AWS CodeBuild to then use this connection, in the <code>source</code> object, set the <code>auth</code> object''s <code>type</code> value to <code>OAUTH</code>.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the build spec. Also, you must connect your AWS account to your Bitbucket account. To do this, use the AWS CodeBuild console to begin creating a build project. When you use the console to connect (or reconnect) with Bitbucket, on the Bitbucket <b>Confirm access to your account</b> page that displays, choose <b>Grant access</b>. (After you have connected to your Bitbucket account, you do not need to finish creating the build project, and you may then leave the AWS CodeBuild console.) To instruct AWS CodeBuild to then use this connection, in the <code>source</code> object, set the <code>auth</code> object''s <code>type</code> value to <code>OAUTH</code>.</p> </li> </ul>'
@@ -1370,6 +1379,15 @@ definitions:
       deepLink:
         $ref: '#/definitions/String'
         description: The URL to an individual build log in Amazon CloudWatch Logs.
+      s3DeepLink:
+        $ref: '#/definitions/String'
+        description: ' The URL to an individual build log in an S3 bucket. '
+      cloudWatchLogs:
+        $ref: '#/definitions/CloudWatchLogsConfig'
+        description: ' Information about Amazon CloudWatch Logs for a build project. '
+      s3Logs:
+        $ref: '#/definitions/S3LogsConfig'
+        description: ' Information about S3 logs for a build project. '
     description: Information about build logs in Amazon CloudWatch Logs.
   WrapperInt:
     type: integer
@@ -1530,6 +1548,26 @@ definitions:
     enum:
       - NO_CACHE
       - S3
+  LogsConfigStatusType:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+  CloudWatchLogsConfig:
+    type: object
+    required:
+      - status
+    properties:
+      status:
+        $ref: '#/definitions/LogsConfigStatusType'
+        description: '<p>The current status of the Amazon CloudWatch Logs for a build project. Valid values are:</p> <ul> <li> <p> <code>ENABLED</code>: Amazon CloudWatch Logs are enabled for this build project.</p> </li> <li> <p> <code>DISABLED</code>: Amazon CloudWatch Logs are not enabled for this build project.</p> </li> </ul>'
+      groupName:
+        $ref: '#/definitions/String'
+        description: ' The group name of the Amazon CloudWatch Logs. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html">Working with Log Groups and Log Streams</a> '
+      streamName:
+        $ref: '#/definitions/String'
+        description: ' The prefix of the stream name of the Amazon CloudWatch Logs. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html">Working with Log Groups and Log Streams</a> '
+    description: ' Information about Amazon CloudWatch Logs for a build project. '
   ComputeType:
     type: string
     enum:
@@ -1594,6 +1632,16 @@ definitions:
       $ref: '#/definitions/Tag'
     minItems: 0
     maxItems: 50
+  LogsConfig:
+    type: object
+    properties:
+      cloudWatchLogs:
+        $ref: '#/definitions/CloudWatchLogsConfig'
+        description: ' Information about Amazon CloudWatch Logs for a build project. Amazon CloudWatch Logs are enabled by default. '
+      s3Logs:
+        $ref: '#/definitions/S3LogsConfig'
+        description: ' Information about logs built to an S3 bucket for a build project. S3 logs are not enabled by default. '
+    description: ' Information about logs for a build project. Logs can be Amazon CloudWatch Logs, built in a specified S3 bucket, or both. '
   Project:
     type: object
     properties:
@@ -1651,6 +1699,9 @@ definitions:
       badge:
         $ref: '#/definitions/ProjectBadge'
         description: Information about the build badge for the build project.
+      logsConfig:
+        $ref: '#/definitions/LogsConfig'
+        description: ' Information about logs for the build project. A project can create Amazon CloudWatch Logs, logs in an S3 bucket, or both. '
     description: Information about a build project.
   Webhook:
     type: object
@@ -1788,6 +1839,18 @@ definitions:
       - NAME
       - CREATED_TIME
       - LAST_MODIFIED_TIME
+  S3LogsConfig:
+    type: object
+    required:
+      - status
+    properties:
+      status:
+        $ref: '#/definitions/LogsConfigStatusType'
+        description: '<p>The current status of the S3 build logs. Valid values are:</p> <ul> <li> <p> <code>ENABLED</code>: S3 build logs are enabled for this build project.</p> </li> <li> <p> <code>DISABLED</code>: S3 build logs are not enabled for this build project.</p> </li> </ul>'
+      location:
+        $ref: '#/definitions/String'
+        description: ' The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3 bucket name is <code>my-bucket</code>, and your path prefix is <code>build-log</code>, then acceptable formats are <code>my-bucket/build-log</code> or <code>aws:s3:::my-bucket/build-log</code>. '
+    description: ' Information about S3 logs for a build project. '
   PhaseContext:
     type: object
     properties:

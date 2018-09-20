@@ -3,7 +3,7 @@ info:
   version: '2016-11-01'
   x-release: v4
   title: AWS OpsWorks for Chef Automate
-  description: '<fullname>AWS OpsWorks CM</fullname> <p> AWS OpsWorks for configuration management (CM) is a service that runs and manages configuration management servers. </p> <p> <b>Glossary of terms</b> </p> <ul> <li> <p> <b>Server</b>: A configuration management server that can be highly-available. The configuration management server runs on an Amazon Elastic Compute Cloud (EC2) instance, and may use various other AWS services, such as Amazon Relational Database Service (RDS) and Elastic Load Balancing. A server is a generic abstraction over the configuration manager that you want to use, much like Amazon RDS. In AWS OpsWorks CM, you do not start or stop servers. After you create servers, they continue to run until they are deleted.</p> </li> <li> <p> <b>Engine</b>: The engine is the specific configuration manager that you want to use. Valid values in this release include <code>Chef</code> and <code>Puppet</code>.</p> </li> <li> <p> <b>Backup</b>: This is an application-level backup of the data that the configuration manager stores. AWS OpsWorks CM creates an S3 bucket for backups when you launch the first server. A backup maintains a snapshot of a server''s configuration-related attributes at the time the backup starts.</p> </li> <li> <p> <b>Events</b>: Events are always related to a server. Events are written during server creation, when health checks run, when backups are created, when system maintenance is performed, etc. When you delete a server, the server''s events are also deleted.</p> </li> <li> <p> <b>Account attributes</b>: Every account has attributes that are assigned in the AWS OpsWorks CM database. These attributes store information about configuration limits (servers, backups, etc.) and your customer account. </p> </li> </ul> <p> <b>Endpoints</b> </p> <p>AWS OpsWorks CM supports the following endpoints, all HTTPS. You must connect to one of the following endpoints. Your servers can only be accessed or managed within the endpoint in which they are created.</p> <ul> <li> <p>opsworks-cm.us-east-1.amazonaws.com</p> </li> <li> <p>opsworks-cm.us-west-2.amazonaws.com</p> </li> <li> <p>opsworks-cm.eu-west-1.amazonaws.com</p> </li> </ul> <p> <b>Throttling limits</b> </p> <p>All API operations allow for five requests per second with a burst of 10 requests per second.</p>'
+  description: '<fullname>AWS OpsWorks CM</fullname> <p>AWS OpsWorks for configuration management (CM) is a service that runs and manages configuration management servers. You can use AWS OpsWorks CM to create and manage AWS OpsWorks for Chef Automate and AWS OpsWorks for Puppet Enterprise servers, and add or remove nodes for the servers to manage.</p> <p> <b>Glossary of terms</b> </p> <ul> <li> <p> <b>Server</b>: A configuration management server that can be highly-available. The configuration management server runs on an Amazon Elastic Compute Cloud (EC2) instance, and may use various other AWS services, such as Amazon Relational Database Service (RDS) and Elastic Load Balancing. A server is a generic abstraction over the configuration manager that you want to use, much like Amazon RDS. In AWS OpsWorks CM, you do not start or stop servers. After you create servers, they continue to run until they are deleted.</p> </li> <li> <p> <b>Engine</b>: The engine is the specific configuration manager that you want to use. Valid values in this release include <code>Chef</code> and <code>Puppet</code>.</p> </li> <li> <p> <b>Backup</b>: This is an application-level backup of the data that the configuration manager stores. AWS OpsWorks CM creates an S3 bucket for backups when you launch the first server. A backup maintains a snapshot of a server''s configuration-related attributes at the time the backup starts.</p> </li> <li> <p> <b>Events</b>: Events are always related to a server. Events are written during server creation, when health checks run, when backups are created, when system maintenance is performed, etc. When you delete a server, the server''s events are also deleted.</p> </li> <li> <p> <b>Account attributes</b>: Every account has attributes that are assigned in the AWS OpsWorks CM database. These attributes store information about configuration limits (servers, backups, etc.) and your customer account. </p> </li> </ul> <p> <b>Endpoints</b> </p> <p>AWS OpsWorks CM supports the following endpoints, all HTTPS. You must connect to one of the following endpoints. Your servers can only be accessed or managed within the endpoint in which they are created.</p> <ul> <li> <p>opsworks-cm.us-east-1.amazonaws.com</p> </li> <li> <p>opsworks-cm.us-east-2.amazonaws.com</p> </li> <li> <p>opsworks-cm.us-west-1.amazonaws.com</p> </li> <li> <p>opsworks-cm.us-west-2.amazonaws.com</p> </li> <li> <p>opsworks-cm.ap-northeast-1.amazonaws.com</p> </li> <li> <p>opsworks-cm.ap-southeast-1.amazonaws.com</p> </li> <li> <p>opsworks-cm.ap-southeast-2.amazonaws.com</p> </li> <li> <p>opsworks-cm.eu-central-1.amazonaws.com</p> </li> <li> <p>opsworks-cm.eu-west-1.amazonaws.com</p> </li> </ul> <p> <b>Throttling limits</b> </p> <p>All API operations allow for five requests per second with a burst of 10 requests per second.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -683,27 +683,9 @@ definitions:
       EngineAttributes:
         $ref: '#/definitions/EngineAttributes'
         description: '<p>Engine attributes used for associating the node. </p> <p class="title"> <b>Attributes accepted in a AssociateNode request for Chef</b> </p> <ul> <li> <p> <code>CHEF_ORGANIZATION</code>: The Chef organization with which the node is associated. By default only one organization named <code>default</code> can exist. </p> </li> <li> <p> <code>CHEF_NODE_PUBLIC_KEY</code>: A PEM-formatted public key. This key is required for the <code>chef-client</code> agent to access the Chef API. </p> </li> </ul> <p class="title"> <b>Attributes accepted in a AssociateNode request for Puppet</b> </p> <ul> <li> <p> <code>PUPPET_NODE_CSR</code>: A PEM-formatted certificate-signing request (CSR) that is created by the node. </p> </li> </ul>'
-  InvalidStateException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-        description: 'Error or informational message that provides more detail if a resource is in a state that is not valid for performing a specified action. '
-    description: 'The resource is in a state that does not allow you to perform a specified action. '
-  ResourceNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-        description: 'Error or informational message that can contain more detail about problems locating or accessing a resource. '
-    description: 'The requested resource does not exist, or access was denied. '
-  ValidationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-        description: 'Error or informational message that can contain more detail about a validation failure. '
-    description: 'One or more of the provided request parameters are not valid. '
+  InvalidStateException: {}
+  ResourceNotFoundException: {}
+  ValidationException: {}
   CreateBackupResponse:
     type: object
     properties:
@@ -721,13 +703,7 @@ definitions:
       Description:
         $ref: '#/definitions/String'
         description: ' A user-defined description of the backup. '
-  LimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-        description: 'Error or informational message that the maximum allowed number of servers or backups has been exceeded. '
-    description: 'The limit of servers or backups has been reached. '
+  LimitExceededException: {}
   CreateServerResponse:
     type: object
     properties:
@@ -793,13 +769,7 @@ definitions:
       BackupId:
         $ref: '#/definitions/BackupId'
         description: ' If you specify this field, AWS OpsWorks CM creates the server by using the backup represented by BackupId. '
-  ResourceAlreadyExistsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-        description: 'Error or informational message in response to a CreateServer request that a resource cannot be created because it already exists. '
-    description: 'The requested resource cannot be created because it already exists. '
+  ResourceAlreadyExistsException: {}
   DeleteBackupResponse:
     type: object
     properties: {}
@@ -839,7 +809,7 @@ definitions:
         description: 'Contains the response to a <code>DescribeBackups</code> request. '
       NextToken:
         $ref: '#/definitions/String'
-        description: 'NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call <code>DescribeBackups</code> again, and assign the token from the previous results as the value of the <code>nextToken</code> parameter. If there are no more results, the response object''s <code>nextToken</code> parameter value is <code>null</code>. Setting a <code>nextToken</code> value that was not returned in your previous results causes an <code>InvalidNextTokenException</code> to occur. '
+        description: This is not currently implemented for <code>DescribeBackups</code> requests.
   DescribeBackupsRequest:
     type: object
     properties:
@@ -851,17 +821,11 @@ definitions:
         description: 'Returns backups for the server with the specified ServerName. '
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: 'NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call <code>DescribeBackups</code> again, and assign the token from the previous results as the value of the <code>nextToken</code> parameter. If there are no more results, the response object''s <code>nextToken</code> parameter value is <code>null</code>. Setting a <code>nextToken</code> value that was not returned in your previous results causes an <code>InvalidNextTokenException</code> to occur.'
+        description: This is not currently implemented for <code>DescribeBackups</code> requests.
       MaxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results. '
-  InvalidNextTokenException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-        description: 'Error or informational message that can contain more detail about a nextToken failure. '
-    description: 'This occurs when the provided nextToken is not valid. '
+        description: This is not currently implemented for <code>DescribeBackups</code> requests.
+  InvalidNextTokenException: {}
   DescribeEventsResponse:
     type: object
     properties:
@@ -914,7 +878,7 @@ definitions:
         description: '<p>Contains the response to a <code>DescribeServers</code> request.</p> <p> <i>For Puppet Server:</i> <code>DescribeServersResponse$Servers$EngineAttributes</code> contains PUPPET_API_CA_CERT. This is the PEM-encoded CA certificate that is used by the Puppet API over TCP port number 8140. The CA certificate is also used to sign node certificates.</p>'
       NextToken:
         $ref: '#/definitions/String'
-        description: 'NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call <code>DescribeServers</code> again, and assign the token from the previous results as the value of the <code>nextToken</code> parameter. If there are no more results, the response object''s <code>nextToken</code> parameter value is <code>null</code>. Setting a <code>nextToken</code> value that was not returned in your previous results causes an <code>InvalidNextTokenException</code> to occur. '
+        description: 'This is not currently implemented for <code>DescribeServers</code> requests. '
   DescribeServersRequest:
     type: object
     properties:
@@ -923,10 +887,10 @@ definitions:
         description: Describes the server with the specified ServerName.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: 'NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call <code>DescribeServers</code> again, and assign the token from the previous results as the value of the <code>nextToken</code> parameter. If there are no more results, the response object''s <code>nextToken</code> parameter value is <code>null</code>. Setting a <code>nextToken</code> value that was not returned in your previous results causes an <code>InvalidNextTokenException</code> to occur. '
+        description: 'This is not currently implemented for <code>DescribeServers</code> requests. '
       MaxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results. '
+        description: 'This is not currently implemented for <code>DescribeServers</code> requests. '
   DisassociateNodeResponse:
     type: object
     properties:

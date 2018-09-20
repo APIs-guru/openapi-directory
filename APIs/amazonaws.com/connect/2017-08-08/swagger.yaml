@@ -697,6 +697,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /contact/attributes:
+    post:
+      operationId: UpdateContactAttributes
+      description: '<p>The <code>UpdateContactAttributes</code> operation lets you programmatically create new or update existing contact attributes associated with a contact. You can use the operation to add or update attributes for both ongoing and completed contacts. For example, you can update the customer''s name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also use the <code>UpdateContactAttributes</code> operation to update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, or flag abusive callers.</p> <p>Contact attributes are available in Amazon Connect for 24 months, and are then deleted.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateContactAttributesResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateContactAttributesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/users/{InstanceId}/{UserId}/hierarchy':
     post:
       operationId: UpdateUserHierarchy
@@ -994,53 +1035,13 @@ definitions:
       HierarchyGroupId:
         $ref: '#/definitions/HierarchyGroupId'
         description: The unique identifier for the hierarchy group to assign to the user created.
-  InvalidRequestException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-        description: The message.
-    description: The request is not valid.
-  InvalidParameterException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-        description: The message.
-    description: One or more of the parameters provided to the operation are not valid.
-  LimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-        description: The message.
-    description: The limit exceeded the maximum allowed active calls in a queue.
-  DuplicateResourceException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-    description: A resource with that name already exisits.
-  ResourceNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-        description: The message.
-    description: The specified resource was not found.
-  ThrottlingException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-    description: The throttling limit has been exceeded.
-  InternalServiceException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-        description: The message.
-    description: Request processing failed due to an error or failure with the service.
+  InvalidRequestException: {}
+  InvalidParameterException: {}
+  LimitExceededException: {}
+  DuplicateResourceException: {}
+  ResourceNotFoundException: {}
+  ThrottlingException: {}
+  InternalServiceException: {}
   DeleteUserRequest:
     type: object
     properties: {}
@@ -1080,12 +1081,7 @@ definitions:
   GetFederationTokenRequest:
     type: object
     properties: {}
-  UserNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-    description: No user with the specified credentials was found in the Amazon Connect instance.
+  UserNotFoundException: {}
   ListRoutingProfilesResponse:
     type: object
     properties:
@@ -1168,20 +1164,8 @@ definitions:
       Attributes:
         $ref: '#/definitions/Attributes'
         description: '<p>Specify a custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.</p> <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs. Attribute keys can include only alphanumeric, dash, and underscore characters.</p> <p>For example, if you want play a greeting when the customer answers the call, you can pass the customer name in attributes similar to the following:</p>'
-  DestinationNotAllowedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-        description: The message.
-    description: Outbound calls to the destination number are not allowed.
-  OutboundContactNotPermittedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-        description: The message.
-    description: The contact is not permitted.
+  DestinationNotAllowedException: {}
+  OutboundContactNotPermittedException: {}
   StopContactResponse:
     type: object
     properties: {}
@@ -1197,13 +1181,26 @@ definitions:
       InstanceId:
         $ref: '#/definitions/InstanceId'
         description: 'The identifier for your Amazon Connect instance. To find the ID of your instance, open the AWS console and select Amazon Connect. Select the alias of the instance in the Instance alias column. The instance ID is displayed in the Overview section of your instance settings. For example, the instance ID is the set of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.'
-  ContactNotFoundException:
+  ContactNotFoundException: {}
+  UpdateContactAttributesResponse:
     type: object
+    properties: {}
+  UpdateContactAttributesRequest:
+    type: object
+    required:
+      - InitialContactId
+      - InstanceId
+      - Attributes
     properties:
-      Message:
-        $ref: '#/definitions/Message'
-        description: The message.
-    description: The contact with the specified ID is not active or does not exist.
+      InitialContactId:
+        $ref: '#/definitions/ContactId'
+        description: The unique identifier of the contact for which to update attributes. This is the identifier for the contact associated with the first interaction with the contact center.
+      InstanceId:
+        $ref: '#/definitions/InstanceId'
+        description: 'The identifier for your Amazon Connect instance. To find the ID of your Amazon Connect instance, open the AWS console and select Amazon Connect. Select the instance alias of the instance. The instance ID is displayed in the Overview section of your instance settings. For example, the instance ID is the set of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.'
+      Attributes:
+        $ref: '#/definitions/Attributes'
+        description: The key-value pairs for the attribute to update.
   UpdateUserHierarchyRequest:
     type: object
     properties:
@@ -1295,8 +1292,6 @@ definitions:
     description: Amazon Connect contact identifier. An unique ContactId will be generated for each contact request.
     minLength: 1
     maxLength: 256
-  Message:
-    type: string
   Password:
     type: string
     pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\S]{8,}$/'

@@ -483,18 +483,8 @@ definitions:
     example:
       Name: example
     properties: {}
-  LexiconNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: '<p>Amazon Polly can''t find the specified lexicon. This could be caused by a lexicon that is missing, its name is misspelled or specifying a lexicon that is in a different region.</p> <p>Verify that the lexicon exists, is in the region (see <a>ListLexicons</a>) and that you spelled its name is spelled correctly. Then try again.</p>'
-  ServiceFailureException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: An unknown condition has caused a service failure.
+  LexiconNotFoundException: {}
+  ServiceFailureException: {}
   DescribeVoicesOutput:
     type: object
     example:
@@ -526,12 +516,7 @@ definitions:
     example:
       LanguageCode: en-GB
     properties: {}
-  InvalidNextTokenException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The NextToken is invalid. Verify that it''s spelled correctly, and then try again.'
+  InvalidNextTokenException: {}
   GetLexiconOutput:
     type: object
     example:
@@ -566,18 +551,8 @@ definitions:
   GetSpeechSynthesisTaskInput:
     type: object
     properties: {}
-  InvalidTaskIdException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The provided Task ID is not valid. Please provide a valid Task ID and try again.
-  SynthesisTaskNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The Speech Synthesis task with requested Task ID cannot be found.
+  InvalidTaskIdException: {}
+  SynthesisTaskNotFoundException: {}
   ListLexiconsOutput:
     type: object
     example:
@@ -628,42 +603,12 @@ definitions:
       Content:
         $ref: '#/definitions/LexiconContent'
         description: Content of the PLS lexicon as string data.
-  InvalidLexiconException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Amazon Polly can''t find the specified lexicon. Verify that the lexicon''s name is spelled correctly, and then try again.'
-  UnsupportedPlsAlphabetException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The alphabet specified by the lexicon is not a supported alphabet. Valid values are <code>x-sampa</code> and <code>ipa</code>.
-  UnsupportedPlsLanguageException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The language specified in the lexicon is unsupported. For a list of supported languages, see <a href="http://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html">Lexicon Attributes</a>.'
-  LexiconSizeExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The maximum size of the specified lexicon would be exceeded by this operation.
-  MaxLexemeLengthExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The maximum size of the lexeme would be exceeded by this operation.
-  MaxLexiconsNumberExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The maximum number of lexicons would be exceeded by this operation.
+  InvalidLexiconException: {}
+  UnsupportedPlsAlphabetException: {}
+  UnsupportedPlsLanguageException: {}
+  LexiconSizeExceededException: {}
+  MaxLexemeLengthExceededException: {}
+  MaxLexiconsNumberExceededException: {}
   StartSpeechSynthesisTaskOutput:
     type: object
     properties:
@@ -711,60 +656,15 @@ definitions:
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
         description: '<p>Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p> <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>'
-  TextLengthExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The value of the "Text" parameter is longer than the accepted limits. For the <code>SynthesizeSpeech</code> API, the limit for input text is a maximum of 6000 characters total, of which no more than 3000 can be billed characters. For the <code>StartSpeechSynthesisTask</code> API, the maximum is 200,000 characters, of which no more than 100,000 can be billed characters. SSML tags are not counted as billed characters.'
-  InvalidS3BucketException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The provided Amazon S3 bucket name is invalid. Please check your input with S3 bucket naming requirements and try again.
-  InvalidS3KeyException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The provided Amazon S3 key prefix is invalid. Please provide a valid S3 object key name.
-  InvalidSampleRateException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified sample rate is not valid.
-  InvalidSnsTopicArnException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The provided SNS topic ARN is invalid. Please provide a valid SNS topic ARN and try again.
-  InvalidSsmlException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The SSML you provided is invalid. Verify the SSML syntax, spelling of tags and values, and then try again.'
-  MarksNotSupportedForFormatException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Speech marks are not supported for the <code>OutputFormat</code> selected. Speech marks are only available for content in <code>json</code> format.
-  SsmlMarksNotSupportedForTextTypeException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: SSML speech marks are not supported for plain text-type input.
-  LanguageNotSupportedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The language specified is not currently supported by Amazon Polly in this capacity.
+  TextLengthExceededException: {}
+  InvalidS3BucketException: {}
+  InvalidS3KeyException: {}
+  InvalidSampleRateException: {}
+  InvalidSnsTopicArnException: {}
+  InvalidSsmlException: {}
+  MarksNotSupportedForFormatException: {}
+  SsmlMarksNotSupportedForTextTypeException: {}
+  LanguageNotSupportedException: {}
   SynthesizeSpeechOutput:
     type: object
     example:
@@ -795,7 +695,7 @@ definitions:
         description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. For information about storing lexicons, see <a href="http://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html">PutLexicon</a>.'
       OutputFormat:
         $ref: '#/definitions/OutputFormat'
-        description: ' The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. '
+        description: '<p> The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. </p> <p>When pcm is used, the content returned is audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format. </p>'
       SampleRate:
         $ref: '#/definitions/SampleRate'
         description: '<p> The audio frequency specified in Hz. </p> <p>The valid values for <code>mp3</code> and <code>ogg_vorbis</code> are "8000", "16000", and "22050". The default value is "22050". </p> <p> Valid values for <code>pcm</code> are "8000" and "16000" The default value is "16000". </p>'
@@ -830,6 +730,7 @@ definitions:
   LanguageCode:
     type: string
     enum:
+      - cmn-CN
       - cy-GB
       - da-DK
       - de-DE
@@ -864,8 +765,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Voice'
-  ErrorMessage:
-    type: string
   Gender:
     type: string
     enum:
@@ -1101,6 +1000,7 @@ definitions:
       - Takumi
       - Seoyeon
       - Aditi
+      - Zhiyu
   TaskStatusReason:
     type: string
   VoiceName:

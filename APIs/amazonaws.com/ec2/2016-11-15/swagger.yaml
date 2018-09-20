@@ -836,7 +836,7 @@ paths:
   '/#CopyImage':
     post:
       operationId: CopyImage
-      description: '<p>Initiates the copy of an AMI from the specified source region to the current region. You specify the destination region by using its endpoint when making the request.</p> <p>For more information about the prerequisites and limits when copying an AMI, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Initiates the copy of an AMI from the specified source region to the current region. You specify the destination region by using its endpoint when making the request.</p> <p>Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot.</p> <p>For more information about the prerequisites and limits when copying an AMI, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -861,7 +861,7 @@ paths:
   '/#CopySnapshot':
     post:
       operationId: CopySnapshot
-      description: '<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to.</p> <p>Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless the <code>Encrypted</code> flag is specified during the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a non-default CMK with the <code>KmsKeyId</code> parameter. </p> <p>To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot.</p> <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html">Copying an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to.</p> <p>Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless the <code>Encrypted</code> flag is specified during the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a non-default CMK with the <code>KmsKeyId</code> parameter.</p> <p>To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot.</p> <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html">Copying an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -936,7 +936,7 @@ paths:
   '/#CreateDefaultVpc':
     post:
       operationId: CreateDefaultVpc
-      description: '<p>Creates a default VPC with a size <code>/16</code> IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html">Default VPC and Default Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. You cannot specify the components of the default VPC yourself.</p> <p>iIf you deleted your previous default VPC, you can create a default VPC. You cannot have more than one default VPC per Region. </p> <p>If your account supports EC2-Classic, you cannot use this action to create a default VPC in a Region that supports EC2-Classic. If you want a default VPC in a Region that supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is that possible?" in the <a href="http://aws.amazon.com/vpc/faqs/#Default_VPCs">Default VPCs FAQ</a>.</p>'
+      description: '<p>Creates a default VPC with a size <code>/16</code> IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html">Default VPC and Default Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. You cannot specify the components of the default VPC yourself.</p> <p>If you deleted your previous default VPC, you can create a default VPC. You cannot have more than one default VPC per Region.</p> <p>If your account supports EC2-Classic, you cannot use this action to create a default VPC in a Region that supports EC2-Classic. If you want a default VPC in a Region that supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is that possible?" in the <a href="http://aws.amazon.com/vpc/faqs/#Default_VPCs">Default VPCs FAQ</a>.</p>'
       responses:
         '200':
           description: Success
@@ -3116,7 +3116,7 @@ paths:
   '/#DescribeHostReservationOfferings':
     post:
       operationId: DescribeHostReservationOfferings
-      description: '<p>Describes the Dedicated Host reservations that are available to purchase.</p> <p>The results describe all the Dedicated Host reservation offerings, including offerings that may not match the instance family and region of your Dedicated Hosts. When purchasing an offering, ensure that the instance family and Region of the offering matches that of the Dedicated Hosts with which it is to be associated . For more information about supported instance types, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html">Dedicated Hosts Overview</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>'
+      description: '<p>Describes the Dedicated Host reservations that are available to purchase.</p> <p>The results describe all the Dedicated Host reservation offerings, including offerings that may not match the instance family and region of your Dedicated Hosts. When purchasing an offering, ensure that the instance family and Region of the offering matches that of the Dedicated Hosts with which it is to be associated. For more information about supported instance types, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html">Dedicated Hosts Overview</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -3415,7 +3415,7 @@ paths:
   '/#DescribeInstanceCreditSpecifications':
     post:
       operationId: DescribeInstanceCreditSpecifications
-      description: '<p>Describes the credit option for CPU usage of one or more of your T2 instances. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>If you do not specify an instance ID, Amazon EC2 returns only the T2 instances with the <code>unlimited</code> credit option. If you specify one or more instance IDs, Amazon EC2 returns the credit option (<code>standard</code> or <code>unlimited</code>) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a T2 instance, an error is returned.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p> <p>If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html">T2 Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Describes the credit option for CPU usage of one or more of your T2 or T3 instances. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>If you do not specify an instance ID, Amazon EC2 returns T2 and T3 instances with the <code>unlimited</code> credit option, as well as instances that were previously configured as T2 or T3 with the <code>unlimited</code> credit option. For example, if you resize a T2 instance, while it is configured as <code>unlimited</code>, to an M4 instance, Amazon EC2 returns the M4 instance.</p> <p>If you specify one or more instance IDs, Amazon EC2 returns the credit option (<code>standard</code> or <code>unlimited</code>) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a T2 or T3 instance, an error is returned.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p> <p>If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -3880,6 +3880,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeNetworkInterfacesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
       x-waiters:
         - operation: DescribeNetworkInterfaces
           delay: 20
@@ -5904,7 +5914,7 @@ paths:
   '/#ModifyHosts':
     post:
       operationId: ModifyHosts
-      description: 'Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, any instances that you launch with a tenancy of <code>host</code> but without a specific host ID are placed onto any available Dedicated Host in your account that has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID ito have the instance launch onto a specific host. If no host ID is provided, the instance is launched onto a suitable host with auto-placement enabled.'
+      description: 'Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, any instances that you launch with a tenancy of <code>host</code> but without a specific host ID are placed onto any available Dedicated Host in your account that has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID to have the instance launch onto a specific host. If no host ID is provided, the instance is launched onto a suitable host with auto-placement enabled.'
       responses:
         '200':
           description: Success
@@ -6021,7 +6031,7 @@ paths:
   '/#ModifyInstanceCreditSpecification':
     post:
       operationId: ModifyInstanceCreditSpecification
-      description: '<p>Modifies the credit option for CPU usage on a running or stopped T2 instance. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html">T2 Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Modifies the credit option for CPU usage on a running or stopped T2 or T3 instance. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -6682,7 +6692,7 @@ paths:
   '/#ReleaseHosts':
     post:
       operationId: ReleaseHosts
-      description: '<p>When you no longer want to use an On-Demand Dedicated Host it can be released. On-Demand billing is stopped and the host goes into <code>released</code> state. The host ID of Dedicated Hosts that have been released can no longer be specified in another request, for example, ModifyHosts. You must stop or terminate all instances on a host before it can be released.</p> <p>When Dedicated Hosts are released, it may take some time for them to stop counting toward your limit and you may receive capacity errors when trying to allocate new Dedicated Hosts. Wait a few minutes and then try again.</p> <p>Released hosts still appear in a <a>DescribeHosts</a> response.</p>'
+      description: '<p>When you no longer want to use an On-Demand Dedicated Host it can be released. On-Demand billing is stopped and the host goes into <code>released</code> state. The host ID of Dedicated Hosts that have been released can no longer be specified in another request, for example, to modify the host. You must stop or terminate all instances on a host before it can be released.</p> <p>When Dedicated Hosts are released, it may take some time for them to stop counting toward your limit and you may receive capacity errors when trying to allocate new Dedicated Hosts. Wait a few minutes and then try again.</p> <p>Released hosts still appear in a <a>DescribeHosts</a> response.</p>'
       responses:
         '200':
           description: Success
@@ -7384,7 +7394,6 @@ definitions:
       VpcPeeringConnection:
         $ref: '#/definitions/VpcPeeringConnection'
         description: Information about the VPC peering connection.
-    description: Contains the output of AcceptVpcPeeringConnection.
   AcceptVpcPeeringConnectionRequest:
     type: object
     properties:
@@ -7394,7 +7403,6 @@ definitions:
       VpcPeeringConnectionId:
         $ref: '#/definitions/String'
         description: The ID of the VPC peering connection. You must specify this parameter in the request.
-    description: Contains the parameters for AcceptVpcPeeringConnection.
   AllocateAddressResult:
     type: object
     example:
@@ -7455,7 +7463,9 @@ definitions:
       Quantity:
         $ref: '#/definitions/Integer'
         description: The number of Dedicated Hosts to allocate to your account with these parameters.
-    description: Contains the parameters for AllocateHosts.
+      TagSpecifications:
+        $ref: '#/definitions/TagSpecificationList'
+        description: The tags to apply to the Dedicated Host during creation.
   AssignIpv6AddressesResult:
     type: object
     properties:
@@ -7555,7 +7565,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for AssociateDhcpOptions.
   AssociateIamInstanceProfileResult:
     type: object
     example:
@@ -7594,7 +7603,6 @@ definitions:
       AssociationId:
         $ref: '#/definitions/String'
         description: The route table association ID. This ID is required for disassociating the route table.
-    description: Contains the output of AssociateRouteTable.
   AssociateRouteTableRequest:
     type: object
     required:
@@ -7613,7 +7621,6 @@ definitions:
       SubnetId:
         $ref: '#/definitions/String'
         description: The ID of the subnet.
-    description: Contains the parameters for AssociateRouteTable.
   AssociateSubnetCidrBlockResult:
     type: object
     properties:
@@ -7667,7 +7674,6 @@ definitions:
       Return:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
-    description: Contains the output of AttachClassicLinkVpc.
   AttachClassicLinkVpcRequest:
     type: object
     required:
@@ -7687,7 +7693,6 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of a ClassicLink-enabled VPC.
-    description: Contains the parameters for AttachClassicLinkVpc.
   AttachInternetGatewayRequest:
     type: object
     required:
@@ -7706,7 +7711,6 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
-    description: Contains the parameters for AttachInternetGateway.
   AttachNetworkInterfaceResult:
     type: object
     example:
@@ -7855,7 +7859,6 @@ definitions:
       SourceSecurityGroupOwnerId:
         $ref: '#/definitions/String'
         description: Not supported. Use a set of IP permissions to specify a destination security group.
-    description: Contains the parameters for AuthorizeSecurityGroupEgress.
   AuthorizeSecurityGroupIngressRequest:
     type: object
     example:
@@ -7898,7 +7901,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for AuthorizeSecurityGroupIngress.
   BundleInstanceResult:
     type: object
     properties:
@@ -8158,7 +8160,7 @@ definitions:
         description: A description for the new AMI in the destination region.
       Encrypted:
         $ref: '#/definitions/Boolean'
-        description: 'Specifies whether the destination snapshots of the copied image should be encrypted. The default CMK for EBS is used unless a non-default AWS Key Management Service (AWS KMS) CMK is specified with <code>KmsKeyId</code>. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+        description: 'Specifies whether the destination snapshots of the copied image should be encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted copy of an encrypted snapshot. The default CMK for EBS is used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK using <code>KmsKeyId</code>. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       KmsKeyId:
         $ref: '#/definitions/String'
         description: '<p>An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set. </p> <p>The CMK identifier may be provided in any of the following formats: </p> <ul> <li> <p>Key ID</p> </li> <li> <p>Key alias, in the form <code>alias/<i>ExampleAlias</i> </code> </p> </li> <li> <p>ARN using key ID. The ID ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>. </p> </li> <li> <p>ARN using key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>. </p> </li> </ul> <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure. </p> <p>The specified CMK must exist in the region that the snapshot is being copied to. </p>'
@@ -8203,7 +8205,7 @@ definitions:
         description: '<p>The destination region to use in the <code>PresignedUrl</code> parameter of a snapshot copy operation. This parameter is only valid for specifying the destination region in a <code>PresignedUrl</code> parameter, where it is required.</p> <p>The snapshot copy is sent to the regional endpoint that you sent the HTTP request to (for example, <code>ec2.us-east-1.amazonaws.com</code>). With the AWS CLI, this is specified using the <code>--region</code> parameter or the default region in your AWS configuration file.</p>'
       Encrypted:
         $ref: '#/definitions/Boolean'
-        description: 'Specifies whether the destination snapshot should be encrypted. You can encrypt a copy of an unencrypted snapshot using this flag, but you cannot use it to create an unencrypted copy from an encrypted snapshot. Your default CMK for EBS is used unless a non-default AWS Key Management Service (AWS KMS) CMK is specified with <code>KmsKeyId</code>. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+        description: 'Specifies whether the destination snapshot should be encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot use it to create an unencrypted copy of an encrypted snapshot. Your default CMK for EBS is used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK using <code>KmsKeyId</code>. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       KmsKeyId:
         $ref: '#/definitions/String'
         description: '<p>An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set. </p> <p>The CMK identifier may be provided in any of the following formats: </p> <ul> <li> <p>Key ID</p> </li> <li> <p>Key alias</p> </li> <li> <p>ARN using key ID. The ID ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>. </p> </li> <li> <p>ARN using key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>. </p> </li> </ul> <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. The action will eventually fail. </p>'
@@ -8281,14 +8283,12 @@ definitions:
       Vpc:
         $ref: '#/definitions/Vpc'
         description: Information about the VPC.
-    description: Contains the output of CreateDefaultVpc.
   CreateDefaultVpcRequest:
     type: object
     properties:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for CreateDefaultVpc.
   CreateDhcpOptionsResult:
     type: object
     example:
@@ -8303,7 +8303,6 @@ definitions:
       DhcpOptions:
         $ref: '#/definitions/DhcpOptions'
         description: A set of DHCP options.
-    description: Contains the output of CreateDhcpOptions.
   CreateDhcpOptionsRequest:
     type: object
     required:
@@ -8321,7 +8320,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for CreateDhcpOptions.
   CreateEgressOnlyInternetGatewayResult:
     type: object
     properties:
@@ -8408,7 +8406,6 @@ definitions:
       Unsuccessful:
         $ref: '#/definitions/UnsuccessfulItemSet'
         description: Information about the flow logs that could not be created successfully.
-    description: Contains the output of CreateFlowLogs.
   CreateFlowLogsRequest:
     type: object
     required:
@@ -8443,7 +8440,6 @@ definitions:
       LogDestination:
         $ref: '#/definitions/String'
         description: '<p>Specifies the destination to which the flow log data is to be published. Flow log data can be published to an CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for LogDestinationType.</p> <p>If LogDestinationType is not specified or <code>cloud-watch-logs</code>, specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group.</p> <p>If LogDestinationType is <code>s3</code>, specify the ARN of the Amazon S3 bucket. You can also specify a subfolder in the bucket. To specify a subfolder in the bucket, use the following ARN format: <code>bucket_ARN/subfolder_name/</code>. For example, to specify a subfolder named <code>my-logs</code> in a bucket named <code>my-bucket</code>, use the following ARN: <code>arn:aws:s3:::my-bucket/my-logs/</code>.</p>'
-    description: Contains the parameters for CreateFlowLogs.
   CreateFpgaImageResult:
     type: object
     properties:
@@ -8557,14 +8553,12 @@ definitions:
       InternetGateway:
         $ref: '#/definitions/InternetGateway'
         description: Information about the internet gateway.
-    description: Contains the output of CreateInternetGateway.
   CreateInternetGatewayRequest:
     type: object
     properties:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for CreateInternetGateway.
   KeyPair:
     type: object
     properties:
@@ -8591,7 +8585,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for CreateKeyPair.
   CreateLaunchTemplateResult:
     type: object
     example:
@@ -8717,7 +8710,6 @@ definitions:
       NatGateway:
         $ref: '#/definitions/NatGateway'
         description: Information about the NAT gateway.
-    description: Contains the output of CreateNatGateway.
   CreateNatGatewayRequest:
     type: object
     required:
@@ -8736,7 +8728,6 @@ definitions:
       SubnetId:
         $ref: '#/definitions/String'
         description: The subnet in which to create the NAT gateway.
-    description: Contains the parameters for CreateNatGateway.
   CreateNetworkAclResult:
     type: object
     example:
@@ -8761,7 +8752,6 @@ definitions:
       NetworkAcl:
         $ref: '#/definitions/NetworkAcl'
         description: Information about the network ACL.
-    description: Contains the output of CreateNetworkAcl.
   CreateNetworkAclRequest:
     type: object
     required:
@@ -8775,7 +8765,6 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
-    description: Contains the parameters for CreateNetworkAcl.
   CreateNetworkAclEntryRequest:
     type: object
     required:
@@ -8825,7 +8814,6 @@ definitions:
       RuleNumber:
         $ref: '#/definitions/Integer'
         description: '<p>The rule number for the entry (for example, 100). ACL entries are processed in ascending order by rule number.</p> <p>Constraints: Positive integer from 1 to 32766. The range 32767 to 65535 is reserved for internal use.</p>'
-    description: Contains the parameters for CreateNetworkAclEntry.
   CreateNetworkInterfaceResult:
     type: object
     example:
@@ -8974,7 +8962,6 @@ definitions:
       Return:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
-    description: Contains the output of CreateRoute.
   CreateRouteRequest:
     type: object
     required:
@@ -9014,7 +9001,6 @@ definitions:
       VpcPeeringConnectionId:
         $ref: '#/definitions/String'
         description: The ID of a VPC peering connection.
-    description: Contains the parameters for CreateRoute.
   CreateRouteTableResult:
     type: object
     example:
@@ -9032,7 +9018,6 @@ definitions:
       RouteTable:
         $ref: '#/definitions/RouteTable'
         description: Information about the route table.
-    description: Contains the output of CreateRouteTable.
   CreateRouteTableRequest:
     type: object
     required:
@@ -9046,7 +9031,6 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
-    description: Contains the parameters for CreateRouteTable.
   CreateSecurityGroupResult:
     type: object
     example:
@@ -9055,7 +9039,6 @@ definitions:
       GroupId:
         $ref: '#/definitions/String'
         description: The ID of the security group.
-    description: Contains the output of CreateSecurityGroup.
   CreateSecurityGroupRequest:
     type: object
     required:
@@ -9078,7 +9061,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for CreateSecurityGroup.
   Snapshot:
     type: object
     example:
@@ -9200,7 +9182,6 @@ definitions:
       Subnet:
         $ref: '#/definitions/Subnet'
         description: Information about the subnet.
-    description: Contains the output of CreateSubnet.
   CreateSubnetRequest:
     type: object
     required:
@@ -9225,7 +9206,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for CreateSubnet.
   CreateTagsRequest:
     type: object
     required:
@@ -9247,7 +9227,6 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: 'One or more tags. The <code>value</code> parameter is required, but if you don''t want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. '
-    description: Contains the parameters for CreateTags.
   Volume:
     type: object
     example:
@@ -9350,7 +9329,6 @@ definitions:
       Vpc:
         $ref: '#/definitions/Vpc'
         description: Information about the VPC.
-    description: Contains the output of CreateVpc.
   CreateVpcRequest:
     type: object
     required:
@@ -9370,7 +9348,6 @@ definitions:
       InstanceTenancy:
         $ref: '#/definitions/Tenancy'
         description: '<p>The tenancy options for instances launched into the VPC. For <code>default</code>, instances are launched with shared tenancy by default. You can launch instances with any tenancy into a shared tenancy VPC. For <code>dedicated</code>, instances are launched as dedicated tenancy instances by default. You can only launch instances with a tenancy of <code>dedicated</code> or <code>host</code> into a dedicated tenancy VPC. </p> <p> <b>Important:</b> The <code>host</code> value cannot be used with this parameter. Use the <code>default</code> or <code>dedicated</code> values only.</p> <p>Default: <code>default</code> </p>'
-    description: Contains the parameters for CreateVpc.
   CreateVpcEndpointResult:
     type: object
     properties:
@@ -9416,7 +9393,7 @@ definitions:
         description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">How to Ensure Idempotency</a>.'
       PrivateDnsEnabled:
         $ref: '#/definitions/Boolean'
-        description: '<p>(Interface endpoint) Indicate whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the region (for example, <code>kinesis.us-east-1.amazonaws.com</code>) which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service.</p> <p>To use a private hosted zone, you must set the following VPC attributes to <code>true</code>: <code>enableDnsHostnames</code> and <code>enableDnsSupport</code>. Use <a>ModifyVpcAttribute</a> to set the VPC attributes.</p> <p>Default: <code>true</code> </p>'
+        description: '<p>(Interface endpoint) Indicate whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the region (for example, <code>kinesis.us-east-1.amazonaws.com</code>) which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service.</p> <p>To use a private hosted zone, you must set the following VPC attributes to <code>true</code>: <code>enableDnsHostnames</code> and <code>enableDnsSupport</code>. Use <a>ModifyVpcAttribute</a> to set the VPC attributes.</p> <p>Default: <code>false</code> </p>'
     description: Contains the parameters for CreateVpcEndpoint.
   CreateVpcEndpointConnectionNotificationResult:
     type: object
@@ -9483,7 +9460,6 @@ definitions:
       VpcPeeringConnection:
         $ref: '#/definitions/VpcPeeringConnection'
         description: Information about the VPC peering connection.
-    description: Contains the output of CreateVpcPeeringConnection.
   CreateVpcPeeringConnectionRequest:
     type: object
     properties:
@@ -9502,7 +9478,6 @@ definitions:
       PeerRegion:
         $ref: '#/definitions/String'
         description: '<p>The region code for the accepter VPC, if the accepter VPC is located in a region other than the region in which you make the request.</p> <p>Default: The region in which you make the request.</p>'
-    description: Contains the parameters for CreateVpcPeeringConnection.
   CreateVpnConnectionResult:
     type: object
     properties:
@@ -9598,7 +9573,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DeleteDhcpOptions.
   DeleteEgressOnlyInternetGatewayResult:
     type: object
     properties:
@@ -9646,7 +9620,6 @@ definitions:
       Unsuccessful:
         $ref: '#/definitions/UnsuccessfulItemSet'
         description: Information about the flow logs that could not be deleted successfully.
-    description: Contains the output of DeleteFlowLogs.
   DeleteFlowLogsRequest:
     type: object
     required:
@@ -9658,7 +9631,6 @@ definitions:
       FlowLogIds:
         $ref: '#/definitions/ValueStringList'
         description: One or more flow log IDs.
-    description: Contains the parameters for DeleteFlowLogs.
   DeleteFpgaImageResult:
     type: object
     properties:
@@ -9689,7 +9661,6 @@ definitions:
       InternetGatewayId:
         $ref: '#/definitions/String'
         description: The ID of the internet gateway.
-    description: Contains the parameters for DeleteInternetGateway.
   DeleteKeyPairRequest:
     type: object
     required:
@@ -9703,7 +9674,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DeleteKeyPair.
   DeleteLaunchTemplateResult:
     type: object
     example:
@@ -9776,7 +9746,6 @@ definitions:
       NatGatewayId:
         $ref: '#/definitions/String'
         description: The ID of the NAT gateway.
-    description: Contains the output of DeleteNatGateway.
   DeleteNatGatewayRequest:
     type: object
     required:
@@ -9787,7 +9756,6 @@ definitions:
       NatGatewayId:
         $ref: '#/definitions/String'
         description: The ID of the NAT gateway.
-    description: Contains the parameters for DeleteNatGateway.
   DeleteNetworkAclRequest:
     type: object
     required:
@@ -9801,7 +9769,6 @@ definitions:
       NetworkAclId:
         $ref: '#/definitions/String'
         description: The ID of the network ACL.
-    description: Contains the parameters for DeleteNetworkAcl.
   DeleteNetworkAclEntryRequest:
     type: object
     required:
@@ -9825,7 +9792,6 @@ definitions:
       RuleNumber:
         $ref: '#/definitions/Integer'
         description: The rule number of the entry to delete.
-    description: Contains the parameters for DeleteNetworkAclEntry.
   DeleteNetworkInterfaceRequest:
     type: object
     required:
@@ -9896,7 +9862,6 @@ definitions:
       RouteTableId:
         $ref: '#/definitions/String'
         description: The ID of the route table.
-    description: Contains the parameters for DeleteRoute.
   DeleteRouteTableRequest:
     type: object
     required:
@@ -9910,7 +9875,6 @@ definitions:
       RouteTableId:
         $ref: '#/definitions/String'
         description: The ID of the route table.
-    description: Contains the parameters for DeleteRouteTable.
   DeleteSecurityGroupRequest:
     type: object
     example:
@@ -9925,7 +9889,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DeleteSecurityGroup.
   DeleteSnapshotRequest:
     type: object
     required:
@@ -9960,7 +9923,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DeleteSubnet.
   DeleteTagsRequest:
     type: object
     required:
@@ -9981,7 +9943,6 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: '<p>One or more tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string.</p> <p>If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete AWS-generated tags (tags that have the <code>aws:</code> prefix).</p>'
-    description: Contains the parameters for DeleteTags.
   DeleteVolumeRequest:
     type: object
     required:
@@ -10009,7 +9970,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DeleteVpc.
   DeleteVpcEndpointConnectionNotificationsResult:
     type: object
     properties:
@@ -10069,7 +10029,6 @@ definitions:
       Return:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
-    description: Contains the output of DeleteVpcPeeringConnection.
   DeleteVpcPeeringConnectionRequest:
     type: object
     required:
@@ -10081,7 +10040,6 @@ definitions:
       VpcPeeringConnectionId:
         $ref: '#/definitions/String'
         description: The ID of the VPC peering connection.
-    description: Contains the parameters for DeleteVpcPeeringConnection.
   DeleteVpnConnectionRequest:
     type: object
     required:
@@ -10287,7 +10245,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
-    description: Contains the output of DescribeClassicLinkInstances.
   DescribeClassicLinkInstancesRequest:
     type: object
     properties:
@@ -10306,7 +10263,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to retrieve the next page of results.
-    description: Contains the parameters for DescribeClassicLinkInstances.
   DescribeConversionTasksResult:
     type: object
     properties:
@@ -10368,7 +10324,6 @@ definitions:
       DhcpOptions:
         $ref: '#/definitions/DhcpOptionsList'
         description: Information about one or more DHCP options sets.
-    description: Contains the output of DescribeDhcpOptions.
   DescribeDhcpOptionsRequest:
     type: object
     example:
@@ -10384,7 +10339,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DescribeDhcpOptions.
   DescribeEgressOnlyInternetGatewaysResult:
     type: object
     properties:
@@ -10563,7 +10517,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
-    description: Contains the output of DescribeFlowLogs.
   DescribeFlowLogsRequest:
     type: object
     properties:
@@ -10582,7 +10535,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to retrieve the next page of results.
-    description: Contains the parameters for DescribeFlowLogs.
   DescribeFpgaImageAttributeResult:
     type: object
     properties:
@@ -10684,7 +10636,7 @@ definitions:
         description: One or more host reservation IDs.
       MaxResults:
         $ref: '#/definitions/Integer'
-        description: 'The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500.If <code>maxResults</code> is given a larger value than 500, you receive an error.'
+        description: 'The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500. If <code>maxResults</code> is given a larger value than 500, you receive an error.'
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
@@ -10697,7 +10649,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
-    description: Contains the output of DescribeHosts.
   DescribeHostsRequest:
     type: object
     properties:
@@ -10713,7 +10664,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to retrieve the next page of results.
-    description: Contains the parameters for DescribeHosts.
   DescribeIamInstanceProfileAssociationsResult:
     type: object
     example:
@@ -11153,7 +11103,6 @@ definitions:
       InternetGateways:
         $ref: '#/definitions/InternetGatewayList'
         description: Information about one or more internet gateways.
-    description: Contains the output of DescribeInternetGateways.
   DescribeInternetGatewaysRequest:
     type: object
     example:
@@ -11171,7 +11120,6 @@ definitions:
       InternetGatewayIds:
         $ref: '#/definitions/ValueStringList'
         description: '<p>One or more internet gateway IDs.</p> <p>Default: Describes all your internet gateways.</p>'
-    description: Contains the parameters for DescribeInternetGateways.
   DescribeKeyPairsResult:
     type: object
     example:
@@ -11182,7 +11130,6 @@ definitions:
       KeyPairs:
         $ref: '#/definitions/KeyPairList'
         description: Information about one or more key pairs.
-    description: Contains the output of DescribeKeyPairs.
   DescribeKeyPairsRequest:
     type: object
     example:
@@ -11198,7 +11145,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DescribeKeyPairs.
   DescribeLaunchTemplateVersionsResult:
     type: object
     example:
@@ -11370,7 +11316,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
-    description: Contains the output of DescribeNatGateways.
   DescribeNatGatewaysRequest:
     type: object
     example:
@@ -11391,7 +11336,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to retrieve the next page of results.
-    description: Contains the parameters for DescribeNatGateways.
   DescribeNetworkAclsResult:
     type: object
     example:
@@ -11419,7 +11363,6 @@ definitions:
       NetworkAcls:
         $ref: '#/definitions/NetworkAclList'
         description: Information about one or more network ACLs.
-    description: Contains the output of DescribeNetworkAcls.
   DescribeNetworkAclsRequest:
     type: object
     example:
@@ -11428,14 +11371,13 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>association.association-id</code> - The ID of an association ID for the ACL.</p> </li> <li> <p> <code>association.network-acl-id</code> - The ID of the network ACL involved in the association.</p> </li> <li> <p> <code>association.subnet-id</code> - The ID of the subnet involved in the association.</p> </li> <li> <p> <code>default</code> - Indicates whether the ACL is the default network ACL for the VPC.</p> </li> <li> <p> <code>entry.cidr</code> - The IPv4 CIDR range specified in the entry.</p> </li> <li> <p> <code>entry.egress</code> - Indicates whether the entry applies to egress traffic.</p> </li> <li> <p> <code>entry.icmp.code</code> - The ICMP code specified in the entry, if any.</p> </li> <li> <p> <code>entry.icmp.type</code> - The ICMP type specified in the entry, if any.</p> </li> <li> <p> <code>entry.ipv6-cidr</code> - The IPv6 CIDR range specified in the entry.</p> </li> <li> <p> <code>entry.port-range.from</code> - The start of the port range specified in the entry. </p> </li> <li> <p> <code>entry.port-range.to</code> - The end of the port range specified in the entry. </p> </li> <li> <p> <code>entry.protocol</code> - The protocol specified in the entry (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>entry.rule-action</code> - Allows or denies the matching traffic (<code>allow</code> | <code>deny</code>).</p> </li> <li> <p> <code>entry.rule-number</code> - The number of an entry (in other words, rule) in the ACL''s set of entries.</p> </li> <li> <p> <code>network-acl-id</code> - The ID of the network ACL.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the network ACL.</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>association.association-id</code> - The ID of an association ID for the ACL.</p> </li> <li> <p> <code>association.network-acl-id</code> - The ID of the network ACL involved in the association.</p> </li> <li> <p> <code>association.subnet-id</code> - The ID of the subnet involved in the association.</p> </li> <li> <p> <code>default</code> - Indicates whether the ACL is the default network ACL for the VPC.</p> </li> <li> <p> <code>entry.cidr</code> - The IPv4 CIDR range specified in the entry.</p> </li> <li> <p> <code>entry.icmp.code</code> - The ICMP code specified in the entry, if any.</p> </li> <li> <p> <code>entry.icmp.type</code> - The ICMP type specified in the entry, if any.</p> </li> <li> <p> <code>entry.ipv6-cidr</code> - The IPv6 CIDR range specified in the entry.</p> </li> <li> <p> <code>entry.port-range.from</code> - The start of the port range specified in the entry. </p> </li> <li> <p> <code>entry.port-range.to</code> - The end of the port range specified in the entry. </p> </li> <li> <p> <code>entry.protocol</code> - The protocol specified in the entry (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>entry.rule-action</code> - Allows or denies the matching traffic (<code>allow</code> | <code>deny</code>).</p> </li> <li> <p> <code>entry.rule-number</code> - The number of an entry (in other words, rule) in the set of ACL entries.</p> </li> <li> <p> <code>network-acl-id</code> - The ID of the network ACL.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the network ACL.</p> </li> </ul>'
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       NetworkAclIds:
         $ref: '#/definitions/ValueStringList'
         description: '<p>One or more network ACL IDs.</p> <p>Default: Describes all your network ACLs.</p>'
-    description: Contains the parameters for DescribeNetworkAcls.
   DescribeNetworkInterfaceAttributeResult:
     type: object
     example:
@@ -11549,6 +11491,9 @@ definitions:
       NetworkInterfaces:
         $ref: '#/definitions/NetworkInterfaceList'
         description: Information about one or more network interfaces.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     description: Contains the output of DescribeNetworkInterfaces.
   DescribeNetworkInterfacesRequest:
     type: object
@@ -11565,6 +11510,12 @@ definitions:
       NetworkInterfaceIds:
         $ref: '#/definitions/NetworkInterfaceIdList'
         description: '<p>One or more network interface IDs.</p> <p>Default: Describes all your network interfaces.</p>'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to retrieve the next page of results.
+      MaxResults:
+        $ref: '#/definitions/Integer'
+        description: The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
     description: Contains the parameters for DescribeNetworkInterfaces.
   DescribePlacementGroupsResult:
     type: object
@@ -11595,7 +11546,6 @@ definitions:
       PrefixLists:
         $ref: '#/definitions/PrefixListSet'
         description: All available prefix lists.
-    description: Contains the output of DescribePrefixLists.
   DescribePrefixListsRequest:
     type: object
     properties:
@@ -11614,7 +11564,6 @@ definitions:
       PrefixListIds:
         $ref: '#/definitions/ValueStringList'
         description: One or more prefix list IDs.
-    description: Contains the parameters for DescribePrefixLists.
   DescribePrincipalIdFormatResult:
     type: object
     properties:
@@ -11831,7 +11780,6 @@ definitions:
       RouteTables:
         $ref: '#/definitions/RouteTableList'
         description: Information about one or more route tables.
-    description: Contains the output of DescribeRouteTables.
   DescribeRouteTablesRequest:
     type: object
     example:
@@ -11847,7 +11795,6 @@ definitions:
       RouteTableIds:
         $ref: '#/definitions/ValueStringList'
         description: '<p>One or more route table IDs.</p> <p>Default: Describes all your route tables.</p>'
-    description: Contains the parameters for DescribeRouteTables.
   DescribeScheduledInstanceAvailabilityResult:
     type: object
     example:
@@ -11996,7 +11943,7 @@ definitions:
     properties:
       DryRun:
         $ref: '#/definitions/Boolean'
-        description: 'Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       GroupId:
         $ref: '#/definitions/GroupIds'
         description: One or more security group IDs in your account.
@@ -12010,7 +11957,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
-    description: Contains the output of DescribeSecurityGroups.
   DescribeSecurityGroupsRequest:
     type: object
     example:
@@ -12037,7 +11983,6 @@ definitions:
       MaxResults:
         $ref: '#/definitions/Integer'
         description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000. If this parameter is not specified, then all results are returned.'
-    description: Contains the parameters for DescribeSecurityGroups.
   DescribeSnapshotAttributeResult:
     type: object
     example:
@@ -12448,7 +12393,7 @@ definitions:
     properties:
       DryRun:
         $ref: '#/definitions/Boolean'
-        description: 'Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
@@ -12474,7 +12419,6 @@ definitions:
       Subnets:
         $ref: '#/definitions/SubnetList'
         description: Information about one or more subnets.
-    description: Contains the output of DescribeSubnets.
   DescribeSubnetsRequest:
     type: object
     example:
@@ -12492,7 +12436,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DescribeSubnets.
   DescribeTagsResult:
     type: object
     example:
@@ -12511,8 +12454,7 @@ definitions:
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
       Tags:
         $ref: '#/definitions/TagDescriptionList'
-        description: A list of tags.
-    description: Contains the output of DescribeTags.
+        description: The tags.
   DescribeTagsRequest:
     type: object
     example:
@@ -12526,14 +12468,13 @@ definitions:
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       Filters:
         $ref: '#/definitions/FilterList'
-        description: <p>One or more filters.</p> <ul> <li> <p> <code>key</code> - The tag key.</p> </li> <li> <p> <code>resource-id</code> - The resource ID.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip</code> | <code>fleet</code> | <code>fpga-image</code> | <code>image</code> | <code>instance</code> | <code>internet-gateway</code> | <code>launch-template</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>reserved-instances</code> | <code>route-table</code> | <code>security-group</code> | <code>snapshot</code> | <code>spot-instances-request</code> | <code>subnet</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>).</p> </li> <li> <p> <code>value</code> - The tag value.</p> </li> </ul>
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>key</code> - The tag key.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>elastic-ip</code> | <code>fleet</code> | <code>fpga-image</code> | <code>image</code> | <code>instance</code> | <code>internet-gateway</code> | <code>launch-template</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>reserved-instances</code> | <code>route-table</code> | <code>security-group</code> | <code>snapshot</code> | <code>spot-instances-request</code> | <code>subnet</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".</p> </li> <li> <p> <code>value</code> - The tag value.</p> </li> </ul>'
       MaxResults:
         $ref: '#/definitions/Integer'
         description: 'The maximum number of results to return in a single call. This value can be between 5 and 1000. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
       NextToken:
         $ref: '#/definitions/String'
         description: The token to retrieve the next page of results.
-    description: Contains the parameters for DescribeTags.
   DescribeVolumeAttributeResult:
     type: object
     example:
@@ -12702,7 +12643,6 @@ definitions:
       EnableDnsSupport:
         $ref: '#/definitions/AttributeBooleanValue'
         description: 'Indicates whether DNS resolution is enabled for the VPC. If this attribute is <code>true</code>, the Amazon DNS server resolves DNS hostnames for your instances to their corresponding IP addresses; otherwise, it does not.'
-    description: Contains the output of DescribeVpcAttribute.
   DescribeVpcAttributeRequest:
     type: object
     required:
@@ -12721,14 +12661,12 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DescribeVpcAttribute.
   DescribeVpcClassicLinkResult:
     type: object
     properties:
       Vpcs:
         $ref: '#/definitions/VpcClassicLinkList'
         description: The ClassicLink status of one or more VPCs.
-    description: Contains the output of DescribeVpcClassicLink.
   DescribeVpcClassicLinkRequest:
     type: object
     properties:
@@ -12741,7 +12679,6 @@ definitions:
       VpcIds:
         $ref: '#/definitions/VpcClassicLinkIdList'
         description: One or more VPCs for which you want to describe the ClassicLink status.
-    description: Contains the parameters for DescribeVpcClassicLink.
   DescribeVpcClassicLinkDnsSupportResult:
     type: object
     properties:
@@ -12751,7 +12688,6 @@ definitions:
       Vpcs:
         $ref: '#/definitions/ClassicLinkDnsSupportList'
         description: Information about the ClassicLink DNS support status of the VPCs.
-    description: Contains the output of DescribeVpcClassicLinkDnsSupport.
   DescribeVpcClassicLinkDnsSupportRequest:
     type: object
     properties:
@@ -12764,7 +12700,6 @@ definitions:
       VpcIds:
         $ref: '#/definitions/VpcClassicLinkIdList'
         description: One or more VPC IDs.
-    description: Contains the parameters for DescribeVpcClassicLinkDnsSupport.
   DescribeVpcEndpointConnectionNotificationsResult:
     type: object
     properties:
@@ -12939,7 +12874,6 @@ definitions:
       VpcPeeringConnections:
         $ref: '#/definitions/VpcPeeringConnectionList'
         description: Information about the VPC peering connections.
-    description: Contains the output of DescribeVpcPeeringConnections.
   DescribeVpcPeeringConnectionsRequest:
     type: object
     properties:
@@ -12952,7 +12886,6 @@ definitions:
       VpcPeeringConnectionIds:
         $ref: '#/definitions/ValueStringList'
         description: '<p>One or more VPC peering connection IDs.</p> <p>Default: Describes all your VPC peering connections.</p>'
-    description: Contains the parameters for DescribeVpcPeeringConnections.
   DescribeVpcsResult:
     type: object
     example:
@@ -12970,7 +12903,6 @@ definitions:
       Vpcs:
         $ref: '#/definitions/VpcList'
         description: Information about one or more VPCs.
-    description: Contains the output of DescribeVpcs.
   DescribeVpcsRequest:
     type: object
     example:
@@ -12986,7 +12918,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DescribeVpcs.
   DescribeVpnConnectionsResult:
     type: object
     properties:
@@ -13033,7 +12964,6 @@ definitions:
       Return:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
-    description: Contains the output of DetachClassicLinkVpc.
   DetachClassicLinkVpcRequest:
     type: object
     required:
@@ -13049,7 +12979,6 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC to which the instance is linked.
-    description: Contains the parameters for DetachClassicLinkVpc.
   DetachInternetGatewayRequest:
     type: object
     required:
@@ -13068,7 +12997,6 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
-    description: Contains the parameters for DetachInternetGateway.
   DetachNetworkInterfaceRequest:
     type: object
     required:
@@ -13147,7 +13075,6 @@ definitions:
       Return:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
-    description: Contains the output of DisableVpcClassicLink.
   DisableVpcClassicLinkRequest:
     type: object
     required:
@@ -13159,21 +13086,18 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
-    description: Contains the parameters for DisableVpcClassicLink.
   DisableVpcClassicLinkDnsSupportResult:
     type: object
     properties:
       Return:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
-    description: Contains the output of DisableVpcClassicLinkDnsSupport.
   DisableVpcClassicLinkDnsSupportRequest:
     type: object
     properties:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
-    description: Contains the parameters for DisableVpcClassicLinkDnsSupport.
   DisassociateAddressRequest:
     type: object
     example:
@@ -13226,7 +13150,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DisassociateRouteTable.
   DisassociateSubnetCidrBlockResult:
     type: object
     properties:
@@ -13300,7 +13223,6 @@ definitions:
       Return:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
-    description: Contains the output of EnableVpcClassicLink.
   EnableVpcClassicLinkRequest:
     type: object
     required:
@@ -13312,21 +13234,18 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
-    description: Contains the parameters for EnableVpcClassicLink.
   EnableVpcClassicLinkDnsSupportResult:
     type: object
     properties:
       Return:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
-    description: Contains the output of EnableVpcClassicLinkDnsSupport.
   EnableVpcClassicLinkDnsSupportRequest:
     type: object
     properties:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
-    description: Contains the parameters for EnableVpcClassicLinkDnsSupport.
   GetConsoleOutputResult:
     type: object
     example:
@@ -13646,7 +13565,6 @@ definitions:
       KeyName:
         $ref: '#/definitions/String'
         description: The key pair name you provided.
-    description: Contains the output of ImportKeyPair.
   ImportKeyPairRequest:
     type: object
     required:
@@ -13662,7 +13580,6 @@ definitions:
       PublicKeyMaterial:
         $ref: '#/definitions/Blob'
         description: 'The public key. For API calls, the text must be base64-encoded. For command line tools, base64 encoding is performed for you.'
-    description: Contains the parameters for ImportKeyPair.
   ImportSnapshotResult:
     type: object
     properties:
@@ -13802,7 +13719,6 @@ definitions:
       Unsuccessful:
         $ref: '#/definitions/UnsuccessfulItemList'
         description: The IDs of the Dedicated Hosts that could not be modified. Check whether the setting you requested can be used.
-    description: Contains the output of ModifyHosts.
   ModifyHostsRequest:
     type: object
     required:
@@ -13815,7 +13731,6 @@ definitions:
       HostIds:
         $ref: '#/definitions/RequestHostIdList'
         description: The IDs of the Dedicated Hosts to modify.
-    description: Contains the parameters for ModifyHosts.
   ModifyIdFormatRequest:
     type: object
     required:
@@ -13974,7 +13889,6 @@ definitions:
       Return:
         $ref: '#/definitions/Boolean'
         description: 'Is <code>true</code> if the request succeeds, and an error otherwise.'
-    description: Contains the output of ModifyInstancePlacement.
   ModifyInstancePlacementRequest:
     type: object
     required:
@@ -13995,7 +13909,6 @@ definitions:
       Tenancy:
         $ref: '#/definitions/HostTenancy'
         description: The tenancy for the instance.
-    description: Contains the parameters for ModifyInstancePlacement.
   ModifyLaunchTemplateResult:
     type: object
     example:
@@ -14161,7 +14074,6 @@ definitions:
       SubnetId:
         $ref: '#/definitions/String'
         description: The ID of the subnet.
-    description: Contains the parameters for ModifySubnetAttribute.
   ModifyVolumeResult:
     type: object
     properties:
@@ -14226,7 +14138,6 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
-    description: Contains the parameters for ModifyVpcAttribute.
   ModifyVpcEndpointResult:
     type: object
     properties:
@@ -14363,7 +14274,7 @@ definitions:
         description: The VPC peering connection options for the accepter VPC.
       DryRun:
         $ref: '#/definitions/Boolean'
-        description: 'Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       RequesterPeeringConnectionOptions:
         $ref: '#/definitions/PeeringConnectionOptionsRequest'
         description: The VPC peering connection options for the requester VPC.
@@ -14376,7 +14287,6 @@ definitions:
       ReturnValue:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, returns an error.'
-    description: Contains the output of ModifyVpcTenancy.
   ModifyVpcTenancyRequest:
     type: object
     required:
@@ -14391,8 +14301,7 @@ definitions:
         description: 'The instance tenancy attribute for the VPC. '
       DryRun:
         $ref: '#/definitions/Boolean'
-        description: 'Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for ModifyVpcTenancy.
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   MonitorInstancesResult:
     type: object
     properties:
@@ -14645,7 +14554,6 @@ definitions:
       Return:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
-    description: Contains the output of RejectVpcPeeringConnection.
   RejectVpcPeeringConnectionRequest:
     type: object
     required:
@@ -14657,7 +14565,6 @@ definitions:
       VpcPeeringConnectionId:
         $ref: '#/definitions/String'
         description: The ID of the VPC peering connection.
-    description: Contains the parameters for RejectVpcPeeringConnection.
   ReleaseAddressRequest:
     type: object
     example:
@@ -14682,7 +14589,6 @@ definitions:
       Unsuccessful:
         $ref: '#/definitions/UnsuccessfulItemList'
         description: 'The IDs of the Dedicated Hosts that could not be released, including an error message.'
-    description: Contains the output of ReleaseHosts.
   ReleaseHostsRequest:
     type: object
     required:
@@ -14691,7 +14597,6 @@ definitions:
       HostIds:
         $ref: '#/definitions/RequestHostIdList'
         description: The IDs of the Dedicated Hosts to release.
-    description: Contains the parameters for ReleaseHosts.
   ReplaceIamInstanceProfileAssociationResult:
     type: object
     properties:
@@ -14718,7 +14623,6 @@ definitions:
       NewAssociationId:
         $ref: '#/definitions/String'
         description: The ID of the new association.
-    description: Contains the output of ReplaceNetworkAclAssociation.
   ReplaceNetworkAclAssociationRequest:
     type: object
     required:
@@ -14737,7 +14641,6 @@ definitions:
       NetworkAclId:
         $ref: '#/definitions/String'
         description: The ID of the new network ACL to associate with the subnet.
-    description: Contains the parameters for ReplaceNetworkAclAssociation.
   ReplaceNetworkAclEntryRequest:
     type: object
     required:
@@ -14787,7 +14690,6 @@ definitions:
       RuleNumber:
         $ref: '#/definitions/Integer'
         description: The rule number of the entry to replace.
-    description: Contains the parameters for ReplaceNetworkAclEntry.
   ReplaceRouteRequest:
     type: object
     required:
@@ -14827,7 +14729,6 @@ definitions:
       VpcPeeringConnectionId:
         $ref: '#/definitions/String'
         description: The ID of a VPC peering connection.
-    description: Contains the parameters for ReplaceRoute.
   ReplaceRouteTableAssociationResult:
     type: object
     example:
@@ -14836,7 +14737,6 @@ definitions:
       NewAssociationId:
         $ref: '#/definitions/String'
         description: The ID of the new association.
-    description: Contains the output of ReplaceRouteTableAssociation.
   ReplaceRouteTableAssociationRequest:
     type: object
     required:
@@ -14855,7 +14755,6 @@ definitions:
       RouteTableId:
         $ref: '#/definitions/String'
         description: The ID of the new route table to associate with the subnet.
-    description: Contains the parameters for ReplaceRouteTableAssociation.
   ReportInstanceStatusRequest:
     type: object
     required:
@@ -15134,7 +15033,6 @@ definitions:
       SourceSecurityGroupOwnerId:
         $ref: '#/definitions/String'
         description: Not supported. Use a set of IP permissions to specify a destination security group.
-    description: Contains the parameters for RevokeSecurityGroupEgress.
   RevokeSecurityGroupIngressRequest:
     type: object
     properties:
@@ -15168,7 +15066,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for RevokeSecurityGroupIngress.
   Reservation:
     type: object
     example: {}
@@ -15302,7 +15199,7 @@ definitions:
         description: '<p>The market (purchasing) option for the instances.</p> <p>For <a>RunInstances</a>, persistent Spot Instance requests are only supported when <b>InstanceInterruptionBehavior</b> is set to either <code>hibernate</code> or <code>stop</code>.</p>'
       CreditSpecification:
         $ref: '#/definitions/CreditSpecificationRequest'
-        description: '<p>The credit option for CPU usage of the instance. Valid values are <code>standard</code> and <code>unlimited</code>. To change this attribute after launch, use <a>ModifyInstanceCreditSpecification</a>. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html">T2 Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Default: <code>standard</code> </p>'
+        description: '<p>The credit option for CPU usage of the instance. Valid values are <code>standard</code> and <code>unlimited</code>. To change this attribute after launch, use <a>ModifyInstanceCreditSpecification</a>. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Default: <code>standard</code> (T2 instances) or <code>unlimited</code> (T3 instances)</p>'
       CpuOptions:
         $ref: '#/definitions/CpuOptionsRequest'
         description: 'The CPU options for the instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html">Optimizing CPU Options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
@@ -15515,7 +15412,6 @@ definitions:
       Return:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, returns an error.'
-    description: Contains the output of UpdateSecurityGroupRuleDescriptionsEgress.
   UpdateSecurityGroupRuleDescriptionsEgressRequest:
     type: object
     required:
@@ -15542,7 +15438,6 @@ definitions:
       IpPermissions:
         $ref: '#/definitions/IpPermissionList'
         description: The IP permissions for the security group rule.
-    description: Contains the parameters for UpdateSecurityGroupRuleDescriptionsEgress.
   UpdateSecurityGroupRuleDescriptionsIngressResult:
     type: object
     example: {}
@@ -15550,7 +15445,6 @@ definitions:
       Return:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, returns an error.'
-    description: Contains the output of UpdateSecurityGroupRuleDescriptionsIngress.
   UpdateSecurityGroupRuleDescriptionsIngressRequest:
     type: object
     required:
@@ -15577,7 +15471,6 @@ definitions:
       IpPermissions:
         $ref: '#/definitions/IpPermissionList'
         description: 'The IP permissions for the security group rule. '
-    description: Contains the parameters for UpdateSecurityGroupRuleDescriptionsIngress.
   Boolean:
     type: boolean
   ReservedInstanceIdSet:
@@ -15742,6 +15635,10 @@ definitions:
       - 'off'
   Integer:
     type: integer
+  TagSpecificationList:
+    type: array
+    items:
+      $ref: '#/definitions/TagSpecification'
   ResponseHostIdList:
     type: array
     items:
@@ -15999,18 +15896,12 @@ definitions:
   EbsBlockDevice:
     type: object
     properties:
-      Encrypted:
-        $ref: '#/definitions/Boolean'
-        description: 'Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can''t specify an encryption value. This is because only blank volumes can be encrypted on creation.'
       DeleteOnTermination:
         $ref: '#/definitions/Boolean'
         description: Indicates whether the EBS volume is deleted on instance termination.
       Iops:
         $ref: '#/definitions/Integer'
         description: '<p>The number of I/O operations per second (IOPS) that the volume supports. For <code>io1</code>, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code>, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraint: Range is 100-20000 IOPS for <code>io1</code> volumes and 100-10000 IOPS for <code>gp2</code> volumes.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>'
-      KmsKeyId:
-        $ref: '#/definitions/String'
-        description: '<p>Identifier (key ID, key alias, ID ARN, or alias ARN) for a user-managed CMK under which the EBS volume is encrypted.</p> <p>This parameter is only supported on <code>BlockDeviceMapping</code> objects called by <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html">RunInstances</a>, <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html">RequestSpotFleet</a>, and <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html">RequestSpotInstances</a>.</p>'
       SnapshotId:
         $ref: '#/definitions/String'
         description: The ID of the snapshot.
@@ -16020,6 +15911,12 @@ definitions:
       VolumeType:
         $ref: '#/definitions/VolumeType'
         description: '<p>The volume type: <code>gp2</code>, <code>io1</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code>.</p> <p>Default: <code>standard</code> </p>'
+      Encrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can''t specify an encryption value. This is because only blank volumes can be encrypted on creation.'
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: '<p>Identifier (key ID, key alias, ID ARN, or alias ARN) for a user-managed CMK under which the EBS volume is encrypted.</p> <p>This parameter is only supported on <code>BlockDeviceMapping</code> objects called by <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html">RunInstances</a>, <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html">RequestSpotFleet</a>, and <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html">RequestSpotInstances</a>.</p>'
     description: Describes a block device for an EBS volume.
   BlockDeviceMapping:
     type: object
@@ -16598,10 +16495,6 @@ definitions:
     enum:
       - request
       - maintain
-  TagSpecificationList:
-    type: array
-    items:
-      $ref: '#/definitions/TagSpecification'
   FleetIdentifier:
     type: string
   FlowLogsResourceType:
@@ -16758,7 +16651,7 @@ definitions:
         description: The market (purchasing) option for the instances.
       CreditSpecification:
         $ref: '#/definitions/CreditSpecificationRequest'
-        description: The credit option for CPU usage of the instance. Valid for T2 instances only.
+        description: The credit option for CPU usage of the instance. Valid for T2 or T3 instances only.
       CpuOptions:
         $ref: '#/definitions/LaunchTemplateCpuOptionsRequest'
         description: 'The CPU options for the instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html">Optimizing CPU Options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
@@ -17257,8 +17150,8 @@ definitions:
     properties:
       CpuCredits:
         $ref: '#/definitions/String'
-        description: The credit option for CPU usage of a T2 instance. Valid values are <code>standard</code> and <code>unlimited</code>.
-    description: Describes the credit option for CPU usage of a T2 instance.
+        description: The credit option for CPU usage of a T2 or T3 instance. Valid values are <code>standard</code> and <code>unlimited</code>.
+    description: Describes the credit option for CPU usage of a T2 or T3 instance.
   CreditSpecificationRequest:
     type: object
     required:
@@ -17266,8 +17159,8 @@ definitions:
     properties:
       CpuCredits:
         $ref: '#/definitions/String'
-        description: The credit option for CPU usage of a T2 instance. Valid values are <code>standard</code> and <code>unlimited</code>.
-    description: The credit option for CPU usage of a T2 instance.
+        description: The credit option for CPU usage of a T2 or T3 instance. Valid values are <code>standard</code> and <code>unlimited</code>.
+    description: The credit option for CPU usage of a T2 or T3 instance.
   CurrencyCodeValues:
     type: string
     enum:
@@ -18553,7 +18446,7 @@ definitions:
         description: The name of the launch template. You must specify either a template name or a template ID.
       Version:
         $ref: '#/definitions/String'
-        description: 'The version number. By default, the default version of the launch template is used.'
+        description: The version number of the launch template. You must specify a version number.
     description: Describes a launch template.
   FleetLaunchTemplateOverridesList:
     type: array
@@ -19690,7 +19583,7 @@ definitions:
       CpuCredits:
         $ref: '#/definitions/String'
         description: The credit option for CPU usage of the instance. Valid values are <code>standard</code> and <code>unlimited</code>.
-    description: 'Describes the credit option for CPU usage of a T2 instance. '
+    description: 'Describes the credit option for CPU usage of a T2 or T3 instance. '
   InstanceCreditSpecificationRequest:
     type: object
     properties:
@@ -19700,7 +19593,7 @@ definitions:
       CpuCredits:
         $ref: '#/definitions/String'
         description: The credit option for CPU usage of the instance. Valid values are <code>standard</code> and <code>unlimited</code>.
-    description: Describes the credit option for CPU usage of a T2 instance.
+    description: Describes the credit option for CPU usage of a T2 or T3 instance.
   InstanceCreditSpecificationListRequest:
     type: array
     items:
@@ -20094,7 +19987,7 @@ definitions:
         description: '[EC2-VPC only] One or more IPv6 ranges.'
       PrefixListIds:
         $ref: '#/definitions/PrefixListIdList'
-        description: '(EC2-VPC only; valid for <a>AuthorizeSecurityGroupEgress</a>, <a>RevokeSecurityGroupEgress</a> and <a>DescribeSecurityGroups</a> only) One or more prefix list IDs for an AWS service. In an <a>AuthorizeSecurityGroupEgress</a> request, this is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.'
+        description: '[EC2-VPC only] One or more prefix list IDs for an AWS service. With <a>AuthorizeSecurityGroupEgress</a>, this is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.'
       ToPort:
         $ref: '#/definitions/Integer'
         description: 'The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of <code>-1</code> indicates all ICMP/ICMPv6 codes for the specified ICMP type. If you specify all ICMP/ICMPv6 types, you must specify all codes.'
@@ -20692,6 +20585,7 @@ definitions:
     type: string
     enum:
       - customer-gateway
+      - dedicated-host
       - dhcp-options
       - image
       - instance
@@ -20901,10 +20795,10 @@ definitions:
         description: 'If true, enables a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.'
       AllowEgressFromLocalClassicLinkToRemoteVpc:
         $ref: '#/definitions/Boolean'
-        description: 'If true, enables outbound communication from an EC2-Classic instance that''s linked to a local VPC via ClassicLink to instances in a peer VPC.'
+        description: 'If true, enables outbound communication from an EC2-Classic instance that''s linked to a local VPC using ClassicLink to instances in a peer VPC.'
       AllowEgressFromLocalVpcToRemoteClassicLink:
         $ref: '#/definitions/Boolean'
-        description: 'If true, enables outbound communication from instances in a local VPC to an EC2-Classic instance that''s linked to a peer VPC via ClassicLink.'
+        description: 'If true, enables outbound communication from instances in a local VPC to an EC2-Classic instance that''s linked to a peer VPC using ClassicLink.'
     description: The VPC peering connection options.
   PeeringConnectionOptions:
     type: object
@@ -20914,10 +20808,10 @@ definitions:
         description: 'If true, the public DNS hostnames of instances in the specified VPC resolve to private IP addresses when queried from instances in the peer VPC.'
       AllowEgressFromLocalClassicLinkToRemoteVpc:
         $ref: '#/definitions/Boolean'
-        description: 'If true, enables outbound communication from an EC2-Classic instance that''s linked to a local VPC via ClassicLink to instances in a peer VPC.'
+        description: 'If true, enables outbound communication from an EC2-Classic instance that''s linked to a local VPC using ClassicLink to instances in a peer VPC.'
       AllowEgressFromLocalVpcToRemoteClassicLink:
         $ref: '#/definitions/Boolean'
-        description: 'If true, enables outbound communication from instances in a local VPC to an EC2-Classic instance that''s linked to a peer VPC via ClassicLink.'
+        description: 'If true, enables outbound communication from instances in a local VPC to an EC2-Classic instance that''s linked to a peer VPC using ClassicLink.'
     description: Describes the VPC peering connection options.
   VpcTenancy:
     type: string
@@ -21181,7 +21075,7 @@ definitions:
       PrefixListId:
         $ref: '#/definitions/String'
         description: The ID of the prefix.
-    description: '[EC2-VPC only] The ID of the prefix.'
+    description: Describes a prefix list ID.
   PrefixListIdSet:
     type: array
     items:
@@ -22560,13 +22454,13 @@ definitions:
       InstanceId:
         $ref: '#/definitions/String'
         description: The ID of the instance.
-    description: Describes the T2 instance whose credit option for CPU usage was successfully modified.
+    description: Describes the T2 or T3 instance whose credit option for CPU usage was successfully modified.
   Tag:
     type: object
     properties:
       Key:
         $ref: '#/definitions/String'
-        description: '<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code> </p>'
+        description: '<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>'
       Value:
         $ref: '#/definitions/String'
         description: '<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.</p>'
@@ -22592,7 +22486,7 @@ definitions:
     properties:
       ResourceType:
         $ref: '#/definitions/ResourceType'
-        description: 'The type of resource to tag. Currently, the resource types that support tagging on creation are <code>fleet</code>, <code>instance</code>, <code>snapshot</code>, and <code>volume</code>. To tag a resource after it has been created, see <a>CreateTags</a>.'
+        description: 'The type of resource to tag. Currently, the resource types that support tagging on creation are <code>fleet</code>, <code>dedicated-host</code>, <code>instance</code>, <code>snapshot</code>, and <code>volume</code>. To tag a resource after it has been created, see <a>CreateTags</a>.'
       Tags:
         $ref: '#/definitions/TagList'
         description: The tags to apply to the resource.
@@ -22679,7 +22573,7 @@ definitions:
       Message:
         $ref: '#/definitions/String'
         description: The applicable error message.
-    description: Information about the error for the T2 instance whose credit option for CPU usage was not modified.
+    description: Information about the error for the T2 or T3 instance whose credit option for CPU usage was not modified.
   UnsuccessfulInstanceCreditSpecificationItem:
     type: object
     properties:
@@ -22688,8 +22582,8 @@ definitions:
         description: The ID of the instance.
       Error:
         $ref: '#/definitions/UnsuccessfulInstanceCreditSpecificationItemError'
-        description: The applicable error for the T2 instance whose credit option for CPU usage was not modified.
-    description: Describes the T2 instance whose credit option for CPU usage was not modified.
+        description: The applicable error for the T2 or T3 instance whose credit option for CPU usage was not modified.
+    description: Describes the T2 or T3 instance whose credit option for CPU usage was not modified.
   UnsuccessfulItemError:
     type: object
     required:

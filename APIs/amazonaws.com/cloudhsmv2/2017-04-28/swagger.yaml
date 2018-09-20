@@ -102,7 +102,7 @@ paths:
   /:
     post:
       operationId: CopyBackupToRegion
-      description: ''
+      description: Copy an AWS CloudHSM cluster backup to a different region.
       responses:
         '200':
           description: Success
@@ -224,6 +224,51 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateHsmRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteBackup':
+    post:
+      operationId: DeleteBackup
+      description: 'Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days after the DeleteBackup request. For more information on restoring a backup, see <a>RestoreBackup</a> '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteBackupResponse'
+        '480':
+          description: CloudHsmInternalFailureException
+          schema:
+            $ref: '#/definitions/CloudHsmInternalFailureException'
+        '481':
+          description: CloudHsmServiceException
+          schema:
+            $ref: '#/definitions/CloudHsmServiceException'
+        '482':
+          description: CloudHsmResourceNotFoundException
+          schema:
+            $ref: '#/definitions/CloudHsmResourceNotFoundException'
+        '483':
+          description: CloudHsmInvalidRequestException
+          schema:
+            $ref: '#/definitions/CloudHsmInvalidRequestException'
+        '484':
+          description: CloudHsmAccessDeniedException
+          schema:
+            $ref: '#/definitions/CloudHsmAccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBackupRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -530,6 +575,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RestoreBackup':
+    post:
+      operationId: RestoreBackup
+      description: 'Restores a specified AWS CloudHSM backup that is in the <code>PENDING_DELETION</code> state. For more information on deleting a backup, see <a>DeleteBackup</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestoreBackupResponse'
+        '480':
+          description: CloudHsmInternalFailureException
+          schema:
+            $ref: '#/definitions/CloudHsmInternalFailureException'
+        '481':
+          description: CloudHsmServiceException
+          schema:
+            $ref: '#/definitions/CloudHsmServiceException'
+        '482':
+          description: CloudHsmResourceNotFoundException
+          schema:
+            $ref: '#/definitions/CloudHsmResourceNotFoundException'
+        '483':
+          description: CloudHsmInvalidRequestException
+          schema:
+            $ref: '#/definitions/CloudHsmInvalidRequestException'
+        '484':
+          description: CloudHsmAccessDeniedException
+          schema:
+            $ref: '#/definitions/CloudHsmAccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RestoreBackupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#TagResource':
     post:
       operationId: TagResource
@@ -626,6 +716,7 @@ definitions:
     properties:
       DestinationBackup:
         $ref: '#/definitions/DestinationBackup'
+        description: '<p>Information on the backup that will be copied to the destination region, including CreateTimestamp, SourceBackup, SourceCluster, and Source Region. CreateTimestamp of the destination backup will be the same as that of the source backup.</p> <p>You will need to use the <code>sourceBackupID</code> returned in this operation to use the <a>DescribeBackups</a> operation on the backup that will be copied to the destination region.</p>'
   CopyBackupToRegionRequest:
     type: object
     required:
@@ -634,38 +725,15 @@ definitions:
     properties:
       DestinationRegion:
         $ref: '#/definitions/Region'
+        description: The AWS region that will contain your copied CloudHSM cluster backup.
       BackupId:
         $ref: '#/definitions/BackupId'
-  CloudHsmInternalFailureException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: The request was rejected because of an AWS CloudHSM internal failure. The request can be retried.
-  CloudHsmServiceException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: The request was rejected because an error occurred.
-  CloudHsmResourceNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: The request was rejected because it refers to a resource that cannot be found.
-  CloudHsmInvalidRequestException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: The request was rejected because it is not a valid request.
-  CloudHsmAccessDeniedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: The request was rejected because the requester does not have permission to perform the requested operation.
+        description: 'The ID of the backup that will be copied to the destination region. '
+  CloudHsmInternalFailureException: {}
+  CloudHsmServiceException: {}
+  CloudHsmResourceNotFoundException: {}
+  CloudHsmInvalidRequestException: {}
+  CloudHsmAccessDeniedException: {}
   CreateClusterResponse:
     type: object
     properties:
@@ -708,6 +776,20 @@ definitions:
       IpAddress:
         $ref: '#/definitions/IpAddress'
         description: 'The HSM''s IP address. If you specify an IP address, use an available address from the subnet that maps to the Availability Zone where you are creating the HSM. If you don''t specify an IP address, one is chosen for you from that subnet.'
+  DeleteBackupResponse:
+    type: object
+    properties:
+      Backup:
+        $ref: '#/definitions/Backup'
+        description: Information on the <code>Backup</code> object deleted.
+  DeleteBackupRequest:
+    type: object
+    required:
+      - BackupId
+    properties:
+      BackupId:
+        $ref: '#/definitions/BackupId'
+        description: 'The ID of the backup to be deleted. To find the ID of a backup, use the <a>DescribeBackups</a> operation.'
   DeleteClusterResponse:
     type: object
     properties:
@@ -765,7 +847,7 @@ definitions:
         description: 'The maximum number of backups to return in the response. When there are more backups than the number you specify, the response contains a <code>NextToken</code> value.'
       Filters:
         $ref: '#/definitions/Filters'
-        description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>backupIds</code> filter to return only the specified backups. Specify backups by their backup identifier (ID).</p> <p>Use the <code>clusterIds</code> filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>states</code> filter to return only backups that match the specified state.</p>
+        description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>backupIds</code> filter to return only the specified backups. Specify backups by their backup identifier (ID).</p> <p>Use the <code>sourceBackupIds</code> filter to return only the backups created from a source backup. The <code>sourceBackupID</code> of a source backup is returned by the <a>CopyBackupToRegion</a> operation.</p> <p>Use the <code>clusterIds</code> filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>states</code> filter to return only backups that match the specified state.</p>
       SortAscending:
         $ref: '#/definitions/Boolean'
   DescribeClustersResponse:
@@ -839,6 +921,20 @@ definitions:
       MaxResults:
         $ref: '#/definitions/MaxSize'
         description: 'The maximum number of tags to return in the response. When there are more tags than the number you specify, the response contains a <code>NextToken</code> value.'
+  RestoreBackupResponse:
+    type: object
+    properties:
+      Backup:
+        $ref: '#/definitions/Backup'
+        description: Information on the <code>Backup</code> object created.
+  RestoreBackupRequest:
+    type: object
+    required:
+      - BackupId
+    properties:
+      BackupId:
+        $ref: '#/definitions/BackupId'
+        description: 'The ID of the backup to be restored. To find the ID of a backup, use the <a>DescribeBackups</a> operation.'
   TagResourceResponse:
     type: object
     properties: {}
@@ -878,6 +974,7 @@ definitions:
       - CREATE_IN_PROGRESS
       - READY
       - DELETED
+      - PENDING_DELETION
   ClusterId:
     type: string
     pattern: 'cluster-[2-7a-zA-Z]{11,16}'
@@ -912,6 +1009,9 @@ definitions:
         $ref: '#/definitions/BackupId'
       SourceCluster:
         $ref: '#/definitions/ClusterId'
+      DeleteTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time when the backup will be permanently deleted.
     description: Contains information about a backup of an AWS CloudHSM cluster.
   BackupPolicy:
     type: string
@@ -946,8 +1046,6 @@ definitions:
         $ref: '#/definitions/Cert'
         description: The cluster certificate issued (signed) by the issuing certificate authority (CA) of the cluster's owner.
     description: Contains one or more certificates or a certificate signing request (CSR).
-  errorMessage:
-    type: string
   Hsms:
     type: array
     items:

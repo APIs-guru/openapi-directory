@@ -1055,25 +1055,10 @@ definitions:
         $ref: '#/definitions/TagList'
         description: ' List of <code>Tag</code> that need to be added for the Elasticsearch domain. '
     description: Container for the parameters to the <code><a>AddTags</a></code> operation. Specify the tags that you want to attach to the Elasticsearch domain.
-  BaseException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A description of the error.
-    description: An error occurred while processing the request.
-  LimitExceededException:
-    type: object
-    properties: {}
-    description: An exception for trying to create more than allowed resources or sub-resources. Gives http status code of 409.
-  ValidationException:
-    type: object
-    properties: {}
-    description: An exception for missing / invalid input fields. Gives http status code of 400.
-  InternalException:
-    type: object
-    properties: {}
-    description: 'The request processing has failed because of an unknown error, exception or failure (the failure is internal to the service) . Gives http status code of 500.'
+  BaseException: {}
+  LimitExceededException: {}
+  ValidationException: {}
+  InternalException: {}
   CreateElasticsearchDomainResponse:
     type: object
     properties:
@@ -1113,24 +1098,18 @@ definitions:
       EncryptionAtRestOptions:
         $ref: '#/definitions/EncryptionAtRestOptions'
         description: Specifies the Encryption At Rest Options.
+      NodeToNodeEncryptionOptions:
+        $ref: '#/definitions/NodeToNodeEncryptionOptions'
+        description: Specifies the NodeToNodeEncryptionOptions.
       AdvancedOptions:
         $ref: '#/definitions/AdvancedOptions'
         description: ' Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.'
       LogPublishingOptions:
         $ref: '#/definitions/LogPublishingOptions'
         description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
-  DisabledOperationException:
-    type: object
-    properties: {}
-    description: An error occured because the client wanted to access a not supported operation. Gives http status code of 409.
-  InvalidTypeException:
-    type: object
-    properties: {}
-    description: An exception for trying to create or access sub-resource that is either invalid or not supported. Gives http status code of 409.
-  ResourceAlreadyExistsException:
-    type: object
-    properties: {}
-    description: An exception for creating a resource that already exists. Gives http status code of 400.
+  DisabledOperationException: {}
+  InvalidTypeException: {}
+  ResourceAlreadyExistsException: {}
   DeleteElasticsearchDomainResponse:
     type: object
     properties:
@@ -1142,10 +1121,7 @@ definitions:
     type: object
     properties: {}
     description: Container for the parameters to the <code><a>DeleteElasticsearchDomain</a></code> operation. Specifies the name of the Elasticsearch domain that you want to delete.
-  ResourceNotFoundException:
-    type: object
-    properties: {}
-    description: An exception for accessing or deleting a resource that does not exist. Gives http status code of 400.
+  ResourceNotFoundException: {}
   DescribeElasticsearchDomainResponse:
     type: object
     required:
@@ -1509,8 +1485,6 @@ definitions:
         $ref: '#/definitions/OptionStatus'
         description: ' Specifies the status of <code>OptionStatus</code> for advanced options for the specified Elasticsearch domain.'
     description: '<p> Status of the advanced options for the specified Elasticsearch domain. Currently, the following advanced options are available:</p> <ul> <li>Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</li> <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options">Configuring Advanced Options</a>.</p>'
-  ErrorMessage:
-    type: string
   Boolean:
     type: boolean
   CloudWatchLogsLogGroupArn:
@@ -1650,6 +1624,13 @@ definitions:
         $ref: '#/definitions/KmsKeyId'
         description: ' Specifies the KMS Key ID for Encryption At Rest options.'
     description: Specifies the Encryption At Rest Options.
+  NodeToNodeEncryptionOptions:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Specify true to enable node-to-node encryption.
+    description: Specifies the node-to-node encryption options.
   LogPublishingOptions:
     type: array
     items:
@@ -1717,6 +1698,9 @@ definitions:
       EncryptionAtRestOptions:
         $ref: '#/definitions/EncryptionAtRestOptions'
         description: ' Specifies the status of the <code>EncryptionAtRestOptions</code>.'
+      NodeToNodeEncryptionOptions:
+        $ref: '#/definitions/NodeToNodeEncryptionOptions'
+        description: Specifies the status of the <code>NodeToNodeEncryptionOptions</code>.
       AdvancedOptions:
         $ref: '#/definitions/AdvancedOptions'
         description: Specifies the status of the <code>AdvancedOptions</code>
@@ -1751,6 +1735,9 @@ definitions:
       EncryptionAtRestOptions:
         $ref: '#/definitions/EncryptionAtRestOptionsStatus'
         description: Specifies the <code>EncryptionAtRestOptions</code> for the Elasticsearch domain.
+      NodeToNodeEncryptionOptions:
+        $ref: '#/definitions/NodeToNodeEncryptionOptionsStatus'
+        description: Specifies the <code>NodeToNodeEncryptionOptions</code> for the Elasticsearch domain.
       AdvancedOptions:
         $ref: '#/definitions/AdvancedOptionsStatus'
         description: 'Specifies the <code>AdvancedOptions</code> for the domain. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuring Advanced Options</a> for more information.'
@@ -1945,6 +1932,19 @@ definitions:
         $ref: '#/definitions/OptionStatus'
         description: ' Specifies the status of the Encryption At Rest options for the specified Elasticsearch domain.'
     description: ' Status of the Encryption At Rest options for the specified Elasticsearch domain.'
+  NodeToNodeEncryptionOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/NodeToNodeEncryptionOptions'
+        description: Specifies the node-to-node encryption options for the specified Elasticsearch domain.
+      Status:
+        $ref: '#/definitions/OptionStatus'
+        description: Specifies the status of the node-to-node encryption options for the specified Elasticsearch domain.
+    description: Status of the node-to-node encryption options for the specified Elasticsearch domain.
   LogPublishingOptionsStatus:
     type: object
     properties:

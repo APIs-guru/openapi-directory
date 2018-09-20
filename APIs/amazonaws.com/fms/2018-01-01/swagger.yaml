@@ -102,7 +102,7 @@ paths:
   /:
     post:
       operationId: AssociateAdminAccount
-      description: '<p>Sets the AWS Firewall Manager administrator account. AWS Firewall Manager must be associated with a master account in AWS Organizations or associated with a member account that has the appropriate permissions. If the account ID that you submit is not an AWS Organizations master account, AWS Firewall Manager will set the appropriate permissions for the given member account.</p> <p>The account that you associate with AWS Firewall Manager is called the AWS Firewall manager administrator account. </p>'
+      description: '<p>Sets the AWS Firewall Manager administrator account. AWS Firewall Manager must be associated with the master account your AWS organization or associated with a member account that has the appropriate permissions. If the account ID that you submit is not an AWS Organizations master account, AWS Firewall Manager will set the appropriate permissions for the given member account.</p> <p>The account that you associate with AWS Firewall Manager is called the AWS Firewall Manager administrator account. </p>'
       responses:
         '200':
           description: Success
@@ -371,6 +371,10 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
+        '483':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
       parameters:
         - name: body
           in: body
@@ -410,6 +414,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListComplianceStatusRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListMemberAccounts':
+    post:
+      operationId: ListMemberAccounts
+      description: <p>Returns a <code>MemberAccounts</code> object that lists the member accounts in the administrator's AWS organization.</p> <p>The <code>ListMemberAccounts</code> must be submitted by the account that is set as the AWS Firewall Manager administrator.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListMemberAccountsResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListMemberAccountsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -518,9 +555,17 @@ paths:
           schema:
             $ref: '#/definitions/InvalidInputException'
         '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
+        '485':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
       parameters:
         - name: body
           in: body
@@ -546,30 +591,10 @@ definitions:
       AdminAccount:
         $ref: '#/definitions/AWSAccountId'
         description: 'The AWS account ID to associate with AWS Firewall Manager as the AWS Firewall Manager administrator account. This can be an AWS Organizations master account or a member account. For more information about AWS Organizations and master accounts, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html">Managing the AWS Accounts in Your Organization</a>.'
-  InvalidOperationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The operation failed because there was nothing to do. For example, you might have submitted an <code>AssociateAdminAccount</code> request, but the account ID that you submitted was already set as the AWS Firewall Manager administrator.'
-  InvalidInputException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The parameters of the request were invalid.
-  ResourceNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified resource was not found.
-  InternalErrorException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The operation failed because of a system problem, even though the request was valid. Retry your request.'
+  InvalidOperationException: {}
+  InvalidInputException: {}
+  ResourceNotFoundException: {}
+  InternalErrorException: {}
   DeleteNotificationChannelRequest:
     type: object
     properties: {}
@@ -590,6 +615,9 @@ definitions:
       AdminAccount:
         $ref: '#/definitions/AWSAccountId'
         description: The AWS account that is set as the AWS Firewall Manager administrator.
+      RoleStatus:
+        $ref: '#/definitions/AccountRoleStatus'
+        description: The status of the AWS account that you set as the AWS Firewall Manager administrator.
   GetAdminAccountRequest:
     type: object
     properties: {}
@@ -640,6 +668,7 @@ definitions:
       PolicyId:
         $ref: '#/definitions/PolicyId'
         description: The ID of the AWS Firewall Manager policy that you want the details for.
+  InvalidTypeException: {}
   ListComplianceStatusResponse:
     type: object
     properties:
@@ -663,6 +692,24 @@ definitions:
       MaxResults:
         $ref: '#/definitions/PaginationMaxResults'
         description: 'Specifies the number of <code>PolicyComplianceStatus</code> objects that you want AWS Firewall Manager to return for this request. If you have more <code>PolicyComplianceStatus</code> objects than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of <code>PolicyComplianceStatus</code> objects.'
+  ListMemberAccountsResponse:
+    type: object
+    properties:
+      MemberAccounts:
+        $ref: '#/definitions/MemberAccounts'
+        description: An array of account IDs.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you have more member account IDs than the number that you specified for <code>MaxResults</code> in the request, the response includes a <code>NextToken</code> value. To list more IDs, submit another <code>ListMemberAccounts</code> request, and specify the <code>NextToken</code> value from the response in the <code>NextToken</code> value in the next request.'
+  ListMemberAccountsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you specify a value for <code>MaxResults</code> and you have more account IDs than the number that you specify for <code>MaxResults</code>, AWS Firewall Manager returns a <code>NextToken</code> value in the response that allows you to list another group of IDs. For the second and subsequent <code>ListMemberAccountsRequest</code> requests, specify the value of <code>NextToken</code> from the previous response to get information about another batch of member account IDs.'
+      MaxResults:
+        $ref: '#/definitions/PaginationMaxResults'
+        description: 'Specifies the number of member account IDs that you want AWS Firewall Manager to return for this request. If you have more IDs than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of member account IDs. The maximum value for <code>MaxResults</code> is 100.'
   ListPoliciesResponse:
     type: object
     properties:
@@ -681,12 +728,7 @@ definitions:
       MaxResults:
         $ref: '#/definitions/PaginationMaxResults'
         description: 'Specifies the number of <code>PolicySummary</code> objects that you want AWS Firewall Manager to return for this request. If you have more <code>PolicySummary</code> objects than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of <code>PolicySummary</code> objects.'
-  LimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The operation exceeds a resource limit, for example, the maximum number of <code>policy</code> objects that you can create for an AWS account. For more information, see <a href="http://docs.aws.amazon.com/waf/latest/developerguide/fms-limits.html">Firewall Manager Limits</a> in the <i>AWS WAF Developer Guide</i>.'
+  LimitExceededException: {}
   PutNotificationChannelRequest:
     type: object
     required:
@@ -720,6 +762,14 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1024
+  AccountRoleStatus:
+    type: string
+    enum:
+      - READY
+      - CREATING
+      - PENDING_DELETION
+      - DELETING
+      - DELETED
   Boolean:
     type: boolean
   ResourceId:
@@ -753,12 +803,40 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ComplianceViolator'
+  CustomerPolicyScopeId:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  CustomerPolicyScopeIdList:
+    type: array
+    items:
+      $ref: '#/definitions/CustomerPolicyScopeId'
+  CustomerPolicyScopeIdType:
+    type: string
+    enum:
+      - ACCOUNT
+  CustomerPolicyScopeMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/CustomerPolicyScopeIdType'
+        value:
+          $ref: '#/definitions/CustomerPolicyScopeIdList'
   PolicyId:
     type: string
     minLength: 36
     maxLength: 36
-  ErrorMessage:
+  DependentServiceName:
     type: string
+    enum:
+      - AWSCONFIG
+      - AWSWAF
+  DetailedInfo:
+    type: string
+    minLength: 1
+    maxLength: 1024
   PolicyComplianceStatusType:
     type: string
     enum:
@@ -805,6 +883,9 @@ definitions:
       ExpiredAt:
         $ref: '#/definitions/TimeStamp'
         description: A time stamp that indicates when the returned information should be considered out-of-date.
+      IssueInfoMap:
+        $ref: '#/definitions/IssueInfoMap'
+        description: 'Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message recieved indicating the problem with the service.'
     description: 'Describes the non-compliant resources in a member account for a specific AWS Firewall Manager policy. A maximum of 100 entries are displayed. If more than 100 resources are non-compliant, <code>EvaluationLimitExceeded</code> is set to <code>True</code>.'
   ResourceArn:
     type: string
@@ -843,7 +924,22 @@ definitions:
       RemediationEnabled:
         $ref: '#/definitions/Boolean'
         description: Indicates if the policy should be automatically applied to new resources.
+      IncludeMap:
+        $ref: '#/definitions/CustomerPolicyScopeMap'
+        description: '<p>Specifies the AWS account IDs to include in the policy. If <code>IncludeMap</code> is null, all accounts in the AWS Organization are included in the policy. If <code>IncludeMap</code> is not null, only values listed in <code>IncludeMap</code> will be included in the policy.</p> <p>The key to the map is <code>ACCOUNT</code>. For example, a valid <code>IncludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>'
+      ExcludeMap:
+        $ref: '#/definitions/CustomerPolicyScopeMap'
+        description: '<p>Specifies the AWS account IDs to exclude from the policy. The <code>IncludeMap</code> values are evaluated first, with all of the appropriate account IDs added to the policy. Then the accounts listed in <code>ExcludeMap</code> are removed, resulting in the final list of accounts to add to the policy.</p> <p>The key to the map is <code>ACCOUNT</code>. For example, a valid <code>ExcludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>'
     description: An AWS Firewall Manager policy.
+  IssueInfoMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DependentServiceName'
+        value:
+          $ref: '#/definitions/DetailedInfo'
   PaginationToken:
     type: string
     minLength: 1
@@ -855,6 +951,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PolicyComplianceStatus'
+  MemberAccounts:
+    type: array
+    items:
+      $ref: '#/definitions/AWSAccountId'
   PolicySummaryList:
     type: array
     items:
@@ -913,6 +1013,9 @@ definitions:
       LastUpdated:
         $ref: '#/definitions/TimeStamp'
         description: Time stamp of the last update to the <code>EvaluationResult</code> objects.
+      IssueInfoMap:
+        $ref: '#/definitions/IssueInfoMap'
+        description: 'Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message recieved indicating the problem with the service.'
     description: Indicates whether the account is compliant with the specified policy. An account is considered non-compliant if it includes resources that are not protected by the policy.
   SecurityServiceType:
     type: string
