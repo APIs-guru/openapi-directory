@@ -512,6 +512,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ExportServerEngineAttribute':
+    post:
+      operationId: ExportServerEngineAttribute
+      description: '<p> Exports a specified server engine attribute as a base64-encoded string. For example, you can export user data that you can use in EC2 to associate nodes with a server. </p> <p> This operation is synchronous. </p> <p> A <code>ValidationException</code> is raised when parameters of the request are not valid. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. An <code>InvalidStateException</code> is thrown when the server is in any of the following states: CREATING, TERMINATED, FAILED or DELETING. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExportServerEngineAttributeResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidStateException
+          schema:
+            $ref: '#/definitions/InvalidStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ExportServerEngineAttributeRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#RestoreServer':
     post:
       operationId: RestoreServer
@@ -912,6 +949,30 @@ definitions:
       EngineAttributes:
         $ref: '#/definitions/EngineAttributes'
         description: '<p>Engine attributes that are used for disassociating the node. No attributes are required for Puppet. </p> <p class="title"> <b>Attributes required in a DisassociateNode request for Chef</b> </p> <ul> <li> <p> <code>CHEF_ORGANIZATION</code>: The Chef organization with which the node was associated. By default only one organization named <code>default</code> can exist. </p> </li> </ul>'
+  ExportServerEngineAttributeResponse:
+    type: object
+    properties:
+      EngineAttribute:
+        $ref: '#/definitions/EngineAttribute'
+        description: 'The requested engine attribute pair with attribute name and value. '
+      ServerName:
+        $ref: '#/definitions/ServerName'
+        description: 'The requested ServerName. '
+  ExportServerEngineAttributeRequest:
+    type: object
+    required:
+      - ExportAttributeName
+      - ServerName
+    properties:
+      ExportAttributeName:
+        $ref: '#/definitions/String'
+        description: The name of the export attribute. Currently supported export attribute is "Userdata" which exports a userdata script filled out with parameters provided in the <code>InputAttributes</code> list.
+      ServerName:
+        $ref: '#/definitions/ServerName'
+        description: 'The name of the Server to which the attribute is being exported from '
+      InputAttributes:
+        $ref: '#/definitions/EngineAttributes'
+        description: 'The list of engine attributes. The list type is <code>EngineAttribute</code>. <code>EngineAttribute</code> is a pair of attribute name and value. For <code>ExportAttributeName</code> "Userdata", currently supported input attribute names are: - "RunList": For Chef, an ordered list of roles and/or recipes that are run in the exact order. For Puppet, this parameter is ignored. - "OrganizationName": For Chef, an organization name. AWS OpsWorks for Chef Server always creates the organization "default". For Puppet, this parameter is ignored. - "NodeEnvironment": For Chef, a node environment (eg. development, staging, onebox). For Puppet, this parameter is ignored. - "NodeClientVersion": For Chef, version of Chef Engine (3 numbers separated by dots, eg. "13.8.5"). If empty, it uses the latest one. For Puppet, this parameter is ignored. '
   RestoreServerResponse:
     type: object
     properties: {}

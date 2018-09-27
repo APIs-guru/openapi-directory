@@ -1746,6 +1746,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDataCatalogEncryptionSettings':
+    post:
+      operationId: GetDataCatalogEncryptionSettings
+      description: Retrieves the security configuration for a specified catalog.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDataCatalogEncryptionSettingsResponse'
+        '480':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDataCatalogEncryptionSettingsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetDatabase':
     post:
       operationId: GetDatabase
@@ -4578,6 +4615,18 @@ definitions:
       NextToken:
         $ref: '#/definitions/Token'
         description: 'A continuation token, if this is a continuation request.'
+  GetDataCatalogEncryptionSettingsResponse:
+    type: object
+    properties:
+      DataCatalogEncryptionSettings:
+        $ref: '#/definitions/DataCatalogEncryptionSettings'
+        description: The requested security configuration.
+  GetDataCatalogEncryptionSettingsRequest:
+    type: object
+    properties:
+      CatalogId:
+        $ref: '#/definitions/CatalogIdString'
+        description: 'The ID of the Data Catalog for which to retrieve the security configuration. If none is supplied, the AWS account ID is used by default.'
   GetDatabaseResponse:
     type: object
     properties:

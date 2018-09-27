@@ -1254,10 +1254,16 @@ definitions:
     properties:
       Description:
         $ref: '#/definitions/__string'
-        description: Optional. A description of the queue you are creating.
+        description: Optional. A description of the queue that you are creating.
       Name:
         $ref: '#/definitions/__string'
-        description: The name of the queue you are creating.
+        description: The name of the queue that you are creating.
+      PricingPlan:
+        $ref: '#/definitions/PricingPlan'
+        description: 'Optional; default is on-demand. Specifies whether the pricing plan for the queue is on-demand or reserved. The pricing plan for the queue determines whether you pay on-demand or reserved pricing for the transcoding jobs you run through the queue. For reserved queue pricing, you must set up a contract. You can create a reserved queue contract through the AWS Elemental MediaConvert console.'
+      ReservationPlanSettings:
+        $ref: '#/definitions/ReservationPlanSettings'
+        description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
       Tags:
         $ref: '#/definitions/__mapOf__string'
         description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
@@ -1376,7 +1382,7 @@ definitions:
         description: Use this string to request the next batch of queues.
       Queues:
         $ref: '#/definitions/__listOfQueue'
-        description: List of queues
+        description: List of queues.
   ListQueuesRequest:
     type: object
     properties: {}
@@ -1458,8 +1464,12 @@ definitions:
       Description:
         $ref: '#/definitions/__string'
         description: 'The new description for the queue, if you are changing it.'
+      ReservationPlanSettings:
+        $ref: '#/definitions/ReservationPlanSettings'
+        description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
       Status:
         $ref: '#/definitions/QueueStatus'
+        description: 'Pause or activate a queue by changing its status between ACTIVE and PAUSED. If you pause a queue, jobs in that queue won''t begin. Jobs that are running when you pause the queue continue to run until they finish or result in an error.'
   AacAudioDescriptionBroadcasterMix:
     type: string
     enum:
@@ -2769,6 +2779,11 @@ definitions:
       - FORCE
       - FALLBACK
     description: 'There are two sources for color metadata, the input file and the job configuration (in the Color space and HDR master display informaiton settings). The Color space usage setting controls which takes precedence. FORCE: The system will use color metadata supplied by user, if any. If the user does not supply color metadata, the system will use data from the source. FALLBACK: The system will use color metadata from the source. If source has no color metadata, the system will use user-supplied color metadata values if available.'
+  Commitment:
+    type: string
+    enum:
+      - ONE_YEAR
+    description: The length of time that you commit to when you set up a pricing plan contract for a reserved queue.
   ContainerType:
     type: string
     enum:
@@ -3150,6 +3165,29 @@ definitions:
         $ref: '#/definitions/Type'
         description: 'A preset can be of two types: system or custom. System or built-in preset can''t be modified or deleted by the user.'
     description: A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
+  PricingPlan:
+    type: string
+    enum:
+      - ON_DEMAND
+      - RESERVED
+    description: 'Specifies whether the pricing plan for the queue is On-demand or Reserved. The pricing plan for the queue determines whether you pay On-demand or Reserved pricing for the transcoding jobs that you run through the queue. For Reserved queue pricing, you must set up a contract. You can create a Reserved queue contract through the AWS Elemental MediaConvert console.'
+  ReservationPlanSettings:
+    type: object
+    required:
+      - ReservedSlots
+      - Commitment
+      - RenewalType
+    properties:
+      Commitment:
+        $ref: '#/definitions/Commitment'
+        description: The length of time that you commit to when you set up a pricing plan contract for a reserved queue.
+      RenewalType:
+        $ref: '#/definitions/RenewalType'
+        description: Specifies whether the pricing plan contract for your reserved queue automatically renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period.
+      ReservedSlots:
+        $ref: '#/definitions/__integer'
+        description: 'Specifies the number of reserved transcode slots (RTSs) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. To increase this number, create a replacement contract through the AWS Elemental MediaConvert console.'
+    description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
   Queue:
     type: object
     required:
@@ -3160,28 +3198,35 @@ definitions:
         description: An identifier for this resource that is unique within all of AWS.
       CreatedAt:
         $ref: '#/definitions/__timestampUnix'
-        description: The timestamp in epoch seconds for queue creation.
+        description: The time stamp in epoch seconds for queue creation.
       Description:
         $ref: '#/definitions/__string'
-        description: An optional description you create for each queue.
+        description: An optional description that you create for each queue.
       LastUpdated:
         $ref: '#/definitions/__timestampUnix'
-        description: The timestamp in epoch seconds when the queue was last updated.
+        description: The time stamp in epoch seconds when the queue was last updated.
       Name:
         $ref: '#/definitions/__string'
-        description: A name you create for each queue. Each name must be unique within your account.
+        description: A name that you create for each queue. Each name must be unique within your account.
+      PricingPlan:
+        $ref: '#/definitions/PricingPlan'
+        description: 'Specifies whether the pricing plan for the queue is On-demand or Reserved. The pricing plan for the queue determines whether you pay On-demand or Reserved pricing for the transcoding jobs that you run through the queue. For Reserved queue pricing, you must set up a contract. You can create a Reserved queue contract through the AWS Elemental MediaConvert console.'
       ProgressingJobsCount:
         $ref: '#/definitions/__integer'
-        description: Estimated number of jobs in PROGRESSING status.
+        description: The estimated number of jobs with a PROGRESSING status.
+      ReservationPlan:
+        $ref: '#/definitions/ReservationPlan'
+        description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
       Status:
         $ref: '#/definitions/QueueStatus'
+        description: 'Queues can be ACTIVE or PAUSED. If you pause a queue, the service won''t begin processing jobs in that queue. Jobs that are running when you pause the queue continue to run until they finish or result in an error.'
       SubmittedJobsCount:
         $ref: '#/definitions/__integer'
-        description: Estimated number of jobs in SUBMITTED status.
+        description: The estimated number of jobs with a SUBMITTED status.
       Type:
         $ref: '#/definitions/Type'
-        description: 'A queue can be of two types: system or custom. System or built-in queues can''t be modified or deleted by the user.'
-    description: MediaConvert jobs are submitted to a queue. Unless specified otherwise jobs are submitted to a built-in default queue. User can create additional queues to separate the jobs of different categories or priority.
+        description: Specifies whether this queue is system or custom. System queues are built in. You can't modify or delete system queues. You can create and modify custom queues.
+    description: 'You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don''t specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/about-resource-allocation-and-job-prioritization.html.'
   SpekeKeyProvider:
     type: object
     properties:
@@ -5535,12 +5580,34 @@ definitions:
       Telecine:
         $ref: '#/definitions/ProresTelecine'
     description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value PRORES.
+  ReservationPlan:
+    type: object
+    properties:
+      Commitment:
+        $ref: '#/definitions/Commitment'
+        description: The length of time that you commit to when you set up a pricing plan contract for a reserved queue.
+      ExpiresAt:
+        $ref: '#/definitions/__timestampUnix'
+        description: 'The time stamp, in epoch seconds, for when the pricing plan for this reserved queue expires.'
+      PurchasedAt:
+        $ref: '#/definitions/__timestampUnix'
+        description: The time stamp in epoch seconds when the reserved queue's reservation plan was created.
+      RenewalType:
+        $ref: '#/definitions/RenewalType'
+        description: Specifies whether the pricing plan contract for your reserved queue automatically renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period.
+      ReservedSlots:
+        $ref: '#/definitions/__integer'
+        description: 'Specifies the number of reserved transcode slots (RTSs) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. To increase this number, create a replacement contract through the AWS Elemental MediaConvert console.'
+      Status:
+        $ref: '#/definitions/ReservationPlanStatus'
+        description: Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
+    description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
   QueueStatus:
     type: string
     enum:
       - ACTIVE
       - PAUSED
-    description: 'Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue won''t begin. Jobs running when a queue is paused continue to run until they finish or error out.'
+    description: 'Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue won''t begin. Jobs that are running when you pause a queue continue to run until they finish or result in an error.'
   __integerMin2Max2147483647:
     type: integer
     minimum: 2
@@ -5569,6 +5636,18 @@ definitions:
     type: integer
     minimum: 1
     maximum: 8
+  RenewalType:
+    type: string
+    enum:
+      - AUTO_RENEW
+      - EXPIRE
+    description: Specifies whether the pricing plan contract for your reserved queue automatically renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period.
+  ReservationPlanStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - EXPIRED
+    description: Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
   RespondToAfd:
     type: string
     enum:

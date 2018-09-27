@@ -174,7 +174,7 @@ paths:
   /2018-06-18/distribution:
     post:
       operationId: CreateDistribution
-      description: Creates a new web distribution. Send a <code>POST</code> request to the <code>/<i>CloudFront API version</i>/distribution</code>/<code>distribution ID</code> resource.
+      description: '<p>Creates a new web distribution. You create a CloudFront distribution to tell CloudFront where you want content to be delivered from, and the details about how to track and manage content delivery. Send a <code>POST</code> request to the <code>/<i>CloudFront API version</i>/distribution</code>/<code>distribution ID</code> resource.</p> <important> <p>When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using <a>UpdateDistribution</a>, follow the steps included in the documentation to get the current configuration and then make your updates. This helps to make sure that you include all of the required fields. To view a summary, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html">Required Fields for Create Distribution and Update Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> </important> <p>If you are using Adobe Flash Media Server''s RTMP protocol, you set up a different kind of CloudFront distribution. For more information, see <a>CreateStreamingDistribution</a>.</p>'
       responses:
         '201':
           description: Success
@@ -1661,7 +1661,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateDistribution
-      description: '<p>Updates the configuration for a web distribution. Perform the following steps.</p> <p>For information about updating a distribution using the CloudFront console, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html">Creating or Updating a Web Distribution Using the CloudFront Console </a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p> <b>To update a web distribution using the CloudFront API</b> </p> <ol> <li> <p>Submit a <a>GetDistributionConfig</a> request to get the current configuration and an <code>Etag</code> header for the distribution.</p> <note> <p>If you update the distribution again, you need to get a new <code>Etag</code> header.</p> </note> </li> <li> <p>Update the XML document that was returned in the response to your <code>GetDistributionConfig</code> request to include the desired changes. You can''t change the value of <code>CallerReference</code>. If you try to change this value, CloudFront returns an <code>IllegalUpdate</code> error. Note that you must strip out the ETag parameter that is returned.</p> <important> <p>The new configuration replaces the existing configuration; the values that you specify in an <code>UpdateDistribution</code> request are not merged into the existing configuration. When you add, delete, or replace values in an element that allows multiple values (for example, <code>CNAME</code>), you must specify all of the values that you want to appear in the updated distribution. In addition, you must update the corresponding <code>Quantity</code> element.</p> </important> </li> <li> <p>Submit an <code>UpdateDistribution</code> request to update the configuration for your distribution:</p> <ul> <li> <p>In the request body, include the XML document that you updated in Step 2. The request body must include an XML document with a <code>DistributionConfig</code> element.</p> </li> <li> <p>Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GetDistributionConfig</code> request in Step 1.</p> </li> </ul> </li> <li> <p>Review the response to the <code>UpdateDistribution</code> request to confirm that the configuration was successfully updated.</p> </li> <li> <p>Optional: Submit a <a>GetDistribution</a> request to confirm that your changes have propagated. When propagation is complete, the value of <code>Status</code> is <code>Deployed</code>.</p> <important> <p>Beginning with the 2012-05-05 version of the CloudFront API, we made substantial changes to the format of the XML document that you include in the request body when you create or update a distribution. With previous versions of the API, we discovered that it was too easy to accidentally delete one or more values for an element that accepts multiple values, for example, CNAMEs and trusted signers. Our changes for the 2012-05-05 release are intended to prevent these accidental deletions and to notify you when there''s a mismatch between the number of values you say you''re specifying in the <code>Quantity</code> element and the number of values you''re actually specifying.</p> </important> </li> </ol>'
+      description: '<p>Updates the configuration for a web distribution. </p> <important> <p>When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using this API action, follow the steps here to get the current configuration and then make your updates, to make sure that you include all of the required fields. To view a summary, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html">Required Fields for Create Distribution and Update Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> </important> <p>The update process includes getting the current distribution configuration, updating the XML document that is returned to make your changes, and then submitting an <code>UpdateDistribution</code> request to make the updates.</p> <p>For information about updating a distribution using the CloudFront console instead, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html">Creating a Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p> <b>To update a web distribution using the CloudFront API</b> </p> <ol> <li> <p>Submit a <a>GetDistributionConfig</a> request to get the current configuration and an <code>Etag</code> header for the distribution.</p> <note> <p>If you update the distribution again, you must get a new <code>Etag</code> header.</p> </note> </li> <li> <p>Update the XML document that was returned in the response to your <code>GetDistributionConfig</code> request to include your changes. </p> <important> <p>When you edit the XML file, be aware of the following:</p> <ul> <li> <p>You must strip out the ETag parameter that is returned.</p> </li> <li> <p>Additional fields are required when you update a distribution. There may be fields included in the XML file for features that you haven''t configured for your distribution. This is expected and required to successfully update the distribution.</p> </li> <li> <p>You can''t change the value of <code>CallerReference</code>. If you try to change this value, CloudFront returns an <code>IllegalUpdate</code> error. </p> </li> <li> <p>The new configuration replaces the existing configuration; the values that you specify in an <code>UpdateDistribution</code> request are not merged into your existing configuration. When you add, delete, or replace values in an element that allows multiple values (for example, <code>CNAME</code>), you must specify all of the values that you want to appear in the updated distribution. In addition, you must update the corresponding <code>Quantity</code> element.</p> </li> </ul> </important> </li> <li> <p>Submit an <code>UpdateDistribution</code> request to update the configuration for your distribution:</p> <ul> <li> <p>In the request body, include the XML document that you updated in Step 2. The request body must include an XML document with a <code>DistributionConfig</code> element.</p> </li> <li> <p>Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GetDistributionConfig</code> request in Step 1.</p> </li> </ul> </li> <li> <p>Review the response to the <code>UpdateDistribution</code> request to confirm that the configuration was successfully updated.</p> </li> <li> <p>Optional: Submit a <a>GetDistribution</a> request to confirm that your changes have propagated. When propagation is complete, the value of <code>Status</code> is <code>Deployed</code>.</p> </li> </ol>'
       responses:
         '200':
           description: Success
@@ -2471,36 +2471,11 @@ definitions:
     description: The request to create a new origin access identity.
     xml:
       namespace: 'http://cloudfront.amazonaws.com/doc/2018-06-18/'
-  CloudFrontOriginAccessIdentityAlreadyExists:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: 'If the <code>CallerReference</code> is a value you already sent in a previous request to create an identity but the content of the <code>CloudFrontOriginAccessIdentityConfig</code> is different from the original request, CloudFront returns a <code>CloudFrontOriginAccessIdentityAlreadyExists</code> error. '
-  MissingBody:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: This operation requires a body. Ensure that the body is present and the <code>Content-Type</code> header is set.
-  TooManyCloudFrontOriginAccessIdentities:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: Processing your request would cause you to exceed the maximum number of origin access identities allowed.
-  InvalidArgument:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The argument is invalid.
-  InconsistentQuantities:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The value of <code>Quantity</code> and the size of <code>Items</code> don't match.
+  CloudFrontOriginAccessIdentityAlreadyExists: {}
+  MissingBody: {}
+  TooManyCloudFrontOriginAccessIdentities: {}
+  InvalidArgument: {}
+  InconsistentQuantities: {}
   CreateDistributionResult:
     type: object
     properties:
@@ -2519,230 +2494,46 @@ definitions:
     description: The request to create a new distribution.
     xml:
       namespace: 'http://cloudfront.amazonaws.com/doc/2018-06-18/'
-  CNAMEAlreadyExists:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  DistributionAlreadyExists:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The caller reference you attempted to create the distribution with is associated with another distribution.
-  InvalidOrigin:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The Amazon S3 origin server specified does not refer to a valid Amazon S3 bucket.
-  InvalidOriginAccessIdentity:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The origin access identity is not valid or doesn't exist.
-  AccessDenied:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: Access denied.
-  TooManyTrustedSigners:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: Your request contains more trusted signers than are allowed per distribution.
-  TrustedSignerDoesNotExist:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: One or more of your trusted signers don't exist.
-  InvalidViewerCertificate:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  InvalidMinimumProtocolVersion:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  TooManyDistributionCNAMEs:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: Your request contains more CNAMEs than are allowed per distribution.
-  TooManyDistributions:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: Processing your request would cause you to exceed the maximum number of distributions allowed.
-  InvalidDefaultRootObject:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The default root object file name is too big or contains an invalid character.
-  InvalidRelativePath:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: 'The relative path is too big, is not URL-encoded, or does not begin with a slash (/).'
-  InvalidErrorCode:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  InvalidResponseCode:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  InvalidRequiredProtocol:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: 'This operation requires the HTTPS protocol. Ensure that you specify the HTTPS protocol in your request, or omit the <code>RequiredProtocols</code> element from your distribution configuration.'
-  NoSuchOrigin:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: 'No origin exists with the specified <code>Origin Id</code>. '
-  TooManyOrigins:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: You cannot create more origins for the distribution.
-  TooManyCacheBehaviors:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: You cannot create more cache behaviors for the distribution.
-  TooManyCookieNamesInWhiteList:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: Your request contains more cookie names in the whitelist than are allowed per cache behavior.
-  InvalidForwardCookies:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: Your request contains forward cookies option which doesn't match with the expectation for the <code>whitelisted</code> list of cookie names. Either list of cookie names has been specified when not allowed or list of cookie names is missing when expected.
-  TooManyHeadersInForwardedValues:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  InvalidHeadersForS3Origin:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  TooManyCertificates:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: You cannot create anymore custom SSL/TLS certificates.
-  InvalidLocationCode:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  InvalidGeoRestrictionParameter:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  InvalidProtocolSettings:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: You cannot specify SSLv3 as the minimum protocol version if you only want to support only clients that support Server Name Indication (SNI).
-  InvalidTTLOrder:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  InvalidWebACLId:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  TooManyOriginCustomHeaders:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  TooManyQueryStringParameters:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  InvalidQueryStringParameters:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  TooManyDistributionsWithLambdaAssociations:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: Processing your request would cause the maximum number of distributions with Lambda function associations per owner to be exceeded.
-  TooManyLambdaFunctionAssociations:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: Your request contains more Lambda function associations than are allowed per distribution.
-  InvalidLambdaFunctionAssociation:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified Lambda function association is invalid.
-  InvalidOriginReadTimeout:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  InvalidOriginKeepaliveTimeout:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  NoSuchFieldLevelEncryptionConfig:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified configuration for field-level encryption doesn't exist.
-  IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified configuration for field-level encryption can't be associated with the specified cache behavior.
-  TooManyDistributionsAssociatedToFieldLevelEncryptionConfig:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The maximum number of distributions have been associated with the specified configuration for field-level encryption.
+  CNAMEAlreadyExists: {}
+  DistributionAlreadyExists: {}
+  InvalidOrigin: {}
+  InvalidOriginAccessIdentity: {}
+  AccessDenied: {}
+  TooManyTrustedSigners: {}
+  TrustedSignerDoesNotExist: {}
+  InvalidViewerCertificate: {}
+  InvalidMinimumProtocolVersion: {}
+  TooManyDistributionCNAMEs: {}
+  TooManyDistributions: {}
+  InvalidDefaultRootObject: {}
+  InvalidRelativePath: {}
+  InvalidErrorCode: {}
+  InvalidResponseCode: {}
+  InvalidRequiredProtocol: {}
+  NoSuchOrigin: {}
+  TooManyOrigins: {}
+  TooManyCacheBehaviors: {}
+  TooManyCookieNamesInWhiteList: {}
+  InvalidForwardCookies: {}
+  TooManyHeadersInForwardedValues: {}
+  InvalidHeadersForS3Origin: {}
+  TooManyCertificates: {}
+  InvalidLocationCode: {}
+  InvalidGeoRestrictionParameter: {}
+  InvalidProtocolSettings: {}
+  InvalidTTLOrder: {}
+  InvalidWebACLId: {}
+  TooManyOriginCustomHeaders: {}
+  TooManyQueryStringParameters: {}
+  InvalidQueryStringParameters: {}
+  TooManyDistributionsWithLambdaAssociations: {}
+  TooManyLambdaFunctionAssociations: {}
+  InvalidLambdaFunctionAssociation: {}
+  InvalidOriginReadTimeout: {}
+  InvalidOriginKeepaliveTimeout: {}
+  NoSuchFieldLevelEncryptionConfig: {}
+  IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior: {}
+  TooManyDistributionsAssociatedToFieldLevelEncryptionConfig: {}
   CreateDistributionWithTagsResult:
     type: object
     properties:
@@ -2761,11 +2552,7 @@ definitions:
     description: 'The request to create a new distribution with tags. '
     xml:
       namespace: 'http://cloudfront.amazonaws.com/doc/2018-06-18/'
-  InvalidTagging:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
+  InvalidTagging: {}
   CreateFieldLevelEncryptionConfigResult:
     type: object
     properties:
@@ -2782,42 +2569,12 @@ definitions:
         description: The request to create a new field-level encryption configuration.
     xml:
       namespace: 'http://cloudfront.amazonaws.com/doc/2018-06-18/'
-  NoSuchFieldLevelEncryptionProfile:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified profile for field-level encryption doesn't exist.
-  FieldLevelEncryptionConfigAlreadyExists:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified configuration for field-level encryption already exists.
-  TooManyFieldLevelEncryptionConfigs:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The maximum number of configurations for field-level encryption have been created.
-  TooManyFieldLevelEncryptionQueryArgProfiles:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The maximum number of query arg profiles for field-level encryption have been created.
-  TooManyFieldLevelEncryptionContentTypeProfiles:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The maximum number of content type profiles for field-level encryption have been created.
-  QueryArgProfileEmpty:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: No profile specified for the field-level encryption query argument.
+  NoSuchFieldLevelEncryptionProfile: {}
+  FieldLevelEncryptionConfigAlreadyExists: {}
+  TooManyFieldLevelEncryptionConfigs: {}
+  TooManyFieldLevelEncryptionQueryArgProfiles: {}
+  TooManyFieldLevelEncryptionContentTypeProfiles: {}
+  QueryArgProfileEmpty: {}
   CreateFieldLevelEncryptionProfileResult:
     type: object
     properties:
@@ -2834,42 +2591,12 @@ definitions:
         description: The request to create a field-level encryption profile.
     xml:
       namespace: 'http://cloudfront.amazonaws.com/doc/2018-06-18/'
-  NoSuchPublicKey:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified public key doesn't exist.
-  FieldLevelEncryptionProfileAlreadyExists:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified profile for field-level encryption already exists.
-  FieldLevelEncryptionProfileSizeExceeded:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The maximum size of a profile for field-level encryption was exceeded.
-  TooManyFieldLevelEncryptionProfiles:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The maximum number of profiles for field-level encryption have been created.
-  TooManyFieldLevelEncryptionEncryptionEntities:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The maximum number of encryption entities for field-level encryption have been created.
-  TooManyFieldLevelEncryptionFieldPatterns:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The maximum number of field patterns for field-level encryption have been created.
+  NoSuchPublicKey: {}
+  FieldLevelEncryptionProfileAlreadyExists: {}
+  FieldLevelEncryptionProfileSizeExceeded: {}
+  TooManyFieldLevelEncryptionProfiles: {}
+  TooManyFieldLevelEncryptionEncryptionEntities: {}
+  TooManyFieldLevelEncryptionFieldPatterns: {}
   CreateInvalidationResult:
     type: object
     properties:
@@ -2888,23 +2615,9 @@ definitions:
     description: The request to create an invalidation.
     xml:
       namespace: 'http://cloudfront.amazonaws.com/doc/2018-06-18/'
-  NoSuchDistribution:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified distribution does not exist.
-  BatchTooLarge:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  TooManyInvalidationsInProgress:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: 'You have exceeded the maximum number of allowable InProgress invalidation batch requests, or invalidation objects.'
+  NoSuchDistribution: {}
+  BatchTooLarge: {}
+  TooManyInvalidationsInProgress: {}
   CreatePublicKeyResult:
     type: object
     properties:
@@ -2921,18 +2634,8 @@ definitions:
         description: The request to add a public key to CloudFront.
     xml:
       namespace: 'http://cloudfront.amazonaws.com/doc/2018-06-18/'
-  PublicKeyAlreadyExists:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified public key already exists.
-  TooManyPublicKeys:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: 'The maximum number of public keys for field-level encryption have been created. To create a new public key, delete one of the existing keys.'
+  PublicKeyAlreadyExists: {}
+  TooManyPublicKeys: {}
   CreateStreamingDistributionResult:
     type: object
     properties:
@@ -2951,22 +2654,9 @@ definitions:
     description: The request to create a new streaming distribution.
     xml:
       namespace: 'http://cloudfront.amazonaws.com/doc/2018-06-18/'
-  StreamingDistributionAlreadyExists:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  TooManyStreamingDistributionCNAMEs:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  TooManyStreamingDistributions:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: Processing your request would cause you to exceed the maximum number of streaming distributions allowed.
+  StreamingDistributionAlreadyExists: {}
+  TooManyStreamingDistributionCNAMEs: {}
+  TooManyStreamingDistributions: {}
   CreateStreamingDistributionWithTagsResult:
     type: object
     properties:
@@ -2989,80 +2679,33 @@ definitions:
     type: object
     properties: {}
     description: Deletes a origin access identity.
-  InvalidIfMatchVersion:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The <code>If-Match</code> version is missing or not valid for the distribution.
-  NoSuchCloudFrontOriginAccessIdentity:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified origin access identity does not exist.
-  PreconditionFailed:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: 'The precondition given in one or more of the request-header fields evaluated to <code>false</code>. '
-  CloudFrontOriginAccessIdentityInUse:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
+  InvalidIfMatchVersion: {}
+  NoSuchCloudFrontOriginAccessIdentity: {}
+  PreconditionFailed: {}
+  CloudFrontOriginAccessIdentityInUse: {}
   DeleteDistributionRequest:
     type: object
     properties: {}
     description: '<p>This action deletes a web distribution. To delete a web distribution using the CloudFront API, perform the following steps.</p> <p> <b>To delete a web distribution using the CloudFront API:</b> </p> <ol> <li> <p>Disable the web distribution </p> </li> <li> <p>Submit a <code>GET Distribution Config</code> request to get the current configuration and the <code>Etag</code> header for the distribution.</p> </li> <li> <p>Update the XML document that was returned in the response to your <code>GET Distribution Config</code> request to change the value of <code>Enabled</code> to <code>false</code>.</p> </li> <li> <p>Submit a <code>PUT Distribution Config</code> request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Distribution Config</code> request in Step 2.</p> </li> <li> <p>Review the response to the <code>PUT Distribution Config</code> request to confirm that the distribution was successfully disabled.</p> </li> <li> <p>Submit a <code>GET Distribution</code> request to confirm that your changes have propagated. When propagation is complete, the value of <code>Status</code> is <code>Deployed</code>.</p> </li> <li> <p>Submit a <code>DELETE Distribution</code> request. Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Distribution Config</code> request in Step 6.</p> </li> <li> <p>Review the response to your <code>DELETE Distribution</code> request to confirm that the distribution was successfully deleted.</p> </li> </ol> <p>For information about deleting a distribution using the CloudFront console, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html">Deleting a Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
-  DistributionNotDisabled:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
+  DistributionNotDisabled: {}
   DeleteFieldLevelEncryptionConfigRequest:
     type: object
     properties: {}
-  FieldLevelEncryptionConfigInUse:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified configuration for field-level encryption is in use.
+  FieldLevelEncryptionConfigInUse: {}
   DeleteFieldLevelEncryptionProfileRequest:
     type: object
     properties: {}
-  FieldLevelEncryptionProfileInUse:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified profile for field-level encryption is in use.
+  FieldLevelEncryptionProfileInUse: {}
   DeletePublicKeyRequest:
     type: object
     properties: {}
-  PublicKeyInUse:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: 'The specified public key is in use. '
+  PublicKeyInUse: {}
   DeleteStreamingDistributionRequest:
     type: object
     properties: {}
     description: The request to delete a streaming distribution.
-  StreamingDistributionNotDisabled:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-  NoSuchStreamingDistribution:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified streaming distribution does not exist.
+  StreamingDistributionNotDisabled: {}
+  NoSuchStreamingDistribution: {}
   GetCloudFrontOriginAccessIdentityResult:
     type: object
     properties:
@@ -3154,12 +2797,7 @@ definitions:
     type: object
     properties: {}
     description: 'The request to get an invalidation''s information. '
-  NoSuchInvalidation:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: The specified invalidation does not exist.
+  NoSuchInvalidation: {}
   GetPublicKeyResult:
     type: object
     properties:
@@ -3295,11 +2933,7 @@ definitions:
     type: object
     properties: {}
     description: ' The request to list tags for a CloudFront resource.'
-  NoSuchResource:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
+  NoSuchResource: {}
   TagResourceRequest:
     type: object
     required:
@@ -3340,12 +2974,7 @@ definitions:
     description: The request to update an origin access identity.
     xml:
       namespace: 'http://cloudfront.amazonaws.com/doc/2018-06-18/'
-  IllegalUpdate:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: 'Origin and <code>CallerReference</code> cannot be updated. '
+  IllegalUpdate: {}
   UpdateDistributionResult:
     type: object
     properties:
@@ -3412,12 +3041,7 @@ definitions:
         description: Request to update public key information.
     xml:
       namespace: 'http://cloudfront.amazonaws.com/doc/2018-06-18/'
-  CannotChangeImmutablePublicKeyFields:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/string'
-    description: You can't change the value of a public key.
+  CannotChangeImmutablePublicKeyFields: {}
   UpdateStreamingDistributionResult:
     type: object
     properties:
@@ -3436,8 +3060,6 @@ definitions:
     description: The request to update a streaming distribution.
     xml:
       namespace: 'http://cloudfront.amazonaws.com/doc/2018-06-18/'
-  string:
-    type: string
   boolean:
     type: boolean
   integer:
@@ -3462,6 +3084,8 @@ definitions:
         $ref: '#/definitions/SignerList'
         description: '<p>A complex type that contains one <code>Signer</code> complex type for each trusted signer that is specified in the <code>TrustedSigners</code> complex type.</p> <p>For more information, see <a>ActiveTrustedSigners</a>. </p>'
     description: '<p>A complex type that lists the AWS accounts, if any, that you included in the <code>TrustedSigners</code> complex type for this distribution. These are the accounts that you want to allow to create signed URLs for private content.</p> <p>The <code>Signer</code> complex type lists the AWS account number of the trusted signer or <code>self</code> if the signer is the AWS account that created the distribution. The <code>Signer</code> element also includes the IDs of any active CloudFront key pairs that are associated with the trusted signer''s AWS account. If no <code>KeyPairId</code> element appears for a <code>Signer</code>, that signer can''t create signed URLs. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+  string:
+    type: string
   AliasList:
     type: array
     items:
@@ -4761,7 +4385,7 @@ definitions:
         description: '<p>Specifies the event type that triggers a Lambda function invocation. You can specify the following values:</p> <ul> <li> <p> <code>viewer-request</code>: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache. </p> </li> <li> <p> <code>origin-request</code>: The function executes only when CloudFront forwards a request to your origin. When the requested object is in the edge cache, the function doesn''t execute.</p> </li> <li> <p> <code>origin-response</code>: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn''t execute.</p> <p>If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn''t execute.</p> </li> <li> <p> <code>viewer-response</code>: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache.</p> <p>If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn''t execute.</p> </li> </ul>'
       IncludeBody:
         $ref: '#/definitions/boolean'
-        description: 'A flag that allows a Lambda function to have read access to the body content. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/">Accessing Body Content</a> in the Amazon CloudFront Developer Guide.'
+        description: 'A flag that allows a Lambda function to have read access to the body content. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-include-body-access.html">Accessing the Request Body by Choosing the Include Body Option</a> in the Amazon CloudFront Developer Guide.'
     description: A complex type that contains a Lambda function association.
   LambdaFunctionAssociationList:
     type: array

@@ -8439,7 +8439,7 @@ definitions:
         description: '<p>Specifies the type of destination to which the flow log data is to be published. Flow log data can be published to CloudWatch Logs or Amazon S3. To publish flow log data to CloudWatch Logs, specify <code>cloud-watch-logs</code>. To publish flow log data to Amazon S3, specify <code>s3</code>.</p> <p>Default: <code>cloud-watch-logs</code> </p>'
       LogDestination:
         $ref: '#/definitions/String'
-        description: '<p>Specifies the destination to which the flow log data is to be published. Flow log data can be published to an CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for LogDestinationType.</p> <p>If LogDestinationType is not specified or <code>cloud-watch-logs</code>, specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group.</p> <p>If LogDestinationType is <code>s3</code>, specify the ARN of the Amazon S3 bucket. You can also specify a subfolder in the bucket. To specify a subfolder in the bucket, use the following ARN format: <code>bucket_ARN/subfolder_name/</code>. For example, to specify a subfolder named <code>my-logs</code> in a bucket named <code>my-bucket</code>, use the following ARN: <code>arn:aws:s3:::my-bucket/my-logs/</code>.</p>'
+        description: '<p>Specifies the destination to which the flow log data is to be published. Flow log data can be published to an CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for LogDestinationType.</p> <p>If LogDestinationType is not specified or <code>cloud-watch-logs</code>, specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group.</p> <p>If LogDestinationType is <code>s3</code>, specify the ARN of the Amazon S3 bucket. You can also specify a subfolder in the bucket. To specify a subfolder in the bucket, use the following ARN format: <code>bucket_ARN/subfolder_name/</code>. For example, to specify a subfolder named <code>my-logs</code> in a bucket named <code>my-bucket</code>, use the following ARN: <code>arn:aws:s3:::my-bucket/my-logs/</code>. You cannot use <code>AWSLogs</code> as a subfolder name. This is a reserved term.</p>'
   CreateFpgaImageResult:
     type: object
     properties:
@@ -8500,7 +8500,7 @@ definitions:
     properties:
       BlockDeviceMappings:
         $ref: '#/definitions/BlockDeviceMappingRequestList'
-        description: Information about one or more block device mappings.
+        description: 'Information about one or more block device mappings. This parameter cannot be used to modify the encryption status of existing volumes or snapshots. To create an AMI with encrypted snapshots, use the <a>CopyImage</a> action.'
       Description:
         $ref: '#/definitions/String'
         description: A description for the new image.
@@ -11780,6 +11780,10 @@ definitions:
       RouteTables:
         $ref: '#/definitions/RouteTableList'
         description: Information about one or more route tables.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    description: Contains the output of DescribeRouteTables.
   DescribeRouteTablesRequest:
     type: object
     example:
@@ -11795,6 +11799,12 @@ definitions:
       RouteTableIds:
         $ref: '#/definitions/ValueStringList'
         description: '<p>One or more route table IDs.</p> <p>Default: Describes all your route tables.</p>'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to retrieve the next page of results.
+      MaxResults:
+        $ref: '#/definitions/Integer'
+        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <b>NextToken</b> value. This value can be between 5 and 100.'
   DescribeScheduledInstanceAvailabilityResult:
     type: object
     example:
@@ -15913,7 +15923,7 @@ definitions:
         description: '<p>The volume type: <code>gp2</code>, <code>io1</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code>.</p> <p>Default: <code>standard</code> </p>'
       Encrypted:
         $ref: '#/definitions/Boolean'
-        description: 'Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can''t specify an encryption value. This is because only blank volumes can be encrypted on creation.'
+        description: '<p>Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. </p> <p>If you are creating a volume from a snapshot, you cannot specify an encryption value. This is because only blank volumes can be encrypted on creation. If you are creating a snapshot from an existing EBS volume, you cannot specify an encryption value that differs from that of the EBS volume. We recommend that you omit the encryption value from the block device mappings when creating an image from an instance.</p>'
       KmsKeyId:
         $ref: '#/definitions/String'
         description: '<p>Identifier (key ID, key alias, ID ARN, or alias ARN) for a user-managed CMK under which the EBS volume is encrypted.</p> <p>This parameter is only supported on <code>BlockDeviceMapping</code> objects called by <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html">RunInstances</a>, <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html">RequestSpotFleet</a>, and <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html">RequestSpotInstances</a>.</p>'
@@ -17754,6 +17764,7 @@ definitions:
       - d2.4xlarge
       - d2.8xlarge
       - f1.2xlarge
+      - f1.4xlarge
       - f1.16xlarge
       - m5.large
       - m5.xlarge

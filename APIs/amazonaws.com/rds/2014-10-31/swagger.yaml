@@ -217,6 +217,14 @@ paths:
           description: ResourceNotFoundFault
           schema:
             $ref: '#/definitions/ResourceNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
       parameters:
         - name: body
           in: body
@@ -4115,10 +4123,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartDBCluster':
+    post:
+      operationId: StartDBCluster
+      description: '<p>Starts an Amazon Aurora DB cluster that was stopped using the AWS console, the stop-db-cluster AWS CLI command, or the StopDBCluster action.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html"> Stopping and Starting an Aurora Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartDBClusterResult'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartDBClusterMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#StartDBInstance':
     post:
       operationId: StartDBInstance
-      description: '<p> Starts a DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action. For more information, see Stopping and Starting a DB instance in the AWS RDS user guide. </p> <note> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL.</p> </note>'
+      description: '<p> Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html"> Starting an Amazon RDS DB Instance That Was Previously Stopped</a> in the <i>Amazon RDS User Guide.</i> </p> <note> <p> This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use <a>StartDBCluster</a> instead. </p> </note>'
       responses:
         '200':
           description: Success
@@ -4184,10 +4229,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopDBCluster':
+    post:
+      operationId: StopDBCluster
+      description: '<p> Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora retains the DB cluster''s metadata, including its endpoints and DB parameter groups. Aurora also retains the transaction logs so you can do a point-in-time restore if necessary. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html"> Stopping and Starting an Aurora Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopDBClusterResult'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopDBClusterMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#StopDBInstance':
     post:
       operationId: StopDBInstance
-      description: '<p> Stops a DB instance. When you stop a DB instance, Amazon RDS retains the DB instance''s metadata, including its endpoint, DB parameter group, and option group membership. Amazon RDS also retains the transaction logs so you can do a point-in-time restore if necessary. For more information, see Stopping and Starting a DB instance in the AWS RDS user guide. </p> <note> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL.</p> </note>'
+      description: '<p> Stops an Amazon RDS DB instance. When you stop a DB instance, Amazon RDS retains the DB instance''s metadata, including its endpoint, DB parameter group, and option group membership. Amazon RDS also retains the transaction logs so you can do a point-in-time restore if necessary. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html"> Stopping an Amazon RDS DB Instance Temporarily</a> in the <i>Amazon RDS User Guide.</i> </p> <note> <p> This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora clusters, use <a>StopDBCluster</a> instead. </p> </note>'
       responses:
         '200':
           description: Success
@@ -4304,6 +4386,7 @@ definitions:
         description: '<p>A value that specifies the type of opt-in request, or undoes an opt-in request. An opt-in request of type <code>immediate</code> can''t be undone.</p> <p>Valid values:</p> <ul> <li> <p> <code>immediate</code> - Apply the maintenance action immediately.</p> </li> <li> <p> <code>next-maintenance</code> - Apply the maintenance action during the next maintenance window for the resource.</p> </li> <li> <p> <code>undo-opt-in</code> - Cancel any existing <code>next-maintenance</code> opt-in requests.</p> </li> </ul>'
     description: <p/>
   ResourceNotFoundFault: {}
+  InvalidDBInstanceStateFault: {}
   AuthorizeDBSecurityGroupIngressResult:
     type: object
     properties:
@@ -4610,10 +4693,13 @@ definitions:
         description: 'The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.'
       EngineMode:
         $ref: '#/definitions/String'
-        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code> or <code>serverless</code>.'
+        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, or <code>parallelquery</code>.'
       ScalingConfiguration:
         $ref: '#/definitions/ScalingConfiguration'
         description: 'For DB clusters in <code>serverless</code> DB engine mode, the scaling properties of the DB cluster.'
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Indicates if the DB cluster should have deletion protection enabled. The database can''t be deleted when this value is set to true. The default is false. '
       SourceRegion:
         $ref: '#/definitions/String'
         description: The ID of the region that contains the source for the read replica.
@@ -4626,7 +4712,6 @@ definitions:
   InvalidVPCNetworkStateFault: {}
   InvalidDBSubnetGroupStateFault: {}
   InvalidSubnet: {}
-  InvalidDBInstanceStateFault: {}
   DBClusterParameterGroupNotFoundFault: {}
   DBSubnetGroupDoesNotCoverEnoughAZs: {}
   CreateDBClusterParameterGroupResult:
@@ -4817,6 +4902,9 @@ definitions:
       ProcessorFeatures:
         $ref: '#/definitions/ProcessorFeatureList'
         description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Indicates if the DB instance should have deletion protection enabled. The database can''t be deleted when this value is set to true. The default is false. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
     description: <p/>
   DBInstanceAlreadyExistsFault: {}
   InsufficientDBInstanceCapacityFault: {}
@@ -4911,6 +4999,9 @@ definitions:
       UseDefaultProcessorFeatures:
         $ref: '#/definitions/BooleanOptional'
         description: A value that specifies that the DB instance class of the DB instance uses its default processor features.
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Indicates if the DB instance should have deletion protection enabled. The database can''t be deleted when this value is set to true. The default is false. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
       SourceRegion:
         $ref: '#/definitions/String'
         description: The ID of the region that contains the source for the read replica.
@@ -6221,6 +6312,9 @@ definitions:
       ScalingConfiguration:
         $ref: '#/definitions/ScalingConfiguration'
         description: The scaling properties of the DB cluster. You can only modify scaling properties for DB clusters in <code>serverless</code> DB engine mode.
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Indicates if the DB cluster has deletion protection enabled. The database can''t be deleted when this value is set to true. '
     description: <p/>
   DBClusterParameterGroupNameMessage:
     type: object
@@ -6394,6 +6488,9 @@ definitions:
       UseDefaultProcessorFeatures:
         $ref: '#/definitions/BooleanOptional'
         description: A value that specifies that the DB instance class of the DB instance uses its default processor features.
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Indicates if the DB instance has deletion protection enabled. The database can''t be deleted when this value is set to true. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
     description: <p/>
   DBUpgradeDependencyFailureFault: {}
   DBParameterGroupNameMessage:
@@ -6776,6 +6873,9 @@ definitions:
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: 'The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.'
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Indicates if the DB cluster should have deletion protection enabled. The database can''t be deleted when this value is set to true. The default is false. '
   InvalidS3BucketFault: {}
   RestoreDBClusterFromSnapshotResult:
     type: object
@@ -6836,10 +6936,13 @@ definitions:
         description: 'The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Aurora User Guide</i>.'
       EngineMode:
         $ref: '#/definitions/String'
-        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code> or <code>serverless</code>.'
+        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, or <code>parallelquery</code>.'
       ScalingConfiguration:
         $ref: '#/definitions/ScalingConfiguration'
         description: 'For DB clusters in <code>serverless</code> DB engine mode, the scaling properties of the DB cluster.'
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Indicates if the DB cluster should have deletion protection enabled. The database can''t be deleted when this value is set to true. The default is false. '
     description: <p/>
   InsufficientDBClusterCapacityFault: {}
   InvalidRestoreFault: {}
@@ -6895,6 +6998,9 @@ definitions:
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: 'The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.'
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Indicates if the DB cluster should have deletion protection enabled. The database can''t be deleted when this value is set to true. The default is false. '
     description: <p/>
   RestoreDBInstanceFromDBSnapshotResult:
     type: object
@@ -6981,6 +7087,9 @@ definitions:
       UseDefaultProcessorFeatures:
         $ref: '#/definitions/BooleanOptional'
         description: A value that specifies that the DB instance class of the DB instance uses its default processor features.
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Indicates if the DB instance should have deletion protection enabled. The database can''t be deleted when this value is set to true. The default is false. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
     description: <p/>
   RestoreDBInstanceFromS3Result:
     type: object
@@ -7124,6 +7233,9 @@ definitions:
       UseDefaultProcessorFeatures:
         $ref: '#/definitions/BooleanOptional'
         description: A value that specifies that the DB instance class of the DB instance uses its default processor features.
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Indicates if the DB instance should have deletion protection enabled. The database can''t be deleted when this value is set to true. The default is false. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
   RestoreDBInstanceToPointInTimeResult:
     type: object
     properties:
@@ -7215,6 +7327,9 @@ definitions:
       UseDefaultProcessorFeatures:
         $ref: '#/definitions/BooleanOptional'
         description: A value that specifies that the DB instance class of the DB instance uses its default processor features.
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Indicates if the DB instance should have deletion protection enabled. The database can''t be deleted when this value is set to true. The default is false. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
     description: <p/>
   PointInTimeRestoreNotEnabledFault: {}
   RevokeDBSecurityGroupIngressResult:
@@ -7243,6 +7358,19 @@ definitions:
         $ref: '#/definitions/String'
         description: ' The AWS Account Number of the owner of the EC2 security group specified in the <code>EC2SecurityGroupName</code> parameter. The AWS Access Key ID is not an acceptable value. For VPC DB security groups, <code>EC2SecurityGroupId</code> must be provided. Otherwise, EC2SecurityGroupOwnerId and either <code>EC2SecurityGroupName</code> or <code>EC2SecurityGroupId</code> must be provided. '
     description: <p/>
+  StartDBClusterResult:
+    type: object
+    properties:
+      DBCluster:
+        $ref: '#/definitions/DBCluster'
+  StartDBClusterMessage:
+    type: object
+    required:
+      - DBClusterIdentifier
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: The DB cluster identifier of the Amazon Aurora DB cluster to be started. This parameter is stored as a lowercase string.
   StartDBInstanceResult:
     type: object
     properties:
@@ -7256,6 +7384,19 @@ definitions:
       DBInstanceIdentifier:
         $ref: '#/definitions/String'
         description: ' The user-supplied instance identifier. '
+  StopDBClusterResult:
+    type: object
+    properties:
+      DBCluster:
+        $ref: '#/definitions/DBCluster'
+  StopDBClusterMessage:
+    type: object
+    required:
+      - DBClusterIdentifier
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: The DB cluster identifier of the Amazon Aurora DB cluster to be stopped. This parameter is stored as a lowercase string.
   StopDBInstanceResult:
     type: object
     properties:
@@ -7822,10 +7963,13 @@ definitions:
         $ref: '#/definitions/IntegerOptional'
       EngineMode:
         $ref: '#/definitions/String'
-        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code> or <code>serverless</code>.'
+        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, or <code>parallelquery</code>.'
       ScalingConfigurationInfo:
         $ref: '#/definitions/ScalingConfigurationInfo'
-    description: <p>Contains the details of an Amazon RDS DB cluster. </p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a> action. </p>
+      DeletionProtection:
+        $ref: '#/definitions/Boolean'
+        description: 'Indicates if the DB cluster has deletion protection enabled. The database can''t be deleted when this value is set to true. '
+    description: '<p>Contains the details of an Amazon Aurora DB cluster. </p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a>, <a>StopDBCluster</a>, and <a>StartDBCluster</a> actions. </p>'
   DBSecurityGroupNameList:
     type: array
     items:
@@ -7999,6 +8143,9 @@ definitions:
       ProcessorFeatures:
         $ref: '#/definitions/ProcessorFeatureList'
         description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+      DeletionProtection:
+        $ref: '#/definitions/Boolean'
+        description: 'Indicates if the DB instance has deletion protection enabled. The database can''t be deleted when this value is set to true. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
     description: <p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action. </p>
   SubnetIdentifierList:
     type: array
@@ -8579,6 +8726,20 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  MinimumEngineVersionPerAllowedValue:
+    type: object
+    properties:
+      AllowedValue:
+        $ref: '#/definitions/String'
+        description: The allowed value for an option setting.
+      MinimumEngineVersion:
+        $ref: '#/definitions/String'
+        description: The minimum DB engine version required for the allowed value.
+    description: The minimum DB engine version required for each corresponding allowed value for an option setting.
+  MinimumEngineVersionPerAllowedValueList:
+    type: array
+    items:
+      $ref: '#/definitions/MinimumEngineVersionPerAllowedValue'
   OptionConfigurationList:
     type: array
     items:
@@ -8753,6 +8914,12 @@ definitions:
       IsModifiable:
         $ref: '#/definitions/Boolean'
         description: Boolean value where true indicates that this option group option can be changed from the default value.
+      IsRequired:
+        $ref: '#/definitions/Boolean'
+        description: Boolean value where true indicates that a value must be specified for this option setting of the option group option.
+      MinimumEngineVersionPerAllowedValue:
+        $ref: '#/definitions/MinimumEngineVersionPerAllowedValueList'
+        description: The minimum DB engine version required for the corresponding allowed value for this option setting.
     description: Option group option settings are used to display settings available for each option with their default values and other information. These values are used with the DescribeOptionGroupOptions action.
   OptionVersion:
     type: object
