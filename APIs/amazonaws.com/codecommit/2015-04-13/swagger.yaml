@@ -3,7 +3,7 @@ info:
   version: '2015-04-13'
   x-release: v4
   title: AWS CodeCommit
-  description: '<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account.</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository.</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository.</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository.</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account.</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository.</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository will be able to access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a new branch in a specified repository.</p> </li> <li> <p> <a>DeleteBranch</a>, which deletes the specified branch in a repository unless it is the default branch.</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch.</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository.</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository.</p> </li> </ul> <p>Files, by calling the following:</p> <ul> <li> <p> <a>PutFile</a>, which adds or modifies a file in a specified repository and branch.</p> </li> </ul> <p>Information about committed code in a repository, by calling the following:</p> <ul> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object within a repository.</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information.</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference).</p> </li> </ul> <p>Pull requests, by calling the following:</p> <ul> <li> <p> <a>CreatePullRequest</a>, which creates a pull request in a specified repository.</p> </li> <li> <p> <a>DescribePullRequestEvents</a>, which returns information about one or more pull request events.</p> </li> <li> <p> <a>GetCommentsForPullRequest</a>, which returns information about comments on a specified pull request.</p> </li> <li> <p> <a>GetMergeConflicts</a>, which returns information about merge conflicts between the source and destination branch in a pull request.</p> </li> <li> <p> <a>GetPullRequest</a>, which returns information about a specified pull request.</p> </li> <li> <p> <a>ListPullRequests</a>, which lists all pull requests for a repository.</p> </li> <li> <p> <a>MergePullRequestByFastForward</a>, which merges the source destination branch of a pull request into the specified destination branch for that pull request using the fast-forward merge option.</p> </li> <li> <p> <a>PostCommentForPullRequest</a>, which posts a comment to a pull request at the specified line, file, or request.</p> </li> <li> <p> <a>UpdatePullRequestDescription</a>, which updates the description of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestStatus</a>, which updates the status of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestTitle</a>, which updates the title of a pull request.</p> </li> </ul> <p>Information about comments in a repository, by calling the following:</p> <ul> <li> <p> <a>DeleteCommentContent</a>, which deletes the content of a comment on a commit in a repository.</p> </li> <li> <p> <a>GetComment</a>, which returns information about a comment on a commit.</p> </li> <li> <p> <a>GetCommentsForComparedCommit</a>, which returns information about comments on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentForComparedCommit</a>, which creates a comment on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentReply</a>, which creates a reply to a comment.</p> </li> <li> <p> <a>UpdateComment</a>, which updates the content of a comment on a commit in a repository.</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository.</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers.</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target.</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">AWS CodeCommit User Guide</a>.</p>'
+  description: '<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account.</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository.</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository.</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository.</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account.</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository.</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository will be able to access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a new branch in a specified repository.</p> </li> <li> <p> <a>DeleteBranch</a>, which deletes the specified branch in a repository unless it is the default branch.</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch.</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository.</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository.</p> </li> </ul> <p>Files, by calling the following:</p> <ul> <li> <p> <a>DeleteFile</a>, which deletes the content of a specified file from a specified branch.</p> </li> <li> <p> <a>GetFile</a>, which returns the base-64 encoded content of a specified file.</p> </li> <li> <p> <a>GetFolder</a>, which returns the contents of a specified folder or directory.</p> </li> <li> <p> <a>PutFile</a>, which adds or modifies a file in a specified repository and branch.</p> </li> </ul> <p>Information about committed code in a repository, by calling the following:</p> <ul> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object within a repository.</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information.</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference).</p> </li> </ul> <p>Pull requests, by calling the following:</p> <ul> <li> <p> <a>CreatePullRequest</a>, which creates a pull request in a specified repository.</p> </li> <li> <p> <a>DescribePullRequestEvents</a>, which returns information about one or more pull request events.</p> </li> <li> <p> <a>GetCommentsForPullRequest</a>, which returns information about comments on a specified pull request.</p> </li> <li> <p> <a>GetMergeConflicts</a>, which returns information about merge conflicts between the source and destination branch in a pull request.</p> </li> <li> <p> <a>GetPullRequest</a>, which returns information about a specified pull request.</p> </li> <li> <p> <a>ListPullRequests</a>, which lists all pull requests for a repository.</p> </li> <li> <p> <a>MergePullRequestByFastForward</a>, which merges the source destination branch of a pull request into the specified destination branch for that pull request using the fast-forward merge option.</p> </li> <li> <p> <a>PostCommentForPullRequest</a>, which posts a comment to a pull request at the specified line, file, or request.</p> </li> <li> <p> <a>UpdatePullRequestDescription</a>, which updates the description of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestStatus</a>, which updates the status of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestTitle</a>, which updates the title of a pull request.</p> </li> </ul> <p>Information about comments in a repository, by calling the following:</p> <ul> <li> <p> <a>DeleteCommentContent</a>, which deletes the content of a comment on a commit in a repository.</p> </li> <li> <p> <a>GetComment</a>, which returns information about a comment on a commit.</p> </li> <li> <p> <a>GetCommentsForComparedCommit</a>, which returns information about comments on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentForComparedCommit</a>, which creates a comment on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentReply</a>, which creates a reply to a comment.</p> </li> <li> <p> <a>UpdateComment</a>, which updates the content of a comment on a commit in a repository.</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository.</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers.</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target.</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">AWS CodeCommit User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -525,6 +525,119 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteCommentContentInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteFile':
+    post:
+      operationId: DeleteFile
+      description: Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file will still exist in the commits prior to the commit that contains the deletion.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteFileOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: ParentCommitIdRequiredException
+          schema:
+            $ref: '#/definitions/ParentCommitIdRequiredException'
+        '484':
+          description: InvalidParentCommitIdException
+          schema:
+            $ref: '#/definitions/InvalidParentCommitIdException'
+        '485':
+          description: ParentCommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/ParentCommitDoesNotExistException'
+        '486':
+          description: ParentCommitIdOutdatedException
+          schema:
+            $ref: '#/definitions/ParentCommitIdOutdatedException'
+        '487':
+          description: PathRequiredException
+          schema:
+            $ref: '#/definitions/PathRequiredException'
+        '488':
+          description: InvalidPathException
+          schema:
+            $ref: '#/definitions/InvalidPathException'
+        '489':
+          description: FileDoesNotExistException
+          schema:
+            $ref: '#/definitions/FileDoesNotExistException'
+        '490':
+          description: BranchNameRequiredException
+          schema:
+            $ref: '#/definitions/BranchNameRequiredException'
+        '491':
+          description: InvalidBranchNameException
+          schema:
+            $ref: '#/definitions/InvalidBranchNameException'
+        '492':
+          description: BranchDoesNotExistException
+          schema:
+            $ref: '#/definitions/BranchDoesNotExistException'
+        '493':
+          description: BranchNameIsTagNameException
+          schema:
+            $ref: '#/definitions/BranchNameIsTagNameException'
+        '494':
+          description: NameLengthExceededException
+          schema:
+            $ref: '#/definitions/NameLengthExceededException'
+        '495':
+          description: InvalidEmailException
+          schema:
+            $ref: '#/definitions/InvalidEmailException'
+        '496':
+          description: CommitMessageLengthExceededException
+          schema:
+            $ref: '#/definitions/CommitMessageLengthExceededException'
+        '497':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '498':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '499':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '500':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '501':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteFileInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1206,6 +1319,164 @@ paths:
           in: query
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetFile':
+    post:
+      operationId: GetFile
+      description: Returns the base-64 encoded contents of a specified file and its metadata.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFileOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: InvalidCommitException
+          schema:
+            $ref: '#/definitions/InvalidCommitException'
+        '484':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '485':
+          description: PathRequiredException
+          schema:
+            $ref: '#/definitions/PathRequiredException'
+        '486':
+          description: InvalidPathException
+          schema:
+            $ref: '#/definitions/InvalidPathException'
+        '487':
+          description: FileDoesNotExistException
+          schema:
+            $ref: '#/definitions/FileDoesNotExistException'
+        '488':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '489':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '490':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '491':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '492':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+        '493':
+          description: FileTooLargeException
+          schema:
+            $ref: '#/definitions/FileTooLargeException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFileInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetFolder':
+    post:
+      operationId: GetFolder
+      description: Returns the contents of a specified folder in a repository.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFolderOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: InvalidCommitException
+          schema:
+            $ref: '#/definitions/InvalidCommitException'
+        '484':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '485':
+          description: PathRequiredException
+          schema:
+            $ref: '#/definitions/PathRequiredException'
+        '486':
+          description: InvalidPathException
+          schema:
+            $ref: '#/definitions/InvalidPathException'
+        '487':
+          description: FolderDoesNotExistException
+          schema:
+            $ref: '#/definitions/FolderDoesNotExistException'
+        '488':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '489':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '490':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '491':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '492':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFolderInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2157,34 +2428,38 @@ paths:
           schema:
             $ref: '#/definitions/CommitMessageLengthExceededException'
         '499':
+          description: InvalidDeletionParameterException
+          schema:
+            $ref: '#/definitions/InvalidDeletionParameterException'
+        '500':
           description: EncryptionIntegrityChecksFailedException
           schema:
             $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
-        '500':
+        '501':
           description: EncryptionKeyAccessDeniedException
           schema:
             $ref: '#/definitions/EncryptionKeyAccessDeniedException'
-        '501':
+        '502':
           description: EncryptionKeyDisabledException
           schema:
             $ref: '#/definitions/EncryptionKeyDisabledException'
-        '502':
+        '503':
           description: EncryptionKeyNotFoundException
           schema:
             $ref: '#/definitions/EncryptionKeyNotFoundException'
-        '503':
+        '504':
           description: EncryptionKeyUnavailableException
           schema:
             $ref: '#/definitions/EncryptionKeyUnavailableException'
-        '504':
+        '505':
           description: SameFileContentException
           schema:
             $ref: '#/definitions/SameFileContentException'
-        '505':
+        '506':
           description: FileNameConflictsWithDirectoryNameException
           schema:
             $ref: '#/definitions/FileNameConflictsWithDirectoryNameException'
-        '506':
+        '507':
           description: DirectoryNameConflictsWithFileNameException
           schema:
             $ref: '#/definitions/DirectoryNameConflictsWithFileNameException'
@@ -2960,6 +3235,70 @@ definitions:
   CommentIdRequiredException: {}
   InvalidCommentIdException: {}
   CommentDeletedException: {}
+  DeleteFileOutput:
+    type: object
+    required:
+      - commitId
+      - blobId
+      - treeId
+      - filePath
+    properties:
+      commitId:
+        $ref: '#/definitions/ObjectId'
+        description: The full commit ID of the commit that contains the change that deletes the file.
+      blobId:
+        $ref: '#/definitions/ObjectId'
+        description: The blob ID removed from the tree as part of deleting the file.
+      treeId:
+        $ref: '#/definitions/ObjectId'
+        description: The full SHA-1 pointer of the tree information for the commit that contains the delete file change.
+      filePath:
+        $ref: '#/definitions/Path'
+        description: 'The fully-qualified path to the file that will be deleted, including the full name and extension of that file.'
+  DeleteFileInput:
+    type: object
+    required:
+      - repositoryName
+      - branchName
+      - filePath
+      - parentCommitId
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the file to delete.
+      branchName:
+        $ref: '#/definitions/BranchName'
+        description: The name of the branch where the commit will be made deleting the file.
+      filePath:
+        $ref: '#/definitions/Path'
+        description: 'The fully-qualified path to the file that will be deleted, including the full name and extension of that file. For example, /examples/file.md is a fully qualified path to a file named file.md in a folder named examples.'
+      parentCommitId:
+        $ref: '#/definitions/CommitId'
+        description: The ID of the commit that is the tip of the branch where you want to create the commit that will delete the file. This must be the HEAD commit for the branch. The commit that deletes the file will be created from this commit ID.
+      keepEmptyFolders:
+        $ref: '#/definitions/KeepEmptyFolders'
+        description: 'Specifies whether to delete the folder or directory that contains the file you want to delete if that file is the only object in the folder or directory. By default, empty folders will be deleted. This includes empty folders that are part of the directory structure. For example, if the path to a file is dir1/dir2/dir3/dir4, and dir2 and dir3 are empty, deleting the last file in dir4 will also delete the empty folders dir4, dir3, and dir2.'
+      commitMessage:
+        $ref: '#/definitions/Message'
+        description: 'The commit message you want to include as part of deleting the file. Commit messages are limited to 256 KB. If no message is specified, a default message will be used.'
+      name:
+        $ref: '#/definitions/Name'
+        description: 'The name of the author of the commit that deletes the file. If no name is specified, the user''s ARN will be used as the author name and committer name.'
+      email:
+        $ref: '#/definitions/Email'
+        description: 'The email address for the commit that deletes the file. If no email address is specified, the email address will be left blank.'
+  ParentCommitIdRequiredException: {}
+  InvalidParentCommitIdException: {}
+  ParentCommitDoesNotExistException: {}
+  ParentCommitIdOutdatedException: {}
+  PathRequiredException: {}
+  InvalidPathException: {}
+  FileDoesNotExistException: {}
+  BranchDoesNotExistException: {}
+  BranchNameIsTagNameException: {}
+  NameLengthExceededException: {}
+  InvalidEmailException: {}
+  CommitMessageLengthExceededException: {}
   DeleteRepositoryOutput:
     type: object
     properties:
@@ -3058,7 +3397,6 @@ definitions:
         $ref: '#/definitions/BranchName'
         description: The name of the branch for which you want to retrieve information.
     description: Represents the input of a get branch operation.
-  BranchDoesNotExistException: {}
   GetCommentOutput:
     type: object
     properties:
@@ -3197,8 +3535,93 @@ definitions:
         description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
   CommitRequiredException: {}
   InvalidCommitException: {}
-  InvalidPathException: {}
   PathDoesNotExistException: {}
+  GetFileOutput:
+    type: object
+    required:
+      - commitId
+      - blobId
+      - filePath
+      - fileMode
+      - fileSize
+      - fileContent
+    properties:
+      commitId:
+        $ref: '#/definitions/ObjectId'
+        description: The full commit ID of the commit that contains the content returned by GetFile.
+      blobId:
+        $ref: '#/definitions/ObjectId'
+        description: The blob ID of the object that represents the file content.
+      filePath:
+        $ref: '#/definitions/Path'
+        description: The fully qualified path to the specified file. This returns the name and extension of the file.
+      fileMode:
+        $ref: '#/definitions/FileModeTypeEnum'
+        description: '<p>The extrapolated file mode permissions of the blob. Valid values include strings such as EXECUTABLE and not numeric values.</p> <note> <p>The file mode permissions returned by this API are not the standard file mode permission values, such as 100644, but rather extrapolated values. See below for a full list of supported return values.</p> </note>'
+      fileSize:
+        $ref: '#/definitions/ObjectSize'
+        description: 'The size of the contents of the file, in bytes.'
+      fileContent:
+        $ref: '#/definitions/FileContent'
+        description: The base-64 encoded binary data object that represents the content of the file.
+  GetFileInput:
+    type: object
+    required:
+      - repositoryName
+      - filePath
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the file.
+      commitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The fully-quaified reference that identifies the commit that contains the file. For example, you could specify a full commit ID, a tag, a branch name, or a reference such as refs/heads/master. If none is provided, then the head commit will be used.'
+      filePath:
+        $ref: '#/definitions/Path'
+        description: 'The fully-qualified path to the file, including the full name and extension of the file. For example, /examples/file.md is the fully-qualified path to a file named file.md in a folder named examples.'
+  GetFolderOutput:
+    type: object
+    required:
+      - commitId
+      - folderPath
+    properties:
+      commitId:
+        $ref: '#/definitions/ObjectId'
+        description: The full commit ID used as a reference for which version of the folder content is returned.
+      folderPath:
+        $ref: '#/definitions/Path'
+        description: The fully-qualified path of the folder whose contents are returned.
+      treeId:
+        $ref: '#/definitions/ObjectId'
+        description: The full SHA-1 pointer of the tree information for the commit that contains the folder.
+      subFolders:
+        $ref: '#/definitions/FolderList'
+        description: 'The list of folders that exist beneath the specified folder, if any.'
+      files:
+        $ref: '#/definitions/FileList'
+        description: 'The list of files that exist in the specified folder, if any.'
+      symbolicLinks:
+        $ref: '#/definitions/SymbolicLinkList'
+        description: 'The list of symbolic links to other files and folders that exist in the specified folder, if any.'
+      subModules:
+        $ref: '#/definitions/SubModuleList'
+        description: 'The list of submodules that exist in the specified folder, if any.'
+  GetFolderInput:
+    type: object
+    required:
+      - repositoryName
+      - folderPath
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository.
+      commitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'A fully-qualified reference used to identify a commit that contains the version of the folder''s content to return. A fully-qualified reference can be a commit ID, branch name, tag, or reference such as HEAD. If no specifier is provided, the folder content will be returned as it exists in the HEAD commit.'
+      folderPath:
+        $ref: '#/definitions/Path'
+        description: 'The fully-qualified path to the folder whose contents will be returned, including the folder name. For example, /examples is a fully-qualified path to a folder named examples that was created off of the root directory (/) of a repository. '
+  FolderDoesNotExistException: {}
   GetMergeConflictsOutput:
     type: object
     required:
@@ -3449,7 +3872,6 @@ definitions:
   CommentContentSizeLimitExceededException: {}
   InvalidFileLocationException: {}
   InvalidRelativeFileVersionEnumException: {}
-  PathRequiredException: {}
   InvalidFilePositionException: {}
   BeforeCommitIdAndAfterCommitIdAreSameException: {}
   PostCommentForPullRequestOutput:
@@ -3581,17 +4003,10 @@ definitions:
       email:
         $ref: '#/definitions/Email'
         description: An email address for the person adding or updating the file.
-  ParentCommitIdRequiredException: {}
-  InvalidParentCommitIdException: {}
-  ParentCommitDoesNotExistException: {}
-  ParentCommitIdOutdatedException: {}
   FileContentRequiredException: {}
   FileContentSizeLimitExceededException: {}
-  BranchNameIsTagNameException: {}
   InvalidFileModeException: {}
-  NameLengthExceededException: {}
-  InvalidEmailException: {}
-  CommitMessageLengthExceededException: {}
+  InvalidDeletionParameterException: {}
   SameFileContentException: {}
   FileNameConflictsWithDirectoryNameException: {}
   DirectoryNameConflictsWithFileNameException: {}
@@ -4090,6 +4505,12 @@ definitions:
     description: Information about a repository.
   Date:
     type: string
+  KeepEmptyFolders:
+    type: boolean
+  Name:
+    type: string
+  Email:
+    type: string
   RepositoryId:
     type: string
   PullRequestEventType:
@@ -4124,24 +4545,69 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Difference'
-  Email:
-    type: string
   EventDate:
     type: string
     format: date-time
-  FileContent:
-    type: string
-    maxLength: 6291456
   FileModeTypeEnum:
     type: string
     enum:
       - EXECUTABLE
       - NORMAL
       - SYMLINK
+  File:
+    type: object
+    properties:
+      blobId:
+        $ref: '#/definitions/ObjectId'
+        description: The blob ID that contains the file information.
+      absolutePath:
+        $ref: '#/definitions/Path'
+        description: The fully-qualified path to the file in the repository.
+      relativePath:
+        $ref: '#/definitions/Path'
+        description: The relative path of the file from the folder where the query originated.
+      fileMode:
+        $ref: '#/definitions/FileModeTypeEnum'
+        description: The extrapolated file mode permissions for the file. Valid values include EXECUTABLE and NORMAL.
+    description: Returns information about a file in a repository.
+  FileContent:
+    type: string
+    maxLength: 6291456
+  FileList:
+    type: array
+    items:
+      $ref: '#/definitions/File'
+  Folder:
+    type: object
+    properties:
+      treeId:
+        $ref: '#/definitions/ObjectId'
+        description: The full SHA-1 pointer of the tree information for the commit that contains the folder.
+      absolutePath:
+        $ref: '#/definitions/Path'
+        description: The fully-qualified path of the folder in the repository.
+      relativePath:
+        $ref: '#/definitions/Path'
+        description: The relative path of the specified folder from the folder where the query originated.
+    description: Returns information about a folder in a repository.
+  FolderList:
+    type: array
+    items:
+      $ref: '#/definitions/Folder'
   blob:
     type: string
   Limit:
     type: integer
+  ObjectSize:
+    type: integer
+  SymbolicLinkList:
+    type: array
+    items:
+      $ref: '#/definitions/SymbolicLink'
+  SubModuleList:
+    type: array
+    items:
+      $ref: '#/definitions/SubModule'
   MergeOptionTypeEnum:
     type: string
     enum:
@@ -4196,8 +4662,6 @@ definitions:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the user who merged the branches.
     description: Returns information about a merge or potential merge between a source reference and a destination reference in a pull request.
-  Name:
-    type: string
   PullRequestTargetList:
     type: array
     items:
@@ -4299,12 +4763,12 @@ definitions:
       destinationCommit:
         $ref: '#/definitions/CommitId'
         description: The full commit ID that is the tip of the destination branch. This is the commit where the pull request was or will be merged.
-      mergeBase:
-        $ref: '#/definitions/CommitId'
-        description: The commit ID of the most recent commit that the source branch and the destination branch have in common.
       sourceCommit:
         $ref: '#/definitions/CommitId'
         description: 'The full commit ID of the tip of the source branch used to create the pull request. If the pull request branch is updated by a push while the pull request is open, the commit ID will change to reflect the new tip of the branch.'
+      mergeBase:
+        $ref: '#/definitions/CommitId'
+        description: The commit ID of the most recent commit that the source branch and the destination branch have in common.
       mergeMetadata:
         $ref: '#/definitions/MergeMetadata'
         description: 'Returns metadata about the state of the merge, including whether the merge has been made.'
@@ -4377,6 +4841,35 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RepositoryTriggerName'
+  SubModule:
+    type: object
+    properties:
+      commitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID that contains the reference to the submodule.
+      absolutePath:
+        $ref: '#/definitions/Path'
+        description: The fully qualified path to the folder that contains the reference to the submodule.
+      relativePath:
+        $ref: '#/definitions/Path'
+        description: The relative path of the submodule from the folder where the query originated.
+    description: Returns information about a submodule reference in a repository folder.
+  SymbolicLink:
+    type: object
+    properties:
+      blobId:
+        $ref: '#/definitions/ObjectId'
+        description: The blob ID that contains the information about the symbolic link.
+      absolutePath:
+        $ref: '#/definitions/Path'
+        description: The fully-qualified path to the folder that contains the symbolic link.
+      relativePath:
+        $ref: '#/definitions/Path'
+        description: The relative path of the symbolic link from the folder where the query originated.
+      fileMode:
+        $ref: '#/definitions/FileModeTypeEnum'
+        description: The file mode permissions of the blob that cotains information about the symbolic link.
+    description: Returns information about a symbolic link in a repository folder.
   Target:
     type: object
     required:

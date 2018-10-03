@@ -1587,6 +1587,9 @@ definitions:
     properties: {}
   AcceptInvitationRequest:
     type: object
+    required:
+      - MasterId
+      - InvitationId
     properties:
       InvitationId:
         $ref: '#/definitions/InvitationId'
@@ -1595,31 +1598,15 @@ definitions:
         $ref: '#/definitions/MasterId'
         description: The account ID of the master GuardDuty account whose invitation you're accepting.
     description: AcceptInvitation request body.
-  BadRequestException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message.
-      Type:
-        $ref: '#/definitions/__string'
-        description: The error type.
-    description: Error response object.
-  InternalServerErrorException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message.
-      Type:
-        $ref: '#/definitions/__string'
-        description: The error type.
-    description: Error response object.
+  BadRequestException: {}
+  InternalServerErrorException: {}
   ArchiveFindingsResponse:
     type: object
     properties: {}
   ArchiveFindingsRequest:
     type: object
+    required:
+      - FindingIds
     properties:
       FindingIds:
         $ref: '#/definitions/FindingIds'
@@ -1633,10 +1620,18 @@ definitions:
         description: The unique ID of the created detector.
   CreateDetectorRequest:
     type: object
+    required:
+      - Enable
     properties:
+      ClientToken:
+        $ref: '#/definitions/__stringMin0Max64'
+        description: The idempotency token for the create request.
       Enable:
         $ref: '#/definitions/Enable'
         description: A boolean value that specifies whether the detector is to be enabled.
+      FindingPublishingFrequency:
+        $ref: '#/definitions/FindingPublishingFrequency'
+        description: A enum value that specifies how frequently customer got Finding updates published.
     description: CreateDetector request body.
   CreateFilterResponse:
     type: object
@@ -1646,6 +1641,9 @@ definitions:
         description: The name of the successfully created filter.
   CreateFilterRequest:
     type: object
+    required:
+      - FindingCriteria
+      - Name
     properties:
       Action:
         $ref: '#/definitions/FilterAction'
@@ -1673,10 +1671,18 @@ definitions:
         $ref: '#/definitions/IpSetId'
   CreateIPSetRequest:
     type: object
+    required:
+      - Format
+      - Activate
+      - Location
+      - Name
     properties:
       Activate:
         $ref: '#/definitions/Activate'
         description: A boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
+      ClientToken:
+        $ref: '#/definitions/__stringMin0Max64'
+        description: The idempotency token for the create request.
       Format:
         $ref: '#/definitions/IpSetFormat'
         description: The format of the file that contains the IPSet.
@@ -1695,6 +1701,8 @@ definitions:
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   CreateMembersRequest:
     type: object
+    required:
+      - AccountDetails
     properties:
       AccountDetails:
         $ref: '#/definitions/AccountDetails'
@@ -1717,10 +1725,18 @@ definitions:
         $ref: '#/definitions/ThreatIntelSetId'
   CreateThreatIntelSetRequest:
     type: object
+    required:
+      - Format
+      - Activate
+      - Location
+      - Name
     properties:
       Activate:
         $ref: '#/definitions/Activate'
         description: A boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
+      ClientToken:
+        $ref: '#/definitions/__stringMin0Max64'
+        description: The idempotency token for the create request.
       Format:
         $ref: '#/definitions/ThreatIntelSetFormat'
         description: The format of the file that contains the ThreatIntelSet.
@@ -1739,6 +1755,8 @@ definitions:
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   DeclineInvitationsRequest:
     type: object
+    required:
+      - AccountIds
     properties:
       AccountIds:
         $ref: '#/definitions/AccountIds'
@@ -1770,6 +1788,8 @@ definitions:
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   DeleteInvitationsRequest:
     type: object
+    required:
+      - AccountIds
     properties:
       AccountIds:
         $ref: '#/definitions/AccountIds'
@@ -1783,6 +1803,8 @@ definitions:
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   DeleteMembersRequest:
     type: object
+    required:
+      - AccountIds
     properties:
       AccountIds:
         $ref: '#/definitions/AccountIds'
@@ -1808,6 +1830,8 @@ definitions:
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   DisassociateMembersRequest:
     type: object
+    required:
+      - AccountIds
     properties:
       AccountIds:
         $ref: '#/definitions/AccountIds'
@@ -1818,6 +1842,8 @@ definitions:
     properties:
       CreatedAt:
         $ref: '#/definitions/CreatedAt'
+      FindingPublishingFrequency:
+        $ref: '#/definitions/FindingPublishingFrequency'
       ServiceRole:
         $ref: '#/definitions/ServiceRole'
       Status:
@@ -1855,6 +1881,8 @@ definitions:
         $ref: '#/definitions/Findings'
   GetFindingsRequest:
     type: object
+    required:
+      - FindingIds
     properties:
       FindingIds:
         $ref: '#/definitions/FindingIds'
@@ -1871,6 +1899,8 @@ definitions:
         description: Finding statistics object.
   GetFindingsStatisticsRequest:
     type: object
+    required:
+      - FindingStatisticTypes
     properties:
       FindingCriteria:
         $ref: '#/definitions/FindingCriteria'
@@ -1924,6 +1954,8 @@ definitions:
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   GetMembersRequest:
     type: object
+    required:
+      - AccountIds
     properties:
       AccountIds:
         $ref: '#/definitions/AccountIds'
@@ -1955,6 +1987,8 @@ definitions:
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   InviteMembersRequest:
     type: object
+    required:
+      - AccountIds
     properties:
       AccountIds:
         $ref: '#/definitions/AccountIds'
@@ -2057,6 +2091,8 @@ definitions:
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   StartMonitoringMembersRequest:
     type: object
+    required:
+      - AccountIds
     properties:
       AccountIds:
         $ref: '#/definitions/AccountIds'
@@ -2070,6 +2106,8 @@ definitions:
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   StopMonitoringMembersRequest:
     type: object
+    required:
+      - AccountIds
     properties:
       AccountIds:
         $ref: '#/definitions/AccountIds'
@@ -2080,6 +2118,8 @@ definitions:
     properties: {}
   UnarchiveFindingsRequest:
     type: object
+    required:
+      - FindingIds
     properties:
       FindingIds:
         $ref: '#/definitions/FindingIds'
@@ -2094,6 +2134,9 @@ definitions:
       Enable:
         $ref: '#/definitions/Enable'
         description: Updated boolean value for the detector that specifies whether the detector is enabled.
+      FindingPublishingFrequency:
+        $ref: '#/definitions/FindingPublishingFrequency'
+        description: A enum value that specifies how frequently customer got Finding updates published.
     description: UpdateDetector request body.
   UpdateFilterResponse:
     type: object
@@ -2122,6 +2165,9 @@ definitions:
     properties: {}
   UpdateFindingsFeedbackRequest:
     type: object
+    required:
+      - Feedback
+      - FindingIds
     properties:
       Comments:
         $ref: '#/definitions/Comments'
@@ -2383,9 +2429,20 @@ definitions:
         $ref: '#/definitions/__string'
         description: Country name of the remote IP address.
     description: Country information of the remote IP address.
+  __stringMin0Max64:
+    type: string
+    minLength: 0
+    maxLength: 64
   Enable:
     type: boolean
     description: A boolean value that specifies whether the detector is to be enabled.
+  FindingPublishingFrequency:
+    type: string
+    enum:
+      - FIFTEEN_MINUTES
+      - ONE_HOUR
+      - SIX_HOURS
+    description: A enum value that specifies how frequently customer got Finding updates published.
   DetectorId:
     type: string
     description: The unique identifier for a detector.
@@ -2395,10 +2452,6 @@ definitions:
       - NOOP
       - ARCHIVE
     description: The action associated with a filter.
-  __stringMin0Max64:
-    type: string
-    minLength: 0
-    maxLength: 64
   FilterDescription:
     type: string
     description: The filter description
@@ -2474,16 +2527,6 @@ definitions:
   Domain:
     type: string
     description: A domain name.
-  ErrorResponse:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message.
-      Type:
-        $ref: '#/definitions/__string'
-        description: The error type.
-    description: Error response object.
   Feedback:
     type: string
     enum:
@@ -3021,8 +3064,3 @@ definitions:
         $ref: '#/definitions/__string'
         description: A reason why the account hasn't been processed.
     description: An object containing the unprocessed account and a result string explaining why it was unprocessed.
-  __long:
-    type: integer
-  __timestamp:
-    type: string
-    format: date-time

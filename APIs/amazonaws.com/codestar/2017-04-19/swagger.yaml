@@ -830,34 +830,13 @@ definitions:
       remoteAccessAllowed:
         $ref: '#/definitions/RemoteAccessAllowed'
         description: 'Whether the team member is allowed to use an SSH public/private key pair to remotely access project resources, for example Amazon EC2 instances.'
-  LimitExceededException:
-    type: object
-    properties: {}
-    description: A resource limit has been exceeded.
-  ProjectNotFoundException:
-    type: object
-    properties: {}
-    description: The specified AWS CodeStar project was not found.
-  TeamMemberAlreadyAssociatedException:
-    type: object
-    properties: {}
-    description: The team member is already associated with a role in this project.
-  ValidationException:
-    type: object
-    properties: {}
-    description: 'The specified input is either not valid, or it could not be validated.'
-  InvalidServiceRoleException:
-    type: object
-    properties: {}
-    description: The service role is not valid.
-  ProjectConfigurationException:
-    type: object
-    properties: {}
-    description: Project configuration information is required but not specified.
-  ConcurrentModificationException:
-    type: object
-    properties: {}
-    description: Another modification is being made. That modification must complete before you can make your change.
+  LimitExceededException: {}
+  ProjectNotFoundException: {}
+  TeamMemberAlreadyAssociatedException: {}
+  ValidationException: {}
+  InvalidServiceRoleException: {}
+  ProjectConfigurationException: {}
+  ConcurrentModificationException: {}
   CreateProjectResult:
     type: object
     required:
@@ -894,14 +873,11 @@ definitions:
       clientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
         description: Reserved for future use.
-  ProjectAlreadyExistsException:
-    type: object
-    properties: {}
-    description: An AWS CodeStar project with the same ID already exists in this region for the AWS account. AWS CodeStar project IDs must be unique within a region for the AWS account.
-  ProjectCreationFailedException:
-    type: object
-    properties: {}
-    description: 'The project creation request was valid, but a nonspecific exception or error occurred during project creation. The project could not be created in AWS CodeStar.'
+      tags:
+        $ref: '#/definitions/Tags'
+        description: The tags created for the project.
+  ProjectAlreadyExistsException: {}
+  ProjectCreationFailedException: {}
   CreateUserProfileResult:
     type: object
     required:
@@ -944,10 +920,7 @@ definitions:
       sshPublicKey:
         $ref: '#/definitions/SshPublicKey'
         description: 'The SSH public key associated with the user in AWS CodeStar. If a project owner allows the user remote access to project resources, this public key will be used along with the user''s private key for SSH access.'
-  UserProfileAlreadyExistsException:
-    type: object
-    properties: {}
-    description: 'A user profile with that name already exists in this region for the AWS account. AWS CodeStar user profile names must be unique within a region for the AWS account. '
+  UserProfileAlreadyExistsException: {}
   DeleteProjectResult:
     type: object
     properties:
@@ -1014,6 +987,9 @@ definitions:
       projectTemplateId:
         $ref: '#/definitions/ProjectTemplateId'
         description: The ID for the AWS CodeStar project template used to create the project.
+      status:
+        $ref: '#/definitions/ProjectStatus'
+        description: The project creation or deletion status.
   DescribeProjectRequest:
     type: object
     required:
@@ -1055,10 +1031,7 @@ definitions:
       userArn:
         $ref: '#/definitions/UserArn'
         description: The Amazon Resource Name (ARN) of the user.
-  UserProfileNotFoundException:
-    type: object
-    properties: {}
-    description: The user profile was not found.
+  UserProfileNotFoundException: {}
   DisassociateTeamMemberResult:
     type: object
     properties: {}
@@ -1094,10 +1067,7 @@ definitions:
       maxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum amount of data that can be contained in a single set of results.
-  InvalidNextTokenException:
-    type: object
-    properties: {}
-    description: The next token is not valid.
+  InvalidNextTokenException: {}
   ListResourcesResult:
     type: object
     properties:
@@ -1269,10 +1239,7 @@ definitions:
       remoteAccessAllowed:
         $ref: '#/definitions/RemoteAccessAllowed'
         description: 'Whether a team member is allowed to remotely access project resources using the SSH public key associated with the user''s profile. Even if this is set to True, the user must associate a public key with their profile before the user can access resources.'
-  TeamMemberNotFoundException:
-    type: object
-    properties: {}
-    description: The specified team member was not found.
+  TeamMemberNotFoundException: {}
   UpdateUserProfileResult:
     type: object
     required:
@@ -1344,18 +1311,28 @@ definitions:
     pattern: ^$|^\S(.*\S)?$
     maxLength: 1024
     format: password
+  Tags:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
   ProjectArn:
     type: string
     pattern: '^arn:aws[^:\s]*:codestar:[^:\s]+:[0-9]{12}:project\/[a-z]([a-z0-9|-])+$'
   ProjectTemplateId:
     type: string
-    pattern: '^arn:aws[^:\s]{0,5}:codestar:[^:\s]+::project-template\/[a-z0-9-]+$'
+    pattern: '^arn:aws[^:\s]{0,5}:codestar:[^:\s]+::project-template(\/(github|codecommit))?\/[a-z0-9-]+$'
     minLength: 1
   UserProfileDisplayName:
     type: string
     pattern: ^\S(.*\S)?$
     minLength: 1
     maxLength: 64
+    format: password
   Email:
     type: string
     pattern: '^[\w-.+]+@[\w-.+]+$'
@@ -1377,6 +1354,18 @@ definitions:
   StackId:
     type: string
     pattern: '^arn:aws[^:\s]*:cloudformation:[^:\s]+:[0-9]{12}:stack\/[^:\s]+\/[^:\s]+$'
+  ProjectStatus:
+    type: object
+    required:
+      - state
+    properties:
+      state:
+        $ref: '#/definitions/State'
+        description: The phase of completion for a project creation or deletion.
+      reason:
+        $ref: '#/definitions/Reason'
+        description: 'In the case of a project creation or deletion failure, a reason for the failure.'
+    description: An indication of whether a project creation or deletion is failed or successful.
   PaginationToken:
     type: string
     pattern: '^[\w/+=]+$'
@@ -1394,15 +1383,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Resource'
-  Tags:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
   TeamMemberResult:
     type: array
     items:
@@ -1411,6 +1391,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/UserProfileSummary'
+  State:
+    type: string
+    pattern: ^(CreateInProgress|CreateComplete|CreateFailed|DeleteComplete|DeleteFailed|DeleteInProgress|UpdateComplete|UpdateInProgress|UpdateFailed|Unknown)$
+  Reason:
+    type: string
+    pattern: ^$|^\S(.*\S)?$
+    maxLength: 1024
   ProjectSummary:
     type: object
     properties:
