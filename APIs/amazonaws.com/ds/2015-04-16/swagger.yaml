@@ -568,7 +568,7 @@ paths:
   '/#CreateMicrosoftAD':
     post:
       operationId: CreateMicrosoftAD
-      description: '<p>Creates a Microsoft AD in the AWS cloud.</p> <p>Before you call <i>CreateMicrosoftAD</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateMicrosoftAD</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
+      description: '<p>Creates an AWS Managed Microsoft AD directory.</p> <p>Before you call <i>CreateMicrosoftAD</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateMicrosoftAD</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
       responses:
         '200':
           description: Success
@@ -658,7 +658,7 @@ paths:
   '/#CreateTrust':
     post:
       operationId: CreateTrust
-      description: '<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.</p>'
+      description: '<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your AWS Managed Microsoft AD directory, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between an AWS Managed Microsoft AD directory and an external domain. You can create either a forest trust or an external trust.</p>'
       responses:
         '200':
           description: Success
@@ -875,7 +875,7 @@ paths:
   '/#DeleteTrust':
     post:
       operationId: DeleteTrust
-      description: Deletes an existing trust relationship between your Microsoft AD in the AWS cloud and an external domain.
+      description: Deletes an existing trust relationship between your AWS Managed Microsoft AD directory and an external domain.
       responses:
         '200':
           description: Success
@@ -2281,10 +2281,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateTrust':
+    post:
+      operationId: UpdateTrust
+      description: Updates the trust that has been set up between your AWS Managed Microsoft AD directory and an on-premises Active Directory.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateTrustResult'
+        '480':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '483':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateTrustRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#VerifyTrust':
     post:
       operationId: VerifyTrust
-      description: <p>AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships.</p> <p>This action verifies a trust relationship between your Microsoft AD in the AWS cloud and an external domain.</p>
+      description: <p>AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships.</p> <p>This action verifies a trust relationship between your AWS Managed Microsoft AD directory and an external domain.</p>
       responses:
         '200':
           description: Success
@@ -2589,8 +2630,8 @@ definitions:
         description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
       Edition:
         $ref: '#/definitions/DirectoryEdition'
-        description: 'AWS Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.'
-    description: Creates a Microsoft AD in the AWS cloud.
+        description: 'AWS Managed Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.'
+    description: Creates an AWS Managed Microsoft AD directory.
   CreateSnapshotResult:
     type: object
     properties:
@@ -2628,7 +2669,7 @@ definitions:
     properties:
       DirectoryId:
         $ref: '#/definitions/DirectoryId'
-        description: The Directory ID of the Microsoft AD in the AWS cloud for which to establish the trust relationship.
+        description: The Directory ID of the AWS Managed Microsoft AD directory for which to establish the trust relationship.
       RemoteDomainName:
         $ref: '#/definitions/RemoteDomainName'
         description: The Fully Qualified Domain Name (FQDN) of the external domain for which to create the trust relationship.
@@ -2640,11 +2681,14 @@ definitions:
         description: The direction of the trust relationship.
       TrustType:
         $ref: '#/definitions/TrustType'
-        description: The trust relationship type.
+        description: The trust relationship type. <code>Forest</code> is the default.
       ConditionalForwarderIpAddrs:
         $ref: '#/definitions/DnsIpAddrs'
         description: The IP addresses of the remote DNS server associated with RemoteDomainName.
-    description: '<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.</p>'
+      SelectiveAuth:
+        $ref: '#/definitions/SelectiveAuth'
+        description: Optional parameter to enable selective authentication for the trust.
+    description: '<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your AWS Managed Microsoft AD directory, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between an AWS Managed Microsoft AD directory and an external domain.</p>'
   DeleteConditionalForwarderResult:
     type: object
     properties: {}
@@ -2723,7 +2767,7 @@ definitions:
       DeleteAssociatedConditionalForwarder:
         $ref: '#/definitions/DeleteAssociatedConditionalForwarder'
         description: Delete a conditional forwarder as part of a DeleteTrustRequest.
-    description: Deletes the local side of an existing trust relationship between the Microsoft AD in the AWS cloud and the external domain.
+    description: Deletes the local side of an existing trust relationship between the AWS Managed Microsoft AD directory and the external domain.
   DeregisterEventTopicResult:
     type: object
     properties: {}
@@ -2904,7 +2948,7 @@ definitions:
       Limit:
         $ref: '#/definitions/Limit'
         description: The maximum number of objects to return.
-    description: 'Describes the trust relationships for a particular Microsoft AD in the AWS cloud. If no input parameters are are provided, such as directory ID or trust ID, this request describes all the trust relationships.'
+    description: 'Describes the trust relationships for a particular AWS Managed Microsoft AD directory. If no input parameters are are provided, such as directory ID or trust ID, this request describes all the trust relationships.'
   DisableRadiusResult:
     type: object
     properties: {}
@@ -3313,6 +3357,25 @@ definitions:
         $ref: '#/definitions/RadiusSettings'
         description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
     description: Contains the inputs for the <a>UpdateRadius</a> operation.
+  UpdateTrustResult:
+    type: object
+    properties:
+      RequestId:
+        $ref: '#/definitions/RequestId'
+      TrustId:
+        $ref: '#/definitions/TrustId'
+        description: Identifier of the trust relationship.
+  UpdateTrustRequest:
+    type: object
+    required:
+      - TrustId
+    properties:
+      TrustId:
+        $ref: '#/definitions/TrustId'
+        description: Identifier of the trust relationship.
+      SelectiveAuth:
+        $ref: '#/definitions/SelectiveAuth'
+        description: Updates selective authentication for the trust.
   VerifyTrustResult:
     type: object
     properties:
@@ -3328,7 +3391,7 @@ definitions:
       TrustId:
         $ref: '#/definitions/TrustId'
         description: The unique Trust ID of the trust relationship to verify.
-    description: Initiates the verification of an existing trust relationship between a Microsoft AD in the AWS cloud and an external domain.
+    description: Initiates the verification of an existing trust relationship between an AWS Managed Microsoft AD directory and an external domain.
   DirectoryId:
     type: string
     pattern: '^d-[0-9a-f]{10}$'
@@ -3568,6 +3631,7 @@ definitions:
     pattern: '^s-[0-9a-f]{10}$'
   TrustPassword:
     type: string
+    pattern: (.|\s)*\S(.|\s)*
     minLength: 1
     maxLength: 128
     format: password
@@ -3581,6 +3645,12 @@ definitions:
     type: string
     enum:
       - Forest
+      - External
+  SelectiveAuth:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
   TrustId:
     type: string
     pattern: '^t-[0-9a-f]{10}$'
@@ -3916,13 +3986,13 @@ definitions:
         description: Indicates if the cloud directory limit has been reached.
       CloudOnlyMicrosoftADLimit:
         $ref: '#/definitions/Limit'
-        description: The maximum number of Microsoft AD directories allowed in the region.
+        description: The maximum number of AWS Managed Microsoft AD directories allowed in the region.
       CloudOnlyMicrosoftADCurrentCount:
         $ref: '#/definitions/Limit'
-        description: The current number of Microsoft AD directories in the region.
+        description: The current number of AWS Managed Microsoft AD directories in the region.
       CloudOnlyMicrosoftADLimitReached:
         $ref: '#/definitions/CloudOnlyDirectoriesLimitReached'
-        description: Indicates if the Microsoft AD directory limit has been reached.
+        description: Indicates if the AWS Managed Microsoft AD directory limit has been reached.
       ConnectedDirectoriesLimit:
         $ref: '#/definitions/Limit'
         description: The maximum number of connected directories allowed in the region.
@@ -4147,6 +4217,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagKey'
+  RequestId:
+    type: string
+    pattern: '^([A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12})$'
+    description: The AWS request identifier.
   UserPassword:
     type: string
     minLength: 1
@@ -4289,6 +4363,9 @@ definitions:
       - Verifying
       - VerifyFailed
       - Verified
+      - Updating
+      - UpdateFailed
+      - Updated
       - Deleting
       - Deleted
       - Failed
@@ -4308,7 +4385,7 @@ definitions:
         description: The Fully Qualified Domain Name (FQDN) of the external domain involved in the trust relationship.
       TrustType:
         $ref: '#/definitions/TrustType'
-        description: The trust relationship type.
+        description: The trust relationship type. <code>Forest</code> is the default.
       TrustDirection:
         $ref: '#/definitions/TrustDirection'
         description: The trust relationship direction.
@@ -4327,7 +4404,10 @@ definitions:
       TrustStateReason:
         $ref: '#/definitions/TrustStateReason'
         description: The reason for the TrustState.
-    description: Describes a trust relationship between an Microsoft AD in the AWS cloud and an external domain.
+      SelectiveAuth:
+        $ref: '#/definitions/SelectiveAuth'
+        description: Current state of selective authentication for the trust.
+    description: Describes a trust relationship between an AWS Managed Microsoft AD directory and an external domain.
   UnshareTarget:
     type: object
     required:

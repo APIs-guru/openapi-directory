@@ -1438,6 +1438,9 @@ definitions:
       sourceVersion:
         $ref: '#/definitions/NonEmptyString'
         description: Any version identifier for the version of the source code to be built.
+      resolvedSourceVersion:
+        $ref: '#/definitions/NonEmptyString'
+        description: '<p> An identifier for the version of this build''s source code. </p> <ul> <li> <p> For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID. </p> </li> <li> <p> For AWS CodePipeline, the source revision provided by AWS CodePipeline. </p> </li> <li> <p> For Amazon Simple Storage Service (Amazon S3), this does not apply. </p> </li> </ul>'
       projectName:
         $ref: '#/definitions/NonEmptyString'
         description: The name of the AWS CodeBuild project.
@@ -1849,7 +1852,7 @@ definitions:
         description: '<p>The current status of the S3 build logs. Valid values are:</p> <ul> <li> <p> <code>ENABLED</code>: S3 build logs are enabled for this build project.</p> </li> <li> <p> <code>DISABLED</code>: S3 build logs are not enabled for this build project.</p> </li> </ul>'
       location:
         $ref: '#/definitions/String'
-        description: ' The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3 bucket name is <code>my-bucket</code>, and your path prefix is <code>build-log</code>, then acceptable formats are <code>my-bucket/build-log</code> or <code>aws:s3:::my-bucket/build-log</code>. '
+        description: ' The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3 bucket name is <code>my-bucket</code>, and your path prefix is <code>build-log</code>, then acceptable formats are <code>my-bucket/build-log</code> or <code>arn:aws:s3:::my-bucket/build-log</code>. '
     description: ' Information about S3 logs for a build project. '
   PhaseContext:
     type: object

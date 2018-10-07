@@ -1853,7 +1853,7 @@ paths:
   '/#RefreshCache':
     post:
       operationId: RefreshCache
-      description: 'Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket''s contents and cached the results. This operation is only supported in the file gateway type.'
+      description: 'Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket''s contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting Notified About File Operations</a>.'
       responses:
         '200':
           description: Success
@@ -2483,7 +2483,7 @@ definitions:
         description: '<p>A value that indicates the region where you want to store your data. The gateway region specified must be the same region as the region in your <code>Host</code> header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p> <p> Valid Values: "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1", "eu-west-2", "eu-west-3", "ap-northeast-1", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "sa-east-1"</p>'
       GatewayType:
         $ref: '#/definitions/GatewayType'
-        description: '<p>A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is <code>STORED</code>. </p> <p> Valid Values: "STORED", "CACHED", "VTL", "FILE_S3"</p>'
+        description: '<p>A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is <code>CACHED</code>. </p> <p> Valid Values: "STORED", "CACHED", "VTL", "FILE_S3"</p>'
       TapeDriveType:
         $ref: '#/definitions/TapeDriveType'
         description: '<p>The value that indicates the type of tape drive to use for tape gateway. This field is optional.</p> <p> Valid Values: "IBM-ULT3580-TD5" </p>'
@@ -2491,26 +2491,8 @@ definitions:
         $ref: '#/definitions/MediumChangerType'
         description: '<p>The value that indicates the type of medium changer to use for tape gateway. This field is optional.</p> <p> Valid Values: "STK-L700", "AWS-Gateway-VTL"</p>'
     description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>ActivateGatewayInput$ActivationKey</a> </p> </li> <li> <p> <a>ActivateGatewayInput$GatewayName</a> </p> </li> <li> <p> <a>ActivateGatewayInput$GatewayRegion</a> </p> </li> <li> <p> <a>ActivateGatewayInput$GatewayTimezone</a> </p> </li> <li> <p> <a>ActivateGatewayInput$GatewayType</a> </p> </li> <li> <p> <a>ActivateGatewayInput$TapeDriveType</a> </p> </li> <li> <p> <a>ActivateGatewayInput$MediumChangerType</a> </p> </li> </ul>'
-  InvalidGatewayRequestException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/string'
-        description: A human-readable message describing the error that occurred.
-      error:
-        $ref: '#/definitions/StorageGatewayError'
-        description: A <a>StorageGatewayError</a> that provides more detail about the cause of the error.
-    description: 'An exception occurred because an invalid gateway request was issued to the service. For more information, see the error and message fields.'
-  InternalServerError:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/string'
-        description: A human-readable message describing the error that occurred.
-      error:
-        $ref: '#/definitions/StorageGatewayError'
-        description: A <a>StorageGatewayError</a> that provides more information about the cause of the error.
-    description: 'An internal server error has occurred during the request. For more information, see the error and message fields.'
+  InvalidGatewayRequestException: {}
+  InternalServerError: {}
   AddCacheOutput:
     type: object
     example:
@@ -2854,16 +2836,7 @@ definitions:
         $ref: '#/definitions/SnapshotDescription'
         description: 'Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the <b>Description</b> field, and in the AWS Storage Gateway snapshot <b>Details</b> pane, <b>Description</b> field'
     description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>CreateSnapshotInput$SnapshotDescription</a> </p> </li> <li> <p> <a>CreateSnapshotInput$VolumeARN</a> </p> </li> </ul>'
-  ServiceUnavailableError:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/string'
-        description: A human-readable message describing the error that occurred.
-      error:
-        $ref: '#/definitions/StorageGatewayError'
-        description: A <a>StorageGatewayError</a> that provides more information about the cause of the error.
-    description: 'An internal server error has occurred because the service is unavailable. For more information, see the error and message fields.'
+  ServiceUnavailableError: {}
   CreateSnapshotFromVolumeRecoveryPointOutput:
     type: object
     example:
@@ -4050,6 +4023,9 @@ definitions:
     properties:
       FileShareARN:
         $ref: '#/definitions/FileShareARN'
+      NotificationId:
+        $ref: '#/definitions/NotificationId'
+    description: RefreshCacheOutput
   RefreshCacheInput:
     type: object
     required:
@@ -4057,6 +4033,11 @@ definitions:
     properties:
       FileShareARN:
         $ref: '#/definitions/FileShareARN'
+      FolderList:
+        $ref: '#/definitions/FolderList'
+      Recursive:
+        $ref: '#/definitions/Boolean'
+        description: 'A value that specifies whether to recursively refresh folders in the cache. The refresh includes folders that were in the cache the last time the gateway listed the folder''s contents. If this value set to "true", each folder that is listed in <code>FolderList</code> is recursively updated. Otherwise, subfolders listed in <code>FolderList</code> are not refreshed. Only objects that are in folders listed directly under <code>FolderList</code> are found and used for the update. The default is "true".'
   RemoveTagsFromResourceOutput:
     type: object
     example:
@@ -4967,70 +4948,6 @@ definitions:
     type: string
     pattern: '^[ -~]+$'
     format: password
-  ErrorCode:
-    type: string
-    enum:
-      - ActivationKeyExpired
-      - ActivationKeyInvalid
-      - ActivationKeyNotFound
-      - GatewayInternalError
-      - GatewayNotConnected
-      - GatewayNotFound
-      - GatewayProxyNetworkConnectionBusy
-      - AuthenticationFailure
-      - BandwidthThrottleScheduleNotFound
-      - Blocked
-      - CannotExportSnapshot
-      - ChapCredentialNotFound
-      - DiskAlreadyAllocated
-      - DiskDoesNotExist
-      - DiskSizeGreaterThanVolumeMaxSize
-      - DiskSizeLessThanVolumeSize
-      - DiskSizeNotGigAligned
-      - DuplicateCertificateInfo
-      - DuplicateSchedule
-      - EndpointNotFound
-      - IAMNotSupported
-      - InitiatorInvalid
-      - InitiatorNotFound
-      - InternalError
-      - InvalidGateway
-      - InvalidEndpoint
-      - InvalidParameters
-      - InvalidSchedule
-      - LocalStorageLimitExceeded
-      - 'LunAlreadyAllocated '
-      - LunInvalid
-      - MaximumContentLengthExceeded
-      - MaximumTapeCartridgeCountExceeded
-      - MaximumVolumeCountExceeded
-      - NetworkConfigurationChanged
-      - NoDisksAvailable
-      - NotImplemented
-      - NotSupported
-      - OperationAborted
-      - OutdatedGateway
-      - ParametersNotImplemented
-      - RegionInvalid
-      - RequestTimeout
-      - ServiceUnavailable
-      - SnapshotDeleted
-      - SnapshotIdInvalid
-      - SnapshotInProgress
-      - SnapshotNotFound
-      - SnapshotScheduleNotFound
-      - StagingAreaFull
-      - StorageFailure
-      - TapeCartridgeNotFound
-      - TargetAlreadyExists
-      - TargetInvalid
-      - TargetNotFound
-      - UnauthorizedOperation
-      - VolumeAlreadyExists
-      - VolumeIdInvalid
-      - VolumeInUse
-      - VolumeNotFound
-      - VolumeNotReady
   IPV4AddressCIDR:
     type: string
     pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))?$'
@@ -5072,6 +4989,17 @@ definitions:
     type: string
     minLength: 1
     maxLength: 64
+  Folder:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  FolderList:
+    type: array
+    description: 'A comma-separated list of the paths of folders to refresh in the cache. The default is [<code>"/"</code>]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If <code>Recursive</code> is set to "true", the entire S3 bucket that the file share has access to is refreshed.'
+    items:
+      $ref: '#/definitions/Folder'
+    minItems: 1
+    maxItems: 50
   GatewayOperationalState:
     type: string
     minLength: 2
@@ -5120,16 +5048,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Initiator'
-  StorageGatewayError:
-    type: object
-    properties:
-      errorCode:
-        $ref: '#/definitions/ErrorCode'
-        description: Additional information about the error.
-      errorDetails:
-        $ref: '#/definitions/errorDetails'
-        description: Human-readable text that provides detail about the error that occurred.
-    description: Provides additional information about an error that was returned by the service as an or. See the <code>errorCode</code> and <code>errorDetails</code> members for more information about the error.
   TapeInfos:
     type: array
     description: 'An array of <a>TapeInfo</a> objects, where each object describes an a single tape. If there not tapes in the tape library or VTS, then the <code>TapeInfos</code> is an empty array.'
@@ -5265,15 +5183,6 @@ definitions:
     minLength: 6
     maxLength: 512
     format: password
-  errorDetails:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/string'
-        value:
-          $ref: '#/definitions/string'
   StorediSCSIVolume:
     type: object
     properties:
