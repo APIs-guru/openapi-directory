@@ -140,6 +140,41 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTranscriptionJob':
+    post:
+      operationId: DeleteTranscriptionJob
+      description: 'Deletes a previously submitted transcription job as wella s any other generated results such as the transcription, models, and so on.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTranscriptionJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteVocabulary':
     post:
       operationId: DeleteVocabulary
@@ -476,30 +511,18 @@ definitions:
       Phrases:
         $ref: '#/definitions/Phrases'
         description: 'An array of strings that contains the vocabulary entries. '
-  BadRequestException:
+  BadRequestException: {}
+  LimitExceededException: {}
+  InternalFailureException: {}
+  ConflictException: {}
+  DeleteTranscriptionJobRequest:
     type: object
+    required:
+      - TranscriptionJobName
     properties:
-      Message:
-        $ref: '#/definitions/FailureReason'
-    description: 'Your request didn''t pass one or more validation tests. For example, a name already exists when creating a resource or a name may not exist when getting a transcription job or custom vocabulary. See the exception <code>Message</code> field for more information.'
-  LimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: 'Either you have sent too many requests or your input file is too long. Wait before you resend your request, or use a smaller file and resend the request.'
-  InternalFailureException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: There was an internal error. Check the error message and try your request again.
-  ConflictException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: '<p>When you are using the <code>StartTranscriptionJob</code> operation, the <code>JobName</code> field is a duplicate of a previously entered job name. Resend your request with a different name.</p> <p>When you are using the <code>UpdateVocabulary</code> operation, there are two jobs running at the same time. Resend the second request later.</p>'
+      TranscriptionJobName:
+        $ref: '#/definitions/TranscriptionJobName'
+        description: The name of the transcription job to be deleted.
   DeleteVocabularyRequest:
     type: object
     required:
@@ -508,12 +531,7 @@ definitions:
       VocabularyName:
         $ref: '#/definitions/VocabularyName'
         description: 'The name of the vocabulary to delete. '
-  NotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: We can't find the requested resource. Check the name and try your request again.
+  NotFoundException: {}
   GetTranscriptionJobResponse:
     type: object
     properties:
@@ -677,12 +695,8 @@ definitions:
       Phrases:
         $ref: '#/definitions/Phrases'
         description: An array of strings containing the vocabulary entries.
-  FailureReason:
-    type: string
   Boolean:
     type: boolean
-  String:
-    type: string
   VocabularyName:
     type: string
     pattern: '^[0-9a-zA-Z._-]+'
@@ -706,6 +720,8 @@ definitions:
   DateTime:
     type: string
     format: date-time
+  FailureReason:
+    type: string
   TranscriptionJobName:
     type: string
     pattern: '^[0-9a-zA-Z._-]+'

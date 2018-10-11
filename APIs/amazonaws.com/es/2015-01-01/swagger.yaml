@@ -137,6 +137,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/es/serviceSoftwareUpdate/cancel:
+    post:
+      operationId: CancelElasticsearchServiceSoftwareUpdate
+      description: Cancels a scheduled service software update for an Amazon ES domain. You can only perform this operation before the <code>AutomatedUpdateDate</code> and when the <code>UpdateStatus</code> is in the <code>PENDING_UPDATE</code> state.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CancelElasticsearchServiceSoftwareUpdateResponse'
+        '480':
+          description: BaseException
+          schema:
+            $ref: '#/definitions/BaseException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CancelElasticsearchServiceSoftwareUpdateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /2015-01-01/es/domain:
     post:
       operationId: CreateElasticsearchDomain
@@ -992,6 +1033,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/es/serviceSoftwareUpdate/start:
+    post:
+      operationId: StartElasticsearchServiceSoftwareUpdate
+      description: Schedules a service software update for an Amazon ES domain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartElasticsearchServiceSoftwareUpdateResponse'
+        '480':
+          description: BaseException
+          schema:
+            $ref: '#/definitions/BaseException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartElasticsearchServiceSoftwareUpdateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /2015-01-01/es/upgradeDomain:
     post:
       operationId: UpgradeElasticsearchDomain
@@ -1059,6 +1141,23 @@ definitions:
   LimitExceededException: {}
   ValidationException: {}
   InternalException: {}
+  CancelElasticsearchServiceSoftwareUpdateResponse:
+    type: object
+    properties:
+      ServiceSoftwareOptions:
+        $ref: '#/definitions/ServiceSoftwareOptions'
+        description: The current status of the Elasticsearch service software update.
+    description: The result of a <code>CancelElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.
+  CancelElasticsearchServiceSoftwareUpdateRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain that you want to stop the latest service software update on.
+    description: Container for the parameters to the <code><a>CancelElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to cancel a service software update on.
+  ResourceNotFoundException: {}
   CreateElasticsearchDomainResponse:
     type: object
     properties:
@@ -1121,7 +1220,6 @@ definitions:
     type: object
     properties: {}
     description: Container for the parameters to the <code><a>DeleteElasticsearchDomain</a></code> operation. Specifies the name of the Elasticsearch domain that you want to delete.
-  ResourceNotFoundException: {}
   DescribeElasticsearchDomainResponse:
     type: object
     required:
@@ -1329,6 +1427,22 @@ definitions:
         $ref: '#/definitions/StringList'
         description: Specifies the <code>TagKey</code> list which you want to remove from the Elasticsearch domain.
     description: Container for the parameters to the <code><a>RemoveTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain from which you want to remove the specified <code>TagKey</code>.
+  StartElasticsearchServiceSoftwareUpdateResponse:
+    type: object
+    properties:
+      ServiceSoftwareOptions:
+        $ref: '#/definitions/ServiceSoftwareOptions'
+        description: The current status of the Elasticsearch service software update.
+    description: The result of a <code>StartElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.
+  StartElasticsearchServiceSoftwareUpdateRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain that you want to update to the latest service software.
+    description: Container for the parameters to the <code><a>StartElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to schedule a service software update on.
   UpdateElasticsearchDomainConfigResponse:
     type: object
     required:
@@ -1487,6 +1601,37 @@ definitions:
     description: '<p> Status of the advanced options for the specified Elasticsearch domain. Currently, the following advanced options are available:</p> <ul> <li>Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</li> <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options">Configuring Advanced Options</a>.</p>'
   Boolean:
     type: boolean
+  DomainName:
+    type: string
+    pattern: '[a-z][a-z0-9\-]+'
+    description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+    minLength: 3
+    maxLength: 28
+  ServiceSoftwareOptions:
+    type: object
+    properties:
+      CurrentVersion:
+        $ref: '#/definitions/String'
+        description: The current service software version that is present on the domain.
+      NewVersion:
+        $ref: '#/definitions/String'
+        description: The new service software version if one is available.
+      UpdateAvailable:
+        $ref: '#/definitions/Boolean'
+        description: '<code>True</code> if you are able to update you service software version. <code>False</code> if you are not able to update your service software version. '
+      Cancellable:
+        $ref: '#/definitions/Boolean'
+        description: '<code>True</code> if you are able to cancel your service software version update. <code>False</code> if you are not able to cancel your service software version. '
+      UpdateStatus:
+        $ref: '#/definitions/DeploymentStatus'
+        description: 'The status of your service software update. This field can take the following values: <code>ELIGIBLE</code>, <code>PENDING_UPDATE</code>, <code>IN_PROGRESS</code>, <code>COMPLETED</code>, and <code>NOT_ELIGIBLE</code>.'
+      Description:
+        $ref: '#/definitions/String'
+        description: The description of the <code>UpdateStatus</code>.
+      AutomatedUpdateDate:
+        $ref: '#/definitions/DeploymentCloseDateTimeStamp'
+        description: 'Timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.'
+    description: The current options of an Elasticsearch domain service software options.
   CloudWatchLogsLogGroupArn:
     type: string
     description: ARN of the Cloudwatch log group to which log needs to be published.
@@ -1553,12 +1698,6 @@ definitions:
     description: 'List of supported elastic search versions. '
     items:
       $ref: '#/definitions/ElasticsearchVersionString'
-  DomainName:
-    type: string
-    pattern: '[a-z][a-z0-9\-]+'
-    description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
-    minLength: 3
-    maxLength: 28
   ElasticsearchClusterConfig:
     type: object
     properties:
@@ -1707,7 +1846,21 @@ definitions:
       LogPublishingOptions:
         $ref: '#/definitions/LogPublishingOptions'
         description: Log publishing options for the given domain.
+      ServiceSoftwareOptions:
+        $ref: '#/definitions/ServiceSoftwareOptions'
+        description: The current status of the Elasticsearch domain's service software.
     description: The current status of an Elasticsearch domain.
+  DeploymentCloseDateTimeStamp:
+    type: string
+    format: date-time
+  DeploymentStatus:
+    type: string
+    enum:
+      - PENDING_UPDATE
+      - IN_PROGRESS
+      - COMPLETED
+      - NOT_ELIGIBLE
+      - ELIGIBLE
   ElasticsearchDomainConfig:
     type: object
     properties:

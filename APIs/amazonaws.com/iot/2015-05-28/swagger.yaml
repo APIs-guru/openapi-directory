@@ -7021,6 +7021,9 @@ definitions:
       jobExecutionsRolloutConfig:
         $ref: '#/definitions/JobExecutionsRolloutConfig'
         description: Allows you to create a staged rollout of the job.
+      timeoutConfig:
+        $ref: '#/definitions/TimeoutConfig'
+        description: 'Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to <code>TIMED_OUT</code>.'
   CreateKeysAndCertificateResponse:
     type: object
     properties:
@@ -9495,6 +9498,8 @@ definitions:
         $ref: '#/definitions/Policies'
         description: A list of policies that allowed the authentication.
     description: Contains information that allowed the authorization.
+  ApproximateSecondsBeforeTimedOut:
+    type: integer
   AscendingOrder:
     type: boolean
   JobTargets:
@@ -10315,6 +10320,13 @@ definitions:
         $ref: '#/definitions/MaxJobExecutionsPerMin'
         description: 'The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.'
     description: Allows you to create a staged rollout of a job.
+  TimeoutConfig:
+    type: object
+    properties:
+      inProgressTimeoutInMinutes:
+        $ref: '#/definitions/InProgressTimeoutInMinutes'
+        description: 'Specifies the amount of time, in minutes, this device has to finish execution of this job. A timer is started, or restarted, whenever this job''s execution status is specified as <code>IN_PROGRESS</code> with this field populated. If the job execution status is not set to a terminal state before the timer expires, or before another job execution status update is sent with this field populated, the status will be automatically set to <code>TIMED_OUT</code>. Note that setting/resetting this timer has no effect on the job execution timeout timer which may have been specified when the job was created (<code>CreateJobExecution</code> using the field <code>timeoutConfig</code>).'
+    description: 'Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.'
   KeyPair:
     type: object
     properties:
@@ -10615,7 +10627,7 @@ definitions:
         description: The unique identifier you assigned to the job when it was created.
       status:
         $ref: '#/definitions/JobExecutionStatus'
-        description: 'The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCESS, CANCELED, or REJECTED).'
+        description: 'The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCEEDED, TIMED_OUT, CANCELED, or REJECTED).'
       forceCanceled:
         $ref: '#/definitions/Forced'
         description: Will be <code>true</code> if the job execution was canceled with the optional <code>force</code> parameter set to <code>true</code>.
@@ -10640,6 +10652,9 @@ definitions:
       versionNumber:
         $ref: '#/definitions/VersionNumber'
         description: The version of the job execution. Job execution versions are incremented each time they are updated by a device.
+      approximateSecondsBeforeTimedOut:
+        $ref: '#/definitions/ApproximateSecondsBeforeTimedOut'
+        description: The estimated number of seconds that remain before the job execution status will be changed to <code>TIMED_OUT</code>.
     description: The job execution object represents the execution of a job on a particular device.
   Job:
     type: object
@@ -10655,7 +10670,7 @@ definitions:
         description: 'Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a device when the thing representing the device is added to a target group, even after the job was completed by all things originally in the group. '
       status:
         $ref: '#/definitions/JobStatus'
-        description: 'The status of the job, one of <code>IN_PROGRESS</code>, <code>CANCELED</code>, or <code>COMPLETED</code>. '
+        description: 'The status of the job, one of <code>IN_PROGRESS</code>, <code>CANCELED</code>, <code>DELETION_IN_PROGRESS</code> or <code>COMPLETED</code>. '
       forceCanceled:
         $ref: '#/definitions/Forced'
         description: Will be <code>true</code> if the job was canceled with the optional <code>force</code> parameter set to <code>true</code>.
@@ -10686,6 +10701,9 @@ definitions:
       jobProcessDetails:
         $ref: '#/definitions/JobProcessDetails'
         description: Details about the job process.
+      timeoutConfig:
+        $ref: '#/definitions/TimeoutConfig'
+        description: 'Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.'
     description: The <code>Job</code> object contains details about a job.
   RoleAliasDescription:
     type: object
@@ -11084,6 +11102,8 @@ definitions:
     type: integer
   InProgressThings:
     type: integer
+  InProgressTimeoutInMinutes:
+    type: integer
   IndexNamesList:
     type: array
     items:
@@ -11126,6 +11146,9 @@ definitions:
       numberOfRemovedThings:
         $ref: '#/definitions/RemovedThings'
         description: The number of things that are no longer scheduled to execute the job because they have been deleted or have been removed from the group that was a target of the job.
+      numberOfTimedOutThings:
+        $ref: '#/definitions/TimedOutThings'
+        description: The number of things whose job execution status is <code>TIMED_OUT</code>.
     description: The job process details.
   JobExecutionStatus:
     type: string
@@ -11134,6 +11157,7 @@ definitions:
       - IN_PROGRESS
       - SUCCEEDED
       - FAILED
+      - TIMED_OUT
       - REJECTED
       - REMOVED
       - CANCELED
@@ -11208,6 +11232,8 @@ definitions:
   QueuedThings:
     type: integer
   RemovedThings:
+    type: integer
+  TimedOutThings:
     type: integer
   JobSummary:
     type: object

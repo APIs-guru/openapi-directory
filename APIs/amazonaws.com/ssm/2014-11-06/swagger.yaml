@@ -185,6 +185,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CancelMaintenanceWindowExecution':
+    post:
+      operationId: CancelMaintenanceWindowExecution
+      description: Stops a Maintenance Window execution that is already in progress and cancels any tasks in the window that have not already starting running. (Tasks already in progress will continue to completion.)
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CancelMaintenanceWindowExecutionResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: DoesNotExistException
+          schema:
+            $ref: '#/definitions/DoesNotExistException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CancelMaintenanceWindowExecutionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateActivation':
     post:
       operationId: CreateActivation
@@ -1753,6 +1786,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeMaintenanceWindowSchedule':
+    post:
+      operationId: DescribeMaintenanceWindowSchedule
+      description: Retrieves information about upcoming executions of a Maintenance Window.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeMaintenanceWindowScheduleResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: DoesNotExistException
+          schema:
+            $ref: '#/definitions/DoesNotExistException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeMaintenanceWindowScheduleRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeMaintenanceWindowTargets':
     post:
       operationId: DescribeMaintenanceWindowTargets
@@ -1838,6 +1904,35 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeMaintenanceWindowsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeMaintenanceWindowsForTarget':
+    post:
+      operationId: DescribeMaintenanceWindowsForTarget
+      description: Retrieves information about the Maintenance Windows targets or tasks that an instance is associated with.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeMaintenanceWindowsForTargetResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeMaintenanceWindowsForTargetRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4509,6 +4604,21 @@ definitions:
   InvalidCommandId: {}
   InvalidInstanceId: {}
   DuplicateInstanceId: {}
+  CancelMaintenanceWindowExecutionResult:
+    type: object
+    properties:
+      WindowExecutionId:
+        $ref: '#/definitions/MaintenanceWindowExecutionId'
+        description: The ID of the Maintenance Window execution that has been stopped.
+  CancelMaintenanceWindowExecutionRequest:
+    type: object
+    required:
+      - WindowExecutionId
+    properties:
+      WindowExecutionId:
+        $ref: '#/definitions/MaintenanceWindowExecutionId'
+        description: The ID of the Maintenance Window execution to stop.
+  DoesNotExistException: {}
   CreateActivationResult:
     type: object
     properties:
@@ -4652,9 +4762,18 @@ definitions:
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
         description: 'An optional description for the Maintenance Window. We recommend specifying a description to help you organize your Maintenance Windows. '
+      StartDate:
+        $ref: '#/definitions/MaintenanceWindowStringDateTime'
+        description: 'The date and time, in ISO-8601 Extended format, for when you want the Maintenance Window to become active. StartDate allows you to delay activation of the Maintenance Window until the specified future date.'
+      EndDate:
+        $ref: '#/definitions/MaintenanceWindowStringDateTime'
+        description: 'The date and time, in ISO-8601 Extended format, for when you want the Maintenance Window to become inactive. EndDate allows you to set a date and time in the future when the Maintenance Window will no longer run.'
       Schedule:
         $ref: '#/definitions/MaintenanceWindowSchedule'
         description: The schedule of the Maintenance Window in the form of a cron or rate expression.
+      ScheduleTimezone:
+        $ref: '#/definitions/MaintenanceWindowTimezone'
+        description: 'The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
       Duration:
         $ref: '#/definitions/MaintenanceWindowDurationHours'
         description: The duration of the Maintenance Window in hours.
@@ -4935,7 +5054,6 @@ definitions:
       Safe:
         $ref: '#/definitions/Boolean'
         description: 'The system checks if the target is being referenced by a task. If the target is being referenced, the system returns an error and does not deregister the target from the Maintenance Window.'
-  DoesNotExistException: {}
   TargetInUseException: {}
   DeregisterTaskFromMaintenanceWindowResult:
     type: object
@@ -5444,6 +5562,36 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token for the next set of items to return. (You received this token from a previous call.)
+  DescribeMaintenanceWindowScheduleResult:
+    type: object
+    properties:
+      ScheduledWindowExecutions:
+        $ref: '#/definitions/ScheduledWindowExecutionList'
+        description: Information about Maintenance Window executions scheduled for the specified time range.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. (You use this token in the next call.)
+  DescribeMaintenanceWindowScheduleRequest:
+    type: object
+    properties:
+      WindowId:
+        $ref: '#/definitions/MaintenanceWindowId'
+        description: The ID of the Maintenance Window to retrieve information about.
+      Targets:
+        $ref: '#/definitions/Targets'
+        description: The instance ID or key/value pair to retrieve information about.
+      ResourceType:
+        $ref: '#/definitions/MaintenanceWindowResourceType'
+        description: 'The type of resource you want to retrieve information about. For example, "INSTANCE".'
+      Filters:
+        $ref: '#/definitions/PatchOrchestratorFilterList'
+        description: 'Filters used to limit the range of results. For example, you can limit Maintenance Window executions to only those scheduled before or after a certain date and time.'
+      MaxResults:
+        $ref: '#/definitions/MaintenanceWindowSearchMaxResults'
+        description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. (You received this token from a previous call.)
   DescribeMaintenanceWindowTargetsResult:
     type: object
     properties:
@@ -5513,6 +5661,33 @@ definitions:
         description: Optional filters used to narrow down the scope of the returned Maintenance Windows. Supported filter keys are Name and Enabled.
       MaxResults:
         $ref: '#/definitions/MaintenanceWindowMaxResults'
+        description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. (You received this token from a previous call.)
+  DescribeMaintenanceWindowsForTargetResult:
+    type: object
+    properties:
+      WindowIdentities:
+        $ref: '#/definitions/MaintenanceWindowsForTargetList'
+        description: Information about the Maintenance Window targets and tasks an instance is associated with.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. (You use this token in the next call.)
+  DescribeMaintenanceWindowsForTargetRequest:
+    type: object
+    required:
+      - Targets
+      - ResourceType
+    properties:
+      Targets:
+        $ref: '#/definitions/Targets'
+        description: The instance ID or key/value pair to retrieve information about.
+      ResourceType:
+        $ref: '#/definitions/MaintenanceWindowResourceType'
+        description: 'The type of resource you want to retrieve information about. For example, "INSTANCE".'
+      MaxResults:
+        $ref: '#/definitions/MaintenanceWindowSearchMaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
       NextToken:
         $ref: '#/definitions/NextToken'
@@ -5887,9 +6062,21 @@ definitions:
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
         description: The description of the Maintenance Window.
+      StartDate:
+        $ref: '#/definitions/MaintenanceWindowStringDateTime'
+        description: 'The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become active. The Maintenance Window will not run before this specified time.'
+      EndDate:
+        $ref: '#/definitions/MaintenanceWindowStringDateTime'
+        description: 'The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become inactive. The Maintenance Window will not run after this specified time.'
       Schedule:
         $ref: '#/definitions/MaintenanceWindowSchedule'
         description: The schedule of the Maintenance Window in the form of a cron or rate expression.
+      ScheduleTimezone:
+        $ref: '#/definitions/MaintenanceWindowTimezone'
+        description: 'The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
+      NextExecutionTime:
+        $ref: '#/definitions/MaintenanceWindowStringDateTime'
+        description: 'The next time the Maintenance Window will actually run, taking into account any specified times for the Maintenance Window to become active or inactive.'
       Duration:
         $ref: '#/definitions/MaintenanceWindowDurationHours'
         description: The duration of the Maintenance Window in hours.
@@ -6927,10 +7114,10 @@ definitions:
     properties:
       InstanceIds:
         $ref: '#/definitions/InstanceIdList'
-        description: 'The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags. For more information about how to use Targets, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html">Sending Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.'
+        description: 'The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags. For more information about how to use targets, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html">Sending Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.'
       Targets:
         $ref: '#/definitions/Targets'
-        description: '(Optional) An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don''t provide one or more instance IDs in the call. For more information about how to use Targets, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html">Sending Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.'
+        description: '(Optional) An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don''t provide one or more instance IDs in the call. For more information about how to use targets, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html">Sending Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.'
       DocumentName:
         $ref: '#/definitions/DocumentARN'
         description: Required. The name of the Systems Manager document to execute. This can be a public document or a custom document.
@@ -7019,7 +7206,7 @@ definitions:
         description: 'The execution mode of the automation. Valid modes include the following: Auto and Interactive. The default mode is Auto.'
       TargetParameterName:
         $ref: '#/definitions/AutomationParameterKey'
-        description: The name of the parameter used as the target resource for the rate-controlled execution. Required if you specify Targets.
+        description: The name of the parameter used as the target resource for the rate-controlled execution. Required if you specify targets.
       Targets:
         $ref: '#/definitions/Targets'
         description: A key-value mapping to target resources. Required if you specify TargetParameterName.
@@ -7214,9 +7401,18 @@ definitions:
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
         description: An optional description of the update.
+      StartDate:
+        $ref: '#/definitions/MaintenanceWindowStringDateTime'
+        description: 'The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become active. The Maintenance Window will not run before this specified time.'
+      EndDate:
+        $ref: '#/definitions/MaintenanceWindowStringDateTime'
+        description: 'The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become inactive. The Maintenance Window will not run after this specified time.'
       Schedule:
         $ref: '#/definitions/MaintenanceWindowSchedule'
         description: The schedule of the Maintenance Window in the form of a cron or rate expression.
+      ScheduleTimezone:
+        $ref: '#/definitions/MaintenanceWindowTimezone'
+        description: 'The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
       Duration:
         $ref: '#/definitions/MaintenanceWindowDurationHours'
         description: The duration of the Maintenance Window in hours.
@@ -7243,9 +7439,18 @@ definitions:
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
         description: An optional description for the update request.
+      StartDate:
+        $ref: '#/definitions/MaintenanceWindowStringDateTime'
+        description: 'The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
+      EndDate:
+        $ref: '#/definitions/MaintenanceWindowStringDateTime'
+        description: 'The date and time, in ISO-8601 Extended format, for when you want the Maintenance Window to become inactive. EndDate allows you to set a date and time in the future when the Maintenance Window will no longer run.'
       Schedule:
         $ref: '#/definitions/MaintenanceWindowSchedule'
         description: The schedule of the Maintenance Window in the form of a cron or rate expression.
+      ScheduleTimezone:
+        $ref: '#/definitions/MaintenanceWindowTimezone'
+        description: 'The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
       Duration:
         $ref: '#/definitions/MaintenanceWindowDurationHours'
         description: The duration of the Maintenance Window in hours.
@@ -8332,6 +8537,11 @@ definitions:
       $ref: '#/definitions/InstanceId'
     minItems: 0
     maxItems: 50
+  MaintenanceWindowExecutionId:
+    type: string
+    pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
+    minLength: 36
+    maxLength: 36
   ClientToken:
     type: string
     minLength: 1
@@ -9024,10 +9234,14 @@ definitions:
     minLength: 1
     maxLength: 128
     format: password
+  MaintenanceWindowStringDateTime:
+    type: string
   MaintenanceWindowSchedule:
     type: string
     minLength: 1
     maxLength: 256
+  MaintenanceWindowTimezone:
+    type: string
   MaintenanceWindowDurationHours:
     type: integer
     minimum: 1
@@ -9300,11 +9514,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InventoryDeletionStatusItem'
-  MaintenanceWindowExecutionId:
-    type: string
-    pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
-    minLength: 36
-    maxLength: 36
   MaintenanceWindowExecutionTaskId:
     type: string
     pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
@@ -9332,6 +9541,17 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/MaintenanceWindowExecution'
+  MaintenanceWindowResourceType:
+    type: string
+    enum:
+      - INSTANCE
+  MaintenanceWindowSearchMaxResults:
+    type: integer
+    minimum: 1
+  ScheduledWindowExecutionList:
+    type: array
+    items:
+      $ref: '#/definitions/ScheduledWindowExecution'
   MaintenanceWindowTargetList:
     type: array
     items:
@@ -9340,6 +9560,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/MaintenanceWindowTask'
+  MaintenanceWindowsForTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/MaintenanceWindowIdentityForTarget'
   MaintenanceWindowIdentityList:
     type: array
     items:
@@ -10689,7 +10913,7 @@ definitions:
       Values:
         $ref: '#/definitions/MaintenanceWindowFilterValues'
         description: The filter values.
-    description: Filter used in the request.
+    description: Filter used in the request. Supported filter keys are Name and Enabled.
   MaintenanceWindowFilterValue:
     type: string
     minLength: 1
@@ -10715,7 +10939,32 @@ definitions:
       Cutoff:
         $ref: '#/definitions/MaintenanceWindowCutoff'
         description: The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
+      Schedule:
+        $ref: '#/definitions/MaintenanceWindowSchedule'
+        description: The schedule of the Maintenance Window in the form of a cron or rate expression.
+      ScheduleTimezone:
+        $ref: '#/definitions/MaintenanceWindowTimezone'
+        description: 'The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format.'
+      EndDate:
+        $ref: '#/definitions/MaintenanceWindowStringDateTime'
+        description: 'The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become inactive.'
+      StartDate:
+        $ref: '#/definitions/MaintenanceWindowStringDateTime'
+        description: 'The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become active.'
+      NextExecutionTime:
+        $ref: '#/definitions/MaintenanceWindowStringDateTime'
+        description: 'The next time the Maintenance Window will actually run, taking into account any specified times for the Maintenance Window to become active or inactive.'
     description: Information about the Maintenance Window.
+  MaintenanceWindowIdentityForTarget:
+    type: object
+    properties:
+      WindowId:
+        $ref: '#/definitions/MaintenanceWindowId'
+        description: The ID of the Maintenance Window.
+      Name:
+        $ref: '#/definitions/MaintenanceWindowName'
+        description: The name of the Maintenance Window.
+    description: The Maintenance Window to which the specified target belongs.
   MaintenanceWindowLambdaClientContext:
     type: string
     minLength: 1
@@ -10741,10 +10990,6 @@ definitions:
         $ref: '#/definitions/MaintenanceWindowLambdaPayload'
         description: JSON to provide to your Lambda function as input.
     description: '<p>The parameters for a LAMBDA task type.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Lambda tasks, Systems Manager ignores any values specified for TaskParameters and LoggingInfo.</p> </note>'
-  MaintenanceWindowResourceType:
-    type: string
-    enum:
-      - INSTANCE
   TimeoutSeconds:
     type: integer
     minimum: 30
@@ -11406,6 +11651,19 @@ definitions:
     maxLength: 300
   StreamUrl:
     type: string
+  ScheduledWindowExecution:
+    type: object
+    properties:
+      WindowId:
+        $ref: '#/definitions/MaintenanceWindowId'
+        description: The ID of the Maintenance Window to be run.
+      Name:
+        $ref: '#/definitions/MaintenanceWindowName'
+        description: The name of the Maintenance Window to be run.
+      ExecutionTime:
+        $ref: '#/definitions/MaintenanceWindowStringDateTime'
+        description: 'The time, in ISO-8601 Extended format, that the Maintenance Window is scheduled to be run.'
+    description: Information about a scheduled execution for a Maintenance Window.
   SignalType:
     type: string
     enum:

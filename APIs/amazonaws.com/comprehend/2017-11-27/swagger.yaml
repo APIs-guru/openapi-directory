@@ -1335,30 +1335,10 @@ definitions:
       TextList:
         $ref: '#/definitions/StringList'
         description: 'A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document should contain at least 20 characters and must contain fewer than 5,000 bytes of UTF-8 encoded characters.'
-  InvalidRequestException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: The request is invalid.
-  TextSizeLimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: The size of the input text exceeds the limit. Use a smaller document.
-  BatchSizeLimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: The number of documents in the request exceeds the limit of 25. Try your request again with fewer documents.
-  InternalServerException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: An internal server error occurred. Retry your request.
+  InvalidRequestException: {}
+  TextSizeLimitExceededException: {}
+  BatchSizeLimitExceededException: {}
+  InternalServerException: {}
   BatchDetectEntitiesResponse:
     type: object
     required:
@@ -1383,12 +1363,7 @@ definitions:
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
         description: The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
-  UnsupportedLanguageException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: 'Amazon Comprehend can''t process the language of the input text. For all APIs except <code>DetectDominantLanguage</code>, Amazon Comprehend accepts only English or Spanish text. For the <code>DetectDominantLanguage</code> API, Amazon Comprehend detects 100 languages. For a list of languages, see <a>how-languages</a> '
+  UnsupportedLanguageException: {}
   BatchDetectKeyPhrasesResponse:
     type: object
     required:
@@ -1475,18 +1450,8 @@ definitions:
       JobId:
         $ref: '#/definitions/JobId'
         description: The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
-  JobNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: The specified job was not found. Check the job ID and try again.
-  TooManyRequestsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: The number of requests exceeds the limit. Resubmit your request later.
+  JobNotFoundException: {}
+  TooManyRequestsException: {}
   DescribeEntitiesDetectionJobResponse:
     type: object
     properties:
@@ -1653,12 +1618,7 @@ definitions:
       MaxResults:
         $ref: '#/definitions/MaxResultsInteger'
         description: The maximum number of results to return in each page. The default is 100.
-  InvalidFilterException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: The filter specified for the <code>ListTopicDetectionJobs</code> operation is invalid. Specify a different filter.
+  InvalidFilterException: {}
   ListEntitiesDetectionJobsResponse:
     type: object
     properties:
@@ -2030,6 +1990,10 @@ definitions:
     enum:
       - en
       - es
+      - fr
+      - de
+      - it
+      - pt
   ListOfDetectEntitiesResult:
     type: array
     items:
@@ -2110,6 +2074,11 @@ definitions:
     type: string
     enum:
       - en
+      - es
+      - fr
+      - de
+      - it
+      - pt
   ListOfDetectSyntaxResult:
     type: array
     items:
