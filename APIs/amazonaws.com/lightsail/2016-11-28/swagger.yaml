@@ -738,7 +738,7 @@ paths:
   '/#CreateInstances':
     post:
       operationId: CreateInstances
-      description: 'Creates one or more Amazon Lightsail virtual private servers, or <i>instances</i>.'
+      description: 'Creates one or more Amazon Lightsail virtual private servers, or <i>instances</i>. Create instances using active blueprints. Inactive blueprints are listed to support customers with existing instances but are not necessarily available for launch of new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. Use the get blueprints operation to return a list of available blueprints.'
       responses:
         '200':
           description: Success
@@ -844,7 +844,7 @@ paths:
   '/#CreateKeyPair':
     post:
       operationId: CreateKeyPair
-      description: Creates sn SSH key pair.
+      description: Creates an SSH key pair.
       responses:
         '200':
           description: Success
@@ -990,6 +990,165 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateLoadBalancerTlsCertificateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateRelationalDatabase':
+    post:
+      operationId: CreateRelationalDatabase
+      description: Creates a new database in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateRelationalDatabaseResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateRelationalDatabaseRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateRelationalDatabaseFromSnapshot':
+    post:
+      operationId: CreateRelationalDatabaseFromSnapshot
+      description: '<p>Creates a new database from an existing database snapshot in Amazon Lightsail.</p> <p>You can create a new database from a snapshot in if something goes wrong with your original database, or to change it to a different plan, such as a high availability or standard plan.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateRelationalDatabaseFromSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateRelationalDatabaseFromSnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateRelationalDatabaseSnapshot':
+    post:
+      operationId: CreateRelationalDatabaseSnapshot
+      description: 'Creates a snapshot of your database in Amazon Lightsail. You can use snapshots for backups, to make copies of a database, and to save data before deleting a database.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateRelationalDatabaseSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateRelationalDatabaseSnapshotRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1467,6 +1626,112 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteLoadBalancerTlsCertificateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRelationalDatabase':
+    post:
+      operationId: DeleteRelationalDatabase
+      description: Deletes a database in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteRelationalDatabaseResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRelationalDatabaseRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRelationalDatabaseSnapshot':
+    post:
+      operationId: DeleteRelationalDatabaseSnapshot
+      description: Deletes a database snapshot in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteRelationalDatabaseSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRelationalDatabaseSnapshotRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3070,7 +3335,7 @@ paths:
   '/#GetRegions':
     post:
       operationId: GetRegions
-      description: Returns a list of all valid regions for Amazon Lightsail. Use the <code>include availability zones</code> parameter to also return the availability zones in a region.
+      description: Returns a list of all valid regions for Amazon Lightsail. Use the <code>include availability zones</code> parameter to also return the Availability Zones in a region.
       responses:
         '200':
           description: Success
@@ -3110,6 +3375,642 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetRegionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRelationalDatabase':
+    post:
+      operationId: GetRelationalDatabase
+      description: Returns information about a specific database in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRelationalDatabaseBlueprints':
+    post:
+      operationId: GetRelationalDatabaseBlueprints
+      description: <p>Returns a list of available database blueprints in Amazon Lightsail. A blueprint describes the major engine version of a database.</p> <p>You can use a blueprint ID to create a new database that runs a specific database engine.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseBlueprintsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseBlueprintsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRelationalDatabaseBundles':
+    post:
+      operationId: GetRelationalDatabaseBundles
+      description: <p>Returns the list of bundles that are available in Amazon Lightsail. A bundle describes the performance specifications for a database.</p> <p>You can use a bundle ID to create a new database with explicit performance specifications.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseBundlesResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseBundlesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRelationalDatabaseEvents':
+    post:
+      operationId: GetRelationalDatabaseEvents
+      description: Returns a list of events for a specific database in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseEventsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseEventsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRelationalDatabaseLogEvents':
+    post:
+      operationId: GetRelationalDatabaseLogEvents
+      description: Returns a list of log events for a database in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseLogEventsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseLogEventsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRelationalDatabaseLogStreams':
+    post:
+      operationId: GetRelationalDatabaseLogStreams
+      description: Returns a list of available log streams for a specific database in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseLogStreamsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseLogStreamsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRelationalDatabaseMasterUserPassword':
+    post:
+      operationId: GetRelationalDatabaseMasterUserPassword
+      description: 'Returns the current, previous, or pending versions of the master user password for a Lightsail database.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseMasterUserPasswordResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseMasterUserPasswordRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRelationalDatabaseMetricData':
+    post:
+      operationId: GetRelationalDatabaseMetricData
+      description: Returns the data points of the specified metric for a database in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseMetricDataResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseMetricDataRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRelationalDatabaseParameters':
+    post:
+      operationId: GetRelationalDatabaseParameters
+      description: '<p>Returns all of the runtime parameters offered by the underlying database software, or engine, for a specific database in Amazon Lightsail.</p> <p>In addition to the parameter names and values, this operation returns other information about each parameter. This information includes whether changes require a reboot, whether the parameter is modifiable, the allowed values, and the data types.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseParametersResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseParametersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRelationalDatabaseSnapshot':
+    post:
+      operationId: GetRelationalDatabaseSnapshot
+      description: Returns information about a specific database snapshot in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseSnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRelationalDatabaseSnapshots':
+    post:
+      operationId: GetRelationalDatabaseSnapshots
+      description: Returns information about all of your database snapshots in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseSnapshotsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRelationalDatabaseSnapshotsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRelationalDatabases':
+    post:
+      operationId: GetRelationalDatabases
+      description: Returns information about all of your databases in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRelationalDatabasesResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRelationalDatabasesRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3544,6 +4445,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RebootRelationalDatabase':
+    post:
+      operationId: RebootRelationalDatabase
+      description: Restarts a specific database in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RebootRelationalDatabaseResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RebootRelationalDatabaseRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ReleaseStaticIp':
     post:
       operationId: ReleaseStaticIp
@@ -3650,6 +4604,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartRelationalDatabase':
+    post:
+      operationId: StartRelationalDatabase
+      description: 'Starts a specific database from a stopped state in Amazon Lightsail. To restart a database, use the <code>reboot relational database</code> operation.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartRelationalDatabaseResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartRelationalDatabaseRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#StopInstance':
     post:
       operationId: StopInstance
@@ -3693,6 +4700,59 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopInstanceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopRelationalDatabase':
+    post:
+      operationId: StopRelationalDatabase
+      description: Stops a specific database that is currently running in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopRelationalDatabaseResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopRelationalDatabaseRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3862,6 +4922,112 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateRelationalDatabase':
+    post:
+      operationId: UpdateRelationalDatabase
+      description: '<p>Allows the update of one or more attributes of a database in Amazon Lightsail.</p> <p>Updates are applied immediately, or in cases where the updates could result in an outage, are applied during the database''s predefined maintenance window.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateRelationalDatabaseResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateRelationalDatabaseRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateRelationalDatabaseParameters':
+    post:
+      operationId: UpdateRelationalDatabaseParameters
+      description: '<p>Allows the update of one or more parameters of a database in Amazon Lightsail.</p> <p>Parameter updates don''t cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which paramater updates are applied: <code>dynamic</code> or <code>pending-reboot</code>. Parameters marked with a <code>dynamic</code> apply type are applied immediately. Parameters marked with a <code>pending-reboot</code> apply type are applied only after the database is rebooted using the <code>reboot relational database</code> operation.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateRelationalDatabaseParametersResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateRelationalDatabaseParametersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AllocateStaticIpResult:
     type: object
@@ -3877,90 +5043,13 @@ definitions:
       staticIpName:
         $ref: '#/definitions/ResourceName'
         description: The name of the static IP address.
-  ServiceException:
-    type: object
-    properties:
-      code:
-        $ref: '#/definitions/string'
-      docs:
-        $ref: '#/definitions/string'
-      message:
-        $ref: '#/definitions/string'
-      tip:
-        $ref: '#/definitions/string'
-    description: A general service exception.
-  InvalidInputException:
-    type: object
-    properties:
-      code:
-        $ref: '#/definitions/string'
-      docs:
-        $ref: '#/definitions/string'
-      message:
-        $ref: '#/definitions/string'
-      tip:
-        $ref: '#/definitions/string'
-    description: '<p>Lightsail throws this exception when user input does not conform to the validation rules of an input field.</p> <note> <p>Domain-related APIs are only available in the N. Virginia (us-east-1) Region. Please set your AWS Region configuration to us-east-1 to create, view, or edit these resources.</p> </note>'
-  NotFoundException:
-    type: object
-    properties:
-      code:
-        $ref: '#/definitions/string'
-      docs:
-        $ref: '#/definitions/string'
-      message:
-        $ref: '#/definitions/string'
-      tip:
-        $ref: '#/definitions/string'
-    description: Lightsail throws this exception when it cannot find a resource.
-  OperationFailureException:
-    type: object
-    properties:
-      code:
-        $ref: '#/definitions/string'
-      docs:
-        $ref: '#/definitions/string'
-      message:
-        $ref: '#/definitions/string'
-      tip:
-        $ref: '#/definitions/string'
-    description: Lightsail throws this exception when an operation fails to execute.
-  AccessDeniedException:
-    type: object
-    properties:
-      code:
-        $ref: '#/definitions/string'
-      docs:
-        $ref: '#/definitions/string'
-      message:
-        $ref: '#/definitions/string'
-      tip:
-        $ref: '#/definitions/string'
-    description: Lightsail throws this exception when the user cannot be authenticated or uses invalid credentials to access a resource.
-  AccountSetupInProgressException:
-    type: object
-    properties:
-      code:
-        $ref: '#/definitions/string'
-      docs:
-        $ref: '#/definitions/string'
-      message:
-        $ref: '#/definitions/string'
-      tip:
-        $ref: '#/definitions/string'
-    description: Lightsail throws this exception when an account is still in the setup in progress state.
-  UnauthenticatedException:
-    type: object
-    properties:
-      code:
-        $ref: '#/definitions/string'
-      docs:
-        $ref: '#/definitions/string'
-      message:
-        $ref: '#/definitions/string'
-      tip:
-        $ref: '#/definitions/string'
-    description: Lightsail throws this exception when the user has not been authenticated.
+  ServiceException: {}
+  InvalidInputException: {}
+  NotFoundException: {}
+  OperationFailureException: {}
+  AccessDeniedException: {}
+  AccountSetupInProgressException: {}
+  UnauthenticatedException: {}
   AttachDiskResult:
     type: object
     properties:
@@ -4190,7 +5279,7 @@ definitions:
         description: 'The names to use for your new Lightsail instances. Separate multiple values using quotation marks and commas, for example: <code>["MyFirstInstance","MySecondInstance"]</code> '
       availabilityZone:
         $ref: '#/definitions/string'
-        description: 'The Availability Zone in which to create your instance. Use the following format: <code>us-east-2a</code> (case sensitive). You can get a list of availability zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.'
+        description: 'The Availability Zone in which to create your instance. Use the following format: <code>us-east-2a</code> (case sensitive). You can get a list of Availability Zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include Availability Zones</code> parameter to your request.'
       customImageName:
         $ref: '#/definitions/ResourceName'
         description: '<p>(Deprecated) The name for your custom image.</p> <note> <p>In releases prior to June 12, 2017, this parameter was ignored by the API. It is now deprecated.</p> </note>'
@@ -4228,7 +5317,7 @@ definitions:
         description: An object containing information about one or more disk mappings.
       availabilityZone:
         $ref: '#/definitions/string'
-        description: 'The Availability Zone where you want to create your instances. Use the following formatting: <code>us-east-2a</code> (case sensitive). You can get a list of availability zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.'
+        description: 'The Availability Zone where you want to create your instances. Use the following formatting: <code>us-east-2a</code> (case sensitive). You can get a list of Availability Zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include Availability Zones</code> parameter to your request.'
       instanceSnapshotName:
         $ref: '#/definitions/ResourceName'
         description: The name of the instance snapshot on which you are basing your new instances. Use the get instance snapshots operation to return information about your existing snapshots.
@@ -4237,7 +5326,7 @@ definitions:
         description: 'The bundle of specification information for your virtual private server (or <i>instance</i>), including the pricing plan (e.g., <code>micro_1_0</code>).'
       userData:
         $ref: '#/definitions/string'
-        description: '<p>You can create a launch script that configures a server with additional user data. For example, <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href="http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps">Dev Guide</a>.</p> </note>'
+        description: '<p>You can create a launch script that configures a server with additional user data. For example, <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href="https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image">Dev Guide</a>.</p> </note>'
       keyPairName:
         $ref: '#/definitions/ResourceName'
         description: The name for your key pair.
@@ -4319,6 +5408,104 @@ definitions:
       certificateAlternativeNames:
         $ref: '#/definitions/DomainNameList'
         description: 'An array of strings listing alternative domains and subdomains for your SSL/TLS certificate. Lightsail will de-dupe the names for you. You can have a maximum of 9 alternative names (in addition to the 1 primary domain). We do not support wildcards (e.g., <code>*.example.com</code>).'
+  CreateRelationalDatabaseResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the result of your create relational database request.
+  CreateRelationalDatabaseRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+      - relationalDatabaseBlueprintId
+      - relationalDatabaseBundleId
+      - masterDatabaseName
+      - masterUsername
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: '<p>The name to use for your new database.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 2 to 255 alphanumeric characters, or hyphens.</p> </li> <li> <p>The first and last character must be a letter or number.</p> </li> </ul>'
+      availabilityZone:
+        $ref: '#/definitions/string'
+        description: <p>The Availability Zone in which to create your new database. Use the <code>us-east-2a</code> case-sensitive format.</p> <p>You can get a list of Availability Zones by using the <code>get regions</code> operation. Be sure to add the <code>include relational database Availability Zones</code> parameter to your request.</p>
+      relationalDatabaseBlueprintId:
+        $ref: '#/definitions/string'
+        description: <p>The blueprint ID for your new database. A blueprint describes the major engine version of a database.</p> <p>You can get a list of database blueprints IDs by using the <code>get relational database blueprints</code> operation.</p>
+      relationalDatabaseBundleId:
+        $ref: '#/definitions/string'
+        description: <p>The bundle ID for your new database. A bundle describes the performance specifications for your database.</p> <p>You can get a list of database bundle IDs by using the <code>get relational database bundles</code> operation.</p>
+      masterDatabaseName:
+        $ref: '#/definitions/string'
+        description: '<p>The name of the master database created when the Lightsail database resource is created.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 64 alphanumeric characters.</p> </li> <li> <p>Cannot be a word reserved by the specified database engine</p> </li> </ul>'
+      masterUsername:
+        $ref: '#/definitions/string'
+        description: '<p>The master user name for your new database.</p> <p>Constraints:</p> <ul> <li> <p>Master user name is required.</p> </li> <li> <p>Must contain from 1 to 16 alphanumeric characters.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the database engine you choose.</p> <p>For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords and Reserved Words articles for <a href="https://dev.mysql.com/doc/refman/5.6/en/keywords.html">MySQL 5.6</a> or <a href="https://dev.mysql.com/doc/refman/5.7/en/keywords.html">MySQL 5.7</a> respectively.</p> </li> </ul>'
+      masterUserPassword:
+        $ref: '#/definitions/SensitiveString'
+        description: '<p>The password for the master user of your new database. The password can include any printable ASCII character except "/", """, or "@".</p> <p>Constraints: Must contain 8 to 41 characters.</p>'
+      preferredBackupWindow:
+        $ref: '#/definitions/string'
+        description: '<p>The daily time range during which automated backups are created for your new database if automated backups are enabled.</p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. For more information about the preferred backup window time blocks for each region, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow">Working With Backups</a> guide in the Amazon Relational Database Service (Amazon RDS) documentation.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the <code>hh24:mi-hh24:mi</code> format.</p> <p>Example: <code>16:00-16:30</code> </p> </li> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
+      preferredMaintenanceWindow:
+        $ref: '#/definitions/string'
+        description: '<p>The weekly time range during which system maintenance can occur on your new database.</p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the <code>ddd:hh24:mi-ddd:hh24:mi</code> format.</p> </li> <li> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Example: <code>Tue:17:00-Tue:17:30</code> </p> </li> </ul>'
+      publiclyAccessible:
+        $ref: '#/definitions/boolean'
+        description: Specifies the accessibility options for your new database. A value of <code>true</code> specifies a database that is available to resources outside of your Lightsail account. A value of <code>false</code> specifies a database that is available only to your Lightsail resources in the same region as your database.
+  CreateRelationalDatabaseFromSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the result of your create relational database from snapshot request.
+  CreateRelationalDatabaseFromSnapshotRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: '<p>The name to use for your new database.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 2 to 255 alphanumeric characters, or hyphens.</p> </li> <li> <p>The first and last character must be a letter or number.</p> </li> </ul>'
+      availabilityZone:
+        $ref: '#/definitions/string'
+        description: <p>The Availability Zone in which to create your new database. Use the <code>us-east-2a</code> case-sensitive format.</p> <p>You can get a list of Availability Zones by using the <code>get regions</code> operation. Be sure to add the <code>include relational database Availability Zones</code> parameter to your request.</p>
+      publiclyAccessible:
+        $ref: '#/definitions/boolean'
+        description: Specifies the accessibility options for your new database. A value of <code>true</code> specifies a database that is available to resources outside of your Lightsail account. A value of <code>false</code> specifies a database that is available only to your Lightsail resources in the same region as your database.
+      relationalDatabaseSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the database snapshot from which to create your new database.
+      relationalDatabaseBundleId:
+        $ref: '#/definitions/string'
+        description: '<p>The bundle ID for your new database. A bundle describes the performance specifications for your database.</p> <p>You can get a list of database bundle IDs by using the <code>get relational database bundles</code> operation.</p> <p>When creating a new database from a snapshot, you cannot choose a bundle that is smaller than the bundle of the source database.</p>'
+      sourceRelationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the source database.
+      restoreTime:
+        $ref: '#/definitions/IsoDate'
+        description: '<p>The date and time to restore your database from.</p> <p>Constraints:</p> <ul> <li> <p>Must be before the latest restorable time for the database.</p> </li> <li> <p>Cannot be specified if the <code>use latest restorable time</code> parameter is <code>true</code>.</p> </li> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a restore time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the restore time.</p> </li> </ul>'
+      useLatestRestorableTime:
+        $ref: '#/definitions/boolean'
+        description: '<p>Specifies whether your database is restored from the latest backup time. A value of <code>true</code> restores from the latest backup time. </p> <p>Default: <code>false</code> </p> <p>Constraints: Cannot be specified if the <code>restore time</code> parameter is provided.</p>'
+  CreateRelationalDatabaseSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the result of your create relational database snapshot request.
+  CreateRelationalDatabaseSnapshotRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+      - relationalDatabaseSnapshotName
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the database on which to base your new snapshot.
+      relationalDatabaseSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: '<p>The name for your new database snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 2 to 255 alphanumeric characters, or hyphens.</p> </li> <li> <p>The first and last character must be a letter or number.</p> </li> </ul>'
   DeleteDiskResult:
     type: object
     properties:
@@ -4455,7 +5642,41 @@ definitions:
         description: The SSL/TLS certificate name.
       force:
         $ref: '#/definitions/boolean'
-        description: '<p>When <code>true</code>, forces the deletion of an SSL/TLS certificate.</p> <p>There can be two certificates associated with a Lightsail load balancer: the primary and the backup. The force parameter is required when the primary SSL/TLS certificate is in use by an instance attached to the load balancer.</p>'
+        description: '<p>When <code>true</code>, forces the deletion of an SSL/TLS certificate.</p> <p>There can be two certificates associated with a Lightsail load balancer: the primary and the backup. The <code>force</code> parameter is required when the primary SSL/TLS certificate is in use by an instance attached to the load balancer.</p>'
+  DeleteRelationalDatabaseResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the result of your delete relational database request.
+  DeleteRelationalDatabaseRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the database that you are deleting.
+      skipFinalSnapshot:
+        $ref: '#/definitions/boolean'
+        description: '<p>Determines whether a final database snapshot is created before your database is deleted. If <code>true</code> is specified, no database snapshot is created. If <code>false</code> is specified, a database snapshot is created before your database is deleted.</p> <p>You must specify the <code>final relational database snapshot name</code> parameter if the <code>skip final snapshot</code> parameter is <code>false</code>.</p> <p>Default: <code>false</code> </p>'
+      finalRelationalDatabaseSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: '<p>The name of the database snapshot created if <code>skip final snapshot</code> is <code>false</code>, which is the default value for that parameter.</p> <note> <p>Specifying this parameter and also specifying the <code>skip final snapshot</code> parameter to <code>true</code> results in an error.</p> </note> <p>Constraints:</p> <ul> <li> <p>Must contain from 2 to 255 alphanumeric characters, or hyphens.</p> </li> <li> <p>The first and last character must be a letter or number.</p> </li> </ul>'
+  DeleteRelationalDatabaseSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the result of your delete relational database snapshot request.
+  DeleteRelationalDatabaseSnapshotRequest:
+    type: object
+    required:
+      - relationalDatabaseSnapshotName
+    properties:
+      relationalDatabaseSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the database snapshot that you are deleting.
   DetachDiskResult:
     type: object
     properties:
@@ -4711,7 +5932,7 @@ definitions:
         description: 'The metric name to get data about. '
       period:
         $ref: '#/definitions/MetricPeriod'
-        description: The time period for which you are requesting data.
+        description: 'The granularity, in seconds, of the returned data points.'
       startTime:
         $ref: '#/definitions/timestamp'
         description: The start time of the time period.
@@ -4867,7 +6088,7 @@ definitions:
         description: '<p>The metric about which you want to return information. Valid values are listed below, along with the most useful <code>statistics</code> to include in your request.</p> <ul> <li> <p> <b> <code>ClientTLSNegotiationErrorCount</code> </b> - The number of TLS connections initiated by the client that did not establish a session with the load balancer. Possible causes include a mismatch of ciphers or protocols.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> </li> <li> <p> <b> <code>HealthyHostCount</code> </b> - The number of target instances that are considered healthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> </li> <li> <p> <b> <code>UnhealthyHostCount</code> </b> - The number of target instances that are considered unhealthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP 4XX client error codes that originate from the load balancer. Client errors are generated when requests are malformed or incomplete. These requests have not been received by the target instance. This count does not include any response codes generated by the target instances.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP 5XX server error codes that originate from the load balancer. This count does not include any response codes generated by the target instances.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer. </p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in seconds, after the request leaves the load balancer until a response from the target instance is received.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> </li> <li> <p> <b> <code>RejectedConnectionCount</code> </b> - The number of connections that were rejected because the load balancer had reached its maximum number of connections.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> </li> <li> <p> <b> <code>RequestCount</code> </b> - The number of requests processed over IPv4. This count includes only the requests with a response generated by a target instance of the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> </ul>'
       period:
         $ref: '#/definitions/MetricPeriod'
-        description: The time period duration for your health data request.
+        description: 'The granularity, in seconds, of the returned data points.'
       startTime:
         $ref: '#/definitions/timestamp'
         description: The start time of the period.
@@ -4946,7 +6167,7 @@ definitions:
         description: An array of key-value pairs containing information about the results of your get operations for resource request.
       nextPageCount:
         $ref: '#/definitions/string'
-        description: '<p>(Deprecated) Returns the number of pages of results that remain.</p> <note> <p>In releases prior to June 12, 2017, this parameter returned <code>null</code> by the API. It is now deprecated, and the API returns the <code>nextPageToken</code> parameter instead.</p> </note>'
+        description: '<p>(Deprecated) Returns the number of pages of results that remain.</p> <note> <p>In releases prior to June 12, 2017, this parameter returned <code>null</code> by the API. It is now deprecated, and the API returns the <code>next page token</code> parameter instead.</p> </note>'
       nextPageToken:
         $ref: '#/definitions/string'
         description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
@@ -4973,6 +6194,251 @@ definitions:
       includeAvailabilityZones:
         $ref: '#/definitions/boolean'
         description: 'A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: e.g., <code>us-east-2a</code>.'
+      includeRelationalDatabaseAvailabilityZones:
+        $ref: '#/definitions/boolean'
+        description: '&gt;A Boolean value indicating whether to also include Availability Zones for databases in your get regions request. Availability Zones are indicated with a letter (e.g., <code>us-east-2a</code>).'
+  GetRelationalDatabaseResult:
+    type: object
+    properties:
+      relationalDatabase:
+        $ref: '#/definitions/RelationalDatabase'
+        description: An object describing the specified database.
+  GetRelationalDatabaseRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the database that you are looking up.
+  GetRelationalDatabaseBlueprintsResult:
+    type: object
+    properties:
+      blueprints:
+        $ref: '#/definitions/RelationalDatabaseBlueprintList'
+        description: An object describing the result of your get relational database blueprints request.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results of your get relational database blueprints request.
+  GetRelationalDatabaseBlueprintsRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to a specific page of results for your get relational database blueprints request.
+  GetRelationalDatabaseBundlesResult:
+    type: object
+    properties:
+      bundles:
+        $ref: '#/definitions/RelationalDatabaseBundleList'
+        description: An object describing the result of your get relational database bundles request.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results of your get relational database bundles request.
+  GetRelationalDatabaseBundlesRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to a specific page of results for your get relational database bundles request.
+  GetRelationalDatabaseEventsResult:
+    type: object
+    properties:
+      relationalDatabaseEvents:
+        $ref: '#/definitions/RelationalDatabaseEventList'
+        description: An object describing the result of your get relational database events request.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get relational database events request.
+  GetRelationalDatabaseEventsRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the database from which to get events.
+      durationInMinutes:
+        $ref: '#/definitions/integer'
+        description: '<p>The number of minutes in the past from which to retrieve events. For example, to get all events from the past 2 hours, enter 120.</p> <p>Default: <code>60</code> </p> <p>The minimum is 1 and the maximum is 14 days (20160 minutes).</p>'
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to a specific page of results from for get relational database events request.
+  GetRelationalDatabaseLogEventsResult:
+    type: object
+    properties:
+      resourceLogEvents:
+        $ref: '#/definitions/LogEventList'
+        description: An object describing the result of your get relational database log events request.
+      nextBackwardToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the previous page of results from your get relational database log events request.
+      nextForwardToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get relational database log events request.
+  GetRelationalDatabaseLogEventsRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+      - logStreamName
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your database for which to get log events.
+      logStreamName:
+        $ref: '#/definitions/string'
+        description: <p>The name of the log stream.</p> <p>Use the <code>get relational database log streams</code> operation to get a list of available log streams.</p>
+      startTime:
+        $ref: '#/definitions/IsoDate'
+        description: '<p>The start of the time interval from which to get log events.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the start time.</p> </li> </ul>'
+      endTime:
+        $ref: '#/definitions/IsoDate'
+        description: '<p>The end of the time interval from which to get log events.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the end time.</p> </li> </ul>'
+      startFromHead:
+        $ref: '#/definitions/boolean'
+        description: '<p>Parameter to specify if the log should start from head or tail. If <code>true</code> is specified, the log event starts from the head of the log. If <code>false</code> is specified, the log event starts from the tail of the log.</p> <p>Default: <code>false</code> </p>'
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to a specific page of results for your get relational database log events request.
+  GetRelationalDatabaseLogStreamsResult:
+    type: object
+    properties:
+      logStreams:
+        $ref: '#/definitions/StringList'
+        description: An object describing the result of your get relational database log streams request.
+  GetRelationalDatabaseLogStreamsRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your database for which to get log streams.
+  GetRelationalDatabaseMasterUserPasswordResult:
+    type: object
+    properties:
+      masterUserPassword:
+        $ref: '#/definitions/SensitiveString'
+        description: The master user password for the <code>password version</code> specified.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the specified version of the master user password was created.
+  GetRelationalDatabaseMasterUserPasswordRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your database for which to get the master user password.
+      passwordVersion:
+        $ref: '#/definitions/RelationalDatabasePasswordVersion'
+        description: '<p>The password version to return.</p> <p>Specifying <code>CURRENT</code> or <code>PREVIOUS</code> returns the current or previous passwords respectively. Specifying <code>PENDING</code> returns the newest version of the password that will rotate to <code>CURRENT</code>. After the <code>PENDING</code> password rotates to <code>CURRENT</code>, the <code>PENDING</code> password is no longer available.</p> <p>Default: <code>CURRENT</code> </p>'
+  GetRelationalDatabaseMetricDataResult:
+    type: object
+    properties:
+      metricName:
+        $ref: '#/definitions/RelationalDatabaseMetricName'
+        description: The name of the metric.
+      metricData:
+        $ref: '#/definitions/MetricDatapointList'
+        description: An object describing the result of your get relational database metric data request.
+  GetRelationalDatabaseMetricDataRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+      - metricName
+      - period
+      - startTime
+      - endTime
+      - unit
+      - statistics
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your database from which to get metric data.
+      metricName:
+        $ref: '#/definitions/RelationalDatabaseMetricName'
+        description: The name of the metric data to return.
+      period:
+        $ref: '#/definitions/MetricPeriod'
+        description: 'The granularity, in seconds, of the returned data points.'
+      startTime:
+        $ref: '#/definitions/IsoDate'
+        description: '<p>The start of the time interval from which to get metric data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the start time.</p> </li> </ul>'
+      endTime:
+        $ref: '#/definitions/IsoDate'
+        description: '<p>The end of the time interval from which to get metric data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the end time.</p> </li> </ul>'
+      unit:
+        $ref: '#/definitions/MetricUnit'
+        description: The unit for the metric data request.
+      statistics:
+        $ref: '#/definitions/MetricStatisticList'
+        description: The array of statistics for your metric data request.
+  GetRelationalDatabaseParametersResult:
+    type: object
+    properties:
+      parameters:
+        $ref: '#/definitions/RelationalDatabaseParameterList'
+        description: An object describing the result of your get relational database parameters request.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get static IPs request.
+  GetRelationalDatabaseParametersRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your database for which to get parameters.
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to a specific page of results for your get relational database parameters request.
+  GetRelationalDatabaseSnapshotResult:
+    type: object
+    properties:
+      relationalDatabaseSnapshot:
+        $ref: '#/definitions/RelationalDatabaseSnapshot'
+        description: An object describing the specified database snapshot.
+  GetRelationalDatabaseSnapshotRequest:
+    type: object
+    required:
+      - relationalDatabaseSnapshotName
+    properties:
+      relationalDatabaseSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the database snapshot for which to get information.
+  GetRelationalDatabaseSnapshotsResult:
+    type: object
+    properties:
+      relationalDatabaseSnapshots:
+        $ref: '#/definitions/RelationalDatabaseSnapshotList'
+        description: An object describing the result of your get relational database snapshots request.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get relational database snapshots request.
+  GetRelationalDatabaseSnapshotsRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to a specific page of results for your get relational database snapshots request.
+  GetRelationalDatabasesResult:
+    type: object
+    properties:
+      relationalDatabases:
+        $ref: '#/definitions/RelationalDatabaseList'
+        description: An object describing the result of your get relational databases request.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get relational databases request.
+  GetRelationalDatabasesRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to a specific page of results for your get relational database request.
   GetStaticIpResult:
     type: object
     properties:
@@ -5088,6 +6554,20 @@ definitions:
       instanceName:
         $ref: '#/definitions/ResourceName'
         description: The name of the instance to reboot.
+  RebootRelationalDatabaseResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the result of your reboot relational database request.
+  RebootRelationalDatabaseRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your database to reboot.
   ReleaseStaticIpResult:
     type: object
     properties:
@@ -5116,6 +6596,20 @@ definitions:
       instanceName:
         $ref: '#/definitions/ResourceName'
         description: The name of the instance (a virtual private server) to start.
+  StartRelationalDatabaseResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the result of your start relational database request.
+  StartRelationalDatabaseRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your database to start.
   StopInstanceResult:
     type: object
     properties:
@@ -5133,6 +6627,23 @@ definitions:
       force:
         $ref: '#/definitions/boolean'
         description: '<p>When set to <code>True</code>, forces a Lightsail instance that is stuck in a <code>stopping</code> state to stop.</p> <important> <p>Only use the <code>force</code> parameter if your instance is stuck in the <code>stopping</code> state. In any other state, your instance should stop normally without adding this parameter to your API request.</p> </important>'
+  StopRelationalDatabaseResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the result of your stop relational database request.
+  StopRelationalDatabaseRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your database to stop.
+      relationalDatabaseSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your new database snapshot to be created before stopping your database.
   UnpeerVpcResult:
     type: object
     properties:
@@ -5182,8 +6693,62 @@ definitions:
       attributeValue:
         $ref: '#/definitions/StringMax256'
         description: The value that you want to specify for the attribute name.
-  string:
-    type: string
+  UpdateRelationalDatabaseResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the result of your update relational database request.
+  UpdateRelationalDatabaseRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your database to update.
+      masterUserPassword:
+        $ref: '#/definitions/SensitiveString'
+        description: '<p>The password for the master user of your database. The password can include any printable ASCII character except "/", """, or "@".</p> <p>Constraints: Must contain 8 to 41 characters.</p>'
+      rotateMasterUserPassword:
+        $ref: '#/definitions/boolean'
+        description: '<p>When <code>true</code>, the master user password is changed to a new strong password generated by Lightsail.</p> <p>Use the <code>get relational database master user password</code> operation to get the new password.</p>'
+      preferredBackupWindow:
+        $ref: '#/definitions/string'
+        description: '<p>The daily time range during which automated backups are created for your database if automated backups are enabled.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the <code>hh24:mi-hh24:mi</code> format.</p> <p>Example: <code>16:00-16:30</code> </p> </li> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
+      preferredMaintenanceWindow:
+        $ref: '#/definitions/string'
+        description: '<p>The weekly time range during which system maintenance can occur on your database.</p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the <code>ddd:hh24:mi-ddd:hh24:mi</code> format.</p> </li> <li> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Example: <code>Tue:17:00-Tue:17:30</code> </p> </li> </ul>'
+      enableBackupRetention:
+        $ref: '#/definitions/boolean'
+        description: '<p>When <code>true</code>, enables automated backup retention for your database.</p> <p>Updates are applied during the next maintenance window because this can result in an outage.</p>'
+      disableBackupRetention:
+        $ref: '#/definitions/boolean'
+        description: '<p>When <code>true</code>, disables automated backup retention for your database.</p> <p>Disabling backup retention deletes all automated database backups. Before disabling this, you may want to create a snapshot of your database using the <code>create relational database snapshot</code> operation.</p> <p>Updates are applied during the next maintenance window because this can result in an outage.</p>'
+      publiclyAccessible:
+        $ref: '#/definitions/boolean'
+        description: Specifies the accessibility options for your database. A value of <code>true</code> specifies a database that is available to resources outside of your Lightsail account. A value of <code>false</code> specifies a database that is available only to your Lightsail resources in the same region as your database.
+      applyImmediately:
+        $ref: '#/definitions/boolean'
+        description: '<p>When <code>true</code>, applies changes immediately. When <code>false</code>, applies changes during the preferred maintenance window. Some changes may cause an outage.</p> <p>Default: <code>false</code> </p>'
+  UpdateRelationalDatabaseParametersResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the result of your update relational database parameters request.
+  UpdateRelationalDatabaseParametersRequest:
+    type: object
+    required:
+      - relationalDatabaseName
+      - parameters
+    properties:
+      relationalDatabaseName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your database for which to update parameters.
+      parameters:
+        $ref: '#/definitions/RelationalDatabaseParameterList'
+        description: The database parameters to update.
   AccessDirection:
     type: string
     enum:
@@ -5237,6 +6802,8 @@ definitions:
     enum:
       - os
       - app
+  string:
+    type: string
   boolean:
     type: boolean
   integer:
@@ -5266,7 +6833,7 @@ definitions:
         description: The description of the blueprint.
       isActive:
         $ref: '#/definitions/boolean'
-        description: 'A Boolean value indicating whether the blueprint is active. When you update your blueprints, you will inactivate old blueprints and keep the most recent versions active.'
+        description: A Boolean value indicating whether the blueprint is active. Inactive blueprints are listed to support customers with existing instances but are not necessarily available for launch of new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases.
       minPower:
         $ref: '#/definitions/integer'
         description: 'The minimum bundle power required to run this blueprint. For example, you need a bundle with a power value of 500 or more to create an instance that uses a blueprint with a minimum power value of 500. <code>0</code> indicates that the blueprint runs on all instance sizes. '
@@ -5455,6 +7022,9 @@ definitions:
   IsoDate:
     type: string
     format: date-time
+  SensitiveString:
+    type: string
+    format: password
   ResourceLocation:
     type: object
     properties:
@@ -5478,6 +7048,8 @@ definitions:
       - LoadBalancerTlsCertificate
       - Disk
       - DiskSnapshot
+      - RelationalDatabase
+      - RelationalDatabaseSnapshot
   DiskState:
     type: string
     enum:
@@ -5754,7 +7326,7 @@ definitions:
         description: 'The timestamp when the instance was created (e.g., <code>1479734909.17</code>).'
       location:
         $ref: '#/definitions/ResourceLocation'
-        description: The region name and availability zone where the instance is located.
+        description: The region name and Availability Zone where the instance is located.
       resourceType:
         $ref: '#/definitions/ResourceType'
         description: The type of resource (usually <code>Instance</code>).
@@ -5812,7 +7384,7 @@ definitions:
         description: 'The timestamp when the snapshot was created (e.g., <code>1479907467.024</code>).'
       location:
         $ref: '#/definitions/ResourceLocation'
-        description: The region name and availability zone where you created the snapshot.
+        description: The region name and Availability Zone where you created the snapshot.
       resourceType:
         $ref: '#/definitions/ResourceType'
         description: The type of resource (usually <code>InstanceSnapshot</code>).
@@ -5939,6 +7511,171 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Region'
+  RelationalDatabaseBlueprintList:
+    type: array
+    items:
+      $ref: '#/definitions/RelationalDatabaseBlueprint'
+  RelationalDatabaseBundleList:
+    type: array
+    items:
+      $ref: '#/definitions/RelationalDatabaseBundle'
+  RelationalDatabaseEventList:
+    type: array
+    items:
+      $ref: '#/definitions/RelationalDatabaseEvent'
+  LogEventList:
+    type: array
+    items:
+      $ref: '#/definitions/LogEvent'
+  RelationalDatabasePasswordVersion:
+    type: string
+    enum:
+      - CURRENT
+      - PREVIOUS
+      - PENDING
+  RelationalDatabaseMetricName:
+    type: string
+    enum:
+      - CPUUtilization
+      - DatabaseConnections
+      - DiskQueueDepth
+      - FreeStorageSpace
+      - NetworkReceiveThroughput
+      - NetworkTransmitThroughput
+  RelationalDatabaseParameterList:
+    type: array
+    items:
+      $ref: '#/definitions/RelationalDatabaseParameter'
+  RelationalDatabase:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The unique name of the database resource in Lightsail.
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the database.
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code for the database. Include this code in your email to support when you have questions about a database in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the database was created. Formatted in Unix time.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The Region name and Availability Zone where the database is located.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The Lightsail resource type for the database (for example, <code>RelationalDatabase</code>).'
+      relationalDatabaseBlueprintId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The blueprint ID for the database. A blueprint describes the major engine version of a database.
+      relationalDatabaseBundleId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The bundle ID for the database. A bundle describes the performance specifications for your database.
+      masterDatabaseName:
+        $ref: '#/definitions/string'
+        description: The name of the master database created when the Lightsail database resource is created.
+      hardware:
+        $ref: '#/definitions/RelationalDatabaseHardware'
+        description: Describes the hardware of the database.
+      state:
+        $ref: '#/definitions/NonEmptyString'
+        description: Describes the current state of the database.
+      secondaryAvailabilityZone:
+        $ref: '#/definitions/string'
+        description: <p>Describes the secondary Availability Zone of a high availability database.</p> <p>The secondary database is used for failover support of a high availability database.</p>
+      backupRetentionEnabled:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether automated backup retention is enabled for the database.
+      pendingModifiedValues:
+        $ref: '#/definitions/PendingModifiedRelationalDatabaseValues'
+        description: Describes pending database value modifications.
+      engine:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The database software (for example, <code>MySQL</code>).'
+      engineVersion:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The database engine version (for example, <code>5.7.23</code>).'
+      latestRestorableTime:
+        $ref: '#/definitions/IsoDate'
+        description: The latest point in time to which the database can be restored. Formatted in Unix time.
+      masterUsername:
+        $ref: '#/definitions/NonEmptyString'
+        description: The master user name of the database.
+      parameterApplyStatus:
+        $ref: '#/definitions/NonEmptyString'
+        description: The status of parameter updates for the database.
+      preferredBackupWindow:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The daily time range during which automated backups are created for the database (for example, <code>16:00-16:30</code>).'
+      preferredMaintenanceWindow:
+        $ref: '#/definitions/NonEmptyString'
+        description: '<p>The weekly time range during which system maintenance can occur on the database.</p> <p>In the format <code>ddd:hh24:mi-ddd:hh24:mi</code>. For example, <code>Tue:17:00-Tue:17:30</code>.</p>'
+      publiclyAccessible:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the database is publicly accessible.
+      masterEndpoint:
+        $ref: '#/definitions/RelationalDatabaseEndpoint'
+        description: The master endpoint for the database.
+      pendingMaintenanceActions:
+        $ref: '#/definitions/PendingMaintenanceActionList'
+        description: Describes the pending maintenance actions for the database.
+    description: Describes a database.
+  RelationalDatabaseSnapshot:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the database snapshot.
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the database snapshot.
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code for the database snapshot. Include this code in your email to support when you have questions about a database snapshot in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the database snapshot was created.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The Region name and Availability Zone where the database snapshot is located.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The Lightsail resource type.
+      engine:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The software of the database snapshot (for example, <code>MySQL</code>)'
+      engineVersion:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The database engine version for the database snapshot (for example, <code>5.7.23</code>).'
+      sizeInGb:
+        $ref: '#/definitions/integer'
+        description: 'The size of the disk in GB (for example, <code>32</code>) for the database snapshot.'
+      state:
+        $ref: '#/definitions/NonEmptyString'
+        description: The state of the database snapshot.
+      fromRelationalDatabaseName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the source database from which the database snapshot was created.
+      fromRelationalDatabaseArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the database from which the database snapshot was created.
+      fromRelationalDatabaseBundleId:
+        $ref: '#/definitions/string'
+        description: The bundle ID of the database from which the database snapshot was created.
+      fromRelationalDatabaseBlueprintId:
+        $ref: '#/definitions/string'
+        description: The blueprint ID of the database from which the database snapshot was created. A blueprint describes the major engine version of a database.
+    description: Describes a database snapshot.
+  RelationalDatabaseSnapshotList:
+    type: array
+    items:
+      $ref: '#/definitions/RelationalDatabaseSnapshot'
+  RelationalDatabaseList:
+    type: array
+    items:
+      $ref: '#/definitions/RelationalDatabase'
   StaticIp:
     type: object
     properties:
@@ -6341,6 +8078,16 @@ definitions:
         $ref: '#/definitions/boolean'
         description: 'When <code>true</code>, the SSL/TLS certificate is attached to the Lightsail load balancer.'
     description: Provides a summary of SSL/TLS certificate metadata.
+  LogEvent:
+    type: object
+    properties:
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the database log event was created.
+      message:
+        $ref: '#/definitions/string'
+        description: The message of the database log event.
+    description: Describes a database log event.
   double:
     type: number
     format: double
@@ -6422,6 +8169,36 @@ definitions:
       - Failed
       - Completed
       - Succeeded
+  PendingMaintenanceAction:
+    type: object
+    properties:
+      action:
+        $ref: '#/definitions/NonEmptyString'
+        description: The type of pending database maintenance action.
+      description:
+        $ref: '#/definitions/NonEmptyString'
+        description: Additional detail about the pending database maintenance action.
+      currentApplyDate:
+        $ref: '#/definitions/IsoDate'
+        description: The effective date of the pending database maintenance action.
+    description: Describes a pending database maintenance action.
+  PendingMaintenanceActionList:
+    type: array
+    items:
+      $ref: '#/definitions/PendingMaintenanceAction'
+  PendingModifiedRelationalDatabaseValues:
+    type: object
+    properties:
+      masterUserPassword:
+        $ref: '#/definitions/string'
+        description: The password for the master user of the database.
+      engineVersion:
+        $ref: '#/definitions/string'
+        description: The database engine version.
+      backupRetentionEnabled:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether automated backup retention is enabled.
+    description: Describes a pending database value modification.
   PortInfoList:
     type: array
     items:
@@ -6433,9 +8210,11 @@ definitions:
       - us-east-2
       - us-west-1
       - us-west-2
-      - eu-central-1
       - eu-west-1
       - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - ca-central-1
       - ap-south-1
       - ap-southeast-1
       - ap-southeast-2
@@ -6459,7 +8238,134 @@ definitions:
       availabilityZones:
         $ref: '#/definitions/AvailabilityZoneList'
         description: The Availability Zones. Follows the format <code>us-east-2a</code> (case-sensitive).
+      relationalDatabaseAvailabilityZones:
+        $ref: '#/definitions/AvailabilityZoneList'
+        description: The Availability Zones for databases. Follows the format <code>us-east-2a</code> (case-sensitive).
     description: Describes the AWS Region.
+  RelationalDatabaseHardware:
+    type: object
+    properties:
+      cpuCount:
+        $ref: '#/definitions/integer'
+        description: The number of vCPUs for the database.
+      diskSizeInGb:
+        $ref: '#/definitions/integer'
+        description: The size of the disk for the database.
+      ramSizeInGb:
+        $ref: '#/definitions/float'
+        description: The amount of RAM in GB for the database.
+    description: Describes the hardware of a database.
+  RelationalDatabaseEndpoint:
+    type: object
+    properties:
+      port:
+        $ref: '#/definitions/integer'
+        description: Specifies the port that the database is listening on.
+      address:
+        $ref: '#/definitions/NonEmptyString'
+        description: Specifies the DNS address of the database.
+    description: Describes an endpoint for a database.
+  RelationalDatabaseEngine:
+    type: string
+    enum:
+      - mysql
+  RelationalDatabaseBlueprint:
+    type: object
+    properties:
+      blueprintId:
+        $ref: '#/definitions/string'
+        description: The ID for the database blueprint.
+      engine:
+        $ref: '#/definitions/RelationalDatabaseEngine'
+        description: 'The database software of the database blueprint (for example, <code>MySQL</code>).'
+      engineVersion:
+        $ref: '#/definitions/string'
+        description: 'The database engine version for the database blueprint (for example, <code>5.7.23</code>).'
+      engineDescription:
+        $ref: '#/definitions/string'
+        description: The description of the database engine for the database blueprint.
+      engineVersionDescription:
+        $ref: '#/definitions/string'
+        description: The description of the database engine version for the database blueprint.
+      isEngineDefault:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the engine version is the default for the database blueprint.
+    description: 'Describes a database image, or blueprint. A blueprint describes the major engine version of a database.'
+  RelationalDatabaseBundle:
+    type: object
+    properties:
+      bundleId:
+        $ref: '#/definitions/string'
+        description: The ID for the database bundle.
+      name:
+        $ref: '#/definitions/string'
+        description: The name for the database bundle.
+      price:
+        $ref: '#/definitions/float'
+        description: The cost of the database bundle in US currency.
+      ramSizeInGb:
+        $ref: '#/definitions/float'
+        description: 'The amount of RAM in GB (for example, <code>2.0</code>) for the database bundle.'
+      diskSizeInGb:
+        $ref: '#/definitions/integer'
+        description: The size of the disk for the database bundle.
+      transferPerMonthInGb:
+        $ref: '#/definitions/integer'
+        description: The data transfer rate per month in GB for the database bundle.
+      cpuCount:
+        $ref: '#/definitions/integer'
+        description: The number of virtual CPUs (vCPUs) for the database bundle.
+      isEncrypted:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the database bundle is encrypted.
+      isActive:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the database bundle is active.
+    description: Describes a database bundle. A bundle describes the performance specifications of the database.
+  RelationalDatabaseEvent:
+    type: object
+    properties:
+      resource:
+        $ref: '#/definitions/ResourceName'
+        description: The database that the database event relates to.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the database event was created.
+      message:
+        $ref: '#/definitions/string'
+        description: The message of the database event.
+      eventCategories:
+        $ref: '#/definitions/StringList'
+        description: The category that the database event belongs to.
+    description: Describes an event for a database.
+  RelationalDatabaseParameter:
+    type: object
+    properties:
+      allowedValues:
+        $ref: '#/definitions/string'
+        description: Specifies the valid range of values for the parameter.
+      applyMethod:
+        $ref: '#/definitions/string'
+        description: <p>Indicates when parameter updates are applied.</p> <p>Can be <code>immediate</code> or <code>pending-reboot</code>.</p>
+      applyType:
+        $ref: '#/definitions/string'
+        description: Specifies the engine-specific parameter type.
+      dataType:
+        $ref: '#/definitions/string'
+        description: Specifies the valid data type for the parameter.
+      description:
+        $ref: '#/definitions/string'
+        description: Provides a description of the parameter.
+      isModifiable:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the parameter can be modified.
+      parameterName:
+        $ref: '#/definitions/string'
+        description: Specifies the name of the parameter.
+      parameterValue:
+        $ref: '#/definitions/string'
+        description: Specifies the value of the parameter.
+    description: Describes the parameters of a database.
   StringMax256:
     type: string
     minLength: 1

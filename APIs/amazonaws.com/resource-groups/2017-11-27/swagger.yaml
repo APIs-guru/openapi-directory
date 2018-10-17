@@ -725,36 +725,11 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: 'The tags to add to the group. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
-  BadRequestException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The request does not comply with validation rules that are defined for the request parameters.
-  ForbiddenException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The caller is not authorized to make the request.
-  MethodNotAllowedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The request uses an HTTP method which is not allowed for the specified resource.
-  TooManyRequestsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The caller has exceeded throttling limits.
-  InternalServerErrorException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: An internal error occurred while processing the request.
+  BadRequestException: {}
+  ForbiddenException: {}
+  MethodNotAllowedException: {}
+  TooManyRequestsException: {}
+  InternalServerErrorException: {}
   DeleteGroupOutput:
     type: object
     properties:
@@ -764,12 +739,7 @@ definitions:
   DeleteGroupInput:
     type: object
     properties: {}
-  NotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: One or more resources specified in the request do not exist.
+  NotFoundException: {}
   GetGroupOutput:
     type: object
     properties:
@@ -815,24 +785,26 @@ definitions:
       Filters:
         $ref: '#/definitions/ResourceFilterList'
         description: '<p>Filters, formatted as ResourceFilter objects, that you want to apply to a ListGroupResources operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter resources by their type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>'
-  UnauthorizedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The request has not been applied because it lacks valid authentication credentials for the target resource.
+  UnauthorizedException: {}
   ListGroupsOutput:
     type: object
     properties:
+      GroupIdentifiers:
+        $ref: '#/definitions/GroupIdentifierList'
+        description: A list of GroupIdentifier objects. Each identifier is an object that contains both the GroupName and the GroupArn.
       Groups:
         $ref: '#/definitions/GroupList'
         description: A list of resource groups.
+        x-deprecation: 'This field is deprecated, use GroupIdentifiers instead.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The NextToken value to include in a subsequent <code>ListGroups</code> request, to get more results.'
   ListGroupsInput:
     type: object
-    properties: {}
+    properties:
+      Filters:
+        $ref: '#/definitions/GroupFilterList'
+        description: '<p>Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups operation.</p> <ul> <li> <p> <code>group-type</code> - Filter groups by resource type. Specify up to five group types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>'
   SearchResourcesOutput:
     type: object
     properties:
@@ -916,10 +888,6 @@ definitions:
       ResourceQuery:
         $ref: '#/definitions/ResourceQuery'
         description: The resource query that determines which AWS resources are members of the resource group.
-  ErrorMessage:
-    type: string
-    minLength: 1
-    maxLength: 1024
   GroupName:
     type: string
     pattern: '[a-zA-Z0-9_\.-]+'
@@ -983,6 +951,51 @@ definitions:
   GroupArn:
     type: string
     pattern: 'arn:aws:resource-groups:[a-z]{2}-[a-z]+-\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\.-]{1,128}'
+  GroupFilterName:
+    type: string
+    enum:
+      - resource-type
+  GroupFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/GroupFilterValue'
+    minItems: 1
+    maxItems: 5
+  GroupFilter:
+    type: object
+    required:
+      - Name
+      - Values
+    properties:
+      Name:
+        $ref: '#/definitions/GroupFilterName'
+        description: The name of the filter. Filter names are case-sensitive.
+      Values:
+        $ref: '#/definitions/GroupFilterValues'
+        description: 'One or more filter values. Allowed filter values vary by group filter name, and are case-sensitive.'
+    description: A filter name and value pair that is used to obtain more specific results from a list of groups.
+  GroupFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/GroupFilter'
+  GroupFilterValue:
+    type: string
+    minLength: 1
+    maxLength: 128
+  GroupIdentifier:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The name of a resource group.
+      GroupArn:
+        $ref: '#/definitions/GroupArn'
+        description: The ARN of a resource group.
+    description: The ARN and group name of a group.
+  GroupIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/GroupIdentifier'
   GroupList:
     type: array
     items:

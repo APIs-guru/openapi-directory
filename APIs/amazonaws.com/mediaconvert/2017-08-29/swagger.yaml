@@ -281,6 +281,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListJobsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
   /2017-08-29/jobTemplates:
     post:
       operationId: CreateJobTemplate
@@ -368,6 +378,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListJobTemplatesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
   /2017-08-29/presets:
     post:
       operationId: CreatePreset
@@ -455,6 +475,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListPresetsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
   /2017-08-29/queues:
     post:
       operationId: CreateQueue
@@ -542,6 +572,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListQueuesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
   '/2017-08-29/jobTemplates/{name}':
     delete:
       operationId: DeleteJobTemplate
@@ -992,6 +1032,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeEndpointsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

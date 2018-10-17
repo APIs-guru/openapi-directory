@@ -3,7 +3,7 @@ info:
   version: '2017-05-18'
   x-release: v4
   title: Amazon Athena
-  description: '<p>Amazon Athena is an interactive query service that lets you use standard SQL to analyze data directly in Amazon S3. You can point Athena at your data in Amazon S3 and run ad-hoc queries and get results in seconds. Athena is serverless, so there is no infrastructure to set up or manage. You pay only for the queries you run. Athena scales automatically—executing queries in parallel—so results are fast, even with large datasets and complex queries. For more information, see <a href="http://docs.aws.amazon.com/athena/latest/ug/what-is.html">What is Amazon Athena</a> in the <i>Amazon Athena User Guide</i>.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
+  description: '<p>Amazon Athena is an interactive query service that lets you use standard SQL to analyze data directly in Amazon S3. You can point Athena at your data in Amazon S3 and run ad-hoc queries and get results in seconds. Athena is serverless, so there is no infrastructure to set up or manage. You pay only for the queries you run. Athena scales automatically—executing queries in parallel—so results are fast, even with large datasets and complex queries. For more information, see <a href="http://docs.aws.amazon.com/athena/latest/ug/what-is.html">What is Amazon Athena</a> in the <i>Amazon Athena User Guide</i>.</p> <p>If you connect to Athena using the JDBC driver, use version 1.1.0 of the driver or later with the Amazon Athena API. Earlier version drivers do not support the API. For more information and to download the driver, see <a href="https://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html">Accessing Amazon Athena with JDBC</a>.</p> <p>For code samples using the AWS SDK for Java, see <a href="https://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -514,20 +514,8 @@ definitions:
       NamedQueryIds:
         $ref: '#/definitions/NamedQueryIdList'
         description: An array of query IDs.
-  InternalServerException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Indicates a platform issue, which may be due to a transient condition or outage.'
-  InvalidRequestException:
-    type: object
-    properties:
-      AthenaErrorCode:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Indicates that something is wrong with the input to the request. For example, a required parameter may be missing or out of range.'
+  InternalServerException: {}
+  InvalidRequestException: {}
   BatchGetQueryExecutionOutput:
     type: object
     properties:
@@ -615,6 +603,9 @@ definitions:
   GetQueryResultsOutput:
     type: object
     properties:
+      UpdateCount:
+        $ref: '#/definitions/Long'
+        description: 'The number of rows inserted with a CREATE TABLE AS SELECT statement. '
       ResultSet:
         $ref: '#/definitions/ResultSet'
         description: The results of the query execution.
@@ -695,14 +686,7 @@ definitions:
       ResultConfiguration:
         $ref: '#/definitions/ResultConfiguration'
         description: Specifies information about where and how to save the results of the query execution.
-  TooManyRequestsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-      Reason:
-        $ref: '#/definitions/ThrottleReason'
-    description: Indicates that the request was throttled.
+  TooManyRequestsException: {}
   StopQueryExecutionOutput:
     type: object
     properties: {}
@@ -846,9 +830,10 @@ definitions:
       KmsKey:
         $ref: '#/definitions/String'
         description: 'For <code>SSE-KMS</code> and <code>CSE-KMS</code>, this is the KMS key ARN or ID.'
-    description: 'If query results are encrypted in Amazon S3, indicates the Amazon S3 encryption option used.'
+    description: 'If query results are encrypted in Amazon S3, indicates the encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information.'
   ErrorCode:
     type: string
+    description: 'The error code returned when the query execution failed to process, or when the processing request for the named query failed.'
     minLength: 1
     maxLength: 256
   ErrorMessage:
@@ -887,6 +872,9 @@ definitions:
       Query:
         $ref: '#/definitions/QueryString'
         description: The SQL query statements which the query execution ran.
+      StatementType:
+        $ref: '#/definitions/StatementType'
+        description: 'The type of query statement that was run. <code>DDL</code> indicates DDL query statements. <code>DML</code> indicates DML (Data Manipulation Language) query statements, such as <code>CREATE TABLE AS SELECT</code>. <code>UTILITY</code> indicates query statements other than DDL and DML, such as <code>SHOW CREATE TABLE</code>, or <code>DESCRIBE &lt;table&gt;</code>.'
       ResultConfiguration:
         $ref: '#/definitions/ResultConfiguration'
         description: 'The location in Amazon S3 where query results were stored and the encryption option, if any, used for query results.'
@@ -898,7 +886,7 @@ definitions:
         description: 'The completion date, current state, submission time, and state change reason (if applicable) for the query execution.'
       Statistics:
         $ref: '#/definitions/QueryExecutionStatistics'
-        description: The amount of data scanned during the query execution and the amount of time that it took to execute.
+        description: 'The amount of data scanned during the query execution and the amount of time that it took to execute, and the type of statement that was run.'
     description: Information about a single instance of a query execution.
   Token:
     type: string
@@ -906,6 +894,8 @@ definitions:
     type: integer
     minimum: 0
     maximum: 1000
+  Long:
+    type: integer
   ResultSet:
     type: object
     properties:
@@ -924,8 +914,12 @@ definitions:
     type: integer
     minimum: 0
     maximum: 50
-  Long:
-    type: integer
+  StatementType:
+    type: string
+    enum:
+      - DDL
+      - DML
+      - UTILITY
   ResultConfiguration:
     type: object
     required:
@@ -933,10 +927,10 @@ definitions:
     properties:
       OutputLocation:
         $ref: '#/definitions/String'
-        description: The location in S3 where query results are stored.
+        description: 'The location in Amazon S3 where your query results are stored, such as <code>s3://path/to/query/bucket/</code>. For more information, see <a href="http://docs.aws.amazon.com/athena/latest/ug/querying.html">Queries and Query Result Files. </a> '
       EncryptionConfiguration:
         $ref: '#/definitions/EncryptionConfiguration'
-        description: 'If query results are encrypted in S3, indicates the S3 encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code> and key information.'
+        description: 'If query results are encrypted in Amazon S3, indicates the encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information.'
     description: 'The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results.'
   QueryExecutionContext:
     type: object
@@ -950,7 +944,7 @@ definitions:
     properties:
       State:
         $ref: '#/definitions/QueryExecutionState'
-        description: The state of query execution. <code>SUBMITTED</code> indicates that the query is queued for execution. <code>RUNNING</code> indicates that the query is scanning data and returning results. <code>SUCCEEDED</code> indicates that the query completed without error. <code>FAILED</code> indicates that the query experienced an error and did not complete processing. <code>CANCELLED</code> indicates that user input interrupted query execution.
+        description: 'The state of query execution. <code>QUEUED</code> state is listed but is not used by Athena and is reserved for future use. <code>RUNNING</code> indicates that the query has been submitted to the service, and Athena will execute the query as soon as resources are available. <code>SUCCEEDED</code> indicates that the query completed without error. <code>FAILED</code> indicates that the query experienced an error and did not complete processing.<code>CANCELLED</code> indicates that user input interrupted query execution. '
       StateChangeReason:
         $ref: '#/definitions/String'
         description: Further detail about the status of the query.
@@ -970,7 +964,7 @@ definitions:
       DataScannedInBytes:
         $ref: '#/definitions/Long'
         description: The number of bytes in the data that was queried.
-    description: The amount of data scanned during the query execution and the amount of time that it took to execute.
+    description: 'The amount of data scanned during the query execution and the amount of time that it took to execute, and the type of statement that was run.'
   QueryExecutionState:
     type: string
     enum:
@@ -988,8 +982,8 @@ definitions:
     properties:
       ColumnInfo:
         $ref: '#/definitions/ColumnInfoList'
-        description: Information about the columns in a query execution result.
-    description: The metadata that describes the column structure and data types of a table of query results.
+        description: Information about the columns returned in a query result metadata.
+    description: 'The metadata that describes the column structure and data types of a table of query results. '
   datumList:
     type: array
     items:
@@ -1001,10 +995,6 @@ definitions:
         $ref: '#/definitions/datumList'
         description: The data that populates a row in a query result table.
     description: The rows that comprise a query result table.
-  ThrottleReason:
-    type: string
-    enum:
-      - CONCURRENT_QUERY_LIMIT_EXCEEDED
   UnprocessedNamedQueryId:
     type: object
     properties:

@@ -1233,6 +1233,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteResourcePolicy':
+    post:
+      operationId: DeleteResourcePolicy
+      description: Deletes a specified policy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteResourcePolicyResponse'
+        '480':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '481':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '482':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '484':
+          description: ConditionCheckFailureException
+          schema:
+            $ref: '#/definitions/ConditionCheckFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteResourcePolicyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteSecurityConfiguration':
     post:
       operationId: DeleteSecurityConfiguration
@@ -1919,7 +1964,7 @@ paths:
   '/#GetDevEndpoint':
     post:
       operationId: GetDevEndpoint
-      description: Retrieves information about a specified DevEndpoint.
+      description: '<p>Retrieves information about a specified DevEndpoint.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1960,7 +2005,7 @@ paths:
   '/#GetDevEndpoints':
     post:
       operationId: GetDevEndpoints
-      description: Retrieves all the DevEndpoints in this AWS account.
+      description: '<p>Retrieves all the DevEndpoints in this AWS account.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2360,6 +2405,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetPlanRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetResourcePolicy':
+    post:
+      operationId: GetResourcePolicy
+      description: Retrieves a specified resource policy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetResourcePolicyResponse'
+        '480':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '481':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '482':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetResourcePolicyRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2904,6 +2990,51 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutDataCatalogEncryptionSettingsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutResourcePolicy':
+    post:
+      operationId: PutResourcePolicy
+      description: Sets the Data Catalog resource policy for access control.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutResourcePolicyResponse'
+        '480':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '481':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '482':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '484':
+          description: ConditionCheckFailureException
+          schema:
+            $ref: '#/definitions/ConditionCheckFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutResourcePolicyRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3884,7 +4015,7 @@ definitions:
         description: 'The name of the table. For Hive compatibility, this name is entirely lowercase.'
       VersionIds:
         $ref: '#/definitions/BatchDeleteTableVersionList'
-        description: A list of the IDs of versions to be deleted.
+        description: A list of the IDs of versions to be deleted. A <code>VersionId</code> is a string representation of an integer. Each version is incremented by 1.
   BatchGetPartitionResponse:
     type: object
     properties:
@@ -4003,7 +4134,7 @@ definitions:
         description: Policy for the crawler's update and deletion behavior.
       Configuration:
         $ref: '#/definitions/CrawlerConfiguration'
-        description: '<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler''s behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>''{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }''</code> </p>'
+        description: 'Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
       CrawlerSecurityConfiguration:
         $ref: '#/definitions/CrawlerSecurityConfiguration'
         description: The name of the SecurityConfiguration structure to be used by this Crawler.
@@ -4394,6 +4525,16 @@ definitions:
       PartitionValues:
         $ref: '#/definitions/ValueStringList'
         description: The values that define the partition.
+  DeleteResourcePolicyResponse:
+    type: object
+    properties: {}
+  DeleteResourcePolicyRequest:
+    type: object
+    properties:
+      PolicyHashCondition:
+        $ref: '#/definitions/HashString'
+        description: The hash value returned when this policy was set.
+  ConditionCheckFailureException: {}
   DeleteSecurityConfigurationResponse:
     type: object
     properties: {}
@@ -4444,7 +4585,7 @@ definitions:
         description: 'The name of the table. For Hive compatibility, this name is entirely lowercase.'
       VersionId:
         $ref: '#/definitions/VersionString'
-        description: The ID of the table version to be deleted.
+        description: The ID of the table version to be deleted. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1.
   DeleteTriggerResponse:
     type: object
     properties:
@@ -4863,7 +5004,7 @@ definitions:
         description: The name of the partitions' table.
       Expression:
         $ref: '#/definitions/PredicateString'
-        description: An expression filtering the partitions to be returned.
+        description: '<p>An expression filtering the partitions to be returned.</p> <p>The expression uses SQL syntax similar to the SQL <code>WHERE</code> filter clause. The SQL statement parser <a href="http://jsqlparser.sourceforge.net/home.php">JSQLParser</a> parses the expression. </p> <p> <i>Operators</i>: The following are the operators that you can use in the <code>Expression</code> API call:</p> <dl> <dt>=</dt> <dd> <p>Checks if the values of the two operands are equal or not; if yes, then the condition becomes true.</p> <p>Example: Assume ''variable a'' holds 10 and ''variable b'' holds 20. </p> <p>(a = b) is not true.</p> </dd> <dt>&lt; &gt;</dt> <dd> <p>Checks if the values of two operands are equal or not; if the values are not equal, then the condition becomes true.</p> <p>Example: (a &lt; &gt; b) is true.</p> </dd> <dt>&gt;</dt> <dd> <p>Checks if the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt; b) is not true.</p> </dd> <dt>&lt;</dt> <dd> <p>Checks if the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt; b) is true.</p> </dd> <dt>&gt;=</dt> <dd> <p>Checks if the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt;= b) is not true.</p> </dd> <dt>&lt;=</dt> <dd> <p>Checks if the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt;= b) is true.</p> </dd> <dt>AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL</dt> <dd> <p>Logical operators.</p> </dd> </dl> <p> <i>Supported Partition Key Types</i>: The following are the the supported partition keys.</p> <ul> <li> <p> <code>string</code> </p> </li> <li> <p> <code>date</code> </p> </li> <li> <p> <code>timestamp</code> </p> </li> <li> <p> <code>int</code> </p> </li> <li> <p> <code>bigint</code> </p> </li> <li> <p> <code>long</code> </p> </li> <li> <p> <code>tinyint</code> </p> </li> <li> <p> <code>smallint</code> </p> </li> <li> <p> <code>decimal</code> </p> </li> </ul> <p>If an invalid type is encountered, an exception is thrown. </p> <p>The following list shows the valid operators on each type. When you define a crawler, the <code>partitionKey</code> type is created as a <code>STRING</code>, to be compatible with the catalog partitions. </p> <p> <i>Sample API Call</i>: </p>'
       NextToken:
         $ref: '#/definitions/Token'
         description: 'A continuation token, if this is not the first call to retrieve these partitions.'
@@ -4903,6 +5044,24 @@ definitions:
       Language:
         $ref: '#/definitions/Language'
         description: The programming language of the code to perform the mapping.
+  GetResourcePolicyResponse:
+    type: object
+    properties:
+      PolicyInJson:
+        $ref: '#/definitions/PolicyJsonString'
+        description: 'Contains the requested policy document, in JSON format.'
+      PolicyHash:
+        $ref: '#/definitions/HashString'
+        description: Contains the hash value associated with this policy.
+      CreateTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time at which the policy was created.
+      UpdateTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time at which the policy was last updated.
+  GetResourcePolicyRequest:
+    type: object
+    properties: {}
   GetSecurityConfigurationResponse:
     type: object
     properties:
@@ -4979,7 +5138,7 @@ definitions:
         description: 'The name of the table. For Hive compatibility, this name is entirely lowercase.'
       VersionId:
         $ref: '#/definitions/VersionString'
-        description: The ID value of the table version to be retrieved.
+        description: 'The ID value of the table version to be retrieved. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1. '
   GetTableVersionsResponse:
     type: object
     properties:
@@ -5148,6 +5307,26 @@ definitions:
       DataCatalogEncryptionSettings:
         $ref: '#/definitions/DataCatalogEncryptionSettings'
         description: The security configuration to set.
+  PutResourcePolicyResponse:
+    type: object
+    properties:
+      PolicyHash:
+        $ref: '#/definitions/HashString'
+        description: A hash of the policy that has just been set. This must be included in a subsequent call that overwrites or updates this policy.
+  PutResourcePolicyRequest:
+    type: object
+    required:
+      - PolicyInJson
+    properties:
+      PolicyInJson:
+        $ref: '#/definitions/PolicyJsonString'
+        description: 'Contains the policy document to set, in JSON format.'
+      PolicyHashCondition:
+        $ref: '#/definitions/HashString'
+        description: This is the hash value returned when the previous policy was set using PutResourcePolicy. Its purpose is to prevent concurrent modifications of a policy. Do not use this parameter if no previous policy has been set.
+      PolicyExistsCondition:
+        $ref: '#/definitions/ExistCondition'
+        description: 'A value of <code>MUST_EXIST</code> is used to update a policy. A value of <code>NOT_EXIST</code> is used to create a new policy. If a value of <code>NONE</code> or a null value is used, the call will not depend on the existence of a policy.'
   ResetJobBookmarkResponse:
     type: object
     properties:
@@ -5343,7 +5522,7 @@ definitions:
         description: Policy for the crawler's update and deletion behavior.
       Configuration:
         $ref: '#/definitions/CrawlerConfiguration'
-        description: '<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler''s behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>''{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }''</code> </p>'
+        description: 'Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
       CrawlerSecurityConfiguration:
         $ref: '#/definitions/CrawlerSecurityConfiguration'
         description: The name of the SecurityConfiguration structure to be used by this Crawler.
@@ -6059,7 +6238,7 @@ definitions:
         description: A list of criteria that can be used in selecting this connection.
       ConnectionProperties:
         $ref: '#/definitions/ConnectionProperties'
-        description: '<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database.</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The S3 path of the a jar file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use).</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for the JDBC connection.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether SSL with hostname matching will be enforced for the JDBC connection on the client. The default is false.</p> </li> </ul>'
+        description: '<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database. The value string for <code>USER_NAME</code> is "<code>USERNAME</code>".</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The S3 path of the a jar file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use).</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for the JDBC connection.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether SSL with hostname matching will be enforced for the JDBC connection on the client. The default is false.</p> </li> </ul>'
       PhysicalConnectionRequirements:
         $ref: '#/definitions/PhysicalConnectionRequirements'
         description: 'A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.'
@@ -6260,7 +6439,7 @@ definitions:
         description: The version of the crawler.
       Configuration:
         $ref: '#/definitions/CrawlerConfiguration'
-        description: '<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler''s behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>''{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }''</code> </p>'
+        description: 'Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
       CrawlerSecurityConfiguration:
         $ref: '#/definitions/CrawlerSecurityConfiguration'
         description: The name of the SecurityConfiguration structure to be used by this Crawler.
@@ -6641,6 +6820,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ValueString'
+  HashString:
+    type: string
+    minLength: 1
+    maxLength: 255
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
   DescriptionStringRemovable:
     type: string
     minLength: 0
@@ -6666,13 +6850,13 @@ definitions:
         description: The YARN endpoint address used by this DevEndpoint.
       PrivateAddress:
         $ref: '#/definitions/GenericString'
-        description: 'A private DNS to access the DevEndpoint within a VPC, if the DevEndpoint is created within one.'
+        description: 'A private IP address to access the DevEndpoint within a VPC, if the DevEndpoint is created within one. The PrivateAddress field is present only when you create the DevEndpoint within your virtual private cloud (VPC).'
       ZeppelinRemoteSparkInterpreterPort:
         $ref: '#/definitions/IntegerValue'
         description: The Apache Zeppelin port for the remote Apache Spark interpreter.
       PublicAddress:
         $ref: '#/definitions/GenericString'
-        description: The public VPC address used by this DevEndpoint.
+        description: The public IP address used by this DevEndpoint. The PublicAddress field is present only when you create a non-VPC (virtual private cloud) DevEndpoint.
       Status:
         $ref: '#/definitions/GenericString'
         description: The current status of this DevEndpoint.
@@ -6756,6 +6940,12 @@ definitions:
     type: integer
   ExecutionTime:
     type: integer
+  ExistCondition:
+    type: string
+    enum:
+      - MUST_EXIST
+      - NOT_EXIST
+      - NONE
   FieldType:
     type: string
   FilterString:
@@ -6961,6 +7151,10 @@ definitions:
         $ref: '#/definitions/TotalSegmentsInteger'
         description: The total numer of segments.
     description: 'Defines a non-overlapping region of a table''s partitions, allowing multiple requests to be executed in parallel.'
+  PolicyJsonString:
+    type: string
+    minLength: 2
+    maxLength: 10240
   SecurityConfiguration:
     type: object
     properties:
@@ -7040,7 +7234,7 @@ definitions:
         description: The table in question
       VersionId:
         $ref: '#/definitions/VersionString'
-        description: The ID value that identifies this table version.
+        description: The ID value that identifies this table version. A <code>VersionId</code> is a string representation of an integer. Each version is incremented by 1.
     description: Specifies a version of a table.
   GetTableVersionsList:
     type: array
@@ -7481,7 +7675,7 @@ definitions:
         description: The name of the table in question.
       VersionId:
         $ref: '#/definitions/VersionString'
-        description: The ID value of the version in question.
+        description: The ID value of the version in question. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1.
       ErrorDetail:
         $ref: '#/definitions/ErrorDetail'
         description: Detail about the error.

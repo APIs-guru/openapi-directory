@@ -102,7 +102,7 @@ paths:
   /:
     post:
       operationId: CreateVocabulary
-      description: Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file.
+      description: 'Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file. Note that vocabularies for en-AU, en-UK, and fr-CA languages that are in preview are not available. In the console, the vocabulary section will be greyed-out and SDK will return error message. '
       responses:
         '200':
           description: Success
@@ -143,7 +143,7 @@ paths:
   '/#DeleteTranscriptionJob':
     post:
       operationId: DeleteTranscriptionJob
-      description: 'Deletes a previously submitted transcription job as wella s any other generated results such as the transcription, models, and so on.'
+      description: 'Deletes a previously submitted transcription job as well as any other generated results such as the transcription, models, and so on.'
       responses:
         '200':
           description: Success
@@ -258,7 +258,7 @@ paths:
   '/#GetVocabulary':
     post:
       operationId: GetVocabulary
-      description: Gets information about a vocabulary.
+      description: 'Gets information about a vocabulary. Note that vocabularies for en-AU, en-UK, and fr-CA languages that are in preview are not available. In the console, the vocabulary section will be greyed-out and SDK will return error message.'
       responses:
         '200':
           description: Success
@@ -393,7 +393,7 @@ paths:
   '/#StartTranscriptionJob':
     post:
       operationId: StartTranscriptionJob
-      description: Starts an asynchronous job to transcribe speech to text.
+      description: 'Starts an asynchronous job to transcribe speech to text. Note that en-AU, en-UK, and fr-CA languages are in preview and are only available to whitelisted customers. '
       responses:
         '200':
           description: Success
@@ -434,7 +434,7 @@ paths:
   '/#UpdateVocabulary':
     post:
       operationId: UpdateVocabulary
-      description: Updates an existing vocabulary with new values. The <code>UpdateVocabulary</code> operation overwrites all of the existing information with the values that you provide in the request.
+      description: 'Updates an existing vocabulary with new values. The <code>UpdateVocabulary</code> operation overwrites all of the existing information with the values that you provide in the request. Note that vocabularies for en-AU, en-UK, and fr-CA languages that are in preview are not available. In the console, the vocabulary section will be greyed-out and SDK will return error message.'
       responses:
         '200':
           description: Success
@@ -707,6 +707,9 @@ definitions:
     enum:
       - en-US
       - es-US
+      - en-AU
+      - fr-CA
+      - en-UK
   Phrases:
     type: array
     items:
@@ -763,7 +766,7 @@ definitions:
       Settings:
         $ref: '#/definitions/Settings'
         description: 'Optional settings for the transcription job. Use these settings to turn on speaker recognition, to set the maximum number of speakers that should be identified and to specify a custom vocabulary to use when processing the transcription job.'
-    description: Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation.
+    description: 'Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation. Note that en-AU, en-UK, and fr-CA languages are in preview and are only available to whitelisted customers.'
   Uri:
     type: string
     minLength: 1
@@ -870,7 +873,7 @@ definitions:
       OutputLocationType:
         $ref: '#/definitions/OutputLocationType'
         description: <p>Indicates the location of the output of the transcription job.</p> <p>If the value is <code>CUSTOMER_BUCKET</code> then the location is the S3 bucket specified in the <code>outputBucketName</code> field when the transcription job was started with the <code>StartTranscriptionJob</code> operation.</p> <p>If the value is <code>SERVICE_BUCKET</code> then the output is stored by Amazon Transcribe and can be retrieved using the URI in the <code>GetTranscriptionJob</code> response's <code>TranscriptFileUri</code> field.</p>
-    description: Provides a summary of information about a transcription job.
+    description: 'Provides a summary of information about a transcription job. Note that en-AU, en-UK, and fr-CA languages are in preview and are only available to whitelisted customers.'
   VocabularyInfo:
     type: object
     properties:
@@ -886,4 +889,4 @@ definitions:
       VocabularyState:
         $ref: '#/definitions/VocabularyState'
         description: The processing state of the vocabulary. If the state is <code>READY</code> you can use the vocabulary in a <code>StartTranscriptionJob</code> request.
-    description: Provides information about a custom vocabulary.
+    description: 'Provides information about a custom vocabulary. Note that vocabularies for en-AU, en-UK, and fr-CA languages that are in preview are not available. In the console, the vocabulary section will be greyed-out and SDK will return error message.'
