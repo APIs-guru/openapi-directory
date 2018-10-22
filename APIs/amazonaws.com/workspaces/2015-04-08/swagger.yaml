@@ -942,48 +942,12 @@ definitions:
       GroupIds:
         $ref: '#/definitions/IpGroupIdList'
         description: The IDs of one or more IP access control groups.
-  InvalidParameterValuesException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The exception error message.
-    description: One or more parameter values are not valid.
-  ResourceNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The resource could not be found.
-      ResourceId:
-        $ref: '#/definitions/NonEmptyString'
-        description: The ID of the resource that could not be found.
-    description: The resource could not be found.
-  ResourceLimitExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The exception error message.
-    description: Your resource limits have been exceeded.
-  InvalidResourceStateException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The state of the resource is not valid for this operation.
-  AccessDeniedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The user is not authorized to access a resource.
-  OperationNotSupportedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: This operation is not supported.
+  InvalidParameterValuesException: {}
+  ResourceNotFoundException: {}
+  ResourceLimitExceededException: {}
+  InvalidResourceStateException: {}
+  AccessDeniedException: {}
+  OperationNotSupportedException: {}
   AuthorizeIpRulesResult:
     type: object
     properties: {}
@@ -1019,18 +983,8 @@ definitions:
       UserRules:
         $ref: '#/definitions/IpRuleList'
         description: The rules to add to the group.
-  ResourceAlreadyExistsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The specified resource already exists.
-  ResourceCreationFailedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The resource could not be created.
+  ResourceAlreadyExistsException: {}
+  ResourceCreationFailedException: {}
   CreateTagsResult:
     type: object
     properties: {}
@@ -1074,12 +1028,7 @@ definitions:
       GroupId:
         $ref: '#/definitions/IpGroupId'
         description: The ID of the IP access control group.
-  ResourceAssociatedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The resource is associated with a directory.
+  ResourceAssociatedException: {}
   DeleteTagsResult:
     type: object
     properties: {}
@@ -1199,16 +1148,7 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: The token for the next set of results. (You received this token from a previous call.)
-  ResourceUnavailableException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The exception error message.
-      ResourceId:
-        $ref: '#/definitions/NonEmptyString'
-        description: The identifier of the resource that is not available.
-    description: The specified resource is not available.
+  ResourceUnavailableException: {}
   DescribeWorkspacesConnectionStatusResult:
     type: object
     properties:
@@ -1257,18 +1197,8 @@ definitions:
       WorkspaceProperties:
         $ref: '#/definitions/WorkspaceProperties'
         description: The properties of the WorkSpace.
-  OperationInProgressException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The properties of this WorkSpace are currently being modified. Try again in a moment.
-  UnsupportedWorkspaceConfigurationException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'The configuration of this WorkSpace is not supported for this operation. For more information, see the <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/">Amazon WorkSpaces Administration Guide</a>. '
+  OperationInProgressException: {}
+  UnsupportedWorkspaceConfigurationException: {}
   ModifyWorkspaceStateResult:
     type: object
     properties: {}
@@ -1387,8 +1317,6 @@ definitions:
   ARN:
     type: string
     pattern: '^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$'
-  ExceptionMessage:
-    type: string
   Alias:
     type: string
   DirectoryId:
@@ -1455,6 +1383,8 @@ definitions:
       - PERFORMANCE
       - POWER
       - GRAPHICS
+      - POWERPRO
+      - GRAPHICSPRO
   ComputeType:
     type: object
     properties:

@@ -4683,6 +4683,12 @@ definitions:
       AssociationName:
         $ref: '#/definitions/AssociationName'
         description: Specify a descriptive name for the association.
+      MaxErrors:
+        $ref: '#/definitions/MaxErrors'
+        description: '<p>The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received.</p> <p>Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won''t be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.</p>'
+      MaxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: '<p>The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time.</p> <p>If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.</p>'
   AssociationAlreadyExists: {}
   AssociationLimitExceeded: {}
   InvalidDocument: {}
@@ -5375,7 +5381,7 @@ definitions:
         description: '<p>This is a legacy method. We recommend that you don''t use this method. Instead, use the <a>InstanceInformationFilter</a> action. The <code>InstanceInformationFilter</code> action enables you to return instance information by using tags that are specified as a key-value mapping. </p> <p>If you do use this method, then you can''t use the <code>InstanceInformationFilter</code> action. Using this method and the <code>InstanceInformationFilter</code> action causes an exception error. </p>'
       Filters:
         $ref: '#/definitions/InstanceInformationStringFilterList'
-        description: One or more filters. Use a filter to return a more specific list of instances.
+        description: One or more filters. Use a filter to return a more specific list of instances. You can filter on Amazon EC2 tag. Specify tags by using a key-value mapping.
       MaxResults:
         $ref: '#/definitions/MaxResultsEC2Compatible'
         description: 'The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results. '
@@ -5437,7 +5443,7 @@ definitions:
     properties:
       Patches:
         $ref: '#/definitions/PatchComplianceDataList'
-        description: '<p>Each entry in the array is a structure containing:</p> <p>Title (string)</p> <p>KBId (string)</p> <p>Classification (string)</p> <p>Severity (string)</p> <p>State (string: "INSTALLED", "INSTALLED OTHER", "MISSING", "NOT APPLICABLE", "FAILED")</p> <p>InstalledTime (DateTime)</p> <p>InstalledBy (string)</p>'
+        description: '<p>Each entry in the array is a structure containing:</p> <p>Title (string)</p> <p>KBId (string)</p> <p>Classification (string)</p> <p>Severity (string)</p> <p>State (string, such as "INSTALLED" or "FAILED")</p> <p>InstalledTime (DateTime)</p> <p>InstalledBy (string)</p>'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
@@ -5752,7 +5758,7 @@ definitions:
         description: The number of instances with patches installed that aren't defined in the patch baseline.
       InstancesWithInstalledRejectedPatches:
         $ref: '#/definitions/InstancesCount'
-        description: '<p>The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of <i>InstalledRejected</i> were typically installed before they were added to a RejectedPatches list.</p> <note> <p>If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero).</p> </note>'
+        description: '<p>The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of <i>INSTALLED_REJECTED</i> were typically installed before they were added to a RejectedPatches list.</p> <note> <p>If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero).</p> </note>'
       InstancesWithMissingPatches:
         $ref: '#/definitions/Integer'
         description: The number of instances with missing patches from the patch baseline.
@@ -6988,7 +6994,7 @@ definitions:
     properties:
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
-        description: The id of the task in the Maintenance Window.
+        description: The ID of the task in the Maintenance Window.
   RegisterTaskWithMaintenanceWindowRequest:
     type: object
     required:
@@ -7317,6 +7323,12 @@ definitions:
       AssociationVersion:
         $ref: '#/definitions/AssociationVersion'
         description: 'This parameter is provided for concurrency control purposes. You must specify the latest association version in the service. If you want to ensure that this request succeeds, either specify <code>$LATEST</code>, or omit this parameter.'
+      MaxErrors:
+        $ref: '#/definitions/MaxErrors'
+        description: '<p>The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received.</p> <p>Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won''t be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.</p>'
+      MaxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: '<p>The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time.</p> <p>If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.</p>'
   InvalidUpdate: {}
   AssociationVersionLimitExceeded: {}
   UpdateAssociationStatusResult:
@@ -7924,6 +7936,16 @@ definitions:
         $ref: '#/definitions/S3OutputLocation'
         description: An Amazon S3 bucket where you want to store the results of this request.
     description: An Amazon S3 bucket where you want to store the results of this request.
+  MaxErrors:
+    type: string
+    pattern: '^([1-9][0-9]*|[0]|[1-9][0-9]%|[0-9]%|100%)$'
+    minLength: 1
+    maxLength: 7
+  MaxConcurrency:
+    type: string
+    pattern: '^([1-9][0-9]*|[1-9][0-9]%|[1-9]%|100%)$'
+    minLength: 1
+    maxLength: 7
   AssociationDescription:
     type: object
     properties:
@@ -7975,6 +7997,12 @@ definitions:
       AssociationName:
         $ref: '#/definitions/AssociationName'
         description: The association name.
+      MaxErrors:
+        $ref: '#/definitions/MaxErrors'
+        description: '<p>The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received.</p> <p>Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won''t be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.</p>'
+      MaxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: '<p>The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time.</p> <p>If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.</p>'
     description: Describes the parameters for a document.
   AssociationDescriptionList:
     type: array
@@ -8234,6 +8262,12 @@ definitions:
       AssociationName:
         $ref: '#/definitions/AssociationName'
         description: The name specified for the association version when the association version was created.
+      MaxErrors:
+        $ref: '#/definitions/MaxErrors'
+        description: '<p>The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received.</p> <p>Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won''t be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.</p>'
+      MaxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: '<p>The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time.</p> <p>If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.</p>'
     description: Information about the association version.
   AssociationVersionList:
     type: array
@@ -8308,16 +8342,6 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: A boolean value indicating whether the resolved target list is truncated.
     description: Information about targets that resolved during the Automation execution.
-  MaxConcurrency:
-    type: string
-    pattern: '^([1-9][0-9]*|[1-9][0-9]%|[1-9]%|100%)$'
-    minLength: 1
-    maxLength: 7
-  MaxErrors:
-    type: string
-    pattern: '^([1-9][0-9]*|[0]|[1-9][0-9]%|[0-9]%|100%)$'
-    minLength: 1
-    maxLength: 7
   AutomationExecution:
     type: object
     properties:
@@ -9142,6 +9166,12 @@ definitions:
       AssociationName:
         $ref: '#/definitions/AssociationName'
         description: Specify a descriptive name for the association.
+      MaxErrors:
+        $ref: '#/definitions/MaxErrors'
+        description: '<p>The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received.</p> <p>Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won''t be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.</p>'
+      MaxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: '<p>The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time.</p> <p>If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.</p>'
     description: Describes the association of a Systems Manager document and an instance.
   FailedCreateAssociationList:
     type: array
@@ -11406,7 +11436,7 @@ definitions:
         description: 'The severity of the patch (for example, Critical, Important, Moderate).'
       State:
         $ref: '#/definitions/PatchComplianceDataState'
-        description: 'The state of the patch on the instance (INSTALLED, INSTALLED_OTHER, MISSING, NOT_APPLICABLE or FAILED).'
+        description: '<p>The state of the patch on the instance, such as INSTALLED or FAILED.</p> <p>For descriptions of each patch state, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-about.html#sysman-compliance-monitor-patch">About Patch Compliance</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
       InstalledTime:
         $ref: '#/definitions/DateTime'
         description: The date/time the patch was installed on the instance. Note that not all operating systems provide this level of information.

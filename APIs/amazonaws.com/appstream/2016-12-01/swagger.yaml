@@ -148,6 +148,60 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#BatchAssociateUserStack':
+    post:
+      operationId: BatchAssociateUserStack
+      description: Associates the specified users with the specified stacks. Users in a user pool cannot be assigned to stacks with fleets that are joined to an Active Directory domain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchAssociateUserStackResult'
+        '480':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchAssociateUserStackRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#BatchDisassociateUserStack':
+    post:
+      operationId: BatchDisassociateUserStack
+      description: Disassociates the specified users from the specified stacks.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchDisassociateUserStackResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchDisassociateUserStackRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CopyImage':
     post:
       operationId: CopyImage
@@ -491,6 +545,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateUser':
+    post:
+      operationId: CreateUser
+      description: Creates a new user in the user pool.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateUserResult'
+        '480':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '481':
+          description: InvalidAccountStatusException
+          schema:
+            $ref: '#/definitions/InvalidAccountStatusException'
+        '482':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateUserRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteDirectoryConfig':
     post:
       operationId: DeleteDirectoryConfig
@@ -699,6 +798,35 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteStackRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteUser':
+    post:
+      operationId: DeleteUser
+      description: Deletes a user from the user pool.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteUserResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteUserRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -969,6 +1097,97 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeUserStackAssociations':
+    post:
+      operationId: DescribeUserStackAssociations
+      description: '<p>Retrieves a list that describes the UserStackAssociation objects. You must specify either or both of the following:</p> <ul> <li> <p>The stack name</p> </li> <li> <p>The user name (email address of the user associated with the stack) and the authentication type for the user</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeUserStackAssociationsResult'
+        '480':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeUserStackAssociationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeUsers':
+    post:
+      operationId: DescribeUsers
+      description: 'Retrieves a list that describes one or more specified users in the user pool, if user names are provided. Otherwise, all users in the user pool are described.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeUsersResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeUsersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisableUser':
+    post:
+      operationId: DisableUser
+      description: 'Disables the specified user in the user pool. Users can''t sign in to AppStream 2.0 until they are re-enabled. This action does not delete the user. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisableUserResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisableUserRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DisassociateFleet':
     post:
       operationId: DisassociateFleet
@@ -996,6 +1215,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#EnableUser':
+    post:
+      operationId: EnableUser
+      description: 'Enables a user in the user pool. After being enabled, users can sign in to AppStream 2.0 and open applications from the stacks to which they are assigned.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnableUserResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidAccountStatusException
+          schema:
+            $ref: '#/definitions/InvalidAccountStatusException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/EnableUserRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1554,6 +1806,34 @@ definitions:
   ConcurrentModificationException: {}
   IncompatibleImageException: {}
   OperationNotPermittedException: {}
+  BatchAssociateUserStackResult:
+    type: object
+    properties:
+      errors:
+        $ref: '#/definitions/UserStackAssociationErrorList'
+        description: The list of UserStackAssociationError objects.
+  BatchAssociateUserStackRequest:
+    type: object
+    required:
+      - UserStackAssociations
+    properties:
+      UserStackAssociations:
+        $ref: '#/definitions/UserStackAssociationList'
+        description: The list of UserStackAssociation objects.
+  BatchDisassociateUserStackResult:
+    type: object
+    properties:
+      errors:
+        $ref: '#/definitions/UserStackAssociationErrorList'
+        description: The list of UserStackAssociationError objects.
+  BatchDisassociateUserStackRequest:
+    type: object
+    required:
+      - UserStackAssociations
+    properties:
+      UserStackAssociations:
+        $ref: '#/definitions/UserStackAssociationList'
+        description: The list of UserStackAssociation objects.
   CopyImageResponse:
     type: object
     properties:
@@ -1788,6 +2068,30 @@ definitions:
       SessionContext:
         $ref: '#/definitions/String'
         description: 'The session context. For more information, see <a href="http://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters">Session Context</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.'
+  CreateUserResult:
+    type: object
+    properties: {}
+  CreateUserRequest:
+    type: object
+    required:
+      - UserName
+      - AuthenticationType
+    properties:
+      UserName:
+        $ref: '#/definitions/Username'
+        description: The email address of the user.
+      MessageAction:
+        $ref: '#/definitions/MessageAction'
+        description: '<p>The action to take for the welcome email that is sent to a user after the user is created in the user pool. If you specify SUPPRESS, no email is sent. If you specify RESEND, do not specify the first name or last name of the user. If the value is null, the email is sent. </p> <note> <p>The temporary password in the welcome email is valid for only 7 days. If users don’t set their passwords within 7 days, you must send them a new welcome email.</p> </note>'
+      FirstName:
+        $ref: '#/definitions/UserAttributeValue'
+        description: 'The first name, or given name, of the user.'
+      LastName:
+        $ref: '#/definitions/UserAttributeValue'
+        description: 'The last name, or surname, of the user.'
+      AuthenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: 'The authentication type for the user. You must specify USERPOOL. '
   DeleteDirectoryConfigResult:
     type: object
     properties: {}
@@ -1865,6 +2169,21 @@ definitions:
       Name:
         $ref: '#/definitions/String'
         description: The name of the stack.
+  DeleteUserResult:
+    type: object
+    properties: {}
+  DeleteUserRequest:
+    type: object
+    required:
+      - UserName
+      - AuthenticationType
+    properties:
+      UserName:
+        $ref: '#/definitions/Username'
+        description: The email address of the user.
+      AuthenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: The authentication type for the user. You must specify USERPOOL.
   DescribeDirectoryConfigsResult:
     type: object
     properties:
@@ -1936,7 +2255,7 @@ definitions:
         description: 'The permissions for a private image that you own. '
       NextToken:
         $ref: '#/definitions/String'
-        description: 'The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
   DescribeImagePermissionsRequest:
     type: object
     required:
@@ -1947,13 +2266,13 @@ definitions:
         description: 'The name of the private image for which to describe permissions. The image must be one that you own. '
       MaxResults:
         $ref: '#/definitions/MaxResults'
-        description: The maximum size of each results page.
+        description: The maximum size of each page of results.
       SharedAwsAccountIds:
         $ref: '#/definitions/AwsAccountIdList'
         description: The 12-digit ID of one or more AWS accounts with which the image is shared.
       NextToken:
         $ref: '#/definitions/String'
-        description: 'The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
   DescribeImagesResult:
     type: object
     properties:
@@ -1962,7 +2281,7 @@ definitions:
         description: Information about the images.
       NextToken:
         $ref: '#/definitions/String'
-        description: 'The pagination token to use to retrieve the next page of results. If there are no more pages, this value is null.'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
   DescribeImagesRequest:
     type: object
     properties:
@@ -1977,7 +2296,7 @@ definitions:
         description: 'The type of image (public, private, or shared) to describe. '
       NextToken:
         $ref: '#/definitions/String'
-        description: 'The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
       MaxResults:
         $ref: '#/definitions/DescribeImagesMaxResults'
         description: The maximum size of each page of results.
@@ -2032,6 +2351,71 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+  DescribeUserStackAssociationsResult:
+    type: object
+    properties:
+      UserStackAssociations:
+        $ref: '#/definitions/UserStackAssociationList'
+        description: The UserStackAssociation objects.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  DescribeUserStackAssociationsRequest:
+    type: object
+    properties:
+      StackName:
+        $ref: '#/definitions/String'
+        description: The name of the stack that is associated with the user.
+      UserName:
+        $ref: '#/definitions/Username'
+        description: The email address of the user who is associated with the stack.
+      AuthenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: The authentication type for the user who is associated with the stack. You must specify USERPOOL.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum size of each page of results.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+  DescribeUsersResult:
+    type: object
+    properties:
+      Users:
+        $ref: '#/definitions/UserList'
+        description: Information about users in the user pool.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  DescribeUsersRequest:
+    type: object
+    required:
+      - AuthenticationType
+    properties:
+      AuthenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: The authentication type for the users in the user pool to describe. You must specify USERPOOL.
+      MaxResults:
+        $ref: '#/definitions/Integer'
+        description: The maximum size of each page of results.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+  DisableUserResult:
+    type: object
+    properties: {}
+  DisableUserRequest:
+    type: object
+    required:
+      - UserName
+      - AuthenticationType
+    properties:
+      UserName:
+        $ref: '#/definitions/Username'
+        description: The email address of the user.
+      AuthenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: The authentication type for the user. You must specify USERPOOL.
   DisassociateFleetResult:
     type: object
     properties: {}
@@ -2047,6 +2431,21 @@ definitions:
       StackName:
         $ref: '#/definitions/String'
         description: The name of the stack.
+  EnableUserResult:
+    type: object
+    properties: {}
+  EnableUserRequest:
+    type: object
+    required:
+      - UserName
+      - AuthenticationType
+    properties:
+      UserName:
+        $ref: '#/definitions/Username'
+        description: The email address of the user.
+      AuthenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: The authentication type for the user. You must specify USERPOOL.
   ExpireSessionResult:
     type: object
     properties: {}
@@ -2440,6 +2839,14 @@ definitions:
       $ref: '#/definitions/AwsAccountId'
     minItems: 1
     maxItems: 5
+  UserStackAssociationList:
+    type: array
+    items:
+      $ref: '#/definitions/UserStackAssociation'
+  UserStackAssociationErrorList:
+    type: array
+    items:
+      $ref: '#/definitions/UserStackAssociationError'
   BooleanObject:
     type: boolean
   Integer:
@@ -2723,6 +3130,22 @@ definitions:
     pattern: '[\w+=,.@-]*'
     minLength: 2
     maxLength: 32
+  Username:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
+    minLength: 1
+    maxLength: 128
+    format: password
+  MessageAction:
+    type: string
+    enum:
+      - SUPPRESS
+      - RESEND
+  UserAttributeValue:
+    type: string
+    pattern: '^[A-Za-z0-9_\-\s]+$'
+    maxLength: 2048
+    format: password
   Image:
     type: object
     required:
@@ -2831,6 +3254,10 @@ definitions:
     description: The stacks.
     items:
       $ref: '#/definitions/Stack'
+  UserList:
+    type: array
+    items:
+      $ref: '#/definitions/User'
   Domain:
     type: string
     description: GSuite domain for GDrive integration.
@@ -3152,6 +3579,36 @@ definitions:
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 0
     maxLength: 256
+  User:
+    type: object
+    required:
+      - AuthenticationType
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the user.
+      UserName:
+        $ref: '#/definitions/Username'
+        description: The email address of the user.
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the user in the user pool is enabled.
+      Status:
+        $ref: '#/definitions/String'
+        description: '<p>The status of the user in the user pool. The status can be one of the following:</p> <ul> <li> <p>UNCONFIRMED – The user is created but not confirmed.</p> </li> <li> <p>CONFIRMED – The user is confirmed.</p> </li> <li> <p>ARCHIVED – The user is no longer active.</p> </li> <li> <p>COMPROMISED – The user is disabled because of a potential security threat.</p> </li> <li> <p>UNKNOWN – The user status is not known.</p> </li> </ul>'
+      FirstName:
+        $ref: '#/definitions/UserAttributeValue'
+        description: 'The first name, or given name, of the user.'
+      LastName:
+        $ref: '#/definitions/UserAttributeValue'
+        description: 'The last name, or surname, of the user.'
+      CreatedTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time the user was created in the user pool.
+      AuthenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: The authentication type for the user.
+    description: Describes a user in the user pool.
   UserSetting:
     type: object
     required:
@@ -3165,3 +3622,42 @@ definitions:
         $ref: '#/definitions/Permission'
         description: Indicates whether the action is enabled or disabled.
     description: Describes an action and whether the action is enabled or disabled for users during their streaming sessions.
+  UserStackAssociation:
+    type: object
+    required:
+      - StackName
+      - UserName
+      - AuthenticationType
+    properties:
+      StackName:
+        $ref: '#/definitions/String'
+        description: The name of the stack that is associated with the user.
+      UserName:
+        $ref: '#/definitions/Username'
+        description: The email address of the user who is associated with the stack.
+      AuthenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: The authentication type for the user.
+      SendEmailNotification:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether a welcome email is sent to a user after the user is created in the user pool.
+    description: Describes a user in the user pool and the associated stack.
+  UserStackAssociationErrorCode:
+    type: string
+    enum:
+      - STACK_NOT_FOUND
+      - USER_NAME_NOT_FOUND
+      - INTERNAL_ERROR
+  UserStackAssociationError:
+    type: object
+    properties:
+      UserStackAssociation:
+        $ref: '#/definitions/UserStackAssociation'
+        description: Information about the user and associated stack.
+      ErrorCode:
+        $ref: '#/definitions/UserStackAssociationErrorCode'
+        description: The error code for the error that is returned when a user can’t be associated with or disassociated from a stack.
+      ErrorMessage:
+        $ref: '#/definitions/String'
+        description: The error message for the error that is returned when a user can’t be associated with or disassociated from a stack.
+    description: 'Describes the error that is returned when a user can’t be associated with or disassociated from a stack. '
