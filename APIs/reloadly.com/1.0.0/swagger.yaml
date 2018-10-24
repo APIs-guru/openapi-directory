@@ -42,7 +42,7 @@ info:
         -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik0wWXpRa" \
     ```
 
-    Access tokens have a finite lifetime. The `expires_in` field in the <a href="#get-access-token-response">get access token response</a> indicates the lifetime, in seconds, of the access token. 
+    Access tokens have a finite lifetime. The `expires_in` field in the <a href="#get-access-token-response">get access token response</a> indicates the lifetime, in seconds, of the access token.
     For example, an expiry value of 3600 indicates that the access token expires in one hour from the time the response was generated.
 
     To detect when an access token expires, write code to either :
@@ -257,7 +257,7 @@ info:
       "infoLink": "ERROR_DOCUMENTATION_LINK",
       "path": "/accounts/verify",
       "errorCode": "ERROR_CODE",
-      
+
       // Some types of errors also include a details array:
       "details": [
         {
@@ -386,7 +386,7 @@ info:
     This excerpt from a sample response shows an array of HATEOAS links:<br /><br />
 
     ```
-    {  
+    {
       "links": [{
         "href": "https://api.reloadly.com/payments/4",
         "rel": "self",
@@ -401,12 +401,12 @@ info:
 
     You can use the links in this example, as follow :
 
-    - Use the <strong>`self`</strong> link to get more information about the request. Combine the method and the target URL to make the call : 
+    - Use the <strong>`self`</strong> link to get more information about the request. Combine the method and the target URL to make the call :
         ```
         GET https://api.reloadly.com/payments/4
         ```
 
-    - Use the <strong>`refund`</strong> link to request a refund : 
+    - Use the <strong>`refund`</strong> link to request a refund :
         ```
         POST https://api.reloadly.com/payments/4/refund
         ```
@@ -633,13 +633,13 @@ info:
           <p>On the <strong>Body</strong> tab, select <strong>raw</strong> and enter this information : </p>
         <code>
           {
-          
+
            "client_id": "YOUR_CLIENT_ID",
-           
+
            "client_secret": "YOUR_CLIENT_SECRET",
-           
+
            "grant_type": "client_credentials",
-           
+
            "audience": "https://topups-sandbox.reloadly.com"
           }
        </li>
@@ -650,13 +650,13 @@ info:
           <p>View the sample response : </p>
         <code>
          {
-         
+
           "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSU",
-        
+
           "scope": "send-topups read-topups-history read-operators read-promotions",
-        
+
           "expires_in": 86400,
-        
+
           "token_type": "Bearer"
          }
        </li>
@@ -883,7 +883,7 @@ paths:
           headers: {}
       summary: Retrieve account operator commission by operator id
       tags: []
-  /operators/auto-detect/phone/36377111/country-code/HT?&includeBundles=true:
+  /operators/auto-detect/phone/36377111/country-code/HT:
     get:
       description: |-
         - NOTE: Supports phone number without country dialing code or with country dialing code.
@@ -904,7 +904,7 @@ paths:
           headers: {}
       summary: Auto-detect mobile operator for given phone number
       tags: []
-  /operators/commissions?page=1&size=3:
+  /operators/commissions:
     get:
       description: ''
       parameters: []
@@ -984,7 +984,7 @@ paths:
           headers: {}
       summary: List available operators by (ISO Alpha-2) country code
       tags: []
-  /operators?page=1&size=3&suggestedAmounts=true&suggestedAmountsMap=true&includeBundles=true:
+  /operators:
     get:
       description: ''
       parameters: []
@@ -1090,7 +1090,7 @@ paths:
           headers: {}
       summary: Retrieve topup operator promotion by id
       tags: []
-  /promotions?page=1&size=3:
+  /promotions:
     get:
       description: ''
       parameters: []
@@ -1206,7 +1206,7 @@ paths:
           headers: {}
       summary: Send Topup
       tags: []
-  '/topups/reports/transactions?page=1&size=1&startTime=2018-06-01 00:00:00&endTime=2018-06-26 23:59:59':
+  '/topups/reports/transactions':
     get:
       description: '- Endpoint : `/topups/reports/transactions?page=1&size=1&startTime=2018-06-01 00:00:00&endTime=2018-06-26 23:59:59`'
       parameters: []
