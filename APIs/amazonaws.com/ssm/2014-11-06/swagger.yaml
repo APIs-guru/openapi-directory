@@ -4689,6 +4689,9 @@ definitions:
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
         description: '<p>The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time.</p> <p>If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.</p>'
+      ComplianceSeverity:
+        $ref: '#/definitions/AssociationComplianceSeverity'
+        description: The severity level to assign to the association.
   AssociationAlreadyExists: {}
   AssociationLimitExceeded: {}
   InvalidDocument: {}
@@ -7329,6 +7332,9 @@ definitions:
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
         description: '<p>The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time.</p> <p>If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.</p>'
+      ComplianceSeverity:
+        $ref: '#/definitions/AssociationComplianceSeverity'
+        description: The severity level to assign to the association.
   InvalidUpdate: {}
   AssociationVersionLimitExceeded: {}
   UpdateAssociationStatusResult:
@@ -7900,6 +7906,14 @@ definitions:
         $ref: '#/definitions/AssociationName'
         description: The association name.
     description: Describes an association of a Systems Manager document and an instance.
+  AssociationComplianceSeverity:
+    type: string
+    enum:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - UNSPECIFIED
   AssociationStatus:
     type: object
     required:
@@ -8003,6 +8017,9 @@ definitions:
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
         description: '<p>The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time.</p> <p>If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.</p>'
+      ComplianceSeverity:
+        $ref: '#/definitions/AssociationComplianceSeverity'
+        description: The severity level that is assigned to the association.
     description: Describes the parameters for a document.
   AssociationDescriptionList:
     type: array
@@ -8268,6 +8285,9 @@ definitions:
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
         description: '<p>The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time.</p> <p>If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.</p>'
+      ComplianceSeverity:
+        $ref: '#/definitions/AssociationComplianceSeverity'
+        description: The severity level that is assigned to the association.
     description: Information about the association version.
   AssociationVersionList:
     type: array
@@ -9172,6 +9192,9 @@ definitions:
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
         description: '<p>The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time.</p> <p>If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.</p>'
+      ComplianceSeverity:
+        $ref: '#/definitions/AssociationComplianceSeverity'
+        description: The severity level to assign to the association.
     description: Describes the association of a Systems Manager document and an instance.
   FailedCreateAssociationList:
     type: array

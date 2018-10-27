@@ -155,7 +155,7 @@ paths:
   '/#CreateProject':
     post:
       operationId: CreateProject
-      description: 'Reserved for future use. To create a project, use the AWS CodeStar console.'
+      description: 'Creates a project, including project resources. This action creates a project based on a submitted project request. A set of source code files and a toolchain template file can be included with the project request. If these are not provided, an empty project is created.'
       responses:
         '200':
           description: Success
@@ -845,13 +845,13 @@ definitions:
     properties:
       id:
         $ref: '#/definitions/ProjectId'
-        description: Reserved for future use.
+        description: The ID of the project.
       arn:
         $ref: '#/definitions/ProjectArn'
-        description: Reserved for future use.
+        description: The Amazon Resource Name (ARN) of the created project.
       clientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
-        description: Reserved for future use.
+        description: A user- or system-generated token that identifies the entity that requested project creation.
       projectTemplateId:
         $ref: '#/definitions/ProjectTemplateId'
         description: Reserved for future use.
@@ -863,16 +863,22 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/ProjectName'
-        description: Reserved for future use.
+        description: The display name for the project to be created in AWS CodeStar.
       id:
         $ref: '#/definitions/ProjectId'
-        description: Reserved for future use.
+        description: The ID of the project to be created in AWS CodeStar.
       description:
         $ref: '#/definitions/ProjectDescription'
-        description: Reserved for future use.
+        description: 'The description of the project, if any.'
       clientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
-        description: Reserved for future use.
+        description: A user- or system-generated token that identifies the entity that requested project creation. This token can be used to repeat the request.
+      sourceCode:
+        $ref: '#/definitions/SourceCode'
+        description: 'A list of the Code objects submitted with the project request. If this parameter is specified, the request must also include the toolchain parameter.'
+      toolchain:
+        $ref: '#/definitions/Toolchain'
+        description: 'The name of the toolchain template file submitted with the project request. If this parameter is specified, the request must also include the sourceCode parameter.'
       tags:
         $ref: '#/definitions/Tags'
         description: The tags created for the project.
@@ -1300,6 +1306,100 @@ definitions:
     pattern: ^(Owner|Viewer|Contributor)$
   RemoteAccessAllowed:
     type: boolean
+  BucketKey:
+    type: string
+  BucketName:
+    type: string
+    minLength: 3
+    maxLength: 63
+  CodeSource:
+    type: object
+    required:
+      - s3
+    properties:
+      s3:
+        $ref: '#/definitions/S3Location'
+        description: 'Information about the Amazon S3 location where the source code files provided with the project request are stored. '
+    description: The location where the source code files provided with the project request are stored. AWS CodeStar retrieves the files during project creation.
+  CodeDestination:
+    type: object
+    properties:
+      codeCommit:
+        $ref: '#/definitions/CodeCommitCodeDestination'
+        description: Information about the AWS CodeCommit repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.
+      gitHub:
+        $ref: '#/definitions/GitHubCodeDestination'
+        description: Information about the GitHub repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.
+    description: 'The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit or GitHub. After AWS CodeStar provisions the new repository, the source code files provided with the project request are placed in the repository.'
+  Code:
+    type: object
+    required:
+      - source
+      - destination
+    properties:
+      source:
+        $ref: '#/definitions/CodeSource'
+        description: The location where the source code files provided with the project request are stored. AWS CodeStar retrieves the files during project creation.
+      destination:
+        $ref: '#/definitions/CodeDestination'
+        description: 'The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit or GitHub. After AWS CodeStar provisions the new repository, the source code files provided with the project request are placed in the repository.'
+    description: Location and destination information about the source code files provided with the project request. The source code is uploaded to the new project source repository after project creation.
+  RepositoryName:
+    type: string
+    pattern: '^\S[\w.-]*$'
+    minLength: 1
+    maxLength: 100
+  CodeCommitCodeDestination:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the AWS CodeCommit repository to be created in AWS CodeStar.
+    description: Information about the AWS CodeCommit repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.
+  GitHubCodeDestination:
+    type: object
+    required:
+      - name
+      - type
+      - owner
+      - privateRepository
+      - issuesEnabled
+      - token
+    properties:
+      name:
+        $ref: '#/definitions/RepositoryName'
+        description: Name of the GitHub repository to be created in AWS CodeStar.
+      description:
+        $ref: '#/definitions/RepositoryDescription'
+        description: Description for the GitHub repository to be created in AWS CodeStar. This description displays in GitHub after the repository is created.
+      type:
+        $ref: '#/definitions/RepositoryType'
+        description: The type of GitHub repository to be created in AWS CodeStar. Valid values are User or Organization.
+      owner:
+        $ref: '#/definitions/RepositoryOwner'
+        description: 'The GitHub username for the owner of the GitHub repository to be created in AWS CodeStar. If this repository should be owned by a GitHub organization, provide its name.'
+      privateRepository:
+        $ref: '#/definitions/RepositoryIsPrivate'
+        description: Whether the GitHub repository is to be a private repository.
+      issuesEnabled:
+        $ref: '#/definitions/RepositoryEnableIssues'
+        description: Whether to enable issues for the GitHub repository.
+      token:
+        $ref: '#/definitions/GitHubPersonalToken'
+        description: The GitHub user's personal access token for the GitHub repository.
+    description: Information about the GitHub repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.
+  S3Location:
+    type: object
+    properties:
+      bucketName:
+        $ref: '#/definitions/BucketName'
+        description: The Amazon S3 bucket name where the source code files provided with the project request are stored.
+      bucketKey:
+        $ref: '#/definitions/BucketKey'
+        description: The Amazon S3 object key where the source code files provided with the project request are stored.
+    description: The Amazon S3 location where the source code files provided with the project request are stored.
   ProjectName:
     type: string
     pattern: ^\S(.*\S)?$
@@ -1311,6 +1411,25 @@ definitions:
     pattern: ^$|^\S(.*\S)?$
     maxLength: 1024
     format: password
+  SourceCode:
+    type: array
+    items:
+      $ref: '#/definitions/Code'
+  Toolchain:
+    type: object
+    required:
+      - source
+    properties:
+      source:
+        $ref: '#/definitions/ToolchainSource'
+        description: The Amazon S3 location where the toolchain template file provided with the project request is stored. AWS CodeStar retrieves the file during project creation.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The service role ARN for AWS CodeStar to use for the toolchain template during stack provisioning.
+      stackParameters:
+        $ref: '#/definitions/TemplateParameterMap'
+        description: 'The list of parameter overrides to be passed into the toolchain template during stack provisioning, if any.'
+    description: The toolchain template file provided with the project request. AWS CodeStar uses the template to provision the toolchain stack in AWS CloudFormation.
   Tags:
     type: array
     items:
@@ -1366,6 +1485,27 @@ definitions:
         $ref: '#/definitions/Reason'
         description: 'In the case of a project creation or deletion failure, a reason for the failure.'
     description: An indication of whether a project creation or deletion is failed or successful.
+  RepositoryDescription:
+    type: string
+    pattern: ^\S(.*\S)?$
+    minLength: 1
+    maxLength: 1000
+  RepositoryType:
+    type: string
+    pattern: ^(user|organization|User|Organization)$
+  RepositoryOwner:
+    type: string
+    pattern: ^\S(.*\S)?$
+    minLength: 1
+    maxLength: 100
+  RepositoryIsPrivate:
+    type: boolean
+  RepositoryEnableIssues:
+    type: boolean
+  GitHubPersonalToken:
+    type: string
+    minLength: 1
+    format: password
   PaginationToken:
     type: string
     pattern: '^[\w/+=]+$'
@@ -1421,6 +1561,10 @@ definitions:
         $ref: '#/definitions/ResourceId'
         description: The Amazon Resource Name (ARN) of the resource.
     description: Information about a resource for a project.
+  RoleArn:
+    type: string
+    minLength: 1
+    maxLength: 1224
   TagKey:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -1450,6 +1594,36 @@ definitions:
         $ref: '#/definitions/RemoteAccessAllowed'
         description: Whether the user is allowed to remotely access project resources using an SSH public/private key pair.
     description: Information about a team member in a project.
+  TemplateParameterKey:
+    type: string
+    pattern: ^\S(.*\S)?$
+    minLength: 1
+    maxLength: 30
+  TemplateParameterValue:
+    type: string
+    pattern: ^\S(.*\S)?$
+    minLength: 1
+    maxLength: 100
+    format: password
+  TemplateParameterMap:
+    type: array
+    maxItems: 25
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TemplateParameterKey'
+        value:
+          $ref: '#/definitions/TemplateParameterValue'
+  ToolchainSource:
+    type: object
+    required:
+      - s3
+    properties:
+      s3:
+        $ref: '#/definitions/S3Location'
+        description: The Amazon S3 bucket where the toolchain template file provided with the project request is stored.
+    description: The Amazon S3 location where the toolchain template file provided with the project request is stored. AWS CodeStar retrieves the file during project creation.
   UserProfileSummary:
     type: object
     properties:

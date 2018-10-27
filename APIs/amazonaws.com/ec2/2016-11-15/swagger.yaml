@@ -172,10 +172,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AdvertiseByoipCidr':
+    post:
+      operationId: AdvertiseByoipCidr
+      description: '<p>Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP).</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from AWS. To minimize down time, you can configure your AWS resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through AWS.</p> <p>It can take a few minutes before traffic to the specified addresses starts routing to AWS because of BGP propagation delays.</p> <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AdvertiseByoipCidrResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AdvertiseByoipCidrRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#AllocateAddress':
     post:
       operationId: AllocateAddress
-      description: '<p>Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account.</p> <p>[EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation.</p> <p>An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account.</p> <p>You can allocate an Elastic IP address from an address pool owned by AWS or from an address pool created from a public IPv4 address range that you have brought to AWS for use with your AWS resources using bring your own IP addresses (BYOIP). For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>[EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation.</p> <p>An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -250,7 +275,7 @@ paths:
   '/#AssignPrivateIpAddresses':
     post:
       operationId: AssignPrivateIpAddresses
-      description: '<p>Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet''s CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about Elastic IP addresses, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>AssignPrivateIpAddresses is available only in EC2-VPC.</p>'
+      description: '<p>Assigns one or more secondary private IP addresses to the specified network interface.</p> <p>You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet''s CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about Elastic IP addresses, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved.</p> <p>Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check <code>network/interfaces/macs/mac/local-ipv4s</code> in the instance metadata to confirm that the remapping is complete.</p>'
       responses:
         '200':
           description: Success
@@ -637,6 +662,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CancelCapacityReservation':
+    post:
+      operationId: CancelCapacityReservation
+      description: '<p>Cancels the specified Capacity Reservation, releases the reserved capacity, and changes the Capacity Reservation''s state to <code>cancelled</code>.</p> <p>Instances running in the reserved capacity continue running until you stop them. Stopped instances that target the Capacity Reservation can no longer launch. Modify these instances to either target a different Capacity Reservation, launch On-Demand Instance capacity, or run in any open Capacity Reservation that has matching attributes and sufficient capacity.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CancelCapacityReservationResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CancelCapacityReservationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CancelConversionTask':
     post:
       operationId: CancelConversionTask
@@ -873,6 +923,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CopySnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateCapacityReservation':
+    post:
+      operationId: CreateCapacityReservation
+      description: '<p>Creates a new Capacity Reservation with the specified attributes.</p> <p>Capacity Reservations enable you to reserve capacity for your Amazon EC2 instances in a specific Availability Zone for any duration. This gives you the flexibility to selectively add capacity reservations and still get the Regional RI discounts for that usage. By creating Capacity Reservations, you ensure that you always have access to Amazon EC2 capacity when you need it, for as long as you need it. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html">Capacity Reservations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Your request to create a Capacity Reservation could fail if Amazon EC2 does not have sufficient capacity to fulfill the request. If your request fails due to Amazon EC2 capacity constraints, either try again at a later time, try in a different Availability Zone, or request a smaller capacity reservation. If your application is flexible across instance types and sizes, try to create a Capacity Reservation with different instance attributes.</p> <p>Your request could also fail if the requested quantity exceeds your On-Demand Instance limit for the selected instance type. If your request fails due to limit constraints, increase your On-Demand Instance limit for the required instance type and try again. For more information about increasing your instance limits, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 Service Limits</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateCapacityReservationResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCapacityReservationRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2560,6 +2635,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeprovisionByoipCidr':
+    post:
+      operationId: DeprovisionByoipCidr
+      description: '<p>Releases the specified address range that you provisioned for use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.</p> <p>Before you can release an address range, you must stop advertising it using <a>WithdrawByoipCidr</a> and you must not have any IP addresses allocated from its address range.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeprovisionByoipCidrResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeprovisionByoipCidrRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeregisterImage':
     post:
       operationId: DeregisterImage
@@ -2711,6 +2811,56 @@ paths:
               matcher: pathAny
               state: failure
               argument: 'BundleTasks[].State'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeByoipCidrs':
+    post:
+      operationId: DescribeByoipCidrs
+      description: '<p>Describes the IP address ranges that were specified in calls to <a>ProvisionByoipCidr</a>.</p> <p>To describe the address pools that were created when you provisioned the address ranges, use <a>DescribePublicIpv4Pools</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeByoipCidrsResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeByoipCidrsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeCapacityReservations':
+    post:
+      operationId: DescribeCapacityReservations
+      description: Describes one or more of your Capacity Reservations. The results describe only the Capacity Reservations in the AWS Region that you're currently using.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeCapacityReservationsResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeCapacityReservationsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3987,6 +4137,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribePublicIpv4Pools':
+    post:
+      operationId: DescribePublicIpv4Pools
+      description: Describes the specified IPv4 address pools.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribePublicIpv4PoolsResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribePublicIpv4PoolsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeRegions':
     post:
       operationId: DescribeRegions
@@ -4374,7 +4549,7 @@ paths:
   '/#DescribeSpotFleetRequestHistory':
     post:
       operationId: DescribeSpotFleetRequestHistory
-      description: <p>Describes the events for the specified Spot Fleet request during the specified time.</p> <p>Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event.</p>
+      description: <p>Describes the events for the specified Spot Fleet request during the specified time.</p> <p>Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. Spot Fleet events are available for 48 hours.</p>
       responses:
         '200':
           description: Success
@@ -5861,6 +6036,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyCapacityReservation':
+    post:
+      operationId: ModifyCapacityReservation
+      description: 'Modifies a Capacity Reservation''s capacity and the conditions under which it is to be released. You cannot change a Capacity Reservation''s instance type, EBS optimization, instance store settings, platform, Availability Zone, or instance eligibility. If you need to modify any of these attributes, we recommend that you cancel the Capacity Reservation, and then create a new one with the required attributes.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyCapacityReservationResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyCapacityReservationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ModifyFleet':
     post:
       operationId: ModifyFleet
@@ -6018,6 +6218,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ModifyInstanceAttributeRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyInstanceCapacityReservationAttributes':
+    post:
+      operationId: ModifyInstanceCapacityReservationAttributes
+      description: 'Modifies the Capacity Reservation settings for a stopped instance. Use this action to configure an instance to target a specific Capacity Reservation, run in any <code>open</code> Capacity Reservation with matching attributes, or run On-Demand Instance capacity.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyInstanceCapacityReservationAttributesResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyInstanceCapacityReservationAttributesRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -6483,6 +6708,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/MoveAddressToVpcRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ProvisionByoipCidr':
+    post:
+      operationId: ProvisionByoipCidr
+      description: '<p>Provisions an address range for use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p> <p>AWS verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from <code>pending-provision</code> to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. To allocate an Elastic IP address from your address pool, use <a>AllocateAddress</a> with either the specific address from the address pool or the ID of the address pool.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ProvisionByoipCidrResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProvisionByoipCidrRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -7344,6 +7594,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#WithdrawByoipCidr':
+    post:
+      operationId: WithdrawByoipCidr
+      description: '<p>Stops advertising an IPv4 address range that is provisioned as an address pool.</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to AWS because of BGP propagation delays.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/WithdrawByoipCidrResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/WithdrawByoipCidrRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AcceptReservedInstancesExchangeQuoteResult:
     type: object
@@ -7403,6 +7678,23 @@ definitions:
       VpcPeeringConnectionId:
         $ref: '#/definitions/String'
         description: The ID of the VPC peering connection. You must specify this parameter in the request.
+  AdvertiseByoipCidrResult:
+    type: object
+    properties:
+      ByoipCidr:
+        $ref: '#/definitions/ByoipCidr'
+        description: Information about the address range.
+  AdvertiseByoipCidrRequest:
+    type: object
+    required:
+      - Cidr
+    properties:
+      Cidr:
+        $ref: '#/definitions/String'
+        description: 'The IPv4 address range, in CIDR notation.'
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   AllocateAddressResult:
     type: object
     example:
@@ -7415,10 +7707,12 @@ definitions:
       AllocationId:
         $ref: '#/definitions/String'
         description: '[EC2-VPC] The ID that AWS assigns to represent the allocation of the Elastic IP address for use with instances in a VPC.'
+      PublicIpv4Pool:
+        $ref: '#/definitions/String'
+        description: The ID of an address pool.
       Domain:
         $ref: '#/definitions/DomainType'
         description: Indicates whether this Elastic IP address is for use with instances in EC2-Classic (<code>standard</code>) or instances in a VPC (<code>vpc</code>).
-    description: Contains the output of AllocateAddress.
   AllocateAddressRequest:
     type: object
     example:
@@ -7429,11 +7723,13 @@ definitions:
         description: '<p>Set to <code>vpc</code> to allocate the address for use with instances in a VPC.</p> <p>Default: The address is for use with instances in EC2-Classic.</p>'
       Address:
         $ref: '#/definitions/String'
-        description: '[EC2-VPC] The Elastic IP address to recover.'
+        description: '[EC2-VPC] The Elastic IP address to recover or an IPv4 address from an address pool.'
+      PublicIpv4Pool:
+        $ref: '#/definitions/String'
+        description: 'The ID of an address pool that you own. Use this parameter to let Amazon EC2 select an address from the address pool. To specify a specific address from the address pool, use the <code>Address</code> parameter instead.'
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for AllocateAddress.
   AllocateHostsResult:
     type: object
     properties:
@@ -7518,7 +7814,6 @@ definitions:
       AssociationId:
         $ref: '#/definitions/String'
         description: '[EC2-VPC] The ID that represents the association of the Elastic IP address with an instance.'
-    description: Contains the output of AssociateAddress.
   AssociateAddressRequest:
     type: object
     example:
@@ -7546,7 +7841,6 @@ definitions:
       PrivateIpAddress:
         $ref: '#/definitions/String'
         description: '[EC2-VPC] The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.'
-    description: Contains the parameters for AssociateAddress.
   AssociateDhcpOptionsRequest:
     type: object
     required:
@@ -7943,6 +8237,23 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     description: Contains the parameters for CancelBundleTask.
+  CancelCapacityReservationResult:
+    type: object
+    properties:
+      Return:
+        $ref: '#/definitions/Boolean'
+        description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
+  CancelCapacityReservationRequest:
+    type: object
+    required:
+      - CapacityReservationId
+    properties:
+      CapacityReservationId:
+        $ref: '#/definitions/String'
+        description: The ID of the Capacity Reservation to be cancelled.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   CancelConversionRequest:
     type: object
     required:
@@ -8222,6 +8533,59 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     description: Contains the parameters for CopySnapshot.
+  CreateCapacityReservationResult:
+    type: object
+    properties:
+      CapacityReservation:
+        $ref: '#/definitions/CapacityReservation'
+        description: Information about the Capacity Reservation.
+  CreateCapacityReservationRequest:
+    type: object
+    required:
+      - InstanceType
+      - InstancePlatform
+      - AvailabilityZone
+      - InstanceCount
+    properties:
+      ClientToken:
+        $ref: '#/definitions/String'
+        description: '<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">How to Ensure Idempotency</a>.</p> <p>Constraint: Maximum 64 ASCII characters.</p>'
+      InstanceType:
+        $ref: '#/definitions/String'
+        description: 'The instance type for which to reserve capacity. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+      InstancePlatform:
+        $ref: '#/definitions/CapacityReservationInstancePlatform'
+        description: The type of operating system for which to reserve capacity.
+      AvailabilityZone:
+        $ref: '#/definitions/String'
+        description: The Availability Zone in which to create the Capacity Reservation.
+      Tenancy:
+        $ref: '#/definitions/CapacityReservationTenancy'
+        description: '<p>Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can have one of the following tenancy settings:</p> <ul> <li> <p> <code>default</code> - The Capacity Reservation is created on hardware that is shared with other AWS accounts.</p> </li> <li> <p> <code>dedicated</code> - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single AWS account.</p> </li> </ul>'
+      InstanceCount:
+        $ref: '#/definitions/Integer'
+        description: The number of instances for which to reserve capacity.
+      EbsOptimized:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the Capacity Reservation supports EBS-optimized instances. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS- optimized instance.
+      EphemeralStorage:
+        $ref: '#/definitions/Boolean'
+        description: 'Indicates whether the Capacity Reservation supports instances with temporary, block-level storage.'
+      EndDate:
+        $ref: '#/definitions/DateTime'
+        description: '<p>The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation''s state changes to <code>expired</code> when it reaches its end date and time.</p> <p>You must provide an <code>EndDate</code> value if <code>EndDateType</code> is <code>limited</code>. Omit <code>EndDate</code> if <code>EndDateType</code> is <code>unlimited</code>.</p> <p>If the <code>EndDateType</code> is <code>limited</code>, the Capacity Reservation is cancelled within an hour from the specified time. For example, if you specify 5/31/2019, 13:30:55, the Capacity Reservation is guaranteed to end between 13:30:55 and 14:30:55 on 5/31/2019.</p>'
+      EndDateType:
+        $ref: '#/definitions/EndDateType'
+        description: '<p>Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:</p> <ul> <li> <p> <code>unlimited</code> - The Capacity Reservation remains active until you explicitly cancel it. Do not provide an <code>EndDate</code> if the <code>EndDateType</code> is <code>unlimited</code>.</p> </li> <li> <p> <code>limited</code> - The Capacity Reservation expires automatically at a specified date and time. You must provide an <code>EndDate</code> value if the <code>EndDateType</code> value is <code>limited</code>.</p> </li> </ul>'
+      InstanceMatchCriteria:
+        $ref: '#/definitions/InstanceMatchCriteria'
+        description: '<p>Indicates the type of instance launches that the Capacity Reservation accepts. The options include:</p> <ul> <li> <p> <code>open</code> - The Capacity Reservation automatically matches all instances that have matching attributes (instance type, platform, and Availability Zone). Instances that have matching attributes run in the Capacity Reservation automatically without specifying any additional parameters.</p> </li> <li> <p> <code>targeted</code> - The Capacity Reservation only accepts instances that have matching attributes (instance type, platform, and Availability Zone), and explicitly target the Capacity Reservation. This ensures that only permitted instances can use the reserved capacity. </p> </li> </ul> <p>Default: <code>open</code> </p>'
+      TagSpecifications:
+        $ref: '#/definitions/TagSpecificationList'
+        description: The tags to apply to the Capacity Reservation during launch.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   CreateCustomerGatewayResult:
     type: object
     example:
@@ -8780,7 +9144,7 @@ definitions:
       PortRange:
         From: 53
         To: 53
-      Protocol: udp
+      Protocol: '17'
       RuleAction: allow
       RuleNumber: 100
     properties:
@@ -8795,7 +9159,7 @@ definitions:
         description: Indicates whether this is an egress rule (rule is applied to traffic leaving the subnet).
       IcmpTypeCode:
         $ref: '#/definitions/IcmpTypeCode'
-        description: 'ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6 CIDR block.'
+        description: 'ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR block.'
       Ipv6CidrBlock:
         $ref: '#/definitions/String'
         description: 'The IPv6 network range to allow or deny, in CIDR notation (for example <code>2001:db8:1234:1a00::/64</code>).'
@@ -8804,10 +9168,10 @@ definitions:
         description: The ID of the network ACL.
       PortRange:
         $ref: '#/definitions/PortRange'
-        description: 'TCP or UDP protocols: The range of ports the rule applies to.'
+        description: 'TCP or UDP protocols: The range of ports the rule applies to. Required if specifying protocol 6 (TCP) or 17 (UDP).'
       Protocol:
         $ref: '#/definitions/String'
-        description: 'The protocol. A value of <code>-1</code> or <code>all</code> means all protocols. If you specify <code>all</code>, <code>-1</code>, or a protocol number other than <code>6</code> (tcp), <code>17</code> (udp), or <code>1</code> (icmp), traffic on all ports is allowed, regardless of any ports or ICMP types or codes that you specify. If you specify protocol <code>58</code> (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol <code>58</code> (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.'
+        description: 'The protocol number. A value of "-1" means all protocols. If you specify "-1" or a protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless of any ports or ICMP types or codes that you specify. If you specify protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.'
       RuleAction:
         $ref: '#/definitions/RuleAction'
         description: Indicates whether to allow or deny the traffic that matches the rule.
@@ -9223,7 +9587,7 @@ definitions:
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       Resources:
         $ref: '#/definitions/ResourceIdList'
-        description: 'The IDs of one or more resources to tag. For example, ami-1a2b3c4d.'
+        description: 'The IDs of one or more resources, separated by spaces.'
       Tags:
         $ref: '#/definitions/TagList'
         description: 'One or more tags. The <code>value</code> parameter is required, but if you don''t want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. '
@@ -9939,7 +10303,7 @@ definitions:
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       Resources:
         $ref: '#/definitions/ResourceIdList'
-        description: The IDs of one or more resources.
+        description: 'The IDs of one or more resources, separated by spaces.'
       Tags:
         $ref: '#/definitions/TagList'
         description: '<p>One or more tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string.</p> <p>If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete AWS-generated tags (tags that have the <code>aws:</code> prefix).</p>'
@@ -10077,6 +10441,23 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     description: Contains the parameters for DeleteVpnGateway.
+  DeprovisionByoipCidrResult:
+    type: object
+    properties:
+      ByoipCidr:
+        $ref: '#/definitions/ByoipCidr'
+        description: Information about the address range.
+  DeprovisionByoipCidrRequest:
+    type: object
+    required:
+      - Cidr
+    properties:
+      Cidr:
+        $ref: '#/definitions/String'
+        description: 'The public IPv4 address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.'
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   DeregisterImageRequest:
     type: object
     required:
@@ -10141,7 +10522,6 @@ definitions:
       Addresses:
         $ref: '#/definitions/AddressList'
         description: Information about one or more Elastic IP addresses.
-    description: Contains the output of DescribeAddresses.
   DescribeAddressesRequest:
     type: object
     example:
@@ -10162,7 +10542,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DescribeAddresses.
   DescribeAggregateIdFormatResult:
     type: object
     properties:
@@ -10236,6 +10615,56 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     description: Contains the parameters for DescribeBundleTasks.
+  DescribeByoipCidrsResult:
+    type: object
+    properties:
+      ByoipCidrs:
+        $ref: '#/definitions/ByoipCidrSet'
+        description: Information about your address ranges.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  DescribeByoipCidrsRequest:
+    type: object
+    required:
+      - MaxResults
+    properties:
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next page of results.
+  DescribeCapacityReservationsResult:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+      CapacityReservations:
+        $ref: '#/definitions/CapacityReservationSet'
+        description: Information about the Capacity Reservations.
+  DescribeCapacityReservationsRequest:
+    type: object
+    properties:
+      CapacityReservationIds:
+        $ref: '#/definitions/CapacityReservationIdSet'
+        description: The ID of the Capacity Reservation.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to retrieve the next page of results.
+      MaxResults:
+        $ref: '#/definitions/Integer'
+        description: The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: One or more filters.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   DescribeClassicLinkInstancesResult:
     type: object
     properties:
@@ -11275,7 +11704,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
-    description: Contains the output of DescribeMovingAddresses.
   DescribeMovingAddressesRequest:
     type: object
     properties:
@@ -11290,11 +11718,10 @@ definitions:
         description: '<p>The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000; if <code>MaxResults</code> is given a value outside of this range, an error is returned.</p> <p>Default: If no value is provided, the default is 1000.</p>'
       NextToken:
         $ref: '#/definitions/String'
-        description: The token to use to retrieve the next page of results.
+        description: The token for the next page of results.
       PublicIps:
         $ref: '#/definitions/ValueStringList'
         description: One or more Elastic IP addresses.
-    description: Contains the parameters for DescribeMovingAddresses.
   DescribeNatGatewaysResult:
     type: object
     example:
@@ -11588,6 +12015,27 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to request the next page of results.
+  DescribePublicIpv4PoolsResult:
+    type: object
+    properties:
+      PublicIpv4Pools:
+        $ref: '#/definitions/PublicIpv4PoolSet'
+        description: Information about the address pools.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  DescribePublicIpv4PoolsRequest:
+    type: object
+    properties:
+      PoolIds:
+        $ref: '#/definitions/ValueStringList'
+        description: The IDs of the address pools.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next page of results.
+      MaxResults:
+        $ref: '#/definitions/PoolMaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   DescribeRegionsResult:
     type: object
     example:
@@ -13122,7 +13570,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DisassociateAddress.
   DisassociateIamInstanceProfileResult:
     type: object
     example:
@@ -13655,6 +14102,32 @@ definitions:
         $ref: '#/definitions/VolumeDetail'
         description: The volume size.
     description: Contains the parameters for ImportVolume.
+  ModifyCapacityReservationResult:
+    type: object
+    properties:
+      Return:
+        $ref: '#/definitions/Boolean'
+        description: Information about the Capacity Reservation.
+  ModifyCapacityReservationRequest:
+    type: object
+    required:
+      - CapacityReservationId
+    properties:
+      CapacityReservationId:
+        $ref: '#/definitions/String'
+        description: The ID of the Capacity Reservation.
+      InstanceCount:
+        $ref: '#/definitions/Integer'
+        description: The number of instances for which to reserve capacity.
+      EndDate:
+        $ref: '#/definitions/DateTime'
+        description: '<p>The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation''s state changes to <code>expired</code> when it reaches its end date and time.</p> <p>The Capacity Reservation is cancelled within an hour from the specified time. For example, if you specify 5/31/2019, 13:30:55, the Capacity Reservation is guaranteed to end between 13:30:55 and 14:30:55 on 5/31/2019.</p> <p>You must provide an <code>EndDate</code> value if <code>EndDateType</code> is <code>limited</code>. Omit <code>EndDate</code> if <code>EndDateType</code> is <code>unlimited</code>.</p>'
+      EndDateType:
+        $ref: '#/definitions/EndDateType'
+        description: '<p>Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:</p> <ul> <li> <p> <code>unlimited</code> - The Capacity Reservation remains active until you explicitly cancel it. Do not provide an <code>EndDate</code> value if <code>EndDateType</code> is <code>unlimited</code>.</p> </li> <li> <p> <code>limited</code> - The Capacity Reservation expires automatically at a specified date and time. You must provide an <code>EndDate</code> value if <code>EndDateType</code> is <code>limited</code>.</p> </li> </ul>'
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   ModifyFleetResult:
     type: object
     properties:
@@ -13870,6 +14343,27 @@ definitions:
         $ref: '#/definitions/String'
         description: 'A new value for the attribute. Use only with the <code>kernel</code>, <code>ramdisk</code>, <code>userData</code>, <code>disableApiTermination</code>, or <code>instanceInitiatedShutdownBehavior</code> attribute.'
     description: Contains the parameters for ModifyInstanceAttribute.
+  ModifyInstanceCapacityReservationAttributesResult:
+    type: object
+    properties:
+      Return:
+        $ref: '#/definitions/Boolean'
+        description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
+  ModifyInstanceCapacityReservationAttributesRequest:
+    type: object
+    required:
+      - InstanceId
+      - CapacityReservationSpecification
+    properties:
+      InstanceId:
+        $ref: '#/definitions/String'
+        description: The ID of the instance to be modified.
+      CapacityReservationSpecification:
+        $ref: '#/definitions/CapacityReservationSpecification'
+        description: Information about the Capacity Reservation targeting option.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   ModifyInstanceCreditSpecificationResult:
     type: object
     properties:
@@ -14342,7 +14836,6 @@ definitions:
       Status:
         $ref: '#/definitions/Status'
         description: The status of the move of the IP address.
-    description: Contains the output of MoveAddressToVpc.
   MoveAddressToVpcRequest:
     type: object
     required:
@@ -14356,7 +14849,29 @@ definitions:
       PublicIp:
         $ref: '#/definitions/String'
         description: The Elastic IP address.
-    description: Contains the parameters for MoveAddressToVpc.
+  ProvisionByoipCidrResult:
+    type: object
+    properties:
+      ByoipCidr:
+        $ref: '#/definitions/ByoipCidr'
+        description: Information about the address pool.
+  ProvisionByoipCidrRequest:
+    type: object
+    required:
+      - Cidr
+    properties:
+      Cidr:
+        $ref: '#/definitions/String'
+        description: 'The public IPv4 address range, in CIDR notation. The most specific prefix that you can specify is /24. The address range cannot overlap with another address range that you''ve brought to this or another region.'
+      CidrAuthorizationContext:
+        $ref: '#/definitions/CidrAuthorizationContext'
+        description: A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP.
+      Description:
+        $ref: '#/definitions/String'
+        description: A description for the address range and the address pool.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   PurchaseHostReservationResult:
     type: object
     properties:
@@ -14589,7 +15104,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for ReleaseAddress.
   ReleaseHostsResult:
     type: object
     properties:
@@ -14666,7 +15180,7 @@ definitions:
       PortRange:
         From: 53
         To: 53
-      Protocol: udp
+      Protocol: '17'
       RuleAction: allow
       RuleNumber: 100
     properties:
@@ -14681,7 +15195,7 @@ definitions:
         description: '<p>Indicates whether to replace the egress rule.</p> <p>Default: If no value is specified, we replace the ingress rule.</p>'
       IcmpTypeCode:
         $ref: '#/definitions/IcmpTypeCode'
-        description: 'ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying the ICMP (1) protocol, or protocol 58 (ICMPv6) with an IPv6 CIDR block.'
+        description: 'ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR block.'
       Ipv6CidrBlock:
         $ref: '#/definitions/String'
         description: 'The IPv6 network range to allow or deny, in CIDR notation (for example <code>2001:bd8:1234:1a00::/64</code>).'
@@ -14690,10 +15204,10 @@ definitions:
         description: The ID of the ACL.
       PortRange:
         $ref: '#/definitions/PortRange'
-        description: 'TCP or UDP protocols: The range of ports the rule applies to. Required if specifying TCP (6) or UDP (17) for the protocol.'
+        description: 'TCP or UDP protocols: The range of ports the rule applies to. Required if specifying protocol 6 (TCP) or 17 (UDP).'
       Protocol:
         $ref: '#/definitions/String'
-        description: 'The IP protocol. You can specify <code>all</code> or <code>-1</code> to mean all protocols. If you specify <code>all</code>, <code>-1</code>, or a protocol number other than <code>tcp</code>, <code>udp</code>, or <code>icmp</code>, traffic on all ports is allowed, regardless of any ports or ICMP types or codes you that specify. If you specify protocol <code>58</code> (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol <code>58</code> (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.'
+        description: 'The protocol number. A value of "-1" means all protocols. If you specify "-1" or a protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless of any ports or ICMP types or codes that you specify. If you specify protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.'
       RuleAction:
         $ref: '#/definitions/RuleAction'
         description: Indicates whether to allow or deny the traffic that matches the rule.
@@ -14996,7 +15510,6 @@ definitions:
       Status:
         $ref: '#/definitions/Status'
         description: The move status for the IP address.
-    description: Contains the output of RestoreAddressToClassic.
   RestoreAddressToClassicRequest:
     type: object
     required:
@@ -15010,7 +15523,6 @@ definitions:
       PublicIp:
         $ref: '#/definitions/String'
         description: The Elastic IP address.
-    description: Contains the parameters for RestoreAddressToClassic.
   RevokeSecurityGroupEgressRequest:
     type: object
     required:
@@ -15213,6 +15725,9 @@ definitions:
       CpuOptions:
         $ref: '#/definitions/CpuOptionsRequest'
         description: 'The CPU options for the instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html">Optimizing CPU Options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+      CapacityReservationSpecification:
+        $ref: '#/definitions/CapacityReservationSpecification'
+        description: Information about the Capacity Reservation targeting option.
     description: Contains the parameters for RunInstances.
   RunScheduledInstancesResult:
     type: object
@@ -15481,6 +15996,23 @@ definitions:
       IpPermissions:
         $ref: '#/definitions/IpPermissionList'
         description: 'The IP permissions for the security group rule. '
+  WithdrawByoipCidrResult:
+    type: object
+    properties:
+      ByoipCidr:
+        $ref: '#/definitions/ByoipCidr'
+        description: Information about the address pool.
+  WithdrawByoipCidrRequest:
+    type: object
+    required:
+      - Cidr
+    properties:
+      Cidr:
+        $ref: '#/definitions/String'
+        description: 'The public IPv4 address range, in CIDR notation.'
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   Boolean:
     type: boolean
   ReservedInstanceIdSet:
@@ -15628,11 +16160,30 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: Any tags assigned to the Elastic IP address.
+      PublicIpv4Pool:
+        $ref: '#/definitions/String'
+        description: The ID of an address pool.
     description: Describes an Elastic IP address.
   AddressList:
     type: array
     items:
       $ref: '#/definitions/Address'
+  ByoipCidr:
+    type: object
+    properties:
+      Cidr:
+        $ref: '#/definitions/String'
+        description: 'The public IPv4 address range, in CIDR notation.'
+      Description:
+        $ref: '#/definitions/String'
+        description: The description of the address range.
+      StatusMessage:
+        $ref: '#/definitions/String'
+        description: 'Upon success, contains the ID of the address pool. Otherwise, contains an error message.'
+      State:
+        $ref: '#/definitions/ByoipCidrState'
+        description: The state of the address pool.
+    description: Information about an address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP).
   Affinity:
     type: string
     enum:
@@ -16018,6 +16569,20 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BundleTask'
+  ByoipCidrState:
+    type: string
+    enum:
+      - advertised
+      - deprovisioned
+      - failed-deprovision
+      - failed-provision
+      - pending-deprovision
+      - pending-provision
+      - provisioned
+  ByoipCidrSet:
+    type: array
+    items:
+      $ref: '#/definitions/ByoipCidr'
   CancelBatchErrorCode:
     type: string
     enum:
@@ -16106,6 +16671,149 @@ definitions:
         $ref: '#/definitions/CancelSpotInstanceRequestState'
         description: The state of the Spot Instance request.
     description: Describes a request to cancel a Spot Instance.
+  CapacityReservationInstancePlatform:
+    type: string
+    enum:
+      - Linux/UNIX
+      - Red Hat Enterprise Linux
+      - SUSE Linux
+      - Windows
+      - Windows with SQL Server
+      - Windows with SQL Server Enterprise
+      - Windows with SQL Server Standard
+      - Windows with SQL Server Web
+  CapacityReservationTenancy:
+    type: string
+    enum:
+      - default
+      - dedicated
+  CapacityReservationState:
+    type: string
+    enum:
+      - active
+      - expired
+      - cancelled
+      - pending
+      - failed
+  EndDateType:
+    type: string
+    enum:
+      - unlimited
+      - limited
+  InstanceMatchCriteria:
+    type: string
+    enum:
+      - open
+      - targeted
+  CapacityReservation:
+    type: object
+    properties:
+      CapacityReservationId:
+        $ref: '#/definitions/String'
+        description: The ID of the Capacity Reservation.
+      InstanceType:
+        $ref: '#/definitions/String'
+        description: The type of instance for which the Capacity Reservation reserves capacity.
+      InstancePlatform:
+        $ref: '#/definitions/CapacityReservationInstancePlatform'
+        description: The type of operating system for which the Capacity Reservation reserves capacity.
+      AvailabilityZone:
+        $ref: '#/definitions/String'
+        description: The Availability Zone in which the capacity is reserved.
+      Tenancy:
+        $ref: '#/definitions/CapacityReservationTenancy'
+        description: '<p>Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can have one of the following tenancy settings:</p> <ul> <li> <p> <code>default</code> - The Capacity Reservation is created on hardware that is shared with other AWS accounts.</p> </li> <li> <p> <code>dedicated</code> - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single AWS account.</p> </li> </ul>'
+      TotalInstanceCount:
+        $ref: '#/definitions/Integer'
+        description: The number of instances for which the Capacity Reservation reserves capacity.
+      AvailableInstanceCount:
+        $ref: '#/definitions/Integer'
+        description: The remaining capacity. Indicates the number of instances that can be launched in the Capacity Reservation.
+      EbsOptimized:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the Capacity Reservation supports EBS-optimized instances. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS- optimized instance.
+      EphemeralStorage:
+        $ref: '#/definitions/Boolean'
+        description: 'Indicates whether the Capacity Reservation supports instances with temporary, block-level storage.'
+      State:
+        $ref: '#/definitions/CapacityReservationState'
+        description: '<p>The current state of the Capacity Reservation. A Capacity Reservation can be in one of the following states:</p> <ul> <li> <p> <code>active</code> - The Capacity Reservation is active and the capacity is available for your use.</p> </li> <li> <p> <code>cancelled</code> - The Capacity Reservation expired automatically at the date and time specified in your request. The reserved capacity is no longer available for your use.</p> </li> <li> <p> <code>expired</code> - The Capacity Reservation was manually cancelled. The reserved capacity is no longer available for your use.</p> </li> <li> <p> <code>pending</code> - The Capacity Reservation request was successful but the capacity provisioning is still pending.</p> </li> <li> <p> <code>failed</code> - The Capacity Reservation request has failed. A request might fail due to invalid request parameters, capacity constraints, or instance limit constraints. Failed requests are retained for 60 minutes.</p> </li> </ul>'
+      EndDate:
+        $ref: '#/definitions/DateTime'
+        description: 'The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation''s state changes to <code>expired</code> when it reaches its end date and time.'
+      EndDateType:
+        $ref: '#/definitions/EndDateType'
+        description: '<p>Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:</p> <ul> <li> <p> <code>unlimited</code> - The Capacity Reservation remains active until you explicitly cancel it.</p> </li> <li> <p> <code>limited</code> - The Capacity Reservation expires automatically at a specified date and time.</p> </li> </ul>'
+      InstanceMatchCriteria:
+        $ref: '#/definitions/InstanceMatchCriteria'
+        description: '<p>Indicates the type of instance launches that the Capacity Reservation accepts. The options include:</p> <ul> <li> <p> <code>open</code> - The Capacity Reservation accepts all instances that have matching attributes (instance type, platform, and Availability Zone). Instances that have matching attributes launch into the Capacity Reservation automatically without specifying any additional parameters.</p> </li> <li> <p> <code>targeted</code> - The Capacity Reservation only accepts instances that have matching attributes (instance type, platform, and Availability Zone), and explicitly target the Capacity Reservation. This ensures that only permitted instances can use the reserved capacity. </p> </li> </ul>'
+      CreateDate:
+        $ref: '#/definitions/DateTime'
+        description: The date and time at which the Capacity Reservation was created.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: Any tags assigned to the Capacity Reservation.
+    description: Describes a Capacity Reservation.
+  CapacityReservationIdSet:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  CapacityReservationPreference:
+    type: string
+    enum:
+      - open
+      - none
+  CapacityReservationSet:
+    type: array
+    items:
+      $ref: '#/definitions/CapacityReservation'
+  CapacityReservationTarget:
+    type: object
+    properties:
+      CapacityReservationId:
+        $ref: '#/definitions/String'
+        description: The ID of the Capacity Reservation.
+    description: Describes a target Capacity Reservation.
+  CapacityReservationSpecification:
+    type: object
+    properties:
+      CapacityReservationPreference:
+        $ref: '#/definitions/CapacityReservationPreference'
+        description: '<p>Indicates the instance''s Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.</p> </li> </ul>'
+      CapacityReservationTarget:
+        $ref: '#/definitions/CapacityReservationTarget'
+        description: Information about the target Capacity Reservation.
+    description: 'Describes an instance''s Capacity Reservation targeting option. You can specify only one option at a time. Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run as an On-Demand Instance or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation.'
+  CapacityReservationTargetResponse:
+    type: object
+    properties:
+      CapacityReservationId:
+        $ref: '#/definitions/String'
+        description: The ID of the Capacity Reservation.
+    description: Describes a target Capacity Reservation.
+  CapacityReservationSpecificationResponse:
+    type: object
+    properties:
+      CapacityReservationPreference:
+        $ref: '#/definitions/CapacityReservationPreference'
+        description: '<p>Describes the instance''s Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>'
+      CapacityReservationTarget:
+        $ref: '#/definitions/CapacityReservationTargetResponse'
+        description: Information about the targeted Capacity Reservation.
+    description: 'Describes the instance''s Capacity Reservation targeting preferences. The action returns the <code>capacityReservationPreference</code> response element if the instance is configured to run in On-Demand capacity, or if it is configured in run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). The action returns the <code>capacityReservationTarget</code> response element if the instance explicily targets a specific Capacity Reservation.'
+  CidrAuthorizationContext:
+    type: object
+    required:
+      - Message
+      - Signature
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+        description: The plain-text authorization message for the prefix and account.
+      Signature:
+        $ref: '#/definitions/String'
+        description: The signed authorization message for the prefix and account.
+    description: Provides authorization for Amazon to bring a specific IP address range to a specific AWS account using bring your own IP addresses (BYOIP).
   CidrBlock:
     type: object
     properties:
@@ -16665,6 +17373,9 @@ definitions:
       CpuOptions:
         $ref: '#/definitions/LaunchTemplateCpuOptionsRequest'
         description: 'The CPU options for the instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html">Optimizing CPU Options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+      CapacityReservationSpecification:
+        $ref: '#/definitions/LaunchTemplateCapacityReservationSpecificationRequest'
+        description: Information about the Capacity Reservation targeting option.
     description: The information to include in the launch template.
   LaunchTemplate:
     type: object
@@ -17324,6 +18035,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  MaxResults:
+    type: integer
+    minimum: 5
+    maximum: 255
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 1024
   InstanceIdStringList:
     type: array
     items:
@@ -17416,14 +18135,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  MaxResults:
-    type: integer
-    minimum: 5
-    maximum: 255
   FpgaImageList:
     type: array
     items:
@@ -17619,6 +18330,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PrincipalIdFormat'
+  PoolMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 10
+  PublicIpv4PoolSet:
+    type: array
+    items:
+      $ref: '#/definitions/PublicIpv4Pool'
   RegionNameStringList:
     type: array
     items:
@@ -18751,6 +19470,9 @@ definitions:
       CpuOptions:
         $ref: '#/definitions/LaunchTemplateCpuOptions'
         description: 'The CPU options for the instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html">Optimizing CPU Options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+      CapacityReservationSpecification:
+        $ref: '#/definitions/LaunchTemplateCapacityReservationSpecificationResponse'
+        description: Information about the Capacity Reservation targeting option.
     description: 'The information for a launch template. '
   ReservationValue:
     type: object
@@ -19537,6 +20259,12 @@ definitions:
       CpuOptions:
         $ref: '#/definitions/CpuOptions'
         description: The CPU options for the instance.
+      CapacityReservationId:
+        $ref: '#/definitions/String'
+        description: The ID of the Capacity Reservation.
+      CapacityReservationSpecification:
+        $ref: '#/definitions/CapacityReservationSpecificationResponse'
+        description: Information about the Capacity Reservation targeting option.
     description: Describes an instance.
   InstanceBlockDeviceMapping:
     type: object
@@ -20299,6 +21027,26 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LaunchTemplateBlockDeviceMappingRequest'
+  LaunchTemplateCapacityReservationSpecificationRequest:
+    type: object
+    properties:
+      CapacityReservationPreference:
+        $ref: '#/definitions/CapacityReservationPreference'
+        description: '<p>Indicates the instance''s Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>'
+      CapacityReservationTarget:
+        $ref: '#/definitions/CapacityReservationTarget'
+        description: Information about the target Capacity Reservation.
+    description: 'Describes an instance''s Capacity Reservation targeting option. You can specify only one option at a time. Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run in On-Demand capacity or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation.'
+  LaunchTemplateCapacityReservationSpecificationResponse:
+    type: object
+    properties:
+      CapacityReservationPreference:
+        $ref: '#/definitions/CapacityReservationPreference'
+        description: '<p>Indicates the instance''s Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>'
+      CapacityReservationTarget:
+        $ref: '#/definitions/CapacityReservationTargetResponse'
+        description: Information about the target Capacity Reservation.
+    description: Information about the Capacity Reservation targeting option.
   LaunchTemplateOverridesList:
     type: array
     items:
@@ -20948,7 +21696,7 @@ definitions:
         description: 'TCP or UDP protocols: The range of ports the rule applies to.'
       Protocol:
         $ref: '#/definitions/String'
-        description: The protocol. A value of <code>-1</code> means all protocols.
+        description: The protocol number. A value of "-1" means all protocols.
       RuleAction:
         $ref: '#/definitions/RuleAction'
         description: Indicates whether to allow or deny the traffic that matches the rule.
@@ -21202,6 +21950,45 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PropagatingVgw'
+  PublicIpv4PoolRangeSet:
+    type: array
+    items:
+      $ref: '#/definitions/PublicIpv4PoolRange'
+  PublicIpv4Pool:
+    type: object
+    properties:
+      PoolId:
+        $ref: '#/definitions/String'
+        description: The ID of the IPv4 address pool.
+      Description:
+        $ref: '#/definitions/String'
+        description: A description of the address pool.
+      PoolAddressRanges:
+        $ref: '#/definitions/PublicIpv4PoolRangeSet'
+        description: The address ranges.
+      TotalAddressCount:
+        $ref: '#/definitions/Integer'
+        description: The total number of addresses.
+      TotalAvailableAddressCount:
+        $ref: '#/definitions/Integer'
+        description: The total number of available addresses.
+    description: Describes an address pool.
+  PublicIpv4PoolRange:
+    type: object
+    properties:
+      FirstAddress:
+        $ref: '#/definitions/String'
+        description: The first IP address in the range.
+      LastAddress:
+        $ref: '#/definitions/String'
+        description: The last IP address in the range.
+      AddressCount:
+        $ref: '#/definitions/Integer'
+        description: The number of addresses in the range.
+      AvailableAddressCount:
+        $ref: '#/definitions/Integer'
+        description: The number of available addresses in the range.
+    description: Describes an address range of an IPv4 address pool.
   Purchase:
     type: object
     properties:
@@ -21380,7 +22167,7 @@ definitions:
         description: Indicates whether running Spot Instances should be terminated if the target capacity of the Spot Fleet request is decreased below the current size of the Spot Fleet.
       FulfilledCapacity:
         $ref: '#/definitions/Double'
-        description: The number of units fulfilled by this request compared to the set target capacity.
+        description: The number of units fulfilled by this request compared to the set target capacity. You cannot set this value.
       OnDemandFulfilledCapacity:
         $ref: '#/definitions/Double'
         description: The number of On-Demand units fulfilled by this request compared to the set target On-Demand capacity.
@@ -22488,7 +23275,7 @@ definitions:
         description: The tag key.
       ResourceId:
         $ref: '#/definitions/String'
-        description: 'The ID of the resource. For example, <code>ami-1a2b3c4d</code>.'
+        description: The ID of the resource.
       ResourceType:
         $ref: '#/definitions/ResourceType'
         description: The resource type.
