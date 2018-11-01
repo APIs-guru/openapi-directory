@@ -358,7 +358,7 @@ paths:
   '/greengrass/groups/{GroupId}/deployments':
     post:
       operationId: CreateDeployment
-      description: Creates a deployment.
+      description: Creates a deployment. ''CreateDeployment'' requests are idempotent with respect to the ''X-Amzn-Client-Token'' token and the request parameters.
       responses:
         '200':
           description: Success
@@ -1633,6 +1633,39 @@ paths:
           in: path
           type: string
           required: true
+  '/greengrass/bulk/deployments/{BulkDeploymentId}/status':
+    get:
+      operationId: GetBulkDeploymentStatus
+      description: Returns the status of a bulk deployment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBulkDeploymentStatusResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBulkDeploymentStatusRequest'
+        - name: BulkDeploymentId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/greengrass/things/{ThingName}/connectivityInfo':
     get:
       operationId: GetConnectivityInfo
@@ -2096,6 +2129,86 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/greengrass/bulk/deployments/{BulkDeploymentId}/detailed-reports':
+    get:
+      operationId: ListBulkDeploymentDetailedReports
+      description: 'Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBulkDeploymentDetailedReportsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBulkDeploymentDetailedReportsRequest'
+        - name: BulkDeploymentId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /greengrass/bulk/deployments:
+    get:
+      operationId: ListBulkDeployments
+      description: Returns a list of bulk deployments.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBulkDeploymentsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBulkDeploymentsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartBulkDeployment
+      description: Deploys multiple groups in one operation. This action starts the bulk deployment of a specified set of group versions. Each group version deployment will be triggered with an adaptive rate that has a fixed upper limit. We recommend that you include an ''X-Amzn-Client-Token'' token in every ''StartBulkDeployment'' request. These requests are idempotent with respect to the token and the request parameters.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartBulkDeploymentResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartBulkDeploymentRequest'
   '/greengrass/groups/{GroupId}/deployments/$reset':
     post:
       operationId: ResetDeployments
@@ -2129,6 +2242,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/greengrass/bulk/deployments/{BulkDeploymentId}/$stop':
+    put:
+      operationId: StopBulkDeployment
+      description: Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopBulkDeploymentResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopBulkDeploymentRequest'
+        - name: BulkDeploymentId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AssociateRoleToGroupResponse:
     type: object
@@ -2142,26 +2288,8 @@ definitions:
       RoleArn:
         $ref: '#/definitions/__string'
         description: The ARN of the role you wish to associate with this group.
-  BadRequestException:
-    type: object
-    properties:
-      ErrorDetails:
-        $ref: '#/definitions/ErrorDetails'
-        description: Details about the error.
-      Message:
-        $ref: '#/definitions/__string'
-        description: A message containing information about the error.
-    description: General error information.
-  InternalServerErrorException:
-    type: object
-    properties:
-      ErrorDetails:
-        $ref: '#/definitions/ErrorDetails'
-        description: Details about the error.
-      Message:
-        $ref: '#/definitions/__string'
-        description: A message containing information about the error.
-    description: General error information.
+  BadRequestException: {}
+  InternalServerErrorException: {}
   AssociateServiceRoleToAccountResponse:
     type: object
     properties:
@@ -2695,6 +2823,27 @@ definitions:
   GetAssociatedRoleRequest:
     type: object
     properties: {}
+  GetBulkDeploymentStatusResponse:
+    type: object
+    properties:
+      BulkDeploymentMetrics:
+        $ref: '#/definitions/BulkDeploymentMetrics'
+        description: Relevant metrics on input records processed during bulk deployment.
+      BulkDeploymentStatus:
+        $ref: '#/definitions/BulkDeploymentStatus'
+        description: The status of the bulk deployment.
+      CreatedAt:
+        $ref: '#/definitions/__string'
+        description: 'The time, in ISO format, when the deployment was created.'
+      ErrorDetails:
+        $ref: '#/definitions/ErrorDetails'
+        description: Error details
+      ErrorMessage:
+        $ref: '#/definitions/__string'
+        description: Error message
+  GetBulkDeploymentStatusRequest:
+    type: object
+    properties: {}
   GetConnectivityInfoResponse:
     type: object
     properties:
@@ -2749,6 +2898,9 @@ definitions:
       Id:
         $ref: '#/definitions/__string'
         description: The ID of the core definition version.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Version:
         $ref: '#/definitions/__string'
         description: The version of the core definition version.
@@ -2760,7 +2912,7 @@ definitions:
     properties:
       DeploymentStatus:
         $ref: '#/definitions/__string'
-        description: The status of the deployment.
+        description: 'The status of the deployment: ''''Pending'''', ''''InProgress'''', ''''Success'''', or ''''Failure''''.'
       DeploymentType:
         $ref: '#/definitions/DeploymentType'
         description: The type of the deployment.
@@ -2818,6 +2970,9 @@ definitions:
       Id:
         $ref: '#/definitions/__string'
         description: The ID of the device definition version.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Version:
         $ref: '#/definitions/__string'
         description: The version of the device definition version.
@@ -2866,6 +3021,9 @@ definitions:
       Id:
         $ref: '#/definitions/__string'
         description: The ID of the function definition version.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Version:
         $ref: '#/definitions/__string'
         description: The version of the function definition version.
@@ -3100,10 +3258,37 @@ definitions:
       Id:
         $ref: '#/definitions/__string'
         description: The ID of the subscription definition version.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Version:
         $ref: '#/definitions/__string'
         description: The version of the subscription definition version.
   GetSubscriptionDefinitionVersionRequest:
+    type: object
+    properties: {}
+  ListBulkDeploymentDetailedReportsResponse:
+    type: object
+    properties:
+      Deployments:
+        $ref: '#/definitions/BulkDeploymentResults'
+        description: A list of the individual group deployments in the bulk deployment operation.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+  ListBulkDeploymentDetailedReportsRequest:
+    type: object
+    properties: {}
+  ListBulkDeploymentsResponse:
+    type: object
+    properties:
+      BulkDeployments:
+        $ref: '#/definitions/BulkDeployments'
+        description: A list of bulk deployments.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+  ListBulkDeploymentsRequest:
     type: object
     properties: {}
   ListCoreDefinitionVersionsResponse:
@@ -3311,6 +3496,30 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: 'If true, performs a best-effort only core reset.'
     description: Information needed to reset deployments.
+  StartBulkDeploymentResponse:
+    type: object
+    properties:
+      BulkDeploymentArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the bulk deployment.
+      BulkDeploymentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the bulk deployment.
+  StartBulkDeploymentRequest:
+    type: object
+    properties:
+      ExecutionRoleArn:
+        $ref: '#/definitions/__string'
+        description: 'The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''''greengrass:CreateDeployment'''' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.'
+      InputFileUri:
+        $ref: '#/definitions/__string'
+        description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100MB. Currently, Greengrass; supports only ''''NewDeployment'''' deployment types.'
+  StopBulkDeploymentResponse:
+    type: object
+    properties: {}
+  StopBulkDeploymentRequest:
+    type: object
+    properties: {}
   UpdateConnectivityInfoResponse:
     type: object
     properties:
@@ -3410,13 +3619,93 @@ definitions:
         description: The name of the definition.
   __string:
     type: string
+  BulkDeployment:
+    type: object
+    properties:
+      BulkDeploymentArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the bulk deployment.
+      BulkDeploymentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the bulk deployment.
+      CreatedAt:
+        $ref: '#/definitions/__string'
+        description: 'The time, in ISO format, when the deployment was created.'
+    description: Information about a bulk deployment.
+  __integer:
+    type: integer
+  BulkDeploymentMetrics:
+    type: object
+    properties:
+      InvalidInputRecords:
+        $ref: '#/definitions/__integer'
+        description: 'The total number of records that returned a non-retryable error. For example, this can occur if a group record from the input file uses an invalid format or specifies a nonexistent group version, or if the execution role doesn''t grant permission to deploy a group or group version.'
+      RecordsProcessed:
+        $ref: '#/definitions/__integer'
+        description: 'The total number of group records from the input file that have been processed so far, or attempted.'
+      RetryAttempts:
+        $ref: '#/definitions/__integer'
+        description: 'The total number of deployment attempts that returned a retryable error. For example, a retry is triggered if the attempt to deploy a group returns a throttling error. ''''StartBulkDeployment'''' retries a group deployment up to five times.'
+    description: Relevant metrics on input records processed during bulk deployment.
+  DeploymentType:
+    type: string
+    enum:
+      - NewDeployment
+      - Redeployment
+      - ResetDeployment
+      - ForceResetDeployment
+    description: The type of deployment.
   ErrorDetails:
     type: array
     description: A list of error details.
     items:
       $ref: '#/definitions/ErrorDetail'
-  __integer:
-    type: integer
+  BulkDeploymentResult:
+    type: object
+    properties:
+      CreatedAt:
+        $ref: '#/definitions/__string'
+        description: 'The time, in ISO format, when the deployment was created.'
+      DeploymentArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the group deployment.
+      DeploymentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the group deployment.
+      DeploymentStatus:
+        $ref: '#/definitions/__string'
+        description: 'The current status of the group deployment: ''''Pending'''', ''''InProgress'''', ''''Success'''', or ''''Failure''''.'
+      DeploymentType:
+        $ref: '#/definitions/DeploymentType'
+        description: The type of the deployment.
+      ErrorDetails:
+        $ref: '#/definitions/ErrorDetails'
+        description: Details about the error.
+      ErrorMessage:
+        $ref: '#/definitions/__string'
+        description: The error message for a failed deployment
+      GroupArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the Greengrass group.
+    description: Information about an individual group deployment in a bulk deployment operation.
+  BulkDeploymentResults:
+    type: array
+    items:
+      $ref: '#/definitions/BulkDeploymentResult'
+  BulkDeploymentStatus:
+    type: string
+    enum:
+      - Initializing
+      - Running
+      - Completed
+      - Stopping
+      - Stopped
+      - Failed
+    description: The current status of the bulk deployment.
+  BulkDeployments:
+    type: array
+    items:
+      $ref: '#/definitions/BulkDeployment'
   ConnectivityInfo:
     type: object
     properties:
@@ -3443,7 +3732,7 @@ definitions:
         description: The ARN of the certificate associated with the core.
       Id:
         $ref: '#/definitions/__string'
-        description: The ID of the core.
+        description: 'A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
       SyncShadow:
         $ref: '#/definitions/__boolean'
         description: 'If true, the core''s local shadow is automatically synced with the cloud.'
@@ -3462,13 +3751,6 @@ definitions:
         $ref: '#/definitions/__listOfCore'
         description: A list of cores in the core definition version.
     description: Information about a core definition version.
-  DeploymentType:
-    type: string
-    enum:
-      - NewDeployment
-      - Redeployment
-      - ResetDeployment
-      - ForceResetDeployment
   DeviceDefinitionVersion:
     type: object
     properties:
@@ -3642,7 +3924,7 @@ definitions:
         description: The ARN of the certificate associated with the device.
       Id:
         $ref: '#/definitions/__string'
-        description: The ID of the device.
+        description: 'A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
       SyncShadow:
         $ref: '#/definitions/__boolean'
         description: 'If true, the device''s local shadow will be automatically synced with the cloud.'
@@ -3650,10 +3932,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: The thing ARN of the device.
     description: Information about a device.
-  Empty:
-    type: object
-    properties: {}
-    description: Empty
   EncodingType:
     type: string
     enum:
@@ -3705,7 +3983,7 @@ definitions:
         description: The configuration of the Lambda function.
       Id:
         $ref: '#/definitions/__string'
-        description: The ID of the Lambda function.
+        description: 'A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
     description: Information about a Lambda function.
   FunctionConfigurationEnvironment:
     type: object
@@ -3733,16 +4011,6 @@ definitions:
           $ref: '#/definitions/__string'
         value:
           $ref: '#/definitions/__string'
-  GeneralError:
-    type: object
-    properties:
-      ErrorDetails:
-        $ref: '#/definitions/ErrorDetails'
-        description: Details about the error.
-      Message:
-        $ref: '#/definitions/__string'
-        description: A message containing information about the error.
-    description: General error information.
   __listOfConnectivityInfo:
     type: array
     items:
@@ -3757,19 +4025,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: The ID of the certificate authority for the group.
     description: Information about a certificate authority for a group.
-  GroupCertificateConfiguration:
-    type: object
-    properties:
-      CertificateAuthorityExpiryInMilliseconds:
-        $ref: '#/definitions/__string'
-        description: 'The amount of time remaining before the certificate authority expires, in milliseconds.'
-      CertificateExpiryInMilliseconds:
-        $ref: '#/definitions/__string'
-        description: 'The amount of time remaining before the certificate expires, in milliseconds.'
-      GroupId:
-        $ref: '#/definitions/__string'
-        description: The ID of the group certificate configuration.
-    description: Information about a group certificate configuration.
   GroupInformation:
     type: object
     properties:
@@ -3813,16 +4068,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DefinitionInformation'
-  ListDefinitionsResponse:
-    type: object
-    properties:
-      Definitions:
-        $ref: '#/definitions/__listOfDefinitionInformation'
-        description: Information about a definition.
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-    description: A list of definitions.
   __listOfGroupCertificateAuthorityProperties:
     type: array
     items:
@@ -3831,16 +4076,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/GroupInformation'
-  ListVersionsResponse:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-      Versions:
-        $ref: '#/definitions/__listOfVersionInformation'
-        description: Information about a version.
-    description: A list of versions.
   LocalDeviceResourceData:
     type: object
     properties:
@@ -3862,7 +4097,7 @@ definitions:
         description: Allows you to configure additional group privileges for the Lambda process. This field is optional.
       SourcePath:
         $ref: '#/definitions/__string'
-        description: The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''.
+        description: The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/proc'' or ''/sys''.
     description: Attributes that define a local volume resource.
   LoggerComponent:
     type: string
@@ -3890,7 +4125,7 @@ definitions:
         description: The component that will be subject to logging.
       Id:
         $ref: '#/definitions/__string'
-        description: The id of the logger.
+        description: 'A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
       Level:
         $ref: '#/definitions/LoggerLevel'
         description: The level of the logs.
@@ -3971,7 +4206,7 @@ definitions:
     properties:
       Id:
         $ref: '#/definitions/__string'
-        description: The id of the subscription.
+        description: 'A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
       Source:
         $ref: '#/definitions/__string'
         description: 'The source of the subscription. Can be a thing ARN, a Lambda function ARN, ''cloud'' (which represents the IoT cloud), or ''GGShadowService''.'
@@ -3998,11 +4233,3 @@ definitions:
         $ref: '#/definitions/__string'
         description: The unique ID of the version.
     description: Information about a version.
-  __double:
-    type: number
-    format: double
-  __long:
-    type: integer
-  __timestamp:
-    type: string
-    format: date-time

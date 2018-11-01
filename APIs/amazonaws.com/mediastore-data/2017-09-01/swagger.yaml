@@ -224,7 +224,7 @@ paths:
           type: string
     put:
       operationId: PutObject
-      description: Uploads an object to the specified path. Object sizes are limited to 10 MB.
+      description: Uploads an object to the specified path. Object sizes are limited to 25 MB.
       responses:
         '200':
           description: Success
@@ -294,24 +294,9 @@ definitions:
   DeleteObjectRequest:
     type: object
     properties: {}
-  ContainerNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified container was not found for the specified account.
-  ObjectNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Could not perform an operation on an object that does not exist.
-  InternalServerError:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The service is temporarily unavailable.
+  ContainerNotFoundException: {}
+  ObjectNotFoundException: {}
+  InternalServerError: {}
   DescribeObjectResponse:
     type: object
     properties: {}
@@ -327,21 +312,16 @@ definitions:
   GetObjectRequest:
     type: object
     properties: {}
-  RequestedRangeNotSatisfiableException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The requested content range is not valid.
+  RequestedRangeNotSatisfiableException: {}
   ListItemsResponse:
     type: object
     properties:
       Items:
         $ref: '#/definitions/ItemList'
-        description: Metadata entries for the folders and objects at the requested path.
+        description: The metadata entries for the folders and objects at the requested path.
       NextToken:
         $ref: '#/definitions/PaginationToken'
-        description: The <code>NextToken</code> used to request the next page of results using <code>ListItems</code>.
+        description: 'The token that can be used in a request to view the next set of results. For example, you submit a <code>ListItems</code> request that matches 2,000 items with <code>MaxResults</code> set at 500. The service returns the first batch of results (up to 500) and a <code>NextToken</code> value that can be used to fetch the next batch of results.'
   ListItemsRequest:
     type: object
     properties: {}
@@ -356,7 +336,7 @@ definitions:
         description: Unique identifier of the object in the container.
       StorageClass:
         $ref: '#/definitions/StorageClass'
-        description: The storage class where the object was persisted. Should be “Temporal”.
+        description: The storage class where the object was persisted. The class should be “Temporal”.
   PutObjectRequest:
     type: object
     required:
@@ -365,17 +345,12 @@ definitions:
       Body:
         $ref: '#/definitions/PayloadBlob'
         description: 'The bytes to be stored. '
-  ErrorMessage:
-    type: string
-    pattern: '[ \w:\.\?-]+'
-    minLength: 1
-    maxLength: 255
   ContentRangePattern:
     type: string
     pattern: ^bytes=\d+\-\d+/\d+$
   ContentType:
     type: string
-    pattern: '^[\w\-\/\.]{1,255}$'
+    pattern: '^[\w\-\/\.\+]{1,255}$'
   PathNaming:
     type: string
     pattern: '(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+'

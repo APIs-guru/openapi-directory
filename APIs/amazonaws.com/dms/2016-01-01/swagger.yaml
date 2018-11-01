@@ -750,6 +750,23 @@ paths:
           in: query
           description: Pagination token
           required: false
+      x-waiters:
+        - acceptors:
+            - expected: ResourceNotFoundFault
+              matcher: error
+              state: success
+            - argument: 'Endpoints[].Status'
+              expected: active
+              matcher: pathAny
+              state: failure
+            - argument: 'Endpoints[].Status'
+              expected: creating
+              matcher: pathAny
+              state: failure
+          delay: 5
+          description: Wait until testing endpoint is deleted.
+          maxAttempts: 60
+          operation: DescribeEndpoints
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -999,6 +1016,44 @@ paths:
           in: query
           description: Pagination token
           required: false
+      x-waiters:
+        - acceptors:
+            - argument: 'ReplicationInstances[].ReplicationInstanceStatus'
+              expected: available
+              matcher: pathAll
+              state: success
+            - argument: 'ReplicationInstances[].ReplicationInstanceStatus'
+              expected: deleting
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationInstances[].ReplicationInstanceStatus'
+              expected: incompatible-credentials
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationInstances[].ReplicationInstanceStatus'
+              expected: incompatible-network
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationInstances[].ReplicationInstanceStatus'
+              expected: inaccessible-encryption-credentials
+              matcher: pathAny
+              state: failure
+          delay: 60
+          description: Wait until DMS replication instance is available.
+          maxAttempts: 60
+          operation: DescribeReplicationInstances
+        - acceptors:
+            - argument: 'ReplicationInstances[].ReplicationInstanceStatus'
+              expected: available
+              matcher: pathAny
+              state: failure
+            - expected: ResourceNotFoundFault
+              matcher: error
+              state: success
+          delay: 15
+          description: Wait until DMS replication instance is deleted.
+          maxAttempts: 60
+          operation: DescribeReplicationInstances
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1116,6 +1171,158 @@ paths:
           in: query
           description: Pagination token
           required: false
+      x-waiters:
+        - acceptors:
+            - argument: 'ReplicationTasks[].Status'
+              expected: ready
+              matcher: pathAll
+              state: success
+            - argument: 'ReplicationTasks[].Status'
+              expected: starting
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: running
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: stopping
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: stopped
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: failed
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: modifying
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: testing
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: deleting
+              matcher: pathAny
+              state: failure
+          delay: 15
+          description: Wait until DMS replication task is ready.
+          maxAttempts: 60
+          operation: DescribeReplicationTasks
+        - acceptors:
+            - argument: 'ReplicationTasks[].Status'
+              expected: stopped
+              matcher: pathAll
+              state: success
+            - argument: 'ReplicationTasks[].Status'
+              expected: ready
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: creating
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: starting
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: running
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: failed
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: modifying
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: testing
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: deleting
+              matcher: pathAny
+              state: failure
+          delay: 15
+          description: Wait until DMS replication task is stopped.
+          maxAttempts: 60
+          operation: DescribeReplicationTasks
+        - acceptors:
+            - argument: 'ReplicationTasks[].Status'
+              expected: running
+              matcher: pathAll
+              state: success
+            - argument: 'ReplicationTasks[].Status'
+              expected: ready
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: creating
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: stopping
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: stopped
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: failed
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: modifying
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: testing
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: deleting
+              matcher: pathAny
+              state: failure
+          delay: 15
+          description: Wait until DMS replication task is running.
+          maxAttempts: 60
+          operation: DescribeReplicationTasks
+        - acceptors:
+            - argument: 'ReplicationTasks[].Status'
+              expected: ready
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: creating
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: stopped
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: running
+              matcher: pathAny
+              state: failure
+            - argument: 'ReplicationTasks[].Status'
+              expected: failed
+              matcher: pathAny
+              state: failure
+            - expected: ResourceNotFoundFault
+              matcher: error
+              state: success
+          delay: 15
+          description: Wait until DMS replication task is deleted.
+          maxAttempts: 60
+          operation: DescribeReplicationTasks
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1773,6 +1980,20 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TestConnectionMessage'
+      x-waiters:
+        - acceptors:
+            - argument: Connection.Status
+              expected: successful
+              matcher: path
+              state: success
+            - argument: Connection.Status
+              expected: failed
+              matcher: path
+              state: failure
+          delay: 5
+          description: Wait until testing connection succeeds.
+          maxAttempts: 60
+          operation: TestConnection
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1807,13 +2028,7 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tag to be assigned to the DMS resource.
     description: <p/>
-  ResourceNotFoundFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: The resource could not be found.
+  ResourceNotFoundFault: {}
   CreateEndpointResponse:
     type: object
     example:
@@ -1913,41 +2128,11 @@ definitions:
         $ref: '#/definitions/MongoDbSettings'
         description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the <b>Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service</b> section at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using MongoDB as a Target for AWS Database Migration Service</a>. '
     description: <p/>
-  KMSKeyNotAccessibleFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: AWS DMS cannot access the KMS key.
-  ResourceAlreadyExistsFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: The resource you are attempting to create already exists.
-  ResourceQuotaExceededFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: The quota for this resource quota has been exceeded.
-  InvalidResourceStateFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: The resource is in a state that prevents it from being used for database migration.
-  AccessDeniedFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: AWS DMS was denied access to the endpoint.
+  KMSKeyNotAccessibleFault: {}
+  ResourceAlreadyExistsFault: {}
+  ResourceQuotaExceededFault: {}
+  InvalidResourceStateFault: {}
+  AccessDeniedFault: {}
   CreateEventSubscriptionResponse:
     type: object
     properties:
@@ -1983,20 +2168,8 @@ definitions:
         $ref: '#/definitions/TagList'
         description: A tag to be attached to the event subscription.
     description: <p/>
-  SNSInvalidTopicFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: The SNS topic is invalid.
-  SNSNoAuthorizationFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: You are not authorized for the SNS subscription.
+  SNSInvalidTopicFault: {}
+  SNSNoAuthorizationFault: {}
   CreateReplicationInstanceResponse:
     type: object
     example:
@@ -2101,34 +2274,10 @@ definitions:
         $ref: '#/definitions/BooleanOptional'
         description: ' Specifies the accessibility options for the replication instance. A value of <code>true</code> represents an instance with a public IP address. A value of <code>false</code> represents an instance with a private IP address. The default value is <code>true</code>. '
     description: <p/>
-  InsufficientResourceCapacityFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: There are not enough resources allocated to the database migration.
-  StorageQuotaExceededFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: The storage quota has been exceeded.
-  ReplicationSubnetGroupDoesNotCoverEnoughAZs:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: The replication subnet group does not cover enough Availability Zones (AZs). Edit the replication subnet group and add more AZs.
-  InvalidSubnet:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: The subnet provided is invalid.
+  InsufficientResourceCapacityFault: {}
+  StorageQuotaExceededFault: {}
+  ReplicationSubnetGroupDoesNotCoverEnoughAZs: {}
+  InvalidSubnet: {}
   CreateReplicationSubnetGroupResponse:
     type: object
     example:
@@ -2949,12 +3098,7 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: The tags associated with the certificate.
-  InvalidCertificateFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The certificate was not valid.
+  InvalidCertificateFault: {}
   ListTagsForResourceResponse:
     type: object
     example:
@@ -3178,13 +3322,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The replication instance identifier. This parameter is stored as a lowercase string.
     description: <p/>
-  UpgradeDependencyFailureFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: An upgrade dependency is preventing the database migration.
+  UpgradeDependencyFailureFault: {}
   ModifyReplicationSubnetGroupResponse:
     type: object
     example:
@@ -3214,13 +3352,7 @@ definitions:
         $ref: '#/definitions/SubnetIdentifierList'
         description: A list of subnet IDs.
     description: <p/>
-  SubnetAlreadyInUse:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: <p/>
-    description: The specified subnet is already in use.
+  SubnetAlreadyInUse: {}
   ModifyReplicationTaskResponse:
     type: object
     properties:
@@ -3458,8 +3590,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
     description: <p/>
-  ExceptionMessage:
-    type: string
   String:
     type: string
   Long:
