@@ -277,6 +277,25 @@ paths:
           schema:
             $ref: '#/definitions/SourceControl'
       summary: Updates source control token
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Web/billingMeters':
+    get:
+      description: Gets a list of meters for a given location.
+      operationId: BillingMeters_List
+      parameters:
+        - description: Azure Location of billable resource
+          in: query
+          name: billingLocation
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BillingMeterCollection'
+      summary: Gets a list of meters for a given location.
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Web/checknameavailability':
     post:
       description: Check if a resource name is available.
@@ -533,6 +552,63 @@ paths:
           description: No Content
       summary: Validate whether a resource can be moved.
 definitions:
+  BillingMeter:
+    allOf:
+      - description: Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
+        properties:
+          id:
+            description: Resource Id.
+            readOnly: true
+            type: string
+          kind:
+            description: Kind of resource.
+            type: string
+          name:
+            description: Resource Name.
+            readOnly: true
+            type: string
+          type:
+            description: Resource type.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: App Service billing entity that contains information about meter which the Azure billing system utilizes to charge users for services.
+    properties:
+      properties:
+        description: BillingMeter resource specific properties
+        properties:
+          billingLocation:
+            description: Azure Location of billable resource
+            type: string
+          friendlyName:
+            description: Friendly name of the meter
+            type: string
+          meterId:
+            description: Meter GUID onboarded in Commerce
+            type: string
+          resourceType:
+            description: App Service resource type meter used for
+            type: string
+          shortName:
+            description: Short Name from App Service Azure pricing Page
+            type: string
+        x-ms-client-flatten: true
+    type: object
+  BillingMeterCollection:
+    description: Collection of Billing Meters
+    properties:
+      nextLink:
+        description: Link to next page of resources.
+        readOnly: true
+        type: string
+      value:
+        description: Collection of Billing Meters.
+        items:
+          $ref: '#/definitions/BillingMeter'
+        type: array
+    required:
+      - value
+    type: object
   CsmMoveResourceEnvelope:
     description: Object with a list of the resources that need to be moved and the resource group they should be moved to.
     properties:

@@ -33,6 +33,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/h5/arena/matches/{matchId}':
     get:
@@ -68,7 +69,7 @@ paths:
                 <li>Updated the documentation for the "MapVariantId" and "GameVariantId" fields with the recommendation of using the "MapVariantResourceId" and "GameVariantResourceId" fields, respectively.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Match Result - Arena
+      operationId: Halo-5-Match-Result-Arena
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
@@ -262,6 +263,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Match Result - Arena
   '/h5/campaign/matches/{matchId}':
     get:
       description: |
@@ -294,7 +296,7 @@ paths:
                 <li>Added documentation for the "GameVariantResourceId", "MapVariantResourceId", and "PlayerScore" fields.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Match Result - Campaign
+      operationId: Halo-5-Match-Result-Campaign
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
@@ -423,6 +425,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Match Result - Campaign
   '/h5/companies/{companyId}':
     get:
       description: |
@@ -435,7 +438,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Company
+      operationId: Halo-5-Company
       parameters:
         - description: The ID for the Company. The Company ID for a player can be retrieved from the Profile APIs via the "Halo 5 - Player Apperance" Endpoint.
           in: path
@@ -533,6 +536,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Company
   '/h5/companies/{companyId}/commendations':
     get:
       description: |
@@ -545,7 +549,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Company Commendations
+      operationId: Halo-5-Company-Commendations
       parameters:
         - description: The ID for the Company. The Company ID for a player can be retrieved from the Profile APIs via the "Halo 5 - Player Apperance" Endpoint.
           in: path
@@ -579,6 +583,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Company Commendations
   '/h5/custom/matches/{matchId}':
     get:
       description: |
@@ -613,7 +618,7 @@ paths:
                 <li>Updated the documentation for the "MapVariantId" and "GameVariantId" fields with the recommendation of using the "MapVariantResourceId" and "GameVariantResourceId" fields, respectively.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Match Result - Custom
+      operationId: Halo-5-Match-Result-Custom
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
@@ -750,6 +755,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Match Result - Custom
   '/h5/customlocal/matches/{matchId}':
     get:
       description: |
@@ -762,7 +768,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Match Result - Custom Local
+      operationId: Halo-5-Match-Result-Custom-Local
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
@@ -899,6 +905,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Match Result - Custom Local
   '/h5/matches/{matchId}/events':
     get:
       description: |
@@ -933,7 +940,7 @@ paths:
                 <li>Fixed an issue that caused the API to consistently return HTTP 500's for matches where a player left and rejoined the match.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Match Events
+      operationId: Halo-5-Match-Events
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
@@ -944,63 +951,465 @@ paths:
         '200':
           description: The response body will contain the Match Events.
           examples:
-            application/json:
-              GameEvents:
-                - Assistants:
-                    - Gamertag: string
-                  DeathDisposition: int
-                  EventName: string
-                  ImpulseId: int
-                  IsAssassination: boolean
-                  IsGroundPound: boolean
-                  IsHeadshot: boolean
-                  IsMelee: boolean
-                  IsShoulderBash: boolean
-                  IsWeapon: boolean
-                  Killer:
-                    Gamertag: string
-                  KillerAgent: int
-                  KillerWeaponAttachmentIds:
-                    - int
-                  KillerWeaponStockId: int
-                  KillerWorldLocation:
-                    x: double
-                    'y': double
-                    z: double
-                  MedalId: int
-                  Player:
-                    Gamertag: string
-                  RoundIndex: int
-                  ShotsFired: int
-                  ShotsLanded: int
-                  TimeSinceStart: string
-                  TimeWeaponActiveAsPrimary: string
-                  Victim:
-                    Gamertag: string
-                  VictimAgent: int
-                  VictimAttachmentIds:
-                    - int
-                  VictimStockId: int
-                  VictimWorldLocation:
-                    x: double
-                    'y': double
-                    z: double
-                  WeaponAttachmentIds:
-                    - int
-                  WeaponStockId: int
-              IsCompleteSetOfEvents: boolean
+            application/json: |
+              {
+                // Events that describe a match from start to completion. Events are reported in
+                // chronological order.
+                // Events can come in a variety of types indicated by the "EventName" field. Each event
+                // is documented in detail below the documentation for this return contract.
+                // Additional event types may be added in the future.
+                // When deserializing events, it is suggested to use a union of all of the fields
+                // across all of the different event types, shown below.
+                "GameEvents": [
+                  {
+                    "Assistants": [
+                      {
+                        "Gamertag": "string",
+
+                        "Xuid": null
+                      }
+                    ],
+
+                    "DeathDisposition": "int",
+
+                    "ImpulseId": "int",
+
+                    "IsAssassination": "boolean",
+
+                    "IsGroundPound": "boolean",
+
+                    "IsHeadshot": "boolean",
+
+                    "IsMelee": "boolean",
+
+                    "IsShoulderBash": "boolean",
+
+                    "IsWeapon": "boolean",
+
+                    "Killer": {
+
+                      "Gamertag": "string",
+
+                      "Xuid": null
+                    },
+
+                    "KillerAgent": "int",
+
+                    "KillerWeaponAttachmentIds": [ "int" ],
+
+                    "KillerWeaponStockId": "int",
+
+                    "KillerWorldLocation": {
+
+                      "x": "double",
+
+                      "y": "double",
+
+                      "z": "double"
+                    },
+
+                    "MedalId": "int",
+
+                    "Player": {
+
+                      "Gamertag": "string",
+
+                      "Xuid": null
+                    },
+
+                    "RoundIndex": "int",
+
+                    "ShotsFired": "int",
+
+                    "ShotsLanded": "int",
+
+                    "TimeWeaponActiveAsPrimary": "string",
+
+                    "Victim": {
+
+                      "Gamertag": "string",
+
+                      "Xuid": null
+                    },
+
+                    "VictimAgent": "int",
+
+                    "VictimAttachmentIds": [ "int" ],
+
+                    "VictimStockId": "int",
+
+                    "VictimWorldLocation": {
+
+                      "x": "double",
+
+                      "y": "double",
+
+                      "z": "double"
+                    },
+
+                    "WeaponAttachmentIds": [ "int" ],
+
+                    "WeaponStockId": "int",
+
+                    // Descriptor to determine what fields will be filled in for the event. This list
+                    // will grow over time as more events are exposed. Can be one of the following:
+                    //   "Death" - An event that is created when a death occurs in the match.
+                    //   "Impulse" - An event that is created when an impulse (invisible medal) is
+                    // triggered in the match.
+                    //   "Medal" - An event that is created when a medal is awarded in the match.
+                    //   "PlayerSpawn" - An event that is created when a player spawns in the match.
+                    //   "RoundStart" - An event that is created when a round starts. In regular
+                    // matches, there is typically one round. However, some modes have multiple rounds..
+                    //   "RoundEnd" - An event that is created when a round ends. In regular matches,
+                    // there is typically one round. However, some modes have multiple rounds..
+                    //   "WeaponDrop" - An event that is created when a player drops a weapon for a new
+                    // weapon. This occurs when a player picks up a new weapon and drops their current
+                    // one, when a player dies and drops their weapon(s), or at the end of the match
+                    // for each player.
+                    //   "WeaponPickup" - An event that is created when a player picks up a weapon.
+                    // This can be when a player spawns, or when a player picks up a new weapon.
+                    //   "WeaponPickupPad" - An event that is created when a player picks up a weapon
+                    // off a pad. This will not be triggered if the weapon was picked up off the ground
+                    // after another player who had picked it off a pad.
+                    "EventName": "string",
+
+                    // Time passed since the start of the match when the event occurred. This is
+                    // expressed as an ISO 8601 Duration.
+                    "TimeSinceStart": "string"
+                  }
+                ],
+
+                // As this is an experimental API it has no guarantees around its accuracy. However we
+                // do try our best to ensure all events are valid and accounted for. If they do not
+                // match up to our expectations this field will return as false indicating this may not
+                // be the full set of events that occurred in game.
+                "IsCompleteSetOfEvents": "boolean",
+
+                // Internal use only. A set of related resource links.
+                "Links": null
+              }
+
+              // Death Event
+              {
+                // The gamertags of players who contributed to a kill.
+                "Assistants": [
+                {
+                  // The player's gamertag.
+                  "Gamertag": "string",
+
+                  // Internal use only. This will always be null.
+                  "Xuid": null
+                }],
+
+                // The disposition of the death. Can be one of the following:
+                //   Friendly = 0,
+                //   Hostile = 1,
+                //   Neutral = 2
+                "DeathDisposition": "int",
+
+                // Describes if the death was committed by the killer from behind (Assassination or
+                // melee to back).
+                "IsAssassination": "boolean",
+
+                // Describes if the kill was committed by the killer with a ground pound.
+                "IsGroundPound": "boolean",
+
+                // Describes if the kill was committed by the killer with a head shot.
+                "IsHeadshot": "boolean",
+
+                // Describes if the kill was committed by the killer using melee.
+                "IsMelee": "boolean",
+
+                // Describes if the kill was committed by the killer with a shoulder bash.
+                "IsShoulderBash": "boolean",
+
+                // Describes if the kill was committed by the killer with a weapon.
+                "IsWeapon": "boolean",
+
+                // Describes the killer's information. Can be null if killer is not a player in the
+                // game.
+                "Killer": {
+
+                  // The player's gamertag.
+                  "Gamertag": "string",
+
+                  // Internal use only. This will always be null.
+                  "Xuid": null
+                },
+
+                // The type of killer that caused the death. Can be one of the following:
+                //   None = 0,
+                //   Player = 1,
+                //   AI = 2
+                "KillerAgent": "int",
+
+                // The IDs of any attachments that were associated with the weapon that was used to
+                // kill the victim.
+                "KillerWeaponAttachmentIds": ["int"],
+
+                // The ID of the weapon that was used to kill the victim. Depending on the type of the
+                // kill, this could be the ID of an Enemy, Vehicle, or Weapon, all of which are
+                // available via the Metadata APIs. Note that most vehicles are duplicated between both
+                // the Vehicle and Weapon Metadata APIs. If this was a standard kill with an actual
+                // weapon, then this will be the ID of the weapon that killed the victim. If this was a
+                // kill with a vehicle, then this will the ID of the vehicle that killed the victim. If
+                // this was a melee kill, then this will be the ID of the type of the object that
+                // killed the player (which will be either Spartan or the type of the type of the AI
+                // enemy that killed the player). Note that if the victim was killed by a weapon held
+                // by an AI enemy, the type of the AI enemy is unknown.
+                "KillerWeaponStockId": "int",
+
+                // Object describing the position of the killer on the map when they made the kill.
+                "KillerWorldLocation": {
+
+                  "x": "double",
+
+                  "y": "double",
+
+                  "z": "double"
+                },
+
+                // Describes the victim's information. Can be null if victim is not a player in the
+                // game.
+                "Victim": {
+
+                  // The player's gamertag.
+                  "Gamertag": "string",
+
+                  // Internal use only. This will always be null.
+                  "Xuid": null
+                },
+
+                // The type of victim who was killed. Can be one of the following:
+                //   None = 0,
+                //   Player = 1,
+                //   AI = 2
+                "VictimAgent": "int",
+
+                // Any variants of the AI enemy, empty otherwise.
+                "VictimAttachmentIds": ["int"],
+
+                // The ID of the AI Enemy killed, zero otherwise. Enemy IDs are available via the
+                // Metadata API.
+                "VictimStockId": "int",
+
+                // Object describing the position of the victim on the map when they were killed.
+                "VictimWorldLocation": {
+
+                  "x": "double",
+
+                  "y": "double",
+
+                  "z": "double"
+                },
+
+                // Descriptor to determine what fields will be filled in for the event.
+                "EventName": "string",
+
+                // Time passed since the start of the match when the event occurred. This is expressed
+                // as an ISO 8601 Duration.
+                "TimeSinceStart": "string"
+              }
+
+              // Impulse Event
+              {
+                // The ID that uniquely identifies this impulse. Impulses are available via the
+                // Metadata API.
+                "ImpulseId" : "int",
+
+                // The player who received the impulse.
+                "Player": {
+
+                  // The player's gamertag.
+                  "Gamertag": "string",
+
+                  // Internal use only. This will always be null.
+                  "Xuid": null
+                }
+                // Descriptor to determine what fields will be filled in for the event.
+                "EventName": "Impulse",
+
+                // Time passed since the start of the match when the event occurred. This is expressed
+                // as an ISO 8601 Duration.
+                "TimeSinceStart": "string"
+              }
+
+              // Medal Event
+              {
+                // The ID that uniquely identifies this medal. Medals are available via the Metadata
+                // API.
+                "MedalId" : "int",
+
+                // The player who received the medal.
+                "Player": {
+
+                  // The player's gamertag.
+                  "Gamertag": "string",
+
+                  // Internal use only. This will always be null.
+                  "Xuid": null
+                },
+
+                // Descriptor to determine what fields will be filled in for the event.
+                "EventName": "Medal",
+
+                // Time passed since the start of the match when the event occurred. This is expressed
+                // as an ISO 8601 Duration.
+                "TimeSinceStart": "string"
+              }
+
+              // PlayerSpawn Event
+              {
+                // The player who spawned.
+                "Player": {
+
+                  // The player's gamertag.
+                  "Gamertag": "string",
+
+                  // Internal use only. This will always be null.
+                  "Xuid": null
+                },
+
+                // Descriptor to determine what fields will be filled in for the event.
+                "EventName": "PlayerSpawn",
+
+                // Time passed since the start of the match when the event occurred. This is expressed
+                // as an ISO 8601 Duration.
+                "TimeSinceStart": "string"
+              }
+
+              // RoundStart Event
+              {
+                // The index of the round that started.
+                "RoundIndex" : "int",
+
+                // Descriptor to determine what fields will be filled in for the event.
+                "EventName": "RoundStart",
+
+                // Time passed since the start of the match when the event occurred. This is expressed
+                // as an ISO 8601 Duration.
+                "TimeSinceStart": "string"
+              }
+
+              // RoundEnd Event
+              {
+                // The index of the round that ended.
+                "RoundIndex" : "int",
+
+                // Descriptor to determine what fields will be filled in for the event.
+                "EventName": "RoundEnd",
+
+                // Time passed since the start of the match when the event occurred. This is expressed
+                // as an ISO 8601 Duration.
+                "TimeSinceStart": "string"
+              }
+
+              // WeaponDrop Event
+              {
+                // The player who dropped the weapon.
+                "Player": {
+
+                  // The player's gamertag.
+                  "Gamertag": "string",
+
+                  // Internal use only. This will always be null.
+                  "Xuid": null
+                },
+
+                // The number of shots fired with the weapon by the player.
+                "ShotsFired" : "int",
+
+                // The number of shots that hit the target with the weapon by the player.
+                "ShotsLanded" : "int",
+
+                // The amount of time the weapon was in the active slot of the player. This is
+                // expressed as an ISO 8601 Duration.
+                "TimeWeaponActiveAsPrimary": "string",
+
+                // The IDs of any attachments that were associated with the weapon that was dropped.
+                "WeaponAttachmentIds": ["int"],
+
+                // The ID of the weapon that was dropped. Weapons are available via the Metadata API.
+                "WeaponStockId": "int",
+
+                // Descriptor to determine what fields will be filled in for the event.
+                "EventName": "WeaponDrop",
+
+                // Time passed since the start of the match when the event occurred. This is expressed
+                // as an ISO 8601 Duration.
+                "TimeSinceStart": "string"
+              }
+
+              // WeaponPickup Event
+              {
+                // The player who picked up the weapon.
+                "Player": {
+
+                  // The player's gamertag.
+                  "Gamertag": "string",
+
+                  // Internal use only. This will always be null.
+                  "Xuid": null
+                },
+
+                // The IDs of any attachments that were associated with the weapon that was picked up.
+                "WeaponAttachmentIds": ["int"],
+
+                // The ID of the weapon that was picked up. Weapons are available via the Metadata API.
+                "WeaponStockId": "int",
+
+                // Descriptor to determine what fields will be filled in for the event.
+                "EventName": "WeaponPickup",
+
+                // Time passed since the start of the match when the event occurred. This is expressed
+                // as an ISO 8601 Duration.
+                "TimeSinceStart": "string"
+              }
+
+              // WeaponPickupPad Event
+              {
+                // The player who picked up the weapon.
+                "Player": {
+
+                  // The player's gamertag.
+                  "Gamertag": "string",
+
+                  // Internal use only. This will always be null.
+                  "Xuid": null
+                },
+
+                // The IDs of any attachments that were associated with the weapon that was picked up.
+                "WeaponAttachmentIds": ["int"],
+
+                // The ID of the weapon that was picked up. Weapons are available via the Metadata API.
+                "WeaponStockId": "int",
+
+                // Descriptor to determine what fields will be filled in for the event.
+                "EventName": "WeaponPickupPad",
+
+                // Time passed since the start of the match when the event occurred. This is expressed
+                // as an ISO 8601 Duration.
+                "TimeSinceStart": "string"
+              }
         '404':
           description: The specified Match could not be found.
         '500':
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Match Events
   '/h5/player-leaderboards/csr/{seasonId}/{playlistId}':
     get:
       description: |
         <p>Retrieves the Leaderboard for Player CSRs. The Leaderboard consists of the top Players with a CSR of 1800 or above for a given Playlist in a Season.</p>
         <br />
         <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>March 6, 2018:</strong></p>
+            <ul>
+                <li>Fixed documentation typos for the names of the "Player" and "Gamertag" properties.</li>
+            </ul>
+        </div>
         <div class="panel-body">
             <p><strong>July 31, 2017:</strong></p>
             <ul>
@@ -1020,7 +1429,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Leaderboard - Player CSR
+      operationId: Halo-5-Leaderboard-Player-CSR
       parameters:
         - description: The ID for the Season.
           in: path
@@ -1054,8 +1463,8 @@ paths:
               Links: links
               ResultCount: int
               Results:
-                - PlayerId:
-                    GamerTag: string
+                - Player:
+                    Gamertag: string
                   Rank: int
                   Score:
                     Csr: int
@@ -1070,6 +1479,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Leaderboard - Player CSR
   '/h5/players/{player}/commendations':
     get:
       description: |
@@ -1082,7 +1492,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Commendations
+      operationId: Halo-5-Player-Commendations
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -1116,6 +1526,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Player Commendations
   '/h5/players/{player}/matches':
     get:
       description: |
@@ -1143,7 +1554,7 @@ paths:
                 <li>Corrected "OwnerType" values for the "MapVariant" and "GameVariant" fields.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Match History
+      operationId: Halo-5-Player-Match-History
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -1408,12 +1819,19 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Player Match History
   /h5/servicerecords/arena:
     get:
       description: |
         <p>Retrieves Service Records for the Arena Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode.</p>
         <br />
         <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>June 29, 2018:</strong></p>
+            <ul>
+                <li>Added support for Social (Unranked) Playlists.</li>
+            </ul>
+        </div>
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
@@ -1433,14 +1851,14 @@ paths:
                 <li>Added documentation for the "CsrPercentile" field.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Service Records - Arena
+      operationId: Halo-5-Player-Service-Records-Arena
       parameters:
         - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
           name: players
           required: true
           type: string
-        - description: 'When specified, this indicates the Season to request the Arena Playlist Stats for. If this is not specified, the default is the current Season. Seasons are available via the Metadata API.'
+        - description: 'When specified, this indicates the Season to request the Arena Playlist Stats for. If this is not specified, the default is the current Season. Seasons are available via the Metadata API. Social (Unranked) Arena Playlist Stats can be retrieved by specifying "NonSeasonal".'
           in: query
           name: seasonId
           type: string
@@ -2325,6 +2743,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Player Service Records - Arena
   /h5/servicerecords/campaign:
     get:
       description: |
@@ -2344,7 +2763,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Service Records - Campaign
+      operationId: Halo-5-Player-Service-Records-Campaign
       parameters:
         - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
@@ -2534,6 +2953,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Player Service Records - Campaign
   /h5/servicerecords/custom:
     get:
       description: |
@@ -2553,7 +2973,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Service Records - Custom
+      operationId: Halo-5-Player-Service-Records-Custom
       parameters:
         - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
@@ -2732,6 +3152,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Player Service Records - Custom
   /h5/servicerecords/customlocal:
     get:
       description: |
@@ -2744,7 +3165,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Service Records - Custom Local
+      operationId: Halo-5-Player-Service-Records-Custom-Local
       parameters:
         - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
@@ -2923,6 +3344,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Player Service Records - Custom Local
   /h5/servicerecords/warzone:
     get:
       description: |
@@ -2942,7 +3364,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Service Records - Warzone
+      operationId: Halo-5-Player-Service-Records-Warzone
       parameters:
         - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
@@ -3117,6 +3539,7 @@ paths:
           description: One or more Gamertags don't pass validation rules.
         '500':
           description: Internal Server Error
+      summary: Halo 5 - Player Service Records - Warzone
   '/h5/warzone/matches/{matchId}':
     get:
       description: |
@@ -3151,7 +3574,7 @@ paths:
                 <li>Updated the documentation for the "MapVariantId" and "GameVariantId" fields with the recommendation of using the "MapVariantResourceId" and "GameVariantResourceId" fields, respectively.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Match Result - Warzone
+      operationId: Halo-5-Match-Result-Warzone
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
@@ -3334,6 +3757,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 - Match Result - Warzone
   '/h5pc/custom/matches/{matchId}':
     get:
       description: |
@@ -3368,7 +3792,7 @@ paths:
                 <li>Updated the documentation for the "MapVariantId" and "GameVariantId" fields with the recommendation of using the "MapVariantResourceId" and "GameVariantResourceId" fields, respectively.</li>
             </ul>
         </div>
-      operationId: Halo 5 PC - Match Result - Custom
+      operationId: Halo-5-PC-Match-Result-Custom
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 PC - Player Match History" Endpoint.
           in: path
@@ -3505,6 +3929,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 PC - Match Result - Custom
   '/h5pc/players/{player}/matches':
     get:
       description: |
@@ -3532,7 +3957,7 @@ paths:
                 <li>Corrected "OwnerType" values for the "MapVariant" and "GameVariant" fields.</li>
             </ul>
         </div>
-      operationId: Halo 5 PC - Player Match History
+      operationId: Halo-5-PC-Player-Match-History
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -3797,6 +4222,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 PC - Player Match History
   /h5pc/servicerecords/custom:
     get:
       description: |
@@ -3816,7 +4242,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-      operationId: Halo 5 PC - Player Service Records - Custom
+      operationId: Halo-5-PC-Player-Service-Records-Custom
       parameters:
         - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
@@ -3995,6 +4421,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo 5 PC - Player Service Records - Custom
   '/hw2/matches/{matchId}':
     get:
       description: |
@@ -4013,7 +4440,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo Wars 2 - Match Result
+      operationId: Halo-Wars-2-Match-Result
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo Wars 2 - Player Match History" Endpoint.
           in: path
@@ -4112,6 +4539,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo Wars 2 - Match Result
   '/hw2/matches/{matchId}/events':
     get:
       description: |
@@ -4131,7 +4559,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo Wars 2 - Match Events
+      operationId: Halo-Wars-2-Match-Events
       parameters:
         - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo Wars 2 - Player Match History" Endpoint.
           in: path
@@ -4142,22 +4570,1031 @@ paths:
         '200':
           description: The response body will contain the Match Events.
           examples:
-            application/json:
-              GameEvents:
-                - GameEvent
-              IsCompleteSetOfEvents: bool
+            application/json: |
+              //
+              // Main Response
+              //
+              {
+                // Events that describe a match from start to completion. Events are reported in
+                // chronological order.
+                // Events can come in a variety of types indicated by the "EventName" field. Each event
+                // is documented in detail below the documentation for this return contract.
+                // Additional event types may be added in the future.
+                // When deserializing events, it is suggested to use a union of all of the fields
+                // across all of the different event types.
+                "GameEvents": [ "GameEvent" ],
+
+                // Whether this set of events accounts for the complete set of events from the match.
+                "IsCompleteSetOfEvents": "bool"
+              }
+
+              //
+              // BuildingConstructionQueued Event
+              //
+              // This event is fired for the following reasons:
+              //   - A player queues a building for construction.
+              //   - A building is provided by the scenario (for instance, the buildings a player
+              //     starts with at the beginning of the scenario). In this case, a subsequent
+              //     BuildingConstructionCompleted event will not be fired.
+              //   - A building is produced by a leader power.
+              //   - A building is built in an "upgraded" state. In this case, a
+              //     BuildingConstructionQueued event is fired for the the "upgraded" building rather
+              //     than firing a BuildingConstructionQueued event for the "non-upgraded" building
+              //     followed by a subsequent BuildingUpgraded event.
+              //
+              {
+                // Index of the player that will control building that was queued for construction.
+                "PlayerIndex": "int",
+
+                // ID that indicates the type of the building. Buildings are available via the Metadata
+                // API as Game Objects.
+                "BuildingId": "string",
+
+                // Instance ID that identifies the building. The building will be referred to by this
+                // ID in subsequent events.
+                "InstanceId": "int",
+
+                // Location that the building will be created at.
+                "Location": {
+
+                  "x": "double",
+
+                  "y": "double",
+
+                  "z": "double"
+                },
+
+                // Supply cost paid to construct the building.
+                "SupplyCost": "int",
+
+                // Energy cost paid to construct the building.
+                "EnergyCost": "int",
+
+                // Length of the construction queue after enqueuing the building.
+                "QueueLength": "int",
+
+                // Whether the building was queued by the player or the scenario.
+                "ProvidedByScenario": "bool",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "EventName"  
+              }
+
+              //
+              // BuildingConstructionCompleted Event
+              //
+              // This event is fired when a building is successfully constructed.
+              //
+              {
+                // Index of the player that controls the building that was constructed.
+                "PlayerIndex": "int",
+
+                // Instance of the building that was constructed.
+                "InstanceId": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "BuildingConstructionCompleted"  
+              }
+
+              //
+              // BuildingRecycled Event
+              //
+              // This event is fired when a building is recycled.
+              //
+              {
+                // Index of the player that controls the building that was recycled.
+                "PlayerIndex": "int",
+
+                // Instance of the building that was recycled.
+                "InstanceId": "int",
+
+                // Supply earned from recycling the building.
+                "SupplyEarned": "int",
+
+                // Energy earned from recycling the building.
+                "EnergyEarned": "int",
+
+                // Whether the building was recycled by the player or the scenario.
+                "ProvidedByScenario": "bool",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "BuildingRecycled"  
+              }
+
+              //
+              // BuildingUpgraded Event
+              //
+              // This event is fired when a building is upgraded.
+              //
+              {
+                // Index of the player that controls the building that was upgraded.
+                "PlayerIndex": "int",
+
+                // ID that indicates the new type of the building. Buildings are available via the
+                // Metadata API as Game Objects.
+                "NewBuildingId": "string",
+
+                // Instance ID of the building that was upgraded.
+                "InstanceId": "int",
+
+                // Supply cost paid to upgrade the building.
+                "SupplyCost": "int",
+
+                // Energy cost paid to upgrade the building.
+                "EnergyCost": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "BuildingUpgraded"  
+              }
+
+              //
+              // CardCycled Event
+              //
+              // This event is fired when a card is cycled.
+              //
+              {
+                // Index of the player that cycled a card.
+                "PlayerIndex": "int",
+
+                // Mana cost paid to cycle the card.
+                "ManaCost": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "CardCycled"  
+              }
+
+              //
+              // CardPlayed Event
+              //
+              // This event is fired when a card is played.
+              //
+              {
+                // Index of the player that played a card.
+                "PlayerIndex": "int",
+
+                // ID that indicates the type of the card. Cards are available via the Metadata API.
+                "CardId": "guid",
+
+                // Instance ID that identifies this cast of the card. This instance will be referred to
+                // by this ID in subsequent events.
+                "InstanceId": "int",
+
+                // Mana cost paid to play the card.
+                "ManaCost": "int",
+
+                // Location where the card was played.
+                "TargetLocation": {
+
+                  "x": "double",
+
+                  "y": "double",
+
+                  "z": "double"
+                },
+
+                // Whether the card was played in the base.
+                "SpawnAtBase": "bool",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "CardPlayed"  
+              }
+
+              //
+              // Death Event
+              //
+              // This event is fired when a building or unit is destroyed.
+              //
+              {
+                // Index of the player that controlled the building or unit that was destroyed.
+                "VictimPlayerIndex": "int",
+
+                // ID that indicates the type of the building or unit that was destroyed. Game Objects
+                // are available via the Metadata API.
+                "VictimObjectTypeId": "string",
+
+                // Instance ID of the building or unit that was destroyed.
+                "VictimInstanceId": "int",
+
+                // Whether the death was considered a suicide.
+                "IsSuicide": "bool",
+
+                // Participants that contributed to the destruction of the building or unit.
+                // Participants are grouped by player, then object, then combat stats.
+                "Participants": {
+
+                  // Index of the player that participated in the destruction.
+                  "int": {
+
+                    // Objects that participated in the destruction that were owned by the given
+                    // player. Object participants are grouped by object then combat stats.
+                    "ObjectParticipants": {
+
+                      // ID that indicates the type of the building or unit that participated in the
+                      // destruction. Game Objects are available via the Metadata API.
+                      "string": {
+
+                        // Number of objects of the given type owned by the given player that
+                        // participated in the destruction.
+                        "Count": "int",
+
+                        // Information about the combat stats across all the objects of the given type
+                        // owned by the given player that participated in the destruction. Combat stats
+                        // are grouped by damage type.
+                        "CombatStats": {
+
+                          // Damage type dealt by the object of the given type. This field will contain
+                          // one of the following values:
+                          //   Basic = 0,
+                          //   LeaderPower = 1,
+                          //   LeaderPowerNonFlying = 2,
+                          //   AntiInfantry = 3,
+                          //   Fire = 4,
+                          //   AntiBuildingFire = 5,
+                          //   SmallArms = 6,
+                          //   AASmallArms = 7,
+                          //   SmallArmsScouts = 8,
+                          //   MediumArms = 9,
+                          //   ChainGun = 10,
+                          //   ArmorPiercing = 11,
+                          //   AntiVehicle = 12,
+                          //   FuelRod = 13,
+                          //   BansheeFuelRod = 14,
+                          //   AntiAir = 15,
+                          //   Explosive = 16,
+                          //   TankExplosive = 17,
+                          //   Artillery = 18,
+                          //   Missile = 19,
+                          //   Grenade = 20,
+                          //   Demolition = 21,
+                          //   Beam = 22,
+                          //   WarthogRam = 23,
+                          //   GaussCannon = 24,
+                          //   BruteShot = 25,
+                          //   Melee = 26,
+                          //   SuicideGrunt = 27,
+                          //   SuicideGruntAV = 28,
+                          //   SuperSentinel = 29,
+                          //   Hero = 30,
+                          //   CampaignHero = 31,
+                          //   ScarabBeam = 32,
+                          //   Unknown = 255
+                          // Additional damage types may be added in the future.
+                          "int": {
+
+                            // Number of attacks of the given damage type that were successfully landed
+                            // on the victim building or unit.
+                            "AttacksLanded": "int"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "Death"  
+              }
+
+              //
+              // FirefightWaveCompleted Event
+              //
+              // This event is fired when a team successfully clears a Firefight wave.
+              //
+              {
+                // Wave number that was completed.
+                "WaveNumber": "int",
+
+                // Elapsed time, measured in milliseconds, that the team took to clear the wave.
+                "WaveDurationMilliseconds": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "FirefightWaveCompleted"  
+              }
+
+              //
+              // FirefightWaveSpawned Event
+              //
+              // This event is fired when a Firefight wave has been spawned.
+              //
+              {
+                // Wave number that was spawned.
+                "WaveNumber": "int",
+
+                // Instance IDs of the buildings and units that make up the wave.
+                "InstancesSpawned": [ "int" ],
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "FirefightWaveSpawned"  
+              }
+
+              //
+              // FirefightWaveStarted Event
+              //
+              // This event is fired when a Firefight wave has started.
+              //
+              {
+                // Wave number that was started.
+                "WaveNumber": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "FirefightWaveStarted"  
+              }
+
+              //
+              // LeaderPowerCast Event
+              //
+              // This event is fired when a leader power is cast.
+              //
+              {
+                // Index of the player that cast the leader power.
+                "PlayerIndex": "int",
+
+                // ID that indicates the type of the leader power. Leader Powers are available via the
+                // Metadata API.
+                "PowerId": "string",
+
+                // Instance ID that identifies this cast of the leader power. This instance will be
+                // referred to by this ID in subsequent events.
+                "InstanceId": "int",
+
+                // Location where the leader power was cast.
+                "TargetLocation": {
+
+                  "x": "double",
+
+                  "y": "double",
+
+                  "z": "double"
+                },
+
+                // Supply cost paid to cast the leader power.
+                "SupplyCost": "int",
+
+                // Energy cost paid to cast the leader power.
+                "EnergyCost": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "LeaderPowerCast"  
+              }
+
+              //
+              // LeaderPowerUnlocked Event
+              //
+              // This event is fired when a leader power is unlocked.
+              //
+              {
+                // Index of the player that unlocked the leader power.
+                "PlayerIndex": "int",
+
+                // ID that indicates the type of the leader power. Leader Powers are available via the
+                // Metadata API.
+                "PowerId": "string",
+
+                // Command point cost paid to unlock the leader power.
+                "CommandPointCost": "int",
+
+                // Whether the leader power was unlocked by the scenario.
+                "ProvidedByScenario": "bool",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "LeaderPowerUnlocked"  
+              }
+
+              //
+              // ManaOrbCollected Event
+              //
+              // This event is fired when a mana orb is collected.
+              //
+              {
+                // Index of the player that collected the mana orb.
+                "PlayerIndex": "int",
+
+                // Instance ID of the unit that collected the mana orb.
+                "CollectorInstanceId": "int",
+
+                // Increase to the player's mana generation rate.
+                "ManaRateIncrease": "int",
+
+                // Location of the mana orb that was collected.
+                "Location": {
+
+                  "x": "double",
+
+                  "y": "double",
+
+                  "z": "double"
+                },
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "ManaOrbCollected"  
+              }
+
+              //
+              // MatchEnd Event
+              //
+              // This event is fired when the match ends.
+              //
+              {
+                // Reason the match ended. This field will contain one of the following values:
+                //   Unknown = 0,
+                //   Completed = 1,
+                //   StartedNewMission = 2,
+                //   EveryoneDisconnected = 3,
+                //   InviteAccepted = 4
+                "MatchEndReason": "int",
+
+                // Reason the winning team achieved victory. This field will contain one of the
+                // following values:
+                //   EndedPrematurely = 0,
+                //   ObjectiveCompleted = 1,
+                //   OpponentsEliminated = 2,
+                //   Unknown = 255
+                "VictoryCondition": "int",
+
+                // Elapsed time, measured in milliseconds, spent playing the match.
+                "ActivePlaytimeMilliseconds": "int",
+
+                // Ending states for the teams in the match.
+                "TeamState": {
+
+                  // Team ID.
+                  "int": {
+
+                    // Score for the team.
+                    "ObjectiveScore": "int",
+
+                    // Outcome for the team. This field will contain one of the following values:
+                    //   Unknown = 0,
+                    //   Win = 1,
+                    //   Loss = 2,
+                    //   Tie = 3
+                    "MatchOutcome": "int"
+                  }
+                },
+
+                // Ending states for the players in the match.
+                "PlayerState": {
+
+                  // Player Index.
+                  "int": {
+
+                    // Score for the player.
+                    "PersonalScore": "int"
+                  }
+                },
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "MatchEnd"  
+              }
+
+              //
+              // MatchStart Event
+              //
+              // This event is fired when the match starts.
+              //
+              {
+                // ID of the match.
+                "MatchId": "guid",
+
+                // Game mode. This field will contain one of the following values:
+                //   Unknown = 0,
+                //   CampaignSolo = 1,
+                //   CampaignCooperative = 2,
+                //   Deathmatch = 3,
+                //   Domination = 4,
+                //   Strongholds = 5,
+                //   Blitz = 6,
+                //   Firefight = 7,
+                //   NormalTutorial = 8,
+                //   BlitzTutorial = 9,
+                //   TerminusFirefight = 10
+                "GameMode": "int",
+
+                // Match type. This field will contain one of the following values:
+                //   Unknown = 0,
+                //   Campaign = 1,
+                //   Custom = 2,
+                //   Matchmaking = 3
+                "MatchType": "int",
+
+                // ID of the map. Maps are available via the Metadata API.
+                "MapId": "string",
+
+                // Playlist the match occurred in if the match occurred in a playlist; otherwise, empty
+                // Guid.
+                "PlaylistId": "guid",
+
+                // Max team size for the match.
+                "TeamSize": "int",
+
+                // whether the match is using the default rule set.
+                "IsDefaultRuleSet": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "MatchStart"  
+              }
+
+              //
+              // PlayerEliminated Event
+              //
+              // This event is fired when a player is eliminated from the match.
+              //
+              {
+                // Index of the player that was eliminated.
+                "PlayerIndex": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "PlayerEliminated"  
+              }
+
+              //
+              // PlayerJoinedMatch Event
+              //
+              // This event is fired at the start of the match for each player in the match. This event
+              // is fired for the neutral players in addition to the Human and Computer players.
+              //
+              {
+                // Index of the player that joined the match. The player will be referred to by this
+                // index in subsequent events.
+                "PlayerIndex": "int",
+
+                // Type of the player that joined the match. This field will contain one of the
+                // following values:
+                //   Unknown = 0,
+                //   Human = 1,
+                //   Computer = 2,
+                //   NPC = 3
+                "PlayerType": "int",
+
+                // Identify of the player if this is a human player; otherwise, null.
+                "HumanPlayerId": {
+
+                  // Gamertag of the player.
+                  "Gamertag": "string",
+
+                  // Internal use. This will always be null.
+                  "Xuid": null
+                },
+
+                // ID of the computer player if this is a computer player; otherwise, null.
+                "ComputerPlayerId": "int",
+
+                // Difficulty of the computer player if this is a computer player; otherwise, null.
+                // Difficulties are available via the Metadata API.
+                "ComputerDifficulty": "int",
+
+                // Team the player is a member of.
+                "TeamId": "int",
+
+                // Leader the player is using. Leaders are available via the Metadata API.
+                "LeaderId": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "PlayerJoinedMatch"  
+              }
+
+              //
+              // PlayerLeftMatch Event
+              //
+              // This event is fired when a player leaves the match early for any reason. This is not
+              // to be confused with the PlayerEliminated event. If a player is eliminated, the
+              // PlayerEliminated event will be fired. The player may continue to spectate the match
+              // after being eliminated. If the player stops spectating the match, then this event will
+              // be fired.
+              //
+              {
+                // Index of the player that left the match.
+                "PlayerIndex": "int",
+
+                // Elapsed time, measured in milliseconds, the player spent playing the match.
+                "TimeInMatchMilliseconds": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "PlayerLeftMatch"  
+              }
+
+              //
+              // PointCaptured Event
+              //
+              // This event is fired when an objective is captured in all game modes besides Blitz.
+              //
+              {
+                // Index of the player that captured the objective.
+                "PlayerIndex": "int",
+
+                // Instance ID of the objective that was captured.
+                "InstanceId": "int",
+
+                // Instance ID of the unit that captured the objective.
+                "CapturerInstanceId": "int",
+
+                // Location of the unit that captured the objective.
+                "CapturerLocation": {
+
+                  "x": "double",
+
+                  "y": "double",
+
+                  "z": "double"
+                },
+
+                // ID of the team that now owns the objective. If the objective is not owned by a team,
+                // this will be 0.
+                "NewOwningTeamId": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "PointCaptured"  
+              }
+
+              //
+              // PointCreated Event
+              //
+              // This event is fired at the start of the match for each objective that can be captured
+              // on the map.
+              //
+              {
+                // ID that indicates the type of the objective.
+                "PointId": "string",
+
+                // Instance ID that identifies the objective. The objective will be referred to by this
+                // ID in subsequent events.
+                "InstanceId": "int",
+
+                // Location of the objective.
+                "Location": {
+
+                  "x": "double",
+
+                  "y": "double",
+
+                  "z": "double"
+                },
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "PointCreated"  
+              }
+
+              //
+              // PointStatusChange Event
+              //
+              // This event is fired when an objective is captured in the Blitz game mode.
+              //
+              {
+                // Instance ID of the objective that was captured.
+                "InstanceId": "int",
+
+                // Updated status of the objective. This field will contain one of the following values:
+                //   Neutral = 0,
+                //   Contested = 1,
+                //   Captured = 2
+                "Status": "int",
+
+                // ID of the team that now owns the objective. If the objective is not owned by a team,
+                // this will be 255.
+                "OwningTeamId": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "PointStatusChange"  
+              }
+
+              //
+              // ResourceHeartbeat Event
+              //
+              // This event is fired at the start of a match and then at regular 5 seconds thereafter.
+              //
+              {
+                // Current resources for each team.
+                "TeamResources": {
+
+                  // Team ID.
+                  "int": {
+
+                    // Current objective score for the team.
+                    "ObjectiveScore": "int"
+                  }
+                },
+
+                // Current resources for each player.
+                "PlayerResources": {
+
+                  // Player Index.
+                  "int": {
+
+                    // Current supply balance for the player.
+                    "Supply": "int",
+
+                    // Total supply generated by the player throughout the match.
+                    "TotalSupply": "int",
+
+                    // Current energy balance for the player.
+                    "Energy": "int",
+
+                    // Total energy generated by the player throughout the match.
+                    "TotalEnergy": "int",
+
+                    // Current population count for the player.
+                    "Population": "int",
+
+                    // Current maximum population for the player.
+                    "PopulationCap": "int",
+
+                    // Current tech level for the player.
+                    "TechLevel": "int",
+
+                    // Current command point balance for the player.
+                    "CommandPoints": "int",
+
+                    // Total command points generated by the player throughout the match.
+                    "TotalCommandPoints": "int",
+
+                    // Current mana balance for the player.
+                    "Mana": "int",
+
+                    // Total mana generated by the player throughout the match.
+                    "TotalMana": "int",
+
+                    // Unused.
+                    "ManaRate": "int",
+
+                    // Current command XP for the player.
+                    "CommandXP": "int"
+                  }
+                },
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "EventName"  
+              }
+
+              //
+              // ResourceTransferred Event
+              //
+              // This event is fired when a player transfers resources to another player.
+              //
+              {
+                // Index of the player that sent the resources.
+                "SendingPlayerIndex": "int",
+
+                // Index of the player that received the resources.
+                "ReceivingPlayerIndex": "int",
+
+                // Supply cost paid by the sending player to send the resource.
+                "SupplyCost": "int",
+
+                // Energy cost paid by the sending player to send the resource.
+                "EnergyCost": "int",
+
+                // Supply earned by the receiving player.
+                "SupplyEarned": "int",
+
+                // Energy earned by the receiving player.
+                "EnergyEarned": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "ResourceTransferred"  
+              }
+
+              //
+              // TechResearched Event
+              //
+              // This event is fired when a tech is researched.
+              //
+              {
+                // Index of the player that received the researched tech.
+                "PlayerIndex": "int",
+
+                // ID that indicates the type of the tech that was researched. Techs are available via
+                // the Metadata API.
+                "TechId": "string",
+
+                // ID of the instance that researched the tech.
+                "ResearcherInstanceId": "int",
+
+                // Supply cost paid to research the tech.
+                "SupplyCost": "int",
+
+                // Energy cost paid to research the tech.
+                "EnergyCost": "int",
+
+                // Whether the tech was researched by the player or the scenario.
+                "ProvidedByScenario": "bool",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "TechResearched"  
+              }
+
+              //
+              // UnitControlTransferred Event
+              //
+              // This event is fired when control of a unit is transferred from a player to another
+              // player.
+              //
+              {
+                // Index of the player that lost control of the unit.
+                "OldPlayerIndex": "int",
+
+                // Index of the player that gained control of the unit.
+                "NewPlayerIndex": "int",
+
+                // ID that indicates the type of the unit that was transferred. Units are available via
+                // the Metadata API as Game Objects.
+                "SquadId": "string",
+
+                // ID of the instance that was transferred.
+                "InstanceId": "int",
+
+                // ID of the instance that caused the transfer of the unit, if appropriate; otherwise,
+                // 0.
+                "CapturerInstanceId": "int",
+
+                // Location of the unit when control was transferred.
+                "Location": {
+
+                  "x": "double",
+
+                  "y": "double",
+
+                  "z": "double"
+                },
+
+                // Population consumed by the transferred unit.
+                "PopulationCost": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "UnitControlTransferred"  
+              }
+
+              //
+              // UnitPromoted Event
+              //
+              // This event is fired when a unit is promoted.
+              //
+              {
+                // Index of the player that controls the unit that was promoted.
+                "PlayerIndex": "int",
+
+                // ID that indicates the type of the unit that was promoted. Units are available via
+                // the Metadata API as Game Objects.
+                "SquadId": "string",
+
+                // ID of the instance that was promoted.
+                "InstanceId": "int",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "UnitPromoted"  
+              }
+
+              //
+              // UnitTrained Event
+              //
+              // This event is fired for the following reasons:
+              //   - A player trains a unit from a building.
+              //   - A unit is produced by a leader power or card.
+              //   - A unit is provided by the scenario (for instance, the units a player starts with
+              //     at the beginning of the scenario).
+              //
+              {
+                // Index of the player that controls the unit that was trained.
+                "PlayerIndex": "int",
+
+                // ID that indicates the type of the unit that was trained. Units are available via the
+                // Metadata API as Game Objects.
+                "SquadId": "string",
+
+                // Instance ID that identifies the unit. The unit will be referred to by this ID in
+                // subsequent events.
+                "InstanceId": "int",
+
+                // ID of the instance that trained the unit, if appropriate; otherwise, 0.
+                "CreatorInstanceId": "int",
+
+                // Location of the unit when it spawned.
+                "SpawnLocation": {
+
+                  "x": "double",
+
+                  "y": "double",
+
+                  "z": "double"
+                },
+
+                // Supply cost paid to train the unit.
+                "SupplyCost": "int",
+
+                // Energy cost paid to train the unit.
+                "EnergyCost": "int",
+
+                // Population cost paid to train the unit.
+                "PopulationCost": "int",
+
+                // Whether the unit that was trained was cloned by a leader power.
+                "IsClone": "bool",
+
+                // Whether the unit was trained by the player or the scenario.
+                "ProvidedByScenario": "bool",
+
+                // Elapsed time, measured in milliseconds, since the point when the match started.
+                "TimeSinceStartMilliseconds": "int",
+
+                // Name of the event.
+                "EventName": "UnitTrained"  
+              }
         '404':
           description: The specified Match could not be found.
         '500':
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo Wars 2 - Match Events
   '/hw2/player-leaderboards/csr/{seasonId}/{playlistId}':
     get:
       description: |
         <p>Retrieves the Leaderboard for Player CSRs. The Leaderboard consists of the top Players with a CSR of 1800 or above for a given Playlist in a Season.</p>
         <br />
         <h4>Changelog</h4>
+        <div class="panel-body">
+            <p><strong>March 6, 2018:</strong></p>
+            <ul>
+                <li>Fixed documentation typos for the names of the "Player" and "Gamertag" properties.</li>
+            </ul>
+        </div>
         <div class="panel-body">
             <p><strong>July 31, 2017:</strong></p>
             <ul>
@@ -4170,7 +5607,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo Wars 2 - Leaderboard - Player CSR
+      operationId: Halo-Wars-2-Leaderboard-Player-CSR
       parameters:
         - description: The ID for the Season.
           in: path
@@ -4204,8 +5641,8 @@ paths:
               Links: links
               ResultCount: int
               Results:
-                - PlayerId:
-                    GamerTag: string
+                - Player:
+                    Gamertag: string
                   Rank: int
                   Score:
                     Csr: int
@@ -4220,6 +5657,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo Wars 2 - Leaderboard - Player CSR
   '/hw2/players/{player}/campaign-progress':
     get:
       description: |
@@ -4232,7 +5670,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo Wars 2 - Player Campaign Progress
+      operationId: Halo-Wars-2-Player-Campaign-Progress
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -4271,6 +5709,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo Wars 2 - Player Campaign Progress
   '/hw2/players/{player}/matches':
     get:
       description: |
@@ -4289,7 +5728,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo Wars 2 - Player Match History
+      operationId: Halo-Wars-2-Player-Match-History
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -4393,6 +5832,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo Wars 2 - Player Match History
   '/hw2/players/{player}/stats':
     get:
       description: |
@@ -4412,7 +5852,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo Wars 2 - Player Stats Summary
+      operationId: Halo-Wars-2-Player-Stats-Summary
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -4423,33 +5863,247 @@ paths:
         '200':
           description: The response body will contain the Stats Summary for the Player.
           examples:
-            application/json:
-              CustomSummary:
-                CustomModeStats:
-                  - Summary
-                CustomStats: Summary
-                SkirmishStats:
-                  MultiplayerModeStats:
-                    - Summary
-                  MultiplayerStats: Summary
-                  SinglePlayerModeStats:
-                    - Summary
-                  SinglePlayerStats: Summary
-              MatchmakingSummary:
-                RankedModeStats:
-                  - Summary
-                RankedPlaylistStats:
-                  - Summary
-                SocialModeStats:
-                  - Summary
-                SocialPlaylistStats:
-                  - Summary
+            application/json: |
+              //
+              // Main Response
+              //
+              {
+                // Summary of activity across all Custom matches that the player has participated in.
+                "CustomSummary": {
+
+                  // Summary of activity across all Skirmish matches (player(s) vs. AI(s)) that the
+                  // player has participated in.
+                  "SkirmishStats": {
+
+                    // Summary of activity across all Skirmish matches that contained only the player.
+                    // This will contain a single Summary. The Summary contract is documented in detail
+                    // below the documentation for the Main Response.
+                    "SinglePlayerStats": "Summary",
+
+                    // Summary of activity across all Skirmish matches that contained two or more human
+                    // players that the player has participated in. This will contain a single Summary.
+                    // The Summary contract is documented in detail below the documentation for the
+                    // Main Response.
+                    "MultiplayerStats": "Summary",
+
+                    // Summary of activity across all Skirmish matches that contained only the player,
+                    // separated by game mode. This will contain multiple Summary entries, one for each
+                    // game mode. The Summary contract is documented in detail below the documentation
+                    // for the Main Response.
+                    "SinglePlayerModeStats": [ "Summary" ],
+
+                    // Summary of activity across all Skirmish matches that contained two or more human
+                    // players that the player has participated in. This will contain multiple Summary
+                    // entries, one for each game mode. The Summary contract is documented in detail
+                    // below the documentation for the Main Response.
+                    "MultiplayerModeStats": [ "Summary" ],
+
+                  },
+
+                  // Summary of activity across all non-Skirmish matches that the player has
+                  // participated in. This will contain a single Summary. The Summary contract is
+                  // documented in detail below the documentation for the Main Response.
+                  "CustomStats": "Summary",
+
+                  // Summary of activity across all non-Skirmish matches that the player has
+                  // participated in, separated by game mode. This will contain multiple Summary
+                  // entries, one for each game mode. The Summary contract is documented in detail
+                  // below the documentation for the Main Response.
+                  "CustomModeStats": [ "Summary" ]
+                },
+
+                // Summary across all matchmade matches that the player has participated in. This
+                // includes both social and ranked matches, matches from all seasons, and matches from
+                // all game modes.
+                "MatchmakingSummary": {
+
+                  // Summary across all matches in social (unranked) playlists. This may include
+                  // summary information from playlists that are no longer playable. Playlists that the
+                  // player has never played in are omitted from this collection. Note that is possible
+                  // for a playlist to go between social and ranked. Consumers of this endpoint should
+                  // be careful about the possibility that a playlist appears in both collections. This
+                  // will contain a Summary entry for each playlist. The Summary contract is documented
+                  // in detail below the documentation for the Main Response.
+                  "SocialPlaylistStats": [ "Summary" ],
+
+                  // Summary across all matches in ranked playlists. This may include summary
+                  // information from playlists that are no longer playable. Playlists that the player
+                  // has never played in are omitted from this collection. Note that is possible for a
+                  // playlist to go between social and ranked. Consumers of this endpoint should be
+                  // careful about the possibility that a playlist appears in both collections. The
+                  // Summary contract is documented in detail below the documentation for the Main
+                  // Response.
+                  "RankedPlaylistStats": [ "Summary" ],
+
+                  // Summary across all matches in social (unranked) playlists, separated by game mode.
+                  // This may include summary information from playlists that are no longer playable.
+                  // Playlists that the player has never played in are omitted from this collection.
+                  // Note that is possible for a playlist to go between social and ranked. Consumers of
+                  // this endpoint should be careful about the possibility that a playlist appears in
+                  // both collections. This will contain multiple Summary entries, one for each
+                  // playlist and game mode combination. The Summary contract is documented in detail
+                  // below the documentation for the Main Response.
+                  "SocialModeStats": [ "Summary" ],
+
+                  // Summary across all matches in ranked playlists, separated by game mode. This may
+                  // include summary information from playlists that are no longer playable. Playlists
+                  // that the player has never played in are omitted from this collection. Note that is
+                  // possible for a playlist to go between social and ranked. Consumers of this
+                  // endpoint should be careful about the possibility that a playlist appears in both
+                  // collections. This will contain multiple Summary entries, one for each playlist and
+                  // game mode combination. The Summary contract is documented in detail below the
+                  // documentation for the Main Response.
+                  "RankedModeStats": [ "Summary" ],
+
+                }
+              }
+
+              //
+              // Summary
+              //
+              {
+                // Playlist ID that this entry summarizes. If this entry summarizes Custom matches,
+                // this will be null. Playlists are available via the Metadata API.
+                "PlaylistId": "guid",
+
+                // When summarizing a set of matches that took place in a common playlist, this field
+                // provides the current classification. This field will contain one of the following
+                // values:
+                //   General Stats = 0,
+                //   Blitz Stats = 1,
+                //   Firefight Stats = 2
+                // If this entry summarizes Custom matches, this will be null.
+                "PlaylistClassification": "int",
+
+                // Highest Competitive Skill Ranking (CSR) achieved by the player in the playlist. If
+                // the player has never finished the measurement matches on this playlist, this field
+                // will be null. If this entry does not summarize ranked matches, this will be null.
+                "HighestCsr": {
+
+                  // CSR Tier. CSR Tiers are designation-specific. If the player is still in
+                  // measurement matches, this field will be null. CSR Tiers are referenced by CSR
+                  // Designations, which are available via the Metadata API.
+                  "Tier": "int",
+
+                  // CSR Designation. If the player is still in measurement matches, this field will be
+                  // null. CSR Designations are available via the Metadata API.
+                  "Designation": "int",
+
+                  // Raw CSR value. If the player is still in measurement matches, this field will be
+                  // null. If the player is not in a high enough designation, this will be zero.
+                  "Raw": "int",
+
+                  // Percentage of progress towards the next CSR tier. If the player is still in
+                  // measurement matches, this field will be null.
+                  "PercentToNextTier": "int",
+
+                  // Number of measurement matches remaining until the player earns a CSR. If this
+                  // field is greater than zero, the player does not have a CSR yet and the other
+                  // components of the CSR will be null.
+                  "MeasurementMatchesRemaining": "int",
+
+                  // Player's ranking on the CSR leaderboard. If the player is still in measurement
+                  // matches, this field will be null. If the player is not in a high enough
+                  // designation, this will be zero.
+                  "Rank": "int"
+                },
+
+                // Total amount of time the player spent in matches. This includes time spent observing
+                // the match after being eliminated. This is expressed as an ISO 8601 Duration.
+                "TotalTimePlayed": "string",
+
+                // Total number of matches that the player participated in.
+                "TotalMatchesStarted": "int",
+
+                // Total number of matches where the player was present until the match ended.
+                "TotalMatchesCompleted": "int",
+
+                // Total number of matches that the player won.
+                "TotalMatchesWon": "int",
+
+                // Total number of matches that the player lost.
+                "TotalMatchesLost": "int",
+
+                // Total number of times the player has captured a point.
+                "TotalPointCaptures": "int",
+
+                // Total number of units trained by the player.
+                "TotalUnitsBuilt": "int",
+
+                // Total number of units trained by the player that were later destroyed.
+                "TotalUnitsLost": "int",
+
+                // Total number of units that the player participated in destroying.
+                "TotalUnitsDestroyed": "int",
+
+                // Total number of times the player played a card, if applicable; otherwise, 0.
+                "TotalCardPlays": "int",
+
+                // Highest wave completed while the player was still present in a match, if applicable;
+                // otherwise, 0.
+                "HighestWaveCompleted": "int",
+
+                // Summary for all leaders used by the player.
+                "LeaderStats": {
+
+                  // Leader ID. Leaders are available via the Metadata API.
+                  "string": {
+
+                    // Total amount of time the player spent in matches with this leader. This includes
+                    // time spent observing the match after being eliminated. This is expressed as an
+                    // ISO 8601 Duration.
+                    "TotalTimePlayed": "string",
+
+                    // Total number of matches that the player participated in with this leader.
+                    "TotalMatchesStarted": "int",
+
+                    // Total number of matches where the player was present until the match ended with
+                    // this leader.
+                    "TotalMatchesCompleted": "int",
+
+                    // Total number of matches that the player won with this leader.
+                    "TotalMatchesWon": "int",
+
+                    // Total number of matches that the player lost with this leader.
+                    "TotalMatchesLost": "int",
+
+                    // Total number of times the player used this leader's active leader power.
+                    "TotalLeaderPowersCast": "int"
+                  }
+                },
+
+                // Game mode that this entry summarizes. If this entry is not summarizing a game mode
+                // pivot, this field will be null. Otherwise, this field will contain one of the
+                // following values:
+                //   Unknown = 0,
+                //   CampaignSolo = 1,
+                //   CampaignCooperative = 2,
+                //   Deathmatch = 3,
+                //   Domination = 4,
+                //   Strongholds = 5,
+                //   Blitz = 6,
+                //   Firefight = 7,
+                //   NormalTutorial = 8,
+                //   BlitzTutorial = 9,
+                //   TerminusFirefight = 10
+                "GameMode": "int",
+
+                // Highest objective score that the player has ever achieved in matches summarized by
+                // this entry. This field is a mapping from the team size to the highest objective
+                // score achieved.
+                "HighestObjectiveScoreByTeamSize": {
+
+                  "int": "int",
+
+                }
+              }
         '404':
           description: Specified Player was not found.
         '500':
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo Wars 2 - Player Stats Summary
   '/hw2/players/{player}/stats/seasons/{seasonId}':
     get:
       description: |
@@ -4470,7 +6124,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo Wars 2 - Player Season Stats Summary
+      operationId: Halo-Wars-2-Player-Season-Stats-Summary
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -4526,6 +6180,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo Wars 2 - Player Season Stats Summary
   '/hw2/playlist/{playlistId}/rating':
     get:
       description: |
@@ -4538,7 +6193,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo Wars 2 - Player Playlist Ratings
+      operationId: Halo-Wars-2-Player-Playlist-Ratings
       parameters:
         - description: The ID of the Playlist to get Ratings for.
           in: path
@@ -4576,6 +6231,7 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo Wars 2 - Player Playlist Ratings
   /hw2/xp:
     get:
       description: |
@@ -4588,7 +6244,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo Wars 2 - Player XPs
+      operationId: Halo-Wars-2-Player-XPs
       parameters:
         - description: A comma-separated list of Gamertags. Up to 6 Gamertags may be specified.
           in: query
@@ -4615,3 +6271,4 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
+      summary: Halo Wars 2 - Player XPs

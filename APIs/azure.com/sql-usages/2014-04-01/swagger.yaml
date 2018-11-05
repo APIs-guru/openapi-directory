@@ -97,6 +97,7 @@ paths:
                     displayName: Database Size
                     limit: 268435456000
                     name: database_size
+                    nextResetTime: null
                     resourceName: '3481'
                     unit: Bytes
       x-ms-pageable: {}
@@ -131,12 +132,14 @@ paths:
                     displayName: Database Throughput Unit Quota
                     limit: 45000
                     name: server_dtu_quota
+                    nextResetTime: null
                     resourceName: sqlcrudtest-9007
                     unit: DTUs
                   - currentValue: 0
                     displayName: Database Throughput Unit Quota
                     limit: 45000
                     name: server_dtu_quota_current
+                    nextResetTime: null
                     resourceName: sqlcrudtest-9007
                     unit: DTUs
       x-ms-pageable: {}
@@ -185,26 +188,6 @@ definitions:
         type: array
     required:
       - value
-  ProxyResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: ARM proxy resource.
-  Resource:
-    description: ARM resource.
-    properties:
-      id:
-        description: Resource ID.
-        readOnly: true
-        type: string
-      name:
-        description: Resource name.
-        readOnly: true
-        type: string
-      type:
-        description: Resource type.
-        readOnly: true
-        type: string
-    x-ms-azure-resource: true
   ServerUsage:
     description: Represents server metrics.
     properties:

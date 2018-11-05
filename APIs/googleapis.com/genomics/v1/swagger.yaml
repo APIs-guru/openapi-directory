@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://genomics.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -580,12 +580,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: |-
-        Creates a new call set.
-
-        For the definitions of call sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Creates a new call set.
       operationId: genomics.callsets.create
       parameters:
         - in: body
@@ -623,10 +618,6 @@ paths:
       description: |-
         Gets a list of call sets matching the criteria.
 
-        For the definitions of call sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
-
         Implements
         [GlobalAllianceApi.searchCallSets](https://github.com/ga4gh/schemas/blob/v0.5.1/src/main/resources/avro/variantmethods.avdl#L178).
       operationId: genomics.callsets.search
@@ -651,12 +642,7 @@ paths:
         - callsets
   '/v1/callsets/{callSetId}':
     delete:
-      description: |-
-        Deletes a call set.
-
-        For the definitions of call sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Deletes a call set.
       operationId: genomics.callsets.delete
       parameters:
         - description: The ID of the call set to be deleted.
@@ -677,12 +663,7 @@ paths:
       tags:
         - callsets
     get:
-      description: |-
-        Gets a call set by ID.
-
-        For the definitions of call sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Gets a call set by ID.
       operationId: genomics.callsets.get
       parameters:
         - description: The ID of the call set.
@@ -722,10 +703,6 @@ paths:
       description: |-
         Updates a call set.
 
-        For the definitions of call sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
-
         This method supports patch semantics.
       operationId: genomics.callsets.patch
       parameters:
@@ -760,12 +737,7 @@ paths:
         - callsets
   /v1/datasets:
     get:
-      description: |-
-        Lists datasets within a project.
-
-        For the definitions of datasets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Lists datasets within a project.
       operationId: genomics.datasets.list
       parameters:
         - description: |-
@@ -814,12 +786,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: |-
-        Creates a new dataset.
-
-        For the definitions of datasets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Creates a new dataset.
       operationId: genomics.datasets.create
       parameters:
         - in: body
@@ -847,10 +814,6 @@ paths:
         the
         datasets.undelete
         operation.
-
-        For the definitions of datasets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
       operationId: genomics.datasets.delete
       parameters:
         - description: The ID of the dataset to be deleted.
@@ -871,12 +834,7 @@ paths:
       tags:
         - datasets
     get:
-      description: |-
-        Gets a dataset by ID.
-
-        For the definitions of datasets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Gets a dataset by ID.
       operationId: genomics.datasets.get
       parameters:
         - description: The ID of the dataset.
@@ -915,10 +873,6 @@ paths:
     patch:
       description: |-
         Updates a dataset.
-
-        For the definitions of datasets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
 
         This method supports patch semantics.
       operationId: genomics.datasets.patch
@@ -971,10 +925,6 @@ paths:
       description: |-
         Undeletes a dataset by restoring a dataset which was deleted via this API.
 
-        For the definitions of datasets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
-
         This operation is only possible for a week after the deletion occurred.
       operationId: genomics.datasets.undelete
       parameters:
@@ -1018,10 +968,6 @@ paths:
       description: |-
         Searches for read group sets matching the criteria.
 
-        For the definitions of read group sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
-
         Implements
         [GlobalAllianceApi.searchReadGroupSets](https://github.com/ga4gh/schemas/blob/v0.5.1/src/main/resources/avro/readmethods.avdl#L135).
       operationId: genomics.readgroupsets.search
@@ -1046,12 +992,7 @@ paths:
         - readgroupsets
   '/v1/readgroupsets/{readGroupSetId}':
     delete:
-      description: |-
-        Deletes a read group set.
-
-        For the definitions of read group sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Deletes a read group set.
       operationId: genomics.readgroupsets.delete
       parameters:
         - description: |-
@@ -1074,12 +1015,7 @@ paths:
       tags:
         - readgroupsets
     get:
-      description: |-
-        Gets a read group set by ID.
-
-        For the definitions of read group sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Gets a read group set by ID.
       operationId: genomics.readgroupsets.get
       parameters:
         - description: The ID of the read group set.
@@ -1118,10 +1054,6 @@ paths:
     patch:
       description: |-
         Updates a read group set.
-
-        For the definitions of read group sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
 
         This method supports patch semantics.
       operationId: genomics.readgroupsets.patch
@@ -1166,10 +1098,6 @@ paths:
         Lists fixed width coverage buckets for a read group set, each of which
         correspond to a range of a reference sequence. Each bucket summarizes
         coverage information across its corresponding genomic range.
-
-        For the definitions of read group sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
 
         Coverage is defined as the number of reads which are aligned to a given
         base in the reference sequence. Coverage buckets are available at several
@@ -1273,10 +1201,6 @@ paths:
       description: |-
         Exports a read group set to a BAM file in Google Cloud Storage.
 
-        For the definitions of read group sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
-
         Note that currently there may be some differences between exported BAM
         files and the original BAM file at the time of import. See
         ImportReadGroupSets
@@ -1328,10 +1252,6 @@ paths:
         Creates read group sets by asynchronously importing the provided
         information.
 
-        For the definitions of read group sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
-
         The caller must have WRITE permissions to the dataset.
 
         ## Notes on [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) import
@@ -1381,10 +1301,6 @@ paths:
     post:
       description: |-
         Gets a list of reads for one or more read group sets.
-
-        For the definitions of read group sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
 
         Reads search operates over a genomic coordinate space of reference sequence
         & position defined over the reference sequences to which the requested
@@ -1443,10 +1359,6 @@ paths:
       description: |-
         Searches for references which match the given criteria.
 
-        For the definitions of references and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
-
         Implements
         [GlobalAllianceApi.searchReferences](https://github.com/ga4gh/schemas/blob/v0.5.1/src/main/resources/avro/referencemethods.avdl#L146).
       operationId: genomics.references.search
@@ -1473,10 +1385,6 @@ paths:
     get:
       description: |-
         Gets a reference.
-
-        For the definitions of references and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
 
         Implements
         [GlobalAllianceApi.getReference](https://github.com/ga4gh/schemas/blob/v0.5.1/src/main/resources/avro/referencemethods.avdl#L158).
@@ -1519,10 +1427,6 @@ paths:
     get:
       description: |-
         Lists the bases in a reference, optionally restricted to a range.
-
-        For the definitions of references and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
 
         Implements
         [GlobalAllianceApi.getReferenceBases](https://github.com/ga4gh/schemas/blob/v0.5.1/src/main/resources/avro/referencemethods.avdl#L221).
@@ -1604,10 +1508,6 @@ paths:
       description: |-
         Searches for reference sets which match the given criteria.
 
-        For the definitions of references and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
-
         Implements
         [GlobalAllianceApi.searchReferenceSets](https://github.com/ga4gh/schemas/blob/v0.5.1/src/main/resources/avro/referencemethods.avdl#L71)
       operationId: genomics.referencesets.search
@@ -1634,10 +1534,6 @@ paths:
     get:
       description: |-
         Gets a reference set.
-
-        For the definitions of references and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
 
         Implements
         [GlobalAllianceApi.getReferenceSet](https://github.com/ga4gh/schemas/blob/v0.5.1/src/main/resources/avro/referencemethods.avdl#L83).
@@ -1692,12 +1588,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: |-
-        Creates a new variant.
-
-        For the definitions of variants and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Creates a new variant.
       operationId: genomics.variants.create
       parameters:
         - in: body
@@ -1735,10 +1626,6 @@ paths:
       description: |-
         Gets a list of variants matching the criteria.
 
-        For the definitions of variants and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
-
         Implements
         [GlobalAllianceApi.searchVariants](https://github.com/ga4gh/schemas/blob/v0.5.1/src/main/resources/avro/variantmethods.avdl#L126).
       operationId: genomics.variants.search
@@ -1763,12 +1650,7 @@ paths:
         - variants
   '/v1/variants/{variantId}':
     delete:
-      description: |-
-        Deletes a variant.
-
-        For the definitions of variants and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Deletes a variant.
       operationId: genomics.variants.delete
       parameters:
         - description: The ID of the variant to be deleted.
@@ -1789,12 +1671,7 @@ paths:
       tags:
         - variants
     get:
-      description: |-
-        Gets a variant by ID.
-
-        For the definitions of variants and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Gets a variant by ID.
       operationId: genomics.variants.get
       parameters:
         - description: The ID of the variant.
@@ -1833,10 +1710,6 @@ paths:
     patch:
       description: |-
         Updates a variant.
-
-        For the definitions of variants and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
 
         This method supports patch semantics. Returns the modified variant without
         its calls.
@@ -1890,10 +1763,6 @@ paths:
       description: |-
         Creates variant data by asynchronously importing the provided information.
 
-        For the definitions of variant sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
-
         The variants for import will be merged with any existing variant that
         matches its reference sequence, start, end, reference bases, and
         alternative bases. If no such variant exists, a new one will be created.
@@ -1944,10 +1813,6 @@ paths:
     post:
       description: |-
         Merges the given variants with existing variants.
-
-        For the definitions of variants and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
 
         Each variant will be
         merged with an existing variant that matches its reference sequence,
@@ -2071,10 +1936,6 @@ paths:
       description: |-
         Creates a new variant set.
 
-        For the definitions of variant sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
-
         The provided variant set must have a valid `datasetId` set - all other
         fields are optional. Note that the `id` field will be ignored, as this is
         assigned by the server.
@@ -2115,10 +1976,6 @@ paths:
       description: |-
         Returns a list of all variant sets matching search criteria.
 
-        For the definitions of variant sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
-
         Implements
         [GlobalAllianceApi.searchVariantSets](https://github.com/ga4gh/schemas/blob/v0.5.1/src/main/resources/avro/variantmethods.avdl#L49).
       operationId: genomics.variantsets.search
@@ -2146,10 +2003,6 @@ paths:
       description: |-
         Deletes a variant set including all variants, call sets, and calls within.
         This is not reversible.
-
-        For the definitions of variant sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
       operationId: genomics.variantsets.delete
       parameters:
         - description: The ID of the variant set to be deleted.
@@ -2170,12 +2023,7 @@ paths:
       tags:
         - variantsets
     get:
-      description: |-
-        Gets a variant set by ID.
-
-        For the definitions of variant sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Gets a variant set by ID.
       operationId: genomics.variantsets.get
       parameters:
         - description: Required. The ID of the variant set.
@@ -2212,12 +2060,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: |-
-        Updates a variant set using patch semantics.
-
-        For the definitions of variant sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Updates a variant set using patch semantics.
       operationId: genomics.variantsets.patch
       parameters:
         - in: body
@@ -2269,12 +2112,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: |-
-        Exports variant set data to an external destination.
-
-        For the definitions of variant sets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+      description: Exports variant set data to an external destination.
       operationId: genomics.variantsets.export
       parameters:
         - in: body
@@ -2405,10 +2243,6 @@ paths:
 
         See <a href="/iam/docs/managing-policies#getting_a_policy">Getting a
         Policy</a> for more information.
-
-        For the definitions of datasets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
       operationId: genomics.datasets.getIamPolicy
       parameters:
         - in: body
@@ -2454,10 +2288,6 @@ paths:
       description: |-
         Sets the access control policy on the specified dataset. Replaces any
         existing policy.
-
-        For the definitions of datasets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
 
         See <a href="/iam/docs/managing-policies#setting_a_policy">Setting a
         Policy</a> for more information.
@@ -2507,10 +2337,6 @@ paths:
         Returns permissions that a caller has on the specified resource.
         See <a href="/iam/docs/managing-policies#testing_permissions">Testing
         Permissions</a> for more information.
-
-        For the definitions of datasets and other genomics resources, see
-        [Fundamentals of Google
-        Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
       operationId: genomics.datasets.testIamPermissions
       parameters:
         - in: body
@@ -2700,7 +2526,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` or `joe@example.com`.
+             account. For example, `alice@gmail.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -2727,9 +2553,6 @@ definitions:
     description: |-
       A call set is a collection of variant calls, typically for one sample. It
       belongs to a variant set.
-
-      For more genomics resource definitions, see [Fundamentals of Google
-      Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
     properties:
       created:
         description: The date this call set was created in milliseconds from the epoch.
@@ -2855,6 +2678,53 @@ definitions:
         description: The availability zone in which the instance resides.
         type: string
     type: object
+  ContainerStartedEvent:
+    description: This event is generated when a container starts.
+    properties:
+      actionId:
+        description: The numeric ID of the action that started this container.
+        format: int32
+        type: integer
+      ipAddress:
+        description: |-
+          The public IP address that can be used to connect to the container.  This
+          field is only populated when at least one port mapping is present.  If the
+          instance was created with a private address this field will be empty even
+          if port mappings exist.
+        type: string
+      portMappings:
+        additionalProperties:
+          format: int32
+          type: integer
+        description: |-
+          The container to host port mappings installed for this container.  This
+          set will contain any ports exposed using the PUBLISH_EXPOSED_PORTS flag as
+          well as any specified in the Action definition.
+        type: object
+    type: object
+  ContainerStoppedEvent:
+    description: This event is generated when a container exits.
+    properties:
+      actionId:
+        description: The numeric ID of the action that started this container.
+        format: int32
+        type: integer
+      exitStatus:
+        description: The exit status of the container.
+        format: int32
+        type: integer
+      stderr:
+        description: |-
+          The tail end of any content written to standard error by the container.
+          To prevent this from being recorded if the action is known to emit
+          large amounts of debugging noise or sensitive information, set the
+          DISABLE_STANDARD_ERROR_CAPTURE flag.
+
+          Note that only a small amount of the end of the stream is captured here.
+          The entire stream is stored in the /google/logs directory mounted into
+          each action, and may be copied off the machine as described elsewhere.
+        type: string
+    type: object
   CoverageBucket:
     description: |-
       A bucket over which read coverage has been precomputed. A bucket corresponds
@@ -2871,11 +2741,7 @@ definitions:
         description: The genomic coordinate range spanned by this bucket.
     type: object
   Dataset:
-    description: |-
-      A Dataset is a collection of genomic data.
-
-      For more genomics resource definitions, see [Fundamentals of Google
-      Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
+    description: A Dataset is a collection of genomic data.
     properties:
       createTime:
         description: 'The time this dataset was created, in seconds from the epoch.'
@@ -2890,6 +2756,27 @@ definitions:
       projectId:
         description: The Google Cloud project ID that this dataset belongs to.
         type: string
+    type: object
+  DelayedEvent:
+    description: |-
+      This event is generated whenever a resource limitation or transient error
+      delays execution of a pipeline that was otherwise ready to run.
+    properties:
+      cause:
+        description: |-
+          A textual description of the cause of the delay.  The string may change
+          without notice since it is often generated by another service (such as
+          Compute Engine).
+        type: string
+      metrics:
+        description: |-
+          If the delay was caused by a resource shortage, this field lists the
+          Compute Engine metrics that are preventing this operation from running
+          (for example, CPUS or INSTANCES).  If the particular metric is not known,
+          a single UNKNOWN metric will be present.
+        items:
+          type: string
+        type: array
     type: object
   Empty:
     description: |-
@@ -2912,6 +2799,25 @@ definitions:
       status:
         $ref: '#/definitions/Status'
         description: The creation status.
+    type: object
+  Event:
+    description: Event carries information about events that occur during pipeline execution.
+    properties:
+      description:
+        description: |-
+          A human readable description of the event.  Note that these strings may
+          change at any time without notice.  Any application logic must use the
+          information in the details field.
+        type: string
+      details:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: Machine readable details about the event.
+        type: object
+      timestamp:
+        description: The time that the event occurred.
+        format: google-datetime
+        type: string
     type: object
   Exon:
     properties:
@@ -3035,6 +2941,36 @@ definitions:
         type: string
       sourceName:
         description: The name of the source of this data.
+        type: string
+    type: object
+  FailedEvent:
+    description: |-
+      This event is generated when the execution of a pipeline has failed.  Note
+      that other events may continue to occur after this event.
+    properties:
+      cause:
+        description: The human readable description of the cause of the failure.
+        type: string
+      code:
+        description: The Google standard error code that best describes this failure.
+        enum:
+          - OK
+          - CANCELLED
+          - UNKNOWN
+          - INVALID_ARGUMENT
+          - DEADLINE_EXCEEDED
+          - NOT_FOUND
+          - ALREADY_EXISTS
+          - PERMISSION_DENIED
+          - UNAUTHENTICATED
+          - RESOURCE_EXHAUSTED
+          - FAILED_PRECONDITION
+          - ABORTED
+          - OUT_OF_RANGE
+          - UNIMPLEMENTED
+          - INTERNAL
+          - UNAVAILABLE
+          - DATA_LOSS
         type: string
     type: object
   GetIamPolicyRequest:
@@ -3283,7 +3219,7 @@ definitions:
       metadata:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.
-        description: An OperationMetadata object. This will always be returned with the Operation.
+        description: An OperationMetadata or Metadata object. This will always be returned with the Operation.
         type: object
       name:
         description: 'The server-assigned name, which is only unique within the same service that originally returns it. For example&#58; `operations/CJHU7Oi_ChDrveSpBRjfuL-qzoWAgEw`'
@@ -3369,12 +3305,12 @@ definitions:
       specify access control policies for Cloud Platform resources.
 
 
-      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of
+      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
       `members` to a `role`, where the members can be user accounts, Google groups,
       Google domains, and service accounts. A `role` is a named list of permissions
       defined by IAM.
 
-      **Example**
+      **JSON Example**
 
           {
             "bindings": [
@@ -3384,7 +3320,7 @@ definitions:
                   "user:mike@example.com",
                   "group:admins@example.com",
                   "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com",
+                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
                 ]
               },
               {
@@ -3393,6 +3329,20 @@ definitions:
               }
             ]
           }
+
+      **YAML Example**
+
+          bindings:
+          - members:
+            - user:mike@example.com
+            - group:admins@example.com
+            - domain:google.com
+            - serviceAccount:my-other-app@appspot.gserviceaccount.com
+            role: roles/owner
+          - members:
+            - user:sean@example.com
+            role: roles/viewer
+
 
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
@@ -3465,6 +3415,20 @@ definitions:
         description: The version of the program run.
         type: string
     type: object
+  PullStartedEvent:
+    description: This event is generated when the worker starts pulling an image.
+    properties:
+      imageUri:
+        description: The URI of the image that was pulled.
+        type: string
+    type: object
+  PullStoppedEvent:
+    description: This event is generated when the worker stops pulling an image.
+    properties:
+      imageUri:
+        description: The URI of the image that was pulled.
+        type: string
+    type: object
   Range:
     description: A 0-based half-open genomic coordinate range for search requests.
     properties:
@@ -3490,9 +3454,6 @@ definitions:
       which were read by the sequencer). A read is equivalent to a line in a SAM
       file. A read belongs to exactly one read group and exactly one
       read group set.
-
-      For more genomics resource definitions, see [Fundamentals of Google
-      Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
 
       ### Reverse-stranded reads
 
@@ -3741,9 +3702,6 @@ definitions:
       * A read group set belongs to one dataset.
       * A read group belongs to one read group set.
       * A read belongs to one read group.
-
-      For more genomics resource definitions, see [Fundamentals of Google
-      Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
     properties:
       datasetId:
         description: The dataset to which this read group set belongs.
@@ -3782,9 +3740,6 @@ definitions:
       reference coordinate space for other genomic annotations. A single reference
       might represent the human chromosome 1 or mitochandrial DNA, for instance. A
       reference belongs to one or more reference sets.
-
-      For more genomics resource definitions, see [Fundamentals of Google
-      Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
     properties:
       id:
         description: 'The server-generated reference ID, unique across all references.'
@@ -3841,9 +3796,6 @@ definitions:
       of the human genome. A reference set defines a common coordinate space for
       comparing reference-aligned experimental data. A reference set contains 1 or
       more references.
-
-      For more genomics resource definitions, see [Fundamentals of Google
-      Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
     properties:
       assemblyId:
         description: 'Public id of this reference set, such as `GRCh37`.'
@@ -4549,14 +4501,27 @@ definitions:
   UndeleteDatasetRequest:
     properties: {}
     type: object
+  UnexpectedExitStatusEvent:
+    description: |-
+      This event is generated when the execution of a container results in a
+      non-zero exit status that was not otherwise ignored.  Execution will
+      continue, but only actions that are flagged as ALWAYS_RUN will be executed:
+      other actions will be skipped.
+    properties:
+      actionId:
+        description: The numeric ID of the action that started the container.
+        format: int32
+        type: integer
+      exitStatus:
+        description: The exit status of the container.
+        format: int32
+        type: integer
+    type: object
   Variant:
     description: |-
       A variant represents a change in DNA sequence relative to a reference
       sequence. For example, a variant could represent a SNP or an insertion.
       Variants belong to a variant set.
-
-      For more genomics resource definitions, see [Fundamentals of Google
-      Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
 
       Each of the calls on a variant represent a determination of genotype with
       respect to that variant. For example, a call might assign probability of 0.32
@@ -4776,9 +4741,6 @@ definitions:
     description: |-
       A variant set is a collection of call sets and variants. It contains summary
       statistics of those contents. A variant set belongs to a dataset.
-
-      For more genomics resource definitions, see [Fundamentals of Google
-      Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
     properties:
       datasetId:
         description: The dataset to which this variant set belongs.
@@ -4864,5 +4826,29 @@ definitions:
         type: string
       value:
         description: The value field for simple metadata
+        type: string
+    type: object
+  WorkerAssignedEvent:
+    description: |-
+      This event is generated once a worker VM has been assigned to run the
+      pipeline.
+    properties:
+      instance:
+        description: The worker's instance name.
+        type: string
+      zone:
+        description: The zone the worker is running in.
+        type: string
+    type: object
+  WorkerReleasedEvent:
+    description: |-
+      This event is generated when the worker VM that was assigned to the pipeline
+      has been released (i.e., deleted).
+    properties:
+      instance:
+        description: The worker's instance name.
+        type: string
+      zone:
+        description: The zone the worker was running in.
         type: string
     type: object

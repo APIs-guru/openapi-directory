@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages Hadoop-based clusters and jobs on Google Cloud Platform.
-  title: Google Cloud Dataproc
+  title: Cloud Dataproc
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://dataproc.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -182,6 +182,10 @@ paths:
           name: region
           required: true
           type: string
+        - description: 'Optional. A unique id used to identify the request. If the server receives two CreateClusterRequest requests with the same id, then the second request will be ignored and the first google.longrunning.Operation created and stored in the backend is returned.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -215,6 +219,10 @@ paths:
           in: path
           name: region
           required: true
+          type: string
+        - description: 'Optional. A unique id used to identify the request. If the server receives two DeleteClusterRequest requests with the same id, then the second request will be ignored and the first google.longrunning.Operation created and stored in the backend is returned.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -295,6 +303,10 @@ paths:
           in: path
           name: region
           required: true
+          type: string
+        - description: 'Optional. A unique id used to identify the request. If the server receives two UpdateClusterRequest requests with the same id, then the second request will be ignored and the first google.longrunning.Operation created and stored in the backend is returned.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.'
+          in: query
+          name: requestId
           type: string
         - description: |-
             Required. Specifies the path, relative to Cluster, of the field to update. For example, to change the number of workers in a cluster to 5, the update_mask parameter would be specified as config.worker_config.num_instances, and the PATCH request body would specify the new value, as follows:
@@ -731,14 +743,18 @@ paths:
         - projects
 definitions:
   AcceleratorConfig:
-    description: Specifies the type and number of accelerator cards attached to the instances of an instance group (see GPUs on Compute Engine).
+    description: Specifies the type and number of accelerator cards attached to the instances of an instance. See GPUs on Compute Engine.
     properties:
       acceleratorCount:
         description: The number of the accelerator cards of this type exposed to this instance.
         format: int32
         type: integer
       acceleratorTypeUri:
-        description: 'Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Google Compute Engine AcceleratorTypes( /compute/docs/reference/beta/acceleratorTypes)Examples * https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * nvidia-tesla-k80'
+        description: |-
+          Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Compute Engine AcceleratorTypes.Examples:
+          https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80
+          projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80
+          nvidia-tesla-k80Auto Zone Exception: If you are using the Cloud Dataproc Auto Zone Placement feature, you must use the short name of the accelerator type resource, for example, nvidia-tesla-k80.
         type: string
     type: object
   CancelJobRequest:
@@ -746,7 +762,7 @@ definitions:
     properties: {}
     type: object
   Cluster:
-    description: 'Describes the identifying information, config, and status of a cluster of Google Compute Engine instances.'
+    description: 'Describes the identifying information, config, and status of a cluster of Compute Engine instances.'
     properties:
       clusterName:
         description: Required. The cluster name. Cluster names within a project must be unique. Names of deleted clusters can be reused.
@@ -781,11 +797,11 @@ definitions:
     description: The cluster config.
     properties:
       configBucket:
-        description: 'Optional. A Google Cloud Storage staging bucket used for sharing generated SSH keys and config. If you do not specify a staging bucket, Cloud Dataproc will determine an appropriate Cloud Storage location (US, ASIA, or EU) for your cluster''s staging bucket according to the Google Compute Engine zone where your cluster is deployed, and then it will create and manage this project-level, per-location bucket for you.'
+        description: 'Optional. A Cloud Storage staging bucket used for sharing generated SSH keys and config. If you do not specify a staging bucket, Cloud Dataproc will determine an appropriate Cloud Storage location (US, ASIA, or EU) for your cluster''s staging bucket according to the Google Compute Engine zone where your cluster is deployed, and then it will create and manage this project-level, per-location bucket for you.'
         type: string
       gceClusterConfig:
         $ref: '#/definitions/GceClusterConfig'
-        description: Required. The shared Google Compute Engine config settings for all instances in a cluster.
+        description: Required. The shared Compute Engine config settings for all instances in a cluster.
       initializationActions:
         description: |
           Optional. Commands to execute on each node after config is completed. By default, executables are run on master and all worker nodes. You can test a node's role metadata to run an executable on a master or worker node, as shown below using curl (you can also use wget):
@@ -800,16 +816,16 @@ definitions:
         type: array
       masterConfig:
         $ref: '#/definitions/InstanceGroupConfig'
-        description: Optional. The Google Compute Engine config settings for the master instance in a cluster.
+        description: Optional. The Compute Engine config settings for the master instance in a cluster.
       secondaryWorkerConfig:
         $ref: '#/definitions/InstanceGroupConfig'
-        description: Optional. The Google Compute Engine config settings for additional worker instances in a cluster.
+        description: Optional. The Compute Engine config settings for additional worker instances in a cluster.
       softwareConfig:
         $ref: '#/definitions/SoftwareConfig'
         description: Optional. The config settings for software inside the cluster.
       workerConfig:
         $ref: '#/definitions/InstanceGroupConfig'
-        description: Optional. The Google Compute Engine config settings for worker instances in a cluster.
+        description: Optional. The Compute Engine config settings for worker instances in a cluster.
     type: object
   ClusterMetrics:
     description: 'Contains cluster daemon metrics, such as HDFS and YARN stats.Beta Feature: This report is available for testing purposes only. It may be changed before final release.'
@@ -919,7 +935,7 @@ definitions:
     description: The location of diagnostic output.
     properties:
       outputUri:
-        description: Output only. The Google Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
+        description: Output only. The Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
         type: string
     type: object
   DiskConfig:
@@ -944,7 +960,7 @@ definitions:
     properties: {}
     type: object
   GceClusterConfig:
-    description: 'Common config settings for resources of Google Compute Engine cluster instances, applicable to all instances in the cluster.'
+    description: 'Common config settings for resources of Compute Engine cluster instances, applicable to all instances in the cluster.'
     properties:
       internalIpOnly:
         description: 'Optional. If true, all instances in the cluster will only have internal IP addresses. By default, clusters are not restricted to internal IP addresses, and will have ephemeral external IP addresses assigned to each instance. This internal_ip_only restriction can only be enabled for subnetwork enabled networks, and all off-cluster dependencies must be configured to be accessible without external IP addresses.'
@@ -952,24 +968,24 @@ definitions:
       metadata:
         additionalProperties:
           type: string
-        description: 'The Google Compute Engine metadata entries to add to all instances (see Project and instance metadata (https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata)).'
+        description: 'The Compute Engine metadata entries to add to all instances (see Project and instance metadata (https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata)).'
         type: object
       networkUri:
         description: |-
-          Optional. The Google Compute Engine network to be used for machine communications. Cannot be specified with subnetwork_uri. If neither network_uri nor subnetwork_uri is specified, the "default" network of the project is used, if it exists. Cannot be a "Custom Subnet Network" (see Using Subnetworks for more information).A full URL, partial URI, or short name are valid. Examples:
+          Optional. The Compute Engine network to be used for machine communications. Cannot be specified with subnetwork_uri. If neither network_uri nor subnetwork_uri is specified, the "default" network of the project is used, if it exists. Cannot be a "Custom Subnet Network" (see Using Subnetworks for more information).A full URL, partial URI, or short name are valid. Examples:
           https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default
           projects/[project_id]/regions/global/default
           default
         type: string
       serviceAccount:
         description: |-
-          Optional. The service account of the instances. Defaults to the default Google Compute Engine service account. Custom service accounts need permissions equivalent to the folloing IAM roles:
+          Optional. The service account of the instances. Defaults to the default Compute Engine service account. Custom service accounts need permissions equivalent to the following IAM roles:
           roles/logging.logWriter
           roles/storage.objectAdmin(see https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts for more information). Example: [account_id]@[project_id].iam.gserviceaccount.com
         type: string
       serviceAccountScopes:
         description: |-
-          Optional. The URIs of service account scopes to be included in Google Compute Engine instances. The following base set of scopes is always included:
+          Optional. The URIs of service account scopes to be included in Compute Engine instances. The following base set of scopes is always included:
           https://www.googleapis.com/auth/cloud.useraccounts.readonly
           https://www.googleapis.com/auth/devstorage.read_write
           https://www.googleapis.com/auth/logging.writeIf no scopes are specified, the following defaults are also provided:
@@ -982,19 +998,19 @@ definitions:
         type: array
       subnetworkUri:
         description: |-
-          Optional. The Google Compute Engine subnetwork to be used for machine communications. Cannot be specified with network_uri.A full URL, partial URI, or short name are valid. Examples:
+          Optional. The Compute Engine subnetwork to be used for machine communications. Cannot be specified with network_uri.A full URL, partial URI, or short name are valid. Examples:
           https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0
           projects/[project_id]/regions/us-east1/sub0
           sub0
         type: string
       tags:
-        description: The Google Compute Engine tags to add to all instances (see Tagging instances).
+        description: The Compute Engine tags to add to all instances (see Tagging instances).
         items:
           type: string
         type: array
       zoneUri:
         description: |-
-          Optional. The zone where the Google Compute Engine cluster will be located. On a create request, it is required in the "global" region. If omitted in a non-global Cloud Dataproc region, the service will pick a zone in the corresponding Compute Engine region. On a get request, zone will always be present.A full URL, partial URI, or short name are valid. Examples:
+          Optional. The zone where the Compute Engine cluster will be located. On a create request, it is required in the "global" region. If omitted in a non-global Cloud Dataproc region, the service will pick a zone in the corresponding Compute Engine region. On a get request, zone will always be present.A full URL, partial URI, or short name are valid. Examples:
           https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]
           projects/[project_id]/zones/[zone]
           us-central1-f
@@ -1067,10 +1083,10 @@ definitions:
         type: object
     type: object
   InstanceGroupConfig:
-    description: 'Optional. The config settings for Google Compute Engine resources in an instance group, such as a master or worker group.'
+    description: 'Optional. The config settings for Compute Engine resources in an instance group, such as a master or worker group.'
     properties:
       accelerators:
-        description: 'Optional. The Google Compute Engine accelerator configuration for these instances.Beta Feature: This feature is still under development. It may be changed before final release.'
+        description: 'Optional. The Compute Engine accelerator configuration for these instances.Beta Feature: This feature is still under development. It may be changed before final release.'
         items:
           $ref: '#/definitions/AcceleratorConfig'
         type: array
@@ -1078,10 +1094,10 @@ definitions:
         $ref: '#/definitions/DiskConfig'
         description: Optional. Disk option config settings.
       imageUri:
-        description: Output only. The Google Compute Engine image resource used for cluster instances. Inferred from SoftwareConfig.image_version.
+        description: Output only. The Compute Engine image resource used for cluster instances. Inferred from SoftwareConfig.image_version.
         type: string
       instanceNames:
-        description: 'Optional. The list of instance names. Cloud Dataproc derives the names from cluster_name, num_instances, and the instance group if not set by user (recommended practice is to let Cloud Dataproc derive the name).'
+        description: 'Output only. The list of instance names. Cloud Dataproc derives the names from cluster_name, num_instances, and the instance group.'
         items:
           type: string
         type: array
@@ -1090,14 +1106,14 @@ definitions:
         type: boolean
       machineTypeUri:
         description: |-
-          Optional. The Google Compute Engine machine type used for cluster instances.A full URL, partial URI, or short name are valid. Examples:
+          Optional. The Compute Engine machine type used for cluster instances.A full URL, partial URI, or short name are valid. Examples:
           https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2
           projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2
-          n1-standard-2
+          n1-standard-2Auto Zone Exception: If you are using the Cloud Dataproc Auto Zone Placement feature, you must use the short name of the machine type resource, for example, n1-standard-2.
         type: string
       managedGroupConfig:
         $ref: '#/definitions/ManagedGroupConfig'
-        description: Output only. The config for Google Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
+        description: Output only. The config for Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
       numInstances:
         description: 'Optional. The number of VM instances in the instance group. For master instance groups, must be set to 1.'
         format: int32
@@ -1288,7 +1304,7 @@ definitions:
     description: Specifies an executable to run on a fully configured node and a timeout period for executable completion.
     properties:
       executableFile:
-        description: Required. Google Cloud Storage URI of executable file.
+        description: Required. Cloud Storage URI of executable file.
         type: string
       executionTimeout:
         description: Optional. Amount of time executable has to complete. Default is 10 minutes. Cluster creation fails with an explanatory error message (the name of the executable that caused the error and the exceeded timeout period) if the executable is not completed at end of the timeout period.
@@ -1412,7 +1428,7 @@ definitions:
     description: Specifies the selection and config of software inside the cluster.
     properties:
       imageVersion:
-        description: 'Optional. The version of software inside the cluster. It must match the regular expression [0-9]+\.[0-9]+. If unspecified, it defaults to the latest version (see Cloud Dataproc Versioning).'
+        description: 'Optional. The version of software inside the cluster. It must be one of the supported Cloud Dataproc Versions, such as "1.2" (including a subminor version, such as "1.2.29"), or the "preview" version. If unspecified, it defaults to the latest version.'
         type: string
       properties:
         additionalProperties:
@@ -1528,6 +1544,9 @@ definitions:
       job:
         $ref: '#/definitions/Job'
         description: Required. The job resource.
+      requestId:
+        description: 'Optional. A unique id used to identify the request. If the server receives two SubmitJobRequest requests with the same id, then the second request will be ignored and the first Job created and stored in the backend is returned.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.'
+        type: string
     type: object
   YarnApplication:
     description: 'A YARN application created by a job. Application information is a subset of <code>org.apache.hadoop.yarn.proto.YarnProtos.ApplicationReportProto</code>.Beta Feature: This report is available for testing purposes only. It may be changed before final release.'

@@ -1,12 +1,19 @@
 language: node_js
 node_js:
   - "8"
-env:
-  global:
-    - GH_REF: "github.com/APIs-guru/api-models.git"
 deploy:
-  skip_cleanup: true
-  provider: script
-  script: 'git fetch --unshallow && npm run deploy'
-  on:
-    branch: master
+  - provider: script
+    skip_cleanup: true
+    script: 'git fetch --unshallow && npm run deploy'
+    on:
+      branch: master
+  - provider: pages
+    skip-cleanup: true
+    local-dir: deploy
+    repo: APIs-guru/openapi-directory-api
+    fqdn: api.apis.guru
+    github-token: $GH_DEPLOY_TOKEN
+    keep-history: false
+    on:
+      branch: master
+

@@ -1,0 +1,405 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://gwells.api.gov.bc.ca/gwells/registries/api/v1'
+info:
+  contact:
+    email: groundwater@gov.bc.ca
+  description: The registers of well drillers and well pump installers are lists of individuals who are authorized under the Water Sustainability Act (WSA) to operate in British Columbia. Registered well drillers and well pump installers are responsible for safe drilling practices and installation of pumps and other works.
+  license:
+    name: Open Government License - British Columbia
+    url: 'https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61'
+  termsOfService: 'http://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88'
+  title: Registers of Well Drillers and Well Pump Installers
+  version: v1
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    url: 'https://avatars1.githubusercontent.com/u/916280?v=3&s=200'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.6.2
+      format: openapi
+      url: 'https://raw.githubusercontent.com/bcgov/api-specs/master/gwells/gwells.json'
+      version: '3.0'
+  x-providerName: gov.bc.ca
+  x-serviceName: gwells
+security:
+  - basic: []
+paths:
+  /api-token-auth/:
+    parameters: []
+  /cities/drillers/:
+    get:
+      description: 'returns a list of cities with a qualified, registered operator (driller or installer)'
+      operationId: cities_drillers_list
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CityList'
+                type: array
+          description: OK
+      tags:
+        - cities
+    parameters: []
+  /cities/installers/:
+    get:
+      description: 'returns a list of cities with a qualified, registered operator (driller or installer)'
+      operationId: cities_installers_list
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CityList'
+                type: array
+          description: OK
+      tags:
+        - cities
+    parameters: []
+  /drillers/:
+    get:
+      description: Returns a list of all person records
+      operationId: drillers_list
+      parameters:
+        - description: ''
+          in: query
+          name: city
+          required: false
+          schema:
+            type: string
+        - description: ''
+          in: query
+          name: prov
+          required: false
+          schema:
+            type: string
+        - description: ''
+          in: query
+          name: status
+          required: false
+          schema:
+            type: string
+        - description: ''
+          in: query
+          name: activity
+          required: false
+          schema:
+            type: string
+        - description: A search term.
+          in: query
+          name: search
+          required: false
+          schema:
+            type: string
+        - description: Which field to use when ordering the results.
+          in: query
+          name: ordering
+          required: false
+          schema:
+            type: string
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    format: uri
+                    type: string
+                  previous:
+                    format: uri
+                    type: string
+                  results:
+                    items:
+                      $ref: '#/components/schemas/Person'
+                    type: array
+                required:
+                  - count
+                  - results
+                type: object
+          description: OK
+      tags:
+        - drillers
+    parameters: []
+  '/drillers/{person_guid}/':
+    get:
+      description: Returns the specified person
+      operationId: drillers_read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+          description: OK
+      tags:
+        - drillers
+    parameters:
+      - description: A UUID string identifying this person.
+        in: path
+        name: person_guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+  /organizations/:
+    get:
+      description: Returns a list of all registered drilling organizations
+      operationId: organizations_list
+      parameters:
+        - description: A search term.
+          in: query
+          name: search
+          required: false
+          schema:
+            type: string
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    format: uri
+                    type: string
+                  previous:
+                    format: uri
+                    type: string
+                  results:
+                    items:
+                      $ref: '#/components/schemas/Organization'
+                    type: array
+                required:
+                  - count
+                  - results
+                type: object
+          description: OK
+      tags:
+        - organizations
+    parameters: []
+  '/organizations/{org_guid}/':
+    get:
+      description: Returns the specified drilling organization
+      operationId: organizations_read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+          description: OK
+      tags:
+        - organizations
+    parameters:
+      - description: A UUID string identifying this organization.
+        in: path
+        name: org_guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+components:
+  schemas:
+    ApplicationList:
+      properties:
+        registrations:
+          items:
+            $ref: '#/components/schemas/RegistrationsList'
+          readOnly: true
+          type: array
+      type: object
+    CityList:
+      properties:
+        companies:
+          items:
+            $ref: '#/components/schemas/ContactAt'
+          readOnly: true
+          type: array
+      type: object
+    ContactAt:
+      properties:
+        city:
+          readOnly: true
+          title: City
+          type: string
+        contact_at_guid:
+          format: uuid
+          readOnly: true
+          title: 'Contact At UUID, hidden from users'
+          type: string
+        contact_email:
+          format: email
+          maxLength: 254
+          title: Email adddress
+          type: string
+        contact_tel:
+          maxLength: 15
+          title: Contact telephone number
+          type: string
+        org:
+          format: uuid
+          title: Company Reference
+          type: string
+        organization_name:
+          readOnly: true
+          title: Organization name
+          type: string
+        person:
+          format: uuid
+          title: Person Reference
+          type: string
+        person_name:
+          readOnly: true
+          title: Person name
+          type: string
+        postal_code:
+          readOnly: true
+          title: Postal code
+          type: string
+        province_state:
+          readOnly: true
+          title: Province state
+          type: string
+        street_address:
+          readOnly: true
+          title: Street address
+          type: string
+        website_url:
+          readOnly: true
+          title: Website url
+          type: string
+      type: object
+    Organization:
+      properties:
+        certificate_authority:
+          enum:
+            - false
+            - true
+          title: Certifying Authority for Registries Activities
+          type: boolean
+        city:
+          maxLength: 50
+          title: Town/City
+          type: string
+        contacts:
+          items:
+            $ref: '#/components/schemas/ContactAt'
+          readOnly: true
+          type: array
+        fax_tel:
+          maxLength: 15
+          title: Facsimile telephone number
+          type: string
+        main_tel:
+          maxLength: 15
+          title: Company main telephone number
+          type: string
+        name:
+          maxLength: 200
+          title: Name
+          type: string
+        org_guid:
+          format: uuid
+          readOnly: true
+          title: 'Organization UUID, hidden from users'
+          type: string
+        postal_code:
+          maxLength: 10
+          title: Postal Code
+          type: string
+        province_state:
+          title: Province state
+          type: string
+        street_address:
+          maxLength: 100
+          title: Street Address
+          type: string
+        website_url:
+          format: uri
+          maxLength: 200
+          title: Orgnization's Website
+          type: string
+      required:
+        - name
+      type: object
+    Person:
+      properties:
+        applications:
+          items:
+            $ref: '#/components/schemas/ApplicationList'
+          readOnly: true
+          type: array
+        companies:
+          items:
+            $ref: '#/components/schemas/ContactAt'
+          readOnly: true
+          type: array
+        first_name:
+          maxLength: 100
+          title: First name
+          type: string
+        person_guid:
+          format: uuid
+          readOnly: true
+          title: 'Person UUID, hidden from users'
+          type: string
+        surname:
+          maxLength: 100
+          title: Surname
+          type: string
+      required:
+        - first_name
+        - surname
+      type: object
+    RegistrationsList:
+      properties:
+        activity:
+          readOnly: true
+          title: Activity
+          type: string
+        registration_no:
+          maxLength: 15
+          title: Registration no
+          type: string
+        status:
+          readOnly: true
+          title: Status
+          type: string
+      type: object
+  securitySchemes:
+    basic:
+      scheme: basic
+      type: http

@@ -7,11 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'The Admin SDK Directory API lets you view and manage enterprise resources such as users and groups, administrative notifications, security features, and more.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
+  description: 'Manages enterprise resources such as users and groups, administrative notifications, security features, and more.'
   title: Admin Directory
   version: directory_v1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/admin/directory_v1/rest'
       version: v1
@@ -35,7 +31,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/admin.directory.customer': View and manage customer related information
@@ -65,40 +61,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/admin.directory.user.security': Manage data access permissions for users on your domain
       'https://www.googleapis.com/auth/admin.directory.userschema': View and manage the provisioning of user schemas on your domain
       'https://www.googleapis.com/auth/admin.directory.userschema.readonly': View user schemas on your domain
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/admin.directory.customer': View and manage customer related information
-      'https://www.googleapis.com/auth/admin.directory.customer.readonly': View customer related information
-      'https://www.googleapis.com/auth/admin.directory.device.chromeos': View and manage your Chrome OS devices' metadata
-      'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly': View your Chrome OS devices' metadata
-      'https://www.googleapis.com/auth/admin.directory.device.mobile': View and manage your mobile devices' metadata
-      'https://www.googleapis.com/auth/admin.directory.device.mobile.action': Manage your mobile devices by performing administrative tasks
-      'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly': View your mobile devices' metadata
-      'https://www.googleapis.com/auth/admin.directory.domain': View and manage the provisioning of domains for your customers
-      'https://www.googleapis.com/auth/admin.directory.domain.readonly': View domains related to your customers
-      'https://www.googleapis.com/auth/admin.directory.group': View and manage the provisioning of groups on your domain
-      'https://www.googleapis.com/auth/admin.directory.group.member': View and manage group subscriptions on your domain
-      'https://www.googleapis.com/auth/admin.directory.group.member.readonly': View group subscriptions on your domain
-      'https://www.googleapis.com/auth/admin.directory.group.readonly': View groups on your domain
-      'https://www.googleapis.com/auth/admin.directory.notifications': View and manage notifications received on your domain
-      'https://www.googleapis.com/auth/admin.directory.orgunit': View and manage organization units on your domain
-      'https://www.googleapis.com/auth/admin.directory.orgunit.readonly': View organization units on your domain
-      'https://www.googleapis.com/auth/admin.directory.resource.calendar': View and manage the provisioning of calendar resources on your domain
-      'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly': View calendar resources on your domain
-      'https://www.googleapis.com/auth/admin.directory.rolemanagement': Manage delegated admin roles for your domain
-      'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly': View delegated admin roles for your domain
-      'https://www.googleapis.com/auth/admin.directory.user': View and manage the provisioning of users on your domain
-      'https://www.googleapis.com/auth/admin.directory.user.alias': View and manage user aliases on your domain
-      'https://www.googleapis.com/auth/admin.directory.user.alias.readonly': View user aliases on your domain
-      'https://www.googleapis.com/auth/admin.directory.user.readonly': View users on your domain
-      'https://www.googleapis.com/auth/admin.directory.user.security': Manage data access permissions for users on your domain
-      'https://www.googleapis.com/auth/admin.directory.userschema': View and manage the provisioning of user schemas on your domain
-      'https://www.googleapis.com/auth/admin.directory.userschema.readonly': View user schemas on your domain
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -131,12 +93,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -185,19 +147,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - channels
@@ -243,7 +197,7 @@ paths:
           in: query
           name: projection
           type: string
-        - description: 'Search string in the format given at http://support.google.com/chromeos/a/bin/answer.py?hl=en&answer=1698333'
+        - description: 'Search string in the format given at http://support.google.com/chromeos/a/bin/answer.py?answer=1698333'
           in: query
           name: query
           type: string
@@ -262,11 +216,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly'
       tags:
         - chromeosdevices
@@ -311,8 +261,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
       tags:
         - chromeosdevices
   '/customer/{customerId}/devices/chromeos/{deviceId}':
@@ -345,11 +293,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly'
       tags:
         - chromeosdevices
@@ -394,8 +338,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
       tags:
         - chromeosdevices
     put:
@@ -431,8 +373,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
       tags:
         - chromeosdevices
   '/customer/{customerId}/devices/chromeos/{resourceId}/action':
@@ -467,8 +407,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
       tags:
         - chromeosdevices
@@ -511,7 +449,7 @@ paths:
           in: query
           name: projection
           type: string
-        - description: 'Search string in the format given at http://support.google.com/a/bin/answer.py?hl=en&answer=1408863#search'
+        - description: 'Search string in the format given at http://support.google.com/a/bin/answer.py?answer=1408863#search'
           in: query
           name: query
           type: string
@@ -530,15 +468,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly'
       tags:
         - mobiledevices
@@ -571,8 +503,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
       tags:
         - mobiledevices
     get:
@@ -604,15 +534,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly'
       tags:
         - mobiledevices
@@ -657,11 +581,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
       tags:
         - mobiledevices
@@ -695,11 +615,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.orgunit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.orgunit.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.orgunit.readonly'
       tags:
         - orgunits
@@ -731,8 +647,6 @@ paths:
             $ref: '#/definitions/OrgUnit'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.orgunit'
       tags:
         - orgunits
@@ -870,11 +784,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.userschema'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.userschema'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.userschema.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.userschema.readonly'
       tags:
         - schemas
@@ -907,8 +817,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.userschema'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.userschema'
       tags:
         - schemas
   '/customer/{customerId}/schemas/{schemaKey}':
@@ -931,8 +839,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.userschema'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.userschema'
       tags:
         - schemas
@@ -958,11 +864,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.userschema'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.userschema'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.userschema.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.userschema.readonly'
       tags:
         - schemas
@@ -1000,8 +902,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.userschema'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.userschema'
       tags:
         - schemas
     put:
@@ -1030,8 +930,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.userschema'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.userschema'
       tags:
         - schemas
   '/customer/{customer}/domainaliases':
@@ -1056,11 +954,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.domain'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
       tags:
         - domainAliases
@@ -1093,8 +987,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.domain'
       tags:
         - domainAliases
   '/customer/{customer}/domainaliases/{domainAliasName}':
@@ -1117,8 +1009,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.domain'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
       tags:
         - domainAliases
@@ -1144,11 +1034,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.domain'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
       tags:
         - domainAliases
@@ -1178,11 +1064,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.domain'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
       tags:
         - domains
@@ -1215,8 +1097,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.domain'
       tags:
         - domains
   '/customer/{customer}/domains/{domainName}':
@@ -1239,8 +1119,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.domain'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
       tags:
         - domains
@@ -1266,11 +1144,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.domain'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
       tags:
         - domains
@@ -1312,8 +1186,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.notifications'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.notifications'
       tags:
         - notifications
     parameters:
@@ -1345,8 +1217,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.notifications'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.notifications'
       tags:
         - notifications
     get:
@@ -1370,8 +1240,6 @@ paths:
             $ref: '#/definitions/Notification'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.notifications'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.notifications'
       tags:
         - notifications
@@ -1409,8 +1277,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.notifications'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.notifications'
       tags:
         - notifications
     put:
@@ -1439,8 +1305,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.notifications'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.notifications'
       tags:
         - notifications
   '/customer/{customer}/resources/buildings':
@@ -1453,6 +1317,16 @@ paths:
           name: customer
           required: true
           type: string
+        - description: Maximum number of results to return.
+          in: query
+          maximum: 500
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: Token to specify the next page in the list.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1461,11 +1335,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
       tags:
         - resources
@@ -1498,8 +1368,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
   '/customer/{customer}/resources/buildings/{buildingId}':
@@ -1522,8 +1390,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
@@ -1549,11 +1415,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
       tags:
         - resources
@@ -1591,8 +1453,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
     put:
@@ -1621,8 +1481,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
   '/customer/{customer}/resources/calendars':
@@ -1649,7 +1507,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: 'String query used to filter results. Should be of the form "field operator value" where field can be any of supported fields and operators can be any of supported operations. Operators include ''='' for exact match and '':'' for prefix match where applicable. For prefix match, the value should always be followed by a *.'
+        - description: 'String query used to filter results. Should be of the form "field operator value" where field can be any of supported fields and operators can be any of supported operations. Operators include ''='' for exact match and '':'' for prefix match or HAS match where applicable. For prefix match, the value should always be followed by a *. Supported fields include generatedResourceName, name, buildingId, featureInstances.feature.name. For example buildingId=US-NYC-9TH AND featureInstances.feature.name:Phone.'
           in: query
           name: query
           type: string
@@ -1661,11 +1519,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
       tags:
         - resources
@@ -1698,8 +1552,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
   '/customer/{customer}/resources/calendars/{calendarResourceId}':
@@ -1722,8 +1574,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
@@ -1749,11 +1599,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
       tags:
         - resources
@@ -1794,8 +1640,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
     put:
@@ -1827,8 +1671,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
   '/customer/{customer}/resources/features':
@@ -1841,6 +1683,12 @@ paths:
           name: customer
           required: true
           type: string
+        - description: Maximum number of results to return.
+          in: query
+          maximum: 500
+          minimum: 1
+          name: maxResults
+          type: integer
         - description: Token to specify the next page in the list.
           in: query
           name: pageToken
@@ -1853,11 +1701,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
       tags:
         - resources
@@ -1890,8 +1734,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
   '/customer/{customer}/resources/features/{featureKey}':
@@ -1914,8 +1756,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
@@ -1941,11 +1781,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
       tags:
         - resources
@@ -1983,8 +1819,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
     put:
@@ -2012,8 +1846,6 @@ paths:
             $ref: '#/definitions/Feature'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
@@ -2049,8 +1881,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
@@ -2090,11 +1920,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
       tags:
         - roleAssignments
@@ -2127,8 +1953,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
       tags:
         - roleAssignments
   '/customer/{customer}/roleassignments/{roleAssignmentId}':
@@ -2151,8 +1975,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
       tags:
         - roleAssignments
@@ -2178,11 +2000,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
       tags:
         - roleAssignments
@@ -2222,11 +2040,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
       tags:
         - roles
@@ -2259,8 +2073,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
       tags:
         - roles
   '/customer/{customer}/roles/ALL/privileges':
@@ -2281,11 +2093,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
       tags:
         - privileges
@@ -2318,8 +2126,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
       tags:
         - roles
     get:
@@ -2344,11 +2150,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
       tags:
         - roles
@@ -2386,8 +2188,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
       tags:
         - roles
     put:
@@ -2416,8 +2216,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
       tags:
         - roles
   '/customers/{customerKey}':
@@ -2438,11 +2236,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.customer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.customer'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.customer.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.customer.readonly'
       tags:
         - customers
@@ -2475,8 +2269,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.customer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.customer'
       tags:
         - customers
     put:
@@ -2500,13 +2292,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.customer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.customer'
       tags:
         - customers
   /groups:
     get:
-      description: Retrieve all groups in a domain (paginated)
+      description: Retrieve all groups of a domain or of a user given a userKey (paginated)
       operationId: directory.groups.list
       parameters:
         - description: 'Immutable ID of the G Suite account. In case of multi-domain, to fetch all groups for a customer, fill this field instead of domain.'
@@ -2522,11 +2312,28 @@ paths:
           minimum: 1
           name: maxResults
           type: integer
+        - description: Column to use for sorting results
+          enum:
+            - email
+          in: query
+          name: orderBy
+          type: string
         - description: Token to specify next page in the list
           in: query
           name: pageToken
           type: string
-        - description: 'Email or immutable ID of the user if only those groups are to be listed, the given user is a member of. If ID, it should match with id of user object'
+        - description: 'Query string search. Should be of the form "". Complete documentation is at https://developers.google.com/admin-sdk/directory/v1/guides/search-groups'
+          in: query
+          name: query
+          type: string
+        - description: Whether to return results in ascending or descending order. Only of use when orderBy is also used
+          enum:
+            - ASCENDING
+            - DESCENDING
+          in: query
+          name: sortOrder
+          type: string
+        - description: 'Email or immutable Id of the user if only those groups are to be listed, the given user is a member of. If Id, it should match with id of user object'
           in: query
           name: userKey
           type: string
@@ -2538,11 +2345,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
       tags:
         - groups
@@ -2570,8 +2373,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
       tags:
         - groups
   '/groups/{groupKey}':
@@ -2589,8 +2390,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group'
       tags:
         - groups
@@ -2611,11 +2410,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
       tags:
         - groups
@@ -2648,8 +2443,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
       tags:
         - groups
     put:
@@ -2673,8 +2466,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
       tags:
         - groups
   '/groups/{groupKey}/aliases':
@@ -2695,11 +2486,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
       tags:
         - groups
@@ -2732,8 +2519,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
       tags:
         - groups
   '/groups/{groupKey}/aliases/{alias}':
@@ -2757,8 +2542,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
       tags:
         - groups
     parameters:
@@ -2771,15 +2554,15 @@ paths:
       - $ref: '#/parameters/userIp'
   '/groups/{groupKey}/hasMember/{memberKey}':
     get:
-      description: Checks Membership of an user within a Group
+      description: Checks whether the given user is a member of the group. Membership can be direct or nested.
       operationId: directory.members.hasMember
       parameters:
-        - description: Email or immutable Id of the group
+        - description: 'Identifies the group in the API request. The value can be the group''s email address, group alias, or the unique group ID.'
           in: path
           name: groupKey
           required: true
           type: string
-        - description: Email or immutable Id of the member
+        - description: 'Identifies the user member in the API request. The value can be the user''s primary email address, alias, or unique ID.'
           in: path
           name: memberKey
           required: true
@@ -2792,19 +2575,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group.member'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
       tags:
         - members
@@ -2826,6 +2601,10 @@ paths:
           name: groupKey
           required: true
           type: string
+        - description: 'Whether to list indirect memberships. Default: false.'
+          in: query
+          name: includeDerivedMembership
+          type: boolean
         - description: Maximum number of results to return. Default is 200
           in: query
           minimum: 1
@@ -2847,19 +2626,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group.member'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
       tags:
         - members
@@ -2892,11 +2663,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group.member'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
       tags:
         - members
@@ -2921,11 +2688,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group.member'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
       tags:
         - members
@@ -2951,19 +2714,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group.member'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
       tags:
         - members
@@ -3001,11 +2756,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group.member'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
       tags:
         - members
@@ -3035,11 +2786,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group.member'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
       tags:
         - members
@@ -3166,11 +2913,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - users
@@ -3197,8 +2940,6 @@ paths:
             $ref: '#/definitions/User'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
@@ -3299,11 +3040,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - users
@@ -3322,8 +3059,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
@@ -3365,11 +3100,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - users
@@ -3402,8 +3133,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
     put:
@@ -3426,8 +3155,6 @@ paths:
             $ref: '#/definitions/User'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
@@ -3456,19 +3183,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - users
@@ -3501,11 +3220,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias'
       tags:
         - users
@@ -3546,19 +3261,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - users
@@ -3583,11 +3290,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias'
       tags:
         - users
@@ -3616,8 +3319,6 @@ paths:
             $ref: '#/definitions/Asps'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.security'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - asps
@@ -3650,8 +3351,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - asps
     get:
@@ -3675,8 +3374,6 @@ paths:
             $ref: '#/definitions/Asp'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.security'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - asps
@@ -3716,8 +3413,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
   '/users/{userKey}/photos/thumbnail':
@@ -3735,8 +3430,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
@@ -3757,11 +3450,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - users
@@ -3794,8 +3483,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
     put:
@@ -3819,8 +3506,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
   '/users/{userKey}/tokens':
@@ -3840,8 +3525,6 @@ paths:
             $ref: '#/definitions/Tokens'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.security'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - tokens
@@ -3874,8 +3557,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - tokens
     get:
@@ -3899,8 +3580,6 @@ paths:
             $ref: '#/definitions/Token'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.security'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - tokens
@@ -3940,8 +3619,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
   '/users/{userKey}/verificationCodes':
@@ -3961,8 +3638,6 @@ paths:
             $ref: '#/definitions/VerificationCodes'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.security'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - verificationCodes
@@ -3998,8 +3673,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - verificationCodes
   '/users/{userKey}/verificationCodes/invalidate':
@@ -4025,8 +3698,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.user.security'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - verificationCodes
@@ -4346,7 +4017,7 @@ definitions:
               format: date-time
               type: string
             downloadUrl:
-              description: File downlod URL
+              description: File download URL
               type: string
             name:
               description: File name
@@ -4427,18 +4098,25 @@ definitions:
         format: date-time
         type: string
       tpmVersionInfo:
+        description: Trusted Platform Module (TPM) (Read-only)
         properties:
           family:
+            description: TPM family.
             type: string
           firmwareVersion:
+            description: TPM firmware version.
             type: string
           manufacturer:
+            description: TPM manufacturer code.
             type: string
           specLevel:
+            description: TPM specification level.
             type: string
           tpmModel:
+            description: TPM model number.
             type: string
           vendorSpecific:
+            description: Vendor-specific information such as Vendor ID.
             type: string
         type: object
       willAutoRenew:
@@ -4650,6 +4328,7 @@ definitions:
     properties:
       feature:
         $ref: '#/definitions/Feature'
+        description: The feature that this is an instance of. A calendar resource may have multiple instances of a feature.
     type: object
   FeatureRename:
     description: JSON request template for renaming a feature.
@@ -4785,7 +4464,7 @@ definitions:
     description: JSON template for Has Member response in Directory API.
     properties:
       isMember:
-        description: Identifies whether given user is a member or not.
+        description: Identifies whether the given user is a member of the group. Membership can be direct or nested.
         readOnly: true
         type: boolean
     type: object
@@ -5223,6 +4902,9 @@ definitions:
   Schema:
     description: JSON template for Schema resource in Directory API.
     properties:
+      displayName:
+        description: Display name for the schema.
+        type: string
       etag:
         description: ETag of the resource.
         type: string
@@ -5245,6 +4927,9 @@ definitions:
   SchemaFieldSpec:
     description: JSON template for FieldSpec resource for Schemas in Directory API.
     properties:
+      displayName:
+        description: Display Name of the field.
+        type: string
       etag:
         description: ETag of the resource.
         type: string
@@ -5399,6 +5084,9 @@ definitions:
           type: string
         readOnly: true
         type: array
+      archived:
+        description: Indicates if user is archived
+        type: boolean
       changePasswordAtNextLogin:
         description: Boolean indicating if the user should change password in next login
         type: boolean
@@ -5807,6 +5495,9 @@ definitions:
         type: string
       homeDirectory:
         description: The path to the home directory for this account.
+        type: string
+      operatingSystemType:
+        description: The operating system type for this account.
         type: string
       primary:
         description: If this is user's primary account within the SystemId.

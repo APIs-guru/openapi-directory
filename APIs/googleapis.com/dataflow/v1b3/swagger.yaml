@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages Google Cloud Dataflow projects on Google Cloud Platform.
-  title: Google Dataflow
+  title: Dataflow
   version: v1b3
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://dataflow.googleapis.com/$discovery/rest?version=v1b3'
       version: v1
@@ -1862,6 +1862,11 @@ definitions:
           num_workers value.
         format: google-datetime
         type: string
+      workerPool:
+        description: |-
+          A short and friendly name for the worker pool this event refers to,
+          populated from the value of PoolStageRelation::user_pool_name.
+        type: string
     type: object
   AutoscalingSettings:
     description: Settings for WorkerPool autoscaling.
@@ -1992,6 +1997,7 @@ definitions:
           - AND
           - SET
           - DISTRIBUTION
+          - LATEST_VALUE
         type: string
       otherUnits:
         description: A string referring to the unit type.
@@ -2108,6 +2114,9 @@ definitions:
       integer:
         $ref: '#/definitions/SplitInt64'
         description: 'Integer value for Sum, Max, Min.'
+      integerGauge:
+        $ref: '#/definitions/IntegerGauge'
+        description: Gauge data
       integerList:
         $ref: '#/definitions/IntegerList'
         description: 'List of integers, for Set.'
@@ -2636,6 +2645,17 @@ definitions:
           Unique across the workflow.
         type: string
     type: object
+  IntegerGauge:
+    description: A metric value representing temporal values of a variable.
+    properties:
+      timestamp:
+        description: The time at which this value was measured. Measured as msecs from epoch.
+        format: google-datetime
+        type: string
+      value:
+        $ref: '#/definitions/SplitInt64'
+        description: The value of the variable represented by this gauge.
+    type: object
   IntegerList:
     description: A metric value representing a list of integers.
     properties:
@@ -3135,6 +3155,11 @@ definitions:
         type: boolean
       distribution:
         description: A struct value describing properties of a distribution of numeric values.
+      gauge:
+        description: |-
+          A struct value describing properties of a Gauge.
+          Metrics of gauge type show the value of a metric across time, and is
+          aggregated based on the newest value.
       internal:
         description: |-
           Worker-computed aggregate value for internal use by the Dataflow
@@ -3216,6 +3241,7 @@ definitions:
           - AND
           - SET
           - DISTRIBUTION
+          - LATEST_VALUE
         type: string
       name:
         description: Name of the counter.
@@ -3572,8 +3598,18 @@ definitions:
           available to your pipeline during execution, from 1 to 1000.
         format: int32
         type: integer
+      network:
+        description: |-
+          Network to which VMs will be assigned.  If empty or unspecified,
+          the service will use the network "default".
+        type: string
       serviceAccountEmail:
         description: The email address of the service account to run the job as.
+        type: string
+      subnetwork:
+        description: |-
+          Subnetwork to which VMs will be assigned, if desired.  Expected to be of
+          the form "regions/REGION/subnetworks/SUBNETWORK".
         type: string
       tempLocation:
         description: |-
@@ -4734,6 +4770,41 @@ definitions:
         format: google-duration
         type: string
     type: object
+  WorkerLifecycleEvent:
+    description: |-
+      A report of an event in a worker's lifecycle.
+      The proto contains one event, because the worker is expected to
+      asynchronously send each message immediately after the event.
+      Due to this asynchrony, messages may arrive out of order (or missing), and it
+      is up to the consumer to interpret.
+      The timestamp of the event is in the enclosing WorkerMessage proto.
+    properties:
+      containerStartTime:
+        description: |-
+          The start time of this container. All events will report this so that
+          events can be grouped together across container/VM restarts.
+        format: google-datetime
+        type: string
+      event:
+        description: The event being reported.
+        enum:
+          - UNKNOWN_EVENT
+          - OS_START
+          - CONTAINER_START
+          - NETWORK_UP
+          - STAGING_FILES_DOWNLOAD_START
+          - STAGING_FILES_DOWNLOAD_FINISH
+          - SDK_INSTALL_START
+          - SDK_INSTALL_FINISH
+        type: string
+      metadata:
+        additionalProperties:
+          type: string
+        description: |-
+          Other stats that can accompany an event. E.g.
+          { "downloaded_bytes" : "123456" }
+        type: object
+    type: object
   WorkerMessage:
     description: WorkerMessage provides information to the backend about a worker.
     properties:
@@ -4759,6 +4830,9 @@ definitions:
       workerHealthReport:
         $ref: '#/definitions/WorkerHealthReport'
         description: The health of a worker.
+      workerLifecycleEvent:
+        $ref: '#/definitions/WorkerLifecycleEvent'
+        description: Record of worker lifecycle events.
       workerMessageCode:
         $ref: '#/definitions/WorkerMessageCode'
         description: A worker message code.

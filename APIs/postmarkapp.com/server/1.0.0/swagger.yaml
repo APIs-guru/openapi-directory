@@ -291,6 +291,33 @@ paths:
       summary: Send a batch of emails
       tags:
         - Sending API
+  /email/batchWithTemplates:
+    post:
+      operationId: sendEmailBatchWithTemplates
+      parameters:
+        - description: The token associated with the Server on which this request will operate.
+          in: header
+          name: X-Postmark-Server-Token
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SendEmailTemplatedBatchRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SendEmailBatchResponse'
+        '422':
+          $ref: '#/responses/422'
+        '500':
+          $ref: '#/responses/500'
+      summary: Send a batch of email using templates.
+      tags:
+        - Sending API
+        - Templates API
   /email/withTemplate:
     post:
       operationId: sendEmailWithTemplate
@@ -1520,7 +1547,7 @@ paths:
       summary: Test Template Content
       tags:
         - Templates API
-  '/templates/{templateid}':
+  '/templates/{templateIdOrAlias}':
     delete:
       operationId: deleteTemplate
       parameters:
@@ -1529,11 +1556,11 @@ paths:
           name: X-Postmark-Server-Token
           required: true
           type: string
-        - description: The ID for the Template you wish to delete.
+        - description: The 'TemplateID' or 'Alias' value for the Template you wish to delete.
           in: path
-          name: templateid
+          name: templateIdOrAlias
           required: true
-          type: integer
+          type: string
       responses:
         '200':
           description: OK
@@ -1554,11 +1581,11 @@ paths:
           name: X-Postmark-Server-Token
           required: true
           type: string
-        - description: The ID for the Template you wish to retrieve.
+        - description: The 'TemplateID' or 'Alias' value for the Template you wish to retrieve.
           in: path
-          name: templateid
+          name: templateIdOrAlias
           required: true
-          type: integer
+          type: string
       responses:
         '200':
           description: OK
@@ -1579,11 +1606,11 @@ paths:
           name: X-Postmark-Server-Token
           required: true
           type: string
-        - description: The ID for the Template you wish to update.
+        - description: The 'TemplateID' or 'Alias' value for the Template you wish to update.
           in: path
-          name: templateid
+          name: templateIdOrAlias
           required: true
-          type: integer
+          type: string
         - in: body
           name: body
           required: true
@@ -1953,6 +1980,9 @@ definitions:
   CreateTemplateRequest:
     description: The contents required for creating a new template.
     properties:
+      Alias:
+        description: 'The optional string identifier for referring to this Template (numbers, letters, and ''.'', ''-'', ''_'' characters, starts with a letter).'
+        type: string
       HtmlBody:
         description: The HTML template definition for this Template.
         type: string
@@ -2033,6 +2063,9 @@ definitions:
   EditTemplateRequest:
     description: The contents required for creating a new template.
     properties:
+      Alias:
+        description: 'The optional string identifier for referring to this Template (numbers, letters, and ''.'', ''-'', ''_'' characters, starts with a letter).'
+        type: string
       HtmlBody:
         description: The HTML template definition for this Template.
         type: string
@@ -2042,14 +2075,9 @@ definitions:
       Subject:
         description: The Subject template definition for this Template.
         type: string
-      TemplateId:
-        description: The ID for the template you wish to modify.
-        type: integer
       TextBody:
         description: The Text template definition for this Template.
         type: string
-    required:
-      - TemplateId
   EmailNameAddressPair:
     description: ''
     properties:
@@ -2059,23 +2087,36 @@ definitions:
         type: string
   EmailWithTemplateRequest:
     properties:
+      Attachments:
+        $ref: '#/definitions/AttachmentCollection'
       Bcc:
+        format: email
         type: string
-      ClickHookUrl:
-        description: Webhook url allowing real-time notification when tracked links are clicked.
+      Cc:
+        format: email
         type: string
       From:
+        format: email
         type: string
+      Headers:
+        $ref: '#/definitions/HeaderCollection'
       InlineCss:
         default: true
         type: boolean
       ReplyTo:
         type: string
+      Tag:
+        type: string
+      TemplateAlias:
+        description: Required if 'TemplateId' is not specified.
+        type: string
       TemplateId:
+        description: Required if 'TemplateAlias' is not specified.
         type: integer
       TemplateModel:
         type: object
       To:
+        format: email
         type: string
       TrackLinks:
         description: 'Replace links in content to enable "click tracking" stats. Default is ''null'', which uses the server''s LinkTracking setting''.'
@@ -2088,6 +2129,12 @@ definitions:
       TrackOpens:
         description: Activate open tracking for this email.
         type: boolean
+    required:
+      - TemplateId
+      - TemplateAlias
+      - TemplateModel
+      - To
+      - From
   ExtendedMessageClickEventInformation:
     description: ''
     properties:
@@ -2368,8 +2415,6 @@ definitions:
         items:
           $ref: '#/definitions/EmailNameAddressPair'
         type: array
-      ClickHookUrl:
-        type: string
       From:
         type: string
       MessageID:
@@ -2414,8 +2459,6 @@ definitions:
         items:
           $ref: '#/definitions/EmailNameAddressPair'
         type: array
-      ClickHookUrl:
-        type: string
       From:
         type: string
       HtmlBody:
@@ -2523,9 +2566,6 @@ definitions:
       Cc:
         description: Recipient email address. Multiple addresses are comma seperated. Max 50.
         type: string
-      ClickHookUrl:
-        description: Webhook url allowing real-time notification when tracked links are clicked.
-        type: string
       From:
         description: The sender email address. Must have a registered and confirmed Sender Signature.
         type: string
@@ -2574,6 +2614,12 @@ definitions:
         type: string
       To:
         type: string
+  SendEmailTemplatedBatchRequest:
+    properties:
+      Messages:
+        items:
+          $ref: '#/definitions/EmailWithTemplateRequest'
+        type: array
   SentCountsResponse:
     description: The result of a get sent counts operation.
     properties:
@@ -2655,6 +2701,9 @@ definitions:
       Active:
         description: Indicates that this template may be used for sending email.
         type: boolean
+      Alias:
+        description: The user-supplied alias for this template.
+        type: string
       AssociatedServerId:
         description: The ID of the Server with which this template is associated.
         type: integer
@@ -2688,6 +2737,9 @@ definitions:
       Active:
         description: True if this template is currently available for use.
         type: boolean
+      Alias:
+        description: The user-supplied alias for this template.
+        type: string
       Name:
         description: The display name for this template.
         type: string
@@ -2724,15 +2776,15 @@ definitions:
           TextBody are not. See our template language documentation for more
           information on the syntax for this field.
         type: string
+      TestRenderModel:
+        description: The model to be used when rendering test content.
+        type: object
       TextBody:
         description: |
           The text body content to validate. Must be specified if HtmlBody or
           Subject are not. See our template language documentation for more
           information on the syntax for this field.
         type: string
-      TextRenderModel:
-        description: The model to be used when rendering test content.
-        type: object
   TemplateValidationResponse:
     properties:
       AllContentIsValid:

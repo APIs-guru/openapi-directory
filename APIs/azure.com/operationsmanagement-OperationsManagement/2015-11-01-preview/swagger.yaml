@@ -61,6 +61,7 @@ parameters:
     name: providerName
     required: true
     type: string
+    x-ms-parameter-location: client
   ResourceGroupNameParameter:
     description: The name of the resource group to get. The name is case insensitive.
     in: path
@@ -77,12 +78,14 @@ parameters:
     name: resourceName
     required: true
     type: string
+    x-ms-parameter-location: client
   ResourceTypeParameter:
     description: Resource type for the parent resource
     in: path
     name: resourceType
     required: true
     type: string
+    x-ms-parameter-location: client
   SolutionNameParameter:
     description: User Solution Name.
     in: path

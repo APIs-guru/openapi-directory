@@ -11,7 +11,7 @@ info:
   x-apisguru-categories:
     - transport
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/874608810190622720/rRcPRXuu_400x400.jpg'
+    url: 'https://twitter.com/wmata/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://developer.wmata.com/docs/services/54763629281d83086473f231/export?DocumentFormat=Swagger'
@@ -30,6 +30,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   /BusPositions:
     get:
@@ -162,7 +163,7 @@ paths:
         </tr>
         </tbody>
         </table>
-      operationId: XML - Bus Position
+      operationId: 5476362a281d830c946a3d6e
       parameters:
         - default: '70'
           description: 'Bus route, e.g.: 70, 10A.'
@@ -240,10 +241,11 @@ paths:
                       </BusPosition>
                   </BusPositions>
               </BusPositionsResp>
+      summary: XML - Bus Position
   /RouteDetails:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n<p>For a given date, returns the set of ordered latitude/longitude points along route variant along with the list of stops served.</p>\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr>\r\n<td>Direction0/Direction1</td>\r\n<td>\r\nStructures describing <a href=\"#Direction\">path/stop</a>information.<br>\r\n<br>\r\nMost routes will return content in both Direction0 and Direction1 elements, though a few will return NULL for Direction0 or for Direction1.<br>\r\n<br>\r\n0 or 1 are binary properties. There is no specific mapping to direction, but a different value for the same route signifies that the route is in an opposite direction.\r\n</td>\r\n</tr>\r\n<tr>\r\n<td>Name</td>\r\n<td>Descriptive name for the route.</td>\r\n</tr>\r\n<tr>\r\n<td>RouteID</td>\r\n<td>Bus route variant (e.g.: 10A, 10Av1, etc.).</td>\r\n</tr>\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Direction\" name=\"Direction\">Direction0/Direction1 Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td style=\"text-decoration: line-through\">DirectionNum</td>\r\n<td><span class=\"text-danger\">Deprecated.</span> Use the DirectionText element to denote the general direction of the route variant.</td>\r\n</tr>\r\n<tr>\r\n<td>DirectionText</td>\r\n<td>General direction of the route variant (NORTH, SOUTH, EAST, WEST, LOOP, etc.).</td>\r\n</tr>\r\n<tr>\r\n<td>Shape</td>\r\n<td>\r\nArray containing shape point information (<a href=\"#ShapePoint\">ShapePoint</a>).\r\n</td>\r\n</tr>\r\n<tr>\r\n<td>Stops</td>\r\n<td>\r\nArray containing stop information (<a href=\"#Stop\">Stop</a>).\r\n</td>\r\n</tr>\r\n<tr>\r\n<td>TripHeadsign</td>\r\n<td>Descriptive text of where the bus is headed. This is similar, but not necessarily identical, to what is displayed on the bus.</td>\r\n</tr>\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"ShapePoint\" name=\"ShapePoint\">ShapePoint Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td>Lat</td>\r\n<td>Latitude.</td>\r\n</tr>\r\n<tr>\r\n<td>Lon</td>\r\n<td>Longitude.</td>\r\n</tr>\r\n<tr>\r\n<td>SeqNum</td>\r\n<td>Order of the point in the sequence of ShapePoints.</td>\r\n</tr>\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\"> \r\n<a id=\"Stop\" name=\"Stop\">Stop Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td>Lat</td>\r\n<td>Latitude.</td>\r\n</tr>\r\n<tr>\r\n<td>Lon</td>\r\n<td>Longitude.</td>\r\n</tr>\r\n<tr>\r\n<td>Name</td>\r\n<td>Stop name. May be slightly different from what is spoken or displayed in the bus.</td>\r\n</tr>\r\n<tr>\r\n<td>Routes</td>\r\n<td>String array of route variants which provide service at this stop. Note that these are not date-specific; any route variant which stops at this stop on any day will be listed.</td>\r\n</tr>\r\n<tr>\r\n<td>StopID</td>\r\n<td>7-digit regional ID which can be used in various bus-related methods. If unavailable, the StopID will be 0 or NULL.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: XML - Path Details
+      operationId: 5476362a281d830c946a3d6f
       parameters:
         - default: '70'
           description: 'Bus route variant, e.g.: 70, 10A, 10Av1.'
@@ -5092,10 +5094,11 @@ paths:
                   <Name>B30 - B30 GREENBELT-BWI (647)</Name>
                   <RouteID>B30</RouteID>
               </RouteDetailsInfo>
+      summary: XML - Path Details
   /RouteSchedule:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns schedules for a given route variant for a given date.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Direction0/Direction1</td>\r\n\r\n<td>\r\nArrays containing trip information (<a href=\r\n\"#Trip\">Trip</a>).<br>\r\n<br>\r\nMost routes will return content in both Direction0 and\r\nDirection1 elements, though a few (especially ones which run in\r\na loop, such as the U8) will return content only for Direction0\r\nand NULL content for Direction1.<br>\r\n<br>\r\n0 or 1 are binary properties. There is no specific mapping to\r\ndirection, but a different value for the same route signifies\r\nthat the route is in an opposite direction.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Descriptive name for the route.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Trip\" name=\"Trip\">Trip Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td style=\"text-decoration: line-through\">DirectionNum</td>\r\n\r\n<td><span class=\"text-danger\">Deprecated.</span> Use the\r\nTripDirectionText element to denote the general direction of the\r\ntrip.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>EndTime</td>\r\n\r\n<td>Scheduled end date and time (Eastern Standard Time) for this\r\ntrip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T13:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RouteID</td>\r\n\r\n<td>Bus route variant. This can be used in several other bus\r\nmethods which accept variants.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StartTime</td>\r\n\r\n<td>Scheduled start date and time (Eastern Standard Time) for this\r\ntrip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T13:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopTimes</td>\r\n\r\n<td>\r\nArray containing location and time information (<a href=\r\n\"#StopTime\">StopTime</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripDirectionText</td>\r\n\r\n<td>General direction of the trip (NORTH, SOUTH, EAST, WEST, LOOP,\r\netc.).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripHeadsign</td>\r\n\r\n<td>Descriptive text of where the bus is headed. This is similar,\r\nbut not necessarily identical, to what is displayed on the\r\nbus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripID</td>\r\n\r\n<td>Unique trip ID. This can be correlated with the data returned\r\nfrom the schedule-related methods.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"StopTime\" name=\"StopTime\">StopTime Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopID</td>\r\n\r\n<td>7-digit regional ID which can be used in various bus-related\r\nmethods. If unavailable, the StopID will be 0 or NULL.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopName</td>\r\n\r\n<td>Stop name. May be slightly different from what is spoken or\r\ndisplayed in the bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopSeq</td>\r\n\r\n<td>Order of the stop in the sequence of StopTimes.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Time</td>\r\n\r\n<td>Scheduled departure date and time (Eastern Standard Time) from\r\nthis stop. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T13:17:00).</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: XML - Schedule
+      operationId: 5476362a281d830c946a3d71
       parameters:
         - default: '70'
           description: 'Bus route variant, e.g.: 70, 10A, 10Av1.'
@@ -7782,10 +7785,11 @@ paths:
                   </Direction1>
                   <Name>B30 - B30 GREENBELT-BWI (647)</Name>
               </RouteScheduleInfo>
+      summary: XML - Schedule
   /Routes:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a list of all bus route variants (patterns). For example, the 10A\r\nand 10Av1 are the same route, but may stop at slightly different locations.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Routes</td>\r\n\r\n<td>\r\nArray containing route variant information (<a href=\r\n\"#Route\">Route</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Route\" name=\"Route\">Route Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Descriptive name of the route variant.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RouteID</td>\r\n\r\n<td>Unique identifier for a given route variant. Can be used in\r\nvarious other bus-related methods.</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>LineDescription</td>\r\n\r\n<td>Denotes the route variant’s grouping – lines are a combination of routes which lie in the same corridor and which have significant portions of their paths along the same roadways.</td>\r\n</tr> \r\n</tbody>\r\n</table>"
-      operationId: XML - Routes
+      operationId: 5476362a281d830c946a3d70
       produces:
         - application/xml
       responses:
@@ -7793,10 +7797,11 @@ paths:
           description: Default response code.
           examples:
             application/xml: "<RoutesResp xmlns=\"http://www.wmata.com\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<Routes>\n\t\t<Route>\n\t\t\t<LineDescription>Hunting Point-Pentagon Line</LineDescription>\n\t\t\t<Name>10A - HUNTING POINT -PENTAGON</Name>\n\t\t\t<RouteID>10A</RouteID>\n\t\t</Route>\n\t\t<Route>\n\t\t\t<LineDescription>Hunting Point-Pentagon Line</LineDescription>\n\t\t\t<Name>10A - PENDELTON+COLUMBUS-PENTAGON</Name>\n\t\t\t<RouteID>10Av1</RouteID>\n\t\t</Route>\n\t\t<Route>\n\t\t\t<LineDescription>Hunting Point-Ballston Line</LineDescription>\n\t\t\t<Name>10B - HUNTING POINT - BALLSTON STA</Name>\n\t\t\t<RouteID>10B</RouteID>\n\t\t</Route>\n\t\t<Route>\n\t\t\t<LineDescription>Hunting Point-Ballston Line</LineDescription>\n\t\t\t<Name>10B - BALLSTON STA - PENDLETON+COLUMBS</Name>\n\t\t\t<RouteID>10Bc</RouteID>\n\t\t</Route>\n\t</Routes>\n</RoutesResponse>"
+      summary: XML - Routes
   /StopSchedule:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a set of buses scheduled at a stop for a given date.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>ScheduleArrivals</td>\r\n\r\n<td>\r\nArray containing scheduled arrival information (<a href=\r\n\"#ScheduleArrival\">ScheduleArrival</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Stop</td>\r\n\r\n<td>\r\nStructure describing <a href=\"#Stop\">stop</a> information.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"ScheduleArrival\" name=\r\n\"ScheduleArrival\">ScheduleArrival Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DirectionNum</td>\r\n\r\n<td>Denotes a binary direction (0 or 1) of the bus. There is no\r\nspecific mapping to direction, but a different value for the same\r\nroute signifies that the buses are traveling in opposite\r\ndirections. Use the TripDirectionText element to show the actual\r\ndestination of the bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>EndTime</td>\r\n\r\n<td>Scheduled end date and time (Eastern Standard Time) for this\r\ntrip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T13:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RouteID</td>\r\n\r\n<td>Bus route variant identifier (pattern). This variant can be\r\nused in several other bus methods which accept variants. Note that\r\ncustomers will never see anything other than the base route name,\r\nso variants 10A, 10Av1, 10Av2, etc. will be displayed as 10A on the\r\nbus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>ScheduleTime</td>\r\n\r\n<td>Date and time (Eastern Standard Time) when the bus is scheduled\r\nto stop at this location. Will be in YYYY-MM-DDTHH:mm:ss format\r\n(e.g.: 2014-10-27T13:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StartTime</td>\r\n\r\n<td>Scheduled start date and time (Eastern Standard Time) for this\r\ntrip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T13:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripDirectionText</td>\r\n\r\n<td>General direction of the trip (e.g.: NORTH, SOUTH, EAST,\r\nWEST).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripHeadsign</td>\r\n\r\n<td>Destination of the bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripID</td>\r\n\r\n<td>Trip identifier. This can be correlated with the data in our\r\nbus schedule information as well as bus positions.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Stop\" name=\"Stop\">Stop Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lat</td>\r\n\r\n<td>Latitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lon</td>\r\n\r\n<td>Longitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Stop name. May be slightly different from what is spoken or\r\ndisplayed in the bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Routes</td>\r\n\r\n<td>String array of route variants which provide service at this\r\nstop. Note that these are not date-specific; any route variant\r\nwhich stops at this stop on any day will be listed.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopID</td>\r\n\r\n<td>7-digit regional ID which can be used in various bus-related\r\nmethods. If unavailable, the StopID will be 0 or NULL.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: XML - Schedule at Stop
+      operationId: 5476362a281d830c946a3d72
       parameters:
         - default: '1001195'
           description: 7-digit regional stop ID.
@@ -9819,10 +9824,11 @@ paths:
                       <StopID>3002578</StopID>
                   </Stop>
               </StopScheduleInfo>
+      summary: XML - Schedule at Stop
   /Stops:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a list of nearby bus stops based on latitude, longitude, and radius.\r\nOmit all parameters to retrieve a list of all stops.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Stops</td>\r\n\r\n<td>\r\nArray containing stop information (<a href=\"#Stop\">Stop</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Stop\" name=\"Stop\">Stop Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lat</td>\r\n\r\n<td>Latitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lon</td>\r\n\r\n<td>Longitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Stop name. May be slightly different from what is spoken or\r\ndisplayed in the bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Routes</td>\r\n\r\n<td>String array of route variants which provide service at this\r\nstop. Note that these are not date-specific; any route variant\r\nwhich stops at this stop on any day will be listed.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopID</td>\r\n\r\n<td>7-digit regional ID which can be used in various bus-related\r\nmethods. If unavailable, the StopID will be 0 or NULL.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: XML - Stop Search
+      operationId: 5476362a281d830c946a3d73
       parameters:
         - description: 'Center point Latitude, required if Longitude and Radius are specified.'
           enum:
@@ -10259,6 +10265,7 @@ paths:
                       </Stop>
                   </Stops>
               </StopsResp>
+      summary: XML - Stop Search
   /json/jBusPositions:
     get:
       description: |-
@@ -10390,7 +10397,7 @@ paths:
         </tr>
         </tbody>
         </table>
-      operationId: JSON - Bus Position
+      operationId: 5476362a281d830c946a3d68
       parameters:
         - default: '70'
           description: 'Base bus route, e.g.: 70, 10A.'
@@ -10455,10 +10462,11 @@ paths:
                   TripID: '6794839'
                   TripStartTime: '2014-10-27T13:20:00'
                   VehicleID: '6213'
+      summary: JSON - Bus Position
   /json/jRouteDetails:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>For a given date, returns the set of ordered latitude/longitude points along\r\na route variant along with the list of stops served.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Direction0/Direction1</td>\r\n\r\n<td>\r\nStructures describing <a href=\"#Direction\">path/stop</a>\r\ninformation.<br>\r\n<br>\r\nMost routes will return content in both Direction0 and\r\nDirection1 elements, though a few will return NULL for Direction0 or for Direction1.<br>\r\n<br>\r\n0 or 1 are binary properties. There is no specific mapping to\r\ndirection, but a different value for the same route signifies\r\nthat the route is in an opposite direction.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Descriptive name for the route.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RouteID</td>\r\n\r\n<td>Bus route variant (e.g.: 10A, 10Av1, etc.).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Direction\" name=\"Direction\">Direction0/Direction1\r\nElements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td style=\"text-decoration: line-through\">DirectionNum</td>\r\n\r\n<td><span class=\"text-danger\">Deprecated.</span> Use the\r\nDirectionText element to denote the general direction of the route\r\nvariant.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DirectionText</td>\r\n\r\n<td>General direction of the route variant (NORTH, SOUTH, EAST,\r\nWEST, LOOP, etc.).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Shape</td>\r\n\r\n<td>\r\nArray containing shape point information (<a href=\r\n\"#ShapePoint\">ShapePoint</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Stops</td>\r\n\r\n<td>\r\nArray containing stop information (<a href=\"#Stop\">Stop</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripHeadsign</td>\r\n\r\n<td>Descriptive text of where the bus is headed. This is similar,\r\nbut not necessarily identical, to what is displayed on the\r\nbus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"ShapePoint\" name=\"ShapePoint\">ShapePoint\r\nElements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lat</td>\r\n\r\n<td>Latitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lon</td>\r\n\r\n<td>Longitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>SeqNum</td>\r\n\r\n<td>Order of the point in the sequence of ShapePoints.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Stop\" name=\"Stop\">Stop Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lat</td>\r\n\r\n<td>Latitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lon</td>\r\n\r\n<td>Longitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Stop name. May be slightly different from what is spoken or\r\ndisplayed in the bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Routes</td>\r\n\r\n<td>String array of route variants which provide service at this\r\nstop. Note that these are not date-specific; any route variant\r\nwhich stops at this stop on any day will be listed.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopID</td>\r\n\r\n<td>7-digit regional ID which can be used in various bus-related\r\nmethods. If unavailable, the StopID will be 0 or NULL.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: JSON - Path Details
+      operationId: 5476362a281d830c946a3d69
       parameters:
         - default: '70'
           description: 'Bus route variant, e.g.: 70, 10A, 10Av1.'
@@ -13389,10 +13397,11 @@ paths:
                 TripHeadsign: GREENBELT STATION
               Name: B30 - B30 GREENBELT-BWI (647)
               RouteID: B30
+      summary: JSON - Path Details
   /json/jRouteSchedule:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns schedules for a given route variant for a given date.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Direction0/Direction1</td>\r\n\r\n<td>\r\nArrays containing trip information (<a href=\r\n\"#Trip\">Trip</a>).<br>\r\n<br>\r\nMost routes will return content in both Direction0 and\r\nDirection1 elements, though a few (especially ones which run in\r\na loop, such as the U8) will return content only for Direction0\r\nand NULL content for Direction1.<br>\r\n<br>\r\n0 or 1 are binary properties. There is no specific mapping to\r\ndirection, but a different value for the same route signifies\r\nthat the route is in an opposite direction.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Descriptive name for the route.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Trip\" name=\"Trip\">Trip Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td style=\"text-decoration: line-through\">DirectionNum</td>\r\n\r\n<td><span class=\"text-danger\">Deprecated.</span> Use the\r\nTripDirectionText element to denote the general direction of the\r\ntrip.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>EndTime</td>\r\n\r\n<td>Scheduled end date and time (Eastern Standard Time) for this\r\ntrip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T13:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RouteID</td>\r\n\r\n<td>Bus route variant. This can be used in several other bus\r\nmethods which accept variants.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StartTime</td>\r\n\r\n<td>Scheduled start date and time (Eastern Standard Time) for this\r\ntrip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T13:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopTimes</td>\r\n\r\n<td>\r\nArray containing location and time information (<a href=\r\n\"#StopTime\">StopTime</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripDirectionText</td>\r\n\r\n<td>General direction of the trip (NORTH, SOUTH, EAST, WEST, LOOP,\r\netc.).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripHeadsign</td>\r\n\r\n<td>Descriptive text of where the bus is headed. This is similar,\r\nbut not necessarily identical, to what is displayed on the\r\nbus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripID</td>\r\n\r\n<td>Unique trip ID. This can be correlated with the data returned\r\nfrom the schedule-related methods.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"StopTime\" name=\"StopTime\">StopTime Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopID</td>\r\n\r\n<td>7-digit regional ID which can be used in various bus-related\r\nmethods. If unavailable, the StopID will be 0 or NULL.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopName</td>\r\n\r\n<td>Stop name. May be slightly different from what is spoken or\r\ndisplayed in the bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopSeq</td>\r\n\r\n<td>Order of the stop in the sequence of StopTimes.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Time</td>\r\n\r\n<td>Scheduled departure date and time (Eastern Standard Time) from\r\nthis stop. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T13:17:00).</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: JSON - Schedule
+      operationId: 5476362a281d830c946a3d6b
       parameters:
         - default: '70'
           description: 'Bus route variant, e.g.: 70, 10A, 10Av1, etc.'
@@ -15223,10 +15232,11 @@ paths:
                   TripHeadsign: GREENBELT STATION
                   TripID: '6794856'
               Name: B30 - B30 GREENBELT-BWI (647)
+      summary: JSON - Schedule
   /json/jRoutes:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a list of all bus route variants (patterns). For example, the 10A\r\nand 10Av1 are the same route, but may stop at slightly different locations.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Routes</td>\r\n\r\n<td>\r\nArray containing route variant information (<a href=\r\n\"#Route\">Route</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Route\" name=\"Route\">Route Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Descriptive name of the route variant.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RouteID</td>\r\n\r\n<td>Unique identifier for a given route variant. Can be used in\r\nvarious other bus-related methods.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>LineDescription</td>\r\n\r\n<td>Denotes the route variant’s grouping – lines are a combination of routes which lie in the same corridor and which have significant portions of their paths along the same roadways.</td>\r\n</tr> \r\n</tbody>\r\n</table>"
-      operationId: JSON - Routes
+      operationId: 5476362a281d830c946a3d6a
       produces:
         - application/json
       responses:
@@ -15247,10 +15257,11 @@ paths:
                 - LineDescription: Hunting Point-Ballston Line
                   Name: 10B - BALLSTON STA - PENDLETON+COLUMBS
                   RouteID: 10Bc
+      summary: JSON - Routes
   /json/jStopSchedule:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a set of buses scheduled at a stop for a given date.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>ScheduleArrivals</td>\r\n\r\n<td>\r\nArray containing scheduled arrival information (<a href=\r\n\"#ScheduleArrival\">ScheduleArrival</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Stop</td>\r\n\r\n<td>\r\nStructure describing <a href=\"#Stop\">stop</a> information.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"ScheduleArrival\" name=\r\n\"ScheduleArrival\">ScheduleArrival Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DirectionNum</td>\r\n\r\n<td>Denotes a binary direction (0 or 1) of the bus. There is no\r\nspecific mapping to direction, but a different value for the same\r\nroute signifies that the buses are traveling in opposite\r\ndirections. Use the TripDirectionText element to show the actual\r\ndestination of the bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>EndTime</td>\r\n\r\n<td>Scheduled end date and time (Eastern Standard Time) for this\r\ntrip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T13:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RouteID</td>\r\n\r\n<td>Bus route variant identifier (pattern). This variant can be\r\nused in several other bus methods which accept variants. Note that\r\ncustomers will never see anything other than the base route name,\r\nso variants 10A, 10Av1, 10Av2, etc. will be displayed as 10A on the\r\nbus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>ScheduleTime</td>\r\n\r\n<td>Date and time (Eastern Standard Time) when the bus is scheduled\r\nto stop at this location. Will be in YYYY-MM-DDTHH:mm:ss format\r\n(e.g.: 2014-10-27T13:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StartTime</td>\r\n\r\n<td>Scheduled start date and time (Eastern Standard Time) for this\r\ntrip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r\n2014-10-27T13:17:00).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripDirectionText</td>\r\n\r\n<td>General direction of the trip (e.g.: NORTH, SOUTH, EAST,\r\nWEST).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripHeadsign</td>\r\n\r\n<td>Destination of the bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>TripID</td>\r\n\r\n<td>Trip identifier. This can be correlated with the data in our\r\nbus schedule information as well as bus positions.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Stop\" name=\"Stop\">Stop Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lat</td>\r\n\r\n<td>Latitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lon</td>\r\n\r\n<td>Longitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Stop name. May be slightly different from what is spoken or\r\ndisplayed in the bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Routes</td>\r\n\r\n<td>String array of route variants which provide service at this\r\nstop. Note that these are not date-specific; any route variant\r\nwhich stops at this stop on any day will be listed.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopID</td>\r\n\r\n<td>7-digit regional ID which can be used in various bus-related\r\nmethods. If unavailable, the StopID will be 0 or NULL.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: JSON - Schedule at Stop
+      operationId: 5476362a281d830c946a3d6c
       parameters:
         - default: '1001195'
           description: 7-digit regional stop ID.
@@ -16871,10 +16882,11 @@ paths:
                   - R12
                   - R3
                 StopID: '3002578'
+      summary: JSON - Schedule at Stop
   /json/jStops:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a list of nearby bus stops based on latitude, longitude, and radius.\r\nOmit all parameters to retrieve a list of all stops.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>Stops</td>\r\n\r\n<td>\r\nArray containing stop information (<a href=\"#Stop\">Stop</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"Stop\" name=\"Stop\">Stop Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lat</td>\r\n\r\n<td>Latitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lon</td>\r\n\r\n<td>Longitude.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Name</td>\r\n\r\n<td>Stop name. May be slightly different from what is spoken or\r\ndisplayed in the bus.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Routes</td>\r\n\r\n<td>String array of route variants which provide service at this\r\nstop. Note that these are not date-specific; any route variant\r\nwhich stops at this stop on any day will be listed.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>StopID</td>\r\n\r\n<td>7-digit regional ID which can be used in various bus-related\r\nmethods. If unavailable, the StopID will be 0 or NULL.</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-      operationId: JSON - Stop Search
+      operationId: 5476362a281d830c946a3d6d
       parameters:
         - description: 'Center point Latitude, required if Longitude and Radius are specified.'
           enum:
@@ -17206,3 +17218,4 @@ paths:
                     - B2c
                     - B2vS2
                   StopID: '1000582'
+      summary: JSON - Stop Search

@@ -203,6 +203,58 @@ paths:
       summary: Rotate DKIM Key
       tags:
         - Domains API
+  '/domains/{domainid}/verifydkim':
+    put:
+      operationId: requestDkimVerificationForDomain
+      parameters:
+        - description: The token associated with the Account on which this request will operate.
+          in: header
+          name: X-Postmark-Account-Token
+          required: true
+          type: string
+        - description: The ID for the Domain for which DKIM DNS records should be verified.
+          in: path
+          name: domainid
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DomainExtendedInformation'
+        '422':
+          $ref: '#/responses/422'
+        '500':
+          $ref: '#/responses/500'
+      summary: Request DNS Verification for DKIM
+      tags:
+        - Domains API
+  '/domains/{domainid}/verifyreturnpath':
+    put:
+      operationId: requestReturnPathVerificationForDomain
+      parameters:
+        - description: The token associated with the Account on which this request will operate.
+          in: header
+          name: X-Postmark-Account-Token
+          required: true
+          type: string
+        - description: The ID for the Domain for which Return-Path DNS records should be verified.
+          in: path
+          name: domainid
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DomainExtendedInformation'
+        '422':
+          $ref: '#/responses/422'
+        '500':
+          $ref: '#/responses/500'
+      summary: Request DNS Verification for Return-Path
+      tags:
+        - Domains API
   '/domains/{domainid}/verifyspf':
     post:
       operationId: requestSPFVerificationForDomain

@@ -25,7 +25,6 @@ securityDefinitions:
 security:
   - Api-Key: []
 paths:
-  '/jaguar/{uri}': {}
   /v3/artists/images:
     get:
       consumes: []
@@ -63,6 +62,7 @@ paths:
               - date_submitted
               - keywords
               - license_model
+              - max_dimensions
               - title
             type: string
           name: fields
@@ -890,10 +890,16 @@ paths:
           name: company_downloads
           required: false
           type: boolean
-        - description: "If specified, select assets downloaded on or before this date. Dates should be submitted in ISO\r\n                8601 format (i.e., YYYY-MM-DD hh:mm:ss.sss). If time is omitted, midnight is assumed. Date/times are UTC."
+        - description: "If specified, select assets downloaded on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD). \r\n                Any hour, minute, second values in the request are not used at this time. Date/times in the response are UTC. Default is 30 days prior to date_to."
           format: date-time
           in: query
-          name: end_date
+          name: date_from
+          required: false
+          type: string
+        - description: "If specified, select assets downloaded on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD). \r\n                Any hour, minute, second values in the request are not used at this time. Date/times in the response are UTC. Default is current date."
+          format: date-time
+          in: query
+          name: date_to
           required: false
           type: string
         - description: Identifies page to return. Default is 1.
@@ -915,15 +921,8 @@ paths:
             - imagepack
             - premiumaccess
             - royaltyfreesubscription
-            - credit_pack
           in: query
           name: product_type
-          required: false
-          type: string
-        - description: "If specified, select assets downloaded on or after this date. Dates should be submitted in ISO\r\n                8601 format (i.e., YYYY-MM-DD hh:mm:ss.sss). If time is omitted, midnight is assumed. Date/times are UTC."
-          format: date-time
-          in: query
-          name: start_date
           required: false
           type: string
       produces:
@@ -1004,11 +1003,15 @@ paths:
             - imagepack
             - premiumaccess
             - royaltyfreesubscription
-            - credit_pack
           in: query
           name: product_type
           required: false
           type: string
+        - description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
+          in: query
+          name: use_team_credits
+          required: false
+          type: boolean
       produces:
         - application/json
         - text/json
@@ -1074,6 +1077,11 @@ paths:
           name: size
           required: false
           type: string
+        - description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
+          in: query
+          name: use_team_credits
+          required: false
+          type: boolean
       produces:
         - application/json
         - text/json
@@ -1093,7 +1101,6 @@ paths:
       summary: Download a video
       tags:
         - Downloads
-  '/v3/downloads/{id}': {}
   /v3/events:
     get:
       consumes: []
@@ -1239,7 +1246,7 @@ paths:
           required: true
           type: array
         - collectionFormat: multi
-          description: Specifies fields to return. Defaults to 'summary_set'.
+          description: 'Specifies fields to return. Defaults to ''summary_set''. NOTE: Bytes returned by ''download_sizes'' field are estimates.'
           in: query
           items:
             enum:
@@ -1272,6 +1279,7 @@ paths:
               - event_ids
               - graphical_style
               - id
+              - istock_collection
               - istock_licenses
               - keywords
               - largest_downloads
@@ -1311,6 +1319,8 @@ paths:
           description: UnauthorizedDisplaySize
         '404':
           description: ImageNotFound
+        '500':
+          description: InvalidIStockCollection
       summary: Get metadata for multiple images by supplying multiple image ids
       tags:
         - Images
@@ -1337,7 +1347,7 @@ paths:
           required: true
           type: string
         - collectionFormat: multi
-          description: Specifies fields to return. Defaults to 'summary_set'.
+          description: 'Specifies fields to return. Defaults to ''summary_set''. NOTE: Bytes returned by ''download_sizes'' field are estimates.'
           in: query
           items:
             enum:
@@ -1370,6 +1380,7 @@ paths:
               - event_ids
               - graphical_style
               - id
+              - istock_collection
               - istock_licenses
               - keywords
               - largest_downloads
@@ -1409,6 +1420,8 @@ paths:
           description: UnauthorizedDisplaySize
         '404':
           description: ImageNotFound
+        '500':
+          description: InvalidIStockCollection
       summary: Get metadata for a single image by supplying one image id
       tags:
         - Images
@@ -1463,6 +1476,7 @@ paths:
               - event_ids
               - graphical_style
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -1510,9 +1524,51 @@ paths:
           description: UnauthorizedDisplaySize
         '404':
           description: ImageNotFound
+        '500':
+          description: InvalidIStockCollection
       summary: Search for images similar to an image
       tags:
         - Images
+  '/v3/orders/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      description: "This endpoint returns detailed order metadata for a specified order.\r\nUse of this endpoint requires configuration changes to your API key. \r\nPlease contact [developersupport@gettyimages.com](mailto:developersupport@gettyimages.com) to learn more.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html)\r\npage for more information on how to sign up for an API key."
+      operationId: Orders_GetOrder
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: An order id.
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GettyImages.Models.Orders.OrderDetail'
+        '401':
+          description: Unauthorized
+        '403':
+          description: NoAccessToOrderMetadata
+        '404':
+          description: OrderNotFound
+      summary: Get order metadata
+      tags:
+        - Orders
   /v3/products:
     get:
       consumes: []
@@ -1552,6 +1608,8 @@ paths:
           description: InvalidParameterValue
         '401':
           description: Unauthorized
+        '500':
+          description: CreditPack
       summary: Get Products
       tags:
         - Products
@@ -1572,10 +1630,16 @@ paths:
           name: Accept-Language
           required: false
           type: string
+        - description: 'If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
+          format: date-time
+          in: query
+          name: date_from
+          required: false
+          type: string
         - description: 'If specified, retrieves previous purchases on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
           format: date-time
           in: query
-          name: end_date
+          name: date_to
           required: false
           type: string
         - description: Identifies page to return. Default is 1.
@@ -1590,12 +1654,6 @@ paths:
           name: page_size
           required: false
           type: integer
-        - description: 'If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
-          format: date-time
-          in: query
-          name: start_date
-          required: false
-          type: string
       produces:
         - application/json
         - text/json
@@ -1628,10 +1686,16 @@ paths:
           name: Accept-Language
           required: false
           type: string
+        - description: 'If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
+          format: date-time
+          in: query
+          name: date_from
+          required: false
+          type: string
         - description: 'If specified, retrieves previous purchases on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
           format: date-time
           in: query
-          name: end_date
+          name: date_to
           required: false
           type: string
         - description: Identifies page to return. Default is 1.
@@ -1646,12 +1710,6 @@ paths:
           name: page_size
           required: false
           type: integer
-        - description: 'If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
-          format: date-time
-          in: query
-          name: start_date
-          required: false
-          type: string
       produces:
         - application/json
         - text/json
@@ -1948,6 +2006,7 @@ paths:
               - event_ids
               - graphical_style
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -1986,10 +2045,19 @@ paths:
               - fine_art
               - illustration
               - photography
+              - vector
             type: string
           name: graphical_styles
           required: false
           type: array
+        - description: Provides searching based on specified graphical style(s).
+          enum:
+            - include
+            - exclude
+          in: query
+          name: graphical_styles_filter_type
+          required: false
+          type: string
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -2257,6 +2325,11 @@ paths:
           name: ethnicity
           required: false
           type: array
+        - description: Exclude images that are only available for editorial (non-commercial) use. Default value is false.
+          in: query
+          name: exclude_editorial_use_only
+          required: false
+          type: boolean
         - description: Excludes images containing nudity. The default is false.
           in: query
           name: exclude_nudity
@@ -2286,6 +2359,7 @@ paths:
               - display_set
               - graphical_style
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -2323,10 +2397,19 @@ paths:
               - fine_art
               - illustration
               - photography
+              - vector
             type: string
           name: graphical_styles
           required: false
           type: array
+        - description: Provides searching based on specified graphical style(s).
+          enum:
+            - include
+            - exclude
+          in: query
+          name: graphical_styles_filter_type
+          required: false
+          type: string
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -2439,6 +2522,8 @@ paths:
           description: AuthorizationTokenRequired
         '403':
           description: UnauthorizedDisplaySize
+        '500':
+          description: InvalidIStockCollection
       summary: Search for creative images only
       tags:
         - Search
@@ -2483,6 +2568,7 @@ paths:
               - display_set
               - graphical_style
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -2545,6 +2631,8 @@ paths:
           description: AuthorizationTokenRequired
         '403':
           description: UnauthorizedDisplaySize
+        '500':
+          description: InvalidIStockCollection
       summary: Search for creative images based on url
       tags:
         - Search
@@ -2661,6 +2749,18 @@ paths:
           name: compositions
           required: false
           type: array
+        - description: 'Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).'
+          format: date-time
+          in: query
+          name: date_from
+          required: false
+          type: string
+        - description: 'Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).'
+          format: date-time
+          in: query
+          name: date_to
+          required: false
+          type: string
         - collectionFormat: multi
           description: Return only events with a matching editorial segment.
           in: query
@@ -2681,12 +2781,6 @@ paths:
           name: embed_content_only
           required: false
           type: boolean
-        - description: 'Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).'
-          format: date-time
-          in: query
-          name: end_date
-          required: false
-          type: string
         - collectionFormat: multi
           description: specify linked data entity uri.
           in: query
@@ -2725,11 +2819,6 @@ paths:
           name: event_ids
           required: false
           type: array
-        - description: Excludes images containing nudity. The default is false.
-          in: query
-          name: exclude_nudity
-          required: false
-          type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
           in: query
@@ -2794,10 +2883,19 @@ paths:
             enum:
               - photography
               - illustration
+              - vector
             type: string
           name: graphical_styles
           required: false
           type: array
+        - description: Provides searching based on specified graphical style(s).
+          enum:
+            - include
+            - exclude
+          in: query
+          name: graphical_styles_filter_type
+          required: false
+          type: string
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -2895,12 +2993,6 @@ paths:
           name: specific_people
           required: false
           type: array
-        - description: 'Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).'
-          format: date-time
-          in: query
-          name: start_date
-          required: false
-          type: string
       produces:
         - application/json
         - text/json
@@ -2922,7 +3014,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "Use this endpoint to search over a blend of our premium stock, contemporary 4K and HD footage, celebrities, news, newsmakers, entertainment, events and archival videos.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
+      description: "Use this endpoint to search over a blend of our premium stock, contemporary 4K and HD footage, celebrities, news, newsmakers, entertainment, events and archival videos.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\",\r\n\t\t\"call_for_image\",\r\n        \"caption\",\r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Search_GetVideosByPhrase
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -3013,11 +3105,6 @@ paths:
           name: editorial_video_types
           required: false
           type: array
-        - description: Excludes images containing nudity. The default is false.
-          in: query
-          name: exclude_nudity
-          required: false
-          type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
           in: query
@@ -3026,6 +3113,7 @@ paths:
               - allowed_use
               - artist
               - asset_family
+              - call_for_image
               - caption
               - clip_length
               - collection_code
@@ -3042,6 +3130,7 @@ paths:
               - entity_details
               - era
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -3132,6 +3221,14 @@ paths:
           name: product_types
           required: false
           type: array
+        - description: Allows filtering by type of model release.
+          enum:
+            - release_not_important
+            - fully_released
+          in: query
+          name: release_status
+          required: false
+          type: string
         - description: Allows sorting of results.
           enum:
             - best_match
@@ -3171,7 +3268,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "Use this endpoint to search premium stock video, from archival film to contemporary 4K and HD footage.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html)\r\npage for more information on how to sign up for an API key.\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without\r\nbeing logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only \r\nassets that you have a license to use, you need to also include an authorization token in the header of your request.\r\nPlease consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search\r\nresponse results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"asset_family\", \r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a \r\ndetailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\", \r\n        \"caption\", \r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\", \r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files \r\nthat are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result \r\nset when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```"
+      description: "Use this endpoint to search premium stock video, from archival film to contemporary 4K and HD footage.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html)\r\npage for more information on how to sign up for an API key.\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without\r\nbeing logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only \r\nassets that you have a license to use, you need to also include an authorization token in the header of your request.\r\nPlease consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search\r\nresponse results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"asset_family\", \r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a \r\ndetailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\", \r\n\t\t\"call_for_image\",\r\n        \"caption\", \r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\", \r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files \r\nthat are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result \r\nset when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```"
       operationId: Search_GetCreativeVideosByPhrase
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -3251,11 +3348,6 @@ paths:
           name: collections_filter_type
           required: false
           type: string
-        - description: Excludes images containing nudity. The default is false.
-          in: query
-          name: exclude_nudity
-          required: false
-          type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
           in: query
@@ -3264,6 +3356,7 @@ paths:
               - allowed_use
               - artist
               - asset_family
+              - call_for_image
               - caption
               - clip_length
               - collection_code
@@ -3278,6 +3371,7 @@ paths:
               - display_set
               - era
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -3367,6 +3461,14 @@ paths:
           name: product_types
           required: false
           type: array
+        - description: Allows filtering by type of model release.
+          enum:
+            - release_not_important
+            - fully_released
+          in: query
+          name: release_status
+          required: false
+          type: string
         - description: Allows sorting of results.
           enum:
             - best_match
@@ -3390,6 +3492,8 @@ paths:
           description: AuthorizationTokenRequired
         '403':
           description: UnauthorizedDisplaySize
+        '500':
+          description: InvalidIStockCollection
       summary: Search for creative videos
       tags:
         - Search
@@ -3397,7 +3501,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "Use this endpoint to search current and archival video clips of celebrities, newsmakers, and events.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"asset_family\", \r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\", \r\n        \"caption\", \r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\", \r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
+      description: "Use this endpoint to search current and archival video clips of celebrities, newsmakers, and events.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"asset_family\", \r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\", \r\n\t\t\"call_for_image\",\r\n        \"caption\", \r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\", \r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Search_GetEditorialVideosByPhrase
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -3496,11 +3600,6 @@ paths:
           name: entity_uris
           required: false
           type: array
-        - description: Excludes images containing nudity. The default is false.
-          in: query
-          name: exclude_nudity
-          required: false
-          type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
           in: query
@@ -3509,6 +3608,7 @@ paths:
               - allowed_use
               - artist
               - asset_family
+              - call_for_image
               - caption
               - clip_length
               - collection_code
@@ -3525,6 +3625,7 @@ paths:
               - entity_details
               - era
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -3604,6 +3705,14 @@ paths:
           name: product_types
           required: false
           type: array
+        - description: Allows filtering by type of model release.
+          enum:
+            - release_not_important
+            - fully_released
+          in: query
+          name: release_status
+          required: false
+          type: string
         - description: Allows sorting of results.
           enum:
             - best_match
@@ -3648,17 +3757,17 @@ paths:
       description: "# Report Usage\r\n\r\nUse this endpoint to report the usages of a set of assets. The count of assets submitted in a single batch to this endpoint is limited to 1000. Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. In this case, you will need to remove the invalid asset Ids from the query request and re-submit the query.\r\n\r\n##  Quickstart\r\n\r\nYou'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource.\r\nPlease see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n\r\n\r\n_Note_: Date of use can be in any unambiguous date format.\r\n"
       operationId: Usage_Put
       parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          type: string
         - description: "Specifies up to 1000 sets of asset Id, usage count, and date of use to submit usages for. \r\n            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. \r\n            The date format should be ISO 8601 (ex: YYYY-MM-DD), time is not needed."
           in: body
           name: request
           required: true
           schema:
             $ref: '#/definitions/report_usage_batch_request'
-        - description: 'Provide access token in the format of ''Bearer {token}''.'
-          in: header
-          name: Authorization
-          required: true
-          type: string
         - description: Specifies a unique batch transaction id to identify the report.
           in: path
           name: id
@@ -3685,7 +3794,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "Use this endpoint to return detailed video metadata for all the specified video ids.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"download_sizes\",\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
+      description: "Use this endpoint to return detailed video metadata for all the specified video ids.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\": \r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\",\r\n\t\t\"call_for_image\",\r\n        \"caption\",\r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"download_sizes\",\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Videos_GetBatch
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -3715,6 +3824,7 @@ paths:
               - allowed_use
               - artist
               - asset_family
+              - call_for_image
               - caption
               - clip_length
               - collection_code
@@ -3724,6 +3834,7 @@ paths:
               - copyright
               - comp
               - date_created
+              - date_submitted
               - detail_set
               - display_set
               - download_sizes
@@ -3745,6 +3856,7 @@ paths:
               - thumb
               - title
               - istock_licenses
+              - istock_collection
             type: string
           name: fields
           required: false
@@ -3765,6 +3877,8 @@ paths:
           description: UnauthorizedDisplaySize
         '404':
           description: VideosNotFound
+        '500':
+          description: InvalidIStockCollection
       summary: Get metadata for multiple videos by supplying multiple video ids
       tags:
         - Videos
@@ -3772,7 +3886,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "Use this endpoint to return detailed video metadata for the specified video id.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"download_sizes\",\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
+      description: "Use this endpoint to return detailed video metadata for the specified video id.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.\r\n\r\nYou can show different information in the response by specifying values on the \"fields\" parameter (see details below).\r\nYou can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.\r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build search response results. The following fields are provided for every video in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_name\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"license_model\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"allowed_use\",\r\n        \"artist\",\r\n        \"asset_family\",\r\n\t\t\"call_for_image\",\r\n        \"caption\",\r\n        \"clip_length\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"color_type\",\r\n        \"copyright\",\r\n        \"date_created\",\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ],\r\n        \"download_sizes\",\r\n        \"era\",\r\n        \"license_model\",\r\n        \"mastered_to\",\r\n        \"originally_shot_on\",\r\n        \"product_types\",\r\n        \"shot_speed\",\r\n        \"source\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"videos\":\r\n    [\r\n        \"display_sizes\":\r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Videos_Get
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -3799,6 +3913,7 @@ paths:
               - allowed_use
               - artist
               - asset_family
+              - call_for_image
               - caption
               - clip_length
               - collection_code
@@ -3808,6 +3923,7 @@ paths:
               - copyright
               - comp
               - date_created
+              - date_submitted
               - detail_set
               - display_set
               - download_sizes
@@ -3829,6 +3945,7 @@ paths:
               - thumb
               - title
               - istock_licenses
+              - istock_collection
             type: string
           name: fields
           required: false
@@ -3849,6 +3966,8 @@ paths:
           description: UnauthorizedDisplaySize
         '404':
           description: VideosNotFound
+        '500':
+          description: InvalidIStockCollection
       summary: Get metadata for a single video by supplying one video id
       tags:
         - Videos
@@ -3881,6 +4000,7 @@ paths:
               - allowed_use
               - artist
               - asset_family
+              - call_for_image
               - caption
               - clip_length
               - collection_code
@@ -3897,6 +4017,7 @@ paths:
               - entity_details
               - era
               - id
+              - istock_collection
               - keywords
               - largest_downloads
               - license_model
@@ -3944,6 +4065,8 @@ paths:
           description: UnauthorizedDisplaySize
         '404':
           description: VideosNotFound
+        '500':
+          description: InvalidIStockCollection
       summary: Get videos similar to a video by supplying one video id
       tags:
         - Videos
@@ -4216,6 +4339,8 @@ definitions:
         type: array
       license_model:
         type: string
+      max_dimensions:
+        $ref: '#/definitions/GettyImages.Models.MaxDimensions'
       title:
         type: string
     type: object
@@ -4513,8 +4638,6 @@ definitions:
         type: string
       asset_family:
         type: string
-      asset_type:
-        type: string
       call_for_image:
         type: boolean
       caption:
@@ -4730,6 +4853,38 @@ definitions:
         format: int32
         type: integer
     type: object
+  GettyImages.Models.Orders.AssetIdFromOrder:
+    properties:
+      id:
+        type: string
+    type: object
+  GettyImages.Models.Orders.OrderDetail:
+    properties:
+      assets:
+        items:
+          $ref: '#/definitions/GettyImages.Models.Orders.AssetIdFromOrder'
+        type: array
+      end_client:
+        type: string
+      id:
+        type: string
+      notes:
+        $ref: '#/definitions/GettyImages.Models.Orders.OrderNotes'
+      order_date:
+        format: date-time
+        type: string
+    type: object
+  GettyImages.Models.Orders.OrderNotes:
+    properties:
+      licensee_name:
+        type: string
+      ordered_by:
+        type: string
+      project_title:
+        type: string
+      purchase_order_number:
+        type: string
+    type: object
   GettyImages.Models.Products.DownloadRequirements:
     properties:
       is_note_required:
@@ -4789,13 +4944,14 @@ definitions:
         type: string
       overage:
         $ref: '#/definitions/GettyImages.Models.Products.OverageDetails'
-      premium_access_download_requirements:
-        $ref: '#/definitions/GettyImages.Models.Products.DownloadRequirements'
       status:
         enum:
           - active
           - inactive
         type: string
+      team_credits:
+        format: int32
+        type: integer
       type:
         enum:
           - easyaccess
@@ -5309,6 +5465,15 @@ definitions:
           $ref: '#/definitions/GettyImages.Models.Artists.VideoSearchItem'
         type: array
     type: object
+  GettyImages.Models.TerritoryRestriction:
+    properties:
+      country_code:
+        type: string
+      description:
+        type: string
+      type:
+        type: string
+    type: object
   GettyImages.Models.Videos.VideoDetail:
     properties:
       allowed_use:
@@ -5333,6 +5498,9 @@ definitions:
       copyright:
         type: string
       date_created:
+        format: date-time
+        type: string
+      date_submitted:
         format: date-time
         type: string
       display_sizes:
@@ -5505,6 +5673,9 @@ definitions:
       asset_family:
         description: Specifies the asset family for the channel (e.g. "editorial" or "creative")
         type: string
+      asset_type:
+        description: 'Specifies channel''s asset type (i.e. "image", "film")'
+        type: string
       channel_id:
         description: Specifies the identification number for the channel
         format: int32
@@ -5516,6 +5687,10 @@ definitions:
         description: Specifies the current count of notifications pending in the channel
         format: int32
         type: integer
+      oldest_notification_date_utc:
+        description: Specifies the date of the oldest notification currently in the channel in UTC
+        format: date-time
+        type: string
       start_date:
         description: ''
         format: date-time

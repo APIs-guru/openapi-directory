@@ -608,6 +608,53 @@ paths:
                     type: Microsoft.Relay/Namespaces/AuthorizationRules
       x-ms-pageable:
         nextLinkName: nextLink
+    post:
+      description: Authorization rules for a namespace.
+      operationId: Namespaces_ListPostAuthorizationRules
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace Authorization rule returned successfully
+          schema:
+            $ref: '#/definitions/AuthorizationRuleListResult'
+        default:
+          description: Relay error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Namespaces
+      x-ms-examples:
+        RelayNameSpaceAutorizationRuleListAll:
+          parameters:
+            api-version: '2016-07-01'
+            namespaceName: sdk-RelayNamespace-01
+            resourceGroupName: RG-eg
+            subscriptionId: 8c246e6a-cbc6-4a87-aff1-d6a886f376ef
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/8c246e6a-cbc6-4a87-aff1-d6a886f376ef/resourceGroups/RG-eg/providers/Microsoft.Relay/namespaces/sdk-RelayNamespace-01/AuthorizationRules/RootManageSharedAccessKey
+                    name: RootManageSharedAccessKey
+                    properties:
+                      rights:
+                        - Listen
+                        - Manage
+                        - Send
+                    type: Microsoft.Relay/Namespaces/AuthorizationRules
+                  - id: /subscriptions/8c246e6a-cbc6-4a87-aff1-d6a886f376ef/resourceGroups/RG-eg/providers/Microsoft.Relay/namespaces/sdk-RelayNamespace-01/AuthorizationRules/sdk-RelayAuthRules-01
+                    name: sdk-RelayAuthRules-01
+                    properties:
+                      rights:
+                        - Listen
+                        - Send
+                    type: Microsoft.Relay/Namespaces/AuthorizationRules
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}':
     delete:
       description: Deletes a namespace authorization rule
@@ -643,6 +690,43 @@ paths:
     get:
       description: Authorization rule for a namespace by name.
       operationId: Namespaces_GetAuthorizationRule
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace Authorization rule returned successfully
+          schema:
+            $ref: '#/definitions/AuthorizationRule'
+        default:
+          description: Relay error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Namespaces
+      x-ms-examples:
+        RelayNameSpaceAutorizationRuleGet:
+          parameters:
+            api-version: '2016-07-01'
+            authorizationRuleName: sdk-RelayAuthRules-01
+            namespaceName: sdk-RelayNamespace-01
+            resourceGroupName: RG-eg
+            subscriptionId: 8c246e6a-cbc6-4a87-aff1-d6a886f376ef
+          responses:
+            '200':
+              body:
+                id: /subscriptions/8c246e6a-cbc6-4a87-aff1-d6a886f376ef/resourceGroups/RG-eg/providers/Microsoft.Relay/namespaces/sdk-RelayNamespace-01/AuthorizationRules/sdk-RelayAuthRules-01
+                name: sdk-RelayAuthRules-01
+                properties:
+                  rights:
+                    - Listen
+                type: Microsoft.Relay/Namespaces/AuthorizationRules
+    post:
+      description: Authorization rule for a namespace by name.
+      operationId: Namespaces_PostAuthorizationRule
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/namespaceNameParameter'
@@ -1008,6 +1092,43 @@ paths:
                     type: Microsoft.Relay/Namespaces/Hybridconnections/AuthorizationRules
       x-ms-pageable:
         nextLinkName: nextLink
+    post:
+      description: Authorization rules for a HybridConnection.
+      operationId: HybridConnections_ListPostAuthorizationRules
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/hybridConnectionNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Authorization rules successfully returned.
+          schema:
+            $ref: '#/definitions/AuthorizationRuleListResult'
+      tags:
+        - HybridConnections
+      x-ms-examples:
+        RelayHybridConnectionAutorizationRuleListAll:
+          parameters:
+            api-version: '2016-07-01'
+            hybridConnectionName: sdk-Relay-Hybrid-01
+            namespaceName: sdk-RelayNamespace-01
+            resourceGroupName: RG-eg
+            subscriptionId: 8c246e6a-cbc6-4a87-aff1-d6a886f376ef
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/8c246e6a-cbc6-4a87-aff1-d6a886f376ef/resourceGroups/RG-eg/providers/Microsoft.Relay/namespaces/sdk-RelayNamespace-01/HybridConnections/sdk-Relay-Hybrid-01/AuthorizationRules/sdk-RelayAuthRules-01
+                    name: sdk-RelayAuthRules-01
+                    properties:
+                      rights:
+                        - Listen
+                        - Send
+                    type: Microsoft.Relay/Namespaces/Hybridconnections/AuthorizationRules
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/HybridConnections/{hybridConnectionName}/authorizationRules/{authorizationRuleName}':
     delete:
       description: Deletes a HybridConnection authorization rule
@@ -1045,6 +1166,45 @@ paths:
     get:
       description: HybridConnection authorizationRule for a HybridConnection by name.
       operationId: HybridConnections_GetAuthorizationRule
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/hybridConnectionNameParameter'
+        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: HybridConnection AuthorizationRule returned successfully
+          schema:
+            $ref: '#/definitions/AuthorizationRule'
+        default:
+          description: Relay error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - HybridConnections
+      x-ms-examples:
+        RelayHybridConnectionAutorizationRuleGet:
+          parameters:
+            api-version: '2016-07-01'
+            authorizationRuleName: sdk-RelayAuthRules-01
+            hybridConnectionName: sdk-Relay-Hybrid-01
+            namespaceName: sdk-RelayNamespace-01
+            resourceGroupName: RG-eg
+            subscriptionId: 8c246e6a-cbc6-4a87-aff1-d6a886f376ef
+          responses:
+            '200':
+              body:
+                id: /subscriptions/8c246e6a-cbc6-4a87-aff1-d6a886f376ef/resourceGroups/RG-eg/providers/Microsoft.Relay/namespaces/sdk-RelayNamespace-01/HybridConnections/sdk-Relay-Hybrid-01/AuthorizationRules/sdk-RelayAuthRules-01
+                name: sdk-RelayAuthRules-01
+                properties:
+                  rights:
+                    - Listen
+                type: Microsoft.Relay/Namespaces/Hybridconnections/AuthorizationRules
+    post:
+      description: HybridConnection authorizationRule for a HybridConnection by name.
+      operationId: HybridConnections_PostAuthorizationRule
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/namespaceNameParameter'
@@ -1429,6 +1589,43 @@ paths:
                     type: Microsoft.Relay/Namespaces/WcfRelay/AuthorizationRules
       x-ms-pageable:
         nextLinkName: nextLink
+    post:
+      description: Authorization rules for a WCFRelays.
+      operationId: WCFRelays_ListPostAuthorizationRules
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/relayNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Authorization rules successfully returned.
+          schema:
+            $ref: '#/definitions/AuthorizationRuleListResult'
+      tags:
+        - WCFRelays
+      x-ms-examples:
+        RelayAutorizationRuleListAll:
+          parameters:
+            api-version: '2016-07-01'
+            namespaceName: sdk-RelayNamespace-01
+            relayName: sdk-Relay-Wcf-01
+            resourceGroupName: RG-eg
+            subscriptionId: 8c246e6a-cbc6-4a87-aff1-d6a886f376ef
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/8c246e6a-cbc6-4a87-aff1-d6a886f376ef/resourceGroups/RG-eg/providers/Microsoft.Relay/namespaces/sdk-RelayNamespace-01/WcfRelays/sdk-Relay-Wcf-01/AuthorizationRules/sdk-RelayAuthRules-01
+                    name: sdk-RelayAuthRules-01
+                    properties:
+                      rights:
+                        - Listen
+                        - Send
+                    type: Microsoft.Relay/Namespaces/WcfRelay/AuthorizationRules
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/WcfRelays/{relayName}/authorizationRules/{authorizationRuleName}':
     delete:
       description: Deletes a WCFRelays authorization rule
@@ -1466,6 +1663,45 @@ paths:
     get:
       description: Get authorizationRule for a WCFRelays by name.
       operationId: WCFRelays_GetAuthorizationRule
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/relayNameParameter'
+        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Request for WCFRelays AuthorizationRule succeeded
+          schema:
+            $ref: '#/definitions/AuthorizationRule'
+        default:
+          description: Relay error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - WCFRelays
+      x-ms-examples:
+        RelayAutorizationRuleGet:
+          parameters:
+            api-version: '2016-07-01'
+            authorizationRuleName: sdk-RelayAuthRules-01
+            namespaceName: sdk-RelayNamespace-01
+            relayName: sdk-Relay-wcf-01
+            resourceGroupName: RG-eg
+            subscriptionId: 8c246e6a-cbc6-4a87-aff1-d6a886f376ef
+          responses:
+            '200':
+              body:
+                id: /subscriptions/8c246e6a-cbc6-4a87-aff1-d6a886f376ef/resourceGroups/RG-eg/providers/Microsoft.Relay/namespaces/sdk-RelayNamespace-01/WcfRelays/sdk-Relay-Wcf-01/AuthorizationRules/sdk-RelayAuthRules-01
+                name: sdk-RelayAuthRules-01
+                properties:
+                  rights:
+                    - Listen
+                type: Microsoft.Relay/Namespaces/WcfRelay/AuthorizationRules
+    post:
+      description: Get authorizationRule for a WCFRelays by name.
+      operationId: WCFRelays_PostAuthorizationRule
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/namespaceNameParameter'

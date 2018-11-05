@@ -57,6 +57,360 @@ parameters:
     required: true
     type: string
 paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/detectors':
+    get:
+      description: List Hosting Environment Detector Responses
+      operationId: Diagnostics_ListHostingEnvironmentDetectorResponses
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site Name
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DetectorResponseCollection'
+      summary: List Hosting Environment Detector Responses
+      tags:
+        - Diagnostics
+      x-ms-examples:
+        List App Service Environment Detector Responses:
+          parameters:
+            api-version: '2016-03-01'
+            name: SampleAppServiceEnvironment
+            resourceGroupName: Sample-WestUSResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.Web/hostingEnvironments/SampleAppServiceEnvironment/detectors/runtimeavailability
+                    name: runtimeavailability
+                    properties:
+                      dataset: []
+                      metadata:
+                        category: Availability and Performance
+                        description: This detector analyzes all the requests to all applications running on this app service environment.
+                        subCategory: App Availability
+                        supportTopicId: ''
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/detectors/{detectorName}':
+    get:
+      description: Get Hosting Environment Detector Response
+      operationId: Diagnostics_GetHostingEnvironmentDetectorResponse
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: App Service Environment Name
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Detector Resource Name
+          in: path
+          name: detectorName
+          required: true
+          type: string
+        - description: Start Time
+          format: date-time
+          in: query
+          name: startTime
+          type: string
+        - description: End Time
+          format: date-time
+          in: query
+          name: endTime
+          type: string
+        - description: Time Grain
+          in: query
+          name: timeGrain
+          pattern: 'PT[1-9][0-9]+[SMH]'
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DetectorResponse'
+      summary: Get Hosting Environment Detector Response
+      tags:
+        - Diagnostics
+      x-ms-examples:
+        Get App Service Environment Detector Response:
+          parameters:
+            api-version: '2016-03-01'
+            detectorName: runtimeavailability
+            name: SampleAppServiceEnvironment
+            resourceGroupName: Sample-WestUSResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/hostingEnvironments/SampleAppServiceEnvironment/detectors/runtimeavailability
+                name: runtimeavailability
+                properties:
+                  dataset:
+                    - renderingProperties:
+                        description: This detector breaks down the number of requests that your apps on this app service environment received for each status code.
+                        renderingType: TimeSeries
+                        title: Requests by Status Code
+                      table:
+                        columns:
+                          - columnName: PreciseTimeStamp
+                            columnType: datetime
+                            dataType: DateTime
+                          - columnName: count_Http2xx
+                            columnType: long
+                            dataType: Int64
+                          - columnName: count_Http3xx
+                            columnType: long
+                            dataType: Int64
+                          - columnName: count_Http4xx
+                            columnType: long
+                            dataType: Int64
+                          - columnName: count_Http5xx
+                            columnType: long
+                            dataType: Int64
+                        rows:
+                          - - '2018-03-27T00:25:00Z'
+                            - '772705'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:30:00Z'
+                            - '787069'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:35:00Z'
+                            - '781627'
+                            - '0'
+                            - '1'
+                            - '0'
+                          - - '2018-03-27T00:40:00Z'
+                            - '785017'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:45:00Z'
+                            - '783518'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:50:00Z'
+                            - '785783'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:55:00Z'
+                            - '772874'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T01:00:00Z'
+                            - '787162'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T01:05:00Z'
+                            - '782036'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T01:10:00Z'
+                            - '784642'
+                            - '0'
+                            - '0'
+                            - '0'
+                        tableName: Table_0
+                  metadata:
+                    category: Availability and Performance
+                    description: This detector analyzes all the requests to all applications running on this app service environment.
+                    subCategory: App Availability
+                    supportTopicId: ''
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/detectors':
+    get:
+      description: List Site Detector Responses
+      operationId: Diagnostics_ListSiteDetectorResponses
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site Name
+          in: path
+          name: siteName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DetectorResponseCollection'
+      summary: List Site Detector Responses
+      tags:
+        - Diagnostics
+      x-ms-examples:
+        List App Detector Responses:
+          parameters:
+            api-version: '2016-03-01'
+            resourceGroupName: Sample-WestUSResourceGroup
+            siteName: SampleApp
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.Web/sites/SampleApp/detectors/runtimeavailability
+                    name: runtimeavailability
+                    properties:
+                      dataset: []
+                      metadata:
+                        category: Availability and Performance
+                        description: This detector analyzes the requests to your application.
+                        subCategory: App Availability
+                        supportTopicId: ''
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/detectors/{detectorName}':
+    get:
+      description: Get site detector response
+      operationId: Diagnostics_GetSiteDetectorResponse
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site Name
+          in: path
+          name: siteName
+          required: true
+          type: string
+        - description: Detector Resource Name
+          in: path
+          name: detectorName
+          required: true
+          type: string
+        - description: Start Time
+          format: date-time
+          in: query
+          name: startTime
+          type: string
+        - description: End Time
+          format: date-time
+          in: query
+          name: endTime
+          type: string
+        - description: Time Grain
+          in: query
+          name: timeGrain
+          pattern: 'PT[1-9][0-9]+[SMH]'
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DetectorResponse'
+      summary: Get site detector response
+      tags:
+        - Diagnostics
+      x-ms-examples:
+        Get App Detector Response:
+          parameters:
+            api-version: '2016-03-01'
+            detectorName: runtimeavailability
+            resourceGroupName: Sample-WestUSResourceGroup
+            siteName: SampleApp
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/sites/BuggyBakery/detectors/runtimeavailability
+                name: runtimeavailability
+                properties:
+                  dataset:
+                    - renderingProperties:
+                        description: This detector breaks down the number of requests that your app received for each status code.
+                        renderingType: TimeSeries
+                        title: Requests by Status Code
+                      table:
+                        columns:
+                          - columnName: PreciseTimeStamp
+                            columnType: datetime
+                            dataType: DateTime
+                          - columnName: count_Http2xx
+                            columnType: long
+                            dataType: Int64
+                          - columnName: count_Http3xx
+                            columnType: long
+                            dataType: Int64
+                          - columnName: count_Http4xx
+                            columnType: long
+                            dataType: Int64
+                          - columnName: count_Http5xx
+                            columnType: long
+                            dataType: Int64
+                        rows:
+                          - - '2018-03-27T00:25:00Z'
+                            - '772705'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:30:00Z'
+                            - '787069'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:35:00Z'
+                            - '781627'
+                            - '0'
+                            - '1'
+                            - '0'
+                          - - '2018-03-27T00:40:00Z'
+                            - '785017'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:45:00Z'
+                            - '783518'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:50:00Z'
+                            - '785783'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:55:00Z'
+                            - '772874'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T01:00:00Z'
+                            - '787162'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T01:05:00Z'
+                            - '782036'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T01:10:00Z'
+                            - '784642'
+                            - '0'
+                            - '0'
+                            - '0'
+                        tableName: Table_0
+                  metadata:
+                    category: Availability and Performance
+                    description: This detector analyzes the requests to your application.
+                    subCategory: Web App Down
+                    supportTopicId: ''
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics':
     get:
       description: Get Diagnostics Categories
@@ -318,6 +672,195 @@ paths:
       summary: Execute Detector
       tags:
         - Diagnostics
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/detectors':
+    get:
+      description: List Site Detector Responses
+      operationId: Diagnostics_ListSiteDetectorResponsesSlot
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site Name
+          in: path
+          name: siteName
+          required: true
+          type: string
+        - description: Slot Name
+          in: path
+          name: slot
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DetectorResponseCollection'
+      summary: List Site Detector Responses
+      tags:
+        - Diagnostics
+      x-ms-examples:
+        List App Slot Detector Responses:
+          parameters:
+            api-version: '2016-03-01'
+            resourceGroupName: Sample-WestUSResourceGroup
+            siteName: SampleApp
+            slot: staging
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.Web/sites/SampleApp/slots/staging/detectors/runtimeavailability
+                    name: runtimeavailability
+                    properties:
+                      dataset: []
+                      metadata:
+                        category: Availability and Performance
+                        description: This detector analyzes the requests to your application.
+                        subCategory: App Availability
+                        supportTopicId: ''
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/detectors/{detectorName}':
+    get:
+      description: Get site detector response
+      operationId: Diagnostics_GetSiteDetectorResponseSlot
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site Name
+          in: path
+          name: siteName
+          required: true
+          type: string
+        - description: Detector Resource Name
+          in: path
+          name: detectorName
+          required: true
+          type: string
+        - description: Slot Name
+          in: path
+          name: slot
+          required: true
+          type: string
+        - description: Start Time
+          format: date-time
+          in: query
+          name: startTime
+          type: string
+        - description: End Time
+          format: date-time
+          in: query
+          name: endTime
+          type: string
+        - description: Time Grain
+          in: query
+          name: timeGrain
+          pattern: 'PT[1-9][0-9]+[SMH]'
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DetectorResponse'
+      summary: Get site detector response
+      tags:
+        - Diagnostics
+      x-ms-examples:
+        Get App Slot Detector Response:
+          parameters:
+            api-version: '2016-03-01'
+            detectorName: runtimeavailability
+            resourceGroupName: Sample-WestUSResourceGroup
+            siteName: SampleApp
+            slot: staging
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/sites/BuggyBakery/slots/staging/detectors/runtimeavailability
+                name: runtimeavailability
+                properties:
+                  dataset:
+                    - renderingProperties:
+                        description: This detector breaks down the number of requests that your app received for each status code.
+                        renderingType: TimeSeries
+                        title: Requests by Status Code
+                      table:
+                        columns:
+                          - columnName: PreciseTimeStamp
+                            columnType: datetime
+                            dataType: DateTime
+                          - columnName: count_Http2xx
+                            columnType: long
+                            dataType: Int64
+                          - columnName: count_Http3xx
+                            columnType: long
+                            dataType: Int64
+                          - columnName: count_Http4xx
+                            columnType: long
+                            dataType: Int64
+                          - columnName: count_Http5xx
+                            columnType: long
+                            dataType: Int64
+                        rows:
+                          - - '2018-03-27T00:25:00Z'
+                            - '772705'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:30:00Z'
+                            - '787069'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:35:00Z'
+                            - '781627'
+                            - '0'
+                            - '1'
+                            - '0'
+                          - - '2018-03-27T00:40:00Z'
+                            - '785017'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:45:00Z'
+                            - '783518'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:50:00Z'
+                            - '785783'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T00:55:00Z'
+                            - '772874'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T01:00:00Z'
+                            - '787162'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T01:05:00Z'
+                            - '782036'
+                            - '0'
+                            - '0'
+                            - '0'
+                          - - '2018-03-27T01:10:00Z'
+                            - '784642'
+                            - '0'
+                            - '0'
+                            - '0'
+                        tableName: Table_0
+                  metadata:
+                    category: Availability and Performance
+                    description: This detector analyzes the requests to your application.
+                    subCategory: Web App Down
+                    supportTopicId: ''
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics':
     get:
       description: Get Diagnostics Categories
@@ -728,6 +1271,38 @@ definitions:
           type: string
         type: array
     type: object
+  DataTableResponseColumn:
+    description: Column definition
+    properties:
+      columnName:
+        description: Name of the column
+        type: string
+      columnType:
+        description: Column Type
+        type: string
+      dataType:
+        description: Data type which looks like 'String' or 'Int32'.
+        type: string
+    type: object
+  DataTableResponseObject:
+    description: Data Table which defines columns and raw row values
+    properties:
+      columns:
+        description: List of columns with data types
+        items:
+          $ref: '#/definitions/DataTableResponseColumn'
+        type: array
+      rows:
+        description: Raw row values
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      tableName:
+        description: Name of the table
+        type: string
+    type: object
   DetectorAbnormalTimePeriod:
     description: Class representing Abnormal Time Period detected.
     properties:
@@ -828,6 +1403,76 @@ definitions:
             readOnly: true
             type: number
         x-ms-client-flatten: true
+    type: object
+  DetectorInfo:
+    description: Definition of Detector
+    properties:
+      category:
+        description: Support Category
+        readOnly: true
+        type: string
+      description:
+        description: Short description of the detector and its purpose
+        readOnly: true
+        type: string
+      subCategory:
+        description: Support Sub Category
+        readOnly: true
+        type: string
+      supportTopicId:
+        description: Support Topic Id
+        readOnly: true
+        type: string
+    type: object
+  DetectorResponse:
+    allOf:
+      - description: Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
+        properties:
+          id:
+            description: Resource Id.
+            readOnly: true
+            type: string
+          kind:
+            description: Kind of resource.
+            type: string
+          name:
+            description: Resource Name.
+            readOnly: true
+            type: string
+          type:
+            description: Resource type.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: Class representing Response from Detector
+    properties:
+      properties:
+        description: DetectorResponse resource specific properties
+        properties:
+          dataset:
+            description: Data Set
+            items:
+              $ref: '#/definitions/DiagnosticData'
+            type: array
+          metadata:
+            $ref: '#/definitions/DetectorInfo'
+            description: metadata for the detector
+        x-ms-client-flatten: true
+    type: object
+  DetectorResponseCollection:
+    description: Collection of detector responses
+    properties:
+      nextLink:
+        description: Link to next page of resources.
+        readOnly: true
+        type: string
+      value:
+        description: Collection of resources.
+        items:
+          $ref: '#/definitions/DetectorResponse'
+        type: array
+    required:
+      - value
     type: object
   DiagnosticAnalysis:
     allOf:
@@ -939,6 +1584,16 @@ definitions:
         type: array
     required:
       - value
+    type: object
+  DiagnosticData:
+    description: Set of data with rendering instructions
+    properties:
+      renderingProperties:
+        $ref: '#/definitions/Rendering'
+        description: Properties that describe how the table should be rendered
+      table:
+        $ref: '#/definitions/DataTableResponseObject'
+        description: Data in table form
     type: object
   DiagnosticDetectorCollection:
     description: Collection of Diagnostic Detectors
@@ -1079,6 +1734,27 @@ definitions:
         items:
           $ref: '#/definitions/DiagnosticMetricSample'
         type: array
+    type: object
+  Rendering:
+    description: Instructions for rendering the data
+    properties:
+      description:
+        description: Description of the data that will help it be interpreted
+        type: string
+      renderingType:
+        description: Rendering Type
+        enum:
+          - NoGraph
+          - Table
+          - TimeSeries
+          - TimeSeriesPerInstance
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: RenderingType
+      title:
+        description: Title of data
+        type: string
     type: object
   ResponseMetaData:
     properties:

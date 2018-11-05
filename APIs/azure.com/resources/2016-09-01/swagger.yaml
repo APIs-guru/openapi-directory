@@ -1345,6 +1345,7 @@ definitions:
     properties:
       id:
         description: The ID of the deployment.
+        readOnly: true
         type: string
       name:
         description: The name of the deployment.
@@ -1354,6 +1355,7 @@ definitions:
         description: Deployment properties.
     required:
       - name
+    x-ms-azure-resource: true
   DeploymentExtendedFilter:
     description: Deployment filter.
     properties:
@@ -1729,6 +1731,7 @@ definitions:
         type: object
     required:
       - location
+    x-ms-azure-resource: true
   ResourceGroupExportResult:
     properties:
       error:
@@ -1871,6 +1874,7 @@ definitions:
         description: 'The total number of resources that use the resource tag. When a tag is initially created and has no associated resources, the value is 0.'
       id:
         description: The tag ID.
+        readOnly: true
         type: string
       tagName:
         description: The tag name.
@@ -1888,10 +1892,12 @@ definitions:
         description: The tag value count.
       id:
         description: The tag ID.
+        readOnly: true
         type: string
       tagValue:
         description: The tag value.
         type: string
+    x-ms-azure-resource: true
   TagsListResult:
     description: List of subscription tags.
     properties:

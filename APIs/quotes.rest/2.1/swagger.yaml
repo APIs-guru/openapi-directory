@@ -1,0 +1,1621 @@
+swagger: '2.0'
+schemes:
+  - https
+  - http
+host: quotes.rest
+info:
+  contact:
+    name: They Said So
+    url: 'https://theysaidso.com/api'
+    x-twitter: theysaidso
+  description: ' They Said So Quotes API offers a complete feature rich REST API access to its quotes platform.  This is the documentation for the world famous [quotes API](https://theysaidso.com/api).  If you are a subscriber and you are trying this from a console add ''X-TheySaidSo-Api-Secret'' header and add your api key as the header value. You can test and play with the API right here on this web page. For using the private end points and subscribing to the API please visit https://theysaidso.com/api.'
+  termsOfService: 'https://theysaidso.com/terms'
+  title: They Said So Quotes
+  version: '2.1'
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    url: 'https://twitter.com/theysaidso/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://quotes.rest/yaml/theysaidso-quotes.yaml'
+      version: '2.0'
+  x-providerName: quotes.rest
+consumes:
+  - application/json
+produces:
+  - application/json
+  - application/xml
+  - application/js
+tags:
+  - description: 'Access quote of the day service. Use this to get the quote of the day in various categories. This is a free API that is available to public. You must credit They Said So if you are using the free version. '
+    externalDocs:
+      description: Find out more
+      url: 'https://theysaidso.com/api#qod'
+    name: qod
+  - description: 'Access random quote service. Use this to get random quotes , quotes filtered by authors or tags etc. You need an API key to access this service.'
+    name: quote
+  - description: Access Qshow - quote collection service. Create curated quotes collection. You can group quotes by any way you want and access them as a single unit. You need an API key to access this service.
+    name: qshow
+  - description: Access to beautiful quote image service
+    externalDocs:
+      description: Find out more about image
+      url: 'https://theysaidso.com/api#image'
+    name: image
+paths:
+  /qod:
+    get:
+      description: |
+        Gets `Quote of the Day`.
+        Optional `category` param determines
+        the category of returned quote of the day
+      parameters:
+        - description: QOD Category
+          format: string
+          in: query
+          name: category
+          required: false
+          type: string
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": 1
+                  },
+                  "contents": {
+                      "quotes": [
+                          {
+                              "quote": "Do not worry if you have built your castles in the air. They are where they should be. Now put the foundations under them.",
+                              "length": "122",
+                              "author": "Henry David Thoreau",
+                              "tags": [
+                                  "dreams",
+                                  "inspire",
+                                  "worry"
+                              ],
+                              "category": "inspire",
+                              "date": "2016-11-21",
+                              "title": "Inspiring Quote of the day",
+                              "background": "https://theysaidso.com/img/bgs/man_on_the_mountain.jpg",
+                              "id": "mYpH8syTM8rf8KFORoAJmQeF"
+                          }
+                      ]
+                  }
+              }
+            application/xml: |-
+              <?xml version="1.0"?>
+              <response>
+                <success>
+                  <total>1</total>
+                </success>
+                <contents>
+                  <quotes>
+                    <quote>Sometimes you climb out of bed in the morning and you think, I'm not going to make it, but you laugh inside &#x2014; remembering all the times you've felt that way.</quote>
+                    <length>164</length>
+                    <author>Charles Bukowski</author>
+                    <tags>depression</tags>
+                    <tags>inspire</tags>
+                    <tags>tso-life</tags>
+                    <category>inspire</category>
+                    <date>2016-11-23</date>
+                    <title>Inspiring Quote of the day</title>
+                    <background>https://theysaidso.com/img/bgs/man_on_the_mountain.jpg</background>
+                    <id>k7rTMtmveYHUN2ImwxNhhAeF</id>
+                  </quotes>
+                </contents>
+              </response>
+          schema:
+            $ref: '#/definitions/QuoteResponse'
+      tags:
+        - qod
+  /qod/categories:
+    get:
+      description: |
+        Gets a list of `Quote of the Day` Categories.
+      parameters:
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: false
+          type: string
+      produces:
+        - application/xml
+        - application/json
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": 8
+                  },
+                  "contents": {
+                      "categories": {
+                          "inspire": "Inspiring Quote of the day",
+                          "management": "Management Quote of the day",
+                          "sports": "Sports Quote of the day",
+                          "life": "Quote of the day about life",
+                          "funny": "Funny Quote of the day",
+                          "love": "Quote of the day about Love",
+                          "art": "Art quote of the day ",
+                          "students": "Quote of the day for students"
+                      },
+                      "copyright": "2013-15 http://theysaidso.com"
+                  }
+              }           
+      tags:
+        - qod
+  /qshow:
+    delete:
+      description: |
+        Delete a qshow.
+      parameters:
+        - description: Qshow ID
+          format: string
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/xml: '{}'
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+        '404':
+          description: 404  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 404,
+                      "message": "Not Found: Qshow not found"
+                  }
+              }                      
+      tags:
+        - qshow
+    get:
+      description: |
+        Gets a details about a qshow.
+      parameters:
+        - description: Qshow ID
+          format: string
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": 1
+                  },
+                  "contents": {
+                      "qshow": {
+                          "title": "A tribute to Steve Jobs!",
+                          "description": "A collection of great quotes from the master inventor Steve Jobs!",
+                          "background": "https://theysaidso.com",
+                          "language": "en",
+                          "id": "CodzN7F_vU_URoHrPSUvDgeF"
+                      }
+                  },
+                  "copyright": {
+                      "year": "2016-18",
+                      "url": "http://theysaidso.com"
+                  }
+              }
+            application/xml: |-
+              <?xml version="1.0"?>
+              <response>
+                <success>
+                  <total>1</total>
+                </success>
+                <contents>
+                  <qshow>
+                    <title>A tribute to Steve Jobs!</title>
+                    <description>A collection of great quotes from the master inventor Steve Jobs!</description>
+                    <background>https://theysaidso.com</background>
+                    <language>en</language>
+                    <id>CodzN7F_vU_URoHrPSUvDgeF</id>
+                  </qshow>
+                </contents>
+                <copyright>
+                  <year>2016-18</year>
+                  <url>http://theysaidso.com</url>
+                </copyright>
+              </response>
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+        '404':
+          description: 404  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 404,
+                      "message": "Not Found: Qshow not found"
+                  }
+              }                 
+      tags:
+        - qshow
+    patch:
+      description: Update an existing qshow.
+      parameters:
+        - description: Qshow ID
+          format: string
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: Qshow title
+          format: string
+          in: query
+          name: title
+          required: false
+          type: string
+        - description: Qshow description
+          format: string
+          in: query
+          name: description
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: Tags for the qshow
+          in: query
+          items:
+            type: string
+          name: tags
+          required: false
+          type: array
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                "success": {
+                  "total": 1
+                },
+                "content": {
+                  "quote": {
+                    "id": "CodzN7F_vU_URoHrPSUvDgeF"
+                  }
+                }
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+        '404':
+          description: 404  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 404,
+                      "message": "Not Found: Qshow not found"
+                  }
+              }                    
+      tags:
+        - qshow
+    put:
+      description: Create and add a new qshow to your private collection.
+      parameters:
+        - description: Qshow title
+          format: string
+          in: query
+          name: title
+          required: true
+          type: string
+        - description: Qshow description
+          format: string
+          in: query
+          name: description
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: Tags for the qshow
+          in: query
+          items:
+            type: string
+          name: tags
+          required: false
+          type: array
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                "success": {
+                  "total": 1
+                },
+                "content": {
+                  "quote": {
+                    "id": "CodzN7F_vU_URoHrPSUvDgeF"
+                  }
+                }
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }              
+      tags:
+        - qshow
+  /qshow/list:
+    get:
+      description: Get the list of Qshows in They Said So platform.
+      parameters:
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+        - default: 0
+          description: Response is paged. This parameter controls where response starts the listing at
+          format: int32
+          in: query
+          name: start
+          required: false
+          type: integer
+        - default: false
+          description: Should include public qshows or not in the list
+          format: boolean
+          in: query
+          name: public
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": "39",
+                      "start": 0,
+                      "limit": 5
+                  },
+                  "contents": {
+                      "qshows": [
+                          {
+                              "title": "A tribute to Steve Jobs!",
+                              "description": "A collection of great quotes from the master inventor Steve Jobs!",
+                              "background": "/img/bgs/stevejobs.jpg",
+                              "language": "en",
+                              "id": "CodzN7F_vU_URoHrPSUvDgeF"
+                          },
+                          {
+                              "title": "Celebrating Life!",
+                              "description": "Eat, Sleep, Live your life!",
+                              "background": "/img/slide-01.jpg",
+                              "language": "en",
+                              "id": "opDfpWwAD6lrfxdW_GBoVAeF"
+                          },
+                          {
+                              "title": "Books ",
+                              "description": "Reading is the greatest pleasure for many! Here's to the bookies!",
+                              "background": "/img/bgs/book.jpg",
+                              "language": "en",
+                              "id": "WMeCgo5WpiLk_qlbdAVyQweF"
+                          },
+                          {
+                              "title": "Kids",
+                              "description": "",
+                              "background": "",
+                              "language": "en",
+                              "id": "sx9reMTiaGzXdt7lbVWntQeF"
+                          },
+                          {
+                              "title": "Great quotes to live by",
+                              "description": "Here are some powerful words of wisdom that inspire, educate and motivate a person to take action. ",
+                              "background": "/img/slide-03.jpg",
+                              "language": "en",
+                              "id": "k_kwBr7BKzxz3vLTQ6TWMQeF"
+                          }
+                      ]
+                  },
+                  "copyright": {
+                      "year": "2016-18",
+                      "url": "http://theysaidso.com"
+                  }
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              } 
+      tags:
+        - qshow
+  /qshow/quotes:
+    get:
+      description: Get the quotes in a given Qshow.
+      parameters:
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+        - description: Qshow ID
+          format: string
+          in: query
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": 1
+                  },
+                  "contents": {
+                      "qshow": {
+                          "title": "A tribute to Steve Jobs!",
+                          "description": "A collection of great quotes from the master inventor Steve Jobs!",
+                          "background": "https://theysaidso.com/img/bgs/stevejobs.jpg",
+                          "language": "en",
+                          "id": "CodzN7F_vU_URoHrPSUvDgeF"
+                      },
+                      "quotes": [
+                          {
+                              "quote": "A lot of people in our industry haven't had very diverse experiences. So they don't have enough dots to connect, and they end up with very linear solutions without a broad perspective on the problem. The broader one's understanding of the human experience, the better design we will have.",
+                              "length": "288",
+                              "author": "Steve Jobs",
+                              "tags": [
+                                  "design",
+                                  "diversity",
+                                  "experience",
+                                  "linear-thinking"
+                              ],
+                              "id": "6HW5Uopw8VFLRKZEqGKDXQeF"
+                          },
+                          {
+                              "quote": "Stay hungry. Stay foolish.",
+                              "length": "26",
+                              "author": "Steve Jobs",
+                              "tags": [
+                                  "inspirational"
+                              ],
+                              "id": "K__p_L1iMZtWulJ1SH4CogeF"
+                          },
+                          {
+                              "quote": "Your time is limited, so don't waste it living someone else's life.",
+                              "length": "67",
+                              "author": "Steve Jobs",
+                              "tags": [
+                                  "life-and-living",
+                                  "tso-life"
+                              ],
+                              "id": "mFjh_dNB_exJMHbyzRFIvQeF"
+                          },
+                          {
+                              "quote": "If you haven't found it yet, keep looking. Don't settle. As with all matters of the heart, you'll know when you find it. And, like any great relationship, it just gets better and better as the years roll on.",
+                              "length": "207",
+                              "author": "Steve Jobs",
+                              "tags": [
+                                  "careers",
+                                  "ideas",
+                                  "ingenuity",
+                                  "match",
+                                  "passion"
+                              ],
+                              "id": "l3Cww1Bx7cYGlIpB_wZuOAeF"
+                          },
+                          {
+                              "quote": "Details matter, it's worth waiting to get it right.",
+                              "length": "51",
+                              "author": "Steve Jobs",
+                              "tags": [
+                                  "apple",
+                                  "ileadership",
+                                  "jobs",
+                                  "mac",
+                                  "macintosh",
+                                  "steve"
+                              ],
+                              "id": "A8gqJ6u2x3ZdUDU5VlnIxgeF"
+                          },
+                          {
+                              "quote": "Be a yardstick of quality. Some people aren't used to an environment where excellence is expected.",
+                              "length": "98",
+                              "author": "Steve Jobs",
+                              "tags": [
+                                  "environment",
+                                  "excellence",
+                                  "people",
+                                  "quality"
+                              ],
+                              "id": "rlqbJLNmDMPT_qkCpDBjEgeF"
+                          },
+                          {
+                              "quote": "If you live each day as it was your last, someday you'll most certainly be right",
+                              "length": "80",
+                              "author": "Steve Jobs",
+                              "tags": [
+                                  "death",
+                                  "rip",
+                                  "steve",
+                                  "tso-life"
+                              ],
+                              "id": "sBse0_uUemQD2l_qdL9BJgeF"
+                          },
+                          {
+                              "quote": "Death is the destination we all share, no one has ever escaped it. And that is as it should be because death is very likely the single best invention of life.",
+                              "length": "158",
+                              "author": "Steve Jobs",
+                              "tags": [
+                                  "death",
+                                  "destination",
+                                  "invention",
+                                  "life-and-death",
+                                  "tso-life"
+                              ],
+                              "id": "LvjYLbdYzBOAqPPKfohvmQeF"
+                          },
+                          {
+                              "quote": "Why join the navy if you can be a pirate?",
+                              "length": "41",
+                              "author": "Steve Jobs",
+                              "tags": [
+                                  "career"
+                              ],
+                              "id": "S6xVf_Nluid5r_0iO73ArQeF"
+                          },
+                          {
+                              "quote": "One more thing...",
+                              "length": "17",
+                              "author": "Steve Jobs",
+                              "tags": [
+                                  "inspiration"
+                              ],
+                              "id": "X2QetehlwForyBZ5Nbp2YQeF"
+                          }
+                      ]
+                  },
+                  "copyright": {
+                      "year": "2016-18",
+                      "url": "http://theysaidso.com"
+                  }
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+        '404':
+          description: 404  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 404,
+                      "message": "Not Found: Qshow not found"
+                  }
+              }                      
+      tags:
+        - qshow
+  /qshow/quotes/add:
+    post:
+      description: Add a quote to a given Qshow.
+      parameters:
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+        - description: Qshow ID
+          format: string
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: Quote ID to add the qshow collection
+          format: string
+          in: query
+          name: quoteid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+        '404':
+          description: 404  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 404,
+                      "message": "Not Found: Qshow not found"
+                  }
+              }                      
+      tags:
+        - qshow
+  /qshow/quotes/remove:
+    post:
+      description: Remove a quote to a given Qshow.
+      parameters:
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+        - description: Qshow ID
+          format: string
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: Quote ID to remove from the qshow collection
+          format: string
+          in: query
+          name: quoteid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+        '404':
+          description: 404  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 404,
+                      "message": "Not Found: Qshow not found"
+                  }
+              }                      
+      tags:
+        - qshow
+  /quote:
+    delete:
+      description: |
+        Delete a quote. The user needs to be the owner of the quote to be able to delete it.
+      parameters:
+        - description: Quote ID
+          format: string
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/xml: '{}'
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+        '404':
+          description: 404  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 404,
+                      "message": "Not Found: Quote not found"
+                  }
+              }                      
+      tags:
+        - quote
+    get:
+      description: Gets a `Quote` with a given `id`.
+      parameters:
+        - description: Quote ID
+          format: string
+          in: query
+          name: id
+          required: false
+          type: string
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": 1
+                  },
+                  "contents": {
+                      "quotes": [
+                          {
+                              "quote": "The day soldiers stop bringing you their problems is the day you have stopped leading them. They have either lost confidence that you can help them or concluded that you do not care. Either case is a failure of leadership.",
+                              "length": "222",
+                              "author": "Colin Powell",
+                              "tags": [
+                                  "confidence",
+                                  "leadership",
+                                  "management"
+                              ],
+                              "category": "management",
+                              "id": "XLa1AmylKv1XF_dXcyhvdweF"
+                          }
+                      ]
+                  }
+              }
+            application/xml: |-
+              <?xml version="1.0"?>
+              <response>
+                <success>
+                  <total>1</total>
+                </success>
+                <contents>
+                  <quotes>
+                    <quote>Sometimes you climb out of bed in the morning and you think, I'm not going to make it, but you laugh inside &#x2014; remembering all the times you've felt that way.</quote>
+                    <length>164</length>
+                    <author>Charles Bukowski</author>
+                    <tags>depression</tags>
+                    <tags>inspire</tags>
+                    <tags>tso-life</tags>
+                    <category>inspire</category>
+                    <date>2016-11-23</date>
+                    <title>Inspiring Quote of the day</title>
+                    <background>https://theysaidso.com/img/bgs/man_on_the_mountain.jpg</background>
+                    <id>k7rTMtmveYHUN2ImwxNhhAeF</id>
+                  </quotes>
+                </contents>
+              </response>          
+          schema:
+            $ref: '#/definitions/QuoteResponse'
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+      tags:
+        - quote
+    patch:
+      description: Update a quote
+      parameters:
+        - description: Quote ID
+          format: string
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: Quote
+          format: string
+          in: query
+          name: quote
+          required: false
+          type: string
+        - description: Quote Author
+          format: string
+          in: query
+          name: author
+          required: false
+          type: string
+        - description: Comma Separated tags
+          in: query
+          name: tags
+          required: false
+          type: string
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                "success": {
+                  "total": 1
+                },
+                "content": {
+                  "quote": {
+                    "id": "0tztT1wYHRzdTf7jIccAzweF"
+                  }
+                }
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }              
+      tags:
+        - quote
+    put:
+      description: Add a new quote to your private collection.
+      parameters:
+        - description: Quote
+          format: string
+          in: query
+          name: quote
+          required: true
+          type: string
+        - description: Quote Author
+          format: string
+          in: query
+          name: author
+          required: false
+          type: string
+        - description: Comma Separated tags
+          format: string
+          in: query
+          name: tags
+          required: false
+          type: string
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                "success": {
+                  "total": 1
+                },
+                "content": {
+                  "quote": {
+                    "id": "0tztT1wYHRzdTf7jIccAzweF"
+                  }
+                }
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }              
+      tags:
+        - quote
+  /quote/authors:
+    get:
+      description: |
+        Gets a list of author names in the system. 
+      parameters:
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+        - default: 0
+          description: Response is paged. This parameter controls where response starts the listing at
+          format: int32
+          in: query
+          name: start
+          required: false
+          type: integer
+      produces:
+        - application/xml
+        - application/json
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": 8
+                  },
+                  "contents": {
+                      "categories": {
+                          "inspire": "Inspiring Quote of the day",
+                          "management": "Management Quote of the day",
+                          "sports": "Sports Quote of the day",
+                          "life": "Quote of the day about life",
+                          "funny": "Funny Quote of the day",
+                          "love": "Quote of the day about Love",
+                          "art": "Art quote of the day ",
+                          "students": "Quote of the day for students"
+                      },
+                      "copyright": "2013-15 http://theysaidso.com"
+                  }
+              }    
+      tags:
+        - quote
+  /quote/categories:
+    get:
+      description: |
+        Gets a list of `Quote` Categories.
+      parameters:
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+        - default: 0
+          description: Response is paged. This parameter controls where response starts the listing at
+          format: int32
+          in: query
+          name: start
+          required: false
+          type: integer
+      produces:
+        - application/xml
+        - application/json
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": 8
+                  },
+                  "contents": {
+                      "categories": {
+                          "inspire": "Inspiring Quote of the day",
+                          "management": "Management Quote of the day",
+                          "sports": "Sports Quote of the day",
+                          "life": "Quote of the day about life",
+                          "funny": "Funny Quote of the day",
+                          "love": "Quote of the day about Love",
+                          "art": "Art quote of the day ",
+                          "students": "Quote of the day for students"
+                      },
+                      "copyright": "2013-15 http://theysaidso.com"
+                  }
+              }    
+      tags:
+        - quote
+  /quote/image/search:
+    get:
+      description: |
+        Gets a Random Quote image. Optional `category` param determinesthe category of quote used in the image. Optional `author` param gets the quote image of a given author. 
+      parameters:
+        - description: Quote Category
+          format: string
+          in: query
+          name: category
+          required: false
+          type: string
+        - description: Quote Author
+          format: string
+          in: query
+          name: author
+          required: false
+          type: string
+        - default: false
+          description: Should search private collection. Default searches public image collection.
+          format: boolean
+          in: query
+          name: private
+          required: false
+          type: boolean
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+      produces:
+        - application/xml
+        - application/json
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": 1
+                  },
+                  "contents": {
+                      "quotes": [
+                          {
+                              "quote": "The day soldiers stop bringing you their problems is the day you have stopped leading them. They have either lost confidence that you can help them or concluded that you do not care. Either case is a failure of leadership.",
+                              "length": "222",
+                              "author": "Colin Powell",
+                              "tags": [
+                                  "confidence",
+                                  "leadership",
+                                  "management"
+                              ],
+                              "category": "management",
+                              "id": "XLa1AmylKv1XF_dXcyhvdweF"
+                          }
+                      ]
+                  }
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+      tags:
+        - image
+  /quote/list:
+    get:
+      description: Get the list of quotes in your private collection.
+      parameters:
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+        - default: 0
+          description: Response is paged. This parameter controls where response starts the listing at
+          format: int32
+          in: query
+          name: start
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": "263",
+                      "range": {
+                          "start": 0,
+                          "end": 5
+                      }
+                  },
+                  "contents": {
+                      "quotes": [
+                          {
+                              "quote": "I think you should defend to the death their right to march, and then go down and meet them with baseball bats.",
+                              "length": "111",
+                              "author": "Woody Allen",
+                              "tags": [],
+                              "id": "GkeLUydBfiAH0Tcs2w_gwAeF"
+                          },
+                          {
+                              "quote": "We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this. ... The world will little note nor long remember what we say here, but it can never forget what they did here.",
+                              "length": "310",
+                              "author": "Abraham Lincoln",
+                              "tags": [],
+                              "id": "u6fD9eRFA2NFMHuEoeujaAeF"
+                          },
+                          {
+                              "quote": "Eighty percent of success is showing up.",
+                              "length": "40",
+                              "author": "Woody Allen",
+                              "tags": [
+                                  "success",
+                                  "tso-top-100"
+                              ],
+                              "id": "nLvp0vLfofW06PILxmERHgeF"
+                          },
+                          {
+                              "quote": "Great ambition is the passion of a great character.  Those endowed with it may perform very good or very bad acts.  All depends on the principals which direct them.",
+                              "length": "164",
+                              "author": "Napoleon Bonaparte",
+                              "tags": [
+                                  "ambition",
+                                  "inspire",
+                                  "passion"
+                              ],
+                              "id": "X8juAoTtvxSEdgA0sGbYeQeF"
+                          },
+                          {
+                              "quote": "I have had dreams, and I have had nightmares. I overcame the nightmares because of my dreams.",
+                              "length": "93",
+                              "author": "Dr. Jonas Salk",
+                              "tags": [
+                                  "dream",
+                                  "nightmare"
+                              ],
+                              "id": "m_6Fj8QcXlVsQiiW7SAMLAeF"
+                          }
+                      ]
+                  }
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              } 
+      tags:
+        - quote
+  /quote/random:
+    get:
+      description: Gets a `Random Quote`. When you are in a hurry this is what you call to get a random famous quote.
+      parameters:
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": 1
+                  },
+                  "contents": {
+                      "quotes": [
+                          {
+                              "quote": "The day soldiers stop bringing you their problems is the day you have stopped leading them. They have either lost confidence that you can help them or concluded that you do not care. Either case is a failure of leadership.",
+                              "length": "222",
+                              "author": "Colin Powell",
+                              "tags": [
+                                  "confidence",
+                                  "leadership",
+                                  "management"
+                              ],
+                              "category": "management",
+                              "id": "XLa1AmylKv1XF_dXcyhvdweF"
+                          }
+                      ]
+                  }
+              }
+            application/xml: |-
+              <?xml version="1.0"?>
+              <response>
+                <success>
+                  <total>1</total>
+                </success>
+                <contents>
+                  <quotes>
+                    <quote>Sometimes you climb out of bed in the morning and you think, I'm not going to make it, but you laugh inside &#x2014; remembering all the times you've felt that way.</quote>
+                    <length>164</length>
+                    <author>Charles Bukowski</author>
+                    <tags>depression</tags>
+                    <tags>inspire</tags>
+                    <tags>tso-life</tags>
+                    <category>inspire</category>
+                    <date>2016-11-23</date>
+                    <title>Inspiring Quote of the day</title>
+                    <background>https://theysaidso.com/img/bgs/man_on_the_mountain.jpg</background>
+                    <id>k7rTMtmveYHUN2ImwxNhhAeF</id>
+                  </quotes>
+                </contents>
+              </response>          
+          schema:
+            $ref: '#/definitions/QuoteResponse'
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+      tags:
+        - quote
+  /quote/search:
+    get:
+      description: 'Search for a `Quote` in They Said So platform. Optional `category` , `author`, `minlength`, `maxlength` params determines the filters applied while searching for the quote. '
+      parameters:
+        - description: Quote Category
+          format: string
+          in: query
+          name: category
+          required: false
+          type: string
+        - description: Quote Author
+          format: string
+          in: query
+          name: author
+          required: false
+          type: string
+        - default: 100
+          description: Quote minimum Length
+          format: int32
+          in: query
+          name: minlength
+          required: false
+          type: integer
+        - default: 300
+          description: Quote maximum Length
+          format: int32
+          in: query
+          name: maxlength
+          required: false
+          type: integer
+        - description: keyword to search for in the quote
+          format: string
+          in: query
+          name: query
+          required: false
+          type: string
+        - default: false
+          description: Should search private collection? Default searches public collection.
+          format: boolean
+          in: query
+          name: private
+          required: false
+          type: boolean
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": 1
+                  },
+                  "contents": {
+                      "quotes": [
+                          {
+                              "quote": "The day soldiers stop bringing you their problems is the day you have stopped leading them. They have either lost confidence that you can help them or concluded that you do not care. Either case is a failure of leadership.",
+                              "length": "222",
+                              "author": "Colin Powell",
+                              "tags": [
+                                  "confidence",
+                                  "leadership",
+                                  "management"
+                              ],
+                              "category": "management",
+                              "id": "XLa1AmylKv1XF_dXcyhvdweF"
+                          }
+                      ]
+                  }
+              }
+            application/xml: |-
+              <?xml version="1.0"?>
+              <response>
+                <success>
+                  <total>1</total>
+                </success>
+                <contents>
+                  <quotes>
+                    <quote>Sometimes you climb out of bed in the morning and you think, I'm not going to make it, but you laugh inside &#x2014; remembering all the times you've felt that way.</quote>
+                    <length>164</length>
+                    <author>Charles Bukowski</author>
+                    <tags>depression</tags>
+                    <tags>inspire</tags>
+                    <tags>tso-life</tags>
+                    <category>inspire</category>
+                    <date>2016-11-23</date>
+                    <title>Inspiring Quote of the day</title>
+                    <background>https://theysaidso.com/img/bgs/man_on_the_mountain.jpg</background>
+                    <id>k7rTMtmveYHUN2ImwxNhhAeF</id>
+                  </quotes>
+                </contents>
+              </response>          
+          schema:
+            $ref: '#/definitions/QuoteResponse'
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+      tags:
+        - quote
+  /quote/tags/add:
+    post:
+      description: Add a tag to a given Quote.
+      parameters:
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+        - description: Quote ID
+          format: string
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: Comma Separated tags
+          format: string
+          in: query
+          name: tags
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+        '404':
+          description: 404  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 404,
+                      "message": "Not Found: Quote not found"
+                  }
+              }                      
+      tags:
+        - quote
+  /quote/tags/remove:
+    post:
+      description: Remove a tag from a given quote.
+      parameters:
+        - description: API Key
+          format: string
+          in: header
+          name: X-TheySaidSo-Api-Secret
+          required: true
+          type: string
+        - description: Quote ID
+          format: string
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: Comma Separated tags
+          format: string
+          in: query
+          name: tags
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+        '404':
+          description: 404  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 404,
+                      "message": "Not Found: Quote not found"
+                  }
+              }                      
+      tags:
+        - quote
+definitions:
+  NewQuote:
+    properties:
+      author:
+        description: Author name of quote.
+        type: string
+      quote:
+        description: The Quote.
+        type: string
+      tags:
+        description: Array of tags/categories.
+        items:
+          type: string
+        type: array
+    required:
+      - quote
+  QOD:
+    allOf:
+      - $ref: '#/definitions/Quote'
+      - properties:
+          date:
+            description: Date this quote of the day belongs to
+            type: string
+        required:
+          - date
+  Quote:
+    allOf:
+      - $ref: '#/definitions/NewQuote'
+      - properties:
+          id:
+            description: Unique identifier representing a specific quote in theysaidso.com.
+            type: string
+          image:
+            description: Image URL that can be used for background to display this quote.
+            type: string
+          length:
+            description: Length of the quote string.
+            format: int32
+            type: integer
+        required:
+          - id
+  QuoteResponse:
+    properties:
+      contents:
+        properties:
+          quotes:
+            description: List of quotes
+            items:
+              $ref: '#/definitions/Quote'
+            type: array
+      success:
+        description: Metadata about this successful call
+        type: string

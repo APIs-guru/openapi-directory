@@ -56,11 +56,11 @@ paths:
           examples:
             application/json: |
               {
-                “value”: [
+                "value": [
                   {
-                      “id”: “{url to resource 1}”,
-                      “name”: “Name1”,
-                      “type”: “Microsoft.CognitiveServices/accounts”,
+                      "id": "{url to resource 1}",
+                      "name": "Name1",
+                      "type": "Microsoft.CognitiveServices/accounts",
                       "location": "North US"    
                       "kind" : "resource kind",
                           "sku": {
@@ -70,9 +70,9 @@ paths:
                       "properties": { }
                   },
                   {
-                      “id”: “{url to resource 2}”,
-                      “name”: “Name2”,
-                      “type”: “Microsoft.CognitiveServices/accounts”,
+                      "id": "{url to resource 2}",
+                      "name": "Name2",
+                      "type": "Microsoft.CognitiveServices/accounts",
                       "location": "North US",
                       "kind" : "resource kind",
                           "sku": {
@@ -82,7 +82,7 @@ paths:
                       "properties": { }
                   }
                 ],
-                “nextLink”: “{originalRequestUrl}?$skipToken={opaqueString}”
+                "nextLink": "{originalRequestUrl}?$skipToken={opaqueString}"
               }
           schema:
             $ref: '#/definitions/CognitiveServicesAccountListResult'
@@ -109,7 +109,7 @@ paths:
         '200':
           description: |-
             The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.
-            The nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with “value” property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.
+            The nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with "value" property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.
             The nextLink should be implemented using following query parameters:
             · skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.
             · top: the optional client query parameter which defines the maximum number of records to be returned by the server.
@@ -118,7 +118,7 @@ paths:
             · Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. 
             Clients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.
           examples:
-            application/json: "{\n  “value”: [\n    {\n        “id”: “{url to resource 1}”,\n        “name”: “Name1”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\"    \n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    },\n    {\n        “id”: “{url to resource 2}”,\n        “name”: “Name2”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\",\n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    }\n  ],\n  “nextLink”: “{originalRequestUrl}?$skipToken={opaqueString}”\n}"
+            application/json: "{\n  \"value\": [\n    {\n        \"id\": \"{url to resource 1}\",\n        \"name\": \"Name1\",\n        \"type\": \"Microsoft.CognitiveServices/accounts\",\n        \"location\": \"North US\"    \n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    },\n    {\n        \"id\": \"{url to resource 2}\",\n        \"name\": \"Name2\",\n        \"type\": \"Microsoft.CognitiveServices/accounts\",\n        \"location\": \"North US\",\n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    }\n  ],\n  \"nextLink\": \"{originalRequestUrl}?$skipToken={opaqueString}\"\n}"
           schema:
             $ref: '#/definitions/CognitiveServicesAccountListResult'
         default:
@@ -180,9 +180,9 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
-          description: "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are “name,” “type” and “id.”\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n"
+          description: "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n"
           examples:
-            application/json: "{\n  “id”: “/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}”,\n  “name”: “{name}”,\n  “type”: “Microsoft.CognitiveSerices/accounts”,\n  \"location\": \"North US\",\n  \"tags\": {\n    \"key1\": \"value 1\",\n    \"key2\": \"value 2\"\n   },\n  \"kind\" : \"resource kind\",\n   \"sku\": {\n\t    \"name\": \"sku code\"\n\t} \n  “etag”: “00000000-0000-0000-0000-000000000000”,\n  \"properties\": { }\n}"
+            application/json: "{\n  \"id\": \"/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}\",\n  \"name\": \"{name}\",\n  \"type\": \"Microsoft.CognitiveSerices/accounts\",\n  \"location\": \"North US\",\n  \"tags\": {\n    \"key1\": \"value 1\",\n    \"key2\": \"value 2\"\n   },\n  \"kind\" : \"resource kind\",\n   \"sku\": {\n\t    \"name\": \"sku code\"\n\t} \n  \"etag\": \"00000000-0000-0000-0000-000000000000\",\n  \"properties\": { }\n}"
           schema:
             $ref: '#/definitions/CognitiveServicesAccount'
         default:
@@ -368,7 +368,7 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
-          description: "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are “name,” “type” and “id.”\nField\tDescription\nsku\tRequired, object\n\tThe exact set of keys that define this sku. This matches the fields on the respective resource.\nsku.name\tRequired, string\n\tThe name of the SKU. This is typically a letter + number code, such as A0 or P3\nsku.tier\tRequired, string\n\tThe tier of this particular SKU. Typically one of:\n\t· Free\n\t· Basic\n\t· Standard\n\t· Premium\n"
+          description: "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nsku\tRequired, object\n\tThe exact set of keys that define this sku. This matches the fields on the respective resource.\nsku.name\tRequired, string\n\tThe name of the SKU. This is typically a letter + number code, such as A0 or P3\nsku.tier\tRequired, string\n\tThe tier of this particular SKU. Typically one of:\n\t· Free\n\t· Basic\n\t· Standard\n\t· Premium\n"
           examples:
             application/json: |-
               {

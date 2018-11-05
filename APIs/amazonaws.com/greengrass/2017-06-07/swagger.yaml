@@ -102,7 +102,7 @@ paths:
   '/greengrass/groups/{GroupId}/role':
     put:
       operationId: AssociateRoleToGroup
-      description: Associates a role with a group. The role will be used by the AWS Greengrass core in order to access AWS cloud services. The role's permissions will allow Greengrass core Lambda functions to perform actions against the cloud.
+      description: Associates a role with a group. Your AWS Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
       responses:
         '200':
           description: Success
@@ -191,7 +191,7 @@ paths:
   /greengrass/servicerole:
     put:
       operationId: AssociateServiceRoleToAccount
-      description: Associates a role which is used by AWS Greengrass. AWS Greengrass uses the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. It needs to have minimum permissions in policy ``AWSGreengrassResourceAccessRolePolicy``
+      description: Associates a role with your account. AWS Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
       responses:
         '200':
           description: Success
@@ -223,7 +223,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DisassociateServiceRoleFromAccount
-      description: 'Disassociates the service role from the account. Without a service role, deployments will not work.'
+      description: 'Disassociates the service role from your account. Without a service role, deployments will not work.'
       responses:
         '200':
           description: Success
@@ -241,7 +241,7 @@ paths:
             $ref: '#/definitions/DisassociateServiceRoleFromAccountRequest'
     get:
       operationId: GetServiceRoleForAccount
-      description: Retrieves the service role that is attached to the account.
+      description: Retrieves the service role that is attached to your account.
       responses:
         '200':
           description: Success
@@ -260,7 +260,7 @@ paths:
   /greengrass/definition/cores:
     post:
       operationId: CreateCoreDefinition
-      description: Creates a core definition. You may optionally provide the initial version of the core definition or use ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
+      description: Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass groups must each contain exactly one AWS Greengrass core.
       responses:
         '200':
           description: Success
@@ -303,7 +303,7 @@ paths:
   '/greengrass/definition/cores/{CoreDefinitionId}/versions':
     post:
       operationId: CreateCoreDefinitionVersion
-      description: Creates a version of a core definition that has already been defined. AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
+      description: Creates a version of a core definition that has already been defined. AWS Greengrass groups must each contain exactly one AWS Greengrass core.
       responses:
         '200':
           description: Success
@@ -335,7 +335,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListCoreDefinitionVersions
-      description: Lists versions of a core definition.
+      description: Lists the versions of a core definition.
       responses:
         '200':
           description: Success
@@ -358,7 +358,7 @@ paths:
   '/greengrass/groups/{GroupId}/deployments':
     post:
       operationId: CreateDeployment
-      description: Creates a deployment.
+      description: Creates a deployment. ''CreateDeployment'' requests are idempotent with respect to the ''X-Amzn-Client-Token'' token and the request parameters.
       responses:
         '200':
           description: Success
@@ -413,7 +413,7 @@ paths:
   /greengrass/definition/devices:
     post:
       operationId: CreateDeviceDefinition
-      description: Creates a device definition. You may optinally provide the initial version of the device definition or use ``CreateDeviceDefinitionVersion`` at a later time.
+      description: Creates a device definition. You may provide the initial version of the device definition now or use ''CreateDeviceDefinitionVersion'' at a later time.
       responses:
         '200':
           description: Success
@@ -511,7 +511,7 @@ paths:
   /greengrass/definition/functions:
     post:
       operationId: CreateFunctionDefinition
-      description: 'Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ``CreateFunctionDefinitionVersion`` later.'
+      description: 'Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ''''CreateFunctionDefinitionVersion'''' later.'
       responses:
         '200':
           description: Success
@@ -554,7 +554,7 @@ paths:
   '/greengrass/definition/functions/{FunctionDefinitionId}/versions':
     post:
       operationId: CreateFunctionDefinitionVersion
-      description: Create a version of a Lambda function definition that has already been defined.
+      description: Creates a version of a Lambda function definition that has already been defined.
       responses:
         '200':
           description: Success
@@ -609,7 +609,7 @@ paths:
   /greengrass/groups:
     post:
       operationId: CreateGroup
-      description: Creates a group. You may optionally provide the initial version of the group or use ''CreateGroupVersion'' at a later time.
+      description: Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time.
       responses:
         '200':
           description: Success
@@ -747,7 +747,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListGroupVersions
-      description: List the versions of a group.
+      description: Lists the versions of a group.
       responses:
         '200':
           description: Success
@@ -770,7 +770,7 @@ paths:
   /greengrass/definition/loggers:
     post:
       operationId: CreateLoggerDefinition
-      description: Creates a logger definition. You may optionally provide the initial version of the logger definition or use ``CreateLoggerDefinitionVersion`` at a later time.
+      description: Creates a logger definition. You may provide the initial version of the logger definition now or use ''CreateLoggerDefinitionVersion'' at a later time.
       responses:
         '200':
           description: Success
@@ -868,7 +868,7 @@ paths:
   /greengrass/definition/resources:
     post:
       operationId: CreateResourceDefinition
-      description: 'Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ``CreateResourceDefinitionVersion`` later.'
+      description: 'Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ''''CreateResourceDefinitionVersion'''' later.'
       responses:
         '200':
           description: Success
@@ -911,7 +911,7 @@ paths:
   '/greengrass/definition/resources/{ResourceDefinitionId}/versions':
     post:
       operationId: CreateResourceDefinitionVersion
-      description: Create a version of a resource definition that has already been defined.
+      description: Creates a version of a resource definition that has already been defined.
       responses:
         '200':
           description: Success
@@ -966,7 +966,7 @@ paths:
   /greengrass/updates:
     post:
       operationId: CreateSoftwareUpdateJob
-      description: Creates an Iot Job that will trigger your Greengrass Cores to update the software they are running.
+      description: Creates a software update for a core or group of cores (specified as an IoT thing group.) Use this to update the OTA Agent as well as the Greengrass core software. It makes use of the IoT Jobs feature which provides additional commands to manage a Greengrass core software update job.
       responses:
         '200':
           description: Success
@@ -999,7 +999,7 @@ paths:
   /greengrass/definition/subscriptions:
     post:
       operationId: CreateSubscriptionDefinition
-      description: Creates a subscription definition. You may optionally provide the initial version of the subscription definition or use ``CreateSubscriptionDefinitionVersion`` at a later time.
+      description: Creates a subscription definition. You may provide the initial version of the subscription definition now or use ''CreateSubscriptionDefinitionVersion'' at a later time.
       responses:
         '200':
           description: Success
@@ -1097,7 +1097,7 @@ paths:
   '/greengrass/definition/cores/{CoreDefinitionId}':
     delete:
       operationId: DeleteCoreDefinition
-      description: Deletes a core definition. The core definition must not have been used in a deployment.
+      description: Deletes a core definition.
       responses:
         '200':
           description: Success
@@ -1174,7 +1174,7 @@ paths:
   '/greengrass/definition/devices/{DeviceDefinitionId}':
     delete:
       operationId: DeleteDeviceDefinition
-      description: Deletes a device definition. The device definition must not have been used in a deployment.
+      description: Deletes a device definition.
       responses:
         '200':
           description: Success
@@ -1251,7 +1251,7 @@ paths:
   '/greengrass/definition/functions/{FunctionDefinitionId}':
     delete:
       operationId: DeleteFunctionDefinition
-      description: Deletes a Lambda function definition. The Lambda function definition must not have been used in a deployment.
+      description: Deletes a Lambda function definition.
       responses:
         '200':
           description: Success
@@ -1283,7 +1283,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetFunctionDefinition
-      description: 'Retrieves information about a Lambda function definition, such as its creation time and latest version.'
+      description: 'Retrieves information about a Lambda function definition, including its creation time and latest version.'
       responses:
         '200':
           description: Success
@@ -1328,7 +1328,7 @@ paths:
   '/greengrass/groups/{GroupId}':
     delete:
       operationId: DeleteGroup
-      description: Deletes a group. The group must not have been used in deployment.
+      description: Deletes a group.
       responses:
         '200':
           description: Success
@@ -1405,7 +1405,7 @@ paths:
   '/greengrass/definition/loggers/{LoggerDefinitionId}':
     delete:
       operationId: DeleteLoggerDefinition
-      description: Deletes a logger definition. The logger definition must not have been used in a deployment.
+      description: Deletes a logger definition.
       responses:
         '200':
           description: Success
@@ -1514,7 +1514,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetResourceDefinition
-      description: 'Retrieves information about a resource definition, such as its creation time and latest version.'
+      description: 'Retrieves information about a resource definition, including its creation time and latest version.'
       responses:
         '200':
           description: Success
@@ -1559,7 +1559,7 @@ paths:
   '/greengrass/definition/subscriptions/{SubscriptionDefinitionId}':
     delete:
       operationId: DeleteSubscriptionDefinition
-      description: Deletes a subscription definition. The subscription definition must not have been used in a deployment.
+      description: Deletes a subscription definition.
       responses:
         '200':
           description: Success
@@ -1633,6 +1633,39 @@ paths:
           in: path
           type: string
           required: true
+  '/greengrass/bulk/deployments/{BulkDeploymentId}/status':
+    get:
+      operationId: GetBulkDeploymentStatus
+      description: Returns the status of a bulk deployment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBulkDeploymentStatusResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBulkDeploymentStatusRequest'
+        - name: BulkDeploymentId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/greengrass/things/{ThingName}/connectivityInfo':
     get:
       operationId: GetConnectivityInfo
@@ -1810,7 +1843,7 @@ paths:
   '/greengrass/definition/functions/{FunctionDefinitionId}/versions/{FunctionDefinitionVersionId}':
     get:
       operationId: GetFunctionDefinitionVersion
-      description: 'Retrieves information about a Lambda function definition version, such as which Lambda functions are included in the version and their configurations.'
+      description: 'Retrieves information about a Lambda function definition version, including which Lambda functions are included in the version and their configurations.'
       responses:
         '200':
           description: Success
@@ -1924,7 +1957,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateGroupCertificateConfiguration
-      description: Updates the Cert expiry time for a group.
+      description: Updates the Certificate expiry time for a group.
       responses:
         '200':
           description: Success
@@ -2025,7 +2058,7 @@ paths:
   '/greengrass/definition/resources/{ResourceDefinitionId}/versions/{ResourceDefinitionVersionId}':
     get:
       operationId: GetResourceDefinitionVersion
-      description: 'Retrieves information about a resource definition version, such as which resources are included in the version.'
+      description: 'Retrieves information about a resource definition version, including which resources are included in the version.'
       responses:
         '200':
           description: Success
@@ -2096,6 +2129,86 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/greengrass/bulk/deployments/{BulkDeploymentId}/detailed-reports':
+    get:
+      operationId: ListBulkDeploymentDetailedReports
+      description: 'Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBulkDeploymentDetailedReportsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBulkDeploymentDetailedReportsRequest'
+        - name: BulkDeploymentId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /greengrass/bulk/deployments:
+    get:
+      operationId: ListBulkDeployments
+      description: Returns a list of bulk deployments.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBulkDeploymentsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBulkDeploymentsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartBulkDeployment
+      description: Deploys multiple groups in one operation. This action starts the bulk deployment of a specified set of group versions. Each group version deployment will be triggered with an adaptive rate that has a fixed upper limit. We recommend that you include an ''X-Amzn-Client-Token'' token in every ''StartBulkDeployment'' request. These requests are idempotent with respect to the token and the request parameters.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartBulkDeploymentResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartBulkDeploymentRequest'
   '/greengrass/groups/{GroupId}/deployments/$reset':
     post:
       operationId: ResetDeployments
@@ -2129,451 +2242,446 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/greengrass/bulk/deployments/{BulkDeploymentId}/$stop':
+    put:
+      operationId: StopBulkDeployment
+      description: Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopBulkDeploymentResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopBulkDeploymentRequest'
+        - name: BulkDeploymentId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AssociateRoleToGroupRequest:
-    type: object
-    properties:
-      RoleArn:
-        $ref: '#/definitions/__string'
-        description: Role arn you wish to associate with this group.
   AssociateRoleToGroupResponse:
     type: object
     properties:
       AssociatedAt:
         $ref: '#/definitions/__string'
-        description: Time the role arn was associated to your group.
-  AssociateServiceRoleToAccountRequest:
+        description: 'The time, in milliseconds since the epoch, when the role ARN was associated with the group.'
+  AssociateRoleToGroupRequest:
     type: object
     properties:
       RoleArn:
         $ref: '#/definitions/__string'
-        description: Role arn you wish to associate with this account.
+        description: The ARN of the role you wish to associate with this group.
+  BadRequestException: {}
+  InternalServerErrorException: {}
   AssociateServiceRoleToAccountResponse:
     type: object
     properties:
       AssociatedAt:
         $ref: '#/definitions/__string'
-        description: Time when the service role was associated to the account.
-  BadRequestException:
+        description: The time when the service role was associated with the account.
+  AssociateServiceRoleToAccountRequest:
     type: object
     properties:
-      ErrorDetails:
-        $ref: '#/definitions/ErrorDetails'
-        description: Error Details
-      Message:
+      RoleArn:
         $ref: '#/definitions/__string'
-        description: Message containing information about the error
-    description: General Error
-  ConnectivityInfo:
-    type: object
-    properties:
-      HostAddress:
-        $ref: '#/definitions/__string'
-        description: Endpoint for the GGC. Can be an IP address or DNS.
-      Id:
-        $ref: '#/definitions/__string'
-        description: Element Id for this entry in the list.
-      Metadata:
-        $ref: '#/definitions/__string'
-        description: Metadata for this endpoint.
-      PortNumber:
-        $ref: '#/definitions/__integer'
-        description: Port of the GGC. Usually 8883.
-    description: Connectivity Info
-  Core:
-    type: object
-    properties:
-      CertificateArn:
-        $ref: '#/definitions/__string'
-        description: Certificate arn of the core.
-      Id:
-        $ref: '#/definitions/__string'
-        description: Element Id for this entry in the list.
-      SyncShadow:
-        $ref: '#/definitions/__boolean'
-        description: 'If true, the local shadow value automatically syncs with the cloud''s shadow state.'
-      ThingArn:
-        $ref: '#/definitions/__string'
-        description: Thing arn of the core.
-    description: Information on the core
-  CoreDefinitionVersion:
-    type: object
-    properties:
-      Cores:
-        $ref: '#/definitions/ListOfCore'
-        description: Cores in the definition version.
-    description: Information on core definition version
-  CreateCoreDefinitionRequest:
-    type: object
-    properties:
-      InitialVersion:
-        $ref: '#/definitions/CoreDefinitionVersion'
-        description: Information on the initial version
-      Name:
-        $ref: '#/definitions/__string'
-        description: name of the core definition
-    description: Information on the core definition request
+        description: The ARN of the service role you wish to associate with your account.
   CreateCoreDefinitionResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  CreateCoreDefinitionVersionRequest:
+        description: The name of the definition.
+  CreateCoreDefinitionRequest:
     type: object
     properties:
-      Cores:
-        $ref: '#/definitions/ListOfCore'
-        description: Cores in the definition version.
+      InitialVersion:
+        $ref: '#/definitions/CoreDefinitionVersion'
+        description: Information about the initial version of the core definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the core definition.
+    description: Information needed to create a core definition.
   CreateCoreDefinitionVersionResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the version.
+        description: The ARN of the version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the version was created.
+        description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the resource container.
+        description: The ID of the version.
       Version:
         $ref: '#/definitions/__string'
-        description: Unique Id of a version.
-  CreateDeploymentRequest:
+        description: The unique ID of the version.
+  CreateCoreDefinitionVersionRequest:
     type: object
     properties:
-      DeploymentId:
-        $ref: '#/definitions/__string'
-        description: Id of the deployment if you wish to redeploy a previous deployment.
-      DeploymentType:
-        $ref: '#/definitions/DeploymentType'
-        description: 'Type of deployment. When used in CreateDeployment, only NewDeployment and Redeployment are valid. '
-      GroupVersionId:
-        $ref: '#/definitions/__string'
-        description: Group Version you wish to deploy.
+      Cores:
+        $ref: '#/definitions/__listOfCore'
+        description: A list of cores in the core definition version.
   CreateDeploymentResponse:
     type: object
     properties:
       DeploymentArn:
         $ref: '#/definitions/__string'
-        description: The arn of the deployment.
+        description: The ARN of the deployment.
       DeploymentId:
         $ref: '#/definitions/__string'
-        description: The id of the deployment.
-  CreateDeviceDefinitionRequest:
+        description: The ID of the deployment.
+  CreateDeploymentRequest:
     type: object
     properties:
-      InitialVersion:
-        $ref: '#/definitions/DeviceDefinitionVersion'
-        description: Information on the initial version
-      Name:
+      DeploymentId:
         $ref: '#/definitions/__string'
-        description: name of the device definition
+        description: The ID of the deployment if you wish to redeploy a previous deployment.
+      DeploymentType:
+        $ref: '#/definitions/DeploymentType'
+        description: 'The type of deployment. When used in ''''CreateDeployment'''', only ''''NewDeployment'''' and ''''Redeployment'''' are valid.'
+      GroupVersionId:
+        $ref: '#/definitions/__string'
+        description: The ID of the group version to be deployed.
   CreateDeviceDefinitionResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  CreateDeviceDefinitionVersionRequest:
+        description: The name of the definition.
+  CreateDeviceDefinitionRequest:
     type: object
     properties:
-      Devices:
-        $ref: '#/definitions/ListOfDevice'
-        description: Devices in the definition version.
+      InitialVersion:
+        $ref: '#/definitions/DeviceDefinitionVersion'
+        description: Information about the initial version of the device definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the device definition.
   CreateDeviceDefinitionVersionResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the version.
+        description: The ARN of the version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the version was created.
+        description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the resource container.
+        description: The ID of the version.
       Version:
         $ref: '#/definitions/__string'
-        description: Unique Id of a version.
-  CreateFunctionDefinitionRequest:
+        description: The unique ID of the version.
+  CreateDeviceDefinitionVersionRequest:
     type: object
     properties:
-      InitialVersion:
-        $ref: '#/definitions/FunctionDefinitionVersion'
-        description: Information on the initial version
-      Name:
-        $ref: '#/definitions/__string'
-        description: name of the function definition
+      Devices:
+        $ref: '#/definitions/__listOfDevice'
+        description: A list of devices in the definition version.
   CreateFunctionDefinitionResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  CreateFunctionDefinitionVersionRequest:
+        description: The name of the definition.
+  CreateFunctionDefinitionRequest:
     type: object
     properties:
-      Functions:
-        $ref: '#/definitions/ListOfFunction'
-        description: Lambda functions in this function definition version.
-    description: Function definition version
+      InitialVersion:
+        $ref: '#/definitions/FunctionDefinitionVersion'
+        description: Information about the initial version of the function definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the function definition.
   CreateFunctionDefinitionVersionResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the version.
+        description: The ARN of the version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the version was created.
+        description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the resource container.
+        description: The ID of the version.
       Version:
         $ref: '#/definitions/__string'
-        description: Unique Id of a version.
-  CreateGroupCertificateAuthorityRequest:
-    type: object
-    properties: {}
-  CreateGroupCertificateAuthorityResponse:
+        description: The unique ID of the version.
+  CreateFunctionDefinitionVersionRequest:
     type: object
     properties:
-      GroupCertificateAuthorityArn:
-        $ref: '#/definitions/__string'
-        description: Arn of the group certificate authority.
-  CreateGroupRequest:
-    type: object
-    properties:
-      InitialVersion:
-        $ref: '#/definitions/GroupVersion'
-        description: Information on the initial version
-      Name:
-        $ref: '#/definitions/__string'
-        description: name of the group
+      Functions:
+        $ref: '#/definitions/__listOfFunction'
+        description: A list of Lambda functions in this function definition version.
+    description: Information needed to create a function definition version.
   CreateGroupResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  CreateGroupVersionRequest:
+        description: The name of the definition.
+  CreateGroupRequest:
     type: object
     properties:
-      CoreDefinitionVersionArn:
+      InitialVersion:
+        $ref: '#/definitions/GroupVersion'
+        description: Information about the initial version of the group.
+      Name:
         $ref: '#/definitions/__string'
-        description: Core definition version arn for this group.
-      DeviceDefinitionVersionArn:
+        description: The name of the group.
+  CreateGroupCertificateAuthorityResponse:
+    type: object
+    properties:
+      GroupCertificateAuthorityArn:
         $ref: '#/definitions/__string'
-        description: Device definition version arn for this group.
-      FunctionDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: Function definition version arn for this group.
-      LoggerDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: Logger definition version arn for this group.
-      ResourceDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: Resource definition version arn for this group.
-      SubscriptionDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: Subscription definition version arn for this group.
+        description: The ARN of the group certificate authority.
+  CreateGroupCertificateAuthorityRequest:
+    type: object
+    properties: {}
   CreateGroupVersionResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the version.
+        description: The ARN of the version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the version was created.
+        description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the resource container.
+        description: The ID of the version.
       Version:
         $ref: '#/definitions/__string'
-        description: Unique Id of a version.
-  CreateLoggerDefinitionRequest:
+        description: The unique ID of the version.
+  CreateGroupVersionRequest:
     type: object
     properties:
-      InitialVersion:
-        $ref: '#/definitions/LoggerDefinitionVersion'
-        description: Information on the initial version
-      Name:
+      CoreDefinitionVersionArn:
         $ref: '#/definitions/__string'
-        description: name of the logger definition
+        description: The ARN of the core definition version for this group.
+      DeviceDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the device definition version for this group.
+      FunctionDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the function definition version for this group.
+      LoggerDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the logger definition version for this group.
+      ResourceDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The resource definition version ARN for this group.
+      SubscriptionDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the subscription definition version for this group.
   CreateLoggerDefinitionResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  CreateLoggerDefinitionVersionRequest:
+        description: The name of the definition.
+  CreateLoggerDefinitionRequest:
     type: object
     properties:
-      Loggers:
-        $ref: '#/definitions/ListOfLogger'
-        description: List of loggers.
+      InitialVersion:
+        $ref: '#/definitions/LoggerDefinitionVersion'
+        description: Information about the initial version of the logger definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the logger definition.
   CreateLoggerDefinitionVersionResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the version.
+        description: The ARN of the version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the version was created.
+        description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the resource container.
+        description: The ID of the version.
       Version:
         $ref: '#/definitions/__string'
-        description: Unique Id of a version.
-  CreateResourceDefinitionRequest:
+        description: The unique ID of the version.
+  CreateLoggerDefinitionVersionRequest:
     type: object
     properties:
-      InitialVersion:
-        $ref: '#/definitions/ResourceDefinitionVersion'
-        description: Information on the initial version
-      Name:
-        $ref: '#/definitions/__string'
-        description: Name of the resource definition
+      Loggers:
+        $ref: '#/definitions/__listOfLogger'
+        description: A list of loggers.
   CreateResourceDefinitionResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  CreateResourceDefinitionVersionRequest:
+        description: The name of the definition.
+  CreateResourceDefinitionRequest:
     type: object
     properties:
-      Resources:
-        $ref: '#/definitions/ListOfResource'
-        description: List of resources.
+      InitialVersion:
+        $ref: '#/definitions/ResourceDefinitionVersion'
+        description: Information about the initial version of the resource definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the resource definition.
   CreateResourceDefinitionVersionResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the version.
+        description: The ARN of the version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the version was created.
+        description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the resource container.
+        description: The ID of the version.
       Version:
         $ref: '#/definitions/__string'
-        description: Unique Id of a version.
+        description: The unique ID of the version.
+  CreateResourceDefinitionVersionRequest:
+    type: object
+    properties:
+      Resources:
+        $ref: '#/definitions/__listOfResource'
+        description: A list of resources.
+  CreateSoftwareUpdateJobResponse:
+    type: object
+    properties:
+      IotJobArn:
+        $ref: '#/definitions/__string'
+        description: The IoT Job ARN corresponding to this update.
+      IotJobId:
+        $ref: '#/definitions/__string'
+        description: The IoT Job Id corresponding to this update.
   CreateSoftwareUpdateJobRequest:
     type: object
     properties:
@@ -2589,190 +2697,100 @@ definitions:
         $ref: '#/definitions/UpdateTargetsArchitecture'
       UpdateTargetsOperatingSystem:
         $ref: '#/definitions/UpdateTargetsOperatingSystem'
-  CreateSoftwareUpdateJobResponse:
-    type: object
-    properties:
-      IotJobArn:
-        $ref: '#/definitions/__string'
-        description: The Iot Job Arn corresponding to this update.
-      IotJobId:
-        $ref: '#/definitions/__string'
-        description: The Iot Job Id corresponding to this update.
-  CreateSubscriptionDefinitionRequest:
-    type: object
-    properties:
-      InitialVersion:
-        $ref: '#/definitions/SubscriptionDefinitionVersion'
-        description: Information on the initial version
-      Name:
-        $ref: '#/definitions/__string'
-        description: name of the subscription definition
   CreateSubscriptionDefinitionResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  CreateSubscriptionDefinitionVersionRequest:
+        description: The name of the definition.
+  CreateSubscriptionDefinitionRequest:
     type: object
     properties:
-      Subscriptions:
-        $ref: '#/definitions/ListOfSubscription'
-        description: Subscriptions in the version.
+      InitialVersion:
+        $ref: '#/definitions/SubscriptionDefinitionVersion'
+        description: Information about the initial version of the subscription definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the subscription definition.
   CreateSubscriptionDefinitionVersionResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the version.
+        description: The ARN of the version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the version was created.
+        description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the resource container.
+        description: The ID of the version.
       Version:
         $ref: '#/definitions/__string'
-        description: Unique Id of a version.
-  DefinitionInformation:
+        description: The unique ID of the version.
+  CreateSubscriptionDefinitionVersionRequest:
     type: object
     properties:
-      Arn:
-        $ref: '#/definitions/__string'
-        description: Arn of the definition.
-      CreationTimestamp:
-        $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
-      Id:
-        $ref: '#/definitions/__string'
-        description: Id of the definition.
-      LastUpdatedTimestamp:
-        $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
-      LatestVersion:
-        $ref: '#/definitions/__string'
-        description: Last version of the definition.
-      LatestVersionArn:
-        $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
-      Name:
-        $ref: '#/definitions/__string'
-        description: Name of the definition.
-    description: Information on the Definition
-  DeleteCoreDefinitionRequest:
-    type: object
-    properties: {}
+      Subscriptions:
+        $ref: '#/definitions/__listOfSubscription'
+        description: A list of subscriptions.
   DeleteCoreDefinitionResponse:
     type: object
     properties: {}
-  DeleteDeviceDefinitionRequest:
+  DeleteCoreDefinitionRequest:
     type: object
     properties: {}
   DeleteDeviceDefinitionResponse:
     type: object
     properties: {}
-  DeleteFunctionDefinitionRequest:
+  DeleteDeviceDefinitionRequest:
     type: object
     properties: {}
   DeleteFunctionDefinitionResponse:
     type: object
     properties: {}
-  DeleteGroupRequest:
+  DeleteFunctionDefinitionRequest:
     type: object
     properties: {}
   DeleteGroupResponse:
     type: object
     properties: {}
-  DeleteLoggerDefinitionRequest:
+  DeleteGroupRequest:
     type: object
     properties: {}
   DeleteLoggerDefinitionResponse:
     type: object
     properties: {}
-  DeleteResourceDefinitionRequest:
+  DeleteLoggerDefinitionRequest:
     type: object
     properties: {}
   DeleteResourceDefinitionResponse:
     type: object
     properties: {}
-  DeleteSubscriptionDefinitionRequest:
+  DeleteResourceDefinitionRequest:
     type: object
     properties: {}
   DeleteSubscriptionDefinitionResponse:
     type: object
     properties: {}
-  Deployment:
-    type: object
-    properties:
-      CreatedAt:
-        $ref: '#/definitions/__string'
-        description: Timestamp when the deployment was created.
-      DeploymentArn:
-        $ref: '#/definitions/__string'
-        description: Arn of the deployment.
-      DeploymentId:
-        $ref: '#/definitions/__string'
-        description: Id of the deployment.
-      DeploymentType:
-        $ref: '#/definitions/DeploymentType'
-        description: The type of deployment.
-      GroupArn:
-        $ref: '#/definitions/__string'
-        description: Arn of the group for this deployment.
-    description: Information on the deployment
-  DeploymentType:
-    type: string
-    enum:
-      - NewDeployment
-      - Redeployment
-      - ResetDeployment
-      - ForceResetDeployment
-  Deployments:
-    type: array
-    items:
-      $ref: '#/definitions/Deployment'
-  Device:
-    type: object
-    properties:
-      CertificateArn:
-        $ref: '#/definitions/__string'
-        description: Certificate arn of the device.
-      Id:
-        $ref: '#/definitions/__string'
-        description: Element Id for this entry in the list.
-      SyncShadow:
-        $ref: '#/definitions/__boolean'
-        description: 'If true, the local shadow value automatically syncs with the cloud''s shadow state.'
-      ThingArn:
-        $ref: '#/definitions/__string'
-        description: Thing arn of the device.
-    description: Information on a Device
-  DeviceDefinitionVersion:
-    type: object
-    properties:
-      Devices:
-        $ref: '#/definitions/ListOfDevice'
-        description: Devices in the definition version.
-    description: Information on device definition version
-  DisassociateRoleFromGroupRequest:
+  DeleteSubscriptionDefinitionRequest:
     type: object
     properties: {}
   DisassociateRoleFromGroupResponse:
@@ -2780,8 +2798,8 @@ definitions:
     properties:
       DisassociatedAt:
         $ref: '#/definitions/__string'
-        description: Time when the role was disassociated from the group.
-  DisassociateServiceRoleFromAccountRequest:
+        description: 'The time, in milliseconds since the epoch, when the role was disassociated from the group.'
+  DisassociateRoleFromGroupRequest:
     type: object
     properties: {}
   DisassociateServiceRoleFromAccountResponse:
@@ -2789,92 +2807,8 @@ definitions:
     properties:
       DisassociatedAt:
         $ref: '#/definitions/__string'
-        description: Time when the service role was disassociated from the account.
-  Empty:
-    type: object
-    properties: {}
-    description: Empty
-  ErrorDetail:
-    type: object
-    properties:
-      DetailedErrorCode:
-        $ref: '#/definitions/__string'
-        description: Detailed Error Code
-      DetailedErrorMessage:
-        $ref: '#/definitions/__string'
-        description: Detailed Error Message
-    description: ErrorDetail
-  ErrorDetails:
-    type: array
-    description: Error Details
-    items:
-      $ref: '#/definitions/ErrorDetail'
-  Function:
-    type: object
-    properties:
-      FunctionArn:
-        $ref: '#/definitions/__string'
-        description: Arn of the Lambda function.
-      FunctionConfiguration:
-        $ref: '#/definitions/FunctionConfiguration'
-        description: Configuration of the function
-      Id:
-        $ref: '#/definitions/__string'
-        description: Id of the function in this version.
-    description: Information on function
-  FunctionConfiguration:
-    type: object
-    properties:
-      Environment:
-        $ref: '#/definitions/FunctionConfigurationEnvironment'
-        description: Environment of the function configuration
-      ExecArgs:
-        $ref: '#/definitions/__string'
-        description: Execution Arguments
-      Executable:
-        $ref: '#/definitions/__string'
-        description: Executable
-      MemorySize:
-        $ref: '#/definitions/__integer'
-        description: 'The memory size, in KB, you configured for the function.'
-      Pinned:
-        $ref: '#/definitions/__boolean'
-        description: Whether the function is pinned or not. Pinned means the function is long-lived and starts when the core starts.
-      Timeout:
-        $ref: '#/definitions/__integer'
-        description: The function execution time at which Lambda should terminate the function. This timeout still applies to pinned lambdas for each request.
-    description: Configuration of the function
-  FunctionConfigurationEnvironment:
-    type: object
-    properties:
-      AccessSysfs:
-        $ref: '#/definitions/__boolean'
-        description: Flag to allow lambda access sys filesystem.
-      ResourceAccessPolicies:
-        $ref: '#/definitions/ListOfResourceAccessPolicy'
-        description: Policies for the function to access resources.
-      Variables:
-        $ref: '#/definitions/MapOf__string'
-        description: Environment variables for the lambda function.
-    description: Environment of the function configuration
-  FunctionDefinitionVersion:
-    type: object
-    properties:
-      Functions:
-        $ref: '#/definitions/ListOfFunction'
-        description: Lambda functions in this function definition version.
-    description: Information on the function definition version
-  GeneralError:
-    type: object
-    properties:
-      ErrorDetails:
-        $ref: '#/definitions/ErrorDetails'
-        description: Error Details
-      Message:
-        $ref: '#/definitions/__string'
-        description: Message containing information about the error
-    description: General Error
-  GetAssociatedRoleRequest:
+        description: The time when the service role was disassociated from the account.
+  DisassociateServiceRoleFromAccountRequest:
     type: object
     properties: {}
   GetAssociatedRoleResponse:
@@ -2882,23 +2816,44 @@ definitions:
     properties:
       AssociatedAt:
         $ref: '#/definitions/__string'
-        description: Time when the role was associated for the group.
+        description: The time when the role was associated with the group.
       RoleArn:
         $ref: '#/definitions/__string'
-        description: Arn of the role that is associated with the group.
-  GetConnectivityInfoRequest:
+        description: The ARN of the role that is associated with the group.
+  GetAssociatedRoleRequest:
+    type: object
+    properties: {}
+  GetBulkDeploymentStatusResponse:
+    type: object
+    properties:
+      BulkDeploymentMetrics:
+        $ref: '#/definitions/BulkDeploymentMetrics'
+        description: Relevant metrics on input records processed during bulk deployment.
+      BulkDeploymentStatus:
+        $ref: '#/definitions/BulkDeploymentStatus'
+        description: The status of the bulk deployment.
+      CreatedAt:
+        $ref: '#/definitions/__string'
+        description: 'The time, in ISO format, when the deployment was created.'
+      ErrorDetails:
+        $ref: '#/definitions/ErrorDetails'
+        description: Error details
+      ErrorMessage:
+        $ref: '#/definitions/__string'
+        description: Error message
+  GetBulkDeploymentStatusRequest:
     type: object
     properties: {}
   GetConnectivityInfoResponse:
     type: object
     properties:
       ConnectivityInfo:
-        $ref: '#/definitions/ListOfConnectivityInfo'
-        description: Connectivity info list
+        $ref: '#/definitions/__listOfConnectivityInfo'
+        description: Connectivity info list.
       Message:
         $ref: '#/definitions/__string'
-        description: Response Text
-  GetCoreDefinitionRequest:
+        description: A message about the connectivity info request.
+  GetConnectivityInfoRequest:
     type: object
     properties: {}
   GetCoreDefinitionResponse:
@@ -2906,26 +2861,26 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  GetCoreDefinitionVersionRequest:
+        description: The name of the definition.
+  GetCoreDefinitionRequest:
     type: object
     properties: {}
   GetCoreDefinitionVersionResponse:
@@ -2933,20 +2888,23 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the core definition version.
+        description: The ARN of the core definition version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the core definition version was created.
+        description: 'The time, in milliseconds since the epoch, when the core definition version was created.'
       Definition:
         $ref: '#/definitions/CoreDefinitionVersion'
-        description: Information on definition
+        description: Information about the core definition version.
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the core definition the version belongs to.
+        description: The ID of the core definition version.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Version:
         $ref: '#/definitions/__string'
-        description: Version of the core definition version.
-  GetDeploymentStatusRequest:
+        description: The version of the core definition version.
+  GetCoreDefinitionVersionRequest:
     type: object
     properties: {}
   GetDeploymentStatusResponse:
@@ -2954,20 +2912,20 @@ definitions:
     properties:
       DeploymentStatus:
         $ref: '#/definitions/__string'
-        description: Status of the deployment.
+        description: 'The status of the deployment: ''''Pending'''', ''''InProgress'''', ''''Success'''', or ''''Failure''''.'
       DeploymentType:
         $ref: '#/definitions/DeploymentType'
         description: The type of the deployment.
       ErrorDetails:
         $ref: '#/definitions/ErrorDetails'
-        description: The error Details
+        description: Error details
       ErrorMessage:
         $ref: '#/definitions/__string'
-        description: Error Message
+        description: Error message
       UpdatedAt:
         $ref: '#/definitions/__string'
-        description: Last time the deployment status was updated.
-  GetDeviceDefinitionRequest:
+        description: 'The time, in milliseconds since the epoch, when the deployment status was updated.'
+  GetDeploymentStatusRequest:
     type: object
     properties: {}
   GetDeviceDefinitionResponse:
@@ -2975,26 +2933,26 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  GetDeviceDefinitionVersionRequest:
+        description: The name of the definition.
+  GetDeviceDefinitionRequest:
     type: object
     properties: {}
   GetDeviceDefinitionVersionResponse:
@@ -3002,20 +2960,23 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the device definition version.
+        description: The ARN of the device definition version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the device definition version was created.
+        description: 'The time, in milliseconds since the epoch, when the device definition version was created.'
       Definition:
         $ref: '#/definitions/DeviceDefinitionVersion'
-        description: Device definition version
+        description: Information about the device definition version.
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the device definition the version belongs to.
+        description: The ID of the device definition version.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Version:
         $ref: '#/definitions/__string'
-        description: Version of the device definition version.
-  GetFunctionDefinitionRequest:
+        description: The version of the device definition version.
+  GetDeviceDefinitionVersionRequest:
     type: object
     properties: {}
   GetFunctionDefinitionResponse:
@@ -3023,26 +2984,26 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  GetFunctionDefinitionVersionRequest:
+        description: The name of the definition.
+  GetFunctionDefinitionRequest:
     type: object
     properties: {}
   GetFunctionDefinitionVersionResponse:
@@ -3050,50 +3011,23 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the function definition version.
+        description: The ARN of the function definition version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp when the funtion definition version was created.
+        description: 'The time, in milliseconds since the epoch, when the function definition version was created.'
       Definition:
         $ref: '#/definitions/FunctionDefinitionVersion'
-        description: Information on the definition
+        description: Information on the definition.
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the function definition the version belongs to.
+        description: The ID of the function definition version.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Version:
         $ref: '#/definitions/__string'
-        description: Version of the function definition version.
-  GetGroupCertificateAuthorityRequest:
-    type: object
-    properties: {}
-  GetGroupCertificateAuthorityResponse:
-    type: object
-    properties:
-      GroupCertificateAuthorityArn:
-        $ref: '#/definitions/__string'
-        description: Arn of the certificate authority for the group.
-      GroupCertificateAuthorityId:
-        $ref: '#/definitions/__string'
-        description: Id of the certificate authority for the group.
-      PemEncodedCertificate:
-        $ref: '#/definitions/__string'
-        description: PEM encoded certificate for the group.
-  GetGroupCertificateConfigurationRequest:
-    type: object
-    properties: {}
-  GetGroupCertificateConfigurationResponse:
-    type: object
-    properties:
-      CertificateAuthorityExpiryInMilliseconds:
-        $ref: '#/definitions/__string'
-        description: Amount of time when the certificate authority expires in milliseconds.
-      CertificateExpiryInMilliseconds:
-        $ref: '#/definitions/__string'
-        description: Amount of time when the certificate expires in milliseconds.
-      GroupId:
-        $ref: '#/definitions/__string'
-        description: Id of the group the certificate configuration belongs to.
-  GetGroupRequest:
+        description: The version of the function definition version.
+  GetFunctionDefinitionVersionRequest:
     type: object
     properties: {}
   GetGroupResponse:
@@ -3101,26 +3035,56 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  GetGroupVersionRequest:
+        description: The name of the definition.
+  GetGroupRequest:
+    type: object
+    properties: {}
+  GetGroupCertificateAuthorityResponse:
+    type: object
+    properties:
+      GroupCertificateAuthorityArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the certificate authority for the group.
+      GroupCertificateAuthorityId:
+        $ref: '#/definitions/__string'
+        description: The ID of the certificate authority for the group.
+      PemEncodedCertificate:
+        $ref: '#/definitions/__string'
+        description: The PEM encoded certificate for the group.
+  GetGroupCertificateAuthorityRequest:
+    type: object
+    properties: {}
+  GetGroupCertificateConfigurationResponse:
+    type: object
+    properties:
+      CertificateAuthorityExpiryInMilliseconds:
+        $ref: '#/definitions/__string'
+        description: 'The amount of time remaining before the certificate authority expires, in milliseconds.'
+      CertificateExpiryInMilliseconds:
+        $ref: '#/definitions/__string'
+        description: 'The amount of time remaining before the certificate expires, in milliseconds.'
+      GroupId:
+        $ref: '#/definitions/__string'
+        description: The ID of the group certificate configuration.
+  GetGroupCertificateConfigurationRequest:
     type: object
     properties: {}
   GetGroupVersionResponse:
@@ -3128,20 +3092,20 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the group version.
+        description: The ARN of the group version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp when the group version was created.
+        description: 'The time, in milliseconds since the epoch, when the group version was created.'
       Definition:
         $ref: '#/definitions/GroupVersion'
-        description: Information on the definition
+        description: Information about the group version definition.
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the group version.
+        description: The ID of the group version.
       Version:
         $ref: '#/definitions/__string'
-        description: Unique Id for a version of the Group.
-  GetLoggerDefinitionRequest:
+        description: The unique ID for the version of the group.
+  GetGroupVersionRequest:
     type: object
     properties: {}
   GetLoggerDefinitionResponse:
@@ -3149,26 +3113,26 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  GetLoggerDefinitionVersionRequest:
+        description: The name of the definition.
+  GetLoggerDefinitionRequest:
     type: object
     properties: {}
   GetLoggerDefinitionVersionResponse:
@@ -3176,20 +3140,20 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the logger definition version.
+        description: The ARN of the logger definition version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the logger definition version was created.
+        description: 'The time, in milliseconds since the epoch, when the logger definition version was created.'
       Definition:
         $ref: '#/definitions/LoggerDefinitionVersion'
-        description: Information on definition
+        description: Information about the logger definition version.
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the logger definition the version belongs to.
+        description: The ID of the logger definition version.
       Version:
         $ref: '#/definitions/__string'
-        description: Version of the logger definition version.
-  GetResourceDefinitionRequest:
+        description: The version of the logger definition version.
+  GetLoggerDefinitionVersionRequest:
     type: object
     properties: {}
   GetResourceDefinitionResponse:
@@ -3197,26 +3161,26 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  GetResourceDefinitionVersionRequest:
+        description: The name of the definition.
+  GetResourceDefinitionRequest:
     type: object
     properties: {}
   GetResourceDefinitionVersionResponse:
@@ -3227,17 +3191,17 @@ definitions:
         description: Arn of the resource definition version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the resource definition version was created.
+        description: 'The time, in milliseconds since the epoch, when the resource definition version was created.'
       Definition:
         $ref: '#/definitions/ResourceDefinitionVersion'
-        description: Information on definition.
+        description: Information about the definition.
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the resource definition the version belongs to.
+        description: The ID of the resource definition version.
       Version:
         $ref: '#/definitions/__string'
-        description: Version of the resource definition version.
-  GetServiceRoleForAccountRequest:
+        description: The version of the resource definition version.
+  GetResourceDefinitionVersionRequest:
     type: object
     properties: {}
   GetServiceRoleForAccountResponse:
@@ -3245,11 +3209,11 @@ definitions:
     properties:
       AssociatedAt:
         $ref: '#/definitions/__string'
-        description: Time when the service role was associated to the account.
+        description: The time when the service role was associated with the account.
       RoleArn:
         $ref: '#/definitions/__string'
-        description: Role arn which is associated to the account.
-  GetSubscriptionDefinitionRequest:
+        description: The ARN of the role which is associated with the account.
+  GetServiceRoleForAccountRequest:
     type: object
     properties: {}
   GetSubscriptionDefinitionResponse:
@@ -3257,26 +3221,26 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the definition.
+        description: The ARN of the definition.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the definition was created.
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the definition.
+        description: The ID of the definition.
       LastUpdatedTimestamp:
         $ref: '#/definitions/__string'
-        description: Last updated timestamp of the definition.
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: Last version of the definition.
+        description: The latest version of the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: Latest version arn of the definition.
+        description: The ARN of the latest version of the definition.
       Name:
         $ref: '#/definitions/__string'
-        description: Name of the definition.
-  GetSubscriptionDefinitionVersionRequest:
+        description: The name of the definition.
+  GetSubscriptionDefinitionRequest:
     type: object
     properties: {}
   GetSubscriptionDefinitionVersionResponse:
@@ -3284,110 +3248,47 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the subscription definition version.
+        description: The ARN of the subscription definition version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the subscription definition version was created.
+        description: 'The time, in milliseconds since the epoch, when the subscription definition version was created.'
       Definition:
         $ref: '#/definitions/SubscriptionDefinitionVersion'
-        description: Information on the definition
+        description: Information about the subscription definition version.
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the subscription definition the version belongs to.
+        description: The ID of the subscription definition version.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Version:
         $ref: '#/definitions/__string'
-        description: Version of the subscription definition version.
-  GroupCertificateAuthorityProperties:
+        description: The version of the subscription definition version.
+  GetSubscriptionDefinitionVersionRequest:
+    type: object
+    properties: {}
+  ListBulkDeploymentDetailedReportsResponse:
     type: object
     properties:
-      GroupCertificateAuthorityArn:
+      Deployments:
+        $ref: '#/definitions/BulkDeploymentResults'
+        description: A list of the individual group deployments in the bulk deployment operation.
+      NextToken:
         $ref: '#/definitions/__string'
-        description: Arn of the certificate authority for the group.
-      GroupCertificateAuthorityId:
-        $ref: '#/definitions/__string'
-        description: Id of the certificate authority for the group.
-    description: Information on group certificate authority properties
-  GroupCertificateConfiguration:
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+  ListBulkDeploymentDetailedReportsRequest:
+    type: object
+    properties: {}
+  ListBulkDeploymentsResponse:
     type: object
     properties:
-      CertificateAuthorityExpiryInMilliseconds:
+      BulkDeployments:
+        $ref: '#/definitions/BulkDeployments'
+        description: A list of bulk deployments.
+      NextToken:
         $ref: '#/definitions/__string'
-        description: Amount of time when the certificate authority expires in milliseconds.
-      CertificateExpiryInMilliseconds:
-        $ref: '#/definitions/__string'
-        description: Amount of time when the certificate expires in milliseconds.
-      GroupId:
-        $ref: '#/definitions/__string'
-        description: Id of the group the certificate configuration belongs to.
-    description: Information on the group certificate configuration
-  GroupInformation:
-    type: object
-    properties:
-      Arn:
-        $ref: '#/definitions/__string'
-        description: Arn of a group.
-      CreationTimestamp:
-        $ref: '#/definitions/__string'
-        description: Timestamp of when the group was created.
-      Id:
-        $ref: '#/definitions/__string'
-        description: Id of a group.
-      LastUpdatedTimestamp:
-        $ref: '#/definitions/__string'
-        description: Last updated timestamp of the group.
-      LatestVersion:
-        $ref: '#/definitions/__string'
-        description: Last version of the group.
-      LatestVersionArn:
-        $ref: '#/definitions/__string'
-        description: Latest version arn of the group.
-      Name:
-        $ref: '#/definitions/__string'
-        description: Name of a group.
-    description: Information on the group
-  GroupOwnerSetting:
-    type: object
-    properties:
-      AutoAddGroupOwner:
-        $ref: '#/definitions/__boolean'
-        description: Eanble the auto added group owner.
-      GroupOwner:
-        $ref: '#/definitions/__string'
-        description: Name of the group owner.
-    description: Group owner related settings for local resources.
-  GroupVersion:
-    type: object
-    properties:
-      CoreDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: Core definition version arn for this group.
-      DeviceDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: Device definition version arn for this group.
-      FunctionDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: Function definition version arn for this group.
-      LoggerDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: Logger definition version arn for this group.
-      ResourceDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: Resource definition version arn for this group.
-      SubscriptionDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: Subscription definition version arn for this group.
-    description: Information on group version
-  InternalServerErrorException:
-    type: object
-    properties:
-      ErrorDetails:
-        $ref: '#/definitions/ErrorDetails'
-        description: Error Details
-      Message:
-        $ref: '#/definitions/__string'
-        description: Message containing information about the error
-    description: General Error
-  ListCoreDefinitionVersionsRequest:
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+  ListBulkDeploymentsRequest:
     type: object
     properties: {}
   ListCoreDefinitionVersionsResponse:
@@ -3397,31 +3298,21 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/ListOfVersionInformation'
-        description: Versions
-  ListCoreDefinitionsRequest:
+        $ref: '#/definitions/__listOfVersionInformation'
+        description: Information about a version.
+  ListCoreDefinitionVersionsRequest:
     type: object
     properties: {}
   ListCoreDefinitionsResponse:
     type: object
     properties:
       Definitions:
-        $ref: '#/definitions/ListOfDefinitionInformation'
-        description: Definitions
+        $ref: '#/definitions/__listOfDefinitionInformation'
+        description: Information about a definition.
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListDefinitionsResponse:
-    type: object
-    properties:
-      Definitions:
-        $ref: '#/definitions/ListOfDefinitionInformation'
-        description: Definitions
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-    description: List of definition responses
-  ListDeploymentsRequest:
+  ListCoreDefinitionsRequest:
     type: object
     properties: {}
   ListDeploymentsResponse:
@@ -3429,11 +3320,11 @@ definitions:
     properties:
       Deployments:
         $ref: '#/definitions/Deployments'
-        description: List of deployments for the requested groups
+        description: A list of deployments for the requested groups.
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListDeviceDefinitionVersionsRequest:
+  ListDeploymentsRequest:
     type: object
     properties: {}
   ListDeviceDefinitionVersionsResponse:
@@ -3443,21 +3334,21 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/ListOfVersionInformation'
-        description: Versions
-  ListDeviceDefinitionsRequest:
+        $ref: '#/definitions/__listOfVersionInformation'
+        description: Information about a version.
+  ListDeviceDefinitionVersionsRequest:
     type: object
     properties: {}
   ListDeviceDefinitionsResponse:
     type: object
     properties:
       Definitions:
-        $ref: '#/definitions/ListOfDefinitionInformation'
-        description: Definitions
+        $ref: '#/definitions/__listOfDefinitionInformation'
+        description: Information about a definition.
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListFunctionDefinitionVersionsRequest:
+  ListDeviceDefinitionsRequest:
     type: object
     properties: {}
   ListFunctionDefinitionVersionsResponse:
@@ -3467,30 +3358,30 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/ListOfVersionInformation'
-        description: Versions
-  ListFunctionDefinitionsRequest:
+        $ref: '#/definitions/__listOfVersionInformation'
+        description: Information about a version.
+  ListFunctionDefinitionVersionsRequest:
     type: object
     properties: {}
   ListFunctionDefinitionsResponse:
     type: object
     properties:
       Definitions:
-        $ref: '#/definitions/ListOfDefinitionInformation'
-        description: Definitions
+        $ref: '#/definitions/__listOfDefinitionInformation'
+        description: Information about a definition.
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListGroupCertificateAuthoritiesRequest:
+  ListFunctionDefinitionsRequest:
     type: object
     properties: {}
   ListGroupCertificateAuthoritiesResponse:
     type: object
     properties:
       GroupCertificateAuthorities:
-        $ref: '#/definitions/ListOfGroupCertificateAuthorityProperties'
-        description: List of certificate authorities associated with the group.
-  ListGroupVersionsRequest:
+        $ref: '#/definitions/__listOfGroupCertificateAuthorityProperties'
+        description: A list of certificate authorities associated with the group.
+  ListGroupCertificateAuthoritiesRequest:
     type: object
     properties: {}
   ListGroupVersionsResponse:
@@ -3500,21 +3391,21 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/ListOfVersionInformation'
-        description: Versions
-  ListGroupsRequest:
+        $ref: '#/definitions/__listOfVersionInformation'
+        description: Information about a version.
+  ListGroupVersionsRequest:
     type: object
     properties: {}
   ListGroupsResponse:
     type: object
     properties:
       Groups:
-        $ref: '#/definitions/ListOfGroupInformation'
-        description: Groups
+        $ref: '#/definitions/__listOfGroupInformation'
+        description: Information about a group.
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListLoggerDefinitionVersionsRequest:
+  ListGroupsRequest:
     type: object
     properties: {}
   ListLoggerDefinitionVersionsResponse:
@@ -3524,69 +3415,21 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/ListOfVersionInformation'
-        description: Versions
-  ListLoggerDefinitionsRequest:
+        $ref: '#/definitions/__listOfVersionInformation'
+        description: Information about a version.
+  ListLoggerDefinitionVersionsRequest:
     type: object
     properties: {}
   ListLoggerDefinitionsResponse:
     type: object
     properties:
       Definitions:
-        $ref: '#/definitions/ListOfDefinitionInformation'
-        description: Definitions
+        $ref: '#/definitions/__listOfDefinitionInformation'
+        description: Information about a definition.
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListOfConnectivityInfo:
-    type: array
-    items:
-      $ref: '#/definitions/ConnectivityInfo'
-  ListOfCore:
-    type: array
-    items:
-      $ref: '#/definitions/Core'
-  ListOfDefinitionInformation:
-    type: array
-    items:
-      $ref: '#/definitions/DefinitionInformation'
-  ListOfDevice:
-    type: array
-    items:
-      $ref: '#/definitions/Device'
-  ListOfFunction:
-    type: array
-    items:
-      $ref: '#/definitions/Function'
-  ListOfGroupCertificateAuthorityProperties:
-    type: array
-    items:
-      $ref: '#/definitions/GroupCertificateAuthorityProperties'
-  ListOfGroupInformation:
-    type: array
-    items:
-      $ref: '#/definitions/GroupInformation'
-  ListOfLogger:
-    type: array
-    items:
-      $ref: '#/definitions/Logger'
-  ListOfResource:
-    type: array
-    items:
-      $ref: '#/definitions/Resource'
-  ListOfResourceAccessPolicy:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceAccessPolicy'
-  ListOfSubscription:
-    type: array
-    items:
-      $ref: '#/definitions/Subscription'
-  ListOfVersionInformation:
-    type: array
-    items:
-      $ref: '#/definitions/VersionInformation'
-  ListResourceDefinitionVersionsRequest:
+  ListLoggerDefinitionsRequest:
     type: object
     properties: {}
   ListResourceDefinitionVersionsResponse:
@@ -3596,21 +3439,21 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/ListOfVersionInformation'
-        description: Versions
-  ListResourceDefinitionsRequest:
+        $ref: '#/definitions/__listOfVersionInformation'
+        description: Information about a version.
+  ListResourceDefinitionVersionsRequest:
     type: object
     properties: {}
   ListResourceDefinitionsResponse:
     type: object
     properties:
       Definitions:
-        $ref: '#/definitions/ListOfDefinitionInformation'
-        description: Definitions
+        $ref: '#/definitions/__listOfDefinitionInformation'
+        description: Information about a definition.
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListSubscriptionDefinitionVersionsRequest:
+  ListResourceDefinitionsRequest:
     type: object
     properties: {}
   ListSubscriptionDefinitionVersionsResponse:
@@ -3620,84 +3463,647 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/ListOfVersionInformation'
-        description: Versions
-  ListSubscriptionDefinitionsRequest:
+        $ref: '#/definitions/__listOfVersionInformation'
+        description: Information about a version.
+  ListSubscriptionDefinitionVersionsRequest:
     type: object
     properties: {}
   ListSubscriptionDefinitionsResponse:
     type: object
     properties:
       Definitions:
-        $ref: '#/definitions/ListOfDefinitionInformation'
-        description: Definitions
+        $ref: '#/definitions/__listOfDefinitionInformation'
+        description: Information about a definition.
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListVersionsResponse:
+  ListSubscriptionDefinitionsRequest:
+    type: object
+    properties: {}
+  ResetDeploymentsResponse:
     type: object
     properties:
-      NextToken:
+      DeploymentArn:
         $ref: '#/definitions/__string'
-        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-      Versions:
-        $ref: '#/definitions/ListOfVersionInformation'
-        description: Versions
-    description: List of versions response
+        description: The ARN of the deployment.
+      DeploymentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the deployment.
+  ResetDeploymentsRequest:
+    type: object
+    properties:
+      Force:
+        $ref: '#/definitions/__boolean'
+        description: 'If true, performs a best-effort only core reset.'
+    description: Information needed to reset deployments.
+  StartBulkDeploymentResponse:
+    type: object
+    properties:
+      BulkDeploymentArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the bulk deployment.
+      BulkDeploymentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the bulk deployment.
+  StartBulkDeploymentRequest:
+    type: object
+    properties:
+      ExecutionRoleArn:
+        $ref: '#/definitions/__string'
+        description: 'The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''''greengrass:CreateDeployment'''' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.'
+      InputFileUri:
+        $ref: '#/definitions/__string'
+        description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100MB. Currently, Greengrass; supports only ''''NewDeployment'''' deployment types.'
+  StopBulkDeploymentResponse:
+    type: object
+    properties: {}
+  StopBulkDeploymentRequest:
+    type: object
+    properties: {}
+  UpdateConnectivityInfoResponse:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: A message about the connectivity info update request.
+      Version:
+        $ref: '#/definitions/__string'
+        description: The new version of the connectivity info.
+  UpdateConnectivityInfoRequest:
+    type: object
+    properties:
+      ConnectivityInfo:
+        $ref: '#/definitions/__listOfConnectivityInfo'
+        description: A list of connectivity info.
+    description: Connectivity information.
+  UpdateCoreDefinitionResponse:
+    type: object
+    properties: {}
+  UpdateCoreDefinitionRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  UpdateDeviceDefinitionResponse:
+    type: object
+    properties: {}
+  UpdateDeviceDefinitionRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  UpdateFunctionDefinitionResponse:
+    type: object
+    properties: {}
+  UpdateFunctionDefinitionRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  UpdateGroupResponse:
+    type: object
+    properties: {}
+  UpdateGroupRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  UpdateGroupCertificateConfigurationResponse:
+    type: object
+    properties:
+      CertificateAuthorityExpiryInMilliseconds:
+        $ref: '#/definitions/__string'
+        description: 'The amount of time remaining before the certificate authority expires, in milliseconds.'
+      CertificateExpiryInMilliseconds:
+        $ref: '#/definitions/__string'
+        description: 'The amount of time remaining before the certificate expires, in milliseconds.'
+      GroupId:
+        $ref: '#/definitions/__string'
+        description: The ID of the group certificate configuration.
+  UpdateGroupCertificateConfigurationRequest:
+    type: object
+    properties:
+      CertificateExpiryInMilliseconds:
+        $ref: '#/definitions/__string'
+        description: 'The amount of time remaining before the certificate expires, in milliseconds.'
+  UpdateLoggerDefinitionResponse:
+    type: object
+    properties: {}
+  UpdateLoggerDefinitionRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  UpdateResourceDefinitionResponse:
+    type: object
+    properties: {}
+  UpdateResourceDefinitionRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  UpdateSubscriptionDefinitionResponse:
+    type: object
+    properties: {}
+  UpdateSubscriptionDefinitionRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  __string:
+    type: string
+  BulkDeployment:
+    type: object
+    properties:
+      BulkDeploymentArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the bulk deployment.
+      BulkDeploymentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the bulk deployment.
+      CreatedAt:
+        $ref: '#/definitions/__string'
+        description: 'The time, in ISO format, when the deployment was created.'
+    description: Information about a bulk deployment.
+  __integer:
+    type: integer
+  BulkDeploymentMetrics:
+    type: object
+    properties:
+      InvalidInputRecords:
+        $ref: '#/definitions/__integer'
+        description: 'The total number of records that returned a non-retryable error. For example, this can occur if a group record from the input file uses an invalid format or specifies a nonexistent group version, or if the execution role doesn''t grant permission to deploy a group or group version.'
+      RecordsProcessed:
+        $ref: '#/definitions/__integer'
+        description: 'The total number of group records from the input file that have been processed so far, or attempted.'
+      RetryAttempts:
+        $ref: '#/definitions/__integer'
+        description: 'The total number of deployment attempts that returned a retryable error. For example, a retry is triggered if the attempt to deploy a group returns a throttling error. ''''StartBulkDeployment'''' retries a group deployment up to five times.'
+    description: Relevant metrics on input records processed during bulk deployment.
+  DeploymentType:
+    type: string
+    enum:
+      - NewDeployment
+      - Redeployment
+      - ResetDeployment
+      - ForceResetDeployment
+    description: The type of deployment.
+  ErrorDetails:
+    type: array
+    description: A list of error details.
+    items:
+      $ref: '#/definitions/ErrorDetail'
+  BulkDeploymentResult:
+    type: object
+    properties:
+      CreatedAt:
+        $ref: '#/definitions/__string'
+        description: 'The time, in ISO format, when the deployment was created.'
+      DeploymentArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the group deployment.
+      DeploymentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the group deployment.
+      DeploymentStatus:
+        $ref: '#/definitions/__string'
+        description: 'The current status of the group deployment: ''''Pending'''', ''''InProgress'''', ''''Success'''', or ''''Failure''''.'
+      DeploymentType:
+        $ref: '#/definitions/DeploymentType'
+        description: The type of the deployment.
+      ErrorDetails:
+        $ref: '#/definitions/ErrorDetails'
+        description: Details about the error.
+      ErrorMessage:
+        $ref: '#/definitions/__string'
+        description: The error message for a failed deployment
+      GroupArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the Greengrass group.
+    description: Information about an individual group deployment in a bulk deployment operation.
+  BulkDeploymentResults:
+    type: array
+    items:
+      $ref: '#/definitions/BulkDeploymentResult'
+  BulkDeploymentStatus:
+    type: string
+    enum:
+      - Initializing
+      - Running
+      - Completed
+      - Stopping
+      - Stopped
+      - Failed
+    description: The current status of the bulk deployment.
+  BulkDeployments:
+    type: array
+    items:
+      $ref: '#/definitions/BulkDeployment'
+  ConnectivityInfo:
+    type: object
+    properties:
+      HostAddress:
+        $ref: '#/definitions/__string'
+        description: The endpoint for the Greengrass core. Can be an IP address or DNS.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The ID of the connectivity information.
+      Metadata:
+        $ref: '#/definitions/__string'
+        description: Metadata for this endpoint.
+      PortNumber:
+        $ref: '#/definitions/__integer'
+        description: The port of the Greengrass core. Usually 8883.
+    description: Information about a Greengrass core's connectivity.
+  __boolean:
+    type: boolean
+  Core:
+    type: object
+    properties:
+      CertificateArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the certificate associated with the core.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
+      SyncShadow:
+        $ref: '#/definitions/__boolean'
+        description: 'If true, the core''s local shadow is automatically synced with the cloud.'
+      ThingArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the thing which is the core.
+    description: Information about a core.
+  __listOfCore:
+    type: array
+    items:
+      $ref: '#/definitions/Core'
+  CoreDefinitionVersion:
+    type: object
+    properties:
+      Cores:
+        $ref: '#/definitions/__listOfCore'
+        description: A list of cores in the core definition version.
+    description: Information about a core definition version.
+  DeviceDefinitionVersion:
+    type: object
+    properties:
+      Devices:
+        $ref: '#/definitions/__listOfDevice'
+        description: A list of devices in the definition version.
+    description: Information about a device definition version.
+  __listOfDevice:
+    type: array
+    items:
+      $ref: '#/definitions/Device'
+  FunctionDefinitionVersion:
+    type: object
+    properties:
+      Functions:
+        $ref: '#/definitions/__listOfFunction'
+        description: A list of Lambda functions in this function definition version.
+    description: Information about a function definition version.
+  __listOfFunction:
+    type: array
+    items:
+      $ref: '#/definitions/Function'
+  GroupVersion:
+    type: object
+    properties:
+      CoreDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the core definition version for this group.
+      DeviceDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the device definition version for this group.
+      FunctionDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the function definition version for this group.
+      LoggerDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the logger definition version for this group.
+      ResourceDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The resource definition version ARN for this group.
+      SubscriptionDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the subscription definition version for this group.
+    description: Information about a group version.
+  LoggerDefinitionVersion:
+    type: object
+    properties:
+      Loggers:
+        $ref: '#/definitions/__listOfLogger'
+        description: A list of loggers.
+    description: Information about a logger definition version.
+  __listOfLogger:
+    type: array
+    items:
+      $ref: '#/definitions/Logger'
+  ResourceDefinitionVersion:
+    type: object
+    properties:
+      Resources:
+        $ref: '#/definitions/__listOfResource'
+        description: A list of resources.
+    description: Information about a resource definition version.
+  __listOfResource:
+    type: array
+    items:
+      $ref: '#/definitions/Resource'
+  S3UrlSignerRole:
+    type: string
+    description: The IAM Role that Greengrass will use to create pre-signed URLs pointing towards the update artifact.
+  SoftwareToUpdate:
+    type: string
+    enum:
+      - core
+      - ota_agent
+    description: The piece of software on the Greengrass core that will be updated.
+  UpdateAgentLogLevel:
+    type: string
+    enum:
+      - NONE
+      - TRACE
+      - DEBUG
+      - VERBOSE
+      - INFO
+      - WARN
+      - ERROR
+      - FATAL
+    description: The minimum level of log statements that should be logged by the OTA Agent during an update.
+  UpdateTargets:
+    type: array
+    description: The ARNs of the targets (IoT things or IoT thing groups) that this update will be applied to.
+    items:
+      $ref: '#/definitions/__string'
+  UpdateTargetsArchitecture:
+    type: string
+    enum:
+      - armv7l
+      - x86_64
+      - aarch64
+    description: The architecture of the cores which are the targets of an update.
+  UpdateTargetsOperatingSystem:
+    type: string
+    enum:
+      - ubuntu
+      - raspbian
+      - amazon_linux
+    description: The operating system of the cores which are the targets of an update.
+  SubscriptionDefinitionVersion:
+    type: object
+    properties:
+      Subscriptions:
+        $ref: '#/definitions/__listOfSubscription'
+        description: A list of subscriptions.
+    description: Information about a subscription definition version.
+  __listOfSubscription:
+    type: array
+    items:
+      $ref: '#/definitions/Subscription'
+  DefinitionInformation:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the definition.
+      CreationTimestamp:
+        $ref: '#/definitions/__string'
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The ID of the definition.
+      LastUpdatedTimestamp:
+        $ref: '#/definitions/__string'
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+      LatestVersion:
+        $ref: '#/definitions/__string'
+        description: The latest version of the definition.
+      LatestVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the latest version of the definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+    description: Information about a definition.
+  Deployment:
+    type: object
+    properties:
+      CreatedAt:
+        $ref: '#/definitions/__string'
+        description: 'The time, in milliseconds since the epoch, when the deployment was created.'
+      DeploymentArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the deployment.
+      DeploymentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the deployment.
+      DeploymentType:
+        $ref: '#/definitions/DeploymentType'
+        description: The type of the deployment.
+      GroupArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the group for this deployment.
+    description: Information about a deployment.
+  Deployments:
+    type: array
+    items:
+      $ref: '#/definitions/Deployment'
+  Device:
+    type: object
+    properties:
+      CertificateArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the certificate associated with the device.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
+      SyncShadow:
+        $ref: '#/definitions/__boolean'
+        description: 'If true, the device''s local shadow will be automatically synced with the cloud.'
+      ThingArn:
+        $ref: '#/definitions/__string'
+        description: The thing ARN of the device.
+    description: Information about a device.
+  EncodingType:
+    type: string
+    enum:
+      - binary
+      - json
+  ErrorDetail:
+    type: object
+    properties:
+      DetailedErrorCode:
+        $ref: '#/definitions/__string'
+        description: A detailed error code.
+      DetailedErrorMessage:
+        $ref: '#/definitions/__string'
+        description: A detailed error message.
+    description: Details about the error.
+  FunctionConfiguration:
+    type: object
+    properties:
+      EncodingType:
+        $ref: '#/definitions/EncodingType'
+        description: The expected encoding type of the input payload for the function. The default is ''json''.
+      Environment:
+        $ref: '#/definitions/FunctionConfigurationEnvironment'
+        description: The environment configuration of the function.
+      ExecArgs:
+        $ref: '#/definitions/__string'
+        description: The execution arguments.
+      Executable:
+        $ref: '#/definitions/__string'
+        description: The name of the function executable.
+      MemorySize:
+        $ref: '#/definitions/__integer'
+        description: 'The memory size, in KB, which the function requires.'
+      Pinned:
+        $ref: '#/definitions/__boolean'
+        description: True if the function is pinned. Pinned means the function is long-lived and starts when the core starts.
+      Timeout:
+        $ref: '#/definitions/__integer'
+        description: 'The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned lambdas for each request.'
+    description: The configuration of the Lambda function.
+  Function:
+    type: object
+    properties:
+      FunctionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the Lambda function.
+      FunctionConfiguration:
+        $ref: '#/definitions/FunctionConfiguration'
+        description: The configuration of the Lambda function.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
+    description: Information about a Lambda function.
+  FunctionConfigurationEnvironment:
+    type: object
+    properties:
+      AccessSysfs:
+        $ref: '#/definitions/__boolean'
+        description: 'If true, the Lambda function is allowed to access the host''s /sys folder. Use this when the Lambda function needs to read device information from /sys.'
+      ResourceAccessPolicies:
+        $ref: '#/definitions/__listOfResourceAccessPolicy'
+        description: 'A list of the resources, with their permissions, to which the Lambda function will be granted access. A Lambda function can have at most 10 resources.'
+      Variables:
+        $ref: '#/definitions/__mapOf__string'
+        description: Environment variables for the Lambda function's configuration.
+    description: The environment configuration of the function.
+  __listOfResourceAccessPolicy:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceAccessPolicy'
+  __mapOf__string:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
+  __listOfConnectivityInfo:
+    type: array
+    items:
+      $ref: '#/definitions/ConnectivityInfo'
+  GroupCertificateAuthorityProperties:
+    type: object
+    properties:
+      GroupCertificateAuthorityArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the certificate authority for the group.
+      GroupCertificateAuthorityId:
+        $ref: '#/definitions/__string'
+        description: The ID of the certificate authority for the group.
+    description: Information about a certificate authority for a group.
+  GroupInformation:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the group.
+      CreationTimestamp:
+        $ref: '#/definitions/__string'
+        description: 'The time, in milliseconds since the epoch, when the group was created.'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The ID of the group.
+      LastUpdatedTimestamp:
+        $ref: '#/definitions/__string'
+        description: 'The time, in milliseconds since the epoch, when the group was last updated.'
+      LatestVersion:
+        $ref: '#/definitions/__string'
+        description: The latest version of the group.
+      LatestVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the latest version of the group.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the group.
+    description: Information about a group.
+  GroupOwnerSetting:
+    type: object
+    properties:
+      AutoAddGroupOwner:
+        $ref: '#/definitions/__boolean'
+        description: 'If true, GreenGrass automatically adds the specified Linux OS group owner of the resource to the Lambda process privileges. Thus the Lambda process will have the file access permissions of the added Linux group.'
+      GroupOwner:
+        $ref: '#/definitions/__string'
+        description: The name of the Linux OS group whose privileges will be added to the Lambda process. This field is optional.
+    description: Group owner related settings for local resources.
+  __listOfVersionInformation:
+    type: array
+    items:
+      $ref: '#/definitions/VersionInformation'
+  __listOfDefinitionInformation:
+    type: array
+    items:
+      $ref: '#/definitions/DefinitionInformation'
+  __listOfGroupCertificateAuthorityProperties:
+    type: array
+    items:
+      $ref: '#/definitions/GroupCertificateAuthorityProperties'
+  __listOfGroupInformation:
+    type: array
+    items:
+      $ref: '#/definitions/GroupInformation'
   LocalDeviceResourceData:
     type: object
     properties:
       GroupOwnerSetting:
         $ref: '#/definitions/GroupOwnerSetting'
-        description: Group owner related settings for local resources.
+        description: Group/owner related settings for local resources.
       SourcePath:
         $ref: '#/definitions/__string'
-        description: Local source path of the resource.
-    description: Attributes that define the Local Device Resource.
+        description: The local absolute path of the device resource. The source path for a device resource can refer only to a character device or block device under ''/dev''.
+    description: Attributes that define a local device resource.
   LocalVolumeResourceData:
     type: object
     properties:
       DestinationPath:
         $ref: '#/definitions/__string'
-        description: Local destination path of the resource.
+        description: The absolute local path of the resource inside the lambda environment.
       GroupOwnerSetting:
         $ref: '#/definitions/GroupOwnerSetting'
-        description: Group owner related settings for local resources.
+        description: Allows you to configure additional group privileges for the Lambda process. This field is optional.
       SourcePath:
         $ref: '#/definitions/__string'
-        description: Local source path of the resource.
-    description: Attributes that define the Local Volume Resource.
-  Logger:
-    type: object
-    properties:
-      Component:
-        $ref: '#/definitions/LoggerComponent'
-        description: The component that will be subject to logs
-      Id:
-        $ref: '#/definitions/__string'
-        description: Element Id for this entry in the list.
-      Level:
-        $ref: '#/definitions/LoggerLevel'
-        description: The level of the logs
-      Space:
-        $ref: '#/definitions/__integer'
-        description: 'Amount of hardware space, in KB, to use if file system is used for logging purposes.'
-      Type:
-        $ref: '#/definitions/LoggerType'
-        description: The type which will be use for log output
-    description: Information on the Logger
+        description: The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/proc'' or ''/sys''.
+    description: Attributes that define a local volume resource.
   LoggerComponent:
     type: string
     enum:
       - GreengrassSystem
       - Lambda
-  LoggerDefinitionVersion:
-    type: object
-    properties:
-      Loggers:
-        $ref: '#/definitions/ListOfLogger'
-        description: List of loggers.
-    description: Information on logger definition version
   LoggerLevel:
     type: string
     enum:
@@ -3711,262 +4117,119 @@ definitions:
     enum:
       - FileSystem
       - AWSCloudWatch
-  MapOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
+  Logger:
+    type: object
+    properties:
+      Component:
+        $ref: '#/definitions/LoggerComponent'
+        description: The component that will be subject to logging.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
+      Level:
+        $ref: '#/definitions/LoggerLevel'
+        description: The level of the logs.
+      Space:
+        $ref: '#/definitions/__integer'
+        description: 'The amount of file space, in KB, to use if the local file system is used for logging purposes.'
+      Type:
+        $ref: '#/definitions/LoggerType'
+        description: The type of log output which will be used.
+    description: Information about a logger
   Permission:
     type: string
     enum:
       - ro
       - rw
-    description: Type of permissions a function could have to access a resource.
-  ResetDeploymentsRequest:
-    type: object
-    properties:
-      Force:
-        $ref: '#/definitions/__boolean'
-        description: 'When set to true, perform a best-effort only core reset.'
-    description: Information needed to perform a reset of a group's deployments.
-  ResetDeploymentsResponse:
-    type: object
-    properties:
-      DeploymentArn:
-        $ref: '#/definitions/__string'
-        description: The arn of the reset deployment.
-      DeploymentId:
-        $ref: '#/definitions/__string'
-        description: The id of the reset deployment.
-  Resource:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/__string'
-        description: Resource Id.
-      Name:
-        $ref: '#/definitions/__string'
-        description: A descriptive resource name.
-      ResourceDataContainer:
-        $ref: '#/definitions/ResourceDataContainer'
-        description: A container of data for all resource types.
-    description: Information on the resource.
-  ResourceAccessPolicy:
-    type: object
-    properties:
-      Permission:
-        $ref: '#/definitions/Permission'
-        description: The function's access permission to the resource.
-      ResourceId:
-        $ref: '#/definitions/__string'
-        description: Id of the resource. A reference to the resource definiton.
-    description: Policy for the function to access a resource.
+    description: The type of permission a function has to access a resource.
   ResourceDataContainer:
     type: object
     properties:
       LocalDeviceResourceData:
         $ref: '#/definitions/LocalDeviceResourceData'
-        description: Attributes that define the Local Device Resource.
+        description: Attributes that define the local device resource.
       LocalVolumeResourceData:
         $ref: '#/definitions/LocalVolumeResourceData'
-        description: Attributes that define the Local Volume Resource.
-    description: A container of data for all resource types.
-  ResourceDefinitionVersion:
+        description: Attributes that define the local volume resource.
+      S3MachineLearningModelResourceData:
+        $ref: '#/definitions/S3MachineLearningModelResourceData'
+        description: Attributes that define an S3 machine learning resource.
+      SageMakerMachineLearningModelResourceData:
+        $ref: '#/definitions/SageMakerMachineLearningModelResourceData'
+        description: Attributes that define an SageMaker machine learning resource.
+    description: 'A container for resource data. The container takes only one of the following supported resource data types: ''''LocalDeviceResourceData'''', ''''LocalVolumeResourceData'''', ''''SageMakerMachineLearningModelResourceData'''', ''''S3MachineLearningModelResourceData''''.'
+  Resource:
     type: object
     properties:
-      Resources:
-        $ref: '#/definitions/ListOfResource'
-        description: List of resources.
-    description: Information on resource definition version
-  S3UrlSignerRole:
-    type: string
-    description: The IAM Role that Greengrass will use to create pre-signed URLs pointing towards the update artifact.
-  SoftwareToUpdate:
-    type: string
-    enum:
-      - core
-      - ota_agent
-    description: The piece of software on the Greengrass Core that will be updated.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'The resource ID, used to refer to a resource in the Lambda function configuration. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
+      Name:
+        $ref: '#/definitions/__string'
+        description: 'The descriptive resource name, which is displayed on the Greengrass console. Max length 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
+      ResourceDataContainer:
+        $ref: '#/definitions/ResourceDataContainer'
+        description: A container of data for all resource types.
+    description: Information about a resource.
+  ResourceAccessPolicy:
+    type: object
+    properties:
+      Permission:
+        $ref: '#/definitions/Permission'
+        description: The permissions that the Lambda function has to the resource. Can be one of ''rw'' (read/write) or ''ro'' (read-only).
+      ResourceId:
+        $ref: '#/definitions/__string'
+        description: The ID of the resource. (This ID is assigned to the resource when you create the resource definiton.)
+    description: A policy used by the function to access a resource.
+  S3MachineLearningModelResourceData:
+    type: object
+    properties:
+      DestinationPath:
+        $ref: '#/definitions/__string'
+        description: The absolute local path of the resource inside the Lambda environment.
+      S3Uri:
+        $ref: '#/definitions/__string'
+        description: The URI of the source model in an S3 bucket. The model package must be in tar.gz or .zip format.
+    description: Attributes that define an S3 machine learning resource.
+  SageMakerMachineLearningModelResourceData:
+    type: object
+    properties:
+      DestinationPath:
+        $ref: '#/definitions/__string'
+        description: The absolute local path of the resource inside the Lambda environment.
+      SageMakerJobArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the SageMaker training job that represents the source model.
+    description: Attributes that define an SageMaker machine learning resource.
   Subscription:
     type: object
     properties:
       Id:
         $ref: '#/definitions/__string'
-        description: Element Id for this entry in the list.
+        description: 'A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
       Source:
         $ref: '#/definitions/__string'
-        description: 'Source of the subscription. Can be a thing arn, lambda arn or word ''cloud'''
+        description: 'The source of the subscription. Can be a thing ARN, a Lambda function ARN, ''cloud'' (which represents the IoT cloud), or ''GGShadowService''.'
       Subject:
         $ref: '#/definitions/__string'
-        description: Subject of the message.
+        description: The subject of the message.
       Target:
         $ref: '#/definitions/__string'
-        description: 'Where the message is sent to. Can be a thing arn, lambda arn or word ''cloud''.'
-    description: Information on subscription
-  SubscriptionDefinitionVersion:
-    type: object
-    properties:
-      Subscriptions:
-        $ref: '#/definitions/ListOfSubscription'
-        description: Subscriptions in the version.
-    description: Information on subscription definition version
-  UpdateAgentLogLevel:
-    type: string
-    enum:
-      - NONE
-      - TRACE
-      - DEBUG
-      - VERBOSE
-      - INFO
-      - WARN
-      - ERROR
-      - FATAL
-    description: The minimum level of log statements that should be logged by the OTA Agent during an update.
-  UpdateConnectivityInfoRequest:
-    type: object
-    properties:
-      ConnectivityInfo:
-        $ref: '#/definitions/ListOfConnectivityInfo'
-        description: Connectivity info list
-    description: connectivity info request
-  UpdateConnectivityInfoResponse:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: Response Text
-      Version:
-        $ref: '#/definitions/__string'
-        description: New Version
-  UpdateCoreDefinitionRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: name of the definition
-  UpdateCoreDefinitionResponse:
-    type: object
-    properties: {}
-  UpdateDeviceDefinitionRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: name of the definition
-  UpdateDeviceDefinitionResponse:
-    type: object
-    properties: {}
-  UpdateFunctionDefinitionRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: name of the definition
-  UpdateFunctionDefinitionResponse:
-    type: object
-    properties: {}
-  UpdateGroupCertificateConfigurationRequest:
-    type: object
-    properties:
-      CertificateExpiryInMilliseconds:
-        $ref: '#/definitions/__string'
-        description: Amount of time when the certificate expires in milliseconds.
-  UpdateGroupCertificateConfigurationResponse:
-    type: object
-    properties:
-      CertificateAuthorityExpiryInMilliseconds:
-        $ref: '#/definitions/__string'
-        description: Amount of time when the certificate authority expires in milliseconds.
-      CertificateExpiryInMilliseconds:
-        $ref: '#/definitions/__string'
-        description: Amount of time when the certificate expires in milliseconds.
-      GroupId:
-        $ref: '#/definitions/__string'
-        description: Id of the group the certificate configuration belongs to.
-  UpdateGroupRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: name of the definition
-  UpdateGroupResponse:
-    type: object
-    properties: {}
-  UpdateLoggerDefinitionRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: name of the definition
-  UpdateLoggerDefinitionResponse:
-    type: object
-    properties: {}
-  UpdateResourceDefinitionRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: name of the definition
-  UpdateResourceDefinitionResponse:
-    type: object
-    properties: {}
-  UpdateSubscriptionDefinitionRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: name of the definition
-  UpdateSubscriptionDefinitionResponse:
-    type: object
-    properties: {}
-  UpdateTargets:
-    type: array
-    description: The target arns that this update will be applied to.
-    items:
-      $ref: '#/definitions/__string'
-  UpdateTargetsArchitecture:
-    type: string
-    enum:
-      - armv7l
-      - x86_64
-      - aarch64
-    description: The architecture of the Cores in the targets of an update
-  UpdateTargetsOperatingSystem:
-    type: string
-    enum:
-      - ubuntu
-      - raspbian
-      - amazon_linux
-    description: The operating system of the Cores in the targets of an update
+        description: 'Where the message is sent to. Can be a thing ARN, a Lambda function ARN, ''cloud'' (which represents the IoT cloud), or ''GGShadowService''.'
+    description: Information about a subscription.
   VersionInformation:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: Arn of the version.
+        description: The ARN of the version.
       CreationTimestamp:
         $ref: '#/definitions/__string'
-        description: Timestamp of when the version was created.
+        description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: Id of the resource container.
+        description: The ID of the version.
       Version:
         $ref: '#/definitions/__string'
-        description: Unique Id of a version.
-    description: Information on the version
-  __boolean:
-    type: boolean
-  __double:
-    type: number
-    format: double
-  __integer:
-    type: integer
-  __string:
-    type: string
-  __timestamp:
-    type: string
-    format: date-time
+        description: The unique ID of the version.
+    description: Information about a version.

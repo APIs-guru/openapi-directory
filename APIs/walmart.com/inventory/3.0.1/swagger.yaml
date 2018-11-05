@@ -1,0 +1,284 @@
+swagger: '2.0'
+schemes:
+  - https
+host: developer.walmart.com
+basePath: /inventoryProxy/inventory-api-doc-app/rest
+info:
+  contact:
+    name: partnerapis@walmartlabs.com
+    x-twitter: Walmart
+  description: 'Please make sure you use the correct version of the APIs for your use case. To find out the appropriate version, go to the API Docs  drop down on the menu.'
+  title: Inventory
+  version: 3.0.1
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    url: 'https://twitter.com/Walmart/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://developer.walmart.com/v1/swaggerProxy?type=inventory'
+      version: '2.0'
+  x-providerName: walmart.com
+  x-serviceName: inventory
+produces:
+  - application/xml
+tags:
+  - name: Version 2
+  - name: Version 3
+paths:
+  /v2/feeds:
+    post:
+      consumes:
+        - multipart/form-data
+      description: 'You can upload an inventory feed. If the feed successfully processed, it returns a feed ID. Use the returned feed ID to retrieve a feed status. You need Your Consumer ID and the private key to upload the feed'
+      parameters:
+        - default: inventory
+          description: Feed Type
+          enum:
+            - inventory
+          in: query
+          name: feedType
+          required: true
+          type: string
+        - description: Feed File to upload
+          in: formData
+          name: file
+          required: true
+          type: file
+          x-example: XML conforming XSD v 1.5
+        - default: SWAGGER_CHANNEL_TYPE
+          description: Channel Type
+          enum:
+            - SWAGGER_CHANNEL_TYPE
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: true
+          type: string
+        - description: Your Consumer ID
+          in: header
+          name: WM_CONSUMER.ID
+          required: true
+          type: string
+        - default: Auto populated
+          description: Epoch timestamp
+          in: header
+          name: WM_SEC.TIMESTAMP
+          required: true
+          type: string
+        - default: Auto populated
+          description: Authentication signature
+          in: header
+          name: WM_SEC.AUTH_SIGNATURE
+          required: true
+          type: string
+        - default: Walmart Marketplace
+          description: The Service name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          type: string
+        - default: 123456abcdef
+          description: A Transaction ID
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          type: string
+      responses:
+        default:
+          description: successful operation
+      summary: Upload an inventory feed
+      tags:
+        - Version 2
+  /v2/inventory:
+    get:
+      consumes:
+        - application/xml
+      description: This endpoint retrieves inventory for a given item.
+      parameters:
+        - description: The SKU (seller-provided product identifier) of the item whose inventory we are retrieving
+          in: query
+          name: sku
+          required: true
+          type: string
+        - default: SWAGGER_CHANNEL_TYPE
+          description: Channel Type
+          enum:
+            - SWAGGER_CHANNEL_TYPE
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: true
+          type: string
+        - description: Your consumer id
+          in: header
+          name: WM_CONSUMER.ID
+          required: true
+          type: string
+        - default: Auto populated
+          description: Epoch timestamp
+          in: header
+          name: WM_SEC.TIMESTAMP
+          required: true
+          type: string
+        - default: Auto populated
+          description: Authentication signature
+          in: header
+          name: WM_SEC.AUTH_SIGNATURE
+          required: true
+          type: string
+        - default: Walmart Marketplace
+          description: Service name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          type: string
+        - default: 123456abcdef
+          description: Correlation id
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          type: string
+        - default: application/xml
+          description: application/xml
+          in: header
+          name: Accept
+          required: true
+          type: string
+      responses:
+        default:
+          description: successful operation
+      summary: Get inventory for an item
+      tags:
+        - Version 2
+  /v3/feeds:
+    post:
+      consumes:
+        - multipart/form-data
+      description: 'You can upload an inventory feed. If the feed successfully processed, it returns a feed ID. Use the returned feed ID to retrieve a feed status. You need Your Consumer ID and the private key to upload the feed'
+      parameters:
+        - default: inventory
+          description: Feed Type
+          enum:
+            - inventory
+          in: query
+          name: feedType
+          required: true
+          type: string
+        - description: Ship Node
+          in: query
+          name: shipNode
+          required: true
+          type: string
+        - description: Feed File to upload
+          in: formData
+          name: file
+          required: true
+          type: file
+          x-example: XML conforming XSD v 1.5
+        - default: SWAGGER_CHANNEL_TYPE
+          description: Channel Type
+          enum:
+            - SWAGGER_CHANNEL_TYPE
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: true
+          type: string
+        - description: Your Consumer ID
+          in: header
+          name: WM_CONSUMER.ID
+          required: true
+          type: string
+        - default: Auto populated
+          description: Epoch timestamp
+          in: header
+          name: WM_SEC.TIMESTAMP
+          required: true
+          type: string
+        - default: Auto populated
+          description: Authentication signature
+          in: header
+          name: WM_SEC.AUTH_SIGNATURE
+          required: true
+          type: string
+        - default: Walmart Marketplace
+          description: The Service name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          type: string
+        - default: 123456abcdef
+          description: A Transaction ID
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          type: string
+      responses:
+        default:
+          description: successful operation
+      summary: Upload an inventory feed
+      tags:
+        - Version 3
+  /v3/inventory:
+    get:
+      consumes:
+        - application/xml
+      description: This endpoint retrieves inventory for a given item.
+      parameters:
+        - description: The SKU (seller-provided product identifier) of the item whose inventory we are retrieving
+          in: query
+          name: sku
+          required: true
+          type: string
+        - description: Ship Node
+          in: query
+          name: shipNode
+          required: true
+          type: string
+        - default: SWAGGER_CHANNEL_TYPE
+          description: Channel Type
+          enum:
+            - SWAGGER_CHANNEL_TYPE
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: true
+          type: string
+        - description: Your consumer id
+          in: header
+          name: WM_CONSUMER.ID
+          required: true
+          type: string
+        - default: Auto populated
+          description: Epoch timestamp
+          in: header
+          name: WM_SEC.TIMESTAMP
+          required: true
+          type: string
+        - default: Auto populated
+          description: Authentication signature
+          in: header
+          name: WM_SEC.AUTH_SIGNATURE
+          required: true
+          type: string
+        - default: Walmart Marketplace
+          description: Service name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          type: string
+        - default: 123456abcdef
+          description: Correlation id
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          type: string
+        - default: application/xml
+          description: application/xml
+          in: header
+          name: Accept
+          required: true
+          type: string
+      responses:
+        default:
+          description: successful operation
+      summary: Get inventory for an item
+      tags:
+        - Version 3

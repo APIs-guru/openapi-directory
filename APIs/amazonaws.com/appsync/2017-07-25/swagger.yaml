@@ -162,7 +162,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListApiKeys
-      description: Lists the API keys for a given API.
+      description: '<p>Lists the API keys for a given API.</p> <note> <p>API keys are deleted automatically sometime after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call <code>DeleteApiKey</code> to manually delete a key before it''s automatically deleted.</p> </note>'
       responses:
         '200':
           description: Success
@@ -307,10 +307,6 @@ paths:
           schema:
             $ref: '#/definitions/InternalFailureException'
         '485':
-          description: LimitExceededException
-          schema:
-            $ref: '#/definitions/LimitExceededException'
-        '486':
           description: ApiLimitExceededException
           schema:
             $ref: '#/definitions/ApiLimitExceededException'
@@ -1282,19 +1278,51 @@ paths:
           type: string
           required: true
 definitions:
-  ApiKey:
+  CreateApiKeyResponse:
     type: object
     properties:
-      id:
-        $ref: '#/definitions/String'
-        description: The API key ID.
+      apiKey:
+        $ref: '#/definitions/ApiKey'
+        description: The API key.
+  CreateApiKeyRequest:
+    type: object
+    properties:
       description:
         $ref: '#/definitions/String'
         description: A description of the purpose of the API key.
       expires:
         $ref: '#/definitions/Long'
-        description: 'The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour.'
-    description: Describes an API key.
+        description: 'The time from creation time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time. For more information, see .'
+  BadRequestException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The request is not well formed. For example, a value is invalid or a required field is missing. Check the field values, and try again. '
+  NotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The resource specified in the request was not found. Check the resource and try again.
+  LimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The request exceeded a limit. Try your request again.
+  UnauthorizedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: You are not authorized to perform this operation.
+  InternalFailureException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: An internal AWS AppSync error occurred. Try your request again.
   ApiKeyLimitExceededException:
     type: object
     properties:
@@ -1306,54 +1334,13 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/String'
-    description: The API key expiration must be set to a value between 1 and 365 days.
-  ApiKeys:
-    type: array
-    items:
-      $ref: '#/definitions/ApiKey'
-  ApiLimitExceededException:
+    description: The API key expiration must be set to a value between 1 and 365 days from creation (for <code>CreateApiKey</code>) or from update (for <code>UpdateApiKey</code>).
+  CreateDataSourceResponse:
     type: object
     properties:
-      message:
-        $ref: '#/definitions/String'
-    description: The GraphQL API exceeded a limit. Try your request again.
-  AuthenticationType:
-    type: string
-    enum:
-      - API_KEY
-      - AWS_IAM
-      - AMAZON_COGNITO_USER_POOLS
-  BadRequestException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The request is not well formed. For example, a value is invalid or a required field is missing. Check the field values, and try again. '
-  Blob:
-    type: string
-  Boolean:
-    type: boolean
-  ConcurrentModificationException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Another modification is being made. That modification must complete before you can make your change. '
-  CreateApiKeyRequest:
-    type: object
-    properties:
-      description:
-        $ref: '#/definitions/String'
-        description: A description of the purpose of the API key.
-      expires:
-        $ref: '#/definitions/Long'
-        description: 'The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time.'
-  CreateApiKeyResponse:
-    type: object
-    properties:
-      apiKey:
-        $ref: '#/definitions/ApiKey'
-        description: The API key.
+      dataSource:
+        $ref: '#/definitions/DataSource'
+        description: The <code>DataSource</code> object.
   CreateDataSourceRequest:
     type: object
     required:
@@ -1381,12 +1368,21 @@ definitions:
       elasticsearchConfig:
         $ref: '#/definitions/ElasticsearchDataSourceConfig'
         description: Amazon Elasticsearch settings.
-  CreateDataSourceResponse:
+      httpConfig:
+        $ref: '#/definitions/HttpDataSourceConfig'
+        description: Http endpoint settings.
+  ConcurrentModificationException:
     type: object
     properties:
-      dataSource:
-        $ref: '#/definitions/DataSource'
-        description: The <code>DataSource</code> object.
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Another modification is being made. That modification must complete before you can make your change. '
+  CreateGraphqlApiResponse:
+    type: object
+    properties:
+      graphqlApi:
+        $ref: '#/definitions/GraphqlApi'
+        description: The <code>GraphqlApi</code>.
   CreateGraphqlApiRequest:
     type: object
     required:
@@ -1396,18 +1392,30 @@ definitions:
       name:
         $ref: '#/definitions/String'
         description: A user-supplied name for the <code>GraphqlApi</code>.
+      logConfig:
+        $ref: '#/definitions/LogConfig'
+        description: The Amazon CloudWatch logs configuration.
       authenticationType:
         $ref: '#/definitions/AuthenticationType'
         description: 'The authentication type: API key, IAM, or Amazon Cognito User Pools.'
       userPoolConfig:
         $ref: '#/definitions/UserPoolConfig'
         description: The Amazon Cognito User Pool configuration.
-  CreateGraphqlApiResponse:
+      openIDConnectConfig:
+        $ref: '#/definitions/OpenIDConnectConfig'
+        description: The Open Id Connect configuration configuration.
+  ApiLimitExceededException:
     type: object
     properties:
-      graphqlApi:
-        $ref: '#/definitions/GraphqlApi'
-        description: The <code>GraphqlApi</code>.
+      message:
+        $ref: '#/definitions/String'
+    description: The GraphQL API exceeded a limit. Try your request again.
+  CreateResolverResponse:
+    type: object
+    properties:
+      resolver:
+        $ref: '#/definitions/Resolver'
+        description: The <code>Resolver</code> object.
   CreateResolverRequest:
     type: object
     required:
@@ -1427,12 +1435,12 @@ definitions:
       responseMappingTemplate:
         $ref: '#/definitions/MappingTemplate'
         description: The mapping template to be used for responses from the data source.
-  CreateResolverResponse:
+  CreateTypeResponse:
     type: object
     properties:
-      resolver:
-        $ref: '#/definitions/Resolver'
-        description: The <code>Resolver</code> object.
+      type:
+        $ref: '#/definitions/Type'
+        description: The <code>Type</code> object.
   CreateTypeRequest:
     type: object
     required:
@@ -1445,118 +1453,34 @@ definitions:
       format:
         $ref: '#/definitions/TypeDefinitionFormat'
         description: 'The type format: SDL or JSON.'
-  CreateTypeResponse:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/Type'
-        description: The <code>Type</code> object.
-  DataSource:
-    type: object
-    properties:
-      dataSourceArn:
-        $ref: '#/definitions/String'
-        description: The data source ARN.
-      name:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the data source.
-      description:
-        $ref: '#/definitions/String'
-        description: The description of the data source.
-      type:
-        $ref: '#/definitions/DataSourceType'
-        description: '<p>The type of the data source.</p> <ul> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon Elasticsearch Service domain.</p> </li> <li> <p> <b>AWS_LAMBDA</b>: The data source is an AWS Lambda function.</p> </li> <li> <p> <b>NONE</b>: There is no data source. This type is used when the required information can be computed on the fly without connecting to a back-end data source.</p> </li> </ul>'
-      serviceRoleArn:
-        $ref: '#/definitions/String'
-        description: The IAM service role ARN for the data source. The system assumes this role when accessing the data source.
-      dynamodbConfig:
-        $ref: '#/definitions/DynamodbDataSourceConfig'
-        description: DynamoDB settings.
-      lambdaConfig:
-        $ref: '#/definitions/LambdaDataSourceConfig'
-        description: Lambda settings.
-      elasticsearchConfig:
-        $ref: '#/definitions/ElasticsearchDataSourceConfig'
-        description: Amazon Elasticsearch settings.
-    description: Describes a data source.
-  DataSourceType:
-    type: string
-    enum:
-      - AWS_LAMBDA
-      - AMAZON_DYNAMODB
-      - AMAZON_ELASTICSEARCH
-      - NONE
-  DataSources:
-    type: array
-    items:
-      $ref: '#/definitions/DataSource'
-  DefaultAction:
-    type: string
-    enum:
-      - ALLOW
-      - DENY
-  DeleteApiKeyRequest:
-    type: object
-    properties: {}
   DeleteApiKeyResponse:
     type: object
     properties: {}
-  DeleteDataSourceRequest:
+  DeleteApiKeyRequest:
     type: object
     properties: {}
   DeleteDataSourceResponse:
     type: object
     properties: {}
-  DeleteGraphqlApiRequest:
+  DeleteDataSourceRequest:
     type: object
     properties: {}
   DeleteGraphqlApiResponse:
     type: object
     properties: {}
-  DeleteResolverRequest:
+  DeleteGraphqlApiRequest:
     type: object
     properties: {}
   DeleteResolverResponse:
     type: object
     properties: {}
-  DeleteTypeRequest:
+  DeleteResolverRequest:
     type: object
     properties: {}
   DeleteTypeResponse:
     type: object
     properties: {}
-  DynamodbDataSourceConfig:
-    type: object
-    required:
-      - tableName
-      - awsRegion
-    properties:
-      tableName:
-        $ref: '#/definitions/String'
-        description: The table name.
-      awsRegion:
-        $ref: '#/definitions/String'
-        description: The AWS region.
-      useCallerCredentials:
-        $ref: '#/definitions/Boolean'
-        description: Set to TRUE to use Amazon Cognito credentials with this data source.
-    description: Describes a DynamoDB data source configuration.
-  ElasticsearchDataSourceConfig:
-    type: object
-    required:
-      - endpoint
-      - awsRegion
-    properties:
-      endpoint:
-        $ref: '#/definitions/String'
-        description: The endpoint.
-      awsRegion:
-        $ref: '#/definitions/String'
-        description: The AWS region.
-    description: Describes an Elasticsearch data source configuration.
-  ErrorMessage:
-    type: string
-  GetDataSourceRequest:
+  DeleteTypeRequest:
     type: object
     properties: {}
   GetDataSourceResponse:
@@ -1565,7 +1489,7 @@ definitions:
       dataSource:
         $ref: '#/definitions/DataSource'
         description: The <code>DataSource</code> object.
-  GetGraphqlApiRequest:
+  GetDataSourceRequest:
     type: object
     properties: {}
   GetGraphqlApiResponse:
@@ -1574,7 +1498,7 @@ definitions:
       graphqlApi:
         $ref: '#/definitions/GraphqlApi'
         description: The <code>GraphqlApi</code> object.
-  GetIntrospectionSchemaRequest:
+  GetGraphqlApiRequest:
     type: object
     properties: {}
   GetIntrospectionSchemaResponse:
@@ -1583,16 +1507,22 @@ definitions:
       schema:
         $ref: '#/definitions/Blob'
         description: '<p>The schema, in GraphQL Schema Definition Language (SDL) format.</p> <p>For more information, see the <a href="http://graphql.org/learn/schema/">GraphQL SDL documentation</a>.</p>'
-  GetResolverRequest:
+  GetIntrospectionSchemaRequest:
     type: object
     properties: {}
+  GraphQLSchemaException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The GraphQL schema is not valid.
   GetResolverResponse:
     type: object
     properties:
       resolver:
         $ref: '#/definitions/Resolver'
         description: The <code>Resolver</code> object.
-  GetSchemaCreationStatusRequest:
+  GetResolverRequest:
     type: object
     properties: {}
   GetSchemaCreationStatusResponse:
@@ -1604,7 +1534,7 @@ definitions:
       details:
         $ref: '#/definitions/String'
         description: Detailed information about the status of the schema creation operation.
-  GetTypeRequest:
+  GetSchemaCreationStatusRequest:
     type: object
     properties: {}
   GetTypeResponse:
@@ -1613,60 +1543,7 @@ definitions:
       type:
         $ref: '#/definitions/Type'
         description: The <code>Type</code> object.
-  GraphQLSchemaException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The GraphQL schema is not valid.
-  GraphqlApi:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/ResourceName'
-        description: The API name.
-      apiId:
-        $ref: '#/definitions/String'
-        description: The API ID.
-      authenticationType:
-        $ref: '#/definitions/AuthenticationType'
-        description: The authentication type.
-      userPoolConfig:
-        $ref: '#/definitions/UserPoolConfig'
-        description: The Amazon Cognito User Pool configuration.
-      arn:
-        $ref: '#/definitions/String'
-        description: The ARN.
-      uris:
-        $ref: '#/definitions/MapOfStringToString'
-        description: The URIs.
-    description: Describes a GraphQL API.
-  GraphqlApis:
-    type: array
-    items:
-      $ref: '#/definitions/GraphqlApi'
-  InternalFailureException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: An internal AWS AppSync error occurred. Try your request again.
-  LambdaDataSourceConfig:
-    type: object
-    required:
-      - lambdaFunctionArn
-    properties:
-      lambdaFunctionArn:
-        $ref: '#/definitions/String'
-        description: The ARN for the Lambda function.
-    description: Describes a Lambda data source configuration.
-  LimitExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: The request exceeded a limit. Try your request again.
-  ListApiKeysRequest:
+  GetTypeRequest:
     type: object
     properties: {}
   ListApiKeysResponse:
@@ -1678,7 +1555,7 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
-  ListDataSourcesRequest:
+  ListApiKeysRequest:
     type: object
     properties: {}
   ListDataSourcesResponse:
@@ -1690,7 +1567,7 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
-  ListGraphqlApisRequest:
+  ListDataSourcesRequest:
     type: object
     properties: {}
   ListGraphqlApisResponse:
@@ -1702,7 +1579,7 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
-  ListResolversRequest:
+  ListGraphqlApisRequest:
     type: object
     properties: {}
   ListResolversResponse:
@@ -1714,7 +1591,7 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
-  ListTypesRequest:
+  ListResolversRequest:
     type: object
     properties: {}
   ListTypesResponse:
@@ -1726,74 +1603,15 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
-  Long:
-    type: integer
-  MapOfStringToString:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  MappingTemplate:
-    type: string
-    minLength: 0
-    maxLength: 65536
-  MaxResults:
-    type: integer
-    minimum: 0
-    maximum: 25
-  NotFoundException:
+  ListTypesRequest:
+    type: object
+    properties: {}
+  StartSchemaCreationResponse:
     type: object
     properties:
-      message:
-        $ref: '#/definitions/String'
-    description: The resource specified in the request was not found. Check the resource and try again.
-  OutputType:
-    type: string
-    enum:
-      - SDL
-      - JSON
-  PaginationToken:
-    type: string
-    pattern: '[\\S]+'
-  Resolver:
-    type: object
-    properties:
-      typeName:
-        $ref: '#/definitions/ResourceName'
-        description: The resolver type name.
-      fieldName:
-        $ref: '#/definitions/ResourceName'
-        description: The resolver field name.
-      dataSourceName:
-        $ref: '#/definitions/ResourceName'
-        description: The resolver data source name.
-      resolverArn:
-        $ref: '#/definitions/String'
-        description: The resolver ARN.
-      requestMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
-        description: The request mapping template.
-      responseMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
-        description: The response mapping template.
-    description: Describes a resolver.
-  Resolvers:
-    type: array
-    items:
-      $ref: '#/definitions/Resolver'
-  ResourceName:
-    type: string
-    pattern: '[_A-Za-z][_0-9A-Za-z]*'
-  SchemaStatus:
-    type: string
-    enum:
-      - PROCESSING
-      - ACTIVE
-      - DELETING
+      status:
+        $ref: '#/definitions/SchemaStatus'
+        description: 'The current state of the schema (PROCESSING, ACTIVE, or DELETING). Once the schema is in the ACTIVE state, you can add data.'
   StartSchemaCreationRequest:
     type: object
     required:
@@ -1802,48 +1620,12 @@ definitions:
       definition:
         $ref: '#/definitions/Blob'
         description: 'The schema definition, in GraphQL schema language format.'
-  StartSchemaCreationResponse:
+  UpdateApiKeyResponse:
     type: object
     properties:
-      status:
-        $ref: '#/definitions/SchemaStatus'
-        description: 'The current state of the schema (PROCESSING, ACTIVE, or DELETING). Once the schema is in the ACTIVE state, you can add data.'
-  String:
-    type: string
-  Type:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/ResourceName'
-        description: The type name.
-      description:
-        $ref: '#/definitions/String'
-        description: The type description.
-      arn:
-        $ref: '#/definitions/String'
-        description: The type ARN.
-      definition:
-        $ref: '#/definitions/String'
-        description: The type definition.
-      format:
-        $ref: '#/definitions/TypeDefinitionFormat'
-        description: 'The type format: SDL or JSON.'
-    description: Describes a type.
-  TypeDefinitionFormat:
-    type: string
-    enum:
-      - SDL
-      - JSON
-  TypeList:
-    type: array
-    items:
-      $ref: '#/definitions/Type'
-  UnauthorizedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: You are not authorized to perform this operation.
+      apiKey:
+        $ref: '#/definitions/ApiKey'
+        description: The API key.
   UpdateApiKeyRequest:
     type: object
     properties:
@@ -1852,13 +1634,13 @@ definitions:
         description: A description of the purpose of the API key.
       expires:
         $ref: '#/definitions/Long'
-        description: The time after which the API key expires. The date is represented as seconds since the epoch.
-  UpdateApiKeyResponse:
+        description: 'The time from update time after which the API key expires. The date is represented as seconds since the epoch. For more information, see .'
+  UpdateDataSourceResponse:
     type: object
     properties:
-      apiKey:
-        $ref: '#/definitions/ApiKey'
-        description: The API key.
+      dataSource:
+        $ref: '#/definitions/DataSource'
+        description: The updated <code>DataSource</code> object.
   UpdateDataSourceRequest:
     type: object
     required:
@@ -1882,12 +1664,15 @@ definitions:
       elasticsearchConfig:
         $ref: '#/definitions/ElasticsearchDataSourceConfig'
         description: The new Elasticsearch configuration.
-  UpdateDataSourceResponse:
+      httpConfig:
+        $ref: '#/definitions/HttpDataSourceConfig'
+        description: The new http endpoint configuration
+  UpdateGraphqlApiResponse:
     type: object
     properties:
-      dataSource:
-        $ref: '#/definitions/DataSource'
-        description: The updated <code>DataSource</code> object.
+      graphqlApi:
+        $ref: '#/definitions/GraphqlApi'
+        description: The updated <code>GraphqlApi</code> object.
   UpdateGraphqlApiRequest:
     type: object
     required:
@@ -1896,18 +1681,24 @@ definitions:
       name:
         $ref: '#/definitions/String'
         description: The new name for the <code>GraphqlApi</code> object.
+      logConfig:
+        $ref: '#/definitions/LogConfig'
+        description: The Amazon CloudWatch logs configuration for the <code>GraphqlApi</code> object.
       authenticationType:
         $ref: '#/definitions/AuthenticationType'
         description: The new authentication type for the <code>GraphqlApi</code> object.
       userPoolConfig:
         $ref: '#/definitions/UserPoolConfig'
         description: The new Amazon Cognito User Pool configuration for the <code>GraphqlApi</code> object.
-  UpdateGraphqlApiResponse:
+      openIDConnectConfig:
+        $ref: '#/definitions/OpenIDConnectConfig'
+        description: The Open Id Connect configuration configuration for the <code>GraphqlApi</code> object.
+  UpdateResolverResponse:
     type: object
     properties:
-      graphqlApi:
-        $ref: '#/definitions/GraphqlApi'
-        description: The updated <code>GraphqlApi</code> object.
+      resolver:
+        $ref: '#/definitions/Resolver'
+        description: The updated <code>Resolver</code> object.
   UpdateResolverRequest:
     type: object
     required:
@@ -1923,12 +1714,12 @@ definitions:
       responseMappingTemplate:
         $ref: '#/definitions/MappingTemplate'
         description: The new response mapping template.
-  UpdateResolverResponse:
+  UpdateTypeResponse:
     type: object
     properties:
-      resolver:
-        $ref: '#/definitions/Resolver'
-        description: The updated <code>Resolver</code> object.
+      type:
+        $ref: '#/definitions/Type'
+        description: The updated <code>Type</code> object.
   UpdateTypeRequest:
     type: object
     required:
@@ -1940,12 +1731,140 @@ definitions:
       format:
         $ref: '#/definitions/TypeDefinitionFormat'
         description: 'The new type format: SDL or JSON.'
-  UpdateTypeResponse:
+  String:
+    type: string
+  Long:
+    type: integer
+  ApiKey:
     type: object
     properties:
+      id:
+        $ref: '#/definitions/String'
+        description: The API key ID.
+      description:
+        $ref: '#/definitions/String'
+        description: A description of the purpose of the API key.
+      expires:
+        $ref: '#/definitions/Long'
+        description: 'The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour.'
+    description: '<p>Describes an API key.</p> <p>Customers invoke AWS AppSync GraphQL APIs with API keys as an identity mechanism. There are two key versions:</p> <p> <b>da1</b>: This version was introduced at launch in November 2017. These keys always expire after 7 days. Key expiration is managed by DynamoDB TTL. The keys will cease to be valid after Feb 21, 2018 and should not be used after that date.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>UpdateApiKey</code> is not available for this key version.</p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in DynamoDB as milliseconds. This results in a bug where keys are not automatically deleted because DynamoDB expects the TTL to be stored in seconds. As a one-time action, we will delete these keys from the table after Feb 21, 2018.</p> </li> </ul> <p> <b>da2</b>: This version was introduced in February 2018 when AppSync added support to extend key expiration.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time in seconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time in seconds and accepts a user-provided expiration time in seconds.</p> </li> <li> <p> <code>UpdateApiKey</code> returns the expiration time in seconds and accepts a user-provided expiration time in seconds. Key expiration can only be updated while the key has not expired.</p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in DynamoDB as seconds.</p> </li> </ul>'
+  ApiKeys:
+    type: array
+    items:
+      $ref: '#/definitions/ApiKey'
+  AuthenticationType:
+    type: string
+    enum:
+      - API_KEY
+      - AWS_IAM
+      - AMAZON_COGNITO_USER_POOLS
+      - OPENID_CONNECT
+  ErrorMessage:
+    type: string
+  Blob:
+    type: string
+  Boolean:
+    type: boolean
+  ResourceName:
+    type: string
+    pattern: '[_A-Za-z][_0-9A-Za-z]*'
+  DataSourceType:
+    type: string
+    enum:
+      - AWS_LAMBDA
+      - AMAZON_DYNAMODB
+      - AMAZON_ELASTICSEARCH
+      - NONE
+      - HTTP
+  DynamodbDataSourceConfig:
+    type: object
+    required:
+      - tableName
+      - awsRegion
+    properties:
+      tableName:
+        $ref: '#/definitions/String'
+        description: The table name.
+      awsRegion:
+        $ref: '#/definitions/String'
+        description: The AWS region.
+      useCallerCredentials:
+        $ref: '#/definitions/Boolean'
+        description: Set to TRUE to use Amazon Cognito credentials with this data source.
+    description: Describes a DynamoDB data source configuration.
+  LambdaDataSourceConfig:
+    type: object
+    required:
+      - lambdaFunctionArn
+    properties:
+      lambdaFunctionArn:
+        $ref: '#/definitions/String'
+        description: The ARN for the Lambda function.
+    description: Describes a Lambda data source configuration.
+  ElasticsearchDataSourceConfig:
+    type: object
+    required:
+      - endpoint
+      - awsRegion
+    properties:
+      endpoint:
+        $ref: '#/definitions/String'
+        description: The endpoint.
+      awsRegion:
+        $ref: '#/definitions/String'
+        description: The AWS region.
+    description: Describes an Elasticsearch data source configuration.
+  HttpDataSourceConfig:
+    type: object
+    properties:
+      endpoint:
+        $ref: '#/definitions/String'
+        description: 'The Http url endpoint. You can either specify the domain name or ip and port combination and the url scheme must be http(s). If the port is not specified, AWS AppSync will use the default port 80 for http endpoint and port 443 for https endpoints.'
+    description: Describes a Http data source configuration.
+  DataSource:
+    type: object
+    properties:
+      dataSourceArn:
+        $ref: '#/definitions/String'
+        description: The data source ARN.
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the data source.
+      description:
+        $ref: '#/definitions/String'
+        description: The description of the data source.
       type:
-        $ref: '#/definitions/Type'
-        description: The updated <code>Type</code> object.
+        $ref: '#/definitions/DataSourceType'
+        description: '<p>The type of the data source.</p> <ul> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon Elasticsearch Service domain.</p> </li> <li> <p> <b>AWS_LAMBDA</b>: The data source is an AWS Lambda function.</p> </li> <li> <p> <b>NONE</b>: There is no data source. This type is used when when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.</p> </li> <li> <p> <b>HTTP</b>: The data source is an HTTP endpoint.</p> </li> </ul>'
+      serviceRoleArn:
+        $ref: '#/definitions/String'
+        description: The IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+      dynamodbConfig:
+        $ref: '#/definitions/DynamodbDataSourceConfig'
+        description: DynamoDB settings.
+      lambdaConfig:
+        $ref: '#/definitions/LambdaDataSourceConfig'
+        description: Lambda settings.
+      elasticsearchConfig:
+        $ref: '#/definitions/ElasticsearchDataSourceConfig'
+        description: Amazon Elasticsearch settings.
+      httpConfig:
+        $ref: '#/definitions/HttpDataSourceConfig'
+        description: Http endpoint settings.
+    description: Describes a data source.
+  LogConfig:
+    type: object
+    required:
+      - fieldLogLevel
+      - cloudWatchLogsRoleArn
+    properties:
+      fieldLogLevel:
+        $ref: '#/definitions/FieldLogLevel'
+        description: '<p>The field logging level. Values can be NONE, ERROR, ALL. </p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>'
+      cloudWatchLogsRoleArn:
+        $ref: '#/definitions/String'
+        description: 'The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. '
+    description: The CloudWatch Logs configuration.
   UserPoolConfig:
     type: object
     required:
@@ -1966,3 +1885,153 @@ definitions:
         $ref: '#/definitions/String'
         description: A regular expression for validating the incoming Amazon Cognito User Pool app client ID.
     description: Describes an Amazon Cognito User Pool configuration.
+  OpenIDConnectConfig:
+    type: object
+    required:
+      - issuer
+    properties:
+      issuer:
+        $ref: '#/definitions/String'
+        description: The issuer for the open id connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
+      clientId:
+        $ref: '#/definitions/String'
+        description: The client identifier of the Relying party at the OpenID Provider. This identifier is typically obtained when the Relying party is registered with the OpenID Provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time
+      iatTTL:
+        $ref: '#/definitions/Long'
+        description: The number of milliseconds a token is valid after being issued to a user.
+      authTTL:
+        $ref: '#/definitions/Long'
+        description: The number of milliseconds a token is valid after being authenticated.
+    description: Describes an Open Id Connect configuration.
+  GraphqlApi:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The API name.
+      apiId:
+        $ref: '#/definitions/String'
+        description: The API ID.
+      authenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: The authentication type.
+      logConfig:
+        $ref: '#/definitions/LogConfig'
+        description: The Amazon CloudWatch Logs configuration.
+      userPoolConfig:
+        $ref: '#/definitions/UserPoolConfig'
+        description: The Amazon Cognito User Pool configuration.
+      openIDConnectConfig:
+        $ref: '#/definitions/OpenIDConnectConfig'
+        description: The Open Id Connect configuration.
+      arn:
+        $ref: '#/definitions/String'
+        description: The ARN.
+      uris:
+        $ref: '#/definitions/MapOfStringToString'
+        description: The URIs.
+    description: Describes a GraphQL API.
+  MappingTemplate:
+    type: string
+    minLength: 1
+    maxLength: 65536
+  Resolver:
+    type: object
+    properties:
+      typeName:
+        $ref: '#/definitions/ResourceName'
+        description: The resolver type name.
+      fieldName:
+        $ref: '#/definitions/ResourceName'
+        description: The resolver field name.
+      dataSourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The resolver data source name.
+      resolverArn:
+        $ref: '#/definitions/String'
+        description: The resolver ARN.
+      requestMappingTemplate:
+        $ref: '#/definitions/MappingTemplate'
+        description: The request mapping template.
+      responseMappingTemplate:
+        $ref: '#/definitions/MappingTemplate'
+        description: The response mapping template.
+    description: Describes a resolver.
+  TypeDefinitionFormat:
+    type: string
+    enum:
+      - SDL
+      - JSON
+  Type:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The type name.
+      description:
+        $ref: '#/definitions/String'
+        description: The type description.
+      arn:
+        $ref: '#/definitions/String'
+        description: The type ARN.
+      definition:
+        $ref: '#/definitions/String'
+        description: The type definition.
+      format:
+        $ref: '#/definitions/TypeDefinitionFormat'
+        description: 'The type format: SDL or JSON.'
+    description: Describes a type.
+  DataSources:
+    type: array
+    items:
+      $ref: '#/definitions/DataSource'
+  DefaultAction:
+    type: string
+    enum:
+      - ALLOW
+      - DENY
+  FieldLogLevel:
+    type: string
+    enum:
+      - NONE
+      - ERROR
+      - ALL
+  OutputType:
+    type: string
+    enum:
+      - SDL
+      - JSON
+  SchemaStatus:
+    type: string
+    enum:
+      - PROCESSING
+      - ACTIVE
+      - DELETING
+  MapOfStringToString:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  GraphqlApis:
+    type: array
+    items:
+      $ref: '#/definitions/GraphqlApi'
+  PaginationToken:
+    type: string
+    pattern: '[\\S]+'
+  MaxResults:
+    type: integer
+    minimum: 0
+    maximum: 25
+  Resolvers:
+    type: array
+    items:
+      $ref: '#/definitions/Resolver'
+  TypeList:
+    type: array
+    items:
+      $ref: '#/definitions/Type'

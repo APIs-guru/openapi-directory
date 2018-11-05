@@ -116,34 +116,6 @@ paths:
       responses:
         '200':
           description: Successful request to get the list of metric values.
-          examples:
-            application/json:
-              id: /subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/vms/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.Insights/baseline/PercentageCpu
-              name:
-                value: PercentageCpu
-              properties:
-                aggregation: Average
-                baseline:
-                  - highThresholds:
-                      - 90.3453
-                      - 91.3453
-                    lowThresholds:
-                      - 30
-                      - 31.1
-                    sensitivity: Low
-                  - highThresholds:
-                      - 70.3453
-                      - 71.3453
-                    lowThresholds:
-                      - 50
-                      - 51.1
-                    sensitivity: Medium
-                interval: PT1H
-                timespan: '2017-04-14T02:20:00Z/2017-04-14T04:20:00Z'
-                timestamps:
-                  - '2017-04-14T02:20:00Z'
-                  - '2017-04-14T03:20:00Z'
-              type: Microsoft.Insights/baseline
           schema:
             $ref: '#/definitions/BaselineResponse'
         default:

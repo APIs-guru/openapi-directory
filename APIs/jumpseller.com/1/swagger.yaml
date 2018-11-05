@@ -888,7 +888,7 @@ paths:
             items:
               $ref: '#/definitions/JSApp'
             type: array
-      summary: Create a Store Settings
+      summary: Create a Store JSApp
       tags:
         - Apps
   '/jsapps/{code}.json':
@@ -966,6 +966,30 @@ paths:
       summary: Create a new Order.
       tags:
         - Orders
+  '/orders/after/{id}.json':
+    get:
+      description: 'For example the GET /orders/after/5000 will return Order 5001, 5002, 5003, etc.'
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Order
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Order'
+        '404':
+          description: Order Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve orders filtered by Order Id.
+      tags:
+        - Orders
   '/orders/status/{status}.json':
     get:
       parameters:
@@ -992,7 +1016,7 @@ paths:
           description: Status Invalid.
           schema:
             $ref: '#/definitions/StatusInvalid'
-      summary: Retrieve orders filter by status.
+      summary: Retrieve orders filtered by status.
       tags:
         - Orders
   '/orders/{id}.json':
@@ -2184,72 +2208,6 @@ paths:
       summary: Update a Promotion.
       tags:
         - Promotions
-  /settings.json:
-    post:
-      parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - description: Store Setting parameters to create
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/SettingEdit'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Setting'
-      summary: Create a Store Settings
-      tags:
-        - Settings
-  '/settings/{name}.json':
-    get:
-      parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - description: Name of the Store Setting
-          in: path
-          name: name
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Setting'
-      summary: Retrieve Store Information
-      tags:
-        - Settings
-    put:
-      parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - description: Name of the Store Setting
-          in: path
-          name: name
-          required: true
-          type: string
-        - description: Store Setting parameters to change
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/SettingEdit'
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/Setting'
-            type: array
-        '404':
-          description: Store Setting Not Found.
-          schema:
-            $ref: '#/definitions/NotFound'
-      summary: Modify an existing Store Setting.
-      tags:
-        - Settings
   /store/info.json:
     get:
       parameters:
@@ -2279,6 +2237,68 @@ paths:
       summary: Retrieve Store Languages
       tags:
         - Stores
+  /taxes.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: An array of Taxes
+          schema:
+            items:
+              $ref: '#/definitions/Tax'
+            type: array
+      summary: Retrieve all Taxes.
+      tags:
+        - Taxes
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Tax parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/TaxEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Tax'
+            type: array
+        '404':
+          description: Tax Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Create a new Tax.
+      tags:
+        - Taxes
+  '/taxes/{id}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Tax
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: A Tax information object
+          schema:
+            $ref: '#/definitions/Tax'
+        '404':
+          description: Tax Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single Tax information.
+      tags:
+        - Taxes
 definitions:
   App:
     properties:
@@ -2825,6 +2845,10 @@ definitions:
         type: number
       shipping_address:
         $ref: '#/definitions/ShippingAddress'
+      shipping_discount:
+        description: Shipping Discount value for the given order
+        format: float
+        type: number
       shipping_method_id:
         description: Shipping method e.g. Royal Mail
         format: int32
@@ -2832,6 +2856,10 @@ definitions:
       shipping_method_name:
         description: Shipping method e.g. Royal Mail
         type: string
+      shipping_tax:
+        description: Shipping Tax value for the given order
+        format: float
+        type: number
       status:
         description: Status of the Order
         enum:
@@ -2950,7 +2978,6 @@ definitions:
           - pagseguro
           - interpagos
           - moneybookers
-          - webpay
           - webpay_cl
           - easypay
           - easypaycc
@@ -2973,7 +3000,7 @@ definitions:
     type: object
   ProductCustomField:
     properties:
-      field:
+      field_value:
         $ref: '#/definitions/ProductCustomFieldFields'
     type: object
   ProductCustomFieldFields:
@@ -3084,6 +3111,10 @@ definitions:
         type: string
       diameter:
         description: Diameter of the product
+        format: float
+        type: number
+      discount:
+        description: Discount of the product
         format: float
         type: number
       featured:
@@ -3396,43 +3427,6 @@ definitions:
         type: string
       name:
         type: string
-  Setting:
-    properties:
-      setting:
-        $ref: '#/definitions/SettingFields'
-    type: object
-  SettingEdit:
-    properties:
-      setting:
-        $ref: '#/definitions/SettingEditFields'
-    type: object
-  SettingEditFields:
-    example:
-      name: limit_test
-      value: 100
-    properties:
-      name:
-        description: Store Setting Name
-        type: string
-      value:
-        description: Store Setting Value
-        type: string
-    required:
-      - name
-    type: object
-  SettingFields:
-    properties:
-      id:
-        description: Unique identifier of the Store Setting
-        format: int32
-        type: integer
-      name:
-        description: Store Setting Name
-        type: string
-      value:
-        description: Store Setting Value
-        type: string
-    type: object
   ShippingAddress:
     properties:
       address:
@@ -3493,6 +3487,70 @@ definitions:
         description: Store URL
         type: string
     type: object
+  Tax:
+    properties:
+      field:
+        $ref: '#/definitions/TaxFields'
+    type: object
+  TaxEdit:
+    properties:
+      field:
+        $ref: '#/definitions/TaxEditFields'
+    type: object
+  TaxEditFields:
+    properties:
+      category_id:
+        description: Unique identifier of the category of the Tax
+        format: int32
+        type: integer
+      country:
+        description: Country where the Tax applies
+        type: string
+      fixed:
+        default: false
+        description: True if the tax has a fixed valued amount
+        type: boolean
+      region:
+        description: Region where the Tax applies
+        type: string
+      shipping:
+        default: false
+        description: True if the tax should be applied to shipping costs
+        type: boolean
+      tax_amount:
+        description: Tax value for the given Tax
+        format: float
+        type: number
+    type: object
+  TaxFields:
+    properties:
+      category_id:
+        description: Unique identifier of the category of the Tax
+        format: int32
+        type: integer
+      country:
+        description: Country name where the Tax applies
+        type: string
+      fixed:
+        default: false
+        description: True if the tax has a fixed valued amount
+        type: boolean
+      id:
+        description: Unique identifier of the Tax
+        format: int32
+        type: integer
+      region:
+        description: Region name where the Tax applies
+        type: string
+      shipping:
+        default: false
+        description: True if the tax should be applied to shipping costs
+        type: boolean
+      tax_amount:
+        description: Tax value for the given Tax
+        format: float
+        type: number
+    type: object
   Variant:
     properties:
       variant:
@@ -3531,6 +3589,10 @@ definitions:
     type: object
   VariantFields:
     properties:
+      discount:
+        description: Discount of the product
+        format: float
+        type: number
       id:
         description: Unique identifier of the product
         format: int32

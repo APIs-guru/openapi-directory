@@ -42,12 +42,30 @@ parameters:
     name: api-version
     required: true
     type: string
+  SkipParameter:
+    description: 'Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.'
+    in: query
+    maximum: 1000
+    minimum: 0
+    name: $skip
+    required: false
+    type: integer
+    x-ms-parameter-location: method
   SubscriptionIdParameter:
     description: Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
     type: string
+  TopParameter:
+    description: May be used to limit the number of results to the most recent N usageDetails.
+    in: query
+    maximum: 1000
+    minimum: 1
+    name: $top
+    required: false
+    type: integer
+    x-ms-parameter-location: method
   aliasNameParameter:
     description: The Disaster Recovery configuration name
     in: path
@@ -65,6 +83,18 @@ parameters:
     name: authorizationRuleName
     required: true
     type: string
+    x-ms-parameter-location: method
+  configNameParameter:
+    description: The configuration name. Should always be "$default".
+    enum:
+      - $default
+    in: path
+    name: configName
+    required: true
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: MigrationConfigurationName
     x-ms-parameter-location: method
   namespaceNameParameter:
     description: The namespace name
@@ -2499,6 +2529,227 @@ paths:
                     type: Microsoft.ServiceBus/Namespaces/EventHubs
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations':
+    get:
+      description: Gets all migrationConfigurations
+      operationId: MigrationConfigs_List
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of migrationConfigurations for servicebus namespace
+          schema:
+            $ref: '#/definitions/MigrationConfigListResult'
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - MigrationConfigs
+      x-ms-examples:
+        MigrationConfigurationsList:
+          parameters:
+            api-version: '2017-04-01'
+            configName: $default
+            namespaceName: sdk-Namespace-9259
+            resourceGroupName: ResourceGroup
+            subscriptionId: SubscriptionId
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/SubscriptionId/resourceGroups/ResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-9259/migrationConfigs/sdk-Namespace-9259
+                    name: sdk-Namespace-9259
+                    properties:
+                      postMigrationName: sdk-PostMigration-9423
+                      provisioningState: Succeeded
+                      targetNamespace: /subscriptions/SubscriptionId/resourceGroups/ResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-7454
+                    type: Microsoft.ServiceBus/Namespaces/migrationconfigurations
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}':
+    delete:
+      description: Deletes a MigrationConfiguration
+      operationId: MigrationConfigs_Delete
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/configNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Delete Migration Config request accepted
+        '204':
+          description: Not Found
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - MigrationConfigs
+      x-ms-examples:
+        MigrationConfigurationsDelete:
+          parameters:
+            api-version: '2017-04-01'
+            configName: $default
+            namespaceName: sdk-Namespace-41
+            resourceGroupName: ResourceGroup
+            subscriptionId: SubscriptionId
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Retrieves Migration Config
+      operationId: MigrationConfigs_Get
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/configNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved Migration Config)
+          schema:
+            $ref: '#/definitions/MigrationConfigProperties'
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - MigrationConfigs
+      x-ms-examples:
+        MigrationConfigurationsGet:
+          parameters:
+            api-version: '2017-04-01'
+            configName: $default
+            namespaceName: sdk-Namespace-41
+            resourceGroupName: ResourceGroup
+            subscriptionId: SubscriptionId
+          responses:
+            '200':
+              body:
+                id: /subscriptions/SubscriptionId/resourceGroups/ResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-41/migrationConfigs/$default
+                name: sdk-Namespace-41
+                properties:
+                  postMigrationName: sdk-PostMigration-5919
+                  provisioningState: Succeeded
+                  targetNamespace: /subscriptions/SubscriptionId/resourceGroups/ResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-4028
+                type: Microsoft.ServiceBus/Namespaces/disasterrecoveryconfigs
+    put:
+      description: Creates Migration configuration and starts migration of enties from Standard to Premium namespace
+      operationId: MigrationConfigs_CreateAndStartMigration
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/configNameParameter'
+        - description: Parameters required to create Migration Configuration
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/MigrationConfigProperties'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Migration Config successfully created
+          schema:
+            $ref: '#/definitions/MigrationConfigProperties'
+        '201':
+          description: Migration Config creation request received
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - MigrationConfigs
+      x-ms-examples:
+        MigrationConfigurationsStartMigration:
+          parameters:
+            api-version: '2017-04-01'
+            configName: $default
+            namespaceName: sdk-Namespace-41
+            parameters:
+              properties:
+                postMigrationName: sdk-PostMigration-5919
+                targetNamespace: /subscriptions/SubscriptionId/resourceGroups/ResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-4028
+            resourceGroupName: ResourceGroup
+            subscriptionId: SubscriptionId
+          responses:
+            '200':
+              body:
+                id: /subscriptions/SubscriptionId/resourceGroups/ResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-41/migrationConfigs/$default
+                name: sdk-Namespace-41
+                properties:
+                  postMigrationName: sdk-PostMigration-5919
+                  provisioningState: Accepted
+                  targetNamespace: /subscriptions/SubscriptionId/resourceGroups/ResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-4028
+                type: Microsoft.ServiceBus/Namespaces/disasterrecoveryconfigs
+            '201': {}
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}/revert':
+    post:
+      description: This operation reverts Migration
+      operationId: MigrationConfigs_Revert
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/configNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: MigrationConfig Revert operation is successful.
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - MigrationConfigs
+      x-ms-examples:
+        MigrationConfigurationsRevert:
+          parameters:
+            api-version: '2017-04-01'
+            configName: $default
+            namespaceName: sdk-Namespace-41
+            resourceGroupName: ResourceGroup
+            subscriptionId: SubscriptionId
+          responses:
+            '200': {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}/upgrade':
+    post:
+      description: This operation Completes Migration of entities by pointing the connection strings to Premium namespace and any enties created after the operation will be under Premium Namespace. CompleteMigration operation will fail when entity migration is in-progress.
+      operationId: MigrationConfigs_CompleteMigration
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/configNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: upgrade operation of Migration Config is successful.
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - MigrationConfigs
+      x-ms-examples:
+        MigrationConfigurationsCompleteMigration:
+          parameters:
+            api-version: '2017-04-01'
+            configName: $default
+            namespaceName: sdk-Namespace-41
+            resourceGroupName: ResourceGroup
+            subscriptionId: SubscriptionId
+          responses:
+            '200': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues':
     get:
       description: Gets the queues within a namespace.
@@ -2510,6 +2761,8 @@ paths:
         - $ref: '#/parameters/namespaceNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/SkipParameter'
+        - $ref: '#/parameters/TopParameter'
       responses:
         '200':
           description: Queues successfully returned.
@@ -2977,6 +3230,8 @@ paths:
         - $ref: '#/parameters/namespaceNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/SkipParameter'
+        - $ref: '#/parameters/TopParameter'
       responses:
         '200':
           description: Successfully retrieved list of topics.
@@ -3444,6 +3699,8 @@ paths:
         - $ref: '#/parameters/topicNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/SkipParameter'
+        - $ref: '#/parameters/TopParameter'
       responses:
         '200':
           description: Successfully retrieved list of subscriptions.
@@ -3670,6 +3927,8 @@ paths:
         - $ref: '#/parameters/subscriptionNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/SkipParameter'
+        - $ref: '#/parameters/TopParameter'
       responses:
         '200':
           description: Successfully retrieved list of Rules.
@@ -3816,36 +4075,80 @@ paths:
       tags:
         - Rules
       x-ms-examples:
-        RulesCreateOrUpdate:
+        RulesCreateCorelationFilter:
           parameters:
             api-version: '2017-04-01'
             namespaceName: sdk-Namespace-1319
             parameters:
               properties:
-                action:
-                  sqlExpression: myproperty='test'
-                correlationFilter: {}
-                filterType: SqlFilter
-                sqlFilter:
-                  sqlExpression: myproperty='test'
-            resourceGroupName: ArunMonocle
+                correlationFilter:
+                  properties:
+                    topicHint: Crop
+                filterType: CorrelationFilter
+            resourceGroupName: resourceGroupName
             ruleName: sdk-Rules-6571
-            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
+            subscriptionId: subscriptionId
             subscriptionName: sdk-Subscriptions-8691
             topicName: sdk-Topics-2081
           responses:
             '200':
               body:
-                id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/ArunMonocle/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-1319/topics/sdk-Topics-2081/subscriptions/sdk-Subscriptions-8691/rules/sdk-Rules-6571
+                id: /subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-1319/topics/sdk-Topics-2081/subscriptions/sdk-Subscriptions-8691/rules/sdk-Rules-6571
                 name: sdk-Rules-6571
                 properties:
-                  action:
-                    compatibilityLevel: 20
-                    sqlExpression: myproperty='test'
+                  action: {}
+                  correlationFilter:
+                    properties:
+                      queueHint: Crop
+                  filterType: CorrelationFilter
+                type: Microsoft.ServiceBus/Namespaces/Topics/Subscriptions/Rules
+        RulesCreateOrUpdate:
+          parameters:
+            api-version: '2017-04-01'
+            namespaceName: sdk-Namespace-1319
+            parameters: {}
+            resourceGroupName: resourceGroupName
+            ruleName: sdk-Rules-6571
+            subscriptionId: subscriptionId
+            subscriptionName: sdk-Subscriptions-8691
+            topicName: sdk-Topics-2081
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-1319/topics/sdk-Topics-2081/subscriptions/sdk-Subscriptions-8691/rules/sdk-Rules-6571
+                name: sdk-Rules-6571
+                properties:
+                  action: {}
                   filterType: SqlFilter
                   sqlFilter:
                     compatibilityLevel: 20
-                    sqlExpression: myproperty='test'
+                    sqlExpression: 1=1
+                type: Microsoft.ServiceBus/Namespaces/Topics/Subscriptions/Rules
+        RulesCreateSQLFilter:
+          parameters:
+            api-version: '2017-04-01'
+            namespaceName: sdk-Namespace-1319
+            parameters:
+              properties:
+                filterType: SqlFilter
+                sqlFilter:
+                  sqlExpression: myproperty=test
+            resourceGroupName: resourceGroupName
+            ruleName: sdk-Rules-6571
+            subscriptionId: subscriptionId
+            subscriptionName: sdk-Subscriptions-8691
+            topicName: sdk-Topics-2081
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-1319/topics/sdk-Topics-2081/subscriptions/sdk-Subscriptions-8691/rules/sdk-Rules-6571
+                name: sdk-Rules-6571
+                properties:
+                  action: {}
+                  filterType: SqlFilter
+                  sqlFilter:
+                    compatibilityLevel: 20
+                    sqlExpression: myproperty=test
                 type: Microsoft.ServiceBus/Namespaces/Topics/Subscriptions/Rules
 definitions:
   AccessKeys:
@@ -4026,6 +4329,11 @@ definitions:
       messageId:
         description: Identifier of the message.
         type: string
+      properties:
+        additionalProperties:
+          type: string
+        description: dictionary object for custom filters
+        type: object
       replyTo:
         description: Address of the queue to reply to.
         type: string
@@ -4194,6 +4502,40 @@ definitions:
         readOnly: true
         type: integer
     type: object
+  MigrationConfigListResult:
+    description: The result of the List migrationConfigurations operation.
+    properties:
+      nextLink:
+        description: Link to the next set of results. Not empty if Value contains incomplete list of migrationConfigurations
+        readOnly: true
+        type: string
+      value:
+        description: List of Migration Configs
+        items:
+          $ref: '#/definitions/MigrationConfigProperties'
+        type: array
+  MigrationConfigProperties:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Single item in List or Get Migration Config operation
+    properties:
+      properties:
+        description: Properties required to the Create Migration Configuration
+        properties:
+          postMigrationName:
+            description: Name to access Standard Namespace after migration
+            type: string
+          provisioningState:
+            description: 'Provisioning state of Migration Configuration '
+            readOnly: true
+            type: string
+          targetNamespace:
+            description: 'Existing premium Namespace ARM Id name which has no entities, will be used for migration'
+            type: string
+        required:
+          - targetNamespace
+          - postMigrationName
+        x-ms-client-flatten: true
   Operation:
     description: A ServiceBus REST API operation
     properties:
@@ -4484,6 +4826,9 @@ definitions:
         description: ISO 8601 timeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.
         format: duration
         type: string
+      enableBatchedOperations:
+        description: Value that indicates whether server-side batched operations are enabled.
+        type: boolean
       enableExpress:
         description: A value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage.
         type: boolean

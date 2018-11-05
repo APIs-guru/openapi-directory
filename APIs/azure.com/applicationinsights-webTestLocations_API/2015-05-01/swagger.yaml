@@ -1,0 +1,144 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: Azure Application Insights client for web test locations.
+  title: ApplicationInsightsManagementClient
+  version: '2015-05-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/microsoft.insights/stable/2015-05-01/webTestLocations_API.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: applicationinsights-webTestLocations_API
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow.
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  ResourceGroupNameParameter:
+    description: The name of the resource group.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceNameParameter:
+    description: The name of the Application Insights component resource.
+    in: path
+    name: resourceName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The Azure subscription ID.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/syntheticmonitorlocations':
+    get:
+      description: Gets a list of web test locations available to this Application Insights component.
+      operationId: webTestLocations_List
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+      responses:
+        '200':
+          description: A list containing 0 or more web test location names available to the Application Insights component.
+          schema:
+            $ref: '#/definitions/ApplicationInsightsWebTestLocationsListResult'
+      x-ms-examples:
+        WebTestLocationsList:
+          parameters:
+            api-version: '2015-05-01'
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                - DisplayName: 'US : IL-Chicago'
+                  Tag: us-il-ch1-azr
+                - DisplayName: 'NL : Amsterdam'
+                  Tag: emea-nl-ams-azr
+                - DisplayName: 'SG : Singapore'
+                  Tag: apac-sg-sin-azr
+                - DisplayName: 'US : CA-San Jose'
+                  Tag: us-ca-sjc-azr
+                - DisplayName: 'US : TX-San Antonio'
+                  Tag: us-tx-sn1-azr
+                - DisplayName: 'US : VA-Ashburn'
+                  Tag: us-va-ash-azr
+                - DisplayName: 'HK : Hong Kong'
+                  Tag: apac-hk-hkn-azr
+                - DisplayName: 'IE : Dublin'
+                  Tag: emea-gb-db3-azr
+                - DisplayName: 'JP : Kawaguchi'
+                  Tag: apac-jp-kaw-edge
+                - DisplayName: 'AU : Sydney'
+                  Tag: emea-au-syd-edge
+                - DisplayName: 'CH : Zurich'
+                  Tag: emea-ch-zrh-edge
+                - DisplayName: 'FR : Paris'
+                  Tag: emea-fr-pra-edge
+                - DisplayName: 'RU : Moscow'
+                  Tag: emea-ru-msa-edge
+                - DisplayName: 'SE : Stockholm'
+                  Tag: emea-se-sto-edge
+                - DisplayName: 'BR : Sao Paulo'
+                  Tag: latam-br-gru-edge
+                - DisplayName: 'US : FL-Miami'
+                  Tag: us-fl-mia-edge
+      x-ms-pageable: {}
+definitions:
+  ApplicationInsightsComponentWebTestLocation:
+    description: Properties that define a web test location available to an Application Insights Component.
+    properties:
+      DisplayName:
+        description: The display name of the web test location.
+        readOnly: true
+        type: string
+      Tag:
+        description: Internally defined geographic location tag.
+        readOnly: true
+        type: string
+    type: object
+  ApplicationInsightsWebTestLocationsListResult:
+    description: Describes the list of web test locations available to an Application Insights Component.
+    properties:
+      value:
+        description: List of web test locations.
+        items:
+          $ref: '#/definitions/ApplicationInsightsComponentWebTestLocation'
+        type: array
+    required:
+      - value

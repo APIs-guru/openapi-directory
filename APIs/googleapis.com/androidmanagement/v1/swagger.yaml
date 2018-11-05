@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: google
       url: 'https://androidmanagement.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -58,11 +58,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -83,12 +78,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -119,12 +108,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -164,12 +151,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -198,15 +183,26 @@ paths:
         - signupUrls
   '/v1/{name}':
     delete:
-      description: 'Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn''t support this method, it returns google.rpc.Code.UNIMPLEMENTED.'
-      operationId: androidmanagement.enterprises.devices.operations.delete
+      description: 'Deletes an enrollment token. This operation invalidates the token, preventing its future use.'
+      operationId: androidmanagement.enterprises.enrollmentTokens.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: 'The name of the enrollment token in the form enterprises/{enterpriseId}/enrollmentTokens/{enrollmentTokenId}.'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
+        - collectionFormat: multi
+          description: Optional flags that control the device wiping behavior.
+          in: query
+          items:
+            enum:
+              - WIPE_DATA_FLAG_UNSPECIFIED
+              - PRESERVE_RESET_PROTECTION_DATA
+              - WIPE_EXTERNAL_STORAGE
+            type: string
+          name: wipeDataFlags
+          type: array
       responses:
         '200':
           description: Successful response
@@ -218,32 +214,24 @@ paths:
       tags:
         - enterprises
     get:
-      description: 'Lists operations that match the specified filter in the request. If the server doesn''t support this method, it returns UNIMPLEMENTED.NOTE: the name binding allows API services to override the binding to use different resource name schemes, such as users/*/operations. To override the binding, API services can add a binding such as "/v1/{name=users/*}/operations" to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.'
-      operationId: androidmanagement.enterprises.devices.operations.list
+      description: Gets info about an application.
+      operationId: androidmanagement.enterprises.applications.get
       parameters:
-        - description: The standard list filter.
+        - description: 'The preferred language for localized application info, as a BCP47 tag (e.g. "en-US", "de"). If not specified the default language of the application will be used.'
           in: query
-          name: filter
+          name: languageCode
           type: string
-        - description: The name of the operation's parent resource.
+        - description: 'The name of the application in the form enterprises/{enterpriseId}/applications/{package_name}.'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListOperationsResponse'
+            $ref: '#/definitions/Application'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
@@ -253,25 +241,23 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: Updates a device.
-      operationId: androidmanagement.enterprises.devices.patch
+      description: Updates or creates a policy.
+      operationId: androidmanagement.enterprises.policies.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Device'
-        - description: 'The name of the device in the form enterprises/{enterpriseId}/devices/{deviceId}.'
+            $ref: '#/definitions/Policy'
+        - description: 'The name of the policy in the form enterprises/{enterpriseId}/policies/{policyId}.'
           in: path
           name: name
           required: true
@@ -285,7 +271,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Device'
+            $ref: '#/definitions/Policy'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
@@ -296,12 +282,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -331,12 +315,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -398,12 +380,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -413,12 +393,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -480,12 +458,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -495,12 +471,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -568,6 +542,27 @@ definitions:
         description: The title of the app. Localized.
         type: string
     type: object
+  ApplicationEvent:
+    description: An app-related event.
+    properties:
+      createTime:
+        description: The creation time of the event.
+        format: google-datetime
+        type: string
+      eventType:
+        description: App event type.
+        enum:
+          - APPLICATION_EVENT_TYPE_UNSPECIFIED
+          - INSTALLED
+          - CHANGED
+          - DATA_CLEARED
+          - REMOVED
+          - REPLACED
+          - RESTARTED
+          - PINNED
+          - UNPINNED
+        type: string
+    type: object
   ApplicationPermission:
     description: A permission required by the app.
     properties:
@@ -585,7 +580,7 @@ definitions:
     description: Policy for an individual app.
     properties:
       defaultPermissionPolicy:
-        description: 'The default policy for all permissions requested by the app. If specified, this overrides the policy-level default_permission_policy which applies to all apps.'
+        description: 'The default policy for all permissions requested by the app. If specified, this overrides the policy-level default_permission_policy which applies to all apps. It does not override the permission_grants which applies to all apps.'
         enum:
           - PERMISSION_POLICY_UNSPECIFIED
           - PROMPT
@@ -605,12 +600,16 @@ definitions:
             - ENABLE_SYSTEM_APP
           type: string
         type: array
+      disabled:
+        description: 'Whether the app is disabled. When disabled, the app data is still preserved.'
+        type: boolean
       installType:
         description: The type of installation to perform.
         enum:
           - INSTALL_TYPE_UNSPECIFIED
           - PREINSTALLED
           - FORCE_INSTALLED
+          - AVAILABLE
         type: string
       lockTaskAllowed:
         description: Whether the app is allowed to lock itself in full-screen mode.
@@ -628,10 +627,72 @@ definitions:
         description: 'The package name of the app. For example, com.google.android.youtube for the YouTube app.'
         type: string
       permissionGrants:
-        description: Explicit permission grants or denials for the app. These values override the default_permission_policy.
+        description: Explicit permission grants or denials for the app. These values override the default_permission_policy and permission_grants which apply to all apps.
         items:
           $ref: '#/definitions/PermissionGrant'
         type: array
+    type: object
+  ApplicationReport:
+    description: Information reported about an installed app.
+    properties:
+      applicationSource:
+        description: The source of the package.
+        enum:
+          - APPLICATION_SOURCE_UNSPECIFIED
+          - SYSTEM_APP_FACTORY_VERSION
+          - SYSTEM_APP_UPDATED_VERSION
+          - INSTALLED_FROM_PLAY_STORE
+        type: string
+      displayName:
+        description: The display name of the app.
+        type: string
+      events:
+        description: List of app events. The most recent 20 events are stored in the list.
+        items:
+          $ref: '#/definitions/ApplicationEvent'
+        type: array
+      installerPackageName:
+        description: The package name of the app that installed this app.
+        type: string
+      packageName:
+        description: Package name of the app.
+        type: string
+      packageSha256Hash:
+        description: 'The SHA-256 hash of the app''s APK file, which can be used to verify the app hasn''t been modified. Each byte of the hash value is represented as a two-digit hexadecimal number.'
+        type: string
+      signingKeyCertFingerprints:
+        description: 'The SHA-1 hash of each android.content.pm.Signature (https://developer.android.com/reference/android/content/pm/Signature.html) associated with the app package. Each byte of each hash value is represented as a two-digit hexadecimal number.'
+        items:
+          type: string
+        type: array
+      state:
+        description: Application state.
+        enum:
+          - INSTALLED
+          - REMOVED
+        type: string
+      versionCode:
+        description: 'The app version code, which can be used to determine whether one version is more recent than another.'
+        format: int32
+        type: integer
+      versionName:
+        description: The app version as displayed to the user.
+        type: string
+    type: object
+  ChoosePrivateKeyRule:
+    description: A rule for automatically choosing a private key and certificate to authenticate the device to a server.
+    properties:
+      packageNames:
+        description: 'The package names for which outgoing requests are subject to this rule. If no package names are specified, then the rule applies to all packages. For each package name listed, the rule applies to that package and all other packages that shared the same Android UID. The SHA256 hash of the signing key signatures of each package_name will be verified against those provided by Play'
+        items:
+          type: string
+        type: array
+      privateKeyAlias:
+        description: The alias of the private key to be used.
+        type: string
+      urlPattern:
+        description: The URL pattern to match against the URL of the outgoing request. The pattern may contain asterisk (*) wildcards. Any URL is matched if unspecified.
+        type: string
     type: object
   Command:
     description: A command.
@@ -643,6 +704,16 @@ definitions:
       duration:
         description: The duration for which the command is valid. The command will expire if not executed by the device during this time. The default duration if unspecified is ten minutes. There is no maximum duration.
         format: google-duration
+        type: string
+      errorCode:
+        description: 'If the command failed, an error code explaining the failure. This is not set when the command is cancelled by the caller.'
+        enum:
+          - COMMAND_ERROR_CODE_UNSPECIFIED
+          - UNKNOWN
+          - API_LEVEL
+          - MANAGEMENT_MODE
+          - INVALID_VALUE
+          - UNSUPPORTED
         type: string
       newPassword:
         description: 'For commands of type RESET_PASSWORD, optionally specifies the new password.'
@@ -665,6 +736,9 @@ definitions:
           - RESET_PASSWORD
           - REBOOT
         type: string
+      userName:
+        description: 'The resource name of the user that owns the device in the form enterprises/{enterpriseId}/users/{userId}. This is automatically generated by the server based on the device the command is sent to.'
+        type: string
     type: object
   ComplianceRule:
     description: 'A rule declaring which mitigating actions to take when a device is not compliant with its policy. For every rule, there is always an implicit mitigating action to set policy_compliant to false for the Device resource, and display a message on the device indicating that the device is not compliant with its policy. Other mitigating actions may optionally be taken as well, depending on the field values in the rule.'
@@ -678,6 +752,11 @@ definitions:
       nonComplianceDetailCondition:
         $ref: '#/definitions/NonComplianceDetailCondition'
         description: A condition which is satisfied if there exists any matching NonComplianceDetail for the device.
+      packageNamesToDisable:
+        description: 'If set, the rule includes a mitigating action to disable apps specified in the list, but app data is preserved.'
+        items:
+          type: string
+        type: array
     type: object
   Device:
     description: 'A device owned by an enterprise. Unless otherwise noted, all fields are read-only and can''t be modified by enterprises.devices.patch.'
@@ -686,6 +765,11 @@ definitions:
         description: The API level of the Android platform version running on the device.
         format: int32
         type: integer
+      applicationReports:
+        description: Reports for apps installed on the device. This information is only available when application_reports_enabled is true in the device's policy.
+        items:
+          $ref: '#/definitions/ApplicationReport'
+        type: array
       appliedPolicyName:
         description: The name of the policy currently applied to the device.
         type: string
@@ -732,7 +816,7 @@ definitions:
           $ref: '#/definitions/HardwareStatus'
         type: array
       lastPolicyComplianceReportTime:
-        description: The last time the device sent a policy compliance report.
+        description: Deprecated.
         format: google-datetime
         type: string
       lastPolicySyncTime:
@@ -742,6 +826,13 @@ definitions:
       lastStatusReportTime:
         description: The last time the device sent a status report.
         format: google-datetime
+        type: string
+      managementMode:
+        description: The type of management mode Android Device Policy takes on the device. This influences which policy settings are supported.
+        enum:
+          - MANAGEMENT_MODE_UNSPECIFIED
+          - DEVICE_OWNER
+          - PROFILE_OWNER
         type: string
       memoryEvents:
         description: Events related to memory and storage measurements in chronological order. This information is only available if memoryInfoEnabled is true in the device's policy.
@@ -889,6 +980,9 @@ definitions:
       name:
         description: 'The name of the enrollment token, which is generated by the server during creation, in the form enterprises/{enterpriseId}/enrollmentTokens/{enrollmentTokenId}.'
         type: string
+      oneTimeOnly:
+        description: 'Whether the enrollment token is for one time use only. If the flag is set to true, only one device can use it for registration.'
+        type: boolean
       policyName:
         description: 'The name of the policy initially applied to the enrolled device, in the form enterprises/{enterpriseId}/policies/{policyId}. If not specified, the policy_name for the device’s user is applied. If user_name is also not specified, enterprises/{enterpriseId}/policies/default is applied by default. When updating this field, you can specify only the policyId as long as the policyId doesn’t contain any slashes. The rest of the policy name will be inferred.'
         type: string
@@ -903,7 +997,7 @@ definitions:
     description: The configuration applied to an enterprise.
     properties:
       appAutoApprovalEnabled:
-        description: 'Whether permissions for apps installed via policy are automatically approved. If enabled, you must display an app''s permissions to the enterprise admin before setting the app to be installed in a policy.'
+        description: Deprecated and unused.
         type: boolean
       enabledNotificationTypes:
         description: The types of Google Pub/Sub notifications enabled for the enterprise.
@@ -932,6 +1026,11 @@ definitions:
       pubsubTopic:
         description: 'The topic that Cloud Pub/Sub notifications are published to, in the form projects/{project}/topics/{topic}. This field is only required if Pub/Sub notifications are enabled.'
         type: string
+      termsAndConditions:
+        description: Terms and conditions that must be accepted when provisioning a device for this enterprise. A page of terms is generated for each value in this list.
+        items:
+          $ref: '#/definitions/TermsAndConditions'
+        type: array
     type: object
   ExternalData:
     description: Data hosted at an external location. The data is to be downloaded by Android Device Policy and verified against the hash.
@@ -1218,7 +1317,7 @@ definitions:
         enum:
           - NON_COMPLIANCE_REASON_UNSPECIFIED
           - API_LEVEL
-          - ADMIN_TYPE
+          - MANAGEMENT_MODE
           - USER_ACTION
           - INVALID_VALUE
           - APP_NOT_INSTALLED
@@ -1243,7 +1342,7 @@ definitions:
         enum:
           - NON_COMPLIANCE_REASON_UNSPECIFIED
           - API_LEVEL
-          - ADMIN_TYPE
+          - MANAGEMENT_MODE
           - USER_ACTION
           - INVALID_VALUE
           - APP_NOT_INSTALLED
@@ -1352,7 +1451,7 @@ definitions:
     description: Configuration for an Android permission and its grant state.
     properties:
       permission:
-        description: 'The android permission, e.g. android.permission.READ_CALENDAR.'
+        description: 'The Android permission or group, e.g. android.permission.READ_CALENDAR or android.permission_group.CALENDAR.'
         type: string
       policy:
         description: The policy for granting the permission.
@@ -1406,6 +1505,15 @@ definitions:
             - BETA
           type: string
         type: array
+      appAutoUpdatePolicy:
+        description: 'The app auto update policy, which controls when automatic app updates can be applied.'
+        enum:
+          - APP_AUTO_UPDATE_POLICY_UNSPECIFIED
+          - CHOICE_TO_THE_USER
+          - NEVER
+          - WIFI_ONLY
+          - ALWAYS
+        type: string
       applications:
         description: Policy applied to apps.
         items:
@@ -1432,6 +1540,11 @@ definitions:
       cellBroadcastsConfigDisabled:
         description: Whether configuring cell broadcast is disabled.
         type: boolean
+      choosePrivateKeyRules:
+        description: 'Rules for automatically choosing a private key and certificate to authenticate the device to a server. The rules are ordered by increasing precedence, so if an outgoing request matches more than one rule, the last rule defines which private key to use.'
+        items:
+          $ref: '#/definitions/ChoosePrivateKeyRule'
+        type: array
       complianceRules:
         description: 'Rules declaring which mitigating actions to take when a device is not compliant with its policy. When the conditions for multiple rules are satisfied, all of the mitigating actions for the rules are taken. There is a maximum limit of 100 rules.'
         items:
@@ -1456,6 +1569,16 @@ definitions:
           - PROMPT
           - GRANT
           - DENY
+        type: string
+      deviceOwnerLockScreenInfo:
+        $ref: '#/definitions/UserFacingMessage'
+        description: The device owner information to be shown on the lock screen.
+      encryptionPolicy:
+        description: Whether encryption is enabled
+        enum:
+          - ENCRYPTION_POLICY_UNSPECIFIED
+          - ENABLED_WITHOUT_PASSWORD
+          - ENABLED_WITH_PASSWORD
         type: string
       ensureVerifyAppsEnabled:
         description: Whether app verification is force-enabled.
@@ -1497,6 +1620,15 @@ definitions:
       kioskCustomLauncherEnabled:
         description: Whether the kiosk custom launcher is enabled. This replaces the home screen with a launcher that locks down the device to the apps installed via the applications setting. The apps appear on a single page in alphabetical order. It is recommended to also use status_bar_disabled to block access to device settings.
         type: boolean
+      locationMode:
+        description: The degree of location detection enabled. The user may change the value unless the user is otherwise blocked from accessing device settings.
+        enum:
+          - LOCATION_MODE_UNSPECIFIED
+          - HIGH_ACCURACY
+          - SENSORS_ONLY
+          - BATTERY_SAVING
+          - 'OFF'
+        type: string
       longSupportMessage:
         $ref: '#/definitions/UserFacingMessage'
         description: A message displayed to the user in the device administators settings screen.
@@ -1536,6 +1668,11 @@ definitions:
       passwordRequirements:
         $ref: '#/definitions/PasswordRequirements'
         description: Password requirements.
+      permissionGrants:
+        description: Explicit permission or group grants or denials for all apps. These values override the default_permission_policy.
+        items:
+          $ref: '#/definitions/PermissionGrant'
+        type: array
       permittedInputMethods:
         $ref: '#/definitions/PackageNameList'
         description: 'If present, only the input methods provided by packages in this list are permitted. If this field is present, but the list is empty, then only system input methods are permitted.'
@@ -1544,6 +1681,9 @@ definitions:
         items:
           $ref: '#/definitions/PersistentPreferredActivity'
         type: array
+      privateKeySelectionEnabled:
+        description: 'Allows showing UI on a device for a user to choose a private key alias if there are no matching rules in ChoosePrivateKeyRules. For devices below Android P, setting this may leave enterprise keys vulnerable.'
+        type: boolean
       recommendedGlobalProxy:
         $ref: '#/definitions/ProxyInfo'
         description: 'The network-independent global HTTP proxy. Typically proxies should be configured per-network in open_network_configuration. However for unusual configurations like general internal filtering a global HTTP proxy may be useful. If the proxy is not accessible, network access may break. The global proxy is only a recommendation and some apps may ignore it.'
@@ -1562,9 +1702,15 @@ definitions:
       setWallpaperDisabled:
         description: Whether changing the wallpaper is disabled.
         type: boolean
+      shareLocationDisabled:
+        description: Whether location sharing is disabled.
+        type: boolean
       shortSupportMessage:
         $ref: '#/definitions/UserFacingMessage'
         description: A message displayed to the user in the settings screen wherever functionality has been disabled by the admin.
+      skipFirstUseHintsEnabled:
+        description: Flag to skip hints on the first use. Enterprise admin can enable the system recommendation for apps to skip their user tutorial and other introductory hints on first start-up.
+        type: boolean
       smsDisabled:
         description: Whether sending and receiving SMS messages is disabled.
         type: boolean
@@ -1598,6 +1744,9 @@ definitions:
         type: boolean
       usbFileTransferDisabled:
         description: Whether transferring files over USB is disabled.
+        type: boolean
+      usbMassStorageEnabled:
+        description: Whether USB storage is enabled.
         type: boolean
       version:
         description: The version of the policy. This is a read-only field. The version is incremented each time the policy is updated.
@@ -1695,6 +1844,9 @@ definitions:
       deviceKernelVersion:
         description: 'Kernel version, for example, 2.6.32.9-g103d848.'
         type: string
+      primaryLanguageCode:
+        description: An IETF BCP 47 language code for the primary locale on the device.
+        type: string
       securityPatchLevel:
         description: 'Security patch level, e.g. 2016-05-01.'
         type: string
@@ -1728,6 +1880,9 @@ definitions:
   StatusReportingSettings:
     description: Settings controlling the behavior of status reports.
     properties:
+      applicationReportsEnabled:
+        description: Whether app reports are enabled.
+        type: boolean
       deviceSettingsEnabled:
         description: Whether device settings reporting is enabled.
         type: boolean
@@ -1769,6 +1924,16 @@ definitions:
           - WINDOWED
           - POSTPONE
         type: string
+    type: object
+  TermsAndConditions:
+    description: A terms and conditions page to be accepted during provisioning.
+    properties:
+      content:
+        $ref: '#/definitions/UserFacingMessage'
+        description: 'A well-formatted HTML string. It will be parsed on the client with android.text.Html#fromHtml.'
+      header:
+        $ref: '#/definitions/UserFacingMessage'
+        description: A short header which appears above the HTML content.
     type: object
   UserFacingMessage:
     description: Provides a user-facing message with locale info. The maximum message length is 4096 characters.

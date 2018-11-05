@@ -8,8 +8,8 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: API for managing lightweight user-provided functions executed in response to events.
-  title: Google Cloud Functions
+  description: Manages lightweight user-provided functions executed in response to events.
+  title: Cloud Functions
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -18,7 +18,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: google
       url: 'https://cloudfunctions.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -59,11 +59,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -84,12 +79,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -160,12 +149,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -175,12 +162,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -239,13 +224,10 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: cloudfunctions.operations.get
+      description: Returns a function with the given name from the requested project.
+      operationId: cloudfunctions.projects.locations.functions.get
       parameters:
-        - description: The name of the operation resource.
+        - description: The name of the function which details should be obtained.
           in: path
           name: name
           required: true
@@ -255,22 +237,20 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/CloudFunction'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - operations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -342,12 +322,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -357,12 +335,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -398,12 +374,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -480,12 +454,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -495,12 +467,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -523,7 +493,7 @@ paths:
         When making a HTTP PUT request, these two headers need to be specified:
 
         * `content-type: application/zip`
-        * `x-google-content-length-range: 0,104857600`
+        * `x-goog-content-length-range: 0,104857600`
       operationId: cloudfunctions.projects.locations.functions.generateUploadUrl
       parameters:
         - in: body
@@ -596,6 +566,14 @@ definitions:
           For Node.js this is name of a function exported by the module specified
           in `source_location`.
         type: string
+      environmentVariables:
+        additionalProperties:
+          type: string
+        description: |-
+          **Beta Feature**
+
+          Environment variables that shall be available during function execution.
+        type: object
       eventTrigger:
         $ref: '#/definitions/EventTrigger'
         description: A source that fires events in response to a condition in another service.
@@ -607,10 +585,38 @@ definitions:
           type: string
         description: Labels associated with this Cloud Function.
         type: object
+      maxInstances:
+        description: |-
+          The limit on the maximum number of function instances that may coexist at a
+          given time. This feature is currently in alpha, available only for
+          whitelisted users.
+        format: int32
+        type: integer
       name:
         description: |-
           A user-defined name of the function. Function names must be unique
           globally and match pattern `projects/*/locations/*/functions/*`
+        type: string
+      network:
+        description: |-
+          The VPC Network that this cloud function can connect to. It can be
+          either the fully-qualified URI, or the short name of the network resource.
+          If the short network name is used, the network must belong to the same
+          project. Otherwise, it must belong to a project within the same
+          organization. The format of this field is either
+          `projects/{project}/global/networks/{network}` or `{network}`, where
+          {project} is a project id where the network is defined, and {network} is
+          the short name of the network.
+
+          See [the VPC documentation](https://cloud.google.com/compute/docs/vpc) for
+          more information on connecting Cloud projects.
+
+          This feature is currently in alpha, available only for whitelisted users.
+        type: string
+      runtime:
+        description: |-
+          The runtime in which the function is going to run. If empty, defaults to
+          Node.js 6.
         type: string
       serviceAccountEmail:
         description: Output only. The email of the function's service account.
@@ -808,6 +814,11 @@ definitions:
   Location:
     description: A resource that represents Google Cloud Platform location.
     properties:
+      displayName:
+        description: |-
+          The friendly name for this location, typically a nearby city name.
+          For example, "Tokyo".
+        type: string
       labels:
         additionalProperties:
           type: string

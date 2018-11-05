@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Provides access to information about profiles and contacts.
-  title: Google People
+  title: People
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://people.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -248,7 +248,8 @@ paths:
       parameters:
         - description: |-
             **Required.** A field mask to restrict which fields on each person are
-            returned. Valid values are:
+            returned. Multiple fields can be specified by separating them with commas.
+            Valid values are:
 
             * addresses
             * ageRanges
@@ -274,9 +275,11 @@ paths:
             * relationshipInterests
             * relationshipStatuses
             * residences
+            * sipAddresses
             * skills
             * taglines
             * urls
+            * userDefined
           in: query
           name: personFields
           type: string
@@ -419,38 +422,11 @@ paths:
           name: maxMembers
           type: integer
         - description: |-
-            **Required.** A field mask to restrict which fields on the person are
-            returned. Valid values are:
-
-            * addresses
-            * ageRanges
-            * biographies
-            * birthdays
-            * braggingRights
-            * coverPhotos
-            * emailAddresses
-            * events
-            * genders
-            * imClients
-            * interests
-            * locales
-            * memberships
-            * metadata
-            * names
-            * nicknames
-            * occupations
-            * organizations
-            * phoneNumbers
-            * photos
-            * relations
-            * relationshipInterests
-            * relationshipStatuses
-            * residences
-            * skills
-            * taglines
-            * urls
+            **Required.** Comma-separated list of person fields to be included in the
+            response. Each path should start with `person.`: for example,
+            `person.names` or `person.photos`.
           in: query
-          name: personFields
+          name: requestMask.includeField
           type: string
         - description: The resource name of the contact group to get.
           in: path
@@ -547,7 +523,8 @@ paths:
           type: string
         - description: |-
             **Required.** A field mask to restrict which fields on each person are
-            returned. Valid values are:
+            returned. Multiple fields can be specified by separating them with commas.
+            Valid values are:
 
             * addresses
             * ageRanges
@@ -573,9 +550,11 @@ paths:
             * relationshipInterests
             * relationshipStatuses
             * residences
+            * sipAddresses
             * skills
             * taglines
             * urls
+            * userDefined
           in: query
           name: personFields
           type: string
@@ -763,12 +742,12 @@ paths:
           x-reservedExpansion: true
         - description: |-
             **Required.** A field mask to restrict which fields on the person are
-            updated. Valid values are:
+            updated. Multiple fields can be specified by separating them with commas.
+            All updated fields will be replaced. Valid values are:
 
             * addresses
             * biographies
             * birthdays
-            * braggingRights
             * emailAddresses
             * events
             * genders
@@ -782,8 +761,9 @@ paths:
             * phoneNumbers
             * relations
             * residences
-            * skills
+            * sipAddresses
             * urls
+            * userDefined
           in: query
           name: updatePersonFields
           type: string
@@ -844,8 +824,8 @@ definitions:
         type: string
       type:
         description: |-
-          The type of the address. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the address. The type can be custom or one of these predefined
+          values:
 
           * `home`
           * `work`
@@ -975,8 +955,7 @@ definitions:
       contactGroupId:
         description: |-
           The contact group ID for the contact group membership. The contact group
-          ID can be custom or predefined. Possible values include, but are not
-          limited to, the following:
+          ID can be custom or one of these predefined values:
 
           *  `myContacts`
           *  `starred`
@@ -1051,7 +1030,9 @@ definitions:
         format: int32
         type: integer
       month:
-        description: Month of year. Must be from 1 to 12.
+        description: |-
+          Month of year. Must be from 1 to 12, or 0 if specifying a date without a
+          month.
         format: int32
         type: integer
       year:
@@ -1084,8 +1065,8 @@ definitions:
         description: Metadata about the email address.
       type:
         description: |-
-          The type of the email address. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the email address. The type can be custom or one of these
+          predefined values:
 
           * `home`
           * `work`
@@ -1124,8 +1105,8 @@ definitions:
         description: Metadata about the event.
       type:
         description: |-
-          The type of the event. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the event. The type can be custom or one of these predefined
+          values:
 
           * `anniversary`
           * `other`
@@ -1162,9 +1143,8 @@ definitions:
         description: Metadata about the gender.
       value:
         description: |-
-          The gender for the person. The gender can be custom or predefined.
-          Possible values include, but are not limited to, the
-          following:
+          The gender for the person. The gender can be custom or one of these
+          predefined values:
 
           * `male`
           * `female`
@@ -1198,8 +1178,8 @@ definitions:
         description: Metadata about the IM client.
       protocol:
         description: |-
-          The protocol of the IM client. The protocol can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The protocol of the IM client. The protocol can be custom or one of these
+          predefined values:
 
           * `aim`
           * `msn`
@@ -1213,8 +1193,8 @@ definitions:
         type: string
       type:
         description: |-
-          The type of the IM client. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the IM client. The type can be custom or one of these
+          predefined values:
 
           * `home`
           * `work`
@@ -1305,7 +1285,10 @@ definitions:
         description: Metadata about the membership.
     type: object
   ModifyContactGroupMembersRequest:
-    description: A request to modify an existing contact group's members.
+    description: |-
+      A request to modify an existing contact group's members. Contacts can be
+      removed from any group but they can only be added to a user group or
+      myContacts or starred system groups.
     properties:
       resourceNamesToAdd:
         description: |-
@@ -1463,8 +1446,8 @@ definitions:
         type: string
       type:
         description: |-
-          The type of the organization. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the organization. The type can be custom or  one of these
+          predefined values:
 
           * `work`
           * `school`
@@ -1619,6 +1602,11 @@ definitions:
           with a max length of 27 characters, in the form of
           `people/`<var>person_id</var>.
         type: string
+      sipAddresses:
+        description: The person's SIP addresses.
+        items:
+          $ref: '#/definitions/SipAddress'
+        type: array
       skills:
         description: The person's skills.
         items:
@@ -1728,8 +1716,8 @@ definitions:
         description: Metadata about the phone number.
       type:
         description: |-
-          The type of the phone number. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the phone number. The type can be custom or one of these
+          predefined values:
 
           * `home`
           * `work`
@@ -1805,8 +1793,8 @@ definitions:
         type: string
       type:
         description: |-
-          The person's relation to the other person. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following values:
+          The person's relation to the other person. The type can be custom or one of
+          these predefined values:
 
           * `spouse`
           * `child`
@@ -1839,8 +1827,7 @@ definitions:
       value:
         description: |-
           The kind of relationship the person is looking for. The value can be custom
-          or predefined. Possible values include, but are not limited to, the
-          following values:
+          or one of these predefined values:
 
           * `friend`
           * `date`
@@ -1861,8 +1848,8 @@ definitions:
         description: Metadata about the relationship status.
       value:
         description: |-
-          The relationship status. The value can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The relationship status. The value can be custom or one of these
+          predefined values:
 
           * `single`
           * `inARelationship`
@@ -1888,6 +1875,36 @@ definitions:
         description: Metadata about the residence.
       value:
         description: The address of the residence.
+        type: string
+    type: object
+  SipAddress:
+    description: |-
+      A person's SIP address. Session Initial Protocol addresses are used for VoIP
+      communications to make voice or video calls over the internet.
+    properties:
+      formattedType:
+        description: |-
+          The read-only type of the SIP address translated and formatted in the
+          viewer's account locale or the `Accept-Language` HTTP header locale.
+        type: string
+      metadata:
+        $ref: '#/definitions/FieldMetadata'
+        description: Metadata about the SIP address.
+      type:
+        description: |-
+          The type of the SIP address. The type can be custom or or one of these
+          predefined values:
+
+          * `home`
+          * `work`
+          * `mobile`
+          * `other`
+        type: string
+      value:
+        description: |-
+          The SIP address in the
+          [RFC 3261 19.1](https://tools.ietf.org/html/rfc3261#section-19.1) SIP URI
+          format.
         type: string
     type: object
   Skill:
@@ -2022,7 +2039,9 @@ definitions:
         type: string
     type: object
   UpdateContactGroupRequest:
-    description: A request to update an existing contact group. Only the name can be updated.
+    description: |-
+      A request to update an existing user contact group. All updated fields will
+      be replaced.
     properties:
       contactGroup:
         $ref: '#/definitions/ContactGroup'
@@ -2041,8 +2060,8 @@ definitions:
         description: Metadata about the URL.
       type:
         description: |-
-          The type of the URL. The type can be custom or predefined.
-          Possible values include, but are not limited to, the following:
+          The type of the URL. The type can be custom or one of these predefined
+          values:
 
           * `home`
           * `work`

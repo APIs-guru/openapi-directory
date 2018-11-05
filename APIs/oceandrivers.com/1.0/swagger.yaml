@@ -14,7 +14,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: swagger
       url: 'http://api.oceandrivers.com/static/resources.json'
       version: '1.2'
@@ -32,7 +32,7 @@ paths:
       operationId: compareStation
       parameters:
         - default: cnarenal
-          description: 'Weather station to compare, values: cnareanl|cmsap|boyaenderrocat|areopuertopalma'
+          description: 'Weather station to compare, values: cnareanl|rcnp | cmsap|boyaenderrocat|areopuertopalma'
           in: path
           name: stationName
           required: true
@@ -57,6 +57,44 @@ paths:
           description: 'Period of time to get the data. Options: lastdata lastday'
           in: path
           name: period
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - ODWeather
+  '/v1.0/getEasyWind/{easywindId}/':
+    get:
+      description: Get data from the easywind weather stations<br/>None
+      operationId: getEasywind
+      parameters:
+        - default: EW013
+          description: 'currently: ''EW013''|''EW008'''
+          in: path
+          name: easywindId
+          required: true
+          type: string
+        - default: latestdata
+          description: Period of time to get the data latestdata|latesthour|latestday
+          in: query
+          name: period
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - ODWeather
+  '/v1.0/getEventStations/{eventId}/':
+    get:
+      description: Get stations in an event<br/>None
+      operationId: getEventStations
+      parameters:
+        - default: trofeoprincesasofia
+          description: 'currently: ''trofeoprincesasofia'''
+          in: path
+          name: eventId
           required: true
           type: string
       responses:

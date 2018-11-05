@@ -659,83 +659,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AttributeAction:
-    type: string
-    enum:
-      - ADD
-      - PUT
-      - DELETE
-    description: 'The type of action for an item update operation. Only use the add action for numbers or sets; the specified value is added to the existing value. If a set of values is specified, the values are added to the existing set. Adds the specified attribute. If the attribute exists, it is replaced by the new value. If no value is specified, this removes the attribute and its value. If a set of values is specified, then the values in the specified set are removed from the old set.'
-  AttributeMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/AttributeValue'
-  AttributeName:
-    type: string
-    maxLength: 65535
-  AttributeNameList:
-    type: array
-    description: 'List of <code>Attribute</code> names. If attribute names are not specified then all attributes will be returned. If some attributes are not found, they will not appear in the result.'
-    items:
-      $ref: '#/definitions/AttributeName'
-    minItems: 1
-  AttributeUpdates:
-    type: array
-    description: 'Map of attribute name to the new value and action for the update. The attribute names specify the attributes to modify, and cannot contain any primary key attributes.'
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/AttributeValueUpdate'
-  AttributeValue:
-    type: object
-    properties:
-      S:
-        $ref: '#/definitions/StringAttributeValue'
-        description: Strings are Unicode with UTF-8 binary encoding. The maximum size is limited by the size of the primary key (1024 bytes as a range part of a key or 2048 bytes as a single part hash key) or the item size (64k).
-      'N':
-        $ref: '#/definitions/NumberAttributeValue'
-        description: Numbers are positive or negative exact-value decimals and integers. A number can have up to 38 digits precision and can be between 10^-128 to 10^+126.
-      B:
-        $ref: '#/definitions/BinaryAttributeValue'
-        description: Binary attributes are sequences of unsigned bytes.
-      SS:
-        $ref: '#/definitions/StringSetAttributeValue'
-        description: A set of strings.
-      NS:
-        $ref: '#/definitions/NumberSetAttributeValue'
-        description: A set of numbers.
-      BS:
-        $ref: '#/definitions/BinarySetAttributeValue'
-        description: A set of binary attributes.
-    description: 'AttributeValue can be <code>String</code>, <code>Number</code>, <code>Binary</code>, <code>StringSet</code>, <code>NumberSet</code>, <code>BinarySet</code>.'
-  AttributeValueList:
-    type: array
-    description: 'A list of attribute values to be used with a comparison operator for a scan or query operation. For comparisons that require more than one value, such as a <code>BETWEEN</code> comparison, the AttributeValueList contains two attribute values and the comparison operator.'
-    items:
-      $ref: '#/definitions/AttributeValue'
-  AttributeValueUpdate:
-    type: object
-    properties:
-      Value:
-        $ref: '#/definitions/AttributeValue'
-      Action:
-        $ref: '#/definitions/AttributeAction'
-    description: 'Specifies the attribute to update and how to perform the update. Possible values: <code>PUT</code> (default), <code>ADD</code> or <code>DELETE</code>.'
-  BatchGetItemInput:
-    type: object
-    required:
-      - RequestItems
-    properties:
-      RequestItems:
-        $ref: '#/definitions/BatchGetRequestMap'
   BatchGetItemOutput:
     type: object
     properties:
@@ -744,44 +667,16 @@ definitions:
       UnprocessedKeys:
         $ref: '#/definitions/BatchGetRequestMap'
         description: 'Contains a map of tables and their respective keys that were not processed with the current response, possibly due to reaching a limit on the response size. The <code>UnprocessedKeys</code> value is in the same form as a <code>RequestItems</code> parameter (so the value can be provided directly to a subsequent <code>BatchGetItem</code> operation). For more information, see the above <code>RequestItems</code> parameter.'
-  BatchGetRequestMap:
-    type: array
-    description: 'A map of the table name and corresponding items to get by primary key. While requesting items, each table name can be invoked only once per operation.'
-    minItems: 1
-    maxItems: 100
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TableName'
-        value:
-          $ref: '#/definitions/KeysAndAttributes'
-  BatchGetResponseMap:
-    type: array
-    description: Table names and the respective item attributes from the tables.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TableName'
-        value:
-          $ref: '#/definitions/BatchResponse'
-  BatchResponse:
-    type: object
-    properties:
-      Items:
-        $ref: '#/definitions/ItemList'
-      ConsumedCapacityUnits:
-        $ref: '#/definitions/ConsumedCapacityUnits'
-    description: 'The item attributes from a response in a specific table, along with the read resources consumed on the table during the request.'
-  BatchWriteItemInput:
+  BatchGetItemInput:
     type: object
     required:
       - RequestItems
     properties:
       RequestItems:
-        $ref: '#/definitions/BatchWriteItemRequestMap'
-        description: A map of table name to list-of-write-requests. Used as input to the <code>BatchWriteItem</code> API call
+        $ref: '#/definitions/BatchGetRequestMap'
+  ProvisionedThroughputExceededException: {}
+  ResourceNotFoundException: {}
+  InternalServerError: {}
   BatchWriteItemOutput:
     type: object
     properties:
@@ -792,79 +687,20 @@ definitions:
         $ref: '#/definitions/BatchWriteItemRequestMap'
         description: The Items which we could not successfully process in a <code>BatchWriteItem</code> call is returned as <code>UnprocessedItems</code>
     description: A container for <code>BatchWriteItem</code> response
-  BatchWriteItemRequestMap:
-    type: array
-    description: '<p>A map of table name to list-of-write-requests.</p> <p>Key: The table name corresponding to the list of requests</p> <p>Value: Essentially a list of request items. Each request item could contain either a <code>PutRequest</code> or <code>DeleteRequest</code>. Never both.</p>'
-    minItems: 1
-    maxItems: 25
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TableName'
-        value:
-          $ref: '#/definitions/WriteRequests'
-  BatchWriteResponse:
-    type: object
-    properties:
-      ConsumedCapacityUnits:
-        $ref: '#/definitions/ConsumedCapacityUnits'
-  BatchWriteResponseMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TableName'
-        value:
-          $ref: '#/definitions/BatchWriteResponse'
-  BinaryAttributeValue:
-    type: string
-  BinarySetAttributeValue:
-    type: array
-    items:
-      $ref: '#/definitions/BinaryAttributeValue'
-  BooleanObject:
-    type: boolean
-  ComparisonOperator:
-    type: string
-    enum:
-      - EQ
-      - NE
-      - IN
-      - LE
-      - LT
-      - GE
-      - GT
-      - BETWEEN
-      - NOT_NULL
-      - 'NULL'
-      - CONTAINS
-      - NOT_CONTAINS
-      - BEGINS_WITH
-    description: '<p>A comparison operator is an enumeration of several operations:</p> <ul> <li><code>EQ</code> for <em>equal</em>.</li> <li><code>NE</code> for <em>not equal</em>.</li> <li><code>IN</code> checks for exact matches.</li> <li><code>LE</code> for <em>less than or equal to</em>.</li> <li><code>LT</code> for <em>less than</em>.</li> <li><code>GE</code> for <em>greater than or equal to</em>.</li> <li><code>GT</code> for <em>greater than</em>.</li> <li><code>BETWEEN</code> for <em>between</em>.</li> <li><code>NOT_NULL</code> for <em>exists</em>.</li> <li><code>NULL</code> for <em>not exists</em>.</li> <li><code>CONTAINS</code> for substring or value in a set.</li> <li><code>NOT_CONTAINS</code> for absence of a substring or absence of a value in a set.</li> <li><code>BEGINS_WITH</code> for a substring prefix.</li> </ul> <p>Scan operations support all available comparison operators.</p> <p>Query operations support a subset of the available comparison operators: EQ, LE, LT, GE, GT, BETWEEN, and BEGINS_WITH.</p>'
-  Condition:
+  BatchWriteItemInput:
     type: object
     required:
-      - ComparisonOperator
+      - RequestItems
     properties:
-      AttributeValueList:
-        $ref: '#/definitions/AttributeValueList'
-      ComparisonOperator:
-        $ref: '#/definitions/ComparisonOperator'
-  ConditionalCheckFailedException:
+      RequestItems:
+        $ref: '#/definitions/BatchWriteItemRequestMap'
+        description: A map of table name to list-of-write-requests. Used as input to the <code>BatchWriteItem</code> API call
+  LimitExceededException: {}
+  CreateTableOutput:
     type: object
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: This exception is thrown when an expected value does not match what was found in the system.
-  ConsistentRead:
-    type: boolean
-    description: 'If set to <code>true</code>, then a consistent read is issued. Otherwise eventually-consistent is used.'
-  ConsumedCapacityUnits:
-    type: number
-    description: 'The number of Capacity Units of the provisioned throughput of the table consumed during the operation. <code>GetItem</code>, <code>BatchGetItem</code>, <code>BatchWriteItem</code>, <code>Query</code>, and <code>Scan</code> operations consume <code>ReadCapacityUnits</code>, while <code>PutItem</code>, <code>UpdateItem</code>, and <code>DeleteItem</code> operations consume <code>WriteCapacityUnits</code>.'
-    format: double
+      TableDescription:
+        $ref: '#/definitions/TableDescription'
   CreateTableInput:
     type: object
     required:
@@ -879,14 +715,15 @@ definitions:
         $ref: '#/definitions/KeySchema'
       ProvisionedThroughput:
         $ref: '#/definitions/ProvisionedThroughput'
-  CreateTableOutput:
+  ResourceInUseException: {}
+  DeleteItemOutput:
     type: object
     properties:
-      TableDescription:
-        $ref: '#/definitions/TableDescription'
-  Date:
-    type: string
-    format: date-time
+      Attributes:
+        $ref: '#/definitions/AttributeMap'
+        description: 'If the <code>ReturnValues</code> parameter is provided as <code>ALL_OLD</code> in the request, Amazon DynamoDB returns an array of attribute name-value pairs (essentially, the deleted item). Otherwise, the response contains an empty set.'
+      ConsumedCapacityUnits:
+        $ref: '#/definitions/ConsumedCapacityUnits'
   DeleteItemInput:
     type: object
     required:
@@ -902,23 +739,12 @@ definitions:
         $ref: '#/definitions/ExpectedAttributeMap'
       ReturnValues:
         $ref: '#/definitions/ReturnValue'
-  DeleteItemOutput:
+  ConditionalCheckFailedException: {}
+  DeleteTableOutput:
     type: object
     properties:
-      Attributes:
-        $ref: '#/definitions/AttributeMap'
-        description: 'If the <code>ReturnValues</code> parameter is provided as <code>ALL_OLD</code> in the request, Amazon DynamoDB returns an array of attribute name-value pairs (essentially, the deleted item). Otherwise, the response contains an empty set.'
-      ConsumedCapacityUnits:
-        $ref: '#/definitions/ConsumedCapacityUnits'
-  DeleteRequest:
-    type: object
-    required:
-      - Key
-    properties:
-      Key:
-        $ref: '#/definitions/Key'
-        description: The item's key to be delete
-    description: A container for a Delete BatchWrite request
+      TableDescription:
+        $ref: '#/definitions/TableDescription'
   DeleteTableInput:
     type: object
     required:
@@ -927,10 +753,10 @@ definitions:
       TableName:
         $ref: '#/definitions/TableName'
         description: 'The name of the table you want to delete. Allowed characters are <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>_</code> (underscore), <code>-</code> (hyphen) and <code>.</code> (period).'
-  DeleteTableOutput:
+  DescribeTableOutput:
     type: object
     properties:
-      TableDescription:
+      Table:
         $ref: '#/definitions/TableDescription'
   DescribeTableInput:
     type: object
@@ -940,42 +766,14 @@ definitions:
       TableName:
         $ref: '#/definitions/TableName'
         description: 'The name of the table you want to describe. Allowed characters are <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>_</code> (underscore), <code>-</code> (hyphen) and <code>.</code> (period).'
-  DescribeTableOutput:
+  GetItemOutput:
     type: object
     properties:
-      Table:
-        $ref: '#/definitions/TableDescription'
-  ErrorMessage:
-    type: string
-  ExpectedAttributeMap:
-    type: array
-    description: 'Designates an attribute for a conditional modification. The <code>Expected</code> parameter allows you to provide an attribute name, and whether or not Amazon DynamoDB should check to see if the attribute has a particular value before modifying it.'
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/ExpectedAttributeValue'
-  ExpectedAttributeValue:
-    type: object
-    properties:
-      Value:
-        $ref: '#/definitions/AttributeValue'
-        description: Specify whether or not a value already exists and has a specific content for the attribute name-value pair.
-      Exists:
-        $ref: '#/definitions/BooleanObject'
-        description: Specify whether or not a value already exists for the attribute name-value pair.
-    description: 'Allows you to provide an attribute name, and whether or not Amazon DynamoDB should check to see if the attribute value already exists; or if the attribute value exists and has a particular value before changing it.'
-  FilterConditionMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/Condition'
+      Item:
+        $ref: '#/definitions/AttributeMap'
+        description: Contains the requested attributes.
+      ConsumedCapacityUnits:
+        $ref: '#/definitions/ConsumedCapacityUnits'
   GetItemInput:
     type: object
     required:
@@ -991,103 +789,6 @@ definitions:
         $ref: '#/definitions/AttributeNameList'
       ConsistentRead:
         $ref: '#/definitions/ConsistentRead'
-  GetItemOutput:
-    type: object
-    properties:
-      Item:
-        $ref: '#/definitions/AttributeMap'
-        description: Contains the requested attributes.
-      ConsumedCapacityUnits:
-        $ref: '#/definitions/ConsumedCapacityUnits'
-  Integer:
-    type: integer
-  InternalServerError:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: This exception is thrown when the service has a problem when trying to process the request.
-  ItemList:
-    type: array
-    items:
-      $ref: '#/definitions/AttributeMap'
-  Key:
-    type: object
-    required:
-      - HashKeyElement
-    properties:
-      HashKeyElement:
-        $ref: '#/definitions/AttributeValue'
-        description: 'A hash key element is treated as the primary key, and can be a string or a number. Single attribute primary keys have one index value. The value can be <code>String</code>, <code>Number</code>, <code>StringSet</code>, <code>NumberSet</code>.'
-      RangeKeyElement:
-        $ref: '#/definitions/AttributeValue'
-        description: 'A range key element is treated as a secondary key (used in conjunction with the primary key), and can be a string or a number, and is only used for hash-and-range primary keys. The value can be <code>String</code>, <code>Number</code>, <code>StringSet</code>, <code>NumberSet</code>.'
-    description: The primary key that uniquely identifies each item in a table. A primary key can be a one attribute (hash) primary key or a two attribute (hash-and-range) primary key.
-  KeyList:
-    type: array
-    items:
-      $ref: '#/definitions/Key'
-    minItems: 1
-    maxItems: 100
-  KeySchema:
-    type: object
-    required:
-      - HashKeyElement
-    properties:
-      HashKeyElement:
-        $ref: '#/definitions/KeySchemaElement'
-        description: 'A hash key element is treated as the primary key, and can be a string or a number. Single attribute primary keys have one index value. The value can be <code>String</code>, <code>Number</code>, <code>StringSet</code>, <code>NumberSet</code>.'
-      RangeKeyElement:
-        $ref: '#/definitions/KeySchemaElement'
-        description: 'A range key element is treated as a secondary key (used in conjunction with the primary key), and can be a string or a number, and is only used for hash-and-range primary keys. The value can be <code>String</code>, <code>Number</code>, <code>StringSet</code>, <code>NumberSet</code>.'
-    description: 'The KeySchema identifies the primary key as a one attribute primary key (hash) or a composite two attribute (hash-and-range) primary key. Single attribute primary keys have one index value: a <code>HashKeyElement</code>. A composite hash-and-range primary key contains two attribute values: a <code>HashKeyElement</code> and a <code>RangeKeyElement</code>.'
-  KeySchemaAttributeName:
-    type: string
-    minLength: 1
-    maxLength: 255
-  KeySchemaElement:
-    type: object
-    required:
-      - AttributeName
-      - AttributeType
-    properties:
-      AttributeName:
-        $ref: '#/definitions/KeySchemaAttributeName'
-        description: The <code>AttributeName</code> of the <code>KeySchemaElement</code>.
-      AttributeType:
-        $ref: '#/definitions/ScalarAttributeType'
-        description: The <code>AttributeType</code> of the <code>KeySchemaElement</code> which can be a <code>String</code> or a <code>Number</code>.
-    description: <code>KeySchemaElement</code> is the primary key (hash or hash-and-range) structure for the table.
-  KeysAndAttributes:
-    type: object
-    required:
-      - Keys
-    properties:
-      Keys:
-        $ref: '#/definitions/KeyList'
-      AttributesToGet:
-        $ref: '#/definitions/AttributeNameList'
-      ConsistentRead:
-        $ref: '#/definitions/ConsistentRead'
-  LimitExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: This exception is thrown when the subscriber exceeded the limits on the number of objects or operations.
-  ListTablesInput:
-    type: object
-    properties:
-      ExclusiveStartTableName:
-        $ref: '#/definitions/TableName'
-        description: 'The name of the table that starts the list. If you already ran a <code>ListTables</code> operation and received a <code>LastEvaluatedTableName</code> value in the response, use that value here to continue the list.'
-      Limit:
-        $ref: '#/definitions/ListTablesInputLimit'
-  ListTablesInputLimit:
-    type: integer
-    description: A number of maximum table names to return.
-    minimum: 1
-    maximum: 100
   ListTablesOutput:
     type: object
     properties:
@@ -1096,52 +797,22 @@ definitions:
       LastEvaluatedTableName:
         $ref: '#/definitions/TableName'
         description: 'The name of the last table in the current list. Use this value as the <code>ExclusiveStartTableName</code> in a new request to continue the list until all the table names are returned. If this value is null, all table names have been returned.'
-  Long:
-    type: integer
-  NumberAttributeValue:
-    type: string
-  NumberSetAttributeValue:
-    type: array
-    items:
-      $ref: '#/definitions/NumberAttributeValue'
-  PositiveIntegerObject:
-    type: integer
-    minimum: 1
-  PositiveLongObject:
-    type: integer
-    minimum: 1
-  ProvisionedThroughput:
-    type: object
-    required:
-      - ReadCapacityUnits
-      - WriteCapacityUnits
-    properties:
-      ReadCapacityUnits:
-        $ref: '#/definitions/PositiveLongObject'
-        description: '<code>ReadCapacityUnits</code> are in terms of strictly consistent reads, assuming items of 1k. 2k items require twice the <code>ReadCapacityUnits</code>. Eventually-consistent reads only require half the <code>ReadCapacityUnits</code> of stirctly consistent reads.'
-      WriteCapacityUnits:
-        $ref: '#/definitions/PositiveLongObject'
-        description: '<code>WriteCapacityUnits</code> are in terms of strictly consistent reads, assuming items of 1k. 2k items require twice the <code>WriteCapacityUnits</code>.'
-    description: 'Provisioned throughput reserves the required read and write resources for your table in terms of <code>ReadCapacityUnits</code> and <code>WriteCapacityUnits</code>. Values for provisioned throughput depend upon your expected read/write rates, item size, and consistency. Provide the expected number of read and write operations, assuming an item size of 1k and strictly consistent reads. For 2k item size, double the value. For 3k, triple the value, etc. Eventually-consistent reads consume half the resources of strictly consistent reads.'
-  ProvisionedThroughputDescription:
+  ListTablesInput:
     type: object
     properties:
-      LastIncreaseDateTime:
-        $ref: '#/definitions/Date'
-      LastDecreaseDateTime:
-        $ref: '#/definitions/Date'
-      NumberOfDecreasesToday:
-        $ref: '#/definitions/PositiveLongObject'
-      ReadCapacityUnits:
-        $ref: '#/definitions/PositiveLongObject'
-      WriteCapacityUnits:
-        $ref: '#/definitions/PositiveLongObject'
-  ProvisionedThroughputExceededException:
+      ExclusiveStartTableName:
+        $ref: '#/definitions/TableName'
+        description: 'The name of the table that starts the list. If you already ran a <code>ListTables</code> operation and received a <code>LastEvaluatedTableName</code> value in the response, use that value here to continue the list.'
+      Limit:
+        $ref: '#/definitions/ListTablesInputLimit'
+  PutItemOutput:
     type: object
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: This exception is thrown when the level of provisioned throughput defined for the table is exceeded.
+      Attributes:
+        $ref: '#/definitions/AttributeMap'
+        description: 'Attribute values before the put operation, but only if the <code>ReturnValues</code> parameter is specified as <code>ALL_OLD</code> in the request.'
+      ConsumedCapacityUnits:
+        $ref: '#/definitions/ConsumedCapacityUnits'
   PutItemInput:
     type: object
     required:
@@ -1157,33 +828,19 @@ definitions:
         $ref: '#/definitions/ExpectedAttributeMap'
       ReturnValues:
         $ref: '#/definitions/ReturnValue'
-  PutItemInputAttributeMap:
-    type: array
-    description: 'A map of the attributes for the item, and must include the primary key values that define the item. Other attribute name-value pairs can be provided for the item.'
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/AttributeValue'
-  PutItemOutput:
+  QueryOutput:
     type: object
     properties:
-      Attributes:
-        $ref: '#/definitions/AttributeMap'
-        description: 'Attribute values before the put operation, but only if the <code>ReturnValues</code> parameter is specified as <code>ALL_OLD</code> in the request.'
+      Items:
+        $ref: '#/definitions/ItemList'
+      Count:
+        $ref: '#/definitions/Integer'
+        description: Number of items in the response.
+      LastEvaluatedKey:
+        $ref: '#/definitions/Key'
+        description: 'Primary key of the item where the query operation stopped, inclusive of the previous result set. Use this value to start a new operation excluding this value in the new request. The <code>LastEvaluatedKey</code> is null when the entire query result set is complete (i.e. the operation processed the "last page").'
       ConsumedCapacityUnits:
         $ref: '#/definitions/ConsumedCapacityUnits'
-  PutRequest:
-    type: object
-    required:
-      - Item
-    properties:
-      Item:
-        $ref: '#/definitions/PutItemInputAttributeMap'
-        description: The item to put
-    description: A container for a Put BatchWrite request
   QueryInput:
     type: object
     required:
@@ -1215,7 +872,7 @@ definitions:
       ExclusiveStartKey:
         $ref: '#/definitions/Key'
         description: Primary key of the item from which to continue an earlier query. An earlier query might provide this value as the <code>LastEvaluatedKey</code> if that query operation was interrupted before completing the query; either because of the result set size or the <code>Limit</code> parameter. The <code>LastEvaluatedKey</code> can be passed back in a new query request to continue the operation from that point.
-  QueryOutput:
+  ScanOutput:
     type: object
     properties:
       Items:
@@ -1223,38 +880,14 @@ definitions:
       Count:
         $ref: '#/definitions/Integer'
         description: Number of items in the response.
+      ScannedCount:
+        $ref: '#/definitions/Integer'
+        description: 'Number of items in the complete scan before any filters are applied. A high <code>ScannedCount</code> value with few, or no, <code>Count</code> results indicates an inefficient <code>Scan</code> operation.'
       LastEvaluatedKey:
         $ref: '#/definitions/Key'
-        description: 'Primary key of the item where the query operation stopped, inclusive of the previous result set. Use this value to start a new operation excluding this value in the new request. The <code>LastEvaluatedKey</code> is null when the entire query result set is complete (i.e. the operation processed the "last page").'
+        description: Primary key of the item where the scan operation stopped. Provide this value in a subsequent scan operation to continue the operation from that point. The <code>LastEvaluatedKey</code> is null when the entire scan result set is complete (i.e. the operation processed the "last page").
       ConsumedCapacityUnits:
         $ref: '#/definitions/ConsumedCapacityUnits'
-  ResourceInUseException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: This exception is thrown when the resource which is being attempted to be changed is in use.
-  ResourceNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: This exception is thrown when the resource which is being attempted to be changed is in use.
-  ReturnValue:
-    type: string
-    enum:
-      - NONE
-      - ALL_OLD
-      - UPDATED_OLD
-      - ALL_NEW
-      - UPDATED_NEW
-    description: '<p>Use this parameter if you want to get the attribute name-value pairs before or after they are modified. For <code>PUT</code> operations, the possible parameter values are <code>NONE</code> (default) or <code>ALL_OLD</code>. For update operations, the possible parameter values are <code>NONE</code> (default) or <code>ALL_OLD</code>, <code>UPDATED_OLD</code>, <code>ALL_NEW</code> or <code>UPDATED_NEW</code>.</p> <ul> <li><code>NONE</code>: Nothing is returned.</li> <li><code>ALL_OLD</code>: Returns the attributes of the item as they were before the operation.</li> <li><code>UPDATED_OLD</code>: Returns the values of the updated attributes, only, as they were before the operation.</li> <li><code>ALL_NEW</code>: Returns all the attributes and their new values after the operation.</li> <li><code>UPDATED_NEW</code>: Returns the values of the updated attributes, only, as they are after the operation.</li> </ul>'
-  ScalarAttributeType:
-    type: string
-    enum:
-      - S
-      - 'N'
-      - B
   ScanInput:
     type: object
     required:
@@ -1277,64 +910,14 @@ definitions:
       ExclusiveStartKey:
         $ref: '#/definitions/Key'
         description: Primary key of the item from which to continue an earlier scan. An earlier scan might provide this value if that scan operation was interrupted before scanning the entire table; either because of the result set size or the <code>Limit</code> parameter. The <code>LastEvaluatedKey</code> can be passed back in a new scan request to continue the operation from that point.
-  ScanOutput:
+  UpdateItemOutput:
     type: object
     properties:
-      Items:
-        $ref: '#/definitions/ItemList'
-      Count:
-        $ref: '#/definitions/Integer'
-        description: Number of items in the response.
-      ScannedCount:
-        $ref: '#/definitions/Integer'
-        description: 'Number of items in the complete scan before any filters are applied. A high <code>ScannedCount</code> value with few, or no, <code>Count</code> results indicates an inefficient <code>Scan</code> operation.'
-      LastEvaluatedKey:
-        $ref: '#/definitions/Key'
-        description: Primary key of the item where the scan operation stopped. Provide this value in a subsequent scan operation to continue the operation from that point. The <code>LastEvaluatedKey</code> is null when the entire scan result set is complete (i.e. the operation processed the "last page").
+      Attributes:
+        $ref: '#/definitions/AttributeMap'
+        description: 'A map of attribute name-value pairs, but only if the <code>ReturnValues</code> parameter is specified as something other than <code>NONE</code> in the request.'
       ConsumedCapacityUnits:
         $ref: '#/definitions/ConsumedCapacityUnits'
-  String:
-    type: string
-  StringAttributeValue:
-    type: string
-  StringSetAttributeValue:
-    type: array
-    items:
-      $ref: '#/definitions/StringAttributeValue'
-  TableDescription:
-    type: object
-    properties:
-      TableName:
-        $ref: '#/definitions/TableName'
-        description: The name of the table being described.
-      KeySchema:
-        $ref: '#/definitions/KeySchema'
-      TableStatus:
-        $ref: '#/definitions/TableStatus'
-      CreationDateTime:
-        $ref: '#/definitions/Date'
-      ProvisionedThroughput:
-        $ref: '#/definitions/ProvisionedThroughputDescription'
-      TableSizeBytes:
-        $ref: '#/definitions/Long'
-      ItemCount:
-        $ref: '#/definitions/Long'
-  TableName:
-    type: string
-    pattern: '[a-zA-Z0-9_.-]+'
-    minLength: 3
-    maxLength: 255
-  TableNameList:
-    type: array
-    items:
-      $ref: '#/definitions/TableName'
-  TableStatus:
-    type: string
-    enum:
-      - CREATING
-      - UPDATING
-      - DELETING
-      - ACTIVE
   UpdateItemInput:
     type: object
     required:
@@ -1353,14 +936,11 @@ definitions:
         $ref: '#/definitions/ExpectedAttributeMap'
       ReturnValues:
         $ref: '#/definitions/ReturnValue'
-  UpdateItemOutput:
+  UpdateTableOutput:
     type: object
     properties:
-      Attributes:
-        $ref: '#/definitions/AttributeMap'
-        description: 'A map of attribute name-value pairs, but only if the <code>ReturnValues</code> parameter is specified as something other than <code>NONE</code> in the request.'
-      ConsumedCapacityUnits:
-        $ref: '#/definitions/ConsumedCapacityUnits'
+      TableDescription:
+        $ref: '#/definitions/TableDescription'
   UpdateTableInput:
     type: object
     required:
@@ -1372,11 +952,405 @@ definitions:
         description: 'The name of the table you want to update. Allowed characters are <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>_</code> (underscore), <code>-</code> (hyphen) and <code>.</code> (period).'
       ProvisionedThroughput:
         $ref: '#/definitions/ProvisionedThroughput'
-  UpdateTableOutput:
+  AttributeAction:
+    type: string
+    enum:
+      - ADD
+      - PUT
+      - DELETE
+    description: 'The type of action for an item update operation. Only use the add action for numbers or sets; the specified value is added to the existing value. If a set of values is specified, the values are added to the existing set. Adds the specified attribute. If the attribute exists, it is replaced by the new value. If no value is specified, this removes the attribute and its value. If a set of values is specified, then the values in the specified set are removed from the old set.'
+  AttributeName:
+    type: string
+    maxLength: 65535
+  AttributeValue:
     type: object
     properties:
-      TableDescription:
-        $ref: '#/definitions/TableDescription'
+      S:
+        $ref: '#/definitions/StringAttributeValue'
+        description: Strings are Unicode with UTF-8 binary encoding. The maximum size is limited by the size of the primary key (1024 bytes as a range part of a key or 2048 bytes as a single part hash key) or the item size (64k).
+      'N':
+        $ref: '#/definitions/NumberAttributeValue'
+        description: Numbers are positive or negative exact-value decimals and integers. A number can have up to 38 digits precision and can be between 10^-128 to 10^+126.
+      B:
+        $ref: '#/definitions/BinaryAttributeValue'
+        description: Binary attributes are sequences of unsigned bytes.
+      SS:
+        $ref: '#/definitions/StringSetAttributeValue'
+        description: A set of strings.
+      NS:
+        $ref: '#/definitions/NumberSetAttributeValue'
+        description: A set of numbers.
+      BS:
+        $ref: '#/definitions/BinarySetAttributeValue'
+        description: A set of binary attributes.
+    description: 'AttributeValue can be <code>String</code>, <code>Number</code>, <code>Binary</code>, <code>StringSet</code>, <code>NumberSet</code>, <code>BinarySet</code>.'
+  AttributeMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeName'
+        value:
+          $ref: '#/definitions/AttributeValue'
+  AttributeNameList:
+    type: array
+    description: 'List of <code>Attribute</code> names. If attribute names are not specified then all attributes will be returned. If some attributes are not found, they will not appear in the result.'
+    items:
+      $ref: '#/definitions/AttributeName'
+    minItems: 1
+  AttributeValueUpdate:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/AttributeValue'
+      Action:
+        $ref: '#/definitions/AttributeAction'
+    description: 'Specifies the attribute to update and how to perform the update. Possible values: <code>PUT</code> (default), <code>ADD</code> or <code>DELETE</code>.'
+  AttributeUpdates:
+    type: array
+    description: 'Map of attribute name to the new value and action for the update. The attribute names specify the attributes to modify, and cannot contain any primary key attributes.'
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeName'
+        value:
+          $ref: '#/definitions/AttributeValueUpdate'
+  StringAttributeValue:
+    type: string
+  NumberAttributeValue:
+    type: string
+  BinaryAttributeValue:
+    type: string
+  StringSetAttributeValue:
+    type: array
+    items:
+      $ref: '#/definitions/StringAttributeValue'
+  NumberSetAttributeValue:
+    type: array
+    items:
+      $ref: '#/definitions/NumberAttributeValue'
+  BinarySetAttributeValue:
+    type: array
+    items:
+      $ref: '#/definitions/BinaryAttributeValue'
+  AttributeValueList:
+    type: array
+    description: 'A list of attribute values to be used with a comparison operator for a scan or query operation. For comparisons that require more than one value, such as a <code>BETWEEN</code> comparison, the AttributeValueList contains two attribute values and the comparison operator.'
+    items:
+      $ref: '#/definitions/AttributeValue'
+  BatchGetRequestMap:
+    type: array
+    description: 'A map of the table name and corresponding items to get by primary key. While requesting items, each table name can be invoked only once per operation.'
+    minItems: 1
+    maxItems: 100
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TableName'
+        value:
+          $ref: '#/definitions/KeysAndAttributes'
+  BatchGetResponseMap:
+    type: array
+    description: Table names and the respective item attributes from the tables.
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TableName'
+        value:
+          $ref: '#/definitions/BatchResponse'
+  TableName:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 3
+    maxLength: 255
+  KeysAndAttributes:
+    type: object
+    required:
+      - Keys
+    properties:
+      Keys:
+        $ref: '#/definitions/KeyList'
+      AttributesToGet:
+        $ref: '#/definitions/AttributeNameList'
+      ConsistentRead:
+        $ref: '#/definitions/ConsistentRead'
+  BatchResponse:
+    type: object
+    properties:
+      Items:
+        $ref: '#/definitions/ItemList'
+      ConsumedCapacityUnits:
+        $ref: '#/definitions/ConsumedCapacityUnits'
+    description: 'The item attributes from a response in a specific table, along with the read resources consumed on the table during the request.'
+  ItemList:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeMap'
+  ConsumedCapacityUnits:
+    type: number
+    description: 'The number of Capacity Units of the provisioned throughput of the table consumed during the operation. <code>GetItem</code>, <code>BatchGetItem</code>, <code>BatchWriteItem</code>, <code>Query</code>, and <code>Scan</code> operations consume <code>ReadCapacityUnits</code>, while <code>PutItem</code>, <code>UpdateItem</code>, and <code>DeleteItem</code> operations consume <code>WriteCapacityUnits</code>.'
+    format: double
+  BatchWriteItemRequestMap:
+    type: array
+    description: '<p>A map of table name to list-of-write-requests.</p> <p>Key: The table name corresponding to the list of requests</p> <p>Value: Essentially a list of request items. Each request item could contain either a <code>PutRequest</code> or <code>DeleteRequest</code>. Never both.</p>'
+    minItems: 1
+    maxItems: 25
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TableName'
+        value:
+          $ref: '#/definitions/WriteRequests'
+  BatchWriteResponseMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TableName'
+        value:
+          $ref: '#/definitions/BatchWriteResponse'
+  WriteRequests:
+    type: array
+    items:
+      $ref: '#/definitions/WriteRequest'
+    minItems: 1
+    maxItems: 25
+  BatchWriteResponse:
+    type: object
+    properties:
+      ConsumedCapacityUnits:
+        $ref: '#/definitions/ConsumedCapacityUnits'
+  BooleanObject:
+    type: boolean
+  ComparisonOperator:
+    type: string
+    enum:
+      - EQ
+      - NE
+      - IN
+      - LE
+      - LT
+      - GE
+      - GT
+      - BETWEEN
+      - NOT_NULL
+      - 'NULL'
+      - CONTAINS
+      - NOT_CONTAINS
+      - BEGINS_WITH
+    description: '<p>A comparison operator is an enumeration of several operations:</p> <ul> <li><code>EQ</code> for <em>equal</em>.</li> <li><code>NE</code> for <em>not equal</em>.</li> <li><code>IN</code> checks for exact matches.</li> <li><code>LE</code> for <em>less than or equal to</em>.</li> <li><code>LT</code> for <em>less than</em>.</li> <li><code>GE</code> for <em>greater than or equal to</em>.</li> <li><code>GT</code> for <em>greater than</em>.</li> <li><code>BETWEEN</code> for <em>between</em>.</li> <li><code>NOT_NULL</code> for <em>exists</em>.</li> <li><code>NULL</code> for <em>not exists</em>.</li> <li><code>CONTAINS</code> for substring or value in a set.</li> <li><code>NOT_CONTAINS</code> for absence of a substring or absence of a value in a set.</li> <li><code>BEGINS_WITH</code> for a substring prefix.</li> </ul> <p>Scan operations support all available comparison operators.</p> <p>Query operations support a subset of the available comparison operators: EQ, LE, LT, GE, GT, BETWEEN, and BEGINS_WITH.</p>'
+  Condition:
+    type: object
+    required:
+      - ComparisonOperator
+    properties:
+      AttributeValueList:
+        $ref: '#/definitions/AttributeValueList'
+      ComparisonOperator:
+        $ref: '#/definitions/ComparisonOperator'
+  ConsistentRead:
+    type: boolean
+    description: 'If set to <code>true</code>, then a consistent read is issued. Otherwise eventually-consistent is used.'
+  KeySchema:
+    type: object
+    required:
+      - HashKeyElement
+    properties:
+      HashKeyElement:
+        $ref: '#/definitions/KeySchemaElement'
+        description: 'A hash key element is treated as the primary key, and can be a string or a number. Single attribute primary keys have one index value. The value can be <code>String</code>, <code>Number</code>, <code>StringSet</code>, <code>NumberSet</code>.'
+      RangeKeyElement:
+        $ref: '#/definitions/KeySchemaElement'
+        description: 'A range key element is treated as a secondary key (used in conjunction with the primary key), and can be a string or a number, and is only used for hash-and-range primary keys. The value can be <code>String</code>, <code>Number</code>, <code>StringSet</code>, <code>NumberSet</code>.'
+    description: 'The KeySchema identifies the primary key as a one attribute primary key (hash) or a composite two attribute (hash-and-range) primary key. Single attribute primary keys have one index value: a <code>HashKeyElement</code>. A composite hash-and-range primary key contains two attribute values: a <code>HashKeyElement</code> and a <code>RangeKeyElement</code>.'
+  ProvisionedThroughput:
+    type: object
+    required:
+      - ReadCapacityUnits
+      - WriteCapacityUnits
+    properties:
+      ReadCapacityUnits:
+        $ref: '#/definitions/PositiveLongObject'
+        description: '<code>ReadCapacityUnits</code> are in terms of strictly consistent reads, assuming items of 1k. 2k items require twice the <code>ReadCapacityUnits</code>. Eventually-consistent reads only require half the <code>ReadCapacityUnits</code> of stirctly consistent reads.'
+      WriteCapacityUnits:
+        $ref: '#/definitions/PositiveLongObject'
+        description: '<code>WriteCapacityUnits</code> are in terms of strictly consistent reads, assuming items of 1k. 2k items require twice the <code>WriteCapacityUnits</code>.'
+    description: 'Provisioned throughput reserves the required read and write resources for your table in terms of <code>ReadCapacityUnits</code> and <code>WriteCapacityUnits</code>. Values for provisioned throughput depend upon your expected read/write rates, item size, and consistency. Provide the expected number of read and write operations, assuming an item size of 1k and strictly consistent reads. For 2k item size, double the value. For 3k, triple the value, etc. Eventually-consistent reads consume half the resources of strictly consistent reads.'
+  TableDescription:
+    type: object
+    properties:
+      TableName:
+        $ref: '#/definitions/TableName'
+        description: The name of the table being described.
+      KeySchema:
+        $ref: '#/definitions/KeySchema'
+      TableStatus:
+        $ref: '#/definitions/TableStatus'
+      CreationDateTime:
+        $ref: '#/definitions/Date'
+      ProvisionedThroughput:
+        $ref: '#/definitions/ProvisionedThroughputDescription'
+      TableSizeBytes:
+        $ref: '#/definitions/Long'
+      ItemCount:
+        $ref: '#/definitions/Long'
+  Date:
+    type: string
+    format: date-time
+  Key:
+    type: object
+    required:
+      - HashKeyElement
+    properties:
+      HashKeyElement:
+        $ref: '#/definitions/AttributeValue'
+        description: 'A hash key element is treated as the primary key, and can be a string or a number. Single attribute primary keys have one index value. The value can be <code>String</code>, <code>Number</code>, <code>StringSet</code>, <code>NumberSet</code>.'
+      RangeKeyElement:
+        $ref: '#/definitions/AttributeValue'
+        description: 'A range key element is treated as a secondary key (used in conjunction with the primary key), and can be a string or a number, and is only used for hash-and-range primary keys. The value can be <code>String</code>, <code>Number</code>, <code>StringSet</code>, <code>NumberSet</code>.'
+    description: The primary key that uniquely identifies each item in a table. A primary key can be a one attribute (hash) primary key or a two attribute (hash-and-range) primary key.
+  ExpectedAttributeMap:
+    type: array
+    description: 'Designates an attribute for a conditional modification. The <code>Expected</code> parameter allows you to provide an attribute name, and whether or not Amazon DynamoDB should check to see if the attribute has a particular value before modifying it.'
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeName'
+        value:
+          $ref: '#/definitions/ExpectedAttributeValue'
+  ReturnValue:
+    type: string
+    enum:
+      - NONE
+      - ALL_OLD
+      - UPDATED_OLD
+      - ALL_NEW
+      - UPDATED_NEW
+    description: '<p>Use this parameter if you want to get the attribute name-value pairs before or after they are modified. For <code>PUT</code> operations, the possible parameter values are <code>NONE</code> (default) or <code>ALL_OLD</code>. For update operations, the possible parameter values are <code>NONE</code> (default) or <code>ALL_OLD</code>, <code>UPDATED_OLD</code>, <code>ALL_NEW</code> or <code>UPDATED_NEW</code>.</p> <ul> <li><code>NONE</code>: Nothing is returned.</li> <li><code>ALL_OLD</code>: Returns the attributes of the item as they were before the operation.</li> <li><code>UPDATED_OLD</code>: Returns the values of the updated attributes, only, as they were before the operation.</li> <li><code>ALL_NEW</code>: Returns all the attributes and their new values after the operation.</li> <li><code>UPDATED_NEW</code>: Returns the values of the updated attributes, only, as they are after the operation.</li> </ul>'
+  DeleteRequest:
+    type: object
+    required:
+      - Key
+    properties:
+      Key:
+        $ref: '#/definitions/Key'
+        description: The item's key to be delete
+    description: A container for a Delete BatchWrite request
+  ExpectedAttributeValue:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/AttributeValue'
+        description: Specify whether or not a value already exists and has a specific content for the attribute name-value pair.
+      Exists:
+        $ref: '#/definitions/BooleanObject'
+        description: Specify whether or not a value already exists for the attribute name-value pair.
+    description: 'Allows you to provide an attribute name, and whether or not Amazon DynamoDB should check to see if the attribute value already exists; or if the attribute value exists and has a particular value before changing it.'
+  String:
+    type: string
+  FilterConditionMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/Condition'
+  Integer:
+    type: integer
+  KeyList:
+    type: array
+    items:
+      $ref: '#/definitions/Key'
+    minItems: 1
+    maxItems: 100
+  KeySchemaElement:
+    type: object
+    required:
+      - AttributeName
+      - AttributeType
+    properties:
+      AttributeName:
+        $ref: '#/definitions/KeySchemaAttributeName'
+        description: The <code>AttributeName</code> of the <code>KeySchemaElement</code>.
+      AttributeType:
+        $ref: '#/definitions/ScalarAttributeType'
+        description: The <code>AttributeType</code> of the <code>KeySchemaElement</code> which can be a <code>String</code> or a <code>Number</code>.
+    description: <code>KeySchemaElement</code> is the primary key (hash or hash-and-range) structure for the table.
+  KeySchemaAttributeName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  ScalarAttributeType:
+    type: string
+    enum:
+      - S
+      - 'N'
+      - B
+  ListTablesInputLimit:
+    type: integer
+    description: A number of maximum table names to return.
+    minimum: 1
+    maximum: 100
+  TableNameList:
+    type: array
+    items:
+      $ref: '#/definitions/TableName'
+  Long:
+    type: integer
+  PositiveIntegerObject:
+    type: integer
+    minimum: 1
+  PositiveLongObject:
+    type: integer
+    minimum: 1
+  ProvisionedThroughputDescription:
+    type: object
+    properties:
+      LastIncreaseDateTime:
+        $ref: '#/definitions/Date'
+      LastDecreaseDateTime:
+        $ref: '#/definitions/Date'
+      NumberOfDecreasesToday:
+        $ref: '#/definitions/PositiveLongObject'
+      ReadCapacityUnits:
+        $ref: '#/definitions/PositiveLongObject'
+      WriteCapacityUnits:
+        $ref: '#/definitions/PositiveLongObject'
+  PutItemInputAttributeMap:
+    type: array
+    description: 'A map of the attributes for the item, and must include the primary key values that define the item. Other attribute name-value pairs can be provided for the item.'
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeName'
+        value:
+          $ref: '#/definitions/AttributeValue'
+  PutRequest:
+    type: object
+    required:
+      - Item
+    properties:
+      Item:
+        $ref: '#/definitions/PutItemInputAttributeMap'
+        description: The item to put
+    description: A container for a Put BatchWrite request
+  TableStatus:
+    type: string
+    enum:
+      - CREATING
+      - UPDATING
+      - DELETING
+      - ACTIVE
   WriteRequest:
     type: object
     properties:
@@ -1385,9 +1359,3 @@ definitions:
       DeleteRequest:
         $ref: '#/definitions/DeleteRequest'
     description: This structure is a Union of PutRequest and DeleteRequest. It can contain exactly one of <code>PutRequest</code> or <code>DeleteRequest</code>. Never Both. This is enforced in the code.
-  WriteRequests:
-    type: array
-    items:
-      $ref: '#/definitions/WriteRequest'
-    minItems: 1
-    maxItems: 25

@@ -136,6 +136,19 @@ paths:
           name: timeVolume
           required: false
           type: string
+        - description: For 'TIMEVOLUME' license type.
+          in: formData
+          items:
+            default: DAY
+            enum:
+              - DAY
+              - WEEK
+              - MONTH
+              - YEAR
+            type: string
+          name: timeVolumePeriod
+          required: false
+          type: string
         - description: Mandatory for 'TIMEVOLUME' license type.
           format: date-time
           in: formData
@@ -158,6 +171,16 @@ paths:
           name: hidden
           required: false
           type: boolean
+        - description: Mandatory for 'Pay-per-Use' license model.
+          in: formData
+          name: quantity
+          required: false
+          type: string
+        - description: Mandatory for 'Pay-per-Use' license model.
+          in: formData
+          name: usedQuantity
+          required: false
+          type: string
       responses:
         '200':
           description: Successful request
@@ -266,8 +289,22 @@ paths:
           name: parentfeature
           required: false
           type: string
-        - in: formData
+        - description: Mandatory for 'TIMEVOLUME' license type.
+          in: formData
           name: timeVolume
+          required: false
+          type: string
+        - description: For 'TIMEVOLUME' license type.
+          in: formData
+          items:
+            default: DAY
+            enum:
+              - DAY
+              - WEEK
+              - MONTH
+              - YEAR
+            type: string
+          name: timeVolumePeriod
           required: false
           type: string
         - description: 'Price for the license. If > 0, it must always be accompanied by the currency specification. Read-only, set from license template on creation'
@@ -286,6 +323,16 @@ paths:
           name: hidden
           required: false
           type: boolean
+        - description: Mandatory for 'Pay-per-Use' license model.
+          in: formData
+          name: quantity
+          required: false
+          type: string
+        - description: Mandatory for 'Pay-per-Use' license model.
+          in: formData
+          name: usedQuantity
+          required: false
+          type: string
       responses:
         '200':
           description: Successful request
@@ -625,7 +672,7 @@ paths:
           required: true
           type: boolean
         - collectionFormat: multi
-          description: 'type of licenses created from this license template. Supported types: FEATURE, TIMEVOLUME'
+          description: 'type of licenses created from this license template. Supported types: FEATURE, TIMEVOLUME, FLOATING, QUANTITY'
           in: formData
           items:
             default: FEATURE
@@ -633,13 +680,27 @@ paths:
               - FEATURE
               - TIMEVOLUME
               - FLOATING
+              - QUANTITY
             type: string
           name: licenseType
           required: true
-          type: array
+          type: string
         - description: Mandatory for 'TIMEVOLUME' license type.
           in: formData
           name: timeVolume
+          required: false
+          type: string
+        - description: For 'TIMEVOLUME' license type.
+          in: formData
+          items:
+            default: DAY
+            enum:
+              - DAY
+              - WEEK
+              - MONTH
+              - YEAR
+            type: string
+          name: timeVolumePeriod
           required: false
           type: string
         - description: Mandatory for 'FLOATING' license type.
@@ -673,6 +734,11 @@ paths:
           name: hideLicenses
           required: false
           type: boolean
+        - description: Mandatory for 'Pay-per-Use' license model.
+          in: formData
+          name: quantity
+          required: false
+          type: string
       responses:
         '200':
           description: Successful request
@@ -780,7 +846,7 @@ paths:
           required: false
           type: boolean
         - collectionFormat: multi
-          description: 'type of licenses created from this license template. Supported types: FEATURE, TIMEVOLUME, FLOATING'
+          description: 'type of licenses created from this license template. Supported types: FEATURE, TIMEVOLUME, FLOATING, QUANTITY'
           in: formData
           items:
             default: FEATURE
@@ -788,13 +854,27 @@ paths:
               - FEATURE
               - TIMEVOLUME
               - FLOATING
+              - QUANTITY
             type: string
           name: licenseType
           required: false
-          type: array
+          type: string
         - description: Mandatory for 'TIMEVOLUME' license type.
           in: formData
           name: timeVolume
+          required: false
+          type: string
+        - description: For 'TIMEVOLUME' license type.
+          in: formData
+          items:
+            default: DAY
+            enum:
+              - DAY
+              - WEEK
+              - MONTH
+              - YEAR
+            type: string
+          name: timeVolumePeriod
           required: false
           type: string
         - description: Mandatory for 'FLOATING' license type.
@@ -828,6 +908,11 @@ paths:
           name: hideLicenses
           required: false
           type: boolean
+        - description: Mandatory for 'Pay-per-Use' license model.
+          in: formData
+          name: quantity
+          required: false
+          type: string
       responses:
         '200':
           description: Successful request
@@ -1240,10 +1325,13 @@ paths:
               - TryAndBuy
               - Rental
               - Floating
+              - MultiFeature
+              - PayPerUse
+              - Quota
             type: string
           name: licensingModel
           required: true
-          type: array
+          type: string
         - description: Maximum checkout validity (days). Mandatory for 'Floating' licensing model.
           format: int32
           in: formData
@@ -1390,7 +1478,7 @@ paths:
             type: string
           name: licensingModel
           required: false
-          type: array
+          type: string
         - description: Maximum checkout validity (days). Mandatory for 'Floating' licensing model.
           format: int32
           in: formData

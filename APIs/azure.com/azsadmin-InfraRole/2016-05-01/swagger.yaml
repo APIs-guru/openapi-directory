@@ -1,0 +1,563 @@
+swagger: '2.0'
+schemes:
+  - https
+host: adminmanagement.local.azurestack.external
+info:
+  description: InfraRole operation endpoints and objects.
+  title: FabricAdminClient
+  version: '2016-05-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/stable/2016-05-01/InfraRole.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: azsadmin-InfraRole
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  InfraRoleParameter:
+    description: Infra role name.
+    in: path
+    name: infraRole
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoles':
+    get:
+      description: Get a list of all infra roles at a location.
+      operationId: InfraRoles_List
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: OData filter parameter.
+          in: query
+          name: $filter
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/InfraRoleList'
+      tags:
+        - InfraRoles
+      x-ms-examples:
+        List all infra roles:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Active Directory Federation Services
+                    location: local
+                    name: Active Directory Federation Services
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-ADFS01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Authorization service (Administrator)
+                    location: local
+                    name: Authorization service (Administrator)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WAS01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Authorization service (User)
+                    location: local
+                    name: Authorization service (User)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WASP01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Azure bridge
+                    location: local
+                    name: Azure bridge
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WAS01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Azure Resource Manager (Administrator)
+                    location: local
+                    name: Azure Resource Manager (Administrator)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WAS01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Azure Resource Manager (User)
+                    location: local
+                    name: Azure Resource Manager (User)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WASP01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Backup controller
+                    location: local
+                    name: Backup controller
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-ERCS01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Backup Restore Resource Provider
+                    location: local
+                    name: Backup Restore Resource Provider
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Capacity
+                    location: local
+                    name: Capacity
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Certificate management
+                    location: local
+                    name: Certificate management
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-CA01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Compute
+                    location: local
+                    name: Compute
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Compute controller
+                    location: local
+                    name: Compute controller
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Directory management
+                    location: local
+                    name: Directory management
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-DC01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Edge gateway
+                    location: local
+                    name: Edge gateway
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Gwy01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Gallery service (Administrator)
+                    location: local
+                    name: Gallery service (Administrator)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WAS01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Gallery service (User)
+                    location: local
+                    name: Gallery service (User)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WASP01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Health controller
+                    location: local
+                    name: Health controller
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Infrastructure deployment
+                    location: local
+                    name: Infrastructure deployment
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-ERCS01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Infrastructure management controller
+                    location: local
+                    name: Infrastructure management controller
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Infrastructure role controller
+                    location: local
+                    name: Infrastructure role controller
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Insights service (Administrator)
+                    location: local
+                    name: Insights service (Administrator)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WAS01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Insights service (User)
+                    location: local
+                    name: Insights service (User)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WASP01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Internal data store
+                    location: local
+                    name: Internal data store
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Sql01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Key Vault
+                    location: local
+                    name: Key Vault
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Key Vault controller (Administrator)
+                    location: local
+                    name: Key Vault controller (Administrator)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Key Vault controller (User)
+                    location: local
+                    name: Key Vault controller (User)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Key Vault name manager
+                    location: local
+                    name: Key Vault name manager
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Key Vault service (Administrator)
+                    location: local
+                    name: Key Vault service (Administrator)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Key Vault service (User)
+                    location: local
+                    name: Key Vault service (User)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Load balancer multiplexer
+                    location: local
+                    name: Load balancer multiplexer
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-SLB01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Network
+                    location: local
+                    name: Network
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Network controller
+                    location: local
+                    name: Network controller
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-NC01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Partition request broker (Administrator)
+                    location: local
+                    name: Partition request broker (Administrator)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Partition request broker (User)
+                    location: local
+                    name: Partition request broker (User)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Portal (Administrator)
+                    location: local
+                    name: Portal (Administrator)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WAS01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Portal (User)
+                    location: local
+                    name: Portal (User)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WASP01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Privileged endpoint
+                    location: local
+                    name: Privileged endpoint
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-ERCS01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Region Management
+                    location: local
+                    name: Region Management
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Storage
+                    location: local
+                    name: Storage
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Storage controller
+                    location: local
+                    name: Storage controller
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Storage services
+                    location: local
+                    name: Storage services
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-ACS01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Subscriptions service
+                    location: local
+                    name: Subscriptions service
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WAS01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Updates
+                    location: local
+                    name: Updates
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Usage Bridge host
+                    location: local
+                    name: Usage Bridge host
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-Xrp01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Usage service (Administrator)
+                    location: local
+                    name: Usage service (Administrator)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WAS01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Usage service (User)
+                    location: local
+                    name: Usage service (User)
+                    properties:
+                      instances:
+                        - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-WASP01
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+      x-ms-odata: '#/definitions/InfraRole'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoles/{infraRole}':
+    get:
+      description: Get an infra role description.
+      operationId: InfraRoles_Get
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/InfraRoleParameter'
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/InfraRole'
+      tags:
+        - InfraRoles
+      x-ms-examples:
+        Get a infra role:
+          parameters:
+            api-version: '2016-05-01'
+            infraRole: Storage services
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/Storage services
+                location: local
+                name: Storage services
+                properties:
+                  instances:
+                    - subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoleInstances/AzS-ACS01
+                tags: {}
+                type: Microsoft.Fabric.Admin/fabricLocations/infraRoles
+definitions:
+  InfraRole:
+    allOf:
+      - description: Base Resource Object
+        properties:
+          id:
+            description: URI of the resource.
+            readOnly: true
+            type: string
+          location:
+            description: Region Location of resource.
+            type: string
+          name:
+            description: Name of the resource.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: List of key value pairs.
+            type: object
+          type:
+            description: Type of resource.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
+    description: Get an infra role description.
+    properties:
+      properties:
+        $ref: '#/definitions/InfraRoleModel'
+        description: Infra role properties.
+        x-ms-client-flatten: true
+    type: object
+  InfraRoleList:
+    description: Pageable list of infra roles.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: List of infra roles for this page.
+        items:
+          $ref: '#/definitions/InfraRole'
+        type: array
+    type: object
+  InfraRoleModel:
+    description: Infra role properties.
+    properties:
+      instances:
+        description: List of infra role instances.
+        items:
+          type: string
+        type: array
+    type: object

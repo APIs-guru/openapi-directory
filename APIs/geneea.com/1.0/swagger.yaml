@@ -95,14 +95,12 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: swagger
       url: 'https://api.geneea.com/api-docs?group=s1'
       version: '1.2'
   x-providerName: geneea.com
 consumes:
-  - application/json
-produces:
   - application/json
 securityDefinitions:
   user_key:
@@ -116,17 +114,21 @@ tags:
     name: account
   - description: Geneea simple REST API version 1
     name: geneea-api-s1
+  - description: REST API for status monitoring
+    name: status-api
 paths:
   /account:
     get:
       deprecated: false
       description: getInfo
       operationId: getInfo
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Information_about_a_user_account.'
+            $ref: '#/definitions/Information%20about%20a%20user%20account.'
         '401':
           description: Unauthorized
         '403':
@@ -142,6 +144,11 @@ paths:
       description: '<br/><strong>Possible options:</strong><p class="markdown">An optional parameter <code>diacritize</code> with values <code>yes</code>, <code>no</code> or <code>auto</code> indicate whether the text diacritization will be performed. The default value is <code>auto</code>.</p>'
       operationId: correctionGet
       parameters:
+        - description: document ID
+          in: query
+          name: id
+          required: false
+          type: string
         - description: raw document text
           in: query
           name: text
@@ -170,11 +177,13 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Response_for_the_text_correction'
+            $ref: '#/definitions/Response%20for%20the%20text%20correction'
         '401':
           description: Unauthorized
         '403':
@@ -195,11 +204,13 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
+      produces:
+        - application/json
       responses:
         '200':
           description: Description was not specified
           schema:
-            $ref: '#/definitions/Response_for_the_text_correction'
+            $ref: '#/definitions/Response%20for%20the%20text%20correction'
         '201':
           description: Created
         '401':
@@ -217,6 +228,11 @@ paths:
       description: entitiesGet
       operationId: entitiesGet
       parameters:
+        - description: document ID
+          in: query
+          name: id
+          required: false
+          type: string
         - description: raw document text
           in: query
           name: text
@@ -245,6 +261,8 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -270,6 +288,8 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
+      produces:
+        - application/json
       responses:
         '200':
           description: Description was not specified
@@ -292,6 +312,11 @@ paths:
       description: lemmatizeGet
       operationId: lemmatizeGet
       parameters:
+        - description: document ID
+          in: query
+          name: id
+          required: false
+          type: string
         - description: raw document text
           in: query
           name: text
@@ -320,6 +345,8 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -345,6 +372,8 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
+      produces:
+        - application/json
       responses:
         '200':
           description: Description was not specified
@@ -367,6 +396,11 @@ paths:
       description: sentimentGet
       operationId: sentimentGet
       parameters:
+        - description: document ID
+          in: query
+          name: id
+          required: false
+          type: string
         - description: raw document text
           in: query
           name: text
@@ -395,6 +429,8 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -420,6 +456,8 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
+      produces:
+        - application/json
       responses:
         '200':
           description: Description was not specified
@@ -442,6 +480,11 @@ paths:
       description: topicGet
       operationId: topicGet
       parameters:
+        - description: document ID
+          in: query
+          name: id
+          required: false
+          type: string
         - description: raw document text
           in: query
           name: text
@@ -470,6 +513,8 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -495,6 +540,8 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
+      produces:
+        - application/json
       responses:
         '200':
           description: Description was not specified
@@ -511,6 +558,28 @@ paths:
       summary: Performs topic detection on the given document
       tags:
         - geneea-api-s1
+  /status:
+    get:
+      deprecated: false
+      description: status
+      operationId: status
+      produces:
+        - text/plain
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Gets status of the Interpretor service
+      tags:
+        - status-api
 definitions:
   EntitiesResponse:
     description: Response for the named-entity recognition
@@ -520,6 +589,9 @@ definitions:
         items:
           $ref: '#/definitions/Entity'
         type: array
+      id:
+        description: Unique identifier of the document
+        type: string
       language:
         description: The used language of the document
         type: string
@@ -559,7 +631,17 @@ definitions:
       key:
         format: int64
         type: integer
-  Information_about_a_user_account.: {}
+  Information about a user account.: {}
+  Information_about_a_user_account.:
+    properties:
+      remainingQuotas:
+        description: Remaining quotas for the user account.
+        items:
+          $ref: '#/definitions/Entry«string,long»'
+        type: array
+      type:
+        description: Type (plan) of the user account.
+        type: string
   Label:
     description: The topic label
     properties:
@@ -576,6 +658,9 @@ definitions:
   LemmatizeResponse:
     description: Response for the lemmatization
     properties:
+      id:
+        description: Unique identifier of the document
+        type: string
       language:
         description: The used language of the document
         type: string
@@ -598,6 +683,9 @@ definitions:
           - article
           - keep-everything
         type: string
+      id:
+        description: 'Unique identifier of the document, it''s optional'
+        type: string
       language:
         description: '[optional] The language of the document, auto-detection will be used if omitted'
         type: string
@@ -613,10 +701,34 @@ definitions:
       url:
         description: 'URL of a document to be analysed, mutually exclusive with the ''text'' parameter'
         type: string
-  Response_for_the_text_correction: {}
+  Response for the text correction: {}
+  Response_for_the_text_correction:
+    properties:
+      corrected:
+        type: boolean
+      correctedText:
+        description: Corrected text of the document
+        type: string
+      diacritized:
+        type: boolean
+      id:
+        description: Unique identifier of the document
+        type: string
+      language:
+        description: The used language of the document
+        type: string
+      text:
+        description: The raw text of the document which has been analysed
+        type: string
+    required:
+      - correctedText
+      - language
   SentimentResponse:
     description: Response for the sentiment analysis
     properties:
+      id:
+        description: Unique identifier of the document
+        type: string
       language:
         description: The used language of the document
         type: string
@@ -637,6 +749,9 @@ definitions:
         description: Confidence for the detected topic
         format: double
         type: number
+      id:
+        description: Unique identifier of the document
+        type: string
       labels:
         description: Probabilistic distribution over possible topic labels
         items:

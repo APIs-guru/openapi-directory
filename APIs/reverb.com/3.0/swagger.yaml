@@ -46,6 +46,7 @@ securityDefinitions:
       read_profile: ''
       write_feedback: ''
       write_listings: ''
+      write_listings_for_others: ''
       write_lists: ''
       write_messages: ''
       write_offers: ''
@@ -256,6 +257,8 @@ paths:
             properties:
               country_code:
                 type: string
+              layaway_terms_slug:
+                type: string
               message:
                 description: Message to include with counter offer
                 type: string
@@ -295,6 +298,8 @@ paths:
                   - amount
                   - currency
                 type: object
+              quantity:
+                type: string
               region_code:
                 type: string
               shipping_price:
@@ -854,6 +859,8 @@ paths:
                 description: 'Currently for users of seller sites only, this allows you to have a listing available only to your seller site by setting this to ''seller_site'''
                 enum:
                   - seller_site
+                  - reverb
+                  - none
                 type: string
               finish:
                 description: 'Finish, e.g. ''Sunburst'''
@@ -882,6 +889,9 @@ paths:
               model:
                 description: 'ex: Stratocaster, SG'
                 type: string
+              multi_item:
+                description: Specifies if the listing is a bundle of multiple individual items
+                type: boolean
               offers_enabled:
                 description: 'Whether the listing accepts negotiated offers (default: true)'
                 type: boolean
@@ -893,6 +903,24 @@ paths:
                 items:
                   type: string
                 type: array
+              preorder_info:
+                description: Create or update a preorder listing. Requires opt-in. Please contact sales@reverb.com if you would like to activate this feature.
+                properties:
+                  lead_time:
+                    description: The amount of time before the item will be ready to ship. When lead_time is submitted it is converted into days and added to the current date to produce `estimated_ship_date` in the response body of the request.
+                    type: integer
+                  lead_time_unit:
+                    description: The unit of time which lead_time is measured in
+                    enum:
+                      - days
+                      - weeks
+                    type: string
+                  ship_date:
+                    description: 'The date the item will be available to ship. In the response body of the request, `estimated_ship_date`, will be the same as ship_date. Date must be ISO8601 format - e.g: 2015-04-09T10:52:23-00:00.'
+                    type: string
+                required:
+                  - lead_time_unit
+                type: object
               price:
                 properties:
                   amount:
@@ -914,6 +942,9 @@ paths:
                   - amount
                   - currency
                 type: object
+              prop_65_warning:
+                description: 'If your listing contains chemicals that are required to be reported under California Prop 65, please provide your warning statement. We will add the required ''Warning'' label and link to California''s information page, so you only need to provide the body of the warning. For more information, see https://www.p65warnings.ca.gov/new-proposition-65-warnings'
+                type: string
               publish:
                 description: Publish your listing if draft
                 type: boolean
@@ -1009,6 +1040,7 @@ paths:
       security:
         - oauth2:
             - write_listings
+            - write_listings_for_others
       summary: Create a listing
       tags:
         - listings
@@ -1468,6 +1500,8 @@ paths:
                 description: 'Currently for users of seller sites only, this allows you to have a listing available only to your seller site by setting this to ''seller_site'''
                 enum:
                   - seller_site
+                  - reverb
+                  - none
                 type: string
               finish:
                 description: 'Finish, e.g. ''Sunburst'''
@@ -1496,6 +1530,9 @@ paths:
               model:
                 description: 'ex: Stratocaster, SG'
                 type: string
+              multi_item:
+                description: Specifies if the listing is a bundle of multiple individual items
+                type: boolean
               offers_enabled:
                 description: 'Whether the listing accepts negotiated offers (default: true)'
                 type: boolean
@@ -1507,6 +1544,24 @@ paths:
                 items:
                   type: string
                 type: array
+              preorder_info:
+                description: Create or update a preorder listing. Requires opt-in. Please contact sales@reverb.com if you would like to activate this feature.
+                properties:
+                  lead_time:
+                    description: The amount of time before the item will be ready to ship. When lead_time is submitted it is converted into days and added to the current date to produce `estimated_ship_date` in the response body of the request.
+                    type: integer
+                  lead_time_unit:
+                    description: The unit of time which lead_time is measured in
+                    enum:
+                      - days
+                      - weeks
+                    type: string
+                  ship_date:
+                    description: 'The date the item will be available to ship. In the response body of the request, `estimated_ship_date`, will be the same as ship_date. Date must be ISO8601 format - e.g: 2015-04-09T10:52:23-00:00.'
+                    type: string
+                required:
+                  - lead_time_unit
+                type: object
               price:
                 properties:
                   amount:
@@ -1528,6 +1583,9 @@ paths:
                   - amount
                   - currency
                 type: object
+              prop_65_warning:
+                description: 'If your listing contains chemicals that are required to be reported under California Prop 65, please provide your warning statement. We will add the required ''Warning'' label and link to California''s information page, so you only need to provide the body of the warning. For more information, see https://www.p65warnings.ca.gov/new-proposition-65-warnings'
+                type: string
               publish:
                 description: Publish your listing if draft
                 type: boolean
@@ -1740,6 +1798,9 @@ paths:
                 type: string
               last_name:
                 description: The last name of the account holder
+                type: string
+              locale_code:
+                description: The locale code for the account
                 type: string
               shipping_region_code:
                 description: The shipping region preference for the account
@@ -2242,6 +2303,23 @@ paths:
       parameters:
         - in: path
           name: identifier
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Follow a category
+      tags:
+        - my
+  '/my/follows/categories/{uuid}':
+    post:
+      description: Follow a category
+      parameters:
+        - in: path
+          name: uuid
           required: true
           type: string
       responses:
@@ -3097,6 +3175,8 @@ paths:
             properties:
               country_code:
                 type: string
+              layaway_terms_slug:
+                type: string
               message:
                 description: Message to include with counter offer
                 type: string
@@ -3136,6 +3216,8 @@ paths:
                   - amount
                   - currency
                 type: object
+              quantity:
+                type: string
               region_code:
                 type: string
               shipping_price:
@@ -3211,6 +3293,18 @@ paths:
       summary: 'Returns all orders, newest first.'
       tags:
         - my
+  '/my/orders/buying/by_uuid/{uuid}':
+    get:
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - my
   /my/orders/buying/unpaid:
     get:
       description: 'Returns unpaid orders, newest first.'
@@ -3260,41 +3354,6 @@ paths:
   /my/orders/selling/all:
     get:
       description: 'Get all seller orders, newest first.'
-      parameters:
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: created_start_date
-          required: false
-          type: string
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: created_end_date
-          required: false
-          type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: updated_start_date
-          required: false
-          type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: updated_end_date
-          required: false
-          type: string
-        - default: 1
-          in: query
-          name: page
-          required: false
-          type: integer
-        - default: 24
-          in: query
-          name: per_page
-          required: false
-          type: integer
-        - in: query
-          name: offset
-          required: false
-          type: integer
       responses:
         default:
           description: Unexpected error
@@ -3306,49 +3365,14 @@ paths:
         - my
   /my/orders/selling/awaiting_shipment:
     get:
-      description: 'Get seller orders awaiting shipment, newest first.'
-      parameters:
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: created_start_date
-          required: false
-          type: string
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: created_end_date
-          required: false
-          type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: updated_start_date
-          required: false
-          type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: updated_end_date
-          required: false
-          type: string
-        - default: 1
-          in: query
-          name: page
-          required: false
-          type: integer
-        - default: 24
-          in: query
-          name: per_page
-          required: false
-          type: integer
-        - in: query
-          name: offset
-          required: false
-          type: integer
+      description: 'Get unpaid seller orders, newest first.'
       responses:
         default:
           description: Unexpected error
       security:
         - oauth2:
             - read_orders
-      summary: 'Get seller orders awaiting shipment, newest first.'
+      summary: 'Get unpaid seller orders, newest first.'
       tags:
         - my
   '/my/orders/selling/buyer_history/{buyer_id}':
@@ -3368,44 +3392,21 @@ paths:
       summary: See previous orders from buyer
       tags:
         - my
+  '/my/orders/selling/by_uuid/{uuid}':
+    get:
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - my
   /my/orders/selling/unpaid:
     get:
       description: 'Get unpaid seller orders, newest first.'
-      parameters:
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: created_start_date
-          required: false
-          type: string
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: created_end_date
-          required: false
-          type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: updated_start_date
-          required: false
-          type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
-          in: query
-          name: updated_end_date
-          required: false
-          type: string
-        - default: 1
-          in: query
-          name: page
-          required: false
-          type: integer
-        - default: 24
-          in: query
-          name: per_page
-          required: false
-          type: integer
-        - in: query
-          name: offset
-          required: false
-          type: integer
       responses:
         default:
           description: Unexpected error
@@ -3472,7 +3473,7 @@ paths:
           schema:
             properties:
               provider:
-                description: 'Shipping provider: One of UPS, USPS, FedEx, DHL, DHLExpress, DHLGlobalMail, DHL Germany, Canada Post, Royal Mail, PostNL, Australia Post, EMS, La Poste, China Post, GLS, Parcelforce, Purolator, Interlogistica, Correos España, Ukraine Post, DPD, Other'
+                description: 'Shipping provider: One of UPS, USPS, FedEx, DHL, DHLExpress, DHLGlobalMail, DHL Germany, Canada Post, Royal Mail, PostNL, Australia Post, EMS, La Poste, China Post, GLS, Parcelforce, Purolator, Interlogistica, Correos España, Ukraine Post, DPD Germany, DPD UK, DPD France, Other'
                 type: string
               send_notification:
                 description: Should we send an email notification to the buyer
@@ -3764,54 +3765,6 @@ paths:
       summary: Get list of payment methods
       tags:
         - payment_methods
-  /priceguide:
-    get:
-      description: Search the Price Guide
-      parameters:
-        - description: Search query.
-          in: query
-          name: query
-          required: false
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: Search the Price Guide
-      tags:
-        - priceguide
-  '/priceguide/{id}':
-    get:
-      description: Retrieve a Price Guide
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: Retrieve a Price Guide
-      tags:
-        - priceguide
-  '/priceguide/{id}/transactions':
-    get:
-      description: Get a list of paginated transactions for a price guide.
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: string
-        - default: used
-          in: query
-          name: condition
-          required: false
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: Get a list of paginated transactions for a price guide.
-      tags:
-        - priceguide
   '/priceguide/{id}/transactions/summary':
     get:
       description: Get a summary of transactions for a given price guide

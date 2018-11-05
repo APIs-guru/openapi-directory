@@ -46,6 +46,7 @@ parameters:
     name: tenantID
     required: true
     type: string
+    x-ms-parameter-location: client
 paths:
   '/{tenantID}/applications':
     get:
@@ -625,6 +626,54 @@ paths:
             $ref: '#/definitions/GraphError'
       tags:
         - Objects
+  '/{tenantID}/oauth2PermissionGrants':
+    get:
+      description: Queries OAuth2 permissions for the relevant SP ObjectId of an app.
+      operationId: OAuth2_Get
+      parameters:
+        - description: This is the Service Principal ObjectId associated with the app
+          in: query
+          name: $filter
+          required: false
+          type: string
+          x-example: clientId+eq+'61ed44c3-5a1d-4639-a215-07f25129c6c3'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK. The operation was successful.
+          schema:
+            $ref: '#/definitions/Permissions'
+      tags:
+        - OAuth2Permissions_get
+    post:
+      consumes:
+        - application/json
+      description: Grants OAuth2 permissions for the relevant resource Ids of an app.
+      operationId: OAuth2_Post
+      parameters:
+        - description: The relevant app Service Principal Object Id and the Service Principal Objecit Id you want to grant.
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Permissions'
+          x-examples:
+            application/json: "{\n\t\"odata.type\": \"Microsoft.DirectoryServices.OAuth2PermissionGrant\",\n\t\"clientId\": \"39afbaa2-4a5c-4f5b-9ee3-2c83f09bbc87\", \n\t\"consentType\": \"AllPrincipals\",\n\t\"principalId\": null,\n\t\"resourceId\": \"d3247842-c517-4520-80a7-332690ae2fe4\",\n\t\"scope\": \"user_impersonation\",\n    \"startTime\": \"0001-01-01T00:00:00\",\n    \"expiryTime\": \"9000-01-01T00:00:00\"\n}"
+            description: 'These are the values required to grant permission to a resourceId for an app, only one operation is allowed per request'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: OK. The operation was successful.
+          schema:
+            $ref: '#/definitions/Permissions'
+      tags:
+        - OAuth2Permissions_post
   '/{tenantID}/servicePrincipals':
     get:
       description: Gets a list of service principals from the current tenant.
@@ -697,7 +746,7 @@ paths:
       tags:
         - ServicePrincipal
     get:
-      description: Gets service principal information from the directory.
+      description: Gets service principal information from the directory. Query by objectId or pass a filter to query by appId
       operationId: ServicePrincipals_Get
       parameters:
         - description: The object ID of the service principal to get.
@@ -1444,6 +1493,10 @@ definitions:
       type: object
     description: Active Directory Key Credential information.
     properties:
+      customKeyIdentifier:
+        description: Custom Key Identifier
+        format: byte
+        type: string
       endDate:
         description: End date.
         format: date-time
@@ -1551,6 +1604,41 @@ definitions:
     required:
       - password
     type: object
+  Permissions:
+    example:
+      clientId: clientId
+      consentType: consentType
+      expiryTime: expiryTime
+      odata.type: odata.type
+      principalId: ''
+      resourceId: resourceId
+      scope: scope
+      startTime: startTime
+    properties:
+      clientId:
+        description: The objectId of the Service Principal associated with the app
+        type: string
+      consentType:
+        description: Typically set to AllPrincipals
+        type: string
+      expiryTime:
+        description: Expiry time for TTL
+        type: string
+      odata.type:
+        description: Microsoft.DirectoryServices.OAuth2PermissionGrant
+        type: string
+      principalId:
+        description: Set to null if AllPrincipals is set
+        type: object
+      resourceId:
+        description: Service Principal Id of the resource you want to grant
+        type: string
+      scope:
+        description: Typically set to user_impersonation
+        type: string
+      startTime:
+        description: Start time for TTL
+        type: string
   RequiredResourceAccess:
     additionalProperties:
       type: object

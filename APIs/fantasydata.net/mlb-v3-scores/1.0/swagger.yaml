@@ -1,0 +1,1328 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: api.fantasydata.net
+basePath: /v3/mlb/scores
+info:
+  contact:
+    x-twitter: nfldata
+  description: MLB scores API.
+  title: MLB v3 Scores
+  version: '1.0'
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    url: 'https://twitter.com/nfldata/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://fantasydata.com/downloads/swagger/mlb-v3-scores.json'
+      version: '2.0'
+  x-providerName: fantasydata.net
+  x-serviceName: mlb-v3-scores
+produces:
+  - application/json
+securityDefinitions:
+  apiKeyHeader:
+    in: header
+    name: Ocp-Apim-Subscription-Key
+    type: apiKey
+  apiKeyQuery:
+    in: query
+    name: subscription-key
+    type: apiKey
+security:
+  - apiKeyHeader: []
+  - apiKeyQuery: []
+tags: []
+paths:
+  '/{format}/AllTeams':
+    get:
+      operationId: TeamsAll
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Team'
+            type: array
+      summary: Teams (All)
+  '/{format}/AreAnyGamesInProgress':
+    get:
+      description: Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.
+      operationId: AreGamesInProgress
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: boolean
+      summary: Are Games In Progress
+  '/{format}/CurrentSeason':
+    get:
+      operationId: CurrentSeason
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Season'
+      summary: Current Season
+  '/{format}/FreeAgents':
+    get:
+      operationId: PlayerDetailsByFreeAgents
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Player'
+            type: array
+      summary: Player Details by Free Agents
+  '/{format}/Games/{season}':
+    get:
+      operationId: Schedules
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>, <code>2018STAR</code>, <code>2019</code>, etc.'
+          in: path
+          name: season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Game'
+            type: array
+      summary: Schedules
+  '/{format}/GamesByDate/{date}':
+    get:
+      operationId: GamesByDate
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+            <br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Game'
+            type: array
+      summary: Games by Date
+  '/{format}/News':
+    get:
+      operationId: News
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/News'
+            type: array
+      summary: News
+  '/{format}/NewsByDate/{date}':
+    get:
+      operationId: NewsByDate
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the news.
+            <br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/News'
+            type: array
+      summary: News by Date
+  '/{format}/NewsByPlayerID/{playerid}':
+    get:
+      operationId: NewsByPlayer
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Player ID.
+            Example:<code>10000507</code>.
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/News'
+            type: array
+      summary: News by Player
+  '/{format}/Player/{playerid}':
+    get:
+      operationId: PlayerDetailsByPlayer
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Player ID.
+            Example:<code>10000507</code>.
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Player'
+      summary: Player Details by Player
+  '/{format}/Players':
+    get:
+      operationId: PlayerDetailsByActive
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Player'
+            type: array
+      summary: Player Details by Active
+  '/{format}/Players/{team}':
+    get:
+      operationId: PlayersByTeam
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The abbreviation of the requested team.
+            <br>Examples: <code>SF</code>, <code>NYY</code>.
+          in: path
+          name: team
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Player'
+            type: array
+      summary: Players by Team
+  '/{format}/Stadiums':
+    get:
+      operationId: Stadiums
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Stadium'
+            type: array
+      summary: Stadiums
+  '/{format}/Standings/{season}':
+    get:
+      operationId: Standings
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season.
+            <br>Examples: <code>2017</code>, <code>2018</code>.
+          in: path
+          name: season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Standing'
+            type: array
+      summary: Standings
+  '/{format}/TeamGameStatsByDate/{date}':
+    get:
+      operationId: TeamGameStatsByDate
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+            <br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/TeamGame'
+            type: array
+      summary: Team Game Stats by Date
+  '/{format}/TeamSeasonStats/{season}':
+    get:
+      operationId: TeamSeasonStats
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season.
+            <br>Examples: <code>2017</code>, <code>2018</code>.
+          in: path
+          name: season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/TeamSeason'
+            type: array
+      summary: Team Season Stats
+  '/{format}/teams':
+    get:
+      operationId: TeamsActive
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Team'
+            type: array
+      summary: Teams (Active)
+definitions:
+  Game:
+    properties:
+      Attendance:
+        type: integer
+      AwayTeam:
+        type: string
+      AwayTeamErrors:
+        type: integer
+      AwayTeamHits:
+        type: integer
+      AwayTeamID:
+        type: integer
+      AwayTeamMoneyLine:
+        type: integer
+      AwayTeamProbablePitcherID:
+        type: integer
+      AwayTeamRuns:
+        type: integer
+      AwayTeamStartingPitcher:
+        type: string
+      AwayTeamStartingPitcherID:
+        type: integer
+      Balls:
+        type: integer
+      Channel:
+        type: string
+      CurrentHitter:
+        type: string
+      CurrentHitterID:
+        type: integer
+      CurrentHittingTeamID:
+        type: integer
+      CurrentPitcher:
+        type: string
+      CurrentPitcherID:
+        type: integer
+      CurrentPitchingTeamID:
+        type: integer
+      DateTime:
+        type: string
+      Day:
+        type: string
+      DueUpHitterID1:
+        type: integer
+      DueUpHitterID2:
+        type: integer
+      DueUpHitterID3:
+        type: integer
+      ForecastDescription:
+        type: string
+      ForecastTempHigh:
+        type: integer
+      ForecastTempLow:
+        type: integer
+      ForecastWindChill:
+        type: integer
+      ForecastWindDirection:
+        type: integer
+      ForecastWindSpeed:
+        type: integer
+      GameID:
+        type: integer
+      GlobalAwayTeamID:
+        type: integer
+      GlobalGameID:
+        type: integer
+      GlobalHomeTeamID:
+        type: integer
+      HomeTeam:
+        type: string
+      HomeTeamErrors:
+        type: integer
+      HomeTeamHits:
+        type: integer
+      HomeTeamID:
+        type: integer
+      HomeTeamMoneyLine:
+        type: integer
+      HomeTeamProbablePitcherID:
+        type: integer
+      HomeTeamRuns:
+        type: integer
+      HomeTeamStartingPitcher:
+        type: string
+      HomeTeamStartingPitcherID:
+        type: integer
+      Inning:
+        type: integer
+      InningHalf:
+        type: string
+      IsClosed:
+        type: boolean
+      LastPlay:
+        type: string
+      LosingPitcher:
+        type: string
+      LosingPitcherID:
+        type: integer
+      Outs:
+        type: integer
+      OverUnder:
+        type: number
+      PointSpread:
+        type: number
+      PointSpreadAwayTeamMoneyLine:
+        type: integer
+      PointSpreadHomeTeamMoneyLine:
+        type: integer
+      RescheduledFromGameID:
+        type: integer
+      RescheduledGameID:
+        type: integer
+      RunnerOnFirst:
+        type: boolean
+      RunnerOnSecond:
+        type: boolean
+      RunnerOnThird:
+        type: boolean
+      SavingPitcher:
+        type: string
+      SavingPitcherID:
+        type: integer
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      StadiumID:
+        type: integer
+      Status:
+        type: string
+      Strikes:
+        type: integer
+      Updated:
+        type: string
+      WinningPitcher:
+        type: string
+      WinningPitcherID:
+        type: integer
+  News:
+    properties:
+      Author:
+        type: string
+      Categories:
+        type: string
+      Content:
+        type: string
+      NewsID:
+        type: integer
+      PlayerID:
+        type: integer
+      PlayerID2:
+        type: integer
+      Source:
+        type: string
+      Team:
+        type: string
+      Team2:
+        type: string
+      TeamID:
+        type: integer
+      TeamID2:
+        type: integer
+      TermsOfUse:
+        type: string
+      TimeAgo:
+        type: string
+      Title:
+        type: string
+      Updated:
+        type: string
+      Url:
+        type: string
+  Player:
+    properties:
+      BatHand:
+        type: string
+      BirthCity:
+        type: string
+      BirthCountry:
+        type: string
+      BirthDate:
+        type: string
+      BirthState:
+        type: string
+      College:
+        type: string
+      DraftKingsName:
+        type: string
+      DraftKingsPlayerID:
+        type: integer
+      Experience:
+        type: string
+      FanDuelName:
+        type: string
+      FanDuelPlayerID:
+        type: integer
+      FantasyAlarmPlayerID:
+        type: integer
+      FantasyDraftName:
+        type: string
+      FantasyDraftPlayerID:
+        type: integer
+      FirstName:
+        type: string
+      GlobalTeamID:
+        type: integer
+      Height:
+        type: integer
+      HighSchool:
+        type: string
+      InjuryBodyPart:
+        type: string
+      InjuryNotes:
+        type: string
+      InjuryStartDate:
+        type: string
+      InjuryStatus:
+        type: string
+      Jersey:
+        type: integer
+      LastName:
+        type: string
+      MLBAMID:
+        type: integer
+      PhotoUrl:
+        type: string
+      PlayerID:
+        type: integer
+      Position:
+        type: string
+      PositionCategory:
+        type: string
+      ProDebut:
+        type: string
+      RotoWirePlayerID:
+        type: integer
+      RotoworldPlayerID:
+        type: integer
+      Salary:
+        type: integer
+      SportRadarPlayerID:
+        type: string
+      SportsDataID:
+        type: string
+      SportsDirectPlayerID:
+        type: integer
+      StatsPlayerID:
+        type: integer
+      Status:
+        type: string
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      ThrowHand:
+        type: string
+      UpcomingGameID:
+        type: integer
+      UsaTodayHeadshotNoBackgroundUrl:
+        type: string
+      UsaTodayHeadshotUrl:
+        type: string
+      UsaTodayPlayerID:
+        type: integer
+      Weight:
+        type: integer
+      XmlTeamPlayerID:
+        type: integer
+      YahooName:
+        type: string
+      YahooPlayerID:
+        type: integer
+  Season:
+    properties:
+      ApiSeason:
+        type: string
+      PostSeasonStartDate:
+        type: string
+      RegularSeasonStartDate:
+        type: string
+      Season:
+        type: integer
+      SeasonType:
+        type: string
+  Stadium:
+    properties:
+      Active:
+        type: boolean
+      Altitude:
+        type: integer
+      Capacity:
+        type: integer
+      CenterField:
+        type: integer
+      City:
+        type: string
+      Country:
+        type: string
+      GeoLat:
+        type: number
+      GeoLong:
+        type: number
+      HomePlateDirection:
+        type: integer
+      LeftCenterField:
+        type: integer
+      LeftField:
+        type: integer
+      MidLeftCenterField:
+        type: integer
+      MidLeftField:
+        type: integer
+      MidRightCenterField:
+        type: integer
+      MidRightField:
+        type: integer
+      Name:
+        type: string
+      RightCenterField:
+        type: integer
+      RightField:
+        type: integer
+      StadiumID:
+        type: integer
+      State:
+        type: string
+      Surface:
+        type: string
+      Type:
+        type: string
+  Standing:
+    properties:
+      AwayLosses:
+        type: integer
+      AwayWins:
+        type: integer
+      City:
+        type: string
+      DayLosses:
+        type: integer
+      DayWins:
+        type: integer
+      Division:
+        type: string
+      DivisionLosses:
+        type: integer
+      DivisionWins:
+        type: integer
+      GamesBehind:
+        type: number
+      HomeLosses:
+        type: integer
+      HomeWins:
+        type: integer
+      Key:
+        type: string
+      LastTenGamesLosses:
+        type: integer
+      LastTenGamesWins:
+        type: integer
+      League:
+        type: string
+      Losses:
+        type: integer
+      Name:
+        type: string
+      NightLosses:
+        type: integer
+      NightWins:
+        type: integer
+      Percentage:
+        type: number
+      RunsAgainst:
+        type: integer
+      RunsScored:
+        type: integer
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      Streak:
+        type: string
+      TeamID:
+        type: integer
+      WildCardGamesBehind:
+        type: number
+      WildCardRank:
+        type: integer
+      Wins:
+        type: integer
+  Team:
+    properties:
+      Active:
+        type: boolean
+      City:
+        type: string
+      Division:
+        type: string
+      GlobalTeamID:
+        type: integer
+      League:
+        type: string
+      Name:
+        type: string
+      PrimaryColor:
+        type: string
+      QuaternaryColor:
+        type: string
+      SecondaryColor:
+        type: string
+      StadiumID:
+        type: integer
+      TeamID:
+        type: integer
+      TertiaryColor:
+        type: string
+      WikipediaLogoUrl:
+        type: string
+      WikipediaWordMarkUrl:
+        type: string
+      '[Key]':
+        type: string
+  TeamGame:
+    properties:
+      AtBats:
+        type: number
+      BallsInPlay:
+        type: number
+      BattingAverage:
+        type: number
+      BattingAverageOnBallsInPlay:
+        type: number
+      BattingOrderConfirmed:
+        type: boolean
+      CaughtStealing:
+        type: number
+      DateTime:
+        type: string
+      Day:
+        type: string
+      DoublePlays:
+        type: number
+      Doubles:
+        type: number
+      EarnedRunAverage:
+        type: number
+      Errors:
+        type: number
+      FantasyPoints:
+        type: number
+      FantasyPointsDraftKings:
+        type: number
+      FantasyPointsFanDuel:
+        type: number
+      FantasyPointsFantasyDraft:
+        type: number
+      FantasyPointsYahoo:
+        type: number
+      FieldingIndependentPitching:
+        type: number
+      FlyOuts:
+        type: number
+      GameID:
+        type: integer
+      Games:
+        type: integer
+      GlobalGameID:
+        type: integer
+      GlobalOpponentID:
+        type: integer
+      GlobalTeamID:
+        type: integer
+      GrandSlams:
+        type: number
+      GroundIntoDoublePlay:
+        type: number
+      GroundOuts:
+        type: number
+      HitByPitch:
+        type: number
+      Hits:
+        type: number
+      HomeOrAway:
+        type: string
+      HomeRuns:
+        type: number
+      InningsPitchedDecimal:
+        type: number
+      InningsPitchedFull:
+        type: number
+      InningsPitchedOuts:
+        type: number
+      IntentionalWalks:
+        type: number
+      IsGameOver:
+        type: boolean
+      IsolatedPower:
+        type: number
+      LeftOnBase:
+        type: number
+      LineOuts:
+        type: number
+      Losses:
+        type: number
+      Name:
+        type: string
+      OnBasePercentage:
+        type: number
+      OnBasePlusSlugging:
+        type: number
+      Opponent:
+        type: string
+      OpponentID:
+        type: integer
+      Outs:
+        type: number
+      PitchesSeen:
+        type: number
+      PitchesThrown:
+        type: number
+      PitchesThrownStrikes:
+        type: number
+      PitchingBallsInPlay:
+        type: number
+      PitchingBattingAverageAgainst:
+        type: number
+      PitchingBattingAverageOnBallsInPlay:
+        type: number
+      PitchingBlownSaves:
+        type: number
+      PitchingCatchersInterference:
+        type: number
+      PitchingCompleteGames:
+        type: number
+      PitchingDoublePlays:
+        type: number
+      PitchingDoubles:
+        type: number
+      PitchingEarnedRuns:
+        type: number
+      PitchingFlyOuts:
+        type: number
+      PitchingGrandSlams:
+        type: number
+      PitchingGroundIntoDoublePlay:
+        type: number
+      PitchingGroundOuts:
+        type: number
+      PitchingHitByPitch:
+        type: number
+      PitchingHits:
+        type: number
+      PitchingHolds:
+        type: number
+      PitchingHomeRuns:
+        type: number
+      PitchingInningStarted:
+        type: integer
+      PitchingIntentionalWalks:
+        type: number
+      PitchingLineOuts:
+        type: number
+      PitchingNoHitters:
+        type: number
+      PitchingOnBasePercentage:
+        type: number
+      PitchingOnBasePlusSlugging:
+        type: number
+      PitchingPerfectGames:
+        type: number
+      PitchingPlateAppearances:
+        type: number
+      PitchingPopOuts:
+        type: number
+      PitchingQualityStarts:
+        type: number
+      PitchingReachedOnError:
+        type: number
+      PitchingRuns:
+        type: number
+      PitchingSacrificeFlies:
+        type: number
+      PitchingSacrifices:
+        type: number
+      PitchingShutOuts:
+        type: number
+      PitchingSingles:
+        type: number
+      PitchingSluggingPercentage:
+        type: number
+      PitchingStrikeouts:
+        type: number
+      PitchingStrikeoutsPerNineInnings:
+        type: number
+      PitchingTotalBases:
+        type: number
+      PitchingTriples:
+        type: number
+      PitchingWalks:
+        type: number
+      PitchingWalksPerNineInnings:
+        type: number
+      PitchingWeightedOnBasePercentage:
+        type: number
+      PlateAppearances:
+        type: number
+      PopOuts:
+        type: number
+      ReachedOnError:
+        type: number
+      Runs:
+        type: number
+      RunsBattedIn:
+        type: number
+      SacrificeFlies:
+        type: number
+      Sacrifices:
+        type: number
+      Saves:
+        type: number
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      Singles:
+        type: number
+      SluggingPercentage:
+        type: number
+      StatID:
+        type: integer
+      StolenBases:
+        type: number
+      Strikeouts:
+        type: number
+      SubstituteBattingOrder:
+        type: integer
+      SubstituteBattingOrderSequence:
+        type: integer
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      TotalBases:
+        type: number
+      TotalOutsPitched:
+        type: number
+      Triples:
+        type: number
+      Updated:
+        type: string
+      Walks:
+        type: number
+      WalksHitsPerInningsPitched:
+        type: number
+      WeightedOnBasePercentage:
+        type: number
+      Wins:
+        type: number
+  TeamSeason:
+    properties:
+      AtBats:
+        type: number
+      BallsInPlay:
+        type: number
+      BattingAverage:
+        type: number
+      BattingAverageOnBallsInPlay:
+        type: number
+      BattingOrderConfirmed:
+        type: boolean
+      CaughtStealing:
+        type: number
+      DoublePlays:
+        type: number
+      Doubles:
+        type: number
+      EarnedRunAverage:
+        type: number
+      Errors:
+        type: number
+      FantasyPoints:
+        type: number
+      FantasyPointsDraftKings:
+        type: number
+      FantasyPointsFanDuel:
+        type: number
+      FantasyPointsFantasyDraft:
+        type: number
+      FantasyPointsYahoo:
+        type: number
+      FieldingIndependentPitching:
+        type: number
+      FlyOuts:
+        type: number
+      Games:
+        type: integer
+      GlobalTeamID:
+        type: integer
+      GrandSlams:
+        type: number
+      GroundIntoDoublePlay:
+        type: number
+      GroundOuts:
+        type: number
+      HitByPitch:
+        type: number
+      Hits:
+        type: number
+      HomeRuns:
+        type: number
+      InningsPitchedDecimal:
+        type: number
+      InningsPitchedFull:
+        type: number
+      InningsPitchedOuts:
+        type: number
+      IntentionalWalks:
+        type: number
+      IsolatedPower:
+        type: number
+      LeftOnBase:
+        type: number
+      LineOuts:
+        type: number
+      Losses:
+        type: number
+      Name:
+        type: string
+      OnBasePercentage:
+        type: number
+      OnBasePlusSlugging:
+        type: number
+      Outs:
+        type: number
+      PitchesSeen:
+        type: number
+      PitchesThrown:
+        type: number
+      PitchesThrownStrikes:
+        type: number
+      PitchingBallsInPlay:
+        type: number
+      PitchingBattingAverageAgainst:
+        type: number
+      PitchingBattingAverageOnBallsInPlay:
+        type: number
+      PitchingBlownSaves:
+        type: number
+      PitchingCatchersInterference:
+        type: number
+      PitchingCompleteGames:
+        type: number
+      PitchingDoublePlays:
+        type: number
+      PitchingDoubles:
+        type: number
+      PitchingEarnedRuns:
+        type: number
+      PitchingFlyOuts:
+        type: number
+      PitchingGrandSlams:
+        type: number
+      PitchingGroundIntoDoublePlay:
+        type: number
+      PitchingGroundOuts:
+        type: number
+      PitchingHitByPitch:
+        type: number
+      PitchingHits:
+        type: number
+      PitchingHolds:
+        type: number
+      PitchingHomeRuns:
+        type: number
+      PitchingInningStarted:
+        type: integer
+      PitchingIntentionalWalks:
+        type: number
+      PitchingLineOuts:
+        type: number
+      PitchingNoHitters:
+        type: number
+      PitchingOnBasePercentage:
+        type: number
+      PitchingOnBasePlusSlugging:
+        type: number
+      PitchingPerfectGames:
+        type: number
+      PitchingPlateAppearances:
+        type: number
+      PitchingPopOuts:
+        type: number
+      PitchingQualityStarts:
+        type: number
+      PitchingReachedOnError:
+        type: number
+      PitchingRuns:
+        type: number
+      PitchingSacrificeFlies:
+        type: number
+      PitchingSacrifices:
+        type: number
+      PitchingShutOuts:
+        type: number
+      PitchingSingles:
+        type: number
+      PitchingSluggingPercentage:
+        type: number
+      PitchingStrikeouts:
+        type: number
+      PitchingStrikeoutsPerNineInnings:
+        type: number
+      PitchingTotalBases:
+        type: number
+      PitchingTriples:
+        type: number
+      PitchingWalks:
+        type: number
+      PitchingWalksPerNineInnings:
+        type: number
+      PitchingWeightedOnBasePercentage:
+        type: number
+      PlateAppearances:
+        type: number
+      PopOuts:
+        type: number
+      ReachedOnError:
+        type: number
+      Runs:
+        type: number
+      RunsBattedIn:
+        type: number
+      SacrificeFlies:
+        type: number
+      Sacrifices:
+        type: number
+      Saves:
+        type: number
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      Singles:
+        type: number
+      SluggingPercentage:
+        type: number
+      StatID:
+        type: integer
+      StolenBases:
+        type: number
+      Strikeouts:
+        type: number
+      SubstituteBattingOrder:
+        type: integer
+      SubstituteBattingOrderSequence:
+        type: integer
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      TotalBases:
+        type: number
+      TotalOutsPitched:
+        type: number
+      Triples:
+        type: number
+      Updated:
+        type: string
+      Walks:
+        type: number
+      WalksHitsPerInningsPitched:
+        type: number
+      WeightedOnBasePercentage:
+        type: number
+      Wins:
+        type: number

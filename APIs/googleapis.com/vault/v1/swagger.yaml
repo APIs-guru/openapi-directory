@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Archiving and eDiscovery for G Suite.
-  title: Google Vault
+  title: G Suite Vault
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://vault.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -311,6 +311,14 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: Specifies which parts of the Hold to return.
+          enum:
+            - HOLD_VIEW_UNSPECIFIED
+            - BASIC_HOLD
+            - FULL_HOLD
+          in: query
+          name: view
+          type: string
       responses:
         '200':
           description: Successful response
@@ -398,6 +406,14 @@ paths:
           in: path
           name: matterId
           required: true
+          type: string
+        - description: Specifies which parts of the Hold to return.
+          enum:
+            - HOLD_VIEW_UNSPECIFIED
+            - BASIC_HOLD
+            - FULL_HOLD
+          in: query
+          name: view
           type: string
       responses:
         '200':
@@ -810,6 +826,11 @@ definitions:
       groupsQuery:
         $ref: '#/definitions/HeldGroupsQuery'
         description: 'Details pertaining to Groups holds. If set, corpus must be Groups.'
+      hangoutsChatQuery:
+        $ref: '#/definitions/HeldHangoutsChatQuery'
+        description: |-
+          Details pertaining to Hangouts Chat holds. If set, corpus must be
+          Hangouts Chat.
       mailQuery:
         $ref: '#/definitions/HeldMailQuery'
         description: 'Details pertaining to mail holds. If set, corpus must be mail.'
@@ -843,7 +864,7 @@ definitions:
         type: string
     type: object
   HeldDriveQuery:
-    description: Query options for drive holds.
+    description: Query options for Drive holds.
     properties:
       includeTeamDriveFiles:
         description: 'If true, include files in Team Drives in the hold.'
@@ -867,6 +888,13 @@ definitions:
       terms:
         description: The search terms for the hold.
         type: string
+    type: object
+  HeldHangoutsChatQuery:
+    description: Query options for hangouts chat holds.
+    properties:
+      includeRooms:
+        description: 'If true, include rooms the user has participated in.'
+        type: boolean
     type: object
   HeldMailQuery:
     description: Query options for mail holds.
@@ -897,7 +925,7 @@ definitions:
         format: google-datetime
         type: string
       orgUnitId:
-        description: The org unit's immutable ID as provided by the admin SDK.
+        description: The org unit's immutable ID as provided by the Admin SDK.
         type: string
     type: object
   Hold:
@@ -921,6 +949,7 @@ definitions:
           - DRIVE
           - MAIL
           - GROUPS
+          - HANGOUTS_CHAT
         type: string
       holdId:
         description: The unique immutable ID of the hold. Assigned during creation.

@@ -198,7 +198,6 @@ paths:
           responses:
             '202': {}
             '204': {}
-      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations':
     get:
       deprecated: false
@@ -667,6 +666,11 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: category
+      extendedProperties:
+        additionalProperties:
+          type: string
+        description: Extended properties
+        type: object
       impact:
         description: The business impact of the recommendation.
         enum:

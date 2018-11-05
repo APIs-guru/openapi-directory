@@ -9,7 +9,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Registers, manages, indexes, and searches beacons.'
-  title: Google Proximity Beacon
+  title: Proximity Beacon
   version: v1beta1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://proximitybeacon.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -1355,7 +1355,9 @@ definitions:
         format: int32
         type: integer
       month:
-        description: Month of year. Must be from 1 to 12.
+        description: |-
+          Month of year. Must be from 1 to 12, or 0 if specifying a date without a
+          month.
         format: int32
         type: integer
       year:

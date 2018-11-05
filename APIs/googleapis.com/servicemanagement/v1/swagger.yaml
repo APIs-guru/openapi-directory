@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers.
-  title: Google Service Management
+  title: Service Management
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://servicemanagement.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -465,6 +465,10 @@ paths:
         This method only stores the service configuration. To roll out the service
         configuration to backend systems please call
         CreateServiceRollout.
+
+        Only the 100 most recent service configurations and ones referenced by
+        existing rollouts are kept for each service. The rest will be deleted
+        eventually.
       operationId: servicemanagement.services.configs.create
       parameters:
         - in: body
@@ -571,6 +575,10 @@ paths:
         other services,
         please call CreateServiceRollout.
 
+        Only the 100 most recent configuration sources and ones referenced by
+        existing service configurtions are kept for each service. The rest will be
+        deleted eventually.
+
         Operation<response: SubmitConfigSourceResponse>
       operationId: servicemanagement.services.configs.submit
       parameters:
@@ -671,6 +679,10 @@ paths:
         Please note that any previous pending and running Rollouts and associated
         Operations will be automatically cancelled so that the latest Rollout will
         not be blocked by previous Rollouts.
+
+        Only the 100 most recent (in any state) and the last 10 successful (if not
+        already part of the set of 100 most recent) rollouts are kept for each
+        service. The rest will be deleted eventually.
 
         Operation<response: Rollout>
       operationId: servicemanagement.services.rollouts.create
@@ -1252,9 +1264,7 @@ definitions:
       bar@gmail.com from DATA_WRITE logging.
     properties:
       auditLogConfigs:
-        description: |-
-          The configuration for logging of each type of permission.
-          Next ID: 4
+        description: The configuration for logging of each type of permission.
         items:
           $ref: '#/definitions/AuditLogConfig'
         type: array
@@ -1436,14 +1446,7 @@ definitions:
       ignored.
     properties:
       allowWithoutCredential:
-        description: |-
-          Whether to allow requests without a credential. The credential can be
-          an OAuth token, Google cookies (first-party auth) or EndUserCreds.
-
-          For requests without credentials, if the service control environment is
-          specified, each incoming request **must** be associated with a service
-          consumer. This can be done by passing an API key that belongs to a consumer
-          project.
+        description: 'If true, the service accepts API keys without any other credential.'
         type: boolean
       customAuth:
         $ref: '#/definitions/CustomAuthRequirements'
@@ -1574,14 +1577,6 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
-      condition:
-        $ref: '#/definitions/Expr'
-        description: |-
-          The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
-          binding. Different bindings, including their conditions, are examined
-          independently.
-          This field is only visible as GOOGLE_INTERNAL or CONDITION_TRUSTED_TESTER.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -1594,7 +1589,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` or `joe@example.com`.
+             account. For example, `alice@gmail.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -1750,6 +1745,25 @@ definitions:
 
       Available context types are defined in package
       `google.rpc.context`.
+
+      This also provides mechanism to whitelist any protobuf message extension that
+      can be sent in grpc metadata using “x-goog-ext-<extension_id>-bin” and
+      “x-goog-ext-<extension_id>-jspb” format. For example, list any service
+      specific protobuf types that can appear in grpc metadata as follows in your
+      yaml file:
+
+      Example:
+
+          context:
+            rules:
+             - selector: "google.example.library.v1.LibraryService.CreateBook"
+               allowed_request_extensions:
+               - google.foo.v1.NewExtension
+               allowed_response_extensions:
+               - google.foo.v1.NewExtension
+
+      You can also specify extension ID instead of fully qualified extension name
+      here.
     properties:
       rules:
         description: |-
@@ -1765,6 +1779,20 @@ definitions:
       A context rule provides information about the context for an individual API
       element.
     properties:
+      allowedRequestExtensions:
+        description: |-
+          A list of full type names or extension IDs of extensions allowed in grpc
+          side channel from client to backend.
+        items:
+          type: string
+        type: array
+      allowedResponseExtensions:
+        description: |-
+          A list of full type names or extension IDs of extensions allowed in grpc
+          side channel from backend to client.
+        items:
+          type: string
+        type: array
       provided:
         description: A list of full type names of provided contexts.
         items:
@@ -1939,9 +1967,7 @@ definitions:
       <pre><code>&#91;display text]&#91;fully.qualified.proto.name]</code></pre>
       Text can be excluded from doc using the following notation:
       <pre><code>&#40;-- internal comment --&#41;</code></pre>
-      Comments can be made conditional using a visibility label. The below
-      text will be only rendered if the `BETA` label is available:
-      <pre><code>&#40;--BETA: comment for BETA users --&#41;</code></pre>
+
       A few directives are available in documentation. Note that
       directives must appear on a single line to be properly
       identified. The `include` directive includes a markdown file from
@@ -2133,39 +2159,6 @@ definitions:
       authorization:
         $ref: '#/definitions/AuthorizationConfig'
         description: Authorization configuration.
-    type: object
-  Expr:
-    description: |-
-      Represents an expression text. Example:
-
-          title: "User account presence"
-          description: "Determines whether the request has a user account"
-          expression: "size(request.user) > 0"
-    properties:
-      description:
-        description: |-
-          An optional description of the expression. This is a longer text which
-          describes the expression, e.g. when hovered over it in a UI.
-        type: string
-      expression:
-        description: |-
-          Textual representation of an expression in
-          Common Expression Language syntax.
-
-          The application context of the containing message determines which
-          well-known feature set of CEL is supported.
-        type: string
-      location:
-        description: |-
-          An optional string indicating the location of the expression for error
-          reporting, e.g. a file name and a position in the file.
-        type: string
-      title:
-        description: |-
-          An optional title for the expression, i.e. a short string describing
-          its purpose. This can be used e.g. in UIs which allow to enter the
-          expression.
-        type: string
     type: object
   Field:
     description: A single field of a message type.
@@ -3419,12 +3412,12 @@ definitions:
       specify access control policies for Cloud Platform resources.
 
 
-      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of
+      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
       `members` to a `role`, where the members can be user accounts, Google groups,
       Google domains, and service accounts. A `role` is a named list of permissions
       defined by IAM.
 
-      **Example**
+      **JSON Example**
 
           {
             "bindings": [
@@ -3434,7 +3427,7 @@ definitions:
                   "user:mike@example.com",
                   "group:admins@example.com",
                   "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com",
+                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
                 ]
               },
               {
@@ -3443,6 +3436,20 @@ definitions:
               }
             ]
           }
+
+      **YAML Example**
+
+          bindings:
+          - members:
+            - user:mike@example.com
+            - group:admins@example.com
+            - domain:google.com
+            - serviceAccount:my-other-app@appspot.gserviceaccount.com
+            role: roles/owner
+          - members:
+            - user:sean@example.com
+            role: roles/viewer
+
 
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
@@ -3864,9 +3871,6 @@ definitions:
       usage:
         $ref: '#/definitions/Usage'
         description: Configuration controlling usage of this service.
-      visibility:
-        $ref: '#/definitions/Visibility'
-        description: API visibility configuration.
     type: object
   SetIamPolicyRequest:
     description: Request message for `SetIamPolicy` method.
@@ -4292,68 +4296,4 @@ definitions:
           This flag is used by Google Cloud Endpoints to bypass checks for internal
           methods, such as service health check methods.
         type: boolean
-    type: object
-  Visibility:
-    description: |-
-      `Visibility` defines restrictions for the visibility of service
-      elements.  Restrictions are specified using visibility labels
-      (e.g., TRUSTED_TESTER) that are elsewhere linked to users and projects.
-
-      Users and projects can have access to more than one visibility label. The
-      effective visibility for multiple labels is the union of each label's
-      elements, plus any unrestricted elements.
-
-      If an element and its parents have no restrictions, visibility is
-      unconditionally granted.
-
-      Example:
-
-          visibility:
-            rules:
-            - selector: google.calendar.Calendar.EnhancedSearch
-              restriction: TRUSTED_TESTER
-            - selector: google.calendar.Calendar.Delegate
-              restriction: GOOGLE_INTERNAL
-
-      Here, all methods are publicly visible except for the restricted methods
-      EnhancedSearch and Delegate.
-    properties:
-      rules:
-        description: |-
-          A list of visibility rules that apply to individual API elements.
-
-          **NOTE:** All service configuration rules follow "last one wins" order.
-        items:
-          $ref: '#/definitions/VisibilityRule'
-        type: array
-    type: object
-  VisibilityRule:
-    description: |-
-      A visibility rule provides visibility configuration for an individual API
-      element.
-    properties:
-      restriction:
-        description: |-
-          A comma-separated list of visibility labels that apply to the `selector`.
-          Any of the listed labels can be used to grant the visibility.
-
-          If a rule has multiple labels, removing one of the labels but not all of
-          them can break clients.
-
-          Example:
-
-              visibility:
-                rules:
-                - selector: google.calendar.Calendar.EnhancedSearch
-                  restriction: GOOGLE_INTERNAL, TRUSTED_TESTER
-
-          Removing GOOGLE_INTERNAL from this restriction will break clients that
-          rely on this method and only had access to it through GOOGLE_INTERNAL.
-        type: string
-      selector:
-        description: |-
-          Selects methods, messages, fields, enums, etc. to which this rule applies.
-
-          Refer to selector for syntax details.
-        type: string
     type: object

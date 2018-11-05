@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: swagger
       url: 'https://semantria.com/developer/api-docs-prod'
       version: '1.2'
@@ -140,7 +140,7 @@ paths:
           name: Blacklisted items
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -181,7 +181,7 @@ paths:
           name: Blacklisted items
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -293,7 +293,7 @@ paths:
           name: Categories
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -334,7 +334,7 @@ paths:
           name: Categories
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -376,7 +376,7 @@ paths:
           name: Collection
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -566,7 +566,7 @@ paths:
           name: Configurations
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -602,7 +602,7 @@ paths:
           name: Configurations
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -644,7 +644,7 @@ paths:
           name: Document
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -682,7 +682,7 @@ paths:
           name: Batch of Documents
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -878,7 +878,7 @@ paths:
           name: User entities
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -919,7 +919,7 @@ paths:
           name: User entities
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -1061,7 +1061,7 @@ paths:
           name: Sentiment phrases
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -1102,7 +1102,7 @@ paths:
           name: Sentiment phrases
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -1214,7 +1214,7 @@ paths:
           name: Queries
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -1255,7 +1255,7 @@ paths:
           name: Queries
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -1446,7 +1446,7 @@ paths:
           name: Taxonomy
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -1487,7 +1487,7 @@ paths:
           name: Taxonomy
           required: true
           schema:
-            $ref: '#/definitions/Request_class'
+            $ref: '#/definitions/Request%20class'
         - in: path
           name: content_type
           required: true
@@ -1680,9 +1680,6 @@ definitions:
       job_id:
         description: Specific marker of incoming job that can be used then for collections retrieving
         type: string
-      metadata:
-        $ref: '#/definitions/JSON'
-        description: Free form metadata object(JSON) attached to the certain collection
       tag:
         description: Any text of up to 50 characters used like marker
         type: string
@@ -1690,16 +1687,12 @@ definitions:
       - documents
       - id
       - job_id
-      - metadata
       - tag
   CollectionAnalyticData:
     properties:
       config_id:
         description: Unique configuration identifier. Usually 36 alphanumeric characters
         type: string
-      docs_count:
-        description: Count of the documents the collection consist of
-        type: integer
       entities:
         description: Returns the named entities and user defined entities from the text
         items:
@@ -1716,9 +1709,6 @@ definitions:
       job_id:
         description: 'Specific marker of a job collection belongs to, can be used for collections ordering on client side.'
         type: string
-      metadata:
-        $ref: '#/definitions/JSON'
-        description: Free form metadata object(JSON) attached to the certain collection
       status:
         description: Status of the collection
         enum:
@@ -1746,12 +1736,10 @@ definitions:
         type: array
     required:
       - config_id
-      - docs_count
       - entities
       - facets
       - id
       - job_id
-      - metadata
       - status
       - tag
       - taxonomy
@@ -1759,65 +1747,130 @@ definitions:
       - topics
   ConfigurationCollectionSection:
     properties:
-      attributes:
-        description: 'Defines whether attributes for facets will be reported for the collection. Default: true'
-        type: boolean
-      concept_topics:
-        description: 'Defines whether user_categories will be reported for the collection. Default: false'
-        type: boolean
-      facets:
-        description: 'Defines whether facets will be reported for the collection. Default: true'
-        type: boolean
-      mentions:
-        description: 'Defines whether mentions for themes, user/named entities, facets and attributes will be reported for the collection. Default: false'
-        type: boolean
-      named_entities:
-        description: 'Defines whether named entities will be reported for the collection. Default: true'
-        type: boolean
-      query_topics:
-        description: 'Defines whether queries will be reported for the collection. Default: true'
-        type: boolean
-      themes:
-        description: 'Defines whether themes will be reported for the collection. Default: true'
-        type: boolean
-      user_entities:
-        description: 'Defines whether user entities will be reported for the collection. Default: true'
-        type: boolean
+      attribute_mentions_limit:
+        description: 'Limits the number of mentions of attribute responded from the server. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
+      concept_topics_limit:
+        description: 'Limits the number of concept topics responded from the service. Default: 5'
+        maximum: 20
+        minimum: 0
+        type: integer
+      facet_atts_limit:
+        description: 'Limits the number of facets which will be responded from the server. Default: 5'
+        maximum: 20
+        minimum: 0
+        type: integer
+      facet_mentions_limit:
+        description: 'Limits the number of mentions of facet responded from the server. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
+      facets_limit:
+        description: 'Limits the number of facets which will be responded from the server.  Default: 15'
+        maximum: 20
+        minimum: 0
+        type: integer
+      named_entities_limit:
+        description: 'Limits the number of named entities responded from the service. Default: 5'
+        maximum: 20
+        minimum: 0
+        type: integer
+      named_mentions_limit:
+        description: 'Limits the number of mentions of theme responded from the server. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
+      query_topics_limit:
+        description: 'Limits the number of query topics responded from the service. Default: 5'
+        maximum: 20
+        minimum: 0
+        type: integer
+      theme_mentions_limit:
+        description: 'Limits the number of entity mentions responded from the server. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
+      themes_limit:
+        description: 'Limits the number of themes responded from the service. Default: 5'
+        maximum: 20
+        minimum: 0
+        type: integer
+      user_entities_limit:
+        description: 'Limits the number of user entities the service responds. Default: 15'
+        maximum: 20
+        minimum: 0
+        type: integer
+      user_mentions_limit:
+        description: 'Limits the number of user entity mentions the service responds. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
     required:
-      - attributes
-      - concept_topics
-      - facets
-      - mentions
-      - named_entities
-      - query_topics
-      - themes
-      - user_entities
+      - attribute_mentions_limit
+      - concept_topics_limit
+      - facet_atts_limit
+      - facet_mentions_limit
+      - facets_limit
+      - named_entities_limit
+      - named_mentions_limit
+      - query_topics_limit
+      - theme_mentions_limit
+      - themes_limit
+      - user_entities_limit
+      - user_mentions_limit
   ConfigurationDocumentSection:
     properties:
-      auto_categories:
-        description: 'Defines whether auto-categories will be reported for the document. Default: true'
-        type: boolean
-      concept_topics:
-        description: 'Defines whether user categories will be reported for the document. Default: false'
-        type: boolean
+      auto_categories_limit:
+        description: 'Limits the number of auto categories the service responds. Default: 5'
+        maximum: 20
+        minimum: 0
+        type: integer
+      concept_topics_limit:
+        description: 'Limits the number of concept topics the service responds. Default: 5'
+        maximum: 20
+        minimum: 0
+        type: integer
       detect_language:
         description: 'Switches on language detection feature. Default: true'
         type: boolean
+      entity_themes_limit:
+        description: 'Limits the number of entity themes the service responds. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
       intentions:
         description: 'Switches on intentions detection feature. Default: false'
-        type: boolean
-      mentions:
-        description: 'Defines whether mentions for themes and user/named entities will be reported for the document. Default: false'
         type: boolean
       model_sentiment:
         description: 'Switches on/off model-based sentiment feature. Default: false'
         type: boolean
-      named_entities:
-        description: 'Defines whether named entities will be reported for the document. Default: true'
-        type: boolean
-      opinions:
-        description: 'Defines whether user/named entity opinions will be reported for the document. Default: false'
-        type: boolean
+      named_entities_limit:
+        description: 'Limits the number of named entities the service responds. Default: 5'
+        maximum: 20
+        minimum: 0
+        type: integer
+      named_mentions_limit:
+        description: 'Limits the number of named entity related mentions. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
+      named_opinions_limit:
+        description: 'Limits the number of named entity opinions the service responds. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
+      named_relations_limit:
+        description: 'Limits the number of named entity relations the service responds. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
+      phrases_limit:
+        description: 'Limits the number of responded sentiment-bearing phrases for document. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
       pos_types:
         description: Defines parts-of-speech which will be responded by the server
         enum:
@@ -1830,67 +1883,98 @@ definitions:
           - Twitter
           - Chinese
         type: string
-      query_topics:
-        description: 'Defines whether queries will be reported for the document. Default: true'
-        type: boolean
-      relations:
-        description: 'Defines whether user/named entity relations will be reported for the document. Default: false'
-        type: boolean
-      sentiment_phrases:
-        description: 'Defines whether sentiment-bearing phrases will be reported for the document. Default: true'
-        type: boolean
-      summary_size:
-        description: 'Limits the number of sentences for the document summary feature.  Default: 3'
+      possible_phrases_limit:
+        description: 'Limits the number of responded possible phrases which may affect on sentiment score extraction. Default: 0'
         maximum: 20
         minimum: 0
         type: integer
-      themes:
-        description: 'Defines whether document and user/named entity themes will be reported for the document. Default: false'
-        type: boolean
-      user_entities:
-        description: 'Defines whether user entities will be reported for the document. Default: true'
-        type: boolean
-    required:
-      - auto_categories
-      - concept_topics
-      - detect_language
-      - intentions
-      - mentions
-      - model_sentiment
-      - named_entities
-      - opinions
-      - pos_types
-      - query_topics
-      - relations
-      - sentiment_phrases
-      - summary_size
-      - themes
-      - user_entities
-  Configuration_InsertVersion:
-    properties:
-      alphanumeric_threshold:
-        description: 'Defines the threshold of alphanumeric characters needed in the text in percent. Default: 80'
-        maximum: 100
+      query_topics_limit:
+        description: 'Limits the number of query topics the service responds. Default: 5'
+        maximum: 20
         minimum: 0
         type: integer
+      summary_limit:
+        description: 'Limits the number of sentences for the document summary feature. Default: 3'
+        maximum: 20
+        minimum: 0
+        type: integer
+      theme_mentions_limit:
+        description: 'Limits the number of document and entity related theme mentions. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
+      themes_limit:
+        description: 'Limits the number of document themes the service responds. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
+      user_entities_limit:
+        description: 'Limits the number of user entities the service responds. Default: 5'
+        maximum: 20
+        minimum: 0
+        type: integer
+      user_mentions_limit:
+        description: 'Limits the number of user entity related mentions. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
+      user_opinions_limit:
+        description: 'Limits the number of concept topics the service responds. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
+      user_relations_limit:
+        description: 'Limits the number of user entity relations the service responds. Default: 0'
+        maximum: 20
+        minimum: 0
+        type: integer
+    required:
+      - auto_categories_limit
+      - concept_topics_limit
+      - detect_language
+      - entity_themes_limit
+      - intentions
+      - model_sentiment
+      - named_entities_limit
+      - named_mentions_limit
+      - named_opinions_limit
+      - named_relations_limit
+      - phrases_limit
+      - pos_types
+      - possible_phrases_limit
+      - query_topics_limit
+      - summary_limit
+      - theme_mentions_limit
+      - themes_limit
+      - user_entities_limit
+      - user_mentions_limit
+      - user_opinions_limit
+      - user_relations_limit
+  Configuration_InsertVersion:
+    properties:
       auto_response:
         description: 'Defines whether or not the service should respond with processed results automatically. Default: false'
         type: boolean
       callback:
         description: Defines a callback URL for automatic data responding
         type: string
+      categories_threshold:
+        description: 'Defines low threshold for strength score of user categories to be reported in the output. Default: 0.45'
+        format: double
+        type: number
+      chars_threshold:
+        description: 'Defines the threshold for alphanumeric characters in the text in percent. Default: 80'
+        maximum: 100
+        minimum: 0
+        type: integer
       collection:
         $ref: '#/definitions/ConfigurationCollectionSection'
         description: Includes options related to collection processing mode
-      concept_topics_threshold:
-        description: 'Defines concept topics detection threshold. Default: 0.45'
-        format: double
-        type: number
       document:
         $ref: '#/definitions/ConfigurationDocumentSection'
         description: Includes options related to document processing mode
       entities_threshold:
-        description: 'Defines low threshold for evidence score of named and user entities to be reported in the output. Default: 55'
+        description: Defines low threshold for evidence score of named and user entities to be reported in the output.
         type: integer
       is_primary:
         description: 'Identifies whether the current configuration is primary or not. Default: false'
@@ -1901,53 +1985,56 @@ definitions:
       name:
         description: Configuration name
         type: string
-      one_sentence_mode:
-        description: 'Defines whether or not service should use one sentence mode with less accurate grammar. Default: false'
+      one_sentence:
+        description: 'Leads the service to consider the entire document as single sentence. Default: false'
         type: boolean
       process_html:
-        description: 'Defines whether or not the service should clean up HTML tags before processing. Default: false'
+        description: 'Leads the service to clean HTML tags before processing. Default: false'
         type: boolean
     required:
-      - alphanumeric_threshold
       - auto_response
       - callback
+      - categories_threshold
+      - chars_threshold
       - collection
-      - concept_topics_threshold
       - document
       - entities_threshold
       - is_primary
       - language
       - name
-      - one_sentence_mode
+      - one_sentence
       - process_html
   Configuration_ResponseVersion:
     properties:
-      alphanumeric_threshold:
-        description: 'Defines the threshold for alphanumeric characters in the text in percent. Default: 80'
-        maximum: 100
-        minimum: 0
-        type: integer
       auto_response:
         description: 'Defines whether or not the service should respond with processed results automatically. Default: false'
         type: boolean
       callback:
         description: Defines a callback URL for automatic data responding
         type: string
+      categories_threshold:
+        description: 'Defines low threshold for strength score of user categories to be reported in the output. Default: 0.45'
+        format: double
+        type: number
+      chars_threshold:
+        description: 'Defines the threshold for alphanumeric characters in the text in percent. Default: 80'
+        maximum: 100
+        minimum: 0
+        type: integer
       collection:
         $ref: '#/definitions/ConfigurationCollectionSection'
         description: Includes options related to collection processing mode
-      concept_topics_threshold:
-        description: 'Defines concept topics detection threshold. Default: 0.45'
-        format: double
-        type: number
+      config_id:
+        description: Unique configuration identifier
+        type: string
       document:
         $ref: '#/definitions/ConfigurationDocumentSection'
         description: Includes options related to document processing mode
       entities_threshold:
         description: 'Defines low threshold for evidence score of named and user entities to be reported in the output. Default: 55'
         type: integer
-      id:
-        description: Unique configuration identifier
+      from_template_config_id:
+        description: Unique identifier of configuration (template) the current configuration has been clonned from
         type: string
       is_primary:
         description: 'Identifies whether the current configuration is primary or not. Default: false'
@@ -1961,64 +2048,61 @@ definitions:
       name:
         description: Configuration name
         type: string
-      one_sentence_mode:
-        description: 'Defines whether or not service should use one sentence mode with less accurate grammar. Default: false'
+      one_sentence:
+        description: 'Leads the service to consider the entire document as single sentence. Default: false'
         type: boolean
       process_html:
-        description: 'Defines whether or not the service should clean up HTML tags before processing. Default: false'
+        description: 'Leads the service to clean HTML tags before processing. Default: false'
         type: boolean
-      template:
-        description: Unique identifier of template configuration if copy operation is performing
-        type: string
       version:
         description: 'Version of the vertical pack, for versioning purposes'
         type: string
     required:
-      - alphanumeric_threshold
       - auto_response
       - callback
+      - categories_threshold
+      - chars_threshold
       - collection
-      - concept_topics_threshold
+      - config_id
       - document
       - entities_threshold
-      - id
+      - from_template_config_id
       - is_primary
       - language
       - modified
       - name
-      - one_sentence_mode
+      - one_sentence
       - process_html
-      - template
       - version
   Configuration_UpdateVersion:
     properties:
-      alphanumeric_threshold:
-        description: 'Defines the threshold of alphanumeric characters needed in the text in percent. Default: 80'
-        maximum: 100
-        minimum: 0
-        type: integer
       auto_response:
         description: 'Defines whether or not the service should respond with processed results automatically. Default: false'
         type: boolean
       callback:
         description: Defines a callback URL for automatic data responding
         type: string
+      categories_threshold:
+        description: 'Defines low threshold for strength score of user categories to be reported in the output. Default: 0.45'
+        format: double
+        type: number
+      chars_threshold:
+        description: 'Defines the threshold for alphanumeric characters in the text in percent. Default: 80'
+        maximum: 100
+        minimum: 0
+        type: integer
       collection:
         $ref: '#/definitions/ConfigurationCollectionSection'
         description: Includes options related to collection processing mode
-      concept_topics_threshold:
-        description: 'Defines concept topics detection threshold. Default: 0.45'
-        format: double
-        type: number
+      config_id:
+        description: Unique configuration identifier
+        type: string
       document:
         $ref: '#/definitions/ConfigurationDocumentSection'
         description: Includes options related to document processing mode
       entities_threshold:
         description: 'Defines low threshold for evidence score of named and user entities to be reported in the output. Default: 55'
         type: integer
-      id:
-        description: Unique configuration identifier
-        type: string
       is_primary:
         description: 'Identifies whether the current configuration is primary or not. Default: false'
         type: boolean
@@ -2028,25 +2112,25 @@ definitions:
       name:
         description: Configuration name
         type: string
-      one_sentence_mode:
-        description: 'Defines whether or not service should use one sentence mode with less accurate grammar. Default: false'
+      one_sentence:
+        description: 'Leads the service to consider the entire document as single sentence. Default: false'
         type: boolean
       process_html:
-        description: 'Defines whether or not the service should clean up HTML tags before processing. Default: false'
+        description: 'Leads the service to clean HTML tags before processing. Default: false'
         type: boolean
     required:
-      - alphanumeric_threshold
       - auto_response
       - callback
+      - categories_threshold
+      - chars_threshold
       - collection
-      - concept_topics_threshold
+      - config_id
       - document
       - entities_threshold
-      - id
       - is_primary
       - language
       - name
-      - one_sentence_mode
+      - one_sentence
       - process_html
   Details:
     properties:
@@ -2073,9 +2157,6 @@ definitions:
       job_id:
         description: Specific marker of incoming job that can be used then for documents retrieving
         type: string
-      metadata:
-        $ref: '#/definitions/JSON'
-        description: Free form metadata object(JSON) attached to the certain document
       tag:
         description: Any text of up to 50 characters used like marker.
         type: string
@@ -2085,7 +2166,6 @@ definitions:
     required:
       - id
       - job_id
-      - metadata
       - tag
       - text
   DocumentAnalyticData:
@@ -2126,9 +2206,6 @@ definitions:
         description: The percentage score of the best match of language among detected languages
         format: double
         type: number
-      metadata:
-        $ref: '#/definitions/JSON'
-        description: Free form metadata object(JSON) attached to the certain document
       model_sentiment:
         $ref: '#/definitions/ModelSentiment'
         description: Returns details of model-based sentiment analysis for the document
@@ -2196,7 +2273,6 @@ definitions:
       - job_id
       - language
       - language_score
-      - metadata
       - model_sentiment
       - opinions
       - phrases
@@ -2405,20 +2481,23 @@ definitions:
       auto_categories:
         description: Represents whether auto-categories of entities supported for certain language or not
         type: boolean
+      entity_mentions:
+        description: Represents whether mentions of entities supported for certain language or not
+        type: boolean
       entity_opinions:
         description: Represents whether opinions of entities supported for certain language or not
         type: boolean
       entity_relations:
         description: Represents whether relations of entities supported for certain language or not
         type: boolean
+      entity_themes:
+        description: Represents whether themes of entities supported for certain language or not
+        type: boolean
       intentions:
         description: Represents whether intentions detection supported for certain language or not
         type: boolean
       language_detection:
         description: Represents whether language detection feature supported or not
-        type: boolean
-      mentions:
-        description: Represents whether mentions for themes and entities supported for certain language or not
         type: boolean
       model_sentiment:
         description: Represents whether model-based sentiment supported for certain language or not
@@ -2444,8 +2523,11 @@ definitions:
       taxonomy:
         description: Represents whether taxonomy feature supported for certain language or not
         type: boolean
+      theme_mentions:
+        description: Represents whether mentions of themes supported for certain language or not
+        type: boolean
       themes:
-        description: Represents whether document and entity themes supported for certain language or not
+        description: Represents whether themes extraction supported for certain language or not
         type: boolean
       user_categories:
         description: Represents whether user categories of entities supported for certain language or not
@@ -2455,11 +2537,12 @@ definitions:
         type: boolean
     required:
       - auto_categories
+      - entity_mentions
       - entity_opinions
       - entity_relations
+      - entity_themes
       - intentions
       - language_detection
-      - mentions
       - model_sentiment
       - named_entities
       - pos_tagging
@@ -2468,57 +2551,63 @@ definitions:
       - sentiment_phrases
       - summarization
       - taxonomy
+      - theme_mentions
       - themes
       - user_categories
       - user_entities
   FeatureDiscoveryModeSection:
     properties:
-      attributes:
+      entity_mentions:
+        description: Represents whether mentions of entities supported for certain language or not
+        type: boolean
+      facet_attributes:
         description: Represents whether attributes of facets supported for certain language or not
         type: boolean
-      concept_topics:
-        description: Represents whether user categories extraction supported for certain language or not
+      facet_mentioins:
+        description: Represents whether mentions of facets supported for certain language or not
         type: boolean
       facets:
         description: Represents whether facets detection supported for certain language or not
         type: boolean
-      mentions:
-        description: 'Represents whether mentions for facets, themes and entities supported for certain language or not'
-        type: boolean
       named_entities:
         description: Represents whether named entities extraction supported for certain language or not
         type: boolean
-      query_topics:
+      queries:
         description: Represents whether queries extraction supported for certain language or not
         type: boolean
       taxonomy:
         description: Represents whether taxonomy feature supported for certain language or not
         type: boolean
+      theme_mentions:
+        description: Represents whether mentions of themes supported for certain language or not
+        type: boolean
       themes:
         description: Represents whether themes extraction supported for certain language or not
+        type: boolean
+      user_categories:
+        description: Represents whether user categories extraction supported for certain language or not
         type: boolean
       user_entities:
         description: Represents whether user entities extraction supported for certain language or not
         type: boolean
     required:
-      - attributes
-      - concept_topics
+      - entity_mentions
+      - facet_attributes
+      - facet_mentioins
       - facets
-      - mentions
       - named_entities
-      - query_topics
+      - queries
       - taxonomy
+      - theme_mentions
       - themes
+      - user_categories
       - user_entities
   FeatureSettingsSection:
     properties:
       blacklist:
         description: Represents whether blacklist feature supported for certain language or not
         type: boolean
-      concept_topics:
-        description: Represents whether user categories definition supported for certain language or not
-        type: boolean
-      query_topics:
+      queries:
         description: Represents whether queries definition supported for certain language or not
         type: boolean
       sentiment_phrases:
@@ -2527,15 +2616,18 @@ definitions:
       taxonomy:
         description: Represents whether taxonomy feature supported for certain language or not
         type: boolean
+      user_categories:
+        description: Represents whether user categories definition supported for certain language or not
+        type: boolean
       user_entities:
         description: Represents whether user entities definition supported for certain language or not
         type: boolean
     required:
       - blacklist
-      - concept_topics
-      - query_topics
+      - queries
       - sentiment_phrases
       - taxonomy
+      - user_categories
       - user_entities
   FeatureTemplateSection:
     properties:
@@ -2713,15 +2805,9 @@ definitions:
       is_negated:
         description: Specifies whether the phrase has been negated or not
         type: boolean
-      length:
-        description: The length of the phrase in bytes
-        type: integer
       negating_phrase:
         description: 'If the phrase has been negated, this gives the negating phrase'
         type: string
-      offset:
-        description: The amount of bytes offset in the original text before the start of the phrase
-        type: integer
       sentiment_polarity:
         description: 'Verbal representation of sentiment score. Can be "negative", "positive" or "neutral"'
         enum:
@@ -2743,9 +2829,7 @@ definitions:
       - intensifying_phrase
       - is_intensified
       - is_negated
-      - length
       - negating_phrase
-      - offset
       - sentiment_polarity
       - sentiment_score
       - title
@@ -2883,23 +2967,36 @@ definitions:
     required:
       - entity_type
       - title
+  Request class: {}
   Request_class: {}
   Statistic:
     properties:
-      batches_queued:
-        description: Total number of queued batches of texts processed
-        minimum: 0
-        type: integer
       calls_data:
         description: Total number of data API calls made. These affect you API balance
         minimum: 0
         type: integer
       calls_polling:
-        description: Total number of polling API calls made
+        description: Total number of polling API calls made. These do not affect API balance
         minimum: 0
         type: integer
       calls_settings:
         description: Total number of settings API calls made. These do not affect API balance
+        minimum: 0
+        type: integer
+      colls_documents:
+        description: Total number of documents that have been queued into collections
+        minimum: 0
+        type: integer
+      colls_failed:
+        description: Total number of collections that have failed to be processed
+        minimum: 0
+        type: integer
+      colls_processed:
+        description: Total numbers of collections that have been successfully processed
+        minimum: 0
+        type: integer
+      colls_responded:
+        description: Total number of successfully processed collections that have been returned
         minimum: 0
         type: integer
       configurations:
@@ -2911,16 +3008,12 @@ definitions:
         description: Total number of documents that have failed to be processed
         minimum: 0
         type: integer
-      docs_queued:
-        description: Total number of documents that have been queued
-        minimum: 0
-        type: integer
-      docs_retrieved:
-        description: Total number of successfully processed documents that have been returned
-        minimum: 0
-        type: integer
-      docs_successful:
+      docs_processed:
         description: Total number of documents that have been successfully processed
+        minimum: 0
+        type: integer
+      docs_responded:
+        description: Total number of successfully processed documents that have been returned
         minimum: 0
         type: integer
       latest_used_app:
@@ -2929,83 +3022,152 @@ definitions:
       name:
         description: Semantria subscriber name. Usually email
         type: string
-      total_api_calls:
+      overall_batches:
+        description: Total number of queued batches of texts processed
+        minimum: 0
+        type: integer
+      overall_calls:
         description: Total number of API calls made
         minimum: 0
         type: integer
+      overall_docs:
+        description: Total number of documents that have been queued
+        minimum: 0
+        type: integer
+      overall_exceeded:
+        description: Total number of documents that have exceeded the favorable (suggested) limit
+        minimum: 0
+        type: integer
+      overall_texts:
+        description: Total number of texts processed
+        minimum: 0
+        type: integer
+      overcall_colls:
+        description: Total numbers of collections that have been queued
+        minimum: 0
+        type: integer
+      status:
+        description: 'Semantria subscriber status. Can be active, expired, disabled, etc'
+        type: string
+      used_apps:
+        description: A list of all the applications that have used the API on this account
+        type: string
     required:
-      - batches_queued
       - calls_data
       - calls_polling
       - calls_settings
+      - colls_documents
+      - colls_failed
+      - colls_processed
+      - colls_responded
       - configurations
       - docs_failed
-      - docs_queued
-      - docs_retrieved
-      - docs_successful
+      - docs_processed
+      - docs_responded
       - latest_used_app
       - name
-      - total_api_calls
+      - overall_batches
+      - overall_calls
+      - overall_docs
+      - overall_exceeded
+      - overall_texts
+      - overcall_colls
+      - status
+      - used_apps
   StatisticConfiguration:
     properties:
-      batches_queued:
-        description: Number of queued batches of texts using certain configuration
-        minimum: 0
-        type: integer
       calls_data:
-        description: Number of data API calls made  using certain configuration. These affect you API balance
+        description: Total number of data API calls made. These affect you API balance
         minimum: 0
         type: integer
       calls_polling:
-        description: Number of polling API calls made using certain configuration. These do not affect API balance
+        description: Total number of polling API calls made. These do not affect API balance
         minimum: 0
         type: integer
       calls_settings:
-        description: Number of settings API calls made  using certain configuration. These do not affect API balance
+        description: Total number of settings API calls made. These do not affect API balance
+        minimum: 0
+        type: integer
+      colls_failed:
+        description: Total number of collections that have failed to be processed
+        minimum: 0
+        type: integer
+      colls_processed:
+        description: Total numbers of collections that have been successfully processed
+        minimum: 0
+        type: integer
+      colls_responded:
+        description: Total number of successfully processed collections that have been returned
         minimum: 0
         type: integer
       config_id:
         description: Unique identifier of configuration
         type: string
       docs_failed:
-        description: Number of documents that have failed to be processed using certain configuration
+        description: Total number of documents that have failed to be processed
         minimum: 0
         type: integer
-      docs_queued:
-        description: Number of documents that have been queued using certain configuration
+      docs_processed:
+        description: Total number of documents that have been successfully processed
         minimum: 0
         type: integer
-      docs_retrieved:
-        description: Number of successfully processed documents which have been returned using certain configuration
-        minimum: 0
-        type: integer
-      docs_successful:
-        description: Number of documents that have been successfully processed using certain configuration
+      docs_responded:
+        description: Total number of successfully processed documents that have been returned
         minimum: 0
         type: integer
       latest_used_app:
-        description: The latest application used by certain configuration
+        description: The latest application that used the API on this account
         type: string
       name:
         description: The name of configuration
         type: string
-      total_api_calls:
-        description: Number of API calls made  using certain configuration
+      overall_batches:
+        description: Total number of queued batches of texts processed
         minimum: 0
         type: integer
+      overall_calls:
+        description: Total number of API calls made
+        minimum: 0
+        type: integer
+      overall_docs:
+        description: Total number of documents that have been queued
+        minimum: 0
+        type: integer
+      overall_exceeded:
+        description: Total number of documents that have exceeded the favorable (suggested) limit
+        minimum: 0
+        type: integer
+      overall_texts:
+        description: Total number of texts processed
+        minimum: 0
+        type: integer
+      overcall_colls:
+        description: Total numbers of collections that have been queued
+        minimum: 0
+        type: integer
+      used_apps:
+        description: A list of all the applications that have used the API on this account
+        type: string
     required:
-      - batches_queued
       - calls_data
       - calls_polling
       - calls_settings
+      - colls_failed
+      - colls_processed
+      - colls_responded
       - config_id
       - docs_failed
-      - docs_queued
-      - docs_retrieved
-      - docs_successful
+      - docs_processed
+      - docs_responded
       - latest_used_app
       - name
-      - total_api_calls
+      - overall_batches
+      - overall_calls
+      - overall_docs
+      - overall_exceeded
+      - overall_texts
+      - overcall_colls
+      - used_apps
   Status:
     properties:
       api_version:
@@ -3080,8 +3242,12 @@ definitions:
       - status
   SubscriptionBasicSection:
     properties:
-      auto_response_batch_limit:
+      auto_response_limit:
         description: Represents the maximum size of outgoing batch for auto-response feature
+        minimum: 0
+        type: integer
+      batch_limit:
+        description: Represents the maximum size of the incoming batch in documents
         minimum: 0
         type: integer
       blacklist_limit:
@@ -3092,99 +3258,65 @@ definitions:
         description: Represents the maximum size of outgoing batch for callback data retrieving mode
         minimum: 0
         type: integer
+      categories_limit:
+        description: Represents the maximum number of allowed categories
+        minimum: 0
+        type: integer
+      category_samples_limit:
+        description: Represents the maximum number of allowed category samples
+        minimum: 0
+        type: integer
+      characters_limit:
+        description: Represents the maximum length of the document allowed for processing
+        minimum: 0
+        type: integer
       collection_limit:
         description: Represents the maximum size of collection in documents
-        minimum: 0
-        type: integer
-      concept_topic_samples_limit:
-        description: Represents the maximum number of allowed user category samples
-        minimum: 0
-        type: integer
-      concept_topics_limit:
-        description: Represents the maximum number of allowed user categories
         minimum: 0
         type: integer
       configurations_limit:
         description: Represents the maximum number of allowed configurations
         minimum: 0
         type: integer
-      document_length:
-        description: Represents the maximum length of the document allowed for processing
+      entities_limit:
+        description: Represents the maximum number of allowed entities
         minimum: 0
         type: integer
-      incoming_batch_limit:
-        description: Represents the maximum size of the incoming batch of documents
+      output_data_limit:
+        description: Represent the maximum number allowed as output limit of configuration
         minimum: 0
         type: integer
-      near_operator_distance:
-        description: Represents the maximum allowed distance that can be used with NEAR operator
+      processed_batch_limit:
+        description: Represents the maximum size of outgoing batch for pulling data retrieving mode
         minimum: 0
         type: integer
-      near_operator_limit:
-        description: Represents the maximum number of NEAR operators that can appear in query/entity/phrase
-        minimum: 0
-        type: integer
-      polling_batch_limit:
-        description: Represents the maximum size of outgoing batch for polling data retrieving mode
-        minimum: 0
-        type: integer
-      queries_depth_level:
-        description: Represents the maximum depth level allowed for nested and referenced queries
-        minimum: 0
-        type: integer
-      query_topics_limit:
+      queries_limit:
         description: Represents the maximum number of allowed queries
         minimum: 0
         type: integer
       return_source_text:
         description: Indicates whether responding of source text along with the analysis data is allowed or not
         type: boolean
-      sentiment_phrases_limit:
+      sentiment_limit:
         description: Represents the maximum number of allowed sentiment-bearing phrases
         minimum: 0
         type: integer
-      summary_size_limit:
-        description: Represent the maximum number allowed as output limit of configuration
-        minimum: 0
-        type: integer
-      taxonomy_depth_limit:
-        description: Represents the maximum depth level allowed for nested taxonomy nodes
-        minimum: 0
-        type: integer
-      taxonomy_limit:
-        description: Represents the number of nodes allowed for entire taxonomy tree
-        minimum: 0
-        type: integer
-      taxonomy_topics_limit:
-        description: Represents the maximum allowed number of topics associated with the certain taxonomy node
-        minimum: 0
-        type: integer
-      user_entities_limit:
-        description: Represents the maximum number of allowed user entities
-        minimum: 0
-        type: integer
     required:
-      - auto_response_batch_limit
+      - auto_response_limit
+      - batch_limit
       - blacklist_limit
       - callback_batch_limit
+      - categories_limit
+      - category_samples_limit
+      - characters_limit
       - collection_limit
-      - concept_topic_samples_limit
-      - concept_topics_limit
       - configurations_limit
-      - document_length
-      - incoming_batch_limit
-      - near_operator_distance
-      - near_operator_limit
-      - polling_batch_limit
-      - queries_depth_level
-      - query_topics_limit
+      - entities_limit
+      - output_data_limit
+      - processed_batch_limit
+      - queries_limit
       - return_source_text
-      - sentiment_phrases_limit
-      - summary_size_limit
-      - taxonomy_depth_limit
-      - taxonomy_limit
-      - taxonomy_topics_limit
-      - user_entities_limit
+      - sentiment_limit
   SubscriptionBillingSection:
     properties:
       app_seats_allocated:
@@ -3211,17 +3343,28 @@ definitions:
         description: Current transaction balance. Applicable for pay-as-you-go subscriptions only
         minimum: 0
         type: integer
+      docs_limit:
+        description: Represents the transactions limit per "docs_limit_interval" value
+        minimum: 0
+        type: integer
+      docs_limit_interval:
+        description: Represents the timeframe for the "docs_limit" value of current subscription
+        minimum: 0
+        type: integer
+      docs_suggested:
+        description: Represents the amount of favorable documents suggested for throughput subscriptions
+        minimum: 0
+        type: integer
+      docs_suggested_interval:
+        description: Represents the timeframe for the “docs_suggested” value of the current subscription
+        minimum: 0
+        type: integer
       expiration_date:
         description: Expiration date of current subscription. Defined as a Unix time stamp
         type: string
-      job_ids_allocated:
-        description: Number of job Ids currently allocated on the server by the certain subscription
-        minimum: 0
-        type: integer
-      job_ids_permitted:
-        description: Number of job Ids allowed for the certain subscription
-        minimum: 0
-        type: integer
+      limit_type:
+        description: Subscription type can have either pay-as-you-go or throughput value
+        type: string
       polling_calls_balance:
         description: Represents actual value of remained polling API calls
         minimum: 0
@@ -3234,6 +3377,9 @@ definitions:
         description: Represents an interval for the "polling_calls_limit" value of current subscription
         minimum: 0
         type: integer
+      priority:
+        description: 'Processing priority of current subscriber. Can have low, normal or high value'
+        type: string
       settings_calls_balance:
         description: Represents actual value of remained settings API calls
         minimum: 0
@@ -3253,12 +3399,16 @@ definitions:
       - data_calls_limit
       - data_calls_limit_interval
       - docs_balance
+      - docs_limit
+      - docs_limit_interval
+      - docs_suggested
+      - docs_suggested_interval
       - expiration_date
-      - job_ids_allocated
-      - job_ids_permitted
+      - limit_type
       - polling_calls_balance
       - polling_calls_limit
       - polling_calls_limit_interval
+      - priority
       - settings_calls_balance
       - settings_calls_limit
       - settings_calls_limit_interval
@@ -3324,6 +3474,9 @@ definitions:
       concept_topics:
         description: Indicates whether concept topics are allowed or not
         type: boolean
+      entity_themes:
+        description: Indicates whether entity themes feature is allowed or not
+        type: boolean
       intentions:
         description: Indicates whether intentions feature is allowed or not.
         type: boolean
@@ -3339,17 +3492,20 @@ definitions:
       named_entities:
         description: Indicates whether named entities feature is allowed or not
         type: boolean
+      named_relations:
+        description: Indicates whether relations for named entities are allowed or not
+        type: boolean
       opinions:
         description: Indicates whether opinions feature is allowed or not
+        type: boolean
+      phrases_detection:
+        description: Indicates whether possible phrases detection feature is allowed or not
         type: boolean
       pos_tagging:
         description: Indicates whether part of speech tagging feature is allowed or not
         type: boolean
       query_topics:
         description: Indicates whether query defined topics are allowed or not
-        type: boolean
-      relations:
-        description: Indicates whether relations feature for user and named entities is allowed or not
         type: boolean
       sentiment_phrases:
         description: Indicates whether sentiment-bearing phrases output is allowed or not
@@ -3358,27 +3514,33 @@ definitions:
         description: Indicates whether summarization feature is allowed or not
         type: boolean
       themes:
-        description: Indicates whether document and entity themes feature is allowed or not
+        description: Indicates whether document themes feature is allowed or not
         type: boolean
       user_entities:
         description: Indicates whether user entities feature is allowed or not
         type: boolean
+      user_relations:
+        description: Indicates whether relations for user entities are allowed or not
+        type: boolean
     required:
       - auto_categories
       - concept_topics
+      - entity_themes
       - intentions
       - language_detection
       - mentions
       - model_sentiment
       - named_entities
+      - named_relations
       - opinions
+      - phrases_detection
       - pos_tagging
       - query_topics
-      - relations
       - sentiment_phrases
       - summary
       - themes
       - user_entities
+      - user_relations
   SubscriptionFeatureSectionTemplate:
     properties:
       config_id:

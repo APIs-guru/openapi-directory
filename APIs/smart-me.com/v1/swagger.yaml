@@ -102,42 +102,6 @@ paths:
       summary: Gets all available Actions of a Device
       tags:
         - Actions
-  /api/ChargingUser:
-    get:
-      consumes: []
-      deprecated: false
-      operationId: ChargingUser_Get
-      parameters:
-        - description: The ID of the user
-          format: int64
-          in: query
-          name: userId
-          required: true
-          type: integer
-        - description: The current Date
-          format: int64
-          in: query
-          name: date
-          required: true
-          type: integer
-        - description: The Password token
-          in: query
-          name: passwordToken
-          required: true
-          type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/User'
-      summary: Gets the informations for the user.
-      tags:
-        - ChargingUser
   /api/CustomDevice:
     get:
       consumes: []
@@ -1069,6 +1033,14 @@ definitions:
         description: The Meter Counter Reading (Total Energy used)
         format: double
         type: number
+      CounterReadingExport:
+        description: The Meter Counter Reading only export
+        format: double
+        type: number
+      CounterReadingImport:
+        description: The Meter Counter Reading only import
+        format: double
+        type: number
       CounterReadingT1:
         description: The Meter Counter Reading Tariff 1
         format: double
@@ -1148,11 +1120,25 @@ definitions:
           - MeterFamilyTypeSmartMe3PhaseMeter32A
           - MeterFamilyTypeSmartMe3PhaseMeterTransformer
           - MeterFamilyTypeLandisGyrModule
+          - MeterFamilyTypeFnnOpticalModule
           - MeterFamilyTypeRestApiMeter
           - MeterFamilyTypeVirtualBillingMeter
         type: string
       Id:
         description: The ID of the device
+        type: string
+      MeterSubType:
+        description: The sub meter type (e.g. warmwater or coldwater)
+        enum:
+          - MeterSubTypeUnknown
+          - MeterSubTypeCold
+          - MeterSubTypeHeat
+          - MeterSubTypeChargingStation
+          - MeterSubTypeElectricity
+          - MeterSubTypeWater
+          - MeterSubTypeGas
+          - MeterSubTypeElectricityHeat
+          - MeterSubTypeTemperature
         type: string
       Name:
         description: The Name of the Device

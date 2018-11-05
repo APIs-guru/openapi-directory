@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Provides natural language understanding technologies to developers. Examples include sentiment analysis, entity recognition, entity sentiment analysis, and text annotations.'
-  title: Google Cloud Natural Language
+  title: Cloud Natural Language
   version: v1beta2
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://language.googleapis.com/$discovery/rest?version=v1beta2'
       version: v1
@@ -540,7 +540,9 @@ definitions:
         format: float
         type: number
       name:
-        description: The name of the category representing the document.
+        description: |-
+          The name of the category representing the document, from the [predefined
+          taxonomy](/natural-language/docs/categories).
         type: string
     type: object
   ClassifyTextRequest:
@@ -666,7 +668,9 @@ definitions:
       Represents the input to API methods.
     properties:
       content:
-        description: The content of the input in string format.
+        description: |-
+          The content of the input in string format.
+          Cloud audit logging exempt since it is based on user data.
         type: string
       gcsContentUri:
         description: |-

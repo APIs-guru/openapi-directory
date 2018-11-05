@@ -104,10 +104,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/Company'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -201,10 +201,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/CompanyContact'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -262,10 +262,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/CreditNote'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -289,6 +289,73 @@ paths:
       summary: Gets list of Currencies
       tags:
         - Currency
+  /api/Estimate:
+    get:
+      consumes: []
+      description: 'EstimateStatusCode values are: "Draft", "Sent", "Late", "Paid", "Partial", "Void"'
+      operationId: Estimate_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - description: Number of items per page
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - in: query
+          name: Sort
+          required: false
+          type: string
+        - format: int32
+          in: query
+          name: CompanyIDFK
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EstimateList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of Estimates
+      tags:
+        - Estimate
+  '/api/Estimate/{id}':
+    get:
+      consumes: []
+      operationId: Estimate_GetByID
+      parameters:
+        - description: Estimate Estimate ID number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      security:
+        - oauth2:
+            - read
+      summary: Gets Estimate by Estimate ID
+      tags:
+        - Estimate
   /api/Expense:
     get:
       consumes: []
@@ -406,10 +473,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ExpenseDetails'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -464,10 +531,10 @@ paths:
           required: true
           type: integer
       responses:
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -501,6 +568,11 @@ paths:
           name: Sort
           required: false
           type: string
+        - format: int32
+          in: query
+          name: CompanyIDFK
+          required: false
+          type: integer
       responses:
         '200':
           description: Success
@@ -552,10 +624,10 @@ paths:
           required: true
           type: integer
       responses:
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -639,10 +711,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/Payment'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -678,6 +750,10 @@ paths:
           name: TimesheetUserID
           required: false
           type: integer
+        - in: query
+          name: includeArchived
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK
@@ -731,10 +807,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ProjectDetails'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -820,28 +896,31 @@ paths:
       consumes: []
       operationId: Task_Get
       parameters:
-        - format: date-time
+        - description: Optional filter to records updated after a specific date.
+          format: date-time
           in: query
           name: UpdatedAfter
           required: false
           type: string
-        - description: Number of items per page
+        - description: Number of items per page. Defaults to 20.
           format: int32
           in: query
           name: pageSize
           required: false
           type: integer
-        - description: Page to display. Starts from 1.
+        - description: Page to display. Starts from 1. Defaults to 1
           format: int32
           in: query
           name: pageNumber
           required: false
           type: integer
-        - in: query
+        - description: 'Optional sorting instruction. Currently possible values: "DateUpdated", "DateCreated", "DateUpdated desc", "DateCreated desc"'
+          in: query
           name: Sort
           required: false
           type: string
-        - format: int32
+        - description: Optional filter to only display tasks belonging to a specific ProjectID
+          format: int32
           in: query
           name: ProjectID
           required: false
@@ -901,10 +980,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/TaskDetails'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -978,7 +1057,8 @@ paths:
           name: pageNumber
           required: false
           type: integer
-        - in: query
+        - description: 'Optional sorting instruction. Currently possible values: "DateUpdated", "DateCreated", "DateUpdated desc", "DateCreated desc"'
+          in: query
           name: Sort
           required: false
           type: string
@@ -1085,10 +1165,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/TimesheetDetails'
-        '400':
-          description: Not Found
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
       security:
         - oauth2:
             - read
@@ -1100,8 +1180,7 @@ paths:
       consumes: []
       operationId: UserProfile_Get
       parameters:
-        - description: 'Optional list of comma sepaprated roele codes to filter users by (e.g. "TimesheetUser,Admin")'
-          in: query
+        - in: query
           name: Roles
           required: false
           type: string
@@ -1109,6 +1188,11 @@ paths:
           name: CurrentUserOnly
           required: false
           type: boolean
+        - format: int32
+          in: query
+          name: CompanyIDFK
+          required: false
+          type: integer
       responses:
         '200':
           description: OK
@@ -1117,7 +1201,6 @@ paths:
       security:
         - oauth2:
             - read
-      summary: Get Collection of Users who have roles in the current Avaza account.
       tags:
         - UserProfile
   /api/Webhook:
@@ -1164,7 +1247,7 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: 'When you receive a webhook, you should respond with Http 200 OK Status Code, otherwise we will retry. Event values are: "company_created", "company_deleted", "company_updated", "contact_created", "contact_deleted", "contact_updated", "invoice_created", "invoice_sent", "project_created", "project_deleted", "project_updated", "task_created", "timesheet_created", "timesheet_deleted", "timesheet_updated"'
+      description: 'When you receive a webhook, you should respond with Http 200 OK Status Code, otherwise we will retry. Event values are: "company_created", "company_deleted", "company_updated", "contact_created", "contact_deleted", "contact_updated", "invoice_created", "invoice_sent", "project_created", "project_deleted", "project_updated", "task_created", "timesheet_created", "timesheet_deleted", "timesheet_updated".  You can subscribe to any webhook, but you will only receive notifications for data appropriate to the roles of your user account.'
       operationId: Webhook_Post
       parameters:
         - in: body
@@ -1470,6 +1553,133 @@ definitions:
         items:
           $ref: '#/definitions/Currency'
         type: array
+    type: object
+  EstimateDetails:
+    properties:
+      AccountIDFK:
+        format: int32
+        type: integer
+      Balance:
+        format: double
+        type: number
+      CompanyIDFK:
+        format: int32
+        type: integer
+      CompanyName:
+        type: string
+      CurrencyCode:
+        type: string
+      DateCreated:
+        format: date-time
+        type: string
+      DateIssued:
+        format: date-time
+        type: string
+      DateSent:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      DueDate:
+        format: date-time
+        type: string
+      EstimateID:
+        format: int64
+        type: integer
+      EstimateItemNumber:
+        type: string
+      EstimatePrefix:
+        type: string
+      EstimateStatusCode:
+        type: string
+      EstimateTaxConfigCode:
+        type: string
+      ExchangeRate:
+        format: double
+        type: number
+      Issuer:
+        $ref: '#/definitions/IssuerDetails'
+      LineItems:
+        items:
+          $ref: '#/definitions/EstimateLineItemDetails'
+        type: array
+      Links:
+        $ref: '#/definitions/EstimateLinks'
+      Notes:
+        type: string
+      Recipient:
+        $ref: '#/definitions/RecipientDetails'
+      Subject:
+        type: string
+      TaxAmount:
+        format: double
+        type: number
+      TotalAmount:
+        format: double
+        type: number
+    type: object
+  EstimateLineItemDetails:
+    properties:
+      Amount:
+        format: double
+        type: number
+      Description:
+        type: string
+      Discount:
+        format: double
+        type: number
+      EstimateLineItemID:
+        format: int64
+        type: integer
+      InventoryItemIDFK:
+        format: int64
+        type: integer
+      InventoryItemName:
+        type: string
+      InventoryItemSKU:
+        type: string
+      Quantity:
+        format: double
+        type: number
+      TaxAmount:
+        format: double
+        type: number
+      TaxCode:
+        type: string
+      TaxIDFK:
+        format: int32
+        type: integer
+      TaxName:
+        type: string
+      UnitPrice:
+        format: double
+        type: number
+    type: object
+  EstimateLinks:
+    properties:
+      ClientView:
+        type: string
+      Edit:
+        type: string
+      View:
+        type: string
+    type: object
+  EstimateList:
+    properties:
+      Estimates:
+        items:
+          $ref: '#/definitions/EstimateDetails'
+        type: array
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalCount:
+        format: int32
+        type: integer
     type: object
   ExpenseDetails:
     properties:
@@ -1886,9 +2096,13 @@ definitions:
         format: int32
         type: integer
       CompanyName:
+        description: 'If left blank then you must specify Company ID. Specified Name will be used to match existing customer record. If not matched then it will be used to create a new customer. First Name, Last Name and Email will only be used if it is a new company. If the Company name appears multiple times we will check the email address to find a matching company. If email address doesn''t identify a matching company then the invoice creation will be rejected.'
         type: string
       CurrencyCode:
         description: Expects ISO Standard 3 character currency code. If left blank the currency will default to account's currency in general setting. For existing companies this field will be ignored and the invoice will use the currency of the customer. For new customers if the currency is not specified then account currency will be used otherwise the specified currency will be used.
+        type: string
+      CustomerPONumber:
+        description: Plain UTF8 text. 100 characters max
         type: string
       DateIssued:
         description: If not specified it will use today's date. The date should be specified as local date.
@@ -1955,6 +2169,10 @@ definitions:
       InventoryItemName:
         description: If not specified then Inventory item ID must be specified. If specified and not matched to any existing inventory items then a new inventory item will be created. Max 200 characters.
         type: string
+      ProjectIDFK:
+        description: 'Optional. Project ID of an Avaza Project that belongs to this customer, so line item is attributed to that Project for reporting.'
+        format: int32
+        type: integer
       Quantity:
         description: The quantity for the line item
         format: double
@@ -2003,6 +2221,9 @@ definitions:
         type: array
       PaymentNumber:
         description: Optional. If not specified will be automatically generated
+        type: string
+      PaymentProviderCode:
+        description: Optional for storing the payment provider who was the source of funds.
         type: string
       TransactionPrefix:
         description: Optional to override the default prefix added to Payment Numbers
@@ -2067,6 +2288,13 @@ definitions:
       Title:
         type: string
     type: object
+  NewTag:
+    properties:
+      Color:
+        type: string
+      Name:
+        type: string
+    type: object
   NewTask:
     properties:
       AssignedToUserIDFK:
@@ -2076,6 +2304,12 @@ definitions:
         format: date-time
         type: string
       DateDueUTC:
+        format: date-time
+        type: string
+      DateStart:
+        format: date-time
+        type: string
+      DateStartUTC:
         format: date-time
         type: string
       Description:
@@ -2090,6 +2324,11 @@ definitions:
       SectionIDFK:
         format: int32
         type: integer
+      Tags:
+        description: Collection of tags specifying Name and Color (Hex)
+        items:
+          $ref: '#/definitions/NewTag'
+        type: array
       Title:
         type: string
     required:
@@ -2217,6 +2456,12 @@ definitions:
     type: object
   ProjectDetails:
     properties:
+      BudgetAmount:
+        format: double
+        type: number
+      BudgetHours:
+        format: double
+        type: number
       CompanyIDFK:
         format: int32
         type: integer
@@ -2228,21 +2473,53 @@ definitions:
       DateUpdated:
         format: date-time
         type: string
+      EndDate:
+        format: date-time
+        type: string
       Members:
         items:
           $ref: '#/definitions/ProjectMemberDetails'
         type: array
       Notes:
         type: string
+      ProjectBillableTypeCode:
+        description: 'Possible values: CategoryHourly, NoRate, NotBillable, PersonHourly, ProjectHourly'
+        type: string
+      ProjectBudgetTypeCode:
+        description: 'Possible Values: CategoryHours, NoBudget, PersonHours, ProjectFees, ProjectHours'
+        type: string
+      ProjectCategoryColor:
+        description: 'Html Hex Color Code starting with #'
+        type: string
+      ProjectCategoryIDFK:
+        format: int32
+        type: integer
+      ProjectCategoryName:
+        type: string
+      ProjectHourlyRate:
+        format: double
+        type: number
       ProjectID:
         format: int32
         type: integer
+      ProjectStatusCode:
+        description: 'Possible values: NotStarted, InProgress, Complete'
+        type: string
+      ProjectTags:
+        items:
+          $ref: '#/definitions/ProjectTagItem'
+        type: array
       Sections:
         items:
           $ref: '#/definitions/ProjectSectionDetails'
         type: array
+      StartDate:
+        format: date-time
+        type: string
       Title:
         type: string
+      isArchived:
+        type: boolean
     type: object
   ProjectList:
     properties:
@@ -2280,6 +2557,8 @@ definitions:
         type: integer
       Title:
         type: string
+      isArchived:
+        type: boolean
     type: object
   ProjectMemberDetails:
     properties:
@@ -2338,6 +2617,14 @@ definitions:
         type: string
       Title:
         type: string
+    type: object
+  ProjectTagItem:
+    properties:
+      Name:
+        type: string
+      ProjectTagID:
+        format: int32
+        type: integer
     type: object
   ProjectTimesheetCategoryDetails:
     properties:
@@ -2440,6 +2727,16 @@ definitions:
         format: int32
         type: integer
     type: object
+  TagItem:
+    properties:
+      Color:
+        type: string
+      Name:
+        type: string
+      TagID:
+        format: int64
+        type: integer
+    type: object
   TaskDetails:
     properties:
       ActualTime:
@@ -2460,6 +2757,12 @@ definitions:
         format: date-time
         type: string
       DateDueUTC:
+        format: date-time
+        type: string
+      DateStart:
+        format: date-time
+        type: string
+      DateStartUTC:
         format: date-time
         type: string
       DateUpdated:
@@ -2485,6 +2788,10 @@ definitions:
         type: integer
       SectionTitle:
         type: string
+      Tags:
+        items:
+          $ref: '#/definitions/TagItem'
+        type: array
       TaskID:
         format: int32
         type: integer
@@ -2674,6 +2981,12 @@ definitions:
         type: integer
       CompanyName:
         type: string
+      DefaultBillableRate:
+        format: double
+        type: number
+      DefaultCostRate:
+        format: double
+        type: number
       Email:
         type: string
       Firstname:
@@ -2706,6 +3019,9 @@ definitions:
       NotificationURL:
         type: string
       SubscriptionID:
+        format: int32
+        type: integer
+      UserIDFK:
         format: int32
         type: integer
     type: object

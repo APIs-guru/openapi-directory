@@ -67,27 +67,6 @@ paths:
       responses:
         '200':
           description: Successful request to get the list of metric values.
-          examples:
-            application/json:
-              baseline:
-                - highThresholds:
-                    - 90.3453
-                    - 91.3453
-                  lowThresholds:
-                    - 30
-                    - 31.1
-                  sensitivity: Low
-                - highThresholds:
-                    - 70.3453
-                    - 71.3453
-                  lowThresholds:
-                    - 50
-                    - 51.1
-                  sensitivity: Medium
-              timestamps:
-                - '2017-04-14T02:20:00Z'
-                - '2017-04-14T03:20:00Z'
-              type: Microsoft.Insights/calculatebaseline
           schema:
             $ref: '#/definitions/CalculateBaselineResponse'
         default:

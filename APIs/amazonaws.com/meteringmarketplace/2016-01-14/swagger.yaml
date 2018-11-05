@@ -243,6 +243,16 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  BatchMeterUsageResult:
+    type: object
+    properties:
+      Results:
+        $ref: '#/definitions/UsageRecordResultList'
+        description: Contains all UsageRecords processed by BatchMeterUsage. These records were either honored by AWS Marketplace Metering Service or were invalid.
+      UnprocessedRecords:
+        $ref: '#/definitions/UsageRecordList'
+        description: Contains all UsageRecords that were not processed by BatchMeterUsage. This is a list of UsageRecords. You can retry the failed request by making another BatchMeterUsage call with this list as input in the BatchMeterUsageRequest.
+    description: Contains the UsageRecords processed by BatchMeterUsage and any records that have failed due to transient error.
   BatchMeterUsageRequest:
     type: object
     required:
@@ -256,69 +266,47 @@ definitions:
         $ref: '#/definitions/ProductCode'
         description: Product code is used to uniquely identify a product in AWS Marketplace. The product code should be the same as the one used during the publishing of a new product.
     description: 'A BatchMeterUsageRequest contains UsageRecords, which indicate quantities of usage within your application.'
-  BatchMeterUsageResult:
-    type: object
-    properties:
-      Results:
-        $ref: '#/definitions/UsageRecordResultList'
-        description: Contains all UsageRecords processed by BatchMeterUsage. These records were either honored by AWS Marketplace Metering Service or were invalid.
-      UnprocessedRecords:
-        $ref: '#/definitions/UsageRecordList'
-        description: Contains all UsageRecords that were not processed by BatchMeterUsage. This is a list of UsageRecords. You can retry the failed request by making another BatchMeterUsage call with this list as input in the BatchMeterUsageRequest.
-    description: Contains the UsageRecords processed by BatchMeterUsage and any records that have failed due to transient error.
-  Boolean:
-    type: boolean
-  CustomerIdentifier:
-    type: string
-    minLength: 1
-    maxLength: 255
-  DuplicateRequestException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/errorMessage'
-    description: 'A metering record has already been emitted by the same EC2 instance for the given {usageDimension, timestamp} with a different usageQuantity.'
-  ExpiredTokenException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/errorMessage'
-    description: 'The submitted registration token has expired. This can happen if the buyer''s browser takes too long to redirect to your page, the buyer has resubmitted the registration token, or your application has held on to the registration token for too long. Your SaaS registration website should redeem this token as soon as it is submitted by the buyer''s browser.'
   InternalServiceErrorException:
     type: object
     properties:
       message:
         $ref: '#/definitions/errorMessage'
     description: 'An internal error has occurred. Retry your request. If the problem persists, post a message with details on the AWS forums.'
-  InvalidCustomerIdentifierException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/errorMessage'
-    description: You have metered usage for a CustomerIdentifier that does not exist.
-  InvalidEndpointRegionException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/errorMessage'
-    description: The endpoint being called is in a region different from your EC2 instance. The region of the Metering service endpoint and the region of the EC2 instance must match.
   InvalidProductCodeException:
     type: object
     properties:
       message:
         $ref: '#/definitions/errorMessage'
     description: The product code passed does not match the product code used for publishing the product.
-  InvalidTokenException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/errorMessage'
   InvalidUsageDimensionException:
     type: object
     properties:
       message:
         $ref: '#/definitions/errorMessage'
     description: The usage dimension does not match one of the UsageDimensions associated with products.
+  InvalidCustomerIdentifierException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: You have metered usage for a CustomerIdentifier that does not exist.
+  TimestampOutOfBoundsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: The timestamp value passed in the meterUsage() is out of allowed range.
+  ThrottlingException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: The calls to the MeterUsage API are throttled.
+  MeterUsageResult:
+    type: object
+    properties:
+      MeteringRecordId:
+        $ref: '#/definitions/String'
   MeterUsageRequest:
     type: object
     required:
@@ -343,27 +331,18 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the permissions required for the action, but does not make the request. If you have the permissions, the request returns DryRunOperation; otherwise, it returns UnauthorizedException.'
-  MeterUsageResult:
+  InvalidEndpointRegionException:
     type: object
     properties:
-      MeteringRecordId:
-        $ref: '#/definitions/String'
-  NonEmptyString:
-    type: string
-    pattern: \S+
-  ProductCode:
-    type: string
-    minLength: 1
-    maxLength: 255
-  ResolveCustomerRequest:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: The endpoint being called is in a region different from your EC2 instance. The region of the Metering service endpoint and the region of the EC2 instance must match.
+  DuplicateRequestException:
     type: object
-    required:
-      - RegistrationToken
     properties:
-      RegistrationToken:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'When a buyer visits your website during the registration process, the buyer submits a registration token through the browser. The registration token is resolved to obtain a CustomerIdentifier and product code.'
-    description: Contains input to the ResolveCustomer operation.
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: 'A metering record has already been emitted by the same EC2 instance for the given {usageDimension, timestamp} with a different usageQuantity.'
   ResolveCustomerResult:
     type: object
     properties:
@@ -374,23 +353,51 @@ definitions:
         $ref: '#/definitions/ProductCode'
         description: The product code is returned to confirm that the buyer is registering for your product. Subsequent BatchMeterUsage calls should be made using this product code.
     description: The result of the ResolveCustomer operation. Contains the CustomerIdentifier and product code.
-  String:
-    type: string
-  ThrottlingException:
+  ResolveCustomerRequest:
+    type: object
+    required:
+      - RegistrationToken
+    properties:
+      RegistrationToken:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'When a buyer visits your website during the registration process, the buyer submits a registration token through the browser. The registration token is resolved to obtain a CustomerIdentifier and product code.'
+    description: Contains input to the ResolveCustomer operation.
+  InvalidTokenException:
     type: object
     properties:
       message:
         $ref: '#/definitions/errorMessage'
-    description: The calls to the MeterUsage API are throttled.
+  ExpiredTokenException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: 'The submitted registration token has expired. This can happen if the buyer''s browser takes too long to redirect to your page, the buyer has resubmitted the registration token, or your application has held on to the registration token for too long. Your SaaS registration website should redeem this token as soon as it is submitted by the buyer''s browser.'
+  UsageRecordList:
+    type: array
+    items:
+      $ref: '#/definitions/UsageRecord'
+    minItems: 0
+    maxItems: 25
+  ProductCode:
+    type: string
+    minLength: 1
+    maxLength: 255
+  UsageRecordResultList:
+    type: array
+    items:
+      $ref: '#/definitions/UsageRecordResult'
+  Boolean:
+    type: boolean
+  CustomerIdentifier:
+    type: string
+    minLength: 1
+    maxLength: 255
+  errorMessage:
+    type: string
   Timestamp:
     type: string
     format: date-time
-  TimestampOutOfBoundsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/errorMessage'
-    description: The timestamp value passed in the meterUsage() is out of allowed range.
   UsageDimension:
     type: string
     minLength: 1
@@ -399,6 +406,11 @@ definitions:
     type: integer
     minimum: 0
     maximum: 1000000
+  String:
+    type: string
+  NonEmptyString:
+    type: string
+    pattern: \S+
   UsageRecord:
     type: object
     required:
@@ -420,12 +432,12 @@ definitions:
         $ref: '#/definitions/UsageQuantity'
         description: The quantity of usage consumed by the customer for the given dimension and time.
     description: '<p>A UsageRecord indicates a quantity of usage for a given product, customer, dimension and time.</p> <p>Multiple requests with the same UsageRecords as input will be deduplicated to prevent double charges.</p>'
-  UsageRecordList:
-    type: array
-    items:
-      $ref: '#/definitions/UsageRecord'
-    minItems: 0
-    maxItems: 25
+  UsageRecordResultStatus:
+    type: string
+    enum:
+      - Success
+      - CustomerNotSubscribed
+      - DuplicateRecord
   UsageRecordResult:
     type: object
     properties:
@@ -439,15 +451,3 @@ definitions:
         $ref: '#/definitions/UsageRecordResultStatus'
         description: '<p>The UsageRecordResult Status indicates the status of an individual UsageRecord processed by BatchMeterUsage.</p> <ul> <li> <p> <i>Success</i>- The UsageRecord was accepted and honored by BatchMeterUsage.</p> </li> <li> <p> <i>CustomerNotSubscribed</i>- The CustomerIdentifier specified is not subscribed to your product. The UsageRecord was not honored. Future UsageRecords for this customer will fail until the customer subscribes to your product.</p> </li> <li> <p> <i>DuplicateRecord</i>- Indicates that the UsageRecord was invalid and not honored. A previously metered UsageRecord had the same customer, dimension, and time, but a different quantity.</p> </li> </ul>'
     description: A UsageRecordResult indicates the status of a given UsageRecord processed by BatchMeterUsage.
-  UsageRecordResultList:
-    type: array
-    items:
-      $ref: '#/definitions/UsageRecordResult'
-  UsageRecordResultStatus:
-    type: string
-    enum:
-      - Success
-      - CustomerNotSubscribed
-      - DuplicateRecord
-  errorMessage:
-    type: string

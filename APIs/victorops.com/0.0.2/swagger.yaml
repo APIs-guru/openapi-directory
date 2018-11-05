@@ -206,6 +206,18 @@ parameters:
     required: true
     schema:
       $ref: '#/definitions/RerouteCollection'
+  scheduleOverridePost:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/ScheduleOverridePayload'
+  scheduleOverridePut:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/ScheduleOverridePayloadUpdate'
   step:
     default: 0
     description: Step of escalation policy (3 max)
@@ -1830,7 +1842,7 @@ paths:
           $ref: '#/responses/user-not-found'
         '500':
           $ref: '#/responses/500'
-      summary: Get the indicate contact email for a user
+      summary: Get the indicated contact email for a user
       tags:
         - User Contact Methods
   '/api-public/v1/user/{user}/contact-methods/phones':
@@ -1967,7 +1979,7 @@ paths:
           $ref: '#/responses/user-not-found'
         '500':
           $ref: '#/responses/500'
-      summary: Get the indicate contact phone for a user
+      summary: Get the indicated contact phone for a user
       tags:
         - User Contact Methods
   '/api-public/v1/user/{user}/oncall/schedule':
@@ -2516,6 +2528,22 @@ definitions:
         type: string
     required:
       - alertId
+    type: object
+  Assignment:
+    properties:
+      assigned:
+        type: boolean
+      id:
+        type: number
+      policy:
+        $ref: '#/definitions/Team'
+        type: object
+      team:
+        $ref: '#/definitions/Team'
+        type: object
+      user:
+        $ref: '#/definitions/ScheduleUser'
+        type: object
     type: object
   Contact:
     properties:
@@ -3180,6 +3208,63 @@ definitions:
       policyName:
         type: string
       policySlug:
+        type: string
+    type: object
+  ScheduleOverride:
+    properties:
+      assignments:
+        items:
+          $ref: '#/definitions/Assignment'
+        type: array
+      end:
+        format: date-time
+        type: string
+      id:
+        type: number
+      overlaps:
+        type: boolean
+      start:
+        format: date-time
+        type: string
+      timezone:
+        type: string
+      user:
+        $ref: '#/definitions/ScheduleUser'
+        type: object
+    type: object
+  ScheduleOverridePayload:
+    properties:
+      end:
+        format: date-time
+        type: string
+      start:
+        format: date-time
+        type: string
+      timezone:
+        type: string
+      username:
+        type: string
+    type: object
+  ScheduleOverridePayloadUpdate:
+    properties:
+      end:
+        format: date-time
+        type: string
+      policySlug:
+        type: string
+      start:
+        format: date-time
+        type: string
+      username:
+        type: string
+    type: object
+  ScheduleUser:
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      username:
         type: string
     type: object
   TakeRequest:

@@ -1064,7 +1064,7 @@ paths:
             '200': {}
             '202':
               headers:
-                Location: 'https://management.azure.com/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/certificateOperationResults/SHA1-0A0E4F50D51BEADEAC1D35AFC5116098E7902E6E-8D4EDFF164A11C9?api-version=2017-05-01'
+                Location: 'https://management.azure.com/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/certificateOperationResults/SHA1-0A0E4F50D51BEADEAC1D35AFC5116098E7902E6E-8D4EDFF164A11C9?api-version=2017-09-01'
                 Retry-After: '15'
             '204': {}
       x-ms-long-running-operation: true
@@ -1654,7 +1654,7 @@ paths:
             '200': {}
             '202':
               headers:
-                Location: 'https://management.azure.com/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/poolOperationResults/delete-testpool-8D4EDFF164A11C9?api-version=2017-05-01'
+                Location: 'https://management.azure.com/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/poolOperationResults/delete-testpool-8D4EDFF164A11C9?api-version=2017-09-01'
                 Retry-After: '15'
             '204': {}
       x-ms-long-running-operation: true
@@ -4084,7 +4084,7 @@ definitions:
         description: This property must be specified if the compute nodes in the pool need to have empty data disks attached to them.
         items:
           $ref: '#/definitions/DataDisk'
-        title: The configuration for data disks attached to the comptue nodes in the pool.
+        title: The configuration for data disks attached to the compute nodes in the pool.
         type: array
       imageReference:
         $ref: '#/definitions/ImageReference'

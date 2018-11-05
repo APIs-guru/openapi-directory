@@ -1,0 +1,200 @@
+swagger: '2.0'
+schemes:
+  - https
+host: adminmanagement.local.azurestack.external
+info:
+  description: Storage system operation endpoints and objects.
+  title: FabricAdminClient
+  version: '2016-05-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/stable/2016-05-01/StorageSystem.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: azsadmin-StorageSystem
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  StorageSubSystemParameter:
+    description: Name of the storage system.
+    in: path
+    name: storageSubSystem
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/storageSubSystems':
+    get:
+      description: Get a list of all storage subsystems for a location.
+      operationId: StorageSystems_List
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: OData filter parameter.
+          in: query
+          name: $filter
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/StorageSystemList'
+      tags:
+        - StorageSystems
+      x-ms-examples:
+        List all storage systems:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/storageSubSystems/S-Cluster.azurestack.local
+                    location: local
+                    name: S-Cluster.azurestack.local
+                    properties:
+                      totalCapacityGB: 2525
+                    tags: {}
+                    type: Microsoft.Fabric.Admin/fabricLocations/storageSubSystems
+      x-ms-odata: '#/definitions/StorageSystem'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/storageSubSystems/{storageSubSystem}':
+    get:
+      description: Get a storage subsystem.
+      operationId: StorageSystems_Get
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location of the resource.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/StorageSubSystemParameter'
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/StorageSystem'
+      tags:
+        - StorageSystems
+      x-ms-examples:
+        Get a storage system:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            storageSubSystem: S-Cluster.azurestack.local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/storageSubSystems/S-Cluster.azurestack.local
+                location: local
+                name: S-Cluster.azurestack.local
+                properties:
+                  totalCapacityGB: 2525
+                tags: {}
+                type: Microsoft.Fabric.Admin/fabricLocations/storageSubSystems
+definitions:
+  StorageSystem:
+    allOf:
+      - description: Base Resource Object
+        properties:
+          id:
+            description: URI of the resource.
+            readOnly: true
+            type: string
+          location:
+            description: Region Location of resource.
+            type: string
+          name:
+            description: Name of the resource.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: List of key value pairs.
+            type: object
+          type:
+            description: Type of resource.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
+    description: Representation of a storage system resource.
+    properties:
+      properties:
+        $ref: '#/definitions/StorageSystemModel'
+        description: All properties of a storage system.
+        x-ms-client-flatten: true
+    type: object
+  StorageSystemList:
+    description: Pageable list of storage systems.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: List of storage systems on this page.
+        items:
+          $ref: '#/definitions/StorageSystem'
+        type: array
+    type: object
+  StorageSystemModel:
+    description: All properties of a storage system.
+    properties:
+      totalCapacityGB:
+        description: Total capacity of the system.
+        format: int32
+        type: integer
+    type: object

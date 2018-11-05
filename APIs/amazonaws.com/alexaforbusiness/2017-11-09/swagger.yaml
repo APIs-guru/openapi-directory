@@ -3,7 +3,7 @@ info:
   version: '2017-11-09'
   x-release: v4
   title: Alexa For Business
-  description: 'Alexa for Business makes it easy for you to use Alexa in your organization. Alexa for Business gives you the tools you need to manage Alexa devices, enroll your users, and assign skills, at scale. You can build your own context-aware voice skills using the Alexa Skills Kit, and the Alexa for Business APIs, and you can make these available as private skills for your organization. Alexa for Business also makes it easy to voice-enable your products and services, providing context-aware voice experiences for your customers.'
+  description: 'Alexa for Business helps you use Alexa in your organization. Alexa for Business provides the tools you to manage Alexa devices, enroll your users, and assign skills, at scale. You can build your own context-aware voice skills using the Alexa Skills Kit and the Alexa for Business API operations. You can also make these available as private skills for your organization. Alexa for Business makes it efficient to voice-enable your products and services, thus providing context-aware voice experiences for your customers. In addition, Alexa for Business enables Alexa Voice Services (AVS) device manufacturers to centrally deploy and manage their devices in Alexa for Business as shared devices as a part of their existing management flow. '
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -101,8 +101,74 @@ security:
 paths:
   /:
     post:
+      operationId: ApproveSkill
+      description: 'Associates a skill with the organization under the customer''s AWS account. If a skill is private, the user implicitly accepts access to this skill during enablement.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApproveSkillResponse'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ApproveSkillRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AssociateContactWithAddressBook':
+    post:
+      operationId: AssociateContactWithAddressBook
+      description: Associates a contact with a given address book.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateContactWithAddressBookResponse'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateContactWithAddressBookRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AssociateDeviceWithRoom':
+    post:
       operationId: AssociateDeviceWithRoom
-      description: 'Associates a device to a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or a manual sync is required. '
+      description: 'Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required. '
       responses:
         '200':
           description: Success
@@ -112,6 +178,14 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: DeviceNotRegisteredException
+          schema:
+            $ref: '#/definitions/DeviceNotRegisteredException'
       parameters:
         - name: body
           in: body
@@ -131,18 +205,150 @@ paths:
   '/#AssociateSkillGroupWithRoom':
     post:
       operationId: AssociateSkillGroupWithRoom
-      description: Associates a skill group to a given room. This enables all skills in the associated skill group on all devices in the room.
+      description: Associates a skill group with a given room. This enables all skills in the associated skill group on all devices in the room.
       responses:
         '200':
           description: Success
           schema:
             $ref: '#/definitions/AssociateSkillGroupWithRoomResponse'
+        '480':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/AssociateSkillGroupWithRoomRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AssociateSkillWithSkillGroup':
+    post:
+      operationId: AssociateSkillWithSkillGroup
+      description: Associates a skill with a skill group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateSkillWithSkillGroupResponse'
+        '480':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateSkillWithSkillGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateAddressBook':
+    post:
+      operationId: CreateAddressBook
+      description: Creates an address book with the specified details.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateAddressBookResponse'
+        '480':
+          description: AlreadyExistsException
+          schema:
+            $ref: '#/definitions/AlreadyExistsException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateAddressBookRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateConferenceProvider':
+    post:
+      operationId: CreateConferenceProvider
+      description: Adds a new conference provider under the user's AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateConferenceProviderResponse'
+        '480':
+          description: AlreadyExistsException
+          schema:
+            $ref: '#/definitions/AlreadyExistsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateConferenceProviderRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateContact':
+    post:
+      operationId: CreateContact
+      description: Creates a contact with the specified details.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateContactResponse'
+        '480':
+          description: AlreadyExistsException
+          schema:
+            $ref: '#/definitions/AlreadyExistsException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateContactRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -170,6 +376,10 @@ paths:
           description: AlreadyExistsException
           schema:
             $ref: '#/definitions/AlreadyExistsException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -236,6 +446,10 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -269,12 +483,148 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/CreateUserRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteAddressBook':
+    post:
+      operationId: DeleteAddressBook
+      description: Deletes an address book by the address book ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteAddressBookResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteAddressBookRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteConferenceProvider':
+    post:
+      operationId: DeleteConferenceProvider
+      description: Deletes a conference provider.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteConferenceProviderResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteConferenceProviderRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteContact':
+    post:
+      operationId: DeleteContact
+      description: Deletes a contact by the contact ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteContactResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteContactRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDevice':
+    post:
+      operationId: DeleteDevice
+      description: Removes a device from Alexa For Business.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDeviceResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: InvalidCertificateAuthorityException
+          schema:
+            $ref: '#/definitions/InvalidCertificateAuthorityException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDeviceRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -298,6 +648,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -327,6 +681,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -352,12 +710,49 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DeleteRoomSkillParameterResponse'
+        '480':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/DeleteRoomSkillParameterRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteSkillAuthorization':
+    post:
+      operationId: DeleteSkillAuthorization
+      description: Unlinks a third-party account from a skill.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSkillAuthorizationResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSkillAuthorizationRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -381,6 +776,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -410,12 +809,41 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/DeleteUserRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateContactFromAddressBook':
+    post:
+      operationId: DisassociateContactFromAddressBook
+      description: Disassociates a contact from a given address book.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateContactFromAddressBookResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateContactFromAddressBookRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -435,12 +863,53 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DisassociateDeviceFromRoomResponse'
+        '480':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '481':
+          description: DeviceNotRegisteredException
+          schema:
+            $ref: '#/definitions/DeviceNotRegisteredException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/DisassociateDeviceFromRoomRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateSkillFromSkillGroup':
+    post:
+      operationId: DisassociateSkillFromSkillGroup
+      description: Disassociates a skill from a skill group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateSkillFromSkillGroupResponse'
+        '480':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateSkillFromSkillGroupRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -460,12 +929,161 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DisassociateSkillGroupFromRoomResponse'
+        '480':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/DisassociateSkillGroupFromRoomRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ForgetSmartHomeAppliances':
+    post:
+      operationId: ForgetSmartHomeAppliances
+      description: Forgets smart home appliances associated to a room.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ForgetSmartHomeAppliancesResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ForgetSmartHomeAppliancesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetAddressBook':
+    post:
+      operationId: GetAddressBook
+      description: Gets address the book details by the address book ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAddressBookResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAddressBookRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetConferencePreference':
+    post:
+      operationId: GetConferencePreference
+      description: Retrieves the existing conference preferences.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetConferencePreferenceResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetConferencePreferenceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetConferenceProvider':
+    post:
+      operationId: GetConferenceProvider
+      description: Gets details about a specific conference provider.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetConferenceProviderResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetConferenceProviderRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetContact':
+    post:
+      operationId: GetContact
+      description: Gets the contact details by the contact ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetContactResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetContactRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -621,6 +1239,80 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListConferenceProviders':
+    post:
+      operationId: ListConferenceProviders
+      description: Lists conference providers under a specific AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListConferenceProvidersResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListConferenceProvidersRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListDeviceEvents':
+    post:
+      operationId: ListDeviceEvents
+      description: 'Lists the device event history, including device connection status, for up to 30 days.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDeviceEventsResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDeviceEventsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListSkills':
     post:
       operationId: ListSkills
@@ -656,10 +1348,119 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListSkillsStoreCategories':
+    post:
+      operationId: ListSkillsStoreCategories
+      description: Lists all categories in the Alexa skill store.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSkillsStoreCategoriesResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListSkillsStoreCategoriesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListSkillsStoreSkillsByCategory':
+    post:
+      operationId: ListSkillsStoreSkillsByCategory
+      description: Lists all skills in the Alexa skill store by category.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSkillsStoreSkillsByCategoryResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListSkillsStoreSkillsByCategoryRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListSmartHomeAppliances':
+    post:
+      operationId: ListSmartHomeAppliances
+      description: Lists all of the smart home appliances associated with a room.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSmartHomeAppliancesResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListSmartHomeAppliancesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListTags':
     post:
       operationId: ListTags
-      description: Lists all tags for a specific resource.
+      description: Lists all tags for the specified resource.
       responses:
         '200':
           description: Success
@@ -695,6 +1496,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutConferencePreference':
+    post:
+      operationId: PutConferencePreference
+      description: Sets the conference preferences on a specific conference provider at the account level.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutConferencePreferenceResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutConferencePreferenceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#PutRoomSkillParameter':
     post:
       operationId: PutRoomSkillParameter
@@ -704,12 +1534,119 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/PutRoomSkillParameterResponse'
+        '480':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/PutRoomSkillParameterRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutSkillAuthorization':
+    post:
+      operationId: PutSkillAuthorization
+      description: 'Links a user''s account to a third-party skill provider. If this API operation is called by an assumed IAM role, the skill being linked must be a private skill. Also, the skill must be owned by the AWS account that assumed the IAM role.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutSkillAuthorizationResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutSkillAuthorizationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RegisterAVSDevice':
+    post:
+      operationId: RegisterAVSDevice
+      description: Registers an Alexa-enabled device built by an Original Equipment Manufacturer (OEM) using Alexa Voice Service (AVS).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterAVSDeviceResponse'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: InvalidDeviceException
+          schema:
+            $ref: '#/definitions/InvalidDeviceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterAVSDeviceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RejectSkill':
+    post:
+      operationId: RejectSkill
+      description: 'Disassociates a skill from the organization under a user''s AWS account. If the skill is a private skill, it moves to an AcceptStatus of PENDING. Any private or public skill that is rejected can be added later by calling the ApproveSkill API. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RejectSkillResponse'
+        '480':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RejectSkillRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -762,12 +1699,86 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/RevokeInvitationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#SearchAddressBooks':
+    post:
+      operationId: SearchAddressBooks
+      description: Searches address books and lists the ones that meet a set of filter and sort criteria.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SearchAddressBooksResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SearchAddressBooksRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#SearchContacts':
+    post:
+      operationId: SearchContacts
+      description: Searches contacts and lists the ones that meet a set of filter and sort criteria.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SearchContactsResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SearchContactsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -970,6 +1981,10 @@ paths:
           description: InvalidUserStatusException
           schema:
             $ref: '#/definitions/InvalidUserStatusException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -989,18 +2004,51 @@ paths:
   '/#StartDeviceSync':
     post:
       operationId: StartDeviceSync
-      description: Resets a device and its account to the known default settings by clearing all information and settings set by previous users.
+      description: 'Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.'
       responses:
         '200':
           description: Success
           schema:
             $ref: '#/definitions/StartDeviceSyncResponse'
+        '480':
+          description: DeviceNotRegisteredException
+          schema:
+            $ref: '#/definitions/DeviceNotRegisteredException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/StartDeviceSyncRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartSmartHomeApplianceDiscovery':
+    post:
+      operationId: StartSmartHomeApplianceDiscovery
+      description: Initiates the discovery of any smart home appliances associated with the room.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartSmartHomeApplianceDiscoveryResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartSmartHomeApplianceDiscoveryRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1069,6 +2117,105 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateAddressBook':
+    post:
+      operationId: UpdateAddressBook
+      description: Updates address book details by the address book ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateAddressBookResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: NameInUseException
+          schema:
+            $ref: '#/definitions/NameInUseException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAddressBookRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateConferenceProvider':
+    post:
+      operationId: UpdateConferenceProvider
+      description: Updates an existing conference provider's settings.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateConferenceProviderResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateConferenceProviderRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateContact':
+    post:
+      operationId: UpdateContact
+      description: Updates the contact details by the contact ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateContactResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateContactRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateDevice':
     post:
       operationId: UpdateDevice
@@ -1082,6 +2229,14 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: DeviceNotRegisteredException
+          schema:
+            $ref: '#/definitions/DeviceNotRegisteredException'
       parameters:
         - name: body
           in: body
@@ -1115,6 +2270,10 @@ paths:
           description: NameInUseException
           schema:
             $ref: '#/definitions/NameInUseException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -1181,6 +2340,10 @@ paths:
           description: NameInUseException
           schema:
             $ref: '#/definitions/NameInUseException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -1198,19 +2361,38 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  Address:
-    type: string
-    minLength: 1
-    maxLength: 500
-  AlreadyExistsException:
+  ApproveSkillResponse:
     type: object
+    properties: {}
+  ApproveSkillRequest:
+    type: object
+    required:
+      - SkillId
     properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The resource being created already exists. HTTP Status Code: 400'
-  Arn:
-    type: string
-    pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The unique identifier of the skill.
+  LimitExceededException: {}
+  NotFoundException: {}
+  ConcurrentModificationException: {}
+  AssociateContactWithAddressBookResponse:
+    type: object
+    properties: {}
+  AssociateContactWithAddressBookRequest:
+    type: object
+    required:
+      - ContactArn
+      - AddressBookArn
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the contact to associate with an address book.
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the address book with which to associate the contact.
+  AssociateDeviceWithRoomResponse:
+    type: object
+    properties: {}
   AssociateDeviceWithRoomRequest:
     type: object
     properties:
@@ -1220,7 +2402,8 @@ definitions:
       RoomArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the room with which to associate the device. Required.
-  AssociateDeviceWithRoomResponse:
+  DeviceNotRegisteredException: {}
+  AssociateSkillGroupWithRoomResponse:
     type: object
     properties: {}
   AssociateSkillGroupWithRoomRequest:
@@ -1232,17 +2415,105 @@ definitions:
       RoomArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the room with which to associate the skill group. Required.
-  AssociateSkillGroupWithRoomResponse:
+  AssociateSkillWithSkillGroupResponse:
     type: object
     properties: {}
-  Boolean:
-    type: boolean
-  ClientRequestToken:
-    type: string
-    pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
-    description: User specified token that is used to support idempotency during Create Resource
-    minLength: 10
-    maxLength: 150
+  AssociateSkillWithSkillGroupRequest:
+    type: object
+    required:
+      - SkillId
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the skill group to associate the skill to. Required.
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The unique identifier of the skill.
+  CreateAddressBookResponse:
+    type: object
+    properties:
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the newly created address book.
+  CreateAddressBookRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/AddressBookName'
+        description: The name of the address book.
+      Description:
+        $ref: '#/definitions/AddressBookDescription'
+        description: The description of the address book.
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'A unique, user-specified identifier for the request that ensures idempotency.'
+  AlreadyExistsException: {}
+  CreateConferenceProviderResponse:
+    type: object
+    properties:
+      ConferenceProviderArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the newly-created conference provider.
+  CreateConferenceProviderRequest:
+    type: object
+    required:
+      - ConferenceProviderName
+      - ConferenceProviderType
+      - MeetingSetting
+    properties:
+      ConferenceProviderName:
+        $ref: '#/definitions/ConferenceProviderName'
+        description: The name of the conference provider.
+      ConferenceProviderType:
+        $ref: '#/definitions/ConferenceProviderType'
+        description: Represents a type within a list of predefined types.
+      IPDialIn:
+        $ref: '#/definitions/IPDialIn'
+        description: The IP endpoint and protocol for calling.
+      PSTNDialIn:
+        $ref: '#/definitions/PSTNDialIn'
+        description: The information for PSTN conferencing.
+      MeetingSetting:
+        $ref: '#/definitions/MeetingSetting'
+        description: The meeting settings for the conference provider.
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: The request token of the client.
+  CreateContactResponse:
+    type: object
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the newly created address book.
+  CreateContactRequest:
+    type: object
+    required:
+      - FirstName
+      - PhoneNumber
+    properties:
+      DisplayName:
+        $ref: '#/definitions/ContactName'
+        description: The name of the contact to display on the console.
+      FirstName:
+        $ref: '#/definitions/ContactName'
+        description: The first name of the contact that is used to call the contact on the device.
+      LastName:
+        $ref: '#/definitions/ContactName'
+        description: The last name of the contact that is used to call the contact on the device.
+      PhoneNumber:
+        $ref: '#/definitions/E164PhoneNumber'
+        description: The phone number of the contact in E.164 format.
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'A unique, user-specified identifier for this request that ensures idempotency.'
+  CreateProfileResponse:
+    type: object
+    properties:
+      ProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the newly created room profile in the response.
   CreateProfileRequest:
     type: object
     required:
@@ -1283,12 +2554,12 @@ definitions:
       PSTNEnabled:
         $ref: '#/definitions/Boolean'
         description: Whether PSTN calling is enabled.
-  CreateProfileResponse:
+  CreateRoomResponse:
     type: object
     properties:
-      ProfileArn:
+      RoomArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the newly created room profile in the response.
+        description: The ARN of the newly created room in the response.
   CreateRoomRequest:
     type: object
     required:
@@ -1312,12 +2583,12 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: The tags for the room.
-  CreateRoomResponse:
+  CreateSkillGroupResponse:
     type: object
     properties:
-      RoomArn:
+      SkillGroupArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the newly created room in the response.
+        description: The ARN of the newly created skill group in the response.
   CreateSkillGroupRequest:
     type: object
     required:
@@ -1332,12 +2603,12 @@ definitions:
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
         description: 'A unique, user-specified identifier for this request that ensures idempotency. '
-  CreateSkillGroupResponse:
+  CreateUserResponse:
     type: object
     properties:
-      SkillGroupArn:
+      UserArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the newly created skill group in the response.
+        description: The ARN of the newly created user in the response.
   CreateUserRequest:
     type: object
     required:
@@ -1361,19 +2632,62 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: The tags for the user.
-  CreateUserResponse:
+  ResourceInUseException: {}
+  DeleteAddressBookResponse:
     type: object
+    properties: {}
+  DeleteAddressBookRequest:
+    type: object
+    required:
+      - AddressBookArn
     properties:
-      UserArn:
+      AddressBookArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the newly created user in the response.
+        description: The ARN of the address book to delete.
+  DeleteConferenceProviderResponse:
+    type: object
+    properties: {}
+  DeleteConferenceProviderRequest:
+    type: object
+    required:
+      - ConferenceProviderArn
+    properties:
+      ConferenceProviderArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the conference provider.
+  DeleteContactResponse:
+    type: object
+    properties: {}
+  DeleteContactRequest:
+    type: object
+    required:
+      - ContactArn
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the contact to delete.
+  DeleteDeviceResponse:
+    type: object
+    properties: {}
+  DeleteDeviceRequest:
+    type: object
+    required:
+      - DeviceArn
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the device for which to request details.
+  InvalidCertificateAuthorityException: {}
+  DeleteProfileResponse:
+    type: object
+    properties: {}
   DeleteProfileRequest:
     type: object
     properties:
       ProfileArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the room profile to delete. Required.
-  DeleteProfileResponse:
+  DeleteRoomResponse:
     type: object
     properties: {}
   DeleteRoomRequest:
@@ -1382,7 +2696,7 @@ definitions:
       RoomArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the room to delete. Required.
-  DeleteRoomResponse:
+  DeleteRoomSkillParameterResponse:
     type: object
     properties: {}
   DeleteRoomSkillParameterRequest:
@@ -1400,7 +2714,21 @@ definitions:
       ParameterKey:
         $ref: '#/definitions/RoomSkillParameterKey'
         description: The room skill parameter key for which to remove details.
-  DeleteRoomSkillParameterResponse:
+  DeleteSkillAuthorizationResponse:
+    type: object
+    properties: {}
+  DeleteSkillAuthorizationRequest:
+    type: object
+    required:
+      - SkillId
+    properties:
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The unique identifier of a skill.
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The room that the skill is authorized for.
+  DeleteSkillGroupResponse:
     type: object
     properties: {}
   DeleteSkillGroupRequest:
@@ -1409,7 +2737,7 @@ definitions:
       SkillGroupArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the skill group to delete. Required.
-  DeleteSkillGroupResponse:
+  DeleteUserResponse:
     type: object
     properties: {}
   DeleteUserRequest:
@@ -1423,9 +2751,1287 @@ definitions:
       EnrollmentId:
         $ref: '#/definitions/EnrollmentId'
         description: The ARN of the user's enrollment in the organization. Required.
-  DeleteUserResponse:
+  DisassociateContactFromAddressBookResponse:
     type: object
     properties: {}
+  DisassociateContactFromAddressBookRequest:
+    type: object
+    required:
+      - ContactArn
+      - AddressBookArn
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the contact to disassociate from an address book.
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the address from which to disassociate the contact.
+  DisassociateDeviceFromRoomResponse:
+    type: object
+    properties: {}
+  DisassociateDeviceFromRoomRequest:
+    type: object
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the device to disassociate from a room. Required.
+  DisassociateSkillFromSkillGroupResponse:
+    type: object
+    properties: {}
+  DisassociateSkillFromSkillGroupRequest:
+    type: object
+    required:
+      - SkillId
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The unique identifier of a skill. Required.
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The ARN of a skill group to associate to a skill.
+  DisassociateSkillGroupFromRoomResponse:
+    type: object
+    properties: {}
+  DisassociateSkillGroupFromRoomRequest:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the skill group to disassociate from a room. Required.
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room from which the skill group is to be disassociated. Required.
+  ForgetSmartHomeAppliancesResponse:
+    type: object
+    properties: {}
+  ForgetSmartHomeAppliancesRequest:
+    type: object
+    required:
+      - RoomArn
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The room that the appliances are associated with.
+  GetAddressBookResponse:
+    type: object
+    properties:
+      AddressBook:
+        $ref: '#/definitions/AddressBook'
+        description: The details of the requested address book.
+  GetAddressBookRequest:
+    type: object
+    required:
+      - AddressBookArn
+    properties:
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the address book for which to request details.
+  GetConferencePreferenceResponse:
+    type: object
+    properties:
+      Preference:
+        $ref: '#/definitions/ConferencePreference'
+        description: The conference preference.
+  GetConferencePreferenceRequest:
+    type: object
+    properties: {}
+  GetConferenceProviderResponse:
+    type: object
+    properties:
+      ConferenceProvider:
+        $ref: '#/definitions/ConferenceProvider'
+        description: The conference provider.
+  GetConferenceProviderRequest:
+    type: object
+    required:
+      - ConferenceProviderArn
+    properties:
+      ConferenceProviderArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the newly created conference provider.
+  GetContactResponse:
+    type: object
+    properties:
+      Contact:
+        $ref: '#/definitions/Contact'
+        description: The details of the requested contact.
+  GetContactRequest:
+    type: object
+    required:
+      - ContactArn
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the contact for which to request details.
+  GetDeviceResponse:
+    type: object
+    properties:
+      Device:
+        $ref: '#/definitions/Device'
+        description: The details of the device requested. Required.
+  GetDeviceRequest:
+    type: object
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the device for which to request details. Required.
+  GetProfileResponse:
+    type: object
+    properties:
+      Profile:
+        $ref: '#/definitions/Profile'
+        description: The details of the room profile requested. Required.
+  GetProfileRequest:
+    type: object
+    properties:
+      ProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room profile for which to request details. Required.
+  GetRoomResponse:
+    type: object
+    properties:
+      Room:
+        $ref: '#/definitions/Room'
+        description: The details of the room requested.
+  GetRoomRequest:
+    type: object
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room for which to request details. Required.
+  GetRoomSkillParameterResponse:
+    type: object
+    properties:
+      RoomSkillParameter:
+        $ref: '#/definitions/RoomSkillParameter'
+        description: The details of the room skill parameter requested. Required.
+  GetRoomSkillParameterRequest:
+    type: object
+    required:
+      - SkillId
+      - ParameterKey
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the room from which to get the room skill parameter details. '
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The ARN of the skill from which to get the room skill parameter details. Required.
+      ParameterKey:
+        $ref: '#/definitions/RoomSkillParameterKey'
+        description: The room skill parameter key for which to get details. Required.
+  GetSkillGroupResponse:
+    type: object
+    properties:
+      SkillGroup:
+        $ref: '#/definitions/SkillGroup'
+        description: The details of the skill group requested. Required.
+  GetSkillGroupRequest:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the skill group for which to get details. Required.
+  ListConferenceProvidersResponse:
+    type: object
+    properties:
+      ConferenceProviders:
+        $ref: '#/definitions/ConferenceProvidersList'
+        description: The conference providers.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The tokens used for pagination.
+  ListConferenceProvidersRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The tokens used for pagination.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of conference providers to be returned, per paginated calls.'
+  ListDeviceEventsResponse:
+    type: object
+    properties:
+      DeviceEvents:
+        $ref: '#/definitions/DeviceEventList'
+        description: The device events requested for the device ARN.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+  ListDeviceEventsRequest:
+    type: object
+    required:
+      - DeviceArn
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of a device.
+      EventType:
+        $ref: '#/definitions/DeviceEventType'
+        description: 'The event type to filter device events. If EventType isn''t specified, this returns a list of all device events in reverse chronological order. If EventType is specified, this returns a list of device events for that EventType in reverse chronological order. '
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults. When the end of results is reached, the response has a value of null.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. The default value is 50. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. '
+  ListSkillsResponse:
+    type: object
+    properties:
+      SkillSummaries:
+        $ref: '#/definitions/SkillSummaryList'
+        description: The list of enabled skills requested. Required.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+  ListSkillsRequest:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the skill group for which to list enabled skills. Required.
+      EnablementType:
+        $ref: '#/definitions/EnablementTypeFilter'
+        description: 'Whether the skill is enabled under the user''s account, or if it requires linking to be used.'
+      SkillType:
+        $ref: '#/definitions/SkillTypeFilter'
+        description: Whether the skill is publicly available or is a private skill.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
+      MaxResults:
+        $ref: '#/definitions/SkillListMaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. Required.'
+  ListSkillsStoreCategoriesResponse:
+    type: object
+    properties:
+      CategoryList:
+        $ref: '#/definitions/CategoryList'
+        description: The list of categories.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The tokens used for pagination.
+  ListSkillsStoreCategoriesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The tokens used for pagination.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of categories returned, per paginated calls.'
+  ListSkillsStoreSkillsByCategoryResponse:
+    type: object
+    properties:
+      SkillsStoreSkills:
+        $ref: '#/definitions/SkillsStoreSkillList'
+        description: The skill store skills.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The tokens used for pagination.
+  ListSkillsStoreSkillsByCategoryRequest:
+    type: object
+    required:
+      - CategoryId
+    properties:
+      CategoryId:
+        $ref: '#/definitions/CategoryId'
+        description: The category ID for which the skills are being retrieved from the skill store.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The tokens used for pagination.
+      MaxResults:
+        $ref: '#/definitions/SkillListMaxResults'
+        description: The maximum number of skills returned per paginated calls.
+  ListSmartHomeAppliancesResponse:
+    type: object
+    properties:
+      SmartHomeAppliances:
+        $ref: '#/definitions/SmartHomeApplianceList'
+        description: The smart home appliances.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The tokens used for pagination.
+  ListSmartHomeAppliancesRequest:
+    type: object
+    required:
+      - RoomArn
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The room that the appliances are associated with.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of appliances to be returned, per paginated calls.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The tokens used for pagination.
+  ListTagsResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags requested for the specified resource.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+  ListTagsRequest:
+    type: object
+    required:
+      - Arn
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the specified resource for which to list tags.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. '
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
+  PutConferencePreferenceResponse:
+    type: object
+    properties: {}
+  PutConferencePreferenceRequest:
+    type: object
+    required:
+      - ConferencePreference
+    properties:
+      ConferencePreference:
+        $ref: '#/definitions/ConferencePreference'
+        description: The conference preference of a specific conference provider.
+  PutRoomSkillParameterResponse:
+    type: object
+    properties: {}
+  PutRoomSkillParameterRequest:
+    type: object
+    required:
+      - SkillId
+      - RoomSkillParameter
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room associated with the room skill parameter. Required.
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The ARN of the skill associated with the room skill parameter. Required.
+      RoomSkillParameter:
+        $ref: '#/definitions/RoomSkillParameter'
+        description: The updated room skill parameter. Required.
+  PutSkillAuthorizationResponse:
+    type: object
+    properties: {}
+  PutSkillAuthorizationRequest:
+    type: object
+    required:
+      - AuthorizationResult
+      - SkillId
+    properties:
+      AuthorizationResult:
+        $ref: '#/definitions/AuthorizationResult'
+        description: The authorization result specific to OAUTH code grant output. "Code” must be populated in the AuthorizationResult map to establish the authorization.
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The unique identifier of a skill.
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The room that the skill is authorized for.
+  UnauthorizedException: {}
+  RegisterAVSDeviceResponse:
+    type: object
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the device.
+  RegisterAVSDeviceRequest:
+    type: object
+    required:
+      - ClientId
+      - UserCode
+      - ProductId
+      - DeviceSerialNumber
+      - AmazonId
+    properties:
+      ClientId:
+        $ref: '#/definitions/ClientId'
+        description: The client ID of the OEM used for code-based linking authorization on an AVS device.
+      UserCode:
+        $ref: '#/definitions/UserCode'
+        description: The code that is obtained after your AVS device has made a POST request to LWA as a part of the Device Authorization Request component of the OAuth code-based linking specification.
+      ProductId:
+        $ref: '#/definitions/ProductId'
+        description: The product ID used to identify your AVS device during authorization.
+      DeviceSerialNumber:
+        $ref: '#/definitions/DeviceSerialNumberForAVS'
+        description: The key generated by the OEM that uniquely identifies a specified instance of your AVS device.
+      AmazonId:
+        $ref: '#/definitions/AmazonId'
+        description: The device type ID for your AVS device generated by Amazon when the OEM creates a new product on Amazon's Developer Console.
+  InvalidDeviceException: {}
+  RejectSkillResponse:
+    type: object
+    properties: {}
+  RejectSkillRequest:
+    type: object
+    required:
+      - SkillId
+    properties:
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The unique identifier of the skill.
+  ResolveRoomResponse:
+    type: object
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room from which the skill request was invoked.
+      RoomName:
+        $ref: '#/definitions/RoomName'
+        description: The name of the room from which the skill request was invoked.
+      RoomSkillParameters:
+        $ref: '#/definitions/RoomSkillParameters'
+        description: Response to get the room profile request. Required.
+  ResolveRoomRequest:
+    type: object
+    required:
+      - UserId
+      - SkillId
+    properties:
+      UserId:
+        $ref: '#/definitions/UserId'
+        description: The ARN of the user. Required.
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The ARN of the skill that was requested. Required.
+  RevokeInvitationResponse:
+    type: object
+    properties: {}
+  RevokeInvitationRequest:
+    type: object
+    properties:
+      UserArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the user for whom to revoke an enrollment invitation. Required.
+      EnrollmentId:
+        $ref: '#/definitions/EnrollmentId'
+        description: The ARN of the enrollment invitation to revoke. Required.
+  SearchAddressBooksResponse:
+    type: object
+    properties:
+      AddressBooks:
+        $ref: '#/definitions/AddressBookDataList'
+        description: 'The address books that meet the specified set of filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of address books returned.
+  SearchAddressBooksRequest:
+    type: object
+    properties:
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: The filters to use to list a specified set of address books. The supported filter key is AddressBookName.
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: The sort order to use in listing the specified set of address books. The supported sort key is AddressBookName.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+  SearchContactsResponse:
+    type: object
+    properties:
+      Contacts:
+        $ref: '#/definitions/ContactDataList'
+        description: 'The contacts that meet the specified set of filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of contacts returned.
+  SearchContactsRequest:
+    type: object
+    properties:
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: 'The filters to use to list a specified set of address books. The supported filter keys are DisplayName, FirstName, LastName, and AddressBookArns.'
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: 'The sort order to use in listing the specified set of contacts. The supported sort keys are DisplayName, FirstName, and LastName.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+  SearchDevicesResponse:
+    type: object
+    properties:
+      Devices:
+        $ref: '#/definitions/DeviceDataList'
+        description: 'The devices that meet the specified set of filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of devices returned.
+  SearchDevicesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: 'The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and ConnectionStatus (ONLINE and OFFLINE).'
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: 'The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and ConnectionStatus.'
+  SearchProfilesResponse:
+    type: object
+    properties:
+      Profiles:
+        $ref: '#/definitions/ProfileDataList'
+        description: 'The profiles that meet the specified set of filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of room profiles returned.
+  SearchProfilesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: 'The filters to use to list a specified set of room profiles. Supported filter keys are ProfileName and Address. Required. '
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: The sort order to use in listing the specified set of room profiles. Supported sort keys are ProfileName and Address.
+  SearchRoomsResponse:
+    type: object
+    properties:
+      Rooms:
+        $ref: '#/definitions/RoomDataList'
+        description: 'The rooms that meet the specified set of filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of rooms returned.
+  SearchRoomsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. '
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: The filters to use to list a specified set of rooms. The supported filter keys are RoomName and ProfileName.
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: The sort order to use in listing the specified set of rooms. The supported sort keys are RoomName and ProfileName.
+  SearchSkillGroupsResponse:
+    type: object
+    properties:
+      SkillGroups:
+        $ref: '#/definitions/SkillGroupDataList'
+        description: 'The skill groups that meet the filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of skill groups returned.
+  SearchSkillGroupsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. '
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: 'The filters to use to list a specified set of skill groups. The supported filter key is SkillGroupName. '
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: 'The sort order to use in listing the specified set of skill groups. The supported sort key is SkillGroupName. '
+  SearchUsersResponse:
+    type: object
+    properties:
+      Users:
+        $ref: '#/definitions/UserDataList'
+        description: 'The users that meet the specified set of filter criteria, in sort order.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned to indicate that there is more data available.
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of users returned.
+  SearchUsersRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. Required.'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: 'The filters to use for listing a specific set of users. Required. Supported filter keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.'
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: 'The sort order to use in listing the filtered set of users. Required. Supported sort keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.'
+  SendInvitationResponse:
+    type: object
+    properties: {}
+  SendInvitationRequest:
+    type: object
+    properties:
+      UserArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the user to whom to send an invitation. Required.
+  InvalidUserStatusException: {}
+  StartDeviceSyncResponse:
+    type: object
+    properties: {}
+  StartDeviceSyncRequest:
+    type: object
+    required:
+      - Features
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room with which the device to sync is associated. Required.
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the device to sync. Required.
+      Features:
+        $ref: '#/definitions/Features'
+        description: Request structure to start the device sync. Required.
+  StartSmartHomeApplianceDiscoveryResponse:
+    type: object
+    properties: {}
+  StartSmartHomeApplianceDiscoveryRequest:
+    type: object
+    required:
+      - RoomArn
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The room where smart home appliance discovery was initiated.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - Arn
+      - Tags
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the resource to which to add metadata tags. Required. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tags to be added to the specified resource. Do not provide system tags. Required. '
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - Arn
+      - TagKeys
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the resource from which to remove metadata tags. Required. '
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: 'The tags to be removed from the specified resource. Do not provide system tags. Required. '
+  UpdateAddressBookResponse:
+    type: object
+    properties: {}
+  UpdateAddressBookRequest:
+    type: object
+    required:
+      - AddressBookArn
+    properties:
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room to update.
+      Name:
+        $ref: '#/definitions/AddressBookName'
+        description: The updated name of the room.
+      Description:
+        $ref: '#/definitions/AddressBookDescription'
+        description: The updated description of the room.
+  NameInUseException: {}
+  UpdateConferenceProviderResponse:
+    type: object
+    properties: {}
+  UpdateConferenceProviderRequest:
+    type: object
+    required:
+      - ConferenceProviderArn
+      - ConferenceProviderType
+      - MeetingSetting
+    properties:
+      ConferenceProviderArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the conference provider.
+      ConferenceProviderType:
+        $ref: '#/definitions/ConferenceProviderType'
+        description: The type of the conference provider.
+      IPDialIn:
+        $ref: '#/definitions/IPDialIn'
+        description: The IP endpoint and protocol for calling.
+      PSTNDialIn:
+        $ref: '#/definitions/PSTNDialIn'
+        description: The information for PSTN conferencing.
+      MeetingSetting:
+        $ref: '#/definitions/MeetingSetting'
+        description: The meeting settings for the conference provider.
+  UpdateContactResponse:
+    type: object
+    properties: {}
+  UpdateContactRequest:
+    type: object
+    required:
+      - ContactArn
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the contact to update.
+      DisplayName:
+        $ref: '#/definitions/ContactName'
+        description: The updated display name of the contact.
+      FirstName:
+        $ref: '#/definitions/ContactName'
+        description: The updated first name of the contact.
+      LastName:
+        $ref: '#/definitions/ContactName'
+        description: The updated last name of the contact.
+      PhoneNumber:
+        $ref: '#/definitions/E164PhoneNumber'
+        description: The updated phone number of the contact.
+  UpdateDeviceResponse:
+    type: object
+    properties: {}
+  UpdateDeviceRequest:
+    type: object
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the device to update. Required.
+      DeviceName:
+        $ref: '#/definitions/DeviceName'
+        description: The updated device name. Required.
+  UpdateProfileResponse:
+    type: object
+    properties: {}
+  UpdateProfileRequest:
+    type: object
+    properties:
+      ProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the room profile to update. Required.
+      ProfileName:
+        $ref: '#/definitions/ProfileName'
+        description: The updated name for the room profile.
+      IsDefault:
+        $ref: '#/definitions/Boolean'
+        description: 'Sets the profile as default if selected. If this is missing, no update is done to the default status.'
+      Timezone:
+        $ref: '#/definitions/Timezone'
+        description: The updated timezone for the room profile.
+      Address:
+        $ref: '#/definitions/Address'
+        description: The updated address for the room profile.
+      DistanceUnit:
+        $ref: '#/definitions/DistanceUnit'
+        description: The updated distance unit for the room profile.
+      TemperatureUnit:
+        $ref: '#/definitions/TemperatureUnit'
+        description: The updated temperature unit for the room profile.
+      WakeWord:
+        $ref: '#/definitions/WakeWord'
+        description: The updated wake word for the room profile.
+      SetupModeDisabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the setup mode of the profile is enabled.
+      MaxVolumeLimit:
+        $ref: '#/definitions/MaxVolumeLimit'
+        description: The updated maximum volume limit for the room profile.
+      PSTNEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the PSTN setting of the room profile is enabled.
+  UpdateRoomResponse:
+    type: object
+    properties: {}
+  UpdateRoomRequest:
+    type: object
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the room to update. '
+      RoomName:
+        $ref: '#/definitions/RoomName'
+        description: The updated name for the room.
+      Description:
+        $ref: '#/definitions/RoomDescription'
+        description: The updated description for the room.
+      ProviderCalendarId:
+        $ref: '#/definitions/ProviderCalendarId'
+        description: The updated provider calendar ARN for the room.
+      ProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The updated profile ARN for the room.
+  UpdateSkillGroupResponse:
+    type: object
+    properties: {}
+  UpdateSkillGroupRequest:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the skill group to update. '
+      SkillGroupName:
+        $ref: '#/definitions/SkillGroupName'
+        description: The updated name for the skill group.
+      Description:
+        $ref: '#/definitions/SkillGroupDescription'
+        description: The updated description for the skill group.
+  Address:
+    type: string
+    minLength: 1
+    maxLength: 500
+  Arn:
+    type: string
+    pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+  AddressBookName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  AddressBookDescription:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 200
+  AddressBook:
+    type: object
+    properties:
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the address book.
+      Name:
+        $ref: '#/definitions/AddressBookName'
+        description: The name of the address book.
+      Description:
+        $ref: '#/definitions/AddressBookDescription'
+        description: The description of the address book.
+    description: An address book with attributes.
+  AddressBookData:
+    type: object
+    properties:
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the address book.
+      Name:
+        $ref: '#/definitions/AddressBookName'
+        description: The name of the address book.
+      Description:
+        $ref: '#/definitions/AddressBookDescription'
+        description: The description of the address book.
+    description: Information related to an address book.
+  AddressBookDataList:
+    type: array
+    items:
+      $ref: '#/definitions/AddressBookData'
+  AmazonId:
+    type: string
+    pattern: '[a-zA-Z0-9]{1,18}'
+  ApplianceDescription:
+    type: string
+  ApplianceFriendlyName:
+    type: string
+  ApplianceManufacturerName:
+    type: string
+  SkillId:
+    type: string
+    pattern: '(^amzn1\.ask\.skill\.[0-9a-f\-]{1,200})|(^amzn1\.echo-sdk-ams\.app\.[0-9a-f\-]{1,200})'
+  Key:
+    type: string
+    minLength: 1
+  Value:
+    type: string
+    minLength: 1
+  AuthorizationResult:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Key'
+        value:
+          $ref: '#/definitions/Value'
+  Boolean:
+    type: boolean
+  BulletPoint:
+    type: string
+  BulletPoints:
+    type: array
+    items:
+      $ref: '#/definitions/BulletPoint'
+  CategoryId:
+    type: integer
+    minimum: 1
+  CategoryName:
+    type: string
+  Category:
+    type: object
+    properties:
+      CategoryId:
+        $ref: '#/definitions/CategoryId'
+        description: The ID of the skill store category.
+      CategoryName:
+        $ref: '#/definitions/CategoryName'
+        description: The name of the skill store category.
+    description: 'The skill store category that is shown. Alexa skills are assigned a specific skill category during creation, such as News, Social, and Sports.'
+  CategoryList:
+    type: array
+    items:
+      $ref: '#/definitions/Category'
+  ClientId:
+    type: string
+    pattern: '^\S\+\{1,256\}$'
+  ClientRequestToken:
+    type: string
+    pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
+    description: User specified token that is used to support idempotency during Create Resource
+    minLength: 10
+    maxLength: 150
+  CommsProtocol:
+    type: string
+    enum:
+      - SIP
+      - SIPS
+      - H323
+  ConferencePreference:
+    type: object
+    properties:
+      DefaultConferenceProviderArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the default conference provider.
+    description: The default conference provider that is used if no other scheduled meetings are detected.
+  ConferenceProviderName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 50
+  ConferenceProviderType:
+    type: string
+    enum:
+      - CHIME
+      - BLUEJEANS
+      - FUZE
+      - GOOGLE_HANGOUTS
+      - POLYCOM
+      - RINGCENTRAL
+      - SKYPE_FOR_BUSINESS
+      - WEBEX
+      - ZOOM
+      - CUSTOM
+  IPDialIn:
+    type: object
+    required:
+      - Endpoint
+      - CommsProtocol
+    properties:
+      Endpoint:
+        $ref: '#/definitions/Endpoint'
+        description: The IP address.
+      CommsProtocol:
+        $ref: '#/definitions/CommsProtocol'
+        description: 'The protocol, including SIP, SIPS, and H323.'
+    description: The IP endpoint and protocol for calling.
+  PSTNDialIn:
+    type: object
+    required:
+      - CountryCode
+      - PhoneNumber
+      - OneClickIdDelay
+      - OneClickPinDelay
+    properties:
+      CountryCode:
+        $ref: '#/definitions/CountryCode'
+        description: The zip code.
+      PhoneNumber:
+        $ref: '#/definitions/PhoneNumber'
+        description: The phone number to call to join the conference.
+      OneClickIdDelay:
+        $ref: '#/definitions/OneClickIdDelay'
+        description: 'The delay duration before Alexa enters the conference ID with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.'
+      OneClickPinDelay:
+        $ref: '#/definitions/OneClickPinDelay'
+        description: 'The delay duration before Alexa enters the conference pin with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.'
+    description: The information for public switched telephone network (PSTN) conferencing.
+  MeetingSetting:
+    type: object
+    required:
+      - RequirePin
+    properties:
+      RequirePin:
+        $ref: '#/definitions/RequirePin'
+        description: The values that indicate whether the pin is always required.
+    description: '<p>The values that indicate whether a pin is always required (YES), never required (NO), or OPTIONAL.</p> <ul> <li> <p>If YES, Alexa will always ask for a meeting pin.</p> </li> <li> <p>If NO, Alexa will never ask for a meeting pin.</p> </li> <li> <p>If OPTIONAL, Alexa will ask if you have a meeting pin and if the customer responds with yes, it will ask for the meeting pin.</p> </li> </ul>'
+  ConferenceProvider:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the newly created conference provider.
+      Name:
+        $ref: '#/definitions/ConferenceProviderName'
+        description: The name of the conference provider.
+      Type:
+        $ref: '#/definitions/ConferenceProviderType'
+        description: The type of conference providers.
+      IPDialIn:
+        $ref: '#/definitions/IPDialIn'
+        description: The IP endpoint and protocol for calling.
+      PSTNDialIn:
+        $ref: '#/definitions/PSTNDialIn'
+        description: The information for PSTN conferencing.
+      MeetingSetting:
+        $ref: '#/definitions/MeetingSetting'
+        description: The meeting settings for the conference provider.
+    description: 'An entity that provides a conferencing solution. Alexa for Business acts as the voice interface and mediator that connects users to their preferred conference provider. Examples of conference providers include Amazon Chime, Zoom, Cisco, and Polycom. '
+  ConferenceProvidersList:
+    type: array
+    items:
+      $ref: '#/definitions/ConferenceProvider'
+  ConnectionStatus:
+    type: string
+    enum:
+      - ONLINE
+      - OFFLINE
+  ContactName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  E164PhoneNumber:
+    type: string
+    pattern: '^\+\d{8,}$'
+  Contact:
+    type: object
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the contact.
+      DisplayName:
+        $ref: '#/definitions/ContactName'
+        description: The name of the contact to display on the console.
+      FirstName:
+        $ref: '#/definitions/ContactName'
+        description: 'The first name of the contact, used to call the contact on the device.'
+      LastName:
+        $ref: '#/definitions/ContactName'
+        description: 'The last name of the contact, used to call the contact on the device.'
+      PhoneNumber:
+        $ref: '#/definitions/E164PhoneNumber'
+        description: The phone number of the contact.
+    description: A contact with attributes.
+  ContactData:
+    type: object
+    properties:
+      ContactArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the contact.
+      DisplayName:
+        $ref: '#/definitions/ContactName'
+        description: The name of the contact to display on the console.
+      FirstName:
+        $ref: '#/definitions/ContactName'
+        description: 'The first name of the contact, used to call the contact on the device.'
+      LastName:
+        $ref: '#/definitions/ContactName'
+        description: 'The last name of the contact, used to call the contact on the device.'
+      PhoneNumber:
+        $ref: '#/definitions/E164PhoneNumber'
+        description: The phone number of the contact.
+    description: Information related to a contact.
+  ContactDataList:
+    type: array
+    items:
+      $ref: '#/definitions/ContactData'
+  CountryCode:
+    type: string
+    pattern: '\d{1,3}'
+  ProfileName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  Timezone:
+    type: string
+    minLength: 1
+    maxLength: 100
+  DistanceUnit:
+    type: string
+    enum:
+      - METRIC
+      - IMPERIAL
+  TemperatureUnit:
+    type: string
+    enum:
+      - FAHRENHEIT
+      - CELSIUS
+  WakeWord:
+    type: string
+    enum:
+      - ALEXA
+      - AMAZON
+      - ECHO
+      - COMPUTER
+  MaxVolumeLimit:
+    type: integer
+  RoomName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  RoomDescription:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 200
+  ProviderCalendarId:
+    type: string
+    minLength: 0
+    maxLength: 100
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  SkillGroupName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  SkillGroupDescription:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 200
+  user_UserId:
+    type: string
+    pattern: '[a-zA-Z0-9@_+.-]*'
+    minLength: 1
+    maxLength: 128
+  user_FirstName:
+    type: string
+    pattern: '([A-Za-z\-'' 0-9._]|\p{IsLetter})*'
+    minLength: 0
+    maxLength: 30
+  user_LastName:
+    type: string
+    pattern: '([A-Za-z\-'' 0-9._]|\p{IsLetter})*'
+    minLength: 0
+    maxLength: 30
+  Email:
+    type: string
+    pattern: '([0-9a-zA-Z]([+-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})'
+    minLength: 1
+    maxLength: 128
+  RoomSkillParameterKey:
+    type: string
+    minLength: 1
+    maxLength: 256
+  EnrollmentId:
+    type: string
+    minLength: 0
+    maxLength: 128
+  DeveloperName:
+    type: string
+  PrivacyPolicy:
+    type: string
+  Url:
+    type: string
+  DeveloperInfo:
+    type: object
+    properties:
+      DeveloperName:
+        $ref: '#/definitions/DeveloperName'
+        description: The name of the developer.
+      PrivacyPolicy:
+        $ref: '#/definitions/PrivacyPolicy'
+        description: The URL of the privacy policy.
+      Email:
+        $ref: '#/definitions/Email'
+        description: The email of the developer.
+      Url:
+        $ref: '#/definitions/Url'
+        description: The website of the developer.
+    description: The details about the developer that published the skill.
+  DeviceSerialNumber:
+    type: string
+    pattern: '[a-zA-Z0-9]{1,200}'
+  DeviceType:
+    type: string
+    pattern: '[a-zA-Z0-9]{1,200}'
+  DeviceName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 2
+    maxLength: 100
+  SoftwareVersion:
+    type: string
+  MacAddress:
+    type: string
+  DeviceStatus:
+    type: string
+    enum:
+      - READY
+      - PENDING
+      - WAS_OFFLINE
+      - DEREGISTERED
+  DeviceStatusInfo:
+    type: object
+    properties:
+      DeviceStatusDetails:
+        $ref: '#/definitions/DeviceStatusDetails'
+        description: One or more device status detail descriptions.
+      ConnectionStatus:
+        $ref: '#/definitions/ConnectionStatus'
+        description: 'The latest available information about the connection status of a device. '
+    description: Detailed information about a device's status.
   Device:
     type: object
     properties:
@@ -1452,7 +4058,7 @@ definitions:
         description: The room ARN of a device.
       DeviceStatus:
         $ref: '#/definitions/DeviceStatus'
-        description: 'The status of a device. If the status is not READY, check the DeviceStatusInfo for details.'
+        description: 'The status of a device. If the status is not READY, check the DeviceStatusInfo value for details.'
       DeviceStatusInfo:
         $ref: '#/definitions/DeviceStatusInfo'
         description: Detailed information about a device's status.
@@ -1495,20 +4101,41 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DeviceData'
-  DeviceName:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 2
-    maxLength: 100
-  DeviceSerialNumber:
-    type: string
-    pattern: '[a-zA-Z0-9]{1,200}'
-  DeviceStatus:
+  DeviceEventType:
     type: string
     enum:
-      - READY
-      - PENDING
-      - WAS_OFFLINE
+      - CONNECTION_STATUS
+      - DEVICE_STATUS
+  DeviceEventValue:
+    type: string
+  Timestamp:
+    type: string
+    format: date-time
+  DeviceEvent:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/DeviceEventType'
+        description: The type of device event.
+      Value:
+        $ref: '#/definitions/DeviceEventValue'
+        description: The value of the event.
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time (in epoch) when the event occurred. '
+    description: The list of device events.
+  DeviceEventList:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceEvent'
+  DeviceSerialNumberForAVS:
+    type: string
+    pattern: '^[a-zA-Z0-9]{1,50}$'
+  DeviceStatusDetailCode:
+    type: string
+    enum:
+      - DEVICE_SOFTWARE_UPDATE_NEEDED
+      - DEVICE_WAS_OFFLINE
   DeviceStatusDetail:
     type: object
     properties:
@@ -1516,69 +4143,34 @@ definitions:
         $ref: '#/definitions/DeviceStatusDetailCode'
         description: The device status detail code.
     description: Details of a device’s status.
-  DeviceStatusDetailCode:
-    type: string
-    enum:
-      - DEVICE_SOFTWARE_UPDATE_NEEDED
-      - DEVICE_WAS_OFFLINE
   DeviceStatusDetails:
     type: array
     items:
       $ref: '#/definitions/DeviceStatusDetail'
-  DeviceStatusInfo:
-    type: object
-    properties:
-      DeviceStatusDetails:
-        $ref: '#/definitions/DeviceStatusDetails'
-        description: One or more device status detail descriptions.
-    description: Detailed information about a device's status.
-  DeviceType:
-    type: string
-    pattern: '[a-zA-Z0-9]{1,200}'
-  DisassociateDeviceFromRoomRequest:
-    type: object
-    properties:
-      DeviceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the device to disassociate from a room. Required.
-  DisassociateDeviceFromRoomResponse:
-    type: object
-    properties: {}
-  DisassociateSkillGroupFromRoomRequest:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the skill group to disassociate from a room. Required.
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room from which the skill group is to be disassociated. Required.
-  DisassociateSkillGroupFromRoomResponse:
-    type: object
-    properties: {}
-  DistanceUnit:
+  EnablementType:
     type: string
     enum:
-      - METRIC
-      - IMPERIAL
-  Email:
+      - ENABLED
+      - PENDING
+  EnablementTypeFilter:
     type: string
-    pattern: '([0-9a-zA-Z]([+-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})'
+    enum:
+      - ENABLED
+      - PENDING
+  EndUserLicenseAgreement:
+    type: string
+  Endpoint:
+    type: string
     minLength: 1
-    maxLength: 128
-  EnrollmentId:
-    type: string
-    minLength: 0
-    maxLength: 128
+    maxLength: 256
   EnrollmentStatus:
     type: string
     enum:
       - INITIALIZED
       - PENDING
       - REGISTERED
+      - DISASSOCIATING
       - DEREGISTERING
-  ErrorMessage:
-    type: string
   Feature:
     type: string
     enum:
@@ -1592,6 +4184,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Feature'
+  FilterKey:
+    type: string
+    minLength: 1
+    maxLength: 500
+  FilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/FilterValue'
+    maxItems: 5
   Filter:
     type: object
     required:
@@ -1605,10 +4206,6 @@ definitions:
         $ref: '#/definitions/FilterValueList'
         description: The values of a filter.
     description: A filter name and value pair that is used to return a more specific list of results. Filters can be used to match a set of resources by various criteria.
-  FilterKey:
-    type: string
-    minLength: 1
-    maxLength: 500
   FilterList:
     type: array
     items:
@@ -1618,160 +4215,12 @@ definitions:
     type: string
     minLength: 1
     maxLength: 500
-  FilterValueList:
+  GenericKeyword:
+    type: string
+  GenericKeywords:
     type: array
     items:
-      $ref: '#/definitions/FilterValue'
-    maxItems: 5
-  GetDeviceRequest:
-    type: object
-    properties:
-      DeviceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the device for which to request details. Required.
-  GetDeviceResponse:
-    type: object
-    properties:
-      Device:
-        $ref: '#/definitions/Device'
-        description: The details of the device requested. Required.
-  GetProfileRequest:
-    type: object
-    properties:
-      ProfileArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room profile for which to request details. Required.
-  GetProfileResponse:
-    type: object
-    properties:
-      Profile:
-        $ref: '#/definitions/Profile'
-        description: The details of the room profile requested. Required.
-  GetRoomRequest:
-    type: object
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room for which to request details. Required.
-  GetRoomResponse:
-    type: object
-    properties:
-      Room:
-        $ref: '#/definitions/Room'
-        description: The details of the room requested.
-  GetRoomSkillParameterRequest:
-    type: object
-    required:
-      - SkillId
-      - ParameterKey
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN of the room from which to get the room skill parameter details. '
-      SkillId:
-        $ref: '#/definitions/SkillId'
-        description: The ARN of the skill from which to get the room skill parameter details. Required.
-      ParameterKey:
-        $ref: '#/definitions/RoomSkillParameterKey'
-        description: The room skill parameter key for which to get details. Required.
-  GetRoomSkillParameterResponse:
-    type: object
-    properties:
-      RoomSkillParameter:
-        $ref: '#/definitions/RoomSkillParameter'
-        description: The details of the room skill parameter requested. Required.
-  GetSkillGroupRequest:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the skill group for which to get details. Required.
-  GetSkillGroupResponse:
-    type: object
-    properties:
-      SkillGroup:
-        $ref: '#/definitions/SkillGroup'
-        description: The details of the skill group requested. Required.
-  InvalidUserStatusException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The attempt to update a user is invalid due to the user''s current status. HTTP Status Code: 400'
-  LimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'You are performing an action that would put you beyond your account''s limits. HTTP Status Code: 400'
-  ListSkillsRequest:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the skill group for which to list enabled skills. Required.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
-      MaxResults:
-        $ref: '#/definitions/SkillListMaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. Required.'
-  ListSkillsResponse:
-    type: object
-    properties:
-      SkillSummaries:
-        $ref: '#/definitions/SkillSummaryList'
-        description: The list of enabled skills requested. Required.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-  ListTagsRequest:
-    type: object
-    required:
-      - Arn
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the specific resource for which to list tags. Required.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. '
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
-  ListTagsResponse:
-    type: object
-    properties:
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The list of tags requested for the specific resource.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-  MacAddress:
-    type: string
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 50
-  MaxVolumeLimit:
-    type: integer
-  NameInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The name sent in the request is already in use. HTTP Status Code: 400'
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 1000
-  NotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The resource is not found. HTTP Status Code: 400'
+      $ref: '#/definitions/GenericKeyword'
   Profile:
     type: object
     properties:
@@ -1781,6 +4230,9 @@ definitions:
       ProfileName:
         $ref: '#/definitions/ProfileName'
         description: The name of a room profile.
+      IsDefault:
+        $ref: '#/definitions/Boolean'
+        description: Retrieves if the profile is default or not.
       Address:
         $ref: '#/definitions/Address'
         description: The address of a room profile.
@@ -1805,7 +4257,115 @@ definitions:
       PSTNEnabled:
         $ref: '#/definitions/Boolean'
         description: The PSTN setting of a room profile.
+      AddressBookArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the address book.
     description: A room profile with attributes.
+  Room:
+    type: object
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of a room.
+      RoomName:
+        $ref: '#/definitions/RoomName'
+        description: The name of a room.
+      Description:
+        $ref: '#/definitions/RoomDescription'
+        description: The description of a room.
+      ProviderCalendarId:
+        $ref: '#/definitions/ProviderCalendarId'
+        description: The provider calendar ARN of a room.
+      ProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The profile ARN of a room.
+    description: A room with attributes.
+  RoomSkillParameter:
+    type: object
+    required:
+      - ParameterKey
+      - ParameterValue
+    properties:
+      ParameterKey:
+        $ref: '#/definitions/RoomSkillParameterKey'
+        description: The parameter key of a room skill parameter. ParameterKey is an enumerated type that only takes “DEFAULT” or “SCOPE” as valid values.
+      ParameterValue:
+        $ref: '#/definitions/RoomSkillParameterValue'
+        description: The parameter value of a room skill parameter.
+    description: A skill parameter associated with a room.
+  SkillGroup:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of a skill group.
+      SkillGroupName:
+        $ref: '#/definitions/SkillGroupName'
+        description: The name of a skill group.
+      Description:
+        $ref: '#/definitions/SkillGroupDescription'
+        description: The description of a skill group.
+    description: A skill group with attributes.
+  IconUrl:
+    type: string
+  InvocationPhrase:
+    type: string
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 50
+  SkillTypeFilter:
+    type: string
+    enum:
+      - PUBLIC
+      - PRIVATE
+      - ALL
+  SkillListMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 10
+  SkillSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/SkillSummary'
+  SkillsStoreSkillList:
+    type: array
+    items:
+      $ref: '#/definitions/SkillsStoreSkill'
+  SmartHomeApplianceList:
+    type: array
+    items:
+      $ref: '#/definitions/SmartHomeAppliance'
+  RequirePin:
+    type: string
+    enum:
+      - 'YES'
+      - 'NO'
+      - OPTIONAL
+  NewInThisVersionBulletPoints:
+    type: array
+    items:
+      $ref: '#/definitions/BulletPoint'
+  OneClickIdDelay:
+    type: string
+    minLength: 1
+    maxLength: 2
+  OneClickPinDelay:
+    type: string
+    minLength: 1
+    maxLength: 2
+  PhoneNumber:
+    type: string
+    pattern: '\d{10}'
+  ProductDescription:
+    type: string
+  ProductId:
+    type: string
+    pattern: '^[a-zA-Z0-9_]{1,256}$'
   ProfileData:
     type: object
     properties:
@@ -1815,6 +4375,9 @@ definitions:
       ProfileName:
         $ref: '#/definitions/ProfileName'
         description: The name of a room profile.
+      IsDefault:
+        $ref: '#/definitions/Boolean'
+        description: Retrieves if the profile data is default or not.
       Address:
         $ref: '#/definitions/Address'
         description: The address of a room profile.
@@ -1835,96 +4398,32 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ProfileData'
-  ProfileName:
+  UserCode:
     type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
     minLength: 1
-    maxLength: 100
-  ProviderCalendarId:
+    maxLength: 128
+  ReleaseDate:
     type: string
-    minLength: 0
-    maxLength: 100
-  PutRoomSkillParameterRequest:
-    type: object
-    required:
-      - SkillId
-      - RoomSkillParameter
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room associated with the room skill parameter. Required.
-      SkillId:
-        $ref: '#/definitions/SkillId'
-        description: The ARN of the skill associated with the room skill parameter. Required.
-      RoomSkillParameter:
-        $ref: '#/definitions/RoomSkillParameter'
-        description: The updated room skill parameter. Required.
-  PutRoomSkillParameterResponse:
-    type: object
-    properties: {}
-  ResolveRoomRequest:
-    type: object
-    required:
-      - UserId
-      - SkillId
-    properties:
-      UserId:
-        $ref: '#/definitions/UserId'
-        description: The ARN of the user. Required.
-      SkillId:
-        $ref: '#/definitions/SkillId'
-        description: The ARN of the skill that was requested. Required.
-  ResolveRoomResponse:
-    type: object
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room from which the skill request was invoked.
-      RoomName:
-        $ref: '#/definitions/RoomName'
-        description: The name of the room from which the skill request was invoked.
-      RoomSkillParameters:
-        $ref: '#/definitions/RoomSkillParameters'
-        description: Response to get the room profile request. Required.
-  ResourceInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-      ClientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-    description: 'The resource in the request is already in use. HTTP Status Code: 400'
-  RevokeInvitationRequest:
-    type: object
-    properties:
-      UserArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the user for whom to revoke an enrollment invitation. Required.
-      EnrollmentId:
-        $ref: '#/definitions/EnrollmentId'
-        description: The ARN of the enrollment invitation to revoke. Required.
-  RevokeInvitationResponse:
-    type: object
-    properties: {}
-  Room:
-    type: object
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of a room.
-      RoomName:
-        $ref: '#/definitions/RoomName'
-        description: The name of a room.
-      Description:
-        $ref: '#/definitions/RoomDescription'
-        description: The description of a room.
-      ProviderCalendarId:
-        $ref: '#/definitions/ProviderCalendarId'
-        description: The provider calendar ARN of a room.
-      ProfileArn:
-        $ref: '#/definitions/Arn'
-        description: The profile ARN of a room.
-    description: A room with attributes.
+  UserId:
+    type: string
+    pattern: 'amzn1\.[A-Za-z0-9+-\/=.]{1,300}'
+  RoomSkillParameters:
+    type: array
+    items:
+      $ref: '#/definitions/RoomSkillParameter'
+  ReviewKey:
+    type: string
+  ReviewValue:
+    type: string
+  Reviews:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ReviewKey'
+        value:
+          $ref: '#/definitions/ReviewValue'
   RoomData:
     type: object
     properties:
@@ -1951,198 +4450,71 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RoomData'
-  RoomDescription:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 200
-  RoomName:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 100
-  RoomSkillParameter:
-    type: object
-    required:
-      - ParameterKey
-      - ParameterValue
-    properties:
-      ParameterKey:
-        $ref: '#/definitions/RoomSkillParameterKey'
-        description: The parameter key of a room skill parameter. ParameterKey is an enumerated type that only takes “DEFAULT” or “SCOPE” as valid values.
-      ParameterValue:
-        $ref: '#/definitions/RoomSkillParameterValue'
-        description: The parameter value of a room skill parameter.
-    description: A skill parameter associated with a room.
-  RoomSkillParameterKey:
-    type: string
-    minLength: 1
-    maxLength: 256
   RoomSkillParameterValue:
     type: string
     minLength: 1
     maxLength: 512
-  RoomSkillParameters:
+  Utterance:
+    type: string
+  SampleUtterances:
     type: array
     items:
-      $ref: '#/definitions/RoomSkillParameter'
-  SearchDevicesRequest:
+      $ref: '#/definitions/Utterance'
+  SortList:
+    type: array
+    items:
+      $ref: '#/definitions/Sort'
+    maxItems: 25
+  TotalCount:
+    type: integer
+  SkillGroupDataList:
+    type: array
+    items:
+      $ref: '#/definitions/SkillGroupData'
+  UserDataList:
+    type: array
+    items:
+      $ref: '#/definitions/UserData'
+  ShortDescription:
+    type: string
+  SkillTypes:
+    type: array
+    items:
+      $ref: '#/definitions/SkillStoreType'
+  SkillDetails:
     type: object
     properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
-      Filters:
-        $ref: '#/definitions/FilterList'
-        description: 'The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.'
-      SortCriteria:
-        $ref: '#/definitions/SortList'
-        description: 'The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, and DeviceSerialNumber.'
-  SearchDevicesResponse:
-    type: object
-    properties:
-      Devices:
-        $ref: '#/definitions/DeviceDataList'
-        description: 'The devices that meet the specified set of filter criteria, in sort order.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-      TotalCount:
-        $ref: '#/definitions/TotalCount'
-        description: The total number of devices returned.
-  SearchProfilesRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
-      Filters:
-        $ref: '#/definitions/FilterList'
-        description: 'The filters to use to list a specified set of room profiles. Supported filter keys are ProfileName and Address. Required. '
-      SortCriteria:
-        $ref: '#/definitions/SortList'
-        description: The sort order to use in listing the specified set of room profiles. Supported sort keys are ProfileName and Address.
-  SearchProfilesResponse:
-    type: object
-    properties:
-      Profiles:
-        $ref: '#/definitions/ProfileDataList'
-        description: 'The profiles that meet the specified set of filter criteria, in sort order.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-      TotalCount:
-        $ref: '#/definitions/TotalCount'
-        description: The total number of room profiles returned.
-  SearchRoomsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. '
-      Filters:
-        $ref: '#/definitions/FilterList'
-        description: The filters to use to list a specified set of rooms. The supported filter keys are RoomName and ProfileName.
-      SortCriteria:
-        $ref: '#/definitions/SortList'
-        description: The sort order to use in listing the specified set of rooms. The supported sort keys are RoomName and ProfileName.
-  SearchRoomsResponse:
-    type: object
-    properties:
-      Rooms:
-        $ref: '#/definitions/RoomDataList'
-        description: 'The rooms that meet the specified set of filter criteria, in sort order.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-      TotalCount:
-        $ref: '#/definitions/TotalCount'
-        description: The total number of rooms returned.
-  SearchSkillGroupsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. '
-      Filters:
-        $ref: '#/definitions/FilterList'
-        description: 'The filters to use to list a specified set of skill groups. The supported filter key is SkillGroupName. '
-      SortCriteria:
-        $ref: '#/definitions/SortList'
-        description: 'The sort order to use in listing the specified set of skill groups. The supported sort key is SkillGroupName. '
-  SearchSkillGroupsResponse:
-    type: object
-    properties:
-      SkillGroups:
-        $ref: '#/definitions/SkillGroupDataList'
-        description: 'The skill groups that meet the filter criteria, in sort order.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-      TotalCount:
-        $ref: '#/definitions/TotalCount'
-        description: The total number of skill groups returned.
-  SearchUsersRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. Required.'
-      Filters:
-        $ref: '#/definitions/FilterList'
-        description: 'The filters to use for listing a specific set of users. Required. Supported filter keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.'
-      SortCriteria:
-        $ref: '#/definitions/SortList'
-        description: 'The sort order to use in listing the filtered set of users. Required. Supported sort keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.'
-  SearchUsersResponse:
-    type: object
-    properties:
-      Users:
-        $ref: '#/definitions/UserDataList'
-        description: 'The users that meet the specified set of filter criteria, in sort order.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned to indicate that there is more data available.
-      TotalCount:
-        $ref: '#/definitions/TotalCount'
-        description: The total number of users returned.
-  SendInvitationRequest:
-    type: object
-    properties:
-      UserArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the user to whom to send an invitation. Required.
-  SendInvitationResponse:
-    type: object
-    properties: {}
-  SkillGroup:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of a skill group.
-      SkillGroupName:
-        $ref: '#/definitions/SkillGroupName'
-        description: The name of a skill group.
-      Description:
-        $ref: '#/definitions/SkillGroupDescription'
-        description: The description of a skill group.
-    description: A skill group with attributes.
+      ProductDescription:
+        $ref: '#/definitions/ProductDescription'
+        description: The description of the product.
+      InvocationPhrase:
+        $ref: '#/definitions/InvocationPhrase'
+        description: The phrase used to trigger the skill.
+      ReleaseDate:
+        $ref: '#/definitions/ReleaseDate'
+        description: The date when the skill was released.
+      EndUserLicenseAgreement:
+        $ref: '#/definitions/EndUserLicenseAgreement'
+        description: The URL of the end user license agreement.
+      GenericKeywords:
+        $ref: '#/definitions/GenericKeywords'
+        description: The generic keywords associated with the skill that can be used to find a skill.
+      BulletPoints:
+        $ref: '#/definitions/BulletPoints'
+        description: The details about what the skill supports organized as bullet points.
+      NewInThisVersionBulletPoints:
+        $ref: '#/definitions/NewInThisVersionBulletPoints'
+        description: The updates added in bullet points.
+      SkillTypes:
+        $ref: '#/definitions/SkillTypes'
+        description: The types of skills.
+      Reviews:
+        $ref: '#/definitions/Reviews'
+        description: 'The list of reviews for the skill, including Key and Value pair.'
+      DeveloperInfo:
+        $ref: '#/definitions/DeveloperInfo'
+        description: The details about the developer that published the skill.
+    description: Granular information about the skill.
   SkillGroupData:
     type: object
     properties:
@@ -2156,30 +4528,21 @@ definitions:
         $ref: '#/definitions/SkillGroupDescription'
         description: The description of a skill group.
     description: The attributes of a skill group.
-  SkillGroupDataList:
-    type: array
-    items:
-      $ref: '#/definitions/SkillGroupData'
-  SkillGroupDescription:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 200
-  SkillGroupName:
+  SkillName:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
     minLength: 1
     maxLength: 100
-  SkillId:
+  SkillStoreType:
     type: string
-    pattern: '(^amzn1\.ask\.skill\.[0-9a-f\-]{1,200})|(^amzn1\.echo-sdk-ams\.app\.[0-9a-f\-]{1,200})'
-  SkillListMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 10
-  SkillName:
+  boolean:
+    type: boolean
+  SkillType:
     type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    enum:
+      - PUBLIC
+      - PRIVATE
+    pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
     minLength: 1
     maxLength: 100
   SkillSummary:
@@ -2194,13 +4557,60 @@ definitions:
       SupportsLinking:
         $ref: '#/definitions/boolean'
         description: Linking support for a skill.
+      EnablementType:
+        $ref: '#/definitions/EnablementType'
+        description: 'Whether the skill is enabled under the user''s account, or if it requires linking to be used.'
+      SkillType:
+        $ref: '#/definitions/SkillType'
+        description: Whether the skill is publicly available or is a private skill.
     description: The summary of skills.
-  SkillSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/SkillSummary'
-  SoftwareVersion:
+  SkillsStoreSkill:
+    type: object
+    properties:
+      SkillId:
+        $ref: '#/definitions/SkillId'
+        description: The ARN of the skill.
+      SkillName:
+        $ref: '#/definitions/SkillName'
+        description: The name of the skill.
+      ShortDescription:
+        $ref: '#/definitions/ShortDescription'
+        description: Short description about the skill.
+      IconUrl:
+        $ref: '#/definitions/IconUrl'
+        description: The URL where the skill icon resides.
+      SampleUtterances:
+        $ref: '#/definitions/SampleUtterances'
+        description: Sample utterances that interact with the skill.
+      SkillDetails:
+        $ref: '#/definitions/SkillDetails'
+        description: Information about the skill.
+      SupportsLinking:
+        $ref: '#/definitions/boolean'
+        description: Linking support for a skill.
+    description: The detailed information about an Alexa skill.
+  SmartHomeAppliance:
+    type: object
+    properties:
+      FriendlyName:
+        $ref: '#/definitions/ApplianceFriendlyName'
+        description: The friendly name of the smart home appliance.
+      Description:
+        $ref: '#/definitions/ApplianceDescription'
+        description: The description of the smart home appliance.
+      ManufacturerName:
+        $ref: '#/definitions/ApplianceManufacturerName'
+        description: The name of the manufacturer of the smart home appliance.
+    description: 'A smart home appliance that can connect to a central system. Any domestic device can be a smart appliance. '
+  SortKey:
     type: string
+    minLength: 1
+    maxLength: 500
+  SortValue:
+    type: string
+    enum:
+      - ASC
+      - DESC
   Sort:
     type: object
     required:
@@ -2214,39 +4624,21 @@ definitions:
         $ref: '#/definitions/SortValue'
         description: The sort value of a sort object.
     description: 'An object representing a sort criteria. '
-  SortKey:
+  TagKey:
     type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
-    maxLength: 500
-  SortList:
-    type: array
-    items:
-      $ref: '#/definitions/Sort'
-    maxItems: 25
-  SortValue:
+    maxLength: 128
+  TagValue:
     type: string
-    enum:
-      - ASC
-      - DESC
-  StartDeviceSyncRequest:
-    type: object
-    required:
-      - Features
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room with which the device to sync is associated. Required.
-      DeviceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the device to sync. Required.
-      Features:
-        $ref: '#/definitions/Features'
-        description: Request structure to start the device sync. Required.
-  StartDeviceSyncResponse:
-    type: object
-    properties: {}
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
+    required:
+      - Key
+      - Value
     properties:
       Key:
         $ref: '#/definitions/TagKey'
@@ -2255,149 +4647,10 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value of a tag. Tag values are case-sensitive and can be null.
     description: 'A key-value pair that can be associated with a resource. '
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagResourceRequest:
-    type: object
-    required:
-      - Arn
-      - Tags
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN of the resource to which to add metadata tags. Required. '
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: 'The tags to be added to the specified resource. Do not provide system tags. Required. '
-  TagResourceResponse:
-    type: object
-    properties: {}
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  TemperatureUnit:
-    type: string
-    enum:
-      - FAHRENHEIT
-      - CELSIUS
-  Timezone:
-    type: string
-    minLength: 1
-    maxLength: 100
-  TotalCount:
-    type: integer
-  UntagResourceRequest:
-    type: object
-    required:
-      - Arn
-      - TagKeys
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN of the resource from which to remove metadata tags. Required. '
-      TagKeys:
-        $ref: '#/definitions/TagKeyList'
-        description: 'The tags to be removed from the specified resource. Do not provide system tags. Required. '
-  UntagResourceResponse:
-    type: object
-    properties: {}
-  UpdateDeviceRequest:
-    type: object
-    properties:
-      DeviceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the device to update. Required.
-      DeviceName:
-        $ref: '#/definitions/DeviceName'
-        description: The updated device name. Required.
-  UpdateDeviceResponse:
-    type: object
-    properties: {}
-  UpdateProfileRequest:
-    type: object
-    properties:
-      ProfileArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the room profile to update. Required.
-      ProfileName:
-        $ref: '#/definitions/ProfileName'
-        description: The updated name for the room profile.
-      Timezone:
-        $ref: '#/definitions/Timezone'
-        description: The updated timezone for the room profile.
-      Address:
-        $ref: '#/definitions/Address'
-        description: The updated address for the room profile.
-      DistanceUnit:
-        $ref: '#/definitions/DistanceUnit'
-        description: The updated distance unit for the room profile.
-      TemperatureUnit:
-        $ref: '#/definitions/TemperatureUnit'
-        description: The updated temperature unit for the room profile.
-      WakeWord:
-        $ref: '#/definitions/WakeWord'
-        description: The updated wake word for the room profile.
-      SetupModeDisabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the setup mode of the profile is enabled.
-      MaxVolumeLimit:
-        $ref: '#/definitions/MaxVolumeLimit'
-        description: The updated maximum volume limit for the room profile.
-      PSTNEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the PSTN setting of the room profile is enabled.
-  UpdateProfileResponse:
-    type: object
-    properties: {}
-  UpdateRoomRequest:
-    type: object
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN of the room to update. '
-      RoomName:
-        $ref: '#/definitions/RoomName'
-        description: The updated name for the room.
-      Description:
-        $ref: '#/definitions/RoomDescription'
-        description: The updated description for the room.
-      ProviderCalendarId:
-        $ref: '#/definitions/ProviderCalendarId'
-        description: The updated provider calendar ARN for the room.
-      ProfileArn:
-        $ref: '#/definitions/Arn'
-        description: The updated profile ARN for the room.
-  UpdateRoomResponse:
-    type: object
-    properties: {}
-  UpdateSkillGroupRequest:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN of the skill group to update. '
-      SkillGroupName:
-        $ref: '#/definitions/SkillGroupName'
-        description: The updated name for the skill group.
-      Description:
-        $ref: '#/definitions/SkillGroupDescription'
-        description: The updated description for the skill group.
-  UpdateSkillGroupResponse:
-    type: object
-    properties: {}
   UserData:
     type: object
     properties:
@@ -2420,34 +4673,3 @@ definitions:
         $ref: '#/definitions/EnrollmentId'
         description: The enrollment ARN of a user.
     description: Information related to a user.
-  UserDataList:
-    type: array
-    items:
-      $ref: '#/definitions/UserData'
-  UserId:
-    type: string
-    pattern: 'amzn1\.[A-Za-z0-9+-\/=.]{1,300}'
-  WakeWord:
-    type: string
-    enum:
-      - ALEXA
-      - AMAZON
-      - ECHO
-      - COMPUTER
-  boolean:
-    type: boolean
-  user_FirstName:
-    type: string
-    pattern: '([A-Za-z\-'' 0-9._]|\p{IsLetter})*'
-    minLength: 0
-    maxLength: 30
-  user_LastName:
-    type: string
-    pattern: '([A-Za-z\-'' 0-9._]|\p{IsLetter})*'
-    minLength: 0
-    maxLength: 30
-  user_UserId:
-    type: string
-    pattern: '[a-zA-Z0-9@_+.-]*'
-    minLength: 1
-    maxLength: 128

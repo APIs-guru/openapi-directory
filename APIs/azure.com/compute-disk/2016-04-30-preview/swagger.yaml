@@ -640,6 +640,8 @@ paths:
       tags:
         - Disks
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots':
     get:
       description: Lists snapshots under a resource group.
@@ -930,6 +932,8 @@ paths:
       tags:
         - Snapshots
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
 definitions:
   AccessUri:
     description: A disk access SAS uri.

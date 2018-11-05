@@ -562,12 +562,174 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  CreateProjectResult:
+    type: object
+    properties:
+      details:
+        $ref: '#/definitions/ProjectDetails'
+        description: ' Detailed information about the created AWS Mobile Hub project. '
+    description: ' Result structure used in response to a request to create a project. '
+  CreateProjectRequest:
+    type: object
+    properties:
+      contents:
+        $ref: '#/definitions/Contents'
+        description: ' ZIP or YAML file which contains configuration settings to be used when creating the project. This may be the contents of the file downloaded from the URL provided in an export project operation. '
+    description: ' Request structure used to request a project be created. '
+  InternalFailureException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' The service has encountered an unexpected error condition which prevents it from servicing the request. '
+  ServiceUnavailableException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' The service is temporarily unavailable. The request should be retried after some time delay. '
+  UnauthorizedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' Credentials of the caller are insufficient to authorize the request. '
+  TooManyRequestsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' Too many requests have been received for this AWS account in too short a time. The request should be retried after some time delay. '
+  BadRequestException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' The request cannot be processed because some parameter is not valid or the project state prevents the operation from being performed. '
+  NotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' No entity can be found with the specified identifier. '
+  LimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' There are too many AWS Mobile Hub projects in the account or the account has exceeded the maximum number of resources in some AWS service. You should create another sub-account using AWS Organizations or remove some resources and retry your request. '
+  DeleteProjectResult:
+    type: object
+    properties:
+      deletedResources:
+        $ref: '#/definitions/Resources'
+        description: ' Resources which were deleted. '
+      orphanedResources:
+        $ref: '#/definitions/Resources'
+        description: ' Resources which were not deleted, due to a risk of losing potentially important data or files. '
+    description: ' Result structure used in response to request to delete a project. '
+  DeleteProjectRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used to request a project be deleted. '
+  DescribeBundleResult:
+    type: object
+    properties:
+      details:
+        $ref: '#/definitions/BundleDetails'
+        description: ' The details of the bundle. '
+    description: ' Result structure contains the details of the bundle. '
+  DescribeBundleRequest:
+    type: object
+    properties: {}
+    description: ' Request structure to request the details of a specific bundle. '
+  DescribeProjectResult:
+    type: object
+    properties:
+      details:
+        $ref: '#/definitions/ProjectDetails'
+    description: ' Result structure used for requests of project details. '
+  DescribeProjectRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used to request details about a project. '
+  ExportBundleResult:
+    type: object
+    properties:
+      downloadUrl:
+        $ref: '#/definitions/DownloadUrl'
+        description: ' URL which contains the custom-generated SDK and tool packages used to integrate the client mobile app or web app with the AWS resources created by the AWS Mobile Hub project. '
+    description: ' Result structure which contains link to download custom-generated SDK and tool packages used to integrate mobile web or app clients with backed AWS resources. '
+  ExportBundleRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used to request generation of custom SDK and tool packages required to integrate mobile web or app clients with backed AWS resources. '
+  ExportProjectResult:
+    type: object
+    properties:
+      downloadUrl:
+        $ref: '#/definitions/DownloadUrl'
+        description: ' URL which can be used to download the exported project configuation file(s). '
+      shareUrl:
+        $ref: '#/definitions/ShareUrl'
+        description: ' URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again. '
+      snapshotId:
+        $ref: '#/definitions/SnapshotId'
+        description: ' Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. '
+    description: ' Result structure used for requests to export project configuration details. '
+  ExportProjectRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used in requests to export project configuration details. '
+  ListBundlesResult:
+    type: object
+    properties:
+      bundleList:
+        $ref: '#/definitions/BundleList'
+        description: ' A list of bundles. '
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
+    description: ' Result structure contains a list of all available bundles with details. '
+  ListBundlesRequest:
+    type: object
+    properties: {}
+    description: ' Request structure to request all available bundles. '
+  ListProjectsResult:
+    type: object
+    properties:
+      projects:
+        $ref: '#/definitions/ProjectSummaries'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+    description: ' Result structure used for requests to list projects in AWS Mobile Hub. '
+  ListProjectsRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used to request projects list in AWS Mobile Hub. '
+  UpdateProjectResult:
+    type: object
+    properties:
+      details:
+        $ref: '#/definitions/ProjectDetails'
+        description: ' Detailed information about the updated AWS Mobile Hub project. '
+    description: ' Result structure used for requests to updated project configuration. '
+  UpdateProjectRequest:
+    type: object
+    properties:
+      contents:
+        $ref: '#/definitions/Contents'
+        description: ' ZIP or YAML file which contains project configuration to be updated. This should be the contents of the file downloaded from the URL provided in an export project operation. '
+    description: ' Request structure used for requests to update project configuration. '
   AccountActionRequiredException:
     type: object
     properties:
       message:
         $ref: '#/definitions/ErrorMessage'
     description: ' Account Action is required in order to continue the request. '
+  ErrorMessage:
+    type: string
+    description: ' The Exception Error Message. '
   AttributeKey:
     type: string
     description: ' Key part of key-value attribute pairs. '
@@ -584,17 +746,28 @@ definitions:
           $ref: '#/definitions/AttributeKey'
         value:
           $ref: '#/definitions/AttributeValue'
-  BadRequestException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: ' The request cannot be processed because some parameter is not valid or the project state prevents the operation from being performed. '
   Boolean:
     type: boolean
   BundleDescription:
     type: string
     description: ' Description of the download bundle. '
+  BundleId:
+    type: string
+    description: ' Unique bundle identifier. '
+  BundleTitle:
+    type: string
+    description: ' Title of the download bundle. '
+  BundleVersion:
+    type: string
+    description: ' Version of the download bundle. '
+  IconUrl:
+    type: string
+    description: ' Icon for the download bundle. '
+  Platforms:
+    type: array
+    description: ' Developer desktop or mobile app or website platforms. '
+    items:
+      $ref: '#/definitions/Platform'
   BundleDetails:
     type: object
     properties:
@@ -611,183 +784,25 @@ definitions:
       availablePlatforms:
         $ref: '#/definitions/Platforms'
     description: ' The details of the bundle. '
-  BundleId:
-    type: string
-    description: ' Unique bundle identifier. '
   BundleList:
     type: array
     description: ' A list of bundles. '
     items:
       $ref: '#/definitions/BundleDetails'
-  BundleTitle:
-    type: string
-    description: ' Title of the download bundle. '
-  BundleVersion:
-    type: string
-    description: ' Version of the download bundle. '
   ConsoleUrl:
     type: string
   Contents:
     type: string
     description: ' Binary file data. '
-  CreateProjectRequest:
-    type: object
-    properties:
-      contents:
-        $ref: '#/definitions/Contents'
-        description: ' ZIP or YAML file which contains configuration settings to be used when creating the project. This may be the contents of the file downloaded from the URL provided in an export project operation. '
-    description: ' Request structure used to request a project be created. '
-  CreateProjectResult:
-    type: object
-    properties:
-      details:
-        $ref: '#/definitions/ProjectDetails'
-        description: ' Detailed information about the created AWS Mobile Hub project. '
-    description: ' Result structure used in response to a request to create a project. '
-  Date:
+  ProjectName:
     type: string
-    format: date-time
-  DeleteProjectRequest:
-    type: object
-    properties: {}
-    description: ' Request structure used to request a project be deleted. '
-  DeleteProjectResult:
-    type: object
-    properties:
-      deletedResources:
-        $ref: '#/definitions/Resources'
-        description: ' Resources which were deleted. '
-      orphanedResources:
-        $ref: '#/definitions/Resources'
-        description: ' Resources which were not deleted, due to a risk of losing potentially important data or files. '
-    description: ' Result structure used in response to request to delete a project. '
-  DescribeBundleRequest:
-    type: object
-    properties: {}
-    description: ' Request structure to request the details of a specific bundle. '
-  DescribeBundleResult:
-    type: object
-    properties:
-      details:
-        $ref: '#/definitions/BundleDetails'
-        description: ' The details of the bundle. '
-    description: ' Result structure contains the details of the bundle. '
-  DescribeProjectRequest:
-    type: object
-    properties: {}
-    description: ' Request structure used to request details about a project. '
-  DescribeProjectResult:
-    type: object
-    properties:
-      details:
-        $ref: '#/definitions/ProjectDetails'
-    description: ' Result structure used for requests of project details. '
-  DownloadUrl:
+    description: ' Name of the project. '
+  ProjectRegion:
     type: string
-    description: ' The download Url. '
-  ErrorMessage:
+    description: ' Default region to use for AWS resource creation in the AWS Mobile Hub project. '
+  SnapshotId:
     type: string
-    description: ' The Exception Error Message. '
-  ExportBundleRequest:
-    type: object
-    properties: {}
-    description: ' Request structure used to request generation of custom SDK and tool packages required to integrate mobile web or app clients with backed AWS resources. '
-  ExportBundleResult:
-    type: object
-    properties:
-      downloadUrl:
-        $ref: '#/definitions/DownloadUrl'
-        description: ' URL which contains the custom-generated SDK and tool packages used to integrate the client mobile app or web app with the AWS resources created by the AWS Mobile Hub project. '
-    description: ' Result structure which contains link to download custom-generated SDK and tool packages used to integrate mobile web or app clients with backed AWS resources. '
-  ExportProjectRequest:
-    type: object
-    properties: {}
-    description: ' Request structure used in requests to export project configuration details. '
-  ExportProjectResult:
-    type: object
-    properties:
-      downloadUrl:
-        $ref: '#/definitions/DownloadUrl'
-        description: ' URL which can be used to download the exported project configuation file(s). '
-      shareUrl:
-        $ref: '#/definitions/ShareUrl'
-        description: ' URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again. '
-      snapshotId:
-        $ref: '#/definitions/SnapshotId'
-        description: ' Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. '
-    description: ' Result structure used for requests to export project configuration details. '
-  Feature:
-    type: string
-    description: ' Identifies which feature in AWS Mobile Hub is associated with this AWS resource. '
-  IconUrl:
-    type: string
-    description: ' Icon for the download bundle. '
-  InternalFailureException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: ' The service has encountered an unexpected error condition which prevents it from servicing the request. '
-  LimitExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: ' There are too many AWS Mobile Hub projects in the account or the account has exceeded the maximum number of resources in some AWS service. You should create another sub-account using AWS Organizations or remove some resources and retry your request. '
-  ListBundlesRequest:
-    type: object
-    properties: {}
-    description: ' Request structure to request all available bundles. '
-  ListBundlesResult:
-    type: object
-    properties:
-      bundleList:
-        $ref: '#/definitions/BundleList'
-        description: ' A list of bundles. '
-      nextToken:
-        $ref: '#/definitions/NextToken'
-        description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
-    description: ' Result structure contains a list of all available bundles with details. '
-  ListProjectsRequest:
-    type: object
-    properties: {}
-    description: ' Request structure used to request projects list in AWS Mobile Hub. '
-  ListProjectsResult:
-    type: object
-    properties:
-      projects:
-        $ref: '#/definitions/ProjectSummaries'
-      nextToken:
-        $ref: '#/definitions/NextToken'
-    description: ' Result structure used for requests to list projects in AWS Mobile Hub. '
-  MaxResults:
-    type: integer
-    description: ' Maximum number of records to list in a single response. '
-  NextToken:
-    type: string
-    description: ' Pagination token. Set to null to start listing records from start. If non-null pagination token is returned in a result, then pass its value in here in another request to list more entries. '
-  NotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: ' No entity can be found with the specified identifier. '
-  Platform:
-    type: string
-    enum:
-      - OSX
-      - WINDOWS
-      - LINUX
-      - OBJC
-      - SWIFT
-      - ANDROID
-      - JAVASCRIPT
-    description: ' Developer desktop or target mobile app or website platform. '
-  Platforms:
-    type: array
-    description: ' Developer desktop or mobile app or website platforms. '
-    items:
-      $ref: '#/definitions/Platform'
+    description: ' Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. '
   ProjectDetails:
     type: object
     properties:
@@ -811,15 +826,48 @@ definitions:
       resources:
         $ref: '#/definitions/Resources'
     description: ' Detailed information about an AWS Mobile Hub project. '
+  Date:
+    type: string
+    format: date-time
   ProjectId:
     type: string
     description: ' Unique project identifier. '
-  ProjectName:
+  Resources:
+    type: array
+    description: ' List of AWS resources associated with a project. '
+    items:
+      $ref: '#/definitions/Resource'
+  DownloadUrl:
     type: string
-    description: ' Name of the project. '
-  ProjectRegion:
+    description: ' The download Url. '
+  Platform:
     type: string
-    description: ' Default region to use for AWS resource creation in the AWS Mobile Hub project. '
+    enum:
+      - OSX
+      - WINDOWS
+      - LINUX
+      - OBJC
+      - SWIFT
+      - ANDROID
+      - JAVASCRIPT
+    description: ' Developer desktop or target mobile app or website platform. '
+  ShareUrl:
+    type: string
+    description: ' URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again. '
+  Feature:
+    type: string
+    description: ' Identifies which feature in AWS Mobile Hub is associated with this AWS resource. '
+  MaxResults:
+    type: integer
+    description: ' Maximum number of records to list in a single response. '
+  NextToken:
+    type: string
+    description: ' Pagination token. Set to null to start listing records from start. If non-null pagination token is returned in a result, then pass its value in here in another request to list more entries. '
+  ProjectSummaries:
+    type: array
+    description: ' List of projects. '
+    items:
+      $ref: '#/definitions/ProjectSummary'
   ProjectState:
     type: string
     enum:
@@ -827,11 +875,6 @@ definitions:
       - SYNCING
       - IMPORTING
     description: ' Synchronization state for a project. '
-  ProjectSummaries:
-    type: array
-    description: ' List of projects. '
-    items:
-      $ref: '#/definitions/ProjectSummary'
   ProjectSummary:
     type: object
     properties:
@@ -842,6 +885,15 @@ definitions:
         $ref: '#/definitions/ProjectId'
         description: ' Unique project identifier. '
     description: ' Summary information about an AWS Mobile Hub project. '
+  ResourceType:
+    type: string
+    description: ' Simplified name for type of AWS resource (e.g., bucket is an Amazon S3 bucket). '
+  ResourceName:
+    type: string
+    description: ' Name of the AWS resource (e.g., for an Amazon S3 bucket this is the name of the bucket). '
+  ResourceArn:
+    type: string
+    description: ' AWS resource name which uniquely identifies the resource in AWS systems. '
   Resource:
     type: object
     properties:
@@ -856,55 +908,3 @@ definitions:
       attributes:
         $ref: '#/definitions/Attributes'
     description: ' Information about an instance of an AWS resource associated with a project. '
-  ResourceArn:
-    type: string
-    description: ' AWS resource name which uniquely identifies the resource in AWS systems. '
-  ResourceName:
-    type: string
-    description: ' Name of the AWS resource (e.g., for an Amazon S3 bucket this is the name of the bucket). '
-  ResourceType:
-    type: string
-    description: ' Simplified name for type of AWS resource (e.g., bucket is an Amazon S3 bucket). '
-  Resources:
-    type: array
-    description: ' List of AWS resources associated with a project. '
-    items:
-      $ref: '#/definitions/Resource'
-  ServiceUnavailableException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: ' The service is temporarily unavailable. The request should be retried after some time delay. '
-  ShareUrl:
-    type: string
-    description: ' URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again. '
-  SnapshotId:
-    type: string
-    description: ' Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. '
-  TooManyRequestsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: ' Too many requests have been received for this AWS account in too short a time. The request should be retried after some time delay. '
-  UnauthorizedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: ' Credentials of the caller are insufficient to authorize the request. '
-  UpdateProjectRequest:
-    type: object
-    properties:
-      contents:
-        $ref: '#/definitions/Contents'
-        description: ' ZIP or YAML file which contains project configuration to be updated. This should be the contents of the file downloaded from the URL provided in an export project operation. '
-    description: ' Request structure used for requests to update project configuration. '
-  UpdateProjectResult:
-    type: object
-    properties:
-      details:
-        $ref: '#/definitions/ProjectDetails'
-        description: ' Detailed information about the updated AWS Mobile Hub project. '
-    description: ' Result structure used for requests to updated project configuration. '

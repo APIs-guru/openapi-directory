@@ -15,6 +15,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/microsoft.insights/stable/2017-04-01/actionGroups_API.json'
       version: '2.0'
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: monitor-actionGroups_API
   x-tags:
@@ -237,8 +238,10 @@ paths:
             subscriptionId: 187f412d-1758-44d9-b052-169e2564721d
           responses:
             '200':
+              body: null
               headers: {}
             '204':
+              body: null
               headers: {}
     get:
       description: Get an action group.
@@ -563,8 +566,10 @@ paths:
             subscriptionId: 187f412d-1758-44d9-b052-169e2564721d
           responses:
             '200':
+              body: null
               headers: {}
             '409':
+              body: null
               headers: {}
 definitions:
   ActionGroup:
@@ -591,7 +596,7 @@ definitions:
         type: boolean
       groupShortName:
         description: The short name of the action group. This will be used in SMS messages.
-        maxLength: 15
+        maxLength: 12
         type: string
       itsmReceivers:
         description: The list of ITSM receivers that are part of this action group.

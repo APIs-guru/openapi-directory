@@ -7,7 +7,7 @@ info:
   title: hetras Booking API Version 0
   version: v0
   x-logo:
-    url: 'https://hetras.zendesk.com/hc/logo'
+    url: 'https://twitter.com/hetras/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://developer.hetras.com/swagger/spec/BookingAPIv0.json'
@@ -1286,6 +1286,64 @@ paths:
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Performs a check out operation for a reservation.
+      tags:
+        - Bookings
+  '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/payment_token':
+    put:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      description: "TBD.<br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
+      operationId: Bookings_PaymentToken
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: The confirmation id for the booking the reservation was made.
+          in: path
+          name: confirmationId
+          required: true
+          type: string
+        - description: Specifies the reservation number for the reservation to be checked in.
+          format: int32
+          in: path
+          name: reservationNumber
+          required: true
+          type: integer
+        - description: ''
+          in: body
+          name: authorizationRequest
+          required: true
+          schema:
+            $ref: '#/definitions/AuthorizationRequest'
+      responses:
+        '200':
+          description: The payment token was added successfully
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: 'The request failed to validate. The reason could be wrong room or reservation status, wrong start date of reservation etc.'
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Post a payment token for a reservation.
       tags:
         - Bookings
   /api/booking/v0/daily_rates:

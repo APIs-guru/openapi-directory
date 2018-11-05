@@ -37,6 +37,7 @@ tags:
   - name: ShopAccountRequests
   - name: LegalEntities
   - name: PeppolIdentifiers
+  - name: PurchaseInvoices
 paths:
   /invoice_submissions:
     post:
@@ -217,16 +218,18 @@ paths:
       description: Create a new PeppolIdentifier.
       operationId: create_peppol_identifier
       parameters:
+        - description: The id of the LegalEntity for which to create the PeppolIdentifier
+          format: int64
+          in: path
+          name: legal_entity_id
+          required: true
+          type: integer
         - description: PeppolIdentifier to create
           in: body
           name: peppol_identifier
           required: true
           schema:
             $ref: '#/definitions/PeppolIdentifierCreate'
-        - in: path
-          name: legal_entity_id
-          required: true
-          type: string
       responses:
         '200':
           description: Success
@@ -236,6 +239,8 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
+        '404':
+          description: Not Found
         '422':
           description: Unprocessable Entity
           schema:
@@ -261,7 +266,7 @@ paths:
           name: superscheme
           required: true
           type: string
-        - description: 'PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see <<_company>>.'
+        - description: 'PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see <<Peppol Schemes List>>.'
           in: path
           name: scheme
           required: true
@@ -283,6 +288,56 @@ paths:
       summary: Delete PeppolIdentifier
       tags:
         - PeppolIdentifiers
+  '/purchase_invoices/{guid}':
+    get:
+      description: Get a specific Invoice.
+      operationId: get_invoice
+      parameters:
+        - description: purchase invoice guid
+          format: uuid
+          in: path
+          name: guid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PurchaseInvoice'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get Invoice
+      tags:
+        - PurchaseInvoices
+  '/purchase_invoices/{guid}/ubl':
+    get:
+      description: Get a specific Invoice in UBL form.
+      operationId: get_invoice_ubl
+      parameters:
+        - description: purchase invoice guid
+          format: uuid
+          in: path
+          name: guid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PurchaseInvoiceUbl'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get Invoice as UBL
+      tags:
+        - PurchaseInvoices
   /shop_account_requests:
     get:
       description: |-
@@ -587,6 +642,12 @@ paths:
         Get all available shops.
         include::examples/shops/shops_index/tabs.adoc[]
       operationId: shops_index
+      parameters:
+        - description: Include creditcards in list. Add ?cc=true to URL to use.
+          in: query
+          name: cc
+          required: false
+          type: string
       responses:
         '200':
           description: Success
@@ -637,6 +698,46 @@ definitions:
     required:
       - party
     title: Customer
+    type: object
+  AllowanceCharge:
+    properties:
+      amountExcludingVat:
+        description: 'The amount for the allowance charge, excluding VAT'
+        title: Amount
+        type: number
+      reason:
+        default: Agreed settlement
+        description: 'The reason for the allowance charge, free text'
+        title: Reason
+        type: string
+      reasonCode:
+        default: '1'
+        description: 'The reason code for the allowance charge. Uses list http://www.unece.org/trade/untdid/d12a/tred/tred4465.htm , defaults to 1 - Agreed settlement'
+        title: Reason Code
+        type: string
+      tax:
+        description: The tax for this allowance charge.
+        properties:
+          amount:
+            description: The amount of VAT. Should equal percentage x amountExcludingVat. A difference of 5 cents or 1% between the calculated value and the provided value is allowed.
+            title: Amount of VAT for the allowance charge
+            type: number
+          country:
+            $ref: '#/definitions/Country'
+          percentage:
+            description: The percentage VAT. This should be a valid VAT percentage in the country at the time of the issueDate of this invoice.
+            title: Percentage VAT
+            type: number
+        required:
+          - amount
+          - percentage
+          - country
+        title: Tax
+        type: object
+    required:
+      - amountExcludingVat
+      - tax
+    title: Allowance Charge
     type: object
   Country:
     description: An ISO 3166-1 alpha-2 country code.
@@ -1168,6 +1269,16 @@ definitions:
         description: The number of items (may be fractional).
         title: Quantity
         type: number
+      sellersItemIdentification:
+        description: The ID the seller assigned to this item.
+        minLength: 1
+        title: Sellers Item Identification
+        type: string
+      standardItemIdentification:
+        description: Standardized ID for the item. Identifiers based on GTIN.
+        minLength: 1
+        title: Standard Item Identification
+        type: string
       tax:
         description: The tax for this invoice line.
         properties:
@@ -1205,27 +1316,34 @@ definitions:
         title: Fallback email
         type: array
       id:
-        description: Your id for this organization. This should match the id that you use for the Storecove widget (if you use that).
+        description: DEPRECATED. Use widgetIdentification.id
         minLength: 2
         title: Entity id
         type: string
       publicIdentifiers:
         $ref: '#/definitions/PublicIdentifiers'
-        description: 'The public identifiers for this invoice recipient. Either an id, or one or more public identifiers must be given'
+        description: The public identifiers for this invoice recipient. These are the identifiers used on the Peppol network.
+        title: Public Identifiers
+      widgetIdentification:
+        $ref: '#/definitions/WidgetIdentification'
+        description: The identification for the identifier related to the Storecove Destination Configuration widget.
+        title: Widget Identification
     title: Recipient ids
     type: object
   InvoiceRecipientPreflight:
     description: Identifies the invoice recipient to preflight
     properties:
-      invoiceRecipient:
-        $ref: '#/definitions/InvoiceRecipient'
+      publicIdentifiers:
+        $ref: '#/definitions/PublicIdentifiers'
+        description: The public identifiers for this invoice recipient.
       supplierId:
-        description: 'The supplier id, provided by Storecove.'
+        description: DEPRECATED.
         title: Supplier id
         type: integer
-    required:
-      - supplierId
-      - invoiceRecipient
+      widgetIdentification:
+        $ref: '#/definitions/WidgetIdentification'
+        description: The identification for the identifier related to the Storecove Destination Configuration widget.
+        title: Widget Identification
     title: Invoice recipient preflight
     type: object
   InvoiceSubmission:
@@ -1249,6 +1367,13 @@ definitions:
           accountingCustomerParty:
             $ref: '#/definitions/AccountingCustomerParty'
             description: The receiving party
+          allowanceCharges:
+            description: An array of allowance charges.
+            items:
+              $ref: '#/definitions/AllowanceCharge'
+            minItems: 0
+            title: Allowance Charges
+            type: array
           amountIncludingVat:
             description: 'amountIncludingVat is important because of rounding differences. In many invoices, the sum of the line item amounts excluding VAT and the VAT amounts is not equal to first summing the line items without VAT, and then applying VAT. The difference is automatically calculated and included in the electronic invoice, so the receiving accounting package can process the electronic invoice without problems.'
             title: Amount including VAT
@@ -1282,7 +1407,7 @@ definitions:
             title: Invoice lines
             type: array
           invoiceNumber:
-            description: 'The invoice number you assigned to the invoice. The invoiceNumber should be unique for the supplierId and year of the issueDate. This means invoice numbers can be reused in different years, as is customary in some countries.'
+            description: 'The invoice number you assigned to the invoice. The invoiceNumber should be unique for the legalEntityId and year of the issueDate. This means invoice numbers can be reused in different years, as is customary in some countries.'
             minLength: 1
             title: Invoice number
             type: string
@@ -1343,8 +1468,12 @@ definitions:
         type: object
       invoiceRecipient:
         $ref: '#/definitions/InvoiceRecipient'
+      legalEntityId:
+        description: The id of the LegalEntity this invoice should be sent for.
+        title: The LegalEntity id
+        type: integer
       legalSupplierId:
-        description: 'If a supplierId has more than one legal entity to send invoices from, specify the legal entity here. If you have not received one or more legal entities, don''t supply this field.'
+        description: DEPRECATED. Use legalEntityId
         title: The legal supplier id
         type: integer
       mode:
@@ -1354,12 +1483,11 @@ definitions:
         title: Mode
         type: string
       supplierId:
-        description: 'The supplier id, provided by Storecove.'
+        description: DEPRECATED.
         title: Supplier id
         type: integer
     required:
       - mode
-      - supplierId
       - invoiceRecipient
       - invoice
     title: Invoice submission
@@ -1580,7 +1708,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: The scheme of the identifier. See <<_company>> for a list.
+        description: The scheme of the identifier. See <<Peppol Schemes List>> for a list.
         maxLength: 64
         minLength: 2
         title: Type
@@ -1600,7 +1728,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: The scheme of the identifier. See <<_company>> for a list.
+        description: The scheme of the identifier. See <<Peppol Schemes List>> for a list.
         maxLength: 64
         minLength: 2
         title: Type
@@ -1636,7 +1764,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: The scheme of the identifier. See <<_company>> for a list.
+        description: The scheme of the identifier. See <<Peppol Schemes List>> for a list.
         minLength: 3
         title: Scheme
         type: string
@@ -1651,6 +1779,277 @@ definitions:
       $ref: '#/definitions/PublicIdentifier'
     title: Public identifiers
     type: array
+  PurchaseInvoice:
+    properties:
+      accounting:
+        $ref: '#/definitions/PurchaseInvoiceAccountingDetails'
+        description: The accounting details for the invoice.
+        title: Accounting Details
+        type: object
+      allowance_charge:
+        description: 'A correction on the amount to pay, for instance if the invoice has been prepaid, in which case it will be negative.'
+        title: Allowance Charge
+        type: number
+      amount_including_vat:
+        description: 'The total invoice amount payable, including VAT. This is equal to the sum of the invoice_lines (amount_excluding_vat + vat.amount)'
+        title: Amount Including VAT
+        type: number
+      billing_reference:
+        description: The end date of the period this invoice relates to. Format "YYYY-MM-DD".
+        title: End of Period
+        type: string
+      buyer_reference:
+        description: The end date of the period this invoice relates to. Format "YYYY-MM-DD".
+        title: End of Period
+        type: string
+      contract_document_reference:
+        description: The end date of the period this invoice relates to. Format "YYYY-MM-DD".
+        title: End of Period
+        type: string
+      document:
+        description: The Base64 encoded PDF document associated with the invoice.
+        title: Document
+        type: string
+      document_currency_code:
+        description: The ISO 4217 currency for the invoice.
+        title: Currency
+        type: string
+      due_date:
+        description: The date the invoice must be payed by. Format "YYYY-MM-DD".
+        title: Due Date
+        type: string
+      external_key:
+        description: Used for accountants. The id you specified for the organization.
+        title: External key
+        type: string
+      external_user_id:
+        description: Used for the embedded portal retrieval service. The external_user_id you provided when the ShopAccount was created.
+        title: External user id
+        type: string
+      guid:
+        description: The GUID of the invoice
+        format: uuid
+        title: GUID
+        type: string
+      invoice_lines:
+        items:
+          $ref: '#/definitions/PurchaseInvoiceInvoiceLine'
+        type: array
+      invoice_number:
+        description: The invoicenumber.
+        title: Invoicenumber
+        type: string
+      invoice_type:
+        description: The type of invoice.
+        enum:
+          - invoice
+          - creditnote
+          - correctioninvoice
+        title: Invoice Type
+        type: string
+      issue_date:
+        description: The date the invoice was issued. Format "YYYY-MM-DD".
+        title: Issue Date
+        type: string
+      legal_entity_id:
+        description: The id of the LegalEntity the invoice was received for.
+        format: int64
+        title: LegalEntity id
+        type: integer
+      payable_amount:
+        description: 'The total invoice amount payable including VAT. This is equal to amount_including_vat + allowance_charge + payable_rounding_amount. This property is redundant and provided only to make invoice processing more easy. You can also choose to only store this property, instead of the underlying fields.'
+        title: Amount to Pay Including VAT
+        type: number
+      payable_rounding_amount:
+        description: The difference between the invoice total and the sum of the invoice lines.
+        title: Payable Rounding Amount
+        type: number
+      payment_means:
+        description: How the invoice can be paid.
+        properties:
+          iban:
+            description: The IBAN to which to transfer.
+            title: IBAN
+            type: string
+          id:
+            description: An id to mention in the transfer.
+            title: Id
+            type: string
+        title: Payment Means
+        type: object
+      period_end:
+        description: The end date of the period this invoice relates to. Format "YYYY-MM-DD".
+        title: End of Period
+        type: string
+      period_start:
+        description: The start date of the period this invoice relates to. Format "YYYY-MM-DD".
+        title: Start of Period
+        type: string
+      sender:
+        $ref: '#/definitions/PurchaseInvoiceSender'
+        description: The organzation that sent the invoice.
+        title: Invoice Sender
+        type: object
+      source:
+        description: The source the invoice was received from.
+        enum:
+          - peppol
+          - script
+          - supplier
+          - email
+        title: Invoice Source
+        type: string
+      tax_point_date:
+        description: The date the invoice was issued for tax purposes. In most countries MUST match the issue_date. Format "YYYY-MM-DD".
+        title: Tax Point Date
+        type: string
+      vat_reverse_charge:
+        description: Whether or not the invoice is reverse charged.
+        title: VAT Reverse Charge
+        type: boolean
+  PurchaseInvoiceAccountingDetails:
+    properties:
+      code:
+        description: The the code of the general ledger account.
+        title: Code
+        type: string
+      list:
+        description: 'The name of the list for the code, e.g. "RGS".'
+        title: List
+        type: string
+      list_version:
+        description: 'The version of the list for the code, e.g. "1.1".'
+        title: List Version
+        type: string
+      name:
+        description: A textual descroption of the code.
+        title: Name
+        type: string
+  PurchaseInvoiceInvoiceLine:
+    properties:
+      accounting:
+        $ref: '#/definitions/PurchaseInvoiceAccountingDetails'
+        description: The accounting details for the invoice line.
+        title: Accounting Details
+        type: object
+      allowance_charge:
+        description: 'The adjustment to the price, for instance a discount.'
+        title: Allowance Charge
+        type: number
+      amount_excluding_vat:
+        description: 'The amount excluding VAT. This is equal to quantity x price_amount + allowance_charge. This property is redundant and provided only to make invoice processing more easy. You can also choose to only store this property, instead of the underlying fields.'
+        title: Amount Excluding VAT
+        type: number
+      description:
+        description: The description for the invoice line.
+        title: Description
+        type: string
+      price_amount:
+        description: 'The price for one item, excluding VAT.'
+        title: Price Amount
+        type: number
+      quantity:
+        description: The quantity of the item.
+        title: Quantity
+        type: number
+      vat:
+        description: The VAT details for the invoice line.
+        properties:
+          amount:
+            description: The amount of VAT for the invoice line.
+            title: Amount
+            type: number
+          country:
+            description: The ISO 3166 country of the VAT for the invoice line.
+            title: Country
+            type: string
+          percentage:
+            description: The percentage of VAT for the invoice line.
+            title: Percentage
+            type: number
+        title: VAT Details
+        type: object
+  PurchaseInvoiceSender:
+    properties:
+      billing_contact:
+        $ref: '#/definitions/PurchaseInvoiceSenderBillingContact'
+        description: The billing contact for the invoice.
+        title: Billing Contact
+        type: object
+      city:
+        description: The city.
+        title: City
+        type: string
+      country:
+        description: The country.
+        title: Country
+        type: string
+      county:
+        description: The county.
+        title: County
+        type: string
+      department:
+        description: The department who sent the invoice.
+        title: Department
+        type: string
+      line1:
+        description: The address
+        title: Address Line 1
+        type: string
+      line2:
+        description: 'The address, line 2'
+        title: Address Line 2
+        type: string
+      party_name:
+        description: The party who sent the invoice.
+        title: Party Name
+        type: string
+      peppol_identifiers:
+        items:
+          $ref: '#/definitions/PeppolIdentifier'
+        type: array
+      zip:
+        description: The zip code.
+        title: Zip
+        type: string
+  PurchaseInvoiceSenderBillingContact:
+    properties:
+      email:
+        description: The email of the billing contact.
+        title: Email
+        type: string
+      first_name:
+        description: The first name of the billing contact.
+        title: First Name
+        type: string
+      last_name:
+        description: The last name of the billing contact.
+        title: Last Name
+        type: string
+  PurchaseInvoiceUbl:
+    properties:
+      external_key:
+        description: Used for accountants. The id you specified for the organization.
+        title: External key
+        type: string
+      external_user_id:
+        description: Used for the embedded portal retrieval service. The external_user_id you provided when the ShopAccount was created.
+        title: External user id
+        type: string
+      guid:
+        description: The GUID of the invoice
+        format: uuid
+        title: GUID
+        type: string
+      legal_entity_id:
+        description: The id of the LegalEntity the invoice was received for.
+        format: int64
+        title: LegalEntity id
+        type: integer
+      ubl:
+        description: The Base64 encoded UBL invoice.
+        title: UBL invoice
+        type: string
   Shop:
     properties:
       description:
@@ -1665,6 +2064,10 @@ definitions:
       logo:
         $ref: '#/definitions/Logos'
       name:
+        type: string
+      purpose:
+        description: The purpose of the shop. Either "invoice" or "statement"
+        title: Purpose
         type: string
   ShopAccountInput:
     properties:
@@ -1793,3 +2196,20 @@ definitions:
       username:
         description: See <<_openapi_shopaccountinput>>.
         type: string
+  WidgetIdentification:
+    description: The identification for the identifier related to the Storecove Destination Configuration widget.
+    properties:
+      id:
+        description: Your id for this organization. This should match the id that you use for the Storecove widget (if you use that).
+        minLength: 2
+        title: Entity id
+        type: string
+      legalEntityId:
+        description: The id of the LegalEntity this invoice should be sent for.
+        title: LegalEntity Id
+        type: integer
+    required:
+      - legalEntityId
+      - id
+    title: Widget Identification
+    type: object

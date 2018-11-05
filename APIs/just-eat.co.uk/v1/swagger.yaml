@@ -1,0 +1,521 @@
+swagger: '2.0'
+schemes:
+  - https
+host: 'uk-deliveryserviceexternalapi.just-eat.co.uk:443'
+info:
+  contact:
+    x-twitter: JustEatUK
+  description: '<h2>Delivery Service API</h2><p>Some calls require HTTPS and an Authorization Key which will be provided by Just Eat.<p><p>The key needs to be provided in the header as follows: <b>Authorization: JE-API-KEY {Your-Key-Here}</b></p>'
+  title: Just Eat UK
+  version: v1
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    url: 'https://twitter.com/JustEatUK/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://uk-deliveryserviceexternalapi.just-eat.co.uk:443/swagger/docs/v1'
+      version: '2.0'
+  x-providerName: just-eat.co.uk
+produces:
+  - application/json
+  - text/json
+  - application/xml
+  - text/xml
+paths:
+  /Delivery/DeliverableRestaurants:
+    get:
+      consumes: []
+      deprecated: false
+      description: "- This method requires the use of an Authorization Key.\r\n"
+      operationId: Delivery_DeliverableRestaurants
+      parameters:
+        - format: double
+          in: query
+          name: toLat
+          required: false
+          type: number
+        - format: double
+          in: query
+          name: toLon
+          required: false
+          type: number
+        - in: query
+          name: toPostcode
+          required: false
+          type: string
+        - description: access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DeliverableRestaurants'
+      tags:
+        - Delivery
+  /Delivery/Estimate:
+    get:
+      consumes: []
+      deprecated: false
+      description: "- This method requires the use of an Authorization Key.\r\n"
+      operationId: Delivery_Estimate
+      parameters:
+        - in: query
+          name: restaurantReference
+          required: true
+          type: string
+        - in: query
+          name: toLat
+          required: false
+          type: string
+        - in: query
+          name: toLon
+          required: false
+          type: string
+        - in: query
+          name: toPostcode
+          required: false
+          type: string
+        - description: access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/EstimatedDeliveryTime'
+      tags:
+        - Delivery
+  /health/check:
+    get:
+      consumes: []
+      deprecated: false
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/HealthState'
+      tags:
+        - Health
+  /health/validate:
+    get:
+      consumes: []
+      deprecated: false
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/HealthState'
+      tags:
+        - Health
+  /healthcheck:
+    get:
+      consumes: []
+      deprecated: false
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/HealthState'
+      tags:
+        - Health
+  /orders/deliverystate/driverlocation:
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "- This method requires the use of an Authorization Key.\r\n"
+      operationId: Delivery_BulkDriverLocations
+      parameters:
+        - in: body
+          name: items
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/BulkDeliveryDetails'
+            type: array
+        - description: access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - Delivery
+  '/orders/{id}/deliverystate/atdeliveryaddress':
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "- This method requires the use of an Authorization Key.\r\n"
+      operationId: Delivery_AtDeliveryAddress
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: deliveryDetails
+          required: true
+          schema:
+            $ref: '#/definitions/DeliveryDetails'
+        - description: access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - Delivery
+  '/orders/{id}/deliverystate/atrestaurant':
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "- This method requires the use of an Authorization Key.\r\n"
+      operationId: Delivery_AtRestaurant
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: deliveryDetails
+          required: true
+          schema:
+            $ref: '#/definitions/DeliveryDetails'
+        - description: access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - Delivery
+  '/orders/{id}/deliverystate/delivered':
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "- This method requires the use of an Authorization Key.\r\n"
+      operationId: Delivery_Delivered
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: deliveryDetails
+          required: true
+          schema:
+            $ref: '#/definitions/DeliveryDetails'
+        - description: access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - Delivery
+  '/orders/{id}/deliverystate/driverassigned':
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "- This method requires the use of an Authorization Key.\r\n"
+      operationId: Delivery_DriverAssigned
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: deliveryDriverAssignedDetails
+          required: true
+          schema:
+            $ref: '#/definitions/DeliveryDriverAssignedDetails'
+        - description: access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - Delivery
+  '/orders/{id}/deliverystate/driverlocation':
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "- This method requires the use of an Authorization Key.\r\n"
+      operationId: Delivery_DriverLocation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: deliveryDetails
+          required: true
+          schema:
+            $ref: '#/definitions/DeliveryDetails'
+        - description: access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - Delivery
+  '/orders/{id}/deliverystate/onitsway':
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "- This method requires the use of an Authorization Key.\r\n"
+      operationId: Delivery_OnItsWay
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: onItsWayDetails
+          required: true
+          schema:
+            $ref: '#/definitions/OnItsWayDetails'
+        - description: access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - Delivery
+definitions:
+  BulkDeliveryDetails:
+    properties:
+      Location:
+        $ref: '#/definitions/Location'
+      OrderId:
+        type: string
+      TimeStampWithUtcOffset:
+        format: date-time
+        type: string
+    type: object
+  DeliverableRestaurant:
+    properties:
+      DeliveryDistanceInMetres:
+        format: int32
+        type: integer
+      DeliveryDurationInSeconds:
+        format: int32
+        type: integer
+      EstimatedWaitForDeliveryPickupInSeconds:
+        format: int32
+        type: integer
+      Restaurant:
+        $ref: '#/definitions/DeliveryableRestaurantLocationInfo'
+    type: object
+  DeliverableRestaurants:
+    properties:
+      DeliveryLocation:
+        $ref: '#/definitions/DeliveryLocation'
+      Restaurants:
+        items:
+          $ref: '#/definitions/DeliverableRestaurant'
+        type: array
+    type: object
+  DeliveryDetails:
+    example:
+      Location:
+        Accuracy: 12.923
+        Heading: 312.29
+        Latitude: 51.51641
+        Longitude: -0.103198
+        Speed: 4.12
+      TimeStampWithUtcOffset: '2018-08-24T13:24:04.6852444+00:00'
+    properties:
+      Location:
+        $ref: '#/definitions/Location'
+      TimeStampWithUtcOffset:
+        format: date-time
+        type: string
+    type: object
+  DeliveryDriverAssignedDetails:
+    properties:
+      DriverContactNumber:
+        type: string
+      DriverName:
+        type: string
+      EstimatedArrivalTime:
+        format: date-time
+        type: string
+      Location:
+        $ref: '#/definitions/Location'
+      TimeStampWithUtcOffset:
+        format: date-time
+        type: string
+      VehicleDetails:
+        $ref: '#/definitions/VehicleDetails'
+    type: object
+  DeliveryEstimatePosition:
+    properties:
+      RestaurantReference:
+        type: string
+      ToLat:
+        type: string
+      ToLon:
+        type: string
+      ToPostcode:
+        type: string
+    required:
+      - RestaurantReference
+    type: object
+  DeliveryLocation:
+    properties:
+      Latitude:
+        format: double
+        type: number
+      Longitude:
+        format: double
+        type: number
+    type: object
+  DeliveryPosition:
+    properties:
+      ToLat:
+        format: double
+        type: number
+      ToLon:
+        format: double
+        type: number
+      ToPostcode:
+        type: string
+    type: object
+  DeliveryableRestaurantLocationInfo:
+    properties:
+      Latitude:
+        format: double
+        type: number
+      Longitude:
+        format: double
+        type: number
+      RestaurantId:
+        type: string
+      RestaurantReference:
+        type: string
+    type: object
+  EstimatedDeliveryTime:
+    properties:
+      DurationInMinutes:
+        type: string
+      RestaurantReference:
+        type: string
+    type: object
+  HealthState:
+    properties:
+      Healthy:
+        type: boolean
+      Information:
+        type: string
+    type: object
+  Location:
+    properties:
+      Accuracy:
+        format: double
+        type: number
+      Heading:
+        format: double
+        type: number
+      Latitude:
+        format: double
+        type: number
+      Longitude:
+        format: double
+        type: number
+      Speed:
+        format: double
+        type: number
+    type: object
+  Object:
+    properties: {}
+    type: object
+  OnItsWayDetails:
+    properties:
+      EstimatedArrivalTime:
+        format: date-time
+        type: string
+      Location:
+        $ref: '#/definitions/Location'
+      TimeStampWithUtcOffset:
+        format: date-time
+        type: string
+    type: object
+  VehicleDetails:
+    properties:
+      Vehicle:
+        type: string
+      VehicleRegistration:
+        type: string
+    type: object

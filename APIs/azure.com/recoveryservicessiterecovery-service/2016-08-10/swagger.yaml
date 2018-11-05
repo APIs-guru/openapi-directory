@@ -15,6 +15,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2016-08-10/service.json'
       version: '2.0'
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: recoveryservicessiterecovery-service
   x-tags:
@@ -48,12 +49,14 @@ parameters:
     name: resourceGroupName
     required: true
     type: string
+    x-ms-parameter-location: client
   ResourceName:
     description: The name of the recovery services vault.
     in: path
     name: resourceName
     required: true
     type: string
+    x-ms-parameter-location: client
   SubscriptionId:
     description: The subscription Id.
     in: path

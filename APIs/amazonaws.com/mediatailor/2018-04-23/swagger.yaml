@@ -1,0 +1,349 @@
+swagger: '2.0'
+info:
+  version: '2018-04-23'
+  x-release: v4
+  title: AWS MediaTailor
+  description: '<p>Use the AWS Elemental MediaTailor SDK to configure scalable ad insertion for your live and VOD content. With AWS Elemental MediaTailor, you can serve targeted ads to viewers while maintaining broadcast quality in over-the-top (OTT) video applications. For information about using the service, including detailed information about the settings covered in this guide, see the AWS Elemental MediaTailor User Guide.<p>Through the SDK, you manage AWS Elemental MediaTailor configurations the same as you do through the console. For example, you specify ad insertion behavior and mapping information for the origin server and the ad decision server (ADS).</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: mediatailor
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mediatailor-2018-04-23.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/mediatailor/'
+host: api.mediatailor.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/playbackConfiguration/{Name}':
+    delete:
+      operationId: DeletePlaybackConfiguration
+      description: 'Deletes the configuration for the specified name. '
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeletePlaybackConfigurationResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeletePlaybackConfigurationRequest'
+        - name: Name
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetPlaybackConfiguration
+      description: 'Returns the configuration for the specified name. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetPlaybackConfigurationResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetPlaybackConfigurationRequest'
+        - name: Name
+          in: path
+          type: string
+          required: true
+  /playbackConfigurations:
+    get:
+      operationId: ListPlaybackConfigurations
+      description: 'Returns a list of the configurations defined in AWS Elemental MediaTailor. You can specify a max number of configurations to return at a time. The default max is 50. Results are returned in pagefuls. If AWS Elemental MediaTailor has more configurations than the specified max, it provides parameters in the response that you can use to retrieve the next pageful. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPlaybackConfigurationsResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPlaybackConfigurationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /playbackConfiguration:
+    put:
+      operationId: PutPlaybackConfiguration
+      description: Adds a new configuration to AWS Elemental MediaTailor.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutPlaybackConfigurationResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutPlaybackConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  DeletePlaybackConfigurationResponse:
+    type: object
+    properties: {}
+  DeletePlaybackConfigurationRequest:
+    type: object
+    properties: {}
+  GetPlaybackConfigurationResponse:
+    type: object
+    properties:
+      AdDecisionServerUrl:
+        $ref: '#/definitions/__string'
+        description: 'The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25000 characters.'
+      CdnConfiguration:
+        $ref: '#/definitions/CdnConfiguration'
+        description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
+      HlsConfiguration:
+        $ref: '#/definitions/HlsConfiguration'
+        description: 'The configuration for HLS content. '
+      Name:
+        $ref: '#/definitions/__string'
+        description: The identifier for the configuration.
+      PlaybackEndpointPrefix:
+        $ref: '#/definitions/__string'
+        description: 'The URL that the player accesses to get a manifest from AWS Elemental MediaTailor. This session will use server-side reporting. '
+      SessionInitializationEndpointPrefix:
+        $ref: '#/definitions/__string'
+        description: 'The URL that the player uses to initialize a session that uses client-side reporting. '
+      SlateAdUrl:
+        $ref: '#/definitions/__string'
+        description: 'URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because AWS Elemental MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
+      VideoContentSourceUrl:
+        $ref: '#/definitions/__string'
+        description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
+  GetPlaybackConfigurationRequest:
+    type: object
+    properties: {}
+  ListPlaybackConfigurationsResponse:
+    type: object
+    properties:
+      Items:
+        $ref: '#/definitions/__listOfPlaybackConfigurations'
+        description: 'Array of playback configurations. This may be all of the available configurations or a subset, depending on the settings you provide and on the total number of configurations stored. '
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: Pagination token returned by the GET list request when results overrun the meximum allowed. Use the token to fetch the next page of results.
+  ListPlaybackConfigurationsRequest:
+    type: object
+    properties: {}
+  PutPlaybackConfigurationResponse:
+    type: object
+    properties:
+      AdDecisionServerUrl:
+        $ref: '#/definitions/__string'
+        description: 'The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25000 characters.'
+      CdnConfiguration:
+        $ref: '#/definitions/CdnConfiguration'
+        description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
+      HlsConfiguration:
+        $ref: '#/definitions/HlsConfiguration'
+        description: 'The configuration for HLS content. '
+      Name:
+        $ref: '#/definitions/__string'
+        description: The identifier for the configuration.
+      PlaybackEndpointPrefix:
+        $ref: '#/definitions/__string'
+        description: 'The URL that the player accesses to get a manifest from AWS Elemental MediaTailor. This session will use server-side reporting. '
+      SessionInitializationEndpointPrefix:
+        $ref: '#/definitions/__string'
+        description: 'The URL that the player uses to initialize a session that uses client-side reporting. '
+      SlateAdUrl:
+        $ref: '#/definitions/__string'
+        description: 'URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because AWS Elemental MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
+      VideoContentSourceUrl:
+        $ref: '#/definitions/__string'
+        description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
+  PutPlaybackConfigurationRequest:
+    type: object
+    properties:
+      AdDecisionServerUrl:
+        $ref: '#/definitions/__string'
+        description: 'The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing you can provide a static VAST URL. The maximum length is 25000 characters.'
+      CdnConfiguration:
+        $ref: '#/definitions/CdnConfiguration'
+        description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
+      Name:
+        $ref: '#/definitions/__string'
+        description: The identifier for the configuration.
+      SlateAdUrl:
+        $ref: '#/definitions/__string'
+        description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because AWS Elemental MediaTailor provides it in the slots that are designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
+      VideoContentSourceUrl:
+        $ref: '#/definitions/__string'
+        description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
+  __string:
+    type: string
+  CdnConfiguration:
+    type: object
+    properties:
+      AdSegmentUrlPrefix:
+        $ref: '#/definitions/__string'
+        description: 'A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the following origin: ads.mediatailor.&lt;region>.amazonaws.com. Then specify the rule''s name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.'
+      ContentSegmentUrlPrefix:
+        $ref: '#/definitions/__string'
+        description: 'A content delivery network (CDN) to cache content segments, so that content requests don’t always have to go to the origin server. First, create a rule in your CDN for the content segment origin server. Then specify the rule''s name in this ContentSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for content segments.'
+    description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
+  HlsConfiguration:
+    type: object
+    properties:
+      ManifestEndpointPrefix:
+        $ref: '#/definitions/__string'
+        description: The URL that is used to initiate a playback session for devices that support Apple HLS. The session uses server-side reporting.
+    description: 'The configuration for HLS content. '
+  Empty:
+    type: object
+    properties: {}
+  PlaybackConfiguration:
+    type: object
+    properties:
+      AdDecisionServerUrl:
+        $ref: '#/definitions/__string'
+        description: 'The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25000 characters.'
+      CdnConfiguration:
+        $ref: '#/definitions/CdnConfiguration'
+        description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
+      Name:
+        $ref: '#/definitions/__string'
+        description: The identifier for the configuration.
+      SlateAdUrl:
+        $ref: '#/definitions/__string'
+        description: 'URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because AWS Elemental MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
+      VideoContentSourceUrl:
+        $ref: '#/definitions/__string'
+        description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
+    description: The AWSMediaTailor configuration.
+  __integerMin1Max100:
+    type: integer
+    minimum: 1
+    maximum: 100
+  __listOfPlaybackConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/PlaybackConfiguration'
+  __boolean:
+    type: boolean
+  __double:
+    type: number
+    format: double
+  __integer:
+    type: integer
+  __long:
+    type: integer

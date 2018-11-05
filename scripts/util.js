@@ -33,17 +33,17 @@ exports.readJson = function (filename) {
   return JSON.parse(data);
 }
 
-exports.saveJson = function (path, json) {
+exports.saveJson = function (path, json, quiet) {
   json = exports.sortJson(json);
-  exports.saveFile(path, JSON.stringify(json, null, 2) + '\n');
+  exports.saveFile(path, JSON.stringify(json, null, 2) + '\n', quiet);
 }
 
-exports.saveYaml = function (path, json) {
-  exports.saveFile(path, exports.Yaml2String(json));
+exports.saveYaml = function (path, json, quiet) {
+  exports.saveFile(path, exports.Yaml2String(json), quiet);
 }
 
-exports.saveFile = function (path, data) {
-  console.log(path);
+exports.saveFile = function (path, data, quiet) {
+  if (!quiet) console.log(path);
   mkdirp(Path.dirname(path));
   fs.writeFileSync(path, data);
 }
@@ -64,7 +64,7 @@ exports.sortJson = function (json) {
   });
 
   //detect Swagger format.
-  if (_.get(json, 'swagger') !== '2.0')
+  if ((_.get(json, 'swagger') !== '2.0') && (!_.get(json,'openapi')))
     return json;
 
   var fieldOrder = [
@@ -72,6 +72,8 @@ exports.sortJson = function (json) {
     'schemes',
     'host',
     'basePath',
+    'openapi',
+    'servers',
     'x-hasEquivalentPaths',
     'info',
     'externalDocs',
@@ -83,7 +85,8 @@ exports.sortJson = function (json) {
     'responses',
     'tags',
     'paths',
-    'definitions'
+    'definitions',
+    'components'
   ];
 
   var sorted = {};
@@ -100,7 +103,9 @@ exports.sortJson = function (json) {
 }
 
 exports.getSpecs = function (dir) {
-  return exports.getYamlFiles('**/swagger.yaml', dir);
+  let result = exports.getYamlFiles('**/swagger.yaml', dir);
+  result = Object.assign(result,exports.getYamlFiles('**/openapi.yaml', dir));
+  return result;
 }
 
 exports.getYamlFiles = function (pattern, dir) {
@@ -166,7 +171,9 @@ exports.getOriginUrl = function (swagger) {
 }
 
 exports.saveSwagger = function (swagger) {
-  var path = exports.getSwaggerPath(swagger);
+  let filename = 'swagger.yaml';
+  if (swagger.openapi) filename = 'openapi.yaml';
+  var path = exports.getSwaggerPath(swagger,filename);
   exports.saveYaml(path, swagger);
   return path;
 }
@@ -206,6 +213,17 @@ exports.editFile = function (str) {
     });
   });
 }
+
+exports.listZipFiles = function(url, pattern) {
+  let lines = exports.exec(`wget -q -O /tmp/t.zip ${url} && unzip -l /tmp/t.zip`).split('\n');
+  let files = [];
+  for (let line of lines) {
+    let filename = line.split('  ').pop().trim();
+    if (filename.match(pattern))
+      files.push(filename);
+  }
+  return files;
+};
 
 exports.listGitHubFiles = function (user, repo, branch, glob) {
   //TODO: use makeRequest lib to dowload archive

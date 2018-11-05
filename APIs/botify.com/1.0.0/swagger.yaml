@@ -42,6 +42,7 @@ paths:
           required: false
           type: integer
         - description: Page Size
+          format: int32
           in: query
           name: size
           required: false
@@ -51,6 +52,11 @@ paths:
           name: only_success
           required: false
           type: boolean
+        - description: Which fields to return (comma-separated)
+          in: query
+          name: fields
+          required: false
+          type: string
       responses:
         '200':
           description: Successful operation
@@ -93,7 +99,12 @@ paths:
     get:
       description: Get an Analysis detail
       operationId: getAnalysisSummary
-      parameters: []
+      parameters:
+        - description: Previous analysis identifier
+          in: query
+          name: previous_crawl
+          required: false
+          type: string
       responses:
         '200':
           description: Successful operation
@@ -122,6 +133,27 @@ paths:
         name: analysis_slug
         required: true
         type: string
+    put:
+      description: Update an Analysis' attribute
+      operationId: updateAnalysis
+      parameters:
+        - description: Analysis Update
+          in: body
+          name: AnalysisUpdate
+          schema:
+            $ref: '#/definitions/AnalysisUpdate'
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/AnalysisUpdate'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Update an Analysis' attribute
+      tags:
+        - Analysis
   '/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics':
     get:
       description: Return global statistics for an analysis
@@ -792,6 +824,129 @@ paths:
         name: source
         required: true
         type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/staticfiles/robots-txt-indexes':
+    get:
+      description: Return a list of all robots.txt files found on the project's domains.
+      operationId: getRobotsTxtIndexesView
+      parameters:
+        - default: 1
+          description: Page Number
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                type: string
+              page:
+                type: integer
+              previous:
+                type: string
+              results:
+                items:
+                  $ref: '#/definitions/Default'
+                type: array
+              size:
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Return a list of all robots
+      tags:
+        - Analysis
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: Analysis' identifier
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/staticfiles/robots-txt-indexes/{robots_txt}':
+    get:
+      description: Return content of a robots.txt file.
+      operationId: getRobotsTxtFileView
+      parameters:
+        - default: 1
+          description: Page Number
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                type: string
+              page:
+                type: integer
+              previous:
+                type: string
+              results:
+                items:
+                  $ref: '#/definitions/Default'
+                type: array
+              size:
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Return content of a robots
+      tags:
+        - Analysis
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: Analysis' identifier
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
+      - description: Filename
+        in: path
+        name: robots_txt
+        required: true
+        type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/urls':
     parameters:
       - description: User's identifier
@@ -826,6 +981,7 @@ paths:
             - new
             - search_engines_orphans
             - gsc_keywords
+            - gsc_keywords_by_country
           in: query
           name: area
           required: false
@@ -842,6 +998,11 @@ paths:
           name: size
           required: false
           type: integer
+        - description: Previous analysis identifier
+          in: query
+          name: previous_crawl
+          required: false
+          type: string
       responses:
         '200':
           description: Successful operation
@@ -903,8 +1064,14 @@ paths:
             - new
             - search_engines_orphans
             - gsc_keywords
+            - gsc_keywords_by_country
           in: query
           name: area
+          required: false
+          type: string
+        - description: Previous analysis identifier
+          in: query
+          name: previous_crawl
           required: false
           type: string
       responses:
@@ -934,6 +1101,7 @@ paths:
             - new
             - search_engines_orphans
             - gsc_keywords
+            - gsc_keywords_by_country
           in: query
           name: area
           required: false
@@ -979,6 +1147,7 @@ paths:
             - new
             - search_engines_orphans
             - gsc_keywords
+            - gsc_keywords_by_country
           in: query
           name: area
           required: false
@@ -1093,10 +1262,28 @@ paths:
             - new
             - search_engines_orphans
             - gsc_keywords
+            - gsc_keywords_by_country
           in: query
           name: area
           required: false
           type: string
+        - description: Previous analysis identifier
+          in: query
+          name: previous_crawl
+          required: false
+          type: string
+        - description: Maximum size of the export (deprecated => size instead)
+          format: int32
+          in: query
+          name: export_size
+          required: false
+          type: integer
+        - description: Maximum size of the export
+          format: int32
+          in: query
+          name: size
+          required: false
+          type: integer
       responses:
         '201':
           description: Successful operation
@@ -1331,42 +1518,148 @@ paths:
         name: username
         required: true
         type: string
-  '/projects/{username}/{project_slug}/filters':
-    get:
-      description: 'List all the project''s saved filters (each filter''s name, ID and filter value)'
-      operationId: getSavedFilters
+  '/projects/{username}/{project_slug}/automations':
+    parameters:
+      - description: user to which belongs the project
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: identifies the project
+        in: path
+        name: project_slug
+        required: true
+        type: string
+    post:
+      description: Creates a new JobAutomation from data
+      operationId: postJobAutomation
       parameters:
-        - default: 1
-          description: Page Number
-          in: query
-          name: page
-          required: false
-          type: integer
-        - description: Page Size
-          in: query
-          name: size
-          required: false
-          type: integer
+        - description: Job automation creation
+          in: body
+          name: JobAutomation
+          schema:
+            $ref: '#/definitions/JobAutomation'
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/JobAutomation'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Creates a new JobAutomation from data
+      tags:
+        - JobAutomation
+  '/projects/{username}/{project_slug}/automations/from/{job_id}':
+    parameters:
+      - description: user to which belongs the project
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: identifies the project
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: the id of the existing job
+        in: path
+        name: job_id
+        required: true
+        type: string
+    post:
+      description: Creates a new JobAutomation from an existing job
+      operationId: postJobAutomationFromJob
+      parameters:
+        - description: Job automation creation
+          in: body
+          name: JobAutomation
+          schema:
+            $ref: '#/definitions/JobAutomation'
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/JobAutomation'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Creates a new JobAutomation from an existing job
+      tags:
+        - JobAutomation
+  '/projects/{username}/{project_slug}/collections':
+    get:
+      description: List all collections for a project
+      operationId: getProjectCollections
+      parameters: []
       responses:
         '200':
           description: Successful operation
           schema:
-            properties:
-              count:
-                type: integer
-              next:
-                type: string
-              page:
-                type: integer
-              previous:
-                type: string
-              results:
-                items:
-                  $ref: '#/definitions/ProjectSavedFilter'
-                type: array
-              size:
-                type: integer
-            type: object
+            $ref: '#/definitions/Collection'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: List all collections for a project
+      tags:
+        - Collections
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+  '/projects/{username}/{project_slug}/collections/{collection}':
+    get:
+      description: Get the detail of a collection
+      operationId: getCollectionDetail
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Datasets'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Get the detail of a collection
+      tags:
+        - Collections
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: The collection to query
+        in: path
+        name: collection
+        required: true
+        type: string
+  '/projects/{username}/{project_slug}/filters':
+    get:
+      description: 'List all the project''s saved filters (each filter''s name, ID and filter value)'
+      operationId: getSavedFilters
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/ProjectSavedFilter'
         default:
           description: error payload
           schema:
@@ -1445,6 +1738,7 @@ paths:
             - disappeared
             - new
             - gsc_keywords
+            - gsc_keywords_by_country
           in: query
           name: area
           required: false
@@ -1496,13 +1790,13 @@ definitions:
       job_url:
         readOnly: true
         type: string
-      nb_lines:
-        readOnly: true
-        type: string
       query:
         readOnly: true
         type: string
       results:
+        readOnly: true
+        type: string
+      user:
         readOnly: true
         type: string
     required:
@@ -1578,6 +1872,9 @@ definitions:
     type: object
   Analysis:
     properties:
+      comparable:
+        readOnly: true
+        type: string
       computing_revision:
         readOnly: true
         type: string
@@ -1612,10 +1909,18 @@ definitions:
       import_keywords_data:
         readOnly: true
         type: string
+      import_keywords_data_by_country:
+        readOnly: true
+        type: string
       name:
         readOnly: true
         type: string
       owner:
+        readOnly: true
+        type: string
+      pinned:
+        type: boolean
+      pins_balance:
         readOnly: true
         type: string
       red_button_domain:
@@ -1625,6 +1930,9 @@ definitions:
         type: string
       status:
         readOnly: true
+        type: string
+      to_be_deleted_at:
+        format: date-time
         type: string
       url:
         readOnly: true
@@ -1642,6 +1950,9 @@ definitions:
     type: object
   AnalysisDetail:
     properties:
+      comparable:
+        readOnly: true
+        type: string
       computing_revision:
         readOnly: true
         type: string
@@ -1676,10 +1987,18 @@ definitions:
       import_keywords_data:
         readOnly: true
         type: string
+      import_keywords_data_by_country:
+        readOnly: true
+        type: string
       name:
         readOnly: true
         type: string
       owner:
+        readOnly: true
+        type: string
+      pinned:
+        type: boolean
+      pins_balance:
         readOnly: true
         type: string
       red_button_domain:
@@ -1689,6 +2008,9 @@ definitions:
         type: string
       status:
         readOnly: true
+        type: string
+      to_be_deleted_at:
+        format: date-time
         type: string
       url:
         readOnly: true
@@ -1703,6 +2025,12 @@ definitions:
         $ref: '#/definitions/User'
     required:
       - user
+    type: object
+  AnalysisUpdate:
+    description: Analysis Update
+    properties:
+      pinned:
+        type: boolean
     type: object
   AnalysisUpdateLaunch:
     description: Launch Analysis Update
@@ -1742,6 +2070,28 @@ definitions:
       access_ok:
         readOnly: true
         type: string
+    type: object
+  Collection:
+    properties:
+      date:
+        readOnly: true
+        type: string
+      date_end:
+        format: date
+        type: string
+      date_start:
+        format: date
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      timestamped:
+        type: boolean
+    required:
+      - id
+      - name
+      - timestamped
     type: object
   CrawlOrphanURLs:
     properties:
@@ -1924,8 +2274,15 @@ definitions:
       results:
         readOnly: true
         type: string
+      size:
+        format: int64
+        type: integer
+      user:
+        readOnly: true
+        type: string
     required:
       - query
+      - size
     type: object
   Datamodel:
     properties:
@@ -2008,6 +2365,10 @@ definitions:
         type: boolean
       name:
         type: string
+      suggested_operations:
+        items:
+          $ref: '#/definitions/SuggestedOperations'
+        type: array
     required:
       - id
       - name
@@ -2141,6 +2502,18 @@ definitions:
       id:
         readOnly: true
         type: string
+    type: object
+  JobAutomation:
+    description: Job automation creation
+    properties:
+      description:
+        type: string
+      job_type:
+        type: string
+      payload:
+        type: object
+    required:
+      - job_type
     type: object
   KeywordsStat:
     properties:
@@ -2314,6 +2687,22 @@ definitions:
     properties:
       active:
         type: boolean
+      auto_pin_first_analysis:
+        type: boolean
+      conversion_rate_desktop:
+        description: Number of conversion per 1000 visits on desktop
+        format: float
+        type: number
+      conversion_rate_mobile:
+        description: Number of conversion per 1000 visits on mobile
+        format: float
+        type: number
+      conversion_rate_tablet:
+        description: Number of conversion per 1000 visits on tablet
+        format: float
+        type: number
+      currency:
+        type: string
       current_settings:
         $ref: '#/definitions/ProjectSettings'
       date_created:
@@ -2327,7 +2716,34 @@ definitions:
         type: object
       name:
         type: string
+      pins_balance:
+        format: int64
+        maximum: 2147483647
+        minimum: 0
+        type: integer
+      retention_period:
+        format: int64
+        maximum: 2147483647
+        minimum: 0
+        type: integer
+      revenue_per_conversion_desktop:
+        description: Revenue per conversion on desktop
+        format: float
+        type: number
+      revenue_per_conversion_mobile:
+        description: Revenue per conversion on mobile
+        format: float
+        type: number
+      revenue_per_conversion_tablet:
+        description: Revenue per conversion on tablet
+        format: float
+        type: number
+      settings_url:
+        readOnly: true
+        type: string
       slug:
+        type: string
+      timezone:
         type: string
       url:
         readOnly: true
@@ -2454,6 +2870,14 @@ definitions:
           type: string
         type: array
     type: object
+  QueryResponses:
+    description: Query Responses
+    properties:
+      results:
+        items:
+          type: string
+        type: array
+    type: object
   RegexConfig:
     description: Regex config
     properties:
@@ -2565,6 +2989,21 @@ definitions:
       - type
       - message
     type: object
+  SuggestedOperations:
+    properties:
+      group:
+        type: string
+      meta:
+        type: object
+      name:
+        type: string
+      operation:
+        type: object
+    required:
+      - name
+      - operation
+      - meta
+    type: object
   SuggestedUpdatesAddOnFeatures:
     properties:
       name:
@@ -2621,6 +3060,9 @@ definitions:
     properties: {}
     type: object
   UrlHTML:
+    properties: {}
+    type: object
+  UrlKeywords:
     properties: {}
     type: object
   User:

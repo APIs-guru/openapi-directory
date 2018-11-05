@@ -100,7 +100,7 @@ paths:
   /:
     post:
       operationId: AddTags
-      description: '<p>Adds the specified tags to the specified load balancer. Each load balancer can have a maximum of 10 tags.</p> <p>Each tag consists of a key and an optional value. If a tag with the same key is already associated with the load balancer, <code>AddTags</code> updates its value.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html">Tag Your Classic Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Adds the specified tags to the specified load balancer. Each load balancer can have a maximum of 10 tags.</p> <p>Each tag consists of a key and an optional value. If a tag with the same key is already associated with the load balancer, <code>AddTags</code> updates its value.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html">Tag Your Classic Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -137,7 +137,7 @@ paths:
   '/#ApplySecurityGroupsToLoadBalancer':
     post:
       operationId: ApplySecurityGroupsToLoadBalancer
-      description: '<p>Associates one or more security groups with your load balancer in a virtual private cloud (VPC). The specified security groups override the previously associated security groups.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups">Security Groups for Load Balancers in a VPC</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Associates one or more security groups with your load balancer in a virtual private cloud (VPC). The specified security groups override the previously associated security groups.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups">Security Groups for Load Balancers in a VPC</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -174,7 +174,7 @@ paths:
   '/#AttachLoadBalancerToSubnets':
     post:
       operationId: AttachLoadBalancerToSubnets
-      description: '<p>Adds one or more subnets to the set of configured subnets for the specified load balancer.</p> <p>The load balancer evenly distributes requests across all registered subnets. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html">Add or Remove Subnets for Your Load Balancer in a VPC</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Adds one or more subnets to the set of configured subnets for the specified load balancer.</p> <p>The load balancer evenly distributes requests across all registered subnets. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html">Add or Remove Subnets for Your Load Balancer in a VPC</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -215,7 +215,7 @@ paths:
   '/#ConfigureHealthCheck':
     post:
       operationId: ConfigureHealthCheck
-      description: '<p>Specifies the health check settings to use when evaluating the health state of your EC2 instances.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html">Configure Health Checks for Your Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Specifies the health check settings to use when evaluating the health state of your EC2 instances.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html">Configure Health Checks for Your Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -244,7 +244,7 @@ paths:
   '/#CreateAppCookieStickinessPolicy':
     post:
       operationId: CreateAppCookieStickinessPolicy
-      description: '<p>Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie. This policy can be associated only with HTTP/HTTPS listeners.</p> <p>This policy is similar to the policy created by <a>CreateLBCookieStickinessPolicy</a>, except that the lifetime of the special Elastic Load Balancing cookie, <code>AWSELB</code>, follows the lifetime of the application-generated cookie specified in the policy configuration. The load balancer only inserts a new stickiness cookie when the application response includes a new application cookie.</p> <p>If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application">Application-Controlled Session Stickiness</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie. This policy can be associated only with HTTP/HTTPS listeners.</p> <p>This policy is similar to the policy created by <a>CreateLBCookieStickinessPolicy</a>, except that the lifetime of the special Elastic Load Balancing cookie, <code>AWSELB</code>, follows the lifetime of the application-generated cookie specified in the policy configuration. The load balancer only inserts a new stickiness cookie when the application response includes a new application cookie.</p> <p>If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application">Application-Controlled Session Stickiness</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -285,7 +285,7 @@ paths:
   '/#CreateLBCookieStickinessPolicy':
     post:
       operationId: CreateLBCookieStickinessPolicy
-      description: '<p>Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period. This policy can be associated only with HTTP/HTTPS listeners.</p> <p>When a load balancer implements this policy, the load balancer uses a special cookie to track the instance for each request. When the load balancer receives a request, it first checks to see if this cookie is present in the request. If so, the load balancer sends the request to the application server specified in the cookie. If not, the load balancer sends the request to a server that is chosen based on the existing load-balancing algorithm.</p> <p>A cookie is inserted into the response for binding subsequent requests from the same user to that server. The validity of the cookie is based on the cookie expiration time, which is specified in the policy configuration.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration">Duration-Based Session Stickiness</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period. This policy can be associated only with HTTP/HTTPS listeners.</p> <p>When a load balancer implements this policy, the load balancer uses a special cookie to track the instance for each request. When the load balancer receives a request, it first checks to see if this cookie is present in the request. If so, the load balancer sends the request to the application server specified in the cookie. If not, the load balancer sends the request to a server that is chosen based on the existing load-balancing algorithm.</p> <p>A cookie is inserted into the response for binding subsequent requests from the same user to that server. The validity of the cookie is based on the cookie expiration time, which is specified in the policy configuration.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration">Duration-Based Session Stickiness</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -326,7 +326,7 @@ paths:
   '/#CreateLoadBalancer':
     post:
       operationId: CreateLoadBalancer
-      description: '<p>Creates a Classic Load Balancer.</p> <p>You can add listeners, security groups, subnets, and tags when you create your load balancer, or you can add them later using <a>CreateLoadBalancerListeners</a>, <a>ApplySecurityGroupsToLoadBalancer</a>, <a>AttachLoadBalancerToSubnets</a>, and <a>AddTags</a>.</p> <p>To describe your current load balancers, see <a>DescribeLoadBalancers</a>. When you are finished with a load balancer, you can delete it using <a>DeleteLoadBalancer</a>.</p> <p>You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html">Limits for Your Classic Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Creates a Classic Load Balancer.</p> <p>You can add listeners, security groups, subnets, and tags when you create your load balancer, or you can add them later using <a>CreateLoadBalancerListeners</a>, <a>ApplySecurityGroupsToLoadBalancer</a>, <a>AttachLoadBalancerToSubnets</a>, and <a>AddTags</a>.</p> <p>To describe your current load balancers, see <a>DescribeLoadBalancers</a>. When you are finished with a load balancer, you can delete it using <a>DeleteLoadBalancer</a>.</p> <p>You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html">Limits for Your Classic Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -399,7 +399,7 @@ paths:
   '/#CreateLoadBalancerListeners':
     post:
       operationId: CreateLoadBalancerListeners
-      description: '<p>Creates one or more listeners for the specified load balancer. If a listener with the specified port does not already exist, it is created; otherwise, the properties of the new listener must match the properties of the existing listener.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html">Listeners for Your Classic Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Creates one or more listeners for the specified load balancer. If a listener with the specified port does not already exist, it is created; otherwise, the properties of the new listener must match the properties of the existing listener.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html">Listeners for Your Classic Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -576,7 +576,7 @@ paths:
   '/#DeregisterInstancesFromLoadBalancer':
     post:
       operationId: DeregisterInstancesFromLoadBalancer
-      description: '<p>Deregisters the specified instances from the specified load balancer. After the instance is deregistered, it no longer receives traffic from the load balancer.</p> <p>You can use <a>DescribeLoadBalancers</a> to verify that the instance is deregistered from the load balancer.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html">Register or De-Register EC2 Instances</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Deregisters the specified instances from the specified load balancer. After the instance is deregistered, it no longer receives traffic from the load balancer.</p> <p>You can use <a>DescribeLoadBalancers</a> to verify that the instance is deregistered from the load balancer.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html">Register or De-Register EC2 Instances</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -609,7 +609,7 @@ paths:
   '/#DescribeAccountLimits':
     post:
       operationId: DescribeAccountLimits
-      description: '<p>Describes the current Elastic Load Balancing resource limits for your AWS account.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html">Limits for Your Classic Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Describes the current Elastic Load Balancing resource limits for your AWS account.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html">Limits for Your Classic Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -893,7 +893,7 @@ paths:
   '/#DisableAvailabilityZonesForLoadBalancer':
     post:
       operationId: DisableAvailabilityZonesForLoadBalancer
-      description: '<p>Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer.</p> <p>There must be at least one Availability Zone registered with a load balancer at all times. After an Availability Zone is removed, all instances registered with the load balancer that are in the removed Availability Zone go into the <code>OutOfService</code> state. Then, the load balancer attempts to equally balance the traffic among its remaining Availability Zones.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html">Add or Remove Availability Zones</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer in EC2-Classic or a default VPC.</p> <p>For load balancers in a non-default VPC, use <a>DetachLoadBalancerFromSubnets</a>.</p> <p>There must be at least one Availability Zone registered with a load balancer at all times. After an Availability Zone is removed, all instances registered with the load balancer that are in the removed Availability Zone go into the <code>OutOfService</code> state. Then, the load balancer attempts to equally balance the traffic among its remaining Availability Zones.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html">Add or Remove Availability Zones</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -926,7 +926,7 @@ paths:
   '/#EnableAvailabilityZonesForLoadBalancer':
     post:
       operationId: EnableAvailabilityZonesForLoadBalancer
-      description: '<p>Adds the specified Availability Zones to the set of Availability Zones for the specified load balancer.</p> <p>The load balancer evenly distributes requests across all its registered Availability Zones that contain instances.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html">Add or Remove Availability Zones</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Adds the specified Availability Zones to the set of Availability Zones for the specified load balancer in EC2-Classic or a default VPC.</p> <p>For load balancers in a non-default VPC, use <a>AttachLoadBalancerToSubnets</a>.</p> <p>The load balancer evenly distributes requests across all its registered Availability Zones that contain instances. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html">Add or Remove Availability Zones</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -955,7 +955,7 @@ paths:
   '/#ModifyLoadBalancerAttributes':
     post:
       operationId: ModifyLoadBalancerAttributes
-      description: '<p>Modifies the attributes of the specified load balancer.</p> <p>You can modify the load balancer attributes, such as <code>AccessLogs</code>, <code>ConnectionDraining</code>, and <code>CrossZoneLoadBalancing</code> by either enabling or disabling them. Or, you can modify the load balancer attribute <code>ConnectionSettings</code> by specifying an idle connection timeout value for your load balancer.</p> <p>For more information, see the following in the <i>Classic Load Balancer Guide</i>:</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html">Cross-Zone Load Balancing</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html">Connection Draining</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html">Access Logs</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html">Idle Connection Timeout</a> </p> </li> </ul>'
+      description: '<p>Modifies the attributes of the specified load balancer.</p> <p>You can modify the load balancer attributes, such as <code>AccessLogs</code>, <code>ConnectionDraining</code>, and <code>CrossZoneLoadBalancing</code> by either enabling or disabling them. Or, you can modify the load balancer attribute <code>ConnectionSettings</code> by specifying an idle connection timeout value for your load balancer.</p> <p>For more information, see the following in the <i>Classic Load Balancers Guide</i>:</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html">Cross-Zone Load Balancing</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html">Connection Draining</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html">Access Logs</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html">Idle Connection Timeout</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -992,7 +992,7 @@ paths:
   '/#RegisterInstancesWithLoadBalancer':
     post:
       operationId: RegisterInstancesWithLoadBalancer
-      description: '<p>Adds the specified instances to the specified load balancer.</p> <p>The instance must be a running instance in the same network as the load balancer (EC2-Classic or the same VPC). If you have EC2-Classic instances and a load balancer in a VPC with ClassicLink enabled, you can link the EC2-Classic instances to that VPC and then register the linked EC2-Classic instances with the load balancer in the VPC.</p> <p>Note that <code>RegisterInstanceWithLoadBalancer</code> completes when the request has been registered. Instance registration takes a little time to complete. To check the state of the registered instances, use <a>DescribeLoadBalancers</a> or <a>DescribeInstanceHealth</a>.</p> <p>After the instance is registered, it starts receiving traffic and requests from the load balancer. Any instance that is not in one of the Availability Zones registered for the load balancer is moved to the <code>OutOfService</code> state. If an Availability Zone is added to the load balancer later, any instances registered with the load balancer move to the <code>InService</code> state.</p> <p>To deregister instances from a load balancer, use <a>DeregisterInstancesFromLoadBalancer</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html">Register or De-Register EC2 Instances</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Adds the specified instances to the specified load balancer.</p> <p>The instance must be a running instance in the same network as the load balancer (EC2-Classic or the same VPC). If you have EC2-Classic instances and a load balancer in a VPC with ClassicLink enabled, you can link the EC2-Classic instances to that VPC and then register the linked EC2-Classic instances with the load balancer in the VPC.</p> <p>Note that <code>RegisterInstanceWithLoadBalancer</code> completes when the request has been registered. Instance registration takes a little time to complete. To check the state of the registered instances, use <a>DescribeLoadBalancers</a> or <a>DescribeInstanceHealth</a>.</p> <p>After the instance is registered, it starts receiving traffic and requests from the load balancer. Any instance that is not in one of the Availability Zones registered for the load balancer is moved to the <code>OutOfService</code> state. If an Availability Zone is added to the load balancer later, any instances registered with the load balancer move to the <code>InService</code> state.</p> <p>To deregister instances from a load balancer, use <a>DeregisterInstancesFromLoadBalancer</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html">Register or De-Register EC2 Instances</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1054,7 +1054,7 @@ paths:
   '/#SetLoadBalancerListenerSSLCertificate':
     post:
       operationId: SetLoadBalancerListenerSSLCertificate
-      description: '<p>Sets the certificate that terminates the specified listener''s SSL connections. The specified certificate replaces any prior certificate that was used on the same load balancer and port.</p> <p>For more information about updating your SSL certificate, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html">Replace the SSL Certificate for Your Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Sets the certificate that terminates the specified listener''s SSL connections. The specified certificate replaces any prior certificate that was used on the same load balancer and port.</p> <p>For more information about updating your SSL certificate, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html">Replace the SSL Certificate for Your Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1099,7 +1099,7 @@ paths:
   '/#SetLoadBalancerPoliciesForBackendServer':
     post:
       operationId: SetLoadBalancerPoliciesForBackendServer
-      description: '<p>Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies. At this time, only the back-end server authentication policy type can be applied to the instance ports; this policy type is composed of multiple public key policies.</p> <p>Each time you use <code>SetLoadBalancerPoliciesForBackendServer</code> to enable the policies, use the <code>PolicyNames</code> parameter to list the policies that you want to enable.</p> <p>You can use <a>DescribeLoadBalancers</a> or <a>DescribeLoadBalancerPolicies</a> to verify that the policy is associated with the EC2 instance.</p> <p>For more information about enabling back-end instance authentication, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#configure_backendauth_clt">Configure Back-end Instance Authentication</a> in the <i>Classic Load Balancer Guide</i>. For more information about Proxy Protocol, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html">Configure Proxy Protocol Support</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies. At this time, only the back-end server authentication policy type can be applied to the instance ports; this policy type is composed of multiple public key policies.</p> <p>Each time you use <code>SetLoadBalancerPoliciesForBackendServer</code> to enable the policies, use the <code>PolicyNames</code> parameter to list the policies that you want to enable.</p> <p>You can use <a>DescribeLoadBalancers</a> or <a>DescribeLoadBalancerPolicies</a> to verify that the policy is associated with the EC2 instance.</p> <p>For more information about enabling back-end instance authentication, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#configure_backendauth_clt">Configure Back-end Instance Authentication</a> in the <i>Classic Load Balancers Guide</i>. For more information about Proxy Protocol, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html">Configure Proxy Protocol Support</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1136,7 +1136,7 @@ paths:
   '/#SetLoadBalancerPoliciesOfListener':
     post:
       operationId: SetLoadBalancerPoliciesOfListener
-      description: '<p>Replaces the current set of policies for the specified load balancer port with the specified set of policies.</p> <p>To enable back-end server authentication, use <a>SetLoadBalancerPoliciesForBackendServer</a>.</p> <p>For more information about setting policies, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ssl-config-update.html">Update the SSL Negotiation Configuration</a>, <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration">Duration-Based Session Stickiness</a>, and <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application">Application-Controlled Session Stickiness</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      description: '<p>Replaces the current set of policies for the specified load balancer port with the specified set of policies.</p> <p>To enable back-end server authentication, use <a>SetLoadBalancerPoliciesForBackendServer</a>.</p> <p>For more information about setting policies, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ssl-config-update.html">Update the SSL Negotiation Configuration</a>, <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration">Duration-Based Session Stickiness</a>, and <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application">Application-Controlled Session Stickiness</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1175,66 +1175,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AccessLog:
-    type: object
-    required:
-      - Enabled
-    properties:
-      Enabled:
-        $ref: '#/definitions/AccessLogEnabled'
-        description: Specifies whether access logs are enabled for the load balancer.
-      S3BucketName:
-        $ref: '#/definitions/S3BucketName'
-        description: The name of the Amazon S3 bucket where the access logs are stored.
-      EmitInterval:
-        $ref: '#/definitions/AccessLogInterval'
-        description: '<p>The interval for publishing the access logs. You can specify an interval of either 5 minutes or 60 minutes.</p> <p>Default: 60 minutes</p>'
-      S3BucketPrefix:
-        $ref: '#/definitions/AccessLogPrefix'
-        description: 'The logical hierarchy you created for your Amazon S3 bucket, for example <code>my-bucket-prefix/prod</code>. If the prefix is not provided, the log is placed at the root level of the bucket.'
-    description: Information about the <code>AccessLog</code> attribute.
-  AccessLogEnabled:
-    type: boolean
-  AccessLogInterval:
-    type: integer
-  AccessLogPrefix:
-    type: string
-  AccessPointName:
-    type: string
-  AccessPointNotFoundException:
+  AddTagsOutput:
     type: object
     properties: {}
-    description: The specified load balancer does not exist.
-  AccessPointPort:
-    type: integer
-  AddAvailabilityZonesInput:
-    type: object
-    required:
-      - LoadBalancerName
-      - AvailabilityZones
-    example:
-      AvailabilityZones:
-        - us-west-2b
-      LoadBalancerName: my-load-balancer
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/AccessPointName'
-        description: The name of the load balancer.
-      AvailabilityZones:
-        $ref: '#/definitions/AvailabilityZones'
-        description: The Availability Zones. These must be in the same region as the load balancer.
-    description: Contains the parameters for EnableAvailabilityZonesForLoadBalancer.
-  AddAvailabilityZonesOutput:
-    type: object
-    example:
-      AvailabilityZones:
-        - us-west-2a
-        - us-west-2b
-    properties:
-      AvailabilityZones:
-        $ref: '#/definitions/AvailabilityZones'
-        description: The updated list of Availability Zones for the load balancer.
-    description: Contains the output of EnableAvailabilityZonesForLoadBalancer.
+    description: Contains the output of AddTags.
   AddTagsInput:
     type: object
     required:
@@ -1256,47 +1200,19 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tags.
     description: Contains the parameters for AddTags.
-  AddTagsOutput:
+  AccessPointNotFoundException: {}
+  TooManyTagsException: {}
+  DuplicateTagKeysException: {}
+  ApplySecurityGroupsToLoadBalancerOutput:
     type: object
-    properties: {}
-    description: Contains the output of AddTags.
-  AdditionalAttribute:
-    type: object
+    example:
+      SecurityGroups:
+        - sg-fc448899
     properties:
-      Key:
-        $ref: '#/definitions/AdditionalAttributeKey'
-        description: This parameter is reserved.
-      Value:
-        $ref: '#/definitions/AdditionalAttributeValue'
-        description: This parameter is reserved.
-    description: This data type is reserved.
-  AdditionalAttributeKey:
-    type: string
-    pattern: '^[a-zA-Z0-9.]+$'
-    maxLength: 256
-  AdditionalAttributeValue:
-    type: string
-    pattern: '^[a-zA-Z0-9.]+$'
-    maxLength: 256
-  AdditionalAttributes:
-    type: array
-    items:
-      $ref: '#/definitions/AdditionalAttribute'
-    maxItems: 10
-  AppCookieStickinessPolicies:
-    type: array
-    items:
-      $ref: '#/definitions/AppCookieStickinessPolicy'
-  AppCookieStickinessPolicy:
-    type: object
-    properties:
-      PolicyName:
-        $ref: '#/definitions/PolicyName'
-        description: The mnemonic name for the policy being created. The name must be unique within a set of policies for this load balancer.
-      CookieName:
-        $ref: '#/definitions/CookieName'
-        description: The name of the application cookie used for stickiness.
-    description: Information about a policy for application-controlled session stickiness.
+      SecurityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: The IDs of the security groups associated with the load balancer.
+    description: Contains the output of ApplySecurityGroupsToLoadBalancer.
   ApplySecurityGroupsToLoadBalancerInput:
     type: object
     required:
@@ -1314,16 +1230,19 @@ definitions:
         $ref: '#/definitions/SecurityGroups'
         description: The IDs of the security groups to associate with the load balancer. Note that you cannot specify the name of the security group.
     description: Contains the parameters for ApplySecurityGroupsToLoadBalancer.
-  ApplySecurityGroupsToLoadBalancerOutput:
+  InvalidConfigurationRequestException: {}
+  InvalidSecurityGroupException: {}
+  AttachLoadBalancerToSubnetsOutput:
     type: object
     example:
-      SecurityGroups:
-        - sg-fc448899
+      Subnets:
+        - subnet-15aaab61
+        - subnet-0ecac448
     properties:
-      SecurityGroups:
-        $ref: '#/definitions/SecurityGroups'
-        description: The IDs of the security groups associated with the load balancer.
-    description: Contains the output of ApplySecurityGroupsToLoadBalancer.
+      Subnets:
+        $ref: '#/definitions/Subnets'
+        description: The IDs of the subnets attached to the load balancer.
+    description: Contains the output of AttachLoadBalancerToSubnets.
   AttachLoadBalancerToSubnetsInput:
     type: object
     required:
@@ -1341,49 +1260,22 @@ definitions:
         $ref: '#/definitions/Subnets'
         description: The IDs of the subnets to add. You can add only one subnet per Availability Zone.
     description: Contains the parameters for AttachLoaBalancerToSubnets.
-  AttachLoadBalancerToSubnetsOutput:
+  SubnetNotFoundException: {}
+  InvalidSubnetException: {}
+  ConfigureHealthCheckOutput:
     type: object
     example:
-      Subnets:
-        - subnet-15aaab61
-        - subnet-0ecac448
+      HealthCheck:
+        HealthyThreshold: 2
+        Interval: 30
+        Target: 'HTTP:80/png'
+        Timeout: 3
+        UnhealthyThreshold: 2
     properties:
-      Subnets:
-        $ref: '#/definitions/Subnets'
-        description: The IDs of the subnets attached to the load balancer.
-    description: Contains the output of AttachLoadBalancerToSubnets.
-  AttributeName:
-    type: string
-  AttributeType:
-    type: string
-  AttributeValue:
-    type: string
-  AvailabilityZone:
-    type: string
-  AvailabilityZones:
-    type: array
-    items:
-      $ref: '#/definitions/AvailabilityZone'
-  BackendServerDescription:
-    type: object
-    properties:
-      InstancePort:
-        $ref: '#/definitions/InstancePort'
-        description: The port on which the EC2 instance is listening.
-      PolicyNames:
-        $ref: '#/definitions/PolicyNames'
-        description: The names of the policies enabled for the EC2 instance.
-    description: Information about the configuration of an EC2 instance.
-  BackendServerDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/BackendServerDescription'
-  Cardinality:
-    type: string
-  CertificateNotFoundException:
-    type: object
-    properties: {}
-    description: 'The specified ARN does not refer to a valid SSL certificate in AWS Identity and Access Management (IAM) or AWS Certificate Manager (ACM). Note that if you recently uploaded the certificate to IAM, this error might indicate that the certificate is not fully available yet.'
+      HealthCheck:
+        $ref: '#/definitions/HealthCheck'
+        description: The updated health check.
+    description: Contains the output of ConfigureHealthCheck.
   ConfigureHealthCheckInput:
     type: object
     required:
@@ -1405,49 +1297,66 @@ definitions:
         $ref: '#/definitions/HealthCheck'
         description: The configuration information.
     description: Contains the parameters for ConfigureHealthCheck.
-  ConfigureHealthCheckOutput:
+  CreateAppCookieStickinessPolicyOutput:
+    type: object
+    properties: {}
+    description: Contains the output for CreateAppCookieStickinessPolicy.
+  CreateAppCookieStickinessPolicyInput:
+    type: object
+    required:
+      - LoadBalancerName
+      - PolicyName
+      - CookieName
+    example:
+      CookieName: my-app-cookie
+      LoadBalancerName: my-load-balancer
+      PolicyName: my-app-cookie-policy
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the load balancer.
+      PolicyName:
+        $ref: '#/definitions/PolicyName'
+        description: The name of the policy being created. Policy names must consist of alphanumeric characters and dashes (-). This name must be unique within the set of policies for this load balancer.
+      CookieName:
+        $ref: '#/definitions/CookieName'
+        description: The name of the application cookie used for stickiness.
+    description: Contains the parameters for CreateAppCookieStickinessPolicy.
+  DuplicatePolicyNameException: {}
+  TooManyPoliciesException: {}
+  CreateLBCookieStickinessPolicyOutput:
+    type: object
+    properties: {}
+    description: Contains the output for CreateLBCookieStickinessPolicy.
+  CreateLBCookieStickinessPolicyInput:
+    type: object
+    required:
+      - LoadBalancerName
+      - PolicyName
+    example:
+      CookieExpirationPeriod: 60
+      LoadBalancerName: my-load-balancer
+      PolicyName: my-duration-cookie-policy
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the load balancer.
+      PolicyName:
+        $ref: '#/definitions/PolicyName'
+        description: The name of the policy being created. Policy names must consist of alphanumeric characters and dashes (-). This name must be unique within the set of policies for this load balancer.
+      CookieExpirationPeriod:
+        $ref: '#/definitions/CookieExpirationPeriod'
+        description: 'The time period, in seconds, after which the cookie should be considered stale. If you do not specify this parameter, the default value is 0, which indicates that the sticky session should last for the duration of the browser session.'
+    description: Contains the parameters for CreateLBCookieStickinessPolicy.
+  CreateAccessPointOutput:
     type: object
     example:
-      HealthCheck:
-        HealthyThreshold: 2
-        Interval: 30
-        Target: 'HTTP:80/png'
-        Timeout: 3
-        UnhealthyThreshold: 2
+      DNSName: internal-my-load-balancer-123456789.us-west-2.elb.amazonaws.com
     properties:
-      HealthCheck:
-        $ref: '#/definitions/HealthCheck'
-        description: The updated health check.
-    description: Contains the output of ConfigureHealthCheck.
-  ConnectionDraining:
-    type: object
-    required:
-      - Enabled
-    properties:
-      Enabled:
-        $ref: '#/definitions/ConnectionDrainingEnabled'
-        description: Specifies whether connection draining is enabled for the load balancer.
-      Timeout:
-        $ref: '#/definitions/ConnectionDrainingTimeout'
-        description: 'The maximum time, in seconds, to keep the existing connections open before deregistering the instances.'
-    description: Information about the <code>ConnectionDraining</code> attribute.
-  ConnectionDrainingEnabled:
-    type: boolean
-  ConnectionDrainingTimeout:
-    type: integer
-  ConnectionSettings:
-    type: object
-    required:
-      - IdleTimeout
-    properties:
-      IdleTimeout:
-        $ref: '#/definitions/IdleTimeout'
-        description: 'The time, in seconds, that the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer.'
-    description: Information about the <code>ConnectionSettings</code> attribute.
-  CookieExpirationPeriod:
-    type: integer
-  CookieName:
-    type: string
+      DNSName:
+        $ref: '#/definitions/DNSName'
+        description: The DNS name of the load balancer.
+    description: Contains the output for CreateLoadBalancer.
   CreateAccessPointInput:
     type: object
     required:
@@ -1471,7 +1380,7 @@ definitions:
         description: '<p>The name of the load balancer.</p> <p>This name must be unique within your set of load balancers for the region, must have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and cannot begin or end with a hyphen.</p>'
       Listeners:
         $ref: '#/definitions/Listeners'
-        description: '<p>The listeners.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html">Listeners for Your Classic Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+        description: '<p>The listeners.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html">Listeners for Your Classic Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       AvailabilityZones:
         $ref: '#/definitions/AvailabilityZones'
         description: <p>One or more Availability Zones from the same region as the load balancer.</p> <p>You must specify at least one Availability Zone.</p> <p>You can add more Availability Zones after you create the load balancer using <a>EnableAvailabilityZonesForLoadBalancer</a>.</p>
@@ -1486,66 +1395,18 @@ definitions:
         description: '<p>The type of a load balancer. Valid only for load balancers in a VPC.</p> <p>By default, Elastic Load Balancing creates an Internet-facing load balancer with a DNS name that resolves to public IP addresses. For more information about Internet-facing and Internal load balancers, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme">Load Balancer Scheme</a> in the <i>Elastic Load Balancing User Guide</i>.</p> <p>Specify <code>internal</code> to create a load balancer with a DNS name that resolves to private IP addresses.</p>'
       Tags:
         $ref: '#/definitions/TagList'
-        description: '<p>A list of tags to assign to the load balancer.</p> <p>For more information about tagging your load balancer, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html">Tag Your Classic Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+        description: '<p>A list of tags to assign to the load balancer.</p> <p>For more information about tagging your load balancer, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html">Tag Your Classic Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
     description: Contains the parameters for CreateLoadBalancer.
-  CreateAccessPointOutput:
-    type: object
-    example:
-      DNSName: internal-my-load-balancer-123456789.us-west-2.elb.amazonaws.com
-    properties:
-      DNSName:
-        $ref: '#/definitions/DNSName'
-        description: The DNS name of the load balancer.
-    description: Contains the output for CreateLoadBalancer.
-  CreateAppCookieStickinessPolicyInput:
-    type: object
-    required:
-      - LoadBalancerName
-      - PolicyName
-      - CookieName
-    example:
-      CookieName: my-app-cookie
-      LoadBalancerName: my-load-balancer
-      PolicyName: my-app-cookie-policy
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/AccessPointName'
-        description: The name of the load balancer.
-      PolicyName:
-        $ref: '#/definitions/PolicyName'
-        description: The name of the policy being created. Policy names must consist of alphanumeric characters and dashes (-). This name must be unique within the set of policies for this load balancer.
-      CookieName:
-        $ref: '#/definitions/CookieName'
-        description: The name of the application cookie used for stickiness.
-    description: Contains the parameters for CreateAppCookieStickinessPolicy.
-  CreateAppCookieStickinessPolicyOutput:
+  DuplicateAccessPointNameException: {}
+  TooManyAccessPointsException: {}
+  CertificateNotFoundException: {}
+  InvalidSchemeException: {}
+  UnsupportedProtocolException: {}
+  OperationNotPermittedException: {}
+  CreateLoadBalancerListenerOutput:
     type: object
     properties: {}
-    description: Contains the output for CreateAppCookieStickinessPolicy.
-  CreateLBCookieStickinessPolicyInput:
-    type: object
-    required:
-      - LoadBalancerName
-      - PolicyName
-    example:
-      CookieExpirationPeriod: 60
-      LoadBalancerName: my-load-balancer
-      PolicyName: my-duration-cookie-policy
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/AccessPointName'
-        description: The name of the load balancer.
-      PolicyName:
-        $ref: '#/definitions/PolicyName'
-        description: The name of the policy being created. Policy names must consist of alphanumeric characters and dashes (-). This name must be unique within the set of policies for this load balancer.
-      CookieExpirationPeriod:
-        $ref: '#/definitions/CookieExpirationPeriod'
-        description: 'The time period, in seconds, after which the cookie should be considered stale. If you do not specify this parameter, the default value is 0, which indicates that the sticky session should last for the duration of the browser session.'
-    description: Contains the parameters for CreateLBCookieStickinessPolicy.
-  CreateLBCookieStickinessPolicyOutput:
-    type: object
-    properties: {}
-    description: Contains the output for CreateLBCookieStickinessPolicy.
+    description: Contains the parameters for CreateLoadBalancerListener.
   CreateLoadBalancerListenerInput:
     type: object
     required:
@@ -1567,10 +1428,11 @@ definitions:
         $ref: '#/definitions/Listeners'
         description: The listeners.
     description: Contains the parameters for CreateLoadBalancerListeners.
-  CreateLoadBalancerListenerOutput:
+  DuplicateListenerException: {}
+  CreateLoadBalancerPolicyOutput:
     type: object
     properties: {}
-    description: Contains the parameters for CreateLoadBalancerListener.
+    description: Contains the output of CreateLoadBalancerPolicy.
   CreateLoadBalancerPolicyInput:
     type: object
     required:
@@ -1598,28 +1460,11 @@ definitions:
         $ref: '#/definitions/PolicyAttributes'
         description: The policy attributes.
     description: Contains the parameters for CreateLoadBalancerPolicy.
-  CreateLoadBalancerPolicyOutput:
+  PolicyTypeNotFoundException: {}
+  DeleteAccessPointOutput:
     type: object
     properties: {}
-    description: Contains the output of CreateLoadBalancerPolicy.
-  CreatedTime:
-    type: string
-    format: date-time
-  CrossZoneLoadBalancing:
-    type: object
-    required:
-      - Enabled
-    properties:
-      Enabled:
-        $ref: '#/definitions/CrossZoneLoadBalancingEnabled'
-        description: Specifies whether cross-zone load balancing is enabled for the load balancer.
-    description: Information about the <code>CrossZoneLoadBalancing</code> attribute.
-  CrossZoneLoadBalancingEnabled:
-    type: boolean
-  DNSName:
-    type: string
-  DefaultValue:
-    type: string
+    description: Contains the output of DeleteLoadBalancer.
   DeleteAccessPointInput:
     type: object
     required:
@@ -1631,10 +1476,10 @@ definitions:
         $ref: '#/definitions/AccessPointName'
         description: The name of the load balancer.
     description: Contains the parameters for DeleteLoadBalancer.
-  DeleteAccessPointOutput:
+  DeleteLoadBalancerListenerOutput:
     type: object
     properties: {}
-    description: Contains the output of DeleteLoadBalancer.
+    description: Contains the output of DeleteLoadBalancerListeners.
   DeleteLoadBalancerListenerInput:
     type: object
     required:
@@ -1652,10 +1497,10 @@ definitions:
         $ref: '#/definitions/Ports'
         description: The client port numbers of the listeners.
     description: Contains the parameters for DeleteLoadBalancerListeners.
-  DeleteLoadBalancerListenerOutput:
+  DeleteLoadBalancerPolicyOutput:
     type: object
     properties: {}
-    description: Contains the output of DeleteLoadBalancerListeners.
+    description: Contains the output of DeleteLoadBalancerPolicy.
   DeleteLoadBalancerPolicyInput:
     type: object
     required:
@@ -1672,13 +1517,17 @@ definitions:
         $ref: '#/definitions/PolicyName'
         description: The name of the policy.
     description: Contains the parameters for DeleteLoadBalancerPolicy.
-  DeleteLoadBalancerPolicyOutput:
+  DeregisterEndPointsOutput:
     type: object
-    properties: {}
-    description: Contains the output of DeleteLoadBalancerPolicy.
-  DependencyThrottleException:
-    type: object
-    properties: {}
+    example:
+      Instances:
+        - InstanceId: i-207d9717
+        - InstanceId: i-afefb49b
+    properties:
+      Instances:
+        $ref: '#/definitions/Instances'
+        description: The remaining instances registered with the load balancer.
+    description: Contains the output of DeregisterInstancesFromLoadBalancer.
   DeregisterEndPointsInput:
     type: object
     required:
@@ -1696,33 +1545,140 @@ definitions:
         $ref: '#/definitions/Instances'
         description: The IDs of the instances.
     description: Contains the parameters for DeregisterInstancesFromLoadBalancer.
-  DeregisterEndPointsOutput:
+  InvalidEndPointException: {}
+  DescribeAccountLimitsOutput:
     type: object
-    example:
-      Instances:
-        - InstanceId: i-207d9717
-        - InstanceId: i-afefb49b
     properties:
-      Instances:
-        $ref: '#/definitions/Instances'
-        description: The remaining instances registered with the load balancer.
-    description: Contains the output of DeregisterInstancesFromLoadBalancer.
-  DescribeAccessPointsInput:
+      Limits:
+        $ref: '#/definitions/Limits'
+        description: Information about the limits.
+      NextMarker:
+        $ref: '#/definitions/Marker'
+        description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+  DescribeAccountLimitsInput:
     type: object
-    example:
-      LoadBalancerNames:
-        - my-load-balancer
     properties:
-      LoadBalancerNames:
-        $ref: '#/definitions/LoadBalancerNames'
-        description: The names of the load balancers.
       Marker:
         $ref: '#/definitions/Marker'
         description: The marker for the next set of results. (You received this marker from a previous call.)
       PageSize:
         $ref: '#/definitions/PageSize'
-        description: The maximum number of results to return with this call (a number from 1 to 400). The default is 400.
-    description: Contains the parameters for DescribeLoadBalancers.
+        description: The maximum number of results to return with this call.
+  DescribeEndPointStateOutput:
+    type: object
+    example:
+      InstanceStates:
+        - Description: N/A
+          InstanceId: i-207d9717
+          ReasonCode: N/A
+          State: InService
+        - Description: N/A
+          InstanceId: i-afefb49b
+          ReasonCode: N/A
+          State: InService
+    properties:
+      InstanceStates:
+        $ref: '#/definitions/InstanceStates'
+        description: Information about the health of the instances.
+    description: Contains the output for DescribeInstanceHealth.
+  DescribeEndPointStateInput:
+    type: object
+    required:
+      - LoadBalancerName
+    example:
+      LoadBalancerName: my-load-balancer
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the load balancer.
+      Instances:
+        $ref: '#/definitions/Instances'
+        description: The IDs of the instances.
+    description: Contains the parameters for DescribeInstanceHealth.
+  DescribeLoadBalancerAttributesOutput:
+    type: object
+    example:
+      LoadBalancerAttributes:
+        AccessLog:
+          Enabled: false
+        ConnectionDraining:
+          Enabled: false
+          Timeout: 300
+        ConnectionSettings:
+          IdleTimeout: 60
+        CrossZoneLoadBalancing:
+          Enabled: false
+    properties:
+      LoadBalancerAttributes:
+        $ref: '#/definitions/LoadBalancerAttributes'
+        description: Information about the load balancer attributes.
+    description: Contains the output of DescribeLoadBalancerAttributes.
+  DescribeLoadBalancerAttributesInput:
+    type: object
+    required:
+      - LoadBalancerName
+    example:
+      LoadBalancerName: my-load-balancer
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the load balancer.
+    description: Contains the parameters for DescribeLoadBalancerAttributes.
+  LoadBalancerAttributeNotFoundException: {}
+  DescribeLoadBalancerPoliciesOutput:
+    type: object
+    example:
+      PolicyDescriptions:
+        - PolicyAttributeDescriptions:
+            - AttributeName: PublicKeyPolicyName
+              AttributeValue: my-PublicKey-policy
+          PolicyName: my-authentication-policy
+          PolicyTypeName: BackendServerAuthenticationPolicyType
+    properties:
+      PolicyDescriptions:
+        $ref: '#/definitions/PolicyDescriptions'
+        description: Information about the policies.
+    description: Contains the output of DescribeLoadBalancerPolicies.
+  DescribeLoadBalancerPoliciesInput:
+    type: object
+    example:
+      LoadBalancerName: my-load-balancer
+      PolicyNames:
+        - my-authentication-policy
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the load balancer.
+      PolicyNames:
+        $ref: '#/definitions/PolicyNames'
+        description: The names of the policies.
+    description: Contains the parameters for DescribeLoadBalancerPolicies.
+  PolicyNotFoundException: {}
+  DescribeLoadBalancerPolicyTypesOutput:
+    type: object
+    example:
+      PolicyTypeDescriptions:
+        - Description: Policy that controls whether to include the IP address and port of the originating request for TCP messages. This policy operates on TCP listeners only.
+          PolicyAttributeTypeDescriptions:
+            - AttributeName: ProxyProtocol
+              AttributeType: Boolean
+              Cardinality: ONE
+          PolicyTypeName: ProxyProtocolPolicyType
+    properties:
+      PolicyTypeDescriptions:
+        $ref: '#/definitions/PolicyTypeDescriptions'
+        description: Information about the policy types.
+    description: Contains the output of DescribeLoadBalancerPolicyTypes.
+  DescribeLoadBalancerPolicyTypesInput:
+    type: object
+    example:
+      PolicyTypeNames:
+        - ProxyProtocolPolicyType
+    properties:
+      PolicyTypeNames:
+        $ref: '#/definitions/PolicyTypeNames'
+        description: 'The names of the policy types. If no names are specified, describes all policy types defined by Elastic Load Balancing.'
+    description: Contains the parameters for DescribeLoadBalancerPolicyTypes.
   DescribeAccessPointsOutput:
     type: object
     example:
@@ -1790,149 +1746,23 @@ definitions:
         $ref: '#/definitions/Marker'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
     description: Contains the parameters for DescribeLoadBalancers.
-  DescribeAccountLimitsInput:
+  DescribeAccessPointsInput:
     type: object
-    properties:
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The marker for the next set of results. (You received this marker from a previous call.)
-      PageSize:
-        $ref: '#/definitions/PageSize'
-        description: The maximum number of results to return with this call.
-  DescribeAccountLimitsOutput:
-    type: object
-    properties:
-      Limits:
-        $ref: '#/definitions/Limits'
-        description: Information about the limits.
-      NextMarker:
-        $ref: '#/definitions/Marker'
-        description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
-  DescribeEndPointStateInput:
-    type: object
-    required:
-      - LoadBalancerName
-    example:
-      LoadBalancerName: my-load-balancer
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/AccessPointName'
-        description: The name of the load balancer.
-      Instances:
-        $ref: '#/definitions/Instances'
-        description: The IDs of the instances.
-    description: Contains the parameters for DescribeInstanceHealth.
-  DescribeEndPointStateOutput:
-    type: object
-    example:
-      InstanceStates:
-        - Description: N/A
-          InstanceId: i-207d9717
-          ReasonCode: N/A
-          State: InService
-        - Description: N/A
-          InstanceId: i-afefb49b
-          ReasonCode: N/A
-          State: InService
-    properties:
-      InstanceStates:
-        $ref: '#/definitions/InstanceStates'
-        description: Information about the health of the instances.
-    description: Contains the output for DescribeInstanceHealth.
-  DescribeLoadBalancerAttributesInput:
-    type: object
-    required:
-      - LoadBalancerName
-    example:
-      LoadBalancerName: my-load-balancer
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/AccessPointName'
-        description: The name of the load balancer.
-    description: Contains the parameters for DescribeLoadBalancerAttributes.
-  DescribeLoadBalancerAttributesOutput:
-    type: object
-    example:
-      LoadBalancerAttributes:
-        AccessLog:
-          Enabled: false
-        ConnectionDraining:
-          Enabled: false
-          Timeout: 300
-        ConnectionSettings:
-          IdleTimeout: 60
-        CrossZoneLoadBalancing:
-          Enabled: false
-    properties:
-      LoadBalancerAttributes:
-        $ref: '#/definitions/LoadBalancerAttributes'
-        description: Information about the load balancer attributes.
-    description: Contains the output of DescribeLoadBalancerAttributes.
-  DescribeLoadBalancerPoliciesInput:
-    type: object
-    example:
-      LoadBalancerName: my-load-balancer
-      PolicyNames:
-        - my-authentication-policy
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/AccessPointName'
-        description: The name of the load balancer.
-      PolicyNames:
-        $ref: '#/definitions/PolicyNames'
-        description: The names of the policies.
-    description: Contains the parameters for DescribeLoadBalancerPolicies.
-  DescribeLoadBalancerPoliciesOutput:
-    type: object
-    example:
-      PolicyDescriptions:
-        - PolicyAttributeDescriptions:
-            - AttributeName: PublicKeyPolicyName
-              AttributeValue: my-PublicKey-policy
-          PolicyName: my-authentication-policy
-          PolicyTypeName: BackendServerAuthenticationPolicyType
-    properties:
-      PolicyDescriptions:
-        $ref: '#/definitions/PolicyDescriptions'
-        description: Information about the policies.
-    description: Contains the output of DescribeLoadBalancerPolicies.
-  DescribeLoadBalancerPolicyTypesInput:
-    type: object
-    example:
-      PolicyTypeNames:
-        - ProxyProtocolPolicyType
-    properties:
-      PolicyTypeNames:
-        $ref: '#/definitions/PolicyTypeNames'
-        description: 'The names of the policy types. If no names are specified, describes all policy types defined by Elastic Load Balancing.'
-    description: Contains the parameters for DescribeLoadBalancerPolicyTypes.
-  DescribeLoadBalancerPolicyTypesOutput:
-    type: object
-    example:
-      PolicyTypeDescriptions:
-        - Description: Policy that controls whether to include the IP address and port of the originating request for TCP messages. This policy operates on TCP listeners only.
-          PolicyAttributeTypeDescriptions:
-            - AttributeName: ProxyProtocol
-              AttributeType: Boolean
-              Cardinality: ONE
-          PolicyTypeName: ProxyProtocolPolicyType
-    properties:
-      PolicyTypeDescriptions:
-        $ref: '#/definitions/PolicyTypeDescriptions'
-        description: Information about the policy types.
-    description: Contains the output of DescribeLoadBalancerPolicyTypes.
-  DescribeTagsInput:
-    type: object
-    required:
-      - LoadBalancerNames
     example:
       LoadBalancerNames:
         - my-load-balancer
     properties:
       LoadBalancerNames:
-        $ref: '#/definitions/LoadBalancerNamesMax20'
+        $ref: '#/definitions/LoadBalancerNames'
         description: The names of the load balancers.
-    description: Contains the parameters for DescribeTags.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The marker for the next set of results. (You received this marker from a previous call.)
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of results to return with this call (a number from 1 to 400). The default is 400.
+    description: Contains the parameters for DescribeLoadBalancers.
+  DependencyThrottleException: {}
   DescribeTagsOutput:
     type: object
     example:
@@ -1948,8 +1778,28 @@ definitions:
         $ref: '#/definitions/TagDescriptions'
         description: Information about the tags.
     description: Contains the output for DescribeTags.
-  Description:
-    type: string
+  DescribeTagsInput:
+    type: object
+    required:
+      - LoadBalancerNames
+    example:
+      LoadBalancerNames:
+        - my-load-balancer
+    properties:
+      LoadBalancerNames:
+        $ref: '#/definitions/LoadBalancerNamesMax20'
+        description: The names of the load balancers.
+    description: Contains the parameters for DescribeTags.
+  DetachLoadBalancerFromSubnetsOutput:
+    type: object
+    example:
+      Subnets:
+        - subnet-15aaab61
+    properties:
+      Subnets:
+        $ref: '#/definitions/Subnets'
+        description: The IDs of the remaining subnets for the load balancer.
+    description: Contains the output of DetachLoadBalancerFromSubnets.
   DetachLoadBalancerFromSubnetsInput:
     type: object
     required:
@@ -1967,34 +1817,349 @@ definitions:
         $ref: '#/definitions/Subnets'
         description: The IDs of the subnets.
     description: Contains the parameters for DetachLoadBalancerFromSubnets.
-  DetachLoadBalancerFromSubnetsOutput:
+  RemoveAvailabilityZonesOutput:
     type: object
     example:
-      Subnets:
-        - subnet-15aaab61
+      AvailabilityZones:
+        - us-west-2b
     properties:
-      Subnets:
-        $ref: '#/definitions/Subnets'
-        description: The IDs of the remaining subnets for the load balancer.
-    description: Contains the output of DetachLoadBalancerFromSubnets.
-  DuplicateAccessPointNameException:
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZones'
+        description: The remaining Availability Zones for the load balancer.
+    description: Contains the output for DisableAvailabilityZonesForLoadBalancer.
+  RemoveAvailabilityZonesInput:
+    type: object
+    required:
+      - LoadBalancerName
+      - AvailabilityZones
+    example:
+      AvailabilityZones:
+        - us-west-2a
+      LoadBalancerName: my-load-balancer
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the load balancer.
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZones'
+        description: The Availability Zones.
+    description: Contains the parameters for DisableAvailabilityZonesForLoadBalancer.
+  AddAvailabilityZonesOutput:
+    type: object
+    example:
+      AvailabilityZones:
+        - us-west-2a
+        - us-west-2b
+    properties:
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZones'
+        description: The updated list of Availability Zones for the load balancer.
+    description: Contains the output of EnableAvailabilityZonesForLoadBalancer.
+  AddAvailabilityZonesInput:
+    type: object
+    required:
+      - LoadBalancerName
+      - AvailabilityZones
+    example:
+      AvailabilityZones:
+        - us-west-2b
+      LoadBalancerName: my-load-balancer
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the load balancer.
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZones'
+        description: The Availability Zones. These must be in the same region as the load balancer.
+    description: Contains the parameters for EnableAvailabilityZonesForLoadBalancer.
+  ModifyLoadBalancerAttributesOutput:
+    type: object
+    example:
+      LoadBalancerAttributes:
+        ConnectionDraining:
+          Enabled: true
+          Timeout: 300
+      LoadBalancerName: my-load-balancer
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the load balancer.
+      LoadBalancerAttributes:
+        $ref: '#/definitions/LoadBalancerAttributes'
+        description: Information about the load balancer attributes.
+    description: Contains the output of ModifyLoadBalancerAttributes.
+  ModifyLoadBalancerAttributesInput:
+    type: object
+    required:
+      - LoadBalancerName
+      - LoadBalancerAttributes
+    example:
+      LoadBalancerAttributes:
+        ConnectionDraining:
+          Enabled: true
+          Timeout: 300
+      LoadBalancerName: my-load-balancer
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the load balancer.
+      LoadBalancerAttributes:
+        $ref: '#/definitions/LoadBalancerAttributes'
+        description: The attributes for the load balancer.
+    description: Contains the parameters for ModifyLoadBalancerAttributes.
+  RegisterEndPointsOutput:
+    type: object
+    example:
+      Instances:
+        - InstanceId: i-d6f6fae3
+        - InstanceId: i-207d9717
+        - InstanceId: i-afefb49b
+    properties:
+      Instances:
+        $ref: '#/definitions/Instances'
+        description: The updated list of instances for the load balancer.
+    description: Contains the output of RegisterInstancesWithLoadBalancer.
+  RegisterEndPointsInput:
+    type: object
+    required:
+      - LoadBalancerName
+      - Instances
+    example:
+      Instances:
+        - InstanceId: i-d6f6fae3
+      LoadBalancerName: my-load-balancer
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the load balancer.
+      Instances:
+        $ref: '#/definitions/Instances'
+        description: The IDs of the instances.
+    description: Contains the parameters for RegisterInstancesWithLoadBalancer.
+  RemoveTagsOutput:
     type: object
     properties: {}
-    description: The specified load balancer name already exists for this account.
-  DuplicateListenerException:
+    description: Contains the output of RemoveTags.
+  RemoveTagsInput:
+    type: object
+    required:
+      - LoadBalancerNames
+      - Tags
+    example:
+      LoadBalancerNames:
+        - my-load-balancer
+      Tags:
+        - Key: project
+    properties:
+      LoadBalancerNames:
+        $ref: '#/definitions/LoadBalancerNames'
+        description: The name of the load balancer. You can specify a maximum of one load balancer name.
+      Tags:
+        $ref: '#/definitions/TagKeyList'
+        description: The list of tag keys to remove.
+    description: Contains the parameters for RemoveTags.
+  SetLoadBalancerListenerSSLCertificateOutput:
     type: object
     properties: {}
-    description: 'A listener already exists for the specified load balancer name and port, but with a different instance port, protocol, or SSL certificate.'
-  DuplicatePolicyNameException:
+    description: Contains the output of SetLoadBalancerListenerSSLCertificate.
+  SetLoadBalancerListenerSSLCertificateInput:
+    type: object
+    required:
+      - LoadBalancerName
+      - LoadBalancerPort
+      - SSLCertificateId
+    example:
+      LoadBalancerName: my-load-balancer
+      LoadBalancerPort: 443
+      SSLCertificateId: 'arn:aws:iam::123456789012:server-certificate/new-server-cert'
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the load balancer.
+      LoadBalancerPort:
+        $ref: '#/definitions/AccessPointPort'
+        description: The port that uses the specified SSL certificate.
+      SSLCertificateId:
+        $ref: '#/definitions/SSLCertificateId'
+        description: The Amazon Resource Name (ARN) of the SSL certificate.
+    description: Contains the parameters for SetLoadBalancerListenerSSLCertificate.
+  ListenerNotFoundException: {}
+  SetLoadBalancerPoliciesForBackendServerOutput:
     type: object
     properties: {}
-    description: A policy with the specified name already exists for this load balancer.
-  DuplicateTagKeysException:
+    description: Contains the output of SetLoadBalancerPoliciesForBackendServer.
+  SetLoadBalancerPoliciesForBackendServerInput:
+    type: object
+    required:
+      - LoadBalancerName
+      - InstancePort
+      - PolicyNames
+    example:
+      InstancePort: 80
+      LoadBalancerName: my-load-balancer
+      PolicyNames:
+        - my-ProxyProtocol-policy
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the load balancer.
+      InstancePort:
+        $ref: '#/definitions/EndPointPort'
+        description: The port number associated with the EC2 instance.
+      PolicyNames:
+        $ref: '#/definitions/PolicyNames'
+        description: 'The names of the policies. If the list is empty, then all current polices are removed from the EC2 instance.'
+    description: Contains the parameters for SetLoadBalancerPoliciesForBackendServer.
+  SetLoadBalancerPoliciesOfListenerOutput:
     type: object
     properties: {}
-    description: A tag key was specified more than once.
-  EndPointPort:
+    description: Contains the output of SetLoadBalancePoliciesOfListener.
+  SetLoadBalancerPoliciesOfListenerInput:
+    type: object
+    required:
+      - LoadBalancerName
+      - LoadBalancerPort
+      - PolicyNames
+    example:
+      LoadBalancerName: my-load-balancer
+      LoadBalancerPort: 80
+      PolicyNames:
+        - my-SSLNegotiation-policy
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the load balancer.
+      LoadBalancerPort:
+        $ref: '#/definitions/AccessPointPort'
+        description: The external port of the load balancer.
+      PolicyNames:
+        $ref: '#/definitions/PolicyNames'
+        description: 'The names of the policies. This list must include all policies to be enabled. If you omit a policy that is currently enabled, it is disabled. If the list is empty, all current policies are disabled.'
+    description: Contains the parameters for SetLoadBalancePoliciesOfListener.
+  AccessLogEnabled:
+    type: boolean
+  S3BucketName:
+    type: string
+  AccessLogInterval:
     type: integer
+  AccessLogPrefix:
+    type: string
+  AccessLog:
+    type: object
+    required:
+      - Enabled
+    properties:
+      Enabled:
+        $ref: '#/definitions/AccessLogEnabled'
+        description: Specifies whether access logs are enabled for the load balancer.
+      S3BucketName:
+        $ref: '#/definitions/S3BucketName'
+        description: The name of the Amazon S3 bucket where the access logs are stored.
+      EmitInterval:
+        $ref: '#/definitions/AccessLogInterval'
+        description: '<p>The interval for publishing the access logs. You can specify an interval of either 5 minutes or 60 minutes.</p> <p>Default: 60 minutes</p>'
+      S3BucketPrefix:
+        $ref: '#/definitions/AccessLogPrefix'
+        description: 'The logical hierarchy you created for your Amazon S3 bucket, for example <code>my-bucket-prefix/prod</code>. If the prefix is not provided, the log is placed at the root level of the bucket.'
+    description: Information about the <code>AccessLog</code> attribute.
+  AccessPointName:
+    type: string
+  AccessPointPort:
+    type: integer
+  AvailabilityZones:
+    type: array
+    items:
+      $ref: '#/definitions/AvailabilityZone'
+  LoadBalancerNames:
+    type: array
+    items:
+      $ref: '#/definitions/AccessPointName'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+  AdditionalAttributeKey:
+    type: string
+    pattern: '^[a-zA-Z0-9.]+$'
+    maxLength: 256
+  AdditionalAttributeValue:
+    type: string
+    pattern: '^[a-zA-Z0-9.]+$'
+    maxLength: 256
+  AdditionalAttribute:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/AdditionalAttributeKey'
+        description: This parameter is reserved.
+      Value:
+        $ref: '#/definitions/AdditionalAttributeValue'
+        description: This parameter is reserved.
+    description: This data type is reserved.
+  AdditionalAttributes:
+    type: array
+    items:
+      $ref: '#/definitions/AdditionalAttribute'
+    maxItems: 10
+  AppCookieStickinessPolicy:
+    type: object
+    properties:
+      PolicyName:
+        $ref: '#/definitions/PolicyName'
+        description: The mnemonic name for the policy being created. The name must be unique within a set of policies for this load balancer.
+      CookieName:
+        $ref: '#/definitions/CookieName'
+        description: The name of the application cookie used for stickiness.
+    description: Information about a policy for application-controlled session stickiness.
+  AppCookieStickinessPolicies:
+    type: array
+    items:
+      $ref: '#/definitions/AppCookieStickinessPolicy'
+  PolicyName:
+    type: string
+  CookieName:
+    type: string
+  SecurityGroups:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+  Subnets:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+  AttributeName:
+    type: string
+  AttributeType:
+    type: string
+  AttributeValue:
+    type: string
+  AvailabilityZone:
+    type: string
+  InstancePort:
+    type: integer
+    minimum: 1
+    maximum: 65535
+  PolicyNames:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyName'
+  BackendServerDescription:
+    type: object
+    properties:
+      InstancePort:
+        $ref: '#/definitions/InstancePort'
+        description: The port on which the EC2 instance is listening.
+      PolicyNames:
+        $ref: '#/definitions/PolicyNames'
+        description: The names of the policies enabled for the EC2 instance.
+    description: Information about the configuration of an EC2 instance.
+  BackendServerDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/BackendServerDescription'
+  Cardinality:
+    type: string
   HealthCheck:
     type: object
     required:
@@ -2020,24 +2185,158 @@ definitions:
         $ref: '#/definitions/HealthyThreshold'
         description: The number of consecutive health checks successes required before moving the instance to the <code>Healthy</code> state.
     description: Information about a health check.
-  HealthCheckInterval:
+  ConnectionDrainingEnabled:
+    type: boolean
+  ConnectionDrainingTimeout:
     type: integer
-    minimum: 5
-    maximum: 300
-  HealthCheckTarget:
-    type: string
-  HealthCheckTimeout:
-    type: integer
-    minimum: 2
-    maximum: 60
-  HealthyThreshold:
-    type: integer
-    minimum: 2
-    maximum: 10
+  ConnectionDraining:
+    type: object
+    required:
+      - Enabled
+    properties:
+      Enabled:
+        $ref: '#/definitions/ConnectionDrainingEnabled'
+        description: Specifies whether connection draining is enabled for the load balancer.
+      Timeout:
+        $ref: '#/definitions/ConnectionDrainingTimeout'
+        description: 'The maximum time, in seconds, to keep the existing connections open before deregistering the instances.'
+    description: Information about the <code>ConnectionDraining</code> attribute.
   IdleTimeout:
     type: integer
     minimum: 1
     maximum: 3600
+  ConnectionSettings:
+    type: object
+    required:
+      - IdleTimeout
+    properties:
+      IdleTimeout:
+        $ref: '#/definitions/IdleTimeout'
+        description: 'The time, in seconds, that the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer.'
+    description: Information about the <code>ConnectionSettings</code> attribute.
+  CookieExpirationPeriod:
+    type: integer
+  Listeners:
+    type: array
+    items:
+      $ref: '#/definitions/Listener'
+  LoadBalancerScheme:
+    type: string
+  DNSName:
+    type: string
+  PolicyTypeName:
+    type: string
+  PolicyAttributes:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyAttribute'
+  CreatedTime:
+    type: string
+    format: date-time
+  CrossZoneLoadBalancingEnabled:
+    type: boolean
+  CrossZoneLoadBalancing:
+    type: object
+    required:
+      - Enabled
+    properties:
+      Enabled:
+        $ref: '#/definitions/CrossZoneLoadBalancingEnabled'
+        description: Specifies whether cross-zone load balancing is enabled for the load balancer.
+    description: Information about the <code>CrossZoneLoadBalancing</code> attribute.
+  DefaultValue:
+    type: string
+  Ports:
+    type: array
+    items:
+      $ref: '#/definitions/AccessPointPort'
+  Instances:
+    type: array
+    items:
+      $ref: '#/definitions/Instance'
+  Marker:
+    type: string
+  PageSize:
+    type: integer
+    minimum: 1
+    maximum: 400
+  LoadBalancerDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerDescription'
+  Limits:
+    type: array
+    items:
+      $ref: '#/definitions/Limit'
+  InstanceStates:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceState'
+  LoadBalancerAttributes:
+    type: object
+    properties:
+      CrossZoneLoadBalancing:
+        $ref: '#/definitions/CrossZoneLoadBalancing'
+        description: '<p>If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html">Configure Cross-Zone Load Balancing</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+      AccessLog:
+        $ref: '#/definitions/AccessLog'
+        description: '<p>If enabled, the load balancer captures detailed information of all requests and delivers the information to the Amazon S3 bucket that you specify.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html">Enable Access Logs</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+      ConnectionDraining:
+        $ref: '#/definitions/ConnectionDraining'
+        description: '<p>If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html">Configure Connection Draining</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+      ConnectionSettings:
+        $ref: '#/definitions/ConnectionSettings'
+        description: '<p>If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration.</p> <p>By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html">Configure Idle Connection Timeout</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+      AdditionalAttributes:
+        $ref: '#/definitions/AdditionalAttributes'
+        description: This parameter is reserved.
+    description: The attributes for a load balancer.
+  PolicyDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyDescription'
+  PolicyTypeNames:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyTypeName'
+  PolicyTypeDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyTypeDescription'
+  LoadBalancerNamesMax20:
+    type: array
+    items:
+      $ref: '#/definitions/AccessPointName'
+    minItems: 1
+    maxItems: 20
+  TagDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/TagDescription'
+  Description:
+    type: string
+  EndPointPort:
+    type: integer
+  HealthCheckTarget:
+    type: string
+  HealthCheckInterval:
+    type: integer
+    minimum: 5
+    maximum: 300
+  HealthCheckTimeout:
+    type: integer
+    minimum: 2
+    maximum: 60
+  UnhealthyThreshold:
+    type: integer
+    minimum: 2
+    maximum: 10
+  HealthyThreshold:
+    type: integer
+    minimum: 2
+    maximum: 10
+  InstanceId:
+    type: string
   Instance:
     type: object
     properties:
@@ -2045,12 +2344,10 @@ definitions:
         $ref: '#/definitions/InstanceId'
         description: The instance ID.
     description: The ID of an EC2 instance.
-  InstanceId:
+  State:
     type: string
-  InstancePort:
-    type: integer
-    minimum: 1
-    maximum: 65535
+  ReasonCode:
+    type: string
   InstanceState:
     type: object
     properties:
@@ -2067,38 +2364,6 @@ definitions:
         $ref: '#/definitions/Description'
         description: <p>A description of the instance state. This string can contain one or more of the following messages.</p> <ul> <li> <p> <code>N/A</code> </p> </li> <li> <p> <code>A transient error occurred. Please try again later.</code> </p> </li> <li> <p> <code>Instance has failed at least the UnhealthyThreshold number of health checks consecutively.</code> </p> </li> <li> <p> <code>Instance has not passed the configured HealthyThreshold number of health checks consecutively.</code> </p> </li> <li> <p> <code>Instance registration is still in progress.</code> </p> </li> <li> <p> <code>Instance is in the EC2 Availability Zone for which LoadBalancer is not configured to route traffic to.</code> </p> </li> <li> <p> <code>Instance is not currently registered with the LoadBalancer.</code> </p> </li> <li> <p> <code>Instance deregistration currently in progress.</code> </p> </li> <li> <p> <code>Disable Availability Zone is currently in progress.</code> </p> </li> <li> <p> <code>Instance is in pending state.</code> </p> </li> <li> <p> <code>Instance is in stopped state.</code> </p> </li> <li> <p> <code>Instance is in terminated state.</code> </p> </li> </ul>
     description: Information about the state of an EC2 instance.
-  InstanceStates:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceState'
-  Instances:
-    type: array
-    items:
-      $ref: '#/definitions/Instance'
-  InvalidConfigurationRequestException:
-    type: object
-    properties: {}
-    description: The requested configuration change is not valid.
-  InvalidEndPointException:
-    type: object
-    properties: {}
-    description: The specified endpoint is not valid.
-  InvalidSchemeException:
-    type: object
-    properties: {}
-    description: The specified value for the schema is not valid. You can only specify a scheme for load balancers in a VPC.
-  InvalidSecurityGroupException:
-    type: object
-    properties: {}
-    description: One or more of the specified security groups do not exist.
-  InvalidSubnetException:
-    type: object
-    properties: {}
-    description: The specified VPC has no associated Internet gateway.
-  LBCookieStickinessPolicies:
-    type: array
-    items:
-      $ref: '#/definitions/LBCookieStickinessPolicy'
   LBCookieStickinessPolicy:
     type: object
     properties:
@@ -2109,20 +2374,28 @@ definitions:
         $ref: '#/definitions/CookieExpirationPeriod'
         description: 'The time period, in seconds, after which the cookie should be considered stale. If this parameter is not specified, the stickiness session lasts for the duration of the browser session.'
     description: Information about a policy for duration-based session stickiness.
+  LBCookieStickinessPolicies:
+    type: array
+    items:
+      $ref: '#/definitions/LBCookieStickinessPolicy'
+  Name:
+    type: string
+  Max:
+    type: string
   Limit:
     type: object
     properties:
       Name:
         $ref: '#/definitions/Name'
-        description: '<p>The name of the limit. The possible values are:</p> <ul> <li> <p>classic-listeners</p> </li> <li> <p>classic-load-balancers</p> </li> </ul>'
+        description: '<p>The name of the limit. The possible values are:</p> <ul> <li> <p>classic-listeners</p> </li> <li> <p>classic-load-balancers</p> </li> <li> <p>classic-registered-instances</p> </li> </ul>'
       Max:
         $ref: '#/definitions/Max'
         description: The maximum value of the limit.
     description: Information about an Elastic Load Balancing resource limit for your AWS account.
-  Limits:
-    type: array
-    items:
-      $ref: '#/definitions/Limit'
+  Protocol:
+    type: string
+  SSLCertificateId:
+    type: string
   Listener:
     type: object
     required:
@@ -2145,7 +2418,7 @@ definitions:
       SSLCertificateId:
         $ref: '#/definitions/SSLCertificateId'
         description: The Amazon Resource Name (ARN) of the server certificate.
-    description: '<p>Information about a listener.</p> <p>For information about the protocols and the ports supported by Elastic Load Balancing, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html">Listeners for Your Classic Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+    description: '<p>Information about a listener.</p> <p>For information about the protocols and the ports supported by Elastic Load Balancing, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html">Listeners for Your Classic Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
   ListenerDescription:
     type: object
     properties:
@@ -2160,37 +2433,31 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ListenerDescription'
-  ListenerNotFoundException:
-    type: object
-    properties: {}
-    description: The load balancer does not have a listener configured at the specified port.
-  Listeners:
-    type: array
-    items:
-      $ref: '#/definitions/Listener'
-  LoadBalancerAttributeNotFoundException:
-    type: object
-    properties: {}
-    description: The specified load balancer attribute does not exist.
-  LoadBalancerAttributes:
+  Policies:
     type: object
     properties:
-      CrossZoneLoadBalancing:
-        $ref: '#/definitions/CrossZoneLoadBalancing'
-        description: '<p>If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html">Configure Cross-Zone Load Balancing</a> in the <i>Classic Load Balancer Guide</i>.</p>'
-      AccessLog:
-        $ref: '#/definitions/AccessLog'
-        description: '<p>If enabled, the load balancer captures detailed information of all requests and delivers the information to the Amazon S3 bucket that you specify.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html">Enable Access Logs</a> in the <i>Classic Load Balancer Guide</i>.</p>'
-      ConnectionDraining:
-        $ref: '#/definitions/ConnectionDraining'
-        description: '<p>If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html">Configure Connection Draining</a> in the <i>Classic Load Balancer Guide</i>.</p>'
-      ConnectionSettings:
-        $ref: '#/definitions/ConnectionSettings'
-        description: '<p>If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration.</p> <p>By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html">Configure Idle Connection Timeout</a> in the <i>Classic Load Balancer Guide</i>.</p>'
-      AdditionalAttributes:
-        $ref: '#/definitions/AdditionalAttributes'
-        description: This parameter is reserved.
-    description: The attributes for a load balancer.
+      AppCookieStickinessPolicies:
+        $ref: '#/definitions/AppCookieStickinessPolicies'
+        description: The stickiness policies created using <a>CreateAppCookieStickinessPolicy</a>.
+      LBCookieStickinessPolicies:
+        $ref: '#/definitions/LBCookieStickinessPolicies'
+        description: The stickiness policies created using <a>CreateLBCookieStickinessPolicy</a>.
+      OtherPolicies:
+        $ref: '#/definitions/PolicyNames'
+        description: The policies other than the stickiness policies.
+    description: The policies for a load balancer.
+  VPCId:
+    type: string
+  SourceSecurityGroup:
+    type: object
+    properties:
+      OwnerAlias:
+        $ref: '#/definitions/SecurityGroupOwnerAlias'
+        description: The owner of the security group.
+      GroupName:
+        $ref: '#/definitions/SecurityGroupName'
+        description: The name of the security group.
+    description: Information about a source security group.
   LoadBalancerDescription:
     type: object
     properties:
@@ -2202,7 +2469,7 @@ definitions:
         description: The DNS name of the load balancer.
       CanonicalHostedZoneName:
         $ref: '#/definitions/DNSName'
-        description: '<p>The DNS name of the load balancer.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html">Configure a Custom Domain Name</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+        description: '<p>The DNS name of the load balancer.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html">Configure a Custom Domain Name</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       CanonicalHostedZoneNameID:
         $ref: '#/definitions/DNSName'
         description: The ID of the Amazon Route 53 hosted zone for the load balancer.
@@ -2243,84 +2510,6 @@ definitions:
         $ref: '#/definitions/LoadBalancerScheme'
         description: '<p>The type of load balancer. Valid only for load balancers in a VPC.</p> <p>If <code>Scheme</code> is <code>internet-facing</code>, the load balancer has a public DNS name that resolves to a public IP address.</p> <p>If <code>Scheme</code> is <code>internal</code>, the load balancer has a public DNS name that resolves to a private IP address.</p>'
     description: Information about a load balancer.
-  LoadBalancerDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerDescription'
-  LoadBalancerNames:
-    type: array
-    items:
-      $ref: '#/definitions/AccessPointName'
-  LoadBalancerNamesMax20:
-    type: array
-    items:
-      $ref: '#/definitions/AccessPointName'
-    minItems: 1
-    maxItems: 20
-  LoadBalancerScheme:
-    type: string
-  Marker:
-    type: string
-  Max:
-    type: string
-  ModifyLoadBalancerAttributesInput:
-    type: object
-    required:
-      - LoadBalancerName
-      - LoadBalancerAttributes
-    example:
-      LoadBalancerAttributes:
-        ConnectionDraining:
-          Enabled: true
-          Timeout: 300
-      LoadBalancerName: my-load-balancer
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/AccessPointName'
-        description: The name of the load balancer.
-      LoadBalancerAttributes:
-        $ref: '#/definitions/LoadBalancerAttributes'
-        description: The attributes for the load balancer.
-    description: Contains the parameters for ModifyLoadBalancerAttributes.
-  ModifyLoadBalancerAttributesOutput:
-    type: object
-    example:
-      LoadBalancerAttributes:
-        ConnectionDraining:
-          Enabled: true
-          Timeout: 300
-      LoadBalancerName: my-load-balancer
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/AccessPointName'
-        description: The name of the load balancer.
-      LoadBalancerAttributes:
-        $ref: '#/definitions/LoadBalancerAttributes'
-        description: Information about the load balancer attributes.
-    description: Contains the output of ModifyLoadBalancerAttributes.
-  Name:
-    type: string
-  OperationNotPermittedException:
-    type: object
-    properties: {}
-    description: This operation is not allowed.
-  PageSize:
-    type: integer
-    minimum: 1
-    maximum: 400
-  Policies:
-    type: object
-    properties:
-      AppCookieStickinessPolicies:
-        $ref: '#/definitions/AppCookieStickinessPolicies'
-        description: The stickiness policies created using <a>CreateAppCookieStickinessPolicy</a>.
-      LBCookieStickinessPolicies:
-        $ref: '#/definitions/LBCookieStickinessPolicies'
-        description: The stickiness policies created using <a>CreateLBCookieStickinessPolicy</a>.
-      OtherPolicies:
-        $ref: '#/definitions/PolicyNames'
-        description: The policies other than the stickiness policies.
-    description: The policies for a load balancer.
   PolicyAttribute:
     type: object
     properties:
@@ -2368,10 +2557,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PolicyAttributeTypeDescription'
-  PolicyAttributes:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyAttribute'
   PolicyDescription:
     type: object
     properties:
@@ -2385,20 +2570,6 @@ definitions:
         $ref: '#/definitions/PolicyAttributeDescriptions'
         description: The policy attributes.
     description: Information about a policy.
-  PolicyDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyDescription'
-  PolicyName:
-    type: string
-  PolicyNames:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyName'
-  PolicyNotFoundException:
-    type: object
-    properties: {}
-    description: One or more of the specified policies do not exist.
   PolicyTypeDescription:
     type: object
     properties:
@@ -2412,219 +2583,29 @@ definitions:
         $ref: '#/definitions/PolicyAttributeTypeDescriptions'
         description: The description of the policy attributes associated with the policies defined by Elastic Load Balancing.
     description: Information about a policy type.
-  PolicyTypeDescriptions:
+  TagKeyList:
     type: array
     items:
-      $ref: '#/definitions/PolicyTypeDescription'
-  PolicyTypeName:
-    type: string
-  PolicyTypeNames:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyTypeName'
-  PolicyTypeNotFoundException:
-    type: object
-    properties: {}
-    description: One or more of the specified policy types do not exist.
-  Ports:
-    type: array
-    items:
-      $ref: '#/definitions/AccessPointPort'
-  Protocol:
-    type: string
-  ReasonCode:
-    type: string
-  RegisterEndPointsInput:
-    type: object
-    required:
-      - LoadBalancerName
-      - Instances
-    example:
-      Instances:
-        - InstanceId: i-d6f6fae3
-      LoadBalancerName: my-load-balancer
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/AccessPointName'
-        description: The name of the load balancer.
-      Instances:
-        $ref: '#/definitions/Instances'
-        description: The IDs of the instances.
-    description: Contains the parameters for RegisterInstancesWithLoadBalancer.
-  RegisterEndPointsOutput:
-    type: object
-    example:
-      Instances:
-        - InstanceId: i-d6f6fae3
-        - InstanceId: i-207d9717
-        - InstanceId: i-afefb49b
-    properties:
-      Instances:
-        $ref: '#/definitions/Instances'
-        description: The updated list of instances for the load balancer.
-    description: Contains the output of RegisterInstancesWithLoadBalancer.
-  RemoveAvailabilityZonesInput:
-    type: object
-    required:
-      - LoadBalancerName
-      - AvailabilityZones
-    example:
-      AvailabilityZones:
-        - us-west-2a
-      LoadBalancerName: my-load-balancer
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/AccessPointName'
-        description: The name of the load balancer.
-      AvailabilityZones:
-        $ref: '#/definitions/AvailabilityZones'
-        description: The Availability Zones.
-    description: Contains the parameters for DisableAvailabilityZonesForLoadBalancer.
-  RemoveAvailabilityZonesOutput:
-    type: object
-    example:
-      AvailabilityZones:
-        - us-west-2b
-    properties:
-      AvailabilityZones:
-        $ref: '#/definitions/AvailabilityZones'
-        description: The remaining Availability Zones for the load balancer.
-    description: Contains the output for DisableAvailabilityZonesForLoadBalancer.
-  RemoveTagsInput:
-    type: object
-    required:
-      - LoadBalancerNames
-      - Tags
-    example:
-      LoadBalancerNames:
-        - my-load-balancer
-      Tags:
-        - Key: project
-    properties:
-      LoadBalancerNames:
-        $ref: '#/definitions/LoadBalancerNames'
-        description: The name of the load balancer. You can specify a maximum of one load balancer name.
-      Tags:
-        $ref: '#/definitions/TagKeyList'
-        description: The list of tag keys to remove.
-    description: Contains the parameters for RemoveTags.
-  RemoveTagsOutput:
-    type: object
-    properties: {}
-    description: Contains the output of RemoveTags.
-  S3BucketName:
-    type: string
-  SSLCertificateId:
-    type: string
+      $ref: '#/definitions/TagKeyOnly'
+    minItems: 1
   SecurityGroupId:
     type: string
   SecurityGroupName:
     type: string
   SecurityGroupOwnerAlias:
     type: string
-  SecurityGroups:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityGroupId'
-  SetLoadBalancerListenerSSLCertificateInput:
-    type: object
-    required:
-      - LoadBalancerName
-      - LoadBalancerPort
-      - SSLCertificateId
-    example:
-      LoadBalancerName: my-load-balancer
-      LoadBalancerPort: 443
-      SSLCertificateId: 'arn:aws:iam::123456789012:server-certificate/new-server-cert'
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/AccessPointName'
-        description: The name of the load balancer.
-      LoadBalancerPort:
-        $ref: '#/definitions/AccessPointPort'
-        description: The port that uses the specified SSL certificate.
-      SSLCertificateId:
-        $ref: '#/definitions/SSLCertificateId'
-        description: The Amazon Resource Name (ARN) of the SSL certificate.
-    description: Contains the parameters for SetLoadBalancerListenerSSLCertificate.
-  SetLoadBalancerListenerSSLCertificateOutput:
-    type: object
-    properties: {}
-    description: Contains the output of SetLoadBalancerListenerSSLCertificate.
-  SetLoadBalancerPoliciesForBackendServerInput:
-    type: object
-    required:
-      - LoadBalancerName
-      - InstancePort
-      - PolicyNames
-    example:
-      InstancePort: 80
-      LoadBalancerName: my-load-balancer
-      PolicyNames:
-        - my-ProxyProtocol-policy
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/AccessPointName'
-        description: The name of the load balancer.
-      InstancePort:
-        $ref: '#/definitions/EndPointPort'
-        description: The port number associated with the EC2 instance.
-      PolicyNames:
-        $ref: '#/definitions/PolicyNames'
-        description: 'The names of the policies. If the list is empty, then all current polices are removed from the EC2 instance.'
-    description: Contains the parameters for SetLoadBalancerPoliciesForBackendServer.
-  SetLoadBalancerPoliciesForBackendServerOutput:
-    type: object
-    properties: {}
-    description: Contains the output of SetLoadBalancerPoliciesForBackendServer.
-  SetLoadBalancerPoliciesOfListenerInput:
-    type: object
-    required:
-      - LoadBalancerName
-      - LoadBalancerPort
-      - PolicyNames
-    example:
-      LoadBalancerName: my-load-balancer
-      LoadBalancerPort: 80
-      PolicyNames:
-        - my-SSLNegotiation-policy
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/AccessPointName'
-        description: The name of the load balancer.
-      LoadBalancerPort:
-        $ref: '#/definitions/AccessPointPort'
-        description: The external port of the load balancer.
-      PolicyNames:
-        $ref: '#/definitions/PolicyNames'
-        description: 'The names of the policies. This list must include all policies to be enabled. If you omit a policy that is currently enabled, it is disabled. If the list is empty, all current policies are disabled.'
-    description: Contains the parameters for SetLoadBalancePoliciesOfListener.
-  SetLoadBalancerPoliciesOfListenerOutput:
-    type: object
-    properties: {}
-    description: Contains the output of SetLoadBalancePoliciesOfListener.
-  SourceSecurityGroup:
-    type: object
-    properties:
-      OwnerAlias:
-        $ref: '#/definitions/SecurityGroupOwnerAlias'
-        description: The owner of the security group.
-      GroupName:
-        $ref: '#/definitions/SecurityGroupName'
-        description: The name of the security group.
-    description: Information about a source security group.
-  State:
-    type: string
   SubnetId:
     type: string
-  SubnetNotFoundException:
-    type: object
-    properties: {}
-    description: One or more of the specified subnets do not exist.
-  Subnets:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetId'
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -2647,20 +2628,6 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tags.
     description: The tags associated with a load balancer.
-  TagDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/TagDescription'
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKeyOnly'
-    minItems: 1
   TagKeyOnly:
     type: object
     properties:
@@ -2668,35 +2635,3 @@ definitions:
         $ref: '#/definitions/TagKey'
         description: The name of the key.
     description: The key of a tag.
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  TooManyAccessPointsException:
-    type: object
-    properties: {}
-    description: The quota for the number of load balancers has been reached.
-  TooManyPoliciesException:
-    type: object
-    properties: {}
-    description: The quota for the number of policies for this load balancer has been reached.
-  TooManyTagsException:
-    type: object
-    properties: {}
-    description: The quota for the number of tags that can be assigned to a load balancer has been reached.
-  UnhealthyThreshold:
-    type: integer
-    minimum: 2
-    maximum: 10
-  UnsupportedProtocolException:
-    type: object
-    properties: {}
-    description: The specified protocol or signature version is not supported.
-  VPCId:
-    type: string

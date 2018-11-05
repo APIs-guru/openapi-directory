@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/androidenterprise/v1/rest'
       version: v1
@@ -65,12 +65,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -119,29 +119,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-    post:
-      description: Establishes the binding between the EMM and an enterprise. This is now deprecated; use enroll instead.
-      operationId: androidenterprise.enterprises.insert
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Enterprise'
-        - description: The token provided by the enterprise to register the EMM.
-          in: query
-          name: token
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Enterprise'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - enterprises
   /enterprises/acknowledgeNotificationSet:
     parameters:
       - $ref: '#/parameters/alt'
@@ -299,23 +276,6 @@ paths:
       tags:
         - enterprises
   '/enterprises/{enterpriseId}':
-    delete:
-      description: 'Deletes the binding between the EMM and enterprise. This is now deprecated. Use this method only to unenroll customers that were previously enrolled with the insert call, then enroll them again with the enroll call.'
-      operationId: androidenterprise.enterprises.delete
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - enterprises
     get:
       description: Retrieves the name and domain of an enterprise.
       operationId: androidenterprise.enterprises.get
@@ -377,7 +337,7 @@ paths:
         - enterprises
   '/enterprises/{enterpriseId}/androidDevicePolicyConfig':
     get:
-      description: Returns the Android Device Policy config resource.
+      description: Deprecated and unused.
       operationId: androidenterprise.enterprises.getAndroidDevicePolicyConfig
       parameters:
         - description: The ID of the enterprise.
@@ -404,7 +364,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     put:
-      description: 'Sets the Android Device Policy config resource. EMM may use this method to enable or disable Android Device Policy support for the specified enterprise. To learn more about managing devices and apps with Android Device Policy, see the Android Management API.'
+      description: Deprecated and unused.
       operationId: androidenterprise.enterprises.setAndroidDevicePolicyConfig
       parameters:
         - in: body
@@ -2805,14 +2765,14 @@ definitions:
         type: array
     type: object
   AndroidDevicePolicyConfig:
-    description: The Android Device Policy configuration of an enterprise.
+    description: Deprecated and unused.
     properties:
       kind:
         default: 'androidenterprise#androidDevicePolicyConfig'
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#androidDevicePolicyConfig".'
         type: string
       state:
-        description: 'The state of Android Device Policy. "enabled" indicates that Android Device Policy is enabled for the enterprise and the EMM is allowed to manage devices with Android Device Policy, while "disabled" means that it cannot.'
+        description: Deprecated and unused.
         type: string
     type: object
   AppRestrictionsSchema:
@@ -3215,6 +3175,18 @@ definitions:
         description: The text localized in the associated locale.
         type: string
     type: object
+  MaintenanceWindow:
+    description: Maintenance window for managed Google Play Accounts. This allows Play store to update the apps on the foreground in the designated window.
+    properties:
+      durationMs:
+        description: 'Duration of the maintenance window, in milliseconds. The duration must be between 30 minutes and 24 hours (inclusive).'
+        format: int64
+        type: string
+      startTimeAfterMidnightMs:
+        description: 'Start time of the maintenance window, in milliseconds after midnight on the device. Windows can span midnight.'
+        format: int64
+        type: string
+    type: object
   ManagedConfiguration:
     description: 'A managed configuration resource contains the set of managed properties defined by the app developer in the app''s managed configurations schema, as well as any configuration variables defined for the user.'
     properties:
@@ -3459,8 +3431,14 @@ definitions:
   Policy:
     description: The device policy for a given managed device.
     properties:
+      autoUpdatePolicy:
+        description: The auto-update policy for apps installed on the device. "choiceToTheUser" allows the device's user to configure the app update policy. "always" enables auto updates. "never" disables auto updates. "wifiOnly" enables auto updates only when the device is connected to wifi.
+        type: string
+      maintenanceWindow:
+        $ref: '#/definitions/MaintenanceWindow'
+        description: The maintenance window defining when apps running in the foreground should be updated.
       productAvailabilityPolicy:
-        description: 'The availability granted to the device for the specified products. "all" gives the device access to all products, regardless of approval status. "allApproved" entitles the device to access all products that are approved for the enterprise. "allApproved" and "all" do not enable automatic visibility of "alpha" or "beta" tracks. "whitelist" grants the device access the products specified in productPolicy[]. Only products that are approved or products that were previously approved (products with revoked approval) by the enterprise can be whitelisted. If no value is provided, the availability set at the user level is applied by default.'
+        description: 'The availability granted to the device for the specified products. "all" gives the device access to all products, regardless of approval status. "all" does not enable automatic visibility of "alpha" or "beta" tracks. "whitelist" grants the device access the products specified in productPolicy[]. Only products that are approved or products that were previously approved (products with revoked approval) by the enterprise can be whitelisted. If no value is provided, the availability set at the user level is applied by default.'
         type: string
       productPolicy:
         description: The list of product policies.

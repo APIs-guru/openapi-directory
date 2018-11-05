@@ -1,0 +1,652 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.n-auth.com
+basePath: /n
+info:
+  contact:
+    x-twitter: nauthsec
+  description: API for the server
+  title: n-Auth
+  version: 0.0.3
+  x-apisguru-categories:
+    - security
+  x-logo:
+    url: 'https://twitter.com/nauthsec/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://www.n-auth.com/api/api/swagger.json'
+      version: '2.0'
+  x-providerName: n-auth.com
+produces:
+  - application/json
+securityDefinitions:
+  api_key:
+    in: header
+    name: x-apikey
+    type: apiKey
+paths:
+  /nauth:
+    post:
+      consumes:
+        - application/octet-stream
+      description: |
+        Hook for the n-Auth protocol handler
+      parameters:
+        - description: n-Auth protocol message
+          in: body
+          name: msg
+          required: true
+          schema:
+            format: byte
+            type: string
+      produces:
+        - application/octet-stream
+      responses:
+        '200':
+          description: n-Auth protocol reply (raw bytes)
+          schema:
+            format: byte
+            type: string
+      summary: n-Auth protocol
+      tags:
+        - n-Auth Protocol
+  /servers/:
+    post:
+      consumes:
+        - application/octet-stream
+      description: Create a new server. Required permission 'createserver'
+      parameters:
+        - description: Name for the server
+          in: query
+          name: servername
+          required: true
+          type: string
+        - description: Owner id
+          in: query
+          name: owner
+          required: true
+          type: integer
+        - description: PIN protection enabled
+          in: query
+          name: pinEnabled
+          required: false
+          type: boolean
+        - description: Base64 encoded server logo
+          in: body
+          name: logo
+          required: true
+          schema:
+            type: string
+      produces:
+        - application/octet-stream
+      responses:
+        '200':
+          description: true if the server was created
+          schema:
+            $ref: '#/definitions/Status'
+      security:
+        - api_key: []
+      summary: Create a new server
+      tags:
+        - Servers
+  '/servers/{server}':
+    get:
+      description: |
+        Returns the configuration of a specific server.
+        Required permission: 'servers' or 'createserver' 
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Server config
+          schema:
+            $ref: '#/definitions/Config'
+      security:
+        - api_key: []
+      summary: Configuration of specific server
+      tags:
+        - Servers
+    put:
+      consumes:
+        - application/octet-stream
+      description: |
+        Update the configuration of a specific server.
+        Required permission: 'createserver' 
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+        - description: server name
+          in: query
+          name: serverName
+          required: false
+          type: string
+        - description: Base64 encoded server logo
+          in: body
+          name: logo
+          required: false
+          schema:
+            type: string
+        - description: 'time (minutes) since the last time the user entered his PIN, that the user is not requested a PIN at login.'
+          in: query
+          name: pinTimeout
+          required: false
+          type: integer
+        - description: 'time (minutes) since the last time the user entered his PIN, that the user is not requested a PIN at transaction approval.'
+          in: query
+          name: pinTransTimeout
+          required: false
+          type: integer
+        - description: time (seconds) that the n-Auth app has to reply to a ping request from the n-Auth server (continious authentication).
+          in: query
+          name: pingTime
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: server flags
+          in: query
+          items:
+            type: string
+          name: serverFlags
+          required: false
+          type: array
+      responses:
+        '200':
+          description: Server config
+          schema:
+            $ref: '#/definitions/Config'
+      security:
+        - api_key: []
+      summary: Update configuration of specific server
+      tags:
+        - Servers
+  '/servers/{server}/accounts/{accountid}/':
+    delete:
+      description: |
+        Delete an account. Required permission 'accounts'
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+        - description: Accountid
+          in: path
+          name: accountid
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: On successful delete
+        '404':
+          description: Account not found
+      security:
+        - api_key: []
+      summary: Delete specific account
+      tags:
+        - Users
+    get:
+      description: |
+        Returns the account
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+        - description: Accountid
+          in: path
+          name: accountid
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Account
+          schema:
+            $ref: '#/definitions/Account'
+      security:
+        - api_key: []
+      summary: Get specific account. Required permission 'sessions' or 'accounts'
+      tags:
+        - Users
+    put:
+      description: |
+        Update an account. The only available change is (un)blocking the account. Required permission 'accounts'
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+        - description: Accountid
+          in: path
+          name: accountid
+          required: true
+          type: integer
+        - description: True if the account is blocked
+          in: query
+          name: blocked
+          required: true
+          type: boolean
+      responses:
+        '200':
+          description: Account after update
+          schema:
+            $ref: '#/definitions/Account'
+      security:
+        - api_key: []
+      summary: Update specific account
+      tags:
+        - Users
+  '/servers/{server}/accounts/{accountid}/provokelogin/{nonce}/':
+    post:
+      description: Provoke a login in the n-Auth app on the given session. Required permission 'sessions' or 'accounts'
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+        - description: Base64 encoded nonce to identify the browser/webserver session
+          in: path
+          name: nonce
+          required: true
+          type: string
+        - description: Accountid
+          in: path
+          name: accountid
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: ok or fail
+          schema:
+            $ref: '#/definitions/Status'
+      security:
+        - api_key: []
+      summary: Provoke a login
+      tags:
+        - Basic Login/logout
+  '/servers/{server}/sessions/{nonce}/':
+    get:
+      description: |
+        Based on the browser/webserver session identifier, check if the user is logged in and return the associated username. The n-Auth server can handle multiple realms in which a user can separately be registrated. This also returns additional information: the data for a login visual (qr/nauth) code and whether or not a loggin can be provoked directly from the server. 
+        Required permission: 'sessions'
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+        - description: Base64 encoded nonce to identify the browser/webserver session
+          in: path
+          name: nonce
+          required: true
+          type: string
+        - description: Realm for the user registeration.
+          in: query
+          name: realm
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Current login status.
+          schema:
+            $ref: '#/definitions/LoginStatus'
+      security:
+        - api_key: []
+      summary: Check if the user is logged in
+      tags:
+        - Basic Login/logout
+  '/servers/{server}/sessions/{nonce}/logout':
+    post:
+      description: |
+        Force a logout on the given session
+
+        Required permission: 'sessions' 
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+        - description: Base64 encoded nonce to identify the browser/webserver session
+          in: path
+          name: nonce
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ok or fail
+          schema:
+            $ref: '#/definitions/Status'
+      security:
+        - api_key: []
+      summary: Force a logout on the given session
+      tags:
+        - Basic Login/logout
+  '/servers/{server}/sessions/{nonce}/provokelogin':
+    post:
+      description: |
+        Provoke a login in the n-Auth app on the given session. Required permission: 'sessions'
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+        - description: Base64 encoded nonce to identify the browser/webserver session
+          in: path
+          name: nonce
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ok or fail
+          schema:
+            $ref: '#/definitions/Status'
+      security:
+        - api_key: []
+      summary: Provoke a login
+      tags:
+        - Basic Login/logout
+  '/servers/{server}/sessions/{nonce}/qr':
+    get:
+      description: |
+        Returns the data for a n-auth or qr code.
+        Required permission: 'sessions'
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+        - description: ENROL or LOGIN
+          in: query
+          name: type
+          required: true
+          type: string
+        - description: Base64 encoded nonce to identify the browser/webserver session
+          in: path
+          name: nonce
+          required: true
+          type: string
+        - description: 'Type of image to show (currently ''nauth'' and ''qr'' are supported, format is PNG). If not set, the raw data encoded in the image will be returned.'
+          in: query
+          name: img
+          required: false
+          type: string
+        - description: 'Only for ENROL, name to forward to the n-Auth app for this account.'
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: 'Only for ENROL, userid to register this user under.'
+          in: query
+          name: userid
+          required: false
+          type: string
+        - description: 'Only for ENROL (and if userid is set), realm of the userid'
+          in: query
+          name: realm
+          required: false
+          type: string
+      produces:
+        - application/octet-stream
+      responses:
+        '200':
+          description: Raw byte array containing qr/n-auth code data (either raw or as a PNG image).
+      security:
+        - api_key: []
+      summary: Generate data for a qr code
+      tags:
+        - Basic Login/logout
+  '/servers/{server}/sessions/{nonce}/registeruser':
+    post:
+      description: Register a user (under a certain realm) for the currently logged in user. You can also directly pass a userid when generating an ENROL qr code. Required permission 'users'
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+        - description: Base64 encoded nonce to identify the browser/webserver session
+          in: path
+          name: nonce
+          required: true
+          type: string
+        - description: Userid to register
+          in: query
+          name: userid
+          required: true
+          type: string
+        - description: Realm for the user registeration.
+          in: query
+          name: realm
+          required: false
+          type: string
+      responses:
+        '200':
+          description: ok or fail
+          schema:
+            $ref: '#/definitions/Status'
+      security:
+        - api_key: []
+      summary: Register a userid for the given realm.
+      tags:
+        - Users
+  '/servers/{server}/users/':
+    get:
+      description: |
+        Returns an array of arrays containing all accounts corresponding to all users
+        Required permission: 'users'
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+        - description: 'Only for ENROL (and if userid is set), realm of the userid'
+          in: query
+          name: realm
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Array of users
+      security:
+        - api_key: []
+      summary: Get all users
+      tags:
+        - Users
+  '/servers/{server}/users/{userid}/':
+    get:
+      description: |
+        Returns an array containing all accounts corresponding to this user
+        Required permission: 'sessions' or 'users'
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+        - description: realm of the userid
+          in: query
+          name: realm
+          required: false
+          type: string
+        - description: Userid
+          in: path
+          name: userid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of accounts
+          schema:
+            $ref: '#/definitions/Account'
+      security:
+        - api_key: []
+      summary: Get specific user
+      tags:
+        - Users
+  '/servers/{server}/users/{userid}/provokelogin/{nonce}/':
+    post:
+      description: Provoke a login in the n-Auth app on the given session. Required permission 'users' or 'sessions'
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+        - description: Base64 encoded nonce to identify the browser/webserver session
+          in: path
+          name: nonce
+          required: true
+          type: string
+        - description: realm of the userid
+          in: query
+          name: realm
+          required: false
+          type: string
+        - description: Userid
+          in: path
+          name: userid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ok or fail
+          schema:
+            $ref: '#/definitions/Status'
+      security:
+        - api_key: []
+      summary: Provoke a login
+      tags:
+        - Basic Login/logout
+  '/servers/{server}/vash/':
+    get:
+      description: Returns a PNG of the visual hash corresponding to this server. Required permission 'sessions' or 'servers'
+      parameters:
+        - description: Base64 encoded server id
+          in: path
+          name: server
+          required: true
+          type: string
+      produces:
+        - application/octet-stream
+      responses:
+        '200':
+          description: Raw byte array containing qr/n-auth code data (either raw or as a PNG image).
+      security:
+        - api_key: []
+      summary: Visual hash of this server
+      tags:
+        - Servers
+definitions:
+  Account:
+    properties:
+      blocked:
+        description: True if the account is blocked
+        type: boolean
+      created:
+        description: timestamp of creation
+        type: integer
+      description:
+        description: description of the account (e.g. device name)
+        type: string
+      id:
+        description: Account id
+        type: integer
+      lastlogin:
+        description: timestamp of last login
+        type: integer
+      permVersion:
+        description: Protocol version number
+        type: integer
+      publicKeyAuthRevoked:
+        description: True if the authentication key has been revoked
+        type: boolean
+      publicKeyTransRevoked:
+        description: True if the transaction key has been revoked
+        type: boolean
+      serverId:
+        description: server id
+        type: integer
+    required:
+      - blocked
+      - description
+      - id
+      - permVersion
+      - publicKeyAuthRevoked
+      - serverId
+  Config:
+    properties:
+      logo:
+        description: Base 64 encoded logo
+        type: string
+      pinTimeout:
+        description: 'time (minutes) since the last time the user entered his PIN, that the user is not requested a PIN at login. -1 means that the user is never asked for a PIN before logging in, 0 means that the user is asked every time he wants to login'
+        type: integer
+      pinTransTimeout:
+        description: 'time (minutes) since the last time the user entered his PIN, that the user is not requested a PIN at transaction approval. -1 means that the user is never asked for a PIN before approving a transaction, 0 means that the user is asked every time he wants to approve a transaction'
+        type: integer
+      pingTime:
+        description: time (seconds) that the n-Auth app has before it needs to reply to a ping request from the n-Auth server (continious authentication)
+        type: integer
+      serverFlags:
+        description: server flags
+        items:
+          type: string
+        type: array
+      serverName:
+        description: serverName
+        type: string
+      serverid:
+        description: Base64 encoded id of the n-Auth server
+        type: string
+      serverpk:
+        description: Base64 encoded public key of the n-Auth server
+        type: string
+    required:
+      - logo
+      - pinTimeout
+      - pinTransTimeout
+      - pingTime
+      - serverFlags
+      - serverName
+      - serverid
+      - serverpk
+  LoginStatus:
+    properties:
+      canprovoke:
+        description: 'True if a login can be pushed from the server, false otherwise'
+        type: boolean
+      loggedin:
+        description: 'True if the user is loggedin, false otherwise'
+        type: boolean
+      loginqrdata:
+        description: Base 64 encoded data that is represented in a LOGIN qr/nauth code
+        type: string
+      pk:
+        description: 'Base64 encoded public key of the n-Auth app. This uniquely identifies the account on the n-Auth app, regardless of the username'
+        type: string
+      userid:
+        description: Username.
+        type: string
+    required:
+      - loggedin
+  Status:
+    properties:
+      result:
+        description: 'True if the operation succeeded, false otherwise'
+        type: boolean
+    required:
+      - result

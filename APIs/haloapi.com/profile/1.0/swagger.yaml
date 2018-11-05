@@ -31,6 +31,7 @@ securityDefinitions:
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
+tags: []
 paths:
   '/h5/profiles/{player}/appearance':
     get:
@@ -45,7 +46,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Appearance
+      operationId: 5969689a2109180f287972a8
       parameters:
         - description: The Player's Gamertag
           in: path
@@ -72,6 +73,7 @@ paths:
           description: Specified Player was not found.
         '500':
           description: Internal Server Error.
+      summary: Halo 5 - Player Appearance
   '/h5/profiles/{player}/emblem':
     get:
       description: |
@@ -89,7 +91,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Emblem Image
+      operationId: 58acdc2e2109180bdcacc404
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -111,6 +113,7 @@ paths:
           description: Specified Player was not found.
         '500':
           description: Internal Server Error.
+      summary: Halo 5 - Player Emblem Image
   '/h5/profiles/{player}/spartan':
     get:
       description: |
@@ -128,7 +131,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-      operationId: Halo 5 - Player Spartan Image
+      operationId: 58acdc2e2109180bdcacc405
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -154,3 +157,4 @@ paths:
           description: Specified Player was not found.
         '500':
           description: Internal Server Error.
+      summary: Halo 5 - Player Spartan Image

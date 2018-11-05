@@ -210,6 +210,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AssociateServiceActionWithProvisioningArtifact':
+    post:
+      operationId: AssociateServiceActionWithProvisioningArtifact
+      description: Associates a self-service action with a provisioning artifact.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateServiceActionWithProvisioningArtifactOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: DuplicateResourceException
+          schema:
+            $ref: '#/definitions/DuplicateResourceException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateServiceActionWithProvisioningArtifactInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#AssociateTagOptionWithResource':
     post:
       operationId: AssociateTagOptionWithResource
@@ -249,6 +286,64 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateTagOptionWithResourceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#BatchAssociateServiceActionWithProvisioningArtifact':
+    post:
+      operationId: BatchAssociateServiceActionWithProvisioningArtifact
+      description: Associates multiple self-service actions with provisioning artifacts.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchAssociateServiceActionWithProvisioningArtifactOutput'
+        '480':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchAssociateServiceActionWithProvisioningArtifactInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#BatchDisassociateServiceActionFromProvisioningArtifact':
+    post:
+      operationId: BatchDisassociateServiceActionFromProvisioningArtifact
+      description: Disassociates a batch of self-service actions from the specified provisioning artifact.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchDisassociateServiceActionFromProvisioningArtifactOutput'
+        '480':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchDisassociateServiceActionFromProvisioningArtifactInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -447,7 +542,7 @@ paths:
   '/#CreateProvisionedProductPlan':
     post:
       operationId: CreateProvisionedProductPlan
-      description: '<p>Creates a plan. A plan includes the list of resources that will be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed.</p> <p>You can create one plan per provisioned product. To create a plan for an existing provisioned product, it''s status must be AVAILBLE or TAINTED.</p> <p>To view the resource changes in the change set, use <a>DescribeProvisionedProductPlan</a>. To create or modify the provisioned product, use <a>ExecuteProvisionedProductPlan</a>.</p>'
+      description: '<p>Creates a plan. A plan includes the list of resources to be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed.</p> <p>You can create one plan per provisioned product. To create a plan for an existing provisioned product, the product status must be AVAILBLE or TAINTED.</p> <p>To view the resource changes in the change set, use <a>DescribeProvisionedProductPlan</a>. To create or modify the provisioned product, use <a>ExecuteProvisionedProductPlan</a>.</p>'
       responses:
         '200':
           description: Success
@@ -508,6 +603,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateProvisioningArtifactInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateServiceAction':
+    post:
+      operationId: CreateServiceAction
+      description: Creates a self-service action.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateServiceActionOutput'
+        '480':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateServiceActionInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -759,6 +887,76 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteProvisioningArtifactInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteServiceAction':
+    post:
+      operationId: DeleteServiceAction
+      description: Deletes a self-service action.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteServiceActionOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteServiceActionInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTagOption':
+    post:
+      operationId: DeleteTagOption
+      description: <p>Deletes the specified TagOption.</p> <p>You cannot delete a TagOption if it is associated with a product or portfolio.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteTagOptionOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTagOptionInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1104,6 +1302,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeServiceAction':
+    post:
+      operationId: DescribeServiceAction
+      description: Describes a self-service action.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeServiceActionOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeServiceActionInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeTagOption':
     post:
       operationId: DescribeTagOption
@@ -1207,6 +1434,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateServiceActionFromProvisioningArtifact':
+    post:
+      operationId: DisassociateServiceActionFromProvisioningArtifact
+      description: Disassociates the specified self-service action association from the specified provisioning artifact.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateServiceActionFromProvisioningArtifactOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateServiceActionFromProvisioningArtifactInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DisassociateTagOptionFromResource':
     post:
       operationId: DisassociateTagOptionFromResource
@@ -1267,6 +1523,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ExecuteProvisionedProductPlanInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ExecuteProvisionedProductServiceAction':
+    post:
+      operationId: ExecuteProvisionedProductServiceAction
+      description: Executes a self-service action against a provisioned product.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExecuteProvisionedProductServiceActionOutput'
+        '480':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidStateException
+          schema:
+            $ref: '#/definitions/InvalidStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ExecuteProvisionedProductServiceActionInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1559,7 +1852,7 @@ paths:
   '/#ListProvisionedProductPlans':
     post:
       operationId: ListProvisionedProductPlans
-      description: Lists the plans for the specified provisioned product or all plans the user has access to.
+      description: Lists the plans for the specified provisioned product or all plans to which the user has access.
       responses:
         '200':
           description: Success
@@ -1612,6 +1905,49 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListProvisioningArtifactsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListProvisioningArtifactsForServiceAction':
+    post:
+      operationId: ListProvisioningArtifactsForServiceAction
+      description: Lists all provisioning artifacts (also known as versions) for the specified self-service action.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListProvisioningArtifactsForServiceActionOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListProvisioningArtifactsForServiceActionInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1678,6 +2014,88 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListResourcesForTagOptionInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListServiceActions':
+    post:
+      operationId: ListServiceActions
+      description: Lists all self-service actions.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListServiceActionsOutput'
+        '480':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListServiceActionsInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListServiceActionsForProvisioningArtifact':
+    post:
+      operationId: ListServiceActionsForProvisioningArtifact
+      description: Returns a paginated list of self-service actions associated with the specified Product ID and Provisioning Artifact ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListServiceActionsForProvisioningArtifactOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListServiceActionsForProvisioningArtifactInput'
         - name: PageSize
           type: string
           in: query
@@ -2163,6 +2581,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateServiceAction':
+    post:
+      operationId: UpdateServiceAction
+      description: Updates a self-service action.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateServiceActionOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateServiceActionInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateTagOption':
     post:
       operationId: UpdateTagOption
@@ -2205,8 +2656,9 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AcceptLanguage:
-    type: string
+  AcceptPortfolioShareOutput:
+    type: object
+    properties: {}
   AcceptPortfolioShareInput:
     type: object
     required:
@@ -2218,47 +2670,12 @@ definitions:
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
-  AcceptPortfolioShareOutput:
+  InvalidParametersException: {}
+  ResourceNotFoundException: {}
+  LimitExceededException: {}
+  AssociatePrincipalWithPortfolioOutput:
     type: object
     properties: {}
-  AccessLevelFilter:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/AccessLevelFilterKey'
-        description: <p>The access level.</p> <ul> <li> <p> <code>Account</code> - Filter results based on the account.</p> </li> <li> <p> <code>Role</code> - Filter results based on the federated role of the specified user.</p> </li> <li> <p> <code>User</code> - Filter results based on the specified user.</p> </li> </ul>
-      Value:
-        $ref: '#/definitions/AccessLevelFilterValue'
-        description: The user to which the access level applies. The only supported value is <code>Self</code>.
-    description: The access level to use to filter results.
-  AccessLevelFilterKey:
-    type: string
-    enum:
-      - Account
-      - Role
-      - User
-  AccessLevelFilterValue:
-    type: string
-  AccountId:
-    type: string
-    pattern: '^[0-9]{12}$'
-  AccountIds:
-    type: array
-    items:
-      $ref: '#/definitions/AccountId'
-  AddTags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    maxItems: 20
-  AllowedValue:
-    type: string
-  AllowedValues:
-    type: array
-    items:
-      $ref: '#/definitions/AllowedValue'
-  ApproximateCount:
-    type: integer
   AssociatePrincipalWithPortfolioInput:
     type: object
     required:
@@ -2278,7 +2695,7 @@ definitions:
       PrincipalType:
         $ref: '#/definitions/PrincipalType'
         description: The principal type. The supported value is <code>IAM</code>.
-  AssociatePrincipalWithPortfolioOutput:
+  AssociateProductWithPortfolioOutput:
     type: object
     properties: {}
   AssociateProductWithPortfolioInput:
@@ -2299,7 +2716,30 @@ definitions:
       SourcePortfolioId:
         $ref: '#/definitions/Id'
         description: The identifier of the source portfolio.
-  AssociateProductWithPortfolioOutput:
+  AssociateServiceActionWithProvisioningArtifactOutput:
+    type: object
+    properties: {}
+  AssociateServiceActionWithProvisioningArtifactInput:
+    type: object
+    required:
+      - ProductId
+      - ProvisioningArtifactId
+      - ServiceActionId
+    properties:
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: 'The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.'
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: 'The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.'
+      ServiceActionId:
+        $ref: '#/definitions/Id'
+        description: 'The self-service action identifier. For example, <code>act-fs7abcd89wxyz</code>.'
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+  DuplicateResourceException: {}
+  AssociateTagOptionWithResourceOutput:
     type: object
     properties: {}
   AssociateTagOptionWithResourceInput:
@@ -2314,83 +2754,48 @@ definitions:
       TagOptionId:
         $ref: '#/definitions/TagOptionId'
         description: The TagOption identifier.
-  AssociateTagOptionWithResourceOutput:
-    type: object
-    properties: {}
-  AttributeValue:
-    type: string
-  CausingEntity:
-    type: string
-  ChangeAction:
-    type: string
-    enum:
-      - ADD
-      - MODIFY
-      - REMOVE
-  CloudWatchDashboard:
+  TagOptionNotMigratedException: {}
+  InvalidStateException: {}
+  BatchAssociateServiceActionWithProvisioningArtifactOutput:
     type: object
     properties:
-      Name:
-        $ref: '#/definitions/CloudWatchDashboardName'
-        description: The name of the CloudWatch dashboard.
-    description: Information about a CloudWatch dashboard.
-  CloudWatchDashboardName:
-    type: string
-  CloudWatchDashboards:
-    type: array
-    items:
-      $ref: '#/definitions/CloudWatchDashboard'
-  ConstraintDescription:
-    type: string
-    maxLength: 2000
-  ConstraintDetail:
+      FailedServiceActionAssociations:
+        $ref: '#/definitions/FailedServiceActionAssociations'
+        description: 'An object that contains a list of errors, along with information to help you identify the self-service action.'
+  BatchAssociateServiceActionWithProvisioningArtifactInput:
+    type: object
+    required:
+      - ServiceActionAssociations
+    properties:
+      ServiceActionAssociations:
+        $ref: '#/definitions/ServiceActionAssociations'
+        description: 'One or more associations, each consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.'
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+  BatchDisassociateServiceActionFromProvisioningArtifactOutput:
     type: object
     properties:
-      ConstraintId:
+      FailedServiceActionAssociations:
+        $ref: '#/definitions/FailedServiceActionAssociations'
+        description: 'An object that contains a list of errors, along with information to help you identify the self-service action.'
+  BatchDisassociateServiceActionFromProvisioningArtifactInput:
+    type: object
+    required:
+      - ServiceActionAssociations
+    properties:
+      ServiceActionAssociations:
+        $ref: '#/definitions/ServiceActionAssociations'
+        description: 'One or more associations, each consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.'
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+  CopyProductOutput:
+    type: object
+    properties:
+      CopyProductToken:
         $ref: '#/definitions/Id'
-        description: The identifier of the constraint.
-      Type:
-        $ref: '#/definitions/ConstraintType'
-        description: <p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>
-      Description:
-        $ref: '#/definitions/ConstraintDescription'
-        description: The description of the constraint.
-      Owner:
-        $ref: '#/definitions/AccountId'
-        description: The owner of the constraint.
-    description: Information about a constraint.
-  ConstraintDetails:
-    type: array
-    items:
-      $ref: '#/definitions/ConstraintDetail'
-  ConstraintParameters:
-    type: string
-  ConstraintSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/ConstraintSummary'
-  ConstraintSummary:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/ConstraintType'
-        description: <p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>
-      Description:
-        $ref: '#/definitions/ConstraintDescription'
-        description: The description of the constraint.
-    description: Summary information about a constraint.
-  ConstraintType:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  CopyOption:
-    type: string
-    enum:
-      - CopyTags
-  CopyOptions:
-    type: array
-    items:
-      $ref: '#/definitions/CopyOption'
+        description: The token to use to track the progress of the operation.
   CopyProductInput:
     type: object
     required:
@@ -2418,18 +2823,18 @@ definitions:
       IdempotencyToken:
         $ref: '#/definitions/IdempotencyToken'
         description: ' A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request. '
-  CopyProductOutput:
+  CreateConstraintOutput:
     type: object
     properties:
-      CopyProductToken:
-        $ref: '#/definitions/Id'
-        description: The token to use to track the progress of the operation.
-  CopyProductStatus:
-    type: string
-    enum:
-      - SUCCEEDED
-      - IN_PROGRESS
-      - FAILED
+      ConstraintDetail:
+        $ref: '#/definitions/ConstraintDetail'
+        description: Information about the constraint.
+      ConstraintParameters:
+        $ref: '#/definitions/ConstraintParameters'
+        description: The constraint parameters.
+      Status:
+        $ref: '#/definitions/Status'
+        description: The status of the current request.
   CreateConstraintInput:
     type: object
     required:
@@ -2460,18 +2865,15 @@ definitions:
       IdempotencyToken:
         $ref: '#/definitions/IdempotencyToken'
         description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.'
-  CreateConstraintOutput:
+  CreatePortfolioOutput:
     type: object
     properties:
-      ConstraintDetail:
-        $ref: '#/definitions/ConstraintDetail'
-        description: Information about the constraint.
-      ConstraintParameters:
-        $ref: '#/definitions/ConstraintParameters'
-        description: The constraint parameters.
-      Status:
-        $ref: '#/definitions/Status'
-        description: The status of the current request.
+      PortfolioDetail:
+        $ref: '#/definitions/PortfolioDetail'
+        description: Information about the portfolio.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Information about the tags associated with the portfolio.
   CreatePortfolioInput:
     type: object
     required:
@@ -2497,15 +2899,9 @@ definitions:
       IdempotencyToken:
         $ref: '#/definitions/IdempotencyToken'
         description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.'
-  CreatePortfolioOutput:
+  CreatePortfolioShareOutput:
     type: object
-    properties:
-      PortfolioDetail:
-        $ref: '#/definitions/PortfolioDetail'
-        description: Information about the portfolio.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: Information about the tags associated with the portfolio.
+    properties: {}
   CreatePortfolioShareInput:
     type: object
     required:
@@ -2521,9 +2917,18 @@ definitions:
       AccountId:
         $ref: '#/definitions/AccountId'
         description: The AWS account ID.
-  CreatePortfolioShareOutput:
+  CreateProductOutput:
     type: object
-    properties: {}
+    properties:
+      ProductViewDetail:
+        $ref: '#/definitions/ProductViewDetail'
+        description: Information about the product view.
+      ProvisioningArtifactDetail:
+        $ref: '#/definitions/ProvisioningArtifactDetail'
+        description: Information about the provisioning artifact.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Information about the tags associated with the product.
   CreateProductInput:
     type: object
     required:
@@ -2569,18 +2974,24 @@ definitions:
       IdempotencyToken:
         $ref: '#/definitions/IdempotencyToken'
         description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.'
-  CreateProductOutput:
+  CreateProvisionedProductPlanOutput:
     type: object
     properties:
-      ProductViewDetail:
-        $ref: '#/definitions/ProductViewDetail'
-        description: Information about the product view.
-      ProvisioningArtifactDetail:
-        $ref: '#/definitions/ProvisioningArtifactDetail'
-        description: Information about the provisioning artifact.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: Information about the tags associated with the product.
+      PlanName:
+        $ref: '#/definitions/ProvisionedProductPlanName'
+        description: The name of the plan.
+      PlanId:
+        $ref: '#/definitions/Id'
+        description: The plan identifier.
+      ProvisionProductId:
+        $ref: '#/definitions/Id'
+        description: The product identifier.
+      ProvisionedProductName:
+        $ref: '#/definitions/ProvisionedProductName'
+        description: The user-friendly name of the provisioned product.
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioning artifact.
   CreateProvisionedProductPlanInput:
     type: object
     required:
@@ -2624,24 +3035,18 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: One or more tags.
-  CreateProvisionedProductPlanOutput:
+  CreateProvisioningArtifactOutput:
     type: object
     properties:
-      PlanName:
-        $ref: '#/definitions/ProvisionedProductPlanName'
-        description: The name of the plan.
-      PlanId:
-        $ref: '#/definitions/Id'
-        description: The plan identifier.
-      ProvisionProductId:
-        $ref: '#/definitions/Id'
-        description: The product identifier.
-      ProvisionedProductName:
-        $ref: '#/definitions/ProvisionedProductName'
-        description: The user-friendly name of the provisioned product.
-      ProvisioningArtifactId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioning artifact.
+      ProvisioningArtifactDetail:
+        $ref: '#/definitions/ProvisioningArtifactDetail'
+        description: Information about the provisioning artifact.
+      Info:
+        $ref: '#/definitions/ProvisioningArtifactInfo'
+        description: 'The URL of the CloudFormation template in Amazon S3, in JSON format.'
+      Status:
+        $ref: '#/definitions/Status'
+        description: The status of the current request.
   CreateProvisioningArtifactInput:
     type: object
     required:
@@ -2661,18 +3066,44 @@ definitions:
       IdempotencyToken:
         $ref: '#/definitions/IdempotencyToken'
         description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.'
-  CreateProvisioningArtifactOutput:
+  CreateServiceActionOutput:
     type: object
     properties:
-      ProvisioningArtifactDetail:
-        $ref: '#/definitions/ProvisioningArtifactDetail'
-        description: Information about the provisioning artifact.
-      Info:
-        $ref: '#/definitions/ProvisioningArtifactInfo'
-        description: 'The URL of the CloudFormation template in Amazon S3, in JSON format.'
-      Status:
-        $ref: '#/definitions/Status'
-        description: The status of the current request.
+      ServiceActionDetail:
+        $ref: '#/definitions/ServiceActionDetail'
+        description: An object containing information about the self-service action.
+  CreateServiceActionInput:
+    type: object
+    required:
+      - Name
+      - DefinitionType
+      - Definition
+      - IdempotencyToken
+    properties:
+      Name:
+        $ref: '#/definitions/ServiceActionName'
+        description: The self-service action name.
+      DefinitionType:
+        $ref: '#/definitions/ServiceActionDefinitionType'
+        description: 'The service action definition type. For example, <code>SSM_AUTOMATION</code>.'
+      Definition:
+        $ref: '#/definitions/ServiceActionDefinitionMap'
+        description: '<p>The self-service action definition. Can be one of the following:</p> <dl> <dt>Name</dt> <dd> <p>The name of the AWS Systems Manager Document. For example, <code>AWS-RestartEC2Instance</code>.</p> </dd> <dt>Version</dt> <dd> <p>The AWS Systems Manager automation document version. For example, <code>"Version": "1"</code> </p> </dd> <dt>AssumeRole</dt> <dd> <p>The Amazon Resource Name (ARN) of the role that performs the self-service actions on your behalf. For example, <code>"AssumeRole": "arn:aws:iam::12345678910:role/ActionRole"</code>.</p> <p>To reuse the provisioned product launch role, set to <code>"AssumeRole": "LAUNCH_ROLE"</code>.</p> </dd> <dt>Parameters</dt> <dd> <p>The list of parameters in JSON format.</p> <p>For example: <code>[{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}]</code>.</p> </dd> </dl>'
+      Description:
+        $ref: '#/definitions/ServiceActionDescription'
+        description: The self-service action description.
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      IdempotencyToken:
+        $ref: '#/definitions/IdempotencyToken'
+        description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.'
+  CreateTagOptionOutput:
+    type: object
+    properties:
+      TagOptionDetail:
+        $ref: '#/definitions/TagOptionDetail'
+        description: Information about the TagOption.
   CreateTagOptionInput:
     type: object
     required:
@@ -2685,20 +3116,9 @@ definitions:
       Value:
         $ref: '#/definitions/TagOptionValue'
         description: The TagOption value.
-  CreateTagOptionOutput:
+  DeleteConstraintOutput:
     type: object
-    properties:
-      TagOptionDetail:
-        $ref: '#/definitions/TagOptionDetail'
-        description: Information about the TagOption.
-  CreatedTime:
-    type: string
-    format: date-time
-  CreationTime:
-    type: string
-    format: date-time
-  DefaultValue:
-    type: string
+    properties: {}
   DeleteConstraintInput:
     type: object
     required:
@@ -2710,7 +3130,7 @@ definitions:
       Id:
         $ref: '#/definitions/Id'
         description: The identifier of the constraint.
-  DeleteConstraintOutput:
+  DeletePortfolioOutput:
     type: object
     properties: {}
   DeletePortfolioInput:
@@ -2724,7 +3144,8 @@ definitions:
       Id:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
-  DeletePortfolioOutput:
+  ResourceInUseException: {}
+  DeletePortfolioShareOutput:
     type: object
     properties: {}
   DeletePortfolioShareInput:
@@ -2742,7 +3163,7 @@ definitions:
       AccountId:
         $ref: '#/definitions/AccountId'
         description: The AWS account ID.
-  DeletePortfolioShareOutput:
+  DeleteProductOutput:
     type: object
     properties: {}
   DeleteProductInput:
@@ -2756,7 +3177,7 @@ definitions:
       Id:
         $ref: '#/definitions/Id'
         description: The product identifier.
-  DeleteProductOutput:
+  DeleteProvisionedProductPlanOutput:
     type: object
     properties: {}
   DeleteProvisionedProductPlanInput:
@@ -2773,7 +3194,7 @@ definitions:
       IgnoreErrors:
         $ref: '#/definitions/IgnoreErrors'
         description: 'If set to true, AWS Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.'
-  DeleteProvisionedProductPlanOutput:
+  DeleteProvisioningArtifactOutput:
     type: object
     properties: {}
   DeleteProvisioningArtifactInput:
@@ -2791,20 +3212,31 @@ definitions:
       ProvisioningArtifactId:
         $ref: '#/definitions/Id'
         description: The identifier of the provisioning artifact.
-  DeleteProvisioningArtifactOutput:
+  DeleteServiceActionOutput:
     type: object
     properties: {}
-  DescribeConstraintInput:
+  DeleteServiceActionInput:
     type: object
     required:
       - Id
     properties:
+      Id:
+        $ref: '#/definitions/Id'
+        description: 'The self-service action identifier. For example, <code>act-fs7abcd89wxyz</code>.'
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
         description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+  DeleteTagOptionOutput:
+    type: object
+    properties: {}
+  DeleteTagOptionInput:
+    type: object
+    required:
+      - Id
+    properties:
       Id:
-        $ref: '#/definitions/Id'
-        description: The identifier of the constraint.
+        $ref: '#/definitions/TagOptionId'
+        description: The TagOption identifier.
   DescribeConstraintOutput:
     type: object
     properties:
@@ -2817,17 +3249,17 @@ definitions:
       Status:
         $ref: '#/definitions/Status'
         description: The status of the current request.
-  DescribeCopyProductStatusInput:
+  DescribeConstraintInput:
     type: object
     required:
-      - CopyProductToken
+      - Id
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
         description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-      CopyProductToken:
+      Id:
         $ref: '#/definitions/Id'
-        description: The token for the copy product operation. This token is returned by <a>CopyProduct</a>.
+        description: The identifier of the constraint.
   DescribeCopyProductStatusOutput:
     type: object
     properties:
@@ -2840,17 +3272,17 @@ definitions:
       StatusDetail:
         $ref: '#/definitions/StatusDetail'
         description: The status message.
-  DescribePortfolioInput:
+  DescribeCopyProductStatusInput:
     type: object
     required:
-      - Id
+      - CopyProductToken
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
         description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-      Id:
+      CopyProductToken:
         $ref: '#/definitions/Id'
-        description: The portfolio identifier.
+        description: The token for the copy product operation. This token is returned by <a>CopyProduct</a>.
   DescribePortfolioOutput:
     type: object
     properties:
@@ -2863,7 +3295,27 @@ definitions:
       TagOptions:
         $ref: '#/definitions/TagOptionDetails'
         description: Information about the TagOptions associated with the portfolio.
-  DescribeProductAsAdminInput:
+  DescribePortfolioInput:
+    type: object
+    required:
+      - Id
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      Id:
+        $ref: '#/definitions/Id'
+        description: The portfolio identifier.
+  DescribeProductOutput:
+    type: object
+    properties:
+      ProductViewSummary:
+        $ref: '#/definitions/ProductViewSummary'
+        description: Summary information about the product view.
+      ProvisioningArtifacts:
+        $ref: '#/definitions/ProvisioningArtifacts'
+        description: Information about the provisioning artifacts for the specified product.
+  DescribeProductInput:
     type: object
     required:
       - Id
@@ -2889,7 +3341,7 @@ definitions:
       TagOptions:
         $ref: '#/definitions/TagOptionDetails'
         description: Information about the TagOptions associated with the product.
-  DescribeProductInput:
+  DescribeProductAsAdminInput:
     type: object
     required:
       - Id
@@ -2900,15 +3352,15 @@ definitions:
       Id:
         $ref: '#/definitions/Id'
         description: The product identifier.
-  DescribeProductOutput:
+  DescribeProductViewOutput:
     type: object
     properties:
       ProductViewSummary:
         $ref: '#/definitions/ProductViewSummary'
-        description: Summary information about the product view.
+        description: Summary information about the product.
       ProvisioningArtifacts:
         $ref: '#/definitions/ProvisioningArtifacts'
-        description: Information about the provisioning artifacts for the specified product.
+        description: Information about the provisioning artifacts for the product.
   DescribeProductViewInput:
     type: object
     required:
@@ -2920,15 +3372,15 @@ definitions:
       Id:
         $ref: '#/definitions/Id'
         description: The product view identifier.
-  DescribeProductViewOutput:
+  DescribeProvisionedProductOutput:
     type: object
     properties:
-      ProductViewSummary:
-        $ref: '#/definitions/ProductViewSummary'
-        description: Summary information about the product.
-      ProvisioningArtifacts:
-        $ref: '#/definitions/ProvisioningArtifacts'
-        description: Information about the provisioning artifacts for the product.
+      ProvisionedProductDetail:
+        $ref: '#/definitions/ProvisionedProductDetail'
+        description: Information about the provisioned product.
+      CloudWatchDashboards:
+        $ref: '#/definitions/CloudWatchDashboards'
+        description: Any CloudWatch dashboards that were created when provisioning the product.
   DescribeProvisionedProductInput:
     type: object
     required:
@@ -2940,15 +3392,18 @@ definitions:
       Id:
         $ref: '#/definitions/Id'
         description: The provisioned product identifier.
-  DescribeProvisionedProductOutput:
+  DescribeProvisionedProductPlanOutput:
     type: object
     properties:
-      ProvisionedProductDetail:
-        $ref: '#/definitions/ProvisionedProductDetail'
-        description: Information about the provisioned product.
-      CloudWatchDashboards:
-        $ref: '#/definitions/CloudWatchDashboards'
-        description: Any CloudWatch dashboards that were created when provisioning the product.
+      ProvisionedProductPlanDetails:
+        $ref: '#/definitions/ProvisionedProductPlanDetails'
+        description: Information about the plan.
+      ResourceChanges:
+        $ref: '#/definitions/ResourceChanges'
+        description: Information about the resource changes that will occur when the plan is executed.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
   DescribeProvisionedProductPlanInput:
     type: object
     required:
@@ -2966,18 +3421,18 @@ definitions:
       PageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-  DescribeProvisionedProductPlanOutput:
+  DescribeProvisioningArtifactOutput:
     type: object
     properties:
-      ProvisionedProductPlanDetails:
-        $ref: '#/definitions/ProvisionedProductPlanDetails'
-        description: Information about the plan.
-      ResourceChanges:
-        $ref: '#/definitions/ResourceChanges'
-        description: Information about the resources changes that will occur when the plan is executed.
-      NextPageToken:
-        $ref: '#/definitions/PageToken'
-        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+      ProvisioningArtifactDetail:
+        $ref: '#/definitions/ProvisioningArtifactDetail'
+        description: Information about the provisioning artifact.
+      Info:
+        $ref: '#/definitions/ProvisioningArtifactInfo'
+        description: The URL of the CloudFormation template in Amazon S3.
+      Status:
+        $ref: '#/definitions/Status'
+        description: The status of the current request.
   DescribeProvisioningArtifactInput:
     type: object
     required:
@@ -2996,18 +3451,21 @@ definitions:
       Verbose:
         $ref: '#/definitions/Verbose'
         description: Indicates whether a verbose level of detail is enabled.
-  DescribeProvisioningArtifactOutput:
+  DescribeProvisioningParametersOutput:
     type: object
     properties:
-      ProvisioningArtifactDetail:
-        $ref: '#/definitions/ProvisioningArtifactDetail'
-        description: Information about the provisioning artifact.
-      Info:
-        $ref: '#/definitions/ProvisioningArtifactInfo'
-        description: The URL of the CloudFormation template in Amazon S3.
-      Status:
-        $ref: '#/definitions/Status'
-        description: The status of the current request.
+      ProvisioningArtifactParameters:
+        $ref: '#/definitions/ProvisioningArtifactParameters'
+        description: Information about the parameters used to provision the product.
+      ConstraintSummaries:
+        $ref: '#/definitions/ConstraintSummaries'
+        description: Information about the constraints used to provision the product.
+      UsageInstructions:
+        $ref: '#/definitions/UsageInstructions'
+        description: 'Any additional metadata specifically related to the provisioning of the product. For example, see the <code>Version</code> field of the CloudFormation template.'
+      TagOptions:
+        $ref: '#/definitions/TagOptionSummaries'
+        description: Information about the TagOptions associated with the resource.
   DescribeProvisioningParametersInput:
     type: object
     required:
@@ -3026,21 +3484,18 @@ definitions:
       PathId:
         $ref: '#/definitions/Id'
         description: 'The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.'
-  DescribeProvisioningParametersOutput:
+  DescribeRecordOutput:
     type: object
     properties:
-      ProvisioningArtifactParameters:
-        $ref: '#/definitions/ProvisioningArtifactParameters'
-        description: Information about the parameters used to provision the product.
-      ConstraintSummaries:
-        $ref: '#/definitions/ConstraintSummaries'
-        description: Information about the constraints used to provision the product.
-      UsageInstructions:
-        $ref: '#/definitions/UsageInstructions'
-        description: 'Any additional metadata specifically related to the provisioning of the product. For example, see the <code>Version</code> field of the CloudFormation template.'
-      TagOptions:
-        $ref: '#/definitions/TagOptionSummaries'
-        description: Information about the TagOptions associated with the resource.
+      RecordDetail:
+        $ref: '#/definitions/RecordDetail'
+        description: Information about the product.
+      RecordOutputs:
+        $ref: '#/definitions/RecordOutputs'
+        description: 'Information about the product created as the result of a request. For example, the output for a CloudFormation-backed product that creates an S3 bucket would include the S3 bucket URL.'
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
   DescribeRecordInput:
     type: object
     required:
@@ -3058,18 +3513,29 @@ definitions:
       PageSize:
         $ref: '#/definitions/PageSize'
         description: The maximum number of items to return with this call.
-  DescribeRecordOutput:
+  DescribeServiceActionOutput:
     type: object
     properties:
-      RecordDetail:
-        $ref: '#/definitions/RecordDetail'
-        description: Information about the product.
-      RecordOutputs:
-        $ref: '#/definitions/RecordOutputs'
-        description: 'Information about the product created as the result of a request. For example, the output for a CloudFormation-backed product that creates an S3 bucket would include the S3 bucket URL.'
-      NextPageToken:
-        $ref: '#/definitions/PageToken'
-        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+      ServiceActionDetail:
+        $ref: '#/definitions/ServiceActionDetail'
+        description: Detailed information about the self-service action.
+  DescribeServiceActionInput:
+    type: object
+    required:
+      - Id
+    properties:
+      Id:
+        $ref: '#/definitions/Id'
+        description: The self-service action identifier.
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+  DescribeTagOptionOutput:
+    type: object
+    properties:
+      TagOptionDetail:
+        $ref: '#/definitions/TagOptionDetail'
+        description: Information about the TagOption.
   DescribeTagOptionInput:
     type: object
     required:
@@ -3078,14 +3544,9 @@ definitions:
       Id:
         $ref: '#/definitions/TagOptionId'
         description: The TagOption identifier.
-  DescribeTagOptionOutput:
+  DisassociatePrincipalFromPortfolioOutput:
     type: object
-    properties:
-      TagOptionDetail:
-        $ref: '#/definitions/TagOptionDetail'
-        description: Information about the TagOption.
-  Description:
-    type: string
+    properties: {}
   DisassociatePrincipalFromPortfolioInput:
     type: object
     required:
@@ -3101,7 +3562,7 @@ definitions:
       PrincipalARN:
         $ref: '#/definitions/PrincipalARN'
         description: 'The ARN of the principal (IAM user, role, or group).'
-  DisassociatePrincipalFromPortfolioOutput:
+  DisassociateProductFromPortfolioOutput:
     type: object
     properties: {}
   DisassociateProductFromPortfolioInput:
@@ -3119,7 +3580,29 @@ definitions:
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
-  DisassociateProductFromPortfolioOutput:
+  DisassociateServiceActionFromProvisioningArtifactOutput:
+    type: object
+    properties: {}
+  DisassociateServiceActionFromProvisioningArtifactInput:
+    type: object
+    required:
+      - ProductId
+      - ProvisioningArtifactId
+      - ServiceActionId
+    properties:
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: 'The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.'
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: 'The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.'
+      ServiceActionId:
+        $ref: '#/definitions/Id'
+        description: 'The self-service action identifier. For example, <code>act-fs7abcd89wxyz</code>.'
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+  DisassociateTagOptionFromResourceOutput:
     type: object
     properties: {}
   DisassociateTagOptionFromResourceInput:
@@ -3134,22 +3617,12 @@ definitions:
       TagOptionId:
         $ref: '#/definitions/TagOptionId'
         description: The TagOption identifier.
-  DisassociateTagOptionFromResourceOutput:
+  ExecuteProvisionedProductPlanOutput:
     type: object
-    properties: {}
-  DuplicateResourceException:
-    type: object
-    properties: {}
-    description: The specified resource is a duplicate.
-  ErrorCode:
-    type: string
-  ErrorDescription:
-    type: string
-  EvaluationType:
-    type: string
-    enum:
-      - STATIC
-      - DYNAMIC
+    properties:
+      RecordDetail:
+        $ref: '#/definitions/RecordDetail'
+        description: Information about the result of provisioning the product.
   ExecuteProvisionedProductPlanInput:
     type: object
     required:
@@ -3165,63 +3638,40 @@ definitions:
       IdempotencyToken:
         $ref: '#/definitions/IdempotencyToken'
         description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.'
-  ExecuteProvisionedProductPlanOutput:
+  ExecuteProvisionedProductServiceActionOutput:
     type: object
     properties:
       RecordDetail:
         $ref: '#/definitions/RecordDetail'
-        description: Information about the result of provisioning the product.
-  HasDefaultPath:
-    type: boolean
-  Id:
-    type: string
-    minLength: 1
-    maxLength: 100
-  IdempotencyToken:
-    type: string
-    pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
-    minLength: 1
-    maxLength: 128
-  IgnoreErrors:
-    type: boolean
-  InstructionType:
-    type: string
-  InstructionValue:
-    type: string
-  InvalidParametersException:
+        description: An object containing detailed information about the result of provisioning the product.
+  ExecuteProvisionedProductServiceActionInput:
     type: object
-    properties: {}
-    description: One or more parameters provided to the operation are not valid.
-  InvalidStateException:
-    type: object
-    properties: {}
-    description: An attempt was made to modify a resource that is in a state that is not valid. Check your resources to ensure that they are in valid states before retrying the operation.
-  LastRequestId:
-    type: string
-  LaunchPathSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/LaunchPathSummary'
-  LaunchPathSummary:
+    required:
+      - ProvisionedProductId
+      - ServiceActionId
+      - ExecuteToken
+    properties:
+      ProvisionedProductId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioned product.
+      ServiceActionId:
+        $ref: '#/definitions/Id'
+        description: 'The self-service action identifier. For example, <code>act-fs7abcd89wxyz</code>.'
+      ExecuteToken:
+        $ref: '#/definitions/IdempotencyToken'
+        description: An idempotency token that uniquely identifies the execute request.
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+  ListAcceptedPortfolioSharesOutput:
     type: object
     properties:
-      Id:
-        $ref: '#/definitions/Id'
-        description: The identifier of the product path.
-      ConstraintSummaries:
-        $ref: '#/definitions/ConstraintSummaries'
-        description: The constraints on the portfolio-product relationship.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: The tags associated with this product path.
-      Name:
-        $ref: '#/definitions/PortfolioName'
-        description: The name of the portfolio to which the user was assigned.
-    description: Summary information about a product path for a user.
-  LimitExceededException:
-    type: object
-    properties: {}
-    description: The current limits of the service would have been exceeded by this operation. Decrease your resource use or increase your service limits and retry the operation.
+      PortfolioDetails:
+        $ref: '#/definitions/PortfolioDetails'
+        description: Information about the portfolios.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
   ListAcceptedPortfolioSharesInput:
     type: object
     properties:
@@ -3234,12 +3684,15 @@ definitions:
       PageSize:
         $ref: '#/definitions/PageSize'
         description: The maximum number of items to return with this call.
-  ListAcceptedPortfolioSharesOutput:
+      PortfolioShareType:
+        $ref: '#/definitions/PortfolioShareType'
+        description: <p>The type of shared portfolios to list. The default is to list imported portfolios.</p> <ul> <li> <p> <code>AWS_SERVICECATALOG</code> - List default portfolios</p> </li> <li> <p> <code>IMPORTED</code> - List imported portfolios</p> </li> </ul>
+  ListConstraintsForPortfolioOutput:
     type: object
     properties:
-      PortfolioDetails:
-        $ref: '#/definitions/PortfolioDetails'
-        description: Information about the portfolios.
+      ConstraintDetails:
+        $ref: '#/definitions/ConstraintDetails'
+        description: Information about the constraints.
       NextPageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
@@ -3263,12 +3716,12 @@ definitions:
       PageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-  ListConstraintsForPortfolioOutput:
+  ListLaunchPathsOutput:
     type: object
     properties:
-      ConstraintDetails:
-        $ref: '#/definitions/ConstraintDetails'
-        description: Information about the constraints.
+      LaunchPathSummaries:
+        $ref: '#/definitions/LaunchPathSummaries'
+        description: Information about the launch path.
       NextPageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
@@ -3289,12 +3742,12 @@ definitions:
       PageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-  ListLaunchPathsOutput:
+  ListPortfolioAccessOutput:
     type: object
     properties:
-      LaunchPathSummaries:
-        $ref: '#/definitions/LaunchPathSummaries'
-        description: Information about the launch path.
+      AccountIds:
+        $ref: '#/definitions/AccountIds'
+        description: Information about the AWS accounts with access to the portfolio.
       NextPageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
@@ -3309,33 +3762,7 @@ definitions:
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
-  ListPortfolioAccessOutput:
-    type: object
-    properties:
-      AccountIds:
-        $ref: '#/definitions/AccountIds'
-        description: Information about the AWS accounts with access to the portfolio.
-      NextPageToken:
-        $ref: '#/definitions/PageToken'
-        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
-  ListPortfoliosForProductInput:
-    type: object
-    required:
-      - ProductId
-    properties:
-      AcceptLanguage:
-        $ref: '#/definitions/AcceptLanguage'
-        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-      ProductId:
-        $ref: '#/definitions/Id'
-        description: The product identifier.
-      PageToken:
-        $ref: '#/definitions/PageToken'
-        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-      PageSize:
-        $ref: '#/definitions/PageSize'
-        description: The maximum number of items to return with this call.
-  ListPortfoliosForProductOutput:
+  ListPortfoliosOutput:
     type: object
     properties:
       PortfolioDetails:
@@ -3356,12 +3783,38 @@ definitions:
       PageSize:
         $ref: '#/definitions/PageSize'
         description: The maximum number of items to return with this call.
-  ListPortfoliosOutput:
+  ListPortfoliosForProductOutput:
     type: object
     properties:
       PortfolioDetails:
         $ref: '#/definitions/PortfolioDetails'
         description: Information about the portfolios.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+  ListPortfoliosForProductInput:
+    type: object
+    required:
+      - ProductId
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: The product identifier.
+      PageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of items to return with this call.
+  ListPrincipalsForPortfolioOutput:
+    type: object
+    properties:
+      Principals:
+        $ref: '#/definitions/Principals'
+        description: The IAM principals (users or roles) associated with the portfolio.
       NextPageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
@@ -3382,12 +3835,12 @@ definitions:
       PageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-  ListPrincipalsForPortfolioOutput:
+  ListProvisionedProductPlansOutput:
     type: object
     properties:
-      Principals:
-        $ref: '#/definitions/Principals'
-        description: The IAM principals (users or roles) associated with the portfolio.
+      ProvisionedProductPlans:
+        $ref: '#/definitions/ProvisionedProductPlans'
+        description: Information about the plans.
       NextPageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
@@ -3409,12 +3862,12 @@ definitions:
       AccessLevelFilter:
         $ref: '#/definitions/AccessLevelFilter'
         description: The access level to use to obtain results. The default is <code>User</code>.
-  ListProvisionedProductPlansOutput:
+  ListProvisioningArtifactsOutput:
     type: object
     properties:
-      ProvisionedProductPlans:
-        $ref: '#/definitions/ProvisionedProductPlans'
-        description: Information about the plans.
+      ProvisioningArtifactDetails:
+        $ref: '#/definitions/ProvisioningArtifactDetails'
+        description: Information about the provisioning artifacts.
       NextPageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
@@ -3429,12 +3882,38 @@ definitions:
       ProductId:
         $ref: '#/definitions/Id'
         description: The product identifier.
-  ListProvisioningArtifactsOutput:
+  ListProvisioningArtifactsForServiceActionOutput:
     type: object
     properties:
-      ProvisioningArtifactDetails:
-        $ref: '#/definitions/ProvisioningArtifactDetails'
-        description: Information about the provisioning artifacts.
+      ProvisioningArtifactViews:
+        $ref: '#/definitions/ProvisioningArtifactViews'
+        description: An array of objects with information about product views and provisioning artifacts.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+  ListProvisioningArtifactsForServiceActionInput:
+    type: object
+    required:
+      - ServiceActionId
+    properties:
+      ServiceActionId:
+        $ref: '#/definitions/Id'
+        description: 'The self-service action identifier. For example, <code>act-fs7abcd89wxyz</code>.'
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of items to return with this call.
+      PageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+  ListRecordHistoryOutput:
+    type: object
+    properties:
+      RecordDetails:
+        $ref: '#/definitions/RecordDetails'
+        description: 'The records, in reverse chronological order.'
       NextPageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
@@ -3456,25 +3935,15 @@ definitions:
       PageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-  ListRecordHistoryOutput:
+  ListResourcesForTagOptionOutput:
     type: object
     properties:
-      RecordDetails:
-        $ref: '#/definitions/RecordDetails'
-        description: 'The records, in reverse chronological order.'
-      NextPageToken:
+      ResourceDetails:
+        $ref: '#/definitions/ResourceDetails'
+        description: Information about the resources.
+      PageToken:
         $ref: '#/definitions/PageToken'
-        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
-  ListRecordHistorySearchFilter:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/SearchFilterKey'
-        description: <p>The filter key.</p> <ul> <li> <p> <code>product</code> - Filter results based on the specified product identifier.</p> </li> <li> <p> <code>provisionedproduct</code> - Filter results based on the provisioned product identifier.</p> </li> </ul>
-      Value:
-        $ref: '#/definitions/SearchFilterValue'
-        description: The filter value.
-    description: The search filter to use when listing history records.
+        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
   ListResourcesForTagOptionInput:
     type: object
     required:
@@ -3492,28 +3961,66 @@ definitions:
       PageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-  ListResourcesForTagOptionOutput:
+  ListServiceActionsOutput:
     type: object
     properties:
-      ResourceDetails:
-        $ref: '#/definitions/ResourceDetails'
-        description: Information about the resources.
+      ServiceActionSummaries:
+        $ref: '#/definitions/ServiceActionSummaries'
+        description: An object containing information about the service actions associated with the provisioning artifact.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+  ListServiceActionsInput:
+    type: object
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of items to return with this call.
       PageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-  ListTagOptionsFilters:
+  ListServiceActionsForProvisioningArtifactOutput:
     type: object
     properties:
-      Key:
-        $ref: '#/definitions/TagOptionKey'
-        description: The TagOption key.
-      Value:
-        $ref: '#/definitions/TagOptionValue'
-        description: The TagOption value.
-      Active:
-        $ref: '#/definitions/TagOptionActive'
-        description: The active state.
-    description: Filters to use when listing TagOptions.
+      ServiceActionSummaries:
+        $ref: '#/definitions/ServiceActionSummaries'
+        description: An object containing information about the self-service actions associated with the provisioning artifact.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+  ListServiceActionsForProvisioningArtifactInput:
+    type: object
+    required:
+      - ProductId
+      - ProvisioningArtifactId
+    properties:
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: 'The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.'
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: 'The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.'
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of items to return with this call.
+      PageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+  ListTagOptionsOutput:
+    type: object
+    properties:
+      TagOptionDetails:
+        $ref: '#/definitions/TagOptionDetails'
+        description: Information about the TagOptions.
+      PageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
   ListTagOptionsInput:
     type: object
     properties:
@@ -3526,67 +4033,639 @@ definitions:
       PageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-  ListTagOptionsOutput:
+  ProvisionProductOutput:
     type: object
     properties:
-      TagOptionDetails:
-        $ref: '#/definitions/TagOptionDetails'
-        description: Information about the TagOptions.
+      RecordDetail:
+        $ref: '#/definitions/RecordDetail'
+        description: Information about the result of provisioning the product.
+  ProvisionProductInput:
+    type: object
+    required:
+      - ProductId
+      - ProvisioningArtifactId
+      - ProvisionedProductName
+      - ProvisionToken
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: The product identifier.
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioning artifact.
+      PathId:
+        $ref: '#/definitions/Id'
+        description: 'The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.'
+      ProvisionedProductName:
+        $ref: '#/definitions/ProvisionedProductName'
+        description: A user-friendly name for the provisioned product. This value must be unique for the AWS account and cannot be updated after the product is provisioned.
+      ProvisioningParameters:
+        $ref: '#/definitions/ProvisioningParameters'
+        description: Parameters specified by the administrator that are required for provisioning the product.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: One or more tags.
+      NotificationArns:
+        $ref: '#/definitions/NotificationArns'
+        description: Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related events.
+      ProvisionToken:
+        $ref: '#/definitions/IdempotencyToken'
+        description: An idempotency token that uniquely identifies the provisioning request.
+  RejectPortfolioShareOutput:
+    type: object
+    properties: {}
+  RejectPortfolioShareInput:
+    type: object
+    required:
+      - PortfolioId
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      PortfolioId:
+        $ref: '#/definitions/Id'
+        description: The portfolio identifier.
+  ScanProvisionedProductsOutput:
+    type: object
+    properties:
+      ProvisionedProducts:
+        $ref: '#/definitions/ProvisionedProductDetails'
+        description: Information about the provisioned products.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+  ScanProvisionedProductsInput:
+    type: object
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      AccessLevelFilter:
+        $ref: '#/definitions/AccessLevelFilter'
+        description: The access level to use to obtain results. The default is <code>User</code>.
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of items to return with this call.
       PageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-  LogicalResourceId:
+  SearchProductsOutput:
+    type: object
+    properties:
+      ProductViewSummaries:
+        $ref: '#/definitions/ProductViewSummaries'
+        description: Information about the product views.
+      ProductViewAggregations:
+        $ref: '#/definitions/ProductViewAggregations'
+        description: The product view aggregations.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+  SearchProductsInput:
+    type: object
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      Filters:
+        $ref: '#/definitions/ProductViewFilters'
+        description: 'The search filters. If no search filters are specified, the output includes all products to which the caller has access.'
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of items to return with this call.
+      SortBy:
+        $ref: '#/definitions/ProductViewSortBy'
+        description: 'The sort field. If no value is specified, the results are not sorted.'
+      SortOrder:
+        $ref: '#/definitions/SortOrder'
+        description: 'The sort order. If no value is specified, the results are not sorted.'
+      PageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
+  SearchProductsAsAdminOutput:
+    type: object
+    properties:
+      ProductViewDetails:
+        $ref: '#/definitions/ProductViewDetails'
+        description: Information about the product views.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+  SearchProductsAsAdminInput:
+    type: object
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      PortfolioId:
+        $ref: '#/definitions/Id'
+        description: The portfolio identifier.
+      Filters:
+        $ref: '#/definitions/ProductViewFilters'
+        description: 'The search filters. If no search filters are specified, the output includes all products to which the administrator has access.'
+      SortBy:
+        $ref: '#/definitions/ProductViewSortBy'
+        description: 'The sort field. If no value is specified, the results are not sorted.'
+      SortOrder:
+        $ref: '#/definitions/SortOrder'
+        description: 'The sort order. If no value is specified, the results are not sorted.'
+      PageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of items to return with this call.
+      ProductSource:
+        $ref: '#/definitions/ProductSource'
+        description: Access level of the source of the product.
+  SearchProvisionedProductsOutput:
+    type: object
+    properties:
+      ProvisionedProducts:
+        $ref: '#/definitions/ProvisionedProductAttributes'
+        description: Information about the provisioned products.
+      TotalResultsCount:
+        $ref: '#/definitions/TotalResultsCount'
+        description: The number of provisioned products found.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+  SearchProvisionedProductsInput:
+    type: object
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      AccessLevelFilter:
+        $ref: '#/definitions/AccessLevelFilter'
+        description: The access level to use to obtain results. The default is <code>User</code>.
+      Filters:
+        $ref: '#/definitions/ProvisionedProductFilters'
+        description: '<p>The search filters.</p> <p>When the key is <code>SearchQuery</code>, the searchable fields are <code>arn</code>, <code>createdTime</code>, <code>id</code>, <code>lastRecordId</code>, <code>idempotencyToken</code>, <code>name</code>, <code>physicalId</code>, <code>productId</code>, <code>provisioningArtifact</code>, <code>type</code>, <code>status</code>, <code>tags</code>, <code>userArn</code>, and <code>userArnSession</code>.</p> <p>Example: <code>"SearchQuery":["status:AVAILABLE"]</code> </p>'
+      SortBy:
+        $ref: '#/definitions/SortField'
+        description: 'The sort field. If no value is specified, the results are not sorted. The valid values are <code>arn</code>, <code>id</code>, <code>name</code>, and <code>lastRecordId</code>.'
+      SortOrder:
+        $ref: '#/definitions/SortOrder'
+        description: 'The sort order. If no value is specified, the results are not sorted.'
+      PageSize:
+        $ref: '#/definitions/SearchProvisionedProductsPageSize'
+        description: The maximum number of items to return with this call.
+      PageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
+  TerminateProvisionedProductOutput:
+    type: object
+    properties:
+      RecordDetail:
+        $ref: '#/definitions/RecordDetail'
+        description: Information about the result of this request.
+  TerminateProvisionedProductInput:
+    type: object
+    required:
+      - TerminateToken
+    properties:
+      ProvisionedProductName:
+        $ref: '#/definitions/ProvisionedProductNameOrArn'
+        description: The name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
+      ProvisionedProductId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
+      TerminateToken:
+        $ref: '#/definitions/IdempotencyToken'
+        description: 'An idempotency token that uniquely identifies the termination request. This token is only valid during the termination process. After the provisioned product is terminated, subsequent requests to terminate the same provisioned product always return <b>ResourceNotFound</b>.'
+      IgnoreErrors:
+        $ref: '#/definitions/IgnoreErrors'
+        description: 'If set to true, AWS Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.'
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+  UpdateConstraintOutput:
+    type: object
+    properties:
+      ConstraintDetail:
+        $ref: '#/definitions/ConstraintDetail'
+        description: Information about the constraint.
+      ConstraintParameters:
+        $ref: '#/definitions/ConstraintParameters'
+        description: The constraint parameters.
+      Status:
+        $ref: '#/definitions/Status'
+        description: The status of the current request.
+  UpdateConstraintInput:
+    type: object
+    required:
+      - Id
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      Id:
+        $ref: '#/definitions/Id'
+        description: The identifier of the constraint.
+      Description:
+        $ref: '#/definitions/ConstraintDescription'
+        description: The updated description of the constraint.
+  UpdatePortfolioOutput:
+    type: object
+    properties:
+      PortfolioDetail:
+        $ref: '#/definitions/PortfolioDetail'
+        description: Information about the portfolio.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Information about the tags associated with the portfolio.
+  UpdatePortfolioInput:
+    type: object
+    required:
+      - Id
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      Id:
+        $ref: '#/definitions/Id'
+        description: The portfolio identifier.
+      DisplayName:
+        $ref: '#/definitions/PortfolioDisplayName'
+        description: The name to use for display purposes.
+      Description:
+        $ref: '#/definitions/PortfolioDescription'
+        description: The updated description of the portfolio.
+      ProviderName:
+        $ref: '#/definitions/ProviderName'
+        description: The updated name of the portfolio provider.
+      AddTags:
+        $ref: '#/definitions/AddTags'
+        description: The tags to add.
+      RemoveTags:
+        $ref: '#/definitions/TagKeys'
+        description: The tags to remove.
+  UpdateProductOutput:
+    type: object
+    properties:
+      ProductViewDetail:
+        $ref: '#/definitions/ProductViewDetail'
+        description: Information about the product view.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Information about the tags associated with the product.
+  UpdateProductInput:
+    type: object
+    required:
+      - Id
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      Id:
+        $ref: '#/definitions/Id'
+        description: The product identifier.
+      Name:
+        $ref: '#/definitions/ProductViewName'
+        description: The updated product name.
+      Owner:
+        $ref: '#/definitions/ProductViewOwner'
+        description: The updated owner of the product.
+      Description:
+        $ref: '#/definitions/ProductViewShortDescription'
+        description: The updated description of the product.
+      Distributor:
+        $ref: '#/definitions/ProductViewOwner'
+        description: The updated distributor of the product.
+      SupportDescription:
+        $ref: '#/definitions/SupportDescription'
+        description: The updated support description for the product.
+      SupportEmail:
+        $ref: '#/definitions/SupportEmail'
+        description: The updated support email for the product.
+      SupportUrl:
+        $ref: '#/definitions/SupportUrl'
+        description: The updated support URL for the product.
+      AddTags:
+        $ref: '#/definitions/AddTags'
+        description: The tags to add to the product.
+      RemoveTags:
+        $ref: '#/definitions/TagKeys'
+        description: The tags to remove from the product.
+  UpdateProvisionedProductOutput:
+    type: object
+    properties:
+      RecordDetail:
+        $ref: '#/definitions/RecordDetail'
+        description: Information about the result of the request.
+  UpdateProvisionedProductInput:
+    type: object
+    required:
+      - UpdateToken
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      ProvisionedProductName:
+        $ref: '#/definitions/ProvisionedProductNameOrArn'
+        description: The updated name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
+      ProvisionedProductId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioned product.
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioning artifact.
+      PathId:
+        $ref: '#/definitions/Id'
+        description: 'The new path identifier. This value is optional if the product has a default path, and required if the product has more than one path.'
+      ProvisioningParameters:
+        $ref: '#/definitions/UpdateProvisioningParameters'
+        description: The new parameters.
+      UpdateToken:
+        $ref: '#/definitions/IdempotencyToken'
+        description: The idempotency token that uniquely identifies the provisioning update request.
+  UpdateProvisioningArtifactOutput:
+    type: object
+    properties:
+      ProvisioningArtifactDetail:
+        $ref: '#/definitions/ProvisioningArtifactDetail'
+        description: Information about the provisioning artifact.
+      Info:
+        $ref: '#/definitions/ProvisioningArtifactInfo'
+        description: The URL of the CloudFormation template in Amazon S3.
+      Status:
+        $ref: '#/definitions/Status'
+        description: The status of the current request.
+  UpdateProvisioningArtifactInput:
+    type: object
+    required:
+      - ProductId
+      - ProvisioningArtifactId
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: The product identifier.
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioning artifact.
+      Name:
+        $ref: '#/definitions/ProvisioningArtifactName'
+        description: The updated name of the provisioning artifact.
+      Description:
+        $ref: '#/definitions/ProvisioningArtifactDescription'
+        description: The updated description of the provisioning artifact.
+      Active:
+        $ref: '#/definitions/ProvisioningArtifactActive'
+        description: Indicates whether the product version is active.
+  UpdateServiceActionOutput:
+    type: object
+    properties:
+      ServiceActionDetail:
+        $ref: '#/definitions/ServiceActionDetail'
+        description: Detailed information about the self-service action.
+  UpdateServiceActionInput:
+    type: object
+    required:
+      - Id
+    properties:
+      Id:
+        $ref: '#/definitions/Id'
+        description: The self-service action identifier.
+      Name:
+        $ref: '#/definitions/ServiceActionName'
+        description: The self-service action name.
+      Definition:
+        $ref: '#/definitions/ServiceActionDefinitionMap'
+        description: A map that defines the self-service action.
+      Description:
+        $ref: '#/definitions/ServiceActionDescription'
+        description: The self-service action description.
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+  UpdateTagOptionOutput:
+    type: object
+    properties:
+      TagOptionDetail:
+        $ref: '#/definitions/TagOptionDetail'
+        description: Information about the TagOption.
+  UpdateTagOptionInput:
+    type: object
+    required:
+      - Id
+    properties:
+      Id:
+        $ref: '#/definitions/TagOptionId'
+        description: The TagOption identifier.
+      Value:
+        $ref: '#/definitions/TagOptionValue'
+        description: The updated value.
+      Active:
+        $ref: '#/definitions/TagOptionActive'
+        description: The updated active state.
+  AcceptLanguage:
     type: string
-  NoEcho:
-    type: boolean
-  NotificationArn:
+    maxLength: 100
+  Id:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-]*'
+    minLength: 1
+    maxLength: 100
+  AccessLevelFilterKey:
+    type: string
+    enum:
+      - Account
+      - Role
+      - User
+  AccessLevelFilterValue:
+    type: string
+  AccessLevelFilter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/AccessLevelFilterKey'
+        description: <p>The access level.</p> <ul> <li> <p> <code>Account</code> - Filter results based on the account.</p> </li> <li> <p> <code>Role</code> - Filter results based on the federated role of the specified user.</p> </li> <li> <p> <code>User</code> - Filter results based on the specified user.</p> </li> </ul>
+      Value:
+        $ref: '#/definitions/AccessLevelFilterValue'
+        description: The user to which the access level applies. The only supported value is <code>Self</code>.
+    description: The access level to use to filter results.
+  AccountId:
+    type: string
+    pattern: '^[0-9]{12}$'
+  AccountIds:
+    type: array
+    items:
+      $ref: '#/definitions/AccountId'
+  Tag:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: The tag key.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The value for this key.
+    description: Information about a tag. A tag is a key-value pair. Tags are propagated to the resources created when provisioning a product.
+  AddTags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    maxItems: 20
+  AllowedValue:
+    type: string
+  AllowedValues:
+    type: array
+    items:
+      $ref: '#/definitions/AllowedValue'
+  ApproximateCount:
+    type: integer
+  PrincipalARN:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  PrincipalType:
+    type: string
+    enum:
+      - IAM
+  ResourceId:
+    type: string
+  TagOptionId:
+    type: string
+    minLength: 1
+    maxLength: 100
+  AttributeValue:
+    type: string
+  ServiceActionAssociations:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceActionAssociation'
+    minItems: 1
+    maxItems: 50
+  FailedServiceActionAssociations:
+    type: array
+    items:
+      $ref: '#/definitions/FailedServiceActionAssociation'
+    maxItems: 50
+  CausingEntity:
+    type: string
+  ChangeAction:
+    type: string
+    enum:
+      - ADD
+      - MODIFY
+      - REMOVE
+  CloudWatchDashboardName:
+    type: string
+  CloudWatchDashboard:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/CloudWatchDashboardName'
+        description: The name of the CloudWatch dashboard.
+    description: Information about a CloudWatch dashboard.
+  CloudWatchDashboards:
+    type: array
+    items:
+      $ref: '#/definitions/CloudWatchDashboard'
+  ConstraintDescription:
+    type: string
+    maxLength: 2000
+  ConstraintType:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  ConstraintDetail:
+    type: object
+    properties:
+      ConstraintId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the constraint.
+      Type:
+        $ref: '#/definitions/ConstraintType'
+        description: <p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>
+      Description:
+        $ref: '#/definitions/ConstraintDescription'
+        description: The description of the constraint.
+      Owner:
+        $ref: '#/definitions/AccountId'
+        description: The owner of the constraint.
+    description: Information about a constraint.
+  ConstraintDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ConstraintDetail'
+  ConstraintParameters:
+    type: string
+  ConstraintSummary:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/ConstraintType'
+        description: <p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>
+      Description:
+        $ref: '#/definitions/ConstraintDescription'
+        description: The description of the constraint.
+    description: Summary information about a constraint.
+  ConstraintSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/ConstraintSummary'
+  CopyOption:
+    type: string
+    enum:
+      - CopyTags
+  CopyOptions:
+    type: array
+    items:
+      $ref: '#/definitions/CopyOption'
+  ProductArn:
     type: string
     pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
     minLength: 1
     maxLength: 1224
-  NotificationArns:
+  ProductViewName:
+    type: string
+    maxLength: 8191
+  SourceProvisioningArtifactProperties:
     type: array
     items:
-      $ref: '#/definitions/NotificationArn'
-    maxItems: 5
-  OutputKey:
+      $ref: '#/definitions/SourceProvisioningArtifactPropertiesMap'
+  IdempotencyToken:
     type: string
-  OutputValue:
+    pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
+    minLength: 1
+    maxLength: 128
+  CopyProductStatus:
     type: string
-  PageSize:
-    type: integer
-    minimum: 0
-    maximum: 20
-  PageToken:
+    enum:
+      - SUCCEEDED
+      - IN_PROGRESS
+      - FAILED
+  Status:
     type: string
-    pattern: '[\u0009\u000a\u000d\u0020-\uD7FF\uE000-\uFFFD]*'
-  ParameterConstraints:
-    type: object
-    properties:
-      AllowedValues:
-        $ref: '#/definitions/AllowedValues'
-        description: The values that the administrator has allowed for the parameter.
-    description: The constraints that the administrator has put on the parameter.
-  ParameterKey:
+    enum:
+      - AVAILABLE
+      - CREATING
+      - FAILED
+  PortfolioDisplayName:
     type: string
     minLength: 1
-    maxLength: 1000
-  ParameterType:
-    type: string
-  ParameterValue:
-    type: string
-    maxLength: 4096
-  PhysicalId:
-    type: string
-  PhysicalResourceId:
-    type: string
-  PlanResourceType:
-    type: string
-    minLength: 1
-    maxLength: 256
+    maxLength: 100
   PortfolioDescription:
     type: string
     maxLength: 2000
+  ProviderName:
+    type: string
+    minLength: 1
+    maxLength: 50
   PortfolioDetail:
     type: object
     properties:
@@ -3609,77 +4688,50 @@ definitions:
         $ref: '#/definitions/ProviderName'
         description: The name of the portfolio provider.
     description: Information about a portfolio.
-  PortfolioDetails:
+  Tags:
     type: array
     items:
-      $ref: '#/definitions/PortfolioDetail'
-  PortfolioDisplayName:
+      $ref: '#/definitions/Tag'
+    maxItems: 50
+  ProductViewOwner:
     type: string
-    minLength: 1
-    maxLength: 100
-  PortfolioName:
+    maxLength: 8191
+  ProductViewShortDescription:
     type: string
-  Principal:
-    type: object
-    properties:
-      PrincipalARN:
-        $ref: '#/definitions/PrincipalARN'
-        description: 'The ARN of the principal (IAM user, role, or group).'
-      PrincipalType:
-        $ref: '#/definitions/PrincipalType'
-        description: The principal type. The supported value is <code>IAM</code>.
-    description: Information about a principal.
-  PrincipalARN:
+    maxLength: 8191
+  SupportDescription:
     type: string
-    minLength: 1
-    maxLength: 1000
-  PrincipalType:
+    maxLength: 8191
+  SupportEmail:
     type: string
-    enum:
-      - IAM
-  Principals:
-    type: array
-    items:
-      $ref: '#/definitions/Principal'
-  ProductArn:
+    maxLength: 254
+  SupportUrl:
     type: string
-    pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
-    minLength: 1
-    maxLength: 1224
-  ProductSource:
-    type: string
-    enum:
-      - ACCOUNT
+    maxLength: 2083
   ProductType:
     type: string
     enum:
       - CLOUD_FORMATION_TEMPLATE
       - MARKETPLACE
-  ProductViewAggregationType:
-    type: string
-  ProductViewAggregationValue:
+    maxLength: 8191
+  ProvisioningArtifactProperties:
     type: object
+    required:
+      - Info
     properties:
-      Value:
-        $ref: '#/definitions/AttributeValue'
-        description: The value of the product view aggregation.
-      ApproximateCount:
-        $ref: '#/definitions/ApproximateCount'
-        description: An approximate count of the products that match the value.
-    description: 'A single product view aggregation value/count pair, containing metadata about each product to which the calling user has access.'
-  ProductViewAggregationValues:
-    type: array
-    items:
-      $ref: '#/definitions/ProductViewAggregationValue'
-  ProductViewAggregations:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ProductViewAggregationType'
-        value:
-          $ref: '#/definitions/ProductViewAggregationValues'
+      Name:
+        $ref: '#/definitions/ProvisioningArtifactName'
+        description: 'The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.'
+      Description:
+        $ref: '#/definitions/ProvisioningArtifactDescription'
+        description: 'The description of the provisioning artifact, including how it differs from the previous provisioning artifact.'
+      Info:
+        $ref: '#/definitions/ProvisioningArtifactInfo'
+        description: '<p>The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON format as follows:</p> <p> <code>"LoadTemplateFromURL": "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."</code> </p>'
+      Type:
+        $ref: '#/definitions/ProvisioningArtifactType'
+        description: <p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>
+    description: Information about a provisioning artifact (also known as a version) for a product.
   ProductViewDetail:
     type: object
     properties:
@@ -3696,50 +4748,138 @@ definitions:
         $ref: '#/definitions/CreatedTime'
         description: The UTC time stamp of the creation time.
     description: Information about a product view.
-  ProductViewDetails:
-    type: array
-    items:
-      $ref: '#/definitions/ProductViewDetail'
-  ProductViewDistributor:
+  ProvisioningArtifactDetail:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioning artifact.
+      Name:
+        $ref: '#/definitions/ProvisioningArtifactName'
+        description: The name of the provisioning artifact.
+      Description:
+        $ref: '#/definitions/ProvisioningArtifactName'
+        description: The description of the provisioning artifact.
+      Type:
+        $ref: '#/definitions/ProvisioningArtifactType'
+        description: <p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>
+      CreatedTime:
+        $ref: '#/definitions/CreationTime'
+        description: The UTC time stamp of the creation time.
+      Active:
+        $ref: '#/definitions/ProvisioningArtifactActive'
+        description: Indicates whether the product version is active.
+    description: Information about a provisioning artifact (also known as a version) for a product.
+  ProvisionedProductPlanName:
     type: string
-  ProductViewFilterBy:
+  ProvisionedProductPlanType:
     type: string
     enum:
-      - FullTextSearch
-      - Owner
-      - ProductType
-      - SourceProductId
-  ProductViewFilterValue:
-    type: string
-  ProductViewFilterValues:
+      - CLOUDFORMATION
+  NotificationArns:
     type: array
     items:
-      $ref: '#/definitions/ProductViewFilterValue'
-  ProductViewFilters:
+      $ref: '#/definitions/NotificationArn'
+    maxItems: 5
+  ProvisionedProductName:
+    type: string
+    pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]*'
+    minLength: 1
+    maxLength: 128
+  UpdateProvisioningParameters:
     type: array
+    items:
+      $ref: '#/definitions/UpdateProvisioningParameter'
+  ProvisioningArtifactInfo:
+    type: array
+    minItems: 1
+    maxItems: 100
     items:
       type: object
       properties:
         key:
-          $ref: '#/definitions/ProductViewFilterBy'
+          $ref: '#/definitions/ProvisioningArtifactInfoKey'
         value:
-          $ref: '#/definitions/ProductViewFilterValues'
-  ProductViewName:
+          $ref: '#/definitions/ProvisioningArtifactInfoValue'
+  ServiceActionName:
     type: string
-  ProductViewOwner:
-    type: string
-  ProductViewShortDescription:
-    type: string
-  ProductViewSortBy:
+    pattern: '^[a-zA-Z0-9_\-.]*'
+    minLength: 1
+    maxLength: 256
+  ServiceActionDefinitionType:
     type: string
     enum:
-      - Title
-      - VersionCount
-      - CreationDate
-  ProductViewSummaries:
+      - SSM_AUTOMATION
+  ServiceActionDefinitionMap:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ServiceActionDefinitionKey'
+        value:
+          $ref: '#/definitions/ServiceActionDefinitionValue'
+  ServiceActionDescription:
+    type: string
+    maxLength: 1024
+  ServiceActionDetail:
+    type: object
+    properties:
+      ServiceActionSummary:
+        $ref: '#/definitions/ServiceActionSummary'
+        description: Summary information about the self-service action.
+      Definition:
+        $ref: '#/definitions/ServiceActionDefinitionMap'
+        description: A map that defines the self-service action.
+    description: An object containing detailed information about the self-service action.
+  TagOptionKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagOptionValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 256
+  TagOptionDetail:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/TagOptionKey'
+        description: The TagOption key.
+      Value:
+        $ref: '#/definitions/TagOptionValue'
+        description: The TagOption value.
+      Active:
+        $ref: '#/definitions/TagOptionActive'
+        description: The TagOption active state.
+      Id:
+        $ref: '#/definitions/TagOptionId'
+        description: The TagOption identifier.
+    description: Information about a TagOption.
+  CreatedTime:
+    type: string
+    format: date-time
+  CreationTime:
+    type: string
+    format: date-time
+  DefaultValue:
+    type: string
+  IgnoreErrors:
+    type: boolean
+  StatusDetail:
+    type: string
+  TagOptionDetails:
     type: array
     items:
-      $ref: '#/definitions/ProductViewSummary'
+      $ref: '#/definitions/TagOptionDetail'
+  ProvisioningArtifactSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningArtifactSummary'
   ProductViewSummary:
     type: object
     properties:
@@ -3777,23 +4917,149 @@ definitions:
         $ref: '#/definitions/SupportUrl'
         description: The URL information to obtain support for this Product.
     description: Summary information about a product view.
-  PropertyName:
-    type: string
-  ProviderName:
-    type: string
-    minLength: 1
-    maxLength: 50
-  ProvisionProductInput:
+  ProvisioningArtifacts:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningArtifact'
+  ProvisionedProductDetail:
     type: object
-    required:
-      - ProductId
-      - ProvisioningArtifactId
-      - ProvisionedProductName
-      - ProvisionToken
     properties:
-      AcceptLanguage:
-        $ref: '#/definitions/AcceptLanguage'
-        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      Name:
+        $ref: '#/definitions/ProvisionedProductNameOrArn'
+        description: The user-friendly name of the provisioned product.
+      Arn:
+        $ref: '#/definitions/ProvisionedProductNameOrArn'
+        description: The ARN of the provisioned product.
+      Type:
+        $ref: '#/definitions/ProvisionedProductType'
+        description: The type of provisioned product. The supported value is <code>CFN_STACK</code>.
+      Id:
+        $ref: '#/definitions/ProvisionedProductId'
+        description: The identifier of the provisioned product.
+      Status:
+        $ref: '#/definitions/ProvisionedProductStatus'
+        description: '<p>The current status of the provisioned product.</p> <ul> <li> <p> <code>AVAILABLE</code> - Stable state, ready to perform any operation. The most recent operation succeeded and completed.</p> </li> <li> <p> <code>UNDER_CHANGE</code> - Transitive state, operations performed might not have valid results. Wait for an <code>AVAILABLE</code> status before performing operations.</p> </li> <li> <p> <code>TAINTED</code> - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.</p> </li> <li> <p> <code>ERROR</code> - An unexpected error occurred, the provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.</p> </li> </ul>'
+      StatusMessage:
+        $ref: '#/definitions/ProvisionedProductStatusMessage'
+        description: The current status message of the provisioned product.
+      CreatedTime:
+        $ref: '#/definitions/CreatedTime'
+        description: The UTC time stamp of the creation time.
+      IdempotencyToken:
+        $ref: '#/definitions/IdempotencyToken'
+        description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.'
+      LastRecordId:
+        $ref: '#/definitions/LastRequestId'
+        description: The record identifier of the last request performed on this provisioned product.
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: 'The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.'
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: 'The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.'
+    description: Information about a provisioned product.
+  PageSize:
+    type: integer
+    minimum: 0
+    maximum: 20
+  PageToken:
+    type: string
+    pattern: '[\u0009\u000a\u000d\u0020-\uD7FF\uE000-\uFFFD]*'
+    maxLength: 2024
+  ProvisionedProductPlanDetails:
+    type: object
+    properties:
+      CreatedTime:
+        $ref: '#/definitions/CreatedTime'
+        description: The UTC time stamp of the creation time.
+      PathId:
+        $ref: '#/definitions/Id'
+        description: 'The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.'
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: The product identifier.
+      PlanName:
+        $ref: '#/definitions/ProvisionedProductPlanName'
+        description: The name of the plan.
+      PlanId:
+        $ref: '#/definitions/Id'
+        description: The plan identifier.
+      ProvisionProductId:
+        $ref: '#/definitions/Id'
+        description: The product identifier.
+      ProvisionProductName:
+        $ref: '#/definitions/ProvisionedProductName'
+        description: The user-friendly name of the provisioned product.
+      PlanType:
+        $ref: '#/definitions/ProvisionedProductPlanType'
+        description: The plan type.
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioning artifact.
+      Status:
+        $ref: '#/definitions/ProvisionedProductPlanStatus'
+        description: The status.
+      UpdatedTime:
+        $ref: '#/definitions/UpdatedTime'
+        description: The time when the plan was last updated.
+      NotificationArns:
+        $ref: '#/definitions/NotificationArns'
+        description: Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related events.
+      ProvisioningParameters:
+        $ref: '#/definitions/UpdateProvisioningParameters'
+        description: Parameters specified by the administrator that are required for provisioning the product.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: One or more tags.
+      StatusMessage:
+        $ref: '#/definitions/StatusMessage'
+        description: The status message.
+    description: Information about a plan.
+  ResourceChanges:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceChange'
+  Verbose:
+    type: boolean
+  ProvisioningArtifactParameters:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningArtifactParameter'
+  UsageInstructions:
+    type: array
+    items:
+      $ref: '#/definitions/UsageInstruction'
+  TagOptionSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/TagOptionSummary'
+  RecordDetail:
+    type: object
+    properties:
+      RecordId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the record.
+      ProvisionedProductName:
+        $ref: '#/definitions/ProvisionedProductName'
+        description: The user-friendly name of the provisioned product.
+      Status:
+        $ref: '#/definitions/RecordStatus'
+        description: '<p>The status of the provisioned product.</p> <ul> <li> <p> <code>CREATED</code> - The request was created but the operation has not started.</p> </li> <li> <p> <code>IN_PROGRESS</code> - The requested operation is in progress.</p> </li> <li> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a rollback.</p> </li> <li> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> </li> <li> <p> <code>FAILED</code> - The requested operation has unsuccessfully completed. Investigate using the error messages returned.</p> </li> </ul>'
+      CreatedTime:
+        $ref: '#/definitions/CreatedTime'
+        description: The UTC time stamp of the creation time.
+      UpdatedTime:
+        $ref: '#/definitions/UpdatedTime'
+        description: The time when the record was last updated.
+      ProvisionedProductType:
+        $ref: '#/definitions/ProvisionedProductType'
+        description: The type of provisioned product. The supported value is <code>CFN_STACK</code>.
+      RecordType:
+        $ref: '#/definitions/RecordType'
+        description: <p>The record type.</p> <ul> <li> <p> <code>PROVISION_PRODUCT</code> </p> </li> <li> <p> <code>UPDATE_PROVISIONED_PRODUCT</code> </p> </li> <li> <p> <code>TERMINATE_PROVISIONED_PRODUCT</code> </p> </li> </ul>
+      ProvisionedProductId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioned product.
       ProductId:
         $ref: '#/definitions/Id'
         description: The product identifier.
@@ -3802,28 +5068,303 @@ definitions:
         description: The identifier of the provisioning artifact.
       PathId:
         $ref: '#/definitions/Id'
-        description: 'The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.'
-      ProvisionedProductName:
-        $ref: '#/definitions/ProvisionedProductName'
-        description: A user-friendly name for the provisioned product. This value must be unique for the AWS account and cannot be updated after the product is provisioned.
-      ProvisioningParameters:
-        $ref: '#/definitions/ProvisioningParameters'
-        description: Parameters specified by the administrator that are required for provisioning the product.
-      Tags:
-        $ref: '#/definitions/Tags'
+        description: The path identifier.
+      RecordErrors:
+        $ref: '#/definitions/RecordErrors'
+        description: The errors that occurred.
+      RecordTags:
+        $ref: '#/definitions/RecordTags'
         description: One or more tags.
-      NotificationArns:
-        $ref: '#/definitions/NotificationArns'
-        description: Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related events.
-      ProvisionToken:
-        $ref: '#/definitions/IdempotencyToken'
-        description: An idempotency token that uniquely identifies the provisioning request.
-  ProvisionProductOutput:
+    description: Information about a request operation.
+  RecordOutputs:
+    type: array
+    items:
+      $ref: '#/definitions/RecordOutput'
+  Description:
+    type: string
+  ErrorCode:
+    type: string
+  ErrorDescription:
+    type: string
+  EvaluationType:
+    type: string
+    enum:
+      - STATIC
+      - DYNAMIC
+  ServiceActionAssociationErrorCode:
+    type: string
+    enum:
+      - DUPLICATE_RESOURCE
+      - INTERNAL_FAILURE
+      - LIMIT_EXCEEDED
+      - RESOURCE_NOT_FOUND
+      - THROTTLING
+  ServiceActionAssociationErrorMessage:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  FailedServiceActionAssociation:
     type: object
     properties:
-      RecordDetail:
-        $ref: '#/definitions/RecordDetail'
-        description: Information about the result of provisioning the product.
+      ServiceActionId:
+        $ref: '#/definitions/Id'
+        description: 'The self-service action identifier. For example, <code>act-fs7abcd89wxyz</code>.'
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: 'The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.'
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: 'The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.'
+      ErrorCode:
+        $ref: '#/definitions/ServiceActionAssociationErrorCode'
+        description: The error code. Valid values are listed below.
+      ErrorMessage:
+        $ref: '#/definitions/ServiceActionAssociationErrorMessage'
+        description: A text description of the error.
+    description: 'An object containing information about the error, along with identifying information about the self-service action and its associations.'
+  HasDefaultPath:
+    type: boolean
+  InstructionType:
+    type: string
+  InstructionValue:
+    type: string
+  LastRequestId:
+    type: string
+  LaunchPathSummary:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/Id'
+        description: The identifier of the product path.
+      ConstraintSummaries:
+        $ref: '#/definitions/ConstraintSummaries'
+        description: The constraints on the portfolio-product relationship.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The tags associated with this product path.
+      Name:
+        $ref: '#/definitions/PortfolioName'
+        description: The name of the portfolio to which the user was assigned.
+    description: Summary information about a product path for a user.
+  LaunchPathSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/LaunchPathSummary'
+  PortfolioName:
+    type: string
+  PortfolioShareType:
+    type: string
+    enum:
+      - IMPORTED
+      - AWS_SERVICECATALOG
+  PortfolioDetails:
+    type: array
+    items:
+      $ref: '#/definitions/PortfolioDetail'
+  Principals:
+    type: array
+    items:
+      $ref: '#/definitions/Principal'
+  ProvisionedProductPlans:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisionedProductPlanSummary'
+  ProvisioningArtifactViews:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningArtifactView'
+  ProvisioningArtifactDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningArtifactDetail'
+  ListRecordHistorySearchFilter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/SearchFilterKey'
+        description: <p>The filter key.</p> <ul> <li> <p> <code>product</code> - Filter results based on the specified product identifier.</p> </li> <li> <p> <code>provisionedproduct</code> - Filter results based on the provisioned product identifier.</p> </li> </ul>
+      Value:
+        $ref: '#/definitions/SearchFilterValue'
+        description: The filter value.
+    description: The search filter to use when listing history records.
+  RecordDetails:
+    type: array
+    items:
+      $ref: '#/definitions/RecordDetail'
+  SearchFilterKey:
+    type: string
+  SearchFilterValue:
+    type: string
+  ResourceType:
+    type: string
+  ResourceDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceDetail'
+  ServiceActionSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceActionSummary'
+  TagOptionActive:
+    type: boolean
+  ListTagOptionsFilters:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/TagOptionKey'
+        description: The TagOption key.
+      Value:
+        $ref: '#/definitions/TagOptionValue'
+        description: The TagOption value.
+      Active:
+        $ref: '#/definitions/TagOptionActive'
+        description: The active state.
+    description: Filters to use when listing TagOptions.
+  LogicalResourceId:
+    type: string
+  NoEcho:
+    type: boolean
+  NotificationArn:
+    type: string
+    pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+    minLength: 1
+    maxLength: 1224
+  OutputKey:
+    type: string
+  OutputValue:
+    type: string
+  ParameterConstraints:
+    type: object
+    properties:
+      AllowedValues:
+        $ref: '#/definitions/AllowedValues'
+        description: The values that the administrator has allowed for the parameter.
+    description: The constraints that the administrator has put on the parameter.
+  ParameterKey:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  ParameterType:
+    type: string
+  ParameterValue:
+    type: string
+    maxLength: 4096
+  PhysicalId:
+    type: string
+  PhysicalResourceId:
+    type: string
+  PlanResourceType:
+    type: string
+    minLength: 1
+    maxLength: 256
+  ResourceARN:
+    type: string
+    minLength: 1
+    maxLength: 150
+  Principal:
+    type: object
+    properties:
+      PrincipalARN:
+        $ref: '#/definitions/PrincipalARN'
+        description: 'The ARN of the principal (IAM user, role, or group).'
+      PrincipalType:
+        $ref: '#/definitions/PrincipalType'
+        description: The principal type. The supported value is <code>IAM</code>.
+    description: Information about a principal.
+  ProductSource:
+    type: string
+    enum:
+      - ACCOUNT
+  ProductViewAggregationType:
+    type: string
+  ProductViewAggregationValue:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/AttributeValue'
+        description: The value of the product view aggregation.
+      ApproximateCount:
+        $ref: '#/definitions/ApproximateCount'
+        description: An approximate count of the products that match the value.
+    description: 'A single product view aggregation value/count pair, containing metadata about each product to which the calling user has access.'
+  ProductViewAggregationValues:
+    type: array
+    items:
+      $ref: '#/definitions/ProductViewAggregationValue'
+  ProductViewAggregations:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ProductViewAggregationType'
+        value:
+          $ref: '#/definitions/ProductViewAggregationValues'
+  ProductViewDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ProductViewDetail'
+  ProductViewDistributor:
+    type: string
+  ProductViewFilterBy:
+    type: string
+    enum:
+      - FullTextSearch
+      - Owner
+      - ProductType
+      - SourceProductId
+  ProductViewFilterValue:
+    type: string
+  ProductViewFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/ProductViewFilterValue'
+  ProductViewFilters:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ProductViewFilterBy'
+        value:
+          $ref: '#/definitions/ProductViewFilterValues'
+  ProductViewSortBy:
+    type: string
+    enum:
+      - Title
+      - VersionCount
+      - CreationDate
+  ProductViewSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/ProductViewSummary'
+  PropertyName:
+    type: string
+  ProvisioningParameters:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningParameter'
+  ProvisionedProductNameOrArn:
+    type: string
+    pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}|arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+    minLength: 1
+    maxLength: 1224
+  ProvisionedProductType:
+    type: string
+  ProvisionedProductStatus:
+    type: string
+    enum:
+      - AVAILABLE
+      - UNDER_CHANGE
+      - TAINTED
+      - ERROR
+      - PLAN_IN_PROGRESS
+  ProvisionedProductStatusMessage:
+    type: string
+  UserArn:
+    type: string
+  UserArnSession:
+    type: string
   ProvisionedProductAttribute:
     type: object
     properties:
@@ -3877,41 +5418,20 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ProvisionedProductAttribute'
-  ProvisionedProductDetail:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/ProvisionedProductNameOrArn'
-        description: The user-friendly name of the provisioned product.
-      Arn:
-        $ref: '#/definitions/ProvisionedProductNameOrArn'
-        description: The ARN of the provisioned product.
-      Type:
-        $ref: '#/definitions/ProvisionedProductType'
-        description: The type of provisioned product. The supported value is <code>CFN_STACK</code>.
-      Id:
-        $ref: '#/definitions/ProvisionedProductId'
-        description: The identifier of the provisioned product.
-      Status:
-        $ref: '#/definitions/ProvisionedProductStatus'
-        description: '<p>The current status of the provisioned product.</p> <ul> <li> <p> <code>AVAILABLE</code> - Stable state, ready to perform any operation. The most recent operation succeeded and completed.</p> </li> <li> <p> <code>UNDER_CHANGE</code> - Transitive state, operations performed might not have valid results. Wait for an <code>AVAILABLE</code> status before performing operations.</p> </li> <li> <p> <code>TAINTED</code> - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.</p> </li> <li> <p> <code>ERROR</code> - An unexpected error occurred, the provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.</p> </li> </ul>'
-      StatusMessage:
-        $ref: '#/definitions/ProvisionedProductStatusMessage'
-        description: The current status message of the provisioned product.
-      CreatedTime:
-        $ref: '#/definitions/CreatedTime'
-        description: The UTC time stamp of the creation time.
-      IdempotencyToken:
-        $ref: '#/definitions/IdempotencyToken'
-        description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.'
-      LastRecordId:
-        $ref: '#/definitions/LastRequestId'
-        description: The record identifier of the last request performed on this provisioned product.
-    description: Information about a provisioned product.
+  ProvisionedProductId:
+    type: string
   ProvisionedProductDetails:
     type: array
     items:
       $ref: '#/definitions/ProvisionedProductDetail'
+  ProvisionedProductViewFilterBy:
+    type: string
+    enum:
+      - SearchQuery
+  ProvisionedProductViewFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisionedProductViewFilterValue'
   ProvisionedProductFilters:
     type: array
     items:
@@ -3921,69 +5441,6 @@ definitions:
           $ref: '#/definitions/ProvisionedProductViewFilterBy'
         value:
           $ref: '#/definitions/ProvisionedProductViewFilterValues'
-  ProvisionedProductId:
-    type: string
-  ProvisionedProductName:
-    type: string
-    pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]*'
-    minLength: 1
-    maxLength: 128
-  ProvisionedProductNameOrArn:
-    type: string
-    pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}|arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
-    minLength: 1
-    maxLength: 1224
-  ProvisionedProductPlanDetails:
-    type: object
-    properties:
-      CreatedTime:
-        $ref: '#/definitions/CreatedTime'
-        description: The UTC time stamp of the creation time.
-      PathId:
-        $ref: '#/definitions/Id'
-        description: 'The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.'
-      ProductId:
-        $ref: '#/definitions/Id'
-        description: The product identifier.
-      PlanName:
-        $ref: '#/definitions/ProvisionedProductPlanName'
-        description: The name of the plan.
-      PlanId:
-        $ref: '#/definitions/Id'
-        description: The plan identifier.
-      ProvisionProductId:
-        $ref: '#/definitions/Id'
-        description: The product identifier.
-      ProvisionProductName:
-        $ref: '#/definitions/ProvisionedProductName'
-        description: The user-friendly name of the provisioned product.
-      PlanType:
-        $ref: '#/definitions/ProvisionedProductPlanType'
-        description: The plan type.
-      ProvisioningArtifactId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioning artifact.
-      Status:
-        $ref: '#/definitions/ProvisionedProductPlanStatus'
-        description: The status.
-      UpdatedTime:
-        $ref: '#/definitions/UpdatedTime'
-        description: The time when the plan was last updated.
-      NotificationArns:
-        $ref: '#/definitions/NotificationArns'
-        description: Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related events.
-      ProvisioningParameters:
-        $ref: '#/definitions/UpdateProvisioningParameters'
-        description: Parameters specified by the administrator that are required for provisioning the product.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: One or more tags.
-      StatusMessage:
-        $ref: '#/definitions/StatusMessage'
-        description: The status message.
-    description: Information about a plan.
-  ProvisionedProductPlanName:
-    type: string
   ProvisionedProductPlanStatus:
     type: string
     enum:
@@ -3993,6 +5450,12 @@ definitions:
       - EXECUTE_IN_PROGRESS
       - EXECUTE_SUCCESS
       - EXECUTE_FAILED
+  UpdatedTime:
+    type: string
+    format: date-time
+  StatusMessage:
+    type: string
+    pattern: '[\u0009\u000a\u000d\u0020-\uD7FF\uE000-\uFFFD]*'
   ProvisionedProductPlanSummary:
     type: object
     properties:
@@ -4015,36 +5478,15 @@ definitions:
         $ref: '#/definitions/Id'
         description: The identifier of the provisioning artifact.
     description: Summary information about a plan.
-  ProvisionedProductPlanType:
-    type: string
-    enum:
-      - CLOUDFORMATION
-  ProvisionedProductPlans:
-    type: array
-    items:
-      $ref: '#/definitions/ProvisionedProductPlanSummary'
-  ProvisionedProductStatus:
-    type: string
-    enum:
-      - AVAILABLE
-      - UNDER_CHANGE
-      - TAINTED
-      - ERROR
-      - PLAN_IN_PROGRESS
-  ProvisionedProductStatusMessage:
-    type: string
-  ProvisionedProductType:
-    type: string
-  ProvisionedProductViewFilterBy:
-    type: string
-    enum:
-      - SearchQuery
   ProvisionedProductViewFilterValue:
     type: string
-  ProvisionedProductViewFilterValues:
-    type: array
-    items:
-      $ref: '#/definitions/ProvisionedProductViewFilterValue'
+  ProvisioningArtifactName:
+    type: string
+  ProvisioningArtifactDescription:
+    type: string
+  ProvisioningArtifactCreatedTime:
+    type: string
+    format: date-time
   ProvisioningArtifact:
     type: object
     properties:
@@ -4063,53 +5505,15 @@ definitions:
     description: Information about a provisioning artifact. A provisioning artifact is also known as a product version.
   ProvisioningArtifactActive:
     type: boolean
-  ProvisioningArtifactCreatedTime:
+  ProvisioningArtifactType:
     type: string
-    format: date-time
-  ProvisioningArtifactDescription:
-    type: string
-  ProvisioningArtifactDetail:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioning artifact.
-      Name:
-        $ref: '#/definitions/ProvisioningArtifactName'
-        description: The name of the provisioning artifact.
-      Description:
-        $ref: '#/definitions/ProvisioningArtifactName'
-        description: The description of the provisioning artifact.
-      Type:
-        $ref: '#/definitions/ProvisioningArtifactType'
-        description: <p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>
-      CreatedTime:
-        $ref: '#/definitions/CreationTime'
-        description: The UTC time stamp of the creation time.
-      Active:
-        $ref: '#/definitions/ProvisioningArtifactActive'
-        description: Indicates whether the product version is active.
-    description: Information about a provisioning artifact (also known as a version) for a product.
-  ProvisioningArtifactDetails:
-    type: array
-    items:
-      $ref: '#/definitions/ProvisioningArtifactDetail'
-  ProvisioningArtifactInfo:
-    type: array
-    minItems: 1
-    maxItems: 100
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ProvisioningArtifactInfoKey'
-        value:
-          $ref: '#/definitions/ProvisioningArtifactInfoValue'
+    enum:
+      - CLOUD_FORMATION_TEMPLATE
+      - MARKETPLACE_AMI
+      - MARKETPLACE_CAR
   ProvisioningArtifactInfoKey:
     type: string
   ProvisioningArtifactInfoValue:
-    type: string
-  ProvisioningArtifactName:
     type: string
   ProvisioningArtifactParameter:
     type: object
@@ -4133,38 +5537,12 @@ definitions:
         $ref: '#/definitions/ParameterConstraints'
         description: Constraints that the administrator has put on a parameter.
     description: Information about a parameter used to provision a product.
-  ProvisioningArtifactParameters:
-    type: array
-    items:
-      $ref: '#/definitions/ProvisioningArtifactParameter'
-  ProvisioningArtifactProperties:
-    type: object
-    required:
-      - Info
-    properties:
-      Name:
-        $ref: '#/definitions/ProvisioningArtifactName'
-        description: 'The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.'
-      Description:
-        $ref: '#/definitions/ProvisioningArtifactDescription'
-        description: 'The description of the provisioning artifact, including how it differs from the previous provisioning artifact.'
-      Info:
-        $ref: '#/definitions/ProvisioningArtifactInfo'
-        description: '<p>The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON format as follows:</p> <p> <code>"LoadTemplateFromURL": "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."</code> </p>'
-      Type:
-        $ref: '#/definitions/ProvisioningArtifactType'
-        description: <p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>
-    description: Information about a provisioning artifact (also known as a version) for a product.
   ProvisioningArtifactPropertyName:
     type: string
     enum:
       - Id
   ProvisioningArtifactPropertyValue:
     type: string
-  ProvisioningArtifactSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/ProvisioningArtifactSummary'
   ProvisioningArtifactSummary:
     type: object
     properties:
@@ -4184,16 +5562,16 @@ definitions:
         $ref: '#/definitions/ProvisioningArtifactInfo'
         description: The metadata for the provisioning artifact. This is used with AWS Marketplace products.
     description: Summary information about a provisioning artifact (also known as a version) for a product.
-  ProvisioningArtifactType:
-    type: string
-    enum:
-      - CLOUD_FORMATION_TEMPLATE
-      - MARKETPLACE_AMI
-      - MARKETPLACE_CAR
-  ProvisioningArtifacts:
-    type: array
-    items:
-      $ref: '#/definitions/ProvisioningArtifact'
+  ProvisioningArtifactView:
+    type: object
+    properties:
+      ProductViewSummary:
+        $ref: '#/definitions/ProductViewSummary'
+        description: Summary information about a product view.
+      ProvisioningArtifact:
+        $ref: '#/definitions/ProvisioningArtifact'
+        description: Information about a provisioning artifact. A provisioning artifact is also known as a product version.
+    description: An object that contains summary information about a product view and a provisioning artifact.
   ProvisioningParameter:
     type: object
     properties:
@@ -4204,57 +5582,25 @@ definitions:
         $ref: '#/definitions/ParameterValue'
         description: The parameter value.
     description: Information about a parameter used to provision a product.
-  ProvisioningParameters:
+  RecordStatus:
+    type: string
+    enum:
+      - CREATED
+      - IN_PROGRESS
+      - IN_PROGRESS_IN_ERROR
+      - SUCCEEDED
+      - FAILED
+  RecordType:
+    type: string
+  RecordErrors:
     type: array
     items:
-      $ref: '#/definitions/ProvisioningParameter'
-  RecordDetail:
-    type: object
-    properties:
-      RecordId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the record.
-      ProvisionedProductName:
-        $ref: '#/definitions/ProvisionedProductName'
-        description: The user-friendly name of the provisioned product.
-      Status:
-        $ref: '#/definitions/RecordStatus'
-        description: '<p>The status of the provisioned product.</p> <ul> <li> <p> <code>CREATED</code> - The request was created but the operation has not started.</p> </li> <li> <p> <code>IN_PROGRESS</code> - The requested operation is in progress.</p> </li> <li> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a rollback.</p> </li> <li> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> </li> <li> <p> <code>FAILED</code> - The requested operation has unsuccessfully completed. Investigate using the error messages returned.</p> </li> </ul>'
-      CreatedTime:
-        $ref: '#/definitions/CreatedTime'
-        description: The UTC time stamp of the creation time.
-      UpdatedTime:
-        $ref: '#/definitions/UpdatedTime'
-        description: The time when the record was last updated.
-      ProvisionedProductType:
-        $ref: '#/definitions/ProvisionedProductType'
-        description: The type of provisioned product. The supported value is <code>CFN_STACK</code>.
-      RecordType:
-        $ref: '#/definitions/RecordType'
-        description: <p>The record type.</p> <ul> <li> <p> <code>PROVISION_PRODUCT</code> </p> </li> <li> <p> <code>UPDATE_PROVISIONED_PRODUCT</code> </p> </li> <li> <p> <code>TERMINATE_PROVISIONED_PRODUCT</code> </p> </li> </ul>
-      ProvisionedProductId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioned product.
-      ProductId:
-        $ref: '#/definitions/Id'
-        description: The product identifier.
-      ProvisioningArtifactId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioning artifact.
-      PathId:
-        $ref: '#/definitions/Id'
-        description: The path identifier.
-      RecordErrors:
-        $ref: '#/definitions/RecordErrors'
-        description: The errors that occurred.
-      RecordTags:
-        $ref: '#/definitions/RecordTags'
-        description: One or more tags.
-    description: Information about a request operation.
-  RecordDetails:
+      $ref: '#/definitions/RecordError'
+  RecordTags:
     type: array
     items:
-      $ref: '#/definitions/RecordDetail'
+      $ref: '#/definitions/RecordTag'
+    maxItems: 50
   RecordError:
     type: object
     properties:
@@ -4265,10 +5611,6 @@ definitions:
         $ref: '#/definitions/ErrorDescription'
         description: The description of the error.
     description: The error code and description resulting from an operation.
-  RecordErrors:
-    type: array
-    items:
-      $ref: '#/definitions/RecordError'
   RecordOutput:
     type: object
     properties:
@@ -4282,28 +5624,6 @@ definitions:
         $ref: '#/definitions/Description'
         description: The description of the output.
     description: 'The output for the product created as the result of a request. For example, the output for a CloudFormation-backed product that creates an S3 bucket would include the S3 bucket URL.'
-  RecordOutputs:
-    type: array
-    items:
-      $ref: '#/definitions/RecordOutput'
-  RecordStatus:
-    type: string
-    enum:
-      - CREATED
-      - IN_PROGRESS
-      - IN_PROGRESS_IN_ERROR
-      - SUCCEEDED
-      - FAILED
-  RecordTag:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/RecordTagKey'
-        description: The key for this tag.
-      Value:
-        $ref: '#/definitions/RecordTagValue'
-        description: The value for this tag.
-    description: 'Information about a tag, which is a key-value pair.'
   RecordTagKey:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
@@ -4314,27 +5634,16 @@ definitions:
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
     minLength: 1
     maxLength: 256
-  RecordTags:
-    type: array
-    items:
-      $ref: '#/definitions/RecordTag'
-    maxItems: 50
-  RecordType:
-    type: string
-  RejectPortfolioShareInput:
+  RecordTag:
     type: object
-    required:
-      - PortfolioId
     properties:
-      AcceptLanguage:
-        $ref: '#/definitions/AcceptLanguage'
-        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-      PortfolioId:
-        $ref: '#/definitions/Id'
-        description: The portfolio identifier.
-  RejectPortfolioShareOutput:
-    type: object
-    properties: {}
+      Key:
+        $ref: '#/definitions/RecordTagKey'
+        description: The key for this tag.
+      Value:
+        $ref: '#/definitions/RecordTagValue'
+        description: The value for this tag.
+    description: 'Information about a tag, which is a key-value pair.'
   Replacement:
     type: string
     enum:
@@ -4347,10 +5656,6 @@ definitions:
       - NEVER
       - CONDITIONALLY
       - ALWAYS
-  ResourceARN:
-    type: string
-    minLength: 1
-    maxLength: 150
   ResourceAttribute:
     type: string
     enum:
@@ -4360,6 +5665,14 @@ definitions:
       - UPDATEPOLICY
       - DELETIONPOLICY
       - TAGS
+  Scope:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceAttribute'
+  ResourceChangeDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceChangeDetail'
   ResourceChange:
     type: object
     properties:
@@ -4385,27 +5698,43 @@ definitions:
         $ref: '#/definitions/ResourceChangeDetails'
         description: Information about the resource changes.
     description: Information about a resource change that will occur when a plan is executed.
+  ResourceTargetDefinition:
+    type: object
+    properties:
+      Attribute:
+        $ref: '#/definitions/ResourceAttribute'
+        description: The attribute to be changed.
+      Name:
+        $ref: '#/definitions/PropertyName'
+        description: 'If the attribute is <code>Properties</code>, the value is the name of the property. Otherwise, the value is null.'
+      RequiresRecreation:
+        $ref: '#/definitions/RequiresRecreation'
+        description: 'If the attribute is <code>Properties</code>, indicates whether a change to this property causes the resource to be re-created.'
+    description: Information about a change to a resource attribute.
   ResourceChangeDetail:
     type: object
     properties:
       Target:
         $ref: '#/definitions/ResourceTargetDefinition'
-        description: Information about the resource attribute that will be modified.
+        description: Information about the resource attribute to be modified.
       Evaluation:
         $ref: '#/definitions/EvaluationType'
-        description: 'For static evaluations, the value the resource attribute will change and the new value is known. For dynamic evaluations, the value might change, and any new value will be determined when the plan is updated.'
+        description: 'For static evaluations, the value of the resource attribute will change and the new value is known. For dynamic evaluations, the value might change, and any new value will be determined when the plan is updated.'
       CausingEntity:
         $ref: '#/definitions/CausingEntity'
         description: The ID of the entity that caused the change.
     description: Information about a change to a resource attribute.
-  ResourceChangeDetails:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceChangeDetail'
-  ResourceChanges:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceChange'
+  ResourceDetailId:
+    type: string
+  ResourceDetailARN:
+    type: string
+  ResourceDetailName:
+    type: string
+  ResourceDetailDescription:
+    type: string
+  ResourceDetailCreatedTime:
+    type: string
+    format: date-time
   ResourceDetail:
     type: object
     properties:
@@ -4425,198 +5754,63 @@ definitions:
         $ref: '#/definitions/ResourceDetailCreatedTime'
         description: The creation time of the resource.
     description: Information about a resource.
-  ResourceDetailARN:
-    type: string
-  ResourceDetailCreatedTime:
-    type: string
-    format: date-time
-  ResourceDetailDescription:
-    type: string
-  ResourceDetailId:
-    type: string
-  ResourceDetailName:
-    type: string
-  ResourceDetails:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceDetail'
-  ResourceId:
-    type: string
-  ResourceInUseException:
-    type: object
-    properties: {}
-    description: A resource that is currently in use. Ensure that the resource is not in use and retry the operation.
-  ResourceNotFoundException:
-    type: object
-    properties: {}
-    description: The specified resource was not found.
-  ResourceTargetDefinition:
-    type: object
-    properties:
-      Attribute:
-        $ref: '#/definitions/ResourceAttribute'
-        description: The attribute that will change.
-      Name:
-        $ref: '#/definitions/PropertyName'
-        description: 'If the attribute is <code>Properties</code>, the value is the name of the property. Otherwise, the value is null.'
-      RequiresRecreation:
-        $ref: '#/definitions/RequiresRecreation'
-        description: 'If the attribute is <code>Properties</code>, indicates whether a change to this property causes the resource to be recreated.'
-    description: Information about a change to a resource attribute.
-  ResourceType:
-    type: string
-  ScanProvisionedProductsInput:
-    type: object
-    properties:
-      AcceptLanguage:
-        $ref: '#/definitions/AcceptLanguage'
-        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-      AccessLevelFilter:
-        $ref: '#/definitions/AccessLevelFilter'
-        description: The access level to use to obtain results. The default is <code>User</code>.
-      PageSize:
-        $ref: '#/definitions/PageSize'
-        description: The maximum number of items to return with this call.
-      PageToken:
-        $ref: '#/definitions/PageToken'
-        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-  ScanProvisionedProductsOutput:
-    type: object
-    properties:
-      ProvisionedProducts:
-        $ref: '#/definitions/ProvisionedProductDetails'
-        description: Information about the provisioned products.
-      NextPageToken:
-        $ref: '#/definitions/PageToken'
-        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
-  Scope:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceAttribute'
-  SearchFilterKey:
-    type: string
-  SearchFilterValue:
-    type: string
-  SearchProductsAsAdminInput:
-    type: object
-    properties:
-      AcceptLanguage:
-        $ref: '#/definitions/AcceptLanguage'
-        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-      PortfolioId:
-        $ref: '#/definitions/Id'
-        description: The portfolio identifier.
-      Filters:
-        $ref: '#/definitions/ProductViewFilters'
-        description: 'The search filters. If no search filters are specified, the output includes all products to which the administrator has access.'
-      SortBy:
-        $ref: '#/definitions/ProductViewSortBy'
-        description: 'The sort field. If no value is specified, the results are not sorted.'
-      SortOrder:
-        $ref: '#/definitions/SortOrder'
-        description: 'The sort order. If no value is specified, the results are not sorted.'
-      PageToken:
-        $ref: '#/definitions/PageToken'
-        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-      PageSize:
-        $ref: '#/definitions/PageSize'
-        description: The maximum number of items to return with this call.
-      ProductSource:
-        $ref: '#/definitions/ProductSource'
-        description: Access level of the source of the product.
-  SearchProductsAsAdminOutput:
-    type: object
-    properties:
-      ProductViewDetails:
-        $ref: '#/definitions/ProductViewDetails'
-        description: Information about the product views.
-      NextPageToken:
-        $ref: '#/definitions/PageToken'
-        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
-  SearchProductsInput:
-    type: object
-    properties:
-      AcceptLanguage:
-        $ref: '#/definitions/AcceptLanguage'
-        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-      Filters:
-        $ref: '#/definitions/ProductViewFilters'
-        description: 'The search filters. If no search filters are specified, the output includes all products to which the caller has access.'
-      PageSize:
-        $ref: '#/definitions/PageSize'
-        description: The maximum number of items to return with this call.
-      SortBy:
-        $ref: '#/definitions/ProductViewSortBy'
-        description: 'The sort field. If no value is specified, the results are not sorted.'
-      SortOrder:
-        $ref: '#/definitions/SortOrder'
-        description: 'The sort order. If no value is specified, the results are not sorted.'
-      PageToken:
-        $ref: '#/definitions/PageToken'
-        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-  SearchProductsOutput:
-    type: object
-    properties:
-      ProductViewSummaries:
-        $ref: '#/definitions/ProductViewSummaries'
-        description: Information about the product views.
-      ProductViewAggregations:
-        $ref: '#/definitions/ProductViewAggregations'
-        description: The product view aggregations.
-      NextPageToken:
-        $ref: '#/definitions/PageToken'
-        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
-  SearchProvisionedProductsInput:
-    type: object
-    properties:
-      AcceptLanguage:
-        $ref: '#/definitions/AcceptLanguage'
-        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-      AccessLevelFilter:
-        $ref: '#/definitions/AccessLevelFilter'
-        description: The access level to use to obtain results. The default is <code>User</code>.
-      Filters:
-        $ref: '#/definitions/ProvisionedProductFilters'
-        description: '<p>The search filters.</p> <p>When the key is <code>SearchQuery</code>, the searchable fields are <code>arn</code>, <code>createdTime</code>, <code>id</code>, <code>lastRecordId</code>, <code>idempotencyToken</code>, <code>name</code>, <code>physicalId</code>, <code>productId</code>, <code>provisioningArtifact</code>, <code>type</code>, <code>status</code>, <code>tags</code>, <code>userArn</code>, and <code>userArnSession</code>.</p> <p>Example: <code>"SearchQuery":["status:AVAILABLE"]</code> </p>'
-      SortBy:
-        $ref: '#/definitions/SortField'
-        description: 'The sort field. If no value is specified, the results are not sorted. The valid values are <code>arn</code>, <code>id</code>, <code>name</code>, and <code>lastRecordId</code>.'
-      SortOrder:
-        $ref: '#/definitions/SortOrder'
-        description: 'The sort order. If no value is specified, the results are not sorted.'
-      PageSize:
-        $ref: '#/definitions/SearchProvisionedProductsPageSize'
-        description: The maximum number of items to return with this call.
-      PageToken:
-        $ref: '#/definitions/PageToken'
-        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
-  SearchProvisionedProductsOutput:
-    type: object
-    properties:
-      ProvisionedProducts:
-        $ref: '#/definitions/ProvisionedProductAttributes'
-        description: Information about the provisioned products.
-      TotalResultsCount:
-        $ref: '#/definitions/TotalResultsCount'
-        description: The number of provisioned products found.
-      NextPageToken:
-        $ref: '#/definitions/PageToken'
-        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
-  SearchProvisionedProductsPageSize:
-    type: integer
-    minimum: 0
-    maximum: 100
-  SortField:
-    type: string
   SortOrder:
     type: string
     enum:
       - ASCENDING
       - DESCENDING
-  SourceProvisioningArtifactProperties:
-    type: array
-    items:
-      $ref: '#/definitions/SourceProvisioningArtifactPropertiesMap'
+  SortField:
+    type: string
+  SearchProvisionedProductsPageSize:
+    type: integer
+    minimum: 0
+    maximum: 100
+  TotalResultsCount:
+    type: integer
+  ServiceActionAssociation:
+    type: object
+    required:
+      - ServiceActionId
+      - ProductId
+      - ProvisioningArtifactId
+    properties:
+      ServiceActionId:
+        $ref: '#/definitions/Id'
+        description: 'The self-service action identifier. For example, <code>act-fs7abcd89wxyz</code>.'
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: 'The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.'
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: 'The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.'
+    description: 'A self-service action association consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.'
+  ServiceActionDefinitionKey:
+    type: string
+    enum:
+      - Name
+      - Version
+      - AssumeRole
+      - Parameters
+  ServiceActionDefinitionValue:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  ServiceActionSummary:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/Id'
+        description: The self-service action identifier.
+      Name:
+        $ref: '#/definitions/ServiceActionName'
+        description: The self-service action name.
+      Description:
+        $ref: '#/definitions/ServiceActionDescription'
+        description: The self-service action description.
+      DefinitionType:
+        $ref: '#/definitions/ServiceActionDefinitionType'
+        description: 'The self-service action definition type. For example, <code>SSM_AUTOMATION</code>.'
+    description: Detailed information about the self-service action.
   SourceProvisioningArtifactPropertiesMap:
     type: array
     items:
@@ -4626,84 +5820,20 @@ definitions:
           $ref: '#/definitions/ProvisioningArtifactPropertyName'
         value:
           $ref: '#/definitions/ProvisioningArtifactPropertyValue'
-  Status:
-    type: string
-    enum:
-      - AVAILABLE
-      - CREATING
-      - FAILED
-  StatusDetail:
-    type: string
-  StatusMessage:
-    type: string
-    pattern: '[\u0009\u000a\u000d\u0020-\uD7FF\uE000-\uFFFD]*'
-  SupportDescription:
-    type: string
-  SupportEmail:
-    type: string
-  SupportUrl:
-    type: string
-  Tag:
-    type: object
-    required:
-      - Key
-      - Value
-    properties:
-      Key:
-        $ref: '#/definitions/TagKey'
-        description: The tag key.
-      Value:
-        $ref: '#/definitions/TagValue'
-        description: The value for this key.
-    description: Information about a tag. A tag is a key-value pair. Tags are propagated to the resources created when provisioning a product.
   TagKey:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 256
   TagKeys:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagOptionActive:
-    type: boolean
-  TagOptionDetail:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/TagOptionKey'
-        description: The TagOption key.
-      Value:
-        $ref: '#/definitions/TagOptionValue'
-        description: The TagOption value.
-      Active:
-        $ref: '#/definitions/TagOptionActive'
-        description: The TagOption active state.
-      Id:
-        $ref: '#/definitions/TagOptionId'
-        description: The TagOption identifier.
-    description: Information about a TagOption.
-  TagOptionDetails:
-    type: array
-    items:
-      $ref: '#/definitions/TagOptionDetail'
-  TagOptionId:
-    type: string
-    minLength: 1
-    maxLength: 100
-  TagOptionKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagOptionNotMigratedException:
-    type: object
-    properties: {}
-    description: An operation requiring TagOptions failed because the TagOptions migration process has not been performed for this account. Please use the AWS console to perform the migration process before retrying the operation.
-  TagOptionSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/TagOptionSummary'
   TagOptionSummary:
     type: object
     properties:
@@ -4714,232 +5844,12 @@ definitions:
         $ref: '#/definitions/TagOptionValues'
         description: The TagOption value.
     description: Summary information about a TagOption.
-  TagOptionValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 256
   TagOptionValues:
     type: array
     items:
       $ref: '#/definitions/TagOptionValue'
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 256
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    maxItems: 50
-  TerminateProvisionedProductInput:
-    type: object
-    required:
-      - TerminateToken
-    properties:
-      ProvisionedProductName:
-        $ref: '#/definitions/ProvisionedProductNameOrArn'
-        description: The name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
-      ProvisionedProductId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
-      TerminateToken:
-        $ref: '#/definitions/IdempotencyToken'
-        description: 'An idempotency token that uniquely identifies the termination request. This token is only valid during the termination process. After the provisioned product is terminated, subsequent requests to terminate the same provisioned product always return <b>ResourceNotFound</b>.'
-      IgnoreErrors:
-        $ref: '#/definitions/IgnoreErrors'
-        description: 'If set to true, AWS Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.'
-      AcceptLanguage:
-        $ref: '#/definitions/AcceptLanguage'
-        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-  TerminateProvisionedProductOutput:
-    type: object
-    properties:
-      RecordDetail:
-        $ref: '#/definitions/RecordDetail'
-        description: Information about the result of this request.
-  TotalResultsCount:
-    type: integer
-  UpdateConstraintInput:
-    type: object
-    required:
-      - Id
-    properties:
-      AcceptLanguage:
-        $ref: '#/definitions/AcceptLanguage'
-        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-      Id:
-        $ref: '#/definitions/Id'
-        description: The identifier of the constraint.
-      Description:
-        $ref: '#/definitions/ConstraintDescription'
-        description: The updated description of the constraint.
-  UpdateConstraintOutput:
-    type: object
-    properties:
-      ConstraintDetail:
-        $ref: '#/definitions/ConstraintDetail'
-        description: Information about the constraint.
-      ConstraintParameters:
-        $ref: '#/definitions/ConstraintParameters'
-        description: The constraint parameters.
-      Status:
-        $ref: '#/definitions/Status'
-        description: The status of the current request.
-  UpdatePortfolioInput:
-    type: object
-    required:
-      - Id
-    properties:
-      AcceptLanguage:
-        $ref: '#/definitions/AcceptLanguage'
-        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-      Id:
-        $ref: '#/definitions/Id'
-        description: The portfolio identifier.
-      DisplayName:
-        $ref: '#/definitions/PortfolioDisplayName'
-        description: The name to use for display purposes.
-      Description:
-        $ref: '#/definitions/PortfolioDescription'
-        description: The updated description of the portfolio.
-      ProviderName:
-        $ref: '#/definitions/ProviderName'
-        description: The updated name of the portfolio provider.
-      AddTags:
-        $ref: '#/definitions/AddTags'
-        description: The tags to add.
-      RemoveTags:
-        $ref: '#/definitions/TagKeys'
-        description: The tags to remove.
-  UpdatePortfolioOutput:
-    type: object
-    properties:
-      PortfolioDetail:
-        $ref: '#/definitions/PortfolioDetail'
-        description: Information about the portfolio.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: Information about the tags associated with the portfolio.
-  UpdateProductInput:
-    type: object
-    required:
-      - Id
-    properties:
-      AcceptLanguage:
-        $ref: '#/definitions/AcceptLanguage'
-        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-      Id:
-        $ref: '#/definitions/Id'
-        description: The product identifier.
-      Name:
-        $ref: '#/definitions/ProductViewName'
-        description: The updated product name.
-      Owner:
-        $ref: '#/definitions/ProductViewOwner'
-        description: The updated owner of the product.
-      Description:
-        $ref: '#/definitions/ProductViewShortDescription'
-        description: The updated description of the product.
-      Distributor:
-        $ref: '#/definitions/ProductViewOwner'
-        description: The updated distributor of the product.
-      SupportDescription:
-        $ref: '#/definitions/SupportDescription'
-        description: The updated support description for the product.
-      SupportEmail:
-        $ref: '#/definitions/SupportEmail'
-        description: The updated support email for the product.
-      SupportUrl:
-        $ref: '#/definitions/SupportUrl'
-        description: The updated support URL for the product.
-      AddTags:
-        $ref: '#/definitions/AddTags'
-        description: The tags to add to the product.
-      RemoveTags:
-        $ref: '#/definitions/TagKeys'
-        description: The tags to remove from the product.
-  UpdateProductOutput:
-    type: object
-    properties:
-      ProductViewDetail:
-        $ref: '#/definitions/ProductViewDetail'
-        description: Information about the product view.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: Information about the tags associated with the product.
-  UpdateProvisionedProductInput:
-    type: object
-    required:
-      - UpdateToken
-    properties:
-      AcceptLanguage:
-        $ref: '#/definitions/AcceptLanguage'
-        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-      ProvisionedProductName:
-        $ref: '#/definitions/ProvisionedProductNameOrArn'
-        description: The updated name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
-      ProvisionedProductId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
-      ProductId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioned product.
-      ProvisioningArtifactId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioning artifact.
-      PathId:
-        $ref: '#/definitions/Id'
-        description: 'The new path identifier. This value is optional if the product has a default path, and required if the product has more than one path.'
-      ProvisioningParameters:
-        $ref: '#/definitions/UpdateProvisioningParameters'
-        description: The new parameters.
-      UpdateToken:
-        $ref: '#/definitions/IdempotencyToken'
-        description: The idempotency token that uniquely identifies the provisioning update request.
-  UpdateProvisionedProductOutput:
-    type: object
-    properties:
-      RecordDetail:
-        $ref: '#/definitions/RecordDetail'
-        description: Information about the result of the request.
-  UpdateProvisioningArtifactInput:
-    type: object
-    required:
-      - ProductId
-      - ProvisioningArtifactId
-    properties:
-      AcceptLanguage:
-        $ref: '#/definitions/AcceptLanguage'
-        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-      ProductId:
-        $ref: '#/definitions/Id'
-        description: The product identifier.
-      ProvisioningArtifactId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioning artifact.
-      Name:
-        $ref: '#/definitions/ProvisioningArtifactName'
-        description: The updated name of the provisioning artifact.
-      Description:
-        $ref: '#/definitions/ProvisioningArtifactDescription'
-        description: The updated description of the provisioning artifact.
-      Active:
-        $ref: '#/definitions/ProvisioningArtifactActive'
-        description: Indicates whether the product version is active.
-  UpdateProvisioningArtifactOutput:
-    type: object
-    properties:
-      ProvisioningArtifactDetail:
-        $ref: '#/definitions/ProvisioningArtifactDetail'
-        description: Information about the provisioning artifact.
-      Info:
-        $ref: '#/definitions/ProvisioningArtifactInfo'
-        description: The URL of the CloudFormation template in Amazon S3.
-      Status:
-        $ref: '#/definitions/Status'
-        description: The status of the current request.
+  UsePreviousValue:
+    type: boolean
   UpdateProvisioningParameter:
     type: object
     properties:
@@ -4953,33 +5863,6 @@ definitions:
         $ref: '#/definitions/UsePreviousValue'
         description: 'If set to true, <code>Value</code> is ignored and the previous parameter value is kept.'
     description: The parameter key-value pair used to update a provisioned product.
-  UpdateProvisioningParameters:
-    type: array
-    items:
-      $ref: '#/definitions/UpdateProvisioningParameter'
-  UpdateTagOptionInput:
-    type: object
-    required:
-      - Id
-    properties:
-      Id:
-        $ref: '#/definitions/TagOptionId'
-        description: The TagOption identifier.
-      Value:
-        $ref: '#/definitions/TagOptionValue'
-        description: The updated value.
-      Active:
-        $ref: '#/definitions/TagOptionActive'
-        description: The updated active state.
-  UpdateTagOptionOutput:
-    type: object
-    properties:
-      TagOptionDetail:
-        $ref: '#/definitions/TagOptionDetail'
-        description: Information about the TagOption.
-  UpdatedTime:
-    type: string
-    format: date-time
   UsageInstruction:
     type: object
     properties:
@@ -4990,15 +5873,3 @@ definitions:
         $ref: '#/definitions/InstructionValue'
         description: The usage instruction value for this type.
     description: Additional information provided by the administrator.
-  UsageInstructions:
-    type: array
-    items:
-      $ref: '#/definitions/UsageInstruction'
-  UsePreviousValue:
-    type: boolean
-  UserArn:
-    type: string
-  UserArnSession:
-    type: string
-  Verbose:
-    type: boolean

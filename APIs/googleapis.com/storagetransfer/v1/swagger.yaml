@@ -9,7 +9,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Transfers data from external data sources to a Google Cloud Storage bucket or between Google Cloud Storage buckets.
-  title: Google Storage Transfer
+  title: Storage Transfer
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://storagetransfer.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -325,41 +325,22 @@ paths:
         - transferOperations
     get:
       description: |-
-        Lists operations that match the specified filter in the request. If the
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
-
-        NOTE: the `name` binding allows API services to override the binding
-        to use different resource name schemes, such as `users/*/operations`. To
-        override the binding, API services can add a binding such as
-        `"/v1/{name=users/*}/operations"` to their service configuration.
-        For backwards compatibility, the default name includes the operations
-        collection id, however overriding users must ensure the name binding
-        is the parent resource, without the operations collection id.
-      operationId: storagetransfer.transferOperations.list
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: storagetransfer.transferOperations.get
       parameters:
-        - description: 'A list of query parameters specified as JSON text in the form of {\"project_id\" : \"my_project_id\", \"job_names\" : [\"jobid1\", \"jobid2\",...], \"operation_names\" : [\"opid1\", \"opid2\",...], \"transfer_statuses\":[\"status1\", \"status2\",...]}. Since `job_names`, `operation_names`, and `transfer_statuses` support multiple values, they must be specified with array notation. `job_names`, `operation_names`, and `transfer_statuses` are optional.'
-          in: query
-          name: filter
-          type: string
-        - description: The value `transferOperations`.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The list page size. The max allowed value is 256.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The list page token.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListOperationsResponse'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -515,8 +496,8 @@ definitions:
     type: object
   AwsS3Data:
     description: |-
-      An AwsS3Data can be a data source, but not a data sink.
-      In an AwsS3Data, an object's name is the S3 object's key name.
+      An AwsS3Data resource can be a data source, but not a data sink.
+      In an AwsS3Data resource, an object's name is the S3 object's key name.
     properties:
       awsAccessKey:
         $ref: '#/definitions/AwsAccessKey'
@@ -549,7 +530,9 @@ definitions:
         format: int32
         type: integer
       month:
-        description: Month of year. Must be from 1 to 12.
+        description: |-
+          Month of year. Must be from 1 to 12, or 0 if specifying a date without a
+          month.
         format: int32
         type: integer
       year:
@@ -627,14 +610,15 @@ definitions:
     type: object
   GcsData:
     description: |-
-      In a GcsData, an object's name is the Google Cloud Storage object's name and
-      its `lastModificationTime` refers to the object's updated time, which changes
-      when the content or the metadata of the object is updated.
+      In a GcsData resource, an object's name is the Google Cloud Storage object's
+      name and its `lastModificationTime` refers to the object's updated time,
+      which changes when the content or the metadata of the object is updated.
     properties:
       bucketName:
         description: |-
           Google Cloud Storage bucket name (see
-          [Bucket Name Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
+          [Bucket Name
+          Requirements](https://cloud.google.com/storage/docs/naming#requirements)).
           Required.
         type: string
     type: object
@@ -647,9 +631,9 @@ definitions:
     type: object
   HttpData:
     description: |-
-      An HttpData specifies a list of objects on the web to be transferred over
-      HTTP.  The information of the objects to be transferred is contained in a
-      file referenced by a URL. The first line in the file must be
+      An HttpData resource specifies a list of objects on the web to be transferred
+      over HTTP.  The information of the objects to be transferred is contained in
+      a file referenced by a URL. The first line in the file must be
       "TsvHttpData-1.0", which specifies the format of the file.  Subsequent lines
       specify the information of the list of objects, one object per list entry.
       Each entry has the following tab-delimited fields:
@@ -661,12 +645,13 @@ definitions:
       * MD5 - The base64-encoded MD5 hash of the object.
 
       For an example of a valid TSV file, see
-      [Transferring data from URLs](https://cloud.google.com/storage/transfer/create-url-list).
+      [Transferring data from
+      URLs](https://cloud.google.com/storage/transfer/create-url-list).
 
       When transferring data based on a URL list, keep the following in mind:
 
-      * When an object located at `http(s)://hostname:port/<URL-path>` is transferred
-      to a data sink, the name of the object at the data sink is
+      * When an object located at `http(s)://hostname:port/<URL-path>` is
+      transferred to a data sink, the name of the object at the data sink is
       `<hostname>/<URL-path>`.
 
       * If the specified size of an object does not match the actual size of the

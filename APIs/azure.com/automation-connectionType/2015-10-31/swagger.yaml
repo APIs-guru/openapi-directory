@@ -42,17 +42,21 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/connectiontypeoperations'
       operationId: ConnectionType_ListByAutomationAccount
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-        - description: The automation account name.
+          x-ms-parameter-location: method
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -67,65 +71,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: The response model for the list connection type operation.
-            properties:
-              nextLink:
-                description: Gets or sets the next link.
-                type: string
-              value:
-                description: Gets or sets a list of connection types.
-                items:
-                  description: Definition of the connection type.
-                  properties:
-                    id:
-                      description: Gets the id of the resource.
-                      readOnly: true
-                      type: string
-                    name:
-                      description: Gets the name of the connection type.
-                      readOnly: true
-                      type: string
-                    properties:
-                      description: Properties of the connection type.
-                      properties:
-                        creationTime:
-                          description: Gets the creation time.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                        description:
-                          description: Gets or sets the description.
-                          type: string
-                        fieldDefinitions:
-                          additionalProperties:
-                            description: Definition of the connection fields.
-                            properties:
-                              isEncrypted:
-                                description: Gets or sets the isEncrypted flag of the connection field definition.
-                                type: boolean
-                              isOptional:
-                                description: Gets or sets the isOptional flag of the connection field definition.
-                                type: boolean
-                              type:
-                                description: Gets or sets the type of the connection field definition.
-                                type: string
-                            required:
-                              - type
-                          description: Gets the field definitions of the connection type.
-                          readOnly: true
-                          type: object
-                        isGlobal:
-                          description: Gets or sets a Boolean value to indicate if the connection type is global.
-                          type: boolean
-                        lastModifiedTime:
-                          description: Gets or sets the last modified time.
-                          format: date-time
-                          type: string
-                    type:
-                      description: Resource type
-                      readOnly: true
-                      type: string
-                type: array
+            $ref: '#/definitions/ConnectionTypeListResult'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -3593,17 +3539,21 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/connectiontypeoperations'
       operationId: ConnectionType_Delete
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-        - description: The automation account name.
+          x-ms-parameter-location: method
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of connectiontype.
           in: path
           name: connectionTypeName
@@ -3655,17 +3605,21 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/connectiontypeoperations'
       operationId: ConnectionType_Get
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-        - description: The automation account name.
+          x-ms-parameter-location: method
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of connectiontype.
           in: path
           name: connectionTypeName
@@ -3685,56 +3639,7 @@ paths:
         '200':
           description: OK
           schema:
-            description: Definition of the connection type.
-            properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the connection type.
-                readOnly: true
-                type: string
-              properties:
-                description: Properties of the connection type.
-                properties:
-                  creationTime:
-                    description: Gets the creation time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  fieldDefinitions:
-                    additionalProperties:
-                      description: Definition of the connection fields.
-                      properties:
-                        isEncrypted:
-                          description: Gets or sets the isEncrypted flag of the connection field definition.
-                          type: boolean
-                        isOptional:
-                          description: Gets or sets the isOptional flag of the connection field definition.
-                          type: boolean
-                        type:
-                          description: Gets or sets the type of the connection field definition.
-                          type: string
-                      required:
-                        - type
-                    description: Gets the field definitions of the connection type.
-                    readOnly: true
-                    type: object
-                  isGlobal:
-                    description: Gets or sets a Boolean value to indicate if the connection type is global.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
+            $ref: '#/definitions/ConnectionType'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -3786,17 +3691,21 @@ paths:
         url: 'http://aka.ms/azureautomationsdk/connectiontypeoperations'
       operationId: ConnectionType_CreateOrUpdate
       parameters:
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-        - description: The automation account name.
+          x-ms-parameter-location: method
+        - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The parameters supplied to the create or update connectiontype operation.
           in: path
           name: connectionTypeName
@@ -3807,39 +3716,7 @@ paths:
           name: parameters
           required: true
           schema:
-            description: The parameters supplied to the create or update connection type operation.
-            properties:
-              name:
-                description: Gets or sets the name of the connection type.
-                type: string
-              properties:
-                description: The properties of the create connection type.
-                properties:
-                  fieldDefinitions:
-                    additionalProperties:
-                      description: Definition of the connection fields.
-                      properties:
-                        isEncrypted:
-                          description: Gets or sets the isEncrypted flag of the connection field definition.
-                          type: boolean
-                        isOptional:
-                          description: Gets or sets the isOptional flag of the connection field definition.
-                          type: boolean
-                        type:
-                          description: Gets or sets the type of the connection field definition.
-                          type: string
-                      required:
-                        - type
-                    description: Gets or sets the field definitions of the connection type.
-                    type: object
-                  isGlobal:
-                    description: Gets or sets a Boolean value to indicate if the connection type is global.
-                    type: boolean
-                required:
-                  - fieldDefinitions
-            required:
-              - name
-              - properties
+            $ref: '#/definitions/ConnectionTypeCreateOrUpdateParameters'
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -3854,109 +3731,11 @@ paths:
         '201':
           description: Created
           schema:
-            description: Definition of the connection type.
-            properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the connection type.
-                readOnly: true
-                type: string
-              properties:
-                description: Properties of the connection type.
-                properties:
-                  creationTime:
-                    description: Gets the creation time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  fieldDefinitions:
-                    additionalProperties:
-                      description: Definition of the connection fields.
-                      properties:
-                        isEncrypted:
-                          description: Gets or sets the isEncrypted flag of the connection field definition.
-                          type: boolean
-                        isOptional:
-                          description: Gets or sets the isOptional flag of the connection field definition.
-                          type: boolean
-                        type:
-                          description: Gets or sets the type of the connection field definition.
-                          type: string
-                      required:
-                        - type
-                    description: Gets the field definitions of the connection type.
-                    readOnly: true
-                    type: object
-                  isGlobal:
-                    description: Gets or sets a Boolean value to indicate if the connection type is global.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
+            $ref: '#/definitions/ConnectionType'
         '409':
           description: Conflict
           schema:
-            description: Definition of the connection type.
-            properties:
-              id:
-                description: Gets the id of the resource.
-                readOnly: true
-                type: string
-              name:
-                description: Gets the name of the connection type.
-                readOnly: true
-                type: string
-              properties:
-                description: Properties of the connection type.
-                properties:
-                  creationTime:
-                    description: Gets the creation time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  fieldDefinitions:
-                    additionalProperties:
-                      description: Definition of the connection fields.
-                      properties:
-                        isEncrypted:
-                          description: Gets or sets the isEncrypted flag of the connection field definition.
-                          type: boolean
-                        isOptional:
-                          description: Gets or sets the isOptional flag of the connection field definition.
-                          type: boolean
-                        type:
-                          description: Gets or sets the type of the connection field definition.
-                          type: string
-                      required:
-                        - type
-                    description: Gets the field definitions of the connection type.
-                    readOnly: true
-                    type: object
-                  isGlobal:
-                    description: Gets or sets a Boolean value to indicate if the connection type is global.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
+            $ref: '#/definitions/ConnectionType'
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -4020,4 +3799,100 @@ paths:
                   lastModifiedTime: '2017-03-27T03:47:53.433+00:00'
               headers: {}
             '409': {}
-definitions: {}
+definitions:
+  ConnectionType:
+    description: Definition of the connection type.
+    properties:
+      id:
+        description: Gets the id of the resource.
+        readOnly: true
+        type: string
+      name:
+        description: Gets the name of the connection type.
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/ConnectionTypeProperties'
+        description: Gets or sets the properties of the connection type.
+        x-ms-client-flatten: true
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
+  ConnectionTypeCreateOrUpdateParameters:
+    description: The parameters supplied to the create or update connection type operation.
+    properties:
+      name:
+        description: Gets or sets the name of the connection type.
+        type: string
+      properties:
+        $ref: '#/definitions/ConnectionTypeCreateOrUpdateProperties'
+        description: Gets or sets the value of the connection type.
+        x-ms-client-flatten: true
+    required:
+      - name
+      - properties
+  ConnectionTypeCreateOrUpdateProperties:
+    description: The properties of the create connection type.
+    properties:
+      fieldDefinitions:
+        additionalProperties:
+          $ref: '#/definitions/FieldDefinition'
+        description: Gets or sets the field definitions of the connection type.
+        type: object
+      isGlobal:
+        description: Gets or sets a Boolean value to indicate if the connection type is global.
+        type: boolean
+    required:
+      - fieldDefinitions
+  ConnectionTypeListResult:
+    description: The response model for the list connection type operation.
+    properties:
+      nextLink:
+        description: Gets or sets the next link.
+        type: string
+      value:
+        description: Gets or sets a list of connection types.
+        items:
+          $ref: '#/definitions/ConnectionType'
+        type: array
+  ConnectionTypeProperties:
+    description: Properties of the connection type.
+    properties:
+      creationTime:
+        description: Gets the creation time.
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      description:
+        description: Gets or sets the description.
+        type: string
+      fieldDefinitions:
+        additionalProperties:
+          $ref: '#/definitions/FieldDefinition'
+        description: Gets the field definitions of the connection type.
+        readOnly: true
+        type: object
+      isGlobal:
+        description: Gets or sets a Boolean value to indicate if the connection type is global.
+        type: boolean
+      lastModifiedTime:
+        description: Gets or sets the last modified time.
+        format: date-time
+        type: string
+        x-nullable: false
+  FieldDefinition:
+    description: Definition of the connection fields.
+    properties:
+      isEncrypted:
+        description: Gets or sets the isEncrypted flag of the connection field definition.
+        type: boolean
+      isOptional:
+        description: Gets or sets the isOptional flag of the connection field definition.
+        type: boolean
+      type:
+        description: Gets or sets the type of the connection field definition.
+        type: string
+    required:
+      - type

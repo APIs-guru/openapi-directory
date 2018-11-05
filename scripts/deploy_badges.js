@@ -8,11 +8,10 @@ var Promise = require('bluebird');
 var util = require('./util');
 var makeRequest = require('makeRequest');
 
-Promise.all([
-    makeRequest.getJson('https://api.apis.guru/v2/metrics.json'),
-    makeRequest.getRaw('https://apis.guru/branding/icon-16x16.png'),
-  ])
-  .spread((metrics, logo) => {
+makeRequest.getRaw('http://apis.guru/branding/icon-16x16.png')
+  .then(logo => {
+    var metrics = util.readJson('deploy/v2/metrics.json');
+
     var badges = [
       ['APIs in collection' , metrics.numAPIs, 'orange'],
       ['Endpoints', metrics.numEndpoints, 'red'],
@@ -20,8 +19,8 @@ Promise.all([
       ['Tested on', metrics.numSpecs + ' specs', 'green', logo]
     ];
     return Promise.mapSeries(badges, _.spread(saveShield));
-  }
-).done();
+  })
+  .done();
 
 
 function saveShield(subject, status, color, icon) {
@@ -40,6 +39,6 @@ function saveShield(subject, status, color, icon) {
 
   return makeRequest.getRaw(url.href(), { retries: 10 })
     .then(data => {
-      util.saveFile(`badges/${subject.toLowerCase()}.svg`, data);
+      util.saveFile(`deploy/badges/${subject.toLowerCase()}.svg`, data);
     });
 }

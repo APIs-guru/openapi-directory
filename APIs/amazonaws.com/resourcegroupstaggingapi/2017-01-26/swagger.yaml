@@ -317,43 +317,15 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AmazonResourceType:
-    type: string
-    minLength: 0
-    maxLength: 256
-  ErrorCode:
-    type: string
-    enum:
-      - InternalServiceException
-      - InvalidParameterException
-  ErrorMessage:
-    type: string
-  ExceptionMessage:
-    type: string
-    minLength: 0
-    maxLength: 2048
-  FailedResourcesMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ResourceARN'
-        value:
-          $ref: '#/definitions/FailureInfo'
-  FailureInfo:
+  GetResourcesOutput:
     type: object
     properties:
-      StatusCode:
-        $ref: '#/definitions/StatusCode'
-        description: The HTTP status code of the common error.
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-        description: 'The code of the common error. Valid values include <code>InternalServiceException</code>, <code>InvalidParameterException</code>, and any valid error code returned by the AWS service that hosts the resource that you want to tag.'
-      ErrorMessage:
-        $ref: '#/definitions/ErrorMessage'
-        description: The message of the common error.
-    description: Details of the common errors that all actions return.
+      PaginationToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'A string that indicates that the response contains more data than can be returned in a single response. To receive additional data, specify this string for the <code>PaginationToken</code> value in a subsequent request.'
+      ResourceTagMappingList:
+        $ref: '#/definitions/ResourceTagMappingList'
+        description: A list of resource ARNs and the tags (keys and values) associated with each.
   GetResourcesInput:
     type: object
     properties:
@@ -372,21 +344,30 @@ definitions:
       ResourceTypeFilters:
         $ref: '#/definitions/ResourceTypeFilterList'
         description: '<p>The constraints on the resources that you want returned. The format of each resource type is <code>service[:resourceType]</code>. For example, specifying a resource type of <code>ec2</code> returns all tagged Amazon EC2 resources (which includes tagged EC2 instances). Specifying a resource type of <code>ec2:instance</code> returns only EC2 instances. </p> <p>The string for each service name and resource type is the same as that embedded in a resource''s Amazon Resource Name (ARN). Consult the <i>AWS General Reference</i> for the following:</p> <ul> <li> <p>For a list of service name strings, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a>.</p> </li> <li> <p>For resource type strings, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax">Example ARNs</a>.</p> </li> <li> <p>For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p> </li> </ul>'
-  GetResourcesOutput:
+  InvalidParameterException:
     type: object
     properties:
-      PaginationToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'A string that indicates that the response contains more data than can be returned in a single response. To receive additional data, specify this string for the <code>PaginationToken</code> value in a subsequent request.'
-      ResourceTagMappingList:
-        $ref: '#/definitions/ResourceTagMappingList'
-        description: A list of resource ARNs and the tags (keys and values) associated with each.
-  GetTagKeysInput:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: A parameter is missing or a malformed string or invalid or out-of-range value was supplied for the request parameter.
+  ThrottledException:
     type: object
     properties:
-      PaginationToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'A string that indicates that additional data is available. Leave this value empty for your initial request. If the response includes a PaginationToken, use that string for this value to request an additional page of data.'
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: The request was denied to limit the frequency of submitted requests.
+  InternalServiceException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: 'The request processing failed because of an unknown error, exception, or failure. You can retry the request.'
+  PaginationTokenExpiredException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: A <code>PaginationToken</code> is valid for a maximum of 15 minutes. Your request was denied because the specified <code>PaginationToken</code> has expired.
   GetTagKeysOutput:
     type: object
     properties:
@@ -396,6 +377,21 @@ definitions:
       TagKeys:
         $ref: '#/definitions/TagKeyList'
         description: A list of all tag keys in the AWS account.
+  GetTagKeysInput:
+    type: object
+    properties:
+      PaginationToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'A string that indicates that additional data is available. Leave this value empty for your initial request. If the response includes a PaginationToken, use that string for this value to request an additional page of data.'
+  GetTagValuesOutput:
+    type: object
+    properties:
+      PaginationToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'A string that indicates that the response contains more data than can be returned in a single response. To receive additional data, specify this string for the <code>PaginationToken</code> value in a subsequent request.'
+      TagValues:
+        $ref: '#/definitions/TagValuesOutputList'
+        description: A list of all tag values for the specified key in the AWS account.
   GetTagValuesInput:
     type: object
     required:
@@ -407,47 +403,129 @@ definitions:
       Key:
         $ref: '#/definitions/TagKey'
         description: The key for which you want to list all existing values in the specified region for the AWS account.
-  GetTagValuesOutput:
+  TagResourcesOutput:
     type: object
     properties:
-      PaginationToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'A string that indicates that the response contains more data than can be returned in a single response. To receive additional data, specify this string for the <code>PaginationToken</code> value in a subsequent request.'
-      TagValues:
-        $ref: '#/definitions/TagValuesOutputList'
-        description: A list of all tag values for the specified key in the AWS account.
-  InternalServiceException:
+      FailedResourcesMap:
+        $ref: '#/definitions/FailedResourcesMap'
+        description: 'Details of resources that could not be tagged. An error code, status code, and error message are returned for each failed item.'
+  TagResourcesInput:
+    type: object
+    required:
+      - ResourceARNList
+      - Tags
+    properties:
+      ResourceARNList:
+        $ref: '#/definitions/ResourceARNList'
+        description: 'A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource. You can specify a minimum of 1 and a maximum of 20 ARNs (resources) to tag. An ARN can be set to a maximum of 1600 characters. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags that you want to add to the specified resources. A tag consists of a key and a value that you define.
+  UntagResourcesOutput:
     type: object
     properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'The request processing failed because of an unknown error, exception, or failure. You can retry the request.'
-  InvalidParameterException:
+      FailedResourcesMap:
+        $ref: '#/definitions/FailedResourcesMap'
+        description: 'Details of resources that could not be untagged. An error code, status code, and error message are returned for each failed item.'
+  UntagResourcesInput:
     type: object
+    required:
+      - ResourceARNList
+      - TagKeys
     properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: A parameter is missing or a malformed string or invalid or out-of-range value was supplied for the request parameter.
-  PaginationToken:
+      ResourceARNList:
+        $ref: '#/definitions/ResourceARNList'
+        description: 'A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource. You can specify a minimum of 1 and a maximum of 20 ARNs (resources) to untag. An ARN can be set to a maximum of 1600 characters. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+      TagKeys:
+        $ref: '#/definitions/TagKeyListForUntag'
+        description: A list of the tag keys that you want to remove from the specified resources.
+  AmazonResourceType:
+    type: string
+    minLength: 0
+    maxLength: 256
+  ErrorCode:
+    type: string
+    enum:
+      - InternalServiceException
+      - InvalidParameterException
+  ErrorMessage:
+    type: string
+  ExceptionMessage:
     type: string
     minLength: 0
     maxLength: 2048
-  PaginationTokenExpiredException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: A <code>PaginationToken</code> is valid for a maximum of 15 minutes. Your request was denied because the specified <code>PaginationToken</code> has expired.
   ResourceARN:
     type: string
     minLength: 1
     maxLength: 1600
+  FailureInfo:
+    type: object
+    properties:
+      StatusCode:
+        $ref: '#/definitions/StatusCode'
+        description: The HTTP status code of the common error.
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+        description: 'The code of the common error. Valid values include <code>InternalServiceException</code>, <code>InvalidParameterException</code>, and any valid error code returned by the AWS service that hosts the resource that you want to tag.'
+      ErrorMessage:
+        $ref: '#/definitions/ErrorMessage'
+        description: The message of the common error.
+    description: Details of the common errors that all actions return.
+  FailedResourcesMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ResourceARN'
+        value:
+          $ref: '#/definitions/FailureInfo'
+  StatusCode:
+    type: integer
+  PaginationToken:
+    type: string
+    minLength: 0
+    maxLength: 2048
+  TagFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
+    minItems: 0
+    maxItems: 50
+  ResourcesPerPage:
+    type: integer
+  TagsPerPage:
+    type: integer
+  ResourceTypeFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/AmazonResourceType'
+  ResourceTagMappingList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceTagMapping'
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValuesOutputList:
+    type: array
+    items:
+      $ref: '#/definitions/TagValue'
   ResourceARNList:
     type: array
     items:
       $ref: '#/definitions/ResourceARN'
     minItems: 1
     maxItems: 20
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   ResourceTagMapping:
     type: object
     properties:
@@ -458,18 +536,10 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tags that have been applied to one or more AWS resources.
     description: A list of resource ARNs and the tags (keys and values) that are associated with each.
-  ResourceTagMappingList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceTagMapping'
-  ResourceTypeFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/AmazonResourceType'
-  ResourcesPerPage:
-    type: integer
-  StatusCode:
-    type: integer
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -483,6 +553,12 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
     description: 'The metadata that you apply to AWS resources to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-basics">Tag Basics</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
+  TagValueList:
+    type: array
+    items:
+      $ref: '#/definitions/TagValue'
+    minItems: 0
+    maxItems: 20
   TagFilter:
     type: object
     properties:
@@ -493,30 +569,12 @@ definitions:
         $ref: '#/definitions/TagValueList'
         description: The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
     description: A list of tags (keys and values) that are used to specify the associated resources.
-  TagFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/TagFilter'
-    minItems: 0
-    maxItems: 50
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
   TagKeyListForUntag:
     type: array
     items:
       $ref: '#/definitions/TagKey'
     minItems: 1
     maxItems: 50
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
   TagMap:
     type: array
     minItems: 1
@@ -528,61 +586,3 @@ definitions:
           $ref: '#/definitions/TagKey'
         value:
           $ref: '#/definitions/TagValue'
-  TagResourcesInput:
-    type: object
-    required:
-      - ResourceARNList
-      - Tags
-    properties:
-      ResourceARNList:
-        $ref: '#/definitions/ResourceARNList'
-        description: 'A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource. You can specify a minimum of 1 and a maximum of 20 ARNs (resources) to tag. An ARN can be set to a maximum of 1600 characters. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
-      Tags:
-        $ref: '#/definitions/TagMap'
-        description: The tags that you want to add to the specified resources. A tag consists of a key and a value that you define.
-  TagResourcesOutput:
-    type: object
-    properties:
-      FailedResourcesMap:
-        $ref: '#/definitions/FailedResourcesMap'
-        description: 'Details of resources that could not be tagged. An error code, status code, and error message are returned for each failed item.'
-  TagValue:
-    type: string
-    minLength: 0
-    maxLength: 256
-  TagValueList:
-    type: array
-    items:
-      $ref: '#/definitions/TagValue'
-    minItems: 0
-    maxItems: 20
-  TagValuesOutputList:
-    type: array
-    items:
-      $ref: '#/definitions/TagValue'
-  TagsPerPage:
-    type: integer
-  ThrottledException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The request was denied to limit the frequency of submitted requests.
-  UntagResourcesInput:
-    type: object
-    required:
-      - ResourceARNList
-      - TagKeys
-    properties:
-      ResourceARNList:
-        $ref: '#/definitions/ResourceARNList'
-        description: 'A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource. You can specify a minimum of 1 and a maximum of 20 ARNs (resources) to untag. An ARN can be set to a maximum of 1600 characters. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
-      TagKeys:
-        $ref: '#/definitions/TagKeyListForUntag'
-        description: A list of the tag keys that you want to remove from the specified resources.
-  UntagResourcesOutput:
-    type: object
-    properties:
-      FailedResourcesMap:
-        $ref: '#/definitions/FailedResourcesMap'
-        description: 'Details of resources that could not be untagged. An error code, status code, and error message are returned for each failed item.'

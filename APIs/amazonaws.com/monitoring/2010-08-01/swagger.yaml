@@ -356,10 +356,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetMetricData':
+    post:
+      operationId: GetMetricData
+      description: '<p>You can use the <code>GetMetricData</code> API to retrieve as many as 100 different metrics in a single request, with a total of as many as 100,800 datapoints. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Calls to the <code>GetMetricData</code> API have a different pricing structure than calls to <code>GetMetricStatistics</code>. For more information about pricing, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMetricDataOutput'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMetricDataInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetMetricStatistics':
     post:
       operationId: GetMetricStatistics
-      description: '<p>Gets statistics for the specified metric.</p> <p>The maximum number of data points returned from a single call is 1,440. If you request more than 1,440 data points, CloudWatch returns an error. To reduce the number of data points, you can narrow the specified time range and make multiple requests across adjacent time ranges, or you can increase the specified period. Data points are not returned in chronological order.</p> <p>CloudWatch aggregates data points based on the length of the period that you specify. For example, if you request statistics with a one-hour period, CloudWatch aggregates all data points with time stamps that fall within each one-hour period. Therefore, the number of values aggregated by CloudWatch is larger than the number of data points returned.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The SampleCount value of the statistic set is 1.</p> </li> <li> <p>The Min and the Max values of the statistic set are equal.</p> </li> </ul> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p> <p>CloudWatch started retaining 5-minute and 1-hour metric data as of July 9, 2016.</p> <p>For information about metrics and dimensions supported by AWS services, see the <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html">Amazon CloudWatch Metrics and Dimensions Reference</a> in the <i>Amazon CloudWatch User Guide</i>.</p>'
+      description: '<p>Gets statistics for the specified metric.</p> <p>The maximum number of data points returned from a single call is 1,440. If you request more than 1,440 data points, CloudWatch returns an error. To reduce the number of data points, you can narrow the specified time range and make multiple requests across adjacent time ranges, or you can increase the specified period. Data points are not returned in chronological order.</p> <p>CloudWatch aggregates data points based on the length of the period that you specify. For example, if you request statistics with a one-hour period, CloudWatch aggregates all data points with time stamps that fall within each one-hour period. Therefore, the number of values aggregated by CloudWatch is larger than the number of data points returned.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The SampleCount value of the statistic set is 1.</p> </li> <li> <p>The Min and the Max values of the statistic set are equal.</p> </li> </ul> <p>Percentile statistics are not available for metrics when any of the metric values are negative numbers.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p> <p>CloudWatch started retaining 5-minute and 1-hour metric data as of July 9, 2016.</p> <p>For information about metrics and dimensions supported by AWS services, see the <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html">Amazon CloudWatch Metrics and Dimensions Reference</a> in the <i>Amazon CloudWatch User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -397,10 +426,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetMetricWidgetImage':
+    post:
+      operationId: GetMetricWidgetImage
+      description: '<p>You can use the <code>GetMetricWidgetImage</code> API to retrieve a snapshot graph of one or more Amazon CloudWatch metrics as a bitmap image. You can then embed this image into your services and products, such as wiki pages, reports, and documents. You could also retrieve images regularly, such as every minute, and create your own custom live dashboard.</p> <p>The graph you retrieve can include all CloudWatch metric graph features, including metric math and horizontal and vertical annotations.</p> <p>There is a limit of 20 transactions per second for this API. Each <code>GetMetricWidgetImage</code> action has the following limits:</p> <ul> <li> <p>As many as 100 metrics in the graph.</p> </li> <li> <p>Up to 100 KB uncompressed payload.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMetricWidgetImageOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMetricWidgetImageInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListDashboards':
     post:
       operationId: ListDashboards
-      description: 'Returns a list of the dashboards for your account. If you include <code>DashboardNamePrefix</code>, only those dashboards with names starting with the prefix are listed. Otherwise, all dashboards in your account are listed. '
+      description: '<p>Returns a list of the dashboards for your account. If you include <code>DashboardNamePrefix</code>, only those dashboards with names starting with the prefix are listed. Otherwise, all dashboards in your account are listed. </p> <p> <code>ListDashboards</code> returns up to 1000 results on one page. If there are more than 1000 dashboards, you can call <code>ListDashboards</code> again and include the value you received for <code>NextToken</code> in the first call, to receive the next 1000 results.</p>'
       responses:
         '200':
           description: Success
@@ -433,7 +487,7 @@ paths:
   '/#ListMetrics':
     post:
       operationId: ListMetrics
-      description: '<p>List the specified metrics. You can use the returned metrics with <a>GetMetricStatistics</a> to obtain statistical data.</p> <p>Up to 500 results are returned for any one call. To retrieve additional results, use the returned token with subsequent calls.</p> <p>After you create a metric, allow up to fifteen minutes before the metric appears. Statistics about the metric, however, are available sooner using <a>GetMetricStatistics</a>.</p>'
+      description: '<p>List the specified metrics. You can use the returned metrics with <a>GetMetricData</a> or <a>GetMetricStatistics</a> to obtain statistical data.</p> <p>Up to 500 results are returned for any one call. To retrieve additional results, use the returned token with subsequent calls.</p> <p>After you create a metric, allow up to fifteen minutes before the metric appears. Statistics about the metric, however, are available sooner using <a>GetMetricData</a> or <a>GetMetricStatistics</a>.</p>'
       responses:
         '200':
           description: Success
@@ -471,7 +525,7 @@ paths:
   '/#PutDashboard':
     post:
       operationId: PutDashboard
-      description: '<p>Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here.</p> <p>You can have up to 500 dashboards per account. All dashboards in your account are global, not region-specific.</p> <p>A simple way to create a dashboard using <code>PutDashboard</code> is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code>.</p> <p>When you create a dashboard with <code>PutDashboard</code>, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the <code>DashboardBody</code> script or the CloudFormation template used to create the dashboard.</p>'
+      description: '<p>Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here.</p> <p>There is no limit to the number of dashboards in your account. All dashboards in your account are global, not region-specific.</p> <p>A simple way to create a dashboard using <code>PutDashboard</code> is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code>.</p> <p>When you create a dashboard with <code>PutDashboard</code>, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the <code>DashboardBody</code> script or the CloudFormation template used to create the dashboard.</p>'
       responses:
         '200':
           description: Success
@@ -504,7 +558,7 @@ paths:
   '/#PutMetricAlarm':
     post:
       operationId: PutMetricAlarm
-      description: '<p>Creates or updates an alarm and associates it with the specified metric. Optionally, this operation can associate one or more Amazon SNS resources with the alarm.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is evaluated and its state is set appropriately. Any actions associated with the state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some operations:</p> <ul> <li> <p> <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p> <code>ec2:DescribeInstanceStatus</code> and <code>ec2:DescribeInstances</code> for all alarms on EC2 instance status metrics</p> </li> <li> <p> <code>ec2:StopInstances</code> for alarms with stop actions</p> </li> <li> <p> <code>ec2:TerminateInstances</code> for alarms with terminate actions</p> </li> <li> <p> <code>ec2:DescribeInstanceRecoveryAttribute</code> and <code>ec2:RecoverInstances</code> for alarms with recover actions</p> </li> </ul> <p>If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed.</p> <p>If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies.</p> <p>If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions.</p> <p>You must create at least one stop, terminate, or reboot alarm using either the Amazon EC2 or CloudWatch consoles to create the <b>EC2ActionsAccess</b> IAM role. After this IAM role is created, you can create stop, terminate, or reboot alarms using a command-line interface or API.</p>'
+      description: '<p>Creates or updates an alarm and associates it with the specified metric. Optionally, this operation can associate one or more Amazon SNS resources with the alarm.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is evaluated and its state is set appropriately. Any actions associated with the state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some operations:</p> <ul> <li> <p> <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p> <code>ec2:DescribeInstanceStatus</code> and <code>ec2:DescribeInstances</code> for all alarms on EC2 instance status metrics</p> </li> <li> <p> <code>ec2:StopInstances</code> for alarms with stop actions</p> </li> <li> <p> <code>ec2:TerminateInstances</code> for alarms with terminate actions</p> </li> <li> <p> <code>ec2:DescribeInstanceRecoveryAttribute</code> and <code>ec2:RecoverInstances</code> for alarms with recover actions</p> </li> </ul> <p>If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed.</p> <p>If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies.</p> <p>If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions.</p> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called <code>AWSServiceRoleForCloudWatchEvents</code>. For more information about service-linked roles, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">AWS service-linked role</a>.</p>'
       responses:
         '200':
           description: Success
@@ -531,7 +585,7 @@ paths:
   '/#PutMetricData':
     post:
       operationId: PutMetricData
-      description: '<p>Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metric. If the specified metric does not exist, CloudWatch creates the metric. When CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to <a>ListMetrics</a>.</p> <p>Each <code>PutMetricData</code> request is limited to 40 KB in size for HTTP POST requests.</p> <p>Although the <code>Value</code> parameter accepts numbers of type <code>Double</code>, CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p> <p>You can use up to 10 dimensions per metric to further clarify what data the metric collects. For more information about specifying dimensions, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html">Publishing Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for <a>GetMetricStatistics</a> from the time they are submitted.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The SampleCount value of the statistic set is 1</p> </li> <li> <p>The Min and the Max values of the statistic set are equal</p> </li> </ul>'
+      description: '<p>Publishes metric data to Amazon CloudWatch. CloudWatch associates the data with the specified metric. If the specified metric does not exist, CloudWatch creates the metric. When CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to <a>ListMetrics</a>.</p> <p>You can publish either individual data points in the <code>Value</code> field, or arrays of values and the number of times each value occurred during the period by using the <code>Values</code> and <code>Counts</code> fields in the <code>MetricDatum</code> structure. Using the <code>Values</code> and <code>Counts</code> method enables you to publish up to 150 values per metric with one <code>PutMetricData</code> request, and supports retrieving percentile statistics on this data.</p> <p>Each <code>PutMetricData</code> request is limited to 40 KB in size for HTTP POST requests. You can send a payload compressed by gzip. Each request is also limited to no more than 20 different metrics.</p> <p>Although the <code>Value</code> parameter accepts numbers of type <code>Double</code>, CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p> <p>You can use up to 10 dimensions per metric to further clarify what data the metric collects. For more information about specifying dimensions, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html">Publishing Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for <a>GetMetricData</a> or <a>GetMetricStatistics</a> from the time they are submitted.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. These raw data points could be published individually or as part of <code>Values</code> and <code>Counts</code> arrays. If you publish data using statistic sets in the <code>StatisticValues</code> field instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The <code>SampleCount</code> value of the statistic set is 1 and <code>Min</code>, <code>Max</code>, and <code>Sum</code> are all equal.</p> </li> <li> <p>The <code>Min</code> and <code>Max</code> are equal, and <code>Sum</code> is equal to <code>Min</code> multiplied by <code>SampleCount</code>.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -599,176 +653,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  ActionPrefix:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  ActionsEnabled:
-    type: boolean
-  AlarmArn:
-    type: string
-    minLength: 1
-    maxLength: 1600
-  AlarmDescription:
-    type: string
-    minLength: 0
-    maxLength: 1024
-  AlarmHistoryItem:
-    type: object
-    properties:
-      AlarmName:
-        $ref: '#/definitions/AlarmName'
-        description: The descriptive name for the alarm.
-      Timestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The time stamp for the alarm history item.
-      HistoryItemType:
-        $ref: '#/definitions/HistoryItemType'
-        description: The type of alarm history item.
-      HistorySummary:
-        $ref: '#/definitions/HistorySummary'
-        description: 'A summary of the alarm history, in text format.'
-      HistoryData:
-        $ref: '#/definitions/HistoryData'
-        description: 'Data about the alarm, in JSON format.'
-    description: Represents the history of a specific alarm.
-  AlarmHistoryItems:
-    type: array
-    items:
-      $ref: '#/definitions/AlarmHistoryItem'
-  AlarmName:
-    type: string
-    minLength: 1
-    maxLength: 255
-  AlarmNamePrefix:
-    type: string
-    minLength: 1
-    maxLength: 255
-  AlarmNames:
-    type: array
-    items:
-      $ref: '#/definitions/AlarmName'
-    maxItems: 100
-  AwsQueryErrorMessage:
-    type: string
-  ComparisonOperator:
-    type: string
-    enum:
-      - GreaterThanOrEqualToThreshold
-      - GreaterThanThreshold
-      - LessThanThreshold
-      - LessThanOrEqualToThreshold
-  DashboardArn:
-    type: string
-  DashboardBody:
-    type: string
-  DashboardEntries:
-    type: array
-    items:
-      $ref: '#/definitions/DashboardEntry'
-  DashboardEntry:
-    type: object
-    properties:
-      DashboardName:
-        $ref: '#/definitions/DashboardName'
-        description: The name of the dashboard.
-      DashboardArn:
-        $ref: '#/definitions/DashboardArn'
-        description: The Amazon Resource Name (ARN) of the dashboard.
-      LastModified:
-        $ref: '#/definitions/LastModified'
-        description: 'The time stamp of when the dashboard was last modified, either by an API call or through the console. This number is expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.'
-      Size:
-        $ref: '#/definitions/Size'
-        description: 'The size of the dashboard, in bytes.'
-    description: Represents a specific dashboard.
-  DashboardErrorMessage:
-    type: string
-  DashboardInvalidInputError:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/DashboardErrorMessage'
-      dashboardValidationMessages:
-        $ref: '#/definitions/DashboardValidationMessages'
-    description: Some part of the dashboard data is invalid.
-  DashboardName:
-    type: string
-  DashboardNamePrefix:
-    type: string
-  DashboardNames:
-    type: array
-    items:
-      $ref: '#/definitions/DashboardName'
-  DashboardNotFoundError:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/DashboardErrorMessage'
-    description: The specified dashboard does not exist.
-  DashboardValidationMessage:
-    type: object
-    properties:
-      DataPath:
-        $ref: '#/definitions/DataPath'
-        description: The data path related to the message.
-      Message:
-        $ref: '#/definitions/Message'
-        description: A message describing the error or warning.
-    description: An error or warning for the operation.
-  DashboardValidationMessages:
-    type: array
-    items:
-      $ref: '#/definitions/DashboardValidationMessage'
-  DataPath:
-    type: string
-  Datapoint:
-    type: object
-    properties:
-      Timestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The time stamp used for the data point.
-      SampleCount:
-        $ref: '#/definitions/DatapointValue'
-        description: The number of metric values that contributed to the aggregate value of this data point.
-      Average:
-        $ref: '#/definitions/DatapointValue'
-        description: The average of the metric values that correspond to the data point.
-      Sum:
-        $ref: '#/definitions/DatapointValue'
-        description: The sum of the metric values for the data point.
-      Minimum:
-        $ref: '#/definitions/DatapointValue'
-        description: The minimum metric value for the data point.
-      Maximum:
-        $ref: '#/definitions/DatapointValue'
-        description: The maximum metric value for the data point.
-      Unit:
-        $ref: '#/definitions/StandardUnit'
-        description: The standard unit for the data point.
-      ExtendedStatistics:
-        $ref: '#/definitions/DatapointValueMap'
-        description: The percentile statistic for the data point.
-    description: Encapsulates the statistical data that CloudWatch computes from metric data.
-  DatapointValue:
-    type: number
-    format: double
-  DatapointValueMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ExtendedStatistic'
-        value:
-          $ref: '#/definitions/DatapointValue'
-  Datapoints:
-    type: array
-    items:
-      $ref: '#/definitions/Datapoint'
-  DatapointsToAlarm:
-    type: integer
-    minimum: 1
   DeleteAlarmsInput:
     type: object
     required:
@@ -777,6 +661,10 @@ definitions:
       AlarmNames:
         $ref: '#/definitions/AlarmNames'
         description: The alarms to be deleted.
+  ResourceNotFound: {}
+  DeleteDashboardsOutput:
+    type: object
+    properties: {}
   DeleteDashboardsInput:
     type: object
     required:
@@ -785,9 +673,18 @@ definitions:
       DashboardNames:
         $ref: '#/definitions/DashboardNames'
         description: The dashboards to be deleted. This parameter is required.
-  DeleteDashboardsOutput:
+  InvalidParameterValueException: {}
+  DashboardNotFoundError: {}
+  InternalServiceFault: {}
+  DescribeAlarmHistoryOutput:
     type: object
-    properties: {}
+    properties:
+      AlarmHistoryItems:
+        $ref: '#/definitions/AlarmHistoryItems'
+        description: 'The alarm histories, in JSON format.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token that marks the start of the next batch of returned results.
   DescribeAlarmHistoryInput:
     type: object
     properties:
@@ -809,15 +706,43 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token returned by a previous call to indicate that there is more data available.
-  DescribeAlarmHistoryOutput:
+  InvalidNextToken: {}
+  DescribeAlarmsOutput:
     type: object
     properties:
-      AlarmHistoryItems:
-        $ref: '#/definitions/AlarmHistoryItems'
-        description: 'The alarm histories, in JSON format.'
+      MetricAlarms:
+        $ref: '#/definitions/MetricAlarms'
+        description: The information for the specified alarms.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token that marks the start of the next batch of returned results.
+  DescribeAlarmsInput:
+    type: object
+    properties:
+      AlarmNames:
+        $ref: '#/definitions/AlarmNames'
+        description: The names of the alarms.
+      AlarmNamePrefix:
+        $ref: '#/definitions/AlarmNamePrefix'
+        description: 'The alarm name prefix. If this parameter is specified, you cannot specify <code>AlarmNames</code>.'
+      StateValue:
+        $ref: '#/definitions/StateValue'
+        description: The state value to be used in matching alarms.
+      ActionPrefix:
+        $ref: '#/definitions/ActionPrefix'
+        description: The action name prefix.
+      MaxRecords:
+        $ref: '#/definitions/MaxRecords'
+        description: The maximum number of alarm descriptions to retrieve.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token returned by a previous call to indicate that there is more data available.
+  DescribeAlarmsForMetricOutput:
+    type: object
+    properties:
+      MetricAlarms:
+        $ref: '#/definitions/MetricAlarms'
+        description: The information for each alarm with the specified metric.
   DescribeAlarmsForMetricInput:
     type: object
     required:
@@ -845,85 +770,6 @@ definitions:
       Unit:
         $ref: '#/definitions/StandardUnit'
         description: The unit for the metric.
-  DescribeAlarmsForMetricOutput:
-    type: object
-    properties:
-      MetricAlarms:
-        $ref: '#/definitions/MetricAlarms'
-        description: The information for each alarm with the specified metric.
-  DescribeAlarmsInput:
-    type: object
-    properties:
-      AlarmNames:
-        $ref: '#/definitions/AlarmNames'
-        description: The names of the alarms.
-      AlarmNamePrefix:
-        $ref: '#/definitions/AlarmNamePrefix'
-        description: 'The alarm name prefix. If this parameter is specified, you cannot specify <code>AlarmNames</code>.'
-      StateValue:
-        $ref: '#/definitions/StateValue'
-        description: The state value to be used in matching alarms.
-      ActionPrefix:
-        $ref: '#/definitions/ActionPrefix'
-        description: The action name prefix.
-      MaxRecords:
-        $ref: '#/definitions/MaxRecords'
-        description: The maximum number of alarm descriptions to retrieve.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token returned by a previous call to indicate that there is more data available.
-  DescribeAlarmsOutput:
-    type: object
-    properties:
-      MetricAlarms:
-        $ref: '#/definitions/MetricAlarms'
-        description: The information for the specified alarms.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token that marks the start of the next batch of returned results.
-  Dimension:
-    type: object
-    required:
-      - Name
-      - Value
-    properties:
-      Name:
-        $ref: '#/definitions/DimensionName'
-        description: The name of the dimension.
-      Value:
-        $ref: '#/definitions/DimensionValue'
-        description: The value representing the dimension measurement.
-    description: Expands the identity of a metric.
-  DimensionFilter:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/DimensionName'
-        description: The dimension name to be matched.
-      Value:
-        $ref: '#/definitions/DimensionValue'
-        description: The value of the dimension to be matched.
-    description: Represents filters for a dimension.
-  DimensionFilters:
-    type: array
-    items:
-      $ref: '#/definitions/DimensionFilter'
-    maxItems: 10
-  DimensionName:
-    type: string
-    minLength: 1
-    maxLength: 255
-  DimensionValue:
-    type: string
-    minLength: 1
-    maxLength: 255
-  Dimensions:
-    type: array
-    items:
-      $ref: '#/definitions/Dimension'
-    maxItems: 10
   DisableAlarmActionsInput:
     type: object
     required:
@@ -940,36 +786,6 @@ definitions:
       AlarmNames:
         $ref: '#/definitions/AlarmNames'
         description: The names of the alarms.
-  ErrorMessage:
-    type: string
-    minLength: 1
-    maxLength: 255
-  EvaluateLowSampleCountPercentile:
-    type: string
-    minLength: 1
-    maxLength: 255
-  EvaluationPeriods:
-    type: integer
-    minimum: 1
-  ExtendedStatistic:
-    type: string
-    pattern: 'p(\d{1,2}(\.\d{0,2})?|100)'
-  ExtendedStatistics:
-    type: array
-    items:
-      $ref: '#/definitions/ExtendedStatistic'
-    minItems: 1
-    maxItems: 10
-  FaultDescription:
-    type: string
-  GetDashboardInput:
-    type: object
-    required:
-      - DashboardName
-    properties:
-      DashboardName:
-        $ref: '#/definitions/DashboardName'
-        description: The name of the dashboard to be described.
   GetDashboardOutput:
     type: object
     properties:
@@ -982,6 +798,57 @@ definitions:
       DashboardName:
         $ref: '#/definitions/DashboardName'
         description: The name of the dashboard.
+  GetDashboardInput:
+    type: object
+    required:
+      - DashboardName
+    properties:
+      DashboardName:
+        $ref: '#/definitions/DashboardName'
+        description: The name of the dashboard to be described.
+  GetMetricDataOutput:
+    type: object
+    properties:
+      MetricDataResults:
+        $ref: '#/definitions/MetricDataResults'
+        description: 'The metrics that are returned, including the metric name, namespace, and dimensions.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token that marks the next batch of returned results.
+  GetMetricDataInput:
+    type: object
+    required:
+      - MetricDataQueries
+      - StartTime
+      - EndTime
+    properties:
+      MetricDataQueries:
+        $ref: '#/definitions/MetricDataQueries'
+        description: 'The metric queries to be returned. A single <code>GetMetricData</code> call can include as many as 100 <code>MetricDataQuery</code> structures. Each of these structures can specify either a metric to retrieve, or a math expression to perform on retrieved data. '
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: '<p>The time stamp indicating the earliest data to be returned.</p> <p>For better performance, specify <code>StartTime</code> and <code>EndTime</code> values that align with the value of the metric''s <code>Period</code> and sync up with the beginning and end of an hour. For example, if the <code>Period</code> of a metric is 5 minutes, specifying 12:05 or 12:30 as <code>StartTime</code> can get a faster response from CloudWatch then setting 12:07 or 12:29 as the <code>StartTime</code>.</p>'
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: '<p>The time stamp indicating the latest data to be returned.</p> <p>For better performance, specify <code>StartTime</code> and <code>EndTime</code> values that align with the value of the metric''s <code>Period</code> and sync up with the beginning and end of an hour. For example, if the <code>Period</code> of a metric is 5 minutes, specifying 12:05 or 12:30 as <code>EndTime</code> can get a faster response from CloudWatch then setting 12:07 or 12:29 as the <code>EndTime</code>.</p>'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'Include this value, if it was returned by the previous call, to get the next set of data points.'
+      ScanBy:
+        $ref: '#/definitions/ScanBy'
+        description: The order in which data points should be returned. <code>TimestampDescending</code> returns the newest data first and paginates when the <code>MaxDatapoints</code> limit is reached. <code>TimestampAscending</code> returns the oldest data first and paginates when the <code>MaxDatapoints</code> limit is reached.
+      MaxDatapoints:
+        $ref: '#/definitions/GetMetricDataMaxDatapoints'
+        description: 'The maximum number of data points the request should return before paginating. If you omit this, the default of 100,800 is used.'
+  GetMetricStatisticsOutput:
+    type: object
+    properties:
+      Label:
+        $ref: '#/definitions/MetricLabel'
+        description: A label for the specified metric.
+      Datapoints:
+        $ref: '#/definitions/Datapoints'
+        description: The data points for the specified metric.
   GetMetricStatisticsInput:
     type: object
     required:
@@ -1014,78 +881,38 @@ definitions:
         description: 'The metric statistics, other than percentile. For percentile statistics, use <code>ExtendedStatistics</code>. When calling <code>GetMetricStatistics</code>, you must specify either <code>Statistics</code> or <code>ExtendedStatistics</code>, but not both.'
       ExtendedStatistics:
         $ref: '#/definitions/ExtendedStatistics'
-        description: 'The percentile statistics. Specify values between p0.0 and p100. When calling <code>GetMetricStatistics</code>, you must specify either <code>Statistics</code> or <code>ExtendedStatistics</code>, but not both.'
+        description: 'The percentile statistics. Specify values between p0.0 and p100. When calling <code>GetMetricStatistics</code>, you must specify either <code>Statistics</code> or <code>ExtendedStatistics</code>, but not both. Percentile statistics are not available for metrics when any of the metric values are negative numbers.'
       Unit:
         $ref: '#/definitions/StandardUnit'
-        description: 'The unit for a given metric. Metrics may be reported in multiple units. Not supplying a unit results in all units being returned. If the metric only ever reports one unit, specifying a unit has no effect.'
-  GetMetricStatisticsOutput:
+        description: 'The unit for a given metric. Metrics may be reported in multiple units. Not supplying a unit results in all units being returned. If you specify only a unit that the metric does not report, the results of the call are null.'
+  MissingRequiredParameterException: {}
+  InvalidParameterCombinationException: {}
+  GetMetricWidgetImageOutput:
     type: object
     properties:
-      Label:
-        $ref: '#/definitions/MetricLabel'
-        description: A label for the specified metric.
-      Datapoints:
-        $ref: '#/definitions/Datapoints'
-        description: The data points for the specified metric.
-  HistoryData:
-    type: string
-    minLength: 1
-    maxLength: 4095
-  HistoryItemType:
-    type: string
-    enum:
-      - ConfigurationUpdate
-      - StateUpdate
-      - Action
-  HistorySummary:
-    type: string
-    minLength: 1
-    maxLength: 255
-  InternalServiceFault:
+      MetricWidgetImage:
+        $ref: '#/definitions/MetricWidgetImage'
+        description: 'The image of the graph, in the output format specified.'
+  GetMetricWidgetImageInput:
+    type: object
+    required:
+      - MetricWidget
+    properties:
+      MetricWidget:
+        $ref: '#/definitions/MetricWidget'
+        description: '<p>A JSON string that defines the bitmap graph to be retrieved. The string includes the metrics to include in the graph, statistics, annotations, title, axis limits, and so on. You can include only one <code>MetricWidget</code> parameter in each <code>GetMetricWidgetImage</code> call.</p> <p>For more information about the syntax of <code>MetricWidget</code> see <a>CloudWatch-Metric-Widget-Structure</a>.</p> <p>If any metric on the graph could not load all the requested data points, an orange triangle with an exclamation point appears next to the graph legend.</p>'
+      OutputFormat:
+        $ref: '#/definitions/OutputFormat'
+        description: '<p>The format of the resulting image. Only PNG images are supported.</p> <p>The default is <code>png</code>. If you specify <code>png</code>, the API returns an HTTP response with the content-type set to <code>text/xml</code>. The image data is in a <code>MetricWidgetImage</code> field. For example:</p> <p> <code> &lt;GetMetricWidgetImageResponse xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/"&gt;</code> </p> <p> <code> &lt;GetMetricWidgetImageResult&gt;</code> </p> <p> <code> &lt;MetricWidgetImage&gt;</code> </p> <p> <code> iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...</code> </p> <p> <code> &lt;/MetricWidgetImage&gt;</code> </p> <p> <code> &lt;/GetMetricWidgetImageResult&gt;</code> </p> <p> <code> &lt;ResponseMetadata&gt;</code> </p> <p> <code> &lt;RequestId&gt;6f0d4192-4d42-11e8-82c1-f539a07e0e3b&lt;/RequestId&gt;</code> </p> <p> <code> &lt;/ResponseMetadata&gt;</code> </p> <p> <code>&lt;/GetMetricWidgetImageResponse&gt;</code> </p> <p>The <code>image/png</code> setting is intended only for custom HTTP requests. For most use cases, and all actions using an AWS SDK, you should use <code>png</code>. If you specify <code>image/png</code>, the HTTP response has a content-type set to <code>image/png</code>, and the body of the response is a PNG image. </p>'
+  ListDashboardsOutput:
     type: object
     properties:
-      Message:
-        $ref: '#/definitions/FaultDescription'
-        description: <p/>
-    description: 'Request processing has failed due to some unknown error, exception, or failure.'
-  InvalidFormatFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: <p/>
-    description: Data was not syntactically valid JSON.
-  InvalidNextToken:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: <p/>
-    description: The next token specified is invalid.
-  InvalidParameterCombinationException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/AwsQueryErrorMessage'
-        description: <p/>
-    description: Parameters were used together that cannot be used together.
-  InvalidParameterValueException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/AwsQueryErrorMessage'
-        description: <p/>
-    description: The value of an input parameter is bad or out-of-range.
-  LastModified:
-    type: string
-    format: date-time
-  LimitExceededFault:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: <p/>
-    description: The quota for alarms for this customer has already been reached.
+      DashboardEntries:
+        $ref: '#/definitions/DashboardEntries'
+        description: The list of matching dashboards.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token that marks the start of the next batch of returned results.
   ListDashboardsInput:
     type: object
     properties:
@@ -1095,12 +922,12 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token returned by a previous call to indicate that there is more data available.
-  ListDashboardsOutput:
+  ListMetricsOutput:
     type: object
     properties:
-      DashboardEntries:
-        $ref: '#/definitions/DashboardEntries'
-        description: The list of matching dashboards.
+      Metrics:
+        $ref: '#/definitions/Metrics'
+        description: The metrics.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token that marks the start of the next batch of returned results.
@@ -1119,21 +946,484 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token returned by a previous call to indicate that there is more data available.
-  ListMetricsOutput:
+  PutDashboardOutput:
     type: object
     properties:
-      Metrics:
-        $ref: '#/definitions/Metrics'
-        description: The metrics.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token that marks the start of the next batch of returned results.
+      DashboardValidationMessages:
+        $ref: '#/definitions/DashboardValidationMessages'
+        description: '<p>If the input for <code>PutDashboard</code> was correct and the dashboard was successfully created or modified, this result is empty.</p> <p>If this result includes only warning messages, then the input was valid enough for the dashboard to be created or modified, but some elements of the dashboard may not render.</p> <p>If this result includes error messages, the input was not valid and the operation failed.</p>'
+  PutDashboardInput:
+    type: object
+    required:
+      - DashboardName
+      - DashboardBody
+    properties:
+      DashboardName:
+        $ref: '#/definitions/DashboardName'
+        description: 'The name of the dashboard. If a dashboard with this name already exists, this call modifies that dashboard, replacing its current contents. Otherwise, a new dashboard is created. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, "-", and "_". This parameter is required.'
+      DashboardBody:
+        $ref: '#/definitions/DashboardBody'
+        description: '<p>The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard. This parameter is required.</p> <p>For more information about the syntax, see <a>CloudWatch-Dashboard-Body-Structure</a>.</p>'
+  DashboardInvalidInputError: {}
+  PutMetricAlarmInput:
+    type: object
+    required:
+      - AlarmName
+      - MetricName
+      - Namespace
+      - Period
+      - EvaluationPeriods
+      - Threshold
+      - ComparisonOperator
+    properties:
+      AlarmName:
+        $ref: '#/definitions/AlarmName'
+        description: The name for the alarm. This name must be unique within the AWS account.
+      AlarmDescription:
+        $ref: '#/definitions/AlarmDescription'
+        description: The description for the alarm.
+      ActionsEnabled:
+        $ref: '#/definitions/ActionsEnabled'
+        description: Indicates whether actions should be executed during any changes to the alarm state.
+      OKActions:
+        $ref: '#/definitions/ResourceList'
+        description: '<p>The actions to execute when this alarm transitions to an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> | <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> | <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> <p>Valid Values (for use with IAM roles): <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p>'
+      AlarmActions:
+        $ref: '#/definitions/ResourceList'
+        description: '<p>The actions to execute when this alarm transitions to the <code>ALARM</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> | <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> | <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> <p>Valid Values (for use with IAM roles): <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p>'
+      InsufficientDataActions:
+        $ref: '#/definitions/ResourceList'
+        description: '<p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> | <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> | <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> <p>Valid Values (for use with IAM roles): <code>&gt;arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p>'
+      MetricName:
+        $ref: '#/definitions/MetricName'
+        description: The name for the metric associated with the alarm.
+      Namespace:
+        $ref: '#/definitions/Namespace'
+        description: The namespace for the metric associated with the alarm.
+      Statistic:
+        $ref: '#/definitions/Statistic'
+        description: 'The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use <code>ExtendedStatistic</code>. When you call <code>PutMetricAlarm</code>, you must specify either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.'
+      ExtendedStatistic:
+        $ref: '#/definitions/ExtendedStatistic'
+        description: 'The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100. When you call <code>PutMetricAlarm</code>, you must specify either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.'
+      Dimensions:
+        $ref: '#/definitions/Dimensions'
+        description: The dimensions for the metric associated with the alarm.
+      Period:
+        $ref: '#/definitions/Period'
+        description: '<p>The period, in seconds, over which the specified statistic is applied. Valid values are 10, 30, and any multiple of 60.</p> <p>Be sure to specify 10 or 30 only for metrics that are stored by a <code>PutMetricData</code> call with a <code>StorageResolution</code> of 1. If you specify a period of 10 or 30 for a metric that does not have sub-minute resolution, the alarm still attempts to gather data at the period rate that you specify. In this case, it does not receive data for the attempts that do not correspond to a one-minute data resolution, and the alarm may often lapse into INSUFFICENT_DATA status. Specifying 10 or 30 also sets this alarm as a high-resolution alarm, which has a higher charge than other alarms. For more information about pricing, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>.</p> <p>An alarm''s total current evaluation period can be no longer than one day, so <code>Period</code> multiplied by <code>EvaluationPeriods</code> cannot be more than 86,400 seconds.</p>'
+      Unit:
+        $ref: '#/definitions/StandardUnit'
+        description: '<p>The unit of measure for the statistic. For example, the units for the Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the number of bytes that an instance receives on all network interfaces. You can also specify a unit when you create a custom metric. Units help provide conceptual meaning to your data. Metric data points that specify a unit of measure, such as Percent, are aggregated separately.</p> <p>If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch alarm can get stuck in the <code>INSUFFICIENT DATA</code> state. </p>'
+      EvaluationPeriods:
+        $ref: '#/definitions/EvaluationPeriods'
+        description: '<p>The number of periods over which data is compared to the specified threshold. If you are setting an alarm which requires that a number of consecutive data points be breaching to trigger the alarm, this value specifies that number. If you are setting an "M out of N" alarm, this value is the N.</p> <p>An alarm''s total current evaluation period can be no longer than one day, so this number multiplied by <code>Period</code> cannot be more than 86,400 seconds.</p>'
+      DatapointsToAlarm:
+        $ref: '#/definitions/DatapointsToAlarm'
+        description: 'The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting an "M out of N" alarm. In that case, this value is the M. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation">Evaluating an Alarm</a> in the <i>Amazon CloudWatch User Guide</i>.'
+      Threshold:
+        $ref: '#/definitions/Threshold'
+        description: The value against which the specified statistic is compared.
+      ComparisonOperator:
+        $ref: '#/definitions/ComparisonOperator'
+        description: ' The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.'
+      TreatMissingData:
+        $ref: '#/definitions/TreatMissingData'
+        description: '<p> Sets how this alarm is to handle missing data points. If <code>TreatMissingData</code> is omitted, the default behavior of <code>missing</code> is used. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p> <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code> </p>'
+      EvaluateLowSampleCountPercentile:
+        $ref: '#/definitions/EvaluateLowSampleCountPercentile'
+        description: '<p> Used only for alarms based on percentiles. If you specify <code>ignore</code>, the alarm state does not change during periods with too few data points to be statistically significant. If you specify <code>evaluate</code> or omit this parameter, the alarm is always evaluated and possibly changes state no matter how many data points are available. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples">Percentile-Based CloudWatch Alarms and Low Data Samples</a>.</p> <p>Valid Values: <code>evaluate | ignore</code> </p>'
+  LimitExceededFault: {}
+  PutMetricDataInput:
+    type: object
+    required:
+      - Namespace
+      - MetricData
+    properties:
+      Namespace:
+        $ref: '#/definitions/Namespace'
+        description: <p>The namespace for the metric data.</p> <p>You cannot specify a namespace that begins with "AWS/". Namespaces that begin with "AWS/" are reserved for use by Amazon Web Services products.</p>
+      MetricData:
+        $ref: '#/definitions/MetricData'
+        description: The data for the metric. The array can include no more than 20 metrics per call.
+  SetAlarmStateInput:
+    type: object
+    required:
+      - AlarmName
+      - StateValue
+      - StateReason
+    properties:
+      AlarmName:
+        $ref: '#/definitions/AlarmName'
+        description: The name for the alarm. This name must be unique within the AWS account. The maximum length is 255 characters.
+      StateValue:
+        $ref: '#/definitions/StateValue'
+        description: The value of the state.
+      StateReason:
+        $ref: '#/definitions/StateReason'
+        description: 'The reason that this alarm is set to this specific state, in text format.'
+      StateReasonData:
+        $ref: '#/definitions/StateReasonData'
+        description: 'The reason that this alarm is set to this specific state, in JSON format.'
+  InvalidFormatFault: {}
+  ActionPrefix:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  ActionsEnabled:
+    type: boolean
+  AlarmArn:
+    type: string
+    minLength: 1
+    maxLength: 1600
+  AlarmDescription:
+    type: string
+    minLength: 0
+    maxLength: 1024
+  AlarmName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  Timestamp:
+    type: string
+    format: date-time
+  HistoryItemType:
+    type: string
+    enum:
+      - ConfigurationUpdate
+      - StateUpdate
+      - Action
+  HistorySummary:
+    type: string
+    minLength: 1
+    maxLength: 255
+  HistoryData:
+    type: string
+    minLength: 1
+    maxLength: 4095
+  AlarmHistoryItem:
+    type: object
+    properties:
+      AlarmName:
+        $ref: '#/definitions/AlarmName'
+        description: The descriptive name for the alarm.
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The time stamp for the alarm history item.
+      HistoryItemType:
+        $ref: '#/definitions/HistoryItemType'
+        description: The type of alarm history item.
+      HistorySummary:
+        $ref: '#/definitions/HistorySummary'
+        description: 'A summary of the alarm history, in text format.'
+      HistoryData:
+        $ref: '#/definitions/HistoryData'
+        description: 'Data about the alarm, in JSON format.'
+    description: Represents the history of a specific alarm.
+  AlarmHistoryItems:
+    type: array
+    items:
+      $ref: '#/definitions/AlarmHistoryItem'
+  AlarmNamePrefix:
+    type: string
+    minLength: 1
+    maxLength: 255
+  AlarmNames:
+    type: array
+    items:
+      $ref: '#/definitions/AlarmName'
+    maxItems: 100
+  ComparisonOperator:
+    type: string
+    enum:
+      - GreaterThanOrEqualToThreshold
+      - GreaterThanThreshold
+      - LessThanThreshold
+      - LessThanOrEqualToThreshold
+  DatapointValue:
+    type: number
+    format: double
+  Counts:
+    type: array
+    items:
+      $ref: '#/definitions/DatapointValue'
+  DashboardArn:
+    type: string
+  DashboardBody:
+    type: string
+  DashboardEntry:
+    type: object
+    properties:
+      DashboardName:
+        $ref: '#/definitions/DashboardName'
+        description: The name of the dashboard.
+      DashboardArn:
+        $ref: '#/definitions/DashboardArn'
+        description: The Amazon Resource Name (ARN) of the dashboard.
+      LastModified:
+        $ref: '#/definitions/LastModified'
+        description: 'The time stamp of when the dashboard was last modified, either by an API call or through the console. This number is expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.'
+      Size:
+        $ref: '#/definitions/Size'
+        description: 'The size of the dashboard, in bytes.'
+    description: Represents a specific dashboard.
+  DashboardEntries:
+    type: array
+    items:
+      $ref: '#/definitions/DashboardEntry'
+  DashboardName:
+    type: string
+  LastModified:
+    type: string
+    format: date-time
+  Size:
+    type: integer
+  DashboardNamePrefix:
+    type: string
+  DashboardNames:
+    type: array
+    items:
+      $ref: '#/definitions/DashboardName'
+  DataPath:
+    type: string
+  Message:
+    type: string
+  DashboardValidationMessage:
+    type: object
+    properties:
+      DataPath:
+        $ref: '#/definitions/DataPath'
+        description: The data path related to the message.
+      Message:
+        $ref: '#/definitions/Message'
+        description: A message describing the error or warning.
+    description: An error or warning for the operation.
+  DashboardValidationMessages:
+    type: array
+    items:
+      $ref: '#/definitions/DashboardValidationMessage'
+  StandardUnit:
+    type: string
+    enum:
+      - Seconds
+      - Microseconds
+      - Milliseconds
+      - Bytes
+      - Kilobytes
+      - Megabytes
+      - Gigabytes
+      - Terabytes
+      - Bits
+      - Kilobits
+      - Megabits
+      - Gigabits
+      - Terabits
+      - Percent
+      - Count
+      - Bytes/Second
+      - Kilobytes/Second
+      - Megabytes/Second
+      - Gigabytes/Second
+      - Terabytes/Second
+      - Bits/Second
+      - Kilobits/Second
+      - Megabits/Second
+      - Gigabits/Second
+      - Terabits/Second
+      - Count/Second
+      - None
+  DatapointValueMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ExtendedStatistic'
+        value:
+          $ref: '#/definitions/DatapointValue'
+  Datapoint:
+    type: object
+    properties:
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The time stamp used for the data point.
+      SampleCount:
+        $ref: '#/definitions/DatapointValue'
+        description: The number of metric values that contributed to the aggregate value of this data point.
+      Average:
+        $ref: '#/definitions/DatapointValue'
+        description: The average of the metric values that correspond to the data point.
+      Sum:
+        $ref: '#/definitions/DatapointValue'
+        description: The sum of the metric values for the data point.
+      Minimum:
+        $ref: '#/definitions/DatapointValue'
+        description: The minimum metric value for the data point.
+      Maximum:
+        $ref: '#/definitions/DatapointValue'
+        description: The maximum metric value for the data point.
+      Unit:
+        $ref: '#/definitions/StandardUnit'
+        description: The standard unit for the data point.
+      ExtendedStatistics:
+        $ref: '#/definitions/DatapointValueMap'
+        description: The percentile statistic for the data point.
+    description: Encapsulates the statistical data that CloudWatch computes from metric data.
+  ExtendedStatistic:
+    type: string
+    pattern: 'p(\d{1,2}(\.\d{0,2})?|100)'
+  DatapointValues:
+    type: array
+    items:
+      $ref: '#/definitions/DatapointValue'
+  Datapoints:
+    type: array
+    items:
+      $ref: '#/definitions/Datapoint'
+  DatapointsToAlarm:
+    type: integer
+    minimum: 1
   MaxRecords:
     type: integer
     minimum: 1
     maximum: 100
-  Message:
+  NextToken:
     type: string
+    minLength: 0
+    maxLength: 1024
+  MetricName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  Namespace:
+    type: string
+    pattern: '[^:].*'
+    minLength: 1
+    maxLength: 255
+  Statistic:
+    type: string
+    enum:
+      - SampleCount
+      - Average
+      - Sum
+      - Minimum
+      - Maximum
+  Dimensions:
+    type: array
+    items:
+      $ref: '#/definitions/Dimension'
+    maxItems: 10
+  Period:
+    type: integer
+    minimum: 1
+  MetricAlarms:
+    type: array
+    items:
+      $ref: '#/definitions/MetricAlarm'
+  StateValue:
+    type: string
+    enum:
+      - OK
+      - ALARM
+      - INSUFFICIENT_DATA
+  DimensionName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  DimensionValue:
+    type: string
+    minLength: 1
+    maxLength: 255
+  Dimension:
+    type: object
+    required:
+      - Name
+      - Value
+    properties:
+      Name:
+        $ref: '#/definitions/DimensionName'
+        description: The name of the dimension.
+      Value:
+        $ref: '#/definitions/DimensionValue'
+        description: The value representing the dimension measurement.
+    description: Expands the identity of a metric.
+  DimensionFilter:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/DimensionName'
+        description: The dimension name to be matched.
+      Value:
+        $ref: '#/definitions/DimensionValue'
+        description: The value of the dimension to be matched.
+    description: Represents filters for a dimension.
+  DimensionFilters:
+    type: array
+    items:
+      $ref: '#/definitions/DimensionFilter'
+    maxItems: 10
+  EvaluateLowSampleCountPercentile:
+    type: string
+    minLength: 1
+    maxLength: 255
+  EvaluationPeriods:
+    type: integer
+    minimum: 1
+  ExtendedStatistics:
+    type: array
+    items:
+      $ref: '#/definitions/ExtendedStatistic'
+    minItems: 1
+    maxItems: 10
+  MetricDataQueries:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDataQuery'
+  ScanBy:
+    type: string
+    enum:
+      - TimestampDescending
+      - TimestampAscending
+  GetMetricDataMaxDatapoints:
+    type: integer
+  MetricDataResults:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDataResult'
+  Statistics:
+    type: array
+    items:
+      $ref: '#/definitions/Statistic'
+    minItems: 1
+    maxItems: 5
+  MetricLabel:
+    type: string
+  MetricWidget:
+    type: string
+  OutputFormat:
+    type: string
+  MetricWidgetImage:
+    type: string
+  Metrics:
+    type: array
+    items:
+      $ref: '#/definitions/Metric'
+  MessageDataCode:
+    type: string
+  MessageDataValue:
+    type: string
+  MessageData:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/MessageDataCode'
+        description: The error code or status code associated with the message.
+      Value:
+        $ref: '#/definitions/MessageDataValue'
+        description: The message text.
+    description: 'A message returned by the <code>GetMetricData</code>API, including a code and a description.'
   Metric:
     type: object
     properties:
@@ -1147,6 +1437,26 @@ definitions:
         $ref: '#/definitions/Dimensions'
         description: The dimensions for the metric.
     description: Represents a specific metric.
+  ResourceList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceName'
+    maxItems: 5
+  StateReason:
+    type: string
+    minLength: 0
+    maxLength: 1023
+  StateReasonData:
+    type: string
+    minLength: 0
+    maxLength: 4000
+  Threshold:
+    type: number
+    format: double
+  TreatMissingData:
+    type: string
+    minLength: 1
+    maxLength: 255
   MetricAlarm:
     type: object
     properties:
@@ -1226,14 +1536,6 @@ definitions:
         $ref: '#/definitions/EvaluateLowSampleCountPercentile'
         description: 'Used only for alarms based on percentiles. If <code>ignore</code>, the alarm state does not change during periods with too few data points to be statistically significant. If <code>evaluate</code> or this parameter is not used, the alarm is always evaluated and possibly changes state no matter how many data points are available.'
     description: Represents an alarm.
-  MetricAlarms:
-    type: array
-    items:
-      $ref: '#/definitions/MetricAlarm'
-  MetricData:
-    type: array
-    items:
-      $ref: '#/definitions/MetricDatum'
   MetricDatum:
     type: object
     required:
@@ -1254,6 +1556,12 @@ definitions:
       StatisticValues:
         $ref: '#/definitions/StatisticSet'
         description: The statistical values for the metric.
+      Values:
+        $ref: '#/definitions/Values'
+        description: '<p>Array of numbers representing the values for the metric during the period. Each unique value is listed just once in this array, and the corresponding number in the <code>Counts</code> array specifies the number of times that value occurred during the period. You can include up to 150 unique values in each <code>PutMetricData</code> action that specifies a <code>Values</code> array.</p> <p>Although the <code>Values</code> array accepts numbers of type <code>Double</code>, CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p>'
+      Counts:
+        $ref: '#/definitions/Counts'
+        description: '<p>Array of numbers that is used along with the <code>Values</code> array. Each number in the <code>Count</code> array is the number of times the corresponding value in the <code>Values</code> array occurred during the period. </p> <p>If you omit the <code>Counts</code> array, the default of 1 is used as the value for each count. If you include a <code>Counts</code> array, it must include the same amount of values as the <code>Values</code> array.</p>'
       Unit:
         $ref: '#/definitions/StandardUnit'
         description: The unit of the metric.
@@ -1261,222 +1569,97 @@ definitions:
         $ref: '#/definitions/StorageResolution'
         description: '<p>Valid values are 1 and 60. Setting this to 1 specifies this metric as a high-resolution metric, so that CloudWatch stores the metric with sub-minute resolution down to one second. Setting this to 60 specifies this metric as a regular-resolution metric, which CloudWatch stores at 1-minute resolution. Currently, high resolution is available only for custom metrics. For more information about high-resolution metrics, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#high-resolution-metrics">High-Resolution Metrics</a> in the <i>Amazon CloudWatch User Guide</i>. </p> <p>This field is optional, if you do not specify it the default of 60 is used.</p>'
     description: Encapsulates the information sent to either create a metric or add new values to be aggregated into an existing metric.
-  MetricLabel:
-    type: string
-  MetricName:
-    type: string
-    minLength: 1
-    maxLength: 255
-  Metrics:
+  MetricData:
     type: array
     items:
-      $ref: '#/definitions/Metric'
-  MissingRequiredParameterException:
+      $ref: '#/definitions/MetricDatum'
+  MetricDataQuery:
     type: object
+    required:
+      - Id
     properties:
-      message:
-        $ref: '#/definitions/AwsQueryErrorMessage'
-        description: <p/>
-    description: An input parameter that is required is missing.
-  Namespace:
+      Id:
+        $ref: '#/definitions/MetricId'
+        description: 'A short name used to tie this structure to the results in the response. This name must be unique within a single call to <code>GetMetricData</code>. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscore. The first character must be a lowercase letter.'
+      MetricStat:
+        $ref: '#/definitions/MetricStat'
+        description: '<p>The metric to be returned, along with statistics, period, and units. Use this parameter only if this structure is performing a data retrieval and not performing a math expression on the returned data.</p> <p>Within one MetricDataQuery structure, you must specify either <code>Expression</code> or <code>MetricStat</code> but not both.</p>'
+      Expression:
+        $ref: '#/definitions/MetricExpression'
+        description: '<p>The math expression to be performed on the returned data, if this structure is performing a math expression. For more information about metric math expressions, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Within one MetricDataQuery structure, you must specify either <code>Expression</code> or <code>MetricStat</code> but not both.</p>'
+      Label:
+        $ref: '#/definitions/MetricLabel'
+        description: 'A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents. If the metric or expression is shown in a CloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch generates a default.'
+      ReturnData:
+        $ref: '#/definitions/ReturnData'
+        description: 'Indicates whether to return the time stamps and raw data values of this metric. If you are performing this call just to do math expressions and do not also need the raw data returned, you can specify <code>False</code>. If you omit this, the default of <code>True</code> is used.'
+    description: 'This structure indicates the metric data to return, and whether this call is just retrieving a batch set of data for one metric, or is performing a math expression on metric data. A single <code>GetMetricData</code> call can include up to 100 <code>MetricDataQuery</code> structures.'
+  MetricId:
     type: string
-    pattern: '[^:].*'
     minLength: 1
     maxLength: 255
-  NextToken:
-    type: string
-    minLength: 0
-    maxLength: 1024
-  Period:
-    type: integer
-    minimum: 1
-  PutDashboardInput:
+  MetricStat:
     type: object
     required:
-      - DashboardName
-      - DashboardBody
-    properties:
-      DashboardName:
-        $ref: '#/definitions/DashboardName'
-        description: 'The name of the dashboard. If a dashboard with this name already exists, this call modifies that dashboard, replacing its current contents. Otherwise, a new dashboard is created. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, "-", and "_". This parameter is required.'
-      DashboardBody:
-        $ref: '#/definitions/DashboardBody'
-        description: '<p>The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard. This parameter is required.</p> <p>For more information about the syntax, see <a>CloudWatch-Dashboard-Body-Structure</a>.</p>'
-  PutDashboardOutput:
-    type: object
-    properties:
-      DashboardValidationMessages:
-        $ref: '#/definitions/DashboardValidationMessages'
-        description: '<p>If the input for <code>PutDashboard</code> was correct and the dashboard was successfully created or modified, this result is empty.</p> <p>If this result includes only warning messages, then the input was valid enough for the dashboard to be created or modified, but some elements of the dashboard may not render.</p> <p>If this result includes error messages, the input was not valid and the operation failed.</p>'
-  PutMetricAlarmInput:
-    type: object
-    required:
-      - AlarmName
-      - MetricName
-      - Namespace
+      - Metric
       - Period
-      - EvaluationPeriods
-      - Threshold
-      - ComparisonOperator
+      - Stat
     properties:
-      AlarmName:
-        $ref: '#/definitions/AlarmName'
-        description: The name for the alarm. This name must be unique within the AWS account.
-      AlarmDescription:
-        $ref: '#/definitions/AlarmDescription'
-        description: The description for the alarm.
-      ActionsEnabled:
-        $ref: '#/definitions/ActionsEnabled'
-        description: Indicates whether actions should be executed during any changes to the alarm state.
-      OKActions:
-        $ref: '#/definitions/ResourceList'
-        description: '<p>The actions to execute when this alarm transitions to an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: arn:aws:automate:<i>region</i>:ec2:stop | arn:aws:automate:<i>region</i>:ec2:terminate | arn:aws:automate:<i>region</i>:ec2:recover | arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> | arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i> autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </p> <p>Valid Values (for use with IAM roles): arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Reboot/1.0</p>'
-      AlarmActions:
-        $ref: '#/definitions/ResourceList'
-        description: '<p>The actions to execute when this alarm transitions to the <code>ALARM</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: arn:aws:automate:<i>region</i>:ec2:stop | arn:aws:automate:<i>region</i>:ec2:terminate | arn:aws:automate:<i>region</i>:ec2:recover | arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> | arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i> autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </p> <p>Valid Values (for use with IAM roles): arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Reboot/1.0</p>'
-      InsufficientDataActions:
-        $ref: '#/definitions/ResourceList'
-        description: '<p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: arn:aws:automate:<i>region</i>:ec2:stop | arn:aws:automate:<i>region</i>:ec2:terminate | arn:aws:automate:<i>region</i>:ec2:recover | arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> | arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i> autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </p> <p>Valid Values (for use with IAM roles): arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Reboot/1.0</p>'
-      MetricName:
-        $ref: '#/definitions/MetricName'
-        description: The name for the metric associated with the alarm.
-      Namespace:
-        $ref: '#/definitions/Namespace'
-        description: The namespace for the metric associated with the alarm.
-      Statistic:
-        $ref: '#/definitions/Statistic'
-        description: 'The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use <code>ExtendedStatistic</code>. When you call <code>PutMetricAlarm</code>, you must specify either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.'
-      ExtendedStatistic:
-        $ref: '#/definitions/ExtendedStatistic'
-        description: 'The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100. When you call <code>PutMetricAlarm</code>, you must specify either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.'
-      Dimensions:
-        $ref: '#/definitions/Dimensions'
-        description: The dimensions for the metric associated with the alarm.
+      Metric:
+        $ref: '#/definitions/Metric'
+        description: 'The metric to return, including the metric name, namespace, and dimensions.'
       Period:
         $ref: '#/definitions/Period'
-        description: '<p>The period, in seconds, over which the specified statistic is applied. Valid values are 10, 30, and any multiple of 60.</p> <p>Be sure to specify 10 or 30 only for metrics that are stored by a <code>PutMetricData</code> call with a <code>StorageResolution</code> of 1. If you specify a Period of 10 or 30 for a metric that does not have sub-minute resolution, the alarm still attempts to gather data at the period rate that you specify. In this case, it does not receive data for the attempts that do not correspond to a one-minute data resolution, and the alarm may often lapse into INSUFFICENT_DATA status. Specifying 10 or 30 also sets this alarm as a high-resolution alarm, which has a higher charge than other alarms. For more information about pricing, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>.</p> <p>An alarm''s total current evaluation period can be no longer than one day, so <code>Period</code> multiplied by <code>EvaluationPeriods</code> cannot be more than 86,400 seconds.</p>'
+        description: The period to use when retrieving the metric.
+      Stat:
+        $ref: '#/definitions/Stat'
+        description: The statistic to return. It can include any CloudWatch statistic or extended statistic.
       Unit:
         $ref: '#/definitions/StandardUnit'
-        description: '<p>The unit of measure for the statistic. For example, the units for the Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the number of bytes that an instance receives on all network interfaces. You can also specify a unit when you create a custom metric. Units help provide conceptual meaning to your data. Metric data points that specify a unit of measure, such as Percent, are aggregated separately.</p> <p>If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch alarm can get stuck in the <code>INSUFFICIENT DATA</code> state. </p>'
-      EvaluationPeriods:
-        $ref: '#/definitions/EvaluationPeriods'
-        description: 'The number of periods over which data is compared to the specified threshold. An alarm''s total current evaluation period can be no longer than one day, so this number multiplied by <code>Period</code> cannot be more than 86,400 seconds.'
-      DatapointsToAlarm:
-        $ref: '#/definitions/DatapointsToAlarm'
-        description: The number of datapoints that must be breaching to trigger the alarm.
-      Threshold:
-        $ref: '#/definitions/Threshold'
-        description: The value against which the specified statistic is compared.
-      ComparisonOperator:
-        $ref: '#/definitions/ComparisonOperator'
-        description: ' The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.'
-      TreatMissingData:
-        $ref: '#/definitions/TreatMissingData'
-        description: '<p> Sets how this alarm is to handle missing data points. If <code>TreatMissingData</code> is omitted, the default behavior of <code>missing</code> is used. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p> <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code> </p>'
-      EvaluateLowSampleCountPercentile:
-        $ref: '#/definitions/EvaluateLowSampleCountPercentile'
-        description: '<p> Used only for alarms based on percentiles. If you specify <code>ignore</code>, the alarm state does not change during periods with too few data points to be statistically significant. If you specify <code>evaluate</code> or omit this parameter, the alarm is always evaluated and possibly changes state no matter how many data points are available. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples">Percentile-Based CloudWatch Alarms and Low Data Samples</a>.</p> <p>Valid Values: <code>evaluate | ignore</code> </p>'
-  PutMetricDataInput:
-    type: object
-    required:
-      - Namespace
-      - MetricData
-    properties:
-      Namespace:
-        $ref: '#/definitions/Namespace'
-        description: <p>The namespace for the metric data.</p> <p>You cannot specify a namespace that begins with "AWS/". Namespaces that begin with "AWS/" are reserved for use by Amazon Web Services products.</p>
-      MetricData:
-        $ref: '#/definitions/MetricData'
-        description: The data for the metric.
-  ResourceList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceName'
-    maxItems: 5
-  ResourceName:
+        description: The unit to use for the returned data points.
+    description: 'This structure defines the metric to be returned, along with the statistics, period, and units.'
+  MetricExpression:
     type: string
     minLength: 1
     maxLength: 1024
-  ResourceNotFound:
+  ReturnData:
+    type: boolean
+  Timestamps:
+    type: array
+    items:
+      $ref: '#/definitions/Timestamp'
+  StatusCode:
+    type: string
+    enum:
+      - Complete
+      - InternalError
+      - PartialData
+  MetricDataResultMessages:
+    type: array
+    items:
+      $ref: '#/definitions/MessageData'
+  MetricDataResult:
     type: object
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: <p/>
-    description: The named resource does not exist.
-  SetAlarmStateInput:
-    type: object
-    required:
-      - AlarmName
-      - StateValue
-      - StateReason
-    properties:
-      AlarmName:
-        $ref: '#/definitions/AlarmName'
-        description: The name for the alarm. This name must be unique within the AWS account. The maximum length is 255 characters.
-      StateValue:
-        $ref: '#/definitions/StateValue'
-        description: The value of the state.
-      StateReason:
-        $ref: '#/definitions/StateReason'
-        description: 'The reason that this alarm is set to this specific state, in text format.'
-      StateReasonData:
-        $ref: '#/definitions/StateReasonData'
-        description: 'The reason that this alarm is set to this specific state, in JSON format.'
-  Size:
-    type: integer
-  StandardUnit:
-    type: string
-    enum:
-      - Seconds
-      - Microseconds
-      - Milliseconds
-      - Bytes
-      - Kilobytes
-      - Megabytes
-      - Gigabytes
-      - Terabytes
-      - Bits
-      - Kilobits
-      - Megabits
-      - Gigabits
-      - Terabits
-      - Percent
-      - Count
-      - Bytes/Second
-      - Kilobytes/Second
-      - Megabytes/Second
-      - Gigabytes/Second
-      - Terabytes/Second
-      - Bits/Second
-      - Kilobits/Second
-      - Megabits/Second
-      - Gigabits/Second
-      - Terabits/Second
-      - Count/Second
-      - None
-  StateReason:
-    type: string
-    minLength: 0
-    maxLength: 1023
-  StateReasonData:
-    type: string
-    minLength: 0
-    maxLength: 4000
-  StateValue:
-    type: string
-    enum:
-      - OK
-      - ALARM
-      - INSUFFICIENT_DATA
-  Statistic:
-    type: string
-    enum:
-      - SampleCount
-      - Average
-      - Sum
-      - Minimum
-      - Maximum
+      Id:
+        $ref: '#/definitions/MetricId'
+        description: The short name you specified to represent this metric.
+      Label:
+        $ref: '#/definitions/MetricLabel'
+        description: The human-readable label associated with the data.
+      Timestamps:
+        $ref: '#/definitions/Timestamps'
+        description: 'The time stamps for the data points, formatted in Unix timestamp format. The number of time stamps always matches the number of values and the value for Timestamps[x] is Values[x].'
+      Values:
+        $ref: '#/definitions/DatapointValues'
+        description: 'The data points for the metric corresponding to <code>Timestamps</code>. The number of values always matches the number of time stamps and the time stamp for Values[x] is Timestamps[x].'
+      StatusCode:
+        $ref: '#/definitions/StatusCode'
+        description: 'The status of the returned data. <code>Complete</code> indicates that all data points in the requested time range were returned. <code>PartialData</code> means that an incomplete set of data points were returned. You can use the <code>NextToken</code> value that was returned and repeat your request to get more data points. <code>NextToken</code> is not returned if you are performing a math expression. <code>InternalError</code> indicates that an error occurred. Retry your request using <code>NextToken</code>, if present.'
+      Messages:
+        $ref: '#/definitions/MetricDataResultMessages'
+        description: A list of messages with additional information about the data returned.
+    description: 'A <code>GetMetricData</code> call returns an array of <code>MetricDataResult</code> structures. Each of these structures includes the data points for that metric, along with the time stamps of those data points and other identifying information.'
   StatisticSet:
     type: object
     required:
@@ -1498,22 +1681,16 @@ definitions:
         $ref: '#/definitions/DatapointValue'
         description: The maximum value of the sample set.
     description: 'Represents a set of statistics that describes a specific metric. '
-  Statistics:
+  Values:
     type: array
     items:
-      $ref: '#/definitions/Statistic'
-    minItems: 1
-    maxItems: 5
+      $ref: '#/definitions/DatapointValue'
   StorageResolution:
     type: integer
     minimum: 1
-  Threshold:
-    type: number
-    format: double
-  Timestamp:
+  Stat:
     type: string
-    format: date-time
-  TreatMissingData:
+  ResourceName:
     type: string
     minLength: 1
-    maxLength: 255
+    maxLength: 1024

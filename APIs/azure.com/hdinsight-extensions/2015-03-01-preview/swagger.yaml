@@ -41,6 +41,27 @@ parameters:
     name: api-version
     required: true
     type: string
+  ClusterNameParameter:
+    description: The name of the cluster.
+    in: path
+    name: clusterName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ExtensionNameParameter:
+    description: The name of the cluster extension.
+    in: path
+    name: extensionName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupNameParameter:
+    description: The name of the resource group.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   SubscriptionIdParameter:
     description: The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
@@ -53,21 +74,27 @@ paths:
       description: Disables the Operations Management Suite (OMS) on the HDInsight cluster.
       operationId: Extension_DisableMonitoring
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
+        '200':
+          description: Ok response definition.
         '202':
           description: OK response definition.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Extensions
       x-ms-examples:
@@ -78,29 +105,34 @@ paths:
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
+            '200': {}
             '202': {}
       x-ms-long-running-operation: true
     get:
       description: Gets the status of Operations Management Suite (OMS) on the HDInsight cluster.
       operationId: Extension_GetMonitoringStatus
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/ClusterMonitoringResponse'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Extensions
       x-ms-examples:
@@ -116,27 +148,33 @@ paths:
       description: Enables the Operations Management Suite (OMS) on the HDInsight cluster.
       operationId: Extension_EnableMonitoring
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
         - description: The Operations Management Suite (OMS) workspace parameters.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/ClusterMonitoringRequest'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: Ok response definition.
         '202':
           description: Accepted response definition.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Extensions
       x-ms-examples:
@@ -150,6 +188,7 @@ paths:
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
+            '200': {}
             '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/extensions/{extensionName}':
@@ -157,31 +196,28 @@ paths:
       description: Deletes the specified extension for HDInsight cluster.
       operationId: Extension_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
-        - description: The name of the cluster extension.
-          enum:
-            - clustermonitoring
-          in: path
-          name: extensionName
-          required: true
-          type: string
-          x-ms-enum:
-            modelAsString: false
-            name: ExtensionName
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ExtensionNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
+        '200':
+          description: Ok response definition.
         '202':
           description: OK response definition.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Extensions
       x-ms-examples:
@@ -193,38 +229,34 @@ paths:
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
+            '200': {}
             '202': {}
     get:
       description: Gets the extension properties for the specified HDInsight cluster extension.
       operationId: Extension_Get
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
-        - description: The name of the cluster extension.
-          enum:
-            - clustermonitoring
-          in: path
-          name: extensionName
-          required: true
-          type: string
-          x-ms-enum:
-            modelAsString: false
-            name: ExtensionName
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ExtensionNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/Extension'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Extensions
       x-ms-examples:
@@ -241,37 +273,34 @@ paths:
       description: Creates an HDInsight cluster extension.
       operationId: Extension_Create
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ExtensionNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
         - description: The cluster extensions create request.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/Extension'
-        - description: The name of the cluster extension.
-          enum:
-            - clustermonitoring
-          in: path
-          name: extensionName
-          required: true
-          type: string
-          x-ms-enum:
-            modelAsString: false
-            name: ExtensionName
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK. The request has succeeded.
         '202':
           description: OK. The request has succeeded.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Extensions
       x-ms-examples:
@@ -286,6 +315,7 @@ paths:
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
+            '200': {}
             '202': {}
 definitions:
   ClusterMonitoringRequest:
@@ -300,10 +330,10 @@ definitions:
   ClusterMonitoringResponse:
     description: The Operations Management Suite (OMS) status response
     properties:
-      ClusterMonitoringEnabled:
+      clusterMonitoringEnabled:
         description: The status of the Operations Management Suite (OMS) on the HDInsight cluster.
         type: boolean
-      WorkspaceId:
+      workspaceId:
         description: The workspace ID of the Operations Management Suite (OMS) on the HDInsight cluster.
         type: string
   Extension:

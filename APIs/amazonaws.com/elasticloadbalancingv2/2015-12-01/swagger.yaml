@@ -236,6 +236,14 @@ paths:
           description: TooManyTargetsException
           schema:
             $ref: '#/definitions/TooManyTargetsException'
+        '493':
+          description: TooManyActionsException
+          schema:
+            $ref: '#/definitions/TooManyActionsException'
+        '494':
+          description: InvalidLoadBalancerActionException
+          schema:
+            $ref: '#/definitions/InvalidLoadBalancerActionException'
       parameters:
         - name: body
           in: body
@@ -332,7 +340,7 @@ paths:
   '/#CreateRule':
     post:
       operationId: CreateRule
-      description: '<p>Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer.</p> <p>Rules are evaluated in priority order, from the lowest value to the highest value. When the condition for a rule is met, the specified action is taken. If no conditions are met, the action for the default rule is taken. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules">Listener Rules</a> in the <i>Application Load Balancers Guide</i>.</p> <p>To view your current rules, use <a>DescribeRules</a>. To update a rule, use <a>ModifyRule</a>. To set the priorities of your rules, use <a>SetRulePriorities</a>. To delete a rule, use <a>DeleteRule</a>.</p>'
+      description: '<p>Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer.</p> <p>Rules are evaluated in priority order, from the lowest value to the highest value. When the conditions for a rule are met, its actions are performed. If the conditions for no rules are met, the actions for the default rule are performed. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules">Listener Rules</a> in the <i>Application Load Balancers Guide</i>.</p> <p>To view your current rules, use <a>DescribeRules</a>. To update a rule, use <a>ModifyRule</a>. To set the priorities of your rules, use <a>SetRulePriorities</a>. To delete a rule, use <a>DeleteRule</a>.</p>'
       responses:
         '200':
           description: Success
@@ -378,6 +386,18 @@ paths:
           description: TooManyTargetsException
           schema:
             $ref: '#/definitions/TooManyTargetsException'
+        '490':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
+        '491':
+          description: TooManyActionsException
+          schema:
+            $ref: '#/definitions/TooManyActionsException'
+        '492':
+          description: InvalidLoadBalancerActionException
+          schema:
+            $ref: '#/definitions/InvalidLoadBalancerActionException'
       parameters:
         - name: body
           in: body
@@ -434,7 +454,7 @@ paths:
   '/#DeleteListener':
     post:
       operationId: DeleteListener
-      description: '<p>Deletes the specified listener.</p> <p>Alternatively, your listener is deleted when you delete the load balancer it is attached to using <a>DeleteLoadBalancer</a>.</p>'
+      description: '<p>Deletes the specified listener.</p> <p>Alternatively, your listener is deleted when you delete the load balancer to which it is attached, using <a>DeleteLoadBalancer</a>.</p>'
       responses:
         '200':
           description: Success
@@ -663,6 +683,10 @@ paths:
           description: LoadBalancerNotFoundException
           schema:
             $ref: '#/definitions/LoadBalancerNotFoundException'
+        '482':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
       parameters:
         - name: body
           in: body
@@ -687,7 +711,7 @@ paths:
   '/#DescribeLoadBalancerAttributes':
     post:
       operationId: DescribeLoadBalancerAttributes
-      description: Describes the attributes for the specified Application Load Balancer or Network Load Balancer.
+      description: '<p>Describes the attributes for the specified Application Load Balancer or Network Load Balancer.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#load-balancer-attributes">Load Balancer Attributes</a> in the <i>Application Load Balancers Guide</i> or <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html#load-balancer-attributes">Load Balancer Attributes</a> in the <i>Network Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -801,6 +825,10 @@ paths:
           description: RuleNotFoundException
           schema:
             $ref: '#/definitions/RuleNotFoundException'
+        '482':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
       parameters:
         - name: body
           in: body
@@ -890,7 +918,7 @@ paths:
   '/#DescribeTargetGroupAttributes':
     post:
       operationId: DescribeTargetGroupAttributes
-      description: Describes the attributes for the specified target group.
+      description: '<p>Describes the attributes for the specified target group.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes">Target Group Attributes</a> in the <i>Application Load Balancers Guide</i> or <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#target-group-attributes">Target Group Attributes</a> in the <i>Network Load Balancers Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1075,6 +1103,14 @@ paths:
           description: TooManyTargetsException
           schema:
             $ref: '#/definitions/TooManyTargetsException'
+        '493':
+          description: TooManyActionsException
+          schema:
+            $ref: '#/definitions/TooManyActionsException'
+        '494':
+          description: InvalidLoadBalancerActionException
+          schema:
+            $ref: '#/definitions/InvalidLoadBalancerActionException'
       parameters:
         - name: body
           in: body
@@ -1127,7 +1163,7 @@ paths:
   '/#ModifyRule':
     post:
       operationId: ModifyRule
-      description: '<p>Modifies the specified rule.</p> <p>Any existing properties that you do not modify retain their current values.</p> <p>To modify the default action, use <a>ModifyListener</a>.</p>'
+      description: '<p>Modifies the specified rule.</p> <p>Any existing properties that you do not modify retain their current values.</p> <p>To modify the actions for the default rule, use <a>ModifyListener</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1161,6 +1197,18 @@ paths:
           description: TargetGroupNotFoundException
           schema:
             $ref: '#/definitions/TargetGroupNotFoundException'
+        '487':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
+        '488':
+          description: TooManyActionsException
+          schema:
+            $ref: '#/definitions/TooManyActionsException'
+        '489':
+          description: InvalidLoadBalancerActionException
+          schema:
+            $ref: '#/definitions/InvalidLoadBalancerActionException'
       parameters:
         - name: body
           in: body
@@ -1365,7 +1413,7 @@ paths:
   '/#SetIpAddressType':
     post:
       operationId: SetIpAddressType
-      description: <p>Sets the type of IP addresses used by the subnets of the specified Application Load Balancer or Network Load Balancer.</p> <p>Note that Network Load Balancers must use <code>ipv4</code>.</p>
+      description: <p>Sets the type of IP addresses used by the subnets of the specified Application Load Balancer or Network Load Balancer.</p> <p>Network Load Balancers must use <code>ipv4</code>.</p>
       responses:
         '200':
           description: Success
@@ -1439,7 +1487,7 @@ paths:
   '/#SetSecurityGroups':
     post:
       operationId: SetSecurityGroups
-      description: <p>Associates the specified security groups with the specified Application Load Balancer. The specified security groups override the previously associated security groups.</p> <p>Note that you can't specify a security group for a Network Load Balancer.</p>
+      description: <p>Associates the specified security groups with the specified Application Load Balancer. The specified security groups override the previously associated security groups.</p> <p>You can't specify a security group for a Network Load Balancer.</p>
       responses:
         '200':
           description: Success
@@ -1476,7 +1524,7 @@ paths:
   '/#SetSubnets':
     post:
       operationId: SetSubnets
-      description: <p>Enables the Availability Zone for the specified public subnets for the specified Application Load Balancer. The specified subnets replace the previously enabled subnets.</p> <p>Note that you can't change the subnets for a Network Load Balancer.</p>
+      description: <p>Enables the Availability Zone for the specified public subnets for the specified Application Load Balancer. The specified subnets replace the previously enabled subnets.</p> <p>You can't change the subnets for a Network Load Balancer.</p>
       responses:
         '200':
           description: Success
@@ -1523,27 +1571,12 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  Action:
+  AddListenerCertificatesOutput:
     type: object
-    required:
-      - Type
-      - TargetGroupArn
     properties:
-      Type:
-        $ref: '#/definitions/ActionTypeEnum'
-        description: The type of action.
-      TargetGroupArn:
-        $ref: '#/definitions/TargetGroupArn'
-        description: The Amazon Resource Name (ARN) of the target group.
-    description: Information about an action.
-  ActionTypeEnum:
-    type: string
-    enum:
-      - forward
-  Actions:
-    type: array
-    items:
-      $ref: '#/definitions/Action'
+      Certificates:
+        $ref: '#/definitions/CertificateList'
+        description: Information about the certificates.
   AddListenerCertificatesInput:
     type: object
     required:
@@ -1556,12 +1589,21 @@ definitions:
       Certificates:
         $ref: '#/definitions/CertificateList'
         description: The certificate to add. You can specify one certificate per call.
-  AddListenerCertificatesOutput:
+  ListenerNotFoundException:
     type: object
-    properties:
-      Certificates:
-        $ref: '#/definitions/CertificateList'
-        description: Information about the certificates.
+    properties: {}
+    description: The specified listener does not exist.
+  TooManyCertificatesException:
+    type: object
+    properties: {}
+    description: You've reached the limit on the number of certificates per load balancer.
+  CertificateNotFoundException:
+    type: object
+    properties: {}
+    description: The specified certificate does not exist.
+  AddTagsOutput:
+    type: object
+    properties: {}
   AddTagsInput:
     type: object
     required:
@@ -1582,79 +1624,40 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: The tags. Each resource can have a maximum of 10 tags.
-  AddTagsOutput:
+  DuplicateTagKeysException:
     type: object
     properties: {}
-  AllocationId:
-    type: string
-  AllocationIdNotFoundException:
+    description: A tag key was specified more than once.
+  TooManyTagsException:
     type: object
     properties: {}
-    description: The specified allocation ID does not exist.
-  AvailabilityZone:
+    description: You've reached the limit on the number of tags per load balancer.
+  LoadBalancerNotFoundException:
     type: object
+    properties: {}
+    description: The specified load balancer does not exist.
+  TargetGroupNotFoundException:
+    type: object
+    properties: {}
+    description: The specified target group does not exist.
+  CreateListenerOutput:
+    type: object
+    example:
+      Listeners:
+        - Certificates:
+            - CertificateArn: 'arn:aws:iam::123456789012:server-certificate/my-server-cert'
+          DefaultActions:
+            - TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+              Type: forward
+          ListenerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2'
+          LoadBalancerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
+          Port: 443
+          Protocol: HTTPS
+          SslPolicy: ELBSecurityPolicy-2015-05
     properties:
-      ZoneName:
-        $ref: '#/definitions/ZoneName'
-        description: The name of the Availability Zone.
-      SubnetId:
-        $ref: '#/definitions/SubnetId'
-        description: The ID of the subnet.
-      LoadBalancerAddresses:
-        $ref: '#/definitions/LoadBalancerAddresses'
-        description: '[Network Load Balancers] The static IP address.'
-    description: Information about an Availability Zone.
-  AvailabilityZoneNotSupportedException:
-    type: object
-    properties: {}
-    description: The specified Availability Zone is not supported.
-  AvailabilityZones:
-    type: array
-    items:
-      $ref: '#/definitions/AvailabilityZone'
-  CanonicalHostedZoneId:
-    type: string
-  Certificate:
-    type: object
-    properties:
-      CertificateArn:
-        $ref: '#/definitions/CertificateArn'
-        description: The Amazon Resource Name (ARN) of the certificate.
-      IsDefault:
-        $ref: '#/definitions/Default'
-        description: Indicates whether the certificate is the default certificate.
-    description: Information about an SSL server certificate.
-  CertificateArn:
-    type: string
-  CertificateList:
-    type: array
-    items:
-      $ref: '#/definitions/Certificate'
-  CertificateNotFoundException:
-    type: object
-    properties: {}
-    description: The specified certificate does not exist.
-  Cipher:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/CipherName'
-        description: The name of the cipher.
-      Priority:
-        $ref: '#/definitions/CipherPriority'
-        description: The priority of the cipher.
-    description: Information about a cipher used in a policy.
-  CipherName:
-    type: string
-  CipherPriority:
-    type: integer
-  Ciphers:
-    type: array
-    items:
-      $ref: '#/definitions/Cipher'
-  ConditionFieldName:
-    type: string
-    maxLength: 64
+      Listeners:
+        $ref: '#/definitions/Listeners'
+        description: Information about the listener.
   CreateListenerInput:
     type: object
     required:
@@ -1687,64 +1690,54 @@ definitions:
         description: '[HTTPS listeners] The security policy that defines which ciphers and protocols are supported. The default is the current predefined security policy.'
       Certificates:
         $ref: '#/definitions/CertificateList'
-        description: '[HTTPS listeners] The SSL server certificate. You must provide exactly one certificate.'
+        description: '[HTTPS listeners] The default SSL server certificate. You must provide exactly one default certificate. To create a certificate list, use <a>AddListenerCertificates</a>.'
       DefaultActions:
         $ref: '#/definitions/Actions'
-        description: 'The default action for the listener. For Application Load Balancers, the protocol of the specified target group must be HTTP or HTTPS. For Network Load Balancers, the protocol of the specified target group must be TCP.'
-  CreateListenerOutput:
+        description: '<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p> <p>If the action type is <code>forward</code>, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.</p> <p>[HTTPS listener] If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>[HTTPS listener] If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you can redirect HTTP and HTTPS requests.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you can return a custom HTTP response.</p>'
+  DuplicateListenerException:
     type: object
-    example:
-      Listeners:
-        - Certificates:
-            - CertificateArn: 'arn:aws:iam::123456789012:server-certificate/my-server-cert'
-          DefaultActions:
-            - TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
-              Type: forward
-          ListenerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2'
-          LoadBalancerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
-          Port: 443
-          Protocol: HTTPS
-          SslPolicy: ELBSecurityPolicy-2015-05
-    properties:
-      Listeners:
-        $ref: '#/definitions/Listeners'
-        description: Information about the listener.
-  CreateLoadBalancerInput:
+    properties: {}
+    description: A listener with the specified port already exists.
+  TooManyListenersException:
     type: object
-    required:
-      - Name
-    example:
-      Name: my-internal-load-balancer
-      Scheme: internal
-      SecurityGroups: []
-      Subnets:
-        - subnet-b7d581c0
-        - subnet-8360a9e7
-    properties:
-      Name:
-        $ref: '#/definitions/LoadBalancerName'
-        description: '<p>The name of the load balancer.</p> <p>This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.</p>'
-      Subnets:
-        $ref: '#/definitions/Subnets'
-        description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones.</p>'
-      SubnetMappings:
-        $ref: '#/definitions/SubnetMappings'
-        description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet.</p>'
-      SecurityGroups:
-        $ref: '#/definitions/SecurityGroups'
-        description: '[Application Load Balancers] The IDs of the security groups for the load balancer.'
-      Scheme:
-        $ref: '#/definitions/LoadBalancerSchemeEnum'
-        description: '<p>The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the Internet.</p> <p>The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the private IP addresses of the nodes. Therefore, internal load balancers can only route requests from clients with access to the VPC for the load balancer.</p> <p>The default is an Internet-facing load balancer.</p>'
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: One or more tags to assign to the load balancer.
-      Type:
-        $ref: '#/definitions/LoadBalancerTypeEnum'
-        description: The type of load balancer. The default is <code>application</code>.
-      IpAddressType:
-        $ref: '#/definitions/IpAddressType'
-        description: '[Application Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are <code>ipv4</code> (for IPv4 addresses) and <code>dualstack</code> (for IPv4 and IPv6 addresses). Internal load balancers must use <code>ipv4</code>.'
+    properties: {}
+    description: You've reached the limit on the number of listeners per load balancer.
+  TargetGroupAssociationLimitException:
+    type: object
+    properties: {}
+    description: You've reached the limit on the number of load balancers per target group.
+  InvalidConfigurationRequestException:
+    type: object
+    properties: {}
+    description: The requested configuration is not valid.
+  IncompatibleProtocolsException:
+    type: object
+    properties: {}
+    description: The specified configuration is not valid with this protocol.
+  SSLPolicyNotFoundException:
+    type: object
+    properties: {}
+    description: The specified SSL policy does not exist.
+  UnsupportedProtocolException:
+    type: object
+    properties: {}
+    description: The specified protocol is not supported.
+  TooManyRegistrationsForTargetIdException:
+    type: object
+    properties: {}
+    description: You've reached the limit on the number of times a target can be registered with a load balancer.
+  TooManyTargetsException:
+    type: object
+    properties: {}
+    description: You've reached the limit on the number of targets.
+  TooManyActionsException:
+    type: object
+    properties: {}
+    description: You've reached the limit on the number of actions per rule.
+  InvalidLoadBalancerActionException:
+    type: object
+    properties: {}
+    description: The requested action is not valid.
   CreateLoadBalancerOutput:
     type: object
     example:
@@ -1770,6 +1763,100 @@ definitions:
       LoadBalancers:
         $ref: '#/definitions/LoadBalancers'
         description: Information about the load balancer.
+  CreateLoadBalancerInput:
+    type: object
+    required:
+      - Name
+    example:
+      Name: my-internal-load-balancer
+      Scheme: internal
+      SecurityGroups: []
+      Subnets:
+        - subnet-b7d581c0
+        - subnet-8360a9e7
+    properties:
+      Name:
+        $ref: '#/definitions/LoadBalancerName'
+        description: '<p>The name of the load balancer.</p> <p>This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, must not begin or end with a hyphen, and must not begin with "internal-".</p>'
+      Subnets:
+        $ref: '#/definitions/Subnets'
+        description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones.</p>'
+      SubnetMappings:
+        $ref: '#/definitions/SubnetMappings'
+        description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet.</p>'
+      SecurityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: '[Application Load Balancers] The IDs of the security groups for the load balancer.'
+      Scheme:
+        $ref: '#/definitions/LoadBalancerSchemeEnum'
+        description: '<p>The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the internet.</p> <p>The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the private IP addresses of the nodes. Therefore, internal load balancers can only route requests from clients with access to the VPC for the load balancer.</p> <p>The default is an Internet-facing load balancer.</p>'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: One or more tags to assign to the load balancer.
+      Type:
+        $ref: '#/definitions/LoadBalancerTypeEnum'
+        description: The type of load balancer. The default is <code>application</code>.
+      IpAddressType:
+        $ref: '#/definitions/IpAddressType'
+        description: '[Application Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are <code>ipv4</code> (for IPv4 addresses) and <code>dualstack</code> (for IPv4 and IPv6 addresses). Internal load balancers must use <code>ipv4</code>.'
+  DuplicateLoadBalancerNameException:
+    type: object
+    properties: {}
+    description: A load balancer with the specified name already exists.
+  TooManyLoadBalancersException:
+    type: object
+    properties: {}
+    description: You've reached the limit on the number of load balancers for your AWS account.
+  SubnetNotFoundException:
+    type: object
+    properties: {}
+    description: The specified subnet does not exist.
+  InvalidSubnetException:
+    type: object
+    properties: {}
+    description: The specified subnet is out of available addresses.
+  InvalidSecurityGroupException:
+    type: object
+    properties: {}
+    description: The specified security group does not exist.
+  InvalidSchemeException:
+    type: object
+    properties: {}
+    description: The requested scheme is not valid.
+  ResourceInUseException:
+    type: object
+    properties: {}
+    description: A specified resource is in use.
+  AllocationIdNotFoundException:
+    type: object
+    properties: {}
+    description: The specified allocation ID does not exist.
+  AvailabilityZoneNotSupportedException:
+    type: object
+    properties: {}
+    description: The specified Availability Zone is not supported.
+  OperationNotPermittedException:
+    type: object
+    properties: {}
+    description: This operation is not allowed.
+  CreateRuleOutput:
+    type: object
+    example:
+      Rules:
+        - Actions:
+            - TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+              Type: forward
+          Conditions:
+            - Field: path-pattern
+              Values:
+                - /img/*
+          IsDefault: false
+          Priority: '10'
+          RuleArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee'
+    properties:
+      Rules:
+        $ref: '#/definitions/Rules'
+        description: Information about the rule.
   CreateRuleInput:
     type: object
     required:
@@ -1793,31 +1880,47 @@ definitions:
         description: The Amazon Resource Name (ARN) of the listener.
       Conditions:
         $ref: '#/definitions/RuleConditionList'
-        description: '<p>The conditions. Each condition specifies a field name and a single value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
+        description: '<p>The conditions. Each condition specifies a field name and a single value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern. A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
       Priority:
         $ref: '#/definitions/RulePriority'
-        description: The priority for the rule. A listener can't have multiple rules with the same priority.
+        description: The rule priority. A listener can't have multiple rules with the same priority.
       Actions:
         $ref: '#/definitions/Actions'
-        description: An action. Each action has the type <code>forward</code> and specifies a target group.
-  CreateRuleOutput:
+        description: '<p>The actions. Each rule must include exactly one of the following types of actions: <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>.</p> <p>If the action type is <code>forward</code>, you can specify a single target group.</p> <p>[HTTPS listener] If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>[HTTPS listener] If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you can redirect HTTP and HTTPS requests.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you can return a custom HTTP response.</p>'
+  PriorityInUseException:
+    type: object
+    properties: {}
+    description: The specified priority is in use.
+  TooManyTargetGroupsException:
+    type: object
+    properties: {}
+    description: You've reached the limit on the number of target groups for your AWS account.
+  TooManyRulesException:
+    type: object
+    properties: {}
+    description: You've reached the limit on the number of rules per load balancer.
+  CreateTargetGroupOutput:
     type: object
     example:
-      Rules:
-        - Actions:
-            - TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
-              Type: forward
-          Conditions:
-            - Field: path-pattern
-              Values:
-                - /img/*
-          IsDefault: false
-          Priority: '10'
-          RuleArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee'
+      TargetGroups:
+        - HealthCheckIntervalSeconds: 30
+          HealthCheckPath: /
+          HealthCheckPort: traffic-port
+          HealthCheckProtocol: HTTP
+          HealthCheckTimeoutSeconds: 5
+          HealthyThresholdCount: 5
+          Matcher:
+            HttpCode: '200'
+          Port: 80
+          Protocol: HTTP
+          TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+          TargetGroupName: my-targets
+          UnhealthyThresholdCount: 2
+          VpcId: vpc-3ac0fb5f
     properties:
-      Rules:
-        $ref: '#/definitions/Rules'
-        description: Information about the rule.
+      TargetGroups:
+        $ref: '#/definitions/TargetGroups'
+        description: Information about the target group.
   CreateTargetGroupInput:
     type: object
     required:
@@ -1854,10 +1957,10 @@ definitions:
         description: '[HTTP/HTTPS health checks] The ping path that is the destination on the targets for health checks. The default is /.'
       HealthCheckIntervalSeconds:
         $ref: '#/definitions/HealthCheckIntervalSeconds'
-        description: 'The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5 to 300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. The default is 30 seconds.'
+        description: 'The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5–300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. The default is 30 seconds.'
       HealthCheckTimeoutSeconds:
         $ref: '#/definitions/HealthCheckTimeoutSeconds'
-        description: 'The amount of time, in seconds, during which no response from a target means a failed health check. For Application Load Balancers, the range is 2 to 60 seconds and the default is 5 seconds. For Network Load Balancers, this is 10 seconds for TCP and HTTPS health checks and 6 seconds for HTTP health checks.'
+        description: 'The amount of time, in seconds, during which no response from a target means a failed health check. For Application Load Balancers, the range is 2–60 seconds and the default is 5 seconds. For Network Load Balancers, this is 10 seconds for TCP and HTTPS health checks and 6 seconds for HTTP health checks.'
       HealthyThresholdCount:
         $ref: '#/definitions/HealthCheckThresholdCount'
         description: 'The number of consecutive health checks successes required before considering an unhealthy target healthy. For Application Load Balancers, the default is 5. For Network Load Balancers, the default is 3.'
@@ -1869,36 +1972,14 @@ definitions:
         description: '[HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target.'
       TargetType:
         $ref: '#/definitions/TargetTypeEnum'
-        description: '<p>The type of target that you must specify when registering targets with this target group. The possible values are <code>instance</code> (targets are specified by instance ID) or <code>ip</code> (targets are specified by IP address). The default is <code>instance</code>. Note that you can''t specify targets for a target group using both instance IDs and IP addresses.</p> <p>If the target type is <code>ip</code>, specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can''t specify publicly routable IP addresses.</p>'
-  CreateTargetGroupOutput:
+        description: '<p>The type of target that you must specify when registering targets with this target group. The possible values are <code>instance</code> (targets are specified by instance ID) or <code>ip</code> (targets are specified by IP address). The default is <code>instance</code>. You can''t specify targets for a target group using both instance IDs and IP addresses.</p> <p>If the target type is <code>ip</code>, specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can''t specify publicly routable IP addresses.</p>'
+  DuplicateTargetGroupNameException:
     type: object
-    example:
-      TargetGroups:
-        - HealthCheckIntervalSeconds: 30
-          HealthCheckPath: /
-          HealthCheckPort: traffic-port
-          HealthCheckProtocol: HTTP
-          HealthCheckTimeoutSeconds: 5
-          HealthyThresholdCount: 5
-          Matcher:
-            HttpCode: '200'
-          Port: 80
-          Protocol: HTTP
-          TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
-          TargetGroupName: my-targets
-          UnhealthyThresholdCount: 2
-          VpcId: vpc-3ac0fb5f
-    properties:
-      TargetGroups:
-        $ref: '#/definitions/TargetGroups'
-        description: Information about the target group.
-  CreatedTime:
-    type: string
-    format: date-time
-  DNSName:
-    type: string
-  Default:
-    type: boolean
+    properties: {}
+    description: A target group with the specified name already exists.
+  DeleteListenerOutput:
+    type: object
+    properties: {}
   DeleteListenerInput:
     type: object
     required:
@@ -1909,7 +1990,7 @@ definitions:
       ListenerArn:
         $ref: '#/definitions/ListenerArn'
         description: The Amazon Resource Name (ARN) of the listener.
-  DeleteListenerOutput:
+  DeleteLoadBalancerOutput:
     type: object
     properties: {}
   DeleteLoadBalancerInput:
@@ -1922,7 +2003,7 @@ definitions:
       LoadBalancerArn:
         $ref: '#/definitions/LoadBalancerArn'
         description: The Amazon Resource Name (ARN) of the load balancer.
-  DeleteLoadBalancerOutput:
+  DeleteRuleOutput:
     type: object
     properties: {}
   DeleteRuleInput:
@@ -1935,7 +2016,11 @@ definitions:
       RuleArn:
         $ref: '#/definitions/RuleArn'
         description: The Amazon Resource Name (ARN) of the rule.
-  DeleteRuleOutput:
+  RuleNotFoundException:
+    type: object
+    properties: {}
+    description: The specified rule does not exist.
+  DeleteTargetGroupOutput:
     type: object
     properties: {}
   DeleteTargetGroupInput:
@@ -1948,7 +2033,7 @@ definitions:
       TargetGroupArn:
         $ref: '#/definitions/TargetGroupArn'
         description: The Amazon Resource Name (ARN) of the target group.
-  DeleteTargetGroupOutput:
+  DeregisterTargetsOutput:
     type: object
     properties: {}
   DeregisterTargetsInput:
@@ -1967,18 +2052,10 @@ definitions:
       Targets:
         $ref: '#/definitions/TargetDescriptions'
         description: 'The targets. If you specified a port override when you registered a target, you must specify both the target ID and the port when you deregister it.'
-  DeregisterTargetsOutput:
+  InvalidTargetException:
     type: object
     properties: {}
-  DescribeAccountLimitsInput:
-    type: object
-    properties:
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The marker for the next set of results. (You received this marker from a previous call.)
-      PageSize:
-        $ref: '#/definitions/PageSize'
-        description: The maximum number of results to return with this call.
+    description: 'The specified target does not exist, is not in the same VPC as the target group, or has an unsupported instance type.'
   DescribeAccountLimitsOutput:
     type: object
     properties:
@@ -1988,14 +2065,9 @@ definitions:
       NextMarker:
         $ref: '#/definitions/Marker'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
-  DescribeListenerCertificatesInput:
+  DescribeAccountLimitsInput:
     type: object
-    required:
-      - ListenerArn
     properties:
-      ListenerArn:
-        $ref: '#/definitions/ListenerArn'
-        description: The Amazon Resource Names (ARN) of the listener.
       Marker:
         $ref: '#/definitions/Marker'
         description: The marker for the next set of results. (You received this marker from a previous call.)
@@ -2011,18 +2083,14 @@ definitions:
       NextMarker:
         $ref: '#/definitions/Marker'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
-  DescribeListenersInput:
+  DescribeListenerCertificatesInput:
     type: object
-    example:
-      ListenerArns:
-        - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2'
+    required:
+      - ListenerArn
     properties:
-      LoadBalancerArn:
-        $ref: '#/definitions/LoadBalancerArn'
-        description: The Amazon Resource Name (ARN) of the load balancer.
-      ListenerArns:
-        $ref: '#/definitions/ListenerArns'
-        description: The Amazon Resource Names (ARN) of the listeners.
+      ListenerArn:
+        $ref: '#/definitions/ListenerArn'
+        description: The Amazon Resource Names (ARN) of the listener.
       Marker:
         $ref: '#/definitions/Marker'
         description: The marker for the next set of results. (You received this marker from a previous call.)
@@ -2047,16 +2115,24 @@ definitions:
       NextMarker:
         $ref: '#/definitions/Marker'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
-  DescribeLoadBalancerAttributesInput:
+  DescribeListenersInput:
     type: object
-    required:
-      - LoadBalancerArn
     example:
-      LoadBalancerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
+      ListenerArns:
+        - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2'
     properties:
       LoadBalancerArn:
         $ref: '#/definitions/LoadBalancerArn'
         description: The Amazon Resource Name (ARN) of the load balancer.
+      ListenerArns:
+        $ref: '#/definitions/ListenerArns'
+        description: The Amazon Resource Names (ARN) of the listeners.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The marker for the next set of results. (You received this marker from a previous call.)
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of results to return with this call.
   DescribeLoadBalancerAttributesOutput:
     type: object
     example:
@@ -2075,24 +2151,16 @@ definitions:
       Attributes:
         $ref: '#/definitions/LoadBalancerAttributes'
         description: Information about the load balancer attributes.
-  DescribeLoadBalancersInput:
+  DescribeLoadBalancerAttributesInput:
     type: object
+    required:
+      - LoadBalancerArn
     example:
-      LoadBalancerArns:
-        - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
+      LoadBalancerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
     properties:
-      LoadBalancerArns:
-        $ref: '#/definitions/LoadBalancerArns'
-        description: The Amazon Resource Names (ARN) of the load balancers. You can specify up to 20 load balancers in a single call.
-      Names:
-        $ref: '#/definitions/LoadBalancerNames'
-        description: The names of the load balancers.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The marker for the next set of results. (You received this marker from a previous call.)
-      PageSize:
-        $ref: '#/definitions/PageSize'
-        description: The maximum number of results to return with this call.
+      LoadBalancerArn:
+        $ref: '#/definitions/LoadBalancerArn'
+        description: The Amazon Resource Name (ARN) of the load balancer.
   DescribeLoadBalancersOutput:
     type: object
     example:
@@ -2121,18 +2189,18 @@ definitions:
       NextMarker:
         $ref: '#/definitions/Marker'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
-  DescribeRulesInput:
+  DescribeLoadBalancersInput:
     type: object
     example:
-      RuleArns:
-        - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee'
+      LoadBalancerArns:
+        - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
     properties:
-      ListenerArn:
-        $ref: '#/definitions/ListenerArn'
-        description: The Amazon Resource Name (ARN) of the listener.
-      RuleArns:
-        $ref: '#/definitions/RuleArns'
-        description: The Amazon Resource Names (ARN) of the rules.
+      LoadBalancerArns:
+        $ref: '#/definitions/LoadBalancerArns'
+        description: The Amazon Resource Names (ARN) of the load balancers. You can specify up to 20 load balancers in a single call.
+      Names:
+        $ref: '#/definitions/LoadBalancerNames'
+        description: The names of the load balancers.
       Marker:
         $ref: '#/definitions/Marker'
         description: The marker for the next set of results. (You received this marker from a previous call.)
@@ -2160,15 +2228,18 @@ definitions:
       NextMarker:
         $ref: '#/definitions/Marker'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
-  DescribeSSLPoliciesInput:
+  DescribeRulesInput:
     type: object
     example:
-      Names:
-        - ELBSecurityPolicy-2015-05
+      RuleArns:
+        - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee'
     properties:
-      Names:
-        $ref: '#/definitions/SslPolicyNames'
-        description: The names of the policies.
+      ListenerArn:
+        $ref: '#/definitions/ListenerArn'
+        description: The Amazon Resource Name (ARN) of the listener.
+      RuleArns:
+        $ref: '#/definitions/RuleArns'
+        description: The Amazon Resource Names (ARN) of the rules.
       Marker:
         $ref: '#/definitions/Marker'
         description: The marker for the next set of results. (You received this marker from a previous call.)
@@ -2230,17 +2301,21 @@ definitions:
       NextMarker:
         $ref: '#/definitions/Marker'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
-  DescribeTagsInput:
+  DescribeSSLPoliciesInput:
     type: object
-    required:
-      - ResourceArns
     example:
-      ResourceArns:
-        - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
+      Names:
+        - ELBSecurityPolicy-2015-05
     properties:
-      ResourceArns:
-        $ref: '#/definitions/ResourceArns'
-        description: The Amazon Resource Names (ARN) of the resources.
+      Names:
+        $ref: '#/definitions/SslPolicyNames'
+        description: The names of the policies.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The marker for the next set of results. (You received this marker from a previous call.)
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of results to return with this call.
   DescribeTagsOutput:
     type: object
     example:
@@ -2255,16 +2330,17 @@ definitions:
       TagDescriptions:
         $ref: '#/definitions/TagDescriptions'
         description: Information about the tags.
-  DescribeTargetGroupAttributesInput:
+  DescribeTagsInput:
     type: object
     required:
-      - TargetGroupArn
+      - ResourceArns
     example:
-      TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+      ResourceArns:
+        - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
     properties:
-      TargetGroupArn:
-        $ref: '#/definitions/TargetGroupArn'
-        description: The Amazon Resource Name (ARN) of the target group.
+      ResourceArns:
+        $ref: '#/definitions/ResourceArns'
+        description: The Amazon Resource Names (ARN) of the resources.
   DescribeTargetGroupAttributesOutput:
     type: object
     example:
@@ -2281,27 +2357,16 @@ definitions:
       Attributes:
         $ref: '#/definitions/TargetGroupAttributes'
         description: Information about the target group attributes
-  DescribeTargetGroupsInput:
+  DescribeTargetGroupAttributesInput:
     type: object
+    required:
+      - TargetGroupArn
     example:
-      TargetGroupArns:
-        - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+      TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
     properties:
-      LoadBalancerArn:
-        $ref: '#/definitions/LoadBalancerArn'
-        description: The Amazon Resource Name (ARN) of the load balancer.
-      TargetGroupArns:
-        $ref: '#/definitions/TargetGroupArns'
-        description: The Amazon Resource Names (ARN) of the target groups.
-      Names:
-        $ref: '#/definitions/TargetGroupNames'
-        description: The names of the target groups.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: The marker for the next set of results. (You received this marker from a previous call.)
-      PageSize:
-        $ref: '#/definitions/PageSize'
-        description: The maximum number of results to return with this call.
+      TargetGroupArn:
+        $ref: '#/definitions/TargetGroupArn'
+        description: The Amazon Resource Name (ARN) of the target group.
   DescribeTargetGroupsOutput:
     type: object
     example:
@@ -2329,6 +2394,41 @@ definitions:
       NextMarker:
         $ref: '#/definitions/Marker'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+  DescribeTargetGroupsInput:
+    type: object
+    example:
+      TargetGroupArns:
+        - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+    properties:
+      LoadBalancerArn:
+        $ref: '#/definitions/LoadBalancerArn'
+        description: The Amazon Resource Name (ARN) of the load balancer.
+      TargetGroupArns:
+        $ref: '#/definitions/TargetGroupArns'
+        description: The Amazon Resource Names (ARN) of the target groups.
+      Names:
+        $ref: '#/definitions/TargetGroupNames'
+        description: The names of the target groups.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The marker for the next set of results. (You received this marker from a previous call.)
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of results to return with this call.
+  DescribeTargetHealthOutput:
+    type: object
+    example:
+      TargetHealthDescriptions:
+        - HealthCheckPort: '80'
+          Target:
+            Id: i-0f76fade
+            Port: 80
+          TargetHealth:
+            State: healthy
+    properties:
+      TargetHealthDescriptions:
+        $ref: '#/definitions/TargetHealthDescriptions'
+        description: Information about the health of the targets.
   DescribeTargetHealthInput:
     type: object
     required:
@@ -2345,91 +2445,889 @@ definitions:
       Targets:
         $ref: '#/definitions/TargetDescriptions'
         description: The targets.
-  DescribeTargetHealthOutput:
-    type: object
-    example:
-      TargetHealthDescriptions:
-        - HealthCheckPort: '80'
-          Target:
-            Id: i-0f76fade
-            Port: 80
-          TargetHealth:
-            State: healthy
-    properties:
-      TargetHealthDescriptions:
-        $ref: '#/definitions/TargetHealthDescriptions'
-        description: Information about the health of the targets.
-  Description:
-    type: string
-  DuplicateListenerException:
-    type: object
-    properties: {}
-    description: A listener with the specified port already exists.
-  DuplicateLoadBalancerNameException:
-    type: object
-    properties: {}
-    description: A load balancer with the specified name already exists.
-  DuplicateTagKeysException:
-    type: object
-    properties: {}
-    description: A tag key was specified more than once.
-  DuplicateTargetGroupNameException:
-    type: object
-    properties: {}
-    description: A target group with the specified name already exists.
-  HealthCheckIntervalSeconds:
-    type: integer
-    minimum: 5
-    maximum: 300
-  HealthCheckPort:
-    type: string
-  HealthCheckThresholdCount:
-    type: integer
-    minimum: 2
-    maximum: 10
-  HealthCheckTimeoutSeconds:
-    type: integer
-    minimum: 2
-    maximum: 60
   HealthUnavailableException:
     type: object
     properties: {}
     description: The health of the specified targets could not be retrieved due to an internal error.
-  HttpCode:
+  ModifyListenerOutput:
+    type: object
+    example:
+      Listeners:
+        - Certificates:
+            - CertificateArn: 'arn:aws:iam::123456789012:server-certificate/my-new-server-cert'
+          DefaultActions:
+            - TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+              Type: forward
+          ListenerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/0467ef3c8400ae65'
+          LoadBalancerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
+          Port: 443
+          Protocol: HTTPS
+          SslPolicy: ELBSecurityPolicy-2015-05
+    properties:
+      Listeners:
+        $ref: '#/definitions/Listeners'
+        description: Information about the modified listener.
+  ModifyListenerInput:
+    type: object
+    required:
+      - ListenerArn
+    example:
+      Certificates:
+        - CertificateArn: 'arn:aws:iam::123456789012:server-certificate/my-new-server-cert'
+      ListenerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/0467ef3c8400ae65'
+    properties:
+      ListenerArn:
+        $ref: '#/definitions/ListenerArn'
+        description: The Amazon Resource Name (ARN) of the listener.
+      Port:
+        $ref: '#/definitions/Port'
+        description: The port for connections from clients to the load balancer.
+      Protocol:
+        $ref: '#/definitions/ProtocolEnum'
+        description: The protocol for connections from clients to the load balancer. Application Load Balancers support HTTP and HTTPS and Network Load Balancers support TCP.
+      SslPolicy:
+        $ref: '#/definitions/SslPolicyName'
+        description: '[HTTPS listeners] The security policy that defines which protocols and ciphers are supported. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies">Security Policies</a> in the <i>Application Load Balancers Guide</i>.'
+      Certificates:
+        $ref: '#/definitions/CertificateList'
+        description: '[HTTPS listeners] The default SSL server certificate. You must provide exactly one default certificate. To create a certificate list, use <a>AddListenerCertificates</a>.'
+      DefaultActions:
+        $ref: '#/definitions/Actions'
+        description: '<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p> <p>If the action type is <code>forward</code>, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.</p> <p>[HTTPS listener] If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>[HTTPS listener] If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you can redirect HTTP and HTTPS requests.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you can return a custom HTTP response.</p>'
+  ModifyLoadBalancerAttributesOutput:
+    type: object
+    example:
+      Attributes:
+        - Key: access_logs.s3.enabled
+          Value: 'true'
+        - Key: access_logs.s3.bucket
+          Value: my-load-balancer-logs
+        - Key: access_logs.s3.prefix
+          Value: myapp
+        - Key: idle_timeout.timeout_seconds
+          Value: '60'
+        - Key: deletion_protection.enabled
+          Value: 'false'
+    properties:
+      Attributes:
+        $ref: '#/definitions/LoadBalancerAttributes'
+        description: Information about the load balancer attributes.
+  ModifyLoadBalancerAttributesInput:
+    type: object
+    required:
+      - LoadBalancerArn
+      - Attributes
+    example:
+      Attributes:
+        - Key: access_logs.s3.enabled
+          Value: 'true'
+        - Key: access_logs.s3.bucket
+          Value: my-loadbalancer-logs
+        - Key: access_logs.s3.prefix
+          Value: myapp
+      LoadBalancerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
+    properties:
+      LoadBalancerArn:
+        $ref: '#/definitions/LoadBalancerArn'
+        description: The Amazon Resource Name (ARN) of the load balancer.
+      Attributes:
+        $ref: '#/definitions/LoadBalancerAttributes'
+        description: The load balancer attributes.
+  ModifyRuleOutput:
+    type: object
+    example:
+      Rules:
+        - Actions:
+            - TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+              Type: forward
+          Conditions:
+            - Field: path-pattern
+              Values:
+                - /images/*
+          IsDefault: false
+          Priority: '10'
+          RuleArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee'
+    properties:
+      Rules:
+        $ref: '#/definitions/Rules'
+        description: Information about the modified rule.
+  ModifyRuleInput:
+    type: object
+    required:
+      - RuleArn
+    example:
+      Conditions:
+        - Field: path-pattern
+          Values:
+            - /images/*
+      RuleArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee'
+    properties:
+      RuleArn:
+        $ref: '#/definitions/RuleArn'
+        description: The Amazon Resource Name (ARN) of the rule.
+      Conditions:
+        $ref: '#/definitions/RuleConditionList'
+        description: '<p>The conditions. Each condition specifies a field name and a single value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern. A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
+      Actions:
+        $ref: '#/definitions/Actions'
+        description: '<p>The actions.</p> <p>If the action type is <code>forward</code>, you can specify a single target group.</p> <p>If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p>'
+  ModifyTargetGroupOutput:
+    type: object
+    example:
+      TargetGroups:
+        - HealthCheckIntervalSeconds: 30
+          HealthCheckPort: '443'
+          HealthCheckProtocol: HTTPS
+          HealthCheckTimeoutSeconds: 5
+          HealthyThresholdCount: 5
+          LoadBalancerArns:
+            - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
+          Matcher:
+            HttpCode: '200'
+          Port: 443
+          Protocol: HTTPS
+          TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-https-targets/2453ed029918f21f'
+          TargetGroupName: my-https-targets
+          UnhealthyThresholdCount: 2
+          VpcId: vpc-3ac0fb5f
+    properties:
+      TargetGroups:
+        $ref: '#/definitions/TargetGroups'
+        description: Information about the modified target group.
+  ModifyTargetGroupInput:
+    type: object
+    required:
+      - TargetGroupArn
+    example:
+      HealthCheckPort: '443'
+      HealthCheckProtocol: HTTPS
+      TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-https-targets/2453ed029918f21f'
+    properties:
+      TargetGroupArn:
+        $ref: '#/definitions/TargetGroupArn'
+        description: The Amazon Resource Name (ARN) of the target group.
+      HealthCheckProtocol:
+        $ref: '#/definitions/ProtocolEnum'
+        description: The protocol the load balancer uses when performing health checks on targets. The TCP protocol is supported only if the protocol of the target group is TCP.
+      HealthCheckPort:
+        $ref: '#/definitions/HealthCheckPort'
+        description: The port the load balancer uses when performing health checks on targets.
+      HealthCheckPath:
+        $ref: '#/definitions/Path'
+        description: '[HTTP/HTTPS health checks] The ping path that is the destination for the health check request.'
+      HealthCheckIntervalSeconds:
+        $ref: '#/definitions/HealthCheckIntervalSeconds'
+        description: 'The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5–300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds.'
+      HealthCheckTimeoutSeconds:
+        $ref: '#/definitions/HealthCheckTimeoutSeconds'
+        description: '[HTTP/HTTPS health checks] The amount of time, in seconds, during which no response means a failed health check.'
+      HealthyThresholdCount:
+        $ref: '#/definitions/HealthCheckThresholdCount'
+        description: The number of consecutive health checks successes required before considering an unhealthy target healthy.
+      UnhealthyThresholdCount:
+        $ref: '#/definitions/HealthCheckThresholdCount'
+        description: 'The number of consecutive health check failures required before considering the target unhealthy. For Network Load Balancers, this value must be the same as the healthy threshold count.'
+      Matcher:
+        $ref: '#/definitions/Matcher'
+        description: '[HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target.'
+  ModifyTargetGroupAttributesOutput:
+    type: object
+    example:
+      Attributes:
+        - Key: stickiness.enabled
+          Value: 'false'
+        - Key: deregistration_delay.timeout_seconds
+          Value: '600'
+        - Key: stickiness.type
+          Value: lb_cookie
+        - Key: stickiness.lb_cookie.duration_seconds
+          Value: '86400'
+    properties:
+      Attributes:
+        $ref: '#/definitions/TargetGroupAttributes'
+        description: Information about the attributes.
+  ModifyTargetGroupAttributesInput:
+    type: object
+    required:
+      - TargetGroupArn
+      - Attributes
+    example:
+      Attributes:
+        - Key: deregistration_delay.timeout_seconds
+          Value: '600'
+      TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+    properties:
+      TargetGroupArn:
+        $ref: '#/definitions/TargetGroupArn'
+        description: The Amazon Resource Name (ARN) of the target group.
+      Attributes:
+        $ref: '#/definitions/TargetGroupAttributes'
+        description: The attributes.
+  RegisterTargetsOutput:
+    type: object
+    properties: {}
+  RegisterTargetsInput:
+    type: object
+    required:
+      - TargetGroupArn
+      - Targets
+    example:
+      TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/3bb63f11dfb0faf9'
+      Targets:
+        - Id: i-80c8dd94
+          Port: 80
+        - Id: i-80c8dd94
+          Port: 766
+    properties:
+      TargetGroupArn:
+        $ref: '#/definitions/TargetGroupArn'
+        description: The Amazon Resource Name (ARN) of the target group.
+      Targets:
+        $ref: '#/definitions/TargetDescriptions'
+        description: The targets.
+  RemoveListenerCertificatesOutput:
+    type: object
+    properties: {}
+  RemoveListenerCertificatesInput:
+    type: object
+    required:
+      - ListenerArn
+      - Certificates
+    properties:
+      ListenerArn:
+        $ref: '#/definitions/ListenerArn'
+        description: The Amazon Resource Name (ARN) of the listener.
+      Certificates:
+        $ref: '#/definitions/CertificateList'
+        description: The certificate to remove. You can specify one certificate per call.
+  RemoveTagsOutput:
+    type: object
+    properties: {}
+  RemoveTagsInput:
+    type: object
+    required:
+      - ResourceArns
+      - TagKeys
+    example:
+      ResourceArns:
+        - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
+      TagKeys:
+        - project
+        - department
+    properties:
+      ResourceArns:
+        $ref: '#/definitions/ResourceArns'
+        description: The Amazon Resource Name (ARN) of the resource.
+      TagKeys:
+        $ref: '#/definitions/TagKeys'
+        description: The tag keys for the tags to remove.
+  SetIpAddressTypeOutput:
+    type: object
+    properties:
+      IpAddressType:
+        $ref: '#/definitions/IpAddressType'
+        description: The IP address type.
+  SetIpAddressTypeInput:
+    type: object
+    required:
+      - LoadBalancerArn
+      - IpAddressType
+    properties:
+      LoadBalancerArn:
+        $ref: '#/definitions/LoadBalancerArn'
+        description: The Amazon Resource Name (ARN) of the load balancer.
+      IpAddressType:
+        $ref: '#/definitions/IpAddressType'
+        description: The IP address type. The possible values are <code>ipv4</code> (for IPv4 addresses) and <code>dualstack</code> (for IPv4 and IPv6 addresses). Internal load balancers must use <code>ipv4</code>.
+  SetRulePrioritiesOutput:
+    type: object
+    example:
+      Rules:
+        - Actions:
+            - TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+              Type: forward
+          Conditions:
+            - Field: path-pattern
+              Values:
+                - /img/*
+          IsDefault: false
+          Priority: '5'
+          RuleArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/1291d13826f405c3'
+    properties:
+      Rules:
+        $ref: '#/definitions/Rules'
+        description: Information about the rules.
+  SetRulePrioritiesInput:
+    type: object
+    required:
+      - RulePriorities
+    example:
+      RulePriorities:
+        - Priority: 5
+          RuleArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/1291d13826f405c3'
+    properties:
+      RulePriorities:
+        $ref: '#/definitions/RulePriorityList'
+        description: The rule priorities.
+  SetSecurityGroupsOutput:
+    type: object
+    example:
+      SecurityGroupIds:
+        - sg-5943793c
+    properties:
+      SecurityGroupIds:
+        $ref: '#/definitions/SecurityGroups'
+        description: The IDs of the security groups associated with the load balancer.
+  SetSecurityGroupsInput:
+    type: object
+    required:
+      - LoadBalancerArn
+      - SecurityGroups
+    example:
+      LoadBalancerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
+      SecurityGroups:
+        - sg-5943793c
+    properties:
+      LoadBalancerArn:
+        $ref: '#/definitions/LoadBalancerArn'
+        description: The Amazon Resource Name (ARN) of the load balancer.
+      SecurityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: The IDs of the security groups.
+  SetSubnetsOutput:
+    type: object
+    example:
+      AvailabilityZones:
+        - SubnetId: subnet-8360a9e7
+          ZoneName: us-west-2a
+        - SubnetId: subnet-b7d581c0
+          ZoneName: us-west-2b
+    properties:
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZones'
+        description: Information about the subnet and Availability Zone.
+  SetSubnetsInput:
+    type: object
+    required:
+      - LoadBalancerArn
+    example:
+      LoadBalancerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
+      Subnets:
+        - subnet-8360a9e7
+        - subnet-b7d581c0
+    properties:
+      LoadBalancerArn:
+        $ref: '#/definitions/LoadBalancerArn'
+        description: The Amazon Resource Name (ARN) of the load balancer.
+      Subnets:
+        $ref: '#/definitions/Subnets'
+        description: The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.
+      SubnetMappings:
+        $ref: '#/definitions/SubnetMappings'
+        description: <p>The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>You cannot specify Elastic IP addresses for your subnets.</p>
+  ActionTypeEnum:
     type: string
-  IncompatibleProtocolsException:
-    type: object
-    properties: {}
-    description: The specified configuration is not valid with this protocol.
-  InvalidConfigurationRequestException:
-    type: object
-    properties: {}
-    description: The requested configuration is not valid.
-  InvalidSchemeException:
-    type: object
-    properties: {}
-    description: The requested scheme is not valid.
-  InvalidSecurityGroupException:
-    type: object
-    properties: {}
-    description: The specified security group does not exist.
-  InvalidSubnetException:
-    type: object
-    properties: {}
-    description: The specified subnet is out of available addresses.
-  InvalidTargetException:
-    type: object
-    properties: {}
-    description: 'The specified target does not exist, is not in the same VPC as the target group, or has an unsupported instance type.'
-  IpAddress:
+    enum:
+      - forward
+      - authenticate-oidc
+      - authenticate-cognito
+      - redirect
+      - fixed-response
+  TargetGroupArn:
     type: string
+  AuthenticateOidcActionConfig:
+    type: object
+    required:
+      - Issuer
+      - AuthorizationEndpoint
+      - TokenEndpoint
+      - UserInfoEndpoint
+      - ClientId
+      - ClientSecret
+    properties:
+      Issuer:
+        $ref: '#/definitions/AuthenticateOidcActionIssuer'
+        description: 'The OIDC issuer identifier of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.'
+      AuthorizationEndpoint:
+        $ref: '#/definitions/AuthenticateOidcActionAuthorizationEndpoint'
+        description: 'The authorization endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.'
+      TokenEndpoint:
+        $ref: '#/definitions/AuthenticateOidcActionTokenEndpoint'
+        description: 'The token endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.'
+      UserInfoEndpoint:
+        $ref: '#/definitions/AuthenticateOidcActionUserInfoEndpoint'
+        description: 'The user info endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.'
+      ClientId:
+        $ref: '#/definitions/AuthenticateOidcActionClientId'
+        description: The OAuth 2.0 client identifier.
+      ClientSecret:
+        $ref: '#/definitions/AuthenticateOidcActionClientSecret'
+        description: The OAuth 2.0 client secret.
+      SessionCookieName:
+        $ref: '#/definitions/AuthenticateOidcActionSessionCookieName'
+        description: The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.
+      Scope:
+        $ref: '#/definitions/AuthenticateOidcActionScope'
+        description: '<p>The set of user claims to be requested from the IdP. The default is <code>openid</code>.</p> <p>To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.</p>'
+      SessionTimeout:
+        $ref: '#/definitions/AuthenticateOidcActionSessionTimeout'
+        description: 'The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).'
+      AuthenticationRequestExtraParams:
+        $ref: '#/definitions/AuthenticateOidcActionAuthenticationRequestExtraParams'
+        description: The query parameters (up to 10) to include in the redirect request to the authorization endpoint.
+      OnUnauthenticatedRequest:
+        $ref: '#/definitions/AuthenticateOidcActionConditionalBehaviorEnum'
+        description: '<p>The behavior if the user is not authenticated. The following are possible values:</p> <ul> <li> <p>deny<code/> - Return an HTTP 401 Unauthorized error.</p> </li> <li> <p>allow<code/> - Allow the request to be forwarded to the target.</p> </li> <li> <p>authenticate<code/> - Redirect the request to the IdP authorization endpoint. This is the default value.</p> </li> </ul>'
+    description: Request parameters when using an identity provider (IdP) that is compliant with OpenID Connect (OIDC) to authenticate users.
+  AuthenticateCognitoActionConfig:
+    type: object
+    required:
+      - UserPoolArn
+      - UserPoolClientId
+      - UserPoolDomain
+    properties:
+      UserPoolArn:
+        $ref: '#/definitions/AuthenticateCognitoActionUserPoolArn'
+        description: The Amazon Resource Name (ARN) of the Amazon Cognito user pool.
+      UserPoolClientId:
+        $ref: '#/definitions/AuthenticateCognitoActionUserPoolClientId'
+        description: The ID of the Amazon Cognito user pool client.
+      UserPoolDomain:
+        $ref: '#/definitions/AuthenticateCognitoActionUserPoolDomain'
+        description: The domain prefix or fully-qualified domain name of the Amazon Cognito user pool.
+      SessionCookieName:
+        $ref: '#/definitions/AuthenticateCognitoActionSessionCookieName'
+        description: The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.
+      Scope:
+        $ref: '#/definitions/AuthenticateCognitoActionScope'
+        description: '<p>The set of user claims to be requested from the IdP. The default is <code>openid</code>.</p> <p>To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.</p>'
+      SessionTimeout:
+        $ref: '#/definitions/AuthenticateCognitoActionSessionTimeout'
+        description: 'The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).'
+      AuthenticationRequestExtraParams:
+        $ref: '#/definitions/AuthenticateCognitoActionAuthenticationRequestExtraParams'
+        description: The query parameters (up to 10) to include in the redirect request to the authorization endpoint.
+      OnUnauthenticatedRequest:
+        $ref: '#/definitions/AuthenticateCognitoActionConditionalBehaviorEnum'
+        description: '<p>The behavior if the user is not authenticated. The following are possible values:</p> <ul> <li> <p>deny<code/> - Return an HTTP 401 Unauthorized error.</p> </li> <li> <p>allow<code/> - Allow the request to be forwarded to the target.</p> </li> <li> <p>authenticate<code/> - Redirect the request to the IdP authorization endpoint. This is the default value.</p> </li> </ul>'
+    description: Request parameters to use when integrating with Amazon Cognito to authenticate users.
+  ActionOrder:
+    type: integer
+    minimum: 1
+    maximum: 50000
+  RedirectActionConfig:
+    type: object
+    required:
+      - StatusCode
+    properties:
+      Protocol:
+        $ref: '#/definitions/RedirectActionProtocol'
+        description: 'The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You cannot redirect HTTPS to HTTP.'
+      Port:
+        $ref: '#/definitions/RedirectActionPort'
+        description: 'The port. You can specify a value from 1 to 65535 or #{port}.'
+      Host:
+        $ref: '#/definitions/RedirectActionHost'
+        description: 'The hostname. This component is not percent-encoded. The hostname can contain #{host}.'
+      Path:
+        $ref: '#/definitions/RedirectActionPath'
+        description: 'The absolute path, starting with the leading "/". This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}.'
+      Query:
+        $ref: '#/definitions/RedirectActionQuery'
+        description: 'The query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading "?", as it is automatically added. You can specify any of the reserved keywords.'
+      StatusCode:
+        $ref: '#/definitions/RedirectActionStatusCodeEnum'
+        description: The HTTP redirect code. The redirect is either permanent (HTTP 301) or temporary (HTTP 302).
+    description: '<p>Information about a redirect action.</p> <p>A URI consists of the following components: protocol://hostname:port/path?query. You must modify at least one of the following components to avoid a redirect loop: protocol, hostname, port, or path. Any components that you do not modify retain their original values.</p> <p>You can reuse URI components using the following reserved keywords:</p> <ul> <li> <p>#{protocol}</p> </li> <li> <p>#{host}</p> </li> <li> <p>#{port}</p> </li> <li> <p>#{path} (the leading "/" is removed)</p> </li> <li> <p>#{query}</p> </li> </ul> <p>For example, you can change the path to "/new/#{path}", the hostname to "example.#{host}", or the query to "#{query}&amp;value=xyz".</p>'
+  FixedResponseActionConfig:
+    type: object
+    required:
+      - StatusCode
+    properties:
+      MessageBody:
+        $ref: '#/definitions/FixedResponseActionMessage'
+        description: The message.
+      StatusCode:
+        $ref: '#/definitions/FixedResponseActionStatusCode'
+        description: 'The HTTP response code (2XX, 4XX, or 5XX).'
+      ContentType:
+        $ref: '#/definitions/FixedResponseActionContentType'
+        description: '<p>The content type.</p> <p>Valid Values: text/plain | text/css | text/html | application/javascript | application/json</p>'
+    description: Information about an action that returns a custom HTTP response.
+  Action:
+    type: object
+    required:
+      - Type
+    properties:
+      Type:
+        $ref: '#/definitions/ActionTypeEnum'
+        description: 'The type of action. Each rule must include exactly one of the following types of actions: <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>.'
+      TargetGroupArn:
+        $ref: '#/definitions/TargetGroupArn'
+        description: The Amazon Resource Name (ARN) of the target group. Specify only when <code>Type</code> is <code>forward</code>.
+      AuthenticateOidcConfig:
+        $ref: '#/definitions/AuthenticateOidcActionConfig'
+        description: '[HTTPS listener] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when <code>Type</code> is <code>authenticate-oidc</code>.'
+      AuthenticateCognitoConfig:
+        $ref: '#/definitions/AuthenticateCognitoActionConfig'
+        description: '[HTTPS listener] Information for using Amazon Cognito to authenticate users. Specify only when <code>Type</code> is <code>authenticate-cognito</code>.'
+      Order:
+        $ref: '#/definitions/ActionOrder'
+        description: The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first. The final action to be performed must be a <code>forward</code> or a <code>fixed-response</code> action.
+      RedirectConfig:
+        $ref: '#/definitions/RedirectActionConfig'
+        description: '[Application Load Balancer] Information for creating a redirect action. Specify only when <code>Type</code> is <code>redirect</code>.'
+      FixedResponseConfig:
+        $ref: '#/definitions/FixedResponseActionConfig'
+        description: '[Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when <code>Type</code> is <code>fixed-response</code>.'
+    description: Information about an action.
+  Actions:
+    type: array
+    items:
+      $ref: '#/definitions/Action'
+  ListenerArn:
+    type: string
+  CertificateList:
+    type: array
+    items:
+      $ref: '#/definitions/Certificate'
+  ResourceArns:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceArn'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+  AllocationId:
+    type: string
+  AuthenticateCognitoActionAuthenticationRequestParamName:
+    type: string
+  AuthenticateCognitoActionAuthenticationRequestParamValue:
+    type: string
+  AuthenticateCognitoActionAuthenticationRequestExtraParams:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AuthenticateCognitoActionAuthenticationRequestParamName'
+        value:
+          $ref: '#/definitions/AuthenticateCognitoActionAuthenticationRequestParamValue'
+  AuthenticateCognitoActionConditionalBehaviorEnum:
+    type: string
+    enum:
+      - deny
+      - allow
+      - authenticate
+  AuthenticateCognitoActionUserPoolArn:
+    type: string
+  AuthenticateCognitoActionUserPoolClientId:
+    type: string
+  AuthenticateCognitoActionUserPoolDomain:
+    type: string
+  AuthenticateCognitoActionSessionCookieName:
+    type: string
+  AuthenticateCognitoActionScope:
+    type: string
+  AuthenticateCognitoActionSessionTimeout:
+    type: integer
+  AuthenticateOidcActionAuthenticationRequestParamName:
+    type: string
+  AuthenticateOidcActionAuthenticationRequestParamValue:
+    type: string
+  AuthenticateOidcActionAuthenticationRequestExtraParams:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AuthenticateOidcActionAuthenticationRequestParamName'
+        value:
+          $ref: '#/definitions/AuthenticateOidcActionAuthenticationRequestParamValue'
+  AuthenticateOidcActionAuthorizationEndpoint:
+    type: string
+  AuthenticateOidcActionClientId:
+    type: string
+  AuthenticateOidcActionClientSecret:
+    type: string
+  AuthenticateOidcActionConditionalBehaviorEnum:
+    type: string
+    enum:
+      - deny
+      - allow
+      - authenticate
+  AuthenticateOidcActionIssuer:
+    type: string
+  AuthenticateOidcActionTokenEndpoint:
+    type: string
+  AuthenticateOidcActionUserInfoEndpoint:
+    type: string
+  AuthenticateOidcActionSessionCookieName:
+    type: string
+  AuthenticateOidcActionScope:
+    type: string
+  AuthenticateOidcActionSessionTimeout:
+    type: integer
+  ZoneName:
+    type: string
+  SubnetId:
+    type: string
+  LoadBalancerAddresses:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerAddress'
+  AvailabilityZone:
+    type: object
+    properties:
+      ZoneName:
+        $ref: '#/definitions/ZoneName'
+        description: The name of the Availability Zone.
+      SubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: The ID of the subnet.
+      LoadBalancerAddresses:
+        $ref: '#/definitions/LoadBalancerAddresses'
+        description: '[Network Load Balancers] The static IP address.'
+    description: Information about an Availability Zone.
+  AvailabilityZones:
+    type: array
+    items:
+      $ref: '#/definitions/AvailabilityZone'
+  CanonicalHostedZoneId:
+    type: string
+  CertificateArn:
+    type: string
+  Default:
+    type: boolean
+  Certificate:
+    type: object
+    properties:
+      CertificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: The Amazon Resource Name (ARN) of the certificate.
+      IsDefault:
+        $ref: '#/definitions/Default'
+        description: Indicates whether the certificate is the default certificate.
+    description: Information about an SSL server certificate.
+  CipherName:
+    type: string
+  CipherPriority:
+    type: integer
+  Cipher:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/CipherName'
+        description: The name of the cipher.
+      Priority:
+        $ref: '#/definitions/CipherPriority'
+        description: The priority of the cipher.
+    description: Information about a cipher used in a policy.
+  Ciphers:
+    type: array
+    items:
+      $ref: '#/definitions/Cipher'
+  ConditionFieldName:
+    type: string
+    maxLength: 64
+  LoadBalancerArn:
+    type: string
+  ProtocolEnum:
+    type: string
+    enum:
+      - HTTP
+      - HTTPS
+      - TCP
+  Port:
+    type: integer
+    minimum: 1
+    maximum: 65535
+  SslPolicyName:
+    type: string
+  Listeners:
+    type: array
+    items:
+      $ref: '#/definitions/Listener'
+  LoadBalancerName:
+    type: string
+  Subnets:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+  SubnetMappings:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetMapping'
+  SecurityGroups:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+  LoadBalancerSchemeEnum:
+    type: string
+    enum:
+      - internet-facing
+      - internal
+  LoadBalancerTypeEnum:
+    type: string
+    enum:
+      - application
+      - network
   IpAddressType:
     type: string
     enum:
       - ipv4
       - dualstack
+  LoadBalancers:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancer'
+  RuleConditionList:
+    type: array
+    items:
+      $ref: '#/definitions/RuleCondition'
+  RulePriority:
+    type: integer
+    minimum: 1
+    maximum: 50000
+  Rules:
+    type: array
+    items:
+      $ref: '#/definitions/Rule'
+  TargetGroupName:
+    type: string
+  VpcId:
+    type: string
+  HealthCheckPort:
+    type: string
+  Path:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  HealthCheckIntervalSeconds:
+    type: integer
+    minimum: 5
+    maximum: 300
+  HealthCheckTimeoutSeconds:
+    type: integer
+    minimum: 2
+    maximum: 60
+  HealthCheckThresholdCount:
+    type: integer
+    minimum: 2
+    maximum: 10
+  Matcher:
+    type: object
+    required:
+      - HttpCode
+    properties:
+      HttpCode:
+        $ref: '#/definitions/HttpCode'
+        description: '<p>The HTTP codes.</p> <p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is 200–399.</p>'
+    description: Information to use when checking for a successful response from a target.
+  TargetTypeEnum:
+    type: string
+    enum:
+      - instance
+      - ip
+  TargetGroups:
+    type: array
+    items:
+      $ref: '#/definitions/TargetGroup'
+  CreatedTime:
+    type: string
+    format: date-time
+  DNSName:
+    type: string
+  RuleArn:
+    type: string
+  TargetDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/TargetDescription'
+  Marker:
+    type: string
+  PageSize:
+    type: integer
+    minimum: 1
+    maximum: 400
+  Limits:
+    type: array
+    items:
+      $ref: '#/definitions/Limit'
+  ListenerArns:
+    type: array
+    items:
+      $ref: '#/definitions/ListenerArn'
+  LoadBalancerAttributes:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerAttribute'
+    maxItems: 20
+  LoadBalancerArns:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerArn'
+  LoadBalancerNames:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerName'
+  RuleArns:
+    type: array
+    items:
+      $ref: '#/definitions/RuleArn'
+  SslPolicyNames:
+    type: array
+    items:
+      $ref: '#/definitions/SslPolicyName'
+  SslPolicies:
+    type: array
+    items:
+      $ref: '#/definitions/SslPolicy'
+  TagDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/TagDescription'
+  TargetGroupAttributes:
+    type: array
+    items:
+      $ref: '#/definitions/TargetGroupAttribute'
+  TargetGroupArns:
+    type: array
+    items:
+      $ref: '#/definitions/TargetGroupArn'
+  TargetGroupNames:
+    type: array
+    items:
+      $ref: '#/definitions/TargetGroupName'
+  TargetHealthDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/TargetHealthDescription'
+  Description:
+    type: string
+  FixedResponseActionMessage:
+    type: string
+    minLength: 0
+    maxLength: 1024
+  FixedResponseActionStatusCode:
+    type: string
+    pattern: ^(2|4|5)\d\d$
+  FixedResponseActionContentType:
+    type: string
+    minLength: 0
+    maxLength: 32
+  HttpCode:
+    type: string
+  IpAddress:
+    type: string
   IsDefault:
     type: boolean
+  Name:
+    type: string
+  Max:
+    type: string
   Limit:
     type: object
     properties:
@@ -2440,10 +3338,8 @@ definitions:
         $ref: '#/definitions/Max'
         description: The maximum value of the limit.
     description: Information about an Elastic Load Balancing resource limit for your AWS account.
-  Limits:
-    type: array
-    items:
-      $ref: '#/definitions/Limit'
+  StringValue:
+    type: string
   ListOfString:
     type: array
     items:
@@ -2473,20 +3369,16 @@ definitions:
         $ref: '#/definitions/Actions'
         description: The default actions for the listener.
     description: Information about a listener.
-  ListenerArn:
-    type: string
-  ListenerArns:
-    type: array
-    items:
-      $ref: '#/definitions/ListenerArn'
-  ListenerNotFoundException:
+  LoadBalancerState:
     type: object
-    properties: {}
-    description: The specified listener does not exist.
-  Listeners:
-    type: array
-    items:
-      $ref: '#/definitions/Listener'
+    properties:
+      Code:
+        $ref: '#/definitions/LoadBalancerStateEnum'
+        description: 'The state code. The initial state of the load balancer is <code>provisioning</code>. After the load balancer is fully set up and ready to route traffic, its state is <code>active</code>. If the load balancer could not be set up, its state is <code>failed</code>.'
+      Reason:
+        $ref: '#/definitions/StateReason'
+        description: A description of the state.
+    description: Information about the state of the load balancer.
   LoadBalancer:
     type: object
     properties:
@@ -2507,7 +3399,7 @@ definitions:
         description: The name of the load balancer.
       Scheme:
         $ref: '#/definitions/LoadBalancerSchemeEnum'
-        description: '<p>The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the Internet.</p> <p>The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the private IP addresses of the nodes. Therefore, internal load balancers can only route requests from clients with access to the VPC for the load balancer.</p>'
+        description: '<p>The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the internet.</p> <p>The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the private IP addresses of the nodes. Therefore, internal load balancers can only route requests from clients with access to the VPC for the load balancer.</p>'
       VpcId:
         $ref: '#/definitions/VpcId'
         description: The ID of the VPC for the load balancer.
@@ -2537,26 +3429,6 @@ definitions:
         $ref: '#/definitions/AllocationId'
         description: '[Network Load Balancers] The allocation ID of the Elastic IP address.'
     description: Information about a static IP address for a load balancer.
-  LoadBalancerAddresses:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerAddress'
-  LoadBalancerArn:
-    type: string
-  LoadBalancerArns:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerArn'
-  LoadBalancerAttribute:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/LoadBalancerAttributeKey'
-        description: '<p>The name of the attribute.</p> <ul> <li> <p> <code>access_logs.s3.enabled</code> - [Application Load Balancers] Indicates whether access logs stored in Amazon S3 are enabled. The value is <code>true</code> or <code>false</code>.</p> </li> <li> <p> <code>access_logs.s3.bucket</code> - [Application Load Balancers] The name of the S3 bucket for the access logs. This attribute is required if access logs in Amazon S3 are enabled. The bucket must exist in the same region as the load balancer and have a bucket policy that grants Elastic Load Balancing permission to write to the bucket.</p> </li> <li> <p> <code>access_logs.s3.prefix</code> - [Application Load Balancers] The prefix for the location in the S3 bucket. If you don''t specify a prefix, the access logs are stored in the root of the bucket.</p> </li> <li> <p> <code>deletion_protection.enabled</code> - Indicates whether deletion protection is enabled. The value is <code>true</code> or <code>false</code>.</p> </li> <li> <p> <code>idle_timeout.timeout_seconds</code> - [Application Load Balancers] The idle timeout value, in seconds. The valid range is 1-4000. The default is 60 seconds.</p> </li> <li> <p> <code>load_balancing.cross_zone.enabled</code> - [Network Load Balancers] Indicates whether cross-zone load balancing is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> <li> <p> <code>routing.http2.enabled</code> - [Application Load Balancers] Indicates whether HTTP/2 is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>true</code>.</p> </li> </ul>'
-      Value:
-        $ref: '#/definitions/LoadBalancerAttributeValue'
-        description: The value of the attribute.
-    description: Information about a load balancer attribute.
   LoadBalancerAttributeKey:
     type: string
     pattern: '^[a-zA-Z0-9._]+$'
@@ -2564,36 +3436,16 @@ definitions:
   LoadBalancerAttributeValue:
     type: string
     maxLength: 1024
-  LoadBalancerAttributes:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerAttribute'
-    maxItems: 20
-  LoadBalancerName:
-    type: string
-  LoadBalancerNames:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerName'
-  LoadBalancerNotFoundException:
-    type: object
-    properties: {}
-    description: The specified load balancer does not exist.
-  LoadBalancerSchemeEnum:
-    type: string
-    enum:
-      - internet-facing
-      - internal
-  LoadBalancerState:
+  LoadBalancerAttribute:
     type: object
     properties:
-      Code:
-        $ref: '#/definitions/LoadBalancerStateEnum'
-        description: 'The state code. The initial state of the load balancer is <code>provisioning</code>. After the load balancer is fully set up and ready to route traffic, its state is <code>active</code>. If the load balancer could not be set up, its state is <code>failed</code>.'
-      Reason:
-        $ref: '#/definitions/StateReason'
-        description: A description of the state.
-    description: Information about the state of the load balancer.
+      Key:
+        $ref: '#/definitions/LoadBalancerAttributeKey'
+        description: '<p>The name of the attribute.</p> <p>The following attributes are supported by both Application Load Balancers and Network Load Balancers:</p> <ul> <li> <p> <code>deletion_protection.enabled</code> - Indicates whether deletion protection is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> </ul> <p>The following attributes are supported by only Application Load Balancers:</p> <ul> <li> <p> <code>access_logs.s3.enabled</code> - Indicates whether access logs are enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> <li> <p> <code>access_logs.s3.bucket</code> - The name of the S3 bucket for the access logs. This attribute is required if access logs are enabled. The bucket must exist in the same region as the load balancer and have a bucket policy that grants Elastic Load Balancing permissions to write to the bucket.</p> </li> <li> <p> <code>access_logs.s3.prefix</code> - The prefix for the location in the S3 bucket for the access logs.</p> </li> <li> <p> <code>idle_timeout.timeout_seconds</code> - The idle timeout value, in seconds. The valid range is 1-4000 seconds. The default is 60 seconds.</p> </li> <li> <p> <code>routing.http2.enabled</code> - Indicates whether HTTP/2 is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>true</code>.</p> </li> </ul> <p>The following attributes are supported by only Network Load Balancers:</p> <ul> <li> <p> <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross-zone load balancing is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> </ul>'
+      Value:
+        $ref: '#/definitions/LoadBalancerAttributeValue'
+        description: The value of the attribute.
+    description: Information about a load balancer attribute.
   LoadBalancerStateEnum:
     type: string
     enum:
@@ -2601,338 +3453,38 @@ definitions:
       - provisioning
       - active_impaired
       - failed
-  LoadBalancerTypeEnum:
+  StateReason:
     type: string
-    enum:
-      - application
-      - network
-  LoadBalancers:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancer'
-  Marker:
+  RedirectActionProtocol:
     type: string
-  Matcher:
-    type: object
-    required:
-      - HttpCode
-    properties:
-      HttpCode:
-        $ref: '#/definitions/HttpCode'
-        description: '<p>The HTTP codes.</p> <p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is 200 to 399.</p>'
-    description: Information to use when checking for a successful response from a target.
-  Max:
+    pattern: '^(HTTPS?|#\{protocol\})$'
+  RedirectActionPort:
     type: string
-  ModifyListenerInput:
-    type: object
-    required:
-      - ListenerArn
-    example:
-      Certificates:
-        - CertificateArn: 'arn:aws:iam::123456789012:server-certificate/my-new-server-cert'
-      ListenerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/0467ef3c8400ae65'
-    properties:
-      ListenerArn:
-        $ref: '#/definitions/ListenerArn'
-        description: The Amazon Resource Name (ARN) of the listener.
-      Port:
-        $ref: '#/definitions/Port'
-        description: The port for connections from clients to the load balancer.
-      Protocol:
-        $ref: '#/definitions/ProtocolEnum'
-        description: The protocol for connections from clients to the load balancer. Application Load Balancers support HTTP and HTTPS and Network Load Balancers support TCP.
-      SslPolicy:
-        $ref: '#/definitions/SslPolicyName'
-        description: 'The security policy that defines which protocols and ciphers are supported. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies">Security Policies</a> in the <i>Application Load Balancers Guide</i>.'
-      Certificates:
-        $ref: '#/definitions/CertificateList'
-        description: The default SSL server certificate.
-      DefaultActions:
-        $ref: '#/definitions/Actions'
-        description: 'The default action. For Application Load Balancers, the protocol of the specified target group must be HTTP or HTTPS. For Network Load Balancers, the protocol of the specified target group must be TCP.'
-  ModifyListenerOutput:
-    type: object
-    example:
-      Listeners:
-        - Certificates:
-            - CertificateArn: 'arn:aws:iam::123456789012:server-certificate/my-new-server-cert'
-          DefaultActions:
-            - TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
-              Type: forward
-          ListenerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/0467ef3c8400ae65'
-          LoadBalancerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
-          Port: 443
-          Protocol: HTTPS
-          SslPolicy: ELBSecurityPolicy-2015-05
-    properties:
-      Listeners:
-        $ref: '#/definitions/Listeners'
-        description: Information about the modified listeners.
-  ModifyLoadBalancerAttributesInput:
-    type: object
-    required:
-      - LoadBalancerArn
-      - Attributes
-    example:
-      Attributes:
-        - Key: access_logs.s3.enabled
-          Value: 'true'
-        - Key: access_logs.s3.bucket
-          Value: my-loadbalancer-logs
-        - Key: access_logs.s3.prefix
-          Value: myapp
-      LoadBalancerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
-    properties:
-      LoadBalancerArn:
-        $ref: '#/definitions/LoadBalancerArn'
-        description: The Amazon Resource Name (ARN) of the load balancer.
-      Attributes:
-        $ref: '#/definitions/LoadBalancerAttributes'
-        description: The load balancer attributes.
-  ModifyLoadBalancerAttributesOutput:
-    type: object
-    example:
-      Attributes:
-        - Key: access_logs.s3.enabled
-          Value: 'true'
-        - Key: access_logs.s3.bucket
-          Value: my-load-balancer-logs
-        - Key: access_logs.s3.prefix
-          Value: myapp
-        - Key: idle_timeout.timeout_seconds
-          Value: '60'
-        - Key: deletion_protection.enabled
-          Value: 'false'
-    properties:
-      Attributes:
-        $ref: '#/definitions/LoadBalancerAttributes'
-        description: Information about the load balancer attributes.
-  ModifyRuleInput:
-    type: object
-    required:
-      - RuleArn
-    example:
-      Conditions:
-        - Field: path-pattern
-          Values:
-            - /images/*
-      RuleArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee'
-    properties:
-      RuleArn:
-        $ref: '#/definitions/RuleArn'
-        description: The Amazon Resource Name (ARN) of the rule.
-      Conditions:
-        $ref: '#/definitions/RuleConditionList'
-        description: The conditions.
-      Actions:
-        $ref: '#/definitions/Actions'
-        description: The actions. The target group must use the HTTP or HTTPS protocol.
-  ModifyRuleOutput:
-    type: object
-    example:
-      Rules:
-        - Actions:
-            - TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
-              Type: forward
-          Conditions:
-            - Field: path-pattern
-              Values:
-                - /images/*
-          IsDefault: false
-          Priority: '10'
-          RuleArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee'
-    properties:
-      Rules:
-        $ref: '#/definitions/Rules'
-        description: Information about the rule.
-  ModifyTargetGroupAttributesInput:
-    type: object
-    required:
-      - TargetGroupArn
-      - Attributes
-    example:
-      Attributes:
-        - Key: deregistration_delay.timeout_seconds
-          Value: '600'
-      TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
-    properties:
-      TargetGroupArn:
-        $ref: '#/definitions/TargetGroupArn'
-        description: The Amazon Resource Name (ARN) of the target group.
-      Attributes:
-        $ref: '#/definitions/TargetGroupAttributes'
-        description: The attributes.
-  ModifyTargetGroupAttributesOutput:
-    type: object
-    example:
-      Attributes:
-        - Key: stickiness.enabled
-          Value: 'false'
-        - Key: deregistration_delay.timeout_seconds
-          Value: '600'
-        - Key: stickiness.type
-          Value: lb_cookie
-        - Key: stickiness.lb_cookie.duration_seconds
-          Value: '86400'
-    properties:
-      Attributes:
-        $ref: '#/definitions/TargetGroupAttributes'
-        description: Information about the attributes.
-  ModifyTargetGroupInput:
-    type: object
-    required:
-      - TargetGroupArn
-    example:
-      HealthCheckPort: '443'
-      HealthCheckProtocol: HTTPS
-      TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-https-targets/2453ed029918f21f'
-    properties:
-      TargetGroupArn:
-        $ref: '#/definitions/TargetGroupArn'
-        description: The Amazon Resource Name (ARN) of the target group.
-      HealthCheckProtocol:
-        $ref: '#/definitions/ProtocolEnum'
-        description: The protocol the load balancer uses when performing health checks on targets. The TCP protocol is supported only if the protocol of the target group is TCP.
-      HealthCheckPort:
-        $ref: '#/definitions/HealthCheckPort'
-        description: The port the load balancer uses when performing health checks on targets.
-      HealthCheckPath:
-        $ref: '#/definitions/Path'
-        description: '[HTTP/HTTPS health checks] The ping path that is the destination for the health check request.'
-      HealthCheckIntervalSeconds:
-        $ref: '#/definitions/HealthCheckIntervalSeconds'
-        description: 'The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5 to 300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds.'
-      HealthCheckTimeoutSeconds:
-        $ref: '#/definitions/HealthCheckTimeoutSeconds'
-        description: '[HTTP/HTTPS health checks] The amount of time, in seconds, during which no response means a failed health check.'
-      HealthyThresholdCount:
-        $ref: '#/definitions/HealthCheckThresholdCount'
-        description: The number of consecutive health checks successes required before considering an unhealthy target healthy.
-      UnhealthyThresholdCount:
-        $ref: '#/definitions/HealthCheckThresholdCount'
-        description: 'The number of consecutive health check failures required before considering the target unhealthy. For Network Load Balancers, this value must be the same as the healthy threshold count.'
-      Matcher:
-        $ref: '#/definitions/Matcher'
-        description: '[HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target.'
-  ModifyTargetGroupOutput:
-    type: object
-    example:
-      TargetGroups:
-        - HealthCheckIntervalSeconds: 30
-          HealthCheckPort: '443'
-          HealthCheckProtocol: HTTPS
-          HealthCheckTimeoutSeconds: 5
-          HealthyThresholdCount: 5
-          LoadBalancerArns:
-            - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
-          Matcher:
-            HttpCode: '200'
-          Port: 443
-          Protocol: HTTPS
-          TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-https-targets/2453ed029918f21f'
-          TargetGroupName: my-https-targets
-          UnhealthyThresholdCount: 2
-          VpcId: vpc-3ac0fb5f
-    properties:
-      TargetGroups:
-        $ref: '#/definitions/TargetGroups'
-        description: Information about the target group.
-  Name:
-    type: string
-  OperationNotPermittedException:
-    type: object
-    properties: {}
-    description: This operation is not allowed.
-  PageSize:
-    type: integer
-    minimum: 1
-    maximum: 400
-  Path:
+  RedirectActionHost:
     type: string
     minLength: 1
-    maxLength: 1024
-  Port:
-    type: integer
-    minimum: 1
-    maximum: 65535
-  PriorityInUseException:
-    type: object
-    properties: {}
-    description: The specified priority is in use.
-  ProtocolEnum:
+    maxLength: 128
+  RedirectActionPath:
+    type: string
+    minLength: 1
+    maxLength: 128
+  RedirectActionQuery:
+    type: string
+    minLength: 0
+    maxLength: 128
+  RedirectActionStatusCodeEnum:
     type: string
     enum:
-      - HTTP
-      - HTTPS
-      - TCP
-  RegisterTargetsInput:
-    type: object
-    required:
-      - TargetGroupArn
-      - Targets
-    example:
-      TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/3bb63f11dfb0faf9'
-      Targets:
-        - Id: i-80c8dd94
-          Port: 80
-        - Id: i-80c8dd94
-          Port: 766
-    properties:
-      TargetGroupArn:
-        $ref: '#/definitions/TargetGroupArn'
-        description: The Amazon Resource Name (ARN) of the target group.
-      Targets:
-        $ref: '#/definitions/TargetDescriptions'
-        description: The targets.
-  RegisterTargetsOutput:
-    type: object
-    properties: {}
-  RemoveListenerCertificatesInput:
-    type: object
-    required:
-      - ListenerArn
-      - Certificates
-    properties:
-      ListenerArn:
-        $ref: '#/definitions/ListenerArn'
-        description: The Amazon Resource Name (ARN) of the listener.
-      Certificates:
-        $ref: '#/definitions/CertificateList'
-        description: The certificate to remove. You can specify one certificate per call.
-  RemoveListenerCertificatesOutput:
-    type: object
-    properties: {}
-  RemoveTagsInput:
-    type: object
-    required:
-      - ResourceArns
-      - TagKeys
-    example:
-      ResourceArns:
-        - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
-      TagKeys:
-        - project
-        - department
-    properties:
-      ResourceArns:
-        $ref: '#/definitions/ResourceArns'
-        description: The Amazon Resource Name (ARN) of the resource.
-      TagKeys:
-        $ref: '#/definitions/TagKeys'
-        description: The tag keys for the tags to remove.
-  RemoveTagsOutput:
-    type: object
-    properties: {}
-  ResourceArn:
-    type: string
-  ResourceArns:
+      - HTTP_301
+      - HTTP_302
+  TagKeys:
     type: array
     items:
-      $ref: '#/definitions/ResourceArn'
-  ResourceInUseException:
-    type: object
-    properties: {}
-    description: A specified resource is in use.
+      $ref: '#/definitions/TagKey'
+  ResourceArn:
+    type: string
+  String:
+    type: string
   Rule:
     type: object
     properties:
@@ -2952,12 +3504,6 @@ definitions:
         $ref: '#/definitions/IsDefault'
         description: Indicates whether this is the default rule.
     description: Information about a rule.
-  RuleArn:
-    type: string
-  RuleArns:
-    type: array
-    items:
-      $ref: '#/definitions/RuleArn'
   RuleCondition:
     type: object
     properties:
@@ -2966,24 +3512,8 @@ definitions:
         description: The name of the field. The possible values are <code>host-header</code> and <code>path-pattern</code>.
       Values:
         $ref: '#/definitions/ListOfString'
-        description: '<p>The condition value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern (for example, /img/*). A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
+        description: '<p>The condition value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern (for example, /img/*). A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
     description: Information about a condition for a rule.
-  RuleConditionList:
-    type: array
-    items:
-      $ref: '#/definitions/RuleCondition'
-  RuleNotFoundException:
-    type: object
-    properties: {}
-    description: The specified rule does not exist.
-  RulePriority:
-    type: integer
-    minimum: 1
-    maximum: 50000
-  RulePriorityList:
-    type: array
-    items:
-      $ref: '#/definitions/RulePriorityPair'
   RulePriorityPair:
     type: object
     properties:
@@ -2994,129 +3524,12 @@ definitions:
         $ref: '#/definitions/RulePriority'
         description: The rule priority.
     description: Information about the priorities for the rules for a listener.
-  Rules:
+  RulePriorityList:
     type: array
     items:
-      $ref: '#/definitions/Rule'
-  SSLPolicyNotFoundException:
-    type: object
-    properties: {}
-    description: The specified SSL policy does not exist.
+      $ref: '#/definitions/RulePriorityPair'
   SecurityGroupId:
     type: string
-  SecurityGroups:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityGroupId'
-  SetIpAddressTypeInput:
-    type: object
-    required:
-      - LoadBalancerArn
-      - IpAddressType
-    properties:
-      LoadBalancerArn:
-        $ref: '#/definitions/LoadBalancerArn'
-        description: The Amazon Resource Name (ARN) of the load balancer.
-      IpAddressType:
-        $ref: '#/definitions/IpAddressType'
-        description: The IP address type. The possible values are <code>ipv4</code> (for IPv4 addresses) and <code>dualstack</code> (for IPv4 and IPv6 addresses). Internal load balancers must use <code>ipv4</code>.
-  SetIpAddressTypeOutput:
-    type: object
-    properties:
-      IpAddressType:
-        $ref: '#/definitions/IpAddressType'
-        description: The IP address type.
-  SetRulePrioritiesInput:
-    type: object
-    required:
-      - RulePriorities
-    example:
-      RulePriorities:
-        - Priority: 5
-          RuleArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/1291d13826f405c3'
-    properties:
-      RulePriorities:
-        $ref: '#/definitions/RulePriorityList'
-        description: The rule priorities.
-  SetRulePrioritiesOutput:
-    type: object
-    example:
-      Rules:
-        - Actions:
-            - TargetGroupArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
-              Type: forward
-          Conditions:
-            - Field: path-pattern
-              Values:
-                - /img/*
-          IsDefault: false
-          Priority: '5'
-          RuleArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/1291d13826f405c3'
-    properties:
-      Rules:
-        $ref: '#/definitions/Rules'
-        description: Information about the rules.
-  SetSecurityGroupsInput:
-    type: object
-    required:
-      - LoadBalancerArn
-      - SecurityGroups
-    example:
-      LoadBalancerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
-      SecurityGroups:
-        - sg-5943793c
-    properties:
-      LoadBalancerArn:
-        $ref: '#/definitions/LoadBalancerArn'
-        description: The Amazon Resource Name (ARN) of the load balancer.
-      SecurityGroups:
-        $ref: '#/definitions/SecurityGroups'
-        description: The IDs of the security groups.
-  SetSecurityGroupsOutput:
-    type: object
-    example:
-      SecurityGroupIds:
-        - sg-5943793c
-    properties:
-      SecurityGroupIds:
-        $ref: '#/definitions/SecurityGroups'
-        description: The IDs of the security groups associated with the load balancer.
-  SetSubnetsInput:
-    type: object
-    required:
-      - LoadBalancerArn
-      - Subnets
-    example:
-      LoadBalancerArn: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188'
-      Subnets:
-        - subnet-8360a9e7
-        - subnet-b7d581c0
-    properties:
-      LoadBalancerArn:
-        $ref: '#/definitions/LoadBalancerArn'
-        description: The Amazon Resource Name (ARN) of the load balancer.
-      Subnets:
-        $ref: '#/definitions/Subnets'
-        description: The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.
-      SubnetMappings:
-        $ref: '#/definitions/SubnetMappings'
-        description: <p>The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>You cannot specify Elastic IP addresses for your subnets.</p>
-  SetSubnetsOutput:
-    type: object
-    example:
-      AvailabilityZones:
-        - SubnetId: subnet-8360a9e7
-          ZoneName: us-west-2a
-        - SubnetId: subnet-b7d581c0
-          ZoneName: us-west-2b
-    properties:
-      AvailabilityZones:
-        $ref: '#/definitions/AvailabilityZones'
-        description: Information about the subnet and Availability Zone.
-  SslPolicies:
-    type: array
-    items:
-      $ref: '#/definitions/SslPolicy'
   SslPolicy:
     type: object
     properties:
@@ -3130,25 +3543,11 @@ definitions:
         $ref: '#/definitions/SslPolicyName'
         description: The name of the policy.
     description: Information about a policy used for SSL negotiation.
-  SslPolicyName:
-    type: string
-  SslPolicyNames:
-    type: array
-    items:
-      $ref: '#/definitions/SslPolicyName'
-  SslProtocol:
-    type: string
   SslProtocols:
     type: array
     items:
       $ref: '#/definitions/SslProtocol'
-  StateReason:
-    type: string
-  String:
-    type: string
-  StringValue:
-    type: string
-  SubnetId:
+  SslProtocol:
     type: string
   SubnetMapping:
     type: object
@@ -3160,18 +3559,16 @@ definitions:
         $ref: '#/definitions/AllocationId'
         description: '[Network Load Balancers] The allocation ID of the Elastic IP address.'
     description: Information about a subnet mapping.
-  SubnetMappings:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetMapping'
-  SubnetNotFoundException:
-    type: object
-    properties: {}
-    description: The specified subnet does not exist.
-  Subnets:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetId'
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -3194,29 +3591,8 @@ definitions:
         $ref: '#/definitions/TagList'
         description: Information about the tags.
     description: The tags associated with a resource.
-  TagDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/TagDescription'
-  TagKey:
+  TargetId:
     type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagKeys:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
   TargetDescription:
     type: object
     required:
@@ -3232,10 +3608,6 @@ definitions:
         $ref: '#/definitions/ZoneName'
         description: '<p>An Availability Zone or <code>all</code>. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer.</p> <p>This parameter is not supported if the target type of the target group is <code>instance</code>. If the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional. If the IP address is outside the VPC, this parameter is required.</p> <p>With an Application Load Balancer, if the IP address is outside the VPC for the target group, the only supported value is <code>all</code>.</p>'
     description: Information about a target.
-  TargetDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/TargetDescription'
   TargetGroup:
     type: object
     properties:
@@ -3285,50 +3657,45 @@ definitions:
         $ref: '#/definitions/TargetTypeEnum'
         description: The type of target that you must specify when registering targets with this target group. The possible values are <code>instance</code> (targets are specified by instance ID) or <code>ip</code> (targets are specified by IP address).
     description: Information about a target group.
-  TargetGroupArn:
-    type: string
-  TargetGroupArns:
-    type: array
-    items:
-      $ref: '#/definitions/TargetGroupArn'
-  TargetGroupAssociationLimitException:
-    type: object
-    properties: {}
-    description: You've reached the limit on the number of load balancers per target group.
-  TargetGroupAttribute:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/TargetGroupAttributeKey'
-        description: '<p>The name of the attribute.</p> <ul> <li> <p> <code>deregistration_delay.timeout_seconds</code> - The amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from <code>draining</code> to <code>unused</code>. The range is 0-3600 seconds. The default value is 300 seconds.</p> </li> <li> <p> <code>proxy_protocol_v2.enabled</code> - [Network Load Balancers] Indicates whether Proxy Protocol version 2 is enabled.</p> </li> <li> <p> <code>stickiness.enabled</code> - [Application Load Balancers] Indicates whether sticky sessions are enabled. The value is <code>true</code> or <code>false</code>.</p> </li> <li> <p> <code>stickiness.type</code> - [Application Load Balancers] The type of sticky sessions. The possible value is <code>lb_cookie</code>.</p> </li> <li> <p> <code>stickiness.lb_cookie.duration_seconds</code> - [Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).</p> </li> </ul>'
-      Value:
-        $ref: '#/definitions/TargetGroupAttributeValue'
-        description: The value of the attribute.
-    description: Information about a target group attribute.
   TargetGroupAttributeKey:
     type: string
     pattern: '^[a-zA-Z0-9._]+$'
     maxLength: 256
   TargetGroupAttributeValue:
     type: string
-  TargetGroupAttributes:
-    type: array
-    items:
-      $ref: '#/definitions/TargetGroupAttribute'
-  TargetGroupName:
-    type: string
-  TargetGroupNames:
-    type: array
-    items:
-      $ref: '#/definitions/TargetGroupName'
-  TargetGroupNotFoundException:
+  TargetGroupAttribute:
     type: object
-    properties: {}
-    description: The specified target group does not exist.
-  TargetGroups:
-    type: array
-    items:
-      $ref: '#/definitions/TargetGroup'
+    properties:
+      Key:
+        $ref: '#/definitions/TargetGroupAttributeKey'
+        description: '<p>The name of the attribute.</p> <p>The following attributes are supported by both Application Load Balancers and Network Load Balancers:</p> <ul> <li> <p> <code>deregistration_delay.timeout_seconds</code> - The amount of time, in seconds, for Elastic Load Balancing to wait before changing the state of a deregistering target from <code>draining</code> to <code>unused</code>. The range is 0-3600 seconds. The default value is 300 seconds.</p> </li> </ul> <p>The following attributes are supported by only Application Load Balancers:</p> <ul> <li> <p> <code>slow_start.duration_seconds</code> - The time period, in seconds, during which a newly registered target receives a linearly increasing share of the traffic to the target group. After this time period ends, the target receives its full share of traffic. The range is 30-900 seconds (15 minutes). Slow start mode is disabled by default.</p> </li> <li> <p> <code>stickiness.enabled</code> - Indicates whether sticky sessions are enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> <li> <p> <code>stickiness.type</code> - The type of sticky sessions. The possible value is <code>lb_cookie</code>.</p> </li> <li> <p> <code>stickiness.lb_cookie.duration_seconds</code> - The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).</p> </li> </ul> <p>The following attributes are supported by only Network Load Balancers:</p> <ul> <li> <p> <code>proxy_protocol_v2.enabled</code> - Indicates whether Proxy Protocol version 2 is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> </ul>'
+      Value:
+        $ref: '#/definitions/TargetGroupAttributeValue'
+        description: The value of the attribute.
+    description: Information about a target group attribute.
+  TargetHealthStateEnum:
+    type: string
+    enum:
+      - initial
+      - healthy
+      - unhealthy
+      - unused
+      - draining
+      - unavailable
+  TargetHealthReasonEnum:
+    type: string
+    enum:
+      - Elb.RegistrationInProgress
+      - Elb.InitialHealthChecking
+      - Target.ResponseCodeMismatch
+      - Target.Timeout
+      - Target.FailedHealthChecks
+      - Target.NotRegistered
+      - Target.NotInUse
+      - Target.DeregistrationInProgress
+      - Target.InvalidState
+      - Target.IpUnusable
+      - Elb.InternalError
   TargetHealth:
     type: object
     properties:
@@ -3355,77 +3722,3 @@ definitions:
         $ref: '#/definitions/TargetHealth'
         description: The health information for the target.
     description: Information about the health of a target.
-  TargetHealthDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/TargetHealthDescription'
-  TargetHealthReasonEnum:
-    type: string
-    enum:
-      - Elb.RegistrationInProgress
-      - Elb.InitialHealthChecking
-      - Target.ResponseCodeMismatch
-      - Target.Timeout
-      - Target.FailedHealthChecks
-      - Target.NotRegistered
-      - Target.NotInUse
-      - Target.DeregistrationInProgress
-      - Target.InvalidState
-      - Target.IpUnusable
-      - Elb.InternalError
-  TargetHealthStateEnum:
-    type: string
-    enum:
-      - initial
-      - healthy
-      - unhealthy
-      - unused
-      - draining
-      - unavailable
-  TargetId:
-    type: string
-  TargetTypeEnum:
-    type: string
-    enum:
-      - instance
-      - ip
-  TooManyCertificatesException:
-    type: object
-    properties: {}
-    description: You've reached the limit on the number of certificates per load balancer.
-  TooManyListenersException:
-    type: object
-    properties: {}
-    description: You've reached the limit on the number of listeners per load balancer.
-  TooManyLoadBalancersException:
-    type: object
-    properties: {}
-    description: You've reached the limit on the number of load balancers for your AWS account.
-  TooManyRegistrationsForTargetIdException:
-    type: object
-    properties: {}
-    description: You've reached the limit on the number of times a target can be registered with a load balancer.
-  TooManyRulesException:
-    type: object
-    properties: {}
-    description: You've reached the limit on the number of rules per load balancer.
-  TooManyTagsException:
-    type: object
-    properties: {}
-    description: You've reached the limit on the number of tags per load balancer.
-  TooManyTargetGroupsException:
-    type: object
-    properties: {}
-    description: You've reached the limit on the number of target groups for your AWS account.
-  TooManyTargetsException:
-    type: object
-    properties: {}
-    description: You've reached the limit on the number of targets.
-  UnsupportedProtocolException:
-    type: object
-    properties: {}
-    description: The specified protocol is not supported.
-  VpcId:
-    type: string
-  ZoneName:
-    type: string

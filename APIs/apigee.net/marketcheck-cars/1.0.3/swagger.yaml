@@ -10,8 +10,7 @@ info:
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://marketcheck-mccarsapiportal.apigee.io/files/logo.png'
+    url: 'https://twitter.com/MarketcheckAPIs/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://stagingapi.marketcheck.com/api-docs'
@@ -333,9 +332,8 @@ paths:
         '200':
           description: List of dealers for the search
           schema:
-            items:
-              $ref: '#/definitions/Dealer'
-            type: array
+            $ref: '#/definitions/DealersResponse'
+            type: object
         default:
           description: Error
           schema:
@@ -538,6 +536,7 @@ paths:
           description: Listing for the given id
           schema:
             $ref: '#/definitions/Listing'
+            type: object
         default:
           description: Error
           schema:
@@ -607,6 +606,12 @@ paths:
           in: path
           name: id
           required: true
+          type: string
+        - description: Get only HTML for given listings VDP page
+          format: string
+          in: query
+          name: html
+          required: false
           type: string
       responses:
         '200':
@@ -827,17 +832,17 @@ paths:
   /search:
     get:
       description: |-
-        This endpoint is the meat of the API and serves many purposes. This API produces a list of currently active cars from the market for the given search criteria. The API results are limited to allow pagination upto 1000 rows. 
-         The search API facilitates the following use cases - 
-        1. Search Cars around a given geo-point within a given radius 
-        2. Search cars for a specific year / make / model or combination of these 
+        This endpoint is the meat of the API and serves many purposes. This API produces a list of currently active cars from the market for the given search criteria. The API results are limited to allow pagination upto 1000 rows.
+         The search API facilitates the following use cases -
+        1. Search Cars around a given geo-point within a given radius
+        2. Search cars for a specific year / make / model or combination of these
         3. Search cars matching multiple year, make, model combinatins in the same search request
         4. Filter results by most car specification attributes
-        5. Search for similar cars by VIN or Taxonomy VIN 
+        5. Search for similar cars by VIN or Taxonomy VIN
         6. Filter cars within a given price / miles / days on market (dom) range
-        7. Specify a sort order for the results on price / miles / dom / listed date 
-        8. Search cars for a given City / State combination 
-        9. Get Facets to build the search drill downs 
+        7. Specify a sort order for the results on price / miles / dom / listed date
+        8. Search cars for a given City / State combination
+        9. Get Facets to build the search drill downs
         10. Get Market averages for price/miles/dom/msrp for your search
       operationId: search
       parameters:
@@ -859,6 +864,11 @@ paths:
           name: radius
           required: false
           type: integer
+        - description: car search bases on zipcode
+          in: query
+          name: zip
+          required: false
+          type: string
         - description: Car type. Allowed values are - new / used / certified
           enum:
             - new
@@ -872,6 +882,18 @@ paths:
           format: string
           in: query
           name: seller_type
+          required: false
+          type: string
+        - description: Indicates whether car has had only one owner or not
+          format: string
+          in: query
+          name: carfax_1_owner
+          required: false
+          type: string
+        - description: Indicates whether car has had any accidents or not
+          format: string
+          in: query
+          name: carfax_clean_title
           required: false
           type: string
         - description: Car year - 1980 onwards. Valid filter values are those that our Search facets API returns for unique years. You can pass in multiple year values comma separated.
@@ -1278,6 +1300,7 @@ definitions:
         $ref: '#/definitions/Build'
       dealer:
         $ref: '#/definitions/Dealer'
+        type: object
       distance:
         description: Distance of the car's location from the specified user lcoation
         type: number
@@ -1649,6 +1672,18 @@ definitions:
         description: Zip of the dealer
         type: string
     type: object
+  DealersResponse:
+    description: Dealers Response
+    properties:
+      dealers:
+        items:
+          $ref: '#/definitions/Dealer'
+          type: object
+        type: array
+      num_found:
+        description: number of dealers found
+        type: number
+    type: object
   DepreciationPoint:
     properties:
       similar_models:
@@ -1789,6 +1824,7 @@ definitions:
         type: object
       dealer:
         $ref: '#/definitions/Dealer'
+        type: object
       dom:
         description: Days on Market value for the car based on current and historical listings found in the Marketcheck database for this car
         type: number
@@ -1986,11 +2022,26 @@ definitions:
     type: object
   PopularityItem:
     properties:
-      count:
-        description: Popularity item count
+      color:
+        description: Color depending upon left and right analysis numbers
+        type: string
+      delta_percent:
+        description: Delta percent
         type: number
-      item:
-        description: Popularity item
+      difference:
+        description: Difference depending upon left and right analysis
+        type: number
+      left:
+        description: Left side rating for above description (2016 ford F-150 Lariat)
+        type: number
+      right:
+        description: Right side rating for above description (All Other Cars)
+        type: number
+      text:
+        description: 'Description for which popularity should be show eg: 2016 ford F-150 Lariat vs All Other Cars'
+        type: string
+      thumbs:
+        description: Thumbs up/down depending upon left and right analysis numbers
         type: string
     type: object
   RatingComponents:

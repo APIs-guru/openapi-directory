@@ -52,6 +52,48 @@ tags:
   - description: formula rendering
     name: Math
 paths:
+  /feed/availability:
+    get:
+      description: |
+        Gets availability of featured feed content for the apps by wiki domain.
+
+        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
+      produces:
+        - 'application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Availability/1.0.1"'
+        - application/problem+json
+      responses:
+        '200':
+          description: JSON containing lists of wiki domains for which feed content is available.
+          schema:
+            $ref: '#/definitions/availability'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Gets availability of featured feed content for the apps by wiki domain.
+      tags:
+        - Feed content availability
+      x-amples:
+        - request:
+            params:
+              domain: wikimedia.org
+          response:
+            body:
+              in_the_news:
+                - /.+/
+              most_read:
+                - '*'
+              on_this_day:
+                - /.+/
+              picture_of_the_day:
+                - '*'
+              todays_featured_article:
+                - /.+/
+            headers:
+              content-type: application/json
+            status: 200
+          title: Retrieve feed content availability
+      x-monitor: true
   '/media/math/check/{type}':
     post:
       description: |
@@ -81,6 +123,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: Information about the checked formula
@@ -129,6 +172,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: Information about the checked formula
@@ -174,6 +218,7 @@ paths:
         - image/svg+xml
         - application/mathml+xml
         - image/png
+        - application/problem+json
       responses:
         '200':
           description: The rendered formula
@@ -198,7 +243,7 @@ paths:
         between daily and monthly granularity as well.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-        - Rate limit: 100 req/s
+        - Rate limit: 25 req/s
         - License: Data accessible via this endpoint is available under the
           [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
@@ -262,6 +307,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -286,7 +332,7 @@ paths:
         daily and monthly granularity as well.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-        - Rate limit: 100 req/s
+        - Rate limit: 25 req/s
         - License: Data accessible via this endpoint is available under the
           [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
@@ -350,6 +396,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -373,7 +420,7 @@ paths:
         granularity as well.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-        - Rate limit: 100 req/s
+        - Rate limit: 25 req/s
         - License: Data accessible via this endpoint is available under the
           [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
@@ -451,6 +498,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -476,7 +524,7 @@ paths:
         for the chosen filters.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-        - Rate limit: 100 req/s
+        - Rate limit: 25 req/s
         - License: Data accessible via this endpoint is available under the
           [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
@@ -541,6 +589,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -563,7 +612,7 @@ paths:
         choose between daily and monthly granularity as well.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-        - Rate limit: 100 req/s
+        - Rate limit: 25 req/s
         - License: Data accessible via this endpoint is available under the
           [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
@@ -626,6 +675,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -648,7 +698,7 @@ paths:
         between daily and monthly granularity as well.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-        - Rate limit: 100 req/s
+        - Rate limit: 25 req/s
         - License: Data accessible via this endpoint is available under the
           [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
@@ -711,6 +761,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -733,7 +784,7 @@ paths:
         choose between daily and monthly granularity as well.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-        - Rate limit: 100 req/s
+        - Rate limit: 25 req/s
         - License: Data accessible via this endpoint is available under the
           [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
@@ -796,6 +847,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -819,7 +871,7 @@ paths:
         granularity as well.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-        - Rate limit: 100 req/s
+        - Rate limit: 25 req/s
         - License: Data accessible via this endpoint is available under the
           [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
@@ -897,6 +949,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -920,7 +973,7 @@ paths:
         mediawiki user_id if user is registered, or his/her IP if the user is anonymous.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-        - Rate limit: 100 req/s
+        - Rate limit: 25 req/s
         - License: Data accessible via this endpoint is available under the
           [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
@@ -983,6 +1036,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1006,7 +1060,7 @@ paths:
         mediawiki user_id if user is registered, or his/her IP if the user is anonymous.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-        - Rate limit: 100 req/s
+        - Rate limit: 25 req/s
         - License: Data accessible via this endpoint is available under the
           [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
@@ -1069,6 +1123,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1092,7 +1147,7 @@ paths:
         user_id if user is registered, or his/her IP if the user is anonymous.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-        - Rate limit: 100 req/s
+        - Rate limit: 25 req/s
         - License: Data accessible via this endpoint is available under the
           [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
@@ -1155,6 +1210,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1177,7 +1233,7 @@ paths:
         monthly granularity as well.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-        - Rate limit: 100 req/s
+        - Rate limit: 25 req/s
         - License: Data accessible via this endpoint is available under the
           [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
@@ -1242,6 +1298,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1310,6 +1367,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1388,6 +1446,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1497,6 +1556,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1553,6 +1613,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of top countries by pageviews in the project
@@ -1615,6 +1676,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of top articles in the project
@@ -1636,7 +1698,7 @@ paths:
         users value is computed with self-created users only, not auto-login created ones.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-        - Rate limit: 100 req/s
+        - Rate limit: 25 req/s
         - License: Data accessible via this endpoint is available under the
           [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
@@ -1673,6 +1735,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1738,6 +1801,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The list of values
@@ -1780,6 +1844,7 @@ paths:
           x-textarea: true
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The translated content
@@ -1831,6 +1896,7 @@ paths:
           x-textarea: true
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: The translated content
@@ -1880,6 +1946,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: the list of tools available for the language pair
@@ -1893,7 +1960,7 @@ paths:
       tags:
         - Transform
       x-monitor: false
-  '/transform/list/tool/{tool}/':
+  '/transform/list/tool/{tool}':
     get:
       description: |
         Fetches the list of tools and all of the language pairs it can translate
@@ -1910,6 +1977,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: the list of language pairs available for a given translation tool
@@ -1923,6 +1991,86 @@ paths:
       tags:
         - Transform
       x-monitor: false
+    parameters: []
+  '/transform/list/tool/{tool}/{from}':
+    get:
+      description: |
+        Fetches the list of tools and all of the language pairs it can translate
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+      parameters:
+        - description: The tool category to list tools and language pairs for
+          enum:
+            - mt
+            - dictionary
+          in: path
+          name: tool
+          required: true
+          type: string
+        - description: The source language code
+          in: path
+          name: from
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/problem+json
+      responses:
+        '200':
+          description: the list of language pairs available for a given translation tool
+          schema:
+            $ref: '#/definitions/cx_list_pairs_for_tool'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Lists the tools and language pairs available for the given tool category
+      tags:
+        - Transform
+      x-monitor: false
+    parameters: []
+  '/transform/list/tool/{tool}/{from}/{to}':
+    get:
+      description: |
+        Fetches the list of tools and all of the language pairs it can translate
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+      parameters:
+        - description: The tool category to list tools and language pairs for
+          enum:
+            - mt
+            - dictionary
+          in: path
+          name: tool
+          required: true
+          type: string
+        - description: The source language code
+          in: path
+          name: from
+          required: true
+          type: string
+        - description: The target language code
+          in: path
+          name: to
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/problem+json
+      responses:
+        '200':
+          description: the list of language pairs available for a given translation tool
+          schema:
+            $ref: '#/definitions/cx_list_pairs_for_tool'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Lists the tools and language pairs available for the given tool category
+      tags:
+        - Transform
+      x-monitor: false
+    parameters: []
   '/transform/word/from/{from_lang}/to/{to_lang}/{word}':
     get:
       description: |
@@ -1948,6 +2096,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: the dictionary translation for the given word
@@ -1995,6 +2144,7 @@ paths:
           type: string
       produces:
         - application/json
+        - application/problem+json
       responses:
         '200':
           description: the dictionary translation for the given word
@@ -2033,6 +2183,41 @@ definitions:
                     type: string
               type: array
         type: array
+  availability:
+    additionalProperties: false
+    properties:
+      in_the_news:
+        description: 'domains for wikis with this feature enabled, or [ ''*.<project>.org'' ] for all wikis in a project'
+        items:
+          type: string
+        type: array
+      most_read:
+        description: 'domains for wikis with this feature enabled, or [ ''*.<project>.org'' ] for all wikis in a project'
+        items:
+          type: string
+        type: array
+      on_this_day:
+        description: 'domains for wikis with this feature enabled, or [ ''*.<project>.org'' ] for all wikis in a project'
+        items:
+          type: string
+        type: array
+      picture_of_the_day:
+        description: 'domains for wikis with this feature enabled, or [ ''*.<project>.org'' ] for all wikis in a project'
+        items:
+          type: string
+        type: array
+      todays_featured_article:
+        description: 'domains for wikis with this feature enabled, or [ ''*.<project>.org'' ] for all wikis in a project'
+        items:
+          type: string
+        type: array
+    required:
+      - todays_featured_article
+      - most_read
+      - picture_of_the_day
+      - in_the_news
+      - on_this_day
+    type: object
   by-country:
     properties:
       items:
@@ -2364,11 +2549,15 @@ definitions:
     properties:
       detail:
         type: string
-      instance:
+      method:
         type: string
+      status:
+        type: integer
       title:
         type: string
       type:
+        type: string
+      uri:
         type: string
     required:
       - type

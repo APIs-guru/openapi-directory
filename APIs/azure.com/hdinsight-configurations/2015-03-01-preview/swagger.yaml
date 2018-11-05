@@ -41,6 +41,27 @@ parameters:
     name: api-version
     required: true
     type: string
+  ClusterNameParameter:
+    description: The name of the cluster.
+    in: path
+    name: clusterName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ConfigurationNameParameter:
+    description: The name of the cluster configuration.
+    in: path
+    name: configurationName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupNameParameter:
+    description: The name of the resource group.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   SubscriptionIdParameter:
     description: The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
@@ -53,29 +74,27 @@ paths:
       description: The configuration object for the specified cluster.
       operationId: Configurations_Get
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
-        - description: The constant for configuration type of gateway.
-          in: path
-          name: configurationName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ConfigurationNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: OK response definition.
           schema:
-            additionalProperties:
-              type: string
+            $ref: '#/definitions/ClusterConfiguration'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
             type: object
       tags:
         - Configurations
@@ -97,34 +116,17 @@ paths:
       description: Configures the HTTP settings on the specified cluster.
       operationId: Configurations_UpdateHTTPSettings
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the cluster.
-          in: path
-          name: clusterName
-          required: true
-          type: string
-        - description: The constant for configuration type of gateway.
-          enum:
-            - gateway
-          in: path
-          name: configurationName
-          required: true
-          type: string
-          x-ms-enum:
-            modelAsString: false
-            name: ConfigurationName
-        - description: The name of the resource group.
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ConfigurationNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The cluster configurations.
           in: body
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/HttpConnectivitySettings'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+            $ref: '#/definitions/ClusterConfiguration'
       responses:
         '200':
           description: Ok response definition
@@ -132,6 +134,18 @@ paths:
           description: Accepted response definition
         '204':
           description: No content response definition
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Configurations
       x-ms-examples:
@@ -169,54 +183,8 @@ paths:
             '204': {}
       x-ms-long-running-operation: true
 definitions:
-  HttpConnectivitySettings:
-    description: The payload for a Configure HTTP settings request.
-    properties:
-      restAuthCredential.isEnabled:
-        description: Whether or not the HTTP based authorization is enabled.
-        enum:
-          - 'true'
-          - 'false'
-        type: string
-        x-ms-client-name: enabledCredential
-      restAuthCredential.password:
-        description: The HTTP user password.
-        format: password
-        type: string
-        x-ms-client-name: password
-      restAuthCredential.username:
-        description: The HTTP username.
-        type: string
-        x-ms-client-name: username
-  LinuxOperatingSystemProfile:
-    description: 'The ssh username, password, and ssh public key.'
-    properties:
-      password:
-        description: The password.
-        type: string
-      sshProfile:
-        $ref: '#/definitions/SshProfile'
-        description: The SSH profile.
-      username:
-        description: The username.
-        type: string
-  OsProfile:
-    description: The Linux operation systems profile.
-    properties:
-      linuxOperatingSystemProfile:
-        $ref: '#/definitions/LinuxOperatingSystemProfile'
-        description: The Linux OS profile.
-  SshProfile:
-    description: The list of SSH public keys.
-    properties:
-      publicKeys:
-        description: The list of SSH public keys.
-        items:
-          $ref: '#/definitions/SshPublicKey'
-        type: array
-  SshPublicKey:
-    description: The SSH public key for the cluster nodes.
-    properties:
-      certificateData:
-        description: The certificate for SSH.
-        type: string
+  ClusterConfiguration:
+    additionalProperties:
+      type: string
+    description: The configuration object for the specified configuration for the specified cluster.
+    type: object

@@ -97,6 +97,7 @@ paths:
                     name: recoverabledatabasetest-1235
                     properties:
                       edition: Standard
+                      elasticPoolName: null
                       lastAvailableBackupDate: '2017-05-26T01:06:29.78Z'
                       serviceLevelObjective: S0
                     type: Microsoft.Sql/servers/recoverabledatabases
@@ -104,6 +105,7 @@ paths:
                     name: recoverabledatabasetest-9231
                     properties:
                       edition: Premium
+                      elasticPoolName: null
                       lastAvailableBackupDate: '2017-05-26T03:20:31.78Z'
                       serviceLevelObjective: P1
                     type: Microsoft.Sql/servers/recoverabledatabases
@@ -111,6 +113,7 @@ paths:
                     name: recoverabledatabasetest-0342
                     properties:
                       edition: Basic
+                      elasticPoolName: null
                       lastAvailableBackupDate: '2017-05-24T02:06:18.78Z'
                       serviceLevelObjective: Basic
                     type: Microsoft.Sql/servers/recoverabledatabases
@@ -151,6 +154,7 @@ paths:
                 name: recoverabledatabasetest-9187
                 properties:
                   edition: Basic
+                  elasticPoolName: null
                   lastAvailableBackupDate: '2017-05-26T01:06:29.78Z'
                   serviceLevelObjective: Basic
                 type: Microsoft.Sql/servers/recoverabledatabases
@@ -190,6 +194,7 @@ paths:
                       deletionDate: '2017-05-27T02:49:47.69Z'
                       earliestRestoreDate: '2017-05-20T02:49:47.69Z'
                       edition: Basic
+                      elasticPoolName: null
                       maxSizeBytes: '2147483648'
                       serviceLevelObjective: Basic
                     type: Microsoft.Sql/servers/restorableDroppedDatabases
@@ -202,6 +207,7 @@ paths:
                       deletionDate: '2017-05-27T02:16:08.403Z'
                       earliestRestoreDate: '2017-04-21T02:49:47.69Z'
                       edition: Standard
+                      elasticPoolName: null
                       maxSizeBytes: '268435456000'
                       serviceLevelObjective: S0
                     type: Microsoft.Sql/servers/restorableDroppedDatabases
@@ -247,17 +253,33 @@ paths:
                   deletionDate: '2017-05-27T02:49:47.69Z'
                   earliestRestoreDate: '2017-05-20T02:49:47.69Z'
                   edition: Basic
+                  elasticPoolName: null
                   maxSizeBytes: '2147483648'
                   serviceLevelObjective: Basic
                 type: Microsoft.Sql/servers/restorableDroppedDatabases
 definitions:
-  ProxyResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: ARM proxy resource.
   RecoverableDatabase:
     allOf:
-      - $ref: '#/definitions/ProxyResource'
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            type: object
+            x-ms-azure-resource: true
+        description: ARM proxy resource.
+        properties: {}
+        type: object
     description: A recoverable database
     properties:
       properties:
@@ -294,25 +316,28 @@ definitions:
         description: The service level objective name of the database
         readOnly: true
         type: string
-  Resource:
-    description: ARM resource.
-    properties:
-      id:
-        description: Resource ID.
-        readOnly: true
-        type: string
-      name:
-        description: Resource name.
-        readOnly: true
-        type: string
-      type:
-        description: Resource type.
-        readOnly: true
-        type: string
-    x-ms-azure-resource: true
   RestorableDroppedDatabase:
     allOf:
-      - $ref: '#/definitions/ProxyResource'
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            type: object
+            x-ms-azure-resource: true
+        description: ARM proxy resource.
+        properties: {}
+        type: object
     description: A restorable dropped database
     properties:
       location:
@@ -371,25 +396,3 @@ definitions:
         description: The service level objective name of the database
         readOnly: true
         type: string
-  TrackedResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: ARM tracked top level resource.
-    properties:
-      location:
-        description: Resource location.
-        type: string
-        x-ms-mutability:
-          - read
-          - create
-      tags:
-        additionalProperties:
-          type: string
-        description: Resource tags.
-        type: object
-        x-ms-mutability:
-          - read
-          - create
-          - update
-    required:
-      - location

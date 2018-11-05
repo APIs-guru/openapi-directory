@@ -3,7 +3,7 @@ info:
   version: '2013-06-30'
   x-release: v4
   title: AWS Storage Gateway
-  description: '<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization''s on-premises IT environment and AWS''s storage infrastructure. The service enables you to securely upload data to the AWS cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders">AWS Storage Gateway Required Request Headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests">Signing Requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses">Error Responses</a>: Provides reference information about AWS Storage Gateway errors.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region">AWS Storage Gateway Regions and Endpoints:</a> Provides a list of each region and endpoints available for use with AWS Storage Gateway. </p> </li> </ul> <note> <p>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href="https://aws.amazon.com/ec2/faqs/#longer-ids">Longer EC2 and EBS Resource IDs</a>.</p> <p> For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href="https://forums.aws.amazon.com/ann.jspa?annID=3557">Announcement: Heads-up – Longer AWS Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>'
+  description: '<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization''s on-premises IT environment and AWS''s storage infrastructure. The service enables you to securely upload data to the AWS cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders">AWS Storage Gateway Required Request Headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests">Signing Requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses">Error Responses</a>: Provides reference information about AWS Storage Gateway errors.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region">AWS Storage Gateway Regions and Endpoints:</a> Provides a list of each AWS region and endpoints available for use with AWS Storage Gateway. </p> </li> </ul> <note> <p>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href="https://aws.amazon.com/ec2/faqs/#longer-ids">Longer EC2 and EBS Resource IDs</a>. </p> <p> For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href="https://forums.aws.amazon.com/ann.jspa?annID=3557">Announcement: Heads-up – Longer AWS Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -102,7 +102,7 @@ paths:
   /:
     post:
       operationId: ActivateGateway
-      description: '<p>Activates the gateway you previously deployed on your host. For more information, see <a href="http://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedActivateGateway-common.html"> Activate the AWS Storage Gateway</a>. In the activation process, you specify information such as the region you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account; for more information, see <a>UpdateGatewayInformation</a>.</p> <note> <p>You must turn on the gateway VM before you can activate your gateway.</p> </note>'
+      description: '<p>Activates the gateway you previously deployed on your host. In the activation process, you specify information such as the region you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account; for more information, see <a>UpdateGatewayInformation</a>.</p> <note> <p>You must turn on the gateway VM before you can activate your gateway.</p> </note>'
       responses:
         '200':
           description: Success
@@ -366,7 +366,7 @@ paths:
   '/#CreateNFSFileShare':
     post:
       operationId: CreateNFSFileShare
-      description: '<p>Creates a file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using a Network File System (NFS) interface. This operation is only supported in the file gateway type.</p> <important> <p>File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. </p> <p>File gateway does not support creating hard or symbolic links on a file share.</p> </important>'
+      description: '<p>Creates a Network File System (NFS) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using a NFS interface. This operation is only supported for file gateways.</p> <important> <p>File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. </p> <p>File gateway does not support creating hard or symbolic links on a file share.</p> </important>'
       responses:
         '200':
           description: Success
@@ -386,6 +386,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateNFSFileShareInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateSMBFileShare':
+    post:
+      operationId: CreateSMBFileShare
+      description: '<p>Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway expose file shares using a SMB interface. This operation is only supported for file gateways.</p> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide.</i> </p> <p>File gateways don''t support creating hard or symbolic links on a file share.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSMBFileShareOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSMBFileShareInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -638,7 +671,7 @@ paths:
   '/#DeleteFileShare':
     post:
       operationId: DeleteFileShare
-      description: Deletes a file share from a file gateway. This operation is only supported in the file gateway type.
+      description: Deletes a file share from a file gateway. This operation is only supported for file gateways.
       responses:
         '200':
           description: Success
@@ -1034,7 +1067,7 @@ paths:
   '/#DescribeNFSFileShares':
     post:
       operationId: DescribeNFSFileShares
-      description: Gets a description for one or more file shares from a file gateway. This operation is only supported in the file gateway type.
+      description: Gets a description for one or more Network File System (NFS) file shares from a file gateway. This operation is only supported for file gateways.
       responses:
         '200':
           description: Success
@@ -1054,6 +1087,72 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeNFSFileSharesInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSMBFileShares':
+    post:
+      operationId: DescribeSMBFileShares
+      description: Gets a description for one or more Server Message Block (SMB) file shares from a file gateway. This operation is only supported for file gateways.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSMBFileSharesOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSMBFileSharesInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSMBSettings':
+    post:
+      operationId: DescribeSMBSettings
+      description: Gets a description of a Server Message Block (SMB) file share settings from a file gateway. This operation is only supported for file gateways.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSMBSettingsOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSMBSettingsInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1401,10 +1500,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#JoinDomain':
+    post:
+      operationId: JoinDomain
+      description: Adds a file gateway to an Active Directory domain. This operation is only supported for file gateways that support the SMB file protocol.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/JoinDomainOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/JoinDomainInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListFileShares':
     post:
       operationId: ListFileShares
-      description: 'Gets a list of the file shares for a specific file gateway, or the list of file shares that belong to the calling user account. This operation is only supported in the file gateway type.'
+      description: 'Gets a list of the file shares for a specific file gateway, or the list of file shares that belong to the calling user account. This operation is only supported for file gateways.'
       responses:
         '200':
           description: Success
@@ -1688,7 +1820,7 @@ paths:
   '/#NotifyWhenUploaded':
     post:
       operationId: NotifyWhenUploaded
-      description: '<p>Sends you notification when all file data written to the NFS file share has been uploaded to Amazon S3.</p> <p>AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the NFS file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch event. You can configure CloudWatch Events to sent the notification through event targets such as email, SNS or a Lambda function. text or Lambda functions. This operation is only supported in the file gateway type.</p>'
+      description: '<p>Sends you notification through CloudWatch Events when all files written to your NFS file share have been uploaded to Amazon S3.</p> <p>AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the NFS file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or AWS Lambda function. This operation is only supported for file gateways.</p> <p>For more information, see Getting File Upload Notification in the Storage Gateway User Guide (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification). </p>'
       responses:
         '200':
           description: Success
@@ -1721,7 +1853,7 @@ paths:
   '/#RefreshCache':
     post:
       operationId: RefreshCache
-      description: 'Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket''s contents and cached the results. This operation is only supported in the file gateway type.'
+      description: 'Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket''s contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting Notified About File Operations</a>.'
       responses:
         '200':
           description: Success
@@ -1787,7 +1919,7 @@ paths:
   '/#ResetCache':
     post:
       operationId: ResetCache
-      description: '<p>Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume, tape and file gateway types.</p> <important> <p>If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly.</p> </important>'
+      description: '<p>Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume and tape types.</p> <important> <p>If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1906,6 +2038,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SetLocalConsolePasswordInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#SetSMBGuestPassword':
+    post:
+      operationId: SetSMBGuestPassword
+      description: Sets the password for the guest user <code>smbguest</code>. The <code>smbguest</code> user is the user when the authentication method for the file share is set to <code>GuestAccess</code>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SetSMBGuestPasswordOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SetSMBGuestPasswordInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2150,7 +2315,7 @@ paths:
   '/#UpdateNFSFileShare':
     post:
       operationId: UpdateNFSFileShare
-      description: '<p>Updates a file share. This operation is only supported in the file gateway type.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <p>Updates the following file share setting:</p> <ul> <li> <p>Default storage class for your S3 bucket</p> </li> <li> <p>Metadata defaults for your S3 bucket</p> </li> <li> <p>Allowed NFS clients for your file share</p> </li> <li> <p>Squash settings</p> </li> <li> <p>Write status of your file share</p> </li> </ul> <note> <p>To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways.</p> </note>'
+      description: '<p>Updates a Network File System (NFS) file share. This operation is only supported in the file gateway type.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <p>Updates the following file share setting:</p> <ul> <li> <p>Default storage class for your S3 bucket</p> </li> <li> <p>Metadata defaults for your S3 bucket</p> </li> <li> <p>Allowed NFS clients for your file share</p> </li> <li> <p>Squash settings</p> </li> <li> <p>Write status of your file share</p> </li> </ul> <note> <p>To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2170,6 +2335,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateNFSFileShareInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateSMBFileShare':
+    post:
+      operationId: UpdateSMBFileShare
+      description: '<p>Updates a Server Message Block (SMB) file share.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported for file gateways.</p> </note> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide.</i> </p> <p>File gateways don''t support creating hard or symbolic links on a file share.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSMBFileShareOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateSMBFileShareInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2247,6 +2445,14 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  ActivateGatewayOutput:
+    type: object
+    example:
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B'
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+    description: '<p>AWS Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It is a string made of information such as your account, gateway name, and region. This ARN is used to reference the gateway in other API operations as well as resource-based authorization.</p> <note> <p>For gateways activated prior to September 02, 2015, the gateway ARN contains the gateway name rather than the gateway ID. Changing the name of the gateway has no effect on the gateway ARN.</p> </note>'
   ActivateGatewayInput:
     type: object
     required:
@@ -2265,7 +2471,7 @@ definitions:
     properties:
       ActivationKey:
         $ref: '#/definitions/ActivationKey'
-        description: 'Your gateway activation key. You can obtain the activation key by sending an HTTP GET request with redirects enabled to the gateway IP address (port 80). The redirect URL returned in the response provides you the activation key for your gateway in the query string parameter <code>activationKey</code>. It may also include other activation-related parameters, however, these are merely defaults -- the arguments you pass to the <code>ActivateGateway</code> API call determine the actual configuration of your gateway.'
+        description: '<p>Your gateway activation key. You can obtain the activation key by sending an HTTP GET request with redirects enabled to the gateway IP address (port 80). The redirect URL returned in the response provides you the activation key for your gateway in the query string parameter <code>activationKey</code>. It may also include other activation-related parameters, however, these are merely defaults -- the arguments you pass to the <code>ActivateGateway</code> API call determine the actual configuration of your gateway. </p> <p>For more information, see https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html in the Storage Gateway User Guide.</p>'
       GatewayName:
         $ref: '#/definitions/GatewayName'
         description: The name you configured for your gateway.
@@ -2274,10 +2480,10 @@ definitions:
         description: 'A value that indicates the time zone you want to set for the gateway. The time zone is of the format "GMT-hr:mm" or "GMT+hr:mm". For example, GMT-4:00 indicates the time is 4 hours behind GMT. GMT+2:00 indicates the time is 2 hours ahead of GMT. The time zone is used, for example, for scheduling snapshots and your gateway''s maintenance schedule.'
       GatewayRegion:
         $ref: '#/definitions/RegionId'
-        description: '<p>A value that indicates the region where you want to store your data. The gateway region specified must be the same region as the region in your <code>Host</code> header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p> <p> Valid Values: "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1", "eu-west-2", "ap-northeast-1", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "sa-east-1"</p>'
+        description: '<p>A value that indicates the region where you want to store your data. The gateway region specified must be the same region as the region in your <code>Host</code> header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p> <p> Valid Values: "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1", "eu-west-2", "eu-west-3", "ap-northeast-1", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "sa-east-1"</p>'
       GatewayType:
         $ref: '#/definitions/GatewayType'
-        description: '<p>A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is <code>STORED</code>. </p> <p> Valid Values: "STORED", "CACHED", "VTL", "FILE_S3"</p>'
+        description: '<p>A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is <code>CACHED</code>. </p> <p> Valid Values: "STORED", "CACHED", "VTL", "FILE_S3"</p>'
       TapeDriveType:
         $ref: '#/definitions/TapeDriveType'
         description: '<p>The value that indicates the type of tape drive to use for tape gateway. This field is optional.</p> <p> Valid Values: "IBM-ULT3580-TD5" </p>'
@@ -2285,18 +2491,15 @@ definitions:
         $ref: '#/definitions/MediumChangerType'
         description: '<p>The value that indicates the type of medium changer to use for tape gateway. This field is optional.</p> <p> Valid Values: "STK-L700", "AWS-Gateway-VTL"</p>'
     description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>ActivateGatewayInput$ActivationKey</a> </p> </li> <li> <p> <a>ActivateGatewayInput$GatewayName</a> </p> </li> <li> <p> <a>ActivateGatewayInput$GatewayRegion</a> </p> </li> <li> <p> <a>ActivateGatewayInput$GatewayTimezone</a> </p> </li> <li> <p> <a>ActivateGatewayInput$GatewayType</a> </p> </li> <li> <p> <a>ActivateGatewayInput$TapeDriveType</a> </p> </li> <li> <p> <a>ActivateGatewayInput$MediumChangerType</a> </p> </li> </ul>'
-  ActivateGatewayOutput:
+  InvalidGatewayRequestException: {}
+  InternalServerError: {}
+  AddCacheOutput:
     type: object
     example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B'
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
-    description: '<p>AWS Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It is a string made of information such as your account, gateway name, and region. This ARN is used to reference the gateway in other API operations as well as resource-based authorization.</p> <note> <p>For gateways activated prior to September 02, 2015, the gateway ARN contains the gateway name rather than the gateway ID. Changing the name of the gateway has no effect on the gateway ARN.</p> </note>'
-  ActivationKey:
-    type: string
-    minLength: 1
-    maxLength: 50
   AddCacheInput:
     type: object
     required:
@@ -2312,13 +2515,15 @@ definitions:
         $ref: '#/definitions/GatewayARN'
       DiskIds:
         $ref: '#/definitions/DiskIds'
-  AddCacheOutput:
+  AddTagsToResourceOutput:
     type: object
     example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+      ResourceARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B'
     properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) of the resource you want to add tags to.
+    description: AddTagsToResourceOutput
   AddTagsToResourceInput:
     type: object
     required:
@@ -2337,15 +2542,13 @@ definitions:
         $ref: '#/definitions/Tags'
         description: '<p>The key-value pair that represents the tag you want to add to the resource. The value can be an empty string.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @.</p> </note>'
     description: AddTagsToResourceInput
-  AddTagsToResourceOutput:
+  AddUploadBufferOutput:
     type: object
     example:
-      ResourceARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B'
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
     properties:
-      ResourceARN:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the resource you want to add tags to.
-    description: AddTagsToResourceOutput
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
   AddUploadBufferInput:
     type: object
     required:
@@ -2361,13 +2564,14 @@ definitions:
         $ref: '#/definitions/GatewayARN'
       DiskIds:
         $ref: '#/definitions/DiskIds'
-  AddUploadBufferOutput:
+  AddWorkingStorageOutput:
     type: object
     example:
       GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
+    description: A JSON object containing the of the gateway for which working storage was configured.
   AddWorkingStorageInput:
     type: object
     required:
@@ -2385,65 +2589,15 @@ definitions:
         $ref: '#/definitions/DiskIds'
         description: An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.
     description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>AddWorkingStorageInput$DiskIds</a> </p> </li> </ul>'
-  AddWorkingStorageOutput:
+  CancelArchivalOutput:
     type: object
     example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+      TapeARN: 'arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4'
     properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the of the gateway for which working storage was configured.
-  BandwidthDownloadRateLimit:
-    type: integer
-    minimum: 102400
-  BandwidthType:
-    type: string
-    minLength: 3
-    maxLength: 25
-  BandwidthUploadRateLimit:
-    type: integer
-    minimum: 51200
-  Boolean:
-    type: boolean
-    description: 'A value that indicates whether the write status of a file share is read-only: "true" if write status is read-only, and otherwise "false".'
-  CachediSCSIVolume:
-    type: object
-    properties:
-      VolumeARN:
-        $ref: '#/definitions/VolumeARN'
-        description: The Amazon Resource Name (ARN) of the storage volume.
-      VolumeId:
-        $ref: '#/definitions/VolumeId'
-        description: 'The unique identifier of the volume, e.g. vol-AE4B946D.'
-      VolumeType:
-        $ref: '#/definitions/VolumeType'
-        description: One of the VolumeType enumeration values that describes the type of the volume.
-      VolumeStatus:
-        $ref: '#/definitions/VolumeStatus'
-        description: One of the VolumeStatus values that indicates the state of the storage volume.
-      VolumeSizeInBytes:
-        $ref: '#/definitions/long'
-        description: 'The size, in bytes, of the volume capacity.'
-      VolumeProgress:
-        $ref: '#/definitions/DoubleObject'
-        description: Represents the percentage complete if the volume is restoring or bootstrapping that represents the percent of data transferred. This field does not appear in the response if the cached volume is not restoring or bootstrapping.
-      SourceSnapshotId:
-        $ref: '#/definitions/SnapshotId'
-        description: 'If the cached volume was created from a snapshot, this field contains the snapshot ID used, e.g. snap-78e22663. Otherwise, this field is not included.'
-      VolumeiSCSIAttributes:
-        $ref: '#/definitions/VolumeiSCSIAttributes'
-        description: An <a>VolumeiSCSIAttributes</a> object that represents a collection of iSCSI attributes for one stored volume.
-      CreatedDate:
-        $ref: '#/definitions/CreatedDate'
-        description: 'The date the volume was created. Volumes created prior to March 28, 2017 don’t have this time stamp.'
-      VolumeUsedInBytes:
-        $ref: '#/definitions/VolumeUsedInBytes'
-        description: '<p>The size of the data stored on the volume in bytes.</p> <note> <p>This value is not available for volumes created prior to May 13, 2015, until you store data on the volume.</p> </note>'
-    description: Describes an iSCSI cached volume.
-  CachediSCSIVolumes:
-    type: array
-    items:
-      $ref: '#/definitions/CachediSCSIVolume'
+      TapeARN:
+        $ref: '#/definitions/TapeARN'
+        description: The Amazon Resource Name (ARN) of the virtual tape for which archiving was canceled.
+    description: CancelArchivalOutput
   CancelArchivalInput:
     type: object
     required:
@@ -2459,15 +2613,15 @@ definitions:
         $ref: '#/definitions/TapeARN'
         description: The Amazon Resource Name (ARN) of the virtual tape you want to cancel archiving for.
     description: CancelArchivalInput
-  CancelArchivalOutput:
+  CancelRetrievalOutput:
     type: object
     example:
       TapeARN: 'arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4'
     properties:
       TapeARN:
         $ref: '#/definitions/TapeARN'
-        description: The Amazon Resource Name (ARN) of the virtual tape for which archiving was canceled.
-    description: CancelArchivalOutput
+        description: The Amazon Resource Name (ARN) of the virtual tape for which retrieval was canceled.
+    description: CancelRetrievalOutput
   CancelRetrievalInput:
     type: object
     required:
@@ -2483,43 +2637,18 @@ definitions:
         $ref: '#/definitions/TapeARN'
         description: The Amazon Resource Name (ARN) of the virtual tape you want to cancel retrieval for.
     description: CancelRetrievalInput
-  CancelRetrievalOutput:
+  CreateCachediSCSIVolumeOutput:
     type: object
     example:
-      TapeARN: 'arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4'
+      TargetARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume'
+      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
     properties:
-      TapeARN:
-        $ref: '#/definitions/TapeARN'
-        description: The Amazon Resource Name (ARN) of the virtual tape for which retrieval was canceled.
-    description: CancelRetrievalOutput
-  ChapCredentials:
-    type: array
-    items:
-      $ref: '#/definitions/ChapInfo'
-  ChapInfo:
-    type: object
-    properties:
+      VolumeARN:
+        $ref: '#/definitions/VolumeARN'
+        description: The Amazon Resource Name (ARN) of the configured volume.
       TargetARN:
         $ref: '#/definitions/TargetARN'
-        description: '<p>The Amazon Resource Name (ARN) of the volume.</p> <p> Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).</p>'
-      SecretToAuthenticateInitiator:
-        $ref: '#/definitions/ChapSecret'
-        description: 'The secret key that the initiator (for example, the Windows client) must provide to participate in mutual CHAP with the target.'
-      InitiatorName:
-        $ref: '#/definitions/IqnName'
-        description: The iSCSI initiator that connects to the target.
-      SecretToAuthenticateTarget:
-        $ref: '#/definitions/ChapSecret'
-        description: The secret key that the target must provide to participate in mutual CHAP with the initiator (e.g. Windows client).
-    description: Describes Challenge-Handshake Authentication Protocol (CHAP) information that supports authentication between your gateway and iSCSI initiators.
-  ChapSecret:
-    type: string
-    minLength: 1
-    maxLength: 100
-  ClientToken:
-    type: string
-    minLength: 5
-    maxLength: 100
+        description: he Amazon Resource Name (ARN) of the volume target that includes the iSCSI name that initiators can use to connect to the target.
   CreateCachediSCSIVolumeInput:
     type: object
     required:
@@ -2540,27 +2669,35 @@ definitions:
         $ref: '#/definitions/GatewayARN'
       VolumeSizeInBytes:
         $ref: '#/definitions/long'
+        description: The size of the volume in bytes.
       SnapshotId:
         $ref: '#/definitions/SnapshotId'
+        description: 'The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new cached volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.'
       TargetName:
         $ref: '#/definitions/TargetName'
+        description: 'The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.'
       SourceVolumeARN:
         $ref: '#/definitions/VolumeARN'
         description: 'The ARN for an existing volume. Specifying this ARN makes the new volume into an exact copy of the specified existing volume''s latest recovery point. The <code>VolumeSizeInBytes</code> value for this new volume must be equal to or larger than the size of the existing volume, in bytes.'
       NetworkInterfaceId:
         $ref: '#/definitions/NetworkInterfaceId'
+        description: '<p>The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use <a>DescribeGatewayInformation</a> to get a list of the network interfaces available on a gateway.</p> <p> Valid Values: A valid IP address.</p>'
       ClientToken:
         $ref: '#/definitions/ClientToken'
-  CreateCachediSCSIVolumeOutput:
+        description: 'A unique identifier that you use to retry a request. If you retry a request, use the same <code>ClientToken</code> you specified in the initial request.'
+      KMSEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+  CreateNFSFileShareOutput:
     type: object
-    example:
-      TargetARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume'
-      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
     properties:
-      VolumeARN:
-        $ref: '#/definitions/VolumeARN'
-      TargetARN:
-        $ref: '#/definitions/TargetARN'
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+        description: 'The Amazon Resource Name (ARN) of the newly created file share. '
+    description: CreateNFSFileShareOutput
   CreateNFSFileShareInput:
     type: object
     required:
@@ -2583,7 +2720,7 @@ definitions:
         description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
       KMSKey:
         $ref: '#/definitions/KMSKey'
-        description: The KMS key used for Amazon S3 server side encryption. This value can only be set when KmsEncrypted is true. Optional.
+        description: The Amazon Resource Name (ARN) AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
       Role:
         $ref: '#/definitions/Role'
         description: 'The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes when it accesses the underlying storage. '
@@ -2592,53 +2729,97 @@ definitions:
         description: 'The ARN of the backed storage used for storing file data. '
       DefaultStorageClass:
         $ref: '#/definitions/StorageClass'
-        description: 'The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
+        description: 'The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are <code>S3_STANDARD</code>, <code>S3_STANDARD_IA</code>, or <code>S3_ONEZONE_IA</code>. If this field is not populated, the default value <code>S3_STANDARD</code> is used. Optional.'
+      ObjectACL:
+        $ref: '#/definitions/ObjectACL'
+        description: A value that sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
       ClientList:
         $ref: '#/definitions/FileShareClientList'
         description: 'The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks. '
       Squash:
         $ref: '#/definitions/Squash'
-        description: '<p>Maps a user to anonymous user. Valid options are the following: </p> <ul> <li> <p>"RootSquash" - Only root is mapped to anonymous user.</p> </li> <li> <p>"NoSquash" - No one is mapped to anonymous user.</p> </li> <li> <p>"AllSquash" - Everyone is mapped to anonymous user.</p> </li> </ul>'
+        description: '<p>Maps a user to anonymous user. Valid options are the following: </p> <ul> <li> <p> <code>RootSquash</code> - Only root is mapped to anonymous user.</p> </li> <li> <p> <code>NoSquash</code> - No one is mapped to anonymous user</p> </li> <li> <p> <code>AllSquash</code> - Everyone is mapped to anonymous user.</p> </li> </ul>'
       ReadOnly:
         $ref: '#/definitions/Boolean'
-        description: 'Sets the write status of a file share: "true" if the write status is read-only, and otherwise "false".'
+        description: 'A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.'
       GuessMIMETypeEnabled:
         $ref: '#/definitions/Boolean'
-        description: 'Enables guessing of the MIME type for uploaded objects based on file extensions: "true" to enable MIME type guessing, and otherwise "false".'
+        description: 'A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.'
+      RequesterPays:
+        $ref: '#/definitions/Boolean'
+        description: A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.
     description: CreateNFSFileShareInput
-  CreateNFSFileShareOutput:
+  CreateSMBFileShareOutput:
     type: object
     properties:
       FileShareARN:
         $ref: '#/definitions/FileShareARN'
         description: 'The Amazon Resource Name (ARN) of the newly created file share. '
-    description: CreateNFSFileShareOutput
-  CreateSnapshotFromVolumeRecoveryPointInput:
+    description: CreateSMBFileShareOutput
+  CreateSMBFileShareInput:
     type: object
     required:
-      - VolumeARN
-      - SnapshotDescription
-    example:
-      SnapshotDescription: 'My root volume snapshot as of 2017-06-30T10:10:10.000Z'
-      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
+      - ClientToken
+      - GatewayARN
+      - Role
+      - LocationARN
     properties:
-      VolumeARN:
-        $ref: '#/definitions/VolumeARN'
-      SnapshotDescription:
-        $ref: '#/definitions/SnapshotDescription'
-  CreateSnapshotFromVolumeRecoveryPointOutput:
+      ClientToken:
+        $ref: '#/definitions/ClientToken'
+        description: A unique string value that you supply that is used by file gateway to ensure idempotent file share creation.
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+        description: The Amazon Resource Name (ARN) of the file gateway on which you want to create a file share.
+      KMSEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+      Role:
+        $ref: '#/definitions/Role'
+        description: 'The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes when it accesses the underlying storage. '
+      LocationARN:
+        $ref: '#/definitions/LocationARN'
+        description: 'The ARN of the backed storage used for storing file data. '
+      DefaultStorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: 'The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are <code>S3_STANDARD</code>, <code>S3_STANDARD_IA</code>, or <code>S3_ONEZONE_IA</code>. If this field is not populated, the default value <code>S3_STANDARD</code> is used. Optional.'
+      ObjectACL:
+        $ref: '#/definitions/ObjectACL'
+        description: A value that sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
+      ReadOnly:
+        $ref: '#/definitions/Boolean'
+        description: 'A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.'
+      GuessMIMETypeEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.'
+      RequesterPays:
+        $ref: '#/definitions/Boolean'
+        description: A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.
+      ValidUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
+      InvalidUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
+      Authentication:
+        $ref: '#/definitions/Authentication'
+        description: <p>The authentication method that users use to access the file share.</p> <p>Valid values are <code>ActiveDirectory</code> or <code>GuestAccess</code>. The default is <code>ActiveDirectory</code>.</p>
+    description: CreateSMBFileShareInput
+  CreateSnapshotOutput:
     type: object
     example:
       SnapshotId: snap-78e22663
       VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
-      VolumeRecoveryPointTime: '2017-06-30T10:10:10.000Z'
     properties:
-      SnapshotId:
-        $ref: '#/definitions/SnapshotId'
       VolumeARN:
         $ref: '#/definitions/VolumeARN'
-      VolumeRecoveryPointTime:
-        $ref: '#/definitions/string'
+        description: The Amazon Resource Name (ARN) of the volume of which the snapshot was taken.
+      SnapshotId:
+        $ref: '#/definitions/SnapshotId'
+        description: The snapshot ID that is used to refer to the snapshot in future operations such as describing snapshots (Amazon Elastic Compute Cloud API <code>DescribeSnapshots</code>) or creating a volume from a snapshot (<a>CreateStorediSCSIVolume</a>).
+    description: 'A JSON object containing the following fields:'
   CreateSnapshotInput:
     type: object
     required:
@@ -2655,18 +2836,49 @@ definitions:
         $ref: '#/definitions/SnapshotDescription'
         description: 'Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the <b>Description</b> field, and in the AWS Storage Gateway snapshot <b>Details</b> pane, <b>Description</b> field'
     description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>CreateSnapshotInput$SnapshotDescription</a> </p> </li> <li> <p> <a>CreateSnapshotInput$VolumeARN</a> </p> </li> </ul>'
-  CreateSnapshotOutput:
+  ServiceUnavailableError: {}
+  CreateSnapshotFromVolumeRecoveryPointOutput:
     type: object
     example:
       SnapshotId: snap-78e22663
       VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
+      VolumeRecoveryPointTime: '2017-06-30T10:10:10.000Z'
+    properties:
+      SnapshotId:
+        $ref: '#/definitions/SnapshotId'
+      VolumeARN:
+        $ref: '#/definitions/VolumeARN'
+      VolumeRecoveryPointTime:
+        $ref: '#/definitions/string'
+  CreateSnapshotFromVolumeRecoveryPointInput:
+    type: object
+    required:
+      - VolumeARN
+      - SnapshotDescription
+    example:
+      SnapshotDescription: 'My root volume snapshot as of 2017-06-30T10:10:10.000Z'
+      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
     properties:
       VolumeARN:
         $ref: '#/definitions/VolumeARN'
-        description: The Amazon Resource Name (ARN) of the volume of which the snapshot was taken.
-      SnapshotId:
-        $ref: '#/definitions/SnapshotId'
-        description: The snapshot ID that is used to refer to the snapshot in future operations such as describing snapshots (Amazon Elastic Compute Cloud API <code>DescribeSnapshots</code>) or creating a volume from a snapshot (<a>CreateStorediSCSIVolume</a>).
+      SnapshotDescription:
+        $ref: '#/definitions/SnapshotDescription'
+  CreateStorediSCSIVolumeOutput:
+    type: object
+    example:
+      TargetARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume'
+      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
+      VolumeSizeInBytes: 1099511627776
+    properties:
+      VolumeARN:
+        $ref: '#/definitions/VolumeARN'
+        description: The Amazon Resource Name (ARN) of the configured volume.
+      VolumeSizeInBytes:
+        $ref: '#/definitions/long'
+        description: The size of the volume in bytes.
+      TargetARN:
+        $ref: '#/definitions/TargetARN'
+        description: he Amazon Resource Name (ARN) of the volume target that includes the iSCSI name that initiators can use to connect to the target.
     description: 'A JSON object containing the following fields:'
   CreateStorediSCSIVolumeInput:
     type: object
@@ -2701,24 +2913,22 @@ definitions:
       NetworkInterfaceId:
         $ref: '#/definitions/NetworkInterfaceId'
         description: '<p>The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use <a>DescribeGatewayInformation</a> to get a list of the network interfaces available on a gateway.</p> <p> Valid Values: A valid IP address.</p>'
+      KMSEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
     description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>CreateStorediSCSIVolumeInput$DiskId</a> </p> </li> <li> <p> <a>CreateStorediSCSIVolumeInput$NetworkInterfaceId</a> </p> </li> <li> <p> <a>CreateStorediSCSIVolumeInput$PreserveExistingData</a> </p> </li> <li> <p> <a>CreateStorediSCSIVolumeInput$SnapshotId</a> </p> </li> <li> <p> <a>CreateStorediSCSIVolumeInput$TargetName</a> </p> </li> </ul>'
-  CreateStorediSCSIVolumeOutput:
+  CreateTapeWithBarcodeOutput:
     type: object
     example:
-      TargetARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume'
-      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
-      VolumeSizeInBytes: 1099511627776
+      TapeARN: 'arn:aws:storagegateway:us-east-1:999999999999:tape/TEST12345'
     properties:
-      VolumeARN:
-        $ref: '#/definitions/VolumeARN'
-        description: The Amazon Resource Name (ARN) of the configured volume.
-      VolumeSizeInBytes:
-        $ref: '#/definitions/long'
-        description: The size of the volume in bytes.
-      TargetARN:
-        $ref: '#/definitions/TargetARN'
-        description: he Amazon Resource Name (ARN) of the volume target that includes the iSCSI name that initiators can use to connect to the target.
-    description: 'A JSON object containing the following fields:'
+      TapeARN:
+        $ref: '#/definitions/TapeARN'
+        description: A unique Amazon Resource Name (ARN) that represents the virtual tape that was created.
+    description: CreateTapeOutput
   CreateTapeWithBarcodeInput:
     type: object
     required:
@@ -2739,15 +2949,24 @@ definitions:
       TapeBarcode:
         $ref: '#/definitions/TapeBarcode'
         description: <p>The barcode that you want to assign to the tape.</p> <note> <p>Barcodes cannot be reused. This includes barcodes used for tapes that have been deleted.</p> </note>
+      KMSEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: The Amazon Resource Name (ARN) of the AWS KMS Key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
     description: CreateTapeWithBarcodeInput
-  CreateTapeWithBarcodeOutput:
+  CreateTapesOutput:
     type: object
     example:
-      TapeARN: 'arn:aws:storagegateway:us-east-1:999999999999:tape/TEST12345'
+      TapeARNs:
+        - 'arn:aws:storagegateway:us-east-1:999999999999:tape/TEST38A29D'
+        - 'arn:aws:storagegateway:us-east-1:204469490176:tape/TEST3AA29F'
+        - 'arn:aws:storagegateway:us-east-1:204469490176:tape/TEST3BA29E'
     properties:
-      TapeARN:
-        $ref: '#/definitions/TapeARN'
-        description: A unique Amazon Resource Name (ARN) that represents the virtual tape that was created.
+      TapeARNs:
+        $ref: '#/definitions/TapeARNs'
+        description: A list of unique Amazon Resource Names (ARNs) that represents the virtual tapes that were created.
     description: CreateTapeOutput
   CreateTapesInput:
     type: object
@@ -2779,26 +2998,21 @@ definitions:
       TapeBarcodePrefix:
         $ref: '#/definitions/TapeBarcodePrefix'
         description: <p>A prefix that you append to the barcode of the virtual tape you are creating. This prefix makes the barcode unique.</p> <note> <p>The prefix must be 1 to 4 characters in length and must be one of the uppercase letters from A to Z.</p> </note>
+      KMSEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
     description: CreateTapesInput
-  CreateTapesOutput:
+  DeleteBandwidthRateLimitOutput:
     type: object
     example:
-      TapeARNs:
-        - 'arn:aws:storagegateway:us-east-1:999999999999:tape/TEST38A29D'
-        - 'arn:aws:storagegateway:us-east-1:204469490176:tape/TEST3AA29F'
-        - 'arn:aws:storagegateway:us-east-1:204469490176:tape/TEST3BA29E'
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
     properties:
-      TapeARNs:
-        $ref: '#/definitions/TapeARNs'
-        description: A list of unique Amazon Resource Names (ARNs) that represents the virtual tapes that were created.
-    description: CreateTapeOutput
-  CreatedDate:
-    type: string
-    format: date-time
-  DayOfWeek:
-    type: integer
-    minimum: 0
-    maximum: 6
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+    description: A JSON object containing the of the gateway whose bandwidth rate information was deleted.
   DeleteBandwidthRateLimitInput:
     type: object
     required:
@@ -2814,14 +3028,19 @@ definitions:
         $ref: '#/definitions/BandwidthType'
         description: '<p>One of the BandwidthType values that indicates the gateway bandwidth rate limit to delete.</p> <p>Valid Values: <code>Upload</code>, <code>Download</code>, <code>All</code>.</p>'
     description: '<p>A JSON object containing the following fields:</p> <ul> <li> <p> <a>DeleteBandwidthRateLimitInput$BandwidthType</a> </p> </li> </ul>'
-  DeleteBandwidthRateLimitOutput:
+  DeleteChapCredentialsOutput:
     type: object
     example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+      InitiatorName: 'iqn.1991-05.com.microsoft:computername.domain.example.com'
+      TargetARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume'
     properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the of the gateway whose bandwidth rate information was deleted.
+      TargetARN:
+        $ref: '#/definitions/TargetARN'
+        description: The Amazon Resource Name (ARN) of the target.
+      InitiatorName:
+        $ref: '#/definitions/IqnName'
+        description: The iSCSI initiator that connects to the target.
+    description: 'A JSON object containing the following fields:'
   DeleteChapCredentialsInput:
     type: object
     required:
@@ -2838,19 +3057,13 @@ definitions:
         $ref: '#/definitions/IqnName'
         description: The iSCSI initiator that connects to the target.
     description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>DeleteChapCredentialsInput$InitiatorName</a> </p> </li> <li> <p> <a>DeleteChapCredentialsInput$TargetARN</a> </p> </li> </ul>'
-  DeleteChapCredentialsOutput:
+  DeleteFileShareOutput:
     type: object
-    example:
-      InitiatorName: 'iqn.1991-05.com.microsoft:computername.domain.example.com'
-      TargetARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume'
     properties:
-      TargetARN:
-        $ref: '#/definitions/TargetARN'
-        description: The Amazon Resource Name (ARN) of the target.
-      InitiatorName:
-        $ref: '#/definitions/IqnName'
-        description: The iSCSI initiator that connects to the target.
-    description: 'A JSON object containing the following fields:'
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+        description: 'The Amazon Resource Name (ARN) of the deleted file share. '
+    description: DeleteFileShareOutput
   DeleteFileShareInput:
     type: object
     required:
@@ -2863,13 +3076,14 @@ definitions:
         $ref: '#/definitions/boolean'
         description: 'If this value is set to true, the operation deletes a file share immediately and aborts all data uploads to AWS. Otherwise, the file share is not deleted until all data is uploaded to AWS. This process aborts the data upload process, and the file share enters the FORCE_DELETING status.'
     description: DeleteFileShareInput
-  DeleteFileShareOutput:
+  DeleteGatewayOutput:
     type: object
+    example:
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
     properties:
-      FileShareARN:
-        $ref: '#/definitions/FileShareARN'
-        description: 'The Amazon Resource Name (ARN) of the deleted file share. '
-    description: DeleteFileShareOutput
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+    description: A JSON object containing the ID of the deleted gateway.
   DeleteGatewayInput:
     type: object
     required:
@@ -2880,14 +3094,13 @@ definitions:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
     description: A JSON object containing the ID of the gateway to delete.
-  DeleteGatewayOutput:
+  DeleteSnapshotScheduleOutput:
     type: object
     example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
     properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the ID of the deleted gateway.
+      VolumeARN:
+        $ref: '#/definitions/VolumeARN'
   DeleteSnapshotScheduleInput:
     type: object
     required:
@@ -2897,33 +3110,15 @@ definitions:
     properties:
       VolumeARN:
         $ref: '#/definitions/VolumeARN'
-  DeleteSnapshotScheduleOutput:
-    type: object
-    example:
-      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
-    properties:
-      VolumeARN:
-        $ref: '#/definitions/VolumeARN'
-  DeleteTapeArchiveInput:
-    type: object
-    required:
-      - TapeARN
-    example:
-      TapeARN: 'arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0'
-    properties:
-      TapeARN:
-        $ref: '#/definitions/TapeARN'
-        description: The Amazon Resource Name (ARN) of the virtual tape to delete from the virtual tape shelf (VTS).
-    description: DeleteTapeArchiveInput
-  DeleteTapeArchiveOutput:
+  DeleteTapeOutput:
     type: object
     example:
       TapeARN: 'arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0'
     properties:
       TapeARN:
         $ref: '#/definitions/TapeARN'
-        description: The Amazon Resource Name (ARN) of the virtual tape that was deleted from the virtual tape shelf (VTS).
-    description: DeleteTapeArchiveOutput
+        description: The Amazon Resource Name (ARN) of the deleted virtual tape.
+    description: DeleteTapeOutput
   DeleteTapeInput:
     type: object
     required:
@@ -2940,15 +3135,35 @@ definitions:
         $ref: '#/definitions/TapeARN'
         description: The Amazon Resource Name (ARN) of the virtual tape to delete.
     description: DeleteTapeInput
-  DeleteTapeOutput:
+  DeleteTapeArchiveOutput:
     type: object
     example:
       TapeARN: 'arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0'
     properties:
       TapeARN:
         $ref: '#/definitions/TapeARN'
-        description: The Amazon Resource Name (ARN) of the deleted virtual tape.
-    description: DeleteTapeOutput
+        description: The Amazon Resource Name (ARN) of the virtual tape that was deleted from the virtual tape shelf (VTS).
+    description: DeleteTapeArchiveOutput
+  DeleteTapeArchiveInput:
+    type: object
+    required:
+      - TapeARN
+    example:
+      TapeARN: 'arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0'
+    properties:
+      TapeARN:
+        $ref: '#/definitions/TapeARN'
+        description: The Amazon Resource Name (ARN) of the virtual tape to delete from the virtual tape shelf (VTS).
+    description: DeleteTapeArchiveInput
+  DeleteVolumeOutput:
+    type: object
+    example:
+      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
+    properties:
+      VolumeARN:
+        $ref: '#/definitions/VolumeARN'
+        description: The Amazon Resource Name (ARN) of the storage volume that was deleted. It is the same ARN you provided in the request.
+    description: A JSON object containing the of the storage volume that was deleted
   DeleteVolumeInput:
     type: object
     required:
@@ -2960,25 +3175,6 @@ definitions:
         $ref: '#/definitions/VolumeARN'
         description: The Amazon Resource Name (ARN) of the volume. Use the <a>ListVolumes</a> operation to return a list of gateway volumes.
     description: A JSON object containing the <a>DeleteVolumeInput$VolumeARN</a> to delete.
-  DeleteVolumeOutput:
-    type: object
-    example:
-      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
-    properties:
-      VolumeARN:
-        $ref: '#/definitions/VolumeARN'
-        description: The Amazon Resource Name (ARN) of the storage volume that was deleted. It is the same ARN you provided in the request.
-    description: A JSON object containing the of the storage volume that was deleted
-  DescribeBandwidthRateLimitInput:
-    type: object
-    required:
-      - GatewayARN
-    example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the of the gateway.
   DescribeBandwidthRateLimitOutput:
     type: object
     example:
@@ -2995,7 +3191,7 @@ definitions:
         $ref: '#/definitions/BandwidthDownloadRateLimit'
         description: The average download bandwidth rate limit in bits per second. This field does not appear in the response if the download rate limit is not set.
     description: 'A JSON object containing the following fields:'
-  DescribeCacheInput:
+  DescribeBandwidthRateLimitInput:
     type: object
     required:
       - GatewayARN
@@ -3004,6 +3200,7 @@ definitions:
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
+    description: A JSON object containing the of the gateway.
   DescribeCacheOutput:
     type: object
     example:
@@ -3031,16 +3228,15 @@ definitions:
         $ref: '#/definitions/double'
       CacheMissPercentage:
         $ref: '#/definitions/double'
-  DescribeCachediSCSIVolumesInput:
+  DescribeCacheInput:
     type: object
     required:
-      - VolumeARNs
+      - GatewayARN
     example:
-      VolumeARNs:
-        - 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
     properties:
-      VolumeARNs:
-        $ref: '#/definitions/VolumeARNs'
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
   DescribeCachediSCSIVolumesOutput:
     type: object
     example:
@@ -3061,17 +3257,16 @@ definitions:
         $ref: '#/definitions/CachediSCSIVolumes'
         description: An array of objects where each object contains metadata about one cached volume.
     description: 'A JSON object containing the following fields:'
-  DescribeChapCredentialsInput:
+  DescribeCachediSCSIVolumesInput:
     type: object
     required:
-      - TargetARN
+      - VolumeARNs
     example:
-      TargetARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume'
+      VolumeARNs:
+        - 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
     properties:
-      TargetARN:
-        $ref: '#/definitions/TargetARN'
-        description: The Amazon Resource Name (ARN) of the iSCSI volume target. Use the <a>DescribeStorediSCSIVolumes</a> operation to return to retrieve the TargetARN for specified VolumeARN.
-    description: A JSON object containing the Amazon Resource Name (ARN) of the iSCSI volume target.
+      VolumeARNs:
+        $ref: '#/definitions/VolumeARNs'
   DescribeChapCredentialsOutput:
     type: object
     example:
@@ -3085,16 +3280,17 @@ definitions:
         $ref: '#/definitions/ChapCredentials'
         description: '<p>An array of <a>ChapInfo</a> objects that represent CHAP credentials. Each object in the array contains CHAP credential information for one target-initiator pair. If no CHAP credentials are set, an empty array is returned. CHAP credential information is provided in a JSON object with the following fields:</p> <ul> <li> <p> <b>InitiatorName</b>: The iSCSI initiator that connects to the target.</p> </li> <li> <p> <b>SecretToAuthenticateInitiator</b>: The secret key that the initiator (for example, the Windows client) must provide to participate in mutual CHAP with the target.</p> </li> <li> <p> <b>SecretToAuthenticateTarget</b>: The secret key that the target must provide to participate in mutual CHAP with the initiator (e.g. Windows client).</p> </li> <li> <p> <b>TargetARN</b>: The Amazon Resource Name (ARN) of the storage volume.</p> </li> </ul>'
     description: A JSON object containing a .
-  DescribeGatewayInformationInput:
+  DescribeChapCredentialsInput:
     type: object
     required:
-      - GatewayARN
+      - TargetARN
     example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+      TargetARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume'
     properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the ID of the gateway.
+      TargetARN:
+        $ref: '#/definitions/TargetARN'
+        description: The Amazon Resource Name (ARN) of the iSCSI volume target. Use the <a>DescribeStorediSCSIVolumes</a> operation to return to retrieve the TargetARN for specified VolumeARN.
+    description: A JSON object containing the Amazon Resource Name (ARN) of the iSCSI volume target.
   DescribeGatewayInformationOutput:
     type: object
     example:
@@ -3136,7 +3332,7 @@ definitions:
         $ref: '#/definitions/LastSoftwareUpdate'
         description: 'The date on which the last software update was applied to the gateway. If the gateway has never been updated, this field does not return a value in the response.'
     description: 'A JSON object containing the following fields:'
-  DescribeMaintenanceStartTimeInput:
+  DescribeGatewayInformationInput:
     type: object
     required:
       - GatewayARN
@@ -3145,7 +3341,7 @@ definitions:
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the of the gateway.
+    description: A JSON object containing the ID of the gateway.
   DescribeMaintenanceStartTimeOutput:
     type: object
     example:
@@ -3169,6 +3365,23 @@ definitions:
       Timezone:
         $ref: '#/definitions/GatewayTimezone'
     description: '<p>A JSON object containing the following fields:</p> <ul> <li> <p> <a>DescribeMaintenanceStartTimeOutput$DayOfWeek</a> </p> </li> <li> <p> <a>DescribeMaintenanceStartTimeOutput$HourOfDay</a> </p> </li> <li> <p> <a>DescribeMaintenanceStartTimeOutput$MinuteOfHour</a> </p> </li> <li> <p> <a>DescribeMaintenanceStartTimeOutput$Timezone</a> </p> </li> </ul>'
+  DescribeMaintenanceStartTimeInput:
+    type: object
+    required:
+      - GatewayARN
+    example:
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+    description: A JSON object containing the of the gateway.
+  DescribeNFSFileSharesOutput:
+    type: object
+    properties:
+      NFSFileShareInfoList:
+        $ref: '#/definitions/NFSFileShareInfoList'
+        description: 'An array containing a description for each requested file share. '
+    description: DescribeNFSFileSharesOutput
   DescribeNFSFileSharesInput:
     type: object
     required:
@@ -3178,24 +3391,40 @@ definitions:
         $ref: '#/definitions/FileShareARNList'
         description: 'An array containing the Amazon Resource Name (ARN) of each file share to be described. '
     description: DescribeNFSFileSharesInput
-  DescribeNFSFileSharesOutput:
+  DescribeSMBFileSharesOutput:
     type: object
     properties:
-      NFSFileShareInfoList:
-        $ref: '#/definitions/NFSFileShareInfoList'
+      SMBFileShareInfoList:
+        $ref: '#/definitions/SMBFileShareInfoList'
         description: 'An array containing a description for each requested file share. '
-    description: DescribeNFSFileSharesOutput
-  DescribeSnapshotScheduleInput:
+    description: DescribeSMBFileSharesOutput
+  DescribeSMBFileSharesInput:
     type: object
     required:
-      - VolumeARN
-    example:
-      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
+      - FileShareARNList
     properties:
-      VolumeARN:
-        $ref: '#/definitions/VolumeARN'
-        description: The Amazon Resource Name (ARN) of the volume. Use the <a>ListVolumes</a> operation to return a list of gateway volumes.
-    description: A JSON object containing the <a>DescribeSnapshotScheduleInput$VolumeARN</a> of the volume.
+      FileShareARNList:
+        $ref: '#/definitions/FileShareARNList'
+        description: 'An array containing the Amazon Resource Name (ARN) of each file share to be described. '
+    description: DescribeSMBFileSharesInput
+  DescribeSMBSettingsOutput:
+    type: object
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain that the gateway is joined to.
+      SMBGuestPasswordSet:
+        $ref: '#/definitions/Boolean'
+        description: 'This value is true if a password for the guest user “smbguest” is set, and otherwise false.'
+  DescribeSMBSettingsInput:
+    type: object
+    required:
+      - GatewayARN
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
   DescribeSnapshotScheduleOutput:
     type: object
     example:
@@ -3215,18 +3444,17 @@ definitions:
         $ref: '#/definitions/Description'
       Timezone:
         $ref: '#/definitions/GatewayTimezone'
-  DescribeStorediSCSIVolumesInput:
+  DescribeSnapshotScheduleInput:
     type: object
     required:
-      - VolumeARNs
+      - VolumeARN
     example:
-      VolumeARNs:
-        - 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
+      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
     properties:
-      VolumeARNs:
-        $ref: '#/definitions/VolumeARNs'
-        description: An array of strings where each string represents the Amazon Resource Name (ARN) of a stored volume. All of the specified stored volumes must from the same gateway. Use <a>ListVolumes</a> to get volume ARNs for a gateway.
-    description: A JSON object containing a list of <a>DescribeStorediSCSIVolumesInput$VolumeARNs</a>.
+      VolumeARN:
+        $ref: '#/definitions/VolumeARN'
+        description: The Amazon Resource Name (ARN) of the volume. Use the <a>ListVolumes</a> operation to return a list of gateway volumes.
+    description: A JSON object containing the <a>DescribeSnapshotScheduleInput$VolumeARN</a> of the volume.
   DescribeStorediSCSIVolumesOutput:
     type: object
     example:
@@ -3246,6 +3474,41 @@ definitions:
     properties:
       StorediSCSIVolumes:
         $ref: '#/definitions/StorediSCSIVolumes'
+  DescribeStorediSCSIVolumesInput:
+    type: object
+    required:
+      - VolumeARNs
+    example:
+      VolumeARNs:
+        - 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
+    properties:
+      VolumeARNs:
+        $ref: '#/definitions/VolumeARNs'
+        description: An array of strings where each string represents the Amazon Resource Name (ARN) of a stored volume. All of the specified stored volumes must from the same gateway. Use <a>ListVolumes</a> to get volume ARNs for a gateway.
+    description: A JSON object containing a list of <a>DescribeStorediSCSIVolumesInput$VolumeARNs</a>.
+  DescribeTapeArchivesOutput:
+    type: object
+    example:
+      Marker: '1'
+      TapeArchives:
+        - CompletionTime: '2016-12-16T13:50Z'
+          TapeARN: 'arn:aws:storagegateway:us-east-1:999999999:tape/AM08A1AD'
+          TapeBarcode: AM08A1AD
+          TapeSizeInBytes: 107374182400
+          TapeStatus: ARCHIVED
+        - CompletionTime: '2016-12-16T13:59Z'
+          TapeARN: 'arn:aws:storagegateway:us-east-1:999999999:tape/AMZN01A2A4'
+          TapeBarcode: AMZN01A2A4
+          TapeSizeInBytes: 429496729600
+          TapeStatus: ARCHIVED
+    properties:
+      TapeArchives:
+        $ref: '#/definitions/TapeArchives'
+        description: 'An array of virtual tape objects in the virtual tape shelf (VTS). The description includes of the Amazon Resource Name (ARN) of the virtual tapes. The information returned includes the Amazon Resource Names (ARNs) of the tapes, size of the tapes, status of the tapes, progress of the description and tape barcode.'
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: 'An opaque string that indicates the position at which the virtual tapes that were fetched for description ended. Use this marker in your next request to fetch the next set of virtual tapes in the virtual tape shelf (VTS). If there are no more virtual tapes to describe, this field does not appear in the response.'
+    description: DescribeTapeArchivesOutput
   DescribeTapeArchivesInput:
     type: object
     example:
@@ -3265,47 +3528,6 @@ definitions:
         $ref: '#/definitions/PositiveIntObject'
         description: Specifies that the number of virtual tapes descried be limited to the specified number.
     description: DescribeTapeArchivesInput
-  DescribeTapeArchivesOutput:
-    type: object
-    example:
-      Marker: '1'
-      TapeArchives:
-        - CompletionTime: '2016-12-16T13:50Z'
-          TapeARN: 'arn:aws:storagegateway:us-east-1:999999999:tape/AM08A1AD'
-          TapeBarcode: AM08A1AD
-          TapeSizeInBytes: 107374182400
-          TapeStatus: ARCHIVED
-        - CompletionTime: '2016-12-16T13:59Z'
-          TapeARN: 'arn:aws:storagegateway:us-east-1:999999999:tape/AMZN01A2A4'
-          TapeBarcode: AMZN01A2A4
-          TapeSizeInBytes: 429496729600
-          TapeStatus: ARCHIVED
-    properties:
-      TapeArchives:
-        $ref: '#/definitions/TapeArchives'
-        description: 'An array of virtual tape objects in the virtual tape shelf (VTS). The description includes of the Amazon Resource Name(ARN) of the virtual tapes. The information returned includes the Amazon Resource Names (ARNs) of the tapes, size of the tapes, status of the tapes, progress of the description and tape barcode.'
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: 'An opaque string that indicates the position at which the virtual tapes that were fetched for description ended. Use this marker in your next request to fetch the next set of virtual tapes in the virtual tape shelf (VTS). If there are no more virtual tapes to describe, this field does not appear in the response.'
-    description: DescribeTapeArchivesOutput
-  DescribeTapeRecoveryPointsInput:
-    type: object
-    required:
-      - GatewayARN
-    example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-      Limit: 1
-      Marker: '1'
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: An opaque string that indicates the position at which to begin describing the virtual tape recovery points.
-      Limit:
-        $ref: '#/definitions/PositiveIntObject'
-        description: Specifies that the number of virtual tape recovery points that are described be limited to the specified number.
-    description: DescribeTapeRecoveryPointsInput
   DescribeTapeRecoveryPointsOutput:
     type: object
     example:
@@ -3326,6 +3548,45 @@ definitions:
         $ref: '#/definitions/Marker'
         description: '<p>An opaque string that indicates the position at which the virtual tape recovery points that were listed for description ended.</p> <p>Use this marker in your next request to list the next set of virtual tape recovery points in the list. If there are no more recovery points to describe, this field does not appear in the response.</p>'
     description: DescribeTapeRecoveryPointsOutput
+  DescribeTapeRecoveryPointsInput:
+    type: object
+    required:
+      - GatewayARN
+    example:
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+      Limit: 1
+      Marker: '1'
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: An opaque string that indicates the position at which to begin describing the virtual tape recovery points.
+      Limit:
+        $ref: '#/definitions/PositiveIntObject'
+        description: Specifies that the number of virtual tape recovery points that are described be limited to the specified number.
+    description: DescribeTapeRecoveryPointsInput
+  DescribeTapesOutput:
+    type: object
+    example:
+      Marker: '1'
+      Tapes:
+        - TapeARN: 'arn:aws:storagegateway:us-east-1:999999999999:tape/TEST04A2A1'
+          TapeBarcode: TEST04A2A1
+          TapeSizeInBytes: 107374182400
+          TapeStatus: AVAILABLE
+        - TapeARN: 'arn:aws:storagegateway:us-east-1:999999999999:tape/TEST05A2A0'
+          TapeBarcode: TEST05A2A0
+          TapeSizeInBytes: 107374182400
+          TapeStatus: AVAILABLE
+    properties:
+      Tapes:
+        $ref: '#/definitions/Tapes'
+        description: An array of virtual tape descriptions.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: '<p>An opaque string which can be used as part of a subsequent DescribeTapes call to retrieve the next page of results.</p> <p>If a response does not contain a marker, then there are no more results to be retrieved.</p>'
+    description: DescribeTapesOutput
   DescribeTapesInput:
     type: object
     required:
@@ -3350,36 +3611,6 @@ definitions:
         $ref: '#/definitions/PositiveIntObject'
         description: '<p>Specifies that the number of virtual tapes described be limited to the specified number.</p> <note> <p>Amazon Web Services may impose its own limit, if this field is not set.</p> </note>'
     description: DescribeTapesInput
-  DescribeTapesOutput:
-    type: object
-    example:
-      Marker: '1'
-      Tapes:
-        - TapeARN: 'arn:aws:storagegateway:us-east-1:999999999999:tape/TEST04A2A1'
-          TapeBarcode: TEST04A2A1
-          TapeSizeInBytes: 107374182400
-          TapeStatus: AVAILABLE
-        - TapeARN: 'arn:aws:storagegateway:us-east-1:999999999999:tape/TEST05A2A0'
-          TapeBarcode: TEST05A2A0
-          TapeSizeInBytes: 107374182400
-          TapeStatus: AVAILABLE
-    properties:
-      Tapes:
-        $ref: '#/definitions/Tapes'
-        description: An array of virtual tape descriptions.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: '<p>An opaque string which can be used as part of a subsequent DescribeTapes call to retrieve the next page of results.</p> <p>If a response does not contain a marker, then there are no more results to be retrieved.</p>'
-    description: DescribeTapesOutput
-  DescribeUploadBufferInput:
-    type: object
-    required:
-      - GatewayARN
-    example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
   DescribeUploadBufferOutput:
     type: object
     example:
@@ -3398,28 +3629,15 @@ definitions:
         $ref: '#/definitions/long'
       UploadBufferAllocatedInBytes:
         $ref: '#/definitions/long'
-  DescribeVTLDevicesInput:
+  DescribeUploadBufferInput:
     type: object
     required:
       - GatewayARN
     example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B'
-      Limit: 123
-      Marker: '1'
-      VTLDeviceARNs: []
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
-      VTLDeviceARNs:
-        $ref: '#/definitions/VTLDeviceARNs'
-        description: '<p>An array of strings, where each string represents the Amazon Resource Name (ARN) of a VTL device.</p> <note> <p>All of the specified VTL devices must be from the same gateway. If no VTL devices are specified, the result will contain all devices on the specified gateway.</p> </note>'
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: An opaque string that indicates the position at which to begin describing the VTL devices.
-      Limit:
-        $ref: '#/definitions/PositiveIntObject'
-        description: Specifies that the number of VTL devices described be limited to the specified number.
-    description: DescribeVTLDevicesInput
   DescribeVTLDevicesOutput:
     type: object
     example:
@@ -3463,16 +3681,28 @@ definitions:
         $ref: '#/definitions/Marker'
         description: 'An opaque string that indicates the position at which the VTL devices that were fetched for description ended. Use the marker in your next request to fetch the next set of VTL devices in the list. If there are no more VTL devices to describe, this field does not appear in the response.'
     description: DescribeVTLDevicesOutput
-  DescribeWorkingStorageInput:
+  DescribeVTLDevicesInput:
     type: object
     required:
       - GatewayARN
     example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B'
+      Limit: 123
+      Marker: '1'
+      VTLDeviceARNs: []
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the of the gateway.
+      VTLDeviceARNs:
+        $ref: '#/definitions/VTLDeviceARNs'
+        description: '<p>An array of strings, where each string represents the Amazon Resource Name (ARN) of a VTL device.</p> <note> <p>All of the specified VTL devices must be from the same gateway. If no VTL devices are specified, the result will contain all devices on the specified gateway.</p> </note>'
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: An opaque string that indicates the position at which to begin describing the VTL devices.
+      Limit:
+        $ref: '#/definitions/PositiveIntObject'
+        description: Specifies that the number of VTL devices described be limited to the specified number.
+    description: DescribeVTLDevicesInput
   DescribeWorkingStorageOutput:
     type: object
     example:
@@ -3495,30 +3725,25 @@ definitions:
         $ref: '#/definitions/long'
         description: 'The total working storage in bytes allocated for the gateway. If no working storage is configured for the gateway, this field returns 0.'
     description: 'A JSON object containing the following fields:'
-  Description:
-    type: string
-    minLength: 1
-    maxLength: 255
-  DeviceType:
-    type: string
-    minLength: 2
-    maxLength: 50
-  DeviceiSCSIAttributes:
+  DescribeWorkingStorageInput:
     type: object
+    required:
+      - GatewayARN
+    example:
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
     properties:
-      TargetARN:
-        $ref: '#/definitions/TargetARN'
-        description: Specifies the unique Amazon Resource Name(ARN) that encodes the iSCSI qualified name(iqn) of a tape drive or media changer target.
-      NetworkInterfaceId:
-        $ref: '#/definitions/NetworkInterfaceId'
-        description: The network interface identifier of the VTL device.
-      NetworkInterfacePort:
-        $ref: '#/definitions/integer'
-        description: The port used to communicate with iSCSI VTL device targets.
-      ChapEnabled:
-        $ref: '#/definitions/boolean'
-        description: Indicates whether mutual CHAP is enabled for the iSCSI target.
-    description: Lists iSCSI information about a VTL device.
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+    description: A JSON object containing the of the gateway.
+  DisableGatewayOutput:
+    type: object
+    example:
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+        description: The unique Amazon Resource Name (ARN) of the disabled gateway.
+    description: DisableGatewayOutput
   DisableGatewayInput:
     type: object
     required:
@@ -3529,279 +3754,34 @@ definitions:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
     description: DisableGatewayInput
-  DisableGatewayOutput:
-    type: object
-    example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-        description: The unique Amazon Resource Name of the disabled gateway.
-    description: DisableGatewayOutput
-  Disk:
-    type: object
-    properties:
-      DiskId:
-        $ref: '#/definitions/DiskId'
-      DiskPath:
-        $ref: '#/definitions/string'
-      DiskNode:
-        $ref: '#/definitions/string'
-      DiskStatus:
-        $ref: '#/definitions/string'
-      DiskSizeInBytes:
-        $ref: '#/definitions/long'
-      DiskAllocationType:
-        $ref: '#/definitions/DiskAllocationType'
-      DiskAllocationResource:
-        $ref: '#/definitions/string'
-  DiskAllocationType:
-    type: string
-    minLength: 3
-    maxLength: 100
-  DiskId:
-    type: string
-    minLength: 1
-    maxLength: 300
-  DiskIds:
-    type: array
-    items:
-      $ref: '#/definitions/DiskId'
-  Disks:
-    type: array
-    items:
-      $ref: '#/definitions/Disk'
-  DoubleObject:
-    type: number
-    format: double
-  ErrorCode:
-    type: string
-    enum:
-      - ActivationKeyExpired
-      - ActivationKeyInvalid
-      - ActivationKeyNotFound
-      - GatewayInternalError
-      - GatewayNotConnected
-      - GatewayNotFound
-      - GatewayProxyNetworkConnectionBusy
-      - AuthenticationFailure
-      - BandwidthThrottleScheduleNotFound
-      - Blocked
-      - CannotExportSnapshot
-      - ChapCredentialNotFound
-      - DiskAlreadyAllocated
-      - DiskDoesNotExist
-      - DiskSizeGreaterThanVolumeMaxSize
-      - DiskSizeLessThanVolumeSize
-      - DiskSizeNotGigAligned
-      - DuplicateCertificateInfo
-      - DuplicateSchedule
-      - EndpointNotFound
-      - IAMNotSupported
-      - InitiatorInvalid
-      - InitiatorNotFound
-      - InternalError
-      - InvalidGateway
-      - InvalidEndpoint
-      - InvalidParameters
-      - InvalidSchedule
-      - LocalStorageLimitExceeded
-      - 'LunAlreadyAllocated '
-      - LunInvalid
-      - MaximumContentLengthExceeded
-      - MaximumTapeCartridgeCountExceeded
-      - MaximumVolumeCountExceeded
-      - NetworkConfigurationChanged
-      - NoDisksAvailable
-      - NotImplemented
-      - NotSupported
-      - OperationAborted
-      - OutdatedGateway
-      - ParametersNotImplemented
-      - RegionInvalid
-      - RequestTimeout
-      - ServiceUnavailable
-      - SnapshotDeleted
-      - SnapshotIdInvalid
-      - SnapshotInProgress
-      - SnapshotNotFound
-      - SnapshotScheduleNotFound
-      - StagingAreaFull
-      - StorageFailure
-      - TapeCartridgeNotFound
-      - TargetAlreadyExists
-      - TargetInvalid
-      - TargetNotFound
-      - UnauthorizedOperation
-      - VolumeAlreadyExists
-      - VolumeIdInvalid
-      - VolumeInUse
-      - VolumeNotFound
-      - VolumeNotReady
-  FileShareARN:
-    type: string
-    description: 'The Amazon Resource Name (ARN) of the file share. '
-    minLength: 50
-    maxLength: 500
-  FileShareARNList:
-    type: array
-    items:
-      $ref: '#/definitions/FileShareARN'
-    minItems: 1
-    maxItems: 10
-  FileShareClientList:
-    type: array
-    description: 'The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks. '
-    items:
-      $ref: '#/definitions/IPV4AddressCIDR'
-    minItems: 1
-    maxItems: 100
-  FileShareId:
-    type: string
-    description: 'The ID of the file share. '
-    minLength: 12
-    maxLength: 30
-  FileShareInfo:
-    type: object
-    properties:
-      FileShareARN:
-        $ref: '#/definitions/FileShareARN'
-      FileShareId:
-        $ref: '#/definitions/FileShareId'
-      FileShareStatus:
-        $ref: '#/definitions/FileShareStatus'
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-    description: Describes a file share.
-  FileShareInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/FileShareInfo'
-  FileShareStatus:
-    type: string
-    description: 'The status of the file share. Possible values are CREATING, UPDATING, AVAILABLE and DELETING. '
-    minLength: 3
-    maxLength: 50
-  GatewayARN:
-    type: string
-    description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.
-    minLength: 50
-    maxLength: 500
-  GatewayId:
-    type: string
-    minLength: 12
-    maxLength: 30
-  GatewayInfo:
-    type: object
-    properties:
-      GatewayId:
-        $ref: '#/definitions/GatewayId'
-        description: 'The unique identifier assigned to your gateway during activation. This ID becomes part of the gateway Amazon Resource Name (ARN), which you use as input for other operations.'
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-        description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.
-      GatewayType:
-        $ref: '#/definitions/GatewayType'
-        description: The type of the gateway.
-      GatewayOperationalState:
-        $ref: '#/definitions/GatewayOperationalState'
-        description: '<p>The state of the gateway.</p> <p>Valid Values: DISABLED or ACTIVE</p>'
-      GatewayName:
-        $ref: '#/definitions/string'
-        description: The name of the gateway.
-    description: Describes a gateway object.
-  GatewayName:
-    type: string
-    pattern: '^[ -\.0-\[\]-~]*[!-\.0-\[\]-~][ -\.0-\[\]-~]*$'
-    description: The name you configured for your gateway.
-    minLength: 2
-    maxLength: 255
-  GatewayNetworkInterfaces:
-    type: array
-    items:
-      $ref: '#/definitions/NetworkInterface'
-  GatewayOperationalState:
-    type: string
-    minLength: 2
-    maxLength: 25
-  GatewayState:
-    type: string
-    minLength: 2
-    maxLength: 25
-  GatewayTimezone:
-    type: string
-    minLength: 3
-    maxLength: 10
-  GatewayType:
-    type: string
-    minLength: 2
-    maxLength: 20
-  Gateways:
-    type: array
-    items:
-      $ref: '#/definitions/GatewayInfo'
-  HourOfDay:
-    type: integer
-    minimum: 0
-    maximum: 23
-  IPV4AddressCIDR:
-    type: string
-    pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))?$'
-  Initiator:
-    type: string
-    minLength: 1
-    maxLength: 50
-  Initiators:
-    type: array
-    items:
-      $ref: '#/definitions/Initiator'
-  InternalServerError:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/string'
-        description: A human-readable message describing the error that occurred.
-      error:
-        $ref: '#/definitions/StorageGatewayError'
-        description: A <a>StorageGatewayError</a> that provides more information about the cause of the error.
-    description: 'An internal server error has occurred during the request. For more information, see the error and message fields.'
-  InvalidGatewayRequestException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/string'
-        description: A human-readable message describing the error that occurred.
-      error:
-        $ref: '#/definitions/StorageGatewayError'
-        description: A <a>StorageGatewayError</a> that provides more detail about the cause of the error.
-    description: 'An exception occurred because an invalid gateway request was issued to the service. For more information, see the error and message fields.'
-  IqnName:
-    type: string
-    pattern: '[0-9a-z:.-]+'
-    minLength: 1
-    maxLength: 255
-  KMSKey:
-    type: string
-    description: 'The ARN of the KMS key used for Amazon S3 server side encryption. '
-    minLength: 20
-    maxLength: 2048
-  LastSoftwareUpdate:
-    type: string
-    minLength: 1
-    maxLength: 25
-  ListFileSharesInput:
+  JoinDomainOutput:
     type: object
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
-        description: 'The Amazon resource Name (ARN) of the gateway whose file shares you want to list. If this field is not present, all file shares under your account are listed.'
-      Limit:
-        $ref: '#/definitions/PositiveIntObject'
-        description: The maximum number of file shares to return in the response. The value must be an integer with a value greater than zero. Optional.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: 'Opaque pagination token returned from a previous ListFileShares operation. If present, <code>Marker</code> specifies where to continue the list from after a previous call to ListFileShares. Optional.'
-    description: ListFileShareInput
+        description: The unique Amazon Resource Name (ARN) of the gateway that joined the domain.
+    description: JoinDomainOutput
+  JoinDomainInput:
+    type: object
+    required:
+      - GatewayARN
+      - DomainName
+      - UserName
+      - Password
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+        description: 'The unique Amazon Resource Name (ARN) of the file gateway you want to add to the Active Directory domain. '
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain that you want the gateway to join.
+      UserName:
+        $ref: '#/definitions/DomainUserName'
+        description: Sets the user name of user who has permission to add the gateway to the Active Directory domain.
+      Password:
+        $ref: '#/definitions/DomainUserPassword'
+        description: Sets the password of the user who has permission to add the gateway to the Active Directory domain.
+    description: JoinDomainInput
   ListFileSharesOutput:
     type: object
     properties:
@@ -3815,6 +3795,31 @@ definitions:
         $ref: '#/definitions/FileShareInfoList'
         description: 'An array of information about the file gateway''s file shares. '
     description: ListFileShareOutput
+  ListFileSharesInput:
+    type: object
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+        description: 'The Amazon resource Name (ARN) of the gateway whose file shares you want to list. If this field is not present, all file shares under your account are listed.'
+      Limit:
+        $ref: '#/definitions/PositiveIntObject'
+        description: The maximum number of file shares to return in the response. The value must be an integer with a value greater than zero. Optional.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: 'Opaque pagination token returned from a previous ListFileShares operation. If present, <code>Marker</code> specifies where to continue the list from after a previous call to ListFileShares. Optional.'
+    description: ListFileShareInput
+  ListGatewaysOutput:
+    type: object
+    example:
+      Gateways:
+        - GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+        - GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-23A4567C'
+      Marker: '1'
+    properties:
+      Gateways:
+        $ref: '#/definitions/Gateways'
+      Marker:
+        $ref: '#/definitions/Marker'
   ListGatewaysInput:
     type: object
     example:
@@ -3828,28 +3833,6 @@ definitions:
         $ref: '#/definitions/PositiveIntObject'
         description: Specifies that the list of gateways returned be limited to the specified number of items.
     description: '<p>A JSON object containing zero or more of the following fields:</p> <ul> <li> <p> <a>ListGatewaysInput$Limit</a> </p> </li> <li> <p> <a>ListGatewaysInput$Marker</a> </p> </li> </ul>'
-  ListGatewaysOutput:
-    type: object
-    example:
-      Gateways:
-        - GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-        - GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-23A4567C'
-      Marker: '1'
-    properties:
-      Gateways:
-        $ref: '#/definitions/Gateways'
-      Marker:
-        $ref: '#/definitions/Marker'
-  ListLocalDisksInput:
-    type: object
-    required:
-      - GatewayARN
-    example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the of the gateway.
   ListLocalDisksOutput:
     type: object
     example:
@@ -3873,25 +3856,16 @@ definitions:
         $ref: '#/definitions/GatewayARN'
       Disks:
         $ref: '#/definitions/Disks'
-  ListTagsForResourceInput:
+  ListLocalDisksInput:
     type: object
     required:
-      - ResourceARN
+      - GatewayARN
     example:
-      Limit: 1
-      Marker: '1'
-      ResourceARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B'
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
     properties:
-      ResourceARN:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the resource for which you want to list tags.
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: An opaque string that indicates the position at which to begin returning the list of tags.
-      Limit:
-        $ref: '#/definitions/PositiveIntObject'
-        description: Specifies that the list of tags returned be limited to the specified number of items.
-    description: ListTagsForResourceInput
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+    description: A JSON object containing the of the gateway.
   ListTagsForResourceOutput:
     type: object
     example:
@@ -3911,6 +3885,34 @@ definitions:
         $ref: '#/definitions/Tags'
         description: An array that contains the tags for the specified resource.
     description: ListTagsForResourceOutput
+  ListTagsForResourceInput:
+    type: object
+    required:
+      - ResourceARN
+    example:
+      Limit: 1
+      Marker: '1'
+      ResourceARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B'
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) of the resource for which you want to list tags.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: An opaque string that indicates the position at which to begin returning the list of tags.
+      Limit:
+        $ref: '#/definitions/PositiveIntObject'
+        description: Specifies that the list of tags returned be limited to the specified number of items.
+    description: ListTagsForResourceInput
+  ListTapesOutput:
+    type: object
+    properties:
+      TapeInfos:
+        $ref: '#/definitions/TapeInfos'
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: 'A string that indicates the position at which to begin returning the next list of tapes. Use the marker in your next request to continue pagination of tapes. If there are no more tapes to list, this element does not appear in the response body.'
+    description: '<p>A JSON object containing the following fields:</p> <ul> <li> <p> <a>ListTapesOutput$Marker</a> </p> </li> <li> <p> <a>ListTapesOutput$VolumeInfos</a> </p> </li> </ul>'
   ListTapesInput:
     type: object
     properties:
@@ -3923,15 +3925,13 @@ definitions:
         $ref: '#/definitions/PositiveIntObject'
         description: An optional number limit for the tapes in the list returned by this call.
     description: '<p>A JSON object that contains one or more of the following fields:</p> <ul> <li> <p> <a>ListTapesInput$Limit</a> </p> </li> <li> <p> <a>ListTapesInput$Marker</a> </p> </li> <li> <p> <a>ListTapesInput$TapeARNs</a> </p> </li> </ul>'
-  ListTapesOutput:
+  ListVolumeInitiatorsOutput:
     type: object
     properties:
-      TapeInfos:
-        $ref: '#/definitions/TapeInfos'
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: 'A string that indicates the position at which to begin returning the next list of tapes. Use the marker in your next request to continue pagination of tapes. If there are no more tapes to list, this element does not appear in the response body.'
-    description: '<p>A JSON object containing the following fields:</p> <ul> <li> <p> <a>ListTapesOutput$Marker</a> </p> </li> <li> <p> <a>ListTapesOutput$VolumeInfos</a> </p> </li> </ul>'
+      Initiators:
+        $ref: '#/definitions/Initiators'
+        description: The host names and port numbers of all iSCSI initiators that are connected to the gateway.
+    description: ListVolumeInitiatorsOutput
   ListVolumeInitiatorsInput:
     type: object
     required:
@@ -3941,22 +3941,6 @@ definitions:
         $ref: '#/definitions/VolumeARN'
         description: The Amazon Resource Name (ARN) of the volume. Use the <a>ListVolumes</a> operation to return a list of gateway volumes for the gateway.
     description: ListVolumeInitiatorsInput
-  ListVolumeInitiatorsOutput:
-    type: object
-    properties:
-      Initiators:
-        $ref: '#/definitions/Initiators'
-        description: The host names and port numbers of all iSCSI initiators that are connected to the gateway.
-    description: ListVolumeInitiatorsOutput
-  ListVolumeRecoveryPointsInput:
-    type: object
-    required:
-      - GatewayARN
-    example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
   ListVolumeRecoveryPointsOutput:
     type: object
     example:
@@ -3970,22 +3954,15 @@ definitions:
         $ref: '#/definitions/GatewayARN'
       VolumeRecoveryPointInfos:
         $ref: '#/definitions/VolumeRecoveryPointInfos'
-  ListVolumesInput:
+  ListVolumeRecoveryPointsInput:
     type: object
+    required:
+      - GatewayARN
     example:
       GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-      Limit: 2
-      Marker: '1'
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
-      Marker:
-        $ref: '#/definitions/Marker'
-        description: A string that indicates the position at which to begin the returned list of volumes. Obtain the marker from the response of a previous List iSCSI Volumes request.
-      Limit:
-        $ref: '#/definitions/PositiveIntObject'
-        description: Specifies that the list of volumes returned be limited to the specified number of items.
-    description: '<p>A JSON object that contains one or more of the following fields:</p> <ul> <li> <p> <a>ListVolumesInput$Limit</a> </p> </li> <li> <p> <a>ListVolumesInput$Marker</a> </p> </li> </ul>'
   ListVolumesOutput:
     type: object
     example:
@@ -4011,118 +3988,22 @@ definitions:
         $ref: '#/definitions/Marker'
       VolumeInfos:
         $ref: '#/definitions/VolumeInfos'
-  LocalConsolePassword:
-    type: string
-    pattern: '^[ -~]+$'
-    minLength: 6
-    maxLength: 512
-    format: password
-  LocationARN:
-    type: string
-    description: 'The ARN of the backend storage used for storing file data. '
-    minLength: 16
-    maxLength: 310
-  Marker:
-    type: string
-    minLength: 1
-    maxLength: 1000
-  MediumChangerType:
-    type: string
-    minLength: 2
-    maxLength: 50
-  MinuteOfHour:
-    type: integer
-    minimum: 0
-    maximum: 59
-  NFSFileShareDefaults:
+  ListVolumesInput:
     type: object
+    example:
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+      Limit: 2
+      Marker: '1'
     properties:
-      FileMode:
-        $ref: '#/definitions/PermissionMode'
-        description: 'The Unix file mode in the form "nnnn". For example, "0666" represents the default file mode inside the file share. The default value is 0666. '
-      DirectoryMode:
-        $ref: '#/definitions/PermissionMode'
-        description: 'The Unix directory mode in the form "nnnn". For example, "0666" represents the default access mode for all directories inside the file share. The default value is 0777.'
-      GroupId:
-        $ref: '#/definitions/PermissionId'
-        description: 'The default group ID for the file share (unless the files have another group ID specified). The default value is nfsnobody. '
-      OwnerId:
-        $ref: '#/definitions/PermissionId'
-        description: 'The default owner ID for files in the file share (unless the files have another owner ID specified). The default value is nfsnobody. '
-    description: 'Describes file share default values. Files and folders stored as Amazon S3 objects in S3 buckets don''t, by default, have Unix file permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that represent files and folders are assigned these default Unix permissions. This operation is only supported in the file gateway type.'
-  NFSFileShareInfo:
-    type: object
-    properties:
-      NFSFileShareDefaults:
-        $ref: '#/definitions/NFSFileShareDefaults'
-      FileShareARN:
-        $ref: '#/definitions/FileShareARN'
-      FileShareId:
-        $ref: '#/definitions/FileShareId'
-      FileShareStatus:
-        $ref: '#/definitions/FileShareStatus'
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
-      KMSEncrypted:
-        $ref: '#/definitions/boolean'
-        description: 'True to use Amazon S3 server side encryption with your own KMS key, or false to use a key managed by Amazon S3. Optional. '
-      KMSKey:
-        $ref: '#/definitions/KMSKey'
-      Path:
-        $ref: '#/definitions/Path'
-      Role:
-        $ref: '#/definitions/Role'
-      LocationARN:
-        $ref: '#/definitions/LocationARN'
-      DefaultStorageClass:
-        $ref: '#/definitions/StorageClass'
-        description: 'The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
-      ClientList:
-        $ref: '#/definitions/FileShareClientList'
-      Squash:
-        $ref: '#/definitions/Squash'
-      ReadOnly:
-        $ref: '#/definitions/Boolean'
-      GuessMIMETypeEnabled:
-        $ref: '#/definitions/Boolean'
-        description: 'Enables guessing of the MIME type for uploaded objects based on file extensions: "true" to enable MIME type guessing, and otherwise "false".'
-    description: 'The Unix file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported in file gateways.'
-  NFSFileShareInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/NFSFileShareInfo'
-  NetworkInterface:
-    type: object
-    properties:
-      Ipv4Address:
-        $ref: '#/definitions/string'
-        description: The Internet Protocol version 4 (IPv4) address of the interface.
-      MacAddress:
-        $ref: '#/definitions/string'
-        description: <p>The Media Access Control (MAC) address of the interface.</p> <note> <p>This is currently unsupported and will not be returned in output.</p> </note>
-      Ipv6Address:
-        $ref: '#/definitions/string'
-        description: The Internet Protocol version 6 (IPv6) address of the interface. <i>Currently not supported</i>.
-    description: Describes a gateway's network interface.
-  NetworkInterfaceId:
-    type: string
-    pattern: '\A(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}\z'
-  NextUpdateAvailabilityDate:
-    type: string
-    minLength: 1
-    maxLength: 25
-  NotificationId:
-    type: string
-    description: The randomly generated ID of the notification that was sent. This ID is in UUID format.
-    minLength: 1
-    maxLength: 2048
-  NotifyWhenUploadedInput:
-    type: object
-    required:
-      - FileShareARN
-    properties:
-      FileShareARN:
-        $ref: '#/definitions/FileShareARN'
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: A string that indicates the position at which to begin the returned list of volumes. Obtain the marker from the response of a previous List iSCSI Volumes request.
+      Limit:
+        $ref: '#/definitions/PositiveIntObject'
+        description: Specifies that the list of volumes returned be limited to the specified number of items.
+    description: '<p>A JSON object that contains one or more of the following fields:</p> <ul> <li> <p> <a>ListVolumesInput$Limit</a> </p> </li> <li> <p> <a>ListVolumesInput$Marker</a> </p> </li> </ul>'
   NotifyWhenUploadedOutput:
     type: object
     properties:
@@ -4130,30 +4011,7 @@ definitions:
         $ref: '#/definitions/FileShareARN'
       NotificationId:
         $ref: '#/definitions/NotificationId'
-  NumTapesToCreate:
-    type: integer
-    minimum: 1
-    maximum: 10
-  Path:
-    type: string
-    description: 'The file share path used by the NFS client to identify the mount point. '
-  PermissionId:
-    type: integer
-    minimum: 0
-    maximum: 4294967294
-  PermissionMode:
-    type: string
-    pattern: '^[0-7]{4}$'
-    minLength: 1
-    maxLength: 4
-  PositiveIntObject:
-    type: integer
-    minimum: 1
-  RecurrenceInHours:
-    type: integer
-    minimum: 1
-    maximum: 24
-  RefreshCacheInput:
+  NotifyWhenUploadedInput:
     type: object
     required:
       - FileShareARN
@@ -4165,10 +4023,30 @@ definitions:
     properties:
       FileShareARN:
         $ref: '#/definitions/FileShareARN'
-  RegionId:
-    type: string
-    minLength: 1
-    maxLength: 25
+      NotificationId:
+        $ref: '#/definitions/NotificationId'
+    description: RefreshCacheOutput
+  RefreshCacheInput:
+    type: object
+    required:
+      - FileShareARN
+    properties:
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+      FolderList:
+        $ref: '#/definitions/FolderList'
+      Recursive:
+        $ref: '#/definitions/Boolean'
+        description: 'A value that specifies whether to recursively refresh folders in the cache. The refresh includes folders that were in the cache the last time the gateway listed the folder''s contents. If this value set to "true", each folder that is listed in <code>FolderList</code> is recursively updated. Otherwise, subfolders listed in <code>FolderList</code> are not refreshed. Only objects that are in folders listed directly under <code>FolderList</code> are found and used for the update. The default is "true".'
+  RemoveTagsFromResourceOutput:
+    type: object
+    example:
+      ResourceARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B'
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) of the resource that the tags were removed from.
+    description: RemoveTagsFromResourceOutput
   RemoveTagsFromResourceInput:
     type: object
     required:
@@ -4187,15 +4065,13 @@ definitions:
         $ref: '#/definitions/TagKeys'
         description: The keys of the tags you want to remove from the specified resource. A tag is composed of a key/value pair.
     description: RemoveTagsFromResourceInput
-  RemoveTagsFromResourceOutput:
+  ResetCacheOutput:
     type: object
     example:
-      ResourceARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B'
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-13B4567C'
     properties:
-      ResourceARN:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the resource that the tags were removed from.
-    description: RemoveTagsFromResourceOutput
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
   ResetCacheInput:
     type: object
     required:
@@ -4205,17 +4081,15 @@ definitions:
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
-  ResetCacheOutput:
+  RetrieveTapeArchiveOutput:
     type: object
     example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-13B4567C'
+      TapeARN: 'arn:aws:storagegateway:us-east-1:999999999999:tape/TEST0AA2AF'
     properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-  ResourceARN:
-    type: string
-    minLength: 50
-    maxLength: 500
+      TapeARN:
+        $ref: '#/definitions/TapeARN'
+        description: The Amazon Resource Name (ARN) of the retrieved virtual tape.
+    description: RetrieveTapeArchiveOutput
   RetrieveTapeArchiveInput:
     type: object
     required:
@@ -4232,15 +4106,15 @@ definitions:
         $ref: '#/definitions/GatewayARN'
         description: <p>The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.</p> <p>You retrieve archived virtual tapes to only one gateway and the gateway must be a tape gateway.</p>
     description: RetrieveTapeArchiveInput
-  RetrieveTapeArchiveOutput:
+  RetrieveTapeRecoveryPointOutput:
     type: object
     example:
       TapeARN: 'arn:aws:storagegateway:us-east-1:999999999999:tape/TEST0AA2AF'
     properties:
       TapeARN:
         $ref: '#/definitions/TapeARN'
-        description: The Amazon Resource Name (ARN) of the retrieved virtual tape.
-    description: RetrieveTapeArchiveOutput
+        description: The Amazon Resource Name (ARN) of the virtual tape for which the recovery point was retrieved.
+    description: RetrieveTapeRecoveryPointOutput
   RetrieveTapeRecoveryPointInput:
     type: object
     required:
@@ -4256,30 +4130,13 @@ definitions:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
     description: RetrieveTapeRecoveryPointInput
-  RetrieveTapeRecoveryPointOutput:
+  SetLocalConsolePasswordOutput:
     type: object
     example:
-      TapeARN: 'arn:aws:storagegateway:us-east-1:999999999999:tape/TEST0AA2AF'
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B'
     properties:
-      TapeARN:
-        $ref: '#/definitions/TapeARN'
-        description: The Amazon Resource Name (ARN) of the virtual tape for which the recovery point was retrieved.
-    description: RetrieveTapeRecoveryPointOutput
-  Role:
-    type: string
-    description: 'The ARN of the IAM role that file gateway assumes when it accesses the underlying storage. '
-    minLength: 20
-    maxLength: 2048
-  ServiceUnavailableError:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/string'
-        description: A human-readable message describing the error that occurred.
-      error:
-        $ref: '#/definitions/StorageGatewayError'
-        description: A <a>StorageGatewayError</a> that provides more information about the cause of the error.
-    description: 'An internal server error has occurred because the service is unavailable. For more information, see the error and message fields.'
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
   SetLocalConsolePasswordInput:
     type: object
     required:
@@ -4295,13 +4152,32 @@ definitions:
         $ref: '#/definitions/LocalConsolePassword'
         description: The password you want to set for your VM local console.
     description: SetLocalConsolePasswordInput
-  SetLocalConsolePasswordOutput:
+  SetSMBGuestPasswordOutput:
+    type: object
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+  SetSMBGuestPasswordInput:
+    type: object
+    required:
+      - GatewayARN
+      - Password
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+        description: The Amazon Resource Name (ARN) of the file gateway the SMB file share is associated with.
+      Password:
+        $ref: '#/definitions/SMBGuestPassword'
+        description: The password that you want to set for your SMB Server.
+    description: SetSMBGuestPasswordInput
+  ShutdownGatewayOutput:
     type: object
     example:
       GatewayARN: 'arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B'
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
+    description: A JSON object containing the of the gateway that was shut down.
   ShutdownGatewayInput:
     type: object
     required:
@@ -4312,26 +4188,14 @@ definitions:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
     description: A JSON object containing the of the gateway to shut down.
-  ShutdownGatewayOutput:
+  StartGatewayOutput:
     type: object
     example:
       GatewayARN: 'arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B'
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the of the gateway that was shut down.
-  SnapshotDescription:
-    type: string
-    minLength: 1
-    maxLength: 255
-  SnapshotId:
-    type: string
-    pattern: '\Asnap-([0-9A-Fa-f]{8}|[0-9A-Fa-f]{17})\z'
-  Squash:
-    type: string
-    description: '<p>The user mapped to anonymous user. Valid options are the following: </p> <ul> <li> <p>"RootSquash" - Only root is mapped to anonymous user.</p> </li> <li> <p>"NoSquash" - No one is mapped to anonymous user</p> </li> <li> <p>"AllSquash" - Everyone is mapped to anonymous user.</p> </li> </ul>'
-    minLength: 5
-    maxLength: 15
+    description: A JSON object containing the of the gateway that was restarted.
   StartGatewayInput:
     type: object
     required:
@@ -4342,29 +4206,983 @@ definitions:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
     description: A JSON object containing the of the gateway to start.
-  StartGatewayOutput:
+  UpdateBandwidthRateLimitOutput:
     type: object
     example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B'
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the of the gateway that was restarted.
+    description: A JSON object containing the of the gateway whose throttle information was updated.
+  UpdateBandwidthRateLimitInput:
+    type: object
+    required:
+      - GatewayARN
+    example:
+      AverageDownloadRateLimitInBitsPerSec: 102400
+      AverageUploadRateLimitInBitsPerSec: 51200
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+      AverageUploadRateLimitInBitsPerSec:
+        $ref: '#/definitions/BandwidthUploadRateLimit'
+        description: The average upload bandwidth rate limit in bits per second.
+      AverageDownloadRateLimitInBitsPerSec:
+        $ref: '#/definitions/BandwidthDownloadRateLimit'
+        description: The average download bandwidth rate limit in bits per second.
+    description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>UpdateBandwidthRateLimitInput$AverageDownloadRateLimitInBitsPerSec</a> </p> </li> <li> <p> <a>UpdateBandwidthRateLimitInput$AverageUploadRateLimitInBitsPerSec</a> </p> </li> </ul>'
+  UpdateChapCredentialsOutput:
+    type: object
+    example:
+      InitiatorName: 'iqn.1991-05.com.microsoft:computername.domain.example.com'
+      TargetARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume'
+    properties:
+      TargetARN:
+        $ref: '#/definitions/TargetARN'
+        description: The Amazon Resource Name (ARN) of the target. This is the same target specified in the request.
+      InitiatorName:
+        $ref: '#/definitions/IqnName'
+        description: The iSCSI initiator that connects to the target. This is the same initiator name specified in the request.
+    description: 'A JSON object containing the following fields:'
+  UpdateChapCredentialsInput:
+    type: object
+    required:
+      - TargetARN
+      - SecretToAuthenticateInitiator
+      - InitiatorName
+    example:
+      InitiatorName: 'iqn.1991-05.com.microsoft:computername.domain.example.com'
+      SecretToAuthenticateInitiator: '111111111111'
+      SecretToAuthenticateTarget: '222222222222'
+      TargetARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume'
+    properties:
+      TargetARN:
+        $ref: '#/definitions/TargetARN'
+        description: The Amazon Resource Name (ARN) of the iSCSI volume target. Use the <a>DescribeStorediSCSIVolumes</a> operation to return the TargetARN for specified VolumeARN.
+      SecretToAuthenticateInitiator:
+        $ref: '#/definitions/ChapSecret'
+        description: '<p>The secret key that the initiator (for example, the Windows client) must provide to participate in mutual CHAP with the target.</p> <note> <p>The secret key must be between 12 and 16 bytes when encoded in UTF-8.</p> </note>'
+      InitiatorName:
+        $ref: '#/definitions/IqnName'
+        description: The iSCSI initiator that connects to the target.
+      SecretToAuthenticateTarget:
+        $ref: '#/definitions/ChapSecret'
+        description: '<p>The secret key that the target must provide to participate in mutual CHAP with the initiator (e.g. Windows client).</p> <p>Byte constraints: Minimum bytes of 12. Maximum bytes of 16.</p> <note> <p>The secret key must be between 12 and 16 bytes when encoded in UTF-8.</p> </note>'
+    description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>UpdateChapCredentialsInput$InitiatorName</a> </p> </li> <li> <p> <a>UpdateChapCredentialsInput$SecretToAuthenticateInitiator</a> </p> </li> <li> <p> <a>UpdateChapCredentialsInput$SecretToAuthenticateTarget</a> </p> </li> <li> <p> <a>UpdateChapCredentialsInput$TargetARN</a> </p> </li> </ul>'
+  UpdateGatewayInformationOutput:
+    type: object
+    example:
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+      GatewayName: ''
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+      GatewayName:
+        $ref: '#/definitions/string'
+    description: A JSON object containing the ARN of the gateway that was updated.
+  UpdateGatewayInformationInput:
+    type: object
+    required:
+      - GatewayARN
+    example:
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+      GatewayName: MyGateway2
+      GatewayTimezone: 'GMT-12:00'
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+      GatewayName:
+        $ref: '#/definitions/GatewayName'
+      GatewayTimezone:
+        $ref: '#/definitions/GatewayTimezone'
+  UpdateGatewaySoftwareNowOutput:
+    type: object
+    example:
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+    description: A JSON object containing the of the gateway that was updated.
+  UpdateGatewaySoftwareNowInput:
+    type: object
+    required:
+      - GatewayARN
+    example:
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+    description: A JSON object containing the of the gateway to update.
+  UpdateMaintenanceStartTimeOutput:
+    type: object
+    example:
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+    description: A JSON object containing the of the gateway whose maintenance start time is updated.
+  UpdateMaintenanceStartTimeInput:
+    type: object
+    required:
+      - GatewayARN
+      - HourOfDay
+      - MinuteOfHour
+      - DayOfWeek
+    example:
+      DayOfWeek: 2
+      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
+      HourOfDay: 0
+      MinuteOfHour: 30
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+      HourOfDay:
+        $ref: '#/definitions/HourOfDay'
+        description: 'The hour component of the maintenance start time represented as <i>hh</i>, where <i>hh</i> is the hour (00 to 23). The hour of the day is in the time zone of the gateway.'
+      MinuteOfHour:
+        $ref: '#/definitions/MinuteOfHour'
+        description: 'The minute component of the maintenance start time represented as <i>mm</i>, where <i>mm</i> is the minute (00 to 59). The minute of the hour is in the time zone of the gateway.'
+      DayOfWeek:
+        $ref: '#/definitions/DayOfWeek'
+        description: 'The maintenance start time day of the week represented as an ordinal number from 0 to 6, where 0 represents Sunday and 6 Saturday.'
+    description: '<p>A JSON object containing the following fields:</p> <ul> <li> <p> <a>UpdateMaintenanceStartTimeInput$DayOfWeek</a> </p> </li> <li> <p> <a>UpdateMaintenanceStartTimeInput$HourOfDay</a> </p> </li> <li> <p> <a>UpdateMaintenanceStartTimeInput$MinuteOfHour</a> </p> </li> </ul>'
+  UpdateNFSFileShareOutput:
+    type: object
+    properties:
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+        description: 'The Amazon Resource Name (ARN) of the updated file share. '
+    description: UpdateNFSFileShareOutput
+  UpdateNFSFileShareInput:
+    type: object
+    required:
+      - FileShareARN
+    properties:
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+        description: 'The Amazon Resource Name (ARN) of the file share to be updated. '
+      KMSEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional. '
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: 'The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional. '
+      NFSFileShareDefaults:
+        $ref: '#/definitions/NFSFileShareDefaults'
+        description: The default values for the file share. Optional.
+      DefaultStorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: 'The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are <code>S3_STANDARD</code>, <code>S3_STANDARD_IA</code>, or <code>S3_ONEZONE_IA</code>. If this field is not populated, the default value <code>S3_STANDARD</code> is used. Optional.'
+      ObjectACL:
+        $ref: '#/definitions/ObjectACL'
+        description: A value that sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
+      ClientList:
+        $ref: '#/definitions/FileShareClientList'
+        description: The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks.
+      Squash:
+        $ref: '#/definitions/Squash'
+        description: '<p>The user mapped to anonymous user. Valid options are the following:</p> <ul> <li> <p> <code>RootSquash</code> - Only root is mapped to anonymous user.</p> </li> <li> <p> <code>NoSquash</code> - No one is mapped to anonymous user</p> </li> <li> <p> <code>AllSquash</code> - Everyone is mapped to anonymous user.</p> </li> </ul>'
+      ReadOnly:
+        $ref: '#/definitions/Boolean'
+        description: 'A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.'
+      GuessMIMETypeEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.'
+      RequesterPays:
+        $ref: '#/definitions/Boolean'
+        description: A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.
+    description: UpdateNFSFileShareInput
+  UpdateSMBFileShareOutput:
+    type: object
+    properties:
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+        description: 'The Amazon Resource Name (ARN) of the updated SMB file share. '
+    description: UpdateSMBFileShareOutput
+  UpdateSMBFileShareInput:
+    type: object
+    required:
+      - FileShareARN
+    properties:
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+        description: The Amazon Resource Name (ARN) of the SMB file share that you want to update.
+      KMSEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+      DefaultStorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: 'The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are <code>S3_STANDARD</code>, <code>S3_STANDARD_IA</code>, or <code>S3_ONEZONE_IA</code>. If this field is not populated, the default value <code>S3_STANDARD</code> is used. Optional.'
+      ObjectACL:
+        $ref: '#/definitions/ObjectACL'
+        description: A value that sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
+      ReadOnly:
+        $ref: '#/definitions/Boolean'
+        description: 'A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.'
+      GuessMIMETypeEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.'
+      RequesterPays:
+        $ref: '#/definitions/Boolean'
+        description: A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.
+      ValidUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
+      InvalidUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
+    description: UpdateSMBFileShareInput
+  UpdateSnapshotScheduleOutput:
+    type: object
+    example:
+      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
+    properties:
+      VolumeARN:
+        $ref: '#/definitions/VolumeARN'
+        description: <p/>
+    description: A JSON object containing the of the updated storage volume.
+  UpdateSnapshotScheduleInput:
+    type: object
+    required:
+      - VolumeARN
+      - StartAt
+      - RecurrenceInHours
+    example:
+      Description: Hourly snapshot
+      RecurrenceInHours: 1
+      StartAt: 0
+      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
+    properties:
+      VolumeARN:
+        $ref: '#/definitions/VolumeARN'
+        description: The Amazon Resource Name (ARN) of the volume. Use the <a>ListVolumes</a> operation to return a list of gateway volumes.
+      StartAt:
+        $ref: '#/definitions/HourOfDay'
+        description: 'The hour of the day at which the snapshot schedule begins represented as <i>hh</i>, where <i>hh</i> is the hour (0 to 23). The hour of the day is in the time zone of the gateway.'
+      RecurrenceInHours:
+        $ref: '#/definitions/RecurrenceInHours'
+        description: Frequency of snapshots. Specify the number of hours between snapshots.
+      Description:
+        $ref: '#/definitions/Description'
+        description: Optional description of the snapshot that overwrites the existing description.
+    description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>UpdateSnapshotScheduleInput$Description</a> </p> </li> <li> <p> <a>UpdateSnapshotScheduleInput$RecurrenceInHours</a> </p> </li> <li> <p> <a>UpdateSnapshotScheduleInput$StartAt</a> </p> </li> <li> <p> <a>UpdateSnapshotScheduleInput$VolumeARN</a> </p> </li> </ul>'
+  UpdateVTLDeviceTypeOutput:
+    type: object
+    example:
+      VTLDeviceARN: 'arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/device/AMZN_SGW-1FAD4876_MEDIACHANGER_00001'
+    properties:
+      VTLDeviceARN:
+        $ref: '#/definitions/VTLDeviceARN'
+        description: The Amazon Resource Name (ARN) of the medium changer you have selected.
+    description: UpdateVTLDeviceTypeOutput
+  UpdateVTLDeviceTypeInput:
+    type: object
+    required:
+      - VTLDeviceARN
+      - DeviceType
+    example:
+      DeviceType: Medium Changer
+      VTLDeviceARN: 'arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/device/AMZN_SGW-1FAD4876_MEDIACHANGER_00001'
+    properties:
+      VTLDeviceARN:
+        $ref: '#/definitions/VTLDeviceARN'
+        description: The Amazon Resource Name (ARN) of the medium changer you want to select.
+      DeviceType:
+        $ref: '#/definitions/DeviceType'
+        description: '<p>The type of medium changer you want to select.</p> <p> Valid Values: "STK-L700", "AWS-Gateway-VTL"</p>'
+  ActivationKey:
+    type: string
+    minLength: 1
+    maxLength: 50
+  GatewayName:
+    type: string
+    pattern: '^[ -\.0-\[\]-~]*[!-\.0-\[\]-~][ -\.0-\[\]-~]*$'
+    description: The name you configured for your gateway.
+    minLength: 2
+    maxLength: 255
+  GatewayTimezone:
+    type: string
+    minLength: 3
+    maxLength: 10
+  RegionId:
+    type: string
+    minLength: 1
+    maxLength: 25
+  GatewayType:
+    type: string
+    minLength: 2
+    maxLength: 20
+  TapeDriveType:
+    type: string
+    minLength: 2
+    maxLength: 50
+  MediumChangerType:
+    type: string
+    minLength: 2
+    maxLength: 50
+  GatewayARN:
+    type: string
+    description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.
+    minLength: 50
+    maxLength: 500
+  DiskIds:
+    type: array
+    items:
+      $ref: '#/definitions/DiskId'
+  ResourceARN:
+    type: string
+    minLength: 50
+    maxLength: 500
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  Authentication:
+    type: string
+    description: <p>The authentication method of the file share.</p> <p>Valid values are <code>ActiveDirectory</code> or <code>GuestAccess</code>. The default is <code>ActiveDirectory</code>.</p>
+    minLength: 5
+    maxLength: 15
+  BandwidthDownloadRateLimit:
+    type: integer
+    minimum: 102400
+  BandwidthType:
+    type: string
+    minLength: 3
+    maxLength: 25
+  BandwidthUploadRateLimit:
+    type: integer
+    minimum: 51200
+  Boolean:
+    type: boolean
+  VolumeARN:
+    type: string
+    minLength: 50
+    maxLength: 500
+  VolumeId:
+    type: string
+    minLength: 12
+    maxLength: 30
+  VolumeType:
+    type: string
+    minLength: 3
+    maxLength: 100
+  VolumeStatus:
+    type: string
+    minLength: 3
+    maxLength: 50
+  long:
+    type: integer
+  DoubleObject:
+    type: number
+    format: double
+  SnapshotId:
+    type: string
+    pattern: '\Asnap-([0-9A-Fa-f]{8}|[0-9A-Fa-f]{17})\z'
+  VolumeiSCSIAttributes:
+    type: object
+    properties:
+      TargetARN:
+        $ref: '#/definitions/TargetARN'
+        description: The Amazon Resource Name (ARN) of the volume target.
+      NetworkInterfaceId:
+        $ref: '#/definitions/NetworkInterfaceId'
+        description: The network interface identifier.
+      NetworkInterfacePort:
+        $ref: '#/definitions/integer'
+        description: The port used to communicate with iSCSI targets.
+      LunNumber:
+        $ref: '#/definitions/PositiveIntObject'
+        description: The logical disk number.
+      ChapEnabled:
+        $ref: '#/definitions/boolean'
+        description: Indicates whether mutual CHAP is enabled for the iSCSI target.
+    description: Lists iSCSI information about a volume.
+  CreatedDate:
+    type: string
+    format: date-time
+  VolumeUsedInBytes:
+    type: integer
+  KMSKey:
+    type: string
+    description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+    minLength: 20
+    maxLength: 2048
+  CachediSCSIVolume:
+    type: object
+    properties:
+      VolumeARN:
+        $ref: '#/definitions/VolumeARN'
+        description: The Amazon Resource Name (ARN) of the storage volume.
+      VolumeId:
+        $ref: '#/definitions/VolumeId'
+        description: 'The unique identifier of the volume, e.g. vol-AE4B946D.'
+      VolumeType:
+        $ref: '#/definitions/VolumeType'
+        description: One of the VolumeType enumeration values that describes the type of the volume.
+      VolumeStatus:
+        $ref: '#/definitions/VolumeStatus'
+        description: One of the VolumeStatus values that indicates the state of the storage volume.
+      VolumeSizeInBytes:
+        $ref: '#/definitions/long'
+        description: 'The size, in bytes, of the volume capacity.'
+      VolumeProgress:
+        $ref: '#/definitions/DoubleObject'
+        description: Represents the percentage complete if the volume is restoring or bootstrapping that represents the percent of data transferred. This field does not appear in the response if the cached volume is not restoring or bootstrapping.
+      SourceSnapshotId:
+        $ref: '#/definitions/SnapshotId'
+        description: 'If the cached volume was created from a snapshot, this field contains the snapshot ID used, e.g. snap-78e22663. Otherwise, this field is not included.'
+      VolumeiSCSIAttributes:
+        $ref: '#/definitions/VolumeiSCSIAttributes'
+        description: An <a>VolumeiSCSIAttributes</a> object that represents a collection of iSCSI attributes for one stored volume.
+      CreatedDate:
+        $ref: '#/definitions/CreatedDate'
+        description: 'The date the volume was created. Volumes created prior to March 28, 2017 don’t have this time stamp.'
+      VolumeUsedInBytes:
+        $ref: '#/definitions/VolumeUsedInBytes'
+        description: '<p>The size of the data stored on the volume in bytes.</p> <note> <p>This value is not available for volumes created prior to May 13, 2015, until you store data on the volume.</p> </note>'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+    description: Describes an iSCSI cached volume.
+  CachediSCSIVolumes:
+    type: array
+    items:
+      $ref: '#/definitions/CachediSCSIVolume'
+  TapeARN:
+    type: string
+    pattern: '^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\-0-9]+:[0-9]+:tape\/[0-9A-Z]{7,16}$'
+    minLength: 50
+    maxLength: 500
+  ChapInfo:
+    type: object
+    properties:
+      TargetARN:
+        $ref: '#/definitions/TargetARN'
+        description: '<p>The Amazon Resource Name (ARN) of the volume.</p> <p> Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).</p>'
+      SecretToAuthenticateInitiator:
+        $ref: '#/definitions/ChapSecret'
+        description: 'The secret key that the initiator (for example, the Windows client) must provide to participate in mutual CHAP with the target.'
+      InitiatorName:
+        $ref: '#/definitions/IqnName'
+        description: The iSCSI initiator that connects to the target.
+      SecretToAuthenticateTarget:
+        $ref: '#/definitions/ChapSecret'
+        description: The secret key that the target must provide to participate in mutual CHAP with the initiator (e.g. Windows client).
+    description: Describes Challenge-Handshake Authentication Protocol (CHAP) information that supports authentication between your gateway and iSCSI initiators.
+  ChapCredentials:
+    type: array
+    items:
+      $ref: '#/definitions/ChapInfo'
+  TargetARN:
+    type: string
+    minLength: 50
+    maxLength: 800
+  ChapSecret:
+    type: string
+    minLength: 1
+    maxLength: 100
+  IqnName:
+    type: string
+    pattern: '[0-9a-z:.-]+'
+    minLength: 1
+    maxLength: 255
+  ClientToken:
+    type: string
+    minLength: 5
+    maxLength: 100
+  TargetName:
+    type: string
+    pattern: '^[-\.;a-z0-9]+$'
+    minLength: 1
+    maxLength: 200
+  NetworkInterfaceId:
+    type: string
+    pattern: '\A(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}\z'
+  NFSFileShareDefaults:
+    type: object
+    properties:
+      FileMode:
+        $ref: '#/definitions/PermissionMode'
+        description: 'The Unix file mode in the form "nnnn". For example, "0666" represents the default file mode inside the file share. The default value is 0666. '
+      DirectoryMode:
+        $ref: '#/definitions/PermissionMode'
+        description: 'The Unix directory mode in the form "nnnn". For example, "0666" represents the default access mode for all directories inside the file share. The default value is 0777.'
+      GroupId:
+        $ref: '#/definitions/PermissionId'
+        description: 'The default group ID for the file share (unless the files have another group ID specified). The default value is nfsnobody. '
+      OwnerId:
+        $ref: '#/definitions/PermissionId'
+        description: 'The default owner ID for files in the file share (unless the files have another owner ID specified). The default value is nfsnobody. '
+    description: 'Describes Network File System (NFS) file share default values. Files and folders stored as Amazon S3 objects in S3 buckets don''t, by default, have Unix file permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that represent files and folders are assigned these default Unix permissions. This operation is only supported for file gateways.'
+  Role:
+    type: string
+    description: 'The ARN of the IAM role that file gateway assumes when it accesses the underlying storage. '
+    minLength: 20
+    maxLength: 2048
+  LocationARN:
+    type: string
+    description: 'The ARN of the backend storage used for storing file data. '
+    minLength: 16
+    maxLength: 310
   StorageClass:
     type: string
     description: <p/>
     minLength: 5
     maxLength: 20
-  StorageGatewayError:
+  ObjectACL:
+    type: string
+    enum:
+      - private
+      - public-read
+      - public-read-write
+      - authenticated-read
+      - bucket-owner-read
+      - bucket-owner-full-control
+      - aws-exec-read
+    description: A value that sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
+  FileShareClientList:
+    type: array
+    description: 'The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks. '
+    items:
+      $ref: '#/definitions/IPV4AddressCIDR'
+    minItems: 1
+    maxItems: 100
+  Squash:
+    type: string
+    description: '<p>The user mapped to anonymous user. Valid options are the following: </p> <ul> <li> <p> <code>RootSquash</code> - Only root is mapped to anonymous user.</p> </li> <li> <p> <code>NoSquash</code> - No one is mapped to anonymous user</p> </li> <li> <p> <code>AllSquash</code> - Everyone is mapped to anonymous user.</p> </li> </ul>'
+    minLength: 5
+    maxLength: 15
+  FileShareARN:
+    type: string
+    description: 'The Amazon Resource Name (ARN) of the file share. '
+    minLength: 50
+    maxLength: 500
+  FileShareUserList:
+    type: array
+    items:
+      $ref: '#/definitions/FileShareUser'
+    minItems: 0
+    maxItems: 100
+  SnapshotDescription:
+    type: string
+    minLength: 1
+    maxLength: 255
+  string:
+    type: string
+  DiskId:
+    type: string
+    minLength: 1
+    maxLength: 300
+  boolean:
+    type: boolean
+  TapeSize:
+    type: integer
+  TapeBarcode:
+    type: string
+    pattern: '^[A-Z0-9]*$'
+    minLength: 7
+    maxLength: 16
+  NumTapesToCreate:
+    type: integer
+    minimum: 1
+    maximum: 10
+  TapeBarcodePrefix:
+    type: string
+    pattern: '^[A-Z]*$'
+    minLength: 1
+    maxLength: 4
+  TapeARNs:
+    type: array
+    description: 'The Amazon Resource Name (ARN) of each of the tapes you want to list. If you don''t specify a tape ARN, the response lists all tapes in both your VTL and VTS.'
+    items:
+      $ref: '#/definitions/TapeARN'
+  DayOfWeek:
+    type: integer
+    minimum: 0
+    maximum: 6
+  double:
+    type: number
+    format: double
+  VolumeARNs:
+    type: array
+    items:
+      $ref: '#/definitions/VolumeARN'
+  GatewayId:
+    type: string
+    minLength: 12
+    maxLength: 30
+  GatewayState:
+    type: string
+    minLength: 2
+    maxLength: 25
+  GatewayNetworkInterfaces:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkInterface'
+  NextUpdateAvailabilityDate:
+    type: string
+    minLength: 1
+    maxLength: 25
+  LastSoftwareUpdate:
+    type: string
+    minLength: 1
+    maxLength: 25
+  HourOfDay:
+    type: integer
+    minimum: 0
+    maximum: 23
+  MinuteOfHour:
+    type: integer
+    minimum: 0
+    maximum: 59
+  FileShareARNList:
+    type: array
+    items:
+      $ref: '#/definitions/FileShareARN'
+    minItems: 1
+    maxItems: 10
+  NFSFileShareInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/NFSFileShareInfo'
+  SMBFileShareInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/SMBFileShareInfo'
+  DomainName:
+    type: string
+    pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
+  RecurrenceInHours:
+    type: integer
+    minimum: 1
+    maximum: 24
+  Description:
+    type: string
+    minLength: 1
+    maxLength: 255
+  StorediSCSIVolumes:
+    type: array
+    items:
+      $ref: '#/definitions/StorediSCSIVolume'
+  Marker:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  PositiveIntObject:
+    type: integer
+    minimum: 1
+  TapeArchives:
+    type: array
+    items:
+      $ref: '#/definitions/TapeArchive'
+  TapeRecoveryPointInfos:
+    type: array
+    items:
+      $ref: '#/definitions/TapeRecoveryPointInfo'
+  Tapes:
+    type: array
+    items:
+      $ref: '#/definitions/Tape'
+  VTLDeviceARNs:
+    type: array
+    items:
+      $ref: '#/definitions/VTLDeviceARN'
+  VTLDevices:
+    type: array
+    items:
+      $ref: '#/definitions/VTLDevice'
+  DeviceType:
+    type: string
+    minLength: 2
+    maxLength: 50
+  integer:
+    type: integer
+  DeviceiSCSIAttributes:
     type: object
     properties:
-      errorCode:
-        $ref: '#/definitions/ErrorCode'
-        description: Additional information about the error.
-      errorDetails:
-        $ref: '#/definitions/errorDetails'
-        description: Human-readable text that provides detail about the error that occurred.
-    description: Provides additional information about an error that was returned by the service as an or. See the <code>errorCode</code> and <code>errorDetails</code> members for more information about the error.
+      TargetARN:
+        $ref: '#/definitions/TargetARN'
+        description: Specifies the unique Amazon Resource Name (ARN) that encodes the iSCSI qualified name(iqn) of a tape drive or media changer target.
+      NetworkInterfaceId:
+        $ref: '#/definitions/NetworkInterfaceId'
+        description: The network interface identifier of the VTL device.
+      NetworkInterfacePort:
+        $ref: '#/definitions/integer'
+        description: The port used to communicate with iSCSI VTL device targets.
+      ChapEnabled:
+        $ref: '#/definitions/boolean'
+        description: Indicates whether mutual CHAP is enabled for the iSCSI target.
+    description: Lists iSCSI information about a VTL device.
+  DiskAllocationType:
+    type: string
+    minLength: 3
+    maxLength: 100
+  Disk:
+    type: object
+    properties:
+      DiskId:
+        $ref: '#/definitions/DiskId'
+      DiskPath:
+        $ref: '#/definitions/string'
+      DiskNode:
+        $ref: '#/definitions/string'
+      DiskStatus:
+        $ref: '#/definitions/string'
+      DiskSizeInBytes:
+        $ref: '#/definitions/long'
+      DiskAllocationType:
+        $ref: '#/definitions/DiskAllocationType'
+      DiskAllocationResource:
+        $ref: '#/definitions/string'
+  Disks:
+    type: array
+    items:
+      $ref: '#/definitions/Disk'
+  DomainUserName:
+    type: string
+    pattern: '^\w[\w\.\- ]*$'
+  DomainUserPassword:
+    type: string
+    pattern: '^[ -~]+$'
+    format: password
+  IPV4AddressCIDR:
+    type: string
+    pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))?$'
+  FileShareId:
+    type: string
+    description: 'The ID of the file share. '
+    minLength: 12
+    maxLength: 30
+  FileShareType:
+    type: string
+    enum:
+      - NFS
+      - SMB
+    description: The type of the file share.
+  FileShareStatus:
+    type: string
+    description: 'The status of the file share. Possible values are <code>CREATING</code>, <code>UPDATING</code>, <code>AVAILABLE</code> and <code>DELETING</code>. '
+    minLength: 3
+    maxLength: 50
+  FileShareInfo:
+    type: object
+    properties:
+      FileShareType:
+        $ref: '#/definitions/FileShareType'
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+      FileShareId:
+        $ref: '#/definitions/FileShareId'
+      FileShareStatus:
+        $ref: '#/definitions/FileShareStatus'
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+    description: Describes a file share.
+  FileShareInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/FileShareInfo'
+  FileShareUser:
+    type: string
+    minLength: 1
+    maxLength: 64
+  Folder:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  FolderList:
+    type: array
+    description: 'A comma-separated list of the paths of folders to refresh in the cache. The default is [<code>"/"</code>]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If <code>Recursive</code> is set to "true", the entire S3 bucket that the file share has access to is refreshed.'
+    items:
+      $ref: '#/definitions/Folder'
+    minItems: 1
+    maxItems: 50
+  GatewayOperationalState:
+    type: string
+    minLength: 2
+    maxLength: 25
+  GatewayInfo:
+    type: object
+    properties:
+      GatewayId:
+        $ref: '#/definitions/GatewayId'
+        description: 'The unique identifier assigned to your gateway during activation. This ID becomes part of the gateway Amazon Resource Name (ARN), which you use as input for other operations.'
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+        description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.
+      GatewayType:
+        $ref: '#/definitions/GatewayType'
+        description: The type of the gateway.
+      GatewayOperationalState:
+        $ref: '#/definitions/GatewayOperationalState'
+        description: '<p>The state of the gateway.</p> <p>Valid Values: DISABLED or ACTIVE</p>'
+      GatewayName:
+        $ref: '#/definitions/string'
+        description: The name of the gateway.
+    description: Describes a gateway object.
+  NetworkInterface:
+    type: object
+    properties:
+      Ipv4Address:
+        $ref: '#/definitions/string'
+        description: The Internet Protocol version 4 (IPv4) address of the interface.
+      MacAddress:
+        $ref: '#/definitions/string'
+        description: <p>The Media Access Control (MAC) address of the interface.</p> <note> <p>This is currently unsupported and will not be returned in output.</p> </note>
+      Ipv6Address:
+        $ref: '#/definitions/string'
+        description: The Internet Protocol version 6 (IPv6) address of the interface. <i>Currently not supported</i>.
+    description: Describes a gateway's network interface.
+  Gateways:
+    type: array
+    items:
+      $ref: '#/definitions/GatewayInfo'
+  Initiator:
+    type: string
+    minLength: 1
+    maxLength: 50
+  Initiators:
+    type: array
+    items:
+      $ref: '#/definitions/Initiator'
+  TapeInfos:
+    type: array
+    description: 'An array of <a>TapeInfo</a> objects, where each object describes an a single tape. If there not tapes in the tape library or VTS, then the <code>TapeInfos</code> is an empty array.'
+    items:
+      $ref: '#/definitions/TapeInfo'
+  VolumeRecoveryPointInfos:
+    type: array
+    items:
+      $ref: '#/definitions/VolumeRecoveryPointInfo'
+  VolumeInfos:
+    type: array
+    items:
+      $ref: '#/definitions/VolumeInfo'
+  LocalConsolePassword:
+    type: string
+    pattern: '^[ -~]+$'
+    minLength: 6
+    maxLength: 512
+    format: password
+  PermissionMode:
+    type: string
+    pattern: '^[0-7]{4}$'
+    minLength: 1
+    maxLength: 4
+  PermissionId:
+    type: integer
+    minimum: 0
+    maximum: 4294967294
+  Path:
+    type: string
+    description: 'The file share path used by the NFS client to identify the mount point. '
+  NFSFileShareInfo:
+    type: object
+    properties:
+      NFSFileShareDefaults:
+        $ref: '#/definitions/NFSFileShareDefaults'
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+      FileShareId:
+        $ref: '#/definitions/FileShareId'
+      FileShareStatus:
+        $ref: '#/definitions/FileShareStatus'
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+      KMSEncrypted:
+        $ref: '#/definitions/boolean'
+        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional. '
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+      Path:
+        $ref: '#/definitions/Path'
+      Role:
+        $ref: '#/definitions/Role'
+      LocationARN:
+        $ref: '#/definitions/LocationARN'
+      DefaultStorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: 'The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are <code>S3_STANDARD</code>, <code>S3_STANDARD_IA</code>, or <code>S3_ONEZONE_IA</code>. If this field is not populated, the default value <code>S3_STANDARD</code> is used. Optional.'
+      ObjectACL:
+        $ref: '#/definitions/ObjectACL'
+      ClientList:
+        $ref: '#/definitions/FileShareClientList'
+      Squash:
+        $ref: '#/definitions/Squash'
+      ReadOnly:
+        $ref: '#/definitions/Boolean'
+        description: 'A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.'
+      GuessMIMETypeEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.'
+      RequesterPays:
+        $ref: '#/definitions/Boolean'
+        description: A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.
+    description: 'The Unix file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported in file gateways.'
+  NotificationId:
+    type: string
+    description: The randomly generated ID of the notification that was sent. This ID is in UUID format.
+    minLength: 1
+    maxLength: 2048
+  TagKeys:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  SMBFileShareInfo:
+    type: object
+    properties:
+      FileShareARN:
+        $ref: '#/definitions/FileShareARN'
+      FileShareId:
+        $ref: '#/definitions/FileShareId'
+      FileShareStatus:
+        $ref: '#/definitions/FileShareStatus'
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+      KMSEncrypted:
+        $ref: '#/definitions/boolean'
+        description: 'True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional. '
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+      Path:
+        $ref: '#/definitions/Path'
+        description: The file share path used by the SMB client to identify the mount point.
+      Role:
+        $ref: '#/definitions/Role'
+      LocationARN:
+        $ref: '#/definitions/LocationARN'
+      DefaultStorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: 'The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are <code>S3_STANDARD</code>, <code>S3_STANDARD_IA</code>, or <code>S3_ONEZONE_IA</code>. If this field is not populated, the default value <code>S3_STANDARD</code> is used. Optional.'
+      ObjectACL:
+        $ref: '#/definitions/ObjectACL'
+      ReadOnly:
+        $ref: '#/definitions/Boolean'
+        description: 'A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.'
+      GuessMIMETypeEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.'
+      RequesterPays:
+        $ref: '#/definitions/Boolean'
+        description: A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.
+      ValidUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
+      InvalidUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
+      Authentication:
+        $ref: '#/definitions/Authentication'
+    description: 'The Windows file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported for file gateways.'
+  SMBGuestPassword:
+    type: string
+    pattern: '^[ -~]+$'
+    minLength: 6
+    maxLength: 512
+    format: password
   StorediSCSIVolume:
     type: object
     properties:
@@ -4404,11 +5222,17 @@ definitions:
       VolumeUsedInBytes:
         $ref: '#/definitions/VolumeUsedInBytes'
         description: '<p>The size of the data stored on the volume in bytes. </p> <note> <p>This value is not available for volumes created prior to May 13, 2015, until you store data on the volume.</p> </note>'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
     description: Describes an iSCSI stored volume.
-  StorediSCSIVolumes:
-    type: array
-    items:
-      $ref: '#/definitions/StorediSCSIVolume'
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -4419,22 +5243,17 @@ definitions:
         $ref: '#/definitions/TagKey'
       Value:
         $ref: '#/definitions/TagValue'
-  TagKey:
+  Time:
     type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagKeys:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-  TagValue:
+    format: date-time
+  TapeStatus:
     type: string
-    maxLength: 256
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
+  VTLDeviceARN:
+    type: string
+    minLength: 50
+    maxLength: 500
+  TapeUsage:
+    type: integer
   Tape:
     type: object
     properties:
@@ -4462,17 +5281,11 @@ definitions:
       TapeUsedInBytes:
         $ref: '#/definitions/TapeUsage'
         description: '<p>The size, in bytes, of data stored on the virtual tape.</p> <note> <p>This value is not available for tapes created prior to May 13, 2015.</p> </note>'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
     description: Describes a virtual tape object.
-  TapeARN:
+  TapeArchiveStatus:
     type: string
-    pattern: '^arn:(aws|aws-cn):storagegateway:[a-z\-0-9]+:[0-9]+:tape\/[0-9A-Z]{7,16}$'
-    minLength: 50
-    maxLength: 500
-  TapeARNs:
-    type: array
-    description: 'The Amazon Resource Name (ARN) of each of the tapes you want to list. If you don''t specify a tape ARN, the response lists all tapes in both your VTL and VTS.'
-    items:
-      $ref: '#/definitions/TapeARN'
   TapeArchive:
     type: object
     properties:
@@ -4484,12 +5297,13 @@ definitions:
         description: The barcode that identifies the archived virtual tape.
       TapeCreatedDate:
         $ref: '#/definitions/Time'
+        description: The date the virtual tape was created.
       TapeSizeInBytes:
         $ref: '#/definitions/TapeSize'
         description: 'The size, in bytes, of the archived virtual tape.'
       CompletionTime:
         $ref: '#/definitions/Time'
-        description: '<p>The time that the archiving of the virtual tape was completed.</p> <p>The string format of the completion time is in the ISO8601 extended YYYY-MM-DD''T''HH:MM:SS''Z'' format.</p>'
+        description: '<p>The time that the archiving of the virtual tape was completed.</p> <p>The default time stamp format is in the ISO8601 extended YYYY-MM-DD''T''HH:MM:SS''Z'' format.</p>'
       RetrievedTo:
         $ref: '#/definitions/GatewayARN'
         description: <p>The Amazon Resource Name (ARN) of the tape gateway that the virtual tape is being retrieved to.</p> <p>The virtual tape is retrieved from the virtual tape shelf (VTS).</p>
@@ -4499,27 +5313,9 @@ definitions:
       TapeUsedInBytes:
         $ref: '#/definitions/TapeUsage'
         description: '<p>The size, in bytes, of data stored on the virtual tape.</p> <note> <p>This value is not available for tapes created prior to May 13, 2015.</p> </note>'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
     description: Represents a virtual tape that is archived in the virtual tape shelf (VTS).
-  TapeArchiveStatus:
-    type: string
-  TapeArchives:
-    type: array
-    items:
-      $ref: '#/definitions/TapeArchive'
-  TapeBarcode:
-    type: string
-    pattern: '^[A-Z0-9]*$'
-    minLength: 7
-    maxLength: 16
-  TapeBarcodePrefix:
-    type: string
-    pattern: '^[A-Z]*$'
-    minLength: 1
-    maxLength: 4
-  TapeDriveType:
-    type: string
-    minLength: 2
-    maxLength: 50
   TapeInfo:
     type: object
     properties:
@@ -4539,11 +5335,8 @@ definitions:
         $ref: '#/definitions/GatewayARN'
         description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.
     description: Describes a virtual tape.
-  TapeInfos:
-    type: array
-    description: 'An array of <a>TapeInfo</a> objects, where each object describes an a single tape. If there not tapes in the tape library or VTS, then the <code>TapeInfos</code> is an empty array.'
-    items:
-      $ref: '#/definitions/TapeInfo'
+  TapeRecoveryPointStatus:
+    type: string
   TapeRecoveryPointInfo:
     type: object
     properties:
@@ -4552,280 +5345,19 @@ definitions:
         description: The Amazon Resource Name (ARN) of the virtual tape.
       TapeRecoveryPointTime:
         $ref: '#/definitions/Time'
-        description: '<p>The time when the point-in-time view of the virtual tape was replicated for later recovery.</p> <p>The string format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD''T''HH:MM:SS''Z'' format.</p>'
+        description: '<p>The time when the point-in-time view of the virtual tape was replicated for later recovery.</p> <p>The default time stamp format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD''T''HH:MM:SS''Z'' format.</p>'
       TapeSizeInBytes:
         $ref: '#/definitions/TapeSize'
         description: 'The size, in bytes, of the virtual tapes to recover.'
       TapeStatus:
         $ref: '#/definitions/TapeRecoveryPointStatus'
     description: Describes a recovery point.
-  TapeRecoveryPointInfos:
-    type: array
-    items:
-      $ref: '#/definitions/TapeRecoveryPointInfo'
-  TapeRecoveryPointStatus:
+  VTLDeviceType:
     type: string
-  TapeSize:
-    type: integer
-  TapeStatus:
+  VTLDeviceVendor:
     type: string
-  TapeUsage:
-    type: integer
-  Tapes:
-    type: array
-    items:
-      $ref: '#/definitions/Tape'
-  TargetARN:
+  VTLDeviceProductIdentifier:
     type: string
-    minLength: 50
-    maxLength: 800
-  TargetName:
-    type: string
-    pattern: '^[-\.;a-z0-9]+$'
-    minLength: 1
-    maxLength: 200
-  Time:
-    type: string
-    format: date-time
-  UpdateBandwidthRateLimitInput:
-    type: object
-    required:
-      - GatewayARN
-    example:
-      AverageDownloadRateLimitInBitsPerSec: 102400
-      AverageUploadRateLimitInBitsPerSec: 51200
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-      AverageUploadRateLimitInBitsPerSec:
-        $ref: '#/definitions/BandwidthUploadRateLimit'
-        description: The average upload bandwidth rate limit in bits per second.
-      AverageDownloadRateLimitInBitsPerSec:
-        $ref: '#/definitions/BandwidthDownloadRateLimit'
-        description: The average download bandwidth rate limit in bits per second.
-    description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>UpdateBandwidthRateLimitInput$AverageDownloadRateLimitInBitsPerSec</a> </p> </li> <li> <p> <a>UpdateBandwidthRateLimitInput$AverageUploadRateLimitInBitsPerSec</a> </p> </li> </ul>'
-  UpdateBandwidthRateLimitOutput:
-    type: object
-    example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the of the gateway whose throttle information was updated.
-  UpdateChapCredentialsInput:
-    type: object
-    required:
-      - TargetARN
-      - SecretToAuthenticateInitiator
-      - InitiatorName
-    example:
-      InitiatorName: 'iqn.1991-05.com.microsoft:computername.domain.example.com'
-      SecretToAuthenticateInitiator: '111111111111'
-      SecretToAuthenticateTarget: '222222222222'
-      TargetARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume'
-    properties:
-      TargetARN:
-        $ref: '#/definitions/TargetARN'
-        description: The Amazon Resource Name (ARN) of the iSCSI volume target. Use the <a>DescribeStorediSCSIVolumes</a> operation to return the TargetARN for specified VolumeARN.
-      SecretToAuthenticateInitiator:
-        $ref: '#/definitions/ChapSecret'
-        description: '<p>The secret key that the initiator (for example, the Windows client) must provide to participate in mutual CHAP with the target.</p> <note> <p>The secret key must be between 12 and 16 bytes when encoded in UTF-8.</p> </note>'
-      InitiatorName:
-        $ref: '#/definitions/IqnName'
-        description: The iSCSI initiator that connects to the target.
-      SecretToAuthenticateTarget:
-        $ref: '#/definitions/ChapSecret'
-        description: '<p>The secret key that the target must provide to participate in mutual CHAP with the initiator (e.g. Windows client).</p> <p>Byte constraints: Minimum bytes of 12. Maximum bytes of 16.</p> <note> <p>The secret key must be between 12 and 16 bytes when encoded in UTF-8.</p> </note>'
-    description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>UpdateChapCredentialsInput$InitiatorName</a> </p> </li> <li> <p> <a>UpdateChapCredentialsInput$SecretToAuthenticateInitiator</a> </p> </li> <li> <p> <a>UpdateChapCredentialsInput$SecretToAuthenticateTarget</a> </p> </li> <li> <p> <a>UpdateChapCredentialsInput$TargetARN</a> </p> </li> </ul>'
-  UpdateChapCredentialsOutput:
-    type: object
-    example:
-      InitiatorName: 'iqn.1991-05.com.microsoft:computername.domain.example.com'
-      TargetARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume'
-    properties:
-      TargetARN:
-        $ref: '#/definitions/TargetARN'
-        description: The Amazon Resource Name (ARN) of the target. This is the same target specified in the request.
-      InitiatorName:
-        $ref: '#/definitions/IqnName'
-        description: The iSCSI initiator that connects to the target. This is the same initiator name specified in the request.
-    description: 'A JSON object containing the following fields:'
-  UpdateGatewayInformationInput:
-    type: object
-    required:
-      - GatewayARN
-    example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-      GatewayName: MyGateway2
-      GatewayTimezone: 'GMT-12:00'
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-      GatewayName:
-        $ref: '#/definitions/GatewayName'
-      GatewayTimezone:
-        $ref: '#/definitions/GatewayTimezone'
-  UpdateGatewayInformationOutput:
-    type: object
-    example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-      GatewayName: ''
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-      GatewayName:
-        $ref: '#/definitions/string'
-    description: A JSON object containing the ARN of the gateway that was updated.
-  UpdateGatewaySoftwareNowInput:
-    type: object
-    required:
-      - GatewayARN
-    example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the of the gateway to update.
-  UpdateGatewaySoftwareNowOutput:
-    type: object
-    example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the of the gateway that was updated.
-  UpdateMaintenanceStartTimeInput:
-    type: object
-    required:
-      - GatewayARN
-      - HourOfDay
-      - MinuteOfHour
-      - DayOfWeek
-    example:
-      DayOfWeek: 2
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-      HourOfDay: 0
-      MinuteOfHour: 30
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-      HourOfDay:
-        $ref: '#/definitions/HourOfDay'
-        description: 'The hour component of the maintenance start time represented as <i>hh</i>, where <i>hh</i> is the hour (00 to 23). The hour of the day is in the time zone of the gateway.'
-      MinuteOfHour:
-        $ref: '#/definitions/MinuteOfHour'
-        description: 'The minute component of the maintenance start time represented as <i>mm</i>, where <i>mm</i> is the minute (00 to 59). The minute of the hour is in the time zone of the gateway.'
-      DayOfWeek:
-        $ref: '#/definitions/DayOfWeek'
-        description: 'The maintenance start time day of the week represented as an ordinal number from 0 to 6, where 0 represents Sunday and 6 Saturday.'
-    description: '<p>A JSON object containing the following fields:</p> <ul> <li> <p> <a>UpdateMaintenanceStartTimeInput$DayOfWeek</a> </p> </li> <li> <p> <a>UpdateMaintenanceStartTimeInput$HourOfDay</a> </p> </li> <li> <p> <a>UpdateMaintenanceStartTimeInput$MinuteOfHour</a> </p> </li> </ul>'
-  UpdateMaintenanceStartTimeOutput:
-    type: object
-    example:
-      GatewayARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B'
-    properties:
-      GatewayARN:
-        $ref: '#/definitions/GatewayARN'
-    description: A JSON object containing the of the gateway whose maintenance start time is updated.
-  UpdateNFSFileShareInput:
-    type: object
-    required:
-      - FileShareARN
-    properties:
-      FileShareARN:
-        $ref: '#/definitions/FileShareARN'
-        description: 'The Amazon Resource Name (ARN) of the file share to be updated. '
-      KMSEncrypted:
-        $ref: '#/definitions/Boolean'
-        description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional. '
-      KMSKey:
-        $ref: '#/definitions/KMSKey'
-        description: 'The KMS key used for Amazon S3 server side encryption. This value can only be set when KmsEncrypted is true. Optional. '
-      NFSFileShareDefaults:
-        $ref: '#/definitions/NFSFileShareDefaults'
-        description: The default values for the file share. Optional.
-      DefaultStorageClass:
-        $ref: '#/definitions/StorageClass'
-        description: 'The default storage class for objects put into an Amazon S3 bucket by a file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.'
-      ClientList:
-        $ref: '#/definitions/FileShareClientList'
-        description: The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks.
-      Squash:
-        $ref: '#/definitions/Squash'
-        description: '<p>The user mapped to anonymous user. Valid options are the following:</p> <ul> <li> <p>"RootSquash" - Only root is mapped to anonymous user.</p> </li> <li> <p>"NoSquash" - No one is mapped to anonymous user</p> </li> <li> <p>"AllSquash" - Everyone is mapped to anonymous user.</p> </li> </ul>'
-      ReadOnly:
-        $ref: '#/definitions/Boolean'
-        description: 'Sets the write status of a file share: "true" if the write status is read-only, otherwise "false".'
-      GuessMIMETypeEnabled:
-        $ref: '#/definitions/Boolean'
-        description: 'Enables guessing of the MIME type for uploaded objects based on file extensions: "true" to enable MIME type guessing, and otherwise "false".'
-    description: UpdateNFSFileShareInput
-  UpdateNFSFileShareOutput:
-    type: object
-    properties:
-      FileShareARN:
-        $ref: '#/definitions/FileShareARN'
-        description: 'The Amazon Resource Name (ARN) of the updated file share. '
-    description: UpdateNFSFileShareOutput
-  UpdateSnapshotScheduleInput:
-    type: object
-    required:
-      - VolumeARN
-      - StartAt
-      - RecurrenceInHours
-    example:
-      Description: Hourly snapshot
-      RecurrenceInHours: 1
-      StartAt: 0
-      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
-    properties:
-      VolumeARN:
-        $ref: '#/definitions/VolumeARN'
-        description: The Amazon Resource Name (ARN) of the volume. Use the <a>ListVolumes</a> operation to return a list of gateway volumes.
-      StartAt:
-        $ref: '#/definitions/HourOfDay'
-        description: 'The hour of the day at which the snapshot schedule begins represented as <i>hh</i>, where <i>hh</i> is the hour (0 to 23). The hour of the day is in the time zone of the gateway.'
-      RecurrenceInHours:
-        $ref: '#/definitions/RecurrenceInHours'
-        description: Frequency of snapshots. Specify the number of hours between snapshots.
-      Description:
-        $ref: '#/definitions/Description'
-        description: Optional description of the snapshot that overwrites the existing description.
-    description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>UpdateSnapshotScheduleInput$Description</a> </p> </li> <li> <p> <a>UpdateSnapshotScheduleInput$RecurrenceInHours</a> </p> </li> <li> <p> <a>UpdateSnapshotScheduleInput$StartAt</a> </p> </li> <li> <p> <a>UpdateSnapshotScheduleInput$VolumeARN</a> </p> </li> </ul>'
-  UpdateSnapshotScheduleOutput:
-    type: object
-    example:
-      VolumeARN: 'arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB'
-    properties:
-      VolumeARN:
-        $ref: '#/definitions/VolumeARN'
-        description: <p/>
-    description: A JSON object containing the of the updated storage volume.
-  UpdateVTLDeviceTypeInput:
-    type: object
-    required:
-      - VTLDeviceARN
-      - DeviceType
-    example:
-      DeviceType: Medium Changer
-      VTLDeviceARN: 'arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/device/AMZN_SGW-1FAD4876_MEDIACHANGER_00001'
-    properties:
-      VTLDeviceARN:
-        $ref: '#/definitions/VTLDeviceARN'
-        description: The Amazon Resource Name (ARN) of the medium changer you want to select.
-      DeviceType:
-        $ref: '#/definitions/DeviceType'
-        description: '<p>The type of medium changer you want to select.</p> <p> Valid Values: "STK-L700", "AWS-Gateway-VTL"</p>'
-  UpdateVTLDeviceTypeOutput:
-    type: object
-    example:
-      VTLDeviceARN: 'arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/device/AMZN_SGW-1FAD4876_MEDIACHANGER_00001'
-    properties:
-      VTLDeviceARN:
-        $ref: '#/definitions/VTLDeviceARN'
-        description: The Amazon Resource Name (ARN) of the medium changer you have selected.
-    description: UpdateVTLDeviceTypeOutput
   VTLDevice:
     type: object
     properties:
@@ -4842,36 +5374,6 @@ definitions:
         $ref: '#/definitions/DeviceiSCSIAttributes'
         description: A list of iSCSI information about a VTL device.
     description: Represents a device object associated with a tape gateway.
-  VTLDeviceARN:
-    type: string
-    minLength: 50
-    maxLength: 500
-  VTLDeviceARNs:
-    type: array
-    items:
-      $ref: '#/definitions/VTLDeviceARN'
-  VTLDeviceProductIdentifier:
-    type: string
-  VTLDeviceType:
-    type: string
-  VTLDeviceVendor:
-    type: string
-  VTLDevices:
-    type: array
-    items:
-      $ref: '#/definitions/VTLDevice'
-  VolumeARN:
-    type: string
-    minLength: 50
-    maxLength: 500
-  VolumeARNs:
-    type: array
-    items:
-      $ref: '#/definitions/VolumeARN'
-  VolumeId:
-    type: string
-    minLength: 12
-    maxLength: 30
   VolumeInfo:
     type: object
     properties:
@@ -4892,10 +5394,6 @@ definitions:
         $ref: '#/definitions/long'
         description: '<p>The size of the volume in bytes.</p> <p>Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).</p>'
     description: Describes a storage volume object.
-  VolumeInfos:
-    type: array
-    items:
-      $ref: '#/definitions/VolumeInfo'
   VolumeRecoveryPointInfo:
     type: object
     properties:
@@ -4907,56 +5405,3 @@ definitions:
         $ref: '#/definitions/long'
       VolumeRecoveryPointTime:
         $ref: '#/definitions/string'
-  VolumeRecoveryPointInfos:
-    type: array
-    items:
-      $ref: '#/definitions/VolumeRecoveryPointInfo'
-  VolumeStatus:
-    type: string
-    minLength: 3
-    maxLength: 50
-  VolumeType:
-    type: string
-    minLength: 3
-    maxLength: 100
-  VolumeUsedInBytes:
-    type: integer
-  VolumeiSCSIAttributes:
-    type: object
-    properties:
-      TargetARN:
-        $ref: '#/definitions/TargetARN'
-        description: The Amazon Resource Name (ARN) of the volume target.
-      NetworkInterfaceId:
-        $ref: '#/definitions/NetworkInterfaceId'
-        description: The network interface identifier.
-      NetworkInterfacePort:
-        $ref: '#/definitions/integer'
-        description: The port used to communicate with iSCSI targets.
-      LunNumber:
-        $ref: '#/definitions/PositiveIntObject'
-        description: The logical disk number.
-      ChapEnabled:
-        $ref: '#/definitions/boolean'
-        description: Indicates whether mutual CHAP is enabled for the iSCSI target.
-    description: Lists iSCSI information about a volume.
-  boolean:
-    type: boolean
-  double:
-    type: number
-    format: double
-  errorDetails:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/string'
-        value:
-          $ref: '#/definitions/string'
-  integer:
-    type: integer
-  long:
-    type: integer
-  string:
-    type: string

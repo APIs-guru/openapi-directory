@@ -68,7 +68,17 @@ paths:
           name: direction_id
           required: false
           type: integer
-        - description: Filter by the date and time of the request (ISO 8601 UTC format)
+        - description: Indicates if filtering runs (and their departures) to those that arrive at destination before date_utc (default = false). Requires max_results &gt; 0.
+          in: query
+          name: look_backwards
+          required: false
+          type: boolean
+        - description: Indicates that stop_id parameter will accept "GTFS stop_id" data
+          in: query
+          name: gtfs
+          required: false
+          type: boolean
+        - description: Filter by the date and time of the request (ISO 8601 UTC format) (default = current date and time)
           format: date-time
           in: query
           name: date_utc
@@ -80,11 +90,6 @@ paths:
           name: max_results
           required: false
           type: integer
-        - description: Indicates that stop_id parameter will accept "GTFS stop_id" data
-          in: query
-          name: gtfs
-          required: false
-          type: boolean
         - description: Indicates if cancelled services (if they exist) are returned (default = false) - metropolitan train only
           in: query
           name: include_cancelled
@@ -170,7 +175,17 @@ paths:
           name: direction_id
           required: false
           type: integer
-        - description: Filter by the date and time of the request (ISO 8601 UTC format)
+        - description: Indicates if filtering runs (and their departures) to those that arrive at destination before date_utc (default = false). Requires max_results &gt; 0.
+          in: query
+          name: look_backwards
+          required: false
+          type: boolean
+        - description: Indicates that stop_id parameter will accept "GTFS stop_id" data
+          in: query
+          name: gtfs
+          required: false
+          type: boolean
+        - description: Filter by the date and time of the request (ISO 8601 UTC format) (default = current date and time)
           format: date-time
           in: query
           name: date_utc
@@ -182,11 +197,6 @@ paths:
           name: max_results
           required: false
           type: integer
-        - description: Indicates that stop_id parameter will accept "GTFS stop_id" data
-          in: query
-          name: gtfs
-          required: false
-          type: boolean
         - description: Indicates if cancelled services (if they exist) are returned (default = false) - metropolitan train only
           in: query
           name: include_cancelled
@@ -527,6 +537,108 @@ paths:
       summary: View a specific disruption
       tags:
         - Disruptions
+  /v3/outlets:
+    get:
+      deprecated: false
+      operationId: Outlets_GetAllOutlets
+      parameters:
+        - description: Maximum number of results returned (default = 30)
+          format: int32
+          in: query
+          name: max_results
+          required: false
+          type: integer
+        - description: Please ignore
+          in: query
+          name: token
+          required: false
+          type: string
+        - description: Your developer id
+          in: query
+          name: devid
+          required: false
+          type: string
+        - description: Authentication signature for request
+          in: query
+          name: signature
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Ticket outlets.
+          schema:
+            $ref: '#/definitions/V3.OutletResponse'
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/V3.ErrorResponse'
+        '403':
+          description: Access Denied
+          schema:
+            $ref: '#/definitions/V3.ErrorResponse'
+      summary: List all ticket outlets
+      tags:
+        - Outlets
+  '/v3/outlets/location/{latitude},{longitude}':
+    get:
+      deprecated: false
+      operationId: Outlets_GetOutletsByGeolocation
+      parameters:
+        - description: Geographic coordinate of latitude
+          format: float
+          in: path
+          name: latitude
+          required: true
+          type: number
+        - description: Geographic coordinate of longitude
+          format: float
+          in: path
+          name: longitude
+          required: true
+          type: number
+        - description: Filter by maximum distance (in metres) from location specified via latitude and longitude parameters (default = 300)
+          format: double
+          in: query
+          name: max_distance
+          required: false
+          type: number
+        - description: Maximum number of results returned (default = 30)
+          format: int32
+          in: query
+          name: max_results
+          required: false
+          type: integer
+        - description: Please ignore
+          in: query
+          name: token
+          required: false
+          type: string
+        - description: Your developer id
+          in: query
+          name: devid
+          required: false
+          type: string
+        - description: Authentication signature for request
+          in: query
+          name: signature
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Ticket outlets near the specified location.
+          schema:
+            $ref: '#/definitions/V3.OutletGeolocationResponse'
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/V3.ErrorResponse'
+        '403':
+          description: Access Denied
+          schema:
+            $ref: '#/definitions/V3.ErrorResponse'
+      summary: List ticket outlets near a specific location
+      tags:
+        - Outlets
   '/v3/pattern/run/{run_id}/route_type/{route_type}':
     get:
       deprecated: false
@@ -550,6 +662,21 @@ paths:
           name: route_type
           required: true
           type: integer
+        - collectionFormat: multi
+          description: 'Objects to be returned in full (i.e. expanded) - options include: all, stop, route, run, direction, disruption. By default disruptions are expanded.'
+          in: query
+          items:
+            enum:
+              - All
+              - Stop
+              - Route
+              - Run
+              - Direction
+              - Disruption
+            type: string
+          name: expand
+          required: true
+          type: array
         - description: Filter by stop_id; values returned by Stops API
           format: int32
           in: query
@@ -972,6 +1099,16 @@ paths:
           name: include_outlets
           required: false
           type: boolean
+        - description: Indicates whether to find stops by suburbs in the search term (default = true)
+          in: query
+          name: match_stop_by_suburb
+          required: false
+          type: boolean
+        - description: Indicates whether to find routes by suburbs in the search term (default = true)
+          in: query
+          name: match_route_by_suburb
+          required: false
+          type: boolean
         - description: Please ignore
           in: query
           name: token
@@ -1220,11 +1357,146 @@ definitions:
   V2.Object:
     properties: {}
     type: object
+  V3.BulkDeparturesRequest:
+    properties:
+      date_utc:
+        description: Filter by the date and time of the request (ISO 8601 UTC format) (default = current date and time)
+        format: date-time
+        type: string
+      expand:
+        description: 'List objects to be returned in full (i.e. expanded) - options include: all, stop, route, run, direction, disruption'
+        items:
+          enum:
+            - All
+            - Stop
+            - Route
+            - Run
+            - Direction
+            - Disruption
+          type: string
+        type: array
+      include_cancelled:
+        description: Indicates if cancelled services (if they exist) are returned (default = false) - metropolitan train only
+        type: boolean
+      look_backwards:
+        description: Indicates if filtering runs (and their departures) to those that arrive at destination before date_utc (default = false). Requires max_results &gt; 0.
+        type: boolean
+      requests:
+        description: Collection of departure requests
+        items:
+          $ref: '#/definitions/V3.StopDepartureRequest'
+        type: array
+    required:
+      - requests
+    type: object
+  V3.BulkDeparturesResponse:
+    properties:
+      directions:
+        description: Directions of travel of route
+        items:
+          $ref: '#/definitions/V3.Direction'
+        type: array
+      disruptions:
+        additionalProperties:
+          $ref: '#/definitions/V3.Disruption'
+        description: Disruption information applicable to relevant routes or stops
+        type: object
+      responses:
+        description: Contains departures for the requested stop and route(s). It includes details as to the route_direction and whether it is still valid.
+        items:
+          $ref: '#/definitions/V3.BulkDeparturesUpdateResponse'
+        type: array
+      routes:
+        description: 'Train lines, tram routes, bus routes, regional coach routes, Night Bus routes'
+        items:
+          $ref: '#/definitions/V3.Route'
+        type: array
+      runs:
+        description: Individual trips/services of a route
+        items:
+          $ref: '#/definitions/V3.Run'
+        type: array
+      status:
+        $ref: '#/definitions/V3.Status'
+        description: API Status / Metadata
+      stops:
+        additionalProperties:
+          $ref: '#/definitions/V3.BulkDeparturesStopResponse'
+        description: 'A train station, tram stop, bus stop, regional coach stop or Night Bus stop'
+        type: object
+    type: object
+  V3.BulkDeparturesRouteDirectionResponse:
+    properties:
+      direction_id:
+        description: Direction of travel identifier
+        format: int32
+        type: integer
+      direction_name:
+        description: Name of direction of travel
+        type: string
+      route_id:
+        description: Route identifier
+        type: string
+    type: object
+  V3.BulkDeparturesStopResponse:
+    properties:
+      stop_id:
+        description: Stop identifier
+        format: int32
+        type: integer
+      stop_latitude:
+        description: Geographic coordinate of latitude at stop
+        format: float
+        type: number
+      stop_longitude:
+        description: Geographic coordinate of longitude at stop
+        format: float
+        type: number
+      stop_name:
+        description: Name of stop
+        type: string
+      stop_suburb:
+        description: suburb of stop
+        type: string
+    type: object
+  V3.BulkDeparturesUpdateResponse:
+    properties:
+      departures:
+        description: Timetabled and real-time service departures
+        items:
+          $ref: '#/definitions/V3.Departure'
+        type: array
+      requested_route_direction:
+        $ref: '#/definitions/V3.BulkDeparturesRouteDirectionResponse'
+        description: The route direction that these departures are for. Will be one of the requested route directions
+      route_direction:
+        $ref: '#/definitions/V3.BulkDeparturesRouteDirectionResponse'
+        description: The route direction found matching the requested_route_direction
+      route_direction_status:
+        description: "The status of the route direction (changed | unchanged).\r\n            If changed, requests should change the requested_route_direction for the route_direction supplied."
+        enum:
+          - 0
+          - 1
+        format: int32
+        type: integer
+      route_type:
+        description: Transport mode identifier
+        format: int32
+        type: integer
+      stop_id:
+        description: Stop identifier
+        format: int32
+        type: integer
+    type: object
   V3.Departure:
     properties:
       at_platform:
         description: Indicates if the metropolitan train service is at the platform at the time of query; returns false for other modes
         type: boolean
+      departure_sequence:
+        description: Chronological sequence of the departure for the run on the route. Order ascendingly by this field to get chronological order (earliest first) of departures with the same route_id and run_id.
+        format: int32
+        type: integer
       direction_id:
         description: Direction of travel identifier
         format: int32
@@ -1232,7 +1504,7 @@ definitions:
       disruption_ids:
         description: Disruption information identifier(s)
         items:
-          format: int32
+          format: int64
           type: integer
         type: array
       estimated_departure_utc:
@@ -1265,7 +1537,7 @@ definitions:
   V3.DeparturesBroadParameters:
     properties:
       date_utc:
-        description: Filter by the date and time of the request (ISO 8601 UTC format)
+        description: Filter by the date and time of the request (ISO 8601 UTC format) (default = current date and time)
         format: date-time
         type: string
       direction_id:
@@ -1289,6 +1561,9 @@ definitions:
         type: boolean
       include_cancelled:
         description: Indicates if cancelled services (if they exist) are returned (default = false) - metropolitan train only
+        type: boolean
+      look_backwards:
+        description: Indicates if filtering runs (and their departures) to those that arrive at destination before date_utc (default = false). Requires max_results &gt; 0.
         type: boolean
       max_results:
         description: Maximum number of results returned
@@ -1340,7 +1615,7 @@ definitions:
   V3.DeparturesSpecificParameters:
     properties:
       date_utc:
-        description: Filter by the date and time of the request (ISO 8601 UTC format)
+        description: Filter by the date and time of the request (ISO 8601 UTC format) (default = current date and time)
         format: date-time
         type: string
       direction_id:
@@ -1364,6 +1639,9 @@ definitions:
         type: boolean
       include_cancelled:
         description: Indicates if cancelled services (if they exist) are returned (default = false) - metropolitan train only
+        type: boolean
+      look_backwards:
+        description: Indicates if filtering runs (and their departures) to those that arrive at destination before date_utc (default = false). Requires max_results &gt; 0.
         type: boolean
       max_results:
         description: Maximum number of results returned
@@ -1473,6 +1751,9 @@ definitions:
       direction:
         $ref: '#/definitions/V3.DisruptionDirection'
         description: Direction of travel relevant to a disruption (if applicable)
+      route_gtfs_id:
+        description: GTFS Identifer of the route
+        type: string
       route_id:
         description: Route identifier
         format: int32
@@ -1545,10 +1826,82 @@ definitions:
         $ref: '#/definitions/V3.Status'
         description: API Status / Metadata
     type: object
-  V3.ResultOutlet:
+  V3.Outlet:
     properties:
       outlet_business:
         description: The business name of the outlet
+        type: string
+      outlet_business_hour_fri:
+        description: The business hours on Friday
+        type: string
+      outlet_business_hour_mon:
+        description: The business hours on Monday
+        type: string
+      outlet_business_hour_sat:
+        description: The business hours on Saturday
+        type: string
+      outlet_business_hour_sun:
+        description: The business hours on Sunday
+        type: string
+      outlet_business_hour_thur:
+        description: The business hours on Thursday
+        type: string
+      outlet_business_hour_tue:
+        description: The business hours on Tuesday
+        type: string
+      outlet_business_hour_wed:
+        description: The business hours on Wednesday
+        type: string
+      outlet_latitude:
+        description: Geographic coordinate of latitude at outlet
+        format: float
+        type: number
+      outlet_longitude:
+        description: Geographic coordinate of longitude at outlet
+        format: float
+        type: number
+      outlet_name:
+        description: The location name of the outlet
+        type: string
+      outlet_notes:
+        description: Any additional notes for the outlet such as 'Buy pre-loaded myki cards only'. May be null/empty.
+        type: string
+      outlet_postcode:
+        description: The postcode for the outlet
+        format: int32
+        type: integer
+      outlet_slid_spid:
+        description: The SLID / SPID
+        type: string
+      outlet_suburb:
+        description: The city/municipality the outlet is in
+        type: string
+    type: object
+  V3.OutletGeolocation:
+    properties:
+      outlet_business:
+        description: The business name of the outlet
+        type: string
+      outlet_business_hour_fri:
+        description: The business hours on Friday
+        type: string
+      outlet_business_hour_mon:
+        description: The business hours on Monday
+        type: string
+      outlet_business_hour_sat:
+        description: The business hours on Saturday
+        type: string
+      outlet_business_hour_sun:
+        description: The business hours on Sunday
+        type: string
+      outlet_business_hour_thur:
+        description: The business hours on Thursday
+        type: string
+      outlet_business_hour_tue:
+        description: The business hours on Tuesday
+        type: string
+      outlet_business_hour_wed:
+        description: The business hours on Wednesday
         type: string
       outlet_distance:
         description: Distance of outlet from input location (in metres); returns 0 if no location is input
@@ -1565,12 +1918,120 @@ definitions:
       outlet_name:
         description: The location name of the outlet
         type: string
+      outlet_notes:
+        description: Any additional notes for the outlet such as 'Buy pre-loaded myki cards only'. May be null/empty.
+        type: string
+      outlet_postcode:
+        description: The postcode for the outlet
+        format: int32
+        type: integer
+      outlet_slid_spid:
+        description: The SLID / SPID
+        type: string
       outlet_suburb:
-        description: The suburb the outlet is in
+        description: The city/municipality the outlet is in
+        type: string
+    type: object
+  V3.OutletGeolocationParameters:
+    properties:
+      max_distance:
+        description: Filter by maximum distance (in metres) from location specified via latitude and longitude parameters (default = 300)
+        format: double
+        type: number
+      max_results:
+        description: Maximum number of results returned (default = 30)
+        format: int32
+        type: integer
+    type: object
+  V3.OutletGeolocationResponse:
+    properties:
+      outlets:
+        description: myki ticket outlets
+        items:
+          $ref: '#/definitions/V3.OutletGeolocation'
+        type: array
+      status:
+        $ref: '#/definitions/V3.Status'
+        description: API Status / Metadata
+    type: object
+  V3.OutletParameters:
+    properties:
+      max_results:
+        description: Maximum number of results returned (default = 30)
+        format: int32
+        type: integer
+    type: object
+  V3.OutletResponse:
+    properties:
+      outlets:
+        description: myki ticket outlets
+        items:
+          $ref: '#/definitions/V3.Outlet'
+        type: array
+      status:
+        $ref: '#/definitions/V3.Status'
+        description: API Status / Metadata
+    type: object
+  V3.ResultOutlet:
+    properties:
+      outlet_business:
+        description: The business name of the outlet
+        type: string
+      outlet_business_hour_fri:
+        description: The business hours on Friday
+        type: string
+      outlet_business_hour_mon:
+        description: The business hours on Monday
+        type: string
+      outlet_business_hour_sat:
+        description: The business hours on Saturday
+        type: string
+      outlet_business_hour_sun:
+        description: The business hours on Sunday
+        type: string
+      outlet_business_hour_thur:
+        description: The business hours on Thursday
+        type: string
+      outlet_business_hour_tue:
+        description: The business hours on Tuesday
+        type: string
+      outlet_business_hour_wed:
+        description: The business hours on Wednesday
+        type: string
+      outlet_distance:
+        description: Distance of outlet from input location (in metres); returns 0 if no location is input
+        format: float
+        type: number
+      outlet_latitude:
+        description: Geographic coordinate of latitude at outlet
+        format: float
+        type: number
+      outlet_longitude:
+        description: Geographic coordinate of longitude at outlet
+        format: float
+        type: number
+      outlet_name:
+        description: The location name of the outlet
+        type: string
+      outlet_notes:
+        description: Any additional notes for the outlet such as 'Buy pre-loaded myki cards only'. May be null/empty.
+        type: string
+      outlet_postcode:
+        description: The postcode for the outlet
+        format: int32
+        type: integer
+      outlet_slid_spid:
+        description: The SLID / SPID
+        type: string
+      outlet_suburb:
+        description: The city/municipality the outlet is in
         type: string
     type: object
   V3.ResultRoute:
     properties:
+      route_gtfs_id:
+        description: GTFS Identifer of the route
+        type: string
       route_id:
         description: Route identifier
         format: int32
@@ -1611,9 +2072,19 @@ definitions:
       stop_name:
         description: Name of stop
         type: string
+      stop_sequence:
+        description: Sequence of the stop on the route/run; return 0 when route_id or run_id not specified. Order ascendingly by this field (when non zero) to get physical order (earliest first) of stops on the route_id/run_id.
+        format: int32
+        type: integer
+      stop_suburb:
+        description: suburb of stop
+        type: string
     type: object
   V3.Route:
     properties:
+      route_gtfs_id:
+        description: GTFS Identifer of the route
+        type: string
       route_id:
         description: Route identifier
         format: int32
@@ -1626,6 +2097,35 @@ definitions:
         type: string
       route_type:
         description: Transport mode identifier
+        format: int32
+        type: integer
+    type: object
+  V3.RouteDeparturesSpecificParameters:
+    properties:
+      date_utc:
+        description: Filter by the date and time of the request (ISO 8601 UTC format) (default = current date and time)
+        format: date-time
+        type: string
+      expand:
+        description: 'List objects to be returned in full (i.e. expanded) - options include: all, stop, route, run, direction, disruption'
+        items:
+          enum:
+            - All
+            - Stop
+            - Route
+            - Run
+            - Direction
+            - Disruption
+          type: string
+        type: array
+      include_cancelled:
+        description: Indicates if cancelled services (if they exist) are returned (default = false) - metropolitan train only
+        type: boolean
+      look_backwards:
+        description: Indicates if filtering runs (and their departures) to those that arrive at destination before date_utc (default = false). Requires max_results &gt; 0.
+        type: boolean
+      max_results:
+        description: Maximum number of results returned
         format: int32
         type: integer
     type: object
@@ -1664,6 +2164,13 @@ definitions:
       destination_name:
         description: Name of destination of run
         type: string
+      direction_id:
+        description: Direction of travel identifier
+        format: int32
+        type: integer
+      express_stop_count:
+        format: int32
+        type: integer
       final_stop_id:
         description: stop_id of final stop of run
         format: int32
@@ -1680,9 +2187,19 @@ definitions:
         description: Trip/service run identifier
         format: int32
         type: integer
+      run_sequence:
+        description: Chronological sequence of the trip/service run on the route in direction. Order ascendingly by this field to get chronological order (earliest first) of runs with the same route_id and direction_id.
+        format: int32
+        type: integer
       status:
         description: Status of metropolitan train run; returns "scheduled" for other modes
         type: string
+      vehicle_descriptor:
+        $ref: '#/definitions/V3.VehicleDescriptor'
+        description: Descriptor of the trip/service run. Only available for some runs. May be null.
+      vehicle_position:
+        $ref: '#/definitions/V3.VehiclePosition'
+        description: Position of the trip/service run. Only available for some bus runs. May be null.
     type: object
   V3.RunResponse:
     properties:
@@ -1720,6 +2237,12 @@ definitions:
         description: Filter by geographic coordinate of longitude
         format: float
         type: number
+      match_route_by_suburb:
+        description: Indicates whether to find routes by suburbs in the search term (default = true)
+        type: boolean
+      match_stop_by_suburb:
+        description: Indicates whether to find stops by suburbs in the search term (default = true)
+        type: boolean
       max_distance:
         description: Filter by maximum distance (in metres) from location specified via latitude and longitude parameters
         format: float
@@ -1835,6 +2358,58 @@ definitions:
         description: Name of stop
         type: string
     type: object
+  V3.StopDepartureRequest:
+    properties:
+      gtfs:
+        description: 'Indicates that stop_id parameter will accept "GTFS stop_id" data and route_directions[x].route_id parameters will accept route_gtfs_id data'
+        type: boolean
+      max_results:
+        description: Maximum number of results returned
+        format: int32
+        maximum: 2147483647
+        minimum: 0
+        type: integer
+      route_directions:
+        description: The route directions to find departures for at this stop.
+        items:
+          $ref: '#/definitions/V3.StopDepartureRequestRouteDirection'
+        type: array
+      route_type:
+        description: Number identifying transport mode; values returned via RouteTypes API
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        format: int32
+        type: integer
+      stop_id:
+        description: Identifier of stop; values returned by Stops API
+        format: int32
+        maximum: 2147483647
+        minimum: 0
+        type: integer
+    required:
+      - route_directions
+    type: object
+  V3.StopDepartureRequestRouteDirection:
+    properties:
+      direction_id:
+        description: Direction of travel identifier; values returned by Directions API - v3/directions
+        format: int32
+        maximum: 2147483647
+        minimum: 0
+        type: integer
+      direction_name:
+        description: Name of direction of travel; values returned by Directions API - v3/directions
+        type: string
+      route_id:
+        description: Identifier of route; values returned by Routes API - v3/routes
+        type: string
+    required:
+      - direction_name
+    type: object
   V3.StopDetails:
     properties:
       route_type:
@@ -1889,6 +2464,13 @@ definitions:
       stop_name:
         description: Name of stop
         type: string
+      stop_sequence:
+        description: Sequence of the stop on the route/run; return 0 when route_id or run_id not specified. Order ascendingly by this field (when non zero) to get physical order (earliest first) of stops on the route_id/run_id.
+        format: int32
+        type: integer
+      stop_suburb:
+        description: suburb of stop
+        type: string
     type: object
   V3.StopGps:
     properties:
@@ -1928,6 +2510,13 @@ definitions:
       stop_name:
         description: Name of stop
         type: string
+      stop_sequence:
+        description: Sequence of the stop on the route/run; return 0 when route_id or run_id not specified. Order ascendingly by this field (when non zero) to get physical order (earliest first) of stops on the route_id/run_id.
+        format: int32
+        type: integer
+      stop_suburb:
+        description: suburb of stop
+        type: string
     type: object
   V3.StopResponse:
     properties:
@@ -1945,14 +2534,34 @@ definitions:
         items:
           $ref: '#/definitions/V3.Departure'
         type: array
+      directions:
+        additionalProperties:
+          $ref: '#/definitions/V3.Direction'
+        description: Directions of travel of route
+        type: object
       disruptions:
         description: Disruption information applicable to relevant routes or stops
         items:
           $ref: '#/definitions/V3.Disruption'
         type: array
+      routes:
+        additionalProperties:
+          $ref: '#/definitions/V3.Route'
+        description: 'Train lines, tram routes, bus routes, regional coach routes, Night Bus routes'
+        type: object
+      runs:
+        additionalProperties:
+          $ref: '#/definitions/V3.Run'
+        description: Individual trips/services of a route
+        type: object
       status:
         $ref: '#/definitions/V3.Status'
         description: API Status / Metadata
+      stops:
+        additionalProperties:
+          $ref: '#/definitions/V3.ResultStop'
+        description: 'A train station, tram stop, bus stop, regional coach stop or Night Bus stop'
+        type: object
     type: object
   V3.StopsByDistanceResponse:
     properties:
@@ -1975,4 +2584,45 @@ definitions:
         items:
           $ref: '#/definitions/V3.StopOnRoute'
         type: array
+    type: object
+  V3.VehicleDescriptor:
+    properties:
+      air_conditioned:
+        description: Indicator if vehicle is air conditioned. May be null. Only available for some tram runs.
+        type: boolean
+      description:
+        description: "Vehicle description such as \"6 Car Comeng\", \"6 Car Xtrapolis\", \"3 Car Comeng\", \"6 Car Siemens\", \"3 Car Siemens\". May be null/empty.\r\n            Only available for some metropolitan train runs."
+        type: string
+      id:
+        description: Operator identifier of the vehicle such as "26094". May be null/empty. Only available for some tram and bus runs.
+        type: string
+      low_floor:
+        description: Indicator if vehicle has a low floor. May be null. Only available for some tram runs.
+        type: boolean
+      operator:
+        description: "Operator name of the vehicle such as \"Metro Trains Melbourne\", \"Yarra Trams\", \"Ventura Bus Line\", \"CDC\" or \"Sita Bus Lines\" . May be null/empty.\r\n            Only available for train, tram, v/line and some bus runs."
+        type: string
+      supplier:
+        description: Supplier of vehicle descriptor data.
+        readOnly: true
+        type: string
+    type: object
+  V3.VehiclePosition:
+    properties:
+      bearing:
+        description: "Compass bearing of the vehicle when known, clockwise from True North, i.e., 0 is North and 90 is East. May be null.\r\n            Only available for some bus runs."
+        format: float
+        type: number
+      latitude:
+        description: "Geographic coordinate of latitude of the vehicle when known. May be null.\r\n            Only available for some bus runs."
+        format: float
+        type: number
+      longitude:
+        description: "Geographic coordinate of longitude of the vehicle when known. \r\n            Only available for some bus runs."
+        format: float
+        type: number
+      supplier:
+        description: Supplier of vehicle position data.
+        readOnly: true
+        type: string
     type: object

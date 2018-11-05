@@ -50,17 +50,21 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: Client Api Version.
           in: query
           name: api-version
@@ -71,6 +75,7 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
         - description: The filter to apply on the operation.
           in: query
           name: $filter
@@ -80,77 +85,19 @@ paths:
         '200':
           description: Return list of software update configurations.
           schema:
-            description: result of listing all software update configuration
+            $ref: '#/definitions/softwareUpdateConfigurationListResult'
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
             properties:
-              value:
-                description: outer object returned when listing all software update configurations
-                items:
-                  description: Software update configuration collection item properties.
-                  properties:
-                    id:
-                      description: Resource Id of the software update configuration
-                      readOnly: true
-                      type: string
-                    name:
-                      description: Name of the software update configuration.
-                      readOnly: true
-                      type: string
-                    properties:
-                      description: Software update configuration collection item properties.
-                      properties:
-                        creationTime:
-                          description: 'Creation time of the software update configuration, which only appears in the response.'
-                          format: date-time
-                          readOnly: true
-                          type: string
-                        frequency:
-                          description: Gets or sets the frequency of the schedule.
-                          enum:
-                            - OneTime
-                            - Day
-                            - Hour
-                            - Week
-                            - Month
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: ScheduleFrequency
-                        lastModifiedTime:
-                          description: 'Last time software update configuration was modified, which only appears in the response.'
-                          format: date-time
-                          readOnly: true
-                          type: string
-                        nextRun:
-                          description: ext run time of the update.
-                          format: date-time
-                          type: string
-                        provisioningState:
-                          description: 'Provisioning state for the software update configuration, which only appears in the response.'
-                          readOnly: true
-                          type: string
-                        startTime:
-                          description: the start time of the update.
-                          format: date-time
-                          type: string
-                        updateConfiguration:
-                          description: object returned when requesting a collection of software update configuration
-                          properties:
-                            azureVirtualMachines:
-                              description: List of azure resource Ids for azure virtual machines targeted by the software update configuration.
-                              items:
-                                description: Azure Resource Manager Id for a virtual machine.
-                                type: string
-                              type: array
-                            duration:
-                              description: 'Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601'
-                              format: duration
-                              type: string
-                  required:
-                    - properties
-                  type: object
-                type: array
-        '404':
-          description: 'Resource group, or account doesn''t exist.'
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Software Update Configuration
       x-ms-examples:
@@ -179,8 +126,11 @@ paths:
                         - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02
                         - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03
                       duration: PT2H
+                      linux: null
+                      nonAzureComputerNames: null
                       operatingSystem: Windows
                       windows:
+                        excludedKbNumbers: null
                         includedUpdateClassifications: 'Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates'
                 - id: /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-02
                   name: testpatch-02
@@ -197,12 +147,12 @@ paths:
                         - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-05
                         - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-06
                       duration: PT2H30M
+                      linux: null
+                      nonAzureComputerNames: null
                       operatingSystem: Windows
                       windows:
+                        excludedKbNumbers: null
                         includedUpdateClassifications: 'Critical, FeaturePack'
-            '404':
-              code: NotFound
-              message: '{"Message":"Could not find the account. SubscriptionId: 1a7d4044-286c-4acb-969a-96639265bf2e AccountName: myaccount"}'
         List software update configurations Targeting a specific azure virtual machine:
           parameters:
             $filter: 'properties/updateConfiguration/azureVirtualMachines/any(m: m eq ''/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01'')'
@@ -229,8 +179,11 @@ paths:
                         - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02
                         - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03
                       duration: PT2H
+                      linux: null
+                      nonAzureComputerNames: null
                       operatingSystem: Windows
                       windows:
+                        excludedKbNumbers: null
                         includedUpdateClassifications: 'Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates'
                 - id: /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-02
                   name: testpatch-02
@@ -247,12 +200,12 @@ paths:
                         - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-05
                         - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-06
                       duration: PT2H30M
+                      linux: null
+                      nonAzureComputerNames: null
                       operatingSystem: Windows
                       windows:
+                        excludedKbNumbers: null
                         includedUpdateClassifications: 'Critical, FeaturePack'
-            '404':
-              code: NotFound
-              message: 'Machine is not registered for Update Management.  Assure that the machine is registered for Update Management.  Machine Name(s) or Id(s): /subscriptions/637d11c3-e6a4-46cb-b32c-ee5b6dd9c68a/resourceGroups/mygroup/providers/Microsoft.Compute/virtualMachines/vm01.'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurations/{softwareUpdateConfigurationName}':
     delete:
       description: delete a specific software update configuration.
@@ -265,17 +218,21 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the software update configuration to be created.
           in: path
           name: softwareUpdateConfigurationName
@@ -291,13 +248,24 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       responses:
         '200':
           description: The software update configuration has been deleted.
         '204':
           description: The software update configuration does not exist.
-        '404':
-          description: 'Resource group, account, or software update configuration doesn''t exist.'
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
       tags:
         - Software Update Configuration
       x-ms-examples:
@@ -312,9 +280,6 @@ paths:
           responses:
             '200': {}
             '204': {}
-            '404':
-              code: NotFound
-              message: '{"Message":"Could not find the account. SubscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab AccountName: myaccount"}'
     get:
       description: Get a single software update configuration by name.
       externalDocs:
@@ -326,17 +291,21 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the software update configuration to be created.
           in: path
           name: softwareUpdateConfigurationName
@@ -352,242 +321,24 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
       responses:
         '200':
           description: A single software update configuration.
           schema:
-            description: Software update configuration properties.
+            $ref: '#/definitions/softwareUpdateConfiguration'
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
             properties:
-              id:
-                description: Resource Id.
-                readOnly: true
+              code:
+                description: Error code
                 type: string
-              name:
-                description: Resource name.
-                readOnly: true
+              message:
+                description: Error message indicating why the operation failed.
                 type: string
-              properties:
-                description: Software update configuration properties.
-                properties:
-                  createdBy:
-                    description: 'createdBy property, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  creationTime:
-                    description: 'Creation time of theresource, which only appears in the response.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  error:
-                    description: Error response of an operation failure
-                    properties:
-                      code:
-                        description: Error code
-                        type: string
-                      message:
-                        description: Error message indicating why the operation failed.
-                        type: string
-                    type: object
-                  lastModifiedBy:
-                    description: 'lastModifiedBy property, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  lastModifiedTime:
-                    description: 'Last time resource was modified, which only appears in the response.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  provisioningState:
-                    description: 'Provisioning state for the software update configuration, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  scheduleInfo:
-                    description: Definition of schedule parameters.
-                    properties:
-                      advancedSchedule:
-                        description: The properties of the create Advanced Schedule.
-                        properties:
-                          monthDays:
-                            description: Days of the month that the job should execute on. Must be between 1 and 31.
-                            items:
-                              format: int32
-                              type: integer
-                            type: array
-                          monthlyOccurrences:
-                            description: Occurrences of days within a month.
-                            items:
-                              description: The properties of the create advanced schedule monthly occurrence.
-                              properties:
-                                day:
-                                  description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday,thursday, friday, saturday, sunday.'
-                                  enum:
-                                    - Monday
-                                    - Tuesday
-                                    - Wednesday
-                                    - Thursday
-                                    - Friday
-                                    - Saturday
-                                    - Sunday
-                                  type: string
-                                  x-ms-enum:
-                                    modelAsString: true
-                                    name: ScheduleDay
-                                occurrence:
-                                  description: Occurrence of the week within the month. Must be between 1 and 5
-                                  format: int32
-                                  type: integer
-                            type: array
-                          weekDays:
-                            description: Days of the week that the job should execute on.
-                            items:
-                              type: string
-                            type: array
-                      creationTime:
-                        description: Gets or sets the creation time.
-                        format: date-time
-                        type: string
-                      description:
-                        description: Gets or sets the description.
-                        type: string
-                      expiryTime:
-                        description: Gets or sets the end time of the schedule.
-                        format: date-time
-                        type: string
-                      expiryTimeOffsetMinutes:
-                        description: Gets or sets the expiry time's offset in minutes.
-                        format: double
-                        type: number
-                      frequency:
-                        description: Gets or sets the frequency of the schedule.
-                        enum:
-                          - OneTime
-                          - Day
-                          - Hour
-                          - Week
-                          - Month
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: ScheduleFrequency
-                      interval:
-                        description: Gets or sets the interval of the schedule.
-                      isEnabled:
-                        default: false
-                        description: Gets or sets a value indicating whether this schedule is enabled.
-                        type: boolean
-                      lastModifiedTime:
-                        description: Gets or sets the last modified time.
-                        format: date-time
-                        type: string
-                      nextRun:
-                        description: Gets or sets the next run time of the schedule.
-                        format: date-time
-                        type: string
-                      nextRunOffsetMinutes:
-                        description: Gets or sets the next run time's offset in minutes.
-                        format: double
-                        type: number
-                      startTime:
-                        description: Gets or sets the start time of the schedule.
-                        format: date-time
-                        type: string
-                      startTimeOffsetMinutes:
-                        description: Gets the start time's offset in minutes.
-                        format: double
-                        readOnly: true
-                        type: number
-                      timeZone:
-                        description: Gets or sets the time zone of the schedule.
-                        type: string
-                  updateConfiguration:
-                    description: Update specifc properties of the software update configuration.
-                    properties:
-                      azureVirtualMachines:
-                        description: List of azure resource Ids for azure virtual machines targeted by the software update configuration.
-                        items:
-                          description: Azure Resource Manager Id for a virtual machine.
-                          type: string
-                        type: array
-                      duration:
-                        description: 'Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601'
-                        format: duration
-                        type: string
-                      linux:
-                        description: Linux specific update configuration.
-                        properties:
-                          excludedPackageNameMasks:
-                            description: packages excluded from the software update configuration.
-                            items:
-                              type: string
-                            type: array
-                          includedPackageClassifications:
-                            description: Update classifications included in the software update configuration.
-                            enum:
-                              - Unclassified
-                              - Critical
-                              - Security
-                              - Other
-                            type: string
-                            x-ms-enum:
-                              modelAsString: true
-                              name: LinuxUpdateClasses
-                        type: object
-                      nonAzureComputerNames:
-                        description: List of names of non-azure machines targeted by the software update configuration.
-                        items:
-                          description: Name of Non-Azure OMS Computer.
-                          type: string
-                        type: array
-                      operatingSystem:
-                        description: Target operating system for the software update configuration.
-                        enum:
-                          - Windows
-                          - Linux
-                        type: string
-                        x-ms-enum:
-                          modelAsString: false
-                          name: OperatingSystemType
-                      windows:
-                        description: Windows specific update configuration.
-                        properties:
-                          excludedKbNumbers:
-                            description: KB numbers excluded from the software update configuration.
-                            items:
-                              type: string
-                            type: array
-                          includedUpdateClassifications:
-                            description: Update classification included in the software update configuration. A comma separated string with required values
-                            enum:
-                              - Unclassified
-                              - Critical
-                              - Security
-                              - UpdateRollup
-                              - FeaturePack
-                              - ServicePack
-                              - Definition
-                              - Tools
-                              - Updates
-                            type: string
-                            x-ms-enum:
-                              modelAsString: true
-                              name: WindowsUpdateClasses
-                        type: object
-                    required:
-                      - operatingSystem
-                    type: object
-                required:
-                  - updateConfiguration
-                  - scheduleInfo
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            required:
-              - properties
             type: object
-            x-ms-azure-resource: true
-        '404':
-          description: 'Resource group, account, or software update configuration doesn''t exist.'
       tags:
         - Software Update Configuration
       x-ms-examples:
@@ -640,11 +391,8 @@ paths:
                       excludedKbNumbers:
                         - '168934'
                         - '168973'
-                      includedUpdateClassifications: 'Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates'
+                      includedUpdateClassifications: Critical
               headers: {}
-            '404':
-              code: NotFound
-              message: Software update configuration not found
     put:
       description: Create a new software update configuration with the name given in the URI.
       externalDocs:
@@ -656,17 +404,21 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The resource group name.
+        - description: Name of an Azure Resource group.
           in: path
+          maxLength: 90
+          minLength: 1
           name: resourceGroupName
           pattern: '^[-\w\._]+$'
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the automation account.
           in: path
           name: automationAccountName
           required: true
           type: string
+          x-ms-parameter-location: method
         - description: The name of the software update configuration to be created.
           in: path
           name: softwareUpdateConfigurationName
@@ -682,714 +434,34 @@ paths:
           name: clientRequestId
           required: false
           type: string
+          x-ms-parameter-location: method
         - description: Request body.
           in: body
           name: parameters
           required: true
           schema:
-            description: Software update configuration properties.
-            properties:
-              id:
-                description: Resource Id.
-                readOnly: true
-                type: string
-              name:
-                description: Resource name.
-                readOnly: true
-                type: string
-              properties:
-                description: Software update configuration properties.
-                properties:
-                  createdBy:
-                    description: 'createdBy property, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  creationTime:
-                    description: 'Creation time of theresource, which only appears in the response.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  error:
-                    description: Error response of an operation failure
-                    properties:
-                      code:
-                        description: Error code
-                        type: string
-                      message:
-                        description: Error message indicating why the operation failed.
-                        type: string
-                    type: object
-                  lastModifiedBy:
-                    description: 'lastModifiedBy property, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  lastModifiedTime:
-                    description: 'Last time resource was modified, which only appears in the response.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  provisioningState:
-                    description: 'Provisioning state for the software update configuration, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  scheduleInfo:
-                    description: Definition of schedule parameters.
-                    properties:
-                      advancedSchedule:
-                        description: The properties of the create Advanced Schedule.
-                        properties:
-                          monthDays:
-                            description: Days of the month that the job should execute on. Must be between 1 and 31.
-                            items:
-                              format: int32
-                              type: integer
-                            type: array
-                          monthlyOccurrences:
-                            description: Occurrences of days within a month.
-                            items:
-                              description: The properties of the create advanced schedule monthly occurrence.
-                              properties:
-                                day:
-                                  description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday,thursday, friday, saturday, sunday.'
-                                  enum:
-                                    - Monday
-                                    - Tuesday
-                                    - Wednesday
-                                    - Thursday
-                                    - Friday
-                                    - Saturday
-                                    - Sunday
-                                  type: string
-                                  x-ms-enum:
-                                    modelAsString: true
-                                    name: ScheduleDay
-                                occurrence:
-                                  description: Occurrence of the week within the month. Must be between 1 and 5
-                                  format: int32
-                                  type: integer
-                            type: array
-                          weekDays:
-                            description: Days of the week that the job should execute on.
-                            items:
-                              type: string
-                            type: array
-                      creationTime:
-                        description: Gets or sets the creation time.
-                        format: date-time
-                        type: string
-                      description:
-                        description: Gets or sets the description.
-                        type: string
-                      expiryTime:
-                        description: Gets or sets the end time of the schedule.
-                        format: date-time
-                        type: string
-                      expiryTimeOffsetMinutes:
-                        description: Gets or sets the expiry time's offset in minutes.
-                        format: double
-                        type: number
-                      frequency:
-                        description: Gets or sets the frequency of the schedule.
-                        enum:
-                          - OneTime
-                          - Day
-                          - Hour
-                          - Week
-                          - Month
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: ScheduleFrequency
-                      interval:
-                        description: Gets or sets the interval of the schedule.
-                      isEnabled:
-                        default: false
-                        description: Gets or sets a value indicating whether this schedule is enabled.
-                        type: boolean
-                      lastModifiedTime:
-                        description: Gets or sets the last modified time.
-                        format: date-time
-                        type: string
-                      nextRun:
-                        description: Gets or sets the next run time of the schedule.
-                        format: date-time
-                        type: string
-                      nextRunOffsetMinutes:
-                        description: Gets or sets the next run time's offset in minutes.
-                        format: double
-                        type: number
-                      startTime:
-                        description: Gets or sets the start time of the schedule.
-                        format: date-time
-                        type: string
-                      startTimeOffsetMinutes:
-                        description: Gets the start time's offset in minutes.
-                        format: double
-                        readOnly: true
-                        type: number
-                      timeZone:
-                        description: Gets or sets the time zone of the schedule.
-                        type: string
-                  updateConfiguration:
-                    description: Update specifc properties of the software update configuration.
-                    properties:
-                      azureVirtualMachines:
-                        description: List of azure resource Ids for azure virtual machines targeted by the software update configuration.
-                        items:
-                          description: Azure Resource Manager Id for a virtual machine.
-                          type: string
-                        type: array
-                      duration:
-                        description: 'Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601'
-                        format: duration
-                        type: string
-                      linux:
-                        description: Linux specific update configuration.
-                        properties:
-                          excludedPackageNameMasks:
-                            description: packages excluded from the software update configuration.
-                            items:
-                              type: string
-                            type: array
-                          includedPackageClassifications:
-                            description: Update classifications included in the software update configuration.
-                            enum:
-                              - Unclassified
-                              - Critical
-                              - Security
-                              - Other
-                            type: string
-                            x-ms-enum:
-                              modelAsString: true
-                              name: LinuxUpdateClasses
-                        type: object
-                      nonAzureComputerNames:
-                        description: List of names of non-azure machines targeted by the software update configuration.
-                        items:
-                          description: Name of Non-Azure OMS Computer.
-                          type: string
-                        type: array
-                      operatingSystem:
-                        description: Target operating system for the software update configuration.
-                        enum:
-                          - Windows
-                          - Linux
-                        type: string
-                        x-ms-enum:
-                          modelAsString: false
-                          name: OperatingSystemType
-                      windows:
-                        description: Windows specific update configuration.
-                        properties:
-                          excludedKbNumbers:
-                            description: KB numbers excluded from the software update configuration.
-                            items:
-                              type: string
-                            type: array
-                          includedUpdateClassifications:
-                            description: Update classification included in the software update configuration. A comma separated string with required values
-                            enum:
-                              - Unclassified
-                              - Critical
-                              - Security
-                              - UpdateRollup
-                              - FeaturePack
-                              - ServicePack
-                              - Definition
-                              - Tools
-                              - Updates
-                            type: string
-                            x-ms-enum:
-                              modelAsString: true
-                              name: WindowsUpdateClasses
-                        type: object
-                    required:
-                      - operatingSystem
-                    type: object
-                required:
-                  - updateConfiguration
-                  - scheduleInfo
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            required:
-              - properties
-            type: object
-            x-ms-azure-resource: true
+            $ref: '#/definitions/softwareUpdateConfiguration'
       responses:
         '200':
           description: Software update configuration with the same name and properties already exists.
           schema:
-            description: Software update configuration properties.
-            properties:
-              id:
-                description: Resource Id.
-                readOnly: true
-                type: string
-              name:
-                description: Resource name.
-                readOnly: true
-                type: string
-              properties:
-                description: Software update configuration properties.
-                properties:
-                  createdBy:
-                    description: 'createdBy property, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  creationTime:
-                    description: 'Creation time of theresource, which only appears in the response.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  error:
-                    description: Error response of an operation failure
-                    properties:
-                      code:
-                        description: Error code
-                        type: string
-                      message:
-                        description: Error message indicating why the operation failed.
-                        type: string
-                    type: object
-                  lastModifiedBy:
-                    description: 'lastModifiedBy property, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  lastModifiedTime:
-                    description: 'Last time resource was modified, which only appears in the response.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  provisioningState:
-                    description: 'Provisioning state for the software update configuration, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  scheduleInfo:
-                    description: Definition of schedule parameters.
-                    properties:
-                      advancedSchedule:
-                        description: The properties of the create Advanced Schedule.
-                        properties:
-                          monthDays:
-                            description: Days of the month that the job should execute on. Must be between 1 and 31.
-                            items:
-                              format: int32
-                              type: integer
-                            type: array
-                          monthlyOccurrences:
-                            description: Occurrences of days within a month.
-                            items:
-                              description: The properties of the create advanced schedule monthly occurrence.
-                              properties:
-                                day:
-                                  description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday,thursday, friday, saturday, sunday.'
-                                  enum:
-                                    - Monday
-                                    - Tuesday
-                                    - Wednesday
-                                    - Thursday
-                                    - Friday
-                                    - Saturday
-                                    - Sunday
-                                  type: string
-                                  x-ms-enum:
-                                    modelAsString: true
-                                    name: ScheduleDay
-                                occurrence:
-                                  description: Occurrence of the week within the month. Must be between 1 and 5
-                                  format: int32
-                                  type: integer
-                            type: array
-                          weekDays:
-                            description: Days of the week that the job should execute on.
-                            items:
-                              type: string
-                            type: array
-                      creationTime:
-                        description: Gets or sets the creation time.
-                        format: date-time
-                        type: string
-                      description:
-                        description: Gets or sets the description.
-                        type: string
-                      expiryTime:
-                        description: Gets or sets the end time of the schedule.
-                        format: date-time
-                        type: string
-                      expiryTimeOffsetMinutes:
-                        description: Gets or sets the expiry time's offset in minutes.
-                        format: double
-                        type: number
-                      frequency:
-                        description: Gets or sets the frequency of the schedule.
-                        enum:
-                          - OneTime
-                          - Day
-                          - Hour
-                          - Week
-                          - Month
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: ScheduleFrequency
-                      interval:
-                        description: Gets or sets the interval of the schedule.
-                      isEnabled:
-                        default: false
-                        description: Gets or sets a value indicating whether this schedule is enabled.
-                        type: boolean
-                      lastModifiedTime:
-                        description: Gets or sets the last modified time.
-                        format: date-time
-                        type: string
-                      nextRun:
-                        description: Gets or sets the next run time of the schedule.
-                        format: date-time
-                        type: string
-                      nextRunOffsetMinutes:
-                        description: Gets or sets the next run time's offset in minutes.
-                        format: double
-                        type: number
-                      startTime:
-                        description: Gets or sets the start time of the schedule.
-                        format: date-time
-                        type: string
-                      startTimeOffsetMinutes:
-                        description: Gets the start time's offset in minutes.
-                        format: double
-                        readOnly: true
-                        type: number
-                      timeZone:
-                        description: Gets or sets the time zone of the schedule.
-                        type: string
-                  updateConfiguration:
-                    description: Update specifc properties of the software update configuration.
-                    properties:
-                      azureVirtualMachines:
-                        description: List of azure resource Ids for azure virtual machines targeted by the software update configuration.
-                        items:
-                          description: Azure Resource Manager Id for a virtual machine.
-                          type: string
-                        type: array
-                      duration:
-                        description: 'Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601'
-                        format: duration
-                        type: string
-                      linux:
-                        description: Linux specific update configuration.
-                        properties:
-                          excludedPackageNameMasks:
-                            description: packages excluded from the software update configuration.
-                            items:
-                              type: string
-                            type: array
-                          includedPackageClassifications:
-                            description: Update classifications included in the software update configuration.
-                            enum:
-                              - Unclassified
-                              - Critical
-                              - Security
-                              - Other
-                            type: string
-                            x-ms-enum:
-                              modelAsString: true
-                              name: LinuxUpdateClasses
-                        type: object
-                      nonAzureComputerNames:
-                        description: List of names of non-azure machines targeted by the software update configuration.
-                        items:
-                          description: Name of Non-Azure OMS Computer.
-                          type: string
-                        type: array
-                      operatingSystem:
-                        description: Target operating system for the software update configuration.
-                        enum:
-                          - Windows
-                          - Linux
-                        type: string
-                        x-ms-enum:
-                          modelAsString: false
-                          name: OperatingSystemType
-                      windows:
-                        description: Windows specific update configuration.
-                        properties:
-                          excludedKbNumbers:
-                            description: KB numbers excluded from the software update configuration.
-                            items:
-                              type: string
-                            type: array
-                          includedUpdateClassifications:
-                            description: Update classification included in the software update configuration. A comma separated string with required values
-                            enum:
-                              - Unclassified
-                              - Critical
-                              - Security
-                              - UpdateRollup
-                              - FeaturePack
-                              - ServicePack
-                              - Definition
-                              - Tools
-                              - Updates
-                            type: string
-                            x-ms-enum:
-                              modelAsString: true
-                              name: WindowsUpdateClasses
-                        type: object
-                    required:
-                      - operatingSystem
-                    type: object
-                required:
-                  - updateConfiguration
-                  - scheduleInfo
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            required:
-              - properties
-            type: object
-            x-ms-azure-resource: true
+            $ref: '#/definitions/softwareUpdateConfiguration'
         '201':
           description: Software update configuration is created.
           schema:
-            description: Software update configuration properties.
+            $ref: '#/definitions/softwareUpdateConfiguration'
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
             properties:
-              id:
-                description: Resource Id.
-                readOnly: true
+              code:
+                description: Error code
                 type: string
-              name:
-                description: Resource name.
-                readOnly: true
+              message:
+                description: Error message indicating why the operation failed.
                 type: string
-              properties:
-                description: Software update configuration properties.
-                properties:
-                  createdBy:
-                    description: 'createdBy property, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  creationTime:
-                    description: 'Creation time of theresource, which only appears in the response.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  error:
-                    description: Error response of an operation failure
-                    properties:
-                      code:
-                        description: Error code
-                        type: string
-                      message:
-                        description: Error message indicating why the operation failed.
-                        type: string
-                    type: object
-                  lastModifiedBy:
-                    description: 'lastModifiedBy property, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  lastModifiedTime:
-                    description: 'Last time resource was modified, which only appears in the response.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  provisioningState:
-                    description: 'Provisioning state for the software update configuration, which only appears in the response.'
-                    readOnly: true
-                    type: string
-                  scheduleInfo:
-                    description: Definition of schedule parameters.
-                    properties:
-                      advancedSchedule:
-                        description: The properties of the create Advanced Schedule.
-                        properties:
-                          monthDays:
-                            description: Days of the month that the job should execute on. Must be between 1 and 31.
-                            items:
-                              format: int32
-                              type: integer
-                            type: array
-                          monthlyOccurrences:
-                            description: Occurrences of days within a month.
-                            items:
-                              description: The properties of the create advanced schedule monthly occurrence.
-                              properties:
-                                day:
-                                  description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday,thursday, friday, saturday, sunday.'
-                                  enum:
-                                    - Monday
-                                    - Tuesday
-                                    - Wednesday
-                                    - Thursday
-                                    - Friday
-                                    - Saturday
-                                    - Sunday
-                                  type: string
-                                  x-ms-enum:
-                                    modelAsString: true
-                                    name: ScheduleDay
-                                occurrence:
-                                  description: Occurrence of the week within the month. Must be between 1 and 5
-                                  format: int32
-                                  type: integer
-                            type: array
-                          weekDays:
-                            description: Days of the week that the job should execute on.
-                            items:
-                              type: string
-                            type: array
-                      creationTime:
-                        description: Gets or sets the creation time.
-                        format: date-time
-                        type: string
-                      description:
-                        description: Gets or sets the description.
-                        type: string
-                      expiryTime:
-                        description: Gets or sets the end time of the schedule.
-                        format: date-time
-                        type: string
-                      expiryTimeOffsetMinutes:
-                        description: Gets or sets the expiry time's offset in minutes.
-                        format: double
-                        type: number
-                      frequency:
-                        description: Gets or sets the frequency of the schedule.
-                        enum:
-                          - OneTime
-                          - Day
-                          - Hour
-                          - Week
-                          - Month
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: ScheduleFrequency
-                      interval:
-                        description: Gets or sets the interval of the schedule.
-                      isEnabled:
-                        default: false
-                        description: Gets or sets a value indicating whether this schedule is enabled.
-                        type: boolean
-                      lastModifiedTime:
-                        description: Gets or sets the last modified time.
-                        format: date-time
-                        type: string
-                      nextRun:
-                        description: Gets or sets the next run time of the schedule.
-                        format: date-time
-                        type: string
-                      nextRunOffsetMinutes:
-                        description: Gets or sets the next run time's offset in minutes.
-                        format: double
-                        type: number
-                      startTime:
-                        description: Gets or sets the start time of the schedule.
-                        format: date-time
-                        type: string
-                      startTimeOffsetMinutes:
-                        description: Gets the start time's offset in minutes.
-                        format: double
-                        readOnly: true
-                        type: number
-                      timeZone:
-                        description: Gets or sets the time zone of the schedule.
-                        type: string
-                  updateConfiguration:
-                    description: Update specifc properties of the software update configuration.
-                    properties:
-                      azureVirtualMachines:
-                        description: List of azure resource Ids for azure virtual machines targeted by the software update configuration.
-                        items:
-                          description: Azure Resource Manager Id for a virtual machine.
-                          type: string
-                        type: array
-                      duration:
-                        description: 'Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601'
-                        format: duration
-                        type: string
-                      linux:
-                        description: Linux specific update configuration.
-                        properties:
-                          excludedPackageNameMasks:
-                            description: packages excluded from the software update configuration.
-                            items:
-                              type: string
-                            type: array
-                          includedPackageClassifications:
-                            description: Update classifications included in the software update configuration.
-                            enum:
-                              - Unclassified
-                              - Critical
-                              - Security
-                              - Other
-                            type: string
-                            x-ms-enum:
-                              modelAsString: true
-                              name: LinuxUpdateClasses
-                        type: object
-                      nonAzureComputerNames:
-                        description: List of names of non-azure machines targeted by the software update configuration.
-                        items:
-                          description: Name of Non-Azure OMS Computer.
-                          type: string
-                        type: array
-                      operatingSystem:
-                        description: Target operating system for the software update configuration.
-                        enum:
-                          - Windows
-                          - Linux
-                        type: string
-                        x-ms-enum:
-                          modelAsString: false
-                          name: OperatingSystemType
-                      windows:
-                        description: Windows specific update configuration.
-                        properties:
-                          excludedKbNumbers:
-                            description: KB numbers excluded from the software update configuration.
-                            items:
-                              type: string
-                            type: array
-                          includedUpdateClassifications:
-                            description: Update classification included in the software update configuration. A comma separated string with required values
-                            enum:
-                              - Unclassified
-                              - Critical
-                              - Security
-                              - UpdateRollup
-                              - FeaturePack
-                              - ServicePack
-                              - Definition
-                              - Tools
-                              - Updates
-                            type: string
-                            x-ms-enum:
-                              modelAsString: true
-                              name: WindowsUpdateClasses
-                        type: object
-                    required:
-                      - operatingSystem
-                    type: object
-                required:
-                  - updateConfiguration
-                  - scheduleInfo
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            required:
-              - properties
             type: object
-            x-ms-azure-resource: true
-        '400':
-          description: Bad request.
-        '404':
-          description: Resource group or automation account does not exist.
-        '409':
-          description: A software update configuration with different properties and the same name already exist.
       tags:
         - Software Update Configuration
       x-ms-examples:
@@ -1423,7 +495,8 @@ paths:
                     excludedKbNumbers:
                       - '168934'
                       - '168973'
-                    includedUpdateClassifications: 'Critical,Definition,FeaturePack,Security,ServicePack,Tools,UpdateRollup,Updates'
+                    includedUpdateClassifications: Critical
+                    rebootSetting: IfRequired
             resourceGroupName: mygroup
             softwareUpdateConfigurationName: testpatch
             subscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab
@@ -1469,7 +542,7 @@ paths:
                       excludedKbNumbers:
                         - '168934'
                         - '168973'
-                      includedUpdateClassifications: 'Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates'
+                      includedUpdateClassifications: Critical
               headers: {}
             '201':
               body:
@@ -1510,14 +583,376 @@ paths:
                       excludedKbNumbers:
                         - '168934'
                         - '168973'
-                      includedUpdateClassifications: 'Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates'
+                      includedUpdateClassifications: Critical
               headers: {}
-            '400':
-              code: BadRequest
-              message: '{"Message":"The request is invalid.","ModelState":{"softwareUpdateConfiguration.properties.scheduleInfo":["The scheduleInfo field is required."]}}'
-            '404':
-              code: NotFound
-              message: '{"Message":"Could not find the account. SubscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab AccountName: myaccount"}'
-            '409':
-              code: Conflict
-              message: '"Software update configuration with the same name already exist."'
+definitions:
+  AdvancedSchedule:
+    description: The properties of the create Advanced Schedule.
+    properties:
+      monthDays:
+        description: Days of the month that the job should execute on. Must be between 1 and 31.
+        items:
+          format: int32
+          type: integer
+          x-nullable: false
+        type: array
+      monthlyOccurrences:
+        description: Occurrences of days within a month.
+        items:
+          $ref: '#/definitions/AdvancedScheduleMonthlyOccurrence'
+        type: array
+      weekDays:
+        description: Days of the week that the job should execute on.
+        items:
+          type: string
+        type: array
+  AdvancedScheduleMonthlyOccurrence:
+    description: The properties of the create advanced schedule monthly occurrence.
+    properties:
+      day:
+        description: 'Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.'
+        enum:
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          - Sunday
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ScheduleDay
+      occurrence:
+        description: Occurrence of the week within the month. Must be between 1 and 5
+        format: int32
+        type: integer
+  LinuxProperties:
+    description: Linux specific update configuration.
+    properties:
+      excludedPackageNameMasks:
+        description: packages excluded from the software update configuration.
+        items:
+          type: string
+        type: array
+      includedPackageClassifications:
+        description: Update classifications included in the software update configuration.
+        enum:
+          - Unclassified
+          - Critical
+          - Security
+          - Other
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: LinuxUpdateClasses
+      includedPackageNameMasks:
+        description: packages included from the software update configuration.
+        items:
+          type: string
+        type: array
+      rebootSetting:
+        description: Reboot setting for the software update configuration.
+        type: string
+    type: object
+  ScheduleProperties:
+    description: Definition of schedule parameters.
+    properties:
+      advancedSchedule:
+        $ref: '#/definitions/AdvancedSchedule'
+        description: Gets or sets the advanced schedule.
+      creationTime:
+        description: Gets or sets the creation time.
+        format: date-time
+        type: string
+        x-nullable: false
+      description:
+        description: Gets or sets the description.
+        type: string
+      expiryTime:
+        description: Gets or sets the end time of the schedule.
+        format: date-time
+        type: string
+        x-nullable: true
+      expiryTimeOffsetMinutes:
+        description: Gets or sets the expiry time's offset in minutes.
+        format: double
+        type: number
+        x-nullable: false
+      frequency:
+        description: Gets or sets the frequency of the schedule.
+        enum:
+          - OneTime
+          - Day
+          - Hour
+          - Week
+          - Month
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ScheduleFrequency
+      interval:
+        description: Gets or sets the interval of the schedule.
+        type: integer
+      isEnabled:
+        default: false
+        description: Gets or sets a value indicating whether this schedule is enabled.
+        type: boolean
+      lastModifiedTime:
+        description: Gets or sets the last modified time.
+        format: date-time
+        type: string
+        x-nullable: false
+      nextRun:
+        description: Gets or sets the next run time of the schedule.
+        format: date-time
+        type: string
+        x-nullable: true
+      nextRunOffsetMinutes:
+        description: Gets or sets the next run time's offset in minutes.
+        format: double
+        type: number
+        x-nullable: false
+      startTime:
+        description: Gets or sets the start time of the schedule.
+        format: date-time
+        type: string
+        x-nullable: false
+      startTimeOffsetMinutes:
+        description: Gets the start time's offset in minutes.
+        format: double
+        readOnly: true
+        type: number
+        x-nullable: false
+      timeZone:
+        description: Gets or sets the time zone of the schedule.
+        type: string
+  WindowsProperties:
+    description: Windows specific update configuration.
+    properties:
+      excludedKbNumbers:
+        description: KB numbers excluded from the software update configuration.
+        items:
+          type: string
+        type: array
+      includedKbNumbers:
+        description: KB numbers included from the software update configuration.
+        items:
+          type: string
+        type: array
+      includedUpdateClassifications:
+        description: Update classification included in the software update configuration. A comma separated string with required values
+        enum:
+          - Unclassified
+          - Critical
+          - Security
+          - UpdateRollup
+          - FeaturePack
+          - ServicePack
+          - Definition
+          - Tools
+          - Updates
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: WindowsUpdateClasses
+      rebootSetting:
+        description: Reboot setting for the software update configuration.
+        type: string
+    type: object
+  collectionItemUpdateConfiguration:
+    description: object returned when requesting a collection of software update configuration
+    properties:
+      azureVirtualMachines:
+        description: List of azure resource Ids for azure virtual machines targeted by the software update configuration.
+        items:
+          description: Azure Resource Manager Id for a virtual machine.
+          type: string
+        type: array
+      duration:
+        description: 'Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601'
+        format: duration
+        type: string
+  operatingSystemType:
+    description: Target operating system for the software update configuration.
+    enum:
+      - Windows
+      - Linux
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: OperatingSystemType
+  scheduleFrequency:
+    description: Gets or sets the frequency of the schedule.
+    enum:
+      - OneTime
+      - Day
+      - Hour
+      - Week
+      - Month
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ScheduleFrequency
+  softwareUpdateConfiguration:
+    description: Software update configuration properties.
+    properties:
+      id:
+        description: Resource Id.
+        readOnly: true
+        type: string
+      name:
+        description: Resource name.
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/softwareUpdateConfigurationProperties'
+        description: Software update configuration properties.
+        x-ms-client-flatten: true
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
+    required:
+      - properties
+    type: object
+    x-ms-azure-resource: true
+  softwareUpdateConfigurationCollectionItem:
+    description: Software update configuration collection item properties.
+    properties:
+      id:
+        description: Resource Id of the software update configuration
+        readOnly: true
+        type: string
+      name:
+        description: Name of the software update configuration.
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/softwareUpdateConfigurationCollectionItemProperties'
+        description: Software update configuration properties.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  softwareUpdateConfigurationCollectionItemProperties:
+    description: Software update configuration collection item properties.
+    properties:
+      creationTime:
+        description: 'Creation time of the software update configuration, which only appears in the response.'
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      frequency:
+        $ref: '#/definitions/scheduleFrequency'
+        description: execution frequency of the schedule associated with the software update configuration
+        type: string
+      lastModifiedTime:
+        description: 'Last time software update configuration was modified, which only appears in the response.'
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      nextRun:
+        description: ext run time of the update.
+        format: date-time
+        type: string
+        x-nullable: true
+      provisioningState:
+        description: 'Provisioning state for the software update configuration, which only appears in the response.'
+        readOnly: true
+        type: string
+      startTime:
+        description: the start time of the update.
+        format: date-time
+        type: string
+        x-nullable: false
+      updateConfiguration:
+        $ref: '#/definitions/collectionItemUpdateConfiguration'
+        description: Update specific properties of the software update configuration.
+  softwareUpdateConfigurationListResult:
+    description: result of listing all software update configuration
+    properties:
+      value:
+        description: outer object returned when listing all software update configurations
+        items:
+          $ref: '#/definitions/softwareUpdateConfigurationCollectionItem'
+        type: array
+  softwareUpdateConfigurationProperties:
+    description: Software update configuration properties.
+    properties:
+      createdBy:
+        description: 'createdBy property, which only appears in the response.'
+        readOnly: true
+        type: string
+      creationTime:
+        description: 'Creation time of theresource, which only appears in the response.'
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      error:
+        description: Error response of an operation failure
+        properties:
+          code:
+            description: Error code
+            type: string
+          message:
+            description: Error message indicating why the operation failed.
+            type: string
+        type: object
+      lastModifiedBy:
+        description: 'lastModifiedBy property, which only appears in the response.'
+        readOnly: true
+        type: string
+      lastModifiedTime:
+        description: 'Last time resource was modified, which only appears in the response.'
+        format: date-time
+        readOnly: true
+        type: string
+        x-nullable: false
+      provisioningState:
+        description: 'Provisioning state for the software update configuration, which only appears in the response.'
+        readOnly: true
+        type: string
+      scheduleInfo:
+        $ref: '#/definitions/ScheduleProperties'
+        description: Schedule information for the Software update configuration
+      updateConfiguration:
+        $ref: '#/definitions/updateConfiguration'
+        description: update specific properties for the Software update configuration
+    required:
+      - updateConfiguration
+      - scheduleInfo
+  updateConfiguration:
+    description: Update specifc properties of the software update configuration.
+    properties:
+      azureVirtualMachines:
+        description: List of azure resource Ids for azure virtual machines targeted by the software update configuration.
+        items:
+          description: Azure Resource Manager Id for a virtual machine.
+          type: string
+        type: array
+      duration:
+        description: 'Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601'
+        format: duration
+        type: string
+      linux:
+        $ref: '#/definitions/LinuxProperties'
+        description: Linux specific update configuration.
+      nonAzureComputerNames:
+        description: List of names of non-azure machines targeted by the software update configuration.
+        items:
+          description: Name of Non-Azure OMS Computer.
+          type: string
+        type: array
+      operatingSystem:
+        $ref: '#/definitions/operatingSystemType'
+        description: operating system of target machines
+      windows:
+        $ref: '#/definitions/WindowsProperties'
+        description: Windows specific update configuration.
+    required:
+      - operatingSystem
+    type: object

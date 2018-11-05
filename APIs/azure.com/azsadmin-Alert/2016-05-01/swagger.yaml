@@ -1,0 +1,507 @@
+swagger: '2.0'
+schemes:
+  - https
+host: adminmanagement.local.azurestack.external
+info:
+  description: Alert operation endpoints and objects.
+  title: InfrastructureInsightsManagementClient
+  version: '2016-05-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/InfrastructureInsights/Microsoft.InfrastructureInsights.Admin/stable/2016-05-01/Alert.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: azsadmin-Alert
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  AlertNameParameter:
+    description: Name of the alert.
+    in: path
+    name: alertName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  AlertParameter:
+    description: Updated Alert Parameter.
+    in: body
+    name: alert
+    required: true
+    schema:
+      $ref: '#/definitions/Alert'
+    x-ms-parameter-location: method
+  HeartbeatMachineNameBodyParameter:
+    description: Name of a heartbeat machine.
+    in: body
+    name: heartbeatMachineName
+    required: true
+    schema:
+      type: string
+    x-ms-parameter-location: method
+  ResourceProviderRegistrationIdBodyParameter:
+    description: A resource provider registration id.
+    in: body
+    name: resourceProviderRegistrationId
+    required: true
+    schema:
+      type: string
+    x-ms-parameter-location: method
+  ResourceRegistrationIdBodyParameter:
+    description: A resource provider id.
+    in: body
+    name: resourceRegistrationId
+    required: true
+    schema:
+      type: string
+    x-ms-parameter-location: method
+  RetentionPeriodInDaysBodyParameter:
+    description: How long alerts should exist before deletion.
+    in: body
+    name: retentionPeriodInDays
+    required: true
+    schema:
+      format: int32
+      type: integer
+    x-ms-parameter-location: method
+  UserParameter:
+    description: The username used to perform the operation.
+    in: query
+    name: user
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts':
+    get:
+      description: Returns the list of all alerts in a given location.
+      operationId: Alerts_List
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location name.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: OData filter parameter.
+          in: query
+          name: $filter
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AlertList'
+      tags:
+        - Alerts
+      x-ms-examples:
+        List all alerts:
+          parameters:
+            api-version: '2016-05-01'
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                nextLink: ''
+                value:
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/alerts/1fcf80bb-f889-44c5-8591-efd191812385
+                    location: local
+                    name: 1fcf80bb-f889-44c5-8591-efd191812385
+                    properties:
+                      alertId: 1fcf80bb-f889-44c5-8591-efd191812385
+                      alertProperties:
+                        description: ''
+                        fabricName: 'fabric:/FabricResourceProvider'
+                        healthState: Warning
+                        name: Capacity
+                        serviceType: FabricResourceProvider
+                      closedByUserAlias: ''
+                      closedTimestamp: ''
+                      createdTimestamp: '2017-08-12T20:28:56.897087Z'
+                      description:
+                        - text: The infrastructure role Capacity is experiencing issues.
+                          type: Text
+                      faultId: 'ServiceFabric:/FabricResourceProvider/fabric:/FabricResourceProvider'
+                      faultTypeId: ServiceFabricApplicationUnhealthy
+                      impactedResourceDisplayName: FabricResourceProvider
+                      impactedResourceId: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/FabricResourceProvider
+                      lastUpdatedTimestamp: '2017-08-12T20:28:56.897087Z'
+                      remediation:
+                        - text: 'Please contact Support. Before you do, start the log file collection process using the guidance from '
+                          type: Text
+                        - linkType: Uri
+                          resourceId: ''
+                          type: LinkBegin
+                          uri: 'https://aka.ms/azurestacklogfiles'
+                        - text: 'https://aka.ms/azurestacklogfiles'
+                          type: Text
+                        - type: LinkEnd
+                        - text: .
+                          type: Text
+                      resourceProviderRegistrationId: e56bc7b8-c8b5-4e25-b00c-4f951effb22c
+                      resourceRegistrationId: ''
+                      severity: Warning
+                      state: Active
+                      title: Infrastructure role is unhealthy
+                    tags: {}
+                    type: Microsoft.InfrastructureInsights.Admin/regionHealths/alerts
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/alerts/ca55be03-9be9-4deb-8467-e890ab1d116b
+                    location: local
+                    name: ca55be03-9be9-4deb-8467-e890ab1d116b
+                    properties:
+                      alertId: ca55be03-9be9-4deb-8467-e890ab1d116b
+                      alertProperties:
+                        description: ''
+                        fabricName: FabricControllerRing
+                        healthState: Warning
+                        name: Infrastructure management controller
+                        serviceType: FabricControllerRing
+                      closedByUserAlias: ''
+                      closedTimestamp: ''
+                      createdTimestamp: '2017-08-12T20:28:56.912712Z'
+                      description:
+                        - text: The infrastructure role Infrastructure management controller is experiencing issues.
+                          type: Text
+                      faultId: 'ServiceFabric:/FabricControllerRing/FabricControllerRing'
+                      faultTypeId: ServiceFabricClusterUnhealthy
+                      impactedResourceDisplayName: Infrastructure management controller
+                      impactedResourceId: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/FabricControllerRing
+                      lastUpdatedTimestamp: '2017-08-12T20:28:56.912712Z'
+                      remediation:
+                        - text: 'Please contact Support. Before you do, start the log file collection process using the guidance from '
+                          type: Text
+                        - linkType: Uri
+                          resourceId: ''
+                          type: LinkBegin
+                          uri: 'https://aka.ms/azurestacklogfiles'
+                        - text: 'https://aka.ms/azurestacklogfiles'
+                          type: Text
+                        - type: LinkEnd
+                        - text: .
+                          type: Text
+                      resourceProviderRegistrationId: e56bc7b8-c8b5-4e25-b00c-4f951effb22c
+                      resourceRegistrationId: 7cd4c25c-e946-4502-926b-e3c32737b116
+                      severity: Warning
+                      state: Active
+                      title: Infrastructure role is unhealthy
+                    tags: {}
+                    type: Microsoft.InfrastructureInsights.Admin/regionHealths/alerts
+      x-ms-odata: '#/definitions/Alert'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts/{alertName}':
+    get:
+      description: Get an alert.
+      operationId: Alerts_Get
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location name.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/AlertNameParameter'
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Alert'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Get an alert:
+          parameters:
+            alertName: ca55be03-9be9-4deb-8467-e890ab1d116b
+            api-version: '2016-05-01'
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/alerts/ca55be03-9be9-4deb-8467-e890ab1d116b
+                location: local
+                name: ca55be03-9be9-4deb-8467-e890ab1d116b
+                properties:
+                  alertId: ca55be03-9be9-4deb-8467-e890ab1d116b
+                  alertProperties:
+                    description: ''
+                    fabricName: FabricControllerRing
+                    healthState: Warning
+                    name: Infrastructure management controller
+                    serviceType: FabricControllerRing
+                  closedByUserAlias: ''
+                  closedTimestamp: ''
+                  createdTimestamp: '2017-08-12T20:28:56.912712Z'
+                  description:
+                    - text: The infrastructure role Infrastructure management controller is experiencing issues.
+                      type: Text
+                  faultId: 'ServiceFabric:/FabricControllerRing/FabricControllerRing'
+                  faultTypeId: ServiceFabricClusterUnhealthy
+                  impactedResourceDisplayName: Infrastructure management controller
+                  impactedResourceId: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/FabricControllerRing
+                  lastUpdatedTimestamp: '2017-08-12T20:28:56.912712Z'
+                  remediation:
+                    - text: 'Please contact Support. Before you do, start the log file collection process using the guidance from '
+                      type: Text
+                    - linkType: Uri
+                      resourceId: ''
+                      type: LinkBegin
+                      uri: 'https://aka.ms/azurestacklogfiles'
+                    - text: 'https://aka.ms/azurestacklogfiles'
+                      type: Text
+                    - type: LinkEnd
+                    - text: .
+                      type: Text
+                  resourceProviderRegistrationId: e56bc7b8-c8b5-4e25-b00c-4f951effb22c
+                  resourceRegistrationId: 7cd4c25c-e946-4502-926b-e3c32737b116
+                  severity: Warning
+                  state: Active
+                  title: Infrastructure role is unhealthy
+                tags: {}
+                type: Microsoft.InfrastructureInsights.Admin/regionHealths/alerts
+    put:
+      description: Close an alert.
+      operationId: Alerts_Close
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Location name.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/AlertNameParameter'
+        - default: '2016-05-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - $ref: '#/parameters/UserParameter'
+        - $ref: '#/parameters/AlertParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Alert'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Close an alert:
+          parameters:
+            alert:
+              id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/alerts/ca55be03-9be9-4deb-8467-e890ab1d116b
+              location: local
+              name: ca55be03-9be9-4deb-8467-e890ab1d116b
+              properties:
+                closedByUserAlias: ciserviceadmin@msazurestack.onmicrosoft.com
+                state: Closed
+              tags: {}
+              type: Microsoft.InfrastructureInsights.Admin/regionHealths/alerts
+            alertName: ca55be03-9be9-4deb-8467-e890ab1d116b
+            api-version: '2016-05-01'
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            user: ciserviceadmin@msazurestack.onmicrosoft.com
+          responses:
+            '200':
+              body:
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/alerts/ca55be03-9be9-4deb-8467-e890ab1d116b
+                location: local
+                name: ca55be03-9be9-4deb-8467-e890ab1d116b
+                properties:
+                  alertId: ca55be03-9be9-4deb-8467-e890ab1d116b
+                  alertProperties:
+                    description: ''
+                    fabricName: FabricControllerRing
+                    healthState: Warning
+                    name: Infrastructure management controller
+                    serviceType: FabricControllerRing
+                  closedByUserAlias: ciserviceadmin@msazurestack.onmicrosoft.com
+                  closedTimestamp: ''
+                  createdTimestamp: '2017-08-12T20:28:56.912712Z'
+                  description:
+                    - text: The infrastructure role Infrastructure management controller is experiencing issues.
+                      type: Text
+                  faultId: 'ServiceFabric:/FabricControllerRing/FabricControllerRing'
+                  faultTypeId: ServiceFabricClusterUnhealthy
+                  impactedResourceDisplayName: Infrastructure management controller
+                  impactedResourceId: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/system.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/infraRoles/FabricControllerRing
+                  lastUpdatedTimestamp: '2017-08-12T20:28:56.912712Z'
+                  remediation:
+                    - text: 'Please contact Support. Before you do, start the log file collection process using the guidance from '
+                      type: Text
+                    - linkType: Uri
+                      resourceId: ''
+                      type: LinkBegin
+                      uri: 'https://aka.ms/azurestacklogfiles'
+                    - text: 'https://aka.ms/azurestacklogfiles'
+                      type: Text
+                    - type: LinkEnd
+                    - text: .
+                      type: Text
+                  resourceProviderRegistrationId: e56bc7b8-c8b5-4e25-b00c-4f951effb22c
+                  resourceRegistrationId: 7cd4c25c-e946-4502-926b-e3c32737b116
+                  severity: Warning
+                  state: Closed
+                  title: Infrastructure role is unhealthy
+                tags: {}
+                type: Microsoft.InfrastructureInsights.Admin/regionHealths/alerts
+definitions:
+  Alert:
+    allOf:
+      - description: Base Resource Object
+        properties:
+          id:
+            description: URI of the resource.
+            type: string
+          location:
+            description: Location where resource is location.
+            readOnly: true
+            type: string
+          name:
+            description: Name of the resource.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: List of key value pairs.
+            readOnly: true
+            type: object
+          type:
+            description: Type of resource.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
+    description: This class models an alert resource.
+    properties:
+      properties:
+        $ref: '#/definitions/AlertModel'
+        description: Holds all information related to Alerts
+        x-ms-client-flatten: true
+  AlertList:
+    description: A pageable list of Alerts
+    properties:
+      nextLink:
+        description: Points to the next page.
+        type: string
+      value:
+        description: Holds all alerts in this page.
+        items:
+          $ref: '#/definitions/Alert'
+        type: array
+  AlertModel:
+    description: Holds Alert data
+    properties:
+      alertId:
+        description: Gets or sets the id of the alert.
+        type: string
+      alertProperties:
+        additionalProperties:
+          type: string
+        description: Gets or sets properties of the alert.
+        type: object
+      closedByUserAlias:
+        description: Gets or sets the user alias who closed the alert.
+        type: string
+      closedTimestamp:
+        description: Gets or sets the closed timestamp of the alert.
+        type: string
+      createdTimestamp:
+        description: Gets or sets the created timestamp of the alert.
+        type: string
+      description:
+        description: Gets or sets the description of the alert.
+        items:
+          additionalProperties:
+            type: string
+          description: dictionary
+          type: object
+        type: array
+      faultId:
+        description: Gets or sets the fault id of the alert.
+        type: string
+      faultTypeId:
+        description: Gets or sets the fault type id of the alert.
+        type: string
+      impactedResourceDisplayName:
+        description: Gets or sets the display name for the impacted item.
+        type: string
+      impactedResourceId:
+        description: Gets or sets the ResourceId for the impacted item.
+        type: string
+      lastUpdatedTimestamp:
+        description: Gets or sets last updated timestamp of the alert.
+        type: string
+      remediation:
+        description: Gets or sets the admin friendly remediation instructions for the alert.
+        items:
+          additionalProperties:
+            type: string
+          description: dictionary
+          type: object
+        type: array
+      resourceProviderRegistrationId:
+        description: Gets or sets the registration id of the service the alert belongs to.
+        type: string
+      resourceRegistrationId:
+        description: Gets or sets the registration id of the atomic component the alert belongs to.  This is null if not associated with a resource.
+        type: string
+      severity:
+        description: Gets or sets the severity of the alert.
+        type: string
+      state:
+        description: Gets or sets the state of the alert.
+        type: string
+      title:
+        description: Gets or sets the ResourceId for the impacted item.
+        type: string

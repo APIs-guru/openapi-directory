@@ -101,6 +101,51 @@ security:
 paths:
   /:
     post:
+      operationId: AcceptSharedDirectory
+      description: Accepts a directory sharing request that was sent from the directory owner account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AcceptSharedDirectoryResult'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '482':
+          description: DirectoryAlreadySharedException
+          schema:
+            $ref: '#/definitions/DirectoryAlreadySharedException'
+        '483':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '484':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AcceptSharedDirectoryRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AddIpRoutes':
+    post:
       operationId: AddIpRoutes
       description: '<p>If the DNS server for your on-premises domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services. <i>AddIpRoutes</i> adds this address block. You can also use <i>AddIpRoutes</i> to facilitate routing traffic that uses public IP ranges from your Microsoft AD on AWS to a peer VPC. </p> <p>Before you call <i>AddIpRoutes</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>AddIpRoutes</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
       responses:
@@ -237,7 +282,7 @@ paths:
   '/#ConnectDirectory':
     post:
       operationId: ConnectDirectory
-      description: '<p>Creates an AD Connector to connect to an on-premises directory.</p> <p>Before you call <i>ConnectDirectory</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>ConnectDirectory</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
+      description: '<p>Creates an AD Connector to connect to an on-premises directory.</p> <p>Before you call <code>ConnectDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>ConnectDirectory</code> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
       responses:
         '200':
           description: Success
@@ -433,7 +478,7 @@ paths:
   '/#CreateDirectory':
     post:
       operationId: CreateDirectory
-      description: '<p>Creates a Simple AD directory.</p> <p>Before you call <i>CreateDirectory</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateDirectory</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
+      description: '<p>Creates a Simple AD directory.</p> <p>Before you call <code>CreateDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>CreateDirectory</code> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
       responses:
         '200':
           description: Success
@@ -471,10 +516,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateLogSubscription':
+    post:
+      operationId: CreateLogSubscription
+      description: Creates a subscription to forward real time Directory Service domain controller security logs to the specified CloudWatch log group in your AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLogSubscriptionResult'
+        '480':
+          description: EntityAlreadyExistsException
+          schema:
+            $ref: '#/definitions/EntityAlreadyExistsException'
+        '481':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '482':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '483':
+          description: InsufficientPermissionsException
+          schema:
+            $ref: '#/definitions/InsufficientPermissionsException'
+        '484':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '485':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLogSubscriptionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateMicrosoftAD':
     post:
       operationId: CreateMicrosoftAD
-      description: '<p>Creates a Microsoft AD in the AWS cloud.</p> <p>Before you call <i>CreateMicrosoftAD</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateMicrosoftAD</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
+      description: '<p>Creates an AWS Managed Microsoft AD directory.</p> <p>Before you call <i>CreateMicrosoftAD</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateMicrosoftAD</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
       responses:
         '200':
           description: Success
@@ -564,7 +658,7 @@ paths:
   '/#CreateTrust':
     post:
       operationId: CreateTrust
-      description: '<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.</p>'
+      description: '<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your AWS Managed Microsoft AD directory, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between an AWS Managed Microsoft AD directory and an external domain. You can create either a forest trust or an external trust.</p>'
       responses:
         '200':
           description: Success
@@ -662,7 +756,7 @@ paths:
   '/#DeleteDirectory':
     post:
       operationId: DeleteDirectory
-      description: '<p>Deletes an AWS Directory Service directory.</p> <p>Before you call <i>DeleteDirectory</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>DeleteDirectory</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
+      description: '<p>Deletes an AWS Directory Service directory.</p> <p>Before you call <code>DeleteDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>DeleteDirectory</code> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
       responses:
         '200':
           description: Success
@@ -686,6 +780,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteDirectoryRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLogSubscription':
+    post:
+      operationId: DeleteLogSubscription
+      description: Deletes the specified log subscription.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLogSubscriptionResult'
+        '480':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '481':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '482':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '483':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLogSubscriptionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -740,7 +875,7 @@ paths:
   '/#DeleteTrust':
     post:
       operationId: DeleteTrust
-      description: Deletes an existing trust relationship between your Microsoft AD in the AWS cloud and an external domain.
+      description: Deletes an existing trust relationship between your AWS Managed Microsoft AD directory and an external domain.
       responses:
         '200':
           description: Success
@@ -875,7 +1010,7 @@ paths:
   '/#DescribeDirectories':
     post:
       operationId: DescribeDirectories
-      description: '<p>Obtains information about the directories that belong to this account.</p> <p>You can retrieve information about specific directories by passing the directory identifiers in the <i>DirectoryIds</i> parameter. Otherwise, all directories that belong to the current account are returned.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> request and response parameters. If more results are available, the <i>DescribeDirectoriesResult.NextToken</i> member contains a token that you pass in the next call to <a>DescribeDirectories</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <i>Limit</i> parameter.</p>'
+      description: '<p>Obtains information about the directories that belong to this account.</p> <p>You can retrieve information about specific directories by passing the directory identifiers in the <code>DirectoryIds</code> parameter. Otherwise, all directories that belong to the current account are returned.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> request and response parameters. If more results are available, the <code>DescribeDirectoriesResult.NextToken</code> member contains a token that you pass in the next call to <a>DescribeDirectories</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <code>Limit</code> parameter.</p>'
       responses:
         '200':
           description: Success
@@ -1017,6 +1152,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSharedDirectories':
+    post:
+      operationId: DescribeSharedDirectories
+      description: 'Returns the shared directories in your account. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSharedDirectoriesResult'
+        '480':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '481':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '484':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '485':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSharedDirectoriesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeSnapshots':
     post:
       operationId: DescribeSnapshots
@@ -1114,7 +1298,7 @@ paths:
   '/#DisableRadius':
     post:
       operationId: DisableRadius
-      description: Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector directory.
+      description: Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
       responses:
         '200':
           description: Success
@@ -1196,7 +1380,7 @@ paths:
   '/#EnableRadius':
     post:
       operationId: EnableRadius
-      description: Enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector directory.
+      description: Enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
       responses:
         '200':
           description: Success
@@ -1402,6 +1586,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListLogSubscriptions':
+    post:
+      operationId: ListLogSubscriptions
+      description: Lists the active log subscriptions for the AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListLogSubscriptionsResult'
+        '480':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '481':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '482':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '483':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListLogSubscriptionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListSchemaExtensions':
     post:
       operationId: ListSchemaExtensions
@@ -1529,6 +1754,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RejectSharedDirectory':
+    post:
+      operationId: RejectSharedDirectory
+      description: Rejects a directory sharing request that was sent from the directory owner account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RejectSharedDirectoryResult'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '482':
+          description: DirectoryAlreadySharedException
+          schema:
+            $ref: '#/definitions/DirectoryAlreadySharedException'
+        '483':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '484':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RejectSharedDirectoryRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#RemoveIpRoutes':
     post:
       operationId: RemoveIpRoutes
@@ -1615,6 +1885,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ResetUserPassword':
+    post:
+      operationId: ResetUserPassword
+      description: Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResetUserPasswordResult'
+        '480':
+          description: DirectoryUnavailableException
+          schema:
+            $ref: '#/definitions/DirectoryUnavailableException'
+        '481':
+          description: UserDoesNotExistException
+          schema:
+            $ref: '#/definitions/UserDoesNotExistException'
+        '482':
+          description: InvalidPasswordException
+          schema:
+            $ref: '#/definitions/InvalidPasswordException'
+        '483':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '484':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '485':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '486':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ResetUserPasswordRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#RestoreFromSnapshot':
     post:
       operationId: RestoreFromSnapshot
@@ -1646,6 +1969,71 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RestoreFromSnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ShareDirectory':
+    post:
+      operationId: ShareDirectory
+      description: '<p>Shares a specified directory (<code>DirectoryId</code>) in your AWS account (directory owner) with another AWS account (directory consumer). With this operation you can use your directory from any AWS account and from any Amazon VPC within an AWS Region.</p> <p>When you share your AWS Managed Microsoft AD directory, AWS Directory Service creates a shared directory in the directory consumer account. This shared directory contains the metadata to provide access to the directory within the directory owner account. The shared directory is visible in all VPCs in the directory consumer account.</p> <p>The <code>ShareMethod</code> parameter determines whether the specified directory can be shared between AWS accounts inside the same AWS organization (<code>ORGANIZATIONS</code>). It also determines whether you can share the directory with any other AWS account either inside or outside of the organization (<code>HANDSHAKE</code>).</p> <p>The <code>ShareNotes</code> parameter is only used when <code>HANDSHAKE</code> is called, which sends a directory sharing request to the directory consumer. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ShareDirectoryResult'
+        '480':
+          description: DirectoryAlreadySharedException
+          schema:
+            $ref: '#/definitions/DirectoryAlreadySharedException'
+        '481':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '482':
+          description: InvalidTargetException
+          schema:
+            $ref: '#/definitions/InvalidTargetException'
+        '483':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '484':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '485':
+          description: ShareLimitExceededException
+          schema:
+            $ref: '#/definitions/ShareLimitExceededException'
+        '486':
+          description: OrganizationsException
+          schema:
+            $ref: '#/definitions/OrganizationsException'
+        '487':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '488':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '489':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ShareDirectoryRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1695,6 +2083,51 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartSchemaExtensionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UnshareDirectory':
+    post:
+      operationId: UnshareDirectory
+      description: 'Stops the directory sharing between the directory owner and consumer accounts. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UnshareDirectoryResult'
+        '480':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '481':
+          description: InvalidTargetException
+          schema:
+            $ref: '#/definitions/InvalidTargetException'
+        '482':
+          description: DirectoryNotSharedException
+          schema:
+            $ref: '#/definitions/DirectoryNotSharedException'
+        '483':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '484':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UnshareDirectoryRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1810,7 +2243,7 @@ paths:
   '/#UpdateRadius':
     post:
       operationId: UpdateRadius
-      description: Updates the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector directory.
+      description: Updates the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector or Microsoft AD directory.
       responses:
         '200':
           description: Success
@@ -1848,10 +2281,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateTrust':
+    post:
+      operationId: UpdateTrust
+      description: Updates the trust that has been set up between your AWS Managed Microsoft AD directory and an on-premises Active Directory.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateTrustResult'
+        '480':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '483':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateTrustRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#VerifyTrust':
     post:
       operationId: VerifyTrust
-      description: <p>AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships.</p> <p>This action verifies a trust relationship between your Microsoft AD in the AWS cloud and an external domain.</p>
+      description: <p>AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships.</p> <p>This action verifies a trust relationship between your AWS Managed Microsoft AD directory and an external domain.</p>
       responses:
         '200':
           description: Success
@@ -1894,10 +2368,28 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AccessUrl:
-    type: string
-    minLength: 1
-    maxLength: 128
+  AcceptSharedDirectoryResult:
+    type: object
+    properties:
+      SharedDirectory:
+        $ref: '#/definitions/SharedDirectory'
+        description: The shared directory in the directory consumer account.
+  AcceptSharedDirectoryRequest:
+    type: object
+    required:
+      - SharedDirectoryId
+    properties:
+      SharedDirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: 'Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account. '
+  InvalidParameterException: {}
+  EntityDoesNotExistException: {}
+  DirectoryAlreadySharedException: {}
+  ClientException: {}
+  ServiceException: {}
+  AddIpRoutesResult:
+    type: object
+    properties: {}
   AddIpRoutesRequest:
     type: object
     required:
@@ -1913,7 +2405,10 @@ definitions:
       UpdateSecurityGroupForDirectoryControllers:
         $ref: '#/definitions/UpdateSecurityGroupForDirectoryControllers'
         description: '<p>If set to true, updates the inbound and outbound rules of the security group that has the description: "AWS created security group for <i>directory ID</i> directory controllers." Following are the new rules: </p> <p>Inbound:</p> <ul> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source: 0.0.0.0/0</p> </li> <li> <p>Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0</p> </li> <li> <p>Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0</p> </li> <li> <p>Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0</p> </li> <li> <p>Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0</p> </li> </ul> <p/> <p>Outbound:</p> <ul> <li> <p>Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0</p> </li> </ul> <p>These security rules impact an internal network interface that is not exposed publicly.</p>'
-  AddIpRoutesResult:
+  EntityAlreadyExistsException: {}
+  DirectoryUnavailableException: {}
+  IpRouteLimitExceededException: {}
+  AddTagsToResourceResult:
     type: object
     properties: {}
   AddTagsToResourceRequest:
@@ -1928,52 +2423,10 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: The tags to be assigned to the directory.
-  AddTagsToResourceResult:
+  TagLimitExceededException: {}
+  CancelSchemaExtensionResult:
     type: object
     properties: {}
-  AddedDateTime:
-    type: string
-    format: date-time
-  AliasName:
-    type: string
-    pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*'
-    minLength: 1
-    maxLength: 62
-  Attribute:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/AttributeName'
-        description: The name of the attribute.
-      Value:
-        $ref: '#/definitions/AttributeValue'
-        description: The value of the attribute.
-    description: Represents a named directory attribute.
-  AttributeName:
-    type: string
-    minLength: 1
-  AttributeValue:
-    type: string
-  Attributes:
-    type: array
-    items:
-      $ref: '#/definitions/Attribute'
-  AuthenticationFailedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The textual message for the exception.
-      RequestId:
-        $ref: '#/definitions/RequestId'
-        description: The identifier of the request that caused the exception.
-    description: An authentication error occurred.
-  AvailabilityZone:
-    type: string
-  AvailabilityZones:
-    type: array
-    items:
-      $ref: '#/definitions/AvailabilityZone'
   CancelSchemaExtensionRequest:
     type: object
     required:
@@ -1986,66 +2439,13 @@ definitions:
       SchemaExtensionId:
         $ref: '#/definitions/SchemaExtensionId'
         description: The identifier of the schema extension that will be canceled.
-  CancelSchemaExtensionResult:
-    type: object
-    properties: {}
-  CidrIp:
-    type: string
-    pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([1-9]|[1-2][0-9]|3[0-2]))$'
-  CidrIps:
-    type: array
-    items:
-      $ref: '#/definitions/CidrIp'
-  ClientException:
+  ConnectDirectoryResult:
     type: object
     properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: A client exception has occurred.
-  CloudOnlyDirectoriesLimitReached:
-    type: boolean
-  Computer:
-    type: object
-    properties:
-      ComputerId:
-        $ref: '#/definitions/SID'
-        description: The identifier of the computer.
-      ComputerName:
-        $ref: '#/definitions/ComputerName'
-        description: The computer name.
-      ComputerAttributes:
-        $ref: '#/definitions/Attributes'
-        description: An array of <a>Attribute</a> objects containing the LDAP attributes that belong to the computer account.
-    description: Contains information about a computer account in a directory.
-  ComputerName:
-    type: string
-    minLength: 1
-    maxLength: 15
-  ComputerPassword:
-    type: string
-    pattern: '[\u0020-\u00FF]+'
-    minLength: 8
-    maxLength: 64
-    format: password
-  ConditionalForwarder:
-    type: object
-    properties:
-      RemoteDomainName:
-        $ref: '#/definitions/RemoteDomainName'
-        description: The fully qualified domain name (FQDN) of the remote domains pointed to by the conditional forwarder.
-      DnsIpAddrs:
-        $ref: '#/definitions/DnsIpAddrs'
-        description: The IP addresses of the remote DNS server associated with RemoteDomainName. This is the IP address of the DNS server that your conditional forwarder points to.
-      ReplicationScope:
-        $ref: '#/definitions/ReplicationScope'
-        description: 'The replication scope of the conditional forwarder. The only allowed value is <code>Domain</code>, which will replicate the conditional forwarder to all of the domain controllers for your AWS directory.'
-    description: Points to a remote domain with which you are setting up a trust relationship. Conditional forwarders are required in order to set up a trust relationship with another domain.
-  ConditionalForwarders:
-    type: array
-    items:
-      $ref: '#/definitions/ConditionalForwarder'
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the new directory.
+    description: Contains the results of the <a>ConnectDirectory</a> operation.
   ConnectDirectoryRequest:
     type: object
     required:
@@ -2056,7 +2456,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DirectoryName'
-        description: 'The fully-qualified name of the on-premises directory, such as <code>corp.example.com</code>.'
+        description: 'The fully qualified name of the on-premises directory, such as <code>corp.example.com</code>.'
       ShortName:
         $ref: '#/definitions/DirectoryShortName'
         description: 'The NetBIOS name of the on-premises directory, such as <code>CORP</code>.'
@@ -2073,20 +2473,17 @@ definitions:
         $ref: '#/definitions/DirectoryConnectSettings'
         description: A <a>DirectoryConnectSettings</a> object that contains additional information for the operation.
     description: Contains the inputs for the <a>ConnectDirectory</a> operation.
-  ConnectDirectoryResult:
+  DirectoryLimitExceededException: {}
+  CreateAliasResult:
     type: object
     properties:
       DirectoryId:
         $ref: '#/definitions/DirectoryId'
-        description: The identifier of the new directory.
-    description: Contains the results of the <a>ConnectDirectory</a> operation.
-  ConnectPassword:
-    type: string
-    minLength: 1
-    maxLength: 128
-    format: password
-  ConnectedDirectoriesLimitReached:
-    type: boolean
+        description: The identifier of the directory.
+      Alias:
+        $ref: '#/definitions/AliasName'
+        description: The alias for the directory.
+    description: Contains the results of the <a>CreateAlias</a> operation.
   CreateAliasRequest:
     type: object
     required:
@@ -2100,16 +2497,13 @@ definitions:
         $ref: '#/definitions/AliasName'
         description: <p>The requested alias.</p> <p>The alias must be unique amongst all aliases in AWS. This operation throws an <code>EntityAlreadyExistsException</code> error if the alias already exists.</p>
     description: Contains the inputs for the <a>CreateAlias</a> operation.
-  CreateAliasResult:
+  CreateComputerResult:
     type: object
     properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The identifier of the directory.
-      Alias:
-        $ref: '#/definitions/AliasName'
-        description: The alias for the directory.
-    description: Contains the results of the <a>CreateAlias</a> operation.
+      Computer:
+        $ref: '#/definitions/Computer'
+        description: A <a>Computer</a> object that represents the computer account.
+    description: Contains the results for the <a>CreateComputer</a> operation.
   CreateComputerRequest:
     type: object
     required:
@@ -2133,13 +2527,12 @@ definitions:
         $ref: '#/definitions/Attributes'
         description: An array of <a>Attribute</a> objects that contain any LDAP attributes to apply to the computer account.
     description: Contains the inputs for the <a>CreateComputer</a> operation.
-  CreateComputerResult:
+  AuthenticationFailedException: {}
+  UnsupportedOperationException: {}
+  CreateConditionalForwarderResult:
     type: object
-    properties:
-      Computer:
-        $ref: '#/definitions/Computer'
-        description: A <a>Computer</a> object that represents the computer account.
-    description: Contains the results for the <a>CreateComputer</a> operation.
+    properties: {}
+    description: The result of a CreateConditinalForwarder request.
   CreateConditionalForwarderRequest:
     type: object
     required:
@@ -2157,10 +2550,13 @@ definitions:
         $ref: '#/definitions/DnsIpAddrs'
         description: The IP addresses of the remote DNS server associated with RemoteDomainName.
     description: Initiates the creation of a conditional forwarder for your AWS Directory Service for Microsoft Active Directory. Conditional forwarders are required in order to set up a trust relationship with another domain.
-  CreateConditionalForwarderResult:
+  CreateDirectoryResult:
     type: object
-    properties: {}
-    description: The result of a CreateConditinalForwarder request.
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory that was created.
+    description: Contains the results of the <a>CreateDirectory</a> operation.
   CreateDirectoryRequest:
     type: object
     required:
@@ -2176,7 +2572,7 @@ definitions:
         description: 'The short name of the directory, such as <code>CORP</code>.'
       Password:
         $ref: '#/definitions/Password'
-        description: The password for the directory administrator. The directory creation process creates a directory administrator account with the username <code>Administrator</code> and this password.
+        description: The password for the directory administrator. The directory creation process creates a directory administrator account with the user name <code>Administrator</code> and this password.
       Description:
         $ref: '#/definitions/Description'
         description: A textual description for the directory.
@@ -2187,13 +2583,29 @@ definitions:
         $ref: '#/definitions/DirectoryVpcSettings'
         description: A <a>DirectoryVpcSettings</a> object that contains additional information for the operation.
     description: 'Contains the inputs for the <a>CreateDirectory</a> operation. '
-  CreateDirectoryResult:
+  CreateLogSubscriptionResult:
+    type: object
+    properties: {}
+  CreateLogSubscriptionRequest:
+    type: object
+    required:
+      - DirectoryId
+      - LogGroupName
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier (ID) of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.
+      LogGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the CloudWatch log group where the real-time domain controller logs are forwarded.
+  InsufficientPermissionsException: {}
+  CreateMicrosoftADResult:
     type: object
     properties:
       DirectoryId:
         $ref: '#/definitions/DirectoryId'
         description: The identifier of the directory that was created.
-    description: Contains the results of the <a>CreateDirectory</a> operation.
+    description: Result of a CreateMicrosoftAD request.
   CreateMicrosoftADRequest:
     type: object
     required:
@@ -2218,17 +2630,15 @@ definitions:
         description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
       Edition:
         $ref: '#/definitions/DirectoryEdition'
-        description: 'AWS Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.'
-    description: Creates a Microsoft AD in the AWS cloud.
-  CreateMicrosoftADResult:
+        description: 'AWS Managed Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.'
+    description: Creates an AWS Managed Microsoft AD directory.
+  CreateSnapshotResult:
     type: object
     properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The identifier of the directory that was created.
-    description: Result of a CreateMicrosoftAD request.
-  CreateSnapshotBeforeSchemaExtension:
-    type: boolean
+      SnapshotId:
+        $ref: '#/definitions/SnapshotId'
+        description: The identifier of the snapshot that was created.
+    description: Contains the results of the <a>CreateSnapshot</a> operation.
   CreateSnapshotRequest:
     type: object
     required:
@@ -2241,13 +2651,14 @@ definitions:
         $ref: '#/definitions/SnapshotName'
         description: The descriptive name to apply to the snapshot.
     description: Contains the inputs for the <a>CreateSnapshot</a> operation.
-  CreateSnapshotResult:
+  SnapshotLimitExceededException: {}
+  CreateTrustResult:
     type: object
     properties:
-      SnapshotId:
-        $ref: '#/definitions/SnapshotId'
-        description: The identifier of the snapshot that was created.
-    description: Contains the results of the <a>CreateSnapshot</a> operation.
+      TrustId:
+        $ref: '#/definitions/TrustId'
+        description: A unique identifier for the trust relationship that was created.
+    description: The result of a CreateTrust request.
   CreateTrustRequest:
     type: object
     required:
@@ -2258,7 +2669,7 @@ definitions:
     properties:
       DirectoryId:
         $ref: '#/definitions/DirectoryId'
-        description: The Directory ID of the Microsoft AD in the AWS cloud for which to establish the trust relationship.
+        description: The Directory ID of the AWS Managed Microsoft AD directory for which to establish the trust relationship.
       RemoteDomainName:
         $ref: '#/definitions/RemoteDomainName'
         description: The Fully Qualified Domain Name (FQDN) of the external domain for which to create the trust relationship.
@@ -2270,23 +2681,18 @@ definitions:
         description: The direction of the trust relationship.
       TrustType:
         $ref: '#/definitions/TrustType'
-        description: The trust relationship type.
+        description: The trust relationship type. <code>Forest</code> is the default.
       ConditionalForwarderIpAddrs:
         $ref: '#/definitions/DnsIpAddrs'
         description: The IP addresses of the remote DNS server associated with RemoteDomainName.
-    description: '<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.</p>'
-  CreateTrustResult:
+      SelectiveAuth:
+        $ref: '#/definitions/SelectiveAuth'
+        description: Optional parameter to enable selective authentication for the trust.
+    description: '<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your AWS Managed Microsoft AD directory, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between an AWS Managed Microsoft AD directory and an external domain.</p>'
+  DeleteConditionalForwarderResult:
     type: object
-    properties:
-      TrustId:
-        $ref: '#/definitions/TrustId'
-        description: A unique identifier for the trust relationship that was created.
-    description: The result of a CreateTrust request.
-  CreatedDateTime:
-    type: string
-    format: date-time
-  DeleteAssociatedConditionalForwarder:
-    type: boolean
+    properties: {}
+    description: The result of a DeleteConditionalForwarder request.
   DeleteConditionalForwarderRequest:
     type: object
     required:
@@ -2300,10 +2706,13 @@ definitions:
         $ref: '#/definitions/RemoteDomainName'
         description: The fully qualified domain name (FQDN) of the remote domain with which you are deleting the conditional forwarder.
     description: Deletes a conditional forwarder.
-  DeleteConditionalForwarderResult:
+  DeleteDirectoryResult:
     type: object
-    properties: {}
-    description: The result of a DeleteConditionalForwarder request.
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The directory identifier.
+    description: Contains the results of the <a>DeleteDirectory</a> operation.
   DeleteDirectoryRequest:
     type: object
     required:
@@ -2313,13 +2722,24 @@ definitions:
         $ref: '#/definitions/DirectoryId'
         description: The identifier of the directory to delete.
     description: Contains the inputs for the <a>DeleteDirectory</a> operation.
-  DeleteDirectoryResult:
+  DeleteLogSubscriptionResult:
     type: object
+    properties: {}
+  DeleteLogSubscriptionRequest:
+    type: object
+    required:
+      - DirectoryId
     properties:
       DirectoryId:
         $ref: '#/definitions/DirectoryId'
-        description: The directory identifier.
-    description: Contains the results of the <a>DeleteDirectory</a> operation.
+        description: Identifier (ID) of the directory whose log subscription you want to delete.
+  DeleteSnapshotResult:
+    type: object
+    properties:
+      SnapshotId:
+        $ref: '#/definitions/SnapshotId'
+        description: The identifier of the directory snapshot that was deleted.
+    description: Contains the results of the <a>DeleteSnapshot</a> operation.
   DeleteSnapshotRequest:
     type: object
     required:
@@ -2329,13 +2749,13 @@ definitions:
         $ref: '#/definitions/SnapshotId'
         description: The identifier of the directory snapshot to be deleted.
     description: Contains the inputs for the <a>DeleteSnapshot</a> operation.
-  DeleteSnapshotResult:
+  DeleteTrustResult:
     type: object
     properties:
-      SnapshotId:
-        $ref: '#/definitions/SnapshotId'
-        description: The identifier of the directory snapshot that was deleted.
-    description: Contains the results of the <a>DeleteSnapshot</a> operation.
+      TrustId:
+        $ref: '#/definitions/TrustId'
+        description: The Trust ID of the trust relationship that was deleted.
+    description: The result of a DeleteTrust request.
   DeleteTrustRequest:
     type: object
     required:
@@ -2347,14 +2767,11 @@ definitions:
       DeleteAssociatedConditionalForwarder:
         $ref: '#/definitions/DeleteAssociatedConditionalForwarder'
         description: Delete a conditional forwarder as part of a DeleteTrustRequest.
-    description: Deletes the local side of an existing trust relationship between the Microsoft AD in the AWS cloud and the external domain.
-  DeleteTrustResult:
+    description: Deletes the local side of an existing trust relationship between the AWS Managed Microsoft AD directory and the external domain.
+  DeregisterEventTopicResult:
     type: object
-    properties:
-      TrustId:
-        $ref: '#/definitions/TrustId'
-        description: The Trust ID of the trust relationship that was deleted.
-    description: The result of a DeleteTrust request.
+    properties: {}
+    description: The result of a DeregisterEventTopic request.
   DeregisterEventTopicRequest:
     type: object
     required:
@@ -2368,10 +2785,13 @@ definitions:
         $ref: '#/definitions/TopicName'
         description: The name of the SNS topic from which to remove the directory as a publisher.
     description: Removes the specified directory as a publisher to the specified SNS topic.
-  DeregisterEventTopicResult:
+  DescribeConditionalForwardersResult:
     type: object
-    properties: {}
-    description: The result of a DeregisterEventTopic request.
+    properties:
+      ConditionalForwarders:
+        $ref: '#/definitions/ConditionalForwarders'
+        description: The list of conditional forwarders that have been created.
+    description: The result of a DescribeConditionalForwarder request.
   DescribeConditionalForwardersRequest:
     type: object
     required:
@@ -2384,13 +2804,16 @@ definitions:
         $ref: '#/definitions/RemoteDomainNames'
         description: 'The fully qualified domain names (FQDN) of the remote domains for which to get the list of associated conditional forwarders. If this member is null, all conditional forwarders are returned.'
     description: Describes a conditional forwarder.
-  DescribeConditionalForwardersResult:
+  DescribeDirectoriesResult:
     type: object
     properties:
-      ConditionalForwarders:
-        $ref: '#/definitions/ConditionalForwarders'
-        description: The list of conditional forwarders that have been created.
-    description: The result of a DescribeConditionalForwarder request.
+      DirectoryDescriptions:
+        $ref: '#/definitions/DirectoryDescriptions'
+        description: '<p>The list of <a>DirectoryDescription</a> objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <code>Limit</code> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeDirectories</a> to retrieve the next set of items.'
+    description: Contains the results of the <a>DescribeDirectories</a> operation.
   DescribeDirectoriesRequest:
     type: object
     properties:
@@ -2399,21 +2822,21 @@ definitions:
         description: '<p>A list of identifiers of the directories for which to obtain the information. If this member is null, all directories that belong to the current account are returned.</p> <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>'
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The <i>DescribeDirectoriesResult.NextToken</i> value from a previous call to <a>DescribeDirectories</a>. Pass null if this is the first call.
+        description: The <code>DescribeDirectoriesResult.NextToken</code> value from a previous call to <a>DescribeDirectories</a>. Pass null if this is the first call.
       Limit:
         $ref: '#/definitions/Limit'
         description: 'The maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation.'
     description: Contains the inputs for the <a>DescribeDirectories</a> operation.
-  DescribeDirectoriesResult:
+  InvalidNextTokenException: {}
+  DescribeDomainControllersResult:
     type: object
     properties:
-      DirectoryDescriptions:
-        $ref: '#/definitions/DirectoryDescriptions'
-        description: '<p>The list of <a>DirectoryDescription</a> objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <i>Limit</i> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>'
+      DomainControllers:
+        $ref: '#/definitions/DomainControllers'
+        description: List of the <a>DomainController</a> objects that were retrieved.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: 'If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>DescribeDirectories</a> to retrieve the next set of items.'
-    description: Contains the results of the <a>DescribeDirectories</a> operation.
+        description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeDomainControllers</a> retrieve the next set of items.'
   DescribeDomainControllersRequest:
     type: object
     required:
@@ -2431,15 +2854,13 @@ definitions:
       Limit:
         $ref: '#/definitions/Limit'
         description: The maximum number of items to return.
-  DescribeDomainControllersResult:
+  DescribeEventTopicsResult:
     type: object
     properties:
-      DomainControllers:
-        $ref: '#/definitions/DomainControllers'
-        description: List of the <a>DomainController</a> objects that were retrieved.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeDomainControllers</a> retrieve the next set of items.'
+      EventTopics:
+        $ref: '#/definitions/EventTopics'
+        description: A list of SNS topic names that receive status messages from the specified Directory ID.
+    description: The result of a DescribeEventTopic request.
   DescribeEventTopicsRequest:
     type: object
     properties:
@@ -2450,13 +2871,42 @@ definitions:
         $ref: '#/definitions/TopicNames'
         description: '<p>A list of SNS topic names for which to obtain the information. If this member is null, all associations for the specified Directory ID are returned.</p> <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>'
     description: Describes event topics.
-  DescribeEventTopicsResult:
+  DescribeSharedDirectoriesResult:
     type: object
     properties:
-      EventTopics:
-        $ref: '#/definitions/EventTopics'
-        description: A list of SNS topic names that receive status messages from the specified Directory ID.
-    description: The result of a DescribeEventTopic request.
+      SharedDirectories:
+        $ref: '#/definitions/SharedDirectories'
+        description: A list of all shared directories in your account.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If not null, token that indicates that more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeSharedDirectories</a> to retrieve the next set of items.'
+  DescribeSharedDirectoriesRequest:
+    type: object
+    required:
+      - OwnerDirectoryId
+    properties:
+      OwnerDirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: 'Returns the identifier of the directory in the directory owner account. '
+      SharedDirectoryIds:
+        $ref: '#/definitions/DirectoryIds'
+        description: 'A list of identifiers of all shared directories in your account. '
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>DescribeSharedDirectoriesResult.NextToken</code> value from a previous call to <a>DescribeSharedDirectories</a>. Pass null if this is the first call. '
+      Limit:
+        $ref: '#/definitions/Limit'
+        description: The number of shared directories to return in the response object.
+  DescribeSnapshotsResult:
+    type: object
+    properties:
+      Snapshots:
+        $ref: '#/definitions/Snapshots'
+        description: '<p>The list of <a>Snapshot</a> objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <i>Limit</i> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If not null, more results are available. Pass this value in the <i>NextToken</i> member of a subsequent call to <a>DescribeSnapshots</a>.'
+    description: Contains the results of the <a>DescribeSnapshots</a> operation.
   DescribeSnapshotsRequest:
     type: object
     properties:
@@ -2473,16 +2923,16 @@ definitions:
         $ref: '#/definitions/Limit'
         description: The maximum number of objects to return.
     description: Contains the inputs for the <a>DescribeSnapshots</a> operation.
-  DescribeSnapshotsResult:
+  DescribeTrustsResult:
     type: object
     properties:
-      Snapshots:
-        $ref: '#/definitions/Snapshots'
-        description: '<p>The list of <a>Snapshot</a> objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <i>Limit</i> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>'
+      Trusts:
+        $ref: '#/definitions/Trusts'
+        description: '<p>The list of Trust objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <i>Limit</i> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>'
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: 'If not null, more results are available. Pass this value in the <i>NextToken</i> member of a subsequent call to <a>DescribeSnapshots</a>.'
-    description: Contains the results of the <a>DescribeSnapshots</a> operation.
+        description: 'If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>DescribeTrusts</a> to retrieve the next set of items.'
+    description: The result of a DescribeTrust request.
   DescribeTrustsRequest:
     type: object
     properties:
@@ -2498,25 +2948,623 @@ definitions:
       Limit:
         $ref: '#/definitions/Limit'
         description: The maximum number of objects to return.
-    description: 'Describes the trust relationships for a particular Microsoft AD in the AWS cloud. If no input parameters are are provided, such as directory ID or trust ID, this request describes all the trust relationships.'
-  DescribeTrustsResult:
+    description: 'Describes the trust relationships for a particular AWS Managed Microsoft AD directory. If no input parameters are are provided, such as directory ID or trust ID, this request describes all the trust relationships.'
+  DisableRadiusResult:
+    type: object
+    properties: {}
+    description: Contains the results of the <a>DisableRadius</a> operation.
+  DisableRadiusRequest:
+    type: object
+    required:
+      - DirectoryId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory for which to disable MFA.
+    description: Contains the inputs for the <a>DisableRadius</a> operation.
+  DisableSsoResult:
+    type: object
+    properties: {}
+    description: Contains the results of the <a>DisableSso</a> operation.
+  DisableSsoRequest:
+    type: object
+    required:
+      - DirectoryId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory for which to disable single-sign on.
+      UserName:
+        $ref: '#/definitions/UserName'
+        description: '<p>The username of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. This account must have privileges to remove a service principal name.</p> <p>If the AD Connector service account does not have privileges to remove a service principal name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i> parameters. These credentials are only used to disable single sign-on and are not stored by the service. The AD Connector service account is not changed.</p>'
+      Password:
+        $ref: '#/definitions/ConnectPassword'
+        description: 'The password of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. For more information, see the <i>UserName</i> parameter.'
+    description: Contains the inputs for the <a>DisableSso</a> operation.
+  EnableRadiusResult:
+    type: object
+    properties: {}
+    description: Contains the results of the <a>EnableRadius</a> operation.
+  EnableRadiusRequest:
+    type: object
+    required:
+      - DirectoryId
+      - RadiusSettings
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory for which to enable MFA.
+      RadiusSettings:
+        $ref: '#/definitions/RadiusSettings'
+        description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
+    description: Contains the inputs for the <a>EnableRadius</a> operation.
+  EnableSsoResult:
+    type: object
+    properties: {}
+    description: Contains the results of the <a>EnableSso</a> operation.
+  EnableSsoRequest:
+    type: object
+    required:
+      - DirectoryId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory for which to enable single-sign on.
+      UserName:
+        $ref: '#/definitions/UserName'
+        description: '<p>The username of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. This account must have privileges to add a service principal name.</p> <p>If the AD Connector service account does not have privileges to add a service principal name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i> parameters. These credentials are only used to enable single sign-on and are not stored by the service. The AD Connector service account is not changed.</p>'
+      Password:
+        $ref: '#/definitions/ConnectPassword'
+        description: 'The password of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. For more information, see the <i>UserName</i> parameter.'
+    description: Contains the inputs for the <a>EnableSso</a> operation.
+  GetDirectoryLimitsResult:
     type: object
     properties:
-      Trusts:
-        $ref: '#/definitions/Trusts'
-        description: '<p>The list of Trust objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <i>Limit</i> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>'
+      DirectoryLimits:
+        $ref: '#/definitions/DirectoryLimits'
+        description: A <a>DirectoryLimits</a> object that contains the directory limits for the current region.
+    description: Contains the results of the <a>GetDirectoryLimits</a> operation.
+  GetDirectoryLimitsRequest:
+    type: object
+    properties: {}
+    description: Contains the inputs for the <a>GetDirectoryLimits</a> operation.
+  GetSnapshotLimitsResult:
+    type: object
+    properties:
+      SnapshotLimits:
+        $ref: '#/definitions/SnapshotLimits'
+        description: A <a>SnapshotLimits</a> object that contains the manual snapshot limits for the specified directory.
+    description: Contains the results of the <a>GetSnapshotLimits</a> operation.
+  GetSnapshotLimitsRequest:
+    type: object
+    required:
+      - DirectoryId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Contains the identifier of the directory to obtain the limits for.
+    description: Contains the inputs for the <a>GetSnapshotLimits</a> operation.
+  ListIpRoutesResult:
+    type: object
+    properties:
+      IpRoutesInfo:
+        $ref: '#/definitions/IpRoutesInfo'
+        description: A list of <a>IpRoute</a>s.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: 'If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>DescribeTrusts</a> to retrieve the next set of items.'
-    description: The result of a DescribeTrust request.
+        description: 'If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>ListIpRoutes</a> to retrieve the next set of items.'
+  ListIpRoutesRequest:
+    type: object
+    required:
+      - DirectoryId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier (ID) of the directory for which you want to retrieve the IP addresses.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The <i>ListIpRoutes.NextToken</i> value from a previous call to <a>ListIpRoutes</a>. Pass null if this is the first call.
+      Limit:
+        $ref: '#/definitions/Limit'
+        description: 'Maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation.'
+  ListLogSubscriptionsResult:
+    type: object
+    properties:
+      LogSubscriptions:
+        $ref: '#/definitions/LogSubscriptions'
+        description: A list of active <a>LogSubscription</a> objects for calling the AWS account.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return.
+  ListLogSubscriptionsRequest:
+    type: object
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: 'If a <i>DirectoryID</i> is provided, lists only the log subscription associated with that directory. If no <i>DirectoryId</i> is provided, lists all log subscriptions associated with your AWS account. If there are no log subscriptions for the AWS account or the directory, an empty list will be returned.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return.
+      Limit:
+        $ref: '#/definitions/Limit'
+        description: The maximum number of items returned.
+  ListSchemaExtensionsResult:
+    type: object
+    properties:
+      SchemaExtensionsInfo:
+        $ref: '#/definitions/SchemaExtensionsInfo'
+        description: Information about the schema extensions applied to the directory.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <code>ListSchemaExtensions</code> to retrieve the next set of items.'
+  ListSchemaExtensionsRequest:
+    type: object
+    required:
+      - DirectoryId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory from which to retrieve the schema extension information.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The <code>ListSchemaExtensions.NextToken</code> value from a previous call to <code>ListSchemaExtensions</code>. Pass null if this is the first call.
+      Limit:
+        $ref: '#/definitions/Limit'
+        description: The maximum number of items to return.
+  ListTagsForResourceResult:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: List of tags returned by the ListTagsForResource operation.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: Reserved for future use.
+  ListTagsForResourceRequest:
+    type: object
+    required:
+      - ResourceId
+    properties:
+      ResourceId:
+        $ref: '#/definitions/ResourceId'
+        description: Identifier (ID) of the directory for which you want to retrieve tags.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: Reserved for future use.
+      Limit:
+        $ref: '#/definitions/Limit'
+        description: Reserved for future use.
+  RegisterEventTopicResult:
+    type: object
+    properties: {}
+    description: The result of a RegisterEventTopic request.
+  RegisterEventTopicRequest:
+    type: object
+    required:
+      - DirectoryId
+      - TopicName
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The Directory ID that will publish status messages to the SNS topic.
+      TopicName:
+        $ref: '#/definitions/TopicName'
+        description: The SNS topic name to which the directory will publish status messages. This SNS topic must be in the same region as the specified Directory ID.
+    description: Registers a new event topic.
+  RejectSharedDirectoryResult:
+    type: object
+    properties:
+      SharedDirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the shared directory in the directory consumer account.
+  RejectSharedDirectoryRequest:
+    type: object
+    required:
+      - SharedDirectoryId
+    properties:
+      SharedDirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account.
+  RemoveIpRoutesResult:
+    type: object
+    properties: {}
+  RemoveIpRoutesRequest:
+    type: object
+    required:
+      - DirectoryId
+      - CidrIps
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier (ID) of the directory from which you want to remove the IP addresses.
+      CidrIps:
+        $ref: '#/definitions/CidrIps'
+        description: IP address blocks that you want to remove.
+  RemoveTagsFromResourceResult:
+    type: object
+    properties: {}
+  RemoveTagsFromResourceRequest:
+    type: object
+    required:
+      - ResourceId
+      - TagKeys
+    properties:
+      ResourceId:
+        $ref: '#/definitions/ResourceId'
+        description: Identifier (ID) of the directory from which to remove the tag.
+      TagKeys:
+        $ref: '#/definitions/TagKeys'
+        description: The tag key (name) of the tag to be removed.
+  ResetUserPasswordResult:
+    type: object
+    properties: {}
+  ResetUserPasswordRequest:
+    type: object
+    required:
+      - DirectoryId
+      - UserName
+      - NewPassword
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the AWS Managed Microsoft AD or Simple AD directory in which the user resides.
+      UserName:
+        $ref: '#/definitions/CustomerUserName'
+        description: The user name of the user whose password will be reset.
+      NewPassword:
+        $ref: '#/definitions/UserPassword'
+        description: The new password that will be reset.
+  UserDoesNotExistException: {}
+  InvalidPasswordException: {}
+  RestoreFromSnapshotResult:
+    type: object
+    properties: {}
+    description: Contains the results of the <a>RestoreFromSnapshot</a> operation.
+  RestoreFromSnapshotRequest:
+    type: object
+    required:
+      - SnapshotId
+    properties:
+      SnapshotId:
+        $ref: '#/definitions/SnapshotId'
+        description: The identifier of the snapshot to restore from.
+    description: An object representing the inputs for the <a>RestoreFromSnapshot</a> operation.
+  ShareDirectoryResult:
+    type: object
+    properties:
+      SharedDirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the directory that is stored in the directory consumer account that is shared from the specified directory (<code>DirectoryId</code>).
+  ShareDirectoryRequest:
+    type: object
+    required:
+      - DirectoryId
+      - ShareTarget
+      - ShareMethod
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the AWS Managed Microsoft AD directory that you want to share with other AWS accounts.
+      ShareNotes:
+        $ref: '#/definitions/Notes'
+        description: A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.
+      ShareTarget:
+        $ref: '#/definitions/ShareTarget'
+        description: Identifier for the directory consumer account with whom the directory is to be shared.
+      ShareMethod:
+        $ref: '#/definitions/ShareMethod'
+        description: The method used when sharing a directory to determine whether the directory should be shared within your AWS organization (<code>ORGANIZATIONS</code>) or with any AWS account by sending a directory sharing request (<code>HANDSHAKE</code>).
+  InvalidTargetException: {}
+  ShareLimitExceededException: {}
+  OrganizationsException: {}
+  AccessDeniedException: {}
+  StartSchemaExtensionResult:
+    type: object
+    properties:
+      SchemaExtensionId:
+        $ref: '#/definitions/SchemaExtensionId'
+        description: The identifier of the schema extension that will be applied.
+  StartSchemaExtensionRequest:
+    type: object
+    required:
+      - DirectoryId
+      - CreateSnapshotBeforeSchemaExtension
+      - LdifContent
+      - Description
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory for which the schema extension will be applied to.
+      CreateSnapshotBeforeSchemaExtension:
+        $ref: '#/definitions/CreateSnapshotBeforeSchemaExtension'
+        description: 'If true, creates a snapshot of the directory before applying the schema extension.'
+      LdifContent:
+        $ref: '#/definitions/LdifContent'
+        description: 'The LDIF file represented as a string. To construct the LdifContent string, precede each line as it would be formatted in an ldif file with \n. See the example request below for more details. The file size can be no larger than 1MB.'
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the schema extension.
+  UnshareDirectoryResult:
+    type: object
+    properties:
+      SharedDirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the directory stored in the directory consumer account that is to be unshared from the specified directory (<code>DirectoryId</code>).
+  UnshareDirectoryRequest:
+    type: object
+    required:
+      - DirectoryId
+      - UnshareTarget
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the AWS Managed Microsoft AD directory that you want to stop sharing.
+      UnshareTarget:
+        $ref: '#/definitions/UnshareTarget'
+        description: Identifier for the directory consumer account with whom the directory has to be unshared.
+  DirectoryNotSharedException: {}
+  UpdateConditionalForwarderResult:
+    type: object
+    properties: {}
+    description: The result of an UpdateConditionalForwarder request.
+  UpdateConditionalForwarderRequest:
+    type: object
+    required:
+      - DirectoryId
+      - RemoteDomainName
+      - DnsIpAddrs
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The directory ID of the AWS directory for which to update the conditional forwarder.
+      RemoteDomainName:
+        $ref: '#/definitions/RemoteDomainName'
+        description: The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.
+      DnsIpAddrs:
+        $ref: '#/definitions/DnsIpAddrs'
+        description: The updated IP addresses of the remote DNS server associated with the conditional forwarder.
+    description: Updates a conditional forwarder.
+  UpdateNumberOfDomainControllersResult:
+    type: object
+    properties: {}
+  UpdateNumberOfDomainControllersRequest:
+    type: object
+    required:
+      - DirectoryId
+      - DesiredNumber
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the directory to which the domain controllers will be added or removed.
+      DesiredNumber:
+        $ref: '#/definitions/DesiredNumberOfDomainControllers'
+        description: The number of domain controllers desired in the directory.
+  DomainControllerLimitExceededException: {}
+  UpdateRadiusResult:
+    type: object
+    properties: {}
+    description: Contains the results of the <a>UpdateRadius</a> operation.
+  UpdateRadiusRequest:
+    type: object
+    required:
+      - DirectoryId
+      - RadiusSettings
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory for which to update the RADIUS server information.
+      RadiusSettings:
+        $ref: '#/definitions/RadiusSettings'
+        description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
+    description: Contains the inputs for the <a>UpdateRadius</a> operation.
+  UpdateTrustResult:
+    type: object
+    properties:
+      RequestId:
+        $ref: '#/definitions/RequestId'
+      TrustId:
+        $ref: '#/definitions/TrustId'
+        description: Identifier of the trust relationship.
+  UpdateTrustRequest:
+    type: object
+    required:
+      - TrustId
+    properties:
+      TrustId:
+        $ref: '#/definitions/TrustId'
+        description: Identifier of the trust relationship.
+      SelectiveAuth:
+        $ref: '#/definitions/SelectiveAuth'
+        description: Updates selective authentication for the trust.
+  VerifyTrustResult:
+    type: object
+    properties:
+      TrustId:
+        $ref: '#/definitions/TrustId'
+        description: The unique Trust ID of the trust relationship that was verified.
+    description: Result of a VerifyTrust request.
+  VerifyTrustRequest:
+    type: object
+    required:
+      - TrustId
+    properties:
+      TrustId:
+        $ref: '#/definitions/TrustId'
+        description: The unique Trust ID of the trust relationship to verify.
+    description: Initiates the verification of an existing trust relationship between an AWS Managed Microsoft AD directory and an external domain.
+  DirectoryId:
+    type: string
+    pattern: '^d-[0-9a-f]{10}$'
+  SharedDirectory:
+    type: object
+    properties:
+      OwnerAccountId:
+        $ref: '#/definitions/CustomerId'
+        description: 'Identifier of the directory owner account, which contains the directory that has been shared to the consumer account.'
+      OwnerDirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: 'Identifier of the directory in the directory owner account. '
+      ShareMethod:
+        $ref: '#/definitions/ShareMethod'
+        description: The method used when sharing a directory to determine whether the directory should be shared within your AWS organization (<code>ORGANIZATIONS</code>) or with any AWS account by sending a shared directory request (<code>HANDSHAKE</code>).
+      SharedAccountId:
+        $ref: '#/definitions/CustomerId'
+        description: Identifier of the directory consumer account that has access to the shared directory (<code>OwnerDirectoryId</code>) in the directory owner account.
+      SharedDirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account.
+      ShareStatus:
+        $ref: '#/definitions/ShareStatus'
+        description: Current directory status of the shared AWS Managed Microsoft AD directory.
+      ShareNotes:
+        $ref: '#/definitions/Notes'
+        description: A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.
+      CreatedDateTime:
+        $ref: '#/definitions/CreatedDateTime'
+        description: The date and time that the shared directory was created.
+      LastUpdatedDateTime:
+        $ref: '#/definitions/LastUpdatedDateTime'
+        description: The date and time that the shared directory was last updated.
+    description: Details about the shared directory in the directory owner account for which the share request in the directory consumer account has been accepted.
+  AccessUrl:
+    type: string
+    minLength: 1
+    maxLength: 128
+  IpRoutes:
+    type: array
+    items:
+      $ref: '#/definitions/IpRoute'
+  UpdateSecurityGroupForDirectoryControllers:
+    type: boolean
+  ResourceId:
+    type: string
+    pattern: '^[d]-[0-9a-f]{10}$'
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  AddedDateTime:
+    type: string
+    format: date-time
+  AliasName:
+    type: string
+    pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*'
+    minLength: 1
+    maxLength: 62
+  AttributeName:
+    type: string
+    minLength: 1
+  AttributeValue:
+    type: string
+  Attribute:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/AttributeName'
+        description: The name of the attribute.
+      Value:
+        $ref: '#/definitions/AttributeValue'
+        description: The value of the attribute.
+    description: Represents a named directory attribute.
+  Attributes:
+    type: array
+    items:
+      $ref: '#/definitions/Attribute'
+  AvailabilityZone:
+    type: string
+  AvailabilityZones:
+    type: array
+    items:
+      $ref: '#/definitions/AvailabilityZone'
+  SchemaExtensionId:
+    type: string
+    pattern: '^e-[0-9a-f]{10}$'
+  CidrIp:
+    type: string
+    pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([1-9]|[1-2][0-9]|3[0-2]))$'
+  CidrIps:
+    type: array
+    items:
+      $ref: '#/definitions/CidrIp'
+  CloudOnlyDirectoriesLimitReached:
+    type: boolean
+  SID:
+    type: string
+    pattern: '[&\w+-.@]+'
+    minLength: 1
+    maxLength: 256
+  ComputerName:
+    type: string
+    minLength: 1
+    maxLength: 15
+  Computer:
+    type: object
+    properties:
+      ComputerId:
+        $ref: '#/definitions/SID'
+        description: The identifier of the computer.
+      ComputerName:
+        $ref: '#/definitions/ComputerName'
+        description: The computer name.
+      ComputerAttributes:
+        $ref: '#/definitions/Attributes'
+        description: An array of <a>Attribute</a> objects containing the LDAP attributes that belong to the computer account.
+    description: Contains information about a computer account in a directory.
+  ComputerPassword:
+    type: string
+    pattern: '[\u0020-\u00FF]+'
+    minLength: 8
+    maxLength: 64
+    format: password
+  RemoteDomainName:
+    type: string
+    pattern: '^([a-zA-Z0-9]+[\\.-])+([a-zA-Z0-9])+[.]?$'
+  DnsIpAddrs:
+    type: array
+    items:
+      $ref: '#/definitions/IpAddr'
+  ReplicationScope:
+    type: string
+    enum:
+      - Domain
+  ConditionalForwarder:
+    type: object
+    properties:
+      RemoteDomainName:
+        $ref: '#/definitions/RemoteDomainName'
+        description: The fully qualified domain name (FQDN) of the remote domains pointed to by the conditional forwarder.
+      DnsIpAddrs:
+        $ref: '#/definitions/DnsIpAddrs'
+        description: The IP addresses of the remote DNS server associated with RemoteDomainName. This is the IP address of the DNS server that your conditional forwarder points to.
+      ReplicationScope:
+        $ref: '#/definitions/ReplicationScope'
+        description: 'The replication scope of the conditional forwarder. The only allowed value is <code>Domain</code>, which will replicate the conditional forwarder to all of the domain controllers for your AWS directory.'
+    description: Points to a remote domain with which you are setting up a trust relationship. Conditional forwarders are required in order to set up a trust relationship with another domain.
+  ConditionalForwarders:
+    type: array
+    items:
+      $ref: '#/definitions/ConditionalForwarder'
+  DirectoryName:
+    type: string
+    pattern: '^([a-zA-Z0-9]+[\\.-])+([a-zA-Z0-9])+$'
+  DirectoryShortName:
+    type: string
+    pattern: '^[^\\/:*?\"\<\>|.]+[^\\/:*?\"<>|]*$'
+  ConnectPassword:
+    type: string
+    minLength: 1
+    maxLength: 128
+    format: password
   Description:
     type: string
     pattern: '^([a-zA-Z0-9_])[\\a-zA-Z0-9_@#%*+=:?./!\s-]*$'
     minLength: 0
     maxLength: 128
-  DesiredNumberOfDomainControllers:
-    type: integer
-    minimum: 2
+  DirectorySize:
+    type: string
+    enum:
+      - Small
+      - Large
   DirectoryConnectSettings:
     type: object
     required:
@@ -2536,8 +3584,172 @@ definitions:
         description: A list of one or more IP addresses of DNS servers or domain controllers in the on-premises directory.
       CustomerUserName:
         $ref: '#/definitions/UserName'
-        description: '<p>The username of an account in the on-premises directory that is used to connect to the directory. This account must have the following privileges:</p> <ul> <li> <p>Read users and groups</p> </li> <li> <p>Create computer objects</p> </li> <li> <p>Join computers to the domain</p> </li> </ul>'
+        description: '<p>The user name of an account in the on-premises directory that is used to connect to the directory. This account must have the following permissions:</p> <ul> <li> <p>Read users and groups</p> </li> <li> <p>Create computer objects</p> </li> <li> <p>Join computers to the domain</p> </li> </ul>'
     description: Contains information for the <a>ConnectDirectory</a> operation when an AD Connector directory is being created.
+  ConnectedDirectoriesLimitReached:
+    type: boolean
+  OrganizationalUnitDN:
+    type: string
+    minLength: 1
+    maxLength: 2000
+  Password:
+    type: string
+    pattern: '(?=^.{8,64}$)((?=.*\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[^A-Za-z0-9\s])(?=.*[a-z])|(?=.*[^A-Za-z0-9\s])(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\s]))^.*'
+    format: password
+  DirectoryVpcSettings:
+    type: object
+    required:
+      - VpcId
+      - SubnetIds
+    properties:
+      VpcId:
+        $ref: '#/definitions/VpcId'
+        description: The identifier of the VPC in which to create the directory.
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: The identifiers of the subnets for the directory servers. The two subnets must be in different Availability Zones. AWS Directory Service creates a directory server and a DNS server in each of these subnets.
+    description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
+  LogGroupName:
+    type: string
+    pattern: '[-._/#A-Za-z0-9]+'
+    minLength: 1
+    maxLength: 512
+  DirectoryEdition:
+    type: string
+    enum:
+      - Enterprise
+      - Standard
+  CreateSnapshotBeforeSchemaExtension:
+    type: boolean
+  SnapshotName:
+    type: string
+    pattern: '^([a-zA-Z0-9_])[\\a-zA-Z0-9_@#%*+=:?./!\s-]*$'
+    minLength: 0
+    maxLength: 128
+  SnapshotId:
+    type: string
+    pattern: '^s-[0-9a-f]{10}$'
+  TrustPassword:
+    type: string
+    pattern: (.|\s)*\S(.|\s)*
+    minLength: 1
+    maxLength: 128
+    format: password
+  TrustDirection:
+    type: string
+    enum:
+      - 'One-Way: Outgoing'
+      - 'One-Way: Incoming'
+      - Two-Way
+  TrustType:
+    type: string
+    enum:
+      - Forest
+      - External
+  SelectiveAuth:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+  TrustId:
+    type: string
+    pattern: '^t-[0-9a-f]{10}$'
+  CreatedDateTime:
+    type: string
+    format: date-time
+  CustomerId:
+    type: string
+    pattern: '^(\d{12})$'
+  CustomerUserName:
+    type: string
+    pattern: '^(?!.*\\|.*"|.*\/|.*\[|.*\]|.*:|.*;|.*\||.*=|.*,|.*\+|.*\*|.*\?|.*<|.*>|.*@).*$'
+    minLength: 1
+    maxLength: 64
+  DeleteAssociatedConditionalForwarder:
+    type: boolean
+  TopicName:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 256
+  RemoteDomainNames:
+    type: array
+    items:
+      $ref: '#/definitions/RemoteDomainName'
+  DirectoryIds:
+    type: array
+    description: A list of directory identifiers.
+    items:
+      $ref: '#/definitions/DirectoryId'
+  NextToken:
+    type: string
+  Limit:
+    type: integer
+    minimum: 0
+  DirectoryDescriptions:
+    type: array
+    description: A list of directory descriptions.
+    items:
+      $ref: '#/definitions/DirectoryDescription'
+  DomainControllerIds:
+    type: array
+    items:
+      $ref: '#/definitions/DomainControllerId'
+  DomainControllers:
+    type: array
+    items:
+      $ref: '#/definitions/DomainController'
+  TopicNames:
+    type: array
+    items:
+      $ref: '#/definitions/TopicName'
+  EventTopics:
+    type: array
+    items:
+      $ref: '#/definitions/EventTopic'
+  SharedDirectories:
+    type: array
+    items:
+      $ref: '#/definitions/SharedDirectory'
+  SnapshotIds:
+    type: array
+    description: A list of directory snapshot identifiers.
+    items:
+      $ref: '#/definitions/SnapshotId'
+  Snapshots:
+    type: array
+    description: A list of descriptions of directory snapshots.
+    items:
+      $ref: '#/definitions/Snapshot'
+  TrustIds:
+    type: array
+    items:
+      $ref: '#/definitions/TrustId'
+  Trusts:
+    type: array
+    items:
+      $ref: '#/definitions/Trust'
+  DesiredNumberOfDomainControllers:
+    type: integer
+    minimum: 2
+  VpcId:
+    type: string
+    pattern: '^(vpc-[0-9a-f]{8}|vpc-[0-9a-f]{17})$'
+  SubnetIds:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+  UserName:
+    type: string
+    pattern: '[a-zA-Z0-9._-]+'
+    minLength: 1
+  SecurityGroupId:
+    type: string
+    pattern: '^(sg-[0-9a-f]{8}|sg-[0-9a-f]{17})$'
+  IpAddrs:
+    type: array
+    items:
+      $ref: '#/definitions/IpAddr'
   DirectoryConnectSettingsDescription:
     type: object
     properties:
@@ -2549,7 +3761,7 @@ definitions:
         description: A list of subnet identifiers in the VPC that the AD connector is in.
       CustomerUserName:
         $ref: '#/definitions/UserName'
-        description: The username of the service account in the on-premises directory.
+        description: The user name of the service account in the on-premises directory.
       SecurityGroupId:
         $ref: '#/definitions/SecurityGroupId'
         description: The security group identifier for the AD Connector directory.
@@ -2560,6 +3772,130 @@ definitions:
         $ref: '#/definitions/IpAddrs'
         description: The IP addresses of the AD Connector servers.
     description: Contains information about an AD Connector directory.
+  DirectoryStage:
+    type: string
+    enum:
+      - Requested
+      - Creating
+      - Created
+      - Active
+      - Inoperable
+      - Impaired
+      - Restoring
+      - RestoreFailed
+      - Deleting
+      - Deleted
+      - Failed
+  ShareStatus:
+    type: string
+    enum:
+      - Shared
+      - PendingAcceptance
+      - Rejected
+      - Rejecting
+      - RejectFailed
+      - Sharing
+      - ShareFailed
+      - Deleted
+      - Deleting
+  ShareMethod:
+    type: string
+    enum:
+      - ORGANIZATIONS
+      - HANDSHAKE
+  Notes:
+    type: string
+    maxLength: 1024
+    format: password
+  LaunchTime:
+    type: string
+    format: date-time
+  LastUpdatedDateTime:
+    type: string
+    format: date-time
+  DirectoryType:
+    type: string
+    enum:
+      - SimpleAD
+      - ADConnector
+      - MicrosoftAD
+      - SharedMicrosoftAD
+  DirectoryVpcSettingsDescription:
+    type: object
+    properties:
+      VpcId:
+        $ref: '#/definitions/VpcId'
+        description: The identifier of the VPC that the directory is in.
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: The identifiers of the subnets for the directory servers.
+      SecurityGroupId:
+        $ref: '#/definitions/SecurityGroupId'
+        description: The domain controller security group identifier for the directory.
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZones'
+        description: The list of Availability Zones that the directory is in.
+    description: Contains information about the directory.
+  RadiusSettings:
+    type: object
+    properties:
+      RadiusServers:
+        $ref: '#/definitions/Servers'
+        description: 'An array of strings that contains the IP addresses of the RADIUS server endpoints, or the IP addresses of your RADIUS server load balancer.'
+      RadiusPort:
+        $ref: '#/definitions/PortNumber'
+        description: The port that your RADIUS server is using for communications. Your on-premises network must allow inbound traffic over this port from the AWS Directory Service servers.
+      RadiusTimeout:
+        $ref: '#/definitions/RadiusTimeout'
+        description: 'The amount of time, in seconds, to wait for the RADIUS server to respond.'
+      RadiusRetries:
+        $ref: '#/definitions/RadiusRetries'
+        description: The maximum number of times that communication with the RADIUS server is attempted.
+      SharedSecret:
+        $ref: '#/definitions/RadiusSharedSecret'
+        description: Required for enabling RADIUS on the directory.
+      AuthenticationProtocol:
+        $ref: '#/definitions/RadiusAuthenticationProtocol'
+        description: The protocol specified for your RADIUS endpoints.
+      DisplayLabel:
+        $ref: '#/definitions/RadiusDisplayLabel'
+        description: Not currently used.
+      UseSameUsername:
+        $ref: '#/definitions/UseSameUsername'
+        description: Not currently used.
+    description: Contains information about a Remote Authentication Dial In User Service (RADIUS) server.
+  RadiusStatus:
+    type: string
+    enum:
+      - Creating
+      - Completed
+      - Failed
+  StageReason:
+    type: string
+  SsoEnabled:
+    type: boolean
+  OwnerDirectoryDescription:
+    type: object
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the AWS Managed Microsoft AD directory in the directory owner account.
+      AccountId:
+        $ref: '#/definitions/CustomerId'
+        description: Identifier of the directory owner account.
+      DnsIpAddrs:
+        $ref: '#/definitions/DnsIpAddrs'
+        description: IP address of the directory’s domain controllers.
+      VpcSettings:
+        $ref: '#/definitions/DirectoryVpcSettingsDescription'
+        description: Information about the VPC settings for the directory.
+      RadiusSettings:
+        $ref: '#/definitions/RadiusSettings'
+        description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
+      RadiusStatus:
+        $ref: '#/definitions/RadiusStatus'
+        description: Information about the status of the RADIUS server.
+    description: Describes the directory owner account details that have been shared to the directory consumer account.
   DirectoryDescription:
     type: object
     properties:
@@ -2568,7 +3904,7 @@ definitions:
         description: The directory identifier.
       Name:
         $ref: '#/definitions/DirectoryName'
-        description: The fully-qualified name of the directory.
+        description: The fully qualified name of the directory.
       ShortName:
         $ref: '#/definitions/DirectoryShortName'
         description: The short name of the directory.
@@ -2593,6 +3929,15 @@ definitions:
       Stage:
         $ref: '#/definitions/DirectoryStage'
         description: The current stage of the directory.
+      ShareStatus:
+        $ref: '#/definitions/ShareStatus'
+        description: Current directory status of the shared AWS Managed Microsoft AD directory.
+      ShareMethod:
+        $ref: '#/definitions/ShareMethod'
+        description: The method used when sharing a directory to determine whether the directory should be shared within your AWS organization (<code>ORGANIZATIONS</code>) or with any AWS account by sending a shared directory request (<code>HANDSHAKE</code>).
+      ShareNotes:
+        $ref: '#/definitions/Notes'
+        description: A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.
       LaunchTime:
         $ref: '#/definitions/LaunchTime'
         description: Specifies when the directory was created.
@@ -2619,37 +3964,14 @@ definitions:
         description: Additional information about the directory stage.
       SsoEnabled:
         $ref: '#/definitions/SsoEnabled'
-        description: 'Indicates if single-sign on is enabled for the directory. For more information, see <a>EnableSso</a> and <a>DisableSso</a>.'
+        description: 'Indicates if single sign-on is enabled for the directory. For more information, see <a>EnableSso</a> and <a>DisableSso</a>.'
       DesiredNumberOfDomainControllers:
         $ref: '#/definitions/DesiredNumberOfDomainControllers'
         description: The desired number of domain controllers in the directory if the directory is Microsoft AD.
+      OwnerDirectoryDescription:
+        $ref: '#/definitions/OwnerDirectoryDescription'
+        description: Describes the AWS Managed Microsoft AD directory in the directory owner account.
     description: Contains information about an AWS Directory Service directory.
-  DirectoryDescriptions:
-    type: array
-    description: A list of directory descriptions.
-    items:
-      $ref: '#/definitions/DirectoryDescription'
-  DirectoryEdition:
-    type: string
-    enum:
-      - Enterprise
-      - Standard
-  DirectoryId:
-    type: string
-    pattern: '^d-[0-9a-f]{10}$'
-  DirectoryIds:
-    type: array
-    description: A list of directory identifiers.
-    items:
-      $ref: '#/definitions/DirectoryId'
-  DirectoryLimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: The maximum number of directories in the region has been reached. You can use the <a>GetDirectoryLimits</a> operation to determine your directory limits in the region.
   DirectoryLimits:
     type: object
     properties:
@@ -2664,13 +3986,13 @@ definitions:
         description: Indicates if the cloud directory limit has been reached.
       CloudOnlyMicrosoftADLimit:
         $ref: '#/definitions/Limit'
-        description: The maximum number of Microsoft AD directories allowed in the region.
+        description: The maximum number of AWS Managed Microsoft AD directories allowed in the region.
       CloudOnlyMicrosoftADCurrentCount:
         $ref: '#/definitions/Limit'
-        description: The current number of Microsoft AD directories in the region.
+        description: The current number of AWS Managed Microsoft AD directories in the region.
       CloudOnlyMicrosoftADLimitReached:
         $ref: '#/definitions/CloudOnlyDirectoriesLimitReached'
-        description: Indicates if the Microsoft AD directory limit has been reached.
+        description: Indicates if the AWS Managed Microsoft AD directory limit has been reached.
       ConnectedDirectoriesLimit:
         $ref: '#/definitions/Limit'
         description: The maximum number of connected directories allowed in the region.
@@ -2681,110 +4003,27 @@ definitions:
         $ref: '#/definitions/ConnectedDirectoriesLimitReached'
         description: Indicates if the connected directory limit has been reached.
     description: Contains directory limit information for a region.
-  DirectoryName:
+  IpAddr:
     type: string
-    pattern: '^([a-zA-Z0-9]+[\\.-])+([a-zA-Z0-9])+$'
-  DirectoryShortName:
+    pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+  DomainControllerId:
     type: string
-    pattern: '^[^\\/:*?\"\<\>|.]+[^\\/:*?\"<>|]*$'
-  DirectorySize:
+    pattern: '^dc-[0-9a-f]{10}$'
+  SubnetId:
     type: string
-    enum:
-      - Small
-      - Large
-  DirectoryStage:
+    pattern: '^(subnet-[0-9a-f]{8}|subnet-[0-9a-f]{17})$'
+  DomainControllerStatus:
     type: string
     enum:
-      - Requested
       - Creating
-      - Created
       - Active
-      - Inoperable
       - Impaired
       - Restoring
-      - RestoreFailed
       - Deleting
       - Deleted
       - Failed
-  DirectoryType:
+  DomainControllerStatusReason:
     type: string
-    enum:
-      - SimpleAD
-      - ADConnector
-      - MicrosoftAD
-  DirectoryUnavailableException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: The specified directory is unavailable or could not be found.
-  DirectoryVpcSettings:
-    type: object
-    required:
-      - VpcId
-      - SubnetIds
-    properties:
-      VpcId:
-        $ref: '#/definitions/VpcId'
-        description: The identifier of the VPC in which to create the directory.
-      SubnetIds:
-        $ref: '#/definitions/SubnetIds'
-        description: The identifiers of the subnets for the directory servers. The two subnets must be in different Availability Zones. AWS Directory Service creates a directory server and a DNS server in each of these subnets.
-    description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
-  DirectoryVpcSettingsDescription:
-    type: object
-    properties:
-      VpcId:
-        $ref: '#/definitions/VpcId'
-        description: The identifier of the VPC that the directory is in.
-      SubnetIds:
-        $ref: '#/definitions/SubnetIds'
-        description: The identifiers of the subnets for the directory servers.
-      SecurityGroupId:
-        $ref: '#/definitions/SecurityGroupId'
-        description: The domain controller security group identifier for the directory.
-      AvailabilityZones:
-        $ref: '#/definitions/AvailabilityZones'
-        description: The list of Availability Zones that the directory is in.
-    description: Contains information about the directory.
-  DisableRadiusRequest:
-    type: object
-    required:
-      - DirectoryId
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The identifier of the directory for which to disable MFA.
-    description: Contains the inputs for the <a>DisableRadius</a> operation.
-  DisableRadiusResult:
-    type: object
-    properties: {}
-    description: Contains the results of the <a>DisableRadius</a> operation.
-  DisableSsoRequest:
-    type: object
-    required:
-      - DirectoryId
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The identifier of the directory for which to disable single-sign on.
-      UserName:
-        $ref: '#/definitions/UserName'
-        description: '<p>The username of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. This account must have privileges to remove a service principal name.</p> <p>If the AD Connector service account does not have privileges to remove a service principal name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i> parameters. These credentials are only used to disable single sign-on and are not stored by the service. The AD Connector service account is not changed.</p>'
-      Password:
-        $ref: '#/definitions/ConnectPassword'
-        description: 'The password of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. For more information, see the <i>UserName</i> parameter.'
-    description: Contains the inputs for the <a>DisableSso</a> operation.
-  DisableSsoResult:
-    type: object
-    properties: {}
-    description: Contains the results of the <a>DisableSso</a> operation.
-  DnsIpAddrs:
-    type: array
-    items:
-      $ref: '#/definitions/IpAddr'
   DomainController:
     type: object
     properties:
@@ -2819,92 +4058,18 @@ definitions:
         $ref: '#/definitions/LastUpdatedDateTime'
         description: The date and time that the status was last updated.
     description: Contains information about the domain controllers for a specified directory.
-  DomainControllerId:
-    type: string
-    pattern: '^dc-[0-9a-f]{10}$'
-  DomainControllerIds:
-    type: array
-    items:
-      $ref: '#/definitions/DomainControllerId'
-  DomainControllerLimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: The maximum allowed number of domain controllers per directory was exceeded. The default limit per directory is 20 domain controllers.
-  DomainControllerStatus:
-    type: string
-    enum:
-      - Creating
-      - Active
-      - Impaired
-      - Restoring
-      - Deleting
-      - Deleted
-      - Failed
-  DomainControllerStatusReason:
-    type: string
-  DomainControllers:
-    type: array
-    items:
-      $ref: '#/definitions/DomainController'
-  EnableRadiusRequest:
-    type: object
-    required:
-      - DirectoryId
-      - RadiusSettings
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The identifier of the directory for which to enable MFA.
-      RadiusSettings:
-        $ref: '#/definitions/RadiusSettings'
-        description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
-    description: Contains the inputs for the <a>EnableRadius</a> operation.
-  EnableRadiusResult:
-    type: object
-    properties: {}
-    description: Contains the results of the <a>EnableRadius</a> operation.
-  EnableSsoRequest:
-    type: object
-    required:
-      - DirectoryId
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The identifier of the directory for which to enable single-sign on.
-      UserName:
-        $ref: '#/definitions/UserName'
-        description: '<p>The username of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. This account must have privileges to add a service principal name.</p> <p>If the AD Connector service account does not have privileges to add a service principal name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i> parameters. These credentials are only used to enable single sign-on and are not stored by the service. The AD Connector service account is not changed.</p>'
-      Password:
-        $ref: '#/definitions/ConnectPassword'
-        description: 'The password of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. For more information, see the <i>UserName</i> parameter.'
-    description: Contains the inputs for the <a>EnableSso</a> operation.
-  EnableSsoResult:
-    type: object
-    properties: {}
-    description: Contains the results of the <a>EnableSso</a> operation.
   EndDateTime:
     type: string
     format: date-time
-  EntityAlreadyExistsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: The specified entity already exists.
-  EntityDoesNotExistException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: The specified entity could not be found.
+  TopicArn:
+    type: string
+  TopicStatus:
+    type: string
+    enum:
+      - Registered
+      - Topic not found
+      - Failed
+      - Deleted
   EventTopic:
     type: object
     properties:
@@ -2924,71 +4089,19 @@ definitions:
         $ref: '#/definitions/TopicStatus'
         description: The topic registration status.
     description: Information about SNS topic and AWS Directory Service directory associations.
-  EventTopics:
-    type: array
-    items:
-      $ref: '#/definitions/EventTopic'
-  ExceptionMessage:
-    type: string
-    description: The descriptive message for the exception.
-  GetDirectoryLimitsRequest:
-    type: object
-    properties: {}
-    description: Contains the inputs for the <a>GetDirectoryLimits</a> operation.
-  GetDirectoryLimitsResult:
+  SnapshotLimits:
     type: object
     properties:
-      DirectoryLimits:
-        $ref: '#/definitions/DirectoryLimits'
-        description: A <a>DirectoryLimits</a> object that contains the directory limits for the current region.
-    description: Contains the results of the <a>GetDirectoryLimits</a> operation.
-  GetSnapshotLimitsRequest:
-    type: object
-    required:
-      - DirectoryId
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: Contains the identifier of the directory to obtain the limits for.
-    description: Contains the inputs for the <a>GetSnapshotLimits</a> operation.
-  GetSnapshotLimitsResult:
-    type: object
-    properties:
-      SnapshotLimits:
-        $ref: '#/definitions/SnapshotLimits'
-        description: A <a>SnapshotLimits</a> object that contains the manual snapshot limits for the specified directory.
-    description: Contains the results of the <a>GetSnapshotLimits</a> operation.
-  InsufficientPermissionsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: The account does not have sufficient permission to perform the operation.
-  InvalidNextTokenException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: The <i>NextToken</i> value is not valid.
-  InvalidParameterException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: One or more parameters are not valid.
-  IpAddr:
-    type: string
-    pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-  IpAddrs:
-    type: array
-    items:
-      $ref: '#/definitions/IpAddr'
+      ManualSnapshotsLimit:
+        $ref: '#/definitions/Limit'
+        description: The maximum number of manual snapshots allowed.
+      ManualSnapshotsCurrentCount:
+        $ref: '#/definitions/Limit'
+        description: The current number of manual snapshots of the directory.
+      ManualSnapshotsLimitReached:
+        $ref: '#/definitions/ManualSnapshotsLimitReached'
+        description: Indicates if the manual snapshot limit has been reached.
+    description: Contains manual snapshot limit information for a directory.
   IpRoute:
     type: object
     properties:
@@ -2999,6 +4112,17 @@ definitions:
         $ref: '#/definitions/Description'
         description: Description of the address block.
     description: 'IP address block. This is often the address block of the DNS server used for your on-premises domain. '
+  IpRouteStatusMsg:
+    type: string
+    enum:
+      - Adding
+      - Added
+      - Removing
+      - Removed
+      - AddFailed
+      - RemoveFailed
+  IpRouteStatusReason:
+    type: string
   IpRouteInfo:
     type: object
     properties:
@@ -3021,127 +4145,40 @@ definitions:
         $ref: '#/definitions/Description'
         description: Description of the <a>IpRouteInfo</a>.
     description: Information about one or more IP address blocks.
-  IpRouteLimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: The maximum allowed number of IP addresses was exceeded. The default limit is 100 IP address blocks.
-  IpRouteStatusMsg:
-    type: string
-    enum:
-      - Adding
-      - Added
-      - Removing
-      - Removed
-      - AddFailed
-      - RemoveFailed
-  IpRouteStatusReason:
-    type: string
-  IpRoutes:
-    type: array
-    items:
-      $ref: '#/definitions/IpRoute'
   IpRoutesInfo:
     type: array
     items:
       $ref: '#/definitions/IpRouteInfo'
-  LastUpdatedDateTime:
-    type: string
-    format: date-time
-  LaunchTime:
-    type: string
-    format: date-time
   LdifContent:
     type: string
     minLength: 1
     maxLength: 500000
-  Limit:
-    type: integer
-    minimum: 0
-  ListIpRoutesRequest:
+  LogSubscriptions:
+    type: array
+    items:
+      $ref: '#/definitions/LogSubscription'
+  SchemaExtensionsInfo:
+    type: array
+    items:
+      $ref: '#/definitions/SchemaExtensionInfo'
+  SubscriptionCreatedDateTime:
+    type: string
+    format: date-time
+  LogSubscription:
     type: object
-    required:
-      - DirectoryId
     properties:
       DirectoryId:
         $ref: '#/definitions/DirectoryId'
-        description: Identifier (ID) of the directory for which you want to retrieve the IP addresses.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The <i>ListIpRoutes.NextToken</i> value from a previous call to <a>ListIpRoutes</a>. Pass null if this is the first call.
-      Limit:
-        $ref: '#/definitions/Limit'
-        description: 'Maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation.'
-  ListIpRoutesResult:
-    type: object
-    properties:
-      IpRoutesInfo:
-        $ref: '#/definitions/IpRoutesInfo'
-        description: A list of <a>IpRoute</a>s.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>ListIpRoutes</a> to retrieve the next set of items.'
-  ListSchemaExtensionsRequest:
-    type: object
-    required:
-      - DirectoryId
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The identifier of the directory from which to retrieve the schema extension information.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The <code>ListSchemaExtensions.NextToken</code> value from a previous call to <code>ListSchemaExtensions</code>. Pass null if this is the first call.
-      Limit:
-        $ref: '#/definitions/Limit'
-        description: The maximum number of items to return.
-  ListSchemaExtensionsResult:
-    type: object
-    properties:
-      SchemaExtensionsInfo:
-        $ref: '#/definitions/SchemaExtensionsInfo'
-        description: Information about the schema extensions applied to the directory.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <code>ListSchemaExtensions</code> to retrieve the next set of items.'
-  ListTagsForResourceRequest:
-    type: object
-    required:
-      - ResourceId
-    properties:
-      ResourceId:
-        $ref: '#/definitions/ResourceId'
-        description: Identifier (ID) of the directory for which you want to retrieve tags.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: Reserved for future use.
-      Limit:
-        $ref: '#/definitions/Limit'
-        description: Reserved for future use.
-  ListTagsForResourceResult:
-    type: object
-    properties:
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: List of tags returned by the ListTagsForResource operation.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: Reserved for future use.
+        description: Identifier (ID) of the directory that you want to associate with the log subscription.
+      LogGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      SubscriptionCreatedDateTime:
+        $ref: '#/definitions/SubscriptionCreatedDateTime'
+        description: The date and time that the log subscription was created.
+    description: 'Represents a log subscription, which tracks real-time data from a chosen log group to a specified destination.'
   ManualSnapshotsLimitReached:
     type: boolean
-  NextToken:
-    type: string
-  OrganizationalUnitDN:
-    type: string
-    minLength: 1
-    maxLength: 2000
-  Password:
-    type: string
-    pattern: '(?=^.{8,64}$)((?=.*\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[^A-Za-z0-9\s])(?=.*[a-z])|(?=.*[^A-Za-z0-9\s])(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\s]))^.*'
-    format: password
   PortNumber:
     type: integer
     minimum: 1025
@@ -3161,135 +4198,51 @@ definitions:
     type: integer
     minimum: 0
     maximum: 10
-  RadiusSettings:
-    type: object
-    properties:
-      RadiusServers:
-        $ref: '#/definitions/Servers'
-        description: 'An array of strings that contains the IP addresses of the RADIUS server endpoints, or the IP addresses of your RADIUS server load balancer.'
-      RadiusPort:
-        $ref: '#/definitions/PortNumber'
-        description: The port that your RADIUS server is using for communications. Your on-premises network must allow inbound traffic over this port from the AWS Directory Service servers.
-      RadiusTimeout:
-        $ref: '#/definitions/RadiusTimeout'
-        description: 'The amount of time, in seconds, to wait for the RADIUS server to respond.'
-      RadiusRetries:
-        $ref: '#/definitions/RadiusRetries'
-        description: The maximum number of times that communication with the RADIUS server is attempted.
-      SharedSecret:
-        $ref: '#/definitions/RadiusSharedSecret'
-        description: Not currently used.
-      AuthenticationProtocol:
-        $ref: '#/definitions/RadiusAuthenticationProtocol'
-        description: The protocol specified for your RADIUS endpoints.
-      DisplayLabel:
-        $ref: '#/definitions/RadiusDisplayLabel'
-        description: Not currently used.
-      UseSameUsername:
-        $ref: '#/definitions/UseSameUsername'
-        description: Not currently used.
-    description: Contains information about a Remote Authentication Dial In User Service (RADIUS) server.
+  Servers:
+    type: array
+    items:
+      $ref: '#/definitions/Server'
+  RadiusTimeout:
+    type: integer
+    minimum: 1
+    maximum: 20
   RadiusSharedSecret:
     type: string
     minLength: 8
     maxLength: 512
     format: password
-  RadiusStatus:
-    type: string
-    enum:
-      - Creating
-      - Completed
-      - Failed
-  RadiusTimeout:
-    type: integer
-    minimum: 1
-    maximum: 20
-  RegisterEventTopicRequest:
-    type: object
-    required:
-      - DirectoryId
-      - TopicName
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The Directory ID that will publish status messages to the SNS topic.
-      TopicName:
-        $ref: '#/definitions/TopicName'
-        description: The SNS topic name to which the directory will publish status messages. This SNS topic must be in the same region as the specified Directory ID.
-    description: Registers a new event topic.
-  RegisterEventTopicResult:
-    type: object
-    properties: {}
-    description: The result of a RegisterEventTopic request.
-  RemoteDomainName:
-    type: string
-    pattern: '^([a-zA-Z0-9]+[\\.-])+([a-zA-Z0-9])+[.]?$'
-  RemoteDomainNames:
+  UseSameUsername:
+    type: boolean
+  TagKeys:
     type: array
     items:
-      $ref: '#/definitions/RemoteDomainName'
-  RemoveIpRoutesRequest:
-    type: object
-    required:
-      - DirectoryId
-      - CidrIps
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: Identifier (ID) of the directory from which you want to remove the IP addresses.
-      CidrIps:
-        $ref: '#/definitions/CidrIps'
-        description: IP address blocks that you want to remove.
-  RemoveIpRoutesResult:
-    type: object
-    properties: {}
-  RemoveTagsFromResourceRequest:
-    type: object
-    required:
-      - ResourceId
-      - TagKeys
-    properties:
-      ResourceId:
-        $ref: '#/definitions/ResourceId'
-        description: Identifier (ID) of the directory from which to remove the tag.
-      TagKeys:
-        $ref: '#/definitions/TagKeys'
-        description: The tag key (name) of the tag to be removed.
-  RemoveTagsFromResourceResult:
-    type: object
-    properties: {}
-  ReplicationScope:
-    type: string
-    enum:
-      - Domain
+      $ref: '#/definitions/TagKey'
   RequestId:
     type: string
     pattern: '^([A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12})$'
     description: The AWS request identifier.
-  ResourceId:
+  UserPassword:
     type: string
-    pattern: '^[d]-[0-9a-f]{10}$'
-  RestoreFromSnapshotRequest:
-    type: object
-    required:
-      - SnapshotId
-    properties:
-      SnapshotId:
-        $ref: '#/definitions/SnapshotId'
-        description: The identifier of the snapshot to restore from.
-    description: An object representing the inputs for the <a>RestoreFromSnapshot</a> operation.
-  RestoreFromSnapshotResult:
-    type: object
-    properties: {}
-    description: Contains the results of the <a>RestoreFromSnapshot</a> operation.
-  SID:
-    type: string
-    pattern: '[&\w+-.@]+'
     minLength: 1
-    maxLength: 256
-  SchemaExtensionId:
+    maxLength: 127
+    format: password
+  SchemaExtensionStatus:
     type: string
-    pattern: '^e-[0-9a-f]{10}$'
+    enum:
+      - Initializing
+      - CreatingSnapshot
+      - UpdatingSchema
+      - Replicating
+      - CancelInProgress
+      - RollbackInProgress
+      - Cancelled
+      - Failed
+      - Completed
+  SchemaExtensionStatusReason:
+    type: string
+  StartDateTime:
+    type: string
+    format: date-time
   SchemaExtensionInfo:
     type: object
     properties:
@@ -3315,43 +4268,45 @@ definitions:
         $ref: '#/definitions/EndDateTime'
         description: The date and time that the schema extension was completed.
     description: Information about a schema extension.
-  SchemaExtensionStatus:
-    type: string
-    enum:
-      - Initializing
-      - CreatingSnapshot
-      - UpdatingSchema
-      - Replicating
-      - CancelInProgress
-      - RollbackInProgress
-      - Cancelled
-      - Failed
-      - Completed
-  SchemaExtensionStatusReason:
-    type: string
-  SchemaExtensionsInfo:
-    type: array
-    items:
-      $ref: '#/definitions/SchemaExtensionInfo'
-  SecurityGroupId:
-    type: string
-    pattern: '^(sg-[0-9a-f]{8}|sg-[0-9a-f]{17})$'
   Server:
     type: string
     minLength: 1
     maxLength: 256
-  Servers:
-    type: array
-    items:
-      $ref: '#/definitions/Server'
-  ServiceException:
+  ShareTarget:
     type: object
+    required:
+      - Id
+      - Type
     properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: An exception has occurred in AWS Directory Service.
+      Id:
+        $ref: '#/definitions/TargetId'
+        description: Identifier of the directory consumer account.
+      Type:
+        $ref: '#/definitions/TargetType'
+        description: Type of identifier to be used in the <code>Id</code> field.
+    description: Identifier that contains details about the directory consumer account.
+  TargetId:
+    type: string
+    minLength: 1
+    maxLength: 64
+  TargetType:
+    type: string
+    enum:
+      - ACCOUNT
+  SnapshotType:
+    type: string
+    enum:
+      - Auto
+      - Manual
+  SnapshotStatus:
+    type: string
+    enum:
+      - Creating
+      - Completed
+      - Failed
+  StartTime:
+    type: string
+    format: date-time
   Snapshot:
     type: object
     properties:
@@ -3374,102 +4329,19 @@ definitions:
         $ref: '#/definitions/StartTime'
         description: The date and time that the snapshot was taken.
     description: Describes a directory snapshot.
-  SnapshotId:
-    type: string
-    pattern: '^s-[0-9a-f]{10}$'
-  SnapshotIds:
-    type: array
-    description: A list of directory snapshot identifiers.
-    items:
-      $ref: '#/definitions/SnapshotId'
-  SnapshotLimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: The maximum number of manual snapshots for the directory has been reached. You can use the <a>GetSnapshotLimits</a> operation to determine the snapshot limits for a directory.
-  SnapshotLimits:
-    type: object
-    properties:
-      ManualSnapshotsLimit:
-        $ref: '#/definitions/Limit'
-        description: The maximum number of manual snapshots allowed.
-      ManualSnapshotsCurrentCount:
-        $ref: '#/definitions/Limit'
-        description: The current number of manual snapshots of the directory.
-      ManualSnapshotsLimitReached:
-        $ref: '#/definitions/ManualSnapshotsLimitReached'
-        description: Indicates if the manual snapshot limit has been reached.
-    description: Contains manual snapshot limit information for a directory.
-  SnapshotName:
-    type: string
-    pattern: '^([a-zA-Z0-9_])[\\a-zA-Z0-9_@#%*+=:?./!\s-]*$'
-    minLength: 0
-    maxLength: 128
-  SnapshotStatus:
-    type: string
-    enum:
-      - Creating
-      - Completed
-      - Failed
-  SnapshotType:
-    type: string
-    enum:
-      - Auto
-      - Manual
-  Snapshots:
-    type: array
-    description: A list of descriptions of directory snapshots.
-    items:
-      $ref: '#/definitions/Snapshot'
-  SsoEnabled:
-    type: boolean
-  StageReason:
-    type: string
-  StartDateTime:
-    type: string
-    format: date-time
-  StartSchemaExtensionRequest:
-    type: object
-    required:
-      - DirectoryId
-      - CreateSnapshotBeforeSchemaExtension
-      - LdifContent
-      - Description
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The identifier of the directory for which the schema extension will be applied to.
-      CreateSnapshotBeforeSchemaExtension:
-        $ref: '#/definitions/CreateSnapshotBeforeSchemaExtension'
-        description: 'If true, creates a snapshot of the directory before applying the schema extension.'
-      LdifContent:
-        $ref: '#/definitions/LdifContent'
-        description: 'The LDIF file represented as a string. To construct the LdifContent string, precede each line as it would be formatted in an ldif file with \n. See the example request below for more details. The file size can be no larger than 1MB.'
-      Description:
-        $ref: '#/definitions/Description'
-        description: A description of the schema extension.
-  StartSchemaExtensionResult:
-    type: object
-    properties:
-      SchemaExtensionId:
-        $ref: '#/definitions/SchemaExtensionId'
-        description: The identifier of the schema extension that will be applied.
-  StartTime:
-    type: string
-    format: date-time
   StateLastUpdatedDateTime:
     type: string
     format: date-time
-  SubnetId:
+  TagKey:
     type: string
-    pattern: '^(subnet-[0-9a-f]{8}|subnet-[0-9a-f]{17})$'
-  SubnetIds:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetId'
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -3483,50 +4355,22 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: 'The optional value of the tag. The string value can be Unicode characters. The string can contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
     description: Metadata assigned to a directory consisting of a key-value pair.
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagKeys:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-  TagLimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: The maximum allowed number of tags was exceeded.
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TopicArn:
-    type: string
-  TopicName:
-    type: string
-    pattern: '[a-zA-Z0-9_-]+'
-    minLength: 1
-    maxLength: 256
-  TopicNames:
-    type: array
-    items:
-      $ref: '#/definitions/TopicName'
-  TopicStatus:
+  TrustState:
     type: string
     enum:
-      - Registered
-      - Topic not found
-      - Failed
+      - Creating
+      - Created
+      - Verifying
+      - VerifyFailed
+      - Verified
+      - Updating
+      - UpdateFailed
+      - Updated
+      - Deleting
       - Deleted
+      - Failed
+  TrustStateReason:
+    type: string
   Trust:
     type: object
     properties:
@@ -3541,7 +4385,7 @@ definitions:
         description: The Fully Qualified Domain Name (FQDN) of the external domain involved in the trust relationship.
       TrustType:
         $ref: '#/definitions/TrustType'
-        description: The trust relationship type.
+        description: The trust relationship type. <code>Forest</code> is the default.
       TrustDirection:
         $ref: '#/definitions/TrustDirection'
         description: The trust relationship direction.
@@ -3560,131 +4404,20 @@ definitions:
       TrustStateReason:
         $ref: '#/definitions/TrustStateReason'
         description: The reason for the TrustState.
-    description: Describes a trust relationship between an Microsoft AD in the AWS cloud and an external domain.
-  TrustDirection:
-    type: string
-    enum:
-      - 'One-Way: Outgoing'
-      - 'One-Way: Incoming'
-      - Two-Way
-  TrustId:
-    type: string
-    pattern: '^t-[0-9a-f]{10}$'
-  TrustIds:
-    type: array
-    items:
-      $ref: '#/definitions/TrustId'
-  TrustPassword:
-    type: string
-    minLength: 1
-    maxLength: 128
-    format: password
-  TrustState:
-    type: string
-    enum:
-      - Creating
-      - Created
-      - Verifying
-      - VerifyFailed
-      - Verified
-      - Deleting
-      - Deleted
-      - Failed
-  TrustStateReason:
-    type: string
-  TrustType:
-    type: string
-    enum:
-      - Forest
-  Trusts:
-    type: array
-    items:
-      $ref: '#/definitions/Trust'
-  UnsupportedOperationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-      RequestId:
-        $ref: '#/definitions/RequestId'
-    description: The operation is not supported.
-  UpdateConditionalForwarderRequest:
+      SelectiveAuth:
+        $ref: '#/definitions/SelectiveAuth'
+        description: Current state of selective authentication for the trust.
+    description: Describes a trust relationship between an AWS Managed Microsoft AD directory and an external domain.
+  UnshareTarget:
     type: object
     required:
-      - DirectoryId
-      - RemoteDomainName
-      - DnsIpAddrs
+      - Id
+      - Type
     properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The directory ID of the AWS directory for which to update the conditional forwarder.
-      RemoteDomainName:
-        $ref: '#/definitions/RemoteDomainName'
-        description: The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.
-      DnsIpAddrs:
-        $ref: '#/definitions/DnsIpAddrs'
-        description: The updated IP addresses of the remote DNS server associated with the conditional forwarder.
-    description: Updates a conditional forwarder.
-  UpdateConditionalForwarderResult:
-    type: object
-    properties: {}
-    description: The result of an UpdateConditionalForwarder request.
-  UpdateNumberOfDomainControllersRequest:
-    type: object
-    required:
-      - DirectoryId
-      - DesiredNumber
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: Identifier of the directory to which the domain controllers will be added or removed.
-      DesiredNumber:
-        $ref: '#/definitions/DesiredNumberOfDomainControllers'
-        description: The number of domain controllers desired in the directory.
-  UpdateNumberOfDomainControllersResult:
-    type: object
-    properties: {}
-  UpdateRadiusRequest:
-    type: object
-    required:
-      - DirectoryId
-      - RadiusSettings
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The identifier of the directory for which to update the RADIUS server information.
-      RadiusSettings:
-        $ref: '#/definitions/RadiusSettings'
-        description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
-    description: Contains the inputs for the <a>UpdateRadius</a> operation.
-  UpdateRadiusResult:
-    type: object
-    properties: {}
-    description: Contains the results of the <a>UpdateRadius</a> operation.
-  UpdateSecurityGroupForDirectoryControllers:
-    type: boolean
-  UseSameUsername:
-    type: boolean
-  UserName:
-    type: string
-    pattern: '[a-zA-Z0-9._-]+'
-    minLength: 1
-  VerifyTrustRequest:
-    type: object
-    required:
-      - TrustId
-    properties:
-      TrustId:
-        $ref: '#/definitions/TrustId'
-        description: The unique Trust ID of the trust relationship to verify.
-    description: Initiates the verification of an existing trust relationship between a Microsoft AD in the AWS cloud and an external domain.
-  VerifyTrustResult:
-    type: object
-    properties:
-      TrustId:
-        $ref: '#/definitions/TrustId'
-        description: The unique Trust ID of the trust relationship that was verified.
-    description: Result of a VerifyTrust request.
-  VpcId:
-    type: string
-    pattern: '^(vpc-[0-9a-f]{8}|vpc-[0-9a-f]{17})$'
+      Id:
+        $ref: '#/definitions/TargetId'
+        description: Identifier of the directory consumer account.
+      Type:
+        $ref: '#/definitions/TargetType'
+        description: Type of identifier to be used in the <i>Id</i> field.
+    description: Identifier that contains details about the directory consumer account with whom the directory is being unshared.

@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Enables client applications to check web resources (most commonly URLs) against Google-generated lists of unsafe web resources.
-  title: Google Safe Browsing
+  title: Safe Browsing
   version: v4
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://safebrowsing.googleapis.com/$discovery/rest?version=v4'
       version: v1
@@ -574,6 +574,7 @@ definitions:
           - CLIENT_INCIDENT_WHITELIST
           - APK_MALWARE_OFFLINE
           - SUBRESOURCE_FILTER
+          - SUSPICIOUS
         type: string
     type: object
   ListUpdateResponse:
@@ -655,6 +656,7 @@ definitions:
           - CLIENT_INCIDENT_WHITELIST
           - APK_MALWARE_OFFLINE
           - SUBRESOURCE_FILTER
+          - SUSPICIOUS
         type: string
     type: object
   MetadataEntry:
@@ -843,6 +845,7 @@ definitions:
           - CLIENT_INCIDENT_WHITELIST
           - APK_MALWARE_OFFLINE
           - SUBRESOURCE_FILTER
+          - SUSPICIOUS
         type: string
       userInfo:
         $ref: '#/definitions/UserInfo'
@@ -904,6 +907,7 @@ definitions:
             - CLIENT_INCIDENT_WHITELIST
             - APK_MALWARE_OFFLINE
             - SUBRESOURCE_FILTER
+            - SUSPICIOUS
           type: string
         type: array
     type: object
@@ -954,6 +958,7 @@ definitions:
           - CLIENT_INCIDENT_WHITELIST
           - APK_MALWARE_OFFLINE
           - SUBRESOURCE_FILTER
+          - SUSPICIOUS
         type: string
     type: object
   ThreatMatch:
@@ -1012,6 +1017,7 @@ definitions:
           - CLIENT_INCIDENT_WHITELIST
           - APK_MALWARE_OFFLINE
           - SUBRESOURCE_FILTER
+          - SUSPICIOUS
         type: string
     type: object
   ThreatSource:

@@ -5,7 +5,7 @@ host: www.envoice.in
 info:
   contact:
     x-twitter: envoicein
-  description: "\r\n[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78ab8c4ce8421e7e0b43)\r\n<span style='margin-left: 0.5em;'>or</span>\r\n<a href='https://documenter.getpostman.com/view/3559821/7TMBCPS' class='openapi-button' _ngcontent-c6>View Postman docs</a>\r\n\r\n# Tutorial for running the API in postman\r\n\r\nFirst click on \"Run in Postman\" button\r\n![postman - tutorial - 1](/Assets/images/api/postman-tutorial/postman-tutorial-1.png)\r\n\r\nA new page will open.\r\nClick on \"Postman for windows\" to run postman as a desktop app.\r\nMake sure you have already [installed](https://www.getpostman.com/docs/postman/launching_postman/installation_and_updates) Postman.\r\n![postman - tutorial - 2](/Assets/images/api/postman-tutorial/postman-tutorial-2.png)\r\n\r\nIn chrome an alert might show up to set a default app for opening postman links.\r\nClick on \"Open Postman\".\r\n![postman - tutorial - 3](/Assets/images/api/postman-tutorial/postman-tutorial-3.png)\r\n\r\nThe OpenAPI specification will be imported in Postman as a new collection named \"Envoice api\"\r\n![postman - tutorial - 4](/Assets/images/api/postman-tutorial/postman-tutorial-4.png)\r\n\r\nWhen testing be sure to check and modify the environment variables to suit your api key and secret.\r\nThe domain is set to envoice's endpoint so you don't really need to change that.\r\n<sub>\\*Eye button in top right corner </sub>\r\n![postman - tutorial - 5](/Assets/images/api/postman-tutorial/postman-tutorial-5.png)\r\n![postman - tutorial - 6](/Assets/images/api/postman-tutorial/postman-tutorial-6.png)\r\n\r\nYou don't need to change the values of the header parameters, because they will be replaced automatically when you send a request with real values from the environment configured in the previous step.\r\n![postman - tutorial - 7](/Assets/images/api/postman-tutorial/postman-tutorial-7.png)\r\n\r\nModify the example data to suit your needs and send a request.\r\n![postman - tutorial - 8](/Assets/images/api/postman-tutorial/postman-tutorial-8.png)\r\n            "
+  description: "[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/1d39bbcddaf694d81100)\r\n<span style='margin-left: 0.5em;'>or</span>\r\n<a href='https://documenter.getpostman.com/view/3559821/envoice-api/RW1XL1mf' class='openapi-button' _ngcontent-c6>View Postman docs</a>\r\n\r\n# Quickstart\r\n\r\nVisit [github](https://github.com/EmitKnowledge/Envoice) to view the quickstart tutorial.\r\n\r\n<div class='postman-tutorial'>\r\n\r\n# Tutorial for running the API in postman\r\n\r\nClick on \"\"Run in Postman\"\" button\r\n<br /><br />\r\n![postman - tutorial - 1](/Assets/images/api/postman-tutorial/postman-tutorial-1.png)\r\n\r\n --- \r\n\r\nA new page will open.\r\nClick the \"\"Postman for windows\"\" to run postman as a desktop app.\r\nMake sure you have already [installed](https://www.getpostman.com/docs/postman/launching_postman/installation_and_updates) Postman.\r\n<br /><br />\r\n![postman - tutorial - 2](/Assets/images/api/postman-tutorial/postman-tutorial-2.png)\r\n\r\n --- \r\n\r\nIn chrome an alert might show up to set a default app for opening postman links. Click on \"\"Open Postman\"\".\r\n<br /><br />\r\n![postman - tutorial - 3](/Assets/images/api/postman-tutorial/postman-tutorial-3.png)\r\n\r\n --- \r\n\r\nThe OpenAPI specification will be imported in Postman as a new collection named \"\"Envoice api\"\"\r\n<br /><br />\r\n![postman - tutorial - 4](/Assets/images/api/postman-tutorial/postman-tutorial-4.png)\r\n\r\n --- \r\n\r\nWhen testing be sure to check and modify the environment variables to suit your api key and secret. The domain is set to envoice's endpoint so you don't really need to change that.  \r\n<sub>\\*Eye button in top right corner </sub>\r\n<br /><br /> \r\n![postman - tutorial - 5](/Assets/images/api/postman-tutorial/postman-tutorial-5.png)\r\n<br /><br /> \r\n![postman - tutorial - 6](/Assets/images/api/postman-tutorial/postman-tutorial-6.png)\r\n\r\n --- \r\n\r\nYou don't need to change the values of the header parameters, because they will be replaced automatically when you send a request with real values from the environment configured in the previous step.\r\n<br /><br />\r\n![postman - tutorial - 7](/Assets/images/api/postman-tutorial/postman-tutorial-7.png)\r\n\r\n --- \r\n\r\nModify the example data to suit your needs and send a request.\r\n<br /><br />\r\n![postman - tutorial - 8](/Assets/images/api/postman-tutorial/postman-tutorial-8.png)\r\n</div>\r\n\r\n# Webhooks\r\n\r\nWebhooks allow you to build or set up Envoice Apps which subscribe to invoice activities. \r\nWhen one of those events is triggered, we'll send a HTTP POST payload to the webhook's configured URL. \r\nWebhooks can be used to update an external invoice data storage.\r\n\r\nIn order to use webhooks visit [this link](/account/settings#api-tab) and add upto 10 webhook urls that will return status `200` in order to signal that the webhook is working.\r\nAll nonworking webhooks will be ignored after a certain period of time and several retry attempts.\r\nIf after several attempts the webhook starts to work, we will send you all activities, both past and present, in chronological order.\r\n\r\nThe payload of the webhook is in format:\r\n```\r\n{\r\n    Signature: \"\"sha256 string\"\",\r\n    Timestamp: \"\"YYYY-MM-DDTHH:mm:ss.FFFFFFFZ\"\",\r\n    Activity: {\r\n        Message: \"string\",\r\n        Link: \"share url\",\r\n        Type: int,        \r\n        InvoiceNumber: \"string\",\r\n        InvoiceId: int,        \r\n        OrderNumber: \"string\",\r\n        OrderId: int,\r\n        Id: int,\r\n        CreatedOn: \"YYYY-MM-DDTHH:mm:ss.FFFFFFFZ\"\r\n    }\r\n}\r\n```            "
   title: API v1.0.0
   version: v1
   x-apisguru-categories:
@@ -57,7 +57,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Client'
+              $ref: '#/definitions/ClientDetailsApiModel'
             type: array
       summary: Return all clients for the account
       tags:
@@ -113,7 +113,7 @@ paths:
           name: deleteModel
           required: true
           schema:
-            $ref: '#/definitions/ClientDeleteModel'
+            $ref: '#/definitions/ClientDeleteApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -173,7 +173,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Client'
+            $ref: '#/definitions/ClientDetailsApiModel'
       summary: Return client details. Activities and invoices included.
       tags:
         - Client
@@ -192,7 +192,7 @@ paths:
           name: client
           required: true
           schema:
-            $ref: '#/definitions/Client'
+            $ref: '#/definitions/ClientCreateApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -235,7 +235,7 @@ paths:
           name: client
           required: true
           schema:
-            $ref: '#/definitions/Client'
+            $ref: '#/definitions/ClientUpdateApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -283,7 +283,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Country'
+              $ref: '#/definitions/CountryDetailsApiModel'
             type: array
       summary: Return all of the platform supported countries
       tags:
@@ -316,9 +316,42 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Currency'
+              $ref: '#/definitions/CurrencyDetailsApiModel'
             type: array
       summary: Return all of the platform supported currencies
+      tags:
+        - General
+  /api/general/dateformats:
+    get:
+      consumes: []
+      operationId: GeneralApi_DateFormats
+      parameters:
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              type: string
+            type: array
+      summary: Return all of the platform supported Date Formats
       tags:
         - General
   /api/general/uilanguages:
@@ -349,7 +382,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/UiLanguage'
+              $ref: '#/definitions/UILanguageDetailsApiModel'
             type: array
       summary: Return all of the platform supported UI languages
       tags:
@@ -391,7 +424,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ListResult[Invoice]'
+            $ref: '#/definitions/ListResult[InvoiceDetailsApiModel]'
       summary: Return all invoices for the account
       tags:
         - Invoice
@@ -410,7 +443,7 @@ paths:
           name: statusModel
           required: true
           schema:
-            $ref: '#/definitions/ChangeStatusModel'
+            $ref: '#/definitions/ChangeStatusApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -423,10 +456,17 @@ paths:
           name: x-auth-secret
           required: true
           type: string
-      produces: []
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
       responses:
-        '204':
-          description: No Content
+        '200':
+          description: OK
+          schema:
+            type: boolean
       summary: Change invoice status
       tags:
         - Invoice
@@ -445,7 +485,7 @@ paths:
           name: deleteModel
           required: true
           schema:
-            $ref: '#/definitions/InvoiceDeleteModel'
+            $ref: '#/definitions/InvoiceDeleteApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -506,7 +546,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Invoice'
+            $ref: '#/definitions/InvoiceFullDetailsApiModel'
       summary: Return invoice data
       tags:
         - Invoice
@@ -525,7 +565,7 @@ paths:
           name: invoice
           required: true
           schema:
-            $ref: '#/definitions/Invoice'
+            $ref: '#/definitions/InvoiceCreateApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -548,7 +588,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Invoice'
+            $ref: '#/definitions/InvoiceFullDetailsApiModel'
       summary: Create an invoice
       tags:
         - Invoice
@@ -567,7 +607,7 @@ paths:
           name: invoice
           required: true
           schema:
-            $ref: '#/definitions/Invoice'
+            $ref: '#/definitions/SendInvoiceToAccountantApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -610,7 +650,7 @@ paths:
           name: deliveryOptions
           required: true
           schema:
-            $ref: '#/definitions/InvoiceDeliveryOptions'
+            $ref: '#/definitions/SendInvoiceToClientApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -694,7 +734,7 @@ paths:
           name: invoice
           required: true
           schema:
-            $ref: '#/definitions/Invoice'
+            $ref: '#/definitions/InvoiceUpdateApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -717,7 +757,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Invoice'
+            $ref: '#/definitions/InvoiceFullDetailsApiModel'
       summary: Update an existing invoice
       tags:
         - Invoice
@@ -754,10 +794,479 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/InvoiceAccessUri'
+            $ref: '#/definitions/InvoiceUriApiModel'
       summary: Return the unique url to the client's invoice
       tags:
         - Invoice
+  /api/order/all:
+    get:
+      consumes: []
+      operationId: OrderApi_All
+      parameters:
+        - format: int32
+          in: query
+          name: queryOptions.page
+          required: false
+          type: integer
+        - format: int32
+          in: query
+          name: queryOptions.pageSize
+          required: false
+          type: integer
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ListResult[OrderDetailsApiModel]'
+      summary: Return all orders for the account
+      tags:
+        - Order
+  /api/order/changeshippingdetails:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: OrderApi_ChangeShippingDetails
+      parameters:
+        - format: int32
+          in: query
+          name: orderId
+          required: true
+          type: integer
+        - in: body
+          name: shippingDetails
+          required: true
+          schema:
+            $ref: '#/definitions/OrderShippingDetailsApiModel'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Change order shipping details
+      tags:
+        - Order
+  /api/order/changestatus:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: OrderApi_ChangeStatus
+      parameters:
+        - in: body
+          name: status
+          required: true
+          schema:
+            $ref: '#/definitions/ChangeOrderStatusApiModel'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Change order status
+      tags:
+        - Order
+  /api/order/delete:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: OrderApi_Delete
+      parameters:
+        - in: body
+          name: order
+          required: true
+          schema:
+            $ref: '#/definitions/OrderDeleteApiModel'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+      summary: Delete an existing order
+      tags:
+        - Order
+  /api/order/details:
+    get:
+      consumes: []
+      operationId: OrderApi_Details
+      parameters:
+        - format: int32
+          in: query
+          name: id
+          required: true
+          type: integer
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OrderFullDetailsApiModel'
+      summary: Return order details
+      tags:
+        - Order
+  /api/order/new:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: OrderApi_New
+      parameters:
+        - in: body
+          name: order
+          required: true
+          schema:
+            $ref: '#/definitions/OrderCreateApiModel'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+      summary: Create an order
+      tags:
+        - Order
+  /api/payment/supported:
+    get:
+      consumes: []
+      operationId: PaymentApi_Supported
+      parameters:
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/PaymentGatewayDetailsApiModel'
+            type: array
+      summary: Return all supported payment gateways (no currencies means all are supported)
+      tags:
+        - Payment
+  /api/product/all:
+    get:
+      consumes: []
+      operationId: ProductApi_All
+      parameters:
+        - format: int32
+          in: query
+          name: queryOptions.page
+          required: false
+          type: integer
+        - format: int32
+          in: query
+          name: queryOptions.pageSize
+          required: false
+          type: integer
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ListResult[ProductDetailsApiModel]'
+      summary: Return all products for the account
+      tags:
+        - Product
+  /api/product/delete:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: ProductApi_Delete
+      parameters:
+        - in: body
+          name: product
+          required: true
+          schema:
+            $ref: '#/definitions/ProductDeleteApiModel'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+      summary: Delete an existing product
+      tags:
+        - Product
+  /api/product/details:
+    get:
+      consumes: []
+      operationId: ProductApi_Details
+      parameters:
+        - format: int32
+          in: query
+          name: id
+          required: true
+          type: integer
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProductFullDetailsApiModel'
+      summary: Return product details
+      tags:
+        - Product
+  /api/product/new:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: ProductApi_New
+      parameters:
+        - in: body
+          name: product
+          required: true
+          schema:
+            $ref: '#/definitions/ProductCreateApiModel'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+      summary: Create a product
+      tags:
+        - Product
+  /api/product/update:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: ProductApi_Update
+      parameters:
+        - in: body
+          name: product
+          required: true
+          schema:
+            $ref: '#/definitions/ProductUpdateApiModel'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Update an existing product
+      tags:
+        - Product
   /api/tax/all:
     get:
       consumes: []
@@ -786,7 +1295,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Tax'
+              $ref: '#/definitions/TaxDetailsApiModel'
             type: array
       summary: Return all taxes for the account
       tags:
@@ -806,7 +1315,7 @@ paths:
           name: deleteModel
           required: true
           schema:
-            $ref: '#/definitions/TaxDeleteModel'
+            $ref: '#/definitions/TaxDeleteApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -849,7 +1358,7 @@ paths:
           name: tax
           required: true
           schema:
-            $ref: '#/definitions/Tax'
+            $ref: '#/definitions/TaxCreateApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -892,7 +1401,7 @@ paths:
           name: tax
           required: true
           schema:
-            $ref: '#/definitions/Tax'
+            $ref: '#/definitions/TaxUpdateApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -940,7 +1449,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/WorkType'
+              $ref: '#/definitions/WorkTypeDetailsApiModel'
             type: array
       summary: Return all work types for the account
       tags:
@@ -960,7 +1469,7 @@ paths:
           name: deleteModel
           required: true
           schema:
-            $ref: '#/definitions/WorkTypeDeleteModel'
+            $ref: '#/definitions/WorkTypeDeleteApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -1020,8 +1529,8 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/WorkType'
-      summary: Returns details for work types by Id
+            $ref: '#/definitions/WorkTypeDetailsApiModel'
+      summary: Return work type details
       tags:
         - WorkType
   /api/worktype/new:
@@ -1039,7 +1548,7 @@ paths:
           name: workType
           required: true
           schema:
-            $ref: '#/definitions/WorkType'
+            $ref: '#/definitions/WorkTypeCreateApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -1067,6 +1576,65 @@ paths:
       summary: Create a work type
       tags:
         - WorkType
+  /api/worktype/search:
+    get:
+      consumes: []
+      operationId: WorkTypeApi_Search
+      parameters:
+        - in: query
+          name: queryOptions.query
+          required: false
+          type: string
+        - in: query
+          name: queryOptions.orderBy
+          required: false
+          type: string
+        - enum:
+            - None
+            - Asc
+            - Desc
+          in: query
+          name: queryOptions.order
+          required: false
+          type: string
+        - format: int32
+          in: query
+          name: queryOptions.page
+          required: false
+          type: integer
+        - format: int32
+          in: query
+          name: queryOptions.pageSize
+          required: false
+          type: integer
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/WorkTypeDetailsApiModel'
+            type: array
+      summary: Return all work types for the account that match the query param
+      tags:
+        - WorkType
   /api/worktype/update:
     post:
       consumes:
@@ -1082,7 +1650,7 @@ paths:
           name: workType
           required: true
           schema:
-            $ref: '#/definitions/WorkType'
+            $ref: '#/definitions/WorkTypeUpdateApiModel'
         - default: '[authentication key]'
           description: ''
           in: header
@@ -1103,25 +1671,243 @@ paths:
       tags:
         - WorkType
 definitions:
-  Activity:
+  ChangeOrderStatusApiModel:
     properties:
       Id:
+        description: Order Id
         format: int32
         type: integer
-      InvoiceId:
+      Reason:
+        description: Reason for status change
+        type: string
+      Status:
+        description: New status of the order
+        enum:
+          - PendingPayment
+          - Processing
+          - Shipped
+          - Completed
+          - OnHold
+          - Cancelled
+          - Refunded
+          - Failed
+        type: string
+    type: object
+  ChangeStatusApiModel:
+    properties:
+      Id:
+        description: Invoice Id
+        format: int32
+        type: integer
+      Status:
+        description: New status of the invoice
+        enum:
+          - Draft
+          - Paid
+          - Unpaid
+          - Overdue
+        type: string
+    type: object
+  ClientCreateApiModel:
+    properties:
+      Address:
+        description: Client business address
+        type: string
+      CC:
+        description: Client additional email contact for CC
+        type: string
+      ClientCountryId:
+        description: Indicates the country where the clients is from
+        format: int32
+        type: integer
+      ClientCurrencyId:
+        description: Indicates the default system currency used by the user for the client
+        format: int32
+        type: integer
+      CompanyRegistrationNumber:
+        description: Client's Company Registration Number
+        type: string
+      Email:
+        description: Client email
+        type: string
+      Name:
+        description: Name of the client
+        type: string
+      PhoneNumber:
+        description: Client phone numer
+        type: string
+      UiLanguageId:
+        description: Hold a value of the language in which the invoice will be sent
+        format: int32
+        type: integer
+      Vat:
+        description: Client's VAT number
+        type: string
+    type: object
+  ClientDeleteApiModel:
+    properties:
+      Id:
+        description: Id of client to be deleted
+        format: int32
+        type: integer
+    type: object
+  ClientDetailsApiModel:
+    properties:
+      Address:
+        description: Client business address
+        type: string
+      CC:
+        description: Client additional email contact for CC
+        type: string
+      ClientCountryId:
+        description: Indicates the country where the clients is from
+        format: int32
+        type: integer
+      ClientCurrencyId:
+        description: Indicates the default system currency used by the user for the client
+        format: int32
+        type: integer
+      CompanyRegistrationNumber:
+        description: Client's Company Registration Number
+        type: string
+      CreatedOn:
+        description: Date of creation
+        format: date-time
+        type: string
+      Email:
+        description: Client email
+        type: string
+      Id:
+        description: Entity id
+        format: int32
+        type: integer
+      Name:
+        description: Name of the client
+        type: string
+      PhoneNumber:
+        description: Client phone numer
+        type: string
+      UiLanguageId:
+        description: Hold a value of the language in which the invoice will be sent
+        format: int32
+        type: integer
+      Vat:
+        description: Client's VAT number
+        type: string
+    type: object
+  ClientUpdateApiModel:
+    properties:
+      Address:
+        description: Client business address
+        type: string
+      CC:
+        description: Client additional email contact for CC
+        type: string
+      ClientCountryId:
+        description: Indicates the country where the clients is from
+        format: int32
+        type: integer
+      ClientCurrencyId:
+        description: Indicates the default system currency used by the user for the client
+        format: int32
+        type: integer
+      CompanyRegistrationNumber:
+        description: Client's Company Registration Number
+        type: string
+      Email:
+        description: Client email
+        type: string
+      Id:
+        description: Entity id
+        format: int32
+        type: integer
+      Name:
+        description: Name of the client
+        type: string
+      PhoneNumber:
+        description: Client phone numer
+        type: string
+      UiLanguageId:
+        description: Hold a value of the language in which the invoice will be sent
+        format: int32
+        type: integer
+      Vat:
+        description: Client's VAT number
+        type: string
+    type: object
+  CountryDetailsApiModel:
+    properties:
+      Id:
+        description: Entity id
+        format: int32
+        type: integer
+      Name:
+        description: Name of the country
+        type: string
+      Value:
+        description: Country short code
+        type: string
+    type: object
+  CurrencyApiModel:
+    properties:
+      Name:
+        description: Name of the currency
+        type: string
+      Value:
+        description: Currency short code
+        type: string
+    type: object
+  CurrencyDetailsApiModel:
+    properties:
+      Code:
+        description: Currency short numeric code
+        type: string
+      Id:
+        description: Entity id
+        format: int32
+        type: integer
+      Name:
+        description: Name of the country
+        type: string
+      Symbol:
+        description: Currency symbol
+        type: string
+      Value:
+        description: Currency short alpha code
+        type: string
+    type: object
+  IErrorInfo:
+    properties:
+      Code:
+        readOnly: true
+        type: string
+      FaultMessage:
+        readOnly: true
+        type: string
+      Group:
+        readOnly: true
+        type: string
+      UserVisibleMessage:
+        readOnly: true
+        type: string
+    type: object
+  InvoiceActivityApiModel:
+    properties:
+      Id:
+        description: Id of invoice activity
         format: int32
         type: integer
       InvoiceNumber:
+        description: Indicates to which invoice this activity refers to
         type: string
       Link:
+        description: 'Url which point out to a certain activity action. Ex: Click to view the payment'
         type: string
       Message:
+        description: Message associated with the activity
         type: string
-      RecommendedArticles:
-        items:
-          $ref: '#/definitions/Article'
-        type: array
       Type:
+        description: Type of the activity
         enum:
           - Created
           - Draft
@@ -1147,454 +1933,633 @@ definitions:
           - OpenedAttachment
           - NewPaymentWithSquare
           - NewPaymentWithKlikAndPay
-        type: string
-      UserId:
-        format: int32
-        type: integer
-    type: object
-  Article:
-    properties:
-      Activities:
-        items:
-          enum:
-            - Created
-            - Draft
-            - Cloned
-            - SentViaEmail
-            - SentViaSms
-            - SentReminderViaEmail
-            - SentReminderViaSms
-            - Opened
-            - Viewed
-            - Rejected
-            - Updated
-            - Paid
-            - Unpaid
-            - Overdue
-            - NewManualPayment
-            - NewPaymentWithPaypal
-            - NewPaymentWithStripe
-            - SentToAccountant
-            - DownloadedAsPdf
-            - TopPayingCustomers
-            - LessPayingCustomers
-            - TopDueCustomers
-            - TopWorkTypes
-            - OtherProfession
-            - DesignAndCreativeProfession
-            - SoftwareDevelopmentProfession
-            - ContentWritingAndMarketingProfession
-            - AskForFeedback
-            - NoInvoicesInPreviousMonth
-            - UpdatePortfolio
-            - ShareWorkExperience
-            - PlanTheNextWeek
-            - InvoiceStatus
-            - InvoiceActivities
-            - YourCollections
-            - LatestArticles
-            - ShareAnArticle
-            - InvoiceLogo
-            - InvoiceBasicInfo
-            - InvoiceFromInfo
-            - InvoiceToInfo
-            - InvoiceItemsTable
-            - InvoiceTerms
-            - InvoiceNotes
-            - InvoiceStepsBeforeSendingToClient
-            - OpenedAttachment
-            - Freelancers
-            - Consultants
-            - Smes
-            - Enterprise
-          type: string
-        type: array
-      Content:
-        type: string
-      Course:
-        $ref: '#/definitions/Course'
-      CourseId:
-        format: int32
-        type: integer
-      Documents:
-        items:
-          $ref: '#/definitions/ArticleDocument'
-        type: array
-      Id:
-        format: int32
-        type: integer
-      ImageUrl:
-        type: string
-      IsRecommended:
-        type: boolean
-      Level:
-        enum:
-          - Beginner
-          - Competent
-          - Skilled
-          - Specialist
-          - Brand
-        type: string
-      Link:
-        type: string
-      TimeToRead:
-        format: int32
-        type: integer
-      Title:
-        type: string
-      TotalHasHelpedYouVotes:
-        format: int32
-        type: integer
-      TotalHasHelpedYouVotesPercentage:
-        format: int32
-        readOnly: true
-        type: integer
-      TotalHasNotHelpedYouVotes:
-        format: int32
-        type: integer
-    type: object
-  ArticleDocument:
-    properties:
-      ArticleId:
-        format: int32
-        type: integer
-      Extension:
-        type: string
-      Id:
-        format: int32
-        type: integer
-      ImageUrl:
-        type: string
-      Title:
-        type: string
-      Url:
+          - NewPaymentWithRazorpay
+          - NewPaymentWithWepay
+          - NewPaymentWithHalkbank
+          - ChangeStatus
+          - OrderUpdated
+          - OrderCreated
+          - NewPaymentWithTwoCheckout
+          - NewPaymentWithPaymentWall
         type: string
     type: object
-  ChangeStatusModel:
+  InvoiceAttachmentApiModel:
     properties:
       Id:
-        description: Invoice Id
-        format: int32
-        type: integer
-      Status:
-        description: New status of the invoice
-        enum:
-          - Draft
-          - Paid
-          - Unpaid
-          - Overdue
-        type: string
-    type: object
-  Client:
-    properties:
-      Address:
-        type: string
-      CC:
-        type: string
-      ClientCountryId:
-        format: int32
-        type: integer
-      ClientCurrencyId:
-        format: int32
-        type: integer
-      Email:
-        type: string
-      Id:
-        format: int32
-        type: integer
-      Name:
-        type: string
-      PhoneNumber:
-        type: string
-      UiLanguageId:
-        format: int32
-        type: integer
-      UserId:
-        format: int32
-        type: integer
-      Vat:
-        type: string
-    type: object
-  ClientDeleteModel:
-    properties:
-      Id:
-        description: Id of client to be deleted
-        format: int32
-        type: integer
-    type: object
-  Country:
-    properties:
-      Id:
-        format: int32
-        type: integer
-      Name:
-        type: string
-      Value:
-        type: string
-    type: object
-  Course:
-    properties:
-      Articles:
-        items:
-          $ref: '#/definitions/Article'
-        type: array
-      CourseCategory:
-        $ref: '#/definitions/CourseCategory'
-      CourseCategoryId:
-        format: int32
-        type: integer
-      Description:
-        type: string
-      Id:
-        format: int32
-        type: integer
-      ImageUrl:
-        type: string
-      Level:
-        enum:
-          - Beginner
-          - Competent
-          - Skilled
-          - Specialist
-          - Brand
-        type: string
-      Name:
-        type: string
-      TimeToRead:
-        format: int32
-        type: integer
-    type: object
-  CourseCategory:
-    properties:
-      Courses:
-        items:
-          $ref: '#/definitions/Course'
-        type: array
-      IconClass:
-        type: string
-      Id:
-        format: int32
-        type: integer
-      Name:
-        type: string
-    type: object
-  Currency:
-    properties:
-      Id:
-        format: int32
-        type: integer
-      Name:
-        type: string
-      Symbol:
-        type: string
-      Value:
-        type: string
-    type: object
-  ExternalConnection:
-    properties:
-      AccessToken:
-        type: string
-      AccessTokenSecret:
-        type: string
-      Data:
-        type: string
-      ExpiresOn:
-        format: date-time
-        type: string
-      ExternalUserId:
-        type: string
-      ExternalUsername:
-        type: string
-      Id:
-        format: int32
-        type: integer
-      Provider:
-        type: string
-      UserId:
-        format: int32
-        type: integer
-    type: object
-  IErrorInfo:
-    properties:
-      Code:
-        readOnly: true
-        type: string
-      FaultMessage:
-        readOnly: true
-        type: string
-      Group:
-        readOnly: true
-        type: string
-      UserVisibleMessage:
-        readOnly: true
-        type: string
-    type: object
-  Invoice:
-    properties:
-      AccessToken:
-        type: string
-      Activities:
-        items:
-          $ref: '#/definitions/Activity'
-        type: array
-      Attachments:
-        items:
-          $ref: '#/definitions/InvoiceAttachment'
-        type: array
-      ClientId:
-        format: int32
-        type: integer
-      ClonedFromId:
-        format: int32
-        type: integer
-      CurrencyId:
-        format: int32
-        type: integer
-      DiscountAmount:
-        format: double
-        type: number
-      Duedate:
-        format: date-time
-        type: string
-      EnablePartialPayments:
-        type: boolean
-      Id:
-        format: int32
-        type: integer
-      IssuedOn:
-        format: date-time
-        type: string
-      Items:
-        items:
-          $ref: '#/definitions/InvoiceItem'
-        type: array
-      Notes:
-        type: string
-      Number:
-        type: string
-      PaymentGateways:
-        items:
-          $ref: '#/definitions/PaymentGatewayForInvoice'
-        type: array
-      Payments:
-        items:
-          $ref: '#/definitions/Payment'
-        type: array
-      PoNumber:
-        type: string
-      RecurringProfileId:
-        format: int32
-        type: integer
-      Status:
-        enum:
-          - Draft
-          - Paid
-          - Unpaid
-          - Overdue
-        type: string
-      SubTotalAmount:
-        format: double
-        type: number
-      TaxAmount:
-        format: double
-        type: number
-      Terms:
-        type: string
-      TotalAmount:
-        format: double
-        type: number
-      UserId:
-        format: int32
-        type: integer
-    type: object
-  InvoiceAccessUri:
-    properties:
-      Link:
-        type: string
-    type: object
-  InvoiceAttachment:
-    properties:
-      Id:
-        format: int32
-        type: integer
-      InvoiceId:
+        description: Id of invoice attachment
         format: int32
         type: integer
       Link:
+        description: Link to the file
         type: string
       ObfuscatedFileName:
+        description: Hashed file name to avoid url wildguessing
         type: string
       OriginalFileName:
+        description: Name of the file
         type: string
       Size:
+        description: File size number in bytes
         format: int64
         type: integer
       Type:
+        description: Type of the link (Attached or external)
         enum:
           - External
           - Uploaded
         type: string
     type: object
-  InvoiceDeleteModel:
+  InvoiceCreateApiModel:
+    properties:
+      Attachments:
+        description: List of invoice attachments
+        items:
+          $ref: '#/definitions/InvoiceCreateAttachmentApiModel'
+        type: array
+      ClientId:
+        description: The client to whom this invoice is assigned
+        format: int32
+        type: integer
+      ClonedFromId:
+        description: Indicate from which invoice this invoice has been cloned from
+        format: int32
+        type: integer
+      CurrencyId:
+        description: Id of the currency for the invoice amounts
+        format: int32
+        type: integer
+      Duedate:
+        description: Indicates when the invoice will be proclamed as due
+        format: date-time
+        type: string
+      IssuedOn:
+        description: Indicates when the invoice was issued
+        format: date-time
+        type: string
+      Items:
+        description: List of invoice items
+        items:
+          $ref: '#/definitions/InvoiceCreateItemApiModel'
+        type: array
+      Notes:
+        description: Internal note regarding the invoice
+        type: string
+      Number:
+        description: Unique invoice number
+        type: string
+      PaymentGateways:
+        description: List of enabled payment gateways for this invoice
+        items:
+          $ref: '#/definitions/InvoiceGatewayApiModel'
+        type: array
+      PoNumber:
+        description: Unique number generated by the buyer
+        type: string
+      RecurringProfile:
+        $ref: '#/definitions/InvoiceRecurringApiModel'
+        description: Hold the recurring profile
+      RecurringProfileId:
+        description: Hold the id of the recurring profile
+        format: int32
+        type: integer
+      Status:
+        description: Indicate the status of the invoice (paid/unpaid/overdue)
+        enum:
+          - Draft
+          - Paid
+          - Unpaid
+          - Overdue
+        type: string
+      Terms:
+        description: Terms of agreement
+        type: string
+    type: object
+  InvoiceCreateAttachmentApiModel:
+    properties:
+      Link:
+        description: Link to the file
+        type: string
+      ObfuscatedFileName:
+        description: Hashed file name to avoid url wildguessing
+        type: string
+      OriginalFileName:
+        description: Name of the file
+        type: string
+      Size:
+        description: File size number in bytes
+        format: int64
+        type: integer
+      Type:
+        description: Type of the link (Attached or external)
+        enum:
+          - External
+          - Uploaded
+        type: string
+    type: object
+  InvoiceCreateItemApiModel:
+    properties:
+      Cost:
+        description: Amount per unit
+        format: double
+        type: number
+      Description:
+        description: Additional description attached to the invoice item
+        type: string
+      DiscountPercentage:
+        description: Discount percentage for the overall amount
+        format: double
+        type: number
+      Quantity:
+        description: Quantity in total used for the work type
+        format: double
+        type: number
+      TaxId:
+        description: Tax applied on the item
+        format: int32
+        type: integer
+      TaxPercentage:
+        description: 'Task percentage. Ex: 18%'
+        format: double
+        type: number
+      WorkTypeId:
+        description: Work type (Name of the service)
+        format: int32
+        type: integer
+    type: object
+  InvoiceDeleteApiModel:
     properties:
       Id:
         description: Id of invoice to be deleted
         format: int32
         type: integer
     type: object
-  InvoiceDeliveryOptions:
+  InvoiceDetailsApiModel:
     properties:
-      Id:
+      AccessToken:
+        description: Security access token used for accessing the invoice anonymously
+        type: string
+      Client:
+        $ref: '#/definitions/ClientDetailsApiModel'
+        description: Client data referened to this invoice
+      ClonedFromId:
+        description: Indicate from which invoice this invoice has been cloned from
         format: int32
         type: integer
-      InvoiceId:
-        format: int32
-        type: integer
-      Message:
-        type: string
-    type: object
-  InvoiceItem:
-    properties:
-      Cost:
-        format: double
-        type: number
-      Description:
-        type: string
+      Currency:
+        $ref: '#/definitions/CurrencyDetailsApiModel'
+        description: The currency related to this invoice
       DiscountAmount:
+        description: Amount that goes as a discount
         format: double
         type: number
-      DiscountPercentage:
-        format: double
-        type: number
+      Duedate:
+        description: Indicates when the invoice will be proclamed as due
+        format: date-time
+        type: string
+      EnablePartialPayments:
+        description: Indicate that the invoice allows the user to pay the invoice partially
+        type: boolean
       Id:
+        description: Invoice id
         format: int32
         type: integer
-      InvoiceId:
+      IssuedOn:
+        description: Indicates when the invoice was issued
+        format: date-time
+        type: string
+      Notes:
+        description: Internal note regarding the invoice
+        type: string
+      Number:
+        description: Unique invoice number
+        type: string
+      PoNumber:
+        description: Unique number generated by the buyer
+        type: string
+      RecurringProfile:
+        $ref: '#/definitions/InvoiceRecurringApiModel'
+        description: Hold the recurring profile
+      RecurringProfileId:
+        description: Hold the id of the recurring profile
         format: int32
         type: integer
-      Quantity:
-        format: double
-        type: number
+      Status:
+        description: Indicate the status of the invoice (paid/unpaid/overdue)
+        enum:
+          - Draft
+          - Paid
+          - Unpaid
+          - Overdue
+        type: string
       SubTotalAmount:
+        description: Total amount of the invoice without tax
         format: double
         type: number
       TaxAmount:
+        description: Amount that goes to the tax
+        format: double
+        type: number
+      Terms:
+        description: Terms of agreement
+        type: string
+      TotalAmount:
+        description: Total amount of the invoice with tax
+        format: double
+        type: number
+    type: object
+  InvoiceFullDetailsApiModel:
+    properties:
+      AccessToken:
+        description: Security access token used for accessing the invoice anonymously
+        type: string
+      Activities:
+        description: List of invoice activities. Invoice audit log
+        items:
+          $ref: '#/definitions/InvoiceActivityApiModel'
+        type: array
+      Attachments:
+        description: List of invoice attachments
+        items:
+          $ref: '#/definitions/InvoiceAttachmentApiModel'
+        type: array
+      Client:
+        $ref: '#/definitions/ClientDetailsApiModel'
+        description: Client data referened to this invoice
+      ClonedFromId:
+        description: Indicate from which invoice this invoice has been cloned from
+        format: int32
+        type: integer
+      Currency:
+        $ref: '#/definitions/CurrencyDetailsApiModel'
+        description: The currency related to this invoice
+      DiscountAmount:
+        description: Amount that goes as a discount
+        format: double
+        type: number
+      Duedate:
+        description: Indicates when the invoice will be proclamed as due
+        format: date-time
+        type: string
+      EnablePartialPayments:
+        description: Indicate that the invoice allows the user to pay the invoice partially
+        type: boolean
+      Id:
+        description: Invoice id
+        format: int32
+        type: integer
+      IssuedOn:
+        description: Indicates when the invoice was issued
+        format: date-time
+        type: string
+      Items:
+        description: List of invoice items
+        items:
+          $ref: '#/definitions/InvoiceItemApiModel'
+        type: array
+      Notes:
+        description: Internal note regarding the invoice
+        type: string
+      Number:
+        description: Unique invoice number
+        type: string
+      PaymentGateways:
+        description: List of enabled payment gateways for this invoice
+        items:
+          $ref: '#/definitions/InvoiceGatewayApiModel'
+        type: array
+      Payments:
+        description: List of invoice payments
+        items:
+          $ref: '#/definitions/InvoicePaymentApiModel'
+        type: array
+      PoNumber:
+        description: Unique number generated by the buyer
+        type: string
+      RecurringProfile:
+        $ref: '#/definitions/InvoiceRecurringApiModel'
+        description: Hold the recurring profile
+      RecurringProfileId:
+        description: Hold the id of the recurring profile
+        format: int32
+        type: integer
+      Status:
+        description: Indicate the status of the invoice (paid/unpaid/overdue)
+        enum:
+          - Draft
+          - Paid
+          - Unpaid
+          - Overdue
+        type: string
+      SubTotalAmount:
+        description: Total amount of the invoice without tax
+        format: double
+        type: number
+      TaxAmount:
+        description: Amount that goes to the tax
+        format: double
+        type: number
+      Terms:
+        description: Terms of agreement
+        type: string
+      TotalAmount:
+        description: Total amount of the invoice with tax
+        format: double
+        type: number
+    type: object
+  InvoiceGatewayApiModel:
+    properties:
+      Name:
+        description: Name of the payment gateway
+        type: string
+    type: object
+  InvoiceItemApiModel:
+    properties:
+      Cost:
+        description: Amount per unit
+        format: double
+        type: number
+      Description:
+        description: Additional description attached to the invoice item
+        type: string
+      DiscountAmount:
+        description: Amount that goes as a discount
+        format: double
+        type: number
+      DiscountPercentage:
+        description: Discount percentage for the overall amount
+        format: double
+        type: number
+      Id:
+        description: Id of invoice item
+        format: int32
+        type: integer
+      Quantity:
+        description: Quantity in total used for the work type
+        format: double
+        type: number
+      SubTotalAmount:
+        description: Sub-Total amount of the invoice item (Amount without tax)
+        format: double
+        type: number
+      TaxAmount:
+        description: Amount that goes to the tax
         format: double
         type: number
       TaxId:
+        description: Tax applied on the item
         format: int32
         type: integer
       TaxPercentage:
+        description: 'Task percentage. Ex: 18%'
         format: double
         type: number
       TotalAmount:
+        description: Total amount of the invoice item
         format: double
         type: number
       WorkTypeId:
+        description: Work type (Name of the service)
         format: int32
         type: integer
     type: object
-  'ListResult[Invoice]':
+  InvoicePaymentApiModel:
+    properties:
+      Amount:
+        description: Total amount of the payment
+        format: double
+        type: number
+      Id:
+        description: Id of invoice payment
+        format: int32
+        type: integer
+      IsAutomatic:
+        description: Indicate if the payment is automatic or manual
+        type: boolean
+      Note:
+        description: Internal payment note
+        type: string
+      PaidOn:
+        description: When the payment was done by the client
+        format: date-time
+        type: string
+      ReferenceId:
+        description: Id of the payment
+        type: string
+      Type:
+        description: Type of payment
+        enum:
+          - Other
+          - Paypal
+          - Stripe
+          - Payoneer
+          - Bank
+          - Cash
+          - Cheque
+          - Ach
+          - Sepa
+          - Square
+          - KlikAndPay
+          - Razorpay
+          - Wepay
+          - Halkbank
+          - TwoCheckout
+          - PaymentWall
+        type: string
+    type: object
+  InvoiceRecurringApiModel:
+    description: Definition of invoice recurring profile
+    properties:
+      DayOfMonth:
+        description: Day of month when the recurrance should happen
+        format: int32
+        type: integer
+      DayOfWeek:
+        description: Day when the recurrance should happen
+        enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+        type: string
+      DueDateInDays:
+        description: Total number of days for the client to pay the invoice after issuing it
+        format: int32
+        type: integer
+      EndOfRecurrance:
+        description: Indcate the date when the recurrance should stop
+        format: date-time
+        type: string
+      Month:
+        description: Month when the recurrance should happen
+        format: int32
+        type: integer
+      RecurrancePattern:
+        description: How often the recurrance occurs
+        enum:
+          - Daily
+          - Weekly
+          - Monthly
+          - Yearly
+        type: string
+      RecurranceValue:
+        description: "Recurring every [value] RecurrancePattern\r\nEx: Recur every 1 week"
+        format: int32
+        type: integer
+      StartOfRecurrance:
+        description: Indcate the date when the recurrance has started
+        format: date-time
+        type: string
+      Status:
+        description: The status of the recurrance
+        enum:
+          - Pending
+          - Active
+          - Cancelled
+          - Finished
+        type: string
+      Title:
+        description: "Title of the recurring profile. \r\nEx: BRAND PACKAGE - 2017-08-16 - 2018-08-16"
+        type: string
+    type: object
+  InvoiceUpdateApiModel:
+    properties:
+      Attachments:
+        description: List of invoice attachments
+        items:
+          $ref: '#/definitions/InvoiceUpdateAttachmentApiModel'
+        type: array
+      ClientId:
+        description: The client to whom this invoice is assigned
+        format: int32
+        type: integer
+      ClonedFromId:
+        description: Indicate from which invoice this invoice has been cloned from
+        format: int32
+        type: integer
+      CurrencyId:
+        description: Id of the currency for the invoice amounts
+        format: int32
+        type: integer
+      Duedate:
+        description: Indicates when the invoice will be proclamed as due
+        format: date-time
+        type: string
+      Id:
+        description: Invoice id
+        format: int32
+        type: integer
+      IssuedOn:
+        description: Indicates when the invoice was issued
+        format: date-time
+        type: string
+      Items:
+        description: List of invoice items
+        items:
+          $ref: '#/definitions/InvoiceUpdateItemApiModel'
+        type: array
+      Notes:
+        description: Internal note regarding the invoice
+        type: string
+      Number:
+        description: Unique invoice number
+        type: string
+      PaymentGateways:
+        description: List of enabled payment gateways for this invoice
+        items:
+          $ref: '#/definitions/InvoiceGatewayApiModel'
+        type: array
+      PoNumber:
+        description: Unique number generated by the buyer
+        type: string
+      RecurringProfile:
+        $ref: '#/definitions/InvoiceRecurringApiModel'
+        description: Hold the recurring profile
+      RecurringProfileId:
+        description: Hold the id of the recurring profile
+        format: int32
+        type: integer
+      Status:
+        description: Indicate the status of the invoice (paid/unpaid/overdue)
+        enum:
+          - Draft
+          - Paid
+          - Unpaid
+          - Overdue
+        type: string
+      Terms:
+        description: Terms of agreement
+        type: string
+    type: object
+  InvoiceUpdateAttachmentApiModel:
+    properties:
+      Id:
+        description: Id of invoice attachment
+        format: int32
+        type: integer
+      Link:
+        description: Link to the file
+        type: string
+      ObfuscatedFileName:
+        description: Hashed file name to avoid url wildguessing
+        type: string
+      OriginalFileName:
+        description: Name of the file
+        type: string
+      Size:
+        description: File size number in bytes
+        format: int64
+        type: integer
+      Type:
+        description: Type of the link (Attached or external)
+        enum:
+          - External
+          - Uploaded
+        type: string
+    type: object
+  InvoiceUpdateItemApiModel:
+    properties:
+      Cost:
+        description: Amount per unit
+        format: double
+        type: number
+      Description:
+        description: Additional description attached to the invoice item
+        type: string
+      DiscountPercentage:
+        description: Discount percentage for the overall amount
+        format: double
+        type: number
+      Id:
+        description: Id of invoice item
+        format: int32
+        type: integer
+      Quantity:
+        description: Quantity in total used for the work type
+        format: double
+        type: number
+      TaxId:
+        description: Tax applied on the item
+        format: int32
+        type: integer
+      TaxPercentage:
+        description: 'Task percentage. Ex: 18%'
+        format: double
+        type: number
+      WorkTypeId:
+        description: Work type (Name of the service)
+        format: int32
+        type: integer
+    type: object
+  InvoiceUriApiModel:
+    properties:
+      Link:
+        description: Unique link to the invoice
+        type: string
+    type: object
+  'ListResult[InvoiceDetailsApiModel]':
     properties:
       Count:
         format: int32
@@ -1608,105 +2573,827 @@ definitions:
         type: boolean
       Result:
         items:
-          $ref: '#/definitions/Invoice'
+          $ref: '#/definitions/InvoiceDetailsApiModel'
         type: array
       TotalCount:
         format: int32
         type: integer
     type: object
-  Payment:
+  'ListResult[OrderDetailsApiModel]':
     properties:
-      Amount:
+      Count:
+        format: int32
+        readOnly: true
+        type: integer
+      ErrorMessages:
+        items:
+          $ref: '#/definitions/IErrorInfo'
+        type: array
+      IsFaulted:
+        type: boolean
+      Result:
+        items:
+          $ref: '#/definitions/OrderDetailsApiModel'
+        type: array
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  'ListResult[ProductDetailsApiModel]':
+    properties:
+      Count:
+        format: int32
+        readOnly: true
+        type: integer
+      ErrorMessages:
+        items:
+          $ref: '#/definitions/IErrorInfo'
+        type: array
+      IsFaulted:
+        type: boolean
+      Result:
+        items:
+          $ref: '#/definitions/ProductDetailsApiModel'
+        type: array
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  OrderAttachmentApiModel:
+    properties:
+      Link:
+        description: Link to the file
+        type: string
+      ObfuscatedFileName:
+        description: Hashed file name to avoid url wildguessing
+        type: string
+      OriginalFileName:
+        description: Name of the file
+        type: string
+      Size:
+        description: File size number in bytes
+        format: int64
+        type: integer
+      Type:
+        description: Type of the link (Attached or external)
+        enum:
+          - External
+          - Uploaded
+        type: string
+    type: object
+  OrderBillingDetailsApiModel:
+    properties:
+      Address:
+        description: Client street and number
+        type: string
+      CountryId:
+        description: Client country id
+        format: int32
+        type: integer
+      Email:
+        description: Client email
+        type: string
+      Name:
+        description: Client name
+        type: string
+      PhoneNumber:
+        description: Client phone number
+        type: string
+    type: object
+  OrderCreateApiModel:
+    properties:
+      AfterPaymentDescription:
+        description: After payment description
+        type: string
+      Attachments:
+        description: List of Order attachments
+        items:
+          $ref: '#/definitions/OrderAttachmentApiModel'
+        type: array
+      CouponCode:
+        description: Coupon to apply in order to get the discount
+        type: string
+      CurrencyId:
+        description: Foreign key Currency
+        format: int32
+        type: integer
+      Description:
+        description: Product description
+        type: string
+      DiscountAmount:
+        description: Discount amount
+        format: double
+        type: number
+      Items:
+        description: List of Order items
+        items:
+          $ref: '#/definitions/OrderItemApiModel'
+        type: array
+      Name:
+        description: Product alias
+        type: string
+      Note:
+        description: Customer note to seller
+        type: string
+      OrderBillingDetails:
+        $ref: '#/definitions/OrderBillingDetailsApiModel'
+        description: Order billing details
+      OrderShippingDetails:
+        $ref: '#/definitions/OrderShippingDetailsApiModel'
+        description: Order sshipping details
+      ProductId:
+        description: Product id
+        format: int32
+        type: integer
+      Referral:
+        description: Represent the referral for this order
+        type: string
+      ShippingAmount:
+        description: Cost for shipping the product
+        format: double
+        type: number
+      ShippingDescription:
+        description: Client instructions for shipping
+        type: string
+      Status:
+        description: Order status
+        enum:
+          - PendingPayment
+          - Processing
+          - Shipped
+          - Completed
+          - OnHold
+          - Cancelled
+          - Refunded
+          - Failed
+        type: string
+      SubTotalAmount:
+        description: Sub total amount
+        format: double
+        type: number
+      TaxAmount:
+        description: Tax amount
+        format: double
+        type: number
+      TotalAmount:
+        description: Total amount
+        format: double
+        type: number
+      WhatHappensNextDescription:
+        description: What happens next description
+        type: string
+    type: object
+  OrderDeleteApiModel:
+    properties:
+      Id:
+        description: Id of order to be deleted
+        format: int32
+        type: integer
+    type: object
+  OrderDetailsApiModel:
+    properties:
+      AccessToken:
+        description: Product short link
+        type: string
+      AfterPaymentDescription:
+        description: After payment description
+        type: string
+      CouponCode:
+        description: Coupon to apply in order to get the discount
+        type: string
+      Currency:
+        $ref: '#/definitions/CurrencyDetailsApiModel'
+        description: The currency related to this order
+      CurrencyId:
+        description: Foreign key Currency
+        format: int32
+        type: integer
+      Description:
+        description: Product description
+        type: string
+      DiscountAmount:
+        description: Discount amount
         format: double
         type: number
       Id:
+        description: Order id
         format: int32
         type: integer
-      Invoice:
-        $ref: '#/definitions/Invoice'
-      InvoiceId:
-        format: int32
-        type: integer
-      IsAutomatic:
-        type: boolean
+      Name:
+        description: Product alias
+        type: string
       Note:
+        description: Customer note to seller
         type: string
-      PaidOn:
-        format: date-time
+      OrderBillingDetails:
+        $ref: '#/definitions/OrderBillingDetailsApiModel'
+        description: Order billing details
+      OrderShippingDetails:
+        $ref: '#/definitions/OrderShippingDetailsApiModel'
+        description: Order sshipping details
+      ProductId:
+        description: Product id
+        format: int32
+        type: integer
+      Referral:
+        description: Represent the referral for this order
         type: string
-      ReferenceId:
+      ShippingAmount:
+        description: Cost for shipping the product
+        format: double
+        type: number
+      ShippingDescription:
+        description: Client instructions for shipping
         type: string
-      Type:
+      Status:
+        description: Order status
         enum:
-          - Other
-          - Paypal
-          - Stripe
-          - Payoneer
-          - Bank
-          - Cash
-          - Cheque
-          - Ach
-          - Sepa
-          - Square
-          - KlikAndPay
+          - PendingPayment
+          - Processing
+          - Shipped
+          - Completed
+          - OnHold
+          - Cancelled
+          - Refunded
+          - Failed
+        type: string
+      SubTotalAmount:
+        description: Sub total amount
+        format: double
+        type: number
+      TaxAmount:
+        description: Tax amount
+        format: double
+        type: number
+      TotalAmount:
+        description: Total amount
+        format: double
+        type: number
+      TotalWithShipping:
+        description: Total amount with shipping
+        format: double
+        type: number
+      WhatHappensNextDescription:
+        description: What happens next description
         type: string
     type: object
-  PaymentGateway:
+  OrderFullDetailsApiModel:
     properties:
-      CanDisconnect:
-        type: boolean
-      ClientImportUri:
+      AccessToken:
+        description: Product short link
         type: string
-      ConnectionType:
-        enum:
-          - OAuth
-          - InputFields
+      AfterPaymentDescription:
+        description: After payment description
         type: string
-      ExternalConnectionId:
+      Attachments:
+        description: List of Order attachments
+        items:
+          $ref: '#/definitions/OrderAttachmentApiModel'
+        type: array
+      CouponCode:
+        description: Coupon to apply in order to get the discount
+        type: string
+      Currency:
+        $ref: '#/definitions/CurrencyDetailsApiModel'
+        description: The currency related to this order
+      CurrencyId:
+        description: Foreign key Currency
         format: int32
         type: integer
-      Fields:
+      Description:
+        description: Product description
+        type: string
+      DiscountAmount:
+        description: Discount amount
+        format: double
+        type: number
+      Id:
+        description: Order id
+        format: int32
+        type: integer
+      Items:
+        description: List of Order items
         items:
-          $ref: '#/definitions/PaymentGatewayInputField'
+          $ref: '#/definitions/OrderItemApiModel'
         type: array
-      IsConnected:
-        type: boolean
-      IsEnabled:
-        type: boolean
-      MaximumAmount:
-        format: double
-        type: number
-      MinimumAmount:
-        format: double
-        type: number
       Name:
+        description: Product alias
         type: string
-      OAuthUri:
+      Note:
+        description: Customer note to seller
         type: string
-      RefundUri:
+      OrderBillingDetails:
+        $ref: '#/definitions/OrderBillingDetailsApiModel'
+        description: Order billing details
+      OrderShippingDetails:
+        $ref: '#/definitions/OrderShippingDetailsApiModel'
+        description: Order sshipping details
+      ProductId:
+        description: Product id
+        format: int32
+        type: integer
+      Referral:
+        description: Represent the referral for this order
+        type: string
+      ShippingAmount:
+        description: Cost for shipping the product
+        format: double
+        type: number
+      ShippingDescription:
+        description: Client instructions for shipping
+        type: string
+      Status:
+        description: Order status
+        enum:
+          - PendingPayment
+          - Processing
+          - Shipped
+          - Completed
+          - OnHold
+          - Cancelled
+          - Refunded
+          - Failed
+        type: string
+      SubTotalAmount:
+        description: Sub total amount
+        format: double
+        type: number
+      TaxAmount:
+        description: Tax amount
+        format: double
+        type: number
+      TotalAmount:
+        description: Total amount
+        format: double
+        type: number
+      TotalWithShipping:
+        description: Total amount with shipping
+        format: double
+        type: number
+      WhatHappensNextDescription:
+        description: What happens next description
+        type: string
+    type: object
+  OrderItemApiModel:
+    properties:
+      Cost:
+        description: Work item cost
+        format: double
+        type: number
+      Description:
+        description: General description
+        type: string
+      ProductItemId:
+        description: Foreign key product item id
+        format: int32
+        type: integer
+      Quantity:
+        description: Work item quantity
+        format: double
+        type: number
+      ReferenceId:
+        description: Order SKU
+        type: string
+      SubTotalAmount:
+        description: Subtotal amount of product
+        format: double
+        type: number
+      TaxAmount:
+        description: Tax amount
+        format: double
+        type: number
+      TaxId:
+        description: Foreign key Tax id
+        format: int32
+        type: integer
+      TaxPercentage:
+        description: Tax percentage
+        format: double
+        type: number
+      TotalAmount:
+        description: Total amount of product
+        format: double
+        type: number
+      WorkTypeId:
+        description: Foreign key work type id
+        format: int32
+        type: integer
+    type: object
+  OrderShippingDetailsApiModel:
+    properties:
+      Address:
+        description: Client street and number
+        type: string
+      CountryId:
+        description: Client country id
+        format: int32
+        type: integer
+      Email:
+        description: Client email
+        type: string
+      Name:
+        description: Client name
+        type: string
+      PhoneNumber:
+        description: Client phone number
+        type: string
+    type: object
+  PaymentGatewayDetailsApiModel:
+    properties:
+      Name:
+        description: Name of the payment gateway
         type: string
       SupportedCurrencies:
+        description: List of supported currencies.
         items:
-          $ref: '#/definitions/Currency'
+          $ref: '#/definitions/CurrencyApiModel'
         type: array
-      SupportsClientsImport:
-        type: boolean
-      SupportsRefund:
-        type: boolean
     type: object
-  PaymentGatewayForInvoice:
+  ProductAttachmentApiModel:
     properties:
       Id:
+        description: Product attachment id
+        format: int32
+        type: integer
+      Link:
+        description: Link to the file
+        type: string
+      ObfuscatedFileName:
+        description: Hashed file name to avoid url wildguessing
+        type: string
+      OriginalFileName:
+        description: Name of the file
+        type: string
+      Size:
+        description: File size number in bytes
+        format: int64
+        type: integer
+      Type:
+        description: Type of the link (Attached or external)
+        enum:
+          - External
+          - Uploaded
+        type: string
+    type: object
+  ProductCouponApiModel:
+    properties:
+      Code:
+        description: Coupon to apply in order to get the discount
+        type: string
+      DiscountAmount:
+        description: Discount amount
+        format: double
+        type: number
+      DiscountPercentage:
+        description: Discount percentage
+        format: double
+        type: number
+      Id:
+        description: Product coupon id
+        format: int32
+        type: integer
+      ValidUntil:
+        description: Coupon expiration date
+        format: date-time
+        type: string
+    type: object
+  ProductCreateApiModel:
+    properties:
+      AfterPaymentDescription:
+        description: After payment description
+        type: string
+      Attachments:
+        description: List of product attachments
+        items:
+          $ref: '#/definitions/ProductAttachmentApiModel'
+        type: array
+      Coupons:
+        description: List of product coupons
+        items:
+          $ref: '#/definitions/ProductCouponApiModel'
+        type: array
+      CurrencyId:
+        description: Foreign key Currency
+        format: int32
+        type: integer
+      Description:
+        description: Product description
+        type: string
+      Discounts:
+        description: List of product discounts
+        items:
+          $ref: '#/definitions/ProductDiscountApiModel'
+        type: array
+      Items:
+        description: List of product items
+        items:
+          $ref: '#/definitions/ProductItemApiModel'
+        type: array
+      Name:
+        description: Product alias
+        type: string
+      PaymentGateways:
+        description: List of enabled payment gateways for this product
+        items:
+          $ref: '#/definitions/ProductGatewayApiModel'
+        type: array
+      ShippingAmount:
+        description: Cost for shipping the product
+        format: double
+        type: number
+      ShippingDescription:
+        description: Client instructions for shipping
+        type: string
+      Status:
+        description: Product availability status
+        enum:
+          - Active
+          - NotAvailable
+          - Inactive
+        type: string
+      WhatHappensNextDescription:
+        description: What happens next description
+        type: string
+    type: object
+  ProductDeleteApiModel:
+    properties:
+      Id:
+        description: Id of product to be deleted
+        format: int32
+        type: integer
+    type: object
+  ProductDetailsApiModel:
+    properties:
+      AccessToken:
+        description: Product short link
+        type: string
+      AfterPaymentDescription:
+        description: After payment description
+        type: string
+      Currency:
+        $ref: '#/definitions/CurrencyDetailsApiModel'
+        description: The currency related to this product
+      CurrencyId:
+        description: Foreign key Currency
+        format: int32
+        type: integer
+      Description:
+        description: Product description
+        type: string
+      Id:
+        description: Product id
         format: int32
         type: integer
       Name:
+        description: Product alias
+        type: string
+      ShippingAmount:
+        description: Cost for shipping the product
+        format: double
+        type: number
+      ShippingDescription:
+        description: Client instructions for shipping
+        type: string
+      Status:
+        description: Product availability status
+        enum:
+          - Active
+          - NotAvailable
+          - Inactive
+        type: string
+      SubTotalAmount:
+        description: Subtotal amount of product
+        format: double
+        type: number
+      TotalAmount:
+        description: Total amount of product
+        format: double
+        type: number
+      TotalWithShipping:
+        description: Total amount of product with shipping
+        format: double
+        type: number
+      WhatHappensNextDescription:
+        description: What happens next description
         type: string
     type: object
-  PaymentGatewayInputField:
+  ProductDiscountApiModel:
+    properties:
+      DiscountAmount:
+        description: Discount amount
+        format: double
+        type: number
+      DiscountPercentage:
+        description: Discount percentage
+        format: double
+        type: number
+      Id:
+        description: Product discount id
+        format: int32
+        type: integer
+      Name:
+        description: Name
+        type: string
+      ValidFrom:
+        description: Discount start date
+        format: date-time
+        type: string
+      ValidTo:
+        description: Discount expiration date
+        format: date-time
+        type: string
+    type: object
+  ProductFullDetailsApiModel:
+    properties:
+      AccessToken:
+        description: Product short link
+        type: string
+      AfterPaymentDescription:
+        description: After payment description
+        type: string
+      Attachments:
+        description: List of product attachments
+        items:
+          $ref: '#/definitions/ProductAttachmentApiModel'
+        type: array
+      Coupons:
+        description: List of product coupons
+        items:
+          $ref: '#/definitions/ProductCouponApiModel'
+        type: array
+      Currency:
+        $ref: '#/definitions/CurrencyDetailsApiModel'
+        description: The currency related to this product
+      CurrencyId:
+        description: Foreign key Currency
+        format: int32
+        type: integer
+      Description:
+        description: Product description
+        type: string
+      Discounts:
+        description: List of product discounts
+        items:
+          $ref: '#/definitions/ProductDiscountApiModel'
+        type: array
+      Id:
+        description: Product id
+        format: int32
+        type: integer
+      Items:
+        description: List of product items
+        items:
+          $ref: '#/definitions/ProductItemApiModel'
+        type: array
+      Name:
+        description: Product alias
+        type: string
+      PaymentGateways:
+        description: List of enabled payment gateways for this product
+        items:
+          $ref: '#/definitions/ProductGatewayApiModel'
+        type: array
+      ShippingAmount:
+        description: Cost for shipping the product
+        format: double
+        type: number
+      ShippingDescription:
+        description: Client instructions for shipping
+        type: string
+      Status:
+        description: Product availability status
+        enum:
+          - Active
+          - NotAvailable
+          - Inactive
+        type: string
+      SubTotalAmount:
+        description: Subtotal amount of product
+        format: double
+        type: number
+      TotalAmount:
+        description: Total amount of product
+        format: double
+        type: number
+      TotalWithShipping:
+        description: Total amount of product with shipping
+        format: double
+        type: number
+      WhatHappensNextDescription:
+        description: What happens next description
+        type: string
+    type: object
+  ProductGatewayApiModel:
     properties:
       Name:
+        description: Payment gateway name
         type: string
-      Value:
+    type: object
+  ProductItemApiModel:
+    properties:
+      Cost:
+        description: Work item cost
+        format: double
+        type: number
+      Description:
+        description: General description
+        type: string
+      Id:
+        description: Product item id
+        format: int32
+        type: integer
+      MinimumQuantity:
+        description: Minimum required quantity in order to buy a work item
+        format: double
+        type: number
+      ReferenceId:
+        description: Product SKU
+        type: string
+      SubTotalAmount:
+        description: Subtotal amount of product
+        format: double
+        type: number
+      TaxAmount:
+        description: Tax amount
+        format: double
+        type: number
+      TaxId:
+        description: Foreign key Tax id
+        format: int32
+        type: integer
+      TaxPercentage:
+        description: Tax percentage
+        format: double
+        type: number
+      TotalAmount:
+        description: Total amount of product
+        format: double
+        type: number
+      WorkTypeId:
+        description: Foreign key work type id
+        format: int32
+        type: integer
+    type: object
+  ProductUpdateApiModel:
+    properties:
+      AfterPaymentDescription:
+        description: After payment description
+        type: string
+      Attachments:
+        description: List of product attachments
+        items:
+          $ref: '#/definitions/ProductAttachmentApiModel'
+        type: array
+      Coupons:
+        description: List of product coupons
+        items:
+          $ref: '#/definitions/ProductCouponApiModel'
+        type: array
+      CurrencyId:
+        description: Foreign key Currency
+        format: int32
+        type: integer
+      Description:
+        description: Product description
+        type: string
+      Discounts:
+        description: List of product discounts
+        items:
+          $ref: '#/definitions/ProductDiscountApiModel'
+        type: array
+      Id:
+        description: Product id
+        format: int32
+        type: integer
+      Items:
+        description: List of product items
+        items:
+          $ref: '#/definitions/ProductItemApiModel'
+        type: array
+      Name:
+        description: Product alias
+        type: string
+      PaymentGateways:
+        description: List of enabled payment gateways for this product
+        items:
+          $ref: '#/definitions/ProductGatewayApiModel'
+        type: array
+      ShippingAmount:
+        description: Cost for shipping the product
+        format: double
+        type: number
+      ShippingDescription:
+        description: Client instructions for shipping
+        type: string
+      Status:
+        description: Product availability status
+        enum:
+          - Active
+          - NotAvailable
+          - Inactive
+        type: string
+      WhatHappensNextDescription:
+        description: What happens next description
         type: string
     type: object
   QueryOptions:
@@ -1718,336 +3405,142 @@ definitions:
         format: int32
         type: integer
     type: object
-  QueuedInvoice:
+  SearchRequest:
     properties:
-      ClonedFromId:
-        format: int32
-        type: integer
-      Id:
-        format: int32
-        type: integer
-      Invoice:
-        $ref: '#/definitions/Invoice'
-      InvoiceId:
-        format: int32
-        type: integer
-      RecurringProfileId:
-        format: int32
-        type: integer
-      ScheduledFor:
-        format: date-time
-        type: string
-      Status:
+      Order:
         enum:
-          - Pending
-          - Cancelled
-          - Failed
-          - Processed
+          - None
+          - Asc
+          - Desc
         type: string
-      UserId:
+      OrderBy:
+        type: string
+      Page:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      Query:
+        type: string
+    type: object
+  SendInvoiceToAccountantApiModel:
+    properties:
+      Id:
+        description: Id of the invoice
         format: int32
         type: integer
     type: object
-  RecurringProfile:
+  SendInvoiceToClientApiModel:
     properties:
-      DayOfMonth:
-        format: int32
-        type: integer
-      DayOfWeek:
-        enum:
-          - Sunday
-          - Monday
-          - Tuesday
-          - Wednesday
-          - Thursday
-          - Friday
-          - Saturday
-        type: string
-      DueDateInDays:
-        format: int32
-        type: integer
-      EndOfRecurrance:
-        format: date-time
-        type: string
       Id:
+        description: Id of the invoice
         format: int32
         type: integer
       InvoiceId:
+        description: Id of the invoice
         format: int32
         type: integer
-      Month:
-        format: int32
-        type: integer
-      RecurrancePattern:
-        enum:
-          - Daily
-          - Weekly
-          - Monthly
-          - Yearly
-        type: string
-      RecurranceValue:
-        format: int32
-        type: integer
-      StartOfRecurrance:
-        format: date-time
-        type: string
-      Status:
-        enum:
-          - Pending
-          - Active
-          - Cancelled
-          - Finished
-        type: string
-      Title:
+      Message:
+        description: Message to be embedded in the email
         type: string
     type: object
-  SubscriptionPlan:
+  TaxCreateApiModel:
     properties:
-      CancellatedOn:
-        format: date-time
-        type: string
-      CurrencyCode:
-        type: string
-      ExternalIdentifier:
-        type: string
-      HasDuePayment:
-        type: boolean
-      HasDuePaymentSince:
-        format: date-time
-        type: string
-      Id:
-        format: int32
-        type: integer
-      Identifier:
-        type: string
-      IsActive:
-        type: boolean
-      LastPaymentOn:
-        format: date-time
-        type: string
-      MaxClients:
-        format: int32
-        type: integer
       Name:
-        type: string
-      OrderIdentifier:
-        type: string
-      Price:
-        format: double
-        type: number
-      Recurrence:
-        enum:
-          - Monthly
-          - Yearly
-        type: string
-      SaleId:
-        format: int64
-        type: integer
-      Status:
-        enum:
-          - ActiveTrial
-          - ExpiredTrial
-          - Active
-          - Canceled
-        readOnly: true
-        type: string
-      TrialEndsOn:
-        format: date-time
-        type: string
-      TrialNumberOfDays:
-        format: int32
-        type: integer
-      TrialStartsOn:
-        format: date-time
-        type: string
-      UserId:
-        format: int32
-        type: integer
-      Version:
-        format: int32
-        type: integer
-    type: object
-  Tax:
-    properties:
-      Id:
-        format: int32
-        type: integer
-      Name:
+        description: Name of the task
         type: string
       Percentage:
+        description: 'Task percentage. Ex: 18%'
         format: double
         type: number
-      UserId:
-        format: int32
-        type: integer
     type: object
-  TaxDeleteModel:
+  TaxDeleteApiModel:
     properties:
       Id:
         description: Id of tax to be deleted
         format: int32
         type: integer
     type: object
-  UiLanguage:
+  TaxDetailsApiModel:
     properties:
+      CreatedOn:
+        description: Date of creation
+        format: date-time
+        type: string
       Id:
+        description: Entity id
         format: int32
         type: integer
       Name:
+        description: Name of the task
+        type: string
+      Percentage:
+        description: 'Task percentage. Ex: 18%'
+        format: double
+        type: number
+    type: object
+  TaxUpdateApiModel:
+    properties:
+      Id:
+        description: Entity id
+        format: int32
+        type: integer
+      Name:
+        description: Name of the task
+        type: string
+      Percentage:
+        description: 'Task percentage. Ex: 18%'
+        format: double
+        type: number
+    type: object
+  UILanguageDetailsApiModel:
+    properties:
+      Id:
+        description: Entity id
+        format: int32
+        type: integer
+      Name:
+        description: Name of the country
         type: string
       UiCulture:
+        description: Ui culture options
         type: string
     type: object
-  User:
+  WorkTypeCreateApiModel:
     properties:
-      ActionNotificationsLastReadOn:
-        format: date-time
-        type: string
-      Email:
-        type: string
-      ExternalConnections:
-        items:
-          $ref: '#/definitions/ExternalConnection'
-        type: array
-      HasBeenOnboarded:
-        type: boolean
-      Id:
-        format: int32
-        type: integer
-      IsLocked:
-        type: boolean
-      IsVerified:
-        type: boolean
-      KnowledgeNotificationsLastReadOn:
-        format: date-time
-        type: string
-      LastSeenOn:
-        format: date-time
-        type: string
-      Name:
-        type: string
-      Password:
-        type: string
-      PasswordSalt:
-        type: string
-      ReferralPath:
-        type: string
-      ReferredUsers:
-        format: int32
-        type: integer
-      ReferrerKey:
-        type: string
-      Settings:
-        $ref: '#/definitions/UserSettings'
-      SubscriptionPlan:
-        $ref: '#/definitions/SubscriptionPlan'
-      Type:
-        enum:
-          - Anonymous
-          - Customer
-          - SystemAdministrator
-          - Collaborator
-        type: string
-      Username:
-        type: string
-      VerifiedOn:
-        format: date-time
-        type: string
-      YearsOfExperience:
-        enum:
-          - One
-          - OneToThree
-          - ThreeToFive
-          - SixPlus
-        type: string
-    type: object
-  UserSettings:
-    properties:
-      AccountantEmail:
-        type: string
-      Address:
-        type: string
-      ApiKey:
-        type: string
-      ApiSecret:
-        type: string
-      BackgroundImage:
-        type: string
-      Bank:
-        type: string
-      BankAccount:
-        type: string
-      Country:
-        $ref: '#/definitions/Country'
-      CountryId:
-        format: int32
-        type: integer
-      Currency:
-        $ref: '#/definitions/Currency'
-      CurrencyId:
-        format: int32
-        type: integer
-      CurrencySymbol:
-        type: string
-      EnableRecurringInvoicing:
-        type: boolean
-      HasInvoiceLogo:
-        type: boolean
-      Iban:
-        type: string
-      Id:
-        format: int32
-        type: integer
-      PhoneNumber:
-        type: string
-      Profession:
-        enum:
-          - Other
-          - DesignAndCreative
-          - SoftwareDevelopment
-          - ContentWritingAndMarketing
-          - Freelancers
-          - Consultants
-          - Smes
-          - Enterprise
-        type: string
-      ReceiveSmsNotifications:
-        type: boolean
-      ReferralProgram:
-        enum:
-          - Enabled
-          - Disabled
-        type: string
-      SubscribeToProductEmails:
-        type: boolean
-      Swift:
-        type: string
-      Terms:
-        type: string
-      UserId:
-        format: int32
-        type: integer
-      VatNumber:
-        type: string
-      YearsOfExperience:
-        format: int32
-        type: integer
-    type: object
-  WorkType:
-    properties:
-      Id:
-        format: int32
-        type: integer
       Title:
+        description: 'Indicates the title of of the work type (Logo design, development...)'
         type: string
-      UserId:
-        format: int32
-        type: integer
     type: object
-  WorkTypeDeleteModel:
+  WorkTypeDeleteApiModel:
     properties:
       Id:
         description: Id of work type to be deleted
         format: int32
         type: integer
+    type: object
+  WorkTypeDetailsApiModel:
+    properties:
+      CreatedOn:
+        description: Date of creation
+        format: date-time
+        type: string
+      Id:
+        description: Entity id
+        format: int32
+        type: integer
+      Title:
+        description: 'Indicates the title of of the work type (Logo design, development...)'
+        type: string
+    type: object
+  WorkTypeUpdateApiModel:
+    properties:
+      Id:
+        description: Entity id
+        format: int32
+        type: integer
+      Title:
+        description: 'Indicates the title of of the work type (Logo design, development...)'
+        type: string
     type: object

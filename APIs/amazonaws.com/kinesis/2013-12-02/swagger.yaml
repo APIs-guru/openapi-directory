@@ -102,7 +102,7 @@ paths:
   /:
     post:
       operationId: AddTagsToStream
-      description: '<p>Adds or updates tags for the specified Kinesis data stream. Each stream can have up to 10 tags.</p> <p>If tags have already been assigned to the stream, <code>AddTagsToStream</code> overwrites any existing tags that correspond to the specified tag keys.</p> <p> <a>AddTagsToStream</a> has a limit of five transactions per second per account.</p>'
+      description: '<p>Adds or updates tags for the specified Kinesis data stream. Each time you invoke this operation, you can specify up to 10 tags. If you want to add more than 10 tags to your stream, you can invoke this operation multiple times. In total, each stream can have up to 50 tags.</p> <p>If tags have already been assigned to the stream, <code>AddTagsToStream</code> overwrites any existing tags that correspond to the specified tag keys.</p> <p> <a>AddTagsToStream</a> has a limit of five transactions per second per account.</p>'
       responses:
         '200':
           description: Success
@@ -227,12 +227,51 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/DeleteStreamInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeregisterStreamConsumer':
+    post:
+      operationId: DeregisterStreamConsumer
+      description: '<p>To deregister a consumer, provide its ARN. Alternatively, you can provide the ARN of the data stream and the name you gave the consumer when you registered it. You may also provide all three parameters, as long as they don''t conflict with each other. If you don''t know the name or ARN of the consumer that you want to deregister, you can use the <a>ListStreamConsumers</a> operation to get a list of the descriptions of all the consumers that are currently registered with a given data stream. The description of a consumer contains its name and ARN.</p> <p>This operation has a limit of five transactions per second per account.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeregisterStreamConsumerInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -321,6 +360,43 @@ paths:
             - expected: ResourceNotFoundException
               matcher: error
               state: success
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeStreamConsumer':
+    post:
+      operationId: DescribeStreamConsumer
+      description: '<p>To get the description of a registered consumer, provide the ARN of the consumer. Alternatively, you can provide the ARN of the data stream and the name you gave the consumer when you registered it. You may also provide all three parameters, as long as they don''t conflict with each other. If you don''t know the name or ARN of the consumer that you want to describe, you can use the <a>ListStreamConsumers</a> operation to get a list of the descriptions of all the consumers that are currently registered with a given data stream.</p> <p>This operation has a limit of 20 transactions per second per account.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeStreamConsumerOutput'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeStreamConsumerInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -449,7 +525,7 @@ paths:
   '/#GetRecords':
     post:
       operationId: GetRecords
-      description: '<p>Gets data records from a Kinesis data stream''s shard.</p> <p>Specify a shard iterator using the <code>ShardIterator</code> parameter. The shard iterator specifies the position in the shard from which you want to start reading data records sequentially. If there are no records available in the portion of the shard that the iterator points to, <a>GetRecords</a> returns an empty list. It might take multiple calls to get to a portion of the shard that contains records.</p> <p>You can scale by provisioning multiple shards per stream while considering service limits (for more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Amazon Kinesis Data Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>). Your application should have one thread per shard, each reading continuously from its stream. To read from a stream continually, call <a>GetRecords</a> in a loop. Use <a>GetShardIterator</a> to get the shard iterator to specify in the first <a>GetRecords</a> call. <a>GetRecords</a> returns a new shard iterator in <code>NextShardIterator</code>. Specify the shard iterator returned in <code>NextShardIterator</code> in subsequent calls to <a>GetRecords</a>. If the shard has been closed, the shard iterator can''t return more data and <a>GetRecords</a> returns <code>null</code> in <code>NextShardIterator</code>. You can terminate the loop when the shard is closed, or when the shard iterator reaches the record with the sequence number or other attribute that marks it as the last record to process.</p> <p>Each data record can be up to 1 MB in size, and each shard can read up to 2 MB per second. You can ensure that your calls don''t exceed the maximum supported size or throughput by using the <code>Limit</code> parameter to specify the maximum number of records that <a>GetRecords</a> can return. Consider your average record size when determining this limit.</p> <p>The size of the data returned by <a>GetRecords</a> varies depending on the utilization of the shard. The maximum size of data that <a>GetRecords</a> can return is 10 MB. If a call returns this amount of data, subsequent calls made within the next five seconds throw <code>ProvisionedThroughputExceededException</code>. If there is insufficient provisioned throughput on the stream, subsequent calls made within the next one second throw <code>ProvisionedThroughputExceededException</code>. <a>GetRecords</a> won''t return any data when it throws an exception. For this reason, we recommend that you wait one second between calls to <a>GetRecords</a>; however, it''s possible that the application will get exceptions for longer than 1 second.</p> <p>To detect whether the application is falling behind in processing, you can use the <code>MillisBehindLatest</code> response attribute. You can also monitor the stream using CloudWatch metrics and other mechanisms (see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html">Monitoring</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>).</p> <p>Each Amazon Kinesis record includes a value, <code>ApproximateArrivalTimestamp</code>, that is set when a stream successfully receives and stores a record. This is commonly referred to as a server-side time stamp, whereas a client-side time stamp is set when a data producer creates or sends the record to a stream (a data producer is any data source putting data records into a stream, for example with <a>PutRecords</a>). The time stamp has millisecond precision. There are no guarantees about the time stamp accuracy, or that the time stamp is always increasing. For example, records in a shard or across a stream might have time stamps that are out of order.</p>'
+      description: '<p>Gets data records from a Kinesis data stream''s shard.</p> <p>Specify a shard iterator using the <code>ShardIterator</code> parameter. The shard iterator specifies the position in the shard from which you want to start reading data records sequentially. If there are no records available in the portion of the shard that the iterator points to, <a>GetRecords</a> returns an empty list. It might take multiple calls to get to a portion of the shard that contains records.</p> <p>You can scale by provisioning multiple shards per stream while considering service limits (for more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Amazon Kinesis Data Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>). Your application should have one thread per shard, each reading continuously from its stream. To read from a stream continually, call <a>GetRecords</a> in a loop. Use <a>GetShardIterator</a> to get the shard iterator to specify in the first <a>GetRecords</a> call. <a>GetRecords</a> returns a new shard iterator in <code>NextShardIterator</code>. Specify the shard iterator returned in <code>NextShardIterator</code> in subsequent calls to <a>GetRecords</a>. If the shard has been closed, the shard iterator can''t return more data and <a>GetRecords</a> returns <code>null</code> in <code>NextShardIterator</code>. You can terminate the loop when the shard is closed, or when the shard iterator reaches the record with the sequence number or other attribute that marks it as the last record to process.</p> <p>Each data record can be up to 1 MiB in size, and each shard can read up to 2 MiB per second. You can ensure that your calls don''t exceed the maximum supported size or throughput by using the <code>Limit</code> parameter to specify the maximum number of records that <a>GetRecords</a> can return. Consider your average record size when determining this limit. The maximum number of records that can be returned per call is 10,000.</p> <p>The size of the data returned by <a>GetRecords</a> varies depending on the utilization of the shard. The maximum size of data that <a>GetRecords</a> can return is 10 MiB. If a call returns this amount of data, subsequent calls made within the next 5 seconds throw <code>ProvisionedThroughputExceededException</code>. If there is insufficient provisioned throughput on the stream, subsequent calls made within the next 1 second throw <code>ProvisionedThroughputExceededException</code>. <a>GetRecords</a> doesn''t return any data when it throws an exception. For this reason, we recommend that you wait 1 second between calls to <a>GetRecords</a>. However, it''s possible that the application will get exceptions for longer than 1 second.</p> <p>To detect whether the application is falling behind in processing, you can use the <code>MillisBehindLatest</code> response attribute. You can also monitor the stream using CloudWatch metrics and other mechanisms (see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html">Monitoring</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>).</p> <p>Each Amazon Kinesis record includes a value, <code>ApproximateArrivalTimestamp</code>, that is set when a stream successfully receives and stores a record. This is commonly referred to as a server-side time stamp, whereas a client-side time stamp is set when a data producer creates or sends the record to a stream (a data producer is any data source putting data records into a stream, for example with <a>PutRecords</a>). The time stamp has millisecond precision. There are no guarantees about the time stamp accuracy, or that the time stamp is always increasing. For example, records in a shard or across a stream might have time stamps that are out of order.</p> <p>This operation has a limit of five transactions per second per account.</p>'
       responses:
         '200':
           description: Success
@@ -514,7 +590,7 @@ paths:
   '/#GetShardIterator':
     post:
       operationId: GetShardIterator
-      description: '<p>Gets an Amazon Kinesis shard iterator. A shard iterator expires five minutes after it is returned to the requester.</p> <p>A shard iterator specifies the shard position from which to start reading data records sequentially. The position is specified using the sequence number of a data record in a shard. A sequence number is the identifier associated with every record ingested in the stream, and is assigned when a record is put into the stream. Each stream has one or more shards.</p> <p>You must specify the shard iterator type. For example, you can set the <code>ShardIteratorType</code> parameter to read exactly from the position denoted by a specific sequence number by using the <code>AT_SEQUENCE_NUMBER</code> shard iterator type. Alternatively, the parameter can read right after the sequence number by using the <code>AFTER_SEQUENCE_NUMBER</code> shard iterator type, using sequence numbers returned by earlier calls to <a>PutRecord</a>, <a>PutRecords</a>, <a>GetRecords</a>, or <a>DescribeStream</a>. In the request, you can specify the shard iterator type <code>AT_TIMESTAMP</code> to read records from an arbitrary point in time, <code>TRIM_HORIZON</code> to cause <code>ShardIterator</code> to point to the last untrimmed record in the shard in the system (the oldest data record in the shard), or <code>LATEST</code> so that you always read the most recent data in the shard. </p> <p>When you read repeatedly from a stream, use a <a>GetShardIterator</a> request to get the first shard iterator for use in your first <a>GetRecords</a> request and for subsequent reads use the shard iterator returned by the <a>GetRecords</a> request in <code>NextShardIterator</code>. A new shard iterator is returned by every <a>GetRecords</a> request in <code>NextShardIterator</code>, which you use in the <code>ShardIterator</code> parameter of the next <a>GetRecords</a> request. </p> <p>If a <a>GetShardIterator</a> request is made too often, you receive a <code>ProvisionedThroughputExceededException</code>. For more information about throughput limits, see <a>GetRecords</a>, and <a href="http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p> <p>If the shard is closed, <a>GetShardIterator</a> returns a valid iterator for the last sequence number of the shard. A shard can be closed as a result of using <a>SplitShard</a> or <a>MergeShards</a>.</p> <p> <a>GetShardIterator</a> has a limit of five transactions per second per account per open shard.</p>'
+      description: '<p>Gets an Amazon Kinesis shard iterator. A shard iterator expires 5 minutes after it is returned to the requester.</p> <p>A shard iterator specifies the shard position from which to start reading data records sequentially. The position is specified using the sequence number of a data record in a shard. A sequence number is the identifier associated with every record ingested in the stream, and is assigned when a record is put into the stream. Each stream has one or more shards.</p> <p>You must specify the shard iterator type. For example, you can set the <code>ShardIteratorType</code> parameter to read exactly from the position denoted by a specific sequence number by using the <code>AT_SEQUENCE_NUMBER</code> shard iterator type. Alternatively, the parameter can read right after the sequence number by using the <code>AFTER_SEQUENCE_NUMBER</code> shard iterator type, using sequence numbers returned by earlier calls to <a>PutRecord</a>, <a>PutRecords</a>, <a>GetRecords</a>, or <a>DescribeStream</a>. In the request, you can specify the shard iterator type <code>AT_TIMESTAMP</code> to read records from an arbitrary point in time, <code>TRIM_HORIZON</code> to cause <code>ShardIterator</code> to point to the last untrimmed record in the shard in the system (the oldest data record in the shard), or <code>LATEST</code> so that you always read the most recent data in the shard. </p> <p>When you read repeatedly from a stream, use a <a>GetShardIterator</a> request to get the first shard iterator for use in your first <a>GetRecords</a> request and for subsequent reads use the shard iterator returned by the <a>GetRecords</a> request in <code>NextShardIterator</code>. A new shard iterator is returned by every <a>GetRecords</a> request in <code>NextShardIterator</code>, which you use in the <code>ShardIterator</code> parameter of the next <a>GetRecords</a> request. </p> <p>If a <a>GetShardIterator</a> request is made too often, you receive a <code>ProvisionedThroughputExceededException</code>. For more information about throughput limits, see <a>GetRecords</a>, and <a href="http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p> <p>If the shard is closed, <a>GetShardIterator</a> returns a valid iterator for the last sequence number of the shard. A shard can be closed as a result of using <a>SplitShard</a> or <a>MergeShards</a>.</p> <p> <a>GetShardIterator</a> has a limit of five transactions per second per account per open shard.</p>'
       responses:
         '200':
           description: Success
@@ -590,7 +666,7 @@ paths:
   '/#ListShards':
     post:
       operationId: ListShards
-      description: '<p>Lists the shards in a stream and provides information about each shard.</p> <important> <p>This API is a new operation that is used by the Amazon Kinesis Client Library (KCL). If you have a fine-grained IAM policy that only allows specific operations, you must update your policy to allow calls to this API. For more information, see <a href="https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html">Controlling Access to Amazon Kinesis Data Streams Resources Using IAM</a>.</p> </important>'
+      description: '<p>Lists the shards in a stream and provides information about each shard. This operation has a limit of 100 transactions per second per data stream.</p> <important> <p>This API is a new operation that is used by the Amazon Kinesis Client Library (KCL). If you have a fine-grained IAM policy that only allows specific operations, you must update your policy to allow calls to this API. For more information, see <a href="https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html">Controlling Access to Amazon Kinesis Data Streams Resources Using IAM</a>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -622,6 +698,61 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListShardsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListStreamConsumers':
+    post:
+      operationId: ListStreamConsumers
+      description: '<p>Lists the consumers registered to receive data from a stream using enhanced fan-out, and provides information about each consumer.</p> <p>This operation has a limit of 10 transactions per second per account.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListStreamConsumersOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ExpiredNextTokenException
+          schema:
+            $ref: '#/definitions/ExpiredNextTokenException'
+        '484':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListStreamConsumersInput'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -869,6 +1000,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RegisterStreamConsumer':
+    post:
+      operationId: RegisterStreamConsumer
+      description: '<p>Registers a consumer with a Kinesis data stream. When you use this operation, the consumer you register can read data from the stream at a rate of up to 2 MiB per second. This rate is unaffected by the total number of consumers that read from the same stream.</p> <p>You can register up to 5 consumers per stream. A given consumer can only be registered with one stream.</p> <p>This operation has a limit of five transactions per second per account.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterStreamConsumerOutput'
+        '480':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterStreamConsumerInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#RemoveTagsFromStream':
     post:
       operationId: RemoveTagsFromStream
@@ -911,7 +1083,7 @@ paths:
   '/#SplitShard':
     post:
       operationId: SplitShard
-      description: '<p>Splits a shard into two new shards in the Kinesis data stream, to increase the stream''s capacity to ingest and transport data. <code>SplitShard</code> is called when there is a need to increase the overall capacity of a stream because of an expected increase in the volume of data records being ingested. </p> <p>You can also use <code>SplitShard</code> when a shard appears to be approaching its maximum utilization; for example, the producers sending data into the specific shard are suddenly sending more than previously anticipated. You can also call <code>SplitShard</code> to increase stream capacity, so that more Kinesis Data Streams applications can simultaneously read data from the stream for real-time processing. </p> <p>You must specify the shard to be split and the new hash key, which is the position in the shard where the shard gets split in two. In many cases, the new hash key might be the average of the beginning and ending hash key, but it can be any hash key value in the range being mapped into the shard. For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-split.html">Split a Shard</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p> <p>You can use <a>DescribeStream</a> to determine the shard ID and hash key values for the <code>ShardToSplit</code> and <code>NewStartingHashKey</code> parameters that are specified in the <code>SplitShard</code> request.</p> <p> <code>SplitShard</code> is an asynchronous operation. Upon receiving a <code>SplitShard</code> request, Kinesis Data Streams immediately returns a response and sets the stream status to <code>UPDATING</code>. After the operation is completed, Kinesis Data Streams sets the stream status to <code>ACTIVE</code>. Read and write operations continue to work while the stream is in the <code>UPDATING</code> state. </p> <p>You can use <code>DescribeStream</code> to check the status of the stream, which is returned in <code>StreamStatus</code>. If the stream is in the <code>ACTIVE</code> state, you can call <code>SplitShard</code>. If a stream is in <code>CREATING</code> or <code>UPDATING</code> or <code>DELETING</code> states, <code>DescribeStream</code> returns a <code>ResourceInUseException</code>.</p> <p>If the specified stream does not exist, <code>DescribeStream</code> returns a <code>ResourceNotFoundException</code>. If you try to create more shards than are authorized for your account, you receive a <code>LimitExceededException</code>. </p> <p>For the default shard limit for an AWS account, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>. To increase this limit, <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">contact AWS Support</a>.</p> <p>If you try to operate on too many streams simultaneously using <a>CreateStream</a>, <a>DeleteStream</a>, <a>MergeShards</a>, and/or <a>SplitShard</a>, you receive a <code>LimitExceededException</code>. </p> <p> <code>SplitShard</code> has a limit of five transactions per second per account.</p>'
+      description: '<p>Splits a shard into two new shards in the Kinesis data stream, to increase the stream''s capacity to ingest and transport data. <code>SplitShard</code> is called when there is a need to increase the overall capacity of a stream because of an expected increase in the volume of data records being ingested. </p> <p>You can also use <code>SplitShard</code> when a shard appears to be approaching its maximum utilization; for example, the producers sending data into the specific shard are suddenly sending more than previously anticipated. You can also call <code>SplitShard</code> to increase stream capacity, so that more Kinesis Data Streams applications can simultaneously read data from the stream for real-time processing. </p> <p>You must specify the shard to be split and the new hash key, which is the position in the shard where the shard gets split in two. In many cases, the new hash key might be the average of the beginning and ending hash key, but it can be any hash key value in the range being mapped into the shard. For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-split.html">Split a Shard</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p> <p>You can use <a>DescribeStream</a> to determine the shard ID and hash key values for the <code>ShardToSplit</code> and <code>NewStartingHashKey</code> parameters that are specified in the <code>SplitShard</code> request.</p> <p> <code>SplitShard</code> is an asynchronous operation. Upon receiving a <code>SplitShard</code> request, Kinesis Data Streams immediately returns a response and sets the stream status to <code>UPDATING</code>. After the operation is completed, Kinesis Data Streams sets the stream status to <code>ACTIVE</code>. Read and write operations continue to work while the stream is in the <code>UPDATING</code> state. </p> <p>You can use <code>DescribeStream</code> to check the status of the stream, which is returned in <code>StreamStatus</code>. If the stream is in the <code>ACTIVE</code> state, you can call <code>SplitShard</code>. If a stream is in <code>CREATING</code> or <code>UPDATING</code> or <code>DELETING</code> states, <code>DescribeStream</code> returns a <code>ResourceInUseException</code>.</p> <p>If the specified stream does not exist, <code>DescribeStream</code> returns a <code>ResourceNotFoundException</code>. If you try to create more shards than are authorized for your account, you receive a <code>LimitExceededException</code>. </p> <p>For the default shard limit for an AWS account, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Kinesis Data Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>. To increase this limit, <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">contact AWS Support</a>.</p> <p>If you try to operate on too many streams simultaneously using <a>CreateStream</a>, <a>DeleteStream</a>, <a>MergeShards</a>, and/or <a>SplitShard</a>, you receive a <code>LimitExceededException</code>. </p> <p> <code>SplitShard</code> has a limit of five transactions per second per account.</p>'
       responses:
         '200':
           description: Success
@@ -950,7 +1122,7 @@ paths:
   '/#StartStreamEncryption':
     post:
       operationId: StartStreamEncryption
-      description: '<p>Enables or updates server-side encryption using an AWS KMS key for a specified stream. </p> <p>Starting encryption is an asynchronous operation. Upon receiving the request, Kinesis Data Streams returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Kinesis Data Streams sets the status of the stream back to <code>ACTIVE</code>. Updating or applying encryption normally takes a few seconds to complete, but it can take minutes. You can continue to read and write data to your stream while its status is <code>UPDATING</code>. Once the status of the stream is <code>ACTIVE</code>, encryption begins for records written to the stream. </p> <p>API Limits: You can successfully apply a new AWS KMS key for server-side encryption 25 times in a rolling 24-hour period.</p> <p>Note: It can take up to five seconds after the stream is in an <code>ACTIVE</code> status before all records written to the stream are encrypted. After you enable encryption, you can verify that encryption is applied by inspecting the API response from <code>PutRecord</code> or <code>PutRecords</code>.</p>'
+      description: '<p>Enables or updates server-side encryption using an AWS KMS key for a specified stream. </p> <p>Starting encryption is an asynchronous operation. Upon receiving the request, Kinesis Data Streams returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Kinesis Data Streams sets the status of the stream back to <code>ACTIVE</code>. Updating or applying encryption normally takes a few seconds to complete, but it can take minutes. You can continue to read and write data to your stream while its status is <code>UPDATING</code>. Once the status of the stream is <code>ACTIVE</code>, encryption begins for records written to the stream. </p> <p>API Limits: You can successfully apply a new AWS KMS key for server-side encryption 25 times in a rolling 24-hour period.</p> <p>Note: It can take up to 5 seconds after the stream is in an <code>ACTIVE</code> status before all records written to the stream are encrypted. After you enable encryption, you can verify that encryption is applied by inspecting the API response from <code>PutRecord</code> or <code>PutRecords</code>.</p>'
       responses:
         '200':
           description: Success
@@ -1013,7 +1185,7 @@ paths:
   '/#StopStreamEncryption':
     post:
       operationId: StopStreamEncryption
-      description: '<p>Disables server-side encryption for a specified stream. </p> <p>Stopping encryption is an asynchronous operation. Upon receiving the request, Kinesis Data Streams returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Kinesis Data Streams sets the status of the stream back to <code>ACTIVE</code>. Stopping encryption normally takes a few seconds to complete, but it can take minutes. You can continue to read and write data to your stream while its status is <code>UPDATING</code>. Once the status of the stream is <code>ACTIVE</code>, records written to the stream are no longer encrypted by Kinesis Data Streams. </p> <p>API Limits: You can successfully disable server-side encryption 25 times in a rolling 24-hour period. </p> <p>Note: It can take up to five seconds after the stream is in an <code>ACTIVE</code> status before all records written to the stream are no longer subject to encryption. After you disabled encryption, you can verify that encryption is not applied by inspecting the API response from <code>PutRecord</code> or <code>PutRecords</code>.</p>'
+      description: '<p>Disables server-side encryption for a specified stream. </p> <p>Stopping encryption is an asynchronous operation. Upon receiving the request, Kinesis Data Streams returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Kinesis Data Streams sets the status of the stream back to <code>ACTIVE</code>. Stopping encryption normally takes a few seconds to complete, but it can take minutes. You can continue to read and write data to your stream while its status is <code>UPDATING</code>. Once the status of the stream is <code>ACTIVE</code>, records written to the stream are no longer encrypted by Kinesis Data Streams. </p> <p>API Limits: You can successfully disable server-side encryption 25 times in a rolling 24-hour period. </p> <p>Note: It can take up to 5 seconds after the stream is in an <code>ACTIVE</code> status before all records written to the stream are no longer subject to encryption. After you disabled encryption, you can verify that encryption is not applied by inspecting the API response from <code>PutRecord</code> or <code>PutRecords</code>.</p>'
       responses:
         '200':
           description: Success
@@ -1052,7 +1224,7 @@ paths:
   '/#UpdateShardCount':
     post:
       operationId: UpdateShardCount
-      description: '<p>Updates the shard count of the specified stream to the specified number of shards.</p> <p>Updating the shard count is an asynchronous operation. Upon receiving the request, Kinesis Data Streams returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Kinesis Data Streams sets the status of the stream back to <code>ACTIVE</code>. Depending on the size of the stream, the scaling action could take a few minutes to complete. You can continue to read and write data to your stream while its status is <code>UPDATING</code>.</p> <p>To update the shard count, Kinesis Data Streams performs splits or merges on individual shards. This can cause short-lived shards to be created, in addition to the final shards. We recommend that you double or halve the shard count, as this results in the fewest number of splits or merges.</p> <p>This operation has the following limits. You cannot do the following:</p> <ul> <li> <p>Scale more than twice per rolling 24-hour period per stream</p> </li> <li> <p>Scale up to more than double your current shard count for a stream</p> </li> <li> <p>Scale down below half your current shard count for a stream</p> </li> <li> <p>Scale up to more than 500 shards in a stream</p> </li> <li> <p>Scale a stream with more than 500 shards down unless the result is less than 500 shards</p> </li> <li> <p>Scale up to more than the shard limit for your account</p> </li> </ul> <p>For the default limits for an AWS account, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>. To request an increase in the call rate limit, the shard limit for this API, or your overall shard limit, use the <a href="https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase&amp;limitType=service-code-kinesis">limits form</a>.</p>'
+      description: '<p>Updates the shard count of the specified stream to the specified number of shards.</p> <p>Updating the shard count is an asynchronous operation. Upon receiving the request, Kinesis Data Streams returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Kinesis Data Streams sets the status of the stream back to <code>ACTIVE</code>. Depending on the size of the stream, the scaling action could take a few minutes to complete. You can continue to read and write data to your stream while its status is <code>UPDATING</code>.</p> <p>To update the shard count, Kinesis Data Streams performs splits or merges on individual shards. This can cause short-lived shards to be created, in addition to the final shards. We recommend that you double or halve the shard count, as this results in the fewest number of splits or merges.</p> <p>This operation has the following default limits. By default, you cannot do the following:</p> <ul> <li> <p>Scale more than twice per rolling 24-hour period per stream</p> </li> <li> <p>Scale up to more than double your current shard count for a stream</p> </li> <li> <p>Scale down below half your current shard count for a stream</p> </li> <li> <p>Scale up to more than 500 shards in a stream</p> </li> <li> <p>Scale a stream with more than 500 shards down unless the result is less than 500 shards</p> </li> <li> <p>Scale up to more than the shard limit for your account</p> </li> </ul> <p>For the default limits for an AWS account, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>. To request an increase in the call rate limit, the shard limit for this API, or your overall shard limit, use the <a href="https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase&amp;limitType=service-code-kinesis">limits form</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1102,10 +1274,36 @@ definitions:
         description: The name of the stream.
       Tags:
         $ref: '#/definitions/TagMap'
-        description: The set of key-value pairs to use to create the tags.
+        description: A set of up to 10 key-value pairs to use to create the tags.
     description: Represents the input for <code>AddTagsToStream</code>.
-  BooleanObject:
-    type: boolean
+  ResourceNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: A message that provides information about the error.
+    description: The requested resource could not be found. The stream might not be specified correctly.
+  ResourceInUseException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: A message that provides information about the error.
+    description: 'The resource is not available for this operation. For successful operation, the resource must be in the <code>ACTIVE</code> state.'
+  InvalidArgumentException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: A message that provides information about the error.
+    description: 'A specified parameter exceeds its restrictions, is not supported, or can''t be used. For more information, see the returned message.'
+  LimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: A message that provides information about the error.
+    description: 'The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. '
   CreateStreamInput:
     type: object
     required:
@@ -1119,10 +1317,6 @@ definitions:
         $ref: '#/definitions/PositiveIntegerObject'
         description: <p>The number of shards that the stream will use. The throughput of the stream is a function of the number of shards; more shards are required for greater provisioned throughput.</p> <p>DefaultShardLimit;</p>
     description: Represents the input for <code>CreateStream</code>.
-  Data:
-    type: string
-    minLength: 0
-    maxLength: 1048576
   DecreaseStreamRetentionPeriodInput:
     type: object
     required:
@@ -1144,10 +1338,22 @@ definitions:
       StreamName:
         $ref: '#/definitions/StreamName'
         description: The name of the stream to delete.
+      EnforceConsumerDeletion:
+        $ref: '#/definitions/BooleanObject'
+        description: 'If this parameter is unset (<code>null</code>) or if you set it to <code>false</code>, and the stream has registered consumers, the call to <code>DeleteStream</code> fails with a <code>ResourceInUseException</code>. '
     description: Represents the input for <a>DeleteStream</a>.
-  DescribeLimitsInput:
+  DeregisterStreamConsumerInput:
     type: object
-    properties: {}
+    properties:
+      StreamARN:
+        $ref: '#/definitions/StreamARN'
+        description: 'The ARN of the Kinesis data stream that the consumer is registered with. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.'
+      ConsumerName:
+        $ref: '#/definitions/ConsumerName'
+        description: The name that you gave to the consumer.
+      ConsumerARN:
+        $ref: '#/definitions/ConsumerARN'
+        description: 'The ARN returned by Kinesis Data Streams when you registered the consumer. If you don''t know the ARN of the consumer that you want to deregister, you can use the ListStreamConsumers operation to get a list of the descriptions of all the consumers that are currently registered with a given data stream. The description of a consumer contains its ARN.'
   DescribeLimitsOutput:
     type: object
     required:
@@ -1160,6 +1366,18 @@ definitions:
       OpenShardCount:
         $ref: '#/definitions/ShardCountObject'
         description: The number of open shards.
+  DescribeLimitsInput:
+    type: object
+    properties: {}
+  DescribeStreamOutput:
+    type: object
+    required:
+      - StreamDescription
+    properties:
+      StreamDescription:
+        $ref: '#/definitions/StreamDescription'
+        description: 'The current status of the stream, the stream Amazon Resource Name (ARN), an array of shard objects that comprise the stream, and whether there are more shards available.'
+    description: Represents the output for <code>DescribeStream</code>.
   DescribeStreamInput:
     type: object
     required:
@@ -1175,27 +1393,26 @@ definitions:
         $ref: '#/definitions/ShardId'
         description: The shard ID of the shard to start with.
     description: Represents the input for <code>DescribeStream</code>.
-  DescribeStreamInputLimit:
-    type: integer
-    minimum: 1
-    maximum: 10000
-  DescribeStreamOutput:
+  DescribeStreamConsumerOutput:
     type: object
     required:
-      - StreamDescription
+      - ConsumerDescription
     properties:
-      StreamDescription:
-        $ref: '#/definitions/StreamDescription'
-        description: 'The current status of the stream, the stream Amazon Resource Name (ARN), an array of shard objects that comprise the stream, and whether there are more shards available.'
-    description: Represents the output for <code>DescribeStream</code>.
-  DescribeStreamSummaryInput:
+      ConsumerDescription:
+        $ref: '#/definitions/ConsumerDescription'
+        description: An object that represents the details of the consumer.
+  DescribeStreamConsumerInput:
     type: object
-    required:
-      - StreamName
     properties:
-      StreamName:
-        $ref: '#/definitions/StreamName'
-        description: The name of the stream to describe.
+      StreamARN:
+        $ref: '#/definitions/StreamARN'
+        description: 'The ARN of the Kinesis data stream that the consumer is registered with. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.'
+      ConsumerName:
+        $ref: '#/definitions/ConsumerName'
+        description: The name that you gave to the consumer.
+      ConsumerARN:
+        $ref: '#/definitions/ConsumerARN'
+        description: The ARN returned by Kinesis Data Streams when you registered the consumer.
   DescribeStreamSummaryOutput:
     type: object
     required:
@@ -1204,6 +1421,27 @@ definitions:
       StreamDescriptionSummary:
         $ref: '#/definitions/StreamDescriptionSummary'
         description: A <a>StreamDescriptionSummary</a> containing information about the stream.
+  DescribeStreamSummaryInput:
+    type: object
+    required:
+      - StreamName
+    properties:
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the stream to describe.
+  EnhancedMonitoringOutput:
+    type: object
+    properties:
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the Kinesis data stream.
+      CurrentShardLevelMetrics:
+        $ref: '#/definitions/MetricsNameList'
+        description: Represents the current state of the metrics that are in the enhanced state before the operation.
+      DesiredShardLevelMetrics:
+        $ref: '#/definitions/MetricsNameList'
+        description: Represents the list of all the metrics that would be in the enhanced state after the operation.
+    description: Represents the output for <a>EnableEnhancedMonitoring</a> and <a>DisableEnhancedMonitoring</a>.
   DisableEnhancedMonitoringInput:
     type: object
     required:
@@ -1230,68 +1468,6 @@ definitions:
         $ref: '#/definitions/MetricsNameList'
         description: '<p>List of shard-level metrics to enable.</p> <p>The following are the valid shard-level metrics. The value "<code>ALL</code>" enables every metric.</p> <ul> <li> <p> <code>IncomingBytes</code> </p> </li> <li> <p> <code>IncomingRecords</code> </p> </li> <li> <p> <code>OutgoingBytes</code> </p> </li> <li> <p> <code>OutgoingRecords</code> </p> </li> <li> <p> <code>WriteProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>ReadProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>IteratorAgeMilliseconds</code> </p> </li> <li> <p> <code>ALL</code> </p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html">Monitoring the Amazon Kinesis Data Streams Service with Amazon CloudWatch</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p>'
     description: Represents the input for <a>EnableEnhancedMonitoring</a>.
-  EncryptionType:
-    type: string
-    enum:
-      - NONE
-      - KMS
-  EnhancedMetrics:
-    type: object
-    properties:
-      ShardLevelMetrics:
-        $ref: '#/definitions/MetricsNameList'
-        description: '<p>List of shard-level metrics.</p> <p>The following are the valid shard-level metrics. The value "<code>ALL</code>" enhances every metric.</p> <ul> <li> <p> <code>IncomingBytes</code> </p> </li> <li> <p> <code>IncomingRecords</code> </p> </li> <li> <p> <code>OutgoingBytes</code> </p> </li> <li> <p> <code>OutgoingRecords</code> </p> </li> <li> <p> <code>WriteProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>ReadProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>IteratorAgeMilliseconds</code> </p> </li> <li> <p> <code>ALL</code> </p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html">Monitoring the Amazon Kinesis Data Streams Service with Amazon CloudWatch</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p>'
-    description: Represents enhanced metrics types.
-  EnhancedMonitoringList:
-    type: array
-    items:
-      $ref: '#/definitions/EnhancedMetrics'
-  EnhancedMonitoringOutput:
-    type: object
-    properties:
-      StreamName:
-        $ref: '#/definitions/StreamName'
-        description: The name of the Kinesis data stream.
-      CurrentShardLevelMetrics:
-        $ref: '#/definitions/MetricsNameList'
-        description: Represents the current state of the metrics that are in the enhanced state before the operation.
-      DesiredShardLevelMetrics:
-        $ref: '#/definitions/MetricsNameList'
-        description: Represents the list of all the metrics that would be in the enhanced state after the operation.
-    description: Represents the output for <a>EnableEnhancedMonitoring</a> and <a>DisableEnhancedMonitoring</a>.
-  ErrorCode:
-    type: string
-  ErrorMessage:
-    type: string
-  ExpiredIteratorException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: The provided iterator exceeds the maximum age allowed.
-  ExpiredNextTokenException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The pagination token passed to the <code>ListShards</code> operation is expired. For more information, see <a>ListShardsInput$NextToken</a>.'
-  GetRecordsInput:
-    type: object
-    required:
-      - ShardIterator
-    properties:
-      ShardIterator:
-        $ref: '#/definitions/ShardIterator'
-        description: The position in the shard from which you want to start sequentially reading data records. A shard iterator specifies this position using the sequence number of a data record in the shard.
-      Limit:
-        $ref: '#/definitions/GetRecordsInputLimit'
-        description: 'The maximum number of records to return. Specify a value of up to 10,000. If you specify a value that is greater than 10,000, <a>GetRecords</a> throws <code>InvalidArgumentException</code>.'
-    description: Represents the input for <a>GetRecords</a>.
-  GetRecordsInputLimit:
-    type: integer
-    minimum: 1
-    maximum: 10000
   GetRecordsOutput:
     type: object
     required:
@@ -1307,6 +1483,81 @@ definitions:
         $ref: '#/definitions/MillisBehindLatest'
         description: 'The number of milliseconds the <a>GetRecords</a> response is from the tip of the stream, indicating how far behind current time the consumer is. A value of zero indicates that record processing is caught up, and there are no new records to process at this moment.'
     description: Represents the output for <a>GetRecords</a>.
+  GetRecordsInput:
+    type: object
+    required:
+      - ShardIterator
+    properties:
+      ShardIterator:
+        $ref: '#/definitions/ShardIterator'
+        description: The position in the shard from which you want to start sequentially reading data records. A shard iterator specifies this position using the sequence number of a data record in the shard.
+      Limit:
+        $ref: '#/definitions/GetRecordsInputLimit'
+        description: 'The maximum number of records to return. Specify a value of up to 10,000. If you specify a value that is greater than 10,000, <a>GetRecords</a> throws <code>InvalidArgumentException</code>.'
+    description: Represents the input for <a>GetRecords</a>.
+  ProvisionedThroughputExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: A message that provides information about the error.
+    description: 'The request rate for the stream is too high, or the requested data is too large for the available throughput. Reduce the frequency or size of your requests. For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>, and <a href="http://docs.aws.amazon.com/general/latest/gr/api-retries.html">Error Retries and Exponential Backoff in AWS</a> in the <i>AWS General Reference</i>.'
+  ExpiredIteratorException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: A message that provides information about the error.
+    description: The provided iterator exceeds the maximum age allowed.
+  KMSDisabledException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: A message that provides information about the error.
+    description: The request was rejected because the specified customer master key (CMK) isn't enabled.
+  KMSInvalidStateException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: A message that provides information about the error.
+    description: 'The request was rejected because the state of the specified resource isn''t valid for this request. For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">How Key State Affects Use of a Customer Master Key</a> in the <i>AWS Key Management Service Developer Guide</i>.'
+  KMSAccessDeniedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: A message that provides information about the error.
+    description: The ciphertext references a key that doesn't exist or that you don't have access to.
+  KMSNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: A message that provides information about the error.
+    description: The request was rejected because the specified entity or resource can't be found.
+  KMSOptInRequired:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: A message that provides information about the error.
+    description: The AWS access key ID needs a subscription for the service.
+  KMSThrottlingException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: A message that provides information about the error.
+    description: 'The request was denied due to request throttling. For more information about throttling, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second">Limits</a> in the <i>AWS Key Management Service Developer Guide</i>.'
+  GetShardIteratorOutput:
+    type: object
+    properties:
+      ShardIterator:
+        $ref: '#/definitions/ShardIterator'
+        description: The position in the shard from which to start reading data records sequentially. A shard iterator specifies this position using the sequence number of a data record in a shard.
+    description: Represents the output for <code>GetShardIterator</code>.
   GetShardIteratorInput:
     type: object
     required:
@@ -1330,29 +1581,6 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: 'The time stamp of the data record from which to start reading. Used with shard iterator type AT_TIMESTAMP. A time stamp is the Unix epoch date with precision in milliseconds. For example, <code>2016-04-04T19:58:46.480-00:00</code> or <code>1459799926.480</code>. If a record with this exact time stamp does not exist, the iterator returned is for the next (later) record. If the time stamp is older than the current trim horizon, the iterator returned is for the oldest untrimmed data record (TRIM_HORIZON).'
     description: Represents the input for <code>GetShardIterator</code>.
-  GetShardIteratorOutput:
-    type: object
-    properties:
-      ShardIterator:
-        $ref: '#/definitions/ShardIterator'
-        description: The position in the shard from which to start reading data records sequentially. A shard iterator specifies this position using the sequence number of a data record in a shard.
-    description: Represents the output for <code>GetShardIterator</code>.
-  HashKey:
-    type: string
-    pattern: '0|([1-9]\d{0,38})'
-  HashKeyRange:
-    type: object
-    required:
-      - StartingHashKey
-      - EndingHashKey
-    properties:
-      StartingHashKey:
-        $ref: '#/definitions/HashKey'
-        description: The starting hash key of the hash key range.
-      EndingHashKey:
-        $ref: '#/definitions/HashKey'
-        description: The ending hash key of the hash key range.
-    description: 'The range of possible hash key values for the shard, which is a set of ordered contiguous positive integers.'
   IncreaseStreamRetentionPeriodInput:
     type: object
     required:
@@ -1366,66 +1594,15 @@ definitions:
         $ref: '#/definitions/RetentionPeriodHours'
         description: 'The new retention period of the stream, in hours. Must be more than the current retention period.'
     description: Represents the input for <a>IncreaseStreamRetentionPeriod</a>.
-  InvalidArgumentException:
+  ListShardsOutput:
     type: object
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: 'A specified parameter exceeds its restrictions, is not supported, or can''t be used. For more information, see the returned message.'
-  KMSAccessDeniedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: The ciphertext references a key that doesn't exist or that you don't have access to.
-  KMSDisabledException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: The request was rejected because the specified customer master key (CMK) isn't enabled.
-  KMSInvalidStateException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: 'The request was rejected because the state of the specified resource isn''t valid for this request. For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">How Key State Affects Use of a Customer Master Key</a> in the <i>AWS Key Management Service Developer Guide</i>.'
-  KMSNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: The request was rejected because the specified entity or resource can't be found.
-  KMSOptInRequired:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: The AWS access key ID needs a subscription for the service.
-  KMSThrottlingException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: 'The request was denied due to request throttling. For more information about throttling, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second">Limits</a> in the <i>AWS Key Management Service Developer Guide</i>.'
-  KeyId:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  LimitExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: 'The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. '
+      Shards:
+        $ref: '#/definitions/ShardList'
+        description: 'An array of JSON objects. Each object represents one shard and specifies the IDs of the shard, the shard''s parent, and the shard that''s adjacent to the shard''s parent. Each object also contains the starting and ending hash keys and the starting and ending sequence numbers for the shard.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: '<p>When the number of shards in the data stream is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of shards in the data stream, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListShards</code> to list the next set of shards. For more information about the use of this pagination token when calling the <code>ListShards</code> operation, see <a>ListShardsInput$NextToken</a>.</p> <important> <p>Tokens expire after 300 seconds. When you obtain a value for <code>NextToken</code> in the response to a call to <code>ListShards</code>, you have 300 seconds to use that value. If you specify an expired token in a call to <code>ListShards</code>, you get <code>ExpiredNextTokenException</code>.</p> </important>'
   ListShardsInput:
     type: object
     properties:
@@ -1437,40 +1614,45 @@ definitions:
         description: '<p>When the number of shards in the data stream is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of shards in the data stream, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListShards</code> to list the next set of shards.</p> <p>Don''t specify <code>StreamName</code> or <code>StreamCreationTimestamp</code> if you specify <code>NextToken</code> because the latter unambiguously identifies the stream.</p> <p>You can optionally specify a value for the <code>MaxResults</code> parameter when you specify <code>NextToken</code>. If you specify a <code>MaxResults</code> value that is less than the number of shards that the operation returns if you don''t specify <code>MaxResults</code>, the response will contain a new <code>NextToken</code> value. You can use the new <code>NextToken</code> value in a subsequent call to the <code>ListShards</code> operation.</p> <important> <p>Tokens expire after 300 seconds. When you obtain a value for <code>NextToken</code> in the response to a call to <code>ListShards</code>, you have 300 seconds to use that value. If you specify an expired token in a call to <code>ListShards</code>, you get <code>ExpiredNextTokenException</code>.</p> </important>'
       ExclusiveStartShardId:
         $ref: '#/definitions/ShardId'
-        description: '<p>The ID of the shard to start the list with. </p> <p>If you don''t specify this parameter, the default behavior is for <code>ListShards</code> to list the shards starting with the first one in the stream.</p> <p>You cannot specify this parameter if you specify <code>NextToken</code>.</p>'
+        description: '<p>Specify this parameter to indicate that you want to list the shards starting with the shard whose ID immediately follows <code>ExclusiveStartShardId</code>.</p> <p>If you don''t specify this parameter, the default behavior is for <code>ListShards</code> to list the shards starting with the first one in the stream.</p> <p>You cannot specify this parameter if you specify <code>NextToken</code>.</p>'
       MaxResults:
         $ref: '#/definitions/ListShardsInputLimit'
         description: '<p>The maximum number of shards to return in a single call to <code>ListShards</code>. The minimum value you can specify for this parameter is 1, and the maximum is 1,000, which is also the default.</p> <p>When the number of shards to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListShards</code> to list the next set of shards.</p>'
       StreamCreationTimestamp:
         $ref: '#/definitions/Timestamp'
         description: '<p>Specify this input parameter to distinguish data streams that have the same name. For example, if you create a data stream and then delete it, and you later create another data stream with the same name, you can use this input parameter to specify which of the two streams you want to list the shards for.</p> <p>You cannot specify this parameter if you specify the <code>NextToken</code> parameter.</p>'
-  ListShardsInputLimit:
-    type: integer
-    minimum: 1
-    maximum: 10000
-  ListShardsOutput:
+  ExpiredNextTokenException:
     type: object
     properties:
-      Shards:
-        $ref: '#/definitions/ShardList'
-        description: 'An array of JSON objects. Each object represents one shard and specifies the IDs of the shard, the shard''s parent, and the shard that''s adjacent to the shard''s parent. Each object also contains the starting and ending hash keys and the starting and ending sequence numbers for the shard.'
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The pagination token passed to the operation is expired.
+  ListStreamConsumersOutput:
+    type: object
+    properties:
+      Consumers:
+        $ref: '#/definitions/ConsumerList'
+        description: An array of JSON objects. Each object represents one registered consumer.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: '<p>When the number of shards in the data stream is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of shards in the data stream, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListShards</code> to list the next set of shards. For more information about the use of this pagination token when calling the <code>ListShards</code> operation, see <a>ListShardsInput$NextToken</a>.</p> <important> <p>Tokens expire after 300 seconds. When you obtain a value for <code>NextToken</code> in the response to a call to <code>ListShards</code>, you have 300 seconds to use that value. If you specify an expired token in a call to <code>ListShards</code>, you get <code>ExpiredNextTokenException</code>.</p> </important>'
-  ListStreamsInput:
+        description: '<p>When the number of consumers that are registered with the data stream is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of registered consumers, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListStreamConsumers</code> to list the next set of registered consumers. For more information about the use of this pagination token when calling the <code>ListStreamConsumers</code> operation, see <a>ListStreamConsumersInput$NextToken</a>.</p> <important> <p>Tokens expire after 300 seconds. When you obtain a value for <code>NextToken</code> in the response to a call to <code>ListStreamConsumers</code>, you have 300 seconds to use that value. If you specify an expired token in a call to <code>ListStreamConsumers</code>, you get <code>ExpiredNextTokenException</code>.</p> </important>'
+  ListStreamConsumersInput:
     type: object
+    required:
+      - StreamARN
     properties:
-      Limit:
-        $ref: '#/definitions/ListStreamsInputLimit'
-        description: The maximum number of streams to list.
-      ExclusiveStartStreamName:
-        $ref: '#/definitions/StreamName'
-        description: The name of the stream to start the list with.
-    description: Represents the input for <code>ListStreams</code>.
-  ListStreamsInputLimit:
-    type: integer
-    minimum: 1
-    maximum: 10000
+      StreamARN:
+        $ref: '#/definitions/StreamARN'
+        description: 'The ARN of the Kinesis data stream for which you want to list the registered consumers. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: '<p>When the number of consumers that are registered with the data stream is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of consumers that are registered with the data stream, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListStreamConsumers</code> to list the next set of registered consumers.</p> <p>Don''t specify <code>StreamName</code> or <code>StreamCreationTimestamp</code> if you specify <code>NextToken</code> because the latter unambiguously identifies the stream.</p> <p>You can optionally specify a value for the <code>MaxResults</code> parameter when you specify <code>NextToken</code>. If you specify a <code>MaxResults</code> value that is less than the number of consumers that the operation returns if you don''t specify <code>MaxResults</code>, the response will contain a new <code>NextToken</code> value. You can use the new <code>NextToken</code> value in a subsequent call to the <code>ListStreamConsumers</code> operation to list the next set of consumers.</p> <important> <p>Tokens expire after 300 seconds. When you obtain a value for <code>NextToken</code> in the response to a call to <code>ListStreamConsumers</code>, you have 300 seconds to use that value. If you specify an expired token in a call to <code>ListStreamConsumers</code>, you get <code>ExpiredNextTokenException</code>.</p> </important>'
+      MaxResults:
+        $ref: '#/definitions/ListStreamConsumersInputLimit'
+        description: The maximum number of consumers that you want a single call of <code>ListStreamConsumers</code> to return.
+      StreamCreationTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: '<p>Specify this input parameter to distinguish data streams that have the same name. For example, if you create a data stream and then delete it, and you later create another data stream with the same name, you can use this input parameter to specify which of the two streams you want to list the consumers for. </p> <p>You can''t specify this parameter if you specify the NextToken parameter. </p>'
   ListStreamsOutput:
     type: object
     required:
@@ -1484,6 +1666,29 @@ definitions:
         $ref: '#/definitions/BooleanObject'
         description: 'If set to <code>true</code>, there are more streams available to list.'
     description: Represents the output for <code>ListStreams</code>.
+  ListStreamsInput:
+    type: object
+    properties:
+      Limit:
+        $ref: '#/definitions/ListStreamsInputLimit'
+        description: The maximum number of streams to list.
+      ExclusiveStartStreamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the stream to start the list with.
+    description: Represents the input for <code>ListStreams</code>.
+  ListTagsForStreamOutput:
+    type: object
+    required:
+      - Tags
+      - HasMoreTags
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'A list of tags associated with <code>StreamName</code>, starting with the first tag after <code>ExclusiveStartTagKey</code> and up to the specified <code>Limit</code>. '
+      HasMoreTags:
+        $ref: '#/definitions/BooleanObject'
+        description: 'If set to <code>true</code>, more tags are available. To request additional tags, set <code>ExclusiveStartTagKey</code> to the key of the last tag returned.'
+    description: Represents the output for <code>ListTagsForStream</code>.
   ListTagsForStreamInput:
     type: object
     required:
@@ -1499,23 +1704,6 @@ definitions:
         $ref: '#/definitions/ListTagsForStreamInputLimit'
         description: 'The number of tags to return. If this number is less than the total number of tags associated with the stream, <code>HasMoreTags</code> is set to <code>true</code>. To list additional tags, set <code>ExclusiveStartTagKey</code> to the last key in the response.'
     description: Represents the input for <code>ListTagsForStream</code>.
-  ListTagsForStreamInputLimit:
-    type: integer
-    minimum: 1
-    maximum: 10
-  ListTagsForStreamOutput:
-    type: object
-    required:
-      - Tags
-      - HasMoreTags
-    properties:
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: 'A list of tags associated with <code>StreamName</code>, starting with the first tag after <code>ExclusiveStartTagKey</code> and up to the specified <code>Limit</code>. '
-      HasMoreTags:
-        $ref: '#/definitions/BooleanObject'
-        description: 'If set to <code>true</code>, more tags are available. To request additional tags, set <code>ExclusiveStartTagKey</code> to the key of the last tag returned.'
-    description: Represents the output for <code>ListTagsForStream</code>.
   MergeShardsInput:
     type: object
     required:
@@ -1533,45 +1721,22 @@ definitions:
         $ref: '#/definitions/ShardId'
         description: The shard ID of the adjacent shard for the merge.
     description: Represents the input for <code>MergeShards</code>.
-  MetricsName:
-    type: string
-    enum:
-      - IncomingBytes
-      - IncomingRecords
-      - OutgoingBytes
-      - OutgoingRecords
-      - WriteProvisionedThroughputExceeded
-      - ReadProvisionedThroughputExceeded
-      - IteratorAgeMilliseconds
-      - ALL
-  MetricsNameList:
-    type: array
-    items:
-      $ref: '#/definitions/MetricsName'
-    minItems: 1
-    maxItems: 7
-  MillisBehindLatest:
-    type: integer
-    minimum: 0
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 1048576
-  PartitionKey:
-    type: string
-    minLength: 1
-    maxLength: 256
-  PositiveIntegerObject:
-    type: integer
-    minimum: 1
-    maximum: 100000
-  ProvisionedThroughputExceededException:
+  PutRecordOutput:
     type: object
+    required:
+      - ShardId
+      - SequenceNumber
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: 'The request rate for the stream is too high, or the requested data is too large for the available throughput. Reduce the frequency or size of your requests. For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>, and <a href="http://docs.aws.amazon.com/general/latest/gr/api-retries.html">Error Retries and Exponential Backoff in AWS</a> in the <i>AWS General Reference</i>.'
+      ShardId:
+        $ref: '#/definitions/ShardId'
+        description: The shard ID of the shard where the data record was placed.
+      SequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+        description: The sequence number identifier that was assigned to the put data record. The sequence number for the record is unique across all records in the stream. A sequence number is the identifier associated with every record put into the stream.
+      EncryptionType:
+        $ref: '#/definitions/EncryptionType'
+        description: '<p>The encryption type to use on the record. This parameter can be one of the following values:</p> <ul> <li> <p> <code>NONE</code>: Do not encrypt the records in the stream.</p> </li> <li> <p> <code>KMS</code>: Use server-side encryption on the records in the stream using a customer-managed AWS KMS key.</p> </li> </ul>'
+    description: Represents the output for <code>PutRecord</code>.
   PutRecordInput:
     type: object
     required:
@@ -1595,35 +1760,6 @@ definitions:
         $ref: '#/definitions/SequenceNumber'
         description: 'Guarantees strictly increasing sequence numbers, for puts from the same client and to the same partition key. Usage: set the <code>SequenceNumberForOrdering</code> of record <i>n</i> to the sequence number of record <i>n-1</i> (as returned in the result when putting record <i>n-1</i>). If this parameter is not set, records are coarsely ordered based on arrival time.'
     description: Represents the input for <code>PutRecord</code>.
-  PutRecordOutput:
-    type: object
-    required:
-      - ShardId
-      - SequenceNumber
-    properties:
-      ShardId:
-        $ref: '#/definitions/ShardId'
-        description: The shard ID of the shard where the data record was placed.
-      SequenceNumber:
-        $ref: '#/definitions/SequenceNumber'
-        description: The sequence number identifier that was assigned to the put data record. The sequence number for the record is unique across all records in the stream. A sequence number is the identifier associated with every record put into the stream.
-      EncryptionType:
-        $ref: '#/definitions/EncryptionType'
-        description: '<p>The encryption type to use on the record. This parameter can be one of the following values:</p> <ul> <li> <p> <code>NONE</code>: Do not encrypt the records in the stream.</p> </li> <li> <p> <code>KMS</code>: Use server-side encryption on the records in the stream using a customer-managed AWS KMS key.</p> </li> </ul>'
-    description: Represents the output for <code>PutRecord</code>.
-  PutRecordsInput:
-    type: object
-    required:
-      - Records
-      - StreamName
-    properties:
-      Records:
-        $ref: '#/definitions/PutRecordsRequestEntryList'
-        description: The records associated with the request.
-      StreamName:
-        $ref: '#/definitions/StreamName'
-        description: The stream name associated with the request.
-    description: A <code>PutRecords</code> request.
   PutRecordsOutput:
     type: object
     required:
@@ -1639,77 +1775,39 @@ definitions:
         $ref: '#/definitions/EncryptionType'
         description: '<p>The encryption type used on the records. This parameter can be one of the following values:</p> <ul> <li> <p> <code>NONE</code>: Do not encrypt the records.</p> </li> <li> <p> <code>KMS</code>: Use server-side encryption on the records using a customer-managed AWS KMS key.</p> </li> </ul>'
     description: ' <code>PutRecords</code> results.'
-  PutRecordsRequestEntry:
+  PutRecordsInput:
     type: object
     required:
-      - Data
-      - PartitionKey
+      - Records
+      - StreamName
     properties:
-      Data:
-        $ref: '#/definitions/Data'
-        description: 'The data blob to put into the record, which is base64-encoded when the blob is serialized. When the data blob (the payload before base64-encoding) is added to the partition key size, the total size must not exceed the maximum record size (1 MB).'
-      ExplicitHashKey:
-        $ref: '#/definitions/HashKey'
-        description: The hash value used to determine explicitly the shard that the data record is assigned to by overriding the partition key hash.
-      PartitionKey:
-        $ref: '#/definitions/PartitionKey'
-        description: 'Determines which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 characters for each key. Amazon Kinesis Data Streams uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream.'
-    description: Represents the output for <code>PutRecords</code>.
-  PutRecordsRequestEntryList:
-    type: array
-    items:
-      $ref: '#/definitions/PutRecordsRequestEntry'
-    minItems: 1
-    maxItems: 500
-  PutRecordsResultEntry:
-    type: object
-    properties:
-      SequenceNumber:
-        $ref: '#/definitions/SequenceNumber'
-        description: The sequence number for an individual record result.
-      ShardId:
-        $ref: '#/definitions/ShardId'
-        description: The shard ID for an individual record result.
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-        description: The error code for an individual record result. <code>ErrorCodes</code> can be either <code>ProvisionedThroughputExceededException</code> or <code>InternalFailure</code>.
-      ErrorMessage:
-        $ref: '#/definitions/ErrorMessage'
-        description: 'The error message for an individual record result. An <code>ErrorCode</code> value of <code>ProvisionedThroughputExceededException</code> has an error message that includes the account ID, stream name, and shard ID. An <code>ErrorCode</code> value of <code>InternalFailure</code> has the error message <code>"Internal Service Failure"</code>.'
-    description: Represents the result of an individual record from a <code>PutRecords</code> request. A record that is successfully added to a stream includes <code>SequenceNumber</code> and <code>ShardId</code> in the result. A record that fails to be added to the stream includes <code>ErrorCode</code> and <code>ErrorMessage</code> in the result.
-  PutRecordsResultEntryList:
-    type: array
-    items:
-      $ref: '#/definitions/PutRecordsResultEntry'
-    minItems: 1
-    maxItems: 500
-  Record:
+      Records:
+        $ref: '#/definitions/PutRecordsRequestEntryList'
+        description: The records associated with the request.
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: The stream name associated with the request.
+    description: A <code>PutRecords</code> request.
+  RegisterStreamConsumerOutput:
     type: object
     required:
-      - SequenceNumber
-      - Data
-      - PartitionKey
+      - Consumer
     properties:
-      SequenceNumber:
-        $ref: '#/definitions/SequenceNumber'
-        description: The unique identifier of the record within its shard.
-      ApproximateArrivalTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The approximate time that the record was inserted into the stream.
-      Data:
-        $ref: '#/definitions/Data'
-        description: 'The data blob. The data in the blob is both opaque and immutable to Kinesis Data Streams, which does not inspect, interpret, or change the data in the blob in any way. When the data blob (the payload before base64-encoding) is added to the partition key size, the total size must not exceed the maximum record size (1 MB).'
-      PartitionKey:
-        $ref: '#/definitions/PartitionKey'
-        description: Identifies which shard in the stream the data record is assigned to.
-      EncryptionType:
-        $ref: '#/definitions/EncryptionType'
-        description: '<p>The encryption type used on the record. This parameter can be one of the following values:</p> <ul> <li> <p> <code>NONE</code>: Do not encrypt the records in the stream.</p> </li> <li> <p> <code>KMS</code>: Use server-side encryption on the records in the stream using a customer-managed AWS KMS key.</p> </li> </ul>'
-    description: 'The unit of data of the Kinesis data stream, which is composed of a sequence number, a partition key, and a data blob.'
-  RecordList:
-    type: array
-    items:
-      $ref: '#/definitions/Record'
+      Consumer:
+        $ref: '#/definitions/Consumer'
+        description: 'An object that represents the details of the consumer you registered. When you register a consumer, it gets an ARN that is generated by Kinesis Data Streams.'
+  RegisterStreamConsumerInput:
+    type: object
+    required:
+      - StreamARN
+      - ConsumerName
+    properties:
+      StreamARN:
+        $ref: '#/definitions/StreamARN'
+        description: 'The ARN of the Kinesis data stream that you want to register the consumer with. For more info, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.'
+      ConsumerName:
+        $ref: '#/definitions/ConsumerName'
+        description: 'For a given Kinesis data stream, each consumer must have a unique name. However, consumer names don''t have to be unique across data streams.'
   RemoveTagsFromStreamInput:
     type: object
     required:
@@ -1723,91 +1821,6 @@ definitions:
         $ref: '#/definitions/TagKeyList'
         description: A list of tag keys. Each corresponding tag is removed from the stream.
     description: Represents the input for <code>RemoveTagsFromStream</code>.
-  ResourceInUseException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: 'The resource is not available for this operation. For successful operation, the resource must be in the <code>ACTIVE</code> state.'
-  ResourceNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: The requested resource could not be found. The stream might not be specified correctly.
-  RetentionPeriodHours:
-    type: integer
-    minimum: 1
-    maximum: 168
-  ScalingType:
-    type: string
-    enum:
-      - UNIFORM_SCALING
-  SequenceNumber:
-    type: string
-    pattern: '0|([1-9]\d{0,128})'
-  SequenceNumberRange:
-    type: object
-    required:
-      - StartingSequenceNumber
-    properties:
-      StartingSequenceNumber:
-        $ref: '#/definitions/SequenceNumber'
-        description: The starting sequence number for the range.
-      EndingSequenceNumber:
-        $ref: '#/definitions/SequenceNumber'
-        description: The ending sequence number for the range. Shards that are in the OPEN state have an ending sequence number of <code>null</code>.
-    description: The range of possible sequence numbers for the shard.
-  Shard:
-    type: object
-    required:
-      - ShardId
-      - HashKeyRange
-      - SequenceNumberRange
-    properties:
-      ShardId:
-        $ref: '#/definitions/ShardId'
-        description: The unique identifier of the shard within the stream.
-      ParentShardId:
-        $ref: '#/definitions/ShardId'
-        description: The shard ID of the shard's parent.
-      AdjacentParentShardId:
-        $ref: '#/definitions/ShardId'
-        description: The shard ID of the shard adjacent to the shard's parent.
-      HashKeyRange:
-        $ref: '#/definitions/HashKeyRange'
-        description: 'The range of possible hash key values for the shard, which is a set of ordered contiguous positive integers.'
-      SequenceNumberRange:
-        $ref: '#/definitions/SequenceNumberRange'
-        description: The range of possible sequence numbers for the shard.
-    description: A uniquely identified group of data records in a Kinesis data stream.
-  ShardCountObject:
-    type: integer
-    minimum: 0
-    maximum: 1000000
-  ShardId:
-    type: string
-    pattern: '[a-zA-Z0-9_.-]+'
-    minLength: 1
-    maxLength: 128
-  ShardIterator:
-    type: string
-    minLength: 1
-    maxLength: 512
-  ShardIteratorType:
-    type: string
-    enum:
-      - AT_SEQUENCE_NUMBER
-      - AFTER_SEQUENCE_NUMBER
-      - TRIM_HORIZON
-      - LATEST
-      - AT_TIMESTAMP
-  ShardList:
-    type: array
-    items:
-      $ref: '#/definitions/Shard'
   SplitShardInput:
     type: object
     required:
@@ -1857,8 +1870,155 @@ definitions:
       KeyId:
         $ref: '#/definitions/KeyId'
         description: '<p>The GUID for the customer-managed AWS KMS key to use for encryption. This value can be a globally unique identifier, a fully specified Amazon Resource Name (ARN) to either an alias or a key, or an alias name prefixed by "alias/".You can also use a master key owned by Kinesis Data Streams by specifying the alias <code>aws/kinesis</code>.</p> <ul> <li> <p>Key ARN example: <code>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</code> </p> </li> <li> <p>Alias ARN example: <code>arn:aws:kms:us-east-1:123456789012:alias/MyAliasName</code> </p> </li> <li> <p>Globally unique key ID example: <code>12345678-1234-1234-1234-123456789012</code> </p> </li> <li> <p>Alias name example: <code>alias/MyAliasName</code> </p> </li> <li> <p>Master key owned by Kinesis Data Streams: <code>alias/aws/kinesis</code> </p> </li> </ul>'
+  UpdateShardCountOutput:
+    type: object
+    properties:
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the stream.
+      CurrentShardCount:
+        $ref: '#/definitions/PositiveIntegerObject'
+        description: The current number of shards.
+      TargetShardCount:
+        $ref: '#/definitions/PositiveIntegerObject'
+        description: The updated number of shards.
+  UpdateShardCountInput:
+    type: object
+    required:
+      - StreamName
+      - TargetShardCount
+      - ScalingType
+    properties:
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the stream.
+      TargetShardCount:
+        $ref: '#/definitions/PositiveIntegerObject'
+        description: The new number of shards.
+      ScalingType:
+        $ref: '#/definitions/ScalingType'
+        description: The scaling type. Uniform scaling creates shards of equal size.
+  StreamName:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 128
+  TagMap:
+    type: array
+    minItems: 1
+    maxItems: 50
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
+  BooleanObject:
+    type: boolean
+  ConsumerName:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 128
+  ConsumerARN:
+    type: string
+    pattern: '^(arn):aws.*:kinesis:.*:\d{12}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+'
+    minLength: 1
+    maxLength: 2048
+  ConsumerStatus:
+    type: string
+    enum:
+      - CREATING
+      - DELETING
+      - ACTIVE
+  Timestamp:
+    type: string
+    format: date-time
+  Consumer:
+    type: object
+    required:
+      - ConsumerName
+      - ConsumerARN
+      - ConsumerStatus
+      - ConsumerCreationTimestamp
+    properties:
+      ConsumerName:
+        $ref: '#/definitions/ConsumerName'
+        description: The name of the consumer is something you choose when you register the consumer.
+      ConsumerARN:
+        $ref: '#/definitions/ConsumerARN'
+        description: '<p>When you register a consumer, Kinesis Data Streams generates an ARN for it. You need this ARN to be able to call <a>SubscribeToShard</a>.</p> <p>If you delete a consumer and then create a new one with the same name, it won''t have the same ARN. That''s because consumer ARNs contain the creation timestamp. This is important to keep in mind if you have IAM policies that reference consumer ARNs.</p>'
+      ConsumerStatus:
+        $ref: '#/definitions/ConsumerStatus'
+        description: A consumer can't read data while in the <code>CREATING</code> or <code>DELETING</code> states.
+      ConsumerCreationTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: <p/>
+    description: An object that represents the details of the consumer you registered.
+  ConsumerCountObject:
+    type: integer
+    minimum: 0
+    maximum: 1000000
   StreamARN:
     type: string
+    pattern: 'arn:aws.*:kinesis:.*:\d{12}:stream/.*'
+    minLength: 1
+    maxLength: 2048
+  ConsumerDescription:
+    type: object
+    required:
+      - ConsumerName
+      - ConsumerARN
+      - ConsumerStatus
+      - ConsumerCreationTimestamp
+      - StreamARN
+    properties:
+      ConsumerName:
+        $ref: '#/definitions/ConsumerName'
+        description: The name of the consumer is something you choose when you register the consumer.
+      ConsumerARN:
+        $ref: '#/definitions/ConsumerARN'
+        description: '<p>When you register a consumer, Kinesis Data Streams generates an ARN for it. You need this ARN to be able to call <a>SubscribeToShard</a>.</p> <p>If you delete a consumer and then create a new one with the same name, it won''t have the same ARN. That''s because consumer ARNs contain the creation timestamp. This is important to keep in mind if you have IAM policies that reference consumer ARNs.</p>'
+      ConsumerStatus:
+        $ref: '#/definitions/ConsumerStatus'
+        description: A consumer can't read data while in the <code>CREATING</code> or <code>DELETING</code> states.
+      ConsumerCreationTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: <p/>
+      StreamARN:
+        $ref: '#/definitions/StreamARN'
+        description: The ARN of the stream with which you registered the consumer.
+    description: An object that represents the details of a registered consumer.
+  ConsumerList:
+    type: array
+    items:
+      $ref: '#/definitions/Consumer'
+  PositiveIntegerObject:
+    type: integer
+    minimum: 1
+    maximum: 100000
+  Data:
+    type: string
+    minLength: 0
+    maxLength: 1048576
+  RetentionPeriodHours:
+    type: integer
+    minimum: 1
+    maximum: 168
+  ShardCountObject:
+    type: integer
+    minimum: 0
+    maximum: 1000000
+  DescribeStreamInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  ShardId:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 128
   StreamDescription:
     type: object
     required:
@@ -1940,16 +2100,262 @@ definitions:
       OpenShardCount:
         $ref: '#/definitions/ShardCountObject'
         description: The number of open shards in the stream.
+      ConsumerCount:
+        $ref: '#/definitions/ConsumerCountObject'
+        description: The number of enhanced fan-out consumers registered with the stream.
     description: 'Represents the output for <a>DescribeStreamSummary</a> '
-  StreamName:
+  MetricsNameList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricsName'
+    minItems: 1
+    maxItems: 7
+  EncryptionType:
     type: string
-    pattern: '[a-zA-Z0-9_.-]+'
+    enum:
+      - NONE
+      - KMS
+  EnhancedMetrics:
+    type: object
+    properties:
+      ShardLevelMetrics:
+        $ref: '#/definitions/MetricsNameList'
+        description: '<p>List of shard-level metrics.</p> <p>The following are the valid shard-level metrics. The value "<code>ALL</code>" enhances every metric.</p> <ul> <li> <p> <code>IncomingBytes</code> </p> </li> <li> <p> <code>IncomingRecords</code> </p> </li> <li> <p> <code>OutgoingBytes</code> </p> </li> <li> <p> <code>OutgoingRecords</code> </p> </li> <li> <p> <code>WriteProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>ReadProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>IteratorAgeMilliseconds</code> </p> </li> <li> <p> <code>ALL</code> </p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html">Monitoring the Amazon Kinesis Data Streams Service with Amazon CloudWatch</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p>'
+    description: Represents enhanced metrics types.
+  EnhancedMonitoringList:
+    type: array
+    items:
+      $ref: '#/definitions/EnhancedMetrics'
+  ErrorCode:
+    type: string
+  ErrorMessage:
+    type: string
+  ShardIterator:
+    type: string
     minLength: 1
-    maxLength: 128
+    maxLength: 512
+  GetRecordsInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  RecordList:
+    type: array
+    items:
+      $ref: '#/definitions/Record'
+  MillisBehindLatest:
+    type: integer
+    minimum: 0
+  ShardIteratorType:
+    type: string
+    enum:
+      - AT_SEQUENCE_NUMBER
+      - AFTER_SEQUENCE_NUMBER
+      - TRIM_HORIZON
+      - LATEST
+      - AT_TIMESTAMP
+  SequenceNumber:
+    type: string
+    pattern: '0|([1-9]\d{0,128})'
+  HashKey:
+    type: string
+    pattern: '0|([1-9]\d{0,38})'
+  HashKeyRange:
+    type: object
+    required:
+      - StartingHashKey
+      - EndingHashKey
+    properties:
+      StartingHashKey:
+        $ref: '#/definitions/HashKey'
+        description: The starting hash key of the hash key range.
+      EndingHashKey:
+        $ref: '#/definitions/HashKey'
+        description: The ending hash key of the hash key range.
+    description: 'The range of possible hash key values for the shard, which is a set of ordered contiguous positive integers.'
+  InternalFailureException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+  KeyId:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 1048576
+  ListShardsInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  ShardList:
+    type: array
+    items:
+      $ref: '#/definitions/Shard'
+  ListStreamConsumersInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  ListStreamsInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 10000
   StreamNameList:
     type: array
     items:
       $ref: '#/definitions/StreamName'
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  ListTagsForStreamInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 50
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+  MetricsName:
+    type: string
+    enum:
+      - IncomingBytes
+      - IncomingRecords
+      - OutgoingBytes
+      - OutgoingRecords
+      - WriteProvisionedThroughputExceeded
+      - ReadProvisionedThroughputExceeded
+      - IteratorAgeMilliseconds
+      - ALL
+  PartitionKey:
+    type: string
+    minLength: 1
+    maxLength: 256
+  PutRecordsRequestEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/PutRecordsRequestEntry'
+    minItems: 1
+    maxItems: 500
+  PutRecordsResultEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/PutRecordsResultEntry'
+    minItems: 1
+    maxItems: 500
+  PutRecordsRequestEntry:
+    type: object
+    required:
+      - Data
+      - PartitionKey
+    properties:
+      Data:
+        $ref: '#/definitions/Data'
+        description: 'The data blob to put into the record, which is base64-encoded when the blob is serialized. When the data blob (the payload before base64-encoding) is added to the partition key size, the total size must not exceed the maximum record size (1 MB).'
+      ExplicitHashKey:
+        $ref: '#/definitions/HashKey'
+        description: The hash value used to determine explicitly the shard that the data record is assigned to by overriding the partition key hash.
+      PartitionKey:
+        $ref: '#/definitions/PartitionKey'
+        description: 'Determines which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 characters for each key. Amazon Kinesis Data Streams uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream.'
+    description: Represents the output for <code>PutRecords</code>.
+  PutRecordsResultEntry:
+    type: object
+    properties:
+      SequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+        description: The sequence number for an individual record result.
+      ShardId:
+        $ref: '#/definitions/ShardId'
+        description: The shard ID for an individual record result.
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+        description: The error code for an individual record result. <code>ErrorCodes</code> can be either <code>ProvisionedThroughputExceededException</code> or <code>InternalFailure</code>.
+      ErrorMessage:
+        $ref: '#/definitions/ErrorMessage'
+        description: 'The error message for an individual record result. An <code>ErrorCode</code> value of <code>ProvisionedThroughputExceededException</code> has an error message that includes the account ID, stream name, and shard ID. An <code>ErrorCode</code> value of <code>InternalFailure</code> has the error message <code>"Internal Service Failure"</code>.'
+    description: Represents the result of an individual record from a <code>PutRecords</code> request. A record that is successfully added to a stream includes <code>SequenceNumber</code> and <code>ShardId</code> in the result. A record that fails to be added to the stream includes <code>ErrorCode</code> and <code>ErrorMessage</code> in the result.
+  Record:
+    type: object
+    required:
+      - SequenceNumber
+      - Data
+      - PartitionKey
+    properties:
+      SequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+        description: The unique identifier of the record within its shard.
+      ApproximateArrivalTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The approximate time that the record was inserted into the stream.
+      Data:
+        $ref: '#/definitions/Data'
+        description: 'The data blob. The data in the blob is both opaque and immutable to Kinesis Data Streams, which does not inspect, interpret, or change the data in the blob in any way. When the data blob (the payload before base64-encoding) is added to the partition key size, the total size must not exceed the maximum record size (1 MB).'
+      PartitionKey:
+        $ref: '#/definitions/PartitionKey'
+        description: Identifies which shard in the stream the data record is assigned to.
+      EncryptionType:
+        $ref: '#/definitions/EncryptionType'
+        description: '<p>The encryption type used on the record. This parameter can be one of the following values:</p> <ul> <li> <p> <code>NONE</code>: Do not encrypt the records in the stream.</p> </li> <li> <p> <code>KMS</code>: Use server-side encryption on the records in the stream using a customer-managed AWS KMS key.</p> </li> </ul>'
+    description: 'The unit of data of the Kinesis data stream, which is composed of a sequence number, a partition key, and a data blob.'
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  ScalingType:
+    type: string
+    enum:
+      - UNIFORM_SCALING
+  SequenceNumberRange:
+    type: object
+    required:
+      - StartingSequenceNumber
+    properties:
+      StartingSequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+        description: The starting sequence number for the range.
+      EndingSequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+        description: The ending sequence number for the range. Shards that are in the OPEN state have an ending sequence number of <code>null</code>.
+    description: The range of possible sequence numbers for the shard.
+  Shard:
+    type: object
+    required:
+      - ShardId
+      - HashKeyRange
+      - SequenceNumberRange
+    properties:
+      ShardId:
+        $ref: '#/definitions/ShardId'
+        description: The unique identifier of the shard within the stream.
+      ParentShardId:
+        $ref: '#/definitions/ShardId'
+        description: The shard ID of the shard's parent.
+      AdjacentParentShardId:
+        $ref: '#/definitions/ShardId'
+        description: The shard ID of the shard adjacent to the shard's parent.
+      HashKeyRange:
+        $ref: '#/definitions/HashKeyRange'
+        description: 'The range of possible hash key values for the shard, which is a set of ordered contiguous positive integers.'
+      SequenceNumberRange:
+        $ref: '#/definitions/SequenceNumberRange'
+        description: The range of possible sequence numbers for the shard.
+    description: A uniquely identified group of data records in a Kinesis data stream.
+  StartingPosition:
+    type: object
+    required:
+      - Type
+    properties:
+      Type:
+        $ref: '#/definitions/ShardIteratorType'
+      SequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
   StreamStatus:
     type: string
     enum:
@@ -1957,6 +2363,57 @@ definitions:
       - DELETING
       - ACTIVE
       - UPDATING
+  SubscribeToShardEvent:
+    type: object
+    required:
+      - Records
+      - ContinuationSequenceNumber
+      - MillisBehindLatest
+    properties:
+      Records:
+        $ref: '#/definitions/RecordList'
+        description: <p/>
+      ContinuationSequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+        description: Use this as <code>StartingSequenceNumber</code> in the next call to <a>SubscribeToShard</a>.
+      MillisBehindLatest:
+        $ref: '#/definitions/MillisBehindLatest'
+        description: 'The number of milliseconds the read records are from the tip of the stream, indicating how far behind current time the consumer is. A value of zero indicates that record processing is caught up, and there are no new records to process at this moment.'
+    description: 'After you call <a>SubscribeToShard</a>, Kinesis Data Streams sends events of this type to your consumer. '
+  SubscribeToShardEventStream:
+    type: object
+    required:
+      - SubscribeToShardEvent
+    properties:
+      SubscribeToShardEvent:
+        $ref: '#/definitions/SubscribeToShardEvent'
+  SubscribeToShardInput:
+    type: object
+    required:
+      - ConsumerARN
+      - ShardId
+      - StartingPosition
+    properties:
+      ConsumerARN:
+        $ref: '#/definitions/ConsumerARN'
+        description: 'For this parameter, use the value you obtained when you called <a>RegisterStreamConsumer</a>.'
+      ShardId:
+        $ref: '#/definitions/ShardId'
+        description: 'The ID of the shard you want to subscribe to. To see a list of all the shards for a given stream, use <a>ListShards</a>.'
+      StartingPosition:
+        $ref: '#/definitions/StartingPosition'
+  SubscribeToShardOutput:
+    type: object
+    required:
+      - EventStream
+    properties:
+      EventStream:
+        $ref: '#/definitions/SubscribeToShardEventStream'
+        description: The event stream that your consumer can use to read records from the shard.
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -1969,64 +2426,3 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: 'An optional string, typically used to describe or define the tag. Maximum length: 256 characters. Valid characters: Unicode letters, digits, white space, _ . / = + - % @'
     description: 'Metadata assigned to the stream, consisting of a key-value pair.'
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-    minItems: 1
-    maxItems: 10
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 0
-  TagMap:
-    type: array
-    minItems: 1
-    maxItems: 10
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
-  TagValue:
-    type: string
-    minLength: 0
-    maxLength: 256
-  Timestamp:
-    type: string
-    format: date-time
-  UpdateShardCountInput:
-    type: object
-    required:
-      - StreamName
-      - TargetShardCount
-      - ScalingType
-    properties:
-      StreamName:
-        $ref: '#/definitions/StreamName'
-        description: The name of the stream.
-      TargetShardCount:
-        $ref: '#/definitions/PositiveIntegerObject'
-        description: The new number of shards.
-      ScalingType:
-        $ref: '#/definitions/ScalingType'
-        description: The scaling type. Uniform scaling creates shards of equal size.
-  UpdateShardCountOutput:
-    type: object
-    properties:
-      StreamName:
-        $ref: '#/definitions/StreamName'
-        description: The name of the stream.
-      CurrentShardCount:
-        $ref: '#/definitions/PositiveIntegerObject'
-        description: The current number of shards.
-      TargetShardCount:
-        $ref: '#/definitions/PositiveIntegerObject'
-        description: The updated number of shards.

@@ -10,7 +10,7 @@ info:
     - transport
     - open_data
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/773531056670646272/dsuVeVSg.jpg'
+    url: 'https://twitter.com/TfL/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://api.tfl.gov.uk/swagger/docs/v1'
@@ -50,7 +50,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/AccidentDetail'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.AccidentStats.AccidentDetail'
             type: array
       summary: Gets all accident details for accidents occuring in the specified year
       tags:
@@ -68,7 +68,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: '#/definitions/System.Object'
       summary: Gets air quality data feed
       tags:
         - AirQuality
@@ -86,7 +86,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Place'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Place'
             type: array
       summary: "Gets all bike point locations. The Place object has an addtionalProperties array which contains the nbBikes, nbDocks and nbSpaces\r\n            numbers which give the status of the BikePoint. A mismatch in these numbers i.e. nbDocks - (nbBikes + nbSpaces) != 0 indicates broken docks."
       tags:
@@ -111,7 +111,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Place'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Place'
             type: array
       summary: "Search for bike stations by their name, a bike point's name often contains information about the name of the street\r\n            or nearby landmarks, for example. Note that the search result does not contain the PlaceProperties i.e. the status\r\n            or occupancy of the BikePoint, to get that information you should retrieve the BikePoint by its id on /BikePoint/id."
       tags:
@@ -135,7 +135,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Place'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.Place'
       summary: Gets the bike point with the given id.
       tags:
         - BikePoint
@@ -207,7 +207,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: '#/definitions/System.Object'
       summary: Gets taxis and minicabs contact information
       tags:
         - Cabwise
@@ -387,7 +387,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ItineraryResult'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.ItineraryResult'
       summary: Perform a Journey Planner search from the parameters specified in simple types
       tags:
         - Journey
@@ -405,7 +405,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Mode'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Mode'
             type: array
       summary: Gets a list of all of the available journey planner modes
       tags:
@@ -443,7 +443,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Mode'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Mode'
             type: array
       summary: Gets a list of valid modes
       tags:
@@ -481,7 +481,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/StatusSeverity'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.StatusSeverity'
             type: array
       summary: Gets a list of valid severity codes
       tags:
@@ -508,7 +508,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Line'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Line'
             type: array
       summary: Gets lines that serve the given modes.
       tags:
@@ -535,7 +535,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Disruption'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Disruption'
             type: array
       summary: Get disruptions for all lines of the given modes.
       tags:
@@ -573,7 +573,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Line'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Line'
             type: array
       summary: 'Gets all lines and their valid routes for given modes, including the name and id of the originating and terminating stops for each route'
       tags:
@@ -605,7 +605,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Line'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Line'
             type: array
       summary: Gets the line status of for all lines for the given modes
       tags:
@@ -636,7 +636,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Line'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Line'
             type: array
       summary: 'Get all valid routes for all lines, including the name and id of the originating and terminating stops for each route.'
       tags:
@@ -679,7 +679,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/RouteSearchResponse'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.RouteSearchResponse'
       summary: Search for lines or routes matching the query string
       tags:
         - Line
@@ -704,7 +704,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Line'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Line'
             type: array
       summary: "Gets the line status for all lines with a given severity\r\n            A list of valid severity codes can be obtained from a call to Line/Meta/Severity"
       tags:
@@ -731,7 +731,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Line'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Line'
             type: array
       summary: Gets lines that match the specified line ids.
       tags:
@@ -777,7 +777,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Prediction'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Prediction'
             type: array
       summary: Get the list of arrival predictions for given line ids based at the given stop
       tags:
@@ -804,7 +804,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Disruption'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Disruption'
             type: array
       summary: Get disruptions for the given line ids
       tags:
@@ -842,7 +842,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Line'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Line'
             type: array
       summary: 'Get all valid routes for given line ids, including the name and id of the originating and terminating stops for each route.'
       tags:
@@ -874,7 +874,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Line'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Line'
             type: array
       summary: Gets the line status of for given line ids e.g Minor Delays
       tags:
@@ -932,7 +932,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Line'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Line'
             type: array
       summary: Gets the line status for given line ids during the provided dates e.g Minor Delays
       tags:
@@ -981,7 +981,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/RouteSequence'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.RouteSequence'
       summary: 'Gets all valid routes for given line id, including the sequence of stops on each route.'
       tags:
         - Line
@@ -1010,7 +1010,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/StopPoint'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPoint'
             type: array
       summary: Gets a list of the stations that serve the given line id
       tags:
@@ -1039,7 +1039,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/TimetableResponse'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.TimetableResponse'
       summary: Gets the timetable for a specified station on the give line
       tags:
         - Line
@@ -1072,7 +1072,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/TimetableResponse'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.TimetableResponse'
       summary: Gets the timetable for a specified station on the give line with specified destination
       tags:
         - Line
@@ -1090,7 +1090,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ActiveServiceType'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.ActiveServiceType'
             type: array
       summary: "Returns the service type active for a mode.\r\n            Currently only supports tube"
       tags:
@@ -1121,30 +1121,11 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Prediction'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Prediction'
             type: array
       summary: Gets the next arrival predictions for all stops of a given mode
       tags:
         - Mode
-  /NetworkStatus:
-    get:
-      deprecated: false
-      operationId: NetworkStatus_Get
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/NetworkStatus'
-            type: array
-      summary: Get travel network status
-      tags:
-        - NetworkStatus
   '/Occupancy/BikePoints/{ids}':
     get:
       deprecated: false
@@ -1167,7 +1148,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/BikePointOccupancy'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.BikePointOccupancy'
             type: array
       summary: Get the occupancy for bike points.
       tags:
@@ -1185,7 +1166,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/CarParkOccupancy'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.CarParkOccupancy'
             type: array
       summary: Gets the occupancy for all car parks that have occupancy data
       tags:
@@ -1208,7 +1189,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/CarParkOccupancy'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.CarParkOccupancy'
       summary: Gets the occupancy for a car park with a given id
       tags:
         - Occupancy
@@ -1226,7 +1207,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ChargeConnectorOccupancy'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.ChargeConnectorOccupancy'
             type: array
       summary: Gets the occupancy for all charge connectors
       tags:
@@ -1252,7 +1233,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ChargeConnectorOccupancy'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.ChargeConnectorOccupancy'
             type: array
       summary: Gets the occupancy for a charge connectors with a given id (sourceSystemPlaceId)
       tags:
@@ -1318,7 +1299,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/StopPoint'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPoint'
             type: array
       summary: "Gets the places that lie within the bounding box defined by the lat/lon of its north-west and south-east corners. Optionally filters\r\n            on type and can strip properties for a smaller payload."
       tags:
@@ -1350,7 +1331,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: '#/definitions/System.Object'
       summary: Gets the set of streets associated with a post code.
       tags:
         - Place
@@ -1368,7 +1349,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/PlaceCategory'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.PlaceCategory'
             type: array
       summary: Gets a list of all of the available place property categories and keys.
       tags:
@@ -1387,7 +1368,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/PlaceCategory'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.PlaceCategory'
             type: array
       summary: Gets a list of the available types of Place.
       tags:
@@ -1420,7 +1401,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Place'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Place'
             type: array
       summary: Gets all places that matches the given query
       tags:
@@ -1452,7 +1433,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Place'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Place'
             type: array
       summary: Gets all places of a given type
       tags:
@@ -1482,7 +1463,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Place'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Place'
             type: array
       summary: Gets the place with the given id.
       tags:
@@ -1534,7 +1515,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: '#/definitions/System.Object'
       summary: "Gets any places of the given type whose geography intersects the given latitude and longitude. In practice this means the Place\r\n            must be polygonal e.g. a BoroughBoundary."
       tags:
         - Place
@@ -1603,7 +1584,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: '#/definitions/System.Object'
       summary: Gets the place overlay for a given set of co-ordinates and a given width/height.
       tags:
         - Place
@@ -1620,7 +1601,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/RoadCorridor'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.RoadCorridor'
             type: array
       summary: Gets all roads managed by TfL
       tags:
@@ -1658,7 +1639,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/StatusSeverity'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.StatusSeverity'
             type: array
       summary: Gets a list of valid RoadDisruption severity codes
       tags:
@@ -1690,7 +1671,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/RoadDisruption'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.RoadDisruption'
       summary: Gets a list of active disruptions filtered by disruption Ids.
       tags:
         - Road
@@ -1720,7 +1701,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: '#/definitions/System.Object'
       summary: 'Gets a list of disrupted streets. If no date filters are provided, current disruptions are returned.'
       tags:
         - Road
@@ -1745,7 +1726,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/RoadCorridor'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.RoadCorridor'
             type: array
       summary: Gets the road with the specified id (e.g. A1)
       tags:
@@ -1799,7 +1780,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/RoadDisruption'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.RoadDisruption'
             type: array
       summary: 'Get active disruptions, filtered by road ids'
       tags:
@@ -1836,7 +1817,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/RoadCorridor'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.RoadCorridor'
             type: array
       summary: 'Gets the specified roads with the status aggregated over the date range specified, or now until the end of today if no dates are passed.'
       tags:
@@ -1860,7 +1841,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/SearchResponse'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.SearchResponse'
       summary: "Search the site for occurrences of the query string. The maximum number of results returned is equal to the maximum page size\r\n            of 100. To return subsequent pages, use the paginated overload."
       tags:
         - Search
@@ -1883,7 +1864,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/SearchResponse'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.SearchResponse'
       summary: Searches the bus schedules folder on S3 for a given bus number.
       tags:
         - Search
@@ -2008,7 +1989,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/StopPointsResponse'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPointsResponse'
       summary: 'Gets a list of StopPoints within {radius} by the specified criteria'
       tags:
         - StopPoint
@@ -2026,7 +2007,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/StopPointCategory'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPointCategory'
             type: array
       summary: Gets the list of available StopPoint additional information categories
       tags:
@@ -2045,7 +2026,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Mode'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Mode'
             type: array
       summary: Gets the list of available StopPoint modes
       tags:
@@ -2096,7 +2077,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/StopPointsResponse'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPointsResponse'
       summary: Gets a list of StopPoints filtered by the modes available at that StopPoint.
       tags:
         - StopPoint
@@ -2127,7 +2108,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/DisruptedPoint'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.DisruptedPoint'
             type: array
       summary: Gets a distinct list of disrupted stop points for the given modes
       tags:
@@ -2187,7 +2168,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/SearchResponse'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.SearchResponse'
       summary: 'Search StopPoints by their common name, or their 5-digit Countdown Bus Stop Code.'
       tags:
         - StopPoint
@@ -2246,7 +2227,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/SearchResponse'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.SearchResponse'
       summary: 'Search StopPoints by their common name, or their 5-digit Countdown Bus Stop Code.'
       tags:
         - StopPoint
@@ -2286,7 +2267,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/LineServiceType'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.LineServiceType'
             type: array
       summary: Gets the service types for a given stoppoint
       tags:
@@ -2315,7 +2296,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: '#/definitions/System.Object'
       summary: Gets a StopPoint for a given sms code.
       tags:
         - StopPoint
@@ -2341,9 +2322,42 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/StopPoint'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPoint'
             type: array
       summary: Gets all stop points of a given type
+      tags:
+        - StopPoint
+  '/StopPoint/Type/{types}/page/{page}':
+    get:
+      deprecated: false
+      operationId: StopPoint_GetByTypeWithPagination
+      parameters:
+        - description: ''
+          in: path
+          items:
+            type: string
+          name: types
+          required: true
+          type: array
+        - description: ''
+          format: int32
+          in: path
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPoint'
+            type: array
+      summary: Gets all the stop points of given type(s) with a page number
       tags:
         - StopPoint
   '/StopPoint/{ids}':
@@ -2372,7 +2386,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/StopPoint'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPoint'
             type: array
       summary: Gets a list of StopPoints corresponding to the given list of stop ids.
       tags:
@@ -2414,7 +2428,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/DisruptedPoint'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.DisruptedPoint'
             type: array
       summary: 'Gets all disruptions for the specified StopPointId, plus disruptions for any child Naptan records it may have.'
       tags:
@@ -2439,7 +2453,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Prediction'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Prediction'
             type: array
       summary: Gets the list of arrival predictions for the given stop point id
       tags:
@@ -2480,7 +2494,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/StopPoint'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPoint'
             type: array
       summary: Gets Stopoints that are reachable from a station/line combination.
       tags:
@@ -2519,7 +2533,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/StopPoint'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPoint'
             type: array
       summary: 'Gets all the Crowding data (static) for the StopPointId, plus crowding data for a given line and optionally a particular direction.'
       tags:
@@ -2588,7 +2602,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/StopPointRouteSection'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPointRouteSection'
             type: array
       summary: Returns the route sections for all the lines that service the given stop point ids
       tags:
@@ -2620,7 +2634,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Place'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Place'
             type: array
       summary: Get a list of places corresponding to a given id and place types.
       tags:
@@ -2645,7 +2659,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Place'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Place'
             type: array
       summary: Get car parks corresponding to the given stop point id.
       tags:
@@ -2670,7 +2684,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Place'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Place'
             type: array
       summary: Gets a list of taxi ranks corresponding to the given stop point id.
       tags:
@@ -2769,7 +2783,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: '#/definitions/System.Object'
       summary: Gets the TravelTime overlay.
       tags:
         - TravelTime
@@ -2859,7 +2873,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: '#/definitions/System.Object'
       summary: Gets the TravelTime overlay.
       tags:
         - TravelTime
@@ -2882,7 +2896,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/VehicleMatch'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.VehicleMatch'
       summary: Gets the Emissions Surcharge compliance for the Vehicle
       tags:
         - Vehicle
@@ -2905,7 +2919,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/VehicleMatch'
+            $ref: '#/definitions/Tfl.Api.Presentation.Entities.VehicleMatch'
       summary: Gets the Ulez Surcharge compliance for the Vehicle
       tags:
         - Vehicle
@@ -2931,19 +2945,132 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Prediction'
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.Prediction'
             type: array
       summary: Gets the predictions for a given list of vehicle Id's.
       tags:
         - Vehicle
 definitions:
-  AccidentDetail:
+  System.Data.Spatial.DbGeography:
+    properties:
+      geography:
+        $ref: '#/definitions/System.Data.Spatial.DbGeographyWellKnownValue'
+    type: object
+  System.Data.Spatial.DbGeographyWellKnownValue:
+    properties:
+      coordinateSystemId:
+        format: int32
+        type: integer
+      wellKnownBinary:
+        format: byte
+        type: string
+      wellKnownText:
+        type: string
+    type: object
+  System.Object:
+    properties: {}
+    type: object
+  Tfl.Api.Common.ApiVersionInfo:
+    properties:
+      assemblies:
+        items:
+          type: string
+        type: array
+      label:
+        type: string
+      timestamp:
+        format: date-time
+        type: string
+      version:
+        type: string
+    type: object
+  Tfl.Api.Common.DateRange:
+    properties:
+      endDate:
+        format: date-time
+        type: string
+      startDate:
+        format: date-time
+        type: string
+    type: object
+  Tfl.Api.Common.DateRangeNullable:
+    properties:
+      endDate:
+        format: date-time
+        type: string
+      startDate:
+        format: date-time
+        type: string
+    type: object
+  Tfl.Api.Common.GeoPoint:
+    properties:
+      lat:
+        format: double
+        type: number
+      lon:
+        format: double
+        type: number
+    required:
+      - lat
+      - lon
+    type: object
+  Tfl.Api.Common.GeoPointBBox:
+    properties:
+      neLat:
+        format: double
+        type: number
+      neLon:
+        format: double
+        type: number
+      swLat:
+        format: double
+        type: number
+      swLon:
+        format: double
+        type: number
+    required:
+      - swLat
+      - swLon
+      - neLat
+      - neLon
+    type: object
+  Tfl.Api.Common.JourneyPlanner.JpElevation:
+    properties:
+      distance:
+        format: int32
+        type: integer
+      endLat:
+        format: double
+        type: number
+      endLon:
+        format: double
+        type: number
+      gradient:
+        format: double
+        type: number
+      heightFromPreviousPoint:
+        format: int32
+        type: integer
+      startLat:
+        format: double
+        type: number
+      startLon:
+        format: double
+        type: number
+    type: object
+  Tfl.Api.Common.PostcodeInput:
+    properties:
+      postcode:
+        pattern: '^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$'
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.AccidentStats.AccidentDetail:
     properties:
       borough:
         type: string
       casualties:
         items:
-          $ref: '#/definitions/Casualty'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.AccidentStats.Casualty'
         type: array
       date:
         format: date-time
@@ -2963,10 +3090,10 @@ definitions:
         type: string
       vehicles:
         items:
-          $ref: '#/definitions/Vehicle'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.AccidentStats.Vehicle'
         type: array
     type: object
-  AccidentStatsOrderedSummary:
+  Tfl.Api.Presentation.Entities.AccidentStats.AccidentStatsOrderedSummary:
     properties:
       accidents:
         format: int32
@@ -2977,14 +3104,33 @@ definitions:
         format: int32
         type: integer
     type: object
-  ActiveServiceType:
+  Tfl.Api.Presentation.Entities.AccidentStats.Casualty:
+    properties:
+      age:
+        format: int32
+        type: integer
+      ageBand:
+        type: string
+      class:
+        type: string
+      mode:
+        type: string
+      severity:
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.AccidentStats.Vehicle:
+    properties:
+      type:
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.ActiveServiceType:
     properties:
       mode:
         type: string
       serviceType:
         type: string
     type: object
-  AdditionalProperties:
+  Tfl.Api.Presentation.Entities.AdditionalProperties:
     properties:
       category:
         type: string
@@ -2998,21 +3144,7 @@ definitions:
       value:
         type: string
     type: object
-  ApiVersionInfo:
-    properties:
-      assemblies:
-        items:
-          type: string
-        type: array
-      label:
-        type: string
-      timestamp:
-        format: date-time
-        type: string
-      version:
-        type: string
-    type: object
-  Bay:
+  Tfl.Api.Presentation.Entities.Bay:
     properties:
       bayCount:
         format: int32
@@ -3026,7 +3158,7 @@ definitions:
         format: int32
         type: integer
     type: object
-  BikePointOccupancy:
+  Tfl.Api.Presentation.Entities.BikePointOccupancy:
     description: Bike point occupancy
     properties:
       bikesCount:
@@ -3048,11 +3180,11 @@ definitions:
         format: int32
         type: integer
     type: object
-  CarParkOccupancy:
+  Tfl.Api.Presentation.Entities.CarParkOccupancy:
     properties:
       bays:
         items:
-          $ref: '#/definitions/Bay'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Bay'
         type: array
       carParkDetailsUrl:
         type: string
@@ -3061,21 +3193,7 @@ definitions:
       name:
         type: string
     type: object
-  Casualty:
-    properties:
-      age:
-        format: int32
-        type: integer
-      ageBand:
-        type: string
-      class:
-        type: string
-      mode:
-        type: string
-      severity:
-        type: string
-    type: object
-  ChargeConnectorOccupancy:
+  Tfl.Api.Presentation.Entities.ChargeConnectorOccupancy:
     description: ''
     properties:
       id:
@@ -3089,7 +3207,7 @@ definitions:
         description: ''
         type: string
     type: object
-  Coordinate:
+  Tfl.Api.Presentation.Entities.Coordinate:
     properties:
       easting:
         format: double
@@ -3110,23 +3228,24 @@ definitions:
         format: int32
         type: integer
     type: object
-  Crowding:
+  Tfl.Api.Presentation.Entities.Crowding:
     properties:
       passengerFlows:
         description: Busiest times at a station (static information)
         items:
-          $ref: '#/definitions/PassengerFlow'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.PassengerFlow'
         type: array
       trainLoadings:
         description: 'Train Loading on a scale 1-6, 1 being "Very quiet" and 6 being "Exceptionally busy" (static information)'
         items:
-          $ref: '#/definitions/TrainLoading'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.TrainLoading'
         type: array
     type: object
-  CycleSuperhighway:
+  Tfl.Api.Presentation.Entities.CycleSuperhighway:
+    description: ''
     properties:
       geography:
-        $ref: '#/definitions/DbGeography'
+        $ref: '#/definitions/System.Data.Spatial.DbGeography'
         description: A LineString or MultiLineString that forms the route of the highway
       id:
         description: The Id
@@ -3141,59 +3260,30 @@ definitions:
         description: When the data was last updated
         format: date-time
         type: string
+      routeType:
+        description: 'Type of cycle route e.g CycleSuperhighways, Quietways, MiniHollands etc'
+        enum:
+          - Unknown
+          - All
+          - CycleSuperHighways
+          - Quietways
+          - MiniHollands
+          - CentralLondonGrid
+          - RoadsProject
+        type: string
       segmented:
         description: True if the route is split into segments
         type: boolean
-    type: object
-  DateRange:
-    properties:
-      endDate:
-        format: date-time
-        type: string
-      startDate:
-        format: date-time
-        type: string
-    type: object
-  DateRangeNullable:
-    properties:
-      endDate:
-        format: date-time
-        type: string
-      startDate:
-        format: date-time
+      status:
+        description: 'Cycle route status i.e Proposed, Existing etc'
+        enum:
+          - Unknown
+          - All
+          - Existing
+          - Proposed
         type: string
     type: object
-  DbGeography:
-    properties:
-      geography:
-        $ref: '#/definitions/DbGeographyWellKnownValue'
-    type: object
-  DbGeographyWellKnownValue:
-    properties:
-      coordinateSystemId:
-        format: int32
-        type: integer
-      wellKnownBinary:
-        format: byte
-        type: string
-      wellKnownText:
-        type: string
-    type: object
-  Disambiguation:
-    properties:
-      disambiguationOptions:
-        items:
-          $ref: '#/definitions/DisambiguationOption'
-        type: array
-    type: object
-  DisambiguationOption:
-    properties:
-      description:
-        type: string
-      uri:
-        type: string
-    type: object
-  DisruptedPoint:
+  Tfl.Api.Presentation.Entities.DisruptedPoint:
     properties:
       additionalInformation:
         type: string
@@ -3218,7 +3308,7 @@ definitions:
       type:
         type: string
     type: object
-  Disruption:
+  Tfl.Api.Presentation.Entities.Disruption:
     description: Represents a disruption to a route within the transport network.
     properties:
       additionalInfo:
@@ -3227,12 +3317,12 @@ definitions:
       affectedRoutes:
         description: Gets or sets the routes affected by this disruption
         items:
-          $ref: '#/definitions/RouteSection'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.RouteSection'
         type: array
       affectedStops:
         description: Gets or sets the stops affected by this disruption
         items:
-          $ref: '#/definitions/StopPoint'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPoint'
         type: array
       category:
         description: Gets or sets the category of this dispruption.
@@ -3269,7 +3359,7 @@ definitions:
         description: Gets or sets the disruption type of this dispruption.
         type: string
     type: object
-  Fare:
+  Tfl.Api.Presentation.Entities.Fares.Fare:
     properties:
       cap:
         format: double
@@ -3298,7 +3388,7 @@ definitions:
       zone:
         type: string
     type: object
-  FareBounds:
+  Tfl.Api.Presentation.Entities.Fares.FareBounds:
     properties:
       description:
         type: string
@@ -3320,7 +3410,7 @@ definitions:
         type: boolean
       messages:
         items:
-          $ref: '#/definitions/Message'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Message'
         type: array
       operator:
         type: string
@@ -3331,7 +3421,7 @@ definitions:
       via:
         type: string
     type: object
-  FareDetails:
+  Tfl.Api.Presentation.Entities.Fares.FareDetails:
     properties:
       boundsId:
         format: int32
@@ -3352,7 +3442,7 @@ definitions:
         type: boolean
       messages:
         items:
-          $ref: '#/definitions/Message'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Message'
         type: array
       mode:
         type: string
@@ -3373,7 +3463,7 @@ definitions:
         type: boolean
       ticketsAvailable:
         items:
-          $ref: '#/definitions/Ticket'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Fares.Ticket'
         type: array
       to:
         type: string
@@ -3384,7 +3474,7 @@ definitions:
       via:
         type: string
     type: object
-  FaresMode:
+  Tfl.Api.Presentation.Entities.Fares.FaresMode:
     properties:
       description:
         type: string
@@ -3394,7 +3484,7 @@ definitions:
       name:
         type: string
     type: object
-  FaresPeriod:
+  Tfl.Api.Presentation.Entities.Fares.FaresPeriod:
     properties:
       endDate:
         format: date-time
@@ -3411,7 +3501,7 @@ definitions:
         format: date-time
         type: string
     type: object
-  FaresSection:
+  Tfl.Api.Presentation.Entities.Fares.FaresSection:
     properties:
       header:
         type: string
@@ -3420,14 +3510,118 @@ definitions:
         type: integer
       messages:
         items:
-          $ref: '#/definitions/Message'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Message'
         type: array
       rows:
         items:
-          $ref: '#/definitions/FareDetails'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Fares.FareDetails'
         type: array
     type: object
-  GeoCodeSearchMatch:
+  Tfl.Api.Presentation.Entities.Fares.PassengerType:
+    properties:
+      description:
+        type: string
+      displayName:
+        type: string
+      displayOrder:
+        format: int32
+        type: integer
+      type:
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.Fares.Recommendation:
+    properties:
+      cost:
+        type: string
+      discountCard:
+        type: string
+      fareType:
+        type: string
+      gettingYourTicket:
+        items:
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Message'
+        type: array
+      id:
+        format: int32
+        type: integer
+      keyFeatures:
+        items:
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Message'
+        type: array
+      notes:
+        items:
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Message'
+        type: array
+      priceComparison:
+        type: string
+      priceDescription:
+        type: string
+      product:
+        type: string
+      productType:
+        type: string
+      rank:
+        format: int32
+        type: integer
+      recommendedTopUp:
+        type: string
+      rule:
+        format: int32
+        type: integer
+      singleFare:
+        format: double
+        type: number
+      ticketTime:
+        type: string
+      ticketType:
+        type: string
+      zones:
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.Fares.RecommendationResponse:
+    properties:
+      recommendations:
+        items:
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Fares.Recommendation'
+        type: array
+    type: object
+  Tfl.Api.Presentation.Entities.Fares.Ticket:
+    properties:
+      cost:
+        type: string
+      description:
+        type: string
+      displayOrder:
+        format: int32
+        type: integer
+      messages:
+        items:
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Message'
+        type: array
+      mode:
+        type: string
+      passengerType:
+        type: string
+      ticketTime:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Fares.TicketTime'
+      ticketType:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Fares.TicketType'
+    type: object
+  Tfl.Api.Presentation.Entities.Fares.TicketTime:
+    properties:
+      description:
+        type: string
+      type:
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.Fares.TicketType:
+    properties:
+      description:
+        type: string
+      type:
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.GeoCodeSearchMatch:
     properties:
       address:
         description: A string describing the formatted address of the place. Adds additional context to the place's Name.
@@ -3450,65 +3644,50 @@ definitions:
       url:
         type: string
     type: object
-  GeoPoint:
-    properties:
-      lat:
-        format: double
-        type: number
-      lon:
-        format: double
-        type: number
-    required:
-      - lat
-      - lon
-    type: object
-  GeoPointBBox:
-    properties:
-      neLat:
-        format: double
-        type: number
-      neLon:
-        format: double
-        type: number
-      swLat:
-        format: double
-        type: number
-      swLon:
-        format: double
-        type: number
-    required:
-      - swLat
-      - swLon
-      - neLat
-      - neLon
-    type: object
-  Identifier:
+  Tfl.Api.Presentation.Entities.Identifier:
     properties:
       crowding:
-        $ref: '#/definitions/Crowding'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Crowding'
       fullName:
         type: string
       id:
         type: string
       name:
         type: string
+      routeType:
+        enum:
+          - Unknown
+          - All
+          - CycleSuperHighways
+          - Quietways
+          - MiniHollands
+          - CentralLondonGrid
+          - RoadsProject
+        type: string
+      status:
+        enum:
+          - Unknown
+          - All
+          - Existing
+          - Proposed
+        type: string
       type:
         type: string
       uri:
         type: string
     type: object
-  Instruction:
+  Tfl.Api.Presentation.Entities.Instruction:
     properties:
       detailed:
         type: string
       steps:
         items:
-          $ref: '#/definitions/InstructionStep'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.InstructionStep'
         type: array
       summary:
         type: string
     type: object
-  InstructionStep:
+  Tfl.Api.Presentation.Entities.InstructionStep:
     properties:
       cumulativeDistance:
         format: int32
@@ -3530,7 +3709,7 @@ definitions:
         format: double
         type: number
       pathAttribute:
-        $ref: '#/definitions/PathAttribute'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.PathAttribute'
       skyDirection:
         format: int32
         type: integer
@@ -3561,7 +3740,7 @@ definitions:
       turnDirection:
         type: string
     type: object
-  Interval:
+  Tfl.Api.Presentation.Entities.Interval:
     properties:
       stopId:
         type: string
@@ -3569,32 +3748,91 @@ definitions:
         format: double
         type: number
     type: object
-  ItineraryResult:
+  Tfl.Api.Presentation.Entities.JourneyPlanner.Fare:
+    properties:
+      chargeLevel:
+        type: string
+      chargeProfileName:
+        type: string
+      cost:
+        format: int32
+        type: integer
+      highZone:
+        format: int32
+        type: integer
+      isHopperFare:
+        type: boolean
+      lowZone:
+        format: int32
+        type: integer
+      offPeak:
+        format: int32
+        type: integer
+      peak:
+        format: int32
+        type: integer
+      taps:
+        items:
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.FareTap'
+        type: array
+    type: object
+  Tfl.Api.Presentation.Entities.JourneyPlanner.FareCaveat:
+    properties:
+      text:
+        type: string
+      type:
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.JourneyPlanner.FareTap:
+    properties:
+      atcoCode:
+        type: string
+      tapDetails:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.FareTapDetails'
+    type: object
+  Tfl.Api.Presentation.Entities.JourneyPlanner.FareTapDetails:
+    properties:
+      busRouteId:
+        type: string
+      hostDeviceType:
+        type: string
+      modeType:
+        type: string
+      nationalLocationCode:
+        format: int32
+        type: integer
+      tapTimestamp:
+        format: date-time
+        type: string
+      validationType:
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.JourneyPlanner.ItineraryResult:
     description: A DTO representing a list of possible journeys.
     properties:
       cycleHireDockingStationData:
-        $ref: '#/definitions/JourneyPlannerCycleHireDockingStationData'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.JourneyPlannerCycleHireDockingStationData'
       journeyVector:
-        $ref: '#/definitions/JourneyVector'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.JourneyVector'
       journeys:
         items:
-          $ref: '#/definitions/Journey'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.Journey'
         type: array
       lines:
         items:
-          $ref: '#/definitions/Line'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Line'
         type: array
       recommendedMaxAgeMinutes:
         format: int32
         type: integer
       searchCriteria:
-        $ref: '#/definitions/SearchCriteria'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.SearchCriteria'
       stopMessages:
         items:
           type: string
         type: array
     type: object
-  Journey:
+  Tfl.Api.Presentation.Entities.JourneyPlanner.Journey:
     description: Object that represents an end to end journey (see schematic).
     properties:
       arrivalDateTime:
@@ -3603,15 +3841,31 @@ definitions:
       duration:
         format: int32
         type: integer
+      fare:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.JourneyFare'
       legs:
         items:
-          $ref: '#/definitions/Leg'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.Leg'
         type: array
       startDateTime:
         format: date-time
         type: string
     type: object
-  JourneyPlannerCycleHireDockingStationData:
+  Tfl.Api.Presentation.Entities.JourneyPlanner.JourneyFare:
+    properties:
+      caveats:
+        items:
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.FareCaveat'
+        type: array
+      fares:
+        items:
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.Fare'
+        type: array
+      totalCost:
+        format: int32
+        type: integer
+    type: object
+  Tfl.Api.Presentation.Entities.JourneyPlanner.JourneyPlannerCycleHireDockingStationData:
     properties:
       destinationId:
         type: string
@@ -3630,7 +3884,7 @@ definitions:
         format: int32
         type: integer
     type: object
-  JourneyVector:
+  Tfl.Api.Presentation.Entities.JourneyPlanner.JourneyVector:
     properties:
       from:
         type: string
@@ -3641,55 +3895,21 @@ definitions:
       via:
         type: string
     type: object
-  JpElevation:
-    properties:
-      distance:
-        format: int32
-        type: integer
-      endLat:
-        format: double
-        type: number
-      endLon:
-        format: double
-        type: number
-      gradient:
-        format: double
-        type: number
-      heightFromPreviousPoint:
-        format: int32
-        type: integer
-      startLat:
-        format: double
-        type: number
-      startLon:
-        format: double
-        type: number
-    type: object
-  KnownJourney:
-    properties:
-      hour:
-        type: string
-      intervalId:
-        format: int32
-        type: integer
-      minute:
-        type: string
-    type: object
-  Leg:
+  Tfl.Api.Presentation.Entities.JourneyPlanner.Leg:
     properties:
       arrivalPoint:
-        $ref: '#/definitions/Point'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Point'
       arrivalTime:
         format: date-time
         type: string
       departurePoint:
-        $ref: '#/definitions/Point'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Point'
       departureTime:
         format: date-time
         type: string
       disruptions:
         items:
-          $ref: '#/definitions/Disruption'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Disruption'
         type: array
       distance:
         format: double
@@ -3701,46 +3921,145 @@ definitions:
         readOnly: true
         type: boolean
       instruction:
-        $ref: '#/definitions/Instruction'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Instruction'
         description: "Describes the action the user need to take for this section, E.g. \"walk to the\r\n            district line\""
       isDisrupted:
         readOnly: true
         type: boolean
       mode:
-        $ref: '#/definitions/Identifier'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Identifier'
       obstacles:
         items:
-          $ref: '#/definitions/Obstacle'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.Obstacle'
         type: array
       path:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.Path'
       plannedWorks:
         items:
-          $ref: '#/definitions/PlannedWork'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.PlannedWork'
         type: array
       routeOptions:
         items:
-          $ref: '#/definitions/RouteOption'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.RouteOption'
         type: array
       speed:
         type: string
     type: object
-  Line:
+  Tfl.Api.Presentation.Entities.JourneyPlanner.Obstacle:
+    properties:
+      incline:
+        type: string
+      position:
+        type: string
+      stopId:
+        format: int32
+        type: integer
+      type:
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.JourneyPlanner.Path:
+    properties:
+      elevation:
+        items:
+          $ref: '#/definitions/Tfl.Api.Common.JourneyPlanner.JpElevation'
+        type: array
+      lineString:
+        type: string
+      stopPoints:
+        items:
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Identifier'
+        type: array
+    type: object
+  Tfl.Api.Presentation.Entities.JourneyPlanner.PlannedWork:
+    properties:
+      createdDateTime:
+        format: date-time
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      lastUpdateDateTime:
+        format: date-time
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.JourneyPlanner.RouteOption:
+    properties:
+      directions:
+        items:
+          type: string
+        type: array
+      id:
+        description: The Id of the route
+        type: string
+      lineIdentifier:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Identifier'
+        description: 'The line identifier (e.g. District Line), from where you can obtain line status information e.g. the rainbow board status "good service".'
+      name:
+        description: Name such as "72"
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.JourneyPlanner.SearchCriteria:
+    properties:
+      dateTime:
+        format: date-time
+        type: string
+      dateTimeType:
+        enum:
+          - Arriving
+          - Departing
+        type: string
+      timeAdjustments:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustments'
+    type: object
+  Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustment:
+    properties:
+      date:
+        type: string
+      time:
+        type: string
+      timeIs:
+        type: string
+      uri:
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustments:
+    properties:
+      earlier:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustment'
+      earliest:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustment'
+      later:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustment'
+      latest:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustment'
+    type: object
+  Tfl.Api.Presentation.Entities.KnownJourney:
+    properties:
+      hour:
+        type: string
+      intervalId:
+        format: int32
+        type: integer
+      minute:
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.Line:
     properties:
       created:
         format: date-time
         type: string
       crowding:
-        $ref: '#/definitions/Crowding'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Crowding'
       disruptions:
         items:
-          $ref: '#/definitions/Disruption'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Disruption'
         type: array
       id:
         type: string
       lineStatuses:
         items:
-          $ref: '#/definitions/LineStatus'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.LineStatus'
         type: array
       modeName:
         type: string
@@ -3751,14 +4070,14 @@ definitions:
         type: string
       routeSections:
         items:
-          $ref: '#/definitions/MatchedRoute'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.MatchedRoute'
         type: array
       serviceTypes:
         items:
-          $ref: '#/definitions/LineServiceTypeInfo'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.LineServiceTypeInfo'
         type: array
     type: object
-  LineGroup:
+  Tfl.Api.Presentation.Entities.LineGroup:
     properties:
       lineIdentifier:
         items:
@@ -3769,7 +4088,7 @@ definitions:
       stationAtcoCode:
         type: string
     type: object
-  LineModeGroup:
+  Tfl.Api.Presentation.Entities.LineModeGroup:
     properties:
       lineIdentifier:
         items:
@@ -3778,7 +4097,7 @@ definitions:
       modeName:
         type: string
     type: object
-  LineRouteSection:
+  Tfl.Api.Presentation.Entities.LineRouteSection:
     properties:
       destination:
         type: string
@@ -3796,36 +4115,36 @@ definitions:
       vehicleDestinationText:
         type: string
     type: object
-  LineServiceType:
+  Tfl.Api.Presentation.Entities.LineServiceType:
     properties:
       lineName:
         type: string
       lineSpecificServiceTypes:
         items:
-          $ref: '#/definitions/LineSpecificServiceType'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.LineSpecificServiceType'
         type: array
     type: object
-  LineServiceTypeInfo:
+  Tfl.Api.Presentation.Entities.LineServiceTypeInfo:
     properties:
       name:
         type: string
       uri:
         type: string
     type: object
-  LineSpecificServiceType:
+  Tfl.Api.Presentation.Entities.LineSpecificServiceType:
     properties:
       serviceType:
-        $ref: '#/definitions/LineServiceTypeInfo'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.LineServiceTypeInfo'
       stopServesServiceType:
         type: boolean
     type: object
-  LineStatus:
+  Tfl.Api.Presentation.Entities.LineStatus:
     properties:
       created:
         format: date-time
         type: string
       disruption:
-        $ref: '#/definitions/Disruption'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Disruption'
       id:
         format: int32
         type: integer
@@ -3843,10 +4162,10 @@ definitions:
         type: string
       validityPeriods:
         items:
-          $ref: '#/definitions/ValidityPeriod'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.ValidityPeriod'
         type: array
     type: object
-  MatchedRoute:
+  Tfl.Api.Presentation.Entities.MatchedRoute:
     description: Description of a Route used in Route search results.
     properties:
       destination:
@@ -3882,13 +4201,13 @@ definitions:
         format: date-time
         type: string
     type: object
-  MatchedRouteSections:
+  Tfl.Api.Presentation.Entities.MatchedRouteSections:
     properties:
       id:
         format: int32
         type: integer
     type: object
-  MatchedStop:
+  Tfl.Api.Presentation.Entities.MatchedStop:
     properties:
       accessibilitySummary:
         type: string
@@ -3905,7 +4224,7 @@ definitions:
         type: number
       lines:
         items:
-          $ref: '#/definitions/Identifier'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Identifier'
         type: array
       lon:
         format: double
@@ -3938,7 +4257,7 @@ definitions:
       zone:
         type: string
     type: object
-  Message:
+  Tfl.Api.Presentation.Entities.Message:
     properties:
       bulletOrder:
         format: int32
@@ -3952,7 +4271,7 @@ definitions:
       url:
         type: string
     type: object
-  Mode:
+  Tfl.Api.Presentation.Entities.Mode:
     properties:
       isFarePaying:
         type: boolean
@@ -3963,7 +4282,7 @@ definitions:
       modeName:
         type: string
     type: object
-  NetworkStatus:
+  Tfl.Api.Presentation.Entities.NetworkStatus:
     description: Represent travel network status
     properties:
       message:
@@ -3976,22 +4295,7 @@ definitions:
         format: int32
         type: integer
     type: object
-  Object:
-    properties: {}
-    type: object
-  Obstacle:
-    properties:
-      incline:
-        type: string
-      position:
-        type: string
-      stopId:
-        format: int32
-        type: integer
-      type:
-        type: string
-    type: object
-  OrderedRoute:
+  Tfl.Api.Presentation.Entities.OrderedRoute:
     properties:
       name:
         type: string
@@ -4002,7 +4306,7 @@ definitions:
       serviceType:
         type: string
     type: object
-  PassengerFlow:
+  Tfl.Api.Presentation.Entities.PassengerFlow:
     properties:
       timeSlice:
         description: 'Time in 24hr format with 15 minute intervals e.g. 0500-0515, 0515-0530 etc.'
@@ -4012,46 +4316,21 @@ definitions:
         format: int32
         type: integer
     type: object
-  PassengerType:
-    properties:
-      description:
-        type: string
-      displayName:
-        type: string
-      displayOrder:
-        format: int32
-        type: integer
-      type:
-        type: string
-    type: object
-  Path:
-    properties:
-      elevation:
-        items:
-          $ref: '#/definitions/JpElevation'
-        type: array
-      lineString:
-        type: string
-      stopPoints:
-        items:
-          $ref: '#/definitions/Identifier'
-        type: array
-    type: object
-  PathAttribute:
+  Tfl.Api.Presentation.Entities.PathAttribute:
     properties:
       name:
         type: string
       value:
         type: string
     type: object
-  Period:
+  Tfl.Api.Presentation.Entities.Period:
     properties:
       frequency:
-        $ref: '#/definitions/ServiceFrequency'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.ServiceFrequency'
       fromTime:
-        $ref: '#/definitions/TwentyFourHourClockTime'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.TwentyFourHourClockTime'
       toTime:
-        $ref: '#/definitions/TwentyFourHourClockTime'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.TwentyFourHourClockTime'
       type:
         enum:
           - Normal
@@ -4060,16 +4339,16 @@ definitions:
           - Unknown
         type: string
     type: object
-  Place:
+  Tfl.Api.Presentation.Entities.Place:
     properties:
       additionalProperties:
         description: A bag of additional key/value pairs with extra information about this place.
         items:
-          $ref: '#/definitions/AdditionalProperties'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.AdditionalProperties'
         type: array
       children:
         items:
-          $ref: '#/definitions/Place'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Place'
         type: array
       childrenUrls:
         items:
@@ -4100,7 +4379,7 @@ definitions:
         description: The unique location of this resource.
         type: string
     type: object
-  PlaceCategory:
+  Tfl.Api.Presentation.Entities.PlaceCategory:
     properties:
       availableKeys:
         items:
@@ -4109,29 +4388,16 @@ definitions:
       category:
         type: string
     type: object
-  PlacePolygon:
+  Tfl.Api.Presentation.Entities.PlacePolygon:
     properties:
       commonName:
         type: string
       geoPoints:
         items:
-          $ref: '#/definitions/GeoPoint'
+          $ref: '#/definitions/Tfl.Api.Common.GeoPoint'
         type: array
     type: object
-  PlannedWork:
-    properties:
-      createdDateTime:
-        format: date-time
-        type: string
-      description:
-        type: string
-      id:
-        type: string
-      lastUpdateDateTime:
-        format: date-time
-        type: string
-    type: object
-  Point:
+  Tfl.Api.Presentation.Entities.Point:
     description: Represents a point located at a latitude and longitude using the WGS84 co-ordinate system.
     properties:
       lat:
@@ -4143,13 +4409,7 @@ definitions:
         format: double
         type: number
     type: object
-  PostcodeInput:
-    properties:
-      postcode:
-        pattern: '^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$'
-        type: string
-    type: object
-  Prediction:
+  Tfl.Api.Presentation.Entities.Prediction:
     description: DTO to capture the prediction details
     properties:
       bearing:
@@ -4209,7 +4469,7 @@ definitions:
         format: date-time
         type: string
       timing:
-        $ref: '#/definitions/PredictionTiming'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.PredictionTiming'
         description: Keep the original timestamp from MongoDb fo debugging purposes
       towards:
         description: Routing information or other descriptive text about the path of the vehicle towards the destination
@@ -4218,7 +4478,7 @@ definitions:
         description: 'The actual vehicle in transit (for train modes, the leading car of the rolling set)'
         type: string
     type: object
-  PredictionTiming:
+  Tfl.Api.Presentation.Entities.PredictionTiming:
     properties:
       countdownServerAdjustment:
         type: string
@@ -4238,63 +4498,7 @@ definitions:
         format: date-time
         type: string
     type: object
-  Recommendation:
-    properties:
-      cost:
-        type: string
-      discountCard:
-        type: string
-      fareType:
-        type: string
-      gettingYourTicket:
-        items:
-          $ref: '#/definitions/Message'
-        type: array
-      id:
-        format: int32
-        type: integer
-      keyFeatures:
-        items:
-          $ref: '#/definitions/Message'
-        type: array
-      notes:
-        items:
-          $ref: '#/definitions/Message'
-        type: array
-      priceComparison:
-        type: string
-      priceDescription:
-        type: string
-      product:
-        type: string
-      productType:
-        type: string
-      rank:
-        format: int32
-        type: integer
-      recommendedTopUp:
-        type: string
-      rule:
-        format: int32
-        type: integer
-      singleFare:
-        format: double
-        type: number
-      ticketTime:
-        type: string
-      ticketType:
-        type: string
-      zones:
-        type: string
-    type: object
-  RecommendationResponse:
-    properties:
-      recommendations:
-        items:
-          $ref: '#/definitions/Recommendation'
-        type: array
-    type: object
-  Redirect:
+  Tfl.Api.Presentation.Entities.Redirect:
     properties:
       active:
         type: boolean
@@ -4303,7 +4507,7 @@ definitions:
       shortUrl:
         type: string
     type: object
-  RoadCorridor:
+  Tfl.Api.Presentation.Entities.RoadCorridor:
     properties:
       bounds:
         description: "The Bounds of the Corridor, given by the south-east followed by the north-west co-ordinate\r\n            pair in geoJSON format e.g. \"[[-1.241531,51.242151],[1.641223,53.765721]]\""
@@ -4338,7 +4542,7 @@ definitions:
         description: URL to retrieve this Corridor.
         type: string
     type: object
-  RoadDisruption:
+  Tfl.Api.Presentation.Entities.RoadDisruption:
     properties:
       category:
         description: 'Describes the nature of disruption e.g. Traffic Incidents, Works'
@@ -4363,10 +4567,10 @@ definitions:
         format: date-time
         type: string
       geography:
-        $ref: '#/definitions/DbGeography'
+        $ref: '#/definitions/System.Data.Spatial.DbGeography'
         description: "Geography version of Point for output as GeoJSON.\r\n            Can not use Geometry in a consistent way as non-TIMS disruptions do not have a polygon"
       geometry:
-        $ref: '#/definitions/DbGeography'
+        $ref: '#/definitions/System.Data.Spatial.DbGeography'
         description: "GeoJSON formatted latitude/longitude (WGS84) pairs forming an enclosed polyline or polygon. The polygon will only be included where affected streets information\r\n            is not available for the disruption, would be inappropriate (e.g. a very large number of streets), or is centred on an area without streets (e.g. a football stadium)."
       hasClosures:
         description: "True if any of the affected Streets have a \"Full Closure\" status, false otherwise. A RoadDisruption that has HasClosures is considered a \r\n            Severe or Serious disruption for severity filtering purposes."
@@ -4409,18 +4613,18 @@ definitions:
         type: string
       recurringSchedules:
         items:
-          $ref: '#/definitions/RoadDisruptionSchedule'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.RoadDisruptionSchedule'
         type: array
       roadDisruptionImpactAreas:
         items:
-          $ref: '#/definitions/RoadDisruptionImpactArea'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.RoadDisruptionImpactArea'
         type: array
       roadDisruptionLines:
         items:
-          $ref: '#/definitions/RoadDisruptionLine'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.RoadDisruptionLine'
         type: array
       roadProject:
-        $ref: '#/definitions/RoadProject'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.RoadProject'
         description: Any associated road project
       severity:
         description: A description of the severity of the disruption.
@@ -4435,7 +4639,7 @@ definitions:
       streets:
         description: A collection of zero or more streets affected by the disruption.
         items:
-          $ref: '#/definitions/Street'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Street'
         type: array
       subCategory:
         description: 'Describes the sub-category of disruption e.g. Collapsed Manhole, Abnormal Load'
@@ -4446,7 +4650,7 @@ definitions:
         description: URL to retrieve this road disruption
         type: string
     type: object
-  RoadDisruptionImpactArea:
+  Tfl.Api.Presentation.Entities.RoadDisruptionImpactArea:
     properties:
       endDate:
         format: date-time
@@ -4457,7 +4661,7 @@ definitions:
         format: int32
         type: integer
       polygon:
-        $ref: '#/definitions/DbGeography'
+        $ref: '#/definitions/System.Data.Spatial.DbGeography'
       roadDisruptionId:
         type: string
       startDate:
@@ -4466,7 +4670,7 @@ definitions:
       startTime:
         type: string
     type: object
-  RoadDisruptionLine:
+  Tfl.Api.Presentation.Entities.RoadDisruptionLine:
     properties:
       endDate:
         format: date-time
@@ -4479,7 +4683,7 @@ definitions:
       isDiversion:
         type: boolean
       multiLineString:
-        $ref: '#/definitions/DbGeography'
+        $ref: '#/definitions/System.Data.Spatial.DbGeography'
       roadDisruptionId:
         type: string
       startDate:
@@ -4488,7 +4692,7 @@ definitions:
       startTime:
         type: string
     type: object
-  RoadDisruptionSchedule:
+  Tfl.Api.Presentation.Entities.RoadDisruptionSchedule:
     properties:
       endTime:
         format: date-time
@@ -4497,7 +4701,7 @@ definitions:
         format: date-time
         type: string
     type: object
-  RoadProject:
+  Tfl.Api.Presentation.Entities.RoadProject:
     properties:
       boroughsBenefited:
         items:
@@ -4547,23 +4751,7 @@ definitions:
       schemeName:
         type: string
     type: object
-  RouteOption:
-    properties:
-      directions:
-        items:
-          type: string
-        type: array
-      id:
-        description: The Id of the route
-        type: string
-      lineIdentifier:
-        $ref: '#/definitions/Identifier'
-        description: 'The line identifier (e.g. District Line), from where you can obtain line status information e.g. the rainbow board status "good service".'
-      name:
-        description: Name such as "72"
-        type: string
-    type: object
-  RouteSearchMatch:
+  Tfl.Api.Presentation.Entities.RouteSearchMatch:
     properties:
       id:
         type: string
@@ -4576,18 +4764,18 @@ definitions:
         type: string
       lineRouteSection:
         items:
-          $ref: '#/definitions/LineRouteSection'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.LineRouteSection'
         type: array
       lon:
         format: double
         type: number
       matchedRouteSections:
         items:
-          $ref: '#/definitions/MatchedRouteSections'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.MatchedRouteSections'
         type: array
       matchedStops:
         items:
-          $ref: '#/definitions/MatchedStop'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.MatchedStop'
         type: array
       mode:
         type: string
@@ -4596,16 +4784,16 @@ definitions:
       url:
         type: string
     type: object
-  RouteSearchResponse:
+  Tfl.Api.Presentation.Entities.RouteSearchResponse:
     properties:
       input:
         type: string
       searchMatches:
         items:
-          $ref: '#/definitions/RouteSearchMatch'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.RouteSearchMatch'
         type: array
     type: object
-  RouteSection:
+  Tfl.Api.Presentation.Entities.RouteSection:
     properties:
       destinationName:
         description: The name of the Destination StopPoint
@@ -4633,7 +4821,7 @@ definitions:
         type: string
       routeSectionNaptanEntrySequence:
         items:
-          $ref: '#/definitions/RouteSectionNaptanEntrySequence'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.RouteSectionNaptanEntrySequence'
         type: array
       validFrom:
         description: The DateTime that the Service containing this Route is valid from.
@@ -4644,15 +4832,15 @@ definitions:
         format: date-time
         type: string
     type: object
-  RouteSectionNaptanEntrySequence:
+  Tfl.Api.Presentation.Entities.RouteSectionNaptanEntrySequence:
     properties:
       ordinal:
         format: int32
         type: integer
       stopPoint:
-        $ref: '#/definitions/StopPoint'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPoint'
     type: object
-  RouteSequence:
+  Tfl.Api.Presentation.Entities.RouteSequence:
     properties:
       direction:
         type: string
@@ -4670,48 +4858,35 @@ definitions:
         type: string
       orderedLineRoutes:
         items:
-          $ref: '#/definitions/OrderedRoute'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.OrderedRoute'
         type: array
       stations:
         items:
-          $ref: '#/definitions/MatchedStop'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.MatchedStop'
         type: array
       stopPointSequences:
         items:
-          $ref: '#/definitions/StopPointSequence'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPointSequence'
         type: array
     type: object
-  Schedule:
+  Tfl.Api.Presentation.Entities.Schedule:
     properties:
       firstJourney:
-        $ref: '#/definitions/KnownJourney'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.KnownJourney'
       knownJourneys:
         items:
-          $ref: '#/definitions/KnownJourney'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.KnownJourney'
         type: array
       lastJourney:
-        $ref: '#/definitions/KnownJourney'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.KnownJourney'
       name:
         type: string
       periods:
         items:
-          $ref: '#/definitions/Period'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Period'
         type: array
     type: object
-  SearchCriteria:
-    properties:
-      dateTime:
-        format: date-time
-        type: string
-      dateTimeType:
-        enum:
-          - Arriving
-          - Departing
-        type: string
-      timeAdjustments:
-        $ref: '#/definitions/TimeAdjustments'
-    type: object
-  SearchMatch:
+  Tfl.Api.Presentation.Entities.SearchMatch:
     properties:
       id:
         type: string
@@ -4726,14 +4901,14 @@ definitions:
       url:
         type: string
     type: object
-  SearchResponse:
+  Tfl.Api.Presentation.Entities.SearchResponse:
     properties:
       from:
         format: int32
         type: integer
       matches:
         items:
-          $ref: '#/definitions/SearchMatch'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.SearchMatch'
         type: array
       maxScore:
         format: double
@@ -4752,7 +4927,7 @@ definitions:
         format: int32
         type: integer
     type: object
-  ServiceFrequency:
+  Tfl.Api.Presentation.Entities.ServiceFrequency:
     properties:
       highestFrequency:
         format: double
@@ -4761,16 +4936,16 @@ definitions:
         format: double
         type: number
     type: object
-  StationInterval:
+  Tfl.Api.Presentation.Entities.StationInterval:
     properties:
       id:
         type: string
       intervals:
         items:
-          $ref: '#/definitions/Interval'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Interval'
         type: array
     type: object
-  StatusSeverity:
+  Tfl.Api.Presentation.Entities.StatusSeverity:
     properties:
       description:
         type: string
@@ -4780,18 +4955,18 @@ definitions:
         format: int32
         type: integer
     type: object
-  StopPoint:
+  Tfl.Api.Presentation.Entities.StopPoint:
     properties:
       accessibilitySummary:
         type: string
       additionalProperties:
         description: A bag of additional key/value pairs with extra information about this place.
         items:
-          $ref: '#/definitions/AdditionalProperties'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.AdditionalProperties'
         type: array
       children:
         items:
-          $ref: '#/definitions/Place'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Place'
         type: array
       childrenUrls:
         items:
@@ -4822,15 +4997,15 @@ definitions:
         type: number
       lineGroup:
         items:
-          $ref: '#/definitions/LineGroup'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.LineGroup'
         type: array
       lineModeGroups:
         items:
-          $ref: '#/definitions/LineModeGroup'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.LineModeGroup'
         type: array
       lines:
         items:
-          $ref: '#/definitions/Identifier'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Identifier'
         type: array
       lon:
         description: WGS84 longitude of the location.
@@ -4864,7 +5039,7 @@ definitions:
         description: The unique location of this resource.
         type: string
     type: object
-  StopPointCategory:
+  Tfl.Api.Presentation.Entities.StopPointCategory:
     properties:
       availableKeys:
         items:
@@ -4873,7 +5048,7 @@ definitions:
       category:
         type: string
     type: object
-  StopPointRouteSection:
+  Tfl.Api.Presentation.Entities.StopPointRouteSection:
     properties:
       destinationName:
         type: string
@@ -4902,7 +5077,7 @@ definitions:
       vehicleDestinationText:
         type: string
     type: object
-  StopPointSequence:
+  Tfl.Api.Presentation.Entities.StopPointSequence:
     properties:
       branchId:
         description: The id of this branch.
@@ -4933,10 +5108,10 @@ definitions:
         type: string
       stopPoint:
         items:
-          $ref: '#/definitions/MatchedStop'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.MatchedStop'
         type: array
     type: object
-  StopPointsResponse:
+  Tfl.Api.Presentation.Entities.StopPointsResponse:
     description: A paged response containing StopPoints
     properties:
       centrePoint:
@@ -4956,14 +5131,14 @@ definitions:
       stopPoints:
         description: Collection of stop points
         items:
-          $ref: '#/definitions/StopPoint'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPoint'
         type: array
       total:
         description: The total number of StopPoints available across all pages
         format: int32
         type: integer
     type: object
-  Street:
+  Tfl.Api.Presentation.Entities.Street:
     properties:
       closure:
         description: "Type of road closure. Some example values:\r\n            Open = road is open, not blocked, not closed, not restricted. It maybe that the disruption has been moved out of the carriageway.\r\n            Partial Closure = road is partially blocked, closed or restricted. \r\n            Full Closure = road is fully blocked or closed."
@@ -4977,7 +5152,7 @@ definitions:
       segments:
         description: Geographic description of the sections of this street that are affected.
         items:
-          $ref: '#/definitions/StreetSegment'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.StreetSegment'
         type: array
       sourceSystemId:
         description: The ID from the source system of the disruption that this street belongs to.
@@ -4987,7 +5162,7 @@ definitions:
         description: The key of the source system of the disruption that this street belongs to.
         type: string
     type: object
-  StreetSegment:
+  Tfl.Api.Presentation.Entities.StreetSegment:
     properties:
       lineString:
         description: geoJSON formatted LineString containing two latitude/longitude (WGS84) pairs that identify the start and end points of the street segment.
@@ -5003,79 +5178,21 @@ definitions:
         description: A 16 digit unique integer identifying a OS ITN (Ordnance Survey Integrated Transport Network) road link.
         type: string
     type: object
-  Ticket:
-    properties:
-      cost:
-        type: string
-      description:
-        type: string
-      displayOrder:
-        format: int32
-        type: integer
-      messages:
-        items:
-          $ref: '#/definitions/Message'
-        type: array
-      mode:
-        type: string
-      passengerType:
-        type: string
-      ticketTime:
-        $ref: '#/definitions/TicketTime'
-      ticketType:
-        $ref: '#/definitions/TicketType'
-    type: object
-  TicketTime:
-    properties:
-      description:
-        type: string
-      type:
-        type: string
-    type: object
-  TicketType:
-    properties:
-      description:
-        type: string
-      type:
-        type: string
-    type: object
-  TimeAdjustment:
-    properties:
-      date:
-        type: string
-      time:
-        type: string
-      timeIs:
-        type: string
-      uri:
-        type: string
-    type: object
-  TimeAdjustments:
-    properties:
-      earlier:
-        $ref: '#/definitions/TimeAdjustment'
-      earliest:
-        $ref: '#/definitions/TimeAdjustment'
-      later:
-        $ref: '#/definitions/TimeAdjustment'
-      latest:
-        $ref: '#/definitions/TimeAdjustment'
-    type: object
-  Timetable:
+  Tfl.Api.Presentation.Entities.Timetable:
     properties:
       departureStopId:
         type: string
       routes:
         items:
-          $ref: '#/definitions/TimetableRoute'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.TimetableRoute'
         type: array
     type: object
-  TimetableResponse:
+  Tfl.Api.Presentation.Entities.TimetableResponse:
     properties:
       direction:
         type: string
       disambiguation:
-        $ref: '#/definitions/Disambiguation'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Timetables.Disambiguation'
       lineId:
         type: string
       lineName:
@@ -5084,29 +5201,43 @@ definitions:
         type: string
       stations:
         items:
-          $ref: '#/definitions/MatchedStop'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.MatchedStop'
         type: array
       statusErrorMessage:
         type: string
       stops:
         items:
-          $ref: '#/definitions/MatchedStop'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.MatchedStop'
         type: array
       timetable:
-        $ref: '#/definitions/Timetable'
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Timetable'
     type: object
-  TimetableRoute:
+  Tfl.Api.Presentation.Entities.TimetableRoute:
     properties:
       schedules:
         items:
-          $ref: '#/definitions/Schedule'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Schedule'
         type: array
       stationIntervals:
         items:
-          $ref: '#/definitions/StationInterval'
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.StationInterval'
         type: array
     type: object
-  TrainLoading:
+  Tfl.Api.Presentation.Entities.Timetables.Disambiguation:
+    properties:
+      disambiguationOptions:
+        items:
+          $ref: '#/definitions/Tfl.Api.Presentation.Entities.Timetables.DisambiguationOption'
+        type: array
+    type: object
+  Tfl.Api.Presentation.Entities.Timetables.DisambiguationOption:
+    properties:
+      description:
+        type: string
+      uri:
+        type: string
+    type: object
+  Tfl.Api.Presentation.Entities.TrainLoading:
     properties:
       direction:
         description: Direction in regards to Journey Planner i.e. inbound or outbound
@@ -5131,14 +5262,14 @@ definitions:
         format: int32
         type: integer
     type: object
-  TwentyFourHourClockTime:
+  Tfl.Api.Presentation.Entities.TwentyFourHourClockTime:
     properties:
       hour:
         type: string
       minute:
         type: string
     type: object
-  ValidityPeriod:
+  Tfl.Api.Presentation.Entities.ValidityPeriod:
     description: Represents a period for which a planned works is valid.
     properties:
       fromDate:
@@ -5153,12 +5284,7 @@ definitions:
         format: date-time
         type: string
     type: object
-  Vehicle:
-    properties:
-      type:
-        type: string
-    type: object
-  VehicleMatch:
+  Tfl.Api.Presentation.Entities.VehicleMatch:
     description: ''
     properties:
       colour:

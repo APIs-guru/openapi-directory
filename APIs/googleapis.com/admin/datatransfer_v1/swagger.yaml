@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Transfers user data from one user to another.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Admin Data Transfer
   version: datatransfer_v1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/admin/datatransfer_v1/rest'
       version: v1
@@ -35,20 +31,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/admin.datatransfer': View and manage data transfers between users in your organization
       'https://www.googleapis.com/auth/admin.datatransfer.readonly': View data transfers between users in your organization
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/admin.datatransfer': View and manage data transfers between users in your organization
-      'https://www.googleapis.com/auth/admin.datatransfer.readonly': View data transfers between users in your organization
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -81,12 +68,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -121,11 +108,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.datatransfer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.datatransfer'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.datatransfer.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.datatransfer.readonly'
       tags:
         - applications
@@ -155,11 +138,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.datatransfer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.datatransfer'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.datatransfer.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.datatransfer.readonly'
       tags:
         - applications
@@ -210,11 +189,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.datatransfer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.datatransfer'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.datatransfer.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.datatransfer.readonly'
       tags:
         - transfers
@@ -242,8 +217,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.datatransfer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.datatransfer'
       tags:
         - transfers
   '/transfers/{dataTransferId}':
@@ -264,11 +237,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.datatransfer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.datatransfer'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.datatransfer.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.datatransfer.readonly'
       tags:
         - transfers

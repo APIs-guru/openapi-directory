@@ -1,6 +1,6 @@
 swagger: '2.0'
 schemes:
-  - http
+  - https
 host: vocadb.net
 info:
   contact:
@@ -417,6 +417,123 @@ paths:
               type: string
             type: array
       summary: Gets a list of album names. Ideal for autocomplete boxes.
+      tags:
+        - AlbumApi
+  /api/albums/new:
+    get:
+      consumes: []
+      deprecated: false
+      description: Output is cached for 1 hour.
+      operationId: AlbumApi_GetNewAlbums
+      parameters:
+        - enum:
+            - Default
+            - Japanese
+            - Romaji
+            - English
+          in: query
+          name: languagePreference
+          required: false
+          type: string
+        - enum:
+            - None
+            - AdditionalNames
+            - Artists
+            - Description
+            - Discs
+            - Identifiers
+            - MainPicture
+            - Names
+            - PVs
+            - ReleaseEvent
+            - Tags
+            - Tracks
+            - WebLinks
+          in: query
+          name: fields
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - text/javascript
+        - application/javascript
+        - application/json-p
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/AlbumForApiContract'
+            type: array
+      summary: 'Gets list of upcoming or recent albums, same as front page.'
+      tags:
+        - AlbumApi
+  /api/albums/top:
+    get:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: Output is cached for 1 hour.
+      operationId: AlbumApi_GetTopAlbums
+      parameters:
+        - in: body
+          name: ignoreIds
+          required: true
+          schema:
+            items:
+              format: int32
+              type: integer
+            type: array
+        - enum:
+            - Default
+            - Japanese
+            - Romaji
+            - English
+          in: query
+          name: languagePreference
+          required: false
+          type: string
+        - enum:
+            - None
+            - AdditionalNames
+            - Artists
+            - Description
+            - Discs
+            - Identifiers
+            - MainPicture
+            - Names
+            - PVs
+            - ReleaseEvent
+            - Tags
+            - Tracks
+            - WebLinks
+          in: query
+          name: fields
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - text/javascript
+        - application/javascript
+        - application/json-p
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/AlbumForApiContract'
+            type: array
+      summary: 'Gets list of top rated albums, same as front page.'
       tags:
         - AlbumApi
   '/api/albums/{id}':
@@ -1929,6 +2046,11 @@ paths:
           name: notes
           required: false
           type: string
+        - description: "If true, the entry is hard deleted. Hard deleted entries cannot be restored normally, but they will be moved to trash.\r\n            If false, the entry is soft deleted, meaning it can still be restored."
+          in: query
+          name: hardDelete
+          required: false
+          type: boolean
       produces: []
       responses:
         '204':
@@ -3212,6 +3334,57 @@ paths:
       summary: Updates a comment.
       tags:
         - SongApi
+  /api/songs/highlighted:
+    get:
+      consumes: []
+      deprecated: false
+      description: Output is cached for 1 hour.
+      operationId: SongApi_GetHighlightedSongs
+      parameters:
+        - enum:
+            - Default
+            - Japanese
+            - Romaji
+            - English
+          in: query
+          name: languagePreference
+          required: false
+          type: string
+        - enum:
+            - None
+            - AdditionalNames
+            - Albums
+            - Artists
+            - Lyrics
+            - MainPicture
+            - Names
+            - PVs
+            - ReleaseEvent
+            - Tags
+            - ThumbUrl
+            - WebLinks
+          in: query
+          name: fields
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - text/javascript
+        - application/javascript
+        - application/json-p
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/SongForApiContract'
+            type: array
+      summary: 'Gets list of highlighted songs, same as front page.'
+      tags:
+        - SongApi
   '/api/songs/lyrics/{lyricsId}':
     get:
       consumes: []
@@ -4058,6 +4231,12 @@ paths:
           name: categoryName
           required: false
           type: string
+        - description: Maximum number of tags to return.
+          format: int32
+          in: query
+          name: maxResults
+          required: false
+          type: integer
         - description: Content language preference (optional).
           enum:
             - Default
@@ -5073,6 +5252,7 @@ paths:
             - Utaite
             - Band
             - Vocalist
+            - Character
           in: query
           name: artistType
           required: false
@@ -5420,6 +5600,14 @@ paths:
           name: childVoicebanks
           required: false
           type: boolean
+        - description: Logical grouping for artists.
+          enum:
+            - And
+            - Or
+          in: query
+          name: artistGrouping
+          required: false
+          type: string
         - description: Filter songs by given rating (optional).
           enum:
             - Nothing
@@ -5845,6 +6033,8 @@ definitions:
           - Romaji
           - English
         type: string
+      deleted:
+        type: boolean
       description:
         type: string
       discType:
@@ -5999,6 +6189,7 @@ definitions:
           - Utaite
           - Band
           - Vocalist
+          - Character
         type: string
       deleted:
         type: boolean
@@ -6038,6 +6229,7 @@ definitions:
           - Other
           - Band
           - Illustrator
+          - Subject
         type: string
       effectiveRoles:
         enum:
@@ -6115,6 +6307,7 @@ definitions:
           - Utaite
           - Band
           - Vocalist
+          - Character
         type: string
       baseVoicebank:
         $ref: '#/definitions/ArtistContract'
@@ -6238,6 +6431,7 @@ definitions:
           - Other
           - Band
           - Illustrator
+          - Subject
         type: string
       effectiveRoles:
         enum:
@@ -6298,7 +6492,7 @@ definitions:
     properties:
       latestAlbums:
         items:
-          $ref: '#/definitions/AlbumContract'
+          $ref: '#/definitions/AlbumForApiContract'
         type: array
       latestEvents:
         items:
@@ -6310,7 +6504,7 @@ definitions:
         type: array
       popularAlbums:
         items:
-          $ref: '#/definitions/AlbumContract'
+          $ref: '#/definitions/AlbumForApiContract'
         type: array
       popularSongs:
         items:
@@ -6416,6 +6610,7 @@ definitions:
           - Utaite
           - Band
           - Vocalist
+          - Character
         type: string
       createDate:
         format: date-time
@@ -6582,6 +6777,8 @@ definitions:
     type: object
   EntryThumbForApiContract:
     properties:
+      mime:
+        type: string
       urlSmallThumb:
         type: string
       urlThumb:

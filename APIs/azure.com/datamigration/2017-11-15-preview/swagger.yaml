@@ -14,8 +14,9 @@ info:
     name: DataMigrationServiceClient
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/2017-11-15-preview/datamigration.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2017-11-15-preview/datamigration.json'
       version: '2.0'
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: datamigration
   x-tags:
@@ -4042,7 +4043,6 @@ paths:
               body: ''
       x-ms-long-running-operation: true
 definitions:
-  ODataError:
-    type: object
+  ODataError: {}
   ODataErrror:
     type: object

@@ -249,137 +249,12 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  Accept:
-    type: string
-  AttributesString:
-    type: string
-    format: password
-  BadGatewayException:
+  PostContentResponse:
     type: object
     properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Either the Amazon Lex bot is still building, or one of the dependent services (Amazon Polly, AWS Lambda) failed with an internal service error.'
-  BadRequestException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: ' Request validation failed, there is no usable message in the context, or the bot build failed, is still in progress, or contains unbuilt changes. '
-  BlobStream:
-    type: string
-  BotAlias:
-    type: string
-  BotName:
-    type: string
-  Button:
-    type: object
-    required:
-      - text
-      - value
-    properties:
-      text:
-        $ref: '#/definitions/ButtonTextStringWithLength'
-        description: Text that is visible to the user on the button.
-      value:
-        $ref: '#/definitions/ButtonValueStringWithLength'
-        description: 'The value sent to Amazon Lex when a user chooses the button. For example, consider button text "NYC." When the user chooses the button, the value sent can be "New York City."'
-    description: 'Represents an option to be shown on the client platform (Facebook, Slack, etc.)'
-  ButtonTextStringWithLength:
-    type: string
-    minLength: 1
-    maxLength: 15
-  ButtonValueStringWithLength:
-    type: string
-    minLength: 1
-    maxLength: 1000
-  ConflictException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: ' Two clients are using the same AWS account, Amazon Lex bot, and user ID. '
-  ContentType:
-    type: string
-    enum:
-      - application/vnd.amazonaws.card.generic
-  DependencyFailedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: '<p> One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception. For example, </p> <ul> <li> <p>If Amazon Lex does not have sufficient permissions to call a Lambda function.</p> </li> <li> <p>If a Lambda function takes longer than 30 seconds to execute.</p> </li> <li> <p>If a fulfillment Lambda function returns a <code>Delegate</code> dialog action without removing any slot values.</p> </li> </ul>'
-  DialogState:
-    type: string
-    enum:
-      - ElicitIntent
-      - ConfirmIntent
-      - ElicitSlot
-      - Fulfilled
-      - ReadyForFulfillment
-      - Failed
-  ErrorMessage:
-    type: string
-  GenericAttachment:
-    type: object
-    properties:
-      title:
-        $ref: '#/definitions/StringWithLength'
-        description: The title of the option.
-      subTitle:
-        $ref: '#/definitions/StringWithLength'
-        description: The subtitle shown below the title.
-      attachmentLinkUrl:
-        $ref: '#/definitions/StringUrlWithLength'
-        description: The URL of an attachment to the response card.
-      imageUrl:
-        $ref: '#/definitions/StringUrlWithLength'
-        description: The URL of an image that is displayed to the user.
-      buttons:
-        $ref: '#/definitions/listOfButtons'
-        description: The list of options to show to the user.
-    description: 'Represents an option rendered to the user when a prompt is shown. It could be an image, a button, a link, or text. '
-  HttpContentType:
-    type: string
-  IntentName:
-    type: string
-  InternalFailureException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: Internal service error. Retry the call.
-  LimitExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: Exceeded a limit.
-  LoopDetectedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: This exception is not used.
-  MessageFormatType:
-    type: string
-    enum:
-      - PlainText
-      - CustomPayload
-      - SSML
-      - Composite
-  NotAcceptableException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: The accept header in the request does not have a valid value.
-  NotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: The resource (such as the Amazon Lex bot or an alias) that is referred to is not found.
+      audioStream:
+        $ref: '#/definitions/BlobStream'
+        description: 'The prompt (or statement) to convey to the user. This is based on the bot configuration and context. For example, if Amazon Lex did not understand the user intent, it sends the <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex sends that message in the response. '
   PostContentRequest:
     type: object
     required:
@@ -388,26 +263,72 @@ definitions:
       inputStream:
         $ref: '#/definitions/BlobStream'
         description: '<p> User input in PCM or Opus audio format or text format as described in the <code>Content-Type</code> HTTP header. </p> <p>You can stream audio data to Amazon Lex or you can create a local buffer that captures all of the audio data before sending. In general, you get better performance if you stream audio data rather than buffering the data locally.</p>'
-  PostContentResponse:
+  NotFoundException:
     type: object
     properties:
-      audioStream:
-        $ref: '#/definitions/BlobStream'
-        description: 'The prompt (or statement) to convey to the user. This is based on the bot configuration and context. For example, if Amazon Lex did not understand the user intent, it sends the <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex sends that message in the response. '
-  PostTextRequest:
+      message:
+        $ref: '#/definitions/String'
+    description: The resource (such as the Amazon Lex bot or an alias) that is referred to is not found.
+  BadRequestException:
     type: object
-    required:
-      - inputText
     properties:
-      sessionAttributes:
-        $ref: '#/definitions/StringMap'
-        description: '<p>Application-specific information passed between Amazon Lex and a client application.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting Session Attributes</a>.</p>'
-      requestAttributes:
-        $ref: '#/definitions/StringMap'
-        description: '<p>Request-specific information passed between Amazon Lex and a client application.</p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting Request Attributes</a>.</p>'
-      inputText:
-        $ref: '#/definitions/Text'
-        description: The text that the user entered (Amazon Lex interprets this text).
+      message:
+        $ref: '#/definitions/String'
+    description: ' Request validation failed, there is no usable message in the context, or the bot build failed, is still in progress, or contains unbuilt changes. '
+  LimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: Exceeded a limit.
+  InternalFailureException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: Internal service error. Retry the call.
+  ConflictException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: ' Two clients are using the same AWS account, Amazon Lex bot, and user ID. '
+  UnsupportedMediaTypeException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: 'The Content-Type header (<code>PostContent</code> API) has an invalid value. '
+  NotAcceptableException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The accept header in the request does not have a valid value.
+  RequestTimeoutException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The input speech is too long.
+  DependencyFailedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: '<p> One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception. For example, </p> <ul> <li> <p>If Amazon Lex does not have sufficient permissions to call a Lambda function.</p> </li> <li> <p>If a Lambda function takes longer than 30 seconds to execute.</p> </li> <li> <p>If a fulfillment Lambda function returns a <code>Delegate</code> dialog action without removing any slot values.</p> </li> </ul>'
+  BadGatewayException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Either the Amazon Lex bot is still building, or one of the dependent services (Amazon Polly, AWS Lambda) failed with an internal service error.'
+  LoopDetectedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: This exception is not used.
   PostTextResponse:
     type: object
     properties:
@@ -435,12 +356,132 @@ definitions:
       responseCard:
         $ref: '#/definitions/ResponseCard'
         description: 'Represents the options that the user has to respond to the current prompt. Response Card can come from the bot configuration (in the Amazon Lex console, choose the settings button next to a slot) or from a code hook (Lambda function). '
-  RequestTimeoutException:
+  PostTextRequest:
+    type: object
+    required:
+      - inputText
+    properties:
+      sessionAttributes:
+        $ref: '#/definitions/StringMap'
+        description: '<p>Application-specific information passed between Amazon Lex and a client application.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting Session Attributes</a>.</p>'
+      requestAttributes:
+        $ref: '#/definitions/StringMap'
+        description: '<p>Request-specific information passed between Amazon Lex and a client application.</p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting Request Attributes</a>.</p>'
+      inputText:
+        $ref: '#/definitions/Text'
+        description: The text that the user entered (Amazon Lex interprets this text).
+  Accept:
+    type: string
+  AttributesString:
+    type: string
+    format: password
+  ErrorMessage:
+    type: string
+  String:
+    type: string
+  BlobStream:
+    type: string
+  BotAlias:
+    type: string
+  BotName:
+    type: string
+  ButtonTextStringWithLength:
+    type: string
+    minLength: 1
+    maxLength: 15
+  ButtonValueStringWithLength:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  Button:
+    type: object
+    required:
+      - text
+      - value
+    properties:
+      text:
+        $ref: '#/definitions/ButtonTextStringWithLength'
+        description: Text that is visible to the user on the button.
+      value:
+        $ref: '#/definitions/ButtonValueStringWithLength'
+        description: 'The value sent to Amazon Lex when a user chooses the button. For example, consider button text "NYC." When the user chooses the button, the value sent can be "New York City."'
+    description: 'Represents an option to be shown on the client platform (Facebook, Slack, etc.)'
+  ContentType:
+    type: string
+    enum:
+      - application/vnd.amazonaws.card.generic
+  DialogState:
+    type: string
+    enum:
+      - ElicitIntent
+      - ConfirmIntent
+      - ElicitSlot
+      - Fulfilled
+      - ReadyForFulfillment
+      - Failed
+  StringWithLength:
+    type: string
+    minLength: 1
+    maxLength: 80
+  StringUrlWithLength:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  listOfButtons:
+    type: array
+    items:
+      $ref: '#/definitions/Button'
+    minItems: 0
+    maxItems: 5
+  GenericAttachment:
     type: object
     properties:
-      message:
-        $ref: '#/definitions/String'
-    description: The input speech is too long.
+      title:
+        $ref: '#/definitions/StringWithLength'
+        description: The title of the option.
+      subTitle:
+        $ref: '#/definitions/StringWithLength'
+        description: The subtitle shown below the title.
+      attachmentLinkUrl:
+        $ref: '#/definitions/StringUrlWithLength'
+        description: The URL of an attachment to the response card.
+      imageUrl:
+        $ref: '#/definitions/StringUrlWithLength'
+        description: The URL of an image that is displayed to the user.
+      buttons:
+        $ref: '#/definitions/listOfButtons'
+        description: The list of options to show to the user.
+    description: 'Represents an option rendered to the user when a prompt is shown. It could be an image, a button, a link, or text. '
+  HttpContentType:
+    type: string
+  IntentName:
+    type: string
+  MessageFormatType:
+    type: string
+    enum:
+      - PlainText
+      - CustomPayload
+      - SSML
+      - Composite
+  UserId:
+    type: string
+    pattern: '[0-9a-zA-Z._:-]+'
+    minLength: 2
+    maxLength: 100
+  Text:
+    type: string
+    minLength: 1
+    maxLength: 1024
+    format: password
+  StringMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
   ResponseCard:
     type: object
     properties:
@@ -454,50 +495,9 @@ definitions:
         $ref: '#/definitions/genericAttachmentList'
         description: An array of attachment objects representing options.
     description: 'If you configure a response card when creating your bots, Amazon Lex substitutes the session attributes and slot values that are available, and then returns it. The response card can also come from a Lambda function ( <code>dialogCodeHook</code> and <code>fulfillmentActivity</code> on an intent).'
-  String:
-    type: string
-  StringMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  StringUrlWithLength:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  StringWithLength:
-    type: string
-    minLength: 1
-    maxLength: 80
-  Text:
-    type: string
-    minLength: 1
-    maxLength: 1024
-    format: password
-  UnsupportedMediaTypeException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/String'
-    description: 'The Content-Type header (<code>PostContent</code> API) has an invalid value. '
-  UserId:
-    type: string
-    pattern: '[0-9a-zA-Z._:-]+'
-    minLength: 2
-    maxLength: 100
   genericAttachmentList:
     type: array
     items:
       $ref: '#/definitions/GenericAttachment'
     minItems: 0
     maxItems: 10
-  listOfButtons:
-    type: array
-    items:
-      $ref: '#/definitions/Button'
-    minItems: 0
-    maxItems: 5

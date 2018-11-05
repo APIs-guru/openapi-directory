@@ -75,7 +75,7 @@ paths:
     x-swagger-router-controller: authentication
   /batch/schedule:
     post:
-      description: Schedules a batch of SMS messages to be sent at the date-time you specify
+      description: Schedules a batch of SMS messages to be sent at the date time you specify
       operationId: scheduleBatch
       parameters:
         - description: Message properties
@@ -216,6 +216,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/SendMessageResponse'
+        '402':
+          description: Error
+          schema:
+            $ref: '#/definitions/ExtendedErrorModel'
         default:
           description: Error
           schema:
@@ -342,7 +346,7 @@ paths:
             $ref: '#/definitions/ErrorModel'
       tags:
         - utils
-    x-swagger-router-controller: hello_world
+    x-swagger-router-controller: hello-world
 definitions:
   BatchMessage:
     description: SMS Message Batch
@@ -368,6 +372,14 @@ definitions:
         description: The sender of the message. Should be no longer than 11 characters for alphanumeric or 15 characters for numeric sender ID's. No spaces or special characters.
         example: YourCompany
         type: string
+      tag:
+        description: 'An identifying label for the message, which you can use to filter and report on messages you''ve sent later. Ideal for campaigns.'
+        example: SummerSpecial
+        type: string
+      ttl:
+        description: The number of minutes before the message is deleted. Optional. Omit to prevent delivery report deletion.
+        example: 10
+        type: number
     required:
       - sender
       - destinations
@@ -437,6 +449,18 @@ definitions:
         description: Telephone number of the recipient
         example: 447777777777
         type: string
+      metadata:
+        example:
+          - key: myKey1
+            value: myValue1
+          - key: myKey2
+            value: myValue2
+        items:
+          type: object
+        properties:
+          schema:
+            $ref: '#/definitions/MetaData'
+        type: array
       schedule:
         description: Date at which to send the message. This is only used by the message/schedule service and can be left empty for other services.
         example: 'Sun Sep 03 2017 15:34:23 GMT+0100 (BST)'
@@ -449,6 +473,10 @@ definitions:
         description: 'An identifying label for the message, which you can use to filter and report on messages you''ve sent later. Ideal for campaigns.'
         example: SummerSpecial
         type: string
+      ttl:
+        description: The number of minutes before the message is deleted. Optional. Omit to prevent delivery report deletion.
+        example: 10
+        type: number
     required:
       - sender
       - destination
@@ -471,7 +499,7 @@ definitions:
       destination:
         example: 447777777777
         type: number
-      failureReason:
+      failurereason:
         properties:
           code:
             example: 34
@@ -531,6 +559,17 @@ definitions:
         type: array
     required:
       - messages
+  MetaData:
+    description: Key/value pair that will be returned to you in the API call response.
+    properties:
+      key:
+        description: key of the key/value pair
+        example: myKey
+        type: string
+      value:
+        description: value of the key/value pair
+        example: myValue
+        type: string
   Query:
     description: search parameters for querying the message database
     properties:
@@ -546,6 +585,19 @@ definitions:
         description: The keyword used in the inbound message
         example: SKYWALKER
         type: string
+      metadata:
+        description: An array of objects containing metadata key/value pairs that have been saved on messages.
+        example:
+          - key: myKey1
+            value: myValue1
+          - key: myKey2
+            value: myValue2
+        items:
+          type: object
+        properties:
+          schema:
+            $ref: '#/definitions/MetaData'
+        type: array
       sender:
         description: The sender of the message (this can be the configured sender name for an outbound message or the senders phone number for an inbound message).
         example: YourCompany

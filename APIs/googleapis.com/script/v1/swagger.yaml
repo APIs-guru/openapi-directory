@@ -7,8 +7,9 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: An API for managing and executing Google Apps Script projects.
-  title: Google Apps Script
+  description: |
+    An API for managing and executing Google Apps Script projects. <aside class="note"><b>Note</b>: In order to use this API in your apps, you must <a href="/apps-script/api/how-tos/enable#using_the_apps_script_api_in_your_app"> enable it for use</a>. To allow other apps to manage your scripts, you must <a href="/apps-script/api/how-tos/enable#granting_third-party_applications_access_to_your_script_projects"> grant them access</a>.</aside>
+  title: Apps Script
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -19,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://script.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -166,7 +167,7 @@ paths:
           type: string
         - description: |-
             Optional field used to limit returned processes to those originating from
-            projects with a specific project name.
+            projects with project names containing a specific string.
           in: query
           name: userProcessFilter.projectName
           type: string
@@ -197,6 +198,7 @@ paths:
               - FAILED
               - TIMED_OUT
               - UNKNOWN
+              - DELAYED
             type: string
           name: userProcessFilter.statuses
           type: array
@@ -214,6 +216,8 @@ paths:
               - TRIGGER
               - WEBAPP
               - EDITOR
+              - SIMPLE_TRIGGER
+              - MENU
             type: string
           name: userProcessFilter.types
           type: array
@@ -315,6 +319,7 @@ paths:
               - FAILED
               - TIMED_OUT
               - UNKNOWN
+              - DELAYED
             type: string
           name: scriptProcessFilter.statuses
           type: array
@@ -332,6 +337,8 @@ paths:
               - TRIGGER
               - WEBAPP
               - EDITOR
+              - SIMPLE_TRIGGER
+              - MENU
             type: string
           name: scriptProcessFilter.types
           type: array
@@ -1182,6 +1189,7 @@ definitions:
           - FAILED
           - TIMED_OUT
           - UNKNOWN
+          - DELAYED
         type: string
       processType:
         description: The executions type.
@@ -1193,6 +1201,8 @@ definitions:
           - TRIGGER
           - WEBAPP
           - EDITOR
+          - SIMPLE_TRIGGER
+          - MENU
         type: string
       projectName:
         description: Name of the script being executed.
@@ -1456,7 +1466,7 @@ definitions:
     description: 'If a `run` call succeeds but the script function (or Apps Script itself) throws an exception, the response body''s error field contains this `Status` object.'
     properties:
       code:
-        description: 'The status code. For this API, this value either: <ul> <li> 3, indicating an `INVALID_ARGUMENT` error, or</li> <li> 1, indicating a `CANCELLED` execution.</li> </ul>'
+        description: 'The status code. For this API, this value either: <ul> <li> 10, indicating a `SCRIPT_TIMEOUT` error,</li> <li> 3, indicating an `INVALID_ARGUMENT` error, or</li> <li> 1, indicating a `CANCELLED` execution.</li> </ul>'
         format: int32
         type: integer
       details:

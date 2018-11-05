@@ -3,6 +3,7 @@ schemes:
   - https
 host: api.cloudmersive.com
 info:
+  description: The powerful Optical Character Recognition (OCR) APIs let you convert scanned images of pages into recognized text.
   title: ocrapi
   version: v1
   x-apisguru-categories:
@@ -44,6 +45,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ImageToTextResponse'
+      security:
+        - Apikey: []
       summary: 'Converts an uploaded image in common formats such as JPEG, PNG into text via Optical Character Recognition.'
       tags:
         - ImageOcr

@@ -188,8 +188,7 @@ parameters:
     required: false
     type: string
   p_des:
-    description: |
-      Universe Designation Limiter.  Enter one or more universe designation codes.  Provide multiple values as a comma-delimited list.  Use code "TSDF" to return the full enforcement TSDF universe and "Operating TSDF" to return the operating TSDF universe.
+    description: Universe Designation Limiter.  Enter one or more universe designation codes.  Provide multiple values as a comma-delimited list.  Use code "TSDF" to return the full enforcement TSDF universe and "Operating TSDF" to return the operating TSDF universe.
     in: query
     name: p_des
     required: false
@@ -297,7 +296,7 @@ parameters:
     required: false
     type: string
   p_fntype:
-    description: |
+    description: |-
       Controls type of text search performed on facility name with parameter p_fn.
       - EXACT = Find facilities having the exact provided name(s).
       - BEGINS = Find facilities with names starting with the provided term(s).
@@ -408,6 +407,12 @@ parameters:
     name: p_lat
     required: false
     type: number
+  p_law:
+    description: Law Statute Code Filter.  Enter a single statute code to limit results.
+    in: query
+    name: p_law
+    required: false
+    type: string
   p_limit_addr:
     description: 'Limit Address Search Flag.  Enter Y to restrict facility searches to native data source only.  '
     enum:
@@ -423,6 +428,11 @@ parameters:
     name: p_long
     required: false
     type: number
+  p_lsdate:
+    in: query
+    name: p_lsdate
+    required: false
+    type: string
   p_med:
     description: |-
       Filter Results by Media.
@@ -506,7 +516,7 @@ parameters:
     required: false
     type: string
   p_pd:
-    description: |
+    description: |-
       Population Density Limiter (per sq mile). Enter a value to limit results to facilities located in area of a given population density.
       - NONE = 0 population density per square mile
       - GT100 = More than 100 population density per square mile
@@ -702,6 +712,12 @@ parameters:
     name: p_sa1
     required: false
     type: string
+  p_section:
+    description: Law Section Code Filter. Enter one or more law section codes to limit results.  Provide multiple values as a comma-delimited list.
+    in: query
+    name: p_section
+    required: false
+    type: string
   p_sfs:
     description: 'Single Facility Search Filter.  Provide a facility name or program system identifier to limit results.  For the all data search, the FRS registry identifier is also searched.'
     in: query
@@ -753,7 +769,6 @@ parameters:
     required: false
     type: string
   p_tribedist:
-    default: 0
     description: Proximity to tribal land limiter. Enter an amount of mile between 0 and 25 to filter results.  This parameter is only evaluated if p_tribeid is populated.
     in: query
     name: p_tribedist
@@ -797,7 +812,7 @@ parameters:
     required: false
     type: number
   p_wbd:
-    description: '2-, 4-, 6-, or 8-character watershed (WBD from the USGS Watershed Boundary Dataset). May contain multiple comma-separated values.'
+    description: '2-, 4-, 6-, 8-, 10-, or 12-character watershed (WBD from the USGS Watershed Boundary Dataset). May contain multiple comma-separated values.  Uses the FRS Best Pick Coordinate to obtain the WBD12 Huc value.'
     in: query
     name: p_wbd
     required: false
@@ -1012,6 +1027,9 @@ paths:
         - $ref: '#/parameters/p_ieay'
         - $ref: '#/parameters/p_ieaa'
         - $ref: '#/parameters/p_cmps'
+        - $ref: '#/parameters/p_law'
+        - $ref: '#/parameters/p_section'
+        - $ref: '#/parameters/p_lsdate'
         - $ref: '#/parameters/p_qiv'
         - $ref: '#/parameters/p_impw'
         - $ref: '#/parameters/p_trep'
@@ -1078,6 +1096,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Resource Conservation and Recovery Act (RCRA) Facility Search Service
       tags:
         - Resource Conservation and Recovery Act
@@ -1127,6 +1147,9 @@ paths:
         - $ref: '#/parameters/p_ieay'
         - $ref: '#/parameters/p_ieaa'
         - $ref: '#/parameters/p_cmps'
+        - $ref: '#/parameters/p_law'
+        - $ref: '#/parameters/p_section'
+        - $ref: '#/parameters/p_lsdate'
         - $ref: '#/parameters/p_qiv'
         - $ref: '#/parameters/p_impw'
         - $ref: '#/parameters/p_trep'
@@ -1193,6 +1216,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Resource Conservation and Recovery Act (RCRA) Facility Search Service
       tags:
         - Resource Conservation and Recovery Act
@@ -1243,6 +1268,9 @@ paths:
         - $ref: '#/parameters/p_ieay'
         - $ref: '#/parameters/p_ieaa'
         - $ref: '#/parameters/p_cmps'
+        - $ref: '#/parameters/p_law'
+        - $ref: '#/parameters/p_section'
+        - $ref: '#/parameters/p_lsdate'
         - $ref: '#/parameters/p_qiv'
         - $ref: '#/parameters/p_impw'
         - $ref: '#/parameters/p_trep'
@@ -1308,6 +1336,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Resource Conservation and Recovery Act (RCRA) Facility Enhanced Search Service
       tags:
         - Resource Conservation and Recovery Act
@@ -1357,6 +1387,9 @@ paths:
         - $ref: '#/parameters/p_ieay'
         - $ref: '#/parameters/p_ieaa'
         - $ref: '#/parameters/p_cmps'
+        - $ref: '#/parameters/p_law'
+        - $ref: '#/parameters/p_section'
+        - $ref: '#/parameters/p_lsdate'
         - $ref: '#/parameters/p_qiv'
         - $ref: '#/parameters/p_impw'
         - $ref: '#/parameters/p_trep'
@@ -1422,6 +1455,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Resource Conservation and Recovery Act (RCRA) Facility Enhanced Search Service
       tags:
         - Resource Conservation and Recovery Act
@@ -1589,6 +1624,8 @@ paths:
             required:
               - MapOutput
             type: object
+            xml:
+              name: Root
       summary: Resource Conservation and Recovery Act (RCRA) Map Service
       tags:
         - Resource Conservation and Recovery Act
@@ -1627,6 +1664,8 @@ paths:
             required:
               - MapOutput
             type: object
+            xml:
+              name: Root
       summary: Resource Conservation and Recovery Act (RCRA) Map Service
       tags:
         - Resource Conservation and Recovery Act
@@ -1664,6 +1703,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Resource Conservation and Recovery Act (RCRA) Paginated Results Service
       tags:
         - Resource Conservation and Recovery Act
@@ -1700,6 +1741,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Resource Conservation and Recovery Act (RCRA) Paginated Results Service
       tags:
         - Resource Conservation and Recovery Act
@@ -1732,6 +1775,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Resource Conservation and Recovery Act (RCRA) Metadata Service
       tags:
         - Metadata
@@ -1763,6 +1808,8 @@ paths:
             required:
               - Results
             type: object
+            xml:
+              name: Root
       summary: Resource Conservation and Recovery Act (RCRA) Metadata Service
       tags:
         - Metadata
@@ -1799,6 +1846,9 @@ definitions:
           $ref: '#/definitions/met_ResultsColumns'
         title: Result Columns
         type: array
+        xml:
+          name: ResultColumns
+          wrapped: true
     required:
       - Message
     type: object
@@ -1836,6 +1886,8 @@ definitions:
       - ObjectName
       - Description
     type: object
+    xml:
+      name: ResultColumn
   qp0_QueryParameters:
     description: Query Parameters Object
     properties:
@@ -1853,6 +1905,8 @@ definitions:
       - QP
       - QV
     type: object
+    xml:
+      name: Parameter
   rcr1_Facilities:
     description: Facilities Object
     properties:
@@ -1940,8 +1994,7 @@ definitions:
       FacFederalAgencyCode:
         description: 'Indicates the federal agency, as classified in FRS. Federal agencies are installations that are owned and operated by the U.S. government. The five-character code consists of a letter followed by four numbers. There are four possible letters that can occupy the first character position: C = Civilian Federal Agency; D = Department of Defense; E = Department of Energy; X = Unknown. The second and third characters represent the agency code, while the fourth and fifth characters represent the bureau code.'
         example: E
-        title: |
-          Facility Federal Agency Code
+        title: Facility Federal Agency Code
         type: string
       FacFederalAgencyName:
         type: string
@@ -1974,8 +2027,7 @@ definitions:
       FacPercentMinority:
         description: Percent Minority is the percentage of the population of the given area that is considered minority. Statistics are shown for the area within a 3-mile radius of each facility.
         example: '45.379'
-        title: |
-          Facility Percent Minority
+        title: Facility Percent Minority
         type: string
       FacPopulationDensity:
         example: '9611.17'
@@ -2075,19 +2127,15 @@ definitions:
         description: The national percentile of the census block group for the EJSCREEN Traffic proximity and volume indicator.
         example: '92'
         type: string
-      RCRA3yrComplQtrsStatus:
+      RCRA3yrComplQtrsHistory:
         type: string
       RCRACaseIDs:
         type: string
       RCRACity:
         type: string
+      RCRAComplStatus:
+        type: string
       RCRACounty:
-        type: string
-      RCRACurrComplStatus:
-        type: string
-      RCRACurrSNC:
-        type: string
-      RCRACurrViolationTypes:
         type: string
       RCRADaysLastInspection:
         example: '1247'
@@ -2147,11 +2195,11 @@ definitions:
       RCRAPenalties:
         example: $987
         type: string
-      RCRAQtrsInNC:
-        example: '0'
+      RCRAQtrsWithNC:
         type: string
-      RCRAQtrsInSNC:
-        example: '0'
+      RCRAQtrsWithSNC:
+        type: string
+      RCRASNC:
         type: string
       RCRAState:
         type: string
@@ -2164,6 +2212,8 @@ definitions:
       RCRATRIbalLandCode:
         type: string
       RCRAUniverse:
+        type: string
+      RCRAViolationTypes:
         type: string
       RCRAZip:
         type: string
@@ -2226,78 +2276,67 @@ definitions:
         title: Web Documents
         type: string
     required:
-      - SourceID
-      - EPASystem
-      - RegistryID
-      - Statute
       - RCRAName
+      - SourceID
       - RCRAStreet
       - RCRACity
       - RCRAState
       - RCRAStateDistrict
       - RCRAZip
+      - RegistryID
       - RCRACounty
       - RCRAEPARegion
-      - RCRAStatus
-      - RCRAIndianCntryFlg
-      - RCRATRIbalLandCode
+      - FacFederalAgencyName
+      - RCRALandTypeCode
+      - FacDerivedHuc
       - FacFIPSCode
+      - FacIndianCntryFlg
+      - RCRAIndianCntryFlg
+      - FacIndianSpatialFlg
+      - FacDerivedTRIbes
+      - FacUsMexBorderFlg
+      - FacSICCodes
+      - RCRANAICS
       - FacLat
       - FacLong
-      - FacUsMexBorderFlg
-      - RCRAImpWaterFlg
       - RCRAUniverse
-      - RCRANAICS
-      - FacSICCodes
-      - FacPercentMinority
-      - FacPopulationDensity
-      - FacFederalAgencyCode
-      - ChesapeakeBayFlag
+      - Tsdf
+      - RCRAStatus
       - AIRIDs
       - CWAIDs
       - RCRAIDs
-      - TRIIDs
+      - RmpIDs
       - SDWAIDs
-      - RCRACaseIDs
-      - RCRACurrSNC
-      - RCRACurrComplStatus
-      - RCRAQtrsInSNC
-      - RCRAQtrsInNC
-      - RCRACurrViolationTypes
+      - TRIIDs
+      - RCRAComplStatus
+      - RCRASNC
+      - RCRAQtrsWithNC
+      - RCRAViolationTypes
+      - RCRAQtrsWithSNC
+      - RCRAOldestOpenVioDate
       - RCRAInspCnt
-      - RCRALastInspectionDate
       - RCRADaysLastInspection
-      - RCRAIeaCnt
-      - RCRALastIeaDate
-      - RCRAFeaCnt
-      - RCRALastFeaDate
-      - RCRAPenalties
-      - RCRALastPenaltyDate
+      - RCRALastInspectionDate
       - RCRALastInspDateEPA
       - RCRALastInspDateState
-      - RCRALastFeaDateEPA
-      - RCRALastFeaDateState
-      - RCRALastIeaDateEPA
-      - RCRALastIeaDateState
-      - FacTRIReporter
-      - FacTRIOnSiteReleases
-      - FacDerivedHuc
+      - DateLastRecordReview
+      - FacTRILandReleases
+      - FacTRIOffSiteTransfers
       - FacDerivedWBD
       - FacDerivedWBDName
-      - FacMapFlg
-      - FacMapIcon
-      - LastViolationDate
-      - CurrentVioCnt
-      - FacFederalAgencyName
-      - FacTRIOffSiteTransfers
-      - RCRAFIPSCode
-      - RCRALandTypeCode
-      - RCRAOldestOpenVioDate
-      - FacTRILandReleases
-      - RCRAMapIcon
-      - RmpIDs
-      - RCRA3yrComplQtrsStatus
-      - CensusBlockGroup
+      - RCRAImpWaterFlg
+      - ChesapeakeBayFlag
+      - RCRAIeaCnt
+      - RCRAFeaCnt
+      - RCRALastIeaDate
+      - RCRALastIeaDateState
+      - RCRALastIeaDateEPA
+      - RCRALastFeaDate
+      - RCRALastFeaDateState
+      - RCRALastFeaDateEPA
+      - RCRAPenalties
+      - RCRALastPenaltyDate
+      - Over80CountUs
       - PctilePctpre1960Us
       - PctileDpmUs
       - PctileCancerUs
@@ -2309,6 +2348,23 @@ definitions:
       - PctileProximityTsdfUs
       - PctileO3Us
       - PctilePmUs
+      - FacPopulationDensity
+      - FacPercentMinority
+      - EPASystem
+      - Statute
+      - RCRATRIbalLandCode
+      - FacFederalAgencyCode
+      - RCRACaseIDs
+      - FacTRIReporter
+      - FacTRIOnSiteReleases
+      - FacMapFlg
+      - FacMapIcon
+      - LastViolationDate
+      - CurrentVioCnt
+      - RCRAFIPSCode
+      - RCRAMapIcon
+      - RCRA3yrComplQtrsHistory
+      - CensusBlockGroup
       - MaxPctileUs
       - EjscreenFlagUs
       - EjscreenFlag
@@ -2321,14 +2377,16 @@ definitions:
       - Infea5yrFlag
       - Lower48
       - ActiveLower48
-      - FacDerivedTRIbes
-      - FacIndianCntryFlg
-      - FacIndianSpatialFlg
       - CollectionMethod
       - ReferencePoint
       - CalculatedAccuracyMeters
       - Map
+      - WebDocs
+      - Score
+      - MaxScore
     type: object
+    xml:
+      name: Facility
   rcr1_MapData:
     description: Map Data Object
     properties:
@@ -2391,6 +2449,8 @@ definitions:
       - FormalCount
       - InformalCount
     type: object
+    xml:
+      name: Object
   rcr1_MapOutput:
     description: Map Output Object
     properties:
@@ -2404,6 +2464,9 @@ definitions:
           $ref: '#/definitions/rcr1_MapData'
         title: Map Data
         type: array
+        xml:
+          name: MapData
+          wrapped: true
       PopUpBaseURL:
         description: Combine this URL with the PUC to get popup info
         example: 'https://ofmpub.epa.gov/echo/cwa_rest_services.pop_up?p_id='
@@ -2436,6 +2499,9 @@ definitions:
           $ref: '#/definitions/rcr1_Facilities'
         title: Facilities
         type: array
+        xml:
+          name: Facilities
+          wrapped: true
       INSPRows:
         description: Number of facilities with insp_5yr_flag populated (CWP_DATE_LAST_INSPECTION)
         example: '1'
@@ -2689,8 +2755,7 @@ definitions:
       FacFederalAgencyCode:
         description: 'Indicates the federal agency, as classified in FRS. Federal agencies are installations that are owned and operated by the U.S. government. The five-character code consists of a letter followed by four numbers. There are four possible letters that can occupy the first character position: C = Civilian Federal Agency; D = Department of Defense; E = Department of Energy; X = Unknown. The second and third characters represent the agency code, while the fourth and fifth characters represent the bureau code.'
         example: E
-        title: |
-          Facility Federal Agency Code
+        title: Facility Federal Agency Code
         type: string
       FacFederalAgencyName:
         type: string
@@ -2723,8 +2788,7 @@ definitions:
       FacPercentMinority:
         description: Percent Minority is the percentage of the population of the given area that is considered minority. Statistics are shown for the area within a 3-mile radius of each facility.
         example: '45.379'
-        title: |
-          Facility Percent Minority
+        title: Facility Percent Minority
         type: string
       FacPopulationDensity:
         example: '9611.17'
@@ -2829,19 +2893,15 @@ definitions:
         description: The national percentile of the census block group for the EJSCREEN Traffic proximity and volume indicator.
         example: '92'
         type: string
-      RCRA3yrComplQtrsStatus:
+      RCRA3yrComplQtrsHistory:
         type: string
       RCRACaseIDs:
         type: string
       RCRACity:
         type: string
+      RCRAComplStatus:
+        type: string
       RCRACounty:
-        type: string
-      RCRACurrComplStatus:
-        type: string
-      RCRACurrSNC:
-        type: string
-      RCRACurrViolationTypes:
         type: string
       RCRADaysLastInspection:
         example: '1247'
@@ -2901,11 +2961,11 @@ definitions:
       RCRAPenalties:
         example: $987
         type: string
-      RCRAQtrsInNC:
-        example: '0'
+      RCRAQtrsWithNC:
         type: string
-      RCRAQtrsInSNC:
-        example: '0'
+      RCRAQtrsWithSNC:
+        type: string
+      RCRASNC:
         type: string
       RCRAState:
         type: string
@@ -2918,6 +2978,8 @@ definitions:
       RCRATRIbalLandCode:
         type: string
       RCRAUniverse:
+        type: string
+      RCRAViolationTypes:
         type: string
       RCRAZip:
         type: string
@@ -2981,78 +3043,67 @@ definitions:
         type: string
     required:
       - ObjectId
-      - SourceID
-      - EPASystem
-      - RegistryID
-      - Statute
       - RCRAName
+      - SourceID
       - RCRAStreet
       - RCRACity
       - RCRAState
       - RCRAStateDistrict
       - RCRAZip
+      - RegistryID
       - RCRACounty
       - RCRAEPARegion
-      - RCRAStatus
-      - RCRAIndianCntryFlg
-      - RCRATRIbalLandCode
+      - FacFederalAgencyName
+      - RCRALandTypeCode
+      - FacDerivedHuc
       - FacFIPSCode
+      - FacIndianCntryFlg
+      - RCRAIndianCntryFlg
+      - FacIndianSpatialFlg
+      - FacDerivedTRIbes
+      - FacUsMexBorderFlg
+      - FacSICCodes
+      - RCRANAICS
       - FacLat
       - FacLong
-      - FacUsMexBorderFlg
-      - RCRAImpWaterFlg
       - RCRAUniverse
-      - RCRANAICS
-      - FacSICCodes
-      - FacPercentMinority
-      - FacPopulationDensity
-      - FacFederalAgencyCode
-      - ChesapeakeBayFlag
+      - Tsdf
+      - RCRAStatus
       - AIRIDs
       - CWAIDs
       - RCRAIDs
-      - TRIIDs
+      - RmpIDs
       - SDWAIDs
-      - RCRACaseIDs
-      - RCRACurrSNC
-      - RCRACurrComplStatus
-      - RCRAQtrsInSNC
-      - RCRAQtrsInNC
-      - RCRACurrViolationTypes
+      - TRIIDs
+      - RCRAComplStatus
+      - RCRASNC
+      - RCRAQtrsWithNC
+      - RCRAViolationTypes
+      - RCRAQtrsWithSNC
+      - RCRAOldestOpenVioDate
       - RCRAInspCnt
-      - RCRALastInspectionDate
       - RCRADaysLastInspection
-      - RCRAIeaCnt
-      - RCRALastIeaDate
-      - RCRAFeaCnt
-      - RCRALastFeaDate
-      - RCRAPenalties
-      - RCRALastPenaltyDate
+      - RCRALastInspectionDate
       - RCRALastInspDateEPA
       - RCRALastInspDateState
-      - RCRALastFeaDateEPA
-      - RCRALastFeaDateState
-      - RCRALastIeaDateEPA
-      - RCRALastIeaDateState
-      - FacTRIReporter
-      - FacTRIOnSiteReleases
-      - FacDerivedHuc
+      - DateLastRecordReview
+      - FacTRILandReleases
+      - FacTRIOffSiteTransfers
       - FacDerivedWBD
       - FacDerivedWBDName
-      - FacMapFlg
-      - FacMapIcon
-      - LastViolationDate
-      - CurrentVioCnt
-      - FacFederalAgencyName
-      - FacTRIOffSiteTransfers
-      - RCRAFIPSCode
-      - RCRALandTypeCode
-      - RCRAOldestOpenVioDate
-      - FacTRILandReleases
-      - RCRAMapIcon
-      - RmpIDs
-      - RCRA3yrComplQtrsStatus
-      - CensusBlockGroup
+      - RCRAImpWaterFlg
+      - ChesapeakeBayFlag
+      - RCRAIeaCnt
+      - RCRAFeaCnt
+      - RCRALastIeaDate
+      - RCRALastIeaDateState
+      - RCRALastIeaDateEPA
+      - RCRALastFeaDate
+      - RCRALastFeaDateState
+      - RCRALastFeaDateEPA
+      - RCRAPenalties
+      - RCRALastPenaltyDate
+      - Over80CountUs
       - PctilePctpre1960Us
       - PctileDpmUs
       - PctileCancerUs
@@ -3064,6 +3115,23 @@ definitions:
       - PctileProximityTsdfUs
       - PctileO3Us
       - PctilePmUs
+      - FacPopulationDensity
+      - FacPercentMinority
+      - EPASystem
+      - Statute
+      - RCRATRIbalLandCode
+      - FacFederalAgencyCode
+      - RCRACaseIDs
+      - FacTRIReporter
+      - FacTRIOnSiteReleases
+      - FacMapFlg
+      - FacMapIcon
+      - LastViolationDate
+      - CurrentVioCnt
+      - RCRAFIPSCode
+      - RCRAMapIcon
+      - RCRA3yrComplQtrsHistory
+      - CensusBlockGroup
       - MaxPctileUs
       - EjscreenFlagUs
       - EjscreenFlag
@@ -3076,14 +3144,16 @@ definitions:
       - Infea5yrFlag
       - Lower48
       - ActiveLower48
-      - FacDerivedTRIbes
-      - FacIndianCntryFlg
-      - FacIndianSpatialFlg
       - CollectionMethod
       - ReferencePoint
       - CalculatedAccuracyMeters
       - Map
+      - WebDocs
+      - Score
+      - MaxScore
     type: object
+    xml:
+      name: Facility
   rcr2_Results:
     description: Results Object
     properties:
@@ -3107,6 +3177,9 @@ definitions:
           $ref: '#/definitions/rcr2_Facilities'
         title: Facilities
         type: array
+        xml:
+          name: Facilities
+          wrapped: true
       INSPRows:
         description: Number of facilities with insp_5yr_flag populated (CWP_DATE_LAST_INSPECTION)
         example: '1'
@@ -3146,6 +3219,9 @@ definitions:
           $ref: '#/definitions/qp0_QueryParameters'
         title: Query Parameters
         type: array
+        xml:
+          name: QueryParameters
+          wrapped: true
       QueryRows:
         description: Number of query results returned
         example: '5'
@@ -3248,6 +3324,8 @@ definitions:
       - FormalCount
       - InformalCount
     type: object
+    xml:
+      name: Object
   rcr3_MapOutput:
     description: Map Output Object
     properties:
@@ -3261,6 +3339,9 @@ definitions:
           $ref: '#/definitions/rcr3_MapData'
         title: Map Data
         type: array
+        xml:
+          name: MapData
+          wrapped: true
       PopUpBaseURL:
         description: Combine this URL with the PUC to get popup info
         example: 'https://ofmpub.epa.gov/echo/cwa_rest_services.pop_up?p_id='
@@ -3285,6 +3366,9 @@ definitions:
           $ref: '#/definitions/rcr1_Facilities'
         title: Facilities
         type: array
+        xml:
+          name: Facilities
+          wrapped: true
       Message:
         description: Field to record messages (typically performance-related) about packet processing
         example: Success
@@ -3416,8 +3500,7 @@ definitions:
       FacFederalAgencyCode:
         description: 'Indicates the federal agency, as classified in FRS. Federal agencies are installations that are owned and operated by the U.S. government. The five-character code consists of a letter followed by four numbers. There are four possible letters that can occupy the first character position: C = Civilian Federal Agency; D = Department of Defense; E = Department of Energy; X = Unknown. The second and third characters represent the agency code, while the fourth and fifth characters represent the bureau code.'
         example: E
-        title: |
-          Facility Federal Agency Code
+        title: Facility Federal Agency Code
         type: string
       FacFederalAgencyName:
         type: string
@@ -3440,8 +3523,7 @@ definitions:
       FacPercentMinority:
         description: Percent Minority is the percentage of the population of the given area that is considered minority. Statistics are shown for the area within a 3-mile radius of each facility.
         example: 45.379
-        title: |
-          Facility Percent Minority
+        title: Facility Percent Minority
         type: number
       FacPopulationDensity:
         example: 9611.17
@@ -3541,19 +3623,15 @@ definitions:
         description: The national percentile of the census block group for the EJSCREEN Traffic proximity and volume indicator.
         example: 7
         type: number
-      RCRA3yrComplQtrsStatus:
+      RCRA3yrComplQtrsHistory:
         type: string
       RCRACaseIDs:
         type: string
       RCRACity:
         type: string
+      RCRAComplStatus:
+        type: string
       RCRACounty:
-        type: string
-      RCRACurrComplStatus:
-        type: string
-      RCRACurrSNC:
-        type: string
-      RCRACurrViolationTypes:
         type: string
       RCRADaysLastInspection:
         example: 1247
@@ -3613,12 +3691,12 @@ definitions:
       RCRAPenalties:
         example: 987
         type: number
-      RCRAQtrsInNC:
-        example: 0
+      RCRAQtrsWithNC:
         type: number
-      RCRAQtrsInSNC:
-        example: 0
+      RCRAQtrsWithSNC:
         type: number
+      RCRASNC:
+        type: string
       RCRAState:
         type: string
       RCRAStateDistrict:
@@ -3630,6 +3708,8 @@ definitions:
       RCRATRIbalLandCode:
         type: string
       RCRAUniverse:
+        type: string
+      RCRAViolationTypes:
         type: string
       RCRAZip:
         type: string
@@ -3692,76 +3772,65 @@ definitions:
         title: Web Documents
         type: string
     required:
-      - SourceID
-      - EPASystem
-      - RegistryID
-      - Statute
       - RCRAName
+      - SourceID
       - RCRAStreet
       - RCRACity
       - RCRAState
       - RCRAStateDistrict
       - RCRAZip
+      - RegistryID
       - RCRACounty
       - RCRAEPARegion
-      - RCRAStatus
-      - RCRAIndianCntryFlg
-      - RCRATRIbalLandCode
+      - FacFederalAgencyName
+      - RCRALandTypeCode
+      - FacDerivedHuc
       - FacFIPSCode
+      - FacIndianCntryFlg
+      - RCRAIndianCntryFlg
+      - FacIndianSpatialFlg
+      - FacDerivedTRIbes
       - FacUsMexBorderFlg
-      - RCRAImpWaterFlg
-      - RCRAUniverse
-      - RCRANAICS
       - FacSICCodes
-      - FacPercentMinority
-      - FacPopulationDensity
-      - FacFederalAgencyCode
-      - ChesapeakeBayFlag
+      - RCRANAICS
+      - RCRAUniverse
+      - Tsdf
+      - RCRAStatus
       - AIRIDs
       - CWAIDs
       - RCRAIDs
-      - TRIIDs
+      - RmpIDs
       - SDWAIDs
-      - RCRACaseIDs
-      - RCRACurrSNC
-      - RCRACurrComplStatus
-      - RCRAQtrsInSNC
-      - RCRAQtrsInNC
-      - RCRACurrViolationTypes
+      - TRIIDs
+      - RCRAComplStatus
+      - RCRASNC
+      - RCRAQtrsWithNC
+      - RCRAViolationTypes
+      - RCRAQtrsWithSNC
+      - RCRAOldestOpenVioDate
       - RCRAInspCnt
-      - RCRALastInspectionDate
       - RCRADaysLastInspection
-      - RCRAIeaCnt
-      - RCRALastIeaDate
-      - RCRAFeaCnt
-      - RCRALastFeaDate
-      - RCRAPenalties
-      - RCRALastPenaltyDate
+      - RCRALastInspectionDate
       - RCRALastInspDateEPA
       - RCRALastInspDateState
-      - RCRALastFeaDateEPA
-      - RCRALastFeaDateState
-      - RCRALastIeaDateEPA
-      - RCRALastIeaDateState
-      - FacTRIReporter
-      - FacTRIOnSiteReleases
-      - FacDerivedHuc
+      - DateLastRecordReview
+      - FacTRILandReleases
+      - FacTRIOffSiteTransfers
       - FacDerivedWBD
       - FacDerivedWBDName
-      - FacMapFlg
-      - FacMapIcon
-      - LastViolationDate
-      - CurrentVioCnt
-      - FacFederalAgencyName
-      - FacTRIOffSiteTransfers
-      - RCRAFIPSCode
-      - RCRALandTypeCode
-      - RCRAOldestOpenVioDate
-      - FacTRILandReleases
-      - RCRAMapIcon
-      - RmpIDs
-      - RCRA3yrComplQtrsStatus
-      - CensusBlockGroup
+      - RCRAImpWaterFlg
+      - ChesapeakeBayFlag
+      - RCRAIeaCnt
+      - RCRAFeaCnt
+      - RCRALastIeaDate
+      - RCRALastIeaDateState
+      - RCRALastIeaDateEPA
+      - RCRALastFeaDate
+      - RCRALastFeaDateState
+      - RCRALastFeaDateEPA
+      - RCRAPenalties
+      - RCRALastPenaltyDate
+      - Over80CountUs
       - PctilePctpre1960Us
       - PctileDpmUs
       - PctileCancerUs
@@ -3773,6 +3842,23 @@ definitions:
       - PctileProximityTsdfUs
       - PctileO3Us
       - PctilePmUs
+      - FacPopulationDensity
+      - FacPercentMinority
+      - EPASystem
+      - Statute
+      - RCRATRIbalLandCode
+      - FacFederalAgencyCode
+      - RCRACaseIDs
+      - FacTRIReporter
+      - FacTRIOnSiteReleases
+      - FacMapFlg
+      - FacMapIcon
+      - LastViolationDate
+      - CurrentVioCnt
+      - RCRAFIPSCode
+      - RCRAMapIcon
+      - RCRA3yrComplQtrsHistory
+      - CensusBlockGroup
       - MaxPctileUs
       - EjscreenFlagUs
       - EjscreenFlag
@@ -3785,11 +3871,11 @@ definitions:
       - Infea5yrFlag
       - Lower48
       - ActiveLower48
-      - FacDerivedTRIbes
-      - FacIndianCntryFlg
-      - FacIndianSpatialFlg
       - CollectionMethod
       - ReferencePoint
       - CalculatedAccuracyMeters
       - Map
+      - WebDocs
+      - Score
+      - MaxScore
     type: object

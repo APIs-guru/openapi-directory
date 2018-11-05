@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/sqladmin/v1beta4/rest'
       version: v1
@@ -68,12 +68,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -282,6 +282,41 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/DatabaseInstance'
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+      tags:
+        - instances
+  '/projects/{project}/instances/{instance}/addServerCa':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Add a new trusted Certificate Authority (CA) version for the specified instance. Required to prepare for a certificate rotation. If a CA version was previously added but never used in a certificate rotation, this operation replaces that version. There can not be more than one CA version waiting to be rotated in.'
+      operationId: sql.instances.addServerCa
+      parameters:
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
@@ -884,6 +919,41 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - instances
+  '/projects/{project}/instances/{instance}/listServerCas':
+    get:
+      description: 'Lists all of the trusted Certificate Authorities (CAs) for the specified instance. There can be up to three CAs listed: the CA that was used to sign the certificate that is currently in use, a CA that has been added but not yet used to sign a certificate, and a CA used to sign a certificate that has previously rotated out.'
+      operationId: sql.instances.listServerCas
+      parameters:
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InstancesListServerCasResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+      tags:
+        - instances
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/projects/{project}/instances/{instance}/promoteReplica':
     parameters:
       - $ref: '#/parameters/alt'
@@ -1006,6 +1076,45 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/InstancesRestoreBackupRequest'
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+      tags:
+        - instances
+  '/projects/{project}/instances/{instance}/rotateServerCa':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Rotates the server certificate to one signed by the Certificate Authority (CA) version previously added with the addServerCA method.
+      operationId: sql.instances.rotateServerCa
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesRotateServerCaRequest'
         - description: Cloud SQL instance ID. This does not include the project ID.
           in: path
           name: instance
@@ -1555,7 +1664,7 @@ definitions:
         description: 'This is always sql#backupConfiguration.'
         type: string
       replicationLogArchivingEnabled:
-        description: Whether replication log archiving is enabled. Replication log archiving is required for the point-in-time recovery (PITR) feature. PostgreSQL instances only.
+        description: Reserved for future use.
         type: boolean
       startTime:
         description: 'Start time for the daily backup configuration in UTC timezone in the 24 hour format - HH:MM.'
@@ -1652,7 +1761,7 @@ definitions:
         description: 'This is always sql#cloneContext.'
         type: string
       pitrTimestampMs:
-        description: 'The epoch timestamp, in milliseconds, of the time to which a point-in-time recovery (PITR) is performed. PostgreSQL instances only. For MySQL instances, use the binLogCoordinates property.'
+        description: Reserved for future use.
         format: int64
         type: string
     type: object
@@ -1841,6 +1950,9 @@ definitions:
       replicaConfiguration:
         $ref: '#/definitions/DemoteMasterConfiguration'
         description: Configuration specific to read-replicas replicating from the on-premises master.
+      verifyGtidConsistency:
+        description: 'Verify GTID consistency for demote operation. Default value: True. Second Generation instances only. Setting this flag to false enables you to bypass GTID consistency check between on-premises master and Cloud SQL instance during the demotion operation but also exposes you to the risk of future replication failures. Change the value only if you know the reason for the GTID divergence and are confident that doing so will not cause any replication issues.'
+        type: boolean
     type: object
   DemoteMasterMySqlReplicaConfiguration:
     description: Read-replica configuration specific to MySQL databases.
@@ -2052,12 +2164,34 @@ definitions:
         description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
         type: string
     type: object
+  InstancesListServerCasResponse:
+    description: Instances ListServerCas response.
+    properties:
+      activeVersion:
+        type: string
+      certs:
+        description: List of server CA certificates for the instance.
+        items:
+          $ref: '#/definitions/SslCert'
+        type: array
+      kind:
+        default: 'sql#instancesListServerCas'
+        description: 'This is always sql#instancesListServerCas.'
+        type: string
+    type: object
   InstancesRestoreBackupRequest:
     description: Database instance restore backup request.
     properties:
       restoreBackupContext:
         $ref: '#/definitions/RestoreBackupContext'
         description: Parameters required to perform the restore backup operation.
+    type: object
+  InstancesRotateServerCaRequest:
+    description: Rotate Server CA request.
+    properties:
+      rotateServerCaContext:
+        $ref: '#/definitions/RotateServerCaContext'
+        description: Contains details about the rotate server CA operation.
     type: object
   InstancesTruncateLogRequest:
     description: Instance truncate log request.
@@ -2305,6 +2439,17 @@ definitions:
       kind:
         default: 'sql#restoreBackupContext'
         description: 'This is always sql#restoreBackupContext.'
+        type: string
+    type: object
+  RotateServerCaContext:
+    description: Instance rotate server CA context.
+    properties:
+      kind:
+        default: 'sql#rotateServerCaContext'
+        description: 'This is always sql#rotateServerCaContext.'
+        type: string
+      nextVersion:
+        description: 'The fingerprint of the next version to be rotated to. If left unspecified, will be rotated to the most recently added server CA version.'
         type: string
     type: object
   Settings:

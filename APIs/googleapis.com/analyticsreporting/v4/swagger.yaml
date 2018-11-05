@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Accesses Analytics report data.
-  title: Google Analytics Reporting
+  title: Analytics Reporting
   version: v4
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: google
       url: 'https://analyticsreporting.googleapis.com/$discovery/rest?version=v4'
       version: v1
@@ -61,11 +61,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -86,12 +81,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -121,12 +110,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -897,7 +884,7 @@ definitions:
         description: |-
           Page size is for paging and specifies the maximum number of returned rows.
           Page size should be >= 0. A query returns the default of 1,000 rows.
-          The Analytics Core Reporting API returns a maximum of 10,000 rows per
+          The Analytics Core Reporting API returns a maximum of 100,000 rows per
           request, no matter how many you ask for. It can also return fewer rows
           than requested, if there aren't as many dimension segments as you expect.
           For instance, there are fewer than 300 possible values for `ga:country`,

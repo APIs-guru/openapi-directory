@@ -13,7 +13,7 @@ Please also check the API isn't in the process of being added, by checking the [
 
 The API should meet the following critera:
 
-* Public - anyone can access it as long as they follow some clearly defined steps (email owner, pay money, etc.).
+* Public - anyone can access it as long as they follow some clearly defined steps (subscribe, pay fees, etc.).
 * Persistant - API is made with long-lived goal, and not for a particular event (conference, hackathon, etc.).
 * Useful - API should provide useful functionality not only for its owner.
 
@@ -27,8 +27,11 @@ Clone the repo locally, if you haven't already done so, and run the following
 * change into the APIs directory
 * run `../scripts/collection add -c {category} [-l {logo-url}|-t {twitter handle}] {format} {url-to-definition}`
 
-Where `{category}` is one of the values from [/resources/categories.yaml](/resources/categories.yaml), and `{format}` is one of:
+Run `../scripts/collection add --help` for a complete list of options.
 
+`{category}` should be one of the values from [/resources/categories.yaml](/resources/categories.yaml), and `{format}` be one of:
+
+  * `openapi_3`
   * `swagger_2`
   * `swagger_1`
   * `api_blueprint`
@@ -41,7 +44,7 @@ If your API definition is unofficial, also specify the `--unofficial` flag.
 
 If there are no validation errors:
 
-* commit your change
+* commit your change (including any `patch.yaml` created)
 * push your change
 * create a Pull Request
 
@@ -49,7 +52,7 @@ If there are no validation errors:
 
 ### Adding information
 
-If you wish to only add information to the API definition, such as a description, category, logo, tag etc, you can amend the `patch.yaml` file found in the API's directory. The file is merged with the `swagger.yaml` file, so the structure should follow that of an OpenAPI definition, including only those properties necessary to place your addition correctly.
+If you wish to only add information to the API definition, such as a description, category, logo, tag etc, you can amend the `patch.yaml` file found in the API's directory. The file is merged with the `swagger.yaml` or `openapi.yaml` file, so the structure should follow that of an OpenAPI definition, including only those properties necessary to place your addition correctly.
 
 For example:
 
@@ -71,7 +74,7 @@ First please see if you can make your fix upstream with the owner of the API def
 
 Check the `info.contact` section of the API definition or the `x-origin` to see if there is an email or Twitter contact, or a GitHub repository you can contribute to.
 
-#### Do not amend swagger.yaml files directly
+#### Do not amend swagger/openapi.yaml files directly
 
 If you do this, your changes will be overwritten the next time the API update scripts are run.
 
@@ -91,7 +94,7 @@ Ensure your `EDITOR` environment variable is set to a terminal editor such as vi
 
 Issue the command `node ../scripts/collection fixup {path/to/swagger.yaml}`
 
-Edit the `swagger.yaml` file and save.
+Edit the `swagger.yaml` or `openapi.yaml` file and save.
 
 Issue the command `node ../scripts/collection update {directory-name}` to reprocess the definition from source.
 

@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/drive/v2/rest'
       version: v1
@@ -75,12 +75,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -2187,7 +2187,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: 'Updates a property, or adds it if it doesn''t exist. This method supports patch semantics.'
+      description: Updates a property.
       operationId: drive.properties.patch
       parameters:
         - in: body
@@ -2205,7 +2205,7 @@ paths:
           required: true
           type: string
         - default: private
-          description: The visibility of the property.
+          description: 'The visibility of the property. Allowed values are PRIVATE and PUBLIC. (Default: PRIVATE)'
           in: query
           name: visibility
           type: string
@@ -2226,7 +2226,7 @@ paths:
       tags:
         - properties
     put:
-      description: 'Updates a property, or adds it if it doesn''t exist.'
+      description: Updates a property.
       operationId: drive.properties.update
       parameters:
         - in: body
@@ -2244,7 +2244,7 @@ paths:
           required: true
           type: string
         - default: private
-          description: The visibility of the property.
+          description: 'The visibility of the property. Allowed values are PRIVATE and PUBLIC. (Default: PRIVATE)'
           in: query
           name: visibility
           type: string
@@ -4308,7 +4308,7 @@ definitions:
         description: The value of this property.
         type: string
       visibility:
-        description: The visibility of this property.
+        description: 'The visibility of this property. Allowed values are PRIVATE and PUBLIC. (Default: PRIVATE)'
         type: string
     type: object
   PropertyList:

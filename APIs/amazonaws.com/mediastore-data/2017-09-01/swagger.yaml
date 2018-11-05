@@ -224,7 +224,7 @@ paths:
           type: string
     put:
       operationId: PutObject
-      description: Uploads an object to the specified path. Object sizes are limited to 10 MB.
+      description: Uploads an object to the specified path. Object sizes are limited to 25 MB.
       responses:
         '200':
           description: Success
@@ -288,41 +288,19 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  ContainerNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified container was not found for the specified account.
-  ContentRangePattern:
-    type: string
-    pattern: ^bytes=\d+\-\d+/\d+$
-  ContentType:
-    type: string
-    pattern: '^[\w\-\/\.]{1,255}$'
-  DeleteObjectRequest:
-    type: object
-    properties: {}
   DeleteObjectResponse:
     type: object
     properties: {}
-  DescribeObjectRequest:
+  DeleteObjectRequest:
     type: object
     properties: {}
+  ContainerNotFoundException: {}
+  ObjectNotFoundException: {}
+  InternalServerError: {}
   DescribeObjectResponse:
     type: object
     properties: {}
-  ETag:
-    type: string
-    pattern: '[0-9A-Fa-f]+'
-    minLength: 1
-    maxLength: 64
-  ErrorMessage:
-    type: string
-    pattern: '[ \w:\.\?-]+'
-    minLength: 1
-    maxLength: 255
-  GetObjectRequest:
+  DescribeObjectRequest:
     type: object
     properties: {}
   GetObjectResponse:
@@ -331,12 +309,81 @@ definitions:
       Body:
         $ref: '#/definitions/PayloadBlob'
         description: 'The bytes of the object. '
-  InternalServerError:
+  GetObjectRequest:
+    type: object
+    properties: {}
+  RequestedRangeNotSatisfiableException: {}
+  ListItemsResponse:
     type: object
     properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The service is temporarily unavailable.
+      Items:
+        $ref: '#/definitions/ItemList'
+        description: The metadata entries for the folders and objects at the requested path.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token that can be used in a request to view the next set of results. For example, you submit a <code>ListItems</code> request that matches 2,000 items with <code>MaxResults</code> set at 500. The service returns the first batch of results (up to 500) and a <code>NextToken</code> value that can be used to fetch the next batch of results.'
+  ListItemsRequest:
+    type: object
+    properties: {}
+  PutObjectResponse:
+    type: object
+    properties:
+      ContentSHA256:
+        $ref: '#/definitions/SHA256Hash'
+        description: The SHA256 digest of the object that is persisted.
+      ETag:
+        $ref: '#/definitions/ETag'
+        description: Unique identifier of the object in the container.
+      StorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: The storage class where the object was persisted. The class should be “Temporal”.
+  PutObjectRequest:
+    type: object
+    required:
+      - Body
+    properties:
+      Body:
+        $ref: '#/definitions/PayloadBlob'
+        description: 'The bytes to be stored. '
+  ContentRangePattern:
+    type: string
+    pattern: ^bytes=\d+\-\d+/\d+$
+  ContentType:
+    type: string
+    pattern: '^[\w\-\/\.\+]{1,255}$'
+  PathNaming:
+    type: string
+    pattern: '(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+'
+    minLength: 1
+    maxLength: 900
+  ETag:
+    type: string
+    pattern: '[0-9A-Fa-f]+'
+    minLength: 1
+    maxLength: 64
+  NonNegativeLong:
+    type: integer
+    minimum: 0
+  StringPrimitive:
+    type: string
+  TimeStamp:
+    type: string
+    format: date-time
+  RangePattern:
+    type: string
+    pattern: '^bytes=(?:\d+\-\d*|\d*\-\d+)$'
+  PayloadBlob:
+    type: string
+  statusCode:
+    type: integer
+  ItemName:
+    type: string
+    pattern: '[A-Za-z0-9_\.\-\~]+'
+  ItemType:
+    type: string
+    enum:
+      - OBJECT
+      - FOLDER
   Item:
     type: object
     properties:
@@ -363,97 +410,25 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Item'
-  ItemName:
-    type: string
-    pattern: '[A-Za-z0-9_\.\-\~]+'
-  ItemType:
-    type: string
-    enum:
-      - OBJECT
-      - FOLDER
-  ListItemsRequest:
-    type: object
-    properties: {}
-  ListItemsResponse:
-    type: object
-    properties:
-      Items:
-        $ref: '#/definitions/ItemList'
-        description: Metadata entries for the folders and objects at the requested path.
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: The <code>NextToken</code> used to request the next page of results using <code>ListItems</code>.
-  ListLimit:
-    type: integer
-    minimum: 1
-    maximum: 1000
   ListPathNaming:
     type: string
     pattern: '/?(?:[A-Za-z0-9_\.\-\~]+/){0,10}(?:[A-Za-z0-9_\.\-\~]+)?/?'
     minLength: 0
     maxLength: 900
-  NonNegativeLong:
+  ListLimit:
     type: integer
-    minimum: 0
-  ObjectNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Could not perform an operation on an object that does not exist.
+    minimum: 1
+    maximum: 1000
   PaginationToken:
     type: string
-  PathNaming:
-    type: string
-    pattern: '(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+'
-    minLength: 1
-    maxLength: 900
-  PayloadBlob:
-    type: string
-  PutObjectRequest:
-    type: object
-    required:
-      - Body
-    properties:
-      Body:
-        $ref: '#/definitions/PayloadBlob'
-        description: 'The bytes to be stored. '
-  PutObjectResponse:
-    type: object
-    properties:
-      ContentSHA256:
-        $ref: '#/definitions/SHA256Hash'
-        description: The SHA256 digest of the object that is persisted.
-      ETag:
-        $ref: '#/definitions/ETag'
-        description: Unique identifier of the object in the container.
-      StorageClass:
-        $ref: '#/definitions/StorageClass'
-        description: The storage class where the object was persisted. Should be “Temporal”.
-  RangePattern:
-    type: string
-    pattern: '^bytes=(?:\d+\-\d*|\d*\-\d+)$'
-  RequestedRangeNotSatisfiableException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The requested content range is not valid.
-  SHA256Hash:
-    type: string
-    pattern: '[0-9A-Fa-f]{64}'
-    minLength: 64
-    maxLength: 64
   StorageClass:
     type: string
     enum:
       - TEMPORAL
     minLength: 1
     maxLength: 16
-  StringPrimitive:
+  SHA256Hash:
     type: string
-  TimeStamp:
-    type: string
-    format: date-time
-  statusCode:
-    type: integer
+    pattern: '[0-9A-Fa-f]{64}'
+    minLength: 64
+    maxLength: 64

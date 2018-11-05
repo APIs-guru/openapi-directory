@@ -136,6 +136,208 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /CreateSamplingRule:
+    post:
+      operationId: CreateSamplingRule
+      description: 'Creates a rule to control sampling behavior for instrumented applications. Services retrieve rules with <a>GetSamplingRules</a>, and evaluate each rule in ascending order of <i>priority</i> for each request. If a rule matches, the service records a trace, borrowing it from the reservoir size. After 10 seconds, the service reports back to X-Ray with <a>GetSamplingTargets</a> to get updated versions of each in-use rule. The updated rule contains a trace quota that the service can use instead of borrowing from the reservoir.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSamplingRuleResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+        '482':
+          description: RuleLimitExceededException
+          schema:
+            $ref: '#/definitions/RuleLimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSamplingRuleRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /DeleteSamplingRule:
+    post:
+      operationId: DeleteSamplingRule
+      description: Deletes a sampling rule.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSamplingRuleResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSamplingRuleRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /EncryptionConfig:
+    post:
+      operationId: GetEncryptionConfig
+      description: Retrieves the current encryption configuration for X-Ray data.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetEncryptionConfigResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetEncryptionConfigRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /GetSamplingRules:
+    post:
+      operationId: GetSamplingRules
+      description: Retrieves all sampling rules.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSamplingRulesResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSamplingRulesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /SamplingStatisticSummaries:
+    post:
+      operationId: GetSamplingStatisticSummaries
+      description: Retrieves information about recent sampling results for all sampling rules.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSamplingStatisticSummariesResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSamplingStatisticSummariesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /SamplingTargets:
+    post:
+      operationId: GetSamplingTargets
+      description: 'Requests a sampling quota for rules that the service is using to sample requests. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSamplingTargetsResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSamplingTargetsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /ServiceGraph:
     post:
       operationId: GetServiceGraph
@@ -250,6 +452,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /PutEncryptionConfig:
+    post:
+      operationId: PutEncryptionConfig
+      description: Updates the encryption configuration for X-Ray data.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutEncryptionConfigResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutEncryptionConfigRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /TelemetryRecords:
     post:
       operationId: PutTelemetryRecords
@@ -286,7 +521,7 @@ paths:
   /TraceSegments:
     post:
       operationId: PutTraceSegments
-      description: '<p>Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments.</p> <p>Segments must include the following fields. For the full segment document schema, see <a href="http://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html">AWS X-Ray Segment Documents</a> in the <i>AWS X-Ray Developer Guide</i>.</p> <p class="title"> <b>Required Segment Document Fields</b> </p> <ul> <li> <p> <code>name</code> - The name of the service that handled the request.</p> </li> <li> <p> <code>id</code> - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.</p> </li> <li> <p> <code>trace_id</code> - A unique identifier that connects all segments and subsegments originating from a single client request.</p> </li> <li> <p> <code>start_time</code> - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, <code>1480615200.010</code> or <code>1.480615200010E9</code>.</p> </li> <li> <p> <code>end_time</code> - Time the segment or subsegment was closed. For example, <code>1480615200.090</code> or <code>1.480615200090E9</code>. Specify either an <code>end_time</code> or <code>in_progress</code>.</p> </li> <li> <p> <code>in_progress</code> - Set to <code>true</code> instead of specifying an <code>end_time</code> to record that a segment has been started, but is not complete. Send an in progress segment when your application receives a request that will take a long time to serve, to trace the fact that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.</p> </li> </ul> <p>A <code>trace_id</code> consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:</p> <p class="title"> <b>Trace ID Format</b> </p> <ul> <li> <p>The version number, i.e. <code>1</code>.</p> </li> <li> <p>The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is <code>1480615200</code> seconds, or <code>58406520</code> in hexadecimal.</p> </li> <li> <p>A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.</p> </li> </ul>'
+      description: '<p>Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments.</p> <p>Segments must include the following fields. For the full segment document schema, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html">AWS X-Ray Segment Documents</a> in the <i>AWS X-Ray Developer Guide</i>.</p> <p class="title"> <b>Required Segment Document Fields</b> </p> <ul> <li> <p> <code>name</code> - The name of the service that handled the request.</p> </li> <li> <p> <code>id</code> - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.</p> </li> <li> <p> <code>trace_id</code> - A unique identifier that connects all segments and subsegments originating from a single client request.</p> </li> <li> <p> <code>start_time</code> - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, <code>1480615200.010</code> or <code>1.480615200010E9</code>.</p> </li> <li> <p> <code>end_time</code> - Time the segment or subsegment was closed. For example, <code>1480615200.090</code> or <code>1.480615200090E9</code>. Specify either an <code>end_time</code> or <code>in_progress</code>.</p> </li> <li> <p> <code>in_progress</code> - Set to <code>true</code> instead of specifying an <code>end_time</code> to record that a segment has been started, but is not complete. Send an in progress segment when your application receives a request that will take a long time to serve, to trace the fact that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.</p> </li> </ul> <p>A <code>trace_id</code> consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:</p> <p class="title"> <b>Trace ID Format</b> </p> <ul> <li> <p>The version number, i.e. <code>1</code>.</p> </li> <li> <p>The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is <code>1480615200</code> seconds, or <code>58406520</code> in hexadecimal.</p> </li> <li> <p>A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -316,7 +551,311 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /UpdateSamplingRule:
+    post:
+      operationId: UpdateSamplingRule
+      description: Modifies a sampling rule's configuration.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSamplingRuleResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateSamplingRuleRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  BatchGetTracesResult:
+    type: object
+    properties:
+      Traces:
+        $ref: '#/definitions/TraceList'
+        description: Full traces for the specified requests.
+      UnprocessedTraceIds:
+        $ref: '#/definitions/UnprocessedTraceIdList'
+        description: Trace IDs of requests that haven't been processed.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  BatchGetTracesRequest:
+    type: object
+    required:
+      - TraceIds
+    properties:
+      TraceIds:
+        $ref: '#/definitions/TraceIdList'
+        description: Specify the trace IDs of requests for which to retrieve segments.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  InvalidRequestException: {}
+  ThrottledException: {}
+  CreateSamplingRuleResult:
+    type: object
+    properties:
+      SamplingRuleRecord:
+        $ref: '#/definitions/SamplingRuleRecord'
+        description: The saved rule definition and metadata.
+  CreateSamplingRuleRequest:
+    type: object
+    required:
+      - SamplingRule
+    properties:
+      SamplingRule:
+        $ref: '#/definitions/SamplingRule'
+        description: The rule definition.
+  RuleLimitExceededException: {}
+  DeleteSamplingRuleResult:
+    type: object
+    properties:
+      SamplingRuleRecord:
+        $ref: '#/definitions/SamplingRuleRecord'
+        description: The deleted rule definition and metadata.
+  DeleteSamplingRuleRequest:
+    type: object
+    properties:
+      RuleName:
+        $ref: '#/definitions/String'
+        description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
+      RuleARN:
+        $ref: '#/definitions/String'
+        description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
+  GetEncryptionConfigResult:
+    type: object
+    properties:
+      EncryptionConfig:
+        $ref: '#/definitions/EncryptionConfig'
+        description: The encryption configuration document.
+  GetEncryptionConfigRequest:
+    type: object
+    properties: {}
+  GetSamplingRulesResult:
+    type: object
+    properties:
+      SamplingRuleRecords:
+        $ref: '#/definitions/SamplingRuleRecordList'
+        description: Rule definitions and metadata.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetSamplingRulesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetSamplingStatisticSummariesResult:
+    type: object
+    properties:
+      SamplingStatisticSummaries:
+        $ref: '#/definitions/SamplingStatisticSummaryList'
+        description: Information about the number of requests instrumented for each sampling rule.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetSamplingStatisticSummariesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetSamplingTargetsResult:
+    type: object
+    properties:
+      SamplingTargetDocuments:
+        $ref: '#/definitions/SamplingTargetDocumentList'
+        description: Updated rules that the service should use to sample requests.
+      LastRuleModification:
+        $ref: '#/definitions/Timestamp'
+        description: 'The last time a user changed the sampling rule configuration. If the sampling rule configuration changed since the service last retrieved it, the service should call <a>GetSamplingRules</a> to get the latest version.'
+      UnprocessedStatistics:
+        $ref: '#/definitions/UnprocessedStatisticsList'
+        description: Information about <a>SamplingStatisticsDocument</a> that X-Ray could not process.
+  GetSamplingTargetsRequest:
+    type: object
+    required:
+      - SamplingStatisticsDocuments
+    properties:
+      SamplingStatisticsDocuments:
+        $ref: '#/definitions/SamplingStatisticsDocumentList'
+        description: Information about rules that the service is using to sample requests.
+  GetServiceGraphResult:
+    type: object
+    properties:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The start of the time frame for which the graph was generated.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The end of the time frame for which the graph was generated.
+      Services:
+        $ref: '#/definitions/ServiceList'
+        description: The services that have processed a traced request during the specified time frame.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetServiceGraphRequest:
+    type: object
+    required:
+      - StartTime
+      - EndTime
+    properties:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The start of the time frame for which to generate a graph.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The end of the time frame for which to generate a graph.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetTraceGraphResult:
+    type: object
+    properties:
+      Services:
+        $ref: '#/definitions/ServiceList'
+        description: The services that have processed one of the specified requests.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetTraceGraphRequest:
+    type: object
+    required:
+      - TraceIds
+    properties:
+      TraceIds:
+        $ref: '#/definitions/TraceIdList'
+        description: Trace IDs of requests for which to generate a service graph.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetTraceSummariesResult:
+    type: object
+    properties:
+      TraceSummaries:
+        $ref: '#/definitions/TraceSummaryList'
+        description: Trace IDs and metadata for traces that were found in the specified time frame.
+      ApproximateTime:
+        $ref: '#/definitions/Timestamp'
+        description: The start time of this page of results.
+      TracesProcessedCount:
+        $ref: '#/definitions/NullableLong'
+        description: 'The total number of traces processed, including traces that did not match the specified filter expression.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'If the requested time frame contained more than one page of results, you can use this token to retrieve the next page. The first page contains the most most recent results, closest to the end of the time frame.'
+  GetTraceSummariesRequest:
+    type: object
+    required:
+      - StartTime
+      - EndTime
+    properties:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The start of the time frame for which to retrieve traces.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The end of the time frame for which to retrieve traces.
+      Sampling:
+        $ref: '#/definitions/NullableBoolean'
+        description: Set to <code>true</code> to get summaries for only a subset of available traces.
+      FilterExpression:
+        $ref: '#/definitions/FilterExpression'
+        description: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Specify the pagination token returned by a previous request to retrieve the next page of results.
+  PutEncryptionConfigResult:
+    type: object
+    properties:
+      EncryptionConfig:
+        $ref: '#/definitions/EncryptionConfig'
+        description: The new encryption configuration.
+  PutEncryptionConfigRequest:
+    type: object
+    required:
+      - Type
+    properties:
+      KeyId:
+        $ref: '#/definitions/EncryptionKeyId'
+        description: '<p>An AWS KMS customer master key (CMK) in one of the following formats:</p> <ul> <li> <p> <b>Alias</b> - The name of the key. For example, <code>alias/MyKey</code>.</p> </li> <li> <p> <b>Key ID</b> - The KMS key ID of the key. For example, <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>.</p> </li> <li> <p> <b>ARN</b> - The full Amazon Resource Name of the key ID or alias. For example, <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Use this format to specify a key in a different account.</p> </li> </ul> <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>'
+      Type:
+        $ref: '#/definitions/EncryptionType'
+        description: The type of encryption. Set to <code>KMS</code> to use your own key for encryption. Set to <code>NONE</code> for default encryption.
+  PutTelemetryRecordsResult:
+    type: object
+    properties: {}
+  PutTelemetryRecordsRequest:
+    type: object
+    required:
+      - TelemetryRecords
+    properties:
+      TelemetryRecords:
+        $ref: '#/definitions/TelemetryRecordList'
+        description: <p/>
+      EC2InstanceId:
+        $ref: '#/definitions/EC2InstanceId'
+        description: <p/>
+      Hostname:
+        $ref: '#/definitions/Hostname'
+        description: <p/>
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: <p/>
+  PutTraceSegmentsResult:
+    type: object
+    properties:
+      UnprocessedTraceSegments:
+        $ref: '#/definitions/UnprocessedTraceSegmentList'
+        description: Segments that failed processing.
+  PutTraceSegmentsRequest:
+    type: object
+    required:
+      - TraceSegmentDocuments
+    properties:
+      TraceSegmentDocuments:
+        $ref: '#/definitions/TraceSegmentDocumentList'
+        description: A string containing a JSON document defining one or more segments or subsegments.
+  UpdateSamplingRuleResult:
+    type: object
+    properties:
+      SamplingRuleRecord:
+        $ref: '#/definitions/SamplingRuleRecord'
+        description: The updated rule definition and metadata.
+  UpdateSamplingRuleRequest:
+    type: object
+    required:
+      - SamplingRuleUpdate
+    properties:
+      SamplingRuleUpdate:
+        $ref: '#/definitions/SamplingRuleUpdate'
+        description: The rule and fields to change.
+  String:
+    type: string
+  AliasNames:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   Alias:
     type: object
     properties:
@@ -334,12 +873,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Alias'
-  AliasNames:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   AnnotationKey:
     type: string
+  NullableDouble:
+    type: number
+    format: double
+  NullableBoolean:
+    type: boolean
   AnnotationValue:
     type: object
     properties:
@@ -353,6 +893,10 @@ definitions:
         $ref: '#/definitions/String'
         description: Value for a String annotation.
     description: 'Value of a segment annotation. Has one of three value types: Number, Boolean or String.'
+  ValuesWithServiceIds:
+    type: array
+    items:
+      $ref: '#/definitions/ValueWithServiceIds'
   Annotations:
     type: array
     items:
@@ -362,6 +906,26 @@ definitions:
           $ref: '#/definitions/AnnotationKey'
         value:
           $ref: '#/definitions/ValuesWithServiceIds'
+  AttributeKey:
+    type: string
+    minLength: 1
+    maxLength: 32
+  AttributeValue:
+    type: string
+    minLength: 1
+    maxLength: 32
+  AttributeMap:
+    type: array
+    maxItems: 5
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeKey'
+        value:
+          $ref: '#/definitions/AttributeValue'
+  NullableInteger:
+    type: integer
   BackendConnectionErrors:
     type: object
     properties:
@@ -384,35 +948,124 @@ definitions:
         $ref: '#/definitions/NullableInteger'
         description: <p/>
     description: <p/>
-  BatchGetTracesRequest:
+  TraceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/TraceId'
+  TraceList:
+    type: array
+    items:
+      $ref: '#/definitions/Trace'
+  UnprocessedTraceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/TraceId'
+  BorrowCount:
+    type: integer
+    minimum: 0
+  ClientID:
+    type: string
+    minLength: 24
+    maxLength: 24
+  SamplingRule:
     type: object
     required:
-      - TraceIds
+      - ResourceARN
+      - Priority
+      - FixedRate
+      - ReservoirSize
+      - ServiceName
+      - ServiceType
+      - Host
+      - HTTPMethod
+      - URLPath
+      - Version
     properties:
-      TraceIds:
-        $ref: '#/definitions/TraceIdList'
-        description: Specify the trace IDs of requests for which to retrieve segments.
-      NextToken:
+      RuleName:
+        $ref: '#/definitions/RuleName'
+        description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
+      RuleARN:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
-  BatchGetTracesResult:
+        description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: Matches the ARN of the AWS resource on which the service runs.
+      Priority:
+        $ref: '#/definitions/Priority'
+        description: The priority of the sampling rule.
+      FixedRate:
+        $ref: '#/definitions/FixedRate'
+        description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
+      ReservoirSize:
+        $ref: '#/definitions/ReservoirSize'
+        description: 'A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.'
+      ServiceName:
+        $ref: '#/definitions/ServiceName'
+        description: Matches the <code>name</code> that the service uses to identify itself in segments.
+      ServiceType:
+        $ref: '#/definitions/ServiceType'
+        description: Matches the <code>origin</code> that the service uses to identify its type in segments.
+      Host:
+        $ref: '#/definitions/Host'
+        description: Matches the hostname from a request URL.
+      HTTPMethod:
+        $ref: '#/definitions/HTTPMethod'
+        description: Matches the HTTP method of a request.
+      URLPath:
+        $ref: '#/definitions/URLPath'
+        description: Matches the path from a request URL.
+      Version:
+        $ref: '#/definitions/Version'
+        description: The version of the sampling rule format (<code>1</code>).
+      Attributes:
+        $ref: '#/definitions/AttributeMap'
+        description: Matches attributes derived from the request.
+    description: 'A sampling rule that services use to decide whether to instrument a request. Rule fields can match properties of the service, or properties of a request. The service can ignore rules that don''t match its properties.'
+  SamplingRuleRecord:
     type: object
     properties:
-      Traces:
-        $ref: '#/definitions/TraceList'
-        description: Full traces for the specified requests.
-      UnprocessedTraceIds:
-        $ref: '#/definitions/UnprocessedTraceIdList'
-        description: Trace IDs of requests that haven't been processed.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+      SamplingRule:
+        $ref: '#/definitions/SamplingRule'
+        description: The sampling rule.
+      CreatedAt:
+        $ref: '#/definitions/Timestamp'
+        description: When the rule was created.
+      ModifiedAt:
+        $ref: '#/definitions/Timestamp'
+        description: When the rule was last modified.
+    description: A <a>SamplingRule</a> and its metadata.
   Double:
     type: number
     format: double
   EC2InstanceId:
     type: string
     maxLength: 20
+  Timestamp:
+    type: string
+    format: date-time
+  EdgeStatistics:
+    type: object
+    properties:
+      OkCount:
+        $ref: '#/definitions/NullableLong'
+        description: The number of requests that completed with a 2xx Success status code.
+      ErrorStatistics:
+        $ref: '#/definitions/ErrorStatistics'
+        description: Information about requests that failed with a 4xx Client Error status code.
+      FaultStatistics:
+        $ref: '#/definitions/FaultStatistics'
+        description: Information about requests that failed with a 5xx Server Error status code.
+      TotalCount:
+        $ref: '#/definitions/NullableLong'
+        description: The total number of completed requests.
+      TotalResponseTime:
+        $ref: '#/definitions/NullableDouble'
+        description: The aggregate response time of completed requests.
+    description: Response statistics for an edge.
+  Histogram:
+    type: array
+    items:
+      $ref: '#/definitions/HistogramEntry'
   Edge:
     type: object
     properties:
@@ -439,27 +1092,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Edge'
-  EdgeStatistics:
-    type: object
-    properties:
-      OkCount:
-        $ref: '#/definitions/NullableLong'
-        description: The number of requests that completed with a 2xx Success status code.
-      ErrorStatistics:
-        $ref: '#/definitions/ErrorStatistics'
-        description: Information about requests that failed with a 4xx Client Error status code.
-      FaultStatistics:
-        $ref: '#/definitions/FaultStatistics'
-        description: Information about requests that failed with a 5xx Server Error status code.
-      TotalCount:
-        $ref: '#/definitions/NullableLong'
-        description: The total number of completed requests.
-      TotalResponseTime:
-        $ref: '#/definitions/NullableDouble'
-        description: The aggregate response time of completed requests.
-    description: Response statistics for an edge.
-  ErrorMessage:
-    type: string
+  NullableLong:
+    type: integer
   ErrorStatistics:
     type: object
     properties:
@@ -483,100 +1117,74 @@ definitions:
         $ref: '#/definitions/NullableLong'
         description: The total number of requests that failed with a 5xx Server Error status code.
     description: Information about requests that failed with a 5xx Server Error status code.
+  EncryptionStatus:
+    type: string
+    enum:
+      - UPDATING
+      - ACTIVE
+  EncryptionType:
+    type: string
+    enum:
+      - NONE
+      - KMS
+  EncryptionConfig:
+    type: object
+    properties:
+      KeyId:
+        $ref: '#/definitions/String'
+        description: 'The ID of the customer master key (CMK) used for encryption, if applicable.'
+      Status:
+        $ref: '#/definitions/EncryptionStatus'
+        description: 'The encryption status. While the status is <code>UPDATING</code>, X-Ray may encrypt data with a combination of the new and old settings.'
+      Type:
+        $ref: '#/definitions/EncryptionType'
+        description: The type of encryption. Set to <code>KMS</code> for encryption with CMKs. Set to <code>NONE</code> for default encryption.
+    description: A configuration document that specifies encryption configuration settings.
+  EncryptionKeyId:
+    type: string
+    minLength: 1
+    maxLength: 3000
   FilterExpression:
     type: string
     minLength: 1
     maxLength: 2000
-  GetServiceGraphRequest:
-    type: object
-    required:
-      - StartTime
-      - EndTime
-    properties:
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: The start of the time frame for which to generate a graph.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The end of the time frame for which to generate a graph.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
-  GetServiceGraphResult:
-    type: object
-    properties:
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: The start of the time frame for which the graph was generated.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The end of the time frame for which the graph was generated.
-      Services:
-        $ref: '#/definitions/ServiceList'
-        description: The services that have processed a traced request during the specified time frame.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
-  GetTraceGraphRequest:
-    type: object
-    required:
-      - TraceIds
-    properties:
-      TraceIds:
-        $ref: '#/definitions/TraceIdList'
-        description: Trace IDs of requests for which to generate a service graph.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
-  GetTraceGraphResult:
-    type: object
-    properties:
-      Services:
-        $ref: '#/definitions/ServiceList'
-        description: The services that have processed one of the specified requests.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
-  GetTraceSummariesRequest:
-    type: object
-    required:
-      - StartTime
-      - EndTime
-    properties:
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: The start of the time frame for which to retrieve traces.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The end of the time frame for which to retrieve traces.
-      Sampling:
-        $ref: '#/definitions/NullableBoolean'
-        description: Set to <code>true</code> to get summaries for only a subset of available traces.
-      FilterExpression:
-        $ref: '#/definitions/FilterExpression'
-        description: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Specify the pagination token returned by a previous request to retrieve the next page of results.
-  GetTraceSummariesResult:
-    type: object
-    properties:
-      TraceSummaries:
-        $ref: '#/definitions/TraceSummaryList'
-        description: Trace IDs and metadata for traces that were found in the specified time frame.
-      ApproximateTime:
-        $ref: '#/definitions/Timestamp'
-        description: The start time of this page of results.
-      TracesProcessedCount:
-        $ref: '#/definitions/NullableLong'
-        description: The number of traces that were processed to get this set of summaries.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: 'If the requested time frame contained more than one page of results, you can use this token to retrieve the next page. The first page contains the most most recent results, closest to the end of the time frame.'
-  Histogram:
+  FixedRate:
+    type: number
+    format: double
+    minimum: 0
+    maximum: 1
+  SamplingRuleRecordList:
     type: array
     items:
-      $ref: '#/definitions/HistogramEntry'
+      $ref: '#/definitions/SamplingRuleRecord'
+  SamplingStatisticSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/SamplingStatisticSummary'
+  SamplingStatisticsDocumentList:
+    type: array
+    items:
+      $ref: '#/definitions/SamplingStatisticsDocument'
+    maxItems: 25
+  SamplingTargetDocumentList:
+    type: array
+    items:
+      $ref: '#/definitions/SamplingTargetDocument'
+  UnprocessedStatisticsList:
+    type: array
+    items:
+      $ref: '#/definitions/UnprocessedStatistics'
+  ServiceList:
+    type: array
+    items:
+      $ref: '#/definitions/Service'
+  TraceSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/TraceSummary'
+  HTTPMethod:
+    type: string
+    maxLength: 10
   HistogramEntry:
     type: object
     properties:
@@ -587,6 +1195,11 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The prevalence of the entry.
     description: 'An entry in a histogram for a statistic. A histogram maps the range of observed values on the X axis, and the prevalence of each value on the Y axis.'
+  Integer:
+    type: integer
+  Host:
+    type: string
+    maxLength: 64
   Hostname:
     type: string
     maxLength: 255
@@ -609,60 +1222,161 @@ definitions:
         $ref: '#/definitions/String'
         description: The IP address of the requestor.
     description: Information about an HTTP request.
-  Integer:
+  Priority:
     type: integer
-  InvalidRequestException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The request is missing required parameters or has invalid parameters.
-  NullableBoolean:
-    type: boolean
-  NullableDouble:
-    type: number
-    format: double
-  NullableInteger:
-    type: integer
-  NullableLong:
-    type: integer
-  PutTelemetryRecordsRequest:
-    type: object
-    required:
-      - TelemetryRecords
-    properties:
-      TelemetryRecords:
-        $ref: '#/definitions/TelemetryRecordList'
-        description: <p/>
-      EC2InstanceId:
-        $ref: '#/definitions/EC2InstanceId'
-        description: <p/>
-      Hostname:
-        $ref: '#/definitions/Hostname'
-        description: <p/>
-      ResourceARN:
-        $ref: '#/definitions/ResourceARN'
-        description: <p/>
-  PutTelemetryRecordsResult:
-    type: object
-    properties: {}
-  PutTraceSegmentsRequest:
-    type: object
-    required:
-      - TraceSegmentDocuments
-    properties:
-      TraceSegmentDocuments:
-        $ref: '#/definitions/TraceSegmentDocumentList'
-        description: A string containing a JSON document defining one or more segments or subsegments.
-  PutTraceSegmentsResult:
-    type: object
-    properties:
-      UnprocessedTraceSegments:
-        $ref: '#/definitions/UnprocessedTraceSegmentList'
-        description: Segments that failed processing.
+    minimum: 1
+    maximum: 9999
+  TelemetryRecordList:
+    type: array
+    items:
+      $ref: '#/definitions/TelemetryRecord'
   ResourceARN:
     type: string
     maxLength: 500
+  TraceSegmentDocumentList:
+    type: array
+    items:
+      $ref: '#/definitions/TraceSegmentDocument'
+  UnprocessedTraceSegmentList:
+    type: array
+    items:
+      $ref: '#/definitions/UnprocessedTraceSegment'
+  RequestCount:
+    type: integer
+    minimum: 0
+  ReservoirSize:
+    type: integer
+    minimum: 0
+  RuleName:
+    type: string
+    minLength: 1
+    maxLength: 32
+  SampledCount:
+    type: integer
+    minimum: 0
+  ServiceName:
+    type: string
+    maxLength: 64
+  ServiceType:
+    type: string
+    maxLength: 64
+  URLPath:
+    type: string
+    maxLength: 128
+  Version:
+    type: integer
+    minimum: 1
+  SamplingRuleUpdate:
+    type: object
+    properties:
+      RuleName:
+        $ref: '#/definitions/RuleName'
+        description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
+      RuleARN:
+        $ref: '#/definitions/String'
+        description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: Matches the ARN of the AWS resource on which the service runs.
+      Priority:
+        $ref: '#/definitions/NullableInteger'
+        description: The priority of the sampling rule.
+      FixedRate:
+        $ref: '#/definitions/NullableDouble'
+        description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
+      ReservoirSize:
+        $ref: '#/definitions/NullableInteger'
+        description: 'A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.'
+      Host:
+        $ref: '#/definitions/Host'
+        description: Matches the hostname from a request URL.
+      ServiceName:
+        $ref: '#/definitions/ServiceName'
+        description: Matches the <code>name</code> that the service uses to identify itself in segments.
+      ServiceType:
+        $ref: '#/definitions/ServiceType'
+        description: Matches the <code>origin</code> that the service uses to identify its type in segments.
+      HTTPMethod:
+        $ref: '#/definitions/HTTPMethod'
+        description: Matches the HTTP method of a request.
+      URLPath:
+        $ref: '#/definitions/URLPath'
+        description: Matches the path from a request URL.
+      Attributes:
+        $ref: '#/definitions/AttributeMap'
+        description: Matches attributes derived from the request.
+    description: A document specifying changes to a sampling rule's configuration.
+  SamplingStatisticSummary:
+    type: object
+    properties:
+      RuleName:
+        $ref: '#/definitions/String'
+        description: The name of the sampling rule.
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The start time of the reporting window.
+      RequestCount:
+        $ref: '#/definitions/Integer'
+        description: The number of requests that matched the rule.
+      BorrowCount:
+        $ref: '#/definitions/Integer'
+        description: The number of requests recorded with borrowed reservoir quota.
+      SampledCount:
+        $ref: '#/definitions/Integer'
+        description: The number of requests recorded.
+    description: Aggregated request sampling data for a sampling rule across all services for a 10 second window.
+  SamplingStatisticsDocument:
+    type: object
+    required:
+      - RuleName
+      - ClientID
+      - Timestamp
+      - RequestCount
+      - SampledCount
+    properties:
+      RuleName:
+        $ref: '#/definitions/RuleName'
+        description: The name of the sampling rule.
+      ClientID:
+        $ref: '#/definitions/ClientID'
+        description: A unique identifier for the service in hexadecimal.
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The current time.
+      RequestCount:
+        $ref: '#/definitions/RequestCount'
+        description: The number of requests that matched the rule.
+      SampledCount:
+        $ref: '#/definitions/SampledCount'
+        description: The number of requests recorded.
+      BorrowCount:
+        $ref: '#/definitions/BorrowCount'
+        description: The number of requests recorded with borrowed reservoir quota.
+    description: Request sampling results for a single rule from a service. Results are for the last 10 seconds unless the service has been assigned a longer reporting interval after a previous call to <a>GetSamplingTargets</a>.
+  SamplingTargetDocument:
+    type: object
+    properties:
+      RuleName:
+        $ref: '#/definitions/String'
+        description: The name of the sampling rule.
+      FixedRate:
+        $ref: '#/definitions/Double'
+        description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
+      ReservoirQuota:
+        $ref: '#/definitions/NullableInteger'
+        description: The number of requests per second that X-Ray allocated this service.
+      ReservoirQuotaTTL:
+        $ref: '#/definitions/Timestamp'
+        description: When the reservoir quota expires.
+      Interval:
+        $ref: '#/definitions/NullableInteger'
+        description: The number of seconds for the service to wait before getting sampling targets again.
+    description: 'Temporary changes to a sampling rule configuration. To meet the global sampling target for a rule, X-Ray calculates a new reservoir for each service based on the recent sampling results of all services that called <a>GetSamplingTargets</a>.'
+  SegmentId:
+    type: string
+  SegmentDocument:
+    type: string
+    minLength: 1
   Segment:
     type: object
     properties:
@@ -671,17 +1385,35 @@ definitions:
         description: The segment's ID.
       Document:
         $ref: '#/definitions/SegmentDocument'
-        description: The segment document
-    description: 'A segment from a trace that has been ingested by the X-Ray service. The segment can be compiled from documents uploaded with <a>PutTraceSegments</a>, or an <code>inferred</code> segment for a downstream service, generated from a subsegment sent by the service that called it.'
-  SegmentDocument:
-    type: string
-    minLength: 1
-  SegmentId:
-    type: string
+        description: The segment document.
+    description: '<p>A segment from a trace that has been ingested by the X-Ray service. The segment can be compiled from documents uploaded with <a>PutTraceSegments</a>, or an <code>inferred</code> segment for a downstream service, generated from a subsegment sent by the service that called it.</p> <p>For the full segment document schema, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html">AWS X-Ray Segment Documents</a> in the <i>AWS X-Ray Developer Guide</i>.</p>'
   SegmentList:
     type: array
     items:
       $ref: '#/definitions/Segment'
+  ServiceNames:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ServiceStatistics:
+    type: object
+    properties:
+      OkCount:
+        $ref: '#/definitions/NullableLong'
+        description: The number of requests that completed with a 2xx Success status code.
+      ErrorStatistics:
+        $ref: '#/definitions/ErrorStatistics'
+        description: Information about requests that failed with a 4xx Client Error status code.
+      FaultStatistics:
+        $ref: '#/definitions/FaultStatistics'
+        description: Information about requests that failed with a 5xx Server Error status code.
+      TotalCount:
+        $ref: '#/definitions/NullableLong'
+        description: The total number of completed requests.
+      TotalResponseTime:
+        $ref: '#/definitions/NullableDouble'
+        description: The aggregate response time of completed requests.
+    description: Response statistics for a service.
   Service:
     type: object
     properties:
@@ -745,35 +1477,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ServiceId'
-  ServiceList:
-    type: array
-    items:
-      $ref: '#/definitions/Service'
-  ServiceNames:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ServiceStatistics:
-    type: object
-    properties:
-      OkCount:
-        $ref: '#/definitions/NullableLong'
-        description: The number of requests that completed with a 2xx Success status code.
-      ErrorStatistics:
-        $ref: '#/definitions/ErrorStatistics'
-        description: Information about requests that failed with a 4xx Client Error status code.
-      FaultStatistics:
-        $ref: '#/definitions/FaultStatistics'
-        description: Information about requests that failed with a 5xx Server Error status code.
-      TotalCount:
-        $ref: '#/definitions/NullableLong'
-        description: The total number of completed requests.
-      TotalResponseTime:
-        $ref: '#/definitions/NullableDouble'
-        description: The aggregate response time of completed requests.
-    description: Response statistics for a service.
-  String:
-    type: string
   TelemetryRecord:
     type: object
     required:
@@ -798,19 +1501,10 @@ definitions:
         $ref: '#/definitions/BackendConnectionErrors'
         description: <p/>
     description: <p/>
-  TelemetryRecordList:
-    type: array
-    items:
-      $ref: '#/definitions/TelemetryRecord'
-  ThrottledException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The request exceeds the maximum number of requests per second.
-  Timestamp:
+  TraceId:
     type: string
-    format: date-time
+    minLength: 1
+    maxLength: 35
   Trace:
     type: object
     properties:
@@ -824,24 +1518,12 @@ definitions:
         $ref: '#/definitions/SegmentList'
         description: Segment documents for the segments and subsegments that comprise the trace.
     description: A collection of segment documents with matching trace IDs.
-  TraceId:
-    type: string
-    minLength: 1
-    maxLength: 35
-  TraceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/TraceId'
-  TraceList:
-    type: array
-    items:
-      $ref: '#/definitions/Trace'
   TraceSegmentDocument:
     type: string
-  TraceSegmentDocumentList:
+  TraceUsers:
     type: array
     items:
-      $ref: '#/definitions/TraceSegmentDocument'
+      $ref: '#/definitions/TraceUser'
   TraceSummary:
     type: object
     properties:
@@ -879,10 +1561,6 @@ definitions:
         $ref: '#/definitions/ServiceIds'
         description: Service IDs from the trace's segment documents.
     description: Metadata generated from the segment documents in a trace.
-  TraceSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/TraceSummary'
   TraceUser:
     type: object
     properties:
@@ -893,14 +1571,19 @@ definitions:
         $ref: '#/definitions/ServiceIds'
         description: Services that the user's request hit.
     description: Information about a user recorded in segment documents.
-  TraceUsers:
-    type: array
-    items:
-      $ref: '#/definitions/TraceUser'
-  UnprocessedTraceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/TraceId'
+  UnprocessedStatistics:
+    type: object
+    properties:
+      RuleName:
+        $ref: '#/definitions/String'
+        description: The name of the sampling rule.
+      ErrorCode:
+        $ref: '#/definitions/String'
+        description: The error code.
+      Message:
+        $ref: '#/definitions/String'
+        description: The error message.
+    description: Sampling statistics from a call to <a>GetSamplingTargets</a> that X-Ray could not process.
   UnprocessedTraceSegment:
     type: object
     properties:
@@ -914,10 +1597,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The error message.
     description: Information about a segment that failed processing.
-  UnprocessedTraceSegmentList:
-    type: array
-    items:
-      $ref: '#/definitions/UnprocessedTraceSegment'
   ValueWithServiceIds:
     type: object
     properties:
@@ -928,7 +1607,3 @@ definitions:
         $ref: '#/definitions/ServiceIds'
         description: Services to which the annotation applies.
     description: Information about a segment annotation.
-  ValuesWithServiceIds:
-    type: array
-    items:
-      $ref: '#/definitions/ValueWithServiceIds'

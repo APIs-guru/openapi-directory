@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: API for access to the data within Blogger.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Blogger
   version: v3
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/blogger/v3/rest'
       version: v1
@@ -35,20 +31,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/blogger': Manage your Blogger account
       'https://www.googleapis.com/auth/blogger.readonly': View your Blogger account
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/blogger': Manage your Blogger account
-      'https://www.googleapis.com/auth/blogger.readonly': View your Blogger account
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -81,12 +68,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -126,11 +113,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - blogs
@@ -172,11 +155,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - blogs
@@ -237,11 +216,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - comments
@@ -300,11 +275,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - pages
@@ -341,8 +312,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - pages
   '/blogs/{blogId}/pages/{pageId}':
@@ -365,8 +334,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - pages
@@ -399,11 +366,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - pages
@@ -449,8 +412,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - pages
     put:
@@ -487,8 +448,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - pages
   '/blogs/{blogId}/pages/{pageId}/publish':
@@ -521,8 +480,6 @@ paths:
             $ref: '#/definitions/Page'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - pages
@@ -557,8 +514,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - pages
   '/blogs/{blogId}/pageviews':
@@ -588,8 +543,6 @@ paths:
             $ref: '#/definitions/Pageviews'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - pageViews
@@ -675,11 +628,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - posts
@@ -725,8 +674,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - posts
   '/blogs/{blogId}/posts/bypath':
@@ -764,11 +711,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - posts
@@ -816,11 +759,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - posts
@@ -852,8 +791,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - posts
@@ -900,11 +837,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - posts
@@ -963,8 +896,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - posts
     put:
@@ -1013,8 +944,6 @@ paths:
             $ref: '#/definitions/Post'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - posts
@@ -1080,11 +1009,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - comments
@@ -1121,8 +1046,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - comments
@@ -1161,11 +1084,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - comments
@@ -1213,8 +1132,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - comments
   '/blogs/{blogId}/posts/{postId}/comments/{commentId}/removecontent':
@@ -1252,8 +1169,6 @@ paths:
             $ref: '#/definitions/Comment'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - comments
@@ -1293,8 +1208,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - comments
   '/blogs/{blogId}/posts/{postId}/publish':
@@ -1332,8 +1245,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - posts
   '/blogs/{blogId}/posts/{postId}/revert':
@@ -1367,8 +1278,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - posts
   '/users/{userId}':
@@ -1389,11 +1298,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - users
@@ -1456,11 +1361,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - blogs
@@ -1499,11 +1400,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - blogUserInfos
@@ -1589,11 +1486,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - postUserInfos
@@ -1637,11 +1530,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/blogger'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger.readonly'
       tags:
         - postUserInfos

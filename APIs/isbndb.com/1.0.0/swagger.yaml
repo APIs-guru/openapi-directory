@@ -1,0 +1,256 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.isbndb.com
+info:
+  description: Definition of ISBNdb.com API
+  title: ISBNdb
+  version: 1.0.0
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    url: 'https://isbndb.com/sites/default/files/ISBN-295x62_4.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://isbndb.com/modules/isbndb_api_docs/swagger.json'
+      version: '2.0'
+  x-providerName: isbndb.com
+produces:
+  - application/json
+securityDefinitions:
+  api_key:
+    in: header
+    name: x-api-key
+    type: apiKey
+paths:
+  '/author/{name}':
+    get:
+      consumes:
+        - application/json
+      description: Returns the name and a list of books by the author.
+      parameters:
+        - description: A string to search for in the Author's database
+          in: path
+          name: name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+          schema:
+            $ref: '#/definitions/Author'
+        '404':
+          description: Author not found
+      security:
+        - api_key: []
+      summary: Gets author details
+      tags:
+        - Author
+  '/authors/{query}':
+    get:
+      consumes:
+        - application/json
+      description: This returns a list of authors whos name matches the given query
+      parameters:
+        - in: path
+          name: query
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+      security:
+        - api_key: []
+      summary: Search authors
+      tags:
+        - Author
+  '/book/{isbn}':
+    get:
+      consumes:
+        - application/json
+      description: Returns the book details
+      parameters:
+        - in: path
+          name: isbn
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+          schema:
+            $ref: '#/definitions/Book'
+        '404':
+          description: Book not found
+      security:
+        - api_key: []
+      summary: Gets book details
+      tags:
+        - Book
+  '/books/{query}':
+    get:
+      consumes:
+        - application/json
+      description: This returns a list of books that match the query
+      parameters:
+        - in: path
+          name: query
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+      security:
+        - api_key: []
+      summary: Search books
+      tags:
+        - Book
+  '/publisher/{name}':
+    get:
+      consumes:
+        - application/json
+      description: Returns details and a list of books by the publisher.
+      parameters:
+        - in: path
+          name: name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+          schema:
+            $ref: '#/definitions/Publisher'
+        '404':
+          description: Publisher not found
+      security:
+        - api_key: []
+      summary: Gets publisher details
+      tags:
+        - Publisher
+  '/publishers/{query}':
+    get:
+      consumes:
+        - application/json
+      description: This returns a list of publishers that match the given query
+      parameters:
+        - in: path
+          name: query
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+      security:
+        - api_key: []
+      summary: Search publishers
+      tags:
+        - Publisher
+  /stats:
+    get:
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+      security:
+        - api_key: []
+definitions:
+  Author:
+    properties:
+      books:
+        items:
+          properties:
+            isbn:
+              type: string
+          type: object
+        type: array
+      name:
+        type: string
+    type: object
+  Book:
+    properties:
+      authors:
+        items:
+          type: string
+        type: array
+      date_published:
+        format: date-time
+        type: string
+      dewey_decimal:
+        type: string
+      dimensions:
+        type: string
+      edition:
+        type: string
+      excerpt:
+        type: string
+      format:
+        type: string
+      isbn:
+        type: string
+      isbn13:
+        type: string
+      language:
+        type: string
+      overview:
+        type: string
+      pages:
+        type: integer
+      publisher:
+        type: string
+      reviews:
+        items:
+          type: string
+        type: array
+      subjects:
+        items:
+          type: string
+        type: array
+      synopsys:
+        type: string
+      title:
+        type: string
+      title_long:
+        type: string
+    type: object
+  Publisher:
+    properties:
+      books:
+        items:
+          properties:
+            isbn:
+              type: string
+          type: object
+        type: array
+      category:
+        type: string
+      location:
+        type: string
+      name:
+        type: string
+    type: object
+  Subject:
+    properties:
+      parent:
+        type: string
+      subject:
+        type: string
+    type: object

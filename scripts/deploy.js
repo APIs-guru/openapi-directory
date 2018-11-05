@@ -15,21 +15,22 @@ var MIME = new MimeLookup(require('mime-db'));
 var makeRequest = require('makeRequest');
 var util = require('./util');
 
+sh.set('-e');
+sh.set('-v');
+
+sh.mkdir('deploy');
+sh.cp('resources/index.html', 'deploy/');
+sh.mkdir('deploy/v2');
+
 function deployDir(path) {
   assert(_.isString(path) && path[0] !== '/');
-  return Path.join('deploy', path);
+  return Path.join('deploy/v2', path);
 }
 
 function rootUrl(url) {
   assert(_.isString(url) && url[0] !== '/');
   return URI('https://api.apis.guru/v2/' + url).href();
 }
-
-sh.set('-e');
-sh.set('-v');
-
-sh.mkdir(deployDir(''));
-sh.cp('resources/index.html', deployDir(''));
 
 var apisGuruSwagger = util.readYaml('resources/apis_guru_swagger.yaml');
 var baseUrl = URI(rootUrl(''));
@@ -113,9 +114,11 @@ function addSwagger(apiList, swagger, filename) {
 }
 
 function buildVersionEntry(swagger, filename) {
-  var basename = 'specs/' + util.getSwaggerPath(swagger, 'swagger');
-  util.saveJson(deployDir(`${basename}.json`), swagger);
-  util.saveYaml(deployDir(`${basename}.yaml`), swagger);
+  let target = 'swagger';
+  if (swagger.openapi) target = 'openapi';
+  var basename = 'specs/' + util.getSwaggerPath(swagger, target);
+  util.saveJson(deployDir(`${basename}.json`), swagger, true);
+  util.saveYaml(deployDir(`${basename}.yaml`), swagger, true);
 
   var dates = util.exec(`git log --format=%aD --follow -- '${filename}'`);
   dates = _(dates).split('\n').compact();

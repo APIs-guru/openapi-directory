@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Views and manages your Google Analytics data.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Analytics
   version: v3
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/analytics/v3/rest'
       version: v1
@@ -35,7 +31,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/analytics': View and manage your Google Analytics data
@@ -44,19 +40,7 @@ securityDefinitions:
       'https://www.googleapis.com/auth/analytics.manage.users.readonly': View Google Analytics user permissions
       'https://www.googleapis.com/auth/analytics.provision': Create a new Google Analytics account along with its default property and view
       'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/analytics': View and manage your Google Analytics data
-      'https://www.googleapis.com/auth/analytics.edit': Edit Google Analytics management entities
-      'https://www.googleapis.com/auth/analytics.manage.users': Manage Google Analytics Account users by email address
-      'https://www.googleapis.com/auth/analytics.manage.users.readonly': View Google Analytics user permissions
-      'https://www.googleapis.com/auth/analytics.provision': Create a new Google Analytics account along with its default property and view
-      'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+      'https://www.googleapis.com/auth/analytics.user.deletion': Manage Google Analytics user deletion requests
     type: oauth2
 parameters:
   alt:
@@ -89,12 +73,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -103,6 +87,7 @@ tags:
   - name: management
   - name: metadata
   - name: provisioning
+  - name: userDeletion
 paths:
   /data/ga:
     get:
@@ -181,11 +166,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - data
@@ -259,11 +240,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - data
@@ -314,11 +291,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - data
@@ -352,11 +325,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -390,15 +359,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -437,11 +400,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.manage.users'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.manage.users.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users.readonly'
       tags:
         - management
@@ -474,8 +433,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
   '/management/accounts/{accountId}/entityUserLinks/{linkId}':
@@ -498,8 +455,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.manage.users'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
@@ -537,8 +492,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
   '/management/accounts/{accountId}/filters':
@@ -568,11 +521,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -605,8 +554,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
   '/management/accounts/{accountId}/filters/{filterId}':
@@ -632,8 +579,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
     get:
@@ -658,11 +603,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -700,8 +641,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
     put:
@@ -729,8 +668,6 @@ paths:
             $ref: '#/definitions/Filter'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -761,15 +698,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -802,8 +733,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}':
@@ -829,11 +758,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -871,8 +796,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
     put:
@@ -900,8 +823,6 @@ paths:
             $ref: '#/definitions/Webproperty'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -938,15 +859,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -996,11 +911,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1042,15 +953,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1091,11 +996,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1132,15 +1033,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1184,11 +1079,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1226,8 +1117,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/customDimensions/{customDimensionId}':
@@ -1258,11 +1147,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1310,8 +1195,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
     put:
@@ -1350,8 +1233,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/customMetrics':
@@ -1386,11 +1267,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1428,8 +1305,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/customMetrics/{customMetricId}':
@@ -1460,11 +1335,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1512,8 +1383,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
     put:
@@ -1552,8 +1421,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks':
@@ -1588,11 +1455,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1630,8 +1493,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks/{webPropertyAdWordsLinkId}':
@@ -1659,8 +1520,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1691,11 +1550,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1738,8 +1593,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
     put:
@@ -1772,8 +1625,6 @@ paths:
             $ref: '#/definitions/EntityAdWordsLink'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1809,11 +1660,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.manage.users'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.manage.users.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users.readonly'
       tags:
         - management
@@ -1851,8 +1698,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/entityUserLinks/{linkId}':
@@ -1880,8 +1725,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.manage.users'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
@@ -1924,8 +1767,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles':
@@ -1960,15 +1801,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2006,8 +1841,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}':
@@ -2035,8 +1868,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2067,11 +1898,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2114,8 +1941,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
     put:
@@ -2148,8 +1973,6 @@ paths:
             $ref: '#/definitions/Profile'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2190,11 +2013,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.manage.users'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.manage.users.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users.readonly'
       tags:
         - management
@@ -2237,8 +2056,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/entityUserLinks/{linkId}':
@@ -2271,8 +2088,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.manage.users'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
@@ -2320,8 +2135,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments':
@@ -2361,15 +2174,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2412,11 +2219,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2451,11 +2254,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2491,15 +2290,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2547,11 +2340,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2591,11 +2380,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2636,15 +2421,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2687,8 +2466,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals/{goalId}':
@@ -2724,11 +2501,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2776,8 +2549,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
     put:
@@ -2815,8 +2586,6 @@ paths:
             $ref: '#/definitions/Goal'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2857,11 +2626,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2904,8 +2669,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks/{linkId}':
@@ -2938,8 +2701,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2975,11 +2736,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -3027,8 +2784,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
     put:
@@ -3066,8 +2821,6 @@ paths:
             $ref: '#/definitions/ProfileFilterLink'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -3108,15 +2861,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -3159,11 +2906,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -3197,8 +2940,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -3234,15 +2975,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -3290,11 +3025,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -3332,8 +3063,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/remarketingAudiences/{remarketingAudienceId}':
@@ -3361,8 +3090,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -3393,11 +3120,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -3440,8 +3163,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
     put:
@@ -3475,8 +3196,35 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
+      tags:
+        - management
+  '/management/clientId:hashClientId':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Hashes the given Client ID.
+      operationId: analytics.management.clientId.hashClientId
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/HashClientIdRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/HashClientIdResponse'
+      security:
+        - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
   /management/segments:
@@ -3501,15 +3249,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -3539,15 +3281,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - metadata
@@ -3559,35 +3295,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-  /provisioning/createAccount:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Provision account.
-      operationId: analytics.provisioning.createAccountTree
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountTreeRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountTreeResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.provision'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.provision'
-      tags:
-        - provisioning
   /provisioning/createAccountTicket:
     parameters:
       - $ref: '#/parameters/alt'
@@ -3613,10 +3320,62 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.provision'
-          Oauth2c:
+      tags:
+        - provisioning
+  /provisioning/createAccountTree:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Provision account.
+      operationId: analytics.provisioning.createAccountTree
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountTreeRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountTreeResponse'
+      security:
+        - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.provision'
       tags:
         - provisioning
+  '/userDeletion/userDeletionRequests:upsert':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Insert or update a user deletion requests.
+      operationId: analytics.userDeletion.userDeletionRequest.upsert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UserDeletionRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UserDeletionRequest'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.user.deletion'
+      tags:
+        - userDeletion
 definitions:
   Account:
     description: JSON template for Analytics account entry.
@@ -3770,17 +3529,13 @@ definitions:
         type: string
       accountSettings:
         properties:
-          admobReporting:
+          shareAnonymouslyWithOthers:
             type: boolean
-          sharingWithGoogleAnySales:
+          shareWithGoogleProducts:
             type: boolean
-          sharingWithGoogleProducts:
+          shareWithSpecialists:
             type: boolean
-          sharingWithGoogleSales:
-            type: boolean
-          sharingWithGoogleSupport:
-            type: boolean
-          sharingWithOthers:
+          shareWithSupport:
             type: boolean
         type: object
       kind:
@@ -3804,17 +3559,13 @@ definitions:
         description: The account created.
       accountSettings:
         properties:
-          admobReporting:
+          shareAnonymouslyWithOthers:
             type: boolean
-          sharingWithGoogleAnySales:
+          shareWithGoogleProducts:
             type: boolean
-          sharingWithGoogleProducts:
+          shareWithSpecialists:
             type: boolean
-          sharingWithGoogleSales:
-            type: boolean
-          sharingWithGoogleSupport:
-            type: boolean
-          sharingWithOthers:
+          shareWithSupport:
             type: boolean
         type: object
       kind:
@@ -5169,6 +4920,30 @@ definitions:
         description: Email ID of the authenticated user
         type: string
     type: object
+  HashClientIdRequest:
+    description: JSON template for a hash Client Id request resource.
+    properties:
+      clientId:
+        type: string
+      kind:
+        default: 'analytics#hashClientIdRequest'
+        type: string
+      webPropertyId:
+        type: string
+    type: object
+  HashClientIdResponse:
+    description: JSON template for a hash Client Id response resource.
+    properties:
+      clientId:
+        type: string
+      hashedClientId:
+        type: string
+      kind:
+        default: 'analytics#hashClientIdResponse'
+        type: string
+      webPropertyId:
+        type: string
+    type: object
   IncludeConditions:
     description: JSON template for an Analytics Remarketing Include Conditions.
     properties:
@@ -6086,6 +5861,35 @@ definitions:
         format: int32
         type: integer
     type: object
+  UserDeletionRequest:
+    description: JSON template for a user deletion request resource.
+    properties:
+      deletionRequestTime:
+        description: This marks the point in time for which all user data before should be deleted
+        format: date-time
+        readOnly: true
+        type: string
+      firebaseProjectId:
+        description: Firebase Project Id
+        type: string
+      id:
+        description: User ID.
+        properties:
+          type:
+            description: Type of user
+            type: string
+          userId:
+            description: The User's id
+            type: string
+        type: object
+      kind:
+        default: 'analytics#userDeletionRequest'
+        description: 'Value is "analytics#userDeletionRequest".'
+        type: string
+      webPropertyId:
+        description: Web property ID of the form UA-XXXXX-YY.
+        type: string
+    type: object
   UserRef:
     description: JSON template for a user reference.
     properties:
@@ -6208,6 +6012,17 @@ definitions:
         description: Time this web property was created.
         format: date-time
         readOnly: true
+        type: string
+      dataRetentionResetOnNewActivity:
+        description: |-
+          Set to true to reset the retention period of the user identifier with each new event from that user (thus setting the expiration date to current time plus retention period).
+          Set to false to delete data associated with the user identifer automatically after the rentention period.
+          This property cannot be set on insert.
+        type: boolean
+      dataRetentionTtl:
+        description: |-
+          The length of time for which user and event data is retained.
+          This property cannot be set on insert.
         type: string
       defaultProfileId:
         description: Default view (profile) ID.

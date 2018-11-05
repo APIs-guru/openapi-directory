@@ -20,7 +20,9 @@ var specSources = {
   'apitore.com': require('./apitore'),
   'gov.bc.ca': require('./bcgov'),
   'bclaws.ca': require('./bcgov'),
-  'box.com': require('./box')
+  'box.com': require('./box'),
+  'fantasydata.net': require('./fantasydata'),
+  'adyen.com': require('./adyen')
 };
 var catalogProviders = _.keys(specSources);
 
@@ -34,7 +36,7 @@ exports.getLeads = function (specs) {
     .values().flatten()
     .map(swagger => ({
       info: {
-	  	'version': swagger.info.version,
+        'version': swagger.info.version,
         'x-providerName': util.getProviderName(swagger),
         'x-serviceName': util.getServiceName(swagger),
         'x-origin': util.getOrigin(swagger)
@@ -46,16 +48,6 @@ exports.getLeads = function (specs) {
     .then(catalogLeads => {
       var leads = _(catalogLeads).values().concat(urlLeads).value();
       leads = indexByOriginUrl(leads);
-
-	  // add new catalog leads (MER)
-	  //for (var l in leads) {
-	  //	var lead = leads[l];
-	  //	var filename = util.getSwaggerPath(lead);
-		//  if (!specs[filename]) { // we should compare on origin url
-		//    console.log('!!! Adding ' + filename);
-	  //	  specs[filename] = lead;
-		//  }
-	  //}
 
       return _(specs).mapValues((swagger, filename) => {
         var lead = leads[util.getOriginUrl(swagger)];

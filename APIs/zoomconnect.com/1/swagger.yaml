@@ -15,7 +15,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: swagger
       url: 'https://www.zoomconnect.com/zoom/api-docs'
       version: '1.2'
@@ -73,6 +73,61 @@ paths:
         '404':
           description: Not Found
       summary: balance
+      tags:
+        - account
+  /api/rest/v1/account/statistics:
+    get:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: 'Returns data from the statistics report. Note that by default the statistics shown are based on the number of messages, use the calculateCreditValue should you wish to calculate the statistics based on credit value.'
+      operationId: getStatistics
+      parameters:
+        - description: 'date format: dd-MM-yyyy'
+          format: date-time
+          in: query
+          name: from
+          required: false
+          type: string
+        - description: 'date format: dd-MM-yyyy'
+          format: date-time
+          in: query
+          name: to
+          required: false
+          type: string
+        - description: 'optional email address of user to return statistics for a single user, default is to return statistics for all users if administrator, or statistics for your own account if not an administrator'
+          in: query
+          name: userEmailAddress
+          required: false
+          type: string
+        - description: optional campaign name
+          in: query
+          name: campaign
+          required: false
+          type: string
+        - description: 'optionally include refunded and optout counts, default is false'
+          in: query
+          name: includeRefundedAndOptout
+          required: false
+          type: boolean
+        - description: 'optionally calculate using credit value rather than message count, default is false'
+          in: query
+          name: calculateCreditValue
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/WebServiceAccountStatistics'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: statistics
       tags:
         - account
   /api/rest/v1/account/transfer:
@@ -906,6 +961,11 @@ paths:
           name: read
           required: false
           type: boolean
+        - description: return only inbox messages which are a reply to the message with the given message id
+          in: query
+          name: repliesToMessageId
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -1731,6 +1791,30 @@ definitions:
         items:
           $ref: '#/definitions/Link'
         type: array
+  WebServiceAccountStatistics:
+    description: WebServiceAccountStatistics
+    properties:
+      from:
+        format: date-time
+        type: string
+      grandTotal:
+        $ref: '#/definitions/WebServiceStatistics'
+      showingCreditValue:
+        type: boolean
+      to:
+        format: date-time
+        type: string
+      users:
+        items:
+          $ref: '#/definitions/WebServiceUserStatistics'
+        type: array
+  WebServiceCampaignStatistics:
+    description: WebServiceCampaignStatistics
+    properties:
+      campaign:
+        type: string
+      statistics:
+        $ref: '#/definitions/WebServiceStatistics'
   WebServiceContact:
     description: WebServiceContact
     properties:
@@ -1830,9 +1914,20 @@ definitions:
         type: integer
       read:
         type: boolean
+      repliedToMessage:
+        $ref: '#/definitions/WebServiceMessageLink'
       toNumber:
         type: string
       userDataField:
+        type: string
+  WebServiceMessageLink:
+    description: WebServiceMessageLink
+    properties:
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      messageId:
         type: string
   WebServiceMessages:
     description: WebServiceMessages
@@ -1930,6 +2025,27 @@ definitions:
         type: string
       voiceMessageId:
         type: string
+  WebServiceStatistics:
+    description: WebServiceStatistics
+    properties:
+      delivered:
+        format: double
+        type: number
+      failed:
+        format: double
+        type: number
+      failedOptout:
+        format: double
+        type: number
+      failedRefunded:
+        format: double
+        type: number
+      sent:
+        format: double
+        type: number
+      total:
+        format: double
+        type: number
   WebServiceTemplate:
     description: WebServiceTemplate
     properties:
@@ -1986,6 +2102,17 @@ definitions:
       userId:
         format: int64
         type: integer
+  WebServiceUserStatistics:
+    description: WebServiceUserStatistics
+    properties:
+      campaigns:
+        items:
+          $ref: '#/definitions/WebServiceCampaignStatistics'
+        type: array
+      total:
+        $ref: '#/definitions/WebServiceStatistics'
+      user:
+        $ref: '#/definitions/WebServiceUser'
   WebServiceUsers:
     description: WebServiceUsers
     properties:

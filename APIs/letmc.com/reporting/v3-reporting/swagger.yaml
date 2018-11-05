@@ -1,0 +1,135 @@
+swagger: '2.0'
+schemes:
+  - https
+host: live-api.letmc.com
+info:
+  contact:
+    x-twitter: LetMC
+  title: 'LetMC Api V3, reporting'
+  version: v3-reporting
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    url: 'https://twitter.com/LetMC/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://live-api.letmc.com/swagger/docs/v3-reporting'
+      version: '2.0'
+  x-providerName: letmc.com
+  x-serviceName: reporting
+consumes: []
+produces:
+  - application/json
+  - text/json
+securityDefinitions:
+  apiKey:
+    description: ApiKey Authentication
+    in: header
+    name: ApiKey
+    type: apiKey
+  basic:
+    description: Basic HTTP Authentication
+    type: basic
+paths:
+  '/v3/reporting/{shortName}/{branchID}/applicantsregisteredbystaffmember':
+    get:
+      deprecated: false
+      operationId: ReportingController_ApplicantsRegisteredByStaffMember
+      parameters:
+        - description: The unique client short-name
+          in: path
+          name: shortName
+          required: true
+          type: string
+        - description: The unique ID of the Branch
+          in: path
+          name: branchID
+          required: true
+          type: string
+        - description: Number of days to search
+          format: double
+          in: query
+          name: days
+          required: true
+          type: number
+        - description: The index of the first item to return
+          format: int32
+          in: query
+          name: offset
+          required: true
+          type: integer
+        - description: The maximum number of items to return (up to 1000 per request)
+          format: int32
+          in: query
+          name: count
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ApplicantsRegisteredByStaffMemberModelResults'
+      summary: A call to return all prospects created in the previous number of days.
+      tags:
+        - ReportingController
+definitions:
+  ApplicantDetailsModel:
+    description: A model containing the representation structure of a prospect
+    properties:
+      Name:
+        description: Name
+        type: string
+      OID:
+        description: OID
+        type: string
+      Postcode:
+        description: Postcode
+        type: string
+    type: object
+  ApplicantsRegisteredByStaffMemberData:
+    description: Sort the prospect and staff data into a list
+    properties:
+      Staff:
+        description: A list of staff member objects.
+        items:
+          $ref: '#/definitions/StaffDetailsModel'
+        type: array
+    type: object
+  ApplicantsRegisteredByStaffMemberModelResults:
+    description: A call containing the main pagination results model for the "ApplicantsRegisteredByStaffMemberModel" method
+    properties:
+      Count:
+        description: 'The total number of results available for all pages:-'
+        format: int32
+        type: integer
+      Data:
+        $ref: '#/definitions/ApplicantsRegisteredByStaffMemberData'
+        description: 'The formatted data returned:-'
+    type: object
+  StaffDetailsModel:
+    description: A model containing the representation structure of a staff member
+    properties:
+      ApplicantRegisteredPerDay:
+        description: Applicant Registered Per Day
+        format: double
+        type: number
+      ApplicantRegisteredWithPostcode:
+        description: The number of applicants logged that contain an address.
+        format: double
+        type: number
+      LinkedApplicants:
+        description: 'Linked Applicants, A list of prospect objects'
+        items:
+          $ref: '#/definitions/ApplicantDetailsModel'
+        type: array
+      OID:
+        description: The OID of the staff member
+        type: string
+      StaffName:
+        description: The staff name
+        type: string
+      TotalRegisteredApplicants:
+        description: Total Registered Applicants
+        format: int32
+        type: integer
+    type: object

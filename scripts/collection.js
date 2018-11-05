@@ -3,6 +3,7 @@
 
 const assert = require('assert');
 const fs = require('fs');
+const url = require('url');
 const pathLib = require('path');
 const utilLib = require('util');
 
@@ -73,6 +74,7 @@ converter.ResourceReaders.url = function (url) {
   var options = {
     headers: {
       'Accept': 'application/json,*/*',
+      'Accept-Language': 'en-GB,en;q=0.5'
     },
   retries : 10
   };
@@ -154,6 +156,7 @@ program
   .description('validate collection')
   .option('-q, --quiet', 'suppress two common warnings')
   .option('-f, --fix', 'test fixing in validate')
+  .option('-n, --nuke', 'nuke failures')
   .arguments('[DIR]')
   .action(validateCollection);
 
@@ -166,15 +169,17 @@ program
 program
   .command('leads')
   .description('add/remove definitions from 3rd-party catalogs')
+  .arguments('[DIR]')
   .action(updateCatalogLeads);
 
 program
   .command('add')
   .description('add new definition')
   .option('-b, --background <BACKGROUND>', 'specify background colour')
-  .option('-d, --desclang <LANG>', 'specify description language')
   .option('-c, --categories <CATEGORIES>', 'csv list of categories')
+  .option('-d, --desclang <LANG>', 'specify description language')
   .option('-f, --fixup', 'try to fix definition')
+  .option('-h, --host <HOST>', 'specify host for relative specs')
   .option('-i, --ignore','ignore validation errors')
   .option('-l, --logo <LOGO>', 'specify logo url')
   .option('-s, --service <NAME>', 'supply service name')
@@ -221,7 +226,7 @@ function updateCollection(dir, command) {
     .then(leadPairs => {
       if (command.resume) {
         _.remove(leadPairs, function(lp){
-          return (lp[0] < command.resume);
+          return (lp[0] <= command.resume+'zzzz');
         });
       }
       return leadPairs;
@@ -240,7 +245,9 @@ function updateCollection(dir, command) {
         return writeSpecFromLead(lead, command)
           .then(swagger => {
             if (swagger) {
-              var newFilename = util.getSwaggerPath(swagger);
+              let target = 'swagger.yaml';
+              if (swagger.openapi) target = 'openapi.yaml';
+              var newFilename = util.getSwaggerPath(swagger,target);
               if (newFilename !== filename)
                 warnings.push(`Spec was moved from "${filename}" to "${newFilename}"`);
             }
@@ -254,7 +261,7 @@ function updateCollection(dir, command) {
       console.log('Finishing successfully');
       fs.writeFileSync(pathLib.join(__dirname,'../metadata/httpCache.yaml'),YAML.safeDump(httpCache, {lineWidth:-1}),'utf8');
       if (newBlackList.length) {
-        console.warn(util.inspect(newBlackList));
+        console.warn(utilLib.inspect(newBlackList));
       }
     });
 }
@@ -266,6 +273,9 @@ function checkPreferred(dir, command) {
 
 function validateCollection(dir, command) {
   var specs = util.getSpecs(dir);
+
+  delete specs['bungie.net/2.0.0/swagger.yaml']; // Travis hack, FIXME
+  delete specs['APIs/bungie.net/2.0.0/swagger.yaml']; // Travis hack, FIXME
 
   validatePreferred(specs);
 
@@ -297,7 +307,10 @@ function validateCollection(dir, command) {
         }
         if (errors) {
           logYaml(errors);
-          throw Error('Validation errors detected');
+          if (command.nuke) {
+            fs.unlinkSync(filename);
+          }
+          else throw Error('Validation errors detected '+filename);
         }
         else {
           if (command.fix) {
@@ -316,8 +329,8 @@ function validatePreferred(specs) {
     var spath = util.getSwaggerPath(swagger);
     preferred[id] = preferred[id] || {};
     preferred[id][swagger.info.version] = swagger.info['x-preferred'];
-    //assert(Object.keys(swagger.paths).length>0, `"${id}" "${version}" has no paths`);
-    assert(Object.keys(swagger.paths).length>0, `"${spath}" has no paths`);
+    if (Object.keys(swagger.paths).length<1)
+      warnings.push(`"${spath}" has no paths`);
   });
 
   _.each(preferred, function (versions, id) {
@@ -328,11 +341,13 @@ function validatePreferred(specs) {
       //  'Preferred not true in "' + id + '"');
       if (versions[0] === false) {
         let swagger = specs[id.replace(':','/')+'/'+oversion+'/swagger.yaml'];
+        if (!swagger)
+          swagger = specs[id.replace(':','/')+'/'+oversion+'/openapi.yaml'];
         if (swagger) {
           swagger.info["x-preferred"] = true;
           util.saveSwagger(swagger);
         }
-        else console.warn('Not found',id,oversion);
+        else console.warn('In validatePreferred (1). Not found',id,oversion);
       }
       return;
     }
@@ -343,16 +358,18 @@ function validatePreferred(specs) {
     _.each(versions, function (value, version) {
       //assert(!_.isUndefined(value), `Missing value for "x-preferred" in "${id}" "${version}"`);
       let swagger = specs[id.replace(':','/')+'/'+version+'/swagger.yaml'];
+      if (!swagger)
+        swagger = specs[id.replace(':','/')+'/'+version+'/openapi.yaml'];
       if (_.isUndefined(value)) {
+        value = false;
         if (swagger) {
-          swagger.info["x-preferred"] = false;
+          swagger.info["x-preferred"] = value;
           util.saveSwagger(swagger);
-          value = false;
         }
-        else console.warn('Not found',id,version);
+        else console.warn('In validatePreferred (2). Not found',id,version);
       }
-      assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}"`);
-      assert(value !== true || !seenTrue, `Multiple preferred versions in "${id}" "${version}"`);
+      assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}": "${typeof value}"`);
+      assert(value !== true || !seenTrue, `Multiple preferred versions in "${id}" "${version}": "${value}"`);
       seenTrue = value || seenTrue;
       if ((version > maxVersion) && (version.indexOf('alpha')<0) && (version.indexOf('beta')<0)) {
         maxVersion = version;
@@ -377,11 +394,11 @@ function addToCollection(format, url, command) {
     exPatch.info['x-serviceName'] = command.service;
   if (command.logo) {
     exPatch.info['x-logo'] = {
-    url: command.logo
-  };
-  if ((command.logo && command.logo.indexOf('.jpg')<0) || command.background){
-    exPatch.info['x-logo'].backgroundColor = command.background||'#FFFFFF';
-  }
+      url: command.logo
+    };
+    if ((command.logo && command.logo.indexOf('.jpg')<0) || command.background){
+      exPatch.info['x-logo'].backgroundColor = command.background||'#FFFFFF';
+    }
   }
   if (command.unofficial) {
     exPatch.info['x-unofficialSpec'] = true;
@@ -458,9 +475,15 @@ function appendFixup(fixupPath, spec, editedSpec) {
   saveFixup(fixupPath, spec, editedSpec);
 }
 
-function updateCatalogLeads() {
+function updateCatalogLeads(dir,command) {
   fromLeads = true;
   var knownUrls = _.map(util.getSpecs(), util.getOriginUrl);
+
+  let providers;
+  if (dir) {
+    providers = [];
+    providers.push(dir.replace('/',''));
+  }
 
   specSources.getCatalogsLeads()
     .then(function (catalogsLeads) {
@@ -503,7 +526,7 @@ function writeSpec(source, format, exPatch, command) {
       var fixup = util.readYaml(getOriginFixupPath(spec));
       jsondiffpatch.patch(spec, fixup);
 
-      return convertToSwagger(spec);
+      return convertToSwagger(spec,exPatch,command);
     })
     .then(swagger => {
       context.swagger = swagger;
@@ -536,7 +559,7 @@ function writeSpec(source, format, exPatch, command) {
       if (validation.remotesResolved) {
         context.swagger = validation.remotesResolved;
       }
-      else {
+      else if (!format.startsWith('openapi')) {
         console.warn('No remotesResolved returned');
       }
 
@@ -551,6 +574,10 @@ function writeSpec(source, format, exPatch, command) {
       delete exPatch.info['x-serviceName'];
       delete exPatch.info['x-preferred'];
       delete exPatch.info['x-origin'];
+
+      if (context.swagger.host && context.swagger.host.endsWith('.local')) {
+        exPatch.host = context.swagger.host;
+      }
 
       if (Object.keys(exPatch.info).length) {
         var patchFilename = pathLib.join(util.getPathComponents(context.swagger, true).join('/'),'patch.yaml');
@@ -786,7 +813,7 @@ function fixSpec(swagger, errors) {
       var value = jp.get(swagger, path);
     }
     catch(e) {
-      //FIXME: sway give path with intermediate $refs in them
+      //FIXME: sway gives path with intermediate $refs in them
       return;
     }
 
@@ -831,22 +858,35 @@ function fixSpec(swagger, errors) {
         }
         break;
       case 'UNRESOLVABLE_REFERENCE':
-        if (value.indexOf(' ') !== -1)
-          newValue = value = replaceSpaces(value);
+        if (error.message.startsWith('Security scope definition could not be resolved')) {
+          console.log(error.message);
+          break;
+        }
+
+        if (value.indexOf(' ') !== -1) {
+          if (value !== encodeURI(value)) {
+            newValue = encodeURI(value);
+          }
+          else
+            newValue = replaceSpaces(value);
+        }
+        else
+          newValue = value;
+
 
         if (!swagger.definitions)
           swagger.definitions = {};
 
-        if (typeof swagger.definitions[value] !== 'undefined')
-          newValue = '#/definitions/' + value;
+        if (typeof swagger.definitions[newValue] !== 'undefined')
+          newValue = '#/definitions/' + newValue;
         else if (value.indexOf('#/definitions/#/parameters')>=0) {
           newValue = value.replace('#/definitions/','');
         }
         else {
-          if (value.startsWith('#/definitions/')) {
+          if ((value == newValue) && (value.startsWith('#/definitions/'))) {
             console.warn(error.code,value);
             let ptr = value.replace('#/definitions/','');
-            swagger.definitions[ptr] = { };
+            swagger.definitions[decodeURI(ptr)] = {};
             fixed = true;
           }
         }
@@ -969,7 +1009,9 @@ function errorToString(error, context) {
 }
 
 function validateSwagger(swagger, source) {
-  return converter.getSpec(swagger, 'swagger_2')
+  let target = 'swagger_2';
+  if (swagger.openapi) target = 'openapi_3';
+  return converter.getSpec(swagger, target)
     .then(function(spec){
       var relativeBase = source.split('/');
       relativeBase.pop();
@@ -1051,7 +1093,7 @@ function patchSwagger(swagger, exPatch) {
 
   removeEmpty(swagger.info);
 
-  if (swagger.host.indexOf('googleapis.com')>=0) {
+  if (swagger.host && swagger.host.indexOf('googleapis.com')>=0) {
     sp.sortParameters(swagger);
     sp.sortTags(swagger);
   }
@@ -1098,11 +1140,13 @@ function removeEmpty(obj) {
   });
 }
 
-function convertToSwagger(spec) {
-  return spec.convertTo('swagger_2')
+function convertToSwagger(spec,exPatch,command) {
+  let target = 'swagger_2';
+  if (spec.format === 'openapi_3') target = spec.format;
+  return spec.convertTo(target)
     .then(swagger => {
       _.merge(swagger.spec.info, {
-        'x-providerName': parseHost(swagger.spec, spec.source)
+        'x-providerName': parseHost(swagger.spec, command.host||exPatch.info["x-providerName"])
       });
     if (typeof swagger.spec.info['x-origin'] == 'undefined')
         swagger.spec.info['x-origin'] = [];
@@ -1128,16 +1172,27 @@ function convertToSwagger(spec) {
 function parseHost(swagger, altSource) {
   var swHost = swagger.host;
 
+  if (swagger.openapi) {
+    let u = url.parse(swagger.servers[0].url);
+    swHost = u.hostname;
+  }
+
+  if ((swHost === 'raw.githubusercontent.com') || (swHost.endsWith('github.io')) || (swHost.indexOf('example.com')>=0) || (swHost.indexOf('foo.bar')>=0) || (swHost.startsWith('localhost'))) {
+    let port = '';
+    if (swHost.indexOf(':')>=0) port = swHost.split(':')[1];
+    swHost = altSource;
+    let pd = parseDomain(swHost,{ customTlds: ["local"] });
+    swagger.host = pd.domain+'.local';
+    if (port) swagger.host += ':'+port;
+  }
+
   assert(swHost, 'Missing host');
   assert(!/^localhost/.test(swHost), 'Can not add localhost API');
-  if (swHost === 'raw.githubusercontent.com') {
-    throw new Error('Warning: relative/github host');
-  }
   assert(swHost !== 'raw.githubusercontent.com', 'Missing host + spec hosted on GitHub');
   assert(swHost !== 'virtserver.swaggerhub.com', 'Cannot add swaggerhub mock server API');
   assert(swHost !== 'example.com', 'Cannot add example.com API');
 
-  var p = parseDomain(swHost);
+  var p = parseDomain(swHost,{ customTlds: ["local"] });
   if (!p) p = parseDomain(altSource);
   p.domain = p.domain.replace(/^www.?/, '')
   p.subdomain = p.subdomain.replace(/^www.?/, '')
@@ -1189,14 +1244,16 @@ function logYaml(json) {
 
 process.on('exit', function() {
   if (warnings.length) {
+    process.exitCode = 1;
     for (var w of warnings) {
       console.log(w);
     }
   }
-  if (specSources.deletions.length) {
+  if (!process.exitCode && specSources.deletions.length) {
     for (var d of specSources.deletions) {
       console.log('Deleted? '+d);
     }
   }
+  console.log('Exiting with '+(process.exitCode||0));
 });
 

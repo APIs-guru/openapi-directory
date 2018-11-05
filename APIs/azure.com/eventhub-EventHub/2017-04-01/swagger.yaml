@@ -42,12 +42,30 @@ parameters:
     name: api-version
     required: true
     type: string
+  SkipParameter:
+    description: 'Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.'
+    in: query
+    maximum: 1000
+    minimum: 0
+    name: $skip
+    required: false
+    type: integer
+    x-ms-parameter-location: method
   SubscriptionIdParameter:
     description: Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
     type: string
+  TopParameter:
+    description: May be used to limit the number of results to the most recent N usageDetails.
+    in: query
+    maximum: 1000
+    minimum: 1
+    name: $top
+    required: false
+    type: integer
+    x-ms-parameter-location: method
   aliasNameParameter:
     description: The Disaster Recovery configuration name
     in: path
@@ -97,6 +115,15 @@ parameters:
     maxLength: 90
     minLength: 1
     name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  skuNameParameter:
+    description: The sku type.
+    in: path
+    maxLength: 50
+    minLength: 1
+    name: sku
     required: true
     type: string
     x-ms-parameter-location: method
@@ -1434,6 +1461,592 @@ paths:
                     type: Microsoft.EventHub/Namespaces
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/sku/{sku}/regions':
+    get:
+      description: Gets the available Regions for a given sku
+      operationId: Regions_ListBySku
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/skuNameParameter'
+      responses:
+        '200':
+          description: Regions successfully returned.
+          schema:
+            $ref: '#/definitions/MessagingRegionsListResult'
+        default:
+          description: EventHub error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Regions
+      x-ms-examples:
+        RegionsListBySkuBasic:
+          parameters:
+            api-version: '2017-04-01'
+            sku: Basic
+            subscriptionId: subscriptionid
+          responses:
+            '200':
+              body:
+                nextLink: null
+                value:
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/CentralUS
+                    location: null
+                    name: Central US
+                    properties:
+                      code: Central US
+                      fullName: Central US
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/EastUS
+                    location: null
+                    name: East US
+                    properties:
+                      code: East US
+                      fullName: East US
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/EastUS2
+                    location: null
+                    name: East US 2
+                    properties:
+                      code: East US 2
+                      fullName: East US 2
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/NorthCentralUS
+                    location: null
+                    name: North Central US
+                    properties:
+                      code: North Central US
+                      fullName: North Central US
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/SouthCentralUS
+                    location: null
+                    name: South Central US
+                    properties:
+                      code: South Central US
+                      fullName: South Central US
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/WestUS
+                    location: null
+                    name: West US
+                    properties:
+                      code: West US
+                      fullName: West US
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/WestUS2
+                    location: null
+                    name: West US 2
+                    properties:
+                      code: West US 2
+                      fullName: West US 2
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/WestCentralUS
+                    location: null
+                    name: West Central US
+                    properties:
+                      code: West Central US
+                      fullName: West Central US
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/NorthEurope
+                    location: null
+                    name: North Europe
+                    properties:
+                      code: North Europe
+                      fullName: North Europe
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/WestEurope
+                    location: null
+                    name: West Europe
+                    properties:
+                      code: West Europe
+                      fullName: West Europe
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/EastAsia
+                    location: null
+                    name: East Asia
+                    properties:
+                      code: East Asia
+                      fullName: East Asia
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/SoutheastAsia
+                    location: null
+                    name: Southeast Asia
+                    properties:
+                      code: Southeast Asia
+                      fullName: Southeast Asia
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/BrazilSouth
+                    location: null
+                    name: Brazil South
+                    properties:
+                      code: Brazil South
+                      fullName: Brazil South
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/JapanEast
+                    location: null
+                    name: Japan East
+                    properties:
+                      code: Japan East
+                      fullName: Japan East
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/JapanWest
+                    location: null
+                    name: Japan West
+                    properties:
+                      code: Japan West
+                      fullName: Japan West
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/CentralIndia
+                    location: null
+                    name: Central India
+                    properties:
+                      code: Central India
+                      fullName: Central India
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/SouthIndia
+                    location: null
+                    name: South India
+                    properties:
+                      code: South India
+                      fullName: South India
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/WestIndia
+                    location: null
+                    name: West India
+                    properties:
+                      code: West India
+                      fullName: West India
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/UKSouth2
+                    location: null
+                    name: UK South 2
+                    properties:
+                      code: UK South 2
+                      fullName: UK South 2
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/UKNorth
+                    location: null
+                    name: UK North
+                    properties:
+                      code: UK North
+                      fullName: UK North
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/CanadaCentral
+                    location: null
+                    name: Canada Central
+                    properties:
+                      code: Canada Central
+                      fullName: Canada Central
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/CanadaEast
+                    location: null
+                    name: Canada East
+                    properties:
+                      code: Canada East
+                      fullName: Canada East
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/AustraliaEast
+                    location: null
+                    name: Australia East
+                    properties:
+                      code: Australia East
+                      fullName: Australia East
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/AustraliaSoutheast
+                    location: null
+                    name: Australia Southeast
+                    properties:
+                      code: Australia Southeast
+                      fullName: Australia Southeast
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/UKSouth
+                    location: null
+                    name: UK South
+                    properties:
+                      code: UK South
+                      fullName: UK South
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/UKWest
+                    location: null
+                    name: UK West
+                    properties:
+                      code: UK West
+                      fullName: UK West
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/EASTUS2EUAP
+                    location: null
+                    name: EAST US 2 EUAP
+                    properties:
+                      code: EAST US 2 EUAP
+                      fullName: EAST US 2 EUAP
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/CentralUSEUAP
+                    location: null
+                    name: Central US EUAP
+                    properties:
+                      code: Central US EUAP
+                      fullName: Central US EUAP
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/KoreaCentral
+                    location: null
+                    name: Korea Central
+                    properties:
+                      code: Korea Central
+                      fullName: Korea Central
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/KoreaSouth
+                    location: null
+                    name: Korea South
+                    properties:
+                      code: Korea South
+                      fullName: Korea South
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/FranceCentral
+                    location: null
+                    name: France Central
+                    properties:
+                      code: France Central
+                      fullName: France Central
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/FranceSouth
+                    location: null
+                    name: France South
+                    properties:
+                      code: France South
+                      fullName: France South
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/AustraliaCentral
+                    location: null
+                    name: Australia Central
+                    properties:
+                      code: Australia Central
+                      fullName: Australia Central
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Basic/regions/AustraliaCentral2
+                    location: null
+                    name: Australia Central 2
+                    properties:
+                      code: Australia Central 2
+                      fullName: Australia Central 2
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+        RegionsListBySkuStandard:
+          parameters:
+            api-version: '2017-04-01'
+            sku: Standard
+            subscriptionId: subscriptionid
+          responses:
+            '200':
+              body:
+                nextLink: null
+                value:
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/CentralUS
+                    location: null
+                    name: Central US
+                    properties:
+                      code: Central US
+                      fullName: Central US
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/EastUS
+                    location: null
+                    name: East US
+                    properties:
+                      code: East US
+                      fullName: East US
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/EastUS2
+                    location: null
+                    name: East US 2
+                    properties:
+                      code: East US 2
+                      fullName: East US 2
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/NorthCentralUS
+                    location: null
+                    name: North Central US
+                    properties:
+                      code: North Central US
+                      fullName: North Central US
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/SouthCentralUS
+                    location: null
+                    name: South Central US
+                    properties:
+                      code: South Central US
+                      fullName: South Central US
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/WestUS
+                    location: null
+                    name: West US
+                    properties:
+                      code: West US
+                      fullName: West US
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/WestUS2
+                    location: null
+                    name: West US 2
+                    properties:
+                      code: West US 2
+                      fullName: West US 2
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/WestCentralUS
+                    location: null
+                    name: West Central US
+                    properties:
+                      code: West Central US
+                      fullName: West Central US
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/NorthEurope
+                    location: null
+                    name: North Europe
+                    properties:
+                      code: North Europe
+                      fullName: North Europe
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/WestEurope
+                    location: null
+                    name: West Europe
+                    properties:
+                      code: West Europe
+                      fullName: West Europe
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/EastAsia
+                    location: null
+                    name: East Asia
+                    properties:
+                      code: East Asia
+                      fullName: East Asia
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/SoutheastAsia
+                    location: null
+                    name: Southeast Asia
+                    properties:
+                      code: Southeast Asia
+                      fullName: Southeast Asia
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/BrazilSouth
+                    location: null
+                    name: Brazil South
+                    properties:
+                      code: Brazil South
+                      fullName: Brazil South
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/JapanEast
+                    location: null
+                    name: Japan East
+                    properties:
+                      code: Japan East
+                      fullName: Japan East
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/JapanWest
+                    location: null
+                    name: Japan West
+                    properties:
+                      code: Japan West
+                      fullName: Japan West
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/CentralIndia
+                    location: null
+                    name: Central India
+                    properties:
+                      code: Central India
+                      fullName: Central India
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/SouthIndia
+                    location: null
+                    name: South India
+                    properties:
+                      code: South India
+                      fullName: South India
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/WestIndia
+                    location: null
+                    name: West India
+                    properties:
+                      code: West India
+                      fullName: West India
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/UKSouth2
+                    location: null
+                    name: UK South 2
+                    properties:
+                      code: UK South 2
+                      fullName: UK South 2
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/UKNorth
+                    location: null
+                    name: UK North
+                    properties:
+                      code: UK North
+                      fullName: UK North
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/CanadaCentral
+                    location: null
+                    name: Canada Central
+                    properties:
+                      code: Canada Central
+                      fullName: Canada Central
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/CanadaEast
+                    location: null
+                    name: Canada East
+                    properties:
+                      code: Canada East
+                      fullName: Canada East
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/AustraliaEast
+                    location: null
+                    name: Australia East
+                    properties:
+                      code: Australia East
+                      fullName: Australia East
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/AustraliaSoutheast
+                    location: null
+                    name: Australia Southeast
+                    properties:
+                      code: Australia Southeast
+                      fullName: Australia Southeast
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/UKSouth
+                    location: null
+                    name: UK South
+                    properties:
+                      code: UK South
+                      fullName: UK South
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/UKWest
+                    location: null
+                    name: UK West
+                    properties:
+                      code: UK West
+                      fullName: UK West
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/EASTUS2EUAP
+                    location: null
+                    name: EAST US 2 EUAP
+                    properties:
+                      code: EAST US 2 EUAP
+                      fullName: EAST US 2 EUAP
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/CentralUSEUAP
+                    location: null
+                    name: Central US EUAP
+                    properties:
+                      code: Central US EUAP
+                      fullName: Central US EUAP
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/KoreaCentral
+                    location: null
+                    name: Korea Central
+                    properties:
+                      code: Korea Central
+                      fullName: Korea Central
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/KoreaSouth
+                    location: null
+                    name: Korea South
+                    properties:
+                      code: Korea South
+                      fullName: Korea South
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/FranceCentral
+                    location: null
+                    name: France Central
+                    properties:
+                      code: France Central
+                      fullName: France Central
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/FranceSouth
+                    location: null
+                    name: France South
+                    properties:
+                      code: France South
+                      fullName: France South
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/AustraliaCentral
+                    location: null
+                    name: Australia Central
+                    properties:
+                      code: Australia Central
+                      fullName: Australia Central
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+                  - id: /subscriptions/subscriptionid/providers/Microsoft.EventHub/sku/Standard/regions/AustraliaCentral2
+                    location: null
+                    name: Australia Central 2
+                    properties:
+                      code: Australia Central 2
+                      fullName: Australia Central 2
+                    tags: null
+                    type: Microsoft.EventHub/sku/Regions
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces':
     get:
       description: Lists the available Namespaces within a resource group.
@@ -2315,8 +2928,7 @@ paths:
             api-version: '2017-04-01'
             namespaceName: sdk-Namespace-9080
             parameters:
-              properties:
-                name: sdk-DisasterRecovery-9474
+              name: sdk-DisasterRecovery-9474
             resourceGroupName: exampleResourceGroup
             subscriptionId: exampleSubscriptionId
           responses:
@@ -2389,6 +3001,7 @@ paths:
                 name: sdk-DisasterRecovery-3814
                 properties:
                   partnerNamespace: sdk-Namespace-8859
+                  pendingReplicationOperationsCount: 0
                   provisioningState: Accepted
                   role: Secondary
                   type: MetadataReplication
@@ -2478,7 +3091,6 @@ paths:
               body:
                 value:
                   - id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/RootManageSharedAccessKey
-                    location: South Central US
                     name: RootManageSharedAccessKey
                     properties:
                       rights:
@@ -2487,7 +3099,6 @@ paths:
                         - Send
                     type: Microsoft.EventHub/Namespaces/AuthorizationRules
                   - id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/sdk-Authrules-1067
-                    location: South Central US
                     name: sdk-Authrules-1067
                     properties:
                       rights:
@@ -2495,7 +3106,6 @@ paths:
                         - Send
                     type: Microsoft.EventHub/Namespaces/AuthorizationRules
                   - id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/sdk-Authrules-1684
-                    location: South Central US
                     name: sdk-Authrules-1684
                     properties:
                       rights:
@@ -2503,7 +3113,6 @@ paths:
                         - Send
                     type: Microsoft.EventHub/Namespaces/AuthorizationRules
                   - id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/sdk-Authrules-4879
-                    location: South Central US
                     name: sdk-Authrules-4879
                     properties:
                       rights:
@@ -2547,7 +3156,6 @@ paths:
             '200':
               body:
                 id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/sdk-Authrules-4879
-                location: South Central US
                 name: sdk-Authrules-4879
                 properties:
                   rights:
@@ -2660,6 +3268,8 @@ paths:
         - $ref: '#/parameters/namespaceNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/SkipParameter'
+        - $ref: '#/parameters/TopParameter'
       responses:
         '200':
           description: Successfully retrieved the list of Event Hubs.
@@ -3139,6 +3749,8 @@ paths:
         - $ref: '#/parameters/eventHubNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/SkipParameter'
+        - $ref: '#/parameters/TopParameter'
       responses:
         '200':
           description: Successfully retrieved the list of consumer groups.
@@ -3297,6 +3909,46 @@ paths:
                   createdAt: '2017-05-25T03:43:09.4536234Z'
                   updatedAt: '2017-05-25T03:43:09.4536234Z'
                 type: Microsoft.EventHub/Namespaces/EventHubs/ConsumerGroups
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/messagingplan':
+    get:
+      description: Gets messaging plan for specified namespace.
+      operationId: Namespaces_GetMessagingPlan
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Messaging Plan successfully returned.
+          schema:
+            $ref: '#/definitions/MessagingPlan'
+        default:
+          description: Eventhub error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Namespaces
+      x-ms-examples:
+        GetNamespaceMessagingPlan:
+          parameters:
+            api-version: '2017-04-01'
+            namespaceName: sdk-Namespace-5849
+            resourceGroupName: ResourceGroup
+            subscriptionId: subscriptionid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subscriptionid/resourceGroups/ResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-5849/messagingplan
+                location: null
+                name: '2'
+                properties:
+                  revision: 1
+                  selectedEventHubUnit: 1
+                  sku: 2
+                  updatedAt: '2018-04-10T17:55:54.4048325Z'
+                tags: null
+                type: Microsoft.EventHub/MessagingSKUPlan
 definitions:
   AccessKeys:
     description: Namespace/EventHub Connection String
@@ -3343,6 +3995,11 @@ definitions:
           partnerNamespace:
             description: 'ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning'
             type: string
+          pendingReplicationOperationsCount:
+            description: Number of entities pending to be replicated.
+            format: int64
+            readOnly: true
+            type: integer
           provisioningState:
             description: Provisioning state of the Alias(Disaster Recovery configuration) - possible values 'Accepted' or 'Succeeded' or 'Failed'
             enum:
@@ -3644,6 +4301,61 @@ definitions:
             readOnly: true
             type: string
         x-ms-client-flatten: true
+  MessagingPlan:
+    allOf:
+      - $ref: '#/definitions/TrackedResource'
+    description: Messaging Plan for the namespace
+    properties:
+      properties:
+        properties:
+          revision:
+            description: revision number
+            format: int64
+            readOnly: true
+            type: integer
+          selectedEventHubUnit:
+            description: Selected event hub unit
+            format: int32
+            readOnly: true
+            type: integer
+          sku:
+            description: Sku type
+            format: int32
+            readOnly: true
+            type: integer
+          updatedAt:
+            description: The exact time the messaging plan was updated.
+            format: date-time
+            readOnly: true
+            type: string
+        x-ms-client-flatten: true
+  MessagingRegions:
+    allOf:
+      - $ref: '#/definitions/TrackedResource'
+    description: Messaging Region
+    properties:
+      properties:
+        properties:
+          code:
+            description: Region code
+            readOnly: true
+            type: string
+          fullName:
+            description: Full name of the region
+            readOnly: true
+            type: string
+  MessagingRegionsListResult:
+    description: The response of the List MessagingRegions operation.
+    properties:
+      nextLink:
+        description: Link to the next set of results. Not empty if Value contains incomplete list of MessagingRegions.
+        readOnly: true
+        type: string
+      value:
+        description: Result of the List MessagingRegions type.
+        items:
+          $ref: '#/definitions/MessagingRegions'
+        type: array
   Operation:
     description: A Event Hub REST API operation
     properties:

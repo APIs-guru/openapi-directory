@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.6.2
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/toolresults/v1beta3/rest'
       version: v1
@@ -67,12 +67,12 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
@@ -1415,7 +1415,7 @@ definitions:
     properties:
       androidAppInfo:
         $ref: '#/definitions/AndroidAppInfo'
-        description: Infomation about the application under test.
+        description: Information about the application under test.
       androidInstrumentationTest:
         $ref: '#/definitions/AndroidInstrumentationTest'
         description: An Android instrumentation test.
@@ -1782,7 +1782,7 @@ definitions:
         type: string
       name:
         description: |-
-          A name to uniquely identify a history within a project. Maximum of 100 characters.
+          A name to uniquely identify a history within a project. Maximum of 200 characters.
 
           - In response always set - In create request: always set
         type: string
@@ -1878,7 +1878,7 @@ definitions:
   ListScreenshotClustersResponse:
     properties:
       clusters:
-        description: The set of clustres associated with an execution Always set
+        description: The set of clusters associated with an execution Always set
         items:
           $ref: '#/definitions/ScreenshotCluster'
         type: array
@@ -2435,7 +2435,10 @@ definitions:
         enum:
           - anr
           - compatibleWithOrchestrator
+          - completeRoboScriptExecution
+          - failedToInstall
           - fatalException
+          - incompleteRoboScriptExecution
           - launcherActivityNotFound
           - nativeCrash
           - startActivityNotFound
@@ -2576,7 +2579,7 @@ definitions:
 
       # JSON Mapping
 
-      In JSON format, the Timestamp type is encoded as a string in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the format is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z" where {year} is always expressed using four digits while {month}, {day}, {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution), are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone is required, though only UTC (as indicated by "Z") is currently supported.
+      In JSON format, the Timestamp type is encoded as a string in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the format is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z" where {year} is always expressed using four digits while {month}, {day}, {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution), are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone is required. A proto3 JSON serializer should always use UTC (as indicated by "Z") when printing the Timestamp type and a proto3 JSON parser should be able to accept both UTC and other timezones (as indicated by an offset).
 
       For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past 01:30 UTC on January 15, 2017.
 

@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2017-05-10/resources.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: resources
   x-tags:
@@ -1377,6 +1377,7 @@ definitions:
     properties:
       id:
         description: The ID of the deployment.
+        readOnly: true
         type: string
       name:
         description: The name of the deployment.
@@ -1386,6 +1387,7 @@ definitions:
         description: Deployment properties.
     required:
       - name
+    x-ms-azure-resource: true
   DeploymentExtendedFilter:
     description: Deployment filter.
     properties:
@@ -1717,7 +1719,7 @@ definitions:
         description: The resource type.
         type: string
   Resource:
-    description: Resource.
+    description: Basic set of the resource properties.
     properties:
       id:
         description: Resource ID
@@ -1766,6 +1768,7 @@ definitions:
         type: object
     required:
       - location
+    x-ms-azure-resource: true
   ResourceGroupExportResult:
     description: Resource group export result.
     properties:
@@ -1860,7 +1863,7 @@ definitions:
         description: Operation description.
         type: string
       operation:
-        description: Operation.
+        description: The operation name.
         type: string
       provider:
         description: Operation provider.
@@ -1928,6 +1931,7 @@ definitions:
         description: 'The total number of resources that use the resource tag. When a tag is initially created and has no associated resources, the value is 0.'
       id:
         description: The tag ID.
+        readOnly: true
         type: string
       tagName:
         description: The tag name.
@@ -1945,10 +1949,12 @@ definitions:
         description: The tag value count.
       id:
         description: The tag ID.
+        readOnly: true
         type: string
       tagValue:
         description: The tag value.
         type: string
+    x-ms-azure-resource: true
   TagsListResult:
     description: List of subscription tags.
     properties:

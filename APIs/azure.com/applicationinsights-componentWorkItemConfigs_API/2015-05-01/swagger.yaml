@@ -1,0 +1,269 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: Azure Application Insights client for work item configurations for a component.
+  title: ApplicationInsightsManagementClient
+  version: '2015-05-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/microsoft.insights/stable/2015-05-01/componentWorkItemConfigs_API.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: applicationinsights-componentWorkItemConfigs_API
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow.
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  ResourceGroupNameParameter:
+    description: The name of the resource group.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceNameParameter:
+    description: The name of the Application Insights component resource.
+    in: path
+    name: resourceName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The Azure subscription ID.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+  WorkItemConfigIdParameter:
+    description: The unique work item configuration Id. This can be either friendly name of connector as defined in connector configuration
+    in: path
+    name: workItemConfigId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/DefaultWorkItemConfig':
+    get:
+      description: Gets default work item configurations that exist for the application
+      operationId: WorkItemConfigurations_GetDefault
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/WorkItemConfiguration'
+      x-ms-examples:
+        WorkItemConfigurationsGetDefault:
+          parameters:
+            api-version: '2015-05-01'
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                ConfigDisplayName: Visual Studio Team Services
+                ConfigProperties: '{"VSOAccountBaseUrl":"https://testtodelete.visualstudio.com","ProjectCollection":"DefaultCollection","Project":"todeletefirst","ResourceId":"d0662b05-439a-4a1b-840b-33a7f8b42ebf","ConfigurationType":"Standard","WorkItemType":"Bug","AreaPath":"todeletefirst","AssignedTo":""}'
+                ConnectorId: d334e2a4-6733-488e-8645-a9fdc1694f41
+                Id: Visual Studio Team Services
+                IsDefault: true
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/WorkItemConfigs':
+    get:
+      description: Gets the list work item configurations that exist for the application
+      operationId: WorkItemConfigurations_List
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            items:
+              $ref: '#/definitions/WorkItemConfiguration'
+            type: array
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/WorkItemConfigurationError'
+      x-ms-examples:
+        WorkItemConfigurationsList:
+          parameters:
+            api-version: '2015-05-01'
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                - ConfigDisplayName: Visual Studio Team Services
+                  ConfigProperties: '{"VSOAccountBaseUrl":"https://testtodelete.visualstudio.com","ProjectCollection":"DefaultCollection","Project":"todeletefirst","ResourceId":"b370eeb2-5dff-4838-8253-ec3014b2c706","ConfigurationType":"Standard","WorkItemType":"Bug","AreaPath":"todeletefirst","AssignedTo":""}'
+                  ConnectorId: d334e2a4-6733-488e-8645-a9fdc1694f41
+                  Id: Visual Studio Team Services
+                  IsDefault: true
+                - ConfigDisplayName: GitHub
+                  ConfigProperties: '{"GitHubAccountUrl":"https://github.com/jpiyali/testrepository","ResourceId":"b370eeb2-5dff-4838-8253-ec3014b2c706"}'
+                  ConnectorId: 4C89E219-D47E-4C14-866A-018D6D634CF3
+                  Id: GitHub
+                  IsDefault: false
+      x-ms-pageable: {}
+    post:
+      description: Create a work item configuration for an Application Insights component.
+      operationId: WorkItemConfigurations_Create
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+        - description: Properties that need to be specified to create a work item configuration of a Application Insights component.
+          in: body
+          name: WorkItemConfigurationProperties
+          required: true
+          schema:
+            $ref: '#/definitions/WorkItemCreateConfiguration'
+      responses:
+        '200':
+          description: An object containing the work item configuration definition created by this PUT call.
+          schema:
+            $ref: '#/definitions/WorkItemConfiguration'
+      x-ms-examples:
+        WorkItemConfigurationsCreate:
+          parameters:
+            WorkItemConfigurationProperties:
+              ConnectorDataConfiguration:
+                Custom: '{"/fields/System.WorkItemType":"Bug","/fields/System.AreaPath":"todeletefirst","/fields/System.AssignedTo":""}'
+                Project: todeletefirst
+                ProjectCollection: DefaultCollection
+                ResourceId: d0662b05-439a-4a1b-840b-33a7f8b42ebf
+                VSOAccountBaseUrl: 'https://testtodelete.visualstudio.com'
+              ConnectorId: d334e2a4-6733-488e-8645-a9fdc1694f41
+              ValidateOnly: 'true'
+              WorkItemProperties:
+                - name: Title
+                  value: Validate Only Title
+                - name: Description
+                  value: Validate Only Description
+            api-version: '2015-05-01'
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+          responses:
+            '200':
+              body: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/WorkItemConfigs/{workItemConfigId}':
+    delete:
+      description: Delete an workitem configuration of an Application Insights component.
+      operationId: WorkItemConfigurations_Delete
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+        - $ref: '#/parameters/WorkItemConfigIdParameter'
+      responses:
+        '200':
+          description: The work item configuration that was successfully deleted.
+          schema: {}
+      x-ms-examples:
+        WorkItemConfigurationDelete:
+          parameters:
+            api-version: '2015-05-01'
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+            workItemConfigId: Visual Studio Team Services
+          responses:
+            '200':
+              body: {}
+definitions:
+  InnerError:
+    description: Inner error
+    properties:
+      diagnosticcontext:
+        description: Provides correlation for request
+        type: string
+      time:
+        description: Request time
+        format: date-time
+        type: string
+    type: object
+  WorkItemConfiguration:
+    description: Work item configuration associated with an application insights resource.
+    properties:
+      ConfigDisplayName:
+        description: Configuration friendly name
+        type: string
+      ConfigProperties:
+        description: Serialized JSON object for detailed properties
+        type: string
+      ConnectorId:
+        description: Connector identifier where work item is created
+        type: string
+      Id:
+        description: Unique Id for work item
+        type: string
+      IsDefault:
+        description: Boolean value indicating whether configuration is default
+        type: boolean
+    type: object
+  WorkItemConfigurationError:
+    description: Error associated with trying to get work item configuration or configurations
+    properties:
+      code:
+        description: Error detail code and explanation
+        type: string
+      innererror:
+        $ref: '#/definitions/InnerError'
+      message:
+        description: Error message
+        type: string
+    type: object
+  WorkItemCreateConfiguration:
+    description: Work item configuration creation payload
+    properties:
+      ConnectorDataConfiguration:
+        description: Serialized JSON object for detaile d properties
+        type: string
+      ConnectorId:
+        description: Unique connector id
+        type: string
+      ValidateOnly:
+        description: Boolean indicating validate only
+        type: boolean
+      WorkItemProperties:
+        description: Custom work item properties
+        type: string
+    type: object

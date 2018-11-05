@@ -99,8 +99,9 @@ paths:
                       provisioningState: Succeeded
                       servicePrincipalProfile:
                         clientId: clientid
-                        secret: secret
-                    tags: managed-cluster
+                    tags:
+                      archv2: ''
+                      tier: production
                     type: Microsoft.ContainerService/ManagedClusters
       x-ms-pageable:
         nextLinkName: nextLink
@@ -159,8 +160,9 @@ paths:
                       provisioningState: Succeeded
                       servicePrincipalProfile:
                         clientId: clientid
-                        secret: secret
-                    tags: managed-cluster
+                    tags:
+                      archv2: ''
+                      tier: production
                     type: Microsoft.ContainerService/ManagedClusters
       x-ms-pageable:
         nextLinkName: nextLink
@@ -259,8 +261,9 @@ paths:
                   provisioningState: Succeeded
                   servicePrincipalProfile:
                     clientId: clientid
-                    secret: secret
-                tags: managed-cluster
+                tags:
+                  archv2: ''
+                  tier: production
                 type: Microsoft.ContainerService/ManagedClusters
     put:
       description: Creates or updates a managed cluster with the specified configuration for agents and Kubernetes version.
@@ -340,8 +343,9 @@ paths:
                   provisioningState: Succeeded
                   servicePrincipalProfile:
                     clientId: clientid
-                    secret: secret
-                tags: managedcluster
+                tags:
+                  archv2: ''
+                  tier: production
                 type: Microsoft.ContainerService/ManagedClusters
             '201':
               body:
@@ -370,13 +374,15 @@ paths:
                   provisioningState: Succeeded
                   servicePrincipalProfile:
                     clientId: clientid
-                    secret: secret
-                tags: managedcluster
+                tags:
+                  archv2: ''
+                  tier: production
                 type: Microsoft.ContainerService/ManagedClusters
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/accessProfiles/{roleName}':
     get:
-      description: Gets the accessProfile for the specified role name of the managed cluster with a specified resource group and name.
+      deprecated: true
+      description: Use ManagedClusters_GetAccessProfile instead.
       operationId: ManagedClusters_GetAccessProfiles
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -402,6 +408,53 @@ paths:
           schema:
             $ref: '#/definitions/ManagedClusterAccessProfile'
       summary: Gets access profile of a managed cluster.
+      tags:
+        - ManagedClusters
+      x-ms-examples:
+        Get Managed Cluster:
+          parameters:
+            api-version: '2017-08-31'
+            resourceGroupName: rg1
+            resourceName: clustername1
+            roleName: clusterUser
+            subscriptionId: subid1
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/accessProfiles/clusterUser
+                location: location1
+                name: clusterUser
+                properties:
+                  kubeConfig: kubeConfig1
+                type: Microsoft.ContainerService/ManagedClusters/AccessProfiles
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/accessProfiles/{roleName}/listCredential':
+    post:
+      description: Gets the accessProfile for the specified role name of the managed cluster with a specified resource group and name.
+      operationId: ManagedClusters_GetAccessProfile
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the managed cluster resource.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+        - description: The name of the role for managed cluster accessProfile resource.
+          in: path
+          name: roleName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ManagedClusterAccessProfile'
+      summary: Gets an access profile of a managed cluster.
       tags:
         - ManagedClusters
       x-ms-examples:
@@ -478,6 +531,7 @@ definitions:
     properties:
       kubeConfig:
         description: Base64-encoded Kubernetes configuration file.
+        format: byte
         type: string
     type: object
   ContainerServiceAgentPoolProfile:
@@ -521,7 +575,7 @@ definitions:
         description: Size of agent VMs.
       vnetSubnetID:
         $ref: '#/definitions/ContainerServiceVnetSubnetID'
-        description: 'VNet SubnetID specifies the vnet''s subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet.'
+        description: VNet SubnetID specifies the vnet's subnet identifier.
     required:
       - name
       - vmSize
@@ -538,7 +592,7 @@ definitions:
     properties:
       adminUsername:
         description: The administrator username to use for Linux VMs.
-        pattern: '^[a-z][a-z0-9_-]*$'
+        pattern: '^[A-Za-z][-A-Za-z0-9_]*$'
         type: string
       ssh:
         $ref: '#/definitions/ContainerServiceSshConfiguration'
@@ -583,7 +637,7 @@ definitions:
         description: Size of agent VMs.
       vnetSubnetID:
         $ref: '#/definitions/ContainerServiceVnetSubnetID'
-        description: 'VNet SubnetID specifies the vnet''s subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet.'
+        description: VNet SubnetID specifies the vnet's subnet identifier.
     required:
       - dnsPrefix
       - vmSize
@@ -649,7 +703,6 @@ definitions:
   ContainerServiceVMSize:
     description: Size of agent VMs.
     enum:
-      - Standard_A0
       - Standard_A1
       - Standard_A10
       - Standard_A11
@@ -668,6 +721,10 @@ definitions:
       - Standard_A8_v2
       - Standard_A8m_v2
       - Standard_A9
+      - Standard_B2ms
+      - Standard_B2s
+      - Standard_B4ms
+      - Standard_B8ms
       - Standard_D1
       - Standard_D11
       - Standard_D11_v2
@@ -691,6 +748,8 @@ definitions:
       - Standard_D2_v3
       - Standard_D2s_v3
       - Standard_D3
+      - Standard_D32_v3
+      - Standard_D32s_v3
       - Standard_D3_v2
       - Standard_D3_v2_Promo
       - Standard_D4
@@ -700,6 +759,8 @@ definitions:
       - Standard_D4s_v3
       - Standard_D5_v2
       - Standard_D5_v2_Promo
+      - Standard_D64_v3
+      - Standard_D64s_v3
       - Standard_D8_v3
       - Standard_D8s_v3
       - Standard_DS1
@@ -710,9 +771,13 @@ definitions:
       - Standard_DS12_v2
       - Standard_DS12_v2_Promo
       - Standard_DS13
+      - Standard_DS13-2_v2
+      - Standard_DS13-4_v2
       - Standard_DS13_v2
       - Standard_DS13_v2_Promo
       - Standard_DS14
+      - Standard_DS14-4_v2
+      - Standard_DS14-8_v2
       - Standard_DS14_v2
       - Standard_DS14_v2_Promo
       - Standard_DS15_v2
@@ -732,10 +797,14 @@ definitions:
       - Standard_E16s_v3
       - Standard_E2_v3
       - Standard_E2s_v3
+      - Standard_E32-16s_v3
+      - Standard_E32-8s_v3
       - Standard_E32_v3
       - Standard_E32s_v3
       - Standard_E4_v3
       - Standard_E4s_v3
+      - Standard_E64-16s_v3
+      - Standard_E64-32s_v3
       - Standard_E64_v3
       - Standard_E64s_v3
       - Standard_E8_v3
@@ -743,13 +812,20 @@ definitions:
       - Standard_F1
       - Standard_F16
       - Standard_F16s
+      - Standard_F16s_v2
       - Standard_F1s
       - Standard_F2
       - Standard_F2s
+      - Standard_F2s_v2
+      - Standard_F32s_v2
       - Standard_F4
       - Standard_F4s
+      - Standard_F4s_v2
+      - Standard_F64s_v2
+      - Standard_F72s_v2
       - Standard_F8
       - Standard_F8s
+      - Standard_F8s_v2
       - Standard_G1
       - Standard_G2
       - Standard_G3
@@ -759,7 +835,11 @@ definitions:
       - Standard_GS2
       - Standard_GS3
       - Standard_GS4
+      - Standard_GS4-4
+      - Standard_GS4-8
       - Standard_GS5
+      - Standard_GS5-16
+      - Standard_GS5-8
       - Standard_H16
       - Standard_H16m
       - Standard_H16mr
@@ -770,12 +850,30 @@ definitions:
       - Standard_L32s
       - Standard_L4s
       - Standard_L8s
+      - Standard_M128-32ms
+      - Standard_M128-64ms
+      - Standard_M128ms
       - Standard_M128s
+      - Standard_M64-16ms
+      - Standard_M64-32ms
       - Standard_M64ms
+      - Standard_M64s
       - Standard_NC12
+      - Standard_NC12s_v2
+      - Standard_NC12s_v3
       - Standard_NC24
       - Standard_NC24r
+      - Standard_NC24rs_v2
+      - Standard_NC24rs_v3
+      - Standard_NC24s_v2
+      - Standard_NC24s_v3
       - Standard_NC6
+      - Standard_NC6s_v2
+      - Standard_NC6s_v3
+      - Standard_ND12s
+      - Standard_ND24rs
+      - Standard_ND24s
+      - Standard_ND6s
       - Standard_NV12
       - Standard_NV24
       - Standard_NV6
@@ -784,7 +882,7 @@ definitions:
       modelAsString: true
       name: ContainerServiceVMSizeTypes
   ContainerServiceVnetSubnetID:
-    description: 'VNet SubnetID specifies the vnet''s subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet.'
+    description: VNet SubnetID specifies the vnet's subnet identifier.
     type: string
   ContainerServiceWindowsProfile:
     description: Profile for Windows VMs in the container service cluster.

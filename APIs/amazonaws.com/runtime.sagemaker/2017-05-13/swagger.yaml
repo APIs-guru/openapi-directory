@@ -3,7 +3,7 @@ info:
   version: '2017-05-13'
   x-release: v4
   title: Amazon SageMaker Runtime
-  description: ' Amazon SageMaker runtime API. '
+  description: ' The Amazon SageMaker runtime API. '
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -101,7 +101,7 @@ paths:
   '/endpoints/{EndpointName}/invocations':
     post:
       operationId: InvokeEndpoint
-      description: '<p>After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint. </p> <p>For an overview of Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It Works</a> </p> <p> Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax. </p>'
+      description: '<p>After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint. </p> <p>For an overview of Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It Works</a>. </p> <p>Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax. </p> <p>Cals to <code>InvokeEndpoint</code> are authenticated by using AWS Signature Version 4. For information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">Authenticating Requests (AWS Signature Version 4)</a> in the <i>Amazon S3 API Reference</i>.</p> <note> <p>Endpoints are scoped to an individual account, and are not public. The URL does not contain the account ID, but Amazon SageMaker determines the account ID from the authentication token that is supplied by the caller.</p> </note>'
       responses:
         '200':
           description: Success
@@ -144,9 +144,33 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  InvokeEndpointOutput:
+    type: object
+    required:
+      - Body
+    properties:
+      Body:
+        $ref: '#/definitions/BodyBlob'
+        description: '<p>Includes the inference provided by the model.</p> <p>For information about the format of the response body, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
+  InvokeEndpointInput:
+    type: object
+    required:
+      - Body
+    properties:
+      Body:
+        $ref: '#/definitions/BodyBlob'
+        description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
+  InternalFailure: {}
+  ServiceUnavailable: {}
+  ValidationError: {}
+  ModelError: {}
   BodyBlob:
     type: string
     maxLength: 5242880
+    format: password
+  CustomAttributesHeader:
+    type: string
+    maxLength: 1024
     format: password
   EndpointName:
     type: string
@@ -155,59 +179,3 @@ definitions:
   Header:
     type: string
     maxLength: 1024
-  InternalFailure:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-    description: ' Internal failure occurred. '
-  InvokeEndpointInput:
-    type: object
-    required:
-      - Body
-    properties:
-      Body:
-        $ref: '#/definitions/BodyBlob'
-        description: 'Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. '
-  InvokeEndpointOutput:
-    type: object
-    required:
-      - Body
-    properties:
-      Body:
-        $ref: '#/definitions/BodyBlob'
-        description: Includes the inference provided by the model.
-  LogStreamArn:
-    type: string
-  Message:
-    type: string
-    maxLength: 2048
-  ModelError:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-      OriginalStatusCode:
-        $ref: '#/definitions/StatusCode'
-        description: ' Original status code. '
-      OriginalMessage:
-        $ref: '#/definitions/Message'
-        description: ' Original message. '
-      LogStreamArn:
-        $ref: '#/definitions/LogStreamArn'
-        description: ' Amazon Resource Name (ARN) of the log stream. '
-    description: ' Model (owned by the customer in the container) returned an error 500. '
-  ServiceUnavailable:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-    description: ' Service is unavailable. Try your call again. '
-  StatusCode:
-    type: integer
-  ValidationError:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/Message'
-    description: ' Inspect your request and try again. '

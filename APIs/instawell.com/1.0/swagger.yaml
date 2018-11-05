@@ -1,12 +1,14 @@
 swagger: '2.0'
 schemes:
-  - https
-host: api-sandbox.instawell.com
+  - http
+host: instawell.local
 basePath: /v3
 info:
   contact:
+    name: Instawell
+    url: 'https://instawell.com/api'
     x-twitter: instawellness
-  description: "The Instawell API gives you access to  helpers all over the world. Integrate Instawell with your app using our API to get help wherever you are. Follow the instructions below to get started.\r\n\r\nBase URL\r\n----\r\nThe Instawell API supports a sandbox mode by making API calls to our sandbox server. Using the Sandbox server, you can make sure your integrations are working before deploying them to production. \r\n\r\nSandbox mode is accessed by using the following base URL\r\n\r\n~~~~\r\nhttps://api-sandbox.instawell.com/\r\n~~~~\r\n\r\nProduction mode is acccessed by using the following base URL\r\n\r\n~~~~\r\nhttps://api.instawell.com/\r\n~~~~\r\n\r\n\r\nGet your Access Token\r\n-----\r\n\r\nThe token to access the Campaign API is available when you create your first Campaign or when you request your first Plan. Have a look at the Create Campaign method to find out how to do this.\r\n\r\nMost requests made to the Instawell API require the auth token to be sent as part of the header. Exceptions will be noted in the docs. The name of the header to be used is X-instawell-token\r\n\r\n~~~~\r\nX-instawell-token: TEST_TOKEN\r\n~~~~\r\n\r\nOnce you have your token, you're ready to go.\r\n\r\n\r\n\r\n"
+  description: Instawell's RESTful API gives you access to mental health professionals.
   license:
     name: MIT
     url: 'http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT'
@@ -30,7 +32,14 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: 'TODO: Add Description'
+      description: |-
+        Create a new Campaign for an existing user or for a new user. 
+
+        If you are a new user and you want to create a Campaign, simply supply the email as a parameter in the body and an account will be automatically created for you. 
+
+        *The response will also return a an `auth_token` that you can use in subsequent requests.*
+
+        If you are an existing user and you want to create a new Campaign under your existing account, then simply add the `X-instawell-token` header in the request to do this.
       operationId: Create Campaign
       parameters:
         - description: Email is a required field if you do not have an auth token. An account will automatically be created for your use.
@@ -76,7 +85,7 @@ paths:
       x-unitTests: []
   /campaigns/get:
     get:
-      description: 'TODO: Add Description'
+      description: 'Use this method to retrieve information about the Campaign. We return basic information like name, description and image used as well as other meta information.'
       operationId: Get Campaign
       parameters:
         - description: ''
@@ -112,7 +121,14 @@ paths:
       x-unitTests: []
   /campaigns/get_stats:
     get:
-      description: 'TODO: Add Description'
+      description: |-
+        You can use this method to  retrieve some basic stats about your Campaign. We currently return the following information
+
+        - users_joined : How many uses' joined the Campaign
+        - money_spent : How much money was spent on the Campaign by users.
+        - plans_sold : The number of Plans that have been sold on the Campaign
+        - view_count : The number of people who viewed the Campaign
+        - feed : The most recent activity log of your Campaign
       operationId: Get Campaign Stats
       parameters:
         - description: ''
@@ -183,13 +199,23 @@ paths:
               X-instawell-token: 589caa2d7eb42fb1630d69e2636a4673853c26757f38621b58a195f44c27c0584194da64e15259849009a5cfc161210d76db9e81d81747c6a1a7be195e353d17
             method: GET
             uri: '/campaigns/get_stats?campaign_id={{campaign_id}}'
-          x-testDescription: 'TODO: Add Description'
+          x-testDescription: |-
+            You can use this method to  retrieve some basic stats about your Campaign. We currently return the following information
+
+            - users_joined : How many uses' joined the Campaign
+            - money_spent : How much money was spent on the Campaign by users.
+            - plans_sold : The number of Plans that have been sold on the Campaign
+            - view_count : The number of people who viewed the Campaign
+            - feed : The most recent activity log of your Campaign
           x-testEnabled: true
           x-testName: Get Campaign Stats
           x-testShouldPass: true
   /campaigns/get_widget:
     get:
-      description: 'TODO: Add Description'
+      description: |
+        The widget code is some HTML that will allow you to embed an Instawell widget on your own website. The widget points to your Campaign and allows visitors to interact with your Campaign right from your own website. 
+
+        To include the widget on your website, simply copy the `embed_html` field from the response and paste it at the bottom of your website template. 
       operationId: Get Campaign Widget
       parameters:
         - description: ''
@@ -255,7 +281,10 @@ paths:
               X-instawell-token: 589caa2d7eb42fb1630d69e2636a4673853c26757f38621b58a195f44c27c0584194da64e15259849009a5cfc161210d76db9e81d81747c6a1a7be195e353d17
             method: GET
             uri: '/campaigns/get_widget?campaign_id={{campaign_id}}'
-          x-testDescription: 'TODO: Add Description'
+          x-testDescription: |
+            The widget code is some HTML that will allow you to embed an Instawell widget on your own website. The widget points to your Campaign and allows visitors to interact with your Campaign right from your own website. 
+
+            To include the widget on your website, simply copy the `embed_html` field from the response and paste it at the bottom of your website template. 
           x-testEnabled: true
           x-testName: Get Campaign Widget
           x-testShouldPass: true
@@ -263,7 +292,8 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: 'TODO: Add Description'
+      description: |
+        The Campaign owner can update information about the Campaign. We currently allow you to update the name, description and the image used. 
       operationId: Update a Campaign
       parameters:
         - description: The new name to be used for your C
@@ -314,7 +344,12 @@ paths:
       x-unitTests: []
   /plans/find:
     get:
-      description: 'TODO: Add Description'
+      description: |-
+        Use this method to find available Plans on Instawell. Use the `category` field to filter Plans by Category. 
+
+        Calling this method without the `category` field will return the possible Category values. 
+
+        Possible category values are : mentalhealth, relationships
       operationId: Find Plans
       parameters:
         - description: ''
@@ -381,8 +416,13 @@ paths:
             headers:
               Content-Type: application/json
             method: GET
-            uri: /plans/find?category=realtalk
-          x-testDescription: 'TODO: Add Description'
+            uri: /plans/find?category=mentalhealth
+          x-testDescription: |-
+            Use this method to find available Plans on Instawell. Use the `category` field to filter Plans by Category. 
+
+            Calling this method without the `category` field will return the possible Category values. 
+
+            Possible category values are : mentalhealth, relationships
           x-testEnabled: true
           x-testName: Find Plans
           x-testShouldPass: true
@@ -390,7 +430,12 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: 'TODO: Add Description'
+      description: |-
+        Once you've found a Plan you like, you can make a request for it. When you make a request for it, we notify the Helper who created the Plan that there's someone waiting to chat with them. And you can start chatting with them as soon as they accept the request. 
+
+        The response to this method also contains a link you can use to automatically login to your account.
+
+        You can call this method as a visitor or as an existing user with a valid `auth_token`. If your `auth_token` is included, we'll create the account under your existing account. Otherwise we'll create an account automatically for you and return the auth token.
       operationId: Request Plan
       parameters:
         - description: Required. The ID of the Plan that you want to chat about.
@@ -454,13 +499,18 @@ paths:
               Content-Type: application/x-www-form-urlencoded
             method: POST
             uri: /plans/request
-          x-testDescription: 'TODO: Add Description'
+          x-testDescription: |-
+            Once you've found a Plan you like, you can make a request for it. When you make a request for it, we notify the Helper who created the Plan that there's someone waiting to chat with them. And you can start chatting with them as soon as they accept the request. 
+
+            The response to this method also contains a link you can use to automatically login to your account.
+
+            You can call this method as a visitor or as an existing user with a valid `auth_token`. If your `auth_token` is included, we'll create the account under your existing account. Otherwise we'll create an account automatically for you and return the auth token.
           x-testEnabled: true
           x-testName: Request Plan
           x-testShouldPass: true
   /users/notifications:
     get:
-      description: 'TODO: Add Description'
+      description: 'Use this method to retrieve your most recent notifications. '
       operationId: Get Notifications
       parameters:
         - description: ''
@@ -542,7 +592,7 @@ paths:
               X-instawell-token: 589caa2d7eb42fb1630d69e2636a4673853c26757f38621b58a195f44c27c0584194da64e15259849009a5cfc161210d76db9e81d81747c6a1a7be195e353d17
             method: GET
             uri: /users/notifications
-          x-testDescription: 'TODO: Add Description'
+          x-testDescription: 'Use this method to retrieve your most recent notifications. '
           x-testEnabled: true
           x-testName: Get Notifications
           x-testShouldPass: true

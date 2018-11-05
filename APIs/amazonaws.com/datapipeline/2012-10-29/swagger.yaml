@@ -946,6 +946,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  ActivatePipelineOutput:
+    type: object
+    properties: {}
+    description: Contains the output of ActivatePipeline.
   ActivatePipelineInput:
     type: object
     required:
@@ -961,10 +965,38 @@ definitions:
         $ref: '#/definitions/timestamp'
         description: 'The date and time to resume the pipeline. By default, the pipeline resumes from the last completed execution.'
     description: Contains the parameters for ActivatePipeline.
-  ActivatePipelineOutput:
+  PipelineNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: Description of the error message.
+    description: The specified pipeline was not found. Verify that you used the correct user and account identifiers.
+  PipelineDeletedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: Description of the error message.
+    description: The specified pipeline has been deleted.
+  InternalServiceError:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: Description of the error message.
+    description: An internal service error occurred.
+  InvalidRequestException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: Description of the error message.
+    description: 'The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven''t exceeded any of the service limits for your account.'
+  AddTagsOutput:
     type: object
     properties: {}
-    description: Contains the output of ActivatePipeline.
+    description: Contains the output of AddTags.
   AddTagsInput:
     type: object
     required:
@@ -978,10 +1010,15 @@ definitions:
         $ref: '#/definitions/tagList'
         description: 'The tags to add, as key/value pairs.'
     description: Contains the parameters for AddTags.
-  AddTagsOutput:
+  CreatePipelineOutput:
     type: object
-    properties: {}
-    description: Contains the output of AddTags.
+    required:
+      - pipelineId
+    properties:
+      pipelineId:
+        $ref: '#/definitions/id'
+        description: 'The ID that AWS Data Pipeline assigns the newly created pipeline. For example, <code>df-06372391ZG65EXAMPLE</code>.'
+    description: Contains the output of CreatePipeline.
   CreatePipelineInput:
     type: object
     required:
@@ -1001,15 +1038,10 @@ definitions:
         $ref: '#/definitions/tagList'
         description: 'A list of tags to associate with the pipeline at creation. Tags let you control access to pipelines. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
     description: Contains the parameters for CreatePipeline.
-  CreatePipelineOutput:
+  DeactivatePipelineOutput:
     type: object
-    required:
-      - pipelineId
-    properties:
-      pipelineId:
-        $ref: '#/definitions/id'
-        description: 'The ID that AWS Data Pipeline assigns the newly created pipeline. For example, <code>df-06372391ZG65EXAMPLE</code>.'
-    description: Contains the output of CreatePipeline.
+    properties: {}
+    description: Contains the output of DeactivatePipeline.
   DeactivatePipelineInput:
     type: object
     required:
@@ -1022,10 +1054,6 @@ definitions:
         $ref: '#/definitions/cancelActive'
         description: 'Indicates whether to cancel any running objects. The default is true, which sets the state of any running objects to <code>CANCELED</code>. If this value is false, the pipeline is deactivated after all running objects finish.'
     description: Contains the parameters for DeactivatePipeline.
-  DeactivatePipelineOutput:
-    type: object
-    properties: {}
-    description: Contains the output of DeactivatePipeline.
   DeletePipelineInput:
     type: object
     required:
@@ -1035,6 +1063,21 @@ definitions:
         $ref: '#/definitions/id'
         description: The ID of the pipeline.
     description: Contains the parameters for DeletePipeline.
+  DescribeObjectsOutput:
+    type: object
+    required:
+      - pipelineObjects
+    properties:
+      pipelineObjects:
+        $ref: '#/definitions/PipelineObjectList'
+        description: An array of object definitions.
+      marker:
+        $ref: '#/definitions/string'
+        description: 'The starting point for the next page of results. To view the next page of results, call <code>DescribeObjects</code> again with this marker value. If the value is null, there are no more results.'
+      hasMoreResults:
+        $ref: '#/definitions/boolean'
+        description: Indicates whether there are more results to return.
+    description: Contains the output of DescribeObjects.
   DescribeObjectsInput:
     type: object
     required:
@@ -1054,30 +1097,6 @@ definitions:
         $ref: '#/definitions/string'
         description: 'The starting point for the results to be returned. For the first call, this value should be empty. As long as there are more results, continue to call <code>DescribeObjects</code> with the marker value from the previous call to retrieve the next set of results.'
     description: Contains the parameters for DescribeObjects.
-  DescribeObjectsOutput:
-    type: object
-    required:
-      - pipelineObjects
-    properties:
-      pipelineObjects:
-        $ref: '#/definitions/PipelineObjectList'
-        description: An array of object definitions.
-      marker:
-        $ref: '#/definitions/string'
-        description: 'The starting point for the next page of results. To view the next page of results, call <code>DescribeObjects</code> again with this marker value. If the value is null, there are no more results.'
-      hasMoreResults:
-        $ref: '#/definitions/boolean'
-        description: Indicates whether there are more results to return.
-    description: Contains the output of DescribeObjects.
-  DescribePipelinesInput:
-    type: object
-    required:
-      - pipelineIds
-    properties:
-      pipelineIds:
-        $ref: '#/definitions/idList'
-        description: 'The IDs of the pipelines to describe. You can pass as many as 25 identifiers in a single call. To obtain pipeline IDs, call <a>ListPipelines</a>.'
-    description: Contains the parameters for DescribePipelines.
   DescribePipelinesOutput:
     type: object
     required:
@@ -1087,6 +1106,24 @@ definitions:
         $ref: '#/definitions/PipelineDescriptionList'
         description: An array of descriptions for the specified pipelines.
     description: Contains the output of DescribePipelines.
+  DescribePipelinesInput:
+    type: object
+    required:
+      - pipelineIds
+    properties:
+      pipelineIds:
+        $ref: '#/definitions/idList'
+        description: 'The IDs of the pipelines to describe. You can pass as many as 25 identifiers in a single call. To obtain pipeline IDs, call <a>ListPipelines</a>.'
+    description: Contains the parameters for DescribePipelines.
+  EvaluateExpressionOutput:
+    type: object
+    required:
+      - evaluatedExpression
+    properties:
+      evaluatedExpression:
+        $ref: '#/definitions/longString'
+        description: The evaluated expression.
+    description: Contains the output of EvaluateExpression.
   EvaluateExpressionInput:
     type: object
     required:
@@ -1104,42 +1141,13 @@ definitions:
         $ref: '#/definitions/longString'
         description: The expression to evaluate.
     description: Contains the parameters for EvaluateExpression.
-  EvaluateExpressionOutput:
+  TaskNotFoundException:
     type: object
-    required:
-      - evaluatedExpression
     properties:
-      evaluatedExpression:
-        $ref: '#/definitions/longString'
-        description: The evaluated expression.
-    description: Contains the output of EvaluateExpression.
-  Field:
-    type: object
-    required:
-      - key
-    properties:
-      key:
-        $ref: '#/definitions/fieldNameString'
-        description: The field identifier.
-      stringValue:
-        $ref: '#/definitions/fieldStringValue'
-        description: 'The field value, expressed as a String.'
-      refValue:
-        $ref: '#/definitions/fieldNameString'
-        description: 'The field value, expressed as the identifier of another object.'
-    description: A key-value pair that describes a property of a pipeline object. The value is specified as either a string value (<code>StringValue</code>) or a reference to another object (<code>RefValue</code>) but not as both.
-  GetPipelineDefinitionInput:
-    type: object
-    required:
-      - pipelineId
-    properties:
-      pipelineId:
-        $ref: '#/definitions/id'
-        description: The ID of the pipeline.
-      version:
-        $ref: '#/definitions/string'
-        description: The version of the pipeline definition to retrieve. Set this parameter to <code>latest</code> (default) to use the last definition saved to the pipeline or <code>active</code> to use the last definition that was activated.
-    description: Contains the parameters for GetPipelineDefinition.
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: Description of the error message.
+    description: 'The specified task was not found. '
   GetPipelineDefinitionOutput:
     type: object
     properties:
@@ -1153,37 +1161,18 @@ definitions:
         $ref: '#/definitions/ParameterValueList'
         description: The parameter values used in the pipeline definition.
     description: Contains the output of GetPipelineDefinition.
-  InstanceIdentity:
+  GetPipelineDefinitionInput:
     type: object
+    required:
+      - pipelineId
     properties:
-      document:
+      pipelineId:
+        $ref: '#/definitions/id'
+        description: The ID of the pipeline.
+      version:
         $ref: '#/definitions/string'
-        description: A description of an EC2 instance that is generated when the instance is launched and exposed to the instance via the instance metadata service in the form of a JSON representation of an object.
-      signature:
-        $ref: '#/definitions/string'
-        description: A signature which can be used to verify the accuracy and authenticity of the information provided in the instance identity document.
-    description: '<p><p>Identity information for the EC2 instance that is hosting the task runner. You can get this value by calling a metadata URI from the EC2 instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> Passing in this value proves that your task runner is running on an EC2 instance, and ensures the proper AWS Data Pipeline service charges are applied to your pipeline.</p></p>'
-  InternalServiceError:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/errorMessage'
-        description: Description of the error message.
-    description: An internal service error occurred.
-  InvalidRequestException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/errorMessage'
-        description: Description of the error message.
-    description: 'The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven''t exceeded any of the service limits for your account.'
-  ListPipelinesInput:
-    type: object
-    properties:
-      marker:
-        $ref: '#/definitions/string'
-        description: 'The starting point for the results to be returned. For the first call, this value should be empty. As long as there are more results, continue to call <code>ListPipelines</code> with the marker value from the previous call to retrieve the next set of results.'
-    description: Contains the parameters for ListPipelines.
+        description: The version of the pipeline definition to retrieve. Set this parameter to <code>latest</code> (default) to use the last definition saved to the pipeline or <code>active</code> to use the last definition that was activated.
+    description: Contains the parameters for GetPipelineDefinition.
   ListPipelinesOutput:
     type: object
     required:
@@ -1199,6 +1188,344 @@ definitions:
         $ref: '#/definitions/boolean'
         description: Indicates whether there are more results that can be obtained by a subsequent call.
     description: Contains the output of ListPipelines.
+  ListPipelinesInput:
+    type: object
+    properties:
+      marker:
+        $ref: '#/definitions/string'
+        description: 'The starting point for the results to be returned. For the first call, this value should be empty. As long as there are more results, continue to call <code>ListPipelines</code> with the marker value from the previous call to retrieve the next set of results.'
+    description: Contains the parameters for ListPipelines.
+  PollForTaskOutput:
+    type: object
+    properties:
+      taskObject:
+        $ref: '#/definitions/TaskObject'
+        description: 'The information needed to complete the task that is being assigned to the task runner. One of the fields returned in this object is <code>taskId</code>, which contains an identifier for the task being assigned. The calling task runner uses <code>taskId</code> in subsequent calls to <a>ReportTaskProgress</a> and <a>SetTaskStatus</a>.'
+    description: Contains the output of PollForTask.
+  PollForTaskInput:
+    type: object
+    required:
+      - workerGroup
+    properties:
+      workerGroup:
+        $ref: '#/definitions/string'
+        description: 'The type of task the task runner is configured to accept and process. The worker group is set as a field on objects in the pipeline when they are created. You can only specify a single value for <code>workerGroup</code> in the call to <code>PollForTask</code>. There are no wildcard values permitted in <code>workerGroup</code>; the string must be an exact, case-sensitive, match.'
+      hostname:
+        $ref: '#/definitions/id'
+        description: The public DNS name of the calling task runner.
+      instanceIdentity:
+        $ref: '#/definitions/InstanceIdentity'
+        description: 'Identity information for the EC2 instance that is hosting the task runner. You can get this value from the instance using <code>http://169.254.169.254/latest/meta-data/instance-id</code>. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> Passing in this value proves that your task runner is running on an EC2 instance, and ensures the proper AWS Data Pipeline service charges are applied to your pipeline.'
+    description: Contains the parameters for PollForTask.
+  PutPipelineDefinitionOutput:
+    type: object
+    required:
+      - errored
+    properties:
+      validationErrors:
+        $ref: '#/definitions/ValidationErrors'
+        description: The validation errors that are associated with the objects defined in <code>pipelineObjects</code>.
+      validationWarnings:
+        $ref: '#/definitions/ValidationWarnings'
+        description: The validation warnings that are associated with the objects defined in <code>pipelineObjects</code>.
+      errored:
+        $ref: '#/definitions/boolean'
+        description: 'Indicates whether there were validation errors, and the pipeline definition is stored but cannot be activated until you correct the pipeline and call <code>PutPipelineDefinition</code> to commit the corrected pipeline.'
+    description: Contains the output of PutPipelineDefinition.
+  PutPipelineDefinitionInput:
+    type: object
+    required:
+      - pipelineId
+      - pipelineObjects
+    properties:
+      pipelineId:
+        $ref: '#/definitions/id'
+        description: The ID of the pipeline.
+      pipelineObjects:
+        $ref: '#/definitions/PipelineObjectList'
+        description: The objects that define the pipeline. These objects overwrite the existing pipeline definition.
+      parameterObjects:
+        $ref: '#/definitions/ParameterObjectList'
+        description: The parameter objects used with the pipeline.
+      parameterValues:
+        $ref: '#/definitions/ParameterValueList'
+        description: The parameter values used with the pipeline.
+    description: Contains the parameters for PutPipelineDefinition.
+  QueryObjectsOutput:
+    type: object
+    properties:
+      ids:
+        $ref: '#/definitions/idList'
+        description: The identifiers that match the query selectors.
+      marker:
+        $ref: '#/definitions/string'
+        description: 'The starting point for the next page of results. To view the next page of results, call <code>QueryObjects</code> again with this marker value. If the value is null, there are no more results.'
+      hasMoreResults:
+        $ref: '#/definitions/boolean'
+        description: Indicates whether there are more results that can be obtained by a subsequent call.
+    description: Contains the output of QueryObjects.
+  QueryObjectsInput:
+    type: object
+    required:
+      - pipelineId
+      - sphere
+    properties:
+      pipelineId:
+        $ref: '#/definitions/id'
+        description: The ID of the pipeline.
+      query:
+        $ref: '#/definitions/Query'
+        description: 'The query that defines the objects to be returned. The <code>Query</code> object can contain a maximum of ten selectors. The conditions in the query are limited to top-level String fields in the object. These filters can be applied to components, instances, and attempts.'
+      sphere:
+        $ref: '#/definitions/string'
+        description: 'Indicates whether the query applies to components or instances. The possible values are: <code>COMPONENT</code>, <code>INSTANCE</code>, and <code>ATTEMPT</code>.'
+      marker:
+        $ref: '#/definitions/string'
+        description: 'The starting point for the results to be returned. For the first call, this value should be empty. As long as there are more results, continue to call <code>QueryObjects</code> with the marker value from the previous call to retrieve the next set of results.'
+      limit:
+        $ref: '#/definitions/int'
+        description: 'The maximum number of object names that <code>QueryObjects</code> will return in a single call. The default value is 100. '
+    description: Contains the parameters for QueryObjects.
+  RemoveTagsOutput:
+    type: object
+    properties: {}
+    description: Contains the output of RemoveTags.
+  RemoveTagsInput:
+    type: object
+    required:
+      - pipelineId
+      - tagKeys
+    properties:
+      pipelineId:
+        $ref: '#/definitions/id'
+        description: The ID of the pipeline.
+      tagKeys:
+        $ref: '#/definitions/stringList'
+        description: The keys of the tags to remove.
+    description: Contains the parameters for RemoveTags.
+  ReportTaskProgressOutput:
+    type: object
+    required:
+      - canceled
+    properties:
+      canceled:
+        $ref: '#/definitions/boolean'
+        description: 'If true, the calling task runner should cancel processing of the task. The task runner does not need to call <a>SetTaskStatus</a> for canceled tasks.'
+    description: Contains the output of ReportTaskProgress.
+  ReportTaskProgressInput:
+    type: object
+    required:
+      - taskId
+    properties:
+      taskId:
+        $ref: '#/definitions/taskId'
+        description: The ID of the task assigned to the task runner. This value is provided in the response for <a>PollForTask</a>.
+      fields:
+        $ref: '#/definitions/fieldList'
+        description: Key-value pairs that define the properties of the ReportTaskProgressInput object.
+    description: Contains the parameters for ReportTaskProgress.
+  ReportTaskRunnerHeartbeatOutput:
+    type: object
+    required:
+      - terminate
+    properties:
+      terminate:
+        $ref: '#/definitions/boolean'
+        description: Indicates whether the calling task runner should terminate.
+    description: Contains the output of ReportTaskRunnerHeartbeat.
+  ReportTaskRunnerHeartbeatInput:
+    type: object
+    required:
+      - taskrunnerId
+    properties:
+      taskrunnerId:
+        $ref: '#/definitions/id'
+        description: 'The ID of the task runner. This value should be unique across your AWS account. In the case of AWS Data Pipeline Task Runner launched on a resource managed by AWS Data Pipeline, the web service provides a unique identifier when it launches the application. If you have written a custom task runner, you should assign a unique identifier for the task runner.'
+      workerGroup:
+        $ref: '#/definitions/string'
+        description: 'The type of task the task runner is configured to accept and process. The worker group is set as a field on objects in the pipeline when they are created. You can only specify a single value for <code>workerGroup</code>. There are no wildcard values permitted in <code>workerGroup</code>; the string must be an exact, case-sensitive, match.'
+      hostname:
+        $ref: '#/definitions/id'
+        description: The public DNS name of the task runner.
+    description: Contains the parameters for ReportTaskRunnerHeartbeat.
+  SetStatusInput:
+    type: object
+    required:
+      - pipelineId
+      - objectIds
+      - status
+    properties:
+      pipelineId:
+        $ref: '#/definitions/id'
+        description: The ID of the pipeline that contains the objects.
+      objectIds:
+        $ref: '#/definitions/idList'
+        description: 'The IDs of the objects. The corresponding objects can be either physical or components, but not a mix of both types.'
+      status:
+        $ref: '#/definitions/string'
+        description: 'The status to be set on all the objects specified in <code>objectIds</code>. For components, use <code>PAUSE</code> or <code>RESUME</code>. For instances, use <code>TRY_CANCEL</code>, <code>RERUN</code>, or <code>MARK_FINISHED</code>.'
+    description: Contains the parameters for SetStatus.
+  SetTaskStatusOutput:
+    type: object
+    properties: {}
+    description: Contains the output of SetTaskStatus.
+  SetTaskStatusInput:
+    type: object
+    required:
+      - taskId
+      - taskStatus
+    properties:
+      taskId:
+        $ref: '#/definitions/taskId'
+        description: The ID of the task assigned to the task runner. This value is provided in the response for <a>PollForTask</a>.
+      taskStatus:
+        $ref: '#/definitions/TaskStatus'
+        description: 'If <code>FINISHED</code>, the task successfully completed. If <code>FAILED</code>, the task ended unsuccessfully. Preconditions use false.'
+      errorId:
+        $ref: '#/definitions/string'
+        description: 'If an error occurred during the task, this value specifies the error code. This value is set on the physical attempt object. It is used to display error information to the user. It should not start with string "Service_" which is reserved by the system.'
+      errorMessage:
+        $ref: '#/definitions/errorMessage'
+        description: 'If an error occurred during the task, this value specifies a text description of the error. This value is set on the physical attempt object. It is used to display error information to the user. The web service does not parse this value.'
+      errorStackTrace:
+        $ref: '#/definitions/string'
+        description: 'If an error occurred during the task, this value specifies the stack trace associated with the error. This value is set on the physical attempt object. It is used to display error information to the user. The web service does not parse this value.'
+    description: Contains the parameters for SetTaskStatus.
+  ValidatePipelineDefinitionOutput:
+    type: object
+    required:
+      - errored
+    properties:
+      validationErrors:
+        $ref: '#/definitions/ValidationErrors'
+        description: Any validation errors that were found.
+      validationWarnings:
+        $ref: '#/definitions/ValidationWarnings'
+        description: Any validation warnings that were found.
+      errored:
+        $ref: '#/definitions/boolean'
+        description: Indicates whether there were validation errors.
+    description: Contains the output of ValidatePipelineDefinition.
+  ValidatePipelineDefinitionInput:
+    type: object
+    required:
+      - pipelineId
+      - pipelineObjects
+    properties:
+      pipelineId:
+        $ref: '#/definitions/id'
+        description: The ID of the pipeline.
+      pipelineObjects:
+        $ref: '#/definitions/PipelineObjectList'
+        description: The objects that define the pipeline changes to validate against the pipeline.
+      parameterObjects:
+        $ref: '#/definitions/ParameterObjectList'
+        description: The parameter objects used with the pipeline.
+      parameterValues:
+        $ref: '#/definitions/ParameterValueList'
+        description: The parameter values used with the pipeline.
+    description: Contains the parameters for ValidatePipelineDefinition.
+  id:
+    type: string
+    minLength: 1
+    maxLength: 1024
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  ParameterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterValue'
+  timestamp:
+    type: string
+    format: date-time
+  tagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 10
+  string:
+    type: string
+    minLength: 0
+    maxLength: 1024
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  cancelActive:
+    type: boolean
+  idList:
+    type: array
+    items:
+      $ref: '#/definitions/id'
+  boolean:
+    type: boolean
+  PipelineObjectList:
+    type: array
+    items:
+      $ref: '#/definitions/PipelineObject'
+  PipelineDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/PipelineDescription'
+  longString:
+    type: string
+    minLength: 0
+    maxLength: 20971520
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  fieldNameString:
+    type: string
+    minLength: 1
+    maxLength: 256
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  fieldStringValue:
+    type: string
+    minLength: 0
+    maxLength: 10240
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  Field:
+    type: object
+    required:
+      - key
+    properties:
+      key:
+        $ref: '#/definitions/fieldNameString'
+        description: The field identifier.
+      stringValue:
+        $ref: '#/definitions/fieldStringValue'
+        description: 'The field value, expressed as a String.'
+      refValue:
+        $ref: '#/definitions/fieldNameString'
+        description: 'The field value, expressed as the identifier of another object.'
+    description: A key-value pair that describes a property of a pipeline object. The value is specified as either a string value (<code>StringValue</code>) or a reference to another object (<code>RefValue</code>) but not as both.
+  ParameterObjectList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterObject'
+  InstanceIdentity:
+    type: object
+    properties:
+      document:
+        $ref: '#/definitions/string'
+        description: A description of an EC2 instance that is generated when the instance is launched and exposed to the instance via the instance metadata service in the form of a JSON representation of an object.
+      signature:
+        $ref: '#/definitions/string'
+        description: A signature which can be used to verify the accuracy and authenticity of the information provided in the instance identity document.
+    description: '<p><p>Identity information for the EC2 instance that is hosting the task runner. You can get this value by calling a metadata URI from the EC2 instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> Passing in this value proves that your task runner is running on an EC2 instance, and ensures the proper AWS Data Pipeline service charges are applied to your pipeline.</p></p>'
+  errorMessage:
+    type: string
+  pipelineList:
+    type: array
+    items:
+      $ref: '#/definitions/PipelineIdName'
+  OperatorType:
+    type: string
+    enum:
+      - EQ
+      - REF_EQ
+      - LE
+      - GE
+      - BETWEEN
+  stringList:
+    type: array
+    items:
+      $ref: '#/definitions/string'
   Operator:
     type: object
     properties:
@@ -1209,14 +1536,16 @@ definitions:
         $ref: '#/definitions/stringList'
         description: The value that the actual field value will be compared with.
     description: Contains a logical operation for comparing the value of a field with a specified value.
-  OperatorType:
+  attributeNameString:
     type: string
-    enum:
-      - EQ
-      - REF_EQ
-      - LE
-      - GE
-      - BETWEEN
+    minLength: 1
+    maxLength: 256
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  attributeValueString:
+    type: string
+    minLength: 0
+    maxLength: 10240
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   ParameterAttribute:
     type: object
     required:
@@ -1247,10 +1576,6 @@ definitions:
         $ref: '#/definitions/ParameterAttributeList'
         description: The attributes of the parameter object.
     description: Contains information about a parameter object.
-  ParameterObjectList:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterObject'
   ParameterValue:
     type: object
     required:
@@ -1264,17 +1589,10 @@ definitions:
         $ref: '#/definitions/fieldStringValue'
         description: 'The field value, expressed as a String.'
     description: 'A value or list of parameter values. '
-  ParameterValueList:
+  fieldList:
     type: array
     items:
-      $ref: '#/definitions/ParameterValue'
-  PipelineDeletedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/errorMessage'
-        description: Description of the error message.
-    description: The specified pipeline has been deleted.
+      $ref: '#/definitions/Field'
   PipelineDescription:
     type: object
     required:
@@ -1298,10 +1616,6 @@ definitions:
         $ref: '#/definitions/tagList'
         description: 'A list of tags to associated with a pipeline. Tags let you control access to pipelines. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
     description: Contains pipeline metadata.
-  PipelineDescriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/PipelineDescription'
   PipelineIdName:
     type: object
     properties:
@@ -1312,13 +1626,6 @@ definitions:
         $ref: '#/definitions/id'
         description: The name of the pipeline.
     description: Contains the name and identifier of a pipeline.
-  PipelineNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/errorMessage'
-        description: Description of the error message.
-    description: The specified pipeline was not found. Verify that you used the correct user and account identifiers.
   PipelineObject:
     type: object
     required:
@@ -1336,10 +1643,6 @@ definitions:
         $ref: '#/definitions/fieldList'
         description: Key-value pairs that define the properties of the object.
     description: 'Contains information about a pipeline object. This can be a logical, physical, or physical attempt pipeline object. The complete set of components of a pipeline defines the pipeline.'
-  PipelineObjectList:
-    type: array
-    items:
-      $ref: '#/definitions/PipelineObject'
   PipelineObjectMap:
     type: array
     items:
@@ -1349,243 +1652,6 @@ definitions:
           $ref: '#/definitions/id'
         value:
           $ref: '#/definitions/PipelineObject'
-  PollForTaskInput:
-    type: object
-    required:
-      - workerGroup
-    properties:
-      workerGroup:
-        $ref: '#/definitions/string'
-        description: 'The type of task the task runner is configured to accept and process. The worker group is set as a field on objects in the pipeline when they are created. You can only specify a single value for <code>workerGroup</code> in the call to <code>PollForTask</code>. There are no wildcard values permitted in <code>workerGroup</code>; the string must be an exact, case-sensitive, match.'
-      hostname:
-        $ref: '#/definitions/id'
-        description: The public DNS name of the calling task runner.
-      instanceIdentity:
-        $ref: '#/definitions/InstanceIdentity'
-        description: 'Identity information for the EC2 instance that is hosting the task runner. You can get this value from the instance using <code>http://169.254.169.254/latest/meta-data/instance-id</code>. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> Passing in this value proves that your task runner is running on an EC2 instance, and ensures the proper AWS Data Pipeline service charges are applied to your pipeline.'
-    description: Contains the parameters for PollForTask.
-  PollForTaskOutput:
-    type: object
-    properties:
-      taskObject:
-        $ref: '#/definitions/TaskObject'
-        description: 'The information needed to complete the task that is being assigned to the task runner. One of the fields returned in this object is <code>taskId</code>, which contains an identifier for the task being assigned. The calling task runner uses <code>taskId</code> in subsequent calls to <a>ReportTaskProgress</a> and <a>SetTaskStatus</a>.'
-    description: Contains the output of PollForTask.
-  PutPipelineDefinitionInput:
-    type: object
-    required:
-      - pipelineId
-      - pipelineObjects
-    properties:
-      pipelineId:
-        $ref: '#/definitions/id'
-        description: The ID of the pipeline.
-      pipelineObjects:
-        $ref: '#/definitions/PipelineObjectList'
-        description: The objects that define the pipeline. These objects overwrite the existing pipeline definition.
-      parameterObjects:
-        $ref: '#/definitions/ParameterObjectList'
-        description: The parameter objects used with the pipeline.
-      parameterValues:
-        $ref: '#/definitions/ParameterValueList'
-        description: The parameter values used with the pipeline.
-    description: Contains the parameters for PutPipelineDefinition.
-  PutPipelineDefinitionOutput:
-    type: object
-    required:
-      - errored
-    properties:
-      validationErrors:
-        $ref: '#/definitions/ValidationErrors'
-        description: The validation errors that are associated with the objects defined in <code>pipelineObjects</code>.
-      validationWarnings:
-        $ref: '#/definitions/ValidationWarnings'
-        description: The validation warnings that are associated with the objects defined in <code>pipelineObjects</code>.
-      errored:
-        $ref: '#/definitions/boolean'
-        description: 'Indicates whether there were validation errors, and the pipeline definition is stored but cannot be activated until you correct the pipeline and call <code>PutPipelineDefinition</code> to commit the corrected pipeline.'
-    description: Contains the output of PutPipelineDefinition.
-  Query:
-    type: object
-    properties:
-      selectors:
-        $ref: '#/definitions/SelectorList'
-        description: List of selectors that define the query. An object must satisfy all of the selectors to match the query.
-    description: Defines the query to run against an object.
-  QueryObjectsInput:
-    type: object
-    required:
-      - pipelineId
-      - sphere
-    properties:
-      pipelineId:
-        $ref: '#/definitions/id'
-        description: The ID of the pipeline.
-      query:
-        $ref: '#/definitions/Query'
-        description: 'The query that defines the objects to be returned. The <code>Query</code> object can contain a maximum of ten selectors. The conditions in the query are limited to top-level String fields in the object. These filters can be applied to components, instances, and attempts.'
-      sphere:
-        $ref: '#/definitions/string'
-        description: 'Indicates whether the query applies to components or instances. The possible values are: <code>COMPONENT</code>, <code>INSTANCE</code>, and <code>ATTEMPT</code>.'
-      marker:
-        $ref: '#/definitions/string'
-        description: 'The starting point for the results to be returned. For the first call, this value should be empty. As long as there are more results, continue to call <code>QueryObjects</code> with the marker value from the previous call to retrieve the next set of results.'
-      limit:
-        $ref: '#/definitions/int'
-        description: 'The maximum number of object names that <code>QueryObjects</code> will return in a single call. The default value is 100. '
-    description: Contains the parameters for QueryObjects.
-  QueryObjectsOutput:
-    type: object
-    properties:
-      ids:
-        $ref: '#/definitions/idList'
-        description: The identifiers that match the query selectors.
-      marker:
-        $ref: '#/definitions/string'
-        description: 'The starting point for the next page of results. To view the next page of results, call <code>QueryObjects</code> again with this marker value. If the value is null, there are no more results.'
-      hasMoreResults:
-        $ref: '#/definitions/boolean'
-        description: Indicates whether there are more results that can be obtained by a subsequent call.
-    description: Contains the output of QueryObjects.
-  RemoveTagsInput:
-    type: object
-    required:
-      - pipelineId
-      - tagKeys
-    properties:
-      pipelineId:
-        $ref: '#/definitions/id'
-        description: The ID of the pipeline.
-      tagKeys:
-        $ref: '#/definitions/stringList'
-        description: The keys of the tags to remove.
-    description: Contains the parameters for RemoveTags.
-  RemoveTagsOutput:
-    type: object
-    properties: {}
-    description: Contains the output of RemoveTags.
-  ReportTaskProgressInput:
-    type: object
-    required:
-      - taskId
-    properties:
-      taskId:
-        $ref: '#/definitions/taskId'
-        description: The ID of the task assigned to the task runner. This value is provided in the response for <a>PollForTask</a>.
-      fields:
-        $ref: '#/definitions/fieldList'
-        description: Key-value pairs that define the properties of the ReportTaskProgressInput object.
-    description: Contains the parameters for ReportTaskProgress.
-  ReportTaskProgressOutput:
-    type: object
-    required:
-      - canceled
-    properties:
-      canceled:
-        $ref: '#/definitions/boolean'
-        description: 'If true, the calling task runner should cancel processing of the task. The task runner does not need to call <a>SetTaskStatus</a> for canceled tasks.'
-    description: Contains the output of ReportTaskProgress.
-  ReportTaskRunnerHeartbeatInput:
-    type: object
-    required:
-      - taskrunnerId
-    properties:
-      taskrunnerId:
-        $ref: '#/definitions/id'
-        description: 'The ID of the task runner. This value should be unique across your AWS account. In the case of AWS Data Pipeline Task Runner launched on a resource managed by AWS Data Pipeline, the web service provides a unique identifier when it launches the application. If you have written a custom task runner, you should assign a unique identifier for the task runner.'
-      workerGroup:
-        $ref: '#/definitions/string'
-        description: 'The type of task the task runner is configured to accept and process. The worker group is set as a field on objects in the pipeline when they are created. You can only specify a single value for <code>workerGroup</code>. There are no wildcard values permitted in <code>workerGroup</code>; the string must be an exact, case-sensitive, match.'
-      hostname:
-        $ref: '#/definitions/id'
-        description: The public DNS name of the task runner.
-    description: Contains the parameters for ReportTaskRunnerHeartbeat.
-  ReportTaskRunnerHeartbeatOutput:
-    type: object
-    required:
-      - terminate
-    properties:
-      terminate:
-        $ref: '#/definitions/boolean'
-        description: Indicates whether the calling task runner should terminate.
-    description: Contains the output of ReportTaskRunnerHeartbeat.
-  Selector:
-    type: object
-    properties:
-      fieldName:
-        $ref: '#/definitions/string'
-        description: 'The name of the field that the operator will be applied to. The field name is the "key" portion of the field definition in the pipeline definition syntax that is used by the AWS Data Pipeline API. If the field is not set on the object, the condition fails.'
-      operator:
-        $ref: '#/definitions/Operator'
-    description: A comparision that is used to determine whether a query should return this object.
-  SelectorList:
-    type: array
-    description: The list of Selectors that define queries on individual fields.
-    items:
-      $ref: '#/definitions/Selector'
-  SetStatusInput:
-    type: object
-    required:
-      - pipelineId
-      - objectIds
-      - status
-    properties:
-      pipelineId:
-        $ref: '#/definitions/id'
-        description: The ID of the pipeline that contains the objects.
-      objectIds:
-        $ref: '#/definitions/idList'
-        description: 'The IDs of the objects. The corresponding objects can be either physical or components, but not a mix of both types.'
-      status:
-        $ref: '#/definitions/string'
-        description: 'The status to be set on all the objects specified in <code>objectIds</code>. For components, use <code>PAUSE</code> or <code>RESUME</code>. For instances, use <code>TRY_CANCEL</code>, <code>RERUN</code>, or <code>MARK_FINISHED</code>.'
-    description: Contains the parameters for SetStatus.
-  SetTaskStatusInput:
-    type: object
-    required:
-      - taskId
-      - taskStatus
-    properties:
-      taskId:
-        $ref: '#/definitions/taskId'
-        description: The ID of the task assigned to the task runner. This value is provided in the response for <a>PollForTask</a>.
-      taskStatus:
-        $ref: '#/definitions/TaskStatus'
-        description: 'If <code>FINISHED</code>, the task successfully completed. If <code>FAILED</code>, the task ended unsuccessfully. Preconditions use false.'
-      errorId:
-        $ref: '#/definitions/string'
-        description: 'If an error occurred during the task, this value specifies the error code. This value is set on the physical attempt object. It is used to display error information to the user. It should not start with string "Service_" which is reserved by the system.'
-      errorMessage:
-        $ref: '#/definitions/errorMessage'
-        description: 'If an error occurred during the task, this value specifies a text description of the error. This value is set on the physical attempt object. It is used to display error information to the user. The web service does not parse this value.'
-      errorStackTrace:
-        $ref: '#/definitions/string'
-        description: 'If an error occurred during the task, this value specifies the stack trace associated with the error. This value is set on the physical attempt object. It is used to display error information to the user. The web service does not parse this value.'
-    description: Contains the parameters for SetTaskStatus.
-  SetTaskStatusOutput:
-    type: object
-    properties: {}
-    description: Contains the output of SetTaskStatus.
-  Tag:
-    type: object
-    required:
-      - key
-      - value
-    properties:
-      key:
-        $ref: '#/definitions/tagKey'
-        description: 'The key name of a tag defined by a user. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
-      value:
-        $ref: '#/definitions/tagValue'
-        description: 'The optional value portion of a tag defined by a user. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
-    description: 'Tags are key/value pairs defined by a user and associated with a pipeline to control access. AWS Data Pipeline allows you to associate ten tags per pipeline. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
-  TaskNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/errorMessage'
-        description: Description of the error message.
-    description: 'The specified task was not found. '
   TaskObject:
     type: object
     properties:
@@ -1602,46 +1668,73 @@ definitions:
         $ref: '#/definitions/PipelineObjectMap'
         description: Connection information for the location where the task runner will publish the output of the task.
     description: Contains information about a pipeline task that is assigned to a task runner.
+  ValidationErrors:
+    type: array
+    items:
+      $ref: '#/definitions/ValidationError'
+  ValidationWarnings:
+    type: array
+    items:
+      $ref: '#/definitions/ValidationWarning'
+  SelectorList:
+    type: array
+    description: The list of Selectors that define queries on individual fields.
+    items:
+      $ref: '#/definitions/Selector'
+  Query:
+    type: object
+    properties:
+      selectors:
+        $ref: '#/definitions/SelectorList'
+        description: List of selectors that define the query. An object must satisfy all of the selectors to match the query.
+    description: Defines the query to run against an object.
+  int:
+    type: integer
+  taskId:
+    type: string
+    minLength: 1
+    maxLength: 2048
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  Selector:
+    type: object
+    properties:
+      fieldName:
+        $ref: '#/definitions/string'
+        description: 'The name of the field that the operator will be applied to. The field name is the "key" portion of the field definition in the pipeline definition syntax that is used by the AWS Data Pipeline API. If the field is not set on the object, the condition fails.'
+      operator:
+        $ref: '#/definitions/Operator'
+    description: A comparision that is used to determine whether a query should return this object.
   TaskStatus:
     type: string
     enum:
       - FINISHED
       - FAILED
       - 'FALSE'
-  ValidatePipelineDefinitionInput:
+  tagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  tagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Tag:
     type: object
     required:
-      - pipelineId
-      - pipelineObjects
+      - key
+      - value
     properties:
-      pipelineId:
-        $ref: '#/definitions/id'
-        description: The ID of the pipeline.
-      pipelineObjects:
-        $ref: '#/definitions/PipelineObjectList'
-        description: The objects that define the pipeline changes to validate against the pipeline.
-      parameterObjects:
-        $ref: '#/definitions/ParameterObjectList'
-        description: The parameter objects used with the pipeline.
-      parameterValues:
-        $ref: '#/definitions/ParameterValueList'
-        description: The parameter values used with the pipeline.
-    description: Contains the parameters for ValidatePipelineDefinition.
-  ValidatePipelineDefinitionOutput:
-    type: object
-    required:
-      - errored
-    properties:
-      validationErrors:
-        $ref: '#/definitions/ValidationErrors'
-        description: Any validation errors that were found.
-      validationWarnings:
-        $ref: '#/definitions/ValidationWarnings'
-        description: Any validation warnings that were found.
-      errored:
-        $ref: '#/definitions/boolean'
-        description: Indicates whether there were validation errors.
-    description: Contains the output of ValidatePipelineDefinition.
+      key:
+        $ref: '#/definitions/tagKey'
+        description: 'The key name of a tag defined by a user. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
+      value:
+        $ref: '#/definitions/tagValue'
+        description: 'The optional value portion of a tag defined by a user. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
+    description: 'Tags are key/value pairs defined by a user and associated with a pipeline to control access. AWS Data Pipeline allows you to associate ten tags per pipeline. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
+  validationMessages:
+    type: array
+    items:
+      $ref: '#/definitions/validationMessage'
   ValidationError:
     type: object
     properties:
@@ -1652,10 +1745,6 @@ definitions:
         $ref: '#/definitions/validationMessages'
         description: A description of the validation error.
     description: Defines a validation error. Validation errors prevent pipeline activation. The set of validation errors that can be returned are defined by AWS Data Pipeline.
-  ValidationErrors:
-    type: array
-    items:
-      $ref: '#/definitions/ValidationError'
   ValidationWarning:
     type: object
     properties:
@@ -1666,97 +1755,8 @@ definitions:
         $ref: '#/definitions/validationMessages'
         description: A description of the validation warning.
     description: Defines a validation warning. Validation warnings do not prevent pipeline activation. The set of validation warnings that can be returned are defined by AWS Data Pipeline.
-  ValidationWarnings:
-    type: array
-    items:
-      $ref: '#/definitions/ValidationWarning'
-  attributeNameString:
-    type: string
-    minLength: 1
-    maxLength: 256
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  attributeValueString:
-    type: string
-    minLength: 0
-    maxLength: 10240
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  boolean:
-    type: boolean
-  cancelActive:
-    type: boolean
-  errorMessage:
-    type: string
-  fieldList:
-    type: array
-    items:
-      $ref: '#/definitions/Field'
-  fieldNameString:
-    type: string
-    minLength: 1
-    maxLength: 256
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  fieldStringValue:
-    type: string
-    minLength: 0
-    maxLength: 10240
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  id:
-    type: string
-    minLength: 1
-    maxLength: 1024
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  idList:
-    type: array
-    items:
-      $ref: '#/definitions/id'
-  int:
-    type: integer
-  longString:
-    type: string
-    minLength: 0
-    maxLength: 20971520
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  pipelineList:
-    type: array
-    items:
-      $ref: '#/definitions/PipelineIdName'
-  string:
-    type: string
-    minLength: 0
-    maxLength: 1024
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  stringList:
-    type: array
-    items:
-      $ref: '#/definitions/string'
-  tagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  tagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 0
-    maxItems: 10
-  tagValue:
-    type: string
-    minLength: 0
-    maxLength: 256
-  taskId:
-    type: string
-    minLength: 1
-    maxLength: 2048
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  timestamp:
-    type: string
-    format: date-time
   validationMessage:
     type: string
     minLength: 0
     maxLength: 10000
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  validationMessages:
-    type: array
-    items:
-      $ref: '#/definitions/validationMessage'

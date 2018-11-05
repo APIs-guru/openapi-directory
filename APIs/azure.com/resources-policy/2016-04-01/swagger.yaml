@@ -425,6 +425,7 @@ definitions:
     properties:
       id:
         description: The ID of the policy definition.
+        readOnly: true
         type: string
       name:
         description: 'The name of the policy definition. If you do not specify a value for name, the value is inferred from the name value in the request URI.'

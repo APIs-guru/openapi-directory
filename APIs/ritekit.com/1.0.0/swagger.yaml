@@ -17,89 +17,15 @@ info:
 
     1. Click "Create a token" button to get your **Client ID** and **Client secret**
 
-    1. Study the documentation below (for more info on oAuth go to http://oauth.net/)
-
     1. When you reach your free limit of calls per month, [upgrade to paid tiers](https://ritekit.com/developer/)
 
     ## Options for authorizing API Calls
 
-    #### A) Using Client ID directly
+    #### Using Client ID directly
 
     You can directly connect to our API using your **client ID** by sending it as a GET query parameter. This option is simple (no need for oAuth) but it should be used only in case the Client ID is not exposed publicly.
 
-    GET  https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php?client_id=292c6912e7710c838347ae178b4a
-
-    #### B) Using Access token (oAuth 2.0)
-
-    Once you have valid Access token, you can access our API by sending the token in the Authorization header bearer or as a query Access token. See the oAuth 2.0 section to learn how to get Access token and keep refreshing it.
-
-    Authorization: Bearer xxxx
-
-    Or
-
-    GET  https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php?access_token=292c6912e7710c838347ae178b4a
-
-    ## oAuth 2.0
-
-    ![oauthschema](https://cdn.ritekit.com/assets/media/1/oauth-simple.png)
-
-    ### Get Access Token
-
-    Use your Client Credentials to get the token.
-
-    POST   https://ritekit.com/oauth/token
-
-               grant_type=client_credentials
-               &client_id=CLIENT_ID
-               &client_secret=CLIENT_SECRET
-               &scope=data
-
-    - [required] grant_type - client_credentials
-
-    - [required] client_id (CLIENT ID)
-
-    - [required] client_secret (CLIENT SECRET)
-
-    - [required] (always use scope=data)
-
-    #### Response
-
-    {
-            "access_token":292c6912e7710c838347ae178b4a,
-            "token_type":"bearer",
-            "expires_in": 3600,
-            "refresh_token":292c6912e7710c838347ae178b4a,
-        }
-
-    ### Refresh token
-
-    Every Access token has a lifetime. You can use Refresh token to request a new Access Token.
-
-    POST   https://ritekit.com/oauth/token
-
-               grant_type=refresh_token
-               &refresh_token=REFRESH_TOKEN
-               &client_id=CLIENT_ID
-               &scope=data
-
-    - [required] grant_type - refresh_token
-
-    - [required] refresh_token - (REFRESH TOKEN) the refresh token you got from the expired token
-
-    - [required] client_id (CLIENT ID)
-
-    - [required] client_secret (CLIENT SECRET)
-
-    - [required] scope (always use scope=data)
-
-    #### Response
-
-    {
-            "access_token":292c6912e7710c838347ae178b4a,
-            "token_type":"bearer",
-            "expires_in": 3600,
-            "refresh_token":292c6912e7710c838347ae178b4a,
-        }
+    GET  https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=292c6912e7710c838347ae178b4a
   title: RiteKit
   version: 1.0.0
   x-apisguru-categories:
@@ -109,7 +35,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: apiBlueprint
       url: 'https://raw.githubusercontent.com/RiteKit/api-docs/master/apiary.apib'
       version: 1A
@@ -124,6 +50,7 @@ paths:
           name: text
           required: true
           type: string
+          x-example: Why robots may soon steal all manufacturing jobs – but it’s not all bad news
       produces:
         - application/json; charset=utf-8
       responses:
@@ -147,6 +74,7 @@ paths:
           name: text
           required: true
           type: string
+          x-example: Why robots may soon steal all manufacturing jobs – but it’s not all bad news
       produces:
         - application/json; charset=utf-8
       responses:
@@ -173,11 +101,13 @@ paths:
           name: url
           required: true
           type: string
+          x-example: 'https://jpeg.org/images/jpeg-home.jpg'
         - description: URL of the company
           in: query
           name: type
           required: true
           type: string
+          x-example: glint
       produces:
         - image/gif
       responses:
@@ -197,6 +127,7 @@ paths:
           name: domain
           required: true
           type: string
+          x-example: google.com
       produces:
         - image/png
       responses:
@@ -216,76 +147,102 @@ paths:
           name: quote
           required: true
           type: string
+          x-example: 'If you love life, don''t waste time, for time is what life is made up of'
         - description: Name of the author/source
           in: query
           name: author
           required: true
           type: string
+          x-example: Bruce Lee
         - description: Font size for the quote (author font size is calculated automatically)
           in: query
           name: fontSize
           required: true
           type: integer
+          x-example: '60'
         - description: Font-family used for quote text
           in: query
           name: quoteFont
           required: true
           type: string
+          x-example: Lora
         - description: Font color of the quote text
           in: query
           name: quoteFontColor
           required: true
           type: string
+          x-example: '#4f4f4f'
         - description: Font-family used for author name
           in: query
           name: authorFont
           required: true
           type: string
+          x-example: Lato Black
         - description: Font color of the author
           in: query
           name: authorFontColor
           required: true
           type: string
+          x-example: '#e5e5e5'
         - description: Enable highlight on quote text
           in: query
           name: enableHighlight
           required: true
           type: integer
+          x-example: '1'
         - description: Color used for highlight
           in: query
           name: highlightColor
           required: true
           type: string
+          x-example: '#f0ea66'
         - description: Background type (gradient/solid)
           in: query
           name: bgType
           required: true
           type: string
+          x-example: gradient
         - description: Background color for solid background type
           in: query
           name: backgroundColor
           required: true
           type: string
+          x-example: '#000000'
         - description: Type of gradient background (linear/radial)
           in: query
           name: gradientType
           required: true
           type: string
+          x-example: linear
         - description: First color for gradient background type
           in: query
           name: gradientColor1
           required: true
           type: string
+          x-example: '#1ee691'
         - description: Second color for gradient background type
           in: query
           name: gradientColor2
           required: true
           type: string
+          x-example: '#1ddad6'
         - description: URL of the brand logo
           in: query
           name: brandLogo
           required: true
           type: string
+          x-example: 'https://cdn.ritekit.com/assets/img/common/made-with-ritekit-white.png'
+        - description: 'Animation type: none, rays, glint, circle'
+          in: query
+          name: animation
+          required: true
+          type: string
+          x-example: glint
+        - description: showing/hiding quote mark
+          in: query
+          name: showQuoteMark
+          required: false
+          type: integer
       produces:
         - application/json; charset=utf-8
       responses:
@@ -307,6 +264,7 @@ paths:
           name: hashtag
           required: true
           type: string
+          x-example: SocialMedia
       produces:
         - application/json; charset=utf-8
       responses:
@@ -385,11 +343,13 @@ paths:
           name: url
           required: true
           type: string
+          x-example: 'https://ritekit.com'
         - description: cta id
           in: query
           name: cta
           required: true
           type: integer
+          x-example: '6530'
       produces:
         - application/json; charset=utf-8
       responses:
@@ -587,14 +547,27 @@ paths:
           headers: {}
       summary: Trending Hashtags
       tags: []
-  '/v1/stats/auto-hashtag?post={post}':
+  /v1/stats/auto-hashtag:
     get:
       description: Returns auto-hashtagged text of the post.
       parameters:
         - description: Text of the post
-          in: path
+          in: query
           name: post
           required: true
+          type: string
+          x-example: Is artificial intelligence the future of customer service?
+        - default: 2
+          description: Max number of hashtags.
+          in: query
+          name: maxHashtags
+          required: false
+          type: integer
+        - default: auto
+          description: 'Position of hashtags: end => at the end, auto => anywhere'
+          in: query
+          name: hashtagPosition
+          required: false
           type: string
       produces:
         - application/json; charset=utf-8
@@ -610,15 +583,16 @@ paths:
           headers: {}
       summary: Auto-Hashtag
       tags: []
-  '/v1/stats/hashtag-suggestions/{topic}':
+  /v1/stats/hashtag-suggestions:
     get:
-      description: Returns list of hashtag suggestions and their real-time stats for a given topic
+      description: Returns list of hashtag suggestions for a single-word topic or a shorter text up to 1000 characters. Takes into account both semantic relevancy and real-time hashtag popularity.
       parameters:
         - description: Topic
-          in: path
-          name: topic
+          in: query
+          name: text
           required: true
           type: string
+          x-example: seo
       produces:
         - application/json; charset=utf-8
       responses:
@@ -652,6 +626,7 @@ paths:
           name: hashtag
           required: true
           type: string
+          x-example: job
       produces:
         - application/json; charset=utf-8
       responses:
@@ -952,6 +927,7 @@ paths:
           name: tags
           required: true
           type: array
+          x-example: 'jobs,hello'
       produces:
         - application/json; charset=utf-8
       responses:
@@ -992,9 +968,37 @@ paths:
           headers: {}
       summary: Hashtag Stats
       tags: []
+  /v2/instagram/hashtags-cleaner:
+    get:
+      description: Remove banned hashtags before posting to Instagram
+      parameters:
+        - description: post
+          in: query
+          name: post
+          required: true
+          type: string
+          x-example: '#instaphotography #instabeauty #instagirls #instanature #instagirl #photography #beauty #girls #nature #girl #sky #water #lady #ladies #woman #women #photograph #photographs #beauties #sunlight #sitting #waters #skies #sit #photographies'
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json; charset=utf-8:
+              bannedHashtags:
+                - '#instagirl'
+                - '#woman'
+                - '#women'
+              message: OK
+              post: '#instaphotography #instabeauty #instagirls #instanature #photography #beauty #girls #nature #girl #sky #water #lady #ladies #photograph #photographs #beauties #sunlight #sitting #waters #skies #sit #photographies'
+              result: true
+          headers: {}
+      summary: Hashtags cleaner
+      tags: []
 definitions:
   Emojis: {}
   Hashtags: {}
   Images: {}
   Influencers: {}
+  Instagram: {}
   Link_shortening: {}

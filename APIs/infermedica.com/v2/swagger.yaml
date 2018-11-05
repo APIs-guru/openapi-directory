@@ -702,19 +702,28 @@ definitions:
   ParseRequest:
     properties:
       concept_types:
+        description: list of concept types that should be captured
         items:
           enum:
             - symptom
             - risk_factor
           type: string
         type: array
+      context:
+        description: ordered list of ids of present symptoms that were already captured and can be used as context
+        items:
+          type: string
+        type: array
       correct_spelling:
         default: false
+        description: correct spelling of input text before proper analysis
         type: boolean
       include_tokens:
         default: false
+        description: include tokenization details in output
         type: boolean
       text:
+        description: user text to process
         type: string
     required:
       - text
@@ -722,13 +731,21 @@ definitions:
   ParseResponse:
     properties:
       mentions:
+        description: list of recognized symptom or risk factor mentions
         items:
           $ref: '#/definitions/ObservationMention'
         type: array
+      obvious:
+        default: false
+        description: indicates that entire input text has been parsed successfully and unambiguously
+        type: boolean
       tokens:
         items:
           type: string
         type: array
+    required:
+      - mentions
+      - obvious
     type: object
   Question:
     properties:

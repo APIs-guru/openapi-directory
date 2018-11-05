@@ -91,8 +91,8 @@ info:
 
     Many RETS vendors have strict requirements for showing disclaimers
     with specific information embedded. For example, in many areas it's
-    required to show the time of the last listing refresh inside the
-    disclaimer.
+    required to show the timestamp of the time the listings were
+    refreshed inside a disclaimer or on a listing page.
 
     The timestamp of the last listing refresh timestamp can be found in
     one of two spots:
@@ -104,10 +104,14 @@ info:
 
       - `OPTIONS /`
 
-        Using this route, you can see the timestamp for all RETS
-        vendors associated with your account.
+        This request will show the last update timestamp for all RETS
+        vendors associated with your application. Look for the
+        `updates` list in the JSON response.
 
       - `OPTIONS /properties`
+
+        Using this request, look for the `lastUpdate` field in the JSON
+        response.
   title: SimplyRETS
   version: 1.0.0
   x-origin:
@@ -155,11 +159,15 @@ paths:
           type: string
         - collectionFormat: multi
           description: |
-            Filter the openhouses returned by a list of valid cities. A
-            list of valid cities can be found by making an OPTIONS
-            request to the `/openhouses` endpoint.
+            Filter the openhouses returned by a list of valid cities.
 
             The `cities` query parameter is case-insensitive.
+
+            The list of `cities` provided by your RETS vendor can be
+            seen by sending an `OPTIONS` request to the `/properties`
+            endpoint:
+
+            `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/openhouses`
           in: query
           items:
             type: string
@@ -600,6 +608,8 @@ paths:
             parameter is required on multi-MLS apps, and you can only
             query one vendor at a time. To get your vendor id's make
             an OPTIONS request to https://api.simplyrets.com.
+
+            `curl -XOPTIONS https://api.simplyrets.com/properties`
           in: query
           name: vendor
           required: false
@@ -629,11 +639,11 @@ paths:
 
             e.g. `https://simplyrets.com/services?features=Wet%20Bar&features=High%20Ceiling`
 
-            The features provided by your MLS can be seen in your
-            OPTIONS request. To view all valid features, make a
-            request to the SimplyRETS api root
+            The list of `features` provided by your RETS vendor can be
+            seen by sending an `OPTIONS` request to the `/properties`
+            endpoint:
 
-            `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`
+            `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/properties`
           in: query
           items:
             type: string
@@ -643,6 +653,15 @@ paths:
         - description: |
             Query water/waterfront listings only. Specify `true` to
             filter waterfront listings.
+
+            If you specify `water=true`, all listings with any `waterfront` value
+            will be queried.
+
+            If you specify `water=false`, listings which are **NOT** waterfront
+            listings will be queried.
+
+            If you specify `water=LAKE+NAME` or another valid value contained in
+            your feed, that value will be searched
           in: query
           name: water
           required: false
@@ -654,6 +673,12 @@ paths:
             using the query parameter multiple times.
 
             The `neighborhoods` query parameter is case-insensitive.
+
+            The list of `neighborhoods` provided by your RETS vendor can be
+            seen by sending an `OPTIONS` request to the `/properties`
+            endpoint:
+
+            `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/properties`
           in: query
           items:
             type: string
@@ -666,6 +691,12 @@ paths:
             specify multiple `cities` query parameters.
 
             The `cities` query parameter is case-insensitive.
+
+            The list of `cities` provided by your RETS vendor can be
+            seen by sending an `OPTIONS` request to the `/properties`
+            endpoint:
+
+            `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/openhouses`
           in: query
           items:
             type: string
@@ -678,6 +709,12 @@ paths:
             specify multiple `counties` parameters.
 
             The `counties` query parameter is case-insensitive.
+
+            The list of `counties` provided by your RETS vendor can be
+            seen by sending an `OPTIONS` request to the `/properties`
+            endpoint:
+
+            `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/openhouses`
           in: query
           items:
             type: string

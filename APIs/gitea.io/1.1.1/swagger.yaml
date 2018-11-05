@@ -1,0 +1,5677 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: try.gitea.io
+basePath: /api/v1
+info:
+  contact:
+    x-twitter: giteaio
+  description: This documentation describes the Gitea API.
+  license:
+    name: MIT
+    url: 'http://opensource.org/licenses/MIT'
+  title: Gitea API.
+  version: 1.1.1
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: 'https://twitter.com/giteaio/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://try.gitea.io/swagger.v1.json'
+      version: '2.0'
+  x-providerName: gitea.io
+consumes:
+  - application/json
+  - text/plain
+produces:
+  - application/json
+  - text/html
+securityDefinitions:
+  AccessToken:
+    in: query
+    name: access_token
+    type: apiKey
+  AuthorizationHeaderToken:
+    in: header
+    name: Authorization
+    type: apiKey
+  BasicAuth:
+    type: basic
+  SudoHeader:
+    description: Sudo API request as the user provided as the key. Admin privileges are required.
+    in: header
+    name: Sudo
+    type: apiKey
+  SudoParam:
+    description: Sudo API request as the user provided as the key. Admin privileges are required.
+    in: query
+    name: sudo
+    type: apiKey
+  Token:
+    in: query
+    name: token
+    type: apiKey
+security:
+  - BasicAuth: []
+  - Token: []
+  - AccessToken: []
+  - AuthorizationHeaderToken: []
+  - SudoParam: []
+  - SudoHeader: []
+responses:
+  AccessToken:
+    description: AccessToken represents a API access token.
+    headers:
+      id:
+        format: int64
+        type: integer
+      name:
+        type: string
+      sha1:
+        type: string
+  AccessTokenList:
+    description: AccessTokenList represents a list of API access token.
+  Attachment:
+    description: Attachment
+    schema:
+      $ref: '#/definitions/Attachment'
+  AttachmentList:
+    description: AttachmentList
+    schema:
+      items:
+        $ref: '#/definitions/Attachment'
+      type: array
+  Branch:
+    description: Branch
+    schema:
+      $ref: '#/definitions/Branch'
+  BranchList:
+    description: BranchList
+    schema:
+      items:
+        $ref: '#/definitions/Branch'
+      type: array
+  Comment:
+    description: Comment
+    schema:
+      $ref: '#/definitions/Comment'
+  CommentList:
+    description: CommentList
+    schema:
+      items:
+        $ref: '#/definitions/Comment'
+      type: array
+  DeployKey:
+    description: DeployKey
+    schema:
+      $ref: '#/definitions/DeployKey'
+  DeployKeyList:
+    description: DeployKeyList
+    schema:
+      items:
+        $ref: '#/definitions/DeployKey'
+      type: array
+  EmailList:
+    description: EmailList
+    schema:
+      items:
+        $ref: '#/definitions/Email'
+      type: array
+  GPGKey:
+    description: GPGKey
+    schema:
+      $ref: '#/definitions/GPGKey'
+  GPGKeyList:
+    description: GPGKeyList
+    schema:
+      items:
+        $ref: '#/definitions/GPGKey'
+      type: array
+  Hook:
+    description: Hook
+    schema:
+      items:
+        $ref: '#/definitions/Branch'
+      type: array
+  HookList:
+    description: HookList
+    schema:
+      items:
+        $ref: '#/definitions/Branch'
+      type: array
+  Issue:
+    description: Issue
+    schema:
+      $ref: '#/definitions/Issue'
+  IssueDeadline:
+    description: IssueDeadline
+    schema:
+      $ref: '#/definitions/IssueDeadline'
+  IssueList:
+    description: IssueList
+    schema:
+      items:
+        $ref: '#/definitions/Issue'
+      type: array
+  Label:
+    description: Label
+    schema:
+      $ref: '#/definitions/Label'
+  LabelList:
+    description: LabelList
+    schema:
+      items:
+        $ref: '#/definitions/Label'
+      type: array
+  MarkdownRender:
+    description: MarkdownRender is a rendered markdown document
+  Milestone:
+    description: Milestone
+    schema:
+      $ref: '#/definitions/Milestone'
+  MilestoneList:
+    description: MilestoneList
+    schema:
+      items:
+        $ref: '#/definitions/Milestone'
+      type: array
+  Organization:
+    description: Organization
+    schema:
+      $ref: '#/definitions/Organization'
+  OrganizationList:
+    description: OrganizationList
+    schema:
+      items:
+        $ref: '#/definitions/Organization'
+      type: array
+  PublicKey:
+    description: PublicKey
+    schema:
+      $ref: '#/definitions/PublicKey'
+  PublicKeyList:
+    description: PublicKeyList
+    schema:
+      items:
+        $ref: '#/definitions/PublicKey'
+      type: array
+  PullRequest:
+    description: PullRequest
+    schema:
+      $ref: '#/definitions/PullRequest'
+  PullRequestList:
+    description: PullRequestList
+    schema:
+      items:
+        $ref: '#/definitions/PullRequest'
+      type: array
+  Release:
+    description: Release
+    schema:
+      $ref: '#/definitions/Release'
+  ReleaseList:
+    description: ReleaseList
+    schema:
+      items:
+        $ref: '#/definitions/Release'
+      type: array
+  Repository:
+    description: Repository
+    schema:
+      $ref: '#/definitions/Repository'
+  RepositoryList:
+    description: RepositoryList
+    schema:
+      items:
+        $ref: '#/definitions/Repository'
+      type: array
+  SearchResults:
+    description: SearchResults
+    schema:
+      $ref: '#/definitions/SearchResults'
+  ServerVersion:
+    description: ServerVersion
+    schema:
+      $ref: '#/definitions/ServerVersion'
+  Status:
+    description: Status
+    schema:
+      $ref: '#/definitions/Status'
+  StatusList:
+    description: StatusList
+    schema:
+      items:
+        $ref: '#/definitions/Status'
+      type: array
+  Team:
+    description: Team
+    schema:
+      $ref: '#/definitions/Team'
+  TeamList:
+    description: TeamList
+    schema:
+      items:
+        $ref: '#/definitions/Team'
+      type: array
+  TrackedTime:
+    description: TrackedTime
+    schema:
+      $ref: '#/definitions/TrackedTime'
+  TrackedTimeList:
+    description: TrackedTimeList
+    schema:
+      items:
+        $ref: '#/definitions/TrackedTime'
+      type: array
+  User:
+    description: User
+    schema:
+      $ref: '#/definitions/User'
+  UserList:
+    description: UserList
+    schema:
+      items:
+        $ref: '#/definitions/User'
+      type: array
+  WatchInfo:
+    description: WatchInfo
+    schema:
+      $ref: '#/definitions/WatchInfo'
+  empty:
+    description: APIEmpty is an empty response
+  error:
+    description: APIError is error format response
+    headers:
+      message:
+        type: string
+      url:
+        type: string
+  forbidden:
+    description: APIForbiddenError is a forbidden error response
+    headers:
+      message:
+        type: string
+      url:
+        type: string
+  notFound:
+    description: APINotFound is a not found empty response
+  parameterBodies:
+    description: parameterBodies
+    schema:
+      $ref: '#/definitions/EditAttachmentOptions'
+  redirect:
+    description: APIRedirect is a redirect response
+  validationError:
+    description: APIValidationError is error format response related to input validation
+    headers:
+      message:
+        type: string
+      url:
+        type: string
+paths:
+  /admin/users:
+    post:
+      consumes:
+        - application/json
+      operationId: adminCreateUser
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateUserOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/User'
+        '403':
+          $ref: '#/responses/forbidden'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Create a user
+      tags:
+        - admin
+  '/admin/users/{username}':
+    delete:
+      operationId: adminDeleteUser
+      parameters:
+        - description: username of user to delete
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Delete a user
+      tags:
+        - admin
+    patch:
+      consumes:
+        - application/json
+      operationId: adminEditUser
+      parameters:
+        - description: username of user to edit
+          in: path
+          name: username
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditUserOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/User'
+        '403':
+          $ref: '#/responses/forbidden'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Edit an existing user
+      tags:
+        - admin
+  '/admin/users/{username}/keys':
+    post:
+      consumes:
+        - application/json
+      operationId: adminCreatePublicKey
+      parameters:
+        - description: username of the user
+          in: path
+          name: username
+          required: true
+          type: string
+        - in: body
+          name: key
+          schema:
+            $ref: '#/definitions/CreateKeyOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/PublicKey'
+        '403':
+          $ref: '#/responses/forbidden'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Add a public key on behalf of a user
+      tags:
+        - admin
+  '/admin/users/{username}/keys/{id}':
+    delete:
+      operationId: adminDeleteUserPublicKey
+      parameters:
+        - description: username of user
+          in: path
+          name: username
+          required: true
+          type: string
+        - description: id of the key to delete
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Delete a user's public key
+      tags:
+        - admin
+  '/admin/users/{username}/orgs':
+    post:
+      consumes:
+        - application/json
+      operationId: adminCreateOrg
+      parameters:
+        - description: username of the user that will own the created organization
+          in: path
+          name: username
+          required: true
+          type: string
+        - in: body
+          name: organization
+          required: true
+          schema:
+            $ref: '#/definitions/CreateOrgOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Organization'
+        '403':
+          $ref: '#/responses/forbidden'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Create an organization
+      tags:
+        - admin
+  '/admin/users/{username}/repos':
+    post:
+      consumes:
+        - application/json
+      operationId: adminCreateRepo
+      parameters:
+        - description: username of the user. This user will own the created repository
+          in: path
+          name: username
+          required: true
+          type: string
+        - in: body
+          name: repository
+          required: true
+          schema:
+            $ref: '#/definitions/CreateRepoOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Repository'
+        '403':
+          $ref: '#/responses/forbidden'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Create a repository on behalf a user
+      tags:
+        - admin
+  /markdown:
+    post:
+      consumes:
+        - application/json
+      operationId: renderMarkdown
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/MarkdownOption'
+      produces:
+        - text/html
+      responses:
+        '200':
+          $ref: '#/responses/MarkdownRender'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Render a markdown document as HTML
+      tags:
+        - miscellaneous
+  /markdown/raw:
+    post:
+      consumes:
+        - text/plain
+      operationId: renderMarkdownRaw
+      parameters:
+        - description: Request body to render
+          in: body
+          name: body
+          required: true
+          schema:
+            type: string
+      produces:
+        - text/html
+      responses:
+        '200':
+          $ref: '#/responses/MarkdownRender'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Render raw markdown as HTML
+      tags:
+        - miscellaneous
+  '/org/{org}/repos':
+    post:
+      consumes:
+        - application/json
+      operationId: createOrgRepo
+      parameters:
+        - description: name of organization
+          in: path
+          name: org
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateRepoOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Repository'
+        '403':
+          $ref: '#/responses/forbidden'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Create a repository in an organization
+      tags:
+        - organization
+  '/orgs/{org}':
+    get:
+      operationId: orgGet
+      parameters:
+        - description: name of the organization to get
+          in: path
+          name: org
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Organization'
+      summary: Get an organization
+      tags:
+        - organization
+    patch:
+      consumes:
+        - application/json
+      operationId: orgEdit
+      parameters:
+        - description: name of the organization to edit
+          in: path
+          name: org
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditOrgOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Organization'
+      summary: Edit an organization
+      tags:
+        - organization
+  '/orgs/{org}/hooks':
+    get:
+      operationId: orgListHooks
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/HookList'
+      summary: List an organization's webhooks
+      tags:
+        - organization
+  '/orgs/{org}/hooks/':
+    post:
+      consumes:
+        - application/json
+      operationId: orgCreateHook
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateHookOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Hook'
+      summary: Create a hook
+      tags:
+        - organization
+  '/orgs/{org}/hooks/{id}':
+    delete:
+      operationId: orgDeleteHook
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+        - description: id of the hook to delete
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Delete a hook
+      tags:
+        - organization
+    get:
+      operationId: orgGetHook
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+        - description: id of the hook to get
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Hook'
+      summary: Get a hook
+      tags:
+        - organization
+    patch:
+      consumes:
+        - application/json
+      operationId: orgEditHook
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+        - description: id of the hook to update
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditHookOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Hook'
+      summary: Update a hook
+      tags:
+        - organization
+  '/orgs/{org}/members':
+    get:
+      operationId: orgListMembers
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/UserList'
+      summary: List an organization's members
+      tags:
+        - organization
+  '/orgs/{org}/members/{username}':
+    delete:
+      operationId: orgDeleteMember
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+        - description: username of the user
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          description: member removed
+      summary: Remove a member from an organization
+      tags:
+        - organization
+    get:
+      operationId: orgIsMember
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+        - description: username of the user
+          in: path
+          name: username
+          required: true
+          type: string
+      responses:
+        '204':
+          description: user is a member
+        '404':
+          description: user is not a member
+      summary: Check if a user is a member of an organization
+      tags:
+        - organization
+  '/orgs/{org}/public_members':
+    get:
+      operationId: orgListPublicMembers
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/UserList'
+      summary: List an organization's public members
+      tags:
+        - organization
+  '/orgs/{org}/public_members/{username}':
+    delete:
+      operationId: orgConcealMember
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+        - description: username of the user
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Conceal a user's membership
+      tags:
+        - organization
+    get:
+      operationId: orgIsPublicMember
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+        - description: username of the user
+          in: path
+          name: username
+          required: true
+          type: string
+      responses:
+        '204':
+          description: user is a public member
+        '404':
+          description: user is not a public member
+      summary: Check if a user is a public member of an organization
+      tags:
+        - organization
+    put:
+      operationId: orgPublicizeMember
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+        - description: username of the user
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          description: membership publicized
+      summary: Publicize a user's membership
+      tags:
+        - organization
+  '/orgs/{org}/repos':
+    get:
+      operationId: orgListRepos
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/RepositoryList'
+      summary: List an organization's repos
+      tags:
+        - organization
+  '/orgs/{org}/teams':
+    get:
+      operationId: orgListTeams
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/TeamList'
+      summary: List an organization's teams
+      tags:
+        - organization
+    post:
+      consumes:
+        - application/json
+      operationId: orgCreateTeam
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateTeamOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Team'
+      summary: Create a team
+      tags:
+        - organization
+  /repos/migrate:
+    post:
+      consumes:
+        - application/json
+      operationId: repoMigrate
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/MigrateRepoForm'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Repository'
+      summary: Migrate a remote git repository
+      tags:
+        - repository
+  /repos/search:
+    get:
+      operationId: repoSearch
+      parameters:
+        - description: keyword
+          in: query
+          name: q
+          type: string
+        - description: search only for repos that the user with the given id owns or contributes to
+          format: int64
+          in: query
+          name: uid
+          type: integer
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
+        - description: 'type of repository to search for. Supported values are "fork", "source", "mirror" and "collaborative"'
+          in: query
+          name: mode
+          type: string
+        - description: 'if `uid` is given, search only for repos that the user owns'
+          in: query
+          name: exclusive
+          type: boolean
+        - description: 'sort repos by attribute. Supported values are "alpha", "created", "updated", "size", and "id". Default is "alpha"'
+          in: query
+          name: sort
+          type: string
+        - description: 'sort order, either "asc" (ascending) or "desc" (descending). Default is "asc", ignored if "sort" is not specified.'
+          in: query
+          name: order
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/SearchResults'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Search for repositories
+      tags:
+        - repository
+  '/repos/{owner}/{repo}':
+    delete:
+      operationId: repoDelete
+      parameters:
+        - description: owner of the repo to delete
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo to delete
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
+      summary: Delete a repository
+      tags:
+        - repository
+    get:
+      operationId: repoGet
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Repository'
+      summary: Get a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/archive/{archive}':
+    get:
+      operationId: repoGetArchive
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: 'archive to download, consisting of a git reference and archive'
+          in: path
+          name: archive
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: success
+      summary: Get an archive of a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/branches':
+    get:
+      operationId: repoListBranches
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/BranchList'
+      summary: List a repository's branches
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/branches/{branch}':
+    get:
+      operationId: repoGetBranch
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: branch to get
+          in: path
+          name: branch
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Branch'
+      summary: Retrieve a specific branch from a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/collaborators':
+    get:
+      operationId: repoListCollaborators
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/UserList'
+      summary: List a repository's collaborators
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/collaborators/{collaborator}':
+    delete:
+      operationId: repoDeleteCollaborator
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: username of the collaborator to delete
+          in: path
+          name: collaborator
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Delete a collaborator from a repository
+      tags:
+        - repository
+    get:
+      operationId: repoCheckCollaborator
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: username of the collaborator
+          in: path
+          name: collaborator
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '404':
+          $ref: '#/responses/empty'
+      summary: Check if a user is a collaborator of a repository
+      tags:
+        - repository
+    put:
+      operationId: repoAddCollaborator
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: username of the collaborator to add
+          in: path
+          name: collaborator
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AddCollaboratorOption'
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Add a collaborator to a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/commits/{ref}/statuses':
+    get:
+      operationId: repoGetCombinedStatusByRef
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: name of branch/tag/commit
+          in: path
+          name: ref
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Status'
+      summary: 'Get a commit''s combined status, by branch/tag/commit reference'
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/editorconfig/{filepath}':
+    get:
+      operationId: repoGetEditorConfig
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: filepath of file to get
+          in: path
+          name: filepath
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: success
+      summary: Get the EditorConfig definitions of a file in a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/forks':
+    get:
+      operationId: listForks
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/RepositoryList'
+      summary: List a repository's forks
+      tags:
+        - repository
+    post:
+      operationId: createFork
+      parameters:
+        - description: owner of the repo to fork
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo to fork
+          in: path
+          name: repo
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateForkOption'
+      produces:
+        - application/json
+      responses:
+        '202':
+          $ref: '#/responses/Repository'
+      summary: Fork a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/hooks':
+    get:
+      operationId: repoListHooks
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/HookList'
+      summary: List the hooks in a repository
+      tags:
+        - repository
+    post:
+      consumes:
+        - application/json
+      operationId: repoCreateHook
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateHookOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Hook'
+      summary: Create a hook
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/hooks/{id}':
+    delete:
+      operationId: repoDeleteHook
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the hook to delete
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Delete a hook in a repository
+      tags:
+        - repository
+    get:
+      operationId: repoGetHook
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the hook to get
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Hook'
+      summary: Get a hook
+      tags:
+        - repository
+    patch:
+      operationId: repoEditHook
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the hook
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditHookOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Hook'
+      summary: Edit a hook in a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/hooks/{id}/tests':
+    post:
+      operationId: repoTestHook
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the hook to test
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Test a push webhook
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/issues':
+    get:
+      operationId: issueListIssues
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: whether issue is open or closed
+          in: query
+          name: state
+          type: string
+        - description: page number of requested issues
+          in: query
+          name: page
+          type: integer
+        - description: search string
+          in: query
+          name: q
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/IssueList'
+      summary: List a repository's issues
+      tags:
+        - issue
+    post:
+      consumes:
+        - application/json
+      operationId: issueCreateIssue
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateIssueOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Issue'
+      summary: Create an issue
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/comments':
+    get:
+      operationId: issueGetRepoComments
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: 'if provided, only comments updated since the provided time are returned.'
+          in: query
+          name: since
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/CommentList'
+      summary: List all comments in a repository
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/comments/{id}':
+    delete:
+      operationId: issueDeleteComment
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of comment to delete
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Delete a comment
+      tags:
+        - issue
+    patch:
+      consumes:
+        - application/json
+      operationId: issueEditComment
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the comment to edit
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditIssueCommentOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Comment'
+      summary: Edit a comment
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{id}/times':
+    get:
+      operationId: issueTrackedTimes
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/TrackedTimeList'
+      summary: List an issue's tracked times
+      tags:
+        - issue
+    post:
+      consumes:
+        - application/json
+      operationId: issueAddTime
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue to add tracked time to
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AddTimeOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/TrackedTime'
+        '400':
+          $ref: '#/responses/error'
+        '403':
+          $ref: '#/responses/error'
+      summary: Add a tracked time to a issue
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}':
+    get:
+      operationId: issueGetIssue
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue to get
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Issue'
+      summary: Get an issue
+      tags:
+        - issue
+    patch:
+      consumes:
+        - application/json
+      operationId: issueEditIssue
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue to edit
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditIssueOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Issue'
+      summary: Edit an issue
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}/comments':
+    get:
+      operationId: issueGetComments
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - description: 'if provided, only comments updated since the specified time are returned.'
+          in: query
+          name: since
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/CommentList'
+      summary: List all comments on an issue
+      tags:
+        - issue
+    post:
+      consumes:
+        - application/json
+      operationId: issueCreateComment
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateIssueCommentOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Comment'
+      summary: Add a comment to an issue
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}/comments/{id}':
+    delete:
+      deprecated: true
+      operationId: issueDeleteCommentDeprecated
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: this parameter is ignored
+          in: path
+          name: index
+          required: true
+          type: integer
+        - description: id of comment to delete
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Delete a comment
+      tags:
+        - issue
+    patch:
+      consumes:
+        - application/json
+      deprecated: true
+      operationId: issueEditCommentDeprecated
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: this parameter is ignored
+          in: path
+          name: index
+          required: true
+          type: integer
+        - description: id of the comment to edit
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditIssueCommentOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Comment'
+      summary: Edit a comment
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}/deadline':
+    post:
+      consumes:
+        - application/json
+      operationId: issueEditIssueDeadline
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue to create or update a deadline on
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditDeadlineOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/IssueDeadline'
+        '403':
+          description: Not repo writer
+        '404':
+          description: Issue not found
+      summary: 'Set an issue deadline. If set to null, the deadline is deleted.'
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}/labels':
+    delete:
+      operationId: issueClearLabels
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Remove all labels from an issue
+      tags:
+        - issue
+    get:
+      operationId: issueGetLabels
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/LabelList'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Get an issue's labels
+      tags:
+        - issue
+    post:
+      consumes:
+        - application/json
+      operationId: issueAddLabel
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IssueLabelsOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/LabelList'
+      summary: Add a label to an issue
+      tags:
+        - issue
+    put:
+      consumes:
+        - application/json
+      operationId: issueReplaceLabels
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IssueLabelsOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/LabelList'
+      summary: Replace an issue's labels
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}/labels/{id}':
+    delete:
+      operationId: issueRemoveLabel
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - description: id of the label to remove
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Remove a label from an issue
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/keys':
+    get:
+      operationId: repoListKeys
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/DeployKeyList'
+      summary: List a repository's keys
+      tags:
+        - repository
+    post:
+      consumes:
+        - application/json
+      operationId: repoCreateKey
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateKeyOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/DeployKey'
+      summary: Add a key to a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/keys/{id}':
+    delete:
+      operationId: repoDeleteKey
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the key to delete
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Delete a key from a repository
+      tags:
+        - repository
+    get:
+      operationId: repoGetKey
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the key to get
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/DeployKey'
+      summary: Get a repository's key by id
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/labels':
+    get:
+      operationId: issueListLabels
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/LabelList'
+      summary: Get all of a repository's labels
+      tags:
+        - issue
+    post:
+      consumes:
+        - application/json
+      operationId: issueCreateLabel
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateLabelOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Label'
+      summary: Create a label
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/labels/{id}':
+    delete:
+      operationId: issueDeleteLabel
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the label to delete
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Delete a label
+      tags:
+        - issue
+    get:
+      operationId: issueGetLabel
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the label to get
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Label'
+      summary: Get a single label
+      tags:
+        - issue
+    patch:
+      consumes:
+        - application/json
+      operationId: issueEditLabel
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the label to edit
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditLabelOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Label'
+      summary: Update a label
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/milestones':
+    get:
+      operationId: issueGetMilestonesList
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/MilestoneList'
+      summary: Get all of a repository's milestones
+      tags:
+        - issue
+    post:
+      consumes:
+        - application/json
+      operationId: issueCreateMilestone
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateMilestoneOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Milestone'
+      summary: Create a milestone
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/milestones/{id}':
+    delete:
+      operationId: issueDeleteMilestone
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the milestone to delete
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Delete a milestone
+      tags:
+        - issue
+    get:
+      operationId: issueGetMilestone
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the milestone
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Milestone'
+      summary: Get a milestone
+      tags:
+        - issue
+    patch:
+      consumes:
+        - application/json
+      operationId: issueEditMilestone
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the milestone
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditMilestoneOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Milestone'
+      summary: Update a milestone
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/mirror-sync':
+    post:
+      operationId: repoMirrorSync
+      parameters:
+        - description: owner of the repo to sync
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo to sync
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/empty'
+      summary: Sync a mirrored repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/pulls':
+    get:
+      operationId: repoListPullRequests
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: Page number
+          in: query
+          name: page
+          type: integer
+        - description: 'State of pull request: open or closed (optional)'
+          enum:
+            - closed
+            - open
+            - all
+          in: query
+          name: state
+          type: string
+        - description: Type of sort
+          enum:
+            - oldest
+            - recentupdate
+            - leastupdate
+            - mostcomment
+            - leastcomment
+            - priority
+          in: query
+          name: sort
+          type: string
+        - description: ID of the milestone
+          format: int64
+          in: query
+          name: milestone
+          type: integer
+        - collectionFormat: multi
+          description: Label IDs
+          in: query
+          items:
+            format: int64
+            type: integer
+          name: labels
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/PullRequestList'
+      summary: List a repo's pull requests
+      tags:
+        - repository
+    post:
+      consumes:
+        - application/json
+      operationId: repoCreatePullRequest
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreatePullRequestOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/PullRequest'
+      summary: Create a pull request
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/pulls/{index}':
+    get:
+      operationId: repoGetPullRequest
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the pull request to get
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/PullRequest'
+      summary: Get a pull request
+      tags:
+        - repository
+    patch:
+      consumes:
+        - application/json
+      operationId: repoEditPullRequest
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the pull request to edit
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditPullRequestOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/PullRequest'
+      summary: Update a pull request
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/pulls/{index}/merge':
+    get:
+      operationId: repoPullRequestIsMerged
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the pull request
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          description: pull request has been merged
+        '404':
+          description: pull request has not been merged
+      summary: Check if a pull request has been merged
+      tags:
+        - repository
+    post:
+      operationId: repoMergePullRequest
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the pull request to merge
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/empty'
+        '405':
+          $ref: '#/responses/empty'
+      summary: Merge a pull request
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/raw/{filepath}':
+    get:
+      operationId: repoGetRawFile
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: filepath of the file to get
+          in: path
+          name: filepath
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: success
+      summary: Get a file from a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/releases':
+    get:
+      operationId: repoListReleases
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/ReleaseList'
+      summary: List a repo's releases
+      tags:
+        - repository
+    post:
+      consumes:
+        - application/json
+      operationId: repoCreateRelease
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateReleaseOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Release'
+      summary: Create a release
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/releases/{id}':
+    delete:
+      operationId: repoDeleteRelease
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the release to delete
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Delete a release
+      tags:
+        - repository
+    get:
+      operationId: repoGetRelease
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the release to get
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Release'
+      summary: Get a release
+      tags:
+        - repository
+    patch:
+      consumes:
+        - application/json
+      operationId: repoEditRelease
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the release to edit
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditReleaseOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Release'
+      summary: Update a release
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/releases/{id}/assets':
+    get:
+      operationId: repoListReleaseAttachments
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the release
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/AttachmentList'
+      summary: List release's attachments
+      tags:
+        - repository
+    post:
+      consumes:
+        - multipart/form-data
+      operationId: repoCreateReleaseAttachment
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the release
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: name of the attachment
+          in: query
+          name: name
+          type: string
+        - description: attachment to upload
+          in: formData
+          name: attachment
+          required: true
+          type: file
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Attachment'
+      summary: Create a release attachment
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/releases/{id}/assets/{attachment_id}':
+    delete:
+      operationId: repoDeleteReleaseAttachment
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the release
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: id of the attachment to delete
+          format: int64
+          in: path
+          name: attachment_id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Delete a release attachment
+      tags:
+        - repository
+    get:
+      operationId: repoGetReleaseAttachment
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the release
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: id of the attachment to get
+          format: int64
+          in: path
+          name: attachment_id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Attachment'
+      summary: Get a release attachment
+      tags:
+        - repository
+    patch:
+      consumes:
+        - application/json
+      operationId: repoEditReleaseAttachment
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the release
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: id of the attachment to edit
+          format: int64
+          in: path
+          name: attachment_id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditAttachmentOptions'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Attachment'
+      summary: Edit a release attachment
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/stargazers':
+    get:
+      operationId: repoListStargazers
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/UserList'
+      summary: List a repo's stargazers
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/statuses/{sha}':
+    get:
+      operationId: repoListStatuses
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: sha of the commit
+          in: path
+          name: sha
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/StatusList'
+      summary: Get a commit's statuses
+      tags:
+        - repository
+    post:
+      operationId: repoCreateStatus
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: sha of the commit
+          in: path
+          name: sha
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateStatusOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/StatusList'
+      summary: Create a commit status
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/subscribers':
+    get:
+      operationId: repoListSubscribers
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/UserList'
+      summary: List a repo's watchers
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/subscription':
+    delete:
+      operationId: userCurrentDeleteSubscription
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Unwatch a repo
+      tags:
+        - repository
+    get:
+      operationId: userCurrentCheckSubscription
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      responses:
+        '200':
+          $ref: '#/responses/WatchInfo'
+      summary: Check if the current user is watching a repo
+      tags:
+        - repository
+    put:
+      operationId: userCurrentPutSubscription
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      responses:
+        '200':
+          $ref: '#/responses/WatchInfo'
+      summary: Watch a repo
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/times':
+    get:
+      operationId: repoTrackedTimes
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/TrackedTimeList'
+      summary: List a repo's tracked times
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/times/{user}':
+    get:
+      operationId: userTrackedTimes
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: username of user
+          in: path
+          name: user
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/TrackedTimeList'
+      summary: List a user's tracked times in a repo
+      tags:
+        - user
+  '/repositories/{id}':
+    get:
+      operationId: repoGetByID
+      parameters:
+        - description: id of the repo to get
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Repository'
+      summary: Get a repository by id
+      tags:
+        - repository
+  '/teams/{id}':
+    delete:
+      operationId: orgDeleteTeam
+      parameters:
+        - description: id of the team to delete
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: team deleted
+      summary: Delete a team
+      tags:
+        - organization
+    get:
+      operationId: orgGetTeam
+      parameters:
+        - description: id of the team to get
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Team'
+      summary: Get a team
+      tags:
+        - organization
+    patch:
+      consumes:
+        - application/json
+      operationId: orgEditTeam
+      parameters:
+        - description: id of the team to edit
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditTeamOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Team'
+      summary: Edit a team
+      tags:
+        - organization
+  '/teams/{id}/members':
+    get:
+      operationId: orgListTeamMembers
+      parameters:
+        - description: id of the team
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/UserList'
+      summary: List a team's members
+      tags:
+        - organization
+  '/teams/{id}/members/{username}':
+    delete:
+      operationId: orgRemoveTeamMember
+      parameters:
+        - description: id of the team
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: username of the user to remove
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Remove a team member
+      tags:
+        - organization
+    put:
+      operationId: orgAddTeamMember
+      parameters:
+        - description: id of the team
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: username of the user to add
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Add a team member
+      tags:
+        - organization
+  '/teams/{id}/repos':
+    get:
+      operationId: orgListTeamRepos
+      parameters:
+        - description: id of the team
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/RepositoryList'
+      summary: List a team's repos
+      tags:
+        - organization
+  '/teams/{id}/repos/{org}/{repo}':
+    delete:
+      description: 'This does not delete the repository, it only removes the repository from the team.'
+      operationId: orgRemoveTeamRepository
+      parameters:
+        - description: id of the team
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: organization that owns the repo to remove
+          in: path
+          name: org
+          required: true
+          type: string
+        - description: name of the repo to remove
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Remove a repository from a team
+      tags:
+        - organization
+    put:
+      operationId: orgAddTeamRepository
+      parameters:
+        - description: id of the team
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: organization that owns the repo to add
+          in: path
+          name: org
+          required: true
+          type: string
+        - description: name of the repo to add
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Add a repository to a team
+      tags:
+        - organization
+  /topics/search:
+    get:
+      operationId: topicSearch
+      parameters:
+        - description: keywords to search
+          in: query
+          name: q
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Repository'
+      summary: search topics via keyword
+      tags:
+        - repository
+  /user:
+    get:
+      operationId: userGetCurrent
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/User'
+      summary: Get the authenticated user
+      tags:
+        - user
+  /user/emails:
+    delete:
+      operationId: userDeleteEmail
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DeleteEmailOption'
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Delete email addresses
+      tags:
+        - user
+    get:
+      operationId: userListEmails
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmailList'
+      summary: List the authenticated user's email addresses
+      tags:
+        - user
+    post:
+      operationId: userAddEmail
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateEmailOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/EmailList'
+      summary: Add email addresses
+      tags:
+        - user
+  /user/followers:
+    get:
+      operationId: userCurrentListFollowers
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/UserList'
+      summary: List the authenticated user's followers
+      tags:
+        - user
+  /user/following:
+    get:
+      operationId: userCurrentListFollowing
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/UserList'
+      summary: List the users that the authenticated user is following
+      tags:
+        - user
+  '/user/following/{username}':
+    delete:
+      operationId: userCurrentDeleteFollow
+      parameters:
+        - description: username of user to unfollow
+          in: path
+          name: username
+          required: true
+          type: string
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Unfollow a user
+      tags:
+        - user
+    get:
+      operationId: userCurrentCheckFollowing
+      parameters:
+        - description: username of followed user
+          in: path
+          name: username
+          required: true
+          type: string
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Check whether a user is followed by the authenticated user
+      tags:
+        - user
+    put:
+      operationId: userCurrentPutFollow
+      parameters:
+        - description: username of user to follow
+          in: path
+          name: username
+          required: true
+          type: string
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Follow a user
+      tags:
+        - user
+  /user/gpg_keys:
+    get:
+      operationId: userCurrentListGPGKeys
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/GPGKeyList'
+      summary: List the authenticated user's GPG keys
+      tags:
+        - user
+    post:
+      consumes:
+        - application/json
+      operationId: userCurrentPostGPGKey
+      parameters:
+        - in: body
+          name: Form
+          schema:
+            $ref: '#/definitions/CreateGPGKeyOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/GPGKey'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Create a GPG key
+      tags:
+        - user
+  '/user/gpg_keys/{id}':
+    delete:
+      operationId: userCurrentDeleteGPGKey
+      parameters:
+        - description: id of key to delete
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
+      summary: Remove a GPG key
+      tags:
+        - user
+    get:
+      operationId: userCurrentGetGPGKey
+      parameters:
+        - description: id of key to get
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/GPGKey'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Get a GPG key
+      tags:
+        - user
+  /user/keys:
+    get:
+      operationId: userCurrentListKeys
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/PublicKeyList'
+      summary: List the authenticated user's public keys
+      tags:
+        - user
+    post:
+      consumes:
+        - application/json
+      operationId: userCurrentPostKey
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateKeyOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/PublicKey'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Create a public key
+      tags:
+        - user
+  '/user/keys/{id}':
+    delete:
+      operationId: userCurrentDeleteKey
+      parameters:
+        - description: id of key to delete
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Delete a public key
+      tags:
+        - user
+    get:
+      operationId: userCurrentGetKey
+      parameters:
+        - description: id of key to get
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/PublicKey'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Get a public key
+      tags:
+        - user
+  /user/orgs:
+    get:
+      operationId: orgListCurrentUserOrgs
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/OrganizationList'
+      summary: List the current user's organizations
+      tags:
+        - organization
+  /user/repos:
+    get:
+      operationId: userCurrentListRepos
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/RepositoryList'
+      summary: List the repos that the authenticated user owns or has access to
+      tags:
+        - user
+    post:
+      consumes:
+        - application/json
+      operationId: createCurrentUserRepo
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateRepoOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Repository'
+      summary: Create a repository
+      tags:
+        - repository
+        - user
+  /user/starred:
+    get:
+      operationId: userCurrentListStarred
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/RepositoryList'
+      summary: The repos that the authenticated user has starred
+      tags:
+        - user
+  '/user/starred/{owner}/{repo}':
+    delete:
+      operationId: userCurrentDeleteStar
+      parameters:
+        - description: owner of the repo to unstar
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo to unstar
+          in: path
+          name: repo
+          required: true
+          type: string
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Unstar the given repo
+      tags:
+        - user
+    get:
+      operationId: userCurrentCheckStarring
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Whether the authenticated is starring the repo
+      tags:
+        - user
+    put:
+      operationId: userCurrentPutStar
+      parameters:
+        - description: owner of the repo to star
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo to star
+          in: path
+          name: repo
+          required: true
+          type: string
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Star the given repo
+      tags:
+        - user
+  /user/subscriptions:
+    get:
+      operationId: userCurrentListSubscriptions
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/RepositoryList'
+      summary: List repositories watched by the authenticated user
+      tags:
+        - user
+  /user/times:
+    get:
+      operationId: userCurrentTrackedTimes
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/TrackedTimeList'
+      summary: List the current user's tracked times
+      tags:
+        - user
+  '/user/{username}/orgs':
+    get:
+      operationId: orgListUserOrgs
+      parameters:
+        - description: username of user
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/OrganizationList'
+      summary: List a user's organizations
+      tags:
+        - organization
+  /users/search:
+    get:
+      operationId: userSearch
+      parameters:
+        - description: keyword
+          in: query
+          name: q
+          type: string
+        - description: ID of the user to search for
+          format: int64
+          in: query
+          name: uid
+          type: integer
+        - description: maximum number of users to return
+          in: query
+          name: limit
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: SearchResults of a successful search
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/User'
+                type: array
+              ok:
+                type: boolean
+            type: object
+      summary: Search for users
+      tags:
+        - user
+  '/users/{follower}/following/{followee}':
+    get:
+      operationId: userCheckFollowing
+      parameters:
+        - description: username of following user
+          in: path
+          name: follower
+          required: true
+          type: string
+        - description: username of followed user
+          in: path
+          name: followee
+          required: true
+          type: string
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Check if one user is following another user
+      tags:
+        - user
+  '/users/{username}':
+    get:
+      operationId: userGet
+      parameters:
+        - description: username of user to get
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/User'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Get a user
+      tags:
+        - user
+  '/users/{username}/followers':
+    get:
+      operationId: userListFollowers
+      parameters:
+        - description: username of user
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/UserList'
+      summary: List the given user's followers
+      tags:
+        - user
+  '/users/{username}/following':
+    get:
+      operationId: userListFollowing
+      parameters:
+        - description: username of user
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/UserList'
+      summary: List the users that the given user is following
+      tags:
+        - user
+  '/users/{username}/gpg_keys':
+    get:
+      operationId: userListGPGKeys
+      parameters:
+        - description: username of user
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/GPGKeyList'
+      summary: List the given user's GPG keys
+      tags:
+        - user
+  '/users/{username}/keys':
+    get:
+      operationId: userListKeys
+      parameters:
+        - description: username of user
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/PublicKeyList'
+      summary: List the given user's public keys
+      tags:
+        - user
+  '/users/{username}/repos':
+    get:
+      operationId: userListRepos
+      parameters:
+        - description: username of user
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/RepositoryList'
+      summary: List the repos owned by the given user
+      tags:
+        - user
+  '/users/{username}/starred':
+    get:
+      operationId: userListStarred
+      parameters:
+        - description: username of user
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/RepositoryList'
+      summary: The repos that the given user has starred
+      tags:
+        - user
+  '/users/{username}/subscriptions':
+    get:
+      operationId: userListSubscriptions
+      parameters:
+        - description: username of the user
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/RepositoryList'
+      summary: List the repositories watched by a user
+      tags:
+        - user
+  '/users/{username}/tokens':
+    get:
+      operationId: userGetTokens
+      parameters:
+        - description: username of user
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/AccessTokenList'
+      summary: List the authenticated user's access tokens
+      tags:
+        - user
+    post:
+      consumes:
+        - application/json
+      operationId: userCreateToken
+      parameters:
+        - description: username of user
+          in: path
+          name: username
+          required: true
+          type: string
+          x-go-name: Name
+        - in: body
+          name: accessToken
+          schema:
+            properties:
+              name:
+                type: string
+            required:
+              - name
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/AccessToken'
+      summary: Create an access token
+      tags:
+        - user
+  '/users/{username}/tokens/{token}':
+    delete:
+      operationId: userDeleteAccessToken
+      parameters:
+        - description: username of user
+          in: path
+          name: username
+          required: true
+          type: string
+        - description: token to be deleted
+          format: int64
+          in: path
+          name: token
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: delete an access token
+      tags:
+        - user
+  /version:
+    get:
+      operationId: getVersion
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/ServerVersion'
+      summary: Returns the version of the Gitea application
+      tags:
+        - miscellaneous
+definitions:
+  AddCollaboratorOption:
+    description: AddCollaboratorOption options when adding a user as a collaborator of a repository
+    properties:
+      permission:
+        type: string
+        x-go-name: Permission
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  AddTimeOption:
+    description: AddTimeOption options for adding time to an issue
+    properties:
+      time:
+        description: time in seconds
+        format: int64
+        type: integer
+        x-go-name: Time
+    required:
+      - time
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Attachment:
+    description: Attachment a generic attachment
+    properties:
+      browser_download_url:
+        type: string
+        x-go-name: DownloadURL
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: Created
+      download_count:
+        format: int64
+        type: integer
+        x-go-name: DownloadCount
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      name:
+        type: string
+        x-go-name: Name
+      size:
+        format: int64
+        type: integer
+        x-go-name: Size
+      uuid:
+        type: string
+        x-go-name: UUID
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Branch:
+    description: Branch represents a repository branch
+    properties:
+      commit:
+        $ref: '#/definitions/PayloadCommit'
+      name:
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Comment:
+    description: Comment represents a comment on a commit or issue
+    properties:
+      body:
+        type: string
+        x-go-name: Body
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: Created
+      html_url:
+        type: string
+        x-go-name: HTMLURL
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      issue_url:
+        type: string
+        x-go-name: IssueURL
+      pull_request_url:
+        type: string
+        x-go-name: PRURL
+      updated_at:
+        format: date-time
+        type: string
+        x-go-name: Updated
+      user:
+        $ref: '#/definitions/User'
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateEmailOption:
+    description: CreateEmailOption options when creating email addresses
+    properties:
+      emails:
+        description: email addresses to add
+        items:
+          type: string
+        type: array
+        x-go-name: Emails
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateForkOption:
+    description: CreateForkOption options for creating a fork
+    properties:
+      organization:
+        description: 'organization name, if forking into an organization'
+        type: string
+        x-go-name: Organization
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateGPGKeyOption:
+    description: CreateGPGKeyOption options create user GPG key
+    properties:
+      armored_public_key:
+        description: An armored GPG key to add
+        type: string
+        uniqueItems: true
+        x-go-name: ArmoredKey
+    required:
+      - armored_public_key
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateHookOption:
+    description: CreateHookOption options when create a hook
+    properties:
+      active:
+        default: false
+        type: boolean
+        x-go-name: Active
+      config:
+        additionalProperties:
+          type: string
+        type: object
+        x-go-name: Config
+      events:
+        items:
+          type: string
+        type: array
+        x-go-name: Events
+      type:
+        enum:
+          - gitea
+          - gogs
+          - slack
+          - discord
+        type: string
+        x-go-name: Type
+    required:
+      - type
+      - config
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateIssueCommentOption:
+    description: CreateIssueCommentOption options for creating a comment on an issue
+    properties:
+      body:
+        type: string
+        x-go-name: Body
+    required:
+      - body
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateIssueOption:
+    description: CreateIssueOption options to create one issue
+    properties:
+      assignee:
+        description: username of assignee
+        type: string
+        x-go-name: Assignee
+      assignees:
+        items:
+          type: string
+        type: array
+        x-go-name: Assignees
+      body:
+        type: string
+        x-go-name: Body
+      closed:
+        type: boolean
+        x-go-name: Closed
+      due_date:
+        format: date-time
+        type: string
+        x-go-name: Deadline
+      labels:
+        description: list of label ids
+        items:
+          format: int64
+          type: integer
+        type: array
+        x-go-name: Labels
+      milestone:
+        description: milestone id
+        format: int64
+        type: integer
+        x-go-name: Milestone
+      title:
+        type: string
+        x-go-name: Title
+    required:
+      - title
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateKeyOption:
+    description: CreateKeyOption options when creating a key
+    properties:
+      key:
+        description: An armored SSH key to add
+        type: string
+        uniqueItems: true
+        x-go-name: Key
+      read_only:
+        description: Describe if the key has only read access or read/write
+        type: boolean
+        x-go-name: ReadOnly
+      title:
+        description: Title of the key to add
+        type: string
+        uniqueItems: true
+        x-go-name: Title
+    required:
+      - title
+      - key
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateLabelOption:
+    description: CreateLabelOption options for creating a label
+    properties:
+      color:
+        example: '#00aabb'
+        type: string
+        x-go-name: Color
+      name:
+        type: string
+        x-go-name: Name
+    required:
+      - name
+      - color
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateMilestoneOption:
+    description: CreateMilestoneOption options for creating a milestone
+    properties:
+      description:
+        type: string
+        x-go-name: Description
+      due_on:
+        format: date-time
+        type: string
+        x-go-name: Deadline
+      title:
+        type: string
+        x-go-name: Title
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateOrgOption:
+    description: CreateOrgOption options for creating an organization
+    properties:
+      description:
+        type: string
+        x-go-name: Description
+      full_name:
+        type: string
+        x-go-name: FullName
+      location:
+        type: string
+        x-go-name: Location
+      username:
+        type: string
+        x-go-name: UserName
+      website:
+        type: string
+        x-go-name: Website
+    required:
+      - username
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreatePullRequestOption:
+    description: CreatePullRequestOption options when creating a pull request
+    properties:
+      assignee:
+        type: string
+        x-go-name: Assignee
+      assignees:
+        items:
+          type: string
+        type: array
+        x-go-name: Assignees
+      base:
+        type: string
+        x-go-name: Base
+      body:
+        type: string
+        x-go-name: Body
+      due_date:
+        format: date-time
+        type: string
+        x-go-name: Deadline
+      head:
+        type: string
+        x-go-name: Head
+      labels:
+        items:
+          format: int64
+          type: integer
+        type: array
+        x-go-name: Labels
+      milestone:
+        format: int64
+        type: integer
+        x-go-name: Milestone
+      title:
+        type: string
+        x-go-name: Title
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateReleaseOption:
+    description: CreateReleaseOption options when creating a release
+    properties:
+      body:
+        type: string
+        x-go-name: Note
+      draft:
+        type: boolean
+        x-go-name: IsDraft
+      name:
+        type: string
+        x-go-name: Title
+      prerelease:
+        type: boolean
+        x-go-name: IsPrerelease
+      tag_name:
+        type: string
+        x-go-name: TagName
+      target_commitish:
+        type: string
+        x-go-name: Target
+    required:
+      - tag_name
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateRepoOption:
+    description: CreateRepoOption options when creating repository
+    properties:
+      auto_init:
+        description: Whether the repository should be auto-intialized?
+        type: boolean
+        x-go-name: AutoInit
+      description:
+        description: Description of the repository to create
+        type: string
+        x-go-name: Description
+      gitignores:
+        description: Gitignores to use
+        type: string
+        x-go-name: Gitignores
+      license:
+        description: License to use
+        type: string
+        x-go-name: License
+      name:
+        description: Name of the repository to create
+        type: string
+        uniqueItems: true
+        x-go-name: Name
+      private:
+        description: Whether the repository is private
+        type: boolean
+        x-go-name: Private
+      readme:
+        description: Readme of the repository to create
+        type: string
+        x-go-name: Readme
+    required:
+      - name
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateStatusOption:
+    description: CreateStatusOption holds the information needed to create a new Status for a Commit
+    properties:
+      context:
+        type: string
+        x-go-name: Context
+      description:
+        type: string
+        x-go-name: Description
+      state:
+        $ref: '#/definitions/StatusState'
+      target_url:
+        type: string
+        x-go-name: TargetURL
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateTeamOption:
+    description: CreateTeamOption options for creating a team
+    properties:
+      description:
+        type: string
+        x-go-name: Description
+      name:
+        type: string
+        x-go-name: Name
+      permission:
+        enum:
+          - read
+          - write
+          - admin
+        type: string
+        x-go-name: Permission
+    required:
+      - name
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CreateUserOption:
+    description: CreateUserOption create user options
+    properties:
+      email:
+        format: email
+        type: string
+        x-go-name: Email
+      full_name:
+        type: string
+        x-go-name: FullName
+      login_name:
+        type: string
+        x-go-name: LoginName
+      password:
+        type: string
+        x-go-name: Password
+      send_notify:
+        type: boolean
+        x-go-name: SendNotify
+      source_id:
+        format: int64
+        type: integer
+        x-go-name: SourceID
+      username:
+        type: string
+        x-go-name: Username
+    required:
+      - username
+      - email
+      - password
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  DeleteEmailOption:
+    description: DeleteEmailOption options when deleting email addresses
+    properties:
+      emails:
+        description: email addresses to delete
+        items:
+          type: string
+        type: array
+        x-go-name: Emails
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  DeployKey:
+    description: DeployKey a deploy key
+    properties:
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: Created
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      key:
+        type: string
+        x-go-name: Key
+      read_only:
+        type: boolean
+        x-go-name: ReadOnly
+      title:
+        type: string
+        x-go-name: Title
+      url:
+        type: string
+        x-go-name: URL
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  EditAttachmentOptions:
+    description: EditAttachmentOptions options for editing attachments
+    properties:
+      name:
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  EditDeadlineOption:
+    description: EditDeadlineOption options for creating a deadline
+    properties:
+      due_date:
+        format: date-time
+        type: string
+        x-go-name: Deadline
+    required:
+      - due_date
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  EditHookOption:
+    description: EditHookOption options when modify one hook
+    properties:
+      active:
+        type: boolean
+        x-go-name: Active
+      config:
+        additionalProperties:
+          type: string
+        type: object
+        x-go-name: Config
+      events:
+        items:
+          type: string
+        type: array
+        x-go-name: Events
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  EditIssueCommentOption:
+    description: EditIssueCommentOption options for editing a comment
+    properties:
+      body:
+        type: string
+        x-go-name: Body
+    required:
+      - body
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  EditIssueOption:
+    description: EditIssueOption options for editing an issue
+    properties:
+      assignee:
+        type: string
+        x-go-name: Assignee
+      assignees:
+        items:
+          type: string
+        type: array
+        x-go-name: Assignees
+      body:
+        type: string
+        x-go-name: Body
+      due_date:
+        format: date-time
+        type: string
+        x-go-name: Deadline
+      milestone:
+        format: int64
+        type: integer
+        x-go-name: Milestone
+      state:
+        type: string
+        x-go-name: State
+      title:
+        type: string
+        x-go-name: Title
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  EditLabelOption:
+    description: EditLabelOption options for editing a label
+    properties:
+      color:
+        type: string
+        x-go-name: Color
+      name:
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  EditMilestoneOption:
+    description: EditMilestoneOption options for editing a milestone
+    properties:
+      description:
+        type: string
+        x-go-name: Description
+      due_on:
+        format: date-time
+        type: string
+        x-go-name: Deadline
+      state:
+        type: string
+        x-go-name: State
+      title:
+        type: string
+        x-go-name: Title
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  EditOrgOption:
+    description: EditOrgOption options for editing an organization
+    properties:
+      description:
+        type: string
+        x-go-name: Description
+      full_name:
+        type: string
+        x-go-name: FullName
+      location:
+        type: string
+        x-go-name: Location
+      website:
+        type: string
+        x-go-name: Website
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  EditPullRequestOption:
+    description: EditPullRequestOption options when modify pull request
+    properties:
+      assignee:
+        type: string
+        x-go-name: Assignee
+      assignees:
+        items:
+          type: string
+        type: array
+        x-go-name: Assignees
+      body:
+        type: string
+        x-go-name: Body
+      due_date:
+        format: date-time
+        type: string
+        x-go-name: Deadline
+      labels:
+        items:
+          format: int64
+          type: integer
+        type: array
+        x-go-name: Labels
+      milestone:
+        format: int64
+        type: integer
+        x-go-name: Milestone
+      state:
+        type: string
+        x-go-name: State
+      title:
+        type: string
+        x-go-name: Title
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  EditReleaseOption:
+    description: EditReleaseOption options when editing a release
+    properties:
+      body:
+        type: string
+        x-go-name: Note
+      draft:
+        type: boolean
+        x-go-name: IsDraft
+      name:
+        type: string
+        x-go-name: Title
+      prerelease:
+        type: boolean
+        x-go-name: IsPrerelease
+      tag_name:
+        type: string
+        x-go-name: TagName
+      target_commitish:
+        type: string
+        x-go-name: Target
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  EditTeamOption:
+    description: EditTeamOption options for editing a team
+    properties:
+      description:
+        type: string
+        x-go-name: Description
+      name:
+        type: string
+        x-go-name: Name
+      permission:
+        enum:
+          - read
+          - write
+          - admin
+        type: string
+        x-go-name: Permission
+    required:
+      - name
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  EditUserOption:
+    description: EditUserOption edit user options
+    properties:
+      active:
+        type: boolean
+        x-go-name: Active
+      admin:
+        type: boolean
+        x-go-name: Admin
+      allow_create_organization:
+        type: boolean
+        x-go-name: AllowCreateOrganization
+      allow_git_hook:
+        type: boolean
+        x-go-name: AllowGitHook
+      allow_import_local:
+        type: boolean
+        x-go-name: AllowImportLocal
+      email:
+        format: email
+        type: string
+        x-go-name: Email
+      full_name:
+        type: string
+        x-go-name: FullName
+      location:
+        type: string
+        x-go-name: Location
+      login_name:
+        type: string
+        x-go-name: LoginName
+      max_repo_creation:
+        format: int64
+        type: integer
+        x-go-name: MaxRepoCreation
+      password:
+        type: string
+        x-go-name: Password
+      prohibit_login:
+        type: boolean
+        x-go-name: ProhibitLogin
+      source_id:
+        format: int64
+        type: integer
+        x-go-name: SourceID
+      website:
+        type: string
+        x-go-name: Website
+    required:
+      - email
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Email:
+    description: Email an email address belonging to a user
+    properties:
+      email:
+        format: email
+        type: string
+        x-go-name: Email
+      primary:
+        type: boolean
+        x-go-name: Primary
+      verified:
+        type: boolean
+        x-go-name: Verified
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  GPGKey:
+    description: GPGKey a user GPG key to sign commit and tag in repository
+    properties:
+      can_certify:
+        type: boolean
+        x-go-name: CanCertify
+      can_encrypt_comms:
+        type: boolean
+        x-go-name: CanEncryptComms
+      can_encrypt_storage:
+        type: boolean
+        x-go-name: CanEncryptStorage
+      can_sign:
+        type: boolean
+        x-go-name: CanSign
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: Created
+      emails:
+        items:
+          $ref: '#/definitions/GPGKeyEmail'
+        type: array
+        x-go-name: Emails
+      expires_at:
+        format: date-time
+        type: string
+        x-go-name: Expires
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      key_id:
+        type: string
+        x-go-name: KeyID
+      primary_key_id:
+        type: string
+        x-go-name: PrimaryKeyID
+      public_key:
+        type: string
+        x-go-name: PublicKey
+      subkeys:
+        items:
+          $ref: '#/definitions/GPGKey'
+        type: array
+        x-go-name: SubsKey
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  GPGKeyEmail:
+    description: GPGKeyEmail an email attached to a GPGKey
+    properties:
+      email:
+        type: string
+        x-go-name: Email
+      verified:
+        type: boolean
+        x-go-name: Verified
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Issue:
+    description: Issue represents an issue in a repository
+    properties:
+      assignee:
+        $ref: '#/definitions/User'
+      assignees:
+        items:
+          $ref: '#/definitions/User'
+        type: array
+        x-go-name: Assignees
+      body:
+        type: string
+        x-go-name: Body
+      closed_at:
+        format: date-time
+        type: string
+        x-go-name: Closed
+      comments:
+        format: int64
+        type: integer
+        x-go-name: Comments
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: Created
+      due_date:
+        format: date-time
+        type: string
+        x-go-name: Deadline
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      labels:
+        items:
+          $ref: '#/definitions/Label'
+        type: array
+        x-go-name: Labels
+      milestone:
+        $ref: '#/definitions/Milestone'
+      number:
+        format: int64
+        type: integer
+        x-go-name: Index
+      pull_request:
+        $ref: '#/definitions/PullRequestMeta'
+      state:
+        $ref: '#/definitions/StateType'
+      title:
+        type: string
+        x-go-name: Title
+      updated_at:
+        format: date-time
+        type: string
+        x-go-name: Updated
+      url:
+        type: string
+        x-go-name: URL
+      user:
+        $ref: '#/definitions/User'
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  IssueDeadline:
+    description: IssueDeadline represents an issue deadline
+    properties:
+      due_date:
+        format: date-time
+        type: string
+        x-go-name: Deadline
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  IssueLabelsOption:
+    description: IssueLabelsOption a collection of labels
+    properties:
+      labels:
+        description: list of label IDs
+        items:
+          format: int64
+          type: integer
+        type: array
+        x-go-name: Labels
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Label:
+    description: Label a label to an issue or a pr
+    properties:
+      color:
+        example: 00aabb
+        type: string
+        x-go-name: Color
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      name:
+        type: string
+        x-go-name: Name
+      url:
+        type: string
+        x-go-name: URL
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  MarkdownOption:
+    description: MarkdownOption markdown options
+    properties:
+      Context:
+        description: |-
+          Context to render
+
+          in: body
+        type: string
+      Mode:
+        description: |-
+          Mode to render
+
+          in: body
+        type: string
+      Text:
+        description: |-
+          Text markdown to render
+
+          in: body
+        type: string
+      Wiki:
+        description: |-
+          Is it a wiki page ?
+
+          in: body
+        type: boolean
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  MigrateRepoForm:
+    description: MigrateRepoForm form for migrating repository
+    properties:
+      auth_password:
+        type: string
+        x-go-name: AuthPassword
+      auth_username:
+        type: string
+        x-go-name: AuthUsername
+      clone_addr:
+        type: string
+        x-go-name: CloneAddr
+      description:
+        type: string
+        x-go-name: Description
+      mirror:
+        type: boolean
+        x-go-name: Mirror
+      private:
+        type: boolean
+        x-go-name: Private
+      repo_name:
+        type: string
+        x-go-name: RepoName
+      uid:
+        format: int64
+        type: integer
+        x-go-name: UID
+    required:
+      - clone_addr
+      - uid
+      - repo_name
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/auth
+  Milestone:
+    description: Milestone milestone is a collection of issues on one repository
+    properties:
+      closed_at:
+        format: date-time
+        type: string
+        x-go-name: Closed
+      closed_issues:
+        format: int64
+        type: integer
+        x-go-name: ClosedIssues
+      description:
+        type: string
+        x-go-name: Description
+      due_on:
+        format: date-time
+        type: string
+        x-go-name: Deadline
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      open_issues:
+        format: int64
+        type: integer
+        x-go-name: OpenIssues
+      state:
+        $ref: '#/definitions/StateType'
+      title:
+        type: string
+        x-go-name: Title
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Organization:
+    description: Organization represents an organization
+    properties:
+      avatar_url:
+        type: string
+        x-go-name: AvatarURL
+      description:
+        type: string
+        x-go-name: Description
+      full_name:
+        type: string
+        x-go-name: FullName
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      location:
+        type: string
+        x-go-name: Location
+      username:
+        type: string
+        x-go-name: UserName
+      website:
+        type: string
+        x-go-name: Website
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  PRBranchInfo:
+    description: PRBranchInfo information about a branch
+    properties:
+      label:
+        type: string
+        x-go-name: Name
+      ref:
+        type: string
+        x-go-name: Ref
+      repo:
+        $ref: '#/definitions/Repository'
+      repo_id:
+        format: int64
+        type: integer
+        x-go-name: RepoID
+      sha:
+        type: string
+        x-go-name: Sha
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  PayloadCommit:
+    description: PayloadCommit represents a commit
+    properties:
+      author:
+        $ref: '#/definitions/PayloadUser'
+      committer:
+        $ref: '#/definitions/PayloadUser'
+      id:
+        description: sha1 hash of the commit
+        type: string
+        x-go-name: ID
+      message:
+        type: string
+        x-go-name: Message
+      timestamp:
+        format: date-time
+        type: string
+        x-go-name: Timestamp
+      url:
+        type: string
+        x-go-name: URL
+      verification:
+        $ref: '#/definitions/PayloadCommitVerification'
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  PayloadCommitVerification:
+    description: PayloadCommitVerification represents the GPG verification of a commit
+    properties:
+      payload:
+        type: string
+        x-go-name: Payload
+      reason:
+        type: string
+        x-go-name: Reason
+      signature:
+        type: string
+        x-go-name: Signature
+      verified:
+        type: boolean
+        x-go-name: Verified
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  PayloadUser:
+    description: PayloadUser represents the author or committer of a commit
+    properties:
+      email:
+        format: email
+        type: string
+        x-go-name: Email
+      name:
+        description: Full name of the commit author
+        type: string
+        x-go-name: Name
+      username:
+        type: string
+        x-go-name: UserName
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Permission:
+    description: Permission represents a set of permissions
+    properties:
+      admin:
+        type: boolean
+        x-go-name: Admin
+      pull:
+        type: boolean
+        x-go-name: Pull
+      push:
+        type: boolean
+        x-go-name: Push
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  PublicKey:
+    description: PublicKey publickey is a user key to push code to repository
+    properties:
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: Created
+      fingerprint:
+        type: string
+        x-go-name: Fingerprint
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      key:
+        type: string
+        x-go-name: Key
+      title:
+        type: string
+        x-go-name: Title
+      url:
+        type: string
+        x-go-name: URL
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  PullRequest:
+    description: PullRequest represents a pull request
+    properties:
+      assignee:
+        $ref: '#/definitions/User'
+      assignees:
+        items:
+          $ref: '#/definitions/User'
+        type: array
+        x-go-name: Assignees
+      base:
+        $ref: '#/definitions/PRBranchInfo'
+      body:
+        type: string
+        x-go-name: Body
+      closed_at:
+        format: date-time
+        type: string
+        x-go-name: Closed
+      comments:
+        format: int64
+        type: integer
+        x-go-name: Comments
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: Created
+      diff_url:
+        type: string
+        x-go-name: DiffURL
+      due_date:
+        format: date-time
+        type: string
+        x-go-name: Deadline
+      head:
+        $ref: '#/definitions/PRBranchInfo'
+      html_url:
+        type: string
+        x-go-name: HTMLURL
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      labels:
+        items:
+          $ref: '#/definitions/Label'
+        type: array
+        x-go-name: Labels
+      merge_base:
+        type: string
+        x-go-name: MergeBase
+      merge_commit_sha:
+        type: string
+        x-go-name: MergedCommitID
+      mergeable:
+        type: boolean
+        x-go-name: Mergeable
+      merged:
+        type: boolean
+        x-go-name: HasMerged
+      merged_at:
+        format: date-time
+        type: string
+        x-go-name: Merged
+      merged_by:
+        $ref: '#/definitions/User'
+      milestone:
+        $ref: '#/definitions/Milestone'
+      number:
+        format: int64
+        type: integer
+        x-go-name: Index
+      patch_url:
+        type: string
+        x-go-name: PatchURL
+      state:
+        $ref: '#/definitions/StateType'
+      title:
+        type: string
+        x-go-name: Title
+      updated_at:
+        format: date-time
+        type: string
+        x-go-name: Updated
+      url:
+        type: string
+        x-go-name: URL
+      user:
+        $ref: '#/definitions/User'
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  PullRequestMeta:
+    description: PullRequestMeta PR info if an issue is a PR
+    properties:
+      merged:
+        type: boolean
+        x-go-name: HasMerged
+      merged_at:
+        format: date-time
+        type: string
+        x-go-name: Merged
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Release:
+    description: Release represents a repository release
+    properties:
+      assets:
+        items:
+          $ref: '#/definitions/Attachment'
+        type: array
+        x-go-name: Attachments
+      author:
+        $ref: '#/definitions/User'
+      body:
+        type: string
+        x-go-name: Note
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: CreatedAt
+      draft:
+        type: boolean
+        x-go-name: IsDraft
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      name:
+        type: string
+        x-go-name: Title
+      prerelease:
+        type: boolean
+        x-go-name: IsPrerelease
+      published_at:
+        format: date-time
+        type: string
+        x-go-name: PublishedAt
+      tag_name:
+        type: string
+        x-go-name: TagName
+      tarball_url:
+        type: string
+        x-go-name: TarURL
+      target_commitish:
+        type: string
+        x-go-name: Target
+      url:
+        type: string
+        x-go-name: URL
+      zipball_url:
+        type: string
+        x-go-name: ZipURL
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Repository:
+    description: Repository represents a repository
+    properties:
+      clone_url:
+        type: string
+        x-go-name: CloneURL
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: Created
+      default_branch:
+        type: string
+        x-go-name: DefaultBranch
+      description:
+        type: string
+        x-go-name: Description
+      empty:
+        type: boolean
+        x-go-name: Empty
+      fork:
+        type: boolean
+        x-go-name: Fork
+      forks_count:
+        format: int64
+        type: integer
+        x-go-name: Forks
+      full_name:
+        type: string
+        x-go-name: FullName
+      html_url:
+        type: string
+        x-go-name: HTMLURL
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      mirror:
+        type: boolean
+        x-go-name: Mirror
+      name:
+        type: string
+        x-go-name: Name
+      open_issues_count:
+        format: int64
+        type: integer
+        x-go-name: OpenIssues
+      owner:
+        $ref: '#/definitions/User'
+      parent:
+        $ref: '#/definitions/Repository'
+      permissions:
+        $ref: '#/definitions/Permission'
+      private:
+        type: boolean
+        x-go-name: Private
+      size:
+        format: int64
+        type: integer
+        x-go-name: Size
+      ssh_url:
+        type: string
+        x-go-name: SSHURL
+      stars_count:
+        format: int64
+        type: integer
+        x-go-name: Stars
+      updated_at:
+        format: date-time
+        type: string
+        x-go-name: Updated
+      watchers_count:
+        format: int64
+        type: integer
+        x-go-name: Watchers
+      website:
+        type: string
+        x-go-name: Website
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  SearchResults:
+    description: SearchResults results of a successful search
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Repository'
+        type: array
+        x-go-name: Data
+      ok:
+        type: boolean
+        x-go-name: OK
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  ServerVersion:
+    description: ServerVersion wraps the version of the server
+    properties:
+      version:
+        type: string
+        x-go-name: Version
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  StateType:
+    description: StateType issue state type
+    type: string
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Status:
+    description: Status holds a single Status of a single Commit
+    properties:
+      context:
+        type: string
+        x-go-name: Context
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: Created
+      creator:
+        $ref: '#/definitions/User'
+      description:
+        type: string
+        x-go-name: Description
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      status:
+        $ref: '#/definitions/StatusState'
+      target_url:
+        type: string
+        x-go-name: TargetURL
+      updated_at:
+        format: date-time
+        type: string
+        x-go-name: Updated
+      url:
+        type: string
+        x-go-name: URL
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  StatusState:
+    description: |-
+      StatusState holds the state of a Status
+      It can be "pending", "success", "error", "failure", and "warning"
+    type: string
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Team:
+    description: Team represents a team in an organization
+    properties:
+      description:
+        type: string
+        x-go-name: Description
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      name:
+        type: string
+        x-go-name: Name
+      permission:
+        enum:
+          - none
+          - read
+          - write
+          - admin
+          - owner
+        type: string
+        x-go-name: Permission
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  TrackedTime:
+    description: TrackedTime worked time for an issue / pr
+    properties:
+      created:
+        format: date-time
+        type: string
+        x-go-name: Created
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      issue_id:
+        format: int64
+        type: integer
+        x-go-name: IssueID
+      time:
+        description: Time in seconds
+        format: int64
+        type: integer
+        x-go-name: Time
+      user_id:
+        format: int64
+        type: integer
+        x-go-name: UserID
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  User:
+    description: User represents a user
+    properties:
+      avatar_url:
+        description: URL to the user's avatar
+        type: string
+        x-go-name: AvatarURL
+      email:
+        format: email
+        type: string
+        x-go-name: Email
+      full_name:
+        description: the user's full name
+        type: string
+        x-go-name: FullName
+      id:
+        description: the user's id
+        format: int64
+        type: integer
+        x-go-name: ID
+      language:
+        description: User locale
+        type: string
+        x-go-name: Language
+      login:
+        description: the user's username
+        type: string
+        x-go-name: UserName
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  WatchInfo:
+    description: WatchInfo represents an API watch status of one repository
+    properties:
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: CreatedAt
+      ignored:
+        type: boolean
+        x-go-name: Ignored
+      reason:
+        type: object
+        x-go-name: Reason
+      repository_url:
+        type: string
+        x-go-name: RepositoryURL
+      subscribed:
+        type: boolean
+        x-go-name: Subscribed
+      url:
+        type: string
+        x-go-name: URL
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea

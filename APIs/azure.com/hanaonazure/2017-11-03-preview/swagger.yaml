@@ -1,0 +1,558 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: The SAP HANA on Azure Management Client.
+  title: HanaManagementClient
+  version: 2017-11-03-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/hanaonazure/resource-manager/Microsoft.HanaOnAzure/preview/2017-11-03-preview/hanaonazure.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: hanaonazure
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+parameters:
+  ApiVersionParameter:
+    description: Client API version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  HanaInstanceNameParameter:
+    description: Name of the SAP HANA on Azure instance.
+    in: path
+    name: hanaInstanceName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupNameParameter:
+    description: Name of the resource group.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: Subscription ID which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  /providers/Microsoft.HanaOnAzure/operations:
+    get:
+      description: Gets a list of SAP HANA management operations.
+      operationId: Operations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        List all HANA management operations supported by HANA RP:
+          parameters:
+            api-version: 2017-11-03-preview
+          responses:
+            '200':
+              body:
+                value:
+                  - display:
+                      description: HanaOp1Description
+                      operation: HanaOp1OperationName
+                      origin: HanaOp1Origin
+                      provider: HanaOp1ProviderName
+                      resource: HanaOp1ResourceName
+                    name: HanaOp1
+                  - display:
+                      description: HanaOp2Description
+                      operation: HanaOp2OperationName
+                      origin: HanaOp2Origin
+                      provider: HanaOp2ProviderName
+                      resource: HanaOp2ResourceName
+                    name: HanaOp2
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/providers/Microsoft.HanaOnAzure/hanaInstances':
+    get:
+      description: Gets a list of SAP HANA instances in the specified subscription. The operations returns various properties of each SAP HANA on Azure instance.
+      operationId: HanaInstances_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/HanaInstancesListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Gets a list of SAP HANA instances in the specified subscription.
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        List all HANA instances in a subscription:
+          parameters:
+            api-version: 2017-11-03-preview
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance1
+                    location: westus
+                    name: myHanaInstance1
+                    properties:
+                      hanaInstanceId: 00000000-0000-0000-0000-000000000000
+                      hardwareProfile:
+                        hanaInstanceSize: S72
+                        hardwareType: Cisco_UCS
+                      networkProfile:
+                        circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit
+                        networkInterfaces:
+                          - ipAddress: 100.100.100.100
+                      osProfile:
+                        computerName: myComputerName1
+                        osType: SUSE
+                        version: 12 SP1
+                      powerState: started
+                      storageProfile:
+                        nfsIpAddress: 200.200.200.200
+                    tags:
+                      key: value
+                    type: Microsoft.HanaOnAzure/hanaInstances
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance2
+                    location: westus
+                    name: myHanaInstance2
+                    properties:
+                      hanaInstanceId: 00000000-0000-0000-0000-000000000000
+                      hardwareProfile:
+                        hanaInstanceSize: S384
+                        hardwareType: HPE
+                      networkProfile:
+                        circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit
+                        networkInterfaces:
+                          - ipAddress: 100.100.100.101
+                      osProfile:
+                        computerName: myComputerName2
+                        osType: SUSE
+                        version: 12 SP1
+                      powerState: started
+                      storageProfile:
+                        nfsIpAddress: 200.200.200.201
+                    tags:
+                      key: value
+                    type: Microsoft.HanaOnAzure/hanaInstances
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup2/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance3
+                    location: westus
+                    name: myHanaInstance3
+                    properties:
+                      hanaInstanceId: 00000000-0000-0000-0000-000000000000
+                      hardwareProfile:
+                        hanaInstanceSize: S960m
+                        hardwareType: HPE
+                      networkProfile:
+                        circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup2/providers/Microsoft.Network/expressRouteCircuit
+                        networkInterfaces:
+                          - ipAddress: 100.100.100.102
+                      osProfile:
+                        computerName: myComputerName3
+                        osType: SUSE
+                        version: 12 SP1
+                      powerState: started
+                      storageProfile:
+                        nfsIpAddress: 200.200.200.202
+                    type: Microsoft.HanaOnAzure/hanaInstances
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances':
+    get:
+      description: Gets a list of SAP HANA instances in the specified subscription and the resource group. The operations returns various properties of each SAP HANA on Azure instance.
+      operationId: HanaInstances_ListByResourceGroup
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/HanaInstancesListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Gets a list of SAP HANA instances in the specified subscription and the resource group.
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        List all HANA instances in a resource group:
+          parameters:
+            api-version: 2017-11-03-preview
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance1
+                    location: westus
+                    name: myHanaInstance1
+                    properties:
+                      hanaInstanceId: 00000000-0000-0000-0000-000000000000
+                      hardwareProfile:
+                        hanaInstanceSize: S72
+                        hardwareType: Cisco_UCS
+                      networkProfile:
+                        circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit
+                        networkInterfaces:
+                          - ipAddress: 100.100.100.100
+                      osProfile:
+                        computerName: myComputerName1
+                        osType: SUSE
+                        version: 12 SP1
+                      powerState: started
+                      storageProfile:
+                        nfsIpAddress: 200.200.200.200
+                    tags:
+                      key: value
+                    type: Microsoft.HanaOnAzure/hanaInstances
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance2
+                    location: westus
+                    name: myHanaInstance2
+                    powerState: started
+                    properties:
+                      hanaInstanceId: 00000000-0000-0000-0000-000000000000
+                      hardwareProfile:
+                        hanaInstanceSize: S384
+                        hardwareType: HPE
+                      networkProfile:
+                        circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit
+                        networkInterfaces:
+                          - ipAddress: 100.100.100.101
+                      osProfile:
+                        computerName: myComputerName2
+                        osType: SUSE
+                        version: 12 SP1
+                      powerState: started
+                      storageProfile:
+                        nfsIpAddress: 200.200.200.201
+                    tags:
+                      key: value
+                    type: Microsoft.HanaOnAzure/hanaInstances
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}':
+    get:
+      description: 'Gets properties of a SAP HANA instance for the specified subscription, resource group, and instance name.'
+      operationId: HanaInstances_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/HanaInstanceNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/HanaInstance'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Gets properties of a SAP HANA instance.
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        Get properties of a HANA instance:
+          parameters:
+            api-version: 2017-11-03-preview
+            hanaInstanceName: myHanaInstance
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance
+                location: westus
+                name: myHanaInstance
+                properties:
+                  hanaInstanceId: 00000000-0000-0000-0000-000000000000
+                  hardwareProfile:
+                    hanaInstanceSize: S72
+                    hardwareType: Cisco_UCS
+                  networkProfile:
+                    circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit
+                    networkInterfaces:
+                      - ipAddress: 100.100.100.100
+                  osProfile:
+                    computerName: myComputerName
+                    osType: SUSE
+                    version: 12 SP1
+                  powerState: restarting
+                  storageProfile:
+                    nfsIpAddress: 200.200.200.200
+                tags:
+                  key: value
+                type: Microsoft.HanaOnAzure/hanaInstances
+definitions:
+  Disk:
+    description: Specifies the disk information fo the HANA instance
+    properties:
+      diskSizeGB:
+        description: Specifies the size of an empty data disk in gigabytes.
+        format: int32
+        type: integer
+      lun:
+        description: Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
+        format: int32
+        readOnly: true
+        type: integer
+      name:
+        description: The disk name.
+        type: string
+  Display:
+    description: Detailed HANA operation information
+    properties:
+      description:
+        description: 'The localized friendly description for the operation as shown to the user. This description should be thorough, yet concise. It will be used in tool-tips and detailed views.'
+        readOnly: true
+        type: string
+      operation:
+        description: 'The localized friendly name for the operation as shown to the user. This name should be concise (to fit in drop downs), but clear (self-documenting). Use Title Casing and include the entity/resource to which it applies.'
+        readOnly: true
+        type: string
+      origin:
+        description: 'The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is ''user,system'''
+        readOnly: true
+        type: string
+      provider:
+        description: The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with "Microsoft" for 1st party services.
+        readOnly: true
+        type: string
+      resource:
+        description: 'The localized friendly form of the resource type related to this action/operation. This form should match the public documentation for the resource provider. Use Title Casing. For examples, refer to the “name” section.'
+        readOnly: true
+        type: string
+    type: object
+  ErrorResponse:
+    description: Describes the format of Error response.
+    properties:
+      code:
+        description: Error code
+        type: string
+      message:
+        description: Error message indicating why the operation failed.
+        type: string
+    type: object
+  HanaInstance:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: HANA instance info on Azure (ARM properties and HANA properties)
+    properties:
+      properties:
+        $ref: '#/definitions/HanaInstanceProperties'
+        description: HANA instance properties
+        x-ms-client-flatten: true
+  HanaInstanceProperties:
+    description: Describes the properties of a HANA instance.
+    properties:
+      hanaInstanceId:
+        description: Specifies the HANA instance unique ID.
+        readOnly: true
+        type: string
+      hardwareProfile:
+        $ref: '#/definitions/HardwareProfile'
+        description: Specifies the hardware settings for the HANA instance.
+      networkProfile:
+        $ref: '#/definitions/NetworkProfile'
+        description: Specifies the network settings for the HANA instance.
+      osProfile:
+        $ref: '#/definitions/OSProfile'
+        description: Specifies the operating system settings for the HANA instance.
+      powerState:
+        description: Resource power state
+        enum:
+          - starting
+          - started
+          - stopping
+          - stopped
+          - restarting
+          - unknown
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: HanaInstancePowerStateEnum
+      storageProfile:
+        $ref: '#/definitions/StorageProfile'
+        description: Specifies the storage settings for the HANA instance disks.
+  HanaInstancesListResult:
+    description: The response from the List HANA Instances operation.
+    properties:
+      nextLink:
+        description: The URL to get the next set of HANA instances.
+        type: string
+      value:
+        description: The list of SAP HANA on Azure instances.
+        items:
+          $ref: '#/definitions/HanaInstance'
+        type: array
+  HardwareProfile:
+    description: Specifies the hardware settings for the HANA instance.
+    properties:
+      hanaInstanceSize:
+        description: Specifies the HANA instance SKU.
+        enum:
+          - S72m
+          - S144m
+          - S72
+          - S144
+          - S192
+          - S192m
+          - S192xm
+          - S384
+          - S384m
+          - S384xm
+          - S384xxm
+          - S576m
+          - S576xm
+          - S768
+          - S768m
+          - S768xm
+          - S960m
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: HanaInstanceSizeNamesEnum
+      hardwareType:
+        description: Name of the hardware type (vendor and/or their product name)
+        enum:
+          - Cisco_UCS
+          - HPE
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: HanaHardwareTypeNamesEnum
+  IpAddress:
+    description: Specifies the IP address of the network interaface.
+    properties:
+      ipAddress:
+        description: Specifies the IP address of the network interface.
+        readOnly: true
+        type: string
+  NetworkProfile:
+    description: Specifies the network settings for the HANA instance disks.
+    properties:
+      circuitId:
+        description: Specifies the circuit id for connecting to express route.
+        readOnly: true
+        type: string
+      networkInterfaces:
+        description: Specifies the network interfaces for the HANA instance.
+        items:
+          $ref: '#/definitions/IpAddress'
+        type: array
+  OSProfile:
+    description: Specifies the operating system settings for the HANA instance.
+    properties:
+      computerName:
+        description: Specifies the host OS name of the HANA instance.
+        readOnly: true
+        type: string
+      osType:
+        description: This property allows you to specify the type of the OS.
+        readOnly: true
+        type: string
+      version:
+        description: Specifies version of operating system.
+        readOnly: true
+        type: string
+  Operation:
+    description: HANA operation information
+    properties:
+      display:
+        $ref: '#/definitions/Display'
+        description: Displayed HANA operation information
+      name:
+        description: The name of the operation being performed on this particular object. This name should match the action name that appears in RBAC / the event service.
+        readOnly: true
+        type: string
+    type: object
+  OperationList:
+    description: List of HANA operations
+    properties:
+      value:
+        description: List of HANA operations
+        items:
+          $ref: '#/definitions/Operation'
+        type: array
+    type: object
+  Resource:
+    description: The resource model definition.
+    properties:
+      id:
+        description: Resource ID
+        readOnly: true
+        type: string
+      location:
+        description: Resource location
+        readOnly: true
+        type: string
+      name:
+        description: Resource name
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        readOnly: true
+        type: object
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
+  StorageProfile:
+    description: Specifies the storage settings for the HANA instance disks.
+    properties:
+      nfsIpAddress:
+        description: IP Address to connect to storage.
+        readOnly: true
+        type: string
+      osDisks:
+        description: Specifies information about the operating system disk used by the hana instance.
+        items:
+          $ref: '#/definitions/Disk'
+        type: array

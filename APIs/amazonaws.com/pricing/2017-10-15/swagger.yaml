@@ -265,44 +265,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AttributeNameList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  AttributeValue:
-    type: object
-    properties:
-      Value:
-        $ref: '#/definitions/String'
-        description: The specific value of an <code>attributeName</code>.
-    description: 'The values of a given attribute, such as <code>Throughput Optimized HDD</code> or <code>Provisioned IOPS</code> for the <code>Amazon EC2</code> <code>volumeType</code> attribute.'
-  AttributeValueList:
-    type: array
-    items:
-      $ref: '#/definitions/AttributeValue'
-  BoxedInteger:
-    type: integer
-    minimum: 1
-    maximum: 100
-  DescribeServicesRequest:
-    type: object
-    example:
-      FormatVersion: aws_v1
-      MaxResults: 1
-      ServiceCode: AmazonEC2
-    properties:
-      ServiceCode:
-        $ref: '#/definitions/String'
-        description: 'The code for the service whose information you want to retrieve, such as <code>AmazonEC2</code>. You can use the <code>ServiceCode</code> to filter the results in a <code>GetProducts</code> call. To retrieve a list of all services, leave this blank.'
-      FormatVersion:
-        $ref: '#/definitions/String'
-        description: '<p>The format version that you want the response to be in.</p> <p>Valid values are: <code>aws_v1</code> </p>'
-      NextToken:
-        $ref: '#/definitions/String'
-        description: The pagination token that indicates the next set of results that you want to retrieve.
-      MaxResults:
-        $ref: '#/definitions/BoxedInteger'
-        description: The maximum number of results that you want returned in the response.
   DescribeServicesResponse:
     type: object
     example:
@@ -326,37 +288,69 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The pagination token for the next set of retreivable results.
+  DescribeServicesRequest:
+    type: object
+    example:
+      FormatVersion: aws_v1
+      MaxResults: 1
+      ServiceCode: AmazonEC2
+    properties:
+      ServiceCode:
+        $ref: '#/definitions/String'
+        description: 'The code for the service whose information you want to retrieve, such as <code>AmazonEC2</code>. You can use the <code>ServiceCode</code> to filter the results in a <code>GetProducts</code> call. To retrieve a list of all services, leave this blank.'
+      FormatVersion:
+        $ref: '#/definitions/String'
+        description: '<p>The format version that you want the response to be in.</p> <p>Valid values are: <code>aws_v1</code> </p>'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The pagination token that indicates the next set of results that you want to retrieve.
+      MaxResults:
+        $ref: '#/definitions/BoxedInteger'
+        description: The maximum number of results that you want returned in the response.
+  InternalErrorException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/errorMessage'
+    description: An error on the server occurred during the processing of your request. Try again later.
+  InvalidParameterException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/errorMessage'
+    description: One or more parameters had an invalid value.
+  NotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/errorMessage'
+    description: The requested resource can't be found.
+  InvalidNextTokenException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/errorMessage'
+    description: The pagination token is invalid. Try again without a pagination token.
   ExpiredNextTokenException:
     type: object
     properties:
       Message:
         $ref: '#/definitions/errorMessage'
     description: The pagination token expired. Try again without a pagination token.
-  Filter:
+  GetAttributeValuesResponse:
     type: object
-    required:
-      - Type
-      - Field
-      - Value
+    example:
+      AttributeValues:
+        - Value: Throughput Optimized HDD
+        - Value: Provisioned IOPS
+      NextToken: 'GpgauEXAMPLEezucl5LV0w==:7GzYJ0nw0DBTJ2J66EoTIIynE6O1uXwQtTRqioJzQadBnDVgHPzI1en4BUQnPCLpzeBk9RQQAWaFieA4+DapFAGLgk+Z/9/cTw9GldnPOHN98+FdmJP7wKU3QQpQ8MQr5KOeBkIsAqvAQYdL0DkL7tHwPtE5iCEByAmg9gcC/yBU1vAOsf7R3VaNN4M5jMDv3woSWqASSIlBVB6tgW78YL22KhssoItM/jWW+aP6Jqtq4mldxp/ct6DWAl+xLFwHU/CbketimPPXyqHF3/UXDw=='
     properties:
-      Type:
-        $ref: '#/definitions/FilterType'
-        description: '<p>The type of filter that you want to use.</p> <p>Valid values are: <code>TERM_MATCH</code>. <code>TERM_MATCH</code> returns only products that match both the given filter field and the given value.</p>'
-      Field:
+      AttributeValues:
+        $ref: '#/definitions/AttributeValueList'
+        description: 'The list of values for an attribute. For example, <code>Throughput Optimized HDD</code> and <code>Provisioned IOPS</code> are two available values for the <code>AmazonEC2</code> <code>volumeType</code>.'
+      NextToken:
         $ref: '#/definitions/String'
-        description: '<p>The product metadata field that you want to filter on. You can filter by just the service code to see all products for a specific service, filter by just the attribute name to see a specific attribute for multiple services, or use both a service code and an attribute name to retrieve only products that match both fields.</p> <p>Valid values include: <code>ServiceCode</code>, and all attribute names</p> <p>For example, you can filter by the <code>AmazonEC2</code> service code and the <code>volumeType</code> attribute name to get the prices for only Amazon EC2 volumes.</p>'
-      Value:
-        $ref: '#/definitions/String'
-        description: 'The service code or attribute value that you want to filter by. If you are filtering by service code this is the actual service code, such as <code>AmazonEC2</code>. If you are filtering by attribute name, this is the attribute value that you want the returned products to match, such as a <code>Provisioned IOPS</code> volume.'
-    description: The constraints that you want all returned products to match.
-  FilterType:
-    type: string
-    enum:
-      - TERM_MATCH
-  Filters:
-    type: array
-    items:
-      $ref: '#/definitions/Filter'
+        description: The pagination token that indicates the next set of results to retrieve.
   GetAttributeValuesRequest:
     type: object
     required:
@@ -379,17 +373,20 @@ definitions:
       MaxResults:
         $ref: '#/definitions/BoxedInteger'
         description: The maximum number of results to return in response.
-  GetAttributeValuesResponse:
+  GetProductsResponse:
     type: object
     example:
-      AttributeValues:
-        - Value: Throughput Optimized HDD
-        - Value: Provisioned IOPS
-      NextToken: 'GpgauEXAMPLEezucl5LV0w==:7GzYJ0nw0DBTJ2J66EoTIIynE6O1uXwQtTRqioJzQadBnDVgHPzI1en4BUQnPCLpzeBk9RQQAWaFieA4+DapFAGLgk+Z/9/cTw9GldnPOHN98+FdmJP7wKU3QQpQ8MQr5KOeBkIsAqvAQYdL0DkL7tHwPtE5iCEByAmg9gcC/yBU1vAOsf7R3VaNN4M5jMDv3woSWqASSIlBVB6tgW78YL22KhssoItM/jWW+aP6Jqtq4mldxp/ct6DWAl+xLFwHU/CbketimPPXyqHF3/UXDw=='
+      FormatVersion: aws_v1
+      NextToken: '57r3EXAMPLEujbzWfHF7Ciw==:ywSmZsD3mtpQmQLQ5XfOsIMkYybSj+vAT+kGmwMFq+K9DGmIoJkz7lunVeamiOPgthdWSO2a7YKojCO+zY4dJmuNl2QvbNhXs+AJ2Ufn7xGmJncNI2TsEuAsVCUfTAvAQNcwwamtk6XuZ4YdNnooV62FjkV3ZAn40d9+wAxV7+FImvhUHi/+f8afgZdGh2zPUlH8jlV9uUtj0oHp8+DhPUuHXh+WBII1E/aoKpPSm3c='
+      PriceList:
+        - '{"product":{"productFamily":"Storage","attributes":{"storageMedia":"SSD-backed","maxThroughputvolume":"320 MB/sec","volumeType":"Provisioned IOPS","maxIopsvolume":"20000","servicecode":"AmazonEC2","usagetype":"CAN1-EBS:VolumeUsage.piops","locationType":"AWS Region","location":"Canada (Central)","servicename":"Amazon Elastic Compute Cloud","maxVolumeSize":"16 TiB","operation":""},"sku":"WQGC34PB2AWS8R4U"},"serviceCode":"AmazonEC2","terms":{"OnDemand":{"WQGC34PB2AWS8R4U.JRTCKXETXF":{"priceDimensions":{"WQGC34PB2AWS8R4U.JRTCKXETXF.6YS6EN2CT7":{"unit":"GB-Mo","endRange":"Inf","description":"$0.138 per GB-month of Provisioned IOPS SSD (io1)  provisioned storage - Canada (Central)","appliesTo":[],"rateCode":"WQGC34PB2AWS8R4U.JRTCKXETXF.6YS6EN2CT7","beginRange":"0","pricePerUnit":{"USD":"0.1380000000"}}},"sku":"WQGC34PB2AWS8R4U","effectiveDate":"2017-08-01T00:00:00Z","offerTermCode":"JRTCKXETXF","termAttributes":{}}}},"version":"20170901182201","publicationDate":"2017-09-01T18:22:01Z"}'
     properties:
-      AttributeValues:
-        $ref: '#/definitions/AttributeValueList'
-        description: 'The list of values for an attribute. For example, <code>Throughput Optimized HDD</code> and <code>Provisioned IOPS</code> are two available values for the <code>AmazonEC2</code> <code>volumeType</code>.'
+      FormatVersion:
+        $ref: '#/definitions/String'
+        description: 'The format version of the response. For example, aws_v1.'
+      PriceList:
+        $ref: '#/definitions/PriceList'
+        description: The list of products that match your filters. The list contains both the product metadata and the price information.
       NextToken:
         $ref: '#/definitions/String'
         description: The pagination token that indicates the next set of results to retrieve.
@@ -421,47 +418,58 @@ definitions:
       MaxResults:
         $ref: '#/definitions/BoxedInteger'
         description: The maximum number of results to return in the response.
-  GetProductsResponse:
+  String:
+    type: string
+  AttributeNameList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  AttributeValue:
     type: object
-    example:
-      FormatVersion: aws_v1
-      NextToken: '57r3EXAMPLEujbzWfHF7Ciw==:ywSmZsD3mtpQmQLQ5XfOsIMkYybSj+vAT+kGmwMFq+K9DGmIoJkz7lunVeamiOPgthdWSO2a7YKojCO+zY4dJmuNl2QvbNhXs+AJ2Ufn7xGmJncNI2TsEuAsVCUfTAvAQNcwwamtk6XuZ4YdNnooV62FjkV3ZAn40d9+wAxV7+FImvhUHi/+f8afgZdGh2zPUlH8jlV9uUtj0oHp8+DhPUuHXh+WBII1E/aoKpPSm3c='
-      PriceList:
-        - '{"product":{"productFamily":"Storage","attributes":{"storageMedia":"SSD-backed","maxThroughputvolume":"320 MB/sec","volumeType":"Provisioned IOPS","maxIopsvolume":"20000","servicecode":"AmazonEC2","usagetype":"CAN1-EBS:VolumeUsage.piops","locationType":"AWS Region","location":"Canada (Central)","servicename":"Amazon Elastic Compute Cloud","maxVolumeSize":"16 TiB","operation":""},"sku":"WQGC34PB2AWS8R4U"},"serviceCode":"AmazonEC2","terms":{"OnDemand":{"WQGC34PB2AWS8R4U.JRTCKXETXF":{"priceDimensions":{"WQGC34PB2AWS8R4U.JRTCKXETXF.6YS6EN2CT7":{"unit":"GB-Mo","endRange":"Inf","description":"$0.138 per GB-month of Provisioned IOPS SSD (io1)  provisioned storage - Canada (Central)","appliesTo":[],"rateCode":"WQGC34PB2AWS8R4U.JRTCKXETXF.6YS6EN2CT7","beginRange":"0","pricePerUnit":{"USD":"0.1380000000"}}},"sku":"WQGC34PB2AWS8R4U","effectiveDate":"2017-08-01T00:00:00Z","offerTermCode":"JRTCKXETXF","termAttributes":{}}}},"version":"20170901182201","publicationDate":"2017-09-01T18:22:01Z"}'
     properties:
-      FormatVersion:
+      Value:
         $ref: '#/definitions/String'
-        description: 'The format version of the response. For example, aws_v1.'
-      PriceList:
-        $ref: '#/definitions/PriceList'
-        description: The list of products that match your filters. The list contains both the product metadata and the price information.
-      NextToken:
+        description: The specific value of an <code>attributeName</code>.
+    description: 'The values of a given attribute, such as <code>Throughput Optimized HDD</code> or <code>Provisioned IOPS</code> for the <code>Amazon EC2</code> <code>volumeType</code> attribute.'
+  AttributeValueList:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeValue'
+  BoxedInteger:
+    type: integer
+    minimum: 1
+    maximum: 100
+  ServiceList:
+    type: array
+    items:
+      $ref: '#/definitions/Service'
+  errorMessage:
+    type: string
+  FilterType:
+    type: string
+    enum:
+      - TERM_MATCH
+  Filter:
+    type: object
+    required:
+      - Type
+      - Field
+      - Value
+    properties:
+      Type:
+        $ref: '#/definitions/FilterType'
+        description: '<p>The type of filter that you want to use.</p> <p>Valid values are: <code>TERM_MATCH</code>. <code>TERM_MATCH</code> returns only products that match both the given filter field and the given value.</p>'
+      Field:
         $ref: '#/definitions/String'
-        description: The pagination token that indicates the next set of results to retrieve.
-  InternalErrorException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: An error on the server occurred during the processing of your request. Try again later.
-  InvalidNextTokenException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: The pagination token is invalid. Try again without a pagination token.
-  InvalidParameterException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: One or more parameters had an invalid value.
-  NotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/errorMessage'
-    description: The requested resource can't be found.
+        description: '<p>The product metadata field that you want to filter on. You can filter by just the service code to see all products for a specific service, filter by just the attribute name to see a specific attribute for multiple services, or use both a service code and an attribute name to retrieve only products that match both fields.</p> <p>Valid values include: <code>ServiceCode</code>, and all attribute names</p> <p>For example, you can filter by the <code>AmazonEC2</code> service code and the <code>volumeType</code> attribute name to get the prices for only Amazon EC2 volumes.</p>'
+      Value:
+        $ref: '#/definitions/String'
+        description: 'The service code or attribute value that you want to filter by. If you are filtering by service code this is the actual service code, such as <code>AmazonEC2</code>. If you are filtering by attribute name, this is the attribute value that you want the returned products to match, such as a <code>Provisioned IOPS</code> volume.'
+    description: The constraints that you want all returned products to match.
+  Filters:
+    type: array
+    items:
+      $ref: '#/definitions/Filter'
   PriceList:
     type: array
     items:
@@ -478,11 +486,3 @@ definitions:
         $ref: '#/definitions/AttributeNameList'
         description: The attributes that are available for this service.
     description: 'The metadata for a service, such as the service code and available attribute names.'
-  ServiceList:
-    type: array
-    items:
-      $ref: '#/definitions/Service'
-  String:
-    type: string
-  errorMessage:
-    type: string

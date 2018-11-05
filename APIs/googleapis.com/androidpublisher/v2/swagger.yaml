@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.11
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/androidpublisher/v2/rest'
       version: v1
@@ -67,19 +67,19 @@ parameters:
     name: prettyPrint
     type: boolean
   quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
     in: query
     name: quotaUser
     type: string
   userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    description: Deprecated. Please use quotaUser instead.
     in: query
     name: userIp
     type: string
 tags:
   - name: edits
-  - name: entitlements
   - name: inappproducts
+  - name: orders
   - name: purchases
   - name: reviews
 paths:
@@ -690,6 +690,64 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
+  '/{packageName}/edits/{editId}/bundles':
+    get:
+      operationId: androidpublisher.edits.bundles.list
+      parameters:
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BundlesListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - edits
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      consumes:
+        - application/octet-stream
+      description: 'Uploads a new Android App Bundle to this edit. If you are using the Google API client libraries, please increase the timeout of the http request before calling this endpoint (a timeout of 2 minutes is recommended). See: https://developers.google.com/api-client-library/java/google-api-java-client/errors for an example in java.'
+      operationId: androidpublisher.edits.bundles.upload
+      parameters:
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Bundle'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - edits
   '/{packageName}/edits/{editId}/details':
     get:
       description: Fetches app details for this edit. This includes the default language and developer support contact information.
@@ -1251,7 +1309,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production" or "rollout".'
+        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
           in: path
           name: track
           required: true
@@ -1291,7 +1349,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production" or "rollout".'
+        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
           in: path
           name: track
           required: true
@@ -1323,7 +1381,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production" or "rollout".'
+        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
           in: path
           name: track
           required: true
@@ -1386,7 +1444,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production" or "rollout".'
+        - description: The track to read or modify.
           in: path
           name: track
           required: true
@@ -1427,7 +1485,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production" or "rollout".'
+        - description: The track to read or modify.
           in: path
           name: track
           required: true
@@ -1460,7 +1518,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production" or "rollout".'
+        - description: The track to read or modify.
           in: path
           name: track
           required: true
@@ -1541,44 +1599,6 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
-  '/{packageName}/entitlements':
-    get:
-      description: Lists the user's current inapp item or subscription entitlements
-      operationId: androidpublisher.entitlements.list
-      parameters:
-        - in: query
-          name: maxResults
-          type: integer
-        - description: 'The package name of the application the inapp product was sold in (for example, ''com.some.thing'').'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: 'The product id of the inapp product (for example, ''sku1''). This can be used to restrict the result set.'
-          in: query
-          name: productId
-          type: string
-        - in: query
-          name: startIndex
-          type: integer
-        - in: query
-          name: token
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/EntitlementsListResponse'
-      tags:
-        - entitlements
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
   '/{packageName}/inappproducts':
     get:
       description: 'List all the in-app products for an Android app, both subscriptions and managed in-app products..'
@@ -1761,6 +1781,41 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - inappproducts
+  '/{packageName}/orders/{orderId}:refund':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Refund a user's subscription or in-app purchase order.
+      operationId: androidpublisher.orders.refund
+      parameters:
+        - description: The order ID provided to the user when the subscription or in-app order was purchased.
+          in: path
+          name: orderId
+          required: true
+          type: string
+        - description: 'The package name of the application for which this subscription or in-app item was purchased (for example, ''com.some.thing'').'
+          in: path
+          name: packageName
+          required: true
+          type: string
+        - description: 'Whether to revoke the purchased item. If set to true, access to the subscription or in-app item will be terminated immediately. If the item is a recurring subscription, all future payments will also be terminated. Consumed in-app items need to be handled by developer''s app. (optional)'
+          in: query
+          name: revoke
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - orders
   '/{packageName}/purchases/products/{productId}/tokens/{token}':
     get:
       description: Checks the purchase and consumption status of an inapp item.
@@ -2232,6 +2287,30 @@ definitions:
         description: The ID of the edit that can be used in subsequent API calls.
         type: string
     type: object
+  Bundle:
+    properties:
+      sha1:
+        description: 'A sha1 hash of the upload payload, encoded as a hex string and matching the output of the sha1sum command.'
+        type: string
+      sha256:
+        description: 'A sha256 hash of the upload payload, encoded as a hex string and matching the output of the sha256sum command.'
+        type: string
+      versionCode:
+        description: The version code of the Android App Bundle. As specified in the Android App Bundle's base module APK manifest file.
+        format: int32
+        type: integer
+    type: object
+  BundlesListResponse:
+    properties:
+      bundles:
+        items:
+          $ref: '#/definitions/Bundle'
+        type: array
+      kind:
+        default: 'androidpublisher#bundlesListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidpublisher#bundlesListResponse".'
+        type: string
+    type: object
   Comment:
     properties:
       developerComment:
@@ -2302,37 +2381,6 @@ definitions:
         description: Screen width in pixels
         format: int32
         type: integer
-    type: object
-  Entitlement:
-    description: An Entitlement resource indicates a user's current entitlement to an inapp item or subscription.
-    properties:
-      kind:
-        default: 'androidpublisher#entitlement'
-        description: This kind represents an entitlement object in the androidpublisher service.
-        type: string
-      productId:
-        description: The SKU of the product.
-        type: string
-      productType:
-        description: |-
-          The type of the inapp product. Possible values are:  
-          - In-app item: "inapp" 
-          - Subscription: "subs"
-        type: string
-      token:
-        description: The token which can be verified using the subscriptions or products API.
-        type: string
-    type: object
-  EntitlementsListResponse:
-    properties:
-      pageInfo:
-        $ref: '#/definitions/PageInfo'
-      resources:
-        items:
-          $ref: '#/definitions/Entitlement'
-        type: array
-      tokenPagination:
-        $ref: '#/definitions/TokenPagination'
     type: object
   ExpansionFile:
     properties:
@@ -2461,6 +2509,9 @@ definitions:
       defaultPrice:
         $ref: '#/definitions/Price'
         description: Default price cannot be zero. In-app products can never be free. Default price is always in the developer's Checkout merchant currency.
+      gracePeriod:
+        description: 'Grace period of the subscription, specified in ISO 8601 format. It will allow developers to give their subscribers a grace period when the payment for the new recurrence period is declined. Acceptable values = "P3D" (three days) and "P7D" (seven days)'
+        type: string
       listings:
         additionalProperties:
           $ref: '#/definitions/InAppProductListing'
@@ -2684,6 +2735,23 @@ definitions:
         $ref: '#/definitions/MonthDay'
         description: Inclusive start date of the recurrence period.
     type: object
+  SubscriptionCancelSurveyResult:
+    description: Information provided by the user when they complete the subscription cancellation flow (cancellation reason survey).
+    properties:
+      cancelSurveyReason:
+        description: |-
+          The cancellation reason the user chose in the survey. Possible values are:  
+          - Other 
+          - I don't use this service enough 
+          - Technical issues 
+          - Cost-related reasons 
+          - I found a better app
+        format: int32
+        type: integer
+      userInputCancelReason:
+        description: The customized input cancel reason from the user. Only present when cancelReason is 0.
+        type: string
+    type: object
   SubscriptionDeferralInfo:
     description: A SubscriptionDeferralInfo contains the data needed to defer a subscription purchase to a future expiry time.
     properties:
@@ -2695,6 +2763,20 @@ definitions:
         description: 'The expected expiry time for the subscription. If the current expiry time for the subscription is not the value specified here, the deferral will not occur.'
         format: int64
         type: string
+    type: object
+  SubscriptionPriceChange:
+    description: Contains the price change information for a subscription that can be used to control the user journey for the price change in the app. This can be in the form of seeking confirmation from the user or tailoring the experience for a successful conversion.
+    properties:
+      newPrice:
+        $ref: '#/definitions/Price'
+        description: The new price the subscription will renew with if the price change is accepted by the user.
+      state:
+        description: |-
+          The current state of the price change. Possible values are:  
+          - Outstanding: State for a pending price change waiting for the user to agree. In this state, you can optionally seek confirmation from the user using the In-App API. 
+          - Accepted: State for an accepted price change that the subscription will renew with unless it's canceled. The price change takes effect on a future date when the subscription renews. Note that the change might not occur when the subscription is renewed next.
+        format: int32
+        type: integer
     type: object
   SubscriptionPurchase:
     description: A SubscriptionPurchase resource indicates the status of a user's subscription purchase.
@@ -2711,15 +2793,27 @@ definitions:
           - Subscription was canceled by the developer
         format: int32
         type: integer
+      cancelSurveyResult:
+        $ref: '#/definitions/SubscriptionCancelSurveyResult'
+        description: Information provided by the user when they complete the subscription cancellation flow (cancellation reason survey).
       countryCode:
         description: ISO 3166-1 alpha-2 billing country/region code of the user at the time the subscription was granted.
         type: string
       developerPayload:
         description: A developer-specified string that contains supplemental information about an order.
         type: string
+      emailAddress:
+        description: The email address of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
+        type: string
       expiryTimeMillis:
         description: 'Time at which the subscription will expire, in milliseconds since the Epoch.'
         format: int64
+        type: string
+      familyName:
+        description: The family name of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
+        type: string
+      givenName:
+        description: The given name of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
         type: string
       kind:
         default: 'androidpublisher#subscriptionPurchase'
@@ -2746,8 +2840,20 @@ definitions:
         description: 'Price of the subscription, not including tax. Price is expressed in micro-units, where 1,000,000 micro-units represents one unit of the currency. For example, if the subscription price is €1.99, price_amount_micros is 1990000.'
         format: int64
         type: string
+      priceChange:
+        $ref: '#/definitions/SubscriptionPriceChange'
+        description: |-
+          The latest price change information available. This is present only when there is an upcoming price change for the subscription yet to be applied.
+
+          Once the subscription renews with the new price or the subscription is canceled, no price change information will be returned.
       priceCurrencyCode:
         description: 'ISO 4217 currency code for the subscription price. For example, if the price is specified in British pounds sterling, price_currency_code is "GBP".'
+        type: string
+      profileId:
+        description: The profile id of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
+        type: string
+      profileName:
+        description: The profile name of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
         type: string
       purchaseType:
         description: |-
@@ -2807,12 +2913,13 @@ definitions:
   Track:
     properties:
       track:
-        description: 'Identifier for this track. One of "alpha", "beta", "production" or "rollout".'
+        description: Identifier for this track.
         type: string
       userFraction:
         format: double
         type: number
       versionCodes:
+        description: 'Version codes to make active on this track. Note that this list should contain all versions you wish to be active, including those you wish to retain from previous releases.'
         items:
           format: int32
           type: integer

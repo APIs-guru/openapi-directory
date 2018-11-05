@@ -1,0 +1,2951 @@
+swagger: '2.0'
+info:
+  version: '2017-11-27'
+  x-release: v4
+  title: AWS IoT Analytics
+  description: '<p>AWS IoT Analytics allows you to collect large amounts of device data, process messages, and store them. You can then query the data and run sophisticated analytics on it. AWS IoT Analytics enables advanced data exploration through integration with Jupyter Notebooks and data visualization through integration with Amazon QuickSight.</p> <p>Traditional analytics and business intelligence tools are designed to process structured data. IoT data often comes from devices that record noisy processes (such as temperature, motion, or sound). As a result the data from these devices can have significant gaps, corrupted messages, and false readings that must be cleaned up before analysis can occur. Also, IoT data is often only meaningful in the context of other data from external sources. </p> <p>AWS IoT Analytics automates the steps required to analyze data from IoT devices. AWS IoT Analytics filters, transforms, and enriches IoT data before storing it in a time-series data store for analysis. You can set up the service to collect only the data you need from your devices, apply mathematical transforms to process the data, and enrich the data with device-specific metadata such as device type and location before storing it. Then, you can analyze your data by running queries using the built-in SQL query engine, or perform more complex analytics and machine learning inference. AWS IoT Analytics includes pre-built models for common IoT use cases so you can answer questions like which devices are about to fail or which customers are at risk of abandoning their wearable devices.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: iotanalytics
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iotanalytics-2017-11-27.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/iotanalytics/'
+host: iotanalytics.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /messages/batch:
+    post:
+      operationId: BatchPutMessage
+      description: Sends messages to a channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchPutMessageResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchPutMessageRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/pipelines/{pipelineName}/reprocessing/{reprocessingId}':
+    delete:
+      operationId: CancelPipelineReprocessing
+      description: Cancels the reprocessing of data through the pipeline.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CancelPipelineReprocessingResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CancelPipelineReprocessingRequest'
+        - name: pipelineName
+          in: path
+          type: string
+          required: true
+        - name: reprocessingId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /channels:
+    post:
+      operationId: CreateChannel
+      description: 'Creates a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateChannelResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateChannelRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListChannels
+      description: Retrieves a list of channels.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListChannelsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListChannelsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  /datasets:
+    post:
+      operationId: CreateDataset
+      description: Creates a data set. A data set stores data retrieved from a data store by applying a "queryAction" (a SQL query) or a "containerAction" (executing a containerized application). This operation creates the skeleton of a data set. The data set can be populated manually by calling "CreateDatasetContent" or automatically according to a "trigger" you specify.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDatasetResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDatasetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListDatasets
+      description: Retrieves information about data sets.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDatasetsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDatasetsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/datasets/{datasetName}/content':
+    post:
+      operationId: CreateDatasetContent
+      description: Creates the content of a data set by applying a SQL action.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDatasetContentResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDatasetContentRequest'
+        - name: datasetName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteDatasetContent
+      description: Deletes the content of the specified data set.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDatasetContentRequest'
+        - name: datasetName
+          in: path
+          type: string
+          required: true
+    get:
+      operationId: GetDatasetContent
+      description: Retrieves the contents of a data set as pre-signed URIs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDatasetContentResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDatasetContentRequest'
+        - name: datasetName
+          in: path
+          type: string
+          required: true
+  /datastores:
+    post:
+      operationId: CreateDatastore
+      description: 'Creates a data store, which is a repository for messages.'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDatastoreResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDatastoreRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListDatastores
+      description: Retrieves a list of data stores.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDatastoresResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDatastoresRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  /pipelines:
+    post:
+      operationId: CreatePipeline
+      description: Creates a pipeline. A pipeline consumes messages from one or more channels and allows you to process the messages before storing them in a data store.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreatePipelineResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreatePipelineRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListPipelines
+      description: Retrieves a list of pipelines.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPipelinesResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPipelinesRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/channels/{channelName}':
+    delete:
+      operationId: DeleteChannel
+      description: Deletes the specified channel.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteChannelRequest'
+        - name: channelName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeChannel
+      description: Retrieves information about a channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeChannelResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeChannelRequest'
+        - name: channelName
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateChannel
+      description: Updates the settings of a channel.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateChannelRequest'
+        - name: channelName
+          in: path
+          type: string
+          required: true
+  '/datasets/{datasetName}':
+    delete:
+      operationId: DeleteDataset
+      description: <p>Deletes the specified data set.</p> <p>You do not have to delete the content of the data set before you perform this operation.</p>
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDatasetRequest'
+        - name: datasetName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeDataset
+      description: Retrieves information about a data set.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDatasetResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDatasetRequest'
+        - name: datasetName
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateDataset
+      description: Updates the settings of a data set.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDatasetRequest'
+        - name: datasetName
+          in: path
+          type: string
+          required: true
+  '/datastores/{datastoreName}':
+    delete:
+      operationId: DeleteDatastore
+      description: Deletes the specified data store.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDatastoreRequest'
+        - name: datastoreName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeDatastore
+      description: Retrieves information about a data store.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDatastoreResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDatastoreRequest'
+        - name: datastoreName
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateDatastore
+      description: Updates the settings of a data store.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDatastoreRequest'
+        - name: datastoreName
+          in: path
+          type: string
+          required: true
+  '/pipelines/{pipelineName}':
+    delete:
+      operationId: DeletePipeline
+      description: Deletes the specified pipeline.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeletePipelineRequest'
+        - name: pipelineName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribePipeline
+      description: Retrieves information about a pipeline.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribePipelineResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribePipelineRequest'
+        - name: pipelineName
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdatePipeline
+      description: Updates the settings of a pipeline.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdatePipelineRequest'
+        - name: pipelineName
+          in: path
+          type: string
+          required: true
+  /logging:
+    get:
+      operationId: DescribeLoggingOptions
+      description: Retrieves the current settings of the AWS IoT Analytics logging options.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeLoggingOptionsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeLoggingOptionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutLoggingOptions
+      description: '<p>Sets or updates the AWS IoT Analytics logging options.</p> <p>Note that if you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy) it takes up to 5 minutes for that change to take effect. </p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutLoggingOptionsRequest'
+  '/datasets/{datasetName}/contents':
+    get:
+      operationId: ListDatasetContents
+      description: Lists information about data set contents that have been created.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDatasetContentsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDatasetContentsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: datasetName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /tags:
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags (metadata) which you have assigned to the resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+    delete:
+      operationId: UntagResource
+      description: Removes the given tags (metadata) from the resource.
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+  /pipelineactivities/run:
+    post:
+      operationId: RunPipelineActivity
+      description: Simulates the results of running a pipeline activity on a message payload.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RunPipelineActivityResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RunPipelineActivityRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/channels/{channelName}/sample':
+    get:
+      operationId: SampleChannelData
+      description: Retrieves a sample of messages from the specified channel ingested during the specified timeframe. Up to 10 messages can be retrieved.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SampleChannelDataResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SampleChannelDataRequest'
+        - name: channelName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/pipelines/{pipelineName}/reprocessing':
+    post:
+      operationId: StartPipelineReprocessing
+      description: Starts the reprocessing of raw message data through the pipeline.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartPipelineReprocessingResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartPipelineReprocessingRequest'
+        - name: pipelineName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  BatchPutMessageResponse:
+    type: object
+    properties:
+      batchPutMessageErrorEntries:
+        $ref: '#/definitions/BatchPutMessageErrorEntries'
+        description: A list of any errors encountered when sending the messages to the channel.
+  BatchPutMessageRequest:
+    type: object
+    required:
+      - channelName
+      - messages
+    properties:
+      channelName:
+        $ref: '#/definitions/ChannelName'
+        description: The name of the channel where the messages are sent.
+      messages:
+        $ref: '#/definitions/Messages'
+        description: 'The list of messages to be sent. Each message has format: ''{ "messageId": "string", "payload": "string"}''.'
+  ResourceNotFoundException: {}
+  InvalidRequestException: {}
+  InternalFailureException: {}
+  ServiceUnavailableException: {}
+  ThrottlingException: {}
+  CancelPipelineReprocessingResponse:
+    type: object
+    properties: {}
+  CancelPipelineReprocessingRequest:
+    type: object
+    properties: {}
+  CreateChannelResponse:
+    type: object
+    properties:
+      channelName:
+        $ref: '#/definitions/ChannelName'
+        description: The name of the channel.
+      channelArn:
+        $ref: '#/definitions/ChannelArn'
+        description: The ARN of the channel.
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the channel.'
+  CreateChannelRequest:
+    type: object
+    required:
+      - channelName
+    properties:
+      channelName:
+        $ref: '#/definitions/ChannelName'
+        description: The name of the channel.
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the channel.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the channel.
+  ResourceAlreadyExistsException: {}
+  LimitExceededException: {}
+  CreateDatasetResponse:
+    type: object
+    properties:
+      datasetName:
+        $ref: '#/definitions/DatasetName'
+        description: The name of the data set.
+      datasetArn:
+        $ref: '#/definitions/DatasetArn'
+        description: The ARN of the data set.
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the data set.'
+  CreateDatasetRequest:
+    type: object
+    required:
+      - datasetName
+      - actions
+    properties:
+      datasetName:
+        $ref: '#/definitions/DatasetName'
+        description: The name of the data set.
+      actions:
+        $ref: '#/definitions/DatasetActions'
+        description: A list of actions that create the data set contents.
+      triggers:
+        $ref: '#/definitions/DatasetTriggers'
+        description: A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: '[Optional] How long, in days, message data is kept for the data set. If not given or set to null, the latest version of the dataset content plus the latest succeeded version (if they are different) are retained for at most 90 days.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the data set.
+  CreateDatasetContentResponse:
+    type: object
+    properties:
+      versionId:
+        $ref: '#/definitions/DatasetContentVersion'
+        description: The version ID of the data set contents which are being created.
+  CreateDatasetContentRequest:
+    type: object
+    properties: {}
+  CreateDatastoreResponse:
+    type: object
+    properties:
+      datastoreName:
+        $ref: '#/definitions/DatastoreName'
+        description: The name of the data store.
+      datastoreArn:
+        $ref: '#/definitions/DatastoreArn'
+        description: The ARN of the data store.
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the data store.'
+  CreateDatastoreRequest:
+    type: object
+    required:
+      - datastoreName
+    properties:
+      datastoreName:
+        $ref: '#/definitions/DatastoreName'
+        description: The name of the data store.
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the data store.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the data store.
+  CreatePipelineResponse:
+    type: object
+    properties:
+      pipelineName:
+        $ref: '#/definitions/PipelineName'
+        description: The name of the pipeline.
+      pipelineArn:
+        $ref: '#/definitions/PipelineArn'
+        description: The ARN of the pipeline.
+  CreatePipelineRequest:
+    type: object
+    required:
+      - pipelineName
+      - pipelineActivities
+    properties:
+      pipelineName:
+        $ref: '#/definitions/PipelineName'
+        description: The name of the pipeline.
+      pipelineActivities:
+        $ref: '#/definitions/PipelineActivities'
+        description: '<p>A list of pipeline activities.</p> <p>The list can be 1-25 <b>PipelineActivity</b> objects. Activities perform transformations on your messages, such as removing, renaming, or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p>'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the pipeline.
+  DeleteChannelRequest:
+    type: object
+    properties: {}
+  DeleteDatasetRequest:
+    type: object
+    properties: {}
+  DeleteDatasetContentRequest:
+    type: object
+    properties: {}
+  DeleteDatastoreRequest:
+    type: object
+    properties: {}
+  DeletePipelineRequest:
+    type: object
+    properties: {}
+  DescribeChannelResponse:
+    type: object
+    properties:
+      channel:
+        $ref: '#/definitions/Channel'
+        description: An object that contains information about the channel.
+      statistics:
+        $ref: '#/definitions/ChannelStatistics'
+        description: Statistics about the channel. Included if the 'includeStatistics' parameter is set to true in the request.
+  DescribeChannelRequest:
+    type: object
+    properties: {}
+  DescribeDatasetResponse:
+    type: object
+    properties:
+      dataset:
+        $ref: '#/definitions/Dataset'
+        description: An object that contains information about the data set.
+  DescribeDatasetRequest:
+    type: object
+    properties: {}
+  DescribeDatastoreResponse:
+    type: object
+    properties:
+      datastore:
+        $ref: '#/definitions/Datastore'
+        description: Information about the data store.
+      statistics:
+        $ref: '#/definitions/DatastoreStatistics'
+        description: Additional statistical information about the data store. Included if the 'includeStatistics' parameter is set to true in the request.
+  DescribeDatastoreRequest:
+    type: object
+    properties: {}
+  DescribeLoggingOptionsResponse:
+    type: object
+    properties:
+      loggingOptions:
+        $ref: '#/definitions/LoggingOptions'
+        description: The current settings of the AWS IoT Analytics logging options.
+  DescribeLoggingOptionsRequest:
+    type: object
+    properties: {}
+  DescribePipelineResponse:
+    type: object
+    properties:
+      pipeline:
+        $ref: '#/definitions/Pipeline'
+        description: A "Pipeline" object that contains information about the pipeline.
+  DescribePipelineRequest:
+    type: object
+    properties: {}
+  GetDatasetContentResponse:
+    type: object
+    properties:
+      entries:
+        $ref: '#/definitions/DatasetEntries'
+        description: A list of "DatasetEntry" objects.
+      timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The time when the request was made.
+      status:
+        $ref: '#/definitions/DatasetContentStatus'
+        description: The status of the data set content.
+  GetDatasetContentRequest:
+    type: object
+    properties: {}
+  ListChannelsResponse:
+    type: object
+    properties:
+      channelSummaries:
+        $ref: '#/definitions/ChannelSummaries'
+        description: A list of "ChannelSummary" objects.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
+  ListChannelsRequest:
+    type: object
+    properties: {}
+  ListDatasetContentsResponse:
+    type: object
+    properties:
+      datasetContentSummaries:
+        $ref: '#/definitions/DatasetContentSummaries'
+        description: Summary information about data set contents that have been created.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
+  ListDatasetContentsRequest:
+    type: object
+    properties: {}
+  ListDatasetsResponse:
+    type: object
+    properties:
+      datasetSummaries:
+        $ref: '#/definitions/DatasetSummaries'
+        description: A list of "DatasetSummary" objects.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
+  ListDatasetsRequest:
+    type: object
+    properties: {}
+  ListDatastoresResponse:
+    type: object
+    properties:
+      datastoreSummaries:
+        $ref: '#/definitions/DatastoreSummaries'
+        description: A list of "DatastoreSummary" objects.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
+  ListDatastoresRequest:
+    type: object
+    properties: {}
+  ListPipelinesResponse:
+    type: object
+    properties:
+      pipelineSummaries:
+        $ref: '#/definitions/PipelineSummaries'
+        description: A list of "PipelineSummary" objects.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
+  ListPipelinesRequest:
+    type: object
+    properties: {}
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The tags (metadata) which you have assigned to the resource.
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+  PutLoggingOptionsRequest:
+    type: object
+    required:
+      - loggingOptions
+    properties:
+      loggingOptions:
+        $ref: '#/definitions/LoggingOptions'
+        description: The new values of the AWS IoT Analytics logging options.
+  RunPipelineActivityResponse:
+    type: object
+    properties:
+      payloads:
+        $ref: '#/definitions/MessagePayloads'
+        description: 'The enriched or transformed sample message payloads as base64-encoded strings. (The results of running the pipeline activity on each input sample message payload, encoded in base64.)'
+      logResult:
+        $ref: '#/definitions/LogResult'
+        description: 'In case the pipeline activity fails, the log message that is generated.'
+  RunPipelineActivityRequest:
+    type: object
+    required:
+      - pipelineActivity
+      - payloads
+    properties:
+      pipelineActivity:
+        $ref: '#/definitions/PipelineActivity'
+        description: 'The pipeline activity that is run. This must not be a ''channel'' activity or a ''datastore'' activity because these activities are used in a pipeline only to load the original message and to store the (possibly) transformed message. If a ''lambda'' activity is specified, only short-running Lambda functions (those with a timeout of less than 30 seconds or less) can be used.'
+      payloads:
+        $ref: '#/definitions/MessagePayloads'
+        description: The sample message payloads on which the pipeline activity is run.
+  SampleChannelDataResponse:
+    type: object
+    properties:
+      payloads:
+        $ref: '#/definitions/MessagePayloads'
+        description: The list of message samples. Each sample message is returned as a base64-encoded string.
+  SampleChannelDataRequest:
+    type: object
+    properties: {}
+  StartPipelineReprocessingResponse:
+    type: object
+    properties:
+      reprocessingId:
+        $ref: '#/definitions/ReprocessingId'
+        description: The ID of the pipeline reprocessing activity that was started.
+  StartPipelineReprocessingRequest:
+    type: object
+    properties:
+      startTime:
+        $ref: '#/definitions/StartTime'
+        description: The start time (inclusive) of raw message data that is reprocessed.
+      endTime:
+        $ref: '#/definitions/EndTime'
+        description: The end time (exclusive) of raw message data that is reprocessed.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The new or modified tags for the resource.
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    properties: {}
+  UpdateChannelRequest:
+    type: object
+    properties:
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the channel.'
+  UpdateDatasetRequest:
+    type: object
+    required:
+      - actions
+    properties:
+      actions:
+        $ref: '#/definitions/DatasetActions'
+        description: A list of "DatasetAction" objects.
+      triggers:
+        $ref: '#/definitions/DatasetTriggers'
+        description: A list of "DatasetTrigger" objects. The list can be empty or can contain up to five <b>DataSetTrigger</b> objects.
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the data set.'
+  UpdateDatastoreRequest:
+    type: object
+    properties:
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the data store.'
+  UpdatePipelineRequest:
+    type: object
+    required:
+      - pipelineActivities
+    properties:
+      pipelineActivities:
+        $ref: '#/definitions/PipelineActivities'
+        description: '<p>A list of "PipelineActivity" objects.</p> <p>The list can be 1-25 <b>PipelineActivity</b> objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p>'
+  ActivityBatchSize:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  ActivityName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  AttributeNameMapping:
+    type: array
+    minItems: 1
+    maxItems: 50
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeName'
+        value:
+          $ref: '#/definitions/AttributeName'
+  AddAttributesActivity:
+    type: object
+    required:
+      - name
+      - attributes
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'addAttributes' activity.
+      attributes:
+        $ref: '#/definitions/AttributeNameMapping'
+        description: '<p>A list of 1-50 "AttributeNameMapping" objects that map an existing attribute to a new attribute.</p> <note> <p>The existing attributes remain in the message, so if you want to remove the originals, use "RemoveAttributeActivity".</p> </note>'
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: An activity that adds other attributes based on existing attributes in the message.
+  AttributeName:
+    type: string
+    minLength: 1
+    maxLength: 256
+  AttributeNames:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeName'
+    minItems: 1
+    maxItems: 50
+  BatchPutMessageErrorEntry:
+    type: object
+    properties:
+      messageId:
+        $ref: '#/definitions/MessageId'
+        description: The ID of the message that caused the error. (See the value corresponding to the "messageId" key in the message object.)
+      errorCode:
+        $ref: '#/definitions/ErrorCode'
+        description: The code associated with the error.
+      errorMessage:
+        $ref: '#/definitions/ErrorMessage'
+        description: The message associated with the error.
+    description: Contains informations about errors.
+  BatchPutMessageErrorEntries:
+    type: array
+    items:
+      $ref: '#/definitions/BatchPutMessageErrorEntry'
+  MessageId:
+    type: string
+    minLength: 1
+    maxLength: 128
+  ErrorCode:
+    type: string
+  ErrorMessage:
+    type: string
+  ChannelName:
+    type: string
+    pattern: '^[a-zA-Z0-9_]+$'
+    minLength: 1
+    maxLength: 128
+  Messages:
+    type: array
+    items:
+      $ref: '#/definitions/Message'
+  PipelineName:
+    type: string
+    pattern: '^[a-zA-Z0-9_]+$'
+    minLength: 1
+    maxLength: 128
+  ReprocessingId:
+    type: string
+  ChannelArn:
+    type: string
+  ChannelStatus:
+    type: string
+    enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+  RetentionPeriod:
+    type: object
+    properties:
+      unlimited:
+        $ref: '#/definitions/UnlimitedRetentionPeriod'
+        description: 'If true, message data is kept indefinitely.'
+      numberOfDays:
+        $ref: '#/definitions/RetentionPeriodInDays'
+        description: The number of days that message data is kept. The "unlimited" parameter must be false.
+    description: 'How long, in days, message data is kept.'
+  Timestamp:
+    type: string
+    format: date-time
+  Channel:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ChannelName'
+        description: The name of the channel.
+      arn:
+        $ref: '#/definitions/ChannelArn'
+        description: The ARN of the channel.
+      status:
+        $ref: '#/definitions/ChannelStatus'
+        description: The status of the channel.
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the channel.'
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: When the channel was created.
+      lastUpdateTime:
+        $ref: '#/definitions/Timestamp'
+        description: When the channel was last updated.
+    description: 'A collection of data from an MQTT topic. Channels archive the raw, unprocessed messages before publishing the data to a pipeline.'
+  ChannelActivity:
+    type: object
+    required:
+      - name
+      - channelName
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'channel' activity.
+      channelName:
+        $ref: '#/definitions/ChannelName'
+        description: The name of the channel from which the messages are processed.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: The activity that determines the source of the messages to be processed.
+  EstimatedResourceSize:
+    type: object
+    properties:
+      estimatedSizeInBytes:
+        $ref: '#/definitions/SizeInBytes'
+        description: The estimated size of the resource in bytes.
+      estimatedOn:
+        $ref: '#/definitions/Timestamp'
+        description: The time when the estimate of the size of the resource was made.
+    description: The estimated size of the resource.
+  ChannelStatistics:
+    type: object
+    properties:
+      size:
+        $ref: '#/definitions/EstimatedResourceSize'
+        description: The estimated size of the channel.
+    description: Statistics information about the channel.
+  ChannelSummary:
+    type: object
+    properties:
+      channelName:
+        $ref: '#/definitions/ChannelName'
+        description: The name of the channel.
+      status:
+        $ref: '#/definitions/ChannelStatus'
+        description: The status of the channel.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: When the channel was created.
+      lastUpdateTime:
+        $ref: '#/definitions/Timestamp'
+        description: The last time the channel was updated.
+    description: A summary of information about a channel.
+  ChannelSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/ChannelSummary'
+  ComputeType:
+    type: string
+    enum:
+      - ACU_1
+      - ACU_2
+  Image:
+    type: string
+    maxLength: 255
+  RoleArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  ResourceConfiguration:
+    type: object
+    required:
+      - computeType
+      - volumeSizeInGB
+    properties:
+      computeType:
+        $ref: '#/definitions/ComputeType'
+        description: 'The type of the compute resource used to execute the "containerAction". Possible values are: ACU_1 (vCPU=4, memory=16GiB) or ACU_2 (vCPU=8, memory=32GiB).'
+      volumeSizeInGB:
+        $ref: '#/definitions/VolumeSizeInGB'
+        description: 'The size (in GB) of the persistent storage available to the resource instance used to execute the "containerAction" (min: 1, max: 50).'
+    description: The configuration of the resource used to execute the "containerAction".
+  Variables:
+    type: array
+    items:
+      $ref: '#/definitions/Variable'
+    minItems: 0
+    maxItems: 50
+  ContainerDatasetAction:
+    type: object
+    required:
+      - image
+      - executionRoleArn
+      - resourceConfiguration
+    properties:
+      image:
+        $ref: '#/definitions/Image'
+        description: The ARN of the Docker container stored in your account. The Docker container contains an application and needed support libraries and is used to generate data set contents.
+      executionRoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: 'The ARN of the role which gives permission to the system to access needed resources in order to run the "containerAction". This includes, at minimum, permission to retrieve the data set contents which are the input to the containerized application.'
+      resourceConfiguration:
+        $ref: '#/definitions/ResourceConfiguration'
+        description: Configuration of the resource which executes the "containerAction".
+      variables:
+        $ref: '#/definitions/Variables'
+        description: 'The values of variables used within the context of the execution of the containerized application (basically, parameters passed to the application). Each variable must have a name and a value given by one of "stringValue", "datasetContentVersionValue", or "outputFileUriValue".'
+    description: Information needed to run the "containerAction" to produce data set contents.
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+    maxItems: 50
+  DatasetName:
+    type: string
+    pattern: '^[a-zA-Z0-9_]+$'
+    minLength: 1
+    maxLength: 128
+  DatasetContentVersion:
+    type: string
+    minLength: 7
+    maxLength: 36
+  DatasetActions:
+    type: array
+    items:
+      $ref: '#/definitions/DatasetAction'
+    minItems: 1
+    maxItems: 1
+  DatasetTriggers:
+    type: array
+    items:
+      $ref: '#/definitions/DatasetTrigger'
+    minItems: 0
+    maxItems: 5
+  DatasetArn:
+    type: string
+  DatastoreName:
+    type: string
+    pattern: '^[a-zA-Z0-9_]+$'
+    minLength: 1
+    maxLength: 128
+  DatastoreArn:
+    type: string
+  PipelineActivities:
+    type: array
+    items:
+      $ref: '#/definitions/PipelineActivity'
+    minItems: 1
+    maxItems: 25
+  PipelineArn:
+    type: string
+  DatasetStatus:
+    type: string
+    enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+  Dataset:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/DatasetName'
+        description: The name of the data set.
+      arn:
+        $ref: '#/definitions/DatasetArn'
+        description: The ARN of the data set.
+      actions:
+        $ref: '#/definitions/DatasetActions'
+        description: The "DatasetAction" objects that automatically create the data set contents.
+      triggers:
+        $ref: '#/definitions/DatasetTriggers'
+        description: The "DatasetTrigger" objects that specify when the data set is automatically updated.
+      status:
+        $ref: '#/definitions/DatasetStatus'
+        description: The status of the data set.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: When the data set was created.
+      lastUpdateTime:
+        $ref: '#/definitions/Timestamp'
+        description: The last time the data set was updated.
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: '[Optional] How long, in days, message data is kept for the data set.'
+    description: Information about a data set.
+  DatasetActionName:
+    type: string
+    pattern: '^[a-zA-Z0-9_]+$'
+    minLength: 1
+    maxLength: 128
+  SqlQueryDatasetAction:
+    type: object
+    required:
+      - sqlQuery
+    properties:
+      sqlQuery:
+        $ref: '#/definitions/SqlQuery'
+        description: A SQL query string.
+      filters:
+        $ref: '#/definitions/QueryFilters'
+        description: Pre-filters applied to message data.
+    description: The SQL query to modify the message.
+  DatasetAction:
+    type: object
+    properties:
+      actionName:
+        $ref: '#/definitions/DatasetActionName'
+        description: The name of the data set action by which data set contents are automatically created.
+      queryAction:
+        $ref: '#/definitions/SqlQueryDatasetAction'
+        description: An "SqlQueryDatasetAction" object that contains the SQL query to modify the message.
+      containerAction:
+        $ref: '#/definitions/ContainerDatasetAction'
+        description: Information which allows the system to run a containerized application in order to create the data set contents. The application must be in a Docker container along with any needed support libraries.
+    description: A "DatasetAction" object specifying the query that creates the data set content.
+  DatasetActionSummary:
+    type: object
+    properties:
+      actionName:
+        $ref: '#/definitions/DatasetActionName'
+        description: The name of the action which automatically creates the data set's contents.
+      actionType:
+        $ref: '#/definitions/DatasetActionType'
+        description: The type of action by which the data set's contents are automatically created.
+    description: <p/>
+  DatasetActionSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/DatasetActionSummary'
+    minItems: 1
+    maxItems: 1
+  DatasetActionType:
+    type: string
+    enum:
+      - QUERY
+      - CONTAINER
+  DatasetContentState:
+    type: string
+    enum:
+      - CREATING
+      - SUCCEEDED
+      - FAILED
+  Reason:
+    type: string
+  DatasetContentStatus:
+    type: object
+    properties:
+      state:
+        $ref: '#/definitions/DatasetContentState'
+        description: 'The state of the data set contents. Can be one of "READY", "CREATING", "SUCCEEDED" or "FAILED".'
+      reason:
+        $ref: '#/definitions/Reason'
+        description: The reason the data set contents are in this state.
+    description: The state of the data set contents and the reason they are in this state.
+  DatasetContentSummary:
+    type: object
+    properties:
+      version:
+        $ref: '#/definitions/DatasetContentVersion'
+        description: The version of the data set contents.
+      status:
+        $ref: '#/definitions/DatasetContentStatus'
+        description: The status of the data set contents.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The actual time the creation of the data set contents was started.
+      scheduleTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time the creation of the data set contents was scheduled to start.
+    description: Summary information about data set contents.
+  DatasetContentSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/DatasetContentSummary'
+  DatasetContentVersionValue:
+    type: object
+    required:
+      - datasetName
+    properties:
+      datasetName:
+        $ref: '#/definitions/DatasetName'
+        description: The name of the data set whose latest contents will be used as input to the notebook or application.
+    description: The data set whose latest contents will be used as input to the notebook or application.
+  DatasetEntry:
+    type: object
+    properties:
+      entryName:
+        $ref: '#/definitions/EntryName'
+        description: The name of the data set item.
+      dataURI:
+        $ref: '#/definitions/PresignedURI'
+        description: The pre-signed URI of the data set item.
+    description: The reference to a data set entry.
+  DatasetEntries:
+    type: array
+    items:
+      $ref: '#/definitions/DatasetEntry'
+  EntryName:
+    type: string
+  PresignedURI:
+    type: string
+  DatasetSummary:
+    type: object
+    properties:
+      datasetName:
+        $ref: '#/definitions/DatasetName'
+        description: The name of the data set.
+      status:
+        $ref: '#/definitions/DatasetStatus'
+        description: The status of the data set.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time the data set was created.
+      lastUpdateTime:
+        $ref: '#/definitions/Timestamp'
+        description: The last time the data set was updated.
+      triggers:
+        $ref: '#/definitions/DatasetTriggers'
+        description: A list of triggers. A trigger causes data set content to be populated at a specified time interval or when another data set is populated. The list of triggers can be empty or contain up to five DataSetTrigger objects
+      actions:
+        $ref: '#/definitions/DatasetActionSummaries'
+        description: A list of "DataActionSummary" objects.
+    description: A summary of information about a data set.
+  DatasetSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/DatasetSummary'
+  Schedule:
+    type: object
+    properties:
+      expression:
+        $ref: '#/definitions/ScheduleExpression'
+        description: 'The expression that defines when to trigger an update. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html"> Schedule Expressions for Rules</a> in the Amazon CloudWatch documentation.'
+    description: The schedule for when to trigger an update.
+  TriggeringDataset:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        $ref: '#/definitions/DatasetName'
+        description: The name of the data set whose content generation will trigger the new data set content generation.
+    description: Information about the data set whose content generation will trigger the new data set content generation.
+  DatasetTrigger:
+    type: object
+    properties:
+      schedule:
+        $ref: '#/definitions/Schedule'
+        description: The "Schedule" when the trigger is initiated.
+      dataset:
+        $ref: '#/definitions/TriggeringDataset'
+        description: The data set whose content creation will trigger the creation of this data set's contents.
+    description: The "DatasetTrigger" that specifies when the data set is automatically updated.
+  DatastoreStatus:
+    type: string
+    enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+  Datastore:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/DatastoreName'
+        description: The name of the data store.
+      arn:
+        $ref: '#/definitions/DatastoreArn'
+        description: The ARN of the data store.
+      status:
+        $ref: '#/definitions/DatastoreStatus'
+        description: '<p>The status of a data store:</p> <dl> <dt>CREATING</dt> <dd> <p>The data store is being created.</p> </dd> <dt>ACTIVE</dt> <dd> <p>The data store has been created and can be used.</p> </dd> <dt>DELETING</dt> <dd> <p>The data store is being deleted.</p> </dd> </dl>'
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the data store.'
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: When the data store was created.
+      lastUpdateTime:
+        $ref: '#/definitions/Timestamp'
+        description: The last time the data store was updated.
+    description: Information about a data store.
+  DatastoreActivity:
+    type: object
+    required:
+      - name
+      - datastoreName
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'datastore' activity.
+      datastoreName:
+        $ref: '#/definitions/DatastoreName'
+        description: The name of the data store where processed messages are stored.
+    description: The 'datastore' activity that specifies where to store the processed data.
+  DatastoreStatistics:
+    type: object
+    properties:
+      size:
+        $ref: '#/definitions/EstimatedResourceSize'
+        description: The estimated size of the data store.
+    description: Statistical information about the data store.
+  DatastoreSummary:
+    type: object
+    properties:
+      datastoreName:
+        $ref: '#/definitions/DatastoreName'
+        description: The name of the data store.
+      status:
+        $ref: '#/definitions/DatastoreStatus'
+        description: The status of the data store.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: When the data store was created.
+      lastUpdateTime:
+        $ref: '#/definitions/Timestamp'
+        description: The last time the data store was updated.
+    description: A summary of information about a data store.
+  DatastoreSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/DatastoreSummary'
+  OffsetSeconds:
+    type: integer
+  TimeExpression:
+    type: string
+  DeltaTime:
+    type: object
+    required:
+      - offsetSeconds
+      - timeExpression
+    properties:
+      offsetSeconds:
+        $ref: '#/definitions/OffsetSeconds'
+        description: The number of seconds of estimated "in flight" lag time of message data.
+      timeExpression:
+        $ref: '#/definitions/TimeExpression'
+        description: 'An expression by which the time of the message data may be determined. This may be the name of a timestamp field, or a SQL expression which is used to derive the time the message data was generated.'
+    description: 'When you create data set contents using message data from a specified time frame, some message data may still be "in flight" when processing begins, and so will not arrive in time to be processed. Use this field to make allowances for the "in flight" time of your message data, so that data not processed from the previous time frame will be included with the next time frame. Without this, missed message data would be excluded from processing during the next time frame as well, because its timestamp places it within the previous time frame.'
+  IncludeStatisticsFlag:
+    type: boolean
+  LoggingOptions:
+    type: object
+    required:
+      - roleArn
+      - level
+      - enabled
+    properties:
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role that grants permission to AWS IoT Analytics to perform logging.
+      level:
+        $ref: '#/definitions/LoggingLevel'
+        description: 'The logging level. Currently, only "ERROR" is supported.'
+      enabled:
+        $ref: '#/definitions/LoggingEnabled'
+        description: 'If true, logging is enabled for AWS IoT Analytics.'
+    description: Information about logging options.
+  Pipeline:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/PipelineName'
+        description: The name of the pipeline.
+      arn:
+        $ref: '#/definitions/PipelineArn'
+        description: The ARN of the pipeline.
+      activities:
+        $ref: '#/definitions/PipelineActivities'
+        description: The activities that perform transformations on the messages.
+      reprocessingSummaries:
+        $ref: '#/definitions/ReprocessingSummaries'
+        description: A summary of information about the pipeline reprocessing.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: When the pipeline was created.
+      lastUpdateTime:
+        $ref: '#/definitions/Timestamp'
+        description: The last time the pipeline was updated.
+    description: Contains information about a pipeline.
+  DeviceRegistryEnrichActivity:
+    type: object
+    required:
+      - name
+      - attribute
+      - thingName
+      - roleArn
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'deviceRegistryEnrich' activity.
+      attribute:
+        $ref: '#/definitions/AttributeName'
+        description: The name of the attribute that is added to the message.
+      thingName:
+        $ref: '#/definitions/AttributeName'
+        description: The name of the IoT device whose registry information is added to the message.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role that allows access to the device's registry information.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: An activity that adds data from the AWS IoT device registry to your message.
+  DeviceShadowEnrichActivity:
+    type: object
+    required:
+      - name
+      - attribute
+      - thingName
+      - roleArn
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'deviceShadowEnrich' activity.
+      attribute:
+        $ref: '#/definitions/AttributeName'
+        description: The name of the attribute that is added to the message.
+      thingName:
+        $ref: '#/definitions/AttributeName'
+        description: The name of the IoT device whose shadow information is added to the message.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role that allows access to the device's shadow.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: An activity that adds information from the AWS IoT Device Shadows service to a message.
+  DoubleValue:
+    type: number
+    format: double
+  EndTime:
+    type: string
+    format: date-time
+  SizeInBytes:
+    type: number
+    format: double
+  FilterExpression:
+    type: string
+    minLength: 1
+    maxLength: 256
+  FilterActivity:
+    type: object
+    required:
+      - name
+      - filter
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'filter' activity.
+      filter:
+        $ref: '#/definitions/FilterExpression'
+        description: An expression that looks like a SQL WHERE clause that must return a Boolean value.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: An activity that filters a message based on its attributes.
+  LambdaName:
+    type: string
+    pattern: '^[a-zA-Z0-9_-]+$'
+    minLength: 1
+    maxLength: 64
+  LambdaActivity:
+    type: object
+    required:
+      - name
+      - lambdaName
+      - batchSize
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'lambda' activity.
+      lambdaName:
+        $ref: '#/definitions/LambdaName'
+        description: The name of the Lambda function that is run on the message.
+      batchSize:
+        $ref: '#/definitions/ActivityBatchSize'
+        description: '<p>The number of messages passed to the Lambda function for processing.</p> <p>The AWS Lambda function must be able to process all of these messages within five minutes, which is the maximum timeout duration for Lambda functions.</p>'
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: An activity that runs a Lambda function to modify the message.
+  NextToken:
+    type: string
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 250
+  PipelineSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/PipelineSummary'
+  ResourceArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  LogResult:
+    type: string
+  LoggingEnabled:
+    type: boolean
+  LoggingLevel:
+    type: string
+    enum:
+      - ERROR
+  MathExpression:
+    type: string
+    minLength: 1
+    maxLength: 256
+  MathActivity:
+    type: object
+    required:
+      - name
+      - attribute
+      - math
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'math' activity.
+      attribute:
+        $ref: '#/definitions/AttributeName'
+        description: The name of the attribute that will contain the result of the math operation.
+      math:
+        $ref: '#/definitions/MathExpression'
+        description: An expression that uses one or more existing attributes and must return an integer value.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: An activity that computes an arithmetic expression using the message's attributes.
+  MaxMessages:
+    type: integer
+    minimum: 1
+    maximum: 10
+  MessagePayload:
+    type: string
+  Message:
+    type: object
+    required:
+      - messageId
+      - payload
+    properties:
+      messageId:
+        $ref: '#/definitions/MessageId'
+        description: The ID you wish to assign to the message. Each "messageId" must be unique within each batch sent.
+      payload:
+        $ref: '#/definitions/MessagePayload'
+        description: The payload of the message. This may be a JSON string or a Base64-encoded string representing binary data (in which case you must decode it by means of a pipeline activity).
+    description: Information about a message.
+  MessagePayloads:
+    type: array
+    items:
+      $ref: '#/definitions/MessagePayload'
+    minItems: 1
+    maxItems: 10
+  OutputFileName:
+    type: string
+    pattern: '[\w\.-]{1,255}'
+  OutputFileUriValue:
+    type: object
+    required:
+      - fileName
+    properties:
+      fileName:
+        $ref: '#/definitions/OutputFileName'
+        description: 'The URI of the location where data set contents are stored, usually the URI of a file in an S3 bucket.'
+    description: 'The URI of the location where data set contents are stored, usually the URI of a file in an S3 bucket.'
+  ReprocessingSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/ReprocessingSummary'
+  PipelineActivity:
+    type: object
+    properties:
+      channel:
+        $ref: '#/definitions/ChannelActivity'
+        description: Determines the source of the messages to be processed.
+      lambda:
+        $ref: '#/definitions/LambdaActivity'
+        description: Runs a Lambda function to modify the message.
+      datastore:
+        $ref: '#/definitions/DatastoreActivity'
+        description: Specifies where to store the processed message data.
+      addAttributes:
+        $ref: '#/definitions/AddAttributesActivity'
+        description: Adds other attributes based on existing attributes in the message.
+      removeAttributes:
+        $ref: '#/definitions/RemoveAttributesActivity'
+        description: Removes attributes from a message.
+      selectAttributes:
+        $ref: '#/definitions/SelectAttributesActivity'
+        description: 'Creates a new message using only the specified attributes from the original message. '
+      filter:
+        $ref: '#/definitions/FilterActivity'
+        description: Filters a message based on its attributes.
+      math:
+        $ref: '#/definitions/MathActivity'
+        description: Computes an arithmetic expression using the message's attributes and adds it to the message.
+      deviceRegistryEnrich:
+        $ref: '#/definitions/DeviceRegistryEnrichActivity'
+        description: Adds data from the AWS IoT device registry to your message.
+      deviceShadowEnrich:
+        $ref: '#/definitions/DeviceShadowEnrichActivity'
+        description: Adds information from the AWS IoT Device Shadows service to a message.
+    description: An activity that performs a transformation on a message.
+  RemoveAttributesActivity:
+    type: object
+    required:
+      - name
+      - attributes
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'removeAttributes' activity.
+      attributes:
+        $ref: '#/definitions/AttributeNames'
+        description: A list of 1-50 attributes to remove from the message.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: An activity that removes attributes from a message.
+  SelectAttributesActivity:
+    type: object
+    required:
+      - name
+      - attributes
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'selectAttributes' activity.
+      attributes:
+        $ref: '#/definitions/AttributeNames'
+        description: A list of the attributes to select from the message.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: Creates a new message using only the specified attributes from the original message.
+  PipelineSummary:
+    type: object
+    properties:
+      pipelineName:
+        $ref: '#/definitions/PipelineName'
+        description: The name of the pipeline.
+      reprocessingSummaries:
+        $ref: '#/definitions/ReprocessingSummaries'
+        description: A summary of information about the pipeline reprocessing.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: When the pipeline was created.
+      lastUpdateTime:
+        $ref: '#/definitions/Timestamp'
+        description: When the pipeline was last updated.
+    description: A summary of information about a pipeline.
+  QueryFilter:
+    type: object
+    properties:
+      deltaTime:
+        $ref: '#/definitions/DeltaTime'
+        description: 'Used to limit data to that which has arrived since the last execution of the action. When you create data set contents using message data from a specified time frame, some message data may still be "in flight" when processing begins, and so will not arrive in time to be processed. Use this field to make allowances for the "in flight" time of you message data, so that data not processed from a previous time frame will be included with the next time frame. Without this, missed message data would be excluded from processing during the next time frame as well, because its timestamp places it within the previous time frame.'
+    description: 'Information which is used to filter message data, to segregate it according to the time frame in which it arrives.'
+  QueryFilters:
+    type: array
+    items:
+      $ref: '#/definitions/QueryFilter'
+    minItems: 0
+    maxItems: 1
+  ReprocessingStatus:
+    type: string
+    enum:
+      - RUNNING
+      - SUCCEEDED
+      - CANCELLED
+      - FAILED
+  ReprocessingSummary:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/ReprocessingId'
+        description: The 'reprocessingId' returned by "StartPipelineReprocessing".
+      status:
+        $ref: '#/definitions/ReprocessingStatus'
+        description: The status of the pipeline reprocessing.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time the pipeline reprocessing was created.
+    description: Information about pipeline reprocessing.
+  VolumeSizeInGB:
+    type: integer
+    minimum: 1
+    maximum: 50
+  UnlimitedRetentionPeriod:
+    type: boolean
+  RetentionPeriodInDays:
+    type: integer
+    minimum: 1
+  StartTime:
+    type: string
+    format: date-time
+  ScheduleExpression:
+    type: string
+  SqlQuery:
+    type: string
+  StringValue:
+    type: string
+    minLength: 0
+    maxLength: 1024
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 256
+  TagValue:
+    type: string
+    minLength: 1
+    maxLength: 256
+  Tag:
+    type: object
+    required:
+      - key
+      - value
+    properties:
+      key:
+        $ref: '#/definitions/TagKey'
+        description: The tag's key.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: The tag's value.
+    description: A set of key/value pairs which are used to manage the resource.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  VariableName:
+    type: string
+    minLength: 1
+    maxLength: 256
+  Variable:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        $ref: '#/definitions/VariableName'
+        description: The name of the variable.
+      stringValue:
+        $ref: '#/definitions/StringValue'
+        description: The value of the variable as a string.
+      doubleValue:
+        $ref: '#/definitions/DoubleValue'
+        description: The value of the variable as a double (numeric).
+      datasetContentVersionValue:
+        $ref: '#/definitions/DatasetContentVersionValue'
+        description: The value of the variable as a structure that specifies a data set content version.
+      outputFileUriValue:
+        $ref: '#/definitions/OutputFileUriValue'
+        description: The value of the variable as a structure that specifies an output file URI.
+    description: 'An instance of a variable to be passed to the "containerAction" execution. Each variable must have a name and a value given by one of "stringValue", "datasetContentVersionValue", or "outputFileUriValue".'

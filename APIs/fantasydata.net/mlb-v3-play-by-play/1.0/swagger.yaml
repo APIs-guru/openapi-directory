@@ -1,0 +1,344 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: api.fantasydata.net
+basePath: /v3/mlb/pbp
+info:
+  contact:
+    x-twitter: nfldata
+  description: MLB play-by-play API.
+  title: MLB v3 Play-by-Play
+  version: '1.0'
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    url: 'https://twitter.com/nfldata/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://fantasydata.com/downloads/swagger/mlb-v3-play-by-play.json'
+      version: '2.0'
+  x-providerName: fantasydata.net
+  x-serviceName: mlb-v3-play-by-play
+produces:
+  - application/json
+securityDefinitions:
+  apiKeyHeader:
+    in: header
+    name: Ocp-Apim-Subscription-Key
+    type: apiKey
+  apiKeyQuery:
+    in: query
+    name: subscription-key
+    type: apiKey
+security:
+  - apiKeyHeader: []
+  - apiKeyQuery: []
+tags: []
+paths:
+  '/{format}/PlayByPlay/{gameid}':
+    get:
+      operationId: PlayByPlay
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: The GameID of an MLB game.  GameIDs can be found in the Games API.  Valid entries are <code>14620</code> or <code>16905</code>
+          in: path
+          name: gameid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PlayByPlay'
+      summary: Play By Play
+  '/{format}/PlayByPlayDelta/{date}/{minutes}':
+    get:
+      operationId: PlayByPlayDelta
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+            <br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.
+          in: path
+          name: date
+          required: true
+          type: string
+        - description: |-
+            Only returns plays that have changed in the last X minutes.  You specify how many minutes in time to go back.  Valid entries are:
+            <code>1</code>, <code>2</code> ... <code>all</code>.
+          in: path
+          name: minutes
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayByPlay'
+            type: array
+      summary: Play By Play Delta
+definitions:
+  Game:
+    properties:
+      Attendance:
+        type: integer
+      AwayTeam:
+        type: string
+      AwayTeamErrors:
+        type: integer
+      AwayTeamHits:
+        type: integer
+      AwayTeamID:
+        type: integer
+      AwayTeamMoneyLine:
+        type: integer
+      AwayTeamProbablePitcherID:
+        type: integer
+      AwayTeamRuns:
+        type: integer
+      AwayTeamStartingPitcher:
+        type: string
+      AwayTeamStartingPitcherID:
+        type: integer
+      Balls:
+        type: integer
+      Channel:
+        type: string
+      CurrentHitter:
+        type: string
+      CurrentHitterID:
+        type: integer
+      CurrentHittingTeamID:
+        type: integer
+      CurrentPitcher:
+        type: string
+      CurrentPitcherID:
+        type: integer
+      CurrentPitchingTeamID:
+        type: integer
+      DateTime:
+        type: string
+      Day:
+        type: string
+      DueUpHitterID1:
+        type: integer
+      DueUpHitterID2:
+        type: integer
+      DueUpHitterID3:
+        type: integer
+      ForecastDescription:
+        type: string
+      ForecastTempHigh:
+        type: integer
+      ForecastTempLow:
+        type: integer
+      ForecastWindChill:
+        type: integer
+      ForecastWindDirection:
+        type: integer
+      ForecastWindSpeed:
+        type: integer
+      GameID:
+        type: integer
+      GlobalAwayTeamID:
+        type: integer
+      GlobalGameID:
+        type: integer
+      GlobalHomeTeamID:
+        type: integer
+      HomeTeam:
+        type: string
+      HomeTeamErrors:
+        type: integer
+      HomeTeamHits:
+        type: integer
+      HomeTeamID:
+        type: integer
+      HomeTeamMoneyLine:
+        type: integer
+      HomeTeamProbablePitcherID:
+        type: integer
+      HomeTeamRuns:
+        type: integer
+      HomeTeamStartingPitcher:
+        type: string
+      HomeTeamStartingPitcherID:
+        type: integer
+      Inning:
+        type: integer
+      InningHalf:
+        type: string
+      IsClosed:
+        type: boolean
+      LastPlay:
+        type: string
+      LosingPitcher:
+        type: string
+      LosingPitcherID:
+        type: integer
+      Outs:
+        type: integer
+      OverUnder:
+        type: number
+      PointSpread:
+        type: number
+      PointSpreadAwayTeamMoneyLine:
+        type: integer
+      PointSpreadHomeTeamMoneyLine:
+        type: integer
+      RescheduledFromGameID:
+        type: integer
+      RescheduledGameID:
+        type: integer
+      RunnerOnFirst:
+        type: boolean
+      RunnerOnSecond:
+        type: boolean
+      RunnerOnThird:
+        type: boolean
+      SavingPitcher:
+        type: string
+      SavingPitcherID:
+        type: integer
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      StadiumID:
+        type: integer
+      Status:
+        type: string
+      Strikes:
+        type: integer
+      Updated:
+        type: string
+      WinningPitcher:
+        type: string
+      WinningPitcherID:
+        type: integer
+  Pitch:
+    properties:
+      Ball:
+        type: boolean
+      BallsBeforePitch:
+        type: integer
+      Foul:
+        type: boolean
+      HitterID:
+        type: integer
+      Looking:
+        type: boolean
+      Outs:
+        type: integer
+      PitchID:
+        type: integer
+      PitchNumberThisAtBat:
+        type: integer
+      PitcherID:
+        type: integer
+      PlayID:
+        type: integer
+      Strike:
+        type: boolean
+      StrikesBeforePitch:
+        type: integer
+      Swinging:
+        type: boolean
+  Play:
+    properties:
+      AtBat:
+        type: boolean
+      AwayTeamRuns:
+        type: integer
+      Balls:
+        type: integer
+      Description:
+        type: string
+      Error:
+        type: boolean
+      Hit:
+        type: boolean
+      HitterBatHand:
+        type: string
+      HitterID:
+        type: integer
+      HitterName:
+        type: string
+      HitterPosition:
+        type: string
+      HitterTeamID:
+        type: integer
+      HomeTeamRuns:
+        type: integer
+      InningBatterNumber:
+        type: integer
+      InningHalf:
+        type: string
+      InningID:
+        type: integer
+      InningNumber:
+        type: integer
+      NumberOfOutsOnPlay:
+        type: integer
+      Out:
+        type: boolean
+      Outs:
+        type: integer
+      PitchNumberThisAtBat:
+        type: integer
+      PitcherID:
+        type: integer
+      PitcherName:
+        type: string
+      PitcherTeamID:
+        type: integer
+      PitcherThrowHand:
+        type: string
+      Pitches:
+        items:
+          $ref: '#/definitions/Pitch'
+        type: array
+      PlayID:
+        type: integer
+      PlayNumber:
+        type: integer
+      Result:
+        type: string
+      RunsBattedIn:
+        type: integer
+      Sacrifice:
+        type: boolean
+      Strikeout:
+        type: boolean
+      Strikes:
+        type: integer
+      Updated:
+        type: string
+      Walk:
+        type: boolean
+  PlayByPlay:
+    properties:
+      Game:
+        $ref: '#/definitions/Game'
+      Plays:
+        items:
+          $ref: '#/definitions/Play'
+        type: array

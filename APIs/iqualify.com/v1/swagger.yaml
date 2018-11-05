@@ -65,6 +65,15 @@ parameters:
     name: offeringId
     required: true
     type: string
+  permissionName:
+    description: permission name
+    enum:
+      - builder
+      - manager
+    in: path
+    name: permissionName
+    required: true
+    type: string
   userEmail:
     description: user's email
     format: email
@@ -297,6 +306,32 @@ paths:
       summary: Update course topic
       tags:
         - courses
+  '/courses/{contentId}/permissions':
+    post:
+      parameters:
+        - description: The content Id
+          in: path
+          name: contentId
+          required: true
+          type: string
+        - in: body
+          name: users
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/CourseUser'
+            title: users to be added to the offering.
+            type: array
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: user successfully added to the course with the specified permission.
+          schema:
+            $ref: '#/definitions/CourseUser'
+      summary: Update course access
+      tags:
+        - courses
   /offerings:
     get:
       description: Responds with all offerings for your organisation.
@@ -445,6 +480,23 @@ paths:
             title: Posts
             type: array
       summary: Find posts
+      tags:
+        - analytics
+  '/offerings/{offeringId}/analytics/channels/{channelId}/replies':
+    get:
+      description: Responds with a list of all replies in any of the posts for a channel in a offering
+      parameters:
+        - $ref: '#/parameters/offeringId'
+        - $ref: '#/parameters/channelId'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            items:
+              $ref: '#/definitions/Comment'
+            title: Comments
+            type: array
+      summary: Find replies
       tags:
         - analytics
   '/offerings/{offeringId}/analytics/learners-progress':
@@ -1010,14 +1062,17 @@ paths:
       tags:
         - offering users
     post:
-      description: Adds user to the offering.
+      description: Adds one or more users to the offering.
       parameters:
         - $ref: '#/parameters/offeringId'
         - in: body
-          name: user
+          name: users
           required: true
           schema:
-            $ref: '#/definitions/OfferingUser'
+            items:
+              $ref: '#/definitions/OfferingUser'
+            title: users to be added to the offering.
+            type: array
       produces:
         - application/json
       responses:
@@ -1241,6 +1296,25 @@ paths:
       summary: Gets user's open response assignment submissions
       tags:
         - submissions
+  /users:
+    post:
+      description: Adds new user
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: user added
+          schema:
+            $ref: '#/definitions/UserResponse'
+      summary: Add new user
+      tags:
+        - users
   /users/all/progress:
     get:
       description: Returns offering progress for each learner
@@ -1336,6 +1410,22 @@ paths:
             title: Offerings
             type: array
       summary: Get user's offerings
+      tags:
+        - users
+  '/users/{userEmail}/permissions/{permissionName}':
+    post:
+      description: Adds permission to user
+      parameters:
+        - $ref: '#/parameters/userEmail'
+        - $ref: '#/parameters/permissionName'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: permission successfully added to user
+          schema:
+            $ref: '#/definitions/UserResponse'
+      summary: Add permission to user
       tags:
         - users
 definitions:
@@ -1521,6 +1611,8 @@ definitions:
         type: boolean
       moderation:
         $ref: '#/definitions/Moderation'
+      parentCommentId:
+        type: string
       postId:
         type: string
   CourseMetaResponse:
@@ -1532,6 +1624,10 @@ definitions:
         type: string
       id:
         type: string
+      learning_outcomes:
+        items:
+          $ref: '#/definitions/LearningOutcomes'
+        type: array
       metadata:
         $ref: '#/definitions/PortfolioMetadata'
       name:
@@ -1546,9 +1642,27 @@ definitions:
         type: string
       id:
         type: string
+      learning_outcomes:
+        items:
+          $ref: '#/definitions/LearningOutcomes'
+        type: array
       name:
         type: string
     title: Course
+  CourseUser:
+    allOf:
+      - $ref: '#/definitions/User'
+    properties:
+      isBuilder:
+        default: false
+        type: boolean
+      isReviewer:
+        default: false
+        type: boolean
+      profile:
+        $ref: '#/definitions/UserProfile'
+    required:
+      - email
   Criteria:
     properties:
       hasCompletedCourse:
@@ -1618,6 +1732,12 @@ definitions:
         type: array
       personId:
         type: string
+  LearningOutcomes:
+    properties:
+      description:
+        type: string
+      id:
+        type: string
   Mark:
     properties:
       createdAt:
@@ -1683,7 +1803,19 @@ definitions:
       isReadonly:
         type: boolean
       metadata:
-        $ref: '#/definitions/PortfolioMetadata'
+        additionalProperties: false
+        properties:
+          category:
+            type: string
+          level:
+            type: string
+          tags:
+            items:
+              type: string
+            type: array
+          topic:
+            type: string
+        type: object
       name:
         minLength: 1
         type: string
@@ -1705,6 +1837,8 @@ definitions:
       coverImageUrl:
         minLength: 1
         type: string
+      currency:
+        type: string
       description:
         minLength: 1
         type: string
@@ -1714,6 +1848,8 @@ definitions:
       end:
         format: date-time
         type: string
+      enrollmentLimit:
+        type: number
       id:
         type: string
       isReadonly:
@@ -1723,6 +1859,8 @@ definitions:
       name:
         minLength: 1
         type: string
+      price:
+        type: number
       start:
         format: date-time
         type: string
@@ -1753,6 +1891,8 @@ definitions:
       coverImageUrl:
         minLength: 1
         type: string
+      currency:
+        type: string
       description:
         minLength: 1
         type: string
@@ -1762,6 +1902,8 @@ definitions:
       end:
         format: date-time
         type: string
+      enrollmentLimit:
+        type: number
       id:
         type: string
       isReadonly:
@@ -1769,6 +1911,8 @@ definitions:
       name:
         minLength: 1
         type: string
+      price:
+        type: number
       start:
         format: date-time
         type: string
@@ -1782,10 +1926,6 @@ definitions:
     allOf:
       - $ref: '#/definitions/User'
     properties:
-      email:
-        format: email
-        minLength: 1
-        type: string
       isFacilitator:
         default: false
         type: boolean
@@ -1964,6 +2104,9 @@ definitions:
         type: string
   User:
     properties:
+      email:
+        minLength: 1
+        type: string
       firstName:
         minLength: 1
         type: string
