@@ -10,9 +10,7 @@
 
 [![Share on Twitter][twitter-image]][twitter-link]
 [![Follow on Twitter][twitterFollow-image]][twitterFollow-link]
-<img src="https://opencollective.com/openapi-directory/tiers/backer/badge.svg?label=backer&color=brightgreen" />
-<img src="https://opencollective.com/openapi-directory/tiers/sponsor/badge.svg?label=sponsor&color=brightgreen" />
-<img src="https://opencollective.com/openapi-directory/tiers/partner/badge.svg?label=partner&color=brightgreen" />
+<a href="#backers" alt="sponsors on Open Collective"><img src="https://opencollective.com/openapi-directory/backers/badge.svg" /></a> <a href="#sponsors" alt="Sponsors on Open Collective"><img src="https://opencollective.com/openapi-directory/sponsors/badge.svg" /></a> <a href="#partners" alt="Partners on Open Collective"><img src="https://opencollective.com/openapi-directory/partner/badge.svg" /></a>
 
 Directory of API definitions in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) and [3.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md) formats.<BR>
 API access to collection: [Go!][apiDoc-link] - We also have an [RSS Feed](http://api.apis.guru/v2/list.rss)
@@ -112,3 +110,37 @@ Some definitions are taken from Open Source projects:
 [addAPI-image]: https://cloud.githubusercontent.com/assets/8336157/15861614/7e31511a-2cd5-11e6-8b79-38ad0f61e598.png
 [addAPI-link]: https://apis.guru/add-api/
 [apiDoc-link]: https://apis.guru/api-doc/
+
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="graphs/contributors"><img src="https://opencollective.com/openapi-directory/contributors.svg?width=890&button=false" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/openapi-directory#backer)]
+
+<a href="https://opencollective.com/openapi-directory#backers" target="_blank"><img src="https://opencollective.com/openapi-directory/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/openapi-directory#sponsor)]
+
+<a href="https://opencollective.com/openapi-directory/sponsor/0/website" target="_blank"><img src="https://opencollective.com/openapi-directory/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/openapi-directory/sponsor/1/website" target="_blank"><img src="https://opencollective.com/openapi-directory/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/openapi-directory/sponsor/2/website" target="_blank"><img src="https://opencollective.com/openapi-directory/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/openapi-directory/sponsor/3/website" target="_blank"><img src="https://opencollective.com/openapi-directory/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/openapi-directory/sponsor/4/website" target="_blank"><img src="https://opencollective.com/openapi-directory/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/openapi-directory/sponsor/5/website" target="_blank"><img src="https://opencollective.com/openapi-directory/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/openapi-directory/sponsor/6/website" target="_blank"><img src="https://opencollective.com/openapi-directory/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/openapi-directory/sponsor/7/website" target="_blank"><img src="https://opencollective.com/openapi-directory/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/openapi-directory/sponsor/8/website" target="_blank"><img src="https://opencollective.com/openapi-directory/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/openapi-directory/sponsor/9/website" target="_blank"><img src="https://opencollective.com/openapi-directory/sponsor/9/avatar.svg"></a>
+
+## Partners
+
+Support this project by becoming a partner. Your logo will show up here with a link to your website. [[Become a partner](https://opencollective.com/openapi-directory#partner)]
+
+<a href="https://opencollective.com/openapi-directory" target="_blank"><img src="https://opencollective.com/openapi-directory/partners.svg?width=890&button=false"></a>

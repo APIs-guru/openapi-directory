@@ -20,6 +20,7 @@
     "mime-lookup": "0.0.2",
     "mkdirp": "^0.5.1",
     "mktemp": "^0.4.0",
+    "opencollective": "^1.0.3",
     "parse-domain": "^0.2.0",
     "recursive-readdir": "^2.1.1",
     "remove-markdown": "^0.2.2",
@@ -36,9 +37,14 @@
   },
   "scripts": {
     "test": "scripts/collection.js validate -q",
-    "deploy": "scripts/deploy.js && scripts/deployRss.js && ./scripts/deploy_badges.js"
+    "deploy": "scripts/deploy.js && scripts/deployRss.js && ./scripts/deploy_badges.js",
+    "postinstall": "opencollective postinstall"
   },
   "devDependencies": {
     "dredd": "^4.7.0"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/openapi-directory"
   }
 }
