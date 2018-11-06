@@ -1070,9 +1070,9 @@ function patchSwagger(swagger, exPatch) {
   if (swagger.info.logo && swagger.host === 'api.nytimes.com')
     delete swagger.info.logo;
 
-  //swagger-converter if title is absent use host as default
-  if (swagger.info.title === swagger.host)
-    delete swagger.info.title;
+  //swagger-converter if title is absent use host as default - makes invalid
+  //if (swagger.info.title === swagger.host)
+  //  delete swagger.info.title;
 
   //Cleanup from common postfixes
   _.some([
