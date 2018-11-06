@@ -7,7 +7,7 @@ info:
   description: |-
     # Integrating with ShipStation
 
-    ShipStation strives to streamline shipping for online sellers, no matter where they sell their products online. We are continuously adding new marketplaces, shopping carts, and integration tools, because we know the e-commerce space is growing. 
+    ShipStation strives to streamline shipping for online sellers, no matter where they sell their products online. We are continuously adding new marketplaces, shopping carts, and integration tools, because we know the e-commerce space is growing.
     As a result, we’ve worked hard to provide developer resources to build custom integrations with ShipStation.  If you’re interested in becoming a partner of ours, drop us a line by [filling out this form](http://www.shipstation.com/partners/shipstation-api-custom-store/) and we’ll get in touch.
 
     There are two methods to integrate with ShipStation:
@@ -18,7 +18,7 @@ info:
 
     ## Custom Store Integration
 
-    Looking for a more 1-to-1 relationship between ShipStation and your chosen selling platform? The Custom Store Integration is the ticket. Our custom store integration is just like any of our other selling channel integration, and could be eligible (based on internal review) as a branded option within the ShipStation admin. It also allows the user to sync orders within ShipStation in a single click, in addition to ShipStation automatically sending shipment status and tracking information 
+    Looking for a more 1-to-1 relationship between ShipStation and your chosen selling platform? The Custom Store Integration is the ticket. Our custom store integration is just like any of our other selling channel integration, and could be eligible (based on internal review) as a branded option within the ShipStation admin. It also allows the user to sync orders within ShipStation in a single click, in addition to ShipStation automatically sending shipment status and tracking information
     updates back to your cart or marketplace once a label is created. It’s the best way to sync up orders with ShipStation and have the most seamless experience.
 
     The Custom Store allows you to perform two major functions:
@@ -27,14 +27,14 @@ info:
 
     * Receive tracking information when an order is shipped, including shipping method, shipping status, tracking number, and more
 
-    To integrate with the Custom Store, you must expose a web page that renders XML that adheres to the specification defined in the Custom Store Integration Guide. 
+    To integrate with the Custom Store, you must expose a web page that renders XML that adheres to the specification defined in the Custom Store Integration Guide.
     We refer to this page as your “XML Endpoint”. If you can provide us an XML Endpoint, we can *pull* data from your endpoint just like we do with other marketplaces like eBay and Amazon.
 
     **To find out more about our Custom Store Integration, click here: [Custom Store Integration Guide](https://help.shipstation.com/hc/en-us/articles/205928478)**
 
     ## ShipStation API
 
-    Our API is available for any plan, and allows for read access to almost all data in your account, and write access to create specific objects, like Orders, Customers, and Products. 
+    Our API is available for any plan, and allows for read access to almost all data in your account, and write access to create specific objects, like Orders, Customers, and Products.
     The API is a great way to get data directly to and from ShipStation, like creating products, customers, and querying order & shipping data. Please note that an API integration will not allow you to use your own MarketplaceID that could eventually be branded with your company's logo (see the Custom Store Integration above for that functionality).
 
     **This API allows developers to build applications that interface with the ShipStation platform. The API can be used to automate many tasks including:**
@@ -53,10 +53,10 @@ info:
 
     ## Which one should I pick?
 
-    The method that's right for your integration very much depends on the type of integration you're planning on implementing. A Custom Store allows ShipStation to *pull* order information from your platform the very same way we *pull* data from marketplaces such as eBay, Amazon, and Shopify. Once an order has been shipped in ShipStation, ShipStation automatically *pushes* tracking information back to your custom store. Though the functionality afforded by this approach is limited to these 2 main functions, much of the *heavy lifting* is performed by ShipStation. Importing orders 
+    The method that's right for your integration very much depends on the type of integration you're planning on implementing. A Custom Store allows ShipStation to *pull* order information from your platform the very same way we *pull* data from marketplaces such as eBay, Amazon, and Shopify. Once an order has been shipped in ShipStation, ShipStation automatically *pushes* tracking information back to your custom store. Though the functionality afforded by this approach is limited to these 2 main functions, much of the *heavy lifting* is performed by ShipStation. Importing orders
     and sending tracking information is performed automatically by ShipStation, as long as your XML endpoint is available to receive our data.
 
-    An API integration, on the other hand, exposes much more functionality, but requires that the developer do much of the heavy lifting. Orders must be *pushed* to ShipStation by using our "/orders/CreateOrder" endpoint.  The API allows developers to perform functions such as tagging an order, 
+    An API integration, on the other hand, exposes much more functionality, but requires that the developer do much of the heavy lifting. Orders must be *pushed* to ShipStation by using our "/orders/CreateOrder" endpoint.  The API allows developers to perform functions such as tagging an order,
     shipping an order, creating a shipping label (without an order), retrieving shipping rates, adding funds to a carrier account, creating a warehouse, listing products, and much more.  The functionality the API affords are typical actions that a user would perform if using the web app.
 
     ### Considerations
@@ -153,7 +153,7 @@ info:
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/879470232292663296/Kp70vg1p_400x400.jpg'
+    url: 'https://twitter.com/ShipStation/profile_image?size=original'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
@@ -207,7 +207,7 @@ paths:
         ``addr1`` | string, optional | Company Address - Street 1
         ``addr2`` | string, optional | Company Address - Street 2
         ``city`` | string, optional | Company Address - City
-        ``state`` | string, optional | Company Address - State 
+        ``state`` | string, optional | Company Address - State
         ``zip`` | string, optional | Company Address - Zip Code
         ``countryCode`` |string, optional | Company Address - Country.  Please use a 2-character country code.
         ``phone`` | string, optional | Company Phone number.
@@ -1432,7 +1432,7 @@ paths:
         ``carrierCode`` | string, optional | The code for the carrier that is to be used(or was used) when this order is shipped(was shipped).
         ``serviceCode`` | string, optional | The code for the shipping service that is to be used(or was used) when this order is shipped(was shipped).
         ``packageCode`` | string, optional | The code for the package type that is to be used(or was used) when this order is shipped(was shipped).
-        ``confirmation`` | string, optional | The type of delivery confirmation that is to be used(or was used) when this order is shipped(was shipped). Possible values: ``none``, ``delivery``, ``signature``, ``adult_signature``, and ``direct_signature``.  ``direct_signature`` is available for FedEx only.  
+        ``confirmation`` | string, optional | The type of delivery confirmation that is to be used(or was used) when this order is shipped(was shipped). Possible values: ``none``, ``delivery``, ``signature``, ``adult_signature``, and ``direct_signature``.  ``direct_signature`` is available for FedEx only.
         ``shipDate`` | string, optional | The date the order was shipped.
         ``weight`` | Weight, optional | Weight of the order.  Use the [**Weight**](http://www.shipstation.com/developer-api/#/reference/model-weight) model.
         ``dimensions`` | Dimensions, optional | Dimensions of the order.  Use the [**Dimensions**](http://www.shipstation.com/developer-api/#/reference/model-dimensions) model.
@@ -3581,9 +3581,9 @@ paths:
          ``shipFrom`` | Address, required | Address indicating shipment's origin.  Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
          ``shipTo`` | Address, required | Address indicating shipment's destination.  Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
          ``returnTo`` | Address, optional | Address indicating return address displayed on the label.  Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
-         ``insuranceOptions`` | InsuranceOptions, optional | The shipping insurance information associated with this order.  
+         ``insuranceOptions`` | InsuranceOptions, optional | The shipping insurance information associated with this order.
          ``internationalOptions`` | InternationalOptions, optional | Customs information that can be used to generate customs documents for international orders.  Use the [**InternationalOptions**](https://www.shipstation.com/developer-api/#/reference/model-internationaloptions) model.
-         ``advancedOptions`` | AdvancedOptions, optional | Various advanced options that may be available depending on the shipping carrier that is used to ship the order.  Use the [**AdvancedOptions**](https://www.shipstation.com/developer-api/#/reference/model-advancedoptions) model. 
+         ``advancedOptions`` | AdvancedOptions, optional | Various advanced options that may be available depending on the shipping carrier that is used to ship the order.  Use the [**AdvancedOptions**](https://www.shipstation.com/developer-api/#/reference/model-advancedoptions) model.
          ``testLabel`` | boolean, optional | Specifies whether a test label should be created. Default value: false.
       parameters:
         - in: body
@@ -3753,7 +3753,7 @@ paths:
          ``toPostalCode`` | string, required | Destination Postal Code.
          ``toCity`` | string, optional | Destination City.
          ``weight`` | Weight, required | Shipment's weight.  Use ``Weight`` object.
-         ``dimensions`` | Dimensions, optional | Shipment's dimensions.  Use ``Dimensions`` object. 
+         ``dimensions`` | Dimensions, optional | Shipment's dimensions.  Use ``Dimensions`` object.
          ``confirmation`` | string, optional | The type of delivery confirmation that is to be used once the shipment is created.  Possible values: ``none``, ``delivery``, ``signature``, ``adult_signature``, and ``direct_signature``.  ``direct_signature`` is available for FedEx only.
          ``residential`` | boolean, optional | Returns rates that account for the specified delivery confirmation type. Default value: false
       parameters:
