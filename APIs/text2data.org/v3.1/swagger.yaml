@@ -1,0 +1,229 @@
+swagger: '2.0'
+schemes:
+  - http
+host: api.text2data.org
+info:
+  contact:
+    x-twitter: Text2Data
+  title: api.text2data.org
+  version: v3.1
+  x-apisguru-categories:
+    - text
+  x-logo:
+    url: 'https://twitter.com/Text2Data/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'http://api.text2data.org/swagger/docs/v3.1'
+      version: '2.0'
+  x-providerName: text2data.org
+produces:
+  - application/json
+  - text/json
+paths:
+  /api/Root:
+    get:
+      consumes: []
+      operationId: Root_Get
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DocumentResult'
+      tags:
+        - Root
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      operationId: Root_Post
+      parameters:
+        - in: body
+          name: requestDoc
+          required: true
+          schema:
+            $ref: '#/definitions/Document'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DocumentResult'
+      tags:
+        - Root
+definitions:
+  Category:
+    properties:
+      CategoryName:
+        type: string
+      Score:
+        format: double
+        type: number
+    type: object
+  Document:
+    properties:
+      DocumentLanguage:
+        type: string
+      DocumentText:
+        type: string
+      IsTwitterContent:
+        type: boolean
+      PrivateKey:
+        type: string
+      Secret:
+        type: string
+      SerializeFormat:
+        format: int32
+        type: integer
+      UserCategoryModelName:
+        type: string
+    type: object
+  DocumentResult:
+    properties:
+      AutoCategories:
+        items:
+          $ref: '#/definitions/Category'
+        type: array
+      Citations:
+        items:
+          $ref: '#/definitions/SentencePart'
+        type: array
+      CloudTagHTML:
+        type: string
+      CoreSentences:
+        items:
+          $ref: '#/definitions/Sentence'
+        type: array
+      DetectedLanguage:
+        type: string
+      DocSentimentPolarity:
+        type: string
+      DocSentimentResultString:
+        type: string
+      DocSentimentValue:
+        format: double
+        type: number
+      Entities:
+        items:
+          $ref: '#/definitions/SentencePart'
+        type: array
+      ErrorMessage:
+        type: string
+      Keywords:
+        items:
+          $ref: '#/definitions/SentencePart'
+        type: array
+      NegativePhraseCount:
+        format: int32
+        type: integer
+      NeutralPhraseCount:
+        format: int32
+        type: integer
+      PartsOfSpeech:
+        items:
+          $ref: '#/definitions/PartOfSpeech'
+        type: array
+      PositivePhraseCount:
+        format: int32
+        type: integer
+      ResultTextHtml:
+        type: string
+      SlangWords:
+        items:
+          $ref: '#/definitions/SlangWord'
+        type: array
+      Status:
+        format: int32
+        type: integer
+      Subjectivity:
+        type: string
+      Summarization:
+        type: string
+      SwearWords:
+        items:
+          $ref: '#/definitions/SlangWord'
+        type: array
+      Themes:
+        items:
+          $ref: '#/definitions/SentencePart'
+        type: array
+      TransactionCurrentDay:
+        format: int32
+        type: integer
+      TransactionDailyLimit:
+        format: int32
+        type: integer
+      TransactionTotalCreditsLeft:
+        format: int32
+        type: integer
+      TransactionUseByDate:
+        format: date-time
+        type: string
+      UserCategories:
+        items:
+          $ref: '#/definitions/Category'
+        type: array
+    type: object
+  PartOfSpeech:
+    properties:
+      Action:
+        type: string
+      Object:
+        type: string
+      ObjectSentimentPolarity:
+        type: string
+      ObjectSentimentResultString:
+        type: string
+      ObjectSentimentValue:
+        format: double
+        type: number
+      Subject:
+        type: string
+      Text:
+        type: string
+    type: object
+  Sentence:
+    properties:
+      Relevance:
+        format: int32
+        type: integer
+      SentenceNumber:
+        format: int32
+        type: integer
+      SentimentPolarity:
+        type: string
+      SentimentResultString:
+        type: string
+      SentimentValue:
+        format: double
+        type: number
+      Text:
+        type: string
+    type: object
+  SentencePart:
+    properties:
+      KeywordType:
+        type: string
+      Mentions:
+        format: int32
+        type: integer
+      SentencePartType:
+        type: string
+      SentenceText:
+        type: string
+      SentimentPolarity:
+        type: string
+      SentimentResult:
+        type: string
+      SentimentValue:
+        format: double
+        type: number
+      Text:
+        type: string
+    type: object
+  SlangWord:
+    properties:
+      SlangWordText:
+        type: string
+      SlangWordTranslation:
+        type: string
+    type: object
