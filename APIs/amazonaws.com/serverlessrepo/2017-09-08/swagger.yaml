@@ -305,6 +305,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/applications/{applicationId}/templates':
+    post:
+      operationId: CreateCloudFormationTemplate
+      description: Creates an AWS CloudFormation template.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateCloudFormationTemplateResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCloudFormationTemplateRequest'
+        - name: applicationId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/applications/{applicationId}':
     delete:
       operationId: DeleteApplication
@@ -488,9 +537,10 @@ paths:
     put:
       operationId: PutApplicationPolicy
       description: |-
-        Sets the permission policy for an application. See
-         <a href="https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions">Application Permissions</a>
-         for the list of supported actions that can be used with this operation.
+        Sets the permission policy for an application. For the list of actions supported for this operation, see
+         <a href="https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions">Application 
+         Permissions</a>
+         .
       responses:
         '200':
           description: Success
@@ -526,6 +576,59 @@ paths:
           in: path
           type: string
           required: true
+  '/applications/{applicationId}/templates/{templateId}':
+    get:
+      operationId: GetCloudFormationTemplate
+      description: Gets the specified AWS CloudFormation template.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCloudFormationTemplateResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCloudFormationTemplateRequest'
+        - name: applicationId
+          in: path
+          type: string
+          required: true
+        - name: templateId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/applications/{applicationId}/versions':
     get:
       operationId: ListApplicationVersions
@@ -649,10 +752,10 @@ definitions:
         $ref: '#/definitions/__string'
         description: |-
           <p>A local text file that contains the license of the app that matches the spdxLicenseID value of your application.
-           The file is of the format file://&lt;path>/&lt;filename>.</p><p>Maximum size 5 MB</p><p>Note: Only one of licenseBody and licenseUrl can be specified, otherwise an error will result.</p>
+           The file has the format file://&lt;path>/&lt;filename>.</p><p>Maximum size 5 MB</p><p>You can specify only one of licenseBody and licenseUrl; otherwise, an error results.</p>
       LicenseUrl:
         $ref: '#/definitions/__string'
-        description: '<p>A link to the S3 object that contains the license of the app that matches the spdxLicenseID value of your application.</p><p>Maximum size 5 MB</p><p>Note: Only one of licenseBody and licenseUrl can be specified, otherwise an error will result.</p>'
+        description: '<p>A link to the S3 object that contains the license of the app that matches the spdxLicenseID value of your application.</p><p>Maximum size 5 MB</p><p>You can specify only one of licenseBody and licenseUrl; otherwise, an error results.</p>'
       Name:
         $ref: '#/definitions/__string'
         description: '<p>The name of the application that you want to publish.</p><p>Minimum length=1. Maximum length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
@@ -660,10 +763,10 @@ definitions:
         $ref: '#/definitions/__string'
         description: |-
           <p>A local text readme file in Markdown language that contains a more detailed description of the application and how it works.
-           The file is of the format file://&lt;path>/&lt;filename>.</p><p>Maximum size 5 MB</p><p>Note: Only one of readmeBody and readmeUrl can be specified, otherwise an error will result.</p>
+           The file has the format file://&lt;path>/&lt;filename>.</p><p>Maximum size 5 MB</p><p>You can specify only one of readmeBody and readmeUrl; otherwise, an error results.</p>
       ReadmeUrl:
         $ref: '#/definitions/__string'
-        description: '<p>A link to the S3 object in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p><p>Note: Only one of readmeBody and readmeUrl can be specified, otherwise an error will result.</p>'
+        description: '<p>A link to the S3 object in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p><p>You can specify only one of readmeBody and readmeUrl; otherwise, an error results.</p>'
       SemanticVersion:
         $ref: '#/definitions/__string'
         description: |-
@@ -680,60 +783,15 @@ definitions:
         $ref: '#/definitions/__string'
         description: |-
           <p>The local raw packaged AWS SAM template file of your application.
-           The file is of the format file://&lt;path>/&lt;filename>.</p><p>Note: Only one of templateBody and templateUrl can be specified, otherwise an error will result.</p>
+           The file has the format file://&lt;path>/&lt;filename>.</p><p>You can specify only one of templateBody and templateUrl; otherwise an error results.</p>
       TemplateUrl:
         $ref: '#/definitions/__string'
-        description: '<p>A link to the S3 object cotaining the packaged AWS SAM template of your application.</p><p>Note: Only one of templateBody and templateUrl can be specified, otherwise an error will result.</p>'
-  TooManyRequestsException:
-    type: object
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/__string'
-        description: '429'
-      Message:
-        $ref: '#/definitions/__string'
-        description: The client is sending more than the allowed number of requests per unit of time.
-    description: The client is sending more than the allowed number of requests per unit of time.
-  BadRequestException:
-    type: object
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/__string'
-        description: '400'
-      Message:
-        $ref: '#/definitions/__string'
-        description: One of the parameters in the request is invalid.
-    description: One of the parameters in the request is invalid.
-  InternalServerErrorException:
-    type: object
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/__string'
-        description: '500'
-      Message:
-        $ref: '#/definitions/__string'
-        description: The AWS Serverless Application Repository service encountered an internal error.
-    description: The AWS Serverless Application Repository service encountered an internal error.
-  ConflictException:
-    type: object
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/__string'
-        description: '409'
-      Message:
-        $ref: '#/definitions/__string'
-        description: The resource already exists.
-    description: The resource already exists.
-  ForbiddenException:
-    type: object
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/__string'
-        description: '403'
-      Message:
-        $ref: '#/definitions/__string'
-        description: The client is not authenticated.
-    description: The client is not authenticated.
+        description: <p>A link to the S3 object containing the packaged AWS SAM template of your application.</p><p>You can specify only one of templateBody and templateUrl; otherwise an error results.</p>
+  TooManyRequestsException: {}
+  BadRequestException: {}
+  InternalServerErrorException: {}
+  ConflictException: {}
+  ForbiddenException: {}
   CreateApplicationVersionResponse:
     type: object
     properties:
@@ -746,6 +804,34 @@ definitions:
       ParameterDefinitions:
         $ref: '#/definitions/__listOfParameterDefinition'
         description: An array of parameter types supported by the application.
+      RequiredCapabilities:
+        $ref: '#/definitions/__listOfCapability'
+        description: |-
+          <p>A list of values that you must specify before you can deploy certain applications.
+           Some applications might include resources that can affect permissions in your AWS
+           account, for example, by creating new AWS Identity and Access Management (IAM) users.
+           For those applications, you must explicitly acknowledge their capabilities by
+           specifying this parameter.</p><p>The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
+           and CAPABILITY_RESOURCE_POLICY.</p><p>The following resources require you to specify CAPABILITY_IAM or
+           CAPABILITY_NAMED_IAM:
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html">AWS::IAM::InstanceProfile</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>, and
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html">AWS::IAM::Role</a>.
+           If the application contains IAM resources, you can specify either CAPABILITY_IAM
+           or CAPABILITY_NAMED_IAM. If the application contains IAM resources
+           with custom names, you must specify CAPABILITY_NAMED_IAM.</p><p>The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html">AWS::ApplicationAutoScaling::ScalingPolicy</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html">AWS::S3::BucketPolicy</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html">AWS::SQS::QueuePolicy</a>, and
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS:TopicPolicy</a>.</p><p>If your application template contains any of the above resources, we recommend that you review
+           all permissions associated with the application before deploying. If you don't specify
+           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY</p>
+      ResourcesSupported:
+        $ref: '#/definitions/__boolean'
+        description: |-
+          Whether all of the AWS resources contained in this application are supported in the region
+           in which it is being retrieved.
       SemanticVersion:
         $ref: '#/definitions/__string'
         description: |-
@@ -793,9 +879,80 @@ definitions:
     required:
       - StackName
     properties:
+      Capabilities:
+        $ref: '#/definitions/__listOf__string'
+        description: |-
+          <p>A list of values that you must specify before you can deploy certain applications.
+           Some applications might include resources that can affect permissions in your AWS
+           account, for example, by creating new AWS Identity and Access Management (IAM) users.
+           For those applications, you must explicitly acknowledge their capabilities by
+           specifying this parameter.</p><p>The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
+           and CAPABILITY_RESOURCE_POLICY.</p><p>The following resources require you to specify CAPABILITY_IAM or
+           CAPABILITY_NAMED_IAM:
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html">AWS::IAM::InstanceProfile</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>, and
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html">AWS::IAM::Role</a>.
+           If the application contains IAM resources, you can specify either CAPABILITY_IAM
+           or CAPABILITY_NAMED_IAM. If the application contains IAM resources
+           with custom names, you must specify CAPABILITY_NAMED_IAM.</p><p>The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html">AWS::ApplicationAutoScaling::ScalingPolicy</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html">AWS::S3::BucketPolicy</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html">AWS::SQS::QueuePolicy</a>, and
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS:TopicPolicy</a>.</p><p>If your application template contains any of the above resources, we recommend that you review
+           all permissions associated with the application before deploying. If you don't specify
+           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY</p>
+      ChangeSetName:
+        $ref: '#/definitions/__string'
+        description: |-
+          This property corresponds to the parameter of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
+           CreateChangeSet</a></i>
+           API.
+      ClientToken:
+        $ref: '#/definitions/__string'
+        description: |-
+          This property corresponds to the parameter of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
+           CreateChangeSet</a></i>
+           API.
+      Description:
+        $ref: '#/definitions/__string'
+        description: |-
+          This property corresponds to the parameter of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
+           CreateChangeSet</a></i>
+           API.
+      NotificationArns:
+        $ref: '#/definitions/__listOf__string'
+        description: |-
+          This property corresponds to the parameter of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
+           CreateChangeSet</a></i>
+           API.
       ParameterOverrides:
         $ref: '#/definitions/__listOfParameterValue'
         description: A list of parameter values for the parameters of the application.
+      ResourceTypes:
+        $ref: '#/definitions/__listOf__string'
+        description: |-
+          This property corresponds to the parameter of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
+           CreateChangeSet</a></i>
+           API.
+      RollbackConfiguration:
+        $ref: '#/definitions/RollbackConfiguration'
+        description: |-
+          This property corresponds to the parameter of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
+           CreateChangeSet</a></i>
+           API.
       SemanticVersion:
         $ref: '#/definitions/__string'
         description: |-
@@ -805,22 +962,66 @@ definitions:
       StackName:
         $ref: '#/definitions/__string'
         description: |-
-          <p>The name or the unique ID of the stack for which you are creating a change set. AWS CloudFormation generates
-           the change set by comparing this stack's information with the information that you submit, such as a modified
-           template or different parameter input values. </p><p>Constraints: Minimum length of 1.</p><p>Pattern: ([a-zA-Z][-a-zA-Z0-9]*)|(arn:\b(aws|aws-us-gov|aws-cn)\b:[-a-zA-Z0-9:/._+]*)</p>
+          This property corresponds to the parameter of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
+           CreateChangeSet</a></i>
+           API.
+      Tags:
+        $ref: '#/definitions/__listOfTag'
+        description: |-
+          This property corresponds to the parameter of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
+           CreateChangeSet</a></i>
+           API.
+      TemplateId:
+        $ref: '#/definitions/__string'
+        description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
+  CreateCloudFormationTemplateResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The application Amazon Resource Name (ARN).
+      CreationTime:
+        $ref: '#/definitions/__string'
+        description: The date and time this resource was created.
+      ExpirationTime:
+        $ref: '#/definitions/__string'
+        description: |-
+          The date and time this template expires. Templates
+           expire 1 hour after creation.
+      SemanticVersion:
+        $ref: '#/definitions/__string'
+        description: |-
+          <p>The semantic version of the application:</p><p>
+           <a href="https://semver.org/">https://semver.org/</a>
+           </p>
+      Status:
+        $ref: '#/definitions/Status'
+        description: '<p>Status of the template creation workflow.</p><p>Possible values: PREPARING | ACTIVE | EXPIRED</p>'
+      TemplateId:
+        $ref: '#/definitions/__string'
+        description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
+      TemplateUrl:
+        $ref: '#/definitions/__string'
+        description: |-
+          A link to the template that can be used to deploy the application using
+           AWS CloudFormation.
+  CreateCloudFormationTemplateRequest:
+    type: object
+    properties:
+      SemanticVersion:
+        $ref: '#/definitions/__string'
+        description: |-
+          <p>The semantic version of the application:</p><p>
+           <a href="https://semver.org/">https://semver.org/</a>
+           </p>
+  NotFoundException: {}
   DeleteApplicationRequest:
     type: object
     properties: {}
-  NotFoundException:
-    type: object
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/__string'
-        description: '404'
-      Message:
-        $ref: '#/definitions/__string'
-        description: 'The resource (for example, an access policy statement) specified in the request doesn''t exist.'
-    description: 'The resource (for example, an access policy statement) specified in the request doesn''t exist.'
   GetApplicationResponse:
     type: object
     properties:
@@ -869,6 +1070,40 @@ definitions:
         $ref: '#/definitions/__listOfApplicationPolicyStatement'
         description: An array of policy statements applied to the application.
   GetApplicationPolicyRequest:
+    type: object
+    properties: {}
+  GetCloudFormationTemplateResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The application Amazon Resource Name (ARN).
+      CreationTime:
+        $ref: '#/definitions/__string'
+        description: The date and time this resource was created.
+      ExpirationTime:
+        $ref: '#/definitions/__string'
+        description: |-
+          The date and time this template expires. Templates
+           expire 1 hour after creation.
+      SemanticVersion:
+        $ref: '#/definitions/__string'
+        description: |-
+          <p>The semantic version of the application:</p><p>
+           <a href="https://semver.org/">https://semver.org/</a>
+           </p>
+      Status:
+        $ref: '#/definitions/Status'
+        description: '<p>Status of the template creation workflow.</p><p>Possible values: PREPARING | ACTIVE | EXPIRED</p>'
+      TemplateId:
+        $ref: '#/definitions/__string'
+        description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
+      TemplateUrl:
+        $ref: '#/definitions/__string'
+        description: |-
+          A link to the template that can be used to deploy the application using
+           AWS CloudFormation.
+  GetCloudFormationTemplateRequest:
     type: object
     properties: {}
   ListApplicationVersionsResponse:
@@ -970,116 +1205,12 @@ definitions:
       ReadmeUrl:
         $ref: '#/definitions/__string'
         description: <p>A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
-  __string:
-    type: string
   __listOf__string:
     type: array
     items:
       $ref: '#/definitions/__string'
-  Version:
-    type: object
-    required:
-      - TemplateUrl
-      - ParameterDefinitions
-      - CreationTime
-      - ApplicationId
-      - SemanticVersion
-    properties:
-      ApplicationId:
-        $ref: '#/definitions/__string'
-        description: The application Amazon Resource Name (ARN).
-      CreationTime:
-        $ref: '#/definitions/__string'
-        description: The date and time this resource was created.
-      ParameterDefinitions:
-        $ref: '#/definitions/__listOfParameterDefinition'
-        description: An array of parameter types supported by the application.
-      SemanticVersion:
-        $ref: '#/definitions/__string'
-        description: |-
-          <p>The semantic version of the application:</p><p>
-           <a href="https://semver.org/">https://semver.org/</a>
-           </p>
-      SourceCodeUrl:
-        $ref: '#/definitions/__string'
-        description: A link to a public repository for the source code of your application.
-      TemplateUrl:
-        $ref: '#/definitions/__string'
-        description: A link to the packaged AWS SAM template of your application.
-    description: Application version details.
-  Application:
-    type: object
-    required:
-      - Description
-      - Author
-      - ApplicationId
-      - Name
-    properties:
-      ApplicationId:
-        $ref: '#/definitions/__string'
-        description: The application Amazon Resource Name (ARN).
-      Author:
-        $ref: '#/definitions/__string'
-        description: '<p>The name of the author publishing the app.</p><p>Minimum length=1. Maximum length=127.</p><p>Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>'
-      CreationTime:
-        $ref: '#/definitions/__string'
-        description: The date and time this resource was created.
-      Description:
-        $ref: '#/definitions/__string'
-        description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
-      HomePageUrl:
-        $ref: '#/definitions/__string'
-        description: |-
-          A URL with more information about the application, for example
-           the location of your GitHub repository for the application.
-      Labels:
-        $ref: '#/definitions/__listOf__string'
-        description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
-      LicenseUrl:
-        $ref: '#/definitions/__string'
-        description: <p>A link to a license file of the app that matches the spdxLicenseID value of your application.</p><p>Maximum size 5 MB</p>
-      Name:
-        $ref: '#/definitions/__string'
-        description: '<p>The name of the application.</p><p>Minimum length=1. Maximum length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
-      ReadmeUrl:
-        $ref: '#/definitions/__string'
-        description: <p>A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
-      SpdxLicenseId:
-        $ref: '#/definitions/__string'
-        description: 'A valid identifier from https://spdx.org/licenses/.'
-      Version:
-        $ref: '#/definitions/Version'
-        description: Version information about the application.
-    description: Details about the application.
-  __listOfApplicationSummary:
-    type: array
-    items:
-      $ref: '#/definitions/ApplicationSummary'
-  ApplicationPage:
-    type: object
-    required:
-      - Applications
-    properties:
-      Applications:
-        $ref: '#/definitions/__listOfApplicationSummary'
-        description: An array of application summaries.
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: The token to request the next page of results.
-    description: A list of application details.
-  __listOfApplicationPolicyStatement:
-    type: array
-    items:
-      $ref: '#/definitions/ApplicationPolicyStatement'
-  ApplicationPolicy:
-    type: object
-    required:
-      - Statements
-    properties:
-      Statements:
-        $ref: '#/definitions/__listOfApplicationPolicyStatement'
-        description: An array of policy statements applied to the application.
-    description: Policy statements applied to the application.
+  __string:
+    type: string
   ApplicationPolicyStatement:
     type: object
     required:
@@ -1088,7 +1219,9 @@ definitions:
     properties:
       Actions:
         $ref: '#/definitions/__listOf__string'
-        description: 'See <a href="https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions">Application Permissions</a> for the list of supported actions.'
+        description: |-
+          For the list of actions supported for this operation, see <a href="https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions">Application 
+           Permissions</a>.
       Principals:
         $ref: '#/definitions/__listOf__string'
         description: 'An AWS account ID, or * to make the application public.'
@@ -1131,86 +1264,61 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'A valid identifier from <a href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>.'
     description: Summary of details about the application.
-  __listOfVersionSummary:
-    type: array
-    items:
-      $ref: '#/definitions/VersionSummary'
-  ApplicationVersionPage:
+  Capability:
+    type: string
+    enum:
+      - CAPABILITY_IAM
+      - CAPABILITY_NAMED_IAM
+      - CAPABILITY_AUTO_EXPAND
+      - CAPABILITY_RESOURCE_POLICY
+  Version:
     type: object
     required:
-      - Versions
-    properties:
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: The token to request the next page of results.
-      Versions:
-        $ref: '#/definitions/__listOfVersionSummary'
-        description: An array of version summaries for the application.
-    description: A list of version summaries for the application.
-  ChangeSetDetails:
-    type: object
-    required:
-      - ChangeSetId
+      - TemplateUrl
+      - ParameterDefinitions
+      - ResourcesSupported
+      - CreationTime
+      - RequiredCapabilities
       - ApplicationId
-      - StackId
       - SemanticVersion
     properties:
       ApplicationId:
         $ref: '#/definitions/__string'
         description: The application Amazon Resource Name (ARN).
-      ChangeSetId:
+      CreationTime:
         $ref: '#/definitions/__string'
-        description: '<p>The Amazon Resource Name (ARN) of the change set.</p><p>Length constraints: Minimum length of 1.</p><p>Pattern: ARN:[-a-zA-Z0-9:/]*</p>'
-      SemanticVersion:
-        $ref: '#/definitions/__string'
+        description: The date and time this resource was created.
+      ParameterDefinitions:
+        $ref: '#/definitions/__listOfParameterDefinition'
+        description: An array of parameter types supported by the application.
+      RequiredCapabilities:
+        $ref: '#/definitions/__listOfCapability'
         description: |-
-          <p>The semantic version of the application:</p><p>
-           <a href="https://semver.org/">https://semver.org/</a>
-           </p>
-      StackId:
-        $ref: '#/definitions/__string'
-        description: The unique ID of the stack.
-    description: Details of the change set.
-  CreateApplicationInput:
-    type: object
-    required:
-      - Description
-      - Name
-      - Author
-    properties:
-      Author:
-        $ref: '#/definitions/__string'
-        description: '<p>The name of the author publishing the app.</p><p>Minimum length=1. Maximum length=127.</p><p>Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>'
-      Description:
-        $ref: '#/definitions/__string'
-        description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
-      HomePageUrl:
-        $ref: '#/definitions/__string'
+          <p>A list of values that you must specify before you can deploy certain applications.
+           Some applications might include resources that can affect permissions in your AWS
+           account, for example, by creating new AWS Identity and Access Management (IAM) users.
+           For those applications, you must explicitly acknowledge their capabilities by
+           specifying this parameter.</p><p>The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
+           and CAPABILITY_RESOURCE_POLICY.</p><p>The following resources require you to specify CAPABILITY_IAM or
+           CAPABILITY_NAMED_IAM:
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html">AWS::IAM::InstanceProfile</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>, and
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html">AWS::IAM::Role</a>.
+           If the application contains IAM resources, you can specify either CAPABILITY_IAM
+           or CAPABILITY_NAMED_IAM. If the application contains IAM resources
+           with custom names, you must specify CAPABILITY_NAMED_IAM.</p><p>The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html">AWS::ApplicationAutoScaling::ScalingPolicy</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html">AWS::S3::BucketPolicy</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html">AWS::SQS::QueuePolicy</a>, and
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS:TopicPolicy</a>.</p><p>If your application template contains any of the above resources, we recommend that you review
+           all permissions associated with the application before deploying. If you don't specify
+           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY</p>
+      ResourcesSupported:
+        $ref: '#/definitions/__boolean'
         description: |-
-          A URL with more information about the application, for example
-           the location of your GitHub repository for the application.
-      Labels:
-        $ref: '#/definitions/__listOf__string'
-        description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
-      LicenseBody:
-        $ref: '#/definitions/__string'
-        description: |-
-          <p>A local text file that contains the license of the app that matches the spdxLicenseID value of your application.
-           The file is of the format file://&lt;path>/&lt;filename>.</p><p>Maximum size 5 MB</p><p>Note: Only one of licenseBody and licenseUrl can be specified, otherwise an error will result.</p>
-      LicenseUrl:
-        $ref: '#/definitions/__string'
-        description: '<p>A link to the S3 object that contains the license of the app that matches the spdxLicenseID value of your application.</p><p>Maximum size 5 MB</p><p>Note: Only one of licenseBody and licenseUrl can be specified, otherwise an error will result.</p>'
-      Name:
-        $ref: '#/definitions/__string'
-        description: '<p>The name of the application that you want to publish.</p><p>Minimum length=1. Maximum length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
-      ReadmeBody:
-        $ref: '#/definitions/__string'
-        description: |-
-          <p>A local text readme file in Markdown language that contains a more detailed description of the application and how it works.
-           The file is of the format file://&lt;path>/&lt;filename>.</p><p>Maximum size 5 MB</p><p>Note: Only one of readmeBody and readmeUrl can be specified, otherwise an error will result.</p>
-      ReadmeUrl:
-        $ref: '#/definitions/__string'
-        description: '<p>A link to the S3 object in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p><p>Note: Only one of readmeBody and readmeUrl can be specified, otherwise an error will result.</p>'
+          Whether all of the AWS resources contained in this application are supported in the region
+           in which it is being retrieved.
       SemanticVersion:
         $ref: '#/definitions/__string'
         description: |-
@@ -1220,68 +1328,77 @@ definitions:
       SourceCodeUrl:
         $ref: '#/definitions/__string'
         description: A link to a public repository for the source code of your application.
-      SpdxLicenseId:
-        $ref: '#/definitions/__string'
-        description: 'A valid identifier from <a href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>.'
-      TemplateBody:
-        $ref: '#/definitions/__string'
-        description: |-
-          <p>The local raw packaged AWS SAM template file of your application.
-           The file is of the format file://&lt;path>/&lt;filename>.</p><p>Note: Only one of templateBody and templateUrl can be specified, otherwise an error will result.</p>
-      TemplateUrl:
-        $ref: '#/definitions/__string'
-        description: '<p>A link to the S3 object cotaining the packaged AWS SAM template of your application.</p><p>Note: Only one of templateBody and templateUrl can be specified, otherwise an error will result.</p>'
-    description: Create an application request.
-  CreateApplicationVersionInput:
-    type: object
-    properties:
-      SourceCodeUrl:
-        $ref: '#/definitions/__string'
-        description: A link to a public repository for the source code of your application.
-      TemplateBody:
-        $ref: '#/definitions/__string'
-        description: The raw packaged AWS SAM template of your application.
       TemplateUrl:
         $ref: '#/definitions/__string'
         description: A link to the packaged AWS SAM template of your application.
-    description: Create a version request.
+    description: Application version details.
   __listOfParameterDefinition:
     type: array
     items:
       $ref: '#/definitions/ParameterDefinition'
+  __listOfCapability:
+    type: array
+    items:
+      $ref: '#/definitions/Capability'
+  __boolean:
+    type: boolean
   __listOfParameterValue:
     type: array
     items:
       $ref: '#/definitions/ParameterValue'
-  CreateCloudFormationChangeSetInput:
+  RollbackConfiguration:
     type: object
-    required:
-      - StackName
     properties:
-      ParameterOverrides:
-        $ref: '#/definitions/__listOfParameterValue'
-        description: A list of parameter values for the parameters of the application.
-      SemanticVersion:
-        $ref: '#/definitions/__string'
+      MonitoringTimeInMinutes:
+        $ref: '#/definitions/__integer'
         description: |-
-          <p>The semantic version of the application:</p><p>
-           <a href="https://semver.org/">https://semver.org/</a>
-           </p>
-      StackName:
-        $ref: '#/definitions/__string'
+          This property corresponds to the content of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">
+           RollbackConfiguration</a></i>
+           Data Type.
+      RollbackTriggers:
+        $ref: '#/definitions/__listOfRollbackTrigger'
         description: |-
-          <p>The name or the unique ID of the stack for which you are creating a change set. AWS CloudFormation generates
-           the change set by comparing this stack's information with the information that you submit, such as a modified
-           template or different parameter input values. </p><p>Constraints: Minimum length of 1.</p><p>Pattern: ([a-zA-Z][-a-zA-Z0-9]*)|(arn:\b(aws|aws-us-gov|aws-cn)\b:[-a-zA-Z0-9:/._+]*)</p>
-    description: Create an application change set request.
+          This property corresponds to the content of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">
+           RollbackConfiguration</a></i>
+           Data Type.
+    description: |-
+      This property corresponds to the
+       <i>AWS CloudFormation
+       <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">
+       RollbackConfiguration</a></i>
+       Data Type.
+  __listOfTag:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  Status:
+    type: string
+    enum:
+      - PREPARING
+      - ACTIVE
+      - EXPIRED
+  __listOfApplicationPolicyStatement:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationPolicyStatement'
   MaxItems:
     type: integer
     minimum: 1
     maximum: 100
+  __listOfVersionSummary:
+    type: array
+    items:
+      $ref: '#/definitions/VersionSummary'
+  __listOfApplicationSummary:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationSummary'
   __integer:
     type: integer
-  __boolean:
-    type: boolean
   ParameterDefinition:
     type: object
     required:
@@ -1364,30 +1481,66 @@ definitions:
         $ref: '#/definitions/__string'
         description: The input value associated with the parameter.
     description: Parameter value of the application.
-  UpdateApplicationInput:
+  __listOfRollbackTrigger:
+    type: array
+    items:
+      $ref: '#/definitions/RollbackTrigger'
+  RollbackTrigger:
     type: object
+    required:
+      - Type
+      - Arn
     properties:
-      Author:
-        $ref: '#/definitions/__string'
-        description: '<p>The name of the author publishing the app.</p><p>Minimum length=1. Maximum length=127.</p><p>Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>'
-      Description:
-        $ref: '#/definitions/__string'
-        description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
-      HomePageUrl:
+      Arn:
         $ref: '#/definitions/__string'
         description: |-
-          A URL with more information about the application, for example
-           the location of your GitHub repository for the application.
-      Labels:
-        $ref: '#/definitions/__listOf__string'
-        description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
-      ReadmeBody:
+          This property corresponds to the content of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">
+           RollbackTrigger</a></i>
+           Data Type.
+      Type:
         $ref: '#/definitions/__string'
-        description: <p>A text readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
-      ReadmeUrl:
+        description: |-
+          This property corresponds to the content of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">
+           RollbackTrigger</a></i>
+           Data Type.
+    description: |-
+      This property corresponds to the
+       <i>AWS CloudFormation
+       <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">
+       RollbackTrigger</a></i>
+       Data Type.
+  Tag:
+    type: object
+    required:
+      - Value
+      - Key
+    properties:
+      Key:
         $ref: '#/definitions/__string'
-        description: <p>A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
-    description: Update the application request.
+        description: |-
+          This property corresponds to the content of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">
+           Tag</a></i>
+           Data Type.
+      Value:
+        $ref: '#/definitions/__string'
+        description: |-
+          This property corresponds to the content of the same name for the
+           <i>AWS CloudFormation
+           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">
+           Tag</a></i>
+           Data Type.
+    description: |-
+      This property corresponds to the
+       <i>AWS CloudFormation
+       <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">
+       Tag</a></i>
+       Data Type.
   VersionSummary:
     type: object
     required:
@@ -1411,8 +1564,3 @@ definitions:
         $ref: '#/definitions/__string'
         description: A link to a public repository for the source code of your application.
     description: An application version summary.
-  __double:
-    type: number
-    format: double
-  __long:
-    type: integer

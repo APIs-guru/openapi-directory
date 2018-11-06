@@ -3,7 +3,7 @@ info:
   version: '2017-01-11'
   x-release: v4
   title: Amazon CloudDirectory
-  description: '<fullname>Amazon Cloud Directory</fullname> <p>Amazon Cloud Directory is a component of the AWS Directory Service that simplifies the development and management of cloud-scale web, mobile, and IoT applications. This guide describes the Cloud Directory operations that you can call programmatically and includes detailed information on data types and errors. For information about AWS Directory Services features, see <a href="https://aws.amazon.com/directoryservice/">AWS Directory Service</a> and the <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html">AWS Directory Service Administration Guide</a>.</p>'
+  description: '<fullname>Amazon Cloud Directory</fullname> <p>Amazon Cloud Directory is a component of the AWS Directory Service that simplifies the development and management of cloud-scale web, mobile, and IoT applications. This guide describes the Cloud Directory operations that you can call programmatically and includes detailed information on data types and errors. For information about Cloud Directory features, see <a href="https://aws.amazon.com/directoryservice/">AWS Directory Service</a> and the <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/what_is_cloud_directory.html">Amazon Cloud Directory Developer Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -430,7 +430,7 @@ paths:
   /amazonclouddirectory/2017-01-11/typedlink/attach:
     put:
       operationId: AttachTypedLink
-      description: 'Attaches a typed link to a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      description: 'Attaches a typed link to a specified source and target object. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       responses:
         '200':
           description: Success
@@ -609,7 +609,7 @@ paths:
   /amazonclouddirectory/2017-01-11/directory/create:
     put:
       operationId: CreateDirectory
-      description: Creates a <a>Directory</a> by copying the published schema into the directory. A directory cannot be created without a schema.
+      description: '<p>Creates a <a>Directory</a> by copying the published schema into the directory. A directory cannot be created without a schema.</p> <p>You can also quickly create a directory using a managed schema, called the <code>QuickStartSchema</code>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_managed.html">Managed Schema</a> in the <i>Amazon Cloud Directory Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -731,7 +731,7 @@ paths:
   /amazonclouddirectory/2017-01-11/index:
     put:
       operationId: CreateIndex
-      description: 'Creates an index object. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html">Indexing</a> for more information.'
+      description: 'Creates an index object. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.html">Indexing and search</a> for more information.'
       responses:
         '200':
           description: Success
@@ -926,7 +926,7 @@ paths:
   /amazonclouddirectory/2017-01-11/typedlink/facet/create:
     put:
       operationId: CreateTypedLinkFacet
-      description: 'Creates a <a>TypedLinkFacet</a>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      description: 'Creates a <a>TypedLinkFacet</a>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       responses:
         '200':
           description: Success
@@ -1113,7 +1113,7 @@ paths:
   /amazonclouddirectory/2017-01-11/object/delete:
     put:
       operationId: DeleteObject
-      description: Deletes an object and its associated attributes. Only objects with no children and no parents can be deleted.
+      description: 'Deletes an object and its associated attributes. Only objects with no children and no parents can be deleted. The maximum number of attributes that can be deleted during an object deletion is 30. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html">Amazon Cloud Directory Limits</a>.'
       responses:
         '200':
           description: Success
@@ -1231,7 +1231,7 @@ paths:
   /amazonclouddirectory/2017-01-11/typedlink/facet/delete:
     put:
       operationId: DeleteTypedLinkFacet
-      description: 'Deletes a <a>TypedLinkFacet</a>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      description: 'Deletes a <a>TypedLinkFacet</a>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       responses:
         '200':
           description: Success
@@ -1475,7 +1475,7 @@ paths:
   /amazonclouddirectory/2017-01-11/typedlink/detach:
     put:
       operationId: DetachTypedLink
-      description: 'Detaches a typed link from a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      description: 'Detaches a typed link from a specified source and target object. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       responses:
         '200':
           description: Success
@@ -2044,7 +2044,7 @@ paths:
   /amazonclouddirectory/2017-01-11/schema/json:
     post:
       operationId: GetSchemaAsJson
-      description: 'Retrieves a JSON representation of the schema. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat">JSON Schema Format</a> for more information.'
+      description: 'Retrieves a JSON representation of the schema. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json">JSON Schema Format</a> for more information.'
       responses:
         '200':
           description: Success
@@ -2100,7 +2100,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutSchemaFromJson
-      description: 'Allows a schema to be updated using JSON upload. Only available for development schemas. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat">JSON Schema Format</a> for more information.'
+      description: 'Allows a schema to be updated using JSON upload. Only available for development schemas. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json">JSON Schema Format</a> for more information.'
       responses:
         '200':
           description: Success
@@ -2147,7 +2147,7 @@ paths:
   /amazonclouddirectory/2017-01-11/typedlink/facet/get:
     post:
       operationId: GetTypedLinkFacetInformation
-      description: 'Returns the identity attribute order for a specific <a>TypedLinkFacet</a>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      description: 'Returns the identity attribute order for a specific <a>TypedLinkFacet</a>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       responses:
         '200':
           description: Success
@@ -2610,7 +2610,7 @@ paths:
   /amazonclouddirectory/2017-01-11/typedlink/incoming:
     post:
       operationId: ListIncomingTypedLinks
-      description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       responses:
         '200':
           description: Success
@@ -2963,7 +2963,7 @@ paths:
   /amazonclouddirectory/2017-01-11/object/parentpaths:
     post:
       operationId: ListObjectParentPaths
-      description: '<p>Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure">Directory Structure</a>.</p> <p>Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined <code>MaxResults</code>, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to the directory root are ignored from the target object.</p>'
+      description: '<p>Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html">Directory Structure</a>.</p> <p>Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined <code>MaxResults</code>, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to the directory root are ignored from the target object.</p>'
       responses:
         '200':
           description: Success
@@ -3180,7 +3180,7 @@ paths:
   /amazonclouddirectory/2017-01-11/typedlink/outgoing:
     post:
       operationId: ListOutgoingTypedLinks
-      description: 'Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      description: 'Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       responses:
         '200':
           description: Success
@@ -3454,7 +3454,7 @@ paths:
   /amazonclouddirectory/2017-01-11/typedlink/facet/attributes:
     post:
       operationId: ListTypedLinkFacetAttributes
-      description: 'Returns a paginated list of all attribute definitions for a particular <a>TypedLinkFacet</a>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      description: 'Returns a paginated list of all attribute definitions for a particular <a>TypedLinkFacet</a>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       responses:
         '200':
           description: Success
@@ -3525,7 +3525,7 @@ paths:
   /amazonclouddirectory/2017-01-11/typedlink/facet/list:
     post:
       operationId: ListTypedLinkFacetNames
-      description: 'Returns a paginated list of <code>TypedLink</code> facet names for a particular schema. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      description: 'Returns a paginated list of <code>TypedLink</code> facet names for a particular schema. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       responses:
         '200':
           description: Success
@@ -3592,7 +3592,7 @@ paths:
   /amazonclouddirectory/2017-01-11/policy/lookup:
     post:
       operationId: LookupPolicy
-      description: 'Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don''t have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don''t lead to the root from the target object are ignored. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.'
+      description: 'Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don''t have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don''t lead to the root from the target object are ignored. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies">Policies</a>.'
       responses:
         '200':
           description: Success
@@ -4074,7 +4074,7 @@ paths:
   /amazonclouddirectory/2017-01-11/typedlink/facet:
     put:
       operationId: UpdateTypedLinkFacet
-      description: 'Updates a <a>TypedLinkFacet</a>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      description: 'Updates a <a>TypedLinkFacet</a>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       responses:
         '200':
           description: Success
@@ -4281,60 +4281,15 @@ definitions:
       ObjectReference:
         $ref: '#/definitions/ObjectReference'
         description: A reference to the object you are adding the specified facet to.
-  InternalServiceException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'Indicates a problem that must be resolved by Amazon Web Services. This might be a transient error in which case you can retry your request until it succeeds. Otherwise, go to the <a href="http://status.aws.amazon.com/">AWS Service Health Dashboard</a> site to see if there are any operational issues with the service.'
-  InvalidArnException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the provided ARN value is not valid.
-  RetryableConflictException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'Occurs when a conflict with a previous successful write is detected. For example, if a write operation occurs on an object and then an attempt is made to read the object using “SERIALIZABLE” consistency, this exception may result. This generally occurs when the previous write did not have time to propagate to the host serving the current request. A retry (with appropriate backoff logic) is the recommended response to this exception.'
-  ValidationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that your request is malformed in some manner. See the exception message.
-  LimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'Indicates that limits are exceeded. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html">Limits</a> for more information.'
-  AccessDeniedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Access denied. Check your permissions.
-  DirectoryNotEnabledException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Operations are only permitted on enabled directories.
-  ResourceNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The specified resource could not be found.
-  FacetValidationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The <a>Facet</a> that you provided was not well formed or could not be validated with the schema.
+  InternalServiceException: {}
+  InvalidArnException: {}
+  RetryableConflictException: {}
+  ValidationException: {}
+  LimitExceededException: {}
+  AccessDeniedException: {}
+  DirectoryNotEnabledException: {}
+  ResourceNotFoundException: {}
+  FacetValidationException: {}
   ApplySchemaResponse:
     type: object
     properties:
@@ -4352,18 +4307,8 @@ definitions:
       PublishedSchemaArn:
         $ref: '#/definitions/Arn'
         description: 'Published schema Amazon Resource Name (ARN) that needs to be copied. For more information, see <a>arns</a>.'
-  SchemaAlreadyExistsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that a schema could not be created due to a naming conflict. Please select a different name and then try again.
-  InvalidAttachmentException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that an attempt to attach an object with the same link name or to apply a schema with the same name has occurred. Rename the link or the schema and then try again.
+  SchemaAlreadyExistsException: {}
+  InvalidAttachmentException: {}
   AttachObjectResponse:
     type: object
     properties:
@@ -4386,12 +4331,7 @@ definitions:
       LinkName:
         $ref: '#/definitions/LinkName'
         description: The link name with which the child object is attached to the parent.
-  LinkNameAlreadyInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that a link could not be created due to a naming conflict. Choose a different name and then try again.
+  LinkNameAlreadyInUseException: {}
   AttachPolicyResponse:
     type: object
     properties: {}
@@ -4407,12 +4347,7 @@ definitions:
       ObjectReference:
         $ref: '#/definitions/ObjectReference'
         description: The reference that identifies the object to which the policy will be attached.
-  NotPolicyException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the requested operation can only operate on policy objects.
+  NotPolicyException: {}
   AttachToIndexResponse:
     type: object
     properties:
@@ -4431,18 +4366,8 @@ definitions:
       TargetReference:
         $ref: '#/definitions/ObjectReference'
         description: A reference to the object that you are attaching to the index.
-  IndexedAttributeMissingException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: An object has been attempted to be attached to an object that does not have the appropriate attribute value.
-  NotIndexException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the requested operation can only operate on index objects.
+  IndexedAttributeMissingException: {}
+  NotIndexException: {}
   AttachTypedLinkResponse:
     type: object
     properties:
@@ -4497,16 +4422,7 @@ definitions:
       Operations:
         $ref: '#/definitions/BatchWriteOperationList'
         description: A list of operations that are part of the batch.
-  BatchWriteException:
-    type: object
-    properties:
-      Index:
-        $ref: '#/definitions/BatchOperationIndex'
-      Type:
-        $ref: '#/definitions/BatchWriteExceptionType'
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: A <code>BatchWrite</code> exception has occurred.
+  BatchWriteException: {}
   CreateDirectoryResponse:
     type: object
     required:
@@ -4535,12 +4451,7 @@ definitions:
       Name:
         $ref: '#/definitions/DirectoryName'
         description: 'The name of the <a>Directory</a>. Should be unique per account, per region.'
-  DirectoryAlreadyExistsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that a <a>Directory</a> could not be created due to a naming conflict. Choose a different name and try again.
+  DirectoryAlreadyExistsException: {}
   CreateFacetResponse:
     type: object
     properties: {}
@@ -4557,22 +4468,12 @@ definitions:
         description: The attributes that are associated with the <a>Facet</a>.
       ObjectType:
         $ref: '#/definitions/ObjectType'
-        description: '<p>Specifies whether a given object created from this facet is of type node, leaf node, policy or index.</p> <ul> <li> <p>Node: Can have multiple children but one parent.</p> </li> </ul> <ul> <li> <p>Leaf node: Cannot have children but can have multiple parents.</p> </li> </ul> <ul> <li> <p>Policy: Allows you to store a policy document and policy type. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.</p> </li> </ul> <ul> <li> <p>Index: Can be created with the Index API.</p> </li> </ul>'
+        description: '<p>Specifies whether a given object created from this facet is of type node, leaf node, policy or index.</p> <ul> <li> <p>Node: Can have multiple children but one parent.</p> </li> </ul> <ul> <li> <p>Leaf node: Cannot have children but can have multiple parents.</p> </li> </ul> <ul> <li> <p>Policy: Allows you to store a policy document and policy type. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies">Policies</a>.</p> </li> </ul> <ul> <li> <p>Index: Can be created with the Index API.</p> </li> </ul>'
       FacetStyle:
         $ref: '#/definitions/FacetStyle'
         description: 'There are two different styles that you can define on any given facet, <code>Static</code> and <code>Dynamic</code>. For static facets, all attributes must be defined in the schema. For dynamic facets, attributes can be defined during data plane operations.'
-  FacetAlreadyExistsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: A facet with the same name already exists.
-  InvalidRuleException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Occurs when any of the rule parameter keys or values are invalid.
+  FacetAlreadyExistsException: {}
+  InvalidRuleException: {}
   CreateIndexResponse:
     type: object
     properties:
@@ -4597,12 +4498,7 @@ definitions:
       LinkName:
         $ref: '#/definitions/LinkName'
         description: The name of the link between the parent object and the index object.
-  UnsupportedIndexTypeException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the requested index type is not supported.
+  UnsupportedIndexTypeException: {}
   CreateObjectResponse:
     type: object
     properties:
@@ -4662,18 +4558,8 @@ definitions:
   DeleteDirectoryRequest:
     type: object
     properties: {}
-  DirectoryNotDisabledException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: An operation can only operate on a disabled directory.
-  DirectoryDeletedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'A directory that has been deleted and to which access has been attempted. Note: The requested resource will eventually cease to exist.'
+  DirectoryNotDisabledException: {}
+  DirectoryDeletedException: {}
   DeleteFacetResponse:
     type: object
     properties: {}
@@ -4685,18 +4571,8 @@ definitions:
       Name:
         $ref: '#/definitions/FacetName'
         description: The name of the facet to delete.
-  FacetNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The specified <a>Facet</a> could not be found.
-  FacetInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Occurs when deleting a facet that contains an attribute that is a target to an attribute reference in a different facet.
+  FacetNotFoundException: {}
+  FacetInUseException: {}
   DeleteObjectResponse:
     type: object
     properties: {}
@@ -4708,12 +4584,7 @@ definitions:
       ObjectReference:
         $ref: '#/definitions/ObjectReference'
         description: A reference that identifies the object.
-  ObjectNotDetachedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the requested operation cannot be completed because the object has not been detached from the tree.
+  ObjectNotDetachedException: {}
   DeleteSchemaResponse:
     type: object
     properties:
@@ -4723,12 +4594,7 @@ definitions:
   DeleteSchemaRequest:
     type: object
     properties: {}
-  StillContainsLinksException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The object could not be deleted because links still exist. Remove the links and then try the operation again.
+  StillContainsLinksException: {}
   DeleteTypedLinkFacetResponse:
     type: object
     properties: {}
@@ -4758,12 +4624,7 @@ definitions:
       TargetReference:
         $ref: '#/definitions/ObjectReference'
         description: A reference to the object being detached from the index.
-  ObjectAlreadyDetachedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the object is not attached to the index.
+  ObjectAlreadyDetachedException: {}
   DetachObjectResponse:
     type: object
     properties:
@@ -4782,12 +4643,7 @@ definitions:
       LinkName:
         $ref: '#/definitions/LinkName'
         description: The link name associated with the object that needs to be detached.
-  NotNodeException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'Occurs when any invalid operations are performed on an object that is not a node, such as calling <code>ListObjectChildren</code> for a leaf node object.'
+  NotNodeException: {}
   DetachPolicyResponse:
     type: object
     properties: {}
@@ -4949,7 +4805,7 @@ definitions:
     properties:
       IdentityAttributeOrder:
         $ref: '#/definitions/AttributeNameList'
-        description: 'The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+        description: 'The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
   GetTypedLinkFacetInformationRequest:
     type: object
     required:
@@ -4958,12 +4814,7 @@ definitions:
       Name:
         $ref: '#/definitions/TypedLinkName'
         description: The unique name of the typed link facet.
-  InvalidNextTokenException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the <code>NextToken</code> value is not valid.
+  InvalidNextTokenException: {}
   ListAppliedSchemaArnsResponse:
     type: object
     properties:
@@ -5149,7 +5000,7 @@ definitions:
         description: The reference to the index to list.
       MaxResults:
         $ref: '#/definitions/NumberResults'
-        description: 'The maximum number of objects in a single page to retrieve from the index during a request. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html#limits_cd">AWS Directory Service Limits</a>.'
+        description: 'The maximum number of objects in a single page to retrieve from the index during a request. For more information, see <a href="http://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html">Amazon Cloud Directory Limits</a>.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The pagination token.
@@ -5255,6 +5106,9 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The pagination token.
+      ParentLinks:
+        $ref: '#/definitions/ObjectIdentifierAndLinkNameList'
+        description: Returns a list of parent reference and LinkName Tuples.
   ListObjectParentsRequest:
     type: object
     required:
@@ -5269,12 +5123,10 @@ definitions:
       MaxResults:
         $ref: '#/definitions/NumberResults'
         description: The maximum number of items to be retrieved in a single call. This is an approximate number.
-  CannotListParentOfRootException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Cannot list the parents of a <a>Directory</a> root.
+      IncludeAllLinksToEachParent:
+        $ref: '#/definitions/Bool'
+        description: 'When set to True, returns all <a>ListObjectParentsResponse$ParentLinks</a>. There could be multiple links between a parent-child pair.'
+  CannotListParentOfRootException: {}
   ListObjectPoliciesResponse:
     type: object
     properties:
@@ -5397,12 +5249,7 @@ definitions:
       MaxResults:
         $ref: '#/definitions/TagsNumberResults'
         description: The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. This is for future use and is not supported currently.
-  InvalidTaggingRequestException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Can occur for multiple reasons such as when you tag a resource that doesn’t exist or if you specify a higher number of tags for a resource than the allowed limit. Allowed limit is 50 tags per resource.
+  InvalidTaggingRequestException: {}
   ListTypedLinkFacetAttributesResponse:
     type: object
     properties:
@@ -5449,7 +5296,7 @@ definitions:
     properties:
       PolicyToPathList:
         $ref: '#/definitions/PolicyToPathList'
-        description: 'Provides list of path to policies. Policies contain <code>PolicyId</code>, <code>ObjectIdentifier</code>, and <code>PolicyType</code>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.'
+        description: 'Provides list of path to policies. Policies contain <code>PolicyId</code>, <code>ObjectIdentifier</code>, and <code>PolicyType</code>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies">Policies</a>.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The pagination token.
@@ -5487,12 +5334,7 @@ definitions:
       Name:
         $ref: '#/definitions/SchemaName'
         description: 'The new name under which the schema will be published. If this is not provided, the development schema is considered.'
-  SchemaAlreadyPublishedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that a schema is already published.
+  SchemaAlreadyPublishedException: {}
   PutSchemaFromJsonResponse:
     type: object
     properties:
@@ -5507,12 +5349,7 @@ definitions:
       Document:
         $ref: '#/definitions/SchemaJsonDocument'
         description: The replacement JSON schema.
-  InvalidSchemaDocException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates that the provided <code>SchemaDoc</code> value is not valid.
+  InvalidSchemaDocException: {}
   RemoveFacetFromObjectResponse:
     type: object
     properties: {}
@@ -5575,12 +5412,7 @@ definitions:
       ObjectType:
         $ref: '#/definitions/ObjectType'
         description: The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.
-  InvalidFacetUpdateException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: An attempt to modify a <a>Facet</a> resulted in an invalid schema exception.
+  InvalidFacetUpdateException: {}
   UpdateLinkAttributesResponse:
     type: object
     properties: {}
@@ -5646,7 +5478,7 @@ definitions:
         description: Attributes update structure.
       IdentityAttributeOrder:
         $ref: '#/definitions/AttributeNameList'
-        description: 'The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to a typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+        description: 'The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to a typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
   UpgradeAppliedSchemaResponse:
     type: object
     properties:
@@ -5671,12 +5503,7 @@ definitions:
       DryRun:
         $ref: '#/definitions/Bool'
         description: 'Used for testing whether the major version schemas are backward compatible or not. If schema compatibility fails, an exception would be thrown else the call would succeed but no changes will be saved. This parameter is optional.'
-  IncompatibleSchemaException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: Indicates a failure occurred while performing a check for backward compatibility between the specified schema and the schema that is currently applied to the directory.
+  IncompatibleSchemaException: {}
   UpgradePublishedSchemaResponse:
     type: object
     properties:
@@ -5702,8 +5529,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Bool'
         description: 'Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded. If schema compatibility fails, an exception would be thrown else the call would succeed. This parameter is optional and defaults to false.'
-  ExceptionMessage:
-    type: string
   Arn:
     type: string
   SchemaFacet:
@@ -5711,7 +5536,7 @@ definitions:
     properties:
       SchemaArn:
         $ref: '#/definitions/Arn'
-        description: 'The ARN of the schema that contains the facet with no minor component. See <a>arns</a> and <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/inplaceschemaupgrade.html">In-Place Schema Upgrade</a> for a description of when to provide minor versions.'
+        description: 'The ARN of the schema that contains the facet with no minor component. See <a>arns</a> and <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_inplaceschemaupgrade.html">In-Place Schema Upgrade</a> for a description of when to provide minor versions.'
       FacetName:
         $ref: '#/definitions/FacetName'
         description: The name of the facet.
@@ -5725,7 +5550,7 @@ definitions:
     properties:
       Selector:
         $ref: '#/definitions/SelectorObjectReference'
-        description: '<p>A path selector supports easy selection of an object by the parent/child links leading to it from the directory root. Use the link names from each parent/child link to construct the path. Path selectors start with a slash (/) and link names are separated by slashes. For more information about paths, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#accessingobjects">Accessing Objects</a>. You can identify an object in one of the following ways:</p> <ul> <li> <p> <i>$ObjectIdentifier</i> - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier</p> </li> <li> <p> <i>/some/path</i> - Identifies the object based on path</p> </li> <li> <p> <i>#SomeBatchReference</i> - Identifies the object in a batch call</p> </li> </ul>'
+        description: '<p>A path selector supports easy selection of an object by the parent/child links leading to it from the directory root. Use the link names from each parent/child link to construct the path. Path selectors start with a slash (/) and link names are separated by slashes. For more information about paths, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_access_objects.html">Access Objects</a>. You can identify an object in one of the following ways:</p> <ul> <li> <p> <i>$ObjectIdentifier</i> - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier</p> </li> <li> <p> <i>/some/path</i> - Identifies the object based on path</p> </li> <li> <p> <i>#SomeBatchReference</i> - Identifies the object in a batch call</p> </li> </ul>'
     description: The reference that identifies an object.
   Arns:
     type: array
@@ -5783,9 +5608,9 @@ definitions:
     maxLength: 64
   AttributeName:
     type: string
-    pattern: '^[a-zA-Z0-9._-]*$'
+    pattern: '^[a-zA-Z0-9._:-]*$'
     minLength: 1
-    maxLength: 64
+    maxLength: 230
   AttributeKey:
     type: object
     required:
@@ -5990,7 +5815,7 @@ definitions:
         description: The name of the link between the parent object and the index object.
       BatchReferenceName:
         $ref: '#/definitions/BatchReferenceName'
-        description: 'The batch reference name. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches">Batches</a> for more information.'
+        description: 'The batch reference name. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html">Transaction Support</a> for more information.'
     description: 'Creates an index object inside of a <a>BatchRead</a> operation. For more information, see <a>CreateIndex</a> and <a>BatchReadRequest$Operations</a>.'
   BatchCreateIndexResponse:
     type: object
@@ -6023,7 +5848,7 @@ definitions:
         description: The name of the link.
       BatchReferenceName:
         $ref: '#/definitions/BatchReferenceName'
-        description: 'The batch reference name. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches">Batches</a> for more information.'
+        description: 'The batch reference name. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html">Transaction Support</a> for more information.'
     description: Represents the output of a <a>CreateObject</a> operation.
   BatchCreateObjectResponse:
     type: object
@@ -6079,7 +5904,7 @@ definitions:
         description: The name of the link.
       BatchReferenceName:
         $ref: '#/definitions/BatchReferenceName'
-        description: 'The batch reference name. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches">Batches</a> for more information.'
+        description: 'The batch reference name. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html">Transaction Support</a> for more information.'
     description: Represents the output of a <a>DetachObject</a> operation.
   BatchDetachObjectResponse:
     type: object
@@ -6377,6 +6202,28 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: The pagination token.
     description: Represents the output of a <a>ListObjectParentPaths</a> response operation.
+  BatchListObjectParents:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+  ObjectIdentifierAndLinkNameList:
+    type: array
+    items:
+      $ref: '#/definitions/ObjectIdentifierAndLinkNameTuple'
+  BatchListObjectParentsResponse:
+    type: object
+    properties:
+      ParentLinks:
+        $ref: '#/definitions/ObjectIdentifierAndLinkNameList'
+      NextToken:
+        $ref: '#/definitions/NextToken'
   BatchListObjectPolicies:
     type: object
     required:
@@ -6486,13 +6333,11 @@ definitions:
     properties:
       PolicyToPathList:
         $ref: '#/definitions/PolicyToPathList'
-        description: 'Provides list of path to policies. Policies contain <code>PolicyId</code>, <code>ObjectIdentifier</code>, and <code>PolicyType</code>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.'
+        description: 'Provides list of path to policies. Policies contain <code>PolicyId</code>, <code>ObjectIdentifier</code>, and <code>PolicyType</code>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies">Policies</a>.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The pagination token.
     description: Represents the output of a <a>LookupPolicy</a> response operation.
-  BatchOperationIndex:
-    type: integer
   BatchReadExceptionType:
     type: string
     enum:
@@ -6509,6 +6354,8 @@ definitions:
       - DirectoryNotEnabledException
       - LimitExceededException
       - InternalServiceException
+  ExceptionMessage:
+    type: string
   BatchReadException:
     type: object
     properties:
@@ -6533,13 +6380,15 @@ definitions:
         description: Lists indices attached to an object.
       ListObjectParentPaths:
         $ref: '#/definitions/BatchListObjectParentPaths'
-        description: 'Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure">Directory Structure</a>.'
+        description: 'Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html">Directory Structure</a>.'
       GetObjectInformation:
         $ref: '#/definitions/BatchGetObjectInformation'
         description: Retrieves metadata about an object.
       GetObjectAttributes:
         $ref: '#/definitions/BatchGetObjectAttributes'
         description: Retrieves attributes within a facet that are associated with an object.
+      ListObjectParents:
+        $ref: '#/definitions/BatchListObjectParents'
       ListObjectPolicies:
         $ref: '#/definitions/BatchListObjectPolicies'
         description: Returns policies attached to an object in pagination fashion.
@@ -6548,16 +6397,16 @@ definitions:
         description: Returns all of the <code>ObjectIdentifiers</code> to which a given policy is attached.
       LookupPolicy:
         $ref: '#/definitions/BatchLookupPolicy'
-        description: 'Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don''t have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don''t lead to the root from the target object are ignored. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.'
+        description: 'Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don''t have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don''t lead to the root from the target object are ignored. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies">Policies</a>.'
       ListIndex:
         $ref: '#/definitions/BatchListIndex'
         description: Lists objects attached to the specified index.
       ListOutgoingTypedLinks:
         $ref: '#/definitions/BatchListOutgoingTypedLinks'
-        description: 'Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+        description: 'Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       ListIncomingTypedLinks:
         $ref: '#/definitions/BatchListIncomingTypedLinks'
-        description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+        description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       GetLinkAttributes:
         $ref: '#/definitions/BatchGetLinkAttributes'
         description: Retrieves attributes that are associated with a typed link.
@@ -6586,7 +6435,7 @@ definitions:
         description: Lists indices attached to an object.
       ListObjectParentPaths:
         $ref: '#/definitions/BatchListObjectParentPathsResponse'
-        description: 'Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure">Directory Structure</a>.'
+        description: 'Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html">Directory Structure</a>.'
       ListObjectPolicies:
         $ref: '#/definitions/BatchListObjectPoliciesResponse'
         description: Returns policies attached to an object in pagination fashion.
@@ -6595,19 +6444,21 @@ definitions:
         description: Returns all of the <code>ObjectIdentifiers</code> to which a given policy is attached.
       LookupPolicy:
         $ref: '#/definitions/BatchLookupPolicyResponse'
-        description: 'Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don''t have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don''t lead to the root from the target object are ignored. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.'
+        description: 'Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don''t have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don''t lead to the root from the target object are ignored. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies">Policies</a>.'
       ListIndex:
         $ref: '#/definitions/BatchListIndexResponse'
         description: Lists objects attached to the specified index.
       ListOutgoingTypedLinks:
         $ref: '#/definitions/BatchListOutgoingTypedLinksResponse'
-        description: 'Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+        description: 'Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       ListIncomingTypedLinks:
         $ref: '#/definitions/BatchListIncomingTypedLinksResponse'
-        description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+        description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       GetLinkAttributes:
         $ref: '#/definitions/BatchGetLinkAttributesResponse'
         description: The list of attributes to retrieve from the typed link.
+      ListObjectParents:
+        $ref: '#/definitions/BatchListObjectParentsResponse'
     description: Represents the output of a <code>BatchRead</code> success response operation.
   BatchReadOperationResponse:
     type: object
@@ -6690,27 +6541,6 @@ definitions:
         $ref: '#/definitions/ObjectIdentifier'
         description: ID that is associated with the object.
     description: Represents the output of a <code>BatchUpdate</code> response operation.
-  BatchWriteExceptionType:
-    type: string
-    enum:
-      - InternalServiceException
-      - ValidationException
-      - InvalidArnException
-      - LinkNameAlreadyInUseException
-      - StillContainsLinksException
-      - FacetValidationException
-      - ObjectNotDetachedException
-      - ResourceNotFoundException
-      - AccessDeniedException
-      - InvalidAttachmentException
-      - NotIndexException
-      - NotNodeException
-      - IndexedAttributeMissingException
-      - ObjectAlreadyDetachedException
-      - NotPolicyException
-      - DirectoryNotEnabledException
-      - LimitExceededException
-      - UnsupportedIndexTypeException
   BatchWriteOperation:
     type: object
     properties:
@@ -6743,7 +6573,7 @@ definitions:
         description: Detaches a policy from a <a>Directory</a>.
       CreateIndex:
         $ref: '#/definitions/BatchCreateIndex'
-        description: 'Creates an index object. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html">Indexing</a> for more information.'
+        description: 'Creates an index object. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.htm">Indexing and search</a> for more information.'
       AttachToIndex:
         $ref: '#/definitions/BatchAttachToIndex'
         description: Attaches the specified object to the specified index.
@@ -6752,10 +6582,10 @@ definitions:
         description: Detaches the specified object from the specified index.
       AttachTypedLink:
         $ref: '#/definitions/BatchAttachTypedLink'
-        description: 'Attaches a typed link to a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+        description: 'Attaches a typed link to a specified source and target object. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       DetachTypedLink:
         $ref: '#/definitions/BatchDetachTypedLink'
-        description: 'Detaches a typed link from a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+        description: 'Detaches a typed link from a specified source and target object. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       UpdateLinkAttributes:
         $ref: '#/definitions/BatchUpdateLinkAttributes'
         description: Updates a given object's attributes.
@@ -6796,7 +6626,7 @@ definitions:
         description: Detaches a policy from a <a>Directory</a>.
       CreateIndex:
         $ref: '#/definitions/BatchCreateIndexResponse'
-        description: 'Creates an index object. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html">Indexing</a> for more information.'
+        description: 'Creates an index object. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.htm">Indexing and search</a> for more information.'
       AttachToIndex:
         $ref: '#/definitions/BatchAttachToIndexResponse'
         description: Attaches the specified object to the specified index.
@@ -6805,10 +6635,10 @@ definitions:
         description: Detaches the specified object from the specified index.
       AttachTypedLink:
         $ref: '#/definitions/BatchAttachTypedLinkResponse'
-        description: 'Attaches a typed link to a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+        description: 'Attaches a typed link to a specified source and target object. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       DetachTypedLink:
         $ref: '#/definitions/BatchDetachTypedLinkResponse'
-        description: 'Detaches a typed link from a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+        description: 'Detaches a typed link from a specified source and target object. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.'
       UpdateLinkAttributes:
         $ref: '#/definitions/BatchUpdateLinkAttributesResponse'
         description: Represents the output of a <code>BatchWrite</code> response operation.
@@ -6913,7 +6743,7 @@ definitions:
       FacetStyle:
         $ref: '#/definitions/FacetStyle'
         description: 'There are two different styles that you can define on any given facet, <code>Static</code> and <code>Dynamic</code>. For static facets, all attributes must be defined in the schema. For dynamic facets, attributes can be defined during data plane operations.'
-    description: 'A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <code> <a>Rule</a>s</code>, and <code>ObjectTypes</code>. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/whatarefacets.html">Facets</a> for more information.'
+    description: 'A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <code> <a>Rule</a>s</code>, and <code>ObjectTypes</code>. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_whatarefacets.html">Facets</a> for more information.'
   FacetAttributeDefinition:
     type: object
     required:
@@ -6931,7 +6761,7 @@ definitions:
       Rules:
         $ref: '#/definitions/RuleMap'
         description: Validation rules attached to the attribute definition.
-    description: 'A facet attribute definition. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
+    description: 'A facet attribute definition. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html">Attribute References</a> for more information.'
   FacetAttributeReference:
     type: object
     required:
@@ -6940,10 +6770,10 @@ definitions:
     properties:
       TargetFacetName:
         $ref: '#/definitions/FacetName'
-        description: 'The target facet name that is associated with the facet reference. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
+        description: 'The target facet name that is associated with the facet reference. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html">Attribute References</a> for more information.'
       TargetAttributeName:
         $ref: '#/definitions/AttributeName'
-        description: 'The target attribute name that is associated with the facet reference. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
+        description: 'The target attribute name that is associated with the facet reference. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html">Attribute References</a> for more information.'
     description: The facet attribute reference that specifies the attribute definition that contains the attribute facet name and attribute name.
   RequiredAttributeBehavior:
     type: string
@@ -6960,10 +6790,10 @@ definitions:
         description: The name of the facet attribute.
       AttributeDefinition:
         $ref: '#/definitions/FacetAttributeDefinition'
-        description: 'A facet attribute consists of either a definition or a reference. This structure contains the attribute definition. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
+        description: 'A facet attribute consists of either a definition or a reference. This structure contains the attribute definition. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html">Attribute References</a> for more information.'
       AttributeReference:
         $ref: '#/definitions/FacetAttributeReference'
-        description: 'An attribute reference that is associated with the attribute. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
+        description: 'An attribute reference that is associated with the attribute. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html">Attribute References</a> for more information.'
       RequiredBehavior:
         $ref: '#/definitions/RequiredAttributeBehavior'
         description: The required behavior of the <code>FacetAttribute</code>.
@@ -7095,7 +6925,7 @@ definitions:
       EndValue:
         $ref: '#/definitions/TypedAttributeValue'
         description: The attribute value to terminate the range at.
-    description: 'A range of attribute values. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters">Range Filters</a>.'
+    description: 'A range of attribute values. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_range_filters.html">Range Filters</a>.'
   ObjectAttributeRange:
     type: object
     properties:
@@ -7116,6 +6946,16 @@ definitions:
         $ref: '#/definitions/ObjectAttributeAction'
         description: The action to perform as part of the attribute update.
     description: Structure that contains attribute update information.
+  ObjectIdentifierAndLinkNameTuple:
+    type: object
+    properties:
+      ObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: The ID that is associated with the object.
+      LinkName:
+        $ref: '#/definitions/LinkName'
+        description: The name of the link between the parent and the child object.
+    description: A pair of ObjectIdentifier and LinkName.
   SelectorObjectReference:
     type: string
   PathString:
@@ -7144,7 +6984,7 @@ definitions:
       PolicyType:
         $ref: '#/definitions/PolicyType'
         description: The type of policy that can be associated with <code>PolicyAttachment</code>.
-    description: 'Contains the <code>PolicyType</code>, <code>PolicyId</code>, and the <code>ObjectIdentifier</code> to which it is attached. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.'
+    description: 'Contains the <code>PolicyType</code>, <code>PolicyId</code>, and the <code>ObjectIdentifier</code> to which it is attached. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies">Policies</a>.'
   PolicyAttachmentList:
     type: array
     items:

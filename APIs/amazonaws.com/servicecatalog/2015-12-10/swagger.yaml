@@ -468,7 +468,7 @@ paths:
   '/#CreatePortfolioShare':
     post:
       operationId: CreatePortfolioShare
-      description: Shares the specified portfolio with the specified account.
+      description: Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an Organization. AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node.
       responses:
         '200':
           description: Success
@@ -486,6 +486,10 @@ paths:
           description: InvalidParametersException
           schema:
             $ref: '#/definitions/InvalidParametersException'
+        '483':
+          description: OperationNotSupportedException
+          schema:
+            $ref: '#/definitions/OperationNotSupportedException'
       parameters:
         - name: body
           in: body
@@ -760,7 +764,7 @@ paths:
   '/#DeletePortfolioShare':
     post:
       operationId: DeletePortfolioShare
-      description: Stops sharing the specified portfolio with the specified account.
+      description: Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the master account of an Organization.
       responses:
         '200':
           description: Success
@@ -770,6 +774,14 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+        '482':
+          description: OperationNotSupportedException
+          schema:
+            $ref: '#/definitions/OperationNotSupportedException'
       parameters:
         - name: body
           in: body
@@ -1044,6 +1056,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribePortfolioInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribePortfolioShareStatus':
+    post:
+      operationId: DescribePortfolioShareStatus
+      description: Gets the status of the specified portfolio share operation. This API can only be called by the master account in the organization.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribePortfolioShareStatusOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+        '482':
+          description: OperationNotSupportedException
+          schema:
+            $ref: '#/definitions/OperationNotSupportedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribePortfolioShareStatusInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1364,6 +1413,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisableAWSOrganizationsAccess':
+    post:
+      operationId: DisableAWSOrganizationsAccess
+      description: Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the master account in the organization.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisableAWSOrganizationsAccessOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidStateException
+          schema:
+            $ref: '#/definitions/InvalidStateException'
+        '482':
+          description: OperationNotSupportedException
+          schema:
+            $ref: '#/definitions/OperationNotSupportedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisableAWSOrganizationsAccessInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DisassociatePrincipalFromPortfolio':
     post:
       operationId: DisassociatePrincipalFromPortfolio
@@ -1496,6 +1582,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#EnableAWSOrganizationsAccess':
+    post:
+      operationId: EnableAWSOrganizationsAccess
+      description: '<p>Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization.</p> <p>By calling this API Service Catalog will use FAS credentials to call organizations:EnableAWSServiceAccess so that your shares can be in sync with any changes in your AWS Organizations.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnableAWSOrganizationsAccessOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidStateException
+          schema:
+            $ref: '#/definitions/InvalidStateException'
+        '482':
+          description: OperationNotSupportedException
+          schema:
+            $ref: '#/definitions/OperationNotSupportedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/EnableAWSOrganizationsAccessInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ExecuteProvisionedProductPlan':
     post:
       operationId: ExecuteProvisionedProductPlan
@@ -1570,6 +1693,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetAWSOrganizationsAccessStatus':
+    post:
+      operationId: GetAWSOrganizationsAccessStatus
+      description: Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the master account in the organization.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAWSOrganizationsAccessStatusOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: OperationNotSupportedException
+          schema:
+            $ref: '#/definitions/OperationNotSupportedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAWSOrganizationsAccessStatusInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListAcceptedPortfolioShares':
     post:
       operationId: ListAcceptedPortfolioShares
@@ -1583,6 +1739,10 @@ paths:
           description: InvalidParametersException
           schema:
             $ref: '#/definitions/InvalidParametersException'
+        '481':
+          description: OperationNotSupportedException
+          schema:
+            $ref: '#/definitions/OperationNotSupportedException'
       parameters:
         - name: body
           in: body
@@ -1675,6 +1835,53 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListLaunchPathsInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListOrganizationPortfolioAccess':
+    post:
+      operationId: ListOrganizationPortfolioAccess
+      description: Lists the organization nodes that have access to the specified portfolio. This API can only be called by the master account in the organization.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListOrganizationPortfolioAccessOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+        '482':
+          description: OperationNotSupportedException
+          schema:
+            $ref: '#/definitions/OperationNotSupportedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListOrganizationPortfolioAccessInput'
         - name: PageSize
           type: string
           in: query
@@ -2670,6 +2877,9 @@ definitions:
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
+      PortfolioShareType:
+        $ref: '#/definitions/PortfolioShareType'
+        description: '<p>The type of shared portfolios to accept. The default is to accept imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - Accept portfolios shared by the master account of your organization.</p> </li> <li> <p> <code>IMPORTED</code> - Accept imported portfolios.</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - Not supported. (Throws ResourceNotFoundException.)</p> </li> </ul> <p>For example, <code>aws servicecatalog accept-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS</code> </p>'
   InvalidParametersException: {}
   ResourceNotFoundException: {}
   LimitExceededException: {}
@@ -2901,12 +3111,14 @@ definitions:
         description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.'
   CreatePortfolioShareOutput:
     type: object
-    properties: {}
+    properties:
+      PortfolioShareToken:
+        $ref: '#/definitions/PortfolioShareToken'
+        description: The portfolio share unique identifier. This will only be returned if portfolio is shared to an organization node.
   CreatePortfolioShareInput:
     type: object
     required:
       - PortfolioId
-      - AccountId
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
@@ -2916,7 +3128,11 @@ definitions:
         description: The portfolio identifier.
       AccountId:
         $ref: '#/definitions/AccountId'
-        description: The AWS account ID.
+        description: 'The AWS account ID. For example, <code>123456789012</code>.'
+      OrganizationNode:
+        $ref: '#/definitions/OrganizationNode'
+        description: 'The organization node to whom you are going to share. If <code>OrganizationNode</code> is passed in, <code>PortfolioShare</code> will be created for the node and its children (when applies), and a <code>PortfolioShareToken</code> will be returned in the output in order for the administrator to monitor the status of the <code>PortfolioShare</code> creation process.'
+  OperationNotSupportedException: {}
   CreateProductOutput:
     type: object
     properties:
@@ -3147,12 +3363,14 @@ definitions:
   ResourceInUseException: {}
   DeletePortfolioShareOutput:
     type: object
-    properties: {}
+    properties:
+      PortfolioShareToken:
+        $ref: '#/definitions/PortfolioShareToken'
+        description: The portfolio share unique identifier. This will only be returned if delete is made to an organization node.
   DeletePortfolioShareInput:
     type: object
     required:
       - PortfolioId
-      - AccountId
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
@@ -3163,6 +3381,9 @@ definitions:
       AccountId:
         $ref: '#/definitions/AccountId'
         description: The AWS account ID.
+      OrganizationNode:
+        $ref: '#/definitions/OrganizationNode'
+        description: The organization node to whom you are going to stop sharing.
   DeleteProductOutput:
     type: object
     properties: {}
@@ -3306,6 +3527,32 @@ definitions:
       Id:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
+  DescribePortfolioShareStatusOutput:
+    type: object
+    properties:
+      PortfolioShareToken:
+        $ref: '#/definitions/PortfolioShareToken'
+        description: 'The token for the portfolio share operation. For example, <code>share-6v24abcdefghi</code>.'
+      PortfolioId:
+        $ref: '#/definitions/Id'
+        description: The portfolio identifier.
+      OrganizationNodeValue:
+        $ref: '#/definitions/OrganizationNodeValue'
+        description: 'Organization node identifier. It can be either account id, organizational unit id or organization id.'
+      Status:
+        $ref: '#/definitions/ShareStatus'
+        description: Status of the portfolio share operation.
+      ShareDetails:
+        $ref: '#/definitions/ShareDetails'
+        description: Information about the portfolio share operation.
+  DescribePortfolioShareStatusInput:
+    type: object
+    required:
+      - PortfolioShareToken
+    properties:
+      PortfolioShareToken:
+        $ref: '#/definitions/PortfolioShareToken'
+        description: The token for the portfolio share operation. This token is returned either by CreatePortfolioShare or by DeletePortfolioShare.
   DescribeProductOutput:
     type: object
     properties:
@@ -3544,6 +3791,12 @@ definitions:
       Id:
         $ref: '#/definitions/TagOptionId'
         description: The TagOption identifier.
+  DisableAWSOrganizationsAccessOutput:
+    type: object
+    properties: {}
+  DisableAWSOrganizationsAccessInput:
+    type: object
+    properties: {}
   DisassociatePrincipalFromPortfolioOutput:
     type: object
     properties: {}
@@ -3617,6 +3870,12 @@ definitions:
       TagOptionId:
         $ref: '#/definitions/TagOptionId'
         description: The TagOption identifier.
+  EnableAWSOrganizationsAccessOutput:
+    type: object
+    properties: {}
+  EnableAWSOrganizationsAccessInput:
+    type: object
+    properties: {}
   ExecuteProvisionedProductPlanOutput:
     type: object
     properties:
@@ -3663,6 +3922,15 @@ definitions:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
         description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+  GetAWSOrganizationsAccessStatusOutput:
+    type: object
+    properties:
+      AccessStatus:
+        $ref: '#/definitions/AccessStatus'
+        description: The status of the portfolio share feature.
+  GetAWSOrganizationsAccessStatusInput:
+    type: object
+    properties: {}
   ListAcceptedPortfolioSharesOutput:
     type: object
     properties:
@@ -3686,7 +3954,7 @@ definitions:
         description: The maximum number of items to return with this call.
       PortfolioShareType:
         $ref: '#/definitions/PortfolioShareType'
-        description: <p>The type of shared portfolios to list. The default is to list imported portfolios.</p> <ul> <li> <p> <code>AWS_SERVICECATALOG</code> - List default portfolios</p> </li> <li> <p> <code>IMPORTED</code> - List imported portfolios</p> </li> </ul>
+        description: <p>The type of shared portfolios to list. The default is to list imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - List portfolios shared by the master account of your organization</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - List default portfolios</p> </li> <li> <p> <code>IMPORTED</code> - List imported portfolios</p> </li> </ul>
   ListConstraintsForPortfolioOutput:
     type: object
     properties:
@@ -3742,6 +4010,36 @@ definitions:
       PageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
+  ListOrganizationPortfolioAccessOutput:
+    type: object
+    properties:
+      OrganizationNodes:
+        $ref: '#/definitions/OrganizationNodes'
+        description: Displays information about the organization nodes.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+  ListOrganizationPortfolioAccessInput:
+    type: object
+    required:
+      - PortfolioId
+      - OrganizationNodeType
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      PortfolioId:
+        $ref: '#/definitions/Id'
+        description: 'The portfolio identifier. For example, <code>port-2abcdext3y5fk</code>.'
+      OrganizationNodeType:
+        $ref: '#/definitions/OrganizationNodeType'
+        description: <p>The organization node type that will be returned in the output.</p> <ul> <li> <p> <code>ORGANIZATION</code> - Organization that has access to the portfolio. </p> </li> <li> <p> <code>ORGANIZATIONAL_UNIT</code> - Organizational unit that has access to the portfolio within your organization.</p> </li> <li> <p> <code>ACCOUNT</code> - Account that has access to the portfolio within your organization.</p> </li> </ul>
+      PageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of items to return with this call.
   ListPortfolioAccessOutput:
     type: object
     properties:
@@ -4088,6 +4386,9 @@ definitions:
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
+      PortfolioShareType:
+        $ref: '#/definitions/PortfolioShareType'
+        description: '<p>The type of shared portfolios to reject. The default is to reject imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - Reject portfolios shared by the master account of your organization.</p> </li> <li> <p> <code>IMPORTED</code> - Reject imported portfolios.</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - Not supported. (Throws ResourceNotFoundException.)</p> </li> </ul> <p>For example, <code>aws servicecatalog reject-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS</code> </p>'
   ScanProvisionedProductsOutput:
     type: object
     properties:
@@ -4373,7 +4674,7 @@ definitions:
         description: The identifier of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
       ProductId:
         $ref: '#/definitions/Id'
-        description: The identifier of the provisioned product.
+        description: The identifier of the product.
       ProvisioningArtifactId:
         $ref: '#/definitions/Id'
         description: The identifier of the provisioning artifact.
@@ -4476,6 +4777,12 @@ definitions:
     pattern: '^[a-zA-Z0-9_\-]*'
     minLength: 1
     maxLength: 100
+  PortfolioShareType:
+    type: string
+    enum:
+      - IMPORTED
+      - AWS_SERVICECATALOG
+      - AWS_ORGANIZATIONS
   AccessLevelFilterKey:
     type: string
     enum:
@@ -4494,6 +4801,12 @@ definitions:
         $ref: '#/definitions/AccessLevelFilterValue'
         description: The user to which the access level applies. The only supported value is <code>Self</code>.
     description: The access level to use to filter results.
+  AccessStatus:
+    type: string
+    enum:
+      - ENABLED
+      - UNDER_CHANGE
+      - DISABLED
   AccountId:
     type: string
     pattern: '^[0-9]{12}$'
@@ -4693,6 +5006,18 @@ definitions:
     items:
       $ref: '#/definitions/Tag'
     maxItems: 50
+  OrganizationNode:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/OrganizationNodeType'
+        description: <p/>
+      Value:
+        $ref: '#/definitions/OrganizationNodeValue'
+        description: <p/>
+    description: <p/>
+  PortfolioShareToken:
+    type: string
   ProductViewOwner:
     type: string
     maxLength: 8191
@@ -4876,6 +5201,27 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagOptionDetail'
+  OrganizationNodeValue:
+    type: string
+    pattern: '(^[0-9]{12}$)|(^arn:aws:organizations::\d{12}:organization\/o-[a-z0-9]{10,32})|(^o-[a-z0-9]{10,32}$)|(^arn:aws:organizations::\d{12}:ou\/o-[a-z0-9]{10,32}\/ou-[0-9a-z]{4,32}-[0-9a-z]{8,32}$)|(^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$)'
+  ShareStatus:
+    type: string
+    enum:
+      - NOT_STARTED
+      - IN_PROGRESS
+      - COMPLETED
+      - COMPLETED_WITH_ERRORS
+      - ERROR
+  ShareDetails:
+    type: object
+    properties:
+      SuccessfulShares:
+        $ref: '#/definitions/SuccessfulShares'
+        description: List of accounts for whom the operation succeeded.
+      ShareErrors:
+        $ref: '#/definitions/ShareErrors'
+        description: List of errors.
+    description: Information about the portfolio share operation.
   ProvisioningArtifactSummaries:
     type: array
     items:
@@ -5082,6 +5428,8 @@ definitions:
       $ref: '#/definitions/RecordOutput'
   Description:
     type: string
+  Error:
+    type: string
   ErrorCode:
     type: string
   ErrorDescription:
@@ -5152,15 +5500,20 @@ definitions:
       $ref: '#/definitions/LaunchPathSummary'
   PortfolioName:
     type: string
-  PortfolioShareType:
-    type: string
-    enum:
-      - IMPORTED
-      - AWS_SERVICECATALOG
   PortfolioDetails:
     type: array
     items:
       $ref: '#/definitions/PortfolioDetail'
+  OrganizationNodeType:
+    type: string
+    enum:
+      - ORGANIZATION
+      - ORGANIZATIONAL_UNIT
+      - ACCOUNT
+  OrganizationNodes:
+    type: array
+    items:
+      $ref: '#/definitions/OrganizationNode'
   Principals:
     type: array
     items:
@@ -5222,6 +5575,12 @@ definitions:
     description: Filters to use when listing TagOptions.
   LogicalResourceId:
     type: string
+  Message:
+    type: string
+  Namespaces:
+    type: array
+    items:
+      $ref: '#/definitions/AccountId'
   NoEcho:
     type: boolean
   NotificationArn:
@@ -5811,6 +6170,27 @@ definitions:
         $ref: '#/definitions/ServiceActionDefinitionType'
         description: 'The self-service action definition type. For example, <code>SSM_AUTOMATION</code>.'
     description: Detailed information about the self-service action.
+  SuccessfulShares:
+    type: array
+    items:
+      $ref: '#/definitions/AccountId'
+  ShareErrors:
+    type: array
+    items:
+      $ref: '#/definitions/ShareError'
+  ShareError:
+    type: object
+    properties:
+      Accounts:
+        $ref: '#/definitions/Namespaces'
+        description: List of accounts impacted by the error.
+      Message:
+        $ref: '#/definitions/Message'
+        description: Information about the error.
+      Error:
+        $ref: '#/definitions/Error'
+        description: Error type that happened when processing the operation.
+    description: Errors that occurred during the portfolio share operation.
   SourceProvisioningArtifactPropertiesMap:
     type: array
     items:
