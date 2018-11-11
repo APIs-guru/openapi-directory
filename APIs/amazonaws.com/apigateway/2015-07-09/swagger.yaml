@@ -5793,6 +5793,9 @@ definitions:
       tracingEnabled:
         $ref: '#/definitions/Boolean'
         description: Specifies whether active tracing with X-ray is enabled for the <a>Stage</a>.
+      webAclArn:
+        $ref: '#/definitions/String'
+        description: The ARN of the WebAcl associated with the <a>Stage</a>.
       tags:
         $ref: '#/definitions/MapOfStringToString'
         description: The collection of tags. Each tag element is associated with a given resource.

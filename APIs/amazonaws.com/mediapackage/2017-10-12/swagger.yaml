@@ -1064,6 +1064,12 @@ definitions:
       - SystemIds
     type: object
     properties:
+      CertificateArn:
+        description: |
+          An Amazon Resource Name (ARN) of a Certificate Manager certificate
+          that MediaPackage will use for enforcing secure end-to-end data
+          transfer with the key provider service.
+        $ref: '#/definitions/__string'
       ResourceId:
         description: The resource ID to include in key requests.
         $ref: '#/definitions/__string'

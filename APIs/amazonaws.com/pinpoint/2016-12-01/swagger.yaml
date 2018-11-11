@@ -3583,66 +3583,12 @@ definitions:
     properties:
       CreateApplicationRequest:
         $ref: '#/definitions/CreateApplicationRequest'
-  BadRequestException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message that's returned from the API.
-      RequestID:
-        $ref: '#/definitions/__string'
-        description: The unique message body ID.
-    description: Simple message object.
-  InternalServerErrorException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message that's returned from the API.
-      RequestID:
-        $ref: '#/definitions/__string'
-        description: The unique message body ID.
-    description: Simple message object.
-  ForbiddenException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message that's returned from the API.
-      RequestID:
-        $ref: '#/definitions/__string'
-        description: The unique message body ID.
-    description: Simple message object.
-  NotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message that's returned from the API.
-      RequestID:
-        $ref: '#/definitions/__string'
-        description: The unique message body ID.
-    description: Simple message object.
-  MethodNotAllowedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message that's returned from the API.
-      RequestID:
-        $ref: '#/definitions/__string'
-        description: The unique message body ID.
-    description: Simple message object.
-  TooManyRequestsException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The error message that's returned from the API.
-      RequestID:
-        $ref: '#/definitions/__string'
-        description: The unique message body ID.
-    description: Simple message object.
+  BadRequestException: {}
+  InternalServerErrorException: {}
+  ForbiddenException: {}
+  NotFoundException: {}
+  MethodNotAllowedException: {}
+  TooManyRequestsException: {}
   CreateCampaignResponse:
     type: object
     required:
@@ -5035,7 +4981,7 @@ definitions:
     properties:
       Daily:
         $ref: '#/definitions/__integer'
-        description: The maximum number of messages that the campaign can send daily.
+        description: The maximum number of messages that each campaign can send to a single endpoint in a 24-hour period.
       MaximumDuration:
         $ref: '#/definitions/__integer'
         description: The length of time (in seconds) that the campaign can run before it ends and message deliveries stop. This duration begins at the scheduled start time for the campaign. The minimum value is 60.
@@ -5044,17 +4990,17 @@ definitions:
         description: 'The number of messages that the campaign can send per second. The minimum value is 50, and the maximum is 20000.'
       Total:
         $ref: '#/definitions/__integer'
-        description: The maximum total number of messages that the campaign can send.
-    description: Campaign Limits are used to limit the number of messages that can be sent to a user.
+        description: The maximum number of messages that an individual campaign can send to a single endpoint over the course of the campaign.
+    description: Campaign Limits are used to limit the number of messages that can be sent to a single endpoint.
   QuietTime:
     type: object
     properties:
       End:
         $ref: '#/definitions/__string'
-        description: The default end time for quiet time in ISO 8601 format.
+        description: 'The time at which quiet time should end. The value that you specify has to be in HH:mm format, where HH is the hour in 24-hour format (with a leading zero, if applicable), and mm is the minutes. For example, use 02:30 to represent 2:30 AM, or 14:30 to represent 2:30 PM.'
       Start:
         $ref: '#/definitions/__string'
-        description: The default start time for quiet time in ISO 8601 format.
+        description: 'The time at which quiet time should begin. The value that you specify has to be in HH:mm format, where HH is the hour in 24-hour format (with a leading zero, if applicable), and mm is the minutes. For example, use 02:30 to represent 2:30 AM, or 14:30 to represent 2:30 PM.'
     description: Quiet Time
   ApplicationSettingsResource:
     type: object
@@ -5105,7 +5051,9 @@ definitions:
         $ref: '#/definitions/AttributeType'
         description: |-
           The type of dimension:
+
           INCLUSIVE - Endpoints that match the criteria are included in the segment.
+
           EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
       Values:
         $ref: '#/definitions/ListOf__string'
@@ -5766,7 +5714,7 @@ definitions:
         description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
       SilentPush:
         $ref: '#/definitions/__boolean'
-        description: Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+        description: Indicates if the message should display on the recipient's device. You can use silent pushes for remote configuration or to deliver messages to in-app notification centers.
       Substitutions:
         $ref: '#/definitions/MapOfListOf__string'
         description: Default message substitutions. Can be overridden by individual address substitutions.
@@ -5783,6 +5731,9 @@ definitions:
       ApplicationId:
         $ref: '#/definitions/__string'
         description: The unique ID of the application to which the email channel belongs.
+      ConfigurationSet:
+        $ref: '#/definitions/__string'
+        description: The configuration set that you want to use when you send email using the Pinpoint Email API.
       CreationDate:
         $ref: '#/definitions/__string'
         description: The date that the settings were last updated in ISO 8601 format.
@@ -6013,6 +5964,31 @@ definitions:
     enum:
       - INCLUSIVE
       - EXCLUSIVE
+  EmailMessage:
+    type: object
+    properties:
+      Body:
+        $ref: '#/definitions/__string'
+        description: The body of the email message.
+      FeedbackForwardingAddress:
+        $ref: '#/definitions/__string'
+        description: The email address that bounces and complaints will be forwarded to when feedback forwarding is enabled.
+      FromAddress:
+        $ref: '#/definitions/__string'
+        description: The email address used to send the email from. Defaults to use FromAddress specified in the Email Channel.
+      RawEmail:
+        $ref: '#/definitions/RawEmail'
+        description: An email represented as a raw MIME message.
+      ReplyToAddresses:
+        $ref: '#/definitions/ListOf__string'
+        description: 'The reply-to email address(es) for the email. If the recipient replies to the email, each reply-to address will receive the reply.'
+      SimpleEmail:
+        $ref: '#/definitions/SimpleEmail'
+        description: 'An email composed of a subject, a text part and a html part.'
+      Substitutions:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Default message substitutions. Can be overridden by individual address substitutions.
+    description: Email Message.
   GCMMessage:
     type: object
     properties:
@@ -6117,6 +6093,9 @@ definitions:
       DefaultPushNotificationMessage:
         $ref: '#/definitions/DefaultPushNotificationMessage'
         description: The default push notification message for all push channels.
+      EmailMessage:
+        $ref: '#/definitions/EmailMessage'
+        description: The message to Email channels. Overrides the default message.
       GCMMessage:
         $ref: '#/definitions/GCMMessage'
         description: The message to GCM channels. Overrides the default push notification message.
@@ -6134,6 +6113,9 @@ definitions:
   EmailChannelRequest:
     type: object
     properties:
+      ConfigurationSet:
+        $ref: '#/definitions/__string'
+        description: The configuration set that you want to use when you send email using the Pinpoint Email API.
       Enabled:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
@@ -6147,6 +6129,26 @@ definitions:
         $ref: '#/definitions/__string'
         description: The ARN of an IAM Role used to submit events to Mobile Analytics' event ingestion service
     description: Email Channel Request
+  RawEmail:
+    type: object
+    properties:
+      Data:
+        $ref: '#/definitions/__blob'
+        description: The raw data of the email.
+    description: An email represented as a raw MIME message.
+  SimpleEmail:
+    type: object
+    properties:
+      HtmlPart:
+        $ref: '#/definitions/SimpleEmailPart'
+        description: 'The content of the message, in HTML format. Use this for email clients that can process HTML. You can include clickable links, formatted text, and much more in an HTML message.'
+      Subject:
+        $ref: '#/definitions/SimpleEmailPart'
+        description: 'The subject of the message: A short summary of the content, which will appear in the recipient''s inbox.'
+      TextPart:
+        $ref: '#/definitions/SimpleEmailPart'
+        description: 'The content of the message, in text format. Use this for text-based email clients, or clients on high-latency networks (such as mobile devices).'
+    description: 'An email composed of a subject, a text part and a html part.'
   EndpointDemographic:
     type: object
     properties:
@@ -6184,7 +6186,7 @@ definitions:
         description: The city where the endpoint is located.
       Country:
         $ref: '#/definitions/__string'
-        description: 'The two-letter code for the country or region of the endpoint. Specified as an ISO 3166-1 Alpha-2 code, such as "US" for the United States.'
+        description: 'The two-letter code for the country or region of the endpoint. Specified as an ISO 3166-1 alpha-2 code, such as "US" for the United States.'
       Latitude:
         $ref: '#/definitions/__double'
         description: 'The latitude of the endpoint location, rounded to one decimal place.'
@@ -6290,8 +6292,8 @@ definitions:
         description: A custom message associated with the registration of an endpoint when issuing a response.
       StatusCode:
         $ref: '#/definitions/__integer'
-        description: The status code to respond with for a particular endpoint id after endpoint registration
-    description: The responses that are returned after you create or update an endpoint and record an event.
+        description: The status code associated with the merging of an endpoint when issuing a response.
+    description: A complex object that holds the status code and message as a result of processing an endpoint.
   __double:
     type: number
     format: double
@@ -6389,7 +6391,7 @@ definitions:
       User:
         $ref: '#/definitions/EndpointUser'
         description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
-    description: Endpoint update request
+    description: An endpoint update request.
   EndpointSendConfiguration:
     type: object
     properties:
@@ -6418,7 +6420,7 @@ definitions:
     properties:
       Duration:
         $ref: '#/definitions/__integer'
-        description: Session duration in millis
+        description: 'The duration of the session, in milliseconds.'
       Id:
         $ref: '#/definitions/__string'
         description: A unique identifier for the session.
@@ -6443,10 +6445,10 @@ definitions:
         description: The name of the custom event that you're recording.
       Metrics:
         $ref: '#/definitions/MapOf__double'
-        description: Event metrics
+        description: Custom metrics related to the event.
       Session:
         $ref: '#/definitions/Session'
-        description: The session
+        description: Information about the session in which the event occurred.
       Timestamp:
         $ref: '#/definitions/__string'
         description: 'The date and time when the event occurred, in ISO 8601 format.'
@@ -6459,14 +6461,17 @@ definitions:
         description: A custom message that is associated with the processing of an event.
       StatusCode:
         $ref: '#/definitions/__integer'
-        description: The status code to respond with for a particular event id
-    description: The responses that are returned after you record an event.
+        description: |-
+          The status returned in the response as a result of processing the event.
+
+          Possible values: 400 (for invalid events) and 202 (for events that were accepted).
+    description: A complex object that holds the status code and message as a result of processing an event.
   PublicEndpoint:
     type: object
     properties:
       Address:
         $ref: '#/definitions/__string'
-        description: 'The unique identifier for the recipient. For example, an address could be a device token or an endpoint ID.'
+        description: 'The unique identifier for the recipient. For example, an address could be a device token, email address, or mobile phone number.'
       Attributes:
         $ref: '#/definitions/MapOfListOf__string'
         description: Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
@@ -6481,7 +6486,7 @@ definitions:
         description: The endpoint demographic attributes.
       EffectiveDate:
         $ref: '#/definitions/__string'
-        description: The date and time when the endpoint was last updated.
+        description: 'The date and time when the endpoint was last updated, in  ISO 8601 format.'
       EndpointStatus:
         $ref: '#/definitions/__string'
         description: 'The status of the endpoint. If the update fails, the value is INACTIVE. If the endpoint is updated successfully, the value is ACTIVE.'
@@ -6520,11 +6525,11 @@ definitions:
     properties:
       Endpoint:
         $ref: '#/definitions/PublicEndpoint'
-        description: Endpoint information
+        description: The PublicEndpoint attached to the EndpointId from the request.
       Events:
         $ref: '#/definitions/MapOfEvent'
-        description: Events
-    description: Events batch definition
+        description: An object that contains a set of events associated with the endpoint.
+    description: A batch of PublicEndpoints and Events to process.
   MapOfEventsBatch:
     type: array
     items:
@@ -6539,8 +6544,8 @@ definitions:
     properties:
       BatchItem:
         $ref: '#/definitions/MapOfEventsBatch'
-        description: Batch of events with endpoint id as the key and an object of EventsBatch as value. The EventsBatch object has the PublicEndpoint and a map of event Id's to events
-    description: Put Events request
+        description: 'A batch of events to process. Each BatchItem consists of an endpoint ID as the key, and an EventsBatch object as the value.'
+    description: A set of events to process.
   MapOfItemResponse:
     type: array
     items:
@@ -6555,8 +6560,11 @@ definitions:
     properties:
       Results:
         $ref: '#/definitions/MapOfItemResponse'
-        description: 'A map containing a multi part response for each endpoint, with the endpoint id as the key and item response as the value'
-    description: The results from processing a put events request
+        description: |-
+          A map that contains a multipart response for each endpoint. Each item in this object uses the endpoint ID as the key, and the item response as the value.
+
+          If no item response exists, the value can also be one of the following: 202 (if the request was processed successfully) or 400 (if the payload was invalid, or required fields were missing).
+    description: Custom messages associated with events.
   ExportJobResource:
     type: object
     properties:
@@ -6722,11 +6730,11 @@ definitions:
     properties:
       EndpointItemResponse:
         $ref: '#/definitions/EndpointItemResponse'
-        description: Endpoint item response after endpoint registration
+        description: The response received after the endpoint was accepted.
       EventsItemResponse:
         $ref: '#/definitions/MapOfEventItemResponse'
-        description: 'Events item response is a multipart response object per event Id, with eventId as the key and EventItemResponse object as the value'
-    description: The endpoint and events combined response definition
+        description: 'A multipart response object that contains a key and value for each event ID in the request. In each object, the event ID is the key, and an EventItemResponse object is the value.'
+    description: The response that's provided after registering the endpoint.
   Message:
     type: object
     properties:
@@ -6906,7 +6914,7 @@ definitions:
     properties:
       ComparisonOperator:
         $ref: '#/definitions/__string'
-        description: GREATER_THAN | LESS_THAN | GREATER_THAN_OR_EQUAL | LESS_THAN_OR_EQUAL | EQUAL
+        description: 'The operator that you''re using to compare metric values. Possible values: GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, or EQUAL'
       Value:
         $ref: '#/definitions/__double'
         description: Value to be compared.
@@ -6920,7 +6928,7 @@ definitions:
       PhoneNumber:
         $ref: '#/definitions/__string'
         description: 'The phone number to get information about. The phone number that you provide should include a country code. If the number doesn''t include a valid country code, the operation might result in an error.'
-    description: Phone Number Information request.
+    description: Phone Number Validate request.
   NumberValidateResponse:
     type: object
     properties:
@@ -6950,7 +6958,7 @@ definitions:
         description: The county where the phone number was originally registered.
       OriginalCountryCodeIso2:
         $ref: '#/definitions/__string'
-        description: The two-character ISO code for the country or region that you included in the request body.
+        description: The two-character code (in ISO 3166-1 alpha-2 format) for the country or region in the request body.
       OriginalPhoneNumber:
         $ref: '#/definitions/__string'
         description: The phone number that you included in the request body.
@@ -6966,7 +6974,7 @@ definitions:
       ZipCode:
         $ref: '#/definitions/__string'
         description: The postal code for the location where the phone number was originally registered.
-    description: Phone Number Information response.
+    description: Phone Number Validate response.
   WriteEventStream:
     type: object
     properties:
@@ -6980,6 +6988,8 @@ definitions:
         $ref: '#/definitions/__string'
         description: The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
     description: Request to save an EventStream.
+  __blob:
+    type: string
   RecencyType:
     type: string
     enum:
@@ -6992,12 +7002,15 @@ definitions:
         $ref: '#/definitions/Duration'
         description: |-
           The length of time during which users have been active or inactive with your app.
+
           Valid values: HR_24, DAY_7, DAY_14, DAY_30
       RecencyType:
         $ref: '#/definitions/RecencyType'
         description: |-
           The recency dimension type:
+
           ACTIVE - Users who have used your app within the specified duration are included in the segment.
+
           INACTIVE - Users who have not used your app within the specified duration are included in the segment.
     description: Define how a segment based on recency of use.
   UpdateAttributesRequest:
@@ -7034,7 +7047,9 @@ definitions:
         $ref: '#/definitions/DimensionType'
         description: |-
           The type of dimension:
+
           INCLUSIVE - Endpoints that match the criteria are included in the segment.
+
           EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
       Values:
         $ref: '#/definitions/ListOf__string'
@@ -7076,7 +7091,7 @@ definitions:
     properties:
       Country:
         $ref: '#/definitions/SetDimension'
-        description: The country filter according to ISO 3166-1 Alpha-2 codes.
+        description: 'The country or region, in ISO 3166-1 alpha-2 format.'
       GPSPoint:
         $ref: '#/definitions/GPSPointDimension'
         description: The GPS Point dimension.
@@ -7140,7 +7155,10 @@ definitions:
         description: List of dimensions to include or exclude.
       SourceSegments:
         $ref: '#/definitions/ListOfSegmentReference'
-        description: 'The base segment that you build your segment on. The source segment defines the starting "universe" of endpoints. When you add dimensions to the segment, it filters the source segment based on the dimensions that you specify. You can specify more than one dimensional segment. You can only specify one imported segment.'
+        description: |-
+          The base segment that you build your segment on. The source segment defines the starting "universe" of endpoints. When you add dimensions to the segment, it filters the source segment based on the dimensions that you specify. You can specify more than one dimensional segment. You can only specify one imported segment.
+
+          NOTE: If you specify an imported segment for this attribute, the segment size estimate that appears in the Amazon Pinpoint console shows the size of the imported segment, without any filters applied to it.
       SourceType:
         $ref: '#/definitions/SourceType'
         description: 'Specify how to handle multiple source segments. For example, if you specify three source segments, should the resulting segment be based on any or all of the segments? Acceptable values: ANY or ALL.'
@@ -7252,6 +7270,16 @@ definitions:
         $ref: '#/definitions/MapOfMapOfEndpointMessageResult'
         description: 'An object that shows the endpoints that were messaged for each user. The object provides a list of user IDs. For each user ID, it provides the endpoint IDs that were messaged. For each endpoint ID, it provides an EndpointMessageResult object.'
     description: User send message response.
+  SimpleEmailPart:
+    type: object
+    properties:
+      Charset:
+        $ref: '#/definitions/__string'
+        description: The character set of the content.
+      Data:
+        $ref: '#/definitions/__string'
+        description: The textual data of the content.
+    description: 'Textual email data, plus an optional character set specification.'
   TreatmentResource:
     type: object
     properties:
@@ -7288,7 +7316,7 @@ definitions:
         description: The CloudWatchMetrics settings for the app.
       Limits:
         $ref: '#/definitions/CampaignLimits'
-        description: 'The default campaign limits for the app. These limits apply to each campaign for the app, unless the campaign overrides the default with limits of its own.'
+        description: 'The limits that apply to each campaign in the project by default. Campaigns can also have their own limits, which override the settings at the project level.'
       QuietTime:
         $ref: '#/definitions/QuietTime'
         description: The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own.
@@ -7316,11 +7344,3 @@ definitions:
         $ref: '#/definitions/__string'
         description: The custom name of a variation of the campaign used for A/B testing.
     description: Used to create a campaign treatment.
-  __long:
-    type: integer
-  __timestampIso8601:
-    type: string
-    format: date-time
-  __timestampUnix:
-    type: string
-    format: date-time

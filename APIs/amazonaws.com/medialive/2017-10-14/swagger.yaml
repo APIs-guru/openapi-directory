@@ -3525,6 +3525,7 @@ definitions:
       - RTMP_PUSH
       - RTMP_PULL
       - URL_PULL
+      - MP4_FILE
     description: Placeholder documentation for InputType
   Input:
     type: object
@@ -3913,7 +3914,7 @@ definitions:
         description: Value to set the initial audio gain for the Live Event.
       InputEndAction:
         $ref: '#/definitions/GlobalConfigurationInputEndAction'
-        description: Indicates the action to take when the input completes (e.g. end-of-file). Options include looping on the input (via "switchAndLoopInputs") or transcoding black / color / slate images per the "Input Loss Behavior" configuration (via "none").
+        description: 'Indicates the action to take when the current input completes (e.g. end-of-file). When switchAndLoopInputs is configured the encoder will restart at the beginning of the first input.  When "none" is configured the encoder will transcode either black, a solid color, or a user specified slate images per the "Input Loss Behavior" configuration until the next input switch occurs (which is controlled through the Channel Schedule API).'
       InputLossBehavior:
         $ref: '#/definitions/InputLossBehavior'
         description: Settings for system actions when input is lost.
@@ -4003,6 +4004,25 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'Start time for the action to start in the channel. (Not the time for the action to be added to the schedule: actions are always added to the schedule immediately.) UTC format: yyyy-mm-ddThh:mm:ss.nnnZ. All the letters are digits (for example, mm might be 01) except for the two constants "T" for time and "Z" for "UTC format".'
     description: Start time for the action.
+  FollowPoint:
+    type: string
+    enum:
+      - END
+      - START
+    description: Follow reference point.
+  FollowModeScheduleActionStartSettings:
+    type: object
+    required:
+      - ReferenceActionName
+      - FollowPoint
+    properties:
+      FollowPoint:
+        $ref: '#/definitions/FollowPoint'
+        description: Identifies whether this action starts relative to the start or relative to the end of the reference action.
+      ReferenceActionName:
+        $ref: '#/definitions/__string'
+        description: The action name of another action that this one refers to.
+    description: Settings to specify if an action follows another.
   __integerMinNegative60Max60:
     type: integer
     description: Placeholder documentation for __integerMinNegative60Max60
@@ -4815,6 +4835,9 @@ definitions:
   InputAttachment:
     type: object
     properties:
+      InputAttachmentName:
+        $ref: '#/definitions/__string'
+        description: User-specified name for the attachment. This is required if the user wants to use this input in an input switch action.
       InputId:
         $ref: '#/definitions/__string'
         description: The ID of the input
@@ -5005,6 +5028,15 @@ definitions:
         $ref: '#/definitions/__string'
         description: The username for the input source.
     description: Settings for for a PULL type input.
+  InputSwitchScheduleActionSettings:
+    type: object
+    required:
+      - InputAttachmentNameReference
+    properties:
+      InputAttachmentNameReference:
+        $ref: '#/definitions/__string'
+        description: The name of the input attachment that should be switched to by this action.
+    description: Settings for the action to switch an input.
   InputWhitelistRule:
     type: object
     properties:
@@ -5764,6 +5796,9 @@ definitions:
   ScheduleActionSettings:
     type: object
     properties:
+      InputSwitchSettings:
+        $ref: '#/definitions/InputSwitchScheduleActionSettings'
+        description: Settings to switch an input
       Scte35ReturnToNetworkSettings:
         $ref: '#/definitions/Scte35ReturnToNetworkScheduleActionSettings'
         description: Settings for SCTE-35 return_to_network message
@@ -5786,6 +5821,9 @@ definitions:
       FixedModeScheduleActionStartSettings:
         $ref: '#/definitions/FixedModeScheduleActionStartSettings'
         description: Holds the start time for the action.
+      FollowModeScheduleActionStartSettings:
+        $ref: '#/definitions/FollowModeScheduleActionStartSettings'
+        description: Specifies an action to follow for scheduling this action.
     description: Settings to specify the start time for an action.
   ScheduleAction:
     type: object

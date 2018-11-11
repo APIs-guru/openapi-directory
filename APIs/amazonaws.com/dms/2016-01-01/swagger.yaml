@@ -676,6 +676,20 @@ paths:
           in: query
           description: Pagination token
           required: false
+      x-waiters:
+        - acceptors:
+            - argument: 'Connections[].Status'
+              expected: successful
+              matcher: pathAll
+              state: success
+            - argument: 'Connections[].Status'
+              expected: failed
+              matcher: pathAny
+              state: failure
+          delay: 5
+          description: Wait until testing connection succeeds.
+          maxAttempts: 60
+          operation: DescribeConnections
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1980,20 +1994,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TestConnectionMessage'
-      x-waiters:
-        - acceptors:
-            - argument: Connection.Status
-              expected: successful
-              matcher: path
-              state: success
-            - argument: Connection.Status
-              expected: failed
-              matcher: path
-              state: failure
-          delay: 5
-          description: Wait until testing connection succeeds.
-          maxAttempts: 60
-          operation: TestConnection
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

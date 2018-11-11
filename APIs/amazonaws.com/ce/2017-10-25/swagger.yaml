@@ -372,43 +372,18 @@ definitions:
         description: 'Filters AWS costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated with that account''s usage of that service. You can nest <code>Expression</code> objects to define any combination of dimension filters. For more information, see <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. '
       Metrics:
         $ref: '#/definitions/MetricNames'
-        description: '<p>Which metrics are returned in the query. For more information about blended and unblended rates, see <a href="https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/">Why does the "blended" annotation appear on some line items in my bill?</a>. </p> <p>Valid values are <code>AmortizedCost</code>, <code>BlendedCost</code>, <code>UnblendedCost</code>, and <code>UsageQuantity</code>.</p> <note> <p>If you return the <code>UsageQuantity</code> metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate <code>usageQuantity</code> across all of EC2, the results aren''t meaningful because EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful <code>UsageQuantity</code> metrics, filter by <code>UsageType</code> or <code>UsageTypeGroups</code>. </p> </note> <p> <code>Metrics</code> is required for <code>GetCostAndUsage</code> requests.</p>'
+        description: '<p>Which metrics are returned in the query. For more information about blended and unblended rates, see <a href="https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/">Why does the "blended" annotation appear on some line items in my bill?</a>. </p> <p>Valid values are <code>AmortizedCost</code>, <code>BlendedCost</code>, <code>NetAmortizedCost</code>, <code>NetUnblendedCost</code>, <code>NormalizedUsageAmount</code>, <code>UnblendedCost</code>, and <code>UsageQuantity</code>. </p> <note> <p>If you return the <code>UsageQuantity</code> metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate <code>usageQuantity</code> across all of EC2, the results aren''t meaningful because EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful <code>UsageQuantity</code> metrics, filter by <code>UsageType</code> or <code>UsageTypeGroups</code>. </p> </note> <p> <code>Metrics</code> is required for <code>GetCostAndUsage</code> requests.</p>'
       GroupBy:
         $ref: '#/definitions/GroupDefinitions'
         description: '<p>You can group AWS costs using up to two different groups, either dimensions, tag keys, or both.</p> <p>When you group by tag key, you get all tag values, including empty strings.</p> <p>Valid values are <code>AZ</code>, <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>, <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TAGS</code>, <code>TENANCY</code>, and <code>USAGE_TYPE</code>.</p>'
       NextPageToken:
         $ref: '#/definitions/NextPageToken'
         description: The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
-  LimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: You made too many calls in a short period of time. Try again later.
-  BillExpirationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The requested report expired. Update the date interval and try again.
-  DataUnavailableException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The requested data is unavailable.
-  InvalidNextTokenException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The pagination token is invalid. Try again without a pagination token.
-  RequestChangedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Your request parameters changed between pages. Try again with the old parameters or without a pagination token.
+  LimitExceededException: {}
+  BillExpirationException: {}
+  DataUnavailableException: {}
+  InvalidNextTokenException: {}
+  RequestChangedException: {}
   GetDimensionValuesResponse:
     type: object
     required:
@@ -620,8 +595,6 @@ definitions:
           $ref: '#/definitions/AttributeType'
         value:
           $ref: '#/definitions/AttributeValue'
-  ErrorMessage:
-    type: string
   Context:
     type: string
     enum:
@@ -694,7 +667,7 @@ definitions:
       $ref: '#/definitions/CoverageByTime'
   YearMonthDay:
     type: string
-    pattern: '\d{4}-\d{2}-\d{2}'
+    pattern: '(\d{4}-\d{2}-\d{2})(T\d{2}:\d{2}:\d{2}Z)?'
   Dimension:
     type: string
     enum:
@@ -718,6 +691,8 @@ definitions:
       - DATABASE_ENGINE
       - CACHE_ENGINE
       - INSTANCE_TYPE_FAMILY
+      - BILLING_ENTITY
+      - RESERVATION_ID
   Values:
     type: array
     items:
@@ -730,7 +705,7 @@ definitions:
         description: 'The names of the metadata types that you can use to filter and group your results. For example, <code>AZ</code> returns a list of Availability Zones.'
       Values:
         $ref: '#/definitions/Values'
-        description: The metadata values that you can use to filter and group your results. You can use <code>GetDimensionValues</code> to find specific values.
+        description: '<p>The metadata values that you can use to filter and group your results. You can use <code>GetDimensionValues</code> to find specific values.</p> <p>Valid values for the <code>SERVICE</code> dimension are <code>Amazon Elastic Compute Cloud - Compute</code>, <code>Amazon Elasticsearch Service</code>, <code>Amazon ElastiCache</code>, <code>Amazon Redshift</code>, and <code>Amazon Relational Database Service</code>.</p>'
     description: The metadata that you can use to filter and group your results. You can use <code>GetDimensionValues</code> to find specific values.
   Value:
     type: string
@@ -875,6 +850,7 @@ definitions:
     enum:
       - DAILY
       - MONTHLY
+      - HOURLY
   MetricNames:
     type: array
     items:
@@ -1187,6 +1163,8 @@ definitions:
   ReservationPurchaseRecommendationDetail:
     type: object
     properties:
+      AccountId:
+        $ref: '#/definitions/GenericString'
       InstanceDetails:
         $ref: '#/definitions/InstanceDetails'
         description: Details about the instances that AWS recommends that you purchase.
