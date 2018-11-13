@@ -1296,18 +1296,9 @@ definitions:
         $ref: '#/definitions/Nonce'
         description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Get this number from the response of the <a>PollForJobs</a> request that returned this job.
     description: Represents the input of an AcknowledgeJob action.
-  ValidationException:
-    type: object
-    properties: {}
-    description: The validation was specified in an invalid format.
-  InvalidNonceException:
-    type: object
-    properties: {}
-    description: The specified nonce was specified in an invalid format.
-  JobNotFoundException:
-    type: object
-    properties: {}
-    description: The specified job was specified in an invalid format or cannot be found.
+  ValidationException: {}
+  InvalidNonceException: {}
+  JobNotFoundException: {}
   AcknowledgeThirdPartyJobOutput:
     type: object
     properties:
@@ -1332,10 +1323,7 @@ definitions:
         $ref: '#/definitions/ClientToken'
         description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
     description: Represents the input of an AcknowledgeThirdPartyJob action.
-  InvalidClientTokenException:
-    type: object
-    properties: {}
-    description: The client token was specified in an invalid format
+  InvalidClientTokenException: {}
   CreateCustomActionTypeOutput:
     type: object
     required:
@@ -1376,10 +1364,7 @@ definitions:
         $ref: '#/definitions/ArtifactDetails'
         description: 'The details of the output artifact of the action, such as its commit ID.'
     description: Represents the input of a CreateCustomActionType operation.
-  LimitExceededException:
-    type: object
-    properties: {}
-    description: The number of pipelines associated with the AWS account has exceeded the limit allowed for the account.
+  LimitExceededException: {}
   CreatePipelineOutput:
     type: object
     properties:
@@ -1396,26 +1381,11 @@ definitions:
         $ref: '#/definitions/PipelineDeclaration'
         description: 'Represents the structure of actions and stages to be performed in the pipeline. '
     description: Represents the input of a CreatePipeline action.
-  PipelineNameInUseException:
-    type: object
-    properties: {}
-    description: The specified pipeline name is already in use.
-  InvalidStageDeclarationException:
-    type: object
-    properties: {}
-    description: The specified stage declaration was specified in an invalid format.
-  InvalidActionDeclarationException:
-    type: object
-    properties: {}
-    description: The specified action declaration was specified in an invalid format.
-  InvalidBlockerDeclarationException:
-    type: object
-    properties: {}
-    description: Reserved for future use.
-  InvalidStructureException:
-    type: object
-    properties: {}
-    description: The specified structure was specified in an invalid format.
+  PipelineNameInUseException: {}
+  InvalidStageDeclarationException: {}
+  InvalidActionDeclarationException: {}
+  InvalidBlockerDeclarationException: {}
+  InvalidStructureException: {}
   DeleteCustomActionTypeInput:
     type: object
     required:
@@ -1462,10 +1432,7 @@ definitions:
       webhookName:
         $ref: '#/definitions/WebhookName'
         description: The name of the webhook you want to deregister.
-  WebhookNotFoundException:
-    type: object
-    properties: {}
-    description: The specified webhook was entered in an invalid format or cannot be found.
+  WebhookNotFoundException: {}
   DisableStageTransitionInput:
     type: object
     required:
@@ -1487,14 +1454,8 @@ definitions:
         $ref: '#/definitions/DisabledReason'
         description: 'The reason given to the user why a stage is disabled, such as waiting for manual approval or manual tests. This message is displayed in the pipeline console UI.'
     description: Represents the input of a DisableStageTransition action.
-  PipelineNotFoundException:
-    type: object
-    properties: {}
-    description: The specified pipeline was specified in an invalid format or cannot be found.
-  StageNotFoundException:
-    type: object
-    properties: {}
-    description: The specified stage was specified in an invalid format or cannot be found.
+  PipelineNotFoundException: {}
+  StageNotFoundException: {}
   EnableStageTransitionInput:
     type: object
     required:
@@ -1550,10 +1511,7 @@ definitions:
         $ref: '#/definitions/PipelineVersion'
         description: 'The version number of the pipeline. If you do not specify a version, defaults to the most current version.'
     description: Represents the input of a GetPipeline action.
-  PipelineVersionNotFoundException:
-    type: object
-    properties: {}
-    description: The specified pipeline version was specified in an invalid format or cannot be found.
+  PipelineVersionNotFoundException: {}
   GetPipelineExecutionOutput:
     type: object
     properties:
@@ -1574,10 +1532,7 @@ definitions:
         $ref: '#/definitions/PipelineExecutionId'
         description: The ID of the pipeline execution about which you want to get execution details.
     description: Represents the input of a GetPipelineExecution action.
-  PipelineExecutionNotFoundException:
-    type: object
-    properties: {}
-    description: 'The pipeline execution was specified in an invalid format or cannot be found, or an execution ID does not belong to the specified pipeline. '
+  PipelineExecutionNotFoundException: {}
   GetPipelineStateOutput:
     type: object
     properties:
@@ -1626,10 +1581,7 @@ definitions:
         $ref: '#/definitions/ClientToken'
         description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
     description: Represents the input of a GetThirdPartyJobDetails action.
-  InvalidJobException:
-    type: object
-    properties: {}
-    description: The specified job was specified in an invalid format or cannot be found.
+  InvalidJobException: {}
   ListActionTypesOutput:
     type: object
     required:
@@ -1652,10 +1604,7 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'An identifier that was returned from the previous list action types call, which can be used to return the next set of action types in the list.'
     description: Represents the input of a ListActionTypes action.
-  InvalidNextTokenException:
-    type: object
-    properties: {}
-    description: The next token was specified in an invalid format. Make sure that the next token you provided is the token returned by a previous call.
+  InvalidNextTokenException: {}
   ListPipelineExecutionsOutput:
     type: object
     properties:
@@ -1738,10 +1687,7 @@ definitions:
         $ref: '#/definitions/QueryParamMap'
         description: 'A map of property names and values. For an action type with no queryable properties, this value must be null or an empty map. For an action type with a queryable property, you must supply that property as a key in the map. Only jobs whose action configuration matches the mapped value will be returned.'
     description: Represents the input of a PollForJobs action.
-  ActionTypeNotFoundException:
-    type: object
-    properties: {}
-    description: The specified action type cannot be found.
+  ActionTypeNotFoundException: {}
   PollForThirdPartyJobsOutput:
     type: object
     properties:
@@ -1792,10 +1738,7 @@ definitions:
         $ref: '#/definitions/ActionRevision'
         description: Represents information about the version (or revision) of an action.
     description: Represents the input of a PutActionRevision action.
-  ActionNotFoundException:
-    type: object
-    properties: {}
-    description: The specified action cannot be found.
+  ActionNotFoundException: {}
   PutApprovalResultOutput:
     type: object
     properties:
@@ -1828,14 +1771,8 @@ definitions:
         $ref: '#/definitions/ApprovalToken'
         description: The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the <a>GetPipelineState</a> action and is used to validate that the approval request corresponding to this token is still valid.
     description: Represents the input of a PutApprovalResult action.
-  InvalidApprovalTokenException:
-    type: object
-    properties: {}
-    description: The approval request already received a response or has expired.
-  ApprovalAlreadyCompletedException:
-    type: object
-    properties: {}
-    description: The approval action has already been approved or rejected.
+  InvalidApprovalTokenException: {}
+  ApprovalAlreadyCompletedException: {}
   PutJobFailureResultInput:
     type: object
     required:
@@ -1849,10 +1786,7 @@ definitions:
         $ref: '#/definitions/FailureDetails'
         description: The details about the failure of a job.
     description: Represents the input of a PutJobFailureResult action.
-  InvalidJobStateException:
-    type: object
-    properties: {}
-    description: The specified job state was specified in an invalid format.
+  InvalidJobStateException: {}
   PutJobSuccessResultInput:
     type: object
     required:
@@ -1924,14 +1858,8 @@ definitions:
       webhook:
         $ref: '#/definitions/WebhookDefinition'
         description: 'The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name. Give the webhook a unique name which identifies the webhook being defined. You may choose to name the webhook after the pipeline and action it targets so that you can easily recognize what it''s used for later.'
-  InvalidWebhookFilterPatternException:
-    type: object
-    properties: {}
-    description: The specified event filter rule is in an invalid format.
-  InvalidWebhookAuthenticationParametersException:
-    type: object
-    properties: {}
-    description: The specified authentication type is in an invalid format.
+  InvalidWebhookFilterPatternException: {}
+  InvalidWebhookAuthenticationParametersException: {}
   RegisterWebhookWithThirdPartyOutput:
     type: object
     properties: {}
@@ -1969,14 +1897,8 @@ definitions:
         $ref: '#/definitions/StageRetryMode'
         description: 'The scope of the retry attempt. Currently, the only supported value is FAILED_ACTIONS.'
     description: Represents the input of a RetryStageExecution action.
-  StageNotRetryableException:
-    type: object
-    properties: {}
-    description: 'The specified stage can''t be retried because the pipeline structure or stage state changed after the stage was not completed; the stage contains no failed actions; one or more actions are still in progress; or another retry attempt is already in progress. '
-  NotLatestPipelineExecutionException:
-    type: object
-    properties: {}
-    description: The stage has failed in a later run of the pipeline and the pipelineExecutionId associated with the request is out of date.
+  StageNotRetryableException: {}
+  NotLatestPipelineExecutionException: {}
   StartPipelineExecutionOutput:
     type: object
     properties:
@@ -1992,6 +1914,9 @@ definitions:
       name:
         $ref: '#/definitions/PipelineName'
         description: The name of the pipeline to start.
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: The system-generated unique ID used to identify a unique execution request.
     description: Represents the input of a StartPipelineExecution action.
   UpdatePipelineOutput:
     type: object
@@ -2009,6 +1934,10 @@ definitions:
         $ref: '#/definitions/PipelineDeclaration'
         description: The name of the pipeline to be updated.
     description: Represents the input of an UpdatePipeline action.
+  AWSRegionName:
+    type: string
+    minLength: 4
+    maxLength: 30
   AccessKeyId:
     type: string
   SecretAccessKey:
@@ -2221,6 +2150,9 @@ definitions:
       roleArn:
         $ref: '#/definitions/RoleArn'
         description: The ARN of the IAM service role that will perform the declared action. This is assumed through the roleArn for the pipeline.
+      region:
+        $ref: '#/definitions/AWSRegionName'
+        description: 'The action declaration''s AWS Region, such as us-east-1.'
     description: Represents information about an action declaration.
   ActionExecutionStatus:
     type: string
@@ -2566,6 +2498,15 @@ definitions:
         $ref: '#/definitions/EncryptionKey'
         description: 'The encryption key used to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If this is undefined, the default key for Amazon S3 is used.'
     description: The Amazon S3 bucket where artifacts are stored for the pipeline.
+  ArtifactStoreMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AWSRegionName'
+        value:
+          $ref: '#/definitions/ArtifactStore'
   BlockerName:
     type: string
     minLength: 1
@@ -2590,6 +2531,11 @@ definitions:
   ClientId:
     type: string
     pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+  ClientRequestToken:
+    type: string
+    pattern: '^[a-zA-Z0-9-]+$'
+    minLength: 1
+    maxLength: 128
   Code:
     type: string
   ContinuationToken:
@@ -2601,7 +2547,6 @@ definitions:
     required:
       - name
       - roleArn
-      - artifactStore
       - stages
     properties:
       name:
@@ -2613,6 +2558,9 @@ definitions:
       artifactStore:
         $ref: '#/definitions/ArtifactStore'
         description: 'Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline. '
+      artifactStores:
+        $ref: '#/definitions/ArtifactStoreMap'
+        description: '<p>A mapping of artifactStore objects and their corresponding regions. There must be an artifact store for the pipeline region and for each cross-region action within the pipeline. You can only use either artifactStore or artifactStores, not both.</p> <p>If you create a cross-region action in your pipeline, you must use artifactStores.</p>'
       stages:
         $ref: '#/definitions/PipelineStageDeclarationList'
         description: The stage in which to perform the action.
@@ -3011,6 +2959,7 @@ definitions:
         description: 'The date and time of the last change to the pipeline execution, in timestamp format.'
       sourceRevisions:
         $ref: '#/definitions/SourceRevisionList'
+        description: A list of the source artifact revisions that initiated a pipeline execution.
     description: Summary information about a pipeline execution.
   PipelineSummary:
     type: object
@@ -3074,12 +3023,17 @@ definitions:
     properties:
       actionName:
         $ref: '#/definitions/ActionName'
+        description: The name of the action that processed the revision to the source artifact.
       revisionId:
         $ref: '#/definitions/Revision'
+        description: The system-generated unique ID that identifies the revision number of the artifact.
       revisionSummary:
         $ref: '#/definitions/RevisionSummary'
+        description: 'Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a <code>codepipeline-artifact-revision-summary</code> key specified in the object metadata.'
       revisionUrl:
         $ref: '#/definitions/Url'
+        description: 'The commit ID for the artifact revision. For artifacts stored in GitHub or AWS CodeCommit repositories, the commit ID is linked to a commit details page.'
+    description: Information about the version (or revision) of a source artifact that initiated a pipeline execution.
   StageActionDeclarationList:
     type: array
     items:
@@ -3190,8 +3144,11 @@ definitions:
     properties:
       AllowedIPRange:
         $ref: '#/definitions/WebhookAuthConfigurationAllowedIPRange'
+        description: 'The property used to configure acceptance of webhooks within a specific IP range. For IP, only the AllowedIPRange property must be set, and this property must be set to a valid CIDR range.'
       SecretToken:
         $ref: '#/definitions/WebhookAuthConfigurationSecretToken'
+        description: 'The property used to configure GitHub authentication. For GITHUB_HMAC, only the SecretToken property must be set.'
+    description: The authentication applied to incoming webhook trigger requests.
   WebhookAuthenticationType:
     type: string
     enum:

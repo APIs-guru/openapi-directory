@@ -201,7 +201,7 @@ paths:
   '/#ListDeliveryStreams':
     post:
       operationId: ListDeliveryStreams
-      description: '<p>Lists your delivery streams.</p> <p>The number of delivery streams might be too large to return using a single call to <code>ListDeliveryStreams</code>. You can limit the number of delivery streams returned, using the <b>Limit</b> parameter. To determine whether there are more delivery streams to list, check the value of <code>HasMoreDeliveryStreams</code> in the output. If there are more delivery streams to list, you can request them by specifying the name of the last delivery stream returned in the call in the <code>ExclusiveStartDeliveryStreamName</code> parameter of a subsequent call.</p>'
+      description: '<p>Lists your delivery streams in alphabetical order of their names.</p> <p>The number of delivery streams might be too large to return using a single call to <code>ListDeliveryStreams</code>. You can limit the number of delivery streams returned, using the <b>Limit</b> parameter. To determine whether there are more delivery streams to list, check the value of <code>HasMoreDeliveryStreams</code> in the output. If there are more delivery streams to list, you can request them by calling this operation again and setting the <code>ExclusiveStartDeliveryStreamName</code> parameter to the name of the last delivery stream returned in the last call.</p>'
       responses:
         '200':
           description: Success
@@ -263,7 +263,7 @@ paths:
   '/#PutRecord':
     post:
       operationId: PutRecord
-      description: '<p>Writes a single data record into an Amazon Kinesis Data Firehose delivery stream. To write multiple data records into a delivery stream, use <a>PutRecordBatch</a>. Applications using these operations are referred to as producers.</p> <p>By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. If you use <a>PutRecord</a> and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations for each delivery stream. For more information about limits and how to request an increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Data Firehose Limits</a>. </p> <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it can be a segment from a log file, geographic location data, website clickstream data, and so on.</p> <p>Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (<code>\n</code>) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination.</p> <p>The <code>PutRecord</code> operation returns a <code>RecordId</code>, which is a unique string assigned to each record. Producer applications can use this ID for purposes such as auditability and investigation.</p> <p>If the <code>PutRecord</code> operation throws a <code>ServiceUnavailableException</code>, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. </p> <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it tries to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.</p>'
+      description: '<p>Writes a single data record into an Amazon Kinesis Data Firehose delivery stream. To write multiple data records into a delivery stream, use <a>PutRecordBatch</a>. Applications using these operations are referred to as producers.</p> <p>By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. If you use <a>PutRecord</a> and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations for each delivery stream. For more information about limits and how to request an increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Data Firehose Limits</a>. </p> <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it can be a segment from a log file, geographic location data, website clickstream data, and so on.</p> <p>Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (<code>\n</code>) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination.</p> <p>The <code>PutRecord</code> operation returns a <code>RecordId</code>, which is a unique string assigned to each record. Producer applications can use this ID for purposes such as auditability and investigation.</p> <p>If the <code>PutRecord</code> operation throws a <code>ServiceUnavailableException</code>, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. </p> <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it tries to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.</p> <important> <p>Don''t concatenate two or more base64 strings to form the data fields of your records. Instead, concatenate the raw data, then perform base64 encoding.</p> </important>'
       responses:
         '200':
           description: Success
@@ -300,7 +300,7 @@ paths:
   '/#PutRecordBatch':
     post:
       operationId: PutRecordBatch
-      description: '<p>Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use <a>PutRecord</a>. Applications using these operations are referred to as producers.</p> <p>By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. If you use <a>PutRecord</a> and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations for each delivery stream. For more information about limits, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Data Firehose Limits</a>.</p> <p>Each <a>PutRecordBatch</a> request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. These limits cannot be changed.</p> <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it could be a segment from a log file, geographic location data, website clickstream data, and so on.</p> <p>Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (<code>\n</code>) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination.</p> <p>The <a>PutRecordBatch</a> response includes a count of failed records, <b>FailedPutCount</b>, and an array of responses, <b>RequestResponses</b>. Each entry in the <b>RequestResponses</b> array provides additional information about the processed record. It directly correlates with a record in the request array using the same ordering, from the top to the bottom. The response array always includes the same number of records as the request array. <b>RequestResponses</b> includes both successfully and unsuccessfully processed records. Kinesis Data Firehose tries to process all records in each <a>PutRecordBatch</a> request. A single record failure does not stop the processing of subsequent records.</p> <p>A successfully processed record includes a <b>RecordId</b> value, which is unique for the record. An unsuccessfully processed record includes <b>ErrorCode</b> and <b>ErrorMessage</b> values. <b>ErrorCode</b> reflects the type of error, and is one of the following values: <code>ServiceUnavailable</code> or <code>InternalFailure</code>. <b>ErrorMessage</b> provides more detailed information about the error.</p> <p>If there is an internal server error or a timeout, the write might have completed or it might have failed. If <b>FailedPutCount</b> is greater than 0, retry the request, resending only those records that might have failed processing. This minimizes the possible duplicate records and also reduces the total bytes sent (and corresponding charges). We recommend that you handle any duplicates at the destination.</p> <p>If <a>PutRecordBatch</a> throws <b>ServiceUnavailableException</b>, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream.</p> <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.</p>'
+      description: '<p>Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use <a>PutRecord</a>. Applications using these operations are referred to as producers.</p> <p>By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. If you use <a>PutRecord</a> and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations for each delivery stream. For more information about limits, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Data Firehose Limits</a>.</p> <p>Each <a>PutRecordBatch</a> request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. These limits cannot be changed.</p> <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it could be a segment from a log file, geographic location data, website clickstream data, and so on.</p> <p>Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (<code>\n</code>) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination.</p> <p>The <a>PutRecordBatch</a> response includes a count of failed records, <b>FailedPutCount</b>, and an array of responses, <b>RequestResponses</b>. Even if the <a>PutRecordBatch</a> call succeeds, the value of <b>FailedPutCount</b> may be greater than 0, indicating that there are records for which the operation didn''t succeed. Each entry in the <b>RequestResponses</b> array provides additional information about the processed record. It directly correlates with a record in the request array using the same ordering, from the top to the bottom. The response array always includes the same number of records as the request array. <b>RequestResponses</b> includes both successfully and unsuccessfully processed records. Kinesis Data Firehose tries to process all records in each <a>PutRecordBatch</a> request. A single record failure does not stop the processing of subsequent records. </p> <p>A successfully processed record includes a <b>RecordId</b> value, which is unique for the record. An unsuccessfully processed record includes <b>ErrorCode</b> and <b>ErrorMessage</b> values. <b>ErrorCode</b> reflects the type of error, and is one of the following values: <code>ServiceUnavailableException</code> or <code>InternalFailure</code>. <b>ErrorMessage</b> provides more detailed information about the error.</p> <p>If there is an internal server error or a timeout, the write might have completed or it might have failed. If <b>FailedPutCount</b> is greater than 0, retry the request, resending only those records that might have failed processing. This minimizes the possible duplicate records and also reduces the total bytes sent (and corresponding charges). We recommend that you handle any duplicates at the destination.</p> <p>If <a>PutRecordBatch</a> throws <b>ServiceUnavailableException</b>, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream.</p> <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.</p> <important> <p>Don''t concatenate two or more base64 strings to form the data fields of your records. Instead, concatenate the raw data, then perform base64 encoding.</p> </important>'
       responses:
         '200':
           description: Success
@@ -324,6 +324,88 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutRecordBatchInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartDeliveryStreamEncryption':
+    post:
+      operationId: StartDeliveryStreamEncryption
+      description: '<p>Enables server-side encryption (SSE) for the delivery stream. This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Firehose first sets the status of the stream to <code>ENABLING</code> then to <code>ENABLED</code>. You can continue to read and write data to your stream while its status is <code>ENABLING</code> but they won''t get encrypted. It can take up to 5 seconds after the encryption status changes to <code>ENABLED</code> before all records written to the delivery stream are encrypted.</p> <p>To check the encryption state of a delivery stream, use <a>DescribeDeliveryStream</a>. </p> <p>You can only enable SSE for a delivery stream that uses <code>DirectPut</code> as its source. </p> <p>The <code>StartDeliveryStreamEncryption</code> and <code>StopDeliveryStreamEncryption</code> operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call <code>StartDeliveryStreamEncryption</code> thirteen times and <code>StopDeliveryStreamEncryption</code> twelve times for the same stream in a 24-hour period.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartDeliveryStreamEncryptionOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartDeliveryStreamEncryptionInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopDeliveryStreamEncryption':
+    post:
+      operationId: StopDeliveryStreamEncryption
+      description: '<p>Disables server-side encryption (SSE) for the delivery stream. This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Firehose first sets the status of the stream to <code>DISABLING</code> then to <code>DISABLED</code>. You can continue to read and write data to your stream while its status is <code>DISABLING</code>. It can take up to 5 seconds after the encryption status changes to <code>DISABLED</code> before all records written to the delivery stream are no longer subject to encryption.</p> <p>To check the encryption state of a delivery stream, use <a>DescribeDeliveryStream</a>. </p> <p>The <code>StartDeliveryStreamEncryption</code> and <code>StopDeliveryStreamEncryption</code> operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call <code>StartDeliveryStreamEncryption</code> thirteen times and <code>StopDeliveryStreamEncryption</code> twelve times for the same stream in a 24-hour period.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopDeliveryStreamEncryptionOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopDeliveryStreamEncryptionInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -493,27 +575,12 @@ definitions:
       SplunkDestinationConfiguration:
         $ref: '#/definitions/SplunkDestinationConfiguration'
         description: The destination in Splunk. You can specify only one destination.
-  InvalidArgumentException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: The specified input parameter has a value that is not valid.
-  LimitExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: You have already reached the limit for a requested resource.
-  ResourceInUseException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: The resource is already in use and not available for this operation.
+      Tags:
+        $ref: '#/definitions/TagDeliveryStreamInputTagList'
+        description: '<p>A set of tags to assign to the delivery stream. A tag is a key-value pair that you can define and assign to AWS resources. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the AWS Billing and Cost Management User Guide.</p> <p>You can specify up to 50 tags when creating a delivery stream.</p>'
+  InvalidArgumentException: {}
+  LimitExceededException: {}
+  ResourceInUseException: {}
   DeleteDeliveryStreamOutput:
     type: object
     properties: {}
@@ -525,13 +592,7 @@ definitions:
       DeliveryStreamName:
         $ref: '#/definitions/DeliveryStreamName'
         description: The name of the delivery stream.
-  ResourceNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: The specified resource could not be found.
+  ResourceNotFoundException: {}
   DescribeDeliveryStreamOutput:
     type: object
     required:
@@ -577,7 +638,7 @@ definitions:
         description: '<p>The delivery stream type. This can be one of the following values:</p> <ul> <li> <p> <code>DirectPut</code>: Provider applications access the delivery stream directly.</p> </li> <li> <p> <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis data stream as a source.</p> </li> </ul> <p>This parameter is optional. If this parameter is omitted, delivery streams of all types are returned.</p>'
       ExclusiveStartDeliveryStreamName:
         $ref: '#/definitions/DeliveryStreamName'
-        description: The name of the delivery stream to start the list with.
+        description: The list of delivery streams returned by this call to <code>ListDeliveryStreams</code> will start with the delivery stream whose name comes alphabetically immediately after the name you specify in <code>ExclusiveStartDeliveryStreamName</code>.
   ListTagsForDeliveryStreamOutput:
     type: object
     required:
@@ -612,6 +673,9 @@ definitions:
       RecordId:
         $ref: '#/definitions/PutResponseRecordId'
         description: The ID of the record.
+      Encrypted:
+        $ref: '#/definitions/BooleanObject'
+        description: Indicates whether server-side encryption (SSE) was enabled during this operation.
   PutRecordInput:
     type: object
     required:
@@ -624,13 +688,7 @@ definitions:
       Record:
         $ref: '#/definitions/Record'
         description: The record.
-  ServiceUnavailableException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: 'The service is unavailable. Back off and retry the operation. If you continue to see the exception, throughput limits for the delivery stream may have been exceeded. For more information about limits and how to request an increase, see <a href="http://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Data Firehose Limits</a>.'
+  ServiceUnavailableException: {}
   PutRecordBatchOutput:
     type: object
     required:
@@ -639,7 +697,10 @@ definitions:
     properties:
       FailedPutCount:
         $ref: '#/definitions/NonNegativeIntegerObject'
-        description: The number of records that might have failed processing.
+        description: The number of records that might have failed processing. This number might be greater than 0 even if the <a>PutRecordBatch</a> call succeeds. Check <code>FailedPutCount</code> to determine whether there are records that you need to resend.
+      Encrypted:
+        $ref: '#/definitions/BooleanObject'
+        description: Indicates whether server-side encryption (SSE) was enabled during this operation.
       RequestResponses:
         $ref: '#/definitions/PutRecordBatchResponseEntryList'
         description: 'The results array. For each record, the index of the response element is the same as the index used in the request array.'
@@ -655,6 +716,28 @@ definitions:
       Records:
         $ref: '#/definitions/PutRecordBatchRequestEntryList'
         description: One or more records.
+  StartDeliveryStreamEncryptionOutput:
+    type: object
+    properties: {}
+  StartDeliveryStreamEncryptionInput:
+    type: object
+    required:
+      - DeliveryStreamName
+    properties:
+      DeliveryStreamName:
+        $ref: '#/definitions/DeliveryStreamName'
+        description: The name of the delivery stream for which you want to enable server-side encryption (SSE).
+  StopDeliveryStreamEncryptionOutput:
+    type: object
+    properties: {}
+  StopDeliveryStreamEncryptionInput:
+    type: object
+    required:
+      - DeliveryStreamName
+    properties:
+      DeliveryStreamName:
+        $ref: '#/definitions/DeliveryStreamName'
+        description: The name of the delivery stream for which you want to disable server-side encryption (SSE).
   TagDeliveryStreamOutput:
     type: object
     properties: {}
@@ -719,13 +802,7 @@ definitions:
       SplunkDestinationUpdate:
         $ref: '#/definitions/SplunkDestinationUpdate'
         description: Describes an update for a destination in Splunk.
-  ConcurrentModificationException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A message that provides information about the error.
-    description: Another modification has already happened. Fetch <b>VersionId</b> again and use it to update the destination.
+  ConcurrentModificationException: {}
   AWSKMSKeyARN:
     type: string
     pattern: 'arn:.*'
@@ -802,8 +879,6 @@ definitions:
       - GZIP
       - ZIP
       - Snappy
-  ErrorMessage:
-    type: string
   DataTableName:
     type: string
     minLength: 1
@@ -1040,6 +1115,12 @@ definitions:
         $ref: '#/definitions/CloudWatchLoggingOptions'
         description: The Amazon CloudWatch logging options for your delivery stream.
     description: Describes the configuration of a destination in Splunk.
+  TagDeliveryStreamInputTagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+    maxItems: 50
   DeliveryStreamARN:
     type: string
     pattern: 'arn:.*'
@@ -1110,6 +1191,13 @@ definitions:
       - CREATING
       - DELETING
       - ACTIVE
+  DeliveryStreamEncryptionConfiguration:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/DeliveryStreamEncryptionStatus'
+        description: 'For a full description of the different values of this status, see <a>StartDeliveryStreamEncryption</a> and <a>StopDeliveryStreamEncryption</a>.'
+    description: Indicates the server-side encryption (SSE) status for the delivery stream.
   DeliveryStreamVersionId:
     type: string
     pattern: '[0-9]+'
@@ -1149,6 +1237,9 @@ definitions:
       DeliveryStreamStatus:
         $ref: '#/definitions/DeliveryStreamStatus'
         description: The status of the delivery stream.
+      DeliveryStreamEncryptionConfiguration:
+        $ref: '#/definitions/DeliveryStreamEncryptionConfiguration'
+        description: Indicates the server-side encryption (SSE) status for the delivery stream.
       DeliveryStreamType:
         $ref: '#/definitions/DeliveryStreamType'
         description: '<p>The delivery stream type. This can be one of the following values:</p> <ul> <li> <p> <code>DirectPut</code>: Provider applications access the delivery stream directly.</p> </li> <li> <p> <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis data stream as a source.</p> </li> </ul>'
@@ -1171,6 +1262,13 @@ definitions:
         $ref: '#/definitions/BooleanObject'
         description: Indicates whether there are more destinations available to list.
     description: Contains information about a delivery stream.
+  DeliveryStreamEncryptionStatus:
+    type: string
+    enum:
+      - ENABLED
+      - ENABLING
+      - DISABLED
+      - DISABLING
   DeliveryStreamNameList:
     type: array
     items:
@@ -1573,6 +1671,8 @@ definitions:
     description: Describes the encryption for a destination in Amazon S3.
   ErrorCode:
     type: string
+  ErrorMessage:
+    type: string
   Prefix:
     type: string
   S3BackupMode:
@@ -1863,7 +1963,7 @@ definitions:
     properties:
       Data:
         $ref: '#/definitions/Data'
-        description: 'The data blob, which is base64-encoded when the blob is serialized. The maximum size of the data blob, before base64-encoding, is 1,000 KB.'
+        description: 'The data blob, which is base64-encoded when the blob is serialized. The maximum size of the data blob, before base64-encoding, is 1,000 KiB.'
     description: The unit of data in a delivery stream.
   PutResponseRecordId:
     type: string
@@ -1989,12 +2089,6 @@ definitions:
     type: string
     minLength: 0
     maxLength: 256
-  TagDeliveryStreamInputTagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-    maxItems: 50
   TagKeyList:
     type: array
     items:
