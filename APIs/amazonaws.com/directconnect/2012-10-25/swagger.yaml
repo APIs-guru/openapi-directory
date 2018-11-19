@@ -432,7 +432,7 @@ paths:
   '/#CreateBGPPeer':
     post:
       operationId: CreateBGPPeer
-      description: '<p>Creates a BGP peer on the specified virtual interface.</p> <p>The BGP peer cannot be in the same address family (IPv4/IPv6) of an existing BGP peer on the virtual interface.</p> <p>You must create a BGP peer for the corresponding address family in order to access AWS resources that also use that address family.</p> <p>When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p> <p>For a public virtual interface, the Autonomous System Number (ASN) must be private or already whitelisted for the virtual interface.</p>'
+      description: '<p>Creates a BGP peer on the specified virtual interface.</p> <p>You must create a BGP peer for the corresponding address family (IPv4/IPv6) in order to access AWS resources that also use that address family.</p> <p>If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot be in the same address family as an existing BGP peer on the virtual interface.</p> <p>When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p> <p>For a public virtual interface, the Autonomous System Number (ASN) must be private or already whitelisted for the virtual interface.</p>'
       responses:
         '200':
           description: Success
@@ -696,7 +696,7 @@ paths:
   '/#DeleteBGPPeer':
     post:
       operationId: DeleteBGPPeer
-      description: <p>Deletes the BGP peer on the specified virtual interface with the specified customer address and ASN.</p> <p>You cannot delete the last BGP peer from a virtual interface.</p>
+      description: <p>Deletes the specified BGP peer on the specified virtual interface with the specified customer address and ASN.</p> <p>You cannot delete the last BGP peer from a virtual interface.</p>
       responses:
         '200':
           description: Success
@@ -1626,6 +1626,9 @@ definitions:
       awsDeviceV2:
         $ref: '#/definitions/AwsDeviceV2'
         description: The Direct Connect endpoint on which the physical connection terminates.
+      hasLogicalRedundancy:
+        $ref: '#/definitions/HasLogicalRedundancy'
+        description: Indicates whether the connection supports a secondary BGP peer in the same address family (IPv4/IPv6).
     description: Information about an AWS Direct Connect connection.
   AllocateConnectionOnInterconnectRequest:
     type: object
@@ -1971,6 +1974,9 @@ definitions:
       awsDeviceV2:
         $ref: '#/definitions/AwsDeviceV2'
         description: The Direct Connect endpoint on which the physical connection terminates.
+      hasLogicalRedundancy:
+        $ref: '#/definitions/HasLogicalRedundancy'
+        description: Indicates whether the interconnect supports a secondary BGP in the same address family (IPv4/IPv6).
     description: Information about an interconnect.
   CreateInterconnectRequest:
     type: object
@@ -2036,6 +2042,9 @@ definitions:
       jumboFrameCapable:
         $ref: '#/definitions/JumboFrameCapable'
         description: Indicates whether jumbo frames (9001 MTU) are supported.
+      hasLogicalRedundancy:
+        $ref: '#/definitions/HasLogicalRedundancy'
+        description: Indicates whether the LAG supports a secondary BGP peer in the same address family (IPv4/IPv6).
     description: Information about a link aggregation group (LAG).
   CreateLagRequest:
     type: object
@@ -2102,6 +2111,9 @@ definitions:
       customerAddress:
         $ref: '#/definitions/CustomerAddress'
         description: The IP address assigned to the customer interface.
+      bgpPeerId:
+        $ref: '#/definitions/BGPPeerId'
+        description: The ID of the BGP peer.
   DeleteConnectionRequest:
     type: object
     required:
@@ -2568,6 +2580,8 @@ definitions:
     type: string
   BGPAuthKey:
     type: string
+  BGPPeerId:
+    type: string
   CustomerAddress:
     type: string
   BGPPeerState:
@@ -2586,6 +2600,9 @@ definitions:
   BGPPeer:
     type: object
     properties:
+      bgpPeerId:
+        $ref: '#/definitions/BGPPeerId'
+        description: The ID of the BGP peer.
       asn:
         $ref: '#/definitions/ASN'
         description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
@@ -2656,6 +2673,12 @@ definitions:
     format: date-time
   JumboFrameCapable:
     type: boolean
+  HasLogicalRedundancy:
+    type: string
+    enum:
+      - unknown
+      - 'yes'
+      - 'no'
   ConnectionList:
     type: array
     items:

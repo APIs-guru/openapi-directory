@@ -239,7 +239,7 @@ paths:
   '/{Bucket}?cors':
     delete:
       operationId: DeleteBucketCors
-      description: 'Deletes the cors configuration information set for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html</p>'
+      description: 'Deletes the CORS configuration information set for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html</p>'
       responses:
         '200':
           description: Success
@@ -353,7 +353,7 @@ paths:
   '/{Bucket}?replication':
     delete:
       operationId: DeleteBucketReplication
-      description: Deletes the replication configuration from the bucket.
+      description: ' Deletes the replication configuration from the bucket. For information about replication configuration, see <a href=" https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html">Cross-Region Replication (CRR)</a> in the <i>Amazon S3 Developer Guide</i>. '
       responses:
         '200':
           description: Success
@@ -478,6 +478,25 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?publicAccessBlock#DeletePublicAccessBlock':
+    delete:
+      operationId: DeletePublicAccessBlock
+      description: Removes the Public Access Block configuration for an Amazon S3 bucket.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeletePublicAccessBlockRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}?accelerate#GetBucketAccelerateConfiguration':
     get:
       operationId: GetBucketAccelerateConfiguration
@@ -544,7 +563,7 @@ paths:
   '/{Bucket}?cors#GetBucketCors':
     get:
       operationId: GetBucketCors
-      description: 'Returns the cors configuration for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html</p>'
+      description: 'Returns the CORS configuration for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html</p>'
       responses:
         '200':
           description: Success
@@ -772,10 +791,31 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?policyStatus#GetBucketPolicyStatus':
+    get:
+      operationId: GetBucketPolicyStatus
+      description: 'Retrieves the policy status for an Amazon S3 bucket, indicating whether the bucket is public.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketPolicyStatusOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketPolicyStatusRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}?replication#GetBucketReplication':
     get:
       operationId: GetBucketReplication
-      description: Returns the replication configuration of a bucket.
+      description: '<p>Returns the replication configuration of a bucket.</p> <note> <p> It can take a while to propagate the put or delete a replication configuration to all Amazon S3 systems. Therefore, a get request soon after put or delete can return a wrong result. </p> </note>'
       responses:
         '200':
           description: Success
@@ -980,6 +1020,27 @@ paths:
           type: string
           required: true
         - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?publicAccessBlock#GetPublicAccessBlock':
+    get:
+      operationId: GetPublicAccessBlock
+      description: Retrieves the Public Access Block configuration for an Amazon S3 bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetPublicAccessBlockOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetPublicAccessBlockRequest'
+        - name: Bucket
           in: path
           type: string
           required: true
@@ -1390,7 +1451,7 @@ paths:
   '/{Bucket}?cors#PutBucketCors':
     put:
       operationId: PutBucketCors
-      description: 'Sets the cors configuration for a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTcors.html</p>'
+      description: 'Sets the CORS configuration for a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTcors.html</p>'
       responses:
         '200':
           description: Success
@@ -1580,7 +1641,7 @@ paths:
   '/{Bucket}?replication#PutBucketReplication':
     put:
       operationId: PutBucketReplication
-      description: ' Creates a new replication configuration (or replaces an existing one, if present). For more information, see <a href=" https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html">Cross-Region Replication (CRR)</a> in the Amazon S3 Developer Guide. '
+      description: ' Creates a replication configuration or replaces an existing one. For more information, see <a href=" https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html">Cross-Region Replication (CRR)</a> in the <i>Amazon S3 Developer Guide</i>. '
       responses:
         '200':
           description: Success
@@ -1746,6 +1807,25 @@ paths:
           type: string
           required: true
         - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?publicAccessBlock#PutPublicAccessBlock':
+    put:
+      operationId: PutPublicAccessBlock
+      description: Creates or modifies the Public Access Block configuration for an Amazon S3 bucket.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutPublicAccessBlockRequest'
+        - name: Bucket
           in: path
           type: string
           required: true
@@ -2011,8 +2091,8 @@ definitions:
   DeleteObjectRequest:
     type: object
     example:
-      Bucket: ExampleBucket
-      Key: HappyFace.jpg
+      Bucket: examplebucket
+      Key: objectkey.jpg
     properties: {}
   DeleteObjectTaggingOutput:
     type: object
@@ -2029,12 +2109,10 @@ definitions:
     type: object
     example:
       Deleted:
-        - DeleteMarker: 'true'
-          DeleteMarkerVersionId: A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F
-          Key: objectkey1
-        - DeleteMarker: 'true'
-          DeleteMarkerVersionId: iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt
-          Key: objectkey2
+        - Key: HappyFace.jpg
+          VersionId: yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd
+        - Key: HappyFace.jpg
+          VersionId: 2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b
     properties:
       Deleted:
         $ref: '#/definitions/DeletedObjects'
@@ -2048,14 +2126,19 @@ definitions:
       Bucket: examplebucket
       Delete:
         Objects:
-          - Key: objectkey1
-          - Key: objectkey2
+          - Key: HappyFace.jpg
+            VersionId: 2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b
+          - Key: HappyFace.jpg
+            VersionId: yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd
         Quiet: false
     properties:
       Delete:
         $ref: '#/definitions/Delete'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  DeletePublicAccessBlockRequest:
+    type: object
+    properties: {}
   GetBucketAccelerateConfigurationOutput:
     type: object
     properties:
@@ -2221,7 +2304,7 @@ definitions:
         $ref: '#/definitions/QueueConfigurationList'
       LambdaFunctionConfigurations:
         $ref: '#/definitions/LambdaFunctionConfigurationList'
-    description: 'Container for specifying the notification configuration of the bucket. If this element is empty, notifications are turned off on the bucket.'
+    description: 'A container for specifying the notification configuration of the bucket. If this element is empty, notifications are turned off for the bucket.'
   GetBucketPolicyOutput:
     type: object
     example:
@@ -2234,6 +2317,15 @@ definitions:
     type: object
     example:
       Bucket: examplebucket
+    properties: {}
+  GetBucketPolicyStatusOutput:
+    type: object
+    properties:
+      PolicyStatus:
+        $ref: '#/definitions/PolicyStatus'
+        description: The public-policy status for this bucket.
+  GetBucketPolicyStatusRequest:
+    type: object
     properties: {}
   GetBucketReplicationOutput:
     type: object
@@ -2415,6 +2507,15 @@ definitions:
     example:
       Bucket: examplebucket
       Key: HappyFace.jpg
+    properties: {}
+  GetPublicAccessBlockOutput:
+    type: object
+    properties:
+      PublicAccessBlockConfiguration:
+        $ref: '#/definitions/PublicAccessBlockConfiguration'
+        description: The Public Access Block configuration currently in effect for this Amazon S3 bucket.
+  GetPublicAccessBlockRequest:
+    type: object
     properties: {}
   HeadBucketRequest:
     type: object
@@ -3132,6 +3233,16 @@ definitions:
         $ref: '#/definitions/Tagging'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutPublicAccessBlockRequest:
+    type: object
+    required:
+      - PublicAccessBlockConfiguration
+    properties:
+      PublicAccessBlockConfiguration:
+        $ref: '#/definitions/PublicAccessBlockConfiguration'
+        description: The Public Access Block configuration that you want to apply to this Amazon S3 bucket.
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   RestoreObjectOutput:
     type: object
     example: {}
@@ -3169,7 +3280,7 @@ definitions:
         description: The expression that is used to query the object.
       ExpressionType:
         $ref: '#/definitions/ExpressionType'
-        description: 'The type of the provided expression (e.g., SQL).'
+        description: 'The type of the provided expression (for example., SQL).'
       RequestProgress:
         $ref: '#/definitions/RequestProgress'
         description: Specifies if periodic request progress information should be enabled.
@@ -3179,7 +3290,7 @@ definitions:
       OutputSerialization:
         $ref: '#/definitions/OutputSerialization'
         description: Describes the format of the data that you want Amazon S3 to return in response.
-    description: 'Request to filter the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response. For more information, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html">S3Select API Documentation</a>.'
+    description: 'Request to filter the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records. It returns only records that match the specified SQL expression. You must also specify the data serialization format for the response. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html">S3Select API Documentation</a>.'
   UploadPartOutput:
     type: object
     example:
@@ -3201,8 +3312,8 @@ definitions:
     type: object
     example:
       CopyPartResult:
-        ETag: '"65d16d19e65a7508a51f043180edcc36"'
-        LastModified: '2016-12-29T21:44:28.000Z'
+        ETag: '"b0c6f0e7e054ab8fa2536a2677f8734d"'
+        LastModified: '2016-12-29T21:24:43.000Z'
     properties:
       CopyPartResult:
         $ref: '#/definitions/CopyPartResult'
@@ -3211,9 +3322,8 @@ definitions:
     example:
       Bucket: examplebucket
       CopySource: /bucketname/sourceobjectkey
-      CopySourceRange: bytes=1-100000
       Key: examplelargeobject
-      PartNumber: '2'
+      PartNumber: '1'
       UploadId: exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--
     properties: {}
   AbortDate:
@@ -3291,7 +3401,7 @@ definitions:
       Owner:
         $ref: '#/definitions/OwnerOverride'
         description: The override value for the owner of the replica object.
-    description: Container for information regarding the access control for replicas.
+    description: A container for information about access control for replicas.
   AccountId:
     type: string
   AllowQuotedRecordDelimiter:
@@ -3575,16 +3685,16 @@ definitions:
         description: 'Describes the first line of input. Valid values: None, Ignore, Use.'
       Comments:
         $ref: '#/definitions/Comments'
-        description: Single character used to indicate a row should be ignored when present at the start of a row.
+        description: The single character used to indicate a row should be ignored when present at the start of a row.
       QuoteEscapeCharacter:
         $ref: '#/definitions/QuoteEscapeCharacter'
-        description: Single character used for escaping the quote character inside an already escaped value.
+        description: The single character used for escaping the quote character inside an already escaped value.
       RecordDelimiter:
         $ref: '#/definitions/RecordDelimiter'
-        description: Value used to separate individual records.
+        description: The value used to separate individual records.
       FieldDelimiter:
         $ref: '#/definitions/FieldDelimiter'
-        description: Value used to separate individual fields in a record.
+        description: The value used to separate individual fields in a record.
       QuoteCharacter:
         $ref: '#/definitions/QuoteCharacter'
         description: Value used for escaping where the field delimiter is part of the value.
@@ -3605,16 +3715,16 @@ definitions:
         description: Indicates whether or not all output fields should be quoted.
       QuoteEscapeCharacter:
         $ref: '#/definitions/QuoteEscapeCharacter'
-        description: Single character used for escaping the quote character inside an already escaped value.
+        description: Th single character used for escaping the quote character inside an already escaped value.
       RecordDelimiter:
         $ref: '#/definitions/RecordDelimiter'
-        description: Value used to separate individual records.
+        description: The value used to separate individual records.
       FieldDelimiter:
         $ref: '#/definitions/FieldDelimiter'
-        description: Value used to separate individual fields in a record.
+        description: The value used to separate individual fields in a record.
       QuoteCharacter:
         $ref: '#/definitions/QuoteCharacter'
-        description: Value used for escaping where the field delimiter is part of the value.
+        description: The value used for escaping where the field delimiter is part of the value.
     description: Describes how CSV-formatted results are formatted.
   CacheControl:
     type: string
@@ -3622,7 +3732,7 @@ definitions:
     type: string
   NotificationId:
     type: string
-    description: 'Optional unique identifier for configurations in a notification configuration. If you don''t provide one, Amazon S3 will assign an ID.'
+    description: 'An optional unique identifier for configurations in a notification configuration. If you don''t provide one, Amazon S3 will assign an ID.'
   Event:
     type: string
     enum:
@@ -3635,7 +3745,7 @@ definitions:
       - 's3:ObjectRemoved:*'
       - 's3:ObjectRemoved:Delete'
       - 's3:ObjectRemoved:DeleteMarkerCreated'
-    description: Bucket event for which to send notifications.
+    description: The bucket event for which to send notifications.
   EventList:
     type: array
     items:
@@ -3913,7 +4023,7 @@ definitions:
     properties:
       Status:
         $ref: '#/definitions/DeleteMarkerReplicationStatus'
-        description: '<p>The status of the delete marker replication.</p> <note> <p> In the current implementation, Amazon S3 does not replicate the delete markers. Therefore, the status must be <code>Disabled</code>. </p> </note>'
+        description: '<p>The status of the delete marker replication.</p> <note> <p> In the current implementation, Amazon S3 doesn''t replicate the delete markers. The status must be <code>Disabled</code>. </p> </note>'
     description: Specifies whether Amazon S3 should replicate delete makers.
   DeleteMarkerVersionId:
     type: string
@@ -3957,8 +4067,8 @@ definitions:
     properties:
       ReplicaKmsKeyID:
         $ref: '#/definitions/ReplicaKmsKeyID'
-        description: ' The ID of the AWS KMS key for the region where the destination bucket resides. Amazon S3 uses this key to encrypt the replica object. '
-    description: Container for information regarding encryption based configuration for replicas.
+        description: 'The ID of the AWS KMS key for the AWS Region where the destination bucket resides. Amazon S3 uses this key to encrypt the replica object. '
+    description: A container for information about the encryption-based configuration for replicas.
   Destination:
     type: object
     required:
@@ -3966,20 +4076,20 @@ definitions:
     properties:
       Bucket:
         $ref: '#/definitions/BucketName'
-        description: '<p> Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule. </p> <p> If you have multiple rules in your replication configuration, all rules must specify the same bucket as the destination. A replication configuration can replicate objects only to one destination bucket. </p>'
+        description: '<p> The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule. </p> <p> If there are multiple rules in your replication configuration, all rules must specify the same bucket as the destination. A replication configuration can replicate objects to only one destination bucket. </p>'
       Account:
         $ref: '#/definitions/AccountId'
-        description: '<p> Account ID of the destination bucket. Currently Amazon S3 verifies this value only if Access Control Translation is enabled. </p> <p> In a cross-account scenario, if you tell Amazon S3 to change replica ownership to the AWS account that owns the destination bucket by adding the <code>AccessControlTranslation</code> element, this is the account ID of the destination bucket owner. </p>'
+        description: '<p>The account ID of the destination bucket. Currently, Amazon S3 verifies this value only if Access Control Translation is enabled. </p> <p>In a cross-account scenario, if you change replica ownership to the AWS account that owns the destination bucket by adding the <code>AccessControlTranslation</code> element, this is the account ID of the owner of the destination bucket. </p>'
       StorageClass:
         $ref: '#/definitions/StorageClass'
-        description: The class of storage used to store the object.
+        description: ' The class of storage used to store the object. By default Amazon S3 uses storage class of the source object when creating a replica. '
       AccessControlTranslation:
         $ref: '#/definitions/AccessControlTranslation'
-        description: '<p> Container for information regarding the access control for replicas. </p> <p> Use only in a cross-account scenario, where source and destination bucket owners are not the same, when you want to change replica ownership to the AWS account that owns the destination bucket. If you don''t add this element to the replication configuration, the replicas are owned by same AWS account that owns the source object. </p>'
+        description: '<p>A container for information about access control for replicas. </p> <p>Use this element only in a cross-account scenario where source and destination bucket owners are not the same to change replica ownership to the AWS account that owns the destination bucket. If you don''t add this element to the replication configuration, the replicas are owned by same AWS account that owns the source object. </p>'
       EncryptionConfiguration:
         $ref: '#/definitions/EncryptionConfiguration'
-        description: ' Container that provides encryption-related information. You must specify this element if the <code>SourceSelectionCriteria</code> is specified. '
-    description: Container for replication destination information.
+        description: 'A container that provides information about encryption. If <code>SourceSelectionCriteria</code> is specified, you must specify this element. '
+    description: A container for information about the replication destination.
   DisplayName:
     type: string
   EmailAddress:
@@ -4063,13 +4173,13 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/FilterRuleName'
-        description: 'Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the Amazon Simple Storage Service Developer Guide.'
+        description: 'The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum prefix length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
       Value:
         $ref: '#/definitions/FilterRuleValue'
-    description: Container for key value pair that defines the criteria for the filter rule.
+    description: A container for a key value pair that defines the criteria for the filter rule.
   FilterRuleList:
     type: array
-    description: A list of containers for key value pair that defines the criteria for the filter rule.
+    description: A list of containers for the key value pair that defines the criteria for the filter rule.
     items:
       $ref: '#/definitions/FilterRule'
     xml:
@@ -4132,6 +4242,13 @@ definitions:
         description: 'Specifies a metrics configuration filter. The metrics configuration will only include objects that meet the filter''s criteria. A filter must be a prefix, a tag, or a conjunction (MetricsAndOperator).'
   Policy:
     type: string
+  PolicyStatus:
+    type: object
+    properties:
+      IsPublic:
+        $ref: '#/definitions/IsPublic'
+        description: The public-policy status for this bucket. <code>TRUE</code> indicates that this bucket is public. <code>FALSE</code> indicates that the bucket is not public.
+    description: The container element for this bucket's public-policy status.
   ReplicationConfiguration:
     type: object
     required:
@@ -4140,11 +4257,11 @@ definitions:
     properties:
       Role:
         $ref: '#/definitions/Role'
-        description: Amazon Resource Name (ARN) of an IAM role for Amazon S3 to assume when replicating the objects.
+        description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 can assume when replicating the objects.
       Rules:
         $ref: '#/definitions/ReplicationRules'
-        description: 'Container for one or more replication rules. Replication configuration must have at least one rule and can contain up to 1,000 rules. '
-    description: 'Container for replication rules. You can add as many as 1,000 rules. Total replication configuration size can be up to 2 MB.'
+        description: 'A container for one or more replication rules. A replication configuration must have at least one rule and can contain a maximum of 1,000 rules. '
+    description: 'A container for replication rules. You can add up to 1,000 rules. The maximum size of a replication configuration is 2 MB.'
   Payer:
     type: string
     enum:
@@ -4218,6 +4335,22 @@ definitions:
   ResponseExpires:
     type: string
     format: date-time
+  PublicAccessBlockConfiguration:
+    type: object
+    properties:
+      BlockPublicAcls:
+        $ref: '#/definitions/Setting'
+        description: '<p/> <p>Specifies whether Amazon S3 should block public ACLs for this bucket. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls will fail if the specified ACL allows public access.</p> </li> <li> <p>PUT Object calls will fail if the request includes an object ACL.</p> </li> </ul> <p>Note that enabling this setting doesn''t affect existing policies or ACLs.</p>'
+      IgnorePublicAcls:
+        $ref: '#/definitions/Setting'
+        description: <p>Specifies whether Amazon S3 should ignore public ACLs for this bucket. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on this bucket and any objects that it contains. </p> <p>Note that enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p>
+      BlockPublicPolicy:
+        $ref: '#/definitions/Setting'
+        description: <p>Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Note that enabling this setting doesn't affect existing bucket policies.</p>
+      RestrictPublicBuckets:
+        $ref: '#/definitions/Setting'
+        description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for this bucket. If this element is set to <code>TRUE</code>, then only the bucket owner and AWS Services can access this bucket if it has a public policy.</p> <p>Note that enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>'
+    description: '<p>The container element for all Public Access Block configuration options. You can enable the configuration options in any combination.</p> <p>Amazon S3 considers a bucket policy public unless at least one of the following conditions is true:</p> <ol> <li> <p>The policy limits access to a set of CIDRs using <code>aws:SourceIp</code>. For more information on CIDR, see <a href="http://www.rfc-editor.org/rfc/rfc4632.txt">http://www.rfc-editor.org/rfc/rfc4632.txt</a> </p> </li> <li> <p>The policy grants permissions, not including any "bad actions," to one of the following:</p> <ul> <li> <p>A fixed AWS principal, user, role, or service principal</p> </li> <li> <p>A fixed <code>aws:SourceArn</code> </p> </li> <li> <p>A fixed <code>aws:SourceVpc</code> </p> </li> <li> <p>A fixed <code>aws:SourceVpce</code> </p> </li> <li> <p>A fixed <code>aws:SourceOwner</code> </p> </li> <li> <p>A fixed <code>aws:SourceAccount</code> </p> </li> <li> <p>A fixed value of <code>s3:x-amz-server-side-encryption-aws-kms-key-id</code> </p> </li> <li> <p>A fixed value of <code>aws:userid</code> outside the pattern "<code>AROLEID:*</code>"</p> </li> </ul> </li> </ol> <p>"Bad actions" are those that could expose the data inside a bucket to reads or writes by the public. These actions are <code>s3:Get*</code>, <code>s3:List*</code>, <code>s3:AbortMultipartUpload</code>, <code>s3:Delete*</code>, <code>s3:Put*</code>, and <code>s3:RestoreObject</code>.</p> <p>The star notation for bad actions indicates that all matching operations are considered bad actions. For example, because <code>s3:Get*</code> is a bad action, <code>s3:GetObject</code>, <code>s3:GetObjectVersion</code>, and <code>s3:GetObjectAcl</code> are all bad actions.</p>'
   Tier:
     type: string
     enum:
@@ -4389,7 +4522,7 @@ definitions:
   SSES3:
     type: object
     properties: {}
-    description: Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+    description: Specifies the use of SSE-S3 to encrypt delivered Inventory reports.
   SSEKMS:
     type: object
     required:
@@ -4398,16 +4531,16 @@ definitions:
       KeyId:
         $ref: '#/definitions/SSEKMSKeyId'
         description: Specifies the ID of the AWS Key Management Service (KMS) master encryption key to use for encrypting Inventory reports.
-    description: Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
+    description: Specifies the use of SSE-KMS to encrypt delivered Inventory reports.
   InventoryEncryption:
     type: object
     properties:
       SSES3:
         $ref: '#/definitions/SSES3'
-        description: Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+        description: Specifies the use of SSE-S3 to encrypt delivered Inventory reports.
       SSEKMS:
         $ref: '#/definitions/SSEKMS'
-        description: Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
+        description: Specifies the use of SSE-KMS to encrypt delivered Inventory reports.
     description: Contains the type of server-side encryption used to encrypt the inventory results.
   InventoryFormat:
     type: string
@@ -4429,6 +4562,8 @@ definitions:
       - IsMultipartUploaded
       - ReplicationStatus
       - EncryptionStatus
+  IsPublic:
+    type: boolean
   IsTruncated:
     type: boolean
   JSONType:
@@ -4453,7 +4588,7 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/S3KeyFilter'
-    description: 'Container for object key name filtering rules. For information about key name filtering, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the Amazon Simple Storage Service Developer Guide.'
+    description: 'A container for object key name filtering rules. For information about key name filtering, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
   LambdaFunctionConfiguration:
     type: object
     required:
@@ -4464,12 +4599,12 @@ definitions:
         $ref: '#/definitions/NotificationId'
       LambdaFunctionArn:
         $ref: '#/definitions/LambdaFunctionArn'
-        description: Lambda cloud function ARN that Amazon S3 can invoke when it detects events of the specified type.
+        description: The Amazon Resource Name (ARN) of the Lambda cloud function that Amazon S3 can invoke when it detects events of the specified type.
       Events:
         $ref: '#/definitions/EventList'
       Filter:
         $ref: '#/definitions/NotificationConfigurationFilter'
-    description: Container for specifying the AWS Lambda notification configuration.
+    description: A container for specifying the configuration for AWS Lambda notifications.
   LambdaFunctionConfigurationList:
     type: array
     items:
@@ -4708,7 +4843,7 @@ definitions:
       StorageClass:
         $ref: '#/definitions/TransitionStorageClass'
         description: The class of storage used to store the object.
-    description: 'Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA or GLACIER storage class at a specific period in the object''s lifetime.'
+    description: 'Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, or GLACIER storage class at a specific period in the object''s lifetime.'
   TopicConfigurationList:
     type: array
     items:
@@ -4750,7 +4885,7 @@ definitions:
     properties:
       FilterRules:
         $ref: '#/definitions/FilterRuleList'
-    description: Container for object key name prefix and suffix filtering rules.
+    description: A container for object key name prefix and suffix filtering rules.
   Size:
     type: integer
   ObjectStorageClass:
@@ -4878,7 +5013,7 @@ definitions:
         description: Entity tag returned when the part was uploaded.
       Size:
         $ref: '#/definitions/Size'
-        description: Size of the uploaded part data.
+        description: Size in bytes of the uploaded part data.
   Priority:
     type: integer
   Progress:
@@ -4886,13 +5021,13 @@ definitions:
     properties:
       BytesScanned:
         $ref: '#/definitions/BytesScanned'
-        description: Current number of object bytes scanned.
+        description: The current number of object bytes scanned.
       BytesProcessed:
         $ref: '#/definitions/BytesProcessed'
-        description: Current number of uncompressed object bytes processed.
+        description: The current number of uncompressed object bytes processed.
       BytesReturned:
         $ref: '#/definitions/BytesReturned'
-        description: Current number of bytes of records payload data returned.
+        description: The current number of bytes of records payload data returned.
   ProgressEvent:
     type: object
     properties:
@@ -4904,6 +5039,8 @@ definitions:
     enum:
       - http
       - https
+  Setting:
+    type: boolean
   RequestPaymentConfiguration:
     type: object
     required:
@@ -4951,12 +5088,12 @@ definitions:
         $ref: '#/definitions/NotificationId'
       QueueArn:
         $ref: '#/definitions/QueueArn'
-        description: Amazon SQS queue ARN to which Amazon S3 will publish a message when it detects events of specified type.
+        description: The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 will publish a message when it detects events of the specified type.
       Events:
         $ref: '#/definitions/EventList'
       Filter:
         $ref: '#/definitions/NotificationConfigurationFilter'
-    description: Container for specifying an configuration when you want Amazon S3 to publish events to an Amazon Simple Queue Service (Amazon SQS) queue.
+    description: A container for specifying the configuration for publication of messages to an Amazon Simple Queue Service (Amazon SQS) queue.when Amazon S3 detects specified events.
   RecordsEvent:
     type: object
     properties:
@@ -4998,14 +5135,14 @@ definitions:
     properties:
       Prefix:
         $ref: '#/definitions/Prefix'
-        description: Object keyname prefix that identifies subset of objects to which the rule applies.
+        description: An object keyname prefix that identifies the subset of objects to which the rule applies.
       Tag:
         $ref: '#/definitions/Tag'
-        description: <p>Container for specifying a tag key and value. </p> <p>The rule applies only to objects having the tag in its tagset.</p>
+        description: <p>A container for specifying a tag key and value. </p> <p>The rule applies only to objects that have the tag in their tag set.</p>
       And:
         $ref: '#/definitions/ReplicationRuleAndOperator'
-        description: '<p>Container for specifying rule filters. These filters determine the subset of objects to which the rule applies. The element is required only if you specify more than one filter. For example: </p> <ul> <li> <p>You specify both a <code>Prefix</code> and a <code>Tag</code> filters. Then you wrap these in an <code>And</code> tag.</p> </li> <li> <p>You specify filter based on multiple tags. Then you wrap the <code>Tag</code> elements in an <code>And</code> tag.</p> </li> </ul>'
-    description: 'Filter that identifies subset of objects to which the replication rule applies. A <code>Filter</code> must specify exactly one <code>Prefix</code>, <code>Tag</code>, or an <code>And</code> child element.'
+        description: '<p>A container for specifying rule filters. The filters determine the subset of objects to which the rule applies. This element is required only if you specify more than one filter. For example: </p> <ul> <li> <p>If you specify both a <code>Prefix</code> and a <code>Tag</code> filter, wrap these filters in an <code>And</code> tag.</p> </li> <li> <p>If you specify a filter based on multiple tags, wrap the <code>Tag</code> elements in an <code>And</code> tag.</p> </li> </ul>'
+    description: 'A filter that identifies the subset of objects to which the replication rule applies. A <code>Filter</code> must specify exactly one <code>Prefix</code>, <code>Tag</code>, or an <code>And</code> child element.'
   ReplicationRuleStatus:
     type: string
     enum:
@@ -5016,8 +5153,8 @@ definitions:
     properties:
       SseKmsEncryptedObjects:
         $ref: '#/definitions/SseKmsEncryptedObjects'
-        description: ' Container for filter information of selection of KMS Encrypted S3 objects. The element is required if you include <code>SourceSelectionCriteria</code> in the replication configuration. '
-    description: Container for filters that define which source objects should be replicated.
+        description: ' A container for filter information for the selection of S3 objects encrypted with AWS KMS. If you include <code>SourceSelectionCriteria</code> in the replication configuration, this element is required. '
+    description: A container for filters that define which source objects should be replicated.
   ReplicationRule:
     type: object
     required:
@@ -5026,27 +5163,27 @@ definitions:
     properties:
       ID:
         $ref: '#/definitions/ID'
-        description: Unique identifier for the rule. The value cannot be longer than 255 characters.
+        description: A unique identifier for the rule. The maximum value is 255 characters.
       Priority:
         $ref: '#/definitions/Priority'
-        description: '<p>The priority associated with the rule. If you specify multiple rules in a replication configuration, then Amazon S3 applies rule priority in the event there are conflicts (two or more rules identify the same object based on filter specified). The rule with higher priority takes precedence. For example,</p> <ul> <li> <p>Same object quality prefix based filter criteria If prefixes you specified in multiple rules overlap. </p> </li> <li> <p>Same object qualify tag based filter criteria specified in multiple rules</p> </li> </ul> <p>For more information, see <a href=" https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html">Cross-Region Replication (CRR)</a> in the Amazon S3 Developer Guide.</p>'
+        description: '<p>The priority associated with the rule. If you specify multiple rules in a replication configuration, Amazon S3 prioritizes the rules to prevent conflicts when filtering. If two or more rules identify the same object based on a specified filter, the rule with higher priority takes precedence. For example:</p> <ul> <li> <p>Same object quality prefix based filter criteria If prefixes you specified in multiple rules overlap </p> </li> <li> <p>Same object qualify tag based filter criteria specified in multiple rules</p> </li> </ul> <p>For more information, see <a href=" https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html">Cross-Region Replication (CRR)</a> in the <i>Amazon S3 Developer Guide</i>.</p>'
       Prefix:
         $ref: '#/definitions/Prefix'
-        description: 'Object keyname prefix identifying one or more objects to which the rule applies. Maximum prefix length can be up to 1,024 characters. '
+        description: 'An object keyname prefix that identifies the object or objects to which the rule applies. The maximum prefix length is 1,024 characters. '
       Filter:
         $ref: '#/definitions/ReplicationRuleFilter'
       Status:
         $ref: '#/definitions/ReplicationRuleStatus'
-        description: The rule is ignored if status is not Enabled.
+        description: 'If status isn''t enabled, the rule is ignored.'
       SourceSelectionCriteria:
         $ref: '#/definitions/SourceSelectionCriteria'
-        description: '<p> Container that describes additional filters in identifying source objects that you want to replicate. Currently, Amazon S3 supports only the filter that you can specify for objects created with server-side encryption using an AWS KMS-managed key. You can choose to enable or disable replication of these objects. </p> <p> if you want Amazon S3 to replicate objects created with server-side encryption using AWS KMS-managed keys. </p>'
+        description: '<p>A container that describes additional filters for identifying the source objects that you want to replicate. You can choose to enable or disable the replication of these objects. Currently, Amazon S3 supports only the filter that you can specify for objects created with server-side encryption using an AWS KMS-Managed Key (SSE-KMS). </p> <p> If you want Amazon S3 to replicate objects created with server-side encryption using AWS KMS-Managed Keys. </p>'
       Destination:
         $ref: '#/definitions/Destination'
-        description: Container for replication destination information.
+        description: A container for information about the replication destination.
       DeleteMarkerReplication:
         $ref: '#/definitions/DeleteMarkerReplication'
-    description: Container for information about a particular replication rule.
+    description: A container for information about a specific replication rule.
   ReplicationRuleAndOperator:
     type: object
     properties:
@@ -5124,7 +5261,7 @@ definitions:
         description: 'A container for describing a condition that must be met for the specified redirect to apply. For example, 1. If request is for pages in the /docs folder, redirect to the /documents folder. 2. If request results in HTTP error 4xx, redirect request to another host where you might process the error.'
       Redirect:
         $ref: '#/definitions/Redirect'
-        description: 'Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can can specify a different error code to return.'
+        description: 'Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return.'
   Transition:
     type: object
     properties:
@@ -5222,8 +5359,8 @@ definitions:
     properties:
       Status:
         $ref: '#/definitions/SseKmsEncryptedObjectsStatus'
-        description: The replication for KMS encrypted S3 objects is disabled if status is not Enabled.
-    description: Container for filter information of selection of KMS Encrypted S3 objects.
+        description: ' If the status is not <code>Enabled</code>, replication for S3 objects encrypted with AWS KMS is disabled.'
+    description: A container for filter information for the selection of S3 objects encrypted with AWS KMS.
   SseKmsEncryptedObjectsStatus:
     type: string
     enum:
@@ -5234,13 +5371,13 @@ definitions:
     properties:
       BytesScanned:
         $ref: '#/definitions/BytesScanned'
-        description: Total number of object bytes scanned.
+        description: The total number of object bytes scanned.
       BytesProcessed:
         $ref: '#/definitions/BytesProcessed'
-        description: Total number of uncompressed object bytes processed.
+        description: The total number of uncompressed object bytes processed.
       BytesReturned:
         $ref: '#/definitions/BytesReturned'
-        description: Total number of bytes of records payload data returned.
+        description: The total number of bytes of records payload data returned.
   StorageClassAnalysisDataExport:
     type: object
     required:
@@ -5279,9 +5416,9 @@ definitions:
         $ref: '#/definitions/NotificationId'
       TopicArn:
         $ref: '#/definitions/TopicArn'
-        description: Amazon SNS topic ARN to which Amazon S3 will publish a message when it detects events of specified type.
+        description: The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 will publish a message when it detects events of the specified type.
       Events:
         $ref: '#/definitions/EventList'
       Filter:
         $ref: '#/definitions/NotificationConfigurationFilter'
-    description: Container for specifying the configuration when you want Amazon S3 to publish events to an Amazon Simple Notification Service (Amazon SNS) topic.
+    description: A container for specifying the configuration for publication of messages to an Amazon Simple Notification Service (Amazon SNS) topic.when Amazon S3 detects specified events.

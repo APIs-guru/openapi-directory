@@ -3166,7 +3166,7 @@ paths:
   '/#DescribeFleets':
     post:
       operationId: DescribeFleets
-      description: Describes one or more of your EC2 Fleet.
+      description: Describes one or more of your EC2 Fleets.
       responses:
         '200':
           description: Success
@@ -8733,6 +8733,12 @@ definitions:
       FleetId:
         $ref: '#/definitions/FleetIdentifier'
         description: The ID of the EC2 Fleet.
+      Errors:
+        $ref: '#/definitions/CreateFleetErrorsSet'
+        description: Information about the instances that could not be launched by the fleet. Valid only when <b>Type</b> is set to <code>instant</code>.
+      Instances:
+        $ref: '#/definitions/CreateFleetInstancesSet'
+        description: Information about the instances that were launched by the fleet. Valid only when <b>Type</b> is set to <code>instant</code>.
   CreateFleetRequest:
     type: object
     required:
@@ -8765,7 +8771,7 @@ definitions:
         description: Indicates whether running instances should be terminated when the EC2 Fleet expires.
       Type:
         $ref: '#/definitions/FleetType'
-        description: 'The type of request. Indicates whether the EC2 Fleet only <code>requests</code> the target capacity, or also attempts to <code>maintain</code> it. If you request a certain target capacity, EC2 Fleet only places the required requests. It does not attempt to replenish instances if capacity is diminished, and does not submit requests in alternative capacity pools if capacity is unavailable. To maintain a certain target capacity, EC2 Fleet places the required requests to meet this target capacity. It also automatically replenishes any interrupted Spot Instances. Default: <code>maintain</code>.'
+        description: 'The type of request. <code>instant</code> indicates whether the EC2 Fleet submits a one-time request for your desired capacity. <code>request</code> indicates whether the EC2 Fleet submits ongoing requests until your desired capacity is fulfilled, but does not attempt to submit requests in alternative capacity pools if capacity is unavailable or maintain the capacity. <code>maintain</code> indicates whether the EC2 Fleet submits ongoing requests until your desired capacity is fulfilled, and continues to maintain your desired capacity by replenishing interrupted Spot Instances. Default: <code>maintain</code>.'
       ValidFrom:
         $ref: '#/definitions/DateTime'
         description: 'The start date and time of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). The default is to start fulfilling the request immediately.'
@@ -10956,7 +10962,7 @@ definitions:
         description: The ID of the EC2 Fleets.
       Filters:
         $ref: '#/definitions/FilterList'
-        description: <p>One or more filters.</p> <ul> <li> <p> <code>activity-status</code> - The progress of the EC2 Fleet ( <code>error</code> | <code>pending-fulfillment</code> | <code>pending-termination</code> | <code>fulfilled</code>).</p> </li> <li> <p> <code>excess-capacity-termination-policy</code> - Indicates whether to terminate running instances if the target capacity is decreased below the current EC2 Fleet size (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>fleet-state</code> - The state of the EC2 Fleet (<code>submitted</code> | <code>active</code> | <code>deleted</code> | <code>failed</code> | <code>deleted-running</code> | <code>deleted-terminating</code> | <code>modifying</code>).</p> </li> <li> <p> <code>replace-unhealthy-instances</code> - Indicates whether EC2 Fleet should replace unhealthy instances (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>type</code> - The type of request (<code>request</code> | <code>maintain</code>).</p> </li> </ul>
+        description: <p>One or more filters.</p> <ul> <li> <p> <code>activity-status</code> - The progress of the EC2 Fleet ( <code>error</code> | <code>pending-fulfillment</code> | <code>pending-termination</code> | <code>fulfilled</code>).</p> </li> <li> <p> <code>excess-capacity-termination-policy</code> - Indicates whether to terminate running instances if the target capacity is decreased below the current EC2 Fleet size (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>fleet-state</code> - The state of the EC2 Fleet (<code>submitted</code> | <code>active</code> | <code>deleted</code> | <code>failed</code> | <code>deleted-running</code> | <code>deleted-terminating</code> | <code>modifying</code>).</p> </li> <li> <p> <code>replace-unhealthy-instances</code> - Indicates whether EC2 Fleet should replace unhealthy instances (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>type</code> - The type of request (<code>instant</code> | <code>request</code> | <code>maintain</code>).</p> </li> </ul>
   DescribeFlowLogsResult:
     type: object
     properties:
@@ -11710,7 +11716,7 @@ definitions:
         description: The token to request the next page of results.
       MaxResults:
         $ref: '#/definitions/Integer'
-        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 5 and 1000.'
+        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 1 and 200.'
   DescribeMovingAddressesResult:
     type: object
     example:
@@ -17198,6 +17204,241 @@ definitions:
         $ref: '#/definitions/EgressOnlyInternetGatewayId'
         description: The ID of the egress-only internet gateway.
     description: Describes an egress-only internet gateway.
+  LaunchTemplateAndOverridesResponse:
+    type: object
+    properties:
+      LaunchTemplateSpecification:
+        $ref: '#/definitions/FleetLaunchTemplateSpecification'
+        description: The launch template.
+      Overrides:
+        $ref: '#/definitions/FleetLaunchTemplateOverrides'
+        description: Any parameters that you specify override the same parameters in the launch template.
+    description: Describes a launch template and overrides.
+  InstanceLifecycle:
+    type: string
+    enum:
+      - spot
+      - on-demand
+  CreateFleetError:
+    type: object
+    properties:
+      LaunchTemplateAndOverrides:
+        $ref: '#/definitions/LaunchTemplateAndOverridesResponse'
+        description: The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.
+      Lifecycle:
+        $ref: '#/definitions/InstanceLifecycle'
+        description: Indicates if the instance that could not be launched was a Spot Instance or On-Demand Instance.
+      ErrorCode:
+        $ref: '#/definitions/String'
+        description: 'The error code that indicates why the instance could not be launched. For more information about error codes, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html">Error Codes</a>.'
+      ErrorMessage:
+        $ref: '#/definitions/String'
+        description: 'The error message that describes why the instance could not be launched. For more information about error messages, see ee <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html">Error Codes</a>.'
+    description: Describes the instances that could not be launched by the fleet.
+  CreateFleetErrorsSet:
+    type: array
+    items:
+      $ref: '#/definitions/CreateFleetError'
+  InstanceIdsSet:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceId'
+  InstanceType:
+    type: string
+    enum:
+      - t1.micro
+      - t2.nano
+      - t2.micro
+      - t2.small
+      - t2.medium
+      - t2.large
+      - t2.xlarge
+      - t2.2xlarge
+      - t3.nano
+      - t3.micro
+      - t3.small
+      - t3.medium
+      - t3.large
+      - t3.xlarge
+      - t3.2xlarge
+      - m1.small
+      - m1.medium
+      - m1.large
+      - m1.xlarge
+      - m3.medium
+      - m3.large
+      - m3.xlarge
+      - m3.2xlarge
+      - m4.large
+      - m4.xlarge
+      - m4.2xlarge
+      - m4.4xlarge
+      - m4.10xlarge
+      - m4.16xlarge
+      - m2.xlarge
+      - m2.2xlarge
+      - m2.4xlarge
+      - cr1.8xlarge
+      - r3.large
+      - r3.xlarge
+      - r3.2xlarge
+      - r3.4xlarge
+      - r3.8xlarge
+      - r4.large
+      - r4.xlarge
+      - r4.2xlarge
+      - r4.4xlarge
+      - r4.8xlarge
+      - r4.16xlarge
+      - r5.large
+      - r5.xlarge
+      - r5.2xlarge
+      - r5.4xlarge
+      - r5.8xlarge
+      - r5.12xlarge
+      - r5.16xlarge
+      - r5.24xlarge
+      - r5.metal
+      - r5a.large
+      - r5a.xlarge
+      - r5a.2xlarge
+      - r5a.4xlarge
+      - r5a.12xlarge
+      - r5a.24xlarge
+      - r5d.large
+      - r5d.xlarge
+      - r5d.2xlarge
+      - r5d.4xlarge
+      - r5d.8xlarge
+      - r5d.12xlarge
+      - r5d.16xlarge
+      - r5d.24xlarge
+      - r5d.metal
+      - x1.16xlarge
+      - x1.32xlarge
+      - x1e.xlarge
+      - x1e.2xlarge
+      - x1e.4xlarge
+      - x1e.8xlarge
+      - x1e.16xlarge
+      - x1e.32xlarge
+      - i2.xlarge
+      - i2.2xlarge
+      - i2.4xlarge
+      - i2.8xlarge
+      - i3.large
+      - i3.xlarge
+      - i3.2xlarge
+      - i3.4xlarge
+      - i3.8xlarge
+      - i3.16xlarge
+      - i3.metal
+      - hi1.4xlarge
+      - hs1.8xlarge
+      - c1.medium
+      - c1.xlarge
+      - c3.large
+      - c3.xlarge
+      - c3.2xlarge
+      - c3.4xlarge
+      - c3.8xlarge
+      - c4.large
+      - c4.xlarge
+      - c4.2xlarge
+      - c4.4xlarge
+      - c4.8xlarge
+      - c5.large
+      - c5.xlarge
+      - c5.2xlarge
+      - c5.4xlarge
+      - c5.9xlarge
+      - c5.18xlarge
+      - c5d.large
+      - c5d.xlarge
+      - c5d.2xlarge
+      - c5d.4xlarge
+      - c5d.9xlarge
+      - c5d.18xlarge
+      - cc1.4xlarge
+      - cc2.8xlarge
+      - g2.2xlarge
+      - g2.8xlarge
+      - g3.4xlarge
+      - g3.8xlarge
+      - g3.16xlarge
+      - g3s.xlarge
+      - cg1.4xlarge
+      - p2.xlarge
+      - p2.8xlarge
+      - p2.16xlarge
+      - p3.2xlarge
+      - p3.8xlarge
+      - p3.16xlarge
+      - d2.xlarge
+      - d2.2xlarge
+      - d2.4xlarge
+      - d2.8xlarge
+      - f1.2xlarge
+      - f1.4xlarge
+      - f1.16xlarge
+      - m5.large
+      - m5.xlarge
+      - m5.2xlarge
+      - m5.4xlarge
+      - m5.12xlarge
+      - m5.24xlarge
+      - m5a.large
+      - m5a.xlarge
+      - m5a.2xlarge
+      - m5a.4xlarge
+      - m5a.12xlarge
+      - m5a.24xlarge
+      - m5d.large
+      - m5d.xlarge
+      - m5d.2xlarge
+      - m5d.4xlarge
+      - m5d.12xlarge
+      - m5d.24xlarge
+      - h1.2xlarge
+      - h1.4xlarge
+      - h1.8xlarge
+      - h1.16xlarge
+      - z1d.large
+      - z1d.xlarge
+      - z1d.2xlarge
+      - z1d.3xlarge
+      - z1d.6xlarge
+      - z1d.12xlarge
+      - u-6tb1.metal
+      - u-9tb1.metal
+      - u-12tb1.metal
+  PlatformValues:
+    type: string
+    enum:
+      - Windows
+  CreateFleetInstance:
+    type: object
+    properties:
+      LaunchTemplateAndOverrides:
+        $ref: '#/definitions/LaunchTemplateAndOverridesResponse'
+        description: The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.
+      Lifecycle:
+        $ref: '#/definitions/InstanceLifecycle'
+        description: Indicates if the instance that was launched is a Spot Instance or On-Demand Instance.
+      InstanceIds:
+        $ref: '#/definitions/InstanceIdsSet'
+        description: The IDs of the instances.
+      InstanceType:
+        $ref: '#/definitions/InstanceType'
+        description: The instance type.
+      Platform:
+        $ref: '#/definitions/PlatformValues'
+        description: The value is <code>Windows</code> for Windows instances; otherwise blank.
+    description: Describes the instances that were launched by the fleet.
+  CreateFleetInstancesSet:
+    type: array
+    items:
+      $ref: '#/definitions/CreateFleetInstance'
   SpotOptionsRequest:
     type: object
     properties:
@@ -17210,6 +17451,12 @@ definitions:
       InstancePoolsToUseCount:
         $ref: '#/definitions/Integer'
         description: The number of Spot pools across which to allocate your target Spot capacity. Valid only when Spot <b>AllocationStrategy</b> is set to <code>lowest-price</code>. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify.
+      SingleInstanceType:
+        $ref: '#/definitions/Boolean'
+        description: Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet.
+      MinTargetCapacity:
+        $ref: '#/definitions/Integer'
+        description: 'The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.'
     description: Describes the configuration of Spot Instances in an EC2 Fleet request.
   OnDemandOptionsRequest:
     type: object
@@ -17217,6 +17464,12 @@ definitions:
       AllocationStrategy:
         $ref: '#/definitions/FleetOnDemandAllocationStrategy'
         description: 'The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify <code>lowest-price</code>, EC2 Fleet uses price to determine the order, launching the lowest price first. If you specify <code>prioritized</code>, EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. If you do not specify a value, EC2 Fleet defaults to <code>lowest-price</code>.'
+      SingleInstanceType:
+        $ref: '#/definitions/Boolean'
+        description: Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the fleet.
+      MinTargetCapacity:
+        $ref: '#/definitions/Integer'
+        description: 'The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.'
     description: The allocation strategy of On-Demand Instances in an EC2 Fleet.
   FleetExcessCapacityTerminationPolicy:
     type: string
@@ -17251,6 +17504,7 @@ definitions:
     enum:
       - request
       - maintain
+      - instant
   FleetIdentifier:
     type: string
   FlowLogsResourceType:
@@ -18121,6 +18375,22 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ExportTask'
+  DescribeFleetError:
+    type: object
+    properties:
+      LaunchTemplateAndOverrides:
+        $ref: '#/definitions/LaunchTemplateAndOverridesResponse'
+        description: The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.
+      Lifecycle:
+        $ref: '#/definitions/InstanceLifecycle'
+        description: Indicates if the instance that could not be launched was a Spot Instance or On-Demand Instance.
+      ErrorCode:
+        $ref: '#/definitions/String'
+        description: 'The error code that indicates why the instance could not be launched. For more information about error codes, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html">Error Codes</a>.'
+      ErrorMessage:
+        $ref: '#/definitions/String'
+        description: 'The error message that describes why the instance could not be launched. For more information about error messages, see ee <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html">Error Codes</a>.'
+    description: Describes the instances that could not be launched by the fleet.
   FleetEventType:
     type: string
     enum:
@@ -18131,6 +18401,33 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/HistoryRecordEntry'
+  DescribeFleetsErrorSet:
+    type: array
+    items:
+      $ref: '#/definitions/DescribeFleetError'
+  DescribeFleetsInstances:
+    type: object
+    properties:
+      LaunchTemplateAndOverrides:
+        $ref: '#/definitions/LaunchTemplateAndOverridesResponse'
+        description: The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.
+      Lifecycle:
+        $ref: '#/definitions/InstanceLifecycle'
+        description: Indicates if the instance that was launched is a Spot Instance or On-Demand Instance.
+      InstanceIds:
+        $ref: '#/definitions/InstanceIdsSet'
+        description: The IDs of the instances.
+      InstanceType:
+        $ref: '#/definitions/InstanceType'
+        description: The instance type.
+      Platform:
+        $ref: '#/definitions/PlatformValues'
+        description: The value is <code>Windows</code> for Windows instances; otherwise blank.
+    description: Describes the instances that were launched by the fleet.
+  DescribeFleetsInstancesSet:
+    type: array
+    items:
+      $ref: '#/definitions/DescribeFleetsInstances'
   FleetSet:
     type: array
     items:
@@ -18392,175 +18689,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ReservedInstancesModification'
-  InstanceType:
-    type: string
-    enum:
-      - t1.micro
-      - t2.nano
-      - t2.micro
-      - t2.small
-      - t2.medium
-      - t2.large
-      - t2.xlarge
-      - t2.2xlarge
-      - t3.nano
-      - t3.micro
-      - t3.small
-      - t3.medium
-      - t3.large
-      - t3.xlarge
-      - t3.2xlarge
-      - m1.small
-      - m1.medium
-      - m1.large
-      - m1.xlarge
-      - m3.medium
-      - m3.large
-      - m3.xlarge
-      - m3.2xlarge
-      - m4.large
-      - m4.xlarge
-      - m4.2xlarge
-      - m4.4xlarge
-      - m4.10xlarge
-      - m4.16xlarge
-      - m2.xlarge
-      - m2.2xlarge
-      - m2.4xlarge
-      - cr1.8xlarge
-      - r3.large
-      - r3.xlarge
-      - r3.2xlarge
-      - r3.4xlarge
-      - r3.8xlarge
-      - r4.large
-      - r4.xlarge
-      - r4.2xlarge
-      - r4.4xlarge
-      - r4.8xlarge
-      - r4.16xlarge
-      - r5.large
-      - r5.xlarge
-      - r5.2xlarge
-      - r5.4xlarge
-      - r5.8xlarge
-      - r5.12xlarge
-      - r5.16xlarge
-      - r5.24xlarge
-      - r5.metal
-      - r5a.large
-      - r5a.xlarge
-      - r5a.2xlarge
-      - r5a.4xlarge
-      - r5a.12xlarge
-      - r5a.24xlarge
-      - r5d.large
-      - r5d.xlarge
-      - r5d.2xlarge
-      - r5d.4xlarge
-      - r5d.8xlarge
-      - r5d.12xlarge
-      - r5d.16xlarge
-      - r5d.24xlarge
-      - r5d.metal
-      - x1.16xlarge
-      - x1.32xlarge
-      - x1e.xlarge
-      - x1e.2xlarge
-      - x1e.4xlarge
-      - x1e.8xlarge
-      - x1e.16xlarge
-      - x1e.32xlarge
-      - i2.xlarge
-      - i2.2xlarge
-      - i2.4xlarge
-      - i2.8xlarge
-      - i3.large
-      - i3.xlarge
-      - i3.2xlarge
-      - i3.4xlarge
-      - i3.8xlarge
-      - i3.16xlarge
-      - i3.metal
-      - hi1.4xlarge
-      - hs1.8xlarge
-      - c1.medium
-      - c1.xlarge
-      - c3.large
-      - c3.xlarge
-      - c3.2xlarge
-      - c3.4xlarge
-      - c3.8xlarge
-      - c4.large
-      - c4.xlarge
-      - c4.2xlarge
-      - c4.4xlarge
-      - c4.8xlarge
-      - c5.large
-      - c5.xlarge
-      - c5.2xlarge
-      - c5.4xlarge
-      - c5.9xlarge
-      - c5.18xlarge
-      - c5d.large
-      - c5d.xlarge
-      - c5d.2xlarge
-      - c5d.4xlarge
-      - c5d.9xlarge
-      - c5d.18xlarge
-      - cc1.4xlarge
-      - cc2.8xlarge
-      - g2.2xlarge
-      - g2.8xlarge
-      - g3.4xlarge
-      - g3.8xlarge
-      - g3.16xlarge
-      - g3s.xlarge
-      - cg1.4xlarge
-      - p2.xlarge
-      - p2.8xlarge
-      - p2.16xlarge
-      - p3.2xlarge
-      - p3.8xlarge
-      - p3.16xlarge
-      - d2.xlarge
-      - d2.2xlarge
-      - d2.4xlarge
-      - d2.8xlarge
-      - f1.2xlarge
-      - f1.4xlarge
-      - f1.16xlarge
-      - m5.large
-      - m5.xlarge
-      - m5.2xlarge
-      - m5.4xlarge
-      - m5.12xlarge
-      - m5.24xlarge
-      - m5a.large
-      - m5a.xlarge
-      - m5a.2xlarge
-      - m5a.4xlarge
-      - m5a.12xlarge
-      - m5a.24xlarge
-      - m5d.large
-      - m5d.xlarge
-      - m5d.2xlarge
-      - m5d.4xlarge
-      - m5d.12xlarge
-      - m5d.24xlarge
-      - h1.2xlarge
-      - h1.4xlarge
-      - h1.8xlarge
-      - h1.16xlarge
-      - z1d.large
-      - z1d.xlarge
-      - z1d.2xlarge
-      - z1d.3xlarge
-      - z1d.6xlarge
-      - z1d.12xlarge
-      - u-6tb1.metal
-      - u-9tb1.metal
-      - u-12tb1.metal
   OfferingClassType:
     type: string
     enum:
@@ -19153,6 +19281,12 @@ definitions:
       InstancePoolsToUseCount:
         $ref: '#/definitions/Integer'
         description: The number of Spot pools across which to allocate your target Spot capacity. Valid only when <b>AllocationStrategy</b> is set to <code>lowestPrice</code>. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify.
+      SingleInstanceType:
+        $ref: '#/definitions/Boolean'
+        description: Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet.
+      MinTargetCapacity:
+        $ref: '#/definitions/Integer'
+        description: 'The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.'
     description: Describes the configuration of Spot Instances in an EC2 Fleet.
   OnDemandOptions:
     type: object
@@ -19160,6 +19294,12 @@ definitions:
       AllocationStrategy:
         $ref: '#/definitions/FleetOnDemandAllocationStrategy'
         description: 'The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify <code>lowest-price</code>, EC2 Fleet uses price to determine the order, launching the lowest price first. If you specify <code>prioritized</code>, EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. If you do not specify a value, EC2 Fleet defaults to <code>lowest-price</code>.'
+      SingleInstanceType:
+        $ref: '#/definitions/Boolean'
+        description: Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the fleet.
+      MinTargetCapacity:
+        $ref: '#/definitions/Integer'
+        description: 'The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.'
     description: The allocation strategy of On-Demand Instances in an EC2 Fleet.
   FleetData:
     type: object
@@ -19218,6 +19358,12 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: The tags for an EC2 Fleet resource.
+      Errors:
+        $ref: '#/definitions/DescribeFleetsErrorSet'
+        description: Information about the instances that could not be launched by the fleet. Valid only when <b>Type</b> is set to <code>instant</code>.
+      Instances:
+        $ref: '#/definitions/DescribeFleetsInstancesSet'
+        description: Information about the instances that were launched by the fleet. Valid only when <b>Type</b> is set to <code>instant</code>.
     description: Describes an EC2 Fleet.
   FleetLaunchTemplateSpecification:
     type: object
@@ -19274,6 +19420,13 @@ definitions:
     items:
       $ref: '#/definitions/FleetLaunchTemplateOverridesRequest'
     maxItems: 50
+  PlacementResponse:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/String'
+        description: The name of the placement group the instance is in.
+    description: Describes the placement of an instance.
   FleetLaunchTemplateOverrides:
     type: object
     properties:
@@ -19295,6 +19448,9 @@ definitions:
       Priority:
         $ref: '#/definitions/Double'
         description: 'The priority for the launch template override. If <b>AllocationStrategy</b> is set to <code>prioritized</code>, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. The highest priority is launched first. Valid values are whole numbers starting at <code>0</code>. The lower the number, the higher the priority. If no number is set, the override has the lowest priority.'
+      Placement:
+        $ref: '#/definitions/PlacementResponse'
+        description: 'The location where the instance launched, if applicable.'
     description: Describes overrides for a launch template.
   FleetLaunchTemplateOverridesRequest:
     type: object
@@ -19317,7 +19473,32 @@ definitions:
       Priority:
         $ref: '#/definitions/Double'
         description: 'The priority for the launch template override. If <b>AllocationStrategy</b> is set to <code>prioritized</code>, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. The highest priority is launched first. Valid values are whole numbers starting at <code>0</code>. The lower the number, the higher the priority. If no number is set, the launch template override has the lowest priority.'
+      Placement:
+        $ref: '#/definitions/Placement'
+        description: 'The location where the instance launched, if applicable.'
     description: Describes overrides for a launch template.
+  Placement:
+    type: object
+    properties:
+      AvailabilityZone:
+        $ref: '#/definitions/String'
+        description: The Availability Zone of the instance.
+      Affinity:
+        $ref: '#/definitions/String'
+        description: The affinity setting for the instance on the Dedicated Host. This parameter is not supported for the <a>ImportInstance</a> command.
+      GroupName:
+        $ref: '#/definitions/String'
+        description: The name of the placement group the instance is in.
+      HostId:
+        $ref: '#/definitions/String'
+        description: The ID of the Dedicated Host on which the instance resides. This parameter is not supported for the <a>ImportInstance</a> command.
+      Tenancy:
+        $ref: '#/definitions/Tenancy'
+        description: The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware. The <code>host</code> tenancy is not supported for the <a>ImportInstance</a> command.
+      SpreadDomain:
+        $ref: '#/definitions/String'
+        description: Reserved for future use.
+    description: Describes the placement of an instance.
   FleetOnDemandAllocationStrategy:
     type: string
     enum:
@@ -19800,10 +19981,6 @@ definitions:
       - machine
       - kernel
       - ramdisk
-  PlatformValues:
-    type: string
-    enum:
-      - Windows
   ImageState:
     type: string
     enum:
@@ -20001,28 +20178,6 @@ definitions:
     enum:
       - stop
       - terminate
-  Placement:
-    type: object
-    properties:
-      AvailabilityZone:
-        $ref: '#/definitions/String'
-        description: The Availability Zone of the instance.
-      Affinity:
-        $ref: '#/definitions/String'
-        description: The affinity setting for the instance on the Dedicated Host. This parameter is not supported for the <a>ImportInstance</a> command.
-      GroupName:
-        $ref: '#/definitions/String'
-        description: The name of the placement group the instance is in.
-      HostId:
-        $ref: '#/definitions/String'
-        description: The ID of the Dedicated Host on which the instance resides. This parameter is not supported for the <a>ImportInstance</a> command.
-      Tenancy:
-        $ref: '#/definitions/Tenancy'
-        description: The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware. The <code>host</code> tenancy is not supported for the <a>ImportInstance</a> command.
-      SpreadDomain:
-        $ref: '#/definitions/String'
-        description: Reserved for future use.
-    description: Describes the placement of an instance.
   UserData:
     type: object
     properties:
@@ -20397,6 +20552,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InstanceCreditSpecificationRequest'
+  InstanceId:
+    type: string
   InstanceIdSet:
     type: array
     items:

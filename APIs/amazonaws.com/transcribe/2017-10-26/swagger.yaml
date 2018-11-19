@@ -143,7 +143,7 @@ paths:
   '/#DeleteTranscriptionJob':
     post:
       operationId: DeleteTranscriptionJob
-      description: 'Deletes a previously submitted transcription job as well as any other generated results such as the transcription, models, and so on.'
+      description: 'Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.'
       responses:
         '200':
           description: Success
@@ -645,7 +645,7 @@ definitions:
     properties:
       TranscriptionJobName:
         $ref: '#/definitions/TranscriptionJobName'
-        description: The name of the job. You can't use the strings "." or ".." in the job name. The name must be unique within an AWS account.
+        description: The name of the job. Note that you can't use the strings "." or ".." by themselves as the job name. The name must also be unique within an AWS account.
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
         description: The language code for the language used in the input media file.
@@ -709,7 +709,10 @@ definitions:
       - es-US
       - en-AU
       - fr-CA
-      - en-UK
+      - en-GB
+      - de-DE
+      - pt-BR
+      - fr-FR
   Phrases:
     type: array
     items:

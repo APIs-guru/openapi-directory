@@ -211,6 +211,9 @@ definitions:
       CdnConfiguration:
         $ref: '#/definitions/CdnConfiguration'
         description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
+      DashConfiguration:
+        $ref: '#/definitions/DashConfiguration'
+        description: 'The configuration object for DASH content. '
       HlsConfiguration:
         $ref: '#/definitions/HlsConfiguration'
         description: 'The configuration for HLS content. '
@@ -226,6 +229,9 @@ definitions:
       SlateAdUrl:
         $ref: '#/definitions/__string'
         description: 'URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because AWS Elemental MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
+      TranscodeProfileName:
+        $ref: '#/definitions/__string'
+        description: 'Associate this playbackConfiguration with a custom transcode profile, overriding MediaTailor''s dynamic transcoding defaults. Do not include this field if you have not setup custom profiles with the MediaTailor service team. '
       VideoContentSourceUrl:
         $ref: '#/definitions/__string'
         description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
@@ -253,6 +259,9 @@ definitions:
       CdnConfiguration:
         $ref: '#/definitions/CdnConfiguration'
         description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
+      DashConfiguration:
+        $ref: '#/definitions/DashConfiguration'
+        description: 'The configuration object for DASH content. '
       HlsConfiguration:
         $ref: '#/definitions/HlsConfiguration'
         description: 'The configuration for HLS content. '
@@ -268,6 +277,9 @@ definitions:
       SlateAdUrl:
         $ref: '#/definitions/__string'
         description: 'URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because AWS Elemental MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
+      TranscodeProfileName:
+        $ref: '#/definitions/__string'
+        description: 'Associate this playbackConfiguration with a custom transcode profile, overriding MediaTailor''s dynamic transcoding defaults. Do not include this field if you have not setup custom profiles with the MediaTailor service team. '
       VideoContentSourceUrl:
         $ref: '#/definitions/__string'
         description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
@@ -286,6 +298,9 @@ definitions:
       SlateAdUrl:
         $ref: '#/definitions/__string'
         description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because AWS Elemental MediaTailor provides it in the slots that are designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
+      TranscodeProfileName:
+        $ref: '#/definitions/__string'
+        description: 'Associate this playbackConfiguration with a custom transcode profile, overriding MediaTailor''s dynamic transcoding defaults. Do not include this field if you have not setup custom profiles with the MediaTailor service team. '
       VideoContentSourceUrl:
         $ref: '#/definitions/__string'
         description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
@@ -308,9 +323,13 @@ definitions:
         $ref: '#/definitions/__string'
         description: The URL that is used to initiate a playback session for devices that support Apple HLS. The session uses server-side reporting.
     description: 'The configuration for HLS content. '
-  Empty:
+  DashConfiguration:
     type: object
-    properties: {}
+    properties:
+      ManifestEndpointPrefix:
+        $ref: '#/definitions/__string'
+        description: 'The URL that is used to initiate a playback session for devices that support DASH. '
+    description: 'The configuration object for DASH content. '
   PlaybackConfiguration:
     type: object
     properties:
@@ -338,12 +357,3 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PlaybackConfiguration'
-  __boolean:
-    type: boolean
-  __double:
-    type: number
-    format: double
-  __integer:
-    type: integer
-  __long:
-    type: integer

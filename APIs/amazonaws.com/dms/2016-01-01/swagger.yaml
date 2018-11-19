@@ -3,7 +3,7 @@ info:
   version: '2016-01-01'
   x-release: v4
   title: AWS Database Migration Service
-  description: '<fullname>AWS Database Migration Service</fullname> <p>AWS Database Migration Service (AWS DMS) can migrate your data to and from the most widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as heterogeneous migrations between different database platforms, such as Oracle to MySQL or SQL Server to PostgreSQL.</p> <p>For more information about AWS DMS, see the AWS DMS user guide at <a href="http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html"> What Is AWS Database Migration Service? </a> </p>'
+  description: '<fullname>AWS Database Migration Service</fullname> <p>AWS Database Migration Service (AWS DMS) can migrate your data to and from the most widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as heterogeneous migrations between different database platforms, such as Oracle to MySQL or SQL Server to PostgreSQL.</p> <p>For more information about AWS DMS, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html">What Is AWS Database Migration Service?</a> in the <i>AWS Database Migration User Guide.</i> </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -180,7 +180,7 @@ paths:
   '/#CreateEventSubscription':
     post:
       operationId: CreateEventSubscription
-      description: '<p> Creates an AWS DMS event notification subscription. </p> <p>You can specify the type of source (<code>SourceType</code>) you want to be notified of, provide a list of AWS DMS source IDs (<code>SourceIds</code>) that triggers the events, and provide a list of event categories (<code>EventCategories</code>) for events you want to be notified of. If you specify both the <code>SourceType</code> and <code>SourceIds</code>, such as <code>SourceType = replication-instance</code> and <code>SourceIdentifier = my-replinstance</code>, you will be notified of all the replication instance events for the specified source. If you specify a <code>SourceType</code> but don''t specify a <code>SourceIdentifier</code>, you receive notice of the events for that source type for all your AWS DMS sources. If you don''t specify either <code>SourceType</code> nor <code>SourceIdentifier</code>, you will be notified of events generated from all AWS DMS sources belonging to your customer account.</p> <p>For more information about AWS DMS events, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html"> Working with Events and Notifications </a> in the AWS Database MIgration Service User Guide.</p>'
+      description: '<p> Creates an AWS DMS event notification subscription. </p> <p>You can specify the type of source (<code>SourceType</code>) you want to be notified of, provide a list of AWS DMS source IDs (<code>SourceIds</code>) that triggers the events, and provide a list of event categories (<code>EventCategories</code>) for events you want to be notified of. If you specify both the <code>SourceType</code> and <code>SourceIds</code>, such as <code>SourceType = replication-instance</code> and <code>SourceIdentifier = my-replinstance</code>, you will be notified of all the replication instance events for the specified source. If you specify a <code>SourceType</code> but don''t specify a <code>SourceIdentifier</code>, you receive notice of the events for that source type for all your AWS DMS sources. If you don''t specify either <code>SourceType</code> nor <code>SourceIdentifier</code>, you will be notified of events generated from all AWS DMS sources belonging to your customer account.</p> <p>For more information about AWS DMS events, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and Notifications</a> in the <i>AWS Database Migration Service User Guide.</i> </p>'
       responses:
         '200':
           description: Success
@@ -676,20 +676,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-      x-waiters:
-        - acceptors:
-            - argument: 'Connections[].Status'
-              expected: successful
-              matcher: pathAll
-              state: success
-            - argument: 'Connections[].Status'
-              expected: failed
-              matcher: pathAny
-              state: failure
-          delay: 5
-          description: Wait until testing connection succeeds.
-          maxAttempts: 60
-          operation: DescribeConnections
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -794,7 +780,7 @@ paths:
   '/#DescribeEventCategories':
     post:
       operationId: DescribeEventCategories
-      description: 'Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html"> Working with Events and Notifications </a> in the AWS Database Migration Service User Guide. '
+      description: 'Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and Notifications</a> in the <i>AWS Database Migration Service User Guide.</i> '
       responses:
         '200':
           description: Success
@@ -858,7 +844,7 @@ paths:
   '/#DescribeEvents':
     post:
       operationId: DescribeEvents
-      description: ' Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on AWS DMS events, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html"> Working with Events and Notifications </a>. '
+      description: ' Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on AWS DMS events, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and Notifications</a> in the <i>AWS Database Migration User Guide.</i> '
       responses:
         '200':
           description: Success
@@ -1686,7 +1672,7 @@ paths:
   '/#ModifyReplicationTask':
     post:
       operationId: ModifyReplicationTask
-      description: '<p>Modifies the specified replication task.</p> <p>You can''t modify the task endpoints. The task must be stopped before you can modify it. </p> <p>For more information about AWS DMS tasks, see the AWS DMS user guide at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html"> Working with Migration Tasks </a> </p>'
+      description: '<p>Modifies the specified replication task.</p> <p>You can''t modify the task endpoints. The task must be stopped before you can modify it. </p> <p>For more information about AWS DMS tasks, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html">Working with Migration Tasks</a> in the <i>AWS Database Migration Service User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1863,7 +1849,7 @@ paths:
   '/#StartReplicationTask':
     post:
       operationId: StartReplicationTask
-      description: '<p>Starts the replication task.</p> <p>For more information about AWS DMS tasks, see the AWS DMS user guide at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html"> Working with Migration Tasks </a> </p>'
+      description: '<p>Starts the replication task.</p> <p>For more information about AWS DMS tasks, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html">Working with Migration Tasks </a> in the <i>AWS Database Migration Service User Guide.</i> </p>'
       responses:
         '200':
           description: Success
@@ -1994,6 +1980,20 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TestConnectionMessage'
+      x-waiters:
+        - acceptors:
+            - argument: Connection.Status
+              expected: successful
+              matcher: path
+              state: success
+            - argument: Connection.Status
+              expected: failed
+              matcher: path
+              state: failure
+          delay: 5
+          description: Wait until testing connection succeeds.
+          maxAttempts: 60
+          operation: TestConnection
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2078,13 +2078,13 @@ definitions:
         description: The type of endpoint.
       EngineName:
         $ref: '#/definitions/String'
-        description: 'The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.'
+        description: 'The type of engine for the endpoint. Valid values, depending on the <code>EndPointType</code> value, include <code>mysql</code>, <code>oracle</code>, <code>postgres</code>, <code>mariadb</code>, <code>aurora</code>, <code>aurora-postgresql</code>, <code>redshift</code>, <code>s3</code>, <code>db2</code>, <code>azuredb</code>, <code>sybase</code>, <code>dynamodb</code>, <code>mongodb</code>, and <code>sqlserver</code>.'
       Username:
         $ref: '#/definitions/String'
-        description: The user name to be used to login to the endpoint database.
+        description: The user name to be used to log in to the endpoint database.
       Password:
         $ref: '#/definitions/SecretString'
-        description: The password to be used to login to the endpoint database.
+        description: The password to be used to log in to the endpoint database.
       ServerName:
         $ref: '#/definitions/String'
         description: The name of the server where the endpoint database resides.
@@ -2099,7 +2099,7 @@ definitions:
         description: Additional attributes associated with the connection.
       KmsKeyId:
         $ref: '#/definitions/String'
-        description: 'The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.'
+        description: 'The AWS KMS key identifier to use to encrypt the connection parameters. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
       Tags:
         $ref: '#/definitions/TagList'
         description: Tags to be added to the endpoint.
@@ -2108,25 +2108,31 @@ definitions:
         description: The Amazon Resource Name (ARN) for the certificate.
       SslMode:
         $ref: '#/definitions/DmsSslModeValue'
-        description: '<p>The SSL mode to use for the SSL connection.</p> <p>SSL mode can be one of four values: none, require, verify-ca, verify-full. </p> <p>The default value is none.</p>'
+        description: 'The Secure Sockets Layer (SSL) mode to use for the SSL connection. The SSL mode can be one of four values: <code>none</code>, <code>require</code>, <code>verify-ca</code>, <code>verify-full</code>. The default value is <code>none</code>.'
       ServiceAccessRoleArn:
         $ref: '#/definitions/String'
-        description: ' The Amazon Resource Name (ARN) for the service access role you want to use to create the endpoint. '
+        description: ' The Amazon Resource Name (ARN) for the service access role that you want to use to create the endpoint. '
       ExternalTableDefinition:
         $ref: '#/definitions/String'
         description: 'The external table definition. '
       DynamoDbSettings:
         $ref: '#/definitions/DynamoDbSettings'
-        description: 'Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see the <b>Using Object Mapping to Migrate Data to DynamoDB</b> section at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html"> Using an Amazon DynamoDB Database as a Target for AWS Database Migration Service</a>. '
+        description: 'Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html">Using Object Mapping to Migrate Data to DynamoDB</a> in the <i>AWS Database Migration Service User Guide.</i> '
       S3Settings:
         $ref: '#/definitions/S3Settings'
-        description: 'Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see the <b>Extra Connection Attributes</b> section at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html"> Using Amazon S3 as a Target for AWS Database Migration Service</a>. '
+        description: 'Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring">Extra Connection Attributes When Using Amazon S3 as a Target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
       DmsTransferSettings:
         $ref: '#/definitions/DmsTransferSettings'
-        description: '<p> The settings in JSON format for the DMS Transfer type source endpoint. </p> <p>Attributes include:</p> <ul> <li> <p>serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p>bucketName - The name of the S3 bucket to use.</p> </li> <li> <p>compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.</p> </li> </ul> <p>Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string</p> <p>JSON syntax:</p> <p> { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </p>'
+        description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Possible attributes include the following:</p> <ul> <li> <p> <code>serviceAccessRoleArn</code> - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p> <code>bucketName</code> - The name of the S3 bucket to use.</p> </li> <li> <p> <code>compressionType</code> - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to <code>NONE</code> (the default). To keep the files uncompressed, don''t use this value. </p> </li> </ul> <p>Shorthand syntax for these attributes is as follows: <code>ServiceAccessRoleArn=string,BucketName=string,CompressionType=string</code> </p> <p>JSON syntax for these attributes is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </code> </p>'
       MongoDbSettings:
         $ref: '#/definitions/MongoDbSettings'
-        description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the <b>Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service</b> section at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using MongoDB as a Target for AWS Database Migration Service</a>. '
+        description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
+      KinesisSettings:
+        $ref: '#/definitions/KinesisSettings'
+        description: 'Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping ">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> '
+      ElasticsearchSettings:
+        $ref: '#/definitions/ElasticsearchSettings'
+        description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration User Guide.</i> '
     description: <p/>
   KMSKeyNotAccessibleFault: {}
   ResourceAlreadyExistsFault: {}
@@ -2157,13 +2163,13 @@ definitions:
         description: '<p> The type of AWS DMS resource that generates the events. For example, if you want to be notified of events generated by a replication instance, you set this parameter to <code>replication-instance</code>. If this value is not specified, all events are returned. </p> <p>Valid values: replication-instance | migration-task</p>'
       EventCategories:
         $ref: '#/definitions/EventCategoriesList'
-        description: ' A list of event categories for a source type that you want to subscribe to. You can see a list of the categories for a given source type by calling the <b>DescribeEventCategories</b> action or in the topic <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html"> Working with Events and Notifications</a> in the AWS Database Migration Service User Guide. '
+        description: ' A list of event categories for a source type that you want to subscribe to. You can see a list of the categories for a given source type by calling the <code>DescribeEventCategories</code> action or in the topic <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and Notifications</a> in the <i>AWS Database Migration Service User Guide.</i> '
       SourceIds:
         $ref: '#/definitions/SourceIdsList'
         description: ' The list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens. '
       Enabled:
         $ref: '#/definitions/BooleanOptional'
-        description: ' A Boolean value; set to <b>true</b> to activate the subscription, or set to <b>false</b> to create the subscription but not activate it. '
+        description: ' A Boolean value; set to <code>true</code> to activate the subscription, or set to <code>false</code> to create the subscription but not activate it. '
       Tags:
         $ref: '#/definitions/TagList'
         description: A tag to be attached to the event subscription.
@@ -2269,10 +2275,13 @@ definitions:
         description: Tags to be associated with the replication instance.
       KmsKeyId:
         $ref: '#/definitions/String'
-        description: 'The KMS key identifier that will be used to encrypt the content on the replication instance. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.'
+        description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
       PubliclyAccessible:
         $ref: '#/definitions/BooleanOptional'
         description: ' Specifies the accessibility options for the replication instance. A value of <code>true</code> represents an instance with a public IP address. A value of <code>false</code> represents an instance with a private IP address. The default value is <code>true</code>. '
+      DnsNameServers:
+        $ref: '#/definitions/String'
+        description: A list of DNS name servers supported for the replication instance.
     description: <p/>
   InsufficientResourceCapacityFault: {}
   StorageQuotaExceededFault: {}
@@ -2377,7 +2386,7 @@ definitions:
         description: '<p>When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with "file://". When working with the DMS API, provide the JSON as the parameter value.</p> <p>For example, --table-mappings file://mappingfile.json</p>'
       ReplicationTaskSettings:
         $ref: '#/definitions/String'
-        description: 'Settings for the task, such as target metadata settings. For a complete list of task settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html">Task Settings for AWS Database Migration Service Tasks</a>.'
+        description: 'Settings for the task, such as target metadata settings. For a complete list of task settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html">Task Settings for AWS Database Migration Service Tasks</a> in the <i>AWS Database Migration User Guide.</i> '
       CdcStartTime:
         $ref: '#/definitions/TStamp'
         description: '<p>Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p>Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”</p>'
@@ -3190,16 +3199,22 @@ definitions:
         description: The external table definition.
       DynamoDbSettings:
         $ref: '#/definitions/DynamoDbSettings'
-        description: 'Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see the <b>Using Object Mapping to Migrate Data to DynamoDB</b> section at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html"> Using an Amazon DynamoDB Database as a Target for AWS Database Migration Service</a>. '
+        description: 'Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html">Using Object Mapping to Migrate Data to DynamoDB</a> in the <i>AWS Database Migration Service User Guide.</i> '
       S3Settings:
         $ref: '#/definitions/S3Settings'
-        description: 'Settings in JSON format for the target S3 endpoint. For more information about the available settings, see the <b>Extra Connection Attributes</b> section at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html"> Using Amazon S3 as a Target for AWS Database Migration Service</a>. '
+        description: 'Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring">Extra Connection Attributes When Using Amazon S3 as a Target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
       DmsTransferSettings:
         $ref: '#/definitions/DmsTransferSettings'
-        description: '<p> The settings in JSON format for the DMS Transfer type source endpoint. </p> <p>Attributes include:</p> <ul> <li> <p>serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p>BucketName - The name of the S3 bucket to use.</p> </li> <li> <p>compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.</p> </li> </ul> <p>Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string</p> <p>JSON syntax:</p> <p> { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </p>'
+        description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Attributes include the following:</p> <ul> <li> <p>serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p>BucketName - The name of the S3 bucket to use.</p> </li> <li> <p>compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.</p> </li> </ul> <p>Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string</p> <p>JSON syntax:</p> <p> { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </p>'
       MongoDbSettings:
         $ref: '#/definitions/MongoDbSettings'
-        description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the <b>Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service</b> section at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using Amazon S3 as a Target for AWS Database Migration Service</a>. '
+        description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
+      KinesisSettings:
+        $ref: '#/definitions/KinesisSettings'
+        description: 'Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping ">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> '
+      ElasticsearchSettings:
+        $ref: '#/definitions/ElasticsearchSettings'
+        description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration User Guide.</i> '
     description: <p/>
   ModifyEventSubscriptionResponse:
     type: object
@@ -3810,7 +3825,39 @@ definitions:
         description: <p> The MongoDB database name. This attribute is not used when <code>authType=NO</code>. </p> <p>The default is admin.</p>
       KmsKeyId:
         $ref: '#/definitions/String'
-        description: ' The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region. '
+        description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
+    description: <p/>
+  KinesisSettings:
+    type: object
+    properties:
+      StreamArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams endpoint.
+      MessageFormat:
+        $ref: '#/definitions/MessageFormatValue'
+        description: The output format for the records created on the endpoint. The message format is <code>JSON</code>.
+      ServiceAccessRoleArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the IAM role that DMS uses to write to the Amazon Kinesis data stream.
+    description: <p/>
+  ElasticsearchSettings:
+    type: object
+    required:
+      - ServiceAccessRoleArn
+      - EndpointUri
+    properties:
+      ServiceAccessRoleArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) used by service to access the IAM role.
+      EndpointUri:
+        $ref: '#/definitions/String'
+        description: The endpoint for the ElasticSearch cluster.
+      FullLoadErrorPercentage:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The maximum percentage of records that can fail to be written before a full load operation stops. '
+      ErrorRetryDuration:
+        $ref: '#/definitions/IntegerOptional'
+        description: The maximum number of seconds that DMS retries failed API requests to the Elasticsearch cluster.
     description: <p/>
   Endpoint:
     type: object
@@ -3847,7 +3894,7 @@ definitions:
         description: The status of the endpoint.
       KmsKeyId:
         $ref: '#/definitions/String'
-        description: 'The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.'
+        description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
       EndpointArn:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -3874,10 +3921,16 @@ definitions:
         description: 'The settings for the S3 target endpoint. For more information, see the <code>S3Settings</code> structure.'
       DmsTransferSettings:
         $ref: '#/definitions/DmsTransferSettings'
-        description: '<p> The settings in JSON format for the DMS Transfer type source endpoint. </p> <p>Attributes include:</p> <ul> <li> <p>serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p>bucketName - The name of the S3 bucket to use.</p> </li> <li> <p>compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.</p> </li> </ul> <p>Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string</p> <p>JSON syntax:</p> <p> { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </p>'
+        description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Possible attributes include the following:</p> <ul> <li> <p> <code>serviceAccessRoleArn</code> - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p> <code>bucketName</code> - The name of the S3 bucket to use.</p> </li> <li> <p> <code>compressionType</code> - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to <code>NONE</code> (the default). To keep the files uncompressed, don''t use this value. </p> </li> </ul> <p>Shorthand syntax for these attributes is as follows: <code>ServiceAccessRoleArn=string,BucketName=string,CompressionType=string</code> </p> <p>JSON syntax for these attributes is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </code> </p>'
       MongoDbSettings:
         $ref: '#/definitions/MongoDbSettings'
         description: 'The settings for the MongoDB source endpoint. For more information, see the <code>MongoDbSettings</code> structure.'
+      KinesisSettings:
+        $ref: '#/definitions/KinesisSettings'
+        description: 'The settings for the Amazon Kinesis source endpoint. For more information, see the <code>KinesisSettings</code> structure.'
+      ElasticsearchSettings:
+        $ref: '#/definitions/ElasticsearchSettings'
+        description: 'The settings for the Elasticsearch source endpoint. For more information, see the <code>ElasticsearchSettings</code> structure.'
     description: <p/>
   EventCategoriesList:
     type: array
@@ -3966,7 +4019,7 @@ definitions:
         description: Boolean value indicating if minor version upgrades will be automatically applied to the instance.
       KmsKeyId:
         $ref: '#/definitions/String'
-        description: 'The KMS key identifier that is used to encrypt the content on the replication instance. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.'
+        description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
       ReplicationInstanceArn:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the replication instance.
@@ -3991,6 +4044,9 @@ definitions:
       FreeUntil:
         $ref: '#/definitions/TStamp'
         description: ' The expiration date of the free replication instance that is part of the Free DMS program. '
+      DnsNameServers:
+        $ref: '#/definitions/String'
+        description: The DNS name servers for the replication instance.
     description: <p/>
   SubnetIdentifierList:
     type: array
@@ -4207,6 +4263,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  MessageFormatValue:
+    type: string
+    enum:
+      - json
   NestingLevelValue:
     type: string
     enum:

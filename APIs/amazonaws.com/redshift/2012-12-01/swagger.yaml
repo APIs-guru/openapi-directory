@@ -240,6 +240,109 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#BatchDeleteClusterSnapshots':
+    post:
+      operationId: BatchDeleteClusterSnapshots
+      description: Deletes a set of cluster snapshots.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchDeleteClusterSnapshotsResult'
+        '480':
+          description: BatchDeleteRequestSizeExceededFault
+          schema:
+            $ref: '#/definitions/BatchDeleteRequestSizeExceededFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchDeleteClusterSnapshotsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#BatchModifyClusterSnapshots':
+    post:
+      operationId: BatchModifyClusterSnapshots
+      description: Modifies the settings for a list of snapshots.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchModifyClusterSnapshotsOutputMessage'
+        '480':
+          description: InvalidRetentionPeriodFault
+          schema:
+            $ref: '#/definitions/InvalidRetentionPeriodFault'
+        '481':
+          description: BatchModifyClusterSnapshotsLimitExceededFault
+          schema:
+            $ref: '#/definitions/BatchModifyClusterSnapshotsLimitExceededFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchModifyClusterSnapshotsMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CancelResize':
+    post:
+      operationId: CancelResize
+      description: Cancels a resize operation.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResizeProgressMessage'
+        '480':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '481':
+          description: ResizeNotFoundFault
+          schema:
+            $ref: '#/definitions/ResizeNotFoundFault'
+        '482':
+          description: InvalidClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterStateFault'
+        '483':
+          description: UnsupportedOperationFault
+          schema:
+            $ref: '#/definitions/UnsupportedOperationFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CancelResizeMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CopyClusterSnapshot':
     post:
       operationId: CopyClusterSnapshot
@@ -265,6 +368,10 @@ paths:
           description: ClusterSnapshotQuotaExceededFault
           schema:
             $ref: '#/definitions/ClusterSnapshotQuotaExceededFault'
+        '484':
+          description: InvalidRetentionPeriodFault
+          schema:
+            $ref: '#/definitions/InvalidRetentionPeriodFault'
       parameters:
         - name: body
           in: body
@@ -370,6 +477,14 @@ paths:
           description: InvalidClusterTrackFault
           schema:
             $ref: '#/definitions/InvalidClusterTrackFault'
+        '500':
+          description: SnapshotScheduleNotFoundFault
+          schema:
+            $ref: '#/definitions/SnapshotScheduleNotFoundFault'
+        '501':
+          description: InvalidRetentionPeriodFault
+          schema:
+            $ref: '#/definitions/InvalidRetentionPeriodFault'
       parameters:
         - name: body
           in: body
@@ -501,6 +616,10 @@ paths:
           description: InvalidTagFault
           schema:
             $ref: '#/definitions/InvalidTagFault'
+        '486':
+          description: InvalidRetentionPeriodFault
+          schema:
+            $ref: '#/definitions/InvalidRetentionPeriodFault'
       parameters:
         - name: body
           in: body
@@ -774,6 +893,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateSnapshotSchedule':
+    post:
+      operationId: CreateSnapshotSchedule
+      description: Creates a new snapshot schedule.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SnapshotSchedule'
+        '480':
+          description: SnapshotScheduleAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/SnapshotScheduleAlreadyExistsFault'
+        '481':
+          description: InvalidScheduleFault
+          schema:
+            $ref: '#/definitions/InvalidScheduleFault'
+        '482':
+          description: SnapshotScheduleQuotaExceededFault
+          schema:
+            $ref: '#/definitions/SnapshotScheduleQuotaExceededFault'
+        '483':
+          description: TagLimitExceededFault
+          schema:
+            $ref: '#/definitions/TagLimitExceededFault'
+        '484':
+          description: ScheduleDefinitionTypeUnsupportedFault
+          schema:
+            $ref: '#/definitions/ScheduleDefinitionTypeUnsupportedFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSnapshotScheduleMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateTags':
     post:
       operationId: CreateTags
@@ -834,6 +998,10 @@ paths:
           description: ClusterSnapshotQuotaExceededFault
           schema:
             $ref: '#/definitions/ClusterSnapshotQuotaExceededFault'
+        '484':
+          description: InvalidRetentionPeriodFault
+          schema:
+            $ref: '#/definitions/InvalidRetentionPeriodFault'
       parameters:
         - name: body
           in: body
@@ -1104,6 +1272,37 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteSnapshotSchedule':
+    post:
+      operationId: DeleteSnapshotSchedule
+      description: Deletes a snapshot schedule.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidClusterSnapshotScheduleStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterSnapshotScheduleStateFault'
+        '481':
+          description: SnapshotScheduleNotFoundFault
+          schema:
+            $ref: '#/definitions/SnapshotScheduleNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSnapshotScheduleMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteTags':
     post:
       operationId: DeleteTags
@@ -1135,6 +1334,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAccountAttributes':
+    post:
+      operationId: DescribeAccountAttributes
+      description: Returns a list of attributes attached to an account
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AccountAttributeList'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAccountAttributesMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeClusterDbRevisions':
     post:
       operationId: DescribeClusterDbRevisions
@@ -1148,6 +1372,10 @@ paths:
           description: ClusterNotFoundFault
           schema:
             $ref: '#/definitions/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterStateFault'
       parameters:
         - name: body
           in: body
@@ -1994,6 +2222,50 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSnapshotSchedules':
+    post:
+      operationId: DescribeSnapshotSchedules
+      description: 'Returns a list of snapshot schedules. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSnapshotSchedulesOutputMessage'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSnapshotSchedulesMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeStorage':
+    post:
+      operationId: DescribeStorage
+      description: Returns the total amount of snapshot usage and provisioned storage for a user in megabytes.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CustomerStorageMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeTableRestoreStatus':
     post:
       operationId: DescribeTableRestoreStatus
@@ -2224,6 +2496,10 @@ paths:
           description: DependentServiceRequestThrottlingFault
           schema:
             $ref: '#/definitions/DependentServiceRequestThrottlingFault'
+        '490':
+          description: InvalidRetentionPeriodFault
+          schema:
+            $ref: '#/definitions/InvalidRetentionPeriodFault'
       parameters:
         - name: body
           in: body
@@ -2403,6 +2679,10 @@ paths:
           description: InvalidClusterTrackFault
           schema:
             $ref: '#/definitions/InvalidClusterTrackFault'
+        '498':
+          description: InvalidRetentionPeriodFault
+          schema:
+            $ref: '#/definitions/InvalidRetentionPeriodFault'
       parameters:
         - name: body
           in: body
@@ -2489,6 +2769,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyClusterMaintenance':
+    post:
+      operationId: ModifyClusterMaintenance
+      description: 'Modifies the maintenance settings of a cluster. For example, you can defer a maintenance window. You can also update or cancel a deferment. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyClusterMaintenanceResult'
+        '480':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyClusterMaintenanceMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ModifyClusterParameterGroup':
     post:
       operationId: ModifyClusterParameterGroup
@@ -2512,6 +2821,78 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ModifyClusterParameterGroupMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyClusterSnapshot':
+    post:
+      operationId: ModifyClusterSnapshot
+      description: Modifies the settings for a snapshot.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyClusterSnapshotResult'
+        '480':
+          description: InvalidClusterSnapshotStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterSnapshotStateFault'
+        '481':
+          description: ClusterSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterSnapshotNotFoundFault'
+        '482':
+          description: InvalidRetentionPeriodFault
+          schema:
+            $ref: '#/definitions/InvalidRetentionPeriodFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyClusterSnapshotMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyClusterSnapshotSchedule':
+    post:
+      operationId: ModifyClusterSnapshotSchedule
+      description: Modifies a snapshot schedule for a cluster.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '481':
+          description: SnapshotScheduleNotFoundFault
+          schema:
+            $ref: '#/definitions/SnapshotScheduleNotFoundFault'
+        '482':
+          description: InvalidClusterSnapshotScheduleStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterSnapshotScheduleStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyClusterSnapshotScheduleMessage'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2635,7 +3016,7 @@ paths:
   '/#ModifySnapshotCopyRetentionPeriod':
     post:
       operationId: ModifySnapshotCopyRetentionPeriod
-      description: Modifies the number of days to retain automated snapshots in the destination region after they are copied from the source region.
+      description: 'Modifies the number of days to retain snapshots in the destination region after they are copied from the source region. By default, this only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots will be updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option only newly copied manual snapshots will have the new retention period '
       responses:
         '200':
           description: Success
@@ -2657,12 +3038,53 @@ paths:
           description: InvalidClusterStateFault
           schema:
             $ref: '#/definitions/InvalidClusterStateFault'
+        '484':
+          description: InvalidRetentionPeriodFault
+          schema:
+            $ref: '#/definitions/InvalidRetentionPeriodFault'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/ModifySnapshotCopyRetentionPeriodMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifySnapshotSchedule':
+    post:
+      operationId: ModifySnapshotSchedule
+      description: Modifies a snapshot schedule. Any schedule associate with a cluster will be modified asynchronously.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SnapshotSchedule'
+        '480':
+          description: InvalidScheduleFault
+          schema:
+            $ref: '#/definitions/InvalidScheduleFault'
+        '481':
+          description: SnapshotScheduleNotFoundFault
+          schema:
+            $ref: '#/definitions/SnapshotScheduleNotFoundFault'
+        '482':
+          description: SnapshotScheduleUpdateInProgressFault
+          schema:
+            $ref: '#/definitions/SnapshotScheduleUpdateInProgressFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifySnapshotScheduleMessage'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2783,7 +3205,7 @@ paths:
   '/#ResizeCluster':
     post:
       operationId: ResizeCluster
-      description: '<p>Changes the size of the cluster. You can change the cluster''s type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize your cluster is avaialble for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> </ul> </li> <li> <p>The type of nodes you add must match the node type for the cluster.</p> </li> </ul>'
+      description: '<p>Changes the size of the cluster. You can change the cluster''s type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -2938,6 +3360,10 @@ paths:
           description: InvalidClusterTrackFault
           schema:
             $ref: '#/definitions/InvalidClusterTrackFault'
+        '502':
+          description: SnapshotScheduleNotFoundFault
+          schema:
+            $ref: '#/definitions/SnapshotScheduleNotFoundFault'
       parameters:
         - name: body
           in: body
@@ -3195,6 +3621,109 @@ definitions:
   DependentServiceRequestThrottlingFault: {}
   InvalidClusterSnapshotStateFault: {}
   LimitExceededFault: {}
+  BatchDeleteClusterSnapshotsResult:
+    type: object
+    properties:
+      Resources:
+        $ref: '#/definitions/SnapshotIdentifierList'
+        description: 'A list of the snapshot identifiers that were deleted. '
+      Errors:
+        $ref: '#/definitions/BatchSnapshotOperationErrorList'
+        description: A list of any errors returned.
+  BatchDeleteClusterSnapshotsRequest:
+    type: object
+    required:
+      - Identifiers
+    properties:
+      Identifiers:
+        $ref: '#/definitions/DeleteClusterSnapshotMessageList'
+        description: A list of indentifiers for the snapshots you want to delete.
+  BatchDeleteRequestSizeExceededFault: {}
+  BatchModifyClusterSnapshotsOutputMessage:
+    type: object
+    properties:
+      Resources:
+        $ref: '#/definitions/SnapshotIdentifierList'
+        description: A list of the snapshots that were modified.
+      Errors:
+        $ref: '#/definitions/BatchSnapshotOperationErrors'
+        description: A list of any errors returned.
+  BatchModifyClusterSnapshotsMessage:
+    type: object
+    required:
+      - SnapshotIdentifierList
+    properties:
+      SnapshotIdentifierList:
+        $ref: '#/definitions/SnapshotIdentifierList'
+        description: A list of snapshot identifiers you want to modify.
+      ManualSnapshotRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of days that a manual snapshot is retained. If you specify the value -1, the manual snapshot is retained indefinitely.</p> <p>The number must be either -1 or an integer between 1 and 3,653.</p> <p>If you decrease the manual snapshot retention period from its current value, existing manual snapshots that fall outside of the new retention period will return an error. If you want to suppress the errors and delete the snapshots, use the force option. </p>'
+      Force:
+        $ref: '#/definitions/Boolean'
+        description: 'A boolean value indicating whether to override an exception if the retention period has passed. '
+  InvalidRetentionPeriodFault: {}
+  BatchModifyClusterSnapshotsLimitExceededFault: {}
+  ResizeProgressMessage:
+    type: object
+    properties:
+      TargetNodeType:
+        $ref: '#/definitions/String'
+        description: The node type that the cluster will have after the resize operation is complete.
+      TargetNumberOfNodes:
+        $ref: '#/definitions/IntegerOptional'
+        description: The number of nodes that the cluster will have after the resize operation is complete.
+      TargetClusterType:
+        $ref: '#/definitions/String'
+        description: '<p>The cluster type after the resize operation is complete.</p> <p>Valid Values: <code>multi-node</code> | <code>single-node</code> </p>'
+      Status:
+        $ref: '#/definitions/String'
+        description: '<p>The status of the resize operation.</p> <p>Valid Values: <code>NONE</code> | <code>IN_PROGRESS</code> | <code>FAILED</code> | <code>SUCCEEDED</code> | <code>CANCELLING</code> </p>'
+      ImportTablesCompleted:
+        $ref: '#/definitions/ImportTablesCompleted'
+        description: '<p>The names of tables that have been completely imported .</p> <p>Valid Values: List of table names.</p>'
+      ImportTablesInProgress:
+        $ref: '#/definitions/ImportTablesInProgress'
+        description: '<p>The names of tables that are being currently imported.</p> <p>Valid Values: List of table names.</p>'
+      ImportTablesNotStarted:
+        $ref: '#/definitions/ImportTablesNotStarted'
+        description: '<p>The names of tables that have not been yet imported.</p> <p>Valid Values: List of table names</p>'
+      AvgResizeRateInMegaBytesPerSecond:
+        $ref: '#/definitions/DoubleOptional'
+        description: 'The average rate of the resize operation over the last few minutes, measured in megabytes per second. After the resize operation completes, this value shows the average rate of the entire resize operation.'
+      TotalResizeDataInMegaBytes:
+        $ref: '#/definitions/LongOptional'
+        description: 'The estimated total amount of data, in megabytes, on the cluster before the resize operation began.'
+      ProgressInMegaBytes:
+        $ref: '#/definitions/LongOptional'
+        description: 'While the resize operation is in progress, this value shows the current amount of data, in megabytes, that has been processed so far. When the resize operation is complete, this value shows the total amount of data, in megabytes, on the cluster, which may be more or less than TotalResizeDataInMegaBytes (the estimated total amount of data before resize).'
+      ElapsedTimeInSeconds:
+        $ref: '#/definitions/LongOptional'
+        description: 'The amount of seconds that have elapsed since the resize operation began. After the resize operation completes, this value shows the total actual time, in seconds, for the resize operation.'
+      EstimatedTimeToCompletionInSeconds:
+        $ref: '#/definitions/LongOptional'
+        description: 'The estimated time remaining, in seconds, until the resize operation is complete. This value is calculated based on the average resize rate and the estimated amount of data remaining to be processed. Once the resize operation is complete, this value will be 0.'
+      ResizeType:
+        $ref: '#/definitions/String'
+        description: 'An enum with possible values of <code>ClassicResize</code> and <code>ElasticResize</code>. These values describe the type of resize operation being performed. '
+      Message:
+        $ref: '#/definitions/String'
+        description: An optional string to provide additional details about the resize action.
+      TargetEncryptionType:
+        $ref: '#/definitions/String'
+        description: '<p>The type of encryption for the cluster after the resize is complete.</p> <p>Possible values are <code>KMS</code> and <code>None</code>. In the China region possible values are: <code>Legacy</code> and <code>None</code>.</p>'
+    description: Describes the result of a cluster resize operation.
+  CancelResizeMessage:
+    type: object
+    required:
+      - ClusterIdentifier
+    properties:
+      ClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: The unique identifier for the cluster that you want to cancel a resize operation for.
+  ClusterNotFoundFault: {}
+  ResizeNotFoundFault: {}
+  InvalidClusterStateFault: {}
   CopyClusterSnapshotResult:
     type: object
     properties:
@@ -3215,6 +3744,9 @@ definitions:
       TargetSnapshotIdentifier:
         $ref: '#/definitions/String'
         description: '<p>The identifier given to the new manual snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank.</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for the AWS account that is making the request.</p> </li> </ul>'
+      ManualSnapshotRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p> <p>The default value is -1.</p>'
     description: <p/>
   ClusterSnapshotAlreadyExistsFault: {}
   ClusterSnapshotQuotaExceededFault: {}
@@ -3270,6 +3802,9 @@ definitions:
       AutomatedSnapshotRetentionPeriod:
         $ref: '#/definitions/IntegerOptional'
         description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>Default: <code>1</code> </p> <p>Constraints: Must be a value from 0 to 35.</p>'
+      ManualSnapshotRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting does not change the retention period of existing snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653</p>'
       Port:
         $ref: '#/definitions/IntegerOptional'
         description: '<p>The port number on which the cluster accepts incoming connections.</p> <p>The cluster is accessible only via the JDBC and ODBC connection strings. Part of the connection string requires the port on which the cluster will listen for incoming connections.</p> <p>Default: <code>5439</code> </p> <p>Valid Values: <code>1150-65535</code> </p>'
@@ -3315,6 +3850,9 @@ definitions:
       MaintenanceTrackName:
         $ref: '#/definitions/String'
         description: 'An optional parameter for the name of the maintenance track for the cluster. If you don''t provide a maintenance track name, the cluster is assigned to the <code>current</code> track.'
+      SnapshotScheduleIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the snapshot schedule.
     description: <p/>
   ClusterAlreadyExistsFault: {}
   InsufficientClusterCapacityFault: {}
@@ -3333,6 +3871,7 @@ definitions:
   TagLimitExceededFault: {}
   InvalidTagFault: {}
   InvalidClusterTrackFault: {}
+  SnapshotScheduleNotFoundFault: {}
   CreateClusterParameterGroupResult:
     type: object
     properties:
@@ -3400,12 +3939,13 @@ definitions:
       ClusterIdentifier:
         $ref: '#/definitions/String'
         description: The cluster identifier for which you want a snapshot.
+      ManualSnapshotRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p> <p>The default value is -1.</p>'
       Tags:
         $ref: '#/definitions/TagList'
         description: A list of tag instances.
     description: <p/>
-  InvalidClusterStateFault: {}
-  ClusterNotFoundFault: {}
   CreateClusterSubnetGroupResult:
     type: object
     properties:
@@ -3459,7 +3999,7 @@ definitions:
         description: '<p>A list of one or more identifiers of Amazon Redshift source objects. All of the objects must be of the same type as was specified in the source type parameter. The event subscription will return only events generated by the specified objects. If not specified, then events are returned for all objects within the source type specified.</p> <p>Example: my-cluster-1, my-cluster-2</p> <p>Example: my-snapshot-20131010</p>'
       EventCategories:
         $ref: '#/definitions/EventCategoriesList'
-        description: '<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: Configuration, Management, Monitoring, Security</p>'
+        description: '<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: configuration, management, monitoring, security</p>'
       Severity:
         $ref: '#/definitions/String'
         description: '<p>Specifies the Amazon Redshift event severity to be published by the event notification subscription.</p> <p>Values: ERROR, INFO</p>'
@@ -3559,6 +4099,46 @@ definitions:
     description: The result of the <code>CreateSnapshotCopyGrant</code> action.
   SnapshotCopyGrantAlreadyExistsFault: {}
   SnapshotCopyGrantQuotaExceededFault: {}
+  SnapshotSchedule:
+    type: object
+    properties:
+      ScheduleDefinitions:
+        $ref: '#/definitions/ScheduleDefinitionList'
+        description: A list of ScheduleDefinitions
+      ScheduleIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the schedule.
+      ScheduleDescription:
+        $ref: '#/definitions/String'
+        description: The description of the schedule.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: An optional set of tags describing the schedule.
+      NextInvocations:
+        $ref: '#/definitions/ScheduledSnapshotTimeList'
+    description: 'Describes a snapshot schedule. You can set a regular interval for creating snapshots of a cluster. You can also schedule snapshots for specific dates. '
+  CreateSnapshotScheduleMessage:
+    type: object
+    properties:
+      ScheduleDefinitions:
+        $ref: '#/definitions/ScheduleDefinitionList'
+        description: 'The definition of the snapshot schedule. The definition is made up of schedule expressions. For example, "cron(30 12 *)" or "rate(12 hours)". '
+      ScheduleIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for a snapshot schedule. Only alphanumeric characters are allowed for the identifier.
+      ScheduleDescription:
+        $ref: '#/definitions/String'
+        description: The description of the snapshot schedule.
+      Tags:
+        $ref: '#/definitions/TagList'
+      DryRun:
+        $ref: '#/definitions/BooleanOptional'
+      NextInvocations:
+        $ref: '#/definitions/IntegerOptional'
+  SnapshotScheduleAlreadyExistsFault: {}
+  InvalidScheduleFault: {}
+  SnapshotScheduleQuotaExceededFault: {}
+  ScheduleDefinitionTypeUnsupportedFault: {}
   CreateTagsMessage:
     type: object
     required:
@@ -3592,6 +4172,9 @@ definitions:
       FinalClusterSnapshotIdentifier:
         $ref: '#/definitions/String'
         description: '<p>The identifier of the final snapshot that is to be created immediately before deleting the cluster. If this parameter is provided, <i>SkipFinalClusterSnapshot</i> must be <code>false</code>. </p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+      FinalClusterSnapshotRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely.</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p> <p>The default value is -1.</p>'
     description: <p/>
   DeleteClusterParameterGroupMessage:
     type: object
@@ -3624,7 +4207,7 @@ definitions:
     properties:
       SnapshotIdentifier:
         $ref: '#/definitions/String'
-        description: '<p>The unique identifier of the manual snapshot to be deleted.</p> <p>Constraints: Must be the name of an existing snapshot that is in the <code>available</code> state.</p>'
+        description: '<p>The unique identifier of the manual snapshot to be deleted.</p> <p>Constraints: Must be the name of an existing snapshot that is in the <code>available</code>, <code>failed</code>, or <code>cancelled</code> state.</p>'
       SnapshotClusterIdentifier:
         $ref: '#/definitions/String'
         description: '<p>The unique identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.</p> <p>Constraints: Must be the name of valid cluster.</p>'
@@ -3681,6 +4264,15 @@ definitions:
     description: The result of the <code>DeleteSnapshotCopyGrant</code> action.
   InvalidSnapshotCopyGrantStateFault: {}
   SnapshotCopyGrantNotFoundFault: {}
+  DeleteSnapshotScheduleMessage:
+    type: object
+    required:
+      - ScheduleIdentifier
+    properties:
+      ScheduleIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier of the snapshot schedule to delete.
+  InvalidClusterSnapshotScheduleStateFault: {}
   DeleteTagsMessage:
     type: object
     required:
@@ -3694,6 +4286,18 @@ definitions:
         $ref: '#/definitions/TagKeyList'
         description: The tag key that you want to delete.
     description: 'Contains the output from the <code>DeleteTags</code> action. '
+  AccountAttributeList:
+    type: object
+    properties:
+      AccountAttributes:
+        $ref: '#/definitions/AttributeList'
+        description: A list of attributes assigned to an account.
+  DescribeAccountAttributesMessage:
+    type: object
+    properties:
+      AttributeNames:
+        $ref: '#/definitions/AttributeNameList'
+        description: A list of attribute names.
   ClusterDbRevisionsMessage:
     type: object
     properties:
@@ -3847,6 +4451,8 @@ definitions:
       ClusterExists:
         $ref: '#/definitions/BooleanOptional'
         description: 'A value that indicates whether to return snapshots only for an existing cluster. Table-level restore can be performed only using a snapshot of an existing cluster, that is, a cluster that has not been deleted. If <code>ClusterExists</code> is set to <code>true</code>, <code>ClusterIdentifier</code> is required.'
+      SortingEntities:
+        $ref: '#/definitions/SnapshotSortingEntityList'
     description: <p/>
   ClusterSubnetGroupMessage:
     type: object
@@ -4212,55 +4818,6 @@ definitions:
         $ref: '#/definitions/String'
         description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeReservedNodes</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
     description: <p/>
-  ResizeProgressMessage:
-    type: object
-    properties:
-      TargetNodeType:
-        $ref: '#/definitions/String'
-        description: The node type that the cluster will have after the resize operation is complete.
-      TargetNumberOfNodes:
-        $ref: '#/definitions/IntegerOptional'
-        description: The number of nodes that the cluster will have after the resize operation is complete.
-      TargetClusterType:
-        $ref: '#/definitions/String'
-        description: '<p>The cluster type after the resize operation is complete.</p> <p>Valid Values: <code>multi-node</code> | <code>single-node</code> </p>'
-      Status:
-        $ref: '#/definitions/String'
-        description: '<p>The status of the resize operation.</p> <p>Valid Values: <code>NONE</code> | <code>IN_PROGRESS</code> | <code>FAILED</code> | <code>SUCCEEDED</code> </p>'
-      ImportTablesCompleted:
-        $ref: '#/definitions/ImportTablesCompleted'
-        description: '<p>The names of tables that have been completely imported .</p> <p>Valid Values: List of table names.</p>'
-      ImportTablesInProgress:
-        $ref: '#/definitions/ImportTablesInProgress'
-        description: '<p>The names of tables that are being currently imported.</p> <p>Valid Values: List of table names.</p>'
-      ImportTablesNotStarted:
-        $ref: '#/definitions/ImportTablesNotStarted'
-        description: '<p>The names of tables that have not been yet imported.</p> <p>Valid Values: List of table names</p>'
-      AvgResizeRateInMegaBytesPerSecond:
-        $ref: '#/definitions/DoubleOptional'
-        description: 'The average rate of the resize operation over the last few minutes, measured in megabytes per second. After the resize operation completes, this value shows the average rate of the entire resize operation.'
-      TotalResizeDataInMegaBytes:
-        $ref: '#/definitions/LongOptional'
-        description: 'The estimated total amount of data, in megabytes, on the cluster before the resize operation began.'
-      ProgressInMegaBytes:
-        $ref: '#/definitions/LongOptional'
-        description: 'While the resize operation is in progress, this value shows the current amount of data, in megabytes, that has been processed so far. When the resize operation is complete, this value shows the total amount of data, in megabytes, on the cluster, which may be more or less than TotalResizeDataInMegaBytes (the estimated total amount of data before resize).'
-      ElapsedTimeInSeconds:
-        $ref: '#/definitions/LongOptional'
-        description: 'The amount of seconds that have elapsed since the resize operation began. After the resize operation completes, this value shows the total actual time, in seconds, for the resize operation.'
-      EstimatedTimeToCompletionInSeconds:
-        $ref: '#/definitions/LongOptional'
-        description: 'The estimated time remaining, in seconds, until the resize operation is complete. This value is calculated based on the average resize rate and the estimated amount of data remaining to be processed. Once the resize operation is complete, this value will be 0.'
-      ResizeType:
-        $ref: '#/definitions/String'
-        description: 'An enum with possible values of ClassicResize and ElasticResize. These values describe the type of resize operation being performed. '
-      Message:
-        $ref: '#/definitions/String'
-        description: An optional string to provide additional details about the resize action.
-      TargetEncryptionType:
-        $ref: '#/definitions/String'
-        description: '<p>The type of encryption for the cluster after the resize is complete.</p> <p>Possible values are <code>KMS</code> and <code>None</code>. In the China region possible values are: <code>Legacy</code> and <code>None</code>.</p>'
-    description: Describes the result of a cluster resize operation.
   DescribeResizeMessage:
     type: object
     required:
@@ -4270,7 +4827,6 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive.</p> <p>By default, resize operations for all clusters defined for an AWS account are returned.</p>'
     description: <p/>
-  ResizeNotFoundFault: {}
   SnapshotCopyGrantMessage:
     type: object
     properties:
@@ -4300,6 +4856,45 @@ definitions:
         $ref: '#/definitions/TagValueList'
         description: 'A tag value or values for which you want to return all matching resources that are associated with the specified value or values. For example, suppose that you have resources tagged with values called <code>admin</code> and <code>test</code>. If you specify both of these tag values in the request, Amazon Redshift returns a response with all resources that have either or both of these tag values associated with them.'
     description: The result of the <code>DescribeSnapshotCopyGrants</code> action.
+  DescribeSnapshotSchedulesOutputMessage:
+    type: object
+    properties:
+      SnapshotSchedules:
+        $ref: '#/definitions/SnapshotScheduleList'
+        description: A list of SnapshotSchedules.
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>marker</code> parameter and retrying the command. If the <code>marker</code> field is empty, all response records have been retrieved for the request.'
+  DescribeSnapshotSchedulesMessage:
+    type: object
+    properties:
+      ClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: The unique identifier for the cluster whose snapshot schedules you want to view.
+      ScheduleIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for a snapshot schedule.
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: The key value for a snapshot schedule tag.
+      TagValues:
+        $ref: '#/definitions/TagValueList'
+        description: The value corresponding to the key of the snapshot schedule tag.
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>marker</code> parameter and retrying the command. If the <code>marker</code> field is empty, all response records have been retrieved for the request.'
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The maximum number or response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned <code>marker</code> value.'
+  CustomerStorageMessage:
+    type: object
+    properties:
+      TotalBackupSizeInMegaBytes:
+        $ref: '#/definitions/Double'
+        description: The total amount of storage currently used for snapshots.
+      TotalProvisionedStorageInMegaBytes:
+        $ref: '#/definitions/Double'
+        description: The total amount of storage currently provisioned.
   TableRestoreStatusMessage:
     type: object
     properties:
@@ -4426,6 +5021,9 @@ definitions:
       SnapshotCopyGrantName:
         $ref: '#/definitions/String'
         description: The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.
+      ManualSnapshotRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of days to retain newly copied snapshots in the destination region after they are copied from the source region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
     description: <p/>
   IncompatibleOrderableOptions: {}
   CopyToRegionDisabledFault: {}
@@ -4530,6 +5128,9 @@ definitions:
       AutomatedSnapshotRetentionPeriod:
         $ref: '#/definitions/IntegerOptional'
         description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted.</p> <p>Default: Uses existing setting.</p> <p>Constraints: Must be a value from 0 to 35.</p>'
+      ManualSnapshotRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The default for number of days that a newly created manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. This value will not retroactively change the retention periods of existing manual snapshots</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p> <p>The default value is -1.</p>'
       PreferredMaintenanceWindow:
         $ref: '#/definitions/String'
         description: '<p>The weekly time range (in UTC) during which system maintenance can occur, if necessary. If system maintenance is necessary during the window, it may result in an outage.</p> <p>This maintenance window change is made immediately. If the new maintenance window indicates the current time, there must be at least 120 minutes between the current time and end of the window in order to ensure that pending changes are applied.</p> <p>Default: Uses existing setting.</p> <p>Format: ddd:hh24:mi-ddd:hh24:mi, for example <code>wed:07:30-wed:08:00</code>.</p> <p>Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun</p> <p>Constraints: Must be at least 30 minutes.</p>'
@@ -4607,6 +5208,34 @@ definitions:
         $ref: '#/definitions/IamRoleArnList'
         description: Zero or more IAM roles in ARN format to disassociate from the cluster. You can disassociate up to 10 IAM roles from a single cluster in a single request.
     description: <p/>
+  ModifyClusterMaintenanceResult:
+    type: object
+    properties:
+      Cluster:
+        $ref: '#/definitions/Cluster'
+  ModifyClusterMaintenanceMessage:
+    type: object
+    required:
+      - ClusterIdentifier
+    properties:
+      ClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the cluster.
+      DeferMaintenance:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'A boolean indicating whether to enable the deferred maintenance window. '
+      DeferMaintenanceIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the deferred maintenance window.
+      DeferMaintenanceStartTime:
+        $ref: '#/definitions/TStamp'
+        description: A timestamp indicating the start time for the deferred maintenance window.
+      DeferMaintenanceEndTime:
+        $ref: '#/definitions/TStamp'
+        description: 'A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can''t specify a duration.'
+      DeferMaintenanceDuration:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'An integer indicating the duration of the maintenance window in days. If you specify a duration, you can''t specify an end time. The duration must be 14 days or less.'
   ClusterParameterGroupNameMessage:
     type: object
     properties:
@@ -4630,6 +5259,39 @@ definitions:
         $ref: '#/definitions/ParametersList'
         description: '<p>An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.</p> <p>For each parameter to be modified, you must supply at least the parameter name and parameter value; other name-value pairs of the parameter are optional.</p> <p>For the workload management (WLM) configuration, you must supply all the name-value pairs in the wlm_json_configuration parameter.</p>'
     description: <p/>
+  ModifyClusterSnapshotResult:
+    type: object
+    properties:
+      Snapshot:
+        $ref: '#/definitions/Snapshot'
+  ModifyClusterSnapshotMessage:
+    type: object
+    required:
+      - SnapshotIdentifier
+    properties:
+      SnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: The identifier of the snapshot whose setting you want to modify.
+      ManualSnapshotRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely.</p> <p>If the manual snapshot falls outside of the new retention period, you can specify the force option to immediately delete the snapshot.</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
+      Force:
+        $ref: '#/definitions/Boolean'
+        description: A Boolean option to override an exception if the retention period has already passed.
+  ModifyClusterSnapshotScheduleMessage:
+    type: object
+    required:
+      - ClusterIdentifier
+    properties:
+      ClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: 'A unique identifier for the cluster whose snapshot schedule you want to modify. '
+      ScheduleIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique alphanumeric identifier for the schedule you want to associate with the cluster.
+      DisassociateSchedule:
+        $ref: '#/definitions/BooleanOptional'
+        description: A boolean to indicate whether to remove the assoiciation between the cluster and the schedule.
   ModifyClusterSubnetGroupResult:
     type: object
     properties:
@@ -4676,7 +5338,7 @@ definitions:
         description: '<p>A list of one or more identifiers of Amazon Redshift source objects. All of the objects must be of the same type as was specified in the source type parameter. The event subscription will return only events generated by the specified objects. If not specified, then events are returned for all objects within the source type specified.</p> <p>Example: my-cluster-1, my-cluster-2</p> <p>Example: my-snapshot-20131010</p>'
       EventCategories:
         $ref: '#/definitions/EventCategoriesList'
-        description: '<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: Configuration, Management, Monitoring, Security</p>'
+        description: '<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: configuration, management, monitoring, security</p>'
       Severity:
         $ref: '#/definitions/String'
         description: '<p>Specifies the Amazon Redshift event severity to be published by the event notification subscription.</p> <p>Values: ERROR, INFO</p>'
@@ -4697,12 +5359,28 @@ definitions:
     properties:
       ClusterIdentifier:
         $ref: '#/definitions/String'
-        description: '<p>The unique identifier of the cluster for which you want to change the retention period for automated snapshots that are copied to a destination region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>'
+        description: '<p>The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>'
       RetentionPeriod:
         $ref: '#/definitions/Integer'
-        description: '<p>The number of days to retain automated snapshots in the destination region after they are copied from the source region.</p> <p>If you decrease the retention period for automated snapshots that are copied to a destination region, Amazon Redshift will delete any existing automated snapshots that were copied to the destination region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35.</p>'
+        description: '<p>The number of days to retain automated snapshots in the destination region after they are copied from the source region.</p> <p>By default, this only changes the retention period of copied automated snapshots. </p> <p>If you decrease the retention period for automated snapshots that are copied to a destination region, Amazon Redshift will delete any existing automated snapshots that were copied to the destination region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p> <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will have the new retention period. </p> <p>If you specify the value of -1 newly copied manual snapshots are retained indefinitely.</p> <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.</p>'
+      Manual:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether to apply the snapshot retention period to newly copied manual snapshots instead of automated snapshots.
     description: <p/>
   SnapshotCopyDisabledFault: {}
+  ModifySnapshotScheduleMessage:
+    type: object
+    required:
+      - ScheduleIdentifier
+      - ScheduleDefinitions
+    properties:
+      ScheduleIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique alphanumeric identifier of the schedule to modify.
+      ScheduleDefinitions:
+        $ref: '#/definitions/ScheduleDefinitionList'
+        description: 'An updated list of schedule definitions. A schedule definition is made up of schedule expressions. For example, "cron(30 12 *)" or "rate(12 hours)".'
+  SnapshotScheduleUpdateInProgressFault: {}
   PurchaseReservedNodeOfferingResult:
     type: object
     properties:
@@ -4775,7 +5453,7 @@ definitions:
         description: The new number of nodes for the cluster.
       Classic:
         $ref: '#/definitions/BooleanOptional'
-        description: 'A boolean value indicating whether the resize operation is using the classic resize process. If you don''t provide this parameter or set the value to <code>false</code> the resize type is elastic. '
+        description: 'A boolean value indicating whether the resize operation is using the classic resize process. If you don''t provide this parameter or set the value to <code>false</code>, the resize type is elastic. '
   RestoreFromClusterSnapshotResult:
     type: object
     properties:
@@ -4838,6 +5516,8 @@ definitions:
       AutomatedSnapshotRetentionPeriod:
         $ref: '#/definitions/IntegerOptional'
         description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>Default: The value selected for the cluster from which the snapshot was taken.</p> <p>Constraints: Must be a value from 0 to 35.</p>'
+      ManualSnapshotRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
       KmsKeyId:
         $ref: '#/definitions/String'
         description: The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.
@@ -4856,6 +5536,9 @@ definitions:
       MaintenanceTrackName:
         $ref: '#/definitions/String'
         description: 'The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the <code>MaintenanceTrack</code> value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks.'
+      SnapshotScheduleIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the snapshot schedule.
     description: <p/>
   AccessToSnapshotDeniedFault: {}
   InvalidRestoreFault: {}
@@ -5003,6 +5686,24 @@ definitions:
       ReservedNodeOfferingType:
         $ref: '#/definitions/ReservedNodeOfferingType'
     description: 'Describes a reserved node. You can call the <a>DescribeReservedNodeOfferings</a> API to obtain the available reserved node offerings. '
+  AttributeValueList:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeValueTarget'
+  AccountAttribute:
+    type: object
+    properties:
+      AttributeName:
+        $ref: '#/definitions/String'
+        description: The name of the attribute.
+      AttributeValues:
+        $ref: '#/definitions/AttributeValueList'
+        description: A list of attribute values.
+    description: 'A name value pair that describes an aspect of an account. '
+  AttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/AccountAttribute'
   AccountWithRestoreAccess:
     type: object
     properties:
@@ -5017,6 +5718,17 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AccountWithRestoreAccess'
+  AttributeNameList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  AttributeValueTarget:
+    type: object
+    properties:
+      AttributeValue:
+        $ref: '#/definitions/String'
+        description: The value of the attribute.
+    description: Describes an attribute value.
   ClusterSecurityGroup:
     type: object
     properties:
@@ -5129,6 +5841,15 @@ definitions:
       MaintenanceTrackName:
         $ref: '#/definitions/String'
         description: The name of the maintenance track for the snapshot.
+      ManualSnapshotRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
+      ManualSnapshotRemainingDays:
+        $ref: '#/definitions/IntegerOptional'
+        description: The number of days until a manual snapshot will pass its retention period.
+      SnapshotRetentionStartTime:
+        $ref: '#/definitions/TStamp'
+        description: A timestamp representing the start of the retention period for the snapshot.
     description: Describes a snapshot.
   SupportedPlatformsList:
     type: array
@@ -5147,8 +5868,42 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AvailabilityZone'
+  DeleteClusterSnapshotMessageList:
+    type: array
+    items:
+      $ref: '#/definitions/DeleteClusterSnapshotMessage'
+  SnapshotIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  BatchSnapshotOperationErrorList:
+    type: array
+    items:
+      $ref: '#/definitions/SnapshotErrorMessage'
+  IntegerOptional:
+    type: integer
   Boolean:
     type: boolean
+  BatchSnapshotOperationErrors:
+    type: array
+    items:
+      $ref: '#/definitions/SnapshotErrorMessage'
+  SnapshotErrorMessage:
+    type: object
+    properties:
+      SnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the snapshot returning the error.
+      SnapshotClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the cluster.
+      FailureCode:
+        $ref: '#/definitions/String'
+        description: The failure code for the error.
+      FailureReason:
+        $ref: '#/definitions/String'
+        description: The text message describing the error.
+    description: Describes the errors returned by a snapshot.
   BooleanOptional:
     type: boolean
   Endpoint:
@@ -5237,6 +5992,28 @@ definitions:
         $ref: '#/definitions/Long'
         description: The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore.
     description: Describes the status of a cluster restore action. Returns null if the cluster was not created by restoring a snapshot.
+  DataTransferProgress:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/String'
+        description: Describes the status of the cluster. While the transfer is in progress the status is <code>transferringdata</code>.
+      CurrentRateInMegaBytesPerSecond:
+        $ref: '#/definitions/DoubleOptional'
+        description: Describes the data transfer rate in MB's per second.
+      TotalDataInMegaBytes:
+        $ref: '#/definitions/Long'
+        description: Describes the total amount of data to be transfered in megabytes.
+      DataTransferredInMegaBytes:
+        $ref: '#/definitions/Long'
+        description: Describes the total amount of data that has been transfered in MB's.
+      EstimatedTimeToCompletionInSeconds:
+        $ref: '#/definitions/LongOptional'
+        description: Describes the estimated number of seconds remaining to complete the transfer.
+      ElapsedTimeInSeconds:
+        $ref: '#/definitions/LongOptional'
+        description: Describes the number of seconds that have elapsed during the data transfer.
+    description: Describes the status of a cluster while it is in the process of resizing with an incremental resize.
   HsmStatus:
     type: object
     properties:
@@ -5259,6 +6036,9 @@ definitions:
       RetentionPeriod:
         $ref: '#/definitions/Long'
         description: The number of days that automated snapshots are retained in the destination region after they are copied from a source region.
+      ManualSnapshotRetentionPeriod:
+        $ref: '#/definitions/Integer'
+        description: '<p>The number of days that automated snapshots are retained in the destination region after they are copied from a source region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
       SnapshotCopyGrantName:
         $ref: '#/definitions/String'
         description: The name of the snapshot copy grant.
@@ -5289,6 +6069,26 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  DeferredMaintenanceWindowsList:
+    type: array
+    items:
+      $ref: '#/definitions/DeferredMaintenanceWindow'
+  ScheduleState:
+    type: string
+    enum:
+      - MODIFYING
+      - ACTIVE
+      - FAILED
+  ResizeInfo:
+    type: object
+    properties:
+      ResizeType:
+        $ref: '#/definitions/String'
+        description: Returns the value <code>ClassicResize</code>.
+      AllowCancelResize:
+        $ref: '#/definitions/Boolean'
+        description: A boolean value indicating if the resize operation can be cancelled.
+    description: Describes a resize operation.
   Cluster:
     type: object
     properties:
@@ -5300,7 +6100,7 @@ definitions:
         description: The node type for the nodes in the cluster.
       ClusterStatus:
         $ref: '#/definitions/String'
-        description: '<p> The current state of the cluster. Possible values are the following:</p> <ul> <li> <p> <code>available</code> </p> </li> <li> <p> <code>creating</code> </p> </li> <li> <p> <code>deleting</code> </p> </li> <li> <p> <code>final-snapshot</code> </p> </li> <li> <p> <code>hardware-failure</code> </p> </li> <li> <p> <code>incompatible-hsm</code> </p> </li> <li> <p> <code>incompatible-network</code> </p> </li> <li> <p> <code>incompatible-parameters</code> </p> </li> <li> <p> <code>incompatible-restore</code> </p> </li> <li> <p> <code>modifying</code> </p> </li> <li> <p> <code>rebooting</code> </p> </li> <li> <p> <code>renaming</code> </p> </li> <li> <p> <code>resizing</code> </p> </li> <li> <p> <code>rotating-keys</code> </p> </li> <li> <p> <code>storage-full</code> </p> </li> <li> <p> <code>updating-hsm</code> </p> </li> </ul>'
+        description: '<p> The current state of the cluster. Possible values are the following:</p> <ul> <li> <p> <code>available</code> </p> </li> <li> <p> <code>cancelling-resize</code> </p> </li> <li> <p> <code>creating</code> </p> </li> <li> <p> <code>deleting</code> </p> </li> <li> <p> <code>final-snapshot</code> </p> </li> <li> <p> <code>hardware-failure</code> </p> </li> <li> <p> <code>incompatible-hsm</code> </p> </li> <li> <p> <code>incompatible-network</code> </p> </li> <li> <p> <code>incompatible-parameters</code> </p> </li> <li> <p> <code>incompatible-restore</code> </p> </li> <li> <p> <code>modifying</code> </p> </li> <li> <p> <code>rebooting</code> </p> </li> <li> <p> <code>renaming</code> </p> </li> <li> <p> <code>resizing</code> </p> </li> <li> <p> <code>rotating-keys</code> </p> </li> <li> <p> <code>storage-full</code> </p> </li> <li> <p> <code>updating-hsm</code> </p> </li> </ul>'
       ModifyStatus:
         $ref: '#/definitions/String'
         description: 'The status of a modify operation, if any, initiated for the cluster.'
@@ -5319,6 +6119,9 @@ definitions:
       AutomatedSnapshotRetentionPeriod:
         $ref: '#/definitions/Integer'
         description: The number of days that automatic cluster snapshots are retained.
+      ManualSnapshotRetentionPeriod:
+        $ref: '#/definitions/Integer'
+        description: '<p>The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting does not change the retention period of existing snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653</p>'
       ClusterSecurityGroups:
         $ref: '#/definitions/ClusterSecurityGroupMembershipList'
         description: '<p>A list of cluster security group that are associated with the cluster. Each security group is represented by an element that contains <code>ClusterSecurityGroup.Name</code> and <code>ClusterSecurityGroup.Status</code> subelements. </p> <p>Cluster security groups are used when the cluster is not created in an Amazon Virtual Private Cloud (VPC). Clusters that are created in a VPC use VPC security groups, which are listed by the <b>VpcSecurityGroups</b> parameter. </p>'
@@ -5361,6 +6164,8 @@ definitions:
       RestoreStatus:
         $ref: '#/definitions/RestoreStatus'
         description: A value that describes the status of a cluster restore action. This parameter returns null if the cluster was not created by restoring a snapshot.
+      DataTransferProgress:
+        $ref: '#/definitions/DataTransferProgress'
       HsmStatus:
         $ref: '#/definitions/HsmStatus'
         description: '<p>A value that reports whether the Amazon Redshift cluster has finished applying any hardware security module (HSM) settings changes specified in a modify cluster command.</p> <p>Values: active, applying</p>'
@@ -5399,7 +6204,19 @@ definitions:
         description: The name of the maintenance track for the cluster.
       ElasticResizeNumberOfNodeOptions:
         $ref: '#/definitions/String'
-        description: 'Indicates the number of nodes the cluster can be resized to with the elastic resize method. '
+        description: 'The number of nodes that you can resize the cluster to with the elastic resize method. '
+      DeferredMaintenanceWindows:
+        $ref: '#/definitions/DeferredMaintenanceWindowsList'
+        description: Describes a group of <code>DeferredMaintenanceWindow</code> objects.
+      SnapshotScheduleIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the cluster snapshot schedule.
+      SnapshotScheduleState:
+        $ref: '#/definitions/ScheduleState'
+        description: The current state of the cluster snapshot schedule.
+      ResizeInfo:
+        $ref: '#/definitions/ResizeInfo'
+        description: '<p>Returns the following:</p> <ul> <li> <p>AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.</p> </li> <li> <p>ResizeType: Returns ClassicResize</p> </li> </ul>'
     description: Describes a cluster.
   SensitiveString:
     type: string
@@ -5588,8 +6405,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
-  IntegerOptional:
-    type: integer
   IamRoleArnList:
     type: array
     items:
@@ -5688,6 +6503,18 @@ definitions:
         $ref: '#/definitions/TagList'
         description: A list of tag instances.
     description: '<p>The snapshot copy grant that grants Amazon Redshift permission to encrypt copied snapshots with the specified customer master key (CMK) from AWS KMS in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
+  ScheduleDefinitionList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  Double:
+    type: number
+    format: double
+  DoubleOptional:
+    type: number
+    format: double
+  LongOptional:
+    type: integer
   DbGroupList:
     type: array
     items:
@@ -5705,6 +6532,19 @@ definitions:
         $ref: '#/definitions/ParametersList'
         description: The list of cluster default parameters.
     description: Describes the default cluster parameters for a parameter group family.
+  DeferredMaintenanceWindow:
+    type: object
+    properties:
+      DeferMaintenanceIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the maintenance window.
+      DeferMaintenanceStartTime:
+        $ref: '#/definitions/TStamp'
+        description: ' A timestamp for the beginning of the time period when we defer maintenance.'
+      DeferMaintenanceEndTime:
+        $ref: '#/definitions/TStamp'
+        description: ' A timestamp for the end of the time period when we defer maintenance.'
+    description: Describes a deferred maintenance window
   TagKeyList:
     type: array
     items:
@@ -5713,6 +6553,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  SnapshotSortingEntityList:
+    type: array
+    items:
+      $ref: '#/definitions/SnapshotSortingEntity'
   SourceType:
     type: string
     enum:
@@ -5720,12 +6564,10 @@ definitions:
       - cluster-parameter-group
       - cluster-security-group
       - cluster-snapshot
-  Double:
-    type: number
-    format: double
-  DoubleOptional:
-    type: number
-    format: double
+  SnapshotScheduleList:
+    type: array
+    items:
+      $ref: '#/definitions/SnapshotSchedule'
   EC2SecurityGroup:
     type: object
     properties:
@@ -5751,6 +6593,9 @@ definitions:
       DatabaseVersion:
         $ref: '#/definitions/String'
         description: The cluster version for the new maintenance track.
+      SupportedOperations:
+        $ref: '#/definitions/SupportedOperationList'
+        description: A list of operations supported by the maintenance track.
     description: A maintenance track that you can switch the current track to.
   EligibleTracksToUpdateList:
     type: array
@@ -5860,8 +6705,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
-  LongOptional:
-    type: integer
   MaintenanceTrack:
     type: object
     properties:
@@ -6047,6 +6890,16 @@ definitions:
         $ref: '#/definitions/TStamp'
         description: The date on which the database revision was released.
     description: Describes a <code>RevisionTarget</code>.
+  ScheduledSnapshotTimeList:
+    type: array
+    items:
+      $ref: '#/definitions/TStamp'
+  SnapshotAttributeToSortBy:
+    type: string
+    enum:
+      - SOURCE_TYPE
+      - TOTAL_SIZE
+      - CREATE_TIME
   SnapshotCopyGrantList:
     type: array
     items:
@@ -6055,6 +6908,23 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Snapshot'
+  SortByOrder:
+    type: string
+    enum:
+      - ASC
+      - DESC
+  SnapshotSortingEntity:
+    type: object
+    required:
+      - Attribute
+    properties:
+      Attribute:
+        $ref: '#/definitions/SnapshotAttributeToSortBy'
+        description: The category for sorting the snapshots.
+      SortOrder:
+        $ref: '#/definitions/SortByOrder'
+        description: The order for listing the attributes.
+    description: Describes a sorting entity
   Subnet:
     type: object
     properties:
@@ -6067,6 +6937,17 @@ definitions:
         $ref: '#/definitions/String'
         description: The status of the subnet.
     description: Describes a subnet.
+  SupportedOperation:
+    type: object
+    properties:
+      OperationName:
+        $ref: '#/definitions/String'
+        description: A list of the supported operations.
+    description: Describes the operations that are allowed on a maintenance track.
+  SupportedOperationList:
+    type: array
+    items:
+      $ref: '#/definitions/SupportedOperation'
   SupportedPlatform:
     type: object
     properties:

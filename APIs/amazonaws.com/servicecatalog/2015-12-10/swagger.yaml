@@ -3065,10 +3065,10 @@ definitions:
         description: The product identifier.
       Parameters:
         $ref: '#/definitions/ConstraintParameters'
-        description: '<p>The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:</p> <dl> <dt>LAUNCH</dt> <dd> <p>Specify the <code>RoleArn</code> property as follows:</p> <p>\"RoleArn\" : \"arn:aws:iam::123456789012:role/LaunchRole\"</p> </dd> <dt>NOTIFICATION</dt> <dd> <p>Specify the <code>NotificationArns</code> property as follows:</p> <p>\"NotificationArns\" : [\"arn:aws:sns:us-east-1:123456789012:Topic\"]</p> </dd> <dt>TEMPLATE</dt> <dd> <p>Specify the <code>Rules</code> property. For more information, see <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html">Template Constraint Rules</a>.</p> </dd> </dl>'
+        description: '<p>The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:</p> <dl> <dt>LAUNCH</dt> <dd> <p>Specify the <code>RoleArn</code> property as follows:</p> <p> <code>{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>LAUNCH</code> constraint on a product and portfolio.</p> </dd> <dt>NOTIFICATION</dt> <dd> <p>Specify the <code>NotificationArns</code> property as follows:</p> <p> <code>{"NotificationArns" : ["arn:aws:sns:us-east-1:123456789012:Topic"]}</code> </p> </dd> <dt>STACKSET</dt> <dd> <p>Specify the <code>Parameters</code> property as follows:</p> <p> <code>{"Version": "String", "Properties": {"AccountList": [ "String" ], "RegionList": [ "String" ], "AdminRole": "String", "ExecutionRole": "String"}}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>STACKSET</code> constraint on a product and portfolio.</p> <p>Products with a <code>STACKSET</code> constraint will launch an AWS CloudFormation stack set.</p> </dd> <dt>TEMPLATE</dt> <dd> <p>Specify the <code>Rules</code> property. For more information, see <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html">Template Constraint Rules</a>.</p> </dd> </dl>'
       Type:
         $ref: '#/definitions/ConstraintType'
-        description: <p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>
+        description: <p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p> <code>STACKSET</code> </p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>
       Description:
         $ref: '#/definitions/ConstraintDescription'
         description: The description of the constraint.
@@ -3713,6 +3713,9 @@ definitions:
       TagOptions:
         $ref: '#/definitions/TagOptionSummaries'
         description: Information about the TagOptions associated with the resource.
+      ProvisioningArtifactPreferences:
+        $ref: '#/definitions/ProvisioningArtifactPreferences'
+        description: 'An object that contains information about preferences, such as regions and accounts, for the provisioning artifact.'
   DescribeProvisioningParametersInput:
     type: object
     required:
@@ -4363,6 +4366,9 @@ definitions:
       ProvisioningParameters:
         $ref: '#/definitions/ProvisioningParameters'
         description: Parameters specified by the administrator that are required for provisioning the product.
+      ProvisioningPreferences:
+        $ref: '#/definitions/ProvisioningPreferences'
+        description: An object that contains information about the provisioning preferences for a stack set.
       Tags:
         $ref: '#/definitions/Tags'
         description: One or more tags.
@@ -4684,6 +4690,9 @@ definitions:
       ProvisioningParameters:
         $ref: '#/definitions/UpdateProvisioningParameters'
         description: The new parameters.
+      ProvisioningPreferences:
+        $ref: '#/definitions/UpdateProvisioningPreferences'
+        description: An object that contains information about the provisioning preferences for a stack set.
       UpdateToken:
         $ref: '#/definitions/IdempotencyToken'
         description: The idempotency token that uniquely identifies the provisioning update request.
@@ -5278,7 +5287,7 @@ definitions:
         description: The ARN of the provisioned product.
       Type:
         $ref: '#/definitions/ProvisionedProductType'
-        description: The type of provisioned product. The supported value is <code>CFN_STACK</code>.
+        description: The type of provisioned product. The supported values are <code>CFN_STACK</code> and <code>CFN_STACKSET</code>.
       Id:
         $ref: '#/definitions/ProvisionedProductId'
         description: The identifier of the provisioned product.
@@ -5379,6 +5388,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagOptionSummary'
+  ProvisioningArtifactPreferences:
+    type: object
+    properties:
+      StackSetAccounts:
+        $ref: '#/definitions/StackSetAccounts'
+        description: <p>One or more AWS accounts where stack instances are deployed from the stack set. These accounts can be scoped in <code>ProvisioningPreferences$StackSetAccounts</code> and <code>UpdateProvisioningPreferences$StackSetAccounts</code>.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p>
+      StackSetRegions:
+        $ref: '#/definitions/StackSetRegions'
+        description: <p>One or more AWS Regions where stack instances are deployed from the stack set. These regions can be scoped in <code>ProvisioningPreferences$StackSetRegions</code> and <code>UpdateProvisioningPreferences$StackSetRegions</code>.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p>
+    description: '<p>The user-defined preferences that will be applied during product provisioning, unless overridden by <code>ProvisioningPreferences</code> or <code>UpdateProvisioningPreferences</code>.</p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
   RecordDetail:
     type: object
     properties:
@@ -5399,7 +5418,7 @@ definitions:
         description: The time when the record was last updated.
       ProvisionedProductType:
         $ref: '#/definitions/ProvisionedProductType'
-        description: The type of provisioned product. The supported value is <code>CFN_STACK</code>.
+        description: The type of provisioned product. The supported values are <code>CFN_STACK</code> and <code>CFN_STACKSET</code>.
       RecordType:
         $ref: '#/definitions/RecordType'
         description: <p>The record type.</p> <ul> <li> <p> <code>PROVISION_PRODUCT</code> </p> </li> <li> <p> <code>UPDATE_PROVISIONED_PRODUCT</code> </p> </li> <li> <p> <code>TERMINATE_PROVISIONED_PRODUCT</code> </p> </li> </ul>
@@ -5703,6 +5722,28 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ProvisioningParameter'
+  ProvisioningPreferences:
+    type: object
+    properties:
+      StackSetAccounts:
+        $ref: '#/definitions/StackSetAccounts'
+        description: '<p>One or more AWS accounts that will have access to the provisioned product.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The AWS accounts specified should be within the list of accounts in the <code>STACKSET</code> constraint. To get the list of accounts in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all accounts from the <code>STACKSET</code> constraint.</p>'
+      StackSetRegions:
+        $ref: '#/definitions/StackSetRegions'
+        description: '<p>One or more AWS Regions where the provisioned product will be available.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The specified regions should be within the list of regions from the <code>STACKSET</code> constraint. To get the list of regions in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all regions from the <code>STACKSET</code> constraint.</p>'
+      StackSetFailureToleranceCount:
+        $ref: '#/definitions/StackSetFailureToleranceCount'
+        description: '<p>The number of accounts, per region, for which this operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn''t attempt the operation in any subsequent regions.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p> <p>The default value is <code>0</code> if no value is specified.</p>'
+      StackSetFailureTolerancePercentage:
+        $ref: '#/definitions/StackSetFailureTolerancePercentage'
+        description: '<p>The percentage of accounts, per region, for which this stack operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn''t attempt the operation in any subsequent regions.</p> <p>When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p>'
+      StackSetMaxConcurrencyCount:
+        $ref: '#/definitions/StackSetMaxConcurrencyCount'
+        description: '<p>The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of <code>StackSetFailureToleranceCount</code>. <code>StackSetMaxConcurrentCount</code> is at most one more than the <code>StackSetFailureToleranceCount</code>.</p> <p>Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>'
+      StackSetMaxConcurrencyPercentage:
+        $ref: '#/definitions/StackSetMaxConcurrencyPercentage'
+        description: '<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, AWS Service Catalog sets the number as <code>1</code> instead.</p> <p>Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>'
+    description: The user-defined preferences that will be applied when updating a provisioned product. Not all preferences are applicable to all provisioned product types.
   ProvisionedProductNameOrArn:
     type: string
     pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}|arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -5735,7 +5776,7 @@ definitions:
         description: The ARN of the provisioned product.
       Type:
         $ref: '#/definitions/ProvisionedProductType'
-        description: The type of provisioned product. The supported value is <code>CFN_STACK</code>.
+        description: The type of provisioned product. The supported values are <code>CFN_STACK</code> and <code>CFN_STACKSET</code>.
       Id:
         $ref: '#/definitions/Id'
         description: The identifier of the provisioned product.
@@ -5896,6 +5937,14 @@ definitions:
         $ref: '#/definitions/ParameterConstraints'
         description: Constraints that the administrator has put on a parameter.
     description: Information about a parameter used to provision a product.
+  StackSetAccounts:
+    type: array
+    items:
+      $ref: '#/definitions/AccountId'
+  StackSetRegions:
+    type: array
+    items:
+      $ref: '#/definitions/Region'
   ProvisioningArtifactPropertyName:
     type: string
     enum:
@@ -5941,6 +5990,20 @@ definitions:
         $ref: '#/definitions/ParameterValue'
         description: The parameter value.
     description: Information about a parameter used to provision a product.
+  StackSetFailureToleranceCount:
+    type: integer
+    minimum: 0
+  StackSetFailureTolerancePercentage:
+    type: integer
+    minimum: 0
+    maximum: 100
+  StackSetMaxConcurrencyCount:
+    type: integer
+    minimum: 1
+  StackSetMaxConcurrencyPercentage:
+    type: integer
+    minimum: 1
+    maximum: 100
   RecordStatus:
     type: string
     enum:
@@ -6003,6 +6066,8 @@ definitions:
         $ref: '#/definitions/RecordTagValue'
         description: The value for this tag.
     description: 'Information about a tag, which is a key-value pair.'
+  Region:
+    type: string
   Replacement:
     type: string
     enum:
@@ -6200,6 +6265,12 @@ definitions:
           $ref: '#/definitions/ProvisioningArtifactPropertyName'
         value:
           $ref: '#/definitions/ProvisioningArtifactPropertyValue'
+  StackSetOperationType:
+    type: string
+    enum:
+      - CREATE
+      - UPDATE
+      - DELETE
   TagKey:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -6228,6 +6299,31 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagOptionValue'
+  UpdateProvisioningPreferences:
+    type: object
+    properties:
+      StackSetAccounts:
+        $ref: '#/definitions/StackSetAccounts'
+        description: '<p>One or more AWS accounts that will have access to the provisioned product.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The AWS accounts specified should be within the list of accounts in the <code>STACKSET</code> constraint. To get the list of accounts in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all accounts from the <code>STACKSET</code> constraint.</p>'
+      StackSetRegions:
+        $ref: '#/definitions/StackSetRegions'
+        description: '<p>One or more AWS Regions where the provisioned product will be available.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The specified regions should be within the list of regions from the <code>STACKSET</code> constraint. To get the list of regions in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all regions from the <code>STACKSET</code> constraint.</p>'
+      StackSetFailureToleranceCount:
+        $ref: '#/definitions/StackSetFailureToleranceCount'
+        description: '<p>The number of accounts, per region, for which this operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn''t attempt the operation in any subsequent regions.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p> <p>The default value is <code>0</code> if no value is specified.</p>'
+      StackSetFailureTolerancePercentage:
+        $ref: '#/definitions/StackSetFailureTolerancePercentage'
+        description: '<p>The percentage of accounts, per region, for which this stack operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn''t attempt the operation in any subsequent regions.</p> <p>When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p>'
+      StackSetMaxConcurrencyCount:
+        $ref: '#/definitions/StackSetMaxConcurrencyCount'
+        description: '<p>The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of <code>StackSetFailureToleranceCount</code>. <code>StackSetMaxConcurrentCount</code> is at most one more than the <code>StackSetFailureToleranceCount</code>.</p> <p>Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>'
+      StackSetMaxConcurrencyPercentage:
+        $ref: '#/definitions/StackSetMaxConcurrencyPercentage'
+        description: '<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, AWS Service Catalog sets the number as <code>1</code> instead.</p> <p>Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>'
+      StackSetOperationType:
+        $ref: '#/definitions/StackSetOperationType'
+        description: '<p>Determines what action AWS Service Catalog performs to a stack set or a stack instance represented by the provisioned product. The default value is <code>UPDATE</code> if nothing is specified.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <dl> <dt>CREATE</dt> <dd> <p>Creates a new stack instance in the stack set represented by the provisioned product. In this case, only new stack instances are created based on accounts and regions; if new ProductId or ProvisioningArtifactID are passed, they will be ignored.</p> </dd> <dt>UPDATE</dt> <dd> <p>Updates the stack set represented by the provisioned product and also its stack instances.</p> </dd> <dt>DELETE</dt> <dd> <p>Deletes a stack instance in the stack set represented by the provisioned product.</p> </dd> </dl>'
+    description: The user-defined preferences that will be applied when updating a provisioned product. Not all preferences are applicable to all provisioned product types.
   UsePreviousValue:
     type: boolean
   UpdateProvisioningParameter:

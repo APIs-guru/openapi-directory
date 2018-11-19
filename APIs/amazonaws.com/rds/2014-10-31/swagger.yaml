@@ -1347,6 +1347,10 @@ paths:
           description: InvalidDBClusterStateFault
           schema:
             $ref: '#/definitions/InvalidDBClusterStateFault'
+        '485':
+          description: DBInstanceAutomatedBackupQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBInstanceAutomatedBackupQuotaExceededFault'
       parameters:
         - name: body
           in: body
@@ -1363,10 +1367,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDBInstanceAutomatedBackup':
+    post:
+      operationId: DeleteDBInstanceAutomatedBackup
+      description: Deletes automated backups based on the source instance's <code>DbiResourceId</code> value or the restorable instance's resource ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDBInstanceAutomatedBackupResult'
+        '480':
+          description: InvalidDBInstanceAutomatedBackupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceAutomatedBackupStateFault'
+        '481':
+          description: DBInstanceAutomatedBackupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceAutomatedBackupNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDBInstanceAutomatedBackupMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteDBParameterGroup':
     post:
       operationId: DeleteDBParameterGroup
-      description: Deletes a specified DBParameterGroup. The DBParameterGroup to be deleted can't be associated with any DB instances.
+      description: Deletes a specified DB parameter group. The DB parameter group to be deleted can't be associated with any DB instances.
       responses:
         '200':
           description: Success
@@ -1428,7 +1465,7 @@ paths:
   '/#DeleteDBSnapshot':
     post:
       operationId: DeleteDBSnapshot
-      description: '<p>Deletes a DBSnapshot. If the snapshot is being copied, the copy operation is terminated.</p> <note> <p>The DBSnapshot must be in the <code>available</code> state to be deleted.</p> </note>'
+      description: '<p>Deletes a DB snapshot. If the snapshot is being copied, the copy operation is terminated.</p> <note> <p>The DB snapshot must be in the <code>available</code> state to be deleted.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1843,6 +1880,45 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeDBEngineVersionsMessage'
+        - name: MaxRecords
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBInstanceAutomatedBackups':
+    post:
+      operationId: DescribeDBInstanceAutomatedBackups
+      description: '<p>Displays backups for both current and deleted instances. For example, use this operation to find details about automated backups for previously deleted instances. Current instances with retention periods greater than zero (0) are returned for both the <code>DescribeDBInstanceAutomatedBackups</code> and <code>DescribeDBInstances</code> operations.</p> <p>All parameters are optional.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBInstanceAutomatedBackupMessage'
+        '480':
+          description: DBInstanceAutomatedBackupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceAutomatedBackupNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDBInstanceAutomatedBackupsMessage'
         - name: MaxRecords
           type: string
           in: query
@@ -4223,13 +4299,17 @@ paths:
           schema:
             $ref: '#/definitions/DomainNotFoundFault'
         '499':
-          description: DBParameterGroupNotFoundFault
-          schema:
-            $ref: '#/definitions/DBParameterGroupNotFoundFault'
-        '500':
           description: BackupPolicyNotFoundFault
           schema:
             $ref: '#/definitions/BackupPolicyNotFoundFault'
+        '500':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+        '501':
+          description: DBInstanceAutomatedBackupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceAutomatedBackupNotFoundFault'
       parameters:
         - name: body
           in: body
@@ -4323,7 +4403,7 @@ paths:
   '/#StartDBInstance':
     post:
       operationId: StartDBInstance
-      description: '<p> Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html"> Starting an Amazon RDS DB Instance That Was Previously Stopped</a> in the <i>Amazon RDS User Guide.</i> </p> <note> <p> This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use <a>StartDBCluster</a> instead. </p> </note>'
+      description: '<p> Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html"> Starting an Amazon RDS DB instance That Was Previously Stopped</a> in the <i>Amazon RDS User Guide.</i> </p> <note> <p> This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use <a>StartDBCluster</a> instead. </p> </note>'
       responses:
         '200':
           description: Success
@@ -5454,11 +5534,31 @@ definitions:
         description: '<p>The DB instance identifier for the DB instance to be deleted. This parameter isn''t case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing DB instance.</p> </li> </ul>'
       SkipFinalSnapshot:
         $ref: '#/definitions/Boolean'
-        description: '<p> Determines whether a final DB snapshot is created before the DB instance is deleted. If <code>true</code> is specified, no DBSnapshot is created. If <code>false</code> is specified, a DB snapshot is created before the DB instance is deleted. </p> <p>Note that when a DB instance is in a failure state and has a status of ''failed'', ''incompatible-restore'', or ''incompatible-network'', it can only be deleted when the SkipFinalSnapshot parameter is set to "true".</p> <p>Specify <code>true</code> when deleting a Read Replica.</p> <note> <p>The FinalDBSnapshotIdentifier parameter must be specified if SkipFinalSnapshot is <code>false</code>.</p> </note> <p>Default: <code>false</code> </p>'
+        description: '<p> A value that indicates whether a final DB snapshot is created before the DB instance is deleted. If <code>true</code> is specified, no DB snapshot is created. If <code>false</code> is specified, a DB snapshot is created before the DB instance is deleted. </p> <p>When a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, or <code>incompatible-network</code>, you can only delete it when the <code>SkipFinalSnapshot</code> parameter is set to <code>true</code>.</p> <p>Specify <code>true</code> when deleting a Read Replica.</p> <note> <p>The <code>FinalDBSnapshotIdentifier</code> parameter must be specified if <code>SkipFinalSnapshot</code> is <code>false</code>.</p> </note> <p>Default: <code>false</code> </p>'
       FinalDBSnapshotIdentifier:
         $ref: '#/definitions/String'
-        description: '<p> The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to <code>false</code>. </p> <note> <p>Specifying this parameter and also setting the SkipFinalShapshot parameter to true results in an error.</p> </note> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters or numbers.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> <li> <p>Can''t be specified when deleting a Read Replica.</p> </li> </ul>'
+        description: '<p> The <code>DBSnapshotIdentifier</code> of the new DB snapshot created when <code>SkipFinalSnapshot</code> is set to <code>false</code>. </p> <note> <p>Specifying this parameter and also setting the <code>SkipFinalShapshot</code> parameter to <code>true</code> results in an error.</p> </note> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters or numbers.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Can''t be specified when deleting a Read Replica.</p> </li> </ul>'
+      DeleteAutomatedBackups:
+        $ref: '#/definitions/BooleanOptional'
+        description: A value that indicates whether to remove automated backups immediately after the DB instance is deleted. This parameter isn't case-sensitive. This parameter defaults to <code>true</code>.
     description: <p/>
+  DBInstanceAutomatedBackupQuotaExceededFault: {}
+  DeleteDBInstanceAutomatedBackupResult:
+    type: object
+    properties:
+      DBInstanceAutomatedBackup:
+        $ref: '#/definitions/DBInstanceAutomatedBackup'
+  DeleteDBInstanceAutomatedBackupMessage:
+    type: object
+    required:
+      - DbiResourceId
+    properties:
+      DbiResourceId:
+        $ref: '#/definitions/String'
+        description: 'The identifier for the source DB instance, which can''t be changed and which is unique to an AWS Region.'
+    description: 'Parameter input for the <code>DeleteDBInstanceAutomatedBackup</code> operation. '
+  InvalidDBInstanceAutomatedBackupStateFault: {}
+  DBInstanceAutomatedBackupNotFoundFault: {}
   DeleteDBParameterGroupMessage:
     type: object
     required:
@@ -5489,7 +5589,7 @@ definitions:
     properties:
       DBSnapshotIdentifier:
         $ref: '#/definitions/String'
-        description: '<p>The DBSnapshot identifier.</p> <p>Constraints: Must be the name of an existing DB snapshot in the <code>available</code> state.</p>'
+        description: '<p>The DB snapshot identifier.</p> <p>Constraints: Must be the name of an existing DB snapshot in the <code>available</code> state.</p>'
     description: <p/>
   DeleteDBSubnetGroupMessage:
     type: object
@@ -5798,6 +5898,35 @@ definitions:
       ListSupportedTimezones:
         $ref: '#/definitions/BooleanOptional'
         description: 'If this parameter is specified and the requested engine supports the <code>TimeZone</code> parameter for <code>CreateDBInstance</code>, the response includes a list of supported time zones for each engine version. '
+  DBInstanceAutomatedBackupMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code> . '
+      DBInstanceAutomatedBackups:
+        $ref: '#/definitions/DBInstanceAutomatedBackupList'
+        description: ' A list of <a>DBInstanceAutomatedBackup</a> instances. '
+    description: ' Contains the result of a successful invocation of the <a>DescribeDBInstanceAutomatedBackups</a> action. '
+  DescribeDBInstanceAutomatedBackupsMessage:
+    type: object
+    properties:
+      DbiResourceId:
+        $ref: '#/definitions/String'
+        description: 'The resource ID of the DB instance that is the source of the automated backup. This parameter isn''t case-sensitive. '
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: '(Optional) The user-supplied instance identifier. If this parameter is specified, it must match the identifier of an existing DB instance. It returns information from the specific DB instance'' automated backup. This parameter isn''t case-sensitive. '
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>A filter that specifies which resources to return based on status.</p> <p>Supported filters are the following:</p> <ul> <li> <p> <code>status</code> </p> <ul> <li> <p> <code>active</code> - automated backups for current instances</p> </li> <li> <p> <code>retained</code> - automated backups for deleted instances</p> </li> <li> <p> <code>creating</code> - automated backups that are waiting for the first automated snapshot to be available</p> </li> </ul> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and Amazon Resource Names (ARNs) for DB instances. The results list includes only information about the DB instance automated backupss identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB instance resource identifiers and DB Amazon Resource Names (ARNs) for DB instances. The results list includes only information about the DB instance resources identified by these ARNs.</p> </li> </ul> <p>Returns all resources by default. The status for each resource is specified in the response.</p>'
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to <code>MaxRecords</code>.'
+    description: 'Parameter input for DescribeDBInstanceAutomatedBackups. '
   DBInstanceMessage:
     type: object
     properties:
@@ -5994,6 +6123,9 @@ definitions:
       IncludePublic:
         $ref: '#/definitions/Boolean'
         description: '<p>True to include manual DB snapshots that are public and can be copied or restored by any AWS account, and otherwise false. The default is false.</p> <p>You can share a manual DB snapshot as public by using the <a>ModifyDBSnapshotAttribute</a> API.</p>'
+      DbiResourceId:
+        $ref: '#/definitions/String'
+        description: A specific DB resource ID to describe.
     description: <p/>
   DBSubnetGroupMessage:
     type: object
@@ -7525,7 +7657,6 @@ definitions:
   RestoreDBInstanceToPointInTimeMessage:
     type: object
     required:
-      - SourceDBInstanceIdentifier
       - TargetDBInstanceIdentifier
     properties:
       SourceDBInstanceIdentifier:
@@ -7614,6 +7745,9 @@ definitions:
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
         description: 'Indicates if the DB instance should have deletion protection enabled. The database can''t be deleted when this value is set to true. The default is false. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
+      SourceDbiResourceId:
+        $ref: '#/definitions/String'
+        description: The resource ID of the source DB instance from which to restore.
     description: <p/>
   PointInTimeRestoreNotEnabledFault: {}
   RevokeDBSecurityGroupIngressResult:
@@ -8070,6 +8204,9 @@ definitions:
       ProcessorFeatures:
         $ref: '#/definitions/ProcessorFeatureList'
         description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance when the DB snapshot was created.
+      DbiResourceId:
+        $ref: '#/definitions/String'
+        description: 'The identifier for the source DB instance, which can''t be changed and which is unique to an AWS Region.'
     description: <p>Contains the details of an Amazon RDS DB snapshot. </p> <p>This data type is used as a response element in the <a>DescribeDBSnapshots</a> action. </p>
   OptionGroup:
     type: object
@@ -8752,6 +8889,93 @@ definitions:
     description: List of Active Directory Domain membership records associated with a DB instance.
     items:
       $ref: '#/definitions/DomainMembership'
+  RestoreWindow:
+    type: object
+    properties:
+      EarliestTime:
+        $ref: '#/definitions/TStamp'
+        description: The earliest time you can restore an instance to.
+      LatestTime:
+        $ref: '#/definitions/TStamp'
+        description: The latest time you can restore an instance to.
+    description: 'Earliest and latest time an instance can be restored to:'
+  DBInstanceAutomatedBackup:
+    type: object
+    properties:
+      DBInstanceArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the automated backup.
+      DbiResourceId:
+        $ref: '#/definitions/String'
+        description: 'The identifier for the source DB instance, which can''t be changed and which is unique to an AWS Region.'
+      Region:
+        $ref: '#/definitions/String'
+        description: The AWS Region associated with the automated backup.
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: 'The customer id of the instance that is/was associated with the automated backup. '
+      RestoreWindow:
+        $ref: '#/definitions/RestoreWindow'
+        description: Earliest and latest time an instance can be restored to.
+      AllocatedStorage:
+        $ref: '#/definitions/Integer'
+        description: Specifies the allocated storage size in gibibytes (GiB).
+      Status:
+        $ref: '#/definitions/String'
+        description: '<p>Provides a list of status information for an automated backup:</p> <ul> <li> <p> <code>active</code> - automated backups for current instances</p> </li> <li> <p> <code>retained</code> - automated backups for deleted instances</p> </li> <li> <p> <code>creating</code> - automated backups that are waiting for the first automated snapshot to be available.</p> </li> </ul>'
+      Port:
+        $ref: '#/definitions/Integer'
+        description: '<p>The port number that the automated backup used for connections.</p> <p>Default: Inherits from the source DB instance</p> <p>Valid Values: <code>1150-65535</code> </p>'
+      AvailabilityZone:
+        $ref: '#/definitions/String'
+        description: 'The Availability Zone that the automated backup was created in. For information on AWS Regions and Availability Zones, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html">Regions and Availability Zones</a>.'
+      VpcId:
+        $ref: '#/definitions/String'
+        description: Provides the VPC ID associated with the DB instance
+      InstanceCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: 'Provides the date and time that the DB instance was created. '
+      MasterUsername:
+        $ref: '#/definitions/String'
+        description: The license model of an automated backup.
+      Engine:
+        $ref: '#/definitions/String'
+        description: The name of the database engine for this automated backup.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: The version of the database engine for the automated backup.
+      LicenseModel:
+        $ref: '#/definitions/String'
+        description: License model information for the automated backup.
+      Iops:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The IOPS (I/O operations per second) value for the automated backup. '
+      OptionGroupName:
+        $ref: '#/definitions/String'
+        description: 'The option group the automated backup is associated with. If omitted, the default option group for the engine specified is used.'
+      TdeCredentialArn:
+        $ref: '#/definitions/String'
+        description: The ARN from the key store with which the automated backup is associated for TDE encryption.
+      Encrypted:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the automated backup is encrypted.
+      StorageType:
+        $ref: '#/definitions/String'
+        description: Specifies the storage type associated with the automated backup.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: 'The AWS KMS key ID for an automated backup. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. '
+      Timezone:
+        $ref: '#/definitions/String'
+        description: 'The time zone of the automated backup. In most cases, the <code>Timezone</code> element is empty. <code>Timezone</code> content appears only for Microsoft SQL Server DB instances that were created with a time zone specified.'
+      IAMDatabaseAuthenticationEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.'
+    description: 'An automated backup of a DB instance. It it consists of system backups, transaction logs, and the database instance properties that existed at the time you deleted the source instance. '
+  DBInstanceAutomatedBackupList:
+    type: array
+    items:
+      $ref: '#/definitions/DBInstanceAutomatedBackup'
   DBInstanceList:
     type: array
     items:

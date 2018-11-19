@@ -250,7 +250,7 @@ paths:
   '/#CreateAssociation':
     post:
       operationId: CreateAssociation
-      description: '<p>Associates the specified Systems Manager document with the specified instances or targets.</p> <p>When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified.</p> <p>If you associate a document with an instance that already has an associated document, the system throws the AssociationAlreadyExists exception.</p>'
+      description: '<p>Associates the specified Systems Manager document with the specified instances or targets.</p> <p>When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified.</p> <p>If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.</p>'
       responses:
         '200':
           description: Success
@@ -319,7 +319,7 @@ paths:
   '/#CreateAssociationBatch':
     post:
       operationId: CreateAssociationBatch
-      description: '<p>Associates the specified Systems Manager document with the specified instances or targets.</p> <p>When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified.</p> <p>If you associate a document with an instance that already has an associated document, the system throws the AssociationAlreadyExists exception.</p>'
+      description: '<p>Associates the specified Systems Manager document with the specified instances or targets.</p> <p>When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified.</p> <p>If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.</p>'
       responses:
         '200':
           description: Success
@@ -5667,7 +5667,7 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/MaintenanceWindowFilterList'
-        description: Optional filters used to narrow down the scope of the returned Maintenance Windows. Supported filter keys are Name and Enabled.
+        description: Optional filters used to narrow down the scope of the returned Maintenance Windows. Supported filter keys are <b>Name</b> and <b>Enabled</b>.
       MaxResults:
         $ref: '#/definitions/MaintenanceWindowMaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
@@ -7228,6 +7228,9 @@ definitions:
       MaxErrors:
         $ref: '#/definitions/MaxErrors'
         description: '<p>The number of errors that are allowed before the system stops running the automation on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops running the automation when the fourth error is received. If you specify 0, then the system stops running the automation on additional targets after the first error result is returned. If you run an automation on 50 resources and set max-errors to 10%, then the system stops running the automation on additional targets when the sixth error is received.</p> <p>Executions that are already running an automation when max-errors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won''t be more than max-errors failed executions, set max-concurrency to 1 so the executions proceed one at a time.</p>'
+      TargetLocations:
+        $ref: '#/definitions/TargetLocations'
+        description: 'A location is a combination of AWS Regions and/or AWS accounts where you want to execute the Automation. Use this action to start an Automation in multiple Regions and multiple accounts. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html">Concurrently Executing Automations in Multiple AWS Regions and Accounts</a> in the <i>AWS Systems Manager User Guide</i>. '
   AutomationDefinitionNotFoundException: {}
   InvalidAutomationExecutionParametersException: {}
   AutomationExecutionLimitExceededException: {}
@@ -7723,6 +7726,8 @@ definitions:
       Replace:
         $ref: '#/definitions/Boolean'
         description: 'If True, then all fields that are required by the CreatePatchBaseline action are also required for this API request. Optional fields that are not specified are set to null.'
+  Account:
+    type: string
   AccountId:
     type: string
     pattern: '\(\?i\)all\|[0-9]\{12\}'
@@ -7731,6 +7736,12 @@ definitions:
     items:
       $ref: '#/definitions/AccountId'
     maxItems: 20
+  Accounts:
+    type: array
+    items:
+      $ref: '#/definitions/Account'
+    minItems: 1
+    maxItems: 50
   ActivationId:
     type: string
     pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
@@ -8362,6 +8373,31 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: A boolean value indicating whether the resolved target list is truncated.
     description: Information about targets that resolved during the Automation execution.
+  TargetLocations:
+    type: array
+    items:
+      $ref: '#/definitions/TargetLocation'
+    minItems: 1
+    maxItems: 100
+  ProgressCounters:
+    type: object
+    properties:
+      TotalSteps:
+        $ref: '#/definitions/Integer'
+        description: The total number of steps executed in all specified AWS Regions and accounts for the current Automation execution.
+      SuccessSteps:
+        $ref: '#/definitions/Integer'
+        description: The total number of steps that successfully completed in all specified AWS Regions and accounts for the current Automation execution.
+      FailedSteps:
+        $ref: '#/definitions/Integer'
+        description: The total number of steps that failed to execute in all specified AWS Regions and accounts for the current Automation execution.
+      CancelledSteps:
+        $ref: '#/definitions/Integer'
+        description: The total number of steps that the system cancelled in all specified AWS Regions and accounts for the current Automation execution.
+      TimedOutSteps:
+        $ref: '#/definitions/Integer'
+        description: The total number of steps that timed out in all specified AWS Regions and accounts for the current Automation execution.
+    description: An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and multi-account Automation execution.
   AutomationExecution:
     type: object
     properties:
@@ -8434,6 +8470,12 @@ definitions:
       Target:
         $ref: '#/definitions/String'
         description: The target of the execution.
+      TargetLocations:
+        $ref: '#/definitions/TargetLocations'
+        description: The combination of AWS Regions and/or AWS accounts where you want to execute the Automation.
+      ProgressCounters:
+        $ref: '#/definitions/ProgressCounters'
+        description: An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and multi-account Automation execution.
     description: Detailed information about the current state of an individual Automation execution.
   AutomationExecutionFilterKey:
     type: string
@@ -8445,6 +8487,7 @@ definitions:
       - CurrentAction
       - StartTimeBefore
       - StartTimeAfter
+      - AutomationType
   AutomationExecutionFilterValueList:
     type: array
     items:
@@ -8474,6 +8517,11 @@ definitions:
     type: string
     minLength: 1
     maxLength: 150
+  AutomationType:
+    type: string
+    enum:
+      - CrossAccount
+      - Local
   AutomationExecutionMetadata:
     type: object
     properties:
@@ -8540,6 +8588,9 @@ definitions:
       Target:
         $ref: '#/definitions/String'
         description: The list of execution outputs as defined in the Automation document.
+      AutomationType:
+        $ref: '#/definitions/AutomationType'
+        description: 'Use this filter with <a>DescribeAutomationExecution</a>. Specify either Local of CrossAccount. CrossAccount is an Automation that executes in multiple AWS Regions and accounts. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html">Concurrently Executing Automations in Multiple AWS Regions and Accounts</a> in the <i>AWS Systems Manager User Guide</i>. '
     description: Details about a specific Automation execution.
   AutomationExecutionMetadataList:
     type: array
@@ -8754,7 +8805,7 @@ definitions:
         description: The name of the filter.
       value:
         $ref: '#/definitions/CommandFilterValue'
-        description: '<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p>InvokedAfter: A timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see results occurring July 7, 2018, and later.</p> </li> <li> <p>InvokedBefore: A timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see results before July 7, 2018.</p> </li> <li> <p>Status: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:</p> <ul> <li> <p>Pending</p> </li> <li> <p>InProgress</p> </li> <li> <p>Success</p> </li> <li> <p>Cancelled</p> </li> <li> <p>Failed</p> </li> <li> <p>TimedOut</p> </li> <li> <p>Cancelling </p> </li> </ul> </li> <li> <p>DocumentName: The name of the SSM document for which you want to see command results.</p> <p>For example, specify <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to perform security patching operations on instances. </p> </li> <li> <p>ExecutionStage: An enum whose value can be either <code>Executing</code> or <code>Complete</code>.</p> <ul> <li> <p>Specify <code>Executing</code> to see a list of command executions that are currently still running.</p> </li> <li> <p>Specify <code>Complete</code> to see a list of command exeuctions that have already completed.</p> </li> </ul> </li> </ul>'
+        description: '<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p> <b>InvokedAfter</b>: Specify a timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions occurring July 7, 2018, and later.</p> </li> <li> <p> <b>InvokedBefore</b>: Specify a timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions from before July 7, 2018.</p> </li> <li> <p> <b>Status</b>: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:</p> <ul> <li> <p> <code>Pending</code> </p> </li> <li> <p> <code>InProgress</code> </p> </li> <li> <p> <code>Success</code> </p> </li> <li> <p> <code>Cancelled</code> </p> </li> <li> <p> <code>Failed</code> </p> </li> <li> <p> <code>TimedOut</code> </p> </li> <li> <p> <code>Cancelling</code> </p> </li> </ul> </li> <li> <p> <b>DocumentName</b>: Specify name of the SSM document for which you want to see command execution results. For example, specify <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to perform security patching operations on instances. </p> </li> <li> <p> <b>ExecutionStage</b>: Specify one of the following values:</p> <ul> <li> <p> <code>Executing</code>: Returns a list of command executions that are currently still running.</p> </li> <li> <p> <code>Complete</code>: Returns a list of command executions that have already completed. </p> </li> </ul> </li> </ul>'
     description: Describes a command filter.
   CommandFilterList:
     type: array
@@ -9195,7 +9246,7 @@ definitions:
       ComplianceSeverity:
         $ref: '#/definitions/AssociationComplianceSeverity'
         description: The severity level to assign to the association.
-    description: Describes the association of a Systems Manager document and an instance.
+    description: Describes the association of a Systems Manager SSM document and an instance.
   FailedCreateAssociationList:
     type: array
     items:
@@ -9917,6 +9968,10 @@ definitions:
         $ref: '#/definitions/PatchStatus'
         description: 'The status of the patch in a patch baseline. This includes information about whether the patch is currently approved, due to be approved by a rule, explicitly approved, or explicitly rejected and the date the patch was or will be approved.'
     description: 'The EffectivePatch structure defines metadata about a patch along with the approval state of the patch in a particular patch baseline. The approval state includes information about whether the patch is currently approved, due to be approved by a rule, explicitly approved, or explicitly rejected and the date the patch was or will be approved.'
+  ExecutionRoleName:
+    type: string
+    minLength: 1
+    maxLength: 64
   Fault:
     type: string
     enum:
@@ -11076,7 +11131,7 @@ definitions:
         description: The IAM service role to assume during task execution.
       TimeoutSeconds:
         $ref: '#/definitions/TimeoutSeconds'
-        description: 'If this time is reached and the command has not already started executing, it doesn not execute.'
+        description: 'If this time is reached and the command has not already started executing, it doesn''t run.'
     description: '<p>The parameters for a RUN_COMMAND task type.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Run Command tasks, Systems Manager uses specified values for <code>TaskParameters</code> and <code>LoggingInfo</code> only if no values are specified for <code>TaskInvocationParameters</code>. </p> </note>'
   MaintenanceWindowStepFunctionsInput:
     type: string
@@ -11604,6 +11659,14 @@ definitions:
     maxLength: 128
   PutInventoryMessage:
     type: string
+  Region:
+    type: string
+  Regions:
+    type: array
+    items:
+      $ref: '#/definitions/Region'
+    minItems: 1
+    maxItems: 50
   TargetParameterList:
     type: array
     items:
@@ -11841,6 +11904,25 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ValidNextStep'
+  TargetLocation:
+    type: object
+    properties:
+      Accounts:
+        $ref: '#/definitions/Accounts'
+        description: The AWS accounts targeted by the current Automation execution.
+      Regions:
+        $ref: '#/definitions/Regions'
+        description: The AWS Regions targeted by the current Automation execution.
+      TargetLocationMaxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: 'The maxium number of AWS accounts and AWS regions allowed to run the Automation concurrently '
+      TargetLocationMaxErrors:
+        $ref: '#/definitions/MaxErrors'
+        description: 'The maxium number of errors allowed before the system stops queueing additional Automation executions for the currently executing Automation. '
+      ExecutionRoleName:
+        $ref: '#/definitions/ExecutionRoleName'
+        description: The Automation execution role used by the currently executing Automation.
+    description: The combination of AWS Regions and accounts targeted by the current Automation execution.
   StepExecution:
     type: object
     properties:
@@ -11904,6 +11986,12 @@ definitions:
       ValidNextSteps:
         $ref: '#/definitions/ValidNextStepList'
         description: 'Strategies used when step fails, we support Continue and Abort. Abort will fail the automation when the step fails. Continue will ignore the failure of current step and allow automation to execute the next step. With conditional branching, we add step:stepName to support the automation to go to another specific step.'
+      Targets:
+        $ref: '#/definitions/Targets'
+        description: The targets for the step execution.
+      TargetLocation:
+        $ref: '#/definitions/TargetLocation'
+        description: The combination of AWS Regions and accounts targeted by the current Automation execution.
     description: Detailed information about an the execution state of an Automation step.
   StepExecutionFilterKey:
     type: string
