@@ -319,6 +319,7 @@ function validateCollection(dir, command) {
 }
 
 function validatePreferred(specs) {
+  Error.stackTraceLimit = 1;
   var preferred = {};
   _.each(specs, function (swagger) {
     var id = util.getApiId(swagger);
@@ -366,7 +367,8 @@ function validatePreferred(specs) {
         else console.warn('In validatePreferred (2). Not found',id,version);
       }
       assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}": "${typeof value}"`);
-      assert(value !== true || !seenTrue, `Multiple preferred versions in "${id}" "${version}": "${value}"`);
+      //assert.fail(value !== true || !seenTrue,true,`Multiple preferred versions in "${id}" "${version}": "${value}"`,validatePreferred);
+      assert(value !== true || !seenTrue,`Multiple preferred versions in "${id}" "${version}": "${value}"`,validatePreferred);
       seenTrue = value || seenTrue;
       if ((version > maxVersion) && (version.indexOf('alpha')<0) && (version.indexOf('beta')<0)) {
         maxVersion = version;
@@ -383,6 +385,7 @@ function validatePreferred(specs) {
     }
     assert(seenTrue, `At least one preferred should be true in "${id}"`);
   });
+  Error.stackTraceLimit = 10;
 }
 
 function addToCollection(format, url, command) {
