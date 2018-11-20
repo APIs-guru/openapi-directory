@@ -1,0 +1,1115 @@
+swagger: '2.0'
+schemes:
+  - https
+host: gst-aeu001.live-test.cluster.gamesparks.net
+basePath: /
+info:
+  contact:
+    x-twitter: GameSparksltd
+  description: The API to manage the GameSparks NoSql Databases
+  license:
+    name: ' '
+  termsOfService: 'http://www.gamesparks.com/gamesparks-terms-of-use'
+  title: GameSparks NoSql
+  version: v2
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: 'https://twitter.com/GameSparksltd/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://api.gamesparks.net/nosqlRestApi.json'
+      version: '2.0'
+  x-providerName: gamesparks.net
+  x-serviceName: nosql
+produces:
+  - application/json;charset=UTF-8
+securityDefinitions:
+  X-GS-JWT:
+    in: header
+    name: X-GS-JWT
+    type: apiKey
+tags:
+  - description: Experiment Results Controller
+    name: experiment-results-controller
+  - description: Mongo Explorer Controller
+    name: mongo
+  - description: Data Explorer Controller
+    name: data
+paths:
+  '/restv2/game/{apiKey}/data/datatypes':
+    get:
+      consumes:
+        - application/json
+      operationId: datatypesUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Lists the datatypes that currently exist in the data service
+      tags:
+        - data
+  '/restv2/game/{apiKey}/data/{type}':
+    delete:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: deleteAllItemsUsingDELETE
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+        - description: type
+          in: path
+          name: type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Delete all items from a data type
+      tags:
+        - data
+  '/restv2/game/{apiKey}/data/{type}/query':
+    post:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: queryItemsUsingPOST
+      parameters:
+        - description: dto
+          in: body
+          name: dto
+          required: true
+          schema:
+            $ref: '#/definitions/DataQueryItemsDTO'
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+        - description: type
+          in: path
+          name: type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Query for items in the data service
+      tags:
+        - data
+  '/restv2/game/{apiKey}/data/{type}/{itemId}':
+    delete:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: deleteItemUsingDELETE
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+        - description: type
+          in: path
+          name: type
+          required: true
+          type: string
+        - description: itemId
+          in: path
+          name: itemId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Delete an item from the data service by ID
+      tags:
+        - data
+    get:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: getItemUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+        - description: type
+          in: path
+          name: type
+          required: true
+          type: string
+        - description: itemId
+          in: path
+          name: itemId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Retrieve an item from the data service by ID
+      tags:
+        - data
+    put:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: putItemUsingPUT
+      parameters:
+        - description: dto
+          in: body
+          name: dto
+          required: true
+          schema:
+            $ref: '#/definitions/DataPutItemDTO'
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+        - description: type
+          in: path
+          name: type
+          required: true
+          type: string
+        - description: itemId
+          in: path
+          name: itemId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Create or update an item in the data service by ID
+      tags:
+        - data
+  '/restv2/game/{apiKey}/experiment/{experimentId}':
+    get:
+      consumes:
+        - application/json
+      operationId: getResultsUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+        - description: experimentId
+          format: int64
+          in: path
+          name: experimentId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ExperimentResults'
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Gets the results for an experiment
+      tags:
+        - experiment-results-controller
+  '/restv2/game/{apiKey}/mongo/collection/{collection}':
+    delete:
+      consumes:
+        - application/json
+      operationId: dropCollectionUsingDELETE
+      parameters:
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MessageModel'
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Deletes a collection
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/aggregate':
+    post:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: aggregateUsingPOST
+      parameters:
+        - description: pipeline
+          in: body
+          name: pipeline
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/MongoObjectDTO'
+            type: array
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              type: object
+            type: array
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Performs an aggregation on the collection and returns the results
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/aggregate/explain':
+    post:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: aggregateExplainUsingPOST
+      parameters:
+        - description: pipeline
+          in: body
+          name: pipeline
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/MongoObjectDTO'
+            type: array
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              type: object
+            type: array
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Explains an aggregation on a collection
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/count':
+    post:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: countUsingPOST
+      parameters:
+        - description: dto
+          in: body
+          name: dto
+          required: true
+          schema:
+            $ref: '#/definitions/MongoCountDTO'
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MongoCountResultDTO'
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Counts the results by the query
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/explain':
+    post:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: explainUsingPOST
+      parameters:
+        - description: dto
+          in: body
+          name: dto
+          required: true
+          schema:
+            $ref: '#/definitions/MongoExplainDTO'
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Performs an explain for the query
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/find':
+    post:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: findUsingPOST
+      parameters:
+        - description: dto
+          in: body
+          name: dto
+          required: true
+          schema:
+            $ref: '#/definitions/MongoFindDTO'
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Query a collection and return the results
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/index/{indexName}':
+    delete:
+      consumes:
+        - application/json
+      operationId: dropIndexUsingDELETE
+      parameters:
+        - description: indexName
+          in: path
+          name: indexName
+          required: true
+          type: string
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MessageModel'
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Drops an index by name on the collection
+      tags:
+        - mongo
+    post:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: createIndexUsingPOST
+      parameters:
+        - description: index
+          in: body
+          name: index
+          required: true
+          schema:
+            additionalProperties:
+              type: object
+            type: object
+        - description: indexName
+          in: path
+          name: indexName
+          required: true
+          type: string
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MessageModel'
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Creates a index on the collection
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/indices':
+    get:
+      consumes:
+        - application/json
+      operationId: indicesUsingGET
+      parameters:
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/MongoObjectDTO'
+            type: array
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Lists the indexes on the collection
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/insert':
+    post:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: insertUsingPOST
+      parameters:
+        - description: documents
+          in: body
+          name: documents
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/MongoObjectDTO'
+            type: array
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/MongoObjectDTO'
+            type: array
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Inserts documents into the collection
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/meta':
+    post:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: createMetaCollectionUsingPOST
+      parameters:
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MessageModel'
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Creates a meta collection
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/remove':
+    post:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: removeUsingPOST
+      parameters:
+        - description: dto
+          in: body
+          name: dto
+          required: true
+          schema:
+            $ref: '#/definitions/MongoRemoveDTO'
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MongoRemoveResultDTO'
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: 'Removes documents by the query, returns the number of documents deleted.'
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/runtime':
+    post:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: createRuntimeCollectionUsingPOST
+      parameters:
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MessageModel'
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Creates a runtime collection
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/save':
+    post:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: saveUsingPOST
+      parameters:
+        - description: document
+          in: body
+          name: document
+          required: true
+          schema:
+            additionalProperties:
+              type: object
+            type: object
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: object
+            type: object
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Saves a document into the collection
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/stats':
+    get:
+      consumes:
+        - application/json
+      operationId: statsUsingGET
+      parameters:
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Returns the stats of the collection
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collection/{collection}/update':
+    post:
+      consumes:
+        - application/json;charset=UTF-8
+      operationId: updateUsingPOST
+      parameters:
+        - description: dto
+          in: body
+          name: dto
+          required: true
+          schema:
+            $ref: '#/definitions/MongoUpdateDTO'
+        - description: collection
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Performs an update on the collection
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/collections':
+    get:
+      consumes:
+        - application/json
+      operationId: collectionsUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/DBCollectionDTO'
+            type: array
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Lists the collections in the db
+      tags:
+        - mongo
+  '/restv2/game/{apiKey}/mongo/stats':
+    get:
+      consumes:
+        - application/json
+      operationId: statsUsingGET_1
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+        '420':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+      summary: Returns the stats for the db
+      tags:
+        - mongo
+definitions:
+  DBCollectionDTO:
+    properties:
+      actions:
+        items:
+          enum:
+            - FIND
+            - INSERT
+            - UPDATE
+            - REMOVE
+            - INDEX
+            - AGGREGATE
+            - DROP
+            - STATS
+            - COUNT
+          type: string
+        type: array
+      name:
+        type: string
+      optionGroup:
+        type: string
+    type: object
+  DataPutItemDTO:
+    properties:
+      data:
+        type: object
+      ttl:
+        format: int64
+        type: integer
+      versionCheck:
+        format: int64
+        type: integer
+    type: object
+  DataQueryItemsDTO:
+    properties:
+      asc:
+        type: boolean
+      query:
+        type: object
+      sort:
+        type: string
+    type: object
+  ExperimentDayResults:
+    properties:
+      date:
+        format: date-time
+        type: string
+      variants:
+        items:
+          $ref: '#/definitions/ExperimentVariantResult'
+        type: array
+    type: object
+  ExperimentResults:
+    properties:
+      archived:
+        type: boolean
+      endDate:
+        format: date-time
+        type: string
+      experimentId:
+        format: int64
+        type: integer
+      measurementQuery:
+        type: string
+      results:
+        items:
+          $ref: '#/definitions/ExperimentDayResults'
+        type: array
+      startDate:
+        format: date-time
+        type: string
+    type: object
+  ExperimentVariantResult:
+    properties:
+      activeParticipants:
+        format: int64
+        type: integer
+      name:
+        type: string
+      positiveResults:
+        format: int64
+        type: integer
+      successPercentage:
+        format: int64
+        type: integer
+    type: object
+  MessageModel:
+    properties:
+      message:
+        type: string
+    type: object
+  MongoCountDTO:
+    properties:
+      query:
+        additionalProperties:
+          type: object
+        type: object
+    type: object
+  MongoCountResultDTO:
+    properties:
+      count:
+        format: int64
+        type: integer
+    type: object
+  MongoExplainDTO:
+    properties:
+      fields:
+        additionalProperties:
+          type: object
+        type: object
+      query:
+        additionalProperties:
+          type: object
+        type: object
+      sort:
+        additionalProperties:
+          type: object
+        type: object
+    type: object
+  MongoFindDTO:
+    properties:
+      fields:
+        additionalProperties:
+          type: object
+        type: object
+      limit:
+        format: int32
+        type: integer
+      query:
+        additionalProperties:
+          type: object
+        type: object
+      skip:
+        format: int32
+        type: integer
+      sort:
+        additionalProperties:
+          type: object
+        type: object
+    type: object
+  MongoObjectDTO:
+    additionalProperties:
+      type: object
+    type: object
+  MongoRemoveDTO:
+    properties:
+      query:
+        additionalProperties:
+          type: object
+        type: object
+    type: object
+  MongoRemoveResultDTO:
+    properties:
+      deletedCount:
+        format: int32
+        type: integer
+      message:
+        type: string
+    type: object
+  MongoUpdateDTO:
+    properties:
+      multi:
+        type: boolean
+      query:
+        additionalProperties:
+          type: object
+        type: object
+      update:
+        additionalProperties:
+          type: object
+        type: object
+      upsert:
+        type: boolean
+    type: object
