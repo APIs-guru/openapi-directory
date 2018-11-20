@@ -870,7 +870,6 @@ function fixSpec(swagger, errors) {
         else
           newValue = value;
 
-
         if (!swagger.definitions)
           swagger.definitions = {};
 
@@ -880,12 +879,13 @@ function fixSpec(swagger, errors) {
           newValue = value.replace('#/definitions/','');
         }
         else {
-          if ((value == newValue) && (value.startsWith('#/definitions/'))) {
+          if ((typeof value === 'string') && (value == newValue) && (value.startsWith('#/definitions/'))) {
             console.warn(error.code,value);
             let ptr = value.replace('#/definitions/','');
             swagger.definitions[decodeURI(ptr)] = {};
             fixed = true;
           }
+          else console.warn(path,typeof value);
         }
         break;
       case 'DUPLICATE_OPERATIONID':
